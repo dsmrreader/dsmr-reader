@@ -20,9 +20,20 @@ ssh-keygen -t rsa -b 4096
 
 
 apt-get install postgresql supervisor mercurial 
-apt-get install python3 python3-pip python3-serial postgresql postgresql-server-dev-9.3
+apt-get install python3 python3-pip postgresql postgresql-server-dev-9.3
+
+
+# Virtualenv
+mkdir /home/dsmr/.virtualenvs
+chown dsmr: /home/dsmr/.virtualenvs/
+su - dsmr
+virtualenv ~/.virtualenvs/dsmr-reader --no-site-packages
+source /home/dsmr/.virtualenvs/dsmr-reader/bin/activate
+# You might want to put the 'source' command in the user's bashrc.
 
 # Database
+### Postgres does not start due to locales? Try: dpkg-reconfigure locales
+### No luck? Try editing /etc/environment, add LC_ALL="en_US.utf-8" and reboot
 su - postgres
 createuser -DSR dsmrreader
 createdb -O dsmrreader dsmrreader
