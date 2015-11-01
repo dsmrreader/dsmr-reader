@@ -2,7 +2,7 @@
 dd if=2015-09-24-raspbian-jessie.img of=/dev/mmcblk0 bs=4M
 sync
 
-# Run rPi and commect
+# Run rPi and cnnect
 ssh pi@IP
 
 apt-get update
@@ -19,4 +19,14 @@ ssh-keygen -t rsa -b 4096
 >> cu -l /dev/ttyUSB0 -s 115200 --parity=none
 
 
-apt-get install postgresql supervisor mercurial python3 python3-serial
+apt-get install postgresql supervisor mercurial 
+apt-get install python3 python3-pip python3-serial postgresql postgresql-server-dev-9.3
+
+# Database
+su - postgres
+createuser -DSR dsmrreader
+createdb -O dsmrreader dsmrreader
+psql -c "alter user dsmrreader with password 'dsmrreader';"
+
+# Django
+./manage.py migrate
