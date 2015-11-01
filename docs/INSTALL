@@ -1,0 +1,22 @@
+# Unpack ZIP ffs! ;-)
+dd if=2015-09-24-raspbian-jessie.img of=/dev/mmcblk0 bs=4M
+sync
+
+# Run rPi and commect
+ssh pi@IP
+
+apt-get update
+apt-get upgrade
+apt-get install vim 
+apt-get install cu minicom
+
+echo "rpi.siemensma.net" > /etc/hostname
+
+adduser dsmr
+usermod -a -G dialout dsmr
+su - dsmr
+ssh-keygen -t rsa -b 4096
+>> cu -l /dev/ttyUSB0 -s 115200 --parity=none
+
+
+apt-get install postgresql supervisor mercurial python3 python3-serial
