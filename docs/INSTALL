@@ -30,6 +30,8 @@ su - dsmr
 virtualenv ~/.virtualenvs/dsmr-reader --no-site-packages
 source /home/dsmr/.virtualenvs/dsmr-reader/bin/activate
 # You might want to put the 'source' command in the user's bashrc.
+pip3 install -r requirements.txt
+
 
 # Database
 ### Postgres does not start due to locales? Try: dpkg-reconfigure locales
