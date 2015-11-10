@@ -93,3 +93,6 @@ class DsmrReading(models.Model):
         decimal_places=3,
         help_text=_("Last hourly value delivered to client")
     )
+    
+    def __str__(self):
+        return '{}: {} kWh'.format(self.timestamp, self.electricity_currently_delivered)
