@@ -19,7 +19,8 @@ ssh-keygen -t rsa -b 4096
 >> cu -l /dev/ttyUSB0 -s 115200 --parity=none
 
 
-apt-get install postgresql supervisor mercurial 
+apt-get install postgresql supervisor mercurial
+# Postgres: http://www.unixmen.com/install-postgresql-9-4-phppgadmin-ubuntu-14-10/ 
 apt-get install python3 python3-pip postgresql-9.4 postgresql-server-dev-9.4
 
 
