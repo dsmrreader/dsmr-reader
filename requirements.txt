@@ -1,3 +1,4 @@
 Django==1.8.5
 psycopg2==2.6.1
 pyserial==2.7
+pytz==2015.7

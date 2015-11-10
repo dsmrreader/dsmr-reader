@@ -1,9 +1,11 @@
 import serial
 from django.core.management.base import BaseCommand, CommandError
 
+import dsmr_stats.services
+
 
 class Command(BaseCommand):
-    help = 'Polls the serial port for DSMR readings'
+    help = 'Polls the serial port for DSMR telegram and performs a reading.'
 
     def add_arguments(self, parser):
         parser.add_argument('--com_port', '-c', nargs='+', type=str, dest='com_port', default='/dev/ttyUSB0')
@@ -12,7 +14,7 @@ class Command(BaseCommand):
         self._connect(options)
         
         try:
-            self._run()
+            self._read()
         except Exception as error:
             raise CommandError(error)
         
@@ -33,11 +35,25 @@ class Command(BaseCommand):
         except serial.serialutil.SerialException as error:
             raise CommandError(error)
 
-    def _run(self):
-        """ Never ending loop, polling for data. """
-        buffer = ""
+    def _read(self):
+        """ Reads the serial port until we can create a reading point. """
+        buffer = ''
         
         while True:
             data = self._serial.readline()
-            print("data", data)
+            
+            try:
+                # Make sure weird characters are converted properly.
+                data = str(data, 'utf-8')
+            except TypeError:
+                pass
+            
+            # Reflect output to STDOUT for logging an convenience.
+            print(data, end='')
+
             buffer += data
+            
+            # Telegrams start with '/' and ends with '!'. So we will use them as delimiters.
+            if data.startswith('!'):
+                # Create reading from buffer.
+                return dsmr_stats.services.telegram_to_reading(data=buffer)
