@@ -1,7 +1,7 @@
+syntax: glob
+*.pyc
 
 syntax: regexp
 ^\.project$
-syntax: regexp
 ^\.pydevproject$
-syntax: regexp
 ^dsmrreader/settings\.py$
