@@ -20,7 +20,7 @@ ssh-keygen -t rsa -b 4096
 
 
 apt-get install postgresql supervisor mercurial 
-apt-get install python3 python3-pip postgresql postgresql-server-dev-9.3
+apt-get install python3 python3-pip postgresql-9.4 postgresql-server-dev-9.4
 
 
 # Virtualenv
