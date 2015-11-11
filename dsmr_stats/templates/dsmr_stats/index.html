@@ -1,1 +1,29 @@
-TEST
+{% load staticfiles %}
+<html>
+    <head>
+        <title>DSMR Reader</title>
+        <!--[if lte IE 8]>
+            <script src="{% static 'js/excanvas.js' %}"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1>Latest power usage (W/h)</h1>
+        <canvas id="power-chart" width="1200" height="250"></canvas>
+
+        <h1>Latest gas reading (m3)</h1>
+        <canvas id="gas-chart" width="1200" height="250"></canvas>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $.get('{% url "stats:power-data-json" %}', function(data) {
+                var ctx = $("#power-chart").get(0).getContext("2d");
+                new Chart(ctx).Line(data);
+            });
+            $.get('{% url "stats:gas-data-json" %}', function(data) {
+                var ctx = $("#gas-chart").get(0).getContext("2d");
+                new Chart(ctx).Line(data);
+            });
+        </script>
+    </body>
+</html>
