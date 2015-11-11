@@ -1,0 +1,17 @@
+upstream dsmr-webinterface {
+    server unix:///var/tmp/gunicorn--dsmr_webinterface.socket;
+}
+
+server {
+    listen      80;
+    server_name rpi.siemensma.net;
+
+    location /static {
+        alias /var/www/dsmr-webinterface/static;
+    }
+
+    location / {
+        uwsgi_pass  dsmr-webinterface;
+        include     /etc/nginx/uwsgi_params;
+    }
+}
