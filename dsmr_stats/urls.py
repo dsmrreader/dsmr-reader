@@ -1,8 +1,10 @@
 from django.conf.urls import url
 
-from dsmr_stats.views import Home
+from dsmr_stats.views import Home, PowerData, GasData
 
 
 urlpatterns = [
-    url(r'^$', Home.as_view(), name='home')
+    url(r'^$', Home.as_view(), name='home'),
+    url(r'^power-data$', PowerData.as_view(), name='power-data-json'),
+    url(r'^gas-data$', GasData.as_view(), name='gas-data-json'),
 ]
