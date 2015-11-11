@@ -22,7 +22,7 @@ class DsmrReading(models.Model):
         "1-0:72.36.0": "voltage_swell_count_l3",
         "0-1:24.2.1": ("extra_device_timestamp", "extra_device_delivered"),
     }
-    
+
     timestamp = models.DateTimeField()
     electricity_delivered_1 = models.DecimalField(
         max_digits=9,
