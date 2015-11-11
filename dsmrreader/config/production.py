@@ -6,5 +6,6 @@ However, since this project is localhost only, I do not care ;-)
 from dsmrreader.config.development import *
 
 DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 # DATABASES = Copied from development.
