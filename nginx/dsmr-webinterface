@@ -7,7 +7,7 @@ server {
     server_name rpi.siemensma.net;
 
     location /static {
-        alias /var/www/dsmr-webinterface/static;
+        alias /var/www/dsmrreader/static;
     }
 
     location / {

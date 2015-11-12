@@ -9,3 +9,5 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 # DATABASES = Copied from development.
+
+STATIC_ROOT = '/var/www/dsmrreader/static'
