@@ -5,24 +5,22 @@ sync
 # Run rPi and cnnect
 ssh pi@IP
 
-apt-get update
-apt-get upgrade
-apt-get install vim 
-apt-get install cu minicom
+sudo echo "rpi.siemensma.net" > /etc/hostname
 
-echo "rpi.siemensma.net" > /etc/hostname
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install vim 
+sudo apt-get install cu minicom
+sudo apt-get install postgresql supervisor mercurial
+# Postgres: http://www.unixmen.com/install-postgresql-9-4-phppgadmin-ubuntu-14-10/ 
+sudo apt-get install python3 python3-pip postgresql-9.4 postgresql-server-dev-9.4
+sudo apt-get install nginx
 
-adduser dsmr
-usermod -a -G dialout dsmr
-su - dsmr
+sudo adduser dsmr
+sudo usermod -a -G dialout dsmr
+sudo su - dsmr
 ssh-keygen -t rsa -b 4096
 >> cu -l /dev/ttyUSB0 -s 115200 --parity=none
-
-
-apt-get install postgresql supervisor mercurial
-# Postgres: http://www.unixmen.com/install-postgresql-9-4-phppgadmin-ubuntu-14-10/ 
-apt-get install python3 python3-pip postgresql-9.4 postgresql-server-dev-9.4
-apt-get install nginx
 
 
 # Virtualenv
@@ -38,10 +36,15 @@ pip3 install -r requirements.txt
 # Database
 ### Postgres does not start due to locales? Try: dpkg-reconfigure locales
 ### No luck? Try editing /etc/environment, add LC_ALL="en_US.utf-8" and reboot
-su - postgres
-createuser -DSR dsmrreader
-createdb -O dsmrreader dsmrreader
-psql -c "alter user dsmrreader with password 'dsmrreader';"
+sudo su - postgres createuser -DSR dsmrreader
+sudo su - postgres createdb -O dsmrreader dsmrreader
+sudo su - postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+
+# Webserver.
+sudo mkdir -p /var/www/dsmrreader/static
+sudo chown -R dsmr:dsmr /var/www/dsmrreader/
 
 # Django
+su - dsmr
 ./manage.py migrate
+./manage.py collectstatic -l
