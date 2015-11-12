@@ -25,7 +25,7 @@
         	{
         		options = {
        				animation: false,
-       				scaleStartValue : 0,
+       				scaleBeginAtZero : true,
         		};
         		
 	            $.get('{% url "stats:power-data-json" %}', function(data) {
