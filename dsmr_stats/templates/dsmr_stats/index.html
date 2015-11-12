@@ -16,14 +16,26 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
         <script type="text/javascript">
-            $.get('{% url "stats:power-data-json" %}', function(data) {
-                var ctx = $("#power-chart").get(0).getContext("2d");
-                new Chart(ctx).Line(data);
-            });
-            $.get('{% url "stats:gas-data-json" %}', function(data) {
-                var ctx = $("#gas-chart").get(0).getContext("2d");
-                new Chart(ctx).Line(data);
-            });
+        	$(document).ready(function(){
+        		poll_graph_data();
+        		setInterval(poll_graph_data, 10 * 5000);
+        	});
+        	
+        	function poll_graph_data()
+        	{
+        		options = {
+       				animation: false,
+        		};
+        		
+	            $.get('{% url "stats:power-data-json" %}', function(data) {
+	                var ctx = $("#power-chart").get(0).getContext("2d");
+	                new Chart(ctx).Line(data, options);
+	            });
+	            $.get('{% url "stats:gas-data-json" %}', function(data) {
+	                var ctx = $("#gas-chart").get(0).getContext("2d");
+	                new Chart(ctx).Line(data, options);
+	            });
+        	}
         </script>
     </body>
 </html>
