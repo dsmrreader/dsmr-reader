@@ -11,7 +11,10 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--days-ago', '-d', nargs='+', type=str, dest='days_ago', default=1
+            '--days-ago', '-d', type=int, dest='days_ago', default=1
+        )
+        parser.add_argument(
+            '--max-readings', '-m', type=int, dest='max_readings', default=360
         )
 
     def handle(self, **options):
@@ -24,18 +27,19 @@ class Command(BaseCommand):
     def _fetch(self, **options):
         """ Finds all readings in the eglible for compacting. """
         max_timestamp = timezone.now() - timezone.timedelta(days=options['days_ago'])
-        print(_('Only selecting reading before: {}'.format(max_timestamp)))
+        max_readings = options['max_readings']
+        print(_('Only selecting reading before: {} (max {})'.format(max_timestamp, max_readings)))
 
         unprocessed_readings = DsmrReading.objects.filter(
             processed=False, timestamp__lt=max_timestamp
         )
         print(_('Found {} readings to compact'.format(unprocessed_readings.count())))
-        return unprocessed_readings
+
+        # Limit resultset, as we should compact much faster than new readings
+        # being created (~ every 11 seconds).
+        return unprocessed_readings[0:max_readings]
 
     def _compact(self, readings):
-#         readings = readings[0:50]
-        readings = [readings[0]]
-
         for current_reading in readings:
             print(_('Compacting: {}'.format(current_reading)))
             dsmr_stats.services.compact(dsmr_reading=current_reading)
