@@ -99,6 +99,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Local timezone to maintain for GUI. (<> TIME_ZONE!)
+LOCAL_TIME_ZONE = 'CET'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

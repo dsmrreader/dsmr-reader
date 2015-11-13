@@ -1,3 +1,6 @@
+import pytz
+
+from django.conf import settings
 from django.views.generic.base import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
@@ -16,9 +19,11 @@ class ChartDataMixin(BaseLineChartView):
 
     def get_labels(self):
         y_axis = []
+        # Make sure we use local time zone.
+        cet_timezone = pytz.timezone(settings.LOCAL_TIME_ZONE)
 
         for read_at in self._get_readings().values_list('read_at', flat=True):
-            y_axis.append(read_at.strftime("%H:%M:%S"))
+            y_axis.append(read_at.astimezone(cet_timezone).strftime("%H:%M:%S"))
 
         return y_axis
 
