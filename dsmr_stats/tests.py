@@ -53,19 +53,19 @@ class TestDsmrStatsPoller(TestCase):
             "0-1:24.4.0(1)\n",
             "!D19A\n",
         ]
-    
+
     @mock.patch('serial.Serial.open')
     @mock.patch('serial.Serial.readline')
     def _poll_reading(self, serial_readline_mock, serial_open_mock):
         serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dummy_data() 
+        serial_readline_mock.side_effect = self._dummy_data()
 
         call_command('dsmr_stats_poller')
 
     def test_reading_creation(self):
         self._poll_reading()
         self.assertGreater(DsmrReading.objects.all().count(), 0)
-        
+
     def test_reading_values(self):
         self._poll_reading()
         reading = DsmrReading.objects.get(pk=1)
