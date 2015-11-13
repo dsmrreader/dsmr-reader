@@ -24,6 +24,9 @@ class DsmrReading(models.Model):
         "0-1:24.2.1": ("extra_device_timestamp", "extra_device_delivered"),
     }
 
+    class Meta:
+        ordering = ['timestamp']
+
     timestamp = models.DateTimeField()
     electricity_delivered_1 = models.DecimalField(
         max_digits=9,
@@ -101,12 +104,14 @@ class DsmrReading(models.Model):
     )
 
     def __str__(self):
-        return '{}: {} kWh'.format(self.timestamp, self.electricity_currently_delivered)
+        return '#{} | {}: {} kWh'.format(
+            self.id, self.timestamp, self.electricity_currently_delivered
+        )
 
 
 class ElectricityStatistics(models.Model):
     """ Daily electricity statistics for data not subject to changing hourly. """
-    day = models.DateField()
+    day = models.DateField(unique=True)
     power_failure_count = models.IntegerField(
         help_text=_("Number of power failures in any phases")
     )
@@ -132,10 +137,17 @@ class ElectricityStatistics(models.Model):
         help_text=_("Number of voltage swells in phase L3 (polyphase meters only)")
     )
 
+    def is_equal(self, other):
+        for field in self._meta.fields:
+            if field.name != 'id' and getattr(self, field.name) != getattr(other, field.name):
+                return False
+
+        return True
+
 
 class ElectricityConsumption(models.Model):
     """ Point in time of electricity consumption, extracted from reading. """
-    read_at = models.DateTimeField()
+    read_at = models.DateTimeField(unique=True)
     delivered_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
@@ -177,7 +189,7 @@ class ElectricityConsumption(models.Model):
 
 class GasConsumption(models.Model):
     """ Hourly consumption, based on the previous value one hour ago. """
-    read_at = models.DateTimeField()
+    read_at = models.DateTimeField(unique=True)
     delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,
