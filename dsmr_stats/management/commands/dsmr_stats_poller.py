@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Polls the serial port for DSMR telegram and performs a reading.'
 
     def add_arguments(self, parser):
-        parser.add_argument('--com_port', '-c', nargs='+', type=str, dest='com_port', default='/dev/ttyUSB0')
+        parser.add_argument('--com_port', '-c', type=str, dest='com_port', default='/dev/ttyUSB0')
 
     def handle(self, **options):
         self._connect(options)
