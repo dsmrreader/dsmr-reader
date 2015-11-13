@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
-from dsmr_stats.models import DsmrReading
+from dsmr_stats.models import ElectricityConsumption, GasConsumption
 
 
 class Home(TemplateView):
@@ -9,37 +9,31 @@ class Home(TemplateView):
 
 
 class ChartDataMixin(BaseLineChartView):
+    consumption_model = None
+
     def _get_readings(self, **kwargs):
-        return DsmrReading.objects.all().order_by('-id')[:60]
+        return self.consumption_model.objects.all().order_by('-id')[:60]
 
     def get_labels(self):
         y_axis = []
 
-        for timestamp in self._get_readings().values_list('timestamp', flat=True):
-            y_axis.append(timestamp.strftime("%H:%M:%S"))
+        for read_at in self._get_readings().values_list('read_at', flat=True):
+            y_axis.append(read_at.strftime("%H:%M:%S"))
 
         return y_axis
 
-    def get_combined_data(self):
-        power_readings = []
-        gas_readings = []
+    def get_data(self):
+        readings = []
 
-        for power in self._get_readings().values_list('electricity_currently_delivered', flat=True):
-            power_readings.append(int(power * 1000))
+        for currently_delivered in self._get_readings().values_list('currently_delivered', flat=True):
+            readings.append(currently_delivered)
 
-        for gas in self._get_readings().values_list('extra_device_delivered', flat=True):
-            gas_readings.append(int(gas))
-
-        return power_readings, gas_readings
+        return [readings]
 
 
 class PowerData(ChartDataMixin):
-    def get_data(self):
-        power, _ = self.get_combined_data()
-        return [power]
+    consumption_model = ElectricityConsumption
 
 
 class GasData(ChartDataMixin):
-    def get_data(self):
-        _, gas = self.get_combined_data()
-        return [gas]
+    consumption_model = GasConsumption
