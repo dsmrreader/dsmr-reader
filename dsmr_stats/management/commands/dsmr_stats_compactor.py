@@ -1,3 +1,5 @@
+from time import sleep
+
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
 from django.utils import timezone
@@ -23,6 +25,9 @@ class Command(BaseCommand):
             self._compact(readings)
         except Exception as error:
             raise CommandError(error)
+
+        # Allow supervisor to mark this process as OK.
+        sleep(1)
 
     def _fetch(self, **options):
         """ Finds all readings in the eglible for compacting. """
