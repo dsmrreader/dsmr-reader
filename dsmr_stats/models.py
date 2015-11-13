@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 
 
 class DsmrReading(models.Model):
+    """ DSMR P1 telegram reading. Contains most of the raw data read from serial port. """
     DSMR_MAPPING = {
         "0-0:1.0.0": "timestamp",
         "1-0:1.8.1": "electricity_delivered_1",
@@ -93,6 +94,97 @@ class DsmrReading(models.Model):
         decimal_places=3,
         help_text=_("Last hourly value delivered to client")
     )
-    
+    processed = models.BooleanField(
+        default=False,
+        db_index=True,
+        help_text=_("Whether this reading has been processed for individual splitting")
+    )
+
     def __str__(self):
         return '{}: {} kWh'.format(self.timestamp, self.electricity_currently_delivered)
+
+
+class ElectricityStatistics(models.Model):
+    """ Daily electricity statistics for data not subject to changing hourly. """
+    day = models.DateField()
+    power_failure_count = models.IntegerField(
+        help_text=_("Number of power failures in any phases")
+    )
+    long_power_failure_count = models.IntegerField(
+        help_text=_("Number of long power failures in any phase")
+    )
+    voltage_sag_count_l1 = models.IntegerField(
+        help_text=_("Number of voltage sags/dips in phase L1")
+    )
+    voltage_sag_count_l2 = models.IntegerField(
+        help_text=_("Number of voltage sags/dips in phase L2 (polyphase meters only)")
+    )
+    voltage_sag_count_l3 = models.IntegerField(
+        help_text=_("Number of voltage sags/dips in phase L3 (polyphase meters only)")
+    )
+    voltage_swell_count_l1 = models.IntegerField(
+        help_text=_("Number of voltage swells in phase L1")
+    )
+    voltage_swell_count_l2 = models.IntegerField(
+        help_text=_("Number of voltage swells in phase L2 (polyphase meters only)")
+    )
+    voltage_swell_count_l3 = models.IntegerField(
+        help_text=_("Number of voltage swells in phase L3 (polyphase meters only)")
+    )
+
+
+class ElectricityConsumption(models.Model):
+    """ Point in time of electricity consumption, extracted from reading. """
+    read_at = models.DateTimeField()
+    delivered_1 = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Meter Reading electricity delivered to client (low tariff) in 0,001 kWh")
+    )
+    returned_1 = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Meter Reading electricity delivered by client (low tariff) in 0,001 kWh")
+    )
+    delivered_2 = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh")
+    )
+    returned_2 = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh")
+    )
+    tariff = models.IntegerField(
+        help_text=_(
+            "Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g "
+            "boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff "
+            "code 2 is used for normal tariff."
+        )
+    )
+    currently_delivered = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Actual electricity power delivered (+P) in 1 Watt resolution")
+    )
+    currently_returned = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Actual electricity power received (-P) in 1 Watt resolution")
+    )
+
+
+class GasConsumption(models.Model):
+    """ Hourly consumption, based on the previous value one hour ago. """
+    read_at = models.DateTimeField()
+    delivered = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Last hourly value delivered to client")
+    )
+    currently_delivered = models.DecimalField(
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Actual value delivered to client, since the last hour")
+    )
