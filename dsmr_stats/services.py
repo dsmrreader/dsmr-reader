@@ -2,8 +2,9 @@ import datetime
 import re
 
 import pytz
+from django.utils import timezone
 
-from dsmr_stats.models import DsmrReading
+from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, ElectricityStatistics
 
 
 def telegram_to_reading(data):
@@ -60,3 +61,71 @@ def reading_timestamp_to_datetime(string):
         second=int(timestamp.group(6)),
         tzinfo=timezone
     )
+
+
+def compact(dsmr_reading):
+    # Electricity should be unique, because it's the reading
+    # with the lowest interval anyway.
+    ElectricityConsumption.objects.create(
+        read_at=dsmr_reading.timestamp,
+        delivered_1=dsmr_reading.electricity_delivered_1,
+        returned_1=dsmr_reading.electricity_returned_1,
+        delivered_2=dsmr_reading.electricity_delivered_2,
+        returned_2=dsmr_reading.electricity_returned_2,
+        tariff=dsmr_reading.electricity_tariff,
+        currently_delivered=dsmr_reading.electricity_currently_delivered,
+        currently_returned=dsmr_reading.electricity_currently_returned,
+    )
+
+    # Gas however only get read every hour, so we should check
+    # for any duplicates, as they WILL exist.
+    gas_consumption_exists = GasConsumption.objects.filter(
+        read_at=dsmr_reading.extra_device_timestamp
+    ).exists()
+
+    if not gas_consumption_exists:
+        # DSMR does not expose current gas rate, so we have to calculate
+        # it ourselves, relative to the previous gas consumption, if any.
+        try:
+            previous_gas_consumption = GasConsumption.objects.get(
+                read_at=dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
+            )
+        except GasConsumption.DoesNotExist:
+            gas_diff = 0
+        else:
+            gas_diff = dsmr_reading.extra_device_delivered - previous_gas_consumption.delivered
+
+        GasConsumption.objects.create(
+            read_at=dsmr_reading.extra_device_timestamp,
+            delivered=dsmr_reading.extra_device_delivered,
+            currently_delivered=gas_diff
+        )
+
+    # The last thing to do is to keep track of other daily statistics.
+    electricity_statistics = ElectricityStatistics(
+        day=dsmr_reading.timestamp.date(),
+        power_failure_count=dsmr_reading.power_failure_count,
+        long_power_failure_count=dsmr_reading.long_power_failure_count,
+        voltage_sag_count_l1=dsmr_reading.voltage_sag_count_l1,
+        voltage_sag_count_l2=dsmr_reading.voltage_sag_count_l2,
+        voltage_sag_count_l3=dsmr_reading.voltage_sag_count_l3,
+        voltage_swell_count_l1=dsmr_reading.voltage_swell_count_l1,
+        voltage_swell_count_l2=dsmr_reading.voltage_swell_count_l2,
+        voltage_swell_count_l3=dsmr_reading.voltage_swell_count_l3,
+    )
+
+    try:
+        existing_statistics = ElectricityStatistics.objects.get(
+            day=electricity_statistics.day
+        )
+    except:
+        electricity_statistics.save()
+    else:
+        # Already exists, but only save if dirty.
+        if not existing_statistics.is_equal(electricity_statistics):
+            electricity_statistics.id = existing_statistics.id
+            electricity_statistics.pk = existing_statistics.pk
+            electricity_statistics.save()
+
+    dsmr_reading.processed = True
+    dsmr_reading.save(update_fields=['processed'])
