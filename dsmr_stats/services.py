@@ -3,6 +3,7 @@ import re
 
 import pytz
 from django.utils import timezone
+from django.db import transaction
 
 from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, ElectricityStatistics
 
@@ -63,6 +64,7 @@ def reading_timestamp_to_datetime(string):
     )
 
 
+@transaction.atomic
 def compact(dsmr_reading):
     # Electricity should be unique, because it's the reading
     # with the lowest interval anyway.
