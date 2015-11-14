@@ -15,7 +15,7 @@ class ChartDataMixin(BaseLineChartView):
     consumption_model = None
 
     def _get_readings(self, **kwargs):
-        return self.consumption_model.objects.all().order_by('-id')[:60]
+        return self.consumption_model.objects.all().order_by('-id')[:72]
 
     def get_labels(self):
         y_axis = []
