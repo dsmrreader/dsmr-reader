@@ -15,23 +15,27 @@
     				<td style="width: 200px;">{{ statistics.day|date:"D d M Y" }}</td>
     				<td style="width: 200px;">Start &rarr; End</td>
     				<td style="width: 200px;">Diff</td>
+    				<td style="width: 200px;">Cost</td>
     			</tr>
     			<tr>
     				<td>Electricity 1</td>
     				<td>{{ statistics.electricity1_start }} &rarr; {{ statistics.electricity1_end }}</td>
     				<td> + {{ statistics.electricity1 }} kW/h</td>
+    				<td>&euro; {{ statistics.electricity1_cost }}</td>
     			</tr>
     			<tr>
     				<td>Electricity 2</td>
     				<td>{{ statistics.electricity2_start }} &rarr; {{ statistics.electricity2_end }}</td>
     				<td> + {{ statistics.electricity2 }} kW/h</td>
+    				<td>&euro; {{ statistics.electricity2_cost }}</td>
     			</tr>
     			<tr>
     				<td>Gas</td>
     				<td>{{ statistics.gas_start }} &rarr; {{ statistics.gas_end }}</td>
     				<td> + {{ statistics.gas }} m<sup>3</sup></td>
+    				<td>&euro; {{ statistics.gas_cost }}</td>
     			</tr>
-    			<tr><td colspan="3">&nbsp;</td></tr>
+    			<tr><td colspan="4">&nbsp;</td></tr>
 		{% endfor %}
     		</table>
     </body>
