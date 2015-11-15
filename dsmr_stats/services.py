@@ -2,6 +2,7 @@ import datetime
 import re
 
 import pytz
+from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
 
@@ -131,3 +132,46 @@ def compact(dsmr_reading):
 
     dsmr_reading.processed = True
     dsmr_reading.save(update_fields=['processed'])
+
+
+def day_consumption(day):
+    consumption = {'day': day.date()}
+    local_timezone = pytz.timezone(settings.LOCAL_TIME_ZONE)
+    day_start = timezone.datetime(
+        year=day.year,
+        month=day.month,
+        day=day.day,
+        tzinfo=local_timezone
+    )
+    day_end = day_start + timezone.timedelta(days=1)
+
+    electricity_readings = ElectricityConsumption.objects.filter(
+        read_at__gte=day_start, read_at__lt=day_end,
+    ).order_by('read_at')
+
+    reading_count = electricity_readings.count()
+
+    if reading_count > 0:
+        first_reading = electricity_readings[0]
+        last_reading = electricity_readings[reading_count - 1]
+        consumption['electricity1'] = last_reading.delivered_1 - first_reading.delivered_1
+        consumption['electricity2'] = last_reading.delivered_2 - first_reading.delivered_2
+        consumption['electricity1_start'] = first_reading.delivered_1
+        consumption['electricity1_end'] = last_reading.delivered_1
+        consumption['electricity2_start'] = first_reading.delivered_2
+        consumption['electricity2_end'] = last_reading.delivered_2
+
+    gas_readings = GasConsumption.objects.filter(
+        read_at__gte=day_start, read_at__lt=day_end,
+    ).order_by('read_at')
+
+    reading_count = gas_readings.count()
+
+    if reading_count > 0:
+        first_reading = gas_readings[0]
+        last_reading = gas_readings[reading_count - 1]
+        consumption['gas'] = last_reading.delivered - first_reading.delivered
+        consumption['gas_start'] = first_reading.delivered
+        consumption['gas_end'] = last_reading.delivered
+
+    return consumption

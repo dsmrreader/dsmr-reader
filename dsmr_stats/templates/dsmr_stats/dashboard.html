@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Dasboard</title>
+        <!--[if lte IE 8]>
+            <script src="{% static 'js/excanvas.js' %}"></script>
+        <![endif]-->
+    </head>
+    <body>
+    	<a href="{% url 'stats:recent'%}">Recent</a>
+    	<h1>Consumption by day</h1>
+    		<table>
+    	{% for statistics in usage %}
+    			<tr style="font-weight: bold;">
+    				<td style="width: 200px;">{{ statistics.day|date:"D d M Y" }}</td>
+    				<td style="width: 200px;">Start &rarr; End</td>
+    				<td style="width: 200px;">Diff</td>
+    			</tr>
+    			<tr>
+    				<td>Electricity 1</td>
+    				<td>{{ statistics.electricity1_start }} &rarr; {{ statistics.electricity1_end }}</td>
+    				<td> + {{ statistics.electricity1 }} kW/h</td>
+    			</tr>
+    			<tr>
+    				<td>Electricity 2</td>
+    				<td>{{ statistics.electricity2_start }} &rarr; {{ statistics.electricity2_end }}</td>
+    				<td> + {{ statistics.electricity2 }} kW/h</td>
+    			</tr>
+    			<tr>
+    				<td>Gas</td>
+    				<td>{{ statistics.gas_start }} &rarr; {{ statistics.gas_end }}</td>
+    				<td> + {{ statistics.gas }} m<sup>3</sup></td>
+    			</tr>
+    			<tr><td colspan="3">&nbsp;</td></tr>
+		{% endfor %}
+    		</table>
+    </body>
+</html>

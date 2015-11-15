@@ -7,10 +7,12 @@
         <![endif]-->
     </head>
     <body>
-        <h1>Latest power usage (kW)</h1>
+    	<a href="{% url 'stats:dashboard'%}">Dashboard</a>
+
+        <h1>Recent power usage (W)</h1>
         <canvas id="power-chart" width="1200" height="250"></canvas>
 
-        <h1>Latest gas usage (m<sup>3</sup>)</h1>
+        <h1>Recent gas usage (m<sup>3</sup>)</h1>
         <canvas id="gas-chart" width="1200" height="250"></canvas>
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>

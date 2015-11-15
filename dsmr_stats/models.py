@@ -186,6 +186,11 @@ class ElectricityConsumption(models.Model):
         help_text=_("Actual electricity power received (-P) in 1 Watt resolution")
     )
 
+    def __str__(self):
+        return '{} | {}: {} Watt'.format(
+            self.__class__.__name__, self.read_at, self.currently_delivered * 1000
+        )
+
 
 class GasConsumption(models.Model):
     """ Hourly consumption, based on the previous value one hour ago. """
@@ -200,3 +205,8 @@ class GasConsumption(models.Model):
         decimal_places=3,
         help_text=_("Actual value delivered to client, since the last hour")
     )
+
+    def __str__(self):
+        return '{} | {}: {} m3'.format(
+            self.__class__.__name__, self.read_at, self.currently_delivered
+        )
