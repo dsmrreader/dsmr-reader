@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.db import transaction
 
 from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, ElectricityStatistics
+from decimal import Decimal, ROUND_UP
 
 
 def telegram_to_reading(data):
@@ -160,6 +161,8 @@ def day_consumption(day):
         consumption['electricity1_end'] = last_reading.delivered_1
         consumption['electricity2_start'] = first_reading.delivered_2
         consumption['electricity2_end'] = last_reading.delivered_2
+        consumption['electricity1_cost'] = (consumption['electricity1'] * settings.CONTRACT_ELECTRICITY_1_PRICE).quantize(Decimal('.01'), rounding=ROUND_UP)
+        consumption['electricity2_cost'] = (consumption['electricity2'] * settings.CONTRACT_ELECTRICITY_2_PRICE).quantize(Decimal('.01'), rounding=ROUND_UP)
 
     gas_readings = GasConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
@@ -173,5 +176,6 @@ def day_consumption(day):
         consumption['gas'] = last_reading.delivered - first_reading.delivered
         consumption['gas_start'] = first_reading.delivered
         consumption['gas_end'] = last_reading.delivered
+        consumption['gas_cost'] = (consumption['gas'] * settings.CONTRACT_GAS_PRICE).quantize(Decimal('.01'), rounding=ROUND_UP)
 
     return consumption

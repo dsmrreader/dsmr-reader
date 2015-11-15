@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from decimal import Decimal
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -106,3 +107,8 @@ LOCAL_TIME_ZONE = 'CET'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Contract prices. @TODO: Move to model with start/ending date and prices.
+CONTRACT_ELECTRICITY_1_PRICE = Decimal('0.20559')
+CONTRACT_ELECTRICITY_2_PRICE = Decimal('0.21843')
+CONTRACT_GAS_PRICE = Decimal('0.58685')
