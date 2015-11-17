@@ -178,4 +178,6 @@ def day_consumption(day):
         consumption['gas_end'] = last_reading.delivered
         consumption['gas_cost'] = (consumption['gas'] * settings.CONTRACT_GAS_PRICE).quantize(Decimal('.01'), rounding=ROUND_UP)
 
+    consumption['total_cost'] = consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost'] 
+
     return consumption
