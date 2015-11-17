@@ -1,21 +1,40 @@
+{% extends "dsmr_stats/base.html" %}
 {% load staticfiles %}
-<html>
-    <head>
-        <title>DSMR Reader</title>
-        <!--[if lte IE 8]>
-            <script src="{% static 'js/excanvas.js' %}"></script>
-        <![endif]-->
-    </head>
-    <body>
-    	<a href="{% url 'stats:dashboard'%}">Dashboard</a>
 
-        <h1>Recent power usage (W)</h1>
-        <canvas id="power-chart" width="1200" height="250"></canvas>
+{% block title %}Recent{% endblock %}
 
-        <h1>Recent gas usage (m<sup>3</sup>)</h1>
-        <canvas id="gas-chart" width="1200" height="250"></canvas>
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    Recent electricity consumption (watt)
+                </header>
+                <div class="panel-body">
+                	<canvas id="power-chart" width="800" height="250"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    Recent gas consumption (m<sup>3</sup>)
+                </header>
+                <div class="panel-body">
+			        <canvas id="gas-chart" width="800" height="250"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+{% endblock %}
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+{% block javascript %}
+{{ block.super }}
         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
         <script type="text/javascript">
         	$(document).ready(function(){
@@ -26,6 +45,7 @@
         	function poll_graph_data()
         	{
         		options = {
+       				responsive: true,
        				animation: false,
        				scaleBeginAtZero: true,
         		};
@@ -40,5 +60,4 @@
 	            });
         	}
         </script>
-    </body>
-</html>
+{% endblock %}

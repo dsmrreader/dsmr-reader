@@ -14,19 +14,20 @@ class Dashboard(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Dashboard, self).get_context_data(**kwargs)
-        context_data['usage'] = []
-
-        # Summarize stats for the past week.
-        now = timezone.now()
-        local_timezone = pytz.timezone(settings.LOCAL_TIME_ZONE)
-
-        for current_day in (now - timezone.timedelta(days=n) for n in range(7)):
-            current_day = current_day.astimezone(local_timezone)
-            context_data['usage'].append(
-                 dsmr_stats.services.day_consumption(day=current_day)
-            )
-
+        context_data['consumption'] = dsmr_stats.services.day_consumption(day=timezone.now())
         return context_data
+
+#         # Summarize stats for the past week.
+#         now = timezone.now()
+#         local_timezone = pytz.timezone(settings.LOCAL_TIME_ZONE)
+#
+#         for current_day in (now - timezone.timedelta(days=n) for n in range(7)):
+#             current_day = current_day.astimezone(local_timezone)
+#             context_data['usage'].append(
+#                  dsmr_stats.services.day_consumption(day=current_day)
+#             )
+# 
+#         return context_data
 
 
 class Recent(TemplateView):
@@ -37,7 +38,7 @@ class ChartDataMixin(BaseLineChartView):
     consumption_model = None
 
     def _get_readings(self, **kwargs):
-        return self.consumption_model.objects.all().order_by('-id')[:72]
+        return self.consumption_model.objects.all().order_by('-id')[:48]
 
     def normalize(self, value):
         return value
