@@ -19,20 +19,24 @@ class Dashboard(TemplateView):
         )
         return context_data
 
-#         # Summarize stats for the past week.
-#         now = timezone.now()
-#
-#         for current_day in (now - timezone.timedelta(days=n) for n in range(7)):
-#             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
-#             context_data['usage'].append(
-#                  dsmr_stats.services.day_consumption(day=current_day)
-#             )
-#
-#         return context_data
-
 
 class Recent(TemplateView):
     template_name = 'dsmr_stats/recent.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super(Recent, self).get_context_data(**kwargs)
+        context_data['usage'] = []
+
+        # Summarize stats for the past week.
+        now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+
+        for current_day in (now - timezone.timedelta(days=n) for n in range(7)):
+            current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
+            context_data['usage'].append(
+                 dsmr_stats.services.day_consumption(day=current_day)
+            )
+
+        return context_data
 
 
 class ChartDataMixin(BaseLineChartView):
