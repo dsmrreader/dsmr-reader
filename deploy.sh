@@ -1,5 +1,5 @@
 #!/bin/bash
 hg pull --up
-./manage.py collectstatic -l
+./manage.py collectstatic --noinput --link
 ./manage.py migrate
 ./reload.sh
