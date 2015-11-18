@@ -14,19 +14,20 @@ class Dashboard(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Dashboard, self).get_context_data(**kwargs)
-        context_data['consumption'] = dsmr_stats.services.day_consumption(day=timezone.now())
+        context_data['consumption'] = dsmr_stats.services.day_consumption(
+            day=timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+        )
         return context_data
 
 #         # Summarize stats for the past week.
 #         now = timezone.now()
-#         local_timezone = pytz.timezone(settings.LOCAL_TIME_ZONE)
 #
 #         for current_day in (now - timezone.timedelta(days=n) for n in range(7)):
-#             current_day = current_day.astimezone(local_timezone)
+#             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
 #             context_data['usage'].append(
 #                  dsmr_stats.services.day_consumption(day=current_day)
 #             )
-# 
+#
 #         return context_data
 
 
@@ -45,11 +46,10 @@ class ChartDataMixin(BaseLineChartView):
 
     def get_labels(self):
         y_axis = []
-        # Make sure we use local time zone.
-        local_timezone = pytz.timezone(settings.LOCAL_TIME_ZONE)
 
+        # Make sure we use local time zone.
         for read_at in self._get_readings().values_list('read_at', flat=True):
-            y_axis.append(read_at.astimezone(local_timezone).strftime("%H:%M:%S"))
+            y_axis.append(read_at.astimezone(settings.LOCAL_TIME_ZONE).strftime("%H:%M:%S"))
 
         return y_axis
 

@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 from decimal import Decimal
 
+import pytz
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -101,7 +103,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Local timezone to maintain for GUI. (<> TIME_ZONE!)
-LOCAL_TIME_ZONE = 'CET'
+LOCAL_TIME_ZONE = pytz.timezone('CET')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
