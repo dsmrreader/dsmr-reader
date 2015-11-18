@@ -6,7 +6,8 @@ from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
 
-from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, ElectricityStatistics
+from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, ElectricityStatistics,\
+    EnergySupplierPrice
 from decimal import Decimal, ROUND_UP
 
 
@@ -144,6 +145,11 @@ def day_consumption(day):
     )
     day_end = day_start + timezone.timedelta(days=1)
 
+    # This WILL fail when we either have no prices at all or conflicting ranges.
+    daily_energy_price = EnergySupplierPrice.objects.by_date(
+        target_date=consumption['day']
+    )
+
     electricity_readings = ElectricityConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
@@ -159,8 +165,10 @@ def day_consumption(day):
         consumption['electricity1_end'] = last_reading.delivered_1
         consumption['electricity2_start'] = first_reading.delivered_2
         consumption['electricity2_end'] = last_reading.delivered_2
-        consumption['electricity1_cost'] = (consumption['electricity1'] * settings.CONTRACT_ELECTRICITY_1_PRICE).quantize(Decimal('.01'), rounding=ROUND_UP)
-        consumption['electricity2_cost'] = (consumption['electricity2'] * settings.CONTRACT_ELECTRICITY_2_PRICE).quantize(Decimal('.01'), rounding=ROUND_UP)
+        consumption['electricity1_unit_price'] = daily_energy_price.electricity_1_price
+        consumption['electricity2_unit_price'] = daily_energy_price.electricity_2_price
+        consumption['electricity1_cost'] = round_price(consumption['electricity1'] * consumption['electricity1_unit_price'])
+        consumption['electricity2_cost'] = round_price(consumption['electricity2'] * consumption['electricity2_unit_price'])
 
     gas_readings = GasConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
@@ -174,8 +182,13 @@ def day_consumption(day):
         consumption['gas'] = last_reading.delivered - first_reading.delivered
         consumption['gas_start'] = first_reading.delivered
         consumption['gas_end'] = last_reading.delivered
-        consumption['gas_cost'] = (consumption['gas'] * settings.CONTRACT_GAS_PRICE).quantize(Decimal('.01'), rounding=ROUND_UP)
+        consumption['gas_unit_price'] = daily_energy_price.gas_price
+        consumption['gas_cost'] = round_price(consumption['gas'] * consumption['gas_unit_price'])
 
-    consumption['total_cost'] = consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost'] 
+    consumption['total_cost'] = round_price(consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']) 
 
     return consumption
+
+
+def round_price(decimal_price):
+    return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
