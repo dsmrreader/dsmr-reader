@@ -23,9 +23,11 @@ class Command(BaseCommand):
 
         """
         Transfer speed and character formatting
-        The interface will use a fixed transfer speed of 115200 baud. For character formatting a start
-        bit, 8 data bits, no parity bit and a stop bit are used (8N1).Note this is not conforming to EN-
-        IEC 62056-21 Mode D
+        ---------------------------------------
+        The interface will use a fixed transfer speed of 115200 baud.
+        For character formatting a start bit, 8 data bits, no parity bit and a
+        stop bit are used (8N1).
+        Note this is not conforming to EN-IEC 62056-21 Mode D
         """
         self._serial = serial.Serial()
         self._serial.baudrate = 115200
@@ -55,7 +57,7 @@ class Command(BaseCommand):
             except TypeError:
                 pass
 
-            # Reflect output to STDOUT for logging an convenience.
+            # Reflect output to STDOUT for logging and convenience.
             print(data, end='')
 
             buffer += data
