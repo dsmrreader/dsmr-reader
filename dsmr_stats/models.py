@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext as _
 
 
@@ -210,3 +211,30 @@ class GasConsumption(models.Model):
         return '{} | {}: {} m3'.format(
             self.__class__.__name__, self.read_at, self.currently_delivered
         )
+
+
+class EnergySupplierPriceManager(models.Manager):
+    def by_date(self, target_date):
+        """ Selects the energy prices price paid for a date. """
+        return self.get_queryset().get(
+            # This comes in handy when you have no contract end (yet).
+            Q(end__gte=target_date) | Q(end__isnull=True),
+            start__lte=target_date,
+        )
+
+
+class EnergySupplierPrice(models.Model):
+    """
+    Represents the price you are/were charged by your energy supplier.
+    Prices are per unit, which is either one kWh power or m3 gas.
+    """
+    class Meta:
+        unique_together = ('start', 'end')
+
+    objects = EnergySupplierPriceManager()
+
+    start = models.DateField()
+    end = models.DateField(null=True, blank=True)
+    electricity_1_price = models.DecimalField(max_digits=11, decimal_places=5)
+    electricity_2_price = models.DecimalField(max_digits=11, decimal_places=5)
+    gas_price = models.DecimalField(max_digits=11, decimal_places=5)
