@@ -108,8 +108,3 @@ LOCAL_TIME_ZONE = pytz.timezone('CET')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_URL = '/static/'
-
-# Contract prices. @TODO: Move to model with start/ending date and prices.
-CONTRACT_ELECTRICITY_1_PRICE = Decimal('0.20559')
-CONTRACT_ELECTRICITY_2_PRICE = Decimal('0.21843')
-CONTRACT_GAS_PRICE = Decimal('0.58685')
