@@ -54,7 +54,6 @@ def reading_timestamp_to_datetime(string):
     Converts a string containing a timestamp to a timezone aware datetime.
     """
     timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})W', string)
-    timezone = pytz.timezone("CET")
     return datetime.datetime(
         year=2000 + int(timestamp.group(1)),
         month=int(timestamp.group(2)),
@@ -62,7 +61,7 @@ def reading_timestamp_to_datetime(string):
         hour=int(timestamp.group(4)),
         minute=int(timestamp.group(5)),
         second=int(timestamp.group(6)),
-        tzinfo=timezone
+        tzinfo=settings.LOCAL_TIME_ZONE
     )
 
 
@@ -137,12 +136,11 @@ def compact(dsmr_reading):
 
 def day_consumption(day):
     consumption = {'day': day.date()}
-    local_timezone = pytz.timezone(settings.LOCAL_TIME_ZONE)
     day_start = timezone.datetime(
         year=day.year,
         month=day.month,
         day=day.day,
-        tzinfo=local_timezone
+        tzinfo=settings.LOCAL_TIME_ZONE
     )
     day_end = day_start + timezone.timedelta(days=1)
 
