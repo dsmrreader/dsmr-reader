@@ -185,7 +185,10 @@ def day_consumption(day):
         consumption['gas_unit_price'] = daily_energy_price.gas_price
         consumption['gas_cost'] = round_price(consumption['gas'] * consumption['gas_unit_price'])
 
-    consumption['total_cost'] = round_price(consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']) 
+    try:
+        consumption['total_cost'] = round_price(consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost'])
+    except KeyError:
+        consumption['total_cost'] = 0 
 
     return consumption
 
