@@ -1,13 +1,12 @@
 import datetime
 import re
 
-import pytz
 from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
 
-from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, ElectricityStatistics,\
-    EnergySupplierPrice
+from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, \
+    ElectricityStatistics, EnergySupplierPrice
 from decimal import Decimal, ROUND_UP
 
 
