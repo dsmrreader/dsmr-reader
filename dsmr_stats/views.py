@@ -1,5 +1,3 @@
-import pytz
-
 from django.conf import settings
 from django.utils import timezone
 from django.views.generic.base import TemplateView
@@ -20,11 +18,11 @@ class Dashboard(TemplateView):
         return context_data
 
 
-class Recent(TemplateView):
-    template_name = 'dsmr_stats/recent.html'
+class History(TemplateView):
+    template_name = 'dsmr_stats/history.html'
 
     def get_context_data(self, **kwargs):
-        context_data = super(Recent, self).get_context_data(**kwargs)
+        context_data = super(History, self).get_context_data(**kwargs)
         context_data['usage'] = []
 
         # Summarize stats for the past week.
@@ -53,25 +51,28 @@ class ChartDataMixin(BaseLineChartView):
 
         # Make sure we use local time zone.
         for read_at in self._get_readings().values_list('read_at', flat=True):
-            y_axis.append(read_at.astimezone(settings.LOCAL_TIME_ZONE).strftime("%H:%M:%S"))
+            y_axis.append(
+                read_at.astimezone(settings.LOCAL_TIME_ZONE).strftime("%H:%M:%S")
+            )
 
         return y_axis
 
     def get_data(self):
         readings = []
+        data = self._get_readings().values_list('currently_delivered', flat=True)
 
-        for currently_delivered in self._get_readings().values_list('currently_delivered', flat=True):
+        for currently_delivered in data:
             readings.append(self.normalize(currently_delivered))
 
         return [readings]
 
 
-class PowerData(ChartDataMixin):
+class RecentElectricityData(ChartDataMixin):
     consumption_model = ElectricityConsumption
 
     def normalize(self, value):
         return value * 1000
 
 
-class GasData(ChartDataMixin):
+class RecentGasData(ChartDataMixin):
     consumption_model = GasConsumption

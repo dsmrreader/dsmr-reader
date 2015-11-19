@@ -95,11 +95,11 @@
        				scaleBeginAtZero: true,
         		};
         		
-	            $.get('{% url "stats:power-data-json" %}', function(data) {
+	            $.get('{% url "stats:recent-electricity-data-json" %}', function(data) {
 	                var ctx = $("#power-chart").get(0).getContext("2d");
 	                new Chart(ctx).Line(data, options);
 	            });
-	            $.get('{% url "stats:gas-data-json" %}', function(data) {
+	            $.get('{% url "stats:recent-gas-data-json" %}', function(data) {
 	                var ctx = $("#gas-chart").get(0).getContext("2d");
 	                new Chart(ctx).Line(data, options);
 	            });
