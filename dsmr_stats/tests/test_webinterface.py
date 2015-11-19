@@ -38,3 +38,10 @@ class TestViews(TestCase):
             reverse('{}:history'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_statistics(self):
+        call_command('dsmr_stats_compactor')
+        response = self.client.get(
+            reverse('{}:statistics'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
