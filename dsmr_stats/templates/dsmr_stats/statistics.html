@@ -1,0 +1,58 @@
+{% extends "dsmr_stats/base.html" %}
+
+{% block title %}Recent{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {{stats.day }} (latest)
+                </header>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Key</th>
+                            <th style="width: 200px">Value</th>
+                        </tr>
+                        <tr>
+                            <td>Number of power failures in any phases</td>
+                            <td><span class="badge bg-black">{{ stats.power_failure_count|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of long power failures in any phase</td>
+                            <td><span class="badge bg-black">{{ stats.long_power_failure_count|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of voltage sags/dips in phase L1</td>
+                            <td><span class="badge bg-orange">{{ stats.voltage_sag_count_l1|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of voltage sags/dips in phase L2 (polyphase meters only)</td>
+                            <td><span class="badge bg-orange">{{ stats.voltage_sag_count_l2|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of voltage sags/dips in phase L3 (polyphase meters only)</td>
+                            <td><span class="badge bg-orange">{{ stats.voltage_sag_count_l3|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of voltage swells in phase L1</td>
+                            <td><span class="badge bg-red">{{ stats.voltage_swell_count_l1|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of voltage swells in phase L2 (polyphase meters only)</td>
+                            <td><span class="badge bg-red">{{ stats.voltage_swell_count_l2|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of voltage swells in phase L3 (polyphase meters only)</td>
+                            <td><span class="badge bg-red">{{ stats.voltage_swell_count_l3|default:'-' }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+{% endblock %}
