@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--max-readings', '-m', type=int, dest='max_readings', default=360
+            '--max-readings', '-m', type=int, dest='max_readings', default=1080
         )
 
     def handle(self, **options):

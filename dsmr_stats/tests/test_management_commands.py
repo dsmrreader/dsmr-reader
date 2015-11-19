@@ -2,10 +2,13 @@ from unittest import mock
 from datetime import datetime
 
 import pytz
+from django.conf import settings
 from django.test import TestCase
+from django.utils import timezone
 from django.core.management import call_command
 
-from dsmr_stats.models import DsmrReading
+from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption,\
+    ElectricityStatistics
 from decimal import Decimal
 
 
@@ -94,3 +97,47 @@ class TestDsmrStatsPoller(TestCase):
             datetime(2015, 11, 10, 18, 0, 0, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('845.206'))
+
+
+class TestDsmrStatsCompactor(TestCase):
+    fixtures = ['test_dsmrreading.json']
+
+    def setUp(self):
+        self.assertEqual(DsmrReading.objects.all().count(), 1)
+
+    def test_processing(self):
+        self.assertFalse(DsmrReading.objects.filter(processed=True).exists())
+
+        call_command('dsmr_stats_compactor')
+
+        self.assertTrue(DsmrReading.objects.filter(processed=True).exists())
+
+    def test_creation(self):
+        self.assertFalse(ElectricityStatistics.objects.exists())
+        self.assertFalse(ElectricityConsumption.objects.exists())
+        self.assertFalse(GasConsumption.objects.exists())
+
+        call_command('dsmr_stats_compactor')
+
+        self.assertTrue(ElectricityStatistics.objects.exists())
+        self.assertTrue(ElectricityConsumption.objects.exists())
+        self.assertTrue(GasConsumption.objects.exists())
+
+
+class TestDsmrStatsCleanup(TestCase):
+    fixtures = ['test_dsmrreading.json']
+
+    def setUp(self):
+        self.assertEqual(DsmrReading.objects.all().count(), 1)
+
+        # Check fixture date, as we keep moving forward every day.
+        now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE).date()
+        self.days_diff = (now - DsmrReading.objects.get(pk=1).timestamp.date()).days
+
+    def test_ignore_range(self):
+        call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff + 1)
+        self.assertEqual(DsmrReading.objects.all().count(), 1)
+
+    def test_cleanup(self):
+        call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff)
+        self.assertEqual(DsmrReading.objects.all().count(), 0)
