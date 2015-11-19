@@ -13,6 +13,7 @@ from decimal import Decimal
 
 
 class TestDsmrStatsPoller(TestCase):
+    """ Test 'dsmr_stats_poller' management command. """
     def _dummy_data(self):
         return [
             "/XMX5LGBBFFB231117727\n",
@@ -100,6 +101,7 @@ class TestDsmrStatsPoller(TestCase):
 
 
 class TestDsmrStatsCompactor(TestCase):
+    """ Test 'dsmr_stats_compactor' management command. """
     fixtures = ['test_dsmrreading.json']
 
     def setUp(self):
@@ -125,6 +127,7 @@ class TestDsmrStatsCompactor(TestCase):
 
 
 class TestDsmrStatsCleanup(TestCase):
+    """ Test 'dsmr_stats_cleanup' management command. """
     fixtures = ['test_dsmrreading.json']
 
     def setUp(self):

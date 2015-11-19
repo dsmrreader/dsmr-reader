@@ -1,11 +1,11 @@
 from django.conf.urls import url
 
-from dsmr_stats.views import Dashboard, Recent, PowerData, GasData
+from dsmr_stats.views import Dashboard, History, RecentElectricityData, RecentGasData
 
 
 urlpatterns = [
     url(r'^$', Dashboard.as_view(), name='dashboard'),
-    url(r'^recent', Recent.as_view(), name='recent'),
-    url(r'^power-data$', PowerData.as_view(), name='power-data-json'),
-    url(r'^gas-data$', GasData.as_view(), name='gas-data-json'),
+    url(r'^recent', History.as_view(), name='history'),
+    url(r'^power-data$', RecentElectricityData.as_view(), name='recent-electricity-data-json'),
+    url(r'^gas-data$', RecentGasData.as_view(), name='recent-gas-data-json'),
 ]
