@@ -45,3 +45,9 @@ class TestViews(TestCase):
             reverse('{}:statistics'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_energy_supplier_prices(self):
+        response = self.client.get(
+            reverse('{}:energy-supplier-prices'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
