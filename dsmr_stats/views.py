@@ -3,7 +3,8 @@ from django.utils import timezone
 from django.views.generic.base import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
-from dsmr_stats.models import ElectricityConsumption, GasConsumption, ElectricityStatistics
+from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, \
+    ElectricityStatistics
 import dsmr_stats.services
 
 
@@ -42,7 +43,10 @@ class Statistics(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Statistics, self).get_context_data(**kwargs)
-        context_data['stats'] = ElectricityStatistics.objects.all().order_by('-pk')[0]
+        context_data['dsmr_stats'] = ElectricityStatistics.objects.all().order_by('-pk')[0]
+        context_data['total_readings'] = DsmrReading.objects.count()
+        context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0].timestamp
+        context_data['last_reading'] = DsmrReading.objects.all().order_by('-pk')[0].timestamp
         return context_data
 
 
