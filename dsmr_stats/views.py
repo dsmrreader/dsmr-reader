@@ -48,9 +48,10 @@ class Statistics(TemplateView):
 
 class ChartDataMixin(BaseLineChartView):
     consumption_model = None
+    reading_count = 72
 
     def _get_readings(self, **kwargs):
-        return self.consumption_model.objects.all().order_by('-id')[:48]
+        return self.consumption_model.objects.all().order_by('-id')[:self.reading_count]
 
     def normalize(self, value):
         return value
@@ -78,6 +79,7 @@ class ChartDataMixin(BaseLineChartView):
 
 class RecentElectricityData(ChartDataMixin):
     consumption_model = ElectricityConsumption
+    reading_count = 48
 
     def normalize(self, value):
         return value * 1000
