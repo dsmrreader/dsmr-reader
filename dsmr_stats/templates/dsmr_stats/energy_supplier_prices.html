@@ -1,0 +1,40 @@
+{% extends "dsmr_stats/base.html" %}
+
+{% block title %}Energy Supplier Prices{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+        {% for current_price in prices %}
+            <div class="panel">
+                <header class="panel-heading">
+                    {%if current_price.description %}{{ current_price.description }}{% endif %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-7">{{ current_price.start }} &larr;&rarr; {{ current_price.end|default:'-' }}</th>
+                            <th class="col-md-5">Unit price</th>
+                        </tr>
+                        <tr>
+                            <td class="col-md-7">Electricity 1</td>
+                            <td class="col-md-5"><span class="badge bg-black">&euro; {{ current_price.electricity_1_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Electricity 2</td>
+                            <td><span class="badge bg-black">&euro; {{ current_price.electricity_2_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Gas</td>
+                            <td><span class="badge bg-black">&euro; {{ current_price.gas_price }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        {% endfor %}
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+{% endblock %}
