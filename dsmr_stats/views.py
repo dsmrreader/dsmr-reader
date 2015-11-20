@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
 from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, \
-    ElectricityStatistics
+    ElectricityStatistics, EnergySupplierPrice
 import dsmr_stats.services
 
 
@@ -47,6 +47,15 @@ class Statistics(TemplateView):
         context_data['total_readings'] = DsmrReading.objects.count()
         context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0].timestamp
         context_data['last_reading'] = DsmrReading.objects.all().order_by('-pk')[0].timestamp
+        return context_data
+
+
+class EnergySupplierPrices(TemplateView):
+    template_name = 'dsmr_stats/energy_supplier_prices.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super(EnergySupplierPrices, self).get_context_data(**kwargs)
+        context_data['prices'] = EnergySupplierPrice.objects.all()
         return context_data
 
 
