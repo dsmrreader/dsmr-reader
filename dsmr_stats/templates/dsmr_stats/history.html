@@ -15,28 +15,32 @@
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
-                            <th>Type</th>
-                            <th style="width: 200px">Consumed</th>
-                            <th style="width: 200px">Cost</th>
+                            <th class="col-md-6">Type</th>
+                            <th class="col-md-2">Consumed</th>
+                            <th class="col-md-2">Returned</th>
+                            <th class="col-md-2">Cost</th>
                         </tr>
                         <tr>
                             <td>Electricity 1 (off-peak)</td>
                             <td><span class="badge bg-red">{{ consumption.electricity1 }} kWh</span></td>
-                            <td><span class="badge bg-maroon">&euro; {{ consumption.electricity1_cost }}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned }} kWh</span></td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.electricity1_cost }}</span></td>
                         </tr>
                         <tr>
                             <td>Electricity 2 (peak)</td>
                             <td><span class="badge bg-red">{{ consumption.electricity2 }} kWh</span></td>
-                            <td><span class="badge bg-maroon">&euro; {{ consumption.electricity2_cost }}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned }} kWh</span></td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.electricity2_cost }}</span></td>
                         </tr>
                         <tr>
                             <td>Gas</td>
                             <td><span class="badge bg-orange">{{ consumption.gas }} m<sup>3</sup></span></td>
-                            <td><span class="badge bg-maroon">&euro; {{ consumption.gas_cost }}</span></td>
+                            <td>&nbsp;</td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.gas_cost }}</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight: bold;">Total</td>
-                            <td>&nbsp;</td>
+                            <td colspan="2">&nbsp;</td>
                             <td><span class="badge bg-black">&euro; {{ consumption.total_cost }}</span></td>
                         </tr>
                     </table>

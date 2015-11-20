@@ -160,6 +160,8 @@ def day_consumption(day):
         last_reading = electricity_readings[reading_count - 1]
         consumption['electricity1'] = last_reading.delivered_1 - first_reading.delivered_1
         consumption['electricity2'] = last_reading.delivered_2 - first_reading.delivered_2
+        consumption['electricity1_returned'] = last_reading.returned_1 - first_reading.returned_1
+        consumption['electricity2_returned'] = last_reading.returned_2 - first_reading.returned_2
         consumption['electricity1_start'] = first_reading.delivered_1
         consumption['electricity1_end'] = last_reading.delivered_1
         consumption['electricity2_start'] = first_reading.delivered_2
