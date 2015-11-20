@@ -142,5 +142,5 @@ class TestDsmrStatsCleanup(TestCase):
         self.assertEqual(DsmrReading.objects.all().count(), 1)
 
     def test_cleanup(self):
-        call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff)
+        call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff - 1)
         self.assertEqual(DsmrReading.objects.all().count(), 0)
