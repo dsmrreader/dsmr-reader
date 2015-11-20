@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.utils import timezone
 from django.views.generic.base import TemplateView
@@ -25,15 +27,22 @@ class History(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(History, self).get_context_data(**kwargs)
         context_data['usage'] = []
+        context_data['chart_x'] = []
+        context_data['chart_y'] = []
 
         # Summarize stats for the past week.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
 
         for current_day in (now - timezone.timedelta(days=n) for n in range(7)):
             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
-            context_data['usage'].append(
-                 dsmr_stats.services.day_consumption(day=current_day)
-            )
+            day_consumption = dsmr_stats.services.day_consumption(day=current_day)
+
+            context_data['usage'].append(day_consumption)
+            context_data['chart_x'].append(current_day.strftime("%Y-%m-%d"))
+            context_data['chart_y'].append(float(day_consumption['total_cost']))
+
+        context_data['chart_x'] = json.dumps(context_data['chart_x'])
+        context_data['chart_y'] = json.dumps(context_data['chart_y'])
 
         return context_data
 
