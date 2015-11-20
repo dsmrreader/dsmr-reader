@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.utils import timezone
 
@@ -6,7 +7,7 @@ from dsmr_stats.models import DsmrReading
 
 
 class Command(BaseCommand):
-    help = 'Cleans up any source data from the poller. PERMANENTLY DELETES DATA!'
+    help = _('Cleans up any source data from the poller. PERMANENTLY DELETES DATA!')
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -15,7 +16,7 @@ class Command(BaseCommand):
             metavar='DAYS',
             dest='days',
             default=365,
-            help='Any polled source data older then DAYS will be purged (default %(default)s days).'
+            help=_('Any polled source data older than DAYS will be purged (default %(default)s days).')
         )
         parser.add_argument(
             '--noinput',
@@ -23,7 +24,7 @@ class Command(BaseCommand):
             metavar='',
             dest='no_input',
             default=False,
-            help='Tells Django to NOT prompt the user for input of any kind.'
+            help=_('Tells Django to NOT prompt the user for input of any kind.')
         )
 
     def handle(self, **options):
@@ -38,8 +39,8 @@ class Command(BaseCommand):
     def _confirm(self, cleanup_date):
         try:
             read = input(
-                'WARNING: This will PERMANENTLY DELETE SOURCE DATA before "{}, still continue?'
-                ' yes/no: '.format(cleanup_date)
+                _('WARNING: This will PERMANENTLY DELETE SOURCE DATA before "{}", still continue?'
+                ' yes/no: ').format(cleanup_date)
             )
         except KeyboardInterrupt:
             read = None
@@ -49,7 +50,7 @@ class Command(BaseCommand):
 
     def _cleanup(self, cleanup_date):
         data_to_delete = DsmrReading.objects.filter(timestamp__lt=cleanup_date)
-        print('Found {} records to delete'.format(data_to_delete.count()))
+        print(_('Found {} records to delete'.format(data_to_delete.count())))
 
         data_to_delete.delete()
-        print('Deleted {} records'.format(data_to_delete.count()))
+        print(_('Deleted {} records'.format(data_to_delete.count())))

@@ -1,14 +1,22 @@
-import serial
 from django.core.management.base import BaseCommand, CommandError
+from django.utils.translation import ugettext as _
+import serial
 
 import dsmr_stats.services
 
 
 class Command(BaseCommand):
-    help = 'Polls the serial port for DSMR telegram and performs a reading.'
+    help = _('Polls the serial port for DSMR telegram and performs a reading.')
 
     def add_arguments(self, parser):
-        parser.add_argument('--com_port', '-c', type=str, dest='com_port', default='/dev/ttyUSB0')
+        parser.add_argument(
+            '--com_port',
+            '-c',
+            type=str,
+            dest='com_port',
+            default='/dev/ttyUSB0',
+            help=_('COM-port connected to Smartmeter (default: %(default)s)')
+        )
 
     def handle(self, **options):
         self._connect(options)

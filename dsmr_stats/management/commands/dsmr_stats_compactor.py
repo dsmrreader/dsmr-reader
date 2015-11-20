@@ -9,11 +9,16 @@ import dsmr_stats.services
 
 
 class Command(BaseCommand):
-    help = 'Compacts existing DSMR readings into consumption points.'
+    help = _('Compacts existing DSMR readings into consumption points.')
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--max-readings', '-m', type=int, dest='max_readings', default=1080
+            '--max-readings',
+            '-m',
+            type=int,
+            dest='max_readings',
+            default=1080,
+            help=_('The max number of readings to compact this run (default: %(default)s)')
         )
 
     def handle(self, **options):
@@ -35,7 +40,7 @@ class Command(BaseCommand):
         )
         print(_('Found {} readings to compact'.format(unprocessed_readings.count())))
 
-        # Limit resultset, as we should compact much faster than new readings
+        # Limit result set, as we should compact much faster than new readings
         # being created (~ every 11 seconds).
         print(_('Limiting readings for this run at: {}'.format(max_readings)))
         return unprocessed_readings[0:max_readings]
