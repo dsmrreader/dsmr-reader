@@ -6,6 +6,7 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
+	{% if consumption %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -15,7 +16,7 @@
                 <div class="panel-body">
                     <table class="table table-striped">
                         <tr>
-                            <th class="col-md-6">{{consumption.day }}</th>
+                            <th class="col-md-6">{{ consumption.day }}</th>
                             <th class="col-md-2">Consumed</th>
                             <th class="col-md-2">Returned</th>
                             <th class="col-md-2">Cost</th>
@@ -48,6 +49,7 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+	{% endif %}
 
     <div class="row">
         <div class="col-md-12">

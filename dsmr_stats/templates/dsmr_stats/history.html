@@ -10,10 +10,10 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Recent total cost
+                    Recent cost
                 </header>
                 <div class="panel-body">
-                	<canvas id="recent-chart" width="1000" height="200"></canvas>
+                	<canvas id="recent-chart" width="1000" height="300"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -73,16 +73,43 @@
         <script type="text/javascript">
         	$(document).ready(function(){
         		var data = {
-       				labels: {{ chart_x|safe }},
+       				labels: {{ chart.days|safe }},
        				datasets: [{
-       				    data: {{ chart_y|safe }},
-	       				label: "Recent total cost",
-	       	            fillColor: "rgba(220,220,220,0.2)",
-	       	            strokeColor: "rgba(220,220,220,1)",
-	       	            pointColor: "rgba(220,220,220,1)",
+       				    data: {{ chart.total_cost|safe }},
+	       				label: "Total cost",
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(0,0,0,1)",
+	       	            pointColor: "rgba(0,0,0,1)",
 	       	            pointStrokeColor: "#fff",
 	       	            pointHighlightFill: "#fff",
-	       	            pointHighlightStroke: "rgba(220,220,220,1)"
+	       	            pointHighlightStroke: "rgba(0,0,0,1)"
+       				}, {
+       				    data: {{ chart.electricity1_cost|safe }},
+	       				label: "Electricity 1 cost (off-peak)",	       				
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(255,0,0,1)",
+	       	            pointColor: "rgba(255,0,0,1)",
+	       	            pointStrokeColor: "#fff",
+	       	            pointHighlightFill: "#fff",
+	       	            pointHighlightStroke: "rgba(255,0,0,1)"
+       				}, {
+       				    data: {{ chart.electricity2_cost|safe }},
+	       				label: "Electricity 2 cost (peak)",	       				
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(255,0,0,1)",
+	       	            pointColor: "rgba(255,0,0,1)",
+	       	            pointStrokeColor: "#fff",
+	       	            pointHighlightFill: "#fff",
+	       	            pointHighlightStroke: "rgba(255,0,0,1)"
+       				}, {
+       				    data: {{ chart.gas_cost|safe }},
+	       				label: "Gas cost",	       				
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(250,133,0,1)",
+	       	            pointColor: "rgba(250,133,0,1)",
+	       	            pointStrokeColor: "#fff",
+	       	            pointHighlightFill: "#fff",
+	       	            pointHighlightStroke: "rgba(150,150,150,1)"
        				}]
         		};
         		{% verbatim %}
@@ -93,7 +120,7 @@
         		{% endverbatim %}
         		
         		var ctx = $("#recent-chart").get(0).getContext("2d");
-                new Chart(ctx).Line(data, options);        		
+                new Chart(ctx).Line(data, options);
         	});
         </script>
 {% endblock %}
