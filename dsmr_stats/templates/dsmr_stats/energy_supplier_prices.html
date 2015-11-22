@@ -10,7 +10,11 @@
         {% for current_price in prices %}
             <div class="panel">
                 <header class="panel-heading">
-                    {%if current_price.description %}{{ current_price.description }}{% endif %}
+                    {%if current_price.description %}
+                        {{ current_price.description }}
+                    {% else %}
+                        Energy Supplier
+                    {% endif %}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
