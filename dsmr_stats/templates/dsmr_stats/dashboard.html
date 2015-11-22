@@ -6,6 +6,32 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="sm-st clearfix">
+                	<small>Last reading</small>
+                    <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
+                    <div class="sm-st-info">
+                        <span id="latest_electricity">-</span>
+                        kWh
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="sm-st clearfix">
+                	<small>Last hour</small>
+                    <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
+                    <div class="sm-st-info">
+                        <span id="latest_gas">-</span>
+                        m<sup>3</sup>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
 	{% if consumption %}
     <div class="row">
         <div class="col-md-12">
@@ -106,4 +132,20 @@
 	            });
         	}
         </script>
+        
+        <script type="text/javascript">
+        	$(document).ready(function(){
+        		poll_latest_data();
+        		setInterval(poll_latest_data, 5 * 1000);
+        	});
+        	
+        	function poll_latest_data()
+        	{
+	            $.get('{% url "stats:latest-data-json" %}', function(data) {
+	            	$("#latest_electricity").html(data.electricity);
+	            	$("#latest_gas").html(data.gas);
+	            });
+        	}
+		</script>
+
 {% endblock %}

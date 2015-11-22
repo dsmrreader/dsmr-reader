@@ -2,13 +2,14 @@ import json
 
 from django.conf import settings
 from django.utils import timezone
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from chartjs.views.lines import BaseLineChartView
 
 from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, \
     ElectricityStatistics, EnergySupplierPrice
 import dsmr_stats.services
 from _collections import defaultdict
+from django.http.response import HttpResponse
 
 
 class Dashboard(TemplateView):
@@ -122,3 +123,12 @@ class RecentElectricityData(ChartDataMixin):
 
 class RecentGasData(ChartDataMixin):
     consumption_model = GasConsumption
+
+
+class LatestData(View):
+    def get(self, request):
+        ec = ElectricityConsumption.objects.all().order_by('-pk')[0].currently_delivered
+        gc = GasConsumption.objects.all().order_by('-pk')[0].currently_delivered
+        return HttpResponse(json.dumps({
+            'electricity': float(ec * 1000), 'gas': float(gc),
+        }), content_type='application/json')
