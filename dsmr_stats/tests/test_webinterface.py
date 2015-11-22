@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
-from dsmr_stats.models import ElectricityConsumption
+from dsmr_stats.models import ElectricityConsumption, GasConsumption
 
 
 class TestViews(TestCase):
@@ -18,8 +18,11 @@ class TestViews(TestCase):
         # Little hack to fake any output for today (moment of test).
         call_command('dsmr_stats_compactor')
         ec = ElectricityConsumption.objects.get(pk=1)
+        gc = GasConsumption.objects.get(pk=1)
         ec.read_at = timezone.now()
+        gc.read_at = timezone.now()
         ec.save()
+        gc.save()
 
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))

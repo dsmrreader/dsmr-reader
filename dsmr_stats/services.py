@@ -152,52 +152,48 @@ def day_consumption(day):
     electricity_readings = ElectricityConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
-
-    reading_count = electricity_readings.count()
-
-    if reading_count > 0:
-        first_reading = electricity_readings[0]
-        last_reading = electricity_readings[reading_count - 1]
-        consumption['electricity1'] = last_reading.delivered_1 - first_reading.delivered_1
-        consumption['electricity2'] = last_reading.delivered_2 - first_reading.delivered_2
-        consumption['electricity1_returned'] = last_reading.returned_1 - first_reading.returned_1
-        consumption['electricity2_returned'] = last_reading.returned_2 - first_reading.returned_2
-        consumption['electricity1_start'] = first_reading.delivered_1
-        consumption['electricity1_end'] = last_reading.delivered_1
-        consumption['electricity2_start'] = first_reading.delivered_2
-        consumption['electricity2_end'] = last_reading.delivered_2
-        consumption['electricity1_unit_price'] = daily_energy_price.electricity_1_price
-        consumption['electricity2_unit_price'] = daily_energy_price.electricity_2_price
-        consumption['electricity1_cost'] = round_price(
-            consumption['electricity1'] * consumption['electricity1_unit_price']
-        )
-        consumption['electricity2_cost'] = round_price(
-            consumption['electricity2'] * consumption['electricity2_unit_price']
-        )
-
     gas_readings = GasConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
 
-    reading_count = gas_readings.count()
+    if not electricity_readings.exists() or not gas_readings.exists():
+        raise LookupError("No readings found for: {}".format(day.date()))
 
-    if reading_count > 0:
-        first_reading = gas_readings[0]
-        last_reading = gas_readings[reading_count - 1]
-        consumption['gas'] = last_reading.delivered - first_reading.delivered
-        consumption['gas_start'] = first_reading.delivered
-        consumption['gas_end'] = last_reading.delivered
-        consumption['gas_unit_price'] = daily_energy_price.gas_price
-        consumption['gas_cost'] = round_price(
-            consumption['gas'] * consumption['gas_unit_price']
-        )
+    electricity_reading_count = electricity_readings.count()
+    gas_reading_count = gas_readings.count()
 
-    try:
-        consumption['total_cost'] = round_price(
-            consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']
-        )
-    except KeyError:
-        consumption['total_cost'] = 0
+    first_reading = electricity_readings[0]
+    last_reading = electricity_readings[electricity_reading_count - 1]
+    consumption['electricity1'] = last_reading.delivered_1 - first_reading.delivered_1
+    consumption['electricity2'] = last_reading.delivered_2 - first_reading.delivered_2
+    consumption['electricity1_returned'] = last_reading.returned_1 - first_reading.returned_1
+    consumption['electricity2_returned'] = last_reading.returned_2 - first_reading.returned_2
+    consumption['electricity1_start'] = first_reading.delivered_1
+    consumption['electricity1_end'] = last_reading.delivered_1
+    consumption['electricity2_start'] = first_reading.delivered_2
+    consumption['electricity2_end'] = last_reading.delivered_2
+    consumption['electricity1_unit_price'] = daily_energy_price.electricity_1_price
+    consumption['electricity2_unit_price'] = daily_energy_price.electricity_2_price
+    consumption['electricity1_cost'] = round_price(
+        consumption['electricity1'] * consumption['electricity1_unit_price']
+    )
+    consumption['electricity2_cost'] = round_price(
+        consumption['electricity2'] * consumption['electricity2_unit_price']
+    )
+
+    first_reading = gas_readings[0]
+    last_reading = gas_readings[gas_reading_count - 1]
+    consumption['gas'] = last_reading.delivered - first_reading.delivered
+    consumption['gas_start'] = first_reading.delivered
+    consumption['gas_end'] = last_reading.delivered
+    consumption['gas_unit_price'] = daily_energy_price.gas_price
+    consumption['gas_cost'] = round_price(
+        consumption['gas'] * consumption['gas_unit_price']
+    )
+
+    consumption['total_cost'] = round_price(
+        consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']
+    )
 
     return consumption
 
