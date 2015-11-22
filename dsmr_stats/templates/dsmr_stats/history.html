@@ -1,0 +1,126 @@
+{% extends "dsmr_stats/base.html" %}
+{% load staticfiles %}
+
+{% block title %}History{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    Recent cost
+                </header>
+                <div class="panel-body">
+                	<canvas id="recent-chart" width="1000" height="300"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+        {% for consumption in usage %}
+            <div class="panel">
+                <header class="panel-heading">
+                    {{ consumption.day }}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-6">Type</th>
+                            <th class="col-md-2">Consumed</th>
+                            <th class="col-md-2">Returned</th>
+                            <th class="col-md-2">Cost</th>
+                        </tr>
+                        <tr>
+                            <td>Electricity 1 (off-peak)</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1 }} kWh</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned }} kWh</span></td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.electricity1_cost }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Electricity 2 (peak)</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2 }} kWh</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned }} kWh</span></td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.electricity2_cost }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Gas</td>
+                            <td><span class="badge bg-orange">{{ consumption.gas }} m<sup>3</sup></span></td>
+                            <td>&nbsp;</td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.gas_cost }}</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Total</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.total_cost }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+           {% endfor %}
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+        	$(document).ready(function(){
+        		var data = {
+       				labels: {{ chart.days|safe }},
+       				datasets: [{
+       				    data: {{ chart.total_cost|safe }},
+	       				label: "Total cost",
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(0,0,0,1)",
+	       	            pointColor: "rgba(0,0,0,1)",
+	       	            pointStrokeColor: "#fff",
+	       	            pointHighlightFill: "#fff",
+	       	            pointHighlightStroke: "rgba(0,0,0,1)"
+       				}, {
+       				    data: {{ chart.electricity1_cost|safe }},
+	       				label: "Electricity 1 cost (off-peak)",	       				
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(255,0,0,1)",
+	       	            pointColor: "rgba(255,0,0,1)",
+	       	            pointStrokeColor: "#fff",
+	       	            pointHighlightFill: "#fff",
+	       	            pointHighlightStroke: "rgba(255,0,0,1)"
+       				}, {
+       				    data: {{ chart.electricity2_cost|safe }},
+	       				label: "Electricity 2 cost (peak)",	       				
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(255,0,0,1)",
+	       	            pointColor: "rgba(255,0,0,1)",
+	       	            pointStrokeColor: "#fff",
+	       	            pointHighlightFill: "#fff",
+	       	            pointHighlightStroke: "rgba(255,0,0,1)"
+       				}, {
+       				    data: {{ chart.gas_cost|safe }},
+	       				label: "Gas cost",	       				
+	       				fillColor: "rgba(255,255,255,0.2)",
+	       	            strokeColor: "rgba(250,133,0,1)",
+	       	            pointColor: "rgba(250,133,0,1)",
+	       	            pointStrokeColor: "#fff",
+	       	            pointHighlightFill: "#fff",
+	       	            pointHighlightStroke: "rgba(150,150,150,1)"
+       				}]
+        		};
+        		{% verbatim %}
+        		var options = {
+          			responsive: true,
+          			animation: false,
+           		};
+        		{% endverbatim %}
+        		
+        		var ctx = $("#recent-chart").get(0).getContext("2d");
+                new Chart(ctx).Line(data, options);
+        	});
+        </script>
+{% endblock %}

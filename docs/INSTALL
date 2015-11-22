@@ -1,0 +1,50 @@
+# Unpack ZIP ffs! ;-)
+dd if=2015-09-24-raspbian-jessie.img of=/dev/mmcblk0 bs=4M
+sync
+
+# Run rPi and cnnect
+ssh pi@IP
+
+sudo echo "rpi.siemensma.net" > /etc/hostname
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install vim 
+sudo apt-get install cu minicom
+sudo apt-get install postgresql supervisor mercurial
+# Postgres: http://www.unixmen.com/install-postgresql-9-4-phppgadmin-ubuntu-14-10/ 
+sudo apt-get install python3 python3-pip postgresql-9.4 postgresql-server-dev-9.4
+sudo apt-get install nginx
+
+sudo adduser dsmr
+sudo usermod -a -G dialout dsmr
+sudo su - dsmr
+ssh-keygen -t rsa -b 4096
+>> cu -l /dev/ttyUSB0 -s 115200 --parity=none
+
+
+# Virtualenv
+mkdir /home/dsmr/.virtualenvs
+chown dsmr: /home/dsmr/.virtualenvs/
+su - dsmr
+virtualenv ~/.virtualenvs/dsmr-reader --no-site-packages
+source /home/dsmr/.virtualenvs/dsmr-reader/bin/activate
+# You might want to put the 'source' command in the user's bashrc.
+pip3 install -r requirements.txt
+
+
+# Database
+### Postgres does not start due to locales? Try: dpkg-reconfigure locales
+### No luck? Try editing /etc/environment, add LC_ALL="en_US.utf-8" and reboot
+sudo su - postgres createuser -DSR dsmrreader
+sudo su - postgres createdb -O dsmrreader dsmrreader
+sudo su - postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+
+# Webserver.
+sudo mkdir -p /var/www/dsmrreader/static
+sudo chown -R dsmr:dsmr /var/www/dsmrreader/
+
+# Django
+su - dsmr
+./manage.py migrate
+./manage.py collectstatic -l
