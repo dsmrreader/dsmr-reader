@@ -34,31 +34,36 @@ class History(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(History, self).get_context_data(**kwargs)
         context_data['usage'] = []
+        context_data['days_ago'] = 14
 
         # @TODO: There must be a way to make this cleaner.
         context_data['chart'] = defaultdict(list)
+        CONSUMPTION_FIELDS = (
+            'electricity1_cost', 'electricity2_cost', 'gas_cost', 'total_cost', 'gas',
+            'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned'
+        )
 
         # Summarize stats for the past two weeks.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+        dates = (now - timezone.timedelta(days=n) for n in range(1, 1 + context_data['days_ago']))
 
-        for current_day in (now - timezone.timedelta(days=n) for n in range(1, 15)):
+        for current_day in dates:
             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
 
             try:
-                day_consumption = dsmr_stats.services.day_consumption(day=current_day)
+                day_consumption = dsmr_stats.services.day_consumption(
+                    day=current_day
+                )
             except LookupError:
                 continue
 
             context_data['usage'].append(day_consumption)
             context_data['chart']['days'].append(current_day.strftime("%a %d-%m"))
-            context_data['chart']['electricity1_cost'].append(float(
-                day_consumption['electricity1_cost']
-            ))
-            context_data['chart']['electricity2_cost'].append(float(
-                day_consumption['electricity2_cost']
-            ))
-            context_data['chart']['gas_cost'].append(float(day_consumption['gas_cost']))
-            context_data['chart']['total_cost'].append(float(day_consumption['total_cost']))
+
+            for current_field in CONSUMPTION_FIELDS:
+                context_data['chart'][current_field].append(float(
+                    day_consumption[current_field]
+                ))
 
         for key, value in context_data['chart'].items():
             context_data['chart'][key] = json.dumps(value)

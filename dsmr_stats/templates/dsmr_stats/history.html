@@ -10,10 +10,36 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Recent cost
+                    Daily cost in the past {{ days_ago }} days (in &euro;)
                 </header>
                 <div class="panel-body">
-                	<canvas id="recent-chart" width="1000" height="300"></canvas>
+                	<canvas id="cost-chart" width="1000" height="150"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    Daily electricity usage in the past {{ days_ago }} days (in kWh) 
+                </header>
+                <div class="panel-body">
+                	<canvas id="electricity-chart" width="1000" height="100"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    Daily gas usage in the past {{ days_ago }} days (in m<sup>3</sup>) 
+                </header>
+                <div class="panel-body">
+                	<canvas id="gas-chart" width="1000" height="100"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -30,7 +56,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-6">Type</th>
-                            <th class="col-md-2">Consumed</th>
+                            <th class="col-md-2">Delivered</th>
                             <th class="col-md-2">Returned</th>
                             <th class="col-md-2">Cost</th>
                         </tr>
@@ -66,61 +92,150 @@
 </section><!-- /.content -->
 {% endblock %}
 
-
 {% block javascript %}
 {{ block.super }}
         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
         <script type="text/javascript">
         	$(document).ready(function(){
-        		var data = {
-       				labels: {{ chart.days|safe }},
-       				datasets: [{
-       				    data: {{ chart.total_cost|safe }},
-	       				label: "Total cost",
-	       				fillColor: "rgba(255,255,255,0.2)",
-	       	            strokeColor: "rgba(0,0,0,1)",
-	       	            pointColor: "rgba(0,0,0,1)",
-	       	            pointStrokeColor: "#fff",
-	       	            pointHighlightFill: "#fff",
-	       	            pointHighlightStroke: "rgba(0,0,0,1)"
-       				}, {
-       				    data: {{ chart.electricity1_cost|safe }},
-	       				label: "Electricity 1 cost (off-peak)",	       				
-	       				fillColor: "rgba(255,255,255,0.2)",
-	       	            strokeColor: "rgba(255,0,0,1)",
-	       	            pointColor: "rgba(255,0,0,1)",
-	       	            pointStrokeColor: "#fff",
-	       	            pointHighlightFill: "#fff",
-	       	            pointHighlightStroke: "rgba(255,0,0,1)"
-       				}, {
-       				    data: {{ chart.electricity2_cost|safe }},
-	       				label: "Electricity 2 cost (peak)",	       				
-	       				fillColor: "rgba(255,255,255,0.2)",
-	       	            strokeColor: "rgba(255,0,0,1)",
-	       	            pointColor: "rgba(255,0,0,1)",
-	       	            pointStrokeColor: "#fff",
-	       	            pointHighlightFill: "#fff",
-	       	            pointHighlightStroke: "rgba(255,0,0,1)"
-       				}, {
-       				    data: {{ chart.gas_cost|safe }},
-	       				label: "Gas cost",	       				
-	       				fillColor: "rgba(255,255,255,0.2)",
-	       	            strokeColor: "rgba(250,133,0,1)",
-	       	            pointColor: "rgba(250,133,0,1)",
-	       	            pointStrokeColor: "#fff",
-	       	            pointHighlightFill: "#fff",
-	       	            pointHighlightStroke: "rgba(150,150,150,1)"
-       				}]
-        		};
-        		{% verbatim %}
-        		var options = {
-          			responsive: true,
-          			animation: false,
-           		};
-        		{% endverbatim %}
-        		
-        		var ctx = $("#recent-chart").get(0).getContext("2d");
-                new Chart(ctx).Line(data, options);
+        		render_cost_chart();
+        		render_electricity_chart();
+        		render_gas_chart();
         	});
-        </script>
+        	
+		   	function render_cost_chart()
+		   	{
+		   		var data = {
+	   				labels: {{ chart.days|safe }},
+	   				datasets: [{
+	   					data: {{ chart.total_cost|safe }},
+	   					label: "Total cost",
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(0,0,0,1)",
+	   					pointColor: "rgba(0,0,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(0,0,0,1)"
+	   				}, {
+	   					data: {{ chart.electricity1_cost|safe }},
+	   					label: "Electricity 1 cost (off-peak)",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(255,0,0,1)",
+	   					pointColor: "rgba(255,0,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(255,0,0,1)"
+	   				}, {
+	   					data: {{ chart.electricity2_cost|safe }},
+	   					label: "Electricity 2 cost (peak)",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(255,0,0,1)",
+	   					pointColor: "rgba(255,0,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(255,0,0,1)"
+	   				}, {
+	   					data: {{ chart.gas_cost|safe }},
+	   					label: "Gas cost",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(250,133,0,1)",
+	   					pointColor: "rgba(250,133,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(150,150,150,1)"
+	   				}]
+	   			};
+	
+	   			{% verbatim %}
+	   			var options = {
+	   				responsive: true,
+	   				animation: false,
+	   			};
+	   			{% endverbatim %}
+	
+	   			var ctx = $("#cost-chart").get(0).getContext("2d");
+	   			new Chart(ctx).Line(data, options);
+   			}
+        	
+		   	function render_electricity_chart()
+		   	{
+		   		var data = {
+	   				labels: {{ chart.days|safe }},
+	   				datasets: [{
+	   					data: {{ chart.electricity1|safe }},
+	   					label: "Electricity 1 (off-peak)",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(255,0,0,1)",
+	   					pointColor: "rgba(255,0,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(255,0,0,1)"
+	   				}, {
+	   					data: {{ chart.electricity2|safe }},
+	   					label: "Electricity 2 (peak)",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(255,0,0,1)",
+	   					pointColor: "rgba(255,0,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(255,0,0,1)"
+	   				}, {
+	   					data: {{ chart.electricity1_returned|safe }},
+	   					label: "Electricity 1 returned (off-peak)",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(133,20,75,1)",
+	   					pointColor: "rgba(133,20,75,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(133,20,75,1)"
+	   				}, {
+	   					data: {{ chart.electricity2_returned|safe }},
+	   					label: "Electricity 1 returned (peak)",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(133,20,75,1)",
+	   					pointColor: "rgba(133,20,75,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(133,20,75,1)"
+	   				}]
+	   			};
+	
+	   			{% verbatim %}
+	   			var options = {
+	   				responsive: true,
+	   				animation: false,
+	   			};
+	   			{% endverbatim %}
+	
+	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
+	   			new Chart(ctx).Line(data, options);
+   			}
+        	
+		   	function render_gas_chart()
+		   	{
+		   		var data = {
+	   				labels: {{ chart.days|safe }},
+	   				datasets: [{
+	   					data: {{ chart.gas|safe }},
+	   					label: "Gas",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(250,133,0,1)",
+	   					pointColor: "rgba(250,133,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(150,150,150,1)"
+	   				}]
+	   			};
+	
+	   			{% verbatim %}
+	   			var options = {
+	   				responsive: true,
+	   				animation: false,
+	   			};
+	   			{% endverbatim %}
+	
+	   			var ctx = $("#gas-chart").get(0).getContext("2d");
+	   			new Chart(ctx).Line(data, options);
+   			}
+
+		</script>
 {% endblock %}
