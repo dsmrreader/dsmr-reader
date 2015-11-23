@@ -32,3 +32,6 @@ class EnergySupplierPrice(models.Model):
     electricity_1_price = models.DecimalField(max_digits=11, decimal_places=5)
     electricity_2_price = models.DecimalField(max_digits=11, decimal_places=5)
     gas_price = models.DecimalField(max_digits=11, decimal_places=5)
+
+    def __str__(self):
+        return self.description or 'Energy Supplier'
