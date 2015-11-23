@@ -103,6 +103,18 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Caching framework.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+        'TIMEOUT': 60,
+        'OPTIONS': {
+            'MAX_ENTRIES': 100
+        }
+    }
+}
+
 # Local timezone to maintain for GUI. (<> TIME_ZONE!)
 LOCAL_TIME_ZONE = pytz.timezone('CET')
 
