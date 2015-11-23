@@ -11,3 +11,5 @@ ALLOWED_HOSTS = ['*']
 # DATABASES = Copied from development.
 
 STATIC_ROOT = '/var/www/dsmrreader/static'
+
+CACHES['default']['TIMEOUT'] = 5 * 60
