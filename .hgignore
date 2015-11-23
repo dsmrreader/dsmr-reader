@@ -3,6 +3,7 @@ syntax: glob
 
 syntax: regexp
 ^\.settings$
+^\.idea$
 ^\.project$
 ^\.pydevproject$
 ^dsmrreader/settings\.py$
