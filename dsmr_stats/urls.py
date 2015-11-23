@@ -10,7 +10,9 @@ urlpatterns = [
     url(r'^$', Dashboard.as_view(), name='dashboard'),
     url(
         r'^history$',
-        cache_page(settings.CACHES['default']['TIMEOUT'])(History.as_view()),
+        cache_page(settings.CACHES['default']['TIMEOUT'])(
+            History.as_view()
+        ),
         name='history'
     ),
     url(
@@ -20,7 +22,9 @@ urlpatterns = [
     ),
     url(
         r'^energy-supplier-prices$',
-        EnergySupplierPrices.as_view(),
+        cache_page(settings.CACHES['default']['TIMEOUT'])(
+            EnergySupplierPrices.as_view()
+        ),
         name='energy-supplier-prices'
     ),
     url(
