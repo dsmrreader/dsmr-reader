@@ -75,6 +75,9 @@ class Statistics(TemplateView):
         context_data['total_readings'] = DsmrReading.objects.count()
         context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0].timestamp
         context_data['last_reading'] = DsmrReading.objects.all().order_by('-pk')[0].timestamp
+        context_data['consumption'] = dsmr_stats.services.day_consumption(
+            day=timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+        )
         return context_data
 
 

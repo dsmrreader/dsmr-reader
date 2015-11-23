@@ -38,6 +38,32 @@
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
+    </div><!-- /.row -->                        
+                        
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    Meter positions (total usage)
+                </header>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td class="col-md-7">Electricity 1 (off-peak) </td>
+                            <td class="col-md-5"><span class="badge bg-red">{{ consumption.electricity1_end|default:'-' }} kWh</span></td>
+                        </tr>
+                        <tr>
+                            <td>Electricity 2 (peak) </td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2_end|default:'-' }} kWh</span></td>
+                        </tr>
+                        <tr>
+                            <td>Gas </td>
+                            <td><span class="badge bg-orange">{{ consumption.gas_end|default:'-' }} m<sup>3</sup></span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
     </div><!-- /.row -->
  
     <div class="row">
