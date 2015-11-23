@@ -11,10 +11,7 @@ class TestViews(TestCase):
     fixtures = ['test_dsmrreading.json', 'EnergySupplierPrice.json']
     namespace = 'stats'
 
-    def setUp(self):
-        self.client = Client()
-
-    def test_dashboard(self):
+    def _synchronize_date(self):
         # Little hack to fake any output for today (moment of test).
         call_command('dsmr_stats_compactor')
         ec = ElectricityConsumption.objects.get(pk=1)
@@ -24,6 +21,11 @@ class TestViews(TestCase):
         ec.save()
         gc.save()
 
+    def setUp(self):
+        self.client = Client()
+
+    def test_dashboard(self):
+        self._synchronize_date()
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
         )
@@ -43,7 +45,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_statistics(self):
-        call_command('dsmr_stats_compactor')
+        self._synchronize_date()
         response = self.client.get(
             reverse('{}:statistics'.format(self.namespace))
         )
