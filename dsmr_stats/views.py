@@ -38,20 +38,25 @@ class History(TemplateView):
         # @TODO: There must be a way to make this cleaner.
         context_data['chart'] = defaultdict(list)
 
-        # Summarize stats for the past week.
+        # Summarize stats for the past two weeks.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
 
-        for current_day in (now - timezone.timedelta(days=n) for n in range(7)):
+        for current_day in (now - timezone.timedelta(days=n) for n in range(1, 15)):
             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
+
             try:
                 day_consumption = dsmr_stats.services.day_consumption(day=current_day)
             except LookupError:
                 continue
 
             context_data['usage'].append(day_consumption)
-            context_data['chart']['days'].append(current_day.strftime("%Y-%m-%d"))
-            context_data['chart']['electricity1_cost'].append(float(day_consumption['electricity1_cost']))
-            context_data['chart']['electricity2_cost'].append(float(day_consumption['electricity2_cost']))
+            context_data['chart']['days'].append(current_day.strftime("%a %d-%m"))
+            context_data['chart']['electricity1_cost'].append(float(
+                day_consumption['electricity1_cost']
+            ))
+            context_data['chart']['electricity2_cost'].append(float(
+                day_consumption['electricity2_cost']
+            ))
             context_data['chart']['gas_cost'].append(float(day_consumption['gas_cost']))
             context_data['chart']['total_cost'].append(float(day_consumption['total_cost']))
 
