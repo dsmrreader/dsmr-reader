@@ -2,6 +2,14 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 
+class DsmrReadingManager(models.Manager):
+    def unprocessed(self):
+        return self.get_queryset().filter(processed=False)
+
+    def processed(self):
+        return self.get_queryset().filter(processed=True)
+
+
 class DsmrReading(models.Model):
     """ DSMR P1 telegram reading. Contains most of the raw data read from serial port. """
     DSMR_MAPPING = {
@@ -26,6 +34,8 @@ class DsmrReading(models.Model):
 
     class Meta:
         ordering = ['timestamp']
+
+    objects = DsmrReadingManager()
 
     timestamp = models.DateTimeField()
     electricity_delivered_1 = models.DecimalField(
