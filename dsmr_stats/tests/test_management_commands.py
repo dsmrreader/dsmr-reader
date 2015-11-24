@@ -3,11 +3,10 @@ from datetime import datetime
 import warnings
 
 import pytz
+from django.core.management import call_command, CommandError
 from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
-from django.core.management import call_command
-from django.core.management.base import CommandError
 
 from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption,\
     ElectricityStatistics
@@ -133,14 +132,23 @@ class TestDsmrStatsCompactor(TestCase):
     fixtures = ['test_dsmrreading.json']
 
     def setUp(self):
-        self.assertEqual(DsmrReading.objects.all().count(), 1)
+        self.assertEqual(DsmrReading.objects.all().count(), 2)
+        self.assertTrue(DsmrReading.objects.unprocessed().exists())
 
     def test_processing(self):
-        self.assertFalse(DsmrReading.objects.filter(processed=True).exists())
-
         call_command('dsmr_stats_compactor')
 
-        self.assertTrue(DsmrReading.objects.filter(processed=True).exists())
+        self.assertTrue(DsmrReading.objects.processed().exists())
+        self.assertFalse(DsmrReading.objects.unprocessed().exists())
+        self.assertEqual(ElectricityConsumption.objects.count(), 2)
+        self.assertEqual(GasConsumption.objects.count(), 1)
+
+    def test_grouping(self):
+        call_command('dsmr_stats_compactor', group_by_minute=True)
+
+        self.assertTrue(DsmrReading.objects.processed().exists())
+        self.assertEqual(ElectricityConsumption.objects.count(), 1)
+        self.assertEqual(GasConsumption.objects.count(), 1)
 
     def test_creation(self):
         self.assertFalse(ElectricityStatistics.objects.exists())
@@ -153,13 +161,28 @@ class TestDsmrStatsCompactor(TestCase):
         self.assertTrue(ElectricityConsumption.objects.exists())
         self.assertTrue(GasConsumption.objects.exists())
 
+    def test_purge(self):
+        call_command('dsmr_stats_compactor')
+        self.assertTrue(ElectricityStatistics.objects.exists())
+        self.assertTrue(ElectricityConsumption.objects.exists())
+        self.assertTrue(GasConsumption.objects.exists())
+        self.assertFalse(DsmrReading.objects.unprocessed().exists())
+
+        with self.assertRaises(CommandError):
+            call_command('dsmr_stats_compactor', purge=True)
+
+        self.assertFalse(ElectricityStatistics.objects.exists())
+        self.assertFalse(ElectricityConsumption.objects.exists())
+        self.assertFalse(GasConsumption.objects.exists())
+        self.assertTrue(DsmrReading.objects.unprocessed().exists())
+
 
 class TestDsmrStatsCleanup(TestCase):
     """ Test 'dsmr_stats_cleanup' management command. """
     fixtures = ['test_dsmrreading.json']
 
     def setUp(self):
-        self.assertEqual(DsmrReading.objects.all().count(), 1)
+        self.assertEqual(DsmrReading.objects.all().count(), 2)
 
         # Check fixture date, as we keep moving forward every day.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE).date()
@@ -167,7 +190,7 @@ class TestDsmrStatsCleanup(TestCase):
 
     def test_ignore_range(self):
         call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff + 1)
-        self.assertEqual(DsmrReading.objects.all().count(), 1)
+        self.assertEqual(DsmrReading.objects.all().count(), 2)
 
     def test_cleanup(self):
         call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff - 1)
