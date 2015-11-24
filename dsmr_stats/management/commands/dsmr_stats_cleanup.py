@@ -16,12 +16,13 @@ class Command(BaseCommand):
             metavar='DAYS',
             dest='days',
             default=365,
-            help=_('Any polled source data older than DAYS will be purged (default %(default)s days).')
+            help=_(
+                'Any polled source data older than DAYS will be purged (default %(default)s days).'
+            )
         )
         parser.add_argument(
             '--noinput',
-            type=bool,
-            metavar='',
+            action='store_true',
             dest='no_input',
             default=False,
             help=_('Tells Django to NOT prompt the user for input of any kind.')

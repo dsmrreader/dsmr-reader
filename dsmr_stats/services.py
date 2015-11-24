@@ -1,13 +1,15 @@
-import datetime
+from datetime import time
 import re
 
 from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
+from django.db.models import Avg, Max
 
 from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, \
     ElectricityStatistics, EnergySupplierPrice
 from decimal import Decimal, ROUND_UP
+import pytz
 
 
 def telegram_to_reading(data):
@@ -54,7 +56,7 @@ def reading_timestamp_to_datetime(string):
     Converts a string containing a timestamp to a timezone aware datetime.
     """
     timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})W', string)
-    return datetime.datetime(
+    return timezone.datetime(
         year=2000 + int(timestamp.group(1)),
         month=int(timestamp.group(2)),
         day=int(timestamp.group(3)),
@@ -66,19 +68,56 @@ def reading_timestamp_to_datetime(string):
 
 
 @transaction.atomic
-def compact(dsmr_reading):
-    # Electricity should be unique, because it's the reading
-    # with the lowest interval anyway.
-    ElectricityConsumption.objects.create(
-        read_at=dsmr_reading.timestamp,
-        delivered_1=dsmr_reading.electricity_delivered_1,
-        returned_1=dsmr_reading.electricity_returned_1,
-        delivered_2=dsmr_reading.electricity_delivered_2,
-        returned_2=dsmr_reading.electricity_returned_2,
-        tariff=dsmr_reading.electricity_tariff,
-        currently_delivered=dsmr_reading.electricity_currently_delivered,
-        currently_returned=dsmr_reading.electricity_currently_returned,
-    )
+def compact(dsmr_reading, group_by_minute=False):
+    """
+    Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute.
+    """
+    # Electricity should be unique, because it's the reading with the lowest interval anyway.
+    if not group_by_minute:
+        ElectricityConsumption.objects.create(
+            read_at=dsmr_reading.timestamp,
+            delivered_1=dsmr_reading.electricity_delivered_1,
+            returned_1=dsmr_reading.electricity_returned_1,
+            delivered_2=dsmr_reading.electricity_delivered_2,
+            returned_2=dsmr_reading.electricity_returned_2,
+            tariff=dsmr_reading.electricity_tariff,
+            currently_delivered=dsmr_reading.electricity_currently_delivered,
+            currently_returned=dsmr_reading.electricity_currently_returned,
+        )
+    # Grouping by minute requires some distinction and history checking.
+    else:
+        minute_start = timezone.datetime.combine(
+            dsmr_reading.timestamp.date(),
+            time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
+        ).replace(tzinfo=pytz.UTC)
+        minute_end = minute_start + timezone.timedelta(minutes=1)
+
+        # We might have six readings per minute, so there is a chance we already parsed it.
+        # Also, delay when the minute hasn't passed yet. 
+        if not ElectricityConsumption.objects.filter(read_at=minute_end).exists() and \
+                timezone.now() > minute_end:
+            grouped_reading = DsmrReading.objects.filter(
+                timestamp__gte=minute_start, timestamp__lt=minute_end
+            ).aggregate(
+                avg_delivered=Avg('electricity_currently_delivered'),
+                avg_returned=Avg('electricity_currently_returned'),
+                max_delivered_1=Max('electricity_delivered_1'),
+                max_delivered_2=Max('electricity_delivered_2'),
+                max_returned_1=Max('electricity_returned_1'),
+                max_returned_2=Max('electricity_returned_2')
+            )
+
+            # This instance is the average/max and combined result.
+            ElectricityConsumption.objects.create(
+                read_at=minute_end,
+                delivered_1=grouped_reading['max_delivered_1'],
+                returned_1=grouped_reading['max_returned_1'],
+                delivered_2=grouped_reading['max_delivered_2'],
+                returned_2=grouped_reading['max_returned_2'],
+                tariff=dsmr_reading.electricity_tariff,
+                currently_delivered=grouped_reading['avg_delivered'],
+                currently_returned=grouped_reading['avg_returned'],
+            )
 
     # Gas however only get read every hour, so we should check
     # for any duplicates, as they WILL exist.
