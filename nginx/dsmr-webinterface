@@ -4,7 +4,7 @@ upstream dsmr-webinterface {
 
 server {
     listen      80;
-    server_name rpi.siemensma.net;
+    server_name HOSTNAME;
 
     location /static {
         alias /var/www/dsmrreader/static;
