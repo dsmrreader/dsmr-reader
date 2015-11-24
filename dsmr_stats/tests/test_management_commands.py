@@ -1,19 +1,21 @@
 from unittest import mock
 from datetime import datetime
+import warnings
 
 import pytz
 from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 from django.core.management import call_command
+from django.core.management.base import CommandError
 
 from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption,\
     ElectricityStatistics
 from decimal import Decimal
 
 
-class TestDsmrStatsPoller(TestCase):
-    """ Test 'dsmr_stats_poller' management command. """
+class TestDsmrStatsDatalogger(TestCase):
+    """ Test 'dsmr_stats_datalogger' management command. """
     def _dummy_data(self):
         return [
             "/XMX5LGBBFFB231117727\n",
@@ -64,7 +66,7 @@ class TestDsmrStatsPoller(TestCase):
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dummy_data()
 
-        call_command('dsmr_stats_poller')
+        call_command('dsmr_stats_datalogger')
 
     def test_reading_creation(self):
         self._poll_reading()
@@ -98,6 +100,32 @@ class TestDsmrStatsPoller(TestCase):
             datetime(2015, 11, 10, 18, 0, 0, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('845.206'))
+
+
+class TestDsmrStatsPoller(TestCase):
+    """ Deprecated legacy support for data poller compatiblity. """
+    @mock.patch('serial.Serial.open')
+    def test(self, serial_patch):
+        # By using this side effect we can verify whether 'dsmr_stats_datalogger' is called.
+        serial_patch.side_effect = RuntimeError("Test")
+
+        with self.assertRaises(RuntimeError):
+            call_command('dsmr_stats_poller')
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+
+            try:
+                call_command('dsmr_stats_poller')
+            except RuntimeError:
+                pass
+
+            self.assertEqual(len(w), 1)
+            self.assertTrue(issubclass(w[-1].category, DeprecationWarning))
+            self.assertEqual(
+                w[-1].message,
+                'dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger'
+            )
 
 
 class TestDsmrStatsCompactor(TestCase):
