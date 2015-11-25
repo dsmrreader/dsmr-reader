@@ -97,7 +97,7 @@ class EnergySupplierPrices(TemplateView):
 
 class ChartDataMixin(BaseLineChartView):
     consumption_model = None
-    reading_count = 72
+    reading_count = 64
 
     def _get_readings(self, **kwargs):
         return self.consumption_model.objects.all().order_by('-id')[:self.reading_count]
@@ -111,7 +111,7 @@ class ChartDataMixin(BaseLineChartView):
         # Make sure we use local time zone.
         for read_at in self._get_readings().values_list('read_at', flat=True):
             y_axis.append(
-                read_at.astimezone(settings.LOCAL_TIME_ZONE).strftime("%H:%M:%S")
+                read_at.astimezone(settings.LOCAL_TIME_ZONE).strftime("%a %d %H:%M")
             )
 
         return y_axis
