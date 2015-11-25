@@ -111,7 +111,7 @@ class ChartDataMixin(BaseLineChartView):
         # Make sure we use local time zone.
         for read_at in self._get_readings().values_list('read_at', flat=True):
             y_axis.append(
-                read_at.astimezone(settings.LOCAL_TIME_ZONE).strftime("%a %d %H:%M")
+                read_at.astimezone(settings.LOCAL_TIME_ZONE).strftime("%a %H:%M")
             )
 
         return y_axis
