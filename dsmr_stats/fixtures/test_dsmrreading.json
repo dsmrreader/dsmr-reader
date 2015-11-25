@@ -48,5 +48,30 @@
     },
     "model": "dsmr_stats.dsmrreading",
     "pk": 2
+},
+{
+    "fields": {
+        "electricity_delivered_1": "530.750",
+        "extra_device_timestamp": "2015-11-10T19:00:00Z",
+        "extra_device_delivered": "845.898",
+        "electricity_returned_2": "0.000",
+        "voltage_swell_count_l3": 0,
+        "electricity_currently_delivered": "1.123",
+        "power_failure_count": 3,
+        "timestamp": "2015-11-10T19:41:07Z",
+        "long_power_failure_count": 0,
+        "electricity_tariff": 2,
+        "voltage_swell_count_l1": 0,
+        "electricity_returned_1": "0.000",
+        "voltage_sag_count_l1": 2,
+        "voltage_swell_count_l2": 0,
+        "voltage_sag_count_l3": 0,
+        "electricity_currently_returned": "0.000",
+        "processed": false,
+        "voltage_sag_count_l2": 2,
+        "electricity_delivered_2": "528.500"
+    },
+    "model": "dsmr_stats.dsmrreading",
+    "pk": 3
 }
 ]

@@ -92,10 +92,12 @@ def compact(dsmr_reading, group_by_minute=False):
         ).replace(tzinfo=pytz.UTC)
         minute_end = minute_start + timezone.timedelta(minutes=1)
 
+        # Postpone when current minute hasn't passed yet.
+        if timezone.now() <= minute_end:
+            return
+
         # We might have six readings per minute, so there is a chance we already parsed it.
-        # Also, delay when the minute hasn't passed yet. 
-        if not ElectricityConsumption.objects.filter(read_at=minute_end).exists() and \
-                timezone.now() > minute_end:
+        if not ElectricityConsumption.objects.filter(read_at=minute_end).exists():
             grouped_reading = DsmrReading.objects.filter(
                 timestamp__gte=minute_start, timestamp__lt=minute_end
             ).aggregate(

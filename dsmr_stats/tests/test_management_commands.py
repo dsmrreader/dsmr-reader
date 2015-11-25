@@ -132,7 +132,7 @@ class TestDsmrStatsCompactor(TestCase):
     fixtures = ['test_dsmrreading.json']
 
     def setUp(self):
-        self.assertEqual(DsmrReading.objects.all().count(), 2)
+        self.assertEqual(DsmrReading.objects.all().count(), 3)
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
 
     def test_processing(self):
@@ -140,13 +140,19 @@ class TestDsmrStatsCompactor(TestCase):
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
-        self.assertEqual(ElectricityConsumption.objects.count(), 2)
+        self.assertEqual(ElectricityConsumption.objects.count(), 3)
         self.assertEqual(GasConsumption.objects.count(), 1)
 
     def test_grouping(self):
+        # Make sure to verify the blocking of read ahead.
+        dr = DsmrReading.objects.get(pk=3)
+        dr.timestamp = timezone.now()
+        dr.save()
+
         call_command('dsmr_stats_compactor', group_by_minute=True)
 
-        self.assertTrue(DsmrReading.objects.processed().exists())
+        self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
+        self.assertTrue(DsmrReading.objects.unprocessed().exists())
         self.assertEqual(ElectricityConsumption.objects.count(), 1)
         self.assertEqual(GasConsumption.objects.count(), 1)
 
@@ -182,7 +188,7 @@ class TestDsmrStatsCleanup(TestCase):
     fixtures = ['test_dsmrreading.json']
 
     def setUp(self):
-        self.assertEqual(DsmrReading.objects.all().count(), 2)
+        self.assertEqual(DsmrReading.objects.all().count(), 3)
 
         # Check fixture date, as we keep moving forward every day.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE).date()
@@ -190,7 +196,7 @@ class TestDsmrStatsCleanup(TestCase):
 
     def test_ignore_range(self):
         call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff + 1)
-        self.assertEqual(DsmrReading.objects.all().count(), 2)
+        self.assertEqual(DsmrReading.objects.all().count(), 3)
 
     def test_cleanup(self):
         call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff - 1)
