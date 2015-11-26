@@ -34,7 +34,7 @@ class History(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(History, self).get_context_data(**kwargs)
         context_data['usage'] = []
-        context_data['days_ago'] = 14
+        context_data['days_ago'] = 28
 
         # @TODO: There must be a way to make this cleaner.
         context_data['chart'] = defaultdict(list)
