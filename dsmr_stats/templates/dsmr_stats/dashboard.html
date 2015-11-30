@@ -14,7 +14,7 @@
                 	<small>Last reading</small>
                     <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
                     <div class="sm-st-info">
-                        <span id="latest_electricity">-</span>
+                        <span>{{ latest_electricity }}</span>
                         Watt
                     </div>
                 </div>
@@ -24,8 +24,8 @@
                 	<small>Last hour</small>
                     <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
                     <div class="sm-st-info">
-                        <span id="latest_gas">-</span>
-                        m<sup>3</sup>
+                        <span>{{ latest_gas }}</span>
+                        m<sup>3</sup> gas
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                     Recent electricity delivered (watt)
                 </header>
                 <div class="panel-body">
-                	<canvas id="power-chart" width="1000" height="200"></canvas>
+                	<canvas id="electricity-chart" width="1000" height="200"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -111,41 +111,63 @@
         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
         <script type="text/javascript">
         	$(document).ready(function(){
-        		poll_graph_data();
-        		setInterval(poll_graph_data, 5 * 1000);
+        		render_electricity_chart();
+        		render_gas_chart();
         	});
         	
-        	function poll_graph_data()
-        	{
-        		options = {
-       				responsive: true,
-       				animation: false,
-        		};
-        		
-	            $.get('{% url "stats:recent-electricity-data-json" %}', function(data) {
-	                var ctx = $("#power-chart").get(0).getContext("2d");
-	                new Chart(ctx).Line(data, options);
-	            });
-	            $.get('{% url "stats:recent-gas-data-json" %}', function(data) {
-	                var ctx = $("#gas-chart").get(0).getContext("2d");
-	                new Chart(ctx).Line(data, options);
-	            });
-        	}
-        </script>
-        
-        <script type="text/javascript">
-        	$(document).ready(function(){
-        		poll_latest_data();
-        		setInterval(poll_latest_data, 5 * 1000);
-        	});
+		   	function render_electricity_chart()
+		   	{
+		   		var data = {
+	   				labels: {{ electricity_x|safe }},
+	   				datasets: [{
+	   					data: {{ electricity_y|safe }},
+	   					label: "Electricity",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(255,0,0,1)",
+	   					pointColor: "rgba(255,0,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(255,0,0,1)"
+	   				}]
+	   			};
+	
+	   			{% verbatim %}
+	   			var options = {
+	   				responsive: true,
+	   				animation: false,
+	   			};
+	   			{% endverbatim %}
+	
+	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
+	   			new Chart(ctx).Line(data, options);
+   			}
         	
-        	function poll_latest_data()
-        	{
-	            $.get('{% url "stats:latest-data-json" %}', function(data) {
-	            	$("#latest_electricity").html(data.electricity);
-	            	$("#latest_gas").html(data.gas);
-	            });
-        	}
+		   	function render_gas_chart()
+		   	{
+		   		var data = {
+	   				labels: {{ gas_x|safe }},
+	   				datasets: [{
+	   					data: {{ gas_y|safe }},
+	   					label: "Gas",	       				
+	   					fillColor: "rgba(255,255,255,0.2)",
+	   					strokeColor: "rgba(250,133,0,1)",
+	   					pointColor: "rgba(250,133,0,1)",
+	   					pointStrokeColor: "#fff",
+	   					pointHighlightFill: "#fff",
+	   					pointHighlightStroke: "rgba(150,150,150,1)"
+	   				}]
+	   			};
+	
+	   			{% verbatim %}
+	   			var options = {
+	   				responsive: true,
+	   				animation: false,
+	   			};
+	   			{% endverbatim %}
+	
+	   			var ctx = $("#gas-chart").get(0).getContext("2d");
+	   			new Chart(ctx).Line(data, options);
+   			}
 		</script>
 
 {% endblock %}
