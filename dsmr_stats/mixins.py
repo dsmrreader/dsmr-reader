@@ -22,13 +22,17 @@ class DashboardMixin(object):
         )[0:self.gas_readings]
 
         context_data['electricity_x'] = json.dumps(
-            [x.read_at.strftime("%a %H:%M") for x in electricity]
+            [x.read_at.astimezone(
+                settings.LOCAL_TIME_ZONE
+            ).strftime("%a %H:%M") for x in electricity]
         )
         context_data['electricity_y'] = json.dumps(
             [float(x.currently_delivered * 1000) for x in electricity]
         )
         context_data['gas_x'] = json.dumps(
-            [x.read_at.strftime("%a %H:%M") for x in gas]
+            [x.read_at.astimezone(
+                settings.LOCAL_TIME_ZONE
+            ).strftime("%a %H:%M") for x in gas]
         )
         context_data['gas_y'] = json.dumps(
             [float(x.currently_delivered) for x in gas]
