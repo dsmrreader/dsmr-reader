@@ -1,3 +1,5 @@
+import json
+
 from django.test import TestCase, Client
 from django.utils import timezone
 from django.core.urlresolvers import reverse
@@ -30,13 +32,17 @@ class TestViews(TestCase):
             reverse('{}:dashboard'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
-        self.assertIn('consumption', response.context)
 
-        consumption = response.context['consumption']
-        self.assertGreater(consumption['electricity1_start'], 0)
-        self.assertGreater(consumption['electricity2_start'], 0)
-        self.assertGreater(consumption['electricity1_end'], 0)
-        self.assertGreater(consumption['electricity2_end'], 0)
+        self.assertGreater(
+            len(json.loads(response.context['electricity_x'])), 0
+        )
+        self.assertGreater(
+            len(json.loads(response.context['electricity_y'])), 0
+        )
+        self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
+        self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
+        self.assertGreater(response.context['latest_electricity'], 0)
+        self.assertEqual(response.context['latest_gas'], 0)
 
     def test_history(self):
         response = self.client.get(
