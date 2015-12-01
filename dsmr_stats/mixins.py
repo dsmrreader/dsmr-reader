@@ -41,6 +41,14 @@ class DashboardMixin(object):
             electricity[0].currently_delivered * 1000
         )
         context_data['latest_gas'] = gas[0].currently_delivered
+
+        try:
+            context_data['consumption'] = dsmr_stats.services.day_consumption(
+                day=electricity[0].read_at
+            )
+        except LookupError:
+            pass
+
         return context_data
 
 

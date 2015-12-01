@@ -43,6 +43,7 @@ class TestViews(TestCase):
         self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
         self.assertGreater(response.context['latest_electricity'], 0)
         self.assertEqual(response.context['latest_gas'], 0)
+        self.assertIn('consumption', response.context)
 
     def test_history(self):
         response = self.client.get(
