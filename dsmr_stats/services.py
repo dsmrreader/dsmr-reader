@@ -240,4 +240,5 @@ def day_consumption(day):
 
 
 def round_price(decimal_price):
+    """ Round the price to two decimals. """
     return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
