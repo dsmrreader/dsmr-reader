@@ -44,11 +44,25 @@ class DashboardMixin(object):
 
         try:
             context_data['consumption'] = dsmr_stats.services.day_consumption(
-                day=electricity[0].read_at
+                day=electricity[0].read_at.astimezone(settings.LOCAL_TIME_ZONE)
             )
         except LookupError:
             pass
 
+        return context_data
+
+
+class ArchiveMixin(object):
+    def get_context_data(self, **kwargs):
+        context_data = super(ArchiveMixin, self).get_context_data(**kwargs)
+        ec = models.ElectricityConsumption.objects.all().order_by('read_at')[0]
+        daterangepicker_format = '%d-%m-%Y'
+        context_data['start_date'] = ec.read_at.astimezone(
+            settings.LOCAL_TIME_ZONE
+        ).strftime(daterangepicker_format)
+        context_data['end_date'] = timezone.now().astimezone(
+            settings.LOCAL_TIME_ZONE
+        ).strftime(daterangepicker_format)
         return context_data
 
 
