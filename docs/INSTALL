@@ -15,6 +15,8 @@ sudo apt-get install postgresql supervisor mercurial
 # Postgres: http://www.unixmen.com/install-postgresql-9-4-phppgadmin-ubuntu-14-10/ 
 sudo apt-get install python3 python3-pip postgresql-9.4 postgresql-server-dev-9.4
 sudo apt-get install nginx
+sudo apt-get purge wolfram-engine
+
 
 sudo adduser dsmr
 sudo usermod -a -G dialout dsmr
