@@ -1,0 +1,19 @@
+upstream dsmr-webinterface {
+    server unix:///var/tmp/gunicorn--dsmr_webinterface.socket fail_timeout=0;
+}
+
+server {
+    listen      80;
+    server_name HOSTNAME;
+
+    location /static {
+        alias /var/www/dsmrreader/static;
+    }
+
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_pass http://dsmr-webinterface;
+    }
+}
