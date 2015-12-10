@@ -1,52 +1,98 @@
-# Unpack ZIP ffs! ;-)
-dd if=2015-09-24-raspbian-jessie.img of=/dev/mmcblk0 bs=4M
-sync
+# Either use the headless version @ https://github.com/debian-pi/raspbian-ua-netinst
+# Or the GUI (full) Raspbian image.
 
-# Run rPi and cnnect
-ssh pi@IP
+# Run rPi and connect
+# ssh pi@IP-address (full img) or ssh root@IP-address (headless)
 
-sudo echo "rpi.siemensma.net" > /etc/hostname
+# Disable IPv6 if you get timeouts or other weird networking stuff related to IPv6..
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+sudo sysctl -p /etc/sysctl.conf
 
+
+apt-get install sudo  # (headless only)
+sudo apt-get install vim raspi-config
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install vim 
-sudo apt-get install cu minicom
-sudo apt-get install postgresql supervisor mercurial
-# Postgres: http://www.unixmen.com/install-postgresql-9-4-phppgadmin-ubuntu-14-10/ 
-sudo apt-get install python3 python3-pip postgresql-9.4 postgresql-server-dev-9.4
-sudo apt-get install nginx
+
+# Make sure to enter the menu below and set timezone to UTC!
+# Also install all locales you need. You may also set a hostname here, depending on your needs.
+raspi-config
+
+# Headless install? You might like bash completion:
+# https://www.howtoforge.com/how-to-add-bash-completion-in-debian
+
+# Choose your database backend (postgresql/mysql).
+# Postgres: http://www.unixmen.com/install-postgresql-9-4-phppgadmin-ubuntu-14-10/
+sudo apt-get install mariadb-server-10.0 libmysqlclient-dev 
+
+# Misc.
+sudo apt-get install nginx supervisor mercurial python3 python3-pip python3-virtualenv virtualenvwrapper
+
+# The CU program allows easy testing for you DSMR connector. It's very basic.
+sudo apt-get install cu
+sudo useradd dsmr
+sudo usermod -a -G dialout dsmr
+sudo su - dsmr
+
+# Test with CU (settings for DSMR v4). It should state 'connected' 
+# and print output data within 10 seconds. 
+cu -l /dev/ttyUSB0 -s 115200 --parity=none
+
+# When not running headless you might want to dispose of (default installed) wolfram engine,
+# used for complex mathematics.
 sudo apt-get purge wolfram-engine
 
 
-sudo adduser dsmr
-sudo usermod -a -G dialout dsmr
-sudo su - dsmr
-ssh-keygen -t rsa -b 4096
->> cu -l /dev/ttyUSB0 -s 115200 --parity=none
 
-
-# Virtualenv
-mkdir /home/dsmr/.virtualenvs
-chown dsmr: /home/dsmr/.virtualenvs/
-su - dsmr
-virtualenv ~/.virtualenvs/dsmr-reader --no-site-packages
-source /home/dsmr/.virtualenvs/dsmr-reader/bin/activate
-# You might want to put the 'source' command in the user's bashrc.
-pip3 install -r requirements.txt
+# Webserver.
+sudo mkdir -p /var/www/dsmrreader/static
+sudo chown -R dsmr:dsmr /var/www/dsmrreader/
 
 
 # Database
+### MySQL
+sudo mysqladmin create dsmrreader
+echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
+echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
+mysqladmin reload
+
 ### Postgres does not start due to locales? Try: dpkg-reconfigure locales
 ### No luck? Try editing /etc/environment, add LC_ALL="en_US.utf-8" and reboot
 sudo su - postgres createuser -DSR dsmrreader
 sudo su - postgres createdb -O dsmrreader dsmrreader
 sudo su - postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
 
-# Webserver.
-sudo mkdir -p /var/www/dsmrreader/static
-sudo chown -R dsmr:dsmr /var/www/dsmrreader/
 
-# Django
 su - dsmr
+hg clone https://bitbucket.org/dennissiemensma/dsmr-reader
+
+# Virtualenv
+mkdir ~/.virtualenvs
+virtualenv ~/.virtualenvs/dsmrreader --no-site-packages
+source ~/.virtualenvs/dsmrreader/bin/activate
+# You might want to put the 'source' command above in the user's ~/.bashrc (logout and login to test)
+pip3 install -r requirements.txt
+
+# App settings & init.
+cd ~/dsmr-reader
+cp dsmrreader/config/production.py dsmrreader/settings.py
+vi dsmrreader/settings.py 
+
 ./manage.py migrate
-./manage.py collectstatic -l
+./manage.py collectstatic -l --noinput
+
+# Now to back to root/sudo-user to config webserver.
+sudo rm /etc/nginx/sites-enabled/default
+sudo cp /home/dsmr/dsmr-reader/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
+sudo vi /etc/nginx/sites-enabled/dsmr-webinterface
+# Now enter hostname etc in vhost and save.
+sudo service nginx configtest
+sudo service nginx reload
+
+# Supervisor.
+sudo cp /home/dsmr/dsmr-reader/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
+# NOTE: dsmr_stats_poller.conf is LEGACY and should be skipped!
+sudo supervisorctl
+supervisor> reread
+supervisor> update
+supervisor> status
