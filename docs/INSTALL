@@ -80,6 +80,8 @@ vi dsmrreader/settings.py
 
 ./manage.py migrate
 ./manage.py collectstatic -l --noinput
+./manage.py loaddata dsmr_stats/fixtures/EnergySupplierPrice.json 
+
 
 # Now to back to root/sudo-user to config webserver.
 sudo rm /etc/nginx/sites-enabled/default
