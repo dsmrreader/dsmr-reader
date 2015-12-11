@@ -4,7 +4,7 @@ upstream dsmr-webinterface {
 
 server {
     listen      80;
-    server_name HOSTNAME;
+    server_name _;  # No hostname available? Just use the underscore for wildcard matching. :]
 
     location /static {
         alias /var/www/dsmrreader/static;
