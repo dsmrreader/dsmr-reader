@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from decimal import Decimal
-
 import pytz
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    # Must be inserted BEFORE contrib because it's an admin skin.
+    # django-flat-theme is officially merged in Django 1.9, this is pre-1.9.
+    'flat',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

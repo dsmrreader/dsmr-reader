@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import EnergySupplierPrice
+
+from dsmr_stats.models import EnergySupplierPrice
+
 
 admin.site.register(EnergySupplierPrice)
-
