@@ -29,9 +29,15 @@ class EnergySupplierPrice(models.Model):
         max_length=255, null=True, blank=True,
         help_text=_('For your own reference, i.e. your supplier name')
     )
-    electricity_1_price = models.DecimalField(max_digits=11, decimal_places=5)
-    electricity_2_price = models.DecimalField(max_digits=11, decimal_places=5)
-    gas_price = models.DecimalField(max_digits=11, decimal_places=5)
+    electricity_1_price = models.DecimalField(
+        max_digits=11, decimal_places=5, default=0
+    )
+    electricity_2_price = models.DecimalField(
+        max_digits=11, decimal_places=5, default=0
+    )
+    gas_price = models.DecimalField(
+        max_digits=11, decimal_places=5, default=0
+    )
 
     def __str__(self):
         return self.description or 'Energy Supplier'
