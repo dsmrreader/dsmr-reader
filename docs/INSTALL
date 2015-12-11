@@ -115,8 +115,11 @@ pip3 install -r requirements/mysql.txt
 # Prepare static files for webinterface. We do not want browsers to access our project code dir.
 ./manage.py collectstatic --noinput
 
-# @TODO: Bug #5 (Dashboard: EnergySupplierPrice matching query does not exist)
-# For now, use these prices until bug above is fixed.
+# Create a superuser, Django will promt you for a password. Alter username and email when you feel you need to.
+./manage.py createsuperuser --username admin --email root@localhost
+
+# OPTIONAL: The application will run without your energy prices, but if you want some defaults
+# then execute the command below. Altering prices later will go well, as it's retroactive. 
 ./manage.py loaddata dsmr_stats/fixtures/EnergySupplierPrice.json 
 
 
@@ -150,3 +153,4 @@ supervisor> tail -f dsmr_stats_datalogger
 # Want to quit supervisor? CTRL + C to stop tail and CTRL + D once to exit supervisor command line.
 
 # Everything OK? Congratulations, this was the hardest part and now the fun begins! :]
+# You might want to 'reboot' and check if everything comes up automatically with  'sudo supervisorctl status'
