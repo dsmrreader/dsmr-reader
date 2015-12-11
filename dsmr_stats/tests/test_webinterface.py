@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
-from dsmr_stats.models import ElectricityConsumption, GasConsumption, EnergySupplierPrice
+from dsmr_stats.models import ElectricityConsumption, GasConsumption
 
 
 class TestViews(TestCase):
@@ -25,6 +25,15 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
+
+    def test_admin(self):
+        response = self.client.get(
+            reverse('admin:index')
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response['Location'], 'http://testserver/admin/login/?next=/admin/'
+        )
 
     def test_dashboard(self):
         self._synchronize_date()
