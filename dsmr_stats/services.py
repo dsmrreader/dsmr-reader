@@ -186,9 +186,13 @@ def day_consumption(day):
     day_end = day_start + timezone.timedelta(days=1)
 
     # This WILL fail when we either have no prices at all or conflicting ranges.
-    daily_energy_price = EnergySupplierPrice.objects.by_date(
-        target_date=consumption['day']
-    )
+    try:
+        daily_energy_price = EnergySupplierPrice.objects.by_date(
+            target_date=consumption['day']
+        )
+    except EnergySupplierPrice.DoesNotExist:
+        # Default to zero prices.
+        daily_energy_price = EnergySupplierPrice()
 
     electricity_readings = ElectricityConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
