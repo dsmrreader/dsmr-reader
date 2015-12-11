@@ -1,0 +1,5 @@
+Django==1.8.7
+django-chartjs==1.0
+gunicorn==19.3.0
+pyserial==2.7
+pytz==2015.7
