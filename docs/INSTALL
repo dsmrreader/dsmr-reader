@@ -98,16 +98,16 @@ cd ~/dsmr-reader
 
 # Now choose your database backend and add your database credentials to the 'settings.py' destination
 # (when not using default credentials).
-cp dsmrreader/config/mysql.py dsmrreader/settings.py
+cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
     OR
-cp dsmrreader/config/postgresql.py dsmrreader/settings.py
+cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
 
 # Choose the client for your database backend (this is the client django uses).
 # Will also install application requirements, such as Django and Gunicorn.
 # Installation might take a while. Nothing to worry about. :]
-pip3 install -r requirements/postgresql.txt
+pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/postgresql.txt
     OR
-pip3 install -r requirements/mysql.txt
+pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
 
 # We will init the database, you should only see OK's. 
 ./manage.py migrate
@@ -126,14 +126,14 @@ pip3 install -r requirements/mysql.txt
 # Now to back to root/sudo-user to config webserver.
 CTRL + D
 sudo rm /etc/nginx/sites-enabled/default
-sudo cp /home/dsmr/dsmr-reader/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
+sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
 sudo vi /etc/nginx/sites-enabled/dsmr-webinterface
 # Now enter any 'hostname' in vhost in 'HOSTNAME' and save. No hostname? Just use the default underscore.
 sudo service nginx configtest
 sudo service nginx reload
 
 # Supervisor.
-sudo cp /home/dsmr/dsmr-reader/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
+sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
 # NOTE: dsmr_stats_poller.conf is LEGACY and should be skipped!
 # rm /etc/supervisor/conf.d/dsmr_stats_poller.conf
 sudo supervisorctl
@@ -143,7 +143,7 @@ supervisor> reread
 supervisor> update
 supervisor> status
 
-# Three processed should be started or running. Make sure they don't end in ERROR state, so refresh
+# Three processed should be started or running. Make sure they don't end up in ERROR state, so refresh
 # with 'status' a few times. dsmr_stats_compactor and dsmr_stats_datalogger will restart every time.
 # This is intended behaviour. dsmr_webinterface however should keep running.
  
