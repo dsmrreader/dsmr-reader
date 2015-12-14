@@ -1,6 +1,18 @@
-Credits & thanks to:
+Software used:
+* OS: Raspbian (https://www.raspbian.org/)
+* Raspbian (minimal) unattended netinstaller (https://github.com/debian-pi/raspbian-ua-netinst)
+* Django Project (https://www.djangoproject.com/)
+* Supervisor (http://supervisord.org/)
+* MySQL (https://www.mysql.com/)
+* MariaDB (https://mariadb.org/)
+* PostgreSQL (http://www.postgresql.org/)
+* Template: Director Responsive Admin (http://web-apps.ninja/director-free-responsive-admin-template/)
+* Favicon (http://www.flaticon.com/free-icon/eco-energy_25013)
 
+Dutch Smart Meter reading specifications, data cables, examples and hints:
 * Gé Janssen (http://gejanssen.com/howto/Slimme-meter-uitlezen/)
 * Joost van der Linde (https://sites.google.com/site/nta8130p1smartmeter/home)
-* Director Responsive Admin Template (http://web-apps.ninja/director-free-responsive-admin-template/)
-* Favicon (http://www.flaticon.com/free-icon/eco-energy_25013)
+* SOS Solutions (https://www.sossolutions.nl/)
+
+Pull requests:
+* Jeroen Peters (https://www.linkedin.com/in/jeroenpeters1986)
