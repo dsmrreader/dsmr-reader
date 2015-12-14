@@ -154,3 +154,5 @@ supervisor> tail -f dsmr_stats_datalogger
 
 # Everything OK? Congratulations, this was the hardest part and now the fun begins! :]
 # You might want to 'reboot' and check if everything comes up automatically with  'sudo supervisorctl status'
+
+# Note: Running production and PUBLIC? Please make sure to ALTER the 'SECRET_KEY' setting in your config!
