@@ -1,0 +1,158 @@
+# Either use the headless version @ https://github.com/debian-pi/raspbian-ua-netinst
+# Or the GUI (full) Raspbian image.
+
+# Run rPi and connect
+# ssh pi@IP-address (full img) or ssh root@IP-address (headless)
+
+# Disable IPv6 if you get timeouts or other weird networking stuff related to IPv6..
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+sysctl -p /etc/sysctl.conf
+
+apt-get install sudo  # (headless only)
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install vim raspi-config
+
+raspi-config
+# - If your sdcard/disk space if not yet fully utilized, select #1 expand filesystem
+# - If you do not have a raspberrypi2, you might want to select #8 overclock (setting MODEST, 0 overvolt!) 
+# Make sure to enter the menu below and set timezone to UTC. This is required to prevent any bugs resulting
+# from the DST transition twice every year. It's also best practice for your database. 
+#    (5. internationalisation options, I2, Etc -> UTC)!
+# Install all locales you need (5. internationalisation options, I1).
+#    (scroll and press space bar on en_US.UTF-8 UTF-8 + nl_NL.UTF-8 UTF-8, finish with tab + enter) 
+# You may also set a hostname here (9 advanced options, A2), depending on your needs.
+# The tool will ask you to reboot, choose yes, allowing it to reflect all your changes.
+
+
+# Headless install? You might like bash completion:
+# https://www.howtoforge.com/how-to-add-bash-completion-in-debian
+sudo apt-get install bash-completion
+sudo vi /etc/profile
+
+"""
+if [ -f /etc/bash_completion ]; then
+ . /etc/bash_completion
+fi
+"""
+
+
+# When not running headless you might want to dispose of (the default installed) wolfram engine,
+# used for complex mathematics.
+sudo apt-get purge wolfram-engine
+
+
+# Choose your database backend (postgresql/mysql).
+# --- Postgres
+sudo apt-get install postgresql postgresql-server-dev-all
+### Postgres does not start due to locales? Try: dpkg-reconfigure locales
+### No luck? Try editing /etc/environment, add LC_ALL="en_US.utf-8" and reboot
+# Create user, database and set password (choose on yourself if you prefer to).
+# Ignore any 'could not change directory to "/root": Permission denied' errors.
+sudo sudo -u postgres createuser -DSR dsmrreader
+sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+
+
+# --- MariaDB (MySQL)
+sudo apt-get install mariadb-server-10.0 libmysqlclient-dev 
+### MySQL
+sudo mysqladmin create dsmrreader
+echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
+echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
+mysqladmin reload
+
+
+# Misc utils, required for: webserver, application server and pulling the application code.
+sudo apt-get install nginx supervisor mercurial python3 python3-pip python3-virtualenv virtualenvwrapper
+
+sudo apt-get install cu
+# The CU program allows easy testing for you DSMR connector. It's very basic but effective.
+sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
+sudo usermod -a -G dialout dsmr
+sudo su - dsmr
+
+# Test with CU (settings for DSMR v4). It should state 'connected' 
+# and print output data within 10 seconds. 
+cu -l /dev/ttyUSB0 -s 115200 --parity=none
+# Only I don't know how to disconnect CU (and I'm too lazy to lookup), so terminate shell and reconnect.
+
+
+# Webserver.
+sudo mkdir -p /var/www/dsmrreader/static
+sudo chown -R dsmr:dsmr /var/www/dsmrreader/
+
+
+su - dsmr
+hg clone https://bitbucket.org/dennissiemensma/dsmr-reader
+
+# Virtualenv
+mkdir ~/.virtualenvs
+virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3
+source ~/.virtualenvs/dsmrreader/bin/activate
+# You might want to put the 'source' command above in the user's ~/.bashrc (logout and login to test)
+# I also advice to put a 'cd ~/dsmr-reader' in there as well.
+
+# App settings & init.
+cd ~/dsmr-reader
+
+# Now choose your database backend and add your database credentials to the 'settings.py' destination
+# (when not using default credentials).
+cp dsmrreader/config/mysql.py dsmrreader/settings.py
+    OR
+cp dsmrreader/config/postgresql.py dsmrreader/settings.py
+
+# Choose the client for your database backend (this is the client django uses).
+# Will also install application requirements, such as Django and Gunicorn.
+# Installation might take a while. Nothing to worry about. :]
+pip3 install -r requirements/postgresql.txt
+    OR
+pip3 install -r requirements/mysql.txt
+
+# We will init the database, you should only see OK's. 
+./manage.py migrate
+
+# Prepare static files for webinterface. We do not want browsers to access our project code dir.
+./manage.py collectstatic --noinput
+
+# Create a superuser, Django will promt you for a password. Alter username and email when you feel you need to.
+./manage.py createsuperuser --username admin --email root@localhost
+
+# OPTIONAL: The application will run without your energy prices, but if you want some defaults
+# then execute the command below. Altering prices later will go well, as it's retroactive. 
+./manage.py loaddata dsmr_stats/fixtures/EnergySupplierPrice.json 
+
+
+# Now to back to root/sudo-user to config webserver.
+CTRL + D
+sudo rm /etc/nginx/sites-enabled/default
+sudo cp /home/dsmr/dsmr-reader/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
+sudo vi /etc/nginx/sites-enabled/dsmr-webinterface
+# Now enter any 'hostname' in vhost in 'HOSTNAME' and save. No hostname? Just use the default underscore.
+sudo service nginx configtest
+sudo service nginx reload
+
+# Supervisor.
+sudo cp /home/dsmr/dsmr-reader/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
+# NOTE: dsmr_stats_poller.conf is LEGACY and should be skipped!
+# rm /etc/supervisor/conf.d/dsmr_stats_poller.conf
+sudo supervisorctl
+
+# Enter these commands (after the >)
+supervisor> reread
+supervisor> update
+supervisor> status
+
+# Three processed should be started or running. Make sure they don't end in ERROR state, so refresh
+# with 'status' a few times. dsmr_stats_compactor and dsmr_stats_datalogger will restart every time.
+# This is intended behaviour. dsmr_webinterface however should keep running.
+ 
+# Want to check whether data logger works? Just tail log in supervisor with:
+supervisor> tail -f dsmr_stats_datalogger
+# You should see similar output as the CU-command used earlier on the command line.
+# Want to quit supervisor? CTRL + C to stop tail and CTRL + D once to exit supervisor command line.
+
+# Everything OK? Congratulations, this was the hardest part and now the fun begins! :]
+# You might want to 'reboot' and check if everything comes up automatically with  'sudo supervisorctl status'
+
+# Note: Running production and PUBLIC? Please make sure to ALTER the 'SECRET_KEY' setting in your config!
