@@ -307,3 +307,31 @@ You might want to `reboot` and check whether everything comes up automatically a
 
 ### Public webinterface warning ###
 **NOTE**: Running production and *public*? Please make sure to ALTER the `SECRET_KEY` setting in your `settings.py`
+
+## Feedback ##
+All feedback and input is, as always, very much appreciated! Please send an e-mail to dsmr (at) dennissiemensma (dot) nl. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
+
+##  Licence ##
+Also included in the **LICENCE** file:
+
+> The MIT License (MIT)
+> 
+> Copyright (c) [2015] [Dennis Siemensma]
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+> 
+> The above copyright notice and this permission notice shall be included in all
+> copies or substantial portions of the Software.
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+> SOFTWARE.
