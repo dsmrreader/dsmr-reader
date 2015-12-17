@@ -27,42 +27,40 @@ Either use the headless version of Raspbian, [netinstall](https://github.com/deb
 #### Init ####
 Power on RaspberryPi and connect using SSH:
 
-<code>ssh pi@IP-address</code> (full image)
+`ssh pi@IP-address` (full image)
 
 or
 
-<code>ssh root@IP-address</code> (headless)
+`ssh root@IP-address` (headless)
 
 
 ##### IPv6 #####
 Disable IPv6 if you get timeouts or other weird networking stuff related to IPv6.
 
-<code>
+```
 echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
 
 sysctl -p /etc/sysctl.conf
-</code>
+```
 
 ##### Sudo #####
 Make sure you are up to date:
-<code>apt-get install sudo</code>  *(headless only)*
+`apt-get install sudo`  *(headless only)*
 
 ##### Updates #####
-<code>
+```
 sudo apt-get update
 
 sudo apt-get upgrade
-</code>
+```
 
 
 ##### raspi-config #####
 Install this RaspberryPi utility.
 
-<code>
-sudo apt-get install raspi-config
-</code>
+`sudo apt-get install raspi-config`
 
-Now run it: <code>raspi-config</code>. You should see a menu containing around ten options to choose from.
+Now run it: `raspi-config`. You should see a menu containing around ten options to choose from.
 
 Make sure to enter the menu **5. Internationalisation Options** and set timezone *(I2)* to UTC. This is required to prevent any bugs resulting from the DST transition twice every year. It's also best practice for your database backend anyway.
 
@@ -76,7 +74,7 @@ If the utility asks you whether to reboot, choose yes to reflect the changes you
 ##### Extra's #####
 Running the headless Raspbian netinstall? You might like Bash completion. Check [this article](https://www.howtoforge.com/how-to-add-bash-completion-in-debian) how to do this.
 
-Running the full Rasbian install? You should check whether you require the [Wolfram Engine](http://www.wolfram.com/raspberry-pi/), which is installed by default, but takes about a whopping 500 MB disk space! Run <code>sudo apt-get purge wolfram-engine</code> if you don't need it.
+Running the full Rasbian install? You should check whether you require the [Wolfram Engine](http://www.wolfram.com/raspberry-pi/), which is installed by default, but takes about a whopping 500 MB disk space! Run `sudo apt-get purge wolfram-engine` if you don't need it.
 
 ----
 
@@ -90,69 +88,69 @@ The application stores by default all readings taken from the serial cable. Depe
 ##### (Option A.) MySQL/MariaDB ####
 Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. **libmysqlclient-dev** is required for the virtualenv installation later in this guide..
 
-<code>sudo apt-get install mariadb-server-10.0 libmysqlclient-dev</code> 
+`sudo apt-get install mariadb-server-10.0 libmysqlclient-dev` 
 
 Create database:
 
-<code>sudo mysqladmin create dsmrreader</code>
+`sudo mysqladmin create dsmrreader`
 
 Create user:
 
-<code>echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v</code>
+`echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v`
 
 Set privileges for user:
 
-<code>echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v</code>
+`echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v`
 
 Flush privileges to activate them:
 
-<code>mysqladmin reload</code>
+`mysqladmin reload`
 
 ##### (Option B.) PostgreSQL
 
 Install PostgreSQL. **postgresql-server-dev-all** is required for the virtualenv installation later in this guide.
 
-<code>sudo apt-get install postgresql postgresql-server-dev-all</code>
+`sudo apt-get install postgresql postgresql-server-dev-all`
 
-Postgres does not start due to locales? Try: <code>dpkg-reconfigure locales</code>
+Postgres does not start due to locales? Try: `dpkg-reconfigure locales`
 
-No luck? Try editing <code>/etc/environment</code>, add <code>LC\_ALL="en_US.utf-8"</code> and <code>reboot</code>
+No luck? Try editing `/etc/environment`, add `LC\_ALL="en_US.utf-8"` and `reboot`
 
 Ignore any *'could not change directory to "/root": Permission denied'* errors for the following commands.
 
 Create user:
 
-<code>sudo sudo -u postgres createuser -DSR dsmrreader</code>
+`sudo sudo -u postgres createuser -DSR dsmrreader`
 
 Create database, owned by the user we just created:
 
-<code>sudo sudo -u postgres createdb -O dsmrreader dsmrreader</code>
+`sudo sudo -u postgres createdb -O dsmrreader dsmrreader`
 
 Set password for user:
 
-<code>sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"</code>
+`sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"`
 
 
 #### Dependencies ####
 Misc utils, required for webserver, application server and cloning the application code from the repository.
 
-<code>sudo apt-get install nginx supervisor mercurial python3 python3-pip python3-virtualenv virtualenvwrapper</code>
+`sudo apt-get install nginx supervisor mercurial python3 python3-pip python3-virtualenv virtualenvwrapper`
 
-Install <code>cu</code>. The CU program allows easy testing for your DSMR serial connection. It's very basic but very effective to test whether your serial cable setup works properly.
+Install `cu`. The CU program allows easy testing for your DSMR serial connection. It's very basic but very effective to test whether your serial cable setup works properly.
 
-<code>sudo apt-get install cu</code>
+`sudo apt-get install cu`
 
 
 #### Application user ####
-The application runs as <code>dsmr</code> user by default. This way we do not have to run the application as <code>root</code>, which is a bad practice anyway. Our user also requires dialout permissions.
+The application runs as `dsmr` user by default. This way we do not have to run the application as `root`, which is a bad practice anyway. Our user also requires dialout permissions.
 
 Create user with homedir. The application code and virtualenv resides in this directory as well:
 
-<code>sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash</code>
+`sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash`
 
 Allow the user to perform a dialout.
 
-<code>sudo usermod -a -G dialout dsmr</code>
+`sudo usermod -a -G dialout dsmr`
 
 
 ### Webserver (Nginx) ###
@@ -160,19 +158,19 @@ We will now prepare the webserver, Nginx. It will serve all application's static
 
 Django will copy all static files to a separate directory, used by Nginx to serve statics. 
 
-<code>sudo mkdir -p /var/www/dsmrreader/static</code>
+`sudo mkdir -p /var/www/dsmrreader/static`
 
-<code>sudo chown -R dsmr:dsmr /var/www/dsmrreader/</code>
+`sudo chown -R dsmr:dsmr /var/www/dsmrreader/`
 
 ### This first reading ###
 
 Now login as the user we just created, to perform our very first reading!
 
-<code>sudo su - dsmr</code>
+`sudo su - dsmr`
 
 Test with **cu** (BAUD rate settings for *DSMR v4* is **115200**, for older verions it should be **9600**). 
 
-<code>cu -l /dev/ttyUSB0 -s 115200 --parity=none</code>
+`cu -l /dev/ttyUSB0 -s 115200 --parity=none`
 
 You now should see something like 'Connected.' and a wall of text and numbers within 10 seconds. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, such as [this one (Dutch)](http://gejanssen.com/howto/Slimme-meter-uitlezen/).
 
@@ -180,36 +178,36 @@ You now should see something like 'Connected.' and a wall of text and numbers wi
 ### Application code clone ###
 Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user:
 
-<code>sudo su - dsmr</code>
+`sudo su - dsmr`
 
-<code>hg clone https://bitbucket.org/dennissiemensma/dsmr-reader</code>
+`hg clone https://bitbucket.org/dennissiemensma/dsmr-reader`
 
 
 ### Virtualenv ###
 
 The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. Although it's just a folder inside our user homedir, it's very effective as it allows us to keep dependencies isolated and also run different versions on the same machine. More info can be found [here](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
 
-<code>sudo su - dsmr</code>
+`sudo su - dsmr`
 
 Create folder for the virtualenvs of this user:
 
-<code>mkdir ~/.virtualenvs</code>
+`mkdir ~/.virtualenvs`
 
 Create a new virtualenv, we usually use the same name for it as the application or project. It's important to specify python3 as the default intepreter: 
 
-<code>virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3</code>
+`virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3`
 
-Now 'activate' the environment. It effectively points all aliases for software installed in the virtualenv to the binaries inside the virtualenv. I.e. the Python binary inside <code>/usr/bin/python</code> won't be used when the virtualenv is activated, but <code>/home/dsmr/.virtualenvs/dsmrreader/bin/python</code> instead will.
+Now 'activate' the environment. It effectively points all aliases for software installed in the virtualenv to the binaries inside the virtualenv. I.e. the Python binary inside `/usr/bin/python` won't be used when the virtualenv is activated, but `/home/dsmr/.virtualenvs/dsmrreader/bin/python` instead will.
 
 Activate & cd to project:
 
-<code>
+```
 source ~/.virtualenvs/dsmrreader/bin/activate
 
 cd ~/dsmr-reader
-</code>
+```
 
-You might want to put the 'source' command above in the user's <code>~/.bashrc</code> (logout and login to test). I also advice to put the <code>cd ~/dsmr-reader</code> in there as well, which will cd you directly inside the project folder on login.
+You might want to put the 'source' command above in the user's `~/.bashrc` (logout and login to test). I also advice to put the `cd ~/dsmr-reader` in there as well, which will cd you directly inside the project folder on login.
 
 
 ### Application settings & init ###
@@ -218,75 +216,77 @@ The application will also need the appropiate database client, which is not inst
 
 A. Did you choose MySQL/MariaDB? Execute these two commands:
 
-<code>
+```
 cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
 
 pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
-</code>
+```
 
 B. Or did you choose MySQL/MariaDB? Then execute these two lines:
 
-<code>
+```
 cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
 
 pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/postgresql.txt
-</code>
+```
 
-Did every go as planned? When either of the database clients refures to install due to missing files/configs, make sure you installed <code>libmysqlclient-dev</code> (MySQL) or <code>postgresql-server-dev-all</code> (PostgreSQL) earlier in the process, when you installed the database server itself.
+Did every go as planned? When either of the database clients refures to install due to missing files/configs, make sure you installed `libmysqlclient-dev` (MySQL) or `postgresql-server-dev-all` (PostgreSQL) earlier in the process, when you installed the database server itself.
 
 Now it's time to bootstrap the application and check whether all settings are good and requirements are met. Execute this to init the database:
  
-<code>./manage.py migrate</code>
+`./manage.py migrate`
 
 Prepare static files for webinterface. This will copy all statis to the directory we created for Nginx earlier:
 
-<code>./manage.py collectstatic --noinput</code>
+`./manage.py collectstatic --noinput`
 
 Create an application superuser. Django will prompt you for a password. Alter username and email when you feel you need to, but email is not (yet) used in the application anyway. The credentials generated can be used to access the administration panel inside the application, which requires authentication.
 
-<code>./manage.py createsuperuser --username admin --email root@localhost</code>
+`./manage.py createsuperuser --username admin --email root@localhost`
 
 **OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period). Altering prices later won't affect your data, because prices are calculated retroactive anyway. 
 
-<code>./manage.py loaddata dsmr_stats/fixtures/EnergySupplierPrice.json</code> 
+`./manage.py loaddata dsmr_stats/fixtures/EnergySupplierPrice.json` 
 
 ### Webserver (Nginx) part 2 ### 
 Now to back to root/sudo-user to config webserver. Remove the default vhost (if you didn't use it yourself anyway!).
 
-<code>sudo rm /etc/nginx/sites-enabled/default</code>
+`sudo rm /etc/nginx/sites-enabled/default`
 
 Copy application vhost, it will listen to **any** hostname (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway.
 
-<code>sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/</code>
+`sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/`
 
 Let Nginx verify vhost syntax and reload Nginx when configtest passes.
 
-<code>sudo service nginx configtest
+```
+sudo service nginx configtest
 
-sudo service nginx reload</code>
+sudo service nginx reload
+```
 
 
 ### Supervisor. ###
 Now we configure [Supervisor](http://supervisord.org/), which is used to run our application and also all background jobs. Each job has it's own configuration file, so make sure to copy them all:  
 
-<code>sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/</code>
+`sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/`
 
-**NOTE**: <code>dsmr\_stats\_poller.conf</code> is LEGACY and should be skipped/removed!
+**NOTE**: `dsmr\_stats\_poller.conf` is LEGACY and should be skipped/removed!
 
-<code>rm /etc/supervisor/conf.d/dsmr_stats_poller.conf</code>
+`rm /etc/supervisor/conf.d/dsmr_stats_poller.conf`
 
 Login to supervisor management console:
 
-<code>sudo supervisorctl</code>
+`sudo supervisorctl`
 
 Enter these commands (after the >). It will force Supervisor to check its config directory and use/reload the files.
 
-> supervisor> <code>reread</code>
+> supervisor> `reread`
 
-> supervisor> <code>update</code>
+> supervisor> `update`
 
-Three processed should be started or running. Make sure they don't end up in **ERROR** state, so refresh with 'status' a few times. <code>dsmr\_stats\_compactor</code> and <code>dsmr\_stats\_datalogger</code> will restart every time. This is intended behaviour. <code>dsmr\_webinterface</code> however should keep running.  
-> supervisor> <code>status</code>
+Three processed should be started or running. Make sure they don't end up in **ERROR** state, so refresh with 'status' a few times. `dsmr\_stats\_compactor` and `dsmr\_stats\_datalogger` will restart every time. This is intended behaviour. `dsmr\_webinterface` however should keep running.  
+> supervisor> `status`
 
 Example of everything running well:
 
@@ -296,14 +296,14 @@ Example of everything running well:
  
 Want to check whether data logger works? Just tail log in supervisor with:
 
-> supervisor> <code>tail -f dsmr\_stats\_datalogger</code>
+> supervisor> `tail -f dsmr\_stats\_datalogger`
 
 You should see similar output as the CU-command used earlier on the command line.
-Want to quit supervisor? <code>CTRL + C</code> to stop tail and <code>CTRL + D</code> once to exit supervisor command line.
+Want to quit supervisor? `CTRL + C` to stop tail and `CTRL + D` once to exit supervisor command line.
 
 Everything OK? Congratulations, this was the hardest part and now the fun begins! :]
 
-You might want to <code>reboot</code> and check whether everything comes up automatically again with <code>sudo supervisorctl status</code>. This will make sure your data logger 'survives' any power surges.
+You might want to `reboot` and check whether everything comes up automatically again with `sudo supervisorctl status`. This will make sure your data logger 'survives' any power surges.
 
 ### Public webinterface warning ###
-**NOTE**: Running production and *public*? Please make sure to ALTER the <code>SECRET_KEY</code> setting in your <code>settings.py</code>
+**NOTE**: Running production and *public*? Please make sure to ALTER the `SECRET_KEY` setting in your `settings.py`
