@@ -6,6 +6,11 @@ server {
     listen      80;
     server_name _;  # No hostname available? Just use the underscore for wildcard matching. :]
 
+##	# Uncomment these lines to force additional authentication on application access.
+##  # Do not forget to generate a password first in '/etc/nginx/htpasswd' and then RELOAD nginx!
+##    auth_basic "Restricted application";
+##    auth_basic_user_file /etc/nginx/htpasswd;
+
     location /static {
         alias /var/www/dsmrreader/static;
     }

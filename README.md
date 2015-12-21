@@ -3,24 +3,25 @@
 Installation instructions are based on the Raspbian distro for RaspberryPi, but it should generally work on every Debian based system, as long as the dependencies & requirements are met.
 
 ## Usage ##
-There are plenty of 'scripts' available online for performing DSMR readings. This project however is a full stack solution. This allows a decent implentation of most features, but requires a certain 'skill' as you will need to install several dependencies. 
-I advise you to only use this tool when you have basic Linux knowledge or interest in the components used.
+There are plenty of 'scripts' available online for performing DSMR readings. This project however is a full stack solution. This allows a decent implementation of most features, but requires a certain 'skill' as you will need to install several dependencies. 
+
+I advise to only use this tool when you have basic Linux knowledge or have any interest in the components used. I might create an installer script later, but I'll focus on the build of features first.
 
 ## Dependencies & requirements ##
 * RaspberryPi 2 *(minimal v1 B required but v2 is recommended)*.
 * Raspbian *(or Debian based distro)*.
-* Python 3.4+.
-* Smart Meter with support for at least DSMR 4.0 *(i.e. Landis + Gyr E350 DSMR4)*.
-* Minimal of 100 MB disk space on RaspberryPi *(for application & virtualenv)*. More disk space is required for storing all reader data captured *(optional)*.
-* Smart meter P1 data cable *(can be purchased online and they cost about 20 Euro's each)*.
+* Python 3.4 *(Included in the latest Raspbian named "Jessie")*.
+* Smart Meter with support for at least DSMR 4.0 *(tested with Landis + Gyr E350 DSMR4)*.
+* Minimal 100 MB of disk space on RaspberryPi *(for application installation & virtualenv)*. More disk space is required for storing all reader data captured *(optional)*. I generally advise to use a 8+ GB SD card.
+* Smart meter P1 data cable *(can be purchased online and they cost around 20 Euro's each)*.
 * Basic Linux knowledge for deployment, debugging and troubleshooting. 
 
 ## Installation guide #
-The installation will take about an hour, but it also depends on your Linux skills and whether you need to understand every bit of information described in the guide.
+The installation guide may take about half an hour, but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
-You should already have an OS running on your RaspberryPi. Here is a brief hint for getting things started. Skip the OS chapter below if you already have your RaspberryPi up and running.
+You should already have an OS running on your RaspberryPi. If not, below is a brief hint for getting things started. Skip the OS chapter below if you already have your RaspberryPi up and running. Just continue directly to the "Application Installation" chapter.
 
-### Operating System Installation (optional) ###
+### (Optional) Operating System Installation ###
 #### Raspbian ####
 Either use the headless version of Raspbian, [netinstall](https://github.com/debian-pi/raspbian-ua-netinst), or the [full Raspbian image](https://www.raspbian.org/RaspbianImages), with graphics stack. You don't need the latter when you intend to only use your decive for DSMR readings.
 
@@ -44,10 +45,11 @@ sysctl -p /etc/sysctl.conf
 ```
 
 ##### Sudo #####
-Make sure you are up to date:
-`apt-get install sudo`  *(headless only)*
+This will allow you to use sudo: `apt-get install sudo`  *(headless only)*
 
 ##### Updates #####
+Make sure you are up to date:
+
 ```
 sudo apt-get update
 
@@ -56,20 +58,17 @@ sudo apt-get upgrade
 
 
 ##### raspi-config #####
-Install this RaspberryPi utility.
+Install this RaspberryPi utility: `sudo apt-get install raspi-config`
+Now run it: `raspi-config`. 
 
-`sudo apt-get install raspi-config`
+You should see a menu containing around ten options to choose from. Make sure to enter the menu **5. Internationalisation Options** and set timezone *(I2)* to `UTC`. This is required to prevent any bugs resulting from the DST transition twice every year. It's also best practice for your database backend anyway.
 
-Now run it: `raspi-config`. You should see a menu containing around ten options to choose from.
+You should also install any locales you require. Go to **5. Internationalisation Options** and select *I1*. You probably need at least English and Dutch locales: `en_US.UTF-8 UTF-8` + `nl_NL.UTF-8 UTF-8`. You can select multiple locales by pressing the spacebar for each item and finish with TAB + Enter.
 
-Make sure to enter the menu **5. Internationalisation Options** and set timezone *(I2)* to UTC. This is required to prevent any bugs resulting from the DST transition twice every year. It's also best practice for your database backend anyway.
+* If your sdcard/disk space is not yet fully utilized, select **1. Expand Filesystem**.
+* If you do not have a RaspberryPi 2, you might want to select **8. Overclock** -> `setting MODEST, 0 overvolt`! 
 
-You should also install any locales you require. Go to **5. Internationalisation Options** and select *I1*. You probably need at least English and Dutch locales: **en_US.UTF-8 UTF-8** + **nl_NL.UTF-8 UTF-8**. You can select multiple by pressing the spacebar and finish with TAB + Enter.
-
-* If your sdcard/disk space is not yet fully utilized, select **#1 Expand Filesystem**.
-* If you do not have a RaspberryPi 2, you might want to select **#8 Overclock** *(setting MODEST, 0 overvolt!)* 
-
-If the utility asks you whether to reboot, choose yes to reflect the changes you made.
+If the utility prompts you to reboot, choose yes to reflect the changes you made.
 
 ##### Extra's #####
 Running the headless Raspbian netinstall? You might like Bash completion. Check [this article](https://www.howtoforge.com/how-to-add-bash-completion-in-debian) how to do this.
@@ -78,7 +77,8 @@ Running the full Rasbian install? You should check whether you require the [Wolf
 
 ----
 
-### Application Installation ### 
+
+### Application Installation ###
 Make sure you have your system running in UTC timezone to prevent weird DST bugs.
 
 #### Database backend ####
@@ -116,7 +116,7 @@ Postgres does not start due to locales? Try: `dpkg-reconfigure locales`
 
 No luck? Try editing `/etc/environment`, add `LC\_ALL="en_US.utf-8"` and `reboot`
 
-Ignore any *'could not change directory to "/root": Permission denied'* errors for the following commands.
+Ignore any *'could not change directory to "/root": Permission denied'* errors for the following three commands.
 
 Create user:
 
@@ -172,7 +172,7 @@ Test with **cu** (BAUD rate settings for *DSMR v4* is **115200**, for older veri
 
 `cu -l /dev/ttyUSB0 -s 115200 --parity=none`
 
-You now should see something like 'Connected.' and a wall of text and numbers within 10 seconds. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, such as [this one (Dutch)](http://gejanssen.com/howto/Slimme-meter-uitlezen/).
+You now should see something similar to `Connected.` and a wall of text and numbers within 10 seconds. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, such as [this one (Dutch)](http://gejanssen.com/howto/Slimme-meter-uitlezen/).
 
 
 ### Application code clone ###
@@ -185,7 +185,7 @@ Now is the time to clone the code from the repository and check it out on your d
 
 ### Virtualenv ###
 
-The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. Although it's just a folder inside our user homedir, it's very effective as it allows us to keep dependencies isolated and also run different versions on the same machine. More info can be found [here](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
+The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine. More info can be found [here](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
 
 `sudo su - dsmr`
 
@@ -193,13 +193,13 @@ Create folder for the virtualenvs of this user:
 
 `mkdir ~/.virtualenvs`
 
-Create a new virtualenv, we usually use the same name for it as the application or project. It's important to specify python3 as the default intepreter: 
+Create a new virtualenv, we usually use the same name for it as the application or project. Note that it's important to specify python3 as the default intepreter: 
 
 `virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3`
 
-Now 'activate' the environment. It effectively points all aliases for software installed in the virtualenv to the binaries inside the virtualenv. I.e. the Python binary inside `/usr/bin/python` won't be used when the virtualenv is activated, but `/home/dsmr/.virtualenvs/dsmrreader/bin/python` instead will.
+Now 'activate' the environment. It effectively direct all aliases for software installed in the virtualenv to the binaries inside the virtualenv. I.e. the Python binary inside `/usr/bin/python` won't be used when the virtualenv is activated, but `/home/dsmr/.virtualenvs/dsmrreader/bin/python` will be instead.
 
-Activate & cd to project:
+Activate virtualenv & cd to project:
 
 ```
 source ~/.virtualenvs/dsmrreader/bin/activate
@@ -207,14 +207,16 @@ source ~/.virtualenvs/dsmrreader/bin/activate
 cd ~/dsmr-reader
 ```
 
-You might want to put the 'source' command above in the user's `~/.bashrc` (logout and login to test). I also advice to put the `cd ~/dsmr-reader` in there as well, which will cd you directly inside the project folder on login.
+You might want to put the `source ~/.virtualenvs/dsmrreader/bin/activate` command above in the user's `~/.bashrc` (logout and login to test). I also advice to put the `cd ~/dsmr-reader` in there as well, which will cd you directly inside the project folder on login.
 
 
-### Application settings & init ###
-Earlier in this guide you had to choose for either (A.) MySQL/MariaDB or (B.) PostgreSQL. Our applications needs to know what backend to talk to. Therefor I created two default configuration files you can copy. 
-The application will also need the appropiate database client, which is not installed by default. Again I created two ready-to-use requirements file, which will also install all other dependencies required, such as the Django framework. Installation might take a while, depending on your Internet connection and hardware. Nothing to worry about. :]
+### Application configuration & setup ###
+Earlier in this guide you had to choose for either **(A.) MySQL/MariaDB** or **(B.) PostgreSQL**. Our applications needs to know what backend to talk to. Therefor I created two default configuration files you can copy, one for each backend. 
+The application will also need the appropiate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. The `base.txt` contains requirements which the application needs, no matter the backend you choose. 
 
-A. Did you choose MySQL/MariaDB? Execute these two commands:
+**Note:** Installation might take a while, depending on your Internet connection, RaspberryPi version and resources. Nothing to worry about. :]
+
+**A.** Did you choose MySQL/MariaDB? Execute these two commands:
 
 ```
 cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
@@ -222,7 +224,7 @@ cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
 pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
 ```
 
-B. Or did you choose MySQL/MariaDB? Then execute these two lines:
+**B.** Or did you choose MySQL/MariaDB? Then execute these two lines:
 
 ```
 cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
@@ -230,13 +232,13 @@ cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
 pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/postgresql.txt
 ```
 
-Did every go as planned? When either of the database clients refures to install due to missing files/configs, make sure you installed `libmysqlclient-dev` (MySQL) or `postgresql-server-dev-all` (PostgreSQL) earlier in the process, when you installed the database server itself.
+Did every go as planned? When either of the database clients refuses to install due to missing files/configs, make sure you installed `libmysqlclient-dev` (**MySQL**) or `postgresql-server-dev-all` (**PostgreSQL**) earlier in the process, when you installed the database server itself.
 
 Now it's time to bootstrap the application and check whether all settings are good and requirements are met. Execute this to init the database:
  
 `./manage.py migrate`
 
-Prepare static files for webinterface. This will copy all statis to the directory we created for Nginx earlier:
+Prepare static files for webinterface. This will copy all statis to the directory we created for Nginx earlier. It allows us to have Nginx serve static files outside our project/code root:
 
 `./manage.py collectstatic --noinput`
 
@@ -290,9 +292,9 @@ Three processed should be started or running. Make sure they don't end up in **E
 
 Example of everything running well:
 
-<pre>dsmr_stats_compactor             STARTING</pre>
-<pre>dsmr_stats_datalogger            RUNNING</pre>
-<pre>dsmr_webinterface                RUNNING</pre>
+    dsmr_stats_compactor             STARTING
+    dsmr_stats_datalogger            RUNNING
+    dsmr_webinterface                RUNNING
  
 Want to check whether data logger works? Just tail log in supervisor with:
 
@@ -301,12 +303,36 @@ Want to check whether data logger works? Just tail log in supervisor with:
 You should see similar output as the CU-command used earlier on the command line.
 Want to quit supervisor? `CTRL + C` to stop tail and `CTRL + D` once to exit supervisor command line.
 
-Everything OK? Congratulations, this was the hardest part and now the fun begins! :]
+### Opening the application ###
+Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser, for example . Don't know what address your device has? Just type `ifconfig | grep addr` and it should display an ip address, for example:
+
+    eth0      Link encap:Ethernet  HWaddr b8:27:eb:f4:24:de  
+              inet addr:192.168.178.150  Bcast:192.168.178.255  Mask:255.255.255.0
+              inet addr:127.0.0.1  Mask:255.0.0.0
+
+In this example the ip address is `192.168.178.150`.
+
+Everything OK? Congratulations, this was the hardest part and now the fun begins by monitoring your electricity (and possible gas) consumption! :]
+
+## Reboot test
 
 You might want to `reboot` and check whether everything comes up automatically again with `sudo supervisorctl status`. This will make sure your data logger 'survives' any power surges.
 
 ### Public webinterface warning ###
-**NOTE**: Running production and *public*? Please make sure to ALTER the `SECRET_KEY` setting in your `settings.py`
+**NOTE**: If you expose your application to the outside world or a public network, you might want to take additional steps: 
+
+* Please make sure to ALTER the `SECRET_KEY` setting in your `settings.py`. Don't forget to run `reload.sh` in the project root, which will force the application to gracefully kill itself and take the new settings into account.
+
+* You should **also** have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string using one of the [many generators found online](http://www.htaccesstools.com/htpasswd-generator/). It's safe to use them, just make sure to **NEVER** enter personal credentials there used for other applications or personal accounts.
+paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/etc/nginx/sites-enabled/dsmr-webinterface` and **uncomment** the following lines:
+
+```
+##    auth_basic "Restricted application";
+##    auth_basic_user_file /etc/nginx/htpasswd;
+``` 
+
+Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login on the next application view in your browser.
+
 
 ## Feedback ##
 All feedback and input is, as always, very much appreciated! Please send an e-mail to dsmr (at) dennissiemensma (dot) nl. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
@@ -337,21 +363,35 @@ Also included in the **LICENCE** file:
 > SOFTWARE.
 
 ## Credits ##
-Software used:
+Software listed below. Please note and respect their licences as well, if any.
+
+
 * OS: [Raspbian](https://www.raspbian.org/)
+
 * [Raspbian (minimal) unattended netinstaller](https://github.com/debian-pi/raspbian-ua-netinst)
+
 * [Django Project](https://www.djangoproject.com/)
+
 * [Supervisor](http://supervisord.org/)
+
 * [MySQL](https://www.mysql.com/)
+
 * [MariaDB](https://mariadb.org/)
+
 * [PostgreSQL](http://www.postgresql.org/)
+
 * Template: [Director Responsive Admin](http://web-apps.ninja/director-free-responsive-admin-template/)
+
 * [Favicon](http://www.flaticon.com/free-icon/eco-energy_25013)
 
 Dutch Smart Meter reading specifications, data cables, examples and hints:
+
 * [Gé Janssen](http://gejanssen.com/howto/Slimme-meter-uitlezen/)
+
 * [Joost van der Linde](https://sites.google.com/site/nta8130p1smartmeter/home)
+
 * [SOS Solutions](https://www.sossolutions.nl/)
 
 Pull requests & forking:
+
 * [Jeroen Peters](https://www.linkedin.com/in/jeroenpeters1986)
