@@ -37,14 +37,20 @@ class DashboardMixin(object):
         context_data['gas_y'] = json.dumps(
             [float(x.currently_delivered) for x in gas]
         )
+
+        latest_electricity = electricity[0]
+        context_data['latest_electricity_read'] = latest_electricity.read_at
         context_data['latest_electricity'] = int(
-            electricity[0].currently_delivered * 1000
+            latest_electricity.currently_delivered * 1000
         )
-        context_data['latest_gas'] = gas[0].currently_delivered
+
+        latest_gas = gas[0]
+        context_data['latest_gas_read'] = latest_gas.read_at
+        context_data['latest_gas'] = latest_gas.currently_delivered
 
         try:
             context_data['consumption'] = dsmr_stats.services.day_consumption(
-                day=electricity[0].read_at.astimezone(settings.LOCAL_TIME_ZONE)
+                day=latest_electricity.read_at.astimezone(settings.LOCAL_TIME_ZONE)
             )
         except LookupError:
             pass

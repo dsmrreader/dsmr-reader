@@ -1,5 +1,6 @@
 {% extends "dsmr_stats/base.html" %}
 {% load staticfiles %}
+{% load humanize %} 
 
 {% block title %}Dashboard{% endblock %}
 
@@ -11,7 +12,7 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="sm-st clearfix">
-                	<small>Last reading</small>
+                	<small>{{ latest_electricity_read|naturaltime }}</small>
                     <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
                     <div class="sm-st-info">
                         <span>{{ latest_electricity }}</span>
@@ -21,7 +22,7 @@
             </div>
             <div class="col-md-6">
                 <div class="sm-st clearfix">
-                	<small>Last hour</small>
+                	<small>{{ latest_gas_read|naturaltime }}</small>
                     <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
                     <div class="sm-st-info">
                         <span>{{ latest_gas }}</span>
