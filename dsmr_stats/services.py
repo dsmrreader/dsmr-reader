@@ -191,12 +191,12 @@ def day_consumption(day):
 
     # This WILL fail when we either have no prices at all or conflicting ranges.
     try:
-        daily_energy_price = EnergySupplierPrice.objects.by_date(
+        consumption['daily_energy_price'] = EnergySupplierPrice.objects.by_date(
             target_date=consumption['day']
         )
     except EnergySupplierPrice.DoesNotExist:
         # Default to zero prices.
-        daily_energy_price = EnergySupplierPrice()
+        consumption['daily_energy_price'] = EnergySupplierPrice()
 
     electricity_readings = ElectricityConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
@@ -221,8 +221,8 @@ def day_consumption(day):
     consumption['electricity1_end'] = last_reading.delivered_1
     consumption['electricity2_start'] = first_reading.delivered_2
     consumption['electricity2_end'] = last_reading.delivered_2
-    consumption['electricity1_unit_price'] = daily_energy_price.electricity_1_price
-    consumption['electricity2_unit_price'] = daily_energy_price.electricity_2_price
+    consumption['electricity1_unit_price'] = consumption['daily_energy_price'].electricity_1_price
+    consumption['electricity2_unit_price'] = consumption['daily_energy_price'].electricity_2_price
     consumption['electricity1_cost'] = round_price(
         consumption['electricity1'] * consumption['electricity1_unit_price']
     )
@@ -235,7 +235,7 @@ def day_consumption(day):
     consumption['gas'] = last_reading.delivered - first_reading.delivered
     consumption['gas_start'] = first_reading.delivered
     consumption['gas_end'] = last_reading.delivered
-    consumption['gas_unit_price'] = daily_energy_price.gas_price
+    consumption['gas_unit_price'] = consumption['daily_energy_price'].gas_price
     consumption['gas_cost'] = round_price(
         consumption['gas'] * consumption['gas_unit_price']
     )
