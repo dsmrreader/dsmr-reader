@@ -11,8 +11,9 @@ class TestRegression(TestCase):
         self.client = Client()
 
     def test_energysupplierprice_matching_query_does_not_exist(self):
+        """ Test whether the dashboard no longer raises as DoesNotExist when prices are omitted. """
         call_command('dsmr_stats_compactor')
-        # This used to raise EnergySupplierPrice.DoesNotExist when no price fixtures are loaded.
+
         self.client.get(
             reverse('stats:dashboard')
         )
