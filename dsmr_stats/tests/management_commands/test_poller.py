@@ -9,6 +9,7 @@ class TestDsmrStatsPoller(TestCase):
     """ Deprecated legacy support for data poller compatiblity. """
     @mock.patch('serial.Serial.open')
     def test(self, serial_patch):
+        """ Test dsmr_stats_datalogger deprecation and fallback. """
         # By using this side effect we can verify whether 'dsmr_stats_datalogger' is called.
         serial_patch.side_effect = RuntimeError("Test")
 
