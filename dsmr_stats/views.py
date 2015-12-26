@@ -13,7 +13,3 @@ class History(mixins.HistoryMixin, TemplateView):
 
 class Statistics(mixins.StatisticsMixin, TemplateView):
     template_name = 'dsmr_stats/statistics.html'
-
-
-class EnergySupplierPrices(mixins.EnergySupplierPricesMixin, TemplateView):
-    template_name = 'dsmr_stats/energy_supplier_prices.html'
