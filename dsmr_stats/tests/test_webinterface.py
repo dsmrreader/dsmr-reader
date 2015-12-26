@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
-from dsmr_stats.models import ElectricityConsumption, GasConsumption
+from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 
 
 class TestViews(TestCase):

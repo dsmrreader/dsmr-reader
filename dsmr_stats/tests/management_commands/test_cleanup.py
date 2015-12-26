@@ -3,7 +3,7 @@ from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_stats.models import DsmrReading
+from dsmr_stats.models.dsmrreading import DsmrReading
 
 
 class TestDsmrStatsCleanup(TestCase):
