@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('dsmr_stats', '0001_initial'),
+        ('dsmr_stats', '0001_renamed_migrations'),
     ]
 
     operations = [
