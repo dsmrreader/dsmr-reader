@@ -11,7 +11,10 @@ class DsmrReadingManager(models.Manager):
 
 
 class DsmrReading(models.Model):
-    """ DSMR P1 telegram reading. Contains most of the raw data read from serial port. """
+    """
+    DSMR P1 telegram reading. Contains most of the raw data read from serial port. Readings are
+    stored first before processing or taking them into account for statistics.
+    """
     DSMR_MAPPING = {
         "0-0:1.0.0": "timestamp",
         "1-0:1.8.1": "electricity_delivered_1",
@@ -29,11 +32,9 @@ class DsmrReading(models.Model):
         "1-0:32.36.0": "voltage_swell_count_l1",
         "1-0:52.36.0": "voltage_swell_count_l2",
         "1-0:72.36.0": "voltage_swell_count_l3",
+        # For some reason this identifier contains two fields, therefor we split them.
         "0-1:24.2.1": ("extra_device_timestamp", "extra_device_delivered"),
     }
-
-    class Meta:
-        ordering = ['timestamp']
 
     objects = DsmrReadingManager()
 
@@ -110,10 +111,13 @@ class DsmrReading(models.Model):
     processed = models.BooleanField(
         default=False,
         db_index=True,
-        help_text=_("Whether this reading has been processed for individual splitting")
+        help_text=_("Whether this reading has been processed for merging into statistics")
     )
 
+    class Meta:
+        ordering = ['timestamp']
+
     def __str__(self):
-        return '#{} | {}: {} kWh'.format(
+        return '{}: {} kWh'.format(
             self.id, self.timestamp, self.electricity_currently_delivered
         )

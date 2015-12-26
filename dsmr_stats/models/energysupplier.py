@@ -18,16 +18,13 @@ class EnergySupplierPrice(models.Model):
     Represents the price you are/were charged by your energy supplier.
     Prices are per unit, which is either one kWh power or m3 gas.
     """
-    class Meta:
-        unique_together = ('start', 'end')
-
     objects = EnergySupplierPriceManager()
 
-    start = models.DateField()
-    end = models.DateField(null=True, blank=True)
+    start = models.DateField(help_text=_('Contract start'))
+    end = models.DateField(null=True, blank=True, help_text=_('Contract end'))
     description = models.CharField(
         max_length=255, null=True, blank=True,
-        help_text=_('For your own reference, i.e. your supplier name')
+        help_text=_('For your own reference, i.e. the name of your supplier')
     )
     electricity_1_price = models.DecimalField(
         max_digits=11, decimal_places=5, default=0
@@ -41,3 +38,8 @@ class EnergySupplierPrice(models.Model):
 
     def __str__(self):
         return self.description or 'Energy Supplier'
+
+    class Meta:
+        verbose_name = _('Energy supplier price')
+        verbose_name_plural = _('Energy supplier prices')
+        unique_together = ('start', 'end')

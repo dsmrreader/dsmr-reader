@@ -2,8 +2,9 @@ from django.core.management import call_command, CommandError
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption,\
-    ElectricityStatistics
+from dsmr_stats.models.dsmrreading import DsmrReading
+from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_stats.models.statistics import ElectricityStatistics
 
 
 class TestDsmrStatsCompactor(TestCase):

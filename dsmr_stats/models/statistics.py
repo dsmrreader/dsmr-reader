@@ -31,6 +31,12 @@ class ElectricityStatistics(models.Model):
     )
 
     def is_equal(self, other):
+        """
+        Checks whether another statistics object equals this one. It actually is just a lousy way of
+        preventing unneeded database writes.
+
+        We could also override the eq() operator, but we rather use any builtins provided by Django.
+        """
         for field in self._meta.fields:
             if field.name != 'id' and getattr(self, field.name) != getattr(other, field.name):
                 return False

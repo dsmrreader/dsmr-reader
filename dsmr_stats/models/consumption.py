@@ -3,7 +3,7 @@ from django.utils.translation import ugettext as _
 
 
 class ElectricityConsumption(models.Model):
-    """ Point in time of electricity consumption, extracted from reading. """
+    """ Point in time of electricity consumption, extracted from reading(s). """
     read_at = models.DateTimeField(unique=True)
     delivered_1 = models.DecimalField(
         max_digits=9,
@@ -50,13 +50,14 @@ class ElectricityConsumption(models.Model):
 
 
 class GasConsumption(models.Model):
-    """ Hourly consumption, based on the previous value one hour ago. """
+    """ Hourly consumption, interpolated on the previous value read the hour before. """
     read_at = models.DateTimeField(unique=True)
     delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,
         help_text=_("Last hourly value delivered to client")
     )
+    # This value is not provided by DSMR so we calculate the difference from the previous reading.
     currently_delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,

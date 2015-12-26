@@ -6,8 +6,12 @@ from django.utils import timezone
 from django.db import transaction
 from django.db.models import Avg, Max
 
-from dsmr_stats.models import DsmrReading, ElectricityConsumption, GasConsumption, \
-    ElectricityStatistics, EnergySupplierPrice
+
+from dsmr_stats.models.dsmrreading import DsmrReading
+from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_stats.models.statistics import ElectricityStatistics
+from dsmr_stats.models.energysupplier import EnergySupplierPrice
+
 from decimal import Decimal, ROUND_UP
 import pytz
 
