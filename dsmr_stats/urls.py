@@ -19,11 +19,4 @@ urlpatterns = [
         views.Statistics.as_view(),
         name='statistics'
     ),
-    url(
-        r'^energy-supplier-prices$',
-        cache_page(settings.CACHES['default']['TIMEOUT'])(
-            views.EnergySupplierPrices.as_view()
-        ),
-        name='energy-supplier-prices'
-    ),
 ]

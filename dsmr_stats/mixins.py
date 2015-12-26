@@ -137,10 +137,3 @@ class StatisticsMixin(object):
             pass
 
         return context_data
-
-
-class EnergySupplierPricesMixin(object):
-    def get_context_data(self, **kwargs):
-        context_data = super(EnergySupplierPricesMixin, self).get_context_data(**kwargs)
-        context_data['prices'] = models.EnergySupplierPrice.objects.all()
-        return context_data

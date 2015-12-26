@@ -111,5 +111,38 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    
+    {% if consumption.daily_energy_price %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                	Current energy supplier: {{ consumption.daily_energy_price.description }}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-7">{{ consumption.daily_energy_price.start }} &larr;&rarr; {{ consumption.daily_energy_price.end|default:'-' }}</th>
+                            <th class="col-md-5">Unit price</th>
+                        </tr>
+                        <tr>
+                            <td class="col-md-7">Electricity 1</td>
+                            <td class="col-md-5"><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_1_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Electricity 2</td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_2_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Gas</td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.gas_price }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    {% endif %}
+
 </section><!-- /.content -->
 {% endblock %}
