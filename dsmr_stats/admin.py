@@ -11,4 +11,4 @@ class EnergySupplierPriceAdmin(admin.ModelAdmin):
 
 @admin.register(Note)
 class NoteAdmin(admin.ModelAdmin):
-    list_display = ('description', 'day')
+    list_display = ('day', 'description')
