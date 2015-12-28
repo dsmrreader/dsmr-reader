@@ -153,7 +153,7 @@ Allow the user to perform a dialout.
 `sudo usermod -a -G dialout dsmr`
 
 
-### Webserver (Nginx) ###
+### Webserver (Nginx), part 1 ###
 We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy application requests to the backend, Supervisor, which we will configure later on.
 
 Django will copy all static files to a separate directory, used by Nginx to serve statics. 
@@ -176,9 +176,7 @@ You now should see something similar to `Connected.` and a wall of text and numb
 
 
 ### Application code clone ###
-Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user:
-
-`sudo su - dsmr`
+Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user (if not then enter `sudo su - dsmr` again):
 
 `hg clone https://bitbucket.org/dennissiemensma/dsmr-reader`
 
@@ -193,7 +191,7 @@ Create folder for the virtualenvs of this user:
 
 `mkdir ~/.virtualenvs`
 
-Create a new virtualenv, we usually use the same name for it as the application or project. Note that it's important to specify python3 as the default intepreter: 
+Create a new virtualenv, we usually use the same name for it as the application or project. Note that it's important to specify python3 as the default interpreter: 
 
 `virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3`
 
@@ -242,18 +240,18 @@ Prepare static files for webinterface. This will copy all statis to the director
 
 `./manage.py collectstatic --noinput`
 
-Create an application superuser. Django will prompt you for a password. Alter username and email when you feel you need to, but email is not (yet) used in the application anyway. The credentials generated can be used to access the administration panel inside the application, which requires authentication.
+Create an application superuser. Django will prompt you for a password. Alter username and email when you prefer other credentials, but email is not (yet) used in the application anyway. The credentials generated can be used to access the administration panel inside the application, which requires authentication.
 
 `./manage.py createsuperuser --username admin --email root@localhost`
 
-**OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period). Altering prices later won't affect your data, because prices are calculated retroactive anyway. 
+**OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period), you may run the command below to import them (fixtures). Note that altering prices later won't affect your reading data, because prices are calculated retroactive anyway. 
 
 `./manage.py loaddata dsmr_stats/fixtures/EnergySupplierPrice.json` 
 
-### Webserver (Nginx) part 2 ### 
+### Webserver (Nginx), part 2 ### 
 Now to back to root/sudo-user to config webserver. Remove the default vhost (if you didn't use it yourself anyway!).
 
-`sudo rm /etc/nginx/sites-enabled/default`
+`sudo rm /etc/nginx/sites-enabled/default` (optional)
 
 Copy application vhost, it will listen to **any** hostname (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway.
 
@@ -269,11 +267,11 @@ sudo service nginx reload
 
 
 ### Supervisor. ###
-Now we configure [Supervisor](http://supervisord.org/), which is used to run our application and also all background jobs. Each job has it's own configuration file, so make sure to copy them all:  
+Now we configure [Supervisor](http://supervisord.org/), which is used to run our application and also all background jobs used. It's also configured to bring the entire applciation up again after a shutdown or reboot. Each job has it's own configuration file, so make sure to copy them all:  
 
 `sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/`
 
-**NOTE**: `dsmr\_stats\_poller.conf` is LEGACY and should be skipped/removed!
+**NOTE**: `dsmr_stats_poller.conf` is LEGACY and should be skipped/removed!
 
 `rm /etc/supervisor/conf.d/dsmr_stats_poller.conf`
 
@@ -281,13 +279,13 @@ Login to supervisor management console:
 
 `sudo supervisorctl`
 
-Enter these commands (after the >). It will force Supervisor to check its config directory and use/reload the files.
+Enter these commands (after the >). It will ask Supervisor to recheck its config directory and use/reload the files.
 
 > supervisor> `reread`
 
 > supervisor> `update`
 
-Three processed should be started or running. Make sure they don't end up in **ERROR** state, so refresh with 'status' a few times. `dsmr\_stats\_compactor` and `dsmr\_stats\_datalogger` will restart every time. This is intended behaviour. `dsmr\_webinterface` however should keep running.  
+Three processed should be started or running. Make sure they don't end up in **ERROR** state, so refresh with 'status' a few times. `dsmr_stats_compactor` and `dsmr_stats_datalogger` will restart every time. This is intended behaviour. `dsmr_webinterface` however should keep running.  
 > supervisor> `status`
 
 Example of everything running well:
@@ -298,7 +296,7 @@ Example of everything running well:
  
 Want to check whether data logger works? Just tail log in supervisor with:
 
-> supervisor> `tail -f dsmr\_stats\_datalogger`
+> supervisor> `tail -f dsmr_stats_datalogger`
 
 You should see similar output as the CU-command used earlier on the command line.
 Want to quit supervisor? `CTRL + C` to stop tail and `CTRL + D` once to exit supervisor command line.
@@ -334,8 +332,15 @@ paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/e
 Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login on the next application view in your browser.
 
 
+## Data preservation & backups
+You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip of ignore this. Actually, it happened to myself quite recently as I somehow managed to get my storage SD card corrupt, losing all my data on it. It luckily happened only a month after running my own readings, but imagine all the data you lose when it contained readings for several years. I plan to implement external data exports (#9, #10) in the future, but those will not be compatible for data recovery after a crash. The best advice I can give you is to make sure your database gets dumped daily on a 'safe' location (NOT the SD card self!). You can find an example in `dsmrreader/provisioning/postgresql/backup.sh` for PostgreSQL, which I dump to a separately mounted USB stick on my RaspberryPi.
+
+Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) allowing you to choose your own retention (for all the source readings).
+
+
 ## Feedback ##
 All feedback and input is, as always, very much appreciated! Please send an e-mail to dsmr (at) dennissiemensma (dot) nl. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
+
 
 ##  Licence ##
 Also included in the **LICENCE** file:
