@@ -15,10 +15,8 @@ def check_renamed_migrations(*args, **kwargs):
     migrations_to_rename = migrations.recorder.MigrationRecorder.Migration.objects.filter(
         app='dsmr_stats', name__in=RENAMED_MIGRATIONS.keys()
     )
-    print (migrations_to_rename, bool(migrations_to_rename))
 
     for current_migration in migrations_to_rename:
-        print(current_migration.pk)
         current_migration.name = RENAMED_MIGRATIONS[current_migration.name]
         current_migration.save(update_fields=['name'])
 
