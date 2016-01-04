@@ -53,6 +53,10 @@
                     {{ consumption.day }}
                 </header>
                 <div class="panel-body">
+                    {% if consumption.notes %}
+                    <div class="alert alert-info" role="alert">{{ consumption.notes|join:" | " }}</div>
+                    {% endif %}
+                
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-6">Type</th>

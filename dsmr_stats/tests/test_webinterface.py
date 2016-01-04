@@ -6,22 +6,31 @@ from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_stats.models.note import Note
 
 
 class TestViews(TestCase):
     """ Test whether views render at all. """
-    fixtures = ['test_dsmrreading.json', 'EnergySupplierPrice.json']
+    fixtures = ['test_dsmrreading.json', 'test_note.json', 'EnergySupplierPrice.json']
     namespace = 'stats'
 
-    def _synchronize_date(self):
-        # Little hack to fake any output for today (moment of test).
+    def _synchronize_date(self, interval=None):
+        """ Little hack to fake any output for today (moment of test). """
         call_command('dsmr_stats_compactor')
         ec = ElectricityConsumption.objects.get(pk=1)
         gc = GasConsumption.objects.get(pk=1)
-        ec.read_at = timezone.now()
-        gc.read_at = timezone.now()
+
+        timestamp = timezone.now()
+
+        if interval:
+            timestamp += interval
+
+        ec.read_at = timestamp
+        gc.read_at = timestamp
         ec.save()
         gc.save()
+
+        Note.objects.all().update(day=timestamp.date())
 
     def setUp(self):
         self.client = Client()
@@ -55,20 +64,20 @@ class TestViews(TestCase):
         self.assertIn('consumption', response.context)
 
     def test_history(self):
+        # History fetches all data BEFORE today, so add a little interval to make that happen.
+        self._synchronize_date(interval=timezone.timedelta(hours=-24))
         response = self.client.get(
             reverse('{}:history'.format(self.namespace))
         )
+        self.assertIn('usage', response.context)
+        self.assertIn('notes', response.context['usage'][0])
+        self.assertEqual(response.context['usage'][0]['notes'][0], 'Gourmetten')
+
         self.assertEqual(response.status_code, 200)
 
     def test_statistics(self):
         self._synchronize_date()
         response = self.client.get(
             reverse('{}:statistics'.format(self.namespace))
-        )
-        self.assertEqual(response.status_code, 200)
-
-    def test_energy_supplier_prices(self):
-        response = self.client.get(
-            reverse('{}:energy-supplier-prices'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
