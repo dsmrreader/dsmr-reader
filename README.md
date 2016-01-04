@@ -323,7 +323,7 @@ You might want to `reboot` and check whether everything comes up automatically a
 ### Public webinterface warning ###
 **NOTE**: If you expose your application to the outside world or a public network, you might want to take additional steps: 
 
-* Please make sure to ALTER the `SECRET_KEY` setting in your `settings.py`. Don't forget to run `reload.sh` in the project root, which will force the application to gracefully kill itself and take the new settings into account.
+* Please make sure to ALTER the `SECRET_KEY` setting in your `settings.py`. Don't forget to run `reload.sh` in the project root, which will force the application to gracefully reload itself and apply the new settings instantly.
 
 * Install a firewall, such as `ufw` [UncomplicatedFirewall](https://wiki.ubuntu.com/UncomplicatedFirewall) and restrict traffic to port 22 (only for yourself) and port 80.
 
@@ -335,7 +335,7 @@ Paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/e
 ##    auth_basic_user_file /etc/nginx/htpasswd;
 ``` 
 
-Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login on the next application view in your browser.
+Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login credentials the next time your browser accesses the applciation.
 
 
 ## Data preservation & backups
