@@ -1,4 +1,6 @@
 from datetime import time
+from decimal import Decimal, ROUND_UP
+import pytz
 import re
 
 from django.conf import settings
@@ -6,14 +8,11 @@ from django.utils import timezone
 from django.db import transaction
 from django.db.models import Avg, Max
 
-
 from dsmr_stats.models.dsmrreading import DsmrReading
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_stats.models.energysupplier import EnergySupplierPrice
-
-from decimal import Decimal, ROUND_UP
-import pytz
+from dsmr_stats.models.note import Note
 
 
 def telegram_to_reading(data):
@@ -243,6 +242,9 @@ def day_consumption(day):
     consumption['total_cost'] = round_price(
         consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']
     )
+    consumption['notes'] = Note.objects.filter(
+        day=consumption['day']
+    ).values_list('description', flat=True)
 
     return consumption
 
