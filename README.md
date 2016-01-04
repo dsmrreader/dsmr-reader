@@ -47,6 +47,9 @@ sysctl -p /etc/sysctl.conf
 ##### Sudo #####
 This will allow you to use sudo: `apt-get install sudo`  *(headless only)*
 
+##### Text editor #####
+My favorite is VIM, but just choose your own: `sudo apt-get install vim`
+
 ##### Updates #####
 Make sure you are up to date:
 
@@ -59,9 +62,10 @@ sudo apt-get upgrade
 
 ##### raspi-config #####
 Install this RaspberryPi utility: `sudo apt-get install raspi-config`
-Now run it: `raspi-config`. 
 
-You should see a menu containing around ten options to choose from. Make sure to enter the menu **5. Internationalisation Options** and set timezone *(I2)* to `UTC`. This is required to prevent any bugs resulting from the DST transition twice every year. It's also best practice for your database backend anyway.
+Now run it: `raspi-config`
+
+You should see a menu containing around ten options to choose from. Make sure to enter the menu **5. Internationalisation Options** and set timezone *(I2)* to `UTC`. The option can be found in the sub menu of "None of the above". This is required to prevent any bugs resulting from the DST transition twice every year. It's also best practice for your database backend anyway.
 
 You should also install any locales you require. Go to **5. Internationalisation Options** and select *I1*. You probably need at least English and Dutch locales: `en_US.UTF-8 UTF-8` + `nl_NL.UTF-8 UTF-8`. You can select multiple locales by pressing the spacebar for each item and finish with TAB + Enter.
 
@@ -82,7 +86,7 @@ Running the full Rasbian install? You should check whether you require the [Wolf
 Make sure you have your system running in UTC timezone to prevent weird DST bugs.
 
 #### Database backend ####
-The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (option A.) **MySQL/MariaDB** or (option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex as PostgreSQL and is easier to learn. For a project of this size and complexity it doesn't matter anyway. :]
+The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **MySQL/MariaDB** or (Option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex as PostgreSQL and is easier to learn. For a project of this size and complexity it doesn't matter anyway. :]
 
 
 ##### (Option A.) MySQL/MariaDB ####
@@ -142,13 +146,13 @@ Install `cu`. The CU program allows easy testing for your DSMR serial connection
 
 
 #### Application user ####
-The application runs as `dsmr` user by default. This way we do not have to run the application as `root`, which is a bad practice anyway. Our user also requires dialout permissions.
+The application runs as `dsmr` user by default. This way we do not have to run the application as `root`, which is a bad practice anyway. 
 
 Create user with homedir. The application code and virtualenv resides in this directory as well:
 
 `sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash`
 
-Allow the user to perform a dialout.
+Our user also requires dialout permissions. So allow the user to perform a dialout by adding it to the group.
 
 `sudo usermod -a -G dialout dsmr`
 
@@ -222,7 +226,7 @@ cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
 pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
 ```
 
-**B.** Or did you choose MySQL/MariaDB? Then execute these two lines:
+**B.** Or did you choose PostgreSQL? Then execute these two lines:
 
 ```
 cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
@@ -236,11 +240,11 @@ Now it's time to bootstrap the application and check whether all settings are go
  
 `./manage.py migrate`
 
-Prepare static files for webinterface. This will copy all statis to the directory we created for Nginx earlier. It allows us to have Nginx serve static files outside our project/code root:
+Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process. It allows us to have Nginx serve static files outside our project/code root:
 
 `./manage.py collectstatic --noinput`
 
-Create an application superuser. Django will prompt you for a password. Alter username and email when you prefer other credentials, but email is not (yet) used in the application anyway. The credentials generated can be used to access the administration panel inside the application, which requires authentication.
+Create an application superuser. Django will prompt you for a password. Alter username and email when you prefer other credentials, but email is not (yet) used in the application anyway. Besides, you have shell access so you may generate another user at any time (in case you get yourself locked out of the application). The credentials generated can be used to access the administration panel inside the application, which requires authentication.
 
 `./manage.py createsuperuser --username admin --email root@localhost`
 
@@ -321,8 +325,10 @@ You might want to `reboot` and check whether everything comes up automatically a
 
 * Please make sure to ALTER the `SECRET_KEY` setting in your `settings.py`. Don't forget to run `reload.sh` in the project root, which will force the application to gracefully kill itself and take the new settings into account.
 
+* Install a firewall, such as `ufw` [UncomplicatedFirewall](https://wiki.ubuntu.com/UncomplicatedFirewall) and restrict traffic to port 22 (only for yourself) and port 80.
+
 * You should **also** have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string using one of the [many generators found online](http://www.htaccesstools.com/htpasswd-generator/). It's safe to use them, just make sure to **NEVER** enter personal credentials there used for other applications or personal accounts.
-paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/etc/nginx/sites-enabled/dsmr-webinterface` and **uncomment** the following lines:
+Paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/etc/nginx/sites-enabled/dsmr-webinterface` and **uncomment** the following lines:
 
 ```
 ##    auth_basic "Restricted application";
@@ -333,16 +339,16 @@ Now make sure you didn't insert any typo's by running `sudo service nginx config
 
 
 ## Data preservation & backups
-You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip of ignore this. Actually, it happened to myself quite recently as I somehow managed to get my storage SD card corrupt, losing all my data on it. It luckily happened only a month after running my own readings, but imagine all the data you lose when it contained readings for several years. I plan to implement external data exports (#9, #10) in the future, but those will not be compatible for data recovery after a crash. The best advice I can give you is to make sure your database gets dumped daily on a 'safe' location (NOT the SD card self!). You can find an example in `dsmrreader/provisioning/postgresql/backup.sh` for PostgreSQL, which I dump to a separately mounted USB stick on my RaspberryPi.
+You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip or ignore this. Actually, it happened to myself quite recently as I somehow managed to corrupt my SD storage card, losing all my data on it. It luckily happened only a month after running my own readings, but imagine all the data you lose when it contained readings for several years. I plan to implement external data exports (#9, #10) in the future, but those will not be compatible for data recovery after a crash. The best advice I can give you is to make sure your database gets dumped daily on a 'safe' location (NOT the SD card self!). You can find an example in `dsmrreader/provisioning/postgresql/backup.sh` for PostgreSQL, which I dump to a separately mounted USB stick on my RaspberryPi.
 
-Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) allowing you to choose your own retention (for all the source readings).
+Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) later, allowing you to choose your own retention (for all the source readings).
 
 
 ## Feedback ##
 All feedback and input is, as always, very much appreciated! Please send an e-mail to dsmr (at) dennissiemensma (dot) nl. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
 
 
-##  Licence ##
+## Licence ##
 Also included in the **LICENCE** file:
 
 > The MIT License (MIT)
