@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-05 20:28+0000\n"
-"PO-Revision-Date: 2016-01-05 22:01+0100\n"
+"POT-Creation-Date: 2016-01-05 21:24+0000\n"
+"PO-Revision-Date: 2016-01-05 22:24+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
-"Language: nl\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: dsmr_stats/apps.py:7
@@ -364,24 +364,30 @@ msgid "Recent gas delivered (m<sup>3</sup>)"
 msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:15
-msgid "Daily cost in the past {{ days_ago }} days"
-msgstr "Dagelijkse kosten in de afgelopen {{ days_ago }} dagen"
+#, python-format
+#| msgid "Daily cost in the past {{ days_ago }} days"
+msgid "Daily cost in the past %(days_ago)s days"
+msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:15
 msgid "(in &euro;)"
 msgstr "(in &euro;)"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:28
-msgid "Daily electricity usage in the past {{ days_ago }} days"
-msgstr "Dagelijks elektriciteitsverbruik in de afgelopen {{ days_ago }} dagen"
+#, python-format
+#| msgid "Daily electricity usage in the past {{ days_ago }} days"
+msgid "Daily electricity usage in the past %(days_ago)s days"
+msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:28
 msgid "(in kWh)"
 msgstr "(in kWh)"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:41
-msgid "Daily gas usage in the past {{ days_ago }} days"
-msgstr "Dagelijks gasverbruik in de afgelopen {{ days_ago }} dagen"
+#, python-format
+#| msgid "Daily gas usage in the past {{ days_ago }} days"
+msgid "Daily gas usage in the past %(days_ago)s days"
+msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:41
 msgid "(in m<sup>3</sup>)"
