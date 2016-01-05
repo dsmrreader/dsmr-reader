@@ -20,12 +20,12 @@ class TestDsmrStatsDatalogger(TestCase):
             "0-0:1.0.0(151110192959W)\n",
             "0-0:96.1.1(xxxxxxxxxxxxx)\n",
             "1-0:1.8.1(000510.747*kWh)\n",
-            "1-0:2.8.1(000000.000*kWh)\n",
+            "1-0:2.8.1(000000.123*kWh)\n",
             "1-0:1.8.2(000500.013*kWh)\n",
-            "1-0:2.8.2(000000.000*kWh)\n",
+            "1-0:2.8.2(000123.456*kWh)\n",
             "0-0:96.14.0(0001)\n",
             "1-0:1.7.0(00.192*kW)\n",
-            "1-0:2.7.0(00.000*kW)\n",
+            "1-0:2.7.0(00.123*kW)\n",
             "0-0:17.0.0(999.9*kW)\n",
             "0-0:96.3.10(1)\n",
             "0-0:96.7.21(00003)\n",
@@ -75,12 +75,12 @@ class TestDsmrStatsDatalogger(TestCase):
             datetime(2015, 11, 10, 18, 29, 59, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.electricity_delivered_1, Decimal('510.747'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('0'))
+        self.assertEqual(reading.electricity_returned_1, Decimal('0.123'))
         self.assertEqual(reading.electricity_delivered_2, Decimal('500.013'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('0'))
+        self.assertEqual(reading.electricity_returned_2, Decimal('123.456'))
         self.assertEqual(reading.electricity_tariff, Decimal('1'))
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.192'))
-        self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
+        self.assertEqual(reading.electricity_currently_returned, Decimal('0.123'))
         self.assertEqual(reading.power_failure_count, 3)
         self.assertEqual(reading.long_power_failure_count, 0)
         self.assertEqual(reading.voltage_sag_count_l1, 2)

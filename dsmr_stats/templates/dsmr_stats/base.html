@@ -28,7 +28,7 @@
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="index.html" class="logo">
+            <a href="{% url 'stats:dashboard' %}" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 DSMR Reader
             </a>
@@ -41,6 +41,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
+				<div class="navbar-left">
+                    <ul class="nav navbar-nav">
+                    	<li class="dropdown user user-menu">
+                        	<a href="" onclick="return false;">
+                        		<span>{% block header %}{% endblock %}</span>
+                         	</a>
+                         </li>
+                    </ul>
+                </div>
             </nav>
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left">

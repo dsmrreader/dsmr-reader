@@ -3,34 +3,43 @@
 {% load humanize %} 
 
 {% block title %}Dashboard{% endblock %}
+{% block header %}Dashboard{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="sm-st clearfix">
-                	<small>{{ latest_electricity_read|naturaltime }}</small>
-                    <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
-                    <div class="sm-st-info">
-                        <span>{{ latest_electricity }}</span>
-                        Watt
-                    </div>
+        <div class="col-md-3">
+            <div class="sm-st clearfix">
+            	<small>{{ latest_electricity_read|naturaltime }}</small>
+                <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
+                <div class="sm-st-info">
+                    <span>{{ latest_electricity }}</span>
+                    Watt consumed
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="sm-st clearfix">
-                	<small>{{ latest_gas_read|naturaltime }}</small>
-                    <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
-                    <div class="sm-st-info">
-                        <span>{{ latest_gas }}</span>
-                        m<sup>3</sup> gas
-                    </div>
+        </div>
+        <div class="col-md-3">
+            <div class="sm-st clearfix">
+            	<small>{{ latest_electricity_read|naturaltime }}</small>
+                <span class="sm-st-icon bg-maroon"><i class="fa fa-bolt"></i></span>
+                <div class="sm-st-info">
+                    <span>{{ latest_electricity_returned|default:'-' }}</span>
+                    Watt returned
                 </div>
             </div>
-        </div><!-- /.col -->
+        </div>
+        <div class="col-md-6">
+            <div class="sm-st clearfix">
+            	<small>{{ latest_gas_read|naturaltime }}</small>
+                <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
+                <div class="sm-st-info">
+                    <span>{{ latest_gas }}</span>
+                    m<sup>3</sup> gas consumed
+                </div>
+            </div>
+        </div>
     </div><!-- /.row -->
 
 	{% if consumption %}
@@ -38,7 +47,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body">
-                    <table class="table table-striped">
+                    <table class="table table-condensed">
                         <tr>
                             <th class="col-md-6">{{ consumption.day }}</th>
                             <th class="col-md-2">Delivered</th>
@@ -48,13 +57,13 @@
                         <tr>
                             <td>Electricity 1 (off-peak)</td>
                             <td><span class="badge bg-red">{{ consumption.electricity1 }} kWh</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned }} kWh</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned|default:'-' }} kWh</span></td>
                             <td><span class="badge bg-black">&euro; {{ consumption.electricity1_cost }}</span></td>
                         </tr>
                         <tr>
                             <td>Electricity 2 (peak)</td>
                             <td><span class="badge bg-red">{{ consumption.electricity2 }} kWh</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned }} kWh</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned|default:'-' }} kWh</span></td>
                             <td><span class="badge bg-black">&euro; {{ consumption.electricity2_cost }}</span></td>
                         </tr>
                         <tr>
