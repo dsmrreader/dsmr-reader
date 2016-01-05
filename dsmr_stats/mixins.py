@@ -43,6 +43,9 @@ class DashboardMixin(object):
         context_data['latest_electricity'] = int(
             latest_electricity.currently_delivered * 1000
         )
+        context_data['latest_electricity_returned'] = int(
+            latest_electricity.currently_returned * 1000
+        )
 
         latest_gas = gas[0]
         context_data['latest_gas_read'] = latest_gas.read_at
