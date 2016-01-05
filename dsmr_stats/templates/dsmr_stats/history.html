@@ -12,7 +12,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Daily cost in the past {{ days_ago }} days" %} {% trans "(in &euro;)" %}
+                    {% blocktrans %}Daily cost in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in &euro;)" %}
                 </header>
                 <div class="panel-body">
                 	<canvas id="cost-chart" width="1000" height="150"></canvas>
@@ -25,7 +25,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Daily electricity usage in the past {{ days_ago }} days" %} {% trans "(in kWh)" %}
+                    {% blocktrans %}Daily electricity usage in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
                 <div class="panel-body">
                 	<canvas id="electricity-chart" width="1000" height="150"></canvas>
@@ -38,7 +38,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Daily gas usage in the past {{ days_ago }} days" %} {% trans "(in m<sup>3</sup>)" %}
+                    {% blocktrans %}Daily gas usage in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in m<sup>3</sup>)" %}
                 </header>
                 <div class="panel-body">
                 	<canvas id="gas-chart" width="1000" height="150"></canvas>
