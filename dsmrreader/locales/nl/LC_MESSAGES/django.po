@@ -1,0 +1,436 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-05 20:28+0000\n"
+"PO-Revision-Date: 2016-01-05 21:56+0100\n"
+"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: nl\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: dsmr_stats/apps.py:7
+msgid "DSMR Statistics"
+msgstr "DSMR Statistieken"
+
+#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:10
+msgid "Cleans up any source data from the poller. PERMANENTLY DELETES DATA!"
+msgstr "Ruimt alle brongegevens van de lezer op. VERWIJDERT DATA PERMANENT"
+
+#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:20
+#, python-format
+msgid ""
+"Any polled source data older than DAYS will be purged (default %(default)s "
+"days)."
+msgstr ""
+"Alle uitgelezen gegevens ouder dan DAGEN wordt verwijderd (standaard "
+"%(default)s dagen)."
+
+#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:28
+msgid "Tells Django to NOT prompt the user for input of any kind."
+msgstr ""
+"Instrueert Django om de gebruiker NIET om welke input dan ook te vragen."
+
+#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:43
+msgid ""
+"WARNING: This will PERMANENTLY DELETE SOURCE DATA before \"{}\", still "
+"continue? yes/no: "
+msgstr ""
+"WAARSCHUWING: Dit VERWIJDERT PERMANENT ALLE BRONDATA van voor \"{}\", alsnog "
+"doorgaan? yes/no: "
+
+#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:54
+msgid "Found {} records to delete"
+msgstr "{} records gevonden om te verwijderen"
+
+#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:57
+msgid "Deleted {} records"
+msgstr "{} records verwijderd"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:15
+msgid "Compacts existing DSMR readings into consumption points."
+msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:26
+#, python-format
+msgid "The max number of readings to compact this run (default: %(default)s)"
+msgstr ""
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:33
+#, python-format
+msgid "Precision of compacting ELECTRICITY readings (default: %(default)s)"
+msgstr ""
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:41
+msgid ""
+"Purges all consumption data (DELETES IT!) and marks all readings as "
+"unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL "
+"HISTORIC READINGS!"
+msgstr ""
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:53
+msgid "Grouping electricity readings by minute? {}"
+msgstr "Groepeer alle elektriciteitsuitlezingen per minuut? {}"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:68
+msgid "Deleting {} ElectricityStatistics record(s)"
+msgstr "{} elektriciteitsstatistiek(en) verwijderd"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:72
+msgid "Deleting {} ElectricityConsumption record(s)"
+msgstr "{} elektriciteitsconsumptie record(s) verwijderd"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:76
+msgid "Deleting {} GasConsumption record(s)"
+msgstr "{} gasconsumptie record(s) verwijderd"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:80
+msgid "Resetting {} DsmrReading record(s)"
+msgstr "{} DSMR uitlezingen gereset"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:88
+msgid "Found {} readings to compact"
+msgstr "{} uitlezingen gevonden om samen te voegen"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:93
+msgid "Limiting readings for this run at: {}"
+msgstr "Aantal uitlezingen voor deze batch beperkt tot: {}"
+
+#: dsmr_stats/management/commands/dsmr_stats_compactor.py:99
+msgid "Compacting: {}"
+msgstr "Samenvoegen: {}"
+
+#: dsmr_stats/management/commands/dsmr_stats_datalogger.py:9
+#: dsmr_stats/management/commands/dsmr_stats_poller.py:9
+msgid "Polls the serial port for DSMR telegram and performs a reading."
+msgstr ""
+
+#: dsmr_stats/management/commands/dsmr_stats_datalogger.py:18
+#: dsmr_stats/management/commands/dsmr_stats_poller.py:18
+#, python-format
+msgid "COM-port connected to Smartmeter (default: %(default)s)"
+msgstr ""
+"COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
+
+#: dsmr_stats/management/commands/dsmr_stats_poller.py:24
+msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
+msgstr ""
+"dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft "
+"dsmr_stats_datalogger"
+
+#: dsmr_stats/models/consumption.py:11 dsmr_stats/models/dsmrreading.py:45
+msgid "Meter Reading electricity delivered to client (low tariff) in 0,001 kWh"
+msgstr ""
+
+#: dsmr_stats/models/consumption.py:16 dsmr_stats/models/dsmrreading.py:50
+msgid "Meter Reading electricity delivered by client (low tariff) in 0,001 kWh"
+msgstr ""
+
+#: dsmr_stats/models/consumption.py:21 dsmr_stats/models/dsmrreading.py:55
+msgid ""
+"Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"
+msgstr ""
+
+#: dsmr_stats/models/consumption.py:26 dsmr_stats/models/dsmrreading.py:60
+msgid ""
+"Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"
+msgstr ""
+
+#: dsmr_stats/models/consumption.py:30 dsmr_stats/models/dsmrreading.py:64
+msgid ""
+"Tariff indicator electricity. The tariff indicator can be used to switch "
+"tariff dependent loads e.g boilers. This is responsibility of the P1 user. "
+"Note: Tariff code 1 is used for low tariff and tariff code 2 is used for "
+"normal tariff."
+msgstr ""
+"Tariefindicatie. Dit kan gebruikt worden om te wisselen met "
+"tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is "
+"voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor "
+"daltarief en tariefcode 2 voor hoogtarief."
+
+#: dsmr_stats/models/consumption.py:38 dsmr_stats/models/dsmrreading.py:72
+msgid "Actual electricity power delivered (+P) in 1 Watt resolution"
+msgstr "Daadwerkelijk geleverde elektriciteit geleverd (-P) in 1 Watt stappen"
+
+#: dsmr_stats/models/consumption.py:43 dsmr_stats/models/dsmrreading.py:77
+msgid "Actual electricity power received (-P) in 1 Watt resolution"
+msgstr "Daadwerkelijk geleverde elektriciteit ontvangen (-P) in 1 Watt stappen"
+
+#: dsmr_stats/models/consumption.py:58 dsmr_stats/models/dsmrreading.py:109
+msgid "Last hourly value delivered to client"
+msgstr "Waarde wat er vorig uur is geleverd aan client"
+
+#: dsmr_stats/models/consumption.py:64
+msgid "Actual value delivered to client, since the last hour"
+msgstr "Daadwerkelijke waarde geleverd aan client, vanaf het vorige uur"
+
+#: dsmr_stats/models/dsmrreading.py:80 dsmr_stats/models/statistics.py:9
+#: dsmr_stats/templates/dsmr_stats/statistics.html:87
+msgid "Number of power failures in any phases"
+msgstr "Aantal stroomstoringen in alle fases"
+
+#: dsmr_stats/models/dsmrreading.py:83 dsmr_stats/models/statistics.py:12
+#: dsmr_stats/templates/dsmr_stats/statistics.html:91
+msgid "Number of long power failures in any phase"
+msgstr "Aantal langdurige stroomstoringen in alle fases"
+
+#: dsmr_stats/models/dsmrreading.py:86 dsmr_stats/models/statistics.py:15
+#: dsmr_stats/templates/dsmr_stats/statistics.html:95
+msgid "Number of voltage sags/dips in phase L1"
+msgstr "Aantal spanningsdippen in fase L1"
+
+#: dsmr_stats/models/dsmrreading.py:89 dsmr_stats/models/statistics.py:18
+#: dsmr_stats/templates/dsmr_stats/statistics.html:99
+msgid "Number of voltage sags/dips in phase L2 (polyphase meters only)"
+msgstr ""
+"Aantal spanningsdippen in fase L2 (alleen voor meters met meerdere fasen)"
+
+#: dsmr_stats/models/dsmrreading.py:92 dsmr_stats/models/statistics.py:21
+#: dsmr_stats/templates/dsmr_stats/statistics.html:103
+msgid "Number of voltage sags/dips in phase L3 (polyphase meters only)"
+msgstr ""
+"Aantal spanningsdippen in fase L3 (alleen voor meters met meerdere fasen)"
+
+#: dsmr_stats/models/dsmrreading.py:95 dsmr_stats/models/statistics.py:24
+#: dsmr_stats/templates/dsmr_stats/statistics.html:107
+msgid "Number of voltage swells in phase L1"
+msgstr "Aantal spanningspieken in fase L1"
+
+#: dsmr_stats/models/dsmrreading.py:98 dsmr_stats/models/statistics.py:27
+#: dsmr_stats/templates/dsmr_stats/statistics.html:111
+msgid "Number of voltage swells in phase L2 (polyphase meters only)"
+msgstr ""
+"Aantal spanningspieken in fase L2 (alleen voor meters met meerdere fasen)"
+
+#: dsmr_stats/models/dsmrreading.py:101 dsmr_stats/models/statistics.py:30
+#: dsmr_stats/templates/dsmr_stats/statistics.html:115
+msgid "Number of voltage swells in phase L3 (polyphase meters only)"
+msgstr ""
+"Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen)"
+
+#: dsmr_stats/models/dsmrreading.py:104
+msgid "Last hourly reading timestamp"
+msgstr "Tijdstip van laatste uitlezing"
+
+#: dsmr_stats/models/dsmrreading.py:114
+msgid "Whether this reading has been processed for merging into statistics"
+msgstr ""
+"Geeft aan of deze uitlezing al verwerkt is in het samenvoegen van "
+"statistieken"
+
+#: dsmr_stats/models/energysupplier.py:23
+msgid "Contract start"
+msgstr "Contract start"
+
+#: dsmr_stats/models/energysupplier.py:24
+msgid "Contract end"
+msgstr "Contract einde"
+
+#: dsmr_stats/models/energysupplier.py:27
+msgid "For your own reference, i.e. the name of your supplier"
+msgstr ""
+"Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
+
+#: dsmr_stats/models/energysupplier.py:43
+msgid "Energy supplier price"
+msgstr "Tarief energieleverancier"
+
+#: dsmr_stats/models/energysupplier.py:44
+msgid "Energy supplier prices"
+msgstr "Tarieven energieleverancier"
+
+#: dsmr_stats/models/note.py:11
+msgid "Note"
+msgstr "Notitie"
+
+#: dsmr_stats/models/note.py:12
+msgid "Notes"
+msgstr "Notities"
+
+#: dsmr_stats/templates/dsmr_stats/base.html:41
+msgid "Toggle navigation"
+msgstr "Wissel navigatie"
+
+#: dsmr_stats/templates/dsmr_stats/base.html:65
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:6
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:7
+msgid "Dashboard"
+msgstr "Startpagina"
+
+#: dsmr_stats/templates/dsmr_stats/base.html:70
+#: dsmr_stats/templates/dsmr_stats/history.html:5
+#: dsmr_stats/templates/dsmr_stats/history.html:6
+msgid "Recent history"
+msgstr "Recente historie"
+
+#: dsmr_stats/templates/dsmr_stats/base.html:75
+#: dsmr_stats/templates/dsmr_stats/statistics.html:5
+#: dsmr_stats/templates/dsmr_stats/statistics.html:6
+msgid "Statistics"
+msgstr "Statistieken"
+
+#: dsmr_stats/templates/dsmr_stats/base.html:83
+msgid "Settings"
+msgstr "Instellingen"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:20
+msgid "Watt consumed"
+msgstr "Wattage verbruikt"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:30
+msgid "Watt returned"
+msgstr "Wattage teruggeleverd"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:40
+msgid "m<sup>3</sup> gas consumed"
+msgstr "m<sup>3</sup> gas verbruikt"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:54
+#: dsmr_stats/templates/dsmr_stats/history.html:65
+#: dsmr_stats/templates/dsmr_stats/statistics.html:55
+msgid "Delivered"
+msgstr "Geleverd"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:55
+#: dsmr_stats/templates/dsmr_stats/history.html:66
+#: dsmr_stats/templates/dsmr_stats/statistics.html:56
+msgid "Returned"
+msgstr "Teruggeleverd"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:56
+#: dsmr_stats/templates/dsmr_stats/history.html:67
+msgid "Cost"
+msgstr "Kosten"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:59
+#: dsmr_stats/templates/dsmr_stats/history.html:70
+#: dsmr_stats/templates/dsmr_stats/statistics.html:59
+msgid "Electricity 1 (off-peak)"
+msgstr "Electriciteit 1 (daltarief)"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:60
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:61
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:66
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:67
+#: dsmr_stats/templates/dsmr_stats/history.html:71
+#: dsmr_stats/templates/dsmr_stats/history.html:72
+#: dsmr_stats/templates/dsmr_stats/history.html:77
+#: dsmr_stats/templates/dsmr_stats/history.html:78
+#: dsmr_stats/templates/dsmr_stats/statistics.html:60
+#: dsmr_stats/templates/dsmr_stats/statistics.html:61
+#: dsmr_stats/templates/dsmr_stats/statistics.html:65
+#: dsmr_stats/templates/dsmr_stats/statistics.html:66
+msgid "kWh"
+msgstr "kWh"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:65
+#: dsmr_stats/templates/dsmr_stats/history.html:76
+#: dsmr_stats/templates/dsmr_stats/statistics.html:64
+msgid "Electricity 2 (peak)"
+msgstr "Electriciteit 2 (hoogtarief)"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:71
+#: dsmr_stats/templates/dsmr_stats/history.html:82
+#: dsmr_stats/templates/dsmr_stats/statistics.html:146
+msgid "Gas"
+msgstr "Gas"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:72
+#: dsmr_stats/templates/dsmr_stats/history.html:83
+#: dsmr_stats/templates/dsmr_stats/statistics.html:70
+msgid "m<sup>3</sup>"
+msgstr "m<sup>3</sup>"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:77
+#: dsmr_stats/templates/dsmr_stats/history.html:88
+msgid "Total"
+msgstr "Totaal"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:92
+msgid "Recent electricity delivered (watt)"
+msgstr "Recent elektriciteitsverbruik  (Watt)"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:105
+msgid "Recent gas delivered (m<sup>3</sup>)"
+msgstr "Recent gasverbruik  (m<sup>3</sup>)"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:15
+msgid "Daily cost in the past {{ days_ago }} days"
+msgstr "Dagelijkse kosten in de afgelopen {{ days_ago }} dagen"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:15
+msgid "(in &euro;)"
+msgstr "(in &euro;)"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:28
+msgid "Daily electricity usage in the past {{ days_ago }} days"
+msgstr "Dagelijks elektriciteitsverbruik in de afgelopen {{ days_ago }} dagen"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:28
+msgid "(in kWh)"
+msgstr "(in kWh)"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:41
+msgid "Daily gas usage in the past {{ days_ago }} days"
+msgstr "Dagelijks gasverbruik in de afgelopen {{ days_ago }} dagen"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:41
+msgid "(in m<sup>3</sup>)"
+msgstr "(in m<sup>3</sup>)"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:64
+msgid "Type"
+msgstr "Soort"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:15
+msgid "DSMR Readings"
+msgstr "DSMR uitlezingen"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:20
+msgid "Last reading"
+msgstr "Laatste uitlezing"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:28
+msgid "First reading"
+msgstr "Eerste uitlezing"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:36
+msgid "Total count"
+msgstr "Totaal aantal"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:49
+msgid "Meter positions"
+msgstr "Meterstanden"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:69
+msgid "Gas "
+msgstr "Gas"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:82
+msgid "Miscellaneous"
+msgstr "Overige"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:129
+msgid "Current energy supplier"
+msgstr "Huidige energieleverancier"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:135
+msgid "Unit price"
+msgstr "Prijs per eenheid"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:138
+msgid "Electricity 1"
+msgstr "Electriciteit 1"
+
+#: dsmr_stats/templates/dsmr_stats/statistics.html:142
+msgid "Electricity 2"
+msgstr "Electriciteit 2"

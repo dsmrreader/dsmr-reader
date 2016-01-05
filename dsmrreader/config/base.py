@@ -123,3 +123,6 @@ LOCAL_TIME_ZONE = pytz.timezone('CET')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_URL = '/static/'
+
+# Translation files.
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )

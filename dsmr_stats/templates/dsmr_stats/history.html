@@ -1,8 +1,9 @@
 {% extends "dsmr_stats/base.html" %}
 {% load staticfiles %}
+{% load i18n %}
 
-{% block title %}Recent history{% endblock %}
-{% block header %}Recent history{% endblock %}
+{% block title %}{% trans "Recent history" %}{% endblock %}
+{% block header %}{% trans "Recent history" %}{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -11,7 +12,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Daily cost in the past {{ days_ago }} days (in &euro;)
+                    {% trans "Daily cost in the past {{ days_ago }} days" %} {% trans "(in &euro;)" %}
                 </header>
                 <div class="panel-body">
                 	<canvas id="cost-chart" width="1000" height="150"></canvas>
@@ -24,7 +25,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Daily electricity usage in the past {{ days_ago }} days (in kWh) 
+                    {% trans "Daily electricity usage in the past {{ days_ago }} days" %} {% trans "(in kWh)" %}
                 </header>
                 <div class="panel-body">
                 	<canvas id="electricity-chart" width="1000" height="150"></canvas>
@@ -37,7 +38,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Daily gas usage in the past {{ days_ago }} days (in m<sup>3</sup>) 
+                    {% trans "Daily gas usage in the past {{ days_ago }} days" %} {% trans "(in m<sup>3</sup>)" %}
                 </header>
                 <div class="panel-body">
                 	<canvas id="gas-chart" width="1000" height="150"></canvas>
@@ -60,31 +61,31 @@
                 
                     <table class="table table-condensed">
                         <tr>
-                            <th class="col-md-6">Type</th>
-                            <th class="col-md-2">Delivered</th>
-                            <th class="col-md-2">Returned</th>
-                            <th class="col-md-2">Cost</th>
+                            <th class="col-md-6">{% trans "Type" %}</th>
+                            <th class="col-md-2">{% trans "Delivered" %}</th>
+                            <th class="col-md-2">{% trans "Returned" %}</th>
+                            <th class="col-md-2">{% trans "Cost" %}</th>
                         </tr>
                         <tr>
-                            <td>Electricity 1 (off-peak)</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity1 }} kWh</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned }} kWh</span></td>
+                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1 }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned }} {% trans "kWh" noop %}</span></td>
                             <td><span class="badge bg-black">&euro; {{ consumption.electricity1_cost }}</span></td>
                         </tr>
                         <tr>
-                            <td>Electricity 2 (peak)</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity2 }} kWh</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned }} kWh</span></td>
+                            <td>{% trans "Electricity 2 (peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2 }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned }} {% trans "kWh" noop %}</span></td>
                             <td><span class="badge bg-black">&euro; {{ consumption.electricity2_cost }}</span></td>
                         </tr>
                         <tr>
-                            <td>Gas</td>
-                            <td><span class="badge bg-orange">{{ consumption.gas }} m<sup>3</sup></span></td>
+                            <td>{% trans "Gas" %}</td>
+                            <td><span class="badge bg-orange">{{ consumption.gas }} {% trans "m<sup>3</sup>" noop %}</span></td>
                             <td>&nbsp;</td>
                             <td><span class="badge bg-black">&euro; {{ consumption.gas_cost }}</span></td>
                         </tr>
                         <tr>
-                            <td style="font-weight: bold;">Total</td>
+                            <td style="font-weight: bold;">{% trans "Total" %}</td>
                             <td colspan="2">&nbsp;</td>
                             <td><span class="badge bg-black">&euro; {{ consumption.total_cost }}</span></td>
                         </tr>
