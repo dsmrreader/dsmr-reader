@@ -2,6 +2,7 @@
 {% load humanize %} 
 
 {% block title %}Statistics{% endblock %}
+{% block header %}Statistics{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -13,7 +14,7 @@
                     DSMR Readings
                 </header>
                 <div class="panel-body">
-                    <table class="table table-striped">
+                    <table class="table table-condensed">
                         <tr>
                             <td class="col-md-7">Last reading</td>
                             <td class="col-md-5">
@@ -44,21 +45,28 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Meter positions (total usage)
+                    Meter positions
                 </header>
                 <div class="panel-body">
-                    <table class="table table-striped">
+                    <table class="table table-condensed">
                         <tr>
-                            <td class="col-md-7">Electricity 1 (off-peak) </td>
-                            <td class="col-md-5"><span class="badge bg-red">{{ consumption.electricity1_end|default:'-' }} kWh</span></td>
+                            <th class="col-md-7">&nbsp;</th>
+                            <th class="col-md-3">Delivered</th>
+                            <th class="col-md-2">Returned</th>
+                        </tr>
+                        <tr>
+                            <td>Electricity 1 (off-peak) </td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1_end|default:'-' }} kWh</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned_end|default:'-' }} kWh</span></td>
                         </tr>
                         <tr>
                             <td>Electricity 2 (peak) </td>
                             <td><span class="badge bg-red">{{ consumption.electricity2_end|default:'-' }} kWh</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned_end|default:'-' }} kWh</span></td>
                         </tr>
                         <tr>
                             <td>Gas </td>
-                            <td><span class="badge bg-orange">{{ consumption.gas_end|default:'-' }} m<sup>3</sup></span></td>
+                            <td colspan="2"><span class="badge bg-orange">{{ consumption.gas_end|default:'-' }} m<sup>3</sup></span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->
@@ -73,7 +81,7 @@
                     Miscellaneous
                 </header>
                 <div class="panel-body">
-                    <table class="table table-striped">
+                    <table class="table table-condensed">
                         <tr>
                             <td class="col-md-7">Number of power failures in any phases</td>
                             <td class="col-md-5"><span class="badge bg-black">{{ dsmr_stats.power_failure_count|default:'-' }}</span></td>
