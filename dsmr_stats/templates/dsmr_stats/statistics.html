@@ -1,8 +1,9 @@
 {% extends "dsmr_stats/base.html" %}
 {% load humanize %} 
+{% load i18n %}
 
-{% block title %}Statistics{% endblock %}
-{% block header %}Statistics{% endblock %}
+{% block title %}{% trans "Statistics" %}{% endblock %}
+{% block header %}{% trans "Statistics" %}{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -11,12 +12,12 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    DSMR Readings
+                    {% trans "DSMR Readings" %}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
-                            <td class="col-md-7">Last reading</td>
+                            <td class="col-md-7">{% trans "Last reading" %}</td>
                             <td class="col-md-5">
                             {% if last_reading %}
                             	<span class="badge bg-navy">{{ last_reading|naturaltime }}</span>
@@ -24,7 +25,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>First reading</td>
+                            <td>{% trans "First reading" %}</td>
                             <td>
                             {% if first_reading %}
                             	<span class="badge bg-navy">{{ first_reading|default:'-' }}</span>
@@ -32,7 +33,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Total count</td>
+                            <td>{% trans "Total count" %}</td>
                             <td><span class="badge bg-navy">{{ total_reading_count|default:'-'|intcomma }}</span></td>
                         </tr>
                     </table>
@@ -45,28 +46,28 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Meter positions
+                    {% trans "Meter positions" %}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-7">&nbsp;</th>
-                            <th class="col-md-3">Delivered</th>
-                            <th class="col-md-2">Returned</th>
+                            <th class="col-md-3">{% trans "Delivered" %}</th>
+                            <th class="col-md-2">{% trans "Returned" %}</th>
                         </tr>
                         <tr>
-                            <td>Electricity 1 (off-peak) </td>
-                            <td><span class="badge bg-red">{{ consumption.electricity1_end|default:'-' }} kWh</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned_end|default:'-' }} kWh</span></td>
+                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1_end|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned_end|default:'-' }} {% trans "kWh" noop %}</span></td>
                         </tr>
                         <tr>
-                            <td>Electricity 2 (peak) </td>
-                            <td><span class="badge bg-red">{{ consumption.electricity2_end|default:'-' }} kWh</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned_end|default:'-' }} kWh</span></td>
+                            <td>{% trans "Electricity 2 (peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2_end|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned_end|default:'-' }} {% trans "kWh" noop %}</span></td>
                         </tr>
                         <tr>
-                            <td>Gas </td>
-                            <td colspan="2"><span class="badge bg-orange">{{ consumption.gas_end|default:'-' }} m<sup>3</sup></span></td>
+                            <td>{% trans "Gas " %}</td>
+                            <td colspan="2"><span class="badge bg-orange">{{ consumption.gas_end|default:'-' }} {% trans "m<sup>3</sup>" noop %}</span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->
@@ -78,40 +79,40 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    Miscellaneous
+                    {% trans "Miscellaneous" %}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
-                            <td class="col-md-7">Number of power failures in any phases</td>
+                            <td class="col-md-7">{% trans "Number of power failures in any phases" %}</td>
                             <td class="col-md-5"><span class="badge bg-black">{{ dsmr_stats.power_failure_count|default:'-' }}</span></td>
                         </tr>
                         <tr>
-                            <td>Number of long power failures in any phase</td>
+                            <td>{% trans "Number of long power failures in any phase" %}</td>
                             <td><span class="badge bg-black">{{ dsmr_stats.long_power_failure_count|default:'-' }}</span></td>
                         </tr>
                         <tr>
-                            <td>Number of voltage sags/dips in phase L1</td>
+                            <td>{% trans "Number of voltage sags/dips in phase L1" %}</td>
                             <td><span class="badge bg-orange">{{ dsmr_stats.voltage_sag_count_l1|default:'-' }}</span></td>
                         </tr>
                         <tr>
-                            <td>Number of voltage sags/dips in phase L2 (polyphase meters only)</td>
+                            <td>{% trans "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-orange">{{ dsmr_stats.voltage_sag_count_l2|default:'-' }}</span></td>
                         </tr>
                         <tr>
-                            <td>Number of voltage sags/dips in phase L3 (polyphase meters only)</td>
+                            <td>{% trans "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-orange">{{ dsmr_stats.voltage_sag_count_l3|default:'-' }}</span></td>
                         </tr>
                         <tr>
-                            <td>Number of voltage swells in phase L1</td>
+                            <td>{% trans "Number of voltage swells in phase L1" %}</td>
                             <td><span class="badge bg-red">{{ dsmr_stats.voltage_swell_count_l1|default:'-' }}</span></td>
                         </tr>
                         <tr>
-                            <td>Number of voltage swells in phase L2 (polyphase meters only)</td>
+                            <td>{% trans "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-red">{{ dsmr_stats.voltage_swell_count_l2|default:'-' }}</span></td>
                         </tr>
                         <tr>
-                            <td>Number of voltage swells in phase L3 (polyphase meters only)</td>
+                            <td>{% trans "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-red">{{ dsmr_stats.voltage_swell_count_l3|default:'-' }}</span></td>
                         </tr>
                     </table>
@@ -125,24 +126,24 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                	Current energy supplier: {{ consumption.daily_energy_price.description }}
+                	{% trans "Current energy supplier" %}: {{ consumption.daily_energy_price.description }}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-7">{{ consumption.daily_energy_price.start }} &larr;&rarr; {{ consumption.daily_energy_price.end|default:'-' }}</th>
-                            <th class="col-md-5">Unit price</th>
+                            <th class="col-md-5">{% trans "Unit price" %}</th>
                         </tr>
                         <tr>
-                            <td class="col-md-7">Electricity 1</td>
+                            <td class="col-md-7">{% trans "Electricity 1" %}</td>
                             <td class="col-md-5"><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_1_price }}</span></td>
                         </tr>
                         <tr>
-                            <td>Electricity 2</td>
+                            <td>{% trans "Electricity 2" %}</td>
                             <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_2_price }}</span></td>
                         </tr>
                         <tr>
-                            <td>Gas</td>
+                            <td>{% trans "Gas" %}</td>
                             <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.gas_price }}</span></td>
                         </tr>
                     </table>
