@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-05 20:28+0000\n"
-"PO-Revision-Date: 2016-01-05 21:56+0100\n"
+"PO-Revision-Date: 2016-01-05 22:01+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
@@ -284,11 +284,11 @@ msgstr "Instellingen"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:20
 msgid "Watt consumed"
-msgstr "Wattage verbruikt"
+msgstr "Watt verbruikt"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:30
 msgid "Watt returned"
-msgstr "Wattage teruggeleverd"
+msgstr "Watt teruggeleverd"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:40
 msgid "m<sup>3</sup> gas consumed"
