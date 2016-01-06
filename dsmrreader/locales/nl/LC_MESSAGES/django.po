@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 18:53+0000\n"
-"PO-Revision-Date: 2016-01-06 20:00+0100\n"
+"POT-Creation-Date: 2016-01-06 19:08+0000\n"
+"PO-Revision-Date: 2016-01-06 20:10+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -244,26 +244,57 @@ msgstr ""
 "Geeft aan of deze uitlezing al verwerkt is in het samenvoegen van "
 "statistieken"
 
-#: dsmr_stats/models/energysupplier.py:23
+#: dsmr_stats/models/energysupplier.py:24
+msgid "Start"
+msgstr "Start"
+
+#: dsmr_stats/models/energysupplier.py:24
 msgid "Contract start"
 msgstr "Contract start"
 
-#: dsmr_stats/models/energysupplier.py:24
+#: dsmr_stats/models/energysupplier.py:27
+msgid "End"
+msgstr "Einde"
+
+#: dsmr_stats/models/energysupplier.py:27
 msgid "Contract end"
 msgstr "Contract einde"
 
-#: dsmr_stats/models/energysupplier.py:27
+#: dsmr_stats/models/energysupplier.py:30 dsmr_stats/models/note.py:8
+msgid "Description"
+msgstr "Omschrijving"
+
+#: dsmr_stats/models/energysupplier.py:31
 msgid "For your own reference, i.e. the name of your supplier"
 msgstr ""
 "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
 
-#: dsmr_stats/models/energysupplier.py:43
+#: dsmr_stats/models/energysupplier.py:34
+#| msgid "Electricity 1"
+msgid "Electricity 1 price"
+msgstr "Elektriciteitstarief 1 (laag)"
+
+#: dsmr_stats/models/energysupplier.py:37
+#| msgid "Electricity 2 (peak)"
+msgid "Electricity 2 price"
+msgstr "Elektriciteitstarief 2 (hoog)"
+
+#: dsmr_stats/models/energysupplier.py:40
+#| msgid "Unit price"
+msgid "Gas price"
+msgstr "Gasprijs"
+
+#: dsmr_stats/models/energysupplier.py:47
 msgid "Energy supplier price"
 msgstr "Tarief energieleverancier"
 
-#: dsmr_stats/models/energysupplier.py:44
+#: dsmr_stats/models/energysupplier.py:48
 msgid "Energy supplier prices"
 msgstr "Tarieven energieleverancier"
+
+#: dsmr_stats/models/note.py:7
+msgid "Day"
+msgstr "Dag"
 
 #: dsmr_stats/models/note.py:11
 msgid "Note"
@@ -332,7 +363,7 @@ msgstr "Kosten"
 #: dsmr_stats/templates/dsmr_stats/history.html:70
 #: dsmr_stats/templates/dsmr_stats/statistics.html:59
 msgid "Electricity 1 (off-peak)"
-msgstr "Electriciteit 1 (daltarief)"
+msgstr "Elektriciteit 1 (daltarief)"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:60
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:61
@@ -353,7 +384,7 @@ msgstr "kWh"
 #: dsmr_stats/templates/dsmr_stats/history.html:76
 #: dsmr_stats/templates/dsmr_stats/statistics.html:64
 msgid "Electricity 2 (peak)"
-msgstr "Electriciteit 2 (hoogtarief)"
+msgstr "Elektriciteit 2 (hoogtarief)"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:71
 #: dsmr_stats/templates/dsmr_stats/history.html:82
@@ -440,7 +471,6 @@ msgid "Miscellaneous"
 msgstr "Overige"
 
 #: dsmr_stats/templates/dsmr_stats/statistics.html:129
-#| msgid "Current energy supplier"
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
 
@@ -450,8 +480,8 @@ msgstr "Prijs per eenheid"
 
 #: dsmr_stats/templates/dsmr_stats/statistics.html:138
 msgid "Electricity 1"
-msgstr "Electriciteit 1"
+msgstr "Elektriciteit 1"
 
 #: dsmr_stats/templates/dsmr_stats/statistics.html:142
 msgid "Electricity 2"
-msgstr "Electriciteit 2"
+msgstr "Elektriciteit 2"

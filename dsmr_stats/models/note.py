@@ -4,8 +4,8 @@ from django.utils.translation import ugettext as _
 
 class Note(models.Model):
     """ Daily note someone might place for some remarks about something related to consumption. """
-    day = models.DateField()
-    description = models.CharField(max_length=256)
+    day = models.DateField(verbose_name=_('Day'))
+    description = models.CharField(max_length=256, verbose_name=_('Description'))
 
     class Meta:
         verbose_name = _('Note')
