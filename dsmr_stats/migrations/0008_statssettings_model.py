@@ -7,7 +7,7 @@ from dsmr_stats.models.settings import StatsSettings
 
 
 def initial_data(* args, **kwargs):
-    # This make sure the model is created.
+    # This persists the model in the database.
     StatsSettings.get_solo()
 
 
