@@ -20,20 +20,24 @@ class EnergySupplierPrice(models.Model):
     """
     objects = EnergySupplierPriceManager()
 
-    start = models.DateField(help_text=_('Contract start'))
-    end = models.DateField(null=True, blank=True, help_text=_('Contract end'))
+    start = models.DateField(
+        verbose_name=_('Start'), help_text=_('Contract start')
+    )
+    end = models.DateField(
+        null=True, blank=True, verbose_name=_('End'), help_text=_('Contract end')
+    )
     description = models.CharField(
-        max_length=255, null=True, blank=True,
+        max_length=255, null=True, blank=True, verbose_name=_('Description'),
         help_text=_('For your own reference, i.e. the name of your supplier')
     )
     electricity_1_price = models.DecimalField(
-        max_digits=11, decimal_places=5, default=0
+        max_digits=11, decimal_places=5, default=0, verbose_name=_('Electricity 1 price')
     )
     electricity_2_price = models.DecimalField(
-        max_digits=11, decimal_places=5, default=0
+        max_digits=11, decimal_places=5, default=0, verbose_name=_('Electricity 2 price')
     )
     gas_price = models.DecimalField(
-        max_digits=11, decimal_places=5, default=0
+        max_digits=11, decimal_places=5, default=0, verbose_name=_('Gas price')
     )
 
     def __str__(self):
