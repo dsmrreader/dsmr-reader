@@ -385,6 +385,8 @@ Software listed below. Please note and respect their licences as well, if any.
 
 * [Django Project](https://www.djangoproject.com/)
 
+* [Django Solo (plugin)](https://github.com/lazybird/django-solo)
+
 * [Supervisor](http://supervisord.org/)
 
 * [MySQL](https://www.mysql.com/)

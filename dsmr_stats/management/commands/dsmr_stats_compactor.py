@@ -1,4 +1,5 @@
 from time import sleep
+import warnings
 
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
@@ -6,15 +7,14 @@ from django.utils import timezone
 from django.db import transaction
 
 from dsmr_stats.models.dsmrreading import DsmrReading
-import dsmr_stats.services
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
+from dsmr_stats.models.settings import StatsSettings
+import dsmr_stats.services
 
 
 class Command(BaseCommand):
     help = _('Compacts existing DSMR readings into consumption points.')
-    GROUPING_SECOND = 'second'
-    GROUPING_MINUTE = 'minute'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -30,7 +30,7 @@ class Command(BaseCommand):
             action='store_true',
             dest='group_by_minute',
             default=False,
-            help=_('Precision of compacting ELECTRICITY readings (default: %(default)s)')
+            help=_('DEPRECATED: Moved to settings in database.')
         )
         parser.add_argument(
             '--purge',
@@ -47,9 +47,23 @@ class Command(BaseCommand):
         # Purging all data is a whole other path, so we will stop after performing the task.
         if options['purge']:
             self._purge_and_reset()
-            raise CommandError("Purge & reset completed")
+            raise CommandError(_("Purge & reset completed"))
 
-        group_by_minute = options['group_by_minute']
+        group_by_minute = False
+
+        if options['group_by_minute'] is True:
+            warnings.showwarning(
+                _('group_by_minute argument is DEPRECATED and moved to the database settings'),
+                DeprecationWarning, __file__, 0
+            )
+
+        # These are stored as singleton in database, but might be converted later to multiple
+        # options. So we do not store a boolean yet.
+        stats_settings = StatsSettings.get_solo()
+
+        if stats_settings.compactor_grouping_type == StatsSettings.COMPACTOR_GROUPING_BY_MINUTE:
+            group_by_minute = True
+
         print(_('Grouping electricity readings by minute? {}'.format(group_by_minute)))
 
         try:
