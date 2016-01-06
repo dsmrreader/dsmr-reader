@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-05 21:24+0000\n"
-"PO-Revision-Date: 2016-01-05 22:24+0100\n"
+"POT-Creation-Date: 2016-01-06 18:53+0000\n"
+"PO-Revision-Date: 2016-01-06 20:00+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -56,6 +56,10 @@ msgstr "{} records gevonden om te verwijderen"
 msgid "Deleted {} records"
 msgstr "{} records verwijderd"
 
+#: dsmr_stats/management/commands/dsmr_stats_clear_cache.py:7
+msgid "Clears the cache."
+msgstr "Gooit de cache leeg."
+
 #: dsmr_stats/management/commands/dsmr_stats_compactor.py:15
 msgid "Compacts existing DSMR readings into consumption points."
 msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
@@ -64,11 +68,13 @@ msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
 #, python-format
 msgid "The max number of readings to compact this run (default: %(default)s)"
 msgstr ""
+"Het maximum aantal uitlezingen dat per keer gegroepeerd wordt  (standaard: "
+"%(default)s)"
 
 #: dsmr_stats/management/commands/dsmr_stats_compactor.py:33
 #, python-format
 msgid "Precision of compacting ELECTRICITY readings (default: %(default)s)"
-msgstr ""
+msgstr "Nauwkeurigheid van elektriciteitsverbruik (standaard: %(default)s)"
 
 #: dsmr_stats/management/commands/dsmr_stats_compactor.py:41
 msgid ""
@@ -76,6 +82,9 @@ msgid ""
 "unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL "
 "HISTORIC READINGS!"
 msgstr ""
+"Wist alle verbruiksgegevens (VERWIJDERT HET!) en markeert alle uitlezingen "
+"als onverwerkt. Gebruik dit alleen als je wisselt van "
+"groeperingsnauwkeurigheid EN JE ALLE DSMR-METINGEN NOG HEBT!"
 
 #: dsmr_stats/management/commands/dsmr_stats_compactor.py:53
 msgid "Grouping electricity readings by minute? {}"
@@ -112,7 +121,7 @@ msgstr "Samenvoegen: {}"
 #: dsmr_stats/management/commands/dsmr_stats_datalogger.py:9
 #: dsmr_stats/management/commands/dsmr_stats_poller.py:9
 msgid "Polls the serial port for DSMR telegram and performs a reading."
-msgstr ""
+msgstr "Controleert de seriele poort voor DSMR-gegevens en leest deze uit."
 
 #: dsmr_stats/management/commands/dsmr_stats_datalogger.py:18
 #: dsmr_stats/management/commands/dsmr_stats_poller.py:18
@@ -130,20 +139,28 @@ msgstr ""
 #: dsmr_stats/models/consumption.py:11 dsmr_stats/models/dsmrreading.py:45
 msgid "Meter Reading electricity delivered to client (low tariff) in 0,001 kWh"
 msgstr ""
+"Meterstand van verbruikte elektriciteit (laagtarief) in stappen van 1 Watt "
+"uur"
 
 #: dsmr_stats/models/consumption.py:16 dsmr_stats/models/dsmrreading.py:50
 msgid "Meter Reading electricity delivered by client (low tariff) in 0,001 kWh"
 msgstr ""
+"Meterstand van teruggeleverde elektriciteit (laagtarief) in stappen van 1 "
+"Watt uur"
 
 #: dsmr_stats/models/consumption.py:21 dsmr_stats/models/dsmrreading.py:55
 msgid ""
 "Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"
 msgstr ""
+"Meterstand van verbruikte elektriciteit (hoogtarief) in stappen van 1 Watt "
+"uur"
 
 #: dsmr_stats/models/consumption.py:26 dsmr_stats/models/dsmrreading.py:60
 msgid ""
 "Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"
 msgstr ""
+"Meterstand van teruggeleverde elektriciteit (hoogtarief) in stappen van 1 "
+"Watt uur"
 
 #: dsmr_stats/models/consumption.py:30 dsmr_stats/models/dsmrreading.py:64
 msgid ""
@@ -365,7 +382,6 @@ msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:15
 #, python-format
-#| msgid "Daily cost in the past {{ days_ago }} days"
 msgid "Daily cost in the past %(days_ago)s days"
 msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"
 
@@ -375,7 +391,6 @@ msgstr "(in &euro;)"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:28
 #, python-format
-#| msgid "Daily electricity usage in the past {{ days_ago }} days"
 msgid "Daily electricity usage in the past %(days_ago)s days"
 msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
 
@@ -385,7 +400,6 @@ msgstr "(in kWh)"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:41
 #, python-format
-#| msgid "Daily gas usage in the past {{ days_ago }} days"
 msgid "Daily gas usage in the past %(days_ago)s days"
 msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
 
@@ -426,8 +440,9 @@ msgid "Miscellaneous"
 msgstr "Overige"
 
 #: dsmr_stats/templates/dsmr_stats/statistics.html:129
-msgid "Current energy supplier"
-msgstr "Huidige energieleverancier"
+#| msgid "Current energy supplier"
+msgid "Current energy prices"
+msgstr "Huidige energietarieven"
 
 #: dsmr_stats/templates/dsmr_stats/statistics.html:135
 msgid "Unit price"
