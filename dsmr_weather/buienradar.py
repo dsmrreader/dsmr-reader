@@ -8,6 +8,8 @@ Moved outside settings and model definitions to keep things separated and isolat
 It also allows us to choose an other external weather service more easily.
 """
 BUIENRADAR_API_URL = 'http://api.buienradar.nl/'
+BUIENRADAR_XPATH = './/weerstations/weerstation[@id="{weather_station_id}"]/temperatuurGC'
+
 BUIENRADAR_STATIONS = (
     (6391, _('Weather station Arcen')),
     (6275, _('Weather station Arnhem')),
