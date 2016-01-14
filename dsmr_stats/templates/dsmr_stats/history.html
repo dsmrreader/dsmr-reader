@@ -47,6 +47,7 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 
+    {% if track_temperature %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -59,6 +60,7 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    {% endif %}
 
     <div class="row">
         <div class="col-md-12">
@@ -119,7 +121,10 @@
         		render_cost_chart();
         		render_electricity_chart();
         		render_gas_chart();
+
+        		{% if track_temperature %}
         		render_temperature_chart();
+        		{% endif %}
         	});
         	
 		   	function render_cost_chart()
@@ -256,7 +261,8 @@
                 var ctx = $("#gas-chart").get(0).getContext("2d");
                 new Chart(ctx).Line(data, options);
             }
-        	
+            
+        {% if track_temperature %}
 		   	function render_temperature_chart()
 		   	{
 		   		var data = {
@@ -283,6 +289,7 @@
 	   			var ctx = $("#temperature-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data, options);
    			}
+	   	{% endif %}
 
 		</script>
 {% endblock %}

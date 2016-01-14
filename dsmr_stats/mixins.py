@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from dsmr_stats import models as stats_models
 from dsmr_weather.models.statistics import TemperatureReading
+from dsmr_weather.models.settings import WeatherSettings
 import dsmr_stats.services
 
 
@@ -44,14 +45,17 @@ class DashboardMixin(object):
             [float(x.currently_delivered) for x in gas]
         )
 
-        context_data['temperature_x'] = json.dumps(
-            [x.read_at.astimezone(
-                settings.LOCAL_TIME_ZONE
-            ).strftime("%a %H:%M") for x in temperature]
-        )
-        context_data['temperature_y'] = json.dumps(
-            [float(x.degrees_celcius) for x in temperature]
-        )
+        context_data['track_temperature'] = WeatherSettings.get_solo().track
+
+        if context_data['track_temperature']:
+            context_data['temperature_x'] = json.dumps(
+                [x.read_at.astimezone(
+                    settings.LOCAL_TIME_ZONE
+                ).strftime("%a %H:%M") for x in temperature]
+            )
+            context_data['temperature_y'] = json.dumps(
+                [float(x.degrees_celcius) for x in temperature]
+            )
 
         latest_electricity = electricity[0]
         context_data['latest_electricity_read'] = latest_electricity.read_at
@@ -98,6 +102,7 @@ class HistoryMixin(object):
         context_data = super(HistoryMixin, self).get_context_data(**kwargs)
         context_data['usage'] = []
         context_data['days_ago'] = self.days_ago
+        context_data['track_temperature'] = WeatherSettings.get_solo().track
 
         # @TODO: There must be a way to make this more clean.
         context_data['chart'] = defaultdict(list)
