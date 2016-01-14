@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.db import transaction
 from django.db.models import Avg, Max
 
+from dsmrreader import signals
 from dsmr_stats.models.dsmrreading import DsmrReading
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
@@ -77,7 +78,7 @@ def compact(dsmr_reading, group_by_minute=False):
     """
     # Electricity should be unique, because it's the reading with the lowest interval anyway.
     if not group_by_minute:
-        ElectricityConsumption.objects.create(
+        consumption = ElectricityConsumption.objects.create(
             read_at=dsmr_reading.timestamp,
             delivered_1=dsmr_reading.electricity_delivered_1,
             returned_1=dsmr_reading.electricity_returned_1,
@@ -87,6 +88,7 @@ def compact(dsmr_reading, group_by_minute=False):
             currently_delivered=dsmr_reading.electricity_currently_delivered,
             currently_returned=dsmr_reading.electricity_currently_returned,
         )
+        signals.electricity_consumption_created.send(None, instance=consumption)
     # Grouping by minute requires some distinction and history checking.
     else:
         minute_start = timezone.datetime.combine(
@@ -113,7 +115,7 @@ def compact(dsmr_reading, group_by_minute=False):
             )
 
             # This instance is the average/max and combined result.
-            ElectricityConsumption.objects.create(
+            consumption = ElectricityConsumption.objects.create(
                 read_at=minute_end,
                 delivered_1=grouped_reading['max_delivered_1'],
                 returned_1=grouped_reading['max_returned_1'],
@@ -123,6 +125,7 @@ def compact(dsmr_reading, group_by_minute=False):
                 currently_delivered=grouped_reading['avg_delivered'],
                 currently_returned=grouped_reading['avg_returned'],
             )
+            signals.electricity_consumption_created.send(None, instance=consumption)
 
     # Gas however only get read every hour, so we should check
     # for any duplicates, as they WILL exist.
@@ -142,11 +145,12 @@ def compact(dsmr_reading, group_by_minute=False):
         else:
             gas_diff = dsmr_reading.extra_device_delivered - previous_gas_consumption.delivered
 
-        GasConsumption.objects.create(
+        consumption = GasConsumption.objects.create(
             read_at=dsmr_reading.extra_device_timestamp,
             delivered=dsmr_reading.extra_device_delivered,
             currently_delivered=gas_diff
         )
+        signals.gas_consumption_created.send(None, instance=consumption)
 
     # The last thing to do is to keep track of other daily statistics.
     electricity_statistics = ElectricityStatistics(
