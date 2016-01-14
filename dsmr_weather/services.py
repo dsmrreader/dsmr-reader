@@ -13,8 +13,8 @@ def read_weather():
     # Only when explicitly enabled in settings.
     weather_settings = WeatherSettings.get_solo()
 
-#     if not weather_settings.track:
-#         return
+    if not weather_settings.track:
+        return
 
     # Fetch XML from API.
     request = urllib.request.urlopen(BUIENRADAR_API_URL)
@@ -36,5 +36,5 @@ def read_weather():
 
     TemperatureReading.objects.create(
         read_at=read_at,
-        temperature_celcius=temperature
+        degrees_celcius=temperature
     )

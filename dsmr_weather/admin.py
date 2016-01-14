@@ -8,7 +8,7 @@ from dsmr_weather.models.settings import WeatherSettings
 
 @admin.register(TemperatureReading)
 class TemperatureReadingAdmin(admin.ModelAdmin):
-    list_display = ('read_at', 'temperature_celcius')
+    list_display = ('read_at', 'degrees_celcius')
 
 
 @admin.register(WeatherSettings)

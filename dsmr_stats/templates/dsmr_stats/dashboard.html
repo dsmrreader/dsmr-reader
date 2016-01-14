@@ -110,6 +110,20 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    {% if temperature_x and temperature_y %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent temperatures (&deg;C)" %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="temperature-chart" width="1000" height="200"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    {% endif %}
 </section><!-- /.content -->
 {% endblock %}
 
@@ -120,7 +134,10 @@
         <script type="text/javascript">
         	$(document).ready(function(){
         		render_electricity_chart();
-        		render_gas_chart();
+                render_gas_chart();
+                {% if temperature_x and temperature_y %}
+                render_temperature_chart();
+                {% endif %}
         	});
         	
 		   	function render_electricity_chart()
@@ -149,7 +166,7 @@
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data, options);
    			}
-        	
+		   	
 		   	function render_gas_chart()
 		   	{
 		   		var data = {
@@ -176,6 +193,33 @@
 	   			var ctx = $("#gas-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data, options);
    			}
+		   	
+            function render_temperature_chart()
+            {
+                var data = {
+                    labels: {{ temperature_x|safe }},
+                    datasets: [{
+                        data: {{ temperature_y|safe }},
+                        label: "Temperature",                       
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(35,183,229,1)",
+                        pointColor: "rgba(35,183,229,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(150,150,150,1)"
+                    }]
+                };
+    
+                {% verbatim %}
+                var options = {
+                    responsive: true,
+                    animation: false,
+                };
+                {% endverbatim %}
+    
+                var ctx = $("#temperature-chart").get(0).getContext("2d");
+                new Chart(ctx).Line(data, options);
+            }
 		</script>
 
 {% endblock %}
