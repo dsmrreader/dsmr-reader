@@ -110,7 +110,7 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
-    {% if temperature_x and temperature_y %}
+    {% if track_temperature %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -135,7 +135,7 @@
         	$(document).ready(function(){
         		render_electricity_chart();
                 render_gas_chart();
-                {% if temperature_x and temperature_y %}
+                {% if track_temperature %}
                 render_temperature_chart();
                 {% endif %}
         	});
@@ -194,6 +194,7 @@
 	   			new Chart(ctx).Line(data, options);
    			}
 		   	
+	    {% if track_temperature %}
             function render_temperature_chart()
             {
                 var data = {
@@ -220,6 +221,7 @@
                 var ctx = $("#temperature-chart").get(0).getContext("2d");
                 new Chart(ctx).Line(data, options);
             }
+        {% endif %}
 		</script>
 
 {% endblock %}
