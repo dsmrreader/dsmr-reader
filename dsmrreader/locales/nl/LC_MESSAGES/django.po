@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 21:17+0000\n"
-"PO-Revision-Date: 2016-01-06 22:18+0100\n"
+"POT-Creation-Date: 2016-01-14 21:44+0000\n"
+"PO-Revision-Date: 2016-01-14 22:41+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -373,24 +373,24 @@ msgid "m<sup>3</sup> gas consumed"
 msgstr "m<sup>3</sup> gas verbruikt"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:54
-#: dsmr_stats/templates/dsmr_stats/history.html:65
+#: dsmr_stats/templates/dsmr_stats/history.html:78
 #: dsmr_stats/templates/dsmr_stats/statistics.html:55
 msgid "Delivered"
 msgstr "Geleverd"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:55
-#: dsmr_stats/templates/dsmr_stats/history.html:66
+#: dsmr_stats/templates/dsmr_stats/history.html:79
 #: dsmr_stats/templates/dsmr_stats/statistics.html:56
 msgid "Returned"
 msgstr "Teruggeleverd"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:56
-#: dsmr_stats/templates/dsmr_stats/history.html:67
+#: dsmr_stats/templates/dsmr_stats/history.html:80
 msgid "Cost"
 msgstr "Kosten"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:59
-#: dsmr_stats/templates/dsmr_stats/history.html:70
+#: dsmr_stats/templates/dsmr_stats/history.html:83
 #: dsmr_stats/templates/dsmr_stats/statistics.html:59
 msgid "Electricity 1 (off-peak)"
 msgstr "Elektriciteit 1 (daltarief)"
@@ -399,10 +399,10 @@ msgstr "Elektriciteit 1 (daltarief)"
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:61
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:66
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:67
-#: dsmr_stats/templates/dsmr_stats/history.html:71
-#: dsmr_stats/templates/dsmr_stats/history.html:72
-#: dsmr_stats/templates/dsmr_stats/history.html:77
-#: dsmr_stats/templates/dsmr_stats/history.html:78
+#: dsmr_stats/templates/dsmr_stats/history.html:84
+#: dsmr_stats/templates/dsmr_stats/history.html:85
+#: dsmr_stats/templates/dsmr_stats/history.html:90
+#: dsmr_stats/templates/dsmr_stats/history.html:91
 #: dsmr_stats/templates/dsmr_stats/statistics.html:60
 #: dsmr_stats/templates/dsmr_stats/statistics.html:61
 #: dsmr_stats/templates/dsmr_stats/statistics.html:65
@@ -411,25 +411,25 @@ msgid "kWh"
 msgstr "kWh"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:65
-#: dsmr_stats/templates/dsmr_stats/history.html:76
+#: dsmr_stats/templates/dsmr_stats/history.html:89
 #: dsmr_stats/templates/dsmr_stats/statistics.html:64
 msgid "Electricity 2 (peak)"
 msgstr "Elektriciteit 2 (hoogtarief)"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:71
-#: dsmr_stats/templates/dsmr_stats/history.html:82
+#: dsmr_stats/templates/dsmr_stats/history.html:95
 #: dsmr_stats/templates/dsmr_stats/statistics.html:146
 msgid "Gas"
 msgstr "Gas"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:72
-#: dsmr_stats/templates/dsmr_stats/history.html:83
+#: dsmr_stats/templates/dsmr_stats/history.html:96
 #: dsmr_stats/templates/dsmr_stats/statistics.html:70
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:77
-#: dsmr_stats/templates/dsmr_stats/history.html:88
+#: dsmr_stats/templates/dsmr_stats/history.html:101
 msgid "Total"
 msgstr "Totaal"
 
@@ -440,6 +440,10 @@ msgstr "Recent elektriciteitsverbruik  (Watt)"
 #: dsmr_stats/templates/dsmr_stats/dashboard.html:105
 msgid "Recent gas delivered (m<sup>3</sup>)"
 msgstr "Recent gasverbruik  (m<sup>3</sup>)"
+
+#: dsmr_stats/templates/dsmr_stats/dashboard.html:118
+msgid "Recent temperatures (&deg;C)"
+msgstr "Recente temperatuurmetingen (&deg;C)"
 
 #: dsmr_stats/templates/dsmr_stats/history.html:15
 #, python-format
@@ -468,7 +472,16 @@ msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
 msgid "(in m<sup>3</sup>)"
 msgstr "(in m<sup>3</sup>)"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:64
+#: dsmr_stats/templates/dsmr_stats/history.html:54
+#, python-format
+msgid "Daily average temperature in the past %(days_ago)s days"
+msgstr "Dagelijks temperatuurgemiddelde in de afgelopen %(days_ago)s dagen"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:54
+msgid "(in &deg;C)"
+msgstr "(in &deg;C)"
+
+#: dsmr_stats/templates/dsmr_stats/history.html:77
 msgid "Type"
 msgstr "Soort"
 
@@ -516,11 +529,257 @@ msgstr "Elektriciteit 1"
 msgid "Electricity 2"
 msgstr "Elektriciteit 2"
 
-#: dsmrreader/config/base.py:134
+#: dsmr_weather/apps.py:9
+msgid "DSMR Weather"
+msgstr "DSMR Weergegevens"
+
+#: dsmr_weather/buienradar.py:14
+msgid "Weather station Arcen"
+msgstr "Weerstation Arcen"
+
+#: dsmr_weather/buienradar.py:15
+msgid "Weather station Arnhem"
+msgstr "Weerstation Arnhem"
+
+#: dsmr_weather/buienradar.py:16
+msgid "Weather station Berkhout"
+msgstr "Weerstation Berkhout"
+
+#: dsmr_weather/buienradar.py:17
+msgid "Weather station Cadzand"
+msgstr "Weerstation Cadzand"
+
+#: dsmr_weather/buienradar.py:18
+msgid "Weather station De Bilt"
+msgstr "Weerstation De Bilt"
+
+#: dsmr_weather/buienradar.py:19
+msgid "Weather station Den Helder"
+msgstr "Weerstation Den Helder"
+
+#: dsmr_weather/buienradar.py:20
+msgid "Weather station Eindhoven"
+msgstr "Weerstation Eindhoven"
+
+#: dsmr_weather/buienradar.py:21
+msgid "Weather station Ell"
+msgstr "Weerstation Ell"
+
+#: dsmr_weather/buienradar.py:22
+msgid "Weather station Euro platform"
+msgstr "Weerstation Euro platform"
+
+#: dsmr_weather/buienradar.py:23
+msgid "Weather station Gilze Rijen"
+msgstr "Weerstation Gilze Rijen"
+
+#: dsmr_weather/buienradar.py:24
+msgid "Weather station Groenlo-Hupsel"
+msgstr "Weerstation Groenlo-Hupsel"
+
+#: dsmr_weather/buienradar.py:25
+msgid "Weather station Groningen"
+msgstr "Weerstation Groningen"
+
+#: dsmr_weather/buienradar.py:26
+msgid "Weather station Hansweert"
+msgstr "Weerstation Hansweert"
+
+#: dsmr_weather/buienradar.py:27
+msgid "Weather station Heino"
+msgstr "Weerstation Heino"
+
+#: dsmr_weather/buienradar.py:28
+msgid "Weather station Herwijnen"
+msgstr "Weerstation Herwijnen"
+
+#: dsmr_weather/buienradar.py:29
+msgid "Weather station Hoek van Holland"
+msgstr "Weerstation Hoek van Holland"
+
+#: dsmr_weather/buienradar.py:30
+msgid "Weather station Hoofdplaat"
+msgstr "Weerstation Hoofdplaat"
+
+#: dsmr_weather/buienradar.py:31
+msgid "Weather station Hoogeveen"
+msgstr "Weerstation Hoogeveen"
+
+#: dsmr_weather/buienradar.py:32
+msgid "Weather station Hoorn Terschelling"
+msgstr "Weerstation Hoorn Terschelling"
+
+#: dsmr_weather/buienradar.py:33
+msgid "Weather station Houtribdijk"
+msgstr "Weerstation Houtribdijk"
+
+#: dsmr_weather/buienradar.py:34
+msgid "Weather station Huibertgat"
+msgstr "Weerstation Huibertgat"
+
+#: dsmr_weather/buienradar.py:35
+msgid "Weather station IJmond"
+msgstr "Weerstation IJmond"
+
+#: dsmr_weather/buienradar.py:36
+msgid "Weather station IJmuiden"
+msgstr "Weerstation IJmuiden"
+
+#: dsmr_weather/buienradar.py:37
+msgid "Weather station Katwijk"
+msgstr "Weerstation Katwijk"
+
+#: dsmr_weather/buienradar.py:38
+msgid "Weather station Lauwersoog"
+msgstr "Weerstation Lauwersoog"
+
+#: dsmr_weather/buienradar.py:39
+msgid "Weather station LE Goeree"
+msgstr "Weerstation LE Goeree"
+
+#: dsmr_weather/buienradar.py:40
+msgid "Weather station Leeuwarden"
+msgstr "Weerstation Leeuwarden"
+
+#: dsmr_weather/buienradar.py:41
+msgid "Weather station Lelystad"
+msgstr "Weerstation Lelystad"
+
+#: dsmr_weather/buienradar.py:42
+msgid "Weather station Lopik-Cabauw"
+msgstr "Weerstation Lopik-Cabauw"
+
+#: dsmr_weather/buienradar.py:43
+msgid "Weather station Maastricht"
+msgstr "Weerstation Maastricht"
+
+#: dsmr_weather/buienradar.py:44
+msgid "Weather station Marknesse"
+msgstr "Weerstation Marknesse"
+
+#: dsmr_weather/buienradar.py:45
+msgid "Weather station Nieuw Beerta"
+msgstr "Weerstation Nieuw Beerta"
+
+#: dsmr_weather/buienradar.py:46
+msgid "Weather station Oosterschelde"
+msgstr "Weerstation Oosterschelde"
+
+#: dsmr_weather/buienradar.py:47
+msgid "Weather station Rotterdam"
+msgstr "Weerstation Rotterdam"
+
+#: dsmr_weather/buienradar.py:48
+msgid "Weather station Rotterdam Geulhaven"
+msgstr "Weerstation Rotterdam Geulhaven"
+
+#: dsmr_weather/buienradar.py:49
+msgid "Weather station Schaar"
+msgstr "Weerstation Schaar"
+
+#: dsmr_weather/buienradar.py:50
+msgid "Weather station Schiphol"
+msgstr "Weerstation Schiphol"
+
+#: dsmr_weather/buienradar.py:51
+msgid "Weather station Stavenisse"
+msgstr "Weerstation Stavenisse"
+
+#: dsmr_weather/buienradar.py:52
+msgid "Weather station Stavoren"
+msgstr "Weerstation Stavoren"
+
+#: dsmr_weather/buienradar.py:53
+msgid "Weather station Tholen"
+msgstr "Weerstation Tholen"
+
+#: dsmr_weather/buienradar.py:54
+msgid "Weather station Twente"
+msgstr "Weerstation Twente"
+
+#: dsmr_weather/buienradar.py:55
+msgid "Weather station Vlakte aan de Raan"
+msgstr "Weerstation Vlakte aan de Raan"
+
+#: dsmr_weather/buienradar.py:56
+msgid "Weather station Vlieland"
+msgstr "Weerstation Vlieland"
+
+#: dsmr_weather/buienradar.py:57
+msgid "Weather station Vlissingen"
+msgstr "Weerstation Vlissingen"
+
+#: dsmr_weather/buienradar.py:58
+msgid "Weather station Volkel"
+msgstr "Weerstation Volkel"
+
+#: dsmr_weather/buienradar.py:59
+msgid "Weather station Voorschoten"
+msgstr "Weerstation Voorschoten"
+
+#: dsmr_weather/buienradar.py:60
+msgid "Weather station Westdorpe"
+msgstr "Weerstation Westdorpe"
+
+#: dsmr_weather/buienradar.py:61
+msgid "Weather station Wijdenes"
+msgstr "Weerstation Wijdenes"
+
+#: dsmr_weather/buienradar.py:62
+msgid "Weather station Wijk aan Zee"
+msgstr "Weerstation Wijk aan Zee"
+
+#: dsmr_weather/buienradar.py:63
+msgid "Weather station Woensdrecht"
+msgstr "Weerstation Woensdrecht"
+
+#: dsmr_weather/buienradar.py:64
+msgid "Weather station Zeeplatform F-3"
+msgstr "Weerstation Zeeplatform F-3"
+
+#: dsmr_weather/buienradar.py:65
+msgid "Weather station Zeeplatform K13"
+msgstr "Weerstation Zeeplatform K13"
+
+#: dsmr_weather/models/settings.py:12
+msgid "Track weather"
+msgstr "Houd weergegevens bij"
+
+#: dsmr_weather/models/settings.py:14
+msgid ""
+"Whether we should track and log outside temperatures using an external "
+"service. Current service integrated is Buienradar"
+msgstr ""
+"Geeft aan of we buitentemperaturen meten via een externe dienst, en ze "
+"bijhouden. Huidig gebruikte dienst is Buienradar"
+
+#: dsmr_weather/models/settings.py:21
+msgid "Buienradar weather station"
+msgstr "Buienradar weerstation"
+
+#: dsmr_weather/models/settings.py:23
+msgid ""
+"The weather station used to measure and log outside temperatures. Choose one "
+"nearby. See http://www.buienradar.nl/weerkaarten/temperatuur for a map of "
+"all locations."
+msgstr ""
+"Het weerstation dat ebruikt wordt om buitentemperaturen te meten en op te "
+"slaan. Kies een locatie zo dicht mogelijk bij huis. Zie http://www."
+"buienradar.nl/weerkaarten/temperatuur voor een kaart van alle locaties."
+
+#: dsmr_weather/models/settings.py:29
+msgid "Weather configuration"
+msgstr "Weergegevensconfiguratie"
+
+#: dsmr_weather/models/statistics.py:11
+msgid "Temperature (in ℃)"
+msgstr "Temperatuur (in ℃)"
+
+#: dsmrreader/config/base.py:136
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: dsmrreader/config/base.py:135
+#: dsmrreader/config/base.py:137
 msgid "English"
 msgstr "Engels"
 
