@@ -89,7 +89,6 @@ def compact(dsmr_reading, group_by_minute=False):
             currently_delivered=dsmr_reading.electricity_currently_delivered,
             currently_returned=dsmr_reading.electricity_currently_returned,
         )
-        signals.electricity_consumption_created.send(None, instance=consumption)
     # Grouping by minute requires some distinction and history checking.
     else:
         minute_start = timezone.datetime.combine(
@@ -126,7 +125,6 @@ def compact(dsmr_reading, group_by_minute=False):
                 currently_delivered=grouped_reading['avg_delivered'],
                 currently_returned=grouped_reading['avg_returned'],
             )
-            signals.electricity_consumption_created.send(None, instance=consumption)
 
     # Gas however only get read every hour, so we should check
     # for any duplicates, as they WILL exist.
