@@ -50,8 +50,8 @@ INSTALLED_APPS = (
     'chartjs',
     'solo.apps.SoloAppConfig',
 
-    'dsmr_stats.apps.DsmrStatsConfig',
-    'dsmr_weather.apps.DsmrWeatherConfig',
+    'dsmr_stats.apps.DsmrStatsAppConfig',
+    'dsmr_weather.apps.DsmrWeatherAppConfig',
 )
 
 MIDDLEWARE_CLASSES = (
