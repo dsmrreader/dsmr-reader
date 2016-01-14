@@ -10,3 +10,8 @@ class TemperatureReading(models.Model):
         decimal_places=1,
         verbose_name=_('Temperature (℃)'),
     )
+
+    def __str__(self):
+        return '{}: {} ℃'.format(
+            self.read_at, self.temperature_celcius
+        )
