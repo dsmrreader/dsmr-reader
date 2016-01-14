@@ -5,7 +5,7 @@ from django.core.management import call_command
 
 class TestRegression(TestCase):
     """ Regression. """
-    fixtures = ['test_dsmrreading.json']
+    fixtures = ['dsmr_stats/test_dsmrreading.json']
 
     def setUp(self):
         self.client = Client()

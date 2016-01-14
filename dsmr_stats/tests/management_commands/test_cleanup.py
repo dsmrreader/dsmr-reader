@@ -8,7 +8,7 @@ from dsmr_stats.models.dsmrreading import DsmrReading
 
 class TestDsmrStatsCleanup(TestCase):
     """ Test 'dsmr_stats_cleanup' management command. """
-    fixtures = ['test_dsmrreading.json']
+    fixtures = ['dsmr_stats/test_dsmrreading.json']
 
     def setUp(self):
         self.assertEqual(DsmrReading.objects.all().count(), 3)

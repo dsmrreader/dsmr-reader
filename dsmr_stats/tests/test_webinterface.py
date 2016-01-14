@@ -7,11 +7,16 @@ from django.core.management import call_command
 
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.note import Note
+from dsmr_weather.models.statistics import TemperatureReading
 
 
 class TestViews(TestCase):
     """ Test whether views render at all. """
-    fixtures = ['test_dsmrreading.json', 'test_note.json', 'EnergySupplierPrice.json']
+    fixtures = [
+        'dsmr_stats/test_dsmrreading.json',
+        'dsmr_stats/test_note.json',
+        'dsmr_stats/EnergySupplierPrice.json'
+    ]
     namespace = 'stats'
 
     def _synchronize_date(self, interval=None):
@@ -31,6 +36,7 @@ class TestViews(TestCase):
         gc.save()
 
         Note.objects.all().update(day=timestamp.date())
+        TemperatureReading.objects.create(read_at=timestamp, degrees_celcius=3.5)
 
     def setUp(self):
         self.client = Client()
@@ -59,6 +65,8 @@ class TestViews(TestCase):
         )
         self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
         self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
+        self.assertGreater(len(json.loads(response.context['temperature_x'])), 0)
+        self.assertGreater(len(json.loads(response.context['temperature_y'])), 0)
         self.assertGreater(response.context['latest_electricity'], 0)
         self.assertEqual(response.context['latest_gas'], 0)
         self.assertIn('consumption', response.context)
