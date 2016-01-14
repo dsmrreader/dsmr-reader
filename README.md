@@ -86,7 +86,7 @@ Running the full Rasbian install? You should check whether you require the [Wolf
 Make sure you have your system running in UTC timezone to prevent weird DST bugs.
 
 #### Database backend ####
-The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **MySQL/MariaDB** or (Option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex as PostgreSQL and is easier to learn. For a project of this size and complexity it doesn't matter anyway. :]
+The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **MySQL/MariaDB** or (Option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex than PostgreSQL. For a project of this size and simplicity it doesn't matter anyway. :]
 
 
 ##### (Option A.) MySQL/MariaDB ####
@@ -158,7 +158,7 @@ Our user also requires dialout permissions. So allow the user to perform a dialo
 
 
 ### Webserver (Nginx), part 1 ###
-We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy application requests to the backend, Supervisor, which we will configure later on.
+We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.
 
 Django will copy all static files to a separate directory, used by Nginx to serve statics. 
 
@@ -335,7 +335,7 @@ Paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/e
 ##    auth_basic_user_file /etc/nginx/htpasswd;
 ``` 
 
-Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login credentials the next time your browser accesses the applciation.
+Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login credentials the next time your browser accesses the application.
 
 
 ## Data preservation & backups
