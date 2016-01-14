@@ -26,6 +26,6 @@ if [ ! -d "$DIRECTORY" ]; then
   mkdir -p $DIRECTORY -m 0700
 fi
 
-# Note: The backup itself is executed by postgres user, but writing the file by root.
+# Note: This command authenticates as the MySQL maintainance user, which should have sufficient permissions by default.
 mysqldump --defaults-file=/etc/mysql/debian.cnf $DATABASE -v --extended-insert --lock-all-tables --hex-blob | gzip --fast > $FILE
 ls -lh $FILE
