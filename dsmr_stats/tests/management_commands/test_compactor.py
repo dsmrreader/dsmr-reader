@@ -36,7 +36,7 @@ class TestDsmrStatsCompactor(TestCase):
         self.assertEqual(ElectricityConsumption.objects.count(), 3)
         self.assertEqual(GasConsumption.objects.count(), 1)
 
-    @mock.patch('dsmrreader.signals.gas_consumption_created.send')
+    @mock.patch('dsmrreader.signals.gas_consumption_created.send_robust')
     def test_consumption_creation_signal(self, signal_mock):
         """ Test outgoing signal communication. """
         self.assertFalse(signal_mock.called)
