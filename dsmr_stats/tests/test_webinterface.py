@@ -65,10 +65,9 @@ class TestViews(TestCase):
         )
         self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
         self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
-        self.assertGreater(len(json.loads(response.context['temperature_x'])), 0)
-        self.assertGreater(len(json.loads(response.context['temperature_y'])), 0)
         self.assertGreater(response.context['latest_electricity'], 0)
         self.assertEqual(response.context['latest_gas'], 0)
+        self.assertFalse(response.context['track_temperature'])
         self.assertIn('consumption', response.context)
 
     def test_history(self):
@@ -80,6 +79,7 @@ class TestViews(TestCase):
         self.assertIn('usage', response.context)
         self.assertIn('notes', response.context['usage'][0])
         self.assertEqual(response.context['usage'][0]['notes'][0], 'Gourmetten')
+        self.assertFalse(response.context['track_temperature'])
 
         self.assertEqual(response.status_code, 200)
 

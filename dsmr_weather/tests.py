@@ -14,7 +14,7 @@ class TestDsmrWeatherServices(TestCase):
     def test_consumption_creation_signal(self, service_mock):
         """ Test incoming signal handling, set in app config. """
         self.assertFalse(service_mock.called)
-        signals.gas_consumption_created.send(None, instance=object())
+        signals.gas_consumption_created.send_robust(None, instance=object())
         self.assertTrue(service_mock.called)
 
     def test_read_weather(self):

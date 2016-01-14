@@ -149,7 +149,7 @@ def compact(dsmr_reading, group_by_minute=False):
             delivered=dsmr_reading.extra_device_delivered,
             currently_delivered=gas_diff
         )
-        signals.gas_consumption_created.send(None, instance=consumption)
+        signals.gas_consumption_created.send_robust(None, instance=consumption)
 
     # The last thing to do is to keep track of other daily statistics.
     electricity_statistics = ElectricityStatistics(
