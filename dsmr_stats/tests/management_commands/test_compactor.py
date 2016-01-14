@@ -1,4 +1,5 @@
 import warnings
+from unittest import mock
 
 from django.core.management import call_command, CommandError
 from django.test import TestCase
@@ -12,7 +13,7 @@ from dsmr_stats.models.settings import StatsSettings
 
 class TestDsmrStatsCompactor(TestCase):
     """ Test 'dsmr_stats_compactor' management command. """
-    fixtures = ['test_dsmrreading.json']
+    fixtures = ['dsmr_stats/test_dsmrreading.json']
 
     def setUp(self):
         self.assertEqual(DsmrReading.objects.all().count(), 3)
@@ -34,6 +35,13 @@ class TestDsmrStatsCompactor(TestCase):
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
         self.assertEqual(ElectricityConsumption.objects.count(), 3)
         self.assertEqual(GasConsumption.objects.count(), 1)
+
+    @mock.patch('dsmrreader.signals.gas_consumption_created.send')
+    def test_consumption_creation_signal(self, signal_mock):
+        """ Test outgoing signal communication. """
+        self.assertFalse(signal_mock.called)
+        call_command('dsmr_stats_compactor')
+        self.assertTrue(signal_mock.called)
 
     def test_grouping(self):
         """ Test grouping per minute, instead of the default 10-second interval. """

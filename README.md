@@ -250,7 +250,7 @@ Create an application superuser. Django will prompt you for a password. Alter us
 
 **OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period), you may run the command below to import them (fixtures). Note that altering prices later won't affect your reading data, because prices are calculated retroactive anyway. 
 
-`./manage.py loaddata dsmr_stats/fixtures/EnergySupplierPrice.json` 
+`./manage.py loaddata dsmr_stats/fixtures/dsmr_stats/EnergySupplierPrice.json` 
 
 ### Webserver (Nginx), part 2 ### 
 Now to back to root/sudo-user to config webserver. Remove the default vhost (if you didn't use it yourself anyway!).
