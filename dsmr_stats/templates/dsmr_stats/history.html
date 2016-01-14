@@ -49,6 +49,19 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Daily average temperature in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in &deg;C)" %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="temperature-chart" width="1000" height="150"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
         {% for consumption in usage %}
             <div class="panel">
                 <header class="panel-heading">
@@ -106,6 +119,7 @@
         		render_cost_chart();
         		render_electricity_chart();
         		render_gas_chart();
+        		render_temperature_chart();
         	});
         	
 		   	function render_cost_chart()
@@ -215,17 +229,44 @@
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data, options);
    			}
+            
+            function render_gas_chart()
+            {
+                var data = {
+                    labels: {{ chart.days|safe }},
+                    datasets: [{
+                        data: {{ chart.gas|safe }},
+                        label: "Gas",                       
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(250,133,0,1)",
+                        pointColor: "rgba(250,133,0,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(150,150,150,1)"
+                    }]
+                };
+    
+                {% verbatim %}
+                var options = {
+                    responsive: true,
+                    animation: false,
+                };
+                {% endverbatim %}
+    
+                var ctx = $("#gas-chart").get(0).getContext("2d");
+                new Chart(ctx).Line(data, options);
+            }
         	
-		   	function render_gas_chart()
+		   	function render_temperature_chart()
 		   	{
 		   		var data = {
 	   				labels: {{ chart.days|safe }},
 	   				datasets: [{
-	   					data: {{ chart.gas|safe }},
+	   					data: {{ chart.average_temperature|safe }},
 	   					label: "Gas",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
-	   					strokeColor: "rgba(250,133,0,1)",
-	   					pointColor: "rgba(250,133,0,1)",
+                        strokeColor: "rgba(35,183,229,1)",
+                        pointColor: "rgba(35,183,229,1)",
 	   					pointStrokeColor: "#fff",
 	   					pointHighlightFill: "#fff",
 	   					pointHighlightStroke: "rgba(150,150,150,1)"
@@ -239,7 +280,7 @@
 	   			};
 	   			{% endverbatim %}
 	
-	   			var ctx = $("#gas-chart").get(0).getContext("2d");
+	   			var ctx = $("#temperature-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data, options);
    			}
 

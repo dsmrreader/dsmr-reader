@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('read_at', models.DateTimeField(unique=True)),
-                ('temperature_celcius', models.DecimalField(decimal_places=1, max_digits=4, verbose_name='Temperature (℃)')),
+                ('degrees_celcius', models.DecimalField(decimal_places=1, max_digits=4, verbose_name='Temperature (℃)')),
             ],
         ),
         migrations.CreateModel(
