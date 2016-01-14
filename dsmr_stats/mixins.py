@@ -4,22 +4,27 @@ import json
 from django.conf import settings
 from django.utils import timezone
 
-from dsmr_stats import models
+from dsmr_stats import models as stats_models
+from dsmr_weather.models.statistics import TemperatureReading
 import dsmr_stats.services
 
 
 class DashboardMixin(object):
     electricity_readings = 60
     gas_readings = 3 * 24
+    temperature_readings = gas_readings
 
     def get_context_data(self, **kwargs):
         context_data = super(DashboardMixin, self).get_context_data(**kwargs)
-        electricity = models.ElectricityConsumption.objects.all().order_by(
+        electricity = stats_models.ElectricityConsumption.objects.all().order_by(
             "-read_at"
         )[0:self.electricity_readings]
-        gas = models.GasConsumption.objects.all().order_by(
+        gas = stats_models.GasConsumption.objects.all().order_by(
             "-read_at"
         )[0:self.gas_readings]
+        temperature = TemperatureReading.objects.all().order_by(
+            "-read_at"
+        )[0:self.temperature_readings]
 
         context_data['electricity_x'] = json.dumps(
             [x.read_at.astimezone(
@@ -29,6 +34,7 @@ class DashboardMixin(object):
         context_data['electricity_y'] = json.dumps(
             [float(x.currently_delivered * 1000) for x in electricity]
         )
+
         context_data['gas_x'] = json.dumps(
             [x.read_at.astimezone(
                 settings.LOCAL_TIME_ZONE
@@ -36,6 +42,15 @@ class DashboardMixin(object):
         )
         context_data['gas_y'] = json.dumps(
             [float(x.currently_delivered) for x in gas]
+        )
+
+        context_data['temperature_x'] = json.dumps(
+            [x.read_at.astimezone(
+                settings.LOCAL_TIME_ZONE
+            ).strftime("%a %H:%M") for x in temperature]
+        )
+        context_data['temperature_y'] = json.dumps(
+            [float(x.degrees_celcius) for x in temperature]
         )
 
         latest_electricity = electricity[0]
@@ -64,7 +79,7 @@ class DashboardMixin(object):
 class ArchiveMixin(object):
     def get_context_data(self, **kwargs):
         context_data = super(ArchiveMixin, self).get_context_data(**kwargs)
-        ec = models.ElectricityConsumption.objects.all().order_by('read_at')[0]
+        ec = stats_models.ElectricityConsumption.objects.all().order_by('read_at')[0]
         daterangepicker_format = '%d-%m-%Y'
         context_data['start_date'] = ec.read_at.astimezone(
             settings.LOCAL_TIME_ZONE
@@ -89,7 +104,7 @@ class HistoryMixin(object):
         CONSUMPTION_FIELDS = (
             'electricity1_cost', 'electricity2_cost', 'gas_cost', 'total_cost',
             'gas', 'electricity1', 'electricity2', 'electricity1_returned',
-            'electricity2_returned'
+            'electricity2_returned', 'average_temperature'
         )
 
         # Summarize stats for the past two weeks.
@@ -127,10 +142,10 @@ class HistoryMixin(object):
 class StatisticsMixin(object):
     def get_context_data(self, **kwargs):
         context_data = super(StatisticsMixin, self).get_context_data(**kwargs)
-        context_data['dsmr_stats'] = models.ElectricityStatistics.objects.all().order_by('-pk')[0]
-        context_data['total_reading_count'] = models.DsmrReading.objects.count()
-        context_data['first_reading'] = models.DsmrReading.objects.all().order_by('pk')[0].timestamp
-        context_data['last_reading'] = models.DsmrReading.objects.all().order_by('-pk')[0].timestamp
+        context_data['dsmr_stats'] = stats_models.ElectricityStatistics.objects.all().order_by('-pk')[0]
+        context_data['total_reading_count'] = stats_models.DsmrReading.objects.count()
+        context_data['first_reading'] = stats_models.DsmrReading.objects.all().order_by('pk')[0].timestamp
+        context_data['last_reading'] = stats_models.DsmrReading.objects.all().order_by('-pk')[0].timestamp
 
         try:
             context_data['consumption'] = dsmr_stats.services.day_consumption(

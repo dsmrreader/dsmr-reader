@@ -14,6 +14,7 @@ from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_stats.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.note import Note
+from dsmr_weather.models.statistics import TemperatureReading
 
 
 def telegram_to_reading(data):
@@ -207,6 +208,9 @@ def day_consumption(day):
     gas_readings = GasConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
+    temperature_readings = TemperatureReading.objects.filter(
+        read_at__gte=day_start, read_at__lt=day_end,
+    ).order_by('read_at')
 
     if not electricity_readings.exists() or not gas_readings.exists():
         raise LookupError("No readings found for: {}".format(day.date()))
@@ -253,6 +257,10 @@ def day_consumption(day):
     consumption['notes'] = Note.objects.filter(
         day=consumption['day']
     ).values_list('description', flat=True)
+
+    consumption['average_temperature'] = temperature_readings.aggregate(
+        avg_temperature=Avg('degrees_celcius'),
+    )['avg_temperature'] or 0
 
     return consumption
 
