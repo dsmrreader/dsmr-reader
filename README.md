@@ -182,7 +182,7 @@ You now should see something similar to `Connected.` and a wall of text and numb
 ### Application code clone ###
 Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user (if not then enter `sudo su - dsmr` again):
 
-`hg clone https://bitbucket.org/dennissiemensma/dsmr-reader`
+`hg clone https://bitbucket.org/dennissiemensma/dsmr-reader -r stable`
 
 
 ### Virtualenv ###
