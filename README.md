@@ -275,10 +275,6 @@ Now we configure [Supervisor](http://supervisord.org/), which is used to run our
 
 `sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/`
 
-**NOTE**: `dsmr_stats_poller.conf` is LEGACY and should be skipped/removed!
-
-`rm /etc/supervisor/conf.d/dsmr_stats_poller.conf`
-
 Login to supervisor management console:
 
 `sudo supervisorctl`
