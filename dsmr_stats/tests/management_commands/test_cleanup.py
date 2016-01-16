@@ -1,12 +1,12 @@
-from django.core.management import call_command
 from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
+from dsmr_stats.tests.mixins import CallCommandStdoutMixin
 from dsmr_stats.models.dsmrreading import DsmrReading
 
 
-class TestDsmrStatsCleanup(TestCase):
+class TestDsmrStatsCleanup(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_stats_cleanup' management command. """
     fixtures = ['dsmr_stats/test_dsmrreading.json']
 
@@ -18,9 +18,9 @@ class TestDsmrStatsCleanup(TestCase):
         self.days_diff = (now - DsmrReading.objects.get(pk=1).timestamp.date()).days
 
     def test_ignore_range(self):
-        call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff + 1)
+        self._call_command_stdout('dsmr_stats_cleanup', no_input=True, days=self.days_diff + 1)
         self.assertEqual(DsmrReading.objects.all().count(), 3)
 
     def test_cleanup(self):
-        call_command('dsmr_stats_cleanup', no_input=True, days=self.days_diff - 1)
+        self._call_command_stdout('dsmr_stats_cleanup', no_input=True, days=self.days_diff - 1)
         self.assertEqual(DsmrReading.objects.all().count(), 0)

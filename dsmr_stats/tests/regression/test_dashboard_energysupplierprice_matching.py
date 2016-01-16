@@ -1,9 +1,10 @@
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
-from django.core.management import call_command
+
+from dsmr_stats.tests.mixins import CallCommandStdoutMixin
 
 
-class TestRegression(TestCase):
+class TestRegression(CallCommandStdoutMixin, TestCase):
     """ Regression. """
     fixtures = ['dsmr_stats/test_dsmrreading.json']
 
@@ -12,7 +13,7 @@ class TestRegression(TestCase):
 
     def test_energysupplierprice_matching_query_does_not_exist(self):
         """ Test whether the dashboard no longer raises as DoesNotExist when prices are omitted. """
-        call_command('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_stats_compactor')
 
         self.client.get(
             reverse('stats:dashboard')
