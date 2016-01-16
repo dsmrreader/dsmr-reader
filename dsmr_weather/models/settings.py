@@ -26,4 +26,5 @@ class WeatherSettings(SingletonModel):
     )
 
     class Meta:
+        default_permissions = tuple()
         verbose_name = _('Weather configuration')

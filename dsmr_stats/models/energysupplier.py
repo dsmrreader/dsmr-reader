@@ -44,6 +44,7 @@ class EnergySupplierPrice(models.Model):
         return self.description or 'Energy Supplier'
 
     class Meta:
+        default_permissions = tuple()
         verbose_name = _('Energy supplier price')
         verbose_name_plural = _('Energy supplier prices')
         unique_together = ('start', 'end')
