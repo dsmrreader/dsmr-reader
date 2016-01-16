@@ -51,7 +51,7 @@ class Command(BaseCommand):
 
     def _cleanup(self, cleanup_date):
         data_to_delete = DsmrReading.objects.filter(timestamp__lt=cleanup_date)
-        print(_('Found {} records to delete'.format(data_to_delete.count())))
+        self.stdout.write(_('Found {} records to delete'.format(data_to_delete.count())))
 
         data_to_delete.delete()
-        print(_('Deleted {} records'.format(data_to_delete.count())))
+        self.stdout.write(_('Deleted {} records'.format(data_to_delete.count())))

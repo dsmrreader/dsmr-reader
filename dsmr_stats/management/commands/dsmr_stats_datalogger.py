@@ -66,7 +66,7 @@ class Command(BaseCommand):
                 pass
 
             # Reflect output to STDOUT for logging and convenience.
-            print(data, end='')
+            self.stdout.write(data, ending='')
 
             buffer += data
 

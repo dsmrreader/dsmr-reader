@@ -3,14 +3,14 @@ import json
 from django.test import TestCase, Client
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-from django.core.management import call_command
 
+from dsmr_stats.tests.mixins import CallCommandStdoutMixin
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.note import Note
 from dsmr_weather.models.statistics import TemperatureReading
 
 
-class TestViews(TestCase):
+class TestViews(CallCommandStdoutMixin, TestCase):
     """ Test whether views render at all. """
     fixtures = [
         'dsmr_stats/test_dsmrreading.json',
@@ -21,7 +21,7 @@ class TestViews(TestCase):
 
     def _synchronize_date(self, interval=None):
         """ Little hack to fake any output for today (moment of test). """
-        call_command('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_stats_compactor')
         ec = ElectricityConsumption.objects.get(pk=1)
         gc = GasConsumption.objects.get(pk=1)
 

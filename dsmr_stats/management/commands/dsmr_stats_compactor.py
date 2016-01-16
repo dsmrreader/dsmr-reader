@@ -64,7 +64,7 @@ class Command(BaseCommand):
         if stats_settings.compactor_grouping_type == StatsSettings.COMPACTOR_GROUPING_BY_MINUTE:
             group_by_minute = True
 
-        print(_('Grouping electricity readings by minute? {}'.format(group_by_minute)))
+        self.stdout.write(_('Grouping electricity readings by minute? {}'.format(group_by_minute)))
 
         try:
             readings = self._fetch(**options)
@@ -79,19 +79,19 @@ class Command(BaseCommand):
     def _purge_and_reset(self):
         """ Purges all consumption data, including statistics, and reverts reading processing. """
         es = ElectricityStatistics.objects.all()
-        print(_('Deleting {} ElectricityStatistics record(s)').format(es.count()))
+        self.stdout.write(_('Deleting {} ElectricityStatistics record(s)').format(es.count()))
         es.delete()
 
         ec = ElectricityConsumption.objects.all()
-        print(_('Deleting {} ElectricityConsumption record(s)').format(ec.count()))
+        self.stdout.write(_('Deleting {} ElectricityConsumption record(s)').format(ec.count()))
         ec.delete()
 
         eg = GasConsumption.objects.all()
-        print(_('Deleting {} GasConsumption record(s)').format(eg.count()))
+        self.stdout.write(_('Deleting {} GasConsumption record(s)').format(eg.count()))
         eg.delete()
 
         dr = DsmrReading.objects.processed()
-        print(_('Resetting {} DsmrReading record(s)').format(dr.count()))
+        self.stdout.write(_('Resetting {} DsmrReading record(s)').format(dr.count()))
         dr.update(processed=False)
 
     def _fetch(self, **options):
@@ -99,18 +99,18 @@ class Command(BaseCommand):
         unprocessed_readings = DsmrReading.objects.filter(
             processed=False, timestamp__lt=timezone.now()
         )
-        print(_('Found {} readings to compact'.format(unprocessed_readings.count())))
+        self.stdout.write(_('Found {} readings to compact'.format(unprocessed_readings.count())))
 
         # Limit result set, as we should compact much faster than new readings
         # being created (~ every 11 seconds).
         max_readings = options['max_readings']
-        print(_('Limiting readings for this run at: {}'.format(max_readings)))
+        self.stdout.write(_('Limiting readings for this run at: {}'.format(max_readings)))
         return unprocessed_readings[0:max_readings]
 
     def _compact(self, readings, group_by_minute):
 
         for current_reading in readings:
-            print(_('Compacting: {}'.format(current_reading)))
+            self.stdout.write(_('Compacting: {}'.format(current_reading)))
             dsmr_stats.services.compact(
                 dsmr_reading=current_reading,
                 group_by_minute=group_by_minute

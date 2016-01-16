@@ -3,13 +3,13 @@ from datetime import datetime
 from decimal import Decimal
 
 import pytz
-from django.core.management import call_command
 from django.test import TestCase
 
+from dsmr_stats.tests.mixins import CallCommandStdoutMixin
 from dsmr_stats.models.dsmrreading import DsmrReading
 
 
-class TestDsmrStatsDatalogger(TestCase):
+class TestDsmrStatsDatalogger(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_stats_datalogger' management command. """
     def _dummy_data(self):
         return [
@@ -61,7 +61,7 @@ class TestDsmrStatsDatalogger(TestCase):
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dummy_data()
 
-        call_command('dsmr_stats_datalogger')
+        self._call_command_stdout('dsmr_stats_datalogger')
 
     def test_reading_creation(self):
         self._poll_reading()
