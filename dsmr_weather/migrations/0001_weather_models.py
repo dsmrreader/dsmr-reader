@@ -3,13 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
-from dsmr_weather.models.settings import WeatherSettings
-
-
-def initial_data(* args, **kwargs):
-    # This persists the model in the database.
-    WeatherSettings.get_solo()
-
 
 class Migration(migrations.Migration):
 
@@ -36,5 +29,4 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Weather configuration',
             },
         ),
-        migrations.RunPython(initial_data),
     ]
