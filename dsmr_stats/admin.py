@@ -19,4 +19,4 @@ class NoteAdmin(admin.ModelAdmin):
 
 @admin.register(StatsSettings)
 class StatsSettingsAdmin(SingletonModelAdmin):
-    list_display = ('compactor_grouping_type', )
+    list_display = ('compactor_grouping_type', 'reverse_dashboard_graphs')
