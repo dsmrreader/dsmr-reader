@@ -9,7 +9,7 @@ from django.db import transaction
 from django.db.models import Avg, Max
 
 from dsmrreader import signals
-from dsmr_stats.models.dsmrreading import DsmrReading
+from dsmr_stats.models.reading import DsmrReading
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_stats.models.energysupplier import EnergySupplierPrice

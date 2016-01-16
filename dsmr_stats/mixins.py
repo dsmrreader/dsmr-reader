@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
-from dsmr_stats.models.dsmrreading import DsmrReading
+from dsmr_stats.models.reading import DsmrReading
 from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.statistics import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
@@ -14,9 +14,9 @@ import dsmr_stats.services
 
 
 class DashboardMixin(object):
-    electricity_readings = 60
-    gas_readings = 3 * 24
-    temperature_readings = gas_readings
+    electricity_max = 60
+    gas_max = 3 * 24
+    temperature_max = gas_max
 
     def get_context_data(self, **kwargs):
         stats_settings = StatsSettings.get_solo()
@@ -26,14 +26,20 @@ class DashboardMixin(object):
         gas = GasConsumption.objects.all().order_by('read_at')
         temperature = TemperatureReading.objects.all().order_by('read_at')
 
+        # User might want to sort things backwards.
         if stats_settings.reverse_dashboard_graphs:
-            electricity = electricity.reverse()
-            gas = gas.reverse()
-            temperature = temperature.reverse()
+            electricity = electricity.reverse()[:self.electricity_max]
+            gas = gas.reverse()[:self.gas_max]
+            temperature = temperature.reverse()[:self.temperature_max]
+        else:
+            # We can't slice using negative offsets, so we should fetch a (quick) count first)
+            electricity_offset = max(0, electricity.count() - self.electricity_max)
+            gas_offset = max(0, gas.count() - self.gas_max)
+            temperature_offset = max(0, temperature.count() - self.temperature_max)
 
-        electricity = electricity[0:self.electricity_readings]
-        gas = gas[0:self.gas_readings]
-        temperature = temperature[0:self.temperature_readings]
+            electricity = electricity[electricity_offset:]
+            gas = gas[gas_offset:]
+            temperature = temperature[temperature_offset:]
 
         context_data['electricity_x'] = json.dumps(
             [x.read_at.astimezone(

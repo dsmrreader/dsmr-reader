@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 from django.utils import timezone
 from django.db import transaction
 
-from dsmr_stats.models.dsmrreading import DsmrReading
+from dsmr_stats.models.reading import DsmrReading
 from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_stats.models.settings import StatsSettings
