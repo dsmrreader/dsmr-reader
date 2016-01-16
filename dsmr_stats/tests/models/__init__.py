@@ -1,1 +1,0 @@
-# Generic model assumptions, preventing any refactoring of models without taking tests into account. 
