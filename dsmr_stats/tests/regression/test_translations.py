@@ -20,7 +20,9 @@ class TestTranslations(CallCommandStdoutMixin, TestCase):
 
     def test_percent_translated(self):
         """ Test whether localization files are 100% translated. """
-        self._call_command_stdout('makemessages', locale=self.locales, no_location=True)
+        self._call_command_stdout(
+            'makemessages', locale=self.locales, no_location=True, no_wrap=True
+        )
 
         for current_locale in self.locales:
             po_file_path = os.path.join(
