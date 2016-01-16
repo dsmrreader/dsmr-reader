@@ -48,6 +48,9 @@ class ElectricityConsumption(models.Model):
             self.__class__.__name__, self.read_at, self.currently_delivered * 1000
         )
 
+    class Meta:
+        default_permissions = tuple()
+
 
 class GasConsumption(models.Model):
     """ Hourly consumption, interpolated on the previous value read the hour before. """
@@ -68,3 +71,6 @@ class GasConsumption(models.Model):
         return '{} | {}: {} m3'.format(
             self.__class__.__name__, self.read_at, self.currently_delivered
         )
+
+    class Meta:
+        default_permissions = tuple()

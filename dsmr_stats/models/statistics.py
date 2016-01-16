@@ -42,3 +42,6 @@ class ElectricityStatistics(models.Model):
                 return False
 
         return True
+
+    class Meta:
+        default_permissions = tuple()

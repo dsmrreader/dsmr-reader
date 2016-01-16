@@ -115,6 +115,7 @@ class DsmrReading(models.Model):
     )
 
     class Meta:
+        default_permissions = tuple()
         ordering = ['timestamp']
 
     def __str__(self):
