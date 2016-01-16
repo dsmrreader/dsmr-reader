@@ -101,7 +101,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-# Django creates migrations based on default language. Therfor we need to force English here.
+# Django creates migrations based on default language. Therefor we need to force English here.
 LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
