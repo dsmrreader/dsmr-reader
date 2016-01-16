@@ -4,7 +4,9 @@ import json
 from django.conf import settings
 from django.utils import timezone
 
-from dsmr_stats import models as stats_models
+from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_stats.models.statistics import ElectricityStatistics
+from dsmr_stats.models.dsmrreading import DsmrReading
 from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.statistics import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
@@ -20,8 +22,8 @@ class DashboardMixin(object):
         stats_settings = StatsSettings.get_solo()
         context_data = super(DashboardMixin, self).get_context_data(**kwargs)
 
-        electricity = stats_models.ElectricityConsumption.objects.all().order_by('read_at')
-        gas = stats_models.GasConsumption.objects.all().order_by('read_at')
+        electricity = ElectricityConsumption.objects.all().order_by('read_at')
+        gas = GasConsumption.objects.all().order_by('read_at')
         temperature = TemperatureReading.objects.all().order_by('read_at')
 
         if stats_settings.reverse_dashboard_graphs:
@@ -63,8 +65,8 @@ class DashboardMixin(object):
                 [float(x.degrees_celcius) for x in temperature]
             )
 
-        latest_electricity = stats_models.ElectricityConsumption.objects.all().order_by('-read_at')[0]
-        latest_gas = stats_models.GasConsumption.objects.all().order_by('-read_at')[0]
+        latest_electricity = ElectricityConsumption.objects.all().order_by('-read_at')[0]
+        latest_gas = GasConsumption.objects.all().order_by('-read_at')[0]
 
         context_data['latest_electricity_read'] = latest_electricity.read_at
         context_data['latest_electricity'] = int(
@@ -140,10 +142,10 @@ class HistoryMixin(object):
 class StatisticsMixin(object):
     def get_context_data(self, **kwargs):
         context_data = super(StatisticsMixin, self).get_context_data(**kwargs)
-        context_data['dsmr_stats'] = stats_models.ElectricityStatistics.objects.all().order_by('-pk')[0]
-        context_data['total_reading_count'] = stats_models.DsmrReading.objects.count()
-        context_data['first_reading'] = stats_models.DsmrReading.objects.all().order_by('pk')[0].timestamp
-        context_data['last_reading'] = stats_models.DsmrReading.objects.all().order_by('-pk')[0].timestamp
+        context_data['dsmr_stats'] = ElectricityStatistics.objects.all().order_by('-pk')[0]
+        context_data['total_reading_count'] = DsmrReading.objects.count()
+        context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0].timestamp
+        context_data['last_reading'] = DsmrReading.objects.all().order_by('-pk')[0].timestamp
 
         try:
             context_data['consumption'] = dsmr_stats.services.day_consumption(

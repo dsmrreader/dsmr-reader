@@ -41,7 +41,7 @@ class Command(BaseCommand):
         try:
             read = input(
                 _('WARNING: This will PERMANENTLY DELETE SOURCE DATA before "{}", still continue?'
-                ' yes/no: ').format(cleanup_date)
+                  ' yes/no: ').format(cleanup_date)
             )
         except KeyboardInterrupt:
             read = None

@@ -133,8 +133,8 @@ STATIC_URL = '/static/'
 
 # Translation files.
 LANGUAGES = (
-  ('nl', _('Dutch')),
-  ('en', _('English')),
+    ('nl', _('Dutch')),
+    ('en', _('English')),
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )

@@ -26,7 +26,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
     def test_processing(self):
         """ Test fixed data parse outcome. """
         # Default is grouping by minute, so make sure to revert that here.
-        stats_settings = StatsSettings.get_solo() 
+        stats_settings = StatsSettings.get_solo()
         stats_settings.compactor_grouping_type = StatsSettings.COMPACTOR_GROUPING_BY_READING
         stats_settings.save()
 

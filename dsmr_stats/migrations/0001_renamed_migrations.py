@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import sys
 
 from django.db import migrations
 
@@ -21,7 +20,7 @@ def check_renamed_migrations(*args, **kwargs):
         current_migration.save(update_fields=['name'])
 
     if migrations_to_rename:
-        print (
+        print(
             'We found legacy migrations which were renamed later on. We fixed it in the database, '
             'but were unable to stop duplicate migrations. Please re-apply migrations again as '
             'these migrations will be marked completed this time and this message remains hidden :]',

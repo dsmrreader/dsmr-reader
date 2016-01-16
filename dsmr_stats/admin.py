@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from solo.admin import SingletonModelAdmin
 
-
 from dsmr_stats.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.note import Note
 from dsmr_stats.models.settings import StatsSettings
