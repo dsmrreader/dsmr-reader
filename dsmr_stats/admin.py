@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from solo.admin import SingletonModelAdmin
 
 
@@ -19,4 +20,8 @@ class NoteAdmin(admin.ModelAdmin):
 
 @admin.register(StatsSettings)
 class StatsSettingsAdmin(SingletonModelAdmin):
-    list_display = ('compactor_grouping_type', )
+    list_display = ('compactor_grouping_type')
+
+
+# Too bad there is no global admin.py, so we'll just disabled Group here.
+admin.site.unregister(Group)
