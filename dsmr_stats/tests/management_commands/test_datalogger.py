@@ -6,7 +6,7 @@ import pytz
 from django.test import TestCase
 
 from dsmr_stats.tests.mixins import CallCommandStdoutMixin
-from dsmr_stats.models.dsmrreading import DsmrReading
+from dsmr_stats.models.reading import DsmrReading
 
 
 class TestDsmrStatsDatalogger(CallCommandStdoutMixin, TestCase):
