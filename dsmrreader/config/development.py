@@ -1,5 +1,3 @@
-import sys
-
 from dsmrreader.config.base import *
 
 
@@ -14,8 +12,5 @@ DATABASES = {
         'CONN_MAX_AGE': 300,
     }
 }
-
-if 'test' in sys.argv or 'test_coverage' in sys.argv:
-    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 CACHES['default']['TIMEOUT'] = 0

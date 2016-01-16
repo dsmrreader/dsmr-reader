@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 21:44+0000\n"
+"POT-Creation-Date: 2016-01-16 16:07+0000\n"
 "PO-Revision-Date: 2016-01-14 22:41+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -18,15 +18,12 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: dsmr_stats/apps.py:7
 msgid "DSMR Statistics"
 msgstr "DSMR Statistieken"
 
-#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:10
 msgid "Cleans up any source data from the poller. PERMANENTLY DELETES DATA!"
 msgstr "Ruimt alle brongegevens van de lezer op. VERWIJDERT DATA PERMANENT"
 
-#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:20
 #, python-format
 msgid ""
 "Any polled source data older than DAYS will be purged (default %(default)s "
@@ -35,12 +32,10 @@ msgstr ""
 "Alle uitgelezen gegevens ouder dan DAGEN wordt verwijderd (standaard "
 "%(default)s dagen)."
 
-#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:28
 msgid "Tells Django to NOT prompt the user for input of any kind."
 msgstr ""
 "Instrueert Django om de gebruiker NIET om welke input dan ook te vragen."
 
-#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:43
 msgid ""
 "WARNING: This will PERMANENTLY DELETE SOURCE DATA before \"{}\", still "
 "continue? yes/no: "
@@ -48,34 +43,29 @@ msgstr ""
 "WAARSCHUWING: Dit VERWIJDERT PERMANENT ALLE BRONDATA van voor \"{}\", alsnog "
 "doorgaan? yes/no: "
 
-#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:54
 msgid "Found {} records to delete"
 msgstr "{} records gevonden om te verwijderen"
 
-#: dsmr_stats/management/commands/dsmr_stats_cleanup.py:57
 msgid "Deleted {} records"
 msgstr "{} records verwijderd"
 
-#: dsmr_stats/management/commands/dsmr_stats_clear_cache.py:7
-msgid "Clears the cache."
+#, fuzzy
+#| msgid "Clears the cache."
+msgid "Clears the entire cache."
 msgstr "Gooit de cache leeg."
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:17
 msgid "Compacts existing DSMR readings into consumption points."
 msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:26
 #, python-format
 msgid "The max number of readings to compact this run (default: %(default)s)"
 msgstr ""
 "Het maximum aantal uitlezingen dat per keer gegroepeerd wordt  (standaard: "
 "%(default)s)"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:33
 msgid "DEPRECATED: Moved to settings in database."
 msgstr "UITGEFASEERD: Instellingen zijn verplaatst naar de database."
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:41
 msgid ""
 "Purges all consumption data (DELETES IT!) and marks all readings as "
 "unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL "
@@ -85,94 +75,69 @@ msgstr ""
 "als onverwerkt. Gebruik dit alleen als je wisselt van "
 "groeperingsnauwkeurigheid EN JE ALLE DSMR-METINGEN NOG HEBT!"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:50
 msgid "Purge & reset completed"
 msgstr "Verwijdering & reset uitgevoerd"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:56
 msgid ""
 "group_by_minute argument is DEPRECATED and moved to the database settings"
 msgstr ""
 "Het group_by_minute argument is UITGEFASEERD en verplaatst naar de "
 "instellingen in de database"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:67
 msgid "Grouping electricity readings by minute? {}"
 msgstr "Groepeer alle elektriciteitsuitlezingen per minuut? {}"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:82
 msgid "Deleting {} ElectricityStatistics record(s)"
 msgstr "{} elektriciteitsstatistiek(en) verwijderd"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:86
 msgid "Deleting {} ElectricityConsumption record(s)"
 msgstr "{} elektriciteitsconsumptie record(s) verwijderd"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:90
 msgid "Deleting {} GasConsumption record(s)"
 msgstr "{} gasconsumptie record(s) verwijderd"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:94
 msgid "Resetting {} DsmrReading record(s)"
 msgstr "{} DSMR uitlezingen gereset"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:102
 msgid "Found {} readings to compact"
 msgstr "{} uitlezingen gevonden om samen te voegen"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:107
 msgid "Limiting readings for this run at: {}"
 msgstr "Aantal uitlezingen voor deze batch beperkt tot: {}"
 
-#: dsmr_stats/management/commands/dsmr_stats_compactor.py:113
 msgid "Compacting: {}"
 msgstr "Samenvoegen: {}"
 
-#: dsmr_stats/management/commands/dsmr_stats_datalogger.py:9
-#: dsmr_stats/management/commands/dsmr_stats_poller.py:9
 msgid "Polls the serial port for DSMR telegram and performs a reading."
 msgstr "Controleert de seriele poort voor DSMR-gegevens en leest deze uit."
 
-#: dsmr_stats/management/commands/dsmr_stats_datalogger.py:18
-#: dsmr_stats/management/commands/dsmr_stats_poller.py:18
 #, python-format
 msgid "COM-port connected to Smartmeter (default: %(default)s)"
 msgstr ""
 "COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
 
-#: dsmr_stats/management/commands/dsmr_stats_poller.py:24
-msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
-msgstr ""
-"dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft "
-"dsmr_stats_datalogger"
-
-#: dsmr_stats/models/consumption.py:11 dsmr_stats/models/dsmrreading.py:45
 msgid "Meter Reading electricity delivered to client (low tariff) in 0,001 kWh"
 msgstr ""
 "Meterstand van verbruikte elektriciteit (laagtarief) in stappen van 1 Watt "
 "uur"
 
-#: dsmr_stats/models/consumption.py:16 dsmr_stats/models/dsmrreading.py:50
 msgid "Meter Reading electricity delivered by client (low tariff) in 0,001 kWh"
 msgstr ""
 "Meterstand van teruggeleverde elektriciteit (laagtarief) in stappen van 1 "
 "Watt uur"
 
-#: dsmr_stats/models/consumption.py:21 dsmr_stats/models/dsmrreading.py:55
 msgid ""
 "Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"
 msgstr ""
 "Meterstand van verbruikte elektriciteit (hoogtarief) in stappen van 1 Watt "
 "uur"
 
-#: dsmr_stats/models/consumption.py:26 dsmr_stats/models/dsmrreading.py:60
 msgid ""
 "Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"
 msgstr ""
 "Meterstand van teruggeleverde elektriciteit (hoogtarief) in stappen van 1 "
 "Watt uur"
 
-#: dsmr_stats/models/consumption.py:30 dsmr_stats/models/dsmrreading.py:64
 msgid ""
 "Tariff indicator electricity. The tariff indicator can be used to switch "
 "tariff dependent loads e.g boilers. This is responsibility of the P1 user. "
@@ -184,568 +149,407 @@ msgstr ""
 "voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor "
 "daltarief en tariefcode 2 voor hoogtarief."
 
-#: dsmr_stats/models/consumption.py:38 dsmr_stats/models/dsmrreading.py:72
 msgid "Actual electricity power delivered (+P) in 1 Watt resolution"
 msgstr "Daadwerkelijk geleverde elektriciteit geleverd (-P) in 1 Watt stappen"
 
-#: dsmr_stats/models/consumption.py:43 dsmr_stats/models/dsmrreading.py:77
 msgid "Actual electricity power received (-P) in 1 Watt resolution"
 msgstr "Daadwerkelijk geleverde elektriciteit ontvangen (-P) in 1 Watt stappen"
 
-#: dsmr_stats/models/consumption.py:58 dsmr_stats/models/dsmrreading.py:109
 msgid "Last hourly value delivered to client"
 msgstr "Waarde wat er vorig uur is geleverd aan client"
 
-#: dsmr_stats/models/consumption.py:64
 msgid "Actual value delivered to client, since the last hour"
 msgstr "Daadwerkelijke waarde geleverd aan client, vanaf het vorige uur"
 
-#: dsmr_stats/models/dsmrreading.py:80 dsmr_stats/models/statistics.py:9
-#: dsmr_stats/templates/dsmr_stats/statistics.html:87
 msgid "Number of power failures in any phases"
 msgstr "Aantal stroomstoringen in alle fases"
 
-#: dsmr_stats/models/dsmrreading.py:83 dsmr_stats/models/statistics.py:12
-#: dsmr_stats/templates/dsmr_stats/statistics.html:91
 msgid "Number of long power failures in any phase"
 msgstr "Aantal langdurige stroomstoringen in alle fases"
 
-#: dsmr_stats/models/dsmrreading.py:86 dsmr_stats/models/statistics.py:15
-#: dsmr_stats/templates/dsmr_stats/statistics.html:95
 msgid "Number of voltage sags/dips in phase L1"
 msgstr "Aantal spanningsdippen in fase L1"
 
-#: dsmr_stats/models/dsmrreading.py:89 dsmr_stats/models/statistics.py:18
-#: dsmr_stats/templates/dsmr_stats/statistics.html:99
 msgid "Number of voltage sags/dips in phase L2 (polyphase meters only)"
 msgstr ""
 "Aantal spanningsdippen in fase L2 (alleen voor meters met meerdere fasen)"
 
-#: dsmr_stats/models/dsmrreading.py:92 dsmr_stats/models/statistics.py:21
-#: dsmr_stats/templates/dsmr_stats/statistics.html:103
 msgid "Number of voltage sags/dips in phase L3 (polyphase meters only)"
 msgstr ""
 "Aantal spanningsdippen in fase L3 (alleen voor meters met meerdere fasen)"
 
-#: dsmr_stats/models/dsmrreading.py:95 dsmr_stats/models/statistics.py:24
-#: dsmr_stats/templates/dsmr_stats/statistics.html:107
 msgid "Number of voltage swells in phase L1"
 msgstr "Aantal spanningspieken in fase L1"
 
-#: dsmr_stats/models/dsmrreading.py:98 dsmr_stats/models/statistics.py:27
-#: dsmr_stats/templates/dsmr_stats/statistics.html:111
 msgid "Number of voltage swells in phase L2 (polyphase meters only)"
 msgstr ""
 "Aantal spanningspieken in fase L2 (alleen voor meters met meerdere fasen)"
 
-#: dsmr_stats/models/dsmrreading.py:101 dsmr_stats/models/statistics.py:30
-#: dsmr_stats/templates/dsmr_stats/statistics.html:115
 msgid "Number of voltage swells in phase L3 (polyphase meters only)"
 msgstr ""
 "Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen)"
 
-#: dsmr_stats/models/dsmrreading.py:104
 msgid "Last hourly reading timestamp"
 msgstr "Tijdstip van laatste uitlezing"
 
-#: dsmr_stats/models/dsmrreading.py:114
 msgid "Whether this reading has been processed for merging into statistics"
 msgstr ""
 "Geeft aan of deze uitlezing al verwerkt is in het samenvoegen van "
 "statistieken"
 
-#: dsmr_stats/models/energysupplier.py:24
 msgid "Start"
 msgstr "Start"
 
-#: dsmr_stats/models/energysupplier.py:24
 msgid "Contract start"
 msgstr "Contract start"
 
-#: dsmr_stats/models/energysupplier.py:27
 msgid "End"
 msgstr "Einde"
 
-#: dsmr_stats/models/energysupplier.py:27
 msgid "Contract end"
 msgstr "Contract einde"
 
-#: dsmr_stats/models/energysupplier.py:30 dsmr_stats/models/note.py:8
 msgid "Description"
 msgstr "Omschrijving"
 
-#: dsmr_stats/models/energysupplier.py:31
 msgid "For your own reference, i.e. the name of your supplier"
 msgstr ""
 "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
 
-#: dsmr_stats/models/energysupplier.py:34
 msgid "Electricity 1 price"
 msgstr "Elektriciteitstarief 1 (laag)"
 
-#: dsmr_stats/models/energysupplier.py:37
 msgid "Electricity 2 price"
 msgstr "Elektriciteitstarief 2 (hoog)"
 
-#: dsmr_stats/models/energysupplier.py:40
 msgid "Gas price"
 msgstr "Gasprijs"
 
-#: dsmr_stats/models/energysupplier.py:47
 msgid "Energy supplier price"
 msgstr "Tarief energieleverancier"
 
-#: dsmr_stats/models/energysupplier.py:48
 msgid "Energy supplier prices"
 msgstr "Tarieven energieleverancier"
 
-#: dsmr_stats/models/note.py:7
 msgid "Day"
 msgstr "Dag"
 
-#: dsmr_stats/models/note.py:11
 msgid "Note"
 msgstr "Notitie"
 
-#: dsmr_stats/models/note.py:12
 msgid "Notes"
 msgstr "Notities"
 
-#: dsmr_stats/models/settings.py:11
 msgid "By reading (every 10 seconds)"
 msgstr "Per meting (elke 10 seconden)"
 
-#: dsmr_stats/models/settings.py:12
 msgid "By minute"
 msgstr "Per minuut"
 
-#: dsmr_stats/models/settings.py:18
 msgid "Compactor grouping type"
 msgstr "Metingen groeperen"
 
-#: dsmr_stats/models/settings.py:19
 msgid ""
 "Electricity readings are read every 10 seconds. We can group those for you."
 msgstr ""
 "Elektriciteitsmetingen vinden elke 10 seconden plaats. We kunnen ze voor je "
 "groeperen."
 
-#: dsmr_stats/models/settings.py:23
+msgid "Reverse dashboard graphs"
+msgstr ""
+
+msgid "Whether graphs are rendered with an reversed X-axis"
+msgstr ""
+
 msgid "Stats configuration"
 msgstr "Statistiekenconfiguratie"
 
-#: dsmr_stats/templates/dsmr_stats/base.html:41
 msgid "Toggle navigation"
 msgstr "Wissel navigatie"
 
-#: dsmr_stats/templates/dsmr_stats/base.html:65
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:6
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:7
 msgid "Dashboard"
 msgstr "Startpagina"
 
-#: dsmr_stats/templates/dsmr_stats/base.html:70
-#: dsmr_stats/templates/dsmr_stats/history.html:5
-#: dsmr_stats/templates/dsmr_stats/history.html:6
 msgid "Recent history"
 msgstr "Recente historie"
 
-#: dsmr_stats/templates/dsmr_stats/base.html:75
-#: dsmr_stats/templates/dsmr_stats/statistics.html:5
-#: dsmr_stats/templates/dsmr_stats/statistics.html:6
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: dsmr_stats/templates/dsmr_stats/base.html:83
 msgid "Settings"
 msgstr "Instellingen"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:20
 msgid "Watt consumed"
 msgstr "Watt verbruikt"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:30
 msgid "Watt returned"
 msgstr "Watt teruggeleverd"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:40
 msgid "m<sup>3</sup> gas consumed"
 msgstr "m<sup>3</sup> gas verbruikt"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:54
-#: dsmr_stats/templates/dsmr_stats/history.html:78
-#: dsmr_stats/templates/dsmr_stats/statistics.html:55
 msgid "Delivered"
 msgstr "Geleverd"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:55
-#: dsmr_stats/templates/dsmr_stats/history.html:79
-#: dsmr_stats/templates/dsmr_stats/statistics.html:56
 msgid "Returned"
 msgstr "Teruggeleverd"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:56
-#: dsmr_stats/templates/dsmr_stats/history.html:80
 msgid "Cost"
 msgstr "Kosten"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:59
-#: dsmr_stats/templates/dsmr_stats/history.html:83
-#: dsmr_stats/templates/dsmr_stats/statistics.html:59
 msgid "Electricity 1 (off-peak)"
 msgstr "Elektriciteit 1 (daltarief)"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:60
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:61
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:66
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:67
-#: dsmr_stats/templates/dsmr_stats/history.html:84
-#: dsmr_stats/templates/dsmr_stats/history.html:85
-#: dsmr_stats/templates/dsmr_stats/history.html:90
-#: dsmr_stats/templates/dsmr_stats/history.html:91
-#: dsmr_stats/templates/dsmr_stats/statistics.html:60
-#: dsmr_stats/templates/dsmr_stats/statistics.html:61
-#: dsmr_stats/templates/dsmr_stats/statistics.html:65
-#: dsmr_stats/templates/dsmr_stats/statistics.html:66
 msgid "kWh"
 msgstr "kWh"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:65
-#: dsmr_stats/templates/dsmr_stats/history.html:89
-#: dsmr_stats/templates/dsmr_stats/statistics.html:64
 msgid "Electricity 2 (peak)"
 msgstr "Elektriciteit 2 (hoogtarief)"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:71
-#: dsmr_stats/templates/dsmr_stats/history.html:95
-#: dsmr_stats/templates/dsmr_stats/statistics.html:146
 msgid "Gas"
 msgstr "Gas"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:72
-#: dsmr_stats/templates/dsmr_stats/history.html:96
-#: dsmr_stats/templates/dsmr_stats/statistics.html:70
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:77
-#: dsmr_stats/templates/dsmr_stats/history.html:101
 msgid "Total"
 msgstr "Totaal"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:92
 msgid "Recent electricity delivered (watt)"
 msgstr "Recent elektriciteitsverbruik  (Watt)"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:105
 msgid "Recent gas delivered (m<sup>3</sup>)"
 msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 
-#: dsmr_stats/templates/dsmr_stats/dashboard.html:118
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:15
 #, python-format
 msgid "Daily cost in the past %(days_ago)s days"
 msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:15
 msgid "(in &euro;)"
 msgstr "(in &euro;)"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:28
 #, python-format
 msgid "Daily electricity usage in the past %(days_ago)s days"
 msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:28
 msgid "(in kWh)"
 msgstr "(in kWh)"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:41
 #, python-format
 msgid "Daily gas usage in the past %(days_ago)s days"
 msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:41
 msgid "(in m<sup>3</sup>)"
 msgstr "(in m<sup>3</sup>)"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:54
 #, python-format
 msgid "Daily average temperature in the past %(days_ago)s days"
 msgstr "Dagelijks temperatuurgemiddelde in de afgelopen %(days_ago)s dagen"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:54
 msgid "(in &deg;C)"
 msgstr "(in &deg;C)"
 
-#: dsmr_stats/templates/dsmr_stats/history.html:77
 msgid "Type"
 msgstr "Soort"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:15
 msgid "DSMR Readings"
 msgstr "DSMR uitlezingen"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:20
 msgid "Last reading"
 msgstr "Laatste uitlezing"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:28
 msgid "First reading"
 msgstr "Eerste uitlezing"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:36
 msgid "Total count"
 msgstr "Totaal aantal"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:49
 msgid "Meter positions"
 msgstr "Meterstanden"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:69
 msgid "Gas "
 msgstr "Gas"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:82
 msgid "Miscellaneous"
 msgstr "Overige"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:129
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:135
 msgid "Unit price"
 msgstr "Prijs per eenheid"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:138
 msgid "Electricity 1"
 msgstr "Elektriciteit 1"
 
-#: dsmr_stats/templates/dsmr_stats/statistics.html:142
 msgid "Electricity 2"
 msgstr "Elektriciteit 2"
 
-#: dsmr_weather/apps.py:9
 msgid "DSMR Weather"
 msgstr "DSMR Weergegevens"
 
-#: dsmr_weather/buienradar.py:14
 msgid "Weather station Arcen"
 msgstr "Weerstation Arcen"
 
-#: dsmr_weather/buienradar.py:15
 msgid "Weather station Arnhem"
 msgstr "Weerstation Arnhem"
 
-#: dsmr_weather/buienradar.py:16
 msgid "Weather station Berkhout"
 msgstr "Weerstation Berkhout"
 
-#: dsmr_weather/buienradar.py:17
 msgid "Weather station Cadzand"
 msgstr "Weerstation Cadzand"
 
-#: dsmr_weather/buienradar.py:18
 msgid "Weather station De Bilt"
 msgstr "Weerstation De Bilt"
 
-#: dsmr_weather/buienradar.py:19
 msgid "Weather station Den Helder"
 msgstr "Weerstation Den Helder"
 
-#: dsmr_weather/buienradar.py:20
 msgid "Weather station Eindhoven"
 msgstr "Weerstation Eindhoven"
 
-#: dsmr_weather/buienradar.py:21
 msgid "Weather station Ell"
 msgstr "Weerstation Ell"
 
-#: dsmr_weather/buienradar.py:22
 msgid "Weather station Euro platform"
 msgstr "Weerstation Euro platform"
 
-#: dsmr_weather/buienradar.py:23
 msgid "Weather station Gilze Rijen"
 msgstr "Weerstation Gilze Rijen"
 
-#: dsmr_weather/buienradar.py:24
 msgid "Weather station Groenlo-Hupsel"
 msgstr "Weerstation Groenlo-Hupsel"
 
-#: dsmr_weather/buienradar.py:25
 msgid "Weather station Groningen"
 msgstr "Weerstation Groningen"
 
-#: dsmr_weather/buienradar.py:26
 msgid "Weather station Hansweert"
 msgstr "Weerstation Hansweert"
 
-#: dsmr_weather/buienradar.py:27
 msgid "Weather station Heino"
 msgstr "Weerstation Heino"
 
-#: dsmr_weather/buienradar.py:28
 msgid "Weather station Herwijnen"
 msgstr "Weerstation Herwijnen"
 
-#: dsmr_weather/buienradar.py:29
 msgid "Weather station Hoek van Holland"
 msgstr "Weerstation Hoek van Holland"
 
-#: dsmr_weather/buienradar.py:30
 msgid "Weather station Hoofdplaat"
 msgstr "Weerstation Hoofdplaat"
 
-#: dsmr_weather/buienradar.py:31
 msgid "Weather station Hoogeveen"
 msgstr "Weerstation Hoogeveen"
 
-#: dsmr_weather/buienradar.py:32
 msgid "Weather station Hoorn Terschelling"
 msgstr "Weerstation Hoorn Terschelling"
 
-#: dsmr_weather/buienradar.py:33
 msgid "Weather station Houtribdijk"
 msgstr "Weerstation Houtribdijk"
 
-#: dsmr_weather/buienradar.py:34
 msgid "Weather station Huibertgat"
 msgstr "Weerstation Huibertgat"
 
-#: dsmr_weather/buienradar.py:35
 msgid "Weather station IJmond"
 msgstr "Weerstation IJmond"
 
-#: dsmr_weather/buienradar.py:36
 msgid "Weather station IJmuiden"
 msgstr "Weerstation IJmuiden"
 
-#: dsmr_weather/buienradar.py:37
 msgid "Weather station Katwijk"
 msgstr "Weerstation Katwijk"
 
-#: dsmr_weather/buienradar.py:38
 msgid "Weather station Lauwersoog"
 msgstr "Weerstation Lauwersoog"
 
-#: dsmr_weather/buienradar.py:39
 msgid "Weather station LE Goeree"
 msgstr "Weerstation LE Goeree"
 
-#: dsmr_weather/buienradar.py:40
 msgid "Weather station Leeuwarden"
 msgstr "Weerstation Leeuwarden"
 
-#: dsmr_weather/buienradar.py:41
 msgid "Weather station Lelystad"
 msgstr "Weerstation Lelystad"
 
-#: dsmr_weather/buienradar.py:42
 msgid "Weather station Lopik-Cabauw"
 msgstr "Weerstation Lopik-Cabauw"
 
-#: dsmr_weather/buienradar.py:43
 msgid "Weather station Maastricht"
 msgstr "Weerstation Maastricht"
 
-#: dsmr_weather/buienradar.py:44
 msgid "Weather station Marknesse"
 msgstr "Weerstation Marknesse"
 
-#: dsmr_weather/buienradar.py:45
 msgid "Weather station Nieuw Beerta"
 msgstr "Weerstation Nieuw Beerta"
 
-#: dsmr_weather/buienradar.py:46
 msgid "Weather station Oosterschelde"
 msgstr "Weerstation Oosterschelde"
 
-#: dsmr_weather/buienradar.py:47
 msgid "Weather station Rotterdam"
 msgstr "Weerstation Rotterdam"
 
-#: dsmr_weather/buienradar.py:48
 msgid "Weather station Rotterdam Geulhaven"
 msgstr "Weerstation Rotterdam Geulhaven"
 
-#: dsmr_weather/buienradar.py:49
 msgid "Weather station Schaar"
 msgstr "Weerstation Schaar"
 
-#: dsmr_weather/buienradar.py:50
 msgid "Weather station Schiphol"
 msgstr "Weerstation Schiphol"
 
-#: dsmr_weather/buienradar.py:51
 msgid "Weather station Stavenisse"
 msgstr "Weerstation Stavenisse"
 
-#: dsmr_weather/buienradar.py:52
 msgid "Weather station Stavoren"
 msgstr "Weerstation Stavoren"
 
-#: dsmr_weather/buienradar.py:53
 msgid "Weather station Tholen"
 msgstr "Weerstation Tholen"
 
-#: dsmr_weather/buienradar.py:54
 msgid "Weather station Twente"
 msgstr "Weerstation Twente"
 
-#: dsmr_weather/buienradar.py:55
 msgid "Weather station Vlakte aan de Raan"
 msgstr "Weerstation Vlakte aan de Raan"
 
-#: dsmr_weather/buienradar.py:56
 msgid "Weather station Vlieland"
 msgstr "Weerstation Vlieland"
 
-#: dsmr_weather/buienradar.py:57
 msgid "Weather station Vlissingen"
 msgstr "Weerstation Vlissingen"
 
-#: dsmr_weather/buienradar.py:58
 msgid "Weather station Volkel"
 msgstr "Weerstation Volkel"
 
-#: dsmr_weather/buienradar.py:59
 msgid "Weather station Voorschoten"
 msgstr "Weerstation Voorschoten"
 
-#: dsmr_weather/buienradar.py:60
 msgid "Weather station Westdorpe"
 msgstr "Weerstation Westdorpe"
 
-#: dsmr_weather/buienradar.py:61
 msgid "Weather station Wijdenes"
 msgstr "Weerstation Wijdenes"
 
-#: dsmr_weather/buienradar.py:62
 msgid "Weather station Wijk aan Zee"
 msgstr "Weerstation Wijk aan Zee"
 
-#: dsmr_weather/buienradar.py:63
 msgid "Weather station Woensdrecht"
 msgstr "Weerstation Woensdrecht"
 
-#: dsmr_weather/buienradar.py:64
 msgid "Weather station Zeeplatform F-3"
 msgstr "Weerstation Zeeplatform F-3"
 
-#: dsmr_weather/buienradar.py:65
 msgid "Weather station Zeeplatform K13"
 msgstr "Weerstation Zeeplatform K13"
 
-#: dsmr_weather/models/settings.py:12
 msgid "Track weather"
 msgstr "Houd weergegevens bij"
 
-#: dsmr_weather/models/settings.py:14
 msgid ""
 "Whether we should track and log outside temperatures using an external "
 "service. Current service integrated is Buienradar"
@@ -753,11 +557,9 @@ msgstr ""
 "Geeft aan of we buitentemperaturen meten via een externe dienst, en ze "
 "bijhouden. Huidig gebruikte dienst is Buienradar"
 
-#: dsmr_weather/models/settings.py:21
 msgid "Buienradar weather station"
 msgstr "Buienradar weerstation"
 
-#: dsmr_weather/models/settings.py:23
 msgid ""
 "The weather station used to measure and log outside temperatures. Choose one "
 "nearby. See http://www.buienradar.nl/weerkaarten/temperatuur for a map of "
@@ -767,21 +569,22 @@ msgstr ""
 "slaan. Kies een locatie zo dicht mogelijk bij huis. Zie http://www."
 "buienradar.nl/weerkaarten/temperatuur voor een kaart van alle locaties."
 
-#: dsmr_weather/models/settings.py:29
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
-#: dsmr_weather/models/statistics.py:11
 msgid "Temperature (in ℃)"
 msgstr "Temperatuur (in ℃)"
 
-#: dsmrreader/config/base.py:136
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: dsmrreader/config/base.py:137
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
+#~ msgstr ""
+#~ "dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft "
+#~ "dsmr_stats_datalogger"
 
 #~ msgid "Precision of compacting ELECTRICITY readings (default: %(default)s)"
 #~ msgstr "Nauwkeurigheid van elektriciteitsverbruik (standaard: %(default)s)"
