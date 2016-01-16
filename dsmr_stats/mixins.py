@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from dsmr_stats import models as stats_models
+from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.statistics import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 import dsmr_stats.services
@@ -16,16 +17,21 @@ class DashboardMixin(object):
     temperature_readings = gas_readings
 
     def get_context_data(self, **kwargs):
+        stats_settings = StatsSettings.get_solo()
         context_data = super(DashboardMixin, self).get_context_data(**kwargs)
-        electricity = stats_models.ElectricityConsumption.objects.all().order_by(
-            "-read_at"
-        )[0:self.electricity_readings]
-        gas = stats_models.GasConsumption.objects.all().order_by(
-            "-read_at"
-        )[0:self.gas_readings]
-        temperature = TemperatureReading.objects.all().order_by(
-            "-read_at"
-        )[0:self.temperature_readings]
+
+        electricity = stats_models.ElectricityConsumption.objects.all().order_by('read_at')
+        gas = stats_models.GasConsumption.objects.all().order_by('read_at')
+        temperature = TemperatureReading.objects.all().order_by('read_at')
+
+        if stats_settings.reverse_dashboard_graphs:
+            electricity = electricity.reverse()
+            gas = gas.reverse()
+            temperature = temperature.reverse()
+
+        electricity = electricity[0:self.electricity_readings]
+        gas = gas[0:self.gas_readings]
+        temperature = temperature[0:self.temperature_readings]
 
         context_data['electricity_x'] = json.dumps(
             [x.read_at.astimezone(
@@ -57,7 +63,9 @@ class DashboardMixin(object):
                 [float(x.degrees_celcius) for x in temperature]
             )
 
-        latest_electricity = electricity[0]
+        latest_electricity = stats_models.ElectricityConsumption.objects.all().order_by('-read_at')[0]
+        latest_gas = stats_models.GasConsumption.objects.all().order_by('-read_at')[0]
+
         context_data['latest_electricity_read'] = latest_electricity.read_at
         context_data['latest_electricity'] = int(
             latest_electricity.currently_delivered * 1000
@@ -66,7 +74,6 @@ class DashboardMixin(object):
             latest_electricity.currently_returned * 1000
         )
 
-        latest_gas = gas[0]
         context_data['latest_gas_read'] = latest_gas.read_at
         context_data['latest_gas'] = latest_gas.currently_delivered
 
@@ -77,20 +84,6 @@ class DashboardMixin(object):
         except LookupError:
             pass
 
-        return context_data
-
-
-class ArchiveMixin(object):
-    def get_context_data(self, **kwargs):
-        context_data = super(ArchiveMixin, self).get_context_data(**kwargs)
-        ec = stats_models.ElectricityConsumption.objects.all().order_by('read_at')[0]
-        daterangepicker_format = '%d-%m-%Y'
-        context_data['start_date'] = ec.read_at.astimezone(
-            settings.LOCAL_TIME_ZONE
-        ).strftime(daterangepicker_format)
-        context_data['end_date'] = timezone.now().astimezone(
-            settings.LOCAL_TIME_ZONE
-        ).strftime(daterangepicker_format)
         return context_data
 
 
@@ -115,9 +108,9 @@ class HistoryMixin(object):
         # Summarize stats for the past two weeks.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
         dates = (
-            now - timezone.timedelta(days=n) for n in range(
+            now - timezone.timedelta(days=n) for n in reversed(range(
                 self.days_offset, self.days_ago + 1
-            )
+            ))
         )
 
         for current_day in dates:

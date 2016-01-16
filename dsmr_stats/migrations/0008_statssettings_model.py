@@ -3,13 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
-from dsmr_stats.models.settings import StatsSettings
-
-
-def initial_data(* args, **kwargs):
-    # This persists the model in the database.
-    StatsSettings.get_solo()
-
 
 class Migration(migrations.Migration):
 
@@ -28,5 +21,4 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Stats configuration',
             },
         ),
-        migrations.RunPython(initial_data),
     ]

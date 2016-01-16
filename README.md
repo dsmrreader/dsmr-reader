@@ -331,7 +331,7 @@ Paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/e
 ##    auth_basic_user_file /etc/nginx/htpasswd;
 ``` 
 
-Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login credentials the next time your browser accesses the application.
+Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login credentials the next time your browser accesses the application. For more information about this topic, see [the Nginx docs](https://www.nginx.com/resources/admin-guide/restricting-access/).
 
 
 ## Data preservation & backups
