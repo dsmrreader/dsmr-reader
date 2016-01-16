@@ -1,5 +1,16 @@
-# DSMR Reader #
+# Table of content #
+* Intro
+    * Usage
+    * Dependencies & requirements
+* Installation guide
+    * (Optional) Operating System Installation
+    * Application Installation
+    * Data preservation & backups
+* Feedback
+* Licence
+* Credits
 
+# Intro #
 Installation instructions are based on the Raspbian distro for RaspberryPi, but it should generally work on every Debian based system, as long as the dependencies & requirements are met.
 
 ## Usage ##
@@ -16,16 +27,16 @@ I advise to only use this tool when you have basic Linux knowledge or have any i
 * Smart meter P1 data cable *(can be purchased online and they cost around 20 Euro's each)*.
 * Basic Linux knowledge for deployment, debugging and troubleshooting. 
 
-## Installation guide #
+# Installation guide #
 The installation guide may take about half an hour, but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
 You should already have an OS running on your RaspberryPi. If not, below is a brief hint for getting things started. Skip the OS chapter below if you already have your RaspberryPi up and running. Just continue directly to the "Application Installation" chapter.
 
-### (Optional) Operating System Installation ###
-#### Raspbian ####
+## (Optional) Operating System Installation ##
+### Raspbian ###
 Either use the headless version of Raspbian, [netinstall](https://github.com/debian-pi/raspbian-ua-netinst), or the [full Raspbian image](https://www.raspbian.org/RaspbianImages), with graphics stack. You don't need the latter when you intend to only use your decive for DSMR readings.
 
-#### Init ####
+### Init ###
 Power on RaspberryPi and connect using SSH:
 
 `ssh pi@IP-address` (full image)
@@ -35,7 +46,7 @@ or
 `ssh root@IP-address` (headless)
 
 
-##### IPv6 #####
+#### IPv6 ####
 Disable IPv6 if you get timeouts or other weird networking stuff related to IPv6.
 
 ```
@@ -44,13 +55,13 @@ echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf
 ```
 
-##### Sudo #####
+#### Sudo ####
 This will allow you to use sudo: `apt-get install sudo`  *(headless only)*
 
-##### Text editor #####
+#### Text editor ####
 My favorite is VIM, but just choose your own: `sudo apt-get install vim`
 
-##### Updates #####
+#### Updates ####
 Make sure you are up to date:
 
 ```
@@ -60,7 +71,7 @@ sudo apt-get upgrade
 ```
 
 
-##### raspi-config #####
+#### raspi-config ####
 Install this RaspberryPi utility: `sudo apt-get install raspi-config`
 
 Now run it: `raspi-config`
@@ -74,7 +85,7 @@ You should also install any locales you require. Go to **5. Internationalisation
 
 If the utility prompts you to reboot, choose yes to reflect the changes you made.
 
-##### Extra's #####
+#### Extra's ####
 Running the headless Raspbian netinstall? You might like Bash completion. Check [this article](https://www.howtoforge.com/how-to-add-bash-completion-in-debian) how to do this.
 
 Running the full Rasbian install? You should check whether you require the [Wolfram Engine](http://www.wolfram.com/raspberry-pi/), which is installed by default, but takes about a whopping 500 MB disk space! Run `sudo apt-get purge wolfram-engine` if you don't need it.
@@ -82,14 +93,14 @@ Running the full Rasbian install? You should check whether you require the [Wolf
 ----
 
 
-### Application Installation ###
+## Application Installation ##
 Make sure you have your system running in UTC timezone to prevent weird DST bugs.
 
-#### Database backend ####
+### Database backend ###
 The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **MySQL/MariaDB** or (Option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex than PostgreSQL. For a project of this size and simplicity it doesn't matter anyway. :]
 
 
-##### (Option A.) MySQL/MariaDB ####
+#### (Option A.) MySQL/MariaDB ###
 Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. **libmysqlclient-dev** is required for the virtualenv installation later in this guide..
 
 `sudo apt-get install mariadb-server-10.0 libmysqlclient-dev` 
@@ -110,7 +121,7 @@ Flush privileges to activate them:
 
 `mysqladmin reload`
 
-##### (Option B.) PostgreSQL
+#### (Option B.) PostgreSQL ###
 
 Install PostgreSQL. **postgresql-server-dev-all** is required for the virtualenv installation later in this guide.
 
@@ -135,7 +146,7 @@ Set password for user:
 `sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"`
 
 
-#### Dependencies ####
+### Dependencies ###
 Misc utils, required for webserver, application server and cloning the application code from the repository.
 
 `sudo apt-get install nginx supervisor mercurial python3 python3-pip python3-virtualenv virtualenvwrapper`
@@ -145,7 +156,7 @@ Install `cu`. The CU program allows easy testing for your DSMR serial connection
 `sudo apt-get install cu`
 
 
-#### Application user ####
+### Application user ###
 The application runs as `dsmr` user by default. This way we do not have to run the application as `root`, which is a bad practice anyway. 
 
 Create user with homedir. The application code and virtualenv resides in this directory as well:
@@ -166,7 +177,7 @@ Django will copy all static files to a separate directory, used by Nginx to serv
 
 `sudo chown -R dsmr:dsmr /var/www/dsmrreader/`
 
-### This first reading ###
+### Your first reading ###
 
 Now login as the user we just created, to perform our very first reading!
 
@@ -312,7 +323,7 @@ In this example the ip address is `192.168.178.150`.
 
 Everything OK? Congratulations, this was the hardest part and now the fun begins by monitoring your electricity (and possible gas) consumption! :]
 
-## Reboot test
+### Reboot test#
 
 You might want to `reboot` and check whether everything comes up automatically again with `sudo supervisorctl status`. This will make sure your data logger 'survives' any power surges.
 
@@ -342,11 +353,11 @@ You can find an example in `dsmrreader/provisioning/postgresql/psql-backup.sh` f
 Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) later, allowing you to choose your own retention (for all the source readings).
 
 
-## Feedback ##
+# Feedback #
 All feedback and input is, as always, very much appreciated! Please send an e-mail to dsmr (at) dennissiemensma (dot) nl. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
 
 
-## Licence ##
+# Licence #
 Also included in the **LICENCE** file:
 
 > The MIT License (MIT)
@@ -371,7 +382,7 @@ Also included in the **LICENCE** file:
 > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 > SOFTWARE.
 
-## Credits ##
+# Credits #
 Software listed below. Please note and respect their licences as well, if any.
 
 
