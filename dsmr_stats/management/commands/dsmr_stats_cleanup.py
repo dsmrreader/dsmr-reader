@@ -1,9 +1,11 @@
+import warnings
+
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.utils import timezone
 
-from dsmr_stats.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading
 
 
 class Command(BaseCommand):
@@ -50,6 +52,11 @@ class Command(BaseCommand):
             raise CommandError('Aborted by user')
 
     def _cleanup(self, cleanup_date):
+        warnings.showwarning(
+            _('dsmr_stats_cleanup is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger'),
+            DeprecationWarning, __file__, 0
+        )
+
         data_to_delete = DsmrReading.objects.filter(timestamp__lt=cleanup_date)
         self.stdout.write(_('Found {} records to delete'.format(data_to_delete.count())))
 
