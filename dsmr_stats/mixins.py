@@ -4,7 +4,7 @@ import json
 from django.conf import settings
 from django.utils import timezone
 
-from dsmr_stats.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_stats.models.reading import DsmrReading
 from dsmr_stats.models.settings import StatsSettings

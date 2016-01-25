@@ -3,5 +3,5 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class AppConfig(AppConfig):
-    name = 'dsmr_stats'
-    verbose_name = _('Statistics')
+    name = 'dsmr_datalogger'
+    verbose_name = _('Datalogger')
