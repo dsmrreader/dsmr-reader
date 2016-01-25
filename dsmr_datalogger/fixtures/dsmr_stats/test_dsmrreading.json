@@ -21,7 +21,7 @@
         "voltage_sag_count_l2": 2,
         "electricity_delivered_2": "525.500"
     },
-    "model": "dsmr_stats.dsmrreading",
+    "model": "dsmr_datalogger.dsmrreading",
     "pk": 1
 },
 {
@@ -46,7 +46,7 @@
         "voltage_sag_count_l2": 2,
         "electricity_delivered_2": "527.500"
     },
-    "model": "dsmr_stats.dsmrreading",
+    "model": "dsmr_datalogger.dsmrreading",
     "pk": 2
 },
 {
@@ -71,7 +71,7 @@
         "voltage_sag_count_l2": 2,
         "electricity_delivered_2": "528.500"
     },
-    "model": "dsmr_stats.dsmrreading",
+    "model": "dsmr_datalogger.dsmrreading",
     "pk": 3
 }
 ]

@@ -8,20 +8,30 @@ from django.db import transaction
 from django.db.models import Avg, Max
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_stats.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.statistics import TemperatureReading
+import dsmr_consumption.signals
+
+
+def compact_all():
+    """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
+    for current_reading in DsmrReading.objects.unprocessed()[0:128]:
+        compact(dsmr_reading=current_reading)
 
 
 @transaction.atomic
-def compact(dsmr_reading, group_by_minute=False):
+def compact(dsmr_reading):
     """
     Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute.
     """
+    grouping_type = ConsumptionSettings.get_solo().compactor_grouping_type
+
     # Electricity should be unique, because it's the reading with the lowest interval anyway.
-    if not group_by_minute:
+    if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
         consumption = ElectricityConsumption.objects.create(
             read_at=dsmr_reading.timestamp,
             delivered_1=dsmr_reading.electricity_delivered_1,
@@ -31,6 +41,9 @@ def compact(dsmr_reading, group_by_minute=False):
             tariff=dsmr_reading.electricity_tariff,
             currently_delivered=dsmr_reading.electricity_currently_delivered,
             currently_returned=dsmr_reading.electricity_currently_returned,
+        )
+        dsmr_consumption.signals.electricity_consumption_created.send_robust(
+            None, instance=consumption
         )
     # Grouping by minute requires some distinction and history checking.
     else:
@@ -68,6 +81,9 @@ def compact(dsmr_reading, group_by_minute=False):
                 currently_delivered=grouped_reading['avg_delivered'],
                 currently_returned=grouped_reading['avg_returned'],
             )
+            dsmr_consumption.signals.electricity_consumption_created.send_robust(
+                None, instance=consumption
+            )
 
     # Gas however only get read every hour, so we should check
     # for any duplicates, as they WILL exist.
@@ -92,7 +108,7 @@ def compact(dsmr_reading, group_by_minute=False):
             delivered=dsmr_reading.extra_device_delivered,
             currently_delivered=gas_diff
         )
-        signals.gas_consumption_created.send_robust(None, instance=consumption)
+        dsmr_consumption.signals.gas_consumption_created.send_robust(None, instance=consumption)
 
     # The last thing to do is to keep track of other daily statistics.
     electricity_statistics = ElectricityStatistics(
