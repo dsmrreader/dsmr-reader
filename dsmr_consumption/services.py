@@ -127,8 +127,13 @@ def compact(dsmr_reading):
         existing_statistics = ElectricityStatistics.objects.get(
             day=electricity_statistics.day
         )
-    except:
-        electricity_statistics.save()
+    except ElectricityStatistics.DoesNotExist:
+        # This willsucceed once every day.
+        statistics = electricity_statistics.save()
+
+        dsmr_consumption.signals.electricity_statistics_created.send_robust(
+            None, instance=statistics
+        )
     else:
         # Already exists, but only save if dirty.
         if not existing_statistics.is_equal(electricity_statistics):

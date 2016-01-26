@@ -13,7 +13,7 @@ from dsmr_stats.models.settings import StatsSettings
 
 
 class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
-    """ Test 'dsmr_stats_compactor' management command. """
+    """ Test 'dsmr_backend' management command. """
     fixtures = ['dsmr_stats/test_dsmrreading.json']
 
     def setUp(self):
@@ -30,7 +30,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
         stats_settings.compactor_grouping_type = StatsSettings.COMPACTOR_GROUPING_BY_READING
         stats_settings.save()
 
-        self._call_command_stdout('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_backend')
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
@@ -41,7 +41,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
     def test_consumption_creation_signal(self, signal_mock):
         """ Test outgoing signal communication. """
         self.assertFalse(signal_mock.called)
-        self._call_command_stdout('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_backend')
         self.assertTrue(signal_mock.called)
 
     def test_grouping(self):
@@ -51,7 +51,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
         dr.timestamp = timezone.now()
         dr.save()
 
-        self._call_command_stdout('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_backend')
 
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
@@ -64,7 +64,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
             warnings.simplefilter("always")
 
             try:
-                self._call_command_stdout('dsmr_stats_compactor', group_by_minute=True)
+                self._call_command_stdout('dsmr_backend', group_by_minute=True)
             except RuntimeError:
                 pass
 
@@ -81,7 +81,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(GasConsumption.objects.exists())
 
-        self._call_command_stdout('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_backend')
 
         self.assertTrue(ElectricityStatistics.objects.exists())
         self.assertTrue(ElectricityConsumption.objects.exists())
@@ -89,14 +89,14 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
 
     def test_purge(self):
         """ Test global consumption reset. """
-        self._call_command_stdout('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_backend')
         self.assertTrue(ElectricityStatistics.objects.exists())
         self.assertTrue(ElectricityConsumption.objects.exists())
         self.assertTrue(GasConsumption.objects.exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
 
         with self.assertRaises(CommandError):
-            self._call_command_stdout('dsmr_stats_compactor', purge=True)
+            self._call_command_stdout('dsmr_backend', purge=True)
 
         self.assertFalse(ElectricityStatistics.objects.exists())
         self.assertFalse(ElectricityConsumption.objects.exists())

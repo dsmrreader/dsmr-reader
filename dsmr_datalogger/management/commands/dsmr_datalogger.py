@@ -9,4 +9,8 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         telegram = dsmr_datalogger.services.read_telegram()
+
+        # Reflect output to STDOUT for logging and convenience.
+        self.stdout.write(telegram)
+
         dsmr_datalogger.services.telegram_to_reading(data=telegram)

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from dsmr_stats.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading
 
 
 class TestDsmrReading(TestCase):

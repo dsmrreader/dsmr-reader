@@ -6,7 +6,7 @@ import pytz
 from django.test import TestCase
 
 from dsmr_stats.tests.mixins import CallCommandStdoutMixin
-from dsmr_stats.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading
 
 
 class TestDsmrStatsDatalogger(CallCommandStdoutMixin, TestCase):
@@ -61,13 +61,15 @@ class TestDsmrStatsDatalogger(CallCommandStdoutMixin, TestCase):
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dummy_data()
 
-        self._call_command_stdout('dsmr_stats_datalogger')
+        self._call_command_stdout('dsmr_datalogger')
 
     def test_reading_creation(self):
+        """ Test whether dsmr_datalogger insert a reading. """
         self._poll_reading()
         self.assertGreater(DsmrReading.objects.all().count(), 0)
 
     def test_reading_values(self):
+        """ Test whether dsmr_datalogger reads the correct values. """
         self._poll_reading()
         reading = DsmrReading.objects.get(pk=1)
         self.assertEqual(
