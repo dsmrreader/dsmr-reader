@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'dsmr_weather.apps.AppConfig',
     'dsmr_stats.apps.AppConfig',
     'dsmr_backend.apps.AppConfig',
+    'dsmr_frontend.apps.AppConfig',
 )
 
 MIDDLEWARE_CLASSES = (

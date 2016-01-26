@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
-from dsmr_stats.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.statistics import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings

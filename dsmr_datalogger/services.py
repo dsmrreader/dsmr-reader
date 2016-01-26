@@ -44,9 +44,6 @@ def read_telegram():
         except TypeError:
             pass
 
-        # Reflect output to STDOUT for logging and convenience.
-        print(data)
-
         buffer += data
 
         # Telegrams start with '/' and ends with '!'. So we will use them as delimiters.

@@ -5,6 +5,16 @@ from solo.models import SingletonModel
 
 class DataloggerSettings(SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    track = models.BooleanField(
+        default=True,
+        verbose_name=_('Poll P1 port'),
+        help_text=_(
+            'Whether we should track the P1 port on your smartmeter. Almost every feature inside '
+            'this project requires this to be enabled. However, it might be disabled temporarily '
+            'due to technical reasons, such as data migrations.'
+        )
+    )
+
     baud_rate = models.IntegerField(
         default=115200,
         verbose_name=_('BAUD rate'),
