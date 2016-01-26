@@ -296,18 +296,18 @@ Enter these commands (after the >). It will ask Supervisor to recheck its config
 
 > supervisor> `update`
 
-Three processed should be started or running. Make sure they don't end up in **ERROR** state, so refresh with 'status' a few times. `dsmr_stats_compactor` and `dsmr_stats_datalogger` will restart every time. This is intended behaviour. `dsmr_webinterface` however should keep running.  
+Three processed should be started or running. Make sure they don't end up in **ERROR** state, so refresh with 'status' a few times. `dsmr_backend` and `dsmr_datalogger` will restart every time. This is intended behaviour. `dsmr_webinterface` however should keep running.  
 > supervisor> `status`
 
 Example of everything running well:
 
-    dsmr_stats_compactor             STARTING
-    dsmr_stats_datalogger            RUNNING
+    dsmr_backend                     STARTING
+    dsmr_datalogger                  RUNNING
     dsmr_webinterface                RUNNING
  
 Want to check whether data logger works? Just tail log in supervisor with:
 
-> supervisor> `tail -f dsmr_stats_datalogger`
+> supervisor> `tail -f dsmr_datalogger`
 
 You should see similar output as the CU-command used earlier on the command line.
 Want to quit supervisor? `CTRL + C` to stop tail and `CTRL + D` once to exit supervisor command line.

@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from dsmr_stats.tests.mixins import CallCommandStdoutMixin
-from dsmr_stats.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading
 
 
 class TestDsmrStatsCleanup(CallCommandStdoutMixin, TestCase):

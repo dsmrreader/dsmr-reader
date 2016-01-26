@@ -22,7 +22,7 @@ echo " --- Sending an SIGHUP to Gunicorn process to gracefully reload itself (we
 
 echo ""
 echo " --- Clearing cache..."
-./manage.py dsmr_stats_clear_cache
+./manage.py dsmr_frontend_clear_cache
 
 echo ""
 echo " >>> Deployment complete! Please check whether all your Supervisor processes are still up & running! <<<"
