@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-26 18:51+0000\n"
+"POT-Creation-Date: 2016-02-01 23:40+0000\n"
 "PO-Revision-Date: 2016-01-16 17:12+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -53,6 +53,39 @@ msgstr "Waarde wat er vorig uur is geleverd aan client"
 
 msgid "Actual value delivered to client, since the last hour"
 msgstr "Daadwerkelijke waarde geleverd aan client, vanaf het vorige uur"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Contract start"
+msgstr "Contract start"
+
+msgid "End"
+msgstr "Einde"
+
+msgid "Contract end"
+msgstr "Contract einde"
+
+msgid "Description"
+msgstr "Omschrijving"
+
+msgid "For your own reference, i.e. the name of your supplier"
+msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
+
+msgid "Electricity 1 price"
+msgstr "Elektriciteitstarief 1 (laag)"
+
+msgid "Electricity 2 price"
+msgstr "Elektriciteitstarief 2 (hoog)"
+
+msgid "Gas price"
+msgstr "Gasprijs"
+
+msgid "Energy supplier price"
+msgstr "Tarief energieleverancier"
+
+msgid "Energy supplier prices"
+msgstr "Tarieven energieleverancier"
 
 msgid "By reading (every 10 seconds)"
 msgstr "Per meting (elke 10 seconden)"
@@ -107,6 +140,12 @@ msgstr "Tijdstip van laatste uitlezing"
 msgid "Whether this reading has been processed for merging into statistics"
 msgstr "Geeft aan of deze uitlezing al verwerkt is in het samenvoegen van statistieken"
 
+msgid "Poll P1 port"
+msgstr ""
+
+msgid "Whether we should track the P1 port on your smartmeter. Almost every feature inside this project requires this to be enabled. However, it might be disabled temporarily due to technical reasons, such as data migrations."
+msgstr ""
+
 msgid "BAUD rate"
 msgstr ""
 
@@ -126,107 +165,11 @@ msgstr "COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
 msgid "Datalogger configuration"
 msgstr "Weergegevensconfiguratie"
 
-msgid "Statistics"
-msgstr "Statistieken"
-
-msgid "Cleans up any source data from the poller. PERMANENTLY DELETES DATA!"
-msgstr "Ruimt alle brongegevens van de lezer op. VERWIJDERT DATA PERMANENT"
-
-#, python-format
-msgid "Any polled source data older than DAYS will be purged (default %(default)s days)."
-msgstr "Alle uitgelezen gegevens ouder dan DAGEN wordt verwijderd (standaard %(default)s dagen)."
-
-msgid "Tells Django to NOT prompt the user for input of any kind."
-msgstr "Instrueert Django om de gebruiker NIET om welke input dan ook te vragen."
-
-msgid "WARNING: This will PERMANENTLY DELETE SOURCE DATA before \"{}\", still continue? yes/no: "
-msgstr "WAARSCHUWING: Dit VERWIJDERT PERMANENT ALLE BRONDATA van voor \"{}\", alsnog doorgaan? yes/no: "
-
-#, fuzzy
-#| msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
-msgid "dsmr_stats_cleanup is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger"
-msgstr "dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft dsmr_stats_datalogger"
-
-msgid "Found {} records to delete"
-msgstr "{} records gevonden om te verwijderen"
-
-msgid "Deleted {} records"
-msgstr "{} records verwijderd"
+msgid "Frontend"
+msgstr ""
 
 msgid "Clears the entire cache."
 msgstr "Gooit de volledige cache leeg."
-
-msgid "Compacts existing DSMR readings into consumption points."
-msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
-
-#, python-format
-msgid "The max number of readings to compact this run (default: %(default)s)"
-msgstr "Het maximum aantal uitlezingen dat per keer gegroepeerd wordt  (standaard: %(default)s)"
-
-msgid "DEPRECATED: Moved to settings in database."
-msgstr "UITGEFASEERD: Instellingen zijn verplaatst naar de database."
-
-msgid "Purges all consumption data (DELETES IT!) and marks all readings as unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL HISTORIC READINGS!"
-msgstr "Wist alle verbruiksgegevens (VERWIJDERT HET!) en markeert alle uitlezingen als onverwerkt. Gebruik dit alleen als je wisselt van groeperingsnauwkeurigheid EN JE ALLE DSMR-METINGEN NOG HEBT!"
-
-#, fuzzy
-#| msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
-msgid "dsmr_stats_compactor is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_backend"
-msgstr "dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft dsmr_stats_datalogger"
-
-msgid "Polls the serial port for DSMR telegram and performs a reading."
-msgstr "Controleert de seriele poort voor DSMR-gegevens en leest deze uit."
-
-#, python-format
-msgid "COM-port connected to Smartmeter (default: %(default)s)"
-msgstr "COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
-
-#, fuzzy
-#| msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
-msgid "dsmr_stats_datalogger is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger"
-msgstr "dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft dsmr_stats_datalogger"
-
-msgid "Start"
-msgstr "Start"
-
-msgid "Contract start"
-msgstr "Contract start"
-
-msgid "End"
-msgstr "Einde"
-
-msgid "Contract end"
-msgstr "Contract einde"
-
-msgid "Description"
-msgstr "Omschrijving"
-
-msgid "For your own reference, i.e. the name of your supplier"
-msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
-
-msgid "Electricity 1 price"
-msgstr "Elektriciteitstarief 1 (laag)"
-
-msgid "Electricity 2 price"
-msgstr "Elektriciteitstarief 2 (hoog)"
-
-msgid "Gas price"
-msgstr "Gasprijs"
-
-msgid "Energy supplier price"
-msgstr "Tarief energieleverancier"
-
-msgid "Energy supplier prices"
-msgstr "Tarieven energieleverancier"
-
-msgid "Day"
-msgstr "Dag"
-
-msgid "Note"
-msgstr "Notitie"
-
-msgid "Notes"
-msgstr "Notities"
 
 msgid "Reverse dashboard graphs"
 msgstr "Keer dashboard-grafieken om"
@@ -234,7 +177,9 @@ msgstr "Keer dashboard-grafieken om"
 msgid "Whether graphs are rendered with an reversed X-axis"
 msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
 
-msgid "Stats configuration"
+#, fuzzy
+#| msgid "Stats configuration"
+msgid "Frontend configuration"
 msgstr "Statistiekenconfiguratie"
 
 msgid "Toggle navigation"
@@ -245,6 +190,9 @@ msgstr "Startpagina"
 
 msgid "Recent history"
 msgstr "Recente historie"
+
+msgid "Statistics"
+msgstr "Statistieken"
 
 msgid "Settings"
 msgstr "Instellingen"
@@ -357,6 +305,48 @@ msgstr "Elektriciteit 1"
 
 msgid "Electricity 2"
 msgstr "Elektriciteit 2"
+
+msgid "Compacts existing DSMR readings into consumption points."
+msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
+
+#, python-format
+msgid "The max number of readings to compact this run (default: %(default)s)"
+msgstr "Het maximum aantal uitlezingen dat per keer gegroepeerd wordt  (standaard: %(default)s)"
+
+msgid "DEPRECATED: Moved to settings in database."
+msgstr "UITGEFASEERD: Instellingen zijn verplaatst naar de database."
+
+msgid "Purges all consumption data (DELETES IT!) and marks all readings as unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL HISTORIC READINGS!"
+msgstr "Wist alle verbruiksgegevens (VERWIJDERT HET!) en markeert alle uitlezingen als onverwerkt. Gebruik dit alleen als je wisselt van groeperingsnauwkeurigheid EN JE ALLE DSMR-METINGEN NOG HEBT!"
+
+#, fuzzy
+#| msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
+msgid "dsmr_stats_compactor is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_backend"
+msgstr "dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft dsmr_stats_datalogger"
+
+msgid "Polls the serial port for DSMR telegram and performs a reading."
+msgstr "Controleert de seriele poort voor DSMR-gegevens en leest deze uit."
+
+#, python-format
+msgid "COM-port connected to Smartmeter (default: %(default)s)"
+msgstr "COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
+
+#, fuzzy
+#| msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
+msgid "dsmr_stats_datalogger is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger"
+msgstr "dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft dsmr_stats_datalogger"
+
+msgid "Day"
+msgstr "Dag"
+
+msgid "Note"
+msgstr "Notitie"
+
+msgid "Notes"
+msgstr "Notities"
+
+msgid "Stats configuration"
+msgstr "Statistiekenconfiguratie"
 
 #, fuzzy
 #| msgid "DSMR Weather"
@@ -542,6 +532,29 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Cleans up any source data from the poller. PERMANENTLY DELETES DATA!"
+#~ msgstr "Ruimt alle brongegevens van de lezer op. VERWIJDERT DATA PERMANENT"
+
+#~ msgid "Any polled source data older than DAYS will be purged (default %(default)s days)."
+#~ msgstr "Alle uitgelezen gegevens ouder dan DAGEN wordt verwijderd (standaard %(default)s dagen)."
+
+#~ msgid "Tells Django to NOT prompt the user for input of any kind."
+#~ msgstr "Instrueert Django om de gebruiker NIET om welke input dan ook te vragen."
+
+#~ msgid "WARNING: This will PERMANENTLY DELETE SOURCE DATA before \"{}\", still continue? yes/no: "
+#~ msgstr "WAARSCHUWING: Dit VERWIJDERT PERMANENT ALLE BRONDATA van voor \"{}\", alsnog doorgaan? yes/no: "
+
+#, fuzzy
+#~| msgid "dsmr_stats_poller is DEPRECATED, please use dsmr_stats_datalogger"
+#~ msgid "dsmr_stats_cleanup is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger"
+#~ msgstr "dsmr_stats_poller wordt UITGEFASEERD, gebruik alsjeblieft dsmr_stats_datalogger"
+
+#~ msgid "Found {} records to delete"
+#~ msgstr "{} records gevonden om te verwijderen"
+
+#~ msgid "Deleted {} records"
+#~ msgstr "{} records verwijderd"
 
 #~ msgid "DSMR Statistics"
 #~ msgstr "DSMR Statistieken"

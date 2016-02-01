@@ -4,7 +4,7 @@ import polib
 from django.test import TestCase
 from django.conf import settings
 
-from dsmr_stats.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 
 
 class TestTranslations(CallCommandStdoutMixin, TestCase):

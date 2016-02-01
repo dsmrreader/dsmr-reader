@@ -5,7 +5,7 @@ from decimal import Decimal
 import pytz
 from django.test import TestCase
 
-from dsmr_stats.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 
 
