@@ -9,8 +9,8 @@ from django.db.models import Avg, Max
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import ElectricityStatistics
-from dsmr_stats.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.statistics import TemperatureReading

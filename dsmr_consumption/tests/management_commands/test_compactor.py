@@ -1,15 +1,13 @@
-import warnings
 from unittest import mock
 
-from django.core.management import CommandError
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_stats.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_stats.models.statistics import ElectricityStatistics
-from dsmr_stats.models.settings import StatsSettings
 
 
 class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
@@ -21,14 +19,14 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
 
         # Initializes singleton model.
-        StatsSettings.get_solo()
+        ConsumptionSettings.get_solo()
 
     def test_processing(self):
         """ Test fixed data parse outcome. """
         # Default is grouping by minute, so make sure to revert that here.
-        stats_settings = StatsSettings.get_solo()
-        stats_settings.compactor_grouping_type = StatsSettings.COMPACTOR_GROUPING_BY_READING
-        stats_settings.save()
+        consumption_settings = ConsumptionSettings.get_solo()
+        consumption_settings.compactor_grouping_type = ConsumptionSettings.COMPACTOR_GROUPING_BY_READING
+        consumption_settings.save()
 
         self._call_command_stdout('dsmr_backend')
 
@@ -37,7 +35,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
         self.assertEqual(ElectricityConsumption.objects.count(), 3)
         self.assertEqual(GasConsumption.objects.count(), 1)
 
-    @mock.patch('dsmrreader.signals.gas_consumption_created.send_robust')
+    @mock.patch('dsmr_consumption.signals.gas_consumption_created.send_robust')
     def test_consumption_creation_signal(self, signal_mock):
         """ Test outgoing signal communication. """
         self.assertFalse(signal_mock.called)
@@ -58,23 +56,6 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
         self.assertEqual(ElectricityConsumption.objects.count(), 1)
         self.assertEqual(GasConsumption.objects.count(), 1)
 
-    def test_deprecated_grouping_argument(self):
-        """ Tests whether we raise an deprecation warning for using the grouping argument. """
-        with warnings.catch_warnings(record=True) as w:
-            warnings.simplefilter("always")
-
-            try:
-                self._call_command_stdout('dsmr_backend', group_by_minute=True)
-            except RuntimeError:
-                pass
-
-            self.assertEqual(len(w), 1)
-            self.assertTrue(issubclass(w[-1].category, DeprecationWarning))
-            self.assertEqual(
-                w[-1].message,
-                'group_by_minute argument is DEPRECATED and moved to the database settings'
-            )
-
     def test_creation(self):
         """ Test the datalogger's builtin fallback for initial readings. """
         self.assertFalse(ElectricityStatistics.objects.exists())
@@ -86,19 +67,3 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
         self.assertTrue(ElectricityStatistics.objects.exists())
         self.assertTrue(ElectricityConsumption.objects.exists())
         self.assertTrue(GasConsumption.objects.exists())
-
-    def test_purge(self):
-        """ Test global consumption reset. """
-        self._call_command_stdout('dsmr_backend')
-        self.assertTrue(ElectricityStatistics.objects.exists())
-        self.assertTrue(ElectricityConsumption.objects.exists())
-        self.assertTrue(GasConsumption.objects.exists())
-        self.assertFalse(DsmrReading.objects.unprocessed().exists())
-
-        with self.assertRaises(CommandError):
-            self._call_command_stdout('dsmr_backend', purge=True)
-
-        self.assertFalse(ElectricityStatistics.objects.exists())
-        self.assertFalse(ElectricityConsumption.objects.exists())
-        self.assertFalse(GasConsumption.objects.exists())
-        self.assertTrue(DsmrReading.objects.unprocessed().exists())

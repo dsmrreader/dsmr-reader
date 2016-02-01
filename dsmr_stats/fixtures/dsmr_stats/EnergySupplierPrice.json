@@ -8,7 +8,7 @@
         "electricity_2_price": "0.21843",
         "description": "Nederlandse Energie Maatschappij"
     },
-    "model": "dsmr_stats.energysupplierprice",
+    "model": "dsmr_consumption.energysupplierprice",
     "pk": 1
 }
 ]
