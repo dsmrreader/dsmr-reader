@@ -4,7 +4,7 @@ from django.test import TestCase, Client
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 
-from dsmr_stats.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.note import Note
 from dsmr_weather.models.statistics import TemperatureReading

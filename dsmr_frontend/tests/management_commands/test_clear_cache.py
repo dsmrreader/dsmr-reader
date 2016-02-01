@@ -1,6 +1,6 @@
 from time import sleep
 
-from dsmr_stats.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from django.core.cache import cache
 from django.test import TestCase
 

@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.db.models import Avg
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_stats.models.energysupplier import EnergySupplierPrice
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.note import Note
 from dsmr_weather.models.statistics import TemperatureReading
 
