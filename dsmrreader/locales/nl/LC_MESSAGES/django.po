@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-01 23:40+0000\n"
+"POT-Creation-Date: 2016-02-02 23:49+0000\n"
 "PO-Revision-Date: 2016-01-16 17:12+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -107,7 +107,7 @@ msgstr "Statistiekenconfiguratie"
 msgid "Datalogger"
 msgstr ""
 
-msgid "performs an DSMR P1 telegram reading on the COM port."
+msgid "Performs an DSMR P1 telegram reading on the COM port."
 msgstr ""
 
 msgid "Number of power failures in any phases"
@@ -345,9 +345,6 @@ msgstr "Notitie"
 msgid "Notes"
 msgstr "Notities"
 
-msgid "Stats configuration"
-msgstr "Statistiekenconfiguratie"
-
 #, fuzzy
 #| msgid "DSMR Weather"
 msgid "Weather"
@@ -532,6 +529,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Stats configuration"
+#~ msgstr "Statistiekenconfiguratie"
 
 #~ msgid "Cleans up any source data from the poller. PERMANENTLY DELETES DATA!"
 #~ msgstr "Ruimt alle brongegevens van de lezer op. VERWIJDERT DATA PERMANENT"
