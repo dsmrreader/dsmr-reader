@@ -1,12 +1,14 @@
 from django.test import TestCase
 
-from dsmr_stats.models.settings import StatsSettings
+from dsmr_consumption.models.settings import ConsumptionSettings
 
 
 class TestSettings(TestCase):
     """ Tests for settings defaults. """
     def setUp(self):
-        self.instance = StatsSettings().get_solo()
+        self.instance = ConsumptionSettings().get_solo()
 
-    def test_reverse_dashboard_graphs(self):
-        self.assertFalse(self.instance.reverse_dashboard_graphs)
+    def test_compactor_grouping_type(self):
+        self.assertEqual(
+            self.instance.compactor_grouping_type, ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE
+        )
