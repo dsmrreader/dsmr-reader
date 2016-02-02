@@ -4,7 +4,7 @@ from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_stats.models.settings import StatsSettings
+from dsmr_frontend.models.settings import FrontendSettings
 
 
 class TestRegression(TestCase):
@@ -16,7 +16,7 @@ class TestRegression(TestCase):
 
     def test_energysupplierprice_matching_query_does_not_exist(self):
         """ Test whether default sorting slices consumption as intended. """
-        self.assertFalse(StatsSettings().get_solo().reverse_dashboard_graphs)
+        self.assertFalse(FrontendSettings().get_solo().reverse_dashboard_graphs)
         self.assertEqual(ElectricityConsumption.objects.count(), 1)
         self.assertEqual(GasConsumption.objects.count(), 100)
 

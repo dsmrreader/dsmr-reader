@@ -7,9 +7,9 @@ from django.utils import timezone
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.statistics import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
+from dsmr_frontend.models.settings import FrontendSettings
 import dsmr_stats.services
 
 
@@ -19,7 +19,7 @@ class DashboardMixin(object):
     temperature_max = gas_max
 
     def get_context_data(self, **kwargs):
-        stats_settings = StatsSettings.get_solo()
+        frontend_settings = FrontendSettings.get_solo()
         context_data = super(DashboardMixin, self).get_context_data(**kwargs)
 
         electricity = ElectricityConsumption.objects.all().order_by('read_at')
@@ -27,7 +27,7 @@ class DashboardMixin(object):
         temperature = TemperatureReading.objects.all().order_by('read_at')
 
         # User might want to sort things backwards.
-        if stats_settings.reverse_dashboard_graphs:
+        if frontend_settings.reverse_dashboard_graphs:
             electricity = electricity.reverse()[:self.electricity_max]
             gas = gas.reverse()[:self.gas_max]
             temperature = temperature.reverse()[:self.temperature_max]
