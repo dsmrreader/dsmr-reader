@@ -1,4 +1,4 @@
-{% extends "dsmr_stats/base.html" %}
+{% extends "dsmr_frontend/base.html" %}
 {% load humanize %} 
 {% load i18n %}
 
@@ -85,35 +85,35 @@
                     <table class="table table-condensed">
                         <tr>
                             <td class="col-md-7">{% trans "Number of power failures in any phases" %}</td>
-                            <td class="col-md-5"><span class="badge bg-black">{{ dsmr_stats.power_failure_count|default:'-' }}</span></td>
+                            <td class="col-md-5"><span class="badge bg-black">{{ dsmr_frontend.power_failure_count|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Number of long power failures in any phase" %}</td>
-                            <td><span class="badge bg-black">{{ dsmr_stats.long_power_failure_count|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ dsmr_frontend.long_power_failure_count|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L1" %}</td>
-                            <td><span class="badge bg-orange">{{ dsmr_stats.voltage_sag_count_l1|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ dsmr_frontend.voltage_sag_count_l1|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-orange">{{ dsmr_stats.voltage_sag_count_l2|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ dsmr_frontend.voltage_sag_count_l2|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-orange">{{ dsmr_stats.voltage_sag_count_l3|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ dsmr_frontend.voltage_sag_count_l3|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L1" %}</td>
-                            <td><span class="badge bg-red">{{ dsmr_stats.voltage_swell_count_l1|default:'-' }}</span></td>
+                            <td><span class="badge bg-red">{{ dsmr_frontend.voltage_swell_count_l1|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-red">{{ dsmr_stats.voltage_swell_count_l2|default:'-' }}</span></td>
+                            <td><span class="badge bg-red">{{ dsmr_frontend.voltage_swell_count_l2|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-red">{{ dsmr_stats.voltage_swell_count_l3|default:'-' }}</span></td>
+                            <td><span class="badge bg-red">{{ dsmr_frontend.voltage_swell_count_l3|default:'-' }}</span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->

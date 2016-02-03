@@ -13,15 +13,15 @@ from dsmr_weather.models.statistics import TemperatureReading
 class TestViews(CallCommandStdoutMixin, TestCase):
     """ Test whether views render at all. """
     fixtures = [
-        'dsmr_stats/test_dsmrreading.json',
+        'dsmr_datalogger/test_dsmrreading.json',
         'dsmr_stats/test_note.json',
-        'dsmr_stats/EnergySupplierPrice.json'
+        'dsmr_frontend/EnergySupplierPrice.json'
     ]
-    namespace = 'stats'
+    namespace = 'frontend'
 
     def _synchronize_date(self, interval=None):
         """ Little hack to fake any output for today (moment of test). """
-        self._call_command_stdout('dsmr_stats_compactor')
+        self._call_command_stdout('dsmr_backend')
         ec = ElectricityConsumption.objects.get(pk=1)
         gc = GasConsumption.objects.get(pk=1)
 

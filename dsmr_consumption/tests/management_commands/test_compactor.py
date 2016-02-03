@@ -12,7 +12,7 @@ from dsmr_stats.models.statistics import ElectricityStatistics
 
 class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_backend' management command. """
-    fixtures = ['dsmr_stats/test_dsmrreading.json']
+    fixtures = ['dsmr_datalogger/test_dsmrreading.json']
 
     def setUp(self):
         self.assertEqual(DsmrReading.objects.all().count(), 3)
