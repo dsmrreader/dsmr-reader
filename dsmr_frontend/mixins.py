@@ -96,13 +96,12 @@ class DashboardMixin(object):
 
 
 class HistoryMixin(object):
-    days_ago = 28
-    days_offset = 1
-
     def get_context_data(self, **kwargs):
+        frontend_settings = FrontendSettings.get_solo()
+
         context_data = super(HistoryMixin, self).get_context_data(**kwargs)
         context_data['usage'] = []
-        context_data['days_ago'] = self.days_ago
+        context_data['days_ago'] = frontend_settings.recent_history_weeks * 7
         context_data['track_temperature'] = WeatherSettings.get_solo().track
 
         # @TODO: There must be a way to make this more clean.
@@ -116,9 +115,9 @@ class HistoryMixin(object):
         # Summarize stats for the past two weeks.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
         dates = (
-            now - timezone.timedelta(days=n) for n in reversed(range(
-                self.days_offset, self.days_ago + 1
-            ))
+            now - timezone.timedelta(days=n) for n in reversed(
+                range(1, context_data['days_ago'] + 1)
+            )
         )
 
         for current_day in dates:
