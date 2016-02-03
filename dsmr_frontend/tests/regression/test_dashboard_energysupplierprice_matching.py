@@ -6,7 +6,7 @@ from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 
 class TestRegression(CallCommandStdoutMixin, TestCase):
     """ Regression. """
-    fixtures = ['dsmr_datalogger/test_dsmrreading.json']
+    fixtures = ['dsmr_frontend/test_dsmrreading.json']
 
     def setUp(self):
         self.client = Client()

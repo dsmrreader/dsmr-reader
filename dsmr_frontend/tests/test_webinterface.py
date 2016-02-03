@@ -13,8 +13,8 @@ from dsmr_weather.models.statistics import TemperatureReading
 class TestViews(CallCommandStdoutMixin, TestCase):
     """ Test whether views render at all. """
     fixtures = [
-        'dsmr_datalogger/test_dsmrreading.json',
-        'dsmr_stats/test_note.json',
+        'dsmr_frontend/test_dsmrreading.json',
+        'dsmr_frontend/test_note.json',
         'dsmr_frontend/EnergySupplierPrice.json'
     ]
     namespace = 'frontend'
