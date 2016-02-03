@@ -12,4 +12,4 @@ DATABASES = None  # Please use one of the prepared configs per database backend.
 
 STATIC_ROOT = '/var/www/dsmrreader/static'
 
-CACHES['default']['TIMEOUT'] = 5 * 60
+CACHES['default']['TIMEOUT'] = 1 * 60

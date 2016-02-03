@@ -128,7 +128,7 @@ def compact(dsmr_reading):
             day=electricity_statistics.day
         )
     except ElectricityStatistics.DoesNotExist:
-        # This willsucceed once every day.
+        # This will succeed once every day.
         statistics = electricity_statistics.save()
 
         dsmr_consumption.signals.electricity_statistics_created.send_robust(

@@ -10,7 +10,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.statistics import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
-import dsmr_stats.services
+import dsmr_consumption.services
 
 
 class DashboardMixin(object):
@@ -86,7 +86,7 @@ class DashboardMixin(object):
         context_data['latest_gas'] = latest_gas.currently_delivered
 
         try:
-            context_data['consumption'] = dsmr_stats.services.day_consumption(
+            context_data['consumption'] = dsmr_consumption.services.day_consumption(
                 day=latest_electricity.read_at.astimezone(settings.LOCAL_TIME_ZONE)
             )
         except LookupError:
@@ -125,7 +125,7 @@ class HistoryMixin(object):
             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
 
             try:
-                day_consumption = dsmr_stats.services.day_consumption(
+                day_consumption = dsmr_consumption.services.day_consumption(
                     day=current_day
                 )
             except LookupError:
@@ -154,7 +154,7 @@ class StatisticsMixin(object):
         context_data['last_reading'] = DsmrReading.objects.all().order_by('-pk')[0].timestamp
 
         try:
-            context_data['consumption'] = dsmr_stats.services.day_consumption(
+            context_data['consumption'] = dsmr_consumption.services.day_consumption(
                 day=timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
             )
         except LookupError:
