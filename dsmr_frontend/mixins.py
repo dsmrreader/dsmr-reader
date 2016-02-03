@@ -148,7 +148,7 @@ class HistoryMixin(object):
 class StatisticsMixin(object):
     def get_context_data(self, **kwargs):
         context_data = super(StatisticsMixin, self).get_context_data(**kwargs)
-        context_data['dsmr_stats'] = ElectricityStatistics.objects.all().order_by('-pk')[0]
+        context_data['statistics'] = ElectricityStatistics.objects.all().order_by('-pk')[0]
         context_data['total_reading_count'] = DsmrReading.objects.count()
         context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0].timestamp
         context_data['last_reading'] = DsmrReading.objects.all().order_by('-pk')[0].timestamp
