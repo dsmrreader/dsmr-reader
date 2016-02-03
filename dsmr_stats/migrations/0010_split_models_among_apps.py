@@ -1,18 +1,37 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from io import StringIO
 
 from django.db import migrations
+from django.core.management import call_command
+
+
+def pre_check(apps, schema_editor):
+    print()
+    print()
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print('You are about to perform a huge migration involving lots of data being moved around.')
+    print()
+    print('Please make sure you have STOPPED all dsmr_* commands and made a BACKUP of all your')
+    print('data generated until now.')
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print()
+    print()
+    print('Enter "Y" to perform the migration or any other key to abort: ')
+
+    if input().lower() != 'y':
+        raise KeyboardInterrupt('Aborted by user.')
 
 
 def migrate_settings(apps, schema_editor):
-    """ NOTE: This migration is executed non-atomic, to reflect datalogger changes instantly. """
+    """ NOTE: This migration is executed NON ATOMIC, to reflect datalogger changes instantly. """
     print()
     print(' - Migrating settings...')
 
     # Create singleton settings record by calling solo().
-    consumption_settings = apps.get_model('dsmr_consumption', 'ConsumptionSettings').objects.create()
-    frontend_settings = apps.get_model('dsmr_frontend', 'FrontendSettings').objects.create()
-    apps.get_model('dsmr_datalogger', 'DataloggerSettings').objects.create()  # No legacy data here.
+    consumption_settings, _ = apps.get_model('dsmr_consumption', 'ConsumptionSettings').objects.get_or_create()
+    frontend_settings, _ = apps.get_model('dsmr_frontend', 'FrontendSettings').objects.get_or_create()
+    apps.get_model('dsmr_datalogger', 'DataloggerSettings').objects.get_or_create()  # No legacy data here.
 
     # Migrate all old settings among the new ones. If we have any (tests have none).
     StatsSettings = apps.get_model('dsmr_stats', 'StatsSettings')
@@ -78,8 +97,19 @@ def migrate_data(apps, schema_editor):
                 'Data migration count mismatch: {} != {}'.format(old_model_count, new_model_count)
             )
 
+    # The sequences will be outdated, so fix them. Django has builtin support for SQL generation.
+    with StringIO() as stdout_buffer:
+        call_command('sqlsequencereset', 'dsmr_consumption', stdout=stdout_buffer, no_color=True)
+        call_command('sqlsequencereset', 'dsmr_frontend', stdout=stdout_buffer, no_color=True)
+        call_command('sqlsequencereset', 'dsmr_datalogger', stdout=stdout_buffer, no_color=True)
+
+        print(' - Realigning auto increments/sequences in database...')
+        stdout_buffer.seek(0)
+        schema_editor.execute(stdout_buffer.read())
+
 
 def resume_datalogger(apps, schema_editor):
+    """ NOTE: This migration is executed NON ATOMIC, to reflect datalogger changes instantly. """
     print()
     print(' - Allowing datalogger to resume tracking data...')
     datalogger_settings = apps.get_model('dsmr_datalogger', 'DataloggerSettings').objects.get()
@@ -99,6 +129,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(pre_check),
         migrations.RunPython(migrate_settings),
         migrations.RunPython(halt_datalogger, atomic=False),
         migrations.RunPython(migrate_data),
