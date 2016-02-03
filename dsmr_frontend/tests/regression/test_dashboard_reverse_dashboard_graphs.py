@@ -9,7 +9,7 @@ from dsmr_frontend.models.settings import FrontendSettings
 
 class TestRegression(TestCase):
     """ Regression. """
-    fixtures = ['dsmr_stats/test_reverse_dashboard_graphs.json']
+    fixtures = ['dsmr_frontend/test_reverse_dashboard_graphs.json']
 
     def setUp(self):
         self.client = Client()
@@ -21,7 +21,7 @@ class TestRegression(TestCase):
         self.assertEqual(GasConsumption.objects.count(), 100)
 
         response = self.client.get(
-            reverse('stats:dashboard')
+            reverse('frontend:dashboard')
         )
         self.assertIn('gas_x', response.context)
 
