@@ -36,9 +36,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # Must be inserted BEFORE contrib because it's an admin skin.
-    # django-flat-theme is officially merged in Django 1.9, this is pre-1.9.
+    # django-flat-theme is officially merged in Django 1.9, however this is pre-1.9 (due to LTS).
     'flat',
 
+    # Django internals.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,11 +48,17 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
+    # Third party apps/plugins.
     'chartjs',
     'solo.apps.SoloAppConfig',
 
-    'dsmr_stats.apps.DsmrStatsAppConfig',
-    'dsmr_weather.apps.DsmrWeatherAppConfig',
+    # Local project apps.
+    'dsmr_datalogger.apps.AppConfig',
+    'dsmr_consumption.apps.AppConfig',
+    'dsmr_weather.apps.AppConfig',
+    'dsmr_stats.apps.AppConfig',
+    'dsmr_backend.apps.AppConfig',
+    'dsmr_frontend.apps.AppConfig',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,7 +119,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Caching framework.
+# Caching framework. Normally we should prefer memcached,
+# but file-based cache is fine (and still fast) for RaspberryPi, preserving memory.
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
@@ -138,3 +146,6 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
+
+# Project version.
+DSMRREADER_VERSION = '0.5'
