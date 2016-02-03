@@ -4,6 +4,7 @@ v0.6 - xxxx-xx-xx
 - Massive refactoring: Separating apps & using signals (Issue #19).
 - README update: Exit character for cu (Issue #27, by Jeroen Peters).
 - Fixed untranslated strings in admin interface.
+- Upgraded Django to 1.8.9.
 
 
 v0.5 - 2016-01-16
