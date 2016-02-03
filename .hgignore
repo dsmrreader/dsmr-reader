@@ -1,0 +1,9 @@
+syntax: glob
+*.pyc
+
+syntax: regexp
+^\.settings$
+^\.idea$
+^\.project$
+^\.pydevproject$
+^dsmrreader/settings\.py$
