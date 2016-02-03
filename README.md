@@ -185,9 +185,11 @@ Now login as the user we just created, to perform our very first reading!
 
 Test with **cu** (BAUD rate settings for *DSMR v4* is **115200**, for older verions it should be **9600**). 
 
-`cu -l /dev/ttyUSB0 -s 115200 --parity=none`
+`cu -l /dev/ttyUSB0 -s 115200 --parity=none -E q`
 
 You now should see something similar to `Connected.` and a wall of text and numbers within 10 seconds. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, such as [this one (Dutch)](http://gejanssen.com/howto/Slimme-meter-uitlezen/).
+
+To exit **cu**, input `q.`, hit Enter and wait for a few seconds. It should exit with the message `Disconnected`.
 
 
 ### Application code clone ###
