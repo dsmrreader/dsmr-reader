@@ -23,6 +23,7 @@ class TestTranslations(CallCommandStdoutMixin, TestCase):
         self._call_command_stdout(
             'makemessages', locale=self.locales, no_location=True, no_wrap=True
         )
+        self._call_command_stdout('compilemessages')
 
         for current_locale in self.locales:
             po_file_path = os.path.join(
