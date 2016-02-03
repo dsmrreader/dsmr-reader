@@ -92,20 +92,28 @@ def migrate_data(apps, schema_editor):
 
         new_model_count = NewModel.objects.count()
         print(' --- Count check: {} / {}'.format(old_model_count, new_model_count))
+
         if old_model_count != new_model_count:
             raise AssertionError(
                 'Data migration count mismatch: {} != {}'.format(old_model_count, new_model_count)
             )
 
-    # The sequences will be outdated, so fix them. Django has builtin support for SQL generation.
+    # The sequences will be outdated, so fix them.
     with StringIO() as stdout_buffer:
+        # Django has builtin support for SQL generation.
         call_command('sqlsequencereset', 'dsmr_consumption', stdout=stdout_buffer, no_color=True)
         call_command('sqlsequencereset', 'dsmr_frontend', stdout=stdout_buffer, no_color=True)
         call_command('sqlsequencereset', 'dsmr_datalogger', stdout=stdout_buffer, no_color=True)
 
-        print(' - Realigning auto increments/sequences in database...')
+        print(' - Resetting sequences in database (if applicable)...')
         stdout_buffer.seek(0)
-        schema_editor.execute(stdout_buffer.read())
+        sql = stdout_buffer.read()
+
+        # Only applies to postgres, but not MySQL.
+        if sql:
+            schema_editor.execute(sql)
+        else:
+            print(' --- No sequence reset required.')
 
 
 def resume_datalogger(apps, schema_editor):
