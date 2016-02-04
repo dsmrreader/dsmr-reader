@@ -6,23 +6,6 @@ from django.db import migrations
 from django.core.management import call_command
 
 
-def pre_check(apps, schema_editor):
-    print()
-    print()
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print('You are about to perform a huge migration involving lots of data being moved around.')
-    print()
-    print('Please make sure you have STOPPED all dsmr_* commands and made a BACKUP of all your')
-    print('data generated until now.')
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print()
-    print()
-    print('Enter "Y" to perform the migration or any other key to abort: ')
-
-    if input().lower() != 'y':
-        raise KeyboardInterrupt('Aborted by user.')
-
-
 def migrate_settings(apps, schema_editor):
     """ NOTE: This migration is executed NON ATOMIC, to reflect datalogger changes instantly. """
     print()
@@ -137,7 +120,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(pre_check),
         migrations.RunPython(migrate_settings),
         migrations.RunPython(halt_datalogger, atomic=False),
         migrations.RunPython(migrate_data),
