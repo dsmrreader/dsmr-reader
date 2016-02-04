@@ -1,0 +1,18 @@
+
+v0.7 - 2016-02-04
+=================
+- Recent history setting: set range (Issue #29).
+- Mock required for test: dsmr_weather.test_weather_tracking (Issue #32).
+
+
+v0.6 - 2016-02-03
+=================
+- Massive refactoring: Separating apps & using signals (Issue #19).
+- README update: Exit character for cu (Issue #27, by Jeroen Peters).
+- Fixed untranslated strings in admin interface.
+- Upgraded Django to 1.8.9.
+
+
+v0.5 - 2016-01-16
+=================
+- First stable release.
