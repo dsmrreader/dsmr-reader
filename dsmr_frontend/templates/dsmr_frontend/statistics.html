@@ -1,0 +1,157 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %} 
+{% load i18n %}
+
+{% block title %}{% trans "Statistics" %}{% endblock %}
+{% block header %}{% trans "Statistics" %}{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "DSMR Readings" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="col-md-7">{% trans "Last reading" %}</td>
+                            <td class="col-md-5">
+                            {% if last_reading %}
+                            	<span class="badge bg-navy">{{ last_reading|naturaltime }}</span>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "First reading" %}</td>
+                            <td>
+                            {% if first_reading %}
+                            	<span class="badge bg-navy">{{ first_reading|default:'-' }}</span>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Total count" %}</td>
+                            <td><span class="badge bg-navy">{{ total_reading_count|default:'-'|intcomma }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->                        
+                        
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Meter positions" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-7">&nbsp;</th>
+                            <th class="col-md-3">{% trans "Delivered" %}</th>
+                            <th class="col-md-2">{% trans "Returned" %}</th>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1_end|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned_end|default:'-' }} {% trans "kWh" noop %}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 2 (peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2_end|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned_end|default:'-' }} {% trans "kWh" noop %}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Gas " %}</td>
+                            <td colspan="2"><span class="badge bg-orange">{{ consumption.gas_end|default:'-' }} {% trans "m<sup>3</sup>" noop %}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Miscellaneous" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="col-md-7">{% trans "Number of power failures in any phases" %}</td>
+                            <td class="col-md-5"><span class="badge bg-black">{{ statistics.power_failure_count|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of long power failures in any phase" %}</td>
+                            <td><span class="badge bg-black">{{ statistics.long_power_failure_count|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage sags/dips in phase L1" %}</td>
+                            <td><span class="badge bg-orange">{{ statistics.voltage_sag_count_l1|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-orange">{{ statistics.voltage_sag_count_l2|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-orange">{{ statistics.voltage_sag_count_l3|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage swells in phase L1" %}</td>
+                            <td><span class="badge bg-red">{{ statistics.voltage_swell_count_l1|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-red">{{ statistics.voltage_swell_count_l2|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-red">{{ statistics.voltage_swell_count_l3|default:'-' }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    
+    {% if consumption.daily_energy_price %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                	{% trans "Current energy prices" %}: {{ consumption.daily_energy_price.description }}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-7">{{ consumption.daily_energy_price.start }} &larr;&rarr; {{ consumption.daily_energy_price.end|default:'-' }}</th>
+                            <th class="col-md-5">{% trans "Unit price" %}</th>
+                        </tr>
+                        <tr>
+                            <td class="col-md-7">{% trans "Electricity 1" %}</td>
+                            <td class="col-md-5"><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_1_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 2" %}</td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_2_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Gas" %}</td>
+                            <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.gas_price }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    {% endif %}
+
+</section><!-- /.content -->
+{% endblock %}
