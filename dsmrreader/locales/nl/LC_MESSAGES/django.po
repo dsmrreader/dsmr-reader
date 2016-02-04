@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-03 21:32+0000\n"
-"PO-Revision-Date: 2016-02-03 22:22+0100\n"
+"POT-Creation-Date: 2016-02-03 22:53+0000\n"
+"PO-Revision-Date: 2016-02-03 23:52+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -165,11 +165,32 @@ msgstr "Weergave"
 msgid "Clears the entire cache."
 msgstr "Gooit de volledige cache leeg."
 
+msgid "Last week"
+msgstr "Afgelopen week"
+
+msgid "Last two weeks"
+msgstr "Afgelopen twee weken"
+
+msgid "Last three weeks"
+msgstr "Afgelopen drie weken"
+
+msgid "Last four weeks"
+msgstr "Afgelopen vier weken"
+
+msgid "Last five weeks"
+msgstr "Afgelopen vijf weken"
+
 msgid "Reverse dashboard graphs"
 msgstr "Keer dashboard-grafieken om"
 
 msgid "Whether graphs are rendered with an reversed X-axis"
 msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
+
+msgid "Recent history weeks"
+msgstr "Weken in recente historie"
+
+msgid "The number of weeks displayed in the recent history overview."
+msgstr "Het aantal weken dat getoond wordt in het recente historie overzicht."
 
 msgid "Frontend configuration"
 msgstr "Weergaveconfiguratie"
@@ -515,18 +536,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "Stats configuration"
-#~ msgstr "Statistiekenconfiguratie"
-
-#~ msgid "Cleans up any source data from the poller. PERMANENTLY DELETES DATA!"
-#~ msgstr "Ruimt alle brongegevens van de lezer op. VERWIJDERT DATA PERMANENT"
-
-#~ msgid "Any polled source data older than DAYS will be purged (default %(default)s days)."
-#~ msgstr "Alle uitgelezen gegevens ouder dan DAGEN wordt verwijderd (standaard %(default)s dagen)."
-
-#~ msgid "Tells Django to NOT prompt the user for input of any kind."
-#~ msgstr "Instrueert Django om de gebruiker NIET om welke input dan ook te vragen."
-
-#~ msgid "WARNING: This will PERMANENTLY DELETE SOURCE DATA before \"{}\", still continue? yes/no: "
-#~ msgstr "WAARSCHUWING: Dit VERWIJDERT PERMANENT ALLE BRONDATA van voor \"{}\", alsnog doorgaan? yes/no: "
