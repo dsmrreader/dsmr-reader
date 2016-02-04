@@ -34,7 +34,4 @@ def read_weather():
     # Therefor we align temperature readings with them, having them grouped by hour that is..
     read_at = timezone.now().replace(minute=0, second=0, microsecond=0)
 
-    TemperatureReading.objects.create(
-        read_at=read_at,
-        degrees_celcius=temperature
-    )
+    TemperatureReading.objects.create(read_at=read_at, degrees_celcius=temperature)
