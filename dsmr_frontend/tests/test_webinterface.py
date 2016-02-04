@@ -1,3 +1,4 @@
+import random
 import json
 
 from django.test import TestCase, Client
@@ -6,8 +7,9 @@ from django.core.urlresolvers import reverse
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_stats.models.note import Note
 from dsmr_weather.models.statistics import TemperatureReading
+from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_stats.models.note import Note
 
 
 class TestViews(CallCommandStdoutMixin, TestCase):
@@ -71,6 +73,10 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self.assertIn('consumption', response.context)
 
     def test_history(self):
+        frontend_settings = FrontendSettings.get_solo()
+        frontend_settings.recent_history_weeks = random.randint(1, 5)
+        frontend_settings.save()
+
         # History fetches all data BEFORE today, so add a little interval to make that happen.
         self._synchronize_date(interval=timezone.timedelta(hours=-24))
         response = self.client.get(
@@ -79,8 +85,8 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self.assertIn('usage', response.context)
         self.assertIn('notes', response.context['usage'][0])
         self.assertEqual(response.context['usage'][0]['notes'][0], 'Gourmetten')
+        self.assertEqual(response.context['days_ago'], frontend_settings.recent_history_weeks * 7)
         self.assertFalse(response.context['track_temperature'])
-
         self.assertEqual(response.status_code, 200)
 
     def test_statistics(self):
