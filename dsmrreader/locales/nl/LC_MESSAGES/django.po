@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 00:04+0000\n"
-"PO-Revision-Date: 2016-02-05 01:04+0100\n"
+"POT-Creation-Date: 2016-02-05 03:04+0000\n"
+"PO-Revision-Date: 2016-02-05 04:04+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -356,6 +356,15 @@ msgstr "Notitie"
 
 msgid "Notes"
 msgstr "Notities"
+
+msgid "Track trends"
+msgstr "Houd trends bij"
+
+msgid "Whether we should track trends by storing daily consumption summaries."
+msgstr "Geeft aan of we trends over het dagelijkse verbruik bijhouden en opslaan."
+
+msgid "Statistics configuration"
+msgstr "Statistiekenconfiguratie"
 
 msgid "Weather"
 msgstr "Weergegevens"

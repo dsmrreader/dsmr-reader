@@ -9,7 +9,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.settings import ConsumptionSettings
 
 
-class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
+class TestCompactor(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_backend' management command. """
     fixtures = ['dsmr_consumption/test_dsmrreading.json']
 
@@ -36,7 +36,7 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
 
     @mock.patch('dsmr_consumption.signals.gas_consumption_created.send_robust')
     def test_consumption_creation_signal(self, signal_mock):
-        """ Test outgoing signal communication. """
+        """ Test incoming signal communication. """
         self.assertFalse(signal_mock.called)
         self._call_command_stdout('dsmr_backend')
         self.assertTrue(signal_mock.called)

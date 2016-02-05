@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ElectricityConsumption(models.Model):
-    """ Point in time of electricity consumption, extracted from reading(s). """
+    """ Point in time of electricity consumption (usage), extracted from reading(s). """
     read_at = models.DateTimeField(unique=True)
     delivered_1 = models.DecimalField(
         max_digits=9,
@@ -53,7 +53,7 @@ class ElectricityConsumption(models.Model):
 
 
 class GasConsumption(models.Model):
-    """ Hourly consumption, interpolated on the previous value read the hour before. """
+    """ Hourly consumption (usage), interpolated on the previous value read the hour before. """
     read_at = models.DateTimeField(unique=True)
     delivered = models.DecimalField(
         max_digits=9,

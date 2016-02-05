@@ -9,10 +9,11 @@ class TestDeprecation(TestCase):
     DEPRECATED_COMMANDS = ['dsmr_stats_datalogger', 'dsmr_stats_compactor']
 
     @mock.patch('serial.Serial.open')
-    def test_datalogger(self, serial_patch):
+    @mock.patch('dsmr_backend.signals.backend_called.send_robust')
+    def test_datalogger(self, backend_signal_mock, serial_mock):
         """ Test dsmr_stats_datalogger deprecation and fallback. """
         # By using this side effect we can verify whether 'dsmr_stats_datalogger' is called.
-        serial_patch.side_effect = RuntimeError("Test")
+        serial_mock.side_effect = RuntimeError("Test")
 
         for current_command in self.DEPRECATED_COMMANDS:
             with warnings.catch_warnings(record=True) as w:
@@ -25,3 +26,5 @@ class TestDeprecation(TestCase):
 
                 self.assertEqual(len(w), 1)
                 self.assertTrue(issubclass(w[-1].category, DeprecationWarning))
+
+        self.assertTrue(backend_signal_mock.called)

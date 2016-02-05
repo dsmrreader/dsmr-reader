@@ -13,7 +13,7 @@ class AppConfig(AppConfig):
         # duplicate signals.
         dsmr_consumption.signals.gas_consumption_created.connect(
             receiver=self._on_consumption_created_signal,
-            dispatch_uid=self.__class__.__name__
+            dispatch_uid=self.__class__
         )
 
     def _on_consumption_created_signal(self, sender, **kwargs):
