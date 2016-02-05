@@ -114,7 +114,9 @@ def compact(dsmr_reading):
 
 
 def day_consumption(day):
-    consumption = {'day': day.date()}
+    consumption = {
+        'day': day
+    }
     day_start = timezone.datetime(
         year=day.year,
         month=day.month,
@@ -126,7 +128,7 @@ def day_consumption(day):
     # This WILL fail when we either have no prices at all or conflicting ranges.
     try:
         consumption['daily_energy_price'] = EnergySupplierPrice.objects.by_date(
-            target_date=consumption['day']
+            target_date=day
         )
     except EnergySupplierPrice.DoesNotExist:
         # Default to zero prices.
@@ -138,12 +140,9 @@ def day_consumption(day):
     gas_readings = GasConsumption.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
-    temperature_readings = TemperatureReading.objects.filter(
-        read_at__gte=day_start, read_at__lt=day_end,
-    ).order_by('read_at')
 
     if not electricity_readings.exists() or not gas_readings.exists():
-        raise LookupError("No readings found for: {}".format(day.date()))
+        raise LookupError("No readings found for: {}".format(day))
 
     electricity_reading_count = electricity_readings.count()
     gas_reading_count = gas_readings.count()
@@ -184,10 +183,11 @@ def day_consumption(day):
     consumption['total_cost'] = round_price(
         consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']
     )
-    consumption['notes'] = Note.objects.filter(
-        day=consumption['day']
-    ).values_list('description', flat=True)
+    consumption['notes'] = Note.objects.filter(day=day).values_list('description', flat=True)
 
+    temperature_readings = TemperatureReading.objects.filter(
+        read_at__gte=day_start, read_at__lt=day_end,
+    ).order_by('read_at')
     consumption['average_temperature'] = temperature_readings.aggregate(
         avg_temperature=Avg('degrees_celcius'),
     )['avg_temperature'] or 0

@@ -11,10 +11,10 @@ class AppConfig(AppConfig):
     def ready(self):
         dsmr_backend.signals.backend_called.connect(
             receiver=self._on_backend_called_signal,
-            dispatch_uid=self.__class__.__name__
+            dispatch_uid=self.__class__
         )
 
     def _on_backend_called_signal(self, sender, **kwargs):
         # Import below prevents an AppRegistryNotReady error on Django init.
         import dsmr_stats.services
-        dsmr_stats.services.create_daily_statistics(day)
+        dsmr_stats.services.analyze()
