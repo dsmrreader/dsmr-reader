@@ -97,12 +97,7 @@ WSGI_APPLICATION = 'dsmrreader.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {}  # Force in sub configs.
 
 
 # Internationalization
@@ -146,6 +141,3 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
-
-# Project version.
-DSMRREADER_VERSION = '0.5'
