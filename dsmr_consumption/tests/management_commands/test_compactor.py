@@ -7,7 +7,6 @@ from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
-from dsmr_stats.models.statistics import ElectricityStatistics
 
 
 class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
@@ -58,12 +57,10 @@ class TestDsmrStatsCompactor(CallCommandStdoutMixin, TestCase):
 
     def test_creation(self):
         """ Test the datalogger's builtin fallback for initial readings. """
-        self.assertFalse(ElectricityStatistics.objects.exists())
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(GasConsumption.objects.exists())
 
         self._call_command_stdout('dsmr_backend')
 
-        self.assertTrue(ElectricityStatistics.objects.exists())
         self.assertTrue(ElectricityConsumption.objects.exists())
         self.assertTrue(GasConsumption.objects.exists())

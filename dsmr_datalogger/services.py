@@ -53,7 +53,7 @@ def read_telegram():
 
 def telegram_to_reading(data):
     """
-    Converts a P1 telegram to a DSMR reading, stored in database.
+    Converts a P1 telegram to a DSMR reading, which will be stored in database.
     """
     reading_kwargs = {}
     field_splitter = re.compile(r'([^(]+)\((.+)\)')
