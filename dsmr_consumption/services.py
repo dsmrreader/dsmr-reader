@@ -10,7 +10,6 @@ from django.db.models import Avg, Max
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
-from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.statistics import TemperatureReading
@@ -109,37 +108,6 @@ def compact(dsmr_reading):
             currently_delivered=gas_diff
         )
         dsmr_consumption.signals.gas_consumption_created.send_robust(None, instance=consumption)
-
-    # The last thing to do is to keep track of other daily statistics.
-    electricity_statistics = ElectricityStatistics(
-        day=dsmr_reading.timestamp.date(),
-        power_failure_count=dsmr_reading.power_failure_count,
-        long_power_failure_count=dsmr_reading.long_power_failure_count,
-        voltage_sag_count_l1=dsmr_reading.voltage_sag_count_l1,
-        voltage_sag_count_l2=dsmr_reading.voltage_sag_count_l2,
-        voltage_sag_count_l3=dsmr_reading.voltage_sag_count_l3,
-        voltage_swell_count_l1=dsmr_reading.voltage_swell_count_l1,
-        voltage_swell_count_l2=dsmr_reading.voltage_swell_count_l2,
-        voltage_swell_count_l3=dsmr_reading.voltage_swell_count_l3,
-    )
-
-    try:
-        existing_statistics = ElectricityStatistics.objects.get(
-            day=electricity_statistics.day
-        )
-    except ElectricityStatistics.DoesNotExist:
-        # This will succeed once every day.
-        statistics = electricity_statistics.save()
-
-        dsmr_consumption.signals.electricity_statistics_created.send_robust(
-            None, instance=statistics
-        )
-    else:
-        # Already exists, but only save if dirty.
-        if not existing_statistics.is_equal(electricity_statistics):
-            electricity_statistics.id = existing_statistics.id
-            electricity_statistics.pk = existing_statistics.pk
-            electricity_statistics.save()
 
     dsmr_reading.processed = True
     dsmr_reading.save(update_fields=['processed'])
