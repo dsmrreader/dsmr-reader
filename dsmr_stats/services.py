@@ -12,7 +12,7 @@ def create_daily_statistics(day):
 #         voltage_swell_count_l2=dsmr_reading.voltage_swell_count_l2,
 #         voltage_swell_count_l3=dsmr_reading.voltage_swell_count_l3,
 #     )
-# 
+#
 #     try:
 #         existing_statistics = ElectricityStatistics.objects.get(
 #             day=electricity_statistics.day
@@ -20,7 +20,7 @@ def create_daily_statistics(day):
 #     except ElectricityStatistics.DoesNotExist:
 #         # This will succeed once every day.
 #         statistics = electricity_statistics.save()
-# 
+#
 #         dsmr_consumption.signals.electricity_statistics_created.send_robust(
 #             None, instance=statistics
 #         )
