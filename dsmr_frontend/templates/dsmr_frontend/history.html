@@ -187,7 +187,7 @@
 	   				labels: {{ chart.days|safe }},
 	   				datasets: [{
 	   					data: {{ chart.electricity1|safe }},
-	   					label: "Electricity 1 (off-peak)",	       				
+	   					label: "{% trans 'Electricity 1 (off-peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(255,0,0,1)",
 	   					pointColor: "rgba(255,0,0,1)",
@@ -196,7 +196,7 @@
 	   					pointHighlightStroke: "rgba(255,0,0,1)"
 	   				}, {
 	   					data: {{ chart.electricity2|safe }},
-	   					label: "Electricity 2 (peak)",	       				
+	   					label: "{% trans 'Electricity 2 (peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(255,0,0,1)",
 	   					pointColor: "rgba(255,0,0,1)",
@@ -205,7 +205,7 @@
 	   					pointHighlightStroke: "rgba(255,0,0,1)"
 	   				}, {
 	   					data: {{ chart.electricity1_returned|safe }},
-	   					label: "Electricity 1 returned (off-peak)",	       				
+	   					label: "{% trans 'Electricity 1 returned (off-peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(133,20,75,1)",
 	   					pointColor: "rgba(133,20,75,1)",
@@ -214,7 +214,7 @@
 	   					pointHighlightStroke: "rgba(133,20,75,1)"
 	   				}, {
 	   					data: {{ chart.electricity2_returned|safe }},
-	   					label: "Electricity 1 returned (peak)",	       				
+	   					label: "{% trans 'Electricity 1 returned (peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(133,20,75,1)",
 	   					pointColor: "rgba(133,20,75,1)",
@@ -241,7 +241,7 @@
                     labels: {{ chart.days|safe }},
                     datasets: [{
                         data: {{ chart.gas|safe }},
-                        label: "Gas",                       
+                        label: "{% trans 'Gas' %}",                       
                         fillColor: "rgba(255,255,255,0.2)",
                         strokeColor: "rgba(250,133,0,1)",
                         pointColor: "rgba(250,133,0,1)",
@@ -269,7 +269,7 @@
 	   				labels: {{ chart.days|safe }},
 	   				datasets: [{
 	   					data: {{ chart.average_temperature|safe }},
-	   					label: "Gas",	       				
+	   					label: "{% trans 'Temperature' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
                         strokeColor: "rgba(35,183,229,1)",
                         pointColor: "rgba(35,183,229,1)",
