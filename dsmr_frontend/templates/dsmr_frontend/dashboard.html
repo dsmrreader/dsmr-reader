@@ -51,25 +51,25 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-6">{{ consumption.day }}</th>
-                            <th class="col-md-2">{% trans "Delivered" %}</th>
-                            <th class="col-md-2">{% trans "Returned" %}</th>
+                            <th class="col-md-2">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
+                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
                             <th class="col-md-2">{% trans "Cost" %}</th>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 1 (off-peak)" %}</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity1 }} {% trans "kWh" noop %}</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1 }} </span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned|default:'-' }}</span></td>
                             <td><span class="badge bg-black">&euro; {{ consumption.electricity1_cost }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 (peak)" %}</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity2 }} {% trans "kWh" noop %}</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2 }}</span></td>
+                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned|default:'-' }}</span></td>
                             <td><span class="badge bg-black">&euro; {{ consumption.electricity2_cost }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ consumption.gas }} {% trans "m<sup>3</sup>" noop %}</span></td>
+                            <td><span class="badge bg-orange">{{ consumption.gas }}</span></td>
                             <td>&nbsp;</td>
                             <td><span class="badge bg-black">&euro; {{ consumption.gas_cost }}</span></td>
                         </tr>
