@@ -146,7 +146,7 @@
 	   				labels: {{ electricity_x|safe }},
 	   				datasets: [{
 	   					data: {{ electricity_y|safe }},
-	   					label: "Electricity",	       				
+	   					label: "{% trans 'Electricity' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(255,0,0,1)",
 	   					pointColor: "rgba(255,0,0,1)",
@@ -173,7 +173,7 @@
 	   				labels: {{ gas_x|safe }},
 	   				datasets: [{
 	   					data: {{ gas_y|safe }},
-	   					label: "Gas",	       				
+	   					label: "{% trans 'Gas' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(250,133,0,1)",
 	   					pointColor: "rgba(250,133,0,1)",
@@ -201,7 +201,7 @@
                     labels: {{ temperature_x|safe }},
                     datasets: [{
                         data: {{ temperature_y|safe }},
-                        label: "Temperature",                       
+                        label: "{% trans 'Temperature' %}",                       
                         fillColor: "rgba(255,255,255,0.2)",
                         strokeColor: "rgba(35,183,229,1)",
                         pointColor: "rgba(35,183,229,1)",

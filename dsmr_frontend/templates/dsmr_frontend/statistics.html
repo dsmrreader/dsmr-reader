@@ -1,5 +1,6 @@
 {% extends "dsmr_frontend/base.html" %}
 {% load humanize %} 
+{% load static %} 
 {% load i18n %}
 
 {% block title %}{% trans "Statistics" %}{% endblock %}
@@ -87,7 +88,20 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
-                  
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Average electricity usage by hour{% endblocktrans %} ({% trans "in Watt" noop %})
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity-chart" width="1000" height="200"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
     {% if energy_prices %}
     <div class="row">
         <div class="col-md-12">
@@ -155,4 +169,42 @@
     </div><!-- /.row -->                        
 
 </section><!-- /.content -->
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            	render_average_electricity_chart();
+            });
+            
+            function render_average_electricity_chart()
+            {
+                var data = {
+                    labels: {{ avg_electricity_x|safe }},
+                    datasets: [{
+                        data: {{ avg_electricity_y|safe }},
+                        label: "{% trans 'Average electricity usage per hour' %}",
+                        fillColor: "rgba(151,187,205,0.5)",
+                        strokeColor: "rgba(151,187,205,0.8)",
+                        highlightFill: "rgba(151,187,205,0.75)",
+                        highlightStroke: "rgba(151,187,205,1)",
+//                        pointHighlightStroke: "rgba(0,0,0,1)"
+                    }]
+                };
+    
+                {% verbatim %}
+                var options = {
+                	segmentShowStroke: true,
+                    animation: false
+                };
+                {% endverbatim %}
+    
+                var ctx = $("#average-electricity-chart").get(0).getContext("2d");
+                new Chart(ctx).Bar(data, options);
+            }
+
+        </script>
 {% endblock %}

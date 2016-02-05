@@ -4,7 +4,7 @@ import pytz
 
 from django.conf import settings
 from django.utils import timezone
-from django.db import transaction
+from django.db import transaction, connection
 from django.db.models import Avg, Max
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -198,3 +198,23 @@ def day_consumption(day):
 def round_price(decimal_price):
     """ Round the price to two decimals. """
     return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
+
+
+def average_electricity_by_hour():
+    """ Calculates the average consumption by hour. Measured over all consumption data. """
+    SQL_EXTRA = {
+        # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
+        'postgresql': "date_part('hour', read_at)",
+        'mysql': "extract(hour from read_at)",
+    }
+
+    try:
+        sql_extra = SQL_EXTRA[connection.vendor]
+    except KeyError:
+        raise NotImplementedError(connection.vendor)
+
+    return ElectricityConsumption.objects.extra({
+        'hour': sql_extra
+    }).values('hour').order_by('hour').annotate(
+        avg_delivered=Avg('currently_delivered')
+    )

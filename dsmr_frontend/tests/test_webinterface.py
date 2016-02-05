@@ -24,8 +24,8 @@ class TestViews(CallCommandStdoutMixin, TestCase):
     def _synchronize_date(self, interval=None):
         """ Little hack to fake any output for today (moment of test). """
         self._call_command_stdout('dsmr_backend')
-        ec = ElectricityConsumption.objects.get(pk=1)
-        gc = GasConsumption.objects.get(pk=1)
+        ec = ElectricityConsumption.objects.all()[0]
+        gc = GasConsumption.objects.all()[0]
 
         timestamp = timezone.now()
 
@@ -83,8 +83,6 @@ class TestViews(CallCommandStdoutMixin, TestCase):
             reverse('{}:history'.format(self.namespace))
         )
         self.assertIn('usage', response.context)
-        self.assertIn('notes', response.context['usage'][0])
-        self.assertEqual(response.context['usage'][0]['notes'][0], 'Gourmetten')
         self.assertEqual(response.context['days_ago'], frontend_settings.recent_history_weeks * 7)
         self.assertFalse(response.context['track_temperature'])
         self.assertEqual(response.status_code, 200)

@@ -1,11 +1,10 @@
-""" Tests with SQLite backend, which WILL result in failing some tests, but it's bloody fast. """
-from dsmrreader.config.base import *
+""" Tests with SQLite backend. """
+from dsmrreader.config.development import *
 
-
-CACHES['default']['TIMEOUT'] = 0
 
 DATABASES = {
     'default': {
+        # SQLite is NOT supported and will FAIL tests. Use only for developing tests initially.
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'dsmrreader',  # Will be adjusted to 'test_*' by Django.
         'USER': 'dsmrreader',
