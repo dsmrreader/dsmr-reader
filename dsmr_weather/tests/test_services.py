@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.conf import settings
 
 from dsmr_weather.models.settings import WeatherSettings
-from dsmr_weather.models.statistics import TemperatureReading
+from dsmr_weather.models.reading import TemperatureReading
 import dsmr_consumption.signals
 import dsmr_weather.services
 

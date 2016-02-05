@@ -5,10 +5,12 @@ from django.conf import settings
 from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_weather.models.statistics import TemperatureReading
+from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 import dsmr_consumption.services
 
 
@@ -106,12 +108,10 @@ class HistoryMixin(object):
         # @TODO: There must be a way to make this more clean.
         context_data['chart'] = defaultdict(list)
         CONSUMPTION_FIELDS = (
-            'electricity1_cost', 'electricity2_cost', 'gas_cost', 'total_cost',
-            'gas', 'electricity1', 'electricity2', 'electricity1_returned',
-            'electricity2_returned', 'average_temperature'
+            'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas',
+            'electricity1_cost', 'electricity2_cost', 'gas_cost', 'average_temperature'
         )
 
-        # Summarize stats for the past two weeks.
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
         dates = (
             now - timezone.timedelta(days=n) for n in reversed(
@@ -123,18 +123,16 @@ class HistoryMixin(object):
             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
 
             try:
-                day_consumption = dsmr_consumption.services.day_consumption(
-                    day=current_day.date()
-                )
-            except LookupError:
+                day_stats = DayStatistics.objects.get(day=current_day)
+            except DayStatistics.DoesNotExist:
                 continue
 
-            context_data['usage'].append(day_consumption)
+            context_data['usage'].append(day_stats)
             context_data['chart']['days'].append(current_day.strftime("%a %d-%m"))
 
             for current_field in CONSUMPTION_FIELDS:
                 context_data['chart'][current_field].append(float(
-                    day_consumption[current_field]
+                    getattr(day_stats, current_field)
                 ))
 
         for key, value in context_data['chart'].items():
@@ -146,15 +144,15 @@ class HistoryMixin(object):
 class StatisticsMixin(object):
     def get_context_data(self, **kwargs):
         context_data = super(StatisticsMixin, self).get_context_data(**kwargs)
+
+        today = timezone.now().astimezone(settings.LOCAL_TIME_ZONE).date()
         context_data['latest_reading'] = DsmrReading.objects.all().order_by('-pk')[0]
         context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0]
         context_data['total_reading_count'] = DsmrReading.objects.count()
 
         try:
-            context_data['consumption'] = dsmr_consumption.services.day_consumption(
-                day=timezone.now().astimezone(settings.LOCAL_TIME_ZONE).date()
-            )
-        except LookupError:
+            context_data['energy_prices'] = EnergySupplierPrice.objects.by_date(today)
+        except EnergySupplierPrice.DoesNotExist:
             pass
 
         return context_data

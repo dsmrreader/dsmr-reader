@@ -1,11 +1,11 @@
-from datetime import datetime, timedelta, time
+from datetime import timedelta
 
 from django.db import transaction
 from django.utils import timezone
 from django.conf import settings
 
 from dsmr_stats.models.settings import StatsSettings
-from dsmr_stats.models.statistics import ElectricityStatistics, GasStatistics
+from dsmr_stats.models.statistics import DayStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 import dsmr_consumption.services
 
@@ -20,13 +20,13 @@ def analyze():
 
     try:
         # Determine the starting date used to construct new statistics.
-        electricity_statistic = ElectricityStatistics.objects.all().order_by('-day')[0]
+        electricity_statistic = DayStatistics.objects.all().order_by('-day')[0]
     except IndexError:
         try:
             # This will happen either the first time or when all statistics were flushed manually.
             first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]
         except IndexError:
-            # Well, it seems we don't have any cojsumption logged (yet) at all.
+            # Well, it seems we don't have any consumption logged (yet) at all.
             return
 
         # We should use the day before the first consumption.
@@ -64,30 +64,29 @@ def analyze():
     create_daily_statistics(day=consumption_date)
 
 
-@transaction.atomic
 def create_daily_statistics(day):
     """ Calculates and persists both electricity and gas statistics for a day. """
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
-    ElectricityStatistics.objects.create(
+    DayStatistics.objects.create(
         day=day,
+        total_cost=consumption['total_cost'],
+
         electricity1=consumption['electricity1'],
         electricity2=consumption['electricity2'],
         electricity1_returned=consumption['electricity1_returned'],
         electricity2_returned=consumption['electricity2_returned'],
         electricity1_cost=consumption['electricity1_cost'],
         electricity2_cost=consumption['electricity2_cost'],
-    )
 
-    GasStatistics.objects.create(
-        day=day,
         gas=consumption['gas'],
         gas_cost=consumption['gas_cost'],
+
+        average_temperature=consumption['average_temperature'],
     )
 
 
 @transaction.atomic
 def flush():
     """ Flushes al statistics stored. New ones will generated, providing the source data exists. """
-    ElectricityStatistics.objects.all().delete()
-    GasStatistics.objects.all().delete()
+    DayStatistics.objects.all().delete()

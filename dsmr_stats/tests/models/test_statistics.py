@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from dsmr_stats.models.statistics import ElectricityStatistics
+from dsmr_stats.models.statistics import DayStatistics
 
 
 # class TestElectricityStatistics(TestCase):
