@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_stats.models.settings import StatsSettings
-from dsmr_stats.models.statistics import ElectricityStatistics, GasStatistics
+from dsmr_stats.models.statistics import DayStatistics
 import dsmr_stats.services
 
 
@@ -31,28 +31,22 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertFalse(create_daily_statistics_mock.called)
 
     def test_analyze_service(self):
-        self.assertFalse(ElectricityStatistics.objects.exists())
-        self.assertFalse(GasStatistics.objects.exists())
+        self.assertFalse(DayStatistics.objects.exists())
 
         dsmr_stats.services.analyze()
-        self.assertEqual(ElectricityStatistics.objects.count(), 1)
-        self.assertEqual(GasStatistics.objects.count(), 1)
+        self.assertEqual(DayStatistics.objects.count(), 1)
 
         # Second run should skip first day.
         dsmr_stats.services.analyze()
-        self.assertEqual(ElectricityStatistics.objects.count(), 2)
-        self.assertEqual(GasStatistics.objects.count(), 2)
+        self.assertEqual(DayStatistics.objects.count(), 2)
 
         # Third run should have no effect, as our fixtures are limited to two days.
         dsmr_stats.services.analyze()
-        self.assertEqual(ElectricityStatistics.objects.count(), 2)
-        self.assertEqual(GasStatistics.objects.count(), 2)
+        self.assertEqual(DayStatistics.objects.count(), 2)
 
     def test_flush(self):
         dsmr_stats.services.analyze()
-        self.assertTrue(ElectricityStatistics.objects.exists())
-        self.assertTrue(GasStatistics.objects.exists())
+        self.assertTrue(DayStatistics.objects.exists())
 
         dsmr_stats.services.flush()
-        self.assertFalse(ElectricityStatistics.objects.exists())
-        self.assertFalse(GasStatistics.objects.exists())
+        self.assertFalse(DayStatistics.objects.exists())

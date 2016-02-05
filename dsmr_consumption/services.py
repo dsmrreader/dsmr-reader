@@ -12,7 +12,7 @@ from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_weather.models.statistics import TemperatureReading
+from dsmr_weather.models.reading import TemperatureReading
 import dsmr_consumption.signals
 
 
