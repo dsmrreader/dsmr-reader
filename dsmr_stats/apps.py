@@ -17,4 +17,4 @@ class AppConfig(AppConfig):
     def _on_backend_called_signal(self, sender, **kwargs):
         # Import below prevents an AppRegistryNotReady error on Django init.
         import dsmr_stats.services
-        dsmr_stats.services.compact_all()
+        dsmr_stats.services.create_daily_statistics(day)
