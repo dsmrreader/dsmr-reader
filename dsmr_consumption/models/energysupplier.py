@@ -41,7 +41,7 @@ class EnergySupplierPrice(models.Model):
     )
 
     def __str__(self):
-        return self.description or 'Energy Supplier'
+        return self.description or _('Energy Supplier')
 
     class Meta:
         default_permissions = tuple()

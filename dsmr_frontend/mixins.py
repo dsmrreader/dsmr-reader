@@ -5,7 +5,6 @@ from django.conf import settings
 from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_stats.models.statistics import ElectricityStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.statistics import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
@@ -147,10 +146,9 @@ class HistoryMixin(object):
 class StatisticsMixin(object):
     def get_context_data(self, **kwargs):
         context_data = super(StatisticsMixin, self).get_context_data(**kwargs)
-        context_data['statistics'] = ElectricityStatistics.objects.all().order_by('-pk')[0]
+        context_data['latest_reading'] = DsmrReading.objects.all().order_by('-pk')[0]
+        context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0]
         context_data['total_reading_count'] = DsmrReading.objects.count()
-        context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0].timestamp
-        context_data['last_reading'] = DsmrReading.objects.all().order_by('-pk')[0].timestamp
 
         try:
             context_data['consumption'] = dsmr_consumption.services.day_consumption(
