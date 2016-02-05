@@ -104,9 +104,8 @@ class HistoryMixin(object):
         context_data['usage'] = []
         context_data['days_ago'] = frontend_settings.recent_history_weeks * 7
         context_data['track_temperature'] = WeatherSettings.get_solo().track
-
-        # @TODO: There must be a way to make this more clean.
         context_data['chart'] = defaultdict(list)
+
         CONSUMPTION_FIELDS = (
             'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas',
             'electricity1_cost', 'electricity2_cost', 'gas_cost', 'average_temperature'

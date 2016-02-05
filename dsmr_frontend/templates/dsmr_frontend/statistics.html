@@ -8,40 +8,7 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Readings" %}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <td class="col-md-7">{% trans "Latest reading" %}</td>
-                            <td class="col-md-5">
-                            {% if latest_reading %}
-                            	<span class="badge bg-navy">{{ latest_reading.timestamp|naturaltime }}</span>
-                            {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "First reading" %}</td>
-                            <td>
-                            {% if first_reading %}
-                            	<span class="badge bg-navy">{{ first_reading.timestamp|default:'-' }}</span>
-                            {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Total reading count" %}</td>
-                            <td><span class="badge bg-navy">{{ total_reading_count|default:'-'|intcomma }}</span></td>
-                        </tr>
-                    </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->                        
-                        
+          
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -51,7 +18,7 @@
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
-                            <th class="col-md-7">&nbsp;</th>
+                            <th class="col-md-7">{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% endif %}</th>
                             <th class="col-md-3">{% trans "Delivered" %}</th>
                             <th class="col-md-2">{% trans "Returned" %}</th>
                         </tr>
@@ -120,7 +87,7 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
-    
+                  
     {% if energy_prices %}
     <div class="row">
         <div class="col-md-12">
@@ -152,6 +119,40 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
     {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Readings" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="col-md-7">{% trans "Latest reading" %}</td>
+                            <td class="col-md-5">
+                            {% if latest_reading %}
+                                <span class="badge bg-navy">{{ latest_reading.timestamp|naturaltime }}</span>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "First reading" %}</td>
+                            <td>
+                            {% if first_reading %}
+                                <span class="badge bg-navy">{{ first_reading.timestamp|default:'-' }}</span>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Total reading count" %}</td>
+                            <td><span class="badge bg-navy">{{ total_reading_count|default:'-'|intcomma }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->                        
 
 </section><!-- /.content -->
 {% endblock %}
