@@ -86,7 +86,7 @@ class DashboardMixin(object):
 
         try:
             context_data['consumption'] = dsmr_consumption.services.day_consumption(
-                day=latest_electricity.read_at.astimezone(settings.LOCAL_TIME_ZONE)
+                day=latest_electricity.read_at.astimezone(settings.LOCAL_TIME_ZONE).date()
             )
         except LookupError:
             pass
@@ -124,7 +124,7 @@ class HistoryMixin(object):
 
             try:
                 day_consumption = dsmr_consumption.services.day_consumption(
-                    day=current_day
+                    day=current_day.date()
                 )
             except LookupError:
                 continue
@@ -152,7 +152,7 @@ class StatisticsMixin(object):
 
         try:
             context_data['consumption'] = dsmr_consumption.services.day_consumption(
-                day=timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+                day=timezone.now().astimezone(settings.LOCAL_TIME_ZONE).date()
             )
         except LookupError:
             pass
