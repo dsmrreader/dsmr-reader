@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_weather.models.statistics import TemperatureReading
+from dsmr_weather.models.reading import TemperatureReading
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
 

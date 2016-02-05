@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 03:04+0000\n"
+"POT-Creation-Date: 2016-02-05 15:51+0000\n"
 "PO-Revision-Date: 2016-02-05 04:04+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -525,6 +525,9 @@ msgstr "Weerstation Zeeplatform F-3"
 msgid "Weather station Zeeplatform K13"
 msgstr "Weerstation Zeeplatform K13"
 
+msgid "Temperature (in ℃)"
+msgstr "Temperatuur (in ℃)"
+
 msgid "Track weather"
 msgstr "Houd weergegevens bij"
 
@@ -539,9 +542,6 @@ msgstr "Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op 
 
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
-
-msgid "Temperature (in ℃)"
-msgstr "Temperatuur (in ℃)"
 
 msgid "Dutch"
 msgstr "Nederlands"

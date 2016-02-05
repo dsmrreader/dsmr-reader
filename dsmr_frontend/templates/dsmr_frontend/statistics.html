@@ -121,30 +121,30 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
     
-    {% if consumption.daily_energy_price %}
+    {% if energy_prices %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                	{% trans "Current energy prices" %}: {{ consumption.daily_energy_price.description }}
+                	{% trans "Current energy prices" %}: {{ energy_prices.description }}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
-                            <th class="col-md-7">{{ consumption.daily_energy_price.start }} &larr;&rarr; {{ consumption.daily_energy_price.end|default:'-' }}</th>
+                            <th class="col-md-7">{{ energy_prices.start }} &larr;&rarr; {{ energy_prices.end|default:'-' }}</th>
                             <th class="col-md-5">{% trans "Unit price" %}</th>
                         </tr>
                         <tr>
                             <td class="col-md-7">{% trans "Electricity 1" %}</td>
-                            <td class="col-md-5"><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_1_price }}</span></td>
+                            <td class="col-md-5"><span class="badge bg-black">&euro; {{ energy_prices.electricity_1_price }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2" %}</td>
-                            <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.electricity_2_price }}</span></td>
+                            <td><span class="badge bg-black">&euro; {{ energy_prices.electricity_2_price }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-black">&euro; {{ consumption.daily_energy_price.gas_price }}</span></td>
+                            <td><span class="badge bg-black">&euro; {{ energy_prices.gas_price }}</span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->

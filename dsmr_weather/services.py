@@ -4,7 +4,7 @@ import urllib.request
 from django.utils import timezone
 
 from dsmr_weather.models.settings import WeatherSettings
-from dsmr_weather.models.statistics import TemperatureReading
+from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.buienradar import BUIENRADAR_API_URL, BUIENRADAR_XPATH
 
 

@@ -3,6 +3,5 @@ django-chartjs==1.0
 django-flat-theme==1.1.3
 django-solo==1.1.1
 gunicorn==19.3.0
-polib==1.0.7
 pyserial==2.7
 pytz==2015.7
