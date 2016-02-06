@@ -24,7 +24,7 @@ class History(TemplateView):
 
         CONSUMPTION_FIELDS = (
             'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas',
-            'electricity1_cost', 'electricity2_cost', 'gas_cost', 'average_temperature'
+            'electricity1_cost', 'electricity2_cost', 'gas_cost', 'total_cost', 'average_temperature'
         )
 
         now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
