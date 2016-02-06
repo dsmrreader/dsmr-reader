@@ -3,6 +3,7 @@ import json
 from django.views.generic.base import TemplateView
 
 from dsmr_stats.models.settings import StatsSettings
+from dsmr_stats.models.statistics import HourStatistics
 import dsmr_consumption.services
 import dsmr_stats.services
 
@@ -70,6 +71,7 @@ class Trends(TemplateView):
                 for x in average_consumption_by_hour
             ]
         )
+        context_data['hour_statistics_count'] = HourStatistics.objects.count()
 
         return context_data
 
