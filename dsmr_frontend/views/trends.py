@@ -20,7 +20,7 @@ class Trends(TemplateView):
         context_data['avg_electricity_delivered'] = json.dumps(
             [
                 {
-                    'value': float(dsmr_consumption.services.round_decimal(x['avg_delivered'] * 1000)),
+                    'value': int(dsmr_consumption.services.round_decimal(x['avg_delivered'] * 1000)),
                     'color': str(self._hour_to_color(x['hour'], 0x3D9970)),
                     'label': '{}:00'.format(int(x['hour'])),
                     'highlight': '#5AD3D1',
