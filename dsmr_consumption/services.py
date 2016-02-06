@@ -113,7 +113,21 @@ def compact(dsmr_reading):
     dsmr_reading.save(update_fields=['processed'])
 
 
+def consumption_by_range(start, end):
+    """ Calculates the consumption of a range specified. """
+    electricity_readings = ElectricityConsumption.objects.filter(
+        read_at__gte=start, read_at__lt=end,
+    ).order_by('read_at')
+
+    gas_readings = GasConsumption.objects.filter(
+        read_at__gte=start, read_at__lt=end,
+    ).order_by('read_at')
+
+    return electricity_readings, gas_readings
+
+
 def day_consumption(day):
+    """ Calculates the consumption of an entire day. """
     consumption = {
         'day': day
     }
@@ -134,12 +148,7 @@ def day_consumption(day):
         # Default to zero prices.
         consumption['daily_energy_price'] = EnergySupplierPrice()
 
-    electricity_readings = ElectricityConsumption.objects.filter(
-        read_at__gte=day_start, read_at__lt=day_end,
-    ).order_by('read_at')
-    gas_readings = GasConsumption.objects.filter(
-        read_at__gte=day_start, read_at__lt=day_end,
-    ).order_by('read_at')
+    electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)
 
     if not electricity_readings.exists() or not gas_readings.exists():
         raise LookupError("No readings found for: {}".format(day))
@@ -163,10 +172,10 @@ def day_consumption(day):
     consumption['electricity2_returned_end'] = last_reading.returned_2
     consumption['electricity1_unit_price'] = consumption['daily_energy_price'].electricity_1_price
     consumption['electricity2_unit_price'] = consumption['daily_energy_price'].electricity_2_price
-    consumption['electricity1_cost'] = round_price(
+    consumption['electricity1_cost'] = round_decimal(
         consumption['electricity1'] * consumption['electricity1_unit_price']
     )
-    consumption['electricity2_cost'] = round_price(
+    consumption['electricity2_cost'] = round_decimal(
         consumption['electricity2'] * consumption['electricity2_unit_price']
     )
 
@@ -176,11 +185,11 @@ def day_consumption(day):
     consumption['gas_start'] = first_reading.delivered
     consumption['gas_end'] = last_reading.delivered
     consumption['gas_unit_price'] = consumption['daily_energy_price'].gas_price
-    consumption['gas_cost'] = round_price(
+    consumption['gas_cost'] = round_decimal(
         consumption['gas'] * consumption['gas_unit_price']
     )
 
-    consumption['total_cost'] = round_price(
+    consumption['total_cost'] = round_decimal(
         consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']
     )
     consumption['notes'] = Note.objects.filter(day=day).values_list('description', flat=True)
@@ -195,12 +204,15 @@ def day_consumption(day):
     return consumption
 
 
-def round_price(decimal_price):
+def round_decimal(decimal_price):
     """ Round the price to two decimals. """
+    if not isinstance(decimal_price, Decimal):
+        decimal_price = Decimal(str(decimal_price))
+
     return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
 
 
-def average_electricity_by_hour():
+def average_electricity_delivered_by_hour():
     """ Calculates the average consumption by hour. Measured over all consumption data. """
     SQL_EXTRA = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
