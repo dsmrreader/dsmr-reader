@@ -11,7 +11,7 @@
 <section class="content">
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="sm-st clearfix">
             	<small>{{ latest_electricity_read|naturaltime }}</small>
                 <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="sm-st clearfix">
             	<small>{{ latest_electricity_read|naturaltime }}</small>
                 <span class="sm-st-icon bg-maroon"><i class="fa fa-bolt"></i></span>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="sm-st clearfix">
             	<small>{{ latest_gas_read|naturaltime }}</small>
                 <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
@@ -110,6 +110,57 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average electricity delivered in Watt{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity-delivered-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+        
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average gas consumed in m<sup>3</sup>{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average electricity 1 (off-peak) consumed in kWh{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity1-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average electricity 2 (peak) consumed in kWh{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity2-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    
     {% if track_temperature %}
     <div class="row">
         <div class="col-md-12">
@@ -136,9 +187,16 @@
                 Chart.defaults.global.responsive = true;
                 Chart.defaults.global.maintainAspectRatio = false;
                 Chart.defaults.global.animation = false;
+                Chart.defaults.global.segmentShowStroke = true;
+
 
                 render_electricity_chart();
                 render_gas_chart();
+
+                render_average_electricity_delivered_chart();
+                render_average_electricity1_consumed_chart();
+                render_average_electricity2_consumed_chart();
+                render_average_gas_consumed_chart();
 
                 {% if track_temperature %}
                 render_temperature_chart();
@@ -184,6 +242,34 @@
 	   			var ctx = $("#gas-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data);
    			}
+
+            function render_average_electricity_delivered_chart()
+            {
+                var data = {{ avg_electricity_delivered|safe }};
+                var ctx = $("#average-electricity-delivered-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+                           
+            function render_average_electricity1_consumed_chart()
+            {
+                var data = {{ avg_electricity1_consumption|safe }};
+                var ctx = $("#average-electricity1-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+                       
+            function render_average_electricity2_consumed_chart()
+            {
+                var data = {{ avg_electricity2_consumption|safe }};
+                var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+            
+            function render_average_gas_consumed_chart()
+            {
+                var data = {{ avg_gas_consumption|safe }};
+                var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
 		   	
 	    {% if track_temperature %}
             function render_temperature_chart()

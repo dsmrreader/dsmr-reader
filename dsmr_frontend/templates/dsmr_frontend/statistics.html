@@ -89,52 +89,6 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Average electricity delivered by hour{% endblocktrans %} ({% trans "in Watt" noop %})
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity-delivered-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-
-        <div class="col-md-3">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Average electricity 1 (off-peak) consumed by hour{% endblocktrans %} ({% trans "in kWh" noop %})
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity1-consumed-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-
-        <div class="col-md-3">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Average electricity 2 (peak) consumed by hour{% endblocktrans %} ({% trans "in kWh" noop %})
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity2-consumed-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-        
-        <div class="col-md-3">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Average gas consumed by hour{% endblocktrans %} ({% trans "in m<sup>3</sup>" noop %})
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
     {% if energy_prices %}
     <div class="row">
         <div class="col-md-12">
@@ -202,52 +156,4 @@
     </div><!-- /.row -->                        
 
 </section><!-- /.content -->
-{% endblock %}
-
-
-{% block javascript %}
-{{ block.super }}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                Chart.defaults.global.responsive = true;
-                Chart.defaults.global.maintainAspectRatio = false;
-                Chart.defaults.global.animation = false;
-                Chart.defaults.global.segmentShowStroke = true;
-
-                render_average_electricity_delivered_chart();
-                render_average_electricity1_consumed_chart();
-                render_average_electricity2_consumed_chart();
-                render_average_gas_consumed_chart();
-            });
-
-            function render_average_electricity_delivered_chart()
-            {
-                var data = {{ avg_electricity_delivered|safe }};
-                var ctx = $("#average-electricity-delivered-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-                           
-            function render_average_electricity1_consumed_chart()
-            {
-                var data = {{ avg_electricity1_consumption|safe }};
-                var ctx = $("#average-electricity1-consumed-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-                       
-            function render_average_electricity2_consumed_chart()
-            {
-                var data = {{ avg_electricity2_consumption|safe }};
-                var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-            
-            function render_average_gas_consumed_chart()
-            {
-                var data = {{ avg_gas_consumption|safe }};
-                var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-
-        </script>
 {% endblock %}
