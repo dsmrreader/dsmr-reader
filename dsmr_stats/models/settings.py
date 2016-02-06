@@ -15,4 +15,4 @@ class StatsSettings(SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Statistics configuration')
+        verbose_name = _('Trends & statistics configuration')

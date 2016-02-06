@@ -111,56 +111,6 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
     
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Hourly details of average electricity delivered in Watt{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity-delivered-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-        
-        <div class="col-md-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Hourly details of average gas consumed in m<sup>3</sup>{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Hourly details of average electricity 1 (off-peak) consumed in kWh{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity1-consumed-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-
-        <div class="col-md-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Hourly details of average electricity 2 (peak) consumed in kWh{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity2-consumed-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    
     {% if track_temperature %}
     <div class="row">
         <div class="col-md-12">
@@ -196,11 +146,6 @@
                 
                 render_electricity_chart();
                 render_gas_chart();
-
-                render_average_electricity_delivered_chart();
-                render_average_electricity1_consumed_chart();
-                render_average_electricity2_consumed_chart();
-                render_average_gas_consumed_chart();
 
                 {% if track_temperature %}
                 render_temperature_chart();
@@ -247,34 +192,6 @@
 	   			new Chart(ctx).Line(data, line_options);
    			}
 
-            function render_average_electricity_delivered_chart()
-            {
-                var data = {{ avg_electricity_delivered|safe }};
-                var ctx = $("#average-electricity-delivered-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-                           
-            function render_average_electricity1_consumed_chart()
-            {
-                var data = {{ avg_electricity1_consumption|safe }};
-                var ctx = $("#average-electricity1-consumed-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-                       
-            function render_average_electricity2_consumed_chart()
-            {
-                var data = {{ avg_electricity2_consumption|safe }};
-                var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-            
-            function render_average_gas_consumed_chart()
-            {
-                var data = {{ avg_gas_consumption|safe }};
-                var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
-                new Chart(ctx).PolarArea(data);
-            }
-		   	
 	    {% if track_temperature %}
             function render_temperature_chart()
             {
