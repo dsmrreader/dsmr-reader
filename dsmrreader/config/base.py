@@ -49,7 +49,6 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     # Third party apps/plugins.
-    'chartjs',
     'solo.apps.SoloAppConfig',
 
     # Local project apps.
