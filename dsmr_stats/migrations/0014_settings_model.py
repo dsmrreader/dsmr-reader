@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('track', models.BooleanField(default=True, verbose_name='Track trends', help_text='Whether we should track trends by storing daily consumption summaries.')),
             ],
             options={
-                'verbose_name': 'Statistics configuration',
+                'verbose_name': 'Trends & statistics configuration',
                 'default_permissions': (),
             },
         ),
