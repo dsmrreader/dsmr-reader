@@ -1,8 +1,9 @@
 import warnings
 
+from django.utils.translation import ugettext_lazy as _
 from django.apps import AppConfig
 from django.db import connection
-from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 
 class AppConfig(AppConfig):
@@ -12,7 +13,7 @@ class AppConfig(AppConfig):
 
     def ready(self):
         """ Performs an DB engine check, as we maintain some engine specific queries. """
-        if (connection.vendor not in ['postgresql', 'mysql']):
+        if (connection.vendor not in settings.DSMR_SUPPORTED_DB_VENDORS):
             # Temporary for backwards compatibility
             warnings.showwarning(
                 _(

@@ -140,3 +140,6 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
+
+# DSMR Project.
+DSMR_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
