@@ -22,7 +22,7 @@ def recalculate_statistics(apps, schema_editor):
     print()
 
     for counter in range(1, days_diff + 1):
-        print(" --- Generating day statistics for day {} of {}".format(counter, days_diff))
+        print(" --- Generating daily/hourly statistics for day {} of {}".format(counter, days_diff))
         # Just call analyze for each day. If we missed a day or so, the backend will regenerate it.
         dsmr_stats.services.analyze()
 
@@ -66,6 +66,9 @@ class Migration(migrations.Migration):
                 ('electricity2_returned', models.DecimalField(decimal_places=3, max_digits=9)),
                 ('gas', models.DecimalField(default=None, decimal_places=3, null=True, max_digits=9)),
             ],
+            options={
+                'default_permissions': (),
+            },
         ),
         migrations.RunPython(recalculate_statistics),
     ]
