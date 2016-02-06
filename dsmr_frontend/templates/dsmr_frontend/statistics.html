@@ -20,22 +20,22 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-7">{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% endif %}</th>
-                            <th class="col-md-3">{% trans "Delivered" %}</th>
-                            <th class="col-md-2">{% trans "Returned" %}</th>
+                            <th class="col-md-3">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
+                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 1 (off-peak)" %}</td>
-                            <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} {% trans "kWh" noop %}</span></td>
-                            <td><span class="badge bg-maroon">{{ latest_reading.electricity_returned_1|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span></td>
+                            <td><span class="badge bg-maroon">{{ latest_reading.electricity_returned_1|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 (peak)" %}</td>
-                            <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }} {% trans "kWh" noop %}</span></td>
-                            <td><span class="badge bg-maroon">{{ latest_reading.electricity_returned_2|default:'-' }} {% trans "kWh" noop %}</span></td>
+                            <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
+                            <td><span class="badge bg-maroon">{{ latest_reading.electricity_returned_2|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Gas " %}</td>
-                            <td colspan="2"><span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-' }} {% trans "m<sup>3</sup>" noop %}</span></td>
+                            <td colspan="2"><span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-' }}</span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->
@@ -100,19 +100,19 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-7">{{ energy_prices.start }} &larr;&rarr; {{ energy_prices.end|default:'-' }}</th>
-                            <th class="col-md-5">{% trans "Unit price" %}</th>
+                            <th class="col-md-5">{% trans "Unit price" %} (&euro;)</th>
                         </tr>
                         <tr>
-                            <td class="col-md-7">{% trans "Electricity 1" %}</td>
-                            <td class="col-md-5"><span class="badge bg-black">&euro; {{ energy_prices.electricity_1_price }}</span></td>
+                            <td class="col-md-7">{% trans "Electricity 1 (per kWh)" %}</td>
+                            <td class="col-md-5"><span class="badge bg-black">{{ energy_prices.electricity_1_price }}</span></td>
                         </tr>
                         <tr>
-                            <td>{% trans "Electricity 2" %}</td>
-                            <td><span class="badge bg-black">&euro; {{ energy_prices.electricity_2_price }}</span></td>
+                            <td>{% trans "Electricity 2 (per kWh)" %}</td>
+                            <td><span class="badge bg-black">{{ energy_prices.electricity_2_price }}</span></td>
                         </tr>
                         <tr>
-                            <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-black">&euro; {{ energy_prices.gas_price }}</span></td>
+                            <td>{% trans "Gas (per m<sup>3</sup>)" %}</td>
+                            <td><span class="badge bg-black">{{ energy_prices.gas_price }}</span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->
