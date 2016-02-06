@@ -67,12 +67,17 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:history' %}">
-                                <i class="fa fa-line-chart"></i> <span>{% trans "Recent history" %}</span>
+                                <i class="fa fa-area-chart"></i> <span>{% trans "Recent history" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:statistics' %}">
-                                <i class="fa fa-bar-chart"></i> <span>{% trans "Statistics" %}</span>
+                                <i class="fa fa-list"></i> <span>{% trans "Statistics" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:trends' %}">
+                                <i class="fa fa-line-chart"></i> <span>{% trans "Trends" %}</span>
                             </a>
                         </li>
                         <li>

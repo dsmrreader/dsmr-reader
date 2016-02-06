@@ -5,6 +5,8 @@ from django.conf.urls import url
 from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.history import History
 from dsmr_frontend.views.statistics import Statistics
+from dsmr_frontend.views.trends import Trends
+
 
 urlpatterns = [
     url(r'^$', Dashboard.as_view(), name='dashboard'),
@@ -14,4 +16,5 @@ urlpatterns = [
         name='history'
     ),
     url(r'^statistics$', Statistics.as_view(), name='statistics'),
+    url(r'^trends$', Trends.as_view(), name='trends'),
 ]

@@ -1,0 +1,125 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+{% load i18n %} 
+
+{% block title %}{% trans "Trends" %}{% endblock %}
+{% block header %}{% trans "Trends" %}{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+{% if stats_settings.track %}
+    <div class="alert alert-info" role="alert">
+    {% blocktrans %}All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account!{% endblocktrans %}
+    </div>
+{% else %}
+    <div class="alert alert-danger" role="alert">
+    {% blocktrans %}Your current trends and statistics settings do not allow to track trends! You should enable it to have accurate (or any) data below.{% endblocktrans %}
+    <br />
+    {% blocktrans %}Trends might be recalculated retroactively, depending on whether all historic DSMR source readings are still available.{% endblocktrans %}
+    </div>
+{% endif %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average electricity delivered in Watt{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity-delivered-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+        
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average gas consumed in m<sup>3</sup>{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average electricity 1 (off-peak) consumed in kWh{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity1-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly details of average electricity 2 (peak) consumed in kWh{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity2-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+	        var line_options = {
+	            /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
+	            pointHitDetectionRadius: 2,
+	        }
+        
+        	$(document).ready(function(){
+                Chart.defaults.global.responsive = true;
+                Chart.defaults.global.maintainAspectRatio = false;
+                Chart.defaults.global.animation = false;
+                Chart.defaults.global.segmentShowStroke = true;
+
+                render_average_electricity_delivered_chart();
+                render_average_electricity1_consumed_chart();
+                render_average_electricity2_consumed_chart();
+                render_average_gas_consumed_chart();
+        	});
+
+            function render_average_electricity_delivered_chart()
+            {
+                var data = {{ avg_electricity_delivered|safe }};
+                var ctx = $("#average-electricity-delivered-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+                           
+            function render_average_electricity1_consumed_chart()
+            {
+                var data = {{ avg_electricity1_consumption|safe }};
+                var ctx = $("#average-electricity1-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+                       
+            function render_average_electricity2_consumed_chart()
+            {
+                var data = {{ avg_electricity2_consumption|safe }};
+                var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+            
+            function render_average_gas_consumed_chart()
+            {
+                var data = {{ avg_gas_consumption|safe }};
+                var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+		</script>
+
+{% endblock %}
