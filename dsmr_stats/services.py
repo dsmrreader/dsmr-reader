@@ -1,14 +1,15 @@
 from datetime import timedelta
 
 from django.db import transaction, connection
+from django.db.models.aggregates import Avg
 from django.utils import timezone
 from django.conf import settings
+from django.core.cache import cache
 
 from dsmr_stats.models.settings import StatsSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 import dsmr_consumption.services
-from django.db.models.aggregates import Avg
 
 
 def analyze():
@@ -63,6 +64,9 @@ def analyze():
     # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly
     # anyway.
     create_daily_statistics(day=consumption_date)
+
+    # Reflect changes in cache.
+    cache.clear()
 
 
 @transaction.atomic
@@ -132,6 +136,7 @@ def flush():
     """ Flushes al statistics stored. New ones will generated, providing the source data exists. """
     DayStatistics.objects.all().delete()
     HourStatistics.objects.all().delete()
+    cache.clear()
 
 
 def average_consumption_by_hour():

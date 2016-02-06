@@ -51,6 +51,11 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertEqual(DayStatistics.objects.count(), 2)
         self.assertEqual(HourStatistics.objects.count(), 4)
 
+    @mock.patch('django.core.cache.cache.clear')
+    def test_analyze_service_clear_cache(self, clear_cache_mock):
+        dsmr_stats.services.analyze()
+        self.assertTrue(clear_cache_mock.called)
+
     def test_flush(self):
         dsmr_stats.services.analyze()
         self.assertTrue(DayStatistics.objects.exists())
@@ -59,3 +64,8 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         dsmr_stats.services.flush()
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
+
+    @mock.patch('django.core.cache.cache.clear')
+    def test_flush_clear_cache(self, clear_cache_mock):
+        dsmr_stats.services.flush()
+        self.assertTrue(clear_cache_mock.called)
