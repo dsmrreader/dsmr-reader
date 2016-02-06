@@ -210,7 +210,7 @@
                 };
 
                 var ctx = $("#temperature-chart").get(0).getContext("2d");
-                new Chart(ctx).Line(data);
+                new Chart(ctx).Line(data, line_options);
             }
         {% endif %}
 		</script>
