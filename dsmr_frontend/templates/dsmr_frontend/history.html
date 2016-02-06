@@ -117,6 +117,11 @@
 {{ block.super }}
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
         <script type="text/javascript">
+            var line_options = {
+                /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
+                pointHitDetectionRadius: 3,
+            }
+        
         	$(document).ready(function(){
                 Chart.defaults.global.responsive = true;
                 Chart.defaults.global.maintainAspectRatio = false;
@@ -175,7 +180,7 @@
 	   			};
 	
 	   			var ctx = $("#cost-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data);
+	   			new Chart(ctx).Line(data, line_options);
    			}
         	
 		   	function render_electricity_chart()
@@ -222,7 +227,7 @@
 	   			};
 	
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data);
+	   			new Chart(ctx).Line(data, line_options);
    			}
             
             function render_gas_chart()
@@ -242,7 +247,7 @@
                 };
 
                 var ctx = $("#gas-chart").get(0).getContext("2d");
-                new Chart(ctx).Line(data);
+                new Chart(ctx).Line(data, line_options);
             }
             
         {% if track_temperature %}
@@ -263,7 +268,7 @@
 	   			};
 
 	   			var ctx = $("#temperature-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data);
+	   			new Chart(ctx).Line(data, line_options);
    			}
 	   	{% endif %}
 
