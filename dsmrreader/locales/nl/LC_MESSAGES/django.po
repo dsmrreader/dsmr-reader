@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-06 02:36+0000\n"
-"PO-Revision-Date: 2016-02-06 03:40+0100\n"
+"POT-Creation-Date: 2016-02-06 11:44+0000\n"
+"PO-Revision-Date: 2016-02-06 12:44+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -258,6 +258,9 @@ msgstr "Recente historie"
 msgid "Statistics"
 msgstr "Statistieken"
 
+msgid "Trends"
+msgstr "Trends"
+
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -302,23 +305,6 @@ msgstr "Recent elektriciteitsverbruik  (Watt)"
 
 msgid "Recent gas delivered (m<sup>3</sup>)"
 msgstr "Recent gasverbruik  (m<sup>3</sup>)"
-
-#| msgid "Average electricity delivered by hour"
-msgid "Hourly details of average electricity delivered in Watt"
-msgstr "Gemiddelde elektriciteitsvraag verdeeld per daguur in Watt"
-
-msgid "Hourly details of average gas consumed in m<sup>3</sup>"
-msgstr "Gemiddeld gasverbruik verdeeld per daguur in m<sup>3</sup>"
-
-#| msgid "Average electricity 1 (off-peak) consumed by hour"
-msgid "Hourly details of average electricity 1 (off-peak) consumed in kWh"
-msgstr ""
-"Gemiddeld elektriciteitsverbruik verdeeld per daguur in kWh (daltarief)"
-
-#| msgid "Average electricity 2 (peak) consumed by hour"
-msgid "Hourly details of average electricity 2 (peak) consumed in kWh"
-msgstr ""
-"Gemiddeld elektriciteitsverbruik verdeeld per daguur in kWh (piektarief)"
 
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
@@ -399,6 +385,49 @@ msgstr "Eerste uitlezing"
 msgid "Total reading count"
 msgstr "Totaal aantal uitlezingen"
 
+msgid ""
+"All data below is calculated among all consumption tracked until a day ago. "
+"Untracked consumption and any usage of today is not taken into account!"
+msgstr ""
+"Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en "
+"met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin "
+"niet meegenomen!"
+
+#| msgid ""
+#| "Your current trends &amp; statistics settings do not allow to track "
+#| "trends! You should enable it to have accurate (or any) data below."
+msgid ""
+"Your current trends and statistics settings do not allow to track trends! "
+"You should enable it to have accurate (or any) data below."
+msgstr ""
+"Je huidige trends- en statistiekeninstellingen staan niet toe om trends bij "
+"te houden. Pas dit aan om accurate (of uberhaupt) gegevens  hieronder te "
+"zien."
+
+msgid ""
+"Trends might be recalculated retroactively, depending on whether all "
+"historic DSMR source readings are still available."
+msgstr ""
+"Trends kunnen met terugwerkende kracht berekend worden, mits alle "
+"historische DSMR-uitlezingen nog beschikbaar zijn."
+
+msgid "Hourly details of average electricity delivered in Watt"
+msgstr "Gemiddelde elektriciteitsvraag verdeeld per daguur in Watt"
+
+msgid "Hourly details of average gas consumed in m<sup>3</sup>"
+msgstr "Gemiddeld gasverbruik verdeeld per daguur in m<sup>3</sup>"
+
+msgid "Hourly details of average electricity 1 (off-peak) consumed in kWh"
+msgstr ""
+"Gemiddeld elektriciteitsverbruik verdeeld per daguur in kWh (daltarief)"
+
+msgid "Hourly details of average electricity 2 (peak) consumed in kWh"
+msgstr ""
+"Gemiddeld elektriciteitsverbruik verdeeld per daguur in kWh (piektarief)"
+
+msgid "Trend & statistics"
+msgstr "Trends & statistieken"
+
 msgid "Compacts existing DSMR readings into consumption points."
 msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
 
@@ -458,8 +487,8 @@ msgid "Whether we should track trends by storing daily consumption summaries."
 msgstr ""
 "Geeft aan of we trends over het dagelijkse verbruik bijhouden en opslaan."
 
-msgid "Statistics configuration"
-msgstr "Statistiekenconfiguratie"
+msgid "Trends & statistics configuration"
+msgstr "Trends- & statistiekenconfiguratie"
 
 msgid "Weather"
 msgstr "Weergegevens"

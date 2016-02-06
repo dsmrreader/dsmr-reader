@@ -6,7 +6,7 @@ import dsmr_backend.signals
 
 class AppConfig(AppConfig):
     name = 'dsmr_stats'
-    verbose_name = _('Statistics')
+    verbose_name = _('Trend & statistics')
 
     def ready(self):
         dsmr_backend.signals.backend_called.connect(
