@@ -31,6 +31,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('dsmr_stats', '0014_settings_model'),
+        ('dsmr_weather', '0001_weather_models'),
     ]
 
     operations = [
