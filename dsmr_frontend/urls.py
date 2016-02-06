@@ -16,5 +16,9 @@ urlpatterns = [
         name='history'
     ),
     url(r'^statistics$', Statistics.as_view(), name='statistics'),
-    url(r'^trends$', Trends.as_view(), name='trends'),
+    url(
+        r'^trends$',
+        cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()),
+        name='trends'
+    ),
 ]
