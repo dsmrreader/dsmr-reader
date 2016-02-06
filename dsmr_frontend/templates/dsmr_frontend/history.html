@@ -15,7 +15,7 @@
                     {% blocktrans %}Daily cost in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in &euro;)" %}
                 </header>
                 <div class="panel-body">
-                	<canvas id="cost-chart" width="1000" height="150"></canvas>
+                	<canvas id="cost-chart" height="150"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -28,7 +28,7 @@
                     {% blocktrans %}Daily electricity usage in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
                 <div class="panel-body">
-                	<canvas id="electricity-chart" width="1000" height="150"></canvas>
+                	<canvas id="electricity-chart" height="150"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -41,7 +41,7 @@
                     {% blocktrans %}Daily gas usage in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in m<sup>3</sup>)" %}
                 </header>
                 <div class="panel-body">
-                	<canvas id="gas-chart" width="1000" height="150"></canvas>
+                	<canvas id="gas-chart" height="150"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -55,7 +55,7 @@
                     {% blocktrans %}Daily average temperature in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in &deg;C)" %}
                 </header>
                 <div class="panel-body">
-                    <canvas id="temperature-chart" width="1000" height="150"></canvas>
+                    <canvas id="temperature-chart" height="150"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -115,9 +115,13 @@
 
 {% block javascript %}
 {{ block.super }}
-        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
         <script type="text/javascript">
         	$(document).ready(function(){
+                Chart.defaults.global.responsive = true;
+                Chart.defaults.global.maintainAspectRatio = false;
+        		Chart.defaults.global.animation = false;
+        		
         		render_cost_chart();
         		render_electricity_chart();
         		render_gas_chart();
@@ -170,15 +174,8 @@
 	   				}]
 	   			};
 	
-	   			{% verbatim %}
-	   			var options = {
-	   				responsive: true,
-	   				animation: false,
-	   			};
-	   			{% endverbatim %}
-	
 	   			var ctx = $("#cost-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data, options);
+	   			new Chart(ctx).Line(data);
    			}
         	
 		   	function render_electricity_chart()
@@ -224,15 +221,8 @@
 	   				}]
 	   			};
 	
-	   			{% verbatim %}
-	   			var options = {
-	   				responsive: true,
-	   				animation: false,
-	   			};
-	   			{% endverbatim %}
-	
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data, options);
+	   			new Chart(ctx).Line(data);
    			}
             
             function render_gas_chart()
@@ -250,16 +240,9 @@
                         pointHighlightStroke: "rgba(150,150,150,1)"
                     }]
                 };
-    
-                {% verbatim %}
-                var options = {
-                    responsive: true,
-                    animation: false,
-                };
-                {% endverbatim %}
-    
+
                 var ctx = $("#gas-chart").get(0).getContext("2d");
-                new Chart(ctx).Line(data, options);
+                new Chart(ctx).Line(data);
             }
             
         {% if track_temperature %}
@@ -278,16 +261,9 @@
 	   					pointHighlightStroke: "rgba(150,150,150,1)"
 	   				}]
 	   			};
-	
-	   			{% verbatim %}
-	   			var options = {
-	   				responsive: true,
-	   				animation: false,
-	   			};
-	   			{% endverbatim %}
-	
+
 	   			var ctx = $("#temperature-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data, options);
+	   			new Chart(ctx).Line(data);
    			}
 	   	{% endif %}
 

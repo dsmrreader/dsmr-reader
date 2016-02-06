@@ -90,13 +90,46 @@
     </div><!-- /.row -->
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average electricity usage by hour{% endblocktrans %} ({% trans "in Watt" noop %})
+                    {% blocktrans %}Average electricity delivered by hour{% endblocktrans %} ({% trans "in Watt" noop %})
                 </header>
                 <div class="panel-body">
-                    <canvas id="average-electricity-chart" width="1000" height="200"></canvas>
+                    <canvas id="average-electricity-delivered-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+
+        <div class="col-md-3">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Average electricity 1 (off-peak) consumed by hour{% endblocktrans %} ({% trans "in kWh" noop %})
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity1-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+
+        <div class="col-md-3">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Average electricity 2 (peak) consumed by hour{% endblocktrans %} ({% trans "in kWh" noop %})
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity2-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+        
+        <div class="col-md-3">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Average gas consumed by hour{% endblocktrans %} ({% trans "in m<sup>3</sup>" noop %})
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -174,36 +207,46 @@
 
 {% block javascript %}
 {{ block.super }}
-        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-            	render_average_electricity_chart();
+                Chart.defaults.global.responsive = true;
+                Chart.defaults.global.maintainAspectRatio = false;
+                Chart.defaults.global.animation = false;
+                Chart.defaults.global.segmentShowStroke = true;
+
+                render_average_electricity_delivered_chart();
+                render_average_electricity1_consumed_chart();
+                render_average_electricity2_consumed_chart();
+                render_average_gas_consumed_chart();
             });
-            
-            function render_average_electricity_chart()
+
+            function render_average_electricity_delivered_chart()
             {
-                var data = {
-                    labels: {{ avg_electricity_x|safe }},
-                    datasets: [{
-                        data: {{ avg_electricity_y|safe }},
-                        label: "{% trans 'Average electricity usage per hour' %}",
-                        fillColor: "rgba(151,187,205,0.5)",
-                        strokeColor: "rgba(151,187,205,0.8)",
-                        highlightFill: "rgba(151,187,205,0.75)",
-                        highlightStroke: "rgba(151,187,205,1)",
-//                        pointHighlightStroke: "rgba(0,0,0,1)"
-                    }]
-                };
-    
-                {% verbatim %}
-                var options = {
-                	segmentShowStroke: true,
-                    animation: false
-                };
-                {% endverbatim %}
-    
-                var ctx = $("#average-electricity-chart").get(0).getContext("2d");
-                new Chart(ctx).Bar(data, options);
+                var data = {{ avg_electricity_delivered|safe }};
+                var ctx = $("#average-electricity-delivered-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+                           
+            function render_average_electricity1_consumed_chart()
+            {
+                var data = {{ avg_electricity1_consumption|safe }};
+                var ctx = $("#average-electricity1-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+                       
+            function render_average_electricity2_consumed_chart()
+            {
+                var data = {{ avg_electricity2_consumption|safe }};
+                var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
+            }
+            
+            function render_average_gas_consumed_chart()
+            {
+                var data = {{ avg_gas_consumption|safe }};
+                var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data);
             }
 
         </script>

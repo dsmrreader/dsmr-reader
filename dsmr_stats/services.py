@@ -1,13 +1,14 @@
 from datetime import timedelta
 
-from django.db import transaction
+from django.db import transaction, connection
 from django.utils import timezone
 from django.conf import settings
 
 from dsmr_stats.models.settings import StatsSettings
-from dsmr_stats.models.statistics import DayStatistics
+from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 import dsmr_consumption.services
+from django.db.models.aggregates import Avg
 
 
 def analyze():
@@ -64,11 +65,16 @@ def analyze():
     create_daily_statistics(day=consumption_date)
 
 
+@transaction.atomic
 def create_daily_statistics(day):
     """ Calculates and persists both electricity and gas statistics for a day. """
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
-    DayStatistics.objects.create(
+    for current_hour in range(0, 24):
+        # Since we are already sinde an atomic() transaction, no further savepoints are required.
+        create_hourly_statistics(day=day, hour=current_hour)
+
+    return DayStatistics.objects.create(
         day=day,
         total_cost=consumption['total_cost'],
 
@@ -86,7 +92,67 @@ def create_daily_statistics(day):
     )
 
 
+def create_hourly_statistics(day, hour):
+    """ Calculates and persists both electricity and gas statistics for an hour. """
+    hour_start = timezone.datetime(
+        year=day.year,
+        month=day.month,
+        day=day.day,
+        hour=hour,
+        tzinfo=settings.LOCAL_TIME_ZONE
+    )
+    hour_end = hour_start + timezone.timedelta(hours=1)
+    electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
+        start=hour_start, end=hour_end
+    )
+
+    if not electricity_readings.exists():
+        return
+
+    creation_kwargs = {
+        'hour_start': hour_start
+    }
+
+    electricity_start = electricity_readings[0]
+    electricity_end = electricity_readings[electricity_readings.count() - 1]
+    creation_kwargs['electricity1'] = electricity_end.delivered_1 - electricity_start.delivered_1
+    creation_kwargs['electricity2'] = electricity_end.delivered_2 - electricity_start.delivered_2
+    creation_kwargs['electricity1_returned'] = electricity_end.returned_1 - electricity_start.returned_1
+    creation_kwargs['electricity2_returned'] = electricity_end.returned_2 - electricity_start.returned_2
+
+    if gas_readings.exists():
+        # Gas readings are unique per hour anyway.
+        creation_kwargs['gas'] = gas_readings[0].currently_delivered
+
+    return HourStatistics.objects.create(**creation_kwargs)
+
+
 @transaction.atomic
 def flush():
     """ Flushes al statistics stored. New ones will generated, providing the source data exists. """
     DayStatistics.objects.all().delete()
+    HourStatistics.objects.all().delete()
+
+
+def average_consumption_by_hour():
+    """ Calculates the average consumption by hour. Measured over all consumption data. """
+    SQL_EXTRA = {
+        # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
+        'postgresql': "date_part('hour', hour_start)",
+        'mysql': "extract(hour from hour_start)",
+    }
+
+    try:
+        sql_extra = SQL_EXTRA[connection.vendor]
+    except KeyError:
+        raise NotImplementedError(connection.vendor)
+
+    return HourStatistics.objects.extra({
+        'hour_start': sql_extra
+    }).values('hour_start').order_by('hour_start').annotate(
+        avg_electricity1=Avg('electricity1'),
+        avg_electricity2=Avg('electricity2'),
+        avg_electricity1_returned=Avg('electricity1_returned'),
+        avg_electricity2_returned=Avg('electricity2_returned'),
+        avg_gas=Avg('gas'),
+    )

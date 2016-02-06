@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 23:15+0000\n"
-"PO-Revision-Date: 2016-02-05 23:07+0100\n"
+"POT-Creation-Date: 2016-02-06 02:25+0000\n"
+"PO-Revision-Date: 2016-02-06 03:24+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -313,11 +313,26 @@ msgstr "Gas"
 msgid "Miscellaneous statistics"
 msgstr "Overige statistieken"
 
-msgid "Average electricity usage by hour"
+msgid "Average electricity delivered by hour"
 msgstr "Gemiddelde energievraag per uur"
 
 msgid "in Watt"
 msgstr "In Watt"
+
+msgid "Average electricity 1 (off-peak) consumed by hour"
+msgstr "Gemiddelde elektriciteitsconsumptie per uur (daltarief)"
+
+msgid "in kWh"
+msgstr "in kWh"
+
+msgid "Average electricity 2 (peak) consumed by hour"
+msgstr "Gemiddelde elektriciteitsconsumptie per uur (piektarief)"
+
+msgid "Average gas consumed by hour"
+msgstr "Gemiddelde gasconsumptie per uur"
+
+msgid "in m<sup>3</sup>"
+msgstr "in m<sup>3</sup>"
 
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
@@ -342,9 +357,6 @@ msgstr "Eerste uitlezing"
 
 msgid "Total reading count"
 msgstr "Totaal aantal uitlezingen"
-
-msgid "Average electricity usage per hour"
-msgstr "Gemiddelde energievraag per uur"
 
 msgid "Compacts existing DSMR readings into consumption points."
 msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
@@ -572,3 +584,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Average electricity usage per hour"
+#~ msgstr "Gemiddelde energievraag per uur"
