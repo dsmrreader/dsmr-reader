@@ -13,8 +13,8 @@ import dsmr_stats.services
 
 class Dashboard(TemplateView):
     template_name = 'dsmr_frontend/dashboard.html'
-    electricity_max = 30
-    gas_max = 36
+    electricity_max = 60  # Minutes or readings.
+    gas_max = 3 * 24  # Hours.
     temperature_max = gas_max
 
     def get_context_data(self, **kwargs):

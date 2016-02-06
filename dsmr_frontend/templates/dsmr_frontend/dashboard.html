@@ -183,13 +183,17 @@
 {{ block.super }}
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
         <script type="text/javascript">
+	        var line_options = {
+	            /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
+	            pointHitDetectionRadius: 2,
+	        }
+        
         	$(document).ready(function(){
                 Chart.defaults.global.responsive = true;
                 Chart.defaults.global.maintainAspectRatio = false;
                 Chart.defaults.global.animation = false;
                 Chart.defaults.global.segmentShowStroke = true;
-
-
+                
                 render_electricity_chart();
                 render_gas_chart();
 
@@ -220,7 +224,7 @@
 	   			};
 	
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data);
+	   			new Chart(ctx).Line(data, line_options);
    			}
 		   	
 		   	function render_gas_chart()
@@ -240,7 +244,7 @@
 	   			};
 
 	   			var ctx = $("#gas-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data);
+	   			new Chart(ctx).Line(data, line_options);
    			}
 
             function render_average_electricity_delivered_chart()
