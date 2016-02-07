@@ -2,3 +2,4 @@
 /.project
 *.pyc
 */__pycache__
+/dsmrreader/settings.py
