@@ -6,6 +6,7 @@ from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.history import History
 from dsmr_frontend.views.statistics import Statistics
 from dsmr_frontend.views.trends import Trends
+from dsmr_frontend.views.export import Export
 
 
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
         cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()),
         name='trends'
     ),
+    url(r'^export$', Export.as_view(), name='export'),
 ]

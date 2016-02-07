@@ -1,0 +1,80 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+{% load i18n %} 
+
+{% block title %}{% trans "Export" %}{% endblock %}
+{% block header %}{% trans "Export" %}{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel export-panel">
+                <header class="panel-heading">
+                    <h2>1. <small>{% blocktrans %}Select data type{% endblocktrans %}</small></h2>
+                </header>
+                <div class="panel-body">
+                    <div class="form-group">
+                    {{ form.data_type }}
+                    </div>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+
+        <div class="col-md-3">
+            <div class="panel export-panel">
+                <header class="panel-heading">
+                    <h2>2. <small>{% blocktrans %}Select date range{% endblocktrans %}</small></h2>
+                </header>
+                <div class="panel-body">
+                    {% blocktrans %}From{% endblocktrans %} <input id="daterange_start" name="start" size="12" /> {% blocktrans %}until{% endblocktrans %} <input id="daterange_end" name="end" size="12" />
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+
+        <div class="col-md-3">
+            <div class="panel export-panel">
+                <header class="panel-heading">
+                    <h2>3. <small>{% blocktrans %}Download{% endblocktrans %}</small></h2>
+                </header>
+                <div class="panel-body">
+                      <a href="" class="btn btn-success"><i class="fa fa-file-excel-o"></i> &nbsp; <span>{% trans "Download (CSV)" %}</span></a>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->    </div><!-- /.row -->
+
+</section><!-- /.content -->
+{% endblock %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link href="{% static 'dsmr_frontend/css/daterangepicker/daterangepicker.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'dsmr_frontend/css/dsmr-reader.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/daterangepicker/moment.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/daterangepicker/daterangepicker.js' %}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			options = {
+                locale: {
+                    format: 'DD-MM-YYYY'
+                  },
+                  singleDatePicker: true,
+                  showWeekNumbers: true,
+                  timePicker: false,
+                  autoApply: true,
+                  minDate: '01-01-2016',
+                  maxDate: '01-03-2016'
+             };
+			
+            $('#daterange_start').daterangepicker(options);
+            $('#daterange_end').daterangepicker(options);
+		});
+	</script>
+
+{% endblock %}

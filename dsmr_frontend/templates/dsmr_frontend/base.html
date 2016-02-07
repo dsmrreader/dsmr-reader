@@ -17,7 +17,9 @@
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}" rel='stylesheet' type='text/css'>
         <!-- Theme style -->
         <link href="{% static 'dsmr_frontend/css/style.css' %}" rel="stylesheet" type="text/css" />
-        
+
+        {% block stylesheets %}{% endblock %}
+
         <link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicon.png' %}">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -83,9 +85,17 @@
                         <li>
                             &nbsp;
                         </li>
+                        <li>
+                            <a href="{% url 'frontend:export' %}">
+                                <i class="fa fa-download"></i> <span>{% trans "Export" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            &nbsp;
+                        </li>
                          <li>
                             <a href="{% url 'admin:index' %}">
-                                <i class="fa fa-cogs"></i> <span>{% trans "Settings" %}</span>
+                                <i class="fa fa-wrench"></i> <span>{% trans "Settings" %}</span>
                             </a>
                         </li>
                     </ul>
