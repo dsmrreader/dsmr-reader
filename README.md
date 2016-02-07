@@ -19,7 +19,7 @@ There are plenty of 'scripts' available online for performing DSMR readings. Thi
 I advise to only use this tool when you have basic Linux knowledge or have any interest in the components used. I might create an installer script later, but I'll focus on the build of features first.
 
 ## Dependencies & requirements ##
-* RaspberryPi 2 *(minimal v1 B required but v2 is recommended)*.
+* RaspberryPi v2+ *(minimal v1 B required but v2 is strongly recommended)*.
 * Raspbian *(or Debian based distro)*.
 * Python 3.4 *(Included in the latest Raspbian named "Jessie")*.
 * Smart Meter with support for at least DSMR 4.0 *(tested with Landis + Gyr E350 DSMR4)*.
@@ -103,7 +103,7 @@ The application stores by default all readings taken from the serial cable. Depe
 #### (Option A.) MySQL/MariaDB ###
 Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. **libmysqlclient-dev** is required for the virtualenv installation later in this guide..
 
-`sudo apt-get install mariadb-server-10.0 libmysqlclient-dev` 
+`sudo apt-get install -y mariadb-server-10.0 libmysqlclient-dev` 
 
 Create database:
 
@@ -125,7 +125,7 @@ Flush privileges to activate them:
 
 Install PostgreSQL. **postgresql-server-dev-all** is required for the virtualenv installation later in this guide.
 
-`sudo apt-get install postgresql postgresql-server-dev-all`
+`sudo apt-get install -y postgresql postgresql-server-dev-all`
 
 Postgres does not start due to locales? Try: `dpkg-reconfigure locales`
 
@@ -149,7 +149,7 @@ Set password for user:
 ### Dependencies ###
 Misc utils, required for webserver, application server and cloning the application code from the repository.
 
-`sudo apt-get install nginx supervisor mercurial python3 python3-pip python3-virtualenv virtualenvwrapper`
+`sudo apt-get install -y nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper`
 
 Install `cu`. The CU program allows easy testing for your DSMR serial connection. It's very basic but very effective to test whether your serial cable setup works properly.
 
@@ -195,7 +195,7 @@ To exit **cu**, input `q.`, hit Enter and wait for a few seconds. It should exit
 ### Application code clone ###
 Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user (if not then enter `sudo su - dsmr` again):
 
-`hg clone https://bitbucket.org/dennissiemensma/dsmr-reader -r stable`
+`git clone https://github.com/dennissiemensma/dsmr-reader.git --branch stable`
 
 
 ### Virtualenv ###
@@ -257,7 +257,7 @@ Prepare static files for webinterface. This will copy all static files to the di
 
 `./manage.py collectstatic --noinput`
 
-Create an application superuser. Django will prompt you for a password. Alter username and email when you prefer other credentials, but email is not (yet) used in the application anyway. Besides, you have shell access so you may generate another user at any time (in case you get yourself locked out of the application). The credentials generated can be used to access the administration panel inside the application, which requires authentication.
+Create an application superuser. Django will prompt you for a password. Alter username and email when you prefer other credentials, but email is not (yet) used in the application anyway. Besides, you have shell access so you may generate another user at any time (in case you lock yourself out of the application). The credentials generated can be used to access the administration panel inside the application, which requires authentication.
 
 `./manage.py createsuperuser --username admin --email root@localhost`
 
@@ -360,29 +360,8 @@ All feedback and input is, as always, very much appreciated! Please send an e-ma
 
 
 # Licence #
-Also included in the **LICENCE** file:
+The official licence for using this project can be found in the **LICENCE.txt** file. In short, only non-commercial use is allowed.
 
-> The MIT License (MIT)
-> 
-> Copyright (c) [2015] [Dennis Siemensma]
-> 
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-> of this software and associated documentation files (the "Software"), to deal
-> in the Software without restriction, including without limitation the rights
-> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> copies of the Software, and to permit persons to whom the Software is
-> furnished to do so, subject to the following conditions:
-> 
-> The above copyright notice and this permission notice shall be included in all
-> copies or substantial portions of the Software.
-> 
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-> SOFTWARE.
 
 # Credits #
 Software listed below. Please note and respect their licences as well, if any.
