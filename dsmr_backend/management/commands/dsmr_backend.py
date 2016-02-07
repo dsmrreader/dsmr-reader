@@ -8,6 +8,8 @@ class Command(BaseCommand):
     help = _('Generates a generic event triggering apps for backend operations, cron-like.')
 
     def handle(self, **options):
+        self.stdout.write('Broadcasting "backend_called" signal...')
+
         # send_robust() guarantees the every listener receives this signal.
         responses = dsmr_backend.signals.backend_called.send_robust(None)
 
@@ -15,3 +17,5 @@ class Command(BaseCommand):
             # Reflect any error to output for convenience.
             if isinstance(current_response, Exception):
                 raise CommandError('Failure(s) detected: {}'.format(responses))
+
+        self.stdout.write('Finished.')
