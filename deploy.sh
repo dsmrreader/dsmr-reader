@@ -3,7 +3,7 @@
 echo ""
 echo " --- Checking remote repository for new commits (in stable)."
 git fetch --tags
-git checkout stable
+git checkout
 
 echo ""
 echo " --- Checking & synchronizing base requirements for changes."
