@@ -2,7 +2,8 @@
 
 echo ""
 echo " --- Checking remote repository for new commits."
-hg pull --up
+hg pull
+hg up
 
 echo ""
 echo " --- Checking & synchronizing base requirements for changes."
