@@ -1,9 +1,8 @@
 #!/bin/bash
 
 echo ""
-echo " --- Checking remote repository for new commits (in stable)."
-git fetch --tags
-git checkout
+echo " --- Pulling remote repository for new commits..."
+git pull
 
 echo ""
 echo " --- Checking & synchronizing base requirements for changes."
