@@ -1,10 +1,11 @@
 
 
 
-v0.9 (β) - 2016-xx-xx
+v0.9 (β) - 2016-02-08
 =====================
 - Moved project to GitHub (#28).
 - Added stdout to dsmr_backend to reflect progress.
+- Restore note usage in GUI (#39).
 
 
 v0.8 (β) - 2016-02-06
