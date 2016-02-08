@@ -1,8 +1,8 @@
 [
 {
     "fields": {
-        "description": "Gourmetten",
-        "day": "2015-12-20"
+        "description": "Testnote",
+        "day": "2016-01-01"
     },
     "pk": 1,
     "model": "dsmr_stats.note"

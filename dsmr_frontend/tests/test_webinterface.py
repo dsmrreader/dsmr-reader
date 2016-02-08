@@ -11,6 +11,7 @@ from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_stats.models.statistics import DayStatistics
 from dsmr_stats.models.note import Note
 
 
@@ -19,7 +20,8 @@ class TestViews(CallCommandStdoutMixin, TestCase):
     fixtures = [
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json'
+        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_statistics.json'
     ]
     namespace = 'frontend'
 
@@ -28,6 +30,7 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self._call_command_stdout('dsmr_backend')
         ec = ElectricityConsumption.objects.all()[0]
         gc = GasConsumption.objects.all()[0]
+        ds = DayStatistics.objects.get(pk=1)
 
         timestamp = timezone.now()
 
@@ -35,9 +38,13 @@ class TestViews(CallCommandStdoutMixin, TestCase):
             timestamp += interval
 
         ec.read_at = timestamp
-        gc.read_at = timestamp
         ec.save()
+
+        gc.read_at = timestamp
         gc.save()
+
+        ds.day = timestamp.date()
+        ds.save()
 
         Note.objects.all().update(day=timestamp.date())
         TemperatureReading.objects.create(read_at=timestamp, degrees_celcius=3.5)
@@ -84,7 +91,22 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         response = self.client.get(
             reverse('{}:history'.format(self.namespace))
         )
-        self.assertIn('usage', response.context)
+        self.assertTrue(all(x in response.context['usage'][0].keys() for x in [
+            'electricity2_returned',
+            'electricity1_cost',
+            'day',
+            'gas',
+            'electricity2_cost',
+            'electricity2',
+            'notes',
+            'gas_cost',
+            'electricity1',
+            'total_cost',
+            'average_temperature',
+            'electricity1_returned'
+        ]))
+        self.assertIn('notes', response.context['usage'][0])
+        self.assertEqual('Testnote', response.context['usage'][0]['notes'][0])
         self.assertEqual(response.context['days_ago'], frontend_settings.recent_history_weeks * 7)
         self.assertFalse(response.context['track_temperature'])
         self.assertEqual(response.status_code, 200)

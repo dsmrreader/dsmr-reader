@@ -8,6 +8,7 @@ from django.utils import timezone
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_stats.models.note import Note
 
 
 class History(TemplateView):
@@ -38,17 +39,18 @@ class History(TemplateView):
             current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
 
             try:
-                day_stats = DayStatistics.objects.get(day=current_day)
+                day_stats = DayStatistics.objects.get(day=current_day).__dict__
             except DayStatistics.DoesNotExist:
                 continue
+
+            # Add any notes, as the model has been converted to a dict above.
+            day_stats['notes'] = Note.objects.filter(day=current_day).values_list('description', flat=True)
 
             context_data['usage'].append(day_stats)
             context_data['chart']['days'].append(current_day.strftime("%a %d-%m"))
 
             for current_field in CONSUMPTION_FIELDS:
-                context_data['chart'][current_field].append(float(
-                    getattr(day_stats, current_field)
-                ))
+                context_data['chart'][current_field].append(float(day_stats[current_field]))
 
         for key, value in context_data['chart'].items():
             context_data['chart'][key] = json.dumps(value)
