@@ -70,10 +70,10 @@
                     {{ consumption.day }}
                 </header>
                 <div class="panel-body">
-                    {% if consumption.notes %}
-                    <div class="alert alert-info" role="alert">{{ consumption.notes|join:" | " }}</div>
-                    {% endif %}
-                
+                    {% for current_note in consumption.notes %}
+                    <div class="alert alert-warning" role="alert">{{ current_note }}</div>
+                    {% endfor %}
+
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-6">{% trans "Type" %}</th>
