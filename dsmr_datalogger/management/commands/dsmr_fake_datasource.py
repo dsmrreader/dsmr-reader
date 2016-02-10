@@ -1,12 +1,13 @@
+from decimal import Decimal, ROUND_UP
 from unittest import mock
-from datetime import datetime
 import random
 import time
 
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
 from django.core.management import call_command
-from decimal import Decimal, ROUND_UP
+from django.utils import timezone
+from django.conf import settings
 
 
 class Command(BaseCommand):
@@ -35,13 +36,11 @@ class Command(BaseCommand):
 
         # Prepare some random data, but which makes sense.
         read_telegram_mock.return_value = self._generate_data()
-        print(read_telegram_mock.return_value)
-        return
         call_command('dsmr_datalogger')
 
     def _generate_data(self):
         """ Generates 'random' data, but in a way that it keeps incrementing. """
-        now = datetime.now()  # Must be naive.
+        now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)  # Must be local.
 
         # 1420070400: 01 Jan 2015 00:00:00 GMT
         second_since = int(time.time() - 1420070400)
@@ -58,23 +57,20 @@ class Command(BaseCommand):
         currently_returned = random.randint(0, 2500) * 0.001  # kW
 
         return ''.join([
-            "/XMX5LGBBFFB231117727\n",
-            "\n",
+            "/XMX5LGBBFFB123456789\n",
             "\n",
             "1-3:0.2.8(40)\n",
             "0-0:1.0.0({timestamp}W)\n".format(
                 timestamp=now.strftime('%y%m%d%H%M%S')
             ),
             "0-0:96.1.1(FAKE-FAKE-FAKE-FAKE-FAKE)\n",
-            "1-0:1.8.1({0:0>6}*kWh)\n".format(self._round_precision(electricity_1)),
-            "1-0:2.8.1({0:0>6}*kWh)\n".format(self._round_precision(electricity_2)),
-            "1-0:1.8.2({0:0>6}*kWh)\n".format(self._round_precision(electricity_1_returned)),
-            "1-0:2.8.2({0:0>6}*kWh)\n".format(self._round_precision(electricity_2_returned)),
-            "0-0:96.14.0(0001)\n",
-            "1-0:1.7.0({0:0>2}*kW)\n".format(self._round_precision(currently_delivered)),
-            "1-0:2.7.0({0:0>2}*kW)\n".format(self._round_precision(currently_returned)),
-            "0-0:17.0.0(999.9*kW)\n",
-            "0-0:96.3.10(1)\n",
+            "1-0:1.8.1({}*kWh)\n".format(self._round_precision(electricity_1, 10)),
+            "1-0:2.8.1({}*kWh)\n".format(self._round_precision(electricity_2, 10)),
+            "1-0:1.8.2({}*kWh)\n".format(self._round_precision(electricity_1_returned, 10)),
+            "1-0:2.8.2({}*kWh)\n".format(self._round_precision(electricity_2_returned, 10)),
+            "0-0:96.14.0(0001)\n",  # Should switch peak/off peak, but not used anyway.
+            "1-0:1.7.0({}*kW)\n".format(self._round_precision(currently_delivered, 6)),
+            "1-0:2.7.0({}*kW)\n".format(self._round_precision(currently_returned, 6)),
             "0-0:96.7.21(00003)\n",
             "0-0:96.7.9(00000)\n",
             "1-0:99.97.0(0)(0-0:96.7.19)\n",
@@ -91,22 +87,22 @@ class Command(BaseCommand):
             "1-0:71.7.0(001*A)\n",
             "1-0:21.7.0(00.000*kW)\n",
             "1-0:41.7.0(00.000*kW)\n",
-            "1-0:61.7.0({:0^2}*kW)\n".format(self._round_precision(currently_delivered)),
+            "1-0:61.7.0({}*kW)\n".format(self._round_precision(currently_delivered, 6)),
             "1-0:22.7.0(00.000*kW)\n",
             "1-0:42.7.0(00.000*kW)\n",
             "1-0:62.7.0(00.000*kW)\n",
             "0-1:24.1.0(003)\n",
             "0-1:96.1.0(FAKE-FAKE-FAKE-FAKE-FAKE)\n",
-            "0-1:24.2.1({}W)({0:0>6}*m3)\n".format(
-                now.strftime('%y%m%d%H0000'), self._round_precision(gas)
+            "0-1:24.2.1({}W)({}*m3)\n".format(
+                now.strftime('%y%m%d%H0000'), self._round_precision(gas, 9)
             ),
-            "0-1:24.4.0(1)\n",
             "!D19A\n",
         ])
 
-    def _round_precision(self, float_number):
-        """ Round the price to two decimals. """
+    def _round_precision(self, float_number, fill_count):
+        """ Rounds the number for precision. """
         if not isinstance(float_number, Decimal):
             float_number = Decimal(str(float_number))
 
-        return float_number.quantize(Decimal('.001'), rounding=ROUND_UP)
+        rounded = float_number.quantize(Decimal('.001'), rounding=ROUND_UP)
+        return str(rounded).zfill(fill_count)
