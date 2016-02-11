@@ -13,6 +13,12 @@ class TestSettings(TestCase):
         """ Model should be registered in Django Admin. """
         self.assertTrue(site.is_registered(DataloggerSettings))
 
+    def test_track(self):
+        self.assertTrue(self.instance.track)
+
+    def test_track_meter_statistics(self):
+        self.assertTrue(self.instance.track_meter_statistics)
+
     def test_baud_rate(self):
         self.assertEqual(self.instance.baud_rate, 115200)
 

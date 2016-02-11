@@ -6,7 +6,7 @@ import pytz
 from django.test import TestCase
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
-from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 
 
 class TestDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
@@ -83,23 +83,25 @@ class TestDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
         self.assertEqual(reading.electricity_returned_1, Decimal('0.123'))
         self.assertEqual(reading.electricity_delivered_2, Decimal('500.013'))
         self.assertEqual(reading.electricity_returned_2, Decimal('123.456'))
-        self.assertEqual(reading.electricity_tariff, Decimal('1'))
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.192'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0.123'))
-        self.assertEqual(reading.power_failure_count, 3)
-        self.assertEqual(reading.long_power_failure_count, 0)
-        self.assertEqual(reading.voltage_sag_count_l1, 2)
-        self.assertEqual(reading.voltage_sag_count_l2, 2)
-        self.assertEqual(reading.voltage_sag_count_l3, 0)
-        self.assertEqual(reading.voltage_swell_count_l1, 0)
-        self.assertEqual(reading.voltage_swell_count_l2, 0)
-        self.assertEqual(reading.voltage_swell_count_l3, 0)
-
         self.assertEqual(
             reading.extra_device_timestamp,
             datetime(2015, 11, 10, 18, 0, 0, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('845.206'))
+
+        # Different data soruce.
+        meter_statistics = MeterStatistics.get_solo()
+        self.assertEqual(meter_statistics.electricity_tariff, Decimal('1'))
+        self.assertEqual(meter_statistics.power_failure_count, 3)
+        self.assertEqual(meter_statistics.long_power_failure_count, 0)
+        self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)
+        self.assertEqual(meter_statistics.voltage_sag_count_l2, 2)
+        self.assertEqual(meter_statistics.voltage_sag_count_l3, 0)
+        self.assertEqual(meter_statistics.voltage_swell_count_l1, 0)
+        self.assertEqual(meter_statistics.voltage_swell_count_l2, 0)
+        self.assertEqual(meter_statistics.voltage_swell_count_l3, 0)
 
 
 class TestDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
@@ -174,20 +176,22 @@ class TestDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
         self.assertEqual(reading.electricity_returned_1, Decimal('0'))
         self.assertEqual(reading.electricity_delivered_2, Decimal('714.405'))
         self.assertEqual(reading.electricity_returned_2, Decimal('0'))
-        self.assertEqual(reading.electricity_tariff, 2)
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.111'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(reading.power_failure_count, 3)
-        self.assertEqual(reading.long_power_failure_count, 0)
-        self.assertEqual(reading.voltage_sag_count_l1, 2)
-        self.assertEqual(reading.voltage_sag_count_l2, 2)
-        self.assertEqual(reading.voltage_sag_count_l3, 0)
-        self.assertEqual(reading.voltage_swell_count_l1, 0)
-        self.assertEqual(reading.voltage_swell_count_l2, 0)
-        self.assertEqual(reading.voltage_swell_count_l3, 0)
-
         self.assertEqual(
             reading.extra_device_timestamp,
             datetime(2016, 2, 10, 19, 0, 0, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('1197.484'))
+
+        # Different data soruce.
+        meter_statistics = MeterStatistics.get_solo()
+        self.assertEqual(meter_statistics.electricity_tariff, 2)
+        self.assertEqual(meter_statistics.power_failure_count, 3)
+        self.assertEqual(meter_statistics.long_power_failure_count, 0)
+        self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)
+        self.assertEqual(meter_statistics.voltage_sag_count_l2, 2)
+        self.assertEqual(meter_statistics.voltage_sag_count_l3, 0)
+        self.assertEqual(meter_statistics.voltage_swell_count_l1, 0)
+        self.assertEqual(meter_statistics.voltage_swell_count_l2, 0)
+        self.assertEqual(meter_statistics.voltage_swell_count_l3, 0)

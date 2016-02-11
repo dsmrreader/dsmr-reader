@@ -14,6 +14,14 @@ class DataloggerSettings(SingletonModel):
             'due to technical reasons, such as data migrations.'
         )
     )
+    track_meter_statistics = models.BooleanField(
+        default=True,
+        verbose_name=_('Track meter statistics'),
+        help_text=_(
+            'Whether we should track any extra statistics sent by the meter, such as the number of '
+            'power failures of voltage dips. Data is not required for core features.'
+        )
+    )
 
     baud_rate = models.IntegerField(
         default=115200,
