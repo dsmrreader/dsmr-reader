@@ -9,8 +9,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.settings import ConsumptionSettings
 
 
-class TestCompactor(CallCommandStdoutMixin, TestCase):
-    """ Test 'dsmr_backend' management command. """
+class TestServices(CallCommandStdoutMixin, TestCase):
     fixtures = ['dsmr_consumption/test_dsmrreading.json']
 
     def setUp(self):

@@ -25,13 +25,6 @@ class ElectricityConsumption(models.Model):
         decimal_places=3,
         help_text=_("Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh")
     )
-    tariff = models.IntegerField(
-        help_text=_(
-            "Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g "
-            "boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff "
-            "code 2 is used for normal tariff."
-        )
-    )
     currently_delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,

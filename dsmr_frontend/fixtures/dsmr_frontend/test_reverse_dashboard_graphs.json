@@ -8,8 +8,7 @@
         "delivered_2": "593.009",
         "read_at": "2015-12-11T21:26:00Z",
         "returned_1": "0.000",
-        "returned_2": "0.000",
-        "tariff": 2
+        "returned_2": "0.000"
     },
     "model": "dsmr_consumption.electricityconsumption"
 },

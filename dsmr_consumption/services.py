@@ -37,7 +37,6 @@ def compact(dsmr_reading):
             returned_1=dsmr_reading.electricity_returned_1,
             delivered_2=dsmr_reading.electricity_delivered_2,
             returned_2=dsmr_reading.electricity_returned_2,
-            tariff=dsmr_reading.electricity_tariff,
             currently_delivered=dsmr_reading.electricity_currently_delivered,
             currently_returned=dsmr_reading.electricity_currently_returned,
         )
@@ -76,7 +75,6 @@ def compact(dsmr_reading):
                 returned_1=grouped_reading['max_returned_1'],
                 delivered_2=grouped_reading['max_delivered_2'],
                 returned_2=grouped_reading['max_returned_2'],
-                tariff=dsmr_reading.electricity_tariff,
                 currently_delivered=grouped_reading['avg_delivered'],
                 currently_returned=grouped_reading['avg_returned'],
             )
