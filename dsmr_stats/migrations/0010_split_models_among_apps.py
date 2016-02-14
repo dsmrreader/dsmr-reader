@@ -115,7 +115,7 @@ class Migration(migrations.Migration):
 
         # This will ensure both the new tables exists and we can reference those models.
         ('dsmr_consumption', '0001_initial'),
-        ('dsmr_datalogger', '0001_initial'),
+        ('dsmr_datalogger', '0002_add_meter_statistics'),
         ('dsmr_frontend', '0001_initial'),
     ]
 
