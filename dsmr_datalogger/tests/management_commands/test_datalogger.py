@@ -91,7 +91,7 @@ class TestDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('845.206'))
 
-        # Different data soruce.
+        # Different data source.
         meter_statistics = MeterStatistics.get_solo()
         self.assertEqual(meter_statistics.electricity_tariff, Decimal('1'))
         self.assertEqual(meter_statistics.power_failure_count, 3)
@@ -184,7 +184,7 @@ class TestDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('1197.484'))
 
-        # Different data soruce.
+        # Different data source.
         meter_statistics = MeterStatistics.get_solo()
         self.assertEqual(meter_statistics.electricity_tariff, 2)
         self.assertEqual(meter_statistics.power_failure_count, 3)
