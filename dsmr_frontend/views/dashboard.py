@@ -1,6 +1,7 @@
 import json
 
 from django.views.generic.base import TemplateView
+from django.utils import formats
 from django.conf import settings
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -40,18 +41,18 @@ class Dashboard(TemplateView):
             temperature = temperature[temperature_offset:]
 
         context_data['electricity_x'] = json.dumps(
-            [x.read_at.astimezone(
+            [formats.date_format(x.read_at.astimezone(
                 settings.LOCAL_TIME_ZONE
-            ).strftime("%a %H:%M") for x in electricity]
+            ), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT') for x in electricity]
         )
         context_data['electricity_y'] = json.dumps(
             [float(x.currently_delivered * 1000) for x in electricity]
         )
 
         context_data['gas_x'] = json.dumps(
-            [x.read_at.astimezone(
+            [formats.date_format(x.read_at.astimezone(
                 settings.LOCAL_TIME_ZONE
-            ).strftime("%a %H:%M") for x in gas]
+            ), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT') for x in gas]
         )
         context_data['gas_y'] = json.dumps(
             [float(x.currently_delivered) for x in gas]
@@ -61,9 +62,9 @@ class Dashboard(TemplateView):
 
         if context_data['track_temperature']:
             context_data['temperature_x'] = json.dumps(
-                [x.read_at.astimezone(
+                [formats.date_format(x.read_at.astimezone(
                     settings.LOCAL_TIME_ZONE
-                ).strftime("%a %H:%M") for x in temperature]
+                ), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT') for x in temperature]
             )
             context_data['temperature_y'] = json.dumps(
                 [float(x.degrees_celcius) for x in temperature]

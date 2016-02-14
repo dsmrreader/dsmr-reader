@@ -2,6 +2,7 @@ from collections import defaultdict
 import json
 
 from django.views.generic.base import TemplateView
+from django.utils import formats
 from django.conf import settings
 from django.utils import timezone
 
@@ -22,6 +23,7 @@ class History(TemplateView):
         context_data['days_ago'] = frontend_settings.recent_history_weeks * 7
         context_data['track_temperature'] = WeatherSettings.get_solo().track
         context_data['chart'] = defaultdict(list)
+        context_data['day_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
 
         CONSUMPTION_FIELDS = (
             'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas',
@@ -47,7 +49,9 @@ class History(TemplateView):
             day_stats['notes'] = Note.objects.filter(day=current_day).values_list('description', flat=True)
 
             context_data['usage'].append(day_stats)
-            context_data['chart']['days'].append(current_day.strftime("%a %d-%m"))
+            context_data['chart']['days'].append(
+                formats.date_format(current_day, 'DSMR_GRAPH_SHORT_DATE_FORMAT')
+            )
 
             for current_field in CONSUMPTION_FIELDS:
                 context_data['chart'][current_field].append(float(day_stats[current_field]))

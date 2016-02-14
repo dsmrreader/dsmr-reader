@@ -6,6 +6,8 @@ v0.10 (β) - 2016-xx-xx
 - Cleanup unused static files (#47).
 - Investigated mysql_tzinfo_to_sql — Load the Time Zone Tables (#35).
 - Make additional DSMR data optional (#46).
+- Localize graph x-axis (#42).
+- Added graph formatting string to gettext file (#42).
 
 
 v0.9 (β) - 2016-02-08

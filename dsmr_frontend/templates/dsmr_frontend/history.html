@@ -71,7 +71,7 @@
         {% for consumption in usage %}
             <div class="panel">
                 <header class="panel-heading">
-                    {{ consumption.day }}
+                    {{ consumption.day|date:day_format }}
                 </header>
                 <div class="panel-body">
                     {% for current_note in consumption.notes %}
