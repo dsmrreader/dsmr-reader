@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-14 14:10+0000\n"
-"PO-Revision-Date: 2016-02-14 15:10+0100\n"
+"POT-Creation-Date: 2016-02-14 15:24+0000\n"
+"PO-Revision-Date: 2016-02-14 16:24+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -288,6 +288,9 @@ msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
 
+msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
+msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
+
 msgid "Electricity"
 msgstr "Elektriciteit"
 
@@ -337,8 +340,23 @@ msgstr "Meterstanden"
 msgid "Gas "
 msgstr "Gas"
 
-msgid "Miscellaneous statistics"
-msgstr "Overige statistieken"
+msgid "Readings"
+msgstr "Uitlezingen"
+
+msgid "Latest reading"
+msgstr "Laatste uitlezing"
+
+msgid "First reading"
+msgstr "Eerste uitlezing"
+
+msgid "Total reading count"
+msgstr "Totaal aantal uitlezingen"
+
+msgid "Meter statistics"
+msgstr "Meterstatistieken"
+
+msgid "Tracking meter statistics is disabled. Enable this feature in the datalogger settings to view statistics."
+msgstr "Meterstatistieken worden niet bijgehouden. Schakel dit bij de dataloggerinstellingen in om de statistieken weer te geven."
 
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
@@ -355,17 +373,8 @@ msgstr "Elektriciteit 2 (per kWh)"
 msgid "Gas (per m<sup>3</sup>)"
 msgstr "Gas (per m<sup>3</sup>)"
 
-msgid "Readings"
-msgstr "Uitlezingen"
-
-msgid "Latest reading"
-msgstr "Laatste uitlezing"
-
-msgid "First reading"
-msgstr "Eerste uitlezing"
-
-msgid "Total reading count"
-msgstr "Totaal aantal uitlezingen"
+msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
+msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
 
 msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account!"
 msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen!"
@@ -621,6 +630,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Miscellaneous statistics"
+#~ msgstr "Overige statistieken"
 
 #~ msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
 #~ msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor hoogtarief."
