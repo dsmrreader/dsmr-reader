@@ -26,4 +26,4 @@ class TestRegression(TestCase):
         self.assertIn('gas_x', response.context)
 
         # This will fail when the fix has been reverted.
-        self.assertEqual(json.loads(response.context['gas_x'])[0], 'Sun 02:00')
+        self.assertEqual(json.loads(response.context['gas_x'])[0], 'Sunday, 2 a.m.')
