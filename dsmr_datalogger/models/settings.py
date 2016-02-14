@@ -5,6 +5,13 @@ from solo.models import SingletonModel
 
 class DataloggerSettings(SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    DSMR_VERSION_4 = 4
+    DSMR_VERSION_3 = 3
+    DSMR_VERSION_CHOICES = (
+        (DSMR_VERSION_4, _('DSMR version 4')),
+        (DSMR_VERSION_3, _('DSMR version 2/3')),
+    )
+
     track = models.BooleanField(
         default=True,
         verbose_name=_('Poll P1 port'),
@@ -23,10 +30,11 @@ class DataloggerSettings(SingletonModel):
         )
     )
 
-    baud_rate = models.IntegerField(
-        default=115200,
-        verbose_name=_('BAUD rate'),
-        help_text=_('BAUD rate used for Smartmeter. 115200 for DSMR v4, 9600 for older versions')
+    dsmr_version = models.IntegerField(
+        default=DSMR_VERSION_4,
+        choices=DSMR_VERSION_CHOICES,
+        verbose_name=_('DSMR version'),
+        help_text=_('The DSMR version your meter supports. Version should be printed on meter.')
     )
 
     com_port = models.CharField(

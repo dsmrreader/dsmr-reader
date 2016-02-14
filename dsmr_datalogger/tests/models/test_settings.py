@@ -19,8 +19,8 @@ class TestSettings(TestCase):
     def test_track_meter_statistics(self):
         self.assertTrue(self.instance.track_meter_statistics)
 
-    def test_baud_rate(self):
-        self.assertEqual(self.instance.baud_rate, 115200)
+    def test_dsmr_version(self):
+        self.assertEqual(self.instance.dsmr_version, DataloggerSettings.DSMR_VERSION_4)
 
     def test_com_port(self):
         self.assertEqual(self.instance.com_port, '/dev/ttyUSB0')

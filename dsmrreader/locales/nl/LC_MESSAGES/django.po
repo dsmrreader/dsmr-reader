@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-14 20:25+0000\n"
-"PO-Revision-Date: 2016-02-14 21:25+0100\n"
+"POT-Creation-Date: 2016-02-14 20:53+0000\n"
+"PO-Revision-Date: 2016-02-14 21:52+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -162,6 +162,12 @@ msgstr "Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen
 msgid "DSMR Meter statistics"
 msgstr "Meterstatistieken"
 
+msgid "DSMR version 4"
+msgstr "DSMR-versie 4"
+
+msgid "DSMR version 2/3"
+msgstr "DSMR-versie 2/3"
+
 msgid "Poll P1 port"
 msgstr "Peil P1 poort"
 
@@ -174,11 +180,11 @@ msgstr "Houd meterstatistieken bij"
 msgid "Whether we should track any extra statistics sent by the meter, such as the number of power failures of voltage dips. Data is not required for core features."
 msgstr "Geeft aan of we extra meterstatistieken moeten bijhouden, zoals het aantal stroomstoringen of spanningsdippen. Deze gegevens zijn niet nodig voor de basisfunctionaliteit."
 
-msgid "BAUD rate"
-msgstr "BAUD-waarde"
+msgid "DSMR version"
+msgstr "DSMR-versie"
 
-msgid "BAUD rate used for Smartmeter. 115200 for DSMR v4, 9600 for older versions"
-msgstr "BAUD-waarde gebruikt door slimme meter. 115200 voor DSMR versie 4, 9600 voor oudere versies"
+msgid "The DSMR version your meter supports. Version should be printed on meter."
+msgstr "The DSMR versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
 
 msgid "COM-port"
 msgstr "COM-poort"
@@ -630,6 +636,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "BAUD rate"
+#~ msgstr "BAUD-waarde"
+
+#~ msgid "BAUD rate used for Smartmeter. 115200 for DSMR v4, 9600 for older versions"
+#~ msgstr "BAUD-waarde gebruikt door slimme meter. 115200 voor DSMR versie 4, 9600 voor oudere versies"
 
 #~ msgid "GRAPH_SHORT_DATETIME l, P"
 #~ msgstr "GRAPH_SHORT_DATETIME l G:i"

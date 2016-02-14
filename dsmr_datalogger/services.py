@@ -21,11 +21,29 @@ def read_telegram():
     """
     datalogger_settings = DataloggerSettings.get_solo()
 
+    DSMR_VERSION_MAPPING = {
+        DataloggerSettings.DSMR_VERSION_3: {
+            'baudrate': 9600,
+            'bytesize': serial.SEVENBITS,
+            'parity': serial.PARITY_EVEN,
+        },
+        DataloggerSettings.DSMR_VERSION_4: {
+            'baudrate': 115200,
+            'bytesize': serial.EIGHTBITS,
+            'parity': serial.PARITY_NONE,
+        },
+    }
+
+    try:
+        serial_settings = DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
+    except KeyError:
+        raise NotImplementedError()
+
     serial_handle = serial.Serial()
-    serial_handle.baudrate = datalogger_settings.baud_rate
     serial_handle.port = datalogger_settings.com_port
-    serial_handle.bytesize = serial.EIGHTBITS
-    serial_handle.parity = serial.PARITY_NONE
+    serial_handle.baudrate = serial_settings['baudrate']
+    serial_handle.bytesize = serial_settings['bytesize']
+    serial_handle.parity = serial_settings['parity']
     serial_handle.stopbits = serial.STOPBITS_ONE
     serial_handle.xonxoff = 1
     serial_handle.rtscts = 0
