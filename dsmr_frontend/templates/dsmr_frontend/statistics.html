@@ -42,84 +42,6 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
- 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Miscellaneous statistics" %}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <td class="col-md-7">{% trans "Number of power failures in any phases" %}</td>
-                            <td class="col-md-5"><span class="badge bg-black">{{ latest_reading.power_failure_count|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Number of long power failures in any phase" %}</td>
-                            <td><span class="badge bg-black">{{ latest_reading.long_power_failure_count|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Number of voltage sags/dips in phase L1" %}</td>
-                            <td><span class="badge bg-olive">{{ latest_reading.voltage_sag_count_l1|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ latest_reading.voltage_sag_count_l2|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ latest_reading.voltage_sag_count_l3|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Number of voltage swells in phase L1" %}</td>
-                            <td><span class="badge bg-olive">{{ latest_reading.voltage_swell_count_l1|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ latest_reading.voltage_swell_count_l2|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ latest_reading.voltage_swell_count_l3|default:'-' }}</span></td>
-                        </tr>
-                    </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    {% if energy_prices %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                	{% trans "Current energy prices" %}: {{ energy_prices.description }}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <th class="col-md-7">{{ energy_prices.start }} &larr;&rarr; {{ energy_prices.end|default:'-' }}</th>
-                            <th class="col-md-5">{% trans "Unit price" %} (&euro;)</th>
-                        </tr>
-                        <tr>
-                            <td class="col-md-7">{% trans "Electricity 1 (per kWh)" %}</td>
-                            <td class="col-md-5"><span class="badge bg-black">{{ energy_prices.electricity_1_price }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Electricity 2 (per kWh)" %}</td>
-                            <td><span class="badge bg-black">{{ energy_prices.electricity_2_price }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Gas (per m<sup>3</sup>)" %}</td>
-                            <td><span class="badge bg-black">{{ energy_prices.gas_price }}</span></td>
-                        </tr>
-                    </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-    {% endif %}
 
     <div class="row">
         <div class="col-md-12">
@@ -154,6 +76,96 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->                        
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Miscellaneous statistics" %}
+                </header>
+                <div class="panel-body">
+                    {% if datalogger_settings.track_meter_statistics %}
+                    <table class="table table-condensed">
+                    
+                        <tr>
+                            <td class="col-md-7">{% trans "Number of power failures in any phases" %}</td>
+                            <td class="col-md-5"><span class="badge bg-black">{{ meter_statistics.power_failure_count|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of long power failures in any phase" %}</td>
+                            <td><span class="badge bg-black">{{ meter_statistics.long_power_failure_count|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage sags/dips in phase L1" %}</td>
+                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l1|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l2|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l3|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage swells in phase L1" %}</td>
+                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l1|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l2|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
+                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l3|default:'-' }}</span></td>
+                        </tr>
+                    </table>
+                    {% else %}
+	                    <div class="alert alert-info" role="alert">
+	                    {% blocktrans %}Tracking meter statistics is disabled. Enable this feature in the datalogger settings to view statistics.{% endblocktrans %}
+	                    </div>
+                    {% endif %}
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                	{% trans "Current energy prices" %}{% if energy_prices %}: {{ energy_prices.description }}{% endif %}
+                </header>
+                <div class="panel-body">
+                    {% if energy_prices %}
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-7">{{ energy_prices.start }} &larr;&rarr; {{ energy_prices.end|default:'-' }}</th>
+                            <th class="col-md-5">{% trans "Unit price" %} (&euro;)</th>
+                        </tr>
+                        <tr>
+                            <td class="col-md-7">{% trans "Electricity 1 (per kWh)" %}</td>
+                            <td class="col-md-5"><span class="badge bg-black">{{ energy_prices.electricity_1_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 2 (per kWh)" %}</td>
+                            <td><span class="badge bg-black">{{ energy_prices.electricity_2_price }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Gas (per m<sup>3</sup>)" %}</td>
+                            <td><span class="badge bg-black">{{ energy_prices.gas_price }}</span></td>
+                        </tr>
+                    </table>
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                        {% blocktrans %}No energy supplier prices found for today. Enable this feature in consumption settings to view prices.{% endblocktrans %}
+                        </div>
+                    {% endif %}
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
 
 </section><!-- /.content -->
 {% endblock %}

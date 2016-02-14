@@ -47,7 +47,6 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 
-    {% if track_temperature %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -55,12 +54,17 @@
                     {% blocktrans %}Daily average temperature in the past {{ days_ago }} days{% endblocktrans %} {% trans "(in &deg;C)" %}
                 </header>
                 <div class="panel-body">
+                {% if track_temperature %}
                     <canvas id="temperature-chart" height="150"></canvas>
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                    {% blocktrans %}Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly).{% endblocktrans %}
+                    </div>
+                {% endif %}
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
-    {% endif %}
 
     <div class="row">
         <div class="col-md-12">
