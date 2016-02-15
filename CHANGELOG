@@ -1,7 +1,13 @@
 
 
 
-v0.10 (β) - 2016-xx-xx
+v0.11 (β) - 2016-xx-xx
+======================
+- 
+
+
+
+v0.10 (β) - 2016-02-15
 ======================
 - Cleanup unused static files (#47).
 - Investigated mysql_tzinfo_to_sql — Load the Time Zone Tables (#35).
@@ -13,11 +19,13 @@ v0.10 (β) - 2016-xx-xx
 - Allow GUI to run without data (#26).
 
 
+
 v0.9 (β) - 2016-02-08
 =====================
 - Moved project to GitHub (#28).
 - Added stdout to dsmr_backend to reflect progress.
 - Restore note usage in GUI (#39).
+
 
 
 v0.8 (β) - 2016-02-06
