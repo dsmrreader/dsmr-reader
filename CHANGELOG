@@ -9,6 +9,7 @@ v0.10 (β) - 2016-xx-xx
 - Localize graph x-axis (#42).
 - Added graph formatting string to gettext file (#42).
 - Different colors for peak & off-peak electricity (#52).
+- Admin: Note widget (#51).
 
 
 v0.9 (β) - 2016-02-08
@@ -20,7 +21,7 @@ v0.9 (β) - 2016-02-08
 
 v0.8 (β) - 2016-02-06
 =====================
-- Store daily, weekly, monthly and yearly statistics (Issue #3).
+- Store daily, weekly, monthly and yearly statistics (#3).
 - Improved Recent History page performance a bit. (as result of #3)
 - Updates ChartJS library tot 1.1, disposing django-chartjs plugin. Labels finally work! (as result of #3)
 - Added trends page. (as result of #3)
@@ -29,15 +30,15 @@ v0.8 (β) - 2016-02-06
 
 v0.7 (β) - 2016-02-04
 =====================
-- Recent history setting: set range (Issue #29).
-- Mock required for test: dsmr_weather.test_weather_tracking (Issue #32).
+- Recent history setting: set range (#29).
+- Mock required for test: dsmr_weather.test_weather_tracking (#32).
 
 
 
 v0.6 (β) - 2016-02-03
 =====================
-- Massive refactoring: Separating apps & using signals (Issue #19).
-- README update: Exit character for cu (Issue #27, by Jeroen Peters).
+- Massive refactoring: Separating apps & using signals (#19).
+- README update: Exit character for cu (#27, by Jeroen Peters).
 - Fixed untranslated strings in admin interface.
 - Upgraded Django to 1.8.9.
 
