@@ -9,18 +9,8 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.dsmr import DSMR_MAPPING
 
 
-def read_telegram():
-    """ Reads the serial port until we can create a reading point. """
-    """
-    Transfer speed and character formatting
-    ---------------------------------------
-    The interface will use a fixed transfer speed of 115200 baud.
-    For character formatting a start bit, 8 data bits, no parity bit and a
-    stop bit are used (8N1).
-    Note this is not conforming to EN-IEC 62056-21 Mode D
-    """
-    datalogger_settings = DataloggerSettings.get_solo()
-
+def get_dsmr_connection_parameters():
+    """ Returns the communication settings required for the DSMR version set. """
     DSMR_VERSION_MAPPING = {
         DataloggerSettings.DSMR_VERSION_3: {
             'baudrate': 9600,
@@ -34,16 +24,26 @@ def read_telegram():
         },
     }
 
+    datalogger_settings = DataloggerSettings.get_solo()
+
     try:
-        serial_settings = DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
+        connection_parameters = DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
     except KeyError:
         raise NotImplementedError()
 
+    connection_parameters['com_port'] = datalogger_settings.com_port
+    return connection_parameters
+
+
+def read_telegram():
+    """ Reads the serial port until we can create a reading point. """
+    connection_parameters = get_dsmr_connection_parameters()
+
     serial_handle = serial.Serial()
-    serial_handle.port = datalogger_settings.com_port
-    serial_handle.baudrate = serial_settings['baudrate']
-    serial_handle.bytesize = serial_settings['bytesize']
-    serial_handle.parity = serial_settings['parity']
+    serial_handle.port = connection_parameters['com_port']
+    serial_handle.baudrate = connection_parameters['baudrate']
+    serial_handle.bytesize = connection_parameters['bytesize']
+    serial_handle.parity = connection_parameters['parity']
     serial_handle.stopbits = serial.STOPBITS_ONE
     serial_handle.xonxoff = 1
     serial_handle.rtscts = 0
