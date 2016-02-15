@@ -130,3 +130,38 @@ class TestViews(CallCommandStdoutMixin, TestCase):
 
         response = self.client.get(trend_url)
         self.assertEqual(response.status_code, 200)
+
+
+class TestViewsWithoutData(TestCase):
+    namespace = 'frontend'
+
+    def setUp(self):
+        self.client = Client()
+
+    def _check_view_status_code(self, view_name):
+        response = self.client.get(
+            reverse('{}:{}'.format(self.namespace, view_name))
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_dashboard(self):
+        """ Check whether dashboard page can run without data. """
+        self._check_view_status_code('dashboard')
+
+    def test_history(self):
+        """ Check whether history page can run without data. """
+        self._check_view_status_code('history')
+
+    def test_statistics(self):
+        """ Check whether statistics page can run without data. """
+        self._check_view_status_code('statistics')
+
+    def test_trends(self):
+        """ Check whether trends page can run without data. """
+        if connection.vendor not in settings.DSMR_SUPPORTED_DB_VENDORS:
+            # The view should crash, as we do not (yet) have native date extractors for this vendor.
+            with self.assertRaises(NotImplementedError):
+                self._check_view_status_code('trends')
+            return
+
+        self._check_view_status_code('trends')
