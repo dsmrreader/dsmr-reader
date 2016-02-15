@@ -8,6 +8,12 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
+{% if not chart %}
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+    </div>
+{% endif %}
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel">

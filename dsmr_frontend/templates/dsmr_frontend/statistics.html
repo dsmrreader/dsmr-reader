@@ -9,7 +9,12 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-          
+{% if not latest_reading %}
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+    </div>
+{% endif %}
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -69,7 +74,7 @@
                         </tr>
                         <tr>
                             <td>{% trans "Total reading count" %}</td>
-                            <td><span class="badge bg-navy">{{ total_reading_count|default:'-'|intcomma }}</span></td>
+                            <td><span class="badge bg-navy">{{ total_reading_count|intcomma }}</span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->

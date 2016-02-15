@@ -9,7 +9,11 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-
+{% if not latest_electricity and not latest_electricity_returned and not latest_gas_read %}
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+    </div>
+{% else %}
     <div class="row">
         <div class="col-md-4">
             <div class="sm-st clearfix">
@@ -42,6 +46,7 @@
             </div>
         </div>
     </div><!-- /.row -->
+{% endif %}
 
 	{% if consumption %}
     <div class="row">
