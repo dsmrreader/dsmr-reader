@@ -8,6 +8,7 @@ v0.10 (β) - 2016-xx-xx
 - Make additional DSMR data optional (#46).
 - Localize graph x-axis (#42).
 - Added graph formatting string to gettext file (#42).
+- Different colors for peak & off-peak electricity (#52).
 
 
 v0.9 (β) - 2016-02-08

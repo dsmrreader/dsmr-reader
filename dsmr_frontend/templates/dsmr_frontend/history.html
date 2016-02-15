@@ -16,6 +16,7 @@
                 </header>
                 <div class="panel-body">
                 	<canvas id="cost-chart" height="150"></canvas>
+                	<div id="cost-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -29,6 +30,7 @@
                 </header>
                 <div class="panel-body">
                 	<canvas id="electricity-chart" height="150"></canvas>
+                    <div id="electricity-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -123,7 +125,12 @@
         <script type="text/javascript">
             var line_options = {
                 /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
-                pointHitDetectionRadius: 3,
+                pointHitDetectionRadius: 5,
+                pointDotRadius: 2.5,
+                
+                {% verbatim %}
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+                {% endverbatim %}
             }
         
         	$(document).ready(function(){
@@ -145,26 +152,17 @@
 		   		var data = {
 	   				labels: {{ chart.days|safe }},
 	   				datasets: [{
-	   					data: {{ chart.total_cost|safe }},
-	   					label: "Total cost",
-	   					fillColor: "rgba(255,255,255,0.2)",
-	   					strokeColor: "rgba(0,0,0,1)",
-	   					pointColor: "rgba(0,0,0,1)",
-	   					pointStrokeColor: "#fff",
-	   					pointHighlightFill: "#fff",
-	   					pointHighlightStroke: "rgba(0,0,0,1)"
-	   				}, {
 	   					data: {{ chart.electricity1_cost|safe }},
-	   					label: "Electricity 1 cost (off-peak)",	       				
+	   					label: "{% trans 'Electricity 1 cost (off-peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
-	   					strokeColor: "rgba(255,0,0,1)",
-	   					pointColor: "rgba(255,0,0,1)",
+	   					strokeColor: "rgba(160,0,0,1)",
+	   					pointColor: "rgba(160,0,0,1)",
 	   					pointStrokeColor: "#fff",
 	   					pointHighlightFill: "#fff",
 	   					pointHighlightStroke: "rgba(255,0,0,1)"
 	   				}, {
 	   					data: {{ chart.electricity2_cost|safe }},
-	   					label: "Electricity 2 cost (peak)",	       				
+	   					label: "{% trans 'Electricity 2 cost (peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(255,0,0,1)",
 	   					pointColor: "rgba(255,0,0,1)",
@@ -173,18 +171,28 @@
 	   					pointHighlightStroke: "rgba(255,0,0,1)"
 	   				}, {
 	   					data: {{ chart.gas_cost|safe }},
-	   					label: "Gas cost",	       				
+	   					label: "{% trans 'Gas cost' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
 	   					strokeColor: "rgba(250,133,0,1)",
 	   					pointColor: "rgba(250,133,0,1)",
 	   					pointStrokeColor: "#fff",
 	   					pointHighlightFill: "#fff",
 	   					pointHighlightStroke: "rgba(150,150,150,1)"
-	   				}]
+	   				}, {
+                        data: {{ chart.total_cost|safe }},
+                        label: "{% trans 'Total cost' %}",
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(0,0,0,1)",
+                        pointColor: "rgba(0,0,0,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(0,0,0,1)"
+                    }]
 	   			};
 	
 	   			var ctx = $("#cost-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data, line_options);
+	   			var chart_instance = new Chart(ctx).Line(data, line_options);
+	   			$("#cost-chart-legend").html(chart_instance.generateLegend());
    			}
         	
 		   	function render_electricity_chart()
@@ -195,8 +203,8 @@
 	   					data: {{ chart.electricity1|safe }},
 	   					label: "{% trans 'Electricity 1 (off-peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
-	   					strokeColor: "rgba(255,0,0,1)",
-	   					pointColor: "rgba(255,0,0,1)",
+	   					strokeColor: "rgba(160,0,0,1)",
+	   					pointColor: "rgba(160,0,0,1)",
 	   					pointStrokeColor: "#fff",
 	   					pointHighlightFill: "#fff",
 	   					pointHighlightStroke: "rgba(255,0,0,1)"
@@ -213,8 +221,8 @@
 	   					data: {{ chart.electricity1_returned|safe }},
 	   					label: "{% trans 'Electricity 1 returned (off-peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
-	   					strokeColor: "rgba(133,20,75,1)",
-	   					pointColor: "rgba(133,20,75,1)",
+	   					strokeColor: "rgba(75,20,75,1)",
+	   					pointColor: "rgba(75,20,75,1)",
 	   					pointStrokeColor: "#fff",
 	   					pointHighlightFill: "#fff",
 	   					pointHighlightStroke: "rgba(133,20,75,1)"
@@ -231,7 +239,8 @@
 	   			};
 	
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
-	   			new Chart(ctx).Line(data, line_options);
+	   			var chart_instance = new Chart(ctx).Line(data, line_options);
+                $("#electricity-chart-legend").html(chart_instance.generateLegend());
    			}
             
             function render_gas_chart()
