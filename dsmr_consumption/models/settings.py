@@ -19,6 +19,9 @@ class ConsumptionSettings(SingletonModel):
         help_text=_('Electricity readings are read every 10 seconds. We can group those for you.')
     )
 
+    def __str__(self):
+        return self._meta.verbose_name.title()
+
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Consumption configuration')

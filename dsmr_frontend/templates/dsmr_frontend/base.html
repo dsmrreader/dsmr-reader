@@ -83,9 +83,14 @@
                         <li>
                             &nbsp;
                         </li>
-                         <li>
+                        <li>
                             <a href="{% url 'admin:index' %}">
                                 <i class="fa fa-cogs"></i> <span>{% trans "Settings" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:status' %}">
+                                <i class="fa fa-heartbeat"></i> <span>{% trans "Status" %}</span>
                             </a>
                         </li>
                     </ul>

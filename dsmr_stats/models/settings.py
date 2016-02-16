@@ -13,6 +13,9 @@ class StatsSettings(SingletonModel):
         )
     )
 
+    def __str__(self):
+        return self._meta.verbose_name.title()
+
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Trends & statistics configuration')

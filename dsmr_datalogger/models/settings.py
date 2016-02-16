@@ -44,6 +44,9 @@ class DataloggerSettings(SingletonModel):
         help_text=_('COM-port connected to Smartmeter.')
     )
 
+    def __str__(self):
+        return self._meta.verbose_name.title()
+
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Datalogger configuration')

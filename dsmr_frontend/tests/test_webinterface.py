@@ -10,7 +10,11 @@ from django.core.urlresolvers import reverse
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
+from dsmr_consumption.models.settings import ConsumptionSettings
+from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_stats.models.settings import StatsSettings
+from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_stats.models.note import Note
 
@@ -131,6 +135,28 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         response = self.client.get(trend_url)
         self.assertEqual(response.status_code, 200)
 
+    def test_status(self):
+        self._synchronize_date()
+        response = self.client.get(
+            reverse('{}:status'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
+
+        self.assertIn('consumption_settings', response.context)
+        self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)
+
+        self.assertIn('datalogger_settings', response.context)
+        self.assertIsInstance(response.context['datalogger_settings'], DataloggerSettings)
+
+        self.assertIn('frontend_settings', response.context)
+        self.assertIsInstance(response.context['frontend_settings'], FrontendSettings)
+
+        self.assertIn('stats_settings', response.context)
+        self.assertIsInstance(response.context['stats_settings'], StatsSettings)
+
+        self.assertIn('weather_settings', response.context)
+        self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
+
 
 class TestViewsWithoutData(TestCase):
     namespace = 'frontend'
@@ -165,3 +191,7 @@ class TestViewsWithoutData(TestCase):
             return
 
         self._check_view_status_code('trends')
+
+    def test_status(self):
+        """ Check whether status page can run without data. """
+        self._check_view_status_code('status')
