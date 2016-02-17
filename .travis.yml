@@ -7,4 +7,4 @@ python:
 
 install: "pip install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/test.txt"
 
-script: ./manage.py test --settings=dsmrreader.config.test -v2 --noinput
+script: ./manage.py test --settings=dsmrreader.config.test --noinput

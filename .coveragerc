@@ -1,6 +1,12 @@
 [run]
 data_file = coverage_report/.coverage
-omit = coverage_report/* django*
+omit = 
+    *django*
+    *migrations*
+    *xml*
+    *polib*
+    *serial*
+    *solo*
 
 [html]
 directory = coverage_report
