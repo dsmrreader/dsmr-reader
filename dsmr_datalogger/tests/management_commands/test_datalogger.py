@@ -2,9 +2,10 @@ from unittest import mock
 from datetime import datetime
 from decimal import Decimal
 
-import pytz
-import serial
+from django.core.management import CommandError
 from django.test import TestCase
+import serial
+import pytz
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
@@ -198,6 +199,18 @@ class TestDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
         self.assertEqual(meter_statistics.voltage_swell_count_l1, 0)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, 0)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, 0)
+
+
+class TestDsmrDataloggerTracking(CallCommandStdoutMixin, TestCase):
+    def test_tracking_disabled(self):
+        """ Test whether datalogger can bij stopped by changing track setting. """
+        datalogger_settings = DataloggerSettings.get_solo()
+        datalogger_settings.track = False
+        datalogger_settings.save()
+
+        # Datalogger should crash with error.
+        with self.assertRaisesMessage(CommandError, 'Datalogger tracking is DISABLED!'):
+            self._call_command_stdout('dsmr_datalogger')
 
 
 class TestDsmrVersionMapping(CallCommandStdoutMixin, TestCase):

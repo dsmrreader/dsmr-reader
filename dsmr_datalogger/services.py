@@ -1,8 +1,8 @@
 import re
-import serial
 
 from django.conf import settings
 from django.utils import timezone
+import serial
 
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
@@ -25,12 +25,7 @@ def get_dsmr_connection_parameters():
     }
 
     datalogger_settings = DataloggerSettings.get_solo()
-
-    try:
-        connection_parameters = DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
-    except KeyError:
-        raise NotImplementedError()
-
+    connection_parameters = DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
     connection_parameters['com_port'] = datalogger_settings.com_port
     return connection_parameters
 

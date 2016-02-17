@@ -58,6 +58,7 @@ def analyze():
 
     # Skip today, try again tomorrow. As we need a full day to pass first.
     now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+
     if consumption_date == now.date():
         return
 

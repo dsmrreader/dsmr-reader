@@ -1,3 +1,4 @@
+from unittest import mock
 import random
 import json
 
@@ -82,6 +83,15 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self.assertEqual(response.context['latest_gas'], 0)
         self.assertFalse(response.context['track_temperature'])
         self.assertIn('consumption', response.context)
+
+        # Test whether reverse graphs work.
+        frontend_settings = FrontendSettings.get_solo()
+        frontend_settings.reverse_dashboard_graphs = True
+        frontend_settings.save()
+
+        response = self.client.get(
+            reverse('{}:dashboard'.format(self.namespace))
+        )
 
     def test_history(self):
         frontend_settings = FrontendSettings.get_solo()
