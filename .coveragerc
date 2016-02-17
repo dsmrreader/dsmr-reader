@@ -1,0 +1,6 @@
+[run]
+data_file = coverage_report/.coverage
+omit = coverage_report/* django*
+
+[html]
+directory = coverage_report

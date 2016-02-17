@@ -21,7 +21,12 @@ class TestTranslations(CallCommandStdoutMixin, TestCase):
     def test_percent_translated(self):
         """ Test whether localization files are 100% translated. """
         self._call_command_stdout(
-            'makemessages', locale=self.locales, no_location=True, no_wrap=True
+            'makemessages',
+            locale=self.locales,
+            no_location=True,
+            no_wrap=True,
+            # Weird bug/collision with coverage reports, crashing the test.
+            ignore_patterns=['coverage_report/*'],
         )
         self._call_command_stdout('compilemessages')
 

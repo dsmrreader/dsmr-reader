@@ -5,10 +5,11 @@ However, since this project is localhost only, I do not care ;-)
 
 from dsmrreader.config.development import *
 
+
 DEBUG = False
 ALLOWED_HOSTS = ['*']
 
-DATABASES = None  # Please use one of the prepared configs per database backend.
+DATABASES = None  # Please use one of the prepared configs for your database backend.
 
 STATIC_ROOT = '/var/www/dsmrreader/static'
 
