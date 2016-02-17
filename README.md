@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/dennissiemensma/dsmr-reader.svg?branch=master)](https://travis-ci.org/dennissiemensma/dsmr-reader)
+
+
 # Table of content #
 * Intro
     * Usage
