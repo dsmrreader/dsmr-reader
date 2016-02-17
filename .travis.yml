@@ -4,6 +4,6 @@ python:
   - "3.4"
   - "3.5"
 
-install: "pip3 install -r dsmrreader/provisioning/requirements/base.txt -r"
+install: "pip install -r dsmrreader/provisioning/requirements/base.txt -r"
 
 script: ./manage.py test --settings=dsmrreader.config.test -v2 --noinput
