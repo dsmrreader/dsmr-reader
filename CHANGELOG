@@ -4,7 +4,8 @@
 v0.11 (β) - 2016-xx-xx
 ======================
 - Status page/alerts when features are disabled/unavailable (#45).
--
+- Integrate Travis CI (#48).
+- Testing coverage (#38).
 
 
 
