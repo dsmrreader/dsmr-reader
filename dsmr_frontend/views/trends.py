@@ -78,5 +78,6 @@ class Trends(TemplateView):
 
     def _hour_to_color(self, hour, offset=0):
         """ A little help to render 'random' colors, making the graphs look less dull. """
-        # Offset 4000000 = purple.
-        return '#%06x' % int(hour * 5 + int(offset))
+        hour = int(hour)
+        offset = int(offset)
+        return '#%06x' % int(hour * 5 + offset)

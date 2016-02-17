@@ -3,8 +3,6 @@ import json
 
 from django.test import TestCase, Client
 from django.utils import timezone
-from django.db import connection
-from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
@@ -126,12 +124,6 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self._synchronize_date()
         trend_url = reverse('{}:trends'.format(self.namespace))
 
-        if connection.vendor not in settings.DSMR_SUPPORTED_DB_VENDORS:
-            # The view should crash, as we do not (yet) have native date extractors for this vendor.
-            with self.assertRaises(NotImplementedError):
-                self.client.get(trend_url)
-            return
-
         response = self.client.get(trend_url)
         self.assertEqual(response.status_code, 200)
 
@@ -184,12 +176,6 @@ class TestViewsWithoutData(TestCase):
 
     def test_trends(self):
         """ Check whether trends page can run without data. """
-        if connection.vendor not in settings.DSMR_SUPPORTED_DB_VENDORS:
-            # The view should crash, as we do not (yet) have native date extractors for this vendor.
-            with self.assertRaises(NotImplementedError):
-                self._check_view_status_code('trends')
-            return
-
         self._check_view_status_code('trends')
 
     def test_status(self):

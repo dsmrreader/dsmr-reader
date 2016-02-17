@@ -215,6 +215,7 @@ def average_electricity_delivered_by_hour():
     SQL_EXTRA = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
         'postgresql': "date_part('hour', read_at)",
+        'sqlite': "strftime('%H', read_at)",
         'mysql': "extract(hour from read_at)",
     }
 

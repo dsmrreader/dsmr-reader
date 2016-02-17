@@ -8,7 +8,6 @@ INSTALLED_APPS.append('django_nose')
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
-    '--with-coverage',
     '--cover-erase',
     '--cover-html',
     '--cover-html-dir=coverage_report/html',
@@ -16,7 +15,7 @@ NOSE_ARGS = [
 
 DATABASES = {
     'default': {
-        # SQLite is NOT supported and will FAIL tests. Use only for developing tests initially.
+        # SQLite is NOT supported, but might work, so experimental!
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'dsmrreader',  # Will be adjusted to 'test_*' by Django.
         'USER': 'dsmrreader',

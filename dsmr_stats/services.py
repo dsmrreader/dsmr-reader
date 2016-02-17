@@ -144,6 +144,7 @@ def average_consumption_by_hour():
     SQL_EXTRA = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
         'postgresql': "date_part('hour', hour_start)",
+        'sqlite': "strftime('%H', hour_start)",
         'mysql': "extract(hour from hour_start)",
     }
 
