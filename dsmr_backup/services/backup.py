@@ -30,13 +30,18 @@ def check():
     )
     next_backup_timestamp = timezone.make_aware(next_backup_timestamp, settings.LOCAL_TIME_ZONE)
 
-    if backup_settings.latest_backup is None or (
-        backup_settings.latest_backup + timezone.timedelta(hours=24) < timezone.now() and
-            next_backup_timestamp < timezone.now()
+    next_backup_interval = backup_settings.latest_backup + timezone.timedelta(
+        hours=settings.DSMR_BACKUP_CREATION_INTERVAL
+    )
+
+    if backup_settings.latest_backup and (
+        timezone.now() < next_backup_interval or timezone.now() < next_backup_timestamp
     ):
-        # Create backup when: none created yet or the last one was over 24 hours ago and past
-        # prefered daily backup creation time.
-        create()
+        # Skip backup when one was either created recently or when we should wait for user's
+        # backup preference.
+        return
+
+    create()
 
 
 def get_backup_directory():
