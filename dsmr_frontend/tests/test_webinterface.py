@@ -16,6 +16,7 @@ from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_stats.models.note import Note
+import dsmr_consumption.services
 
 
 class TestViews(CallCommandStdoutMixin, TestCase):
@@ -30,7 +31,7 @@ class TestViews(CallCommandStdoutMixin, TestCase):
 
     def _synchronize_date(self, interval=None):
         """ Little hack to fake any output for today (moment of test). """
-        self._call_command_stdout('dsmr_backend')
+        dsmr_consumption.services.compact_all()
         ec = ElectricityConsumption.objects.all()[0]
         gc = GasConsumption.objects.all()[0]
         ds = DayStatistics.objects.get(pk=1)

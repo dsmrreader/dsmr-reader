@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-20 00:10+0000\n"
-"PO-Revision-Date: 2016-02-20 01:10+0100\n"
+"POT-Creation-Date: 2016-02-20 16:49+0000\n"
+"PO-Revision-Date: 2016-02-20 17:13+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -48,8 +48,11 @@ msgstr "Tijdstip van backup"
 msgid "Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation."
 msgstr "Voorkeurstijdstip van dagelijkse backup. Ons advies is om een moment in de nacht te pakken, gezien het maken van een backup de werking van de applicatie kort kan onderbreken."
 
+msgid "Latest backup"
+msgstr "Meest recente backup"
+
 msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
-msgstr " Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de backup wordt (alleen) de eerste keer genegeerd!"
+msgstr " Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de backup wordt (eenmalig) de eerste keer genegeerd!"
 
 msgid "Backup configuration"
 msgstr "Backupconfiguratie"
@@ -59,6 +62,9 @@ msgstr "Dropbox 'access token'"
 
 msgid "The access token for your Dropbox account. You should register an App for your own Dropbox account ({}). Please select \"Permission type\" named \"App folder\" to restrict unneeded access. Backups will be synced to a dedicated folder in your account. After creating your App you should be able to generate an \"Access token\" and enter it here. See {} for more information."
 msgstr "Het 'access token' voor je Dropbox account. Hiervoor moet je onder je eigen account een applicatie registeren ({}). Zorg ervoor dat je bij \"Permission type\" kiest voor de optie \"App folder\" om de gedeelde toegang tot je account te beperken. Backups worden hierdoor in je account op een geïsoleerde locatie gezet. Zodra je in Dropbox een applicatie hebt toegevoegd, kun je een zogeheten \"Access token\" genereren en hier invullen. Zie voor meer informatie: {}."
+
+msgid "Latest sync"
+msgstr "Meest recente synchronisatie"
 
 msgid "Timestamp of latest sync with Dropbox. Automatically updated by application."
 msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."

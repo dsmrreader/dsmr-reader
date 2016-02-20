@@ -14,13 +14,6 @@ class TestServices(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_backend' management command. """
     fixtures = ['dsmr_stats/electricity-consumption.json', 'dsmr_stats/gas-consumption.json']
 
-    @mock.patch('dsmr_stats.services.analyze')
-    def test_analyze_service_signal_trigger(self, analyze_mock):
-        """ Test incoming signal communication. """
-        self.assertFalse(analyze_mock.called)
-        self._call_command_stdout('dsmr_backend')
-        self.assertTrue(analyze_mock.called)
-
     @mock.patch('dsmr_stats.services.create_hourly_statistics')
     @mock.patch('dsmr_stats.services.create_daily_statistics')
     def test_analyze_service_track_setting(self, daily_statistics_mock, hourly_statistics_mock):

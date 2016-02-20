@@ -33,6 +33,7 @@ class BackupSettings(SingletonModel):
         default=None,
         null=True,
         blank=True,
+        verbose_name=_('Latest backup'),
         help_text=_(
             'Timestamp of latest backup created. Automatically updated by application. Please note '
             'that the application will ignore the "backup_time" setting the first time used.'
@@ -72,6 +73,7 @@ class DropboxSettings(SingletonModel):
         default=None,
         null=True,
         blank=True,
+        verbose_name=_('Latest sync'),
         help_text=_(
             'Timestamp of latest sync with Dropbox. Automatically updated by application.'
         )

@@ -7,6 +7,7 @@ from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
+import dsmr_consumption.services
 
 
 class TestServices(CallCommandStdoutMixin, TestCase):
@@ -26,19 +27,12 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         consumption_settings.compactor_grouping_type = ConsumptionSettings.COMPACTOR_GROUPING_BY_READING
         consumption_settings.save()
 
-        self._call_command_stdout('dsmr_backend')
+        dsmr_consumption.services.compact_all()
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
         self.assertEqual(ElectricityConsumption.objects.count(), 3)
         self.assertEqual(GasConsumption.objects.count(), 1)
-
-    @mock.patch('dsmr_consumption.signals.gas_consumption_created.send_robust')
-    def test_consumption_creation_signal(self, signal_mock):
-        """ Test incoming signal communication. """
-        self.assertFalse(signal_mock.called)
-        self._call_command_stdout('dsmr_backend')
-        self.assertTrue(signal_mock.called)
 
     def test_grouping(self):
         """ Test grouping per minute, instead of the default 10-second interval. """
@@ -47,7 +41,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         dr.timestamp = timezone.now()
         dr.save()
 
-        self._call_command_stdout('dsmr_backend')
+        dsmr_consumption.services.compact_all()
 
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
@@ -59,7 +53,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(GasConsumption.objects.exists())
 
-        self._call_command_stdout('dsmr_backend')
+        dsmr_consumption.services.compact_all()
 
         self.assertTrue(ElectricityConsumption.objects.exists())
         self.assertTrue(GasConsumption.objects.exists())

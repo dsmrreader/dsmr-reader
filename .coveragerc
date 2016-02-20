@@ -7,6 +7,11 @@ omit =
     *polib*
     *serial*
     *solo*
+    *dropbox*
+    *requests*
+    *urllib3*
+    *six*
+    *http/cookiejar*
 
 [html]
 directory = coverage_report

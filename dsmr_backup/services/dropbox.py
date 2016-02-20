@@ -15,7 +15,7 @@ def sync():
     if not dropbox_settings.access_token:
         return
 
-    if timezone.now() < dropbox_settings.latest_sync + timezone.timedelta(hour=1):
+    if timezone.now() < dropbox_settings.latest_sync + timezone.timedelta(hours=1):
         return
 
 #     backup_folder = os.path.join(settings.BASE_DIR, settings.DSMR_BACKUP_DIRECTORY)
