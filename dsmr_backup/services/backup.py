@@ -30,12 +30,16 @@ def check():
     )
     next_backup_timestamp = timezone.make_aware(next_backup_timestamp, settings.LOCAL_TIME_ZONE)
 
-    next_backup_interval = backup_settings.latest_backup + timezone.timedelta(
-        hours=settings.DSMR_BACKUP_CREATION_INTERVAL
-    )
+    # Timestamp when we are allowed to backup again due to interval restriction passed.
+    next_backup_interval = None
 
-    if backup_settings.latest_backup and (
-        timezone.now() < next_backup_interval or timezone.now() < next_backup_timestamp
+    if backup_settings.latest_backup:
+        next_backup_interval = backup_settings.latest_backup + timezone.timedelta(
+            hours=settings.DSMR_BACKUP_CREATION_INTERVAL
+        )
+
+    if backup_settings.latest_backup and next_backup_interval and (
+        timezone.now() < next_backup_interval or timezone.now() > next_backup_timestamp
     ):
         # Skip backup when one was either created recently or when we should wait for user's
         # backup preference.

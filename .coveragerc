@@ -1,17 +1,7 @@
 [run]
 data_file = coverage_report/.coverage
-omit = 
-    *django*
-    *migrations*
-    *xml*
-    *polib*
-    *serial*
-    *solo*
-    *dropbox*
-    *requests*
-    *urllib3*
-    *six*
-    *http/cookiejar*
+include = ./*
+omit = ./*/migrations/*
 
 [html]
 directory = coverage_report
