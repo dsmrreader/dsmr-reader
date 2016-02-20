@@ -10,11 +10,6 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-    <div class="alert alert-info" role="alert">
-        {% blocktrans %}This page displays all settings and the status of them. You can change them here{% endblocktrans %}: 
-        &nbsp; <a href="{% url 'admin:index' %}" class="btn btn-success"><i class="fa fa-cogs"></i> <span>{% trans "Settings" %}</span></a>
-    </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -27,7 +22,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Value" %} </th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
                         <tr{% if not datalogger_settings.track %} class="alert alert-danger"{% endif %}>
@@ -68,7 +63,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Value" %} </th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
                         <tr{% if not backup_settings.daily_backup %} class="alert alert-danger"{% endif %}>
@@ -86,7 +81,7 @@
                             <td>{{ backup_settings.backup_time }}</td>
                             <td>{% model_meta_info backup_settings 'backup_time' 'help_text' %}</td>
                         </tr>
-                        <tr>
+                        <tr{% if not backup_settings.latest_backup %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info backup_settings 'latest_backup' 'verbose_name' %}</td>
                             <td>{{ backup_settings.latest_backup|naturaltime|default_if_none:'-' }}</td>
                             <td>{% model_meta_info backup_settings 'latest_backup' 'help_text' %}</td>
@@ -109,7 +104,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Value" %} </th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
                         <tr>
@@ -135,7 +130,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Value" %} </th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
                         <tr>
@@ -161,7 +156,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Value" %} </th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
                         <tr>
@@ -184,26 +179,26 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_weather_weathersettings_change' weather_settings.pk %}" class="btn btn-success">
+                    <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' dropbox_settings.pk %}"  class="btn {% if dropbox_settings.access_token %}btn-success{% else %}alert-warning{% endif %}">
                         <i class="fa fa-cogs"></i>
-                    </a> &nbsp; {{ weather_settings }}
+                    </a> &nbsp; {{ dropbox_settings }}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Value" %} </th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
-                        <tr>
-                            <td>{% model_meta_info weather_settings 'track' 'verbose_name' %}</td>
-                            <td>{{ weather_settings.track|yesno }}</td>
-                            <td>{% model_meta_info weather_settings 'track' 'help_text' %}</td>
+                        <tr{% if not dropbox_settings.access_token %} class="alert alert-warning"{% endif %}>
+                            <td>{% model_meta_info dropbox_settings 'access_token' 'verbose_name' %}</td>
+                            <td>{{ dropbox_settings.access_token|yesno:'yes,-' }}</td>
+                            <td>{% model_meta_info dropbox_settings 'access_token' 'help_text' %}</td>
                         </tr>
-                        <tr>
-                            <td>{% model_meta_info weather_settings 'buienradar_station' 'verbose_name' %}</td>
-                            <td>{{ weather_settings.get_buienradar_station_display }}</td>
-                            <td>{% model_meta_info weather_settings 'buienradar_station' 'help_text' %}</td>
+                        <tr{% if dropbox_settings.access_token and not dropbox_settings.latest_sync %} class="alert alert-warning"{% endif %}>
+                            <td>{% model_meta_info dropbox_settings 'latest_sync' 'verbose_name' %}</td>
+                            <td>{{ dropbox_settings.latest_sync|naturaltime|default_if_none:'-' }}</td>
+                            <td>{% model_meta_info dropbox_settings 'latest_sync' 'help_text' %}</td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->
@@ -215,26 +210,26 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' dropbox_settings.pk %}" class="btn btn-success">
+                    <a href="{% url 'admin:dsmr_weather_weathersettings_change' weather_settings.pk %}" class="btn btn-success">
                         <i class="fa fa-cogs"></i>
-                    </a> &nbsp; {{ dropbox_settings }}
+                    </a> &nbsp; {{ weather_settings }}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Value" %} </th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
                         <tr>
-                            <td>{% model_meta_info dropbox_settings 'access_token' 'verbose_name' %}</td>
-                            <td>{{ dropbox_settings.access_token|yesno }}</td>
-                            <td>{% model_meta_info dropbox_settings 'access_token' 'help_text' %}</td>
+                            <td>{% model_meta_info weather_settings 'track' 'verbose_name' %}</td>
+                            <td>{{ weather_settings.track|yesno }}</td>
+                            <td>{% model_meta_info weather_settings 'track' 'help_text' %}</td>
                         </tr>
                         <tr>
-                            <td>{% model_meta_info dropbox_settings 'latest_sync' 'verbose_name' %}</td>
-                            <td>{{ dropbox_settings.latest_sync|naturaltime|default_if_none:'-' }}</td>
-                            <td>{% model_meta_info dropbox_settings 'latest_sync' 'help_text' %}</td>
+                            <td>{% model_meta_info weather_settings 'buienradar_station' 'verbose_name' %}</td>
+                            <td>{{ weather_settings.get_buienradar_station_display }}</td>
+                            <td>{% model_meta_info weather_settings 'buienradar_station' 'help_text' %}</td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->

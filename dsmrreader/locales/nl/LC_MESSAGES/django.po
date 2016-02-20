@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-20 19:11+0000\n"
+"POT-Creation-Date: 2016-02-20 23:51+0000\n"
 "PO-Revision-Date: 2016-02-20 18:04+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -445,9 +445,6 @@ msgstr "Gas (per m<sup>3</sup>)"
 msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
 msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
 
-msgid "This page displays all settings and the status of them. You can change them here"
-msgstr "Deze pagina geeft een overzicht van alle instellingen en hun waarde. Je kunt ze hier veranderen"
-
 msgid "Setting"
 msgstr "Instelling"
 
@@ -708,6 +705,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "This page displays all settings and the status of them. You can change them here"
+#~ msgstr "Deze pagina geeft een overzicht van alle instellingen en hun waarde. Je kunt ze hier veranderen"
 
 #~ msgid "BAUD rate"
 #~ msgstr "BAUD-waarde"
