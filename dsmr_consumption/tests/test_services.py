@@ -1,5 +1,3 @@
-from unittest import mock
-
 from django.test import TestCase
 from django.utils import timezone
 
@@ -57,3 +55,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
 
         self.assertTrue(ElectricityConsumption.objects.exists())
         self.assertTrue(GasConsumption.objects.exists())
+
+    def test_day_consumption(self):
+        with self.assertRaises(LookupError):
+            dsmr_consumption.services.day_consumption(timezone.now() + timezone.timedelta(weeks=1))

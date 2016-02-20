@@ -61,7 +61,7 @@ def create():
     ))
 
     # PostgreSQL backup.
-    if connection.vendor == 'postgresql':
+    if connection.vendor == 'postgresql':  # pragma: no cover
         backup_process = subprocess.Popen(
             [
                 'pg_dump',
@@ -71,10 +71,10 @@ def create():
             ], env={
                 'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
             },
-            stdout=open(backup_file, 'w')
+            stdout=open(backup_file, 'w')  # pragma: no cover
         )
     # MySQL backup.
-    elif connection.vendor == 'mysql':
+    elif connection.vendor == 'mysql':  # pragma: no cover
         backup_process = subprocess.Popen(
             [
                 'mysqldump',
@@ -86,6 +86,16 @@ def create():
                 '--user', settings.DATABASES['default']['USER'],
                 '--password={}'.format(settings.DATABASES['default']['PASSWORD']),
                 settings.DATABASES['default']['NAME'],
+            ],
+            stdout=open(backup_file, 'w')  # pragma: no cover
+        )
+    # SQLite backup.
+    elif connection.vendor == 'sqlite':
+        backup_process = subprocess.Popen(
+            [
+                'sqlite3',
+                settings.DATABASES['default']['NAME'],
+                '.dump',
             ],
             stdout=open(backup_file, 'w')
         )
@@ -110,9 +120,6 @@ def compress(file_path, compresslevel=1):
     with open(file_path, 'rb') as f_in:
         with gzip.open(file_path_gz, 'wb', compresslevel=compresslevel) as f_out:
             shutil.copyfileobj(f_in, f_out)
-
-    if os.stat(file_path_gz).st_size == 0:
-        raise IOError('Failed to compress {}'.format(file_path))
 
     os.unlink(file_path)
 

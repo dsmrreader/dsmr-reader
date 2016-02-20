@@ -66,6 +66,10 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         )
 
     def test_dashboard(self):
+        weather_settings = WeatherSettings.get_solo()
+        weather_settings.track = True
+        weather_settings.save()
+
         self._synchronize_date()
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
@@ -82,7 +86,7 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
         self.assertGreater(response.context['latest_electricity'], 0)
         self.assertEqual(response.context['latest_gas'], 0)
-        self.assertFalse(response.context['track_temperature'])
+        self.assertTrue(response.context['track_temperature'])
         self.assertIn('consumption', response.context)
 
         # Test whether reverse graphs work.

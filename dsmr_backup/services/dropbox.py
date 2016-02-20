@@ -17,11 +17,14 @@ def sync():
         return
 
     #  Or when we already synced within the last hour.
-    next_sync_interval = dropbox_settings.latest_sync + timezone.timedelta(
-        hours=settings.DSMR_DROPBOX_SYNC_INTERVAL
-    )
+    next_sync_interval = None
 
-    if dropbox_settings.latest_sync and timezone.now() < next_sync_interval:
+    if dropbox_settings.latest_sync:
+        next_sync_interval = dropbox_settings.latest_sync + timezone.timedelta(
+            hours=settings.DSMR_DROPBOX_SYNC_INTERVAL
+        )
+
+    if next_sync_interval and timezone.now() < next_sync_interval:
         return
 
     backup_directory = dsmr_backup.services.backup.get_backup_directory()

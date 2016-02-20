@@ -142,17 +142,12 @@ def flush():
 
 def average_consumption_by_hour():
     """ Calculates the average consumption by hour. Measured over all consumption data. """
-    SQL_EXTRA = {
+    sql_extra = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
         'postgresql': "date_part('hour', hour_start)",
         'sqlite': "strftime('%H', hour_start)",
         'mysql': "extract(hour from hour_start)",
-    }
-
-    try:
-        sql_extra = SQL_EXTRA[connection.vendor]
-    except KeyError:
-        raise NotImplementedError(connection.vendor)
+    }[connection.vendor]
 
     return HourStatistics.objects.extra({
         'hour_start': sql_extra

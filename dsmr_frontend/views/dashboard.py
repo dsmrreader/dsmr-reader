@@ -87,12 +87,8 @@ class Dashboard(TemplateView):
 
         context_data['latest_gas_read'] = latest_gas.read_at
         context_data['latest_gas'] = latest_gas.currently_delivered
-
-        try:
-            context_data['consumption'] = dsmr_consumption.services.day_consumption(
-                day=latest_electricity.read_at.astimezone(settings.LOCAL_TIME_ZONE).date()
-            )
-        except LookupError:
-            pass
+        context_data['consumption'] = dsmr_consumption.services.day_consumption(
+            day=latest_electricity.read_at.astimezone(settings.LOCAL_TIME_ZONE).date()
+        )
 
         return context_data
