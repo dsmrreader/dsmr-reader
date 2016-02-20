@@ -71,4 +71,5 @@ def upload_chunked(file_path):
             if retries == 0:
                 raise IOError("Failed to upload to dropbox")
 
-    uploader.finish(file_name)
+    # This will commit the file and persist it in Dropbox. Due to rotating backups we MUST override.
+    uploader.finish(file_name, overwrite=True)
