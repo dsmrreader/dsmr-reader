@@ -13,9 +13,9 @@ class Command(BaseCommand):
         # send_robust() guarantees the every listener receives this signal.
         responses = dsmr_backend.signals.backend_called.send_robust(None)
 
-        for _, current_response in responses:
+        for current_app, current_response in responses:
             # Reflect any error to output for convenience.
             if isinstance(current_response, Exception):
-                raise CommandError('Failure(s) detected: {}'.format(responses))
+                raise CommandError('Exception @ {}: {}'.format(current_app, current_response))
 
         self.stdout.write('Finished.')

@@ -18,14 +18,17 @@ class TestBackend(TestCase):
     def test_robust_signal(self):
         """ Test whether the signal is robust, handling any exceptions. """
 
-        def _trouble_making_callback(*args, **kwargs):
+        def _fake_signal_troublemaker(*args, **kwargs):
             raise BrokenPipeError("Signal receiver crashed for some reason...")
 
-        dsmr_backend.signals.backend_called.connect(receiver=_trouble_making_callback)
+        dsmr_backend.signals.backend_called.connect(receiver=_fake_signal_troublemaker)
 
         with self.assertRaises(CommandError):
-            # Signal should crashs, rasing a command error.
+            # Signal should crash, rasing a command error.
             call_command('dsmr_backend')
+
+        # We must disconnect to prevent other tests from failing, since this is no database action.
+        dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)
 
     def test_supported_vendors(self):
         """ Check whether supported vendors is as expected. """

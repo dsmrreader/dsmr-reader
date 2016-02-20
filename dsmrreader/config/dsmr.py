@@ -7,3 +7,4 @@ import pytz
 LOCAL_TIME_ZONE = pytz.timezone('CET')
 
 DSMR_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
+DSMR_BACKUP_DIRECTORY = 'backups'  # Relative to project root.
