@@ -68,11 +68,11 @@ def upload_chunked(file_path):
     while uploader.offset < size:
         try:
             uploader.upload_chunked(chunk_size=1 * 1024 * 1024)
-        except rest.ErrorResponse:
-            retries -= 1
+        except rest.ErrorResponse:   # pragma: no cover
+            retries -= 1  # pragma: no cover
 
-            if retries == 0:
-                raise IOError("Failed to upload to dropbox")
+            if retries == 0:  # pragma: no cover
+                raise IOError("Failed to upload to dropbox")  # pragma: no cover
 
     # This will commit the file and persist it in Dropbox. Due to rotating backups we MUST override.
     uploader.finish(file_name, overwrite=True)

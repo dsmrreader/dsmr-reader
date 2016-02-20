@@ -32,7 +32,8 @@ def analyze():
             return
 
         # We should use the day before the first consumption.
-        latest_statistics_day = first_consumption.read_at.date() - timedelta(hours=24)
+        read_at = timezone.localtime(first_consumption.read_at, settings.LOCAL_TIME_ZONE)
+        latest_statistics_day = read_at.date() - timedelta(hours=24)
     else:
         # As we'll be searching starting on this day, make sure to select the next one.
         latest_statistics_day = electricity_statistic.day + timedelta(hours=24)
@@ -43,7 +44,7 @@ def analyze():
         month=latest_statistics_day.month,
         day=latest_statistics_day.day,
         tzinfo=settings.LOCAL_TIME_ZONE
-    ) + timedelta(hours=1)  # BUG BUG BUG: Required dispite UTC!?
+    ) + timedelta(hours=1)  # BUG BUG BUG: Required despite UTC!?
 
     try:
         # First the first day of consumptions available. If any.

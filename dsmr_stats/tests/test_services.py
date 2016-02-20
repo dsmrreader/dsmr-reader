@@ -47,7 +47,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertEqual(HourStatistics.objects.count(), 4)
 
     def test_analyze_service_skip_current_day(self):
-        """ Tests whetehr analysis postpones current day. """
+        """ Tests whether analysis postpones current day. """
         # Drop fixtures and create data of today.
         ElectricityConsumption.objects.all().delete()
         GasConsumption.objects.all().delete()
@@ -74,7 +74,9 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
 
-        dsmr_stats.services.analyze()
+        # Analysis should crash.
+        with self.assertRaises(LookupError):
+            dsmr_stats.services.analyze()
 
         # Analysis should be skipped, as all source data is faked into being generated today.
         self.assertFalse(DayStatistics.objects.exists())

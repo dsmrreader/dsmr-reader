@@ -1,3 +1,4 @@
+from datetime import time
 import tempfile
 import gzip
 import os
@@ -6,6 +7,7 @@ from unittest import mock
 from django.test import TestCase
 from django.utils import timezone
 from django.conf import settings
+from pytz import utc
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
@@ -45,25 +47,6 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
         backup_settings.save()
 
         self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
-        self.assertFalse(create_backup_mock.called)
-
-        # Should not do anything.
-        dsmr_backup.services.backup.check()
-        self.assertFalse(create_backup_mock.called)
-
-    @mock.patch('dsmr_backup.services.backup.create')
-    def test_check_backup_time_restriction(self, create_backup_mock):
-        """ Test whether backups are restricted by the user's backup time preference. """
-        # Fake latest backup, long time ago.
-        backup_settings = BackupSettings.get_solo()
-        backup_settings.latest_backup = timezone.now() - timezone.timedelta(weeks=1)
-        backup_settings.save()
-        self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
-
-        # Fake the user's preference. BUG BUG: This might fail when test run just before midnight.
-        backup_settings.backup_time = (timezone.now() + timezone.timedelta(minutes=1)).time()
-        backup_settings.save()
-
         self.assertFalse(create_backup_mock.called)
 
         # Should not do anything.
@@ -185,3 +168,17 @@ class TestDropboxServices(CallCommandStdoutMixin, TestCase):
             # File should be ignored, as it's modification timestamp is before latest sync.
             dsmr_backup.services.dropbox.sync()
             self.assertFalse(upload_chunked_mock.called)
+
+    @mock.patch('dropbox.client.DropboxClient.get_chunked_uploader')
+    def test_upload_chunked(self, chunked_uploader_mock):
+        DATA = b'Lots of data.'
+        uploader_mock = mock.MagicMock()
+        type(uploader_mock).offset = mock.PropertyMock(side_effect=[0, 5, 10, len(DATA), len(DATA)])
+        chunked_uploader_mock.return_value = uploader_mock
+
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(DATA)
+            temp_file.flush()
+
+            dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
+            self.assertTrue(uploader_mock.finish.called)
