@@ -352,9 +352,10 @@ Now make sure you didn't insert any typo's by running `sudo service nginx config
 
 
 ## Data preservation & backups
-You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip or ignore this. Actually, it happened to myself quite recently as I somehow managed to corrupt my SD storage card, losing all my data on it. It luckily happened only a month after running my own readings, but imagine all the data you lose when it contained readings for several years. I plan to implement external data exports (#9, #10) in the future, but those will not be compatible for data recovery after a crash. The best advice I can give you is to make sure your database gets dumped daily on a 'safe' location (NOT the SD card self!). 
+You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip or ignore this. Actually, it happened to myself quite recently as I somehow managed to corrupt my SD storage card, losing all my data on it. It luckily happened only a month after running my own readings, but imagine all the data you lose when it contained readings for several years.
+The application will by default create a backup every night. However, as the data is still stored locally on your vulnerable SD card, you should export it off your RaspberryPi. There is an builtin option to have backups synced to your Dropbox, without exposing your Dropbox account and your private files in it. Please either use this service or manage offloading backups on your own.
 
-You can find an example in `dsmrreader/provisioning/postgresql/psql-backup.sh` for PostgreSQL, which I dump to a separately mounted USB stick on my RaspberryPi. For MySQL/MariaDB you can use `dsmrreader/provisioning/mysql/mysql-backup.sh`. Make sure to schedule the backup script as cronjob and also verify that it actually works. ;-)
+You may also decide to run backups outside the application. There are example backup scripts available in `dsmrreader/provisioning/postgresql/psql-backup.sh` for PostgreSQL, which I dump to a separately mounted USB stick on my RaspberryPi. For MySQL/MariaDB you can use `dsmrreader/provisioning/mysql/mysql-backup.sh`. Make sure to schedule the backup script as cronjob and also verify that it actually works. ;-)
 
 Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) later, allowing you to choose your own retention (for all the source readings).
 
