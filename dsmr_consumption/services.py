@@ -81,26 +81,23 @@ def compact(dsmr_reading):
                 None, instance=consumption
             )
 
-    # Gas however only get read every hour, so we should check
-    # for any duplicates, as they WILL exist.
-    gas_consumption_exists = GasConsumption.objects.filter(
-        read_at=dsmr_reading.extra_device_timestamp
-    ).exists()
+    # Gas however is only read (or updated) once every hour, so we should check for any duplicates
+    # as they will exist at some point.
+    hour_start = dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
 
-    if not gas_consumption_exists:
+    if not GasConsumption.objects.filter(read_at=hour_start).exists():
         # DSMR does not expose current gas rate, so we have to calculate
         # it ourselves, relative to the previous gas consumption, if any.
         try:
-            previous_gas_consumption = GasConsumption.objects.get(
-                read_at=dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
-            )
+            previous_gas_consumption = GasConsumption.objects.get(read_at=hour_start)
         except GasConsumption.DoesNotExist:
             gas_diff = 0
         else:
             gas_diff = dsmr_reading.extra_device_delivered - previous_gas_consumption.delivered
 
         consumption = GasConsumption.objects.create(
-            read_at=dsmr_reading.extra_device_timestamp,
+            # Gas consumption is aligned to start of the hour.
+            read_at=hour_start,
             delivered=dsmr_reading.extra_device_delivered,
             currently_delivered=gas_diff
         )
@@ -207,17 +204,12 @@ def round_decimal(decimal_price):
 
 def average_electricity_delivered_by_hour():
     """ Calculates the average consumption by hour. Measured over all consumption data. """
-    SQL_EXTRA = {
+    sql_extra = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
         'postgresql': "date_part('hour', read_at)",
-        'sqlite': "strftime('%H', read_at)",
         'mysql': "extract(hour from read_at)",
-    }
-
-    try:
-        sql_extra = SQL_EXTRA[connection.vendor]
-    except KeyError:
-        raise NotImplementedError(connection.vendor)
+        'sqlite': "strftime('%H', read_at)",
+    }[connection.vendor]
 
     return ElectricityConsumption.objects.extra({
         'hour': sql_extra
