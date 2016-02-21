@@ -7,6 +7,7 @@ v0.11 (β) - 2016-xx-xx
 - Integrate Travis CI (#48).
 - Testing coverage (#38).
 - Implement automatic backups & Dropbox cloud storage (#44).
+- Link code coverage service to repository (#56)
 
 
 
