@@ -199,7 +199,7 @@ To exit **cu**, input `q.`, hit Enter and wait for a few seconds. It should exit
 ### Application code clone ###
 Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user (if not then enter `sudo su - dsmr` again):
 
-`git clone https://github.com/dennissiemensma/dsmr-reader.git --branch stable`
+`git clone https://github.com/dennissiemensma/dsmr-reader.git`
 
 
 ### Virtualenv ###
