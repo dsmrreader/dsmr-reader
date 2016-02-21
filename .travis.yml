@@ -4,6 +4,9 @@ python:
   - "3.3"
   - "3.4"
 
+before_install:
+  - pip install codecov
+
 install: 
   - pip install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/test.txt
 
@@ -11,4 +14,4 @@ script:
   - ./manage.py test --settings=dsmrreader.config.test --noinput --with-coverage
 
 after_success:
-  - coveralls
+  - codecov
