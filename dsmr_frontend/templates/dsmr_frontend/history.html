@@ -95,26 +95,26 @@
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 1 (off-peak)" %}</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity1 }}</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity1_returned }}</span></td>
-                            <td><span class="badge bg-black">{{ consumption.electricity1_cost }}</span></td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ consumption.electricity1_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ consumption.electricity1_cost|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 (peak)" %}</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity2 }}</span></td>
-                            <td><span class="badge bg-maroon">{{ consumption.electricity2_returned }}</span></td>
-                            <td><span class="badge bg-black">{{ consumption.electricity2_cost }}</span></td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ consumption.electricity2_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ consumption.electricity2_cost|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ consumption.gas }}</span></td>
+                            <td><span class="badge bg-orange">{{ consumption.gas|default:'-' }}</span></td>
                             <td>&nbsp;</td>
-                            <td><span class="badge bg-black">{{ consumption.gas_cost }}</span></td>
+                            <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
                             <td colspan="2">&nbsp;</td>
-                            <td><span class="badge bg-black">{{ consumption.total_cost }}</span></td>
+                            <td><span class="badge bg-black">{{ consumption.total_cost|default:'-' }}</span></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->
@@ -227,20 +227,20 @@
 	   					data: {{ chart.electricity1_returned|safe }},
 	   					label: "{% trans 'Electricity 1 returned (off-peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
-	   					strokeColor: "rgba(75,20,75,1)",
-	   					pointColor: "rgba(75,20,75,1)",
+	   					strokeColor: "rgba(39,194,76,1)",
+	   					pointColor: "rgba(39,194,76,1)",
 	   					pointStrokeColor: "#fff",
 	   					pointHighlightFill: "#fff",
-	   					pointHighlightStroke: "rgba(133,20,75,1)"
+	   					pointHighlightStroke: "rgba(39,194,76,1)"
 	   				}, {
 	   					data: {{ chart.electricity2_returned|safe }},
 	   					label: "{% trans 'Electricity 1 returned (peak)' %}",	       				
 	   					fillColor: "rgba(255,255,255,0.2)",
-	   					strokeColor: "rgba(133,20,75,1)",
-	   					pointColor: "rgba(133,20,75,1)",
+	   					strokeColor: "rgba(65,218,102,1)",
+	   					pointColor: "rgba(65,218,102,1)",
 	   					pointStrokeColor: "#fff",
 	   					pointHighlightFill: "#fff",
-	   					pointHighlightStroke: "rgba(133,20,75,1)"
+	   					pointHighlightStroke: "rgba(65,218,102,1)"
 	   				}]
 	   			};
 	

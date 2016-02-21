@@ -31,12 +31,12 @@
                         <tr>
                             <td>{% trans "Electricity 1 (off-peak)" %}</td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span></td>
-                            <td><span class="badge bg-maroon">{{ latest_reading.electricity_returned_1|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ latest_reading.electricity_returned_1|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 (peak)" %}</td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
-                            <td><span class="badge bg-maroon">{{ latest_reading.electricity_returned_2|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ latest_reading.electricity_returned_2|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Gas " %}</td>
