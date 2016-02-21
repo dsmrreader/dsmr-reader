@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/dennissiemensma/dsmr-reader.svg?branch=master)](https://travis-ci.org/dennissiemensma/dsmr-reader)
-
+[![Coverage Status](https://coveralls.io/repos/github/dennissiemensma/dsmr-reader/badge.svg?branch=master)](https://coveralls.io/github/dennissiemensma/dsmr-reader?branch=master)
 
 # Table of content #
 * Intro
