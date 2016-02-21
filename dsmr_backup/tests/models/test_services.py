@@ -1,4 +1,3 @@
-from datetime import time
 import tempfile
 import gzip
 import os
@@ -7,7 +6,6 @@ from unittest import mock
 from django.test import TestCase
 from django.utils import timezone
 from django.conf import settings
-from pytz import utc
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
@@ -40,10 +38,11 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
 
     @mock.patch('dsmr_backup.services.backup.create')
     def test_check_interval_restriction(self, create_backup_mock):
-        """ Test whether backups are restricted by an interval. """
+        """ Test whether backups are restricted by one backup per day. """
         # Fake latest backup.
         backup_settings = BackupSettings.get_solo()
         backup_settings.latest_backup = timezone.now()
+        backup_settings.backup_time = timezone.now().time()
         backup_settings.save()
 
         self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
@@ -52,6 +51,35 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
         # Should not do anything.
         dsmr_backup.services.backup.check()
         self.assertFalse(create_backup_mock.called)
+
+        backup_settings.latest_backup = timezone.now() - timezone.timedelta(days=1)
+        backup_settings.save()
+
+        # Should be fine to backup now.
+        dsmr_backup.services.backup.check()
+        self.assertTrue(create_backup_mock.called)
+
+    @mock.patch('dsmr_backup.services.backup.create')
+    def test_check_backup_time_restriction(self, create_backup_mock):
+        """ Test whether backups are restricted by user's backup time preference. """
+        local_now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+
+        backup_settings = BackupSettings.get_solo()
+        backup_settings.latest_backup = local_now - timezone.timedelta(days=1)
+        backup_settings.backup_time = (local_now + timezone.timedelta(seconds=15)).time()
+        backup_settings.save()
+
+        # Should not do anything, we should backup a minute from now.
+        self.assertFalse(create_backup_mock.called)
+        dsmr_backup.services.backup.check()
+        self.assertFalse(create_backup_mock.called)
+
+        # Should be fine to backup now. Passed prefered time of user.
+        backup_settings.backup_time = local_now.time()
+        backup_settings.save()
+
+        dsmr_backup.services.backup.check()
+        self.assertTrue(create_backup_mock.called)
 
     def test_get_backup_directory(self):
         self.assertEqual(

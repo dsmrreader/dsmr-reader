@@ -21,6 +21,10 @@ def check():
     if not backup_settings.daily_backup:
         return
 
+    # Postpone when we already created a backup today.
+    if backup_settings.latest_backup and backup_settings.latest_backup.date() == timezone.now().date():
+        return
+
     # Timezone magic to make sure we select and combine the CURRENT day, in the user's timezone.
     next_backup_timestamp = timezone.now().astimezone(
         settings.LOCAL_TIME_ZONE
@@ -30,19 +34,8 @@ def check():
     )
     next_backup_timestamp = timezone.make_aware(next_backup_timestamp, settings.LOCAL_TIME_ZONE)
 
-    # Timestamp when we are allowed to backup again due to interval restriction passed.
-    next_backup_interval = None
-
-    if backup_settings.latest_backup:
-        next_backup_interval = backup_settings.latest_backup + timezone.timedelta(
-            hours=settings.DSMR_BACKUP_CREATION_INTERVAL
-        )
-
-    if backup_settings.latest_backup and next_backup_interval and (
-        timezone.now() < next_backup_interval or timezone.now() > next_backup_timestamp
-    ):
-        # Skip backup when one was either created recently or when we should wait for user's
-        # backup preference.
+    if backup_settings.latest_backup and timezone.now() < next_backup_timestamp:
+        # Postpone when the user's backup time preference has not been passed yet.
         return
 
     create()
