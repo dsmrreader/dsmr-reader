@@ -6,12 +6,14 @@ python:
 
 before_install:
   - pip install codecov
+  - pip install python-coveralls
 
 install: 
   - pip install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/test.txt
 
 script: 
-  - coverage run manage.py test --settings=dsmrreader.config.test --noinput --with-coverage
+  - ./manage.py test --settings=dsmrreader.config.test --noinput --with-coverage
 
 after_success:
   - codecov
+  - coveralls

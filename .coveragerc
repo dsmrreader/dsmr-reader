@@ -1,5 +1,4 @@
 [run]
-data_file = coverage_report/.coverage
 include = ./*
 omit = ./*/migrations/*
 
