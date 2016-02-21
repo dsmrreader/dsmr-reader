@@ -96,7 +96,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_stats_statssettings_change' stats_settings.pk %}" class="btn btn-success">
+                    <a href="{% url 'admin:dsmr_stats_statssettings_change' stats_settings.pk %}" class="btn {% if stats_settings.track %}btn-success{% else %}alert-warning{% endif %}">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ stats_settings }}
                 </header>
@@ -107,7 +107,7 @@
                             <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
-                        <tr>
+                        <tr{% if not stats_settings.track %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info stats_settings 'track' 'verbose_name' %}</td>
                             <td>{{ stats_settings.track|yesno }}</td>
                             <td>{% model_meta_info stats_settings 'track' 'help_text' %}</td>
@@ -179,7 +179,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' dropbox_settings.pk %}"  class="btn {% if dropbox_settings.access_token %}btn-success{% else %}alert-warning{% endif %}">
+                    <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' dropbox_settings.pk %}" class="btn {% if dropbox_settings.access_token %}btn-success{% else %}alert-warning{% endif %}">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ dropbox_settings }}
                 </header>
@@ -210,7 +210,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_weather_weathersettings_change' weather_settings.pk %}" class="btn btn-success">
+                    <a href="{% url 'admin:dsmr_weather_weathersettings_change' weather_settings.pk %}" class="btn {% if weather_settings.track %}btn-success{% else %}alert-warning{% endif %}">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ weather_settings }}
                 </header>
@@ -221,7 +221,7 @@
                             <th class="col-md-3">{% trans "Status" %} </th>
                             <th class="col-md-6">{% trans "Description" %} </th>
                         </tr>
-                        <tr>
+                        <tr{% if not weather_settings.track %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info weather_settings 'track' 'verbose_name' %}</td>
                             <td>{{ weather_settings.track|yesno }}</td>
                             <td>{% model_meta_info weather_settings 'track' 'help_text' %}</td>
