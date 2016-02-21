@@ -58,14 +58,11 @@ class DropboxSettings(SingletonModel):
         verbose_name=_('Dropbox access token'),
         help_text=_(
             'The access token for your Dropbox account. You should register an App for your own '
-            'Dropbox account ({}). Please select "Permission type" named "App folder" to restrict '
-            'unneeded access. Backups will be synced to a dedicated folder in your account. After '
-            'creating your App you should be able to generate an "Access token" and enter it here. '
-            'See {} for more information.'.format(
-                'https://www.dropbox.com/developers/apps',
-                'https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own'
-                '-account/'
-            )
+            'Dropbox account (https://www.dropbox.com/developers/apps). Please select "Permission '
+            'type" named "App folder" to restrict unneeded access. Backups will be synced to a '
+            'dedicated folder in your account. After creating your App you should be able to '
+            'generate an "Access token" and enter it here. For more information, see https://'
+            'blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account'
         )
     )
 
