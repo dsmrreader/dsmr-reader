@@ -26,13 +26,9 @@ def check():
         return
 
     # Timezone magic to make sure we select and combine the CURRENT day, in the user's timezone.
-    next_backup_timestamp = timezone.now().astimezone(
-        settings.LOCAL_TIME_ZONE
-    )
-    next_backup_timestamp = timezone.datetime.combine(
-        next_backup_timestamp, backup_settings.backup_time
-    )
-    next_backup_timestamp = timezone.make_aware(next_backup_timestamp, settings.LOCAL_TIME_ZONE)
+    next_backup_timestamp = timezone.make_aware(timezone.datetime.combine(
+        timezone.now(), backup_settings.backup_time
+    ))
 
     if backup_settings.latest_backup and timezone.now() < next_backup_timestamp:
         # Postpone when the user's backup time preference has not been passed yet.

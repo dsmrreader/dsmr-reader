@@ -1,8 +1,7 @@
 import json
 
 from django.views.generic.base import TemplateView
-from django.utils import formats
-from django.conf import settings
+from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
@@ -41,18 +40,18 @@ class Dashboard(TemplateView):
             temperature = temperature[temperature_offset:]
 
         context_data['electricity_x'] = json.dumps(
-            [formats.date_format(x.read_at.astimezone(
-                settings.LOCAL_TIME_ZONE
-            ), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT') for x in electricity]
+            [formats.date_format(
+                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT'
+            ) for x in electricity]
         )
         context_data['electricity_y'] = json.dumps(
             [float(x.currently_delivered * 1000) for x in electricity]
         )
 
         context_data['gas_x'] = json.dumps(
-            [formats.date_format(x.read_at.astimezone(
-                settings.LOCAL_TIME_ZONE
-            ), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT') for x in gas]
+            [formats.date_format(
+                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT'
+            ) for x in gas]
         )
         context_data['gas_y'] = json.dumps(
             [float(x.currently_delivered) for x in gas]
@@ -62,9 +61,9 @@ class Dashboard(TemplateView):
 
         if context_data['track_temperature']:
             context_data['temperature_x'] = json.dumps(
-                [formats.date_format(x.read_at.astimezone(
-                    settings.LOCAL_TIME_ZONE
-                ), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT') for x in temperature]
+                [formats.date_format(
+                    timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT'
+                ) for x in temperature]
             )
             context_data['temperature_y'] = json.dumps(
                 [float(x.degrees_celcius) for x in temperature]
@@ -84,11 +83,10 @@ class Dashboard(TemplateView):
         context_data['latest_electricity_returned'] = int(
             latest_electricity.currently_returned * 1000
         )
-
         context_data['latest_gas_read'] = latest_gas.read_at
         context_data['latest_gas'] = latest_gas.currently_delivered
         context_data['consumption'] = dsmr_consumption.services.day_consumption(
-            day=latest_electricity.read_at.astimezone(settings.LOCAL_TIME_ZONE).date()
+            day=timezone.localtime(latest_electricity.read_at).date()
         )
 
         return context_data

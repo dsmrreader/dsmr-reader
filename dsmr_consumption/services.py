@@ -2,7 +2,6 @@ from datetime import time
 from decimal import Decimal, ROUND_UP
 import pytz
 
-from django.conf import settings
 from django.utils import timezone
 from django.db import transaction, connection
 from django.db.models import Avg, Max
@@ -129,12 +128,8 @@ def day_consumption(day):
     consumption = {
         'day': day
     }
-    day_start = timezone.datetime(
-        year=day.year,
-        month=day.month,
-        day=day.day,
-        tzinfo=settings.LOCAL_TIME_ZONE
-    )
+    day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
+
     day_end = day_start + timezone.timedelta(days=1)
 
     # This WILL fail when we either have no prices at all or conflicting ranges.

@@ -107,7 +107,7 @@ DATABASES = {}  # Force in sub configs.
 # Django creates migrations based on default language. Therefor we need to force English here.
 LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
 

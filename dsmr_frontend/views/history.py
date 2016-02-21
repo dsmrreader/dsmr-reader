@@ -30,7 +30,7 @@ class History(TemplateView):
             'electricity1_cost', 'electricity2_cost', 'gas_cost', 'total_cost', 'average_temperature'
         )
 
-        now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+        now = timezone.localtime(timezone.now())
         dates = (
             now - timezone.timedelta(days=n) for n in reversed(
                 range(1, context_data['days_ago'] + 1)
@@ -38,7 +38,7 @@ class History(TemplateView):
         )
 
         for current_day in dates:
-            current_day = current_day.astimezone(settings.LOCAL_TIME_ZONE)
+            current_day = current_day
 
             try:
                 day_stats = DayStatistics.objects.get(day=current_day).__dict__

@@ -1,5 +1,4 @@
 from django.views.generic.base import TemplateView
-from django.conf import settings
 from django.utils import timezone
 
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
@@ -12,7 +11,7 @@ class Statistics(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Statistics, self).get_context_data(**kwargs)
-        today = timezone.now().astimezone(settings.LOCAL_TIME_ZONE).date()
+        today = timezone.localtime(timezone.now()).date()
 
         context_data['total_reading_count'] = DsmrReading.objects.count()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()

@@ -3,7 +3,6 @@ from datetime import timedelta
 from django.db import transaction, connection
 from django.db.models.aggregates import Avg
 from django.utils import timezone
-from django.conf import settings
 from django.core.cache import cache
 
 from dsmr_stats.models.settings import StatsSettings
@@ -22,7 +21,7 @@ def analyze():
 
     try:
         # Determine the starting date used to construct new statistics.
-        electricity_statistic = DayStatistics.objects.all().order_by('-day')[0]
+        day_statistic = DayStatistics.objects.all().order_by('-day')[0]
     except IndexError:
         try:
             # This will happen either the first time or when all statistics were flushed manually.
@@ -32,19 +31,22 @@ def analyze():
             return
 
         # We should use the day before the first consumption.
-        read_at = timezone.localtime(first_consumption.read_at, settings.LOCAL_TIME_ZONE)
-        latest_statistics_day = read_at.date() - timedelta(hours=24)
+        read_at = timezone.localtime(first_consumption.read_at)
+        latest_statistics_day = read_at.date()
     else:
         # As we'll be searching starting on this day, make sure to select the next one.
-        latest_statistics_day = electricity_statistic.day + timedelta(hours=24)
+        latest_statistics_day = timezone.make_aware(timezone.datetime(
+            year=day_statistic.day.year,
+            month=day_statistic.day.month,
+            day=day_statistic.day.day,
+        )) + timezone.timedelta(days=1)
 
     # Localize, as we do not want to use UTC as day boundary.
-    search_start = timezone.datetime(
+    search_start = timezone.make_aware(timezone.datetime(
         year=latest_statistics_day.year,
         month=latest_statistics_day.month,
         day=latest_statistics_day.day,
-        tzinfo=settings.LOCAL_TIME_ZONE
-    ) + timedelta(hours=1)  # BUG BUG BUG: Required despite UTC!?
+    ))
 
     try:
         # First the first day of consumptions available. If any.
@@ -55,10 +57,10 @@ def analyze():
         # No data logged yet.
         return
 
-    consumption_date = consumption_found.read_at.date()
+    consumption_date = timezone.localtime(consumption_found.read_at).date()
 
     # Skip today, try again tomorrow. As we need a full day to pass first.
-    now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
+    now = timezone.localtime(timezone.now())
 
     if consumption_date == now.date():
         return
@@ -100,14 +102,14 @@ def create_daily_statistics(day):
 
 def create_hourly_statistics(day, hour):
     """ Calculates and persists both electricity and gas statistics for an hour. """
-    hour_start = timezone.datetime(
+    hour_start = timezone.make_aware(timezone.datetime(
         year=day.year,
         month=day.month,
         day=day.day,
         hour=hour,
-        tzinfo=settings.LOCAL_TIME_ZONE
-    )
+    ))
     hour_end = hour_start + timezone.timedelta(hours=1)
+
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
         start=hour_start, end=hour_end
     )

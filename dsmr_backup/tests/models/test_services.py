@@ -62,11 +62,10 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_backup.services.backup.create')
     def test_check_backup_time_restriction(self, create_backup_mock):
         """ Test whether backups are restricted by user's backup time preference. """
-        local_now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)
-
+        now = timezone.localtime(timezone.now())
         backup_settings = BackupSettings.get_solo()
-        backup_settings.latest_backup = local_now - timezone.timedelta(days=1)
-        backup_settings.backup_time = (local_now + timezone.timedelta(seconds=15)).time()
+        backup_settings.latest_backup = now - timezone.timedelta(days=1)
+        backup_settings.backup_time = (now + timezone.timedelta(seconds=15)).time()
         backup_settings.save()
 
         # Should not do anything, we should backup a minute from now.
@@ -75,7 +74,7 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
         self.assertFalse(create_backup_mock.called)
 
         # Should be fine to backup now. Passed prefered time of user.
-        backup_settings.backup_time = local_now.time()
+        backup_settings.backup_time = now.time()
         backup_settings.save()
 
         dsmr_backup.services.backup.check()

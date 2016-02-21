@@ -1,6 +1,5 @@
 import re
 
-from django.conf import settings
 from django.utils import timezone
 import serial
 
@@ -138,5 +137,4 @@ def reading_timestamp_to_datetime(string):
         hour=int(timestamp.group(4)),
         minute=int(timestamp.group(5)),
         second=int(timestamp.group(6)),
-        tzinfo=settings.LOCAL_TIME_ZONE
     )

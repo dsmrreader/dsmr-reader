@@ -7,7 +7,6 @@ from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
 from django.core.management import call_command
 from django.utils import timezone
-from django.conf import settings
 
 
 class Command(BaseCommand):
@@ -38,12 +37,11 @@ class Command(BaseCommand):
         read_telegram_mock.return_value = self._generate_data()
         call_command('dsmr_datalogger')
 
-        print('Faking a 10 second delay...')
-        time.sleep(10)
+        time.sleep(5)
 
     def _generate_data(self):
         """ Generates 'random' data, but in a way that it keeps incrementing. """
-        now = timezone.now().astimezone(settings.LOCAL_TIME_ZONE)  # Must be local.
+        now = timezone.localtime(timezone.now())  # Must be local.
 
         # 1420070400: 01 Jan 2015 00:00:00 GMT
         second_since = int(time.time() - 1420070400)

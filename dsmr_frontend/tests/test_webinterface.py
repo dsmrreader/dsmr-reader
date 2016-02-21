@@ -104,7 +104,7 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         frontend_settings.save()
 
         # History fetches all data BEFORE today, so add a little interval to make that happen.
-        self._synchronize_date(interval=timezone.timedelta(hours=-24))
+        self._synchronize_date(interval=timezone.timedelta(days=-1))
         response = self.client.get(
             reverse('{}:history'.format(self.namespace))
         )
