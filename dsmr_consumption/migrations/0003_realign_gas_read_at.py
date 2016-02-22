@@ -7,26 +7,16 @@ from django.db import migrations, models
 import dsmr_stats.services
 
 
-def realign_forwards(apps, schema_editor):
-    """ Fetches all existing gas consumption readings and realigns them by changing read_at. """
-    realign_gas_readings(apps, schema_editor, hours_offset=-1)
-
-
-def realign_backwards(apps, schema_editor):
-    """ Same as above, but reversed. """
-    realign_gas_readings(apps, schema_editor, hours_offset=+1)
-
-
-def realign_gas_readings(apps, schema_editor, hours_offset):
+def realign_gas_readings(apps, schema_editor):
     """ Alters the read_at value by the offset given and purges all existing statistics. """
     print()
     # We use F() to have the database sort things out.
     GasConsumption = apps.get_model('dsmr_consumption', 'GasConsumption')
-    print('Updating gas consumptions ({} records) with hour offset: {}'.format(
-        GasConsumption.objects.all().count(), hours_offset
+    print('Updating gas consumptions ({} records) with -1 hour offset'.format(
+        GasConsumption.objects.all().count()
     ))
     GasConsumption.objects.all().update(
-        read_at=models.F('read_at') + timezone.timedelta(hours=hours_offset)
+        read_at=models.F('read_at') - timezone.timedelta(hours=1)
     )
 
     # We have to recalculate ALL trends and statistics generated.
@@ -52,5 +42,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(realign_forwards, realign_backwards),
+        migrations.RunPython(realign_gas_readings),
     ]
