@@ -41,10 +41,10 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertEqual(DayStatistics.objects.count(), 2)
         self.assertEqual(HourStatistics.objects.count(), 4)
 
-        # Third run should have no effect, as our fixtures are limited to two days.
+        # Third run should have no effect, as our fixtures are limited to a few days.
         dsmr_stats.services.analyze()
-        self.assertEqual(DayStatistics.objects.count(), 2)
-        self.assertEqual(HourStatistics.objects.count(), 4)
+        self.assertEqual(DayStatistics.objects.count(), 3)
+        self.assertEqual(HourStatistics.objects.count(), 5)
 
     def test_analyze_service_skip_current_day(self):
         """ Tests whether analysis postpones current day. """

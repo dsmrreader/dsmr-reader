@@ -140,11 +140,10 @@ def day_consumption(day):
 
     electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)
 
-    if not electricity_readings.exists() or not gas_readings.exists():
-        raise LookupError("No readings found for: {}".format(day))
+    if not electricity_readings.exists():
+        raise LookupError("No electricity readings found for: {}".format(day))
 
     electricity_reading_count = electricity_readings.count()
-    gas_reading_count = gas_readings.count()
 
     first_reading = electricity_readings[0]
     last_reading = electricity_readings[electricity_reading_count - 1]
@@ -168,20 +167,24 @@ def day_consumption(day):
     consumption['electricity2_cost'] = round_decimal(
         consumption['electricity2'] * consumption['electricity2_unit_price']
     )
-
-    first_reading = gas_readings[0]
-    last_reading = gas_readings[gas_reading_count - 1]
-    consumption['gas'] = last_reading.delivered - first_reading.delivered
-    consumption['gas_start'] = first_reading.delivered
-    consumption['gas_end'] = last_reading.delivered
-    consumption['gas_unit_price'] = consumption['daily_energy_price'].gas_price
-    consumption['gas_cost'] = round_decimal(
-        consumption['gas'] * consumption['gas_unit_price']
-    )
-
     consumption['total_cost'] = round_decimal(
-        consumption['electricity1_cost'] + consumption['electricity2_cost'] + consumption['gas_cost']
+        consumption['electricity1_cost'] + consumption['electricity2_cost']
     )
+
+    # Gas readings are optional, as not all meters support this.
+    if gas_readings.exists():
+        gas_reading_count = gas_readings.count()
+        first_reading = gas_readings[0]
+        last_reading = gas_readings[gas_reading_count - 1]
+        consumption['gas'] = last_reading.delivered - first_reading.delivered
+        consumption['gas_start'] = first_reading.delivered
+        consumption['gas_end'] = last_reading.delivered
+        consumption['gas_unit_price'] = consumption['daily_energy_price'].gas_price
+        consumption['gas_cost'] = round_decimal(
+            consumption['gas'] * consumption['gas_unit_price']
+        )
+        consumption['total_cost'] += consumption['gas_cost']
+
     consumption['notes'] = Note.objects.filter(day=day).values_list('description', flat=True)
 
     temperature_readings = TemperatureReading.objects.filter(

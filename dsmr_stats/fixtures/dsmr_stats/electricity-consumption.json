@@ -896,6 +896,33 @@
         "read_at": "2015-12-12T01:01:00Z"
     },
     "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 217,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.109",
+        "delivered_1": "595.428",
+        "read_at": "2015-12-15T01:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 218,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.110",
+        "delivered_1": "595.430",
+        "read_at": "2015-12-15T01:01:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
 }
+
 
 ]

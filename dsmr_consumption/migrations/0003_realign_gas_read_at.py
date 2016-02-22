@@ -19,6 +19,7 @@ def realign_backwards(apps, schema_editor):
 
 def realign_gas_readings(apps, schema_editor, hours_offset):
     """ Alters the read_at value by the offset given and purges all existing statistics. """
+    print()
     # We use F() to have the database sort things out.
     GasConsumption = apps.get_model('dsmr_consumption', 'GasConsumption')
     print('Updating gas consumptions ({} records) with hour offset: {}'.format(

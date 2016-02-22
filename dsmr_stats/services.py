@@ -1,5 +1,3 @@
-from datetime import timedelta
-
 from django.db import transaction, connection
 from django.db.models.aggregates import Avg
 from django.utils import timezone
@@ -93,10 +91,10 @@ def create_daily_statistics(day):
         electricity1_cost=consumption['electricity1_cost'],
         electricity2_cost=consumption['electricity2_cost'],
 
-        gas=consumption['gas'],
-        gas_cost=consumption['gas_cost'],
+        gas=consumption.get('gas', 0),
+        gas_cost=consumption.get('gas_cost', 0),
 
-        average_temperature=consumption['average_temperature'],
+        average_temperature=consumption.get('average_temperature', 0),
     )
 
 
