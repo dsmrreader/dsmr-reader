@@ -1,0 +1,207 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}{% trans "Archive" %}{% endblock %}
+{% block header %}{% trans "Archive" %} &nbsp; <i class="fa fa fa-history"></i>{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+{% if not start_date or not end_date %}
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+    </div>
+{% endif %}
+
+    <div class="row">
+        <div class="col-md-offset-5 col-md-2">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Select day{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <span class="sm-st-icon st-orange" id="daterangepicker_trigger" style="cursor: pointer;"><i class="fa fa-calendar-check-o"></i></span>
+                    <div class="sm-st-info form-group">
+                        <input class="form-control" id="daterangepicker" type="text" size="10" style="width: 128px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Cost{% endblocktrans %} {% trans "(in &euro;)" %}
+                </header>
+                <div class="panel-body">
+                	<canvas id="cost-chart" height="150"></canvas>
+                	<div id="cost-chart-legend"></div>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Electricity usage{% endblocktrans %} {% trans "(in kWh)" %}
+                </header>
+                <div class="panel-body">
+                	<canvas id="electricity-chart" height="150"></canvas>
+                    <div id="electricity-chart-legend"></div>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Gas usage{% endblocktrans %} {% trans "(in m<sup>3</sup>)" %}
+                </header>
+                <div class="panel-body">
+                	<canvas id="gas-chart" height="150"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Temperature{% endblocktrans %} {% trans "(in &deg;C)" %}
+                </header>
+                <div class="panel-body">
+                {% if track_temperature %}
+                    <canvas id="temperature-chart" height="150"></canvas>
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                    {% blocktrans %}Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly).{% endblocktrans %}
+                    </div>
+                {% endif %}
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+        {% for consumption in usage %}
+            <div class="panel">
+                <header class="panel-heading">
+                    {{ consumption.day|date:day_format }}
+                </header>
+                <div class="panel-body">
+                    {% for current_note in consumption.notes %}
+                    <div class="alert alert-warning" role="alert">{{ current_note }}</div>
+                    {% endfor %}
+
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-6">{% trans "Type" %}</th>
+                            <th class="col-md-2">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
+                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
+                            <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity1|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ consumption.electricity1_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ consumption.electricity1_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 2 (peak)" %}</td>
+                            <td><span class="badge bg-red">{{ consumption.electricity2|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ consumption.electricity2_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ consumption.electricity2_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Gas" %}</td>
+                            <td><span class="badge bg-orange">{{ consumption.gas|default:'-' }}</span></td>
+                            <td>&nbsp;</td>
+                            <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">{% trans "Total" %}</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td><span class="badge bg-black">{{ consumption.total_cost|default:'-' }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+           {% endfor %}
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+{% endblock %}
+
+{% block stylesheets %}
+{{ block.super }}
+        <link href="{% static 'dsmr_frontend/css/daterangepicker.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/daterangepicker.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
+
+        <script type="text/javascript">
+            var line_options = {
+                /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
+                pointHitDetectionRadius: 5,
+                pointDotRadius: 2.5,
+                
+                {% verbatim %}
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+                {% endverbatim %}
+            }
+        
+        	$(document).ready(function(){
+                Chart.defaults.global.responsive = true;
+                Chart.defaults.global.maintainAspectRatio = false;
+        		Chart.defaults.global.animation = false;
+        		
+        		$('#daterangepicker').daterangepicker({
+        			showWeekNumbers: true,
+        	        singleDatePicker: true,
+        	        autoUpdateInput: true,
+        	        showDropdowns: true,
+        	        autoApply: true,
+        	        startDate: '{{ end_date|date:datepicker_date_format }}',
+        	        minDate: '{{ start_date|date:datepicker_date_format }}',
+        	        maxDate: '{{ end_date|date:datepicker_date_format }}',
+       	            locale: {
+       	                format: '{{ datepicker_locale_format }}'
+       	            }
+        	    });
+        		
+        		$("#daterangepicker_trigger").click(function(){
+        			$('#daterangepicker').click();
+        		});
+        		
+        		$('#daterangepicker').on('apply.daterangepicker', function(ev, picker) {
+        			$.ajax({
+        			    url: "{% url 'frontend:archive-xhr' %}",
+        			    dataType: "json",
+        			    data: {'date': $('#daterangepicker').val()},
+        			    beforeSend: function(xhr) {
+        			    	$("#daterangepicker_trigger").removeClass("st-orange").addClass("st-blue");
+        			    }
+        			}).error(function(jqXHR, textStatus, errorThrown ){
+        				$("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
+        			}).done(function(data) {
+        				$("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
+        			});
+       			});
+        		
+        	});
+        	
+		</script>
+{% endblock %}

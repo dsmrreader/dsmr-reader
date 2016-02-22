@@ -3,7 +3,6 @@ import json
 
 from django.views.generic.base import TemplateView
 from django.utils import formats
-from django.conf import settings
 from django.utils import timezone
 
 from dsmr_stats.models.statistics import DayStatistics
