@@ -1,7 +1,13 @@
 
 
 
-v0.11 (β) - 2016-xx-xx
+v0.12 (β) - 2016-xx-xx
+======================
+-
+
+
+
+v0.11 (β) - 2016-02-22
 ======================
 - Status page/alerts when features are disabled/unavailable (#45).
 - Integrate Travis CI (#48).
