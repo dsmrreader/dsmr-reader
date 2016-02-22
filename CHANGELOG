@@ -9,6 +9,7 @@ v0.11 (β) - 2016-xx-xx
 - Implement automatic backups & Dropbox cloud storage (#44).
 - Link code coverage service to repository (#56).
 - Explore timezone.localtime() as replacement for datetime.astimezone() (#50).
+- Align GasConsumption.read_at to represent the start of hour (#40).
 
 
 

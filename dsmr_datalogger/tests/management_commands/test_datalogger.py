@@ -70,7 +70,7 @@ class TestDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
-        """ Test whether dsmr_datalogger insert a reading. """
+        """ Test whether dsmr_datalogger can insert a reading. """
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
@@ -163,7 +163,7 @@ class TestDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
-        """ Test whether dsmr_datalogger insert a reading. """
+        """ Test whether dsmr_datalogger can insert a reading. """
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
