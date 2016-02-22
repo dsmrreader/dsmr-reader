@@ -130,11 +130,11 @@ def reading_timestamp_to_datetime(string):
     Converts a string containing a timestamp to a timezone aware datetime.
     """
     timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})W', string)
-    return timezone.datetime(
+    return timezone.make_aware(timezone.datetime(
         year=2000 + int(timestamp.group(1)),
         month=int(timestamp.group(2)),
         day=int(timestamp.group(3)),
         hour=int(timestamp.group(4)),
         minute=int(timestamp.group(5)),
         second=int(timestamp.group(6)),
-    )
+    ))
