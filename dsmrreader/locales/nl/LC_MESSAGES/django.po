@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-22 20:29+0100\n"
-"PO-Revision-Date: 2016-02-21 14:30+0100\n"
+"POT-Creation-Date: 2016-02-24 00:13+0100\n"
+"PO-Revision-Date: 2016-02-23 23:59+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -276,38 +276,38 @@ msgstr "Het aantal weken dat getoond wordt in het recente historie overzicht."
 msgid "Frontend configuration"
 msgstr "Weergaveconfiguratie"
 
-msgid "Toggle navigation"
-msgstr "Wissel navigatie"
-
-msgid "Dashboard"
-msgstr "Dashboard"
-
-msgid "Recent history"
-msgstr "Recente historie"
-
-msgid "Statistics"
-msgstr "Statistieken"
-
-msgid "Trends"
-msgstr "Trends"
-
-msgid "Settings"
-msgstr "Instellingen"
-
-msgid "Status"
-msgstr "Status"
+msgid "Archive"
+msgstr "Archief"
 
 msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
 
-msgid "Watt consumed"
-msgstr "Watt verbruikt"
+msgid "Select day"
+msgstr "Selecteer dag"
 
-msgid "Watt returned"
-msgstr "Watt teruggeleverd"
+msgid "Electricity usage"
+msgstr "Elektriciteitsverbruik"
 
-msgid "m<sup>3</sup> gas consumed"
-msgstr "m<sup>3</sup> gas verbruikt"
+msgid "(in kWh)"
+msgstr "(in kWh)"
+
+msgid "Gas usage"
+msgstr "Gasverbruik"
+
+msgid "(in m<sup>3</sup>)"
+msgstr "(in m<sup>3</sup>)"
+
+msgid "Temperature"
+msgstr "Temperatuur"
+
+msgid "(in &deg;C)"
+msgstr "(in &deg;C)"
+
+msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
+msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
+
+msgid "Type"
+msgstr "Soort"
 
 msgid "Delivered"
 msgstr "Geleverd"
@@ -336,6 +336,36 @@ msgstr "Gas"
 msgid "Total"
 msgstr "Totaal"
 
+msgid "Toggle navigation"
+msgstr "Wissel navigatie"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Recent history"
+msgstr "Recente historie"
+
+msgid "Statistics"
+msgstr "Statistieken"
+
+msgid "Trends"
+msgstr "Trends"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Watt consumed"
+msgstr "Watt verbruikt"
+
+msgid "Watt returned"
+msgstr "Watt teruggeleverd"
+
+msgid "m<sup>3</sup> gas consumed"
+msgstr "m<sup>3</sup> gas verbruikt"
+
 msgid "Recent electricity delivered (watt)"
 msgstr "Recent elektriciteitsverbruik  (Watt)"
 
@@ -345,14 +375,8 @@ msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
 
-msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
-msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
-
 msgid "Electricity"
 msgstr "Elektriciteit"
-
-msgid "Temperature"
-msgstr "Temperatuur"
 
 #, python-format
 msgid "Daily cost in the past %(days_ago)s days"
@@ -365,25 +389,13 @@ msgstr "(in &euro;)"
 msgid "Daily electricity usage in the past %(days_ago)s days"
 msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
 
-msgid "(in kWh)"
-msgstr "(in kWh)"
-
 #, python-format
 msgid "Daily gas usage in the past %(days_ago)s days"
 msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
 
-msgid "(in m<sup>3</sup>)"
-msgstr "(in m<sup>3</sup>)"
-
 #, python-format
 msgid "Daily average temperature in the past %(days_ago)s days"
 msgstr "Dagelijks temperatuurgemiddelde in de afgelopen %(days_ago)s dagen"
-
-msgid "(in &deg;C)"
-msgstr "(in &deg;C)"
-
-msgid "Type"
-msgstr "Soort"
 
 msgid "Electricity 1 cost (off-peak)"
 msgstr "Elektriciteit 1 (daltarief) kosten"
@@ -729,9 +741,6 @@ msgstr "Engels"
 
 #~ msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
 #~ msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor hoogtarief."
-
-#~ msgid "Electricity 1"
-#~ msgstr "Elektriciteit 1"
 
 #~ msgid "Electricity 2"
 #~ msgstr "Elektriciteit 2"

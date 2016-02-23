@@ -1,0 +1,48 @@
+{% load humanize %}
+{% load i18n %} 
+
+<!-- Main content -->
+<section class="content">
+    <div class="row statistics-block">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {{ statistics.day }}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-6"></th>
+                            <th class="col-md-2">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
+                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
+                            <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                            <td><span class="badge bg-red">{{ statistics.electricity1|default:'-' }} </span></td>
+                            <td><span class="badge bg-green">{{ statistics.electricity1_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ statistics.electricity1_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 2 (peak)" %}</td>
+                            <td><span class="badge bg-red">{{ statistics.electricity2|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ statistics.electricity2_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ statistics.electricity2_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Gas" %}</td>
+                            <td><span class="badge bg-orange">{{ statistics.gas|default:'-' }}</span></td>
+                            <td>&nbsp;</td>
+                            <td><span class="badge bg-black">{{ statistics.gas_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">{% trans "Total" %}</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td><span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section>

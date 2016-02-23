@@ -27,7 +27,7 @@ def check():
 
     # Timezone magic to make sure we select and combine the CURRENT day, in the user's timezone.
     next_backup_timestamp = timezone.make_aware(timezone.datetime.combine(
-        timezone.now(), backup_settings.backup_time
+        timezone.localtime(timezone.now()), backup_settings.backup_time
     ))
 
     if backup_settings.latest_backup and timezone.now() < next_backup_timestamp:

@@ -40,9 +40,10 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
     def test_check_interval_restriction(self, create_backup_mock):
         """ Test whether backups are restricted by one backup per day. """
         # Fake latest backup.
+        now = timezone.localtime(timezone.now())
         backup_settings = BackupSettings.get_solo()
-        backup_settings.latest_backup = timezone.now()
-        backup_settings.backup_time = timezone.now().time()
+        backup_settings.latest_backup = now
+        backup_settings.backup_time = (now - timezone.timedelta(minutes=1)).time()
         backup_settings.save()
 
         self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
@@ -52,7 +53,7 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
         dsmr_backup.services.backup.check()
         self.assertFalse(create_backup_mock.called)
 
-        backup_settings.latest_backup = timezone.now() - timezone.timedelta(days=1)
+        backup_settings.latest_backup = now - timezone.timedelta(days=1)
         backup_settings.save()
 
         # Should be fine to backup now.

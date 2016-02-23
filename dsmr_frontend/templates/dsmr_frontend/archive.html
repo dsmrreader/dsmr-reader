@@ -15,7 +15,7 @@
 {% endif %}
 
     <div class="row">
-        <div class="col-md-offset-5 col-md-2">
+        <div class="col-md-offset-4 col-md-4">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Select day{% endblocktrans %}
@@ -29,20 +29,8 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Cost{% endblocktrans %} {% trans "(in &euro;)" %}
-                </header>
-                <div class="panel-body">
-                	<canvas id="cost-chart" height="150"></canvas>
-                	<div id="cost-chart-legend"></div>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+    
+    <div id="day_statistics_holder"></div>
 
     <div class="row">
         <div class="col-md-12">
@@ -187,21 +175,47 @@
         		});
         		
         		$('#daterangepicker').on('apply.daterangepicker', function(ev, picker) {
-        			$.ajax({
-        			    url: "{% url 'frontend:archive-xhr' %}",
-        			    dataType: "json",
-        			    data: {'date': $('#daterangepicker').val()},
-        			    beforeSend: function(xhr) {
-        			    	$("#daterangepicker_trigger").removeClass("st-orange").addClass("st-blue");
-        			    }
-        			}).error(function(jqXHR, textStatus, errorThrown ){
-        				$("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
-        			}).done(function(data) {
-        				$("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
-        			});
+        			var selected_day = $('#daterangepicker').val();
+        			update_day_statistics(selected_day);
+        			update_hour_statistics(selected_day);
        			});
-        		
+
+        		/* Initial day selection. */
+        		$('#daterangepicker').trigger('apply.daterangepicker');
         	});
+            
+            function update_day_statistics(selected_day)
+            {
+                $.ajax({
+                    url: "{% url 'frontend:archive-xhr-day' %}",
+                    data: {'date': selected_day},
+                    beforeSend: function(xhr) {
+                        $("#daterangepicker_trigger").removeClass("st-orange").addClass("st-blue");
+                    }
+                }).error(function(jqXHR, textStatus, errorThrown ){
+                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
+                }).done(function(data) {
+                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
+                    $("#day_statistics_holder").html(data);
+                });
+            }
+            
+            function update_hour_statistics(selected_day)
+            {
+                $.ajax({
+                    url: "{% url 'frontend:archive-xhr-hour' %}",
+                    dataType: "json",
+                    data: {'date': selected_day},
+                    beforeSend: function(xhr) {
+                        $("#daterangepicker_trigger").removeClass("st-orange").addClass("st-blue");
+                    }
+                }).error(function(jqXHR, textStatus, errorThrown ){
+                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
+                }).done(function(data) {
+                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
+                    console.log(data)
+                });
+            }
         	
 		</script>
 {% endblock %}
