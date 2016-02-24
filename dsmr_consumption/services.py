@@ -9,15 +9,15 @@ from django.db.models import Avg, Max
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
-from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.reading import TemperatureReading
+from dsmr_stats.models.note import Note
 import dsmr_consumption.signals
 
 
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
-    for current_reading in DsmrReading.objects.unprocessed()[0:128]:
+    for current_reading in DsmrReading.objects.unprocessed()[0:1000]:
         compact(dsmr_reading=current_reading)
 
 
@@ -83,13 +83,16 @@ def compact(dsmr_reading):
 
     # Gas however is only read (or updated) once every hour, so we should check for any duplicates
     # as they will exist at some point.
-    hour_start = dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
+    passed_hour_start = dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
 
-    if not GasConsumption.objects.filter(read_at=hour_start).exists():
+    if not GasConsumption.objects.filter(read_at=passed_hour_start).exists():
         # DSMR does not expose current gas rate, so we have to calculate
         # it ourselves, relative to the previous gas consumption, if any.
         try:
-            previous_gas_consumption = GasConsumption.objects.get(read_at=hour_start)
+            previous_gas_consumption = GasConsumption.objects.get(
+                # Compare to reading before, if any.
+                read_at=passed_hour_start - timezone.timedelta(hours=1)
+            )
         except GasConsumption.DoesNotExist:
             gas_diff = 0
         else:
@@ -97,7 +100,7 @@ def compact(dsmr_reading):
 
         consumption = GasConsumption.objects.create(
             # Gas consumption is aligned to start of the hour.
-            read_at=hour_start,
+            read_at=passed_hour_start,
             delivered=dsmr_reading.extra_device_delivered,
             currently_delivered=gas_diff
         )
