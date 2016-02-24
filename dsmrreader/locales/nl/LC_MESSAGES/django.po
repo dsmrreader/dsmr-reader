@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-24 00:13+0100\n"
-"PO-Revision-Date: 2016-02-23 23:59+0100\n"
+"POT-Creation-Date: 2016-02-25 00:28+0100\n"
+"PO-Revision-Date: 2016-02-25 00:26+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -229,7 +229,7 @@ msgid "DSMR version"
 msgstr "DSMR-versie"
 
 msgid "The DSMR version your meter supports. Version should be printed on meter."
-msgstr "The DSMR versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
+msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
 
 msgid "COM-port"
 msgstr "COM-poort"
@@ -297,44 +297,20 @@ msgstr "Gasverbruik"
 msgid "(in m<sup>3</sup>)"
 msgstr "(in m<sup>3</sup>)"
 
-msgid "Temperature"
-msgstr "Temperatuur"
-
-msgid "(in &deg;C)"
-msgstr "(in &deg;C)"
-
-msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
-msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
-
-msgid "Type"
-msgstr "Soort"
-
-msgid "Delivered"
-msgstr "Geleverd"
-
-msgid "kWh"
-msgstr "kWh"
-
-msgid "m<sup>3</sup>"
-msgstr "m<sup>3</sup>"
-
-msgid "Returned"
-msgstr "Teruggeleverd"
-
-msgid "Cost"
-msgstr "Kosten"
-
 msgid "Electricity 1 (off-peak)"
 msgstr "Elektriciteit 1 (daltarief)"
 
 msgid "Electricity 2 (peak)"
 msgstr "Elektriciteit 2 (hoogtarief)"
 
+msgid "Electricity 1 returned (off-peak)"
+msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+
+msgid "Electricity 1 returned (peak)"
+msgstr "Elektriciteit 2 teruggeleverd (hoogtarief)"
+
 msgid "Gas"
 msgstr "Gas"
-
-msgid "Total"
-msgstr "Totaal"
 
 msgid "Toggle navigation"
 msgstr "Wissel navigatie"
@@ -366,6 +342,24 @@ msgstr "Watt teruggeleverd"
 msgid "m<sup>3</sup> gas consumed"
 msgstr "m<sup>3</sup> gas verbruikt"
 
+msgid "Delivered"
+msgstr "Geleverd"
+
+msgid "kWh"
+msgstr "kWh"
+
+msgid "m<sup>3</sup>"
+msgstr "m<sup>3</sup>"
+
+msgid "Returned"
+msgstr "Teruggeleverd"
+
+msgid "Cost"
+msgstr "Kosten"
+
+msgid "Total"
+msgstr "Totaal"
+
 msgid "Recent electricity delivered (watt)"
 msgstr "Recent elektriciteitsverbruik  (Watt)"
 
@@ -375,8 +369,17 @@ msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
 
+msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
+msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
+
 msgid "Electricity"
 msgstr "Elektriciteit"
+
+msgid "Temperature"
+msgstr "Temperatuur"
+
+msgid "Energy price"
+msgstr "Energieprijs"
 
 #, python-format
 msgid "Daily cost in the past %(days_ago)s days"
@@ -397,6 +400,12 @@ msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
 msgid "Daily average temperature in the past %(days_ago)s days"
 msgstr "Dagelijks temperatuurgemiddelde in de afgelopen %(days_ago)s dagen"
 
+msgid "(in &deg;C)"
+msgstr "(in &deg;C)"
+
+msgid "Type"
+msgstr "Soort"
+
 msgid "Electricity 1 cost (off-peak)"
 msgstr "Elektriciteit 1 (daltarief) kosten"
 
@@ -408,12 +417,6 @@ msgstr "Gaskosten"
 
 msgid "Total cost"
 msgstr "Totale kosten"
-
-msgid "Electricity 1 returned (off-peak)"
-msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
-
-msgid "Electricity 1 returned (peak)"
-msgstr "Elektriciteit 2 teruggeleverd (hoogtarief)"
 
 msgid "Meter positions"
 msgstr "Meterstanden"

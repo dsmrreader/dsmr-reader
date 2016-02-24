@@ -15,7 +15,7 @@
 {% endif %}
 
     <div class="row">
-        <div class="col-md-offset-4 col-md-4">
+        <div class=" col-md-4">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Select day{% endblocktrans %}
@@ -28,11 +28,10 @@
                 </div>
             </div>
         </div>
+        <div id="day-statistics-holder"></div>
     </div>
     
-    <div id="day_statistics_holder"></div>
-
-    <div class="row">
+    <div class="row" id="electricity-chart-holder" style="display: none;">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -46,7 +45,7 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 
-    <div class="row">
+    <div class="row" id="gas-chart-holder" style="display: none;">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -56,74 +55,6 @@
                 	<canvas id="gas-chart" height="150"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Temperature{% endblocktrans %} {% trans "(in &deg;C)" %}
-                </header>
-                <div class="panel-body">
-                {% if track_temperature %}
-                    <canvas id="temperature-chart" height="150"></canvas>
-                {% else %}
-                    <div class="alert alert-info" role="alert">
-                    {% blocktrans %}Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly).{% endblocktrans %}
-                    </div>
-                {% endif %}
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    <div class="row">
-        <div class="col-md-12">
-        {% for consumption in usage %}
-            <div class="panel">
-                <header class="panel-heading">
-                    {{ consumption.day|date:day_format }}
-                </header>
-                <div class="panel-body">
-                    {% for current_note in consumption.notes %}
-                    <div class="alert alert-warning" role="alert">{{ current_note }}</div>
-                    {% endfor %}
-
-                    <table class="table table-condensed">
-                        <tr>
-                            <th class="col-md-6">{% trans "Type" %}</th>
-                            <th class="col-md-2">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
-                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
-                            <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity1|default:'-' }}</span></td>
-                            <td><span class="badge bg-green">{{ consumption.electricity1_returned|default:'-' }}</span></td>
-                            <td><span class="badge bg-black">{{ consumption.electricity1_cost|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Electricity 2 (peak)" %}</td>
-                            <td><span class="badge bg-red">{{ consumption.electricity2|default:'-' }}</span></td>
-                            <td><span class="badge bg-green">{{ consumption.electricity2_returned|default:'-' }}</span></td>
-                            <td><span class="badge bg-black">{{ consumption.electricity2_cost|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ consumption.gas|default:'-' }}</span></td>
-                            <td>&nbsp;</td>
-                            <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: bold;">{% trans "Total" %}</td>
-                            <td colspan="2">&nbsp;</td>
-                            <td><span class="badge bg-black">{{ consumption.total_cost|default:'-' }}</span></td>
-                        </tr>
-                    </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-           {% endfor %}
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->
@@ -150,6 +81,8 @@
                 legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
                 {% endverbatim %}
             }
+            var g_electricity_chart_instance = undefined;
+            var g_gas_chart_instance = undefined;
         
         	$(document).ready(function(){
                 Chart.defaults.global.responsive = true;
@@ -181,7 +114,7 @@
        			});
 
         		/* Initial day selection. */
-        		$('#daterangepicker').trigger('apply.daterangepicker');
+        		$('#daterangepicker_trigger').click();
         	});
             
             function update_day_statistics(selected_day)
@@ -196,7 +129,7 @@
                     $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
                 }).done(function(data) {
                     $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
-                    $("#day_statistics_holder").html(data);
+                    $("#day-statistics-holder").html(data);
                 });
             }
             
@@ -213,9 +146,93 @@
                     $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
                 }).done(function(data) {
                     $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
-                    console.log(data)
+                    
+                    render_electricity_chart(
+                    	data.x, data.electricity1, data.electricity2, data.electricity1_returned, data.electricity2_returned
+                    )
+                    render_gas_chart(data.x, data.gas)
                 });
             }
         	
+            function render_electricity_chart(labels, electricity1, electricity2, electricity1_returned, electricity2_returned)
+            {
+                var data = {
+                    labels: labels,
+                    datasets: [{
+                        data: electricity1,
+                        label: "{% trans 'Electricity 1 (off-peak)' %}",                        
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(160,0,0,1)",
+                        pointColor: "rgba(160,0,0,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(255,0,0,1)"
+                    }, {
+                        data: electricity2,
+                        label: "{% trans 'Electricity 2 (peak)' %}",                        
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(255,0,0,1)",
+                        pointColor: "rgba(255,0,0,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(255,0,0,1)"
+                    }, {
+                        data: electricity1_returned,
+                        label: "{% trans 'Electricity 1 returned (off-peak)' %}",                       
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(39,194,76,1)",
+                        pointColor: "rgba(39,194,76,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(39,194,76,1)"
+                    }, {
+                        data: electricity2_returned,
+                        label: "{% trans 'Electricity 1 returned (peak)' %}",                       
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(200,200,100,1)",
+                        pointColor: "rgba(200,200,100,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(200,200,100,1)"
+                    }]
+                };
+                
+                if (g_electricity_chart_instance)
+                {
+                	g_electricity_chart_instance.destroy();
+                }
+                $("#electricity-chart-holder").show();
+
+                var ctx = $("#electricity-chart").css('height', '150px').get(0).getContext("2d");
+                g_electricity_chart_instance = new Chart(ctx).Line(data, line_options);
+                $("#electricity-chart-legend").html(g_electricity_chart_instance.generateLegend());
+            }
+            
+            
+            function render_gas_chart(labels, gas)
+            {
+                var data = {
+                    labels: labels,
+                    datasets: [{
+                        data: gas,
+                        label: "{% trans 'Gas' %}",                       
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(250,133,0,1)",
+                        pointColor: "rgba(250,133,0,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(150,150,150,1)"
+                    }]
+                };
+                
+                if (g_gas_chart_instance)
+               	{
+                	g_gas_chart_instance.destroy();
+               	}
+                $("#gas-chart-holder").show();
+
+                var ctx = $("#gas-chart").show().css('height', '150px').get(0).getContext("2d");
+                g_gas_chart_instance = new Chart(ctx).Line(data, line_options);
+            }
 		</script>
 {% endblock %}

@@ -132,12 +132,12 @@ def day_consumption(day):
 
     day_end = day_start + timezone.timedelta(days=1)
 
-    # This WILL fail when we either have no prices at all or conflicting ranges.
     try:
+        # This WILL fail when we either have no prices at all or conflicting ranges.
         consumption['daily_energy_price'] = EnergySupplierPrice.objects.by_date(
             target_date=day
         )
-    except EnergySupplierPrice.DoesNotExist:
+    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
         # Default to zero prices.
         consumption['daily_energy_price'] = EnergySupplierPrice()
 

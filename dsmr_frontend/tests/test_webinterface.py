@@ -1,4 +1,3 @@
-from unittest import mock
 import random
 import json
 
@@ -98,6 +97,12 @@ class TestViews(CallCommandStdoutMixin, TestCase):
             reverse('{}:dashboard'.format(self.namespace))
         )
 
+    def test_archive(self):
+        response = self.client.get(
+            reverse('{}:archive'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
+
     def test_history(self):
         frontend_settings = FrontendSettings.get_solo()
         frontend_settings.recent_history_weeks = random.randint(1, 5)
@@ -137,9 +142,9 @@ class TestViews(CallCommandStdoutMixin, TestCase):
 
     def test_trends(self):
         self._synchronize_date()
-        trend_url = reverse('{}:trends'.format(self.namespace))
-
-        response = self.client.get(trend_url)
+        response = self.client.get(
+            reverse('{}:trends'.format(self.namespace))
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_status(self):
@@ -180,6 +185,10 @@ class TestViewsWithoutData(TestCase):
     def test_dashboard(self):
         """ Check whether dashboard page can run without data. """
         self._check_view_status_code('dashboard')
+
+    def test_archive(self):
+        """ Check whether archive page can run without data. """
+        self._check_view_status_code('archive')
 
     def test_history(self):
         """ Check whether history page can run without data. """
