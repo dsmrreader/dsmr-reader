@@ -39,6 +39,7 @@ class ArchiveXhrDayStatistics(TemplateView):
         context_data['statistics'] = DayStatistics.objects.get(
             day=selected_datetime.date()
         )
+        context_data['day_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
 
         try:
             # This WILL fail when we either have no prices at all or conflicting ranges.

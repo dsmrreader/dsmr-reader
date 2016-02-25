@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <div class="panel">
                 <header class="panel-heading">
-                    {{ statistics.day }}
+                    {{ statistics.day|date:day_format }}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">

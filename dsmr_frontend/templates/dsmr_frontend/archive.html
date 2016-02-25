@@ -15,16 +15,30 @@
 {% endif %}
 
     <div class="row">
-        <div class=" col-md-4">
+        <div class="col-md-4">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Select day{% endblocktrans %}
                 </header>
                 <div class="panel-body">
-                    <span class="sm-st-icon st-orange" id="daterangepicker_trigger" style="cursor: pointer;"><i class="fa fa-calendar-check-o"></i></span>
-                    <div class="sm-st-info form-group">
-                        <input class="form-control" id="daterangepicker" type="text" size="10" style="width: 128px;" />
+				    <div class="row">
+                         <div class="col-md-offset-4 col-md-4">
+                             <div class="sm-st-info form-group">
+                                 <input class="form-control" id="daterangepicker" type="text" size="10" style="width: 128px;" />
+                             </div>
+                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <span class="sm-st-icon st-blue" id="daterangepicker_trigger_backwards" style="cursor: pointer;"><i class="fa fa-arrow-left"></i></span>
+                        </div>
+                        <div class="col-md-offset-1 col-md-2">
+                            <span class="sm-st-icon st-orange" id="daterangepicker_trigger" style="cursor: pointer;"><i class="fa fa-calendar-check-o"></i></span>
+                        </div>
+	                    <div class="col-md-offset-1 col-md-2">
+		                    <span class="sm-st-icon st-blue" id="daterangepicker_trigger_forwards" style="cursor: pointer;"><i class="fa fa-arrow-right"></i></span>
+		                </div>
+	                </div>
                 </div>
             </div>
         </div>
@@ -95,6 +109,7 @@
         	        autoUpdateInput: true,
         	        showDropdowns: true,
         	        autoApply: true,
+        	        opens: 'center',
         	        startDate: '{{ end_date|date:datepicker_date_format }}',
         	        minDate: '{{ start_date|date:datepicker_date_format }}',
         	        maxDate: '{{ end_date|date:datepicker_date_format }}',
@@ -103,9 +118,26 @@
        	            }
         	    });
         		
+        		/* When large icon is clicked. */
         		$("#daterangepicker_trigger").click(function(){
         			$('#daterangepicker').click();
         		});
+
+        		/* When the left arrow (backwards) is clicked. */
+        		$("#daterangepicker_trigger_backwards").click(function(){
+        			$('#daterangepicker').data('daterangepicker').setStartDate(
+        				moment($('#daterangepicker').val(), '{{ datepicker_locale_format }}').subtract(1, 'days')
+                    );
+                    $('#daterangepicker').trigger('apply.daterangepicker');
+        		});
+
+        		/* When the right arrow (forwards) is clicked. */
+                $("#daterangepicker_trigger_forwards").click(function(){
+                    $('#daterangepicker').data('daterangepicker').setStartDate(
+                        moment($('#daterangepicker').val(), '{{ datepicker_locale_format }}').add(1, 'days')
+                    );
+                    $('#daterangepicker').trigger('apply.daterangepicker');
+                });
         		
         		$('#daterangepicker').on('apply.daterangepicker', function(ev, picker) {
         			var selected_day = $('#daterangepicker').val();
@@ -207,7 +239,6 @@
                 g_electricity_chart_instance = new Chart(ctx).Line(data, line_options);
                 $("#electricity-chart-legend").html(g_electricity_chart_instance.generateLegend());
             }
-            
             
             function render_gas_chart(labels, gas)
             {

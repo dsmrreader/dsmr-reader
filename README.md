@@ -392,6 +392,8 @@ Software listed below. Please note and respect their licences as well, if any.
 
 * [Favicon](http://www.flaticon.com/free-icon/eco-energy_25013)
 
+* [Date Range Picker](http://www.daterangepicker.com/)
+
 Dutch Smart Meter reading specifications, data cables, examples and hints:
 
 * [Gé Janssen](http://gejanssen.com/howto/Slimme-meter-uitlezen/)
