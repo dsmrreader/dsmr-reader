@@ -2,7 +2,7 @@ import random
 import json
 
 from django.test import TestCase, Client
-from django.utils import timezone
+from django.utils import timezone, formats
 from django.core.urlresolvers import reverse
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
@@ -98,8 +98,23 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         )
 
     def test_archive(self):
+        self._synchronize_date()
         response = self.client.get(
             reverse('{}:archive'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
+
+        # XHR's.
+        data = {
+            'date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT')
+        }
+        response = self.client.get(
+            reverse('{}:archive-xhr-day'.format(self.namespace)), data=data
+        )
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(
+            reverse('{}:archive-xhr-hour'.format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 200)
 

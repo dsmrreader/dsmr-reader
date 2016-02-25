@@ -3,7 +3,7 @@ import json
 
 from django.views.generic.base import TemplateView, View
 from django.http.response import HttpResponse
-from django.utils import formats, timezone
+from django.utils import timezone, formats
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
