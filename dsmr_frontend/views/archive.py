@@ -62,7 +62,7 @@ class ArchiveXhrHourStatistics(View):
 
         hour_statistics = HourStatistics.objects.filter(
             hour_start__gte=selected_datetime,
-            hour_start__lt=selected_datetime + timezone.timedelta(days=1)
+            hour_start__lte=selected_datetime + timezone.timedelta(days=1)
         ).order_by('hour_start')
 
         data = defaultdict(list)

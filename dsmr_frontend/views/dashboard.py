@@ -1,19 +1,21 @@
 import json
 
 from django.views.generic.base import TemplateView
+from django.db.models.aggregates import Sum
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_stats.models.statistics import DayStatistics
 import dsmr_consumption.services
 
 
 class Dashboard(TemplateView):
     template_name = 'dsmr_frontend/dashboard.html'
-    electricity_max = 60  # Minutes or readings.
-    gas_max = 3 * 24  # Hours.
+    electricity_max = 30  # Minutes or readings.
+    gas_max = 24  # Hours.
     temperature_max = gas_max
 
     def get_context_data(self, **kwargs):
@@ -88,5 +90,18 @@ class Dashboard(TemplateView):
         context_data['consumption'] = dsmr_consumption.services.day_consumption(
             day=timezone.localtime(latest_electricity.read_at).date()
         )
-
+        now = timezone.localtime(timezone.now()).date()
+        start_of_month = timezone.datetime(year=now.year, month=now.month, day=1)
+        context_data['month_total'] = DayStatistics.objects.filter(
+            day__gte=start_of_month
+        ).aggregate(
+            total_electricity1=Sum('electricity1'),
+            total_electricity1_cost=Sum('electricity1_cost'),
+            total_electricity2=Sum('electricity2'),
+            total_electricity2_cost=Sum('electricity2_cost'),
+            total_electricity1_returned=Sum('electricity1_returned'),
+            total_electricity2_returned=Sum('electricity2_returned'),
+            total_gas=Sum('gas'),
+            total_gas_cost=Sum('gas_cost'),
+        )
         return context_data

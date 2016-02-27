@@ -13,54 +13,56 @@
     <div class="alert alert-danger" role="alert">
         <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
-{% else %}
-    <div class="row">
-        <div class="col-md-{% if latest_electricity_returned %}4{% else %}6{% endif %}">
-            <div class="panel">
-                <header class="panel-heading">
-                    {{ latest_electricity_read|naturaltime }}
-                </header>
-                <div class="panel-body">
-	                <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
-	                <div class="sm-st-info">
-	                    <span>{{ latest_electricity }}</span>
-	                    {% trans "Watt consumed" %}
-	                </div>
-                </div>
-            </div>
-        </div>
-        {% if latest_electricity_returned %}
-        <div class="col-md-4">
-            <div class="panel">
-                <header class="panel-heading">
-                    {{ latest_electricity_read|naturaltime }}
-                </header>
-                <div class="panel-body">
-	                <span class="sm-st-icon bg-green"><i class="fa fa-bolt"></i></span>
-	                <div class="sm-st-info">
-	                    <span>{{ latest_electricity_returned|default:'-' }}</span>
-	                    {% trans "Watt returned" %}
-	                </div>
-                </div>
-            </div>       
-        </div>
-        {% endif %}
-        <div class="col-md-{% if latest_electricity_returned %}4{% else %}6{% endif %}">
-            <div class="panel">
-                <header class="panel-heading">
-                    {{ latest_gas_read|naturaltime }}
-                </header>
-                <div class="panel-body">
-	                <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
-	                <div class="sm-st-info">
-	                    <span>{{ latest_gas }}</span>
-	                    {% trans "m<sup>3</sup> gas consumed" %}
-	                </div>
-                </div>
-            </div> 
-        </div>
-    </div><!-- /.row -->
 {% endif %}
+
+    {% if month_total %}
+    <div class="row consumption-block">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "This month" %} <small>({% trans "until yesterday" %})</small>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-6"></th>
+                            <th class="col-md-2">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
+                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
+                            <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                            <td><span class="badge bg-red">{{ month_total.total_electricity1|default:'-' }} </span></td>
+                            <td><span class="badge bg-green">{{ month_total.total_electricity1_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ month_total.total_electricity1_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Electricity 2 (peak)" %}</td>
+                            <td><span class="badge bg-red">{{ month_total.total_electricity2|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ month_total.total_electricity2_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ month_total.total_electricity2_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Gas" %}</td>
+                            <td><span class="badge bg-orange">{{ month_total.total_gas|default:'-' }}</span></td>
+                            <td>&nbsp;</td>
+                            <td><span class="badge bg-black">{{ month_total.total_gas_cost|default:'-' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">{% trans "Total" %}</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td>
+	                            <span class="badge bg-black">
+	                                {{ month_total.total_electricity1_cost|add:month_total.total_electricity2_cost|add:month_total.total_gas_cost }}
+	                            </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    {% endif %}
 
 	{% if consumption %}
     <div class="row consumption-block">
@@ -106,6 +108,55 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 	{% endif %}
+
+    {% if latest_electricity_read %}
+    <div class="row">
+        <div class="col-md-{% if latest_electricity_returned %}4{% else %}6{% endif %}">
+            <div class="panel">
+                <header class="panel-heading">
+                    {{ latest_electricity_read|naturaltime }}
+                </header>
+                <div class="panel-body">
+                    <span class="sm-st-icon st-red"><i class="fa fa-bolt"></i></span>
+                    <div class="sm-st-info">
+                        <span>{{ latest_electricity }}</span>
+                        {% trans "Watt consumed" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if latest_electricity_returned %}
+        <div class="col-md-4">
+            <div class="panel">
+                <header class="panel-heading">
+                    {{ latest_electricity_read|naturaltime }}
+                </header>
+                <div class="panel-body">
+                    <span class="sm-st-icon bg-green"><i class="fa fa-bolt"></i></span>
+                    <div class="sm-st-info">
+                        <span>{{ latest_electricity_returned|default:'-' }}</span>
+                        {% trans "Watt returned" %}
+                    </div>
+                </div>
+            </div>       
+        </div>
+        {% endif %}
+        <div class="col-md-{% if latest_electricity_returned %}4{% else %}6{% endif %}">
+            <div class="panel">
+                <header class="panel-heading">
+                    {{ latest_gas_read|naturaltime }}
+                </header>
+                <div class="panel-body">
+                    <span class="sm-st-icon st-orange"><i class="fa fa-fire"></i></span>
+                    <div class="sm-st-info">
+                        <span>{{ latest_gas }}</span>
+                        {% trans "m<sup>3</sup> gas consumed in hour" %}
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div><!-- /.row -->
+    {% endif %}
 	
     <div class="row">
         <div class="col-md-12">

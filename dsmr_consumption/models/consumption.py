@@ -53,7 +53,7 @@ class GasConsumption(models.Model):
         decimal_places=3,
         help_text=_("Last hourly value delivered to client")
     )
-    # This value is not provided by DSMR so we calculate the difference from the previous reading.
+    # This value is not provided by DSMR so we calculate the difference relative to the previous reading.
     currently_delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,
