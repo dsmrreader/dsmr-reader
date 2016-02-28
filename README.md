@@ -7,9 +7,9 @@
     * Usage
     * Dependencies & requirements
 * Installation guide
-    * (Optional) Operating System Installation
     * Application Installation
     * Data preservation & backups
+    * (Optional) Operating System Installation
 * Feedback
 * Licence
 * Credits
@@ -23,85 +23,27 @@ There are plenty of 'scripts' available online for performing DSMR readings. Thi
 I advise to only use this tool when you have basic Linux knowledge or have any interest in the components used. I might create an installer script later, but I'll focus on the build of features first.
 
 ## Dependencies & requirements ##
-* RaspberryPi v2+ *(minimal v1 B required but v2 is strongly recommended)*.
+* RaspberryPi v1 B+ *(minimal v1 B required but v2 is strongly recommended)*.
 * Raspbian *(or Debian based distro)*.
-* Python 3.4 *(Included in the latest Raspbian named "Jessie")*.
-* Smart Meter with support for at least DSMR 4.0 *(tested with Landis + Gyr E350 DSMR4)*.
+* Python 3.3 or 3.4 *(Included in the latest Raspbian named "Jessie")*.
+* Smart Meter with support for at least DSMR 4.0/4.2 *(tested with Landis + Gyr E350 DSMR4)*.
 * Minimal 100 MB of disk space on RaspberryPi *(for application installation & virtualenv)*. More disk space is required for storing all reader data captured *(optional)*. I generally advise to use a 8+ GB SD card.
-* Smart meter P1 data cable *(can be purchased online and they cost around 20 Euro's each)*.
+* Smart meter P1 data cable *(can be purchased online and they cost around 20 Euro's)*.
 * Basic Linux knowledge for deployment, debugging and troubleshooting. 
 
 # Installation guide #
-The installation guide may take about half an hour, but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
+The installation guide may take about half an hour max, but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
-You should already have an OS running on your RaspberryPi. If not, below is a brief hint for getting things started. Skip the OS chapter below if you already have your RaspberryPi up and running. Just continue directly to the "Application Installation" chapter.
-
-## (Optional) Operating System Installation ##
-### Raspbian ###
-Either use the headless version of Raspbian, [netinstall](https://github.com/debian-pi/raspbian-ua-netinst), or the [full Raspbian image](https://www.raspbian.org/RaspbianImages), with graphics stack. You don't need the latter when you intend to only use your decive for DSMR readings.
-
-### Init ###
-Power on RaspberryPi and connect using SSH:
-
-`ssh pi@IP-address` (full image)
-
-or
-
-`ssh root@IP-address` (headless)
-
-
-#### IPv6 ####
-Disable IPv6 if you get timeouts or other weird networking stuff related to IPv6.
-
-```
-echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
-
-sysctl -p /etc/sysctl.conf
-```
-
-#### Sudo ####
-This will allow you to use sudo: `apt-get install sudo`  *(headless only)*
-
-#### Text editor ####
-My favorite is VIM, but just choose your own: `sudo apt-get install vim`
-
-#### Updates ####
-Make sure you are up to date:
-
-```
-sudo apt-get update
-
-sudo apt-get upgrade
-```
-
-
-#### raspi-config ####
-Install this RaspberryPi utility: `sudo apt-get install raspi-config`
-
-Now run it: `raspi-config`
-
-You should see a menu containing around ten options to choose from. Make sure to enter the menu **5. Internationalisation Options** and set timezone *(I2)* to `UTC`. The option can be found in the sub menu of "None of the above". This is required to prevent any bugs resulting from the DST transition twice every year. It's also best practice for your database backend anyway.
-
-You should also install any locales you require. Go to **5. Internationalisation Options** and select *I1*. You probably need at least English and Dutch locales: `en_US.UTF-8 UTF-8` + `nl_NL.UTF-8 UTF-8`. You can select multiple locales by pressing the spacebar for each item and finish with TAB + Enter.
-
-* If your sdcard/disk space is not yet fully utilized, select **1. Expand Filesystem**.
-* If you do not have a RaspberryPi 2, you might want to select **8. Overclock** -> `setting MODEST, 0 overvolt`! 
-
-If the utility prompts you to reboot, choose yes to reflect the changes you made.
-
-#### Extra's ####
-Running the headless Raspbian netinstall? You might like Bash completion. Check [this article](https://www.howtoforge.com/how-to-add-bash-completion-in-debian) how to do this.
-
-Running the full Rasbian install? You should check whether you require the [Wolfram Engine](http://www.wolfram.com/raspberry-pi/), which is installed by default, but takes about a whopping 500 MB disk space! Run `sudo apt-get purge wolfram-engine` if you don't need it.
-
-----
+You should already have an OS running on your RaspberryPi. If not, somewhere near the end of the guide is a brief hint for getting things started ("(Optional) Operating System Installation"). 
+Just continue directly to the "Application Installation" chapter when you already have your RaspberryPi up and running.
 
 
 ## Application Installation ##
-Make sure you have your system running in UTC timezone to prevent weird DST bugs.
 
 ### Database backend ###
-The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **MySQL/MariaDB** or (Option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex than PostgreSQL. For a project of this size and simplicity it doesn't matter anyway. :]
+The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **MySQL/MariaDB** or (Option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex than PostgreSQL. 
+
+For a project of this size and simplicity it doesn't matter anyway. :] I plan to support SQLite later on as well.
 
 
 #### (Option A.) MySQL/MariaDB ###
@@ -155,7 +97,7 @@ Misc utils, required for webserver, application server and cloning the applicati
 
 `sudo apt-get install -y nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper`
 
-Install `cu`. The CU program allows easy testing for your DSMR serial connection. It's very basic but very effective to test whether your serial cable setup works properly.
+Install `cu`. The CU program allows easy testing for your DSMR serial connection. It's basic but very effective to test whether your serial cable setup works properly.
 
 `sudo apt-get install cu`
 
@@ -340,7 +282,7 @@ You might want to `reboot` and check whether everything comes up automatically a
 
 * Install a firewall, such as `ufw` [UncomplicatedFirewall](https://wiki.ubuntu.com/UncomplicatedFirewall) and restrict traffic to port 22 (only for yourself) and port 80.
 
-* You should **also** have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string using one of the [many generators found online](http://www.htaccesstools.com/htpasswd-generator/). It's safe to use them, just make sure to **NEVER** enter personal credentials there used for other applications or personal accounts.
+* You should **also** have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string using one of the [many generators found online](http://www.htaccesstools.com/htpasswd-generator/). It's safe to use them, just make sure to **NEVER** enter personal credentials there **used for other applications** or personal accounts.
 Paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/etc/nginx/sites-enabled/dsmr-webinterface` and **uncomment** the following lines:
 
 ```
@@ -359,6 +301,66 @@ You may also decide to run backups outside the application. There are example ba
 
 Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) later, allowing you to choose your own retention (for all the source readings).
 
+
+## (Optional) Operating System Installation ##
+Only required when you didn't have your RaspberryPi installed at all.
+
+### Raspbian ###
+Either use the headless version of Raspbian, [netinstall](https://github.com/debian-pi/raspbian-ua-netinst), or the [full Raspbian image](https://www.raspbian.org/RaspbianImages), with graphics stack. You don't need the latter when you intend to only use your decive for DSMR readings.
+
+### Init ###
+Power on RaspberryPi and connect using SSH:
+
+`ssh pi@IP-address` (full image)
+
+or
+
+`ssh root@IP-address` (headless)
+
+
+#### IPv6 ####
+Disable IPv6 if you get timeouts or other weird networking stuff related to IPv6.
+
+```
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+
+sysctl -p /etc/sysctl.conf
+```
+
+#### Sudo ####
+This will allow you to use sudo: `apt-get install sudo`  *(headless only)*
+
+#### Text editor ####
+My favorite is VIM, but just choose your own: `sudo apt-get install vim`
+
+#### Updates ####
+Make sure you are up to date:
+
+```
+sudo apt-get update
+
+sudo apt-get upgrade
+```
+
+
+#### raspi-config ####
+Install this RaspberryPi utility: `sudo apt-get install raspi-config`
+
+Now run it: `raspi-config`
+
+You should see a menu containing around ten options to choose from. Make sure to enter the menu **5. Internationalisation Options** and set timezone *(I2)* to `UTC`. The option can be found in the sub menu of "None of the above". This is required to prevent any bugs resulting from the DST transition twice every year. It's also best practice for your database backend anyway.
+
+You should also install any locales you require. Go to **5. Internationalisation Options** and select *I1*. You probably need at least English and Dutch locales: `en_US.UTF-8 UTF-8` + `nl_NL.UTF-8 UTF-8`. You can select multiple locales by pressing the spacebar for each item and finish with TAB + Enter.
+
+* If your sdcard/disk space is not yet fully utilized, select **1. Expand Filesystem**.
+* If you do not have a RaspberryPi 2, you might want to select **8. Overclock** -> `setting MODEST, 0 overvolt`! 
+
+If the utility prompts you to reboot, choose yes to reflect the changes you made.
+
+#### Extra's ####
+Running the headless Raspbian netinstall? You might like Bash completion. Check [this article](https://www.howtoforge.com/how-to-add-bash-completion-in-debian) how to do this.
+
+Running the full Rasbian install? You should check whether you require the [Wolfram Engine](http://www.wolfram.com/raspberry-pi/), which is installed by default, but takes about a whopping 500 MB disk space! Run `sudo apt-get purge wolfram-engine` if you don't need it.
 
 # Feedback #
 All feedback and input is, as always, very much appreciated! Please send an e-mail to dsmr (at) dennissiemensma (dot) nl. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
