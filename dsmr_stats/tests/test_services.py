@@ -46,6 +46,11 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertEqual(DayStatistics.objects.count(), 3)
         self.assertEqual(HourStatistics.objects.count(), 5)
 
+    def test_analyze_service_without_data(self):
+        first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]
+        first_consumption.read_at = first_consumption.read_at + timezone.timedelta()
+        dsmr_stats.services.analyze()
+
     def test_analyze_service_skip_current_day(self):
         """ Tests whether analysis postpones current day. """
         # Drop fixtures and create data of today.

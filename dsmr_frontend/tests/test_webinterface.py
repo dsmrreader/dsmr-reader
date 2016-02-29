@@ -1,11 +1,11 @@
 import random
 import json
 
+from django.core.management import call_command
 from django.test import TestCase, Client
 from django.utils import timezone, formats
 from django.core.urlresolvers import reverse
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -13,12 +13,12 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.settings import WeatherSettings
-from dsmr_stats.models.statistics import DayStatistics
+from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_stats.models.note import Note
 import dsmr_consumption.services
 
 
-class TestViews(CallCommandStdoutMixin, TestCase):
+class TestViews(TestCase):
     """ Test whether views render at all. """
     fixtures = [
         'dsmr_frontend/test_dsmrreading.json',
@@ -27,27 +27,41 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         'dsmr_frontend/test_statistics.json'
     ]
     namespace = 'frontend'
+    support_data = True
+    support_gas = True
 
     def _synchronize_date(self, interval=None):
         """ Little hack to fake any output for today (moment of test). """
+        if not self.support_data:
+            return
+
         dsmr_consumption.services.compact_all()
-        ec = ElectricityConsumption.objects.all()[0]
-        gc = GasConsumption.objects.all()[0]
-        ds = DayStatistics.objects.get(pk=1)
 
         timestamp = timezone.now()
 
         if interval:
             timestamp += interval
 
+        ec = ElectricityConsumption.objects.all()[0]
         ec.read_at = timestamp
-        ec.save()
+        ec.save(update_fields=['read_at'])
 
-        gc.read_at = timestamp
-        gc.save()
+        if self.support_gas:
+            gc = GasConsumption.objects.all()[0]
+            gc.read_at = timestamp
+            gc.save(update_fields=['read_at'])
 
+        ds = DayStatistics.objects.get(pk=1)
         ds.day = timestamp.date()
-        ds.save()
+        ds.save(update_fields=['day'])
+
+        for current_hour in HourStatistics.objects.all():
+            current_hour.hour_start = current_hour.hour_start.replace(
+                year=ds.day.year,
+                month=ds.day.month,
+                day=ds.day.day
+            )
+            current_hour.save(update_fields=['hour_start'])
 
         Note.objects.all().update(day=timestamp.date())
         TemperatureReading.objects.create(read_at=timestamp, degrees_celcius=3.5)
@@ -75,18 +89,22 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         )
         self.assertEqual(response.status_code, 200)
 
-        self.assertGreater(
-            len(json.loads(response.context['electricity_x'])), 0
-        )
-        self.assertGreater(
-            len(json.loads(response.context['electricity_y'])), 0
-        )
-        self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
-        self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
-        self.assertGreater(response.context['latest_electricity'], 0)
-        self.assertEqual(response.context['latest_gas'], 0)
-        self.assertTrue(response.context['track_temperature'])
-        self.assertIn('consumption', response.context)
+        if self.support_data:
+            self.assertGreater(
+                len(json.loads(response.context['electricity_x'])), 0
+            )
+            self.assertGreater(
+                len(json.loads(response.context['electricity_y'])), 0
+            )
+
+            self.assertGreater(response.context['latest_electricity'], 0)
+            self.assertTrue(response.context['track_temperature'])
+            self.assertIn('consumption', response.context)
+
+        if self.support_gas:
+            self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
+            self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
+            self.assertEqual(response.context['latest_gas'], 0)
 
         # Test whether reverse graphs work.
         frontend_settings = FrontendSettings.get_solo()
@@ -128,6 +146,11 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         response = self.client.get(
             reverse('{}:history'.format(self.namespace))
         )
+        self.assertEqual(response.status_code, 200)
+
+        if not self.support_data:
+            return
+
         self.assertTrue(all(x in response.context['usage'][0].keys() for x in [
             'electricity2_returned',
             'electricity1_cost',
@@ -146,7 +169,6 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self.assertEqual('Testnote', response.context['usage'][0]['notes'][0])
         self.assertEqual(response.context['days_ago'], frontend_settings.recent_history_weeks * 7)
         self.assertFalse(response.context['track_temperature'])
-        self.assertEqual(response.status_code, 200)
 
     def test_statistics(self):
         self._synchronize_date()
@@ -185,38 +207,30 @@ class TestViews(CallCommandStdoutMixin, TestCase):
         self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
 
 
-class TestViewsWithoutData(TestCase):
-    namespace = 'frontend'
+class TestViewsWithoutData(TestViews):
+    """ Same tests as above, but without any data as it's flushed in setUp().  """
+    fixtures = []
+    support_data = support_gas = False
 
     def setUp(self):
-        self.client = Client()
+        super(TestViewsWithoutData, self).setUp()
+        call_command('flush', interactive=False)
 
-    def _check_view_status_code(self, view_name):
-        response = self.client.get(
-            reverse('{}:{}'.format(self.namespace, view_name))
-        )
-        self.assertEqual(response.status_code, 200)
+        self.assertFalse(ElectricityConsumption.objects.exists())
+        self.assertFalse(GasConsumption.objects.exists())
+        self.assertFalse(DayStatistics.objects.exists())
 
-    def test_dashboard(self):
-        """ Check whether dashboard page can run without data. """
-        self._check_view_status_code('dashboard')
 
-    def test_archive(self):
-        """ Check whether archive page can run without data. """
-        self._check_view_status_code('archive')
+class TestViewsWithoutGas(TestViews):
+    """ Same tests as above, but without any GAS related data.  """
+    fixtures = [
+        'dsmr_frontend/test_dsmrreading_without_gas.json',
+        'dsmr_frontend/test_note.json',
+        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_statistics.json'
+    ]
+    support_gas = False
 
-    def test_history(self):
-        """ Check whether history page can run without data. """
-        self._check_view_status_code('history')
-
-    def test_statistics(self):
-        """ Check whether statistics page can run without data. """
-        self._check_view_status_code('statistics')
-
-    def test_trends(self):
-        """ Check whether trends page can run without data. """
-        self._check_view_status_code('trends')
-
-    def test_status(self):
-        """ Check whether status page can run without data. """
-        self._check_view_status_code('status')
+    def setUp(self):
+        super(TestViewsWithoutGas, self).setUp()
+        self.assertFalse(GasConsumption.objects.exists())

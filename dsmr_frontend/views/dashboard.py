@@ -73,7 +73,6 @@ class Dashboard(TemplateView):
 
         try:
             latest_electricity = ElectricityConsumption.objects.all().order_by('-read_at')[0]
-            latest_gas = GasConsumption.objects.all().order_by('-read_at')[0]
         except IndexError:
             # Don't even bother when no data available.
             return context_data
@@ -85,8 +84,15 @@ class Dashboard(TemplateView):
         context_data['latest_electricity_returned'] = int(
             latest_electricity.currently_returned * 1000
         )
-        context_data['latest_gas_read'] = latest_gas.read_at
-        context_data['latest_gas'] = latest_gas.currently_delivered
+
+        try:
+            latest_gas = GasConsumption.objects.all().order_by('-read_at')[0]
+        except IndexError:
+            latest_gas = None
+        else:
+            context_data['latest_gas_read'] = latest_gas.read_at
+            context_data['latest_gas'] = latest_gas.currently_delivered
+
         context_data['consumption'] = dsmr_consumption.services.day_consumption(
             day=timezone.localtime(latest_electricity.read_at).date()
         )

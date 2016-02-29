@@ -36,9 +36,13 @@ class ArchiveXhrDayStatistics(TemplateView):
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
             self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
-        context_data['statistics'] = DayStatistics.objects.get(
-            day=selected_datetime.date()
-        )
+        try:
+            context_data['statistics'] = DayStatistics.objects.get(
+                day=selected_datetime.date()
+            )
+        except DayStatistics.DoesNotExist:
+            context_data['statistics'] = None
+
         context_data['day_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
 
         try:

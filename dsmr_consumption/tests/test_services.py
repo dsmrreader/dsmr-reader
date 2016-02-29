@@ -37,7 +37,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertEqual(ElectricityConsumption.objects.count(), 3)
 
         if self.support_gas_readings:
-            self.assertEqual(GasConsumption.objects.count(), 1)
+            self.assertEqual(GasConsumption.objects.count(), 2)
         else:
             self.assertEqual(GasConsumption.objects.count(), 0)
 

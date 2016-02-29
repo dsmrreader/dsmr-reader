@@ -89,7 +89,7 @@ def create():
             stdout=open(backup_file, 'w')
         )
     else:
-        raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))
+        raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))  # pragma: no cover
 
     backup_process.wait()
     backup_settings = BackupSettings.get_solo()

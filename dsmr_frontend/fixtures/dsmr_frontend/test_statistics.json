@@ -32,5 +32,293 @@
         "electricity1_cost": "0.44"
     },
     "model": "dsmr_stats.daystatistics"
+},
+{
+    "pk": 1735,
+    "fields": {
+        "gas": "0.666",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T01:00:00Z",
+        "electricity1": "0.105"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1736,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T02:00:00Z",
+        "electricity1": "0.065"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1737,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T03:00:00Z",
+        "electricity1": "0.065"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1738,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T04:00:00Z",
+        "electricity1": "0.065"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1739,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T05:00:00Z",
+        "electricity1": "0.066"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1740,
+    "fields": {
+        "gas": "0.000",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T06:00:00Z",
+        "electricity1": "0.073"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1741,
+    "fields": {
+        "gas": "0.741",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T07:00:00Z",
+        "electricity1": "0.163"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1742,
+    "fields": {
+        "gas": "1.108",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T08:00:00Z",
+        "electricity1": "0.132"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1743,
+    "fields": {
+        "gas": "0.065",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T09:00:00Z",
+        "electricity1": "0.069"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1744,
+    "fields": {
+        "gas": "0.000",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T10:00:00Z",
+        "electricity1": "0.066"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1745,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T11:00:00Z",
+        "electricity1": "0.066"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1746,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T12:00:00Z",
+        "electricity1": "0.066"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1747,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T13:00:00Z",
+        "electricity1": "0.065"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1748,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T14:00:00Z",
+        "electricity1": "0.065"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1749,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T15:00:00Z",
+        "electricity1": "0.065"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1750,
+    "fields": {
+        "gas": "0.010",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T16:00:00Z",
+        "electricity1": "0.065"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1751,
+    "fields": {
+        "gas": "1.087",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T17:00:00Z",
+        "electricity1": "0.139"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1752,
+    "fields": {
+        "gas": "0.658",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T18:00:00Z",
+        "electricity1": "0.124"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1753,
+    "fields": {
+        "gas": "0.010",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T19:00:00Z",
+        "electricity1": "0.086"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1754,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T20:00:00Z",
+        "electricity1": "0.091"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1755,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T21:00:00Z",
+        "electricity1": "0.070"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1756,
+    "fields": {
+        "gas": "0.009",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T22:00:00Z",
+        "electricity1": "0.069"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1757,
+    "fields": {
+        "gas": "0.019",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-12T23:00:00Z",
+        "electricity1": "0.069"
+    },
+    "model": "dsmr_stats.hourstatistics"
+},
+{
+    "pk": 1758,
+    "fields": {
+        "gas": "0.175",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "hour_start": "2015-12-13T00:00:00Z",
+        "electricity1": "0.129"
+    },
+    "model": "dsmr_stats.hourstatistics"
 }
 ]

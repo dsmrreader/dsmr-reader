@@ -46,14 +46,10 @@ def analyze():
         day=latest_statistics_day.day,
     ))
 
-    try:
-        # First the first day of consumptions available. If any.
-        consumption_found = ElectricityConsumption.objects.filter(
-            read_at__gt=search_start
-        ).order_by('read_at')[0]
-    except IndexError:
-        # No data logged yet.
-        return
+    # Find the first day of consumptions available. If any.
+    consumption_found = ElectricityConsumption.objects.filter(
+        read_at__gt=search_start
+    ).order_by('read_at')[0]
 
     consumption_date = timezone.localtime(consumption_found.read_at).date()
 
