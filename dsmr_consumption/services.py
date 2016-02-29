@@ -81,30 +81,32 @@ def compact(dsmr_reading):
                 None, instance=consumption
             )
 
-    # Gas however is only read (or updated) once every hour, so we should check for any duplicates
-    # as they will exist at some point.
-    passed_hour_start = dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
+    # Gas is optional.
+    if dsmr_reading.extra_device_timestamp and dsmr_reading.extra_device_delivered:
+        # Gas however is only read (or updated) once every hour, so we should check for any duplicates
+        # as they will exist at some point.
+        passed_hour_start = dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
 
-    if not GasConsumption.objects.filter(read_at=passed_hour_start).exists():
-        # DSMR does not expose current gas rate, so we have to calculate
-        # it ourselves, relative to the previous gas consumption, if any.
-        try:
-            previous_gas_consumption = GasConsumption.objects.get(
-                # Compare to reading before, if any.
-                read_at=passed_hour_start - timezone.timedelta(hours=1)
+        if not GasConsumption.objects.filter(read_at=passed_hour_start).exists():
+            # DSMR does not expose current gas rate, so we have to calculate
+            # it ourselves, relative to the previous gas consumption, if any.
+            try:
+                previous_gas_consumption = GasConsumption.objects.get(
+                    # Compare to reading before, if any.
+                    read_at=passed_hour_start - timezone.timedelta(hours=1)
+                )
+            except GasConsumption.DoesNotExist:
+                gas_diff = 0
+            else:
+                gas_diff = dsmr_reading.extra_device_delivered - previous_gas_consumption.delivered
+
+            consumption = GasConsumption.objects.create(
+                # Gas consumption is aligned to start of the hour.
+                read_at=passed_hour_start,
+                delivered=dsmr_reading.extra_device_delivered,
+                currently_delivered=gas_diff
             )
-        except GasConsumption.DoesNotExist:
-            gas_diff = 0
-        else:
-            gas_diff = dsmr_reading.extra_device_delivered - previous_gas_consumption.delivered
-
-        consumption = GasConsumption.objects.create(
-            # Gas consumption is aligned to start of the hour.
-            read_at=passed_hour_start,
-            delivered=dsmr_reading.extra_device_delivered,
-            currently_delivered=gas_diff
-        )
-        dsmr_consumption.signals.gas_consumption_created.send_robust(None, instance=consumption)
+            dsmr_consumption.signals.gas_consumption_created.send_robust(None, instance=consumption)
 
     dsmr_reading.processed = True
     dsmr_reading.save(update_fields=['processed'])

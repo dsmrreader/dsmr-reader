@@ -10,12 +10,17 @@ import dsmr_consumption.services
 
 class TestServices(CallCommandStdoutMixin, TestCase):
     fixtures = ['dsmr_consumption/test_dsmrreading.json']
+    support_gas_readings = None
 
     def setUp(self):
+        self.support_gas_readings = True
         self.assertEqual(DsmrReading.objects.all().count(), 3)
-        self.assertTrue(DsmrReading.objects.unprocessed().exists())
 
-        # Initializes singleton model.
+        if self.support_gas_readings:
+            self.assertTrue(DsmrReading.objects.unprocessed().exists())
+        else:
+            self.assertFalse(DsmrReading.objects.unprocessed().exists())
+
         ConsumptionSettings.get_solo()
 
     def test_processing(self):
@@ -30,7 +35,11 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
         self.assertEqual(ElectricityConsumption.objects.count(), 3)
-        self.assertEqual(GasConsumption.objects.count(), 1)
+
+        if self.support_gas_readings:
+            self.assertEqual(GasConsumption.objects.count(), 1)
+        else:
+            self.assertEqual(GasConsumption.objects.count(), 0)
 
     def test_grouping(self):
         """ Test grouping per minute, instead of the default 10-second interval. """
@@ -44,7 +53,11 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
         self.assertEqual(ElectricityConsumption.objects.count(), 1)
-        self.assertEqual(GasConsumption.objects.count(), 1)
+
+        if self.support_gas_readings:
+            self.assertEqual(GasConsumption.objects.count(), 1)
+        else:
+            self.assertEqual(GasConsumption.objects.count(), 0)
 
     def test_creation(self):
         """ Test the datalogger's builtin fallback for initial readings. """
@@ -54,8 +67,20 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         dsmr_consumption.services.compact_all()
 
         self.assertTrue(ElectricityConsumption.objects.exists())
-        self.assertTrue(GasConsumption.objects.exists())
+
+        if self.support_gas_readings:
+            self.assertTrue(GasConsumption.objects.exists())
+        else:
+            self.assertFalse(GasConsumption.objects.exists())
 
     def test_day_consumption(self):
         with self.assertRaises(LookupError):
             dsmr_consumption.services.day_consumption(timezone.now() + timezone.timedelta(weeks=1))
+
+
+class TestServicesWithoutGas(TestServices):
+    fixtures = ['dsmr_consumption/test_dsmrreading_without_gas.json']
+
+    def setUp(self):
+        super(TestServicesWithoutGas, self).setUp()
+        self.support_gas_readings = False
