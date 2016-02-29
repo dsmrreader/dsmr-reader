@@ -102,3 +102,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
     def test_flush_clear_cache(self, clear_cache_mock):
         dsmr_stats.services.flush()
         self.assertTrue(clear_cache_mock.called)
+
+
+class TestServicesWithoutGas(TestServices):
+    fixtures = ['dsmr_stats/electricity-consumption.json']

@@ -14,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dsmrreading',
             name='extra_device_delivered',
-            field=models.DecimalField(blank=True, help_text='Last hourly value delivered to client', null=True, default=None, decimal_places=3, max_digits=9),
+            field=models.DecimalField(null=True, default=None, help_text='Last hourly value delivered to client', decimal_places=3, max_digits=9),
         ),
         migrations.AlterField(
             model_name='dsmrreading',
             name='extra_device_timestamp',
-            field=models.DateTimeField(blank=True, default=None, help_text='Last hourly reading timestamp', null=True),
+            field=models.DateTimeField(null=True, default=None, help_text='Last hourly reading timestamp'),
         ),
     ]

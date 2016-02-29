@@ -131,7 +131,6 @@ def day_consumption(day):
         'day': day
     }
     day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
-
     day_end = day_start + timezone.timedelta(days=1)
 
     try:
@@ -192,6 +191,7 @@ def day_consumption(day):
 
     consumption['notes'] = Note.objects.filter(day=day).values_list('description', flat=True)
 
+    # Remperature readings are not mandatory as well.
     temperature_readings = TemperatureReading.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')

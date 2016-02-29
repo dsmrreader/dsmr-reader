@@ -52,13 +52,11 @@ class DsmrReading(models.Model):
     )
     extra_device_timestamp = models.DateTimeField(
         null=True,
-        blank=True,
         default=None,
         help_text=_("Last hourly reading timestamp")
     )
     extra_device_delivered = models.DecimalField(
         null=True,
-        blank=True,
         default=None,
         max_digits=9,
         decimal_places=3,
