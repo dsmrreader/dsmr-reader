@@ -51,9 +51,15 @@ class DsmrReading(models.Model):
         help_text=_("Actual electricity power received (-P) in 1 Watt resolution")
     )
     extra_device_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+        default=None,
         help_text=_("Last hourly reading timestamp")
     )
     extra_device_delivered = models.DecimalField(
+        null=True,
+        blank=True,
+        default=None,
         max_digits=9,
         decimal_places=3,
         help_text=_("Last hourly value delivered to client")

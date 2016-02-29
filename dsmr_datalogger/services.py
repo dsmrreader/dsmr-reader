@@ -80,7 +80,7 @@ def telegram_to_reading(data):
         reading_fields.remove('id')
         return reading_fields
 
-    parsed_reading = {}
+    parsed_reading = {k: None for k in _get_reading_fields()}  # Defaults all fields to NULL.
     field_splitter = re.compile(r'([^(]+)\((.+)\)')
 
     for current_line in data.split("\n"):
@@ -101,7 +101,7 @@ def telegram_to_reading(data):
         # Drop units, as the database does not care for them.
         value = value.replace('*kWh', '').replace('*kW', '').replace('*m3', '')
 
-        # Ugly workaround for combined values.
+        # Extra device parameters are placed on a single line, meh.
         if code == "0-1:24.2.1":
             timestamp_value, gas_usage = value.split(")(")
             parsed_reading[field[0]] = reading_timestamp_to_datetime(string=timestamp_value)

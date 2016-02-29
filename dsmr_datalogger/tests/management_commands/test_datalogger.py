@@ -15,9 +15,9 @@ import dsmr_datalogger.services
 
 class TestDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_stats_datalogger' management command, DSMR v4.0. """
-    def _dsmr_dummy_data(self):
+    def _dsmr_dummy_data(self, with_gas=True):
         """ Returns DSMR v4.0 data. """
-        return [
+        data = [
             "/XMX5LGBBFFB123456789\n",
             "\n",
             "1-3:0.2.8(40)\n",
@@ -52,27 +52,44 @@ class TestDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
             "1-0:22.7.0(00.000*kW)\n",
             "1-0:42.7.0(00.000*kW)\n",
             "1-0:62.7.0(00.000*kW)\n",
-            "0-1:24.1.0(003)\n",
-            "0-1:96.1.0(xxxxxxxxxxxxx)\n",
-            "0-1:24.2.1(151110190000W)(00845.206*m3)\n",
-            "0-1:24.4.0(1)\n",
-            "!D19A\n",
         ]
+
+        if with_gas:
+            data += [
+                "0-1:24.1.0(003)\n",
+                "0-1:96.1.0(xxxxxxxxxxxxx)\n",
+                "0-1:24.2.1(151110190000W)(00845.206*m3)\n",
+                "0-1:24.4.0(1)\n",
+            ]
+
+        data += ["!D19A\n"]
+        return data
 
     @mock.patch('serial.Serial.open')
     @mock.patch('serial.Serial.readline')
-    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock):
+    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock, with_gas=True):
         """ Fake & process an DSMR vX telegram reading. """
         serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
+        serial_readline_mock.side_effect = self._dsmr_dummy_data(with_gas)
 
         self._call_command_stdout('dsmr_datalogger')
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
         """ Test whether dsmr_datalogger can insert a reading. """
+        self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
+
+    def test_reading_creation_without_gas(self):
+        """ Test whether dsmr_datalogger can insert a reading, when gas is omitted. """
+        self.assertFalse(DsmrReading.objects.exists())
+        self._fake_dsmr_reading(with_gas=False)
+        self.assertTrue(DsmrReading.objects.exists())
+
+        reading = DsmrReading.objects.get()
+        self.assertIsNone(reading.extra_device_timestamp)
+        self.assertIsNone(reading.extra_device_delivered)
 
     def test_reading_values(self):
         """ Test whether dsmr_datalogger reads the correct values. """
@@ -111,9 +128,9 @@ class TestDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
 class TestDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_stats_datalogger' management command, DSMR v4.2. """
 
-    def _dsmr_dummy_data(self):
+    def _dsmr_dummy_data(self, with_gas=True):
         """ Returns DSMR v4.2 data. """
-        return [
+        data = [
             "/XMX5LGBBFFB123456789\n",
             "\n",
             "1-3:0.2.8(42)\n",
@@ -146,26 +163,44 @@ class TestDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
             "1-0:22.7.0(00.000*kW)\n",
             "1-0:42.7.0(00.000*kW)\n",
             "1-0:62.7.0(00.000*kW)\n",
-            "0-1:24.1.0(003)\n",
-            "0-1:96.1.0(xxxxxxxxxxxxx)\n",
-            "0-1:24.2.1(160210200000W)(01197.484*m3)\n",
-            "!AD8D\n",
         ]
+
+        if with_gas:
+            data += [
+                "0-1:24.1.0(003)\n",
+                "0-1:96.1.0(xxxxxxxxxxxxx)\n",
+                "0-1:24.2.1(160210200000W)(01197.484*m3)\n",
+            ]
+
+        data += ["!AD8D\n"]
+        return data
 
     @mock.patch('serial.Serial.open')
     @mock.patch('serial.Serial.readline')
-    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock):
+    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock, with_gas=True):
         """ Fake & process an DSMR vX telegram reading. """
         serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
+        serial_readline_mock.side_effect = self._dsmr_dummy_data(with_gas)
 
+        self.assertFalse(DsmrReading.objects.exists())
         self._call_command_stdout('dsmr_datalogger')
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
         """ Test whether dsmr_datalogger can insert a reading. """
+        self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
+
+    def test_reading_creation_without_gas(self):
+        """ Test whether dsmr_datalogger can insert a reading, when gas is omitted. """
+        self.assertFalse(DsmrReading.objects.exists())
+        self._fake_dsmr_reading(with_gas=False)
+        self.assertTrue(DsmrReading.objects.exists())
+
+        reading = DsmrReading.objects.get()
+        self.assertIsNone(reading.extra_device_timestamp)
+        self.assertIsNone(reading.extra_device_delivered)
 
     def test_reading_values(self):
         """ Test whether dsmr_datalogger reads the correct values. """
