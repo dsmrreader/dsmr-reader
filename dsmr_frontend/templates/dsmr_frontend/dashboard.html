@@ -9,7 +9,7 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-{% if not latest_electricity and not latest_electricity_returned and not latest_gas_read %}
+{% if not latest_electricity %}
     <div class="alert alert-danger" role="alert">
         <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
@@ -42,12 +42,14 @@
                             <td><span class="badge bg-green">{{ month_total.total_electricity2_returned|default:'-' }}</span></td>
                             <td><span class="badge bg-black">{{ month_total.total_electricity2_cost|default:'-' }}</span></td>
                         </tr>
+                        {% if month_total.total_gas %}
                         <tr>
                             <td>{% trans "Gas" %}</td>
                             <td><span class="badge bg-orange">{{ month_total.total_gas|default:'-' }}</span></td>
                             <td>&nbsp;</td>
                             <td><span class="badge bg-black">{{ month_total.total_gas_cost|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
                             <td colspan="2">&nbsp;</td>
@@ -91,12 +93,14 @@
                             <td><span class="badge bg-green">{{ consumption.electricity2_returned|default:'-' }}</span></td>
                             <td><span class="badge bg-black">{{ consumption.electricity2_cost|default:'-' }}</span></td>
                         </tr>
+                        {% if consumption.gas %}
                         <tr>
                             <td>{% trans "Gas" %}</td>
                             <td><span class="badge bg-orange">{{ consumption.gas|default:'-' }}</span></td>
                             <td>&nbsp;</td>
                             <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
                             <td colspan="2">&nbsp;</td>
@@ -125,6 +129,7 @@
                 </div>
             </div>
         </div>
+        
         {% if latest_electricity_returned %}
         <div class="col-md-4">
             <div class="panel">
@@ -141,6 +146,8 @@
             </div>       
         </div>
         {% endif %}
+        
+        {% if latest_gas_read %}
         <div class="col-md-{% if latest_electricity_returned %}4{% else %}6{% endif %}">
             <div class="panel">
                 <header class="panel-heading">
@@ -155,6 +162,7 @@
                 </div>
             </div> 
         </div>
+        {% endif %}
     </div><!-- /.row -->
     {% endif %}
 	
@@ -171,6 +179,7 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 
+    {% if consumption and consumption.gas %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -183,7 +192,9 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    {% endif %}
     
+    {% if temperature_count %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -202,6 +213,7 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    {% endif %}
 </section><!-- /.content -->
 {% endblock %}
 

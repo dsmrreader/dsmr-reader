@@ -60,6 +60,7 @@ class Dashboard(TemplateView):
         )
 
         context_data['track_temperature'] = WeatherSettings.get_solo().track
+        context_data['temperature_count'] = temperature.count()
 
         if context_data['track_temperature']:
             context_data['temperature_x'] = json.dumps(
