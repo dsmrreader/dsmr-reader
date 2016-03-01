@@ -29,7 +29,7 @@ class Archive(TemplateView):
 
 class ArchiveXhrDayStatistics(TemplateView):
     """ XHR view for fetching day statistics, HTML response. """
-    template_name = 'dsmr_frontend/fragments/archive.html'
+    template_name = 'dsmr_frontend/fragments/archive-xhr-day-statistics.html'
 
     def get_context_data(self, **kwargs):
         context_data = super(ArchiveXhrDayStatistics, self).get_context_data(**kwargs)
