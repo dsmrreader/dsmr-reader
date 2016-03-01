@@ -123,6 +123,9 @@ Django will copy all static files to a separate directory, used by Nginx to serv
 
 `sudo chown -R dsmr:dsmr /var/www/dsmrreader/`
 
+The reason for splitting the webserver chapter in two steps, is because the application requires the directory created above to exist. And Nginx requires the application to exist (cloned) before running (and to copy its virtual hosts file), resulting in an dependency loop... :]
+
+
 ### Your first reading ###
 
 Now login as the user we just created, to perform our very first reading!
@@ -139,7 +142,7 @@ To exit **cu**, input `q.`, hit Enter and wait for a few seconds. It should exit
 
 
 ### Application code clone ###
-Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user (if not then enter `sudo su - dsmr` again):
+Now is the time to clone the code from the repository and check it out on your device. Make sure you are still logged in as our **dsmr** user (if not so, then enter `sudo su - dsmr` again):
 
 `git clone https://github.com/dennissiemensma/dsmr-reader.git`
 
@@ -148,6 +151,7 @@ Now is the time to clone the code from the repository and check it out on your d
 
 The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine. More info can be found [here](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
 
+(Make sure you are still `dsmr` user)
 `sudo su - dsmr`
 
 Create folder for the virtualenvs of this user:
@@ -158,7 +162,7 @@ Create a new virtualenv, we usually use the same name for it as the application 
 
 `virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3`
 
-Now 'activate' the environment. It effectively direct all aliases for software installed in the virtualenv to the binaries inside the virtualenv. I.e. the Python binary inside `/usr/bin/python` won't be used when the virtualenv is activated, but `/home/dsmr/.virtualenvs/dsmrreader/bin/python` will be instead.
+Now 'activate' the environment. It effectively directs all aliases for software installed in the virtualenv to the binaries inside the virtualenv. I.e. the Python binary inside `/usr/bin/python` won't be used when the virtualenv is activated, but `/home/dsmr/.virtualenvs/dsmrreader/bin/python` will be instead.
 
 Activate virtualenv & cd to project:
 
@@ -173,9 +177,9 @@ You might want to put the `source ~/.virtualenvs/dsmrreader/bin/activate` comman
 
 ### Application configuration & setup ###
 Earlier in this guide you had to choose for either **(A.) MySQL/MariaDB** or **(B.) PostgreSQL**. Our applications needs to know what backend to talk to. Therefor I created two default configuration files you can copy, one for each backend. 
-The application will also need the appropiate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. The `base.txt` contains requirements which the application needs, no matter the backend you choose. 
+The application will also need the appropiate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. The `base.txt` contains requirements which the application needs anyway, no matter the backend you've choosen. 
 
-**Note:** Installation might take a while, depending on your Internet connection, RaspberryPi version and resources. Nothing to worry about. :]
+**Note:** Installation might take a while, depending on your Internet connection, RaspberryPi version and resources (generally CPU) available. Nothing to worry about. :]
 
 **A.** Did you choose MySQL/MariaDB? Execute these two commands:
 
@@ -211,7 +215,7 @@ Create an application superuser. Django will prompt you for a password. Alter us
 
 `./manage.py loaddata dsmr_stats/fixtures/dsmr_stats/EnergySupplierPrice.json` 
 
-### Webserver (Nginx), part 2 ### 
+### Webserver (Nginx), part 2 ###
 Now to back to root/sudo-user to config webserver. Remove the default vhost (if you didn't use it yourself anyway!).
 
 `sudo rm /etc/nginx/sites-enabled/default` (optional)
@@ -271,7 +275,7 @@ In this example the ip address is `192.168.178.150`.
 
 Everything OK? Congratulations, this was the hardest part and now the fun begins by monitoring your electricity (and possible gas) consumption! :]
 
-### Reboot test#
+### Reboot test ###
 
 You might want to `reboot` and check whether everything comes up automatically again with `sudo supervisorctl status`. This will make sure your data logger 'survives' any power surges.
 
@@ -293,13 +297,25 @@ Paste the htpasswd string in `/etc/nginx/htpasswd`, open the site's vhost in `/e
 Now make sure you didn't insert any typo's by running `sudo service nginx configtest` and then reload with `sudo service nginx reload`. You should be prompted for login credentials the next time your browser accesses the application. For more information about this topic, see [the Nginx docs](https://www.nginx.com/resources/admin-guide/restricting-access/).
 
 
-## Data preservation & backups
+## Data preservation & backups ##
 You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip or ignore this. Actually, it happened to myself quite recently as I somehow managed to corrupt my SD storage card, losing all my data on it. It luckily happened only a month after running my own readings, but imagine all the data you lose when it contained readings for several years.
 The application will by default create a backup every night. However, as the data is still stored locally on your vulnerable SD card, you should export it off your RaspberryPi. There is an builtin option to have backups synced to your Dropbox, without exposing your Dropbox account and your private files in it. Please either use this service or manage offloading backups on your own.
 
 You may also decide to run backups outside the application. There are example backup scripts available in `dsmrreader/provisioning/postgresql/psql-backup.sh` for PostgreSQL, which I dump to a separately mounted USB stick on my RaspberryPi. For MySQL/MariaDB you can use `dsmrreader/provisioning/mysql/mysql-backup.sh`. Make sure to schedule the backup script as cronjob and also verify that it actually works. ;-)
 
 Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) later, allowing you to choose your own retention (for all the source readings).
+
+
+## Application updates (bug fixes & new features) ##
+The current setup is based on the 'latest' version of the application, called the `master` branch. I will add versions/releases later, possibly by using PIP. For now you can always update your application to the latest version by executing `deploy.sh`, located in the root of the project. Make sure to execute it while logged in as the `dsmr` user. It will make sure to check, fetch and apply any changes released.
+
+Summary of deployment script:
+* GIT pull (codebase update)
+* PIP update requirements
+* Apply any database migrations
+* Sync static files to Nginx folder
+* Reload Gunicorn application server
+* Clear any cache
 
 
 ## (Optional) Operating System Installation ##
