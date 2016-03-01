@@ -1,7 +1,6 @@
 import random
 import json
 
-from django.core.management import call_command
 from django.test import TestCase, Client
 from django.utils import timezone, formats
 from django.core.urlresolvers import reverse
@@ -214,7 +213,9 @@ class TestViewsWithoutData(TestViews):
 
     def setUp(self):
         super(TestViewsWithoutData, self).setUp()
-        call_command('flush', interactive=False)
+
+        for current_model in (ElectricityConsumption, GasConsumption, DayStatistics):
+            current_model.objects.all().delete()
 
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(GasConsumption.objects.exists())

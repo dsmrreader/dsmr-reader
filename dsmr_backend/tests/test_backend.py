@@ -4,10 +4,11 @@ from django.core.management import call_command, CommandError
 from django.test import TestCase
 from django.conf import settings
 
+from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 import dsmr_backend.signals
 
 
-class TestBackend(TestCase):
+class TestBackend(CallCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_backend.signals.backend_called.send_robust')
     def test_backend_creation_signal(self, signal_mock):
         """ Test outgoing signal. """
@@ -25,7 +26,7 @@ class TestBackend(TestCase):
 
         with self.assertRaises(CommandError):
             # Signal should crash, rasing a command error.
-            call_command('dsmr_backend')
+            self._call_command_stdout('dsmr_backend')
 
         # We must disconnect to prevent other tests from failing, since this is no database action.
         dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)

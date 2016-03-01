@@ -43,4 +43,4 @@ class Command(BaseCommand):
             DeprecationWarning, __file__, 0
         )
 
-        call_command("dsmr_backend", **options)
+        call_command('dsmr_backend', **options)
