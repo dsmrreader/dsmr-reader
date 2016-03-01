@@ -1,12 +1,19 @@
 
 
 
-v0.12 (β) - 2016-xx-xx
+v0.13 (β) - 2016-xx-xx
+======================
+-
+
+
+
+v0.12 (β) - 2016-03-01
 ======================
 - Archive: View past days details (#61).
+- Dashboard: Consumption total for current month (#60).
 - Check whether gas readings are optional (#34).
 - Django security releases issued: 1.8.10 (#68).
-- 
+- Notes display in archive (#69).
 
 
 

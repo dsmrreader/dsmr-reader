@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}{% trans "Archive" %}{% endblock %}
-{% block header %}{% trans "Archive" %} &nbsp; <i class="fa fa fa-history"></i>{% endblock %}
+{% block header %}{% trans "Archive" %} &nbsp; <i class="fa fa-calendar-check-o"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -15,34 +15,33 @@
 {% endif %}
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Select day{% endblocktrans %}
                 </header>
                 <div class="panel-body">
 				    <div class="row">
-                         <div class="col-md-offset-4 col-md-4">
-                             <div class="sm-st-info form-group">
-                                 <input class="form-control" id="daterangepicker" type="text" size="10" style="width: 128px;" />
-                             </div>
-                         </div>
+                        <div class="col-md-offset-1 col-md-10">
+                            <div class="sm-st-info form-group">
+                                <input class="form-control" id="daterangepicker" type="text" />
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-offset-2 col-md-2">
+                        <div class="col-md-6">
                             <span class="sm-st-icon st-blue" id="daterangepicker_trigger_backwards" style="cursor: pointer;"><i class="fa fa-arrow-left"></i></span>
                         </div>
-                        <div class="col-md-offset-1 col-md-2">
-                            <span class="sm-st-icon st-orange" id="daterangepicker_trigger" style="cursor: pointer;"><i class="fa fa-calendar-check-o"></i></span>
+                        <div class="col-md-6">
+                            <span class="sm-st-icon st-blue" id="daterangepicker_trigger_forwards" style="cursor: pointer;"><i class="fa fa-arrow-right"></i></span>
                         </div>
-	                    <div class="col-md-offset-1 col-md-2">
-		                    <span class="sm-st-icon st-blue" id="daterangepicker_trigger_forwards" style="cursor: pointer;"><i class="fa fa-arrow-right"></i></span>
-		                </div>
-	                </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="day-statistics-holder"></div>
+        <div class="col-md-10">
+            <div id="day-statistics-holder"></div>
+        </div>
     </div>
     
     <div class="row" id="electricity-chart-holder" style="display: none;">
@@ -52,7 +51,7 @@
                     {% blocktrans %}Electricity usage{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
                 <div class="panel-body">
-                	<canvas id="electricity-chart" height="150"></canvas>
+                	<canvas id="electricity-chart" style="height: 150px;"></canvas>
                     <div id="electricity-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
@@ -66,7 +65,7 @@
                     {% blocktrans %}Gas usage{% endblocktrans %} {% trans "(in m<sup>3</sup>)" %}
                 </header>
                 <div class="panel-body">
-                	<canvas id="gas-chart" height="150"></canvas>
+                	<canvas id="gas-chart" style="height: 150px;"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -118,11 +117,6 @@
        	            }
         	    });
         		
-        		/* When large icon is clicked. */
-        		$("#daterangepicker_trigger").click(function(){
-        			$('#daterangepicker').click();
-        		});
-
         		/* When the left arrow (backwards) is clicked. */
         		$("#daterangepicker_trigger_backwards").click(function(){
         			$('#daterangepicker').data('daterangepicker').setStartDate(
@@ -146,7 +140,7 @@
        			});
 
         		/* Initial day selection. */
-        		$('#daterangepicker_trigger').click();
+        		$('#daterangepicker').trigger('apply.daterangepicker');
         	});
             
             function update_day_statistics(selected_day)
@@ -154,13 +148,7 @@
                 $.ajax({
                     url: "{% url 'frontend:archive-xhr-day' %}",
                     data: {'date': selected_day},
-                    beforeSend: function(xhr) {
-                        $("#daterangepicker_trigger").removeClass("st-orange").addClass("st-blue");
-                    }
-                }).error(function(jqXHR, textStatus, errorThrown ){
-                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
                 }).done(function(data) {
-                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
                     $("#day-statistics-holder").html(data);
                 });
             }
@@ -171,14 +159,7 @@
                     url: "{% url 'frontend:archive-xhr-hour' %}",
                     dataType: "json",
                     data: {'date': selected_day},
-                    beforeSend: function(xhr) {
-                        $("#daterangepicker_trigger").removeClass("st-orange").addClass("st-blue");
-                    }
-                }).error(function(jqXHR, textStatus, errorThrown ){
-                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-red");
                 }).done(function(data) {
-                    $("#daterangepicker_trigger").removeClass("st-blue").addClass("st-green");
-                    
                     render_electricity_chart(
                     	data.x, data.electricity1, data.electricity2, data.electricity1_returned, data.electricity2_returned
                     )

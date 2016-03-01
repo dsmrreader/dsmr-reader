@@ -1,47 +1,51 @@
 {% load humanize %}
 {% load i18n %} 
 
-        <div class="col-md-8">
-            <div class="panel">
-                <header class="panel-heading">
-                    {{ statistics.day|date:day_format }}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <th class="col-md-2"></th>
-                            <th class="col-md-2">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
-                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
-                            <th class="col-md-2">{% trans "Energy price" %} (&euro;)</th>
-                            <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
-                            <td><span class="badge bg-red">{{ statistics.electricity1|default:'-' }} </span></td>
-                            <td><span class="badge bg-green">{{ statistics.electricity1_returned|default:'-' }}</span></td>
-                            <td><span class="badge bg-facebook">{{ energy_price.electricity_1_price|default:'-' }}</span></td>
-                            <td><span class="badge bg-black">{{ statistics.electricity1_cost|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Electricity 2 (peak)" %}</td>
-                            <td><span class="badge bg-red">{{ statistics.electricity2|default:'-' }}</span></td>
-                            <td><span class="badge bg-green">{{ statistics.electricity2_returned|default:'-' }}</span></td>
-                            <td><span class="badge bg-facebook">{{ energy_price.electricity_2_price|default:'-' }}</span></td>
-                            <td><span class="badge bg-black">{{ statistics.electricity2_cost|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ statistics.gas|default:'-' }}</span></td>
-                            <td>&nbsp;</td>
-                            <td><span class="badge bg-facebook">{{ energy_price.gas_price|default:'-' }}</span></td>
-                            <td><span class="badge bg-black">{{ statistics.gas_cost|default:'-' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: bold;">{% trans "Total" %}</td>
-                            <td colspan="3">&nbsp;</td>
-                            <td><span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span></td>
-                        </tr>
-                    </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
+<div class="panel">
+    <header class="panel-heading">
+        {{ statistics.day|date:day_format }}
+    </header>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <tr>
+                <th class="col-md-2"></th>
+                <th class="col-md-2">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
+                <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
+                <th class="col-md-2">{% trans "Energy price" %} (&euro;)</th>
+                <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
+            </tr>
+            <tr>
+                <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                <td><span class="badge bg-red">{{ statistics.electricity1|default:'-' }} </span></td>
+                <td><span class="badge bg-green">{{ statistics.electricity1_returned|default:'-' }}</span></td>
+                <td><span class="badge bg-facebook">{{ energy_price.electricity_1_price|default:'-' }}</span></td>
+                <td><span class="badge bg-black">{{ statistics.electricity1_cost|default:'-' }}</span></td>
+            </tr>
+            <tr>
+                <td>{% trans "Electricity 2 (peak)" %}</td>
+                <td><span class="badge bg-red">{{ statistics.electricity2|default:'-' }}</span></td>
+                <td><span class="badge bg-green">{{ statistics.electricity2_returned|default:'-' }}</span></td>
+                <td><span class="badge bg-facebook">{{ energy_price.electricity_2_price|default:'-' }}</span></td>
+                <td><span class="badge bg-black">{{ statistics.electricity2_cost|default:'-' }}</span></td>
+            </tr>
+            <tr>
+                <td>{% trans "Gas" %}</td>
+                <td><span class="badge bg-orange">{{ statistics.gas|default:'-' }}</span></td>
+                <td>&nbsp;</td>
+                <td><span class="badge bg-facebook">{{ energy_price.gas_price|default:'-' }}</span></td>
+                <td><span class="badge bg-black">{{ statistics.gas_cost|default:'-' }}</span></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">{% trans "Total" %}</td>
+                <td colspan="3">&nbsp;</td>
+                <td><span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span></td>
+            </tr>
+        </table>
+        
+{% if notes %}
+	    {% for current_note in notes %}
+	    <div class="alert alert-warning" role="alert">{{ current_note.description }}</div>
+	    {% endfor %}
+{% endif %}
+    </div><!-- /.panel-body -->
+</div><!-- /.panel -->

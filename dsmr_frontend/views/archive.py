@@ -7,6 +7,7 @@ from django.utils import timezone, formats
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_stats.models.note import Note
 
 
 class Archive(TemplateView):
@@ -36,6 +37,7 @@ class ArchiveXhrDayStatistics(TemplateView):
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
             self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
+
         try:
             context_data['statistics'] = DayStatistics.objects.get(
                 day=selected_datetime.date()
@@ -53,6 +55,8 @@ class ArchiveXhrDayStatistics(TemplateView):
         except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
             # Default to zero prices.
             context_data['energy_price'] = EnergySupplierPrice()
+
+        context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
 
         return context_data
 
