@@ -10,7 +10,7 @@ pip3 install -r dsmrreader/provisioning/requirements/base.txt
 
 echo ""
 echo " --- Checking & synchronizing database changes/migrations."
-./manage.py migrate
+./manage.py migrate --noinput
 
 echo ""
 echo " --- Checking & synchronizing static file changes."
