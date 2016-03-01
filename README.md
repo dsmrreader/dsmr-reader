@@ -9,6 +9,7 @@
 * Installation guide
     * Application Installation
     * Data preservation & backups
+    * Application updates (bug fixes & new features)
     * (Optional) Operating System Installation
 * Feedback
 * Licence
