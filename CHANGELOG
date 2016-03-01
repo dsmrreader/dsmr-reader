@@ -5,7 +5,8 @@ v0.12 (β) - 2016-xx-xx
 ======================
 - Archive: View past days details (#61).
 - Check whether gas readings are optional (#34).
--
+- Django security releases issued: 1.8.10 (#68).
+- 
 
 
 
