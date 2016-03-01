@@ -2,7 +2,6 @@ import json
 
 from django.views.generic.base import TemplateView
 
-from dsmr_stats.models.settings import StatsSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_consumption.services
 import dsmr_stats.services
@@ -13,7 +12,6 @@ class Trends(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Trends, self).get_context_data(**kwargs)
-        context_data['stats_settings'] = StatsSettings.get_solo()
 
         # Average of 'currently delivered' in Watt.
         avg_electricity_delivered_per_hour = dsmr_consumption.services.average_electricity_delivered_by_hour()

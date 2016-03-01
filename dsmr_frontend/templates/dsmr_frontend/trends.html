@@ -15,18 +15,10 @@
     </div>
 {% endif %}
 
-{% if stats_settings.track %}
     <div class="alert alert-info" role="alert">
     {% blocktrans %}All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account!{% endblocktrans %}
     {% blocktrans %}Current data displayed averages {{ hour_statistics_count }} hour(s), among {{ day_statistics_count }} day(s).{% endblocktrans %}
     </div>
-{% else %}
-    <div class="alert alert-danger" role="alert">
-    {% blocktrans %}Your current trends and statistics settings do not allow to track trends! You should enable it to have accurate (or any) data below.{% endblocktrans %}
-    <br />
-    {% blocktrans %}Trends might be recalculated retroactively, depending on whether all historic DSMR source readings are still available.{% endblocktrans %}
-    </div>
-{% endif %}
 
     <div class="row">
         <div class="col-md-6">

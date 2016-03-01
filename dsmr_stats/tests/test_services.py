@@ -6,27 +6,12 @@ from django.utils import timezone
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
-from dsmr_stats.models.settings import StatsSettings
 import dsmr_stats.services
 
 
 class TestServices(CallCommandStdoutMixin, TestCase):
     """ Test 'dsmr_backend' management command. """
     fixtures = ['dsmr_stats/electricity-consumption.json', 'dsmr_stats/gas-consumption.json']
-
-    @mock.patch('dsmr_stats.services.create_hourly_statistics')
-    @mock.patch('dsmr_stats.services.create_daily_statistics')
-    def test_analyze_service_track_setting(self, daily_statistics_mock, hourly_statistics_mock):
-        """ Test whether we respect the statistics tracking setting. """
-        stats_settings = StatsSettings.get_solo()
-        stats_settings.track = False
-        stats_settings.save()
-
-        self.assertFalse(daily_statistics_mock.called)
-        self.assertFalse(hourly_statistics_mock.called)
-        dsmr_stats.services.analyze()
-        self.assertFalse(daily_statistics_mock.called)
-        self.assertFalse(hourly_statistics_mock.called)
 
     def test_analyze_service(self):
         self.assertFalse(DayStatistics.objects.exists())

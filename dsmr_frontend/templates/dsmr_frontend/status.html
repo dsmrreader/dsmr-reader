@@ -96,32 +96,6 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_stats_statssettings_change' stats_settings.pk %}" class="btn {% if stats_settings.track %}btn-success{% else %}alert-warning{% endif %}">
-                        <i class="fa fa-cogs"></i>
-                    </a> &nbsp; {{ stats_settings }}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <th class="col-md-3">{% trans "Setting" %}</th>
-                            <th class="col-md-3">{% trans "Status" %} </th>
-                            <th class="col-md-6">{% trans "Description" %} </th>
-                        </tr>
-                        <tr{% if not stats_settings.track %} class="alert alert-warning"{% endif %}>
-                            <td>{% model_meta_info stats_settings 'track' 'verbose_name' %}</td>
-                            <td>{% if stats_settings.track %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
-                            <td>{% model_meta_info stats_settings 'track' 'help_text' %}</td>
-                        </tr>
-                    </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-    
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
                     <a href="{% url 'admin:dsmr_consumption_consumptionsettings_change' consumption_settings.pk %}" class="btn btn-success">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp;{{ consumption_settings }} 

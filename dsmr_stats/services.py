@@ -3,7 +3,6 @@ from django.db.models.aggregates import Avg
 from django.utils import timezone
 from django.core.cache import cache
 
-from dsmr_stats.models.settings import StatsSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 import dsmr_consumption.services
@@ -11,12 +10,6 @@ import dsmr_consumption.services
 
 def analyze():
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
-    stats_settings = StatsSettings.get_solo()
-
-    # Respect user setting.
-    if not stats_settings.track:
-        return
-
     try:
         # Determine the starting date used to construct new statistics.
         day_statistic = DayStatistics.objects.all().order_by('-day')[0]

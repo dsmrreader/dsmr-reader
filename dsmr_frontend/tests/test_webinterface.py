@@ -10,7 +10,6 @@ from dsmr_weather.models.reading import TemperatureReading
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
-from dsmr_stats.models.settings import StatsSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_stats.models.note import Note
@@ -198,9 +197,6 @@ class TestViews(TestCase):
 
         self.assertIn('frontend_settings', response.context)
         self.assertIsInstance(response.context['frontend_settings'], FrontendSettings)
-
-        self.assertIn('stats_settings', response.context)
-        self.assertIsInstance(response.context['stats_settings'], StatsSettings)
 
         self.assertIn('weather_settings', response.context)
         self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
