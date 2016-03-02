@@ -4,6 +4,7 @@
 v0.13 (β) - 2016-xx-xx
 ======================
 - Delete StatsSettings(.track) settings model (#71).
+- Drop deprecated commands (#22).
 - 
 
 
