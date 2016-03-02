@@ -100,7 +100,7 @@ Misc utils, required for webserver, application server and cloning the applicati
 
 Install `cu`. The CU program allows easy testing for your DSMR serial connection. It's basic but very effective to test whether your serial cable setup works properly.
 
-`sudo apt-get install cu`
+`sudo apt-get install -y cu`
 
 
 ### Application user ###
@@ -345,10 +345,10 @@ sysctl -p /etc/sysctl.conf
 ```
 
 #### Sudo ####
-This will allow you to use sudo: `apt-get install sudo`  *(headless only)*
+This will allow you to use sudo: `apt-get install -y sudo`  *(headless only)*
 
 #### Text editor ####
-My favorite is VIM, but just choose your own: `sudo apt-get install vim`
+My favorite is VIM, but just choose your own: `sudo apt-get install -y vim`
 
 #### Updates ####
 Make sure you are up to date:
@@ -361,7 +361,7 @@ sudo apt-get upgrade
 
 
 #### raspi-config ####
-Install this RaspberryPi utility: `sudo apt-get install raspi-config`
+Install this RaspberryPi utility: `sudo apt-get install -y raspi-config`
 
 Now run it: `raspi-config`
 
