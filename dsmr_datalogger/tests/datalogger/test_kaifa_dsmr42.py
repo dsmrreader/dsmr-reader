@@ -2,15 +2,11 @@ from unittest import mock
 from datetime import datetime
 from decimal import Decimal
 
-from django.core.management import CommandError
 from django.test import TestCase
-import serial
 import pytz
 
 from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
-from dsmr_datalogger.models.settings import DataloggerSettings
-import dsmr_datalogger.services
 
 
 class TestKaifaDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
