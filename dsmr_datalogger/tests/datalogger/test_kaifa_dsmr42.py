@@ -59,3 +59,32 @@ class TestKaifaDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
+
+    def test_reading_values(self):
+        """ Test whether dsmr_datalogger reads the correct values. """
+        self._fake_dsmr_reading()
+        self.assertTrue(DsmrReading.objects.exists())
+        reading = DsmrReading.objects.get()
+        self.assertEqual(
+            reading.timestamp,
+            datetime(2016, 3, 3, 15, 43, 47, tzinfo=pytz.UTC)
+        )
+        self.assertEqual(reading.electricity_delivered_1, Decimal('1073.079'))
+        self.assertEqual(reading.electricity_returned_1, Decimal('0'))
+        self.assertEqual(reading.electricity_delivered_2, Decimal('1263.199'))
+        self.assertEqual(reading.electricity_returned_2, Decimal('0'))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.143'))
+        self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
+        self.assertEqual(reading.extra_device_timestamp, None)
+        self.assertEqual(reading.extra_device_delivered, None)
+
+        meter_statistics = MeterStatistics.get_solo()
+        self.assertEqual(meter_statistics.electricity_tariff, 2)
+        self.assertEqual(meter_statistics.power_failure_count, 6)
+        self.assertEqual(meter_statistics.long_power_failure_count, 3)
+        self.assertEqual(meter_statistics.voltage_sag_count_l1, 0)
+        self.assertEqual(meter_statistics.voltage_sag_count_l2, None)
+        self.assertEqual(meter_statistics.voltage_sag_count_l3, None)
+        self.assertEqual(meter_statistics.voltage_swell_count_l1, 0)
+        self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
+        self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
