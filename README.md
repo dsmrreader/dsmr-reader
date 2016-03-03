@@ -421,6 +421,7 @@ Dutch Smart Meter reading specifications, data cables, examples and hints:
 
 * [SOS Solutions](https://www.sossolutions.nl/)
 
-Pull requests & forking:
+Pull requests, forking & testing:
 
 * [Jeroen Peters](https://www.linkedin.com/in/jeroenpeters1986)
+* [Daniel ter Horst](https://www.linkedin.com/in/danielterhorst)

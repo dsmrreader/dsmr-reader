@@ -80,7 +80,8 @@ def telegram_to_reading(data):
         reading_fields.remove('id')
         return reading_fields
 
-    parsed_reading = {k: None for k in _get_reading_fields()}  # Defaults all fields to NULL.
+    # Defaults all fields to NULL.
+    parsed_reading = {k: None for k in _get_reading_fields() + _get_statistics_fields()}
     field_splitter = re.compile(r'([^(]+)\((.+)\)')
 
     for current_line in data.split("\n"):
