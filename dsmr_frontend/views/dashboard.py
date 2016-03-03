@@ -99,7 +99,7 @@ class Dashboard(TemplateView):
         )
         now = timezone.localtime(timezone.now()).date()
         start_of_month = timezone.datetime(year=now.year, month=now.month, day=1)
-        context_data['month_total'] = DayStatistics.objects.filter(
+        month_statistics = DayStatistics.objects.filter(
             day__gte=start_of_month
         ).aggregate(
             total_electricity1=Sum('electricity1'),
@@ -111,4 +111,22 @@ class Dashboard(TemplateView):
             total_gas=Sum('gas'),
             total_gas_cost=Sum('gas_cost'),
         )
+        month_statistics['total_cost'] = 0
+
+        try:
+            month_statistics['total_cost'] += month_statistics['total_electricity1_cost']
+        except TypeError:
+            pass
+
+        try:
+            month_statistics['total_cost'] += month_statistics['total_electricity2_cost']
+        except TypeError:
+            pass
+
+        try:
+            month_statistics['total_cost'] += month_statistics['total_gas_cost']
+        except TypeError:
+            pass
+
+        context_data['month_statistics'] = month_statistics
         return context_data

@@ -15,7 +15,7 @@
     </div>
 {% endif %}
 
-    {% if month_total %}
+    {% if month_statistics %}
     <div class="row consumption-block">
         <div class="col-md-12">
             <div class="panel">
@@ -32,22 +32,22 @@
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 1 (off-peak)" %}</td>
-                            <td><span class="badge bg-red">{{ month_total.total_electricity1|default:'-' }} </span></td>
-                            <td><span class="badge bg-green">{{ month_total.total_electricity1_returned|default:'-' }}</span></td>
-                            <td><span class="badge bg-black">{{ month_total.total_electricity1_cost|default:'-' }}</span></td>
+                            <td><span class="badge bg-red">{{ month_statistics.total_electricity1|default:'-' }} </span></td>
+                            <td><span class="badge bg-green">{{ month_statistics.total_electricity1_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ month_statistics.total_electricity1_cost|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 (peak)" %}</td>
-                            <td><span class="badge bg-red">{{ month_total.total_electricity2|default:'-' }}</span></td>
-                            <td><span class="badge bg-green">{{ month_total.total_electricity2_returned|default:'-' }}</span></td>
-                            <td><span class="badge bg-black">{{ month_total.total_electricity2_cost|default:'-' }}</span></td>
+                            <td><span class="badge bg-red">{{ month_statistics.total_electricity2|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{{ month_statistics.total_electricity2_returned|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ month_statistics.total_electricity2_cost|default:'-' }}</span></td>
                         </tr>
-                        {% if month_total.total_gas %}
+                        {% if month_statistics.total_gas %}
                         <tr>
                             <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ month_total.total_gas|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ month_statistics.total_gas|default:'-' }}</span></td>
                             <td>&nbsp;</td>
-                            <td><span class="badge bg-black">{{ month_total.total_gas_cost|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ month_statistics.total_gas_cost|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
                         <tr>
@@ -55,7 +55,7 @@
                             <td colspan="2">&nbsp;</td>
                             <td>
 	                            <span class="badge bg-black">
-	                                {{ month_total.total_electricity1_cost|add:month_total.total_electricity2_cost|add:month_total.total_gas_cost }}
+	                                {{ month_statistics.total_cost }}
 	                            </span>
                             </td>
                         </tr>
