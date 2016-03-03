@@ -8,6 +8,7 @@ v0.13 (β) - 2016-xx-xx
 - Datalogger doesn't work properly with DSMR 4.2 (KAIFA-METER) (#73).
 - Dashboard month statistics costs does not add up (#75).
 - Log unhandled exceptions and errors (#65).
+- Datalogger crashes with IntegrityError because 'timestamp' is null (#74).
 - 
 
 
