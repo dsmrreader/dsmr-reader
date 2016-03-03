@@ -11,7 +11,10 @@
     * Data preservation & backups
     * Application updates (bug fixes & new features)
     * (Optional) Operating System Installation
-* Feedback
+* Contribution & feedback
+    * P1 Telegram snaphot
+    * Feedback
+    * Sentry
 * Licence
 * Credits
 
@@ -24,10 +27,10 @@ There are plenty of 'scripts' available online for performing DSMR readings. Thi
 I advise to only use this tool when you have basic Linux knowledge or have any interest in the components used. I might create an installer script later, but I'll focus on the build of features first.
 
 ## Dependencies & requirements ##
-* RaspberryPi v1 B+ *(minimal v1 B required but v2 is strongly recommended)*.
+* RaspberryPi v2+ *(recommended)*.
 * Raspbian *(or Debian based distro)*.
 * Python 3.3 or 3.4 *(Included in the latest Raspbian named "Jessie")*.
-* Smart Meter with support for at least DSMR 4.0/4.2 *(tested with Landis + Gyr E350 DSMR4)*.
+* Smart Meter with support for at least DSMR 4.0/4.2 *(tested with Landis + Gyr E350 DSMR4, Kaifa)*.
 * Minimal 100 MB of disk space on RaspberryPi *(for application installation & virtualenv)*. More disk space is required for storing all reader data captured *(optional)*. I generally advise to use a 8+ GB SD card.
 * Smart meter P1 data cable *(can be purchased online and they cost around 20 Euro's)*.
 * Basic Linux knowledge for deployment, debugging and troubleshooting. 
@@ -234,7 +237,7 @@ sudo service nginx reload
 ```
 
 
-### Supervisor. ###
+### Supervisor ###
 Now we configure [Supervisor](http://supervisord.org/), which is used to run our application and also all background jobs used. It's also configured to bring the entire applciation up again after a shutdown or reboot. Each job has it's own configuration file, so make sure to copy them all:  
 
 `sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/`
@@ -379,12 +382,67 @@ Running the headless Raspbian netinstall? You might like Bash completion. Check 
 
 Running the full Rasbian install? You should check whether you require the [Wolfram Engine](http://www.wolfram.com/raspberry-pi/), which is installed by default, but takes about a whopping 500 MB disk space! Run `sudo apt-get purge wolfram-engine` if you don't need it.
 
-# Feedback #
-All feedback and input is, as always, very much appreciated! Please send an e-mail to dsmr (at) dennissiemensma (dot) nl. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
+
+# Contribution & feedback #
+Would you like to contribute? 
+
+## P1 Telegram snaphot ##
+Please start by creating an issue with a snapshot of a DSMR telegram. You can find it by executing `sudo supervisorctl tail -n 100 dsmr_datalogger` on your DSMR-reader system. You may omit your unique meter identification, which are lines starting with `0-0:96.1.1` or `0-1:96.1.0`, followed by the meter ID.
+
+## Feedback ##
+Also all feedback and input is, as always, very much appreciated! Please create an issue. It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away. 
+
+## Sentry ##
+Another way of contributing is reporting any errors your reader encounters. You can install [Sentry](https://docs.getsentry.com/hosted/), which will log any unhandled errors, even the ones you do not see.
+
+Create separate user for sentry:
+
+`sudo useradd sentry --home-dir /home/sentry --create-home --shell /bin/bash`
+
+`sudo apt-get install -y python-dev python-libxml2 libxml2-dev libxslt1-dev libffi-dev`
+
+Create database & user (postgres is recommended):
+
+```
+sudo sudo -u postgres createuser -DSR sentry
+sudo sudo -u postgres createdb -O sentry sentry
+sudo sudo -u postgres psql -c "alter user sentry with password 'sentry';"
+
+OR
+
+sudo mysqladmin create sentry
+echo "CREATE USER 'sentry'@'localhost' IDENTIFIED BY 'sentry';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
+echo "GRANT ALL ON sentry.* TO 'sentry'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
+mysqladmin reload
+```
+
+Login and create virtualenv (Python 2x):
+
+`su - sentry`
+
+`mkdir ~/.virtualenvs`
+
+`virtualenv ~/.virtualenvs/sentry --no-site-packages`
+
+Add this to your `~/.bashrc` and logout / login to load your virtualenv:
+
+`source ~/.virtualenvs/sentry/bin/activate`
+
+Install Sentry (8.2.1 or higher):
+
+`pip install sentry==8.2.1`
+
+Create config:
+
+`sentry init`
+
+Edit config and set database settings (user `sentry`, password `sentry`)
+`vi .sentry/sentry.conf.py`
+
 
 
 # Licence #
-The official licence for using this project can be found in the **LICENCE.txt** file. In short, only non-commercial use is allowed.
+The official licence for using this project can be found in the **LICENCE.txt** file. In short, only non-commercial use is allowed for personal usage.
 
 
 # Credits #
