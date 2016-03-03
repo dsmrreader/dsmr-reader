@@ -6,6 +6,7 @@ v0.13 (β) - 2016-xx-xx
 - Delete StatsSettings(.track) settings model (#71).
 - Drop deprecated commands (#22).
 - Datalogger doesn't work properly with DSMR 4.2 (KAIFA-METER) (#73).
+- Dashboard month statistics costs does not add up (#75).
 - Log unhandled exceptions and errors (#65).
 - 
 
