@@ -46,6 +46,7 @@ def read_telegram():
     # This might fail, but nothing we can do so just let it crash.
     serial_handle.open()
 
+    telegram_start_seen = False
     buffer = ''
 
     while True:
@@ -57,10 +58,16 @@ def read_telegram():
         except TypeError:
             pass
 
-        buffer += data
+        # This guarantees we will only parse complete telegrams. (issue #74)
+        if data.startswith('/'):
+            telegram_start_seen = True
 
-        # Telegrams start with '/' and ends with '!'. So we will use them as delimiters.
-        if data.startswith('!'):
+        # Delay any logging until we've seen the start of a telegram.
+        if telegram_start_seen:
+            buffer += data
+
+        # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
+        if data.startswith('!') and telegram_start_seen:
             return buffer
 
 

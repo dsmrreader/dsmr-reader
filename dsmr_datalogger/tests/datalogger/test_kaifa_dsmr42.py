@@ -9,7 +9,7 @@ from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 
 
-class TestKaifaDsmrV42Datalogger(CallCommandStdoutMixin, TestCase):
+class TestDatalogger(CallCommandStdoutMixin, TestCase):
     """ Test Kaifa DSMR v4.2, without gas support. """
 
     def _dsmr_dummy_data(self):

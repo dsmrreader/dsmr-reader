@@ -9,7 +9,7 @@ from dsmr_backend.tests.mixins import CallCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 
 
-class TestLandisGyrDsmrV40Datalogger(CallCommandStdoutMixin, TestCase):
+class TestDatalogger(CallCommandStdoutMixin, TestCase):
     """ Test Landis+Gyr 350 DSMR v4.0. """
     def _dsmr_dummy_data(self):
         return [
