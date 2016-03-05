@@ -11,6 +11,7 @@ v0.13 (β) - 2016-xx-xx
 - Datalogger crashes with IntegrityError because 'timestamp' is null (#74).
 - Trends are always shown in UTC (#76).
 - Squash migrations (#31).
+- Display 'electricity returned' graph in dashboard (#81).
 - 
 
 

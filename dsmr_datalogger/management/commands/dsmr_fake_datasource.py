@@ -37,8 +37,6 @@ class Command(BaseCommand):
         read_telegram_mock.return_value = self._generate_data()
         call_command('dsmr_datalogger')
 
-        time.sleep(5)
-
     def _generate_data(self):
         """ Generates 'random' data, but in a way that it keeps incrementing. """
         now = timezone.localtime(timezone.now())  # Must be local.

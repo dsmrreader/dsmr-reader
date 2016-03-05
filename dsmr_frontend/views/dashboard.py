@@ -49,6 +49,9 @@ class Dashboard(TemplateView):
         context_data['electricity_y'] = json.dumps(
             [float(x.currently_delivered * 1000) for x in electricity]
         )
+        context_data['electricity_returned_y'] = json.dumps(
+            [float(x.currently_returned * 1000) for x in electricity]
+        )
 
         context_data['gas_x'] = json.dumps(
             [formats.date_format(

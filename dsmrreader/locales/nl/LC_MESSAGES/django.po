@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-01 23:13+0100\n"
-"PO-Revision-Date: 2016-02-27 15:07+0100\n"
+"POT-Creation-Date: 2016-03-05 19:10+0100\n"
+"PO-Revision-Date: 2016-03-05 19:06+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -369,6 +369,9 @@ msgstr "m<sup>3</sup> gas verbruikt in uur tijd"
 msgid "Recent electricity delivered (watt)"
 msgstr "Recent elektriciteitsverbruik  (Watt)"
 
+msgid "Recent electricity returned (watt)"
+msgstr "Recente teruglevering elektriciteit (Watt)"
+
 msgid "Recent gas delivered (m<sup>3</sup>)"
 msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 
@@ -380,6 +383,9 @@ msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinst
 
 msgid "Electricity"
 msgstr "Elektriciteit"
+
+msgid "Electricity returned"
+msgstr "Elektriciteit teruggeleverd"
 
 msgid "Temperature"
 msgstr "Temperatuur"
@@ -490,32 +496,6 @@ msgstr "Verhouding gemiddeld elektriciteitsverbruik per daguur in kWh (piektarie
 
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
-
-msgid "Compacts existing DSMR readings into consumption points."
-msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
-
-#, python-format
-msgid "The max number of readings to compact this run (default: %(default)s)"
-msgstr "Het maximum aantal uitlezingen dat per keer gegroepeerd wordt  (standaard: %(default)s)"
-
-msgid "DEPRECATED: Moved to settings in database."
-msgstr "UITGEFASEERD: Instellingen zijn verplaatst naar de database."
-
-msgid "Purges all consumption data (DELETES IT!) and marks all readings as unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL HISTORIC READINGS!"
-msgstr "Wist alle verbruiksgegevens (VERWIJDERT HET!) en markeert alle uitlezingen als onverwerkt. Gebruik dit alleen als je wisselt van groeperingsnauwkeurigheid EN JE ALLE DSMR-METINGEN NOG HEBT!"
-
-msgid "dsmr_stats_compactor is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_backend"
-msgstr "dsmr_stats_compactor wordt UITGEFASEERD in versie 1.0, gebruik alsjeblieft dsmr_backend"
-
-msgid "Polls the serial port for DSMR telegram and performs a reading."
-msgstr "Controleert de seriele poort voor DSMR-gegevens en leest deze uit."
-
-#, python-format
-msgid "COM-port connected to Smartmeter (default: %(default)s)"
-msgstr "COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
-
-msgid "dsmr_stats_datalogger is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger"
-msgstr "dsmr_stats_datalogger wordt UITGEFASEERD in versie 1.0, gebruik alsjeblieft dsmr_datalogger"
 
 msgid "Day"
 msgstr "Dag"
@@ -708,6 +688,30 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Compacts existing DSMR readings into consumption points."
+#~ msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
+
+#~ msgid "The max number of readings to compact this run (default: %(default)s)"
+#~ msgstr "Het maximum aantal uitlezingen dat per keer gegroepeerd wordt  (standaard: %(default)s)"
+
+#~ msgid "DEPRECATED: Moved to settings in database."
+#~ msgstr "UITGEFASEERD: Instellingen zijn verplaatst naar de database."
+
+#~ msgid "Purges all consumption data (DELETES IT!) and marks all readings as unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL HISTORIC READINGS!"
+#~ msgstr "Wist alle verbruiksgegevens (VERWIJDERT HET!) en markeert alle uitlezingen als onverwerkt. Gebruik dit alleen als je wisselt van groeperingsnauwkeurigheid EN JE ALLE DSMR-METINGEN NOG HEBT!"
+
+#~ msgid "dsmr_stats_compactor is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_backend"
+#~ msgstr "dsmr_stats_compactor wordt UITGEFASEERD in versie 1.0, gebruik alsjeblieft dsmr_backend"
+
+#~ msgid "Polls the serial port for DSMR telegram and performs a reading."
+#~ msgstr "Controleert de seriele poort voor DSMR-gegevens en leest deze uit."
+
+#~ msgid "COM-port connected to Smartmeter (default: %(default)s)"
+#~ msgstr "COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
+
+#~ msgid "dsmr_stats_datalogger is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger"
+#~ msgstr "dsmr_stats_datalogger wordt UITGEFASEERD in versie 1.0, gebruik alsjeblieft dsmr_datalogger"
 
 #~ msgid "Your current trends and statistics settings do not allow to track trends! You should enable it to have accurate (or any) data below."
 #~ msgstr "Je huidige trends- en statistiekeninstellingen staan niet toe om trends bij te houden. Pas dit aan om accurate (of uberhaupt) gegevens  hieronder te zien."

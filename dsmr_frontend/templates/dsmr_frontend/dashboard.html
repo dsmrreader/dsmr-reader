@@ -166,6 +166,7 @@
     </div><!-- /.row -->
     {% endif %}
 	
+    {% if latest_electricity %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -178,6 +179,22 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    {% endif %}
+    
+    {% if latest_electricity_returned %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent electricity returned (watt)" %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="electricity-returned-chart" height="200"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    {% endif %}
 
     {% if consumption and consumption.gas %}
     <div class="row">
@@ -234,14 +251,24 @@
                 Chart.defaults.global.animation = false;
                 Chart.defaults.global.segmentShowStroke = true;
                 
+            {% if latest_electricity %}
                 render_electricity_chart();
-                render_gas_chart();
+            {% endif %}
 
-                {% if track_temperature %}
+            {% if latest_electricity_returned %}
+                render_electricity_returned_chart();
+            {% endif %}
+            
+            {% if consumption and consumption.gas %}
+                render_gas_chart();
+            {% endif %}
+
+            {% if track_temperature %}
                 render_temperature_chart();
-                {% endif %}
+            {% endif %}
         	});
         	
+       {% if latest_electricity %}
 		   	function render_electricity_chart()
 		   	{
 		   		var data = {
@@ -261,7 +288,31 @@
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data, line_options);
    			}
+        {% endif %}
+        
+        {% if latest_electricity_returned %}
+             function render_electricity_returned_chart()
+             {
+                 var data = {
+                     labels: {{ electricity_x|safe }},
+                     datasets: [{
+                         data: {{ electricity_returned_y|safe }},
+                         label: "{% trans 'Electricity returned' %}",                     
+                         fillColor: "rgba(255,255,255,0.2)",
+                         strokeColor: "rgba(39,194,76,1)",
+                         pointColor: "rgba(39,194,76,1)",
+                         pointStrokeColor: "#fff",
+                         pointHighlightFill: "#fff",
+                         pointHighlightStroke: "rgba(39,194,76,1)"
+                     }]
+                 };
+     
+                 var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
+                 new Chart(ctx).Line(data, line_options);
+             }
+         {% endif %}
 		   	
+        {% if consumption and consumption.gas %}
 		   	function render_gas_chart()
 		   	{
 		   		var data = {
@@ -281,6 +332,7 @@
 	   			var ctx = $("#gas-chart").get(0).getContext("2d");
 	   			new Chart(ctx).Line(data, line_options);
    			}
+	        {% endif %}
 
 	    {% if track_temperature %}
             function render_temperature_chart()

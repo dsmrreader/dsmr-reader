@@ -144,7 +144,7 @@ def average_consumption_by_hour():
     set_time_zone_sql = connection.ops.set_time_zone_sql()
 
     if set_time_zone_sql:
-        connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])
+        connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])  # pragma: no cover
 
     return HourStatistics.objects.extra({
         'hour_start': sql_extra
