@@ -2,7 +2,13 @@
 
 echo ""
 echo " --- Pulling remote repository for new commits..."
-git pull
+git fetch
+
+echo " --- The following changes will be applied (if any)."
+git log ..origin/master
+
+echo " --- Merging/updating checkout."
+git merge FETCH_HEAD
 
 echo ""
 echo " --- Checking & synchronizing base requirements for changes."
