@@ -11,18 +11,9 @@ def recalculate_gas_consumption(apps, schema):
     DsmrReading = apps.get_model('dsmr_datalogger', 'DsmrReading')
     broken_since = timezone.make_aware(timezone.datetime(2016, 2, 22))
 
-    print()
-    print('Recalculating gas consumption since {}'.format(broken_since))
-
     for current_consumption in GasConsumption.objects.filter(read_at__gt=broken_since).order_by('read_at'):
-        print()
-        print(' - {}: {}'.format(current_consumption.read_at, current_consumption.currently_delivered))
-
         if current_consumption.currently_delivered > 0:
-            print(' --- Not empty, must be OK')
             continue
-
-        print(' --- EMPTY value, rechecking source reading...')
 
         # Find the a reading of the current consumption hour. Doesn't matter which one.
         source_reading = DsmrReading.objects.filter(
@@ -36,7 +27,6 @@ def recalculate_gas_consumption(apps, schema):
         )
         actual_diff = source_reading.extra_device_delivered - previous_consumption.delivered
 
-        print(' >>> Updating hour gas consumption to {}'.format(actual_diff))
         current_consumption.currently_delivered = actual_diff
         current_consumption.save()
 

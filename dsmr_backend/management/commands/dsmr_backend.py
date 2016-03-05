@@ -16,7 +16,7 @@ class Command(BaseCommand):
         signal_failure = []
 
         for current_receiver, current_response in responses:
-            print(' - {} :: {}'.format(current_receiver, current_response))
+            self.stdout.write(' - {} :: {}'.format(current_receiver, current_response))
 
             if isinstance(current_response, Exception):
                 signal_failure.append(current_response)

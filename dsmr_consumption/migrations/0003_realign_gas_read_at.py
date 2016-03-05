@@ -9,12 +9,8 @@ import dsmr_stats.services
 
 def realign_gas_readings(apps, schema_editor):
     """ Alters the read_at value by the offset given and purges all existing statistics. """
-    print()
     # We use F() to have the database sort things out.
     GasConsumption = apps.get_model('dsmr_consumption', 'GasConsumption')
-    print('Updating gas consumptions ({} records) with -1 hour offset'.format(
-        GasConsumption.objects.all().count()
-    ))
     GasConsumption.objects.all().update(
         read_at=models.F('read_at') - timezone.timedelta(hours=1)
     )
@@ -23,14 +19,10 @@ def realign_gas_readings(apps, schema_editor):
     DayStatistics = apps.get_model('dsmr_stats', 'DayStatistics')
     HourStatistics = apps.get_model('dsmr_stats', 'HourStatistics')
     day_statistics_count = DayStatistics.objects.all().count()
-    print('Purging existing day ({} records) & hour statistics ({} records)'.format(
-        day_statistics_count, HourStatistics.objects.all().count()
-    ))
     DayStatistics.objects.all().delete()
     HourStatistics.objects.all().delete()
 
     for counter in range(1, day_statistics_count + 1):
-        print(" --- Regenerating daily/hourly statistics for day {} of {}".format(counter, day_statistics_count))
         dsmr_stats.services.analyze()
 
 

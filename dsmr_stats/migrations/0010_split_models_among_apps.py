@@ -8,9 +8,6 @@ from django.core.management import call_command
 
 def migrate_settings(apps, schema_editor):
     """ NOTE: This migration is executed NON ATOMIC, to reflect datalogger changes instantly. """
-    print()
-    print(' - Migrating settings...')
-
     # Create singleton settings record by calling solo().
     consumption_settings, _ = apps.get_model('dsmr_consumption', 'ConsumptionSettings').objects.get_or_create()
     frontend_settings, _ = apps.get_model('dsmr_frontend', 'FrontendSettings').objects.get_or_create()
@@ -35,16 +32,12 @@ def migrate_settings(apps, schema_editor):
 def halt_datalogger(apps, schema_editor):
     # Now disable tracking to prevent database activity while copying data. The management command
     # job running in the background will skip fetching data on the next run.
-    print(' - Temporarily disabling datalogger tracking data...')
     datalogger_settings = apps.get_model('dsmr_datalogger', 'DataloggerSettings').objects.get()
     datalogger_settings.track = False
     datalogger_settings.save()
 
 
 def migrate_data(apps, schema_editor):
-    print()
-    print(' - Migrating data...')
-
     MODEL_MAPPING = {
         # Old model: New model.
         apps.get_model('dsmr_stats', 'DsmrReading'): apps.get_model('dsmr_datalogger', 'DsmrReading'),
@@ -57,15 +50,10 @@ def migrate_data(apps, schema_editor):
 
     for OldModel, NewModel in MODEL_MAPPING.items():
         old_model_count = OldModel.objects.count()
-        print()
-        print(' - Processing {:<32} {:>10} item(s) found in database'.format(
-            OldModel.__name__, old_model_count
-        ))
 
         if not old_model_count:
             continue
 
-        print(' --- Copying data... (might take a while)')
         schema_editor.execute(
             COPY_QUERY % {
                 "old_table": OldModel._meta.db_table,
@@ -74,7 +62,6 @@ def migrate_data(apps, schema_editor):
         )
 
         new_model_count = NewModel.objects.count()
-        print(' --- Count check: {} / {}'.format(old_model_count, new_model_count))
 
         if old_model_count != new_model_count:
             raise AssertionError(
@@ -88,21 +75,16 @@ def migrate_data(apps, schema_editor):
         call_command('sqlsequencereset', 'dsmr_frontend', stdout=stdout_buffer, no_color=True)
         call_command('sqlsequencereset', 'dsmr_datalogger', stdout=stdout_buffer, no_color=True)
 
-        print(' - Resetting sequences in database (if applicable)...')
         stdout_buffer.seek(0)
         sql = stdout_buffer.read()
 
         # Only applies to postgres, but not MySQL.
         if sql:
             schema_editor.execute(sql)
-        else:
-            print(' --- No sequence reset required.')
 
 
 def resume_datalogger(apps, schema_editor):
     """ NOTE: This migration is executed NON ATOMIC, to reflect datalogger changes instantly. """
-    print()
-    print(' - Allowing datalogger to resume tracking data...')
     datalogger_settings = apps.get_model('dsmr_datalogger', 'DataloggerSettings').objects.get()
     datalogger_settings.track = True
     datalogger_settings.save()
