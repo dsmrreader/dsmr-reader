@@ -45,33 +45,13 @@ Just continue directly to the "Application Installation" chapter when you alread
 ## Application Installation ##
 
 ### Database backend ###
-The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **MySQL/MariaDB** or (Option B.) **PostgreSQL**. If you have no idea what to choose, I generally advise to pick MySQL/MariaDB, as it's less complex than PostgreSQL. 
+The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **PostgreSQL** or (Option B.) **MySQL/MariaDB**. If you have no idea what to choose, **I generally advise to pick PostgreSQL**, as it has better support for timezone handling (needed for DST transitions). 
 
 For a project of this size and simplicity it doesn't matter anyway. :] I plan to support SQLite later on as well.
 
 
-#### (Option A.) MySQL/MariaDB ###
-Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. **libmysqlclient-dev** is required for the virtualenv installation later in this guide..
 
-`sudo apt-get install -y mariadb-server-10.0 libmysqlclient-dev` 
-
-Create database:
-
-`sudo mysqladmin create dsmrreader`
-
-Create user:
-
-`echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v`
-
-Set privileges for user:
-
-`echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v`
-
-Flush privileges to activate them:
-
-`mysqladmin reload`
-
-#### (Option B.) PostgreSQL ###
+#### (Option A.) PostgreSQL ###
 
 Install PostgreSQL. **postgresql-server-dev-all** is required for the virtualenv installation later in this guide.
 
@@ -94,6 +74,28 @@ Create database, owned by the user we just created:
 Set password for user:
 
 `sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"`
+
+
+#### (Option B.) MySQL/MariaDB ###
+Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. **libmysqlclient-dev** is required for the virtualenv installation later in this guide..
+
+`sudo apt-get install -y mariadb-server-10.0 libmysqlclient-dev` 
+
+Create database:
+
+`sudo mysqladmin create dsmrreader`
+
+Create user:
+
+`echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v`
+
+Set privileges for user:
+
+`echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v`
+
+Flush privileges to activate them:
+
+`mysqladmin reload`
 
 
 ### Dependencies ###
@@ -180,12 +182,20 @@ You might want to put the `source ~/.virtualenvs/dsmrreader/bin/activate` comman
 
 
 ### Application configuration & setup ###
-Earlier in this guide you had to choose for either **(A.) MySQL/MariaDB** or **(B.) PostgreSQL**. Our applications needs to know what backend to talk to. Therefor I created two default configuration files you can copy, one for each backend. 
+Earlier in this guide you had to choose for either **(A.) PostgreSQL** or **(B.) MySQL/MariaDB**. Our applications needs to know what backend to talk to. Therefor I created two default configuration files you can copy, one for each backend. 
 The application will also need the appropiate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. The `base.txt` contains requirements which the application needs anyway, no matter the backend you've choosen. 
 
 **Note:** Installation might take a while, depending on your Internet connection, RaspberryPi version and resources (generally CPU) available. Nothing to worry about. :]
 
-**A.** Did you choose MySQL/MariaDB? Execute these two commands:
+**A.** Did you choose PostgreSQL? Then execute these two lines:
+
+```
+cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
+
+pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/postgresql.txt
+```
+
+**B.** Or did you choose MySQL/MariaDB? Execute these two commands:
 
 ```
 cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
@@ -193,13 +203,6 @@ cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
 pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
 ```
 
-**B.** Or did you choose PostgreSQL? Then execute these two lines:
-
-```
-cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
-
-pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/postgresql.txt
-```
 
 Did every go as planned? When either of the database clients refuses to install due to missing files/configs, make sure you installed `libmysqlclient-dev` (**MySQL**) or `postgresql-server-dev-all` (**PostgreSQL**) earlier in the process, when you installed the database server itself.
 
