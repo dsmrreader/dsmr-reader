@@ -22,7 +22,7 @@ def realign_gas_readings(apps, schema_editor):
     DayStatistics.objects.all().delete()
     HourStatistics.objects.all().delete()
 
-    for counter in range(1, day_statistics_count + 1):
+    for _ in range(1, day_statistics_count + 1):
         dsmr_stats.services.analyze()
 
 
