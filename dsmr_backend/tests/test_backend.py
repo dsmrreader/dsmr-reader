@@ -37,3 +37,7 @@ class TestBackend(CallCommandStdoutMixin, TestCase):
             settings.DSMR_SUPPORTED_DB_VENDORS,
             ('postgresql', 'mysql')
         )
+
+    def test_timezone(self):
+        """ Verify timezone setting, as it should never be altered. """
+        self.assertEqual(settings.TIME_ZONE, 'Europe/Amsterdam')

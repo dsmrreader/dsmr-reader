@@ -1,7 +1,8 @@
 from django.db import transaction, connection
 from django.db.models.aggregates import Avg
-from django.utils import timezone
 from django.core.cache import cache
+from django.utils import timezone
+from django.conf import settings
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
@@ -138,6 +139,12 @@ def average_consumption_by_hour():
         'sqlite': "strftime('%H', hour_start)",
         'mysql': "extract(hour from hour_start)",
     }[connection.vendor]
+
+    # Only PostgreSQL supports this builtin.
+    set_time_zone_sql = connection.ops.set_time_zone_sql()
+
+    if set_time_zone_sql:
+        connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])
 
     return HourStatistics.objects.extra({
         'hour_start': sql_extra

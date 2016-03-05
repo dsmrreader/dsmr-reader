@@ -1,5 +1,6 @@
 from unittest import mock
 
+from django.db import connection
 from django.test import TestCase
 from django.utils import timezone
 
@@ -92,6 +93,25 @@ class TestServices(CallCommandStdoutMixin, TestCase):
     def test_flush_clear_cache(self, clear_cache_mock):
         dsmr_stats.services.flush()
         self.assertTrue(clear_cache_mock.called)
+
+    def test_average_consumption_by_hour(self):
+        """ Test whether timezones are converted properly when grouping hours. """
+        # @see "Trends are always shown in UTC #76", only PostgreSQL can fix this.
+        if connection.vendor != 'postgresql':
+            return self.skipTest('Test cannot be fixed for backends other than PostgreSQL')
+
+        HourStatistics.objects.create(
+            # This should be stored with local timezone, so +1.
+            hour_start=timezone.make_aware(timezone.datetime(2016, 1, 1, 12)),
+            electricity1=1,
+            electricity2=0,
+            electricity1_returned=0,
+            electricity2_returned=0,
+        )
+        hour_stat = dsmr_stats.services.average_consumption_by_hour()[0]
+
+        # Regression, Django defaults to UTC, so '11' here.
+        self.assertEqual(hour_stat['hour_start'], 12)
 
 
 class TestServicesWithoutGas(TestServices):
