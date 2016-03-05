@@ -196,7 +196,7 @@
     </div><!-- /.row -->
     {% endif %}
 
-    {% if latest_gas %}
+    {% if latest_gas_read %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -259,7 +259,7 @@
                 render_electricity_returned_chart();
             {% endif %}
             
-            {% if latest_gas %}
+            {% if latest_gas_read %}
                 render_gas_chart();
             {% endif %}
 
@@ -312,7 +312,7 @@
              }
          {% endif %}
 		   	
-        {% if latest_gas %}
+        {% if latest_gas_read %}
 		   	function render_gas_chart()
 		   	{
 		   		var data = {
