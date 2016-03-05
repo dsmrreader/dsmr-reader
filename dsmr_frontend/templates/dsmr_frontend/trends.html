@@ -9,7 +9,7 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-{% if not day_statistics_count %}
+{% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
         <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
@@ -20,8 +20,9 @@
     {% blocktrans %}Current data displayed averages {{ hour_statistics_count }} hour(s), among {{ day_statistics_count }} day(s).{% endblocktrans %}
     </div>
 
+    {% if capabilities.electricity %}
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Hourly ratio of average electricity delivered in Watt{% endblocktrans %}
@@ -31,19 +32,7 @@
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
-        
-        <div class="col-md-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Hourly ratio of average gas consumed in m<sup>3</sup>{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
     </div><!-- /.row -->
-
     <div class="row">
         <div class="col-md-6">
             <div class="panel">
@@ -67,6 +56,22 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+    {% endif %}
+    
+    {% if capabilities.gas %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly ratio of average gas consumed in m<sup>3</sup>{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    {% endif %}
 </section><!-- /.content -->
 {% endblock %}
 
@@ -85,12 +90,18 @@
                 Chart.defaults.global.animation = false;
                 Chart.defaults.global.segmentShowStroke = true;
 
+            {% if capabilities.electricity %}
                 render_average_electricity_delivered_chart();
                 render_average_electricity1_consumed_chart();
                 render_average_electricity2_consumed_chart();
+            {% endif %}
+
+            {% if capabilities.gas %}
                 render_average_gas_consumed_chart();
+            {% endif %}
         	});
 
+	    {% if capabilities.electricity %}
             function render_average_electricity_delivered_chart()
             {
                 var data = {{ avg_electricity_delivered|safe }};
@@ -111,13 +122,16 @@
                 var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
                 new Chart(ctx).PolarArea(data, polar_options);
             }
+        {% endif %}
             
+        {% if capabilities.gas %}
             function render_average_gas_consumed_chart()
             {
                 var data = {{ avg_gas_consumption|safe }};
                 var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
                 new Chart(ctx).PolarArea(data, polar_options);
             }
+        {% endif %}
 		</script>
 
 {% endblock %}

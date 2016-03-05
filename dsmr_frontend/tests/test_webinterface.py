@@ -119,6 +119,7 @@ class TestViews(TestCase):
             reverse('{}:archive'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('capabilities', response.context)
 
         # XHR's.
         data = {
@@ -128,6 +129,7 @@ class TestViews(TestCase):
             reverse('{}:archive-xhr-day'.format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('capabilities', response.context)
 
         response = self.client.get(
             reverse('{}:archive-xhr-hour'.format(self.namespace)), data=data
@@ -163,6 +165,7 @@ class TestViews(TestCase):
             'average_temperature',
             'electricity1_returned'
         ]))
+        self.assertIn('capabilities', response.context)
         self.assertIn('notes', response.context['usage'][0])
         self.assertEqual('Testnote', response.context['usage'][0]['notes'][0])
         self.assertEqual(response.context['days_ago'], frontend_settings.recent_history_weeks * 7)
@@ -174,6 +177,7 @@ class TestViews(TestCase):
             reverse('{}:statistics'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('capabilities', response.context)
 
     def test_trends(self):
         self._synchronize_date()
@@ -181,6 +185,7 @@ class TestViews(TestCase):
             reverse('{}:trends'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('capabilities', response.context)
 
     def test_status(self):
         self._synchronize_date()
@@ -188,6 +193,7 @@ class TestViews(TestCase):
             reverse('{}:status'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('capabilities', response.context)
 
         self.assertIn('consumption_settings', response.context)
         self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)

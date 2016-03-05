@@ -9,6 +9,7 @@ from dsmr_stats.models.statistics import DayStatistics
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
+import dsmr_frontend.services
 
 
 class History(TemplateView):
@@ -18,6 +19,7 @@ class History(TemplateView):
         frontend_settings = FrontendSettings.get_solo()
 
         context_data = super(History, self).get_context_data(**kwargs)
+        context_data['capabilities'] = dsmr_frontend.services.get_data_capabilities()
         context_data['usage'] = []
         context_data['days_ago'] = frontend_settings.recent_history_weeks * 7
         context_data['track_temperature'] = WeatherSettings.get_solo().track

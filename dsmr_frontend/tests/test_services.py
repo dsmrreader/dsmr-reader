@@ -17,6 +17,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         self.assertIn('electricity_returned', capabilities.keys())
         self.assertIn('gas', capabilities.keys())
         self.assertIn('weather', capabilities.keys())
+        self.assertIn('any', capabilities.keys())
 
     def test_empty_capabilities(self):
         """ Capability check for empty database. """
@@ -33,6 +34,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         """ Capability check for electricity consumption. """
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertFalse(capabilities['electricity'])
+        self.assertFalse(capabilities['any'])
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now(),
@@ -45,11 +47,13 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         )
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertTrue(capabilities['electricity'])
+        self.assertTrue(capabilities['any'])
 
     def test_electricity_returned_capabilities(self):
         """ Capability check for electricity returned. """
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertFalse(capabilities['electricity_returned'])
+        self.assertFalse(capabilities['any'])
 
         # Should not have any affect.
         consumption = ElectricityConsumption.objects.create(
@@ -68,11 +72,13 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         consumption.save(update_fields=['currently_returned'])
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertTrue(capabilities['electricity_returned'])
+        self.assertTrue(capabilities['any'])
 
     def test_gas_capabilities(self):
         """ Capability check for gas consumption. """
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertFalse(capabilities['gas'])
+        self.assertFalse(capabilities['any'])
 
         GasConsumption.objects.create(
             read_at=timezone.now(),
@@ -81,6 +87,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         )
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertTrue(capabilities['gas'])
+        self.assertTrue(capabilities['any'])
 
     def test_weather_capabilities(self):
         """ Capability check for gas consumption. """
@@ -90,6 +97,7 @@ class TestServices(CallCommandStdoutMixin, TestCase):
 
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertFalse(capabilities['weather'])
+        self.assertFalse(capabilities['any'])
 
         # Should not have any affect.
         weather_settings.track = True
@@ -102,3 +110,4 @@ class TestServices(CallCommandStdoutMixin, TestCase):
         TemperatureReading.objects.create(read_at=timezone.now(), degrees_celcius=0.0)
         capabilities = dsmr_frontend.services.get_data_capabilities()
         self.assertTrue(capabilities['weather'])
+        self.assertTrue(capabilities['any'])

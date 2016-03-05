@@ -51,8 +51,22 @@
                     {% blocktrans %}Electricity usage{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
                 <div class="panel-body">
-                	<canvas id="electricity-chart" style="height: 150px;"></canvas>
+                    <canvas id="electricity-chart" style="height: 150px;"></canvas>
                     <div id="electricity-chart-legend"></div>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    
+    <div class="row" id="electricity-returned-chart-holder" style="display: none;">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Electricity returned{% endblocktrans %} {% trans "(in kWh)" %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="electricity-returned-chart" style="height: 150px;"></canvas>
+                    <div id="electricity-returned-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -95,8 +109,9 @@
                 {% endverbatim %}
             }
             var g_electricity_chart_instance = undefined;
+            var g_electricity_returned_chart_instance = undefined;
             var g_gas_chart_instance = undefined;
-        
+            
         	$(document).ready(function(){
                 Chart.defaults.global.responsive = true;
                 Chart.defaults.global.maintainAspectRatio = false;
@@ -159,15 +174,28 @@
                     url: "{% url 'frontend:archive-xhr-hour' %}",
                     dataType: "json",
                     data: {'date': selected_day},
-                }).done(function(data) {
-                    render_electricity_chart(
-                    	data.x, data.electricity1, data.electricity2, data.electricity1_returned, data.electricity2_returned
-                    )
-                    render_gas_chart(data.x, data.gas)
+                }).done(function(response) {
+                	var capabilities = response.capabilities;
+                	var data = response.data;
+                	
+                	if (capabilities.electricity)
+               		{
+	                    render_electricity_chart(data.x, data.electricity1, data.electricity2);
+               		}
+                    
+                    if (capabilities.electricity_returned)
+                    {
+                    	render_electricity_returned_chart(data.x, data.electricity1_returned, data.electricity2_returned);
+                    }
+
+                    if (capabilities.gas)
+                   	{
+                        render_gas_chart(data.x, data.gas);
+                   	}
                 });
             }
         	
-            function render_electricity_chart(labels, electricity1, electricity2, electricity1_returned, electricity2_returned)
+            function render_electricity_chart(labels, electricity1, electricity2)
             {
                 var data = {
                     labels: labels,
@@ -189,7 +217,25 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(255,0,0,1)"
-                    }, {
+                    }]
+                };
+                
+                if (g_electricity_chart_instance)
+                {
+                	g_electricity_chart_instance.destroy();
+                }
+                $("#electricity-chart-holder").show();
+
+                var ctx = $("#electricity-chart").css('height', '150px').get(0).getContext("2d");
+                g_electricity_chart_instance = new Chart(ctx).Line(data, line_options);
+                $("#electricity-chart-legend").html(g_electricity_chart_instance.generateLegend());
+            }
+                
+            function render_electricity_returned_chart(labels, electricity1_returned, electricity2_returned)
+            {
+                var data = {
+                    labels: labels,
+                    datasets: [{
                         data: electricity1_returned,
                         label: "{% trans 'Electricity 1 returned (off-peak)' %}",                       
                         fillColor: "rgba(255,255,255,0.2)",
@@ -209,16 +255,16 @@
                         pointHighlightStroke: "rgba(200,200,100,1)"
                     }]
                 };
-                
-                if (g_electricity_chart_instance)
+                     
+                if (g_electricity_returned_chart_instance)
                 {
-                	g_electricity_chart_instance.destroy();
+                	g_electricity_returned_chart_instance.destroy();
                 }
-                $("#electricity-chart-holder").show();
+                $("#electricity-returned-chart-holder").show();
 
-                var ctx = $("#electricity-chart").css('height', '150px').get(0).getContext("2d");
-                g_electricity_chart_instance = new Chart(ctx).Line(data, line_options);
-                $("#electricity-chart-legend").html(g_electricity_chart_instance.generateLegend());
+                var ctx = $("#electricity-returned-chart").css('height', '150px').get(0).getContext("2d");
+                g_electricity_returned_chart_instance = new Chart(ctx).Line(data, line_options);
+                $("#electricity-returned-chart-legend").html(g_electricity_returned_chart_instance.generateLegend());
             }
             
             function render_gas_chart(labels, gas)
