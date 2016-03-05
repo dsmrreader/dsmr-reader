@@ -47,8 +47,6 @@ Just continue directly to the "Application Installation" chapter when you alread
 ### Database backend ###
 The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **PostgreSQL** (Option B.) **MySQL/MariaDB**. If you have no idea what to choose, **I generally advise to pick PostgreSQL**, as it has better support for timezone handling (needed for DST transitions). 
 
-For a project of this size and simplicity it doesn't matter anyway. :] I plan to support SQLite later on as well.
-
 
 
 #### (Option A.) PostgreSQL ###
