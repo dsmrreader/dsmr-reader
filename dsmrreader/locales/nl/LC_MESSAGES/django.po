@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-05 22:29+0100\n"
-"PO-Revision-Date: 2016-03-05 19:34+0100\n"
+"POT-Creation-Date: 2016-03-06 00:53+0100\n"
+"PO-Revision-Date: 2016-03-06 00:49+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -297,6 +297,9 @@ msgstr "Elektriciteitsverbruik"
 msgid "(in kWh)"
 msgstr "(in kWh)"
 
+msgid "Electricity returned"
+msgstr "Elektriciteit teruggeleverd"
+
 msgid "Gas usage"
 msgstr "Gasverbruik"
 
@@ -339,6 +342,21 @@ msgstr "Statistieken"
 msgid "Settings"
 msgstr "Instellingen"
 
+msgid "Watt"
+msgstr "Watt"
+
+msgid "delivered"
+msgstr "geleverd"
+
+msgid "returned"
+msgstr "teruggeleverd"
+
+msgid "m<sup>3</sup>"
+msgstr "m<sup>3</sup>"
+
+msgid "gas consumed in hour"
+msgstr "gas verbruikt in uur"
+
 msgid "This month"
 msgstr "Huidige maand"
 
@@ -351,9 +369,6 @@ msgstr "Geleverd"
 msgid "kWh"
 msgstr "kWh"
 
-msgid "m<sup>3</sup>"
-msgstr "m<sup>3</sup>"
-
 msgid "Returned"
 msgstr "Teruggeleverd"
 
@@ -362,15 +377,6 @@ msgstr "Kosten"
 
 msgid "Total"
 msgstr "Totaal"
-
-msgid "Watt consumed"
-msgstr "Watt verbruikt"
-
-msgid "Watt returned"
-msgstr "Watt teruggeleverd"
-
-msgid "m<sup>3</sup> gas consumed in hour"
-msgstr "m<sup>3</sup> gas verbruikt in uur tijd"
 
 msgid "Recent electricity delivered (watt)"
 msgstr "Recent elektriciteitsverbruik  (Watt)"
@@ -384,14 +390,8 @@ msgstr "Recent gasverbruik  (m<sup>3</sup>)"
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
 
-msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
-msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
-
 msgid "Electricity"
 msgstr "Elektriciteit"
-
-msgid "Electricity returned"
-msgstr "Elektriciteit teruggeleverd"
 
 msgid "Temperature"
 msgstr "Temperatuur"
@@ -420,6 +420,9 @@ msgstr "Dagelijks temperatuurgemiddelde in de afgelopen %(days_ago)s dagen"
 
 msgid "(in &deg;C)"
 msgstr "(in &deg;C)"
+
+msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
+msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
 
 msgid "Type"
 msgstr "Soort"
@@ -491,14 +494,14 @@ msgstr "Huidige gegevens betreffen gemiddelden over %(hour_statistics_count)s ur
 msgid "Hourly ratio of average electricity delivered in Watt"
 msgstr "Verhouding gemiddelde elektriciteitsvraag per daguur in Watt"
 
-msgid "Hourly ratio of average gas consumed in m<sup>3</sup>"
-msgstr "Verhouding gemiddeld gasverbruik per daguur in m<sup>3</sup>"
-
 msgid "Hourly ratio of average electricity 1 (off-peak) consumed in kWh"
 msgstr "Verhouding gemiddeld elektriciteitsverbruik per daguur in kWh (daltarief)"
 
 msgid "Hourly ratio of average electricity 2 (peak) consumed in kWh"
 msgstr "Verhouding gemiddeld elektriciteitsverbruik per daguur in kWh (piektarief)"
+
+msgid "Hourly ratio of average gas consumed in m<sup>3</sup>"
+msgstr "Verhouding gemiddeld gasverbruik per daguur in m<sup>3</sup>"
 
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
@@ -695,6 +698,15 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "consumed"
+#~ msgstr "verbruikt"
+
+#~ msgid "Watt returned"
+#~ msgstr "Watt teruggeleverd"
+
+#~ msgid "m<sup>3</sup> gas consumed in hour"
+#~ msgstr "m<sup>3</sup> gas verbruikt in uur tijd"
+
 #~ msgid "Compacts existing DSMR readings into consumption points."
 #~ msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
 
@@ -764,14 +776,8 @@ msgstr "Engels"
 #~ msgid "Electricity 2"
 #~ msgstr "Elektriciteit 2"
 
-#~ msgid "in Watt"
-#~ msgstr "In Watt"
-
 #~ msgid "in kWh"
 #~ msgstr "in kWh"
-
-#~ msgid "Average gas consumed by hour"
-#~ msgstr "Gemiddelde gasconsumptie per uur"
 
 #~ msgid "in m<sup>3</sup>"
 #~ msgstr "in m<sup>3</sup>"

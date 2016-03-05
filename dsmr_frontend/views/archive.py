@@ -85,7 +85,7 @@ class ArchiveXhrHourStatistics(View):
 
         for current_hour in hour_statistics:
             data['x'].append(formats.date_format(
-                timezone.localtime(current_hour.hour_start), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT' ##DSMR_GRAPH_SHORT_TIME_FORMAT
+                timezone.localtime(current_hour.hour_start), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
             ))
 
             for current_field in FIELDS:

@@ -51,7 +51,12 @@
                         	<a href="" onclick="return false;">
                         		<span>{% block header %}{% endblock %}</span>
                          	</a>
-                         </li>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        {% block header_right %}{% endblock %}
                     </ul>
                 </div>
             </nav>
@@ -106,7 +111,8 @@
             </aside>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
-			{% block content %}{% endblock %}
+	            <div class="clearfix"></div>
+				{% block content %}{% endblock %}
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
