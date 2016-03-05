@@ -3,12 +3,15 @@
 echo ""
 echo " --- Pulling remote repository for new commits..."
 git fetch
+echo ""
 
 echo " --- The following changes will be applied (if any)."
 git log ..origin/master
+echo ""
 
 echo " --- Merging/updating checkout."
 git merge FETCH_HEAD
+echo ""
 
 echo ""
 echo " --- Checking & synchronizing base requirements for changes."
