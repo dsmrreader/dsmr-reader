@@ -55,7 +55,7 @@
                             <td colspan="2">&nbsp;</td>
                             <td>
 	                            <span class="badge bg-black">
-	                                {{ month_statistics.total_cost }}
+	                                {{ month_statistics.total_cost|default:'-' }}
 	                            </span>
                             </td>
                         </tr>
@@ -196,7 +196,7 @@
     </div><!-- /.row -->
     {% endif %}
 
-    {% if consumption and consumption.gas %}
+    {% if latest_gas %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -259,7 +259,7 @@
                 render_electricity_returned_chart();
             {% endif %}
             
-            {% if consumption and consumption.gas %}
+            {% if latest_gas %}
                 render_gas_chart();
             {% endif %}
 
@@ -312,7 +312,7 @@
              }
          {% endif %}
 		   	
-        {% if consumption and consumption.gas %}
+        {% if latest_gas %}
 		   	function render_gas_chart()
 		   	{
 		   		var data = {
