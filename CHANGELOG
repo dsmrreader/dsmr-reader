@@ -10,6 +10,7 @@ v0.13 (β) - 2016-xx-xx
 - Log unhandled exceptions and errors (#65).
 - Datalogger crashes with IntegrityError because 'timestamp' is null (#74).
 - Trends are always shown in UTC (#76).
+- Squash migrations (#31).
 - 
 
 
