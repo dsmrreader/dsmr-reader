@@ -4,6 +4,7 @@
 v0.14 (β) - 2016-xx-xx
 ======================
 - Allow month archive (#66).
+- Show exceptions in production (webinterface) (#87).
 - Keep Supervisor processes running (#79).
 - 
 

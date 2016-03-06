@@ -447,7 +447,7 @@ The official licence for using this project can be found in the **LICENCE.txt** 
 
 
 # Credits #
-Software listed below. Please note and respect their licences as well, if any.
+Software and thanks listed below. Please note and respect their licences as well, if any.
 
 
 * OS: [Raspbian](https://www.raspbian.org/)
@@ -479,6 +479,8 @@ Dutch Smart Meter reading specifications, data cables, examples and hints:
 * [Joost van der Linde](https://sites.google.com/site/nta8130p1smartmeter/home)
 
 * [SOS Solutions](https://www.sossolutions.nl/)
+
+* [MW](http://bettermotherfuckingwebsite.com/)
 
 Pull requests, forking & testing:
 

@@ -72,6 +72,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
+    # Local.
+    'dsmr_frontend.middleware.exception_traceback.ExceptionTracebackMiddleware',
 )
 
 ROOT_URLCONF = 'dsmrreader.urls'
