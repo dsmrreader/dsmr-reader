@@ -57,7 +57,7 @@ class InfiniteManagementCommandMixin(object):
 
         while self.keep_alive:
             self.run(**options)
-            time.sleep(1)  # Do not hammer.
+            time.sleep(2)  # Do not hammer.
 
         self.stderr.write('Exited due to signal detection')
         sys.exit(0)

@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
+from django.utils import timezone
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
 import dsmr_backend.signals
@@ -11,7 +12,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
-        self.stdout.write('Broadcasting backend signal...')
+        self.stdout.write('')
+        self.stdout.write('Broadcasting backend signal @ {}...'.format(timezone.now()))
 
         # send_robust() guarantees the every listener receives this signal.
         responses = dsmr_backend.signals.backend_called.send_robust(None)
