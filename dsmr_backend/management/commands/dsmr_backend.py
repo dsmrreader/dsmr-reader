@@ -1,3 +1,5 @@
+import traceback
+
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
 from django.utils import timezone
@@ -24,7 +26,12 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             self.stdout.write(' - {} :: {}'.format(current_receiver, current_response))
 
             if isinstance(current_response, Exception):
-                signal_failure.append(current_response)
+                # Add and print traceback to help debugging any issues raised.
+                exception_traceback = traceback.format_tb(current_response.__traceback__, limit=100)
+                exception_traceback = "\n".join(exception_traceback)
+
+                self.stderr.write(exception_traceback)
+                signal_failure.append(exception_traceback)
 
         if signal_failure:
             # Reflect any error to output for convenience.
