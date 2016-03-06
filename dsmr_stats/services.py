@@ -146,7 +146,7 @@ def average_consumption_by_hour():
     if set_time_zone_sql:
         connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])  # pragma: no cover
 
-    return HourStatistics.objects.extra({
+    hour_statistics = HourStatistics.objects.extra({
         'hour_start': sql_extra
     }).values('hour_start').order_by('hour_start').annotate(
         avg_electricity1=Avg('electricity1'),
@@ -155,3 +155,11 @@ def average_consumption_by_hour():
         avg_electricity2_returned=Avg('electricity2_returned'),
         avg_gas=Avg('gas'),
     )
+    # Force evaluation, as we want to reset timezone in cursor below.
+    hour_statistics = list(hour_statistics)
+
+    if set_time_zone_sql:
+        # Prevents "database connection isn't set to UTC" error.
+        connection.connection.cursor().execute(set_time_zone_sql, ['UTC'])  # pragma: no cover
+
+    return hour_statistics
