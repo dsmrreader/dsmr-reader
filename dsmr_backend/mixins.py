@@ -59,7 +59,7 @@ class InfiniteManagementCommandMixin(object):
             self.run(**options)
             time.sleep(2)  # Do not hammer.
 
-        self.stderr.write('Exited due to signal detection')
+        self.stdout.write('Exited due to signal detection')
         sys.exit(0)
 
     def run(self, *args, **options):
