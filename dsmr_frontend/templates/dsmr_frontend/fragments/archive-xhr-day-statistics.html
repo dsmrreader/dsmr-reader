@@ -44,7 +44,7 @@
         
 {% if notes %}
 	    {% for current_note in notes %}
-	    <div class="alert alert-warning" role="alert">{{ current_note.description }}</div>
+	    <div class="alert alert-warning" role="alert"><i class="fa fa-comments-o"></i> {{ current_note.description }}</div>
 	    {% endfor %}
 {% endif %}
     </div><!-- /.panel-body -->

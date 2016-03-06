@@ -8,27 +8,27 @@
     
 {% block header_right %}
     {% if capabilities.electricity and latest_electricity_read %}
-	<li><!-- bg-red -->
+	<li>
 	    <a href="" onclick="return false;">
-	        <span class="badge bg-red"><i class="fa fa-bolt "></i> {{ latest_electricity }} {% trans "Watt" %}</span>
+	        <span class="badge bg-red"><i class="fa fa-bolt"></i> {{ latest_electricity }} {% trans "Watt" %}</span>
             <small>{% trans "delivered" %} ({{ latest_electricity_read|naturaltime }})</small>
 	    </a>
     </li>
     {% endif %}
     
     {% if capabilities.electricity_returned and latest_electricity_returned %}
-    <li><!-- bg-green -->
+    <li>
         <a href="" onclick="return false;">
-            <span class="badge bg-green"><i class="fa fa-bolt "></i> {{ latest_electricity_returned }} {% trans "Watt" %}</span>
+            <span class="badge bg-green"><i class="fa fa-bolt"></i> {{ latest_electricity_returned }} {% trans "Watt" %}</span>
             <small>{% trans "returned" %} ({{ latest_electricity_read|naturaltime }})</small>
         </a>
     </li>
     {% endif %}
      
     {% if capabilities.gas and latest_gas_read %}
-    <li><!-- bg-green -->
+    <li>
         <a href="" onclick="return false;">
-            <span class="badge bg-orange"><i class="fa fa-fire "></i> {{ latest_gas }} {% trans "m<sup>3</sup>" %}</span>
+            <span class="badge bg-orange"><i class="fa fa-fire"></i> {{ latest_gas }} {% trans "m<sup>3</sup>" %}</span>
             <small>{% trans "gas consumed in hour" %} ({{ latest_gas_read|naturaltime }})</small>
         </a>
     </li>

@@ -10,11 +10,47 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
+{% if not capabilities.any %}
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+    </div>
+{% endif %}
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_datalogger_dataloggersettings_change' datalogger_settings.pk %}" class="btn {% if datalogger_settings.track %}btn-success{% else %}btn-danger{% endif %}">
+                    <span class="fa fa-info-circle fa-lg"></span> {% trans "Data availability" %} <small>({% blocktrans %}Based on readings until this moment{% endblocktrans %})</small>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-6">{% trans "Data type" %}</th>
+                            <th class="col-md-6">{% trans "Read" %}</th>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-red"><i class="fa fa-bolt fa-lg"></i></span> &nbsp; {% trans "Electricity usage" %}</td>
+                            <td><i class="fa fa-{{ capabilities.electricity|yesno:'check-square-o,close' }}"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-green"><i class="fa fa-bolt fa-lg"></i></span> &nbsp; {% trans "Electricity return" %}</td>
+                            <td><i class="fa fa-{{ capabilities.electricity_returned|yesno:'check-square-o,close' }}"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-orange"><i class="fa fa-fire fa-lg"></i></span> &nbsp; {% trans "Gas" %}</td>
+                            <td><i class="fa fa-{{ capabilities.gas|yesno:'check-square-o,close' }}"></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_datalogger_dataloggersettings_change' datalogger_settings.pk %}" class="btn {% if datalogger_settings.track %}btn-primary{% else %}btn-danger{% endif %}">
                     <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ datalogger_settings }} 
                 </header>
@@ -27,12 +63,12 @@
                         </tr>
                         <tr{% if not datalogger_settings.track %} class="alert alert-danger"{% endif %}>
                             <td>{% model_meta_info datalogger_settings 'track' 'verbose_name' %}</td>
-                            <td>{% if datalogger_settings.track %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                            <td><i class="fa fa-{{ datalogger_settings.track|yesno:'check-square-o,close' }}"></td>
                             <td>{% model_meta_info datalogger_settings 'track' 'help_text' %}</td>
                         </tr>
                         <tr>
                             <td>{% model_meta_info datalogger_settings 'track_meter_statistics' 'verbose_name' %}</td>
-                            <td>{% if datalogger_settings.track_meter_statistics %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                            <td><i class="fa fa-{{ datalogger_settings.track_meter_statistics|yesno:'check-square-o,close' }}"></td>
                             <td>{% model_meta_info datalogger_settings 'track_meter_statistics' 'help_text' %}</td>
                         </tr>
                         <tr>
@@ -55,7 +91,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_backup_backupsettings_change' backup_settings.pk %}" class="btn {% if backup_settings.daily_backup %}btn-success{% else %}btn-danger{% endif %}">
+                    <a href="{% url 'admin:dsmr_backup_backupsettings_change' backup_settings.pk %}" class="btn {% if backup_settings.daily_backup %}btn-primary{% else %}btn-danger{% endif %}">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ backup_settings }}
                 </header>
@@ -68,12 +104,12 @@
                         </tr>
                         <tr{% if not backup_settings.daily_backup %} class="alert alert-danger"{% endif %}>
                             <td>{% model_meta_info backup_settings 'daily_backup' 'verbose_name' %}</td>
-                            <td>{% if backup_settings.daily_backup %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                            <td><i class="fa fa-{{ backup_settings.daily_backup|yesno:'check-square-o,close' }}"></td>
                             <td>{% model_meta_info backup_settings 'daily_backup' 'help_text' %}</td>
                         </tr>
                         <tr>
                             <td>{% model_meta_info backup_settings 'compress' 'verbose_name' %}</td>
-                            <td>{% if backup_settings.compress %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                            <td><i class="fa fa-{{ backup_settings.compress|yesno:'check-square-o,close' }}"></td>
                             <td>{% model_meta_info backup_settings 'compress' 'help_text' %}</td>
                         </tr>
                         <tr>
@@ -96,7 +132,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_consumption_consumptionsettings_change' consumption_settings.pk %}" class="btn btn-success">
+                    <a href="{% url 'admin:dsmr_consumption_consumptionsettings_change' consumption_settings.pk %}" class="btn btn-primary">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp;{{ consumption_settings }} 
                 </header>
@@ -122,7 +158,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_frontend_frontendsettings_change' frontend_settings.pk %}" class="btn btn-success">
+                    <a href="{% url 'admin:dsmr_frontend_frontendsettings_change' frontend_settings.pk %}" class="btn btn-primary">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ frontend_settings }} 
                 </header>
@@ -135,7 +171,7 @@
                         </tr>
                         <tr>
                             <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'verbose_name' %}</td>
-                            <td>{% if frontend_settings.reverse_dashboard_graphs %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                            <td><i class="fa fa-{{ frontend_settings.reverse_dashboard_graphs|yesno:'check-square-o,square-o' }}"></td>
                             <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'help_text' %}</td>
                         </tr>
                         <tr>
@@ -153,7 +189,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' dropbox_settings.pk %}" class="btn {% if dropbox_settings.access_token %}btn-success{% else %}alert-warning{% endif %}">
+                    <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' dropbox_settings.pk %}" class="btn {% if dropbox_settings.access_token %}btn-primary{% else %}alert-warning{% endif %}">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ dropbox_settings }}
                 </header>
@@ -166,7 +202,7 @@
                         </tr>
                         <tr{% if not dropbox_settings.access_token %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info dropbox_settings 'access_token' 'verbose_name' %}</td>
-                            <td>{% if dropbox_settings.access_token %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                            <td><i class="fa fa-{{ dropbox_settings.access_token|yesno:'check-square-o,close' }}"></td>
                             <td>{% model_meta_info dropbox_settings 'access_token' 'help_text' %}</td>
                         </tr>
                         <tr{% if dropbox_settings.access_token and not dropbox_settings.latest_sync %} class="alert alert-warning"{% endif %}>
@@ -184,7 +220,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <a href="{% url 'admin:dsmr_weather_weathersettings_change' weather_settings.pk %}" class="btn {% if weather_settings.track %}btn-success{% else %}alert-warning{% endif %}">
+                    <a href="{% url 'admin:dsmr_weather_weathersettings_change' weather_settings.pk %}" class="btn {% if weather_settings.track %}btn-primary{% else %}alert-warning{% endif %}">
                         <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ weather_settings }}
                 </header>
@@ -197,7 +233,7 @@
                         </tr>
                         <tr{% if not weather_settings.track %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info weather_settings 'track' 'verbose_name' %}</td>
-                            <td>{% if weather_settings.track %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                            <td><i class="fa fa-{{ weather_settings.track|yesno:'check-square-o,close' }}"></td>
                             <td>{% model_meta_info weather_settings 'track' 'help_text' %}</td>
                         </tr>
                         <tr>

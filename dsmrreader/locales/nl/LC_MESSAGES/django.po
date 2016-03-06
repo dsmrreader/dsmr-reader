@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-06 00:53+0100\n"
-"PO-Revision-Date: 2016-03-06 00:49+0100\n"
+"POT-Creation-Date: 2016-03-06 01:51+0100\n"
+"PO-Revision-Date: 2016-03-06 01:48+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -355,7 +355,7 @@ msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
 msgid "gas consumed in hour"
-msgstr "gas verbruikt in uur"
+msgstr "gas verbruikt in uur tijd"
 
 msgid "This month"
 msgstr "Huidige maand"
@@ -411,6 +411,10 @@ msgid "Daily electricity usage in the past %(days_ago)s days"
 msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
 
 #, python-format
+msgid "Daily electricity returned in the past %(days_ago)s days"
+msgstr "Dagelijks elektriciteitsteruglevering in de afgelopen %(days_ago)s dagen"
+
+#, python-format
 msgid "Daily gas usage in the past %(days_ago)s days"
 msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
 
@@ -423,9 +427,6 @@ msgstr "(in &deg;C)"
 
 msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
 msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
-
-msgid "Type"
-msgstr "Soort"
 
 msgid "Electricity 1 cost (off-peak)"
 msgstr "Elektriciteit 1 (daltarief) kosten"
@@ -480,6 +481,21 @@ msgstr "Gas (per m<sup>3</sup>)"
 
 msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
 msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
+
+msgid "Data availability"
+msgstr "Gegevensbeschikbaarheid"
+
+msgid "Based on readings until this moment"
+msgstr "Gebaseerd op metingen tot nu toe"
+
+msgid "Data type"
+msgstr "Soort gegevens"
+
+msgid "Read"
+msgstr "Gemeten"
+
+msgid "Electricity return"
+msgstr "Elektriciteitsteruglevering"
 
 msgid "Setting"
 msgstr "Instelling"
@@ -697,6 +713,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Display capabilities"
+#~ msgstr "Weergavemogelijkheden"
+
+#~ msgid "Available"
+#~ msgstr "Beschikbaar"
+
+#~ msgid "Type"
+#~ msgstr "Soort"
 
 #~ msgid "consumed"
 #~ msgstr "verbruikt"

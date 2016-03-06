@@ -25,23 +25,26 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-7">{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% endif %}</th>
-                            <th class="col-md-3">{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %})</th>
-                            <th class="col-md-2">{% trans "Returned" %} ({% trans "kWh" noop %})</th>
+                            <th class="col-md-3">{% trans "Delivered" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}){% endif %}</th>
+                            
+                            <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 1 (off-peak)" %}</td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span></td>
-                            <td><span class="badge bg-green">{{ latest_reading.electricity_returned_1|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_1|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 (peak)" %}</td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
-                            <td><span class="badge bg-green">{{ latest_reading.electricity_returned_2|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_2|default:'-' }}{% endif %}</span></td>
                         </tr>
+                        {% if capabilities.gas %}
                         <tr>
                             <td>{% trans "Gas " %}</td>
                             <td colspan="2"><span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
                     </table>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
