@@ -4,13 +4,13 @@ from django.db import connection
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_stats.services
 
 
-class TestServices(CallCommandStdoutMixin, TestCase):
+class TestServices(InterceptStdoutMixin, TestCase):
     """ Test 'dsmr_backend' management command. """
     fixtures = ['dsmr_stats/electricity-consumption.json', 'dsmr_stats/gas-consumption.json']
 

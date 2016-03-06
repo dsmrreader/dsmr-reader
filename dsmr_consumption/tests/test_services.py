@@ -1,14 +1,14 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
 import dsmr_consumption.services
 
 
-class TestServices(CallCommandStdoutMixin, TestCase):
+class TestServices(InterceptStdoutMixin, TestCase):
     fixtures = ['dsmr_consumption/test_dsmrreading.json']
     support_gas_readings = None
 

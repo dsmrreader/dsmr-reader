@@ -2,11 +2,11 @@ from unittest import mock
 
 from django.test import TestCase
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 
 
-class TestDataloggerIncompleteTelegram(CallCommandStdoutMixin, TestCase):
+class TestDataloggerIncompleteTelegram(InterceptStdoutMixin, TestCase):
     """ Test INCOMPLETE telegram. """
 
     def _dsmr_dummy_data(self):
@@ -54,7 +54,7 @@ class TestDataloggerIncompleteTelegram(CallCommandStdoutMixin, TestCase):
         """ Fake & process an DSMR vX telegram reading. """
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
-        self._call_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger')
 
     def test_telegram_buffer_reset(self):
         """ Test whether an incomplete telegram gets dicarded. """

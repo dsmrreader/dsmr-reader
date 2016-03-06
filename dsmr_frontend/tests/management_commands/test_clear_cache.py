@@ -1,11 +1,11 @@
 from time import sleep
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from django.core.cache import cache
 from django.test import TestCase
 
 
-class TestDsmrStatsClearCache(CallCommandStdoutMixin, TestCase):
+class TestDsmrStatsClearCache(InterceptStdoutMixin, TestCase):
     """ Tests whether manually clearing the cache works. """
     def test(self):
         """ Test dsmr_frontend_clear_cache deprecation and fallback. """
@@ -20,5 +20,5 @@ class TestDsmrStatsClearCache(CallCommandStdoutMixin, TestCase):
 
         self.assertEqual(cache.get(CACHE_KEY), CACHE_VALUE)
 
-        self._call_command_stdout('dsmr_frontend_clear_cache')
+        self._intercept_command_stdout('dsmr_frontend_clear_cache')
         self.assertIsNone(cache.get(CACHE_KEY))

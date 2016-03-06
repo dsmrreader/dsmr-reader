@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-06 16:06+0100\n"
-"PO-Revision-Date: 2016-03-06 15:27+0100\n"
+"POT-Creation-Date: 2016-03-06 22:44+0100\n"
+"PO-Revision-Date: 2016-03-06 22:38+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -26,6 +26,9 @@ msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functie
 
 msgid "Generates a generic event triggering apps for backend operations, cron-like."
 msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
+
+msgid "Forces single run, overriding Infinite Command mixin"
+msgstr "Forceert enkele uitvoer."
 
 msgid "Backup"
 msgstr "Backup"

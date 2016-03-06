@@ -3,6 +3,7 @@ import time
 import sys
 import os
 
+from django.utils.translation import ugettext as _
 from django.conf import settings
 
 
@@ -11,8 +12,18 @@ class InfiniteManagementCommandMixin(object):
     keep_alive = None
     _pid_file = None
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--run-once',
+            action='store_true',
+            dest='run_once',
+            default=False,
+            help=_('Forces single run, overriding Infinite Command mixin')
+        )
+
     def __del__(self):
-        self._remove_pid_file()
+        if self._pid_file:
+            self._remove_pid_file()
 
     def _write_pid_file(self):
         self._pid_file = os.path.join(
@@ -30,6 +41,10 @@ class InfiniteManagementCommandMixin(object):
 
     def handle(self, **options):
         """ Called by Django to run command. We relay to run() ourselves and keep it running. """
+        if options.get('run_once'):
+            # Only tests should use this.
+            return self.run(**options)
+
         self._write_pid_file()
 
         # Supervisor defaults to TERM and our deploy script uses HUP.
@@ -38,6 +53,7 @@ class InfiniteManagementCommandMixin(object):
 
         # We simply keep executing the management command until we are told otherwise.
         self.keep_alive = True
+        print('Starting INFINITE command loop...')  # Just to make sure it gets printed.
 
         while self.keep_alive:
             self.run(**options)

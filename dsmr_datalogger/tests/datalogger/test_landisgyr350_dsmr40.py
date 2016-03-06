@@ -5,11 +5,11 @@ from decimal import Decimal
 from django.test import TestCase
 import pytz
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 
 
-class TestDatalogger(CallCommandStdoutMixin, TestCase):
+class TestDatalogger(InterceptStdoutMixin, TestCase):
     """ Test Landis+Gyr 350 DSMR v4.0. """
     def _dsmr_dummy_data(self):
         return [
@@ -61,7 +61,7 @@ class TestDatalogger(CallCommandStdoutMixin, TestCase):
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
 
-        self._call_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger')
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):

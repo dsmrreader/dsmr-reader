@@ -2,12 +2,12 @@ from django.core.management import CommandError
 from django.test import TestCase
 import serial
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
 import dsmr_datalogger.services
 
 
-class TestDsmrDataloggerTracking(CallCommandStdoutMixin, TestCase):
+class TestDsmrDataloggerTracking(InterceptStdoutMixin, TestCase):
     def test_tracking_disabled(self):
         """ Test whether datalogger can bij stopped by changing track setting. """
         datalogger_settings = DataloggerSettings.get_solo()
@@ -16,10 +16,10 @@ class TestDsmrDataloggerTracking(CallCommandStdoutMixin, TestCase):
 
         # Datalogger should crash with error.
         with self.assertRaisesMessage(CommandError, 'Datalogger tracking is DISABLED!'):
-            self._call_command_stdout('dsmr_datalogger')
+            self._intercept_command_stdout('dsmr_datalogger')
 
 
-class TestDsmrVersionMapping(CallCommandStdoutMixin, TestCase):
+class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
     def test_dsmr_version_3(self):
         """ Test connection parameters for DSMR v2/3. """
         datalogger_settings = DataloggerSettings.get_solo()

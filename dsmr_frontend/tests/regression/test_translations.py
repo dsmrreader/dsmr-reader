@@ -4,10 +4,10 @@ import polib
 from django.test import TestCase
 from django.conf import settings
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 
 
-class TestTranslations(CallCommandStdoutMixin, TestCase):
+class TestTranslations(InterceptStdoutMixin, TestCase):
     """ NOTE: This also regenerates translations! """
     def setUp(self):
         # A bit of a hack to detect all languages set, excluding the default one (should be base).
@@ -20,7 +20,7 @@ class TestTranslations(CallCommandStdoutMixin, TestCase):
 
     def test_percent_translated(self):
         """ Test whether localization files are 100% translated. """
-        self._call_command_stdout(
+        self._intercept_command_stdout(
             'makemessages',
             locale=self.locales,
             no_location=True,
@@ -28,7 +28,7 @@ class TestTranslations(CallCommandStdoutMixin, TestCase):
             # Weird bug/collision with coverage reports, crashing the test.
             ignore_patterns=['coverage_report/*'],
         )
-        self._call_command_stdout('compilemessages')
+        self._intercept_command_stdout('compilemessages')
 
         for current_locale in self.locales:
             po_file_path = os.path.join(

@@ -15,6 +15,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
     name = __name__  # Required for PID file.
 
     def add_arguments(self, parser):
+        super(Command, self).add_arguments(parser)
         parser.add_argument(
             '--ack-to-mess-up-my-data',
             action='store_true',
@@ -54,7 +55,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         read_telegram_mock.return_value = self._generate_data(
             options['with_gas'], options['with_electricity_returned']
         )
-        call_command('dsmr_datalogger')
+        call_command('dsmr_datalogger', run_once=True)
 
     def _generate_data(self, with_gas, with_electricity_returned):
         """ Generates 'random' data, but in a way that it keeps incrementing. """

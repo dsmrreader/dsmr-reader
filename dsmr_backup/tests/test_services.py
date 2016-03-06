@@ -7,13 +7,13 @@ from django.test import TestCase
 from django.utils import timezone
 from django.conf import settings
 
-from dsmr_backend.tests.mixins import CallCommandStdoutMixin
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
 import dsmr_backup.services.backup
 import dsmr_backup.services.dropbox
 
 
-class TestBackupServices(CallCommandStdoutMixin, TestCase):
+class TestBackupServices(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backup.services.backup.create')
     def test_check_backups_disabled(self, create_backup_mock):
         backup_settings = BackupSettings.get_solo()
@@ -132,7 +132,7 @@ class TestBackupServices(CallCommandStdoutMixin, TestCase):
         self.assertTrue(dropbox_mock.called)
 
 
-class TestDropboxServices(CallCommandStdoutMixin, TestCase):
+class TestDropboxServices(InterceptStdoutMixin, TestCase):
     def setUp(self):
         dropbox_settings = DropboxSettings.get_solo()
         dropbox_settings.access_token = 'FAKE'
