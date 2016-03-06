@@ -210,10 +210,10 @@ def round_decimal(decimal_price):
     return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
 
 
-def average_electricity_delivered_by_hour():
-    """ Calculates the average consumption by hour. Measured over all consumption data. """
+def average_electricity_demand_by_hour():
+    """ Calculates the average demand by hour. Measured over all consumption data. """
     sql_extra = {
-        # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
+        # Ugly engine check, but still preferred to iterating over a hundred of thousand items.
         'postgresql': "date_part('hour', read_at)",
         'mysql': "extract(hour from read_at)",
         'sqlite': "strftime('%H', read_at)",
@@ -222,5 +222,6 @@ def average_electricity_delivered_by_hour():
     return ElectricityConsumption.objects.extra({
         'hour': sql_extra
     }).values('hour').order_by('hour').annotate(
-        avg_delivered=Avg('currently_delivered')
+        avg_delivered=Avg('currently_delivered'),
+        avg_returned=Avg('currently_returned')
     )

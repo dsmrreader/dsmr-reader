@@ -22,19 +22,35 @@
 
     {% if capabilities.electricity %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-{% if capabilities.electricity_returned %}6{% else %}12{% endif %}">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Hourly ratio of average electricity delivered in Watt{% endblocktrans %}
+                    {% blocktrans %}Hourly ratio of average electricity demand in Watt{% endblocktrans %}
                 </header>
                 <div class="panel-body">
                     <canvas id="average-electricity-delivered-chart" height="350"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
-    </div><!-- /.row -->
-    <div class="row">
+        
+        {% if capabilities.electricity_returned %}
         <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly ratio of average electricity returned in Watt{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity-returned-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+        {% endif %}
+    </div><!-- /.row -->
+    {% endif %}
+    
+    {% if capabilities.electricity %}
+    <div class="row">
+        <div class="col-md-{% if capabilities.electricity_returned %}6{% else %}12{% endif %}">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Hourly ratio of average electricity 1 (off-peak) consumed in kWh{% endblocktrans %}
@@ -45,7 +61,22 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
 
+        {% if capabilities.electricity_returned %}
         <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly ratio of average electricity 1 return (off-peak) yield in kWh{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity1-returned-yield-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+        {% endif %}
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-{% if capabilities.electricity_returned %}6{% else %}12{% endif %}">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Hourly ratio of average electricity 2 (peak) consumed in kWh{% endblocktrans %}
@@ -55,6 +86,19 @@
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
+        
+        {% if capabilities.electricity_returned %}
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Hourly ratio of average electricity 2 return (peak) yield in kWh{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <canvas id="average-electricity2-returned-yield-chart" height="350"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+        {% endif %}
     </div><!-- /.row -->
     {% endif %}
     
@@ -96,6 +140,12 @@
                 render_average_electricity2_consumed_chart();
             {% endif %}
 
+            {% if capabilities.electricity_returned %}
+                render_average_electricity_returned_chart();
+                render_average_electricity1_yield_chart();
+                render_average_electricity2_yield_chart();
+            {% endif %}
+
             {% if capabilities.gas %}
                 render_average_gas_consumed_chart();
             {% endif %}
@@ -120,6 +170,29 @@
             {
                 var data = {{ avg_electricity2_consumption|safe }};
                 var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data, polar_options);
+            }
+        {% endif %}
+
+        {% if capabilities.electricity_returned %}
+            function render_average_electricity_returned_chart()
+            {
+                var data = {{ avg_electricity_returned|safe }};
+                var ctx = $("#average-electricity-returned-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data, polar_options);
+            }
+                           
+            function render_average_electricity1_yield_chart()
+            {
+                var data = {{ avg_electricity1_returned_yield|safe }};
+                var ctx = $("#average-electricity1-returned-yield-chart").get(0).getContext("2d");
+                new Chart(ctx).PolarArea(data, polar_options);
+            }
+                       
+            function render_average_electricity2_yield_chart()
+            {
+                var data = {{ avg_electricity2_returned_yield|safe }};
+                var ctx = $("#average-electricity2-returned-yield-chart").get(0).getContext("2d");
                 new Chart(ctx).PolarArea(data, polar_options);
             }
         {% endif %}
