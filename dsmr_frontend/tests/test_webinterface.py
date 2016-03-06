@@ -1,3 +1,4 @@
+from unittest import mock
 import random
 import json
 
@@ -75,6 +76,14 @@ class TestViews(TestCase):
         self.assertEqual(
             response['Location'], 'http://testserver/admin/login/?next=/admin/'
         )
+
+    @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
+    def test_http_500(self, get_context_data_mock):
+        get_context_data_mock.side_effect = SyntaxError('Meh')
+        response = self.client.get(
+            reverse('{}:dashboard'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 500)
 
     def test_dashboard(self):
         weather_settings = WeatherSettings.get_solo()
