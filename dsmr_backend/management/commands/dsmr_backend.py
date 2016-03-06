@@ -1,13 +1,16 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
 
+from dsmr_backend.mixins import InfiniteManagementCommandMixin
 import dsmr_backend.signals
 
 
-class Command(BaseCommand):
+class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a generic event triggering apps for backend operations, cron-like.')
+    name = __name__  # Required for PID file.
 
-    def handle(self, **options):
+    def run(self, **options):
+        """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
         self.stdout.write('Broadcasting backend signal...')
 
         # send_robust() guarantees the every listener receives this signal.

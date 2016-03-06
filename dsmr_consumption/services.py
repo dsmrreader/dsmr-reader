@@ -3,7 +3,7 @@ from decimal import Decimal, ROUND_UP
 import pytz
 
 from django.utils import timezone
-from django.db import transaction, connection
+from django.db import connection
 from django.db.models import Avg, Max
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -21,7 +21,6 @@ def compact_all():
         compact(dsmr_reading=current_reading)
 
 
-@transaction.atomic
 def compact(dsmr_reading):
     """
     Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute.

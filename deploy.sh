@@ -26,7 +26,7 @@ echo " --- Checking & synchronizing static file changes."
 ./manage.py collectstatic --noinput
 
 echo ""
-echo " --- Sending an SIGHUP to Gunicorn process to gracefully reload itself (webinterface)."
+echo " --- Sending an SIGHUP to supervisor processes to gracefully reload itself."
 ./reload.sh
 
 echo ""

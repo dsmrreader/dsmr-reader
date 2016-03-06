@@ -4,13 +4,15 @@ import random
 import time
 
 from django.core.management.base import BaseCommand, CommandError
+from dsmr_backend.mixins import InfiniteManagementCommandMixin
 from django.utils.translation import ugettext as _
 from django.core.management import call_command
 from django.utils import timezone
 
 
-class Command(BaseCommand):
+class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a FAKE reading. DO NOT USE in production! Used for integration checks.')
+    name = __name__  # Required for PID file.
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -35,7 +37,8 @@ class Command(BaseCommand):
             help=_('Include electricity returned (solar panels)')
         )
 
-    def handle(self, **options):
+    def run(self, **options):
+        """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
         if not options.get('acked_warning'):
             raise CommandError(_(
                 'Intended usage is NOT production! Force by using --ack-to-mess-up-my-data'
