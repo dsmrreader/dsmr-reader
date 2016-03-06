@@ -1,4 +1,5 @@
 from collections import defaultdict
+from datetime import time
 import json
 
 from django.views.generic.base import TemplateView
@@ -10,6 +11,7 @@ from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
 import dsmr_frontend.services
+import dsmr_stats.services
 
 
 class History(TemplateView):
@@ -32,6 +34,7 @@ class History(TemplateView):
         )
 
         now = timezone.localtime(timezone.now())
+        now = timezone.datetime.combine(now.date(), time.min)
         dates = (
             now - timezone.timedelta(days=n) for n in reversed(
                 range(1, context_data['days_ago'] + 1)
@@ -39,8 +42,6 @@ class History(TemplateView):
         )
 
         for current_day in dates:
-            current_day = current_day
-
             try:
                 day_stats = DayStatistics.objects.get(day=current_day).__dict__
             except DayStatistics.DoesNotExist:
@@ -59,5 +60,11 @@ class History(TemplateView):
 
         for key, value in context_data['chart'].items():
             context_data['chart'][key] = json.dumps(value)
+
+        dates = list(dates)
+        context_data['statistics_summary'] = dsmr_stats.services.range_statistics(
+            start=now - timezone.timedelta(days=context_data['days_ago']),
+            end=now
+        )
 
         return context_data

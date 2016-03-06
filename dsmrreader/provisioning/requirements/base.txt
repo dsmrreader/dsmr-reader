@@ -4,4 +4,5 @@ django-solo==1.1.1
 dropbox==5.2.1
 gunicorn==19.3.0
 pyserial==2.7
+python-dateutil==2.5.0
 pytz==2015.7

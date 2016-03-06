@@ -1,16 +1,15 @@
 import json
 
 from django.views.generic.base import TemplateView
-from django.db.models.aggregates import Sum
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
-from dsmr_stats.models.statistics import DayStatistics
 import dsmr_consumption.services
 import dsmr_frontend.services
+import dsmr_stats.services
 
 
 class Dashboard(TemplateView):
@@ -102,36 +101,6 @@ class Dashboard(TemplateView):
         context_data['consumption'] = dsmr_consumption.services.day_consumption(
             day=timezone.localtime(latest_electricity.read_at).date()
         )
-        now = timezone.localtime(timezone.now()).date()
-        start_of_month = timezone.datetime(year=now.year, month=now.month, day=1)
-        month_statistics = DayStatistics.objects.filter(
-            day__gte=start_of_month
-        ).aggregate(
-            total_electricity1=Sum('electricity1'),
-            total_electricity1_cost=Sum('electricity1_cost'),
-            total_electricity2=Sum('electricity2'),
-            total_electricity2_cost=Sum('electricity2_cost'),
-            total_electricity1_returned=Sum('electricity1_returned'),
-            total_electricity2_returned=Sum('electricity2_returned'),
-            total_gas=Sum('gas'),
-            total_gas_cost=Sum('gas_cost'),
-        )
-        month_statistics['total_cost'] = 0
-
-        try:
-            month_statistics['total_cost'] += month_statistics['total_electricity1_cost']
-        except TypeError:
-            pass
-
-        try:
-            month_statistics['total_cost'] += month_statistics['total_electricity2_cost']
-        except TypeError:
-            pass
-
-        try:
-            month_statistics['total_cost'] += month_statistics['total_gas_cost']
-        except TypeError:
-            pass
-
-        context_data['month_statistics'] = month_statistics
+        today = timezone.localtime(timezone.now()).date()
+        context_data['month_statistics'] = dsmr_stats.services.month_statistics(target_date=today)
         return context_data

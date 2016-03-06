@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-06 12:43+0100\n"
-"PO-Revision-Date: 2016-03-06 12:42+0100\n"
+"POT-Creation-Date: 2016-03-06 15:31+0100\n"
+"PO-Revision-Date: 2016-03-06 15:27+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -282,8 +282,8 @@ msgstr "Het aantal weken dat getoond wordt in het recente historie overzicht."
 msgid "Frontend configuration"
 msgstr "Weergaveconfiguratie"
 
-msgid "Archive"
-msgstr "Archief"
+msgid "Day archive"
+msgstr "Dagarchief"
 
 msgid "No data found. It can take up to one day before any data is visible here."
 msgstr "Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer gegevens zichtbaar."
@@ -327,8 +327,8 @@ msgstr "Wissel navigatie"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-msgid "Recent"
-msgstr "Recent"
+msgid "History"
+msgstr "Geschiedenis"
 
 msgid "Trends"
 msgstr "Trends"
@@ -394,27 +394,26 @@ msgid "Energy price"
 msgstr "Energieprijs"
 
 #, python-format
-msgid "Daily cost in the past %(days_ago)s days"
-msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"
+msgid "Summary of past %(days_ago)s days"
+msgstr "Overzicht van de afgelopen %(days_ago)s dagen"
+
+msgid "Daily cost"
+msgstr "Dagelijkse kosten"
 
 msgid "(in &euro;)"
 msgstr "(in &euro;)"
 
-#, python-format
-msgid "Daily electricity usage in the past %(days_ago)s days"
-msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
+msgid "Daily electricity usage"
+msgstr "Dagelijks elektriciteitsverbruik"
 
-#, python-format
-msgid "Daily electricity returned in the past %(days_ago)s days"
-msgstr "Dagelijks elektriciteitsteruglevering in de afgelopen %(days_ago)s dagen"
+msgid "Daily electricity returned"
+msgstr "Dagelijks elektriciteit teruggeleverd"
 
-#, python-format
-msgid "Daily gas usage in the past %(days_ago)s days"
-msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
+msgid "Daily gas usage"
+msgstr "Dagelijks gasverbruik"
 
-#, python-format
-msgid "Daily average temperature in the past %(days_ago)s days"
-msgstr "Dagelijks temperatuurgemiddelde in de afgelopen %(days_ago)s dagen"
+msgid "Daily average temperature"
+msgstr "Dagelijks temperatuurgemiddelde"
 
 msgid "(in &deg;C)"
 msgstr "(in &deg;C)"
@@ -716,6 +715,21 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Daily cost in the past %(days_ago)s days"
+#~ msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"
+
+#~ msgid "Daily electricity usage in the past %(days_ago)s days"
+#~ msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
+
+#~ msgid "Daily electricity returned in the past %(days_ago)s days"
+#~ msgstr "Dagelijks elektriciteitsteruglevering in de afgelopen %(days_ago)s dagen"
+
+#~ msgid "Daily gas usage in the past %(days_ago)s days"
+#~ msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
+
+#~ msgid "Recent"
+#~ msgstr "Recent"
 
 #~ msgid "delivered"
 #~ msgstr "geleverd"

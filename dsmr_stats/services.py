@@ -1,8 +1,11 @@
+from datetime import time
+
 from django.db import transaction, connection
-from django.db.models.aggregates import Avg
+from django.db.models.aggregates import Avg, Sum
 from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
+from dateutil.relativedelta import relativedelta
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
@@ -163,3 +166,44 @@ def average_consumption_by_hour():
         connection.connection.cursor().execute(set_time_zone_sql, ['UTC'])  # pragma: no cover
 
     return hour_statistics
+
+
+def range_statistics(start, end):
+    """ Returns the statistics (totals) for a target date. Its month will be used. """
+    statistics = DayStatistics.objects.filter(day__gte=start, day__lt=end).aggregate(
+        total_electricity1=Sum('electricity1'),
+        total_electricity1_cost=Sum('electricity1_cost'),
+        total_electricity2=Sum('electricity2'),
+        total_electricity2_cost=Sum('electricity2_cost'),
+        total_electricity1_returned=Sum('electricity1_returned'),
+        total_electricity2_returned=Sum('electricity2_returned'),
+        total_gas=Sum('gas'),
+        total_gas_cost=Sum('gas_cost'),
+    )
+
+    # Capabilities may differ.
+    statistics['total_cost'] = 0
+
+    try:
+        statistics['total_cost'] += statistics['total_electricity1_cost']
+    except TypeError:
+        pass
+
+    try:
+        statistics['total_cost'] += statistics['total_electricity2_cost']
+    except TypeError:
+        pass
+
+    try:
+        statistics['total_cost'] += statistics['total_gas_cost']
+    except TypeError:
+        pass
+
+    return statistics
+
+
+def month_statistics(target_date):
+    """ Alias of daterange_statistics() for a month targeted. """
+    start_of_month = timezone.datetime(year=target_date.year, month=target_date.month, day=1)
+    end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
+    return range_statistics(start=start_of_month, end=end_of_month)
