@@ -8,12 +8,13 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-{% if not start_date or not end_date %}
+{% if not capabilities.any or not start_date or not end_date %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. It can take up to one day before any data is visible here.{% endblocktrans %}
     </div>
 {% endif %}
 
+{% if capabilities.any and start_date and end_date %}
     <div class="row">
         <div class="col-md-2">
             <div class="panel">
@@ -84,6 +85,7 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+{% endif %}
 </section><!-- /.content -->
 {% endblock %}
 
@@ -239,20 +241,20 @@
                         data: electricity1_returned,
                         label: "{% trans 'Electricity 1 returned (off-peak)' %}",                       
                         fillColor: "rgba(255,255,255,0.2)",
-                        strokeColor: "rgba(39,194,76,1)",
-                        pointColor: "rgba(39,194,76,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(39,194,76,1)"
-                    }, {
-                        data: electricity2_returned,
-                        label: "{% trans 'Electricity 1 returned (peak)' %}",                       
-                        fillColor: "rgba(255,255,255,0.2)",
                         strokeColor: "rgba(200,200,100,1)",
                         pointColor: "rgba(200,200,100,1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(200,200,100,1)"
+                    }, {
+                        data: electricity2_returned,
+                        label: "{% trans 'Electricity 1 returned (peak)' %}",                       
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(39,194,76,1)",
+                        pointColor: "rgba(39,194,76,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(39,194,76,1)"
                     }]
                 };
                      

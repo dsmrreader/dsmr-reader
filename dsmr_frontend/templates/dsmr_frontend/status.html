@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <span class="fa fa-info-circle fa-lg"></span> {% trans "Data availability" %} <small>({% blocktrans %}Based on readings until this moment{% endblocktrans %})</small>
+                    <span class="fa fa-info-circle fa-lg"></span> &nbsp; {% trans "Data availability" %} &nbsp; <small>({% blocktrans %}Based on readings until this moment{% endblocktrans %})</small>
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
@@ -30,15 +30,15 @@
                         </tr>
                         <tr>
                             <td><span class="badge bg-red"><i class="fa fa-bolt fa-lg"></i></span> &nbsp; {% trans "Electricity usage" %}</td>
-                            <td><i class="fa fa-{{ capabilities.electricity|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ capabilities.electricity|yesno:'check-square-o,close' }} fa-lg"></td>
                         </tr>
                         <tr>
                             <td><span class="badge bg-green"><i class="fa fa-bolt fa-lg"></i></span> &nbsp; {% trans "Electricity return" %}</td>
-                            <td><i class="fa fa-{{ capabilities.electricity_returned|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ capabilities.electricity_returned|yesno:'check-square-o,close' }} fa-lg"></td>
                         </tr>
                         <tr>
                             <td><span class="badge bg-orange"><i class="fa fa-fire fa-lg"></i></span> &nbsp; {% trans "Gas" %}</td>
-                            <td><i class="fa fa-{{ capabilities.gas|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ capabilities.gas|yesno:'check-square-o,close' }} fa-lg"></td>
                         </tr>
                     </table>
                 </div><!-- /.panel-body -->
@@ -63,12 +63,12 @@
                         </tr>
                         <tr{% if not datalogger_settings.track %} class="alert alert-danger"{% endif %}>
                             <td>{% model_meta_info datalogger_settings 'track' 'verbose_name' %}</td>
-                            <td><i class="fa fa-{{ datalogger_settings.track|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ datalogger_settings.track|yesno:'check-square-o,close' }} fa-lg"></td>
                             <td>{% model_meta_info datalogger_settings 'track' 'help_text' %}</td>
                         </tr>
                         <tr>
                             <td>{% model_meta_info datalogger_settings 'track_meter_statistics' 'verbose_name' %}</td>
-                            <td><i class="fa fa-{{ datalogger_settings.track_meter_statistics|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ datalogger_settings.track_meter_statistics|yesno:'check-square-o,close' }} fa-lg"></td>
                             <td>{% model_meta_info datalogger_settings 'track_meter_statistics' 'help_text' %}</td>
                         </tr>
                         <tr>
@@ -104,12 +104,12 @@
                         </tr>
                         <tr{% if not backup_settings.daily_backup %} class="alert alert-danger"{% endif %}>
                             <td>{% model_meta_info backup_settings 'daily_backup' 'verbose_name' %}</td>
-                            <td><i class="fa fa-{{ backup_settings.daily_backup|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ backup_settings.daily_backup|yesno:'check-square-o,close' }} fa-lg"></td>
                             <td>{% model_meta_info backup_settings 'daily_backup' 'help_text' %}</td>
                         </tr>
                         <tr>
                             <td>{% model_meta_info backup_settings 'compress' 'verbose_name' %}</td>
-                            <td><i class="fa fa-{{ backup_settings.compress|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ backup_settings.compress|yesno:'check-square-o,close' }} fa-lg"></td>
                             <td>{% model_meta_info backup_settings 'compress' 'help_text' %}</td>
                         </tr>
                         <tr>
@@ -171,7 +171,7 @@
                         </tr>
                         <tr>
                             <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'verbose_name' %}</td>
-                            <td><i class="fa fa-{{ frontend_settings.reverse_dashboard_graphs|yesno:'check-square-o,square-o' }}"></td>
+                            <td><i class="fa fa-{{ frontend_settings.reverse_dashboard_graphs|yesno:'check-square-o,square-o' }} fa-lg"></td>
                             <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'help_text' %}</td>
                         </tr>
                         <tr>
@@ -202,7 +202,7 @@
                         </tr>
                         <tr{% if not dropbox_settings.access_token %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info dropbox_settings 'access_token' 'verbose_name' %}</td>
-                            <td><i class="fa fa-{{ dropbox_settings.access_token|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ dropbox_settings.access_token|yesno:'check-square-o,close' }} fa-lg"></td>
                             <td>{% model_meta_info dropbox_settings 'access_token' 'help_text' %}</td>
                         </tr>
                         <tr{% if dropbox_settings.access_token and not dropbox_settings.latest_sync %} class="alert alert-warning"{% endif %}>
@@ -233,7 +233,7 @@
                         </tr>
                         <tr{% if not weather_settings.track %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info weather_settings 'track' 'verbose_name' %}</td>
-                            <td><i class="fa fa-{{ weather_settings.track|yesno:'check-square-o,close' }}"></td>
+                            <td><i class="fa fa-{{ weather_settings.track|yesno:'check-square-o,close' }} fa-lg"></td>
                             <td>{% model_meta_info weather_settings 'track' 'help_text' %}</td>
                         </tr>
                         <tr>

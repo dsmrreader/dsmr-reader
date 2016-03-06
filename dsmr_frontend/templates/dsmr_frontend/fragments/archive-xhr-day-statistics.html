@@ -9,7 +9,7 @@
         <table class="table table-condensed">
             <tr>
                 <th class="col-md-2"></th>
-                <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %}){% endif %}</th>
+                <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}{% endif %}){% endif %}</th>
                 <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
                 <th class="col-md-2">{% trans "Energy price" %} (&euro;)</th>
                 <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>

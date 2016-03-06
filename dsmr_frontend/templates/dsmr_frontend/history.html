@@ -8,12 +8,13 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-{% if not capabilities.any %}
+{% if not capabilities.any or not chart %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. It can take up to one day before any data is visible here.{% endblocktrans %}
     </div>
 {% endif %}
 
+{% if capabilities.any and chart %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -27,8 +28,9 @@
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
+{% endif %}
 
-{% if capabilities.electricity %}
+{% if capabilities.electricity and chart %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -44,7 +46,7 @@
     </div><!-- /.row -->
 {% endif %}
 
-{% if capabilities.electricity_returned %}
+{% if capabilities.electricity_returned and chart %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -60,7 +62,7 @@
     </div><!-- /.row -->
 {% endif %}
 
-{% if capabilities.gas %}
+{% if capabilities.gas and chart %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -75,7 +77,7 @@
     </div><!-- /.row -->
 {% endif %}
 
-{% if capabilities.weather %}
+{% if capabilities.weather and chart %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -108,7 +110,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-6"></th>
-                            <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %}){% endif %}</th>
+                            <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}{% endif %}){% endif %}</th>
                             <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
                             <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
                         </tr>
@@ -279,20 +281,20 @@
                         data: {{ chart.electricity1_returned|safe }},
                         label: "{% trans 'Electricity 1 returned (off-peak)' %}",                       
                         fillColor: "rgba(255,255,255,0.2)",
-                        strokeColor: "rgba(39,194,76,1)",
-                        pointColor: "rgba(39,194,76,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(39,194,76,1)"
-                    }, {
-                        data: {{ chart.electricity2_returned|safe }},
-                        label: "{% trans 'Electricity 1 returned (peak)' %}",                       
-                        fillColor: "rgba(255,255,255,0.2)",
                         strokeColor: "rgba(200,200,100,1)",
                         pointColor: "rgba(200,200,100,1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(200,200,100,1)"
+                    }, {
+                        data: {{ chart.electricity2_returned|safe }},
+                        label: "{% trans 'Electricity 1 returned (peak)' %}",                       
+                        fillColor: "rgba(255,255,255,0.2)",
+                        strokeColor: "rgba(39,194,76,1)",
+                        pointColor: "rgba(39,194,76,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(39,194,76,1)"
                     }]
                 };
     

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-06 01:51+0100\n"
-"PO-Revision-Date: 2016-03-06 01:48+0100\n"
+"POT-Creation-Date: 2016-03-06 02:45+0100\n"
+"PO-Revision-Date: 2016-03-06 02:04+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -285,8 +285,8 @@ msgstr "Weergaveconfiguratie"
 msgid "Archive"
 msgstr "Archief"
 
-msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
-msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
+msgid "No data found. It can take up to one day before any data is visible here."
+msgstr "Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer gegevens zichtbaar."
 
 msgid "Select day"
 msgstr "Selecteer dag"
@@ -345,17 +345,11 @@ msgstr "Instellingen"
 msgid "Watt"
 msgstr "Watt"
 
-msgid "delivered"
-msgstr "geleverd"
-
-msgid "returned"
-msgstr "teruggeleverd"
-
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
-msgid "gas consumed in hour"
-msgstr "gas verbruikt in uur tijd"
+msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
+msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
 
 msgid "This month"
 msgstr "Huidige maand"
@@ -483,7 +477,7 @@ msgid "No energy supplier prices found for today. Enable this feature in consump
 msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
 
 msgid "Data availability"
-msgstr "Gegevensbeschikbaarheid"
+msgstr "Beschikbaarheid gegevens"
 
 msgid "Based on readings until this moment"
 msgstr "Gebaseerd op metingen tot nu toe"
@@ -713,6 +707,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "delivered"
+#~ msgstr "geleverd"
+
+#~ msgid "returned"
+#~ msgstr "teruggeleverd"
+
+#~ msgid "gas consumed in hour"
+#~ msgstr "gas verbruikt in uur tijd"
 
 #~ msgid "Display capabilities"
 #~ msgstr "Weergavemogelijkheden"

@@ -16,7 +16,7 @@ import dsmr_frontend.services
 class Dashboard(TemplateView):
     template_name = 'dsmr_frontend/dashboard.html'
     electricity_max = 30  # Minutes or readings.
-    gas_max = 24  # Hours.
+    gas_max = 25  # Hours.
     temperature_max = gas_max
 
     def get_context_data(self, **kwargs):
@@ -45,7 +45,7 @@ class Dashboard(TemplateView):
 
         context_data['electricity_x'] = json.dumps(
             [formats.date_format(
-                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT'
+                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
             ) for x in electricity]
         )
         context_data['electricity_y'] = json.dumps(
@@ -57,7 +57,7 @@ class Dashboard(TemplateView):
 
         context_data['gas_x'] = json.dumps(
             [formats.date_format(
-                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT'
+                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
             ) for x in gas]
         )
         context_data['gas_y'] = json.dumps(
@@ -70,7 +70,7 @@ class Dashboard(TemplateView):
         if context_data['track_temperature']:
             context_data['temperature_x'] = json.dumps(
                 [formats.date_format(
-                    timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_DATETIME_FORMAT'
+                    timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
                 ) for x in temperature]
             )
             context_data['temperature_y'] = json.dumps(

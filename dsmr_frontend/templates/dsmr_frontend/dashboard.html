@@ -10,8 +10,8 @@
     {% if capabilities.electricity and latest_electricity_read %}
 	<li>
 	    <a href="" onclick="return false;">
-	        <span class="badge bg-red"><i class="fa fa-bolt"></i> {{ latest_electricity }} {% trans "Watt" %}</span>
-            <small>{% trans "delivered" %} ({{ latest_electricity_read|naturaltime }})</small>
+	        <span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ latest_electricity }} &nbsp; {% trans "Watt" %}</span>
+            <small style="color: #999999;">({{ latest_electricity_read|naturaltime }})</small>
 	    </a>
     </li>
     {% endif %}
@@ -19,8 +19,8 @@
     {% if capabilities.electricity_returned and latest_electricity_returned %}
     <li>
         <a href="" onclick="return false;">
-            <span class="badge bg-green"><i class="fa fa-bolt"></i> {{ latest_electricity_returned }} {% trans "Watt" %}</span>
-            <small>{% trans "returned" %} ({{ latest_electricity_read|naturaltime }})</small>
+            <span class="badge bg-green"><i class="fa fa-bolt"></i> &nbsp; {{ latest_electricity_returned }} &nbsp; {% trans "Watt" %}</span>
+            <small style="color: #999999;">({{ latest_electricity_read|naturaltime }})</small>
         </a>
     </li>
     {% endif %}
@@ -28,8 +28,8 @@
     {% if capabilities.gas and latest_gas_read %}
     <li>
         <a href="" onclick="return false;">
-            <span class="badge bg-orange"><i class="fa fa-fire"></i> {{ latest_gas }} {% trans "m<sup>3</sup>" %}</span>
-            <small>{% trans "gas consumed in hour" %} ({{ latest_gas_read|naturaltime }})</small>
+            <span class="badge bg-orange"><i class="fa fa-fire"></i> &nbsp; {{ latest_gas }} &nbsp; {% trans "m<sup>3</sup>" %}</span>
+            <small style="color: #999999;">({{ latest_gas_read|naturaltime }})</small>
         </a>
     </li>
     {% endif %}
@@ -55,7 +55,7 @@
                     <table class="table table-condensed">
                         <tr>
                             <th class="col-md-6"></th>
-                            <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %}){% endif %}</th>
+                            <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}{% endif %}){% endif %}</th>
                             <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
                             <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
                         </tr>
@@ -71,12 +71,14 @@
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.total_electricity2_returned|default:'-' }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.total_electricity2_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
+                        {% if capabilities.gas %}
                         <tr>
-                            <td> {% if capabilities.gas %}{% trans "Gas" %}{% endif %}</td>
-                            <td><span class="badge bg-orange">{% if capabilities.gas %}{{ month_statistics.total_gas|default:'-' }}{% endif %}</span></td>
+                            <td>{% trans "Gas" %}</td>
+                            <td><span class="badge bg-orange">{{ month_statistics.total_gas|default:'-' }}</span></td>
                             <td>&nbsp;</td>
-                            <td><span class="badge bg-black">{% if capabilities.gas %}{{ month_statistics.total_gas_cost|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{{ month_statistics.total_gas_cost|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
                             <td colspan="2">&nbsp;</td>
@@ -100,7 +102,7 @@
 			        <table class="table table-condensed">
 			            <tr>
 			                <th class="col-md-6"></th>
-			                <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %} / {% trans "m<sup>3</sup>" noop %}){% endif %}</th>
+			                <th class="col-md-2">{% if capabilities.electricity %}{% trans "Delivered" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}{% endif %}){% endif %}</th>
 			                <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
 			                <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
 			            </tr>
@@ -116,12 +118,14 @@
 			                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity2_returned|default:'-' }}{% endif %}</span></td>
 			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity2_cost|default:'-' }}{% endif %}</span></td>
 			            </tr>
+                        {% if capabilities.gas %}
 			            <tr>
-			                <td> {% if capabilities.gas %}{% trans "Gas" %}{% endif %}</td>
-			                <td><span class="badge bg-orange">{% if capabilities.gas %}{{ consumption.gas|default:'-' }}{% endif %}</span></td>
+			                <td> {% trans "Gas" %}</td>
+			                <td><span class="badge bg-orange">{{ consumption.gas|default:'-' }}</span></td>
 			                <td>&nbsp;</td>
-			                <td><span class="badge bg-black">{% if capabilities.gas %}{{ consumption.gas_cost|default:'-' }}{% endif %}</span></td>
+			                <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
 			            </tr>
+			            {% endif %}
 			            <tr>
 			                <td style="font-weight: bold;">{% trans "Total" %}</td>
 			                <td colspan="2">&nbsp;</td>
