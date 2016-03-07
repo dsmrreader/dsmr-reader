@@ -70,4 +70,4 @@ class InfiniteManagementCommandMixin(object):
     def _signal_handler(self, signum, frame):
         # If we get called, then we must gracefully exit.
         self.keep_alive = False
-        self.stderr.write('Detected signal #{}, exiting on next run...'.format(signum))
+        self.stdout.write('Detected signal #{}, exiting on next run...'.format(signum))
