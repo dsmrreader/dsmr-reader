@@ -1,3 +1,4 @@
+import errno
 import re
 
 from django.utils import timezone
@@ -49,8 +50,19 @@ def read_telegram():
     telegram_start_seen = False
     buffer = ''
 
+    # Just keep fetching data until we got what we were looking for.
     while True:
-        data = serial_handle.readline()
+        try:
+            # Since #79 we use an infinite datalogger loop and signals to break out of it. Serial
+            # operations however do not work well with interupts, so we'll have to check for E-INTR.
+            data = serial_handle.readline()
+        except OSError as e:
+            if getattr(e, 'errno', errno.EINTR):
+                # If we were signaled to stop, we still have to finish our loop.
+                continue
+
+            # Something else and unexpected failed.
+            raise
 
         try:
             # Make sure weird characters are converted properly.
