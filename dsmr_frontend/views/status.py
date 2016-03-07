@@ -13,7 +13,7 @@ class Status(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Status, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_data_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['consumption_settings'] = ConsumptionSettings.get_solo()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()

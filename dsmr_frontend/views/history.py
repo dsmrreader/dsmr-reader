@@ -21,7 +21,7 @@ class History(TemplateView):
         frontend_settings = FrontendSettings.get_solo()
 
         context_data = super(History, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_data_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['usage'] = []
         context_data['days_ago'] = frontend_settings.recent_history_weeks * 7
         context_data['track_temperature'] = WeatherSettings.get_solo().track

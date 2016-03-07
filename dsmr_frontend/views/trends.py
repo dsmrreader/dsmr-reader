@@ -12,7 +12,7 @@ class Trends(TemplateView):
     template_name = 'dsmr_frontend/trends.html'
 
     def get_context_data(self, **kwargs):
-        capabilities = dsmr_backend.services.get_data_capabilities()
+        capabilities = dsmr_backend.services.get_capabilities()
 
         context_data = super(Trends, self).get_context_data(**kwargs)
         context_data['capabilities'] = capabilities

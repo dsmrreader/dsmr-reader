@@ -3,7 +3,7 @@ from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 
 
-def get_data_capabilities():
+def get_capabilities():
     """
     Returns the capabilities of the data tracked, such as whether the meter supports gas readings or
     if there have been any readings regarding electricity being returned.

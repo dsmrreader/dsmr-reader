@@ -10,6 +10,7 @@ from dateutil.relativedelta import relativedelta
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 import dsmr_consumption.services
+import dsmr_backend.services
 
 
 def analyze():
@@ -53,11 +54,17 @@ def analyze():
         return
 
     consumption_date = timezone.localtime(consumption_found.read_at).date()
-
-    # Skip today, try again tomorrow. As we need a full day to pass first.
     now = timezone.localtime(timezone.now())
 
+    # Skip today, try again tomorrow. As we need a full day to pass first.
     if consumption_date == now.date():
+        return
+
+    # Do not create status until we've passed the next day for over 30 minutes. Required due to
+    # somewhat delayed gas update by meters.
+    if dsmr_backend.services.get_capabilities(capability='gas') \
+            and now.time() < time(minute=30):
+        # Skip for a moment.
         return
 
     # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly
@@ -174,40 +181,22 @@ def average_consumption_by_hour():
 
 def range_statistics(start, end):
     """ Returns the statistics (totals) for a target date. Its month will be used. """
-    statistics = DayStatistics.objects.filter(day__gte=start, day__lt=end).aggregate(
+    return DayStatistics.objects.filter(day__gte=start, day__lt=end).aggregate(
+        total_cost=Sum('total_cost'),
         total_electricity1=Sum('electricity1'),
         total_electricity1_cost=Sum('electricity1_cost'),
+        total_electricity1_returned=Sum('electricity1_returned'),
         total_electricity2=Sum('electricity2'),
         total_electricity2_cost=Sum('electricity2_cost'),
-        total_electricity1_returned=Sum('electricity1_returned'),
         total_electricity2_returned=Sum('electricity2_returned'),
         total_gas=Sum('gas'),
         total_gas_cost=Sum('gas_cost'),
     )
-
-    # Capabilities may differ.
-    statistics['total_cost'] = 0
-
-    try:
-        statistics['total_cost'] += statistics['total_electricity1_cost']
-    except TypeError:
-        pass
-
-    try:
-        statistics['total_cost'] += statistics['total_electricity2_cost']
-    except TypeError:
-        pass
-
-    try:
-        statistics['total_cost'] += statistics['total_gas_cost']
-    except TypeError:
-        pass
-
-    return statistics
 
 
 def month_statistics(target_date):
     """ Alias of daterange_statistics() for a month targeted. """
     start_of_month = timezone.datetime(year=target_date.year, month=target_date.month, day=1)
     end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
+
     return range_statistics(start=start_of_month, end=end_of_month)

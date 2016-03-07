@@ -16,7 +16,7 @@ class Archive(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Archive, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_data_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
 
         day_statistics = DayStatistics.objects.all().order_by('pk')
 
@@ -37,7 +37,7 @@ class ArchiveXhrDayStatistics(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(ArchiveXhrDayStatistics, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_data_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
 
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
             self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
@@ -94,7 +94,7 @@ class ArchiveXhrHourStatistics(View):
 
         return HttpResponse(
             json.dumps({
-                'capabilities': dsmr_backend.services.get_data_capabilities(),
+                'capabilities': dsmr_backend.services.get_capabilities(),
                 'data': data,
             }),
             content_type='application/json'

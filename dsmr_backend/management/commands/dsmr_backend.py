@@ -14,27 +14,24 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
-        self.stdout.write('')
         self.stdout.write('Broadcasting backend signal @ {}...'.format(
             timezone.localtime(timezone.now())
         ))
 
         # send_robust() guarantees the every listener receives this signal.
         responses = dsmr_backend.signals.backend_called.send_robust(None)
-
-        signal_failure = []
+        signal_failures = []
 
         for current_receiver, current_response in responses:
-            self.stdout.write(' - {} :: {}'.format(current_receiver, current_response))
-
             if isinstance(current_response, Exception):
                 # Add and print traceback to help debugging any issues raised.
                 exception_traceback = traceback.format_tb(current_response.__traceback__, limit=100)
                 exception_traceback = "\n".join(exception_traceback)
 
+                self.stdout.write(' - {} :: {}'.format(current_receiver, exception_traceback))
                 self.stderr.write(exception_traceback)
-                signal_failure.append(exception_traceback)
+                signal_failures.append(exception_traceback)
 
-        if signal_failure:
+        if signal_failures:
             # Reflect any error to output for convenience.
-            raise CommandError(signal_failure)
+            raise CommandError(signal_failures)

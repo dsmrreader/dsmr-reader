@@ -12,7 +12,7 @@ class Statistics(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Statistics, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_data_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
 
         today = timezone.localtime(timezone.now()).date()
 
