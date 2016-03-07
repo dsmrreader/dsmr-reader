@@ -68,6 +68,7 @@ def read_telegram():
 
         # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
         if data.startswith('!') and telegram_start_seen:
+            serial_handle.close()
             return buffer
 
 
