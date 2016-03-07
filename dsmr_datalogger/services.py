@@ -1,6 +1,6 @@
-import errno
 import re
 
+from serial.serialutil import SerialException
 from django.utils import timezone
 import serial
 
@@ -54,10 +54,11 @@ def read_telegram():
     while True:
         try:
             # Since #79 we use an infinite datalogger loop and signals to break out of it. Serial
-            # operations however do not work well with interupts, so we'll have to check for E-INTR.
+            # operations however do not work well with interrupts, so we'll have to check for E-INTR.
             data = serial_handle.readline()
-        except OSError as e:
-            if getattr(e, 'errno', errno.EINTR):
+        except SerialException as error:
+            print(str(error))
+            if str(error) == 'read failed: [Errno 4] Interrupted system call':
                 # If we were signaled to stop, we still have to finish our loop.
                 continue
 

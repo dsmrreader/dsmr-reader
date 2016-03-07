@@ -1,15 +1,15 @@
 from unittest import mock
 
+from serial.serialutil import SerialException
 from django.test import TestCase
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 
 
-class TestDataloggerIncompleteTelegram(InterceptStdoutMixin, TestCase):
-    """ Test INCOMPLETE telegram. """
-
+class TestDataloggerError(InterceptStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
+        """ Returns INCOMPLETE telegram. """
         return [
             # We start halfway, forcing us to discard/ignore it.
             "1-0:99.97.0(1)(0-0:96.7.19)(000101000001W)(2147483647*s)\n",
@@ -64,3 +64,28 @@ class TestDataloggerIncompleteTelegram(InterceptStdoutMixin, TestCase):
         #                      dsmr_datalogger_dsmrreading.timestamp
         self._fake_dsmr_reading()
         self.assertEqual(DsmrReading.objects.count(), 1)
+
+    @mock.patch('serial.Serial.open')
+    @mock.patch('serial.Serial.readline')
+    def test_interrupt(self, serial_readline_mock, serial_open_mock):
+        """ Test whether interrupts are handled. """
+        serial_open_mock.return_value = None
+
+        # First call raises expected exception, second call should just return data.
+        eintr_error = SerialException('read failed: [Errno 4] Interrupted system call')
+        serial_readline_mock.side_effect = [eintr_error] + self._dsmr_dummy_data()
+        self.assertFalse(DsmrReading.objects.exists())
+
+        self._intercept_command_stdout('dsmr_datalogger')
+        self.assertTrue(DsmrReading.objects.exists())
+
+        # Everything else should be reraised.
+        serial_readline_mock.side_effect = SerialException('Unexpected error from Serial')
+
+        DsmrReading.objects.all().delete()
+        self.assertFalse(DsmrReading.objects.exists())
+
+        with self.assertRaises(SerialException):
+            self._intercept_command_stdout('dsmr_datalogger')
+
+        self.assertFalse(DsmrReading.objects.exists())
