@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_consumption.services
-import dsmr_frontend.services
+import dsmr_backend.services
 import dsmr_stats.services
 
 
@@ -12,7 +12,7 @@ class Trends(TemplateView):
     template_name = 'dsmr_frontend/trends.html'
 
     def get_context_data(self, **kwargs):
-        capabilities = dsmr_frontend.services.get_data_capabilities()
+        capabilities = dsmr_backend.services.get_data_capabilities()
 
         context_data = super(Trends, self).get_context_data(**kwargs)
         context_data['capabilities'] = capabilities

@@ -4,7 +4,7 @@ from django.utils import timezone
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.settings import DataloggerSettings
-import dsmr_frontend.services
+import dsmr_backend.services
 
 
 class Statistics(TemplateView):
@@ -12,7 +12,7 @@ class Statistics(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Statistics, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_frontend.services.get_data_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.get_data_capabilities()
 
         today = timezone.localtime(timezone.now()).date()
 
