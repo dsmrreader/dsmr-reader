@@ -57,7 +57,6 @@ def read_telegram():
             # operations however do not work well with interrupts, so we'll have to check for E-INTR.
             data = serial_handle.readline()
         except SerialException as error:
-            print(str(error))
             if str(error) == 'read failed: [Errno 4] Interrupted system call':
                 # If we were signaled to stop, we still have to finish our loop.
                 continue
