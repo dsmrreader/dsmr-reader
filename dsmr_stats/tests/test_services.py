@@ -38,7 +38,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         # This should delay statistics generation.
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 13, hour=0, minute=29)
+            timezone.datetime(2015, 12, 13, hour=1, minute=5)
         )
         dsmr_stats.services.analyze()
 
@@ -50,7 +50,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(HourStatistics.objects.count(), 3)
 
         # Now we exceed the delay threshold, causing stats to be generated.
-        now_mock.return_value += timezone.timedelta(minutes=1)
+        now_mock.return_value += timezone.timedelta(minutes=15)
         dsmr_stats.services.analyze()
 
         if dsmr_backend.services.get_capabilities(capability='gas'):

@@ -25,6 +25,11 @@ class DayStatistics(models.Model):
     class Meta:
         default_permissions = tuple()
 
+    def __str__(self):
+        return '{}: {}'.format(
+            self.__class__.__name__, self.day
+        )
+
 
 class HourStatistics(models.Model):
     """ Hourly consumption usage summary. """
@@ -40,3 +45,8 @@ class HourStatistics(models.Model):
 
     class Meta:
         default_permissions = tuple()
+
+    def __str__(self):
+        return '{}: {}'.format(
+            self.__class__.__name__, self.hour_start
+        )

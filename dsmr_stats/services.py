@@ -63,7 +63,7 @@ def analyze():
     # Do not create status until we've passed the next day for over 30 minutes. Required due to
     # somewhat delayed gas update by meters.
     if dsmr_backend.services.get_capabilities(capability='gas') \
-            and now.time() < time(minute=30):
+            and now.time() < time(hour=1, minute=15):
         # Skip for a moment.
         return
 
@@ -71,18 +71,17 @@ def analyze():
     # anyway.
     create_daily_statistics(day=consumption_date)
 
+    with transaction.atomic():
+        for current_hour in range(0, 24):
+            create_hourly_statistics(day=consumption_date, hour=current_hour)
+
     # Reflect changes in cache.
     cache.clear()
 
 
-@transaction.atomic
 def create_daily_statistics(day):
-    """ Calculates and persists both electricity and gas statistics for a day. """
+    """ Calculates and persists both electricity and gas statistics for a day. Daily. """
     consumption = dsmr_consumption.services.day_consumption(day=day)
-
-    for current_hour in range(0, 24):
-        # Since we are already sinde an atomic() transaction, no further savepoints are required.
-        create_hourly_statistics(day=day, hour=current_hour)
 
     return DayStatistics.objects.create(
         day=day,
@@ -103,7 +102,7 @@ def create_daily_statistics(day):
 
 
 def create_hourly_statistics(day, hour):
-    """ Calculates and persists both electricity and gas statistics for an hour. """
+    """ Calculates and persists both electricity and gas statistics for a day. Hourly. """
     hour_start = timezone.make_aware(timezone.datetime(
         year=day.year,
         month=day.month,
@@ -134,7 +133,7 @@ def create_hourly_statistics(day, hour):
         # Gas readings are unique per hour anyway.
         creation_kwargs['gas'] = gas_readings[0].currently_delivered
 
-    return HourStatistics.objects.create(**creation_kwargs)
+    HourStatistics.objects.create(**creation_kwargs)
 
 
 @transaction.atomic
