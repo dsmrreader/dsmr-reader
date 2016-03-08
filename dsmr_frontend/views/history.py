@@ -33,26 +33,27 @@ class History(TemplateView):
             'electricity1_cost', 'electricity2_cost', 'gas_cost', 'total_cost', 'average_temperature'
         )
 
-        now = timezone.localtime(timezone.now())
-        now = timezone.datetime.combine(now.date(), time.min)
+        today = timezone.localtime(timezone.now()).date()
+        now = timezone.datetime.combine(today, time.min)
+
+        start = now - timezone.timedelta(days=context_data['days_ago'])
         dates = (
             now - timezone.timedelta(days=n) for n in reversed(
                 range(1, context_data['days_ago'] + 1)
             )
         )
 
-        for current_day in dates:
-            try:
-                day_stats = DayStatistics.objects.get(day=current_day).__dict__
-            except DayStatistics.DoesNotExist:
-                continue
+        passed_days = DayStatistics.objects.filter(day__gte=start)
+
+        for current_day_statistics in passed_days:
+            day_stats = current_day_statistics.__dict__
 
             # Add any notes, as the model has been converted to a dict above.
-            day_stats['notes'] = Note.objects.filter(day=current_day).values_list('description', flat=True)
+            day_stats['notes'] = Note.objects.filter(day=current_day_statistics.day).values_list('description', flat=True)
 
             context_data['usage'].append(day_stats)
             context_data['chart']['days'].append(
-                formats.date_format(current_day, 'DSMR_GRAPH_SHORT_DATE_FORMAT')
+                formats.date_format(current_day_statistics.day, 'DSMR_GRAPH_SHORT_DATE_FORMAT')
             )
 
             for current_field in CONSUMPTION_FIELDS:
