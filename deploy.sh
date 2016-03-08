@@ -1,12 +1,14 @@
 #!/bin/bash
 
+export GIT_PAGER=cat
+
 echo ""
 echo " --- Pulling remote repository for new commits..."
 git fetch
 echo ""
 
 echo " --- The following changes will be applied (if any)."
-git log ..origin/master
+git log --oneline ..origin/master
 echo ""
 
 echo " --- Merging/updating checkout."
