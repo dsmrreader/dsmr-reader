@@ -8,8 +8,8 @@ services:
   - mysql
 
 env:
-  - DB=sqlite
-  - DB=mysql
+  - DB=sqlite DJANGO_SETTINGS_MODULE='dsmrreader.config.test_sqlite'
+  - DB=mysql DJANGO_SETTINGS_MODULE='dsmrreader.config.test_mysql'
 #  - DB=postgres
 
 before_install:
@@ -23,8 +23,6 @@ before_script:
 #  - sh -c "if [ '$DB' = 'pgsql' ]; then createdb -U postgres dsmrreader; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin --force drop dsmrreader; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin create dsmrreader; fi"
-  - sh -c "if [ '$DB' = 'sqlite' ]; then export DJANGO_SETTINGS_MODULE='dsmrreader.config.test_sqlite'; fi"
-  - sh -c "if [ '$DB' = 'mysql' ]; then export DJANGO_SETTINGS_MODULE='dsmrreader.config.test_mysql'; fi"
 
 script: 
   - ./manage.py test --noinput --with-coverage
