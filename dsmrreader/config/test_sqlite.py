@@ -5,7 +5,7 @@ from dsmrreader.config.test import *
 # Use for TESTING only: ALTER USER dsmrreader CREATEDB;
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Sub configs should set this.
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'dsmrreader',  # Will be adjusted to 'test_*' by Django.
         'USER': 'dsmrreader',
         'PASSWORD': 'dsmrreader',

@@ -2,13 +2,12 @@
 
 echo ""
 echo "--- Testing with SQLite..."
-./manage.py test --settings=dsmrreader.config.test --noinput --with-coverage
+./manage.py test --noinput --with-coverage --settings=dsmrreader.config.test_sqlite
 
 echo ""
 echo "--- Testing with PostgreSQL..."
-# See issue #62 @ Github.
-./manage.py test --settings=dsmrreader.config.test_postgresql --noinput
+./manage.py test --noinput --with-coverage --settings=dsmrreader.config.test_postgresql
 
 echo ""
 echo "--- Testing with MySQL..."
-./manage.py test --settings=dsmrreader.config.test_mysql --noinput --with-coverage
+./manage.py test --noinput --with-coverage --settings=dsmrreader.config.test_mysql
