@@ -1,45 +1,46 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from datetime import time
 
 from django.db import migrations
 from django.utils import timezone
 
 
 def regenerate_missing_data(apps, schema_editor):
-    import dsmr_stats.services
     GasConsumption = apps.get_model('dsmr_consumption', 'GasConsumption')
+    HourStatistics = apps.get_model('dsmr_stats', 'HourStatistics')
+    DayStatistics = apps.get_model('dsmr_stats', 'DayStatistics')
+
+    print('')
 
     # Skip when there were no gas readings at all.
     if not GasConsumption.objects.exists():
+        print('--- No data regeneration required')
         return
 
-    # Check for any missing gas data.
-    HourStatistics = apps.get_model('dsmr_stats', 'HourStatistics')
-    missing_gas_hours = HourStatistics.objects.filter(
-        gas__isnull=True,
-        hour_start__gte=timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
-    ).order_by('hour_start')
+    try:
+        # Check for any missing gas data.
+        first_missing_gas_stat = HourStatistics.objects.filter(
+            gas__isnull=True,
+            hour_start__gte=timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
+        ).order_by('hour_start')[0]
+    except IndexError:
+        return
 
-    days_to_regenerate = []
+    target_hour = timezone.localtime(first_missing_gas_stat.hour_start)
+    day_start = timezone.make_aware(timezone.datetime.combine(target_hour, time.min))
+    print('Deleting statistics starting from: {}'.format(day_start))
 
-    for current_hour_stats in missing_gas_hours:
-        # Regeneration MUST be in local time.
-        current_hour = timezone.localtime(current_hour_stats.hour_start)
-        print('Deleting and regenerating hour statistiscs: {}'.format(current_hour))
+    HourStatistics.objects.filter(hour_start__gte=day_start).delete()
+    DayStatistics.objects.filter(day__gte=day_start.date()).delete()
 
-        current_hour_stats.delete()
-        dsmr_stats.services.create_hourly_statistics(day=current_hour.date(), hour=current_hour.hour)
-        days_to_regenerate.append(current_hour.date())
+    days_diff = (timezone.now() - day_start).days
+    import dsmr_stats.services
 
-    # Unique days.
-    days_to_regenerate = list(set(days_to_regenerate))
-    DayStatistics = apps.get_model('dsmr_stats', 'DayStatistics')
-
-    for current_day in days_to_regenerate:
-        print('Deleting and regenerating daystatistics: {}'.format(current_day))
-
-        DayStatistics.objects.filter(day=current_day).delete()
-        dsmr_stats.services.create_daily_statistics(day=current_day)
+    for x in range(1, days_diff + 1):
+        # Just call analyze for each day. If we missed a day or so, the backend will regenerate it.
+        print('Regenerating day: {} / {}'.format(x, days_diff))
+        dsmr_stats.services.analyze()
 
 
 class Migration(migrations.Migration):
