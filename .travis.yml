@@ -16,7 +16,10 @@ before_install:
   - pip install codecov
 
 install: 
-  - pip install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/test.txt
+  - pip install -r dsmrreader/provisioning/requirements/base.txt
+  - pip install -r dsmrreader/provisioning/requirements/test.txt
+#  - pip install -r dsmrreader/provisioning/requirements/postgresql.txt
+  - pip install -r dsmrreader/provisioning/requirements/mysql.txt
 
 before_script:
 #  - sh -c "if [ '$DB' = 'pgsql' ]; then dropdb -U postgres --if-exists dsmrreader; fi"
