@@ -8,8 +8,8 @@ services:
   - mysql
 
 env:
-  - DB=sqlite DJANGO_SETTINGS_MODULE='dsmrreader.config.test_sqlite'
-  - DB=mysql DJANGO_SETTINGS_MODULE='dsmrreader.config.test_mysql'
+  - DB=sqlite DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.test_sqlite'
+  - DB=mysql DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.test_mysql'
 #  - DB=postgres
 
 before_install:
