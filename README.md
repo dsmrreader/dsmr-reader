@@ -472,6 +472,10 @@ Software and thanks listed below. Please note and respect their licences as well
 
 * [Date Range Picker](http://www.daterangepicker.com/)
 
+* [TravisCI](https://travis-ci.org)
+
+* [Codecov[(https://codecov.io)
+
 Dutch Smart Meter reading specifications, data cables, examples and hints:
 
 * [Gé Janssen](http://gejanssen.com/howto/Slimme-meter-uitlezen/)
