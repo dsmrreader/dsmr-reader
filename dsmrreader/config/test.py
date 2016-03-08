@@ -28,8 +28,7 @@ NOSE_ARGS = [
 
 DATABASES = {
     'default': {
-        # SQLite is NOT supported, but might work, so experimental!
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': None,  # Sub configs should set this.
         'NAME': 'dsmrreader',  # Will be adjusted to 'test_*' by Django.
         'USER': 'dsmrreader',
         'PASSWORD': 'dsmrreader',

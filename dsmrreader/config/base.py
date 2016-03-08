@@ -15,8 +15,6 @@ import os
 
 from django.utils.translation import ugettext_lazy as _
 
-from .dsmr import *  # Project specific non-Django settings.
-
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -149,3 +147,13 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
+
+
+""" DSMR Project settings. """
+
+DSMR_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
+
+DSMR_BACKUP_DIRECTORY = 'backups'  # Relative to project root.
+DSMR_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
+
+DSMR_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
