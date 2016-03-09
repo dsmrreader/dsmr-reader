@@ -11,6 +11,7 @@ import dsmr_backend.signals
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a generic event triggering apps for backend operations, cron-like.')
     name = __name__  # Required for PID file.
+    sleep_time = 5
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """

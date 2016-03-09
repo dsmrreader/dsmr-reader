@@ -25,10 +25,10 @@
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
-                            <th class="col-md-7">{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% endif %}</th>
+                            <th class="col-md-6">{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% endif %}</th>
                             <th class="col-md-3">{% trans "Delivered" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}){% endif %}</th>
                             
-                            <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
+                            <th class="col-md-3">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 1 (off-peak)" %}</td>
@@ -56,78 +56,59 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Readings" %}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <td class="col-md-7">{% trans "Latest reading" %}</td>
-                            <td class="col-md-5">
-                            {% if latest_reading %}
-                                <span class="badge bg-navy">{{ latest_reading.timestamp|naturaltime }}</span>
-                            {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "First reading" %}</td>
-                            <td>
-                            {% if first_reading %}
-                                <span class="badge bg-navy">{{ first_reading.timestamp|default:'-' }}</span>
-                            {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Total reading count" %}</td>
-                            <td><span class="badge bg-navy">{{ total_reading_count|intcomma }}</span></td>
-                        </tr>
-                    </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->                        
- 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
                     {% trans "Meter statistics" %}
                 </header>
                 <div class="panel-body">
                     {% if datalogger_settings.track_meter_statistics %}
                     <table class="table table-condensed">
-                    
+                        {% if meter_statistics.power_failure_count %}
                         <tr>
-                            <td class="col-md-7">{% trans "Number of power failures in any phases" %}</td>
-                            <td class="col-md-5"><span class="badge bg-black">{{ meter_statistics.power_failure_count|default:'-' }}</span></td>
+                            <td class="col-md-6">{% trans "Number of power failures in any phases" %}</td>
+                            <td class="col-md-6"><span class="badge bg-black">{{ meter_statistics.power_failure_count|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
+                        {% if meter_statistics.long_power_failure_count %}
                         <tr>
                             <td>{% trans "Number of long power failures in any phase" %}</td>
                             <td><span class="badge bg-black">{{ meter_statistics.long_power_failure_count|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
+                        {% if meter_statistics.voltage_sag_count_l1 %}
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L1" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l1|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
+                        {% if meter_statistics.voltage_sag_count_l2 %}
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l2|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
+                        {% if meter_statistics.voltage_sag_count_l3 %}
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l3|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
+                        {% if meter_statistics.voltage_swell_count_l1 %}
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L1" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l1|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
+                        {% if meter_statistics.voltage_swell_count_l2 %}
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l2|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
+                        {% if meter_statistics.voltage_swell_count_l3 %}
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l3|default:'-' }}</span></td>
                         </tr>
+                        {% endif %}
                     </table>
                     {% else %}
 	                    <div class="alert alert-info" role="alert">
@@ -150,12 +131,12 @@
                     {% if energy_prices %}
                     <table class="table table-condensed">
                         <tr>
-                            <th class="col-md-7">{{ energy_prices.start }} &larr;&rarr; {{ energy_prices.end|default:'-' }}</th>
-                            <th class="col-md-5">{% trans "Unit price" %} (&euro;)</th>
+                            <th class="col-md-6">{{ energy_prices.start }} &larr;&rarr; {{ energy_prices.end|default:'-' }}</th>
+                            <th class="col-md-6">{% trans "Unit price" %} (&euro;)</th>
                         </tr>
                         <tr>
-                            <td class="col-md-7">{% trans "Electricity 1 (per kWh)" %}</td>
-                            <td class="col-md-5"><span class="badge bg-black">{{ energy_prices.electricity_1_price }}</span></td>
+                            <td class="col-md-6">{% trans "Electricity 1 (per kWh)" %}</td>
+                            <td class="col-md-6"><span class="badge bg-black">{{ energy_prices.electricity_1_price }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 (per kWh)" %}</td>

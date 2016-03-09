@@ -203,7 +203,13 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
+        self.assertIn('unprocessed_readings', response.context)
 
+    def test_configuration(self):
+        self._synchronize_date()
+        response = self.client.get(
+            reverse('{}:configuration'.format(self.namespace))
+        )
         self.assertIn('consumption_settings', response.context)
         self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)
 

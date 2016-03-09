@@ -1,0 +1,222 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %} 
+{% load static %} 
+{% load i18n %}
+{% load model_meta_info %}
+
+{% block title %}{% trans "Status" %}{% endblock %}
+{% block header %}{% trans "Status" %} &nbsp; <i class="fa fa-heartbeat"></i>{% endblock %}
+
+{% block header_right %}
+    <li>
+        <a href="{% url 'admin:index' %}" class="btn btn-info">
+            <i class="fa fa-cogs"></i> &nbsp; {% trans "All settings" %}
+        </a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_datalogger_dataloggersettings_change' datalogger_settings.pk %}" class="btn {% if datalogger_settings.track %}btn-primary{% else %}btn-danger{% endif %}">
+                    <i class="fa fa-cogs"></i>
+                    </a> &nbsp; {{ datalogger_settings }} 
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-3">{% trans "Setting" %}</th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
+                            <th class="col-md-6">{% trans "Description" %} </th>
+                        </tr>
+                        <tr{% if not datalogger_settings.track %} class="alert alert-danger"{% endif %}>
+                            <td>{% model_meta_info datalogger_settings 'track' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ datalogger_settings.track|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td>{% model_meta_info datalogger_settings 'track' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info datalogger_settings 'track_meter_statistics' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ datalogger_settings.track_meter_statistics|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td>{% model_meta_info datalogger_settings 'track_meter_statistics' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info datalogger_settings 'dsmr_version' 'verbose_name' %}</td>
+                            <td>{{ datalogger_settings.get_dsmr_version_display }}</td>
+                            <td>{% model_meta_info datalogger_settings 'dsmr_version' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info datalogger_settings 'com_port' 'verbose_name' %}</td>
+                            <td>{{ datalogger_settings.com_port }}</td>
+                            <td>{% model_meta_info datalogger_settings 'com_port' 'help_text' %}</td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_backup_backupsettings_change' backup_settings.pk %}" class="btn {% if backup_settings.daily_backup %}btn-primary{% else %}btn-danger{% endif %}">
+                        <i class="fa fa-cogs"></i>
+                    </a> &nbsp; {{ backup_settings }}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-3">{% trans "Setting" %}</th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
+                            <th class="col-md-6">{% trans "Description" %} </th>
+                        </tr>
+                        <tr{% if not backup_settings.daily_backup %} class="alert alert-danger"{% endif %}>
+                            <td>{% model_meta_info backup_settings 'daily_backup' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ backup_settings.daily_backup|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td>{% model_meta_info backup_settings 'daily_backup' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info backup_settings 'compress' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ backup_settings.compress|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td>{% model_meta_info backup_settings 'compress' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info backup_settings 'backup_time' 'verbose_name' %}</td>
+                            <td>{{ backup_settings.backup_time }}</td>
+                            <td>{% model_meta_info backup_settings 'backup_time' 'help_text' %}</td>
+                        </tr>
+                        <tr{% if not backup_settings.latest_backup %} class="alert alert-warning"{% endif %}>
+                            <td>{% model_meta_info backup_settings 'latest_backup' 'verbose_name' %}</td>
+                            <td>{{ backup_settings.latest_backup|naturaltime|default_if_none:'-' }}</td>
+                            <td>{% model_meta_info backup_settings 'latest_backup' 'help_text' %}</td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_consumption_consumptionsettings_change' consumption_settings.pk %}" class="btn btn-primary">
+                        <i class="fa fa-cogs"></i>
+                    </a> &nbsp;{{ consumption_settings }} 
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-3">{% trans "Setting" %}</th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
+                            <th class="col-md-6">{% trans "Description" %} </th>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info consumption_settings 'compactor_grouping_type' 'verbose_name' %}</td>
+                            <td>{{ consumption_settings.get_compactor_grouping_type_display }}</td>
+                            <td>{% model_meta_info consumption_settings 'compactor_grouping_type' 'help_text' %}</td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_frontend_frontendsettings_change' frontend_settings.pk %}" class="btn btn-primary">
+                        <i class="fa fa-cogs"></i>
+                    </a> &nbsp; {{ frontend_settings }} 
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-3">{% trans "Setting" %}</th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
+                            <th class="col-md-6">{% trans "Description" %} </th>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ frontend_settings.reverse_dashboard_graphs|yesno:'check-square-o,square-o' }} fa-lg"></td>
+                            <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info frontend_settings 'recent_history_weeks' 'verbose_name' %}</td>
+                            <td>{{ frontend_settings.get_recent_history_weeks_display }}</td>
+                            <td>{% model_meta_info frontend_settings 'recent_history_weeks' 'help_text' %}</td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' dropbox_settings.pk %}" class="btn {% if dropbox_settings.access_token %}btn-primary{% else %}alert-warning{% endif %}">
+                        <i class="fa fa-cogs"></i>
+                    </a> &nbsp; {{ dropbox_settings }}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-3">{% trans "Setting" %}</th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
+                            <th class="col-md-6">{% trans "Description" %} </th>
+                        </tr>
+                        <tr{% if not dropbox_settings.access_token %} class="alert alert-warning"{% endif %}>
+                            <td>{% model_meta_info dropbox_settings 'access_token' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ dropbox_settings.access_token|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td>{% model_meta_info dropbox_settings 'access_token' 'help_text' %}</td>
+                        </tr>
+                        <tr{% if dropbox_settings.access_token and not dropbox_settings.latest_sync %} class="alert alert-warning"{% endif %}>
+                            <td>{% model_meta_info dropbox_settings 'latest_sync' 'verbose_name' %}</td>
+                            <td>{{ dropbox_settings.latest_sync|naturaltime|default_if_none:'-' }}</td>
+                            <td>{% model_meta_info dropbox_settings 'latest_sync' 'help_text' %}</td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_weather_weathersettings_change' weather_settings.pk %}" class="btn {% if weather_settings.track %}btn-primary{% else %}alert-warning{% endif %}">
+                        <i class="fa fa-cogs"></i>
+                    </a> &nbsp; {{ weather_settings }}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-3">{% trans "Setting" %}</th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
+                            <th class="col-md-6">{% trans "Description" %} </th>
+                        </tr>
+                        <tr{% if not weather_settings.track %} class="alert alert-warning"{% endif %}>
+                            <td>{% model_meta_info weather_settings 'track' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ weather_settings.track|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td>{% model_meta_info weather_settings 'track' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info weather_settings 'buienradar_station' 'verbose_name' %}</td>
+                            <td>{{ weather_settings.get_buienradar_station_display }}</td>
+                            <td>{% model_meta_info weather_settings 'buienradar_station' 'help_text' %}</td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+{% endblock %}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-06 22:44+0100\n"
-"PO-Revision-Date: 2016-03-06 22:38+0100\n"
+"POT-Creation-Date: 2016-03-09 23:33+0100\n"
+"PO-Revision-Date: 2016-03-09 23:26+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -157,10 +157,10 @@ msgid "Datalogger"
 msgstr "Datalogger"
 
 msgid "Performs an DSMR P1 telegram reading on the COM port."
-msgstr "Leest een DSMR P1 telegram uit van de COM-poort."
+msgstr "Leest een DSMR P1 telegram uit van de COM-poort (meting)."
 
 msgid "Generates a FAKE reading. DO NOT USE in production! Used for integration checks."
-msgstr "Genereert een VERZONNEN uitlezing. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
+msgstr "Genereert een NEP-meting. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
 
 msgid "Required option to acknowledge you that you WILL mess up your data with this."
 msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee je data kan verprutsen."
@@ -175,16 +175,16 @@ msgid "Intended usage is NOT production! Force by using --ack-to-mess-up-my-data
 msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-my-data"
 
 msgid "Timestamp indicating when the reading was taken, according to the meter"
-msgstr "Moment waarop de uitlezing is gedaan, volgens de meter."
+msgstr "Moment waarop de meting is gedaan, volgens de meter."
 
 msgid "Last hourly reading timestamp"
-msgstr "Tijdstip van laatste uitlezing"
+msgstr "Tijdstip van laatste meting"
 
 msgid "Whether this reading has been processed for merging into statistics"
-msgstr "Geeft aan of deze uitlezing al verwerkt is in het samenvoegen van statistieken"
+msgstr "Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
 
 msgid "DSMR reading"
-msgstr "DSMR-uitlezing"
+msgstr "DSMR-meting"
 
 msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
 msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor hoogtarief."
@@ -336,14 +336,20 @@ msgstr "Geschiedenis"
 msgid "Trends"
 msgstr "Trends"
 
-msgid "Status"
-msgstr "Status"
-
 msgid "Statistics"
 msgstr "Statistieken"
 
-msgid "Settings"
-msgstr "Instellingen"
+msgid "Status"
+msgstr "Status"
+
+msgid "Configuration"
+msgstr "Configuratie"
+
+msgid "All settings"
+msgstr "Alle instellingen"
+
+msgid "Setting"
+msgstr "Instelling"
 
 msgid "Watt"
 msgstr "Watt"
@@ -442,18 +448,6 @@ msgstr "Meterstanden"
 msgid "Gas "
 msgstr "Gas"
 
-msgid "Readings"
-msgstr "Uitlezingen"
-
-msgid "Latest reading"
-msgstr "Laatste uitlezing"
-
-msgid "First reading"
-msgstr "Eerste uitlezing"
-
-msgid "Total reading count"
-msgstr "Totaal aantal uitlezingen"
-
 msgid "Meter statistics"
 msgstr "Meterstatistieken"
 
@@ -478,6 +472,36 @@ msgstr "Gas (per m<sup>3</sup>)"
 msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
 msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
 
+msgid "Readings"
+msgstr "Metingen"
+
+msgid "Number of times data read from your meter. Should be updated every 15 seconds."
+msgstr "Aantal keer dat data uit je meter is uitgelezen. Zou elke 15 seconden uitgevoerd moeten worden."
+
+msgid "Latest reading"
+msgstr "Laatste meting"
+
+msgid "First reading"
+msgstr "Eerste meting"
+
+msgid "Total reading count"
+msgstr "Totaal aantal metingen"
+
+msgid "Background"
+msgstr "Achtergrond"
+
+msgid "Most data is processed with a small delay, but should take no longer than a minute to update. Gas consumption however, is only updated once a hour."
+msgstr "De meeste gegevens worden op de achtergrond verwerkt met een kleine vertraging. Echter zou het verwerken daarvan niet langer dan een minuut moeten duren. Uitgezonderd gasverbruik, wat elk uur verwerkt wordt."
+
+msgid "Unprocessed readings"
+msgstr "Onverwerkte metingen"
+
+msgid "Latest electricity consumption tracked"
+msgstr "Meest recente electriciteitsverbruikmeting"
+
+msgid "Latest gas consumption tracked"
+msgstr "Meest recente gasverbruikmeting"
+
 msgid "Data availability"
 msgstr "Beschikbaarheid gegevens"
 
@@ -492,9 +516,6 @@ msgstr "Gemeten"
 
 msgid "Electricity return"
 msgstr "Elektriciteitsteruglevering"
-
-msgid "Setting"
-msgstr "Instelling"
 
 msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account."
 msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen."

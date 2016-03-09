@@ -9,7 +9,8 @@ from django.conf import settings
 
 class InfiniteManagementCommandMixin(object):
     """ Mixin for long running management commands, only stopping (gracefully) on SIGHUP signal. """
-    keep_alive = None
+    sleep_time = None
+    _keep_alive = None
     _pid_file = None
 
     def add_arguments(self, parser):
@@ -52,12 +53,15 @@ class InfiniteManagementCommandMixin(object):
         signal.signal(signal.SIGTERM, self._signal_handler)
 
         # We simply keep executing the management command until we are told otherwise.
-        self.keep_alive = True
+        self._keep_alive = True
         print('Starting INFINITE command loop...')  # Just to make sure it gets printed.
 
-        while self.keep_alive:
+        while self._keep_alive:
             self.run(**options)
-            time.sleep(2)  # Do not hammer.
+
+            if self.sleep_time is not None:
+                self.stdout.write('Command completed. Sleeping for {} second(s)...'.format(self.sleep_time))
+                time.sleep(self.sleep_time)  # Do not hammer.
 
         self.stdout.write('Exited due to signal detection')
         sys.exit(0)
@@ -69,5 +73,5 @@ class InfiniteManagementCommandMixin(object):
 
     def _signal_handler(self, signum, frame):
         # If we get called, then we must gracefully exit.
-        self.keep_alive = False
+        self._keep_alive = False
         self.stdout.write('Detected signal #{}, exiting on next run...'.format(signum))

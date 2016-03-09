@@ -11,11 +11,8 @@ def regenerate_missing_data(apps, schema_editor):
     HourStatistics = apps.get_model('dsmr_stats', 'HourStatistics')
     DayStatistics = apps.get_model('dsmr_stats', 'DayStatistics')
 
-    print('')
-
     # Skip when there were no gas readings at all.
     if not GasConsumption.objects.exists():
-        print('--- No data regeneration required')
         return
 
     try:
@@ -26,6 +23,8 @@ def regenerate_missing_data(apps, schema_editor):
         ).order_by('hour_start')[0]
     except IndexError:
         return
+
+    print('')
 
     target_hour = timezone.localtime(first_missing_gas_stat.hour_start)
     day_start = timezone.make_aware(timezone.datetime.combine(target_hour, time.min))

@@ -8,6 +8,7 @@ from dsmr_frontend.views.archive import Archive, ArchiveXhrDayStatistics, Archiv
 from dsmr_frontend.views.statistics import Statistics
 from dsmr_frontend.views.trends import Trends
 from dsmr_frontend.views.status import Status
+from dsmr_frontend.views.configuration import Configuration
 
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
         name='trends'
     ),
     url(r'^status$', Status.as_view(), name='status'),
+    url(r'^configuration$', Configuration.as_view(), name='configuration'),
 ]

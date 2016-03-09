@@ -13,6 +13,7 @@ from django.utils import timezone
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a FAKE reading. DO NOT USE in production! Used for integration checks.')
     name = __name__  # Required for PID file.
+    sleep_time = 10
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)

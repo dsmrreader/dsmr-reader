@@ -88,6 +88,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{% url 'frontend:statistics' %}">
+                                <i class="fa fa-list"></i> <span>{% trans "Statistics" %}</span>
+                            </a>
+                        </li>
+                        <li>
                             &nbsp;
                         </li>
                         <li>
@@ -96,13 +101,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:statistics' %}">
-                                <i class="fa fa-list"></i> <span>{% trans "Statistics" %}</span>
-                            </a>
-                        </li>
-                        <li>
-				            <a href="{% url 'admin:index' %}">
-				                <i class="fa fa-cogs"></i> <span>{% trans "Settings" %}</span>
+				            <a href="{% url 'frontend:configuration' %}">
+				                <i class="fa fa-cogs"></i> <span>{% trans "Configuration" %}</span>
 				            </a>
 			            </li>
                     </ul>
