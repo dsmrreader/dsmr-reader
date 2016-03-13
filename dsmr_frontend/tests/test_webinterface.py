@@ -133,18 +133,19 @@ class TestViews(TestCase):
         # XHR's.
         data = {
             'date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT'),
-            'level': 'days',
         }
-        response = self.client.get(
-            reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('capabilities', response.context)
+        for current_level in ('days', 'months', 'years'):
+            data.update({'level': current_level})
+            response = self.client.get(
+                reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('capabilities', response.context)
 
-        response = self.client.get(
-            reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
-        )
-        self.assertEqual(response.status_code, 200)
+            response = self.client.get(
+                reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
+            )
+            self.assertEqual(response.status_code, 200)
 
     def test_history(self):
         frontend_settings = FrontendSettings.get_solo()
