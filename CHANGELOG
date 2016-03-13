@@ -3,13 +3,13 @@
 
 v0.14 (β) - 2016-xx-xx
 ======================
-- Allow month archive (#66).
 - Show exceptions in production (webinterface) (#87).
 - Keep Supervisor processes running (#79).
 - Hourly stats of 22:00:00+00 every day lack gas (#78).
 - Test Travis-CI with MySQL + MariaDB + PostgreSQL (#54).
 - PostgreSQL tests + nosetests + coverage failure: unrecognized configuration parameter "foreign_key_checks" (#62).
 - Performance check (#83).
+- Allow month & year archive (#66).
 - 
 
 

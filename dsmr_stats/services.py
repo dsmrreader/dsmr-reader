@@ -193,9 +193,23 @@ def range_statistics(start, end):
     )
 
 
+def day_statistics(target_date):
+    """ Alias of daterange_statistics() for a day targeted. """
+    next_day = timezone.datetime.combine(target_date + relativedelta(days=1), time.min)
+    return range_statistics(start=target_date, end=next_day)
+
+
 def month_statistics(target_date):
     """ Alias of daterange_statistics() for a month targeted. """
     start_of_month = timezone.datetime(year=target_date.year, month=target_date.month, day=1)
     end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
 
     return range_statistics(start=start_of_month, end=end_of_month)
+
+
+def year_statistics(target_date):
+    """ Alias of daterange_statistics() for a year targeted. """
+    start_of_year = timezone.datetime(year=target_date.year, month=1, day=1)
+    end_of_year = timezone.datetime.combine(start_of_year + relativedelta(years=1), time.min)
+
+    return range_statistics(start=start_of_year, end=end_of_year)

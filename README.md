@@ -486,6 +486,8 @@ Dutch Smart Meter reading specifications, data cables, examples and hints:
 
 * [MW](http://bettermotherfuckingwebsite.com/)
 
+* [Bootstrap Datepicker](http://bootstrap-datepicker.readthedocs.org/)
+
 Pull requests, forking & testing:
 
 * [Jeroen Peters](https://www.linkedin.com/in/jeroenpeters1986)

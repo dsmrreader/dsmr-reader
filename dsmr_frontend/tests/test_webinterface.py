@@ -132,16 +132,17 @@ class TestViews(TestCase):
 
         # XHR's.
         data = {
-            'date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT')
+            'date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT'),
+            'level': 'days',
         }
         response = self.client.get(
-            reverse('{}:archive-xhr-day'.format(self.namespace)), data=data
+            reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
 
         response = self.client.get(
-            reverse('{}:archive-xhr-hour'.format(self.namespace)), data=data
+            reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 200)
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 23:33+0100\n"
-"PO-Revision-Date: 2016-03-09 23:26+0100\n"
+"POT-Creation-Date: 2016-03-13 01:28+0100\n"
+"PO-Revision-Date: 2016-03-13 01:24+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -285,14 +285,23 @@ msgstr "Het aantal weken dat getoond wordt in het recente historie overzicht."
 msgid "Frontend configuration"
 msgstr "Weergaveconfiguratie"
 
-msgid "Day archive"
-msgstr "Dagarchief"
+msgid "Archive"
+msgstr "Archief"
 
 msgid "No data found. It can take up to one day before any data is visible here."
 msgstr "Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer gegevens zichtbaar."
 
-msgid "Select day"
-msgstr "Selecteer dag"
+msgid "Select level of detail displayed"
+msgstr "Selecteer detailniveau"
+
+msgid "Days"
+msgstr "Dagen"
+
+msgid "Months"
+msgstr "Maanden"
+
+msgid "Years"
+msgstr "Jaren"
 
 msgid "Electricity usage"
 msgstr "Elektriciteitsverbruik"
@@ -739,6 +748,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Select day"
+#~ msgstr "Selecteer dag"
 
 #~ msgid "Daily cost in the past %(days_ago)s days"
 #~ msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"
