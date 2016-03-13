@@ -53,6 +53,12 @@ class ArchiveXhrSummary(TemplateView):
             'years': dsmr_stats.services.year_statistics(selected_datetime.date()),
         }[selected_level]
 
+        context_data['title'] = {
+            'days': formats.date_format(selected_datetime.date(), 'DSMR_GRAPH_LONG_DATE_FORMAT'),
+            'months': formats.date_format(selected_datetime.date(), 'DSMR_DATEPICKER_MONTH'),
+            'years': selected_datetime.date().year,
+        }[selected_level]
+
         # Only day level allows some additional data.
         if selected_level == 'days':
             try:
@@ -65,8 +71,6 @@ class ArchiveXhrSummary(TemplateView):
                 context_data['energy_price'] = EnergySupplierPrice()
 
             context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
-
-        context_data['day_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
 
         return context_data
 

@@ -1,9 +1,10 @@
 {% load humanize %}
 {% load i18n %} 
+{% load l10n %}
 
 <div class="panel">
     <header class="panel-heading">
-        {{ statistics.day|date:day_format }}
+        {{ title|unlocalize }}
     </header>
     <div class="panel-body">
         <table class="table table-condensed">
