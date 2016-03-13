@@ -10,6 +10,7 @@ v0.14 (β) - 2016-xx-xx
 - PostgreSQL tests + nosetests + coverage failure: unrecognized configuration parameter "foreign_key_checks" (#62).
 - Performance check (#83).
 - Allow month & year archive (#66).
+- Graphs keep increasing height on tablet (#89).
 - 
 
 

@@ -27,8 +27,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Average hourly electricity demand in Watt{% endblocktrans %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity-delivered-chart" height="350"></canvas>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="average-electricity-delivered-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -39,8 +39,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Average hourly electricity returned in Watt{% endblocktrans %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity-returned-chart" height="350"></canvas>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="average-electricity-returned-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -55,8 +55,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Average hourly electricity 1 (off-peak) consumed in kWh{% endblocktrans %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity1-consumed-chart" height="350"></canvas>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="average-electricity1-consumed-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -67,8 +67,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Average hourly electricity 1 return (off-peak) yield in kWh{% endblocktrans %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity1-returned-yield-chart" height="350"></canvas>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="average-electricity1-returned-yield-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -81,8 +81,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Average hourly electricity 2 (peak) consumed in kWh{% endblocktrans %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity2-consumed-chart" height="350"></canvas>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="average-electricity2-consumed-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -93,8 +93,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Average hourly electricity 2 return (peak) yield in kWh{% endblocktrans %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="average-electricity2-returned-yield-chart" height="350"></canvas>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="average-electricity2-returned-yield-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -109,8 +109,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Average hourly gas consumed in m<sup>3</sup>{% endblocktrans %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="average-gas-consumed-chart" height="350"></canvas>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="average-gas-consumed-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -156,6 +156,7 @@
             {
                 var data = {{ avg_electricity_delivered|safe }};
                 var ctx = $("#average-electricity-delivered-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity-delivered-chart").parent().height();
                 new Chart(ctx).PolarArea(data, polar_options);
             }
                            
@@ -163,6 +164,7 @@
             {
                 var data = {{ avg_electricity1_consumption|safe }};
                 var ctx = $("#average-electricity1-consumed-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity1-consumed-chart").parent().height();
                 new Chart(ctx).PolarArea(data, polar_options);
             }
                        
@@ -170,6 +172,7 @@
             {
                 var data = {{ avg_electricity2_consumption|safe }};
                 var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity2-consumed-chart").parent().height();
                 new Chart(ctx).PolarArea(data, polar_options);
             }
         {% endif %}
@@ -179,6 +182,7 @@
             {
                 var data = {{ avg_electricity_returned|safe }};
                 var ctx = $("#average-electricity-returned-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity-returned-chart").parent().height();
                 new Chart(ctx).PolarArea(data, polar_options);
             }
                            
@@ -186,6 +190,7 @@
             {
                 var data = {{ avg_electricity1_returned_yield|safe }};
                 var ctx = $("#average-electricity1-returned-yield-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity1-returned-yield-chart").parent().height();
                 new Chart(ctx).PolarArea(data, polar_options);
             }
                        
@@ -193,6 +198,7 @@
             {
                 var data = {{ avg_electricity2_returned_yield|safe }};
                 var ctx = $("#average-electricity2-returned-yield-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity2-returned-yield-chart").parent().height();
                 new Chart(ctx).PolarArea(data, polar_options);
             }
         {% endif %}
@@ -202,6 +208,7 @@
             {
                 var data = {{ avg_gas_consumption|safe }};
                 var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-gas-consumed-chart").parent().height();
                 new Chart(ctx).PolarArea(data, polar_options);
             }
         {% endif %}

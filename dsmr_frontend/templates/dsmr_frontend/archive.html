@@ -56,8 +56,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Electricity usage{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="electricity-chart" style="height: 150px;"></canvas>
+                <div class="panel-body" style="height: 200px;">
+                    <canvas id="electricity-chart"></canvas>
                     <div id="electricity-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
@@ -70,8 +70,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Electricity returned{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="electricity-returned-chart" style="height: 150px;"></canvas>
+                <div class="panel-body" style="height: 200px;">
+                    <canvas id="electricity-returned-chart"></canvas>
                     <div id="electricity-returned-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
@@ -84,8 +84,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Gas usage{% endblocktrans %} {% trans "(in m<sup>3</sup>)" %}
                 </header>
-                <div class="panel-body">
-                	<canvas id="gas-chart" style="height: 150px;"></canvas>
+                <div class="panel-body" style="height: 200px;">
+                	<canvas id="gas-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -293,7 +293,8 @@
                 }
                 $("#electricity-chart-holder").show();
 
-                var ctx = $("#electricity-chart").css('height', '150px').get(0).getContext("2d");
+                var ctx = $("#electricity-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-chart").parent().height();
                 g_electricity_chart_instance = new Chart(ctx).Line(data, line_options);
                 $("#electricity-chart-legend").html(g_electricity_chart_instance.generateLegend());
             }
@@ -329,7 +330,8 @@
                 }
                 $("#electricity-returned-chart-holder").show();
 
-                var ctx = $("#electricity-returned-chart").css('height', '150px').get(0).getContext("2d");
+                var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-returned-chart").parent().height();
                 g_electricity_returned_chart_instance = new Chart(ctx).Line(data, line_options);
                 $("#electricity-returned-chart-legend").html(g_electricity_returned_chart_instance.generateLegend());
             }
@@ -356,7 +358,8 @@
                	}
                 $("#gas-chart-holder").show();
 
-                var ctx = $("#gas-chart").show().css('height', '150px').get(0).getContext("2d");
+                var ctx = $("#gas-chart").show().get(0).getContext("2d");
+                ctx.canvas.height = $("#gas-chart").parent().height();
                 g_gas_chart_instance = new Chart(ctx).Line(data, line_options);
             }
 		</script>

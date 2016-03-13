@@ -69,8 +69,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Daily cost{% endblocktrans %} {% trans "(in &euro;)" %}
                 </header>
-                <div class="panel-body">
-                	<canvas id="cost-chart" height="150"></canvas>
+                <div class="panel-body" style="height: 200px;">
+                	<canvas id="cost-chart"></canvas>
                 	<div id="cost-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
@@ -85,8 +85,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Daily electricity usage{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
-                <div class="panel-body">
-                	<canvas id="electricity-chart" height="150"></canvas>
+                <div class="panel-body" style="height: 200px;">
+                	<canvas id="electricity-chart"></canvas>
                     <div id="electricity-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
@@ -101,8 +101,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Daily electricity returned{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
-                <div class="panel-body">
-                    <canvas id="electricity-returned-chart" height="150"></canvas>
+                <div class="panel-body" style="height: 200px;">
+                    <canvas id="electricity-returned-chart"></canvas>
                     <div id="electricity-returned-chart-legend"></div>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
@@ -117,8 +117,8 @@
                 <header class="panel-heading">
                     {% blocktrans %}Daily gas usage{% endblocktrans %} {% trans "(in m<sup>3</sup>)" %}
                 </header>
-                <div class="panel-body">
-                	<canvas id="gas-chart" height="150"></canvas>
+                <div class="panel-body" style="height: 200px;">
+                	<canvas id="gas-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -132,9 +132,9 @@
                 <header class="panel-heading">
                     {% blocktrans %}Daily average temperature{% endblocktrans %} {% trans "(in &deg;C)" %}
                 </header>
-                <div class="panel-body">
+                <div class="panel-body" style="height: 200px;">
                 {% if track_temperature %}
-                    <canvas id="temperature-chart" height="150"></canvas>
+                    <canvas id="temperature-chart"></canvas>
                 {% else %}
                     <div class="alert alert-info" role="alert">
                     {% blocktrans %}Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly).{% endblocktrans %}
@@ -233,6 +233,7 @@
 	   			};
 	
 	   			var ctx = $("#cost-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#cost-chart").parent().height();
 	   			var chart_instance = new Chart(ctx).Line(data, line_options);
 	   			$("#cost-chart-legend").html(chart_instance.generateLegend());
    			}
@@ -265,6 +266,7 @@
 	   			};
 	
 	   			var ctx = $("#electricity-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-chart").parent().height();
 	   			var chart_instance = new Chart(ctx).Line(data, line_options);
                 $("#electricity-chart-legend").html(chart_instance.generateLegend());
    			}
@@ -297,6 +299,7 @@
                 };
     
                 var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-returned-chart").parent().height();
                 var chart_instance = new Chart(ctx).Line(data, line_options);
                 $("#electricity-returned-chart-legend").html(chart_instance.generateLegend());
             }
@@ -320,6 +323,7 @@
                 };
 
                 var ctx = $("#gas-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#gas-chart").parent().height();
                 new Chart(ctx).Line(data, line_options);
             }
             {% endif %}
@@ -342,6 +346,7 @@
 	   			};
 
 	   			var ctx = $("#temperature-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#temperature-chart").parent().height();
 	   			new Chart(ctx).Line(data, line_options);
    			}
 		    {% endif %}
