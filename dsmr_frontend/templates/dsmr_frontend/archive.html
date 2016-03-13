@@ -16,7 +16,7 @@
 
 {% if capabilities.any and start_date and end_date %}
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Select level of detail displayed{% endblocktrans %}
@@ -38,14 +38,14 @@
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-md-offset-1 col-md-8">
+                        <div class="col-md-offset-1 col-md-10">
                             <div id="datepicker"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div id="summary-holder"></div>
         </div>
     </div>
@@ -155,6 +155,9 @@
        			});
         	});
             
+            /**
+             * Resets the datepicker. Required because options cannot be changed dynamically.
+             */
             function initialize_datepicker()
             {
             	$('.datepicker-trigger').removeClass('st-green').addClass('st-gray');
@@ -168,8 +171,7 @@
                 $('#datepicker').datepicker({
                     startView: g_datepicker_view_mode,
                     minViewMode: g_datepicker_view_mode,
-                    maxViewMode: g_datepicker_view_mode,
-                    todayBtn: "linked",
+                    maxViewMode: 'years',
                     calendarWeeks: true,
                     todayHighlight: true,
                     startDate: '{{ start_date|date:datepicker_date_format }}',
@@ -181,27 +183,39 @@
                     {
                         return;
                     }
-                    update_summary(e.date);
+                    update_view(e.date);
                     
                 }).on('changeMonth', function(e) {
                     if (g_datepicker_view_mode != 'months')
                     {
                         return;
                     }
-                    update_summary(e.date);
+                    update_view(e.date);
                     
                 }).on('changeYear', function(e) {
                     if (g_datepicker_view_mode != 'years')
                     {
                         return;
                     }
-                    update_summary(e.date);
+                    update_view(e.date);
                     
                 }).datepicker('update', '{{ end_date|date:datepicker_date_format }}');
                 
-                update_summary($('#datepicker').datepicker('getDate'));
+                update_view($('#datepicker').datepicker('getDate'));
             }
             
+            /**
+             * Shortcut for updating both XHR views.
+             */
+            function update_view(selected_date)
+            {
+                update_summary(selected_date);
+                update_graphs(selected_date)
+            }
+            
+            /**
+             * Updates the upper view, which is the summary table.
+             */
             function update_summary(selected_date)
             {
                 $.ajax({
@@ -215,6 +229,9 @@
                 });
             }
             
+            /**
+             * Updates the lower view, which are the graphs displayed.
+             */
             function update_graphs(selected_date)
             {
                 $.ajax({

@@ -31,22 +31,22 @@
                         </tr>
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 1 (off-peak)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics_summary.total_electricity1|default:'-' }} </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics_summary.total_electricity1_returned|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics_summary.total_electricity1_cost|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics_summary.electricity1|default:'-' }} </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics_summary.electricity1_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics_summary.electricity1_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 2 (peak)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics_summary.total_electricity2|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics_summary.total_electricity2_returned|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics_summary.total_electricity2_cost|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics_summary.electricity2|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics_summary.electricity2_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics_summary.electricity2_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% if capabilities.gas %}
                         <tr>
                             <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ statistics_summary.total_gas|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ statistics_summary.gas|default:'-' }}</span></td>
                             <td>&nbsp;</td>
-                            <td><span class="badge bg-black">{{ statistics_summary.total_gas_cost|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ statistics_summary.gas_cost|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
                         <tr>

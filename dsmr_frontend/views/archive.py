@@ -1,6 +1,8 @@
 from collections import defaultdict
+from datetime import time
 import json
 
+from dateutil.relativedelta import relativedelta
 from django.views.generic.base import TemplateView, View
 from django.http.response import HttpResponse
 from django.utils import timezone, formats
@@ -51,6 +53,7 @@ class ArchiveXhrSummary(TemplateView):
             'years': dsmr_stats.services.year_statistics(selected_datetime.date()),
         }[selected_level]
 
+        # Only day level allows some additional data.
         if selected_level == 'days':
             try:
                 # This WILL fail when we either have no prices at all or conflicting ranges.
@@ -61,8 +64,9 @@ class ArchiveXhrSummary(TemplateView):
                 # Default to zero prices.
                 context_data['energy_price'] = EnergySupplierPrice()
 
+            context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
+
         context_data['day_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
-        context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
 
         return context_data
 
@@ -74,25 +78,62 @@ class ArchiveXhrGraphs(View):
             self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
         selected_level = self.request.GET['level']
-
-        hour_statistics = HourStatistics.objects.filter(
-            hour_start__gte=selected_datetime,
-            hour_start__lte=selected_datetime + timezone.timedelta(days=1)
-        ).order_by('hour_start')
-
         data = defaultdict(list)
+        x_extra = None
         FIELDS = (
             'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas'
         )
 
-        for current_hour in hour_statistics:
-            data['x'].append(formats.date_format(
-                timezone.localtime(current_hour.hour_start), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
-            ))
+        # Zoom to hourly data.
+        if selected_level == 'days':
+            source_data = HourStatistics.objects.filter(
+                hour_start__gte=selected_datetime,
+                hour_start__lte=selected_datetime + timezone.timedelta(days=1)
+            ).order_by('hour_start')
+            x_format = 'DSMR_GRAPH_SHORT_TIME_FORMAT'
+            x_axis = 'hour_start'
+            x_extra = timezone.localtime
+
+        # Zoom to daily data.
+        elif selected_level == 'months':
+            start_of_month = timezone.datetime(year=selected_datetime.year, month=selected_datetime.month, day=1)
+            end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
+            source_data = DayStatistics.objects.filter(day__gte=start_of_month, day__lt=end_of_month)
+            x_format = 'DSMR_GRAPH_SHORT_DATE_FORMAT'
+            x_axis = 'day'
+
+        # Zoom to monthly data.
+        elif selected_level == 'years':
+            source_data = []
+            start_of_year = timezone.datetime(year=selected_datetime.year, month=1, day=1)
+
+            for increment in range(0, 12):
+                current_month = start_of_year + relativedelta(months=increment)
+                current_month_stats = dsmr_stats.services.month_statistics(current_month.date())
+                current_month_stats['month'] = current_month.date()
+                source_data.append(current_month_stats)
+
+            x_format = 'DSMR_DATEPICKER_MONTH'
+            x_axis = 'month'
+
+        for current_item in source_data:
+            try:
+                x_value = getattr(current_item, x_axis)
+            except AttributeError:
+                x_value = current_item[x_axis]
+
+            if x_extra:
+                x_value = x_extra(x_value)
+
+            data['x'].append(formats.date_format(x_value, x_format))
 
             for current_field in FIELDS:
-                value = getattr(current_hour, current_field) or 0
-                data[current_field].append(float(value))
+                try:
+                    y_value = getattr(current_item, current_field) or 0
+                except AttributeError:
+                    y_value = current_item[current_field] or 0
+
+                data[current_field].append(float(y_value))
 
         return HttpResponse(
             json.dumps({

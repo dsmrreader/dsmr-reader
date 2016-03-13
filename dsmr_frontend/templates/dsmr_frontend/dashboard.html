@@ -61,22 +61,22 @@
                         </tr>
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 1 (off-peak)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.total_electricity1|default:'-' }} </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.total_electricity1_returned|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.total_electricity1_cost|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity1|default:'-' }} </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity1_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity1_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 2 (peak)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.total_electricity2|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.total_electricity2_returned|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.total_electricity2_cost|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity2|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity2_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity2_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% if capabilities.gas %}
                         <tr>
                             <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ month_statistics.total_gas|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ month_statistics.gas|default:'-' }}</span></td>
                             <td>&nbsp;</td>
-                            <td><span class="badge bg-black">{{ month_statistics.total_gas_cost|default:'-' }}</span></td>
+                            <td><span class="badge bg-black">{{ month_statistics.gas_cost|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
                         <tr>

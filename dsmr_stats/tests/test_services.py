@@ -161,14 +161,14 @@ class TestServices(InterceptStdoutMixin, TestCase):
             start=target_date, end=target_date + timezone.timedelta(days=1)
         )
         self.assertEqual(statistics['total_cost'], 39)
-        self.assertEqual(statistics['total_electricity1'], 100)
-        self.assertEqual(statistics['total_electricity1_cost'], 1)
-        self.assertEqual(statistics['total_electricity1_returned'], 11)
-        self.assertEqual(statistics['total_electricity2'], 200)
-        self.assertEqual(statistics['total_electricity2_cost'], 2)
-        self.assertEqual(statistics['total_electricity2_returned'], 22)
-        self.assertEqual(statistics['total_gas'], 300)
-        self.assertEqual(statistics['total_gas_cost'], 3)
+        self.assertEqual(statistics['electricity1'], 100)
+        self.assertEqual(statistics['electricity1_cost'], 1)
+        self.assertEqual(statistics['electricity1_returned'], 11)
+        self.assertEqual(statistics['electricity2'], 200)
+        self.assertEqual(statistics['electricity2_cost'], 2)
+        self.assertEqual(statistics['electricity2_returned'], 22)
+        self.assertEqual(statistics['gas'], 300)
+        self.assertEqual(statistics['gas_cost'], 3)
 
         # Now we fetch one outside our range.
         no_statistics = dsmr_stats.services.range_statistics(
@@ -192,14 +192,14 @@ class TestServices(InterceptStdoutMixin, TestCase):
         # Now we just verify whether the expected amount of days is fetched and summarized.
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.
         self.assertEqual(monthly['total_cost'], daily['total_cost'] * days_in_month)
-        self.assertEqual(monthly['total_electricity1'], daily['electricity1'] * days_in_month)
-        self.assertEqual(monthly['total_electricity1_cost'], daily['electricity1_cost'] * days_in_month)
-        self.assertEqual(monthly['total_electricity1_returned'], daily['electricity1_returned'] * days_in_month)
-        self.assertEqual(monthly['total_electricity2'], daily['electricity2'] * days_in_month)
-        self.assertEqual(monthly['total_electricity2_cost'], daily['electricity2_cost'] * days_in_month)
-        self.assertEqual(monthly['total_electricity2_returned'], daily['electricity2_returned'] * days_in_month)
-        self.assertEqual(monthly['total_gas'], daily['gas'] * days_in_month)
-        self.assertEqual(monthly['total_gas_cost'], daily['gas_cost'] * days_in_month)
+        self.assertEqual(monthly['electricity1'], daily['electricity1'] * days_in_month)
+        self.assertEqual(monthly['electricity1_cost'], daily['electricity1_cost'] * days_in_month)
+        self.assertEqual(monthly['electricity1_returned'], daily['electricity1_returned'] * days_in_month)
+        self.assertEqual(monthly['electricity2'], daily['electricity2'] * days_in_month)
+        self.assertEqual(monthly['electricity2_cost'], daily['electricity2_cost'] * days_in_month)
+        self.assertEqual(monthly['electricity2_returned'], daily['electricity2_returned'] * days_in_month)
+        self.assertEqual(monthly['gas'], daily['gas'] * days_in_month)
+        self.assertEqual(monthly['gas_cost'], daily['gas_cost'] * days_in_month)
 
 
 class TestServicesWithoutGas(TestServices):

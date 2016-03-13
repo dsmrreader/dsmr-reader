@@ -1,11 +1,11 @@
 from datetime import time
 
+from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection
 from django.db.models.aggregates import Avg, Sum
 from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
-from dateutil.relativedelta import relativedelta
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
@@ -182,14 +182,14 @@ def range_statistics(start, end):
     """ Returns the statistics (totals) for a target date. Its month will be used. """
     return DayStatistics.objects.filter(day__gte=start, day__lt=end).aggregate(
         total_cost=Sum('total_cost'),
-        total_electricity1=Sum('electricity1'),
-        total_electricity1_cost=Sum('electricity1_cost'),
-        total_electricity1_returned=Sum('electricity1_returned'),
-        total_electricity2=Sum('electricity2'),
-        total_electricity2_cost=Sum('electricity2_cost'),
-        total_electricity2_returned=Sum('electricity2_returned'),
-        total_gas=Sum('gas'),
-        total_gas_cost=Sum('gas_cost'),
+        electricity1=Sum('electricity1'),
+        electricity1_cost=Sum('electricity1_cost'),
+        electricity1_returned=Sum('electricity1_returned'),
+        electricity2=Sum('electricity2'),
+        electricity2_cost=Sum('electricity2_cost'),
+        electricity2_returned=Sum('electricity2_returned'),
+        gas=Sum('gas'),
+        gas_cost=Sum('gas_cost'),
     )
 
 

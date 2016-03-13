@@ -11,6 +11,7 @@ class ExceptionTracebackMiddleware(object):
             render_to_string(
                 '500.html', {
                     'exception': exception,
+                    'exception_class': exception.__class__.__name__,
                     'error_trace': traceback.format_tb(exception.__traceback__, limit=100)
                 }
             )

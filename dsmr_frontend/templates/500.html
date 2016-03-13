@@ -17,7 +17,7 @@
 		
 		{% if exception %}
 		    <h2>Exception:</h2>
-		    <pre>{{ exception }}</pre>
+		    <pre>{{ exception_class }}: {{ exception }}</pre>
 		
 	        <h3>Traceback:</h3>
 	        <pre>{% for current_line in error_trace %}{{ current_line }}
