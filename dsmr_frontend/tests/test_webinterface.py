@@ -7,13 +7,11 @@ from django.utils import timezone, formats
 from django.core.urlresolvers import reverse
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_weather.models.reading import TemperatureReading
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
-from dsmr_stats.models.statistics import DayStatistics, HourStatistics
-from dsmr_stats.models.note import Note
+from dsmr_stats.models.statistics import DayStatistics
 import dsmr_consumption.services
 
 
@@ -29,44 +27,9 @@ class TestViews(TestCase):
     support_data = True
     support_gas = True
 
-    def _synchronize_date(self, interval=None):
-        """ Little hack to fake any output for today (moment of test). """
-        if not self.support_data:
-            return
-
-        dsmr_consumption.services.compact_all()
-
-        timestamp = timezone.now()
-
-        if interval:
-            timestamp += interval
-
-        ec = ElectricityConsumption.objects.all()[0]
-        ec.read_at = timestamp
-        ec.save(update_fields=['read_at'])
-
-        if self.support_gas:
-            gc = GasConsumption.objects.all()[0]
-            gc.read_at = timestamp
-            gc.save(update_fields=['read_at'])
-
-        ds = DayStatistics.objects.get(pk=1)
-        ds.day = timestamp.date()
-        ds.save(update_fields=['day'])
-
-        for current_hour in HourStatistics.objects.all():
-            current_hour.hour_start = current_hour.hour_start.replace(
-                year=ds.day.year,
-                month=ds.day.month,
-                day=ds.day.day
-            )
-            current_hour.save(update_fields=['hour_start'])
-
-        Note.objects.all().update(day=timestamp.date())
-        TemperatureReading.objects.create(read_at=timestamp, degrees_celcius=3.5)
-
     def setUp(self):
         self.client = Client()
+        dsmr_consumption.services.compact_all()
 
     def test_admin(self):
         response = self.client.get(
@@ -85,12 +48,17 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 500)
 
-    def test_dashboard(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_dashboard(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+
         weather_settings = WeatherSettings.get_solo()
         weather_settings.track = True
         weather_settings.save()
 
-        self._synchronize_date()
+#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
         )
@@ -122,8 +90,12 @@ class TestViews(TestCase):
             reverse('{}:dashboard'.format(self.namespace))
         )
 
-    def test_archive(self):
-        self._synchronize_date()
+    @mock.patch('django.utils.timezone.now')
+    def test_archive(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:archive'.format(self.namespace))
         )
@@ -147,13 +119,17 @@ class TestViews(TestCase):
             )
             self.assertEqual(response.status_code, 200)
 
-    def test_history(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_history(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2015, 12, 13)
+        )
         frontend_settings = FrontendSettings.get_solo()
         frontend_settings.recent_history_weeks = random.randint(1, 5)
         frontend_settings.save()
 
         # History fetches all data BEFORE today, so add a little interval to make that happen.
-        self._synchronize_date(interval=timezone.timedelta(days=-1))
+#         self._synchronize_date(interval=timezone.timedelta(days=-1))
         response = self.client.get(
             reverse('{}:history'.format(self.namespace))
         )
@@ -182,24 +158,36 @@ class TestViews(TestCase):
         self.assertEqual(response.context['days_ago'], frontend_settings.recent_history_weeks * 7)
         self.assertFalse(response.context['track_temperature'])
 
-    def test_statistics(self):
-        self._synchronize_date()
+    @mock.patch('django.utils.timezone.now')
+    def test_statistics(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:statistics'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
 
-    def test_trends(self):
-        self._synchronize_date()
+    @mock.patch('django.utils.timezone.now')
+    def test_trends(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:trends'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
 
-    def test_status(self):
-        self._synchronize_date()
+    @mock.patch('django.utils.timezone.now')
+    def test_status(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:status'.format(self.namespace))
         )
@@ -207,8 +195,12 @@ class TestViews(TestCase):
         self.assertIn('capabilities', response.context)
         self.assertIn('unprocessed_readings', response.context)
 
-    def test_configuration(self):
-        self._synchronize_date()
+    @mock.patch('django.utils.timezone.now')
+    def test_configuration(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:configuration'.format(self.namespace))
         )

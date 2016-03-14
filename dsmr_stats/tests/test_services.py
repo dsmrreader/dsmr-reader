@@ -75,8 +75,13 @@ class TestServices(InterceptStdoutMixin, TestCase):
         first_consumption.read_at = first_consumption.read_at + timezone.timedelta()
         dsmr_stats.services.analyze()
 
-    def test_analyze_service_skip_current_day(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_service_skip_current_day(self, now_mock):
         """ Tests whether analysis postpones current day. """
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+
         # Drop fixtures and create data of today.
         ElectricityConsumption.objects.all().delete()
         GasConsumption.objects.all().delete()
@@ -104,7 +109,6 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(HourStatistics.objects.exists())
 
         try:
-            # BUG BUG BUG. Might crash during DST day transition. Should investigate.
             dsmr_stats.services.analyze()
         except LookupError:
             pass

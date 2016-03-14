@@ -19,7 +19,7 @@ def recalculate_statistics(apps, schema_editor):
     latest_consumption = ec_dates[ec_dates.count() - 1].date()
     days_diff = (latest_consumption - first_consumption).days
 
-    for counter in range(1, days_diff + 1):
+    for _ in range(1, days_diff + 1):
         # Just call analyze for each day. If we missed a day or so, the backend will regenerate it.
         dsmr_stats.services.analyze()
 
