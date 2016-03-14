@@ -1,7 +1,12 @@
 
 
+v0.15 (β) - 2016-xx-xx
+======================
+- 
 
-v0.14 (β) - 2016-xx-xx
+
+
+v0.14 (β) - 2016-03-13
 ======================
 - Show exceptions in production (webinterface) (#87).
 - Keep Supervisor processes running (#79).
@@ -11,7 +16,6 @@ v0.14 (β) - 2016-xx-xx
 - Performance check (#83).
 - Allow month & year archive (#66).
 - Graphs keep increasing height on tablet (#89).
-- 
 
 
 
