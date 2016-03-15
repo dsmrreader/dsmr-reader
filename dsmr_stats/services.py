@@ -136,14 +136,6 @@ def create_hourly_statistics(day, hour):
     HourStatistics.objects.create(**creation_kwargs)
 
 
-@transaction.atomic
-def flush():
-    """ Flushes al statistics stored. New ones will generated, providing the source data exists. """
-    DayStatistics.objects.all().delete()
-    HourStatistics.objects.all().delete()
-    cache.clear()
-
-
 def average_consumption_by_hour():
     """ Calculates the average consumption by hour. Measured over all consumption data. """
     sql_extra = {
