@@ -9,6 +9,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_backend.services
 import dsmr_stats.services
+from django.db.utils import IntegrityError
 
 
 class TestServices(InterceptStdoutMixin, TestCase):
@@ -69,6 +70,27 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_stats.services.analyze()
         self.assertEqual(DayStatistics.objects.count(), 2)
         self.assertEqual(HourStatistics.objects.count(), 4)
+
+    def test_create_hourly_statistics_integrity(self):
+        day_start = timezone.make_aware(
+            timezone.datetime(2015, 12, 13, hour=0)
+        )
+        ec_kwargs = {
+            'delivered_1': 0,
+            'returned_1': 0,
+            'delivered_2': 0,
+            'returned_2': 0,
+            'currently_delivered': 0,
+            'currently_returned': 0,
+        }
+        ElectricityConsumption.objects.create(read_at=day_start, **ec_kwargs)
+
+        self.assertFalse(HourStatistics.objects.exists())
+        dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
+        self.assertEqual(HourStatistics.objects.count(), 1)
+
+        with self.assertRaises(IntegrityError):
+            dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
 
     def test_analyze_service_without_data(self):
         first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]

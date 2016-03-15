@@ -3,6 +3,7 @@ from datetime import time
 from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection
 from django.db.models.aggregates import Avg, Sum
+from django.db.utils import IntegrityError
 from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
@@ -71,9 +72,24 @@ def analyze():
     # anyway.
     create_daily_statistics(day=consumption_date)
 
+    day_start = timezone.make_aware(timezone.datetime(
+        year=consumption_date.year,
+        month=consumption_date.month,
+        day=consumption_date.day,
+        hour=0,
+    ))
+
     with transaction.atomic():
-        for current_hour in range(0, 24):
-            create_hourly_statistics(day=consumption_date, hour=current_hour)
+        try:
+            # For legacy reasons, this may (or will) fail. Since #77.
+            create_hourly_statistics(hour_start=day_start)
+        except IntegrityError:
+            # We simply expect it to already exist.
+            pass
+
+        for current_hour in range(1, 24 + 1):  # Current day + midnight of next day.
+            hour_start = day_start + timezone.timedelta(hours=current_hour)
+            create_hourly_statistics(hour_start=hour_start)
 
     # Reflect changes in cache.
     cache.clear()
@@ -101,16 +117,9 @@ def create_daily_statistics(day):
     )
 
 
-def create_hourly_statistics(day, hour):
+def create_hourly_statistics(hour_start):
     """ Calculates and persists both electricity and gas statistics for a day. Hourly. """
-    hour_start = timezone.make_aware(timezone.datetime(
-        year=day.year,
-        month=day.month,
-        day=day.day,
-        hour=hour,
-    ))
     hour_end = hour_start + timezone.timedelta(hours=1)
-
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
         start=hour_start, end=hour_end
     )
