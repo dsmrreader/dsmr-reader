@@ -102,7 +102,7 @@ class ArchiveXhrGraphs(View):
         elif selected_level == 'months':
             start_of_month = timezone.datetime(year=selected_datetime.year, month=selected_datetime.month, day=1)
             end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
-            source_data = DayStatistics.objects.filter(day__gte=start_of_month, day__lt=end_of_month)
+            source_data = DayStatistics.objects.filter(day__gte=start_of_month, day__lt=end_of_month).order_by('day')
             x_format = 'DSMR_GRAPH_SHORT_DATE_FORMAT'
             x_axis = 'day'
 
