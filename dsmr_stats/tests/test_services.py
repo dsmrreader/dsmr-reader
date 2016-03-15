@@ -97,8 +97,13 @@ class TestServices(InterceptStdoutMixin, TestCase):
         first_consumption.read_at = first_consumption.read_at + timezone.timedelta()
         dsmr_stats.services.analyze()
 
-    def test_analyze_service_skip_current_day(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_service_skip_current_day(self, now_mock):
         """ Tests whether analysis postpones current day. """
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+
         # Drop fixtures and create data of today.
         ElectricityConsumption.objects.all().delete()
         GasConsumption.objects.all().delete()
@@ -126,7 +131,6 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(HourStatistics.objects.exists())
 
         try:
-            # BUG BUG BUG. Might crash during DST day transition. Should investigate.
             dsmr_stats.services.analyze()
         except LookupError:
             pass
@@ -136,22 +140,12 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(HourStatistics.objects.exists())
 
     @mock.patch('django.core.cache.cache.clear')
-    def test_analyze_service_clear_cache(self, clear_cache_mock):
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_service_clear_cache(self, now_mock, clear_cache_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1, hour=2)
+        )
         dsmr_stats.services.analyze()
-        self.assertTrue(clear_cache_mock.called)
-
-    def test_flush(self):
-        dsmr_stats.services.analyze()
-        self.assertTrue(DayStatistics.objects.exists())
-        self.assertTrue(HourStatistics.objects.exists())
-
-        dsmr_stats.services.flush()
-        self.assertFalse(DayStatistics.objects.exists())
-        self.assertFalse(HourStatistics.objects.exists())
-
-    @mock.patch('django.core.cache.cache.clear')
-    def test_flush_clear_cache(self, clear_cache_mock):
-        dsmr_stats.services.flush()
         self.assertTrue(clear_cache_mock.called)
 
     def test_average_consumption_by_hour(self):

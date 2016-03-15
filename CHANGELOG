@@ -3,6 +3,7 @@
 v0.15 (β) - 2016-xx-xx
 ======================
 - Django 1.8.11 released (#82).
+- Prevent tests from failing due to moment of execution (#88).
 - Archive only shows graph untill 23:00 (11 pm) (#77).
 - 
 

@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.utils import timezone
+from unittest import mock
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
@@ -41,8 +42,14 @@ class TestServices(InterceptStdoutMixin, TestCase):
         else:
             self.assertEqual(GasConsumption.objects.count(), 0)
 
-    def test_grouping(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_grouping(self, now_mock):
         """ Test grouping per minute, instead of the default 10-second interval. """
+
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2015, 11, 10, hour=21)
+        )
+
         # Make sure to verify the blocking of read ahead.
         dr = DsmrReading.objects.get(pk=3)
         dr.timestamp = timezone.now()
