@@ -12,6 +12,7 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
+from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 
 
@@ -169,6 +170,9 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
+
+        if DsmrReading.objects.exists():
+            self.assertIn('latest_reading', response.context)
 
     @mock.patch('django.utils.timezone.now')
     def test_trends(self, now_mock):

@@ -112,6 +112,10 @@ def telegram_to_reading(data):
 
         code = result.group(1)
 
+        # Dirty fix for #92.
+        if code == "0-2:24.2.1":
+            code = "0-1:24.2.1"
+
         try:
             field = DSMR_MAPPING[code]
         except KeyError:
