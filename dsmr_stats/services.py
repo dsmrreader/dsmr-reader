@@ -68,10 +68,6 @@ def analyze():
         # Skip for a moment.
         return
 
-    # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly
-    # anyway.
-    create_daily_statistics(day=consumption_date)
-
     day_start = timezone.make_aware(timezone.datetime(
         year=consumption_date.year,
         month=consumption_date.month,
@@ -80,14 +76,11 @@ def analyze():
     ))
 
     with transaction.atomic():
-        try:
-            # For legacy reasons, this may (or will) fail. Since #77.
-            create_hourly_statistics(hour_start=day_start)
-        except IntegrityError:
-            # We simply expect it to already exist.
-            pass
+        # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly
+        # anyway.
+        create_daily_statistics(day=consumption_date)
 
-        for current_hour in range(1, 24 + 1):  # Current day + midnight of next day.
+        for current_hour in range(0, 24 + 1):  # Current day + midnight of next day.
             hour_start = day_start + timezone.timedelta(hours=current_hour)
             create_hourly_statistics(hour_start=hour_start)
 
@@ -130,6 +123,9 @@ def create_hourly_statistics(hour_start):
     creation_kwargs = {
         'hour_start': hour_start
     }
+
+    if HourStatistics.objects.filter(**creation_kwargs).exists():
+        return
 
     electricity_start = electricity_readings[0]
     electricity_end = electricity_readings[electricity_readings.count() - 1]

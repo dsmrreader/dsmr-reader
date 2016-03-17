@@ -89,8 +89,8 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
         self.assertEqual(HourStatistics.objects.count(), 1)
 
-        with self.assertRaises(IntegrityError):
-            dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
+        # Should NOT raised any exception.
+        dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
 
     def test_analyze_service_without_data(self):
         first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]
