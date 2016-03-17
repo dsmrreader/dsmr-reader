@@ -474,7 +474,7 @@ Software and thanks listed below. Please note and respect their licences as well
 
 * [TravisCI](https://travis-ci.org)
 
-* [Codecov[(https://codecov.io)
+* [Codecov](https://codecov.io)
 
 Dutch Smart Meter reading specifications, data cables, examples and hints:
 
@@ -485,8 +485,6 @@ Dutch Smart Meter reading specifications, data cables, examples and hints:
 * [SOS Solutions](https://www.sossolutions.nl/)
 
 * [MW](http://bettermotherfuckingwebsite.com/)
-
-* [Bootstrap Datepicker](http://bootstrap-datepicker.readthedocs.org/)
 
 Pull requests, forking & testing:
 
