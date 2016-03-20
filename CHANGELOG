@@ -6,6 +6,7 @@ v0.15 (β) - 2016-xx-xx
 - Prevent tests from failing due to moment of execution (#88).
 - Statistics page meter positions are broken (#93).
 - Archive only shows graph untill 23:00 (11 pm) (#77).
+- Trends page crashes due to nullable fields average (#100).
 - 
 
 

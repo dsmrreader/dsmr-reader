@@ -40,8 +40,8 @@ class HourStatistics(models.Model):
     electricity1_returned = models.DecimalField(max_digits=9, decimal_places=3)
     electricity2_returned = models.DecimalField(max_digits=9, decimal_places=3)
 
-    # Gas readings are optional/not guaranteed.
-    gas = models.DecimalField(max_digits=9, decimal_places=3, null=True, default=None)
+    # Gas readings are optional/not guaranteed. But need to be zero due to averages.
+    gas = models.DecimalField(max_digits=9, decimal_places=3, default=0)
 
     class Meta:
         default_permissions = tuple()

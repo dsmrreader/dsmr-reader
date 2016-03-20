@@ -9,7 +9,6 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_backend.services
 import dsmr_stats.services
-from django.db.utils import IntegrityError
 
 
 class TestServices(InterceptStdoutMixin, TestCase):
