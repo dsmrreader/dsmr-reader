@@ -7,6 +7,7 @@ v0.15 (β) - 2016-xx-xx
 - Statistics page meter positions are broken (#93).
 - Archive only shows graph untill 23:00 (11 pm) (#77).
 - Trends page crashes due to nullable fields average (#100).
+- Trends: Plot peak and off-peak relative to each other (#99).
 - 
 
 
