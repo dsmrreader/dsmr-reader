@@ -216,6 +216,17 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(monthly['gas'], daily['gas'] * days_in_month)
         self.assertEqual(monthly['gas_cost'], daily['gas_cost'] * days_in_month)
 
+    def test_electricity_tariff_percentage(self):
+        target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
+        statistics_dict = self._get_statistics_dict(target_date)
+        statistics_dict['electricity1'] = 5
+        statistics_dict['electricity2'] = 15
+        DayStatistics.objects.create(**statistics_dict)
+
+        percentages = dsmr_stats.services.electricity_tariff_percentage()
+        self.assertEqual(percentages['electricity1'], 25)
+        self.assertEqual(percentages['electricity2'], 75)
+
 
 class TestServicesWithoutGas(TestServices):
     fixtures = ['dsmr_stats/electricity-consumption.json']

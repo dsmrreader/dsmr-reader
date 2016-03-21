@@ -22,6 +22,20 @@
 
     {% if capabilities.electricity %}
     <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Electricity consumption by tariff ratio{% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <canvas id="electricity-by-tariff-chart"></canvas>
+                    <div id="electricity-by-tariff-chart-legend"></div>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    
+    <div class="row">
         <div class="col-md-{% if capabilities.electricity_returned %}6{% else %}12{% endif %}">
             <div class="panel">
                 <header class="panel-heading">
@@ -127,6 +141,13 @@
 	        var polar_options = {
         		segmentStrokeWidth: 5,
 	        }
+	        
+	        var pie_options = {
+                {% verbatim %}
+                tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%",
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=segments[i].fillColor%>\"><%if(segments[i].label){%><%=segments[i].label%><%}%></span></li><%}%></ul>"
+                {% endverbatim %}
+            }
         
         	$(document).ready(function(){
                 Chart.defaults.global.responsive = true;
@@ -135,6 +156,7 @@
                 Chart.defaults.global.segmentShowStroke = true;
 
             {% if capabilities.electricity %}
+                render_electricity_consumption_by_tariff_chart();
                 render_average_electricity_delivered_chart();
                 render_average_electricity1_consumed_chart();
                 render_average_electricity2_consumed_chart();
@@ -152,6 +174,28 @@
         	});
 
 	    {% if capabilities.electricity %}
+	        function render_electricity_consumption_by_tariff_chart()
+	        {
+	            var data = [
+	                {
+	                    value: {{ electricity_by_tariff.electricity1|floatformat:"0" }},
+                        color:"rgba(160,0,0,1)",
+	                    highlight: "#5AD3D1",
+	                    label: "{% trans 'Electricity 1 (off-peak)' %}"
+	                },
+	                {
+	                    value: {{ electricity_by_tariff.electricity2|floatformat:"0" }},
+                        color: "rgba(255,0,0,1)",
+	                    highlight: "#5AD3D1",
+	                    label: "{% trans 'Electricity 2 (peak)' %}"
+	                }
+	            ]
+                var ctx = $("#electricity-by-tariff-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-by-tariff-chart").parent().height();
+                var chart_instance = new Chart(ctx).Pie(data, pie_options);	        	
+                $("#electricity-by-tariff-chart-legend").html(chart_instance.generateLegend());
+	        }
+	    
             function render_average_electricity_delivered_chart()
             {
                 var data = {{ avg_electricity_delivered|safe }};

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-13 02:33+0100\n"
-"PO-Revision-Date: 2016-03-13 01:24+0100\n"
+"POT-Creation-Date: 2016-03-21 21:46+0100\n"
+"PO-Revision-Date: 2016-03-21 21:32+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -532,6 +532,9 @@ msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot
 #, python-format
 msgid "Current data displayed averages %(hour_statistics_count)s hour(s), among %(day_statistics_count)s day(s)."
 msgstr "Huidige gegevens betreffen gemiddelden over %(hour_statistics_count)s uren, verdeeld over %(day_statistics_count)s dag(en)."
+
+msgid "Electricity consumption by tariff ratio"
+msgstr "Electriciteitsverbruik gedurende piek- en daltarief"
 
 msgid "Average hourly electricity demand in Watt"
 msgstr "Gemiddelde elektriciteitsvraag per daguur in Watt"

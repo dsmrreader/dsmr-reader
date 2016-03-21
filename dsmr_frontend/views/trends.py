@@ -34,6 +34,9 @@ class Trends(TemplateView):
         )
 
         if capabilities['electricity']:
+            context_data['electricity_by_tariff'] = dsmr_stats.services.\
+                electricity_tariff_percentage()
+
             context_data['avg_electricity_delivered'] = self._map_graph_data_to_json(
                 avg_electricity_demand_per_hour,
                 'hour',
@@ -94,11 +97,13 @@ class Trends(TemplateView):
         return json.dumps(
             [
                 {
-                    'value': y_type(dsmr_consumption.services.round_decimal(i[y_field] * y_multiply)),
+                    'value': y_type(dsmr_consumption.services.round_decimal(
+                        current[y_field] * y_multiply
+                    )),
                     'color': color,
-                    'label': '{}:00'.format(int(i[x_field])),
+                    'label': '{}:00'.format(int(current[x_field])),
                     'highlight': '#5AD3D1',
                 }
-                for i in data
+                for current in data
             ]
         )

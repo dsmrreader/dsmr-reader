@@ -1,9 +1,9 @@
 from datetime import time
+import math
 
 from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection
 from django.db.models.aggregates import Avg, Sum
-from django.db.utils import IntegrityError
 from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
@@ -139,6 +139,18 @@ def create_hourly_statistics(hour_start):
         creation_kwargs['gas'] = gas_readings[0].currently_delivered
 
     HourStatistics.objects.create(**creation_kwargs)
+
+
+def electricity_tariff_percentage():
+    """ Returns the total electricity consumption percentage by tariff (peak & off-peak). """
+    totals = DayStatistics.objects.all().aggregate(
+        electricity1=Sum('electricity1'),
+        electricity2=Sum('electricity2'),
+    )
+    global_total = totals['electricity1'] + totals['electricity2']
+    totals['electricity1'] = math.ceil(totals['electricity1'] / global_total * 100)
+    totals['electricity2'] = 100 - totals['electricity1']
+    return totals
 
 
 def average_consumption_by_hour():
