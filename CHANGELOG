@@ -8,6 +8,7 @@ v0.15 (β) - 2016-xx-xx
 - Archive only shows graph untill 23:00 (11 pm) (#77).
 - Trends page crashes due to nullable fields average (#100).
 - Trends: Plot peak and off-peak relative to each other (#99).
+- Monitor requirements with requires.io (#101).
 - 
 
 
