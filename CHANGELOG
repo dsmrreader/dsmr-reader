@@ -10,6 +10,7 @@ v0.15 (β) - 2016-xx-xx
 - Trends: Plot peak and off-peak relative to each other (#99).
 - Monitor requirements with requires.io (#101).
 - Terminology (#41).
+- Obsolete signals in dsmr_consumption (#63).
 - 
 
 
