@@ -9,6 +9,7 @@ v0.15 (β) - 2016-xx-xx
 - Trends page crashes due to nullable fields average (#100).
 - Trends: Plot peak and off-peak relative to each other (#99).
 - Monitor requirements with requires.io (#101).
+- Terminology (#41).
 - 
 
 
