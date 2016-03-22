@@ -1,8 +1,8 @@
 Django==1.8.11
 django-flat-theme==1.1.3
-django-solo==1.1.1
-dropbox==5.2.1
-gunicorn==19.3.0
+django-solo==1.1.2
+dropbox==6.1
+gunicorn==19.4.5
 pyserial==3.0.1
-python-dateutil==2.5.0
-pytz==2015.7
+python-dateutil==2.5.1
+pytz==2016.2
