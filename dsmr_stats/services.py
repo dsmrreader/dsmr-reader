@@ -142,7 +142,7 @@ def create_hourly_statistics(hour_start):
 
 
 def electricity_tariff_percentage():
-    """ Returns the total electricity consumption percentage by tariff (peak & off-peak). """
+    """ Returns the total electricity consumption percentage by tariff (high/low tariff). """
     totals = DayStatistics.objects.all().aggregate(
         electricity1=Sum('electricity1'),
         electricity2=Sum('electricity2'),

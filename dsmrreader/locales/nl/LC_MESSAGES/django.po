@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-21 21:46+0100\n"
-"PO-Revision-Date: 2016-03-21 21:32+0100\n"
+"POT-Creation-Date: 2016-03-22 21:57+0100\n"
+"PO-Revision-Date: 2016-03-22 21:56+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -85,10 +85,10 @@ msgid "Meter Reading electricity delivered by client (low tariff) in 0,001 kWh"
 msgstr "Meterstand van teruggeleverde elektriciteit (laagtarief) in stappen van 1 Watt uur"
 
 msgid "Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"
-msgstr "Meterstand van verbruikte elektriciteit (hoogtarief) in stappen van 1 Watt uur"
+msgstr "Meterstand van verbruikte elektriciteit (piektarief) in stappen van 1 Watt uur"
 
 msgid "Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"
-msgstr "Meterstand van teruggeleverde elektriciteit (hoogtarief) in stappen van 1 Watt uur"
+msgstr "Meterstand van teruggeleverde elektriciteit (piektarief) in stappen van 1 Watt uur"
 
 msgid "Actual electricity power delivered (+P) in 1 Watt resolution"
 msgstr "Daadwerkelijk geleverde elektriciteit geleverd (-P) in 1 Watt stappen"
@@ -124,7 +124,7 @@ msgid "Electricity 1 price"
 msgstr "Elektriciteitstarief 1 (laag)"
 
 msgid "Electricity 2 price"
-msgstr "Elektriciteitstarief 2 (hoog)"
+msgstr "Elektriciteitstarief 2 (piek)"
 
 msgid "Gas price"
 msgstr "Gasprijs"
@@ -187,7 +187,7 @@ msgid "DSMR reading"
 msgstr "DSMR-meting"
 
 msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
-msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor hoogtarief."
+msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor piektarief."
 
 msgid "Number of power failures in any phases"
 msgstr "Aantal stroomstoringen in alle fases"
@@ -318,17 +318,17 @@ msgstr "Gasverbruik"
 msgid "(in m<sup>3</sup>)"
 msgstr "(in m<sup>3</sup>)"
 
-msgid "Electricity 1 (off-peak)"
+msgid "Electricity 1 (low tariff)"
 msgstr "Elektriciteit 1 (daltarief)"
 
-msgid "Electricity 2 (peak)"
-msgstr "Elektriciteit 2 (hoogtarief)"
+msgid "Electricity 2 (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
 
-msgid "Electricity 1 returned (off-peak)"
+msgid "Electricity 1 returned (low tariff)"
 msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
 
-msgid "Electricity 1 returned (peak)"
-msgstr "Elektriciteit 2 teruggeleverd (hoogtarief)"
+msgid "Electricity 1 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
 msgid "Gas"
 msgstr "Gas"
@@ -375,8 +375,8 @@ msgstr "Huidige maand"
 msgid "until yesterday"
 msgstr "tot en met gisteren"
 
-msgid "Delivered"
-msgstr "Geleverd"
+msgid "Consumed"
+msgstr "Verbruikt"
 
 msgid "kWh"
 msgstr "kWh"
@@ -390,14 +390,14 @@ msgstr "Kosten"
 msgid "Total"
 msgstr "Totaal"
 
-msgid "Recent electricity delivered (watt)"
-msgstr "Recent elektriciteitsverbruik  (Watt)"
+msgid "Recent electricity consumed (watt)"
+msgstr "Recent elektriciteitsverbruik (Watt)"
 
 msgid "Recent electricity returned (watt)"
 msgstr "Recente teruglevering elektriciteit (Watt)"
 
-msgid "Recent gas delivered (m<sup>3</sup>)"
-msgstr "Recent gasverbruik  (m<sup>3</sup>)"
+msgid "Recent gas consumed (m<sup>3</sup>)"
+msgstr "Recent gasverbruik (m<sup>3</sup>)"
 
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
@@ -439,11 +439,11 @@ msgstr "(in &deg;C)"
 msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
 msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
 
-msgid "Electricity 1 cost (off-peak)"
-msgstr "Elektriciteit 1 (daltarief) kosten"
+msgid "Electricity 1 cost (low tariff)"
+msgstr "Elektriciteit 1 kosten (daltarief)"
 
-msgid "Electricity 2 cost (peak)"
-msgstr "Elektriciteit 2 (hoogtarief) kosten"
+msgid "Electricity 2 cost (high tariff)"
+msgstr "Elektriciteit 2 kosten (piektarief)"
 
 msgid "Gas cost"
 msgstr "Gaskosten"
@@ -453,6 +453,9 @@ msgstr "Totale kosten"
 
 msgid "Meter positions"
 msgstr "Meterstanden"
+
+msgid "Delivered"
+msgstr "Geleverd"
 
 msgid "Gas "
 msgstr "Gas"
@@ -542,16 +545,16 @@ msgstr "Gemiddelde elektriciteitsvraag per daguur in Watt"
 msgid "Average hourly electricity returned in Watt"
 msgstr "Gemiddelde elektriciteit teruglevering per daguur in Watt"
 
-msgid "Average hourly electricity 1 (off-peak) consumed in kWh"
+msgid "Average hourly electricity 1 (low tariff) consumed in kWh"
 msgstr "Gemiddeld verbruik elektriciteit 1 (daltarief) per daguur in kWh"
 
-msgid "Average hourly electricity 1 return (off-peak) yield in kWh"
+msgid "Average hourly electricity 1 return (low tariff) yield in kWh"
 msgstr "Verhouding gemiddelde opbrengst/teruglevering elektriciteit 1 (daltarief) per daguur in kWh"
 
-msgid "Average hourly electricity 2 (peak) consumed in kWh"
+msgid "Average hourly electricity 2 (high tariff) consumed in kWh"
 msgstr "Gemiddeld verbruik elektriciteit 2 (piektarief) per daguur in kWh"
 
-msgid "Average hourly electricity 2 return (peak) yield in kWh"
+msgid "Average hourly electricity 2 return (high tariff) yield in kWh"
 msgstr "Verhouding gemiddelde opbrengst/teruglevering elektriciteit 2 (piektarief) per daguur in kWh"
 
 msgid "Average hourly gas consumed in m<sup>3</sup>"
@@ -752,6 +755,9 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Recent electricity delivered (watt)"
+#~ msgstr "Recent elektriciteitsverbruik  (Watt)"
+
 #~ msgid "Select day"
 #~ msgstr "Selecteer dag"
 
@@ -787,9 +793,6 @@ msgstr "Engels"
 
 #~ msgid "Type"
 #~ msgstr "Soort"
-
-#~ msgid "consumed"
-#~ msgstr "verbruikt"
 
 #~ msgid "Watt returned"
 #~ msgstr "Watt teruggeleverd"

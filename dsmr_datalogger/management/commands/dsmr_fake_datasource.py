@@ -99,7 +99,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:2.8.1({}*kWh)\n".format(self._round_precision(electricity_1_returned, 10)),
             "1-0:1.8.2({}*kWh)\n".format(self._round_precision(electricity_2, 10)),
             "1-0:2.8.2({}*kWh)\n".format(self._round_precision(electricity_2_returned, 10)),
-            "0-0:96.14.0(0001)\n",  # Should switch peak/off peak, but not used anyway.
+            "0-0:96.14.0(0001)\n",  # Should switch high/low tariff, but not used anyway.
             "1-0:1.7.0({}*kW)\n".format(self._round_precision(currently_delivered, 6)),
             "1-0:2.7.0({}*kW)\n".format(self._round_precision(currently_returned, 6)),
             "0-0:96.7.21(00003)\n",

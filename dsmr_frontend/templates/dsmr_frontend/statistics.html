@@ -31,12 +31,12 @@
                             <th class="col-md-3">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
                         </tr>
                         <tr>
-                            <td>{% trans "Electricity 1 (off-peak)" %}</td>
+                            <td>{% trans "Electricity 1 (low tariff)" %}</td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_1|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
-                            <td>{% trans "Electricity 2 (peak)" %}</td>
+                            <td>{% trans "Electricity 2 (high tariff)" %}</td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_2|default:'-' }}{% endif %}</span></td>
                         </tr>
