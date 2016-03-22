@@ -4,10 +4,11 @@ import os
 
 from django.test import TestCase
 from django.conf import settings
+from django.utils import timezone
 
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
-import dsmr_consumption.signals
+from dsmr_consumption.models.consumption import GasConsumption
 import dsmr_weather.services
 
 
@@ -17,7 +18,7 @@ class TestDsmrWeatherServices(TestCase):
     def test_consumption_creation_signal(self, service_mock):
         """ Test incoming signal handling, set in app config. """
         self.assertFalse(service_mock.called)
-        dsmr_consumption.signals.gas_consumption_created.send_robust(None, instance=object())
+        GasConsumption.objects.create(read_at=timezone.now(), delivered=0, currently_delivered=0)
         self.assertTrue(service_mock.called)
 
     def test_weather_tracking(self):

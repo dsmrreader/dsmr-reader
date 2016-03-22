@@ -12,7 +12,6 @@ from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
-import dsmr_consumption.signals
 
 
 def compact_all():
@@ -29,7 +28,7 @@ def compact(dsmr_reading):
 
     # Electricity should be unique, because it's the reading with the lowest interval anyway.
     if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
-        consumption = ElectricityConsumption.objects.create(
+        ElectricityConsumption.objects.create(
             read_at=dsmr_reading.timestamp,
             delivered_1=dsmr_reading.electricity_delivered_1,
             returned_1=dsmr_reading.electricity_returned_1,
@@ -37,9 +36,6 @@ def compact(dsmr_reading):
             returned_2=dsmr_reading.electricity_returned_2,
             currently_delivered=dsmr_reading.electricity_currently_delivered,
             currently_returned=dsmr_reading.electricity_currently_returned,
-        )
-        dsmr_consumption.signals.electricity_consumption_created.send_robust(
-            None, instance=consumption
         )
     # Grouping by minute requires some distinction and history checking.
     else:
@@ -67,7 +63,7 @@ def compact(dsmr_reading):
             )
 
             # This instance is the average/max and combined result.
-            consumption = ElectricityConsumption.objects.create(
+            ElectricityConsumption.objects.create(
                 read_at=minute_end,
                 delivered_1=grouped_reading['max_delivered_1'],
                 returned_1=grouped_reading['max_returned_1'],
@@ -75,9 +71,6 @@ def compact(dsmr_reading):
                 returned_2=grouped_reading['max_returned_2'],
                 currently_delivered=grouped_reading['avg_delivered'],
                 currently_returned=grouped_reading['avg_returned'],
-            )
-            dsmr_consumption.signals.electricity_consumption_created.send_robust(
-                None, instance=consumption
             )
 
     # Gas is optional.
@@ -99,13 +92,12 @@ def compact(dsmr_reading):
             else:
                 gas_diff = dsmr_reading.extra_device_delivered - previous_gas_consumption.delivered
 
-            consumption = GasConsumption.objects.create(
+            GasConsumption.objects.create(
                 # Gas consumption is aligned to start of the hour.
                 read_at=passed_hour_start,
                 delivered=dsmr_reading.extra_device_delivered,
                 currently_delivered=gas_diff
             )
-            dsmr_consumption.signals.gas_consumption_created.send_robust(None, instance=consumption)
 
     dsmr_reading.processed = True
     dsmr_reading.save(update_fields=['processed'])
