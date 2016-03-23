@@ -2,7 +2,7 @@
 {
     "fields": {
         "description": "Testnote",
-        "day": "2015-12-11"
+        "day": "2016-01-01"
     },
     "pk": 1,
     "model": "dsmr_stats.note"

@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.test import TestCase
 from django.utils import timezone
 from unittest import mock
@@ -83,6 +85,98 @@ class TestServices(InterceptStdoutMixin, TestCase):
     def test_day_consumption(self):
         with self.assertRaises(LookupError):
             dsmr_consumption.services.day_consumption(timezone.now() + timezone.timedelta(weeks=1))
+
+        now = timezone.make_aware(
+            timezone.datetime(2016, 1, 1, hour=13)
+        )
+        ElectricityConsumption.objects.create(
+            read_at=now,  # Now.
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=10,
+            currently_returned=20,
+        )
+        ElectricityConsumption.objects.create(
+            read_at=now + timezone.timedelta(hours=1),  # Next hour.
+            delivered_1=1 + 1,
+            returned_1=1 + 2,
+            delivered_2=2 + 3,
+            returned_2=2 + 4,
+            currently_delivered=10 + 5,
+            currently_returned=20 + 6,
+        )
+        ElectricityConsumption.objects.create(
+            read_at=now + timezone.timedelta(days=1),  # Next day.
+            delivered_1=2,
+            returned_1=2,
+            delivered_2=4,
+            returned_2=4,
+            currently_delivered=20,
+            currently_returned=40,
+        )
+
+        data = dsmr_consumption.services.day_consumption(day=now)
+        self.assertIsInstance(data, dict)
+        self.assertEqual(data['electricity1'], 1)
+        self.assertEqual(data['electricity1_returned'], 2)
+        self.assertEqual(data['electricity2'], 3)
+        self.assertEqual(data['electricity2_returned'], 4)
+
+        GasConsumption.objects.create(
+            read_at=now,  # Now.
+            delivered=100,
+            currently_delivered=1,
+        )
+        GasConsumption.objects.create(
+            read_at=now + timezone.timedelta(hours=1),  # Next hour.
+            delivered=100 + 20,
+            currently_delivered=1,
+        )
+        GasConsumption.objects.create(
+            read_at=now + timezone.timedelta(days=1),  # Next day.
+            delivered=200,
+            currently_delivered=10,
+        )
+
+        data = dsmr_consumption.services.day_consumption(day=now)
+        self.assertEqual(data['gas'], 20)
+
+    def test_round_decimal(self):
+        rounded = dsmr_consumption.services.round_decimal(decimal_price=1.555)
+        self.assertIsInstance(rounded, Decimal)  # Should auto convert to decimal.
+        self.assertEqual(rounded, Decimal('1.56'))
+
+        rounded = dsmr_consumption.services.round_decimal(decimal_price=Decimal('1.555'))
+        self.assertEqual(rounded, Decimal('1.56'))
+
+    def test_average_electricity_demand_by_hour(self):
+        now = timezone.make_aware(
+            timezone.datetime(2016, 1, 1, hour=13)
+        )
+        ElectricityConsumption.objects.create(
+            read_at=now,
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=10,
+            currently_returned=20,
+        )
+        ElectricityConsumption.objects.create(
+            read_at=now + timezone.timedelta(minutes=1),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=30,
+            currently_returned=40,
+        )
+        demand = dsmr_consumption.services.average_electricity_demand_by_hour()
+        self.assertEqual(int(demand[0]['hour']), 12)
+        self.assertEqual(int(demand[0]['avg_delivered']), 20)
+        self.assertEqual(int(demand[0]['avg_returned']), 30)
 
 
 class TestServicesWithoutGas(TestServices):

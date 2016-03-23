@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Q
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 
 class EnergySupplierPriceManager(models.Manager):
@@ -41,7 +41,7 @@ class EnergySupplierPrice(models.Model):
     )
 
     def __str__(self):
-        return self.description or _('Energy Supplier')
+        return self.description or ugettext('Energy Supplier')
 
     class Meta:
         default_permissions = tuple()

@@ -1,7 +1,7 @@
 
 
-v0.15 (β) - 2016-xx-xx
-======================
+v0.15 (RC 1) - 2016-xx-xx
+=========================
 - Django 1.8.11 released (#82).
 - Prevent tests from failing due to moment of execution (#88).
 - Statistics page meter positions are broken (#93).
@@ -11,6 +11,7 @@ v0.15 (β) - 2016-xx-xx
 - Monitor requirements with requires.io (#101).
 - Terminology (#41).
 - Obsolete signals in dsmr_consumption (#63).
+- Individual app testing coverage (#64).
 - 
 
 

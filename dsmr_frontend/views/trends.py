@@ -33,31 +33,30 @@ class Trends(TemplateView):
             ['{}:00'.format(int(x['hour_start'])) for x in average_consumption_by_hour]
         )
 
-        if capabilities['electricity']:
-            context_data['electricity_by_tariff'] = dsmr_stats.services.\
-                electricity_tariff_percentage()
+        context_data['electricity_by_tariff'] = dsmr_stats.services.\
+            electricity_tariff_percentage()
 
-            context_data['avg_electricity_delivered'] = self._map_graph_data_to_json(
-                avg_electricity_demand_per_hour,
-                'hour',
-                'avg_delivered',
-                '#F05050',
-                y_type=int,
-                y_multiply=1000
-            )
+        context_data['avg_electricity_delivered'] = self._map_graph_data_to_json(
+            avg_electricity_demand_per_hour,
+            'hour',
+            'avg_delivered',
+            '#F05050',
+            y_type=int,
+            y_multiply=1000
+        )
 
-            context_data['avg_electricity1_consumption'] = self._map_graph_data_to_json(
-                average_consumption_by_hour,
-                'hour_start',
-                'avg_electricity1',
-                '#F05050'
-            )
-            context_data['avg_electricity2_consumption'] = self._map_graph_data_to_json(
-                average_consumption_by_hour,
-                'hour_start',
-                'avg_electricity2',
-                '#F05050'
-            )
+        context_data['avg_electricity1_consumption'] = self._map_graph_data_to_json(
+            average_consumption_by_hour,
+            'hour_start',
+            'avg_electricity1',
+            '#F05050'
+        )
+        context_data['avg_electricity2_consumption'] = self._map_graph_data_to_json(
+            average_consumption_by_hour,
+            'hour_start',
+            'avg_electricity2',
+            '#F05050'
+        )
 
         if capabilities['electricity_returned']:
             context_data['avg_electricity_returned'] = self._map_graph_data_to_json(
