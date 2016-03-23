@@ -204,6 +204,14 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
 
+        # Test with missing electricity returned.
+        ElectricityConsumption.objects.all().update(currently_returned=0)
+        response = self.client.get(
+            reverse('{}:trends'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['capabilities']['electricity_returned'])
+
     @mock.patch('django.utils.timezone.now')
     def test_status(self, now_mock):
         now_mock.return_value = timezone.make_aware(
