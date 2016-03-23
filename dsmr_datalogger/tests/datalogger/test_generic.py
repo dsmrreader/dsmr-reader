@@ -6,7 +6,7 @@ import serial
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
-from dsmr_datalogger.models.reading import MeterStatistics
+from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 import dsmr_datalogger.services
 
 
@@ -100,6 +100,49 @@ class TestServices(TestCase):
         self.assertEqual(meter_statistics.power_failure_count, 3)
         self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)
         self.assertEqual(meter_statistics.voltage_sag_count_l2, 2)
+
+    def test_extra_devices_mbus_hack(self):
+        """ Verify that the hack issue #92 is working. """
+        fake_telegram = [
+            "/XMX5LGBBFFB123456789\n",
+            "\n",
+            "1-3:0.2.8(40)\n",
+            "0-0:1.0.0(151110192959W)\n",
+            "0-0:96.1.1(xxxxxxxxxxxxx)\n",
+            "1-0:1.8.1(000510.747*kWh)\n",
+            "1-0:2.8.1(000000.123*kWh)\n",
+            "1-0:1.8.2(000500.013*kWh)\n",
+            "1-0:2.8.2(000123.456*kWh)\n",
+            "0-0:96.14.0(0001)\n",
+            "1-0:1.7.0(00.192*kW)\n",
+            "1-0:2.7.0(00.123*kW)\n",
+            "0-0:17.0.0(999.9*kW)\n",
+            "0-0:96.3.10(1)\n",
+            "0-0:96.7.21(00003)\n",
+            "0-0:96.7.9(00000)\n",
+            "1-0:99.97.0(0)(0-0:96.7.19)\n",
+            "1-0:32.32.0(00002)\n",
+            "1-0:52.32.0(00002)\n",
+            "1-0:72.32.0(00000)\n",
+            "1-0:32.36.0(00000)\n",
+            "1-0:52.36.0(00000)\n",
+            "1-0:72.36.0(00000)\n",
+            "0-1:96.1.0(xxxxxxxxxxxxx)\n",
+            "0-1:24.2.1(151110190000W)(00845.206*m3)\n",
+            "0-1:24.4.0(1)\n",
+            "!D19A\n",
+        ]
+        self.assertFalse(DsmrReading.objects.exists())
+        dsmr_datalogger.services.telegram_to_reading(data=''.join(fake_telegram))
+        self.assertFalse(DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists())
+
+        # Alter extra device m-bus to 2, 3 and 4.
+        for current_mbus in (2, 3, 4):
+            fake_telegram[-3] = "0-{}:24.2.1(151110190000W)(00845.206*m3)\n".format(current_mbus)
+            self.assertNotIn("0-1:24.2.1(151110190000W)(00845.206*m3)\n", fake_telegram)
+
+            dsmr_datalogger.services.telegram_to_reading(data=''.join(fake_telegram))
+            self.assertFalse(DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists())
 
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):

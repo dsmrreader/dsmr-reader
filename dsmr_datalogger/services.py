@@ -112,9 +112,10 @@ def telegram_to_reading(data):
 
         code = result.group(1)
 
-        # Dirty fix for #92.
-        if code == "0-2:24.2.1":
-            code = "0-1:24.2.1"
+        # M-bus (0-n:24.1) cannot identify the type of device, see issue #92.
+        if code in ('0-2:24.2.1', '0-3:24.2.1', '0-4:24.2.1'):
+            # I really hope this will get 'fixed' in DSMR v4.2+ in the future. (:
+            code = '0-1:24.2.1'
 
         try:
             field = DSMR_MAPPING[code]
