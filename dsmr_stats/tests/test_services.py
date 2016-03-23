@@ -36,7 +36,20 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
 
-        # This should delay statistics generation.
+        # This should delay statistics generation. Because day has not yet passed.
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2015, 12, 12, hour=1, minute=5)
+        )
+        dsmr_stats.services.analyze()
+
+        if dsmr_backend.services.get_capabilities(capability='gas'):
+            self.assertEqual(DayStatistics.objects.count(), 0)
+            self.assertEqual(HourStatistics.objects.count(), 0)
+        else:
+            self.assertEqual(DayStatistics.objects.count(), 0)
+            self.assertEqual(HourStatistics.objects.count(), 0)
+
+        # Still too soon.
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2015, 12, 13, hour=1, minute=5)
         )
@@ -69,6 +82,15 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_stats.services.analyze()
         self.assertEqual(DayStatistics.objects.count(), 2)
         self.assertEqual(HourStatistics.objects.count(), 4)
+
+        # Without any data, fallback.
+        for current_model in (DayStatistics, HourStatistics, ElectricityConsumption):
+            current_model.objects.all().delete()
+
+        self.assertFalse(ElectricityConsumption.objects.exists())
+        dsmr_stats.services.analyze()
+        self.assertFalse(DayStatistics.objects.exists())
+        self.assertFalse(HourStatistics.objects.exists())
 
     def test_create_hourly_statistics_integrity(self):
         day_start = timezone.make_aware(
@@ -191,30 +213,77 @@ class TestServices(InterceptStdoutMixin, TestCase):
         )
         self.assertIsNone(no_statistics['total_cost'])
 
-    def test_month_statistics(self):
+    def test_day_statistics(self):
         target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
 
         # Create statistics for multiple days in month, and beyond.
+        for x in range(-5, 5):
+            DayStatistics.objects.create(
+                **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
+            )
+
+        data = dsmr_stats.services.day_statistics(target_date=target_date)
+        daily = self._get_statistics_dict(target_date)
+
+        self.assertEqual(data['total_cost'], daily['total_cost'])
+        self.assertEqual(data['electricity1'], daily['electricity1'])
+        self.assertEqual(data['electricity1_cost'], daily['electricity1_cost'])
+        self.assertEqual(data['electricity1_returned'], daily['electricity1_returned'])
+        self.assertEqual(data['electricity2'], daily['electricity2'])
+        self.assertEqual(data['electricity2_cost'], daily['electricity2_cost'])
+        self.assertEqual(data['electricity2_returned'], daily['electricity2_returned'])
+        self.assertEqual(data['gas'], daily['gas'])
+        self.assertEqual(data['gas_cost'], daily['gas_cost'])
+
+    def test_month_statistics(self):
+        target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
+
+        # Create statistics for multiple days.
         for x in range(0, 40):
             DayStatistics.objects.create(
                 **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
             )
 
-        monthly = dsmr_stats.services.month_statistics(target_date=target_date)
+        data = dsmr_stats.services.month_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
-        days_in_month = 31
+        days_in_month = 31  # Hardcoded January.
 
         # Now we just verify whether the expected amount of days is fetched and summarized.
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.
-        self.assertEqual(monthly['total_cost'], daily['total_cost'] * days_in_month)
-        self.assertEqual(monthly['electricity1'], daily['electricity1'] * days_in_month)
-        self.assertEqual(monthly['electricity1_cost'], daily['electricity1_cost'] * days_in_month)
-        self.assertEqual(monthly['electricity1_returned'], daily['electricity1_returned'] * days_in_month)
-        self.assertEqual(monthly['electricity2'], daily['electricity2'] * days_in_month)
-        self.assertEqual(monthly['electricity2_cost'], daily['electricity2_cost'] * days_in_month)
-        self.assertEqual(monthly['electricity2_returned'], daily['electricity2_returned'] * days_in_month)
-        self.assertEqual(monthly['gas'], daily['gas'] * days_in_month)
-        self.assertEqual(monthly['gas_cost'], daily['gas_cost'] * days_in_month)
+        self.assertEqual(data['total_cost'], daily['total_cost'] * days_in_month)
+        self.assertEqual(data['electricity1'], daily['electricity1'] * days_in_month)
+        self.assertEqual(data['electricity1_cost'], daily['electricity1_cost'] * days_in_month)
+        self.assertEqual(data['electricity1_returned'], daily['electricity1_returned'] * days_in_month)
+        self.assertEqual(data['electricity2'], daily['electricity2'] * days_in_month)
+        self.assertEqual(data['electricity2_cost'], daily['electricity2_cost'] * days_in_month)
+        self.assertEqual(data['electricity2_returned'], daily['electricity2_returned'] * days_in_month)
+        self.assertEqual(data['gas'], daily['gas'] * days_in_month)
+        self.assertEqual(data['gas_cost'], daily['gas_cost'] * days_in_month)
+
+    def test_year_statistics(self):
+        target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
+
+        # Create statistics for multiple days in year, and beyond.
+        for x in range(-5, 400):
+            DayStatistics.objects.create(
+                **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
+            )
+
+        data = dsmr_stats.services.year_statistics(target_date=target_date)
+        daily = self._get_statistics_dict(target_date)
+        days_in_year = 366  # Hardcoded leapyear 2016.
+
+        # Now we just verify whether the expected amount of days is fetched and summarized.
+        # Since January only has 31 days and we we've generated 40, we should multiply by 31.
+        self.assertEqual(data['total_cost'], daily['total_cost'] * days_in_year)
+        self.assertEqual(data['electricity1'], daily['electricity1'] * days_in_year)
+        self.assertEqual(data['electricity1_cost'], daily['electricity1_cost'] * days_in_year)
+        self.assertEqual(data['electricity1_returned'], daily['electricity1_returned'] * days_in_year)
+        self.assertEqual(data['electricity2'], daily['electricity2'] * days_in_year)
+        self.assertEqual(data['electricity2_cost'], daily['electricity2_cost'] * days_in_year)
+        self.assertEqual(data['electricity2_returned'], daily['electricity2_returned'] * days_in_year)
+        self.assertEqual(data['gas'], daily['gas'] * days_in_year)
+        self.assertEqual(data['gas_cost'], daily['gas_cost'] * days_in_year)
 
     def test_electricity_tariff_percentage(self):
         target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
