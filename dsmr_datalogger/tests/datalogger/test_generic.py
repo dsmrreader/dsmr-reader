@@ -1,9 +1,12 @@
 from django.core.management import CommandError
 from django.test import TestCase
+from django.utils import timezone
+from django.conf import settings
 import serial
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_datalogger.models.reading import MeterStatistics
 import dsmr_datalogger.services
 
 
@@ -17,6 +20,86 @@ class TestDsmrDataloggerTracking(InterceptStdoutMixin, TestCase):
         # Datalogger should crash with error.
         with self.assertRaisesMessage(CommandError, 'Datalogger tracking is DISABLED!'):
             self._intercept_command_stdout('dsmr_datalogger')
+
+
+class TestServices(TestCase):
+    def test_reading_timestamp_to_datetime(self):
+        result = dsmr_datalogger.services.reading_timestamp_to_datetime('151110192959W')
+        expected_result = timezone.make_aware(timezone.datetime(2015, 11, 10, 19, 29, 59))
+        self.assertEqual(result, expected_result)
+        self.assertEqual(str(result.tzinfo), settings.TIME_ZONE)
+
+        result = dsmr_datalogger.services.reading_timestamp_to_datetime('160401203040W')
+        expected_result = timezone.make_aware(timezone.datetime(2016, 4, 1, 20, 30, 40))
+        self.assertEqual(result, expected_result)
+        self.assertEqual(str(result.tzinfo), settings.TIME_ZONE)
+
+    def test_track_meter_statistics(self):
+        datalogger_settings = DataloggerSettings.get_solo()
+        datalogger_settings.track_meter_statistics = False
+        datalogger_settings.save()
+
+        fake_telegram = ''.join([
+            "/XMX5LGBBFFB123456789\n",
+            "\n",
+            "1-3:0.2.8(40)\n",
+            "0-0:1.0.0(151110192959W)\n",
+            "0-0:96.1.1(xxxxxxxxxxxxx)\n",
+            "1-0:1.8.1(000510.747*kWh)\n",
+            "1-0:2.8.1(000000.123*kWh)\n",
+            "1-0:1.8.2(000500.013*kWh)\n",
+            "1-0:2.8.2(000123.456*kWh)\n",
+            "0-0:96.14.0(0001)\n",
+            "1-0:1.7.0(00.192*kW)\n",
+            "1-0:2.7.0(00.123*kW)\n",
+            "0-0:17.0.0(999.9*kW)\n",
+            "0-0:96.3.10(1)\n",
+            "0-0:96.7.21(00003)\n",
+            "0-0:96.7.9(00000)\n",
+            "1-0:99.97.0(0)(0-0:96.7.19)\n",
+            "1-0:32.32.0(00002)\n",
+            "1-0:52.32.0(00002)\n",
+            "1-0:72.32.0(00000)\n",
+            "1-0:32.36.0(00000)\n",
+            "1-0:52.36.0(00000)\n",
+            "1-0:72.36.0(00000)\n",
+            "0-0:96.13.1()\n",
+            "0-0:96.13.0()\n",
+            "1-0:31.7.0(000*A)\n",
+            "1-0:51.7.0(000*A)\n",
+            "1-0:71.7.0(001*A)\n",
+            "1-0:21.7.0(00.000*kW)\n",
+            "1-0:41.7.0(00.000*kW)\n",
+            "1-0:61.7.0(00.192*kW)\n",
+            "1-0:22.7.0(00.000*kW)\n",
+            "1-0:42.7.0(00.000*kW)\n",
+            "1-0:62.7.0(00.000*kW)\n",
+            "0-1:24.1.0(003)\n",
+            "0-1:96.1.0(xxxxxxxxxxxxx)\n",
+            "0-1:24.2.1(151110190000W)(00845.206*m3)\n",
+            "0-1:24.4.0(1)\n",
+            "!D19A\n",
+        ])
+
+        self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
+        dsmr_datalogger.services.telegram_to_reading(data=fake_telegram)
+        self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Unaffected
+
+        # Try again, but now with tracking settings enabled.
+        datalogger_settings = DataloggerSettings.get_solo()
+        datalogger_settings.track_meter_statistics = True
+        datalogger_settings.save()
+
+        self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
+        dsmr_datalogger.services.telegram_to_reading(data=fake_telegram)
+
+        # Should be populated now.
+        meter_statistics = MeterStatistics.get_solo()
+        self.assertIsNotNone(meter_statistics.electricity_tariff)
+        self.assertEqual(meter_statistics.electricity_tariff, 1)
+        self.assertEqual(meter_statistics.power_failure_count, 3)
+        self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)
+        self.assertEqual(meter_statistics.voltage_sag_count_l2, 2)
 
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
