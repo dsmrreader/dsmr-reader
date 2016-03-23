@@ -11,6 +11,7 @@ v0.15 (β) - 2016-xx-xx
 - Monitor requirements with requires.io (#101).
 - Terminology (#41).
 - Obsolete signals in dsmr_consumption (#63).
+- Individual app testing coverage (#64).
 - 
 
 
