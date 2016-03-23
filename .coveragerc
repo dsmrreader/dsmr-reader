@@ -1,4 +1,5 @@
 [run]
+branch = True
 include = ./*
 omit = ./*/migrations/*
   ./dsmr_backend/mixins.py
