@@ -42,12 +42,24 @@ class TestViews(TestCase):
         )
 
     @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
-    def test_http_500(self, get_context_data_mock):
+    def test_http_500_production(self, get_context_data_mock):
         get_context_data_mock.side_effect = SyntaxError('Meh')
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 500)
+
+    @mock.patch('django.conf.settings.DEBUG')
+    @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
+    def test_http_500_development(self, get_context_data_mock, debug_setting_mock):
+        """ Verify that the middleware is allowing Django to jump in when not in production. """
+        get_context_data_mock.side_effect = SyntaxError('Meh')
+        debug_setting_mock.return_value = True
+
+        with self.assertRaises(SyntaxError):
+            self.client.get(
+                reverse('{}:dashboard'.format(self.namespace))
+            )
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard(self, now_mock):
@@ -59,7 +71,6 @@ class TestViews(TestCase):
         weather_settings.track = True
         weather_settings.save()
 
-#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
         )
@@ -96,7 +107,6 @@ class TestViews(TestCase):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
         )
-#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:archive'.format(self.namespace))
         )
@@ -120,6 +130,17 @@ class TestViews(TestCase):
             )
             self.assertEqual(response.status_code, 200)
 
+        # Invalid XHR.
+        data.update({'level': 'INVALID DATA'})
+        response = self.client.get(
+            reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+        )
+        self.assertEqual(response.status_code, 500)
+        response = self.client.get(
+            reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
+        )
+        self.assertEqual(response.status_code, 500)
+
     @mock.patch('django.utils.timezone.now')
     def test_history(self, now_mock):
         now_mock.return_value = timezone.make_aware(
@@ -130,7 +151,6 @@ class TestViews(TestCase):
         frontend_settings.save()
 
         # History fetches all data BEFORE today, so add a little interval to make that happen.
-#         self._synchronize_date(interval=timezone.timedelta(days=-1))
         response = self.client.get(
             reverse('{}:history'.format(self.namespace))
         )
@@ -164,7 +184,6 @@ class TestViews(TestCase):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
         )
-#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:statistics'.format(self.namespace))
         )
@@ -179,7 +198,6 @@ class TestViews(TestCase):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
         )
-#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:trends'.format(self.namespace))
         )
@@ -191,7 +209,6 @@ class TestViews(TestCase):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
         )
-#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:status'.format(self.namespace))
         )
@@ -204,7 +221,6 @@ class TestViews(TestCase):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
         )
-#         self._synchronize_date()
         response = self.client.get(
             reverse('{}:configuration'.format(self.namespace))
         )

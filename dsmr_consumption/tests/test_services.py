@@ -174,9 +174,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
             currently_returned=40,
         )
         demand = dsmr_consumption.services.average_electricity_demand_by_hour()
-        self.assertEqual(demand[0]['hour'], '12')
-        self.assertEqual(demand[0]['avg_delivered'], 20)
-        self.assertEqual(demand[0]['avg_returned'], 30)
+        self.assertEqual(int(demand[0]['hour']), 12)
+        self.assertEqual(int(demand[0]['avg_delivered']), 20)
+        self.assertEqual(int(demand[0]['avg_returned']), 30)
 
 
 class TestServicesWithoutGas(TestServices):
