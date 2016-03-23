@@ -1,9 +1,26 @@
 #!/bin/bash
 
+echo ""
+echo ""
+echo " --- Checking & synchronizing base requirements for changes."
+pip3 install -r dsmrreader/provisioning/requirements/base.txt
 
 
-##### LEGACY SCRIPT. Will be deleted later. See issue #102. #####
+echo ""
+echo ""
+echo " --- Checking & synchronizing database changes/migrations."
+./manage.py migrate --noinput
 
+
+echo ""
+echo ""
+echo " --- Checking & synchronizing static file changes."
+./manage.py collectstatic --noinput
+
+
+echo ""
+echo ""
+echo " --- Reloading app code..."
 
 
 # Sending a HANGUP signal to Gunicorn's master process will gracefully reload its children.
@@ -17,6 +34,7 @@ then
 else
     echo " !-- PID file does not exist (yet)"
 fi
+
 
 # Management commands have some mechanisme builtin as well for this.
 echo ""
@@ -41,4 +59,8 @@ else
     echo " !-- PID file does not exist (yet)"
 fi
 
+
 echo ""
+echo ""
+echo " --- Clearing cache..."
+./manage.py dsmr_frontend_clear_cache
