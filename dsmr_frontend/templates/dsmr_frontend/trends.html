@@ -25,33 +25,6 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Electricity tariff ratio (passed week){% endblocktrans %}
-                </header>
-                <div class="panel-body" style="height: 350px;">
-                    <div id="electricity-by-tariff-week-chart-legend"></div>
-                    <canvas id="electricity-by-tariff-week-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Electricity tariff ratio (passed month){% endblocktrans %}
-                </header>
-                <div class="panel-body" style="height: 350px;">
-                    <div id="electricity-by-tariff-month-chart-legend"></div>
-                    <canvas id="electricity-by-tariff-month-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
                     {% blocktrans %}Average hourly electricity consumed (in %){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
@@ -91,6 +64,36 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
     {% endif %}
+
+    {% if capabilities.electricity %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Electricity tariff ratio (passed week){% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <div id="electricity-by-tariff-week-chart-legend"></div>
+                    <canvas id="electricity-by-tariff-week-chart"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Electricity tariff ratio (passed month){% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <div id="electricity-by-tariff-month-chart-legend"></div>
+                    <canvas id="electricity-by-tariff-month-chart"></canvas>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    {% endif %}
+
 </section><!-- /.content -->
 {% endblock %}
 
