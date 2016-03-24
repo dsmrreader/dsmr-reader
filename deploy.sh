@@ -21,7 +21,7 @@ git merge FETCH_HEAD
 echo ""
 echo ""
 echo " >>> Running post-deployment script. <<<"
-#./post-deploy.sh
+./post-deploy.sh
 
 
 echo ""
