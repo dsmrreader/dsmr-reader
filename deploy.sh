@@ -9,20 +9,19 @@ echo " --- Pulling remote repository for new commits..."
 git fetch
 
 # Save to var to display as last.
-MESSAGE=$(git log --oneline ..origin/master)
+MESSAGE=$(git log --pretty=format:'[%h] %an (%ar): %s' ..origin/master)
 
 
 echo ""
 echo ""
 echo " --- Merging/updating checkout."
 git merge FETCH_HEAD
-echo ""
 
 
 echo ""
 echo ""
-echo " --- Running post-deployment script."
-./post-deploy.sh
+echo " >>> Running post-deployment script. <<<"
+#./post-deploy.sh
 
 
 echo ""
