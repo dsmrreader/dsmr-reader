@@ -9,7 +9,7 @@ echo " --- Pulling remote repository for new commits..."
 git fetch
 
 # Save to var to display as last.
-MESSAGE=$(git log --pretty=format:'[%h] %an (%ar): %s' ..origin/master)
+MESSAGE=$(git log --pretty=format:'[%h] %s (%ar)' ..origin/master)
 
 
 echo ""
