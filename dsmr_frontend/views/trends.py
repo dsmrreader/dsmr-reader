@@ -1,6 +1,9 @@
+from collections import defaultdict
 import json
 
 from django.views.generic.base import TemplateView
+from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_consumption.services
@@ -23,9 +26,6 @@ class Trends(TemplateView):
         if not capabilities['any']:
             return context_data
 
-        # Average of power demand in Watt.
-        avg_electricity_demand_per_hour = dsmr_consumption.services.average_electricity_demand_by_hour()
-
         # Average of real consumption/return per hour.
         average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour()
 
@@ -33,76 +33,39 @@ class Trends(TemplateView):
             ['{}:00'.format(int(x['hour_start'])) for x in average_consumption_by_hour]
         )
 
-        context_data['electricity_by_tariff'] = dsmr_stats.services.\
-            electricity_tariff_percentage()
+        now = timezone.localtime(timezone.now())
+        context_data['electricity_by_tariff_week'] = dsmr_stats.services.\
+            electricity_tariff_percentage(start_date=now.date() - timezone.timedelta(days=7))
 
-        context_data['avg_electricity_delivered'] = self._map_graph_data_to_json(
-            avg_electricity_demand_per_hour,
-            'hour',
-            'avg_delivered',
-            '#F05050',
-            y_type=int,
-            y_multiply=1000
-        )
+        context_data['electricity_by_tariff_month'] = dsmr_stats.services.\
+            electricity_tariff_percentage(start_date=now.date() - relativedelta(months=1))
 
-        context_data['avg_electricity1_consumption'] = self._map_graph_data_to_json(
-            average_consumption_by_hour,
-            'hour_start',
-            'avg_electricity1',
-            '#F05050'
-        )
-        context_data['avg_electricity2_consumption'] = self._map_graph_data_to_json(
-            average_consumption_by_hour,
-            'hour_start',
-            'avg_electricity2',
-            '#F05050'
-        )
+        graph_data = defaultdict(list)
 
-        if capabilities['electricity_returned']:
-            context_data['avg_electricity_returned'] = self._map_graph_data_to_json(
-                avg_electricity_demand_per_hour,
-                'hour',
-                'avg_returned',
-                '#27C24C',
-                y_type=int,
-                y_multiply=1000
+        for current in average_consumption_by_hour:
+            graph_data['x_hours'].append('{}:00'.format(int(current['hour_start'])))
+            current['avg_electricity'] = (
+                current['avg_electricity1'] + current['avg_electricity2']
+            ) / 2
+
+            graph_data['avg_electricity_consumption'].append(
+                float(dsmr_consumption.services.round_decimal(current['avg_electricity']))
             )
 
-            context_data['avg_electricity1_returned_yield'] = self._map_graph_data_to_json(
-                average_consumption_by_hour,
-                'hour_start',
-                'avg_electricity1_returned',
-                '#27C24C'
-            )
-            context_data['avg_electricity2_returned_yield'] = self._map_graph_data_to_json(
-                average_consumption_by_hour,
-                'hour_start',
-                'avg_electricity2_returned',
-                '#27C24C'
-            )
+            if capabilities['electricity_returned']:
+                current['avg_electricity_returned'] = (
+                    current['avg_electricity1_returned'] + current['avg_electricity2_returned']
+                ) / 2
+                graph_data['avg_electricity_returned_yield'].append(
+                    float(dsmr_consumption.services.round_decimal(current['avg_electricity_returned']))
+                )
 
-        if capabilities['gas']:
-            context_data['avg_gas_consumption'] = self._map_graph_data_to_json(
-                average_consumption_by_hour,
-                'hour_start',
-                'avg_gas',
-                '#FF851B'
-            )
+            if capabilities['gas']:
+                graph_data['avg_gas_consumption'].append(
+                    float(dsmr_consumption.services.round_decimal(current['avg_gas']))
+                )
+
+        for key, values in graph_data.items():
+            context_data[key] = json.dumps(values)
 
         return context_data
-
-    def _map_graph_data_to_json(self, data, x_field, y_field, color, y_type=float, y_multiply=1):
-        """ Helper to iterate all data, extract the fields we need andmapping then to JSON. """
-        return json.dumps(
-            [
-                {
-                    'value': y_type(dsmr_consumption.services.round_decimal(
-                        current[y_field] * y_multiply
-                    )),
-                    'color': color,
-                    'label': '{}:00'.format(int(current[x_field])),
-                    'highlight': '#5AD3D1',
-                }
-                for current in data
-            ]
-        )

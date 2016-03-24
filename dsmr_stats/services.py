@@ -141,9 +141,9 @@ def create_hourly_statistics(hour_start):
     HourStatistics.objects.create(**creation_kwargs)
 
 
-def electricity_tariff_percentage():
+def electricity_tariff_percentage(start_date):
     """ Returns the total electricity consumption percentage by tariff (high/low tariff). """
-    totals = DayStatistics.objects.all().aggregate(
+    totals = DayStatistics.objects.filter(day__gte=start_date).aggregate(
         electricity1=Sum('electricity1'),
         electricity2=Sum('electricity2'),
     )

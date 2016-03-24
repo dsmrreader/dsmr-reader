@@ -25,94 +25,55 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Electricity consumption by tariff ratio{% endblocktrans %}
+                    {% blocktrans %}Electricity tariff ratio (passed week){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
-                    <canvas id="electricity-by-tariff-chart"></canvas>
-                    <div id="electricity-by-tariff-chart-legend"></div>
+                    <div id="electricity-by-tariff-week-chart-legend"></div>
+                    <canvas id="electricity-by-tariff-week-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
     </div><!-- /.row -->
-    
     <div class="row">
-        <div class="col-md-{% if capabilities.electricity_returned %}6{% else %}12{% endif %}">
+        <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity demand in Watt{% endblocktrans %}
+                    {% blocktrans %}Electricity tariff ratio (passed month){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
-                    <canvas id="average-electricity-delivered-chart"></canvas>
+                    <div id="electricity-by-tariff-month-chart-legend"></div>
+                    <canvas id="electricity-by-tariff-month-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
-        
-        {% if capabilities.electricity_returned %}
-        <div class="col-md-6">
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity returned in Watt{% endblocktrans %}
+                    {% blocktrans %}Average hourly electricity consumed{% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
-                    <canvas id="average-electricity-returned-chart"></canvas>
+                    <canvas id="average-electricity-consumed-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
-        {% endif %}
     </div><!-- /.row -->
     {% endif %}
     
-    {% if capabilities.electricity %}
+    {% if capabilities.electricity_returned %}
     <div class="row">
-        <div class="col-md-{% if capabilities.electricity_returned %}6{% else %}12{% endif %}">
+        <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity 1 (low tariff) consumed in kWh{% endblocktrans %}
+                    {% blocktrans %}Average hourly electricity returned{% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
-                    <canvas id="average-electricity1-consumed-chart"></canvas>
+                    <canvas id="average-electricity-returned-yield-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
-
-        {% if capabilities.electricity_returned %}
-        <div class="col-md-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity 1 return (low tariff) yield in kWh{% endblocktrans %}
-                </header>
-                <div class="panel-body" style="height: 350px;">
-                    <canvas id="average-electricity1-returned-yield-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-        {% endif %}
-    </div><!-- /.row -->
-
-    <div class="row">
-        <div class="col-md-{% if capabilities.electricity_returned %}6{% else %}12{% endif %}">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity 2 (high tariff) consumed in kWh{% endblocktrans %}
-                </header>
-                <div class="panel-body" style="height: 350px;">
-                    <canvas id="average-electricity2-consumed-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-        
-        {% if capabilities.electricity_returned %}
-        <div class="col-md-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity 2 return (high tariff) yield in kWh{% endblocktrans %}
-                </header>
-                <div class="panel-body" style="height: 350px;">
-                    <canvas id="average-electricity2-returned-yield-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-        {% endif %}
     </div><!-- /.row -->
     {% endif %}
     
@@ -121,7 +82,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly gas consumed in m<sup>3</sup>{% endblocktrans %}
+                    {% blocktrans %}Average hourly gas consumed{% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-gas-consumed-chart"></canvas>
@@ -138,17 +99,23 @@
 {{ block.super }}
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
         <script type="text/javascript">
-	        var polar_options = {
-        		segmentStrokeWidth: 5,
-	        }
-	        
-	        var pie_options = {
+            var pie_options = {
                 {% verbatim %}
                 tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%",
                 legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=segments[i].fillColor%>\"><%if(segments[i].label){%><%=segments[i].label%><%}%></span></li><%}%></ul>"
                 {% endverbatim %}
             }
         
+            var bar_options = {
+                /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
+                pointHitDetectionRadius: 5,
+                pointDotRadius: 2.5,
+                
+                {% verbatim %}
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+                {% endverbatim %}
+	        }
+	        
         	$(document).ready(function(){
                 Chart.defaults.global.responsive = true;
                 Chart.defaults.global.maintainAspectRatio = false;
@@ -156,16 +123,13 @@
                 Chart.defaults.global.segmentShowStroke = true;
 
             {% if capabilities.electricity %}
-                render_electricity_consumption_by_tariff_chart();
-                render_average_electricity_delivered_chart();
-                render_average_electricity1_consumed_chart();
-                render_average_electricity2_consumed_chart();
+                render_electricity_consumption_by_tariff_week_chart();
+                render_electricity_consumption_by_tariff_month_chart();
+                render_average_electricity_consumed_chart();
             {% endif %}
 
             {% if capabilities.electricity_returned %}
-                render_average_electricity_returned_chart();
-                render_average_electricity1_yield_chart();
-                render_average_electricity2_yield_chart();
+                render_average_electricity_yield_chart();
             {% endif %}
 
             {% if capabilities.gas %}
@@ -174,86 +138,110 @@
         	});
 
 	    {% if capabilities.electricity %}
-	        function render_electricity_consumption_by_tariff_chart()
+	        function render_electricity_consumption_by_tariff_week_chart()
 	        {
 	            var data = [
+                    {
+                        value: {{ electricity_by_tariff_week.electricity2|floatformat:"0" }},
+                        color: "rgba(255,0,0,1)",
+                        highlight: "#5AD3D1",
+                        label: "{% trans 'Electricity 2 (high tariff)' %}"
+                    },
 	                {
-	                    value: {{ electricity_by_tariff.electricity1|floatformat:"0" }},
+	                    value: {{ electricity_by_tariff_week.electricity1|floatformat:"0" }},
                         color:"rgba(160,0,0,1)",
 	                    highlight: "#5AD3D1",
 	                    label: "{% trans 'Electricity 1 (low tariff)' %}"
-	                },
-	                {
-	                    value: {{ electricity_by_tariff.electricity2|floatformat:"0" }},
-                        color: "rgba(255,0,0,1)",
-	                    highlight: "#5AD3D1",
-	                    label: "{% trans 'Electricity 2 (high tariff)' %}"
 	                }
 	            ]
-                var ctx = $("#electricity-by-tariff-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#electricity-by-tariff-chart").parent().height();
+                var ctx = $("#electricity-by-tariff-week-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-by-tariff-week-chart").parent().height();
                 var chart_instance = new Chart(ctx).Pie(data, pie_options);	        	
-                $("#electricity-by-tariff-chart-legend").html(chart_instance.generateLegend());
+                $("#electricity-by-tariff-week-chart-legend").html(chart_instance.generateLegend());
 	        }
-	    
-            function render_average_electricity_delivered_chart()
+	        
+            function render_electricity_consumption_by_tariff_month_chart()
             {
-                var data = {{ avg_electricity_delivered|safe }};
-                var ctx = $("#average-electricity-delivered-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#average-electricity-delivered-chart").parent().height();
-                new Chart(ctx).PolarArea(data, polar_options);
+                var data = [
+                    {
+                        value: {{ electricity_by_tariff_month.electricity2|floatformat:"0" }},
+                        color: "rgba(255,0,0,1)",
+                        highlight: "#5AD3D1",
+                        label: "{% trans 'Electricity 2 (high tariff)' %}"
+                    },
+                    {
+                        value: {{ electricity_by_tariff_month.electricity1|floatformat:"0" }},
+                        color:"rgba(160,0,0,1)",
+                        highlight: "#5AD3D1",
+                        label: "{% trans 'Electricity 1 (low tariff)' %}"
+                    }
+                ]
+                var ctx = $("#electricity-by-tariff-month-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-by-tariff-month-chart").parent().height();
+                var chart_instance = new Chart(ctx).Pie(data, pie_options);             
+                $("#electricity-by-tariff-month-chart-legend").html(chart_instance.generateLegend());
             }
-                           
-            function render_average_electricity1_consumed_chart()
+	    
+            function render_average_electricity_consumed_chart()
             {
-                var data = {{ avg_electricity1_consumption|safe }};
-                var ctx = $("#average-electricity1-consumed-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#average-electricity1-consumed-chart").parent().height();
-                new Chart(ctx).PolarArea(data, polar_options);
+                var data = {
+                    labels: {{ x_hours|safe }},
+                    datasets: [{
+                        data: {{ avg_electricity_consumption|safe }},
+                        label: "{% trans 'Electricity' %}",                      
+                        fillColor: "#F05050",
+                        strokeColor: "#F05050",
+                        highlightFill: "#5AD3D1",
+                        highlightStroke: "#5AD3D1"
+                    }]
+                };
+                
+                var ctx = $("#average-electricity-consumed-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity-consumed-chart").parent().height();
+                new Chart(ctx).Bar(data, bar_options);
             }
                        
-            function render_average_electricity2_consumed_chart()
-            {
-                var data = {{ avg_electricity2_consumption|safe }};
-                var ctx = $("#average-electricity2-consumed-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#average-electricity2-consumed-chart").parent().height();
-                new Chart(ctx).PolarArea(data, polar_options);
-            }
         {% endif %}
 
         {% if capabilities.electricity_returned %}
-            function render_average_electricity_returned_chart()
+            function render_average_electricity_yield_chart()
             {
-                var data = {{ avg_electricity_returned|safe }};
-                var ctx = $("#average-electricity-returned-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#average-electricity-returned-chart").parent().height();
-                new Chart(ctx).PolarArea(data, polar_options);
-            }
-                           
-            function render_average_electricity1_yield_chart()
-            {
-                var data = {{ avg_electricity1_returned_yield|safe }};
-                var ctx = $("#average-electricity1-returned-yield-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#average-electricity1-returned-yield-chart").parent().height();
-                new Chart(ctx).PolarArea(data, polar_options);
-            }
-                       
-            function render_average_electricity2_yield_chart()
-            {
-                var data = {{ avg_electricity2_returned_yield|safe }};
-                var ctx = $("#average-electricity2-returned-yield-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#average-electricity2-returned-yield-chart").parent().height();
-                new Chart(ctx).PolarArea(data, polar_options);
+                var data = {
+                    labels: {{ x_hours|safe }},
+                    datasets: [{
+                        data: {{ avg_electricity_returned_yield|safe }},
+                        label: "{% trans 'Electricity returned' %}",                      
+                        fillColor: "rgba(39,194,76,1)",
+                        strokeColor: "rgba(39,194,76,1)",
+                        highlightFill: "#5AD3D1",
+                        highlightStroke: "#5AD3D1"
+                    }]
+                };
+            	
+                var ctx = $("#average-electricity-returned-yield-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity-returned-yield-chart").parent().height();
+                new Chart(ctx).Bar(data, bar_options);
             }
         {% endif %}
             
         {% if capabilities.gas %}
             function render_average_gas_consumed_chart()
             {
-                var data = {{ avg_gas_consumption|safe }};
+                var data = {
+                    labels: {{ x_hours|safe }},
+                    datasets: [{
+                        data: {{ avg_gas_consumption|safe }},
+                        label: "{% trans 'Gas' %}",                      
+                        fillColor: "rgba(250,133,0,1)",
+                        strokeColor: "rgba(250,133,0,1)",
+                        highlightFill: "#5AD3D1",
+                        highlightStroke: "#5AD3D1"
+                    }]
+                };
+            	
                 var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#average-gas-consumed-chart").parent().height();
-                new Chart(ctx).PolarArea(data, polar_options);
+                new Chart(ctx).Bar(data, bar_options);
             }
         {% endif %}
 		</script>

@@ -151,33 +151,6 @@ class TestServices(InterceptStdoutMixin, TestCase):
         rounded = dsmr_consumption.services.round_decimal(decimal_price=Decimal('1.555'))
         self.assertEqual(rounded, Decimal('1.56'))
 
-    def test_average_electricity_demand_by_hour(self):
-        now = timezone.make_aware(
-            timezone.datetime(2016, 1, 1, hour=13)
-        )
-        ElectricityConsumption.objects.create(
-            read_at=now,
-            delivered_1=1,
-            returned_1=1,
-            delivered_2=2,
-            returned_2=2,
-            currently_delivered=10,
-            currently_returned=20,
-        )
-        ElectricityConsumption.objects.create(
-            read_at=now + timezone.timedelta(minutes=1),
-            delivered_1=1,
-            returned_1=1,
-            delivered_2=2,
-            returned_2=2,
-            currently_delivered=30,
-            currently_returned=40,
-        )
-        demand = dsmr_consumption.services.average_electricity_demand_by_hour()
-        self.assertEqual(int(demand[0]['hour']), 12)
-        self.assertEqual(int(demand[0]['avg_delivered']), 20)
-        self.assertEqual(int(demand[0]['avg_returned']), 30)
-
 
 class TestServicesWithoutGas(TestServices):
     fixtures = ['dsmr_consumption/test_dsmrreading_without_gas.json']

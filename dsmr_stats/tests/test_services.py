@@ -292,7 +292,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         statistics_dict['electricity2'] = 15
         DayStatistics.objects.create(**statistics_dict)
 
-        percentages = dsmr_stats.services.electricity_tariff_percentage()
+        percentages = dsmr_stats.services.electricity_tariff_percentage(start_date=target_date.date())
         self.assertEqual(percentages['electricity1'], 25)
         self.assertEqual(percentages['electricity2'], 75)
 
