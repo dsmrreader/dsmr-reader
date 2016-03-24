@@ -48,7 +48,7 @@ class Trends(TemplateView):
                 current['avg_electricity1'] + current['avg_electricity2']
             ) / 2
 
-            graph_data['avg_electricity_consumption'].append(
+            graph_data['avg_electricity_consumed'].append(
                 float(dsmr_consumption.services.round_decimal(current['avg_electricity']))
             )
 
@@ -56,7 +56,7 @@ class Trends(TemplateView):
                 current['avg_electricity_returned'] = (
                     current['avg_electricity1_returned'] + current['avg_electricity2_returned']
                 ) / 2
-                graph_data['avg_electricity_returned_yield'].append(
+                graph_data['avg_electricity_returned'].append(
                     float(dsmr_consumption.services.round_decimal(current['avg_electricity_returned']))
                 )
 
@@ -65,7 +65,25 @@ class Trends(TemplateView):
                     float(dsmr_consumption.services.round_decimal(current['avg_gas']))
                 )
 
+        # We need the sums to calculate percentage.
+        sums = {
+            'avg_electricity_consumed': sum(graph_data['avg_electricity_consumed']),
+            'avg_electricity_returned': sum(graph_data['avg_electricity_returned']),
+            'avg_gas_consumption': sum(graph_data['avg_gas_consumption']),
+        }
+
+        # Map to percentages and JSON.
         for key, values in graph_data.items():
+            try:
+                current_sum = sums[key]
+                values = [
+                    float(dsmr_consumption.services.round_decimal(current / current_sum * 100))
+                    for current
+                    in values
+                ]
+            except (KeyError, ZeroDivisionError):
+                pass
+
             context_data[key] = json.dumps(values)
 
         return context_data

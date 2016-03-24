@@ -52,7 +52,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity consumed{% endblocktrans %}
+                    {% blocktrans %}Average hourly electricity consumed (in %){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-electricity-consumed-chart"></canvas>
@@ -67,10 +67,10 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity returned{% endblocktrans %}
+                    {% blocktrans %}Average hourly electricity returned (in %){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
-                    <canvas id="average-electricity-returned-yield-chart"></canvas>
+                    <canvas id="average-electricity-returned-chart"></canvas>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->
         </div><!-- /.col -->
@@ -82,7 +82,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly gas consumed{% endblocktrans %}
+                    {% blocktrans %}Average hourly gas consumed (in %){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-gas-consumed-chart"></canvas>
@@ -112,6 +112,7 @@
                 pointDotRadius: 2.5,
                 
                 {% verbatim %}
+                tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%",
                 legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
                 {% endverbatim %}
 	        }
@@ -129,7 +130,7 @@
             {% endif %}
 
             {% if capabilities.electricity_returned %}
-                render_average_electricity_yield_chart();
+                render_average_electricity_returned_chart();
             {% endif %}
 
             {% if capabilities.gas %}
@@ -187,7 +188,7 @@
                 var data = {
                     labels: {{ x_hours|safe }},
                     datasets: [{
-                        data: {{ avg_electricity_consumption|safe }},
+                        data: {{ avg_electricity_consumed|safe }},
                         label: "{% trans 'Electricity' %}",                      
                         fillColor: "#F05050",
                         strokeColor: "#F05050",
@@ -204,12 +205,12 @@
         {% endif %}
 
         {% if capabilities.electricity_returned %}
-            function render_average_electricity_yield_chart()
+            function render_average_electricity_returned_chart()
             {
                 var data = {
                     labels: {{ x_hours|safe }},
                     datasets: [{
-                        data: {{ avg_electricity_returned_yield|safe }},
+                        data: {{ avg_electricity_returned|safe }},
                         label: "{% trans 'Electricity returned' %}",                      
                         fillColor: "rgba(39,194,76,1)",
                         strokeColor: "rgba(39,194,76,1)",
@@ -218,8 +219,8 @@
                     }]
                 };
             	
-                var ctx = $("#average-electricity-returned-yield-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#average-electricity-returned-yield-chart").parent().height();
+                var ctx = $("#average-electricity-returned-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#average-electricity-returned-chart").parent().height();
                 new Chart(ctx).Bar(data, bar_options);
             }
         {% endif %}
