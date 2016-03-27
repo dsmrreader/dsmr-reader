@@ -155,7 +155,7 @@ def reading_timestamp_to_datetime(string):
     """
     Converts a string containing a timestamp to a timezone aware datetime.
     """
-    timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})W', string)
+    timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})[WS]+', string)
     return timezone.make_aware(timezone.datetime(
         year=2000 + int(timestamp.group(1)),
         month=int(timestamp.group(2)),

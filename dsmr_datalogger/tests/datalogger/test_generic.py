@@ -34,6 +34,12 @@ class TestServices(TestCase):
         self.assertEqual(result, expected_result)
         self.assertEqual(str(result.tzinfo), settings.TIME_ZONE)
 
+        # Summer time.
+        result = dsmr_datalogger.services.reading_timestamp_to_datetime('160327042016S')
+        expected_result = timezone.make_aware(timezone.datetime(2016, 3, 27, 4, 20, 16))
+        self.assertEqual(result, expected_result)
+        self.assertEqual(str(result.tzinfo), settings.TIME_ZONE)
+
     def test_track_meter_statistics(self):
         datalogger_settings = DataloggerSettings.get_solo()
         datalogger_settings.track_meter_statistics = False

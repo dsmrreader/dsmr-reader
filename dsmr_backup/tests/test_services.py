@@ -28,8 +28,12 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(create_backup_mock.called)
 
     @mock.patch('dsmr_backup.services.backup.create')
-    def test_check_initial(self, create_backup_mock):
+    @mock.patch('django.utils.timezone.now')
+    def test_check_initial(self, now_mock, create_backup_mock):
         """ Test whether a initial backup is created immediately. """
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1, hour=18)
+        )
         self.assertFalse(create_backup_mock.called)
 
         # Should create initial backup.
