@@ -15,6 +15,8 @@ import os
 
 from django.utils.translation import ugettext_lazy as _
 
+import dsmrreader
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -88,6 +90,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Project version.
+                'dsmr_frontend.context_processors.version',
             ],
         },
     },
@@ -157,3 +162,5 @@ DSMR_BACKUP_DIRECTORY = 'backups'  # Relative to project root.
 DSMR_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
 
 DSMR_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
+
+DSMR_VERSION = dsmrreader.__version__

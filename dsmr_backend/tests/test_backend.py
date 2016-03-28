@@ -41,3 +41,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
     def test_timezone(self):
         """ Verify timezone setting, as it should never be altered. """
         self.assertEqual(settings.TIME_ZONE, 'Europe/Amsterdam')
+
+    def test_version(self):
+        """ Verify version setting. """
+        self.assertIsNotNone(settings.DSMR_VERSION)

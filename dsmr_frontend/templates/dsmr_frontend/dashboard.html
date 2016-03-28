@@ -9,7 +9,7 @@
 {% block header_right %}
     {% if capabilities.electricity and latest_electricity_read %}
     <li>
-        <a href="" onclick="return false;">
+        <a href="" onclick="return false;" style="cursor: default;">
             <span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ latest_electricity }} &nbsp; {% trans "Watt" %}</span>
             <small style="color: #999999;">({{ latest_electricity_read|naturaltime }})</small>
         </a>
@@ -18,7 +18,7 @@
     
     {% if capabilities.electricity_returned and latest_electricity_returned %}
     <li>
-        <a href="" onclick="return false;">
+        <a href="" onclick="return false;" style="cursor: default;">
             <span class="badge bg-green"><i class="fa fa-bolt"></i> &nbsp; {{ latest_electricity_returned }} &nbsp; {% trans "Watt" %}</span>
             <small style="color: #999999;">({{ latest_electricity_read|naturaltime }})</small>
         </a>
@@ -27,7 +27,7 @@
      
     {% if capabilities.gas and latest_gas_read %}
     <li>
-        <a href="" onclick="return false;">
+        <a href="" onclick="return false;" style="cursor: default;">
             <span class="badge bg-orange"><i class="fa fa-fire"></i> &nbsp; {{ latest_gas }} &nbsp; {% trans "m<sup>3</sup>" %}</span>
             <small style="color: #999999;">({{ latest_gas_read|naturaltime }})</small>
         </a>
