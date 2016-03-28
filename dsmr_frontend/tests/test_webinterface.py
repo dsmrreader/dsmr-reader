@@ -203,6 +203,12 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
+        self.assertIn('day_statistics_count', response.context)
+        self.assertIn('hour_statistics_count', response.context)
+
+        if 'avg_consumption_x' in response.context:
+            self.assertIn('electricity_by_tariff_week', response.context)
+            self.assertIn('electricity_by_tariff_month', response.context)
 
         # Test with missing electricity returned.
         ElectricityConsumption.objects.all().update(currently_returned=0)
@@ -222,7 +228,18 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
+        self.assertIn('total_reading_count', response.context)
         self.assertIn('unprocessed_readings', response.context)
+
+        if 'latest_reading' in response.context:
+            self.assertIn('first_reading', response.context)
+            self.assertIn('delta_since_latest_reading', response.context)
+
+        if 'latest_ec' in response.context:
+            self.assertIn('delta_since_latest_ec', response.context)
+
+        if 'latest_gc' in response.context:
+            self.assertIn('delta_since_latest_gc', response.context)
 
     @mock.patch('django.utils.timezone.now')
     def test_configuration(self, now_mock):

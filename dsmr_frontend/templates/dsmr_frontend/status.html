@@ -21,9 +21,15 @@
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Readings" %} <br />
-                    <small>{% blocktrans %}Number of times data read from your meter. Should be updated every 15 seconds.{% endblocktrans %}</small>
+                    <small>{% blocktrans %}Status regarding the latest data read from your meter.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
+                    {% if delta_since_latest_reading == None or delta_since_latest_reading > 60 %}
+                    <div class="alert alert-danger" role="alert">
+                        <span class="fa fa-exclamation fa-2x"></span> 
+                        {% blocktrans %}It has been a while since the latest meter reading. Your <strong>datalogger process</strong> might hang or has been crashed.{% endblocktrans %}
+                    </div>
+                    {% endif %}
                     <table class="table table-condensed">
                         <tr>
                             <td class="col-md-6">{% trans "Latest reading" %}</td>
@@ -48,24 +54,54 @@
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Background" %}<br />
-                    <small>{% blocktrans %}Most data is processed with a small delay, but should take no longer than a minute to update. Gas consumption however, is only updated once a hour.{% endblocktrans %}</small>
+                    <small>{% blocktrans %}Status regarding processing readings, making them visible in other pages and graphs.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
                             <td class="col-md-6">{% trans "Unprocessed readings" %}</td>
-                            <td class="col-md-6">{{ unprocessed_readings|default:'-' }}</td>
+                            <td class="col-md-6">
+                                {{ unprocessed_readings|default:'-' }}
+                                
+		                        {% if unprocessed_readings > 30 %}
+		                        <br /><br />
+		                        <div class="alert alert-danger" role="alert">
+		                            <span class="fa fa-exclamation fa-2x"></span>
+		                            {% blocktrans %}There are too many unprocessed readings. Your <strong>backend process</strong> might hang or has been crashed.{% endblocktrans %}
+		                        </div>
+		                        {% endif %}
+                            </td>
                         </tr>
                         {% if latest_ec %}
                         <tr>
                             <td class="col-md-6">{% trans "Latest electricity consumption tracked" %}</td>
-                            <td class="col-md-6">{{ latest_ec.read_at|naturaltime }}</td>
+                            <td class="col-md-6">
+                                {{ latest_ec.read_at|naturaltime }}
+
+		                        {% if delta_since_latest_ec == None or delta_since_latest_ec > 120 %}
+		                        <br /><br />
+		                        <div class="alert alert-danger" role="alert">
+		                            <span class="fa fa-exclamation fa-2x"></span>
+		                            {% blocktrans %}It has been a while since electricity consumption was tracked. Your <strong>backend process</strong> might hang or has been crashed.{% endblocktrans %}
+		                        </div>
+		                        {% endif %}
+                            </td>
                         </tr>
                         {% endif %}
                         {% if latest_gc %}
                         <tr>
                             <td class="col-md-6">{% trans "Latest gas consumption tracked" %}</td>
-                            <td class="col-md-6">{{ latest_gc.read_at|naturaltime }}</td>
+                            <td class="col-md-6">
+                                {{ latest_gc.read_at|naturaltime }}
+                                
+		                        {% if delta_since_latest_gc == None or delta_since_latest_gc > 9000 %}
+                                <br /><br />
+		                        <div class="alert alert-danger" role="alert">
+		                            <span class="fa fa-exclamation fa-2x"></span>
+		                            {% blocktrans %}It has been a while since gas consumption was tracked. Your <strong>backend process</strong> might hang or has been crashed.{% endblocktrans %}
+		                        </div>
+		                        {% endif %}
+                            </td>
                         </tr>
                         {% endif %}
                     </table>
@@ -79,7 +115,7 @@
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Data availability" %} <br />
-                    <small>{% blocktrans %}Based on readings until this moment{% endblocktrans %}</small>
+                    <small>{% blocktrans %}Based on readings until this moment. Electricity usage should be always available. Gas usage and electricity return depend on your home situation.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
