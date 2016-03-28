@@ -1,8 +1,8 @@
 from django.core.management import CommandError
 from django.test import TestCase
 from django.utils import timezone
-from django.conf import settings
 import serial
+import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
@@ -27,18 +27,39 @@ class TestServices(TestCase):
         result = dsmr_datalogger.services.reading_timestamp_to_datetime('151110192959W')
         expected_result = timezone.make_aware(timezone.datetime(2015, 11, 10, 19, 29, 59))
         self.assertEqual(result, expected_result)
-        self.assertEqual(str(result.tzinfo), settings.TIME_ZONE)
+        self.assertEqual(result.tzinfo, pytz.utc)
 
         result = dsmr_datalogger.services.reading_timestamp_to_datetime('160401203040W')
         expected_result = timezone.make_aware(timezone.datetime(2016, 4, 1, 20, 30, 40))
         self.assertEqual(result, expected_result)
-        self.assertEqual(str(result.tzinfo), settings.TIME_ZONE)
+        self.assertEqual(result.tzinfo, pytz.utc)
 
         # Summer time.
         result = dsmr_datalogger.services.reading_timestamp_to_datetime('160327042016S')
         expected_result = timezone.make_aware(timezone.datetime(2016, 3, 27, 4, 20, 16))
         self.assertEqual(result, expected_result)
-        self.assertEqual(str(result.tzinfo), settings.TIME_ZONE)
+        self.assertEqual(result.tzinfo, pytz.utc)
+
+        """ Summer to winter transition is hard in DST, because the input is not UTC. """
+        # Last hour before winter time.
+        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030020000S')
+        expected_result = timezone.datetime(2016, 10, 30, 0, tzinfo=pytz.utc)
+        self.assertEqual(result, expected_result)
+
+        # Last second before winter time.
+        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030025959S')
+        expected_result = timezone.datetime(2016, 10, 30, 0, 59, 59, tzinfo=pytz.utc)
+        self.assertEqual(result, expected_result)
+
+        # First second in winter time.
+        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030020000W')
+        expected_result = timezone.datetime(2016, 10, 30, 1, tzinfo=pytz.utc)
+        self.assertEqual(result, expected_result)
+
+        # Last second of DST transition.
+        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030025959W')
+        expected_result = timezone.datetime(2016, 10, 30, 1, 59, 59, tzinfo=pytz.utc)
+        self.assertEqual(result, expected_result)
 
     def test_track_meter_statistics(self):
         datalogger_settings = DataloggerSettings.get_solo()

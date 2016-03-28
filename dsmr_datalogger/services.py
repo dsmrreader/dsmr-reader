@@ -2,7 +2,9 @@ import re
 
 from serial.serialutil import SerialException
 from django.utils import timezone
+from django.conf import settings
 import serial
+import pytz
 
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
@@ -155,12 +157,15 @@ def reading_timestamp_to_datetime(string):
     """
     Converts a string containing a timestamp to a timezone aware datetime.
     """
-    timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})[WS]+', string)
-    return timezone.make_aware(timezone.datetime(
+    timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})([WS])+', string)
+    meter_timestamp = timezone.datetime(
         year=2000 + int(timestamp.group(1)),
         month=int(timestamp.group(2)),
         day=int(timestamp.group(3)),
         hour=int(timestamp.group(4)),
         minute=int(timestamp.group(5)),
         second=int(timestamp.group(6)),
-    ))
+    )
+    is_dst = timestamp.group(7) == 'S'
+    local_timezone = pytz.timezone(settings.TIME_ZONE)
+    return local_timezone.localize(meter_timestamp, is_dst=is_dst).astimezone(pytz.utc)
