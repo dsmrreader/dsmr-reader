@@ -6,6 +6,7 @@ v0.16 (β) - 2016-xx-xx
 - Support for summer time (#105).
 - Support for Daylight Saving Time (DST) transition (#104).
 - Add (error) hints to status page (#106).
+- Keep track of version (#108).
 
 
 v0.15 (β) - 2016-03-24
