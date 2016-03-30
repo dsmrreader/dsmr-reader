@@ -6,6 +6,7 @@ DSMR Reader's documentation
    
    intro
    installation
+   application
    contributing
    changelog
    licence

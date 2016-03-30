@@ -3,8 +3,8 @@ Installation
 
 The installation guide may take about *half an hour max* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
-Database backend
-----------------
+1. Database backend
+-------------------
 The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) PostgreSQL (Option B.) MySQL/MariaDB. If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has better support for timezone handling (needed for DST transitions).
 
 (Option A.) PostgreSQL
@@ -59,8 +59,8 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
     mysqladmin reload
 
 
-Dependencies
-------------
+2. Dependencies
+---------------
 Several utilities, required for webserver, application server and cloning the application code from the repository::
 
     sudo apt-get install -y nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper
@@ -70,8 +70,8 @@ Install ``cu``. The CU program allows easy testing for your DSMR serial connecti
     sudo apt-get install -y cu
 
     
-Application user
-----------------
+3. Application user
+-------------------
 The application runs as ``dsmr`` user by default. This way we do not have to run the application as ``root``, which is a bad practice anyway.
 
 Create user with homedir. The application code and virtualenv resides in this directory as well::
@@ -83,8 +83,8 @@ Our user also requires ``dialout`` permissions. So allow the user to perform a d
     sudo usermod -a -G dialout dsmr
 
 
-Webserver (Nginx), part 1
--------------------------
+4. Webserver/Nginx (part 1)
+---------------------------
 We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.
 
 Django will copy all static files to a separate directory, used by Nginx to serve statics::
@@ -98,7 +98,7 @@ Django will copy all static files to a separate directory, used by Nginx to serv
 
 Your first reading (optional)
 -----------------------------
-You may skip this section as it's not required for the application to install. However, if you have never read your meter before, I recommend to perform an initial reading to make sure everything works as expected.
+**OPTIONAL** You may skip this section as it's not required for the application to install. However, if you have never read your meter before, I recommend to perform an initial reading to make sure everything works as expected.
 
 - Now login as the user we just created, to perform our very first reading! ::
 
@@ -113,8 +113,8 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 - To exit cu, type "``q.``", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``.
 
 
-Clone project code from Github
-------------------------------
+5. Clone project code from Github
+---------------------------------
 Now is the time to clone the code from the repository and check it out on your device. 
 
 - Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
@@ -126,8 +126,8 @@ Now is the time to clone the code from the repository and check it out on your d
 This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the Github repository.    
 
 
-Virtualenv
-----------
+6. Virtualenv
+-------------
 The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine. `More information about this subject can be found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_.
 
 - Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
@@ -153,8 +153,8 @@ I.e. the Python binary inside ``/usr/bin/python`` won't be used when the virtual
 You might want to put the ``source ~/.virtualenvs/dsmrreader/bin/activate`` command above in the user's ``~/.bashrc`` (logout and login to test). I also advice to put the ``cd ~/dsmr-reader`` in there as well, which will cd you directly inside the project folder on login.
 
 
-Application configuration & setup
----------------------------------
+7. Application configuration & setup
+------------------------------------
 Earlier in this guide you had to choose for either **(A.) PostgreSQL** or **(B.) MySQL/MariaDB**. Our application needs to know which backend used in order to communicate with it. 
 
 Therefor I created two default (Django-)settings files you can copy, one for each backend. The application will also need the appropiate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. 
@@ -179,3 +179,93 @@ The ``base.txt`` contains requirements which the application needs anyway, no ma
 
     pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
 
+
+Did everything install without fatal errors? When either of the database clients refuses to install due to missing files/configs, make sure you've installed ``libmysqlclient-dev`` (**for MySQL**) or ``postgresql-server-dev-all`` (**for PostgreSQL**) earlier in the process, when you installed the database server itself.
+
+
+8. Bootstrapping
+----------------
+Now it's time to bootstrap the application and check whether all settings are good and requirements are met.
+ 
+- Execute this to init the database::
+
+    ./manage.py migrate
+
+Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process. It allows us to have Nginx serve static files outside our project/code root.
+
+- Sync static files::
+
+    ./manage.py collectstatic --noinput
+
+Create an application superuser. Django will prompt you for a password. Alter username and email when you prefer other credentials, but email is not (yet) used in the application anyway. Besides, you have shell access so you may generate another user at any time (in case you lock yourself out of the application). The credentials generated can be used to access the administration panel inside the application, which requires authentication.
+
+- Create user inside application::
+
+    ./manage.py createsuperuser --username admin --email root@localhost
+
+**OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period), you may run the command below to import them (fixtures). Note that altering prices later won't affect your reading data, because prices are calculated retroactive anyway.
+
+- Import example prices::
+
+    ./manage.py loaddata dsmr_stats/fixtures/dsmr_stats/EnergySupplierPrice.json
+    
+9. Webserver/Nginx (part 2)
+---------------------------
+Now move back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` once).
+
+- Remove the default vhost (if you do not use it yourself anyway!)::
+
+    sudo rm /etc/nginx/sites-enabled/default
+
+- Copy application vhost, *it will listen to any hostname* (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
+
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
+
+- Let Nginx verify vhost syntax and reload Nginx when configtest passes::
+
+    sudo service nginx configtest
+
+    sudo service nginx reload
+
+
+
+10. Supervisor
+--------------
+Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application and also all background jobs used. It's also configured to bring the entire application up again after a shutdown or reboot. 
+
+- Each job has it's own configuration file, so make sure to copy them all::
+
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
+
+- Login to supervisor management console::
+
+    sudo supervisorctl
+
+- Enter these commands (after the >). It will ask Supervisor to recheck its config directory and use/reload the files::
+
+    supervisor> reread
+
+    supervisor> update
+    
+Three processes should be started or running. Make sure they don't end up in ERROR state, so refresh with 'status' a few times.
+
+- When still in ``supervisorctl``'s console, type::
+
+    supervisor> status
+
+Example of everything running well::
+
+    dsmr_backend                     STARTING
+    dsmr_datalogger                  RUNNING
+    dsmr_webinterface                RUNNING
+
+- Want to check whether data logger works? Just tail it's log in supervisor with::
+
+    supervisor> tail -f dsmr_datalogger
+    
+Please note that due to Supervisor's output buffering **it might take a minute or two before you see any output**. You should see similar output as the ``cu``-command printed earlier in the installation process.
+
+Want to quit supervisor? ``CTRL + C`` to stop tail and ``CTRL + D`` once to exit supervisor command line.
+
+
+You now should have everything up and running! We're almost done, but only need to check a just few more things in the next chapters.
