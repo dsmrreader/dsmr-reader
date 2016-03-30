@@ -2,8 +2,10 @@ DSMR Reader's documentation
 ===========================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    
    intro
+   installation
+   contributing
    changelog
    licence
