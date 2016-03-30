@@ -1,15 +1,14 @@
-
+Changelog
+=========
 
 v1.0.0 - 2016-xx-xx
-===================
+^^^^^^^^^^^^^^^^^^^
 - Move documentation to wiki or RTD (#90).
 
 
-----------------------------------------------------------------------------------------------------
-
 
 v0.16 (β) - 2016-03-28
-======================
+^^^^^^^^^^^^^^^^^^^^^^
 - Redesign trends page (#97).
 - Support for summer time (#105).
 - Support for Daylight Saving Time (DST) transition (#104).
@@ -18,7 +17,7 @@ v0.16 (β) - 2016-03-28
 
 
 v0.15 (β) - 2016-03-24
-======================
+^^^^^^^^^^^^^^^^^^^^^^
 - Django 1.8.11 released (#82).
 - Prevent tests from failing due to moment of execution (#88).
 - Statistics page meter positions are broken (#93).
@@ -34,7 +33,7 @@ v0.15 (β) - 2016-03-24
 
 
 v0.14 (β) - 2016-03-13
-======================
+^^^^^^^^^^^^^^^^^^^^^^
 - Show exceptions in production (webinterface) (#87).
 - Keep Supervisor processes running (#79).
 - Hourly stats of 22:00:00+00 every day lack gas (#78).
@@ -46,7 +45,7 @@ v0.14 (β) - 2016-03-13
 
 
 v0.13 (β) - 2016-03-06
-======================
+^^^^^^^^^^^^^^^^^^^^^^
 - Delete StatsSettings(.track) settings model (#71).
 - Drop deprecated commands (#22).
 - Datalogger doesn't work properly with DSMR 4.2 (KAIFA-METER) (#73).
@@ -61,7 +60,7 @@ v0.13 (β) - 2016-03-06
 
 
 v0.12 (β) - 2016-03-01
-======================
+^^^^^^^^^^^^^^^^^^^^^^
 - Archive: View past days details (#61).
 - Dashboard: Consumption total for current month (#60).
 - Check whether gas readings are optional (#34).
@@ -70,7 +69,7 @@ v0.12 (β) - 2016-03-01
 
 
 v0.11 (β) - 2016-02-22
-======================
+^^^^^^^^^^^^^^^^^^^^^^
 - Status page/alerts when features are disabled/unavailable (#45).
 - Integrate Travis CI (#48).
 - Testing coverage (#38).
@@ -81,7 +80,7 @@ v0.11 (β) - 2016-02-22
 
 
 v0.10 (β) - 2016-02-15
-======================
+^^^^^^^^^^^^^^^^^^^^^^
 - Cleanup unused static files (#47).
 - Investigated mysql_tzinfo_to_sql — Load the Time Zone Tables (#35).
 - Make additional DSMR data optional (#46).
@@ -93,14 +92,14 @@ v0.10 (β) - 2016-02-15
 
 
 v0.9 (β) - 2016-02-08
-=====================
+^^^^^^^^^^^^^^^^^^^^^
 - Moved project to GitHub (#28).
 - Added stdout to dsmr_backend to reflect progress.
 - Restore note usage in GUI (#39).
 
 
 v0.8 (β) - 2016-02-06
-=====================
+^^^^^^^^^^^^^^^^^^^^^
 - Store daily, weekly, monthly and yearly statistics (#3).
 - Improved Recent History page performance a bit. (as result of #3)
 - Updates ChartJS library tot 1.1, disposing django-chartjs plugin. Labels finally work! (as result of #3)
@@ -108,13 +107,13 @@ v0.8 (β) - 2016-02-06
 
 
 v0.7 (β) - 2016-02-04
-=====================
+^^^^^^^^^^^^^^^^^^^^^
 - Recent history setting: set range (#29).
 - Mock required for test: dsmr_weather.test_weather_tracking (#32).
 
 
 v0.6 (β) - 2016-02-03
-=====================
+^^^^^^^^^^^^^^^^^^^^^
 - Massive refactoring: Separating apps & using signals (#19).
 - README update: Exit character for cu (#27, by Jeroen Peters).
 - Fixed untranslated strings in admin interface.
@@ -122,5 +121,5 @@ v0.6 (β) - 2016-02-03
 
 
 v0.5 (β) - 2016-01-16
-=====================
+^^^^^^^^^^^^^^^^^^^^^
 - First stable release.

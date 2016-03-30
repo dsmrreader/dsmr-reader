@@ -7,11 +7,4 @@ Contents:
    :maxdepth: 3
    
    intro
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   changelog
