@@ -7,7 +7,7 @@ DSMR Reader's documentation
    intro
    installation
    application
-   contributing
    changelog
-   licence
+   contributing
    credits
+   licence
