@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 22:43+0200\n"
+"POT-Creation-Date: 2016-03-30 22:54+0200\n"
 "PO-Revision-Date: 2016-03-30 20:20+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,116 +22,142 @@ msgid "Introduction"
 msgstr "Introductie"
 
 #: ../../intro.rst:5
-msgid "Usage"
-msgstr "Gebruik"
+msgid "Why"
+msgstr ""
 
 #: ../../intro.rst:6
 msgid ""
 "There are plenty of 'scripts' and websites available for performing DSMR "
-"readings. This project however is a full stack solution. This allows a "
-"decent implementation of most features, but requires a certain 'skill' as"
-" you will need to install several dependencies."
+"readings. This project however is a full stack solution and allows you to"
+" keep your own data for yourself."
 msgstr ""
 
 #: ../../intro.rst:8
 msgid ""
-"I advise to only use this tool when you have basic Linux knowledge or "
-"have any interest in the components used. I might create an installer "
-"script later, but I'll focus on the build of features first."
+"The project was originally started 'just for fun and learning', but kept "
+"growing until eventually other people were interested in using it "
+"theirselves as well. I also longed for a while to contribute something "
+"back to the open source community and this seemed the right project for "
+"it."
+msgstr ""
+
+#: ../../intro.rst:11
+msgid "Knowledge required"
 msgstr ""
 
 #: ../../intro.rst:12
-msgid "Dependencies & requirements"
-msgstr ""
-
-#: ../../intro.rst:13
-msgid "**RaspberryPi 2 or 3**"
+msgid ""
+"This allows a decent implementation of most features, but requires a "
+"certain 'Unix skill' as you will need to install several dependencies "
+"using the command line."
 msgstr ""
 
 #: ../../intro.rst:14
-msgid "RaspberryPi 1 should work decently, but I do not actively support it"
-msgstr ""
-
-#: ../../intro.rst:15
-msgid "**Raspbian OS**"
-msgstr ""
-
-#: ../../intro.rst:16
 msgid ""
-"Recommended and tested, but any OS satisfying the requirements should do "
-"fine."
-msgstr ""
-
-#: ../../intro.rst:17
-msgid "**Python 3.3 / 3.4**"
+"I advise to only use this tool when you have basic Linux knowledge or "
+"have any interest in the components used. I might create an installer "
+"script later, but I'll focus on building more features first."
 msgstr ""
 
 #: ../../intro.rst:18
-msgid "**PostgreSQL 9+ or MySQL / MariaDB 5.5+**"
+msgid "Github"
 msgstr ""
 
 #: ../../intro.rst:19
-msgid "I highly recommend *PostgreSQL*"
-msgstr ""
-
-#: ../../intro.rst:20
-msgid "**Smart Meter** with support for **at least DSMR 4.0/4.2**"
-msgstr ""
-
-#: ../../intro.rst:21
-msgid "Tested so far with Landis+Gyr E350, Kaifa."
-msgstr ""
-
-#: ../../intro.rst:22
 msgid ""
-"**Minimal 100 MB of disk space on RaspberryPi (card)** (for application "
-"installation & virtualenv)."
-msgstr ""
-
-#: ../../intro.rst:23
-msgid ""
-"More disk space is required for storing all reader data captured "
-"(optional). I generally advise to use a 8+ GB SD card."
-msgstr ""
-
-#: ../../intro.rst:24
-#, python-format
-msgid ""
-"The readings will take 90+ % of the disk space. I plan however to add "
-"some kind of retention to it later, keeping the data (of many years) far "
-"below the 500 MB"
-msgstr ""
-
-#: ../../intro.rst:25
-msgid ""
-"**Smart meter P1 data cable** (can be purchased online and they cost "
-"around 20 Euro's)."
-msgstr ""
-
-#: ../../intro.rst:26
-msgid "**Basic Linux knowledge for deployment, debugging and troubleshooting**"
-msgstr ""
-
-#: ../../intro.rst:27
-msgid "It just really helps if you know what you are doing."
+"The project can be found here: https://github.com/dennissiemensma/dsmr-"
+"reader"
 msgstr ""
 
 #~ msgid ""
-#~ "Installation instructions are based on "
-#~ "the Raspbian distro for RaspberryPi, but"
-#~ " it should generally work on every"
-#~ " Debian based system, as long as "
-#~ "the dependencies & requirements are met."
+#~ msgstr ""
+
+#~ msgid "Usage"
+#~ msgstr "Gebruik"
+
+#~ msgid ""
+#~ "There are plenty of 'scripts' and "
+#~ "websites available for performing DSMR "
+#~ "readings. This project however is a "
+#~ "full stack solution. This allows a "
+#~ "decent implementation of most features, "
+#~ "but requires a certain 'skill' as "
+#~ "you will need to install several "
+#~ "dependencies."
 #~ msgstr ""
 
 #~ msgid ""
-#~ "There are plenty of 'scripts' available"
-#~ " online for performing DSMR readings. "
-#~ "This project however is a full "
-#~ "stack solution. This allows a decent "
-#~ "implementation of most features, but "
-#~ "requires a certain 'skill' as you "
-#~ "will need to install several "
-#~ "dependencies."
+#~ "I advise to only use this tool "
+#~ "when you have basic Linux knowledge "
+#~ "or have any interest in the "
+#~ "components used. I might create an "
+#~ "installer script later, but I'll focus"
+#~ " on the build of features first."
+#~ msgstr ""
+
+#~ msgid "Dependencies & requirements"
+#~ msgstr ""
+
+#~ msgid "**RaspberryPi 2 or 3**"
+#~ msgstr ""
+
+#~ msgid "RaspberryPi 1 should work decently, but I do not actively support it"
+#~ msgstr ""
+
+#~ msgid "**Raspbian OS**"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Recommended and tested, but any OS "
+#~ "satisfying the requirements should do "
+#~ "fine."
+#~ msgstr ""
+
+#~ msgid "**Python 3.3 / 3.4**"
+#~ msgstr ""
+
+#~ msgid "**PostgreSQL 9+ or MySQL / MariaDB 5.5+**"
+#~ msgstr ""
+
+#~ msgid "I highly recommend *PostgreSQL*"
+#~ msgstr ""
+
+#~ msgid "**Smart Meter** with support for **at least DSMR 4.0/4.2**"
+#~ msgstr ""
+
+#~ msgid "Tested so far with Landis+Gyr E350, Kaifa."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Minimal 100 MB of disk space on"
+#~ " RaspberryPi (card)** (for application "
+#~ "installation & virtualenv)."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "More disk space is required for "
+#~ "storing all reader data captured "
+#~ "(optional). I generally advise to use"
+#~ " a 8+ GB SD card."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The readings will take 90+ % of"
+#~ " the disk space. I plan however "
+#~ "to add some kind of retention to"
+#~ " it later, keeping the data (of "
+#~ "many years) far below the 500 MB"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Smart meter P1 data cable** (can "
+#~ "be purchased online and they cost "
+#~ "around 20 Euro's)."
+#~ msgstr ""
+
+#~ msgid "**Basic Linux knowledge for deployment, debugging and troubleshooting**"
+#~ msgstr ""
+
+#~ msgid "It just really helps if you know what you are doing."
 #~ msgstr ""
 
