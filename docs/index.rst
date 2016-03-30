@@ -10,3 +10,4 @@ DSMR Reader's documentation
    contributing
    changelog
    licence
+   credits

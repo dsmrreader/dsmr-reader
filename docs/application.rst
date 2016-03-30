@@ -62,3 +62,21 @@ You **should (or must)** make sure to periodically BACKUP your data! It's one of
  - For **MySQL/MariaDB** you can use ``dsmrreader/provisioning/mysql/mysql-backup.sh``. Make sure to schedule the backup script as cronjob and also verify that it actually works. ;-)
 
 - Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) later, allowing you to choose your own retention (for all the source readings).
+
+
+Application updates (bug fixes & new features)
+----------------------------------------------
+The current setup is based on the 'latest' version of the application, called the `master` branch. I will add versions/releases later, possibly by using PIP. 
+
+For now you can always update your application to the latest version by executing `deploy.sh`, located in the root of the project. Make sure to execute it while logged in as the `dsmr` user. It will make sure to check, fetch and apply any changes released::
+
+   ./deploy.sh
+
+Summary of deployment script:
+
+- GIT pull (codebase update)
+- PIP update requirements
+- Apply any database migrations
+- Sync static files to Nginx folder
+- Reload Gunicorn application server
+- Clear any caches
