@@ -1,0 +1,482 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016, Dennis Siemensma
+# This file is distributed under the same license as the DSMR Reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-30 22:43+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.2.0\n"
+
+#: ../../installation.rst:2
+msgid "Installation"
+msgstr ""
+
+#: ../../installation.rst:4
+msgid ""
+"The installation guide may take about *half an hour max* (for raspberryPi"
+" 2/3), but it greatly depends on your Linux skills and whether you need "
+"to understand every step described in this guide."
+msgstr ""
+
+#: ../../installation.rst:7
+msgid "1. Database backend"
+msgstr ""
+
+#: ../../installation.rst:8
+msgid ""
+"The application stores by default all readings taken from the serial "
+"cable. Depending on your needs, you can choose for either (Option A.) "
+"PostgreSQL (Option B.) MySQL/MariaDB. If you have no idea what to choose,"
+" I generally advise to pick PostgreSQL, as it has better support for "
+"timezone handling (needed for DST transitions)."
+msgstr ""
+
+#: ../../installation.rst:11 ../../installation.rst:167
+msgid "(Option A.) PostgreSQL"
+msgstr ""
+
+#: ../../installation.rst:12
+msgid ""
+"Install PostgreSQL, postgresql-server-dev-all is required for the "
+"virtualenv installation later in this guide."
+msgstr ""
+
+#: ../../installation.rst:14 ../../installation.rst:41
+msgid "Install database::"
+msgstr ""
+
+#: ../../installation.rst:18
+msgid "Postgres does not start due to locales? Try: dpkg-reconfigure locales"
+msgstr ""
+
+#: ../../installation.rst:20
+msgid ""
+"No luck? Try editing ``/etc/environment``, add ``LC_ALL=\"en_US.utf-8\"``"
+" and reboot"
+msgstr ""
+
+#: ../../installation.rst:22
+msgid ""
+"(!) Ignore any '*could not change directory to \"/root\": Permission "
+"denied*' errors for the following three commands."
+msgstr ""
+
+#: ../../installation.rst:24 ../../installation.rst:49
+msgid "Create user::"
+msgstr ""
+
+#: ../../installation.rst:28
+msgid "Create database, owned by the user we just created::"
+msgstr ""
+
+#: ../../installation.rst:32
+msgid "Set password for user::"
+msgstr ""
+
+#: ../../installation.rst:38 ../../installation.rst:175
+msgid "(Option B.) MySQL/MariaDB"
+msgstr ""
+
+#: ../../installation.rst:39
+msgid ""
+"Install MariaDB. You can also choose to install the closed source MySQL, "
+"as they should be interchangeable anyway. libmysqlclient-dev is required "
+"for the virtualenv installation later in this guide."
+msgstr ""
+
+#: ../../installation.rst:45
+msgid "Create database::"
+msgstr ""
+
+#: ../../installation.rst:53
+msgid "Set privileges for user::"
+msgstr ""
+
+#: ../../installation.rst:57
+msgid "Flush privileges to activate them::"
+msgstr ""
+
+#: ../../installation.rst:63
+msgid "2. Dependencies"
+msgstr ""
+
+#: ../../installation.rst:64
+msgid ""
+"Several utilities, required for webserver, application server and cloning"
+" the application code from the repository::"
+msgstr ""
+
+#: ../../installation.rst:68
+msgid ""
+"Install ``cu``. The CU program allows easy testing for your DSMR serial "
+"connection. It's basic but very effective to test whether your serial "
+"cable setup works properly. ::"
+msgstr ""
+
+#: ../../installation.rst:74
+msgid "3. Application user"
+msgstr ""
+
+#: ../../installation.rst:75
+msgid ""
+"The application runs as ``dsmr`` user by default. This way we do not have"
+" to run the application as ``root``, which is a bad practice anyway."
+msgstr ""
+
+#: ../../installation.rst:77
+msgid ""
+"Create user with homedir. The application code and virtualenv resides in "
+"this directory as well::"
+msgstr ""
+
+#: ../../installation.rst:81
+msgid ""
+"Our user also requires ``dialout`` permissions. So allow the user to "
+"perform a dialout by adding it to the group::"
+msgstr ""
+
+#: ../../installation.rst:87
+msgid "4. Webserver/Nginx (part 1)"
+msgstr ""
+
+#: ../../installation.rst:88
+msgid ""
+"We will now prepare the webserver, Nginx. It will serve all application's"
+" static files directly and proxy application requests to the backend, "
+"Gunicorn controlled by Supervisor, which we will configure later on."
+msgstr ""
+
+#: ../../installation.rst:90
+msgid ""
+"Django will copy all static files to a separate directory, used by Nginx "
+"to serve statics::"
+msgstr ""
+
+#: ../../installation.rst:96
+msgid ""
+"*The reason for splitting the webserver chapter in two steps, is because "
+"the application requires the directory created above to exist. And Nginx "
+"requires the application to exist (cloned) before running (and to copy "
+"its virtual hosts file), resulting in an dependency loop... :]*"
+msgstr ""
+
+#: ../../installation.rst:100
+msgid "Your first reading (optional)"
+msgstr ""
+
+#: ../../installation.rst:101
+msgid ""
+"**OPTIONAL** You may skip this section as it's not required for the "
+"application to install. However, if you have never read your meter "
+"before, I recommend to perform an initial reading to make sure everything"
+" works as expected."
+msgstr ""
+
+#: ../../installation.rst:103
+msgid ""
+"Now login as the user we just created, to perform our very first reading!"
+" ::"
+msgstr ""
+
+#: ../../installation.rst:107
+msgid ""
+"Test with ``cu`` (BAUD rate settings for **DSMR v4** is ``115200``, for "
+"older verions it should be ``9600``)::"
+msgstr ""
+
+#: ../../installation.rst:111
+msgid ""
+"You now should see something similar to ``Connected.`` and a wall of text"
+" and numbers within 10 seconds. Nothing? Try different BAUD rate, as "
+"mentioned above. You might also check out a useful blog, `such as this "
+"one (Dutch) <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
+msgstr ""
+
+#: ../../installation.rst:113
+msgid ""
+"To exit cu, type \"``q.``\", hit Enter and wait for a few seconds. It "
+"should exit with the message ``Disconnected.``."
+msgstr ""
+
+#: ../../installation.rst:117
+msgid "5. Clone project code from Github"
+msgstr ""
+
+#: ../../installation.rst:118
+msgid ""
+"Now is the time to clone the code from the repository and check it out on"
+" your device."
+msgstr ""
+
+#: ../../installation.rst:120 ../../installation.rst:133
+msgid ""
+"Make sure you are still acting as ``dsmr`` user (if not then enter: "
+"``sudo su - dsmr``)"
+msgstr ""
+
+#: ../../installation.rst:122
+msgid "Clone the repository::"
+msgstr ""
+
+#: ../../installation.rst:126
+msgid ""
+"This may take a few seconds. When finished, you should see a new folder "
+"called ``dsmr-reader``, containing a clone of the Github repository."
+msgstr ""
+
+#: ../../installation.rst:130
+msgid "6. Virtualenv"
+msgstr ""
+
+#: ../../installation.rst:131
+msgid ""
+"The dependencies our application uses are stored in a separate "
+"environment, also called **VirtualEnv**. Although it's just a folder "
+"inside our user's homedir, it's very effective as it allows us to keep "
+"dependencies isolated or to run different versions of the same package on"
+" the same machine. `More information about this subject can be found here"
+" <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
+msgstr ""
+
+#: ../../installation.rst:135
+msgid "Create folder for the virtualenvs of this user::"
+msgstr ""
+
+#: ../../installation.rst:139
+msgid ""
+"Create a new virtualenv, we usually use the same name for it as the "
+"application or project. Note that it's important to specify python3 as "
+"the default interpreter::"
+msgstr ""
+
+#: ../../installation.rst:143
+msgid ""
+"Now *activate* the environment. It effectively directs all aliases for "
+"software installed in the virtualenv to the binaries inside the "
+"virtualenv."
+msgstr ""
+
+#: ../../installation.rst:145
+msgid ""
+"I.e. the Python binary inside ``/usr/bin/python`` won't be used when the "
+"virtualenv is activated, but "
+"``/home/dsmr/.virtualenvs/dsmrreader/bin/python`` will be instead."
+msgstr ""
+
+#: ../../installation.rst:147
+msgid "Activate virtualenv & cd to project::"
+msgstr ""
+
+#: ../../installation.rst:153
+msgid ""
+"You might want to put the ``source "
+"~/.virtualenvs/dsmrreader/bin/activate`` command above in the user's "
+"``~/.bashrc`` (logout and login to test). I also advice to put the ``cd "
+"~/dsmr-reader`` in there as well, which will cd you directly inside the "
+"project folder on login."
+msgstr ""
+
+#: ../../installation.rst:157
+msgid "7. Application configuration & setup"
+msgstr ""
+
+#: ../../installation.rst:158
+msgid ""
+"Earlier in this guide you had to choose for either **(A.) PostgreSQL** or"
+" **(B.) MySQL/MariaDB**. Our application needs to know which backend used"
+" in order to communicate with it."
+msgstr ""
+
+#: ../../installation.rst:160
+msgid ""
+"Therefor I created two default (Django-)settings files you can copy, one "
+"for each backend. The application will also need the appropiate database "
+"client, which is not installed by default. For this I also created two "
+"ready-to-use requirements files, which will also install all other "
+"dependencies required, such as the Django framework."
+msgstr ""
+
+#: ../../installation.rst:162
+msgid ""
+"The ``base.txt`` contains requirements which the application needs "
+"anyway, no matter which backend you've choosen."
+msgstr ""
+
+#: ../../installation.rst:164
+msgid ""
+"(!) Note: *Installation might take a while*, depending on your Internet "
+"connection, RaspberryPi version and resources (generally CPU) available. "
+"Nothing to worry about. :]"
+msgstr ""
+
+#: ../../installation.rst:168
+msgid "Did you choose PostgreSQL? Then execute these two lines::"
+msgstr ""
+
+#: ../../installation.rst:176
+msgid "Or did you choose MySQL/MariaDB? Execute these two commands::"
+msgstr ""
+
+#: ../../installation.rst:183
+msgid ""
+"Did everything install without fatal errors? When either of the database "
+"clients refuses to install due to missing files/configs, make sure you've"
+" installed ``libmysqlclient-dev`` (**for MySQL**) or ``postgresql-server-"
+"dev-all`` (**for PostgreSQL**) earlier in the process, when you installed"
+" the database server itself."
+msgstr ""
+
+#: ../../installation.rst:187
+msgid "8. Bootstrapping"
+msgstr ""
+
+#: ../../installation.rst:188
+msgid ""
+"Now it's time to bootstrap the application and check whether all settings"
+" are good and requirements are met."
+msgstr ""
+
+#: ../../installation.rst:190
+msgid "Execute this to init the database::"
+msgstr ""
+
+#: ../../installation.rst:194
+msgid ""
+"Prepare static files for webinterface. This will copy all static files to"
+" the directory we created for Nginx earlier in the process. It allows us "
+"to have Nginx serve static files outside our project/code root."
+msgstr ""
+
+#: ../../installation.rst:196
+msgid "Sync static files::"
+msgstr ""
+
+#: ../../installation.rst:200
+msgid ""
+"Create an application superuser. Django will prompt you for a password. "
+"Alter username and email when you prefer other credentials, but email is "
+"not (yet) used in the application anyway. Besides, you have shell access "
+"so you may generate another user at any time (in case you lock yourself "
+"out of the application). The credentials generated can be used to access "
+"the administration panel inside the application, which requires "
+"authentication."
+msgstr ""
+
+#: ../../installation.rst:202
+msgid "Create user inside application::"
+msgstr ""
+
+#: ../../installation.rst:206
+msgid ""
+"**OPTIONAL**: The application will run without your energy prices, but if"
+" you want some sensible defaults (actually my own energy prices for a "
+"brief period), you may run the command below to import them (fixtures). "
+"Note that altering prices later won't affect your reading data, because "
+"prices are calculated retroactive anyway."
+msgstr ""
+
+#: ../../installation.rst:208
+msgid "Import example prices::"
+msgstr ""
+
+#: ../../installation.rst:213
+msgid "9. Webserver/Nginx (part 2)"
+msgstr ""
+
+#: ../../installation.rst:214
+msgid ""
+"Now move back to ``root``/``sudo-user`` to config webserver (press ``CTRL"
+" + D`` once)."
+msgstr ""
+
+#: ../../installation.rst:216
+msgid "Remove the default vhost (if you do not use it yourself anyway!)::"
+msgstr ""
+
+#: ../../installation.rst:220
+msgid ""
+"Copy application vhost, *it will listen to any hostname* (wildcard), but "
+"you may change that if you feel like you need to. It won't affect the "
+"application anyway::"
+msgstr ""
+
+#: ../../installation.rst:224
+msgid "Let Nginx verify vhost syntax and reload Nginx when configtest passes::"
+msgstr ""
+
+#: ../../installation.rst:233
+msgid "10. Supervisor"
+msgstr ""
+
+#: ../../installation.rst:234
+msgid ""
+"Now we configure `Supervisor <http://supervisord.org/>`_, which is used "
+"to run our application and also all background jobs used. It's also "
+"configured to bring the entire application up again after a shutdown or "
+"reboot."
+msgstr ""
+
+#: ../../installation.rst:236
+msgid "Each job has it's own configuration file, so make sure to copy them all::"
+msgstr ""
+
+#: ../../installation.rst:240
+msgid "Login to supervisor management console::"
+msgstr ""
+
+#: ../../installation.rst:244
+msgid ""
+"Enter these commands (after the >). It will ask Supervisor to recheck its"
+" config directory and use/reload the files::"
+msgstr ""
+
+#: ../../installation.rst:250
+msgid ""
+"Three processes should be started or running. Make sure they don't end up"
+" in ERROR state, so refresh with 'status' a few times."
+msgstr ""
+
+#: ../../installation.rst:252
+msgid "When still in ``supervisorctl``'s console, type::"
+msgstr ""
+
+#: ../../installation.rst:256
+msgid "Example of everything running well::"
+msgstr ""
+
+#: ../../installation.rst:262
+msgid ""
+"Want to check whether data logger works? Just tail it's log in supervisor"
+" with::"
+msgstr ""
+
+#: ../../installation.rst:266
+msgid ""
+"Please note that due to Supervisor's output buffering **it might take a "
+"minute or two before you see any output**. You should see similar output "
+"as the ``cu``-command printed earlier in the installation process."
+msgstr ""
+
+#: ../../installation.rst:268
+msgid ""
+"Want to quit supervisor? ``CTRL + C`` to stop tail and ``CTRL + D`` once "
+"to exit supervisor command line."
+msgstr ""
+
+#: ../../installation.rst:271
+msgid ""
+"You now should have everything up and running! We're almost done, but "
+"only need to check a just few more things in the next chapters."
+msgstr ""
+

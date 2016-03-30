@@ -8,43 +8,130 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 20:19+0200\n"
+"POT-Creation-Date: 2016-03-30 22:43+0200\n"
 "PO-Revision-Date: 2016-03-30 20:20+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.5.4\n"
-"Language: nl\n"
 
 #: ../../intro.rst:2
 msgid "Introduction"
 msgstr "Introductie"
 
-#: ../../intro.rst:4
-msgid ""
-"Installation instructions are based on the Raspbian distro for RaspberryPi, "
-"but it should generally work on every Debian based system, as long as the "
-"dependencies & requirements are met."
-msgstr ""
-
-#: ../../intro.rst:7
+#: ../../intro.rst:5
 msgid "Usage"
 msgstr "Gebruik"
 
-#: ../../intro.rst:8
+#: ../../intro.rst:6
 msgid ""
-"There are plenty of 'scripts' available online for performing DSMR readings. "
-"This project however is a full stack solution. This allows a decent "
-"implementation of most features, but requires a certain 'skill' as you will "
-"need to install several dependencies."
+"There are plenty of 'scripts' and websites available for performing DSMR "
+"readings. This project however is a full stack solution. This allows a "
+"decent implementation of most features, but requires a certain 'skill' as"
+" you will need to install several dependencies."
 msgstr ""
 
-#: ../../intro.rst:10
+#: ../../intro.rst:8
 msgid ""
-"I advise to only use this tool when you have basic Linux knowledge or have "
-"any interest in the components used. I might create an installer script "
-"later, but I'll focus on the build of features first."
+"I advise to only use this tool when you have basic Linux knowledge or "
+"have any interest in the components used. I might create an installer "
+"script later, but I'll focus on the build of features first."
 msgstr ""
+
+#: ../../intro.rst:12
+msgid "Dependencies & requirements"
+msgstr ""
+
+#: ../../intro.rst:13
+msgid "**RaspberryPi 2 or 3**"
+msgstr ""
+
+#: ../../intro.rst:14
+msgid "RaspberryPi 1 should work decently, but I do not actively support it"
+msgstr ""
+
+#: ../../intro.rst:15
+msgid "**Raspbian OS**"
+msgstr ""
+
+#: ../../intro.rst:16
+msgid ""
+"Recommended and tested, but any OS satisfying the requirements should do "
+"fine."
+msgstr ""
+
+#: ../../intro.rst:17
+msgid "**Python 3.3 / 3.4**"
+msgstr ""
+
+#: ../../intro.rst:18
+msgid "**PostgreSQL 9+ or MySQL / MariaDB 5.5+**"
+msgstr ""
+
+#: ../../intro.rst:19
+msgid "I highly recommend *PostgreSQL*"
+msgstr ""
+
+#: ../../intro.rst:20
+msgid "**Smart Meter** with support for **at least DSMR 4.0/4.2**"
+msgstr ""
+
+#: ../../intro.rst:21
+msgid "Tested so far with Landis+Gyr E350, Kaifa."
+msgstr ""
+
+#: ../../intro.rst:22
+msgid ""
+"**Minimal 100 MB of disk space on RaspberryPi (card)** (for application "
+"installation & virtualenv)."
+msgstr ""
+
+#: ../../intro.rst:23
+msgid ""
+"More disk space is required for storing all reader data captured "
+"(optional). I generally advise to use a 8+ GB SD card."
+msgstr ""
+
+#: ../../intro.rst:24
+#, python-format
+msgid ""
+"The readings will take 90+ % of the disk space. I plan however to add "
+"some kind of retention to it later, keeping the data (of many years) far "
+"below the 500 MB"
+msgstr ""
+
+#: ../../intro.rst:25
+msgid ""
+"**Smart meter P1 data cable** (can be purchased online and they cost "
+"around 20 Euro's)."
+msgstr ""
+
+#: ../../intro.rst:26
+msgid "**Basic Linux knowledge for deployment, debugging and troubleshooting**"
+msgstr ""
+
+#: ../../intro.rst:27
+msgid "It just really helps if you know what you are doing."
+msgstr ""
+
+#~ msgid ""
+#~ "Installation instructions are based on "
+#~ "the Raspbian distro for RaspberryPi, but"
+#~ " it should generally work on every"
+#~ " Debian based system, as long as "
+#~ "the dependencies & requirements are met."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "There are plenty of 'scripts' available"
+#~ " online for performing DSMR readings. "
+#~ "This project however is a full "
+#~ "stack solution. This allows a decent "
+#~ "implementation of most features, but "
+#~ "requires a certain 'skill' as you "
+#~ "will need to install several "
+#~ "dependencies."
+#~ msgstr ""
+

@@ -28,11 +28,13 @@ Public webinterface warning
 **NOTE**: If you expose your application to the outside world or a public network, you might want to take additional steps:
 
 - Please make sure to **ALTER** the ``SECRET_KEY`` setting in your settings.py.
+
  - Don't forget to run ``post-deploy.sh`` in the project's root, which will force the application to gracefully reload itself and apply the new settings instantly.
 
 - Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for yourself) and port ``80``.
 
 - You should also have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string `using one of the many generators found online <http://www.htaccesstools.com/htpasswd-generator/>`_. 
+
  - It's safe to use them, **just make sure to NEVER enter personal credentials there used for other applications or personal accounts**. 
 
 - Paste the htpasswd string in ``/etc/nginx/htpasswd``
@@ -55,10 +57,13 @@ You **should (or must)** make sure to periodically BACKUP your data! It's one of
 - The application will by default create a backup every night. However, as the data is still stored **locally** on your 'vulnerable' SD card, you should export it off your RaspberryPi. 
 
 - There is an builtin option to have backups synced to your **Dropbox**, *without exposing your Dropbox account and your private files in it*. 
+
  - Please either use this service or manage offloading backups on your own (see below).
 
 - You may also decide to run backups outside the application. 
+
  - There are example backup scripts available in ``dsmrreader/provisioning/postgresql/psql-backup.sh`` for **PostgreSQL**, which I dump to a separately mounted USB stick on my RaspberryPi. 
+
  - For **MySQL/MariaDB** you can use ``dsmrreader/provisioning/mysql/mysql-backup.sh``. Make sure to schedule the backup script as cronjob and also verify that it actually works. ;-)
 
 - Also, check your free disk space once in a while. I will implement automatic cleanup settings (#12, #13) later, allowing you to choose your own retention (for all the source readings).

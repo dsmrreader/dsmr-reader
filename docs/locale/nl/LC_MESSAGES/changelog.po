@@ -1,0 +1,366 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016, Dennis Siemensma
+# This file is distributed under the same license as the DSMR Reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-30 22:43+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.2.0\n"
+
+#: ../../changelog.rst:2
+msgid "Changelog"
+msgstr ""
+
+#: ../../changelog.rst:5
+msgid "v1.0.0 - 2016-xx-xx"
+msgstr ""
+
+#: ../../changelog.rst:6
+msgid "Move documentation to wiki or RTD (#90)."
+msgstr ""
+
+#: ../../changelog.rst:11
+msgid "v0.16 (β) - 2016-03-28"
+msgstr ""
+
+#: ../../changelog.rst:12
+msgid "Redesign trends page (#97)."
+msgstr ""
+
+#: ../../changelog.rst:13
+msgid "Support for summer time (#105)."
+msgstr ""
+
+#: ../../changelog.rst:14
+msgid "Support for Daylight Saving Time (DST) transition (#104)."
+msgstr ""
+
+#: ../../changelog.rst:15
+msgid "Add (error) hints to status page (#106)."
+msgstr ""
+
+#: ../../changelog.rst:16
+msgid "Keep track of version (#108)."
+msgstr ""
+
+#: ../../changelog.rst:20
+msgid "v0.15 (β) - 2016-03-24"
+msgstr ""
+
+#: ../../changelog.rst:21
+msgid "Django 1.8.11 released (#82)."
+msgstr ""
+
+#: ../../changelog.rst:22
+msgid "Prevent tests from failing due to moment of execution (#88)."
+msgstr ""
+
+#: ../../changelog.rst:23
+msgid "Statistics page meter positions are broken (#93)."
+msgstr ""
+
+#: ../../changelog.rst:24
+msgid "Archive only shows graph untill 23:00 (11 pm) (#77)."
+msgstr ""
+
+#: ../../changelog.rst:25
+msgid "Trends page crashes due to nullable fields average (#100)."
+msgstr ""
+
+#: ../../changelog.rst:26
+msgid "Trends: Plot peak and off-peak relative to each other (#99)."
+msgstr ""
+
+#: ../../changelog.rst:27
+msgid "Monitor requirements with requires.io (#101)."
+msgstr ""
+
+#: ../../changelog.rst:28
+msgid "Terminology (#41)."
+msgstr ""
+
+#: ../../changelog.rst:29
+msgid "Obsolete signals in dsmr_consumption (#63)."
+msgstr ""
+
+#: ../../changelog.rst:30
+msgid "Individual app testing coverage (#64)."
+msgstr ""
+
+#: ../../changelog.rst:31
+msgid "Support for extra devices on other M-bus (0-n:24.1) (#92)."
+msgstr ""
+
+#: ../../changelog.rst:32
+msgid "Separate post-deployment commands (#102)."
+msgstr ""
+
+#: ../../changelog.rst:36
+msgid "v0.14 (β) - 2016-03-13"
+msgstr ""
+
+#: ../../changelog.rst:37
+msgid "Show exceptions in production (webinterface) (#87)."
+msgstr ""
+
+#: ../../changelog.rst:38
+msgid "Keep Supervisor processes running (#79)."
+msgstr ""
+
+#: ../../changelog.rst:39
+msgid "Hourly stats of 22:00:00+00 every day lack gas (#78)."
+msgstr ""
+
+#: ../../changelog.rst:40
+msgid "Test Travis-CI with MySQL + MariaDB + PostgreSQL (#54)."
+msgstr ""
+
+#: ../../changelog.rst:41
+msgid ""
+"PostgreSQL tests + nosetests + coverage failure: unrecognized "
+"configuration parameter \"foreign_key_checks\" (#62)."
+msgstr ""
+
+#: ../../changelog.rst:42
+msgid "Performance check (#83)."
+msgstr ""
+
+#: ../../changelog.rst:43
+msgid "Allow month & year archive (#66)."
+msgstr ""
+
+#: ../../changelog.rst:44
+msgid "Graphs keep increasing height on tablet (#89)."
+msgstr ""
+
+#: ../../changelog.rst:48
+msgid "v0.13 (β) - 2016-03-06"
+msgstr ""
+
+#: ../../changelog.rst:49
+msgid "Delete StatsSettings(.track) settings model (#71)."
+msgstr ""
+
+#: ../../changelog.rst:50
+msgid "Drop deprecated commands (#22)."
+msgstr ""
+
+#: ../../changelog.rst:51
+msgid "Datalogger doesn't work properly with DSMR 4.2 (KAIFA-METER) (#73)."
+msgstr ""
+
+#: ../../changelog.rst:52
+msgid "Dashboard month statistics costs does not add up (#75)."
+msgstr ""
+
+#: ../../changelog.rst:53
+msgid "Log unhandled exceptions and errors (#65)."
+msgstr ""
+
+#: ../../changelog.rst:54
+msgid "Datalogger crashes with IntegrityError because 'timestamp' is null (#74)."
+msgstr ""
+
+#: ../../changelog.rst:55
+msgid "Trends are always shown in UTC (#76)."
+msgstr ""
+
+#: ../../changelog.rst:56
+msgid "Squash migrations (#31)."
+msgstr ""
+
+#: ../../changelog.rst:57
+msgid "Display 'electricity returned' graph in dashboard (#81)."
+msgstr ""
+
+#: ../../changelog.rst:58
+msgid "Optional gas (and electricity returned) capabilities tracking (#70)."
+msgstr ""
+
+#: ../../changelog.rst:59
+msgid "Add 'electricity returned' to trends page (#84)."
+msgstr ""
+
+#: ../../changelog.rst:63
+msgid "v0.12 (β) - 2016-03-01"
+msgstr ""
+
+#: ../../changelog.rst:64
+msgid "Archive: View past days details (#61)."
+msgstr ""
+
+#: ../../changelog.rst:65
+msgid "Dashboard: Consumption total for current month (#60)."
+msgstr ""
+
+#: ../../changelog.rst:66
+msgid "Check whether gas readings are optional (#34)."
+msgstr ""
+
+#: ../../changelog.rst:67
+msgid "Django security releases issued: 1.8.10 (#68)."
+msgstr ""
+
+#: ../../changelog.rst:68
+msgid "Notes display in archive (#69)."
+msgstr ""
+
+#: ../../changelog.rst:72
+msgid "v0.11 (β) - 2016-02-22"
+msgstr ""
+
+#: ../../changelog.rst:73
+msgid "Status page/alerts when features are disabled/unavailable (#45)."
+msgstr ""
+
+#: ../../changelog.rst:74
+msgid "Integrate Travis CI (#48)."
+msgstr ""
+
+#: ../../changelog.rst:75
+msgid "Testing coverage (#38)."
+msgstr ""
+
+#: ../../changelog.rst:76
+msgid "Implement automatic backups & Dropbox cloud storage (#44)."
+msgstr ""
+
+#: ../../changelog.rst:77
+msgid "Link code coverage service to repository (#56)."
+msgstr ""
+
+#: ../../changelog.rst:78
+msgid ""
+"Explore timezone.localtime() as replacement for datetime.astimezone() "
+"(#50)."
+msgstr ""
+
+#: ../../changelog.rst:79
+msgid "Align GasConsumption.read_at to represent the start of hour (#40)."
+msgstr ""
+
+#: ../../changelog.rst:83
+msgid "v0.10 (β) - 2016-02-15"
+msgstr ""
+
+#: ../../changelog.rst:84
+msgid "Cleanup unused static files (#47)."
+msgstr ""
+
+#: ../../changelog.rst:85
+msgid "Investigated mysql_tzinfo_to_sql — Load the Time Zone Tables (#35)."
+msgstr ""
+
+#: ../../changelog.rst:86
+msgid "Make additional DSMR data optional (#46)."
+msgstr ""
+
+#: ../../changelog.rst:87
+msgid "Localize graph x-axis (#42)."
+msgstr ""
+
+#: ../../changelog.rst:88
+msgid "Added graph formatting string to gettext file (#42)."
+msgstr ""
+
+#: ../../changelog.rst:89
+msgid "Different colors for peak & off-peak electricity (#52)."
+msgstr ""
+
+#: ../../changelog.rst:90
+msgid "Admin: Note widget (#51)."
+msgstr ""
+
+#: ../../changelog.rst:91
+msgid "Allow GUI to run without data (#26)."
+msgstr ""
+
+#: ../../changelog.rst:95
+msgid "v0.9 (β) - 2016-02-08"
+msgstr ""
+
+#: ../../changelog.rst:96
+msgid "Moved project to GitHub (#28)."
+msgstr ""
+
+#: ../../changelog.rst:97
+msgid "Added stdout to dsmr_backend to reflect progress."
+msgstr ""
+
+#: ../../changelog.rst:98
+msgid "Restore note usage in GUI (#39)."
+msgstr ""
+
+#: ../../changelog.rst:102
+msgid "v0.8 (β) - 2016-02-06"
+msgstr ""
+
+#: ../../changelog.rst:103
+msgid "Store daily, weekly, monthly and yearly statistics (#3)."
+msgstr ""
+
+#: ../../changelog.rst:104
+msgid "Improved Recent History page performance a bit. (as result of #3)"
+msgstr ""
+
+#: ../../changelog.rst:105
+msgid ""
+"Updates ChartJS library tot 1.1, disposing django-chartjs plugin. Labels "
+"finally work! (as result of #3)"
+msgstr ""
+
+#: ../../changelog.rst:106
+msgid "Added trends page. (as result of #3)"
+msgstr ""
+
+#: ../../changelog.rst:110
+msgid "v0.7 (β) - 2016-02-04"
+msgstr ""
+
+#: ../../changelog.rst:111
+msgid "Recent history setting: set range (#29)."
+msgstr ""
+
+#: ../../changelog.rst:112
+msgid "Mock required for test: dsmr_weather.test_weather_tracking (#32)."
+msgstr ""
+
+#: ../../changelog.rst:116
+msgid "v0.6 (β) - 2016-02-03"
+msgstr ""
+
+#: ../../changelog.rst:117
+msgid "Massive refactoring: Separating apps & using signals (#19)."
+msgstr ""
+
+#: ../../changelog.rst:118
+msgid "README update: Exit character for cu (#27, by Jeroen Peters)."
+msgstr ""
+
+#: ../../changelog.rst:119
+msgid "Fixed untranslated strings in admin interface."
+msgstr ""
+
+#: ../../changelog.rst:120
+msgid "Upgraded Django to 1.8.9."
+msgstr ""
+
+#: ../../changelog.rst:124
+msgid "v0.5 (β) - 2016-01-16"
+msgstr ""
+
+#: ../../changelog.rst:125
+msgid "First stable release."
+msgstr ""
+
