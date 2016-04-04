@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 22:43+0200\n"
+"POT-Creation-Date: 2016-04-05 00:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,67 +30,183 @@ msgstr ""
 msgid ""
 "Now it's time to view the application in your browser to check whether "
 "the GUI works as well. Just enter the ip address or hostname of your "
-"RaspberryPi in your browser, for example."
+"RaspberryPi in your browser."
 msgstr ""
 
 #: ../../application.rst:10
 msgid ""
-"Don't know what address your device has? Just type ``ifconfig | grep "
-"addr`` and it should display an ip address, for example::"
+"Installed using a monitor attached to the RaspberryPi and don't know what"
+" address your device has? Just type ``ifconfig | grep addr`` and it "
+"should display an ip address, for example::"
 msgstr ""
 
 #: ../../application.rst:16
-msgid "In this example the ip address is ``192.168.178.150``."
-msgstr ""
-
-#: ../../application.rst:18
 msgid ""
-"Everything OK? Congratulations, this was the hardest part and now the fun"
-" begins by monitoring your energy consumption."
+"In this example the ip address is ``192.168.178.150``. When possible you "
+"should assign a static ip address to your device in your router."
 msgstr ""
 
-#: ../../application.rst:22
+#: ../../application.rst:20
 msgid "Reboot test"
 msgstr ""
 
-#: ../../application.rst:23
+#: ../../application.rst:21
 msgid ""
 "You surely want to ``reboot`` your device and check whether everything "
 "comes up automatically again with ``sudo supervisorctl status``. This "
 "will make sure your data logger 'survives' any power surges."
 msgstr ""
 
+#: ../../application.rst:23
+msgid ""
+"Everything OK? Congratulations, this was the hardest part and now the fun"
+" begins by monitoring your energy consumption."
+msgstr ""
+
 #: ../../application.rst:27
-msgid "Public webinterface warning"
+msgid "Data preservation & backups"
 msgstr ""
 
 #: ../../application.rst:28
+msgid ""
+"You **should (or must)** make sure to periodically BACKUP your data! It's"
+" one of the most common mistakes to skip or ignore this. Actually, it "
+"happened to myself quite soon after I started, as I somehow managed to "
+"corrupt my SD storage card, losing all my data on it. It luckily happened"
+" only a month after running my own readings, but imagine all the data "
+"you'll lose when it will contain readings taken over several years."
+msgstr ""
+
+#: ../../application.rst:32
+msgid "The application will by default create a backup every night."
+msgstr ""
+
+#: ../../application.rst:34
+msgid ""
+"However, as the data is still stored **locally** on your 'vulnerable' SD "
+"card, you should export it off your RaspberryPi."
+msgstr ""
+
+#: ../../application.rst:36
+msgid ""
+"There is an builtin option to have backups synced to your **Dropbox**, "
+"*without exposing your Dropbox account and your private files in it*."
+msgstr ""
+
+#: ../../application.rst:38
+msgid ""
+"Please either use this service or manage offloading backups on your own "
+"(see below)."
+msgstr ""
+
+#: ../../application.rst:40
+msgid "You may also decide to run backups outside the application."
+msgstr ""
+
+#: ../../application.rst:42
+msgid ""
+"There are example backup scripts available in "
+"``dsmrreader/provisioning/postgresql/psql-backup.sh`` for **PostgreSQL**,"
+" which I dump to a separately USB stick mounted on my RaspberryPi."
+msgstr ""
+
+#: ../../application.rst:44
+msgid ""
+"For **MySQL/MariaDB** you can use ``dsmrreader/provisioning/mysql/mysql-"
+"backup.sh``."
+msgstr ""
+
+#: ../../application.rst:46
+msgid ""
+"Make sure to schedule the backup scripts as cronjob and also verify that "
+"it actually works, by running ``run-parts -v /etc/cron.daily``."
+msgstr ""
+
+#: ../../application.rst:48
+msgid ""
+"Also, check your free disk space once in a while. I will implement "
+"automatic cleanup settings later, allowing you to choose your own "
+"retention (for all the source readings)."
+msgstr ""
+
+#: ../../application.rst:52
+msgid "Application updates (bug fixes & new features)"
+msgstr ""
+
+#: ../../application.rst:53
+msgid ""
+"The current setup is based on the 'latest' version of the application, "
+"called the `master` branch. I will add versions/releases later, possibly "
+"by using PIP."
+msgstr ""
+
+#: ../../application.rst:55
+msgid ""
+"For now you can always update your application to the latest version by "
+"executing **deploy.sh**, located in the root of the project. Make sure to"
+" execute it while logged in as the `dsmr` user. It will make sure to "
+"check, fetch and apply any changes released::"
+msgstr ""
+
+#: ../../application.rst:60
+msgid "Summary of deployment script steps:"
+msgstr ""
+
+#: ../../application.rst:62
+msgid "GIT pull (codebase update)."
+msgstr ""
+
+#: ../../application.rst:63
+msgid "PIP update requirements."
+msgstr ""
+
+#: ../../application.rst:64
+msgid "Apply any database migrations."
+msgstr ""
+
+#: ../../application.rst:65
+msgid "Sync static files to Nginx folder."
+msgstr ""
+
+#: ../../application.rst:66
+msgid "Reload Gunicorn application server."
+msgstr ""
+
+#: ../../application.rst:67
+msgid "Clear any caches."
+msgstr ""
+
+#: ../../application.rst:71
+msgid "Public webinterface warning"
+msgstr ""
+
+#: ../../application.rst:72
 msgid ""
 "**NOTE**: If you expose your application to the outside world or a public"
 " network, you might want to take additional steps:"
 msgstr ""
 
-#: ../../application.rst:30
+#: ../../application.rst:74
 msgid ""
-"Please make sure to **ALTER** the ``SECRET_KEY`` setting in your "
+"Please make sure to **alter** the ``SECRET_KEY`` setting in your "
 "settings.py."
 msgstr ""
 
-#: ../../application.rst:32
+#: ../../application.rst:76
 msgid ""
-"Don't forget to run ``post-deploy.sh`` in the project's root, which will "
-"force the application to gracefully reload itself and apply the new "
+"Don't forget to run ``./post-deploy.sh`` in the project's root, which "
+"will force the application to gracefully reload itself and apply the new "
 "settings instantly."
 msgstr ""
 
-#: ../../application.rst:34
+#: ../../application.rst:78
 msgid ""
 "Install a firewall, such as ``ufw`` `UncomplicatedFirewall "
 "<https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to"
 " port ``22`` (only for yourself) and port ``80``."
 msgstr ""
 
-#: ../../application.rst:36
+#: ../../application.rst:80
 msgid ""
 "You should also have Nginx restrict application access when exposing it "
 "to the Internet. Simply generate an htpasswd string `using one of the "
@@ -98,33 +214,33 @@ msgid ""
 "generator/>`_."
 msgstr ""
 
-#: ../../application.rst:38
+#: ../../application.rst:82
 msgid ""
 "It's safe to use them, **just make sure to NEVER enter personal "
-"credentials there used for other applications or personal accounts**."
+"credentials** there **used for other applications or personal accounts**."
 msgstr ""
 
-#: ../../application.rst:40
-msgid "Paste the htpasswd string in ``/etc/nginx/htpasswd``"
+#: ../../application.rst:84
+msgid "Paste the htpasswd string in ``/etc/nginx/htpasswd``."
 msgstr ""
 
-#: ../../application.rst:42
+#: ../../application.rst:86
 msgid ""
 "Open the site's vhost in ``/etc/nginx/sites-enabled/dsmr-webinterface`` "
-"and **uncomment** the following lines::"
+"and **uncomment** the following lines (remove the ##)::"
 msgstr ""
 
-#: ../../application.rst:47
+#: ../../application.rst:91
 msgid ""
 "Now make sure you didn't insert any typo's by running ``sudo service "
 "nginx configtest``"
 msgstr ""
 
-#: ../../application.rst:48
+#: ../../application.rst:92
 msgid "And reload with ``sudo service nginx reload``."
 msgstr ""
 
-#: ../../application.rst:50
+#: ../../application.rst:94
 msgid ""
 "You should be prompted for login credentials the next time your browser "
 "accesses the application. For more information regarding this topic, see "
@@ -132,108 +248,132 @@ msgid ""
 "access/>`_."
 msgstr ""
 
-#: ../../application.rst:54
-msgid "Data preservation & backups"
-msgstr ""
+#~ msgid ""
+#~ "Now it's time to view the "
+#~ "application in your browser to check "
+#~ "whether the GUI works as well. "
+#~ "Just enter the ip address or "
+#~ "hostname of your RaspberryPi in your "
+#~ "browser, for example."
+#~ msgstr ""
 
-#: ../../application.rst:55
-msgid ""
-"You **should (or must)** make sure to periodically BACKUP your data! It's"
-" one of the most common mistakes to skip or ignore this. Actually, it "
-"happened to myself quite recently as I somehow managed to corrupt my SD "
-"storage card, losing all my data on it. It luckily happened only a month "
-"after running my own readings, but imagine all the data you lose when it "
-"contained readings for several years."
-msgstr ""
+#~ msgid ""
+#~ "Don't know what address your device "
+#~ "has? Just type ``ifconfig | grep "
+#~ "addr`` and it should display an ip"
+#~ " address, for example::"
+#~ msgstr ""
 
-#: ../../application.rst:57
-msgid ""
-"The application will by default create a backup every night. However, as "
-"the data is still stored **locally** on your 'vulnerable' SD card, you "
-"should export it off your RaspberryPi."
-msgstr ""
+#~ msgid "In this example the ip address is ``192.168.178.150``."
+#~ msgstr ""
 
-#: ../../application.rst:59
-msgid ""
-"There is an builtin option to have backups synced to your **Dropbox**, "
-"*without exposing your Dropbox account and your private files in it*."
-msgstr ""
+#~ msgid ""
+#~ "Please make sure to **ALTER** the "
+#~ "``SECRET_KEY`` setting in your settings.py."
+#~ msgstr ""
 
-#: ../../application.rst:61
-msgid ""
-"Please either use this service or manage offloading backups on your own "
-"(see below)."
-msgstr ""
+#~ msgid ""
+#~ "Don't forget to run ``post-deploy.sh``"
+#~ " in the project's root, which will"
+#~ " force the application to gracefully "
+#~ "reload itself and apply the new "
+#~ "settings instantly."
+#~ msgstr ""
 
-#: ../../application.rst:63
-msgid "You may also decide to run backups outside the application."
-msgstr ""
+#~ msgid ""
+#~ "It's safe to use them, **just make"
+#~ " sure to NEVER enter personal "
+#~ "credentials there used for other "
+#~ "applications or personal accounts**."
+#~ msgstr ""
 
-#: ../../application.rst:65
-msgid ""
-"There are example backup scripts available in "
-"``dsmrreader/provisioning/postgresql/psql-backup.sh`` for **PostgreSQL**,"
-" which I dump to a separately mounted USB stick on my RaspberryPi."
-msgstr ""
+#~ msgid "Paste the htpasswd string in ``/etc/nginx/htpasswd``"
+#~ msgstr ""
 
-#: ../../application.rst:67
-msgid ""
-"For **MySQL/MariaDB** you can use ``dsmrreader/provisioning/mysql/mysql-"
-"backup.sh``. Make sure to schedule the backup script as cronjob and also "
-"verify that it actually works. ;-)"
-msgstr ""
+#~ msgid ""
+#~ "Open the site's vhost in ``/etc/nginx"
+#~ "/sites-enabled/dsmr-webinterface`` and "
+#~ "**uncomment** the following lines::"
+#~ msgstr ""
 
-#: ../../application.rst:69
-msgid ""
-"Also, check your free disk space once in a while. I will implement "
-"automatic cleanup settings (#12, #13) later, allowing you to choose your "
-"own retention (for all the source readings)."
-msgstr ""
+#~ msgid ""
+#~ "You **should (or must)** make sure "
+#~ "to periodically BACKUP your data! It's"
+#~ " one of the most common mistakes "
+#~ "to skip or ignore this. Actually, "
+#~ "it happened to myself quite recently "
+#~ "as I somehow managed to corrupt my"
+#~ " SD storage card, losing all my "
+#~ "data on it. It luckily happened "
+#~ "only a month after running my own"
+#~ " readings, but imagine all the data"
+#~ " you lose when it contained readings"
+#~ " for several years."
+#~ msgstr ""
 
-#: ../../application.rst:73
-msgid "Application updates (bug fixes & new features)"
-msgstr ""
+#~ msgid ""
+#~ "The application will by default create"
+#~ " a backup every night. However, as"
+#~ " the data is still stored **locally**"
+#~ " on your 'vulnerable' SD card, you"
+#~ " should export it off your "
+#~ "RaspberryPi."
+#~ msgstr ""
 
-#: ../../application.rst:74
-msgid ""
-"The current setup is based on the 'latest' version of the application, "
-"called the `master` branch. I will add versions/releases later, possibly "
-"by using PIP."
-msgstr ""
+#~ msgid ""
+#~ "There are example backup scripts "
+#~ "available in ``dsmrreader/provisioning/postgresql/psql-"
+#~ "backup.sh`` for **PostgreSQL**, which I "
+#~ "dump to a separately mounted USB "
+#~ "stick on my RaspberryPi."
+#~ msgstr ""
 
-#: ../../application.rst:76
-msgid ""
-"For now you can always update your application to the latest version by "
-"executing `deploy.sh`, located in the root of the project. Make sure to "
-"execute it while logged in as the `dsmr` user. It will make sure to "
-"check, fetch and apply any changes released::"
-msgstr ""
+#~ msgid ""
+#~ "For **MySQL/MariaDB** you can use "
+#~ "``dsmrreader/provisioning/mysql/mysql-backup.sh``. Make"
+#~ " sure to schedule the backup script"
+#~ " as cronjob and also verify that "
+#~ "it actually works. ;-)"
+#~ msgstr ""
 
-#: ../../application.rst:80
-msgid "Summary of deployment script:"
-msgstr ""
+#~ msgid ""
+#~ "Also, check your free disk space "
+#~ "once in a while. I will implement"
+#~ " automatic cleanup settings (#12, #13) "
+#~ "later, allowing you to choose your "
+#~ "own retention (for all the source "
+#~ "readings)."
+#~ msgstr ""
 
-#: ../../application.rst:82
-msgid "GIT pull (codebase update)"
-msgstr ""
+#~ msgid ""
+#~ "For now you can always update your"
+#~ " application to the latest version by"
+#~ " executing `deploy.sh`, located in the "
+#~ "root of the project. Make sure to"
+#~ " execute it while logged in as "
+#~ "the `dsmr` user. It will make sure"
+#~ " to check, fetch and apply any "
+#~ "changes released::"
+#~ msgstr ""
 
-#: ../../application.rst:83
-msgid "PIP update requirements"
-msgstr ""
+#~ msgid "Summary of deployment script:"
+#~ msgstr ""
 
-#: ../../application.rst:84
-msgid "Apply any database migrations"
-msgstr ""
+#~ msgid "GIT pull (codebase update)"
+#~ msgstr ""
 
-#: ../../application.rst:85
-msgid "Sync static files to Nginx folder"
-msgstr ""
+#~ msgid "PIP update requirements"
+#~ msgstr ""
 
-#: ../../application.rst:86
-msgid "Reload Gunicorn application server"
-msgstr ""
+#~ msgid "Apply any database migrations"
+#~ msgstr ""
 
-#: ../../application.rst:87
-msgid "Clear any caches"
-msgstr ""
+#~ msgid "Sync static files to Nginx folder"
+#~ msgstr ""
+
+#~ msgid "Reload Gunicorn application server"
+#~ msgstr ""
+
+#~ msgid "Clear any caches"
+#~ msgstr ""
 
