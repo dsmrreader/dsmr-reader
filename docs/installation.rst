@@ -7,27 +7,30 @@ Dependencies & requirements
 ---------------------------
 - **RaspberryPi 2 or 3**
 
- - RaspberryPi 1 should work decently, but I do not actively support it
+ - RaspberryPi 1 should work decently, but I do not actively support it.
 
 - **Raspbian OS**
 
- - Recommended and tested, but any OS satisfying the requirements should do fine.
+ - Recommended and tested with, but any OS satisfying the requirements should do fine.
 
 - **Python 3.3 / 3.4**
 - **PostgreSQL 9+ or MySQL / MariaDB 5.5+**
 
- - I highly recommend *PostgreSQL*
+ - I highly recommend *PostgreSQL* due to builtin support for timezones.
 
-- **Smart Meter** with support for **at least DSMR 4.0/4.2**
+- **Smart Meter** with support for **at least DSMR 4.0/4.2** and **P1 telegram port**
 
- - Tested so far with Landis+Gyr E350, Kaifa.
+ - Tested so far with Landis+Gyr E350, Kaifa. Telegram port looks like an RJ11 (phone) socket.
 
 - **Minimal 100 MB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
 
  - More disk space is required for storing all reader data captured (optional). I generally advise to use a 8+ GB SD card. 
- - The readings will take 90+ % of the disk space. I plan however to add some kind of retention to it later, keeping the data (of many years) far below the 500 MB 
+ - The readings will take 90+ % of the disk space. I plan however to add some kind of retention to it later, keeping the data (of many years) far below the 500 MB. 
 
-- **Smart meter P1 data cable** (can be purchased online and they cost around 20 Euro's).
+- **Smart meter P1 data cable** 
+
+  - Can be purchased online and they cost around 15 tot 20 Euro's each.
+
 - **Basic Linux knowledge for deployment, debugging and troubleshooting**
 
  - It just really helps if you know what you are doing.
@@ -35,38 +38,39 @@ Dependencies & requirements
 
 1. Database backend
 -------------------
-The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) PostgreSQL (Option B.) MySQL/MariaDB. If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has better support for timezone handling (needed for DST transitions).
+
+The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **PostgreSQL** (Option B.) **MySQL/MariaDB**. 
+
+*If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for DST transitions).*
 
 (Option A.) PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
-Install PostgreSQL, postgresql-server-dev-all is required for the virtualenv installation later in this guide.
+Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv installation later in this guide.
 
 - Install database::
 
     sudo apt-get install -y postgresql postgresql-server-dev-all
 
-Postgres does not start due to locales? Try: dpkg-reconfigure locales
-
-No luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot
+Does Postgres not start due to locales? Try: ``dpkg-reconfigure locales``.  Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
 
 (!) Ignore any '*could not change directory to "/root": Permission denied*' errors for the following three commands.
 
-- Create user::
+- Create database user::
 
     sudo sudo -u postgres createuser -DSR dsmrreader
 
-- Create database, owned by the user we just created::
+- Create database, owned by the database user we just created::
 
     sudo sudo -u postgres createdb -O dsmrreader dsmrreader
 
-- Set password for user::
+- Set password for database user::
 
     sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
 
 
 (Option B.) MySQL/MariaDB
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. libmysqlclient-dev is required for the virtualenv installation later in this guide.
+Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. ``libmysqlclient-dev`` is required for the virtualenv installation later in this guide.
 
 - Install database::
 
@@ -76,11 +80,11 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
     sudo mysqladmin create dsmrreader
 
-- Create user::
+- Create database user::
 
     echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
 
-- Set privileges for user::
+- Set privileges for database user::
 
     echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
 
@@ -91,11 +95,11 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
 2. Dependencies
 ---------------
-Several utilities, required for webserver, application server and cloning the application code from the repository::
+Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the Github repository::
 
     sudo apt-get install -y nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper
 
-Install ``cu``. The CU program allows easy testing for your DSMR serial connection. It's basic but very effective to test whether your serial cable setup works properly. ::
+Install ``cu``. The CU program allows easy testing for your DSMR serial connection. It's very basic but also very effective to simply test whether your serial cable setup works properly. ::
 
     sudo apt-get install -y cu
 
@@ -104,33 +108,36 @@ Install ``cu``. The CU program allows easy testing for your DSMR serial connecti
 -------------------
 The application runs as ``dsmr`` user by default. This way we do not have to run the application as ``root``, which is a bad practice anyway.
 
-Create user with homedir. The application code and virtualenv resides in this directory as well::
+Create user with homedir. The application code and virtualenv will reside in this directory as well::
 
     sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
 
-Our user also requires ``dialout`` permissions. So allow the user to perform a dialout by adding it to the group::
+Our user also requires dialout permissions. So allow the user to perform a dialout by adding it to the ``dialout`` group::
 
     sudo usermod -a -G dialout dsmr
 
 
 4. Webserver/Nginx (part 1)
 ---------------------------
-We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.
 
-Django will copy all static files to a separate directory, used by Nginx to serve statics::
+*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
+
+Django will copy all static files to a separate directory, used by Nginx to serve statics. Therefor it requires (write) access to it::
 
     sudo mkdir -p /var/www/dsmrreader/static
     
     sudo chown -R dsmr:dsmr /var/www/dsmrreader/
 
-*The reason for splitting the webserver chapter in two steps, is because the application requires the directory created above to exist. And Nginx requires the application to exist (cloned) before running (and to copy its virtual hosts file), resulting in an dependency loop... :]*
+Either proceed to the next heading for a test reading or continue at step 5.
+
+*The reason for splitting the webserver chapter in two steps, is because the application requires the directory created above to exist. And Nginx requires the application to exist (cloned) before running (and to copy its virtual hosts file), resulting in an dependency loop.*
 
 
 Your first reading (optional)
 -----------------------------
-**OPTIONAL** You may skip this section as it's not required for the application to install. However, if you have never read your meter before, I recommend to perform an initial reading to make sure everything works as expected.
+**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegrapport before, I recommend to perform an initial reading to make sure everything works as expected.
 
-- Now login as the user we just created, to perform our very first reading! ::
+- Now login as the user we have just created, to perform our very first reading! ::
 
     sudo su - dsmr
 
@@ -145,7 +152,7 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 
 5. Clone project code from Github
 ---------------------------------
-Now is the time to clone the code from the repository and check it out on your device. 
+Now is the time to clone the code from the repository into the homedir we created. 
 
 - Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
 
@@ -158,20 +165,23 @@ This may take a few seconds. When finished, you should see a new folder called `
 
 6. Virtualenv
 -------------
-The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine. `More information about this subject can be found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_.
+
+The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. 
+
+Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine. 
+`More information about this subject can be found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_.
 
 - Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
 
-- Create folder for the virtualenvs of this user::
+- Create folder for the virtualenv(s) of this user::
 
     mkdir ~/.virtualenvs
 
-- Create a new virtualenv, we usually use the same name for it as the application or project. Note that it's important to specify python3 as the default interpreter::
+- Create a new virtualenv, we usually use the same name for it as the application or project. Note that it's important to specify **python3** as the default interpreter::
 
     virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3
 
 Now *activate* the environment. It effectively directs all aliases for software installed in the virtualenv to the binaries inside the virtualenv.
-
 I.e. the Python binary inside ``/usr/bin/python`` won't be used when the virtualenv is activated, but ``/home/dsmr/.virtualenvs/dsmrreader/bin/python`` will be instead.
 
 - Activate virtualenv & cd to project::
@@ -180,7 +190,9 @@ I.e. the Python binary inside ``/usr/bin/python`` won't be used when the virtual
     
     cd ~/dsmr-reader
 
-You might want to put the ``source ~/.virtualenvs/dsmrreader/bin/activate`` command above in the user's ``~/.bashrc`` (logout and login to test). I also advice to put the ``cd ~/dsmr-reader`` in there as well, which will cd you directly inside the project folder on login.
+You might want to put the ``source ~/.virtualenvs/dsmrreader/bin/activate`` command above in the user's ``~/.bashrc`` (logout and login to test).
+
+I also advice to put the ``cd ~/dsmr-reader`` in there as well, which will cd you directly inside the project folder on login.
 
 
 7. Application configuration & setup
@@ -191,7 +203,7 @@ Therefor I created two default (Django-)settings files you can copy, one for eac
 
 The ``base.txt`` contains requirements which the application needs anyway, no matter which backend you've choosen.
 
-- (!) Note: *Installation might take a while*, depending on your Internet connection, RaspberryPi version and resources (generally CPU) available. Nothing to worry about. :]
+- (!) Note: **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
 (Option A.) PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -210,30 +222,36 @@ The ``base.txt`` contains requirements which the application needs anyway, no ma
     pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
 
 
-Did everything install without fatal errors? When either of the database clients refuses to install due to missing files/configs, make sure you've installed ``libmysqlclient-dev`` (**for MySQL**) or ``postgresql-server-dev-all`` (**for PostgreSQL**) earlier in the process, when you installed the database server itself.
+Did everything install without fatal errors? If either of the database clients refuses to install due to missing files/configs, 
+make sure you've installed ``postgresql-server-dev-all`` (for **PostgreSQL**) or ``libmysqlclient-dev`` (for **MySQL**) earlier in the process, 
+when you installed the database server itself.
 
 
 8. Bootstrapping
 ----------------
 Now it's time to bootstrap the application and check whether all settings are good and requirements are met.
  
-- Execute this to init the database::
+- Execute this to initialize the database we've created earlier::
 
     ./manage.py migrate
 
-Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process. It allows us to have Nginx serve static files outside our project/code root.
+Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process. 
+It allows us to have Nginx serve static files outside our project/code root.
 
 - Sync static files::
 
     ./manage.py collectstatic --noinput
 
-Create an application superuser. Django will prompt you for a password. Alter username and email when you prefer other credentials, but email is not (yet) used in the application anyway. Besides, you have shell access so you may generate another user at any time (in case you lock yourself out of the application). The credentials generated can be used to access the administration panel inside the application, which requires authentication.
+Create an application superuser. Django will prompt you for a password. The credentials generated can be used to access the administration panel inside the application 
+Alter username and email if you prefer other credentials, but email is not (yet) used in the application anyway. 
+
+Since you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset: ``./manage.py changepassword admin``
 
 - Create user inside application::
 
     ./manage.py createsuperuser --username admin --email root@localhost
 
-**OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period), you may run the command below to import them (fixtures). Note that altering prices later won't affect your reading data, because prices are calculated retroactive anyway.
+**OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period), you may run the command below to import them (fixtures).
 
 - Import example prices::
 
@@ -241,9 +259,9 @@ Create an application superuser. Django will prompt you for a password. Alter us
     
 9. Webserver/Nginx (part 2)
 ---------------------------
-Now move back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` once).
+Go back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` once).
 
-- Remove the default vhost (if you do not use it yourself anyway!)::
+- **OPTIONAL**: Remove the default Nginx vhost (*only when you do not use it yourself*)::
 
     sudo rm /etc/nginx/sites-enabled/default
 
@@ -251,7 +269,7 @@ Now move back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` 
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
 
-- Let Nginx verify vhost syntax and reload Nginx when configtest passes::
+- Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::
 
     sudo service nginx configtest
 
@@ -261,23 +279,24 @@ Now move back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` 
 
 10. Supervisor
 --------------
-Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application and also all background jobs used. It's also configured to bring the entire application up again after a shutdown or reboot. 
+Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. 
+It's also configured to bring the entire application up again after a shutdown or reboot.
 
 - Each job has it's own configuration file, so make sure to copy them all::
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
 
-- Login to supervisor management console::
+- Login to ``supervisorctl`` management console::
 
     sudo supervisorctl
 
-- Enter these commands (after the >). It will ask Supervisor to recheck its config directory and use/reload the files::
+- Enter these commands (listed after the ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::
 
     supervisor> reread
 
     supervisor> update
     
-Three processes should be started or running. Make sure they don't end up in ERROR state, so refresh with 'status' a few times.
+Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with '``status``' a few times.
 
 - When still in ``supervisorctl``'s console, type::
 
@@ -289,7 +308,7 @@ Example of everything running well::
     dsmr_datalogger                  RUNNING
     dsmr_webinterface                RUNNING
 
-- Want to check whether data logger works? Just tail it's log in supervisor with::
+- Want to check whether the datalogger works? Just tail it's log in supervisor with::
 
     supervisor> tail -f dsmr_datalogger
     
