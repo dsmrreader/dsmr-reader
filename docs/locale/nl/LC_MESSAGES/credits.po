@@ -1,148 +1,160 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2016, Dennis Siemensma
 # This file is distributed under the same license as the DSMR Reader
 # package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-30 22:43+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2016-04-05 19:46+0100\n"
+"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.2.0\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: nl\n"
 
 #: ../../credits.rst:2
 msgid "Credits"
-msgstr ""
+msgstr "Credits"
 
 #: ../../credits.rst:3
 msgid ""
 "Software used and contributers are listed below. Please note and respect "
 "their licences as well, if any apply."
 msgstr ""
+"Alle gebruikte software en iedereen die bijgedragen heeft staan hieronder. "
+"De software kan onder licentie staan, zie de software zelf."
 
 #: ../../credits.rst:6
 msgid "Software"
-msgstr ""
+msgstr "Software"
 
 #: ../../credits.rst:8
 msgid "`Raspbian <https://www.raspbian.org/>`_"
-msgstr ""
+msgstr "`Raspbian <https://www.raspbian.org/>`_"
 
 #: ../../credits.rst:10
 msgid ""
-"`Raspbian minimal unattended netinstaller <https://github.com/debian-pi"
-"/raspbian-ua-netinst>`_"
+"`Raspbian minimal unattended netinstaller <https://github.com/debian-pi/"
+"raspbian-ua-netinst>`_"
 msgstr ""
+"`Raspbian minimal unattended netinstaller <https://github.com/debian-pi/"
+"raspbian-ua-netinst>`_"
 
 #: ../../credits.rst:12
 msgid "`Django Project <https://www.djangoproject.com/>`_"
-msgstr ""
+msgstr "`Django Project <https://www.djangoproject.com/>`_"
 
 #: ../../credits.rst:14
 msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
-msgstr ""
+msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
 
 #: ../../credits.rst:16
 msgid "`Supervisor <http://supervisord.org/>`_"
-msgstr ""
+msgstr "`Supervisor <http://supervisord.org/>`_"
 
 #: ../../credits.rst:18
 msgid "`MySQL <https://www.mysql.com/>`_"
-msgstr ""
+msgstr "`MySQL <https://www.mysql.com/>`_"
 
 #: ../../credits.rst:20
 msgid "`MariaDB <https://mariadb.org/>`_"
-msgstr ""
+msgstr "`MariaDB <https://mariadb.org/>`_"
 
 #: ../../credits.rst:22
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
-msgstr ""
+msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
 #: ../../credits.rst:24
 msgid ""
-"`Director Responsive Admin <http://web-apps.ninja/director-free-"
-"responsive-admin-template/>`_"
+"`Director Responsive Admin <http://web-apps.ninja/director-free-responsive-"
+"admin-template/>`_"
 msgstr ""
+"`Director Responsive Admin <http://web-apps.ninja/director-free-responsive-"
+"admin-template/>`_"
 
 #: ../../credits.rst:26
 msgid "`Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
-msgstr ""
+msgstr "`Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
 #: ../../credits.rst:28
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
-msgstr ""
+msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
 #: ../../credits.rst:30
 msgid "`Github <https://github.com/>`_"
-msgstr ""
+msgstr "`Github <https://github.com/>`_"
 
 #: ../../credits.rst:32
 msgid "`TravisCI <https://travis-ci.org>`_"
-msgstr ""
+msgstr "`TravisCI <https://travis-ci.org>`_"
 
 #: ../../credits.rst:34
 msgid "`Codecov <https://codecov.io>`_"
-msgstr ""
+msgstr "`Codecov <https://codecov.io>`_"
 
 #: ../../credits.rst:36
 msgid "`Read The Docs <https://readthedocs.org/>`_"
-msgstr ""
+msgstr "`Read The Docs <https://readthedocs.org/>`_"
 
 #: ../../credits.rst:38
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
-msgstr ""
+msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
 #: ../../credits.rst:41
 msgid "Testers & contributors"
-msgstr ""
+msgstr "Testers & mensen met bijdrage"
 
 #: ../../credits.rst:43
 msgid ""
 "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github "
 "profile <https://github.com/jeroenpeters1986>`_)"
 msgstr ""
+"`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github "
+"profile <https://github.com/jeroenpeters1986>`_)"
 
 #: ../../credits.rst:44
 msgid ""
-"`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github"
-" profile <https://github.com/danielterhorst>`_)"
+"`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github "
+"profile <https://github.com/danielterhorst>`_)"
 msgstr ""
+"`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github "
+"profile <https://github.com/danielterhorst>`_)"
 
 #: ../../credits.rst:45
 msgid "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
-msgstr ""
+msgstr "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
 
 #: ../../credits.rst:46
 msgid "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
-msgstr ""
+msgstr "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
 
 #: ../../credits.rst:50
 msgid "DSMR help"
-msgstr ""
+msgstr "DSMR hulp"
 
 #: ../../credits.rst:52
-msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
+msgid ""
+"Dutch Smart Meter reading specifications, data cables, examples and hints:"
 msgstr ""
+"Dutch Smart Meter reading specifications, data cables, examples and hints:"
 
 #: ../../credits.rst:54
 msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
-msgstr ""
+msgstr "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 
 #: ../../credits.rst:56
 msgid ""
-"`Joost van der Linde "
-"<https://sites.google.com/site/nta8130p1smartmeter/home>`_"
+"`Joost van der Linde <https://sites.google.com/site/nta8130p1smartmeter/"
+"home>`_"
 msgstr ""
+"`Joost van der Linde <https://sites.google.com/site/nta8130p1smartmeter/"
+"home>`_"
 
 #: ../../credits.rst:58
 msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
-msgstr ""
-
+msgstr "`SOS Solutions <https://www.sossolutions.nl/>`_"
