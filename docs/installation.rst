@@ -141,11 +141,15 @@ Your first reading (optional)
 
     sudo su - dsmr
 
-- Test with ``cu`` (BAUD rate settings for **DSMR v4** is ``115200``, for older verions it should be ``9600``)::
+- Test with ``cu`` for **DSMR 4+**::
 
     cu -l /dev/ttyUSB0 -s 115200 --parity=none -E q
 
-You now should see something similar to ``Connected.`` and a wall of text and numbers within 10 seconds. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, `such as this one (Dutch) <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_.
+- Or test with ``cu`` for **DSMR 2.2** (untested)::
+
+    cu -l /dev/ttyUSB0 -s 9600 --parity=none
+
+You now should see something similar to ``Connected.`` and a wall of text and numbers *within 10 seconds*. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, `such as this one (Dutch) <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_.
 
 - To exit cu, type "``q.``", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``.
 
