@@ -4,4 +4,8 @@
 
 # Documentation
 
+## English
 See [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/). Installation guide can be found there as well.
+
+## Dutch (Nederlands)
+Zie [Read The Docs, in het Nederlands](http://dsmr-reader.readthedocs.org/nl/latest/). Je kunt daar ook alle installatieinstructies vinden.

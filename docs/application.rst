@@ -71,7 +71,7 @@ Public webinterface warning
 ---------------------------
 **NOTE**: If you expose your application to the outside world or a public network, you might want to take additional steps:
 
-- Please make sure to **alter** the ``SECRET_KEY`` setting in your settings.py.
+- Please make sure to **alter** the ``SECRET_KEY`` setting in your ``dsmrreader/settings.py``.
 
  - Don't forget to run ``./post-deploy.sh`` in the project's root, which will force the application to gracefully reload itself and apply the new settings instantly.
 
