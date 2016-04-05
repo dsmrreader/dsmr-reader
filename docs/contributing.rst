@@ -2,7 +2,7 @@ Contributing
 ============
 Would you like to contribute or help this project in any way?
 
-P1 Telegram snapshot
+P1 telegram snapshot
 --------------------
 Please start by `creating an issue on Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_ with a snapshot of a DSMR telegram. It will help me in improving support for multiple meter vendors and home situations.
 
