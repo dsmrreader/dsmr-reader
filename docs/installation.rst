@@ -203,7 +203,7 @@ I also advice to put the ``cd ~/dsmr-reader`` in there as well, which will cd yo
 ------------------------------------
 Earlier in this guide you had to choose for either **(A.) PostgreSQL** or **(B.) MySQL/MariaDB**. Our application needs to know which backend used in order to communicate with it. 
 
-Therefor I created two default (Django-)settings files you can copy, one for each backend. The application will also need the appropiate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. 
+Therefor I created two default (Django-)settings files you can copy, one for each backend. The application will also need the appropriate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. 
 
 The ``base.txt`` contains requirements which the application needs anyway, no matter which backend you've choosen.
 
@@ -246,7 +246,7 @@ It allows us to have Nginx serve static files outside our project/code root.
 
     ./manage.py collectstatic --noinput
 
-Create an application superuser. Django will prompt you for a password. The credentials generated can be used to access the administration panel inside the application 
+Create an application superuser. Django will prompt you for a password. The credentials generated can be used to access the administration panel inside the application.  
 Alter username and email if you prefer other credentials, but email is not (yet) used in the application anyway. 
 
 Since you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset: ``./manage.py changepassword admin``
@@ -255,11 +255,6 @@ Since you have shell access you may reset your user's password at any time (in c
 
     ./manage.py createsuperuser --username admin --email root@localhost
 
-**OPTIONAL**: The application will run without your energy prices, but if you want some sensible defaults (actually my own energy prices for a brief period), you may run the command below to import them (fixtures).
-
-- Import example prices::
-
-    ./manage.py loaddata dsmr_stats/fixtures/dsmr_stats/EnergySupplierPrice.json
     
 9. Webserver/Nginx (part 2)
 ---------------------------

@@ -4,7 +4,7 @@ Changelog
 v1.0.0 - 2016-xx-xx
 ^^^^^^^^^^^^^^^^^^^
 - Move documentation to wiki or RTD (#90).
-
+- Translate README to Dutch (#16).
 
 
 v0.16 (β) - 2016-03-28
