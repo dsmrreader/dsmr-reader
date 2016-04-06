@@ -45,3 +45,11 @@ class TestBackend(InterceptStdoutMixin, TestCase):
     def test_version(self):
         """ Verify version setting. """
         self.assertIsNotNone(settings.DSMR_VERSION)
+
+    def test_pending_migrations(self):
+        """ Tests whether there are any model changes, which are not reflected in migrations. """
+        self.assertEqual(
+            self._intercept_command_stdout('makemigrations', dry_run=True),
+            'No changes detected\n',
+            'Pending model changes found, missing in migrations!'
+        )

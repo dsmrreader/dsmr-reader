@@ -5,6 +5,7 @@ v1.0.0 - 2016-xx-xx
 ^^^^^^^^^^^^^^^^^^^
 - Move documentation to wiki or RTD (`#90 <https://github.com/dennissiemensma/dsmr-reader/issues/90>`_).
 - Translate README to Dutch (`#16 <https://github.com/dennissiemensma/dsmr-reader/issues/16>`_).
+- Delete (recent) history page (`#112 <https://github.com/dennissiemensma/dsmr-reader/issues/112>`_).
 
 
 v0.16 (β) - 2016-03-28

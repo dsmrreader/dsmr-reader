@@ -59,7 +59,7 @@
                         {% block header_right %}{% endblock %}
                         
 					    <li>
-					        <a href="https://github.com/dennissiemensma/dsmr-reader/releases" target="_blank" title="{% trans 'View releases' %}">
+					        <a href="http://dsmr-reader.readthedocs.org/en/latest/changelog.html" target="_blank" title="{% trans 'View releases' %}">
 					            <small>v{{ dsmr_version }}</small>
 					        </a>
 					    </li>
@@ -76,11 +76,6 @@
                         <li>
                             <a href="{% url 'frontend:dashboard' %}">
                                 <i class="fa fa-dashboard"></i> <span>{% trans "Dashboard" %}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'frontend:history' %}">
-                                <i class="fa fa-line-chart"></i> <span>{% trans "History" %}</span>
                             </a>
                         </li>
                         <li>

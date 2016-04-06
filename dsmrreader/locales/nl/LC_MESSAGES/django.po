@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-28 17:54+0200\n"
+"POT-Creation-Date: 2016-04-06 23:00+0200\n"
 "PO-Revision-Date: 2016-03-28 17:52+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -255,32 +255,11 @@ msgstr "Weergave"
 msgid "Clears the entire cache."
 msgstr "Gooit de volledige cache leeg."
 
-msgid "Last week"
-msgstr "Afgelopen week"
-
-msgid "Last two weeks"
-msgstr "Afgelopen twee weken"
-
-msgid "Last three weeks"
-msgstr "Afgelopen drie weken"
-
-msgid "Last four weeks"
-msgstr "Afgelopen vier weken"
-
-msgid "Last five weeks"
-msgstr "Afgelopen vijf weken"
-
 msgid "Reverse dashboard graphs"
 msgstr "Keer dashboard-grafieken om"
 
 msgid "Whether graphs are rendered with an reversed X-axis"
 msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
-
-msgid "Recent history weeks"
-msgstr "Weken in recente historie"
-
-msgid "The number of weeks displayed in the recent history overview."
-msgstr "Het aantal weken dat getoond wordt in het recente historie overzicht."
 
 msgid "Frontend configuration"
 msgstr "Weergaveconfiguratie"
@@ -341,9 +320,6 @@ msgstr "Bekijk releases"
 
 msgid "Dashboard"
 msgstr "Dashboard"
-
-msgid "History"
-msgstr "Geschiedenis"
 
 msgid "Trends"
 msgstr "Trends"
@@ -425,46 +401,6 @@ msgstr "Temperatuur"
 
 msgid "Energy price"
 msgstr "Energieprijs"
-
-#, python-format
-msgid "Summary of past %(days_ago)s days"
-msgstr "Overzicht van de afgelopen %(days_ago)s dagen"
-
-msgid "Daily cost"
-msgstr "Dagelijkse kosten"
-
-msgid "(in &euro;)"
-msgstr "(in &euro;)"
-
-msgid "Daily electricity usage"
-msgstr "Dagelijks elektriciteitsverbruik"
-
-msgid "Daily electricity returned"
-msgstr "Dagelijks elektriciteit teruggeleverd"
-
-msgid "Daily gas usage"
-msgstr "Dagelijks gasverbruik"
-
-msgid "Daily average temperature"
-msgstr "Dagelijks temperatuurgemiddelde"
-
-msgid "(in &deg;C)"
-msgstr "(in &deg;C)"
-
-msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
-msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
-
-msgid "Electricity 1 cost (low tariff)"
-msgstr "Elektriciteit 1 kosten (daltarief)"
-
-msgid "Electricity 2 cost (high tariff)"
-msgstr "Elektriciteit 2 kosten (piektarief)"
-
-msgid "Gas cost"
-msgstr "Gaskosten"
-
-msgid "Total cost"
-msgstr "Totale kosten"
 
 msgid "Meter positions"
 msgstr "Meterstanden"
@@ -775,6 +711,69 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Last week"
+#~ msgstr "Afgelopen week"
+
+#~ msgid "Last two weeks"
+#~ msgstr "Afgelopen twee weken"
+
+#~ msgid "Last three weeks"
+#~ msgstr "Afgelopen drie weken"
+
+#~ msgid "Last four weeks"
+#~ msgstr "Afgelopen vier weken"
+
+#~ msgid "Last five weeks"
+#~ msgstr "Afgelopen vijf weken"
+
+#~ msgid "Recent history weeks"
+#~ msgstr "Weken in recente historie"
+
+#~ msgid "The number of weeks displayed in the recent history overview."
+#~ msgstr "Het aantal weken dat getoond wordt in het recente historie overzicht."
+
+#~ msgid "History"
+#~ msgstr "Geschiedenis"
+
+#~ msgid "Summary of past %(days_ago)s days"
+#~ msgstr "Overzicht van de afgelopen %(days_ago)s dagen"
+
+#~ msgid "Daily cost"
+#~ msgstr "Dagelijkse kosten"
+
+#~ msgid "(in &euro;)"
+#~ msgstr "(in &euro;)"
+
+#~ msgid "Daily electricity usage"
+#~ msgstr "Dagelijks elektriciteitsverbruik"
+
+#~ msgid "Daily electricity returned"
+#~ msgstr "Dagelijks elektriciteit teruggeleverd"
+
+#~ msgid "Daily gas usage"
+#~ msgstr "Dagelijks gasverbruik"
+
+#~ msgid "Daily average temperature"
+#~ msgstr "Dagelijks temperatuurgemiddelde"
+
+#~ msgid "(in &deg;C)"
+#~ msgstr "(in &deg;C)"
+
+#~ msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
+#~ msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
+
+#~ msgid "Electricity 1 cost (low tariff)"
+#~ msgstr "Elektriciteit 1 kosten (daltarief)"
+
+#~ msgid "Electricity 2 cost (high tariff)"
+#~ msgstr "Elektriciteit 2 kosten (piektarief)"
+
+#~ msgid "Gas cost"
+#~ msgstr "Gaskosten"
+
+#~ msgid "Total cost"
+#~ msgstr "Totale kosten"
 
 #~ msgid "Theme by"
 #~ msgstr "Thema door"

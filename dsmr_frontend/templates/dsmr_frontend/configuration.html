@@ -146,11 +146,6 @@
                             <td><i class="fa fa-{{ frontend_settings.reverse_dashboard_graphs|yesno:'check-square-o,square-o' }} fa-lg"></td>
                             <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'help_text' %}</td>
                         </tr>
-                        <tr>
-                            <td>{% model_meta_info frontend_settings 'recent_history_weeks' 'verbose_name' %}</td>
-                            <td>{{ frontend_settings.get_recent_history_weeks_display }}</td>
-                            <td>{% model_meta_info frontend_settings 'recent_history_weeks' 'help_text' %}</td>
-                        </tr>
                     </table>
                 </div><!-- /.panel-body -->
             </div><!-- /.panel -->

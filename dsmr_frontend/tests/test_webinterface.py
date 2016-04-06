@@ -1,5 +1,4 @@
 from unittest import mock
-import random
 import json
 
 from django.test import TestCase, Client
@@ -140,44 +139,6 @@ class TestViews(TestCase):
             reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 500)
-
-    @mock.patch('django.utils.timezone.now')
-    def test_history(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 13)
-        )
-        frontend_settings = FrontendSettings.get_solo()
-        frontend_settings.recent_history_weeks = random.randint(1, 5)
-        frontend_settings.save()
-
-        # History fetches all data BEFORE today, so add a little interval to make that happen.
-        response = self.client.get(
-            reverse('{}:history'.format(self.namespace))
-        )
-        self.assertEqual(response.status_code, 200)
-
-        if not self.support_data:
-            return
-
-        self.assertTrue(all(x in response.context['usage'][0].keys() for x in [
-            'electricity2_returned',
-            'electricity1_cost',
-            'day',
-            'gas',
-            'electricity2_cost',
-            'electricity2',
-            'notes',
-            'gas_cost',
-            'electricity1',
-            'total_cost',
-            'average_temperature',
-            'electricity1_returned'
-        ]))
-        self.assertIn('capabilities', response.context)
-        self.assertIn('notes', response.context['usage'][0])
-        self.assertEqual('Testnote', response.context['usage'][0]['notes'][0])
-        self.assertEqual(response.context['days_ago'], frontend_settings.recent_history_weeks * 7)
-        self.assertFalse(response.context['track_temperature'])
 
     @mock.patch('django.utils.timezone.now')
     def test_statistics(self, now_mock):

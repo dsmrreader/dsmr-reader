@@ -15,6 +15,3 @@ class TestSettings(TestCase):
 
     def test_reverse_dashboard_graphs(self):
         self.assertFalse(self.instance.reverse_dashboard_graphs)
-
-    def test_recent_history_weeks(self):
-        self.assertEqual(self.instance.recent_history_weeks, 4)
