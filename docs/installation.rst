@@ -135,7 +135,7 @@ Either proceed to the next heading for a test reading or continue at step 5.
 
 Your first reading (optional)
 -----------------------------
-**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegrapport before, I recommend to perform an initial reading to make sure everything works as expected.
+**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected.
 
 - Now login as the user we have just created, to perform our very first reading! ::
 
