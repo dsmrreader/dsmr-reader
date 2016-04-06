@@ -76,6 +76,14 @@ class Dashboard(TemplateView):
                 [float(x.degrees_celcius) for x in temperature]
             )
 
+            try:
+                latest_temperature = TemperatureReading.objects.all().order_by('-read_at')[0]
+            except IndexError:
+                pass
+            else:
+                context_data['latest_temperature_read'] = latest_temperature.read_at
+                context_data['latest_temperature'] = latest_temperature.degrees_celcius
+
         try:
             latest_electricity = ElectricityConsumption.objects.all().order_by('-read_at')[0]
         except IndexError:
@@ -93,7 +101,7 @@ class Dashboard(TemplateView):
         try:
             latest_gas = GasConsumption.objects.all().order_by('-read_at')[0]
         except IndexError:
-            latest_gas = None
+            pass
         else:
             context_data['latest_gas_read'] = latest_gas.read_at
             context_data['latest_gas'] = latest_gas.currently_delivered

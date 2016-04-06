@@ -33,6 +33,15 @@
         </a>
     </li>
     {% endif %}
+
+    {% if latest_temperature %}
+    <li>
+        <a href="" onclick="return false;" style="cursor: default;">
+            <span class="badge bg-blue"><i class="fa fa-cloud"></i> &nbsp; {{ latest_temperature }} &nbsp; &deg;C</span>
+            <small style="color: #999999;">({{ latest_temperature_read|naturaltime }})</small>
+        </a>
+    </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
