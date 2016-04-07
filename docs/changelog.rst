@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v1.0.0 - 2016-xx-xx
+v1.0.0 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
 - Move documentation to wiki or RTD (`#90 <https://github.com/dennissiemensma/dsmr-reader/issues/90>`_).
 - Translate README to Dutch (`#16 <https://github.com/dennissiemensma/dsmr-reader/issues/16>`_).
