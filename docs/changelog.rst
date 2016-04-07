@@ -8,24 +8,25 @@ v1.0.1 - 2016-04-07
 
 v1.0.0 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
+- First official stable release.
+
+
+[β] v0.1 (2015-10-29) to 0.16 (2016-04-06)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+All previous beta releases/changes have been combined to a single list below:
+
 - Move documentation to wiki or RTD (`#90 <https://github.com/dennissiemensma/dsmr-reader/issues/90>`_).
 - Translate README to Dutch (`#16 <https://github.com/dennissiemensma/dsmr-reader/issues/16>`_).
 - Delete (recent) history page (`#112 <https://github.com/dennissiemensma/dsmr-reader/issues/112>`_).
 - Display most recent temperature in dashboard (`#114 <https://github.com/dennissiemensma/dsmr-reader/issues/114>`_).
 - Upgrade Django to 1.8.12 (`#118 <https://github.com/dennissiemensma/dsmr-reader/issues/118>`_).
 
-
-v0.16 (β) - 2016-03-28
-^^^^^^^^^^^^^^^^^^^^^^
 - Redesign trends page (`#97 <https://github.com/dennissiemensma/dsmr-reader/issues/97>`_).
 - Support for summer time (`#105 <https://github.com/dennissiemensma/dsmr-reader/issues/105>`_).
 - Support for Daylight Saving Time (DST) transition (`#104 <https://github.com/dennissiemensma/dsmr-reader/issues/104>`_).
 - Add (error) hints to status page (`#106 <https://github.com/dennissiemensma/dsmr-reader/issues/106>`_).
 - Keep track of version (`#108 <https://github.com/dennissiemensma/dsmr-reader/issues/108>`_).
 
-
-v0.15 (β) - 2016-03-24
-^^^^^^^^^^^^^^^^^^^^^^
 - Django 1.8.11 released (`#82 <https://github.com/dennissiemensma/dsmr-reader/issues/82>`_).
 - Prevent tests from failing due to moment of execution (`#88 <https://github.com/dennissiemensma/dsmr-reader/issues/88>`_).
 - Statistics page meter positions are broken (`#93 <https://github.com/dennissiemensma/dsmr-reader/issues/93>`_).
@@ -39,9 +40,6 @@ v0.15 (β) - 2016-03-24
 - Support for extra devices on other M-bus (0-n:24.1) (`#92 <https://github.com/dennissiemensma/dsmr-reader/issues/92>`_).
 - Separate post-deployment commands (`#102 <https://github.com/dennissiemensma/dsmr-reader/issues/102>`_).
 
-
-v0.14 (β) - 2016-03-13
-^^^^^^^^^^^^^^^^^^^^^^
 - Show exceptions in production (webinterface) (`#87 <https://github.com/dennissiemensma/dsmr-reader/issues/87>`_).
 - Keep Supervisor processes running (`#79 <https://github.com/dennissiemensma/dsmr-reader/issues/79>`_).
 - Hourly stats of 22:00:00+00 every day lack gas (`#78 <https://github.com/dennissiemensma/dsmr-reader/issues/78>`_).
@@ -51,9 +49,6 @@ v0.14 (β) - 2016-03-13
 - Allow month & year archive (`#66 <https://github.com/dennissiemensma/dsmr-reader/issues/66>`_).
 - Graphs keep increasing height on tablet (`#89 <https://github.com/dennissiemensma/dsmr-reader/issues/89>`_).
 
-
-v0.13 (β) - 2016-03-06
-^^^^^^^^^^^^^^^^^^^^^^
 - Delete StatsSettings(.track) settings model (`#71 <https://github.com/dennissiemensma/dsmr-reader/issues/71>`_).
 - Drop deprecated commands (`#22 <https://github.com/dennissiemensma/dsmr-reader/issues/22>`_).
 - Datalogger doesn't work properly with DSMR 4.2 (KAIFA-METER) (`#73 <https://github.com/dennissiemensma/dsmr-reader/issues/73>`_).
@@ -66,18 +61,12 @@ v0.13 (β) - 2016-03-06
 - Optional gas (and electricity returned) capabilities tracking (`#70 <https://github.com/dennissiemensma/dsmr-reader/issues/70>`_).
 - Add 'electricity returned' to trends page (`#84 <https://github.com/dennissiemensma/dsmr-reader/issues/84>`_).
 
-
-v0.12 (β) - 2016-03-01
-^^^^^^^^^^^^^^^^^^^^^^
 - Archive: View past days details (`#61 <https://github.com/dennissiemensma/dsmr-reader/issues/61>`_).
 - Dashboard: Consumption total for current month (`#60 <https://github.com/dennissiemensma/dsmr-reader/issues/60>`_).
 - Check whether gas readings are optional (`#34 <https://github.com/dennissiemensma/dsmr-reader/issues/34>`_).
 - Django security releases issued: 1.8.10 (`#68 <https://github.com/dennissiemensma/dsmr-reader/issues/68>`_).
 - Notes display in archive (`#69 <https://github.com/dennissiemensma/dsmr-reader/issues/69>`_).
 
-
-v0.11 (β) - 2016-02-22
-^^^^^^^^^^^^^^^^^^^^^^
 - Status page/alerts when features are disabled/unavailable (`#45 <https://github.com/dennissiemensma/dsmr-reader/issues/45>`_).
 - Integrate Travis CI (`#48 <https://github.com/dennissiemensma/dsmr-reader/issues/48>`_).
 - Testing coverage (`#38 <https://github.com/dennissiemensma/dsmr-reader/issues/38>`_).
@@ -86,9 +75,6 @@ v0.11 (β) - 2016-02-22
 - Explore timezone.localtime() as replacement for datetime.astimezone() (`#50 <https://github.com/dennissiemensma/dsmr-reader/issues/50>`_).
 - Align GasConsumption.read_at to represent the start of hour (`#40 <https://github.com/dennissiemensma/dsmr-reader/issues/40>`_).
 
-
-v0.10 (β) - 2016-02-15
-^^^^^^^^^^^^^^^^^^^^^^
 - Cleanup unused static files (`#47 <https://github.com/dennissiemensma/dsmr-reader/issues/47>`_).
 - Investigated mysql_tzinfo_to_sql — Load the Time Zone Tables (`#35 <https://github.com/dennissiemensma/dsmr-reader/issues/35>`_).
 - Make additional DSMR data optional (`#46 <https://github.com/dennissiemensma/dsmr-reader/issues/46>`_).
@@ -98,36 +84,19 @@ v0.10 (β) - 2016-02-15
 - Admin: Note widget (`#51 <https://github.com/dennissiemensma/dsmr-reader/issues/51>`_).
 - Allow GUI to run without data (`#26 <https://github.com/dennissiemensma/dsmr-reader/issues/26>`_).
 
-
-v0.9 (β) - 2016-02-08
-^^^^^^^^^^^^^^^^^^^^^
 - Moved project to GitHub (`#28 <https://github.com/dennissiemensma/dsmr-reader/issues/28>`_).
 - Added stdout to dsmr_backend to reflect progress.
 - Restore note usage in GUI (`#39 <https://github.com/dennissiemensma/dsmr-reader/issues/39>`_).
 
-
-v0.8 (β) - 2016-02-06
-^^^^^^^^^^^^^^^^^^^^^
 - Store daily, weekly, monthly and yearly statistics (`#3 <https://github.com/dennissiemensma/dsmr-reader/issues/3>`_).
 - Improved Recent History page performance a bit. (as result of `#3 <https://github.com/dennissiemensma/dsmr-reader/issues/3>`_)
 - Updates ChartJS library tot 1.1, disposing django-chartjs plugin. Labels finally work! (as result of `#3 <https://github.com/dennissiemensma/dsmr-reader/issues/3>`_)
 - Added trends page. (as result of `#3 <https://github.com/dennissiemensma/dsmr-reader/issues/3>`_)
 
-
-v0.7 (β) - 2016-02-04
-^^^^^^^^^^^^^^^^^^^^^
 - Recent history setting: set range (`#29 <https://github.com/dennissiemensma/dsmr-reader/issues/29>`_).
 - Mock required for test: dsmr_weather.test_weather_tracking (`#32 <https://github.com/dennissiemensma/dsmr-reader/issues/32>`_).
 
-
-v0.6 (β) - 2016-02-03
-^^^^^^^^^^^^^^^^^^^^^
 - Massive refactoring: Separating apps & using signals (`#19 <https://github.com/dennissiemensma/dsmr-reader/issues/19>`_).
 - README update: Exit character for cu (`#27 <https://github.com/dennissiemensma/dsmr-reader/issues/27>`_, by Jeroen Peters).
 - Fixed untranslated strings in admin interface.
 - Upgraded Django to 1.8.9.
-
-
-v0.5 (β) - 2016-01-16
-^^^^^^^^^^^^^^^^^^^^^
-- First stable release.
