@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-06 20:19+0200\n"
-"PO-Revision-Date: 2016-04-06 20:24+0100\n"
+"PO-Revision-Date: 2016-04-07 20:07+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid ""
 "understand every step described in this guide."
 msgstr ""
 "Het installeren duurt naar verwachting zo'n *half uur* (op een RaspberryPi "
-"2/3), maar hangt natuurlijk erg af van je eigen vaardigheid op de command "
+"2/3), maar hangt natuurlijk ook af van je eigen vaardigheid op de command "
 "line."
 
 #: ../../installation.rst:7
@@ -61,7 +61,7 @@ msgstr ""
 
 #: ../../installation.rst:16
 msgid "**Python 3.3 / 3.4**"
-msgstr "**Raspbian OS**"
+msgstr "**Python 3.3 / 3.4**"
 
 #: ../../installation.rst:17
 msgid "**PostgreSQL 9+ or MySQL / MariaDB 5.5+**"
@@ -86,8 +86,8 @@ msgid ""
 "Tested so far with Landis+Gyr E350, Kaifa. Telegram port looks like an RJ11 "
 "(phone) socket."
 msgstr ""
-"Tot nu toe getest met Landis+Gyr E350, Kaifa. Telegram poort ziet er uit als "
-"een RJ11 (telefoon) aansluiting."
+"Tot nu toe getest met Landis+Gyr E350, Kaifa. Telegram poort (P1) ziet er "
+"uit als een RJ11 (telefoon) aansluiting."
 
 #: ../../installation.rst:25
 msgid ""
@@ -108,11 +108,11 @@ msgstr ""
 #: ../../installation.rst:28
 #, python-format
 msgid ""
-"The readings will take 90+ %% of the disk space. I plan however to add some "
+"The readings will take 90+ % of the disk space. I plan however to add some "
 "kind of retention to it later, keeping the data (of many years) far below "
 "the 500 MB."
 msgstr ""
-"De ruwe metingen nemen ongeveer 90+ %% van de schijfruimte in gebruik. Ik "
+"De ruwe metingen nemen ongeveer 90+ % van de schijfruimte in gebruik. Ik "
 "bouw later overigens nog wel een optie in voor retentie, waardoor je de "
 "gegevens over meerdere jaren ruimschoots onder de 500 MB krijgt."
 
@@ -131,7 +131,7 @@ msgstr ""
 
 #: ../../installation.rst:36
 msgid "It just really helps if you know what you are doing."
-msgstr "Het scheelt eenmaal een hoop wanneer je weet wat je doet."
+msgstr "Het scheelt eenmaal een hoop wanneer je weet waar je mee bezig bent."
 
 #: ../../installation.rst:40
 msgid "1. Database backend"
@@ -166,8 +166,8 @@ msgid ""
 "Install PostgreSQL, ``postgresql-server-dev-all`` is required for the "
 "virtualenv installation later in this guide."
 msgstr ""
-"Installeer PostgreSQL. ``postgresql-server-dev-all`` is nodig voor het "
-"installeren van de virtuelenv later."
+"Installeer PostgreSQL. Daarnaast is ``postgresql-server-dev-all`` nodig voor "
+"het installeren van de virtuelenv later."
 
 #: ../../installation.rst:50 ../../installation.rst:75
 msgid "Install database::"
@@ -181,7 +181,7 @@ msgid ""
 msgstr ""
 "Start PostgreSQL niet wegens een fout in 'locales'? Probeer dan het "
 "volgende: ``dpkg-reconfigure locales``. Werkt het nog steeds niet? Open dan "
-"dit bestand `/etc/environment``, voeg onderaan de regel ``LC_ALL=\"en_US."
+"dit bestand ``/etc/environment``, voeg onderaan de regel ``LC_ALL=\"en_US."
 "utf-8\"`` toe en herstart het systeem."
 
 #: ../../installation.rst:56
@@ -217,8 +217,8 @@ msgid ""
 "for the virtualenv installation later in this guide."
 msgstr ""
 "Installeer MariaDB. Je kunt er ook voor kiezen om het closed-source MySQL te "
-"installeren. Wat je ook kiest, ``libmysqlclient-dev`` is later nodig voor de "
-"virtualenv."
+"installeren. Welke je ook kiest, ``libmysqlclient-dev`` is later nodig voor "
+"de virtualenv."
 
 #: ../../installation.rst:79
 msgid "Create database::"
@@ -296,8 +296,9 @@ msgid ""
 "Gunicorn controlled by Supervisor, which we will configure later on.*"
 msgstr ""
 "*We configureren vervolgens de webserver (Nginx). Deze serveert alle "
-"statische bestanden en geeft alle applicatie-verzoeken door naar de backend, "
-"waar Gunicorn draait onder Supervisor. Deze stellen we later in.*"
+"statische bestanden en geeft de applicatie-verzoeken door naar de backend, "
+"waar de applicatie in Gunicorn draait onder Supervisor. Deze stellen we "
+"later in.*"
 
 #: ../../installation.rst:125
 msgid ""
@@ -340,7 +341,8 @@ msgstr ""
 "**OPTIONEEL**: Je kunt deze stap overslaan wanneer je al eerder een "
 "(test)meting hebt gedaan met je slimme meter. Ik raad het dus vooral aan als "
 "je nog nooit eerder je P1-poort hebt uitgelezen. Hiermee verzeker je jezelf "
-"ook dat de applicatie straks dezelfde toegang heeft voor de metingen."
+"ook dat de applicatie straks dezelfde (werkende) toegang heeft voor de "
+"metingen."
 
 #: ../../installation.rst:140
 msgid ""
@@ -435,8 +437,8 @@ msgstr ""
 "Dit is allemaal erg handig, ondanks dat het feitelijk niets meer voorstelt "
 "dan een aparte map binnen de homedir van onze gebruiker. Hierdoor kunnen we "
 "namelijk meerdere versie van software op hetzelfde systeem installeren, "
-"zonder dat dat elkaar bijt. Meer informatie `kan hier gevonden worden "
-"<http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
+"zonder dat dat elkaar bijt. Meer informatie hierover `kan hier gevonden "
+"worden <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
 
 #: ../../installation.rst:180
 msgid "Create folder for the virtualenv(s) of this user::"
@@ -461,9 +463,9 @@ msgid ""
 "virtualenv is activated, but ``/home/dsmr/.virtualenvs/dsmrreader/bin/"
 "python`` will be instead."
 msgstr ""
-"Tijd om de omgeving te *activeren*. Hierdoor worden diverse aliassen voor "
+"Tijd om de virtualenv te *activeren*. Hierdoor worden diverse aliassen voor "
 "software binnen deze omgeving veranderd naar die van de virtualenv. Voor "
-"bijvoorbeeld Python wordt niet meer ``/usr/bin/python``gebruikt, maar ``/"
+"bijvoorbeeld Python wordt niet meer ``/usr/bin/python`` gebruikt, maar ``/"
 "home/dsmr/.virtualenvs/dsmrreader/bin/python``."
 
 #: ../../installation.rst:191
@@ -476,7 +478,7 @@ msgid ""
 "command above in the user's ``~/.bashrc`` (logout and login to test)."
 msgstr ""
 "Het is aan te raden om ``source ~/.virtualenvs/dsmrreader/bin/activate`` op "
-"te nemen in de ``~/.bashrc``van de gebruiker. Vervolgens kun je het testen "
+"te nemen in de ``~/.bashrc`` van de gebruiker. Vervolgens kun je het testen "
 "door uit- en in te loggen."
 
 #: ../../installation.rst:199
@@ -498,8 +500,8 @@ msgid ""
 "order to communicate with it."
 msgstr ""
 "Eerder tijdens de installatie moest je kiezen voor ofwel **(A.) PostgreSQL** "
-"ofwel **(B.) MySQL/MariaDB**. De applicatie moet ook weten met welke variant "
-"hij communiceert."
+"ofwel **(B.) MySQL/MariaDB**. De applicatie moet zelf ook weten met welke "
+"variant hij communiceert."
 
 #: ../../installation.rst:206
 msgid ""
@@ -511,15 +513,16 @@ msgid ""
 msgstr ""
 "Daarom heb ik twee standaard (Django-)configuraties gemaakt die je gewoon "
 "kan kopiëren. Daarnaast heeft elke database zijn eigen database-client "
-"nodig. Daarom heb ik ook een tweetal requirements-bestanden gemaakt, waar "
-"alles al in staat wat nodig is. Zoals bijvoorbeeld Django."
+"nodig. Daarvoor heb ik ook een tweetal requirements-bestanden gemaakt, waar "
+"alles al in staat wat nodig is. Zoals bijvoorbeeld Django en de "
+"databaseverbinding."
 
 #: ../../installation.rst:208
 msgid ""
 "The ``base.txt`` contains requirements which the application needs anyway, "
 "no matter which backend you've choosen."
 msgstr ""
-"Het bestande``base.txt`` bevat alle afhankelijkheden die de applicatie "
+"Het bestand ``base.txt`` bevat alle afhankelijkheden die de applicatie "
 "sowieso nodig heeft, ongeacht de databasekeuze die je gemaakt hebt."
 
 #: ../../installation.rst:210
@@ -552,10 +555,10 @@ msgid ""
 msgstr ""
 "Zonder problemen alles kunnen installeren? Mocht een van de database clients "
 "niet willen installeren wegens missende bestanden, controleer dan of je "
-"eerder tijdens de installatie het volgende hebt gedaan. Als het goed is heb "
-"je ``postgresql-server-dev-all`` (voor **PostgreSQL**) of ``libmysqlclient-"
-"dev`` (voor **MySQL**) geïnstalleerd, tegelijkertijd met de databaseserver. "
-"Die zijn namelijk hiervoor nodig."
+"eerder tijdens de installatie het volgende hebt uitgevoerd: als het goed is "
+"heb je ``postgresql-server-dev-all`` (voor **PostgreSQL**) of "
+"``libmysqlclient-dev`` (voor **MySQL**) geïnstalleerd, tegelijkertijd met de "
+"databaseserver. Die zijn namelijk hiervoor nodig."
 
 #: ../../installation.rst:235
 msgid "8. Bootstrapping"
@@ -595,7 +598,7 @@ msgid ""
 "the application. Alter username and email if you prefer other credentials, "
 "but email is not (yet) used in the application anyway."
 msgstr ""
-"Maak een gebruiker aan binnen de applicatie. Django vraagt je om een "
+"Maak een gebruiker aan voor binnen de applicatie. Django vraagt je om een "
 "wachtwoord te kiezen. Met deze gegevens (standaard gebruikersnaam is "
 "'admin') kun je het beheerderspaneel binnen de applicatie gebruiken."
 
@@ -646,7 +649,7 @@ msgid ""
 "Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::"
 msgstr ""
 "Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad Nginx "
-"wanneer de ``configtest`` lukt::"
+"vervolgens wanneer de ``configtest`` lukt::"
 
 #: ../../installation.rst:280
 msgid "10. Supervisor"
@@ -672,7 +675,7 @@ msgstr ""
 
 #: ../../installation.rst:288
 msgid "Login to ``supervisorctl`` management console::"
-msgstr "Wissel naar ``supervisorctl`` beheerconsole::"
+msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
 
 #: ../../installation.rst:292
 msgid ""
@@ -687,7 +690,7 @@ msgid ""
 "Three processes should be started or running. Make sure they don't end up in "
 "``ERROR`` or ``BACKOFF`` state, so refresh with '``status``' a few times."
 msgstr ""
-"Er draaien als het goed is altijd drie processen. Kijk goed of ze "
+"Er draaien als het goed is altijd **drie** processen. Kijk goed of ze "
 "uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn gekomen. "
 "Je kunt het overzicht verversen door ``status`` te typen."
 
@@ -731,8 +734,8 @@ msgid ""
 "You now should have everything up and running! We're almost done, but only "
 "need to check a just few more things in the next chapters."
 msgstr ""
-"Alles zou nu moeten werken! We zijn bijna klaar, op een paar checks na in de "
-"komende hoofdstukken."
+"Alles zou nu moeten werken! We zijn bijna klaar, op een paar checks na in "
+"het volgende hoofdstuk."
 
 #~ msgid "Import example prices::"
 #~ msgstr "Importeer voorbeeldprijzen::"

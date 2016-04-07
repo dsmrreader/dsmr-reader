@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-30 22:43+0200\n"
-"PO-Revision-Date: 2016-04-05 20:30+0100\n"
+"PO-Revision-Date: 2016-04-07 20:19+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "De applicatie gebruiken"
 
 #: ../../application.rst:7
 msgid "Viewing the application"
-msgstr "De applicatie bekijken"
+msgstr "Bekijk applicatie"
 
 #: ../../application.rst:8
 msgid ""
@@ -113,8 +113,8 @@ msgid ""
 "*without exposing your Dropbox account and your private files in it*."
 msgstr ""
 "Er is ingebouwde ondersteuning om back-ups naar je  **Dropbox**-account te "
-"uploaden. *Zonder dat de applicatie bij je (privé) bestanden in je Dropbox-"
-"account hoeft*."
+"uploaden. *Zonder dat de applicatie toegang tot je (privé) bestanden in je "
+"Dropbox-account heeft*."
 
 #: ../../application.rst:38
 msgid ""
@@ -154,8 +154,8 @@ msgid ""
 "Make sure to schedule the backup scripts as cronjob and also verify that it "
 "actually works, by running ``run-parts -v /etc/cron.daily``."
 msgstr ""
-"Zorg ervoor dat je de back-ups via een 'cronjob' hebt ingepland en test dat "
-"door het volgende uit te voeren:  ``run-parts -v /etc/cron.daily``."
+"Zorg ervoor dat je de back-ups via een 'daily cronjob' hebt ingepland en "
+"test dat door het volgende uit te voeren:  ``run-parts -v /etc/cron.daily``."
 
 #: ../../application.rst:48
 msgid ""
@@ -212,7 +212,7 @@ msgstr "Past openstaande databasemigraties toe."
 
 #: ../../application.rst:65
 msgid "Sync static files to Nginx folder."
-msgstr "Synchroniseer statische bestanden naar de Nginx map."
+msgstr "Synchroniseert statische bestanden naar de Nginx map."
 
 #: ../../application.rst:66
 msgid "Reload Gunicorn application server."
@@ -220,7 +220,7 @@ msgstr "Herlaad Gunicorn applicatieserver."
 
 #: ../../application.rst:67
 msgid "Clear any caches."
-msgstr "Leeg caches."
+msgstr "Leegt caches."
 
 #: ../../application.rst:71
 msgid "Public webinterface warning"
@@ -231,8 +231,8 @@ msgid ""
 "**NOTE**: If you expose your application to the outside world or a public "
 "network, you might want to take additional steps:"
 msgstr ""
-"**LET OP**: Wanneer je de applicatie verbindt aan het Internet wil je extra "
-"maatregelen nemen:"
+"**LET OP**: Wanneer je de applicatie koppelt aan het Internet wil je sowieso "
+"extra maatregelen nemen:"
 
 #: ../../application.rst:74
 msgid ""
@@ -248,9 +248,9 @@ msgid ""
 "force the application to gracefully reload itself and apply the new settings "
 "instantly."
 msgstr ""
-"Vergeet vooral niet om ``./post-deploy.sh`` uit te voeren (staat in hoogste "
-"map van project), die ervoor zorgt dat de hele applicatie zichzelf herlaadt "
-"en daarmee de nieuwe instellingen per direct gebruikt."
+"Vergeet vooral niet om daarna ``./post-deploy.sh`` uit te voeren (staat in "
+"hoogste map van project), die ervoor zorgt dat de hele applicatie zichzelf "
+"herlaadt en daarmee de nieuwe instellingen per direct gebruikt."
 
 #: ../../application.rst:78
 msgid ""
@@ -258,8 +258,8 @@ msgid ""
 "ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` "
 "(only for yourself) and port ``80``."
 msgstr ""
-"Installeer een firewall, zoals ``ufw`` `UncomplicatedFirewall <https://wiki."
-"ubuntu.com/UncomplicatedFirewall>`_ beperkt al het toegestane verkeer tot "
+"Installeer een firewall, zoals ``ufw`` (`UncomplicatedFirewall <https://wiki."
+"ubuntu.com/UncomplicatedFirewall>`_) beperkt al het toegestane verkeer tot "
 "poort ``22`` (puur voor jezelf) en poort ``80``."
 
 #: ../../application.rst:80
@@ -268,10 +268,10 @@ msgid ""
 "the Internet. Simply generate an htpasswd string `using one of the many "
 "generators found online <http://www.htaccesstools.com/htpasswd-generator/>`_."
 msgstr ""
-"Je zou Nginx de toegang moeten beperken door inloggegevens te vragen, "
-"wanneer je de applicatie aan het Internet koppelt. Genereer een zogenaamde "
-"htpasswd-tekenreeks via `een van de vele websites die dit voor je kunnen "
-"doen <http://www.htaccesstools.com/htpasswd-generator/>`_"
+"Je zou in Nginx de toegang moeten beperken door altijd inloggegevens te "
+"vragen voor het bekijken van de applicatie. Genereer een zogenaamde htpasswd-"
+"tekenreeks via `een van de vele websites die dit voor je kunnen doen <http://"
+"www.htaccesstools.com/htpasswd-generator/>`_"
 
 #: ../../application.rst:82
 msgid ""
@@ -303,7 +303,7 @@ msgstr ""
 
 #: ../../application.rst:92
 msgid "And reload with ``sudo service nginx reload``."
-msgstr "En herlaad met ``sudo service nginx reload``."
+msgstr "En herlaad vervolgens met ``sudo service nginx reload``."
 
 #: ../../application.rst:94
 msgid ""
@@ -312,7 +312,7 @@ msgid ""
 "`Nginx docs <https://www.nginx.com/resources/admin-guide/restricting-access/"
 ">`_."
 msgstr ""
-"Als het goed is krijg je de volgende keer een pop-up te zien, waarin je "
-"gevraagd wordt om in te loggen. Voor meer informatie over dit onderwerp `zie "
-"de Nginx documentatie <https://www.nginx.com/resources/admin-guide/"
-"restricting-access/>`_."
+"Als het goed is krijg je de volgende keer dat je de applicatie bekijkt een "
+"pop-up te zien, waarin je gevraagd wordt om in te loggen. Voor meer "
+"informatie over dit onderwerp `zie de Nginx documentatie <https://www.nginx."
+"com/resources/admin-guide/restricting-access/>`_."

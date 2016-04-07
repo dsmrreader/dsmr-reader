@@ -128,9 +128,9 @@ Django will copy all static files to a separate directory, used by Nginx to serv
     
     sudo chown -R dsmr:dsmr /var/www/dsmrreader/
 
-Either proceed to the next heading for a test reading or continue at step 5.
-
 *The reason for splitting the webserver chapter in two steps, is because the application requires the directory created above to exist. And Nginx requires the application to exist (cloned) before running (and to copy its virtual hosts file), resulting in an dependency loop.*
+
+Either proceed to the next heading for a test reading or continue at step 5.
 
 
 Your first reading (optional)
