@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v1.0.1 - 2016-xx-xx
+v1.0.1 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
 - Update licence to OSI compatible one (`#119 <https://github.com/dennissiemensma/dsmr-reader/issues/119>`_).
 
