@@ -11,3 +11,6 @@ DATABASES = {
         'CONN_MAX_AGE': 300,
     }
 }
+
+# Change me when exposing your application to the outside world using the Internet!
+SECRET_KEY = 'aUqm$#!1yIILyt3^hDDy`Fv!&%kM>aI&#H(}a0JV~fec;rS%tH'
