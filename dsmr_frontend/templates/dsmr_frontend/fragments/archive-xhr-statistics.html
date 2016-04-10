@@ -5,6 +5,14 @@
 <div class="panel">
     <header class="panel-heading">
         {{ title|unlocalize }}
+        
+        {% if selected_level == 'days' %}
+        <small class="pull-right">
+            <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}">
+                <span class="badge bg-green"><i class="fa fa-plus"></i> &nbsp; {% trans "Add note for this date" %}</span>
+            </a>
+        </small>
+        {% endif %}
     </header>
     <div class="panel-body">
         <table class="table table-condensed">

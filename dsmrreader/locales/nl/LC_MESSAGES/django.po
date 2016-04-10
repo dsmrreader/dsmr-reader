@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-06 23:55+0200\n"
-"PO-Revision-Date: 2016-03-28 17:52+0100\n"
+"POT-Creation-Date: 2016-04-10 21:38+0200\n"
+"PO-Revision-Date: 2016-04-10 21:33+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -381,6 +381,9 @@ msgstr "Kosten"
 msgid "Total"
 msgstr "Totaal"
 
+msgid "Add note for today"
+msgstr "Voeg notitie toe voor vandaag"
+
 msgid "Recent electricity consumed (watt)"
 msgstr "Recent elektriciteitsverbruik (Watt)"
 
@@ -398,6 +401,9 @@ msgstr "Elektriciteit"
 
 msgid "Temperature"
 msgstr "Temperatuur"
+
+msgid "Add note for this date"
+msgstr "Voeg notitie toe voor deze datum"
 
 msgid "Energy price"
 msgstr "Energieprijs"
