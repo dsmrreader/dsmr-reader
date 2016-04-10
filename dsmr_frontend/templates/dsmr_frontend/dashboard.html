@@ -241,6 +241,9 @@
             {% if capabilities.weather %}
                 render_temperature_chart();
             {% endif %}
+            
+                /* Auto reload page. */
+                setInterval(function(){ location.reload(); }, 10000);
             });
             
        {% if capabilities.electricity %}
