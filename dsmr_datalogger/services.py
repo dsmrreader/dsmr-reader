@@ -105,8 +105,9 @@ def telegram_to_reading(data):
     # Defaults all fields to NULL.
     parsed_reading = {k: None for k in _get_reading_fields() + _get_statistics_fields()}
     field_splitter = re.compile(r'([^(]+)\((.+)\)')
+    lines_read = data.split("\n")
 
-    for current_line in data.split("\n"):
+    for index, current_line in enumerate(lines_read):
         result = field_splitter.search(current_line)
 
         if not result:
@@ -118,6 +119,30 @@ def telegram_to_reading(data):
         if code in ('0-2:24.2.1', '0-3:24.2.1', '0-4:24.2.1'):
             # I really hope this will get 'fixed' in DSMR v4.2+ in the future. (:
             code = '0-1:24.2.1'
+
+        # Iskra wtf. @TODO: Refactor!
+        if code == '0-1:24.3.0':
+            next_line = lines_read[index + 1]
+
+            if next_line.startswith('('):
+                iskra_gas_line = current_line + next_line
+
+            iskra_gas_result = re.search(
+                r'[^(]+\((\d+)\)\(\d+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
+                iskra_gas_line
+            )
+            gas_timestamp = iskra_gas_result.group(1)
+
+            if timezone.now().dst() != timezone.timedelta(0):
+                gas_timestamp += 'S'
+            else:
+                gas_timestamp += 'W'
+
+            parsed_reading['extra_device_timestamp'] = reading_timestamp_to_datetime(
+                string=gas_timestamp
+            )
+            parsed_reading['extra_device_delivered'] = iskra_gas_result.group(2)
+            continue
 
         try:
             field = DSMR_MAPPING[code]
@@ -139,6 +164,10 @@ def telegram_to_reading(data):
                 value = reading_timestamp_to_datetime(string=value)
 
             parsed_reading[field] = value
+
+    # Hack for Iskra. @TODO: Refactor!
+    if parsed_reading['timestamp'] is None:
+        parsed_reading['timestamp'] = timezone.now()
 
     # Now we need to split reading & statistics. So we split the dict here.
     reading_kwargs = {k: parsed_reading[k] for k in _get_reading_fields()}
