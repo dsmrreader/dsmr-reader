@@ -72,6 +72,9 @@ class ArchiveXhrSummary(TemplateView):
 
             context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
 
+        context_data['selected_level'] = selected_level
+        context_data['selected_datetime'] = selected_datetime
+        context_data['django_date_format'] = 'DJANGO_DATE_FORMAT'
         return context_data
 
 
