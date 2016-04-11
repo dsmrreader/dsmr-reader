@@ -1,3 +1,8 @@
+import subprocess
+import os
+
+from django.conf import settings
+
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
@@ -28,3 +33,21 @@ def get_capabilities(capability=None):
         return capabilities[capability]
 
     return capabilities
+
+
+def deploy():
+    project_root = os.path.join(settings.BASE_DIR, '..')
+    deployment_process = subprocess.Popen(
+        'sh deploy.sh',
+        stdout=subprocess.PIPE,
+        shell=True,
+        cwd=project_root,
+    )
+
+    yield '<pre>'
+
+    for current_line in iter(deployment_process.stdout.readline, ''):
+        if not current_line:
+            raise StopIteration()
+
+        yield current_line
