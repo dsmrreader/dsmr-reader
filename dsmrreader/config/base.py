@@ -100,6 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dsmrreader.wsgi.application'
 
+LOGIN_URL = 'admin/login/'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

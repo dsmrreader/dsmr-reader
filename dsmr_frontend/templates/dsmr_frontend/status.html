@@ -20,7 +20,29 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Readings" %} <br />
+                    <i class="fa fa-cube"></i> &nbsp; {% trans "DSMR-reader" %} <br />
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="col-md-6">{% trans "Current version" %} {% trans "DSMR-reader" %}</td>
+                            <td class="col-md-6"><a href="https://github.com/dennissiemensma/dsmr-reader/releases/tag/v{{ dsmr_version }}" target="_blank" title="{% trans 'View current release' %}">v{{ dsmr_version }}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-6">{% trans "Changelog" %}</td>
+                            <td class="col-md-6"><a href="http://dsmr-reader.readthedocs.org/{{ LANGUAGE_CODE }}/latest/changelog.html" target="_blank">{% trans 'View all releases' %}</a></td>
+                        </tr>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fa fa-plug"></i> &nbsp; {% trans "Readings" %} <br />
                     <small>{% blocktrans %}Status regarding the latest data read from your meter.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
@@ -53,7 +75,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Background" %}<br />
+                    <i class="fa fa-cogs"></i> &nbsp; {% trans "Background" %}<br />
                     <small>{% blocktrans %}Status regarding processing readings, making them visible in other pages and graphs.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
@@ -114,7 +136,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Data availability" %} <br />
+                    <i class="fa fa-eye"></i> &nbsp; {% trans "Data availability" %} <br />
                     <small>{% blocktrans %}Based on readings until this moment. Electricity usage should be always available. Gas usage and electricity return depend on your home situation.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">

@@ -1,0 +1,28 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %} 
+{% load static %} 
+{% load i18n %}
+{% load model_meta_info %}
+
+{% block title %}{% trans "Deploy" %}{% endblock %}
+{% block header %}{% trans "Deploy" %} &nbsp; <i class="fa fa-refresh"></i>{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fa fa-refresh"></i> &nbsp; {% trans "Updating/deploying DSMR-reader" %} <br />
+                    <small>{% blocktrans %}Please note that this may take a while, depending on your device...{% endblocktrans %}</small>
+                </header>
+                <div class="panel-body">
+                    <iframe class="col-md-12" style="height: 600px;" src="{% url 'frontend:deployment-stream' %}"><pre></pre></iframe>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+ 
+</section><!-- /.content -->
+{% endblock %}
