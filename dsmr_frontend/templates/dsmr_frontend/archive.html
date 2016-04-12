@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}{% trans "Archive" %}{% endblock %}
-{% block header %}{% trans "Archive" %} &nbsp; <i class="fa fa-calendar-check-o"></i>{% endblock %}
+{% block header %}{% trans "Archive" %} &nbsp; <i class="fa fa-history"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -269,7 +269,7 @@
                     datasets: [{
                         data: electricity1,
                         label: "{% trans 'Electricity 1 (low tariff)' %}",                        
-                        fillColor: "rgba(255,255,255,0.2)",
+                        fillColor: "rgba(160,0,0,0.1)",
                         strokeColor: "rgba(160,0,0,1)",
                         pointColor: "rgba(160,0,0,1)",
                         pointStrokeColor: "#fff",
@@ -278,7 +278,7 @@
                     }, {
                         data: electricity2,
                         label: "{% trans 'Electricity 2 (high tariff)' %}",                        
-                        fillColor: "rgba(255,255,255,0.2)",
+                        fillColor: "rgba(255,0,0,0.1)",
                         strokeColor: "rgba(255,0,0,1)",
                         pointColor: "rgba(255,0,0,1)",
                         pointStrokeColor: "#fff",
@@ -306,7 +306,7 @@
                     datasets: [{
                         data: electricity1_returned,
                         label: "{% trans 'Electricity 1 returned (low tariff)' %}",                       
-                        fillColor: "rgba(255,255,255,0.2)",
+                        fillColor: "rgba(200,200,100,0.1)",
                         strokeColor: "rgba(200,200,100,1)",
                         pointColor: "rgba(200,200,100,1)",
                         pointStrokeColor: "#fff",
@@ -315,7 +315,7 @@
                     }, {
                         data: electricity2_returned,
                         label: "{% trans 'Electricity 1 returned (high tariff)' %}",                       
-                        fillColor: "rgba(255,255,255,0.2)",
+                        fillColor: "rgba(39,194,76,0.1)",
                         strokeColor: "rgba(39,194,76,1)",
                         pointColor: "rgba(39,194,76,1)",
                         pointStrokeColor: "#fff",
@@ -343,7 +343,7 @@
                     datasets: [{
                         data: gas,
                         label: "{% trans 'Gas' %}",                       
-                        fillColor: "rgba(255,255,255,0.2)",
+                        fillColor: "rgba(250,133,0,0.1)",
                         strokeColor: "rgba(250,133,0,1)",
                         pointColor: "rgba(250,133,0,1)",
                         pointStrokeColor: "#fff",
