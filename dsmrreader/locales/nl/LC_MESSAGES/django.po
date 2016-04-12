@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 21:17+0200\n"
+"POT-Creation-Date: 2016-04-12 20:25+0200\n"
 "PO-Revision-Date: 2016-04-11 21:16+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -402,9 +402,6 @@ msgstr "Elektriciteit"
 msgid "Temperature"
 msgstr "Temperatuur"
 
-msgid "Add note for this date"
-msgstr "Voeg notitie toe voor deze datum"
-
 msgid "Deploy"
 msgstr "Uitrollen"
 
@@ -413,6 +410,9 @@ msgstr "Bezig met bijwerken/uitrollen van DSMR-reader"
 
 msgid "Please note that this may take a while, depending on your device..."
 msgstr "Dit kan enige tijd in beslag nemen, afhankelijk van de snelheid van je apparaat..."
+
+msgid "Add note for this date"
+msgstr "Voeg notitie toe voor deze datum"
 
 msgid "Energy price"
 msgstr "Energieprijs"
@@ -453,9 +453,6 @@ msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbrui
 msgid "DSMR-reader"
 msgstr "DSMR-reader"
 
-msgid "Info regarding the version of this application. Automatic updates are not available (mostly due to privacy reasons), but you should be able to update manually."
-msgstr "Versie-informatie. Automatische updates zijn niet mogelijk, voornamelijk wegens privacy-overwegingen, maar je kun wel handmatig bijwerken naar een nieuwere versie."
-
 msgid "Current version"
 msgstr "Huidige versie"
 
@@ -467,12 +464,6 @@ msgstr "Wijzigingenoverzicht"
 
 msgid "View all releases"
 msgstr "Bekijk alle versies"
-
-msgid "Updates"
-msgstr "Updates"
-
-msgid "Check for updates"
-msgstr "Controleer op updates"
 
 msgid "Readings"
 msgstr "Metingen"
@@ -750,6 +741,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Info regarding the version of this application. Automatic updates are not available (mostly due to privacy reasons), but you should be able to update manually."
+#~ msgstr "Versie-informatie. Automatische updates zijn niet mogelijk, voornamelijk wegens privacy-overwegingen, maar je kun wel handmatig bijwerken naar een nieuwere versie."
+
+#~ msgid "Updates"
+#~ msgstr "Updates"
+
+#~ msgid "Check for updates"
+#~ msgstr "Controleer op updates"
 
 #~ msgid "Last week"
 #~ msgstr "Afgelopen week"
