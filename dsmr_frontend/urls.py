@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
 from django.conf import settings
 from django.conf.urls import url
@@ -9,7 +8,6 @@ from dsmr_frontend.views.statistics import Statistics
 from dsmr_frontend.views.trends import Trends
 from dsmr_frontend.views.status import Status
 from dsmr_frontend.views.configuration import Configuration
-from dsmr_frontend.views.deploy import Deploy, DeploymentStream
 
 
 urlpatterns = [
@@ -25,6 +23,4 @@ urlpatterns = [
     ),
     url(r'^status$', Status.as_view(), name='status'),
     url(r'^configuration$', Configuration.as_view(), name='configuration'),
-    url(r'^deploy$', login_required(Deploy.as_view()), name='deploy'),
-    url(r'^deploy/stream$', login_required(DeploymentStream.as_view()), name='deployment-stream'),
 ]
