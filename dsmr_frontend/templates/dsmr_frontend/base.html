@@ -102,6 +102,14 @@
                             </a>
                         </li>
                         <li>
+                            &nbsp;
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:export' %}">
+                                <i class="fa fa-download"></i> <span>{% trans "Export data" %} &nbsp; <i class="fa fa-lock" title="{% trans 'Authentication required' %}"></i></span>
+                            </a>
+                        </li>
+                        <li>
 				            <a href="{% url 'frontend:configuration' %}">
 				                <i class="fa fa-cogs"></i> <span>{% trans "Configuration" %}</span>
 				            </a>
@@ -115,7 +123,7 @@
 	            <div class="clearfix"></div>
 				{% block content %}{% endblock %}
 				
-				<div class="row" style="text-align: center;">
+				<div class="row" style="text-align: center; color: grey;">
 		            <small>&ldquo;{% trans "DSMR reader" %}&rdquo; {% trans "created by" %} <a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}">Dennis Siemensma</a> &copy; 2015 - 2016</small>
 		            |
 		            <small>{% trans "Theme created by" %} <a href="http://web-apps.ninja/" target="_blank">web-apps.ninja</a> &copy; 2015</small>
