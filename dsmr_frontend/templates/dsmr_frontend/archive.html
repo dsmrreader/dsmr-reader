@@ -147,12 +147,6 @@
                     g_datepicker_view_mode = 'years';
                     initialize_datepicker()
                 });
-        		
-        		$('#daterangepicker').on('changeDate', function(ev, picker) {
-        			var selected_day = $('#daterangepicker').val();
-        			update_summary(selected_day);
-        			update_graphs(selected_day);
-       			});
         	});
             
             /**
