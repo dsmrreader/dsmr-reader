@@ -32,5 +32,5 @@ urlpatterns = [
     url(r'^export$', login_required(Export.as_view()), name='export'),
     url(r'^export/csv$', login_required(ExportAsCsv.as_view()), name='export-as-csv'),
 
-    url(r'^configuration$', Configuration.as_view(), name='configuration'),
+    url(r'^configuration$', login_required(Configuration.as_view()), name='configuration'),
 ]

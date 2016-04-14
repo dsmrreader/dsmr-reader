@@ -27,7 +27,8 @@ class Export(TemplateView):
             context_data['start_date'] = day_statistics[0].day
             context_data['end_date'] = day_statistics.order_by('-pk')[0].day
         except IndexError:
-            pass
+            context_data['start_date'] = None
+            context_data['end_date'] = None
 
         context_data['datepicker_locale_format'] = formats.get_format('DSMR_DATEPICKER_LOCALE_FORMAT')
         context_data['datepicker_date_format'] = 'DSMR_DATEPICKER_DATE_FORMAT'
@@ -62,7 +63,7 @@ class ExportAsCsv(BaseFormView):
                 'gas_cost', 'total_cost'
             ]
 
-        elif data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
+        else:  # if data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
             source_data = HourStatistics.objects.filter(
                 hour_start__gte=start_date, hour_start__lte=end_date
             ).order_by('hour_start')
@@ -77,7 +78,6 @@ class ExportAsCsv(BaseFormView):
             def write(self, value):
                 """ Write the value by returning it, instead of storing in a buffer. """
                 return value
-
         pseudo_buffer = Echo()
         writer = csv.writer(pseudo_buffer)
         response = StreamingHttpResponse(
@@ -86,7 +86,10 @@ class ExportAsCsv(BaseFormView):
             ),
             content_type='text/csv'
         )
-        response['Content-Disposition'] = 'attachment; filename="export-{}.csv"'.format(data_type)
+        attachment_name = 'dsmrreader-data-export---{}__{}__{}.csv'.format(
+            data_type, start_date.date(), end_date.date()
+        )
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(attachment_name)
         return response
 
     def _generate_csv_row(self, writer, data, fields):
@@ -105,10 +108,8 @@ class ExportAsCsv(BaseFormView):
         if isinstance(data, Decimal):
             return float(data)
 
-        if isinstance(data, datetime.datetime):
+        elif isinstance(data, datetime.datetime):
             return formats.date_format(data, 'DSMR_EXPORT_DATETIME_FORMAT')
 
-        if isinstance(data, datetime.date):
+        elif isinstance(data, datetime.date):
             return formats.date_format(data, 'DSMR_DATEPICKER_DATE_FORMAT')
-
-        return data
