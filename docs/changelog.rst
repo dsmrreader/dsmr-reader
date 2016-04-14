@@ -1,6 +1,14 @@
 Changelog
 =========
 
+v1.1.0 - 2016-xx-xx
+^^^^^^^^^^^^^^^^^^^
+- Autorefresh dashboard (`#117 <https://github.com/dennissiemensma/dsmr-reader/issues/117>`_).
+- Improve line graphs' visibility (`#111 <https://github.com/dennissiemensma/dsmr-reader/issues/111>`_).
+- Easily add notes (`#110 <https://github.com/dennissiemensma/dsmr-reader/issues/110>`_).
+- Export data points in CSV format (`#2 <https://github.com/dennissiemensma/dsmr-reader/issues/2>`_).
+
+
 v1.0.1 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
 - Update licence to OSI compatible one (`#119 <https://github.com/dennissiemensma/dsmr-reader/issues/119>`_).
