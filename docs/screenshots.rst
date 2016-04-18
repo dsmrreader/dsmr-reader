@@ -39,7 +39,7 @@ Trends are an average summary of your daily consumption and habits.
 
 Statistics
 ----------
-The statistics will display the current state of your meter and the energy prices currently apply (if any).
+The statistics page will display the current state of your meter and the energy prices currently apply (if any).
 
 .. image:: _static/screenshots/statistics.png
     :target: _static/screenshots/statistics.png
