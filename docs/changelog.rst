@@ -7,6 +7,8 @@ v1.1.0 - 2016-xx-xx
 - Improve line graphs' visibility (`#111 <https://github.com/dennissiemensma/dsmr-reader/issues/111>`_).
 - Easily add notes (`#110 <https://github.com/dennissiemensma/dsmr-reader/issues/110>`_).
 - Export data points in CSV format (`#2 <https://github.com/dennissiemensma/dsmr-reader/issues/2>`_).
+- Allow day/month/year comparison (`#94 <https://github.com/dennissiemensma/dsmr-reader/issues/94>`_).
+- Docs: Add FAQ and generic application info (`#113 <https://github.com/dennissiemensma/dsmr-reader/issues/113>`_).
 
 
 v1.0.1 - 2016-04-07
