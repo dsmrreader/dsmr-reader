@@ -17,3 +17,8 @@ I advise to only use this tool when you have basic Linux knowledge or have any i
 Github
 ------
 The project can be found here: https://github.com/dennissiemensma/dsmr-reader
+
+
+Languages
+---------
+The entire application and it's code is written in English. The entire interface however is also translated into Dutch and will be triggered depending on you browser's language preference.
