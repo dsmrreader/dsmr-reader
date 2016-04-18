@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 22:32+0200\n"
-"PO-Revision-Date: 2016-04-14 00:26+0100\n"
+"POT-Creation-Date: 2016-04-18 20:05+0200\n"
+"PO-Revision-Date: 2016-04-18 19:57+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -336,6 +336,9 @@ msgstr "Trends"
 msgid "Statistics"
 msgstr "Statistieken"
 
+msgid "Compare"
+msgstr "Vergelijk"
+
 msgid "Status"
 msgstr "Status"
 
@@ -360,6 +363,15 @@ msgstr "Bekijk repository op Github"
 msgid "Theme created by"
 msgstr "Thema gemaakt door"
 
+msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
+msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
+
+msgid "Base selection"
+msgstr "Basisselectie"
+
+msgid "Compare with selection"
+msgstr "Te vergelijken selectie"
+
 msgid "All settings"
 msgstr "Alle instellingen"
 
@@ -371,9 +383,6 @@ msgstr "Watt"
 
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
-
-msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
-msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
 
 msgid "This month"
 msgstr "Huidige maand"

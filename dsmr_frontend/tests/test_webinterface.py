@@ -184,6 +184,18 @@ class TestViews(TestCase):
         self.assertFalse(response.context['capabilities']['electricity_returned'])
 
     @mock.patch('django.utils.timezone.now')
+    def test_compare(self, now_mock):
+        """ Basicly the same view (context vars) as the archive view. """
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+        response = self.client.get(
+            reverse('{}:compare'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('capabilities', response.context)
+
+    @mock.patch('django.utils.timezone.now')
     def test_status(self, now_mock):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
