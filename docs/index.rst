@@ -5,6 +5,7 @@ DSMR Reader's documentation
    :maxdepth: 2
    
    intro
+   screenshots
    installation
    application
    changelog

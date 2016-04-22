@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-12 20:25+0200\n"
-"PO-Revision-Date: 2016-04-11 21:16+0100\n"
+"POT-Creation-Date: 2016-04-18 20:05+0200\n"
+"PO-Revision-Date: 2016-04-18 19:57+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -252,6 +252,15 @@ msgstr "Dataloggerconfiguratie"
 msgid "Frontend"
 msgstr "Weergave"
 
+msgid "Day"
+msgstr "Dag"
+
+msgid "Hour"
+msgstr "Uur"
+
+msgid "CSV"
+msgstr "CSV"
+
 msgid "Clears the entire cache."
 msgstr "Gooit de volledige cache leeg."
 
@@ -327,8 +336,17 @@ msgstr "Trends"
 msgid "Statistics"
 msgstr "Statistieken"
 
+msgid "Compare"
+msgstr "Vergelijk"
+
 msgid "Status"
 msgstr "Status"
+
+msgid "Export data"
+msgstr "Exporteer gegevens"
+
+msgid "Authentication required"
+msgstr "Inloggen vereist"
 
 msgid "Configuration"
 msgstr "Configuratie"
@@ -345,6 +363,15 @@ msgstr "Bekijk repository op Github"
 msgid "Theme created by"
 msgstr "Thema gemaakt door"
 
+msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
+msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
+
+msgid "Base selection"
+msgstr "Basisselectie"
+
+msgid "Compare with selection"
+msgstr "Te vergelijken selectie"
+
 msgid "All settings"
 msgstr "Alle instellingen"
 
@@ -356,9 +383,6 @@ msgstr "Watt"
 
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
-
-msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
-msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
 
 msgid "This month"
 msgstr "Huidige maand"
@@ -402,14 +426,47 @@ msgstr "Elektriciteit"
 msgid "Temperature"
 msgstr "Temperatuur"
 
-msgid "Deploy"
-msgstr "Uitrollen"
+msgid "Select data type"
+msgstr "Selecteer gegevenstype"
 
-msgid "Updating/deploying DSMR-reader"
-msgstr "Bezig met bijwerken/uitrollen van DSMR-reader"
+msgid "Select the type of data you want to export."
+msgstr "Selecteer het soort gegevens dat je wil exporteren."
 
-msgid "Please note that this may take a while, depending on your device..."
-msgstr "Dit kan enige tijd in beslag nemen, afhankelijk van de snelheid van je apparaat..."
+msgid "Day totals"
+msgstr "Dagtotalen"
+
+msgid "Summary of each day. Contains electricity, gas and costs (if applicable)."
+msgstr "Samenvatting van elke dag. Bevat electriciteit, gas en gemaakte kosten (wanneer van toepassing)."
+
+msgid "Hour totals"
+msgstr "Uurtotalen"
+
+msgid "Summary of each hour read. Contains electricity and gas (if applicable)."
+msgstr "Samenvatting van elk uur. Bevat electriciteit en gas (wanneer van toepassing)."
+
+msgid "Select date range start"
+msgstr "Selecteer startdatum"
+
+msgid "Select starting day for export."
+msgstr "Selecteer startdatum voor export."
+
+msgid "Select date range end"
+msgstr "Selecteer einddatum"
+
+msgid "Select ending day for export."
+msgstr "Selecteer einddatum voor export."
+
+msgid "Select export format"
+msgstr "Selecteer export formaat"
+
+msgid "Choose a format the data will be exported in."
+msgstr "Kies een formaat waarin de data geëxporteerd wordt."
+
+msgid "Excel (.CSV)"
+msgstr "Excel (.CSV)"
+
+msgid "Exports the data in Comma Separated Format, which can be read by Excel."
+msgstr "Exporteert de gegevens in komma gescheiden formaat, die in te lezen is door Excel."
 
 msgid "Add note for this date"
 msgstr "Voeg notitie toe voor deze datum"
@@ -549,9 +606,6 @@ msgstr "Electriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
-
-msgid "Day"
-msgstr "Dag"
 
 msgid "Note"
 msgstr "Notitie"
@@ -742,6 +796,15 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Deploy"
+#~ msgstr "Uitrollen"
+
+#~ msgid "Updating/deploying DSMR-reader"
+#~ msgstr "Bezig met bijwerken/uitrollen van DSMR-reader"
+
+#~ msgid "Please note that this may take a while, depending on your device..."
+#~ msgstr "Dit kan enige tijd in beslag nemen, afhankelijk van de snelheid van je apparaat..."
+
 #~ msgid "Info regarding the version of this application. Automatic updates are not available (mostly due to privacy reasons), but you should be able to update manually."
 #~ msgstr "Versie-informatie. Automatische updates zijn niet mogelijk, voornamelijk wegens privacy-overwegingen, maar je kun wel handmatig bijwerken naar een nieuwere versie."
 
@@ -843,9 +906,6 @@ msgstr "Engels"
 
 #~ msgid "Recent electricity delivered (watt)"
 #~ msgstr "Recent elektriciteitsverbruik  (Watt)"
-
-#~ msgid "Select day"
-#~ msgstr "Selecteer dag"
 
 #~ msgid "Daily cost in the past %(days_ago)s days"
 #~ msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"

@@ -1,9 +1,11 @@
 from unittest import mock
 import json
+import io
 
 from django.test import TestCase, Client
 from django.utils import timezone, formats
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -13,6 +15,7 @@ from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
+from dsmr_frontend.forms import ExportAsCsvForm
 
 
 class TestViews(TestCase):
@@ -29,6 +32,7 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
         dsmr_consumption.services.compact_all()
 
     def test_admin(self):
@@ -180,6 +184,18 @@ class TestViews(TestCase):
         self.assertFalse(response.context['capabilities']['electricity_returned'])
 
     @mock.patch('django.utils.timezone.now')
+    def test_compare(self, now_mock):
+        """ Basicly the same view (context vars) as the archive view. """
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+        response = self.client.get(
+            reverse('{}:compare'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('capabilities', response.context)
+
+    @mock.patch('django.utils.timezone.now')
     def test_status(self, now_mock):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
@@ -188,6 +204,7 @@ class TestViews(TestCase):
             reverse('{}:status'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+
         self.assertIn('capabilities', response.context)
         self.assertIn('total_reading_count', response.context)
         self.assertIn('unprocessed_readings', response.context)
@@ -202,14 +219,79 @@ class TestViews(TestCase):
         if 'latest_gc' in response.context:
             self.assertIn('delta_since_latest_gc', response.context)
 
+    def test_export(self):
+        view_url = reverse('{}:export'.format(self.namespace))
+        # Check login required.
+        response = self.client.get(view_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
+        )
+
+        # Login and retest
+        self.client.login(username='testuser', password='passwd')
+        response = self.client.get(view_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('start_date', response.context)
+        self.assertIn('end_date', response.context)
+
+    def test_export_as_csv(self):
+        view_url = reverse('{}:export-as-csv'.format(self.namespace))
+        post_data = {
+            'data_type': ExportAsCsvForm.DATA_TYPE_DAY,
+            'export_format': ExportAsCsvForm.EXPORT_FORMAT_CSV,
+            'start_date': '2016-01-01',
+            'end_date': '2016-02-01',
+        }
+
+        # Check login required.
+        response = self.client.post(view_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response['Location'], 'http://testserver/export/admin/login/?next={}'.format(view_url)
+        )
+
+        # Login and retest, without post data.
+        self.client.login(username='testuser', password='passwd')
+        response = self.client.post(view_url,)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            # Invalid form redirects to previous page.
+            response['Location'], 'http://testserver{}'.format(
+                reverse('{}:export'.format(self.namespace))
+            )
+        )
+
+        # Day export.
+        response = self.client.post(view_url, data=post_data)
+        self.assertEqual(response.status_code, 200)
+        io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
+
+        # Hour export.
+        post_data['data_type'] = ExportAsCsvForm.DATA_TYPE_HOUR
+        response = self.client.post(view_url, data=post_data)
+        self.assertEqual(response.status_code, 200)
+        io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
+
     @mock.patch('django.utils.timezone.now')
     def test_configuration(self, now_mock):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
         )
+
+        # Check login required.
         response = self.client.get(
             reverse('{}:configuration'.format(self.namespace))
         )
+        self.assertEqual(response.status_code, 302)
+
+        # Login and retest
+        self.client.login(username='testuser', password='passwd')
+        response = self.client.get(
+            reverse('{}:configuration'.format(self.namespace))
+        )
+
+        self.assertEqual(response.status_code, 200)
         self.assertIn('consumption_settings', response.context)
         self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)
 
