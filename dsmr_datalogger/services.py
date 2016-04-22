@@ -122,6 +122,7 @@ def telegram_to_reading(data):
 
         # Iskra wtf. @TODO: Refactor!
         if code == '0-1:24.3.0':
+            iskra_gas_line = current_line
             next_line = lines_read[index + 1]
 
             if next_line.startswith('('):
