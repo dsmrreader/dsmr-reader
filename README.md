@@ -4,6 +4,15 @@
 [![Documentation Status](http://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](http://dsmr-reader.readthedocs.org/en/latest/?badge=latest)
 
 
+# Screenshots
+
+## English
+See [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/screenshots.html). Screenshots also have a description regarding features displayed. 
+
+## Dutch (Nederlands)
+Zie [Read The Docs, in het Nederlands](http://dsmr-reader.readthedocs.org/nl/latest/screenshots.html). Bij elke screenshot staat een korte toelichting over de functionaliteiten.
+
+
 # Documentation
 
 ## English
