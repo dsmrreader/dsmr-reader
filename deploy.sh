@@ -20,11 +20,16 @@ echo ""
 echo " --- Merging/updating checkout."
 git merge FETCH_HEAD
 
-
 echo ""
 echo ""
 echo " >>> Running post-deployment script. <<<"
 ./post-deploy.sh
+
+
+echo ""
+echo ""
+echo " --- Now at version: "
+python -c 'import dsmrreader ; print(dsmrreader.__version__)'
 
 
 echo ""

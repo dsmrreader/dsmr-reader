@@ -1,0 +1,140 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %} 
+{% load static %} 
+{% load i18n %}
+
+{% block title %}{% trans "Export data" %}{% endblock %}
+{% block header %}{% trans "Export data" %} &nbsp; <i class="fa fa-download"></i>{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+{% if not capabilities.any %}
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+    </div>
+{% endif %}
+
+    <form action="{% url 'frontend:export-as-csv' %}" method="post" id="download_form">
+    {% csrf_token %}
+	    <div class="row">
+	        <div class="col-md-12">
+	            <div class="panel">
+	                <header class="panel-heading">
+	                    <i class="fa fa-tasks"></i> &nbsp; {% trans "Select data type" %} <br />
+	                    <small>{% blocktrans %}Select the type of data you want to export.{% endblocktrans %}</small>
+	                </header>
+	                <div class="panel-body">
+	                    <table class="table table-condensed">
+	                        <tr>
+	                            <td class="col-md-3"><input class="" type="radio" name="data_type" value="day" id="data_day_totals" checked="checked"> &nbsp; <label for="data_day_totals">{% trans "Day totals" %}</label></td>
+	                            <td class="col-md-9">{% blocktrans %}Summary of each day. Contains electricity, gas and costs (if applicable).{% endblocktrans %}</td>
+	                        </tr>
+	                        <tr>
+	                            <td class="col-md-3"><input class="" type="radio" name="data_type" value="hour" id="data_hour_totals"> &nbsp; <label for="data_hour_totals">{% trans "Hour totals" %}</label></td>
+	                            <td class="col-md-9">{% blocktrans %}Summary of each hour read. Contains electricity and gas (if applicable).{% endblocktrans %}</td>
+	                        </tr>
+	                    </table>
+	                </div><!-- /.panel-body -->
+	            </div><!-- /.panel -->
+	        </div><!-- /.col -->
+	    </div><!-- /.row -->
+	
+	    <div class="row">
+	        <div class="col-md-6">
+	            <div class="panel">
+	                <header class="panel-heading">
+	                    <i class="fa fa-calendar"></i> &nbsp; {% trans "Select date range start" %} <br />
+	                    <small>{% blocktrans %}Select starting day for export.{% endblocktrans %}</small>
+	                </header>
+	                <div class="panel-body">
+	                    <div id="start_datepicker"></div>
+	                    <input type="hidden" name="start_date" id="start_date" />
+	                </div><!-- /.panel-body -->
+	            </div><!-- /.panel -->
+	        </div><!-- /.col -->
+	
+	        <div class="col-md-6">
+	            <div class="panel">
+	                <header class="panel-heading">
+	                    <i class="fa fa-calendar"></i> &nbsp; {% trans "Select date range end" %} <br />
+	                    <small>{% blocktrans %}Select ending day for export.{% endblocktrans %}</small>
+	                </header>
+	                <div class="panel-body">
+	                    <div id="end_datepicker"></div>
+                        <input type="hidden" name="end_date" id="end_date" />
+	                </div><!-- /.panel-body -->
+	            </div><!-- /.panel -->
+	        </div><!-- /.col -->
+	    </div><!-- /.row -->
+	
+	    <div class="row">
+	        <div class="col-md-12">
+	            <div class="panel">
+	                <header class="panel-heading">
+	                    <i class="fa fa-file-o"></i> &nbsp; {% trans "Select export format" %} <br />
+	                    <small>{% blocktrans %}Choose a format the data will be exported in.{% endblocktrans %}</small>
+	                </header>
+	                <div class="panel-body">
+	                    <table class="table table-condensed">
+	                        <tr>
+	                            <td class="col-md-3"><input class="" type="radio" name="export_format" value="csv" id="export_format_csv" checked="checked"> &nbsp; <label for="export_format_csv"><i class="fa fa-file-excel-o"></i> &nbsp; {% trans "Excel (.CSV)" %}</label></td>
+	                            <td class="col-md-9">{% blocktrans %}Exports the data in Comma Separated Format, which can be read by Excel.{% endblocktrans %}</td>
+	                        </tr>
+	                    </table>
+	                </div><!-- /.panel-body -->
+	            </div><!-- /.panel -->
+	        </div><!-- /.col -->
+	    </div><!-- /.row -->
+	    
+	    <a href="#" id="download_button" class="btn btn-lg btn-primary"><i class="fa fa-download"></i> &nbsp; Download export</a>
+    </form>
+
+</section><!-- /.content -->
+{% endblock %}
+
+{% block stylesheets %}
+{{ block.super }}
+        <link href="{% static 'dsmr_frontend/css/bootstrap-datepicker/bootstrap-datepicker3.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+        {{ block.super }}
+        {% get_current_language as LANGUAGE_CODE %}
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.en.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.nl.min.js' %}"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                initialize_datepicker('start_datepicker', '{{ start_date|date:datepicker_date_format }}', 'start_date');
+                initialize_datepicker('end_datepicker', '{{ end_date|date:datepicker_date_format }}', 'end_date');
+                
+                $("#download_button").click(function(){
+                	$("#download_form").submit();
+                	return false;
+                });
+            });
+            
+            function initialize_datepicker(datepicker_id, initial_date, input_id)
+            {
+            	$("#" + datepicker_id).datepicker({
+                    startView: 'months',
+                    minViewMode: 'days',
+                    maxViewMode: 'years',
+                    calendarWeeks: true,
+                    startDate: '{{ start_date|date:datepicker_date_format }}',
+                    endDate: '{{ end_date|date:datepicker_date_format }}',
+                    format: "{{ datepicker_locale_format }}",
+                    language: "{{ LANGUAGE_CODE }}"
+
+            	}).on('changeDate', function(e) {
+                	var selected_date = moment(e.date).format('{{ datepicker_locale_format }}'.toUpperCase());
+                    $("#" + input_id).val(selected_date)
+
+                }).datepicker('update', initial_date).datepicker('setDate', initial_date);
+            }
+        </script>
+{% endblock %}
