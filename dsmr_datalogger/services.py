@@ -102,6 +102,30 @@ def telegram_to_reading(data):
         reading_fields.remove('id')
         return reading_fields
 
+    def _convert_legacy_dsmr_gas_line(parsed_reading, current_line, next_line):
+        """ Legacy support for DSMR 2.x gas. """
+        legacy_gas_line = current_line
+
+        if next_line.startswith('('):
+            legacy_gas_line = current_line + next_line
+
+        legacy_gas_result = re.search(
+            r'[^(]+\((\d+)\)\(\d+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
+            legacy_gas_line
+        )
+        gas_timestamp = legacy_gas_result.group(1)
+
+        if timezone.now().dst() != timezone.timedelta(0):
+            gas_timestamp += 'S'
+        else:
+            gas_timestamp += 'W'
+
+        parsed_reading['extra_device_timestamp'] = reading_timestamp_to_datetime(
+            string=gas_timestamp
+        )
+        parsed_reading['extra_device_delivered'] = legacy_gas_result.group(2)
+        return parsed_reading
+
     # Defaults all fields to NULL.
     parsed_reading = {k: None for k in _get_reading_fields() + _get_statistics_fields()}
     field_splitter = re.compile(r'([^(]+)\((.+)\)')
@@ -117,32 +141,13 @@ def telegram_to_reading(data):
 
         # M-bus (0-n:24.1) cannot identify the type of device, see issue #92.
         if code in ('0-2:24.2.1', '0-3:24.2.1', '0-4:24.2.1'):
-            # I really hope this will get 'fixed' in DSMR v4.2+ in the future. (:
             code = '0-1:24.2.1'
 
-        # Iskra wtf. @TODO: Refactor!
+        # DSMR 2.x emits gas readings in different format.
         if code == '0-1:24.3.0':
-            iskra_gas_line = current_line
-            next_line = lines_read[index + 1]
-
-            if next_line.startswith('('):
-                iskra_gas_line = current_line + next_line
-
-            iskra_gas_result = re.search(
-                r'[^(]+\((\d+)\)\(\d+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
-                iskra_gas_line
+            parsed_reading = _convert_legacy_dsmr_gas_line(
+                parsed_reading, current_line, lines_read[index + 1]
             )
-            gas_timestamp = iskra_gas_result.group(1)
-
-            if timezone.now().dst() != timezone.timedelta(0):
-                gas_timestamp += 'S'
-            else:
-                gas_timestamp += 'W'
-
-            parsed_reading['extra_device_timestamp'] = reading_timestamp_to_datetime(
-                string=gas_timestamp
-            )
-            parsed_reading['extra_device_delivered'] = iskra_gas_result.group(2)
             continue
 
         try:
@@ -166,7 +171,7 @@ def telegram_to_reading(data):
 
             parsed_reading[field] = value
 
-    # Hack for Iskra. @TODO: Refactor!
+    # Hack for DSMR 2.x legacy, which lacks timestamp info..
     if parsed_reading['timestamp'] is None:
         parsed_reading['timestamp'] = timezone.now()
 
