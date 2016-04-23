@@ -105,7 +105,7 @@ def telegram_to_reading(data):
     # Defaults all fields to NULL.
     parsed_reading = {k: None for k in _get_reading_fields() + _get_statistics_fields()}
     field_splitter = re.compile(r'([^(]+)\((.+)\)')
-    lines_read = data.split("\n")
+    lines_read = data.split("\r\n")
 
     for index, current_line in enumerate(lines_read):
         result = field_splitter.search(current_line)
