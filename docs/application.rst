@@ -3,6 +3,13 @@
 Using the application
 =====================
 
+DSMR 2.x (legacy)
+-----------------
+Note: The application's default DSMR version used is 4.x. This version is also the default for any recent smart meters placed at your home. 
+
+Make sure to alter this setting in the backend's configuration page to DSMR 2.x when required!  
+
+
 Viewing the application
 -----------------------
 Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser. 
