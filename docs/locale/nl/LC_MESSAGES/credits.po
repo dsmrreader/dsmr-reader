@@ -1,20 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2016, Dennis Siemensma
 # This file is distributed under the same license as the DSMR Reader
 # package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 22:43+0200\n"
+"POT-Creation-Date: 2016-04-23 17:05+0200\n"
 "PO-Revision-Date: 2016-04-07 20:22+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.5.4\n"
 "Language: nl\n"
 
 #: ../../credits.rst:2
@@ -26,9 +27,9 @@ msgid ""
 "Software used and contributers are listed below. Please note and respect "
 "their licences as well, if any apply."
 msgstr ""
-"Alle gebruikte software en iedereen die bijgedragen heeft staat hieronder. "
-"De externe software kan tevens onder licentie staan, zie daarvoor de "
-"software zelf."
+"Alle gebruikte software en iedereen die bijgedragen heeft staat "
+"hieronder. De externe software kan tevens onder licentie staan, zie "
+"daarvoor de software zelf."
 
 #: ../../credits.rst:6
 msgid "Software"
@@ -40,11 +41,11 @@ msgstr "`Raspbian <https://www.raspbian.org/>`_"
 
 #: ../../credits.rst:10
 msgid ""
-"`Raspbian minimal unattended netinstaller <https://github.com/debian-pi/"
-"raspbian-ua-netinst>`_"
+"`Raspbian minimal unattended netinstaller <https://github.com/debian-pi"
+"/raspbian-ua-netinst>`_"
 msgstr ""
-"`Raspbian minimal unattended netinstaller <https://github.com/debian-pi/"
-"raspbian-ua-netinst>`_"
+"`Raspbian minimal unattended netinstaller <https://github.com/debian-pi"
+"/raspbian-ua-netinst>`_"
 
 #: ../../credits.rst:12
 msgid "`Django Project <https://www.djangoproject.com/>`_"
@@ -72,11 +73,11 @@ msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
 #: ../../credits.rst:24
 msgid ""
-"`Director Responsive Admin <http://web-apps.ninja/director-free-responsive-"
-"admin-template/>`_"
+"`Director Responsive Admin <http://web-apps.ninja/director-free-"
+"responsive-admin-template/>`_"
 msgstr ""
-"`Director Responsive Admin <http://web-apps.ninja/director-free-responsive-"
-"admin-template/>`_"
+"`Director Responsive Admin <http://web-apps.ninja/director-free-"
+"responsive-admin-template/>`_"
 
 #: ../../credits.rst:26
 msgid "`Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
@@ -120,42 +121,50 @@ msgstr ""
 
 #: ../../credits.rst:44
 msgid ""
-"`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github "
-"profile <https://github.com/danielterhorst>`_)"
+"`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github"
+" profile <https://github.com/danielterhorst>`_)"
 msgstr ""
-"`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github "
-"profile <https://github.com/danielterhorst>`_)"
+"`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github"
+" profile <https://github.com/danielterhorst>`_)"
 
 #: ../../credits.rst:45
+#, fuzzy
+msgid ""
+"`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
+" (`Github profile <https://github.com/sdeleeuw>`_)"
+msgstr ""
+"`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github "
+"profile <https://github.com/jeroenpeters1986>`_)"
+
+#: ../../credits.rst:46
 msgid "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
 msgstr "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
 
-#: ../../credits.rst:46
+#: ../../credits.rst:47
 msgid "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
 msgstr "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
 
-#: ../../credits.rst:50
+#: ../../credits.rst:51
 msgid "DSMR help"
 msgstr "DSMR hulp"
 
-#: ../../credits.rst:52
-msgid ""
-"Dutch Smart Meter reading specifications, data cables, examples and hints:"
-msgstr ""
-"Dutch Smart Meter reading specifications, data cables, examples and hints:"
+#: ../../credits.rst:53
+msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
+msgstr "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 
-#: ../../credits.rst:54
+#: ../../credits.rst:55
 msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 msgstr "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 
-#: ../../credits.rst:56
+#: ../../credits.rst:57
 msgid ""
-"`Joost van der Linde <https://sites.google.com/site/nta8130p1smartmeter/"
-"home>`_"
+"`Joost van der Linde "
+"<https://sites.google.com/site/nta8130p1smartmeter/home>`_"
 msgstr ""
-"`Joost van der Linde <https://sites.google.com/site/nta8130p1smartmeter/"
-"home>`_"
+"`Joost van der Linde "
+"<https://sites.google.com/site/nta8130p1smartmeter/home>`_"
 
-#: ../../credits.rst:58
+#: ../../credits.rst:59
 msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
 msgstr "`SOS Solutions <https://www.sossolutions.nl/>`_"
+
