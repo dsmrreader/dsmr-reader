@@ -4,13 +4,23 @@
 [![Documentation Status](http://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](http://dsmr-reader.readthedocs.org/en/latest/?badge=latest)
 
 
+# About
+There are plenty of ‘scripts’ and websites available for performing DSMR readings. This project however is a full stack solution and allows you to keep your own data for yourself, on your own RaspberryPi.
+
+
 # Screenshots
+[[https://github.com/dennissiemensma/dsmr-reader/blob/master/docs/_static/screenshots/dashboard.png|alt=Dashboard]]
+
+[[https://github.com/dennissiemensma/dsmr-reader/blob/master/docs/_static/screenshots/configuration.png|alt=Configuration]]
+
+[[https://github.com/dennissiemensma/dsmr-reader/blob/master/docs/_static/screenshots/archive.png|alt=Archive]]
+
 
 ## English
-See [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/screenshots.html). Screenshots also have a description regarding features displayed. 
+See more screenshots at [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/screenshots.html).
 
 ## Dutch (Nederlands)
-Zie [Read The Docs, in het Nederlands](http://dsmr-reader.readthedocs.org/nl/latest/screenshots.html). Bij elke screenshot staat een korte toelichting over de functionaliteiten.
+Zie [Read The Docs](http://dsmr-reader.readthedocs.org/nl/latest/screenshots.html) voor meer screenshots.
 
 
 # Documentation
@@ -20,3 +30,7 @@ See [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/). 
 
 ## Dutch (Nederlands)
 Zie [Read The Docs, in het Nederlands](http://dsmr-reader.readthedocs.org/nl/latest/). Je kunt daar ook alle installatieinstructies vinden.
+
+
+
+
