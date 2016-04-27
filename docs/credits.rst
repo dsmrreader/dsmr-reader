@@ -37,6 +37,8 @@ Software
 
 - `MW <http://bettermotherfuckingwebsite.com/>`_
 
+- `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
+
 Testers & contributors
 ----------------------
 
