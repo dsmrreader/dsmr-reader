@@ -9,19 +9,13 @@ There are plenty of ‘scripts’ and websites available for performing DSMR rea
 
 
 # Screenshots
-[[https://github.com/dennissiemensma/dsmr-reader/blob/master/docs/_static/screenshots/dashboard.png|alt=Dashboard]]
+![Dashboard](docs/_static/screenshots/dashboard.png)
 
-[[https://github.com/dennissiemensma/dsmr-reader/blob/master/docs/_static/screenshots/configuration.png|alt=Configuration]]
+![Configuration](docs/_static/screenshots/configuration.png)
 
-[[https://github.com/dennissiemensma/dsmr-reader/blob/master/docs/_static/screenshots/archive.png|alt=Archive]]
+![Archive](docs/_static/screenshots/archive.png)
 
-
-## English
 See more screenshots at [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/screenshots.html).
-
-## Dutch (Nederlands)
-Zie [Read The Docs](http://dsmr-reader.readthedocs.org/nl/latest/screenshots.html) voor meer screenshots.
-
 
 # Documentation
 
