@@ -1,6 +1,12 @@
 Changelog
 =========
 
+
+v1.1.1 - 2016-04-27
+^^^^^^^^^^^^^^^^^^^
+- Improve readme (`#124 <https://github.com/dennissiemensma/dsmr-reader/issues/124>`_).
+
+
 v1.1.0 - 2016-04-23
 ^^^^^^^^^^^^^^^^^^^
 - Autorefresh dashboard (`#117 <https://github.com/dennissiemensma/dsmr-reader/issues/117>`_).
