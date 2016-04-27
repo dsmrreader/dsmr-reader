@@ -8,23 +8,25 @@
 There are plenty of ‘scripts’ and websites available for performing DSMR readings. This project however is a full stack solution and allows you to keep your own data for yourself, on your own RaspberryPi.
 
 
-# Screenshots
-![Dashboard](docs/_static/screenshots/dashboard.png)
-
-![Configuration](docs/_static/screenshots/configuration.png)
-
-![Archive](docs/_static/screenshots/archive.png)
-
-See more screenshots at [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/screenshots.html).
-
 # Documentation
 
-## English
+**English**
+
 See [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/). Installation guide can be found there as well.
 
-## Dutch (Nederlands)
+**Dutch / Nederlands**
+
 Zie [Read The Docs, in het Nederlands](http://dsmr-reader.readthedocs.org/nl/latest/). Je kunt daar ook alle installatieinstructies vinden.
 
 
+# Screenshots
+See more screenshots can be found in the documentation at [Read The Docs](http://dsmr-reader.readthedocs.org/en/latest/screenshots.html).
 
+## Dashboard
+![Dashboard](docs/_static/screenshots/dashboard.png)
 
+## Archive
+![Archive](docs/_static/screenshots/archive.png)
+
+## Configuration
+![Configuration](docs/_static/screenshots/configuration.png)
