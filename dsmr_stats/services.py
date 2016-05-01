@@ -147,6 +147,11 @@ def electricity_tariff_percentage(start_date):
         electricity1=Sum('electricity1'),
         electricity2=Sum('electricity2'),
     )
+
+    # Empty data will crash.
+    if not all(totals.values()):
+        return None
+
     global_total = totals['electricity1'] + totals['electricity2']
     totals['electricity1'] = math.ceil(totals['electricity1'] / global_total * 100)
     totals['electricity2'] = 100 - totals['electricity1']

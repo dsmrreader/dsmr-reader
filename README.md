@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/dennissiemensma/dsmr-reader.svg?branch=master)](https://travis-ci.org/dennissiemensma/dsmr-reader)
 [![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=master)](https://codecov.io/github/dennissiemensma/dsmr-reader?branch=master)
 [![Requirements Status](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=master)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=master)
-[![Documentation Status](http://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](http://dsmr-reader.readthedocs.org/en/latest/?badge=latest)
+[![Documentation Status](http://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](http://dsmr-reader.readthedocs.io/en/latest/?badge=latest)
 
 
 # About
@@ -12,15 +12,15 @@ There are plenty of ‘scripts’ and websites available for performing DSMR rea
 
 **English**
 
-See [Read The Docs, in English](http://dsmr-reader.readthedocs.org/en/latest/). Installation guide can be found there as well.
+See [Read The Docs, in English](http://dsmr-reader.readthedocs.io/en/latest/). Installation guide can be found there as well.
 
 **Dutch / Nederlands**
 
-Zie [Read The Docs, in het Nederlands](http://dsmr-reader.readthedocs.org/nl/latest/). Je kunt daar ook alle installatieinstructies vinden.
+Zie [Read The Docs, in het Nederlands](http://dsmr-reader.readthedocs.io/nl/latest/). Je kunt daar ook alle installatieinstructies vinden.
 
 
 # Screenshots
-More screenshots can be found in the documentation at [Read The Docs](http://dsmr-reader.readthedocs.org/en/latest/screenshots.html).
+More screenshots can be found in the documentation at [Read The Docs](http://dsmr-reader.readthedocs.io/en/latest/screenshots.html).
 
 ## Dashboard
 ![Dashboard](docs/_static/screenshots/dashboard.png)

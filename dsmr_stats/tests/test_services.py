@@ -296,6 +296,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(percentages['electricity1'], 25)
         self.assertEqual(percentages['electricity2'], 75)
 
+        # Now try again without data.
+        DayStatistics.objects.all().delete()
+        percentages = dsmr_stats.services.electricity_tariff_percentage(start_date=target_date.date())
+
 
 class TestServicesWithoutGas(TestServices):
     fixtures = ['dsmr_stats/electricity-consumption.json']
