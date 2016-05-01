@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+v1.1.2 - 2016-05-01
+^^^^^^^^^^^^^^^^^^^
+- Trends page giving errors (when lacking data) (`#125 <https://github.com/dennissiemensma/dsmr-reader/issues/125>`_).
+
+
 v1.1.1 - 2016-04-27
 ^^^^^^^^^^^^^^^^^^^
 - Improve readme (`#124 <https://github.com/dennissiemensma/dsmr-reader/issues/124>`_).
