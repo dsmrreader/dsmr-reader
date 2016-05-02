@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_backup.models.settings import BackupSettings
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
@@ -275,21 +276,21 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_configuration(self, now_mock):
+        view_url = reverse('{}:configuration'.format(self.namespace))
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2016, 1, 1)
         )
 
         # Check login required.
-        response = self.client.get(
-            reverse('{}:configuration'.format(self.namespace))
-        )
+        response = self.client.get(view_url)
         self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
+        )
 
         # Login and retest
         self.client.login(username='testuser', password='passwd')
-        response = self.client.get(
-            reverse('{}:configuration'.format(self.namespace))
-        )
+        response = self.client.get(view_url)
 
         self.assertEqual(response.status_code, 200)
         self.assertIn('consumption_settings', response.context)
@@ -303,6 +304,40 @@ class TestViews(TestCase):
 
         self.assertIn('weather_settings', response.context)
         self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
+
+    @mock.patch('django.utils.timezone.now')
+    def test_configuration_force_backup(self, now_mock):
+        view_url = reverse('{}:configuration-force-backup'.format(self.namespace))
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 1, 1)
+        )
+        backup_settings = BackupSettings.get_solo()
+        backup_settings.latest_backup = now_mock.return_value
+        backup_settings.save()
+
+        self.assertEqual(BackupSettings.get_solo().latest_backup, now_mock.return_value)
+
+        # Check login required.
+        response = self.client.post(view_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response['Location'], 'http://testserver/configuration/admin/login/?next={}'.format(view_url)
+        )
+
+        # Login and retest.
+        self.client.login(username='testuser', password='passwd')
+        response = self.client.post(view_url)
+
+        success_url = reverse('{}:configuration'.format(self.namespace))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response['Location'], 'http://testserver{}'.format(success_url)
+        )
+        # Setting should have been altered.
+        self.assertEqual(
+            BackupSettings.get_solo().latest_backup,
+            now_mock.return_value - timezone.timedelta(days=7)
+        )
 
 
 class TestViewsWithoutData(TestViews):

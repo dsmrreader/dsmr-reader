@@ -10,7 +10,7 @@ from dsmr_frontend.views.trends import Trends
 from dsmr_frontend.views.compare import Compare
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status
-from dsmr_frontend.views.configuration import Configuration
+from dsmr_frontend.views.configuration import Configuration, ForceBackup
 
 
 urlpatterns = [
@@ -43,4 +43,9 @@ urlpatterns = [
     url(r'^export/csv$', login_required(ExportAsCsv.as_view()), name='export-as-csv'),
 
     url(r'^configuration$', login_required(Configuration.as_view()), name='configuration'),
+    url(
+        r'^configuration/force-backup$',
+        login_required(ForceBackup.as_view()),
+        name='configuration-force-backup'
+    ),
 ]
