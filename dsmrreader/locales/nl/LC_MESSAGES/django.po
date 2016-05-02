@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 19:42+0200\n"
-"PO-Revision-Date: 2016-05-02 19:41+0100\n"
+"POT-Creation-Date: 2016-05-02 23:32+0200\n"
+"PO-Revision-Date: 2016-05-02 23:19+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -377,6 +377,12 @@ msgstr "Alle instellingen"
 
 msgid "Setting"
 msgstr "Instelling"
+
+msgid "This will simply alter the latest backup timestamp displayed above to a week ago."
+msgstr "Dit zorgt er simpelweg voor dat het tijdstip van de meest recente back-up een week in het verleden wordt gezet."
+
+msgid "Schedule new backup now"
+msgstr "Plan per direct nieuwe back-up in"
 
 msgid "Watt"
 msgstr "Watt"

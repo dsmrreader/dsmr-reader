@@ -91,7 +91,16 @@
                         </tr>
                         <tr{% if not backup_settings.latest_backup %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info backup_settings 'latest_backup' 'verbose_name' %}</td>
-                            <td>{{ backup_settings.latest_backup|naturaltime|default_if_none:'-' }}</td>
+                            <td>
+                                <p>{{ backup_settings.latest_backup|naturaltime|default_if_none:'-' }}</p>
+                                
+                                <form action="{% url 'frontend:configuration-force-backup' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary" title="{% blocktrans %}This will simply alter the latest backup timestamp displayed above to a week ago.{% endblocktrans %}">
+                                        <i class="fa fa-refresh"></i> &nbsp; <span>{% trans "Schedule new backup now" %}</span>
+                                    </button>
+                                </form>
+                            </td>
                             <td>{% model_meta_info backup_settings 'latest_backup' 'help_text' %}</td>
                         </tr>
                     </table>
