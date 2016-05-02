@@ -149,7 +149,9 @@
                     </table>
                     {% else %}
                         <div class="alert alert-info" role="alert">
-                        {% blocktrans %}No energy supplier prices found for today. Enable this feature in consumption settings to view prices.{% endblocktrans %}
+                            <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No energy supplier prices found for today. Enable this feature in consumption settings to view prices.{% endblocktrans %}
+                            &nbsp;
+                            <a href="{% url 'admin:dsmr_consumption_energysupplierprice_add' %}" class="btn btn-primary"><i class="fa fa-cogs"></i></a>
                         </div>
                     {% endif %}
                 </div><!-- /.panel-body -->

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-18 20:05+0200\n"
-"PO-Revision-Date: 2016-04-18 19:57+0100\n"
+"POT-Creation-Date: 2016-05-02 19:42+0200\n"
+"PO-Revision-Date: 2016-05-02 19:41+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -120,11 +120,11 @@ msgstr "Omschrijving"
 msgid "For your own reference, i.e. the name of your supplier"
 msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
 
-msgid "Electricity 1 price"
-msgstr "Elektriciteitstarief 1 (laag)"
+msgid "Electricity 1 price (low tariff)"
+msgstr "Elektriciteit 1 (daltarief)"
 
-msgid "Electricity 2 price"
-msgstr "Elektriciteitstarief 2 (piek)"
+msgid "Electricity 2 price (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
 
 msgid "Gas price"
 msgstr "Gasprijs"
@@ -513,9 +513,6 @@ msgstr "DSMR-reader"
 msgid "Current version"
 msgstr "Huidige versie"
 
-msgid "View current release"
-msgstr "Bekijk huidige versie"
-
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"
 
@@ -795,6 +792,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Electricity 1 price"
+#~ msgstr "Elektriciteitstarief 1 (laag)"
+
+#~ msgid "Electricity 2 price"
+#~ msgstr "Elektriciteitstarief 2 (piek)"
+
+#~ msgid "View current release"
+#~ msgstr "Bekijk huidige versie"
 
 #~ msgid "Deploy"
 #~ msgstr "Uitrollen"
