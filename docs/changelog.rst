@@ -5,6 +5,7 @@ Changelog
 v1.2.0 - 2016-xx-xx
 ^^^^^^^^^^^^^^^^^^^
 - Energy supplier prices does not indicate tariff type (Django admin) (`#126 <https://github.com/dennissiemensma/dsmr-reader/issues/126>`_).
+- Requirements update (`#128 <https://github.com/dennissiemensma/dsmr-reader/issues/128>`_).
 
 
 v1.1.2 - 2016-05-01
