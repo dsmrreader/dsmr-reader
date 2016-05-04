@@ -3,8 +3,7 @@ from decimal import Decimal, ROUND_UP
 import pytz
 
 from django.utils import timezone
-from django.db import connection
-from django.db.models import Avg, Max
+from django.db.models import Avg, Min, Max
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -186,6 +185,12 @@ def day_consumption(day):
     temperature_readings = TemperatureReading.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
+    consumption['lowest_temperature'] = temperature_readings.aggregate(
+        avg_temperature=Min('degrees_celcius'),
+    )['avg_temperature'] or 0
+    consumption['highest_temperature'] = temperature_readings.aggregate(
+        avg_temperature=Max('degrees_celcius'),
+    )['avg_temperature'] or 0
     consumption['average_temperature'] = temperature_readings.aggregate(
         avg_temperature=Avg('degrees_celcius'),
     )['avg_temperature'] or 0

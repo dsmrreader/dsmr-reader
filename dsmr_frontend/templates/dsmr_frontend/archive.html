@@ -59,10 +59,10 @@
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-chart"></canvas>
                     <div id="electricity-chart-legend"></div>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="row" id="electricity-returned-chart-holder" style="display: none;">
         <div class="col-md-12">
@@ -73,10 +73,10 @@
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-returned-chart"></canvas>
                     <div id="electricity-returned-chart-legend"></div>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row" id="gas-chart-holder" style="display: none;">
         <div class="col-md-12">
@@ -86,12 +86,12 @@
                 </header>
                 <div class="panel-body" style="height: 200px;">
                 	<canvas id="gas-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
 {% endif %}
-</section><!-- /.content -->
+</section>
 {% endblock %}
 
 {% block stylesheets %}
@@ -356,5 +356,6 @@
                 ctx.canvas.height = $("#gas-chart").parent().height();
                 g_gas_chart_instance = new Chart(ctx).Line(data, line_options);
             }
-		</script>
+
+            </script>
 {% endblock %}
