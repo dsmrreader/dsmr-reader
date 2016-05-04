@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 23:32+0200\n"
-"PO-Revision-Date: 2016-05-02 23:19+0100\n"
+"POT-Creation-Date: 2016-05-04 21:56+0200\n"
+"PO-Revision-Date: 2016-05-04 21:53+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -121,10 +121,10 @@ msgid "For your own reference, i.e. the name of your supplier"
 msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
 
 msgid "Electricity 1 price (low tariff)"
-msgstr "Elektriciteit 1 (daltarief)"
+msgstr "Prijs elektriciteit 1 (daltarief)"
 
 msgid "Electricity 2 price (high tariff)"
-msgstr "Elektriciteit 2 (piektarief)"
+msgstr "Prijs elektriciteit 2 (piektarief)"
 
 msgid "Gas price"
 msgstr "Gasprijs"
@@ -616,6 +616,21 @@ msgstr "Notitie"
 msgid "Notes"
 msgstr "Notities"
 
+msgid "Date"
+msgstr "Datum"
+
+msgid "Total cost"
+msgstr "Totale kosten"
+
+msgid "Electricity 2 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
+
+msgid "Average temperature"
+msgstr "Gemiddelde temperatuur"
+
+msgid "Hour start"
+msgstr "Begintijd uur"
+
 msgid "Weather"
 msgstr "Weergegevens"
 
@@ -868,9 +883,6 @@ msgstr "Engels"
 #~ msgid "Daily gas usage"
 #~ msgstr "Dagelijks gasverbruik"
 
-#~ msgid "Daily average temperature"
-#~ msgstr "Dagelijks temperatuurgemiddelde"
-
 #~ msgid "(in &deg;C)"
 #~ msgstr "(in &deg;C)"
 
@@ -885,9 +897,6 @@ msgstr "Engels"
 
 #~ msgid "Gas cost"
 #~ msgstr "Gaskosten"
-
-#~ msgid "Total cost"
-#~ msgstr "Totale kosten"
 
 #~ msgid "Theme by"
 #~ msgstr "Thema door"

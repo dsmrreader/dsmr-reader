@@ -78,6 +78,7 @@ class ExportAsCsv(BaseFormView):
             def write(self, value):
                 """ Write the value by returning it, instead of storing in a buffer. """
                 return value
+
         pseudo_buffer = Echo()
         writer = csv.writer(pseudo_buffer)
         response = StreamingHttpResponse(
@@ -93,7 +94,14 @@ class ExportAsCsv(BaseFormView):
         return response
 
     def _generate_csv_row(self, writer, data, fields):
-        yield writer.writerow(fields)
+        if not data:
+            raise StopIteration()
+
+        # Write header, but use the fields' verbose name.
+        data_class = data[0].__class__
+        header = [data_class._meta.get_field(x).verbose_name.title() for x in fields]
+
+        yield writer.writerow(header)
 
         for current_data in data:
             yield writer.writerow([
