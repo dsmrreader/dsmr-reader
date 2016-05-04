@@ -9,6 +9,7 @@ v1.2.0 - 2016-xx-xx
 - Force backup (`#123 <https://github.com/dennissiemensma/dsmr-reader/issues/123>`_).
 - Update clean-install.md (`#131 <https://github.com/dennissiemensma/dsmr-reader/issues/131>`_).
 - Improve data export field names (`#132 <https://github.com/dennissiemensma/dsmr-reader/issues/132>`_).
+- Display average temperature in archive (`#122 <https://github.com/dennissiemensma/dsmr-reader/issues/122>`_).
 
 
 v1.1.2 - 2016-05-01

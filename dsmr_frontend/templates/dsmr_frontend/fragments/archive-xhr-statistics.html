@@ -39,16 +39,28 @@
             </tr>
             <tr>
                 <td> {% if capabilities.gas %}{% trans "Gas" %}{% endif %}</td>
-                <td><span class="badge bg-orange"> {% if capabilities.gas %}{{ statistics.gas|default:'-' }}{% endif %}</span></td>
+                <td><span class="badge bg-orange">{% if capabilities.gas %}{{ statistics.gas|default:'-' }}{% endif %}</span></td>
                 <td>&nbsp;</td>
                 <td><span class="badge bg-facebook">{% if energy_price %}{{ energy_price.gas_price|default:'-' }}{% endif %}</span></td>
-                <td><span class="badge bg-black"> {% if capabilities.gas %}{{ statistics.gas_cost|default:'-' }}{% endif %}</span></td>
+                <td><span class="badge bg-black">{% if capabilities.gas %}{{ statistics.gas_cost|default:'-' }}{% endif %}</span></td>
             </tr>
             <tr>
                 <td style="font-weight: bold;">{% trans "Total" %}</td>
                 <td colspan="3">&nbsp;</td>
                 <td><span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span></td>
             </tr>
+            {% if statistics.temperature_avg %}
+            <tr>
+                <td colspan="5">&nbsp;</td>
+            </tr>
+            <tr>
+                <td> {% trans "Weather" %}</td>
+                <td><span class="badge bg-blue">{% trans "Min." %} &nbsp; {{ statistics.temperature_min|floatformat|default:'-' }} &deg;C</span></td>
+                <td><span class="badge bg-blue">{% trans "Max." %} &nbsp; {{ statistics.temperature_max|floatformat|default:'-' }} &deg;C</span></td>
+                <td>&nbsp;</td>
+                <td><span class="badge bg-blue">{% trans "Avg." %} &nbsp; {{ statistics.temperature_avg|floatformat|default:'-' }} &deg;C</span></td>
+            </tr>
+            {% endif %}
         </table>
         
 {% if notes %}

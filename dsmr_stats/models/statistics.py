@@ -35,6 +35,12 @@ class DayStatistics(models.Model):
     )
 
     # Temperature readings depend on user settings.
+    lowest_temperature = models.DecimalField(
+        max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Lowest temperature')
+    )
+    highest_temperature = models.DecimalField(
+        max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Highest temperature')
+    )
     average_temperature = models.DecimalField(
         max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Average temperature')
     )

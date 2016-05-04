@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-04 21:56+0200\n"
-"PO-Revision-Date: 2016-05-04 21:53+0100\n"
+"POT-Creation-Date: 2016-05-04 23:43+0200\n"
+"PO-Revision-Date: 2016-05-04 23:41+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -480,6 +480,18 @@ msgstr "Voeg notitie toe voor deze datum"
 msgid "Energy price"
 msgstr "Energieprijs"
 
+msgid "Weather"
+msgstr "Weergegevens"
+
+msgid "Min."
+msgstr "Min."
+
+msgid "Max."
+msgstr "Max."
+
+msgid "Avg."
+msgstr "Gem."
+
 msgid "Meter positions"
 msgstr "Meterstanden"
 
@@ -625,14 +637,17 @@ msgstr "Totale kosten"
 msgid "Electricity 2 returned (high tariff)"
 msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
+msgid "Lowest temperature"
+msgstr "Laagste temperatuur"
+
+msgid "Highest temperature"
+msgstr "Hoogste temperatuur"
+
 msgid "Average temperature"
 msgstr "Gemiddelde temperatuur"
 
 msgid "Hour start"
 msgstr "Begintijd uur"
-
-msgid "Weather"
-msgstr "Weergegevens"
 
 msgid "Weather station Arcen"
 msgstr "Weerstation Arcen"
