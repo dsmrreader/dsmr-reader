@@ -8,7 +8,7 @@ v1.2.0 - 2016-xx-xx
 - Requirements update (`#128 <https://github.com/dennissiemensma/dsmr-reader/issues/128>`_).
 - Force backup (`#123 <https://github.com/dennissiemensma/dsmr-reader/issues/123>`_).
 - Update clean-install.md (`#131 <https://github.com/dennissiemensma/dsmr-reader/issues/131>`_).
-- Improve data export field names (`#132 <https://github.com/dennissiemensma/dsmr-reader/issues/1312>`_).
+- Improve data export field names (`#132 <https://github.com/dennissiemensma/dsmr-reader/issues/132>`_).
 
 
 v1.1.2 - 2016-05-01
