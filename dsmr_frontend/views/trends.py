@@ -29,6 +29,10 @@ class Trends(TemplateView):
         # Average of real consumption/return per hour.
         average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour()
 
+        # The most constant usage.
+        context_data['slumber_consumption_watt'] = dsmr_consumption.services.\
+            calculate_slumber_consumption_watt()
+
         context_data['avg_consumption_x'] = json.dumps(
             ['{}:00'.format(int(x['hour_start'])) for x in average_consumption_by_hour]
         )

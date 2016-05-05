@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-04 23:48+0200\n"
-"PO-Revision-Date: 2016-05-04 23:41+0100\n"
+"POT-Creation-Date: 2016-05-05 23:29+0200\n"
+"PO-Revision-Date: 2016-05-05 23:10+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -442,13 +442,13 @@ msgid "Day totals"
 msgstr "Dagtotalen"
 
 msgid "Summary of each day. Contains electricity, gas and costs (if applicable)."
-msgstr "Samenvatting van elke dag. Bevat electriciteit, gas en gemaakte kosten (wanneer van toepassing)."
+msgstr "Samenvatting van elke dag. Bevat elektriciteit, gas en gemaakte kosten (wanneer van toepassing)."
 
 msgid "Hour totals"
 msgstr "Uurtotalen"
 
 msgid "Summary of each hour read. Contains electricity and gas (if applicable)."
-msgstr "Samenvatting van elk uur. Bevat electriciteit en gas (wanneer van toepassing)."
+msgstr "Samenvatting van elk uur. Bevat elektriciteit en gas (wanneer van toepassing)."
 
 msgid "Select date range start"
 msgstr "Selecteer startdatum"
@@ -568,10 +568,10 @@ msgid "There are too many unprocessed readings. Your <strong>backend process</st
 msgstr "Er zijn te veel onverwerkte metingen. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
 
 msgid "Latest electricity consumption tracked"
-msgstr "Meest recente electriciteitsverbruik verwerkt"
+msgstr "Meest recente elektriciteitsverbruik verwerkt"
 
 msgid "It has been a while since electricity consumption was tracked. Your <strong>backend process</strong> might hang or has been crashed."
-msgstr "Het meest recente electriciteitsverbruik is een tijdje geleden verwerkt. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
+msgstr "Het meest recente elektriciteitsverbruik is een tijdje geleden verwerkt. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
 
 msgid "Latest gas consumption tracked"
 msgstr "Meest recente gasverbruik verwerkt"
@@ -583,7 +583,7 @@ msgid "Data availability"
 msgstr "Beschikbaarheid gegevens"
 
 msgid "Based on readings until this moment. Electricity usage should be always available. Gas usage and electricity return depend on your home situation."
-msgstr "Gebaseerd op verwerkte uitlezingen tot nu toe. Electriciteitsverbruik zou altijd beschikbaar moeten zijn. Gasverbruik en elektriciteitsteruglevering hangen af van je thuissituatie."
+msgstr "Gebaseerd op verwerkte metingen tot nu toe. Elektriciteitsverbruik zou altijd beschikbaar moeten zijn. Gasverbruik en elektriciteitsteruglevering hangen af van je thuissituatie."
 
 msgid "Data type"
 msgstr "Soort gegevens"
@@ -614,10 +614,16 @@ msgid "Average hourly gas consumed (in %%)"
 msgstr "Gemiddeld gasverbruik per daguur (in %%)"
 
 msgid "Electricity tariff ratio (passed week)"
-msgstr "Electriciteitsverbruik piek- en daltarief (afgelopen week)"
+msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 
 msgid "Electricity tariff ratio (passed month)"
-msgstr "Electriciteitsverbruik piek- en daltarief (afgelopen maand)"
+msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
+
+msgid "Most common electricity consumption"
+msgstr "Veelvoorkomend elektriciteitsverbruik"
+
+msgid "Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home."
+msgstr "Gemiddeld elektriciteitsverbruik berekend over de vijf meest voorkomende waardes. Dit is vaak ook het (minimale) elektriciteitsverbruik van je woning."
 
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"

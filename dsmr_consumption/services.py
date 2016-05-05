@@ -3,7 +3,7 @@ from decimal import Decimal, ROUND_UP
 import pytz
 
 from django.utils import timezone
-from django.db.models import Avg, Min, Max
+from django.db.models import Avg, Min, Max, Count
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -204,3 +204,25 @@ def round_decimal(decimal_price):
         decimal_price = Decimal(str(decimal_price))
 
     return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
+
+
+def calculate_slumber_consumption_watt():
+    """ Groups all electricity readings to find the most constant consumption. """
+    most_common = ElectricityConsumption.objects.filter(
+        currently_delivered__gt=0
+    ).values('currently_delivered').annotate(
+        currently_delivered_count=Count('currently_delivered')
+    ).order_by('-currently_delivered_count')[:5]
+
+    if not most_common:
+        return
+
+    # We calculate the average among the most common consumption read.
+    count = 0
+    usage = 0
+
+    for item in most_common:
+        count += item['currently_delivered_count']
+        usage += item['currently_delivered_count'] * item['currently_delivered']
+
+    return round(usage / count * 1000)
