@@ -29,10 +29,10 @@
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-electricity-consumed-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
     
     {% if capabilities.electricity_returned %}
@@ -44,10 +44,10 @@
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-electricity-returned-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
     
     {% if capabilities.gas %}
@@ -59,10 +59,10 @@
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-gas-consumed-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
 
     {% if capabilities.electricity %}
@@ -75,10 +75,10 @@
                 <div class="panel-body" style="height: 350px;">
                     <div id="electricity-by-tariff-week-chart-legend"></div>
                     <canvas id="electricity-by-tariff-week-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="panel" style="padding-bottom: 24px;">
@@ -88,13 +88,30 @@
                 <div class="panel-body" style="height: 350px;">
                     <div id="electricity-by-tariff-month-chart-legend"></div>
                     <canvas id="electricity-by-tariff-month-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if slumber_consumption_watt %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Most common electricity consumption{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ slumber_consumption_watt }} &nbsp; {% trans "Watt" %}</span>
+                    &nbsp;
+                    <small>{% blocktrans %}Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home.{% endblocktrans %}</small>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
 
-</section><!-- /.content -->
+</section>
 {% endblock %}
 
 
