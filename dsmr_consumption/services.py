@@ -226,3 +226,20 @@ def calculate_slumber_consumption_watt():
         usage += item['currently_delivered_count'] * item['currently_delivered']
 
     return round(usage / count * 1000)
+
+
+def calculate_min_max_consumption_watt():
+    """ Returns the lowest and highest Wattage consumed. """
+    min_max = ElectricityConsumption.objects.filter(
+        currently_delivered__gt=0
+    ).aggregate(
+        min_watt=Min('currently_delivered'),
+        max_watt=Max('currently_delivered')
+    )
+
+    for x in min_max.keys():
+        if min_max[x]:
+            min_max[x] = int(min_max[x] * 1000)
+
+    print(min_max)
+    return min_max

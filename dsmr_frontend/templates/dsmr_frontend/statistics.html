@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -118,7 +118,38 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Usage statistics" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="col-md-6">
+                                {% trans "Most common electricity consumption" %} <small>
+                                <br />
+                                {% blocktrans %}Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home.{% endblocktrans %}</small>
+                            </td>
+                            <td class="col-md-6"><span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ slumber_consumption_watt|intcomma|default:'-' }} &nbsp; {% trans "Watt" %}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Lowest electricity consumption read" %}</td>
+                            <td><span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ min_max_consumption_watt.min_watt|intcomma|default:'-' }} &nbsp; {% trans "Watt" %}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Highest electricity consumption read" %}</td>
+                            <td><span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ min_max_consumption_watt.max_watt|intcomma|default:'-' }} &nbsp; {% trans "Watt" %}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endif %}
     
     <div class="row">
@@ -157,7 +188,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
 
-</section><!-- /.content -->
+</section>
 {% endblock %}

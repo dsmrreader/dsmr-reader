@@ -93,24 +93,6 @@
         </div>
     </div>
     {% endif %}
-    
-    {% if slumber_consumption_watt %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Most common electricity consumption{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ slumber_consumption_watt }} &nbsp; {% trans "Watt" %}</span>
-                    &nbsp;
-                    <small>{% blocktrans %}Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home.{% endblocktrans %}</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-
 </section>
 {% endblock %}
 

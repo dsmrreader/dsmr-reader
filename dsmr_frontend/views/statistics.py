@@ -5,6 +5,7 @@ from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.settings import DataloggerSettings
 import dsmr_backend.services
+import dsmr_consumption.services
 
 
 class Statistics(TemplateView):
@@ -27,5 +28,12 @@ class Statistics(TemplateView):
             context_data['energy_prices'] = EnergySupplierPrice.objects.by_date(today)
         except EnergySupplierPrice.DoesNotExist:
             pass
+
+        # Use stats
+        context_data['slumber_consumption_watt'] = dsmr_consumption.services.\
+            calculate_slumber_consumption_watt()
+
+        context_data['min_max_consumption_watt'] = dsmr_consumption.services.\
+            calculate_min_max_consumption_watt()
 
         return context_data
