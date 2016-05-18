@@ -143,6 +143,12 @@ def create_hourly_statistics(hour_start):
     HourStatistics.objects.create(**creation_kwargs)
 
 
+def clear_statistics():
+    """ Clears ALL statistics ever generated. """
+    DayStatistics.objects.all().delete()
+    HourStatistics.objects.all().delete()
+
+
 def electricity_tariff_percentage(start_date):
     """ Returns the total electricity consumption percentage by tariff (high/low tariff). """
     totals = DayStatistics.objects.filter(day__gte=start_date).aggregate(

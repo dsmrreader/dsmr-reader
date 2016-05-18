@@ -241,5 +241,4 @@ def calculate_min_max_consumption_watt():
         if min_max[x]:
             min_max[x] = int(min_max[x] * 1000)
 
-    print(min_max)
     return min_max

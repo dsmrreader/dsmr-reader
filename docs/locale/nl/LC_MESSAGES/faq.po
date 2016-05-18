@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016, Dennis Siemensma
+# This file is distributed under the same license as the DSMR Reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-18 21:05+0200\n"
+"PO-Revision-Date: 2016-05-18 21:07+0100\n"
+"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.2.0\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../../faq.rst:2
+msgid "Frequently Asked Questions (FAQ)"
+msgstr "Veelgestelde vragen (FAQ)"
+
+#: ../../faq.rst:5
+msgid "Feature/bug report"
+msgstr "Verzoek/fout melden"
+
+#: ../../faq.rst:6
+msgid "**How can I propose a feature or report a bug I've found?**"
+msgstr "**Hoe kan ik een verzoek indienen of een fout melden?**"
+
+#: ../../faq.rst:8
+msgid ""
+"`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/new>`_"
+msgstr ""
+"`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/new>`_"
+
+#: ../../faq.rst:11
+msgid "Recalculate prices"
+msgstr "Prijzen opnieuw berekenen"
+
+#: ../../faq.rst:12
+msgid ""
+"**I've adjusted my energy prices but there are no changes! How can I "
+"regenerate them with my new prices?**"
+msgstr ""
+"**Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! "
+"Hoe kan ik de nieuwe prijzen doorvoeren?**"
+
+#: ../../faq.rst:14
+msgid "*You can flush your statistics by executing:*"
+msgstr "*Je kunt je statistieken verwijderen door het volgende uit te voeren:*"
+
+#: ../../faq.rst:16
+msgid "``./manage.py dsmr_stats_clear_statistics --ack-to-delete-my-data``"
+msgstr "``./manage.py dsmr_stats_clear_statistics --ack-to-delete-my-data``"
+
+#: ../../faq.rst:18
+msgid ""
+"*The application will delete all statistics and (slowly) regenerate them in "
+"the background. Just make sure the source data is still there.*"
+msgstr ""
+"*De applicatie verwijdert alle statistics en genereert ze (langzaam) weer op "
+"de achtergrond. Zorg er wel voor dat alle brongegevens intact zijn.*"
