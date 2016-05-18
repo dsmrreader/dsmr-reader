@@ -160,6 +160,27 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
 
+    def test_clear_statistics(self):
+        # Prepare some test data that should be deleted.
+        target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
+        statistics_dict = self._get_statistics_dict(target_date)
+        DayStatistics.objects.create(**statistics_dict)
+
+        HourStatistics.objects.create(
+            hour_start=timezone.now(),
+            electricity1=1,
+            electricity2=0,
+            electricity1_returned=0,
+            electricity2_returned=0,
+        )
+        self.assertTrue(DayStatistics.objects.exists())
+        self.assertTrue(HourStatistics.objects.exists())
+
+        dsmr_stats.services.clear_statistics()
+
+        self.assertFalse(DayStatistics.objects.exists())
+        self.assertFalse(HourStatistics.objects.exists())
+
     @mock.patch('django.core.cache.cache.clear')
     @mock.patch('django.utils.timezone.now')
     def test_analyze_service_clear_cache(self, now_mock, clear_cache_mock):
