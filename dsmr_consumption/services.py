@@ -3,8 +3,7 @@ from decimal import Decimal, ROUND_UP
 import pytz
 
 from django.utils import timezone
-from django.db import connection
-from django.db.models import Avg, Max
+from django.db.models import Avg, Min, Max, Count
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -186,6 +185,12 @@ def day_consumption(day):
     temperature_readings = TemperatureReading.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
+    consumption['lowest_temperature'] = temperature_readings.aggregate(
+        avg_temperature=Min('degrees_celcius'),
+    )['avg_temperature'] or 0
+    consumption['highest_temperature'] = temperature_readings.aggregate(
+        avg_temperature=Max('degrees_celcius'),
+    )['avg_temperature'] or 0
     consumption['average_temperature'] = temperature_readings.aggregate(
         avg_temperature=Avg('degrees_celcius'),
     )['avg_temperature'] or 0
@@ -199,3 +204,41 @@ def round_decimal(decimal_price):
         decimal_price = Decimal(str(decimal_price))
 
     return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
+
+
+def calculate_slumber_consumption_watt():
+    """ Groups all electricity readings to find the most constant consumption. """
+    most_common = ElectricityConsumption.objects.filter(
+        currently_delivered__gt=0
+    ).values('currently_delivered').annotate(
+        currently_delivered_count=Count('currently_delivered')
+    ).order_by('-currently_delivered_count')[:5]
+
+    if not most_common:
+        return
+
+    # We calculate the average among the most common consumption read.
+    count = 0
+    usage = 0
+
+    for item in most_common:
+        count += item['currently_delivered_count']
+        usage += item['currently_delivered_count'] * item['currently_delivered']
+
+    return round(usage / count * 1000)
+
+
+def calculate_min_max_consumption_watt():
+    """ Returns the lowest and highest Wattage consumed. """
+    min_max = ElectricityConsumption.objects.filter(
+        currently_delivered__gt=0
+    ).aggregate(
+        min_watt=Min('currently_delivered'),
+        max_watt=Max('currently_delivered')
+    )
+
+    for x in min_max.keys():
+        if min_max[x]:
+            min_max[x] = int(min_max[x] * 1000)
+
+    return min_max

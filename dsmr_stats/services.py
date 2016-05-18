@@ -3,7 +3,7 @@ import math
 
 from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection
-from django.db.models.aggregates import Avg, Sum
+from django.db.models.aggregates import Avg, Sum, Min, Max
 from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
@@ -106,7 +106,9 @@ def create_daily_statistics(day):
         gas=consumption.get('gas', 0),
         gas_cost=consumption.get('gas_cost', 0),
 
-        average_temperature=consumption.get('average_temperature', 0),
+        lowest_temperature=consumption.get('lowest_temperature'),
+        highest_temperature=consumption.get('highest_temperature'),
+        average_temperature=consumption.get('average_temperature'),
     )
 
 
@@ -139,6 +141,12 @@ def create_hourly_statistics(hour_start):
         creation_kwargs['gas'] = gas_readings[0].currently_delivered
 
     HourStatistics.objects.create(**creation_kwargs)
+
+
+def clear_statistics():
+    """ Clears ALL statistics ever generated. """
+    DayStatistics.objects.all().delete()
+    HourStatistics.objects.all().delete()
 
 
 def electricity_tariff_percentage(start_date):
@@ -204,6 +212,9 @@ def range_statistics(start, end):
         electricity2_returned=Sum('electricity2_returned'),
         gas=Sum('gas'),
         gas_cost=Sum('gas_cost'),
+        temperature_min=Min('lowest_temperature'),
+        temperature_max=Max('highest_temperature'),
+        temperature_avg=Avg('average_temperature'),
     )
 
 

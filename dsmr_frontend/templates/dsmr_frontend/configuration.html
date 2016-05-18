@@ -54,10 +54,10 @@
                             <td>{% model_meta_info datalogger_settings 'com_port' 'help_text' %}</td>
                         </tr>
                     </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -91,14 +91,23 @@
                         </tr>
                         <tr{% if not backup_settings.latest_backup %} class="alert alert-warning"{% endif %}>
                             <td>{% model_meta_info backup_settings 'latest_backup' 'verbose_name' %}</td>
-                            <td>{{ backup_settings.latest_backup|naturaltime|default_if_none:'-' }}</td>
+                            <td>
+                                <p>{{ backup_settings.latest_backup|naturaltime|default_if_none:'-' }}</p>
+                                
+                                <form action="{% url 'frontend:configuration-force-backup' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary" title="{% blocktrans %}This will simply alter the latest backup timestamp displayed above to a week ago.{% endblocktrans %}">
+                                        <i class="fa fa-refresh"></i> &nbsp; <span>{% trans "Schedule new backup now" %}</span>
+                                    </button>
+                                </form>
+                            </td>
                             <td>{% model_meta_info backup_settings 'latest_backup' 'help_text' %}</td>
                         </tr>
                     </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -121,10 +130,10 @@
                             <td>{% model_meta_info consumption_settings 'compactor_grouping_type' 'help_text' %}</td>
                         </tr>
                     </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -147,10 +156,10 @@
                             <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'help_text' %}</td>
                         </tr>
                     </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -178,10 +187,10 @@
                             <td>{% model_meta_info dropbox_settings 'latest_sync' 'help_text' %}</td>
                         </tr>
                     </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -209,9 +218,9 @@
                             <td>{% model_meta_info weather_settings 'buienradar_station' 'help_text' %}</td>
                         </tr>
                     </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-</section><!-- /.content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

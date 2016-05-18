@@ -2,6 +2,20 @@ Changelog
 =========
 
 
+v1.2.0 - 2016-05-18
+^^^^^^^^^^^^^^^^^^^
+- Energy supplier prices does not indicate tariff type (Django admin) (`#126 <https://github.com/dennissiemensma/dsmr-reader/issues/126>`_).
+- Requirements update (`#128 <https://github.com/dennissiemensma/dsmr-reader/issues/128>`_).
+- Force backup (`#123 <https://github.com/dennissiemensma/dsmr-reader/issues/123>`_).
+- Update clean-install.md (`#131 <https://github.com/dennissiemensma/dsmr-reader/issues/131>`_).
+- Improve data export field names (`#132 <https://github.com/dennissiemensma/dsmr-reader/issues/132>`_).
+- Display average temperature in archive (`#122 <https://github.com/dennissiemensma/dsmr-reader/issues/122>`_).
+- Pie charts on trends page overlap their canvas (`#136 <https://github.com/dennissiemensma/dsmr-reader/issues/136>`_).
+- 'Slumber' consumption (`#115 <https://github.com/dennissiemensma/dsmr-reader/issues/115>`_).
+- Show lowest & highest Watt peaks (`#138 <https://github.com/dennissiemensma/dsmr-reader/issues/138>`_).
+- Allow day & hour statistics reset due to changing energy prices (`#95 <https://github.com/dennissiemensma/dsmr-reader/issues/95>`_).
+
+
 v1.1.2 - 2016-05-01
 ^^^^^^^^^^^^^^^^^^^
 - Trends page giving errors (when lacking data) (`#125 <https://github.com/dennissiemensma/dsmr-reader/issues/125>`_).

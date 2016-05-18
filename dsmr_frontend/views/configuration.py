@@ -1,4 +1,7 @@
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
+from django.utils import timezone
 
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
@@ -19,3 +22,13 @@ class Configuration(TemplateView):
         context_data['backup_settings'] = BackupSettings.get_solo()
         context_data['dropbox_settings'] = DropboxSettings.get_solo()
         return context_data
+
+
+class ForceBackup(View):
+    """ Alters the backup settings, forcing the application to create a (new) backup right away. """
+    def post(self, request):
+        backup_settings = BackupSettings.get_solo()
+        backup_settings.latest_backup = timezone.now() - timezone.timedelta(days=7)
+        backup_settings.save()
+
+        return redirect(reverse('frontend:configuration'))

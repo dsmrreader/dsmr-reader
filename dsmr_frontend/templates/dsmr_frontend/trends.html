@@ -29,10 +29,10 @@
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-electricity-consumed-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
     
     {% if capabilities.electricity_returned %}
@@ -44,10 +44,10 @@
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-electricity-returned-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
     
     {% if capabilities.gas %}
@@ -59,42 +59,41 @@
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-gas-consumed-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
 
     {% if capabilities.electricity %}
     <div class="row">
         <div class="col-md-12">
-            <div class="panel">
+            <div class="panel" style="padding-bottom: 24px;">
                 <header class="panel-heading">
                     {% blocktrans %}Electricity tariff ratio (passed week){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <div id="electricity-by-tariff-week-chart-legend"></div>
                     <canvas id="electricity-by-tariff-week-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="panel">
+            <div class="panel" style="padding-bottom: 24px;">
                 <header class="panel-heading">
                     {% blocktrans %}Electricity tariff ratio (passed month){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <div id="electricity-by-tariff-month-chart-legend"></div>
                     <canvas id="electricity-by-tariff-month-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
-
-</section><!-- /.content -->
+</section>
 {% endblock %}
 
 

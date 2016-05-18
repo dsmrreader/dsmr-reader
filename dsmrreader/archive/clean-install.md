@@ -2,7 +2,7 @@
 Only required when you didn't have your RaspberryPi installed at all.
 
 ### Raspbian ###
-Either use the headless version of Raspbian, [netinstall](https://github.com/debian-pi/raspbian-ua-netinst), or the [full Raspbian image](https://www.raspbian.org/RaspbianImages), with graphics stack. You don't need the latter when you intend to only use your decive for DSMR readings.
+Either use the headless version of Raspbian, [netinstall](https://github.com/debian-pi/raspbian-ua-netinst), or the [full Raspbian image](https://www.raspbian.org/RaspbianImages), with graphics stack. You don't need the latter when you intend to only use your device for DSMR readings.
 
 ### Init ###
 Power on RaspberryPi and connect using SSH:

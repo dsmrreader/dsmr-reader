@@ -151,6 +151,79 @@ class TestServices(InterceptStdoutMixin, TestCase):
         rounded = dsmr_consumption.services.round_decimal(decimal_price=Decimal('1.555'))
         self.assertEqual(rounded, Decimal('1.56'))
 
+    def test_calculate_slumber_consumption_watt(self):
+        most_common = dsmr_consumption.services.calculate_slumber_consumption_watt()
+        self.assertIsNone(most_common)
+
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=0.25,
+            currently_returned=0,
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=1),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=0.25,
+            currently_returned=0,
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=2),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=1,
+            currently_returned=0,
+        )
+        most_common = dsmr_consumption.services.calculate_slumber_consumption_watt()
+
+        # Average = 250 + 250 + 1000 / 3 = 500.
+        self.assertEqual(most_common, 500)
+
+    def test_calculate_min_max_consumption_watt(self):
+        min_max = dsmr_consumption.services.calculate_min_max_consumption_watt()
+        self.assertIsNone(min_max['min_watt'])
+        self.assertIsNone(min_max['max_watt'])
+
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=0.25,
+            currently_returned=0,
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=1),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=0.25,
+            currently_returned=0,
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=2),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=6.123,
+            currently_returned=0,
+        )
+        min_max = dsmr_consumption.services.calculate_min_max_consumption_watt()
+
+        self.assertEqual(min_max['min_watt'], 250)
+        self.assertEqual(min_max['max_watt'], 6123)
+
 
 class TestServicesWithoutGas(TestServices):
     fixtures = ['dsmr_consumption/test_dsmrreading_without_gas.json']

@@ -94,9 +94,9 @@
                             <td><span class="badge bg-black">{{ month_statistics.total_cost|default:'-' }}</span></td>
                         </tr>
                     </table>                
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
     </div><!-- /.row -->
     {% endif %}
 
@@ -147,9 +147,9 @@
                             <td><span class="badge bg-black">{{ consumption.total_cost|default:'-' }}</span></td>
                         </tr>
                     </table>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
     </div><!-- /.row -->
     {% endif %}
     
@@ -162,9 +162,9 @@
                 </header>
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
     </div><!-- /.row -->
     {% endif %}
     
@@ -177,9 +177,9 @@
                 </header>
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-returned-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
     </div><!-- /.row -->
     {% endif %}
 
@@ -192,9 +192,9 @@
                 </header>
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="gas-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
     </div><!-- /.row -->
     {% endif %}
     
@@ -207,12 +207,12 @@
                 </header>
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="temperature-chart"></canvas>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
     </div><!-- /.row -->
     {% endif %}
-</section><!-- /.content -->
+</section>
 {% endblock %}
 
 
@@ -329,9 +329,9 @@
                     datasets: [{
                         data: {{ temperature_y|safe }},
                         label: "{% trans 'Temperature' %}",                       
-                        fillColor: "rgba(35,183,229,0.1)",
-                        strokeColor: "rgba(35,183,229,1)",
-                        pointColor: "rgba(35,183,229,1)",
+                        fillColor: "rgba(0,115,183,0.1)",
+                        strokeColor: "rgba(0,115,183,1)",
+                        pointColor: "rgba(0,115,183,1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(150,150,150,1)"
