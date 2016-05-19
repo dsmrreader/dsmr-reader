@@ -22,6 +22,37 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
+                    <a href="{% url 'admin:dsmr_api_apisettings_change' api_settings.pk %}" class="btn btn-primary">
+                    <i class="fa fa-cogs"></i>
+                    </a> &nbsp; {{ api_settings }} 
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th class="col-md-3">{% trans "Setting" %}</th>
+                            <th class="col-md-3">{% trans "Status" %} </th>
+                            <th class="col-md-6">{% trans "Description" %} </th>
+                        </tr>
+                        <tr{% if not api_settings.allow %} class="alert alert-warning"{% endif %}>
+                            <td>{% model_meta_info api_settings 'allow' 'verbose_name' %}</td>
+                            <td><i class="fa fa-{{ api_settings.allow|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td>{% model_meta_info api_settings 'allow' 'help_text' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% model_meta_info api_settings 'auth_key' 'verbose_name' %}</td>
+                            <td>{{ api_settings.auth_key|truncatechars:24 }}</td>
+                            <td>{% model_meta_info api_settings 'auth_key' 'help_text' %}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
                     <a href="{% url 'admin:dsmr_datalogger_dataloggersettings_change' datalogger_settings.pk %}" class="btn {% if datalogger_settings.track %}btn-primary{% else %}btn-danger{% endif %}">
                     <i class="fa fa-cogs"></i>
                     </a> &nbsp; {{ datalogger_settings }} 

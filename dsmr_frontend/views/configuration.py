@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils import timezone
 
+from dsmr_api.models import APISettings
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
@@ -15,6 +16,7 @@ class Configuration(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Configuration, self).get_context_data(**kwargs)
+        context_data['api_settings'] = APISettings.get_solo()
         context_data['consumption_settings'] = ConsumptionSettings.get_solo()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()

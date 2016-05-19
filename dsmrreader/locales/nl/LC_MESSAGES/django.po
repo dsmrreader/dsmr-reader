@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 21:10+0200\n"
-"PO-Revision-Date: 2016-05-18 21:10+0100\n"
+"POT-Creation-Date: 2016-05-19 22:24+0200\n"
+"PO-Revision-Date: 2016-05-19 21:53+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -17,6 +17,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "API"
+msgstr "API"
+
+msgid "Allow API calls"
+msgstr "Sta API-calls toe"
+
+msgid "Whether the API is available for use."
+msgstr "Geeft aan of de API beschikbaar is voor gebruik."
+
+msgid "Auth Key"
+msgstr "Authorisatiesleutel"
+
+msgid "The auth key used to authenticate for this API."
+msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
+
+msgid "API configuration"
+msgstr "API-configuratie"
+
+msgid "API is disabled"
+msgstr "API is uitgeschakeld"
+
+msgid "Invalid auth key"
+msgstr "Ongeldige autorisatiesleutel"
+
+msgid "Invalid data"
+msgstr "Ongeldige gegevens"
+
+msgid "Failed to parse telegram"
+msgstr "Inlezen telegram mislukt"
 
 msgid "Backend"
 msgstr "Achterkant"
