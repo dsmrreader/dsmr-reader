@@ -8,12 +8,13 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_backup.models.settings import BackupSettings
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
+from dsmr_backup.models.settings import BackupSettings
+from dsmr_api.models import APISettings
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 from dsmr_frontend.forms import ExportAsCsvForm
@@ -293,6 +294,12 @@ class TestViews(TestCase):
         response = self.client.get(view_url)
 
         self.assertEqual(response.status_code, 200)
+        self.assertIn('api_settings', response.context)
+        self.assertIsInstance(response.context['api_settings'], APISettings)
+
+        self.assertIn('backup_settings', response.context)
+        self.assertIsInstance(response.context['backup_settings'], BackupSettings)
+
         self.assertIn('consumption_settings', response.context)
         self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)
 

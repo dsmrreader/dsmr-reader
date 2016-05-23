@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'solo.apps.SoloAppConfig',
 
     # Local project apps.
+    'dsmr_api.apps.AppConfig',
     'dsmr_datalogger.apps.AppConfig',
     'dsmr_consumption.apps.AppConfig',
     'dsmr_weather.apps.AppConfig',
