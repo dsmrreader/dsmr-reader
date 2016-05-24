@@ -1,4 +1,5 @@
 Django==1.8.12
+django-colorfield==0.1.10
 django-flat-theme==1.1.3
 django-solo==1.1.2
 dropbox==6.2

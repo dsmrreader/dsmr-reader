@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-19 22:24+0200\n"
-"PO-Revision-Date: 2016-05-19 21:53+0100\n"
+"POT-Creation-Date: 2016-05-24 23:22+0200\n"
+"PO-Revision-Date: 2016-05-24 22:54+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -299,6 +299,42 @@ msgstr "Keer dashboard-grafieken om"
 
 msgid "Whether graphs are rendered with an reversed X-axis"
 msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
+
+msgid "Electricity delivered color"
+msgstr "Kleur elektriciteitsverbruik"
+
+msgid "Graph color for electricity delivered (default + high tariff)"
+msgstr "Grafiekkleur voor elektriciteitsverbruik (standaard + hoogtarief)"
+
+msgid "Electricity delivered color (alternative)"
+msgstr "Kleur elektriciteitsverbruik (alternatief)"
+
+msgid "Graph color for electricity delivered (low tariff)"
+msgstr "Grafiekkleur voor elektriciteitsverbruik (laagtarief)"
+
+msgid "Electricity returned color"
+msgstr "Kleur teruglevering elektriciteit"
+
+msgid "Graph color for electricity returned (default + high tariff)"
+msgstr "Grafiekkleur voor elektriciteit teruglevering (standaard + hoogtarief)"
+
+msgid "Electricity returned color (alternative)"
+msgstr "Kleur teruglevering elektriciteit (alternatief)"
+
+msgid "Graph color for electricity returned (low tariff)"
+msgstr "Grafiekkleur voor elektriciteit teruglevering (laagtarief)"
+
+msgid "Gas delivered color"
+msgstr "Kleur gasverbruik"
+
+msgid "Graph color for gas delivered"
+msgstr "Grafiekkleur voor gasverbruik"
+
+msgid "Temperature color"
+msgstr "Temperatuurkleur"
+
+msgid "Graph color for temperatures read"
+msgstr "Grafiekkleur voor temperatuurmetingen"
 
 msgid "Frontend configuration"
 msgstr "Weergaveconfiguratie"
@@ -883,14 +919,17 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Electricity 2 delivered color"
+#~ msgstr "Kleur verbruik elektriciteit (2)"
+
+#~ msgid "Electricity 2 returned color"
+#~ msgstr "Kleur teruglevering elektriciteit (2)"
+
 #~ msgid "DSMR reader"
 #~ msgstr "DSMR-reader"
 
 #~ msgid "Electricity 1 price"
 #~ msgstr "Elektriciteitstarief 1 (laag)"
-
-#~ msgid "Electricity 2 price"
-#~ msgstr "Elektriciteitstarief 2 (piek)"
 
 #~ msgid "View current release"
 #~ msgstr "Bekijk huidige versie"
@@ -964,9 +1003,6 @@ msgstr "Engels"
 #~ msgid "Electricity 1 cost (low tariff)"
 #~ msgstr "Elektriciteit 1 kosten (daltarief)"
 
-#~ msgid "Electricity 2 cost (high tariff)"
-#~ msgstr "Elektriciteit 2 kosten (piektarief)"
-
 #~ msgid "Gas cost"
 #~ msgstr "Gaskosten"
 
@@ -1014,9 +1050,6 @@ msgstr "Engels"
 
 #~ msgid "Recent"
 #~ msgstr "Recent"
-
-#~ msgid "delivered"
-#~ msgstr "geleverd"
 
 #~ msgid "returned"
 #~ msgstr "teruggeleverd"

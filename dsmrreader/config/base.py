@@ -51,6 +51,7 @@ INSTALLED_APPS = (
 
     # Third party apps/plugins.
     'solo.apps.SoloAppConfig',
+    'colorfield',
 
     # Local project apps.
     'dsmr_api.apps.AppConfig',

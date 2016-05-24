@@ -1,6 +1,7 @@
 {% extends "dsmr_frontend/base.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load hex_to_rgb %}
 
 {% block title %}{% trans "Archive" %}{% endblock %}
 {% block header %}{% trans "Archive" %} &nbsp; <i class="fa fa-history"></i>{% endblock %}
@@ -52,7 +53,7 @@
     
     <div class="row" id="electricity-chart-holder" style="display: none;">
         <div class="col-md-12">
-            <div class="panel">
+            <div class="panel" style="padding-bottom: 24px;">
                 <header class="panel-heading">
                     {% blocktrans %}Electricity usage{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
@@ -66,7 +67,7 @@
     
     <div class="row" id="electricity-returned-chart-holder" style="display: none;">
         <div class="col-md-12">
-            <div class="panel">
+            <div class="panel" style="padding-bottom: 24px;">
                 <header class="panel-heading">
                     {% blocktrans %}Electricity returned{% endblocktrans %} {% trans "(in kWh)" %}
                 </header>
@@ -263,18 +264,18 @@
                     datasets: [{
                         data: electricity1,
                         label: "{% trans 'Electricity 1 (low tariff)' %}",                        
-                        fillColor: "rgba(160,0,0,0.1)",
-                        strokeColor: "rgba(160,0,0,1)",
-                        pointColor: "rgba(160,0,0,1)",
+                        fillColor: "rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(255,0,0,1)"
                     }, {
                         data: electricity2,
                         label: "{% trans 'Electricity 2 (high tariff)' %}",                        
-                        fillColor: "rgba(255,0,0,0.1)",
-                        strokeColor: "rgba(255,0,0,1)",
-                        pointColor: "rgba(255,0,0,1)",
+                        fillColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(255,0,0,1)"
@@ -300,18 +301,18 @@
                     datasets: [{
                         data: electricity1_returned,
                         label: "{% trans 'Electricity 1 returned (low tariff)' %}",                       
-                        fillColor: "rgba(200,200,100,0.1)",
-                        strokeColor: "rgba(200,200,100,1)",
-                        pointColor: "rgba(200,200,100,1)",
+                        fillColor: "rgba({{frontend_settings.electricity_returned_alternate_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.electricity_returned_alternate_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.electricity_returned_alternate_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(200,200,100,1)"
                     }, {
                         data: electricity2_returned,
                         label: "{% trans 'Electricity 1 returned (high tariff)' %}",                       
-                        fillColor: "rgba(39,194,76,0.1)",
-                        strokeColor: "rgba(39,194,76,1)",
-                        pointColor: "rgba(39,194,76,1)",
+                        fillColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(39,194,76,1)"
@@ -337,9 +338,9 @@
                     datasets: [{
                         data: gas,
                         label: "{% trans 'Gas' %}",                       
-                        fillColor: "rgba(250,133,0,0.1)",
-                        strokeColor: "rgba(250,133,0,1)",
-                        pointColor: "rgba(250,133,0,1)",
+                        fillColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(150,150,150,1)"

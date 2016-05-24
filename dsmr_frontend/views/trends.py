@@ -6,6 +6,7 @@ from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
+from dsmr_frontend.models.settings import FrontendSettings
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
@@ -19,6 +20,7 @@ class Trends(TemplateView):
 
         context_data = super(Trends, self).get_context_data(**kwargs)
         context_data['capabilities'] = capabilities
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         context_data['day_statistics_count'] = DayStatistics.objects.count()
         context_data['hour_statistics_count'] = HourStatistics.objects.count()

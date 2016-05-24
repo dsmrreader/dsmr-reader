@@ -9,6 +9,7 @@ from django.utils import timezone, formats
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
 import dsmr_backend.services
 import dsmr_stats.services
@@ -20,6 +21,7 @@ class Archive(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(Archive, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         day_statistics = DayStatistics.objects.all().order_by('pk')
 

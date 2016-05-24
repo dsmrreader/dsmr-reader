@@ -98,4 +98,10 @@ This allows you to alter your backup settings:
     :target: _static/screenshots/backupsettings.png
     :alt: Backup settings
 
+Pick your own colors for the graphs displayed:
+
+.. image:: _static/screenshots/admin_graph_colors.png
+    :target: _static/screenshots/admin_graph_colors.png
+    :alt: Backup settings
+
 There are several additional backend pages for the other configuration options as well. 
