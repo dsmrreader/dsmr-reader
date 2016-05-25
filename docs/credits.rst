@@ -13,6 +13,8 @@ Software
 
 - `Django Solo <https://github.com/lazybird/django-solo>`_
 
+- `Django Colorfield <https://github.com/jaredly/django-colorfield>`_
+
 - `Supervisor <http://supervisord.org/>`_
 
 - `MySQL <https://www.mysql.com/>`_

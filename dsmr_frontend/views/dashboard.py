@@ -22,6 +22,7 @@ class Dashboard(TemplateView):
         frontend_settings = FrontendSettings.get_solo()
         context_data = super(Dashboard, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['frontend_settings'] = frontend_settings
 
         electricity = ElectricityConsumption.objects.all().order_by('read_at')
         gas = GasConsumption.objects.all().order_by('read_at')

@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load humanize %}
 {% load i18n %} 
+{% load hex_to_rgb %}
 
 {% block title %}{% trans "Dashboard" %}{% endblock %}
 {% block header %}{% trans "Dashboard" %} &nbsp; <i class="fa fa-dashboard"></i>{% endblock %}
@@ -260,9 +261,9 @@
                     datasets: [{
                         data: {{ electricity_y|safe }},
                         label: "{% trans 'Electricity' %}",                     
-                        fillColor: "rgba(255,0,0,0.1)",
-                        strokeColor: "rgba(255,0,0,1)",
-                        pointColor: "rgba(255,0,0,1)",
+                        fillColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(255,0,0,1)"
@@ -283,9 +284,9 @@
                      datasets: [{
                          data: {{ electricity_returned_y|safe }},
                          label: "{% trans 'Electricity returned' %}",                     
-                         fillColor: "rgba(0,255,0,0.1)",
-                         strokeColor: "rgba(39,194,76,1)",
-                         pointColor: "rgba(39,194,76,1)",
+                         fillColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
+                         strokeColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                         pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
                          pointStrokeColor: "#fff",
                          pointHighlightFill: "#fff",
                          pointHighlightStroke: "rgba(39,194,76,1)"
@@ -306,9 +307,9 @@
                     datasets: [{
                         data: {{ gas_y|safe }},
                         label: "{% trans 'Gas' %}",                     
-                        fillColor: "rgba(250,133,0,0.1)",
-                        strokeColor: "rgba(250,133,0,1)",
-                        pointColor: "rgba(250,133,0,1)",
+                        fillColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(150,150,150,1)"
@@ -329,9 +330,9 @@
                     datasets: [{
                         data: {{ temperature_y|safe }},
                         label: "{% trans 'Temperature' %}",                       
-                        fillColor: "rgba(0,115,183,0.1)",
-                        strokeColor: "rgba(0,115,183,1)",
-                        pointColor: "rgba(0,115,183,1)",
+                        fillColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},0.1)",
+                        strokeColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(150,150,150,1)"
