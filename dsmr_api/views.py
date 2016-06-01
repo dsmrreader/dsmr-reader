@@ -27,9 +27,7 @@ class DataloggerDsmrReading(View):
             return HttpResponseBadRequest(_('Invalid data'))
 
         try:
-            dsmr_reading = dsmr_datalogger.services.telegram_to_reading(
-                data=post_form.cleaned_data['telegram']
-            )
+            dsmr_reading = dsmr_datalogger.services.telegram_to_reading(data=post_form.cleaned_data['telegram'])
         except:
             dsmr_reading = None
 

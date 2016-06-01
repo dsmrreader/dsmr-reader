@@ -74,9 +74,7 @@ class DsmrReading(models.Model):
         verbose_name = _('DSMR reading')
 
     def __str__(self):
-        return '{}: {} kWh'.format(
-            self.id, self.timestamp, self.electricity_currently_delivered
-        )
+        return '{}: {} kWh'.format(self.id, self.timestamp, self.electricity_currently_delivered)
 
 
 class MeterStatistics(SingletonModel):

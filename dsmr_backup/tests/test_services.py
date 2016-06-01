@@ -31,9 +31,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_check_initial(self, now_mock, create_backup_mock):
         """ Test whether a initial backup is created immediately. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1, hour=18)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=18))
         self.assertFalse(create_backup_mock.called)
 
         # Should create initial backup.
@@ -44,9 +42,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_check_interval_restriction(self, now_mock, create_backup_mock):
         """ Test whether backups are restricted by one backup per day. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1, hour=1, minute=5)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=1, minute=5))
 
         # Fake latest backup.
         now = timezone.localtime(timezone.now())
@@ -73,9 +69,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_check_backup_time_restriction(self, now_mock, create_backup_mock):
         """ Test whether backups are restricted by user's backup time preference. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1, hour=1, minute=5)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=1, minute=5))
 
         now = timezone.localtime(timezone.now())
         backup_settings = BackupSettings.get_solo()
@@ -166,9 +160,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
     @mock.patch('django.utils.timezone.now')
     def test_sync(self, now_mock, upload_chunked_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
 
         old_latest_sync = timezone.now() - timezone.timedelta(weeks=1)
         dropbox_settings = DropboxSettings.get_solo()
@@ -186,9 +178,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_sync_latest_sync(self, now_mock, get_backup_directory_mock):
         """ Test whether syncs are limited to intervals. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
 
         dropbox_settings = DropboxSettings.get_solo()
         dropbox_settings.latest_sync = timezone.now() + timezone.timedelta(minutes=1)
@@ -204,9 +194,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_sync_last_modified(self, now_mock, upload_chunked_mock, get_backup_directory_mock):
         """ Test whether syncs are skipped when file was not modified. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
 
         dropbox_settings = DropboxSettings.get_solo()
         dropbox_settings.latest_sync = timezone.now() - timezone.timedelta(weeks=1)

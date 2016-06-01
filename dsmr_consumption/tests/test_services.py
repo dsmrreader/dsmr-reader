@@ -86,9 +86,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         with self.assertRaises(LookupError):
             dsmr_consumption.services.day_consumption(timezone.now() + timezone.timedelta(weeks=1))
 
-        now = timezone.make_aware(
-            timezone.datetime(2016, 1, 1, hour=13)
-        )
+        now = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=13))
         ElectricityConsumption.objects.create(
             read_at=now,  # Now.
             delivered_1=1,

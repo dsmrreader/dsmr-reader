@@ -20,12 +20,8 @@ class EnergySupplierPrice(models.Model):
     """
     objects = EnergySupplierPriceManager()
 
-    start = models.DateField(
-        verbose_name=_('Start'), help_text=_('Contract start')
-    )
-    end = models.DateField(
-        null=True, blank=True, verbose_name=_('End'), help_text=_('Contract end')
-    )
+    start = models.DateField(verbose_name=_('Start'), help_text=_('Contract start'))
+    end = models.DateField(null=True, blank=True, verbose_name=_('End'), help_text=_('Contract end'))
     description = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('Description'),
         help_text=_('For your own reference, i.e. the name of your supplier')
@@ -36,9 +32,7 @@ class EnergySupplierPrice(models.Model):
     electricity_2_price = models.DecimalField(
         max_digits=11, decimal_places=5, default=0, verbose_name=_('Electricity 2 price (high tariff)')
     )
-    gas_price = models.DecimalField(
-        max_digits=11, decimal_places=5, default=0, verbose_name=_('Gas price')
-    )
+    gas_price = models.DecimalField(max_digits=11, decimal_places=5, default=0, verbose_name=_('Gas price'))
 
     def __str__(self):
         return self.description or ugettext('Energy Supplier')

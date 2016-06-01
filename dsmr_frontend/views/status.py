@@ -27,14 +27,10 @@ class Status(TemplateView):
 
         if context_data['capabilities']['electricity']:
             context_data['latest_ec'] = ElectricityConsumption.objects.all().order_by('-pk')[0]
-            context_data['delta_since_latest_ec'] = (
-                timezone.now() - context_data['latest_ec'].read_at
-            ).seconds
+            context_data['delta_since_latest_ec'] = (timezone.now() - context_data['latest_ec'].read_at).seconds
 
         if context_data['capabilities']['gas']:
             context_data['latest_gc'] = GasConsumption.objects.all().order_by('-pk')[0]
-            context_data['delta_since_latest_gc'] = (
-                timezone.now() - context_data['latest_gc'].read_at
-            ).seconds
+            context_data['delta_since_latest_gc'] = (timezone.now() - context_data['latest_gc'].read_at).seconds
 
         return context_data
