@@ -67,9 +67,7 @@ class InfiniteManagementCommandMixin(object):
         sys.exit(0)
 
     def run(self, *args, **options):
-        raise NotImplementedError(
-            'Subclasses of InfiniteManagementCommandMixin must provide a run() method'
-        )
+        raise NotImplementedError('Subclasses of InfiniteManagementCommandMixin must provide a run() method')
 
     def _signal_handler(self, signum, frame):
         # If we get called, then we must gracefully exit.

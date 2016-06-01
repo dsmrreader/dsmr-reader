@@ -20,9 +20,7 @@ class TestRegression(TestCase):
         self.assertEqual(ElectricityConsumption.objects.count(), 1)
         self.assertEqual(GasConsumption.objects.count(), 100)
 
-        response = self.client.get(
-            reverse('frontend:dashboard')
-        )
+        response = self.client.get(reverse('frontend:dashboard'))
         self.assertIn('gas_x', response.context)
 
         # This will fail when the fix has been reverted.

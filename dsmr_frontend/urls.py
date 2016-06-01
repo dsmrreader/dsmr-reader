@@ -17,22 +17,10 @@ urlpatterns = [
     # Public views.
     url(r'^$', Dashboard.as_view(), name='dashboard'),
     url(r'^archive$', Archive.as_view(), name='archive'),
-    url(
-        r'^archive/xhr/summary$',
-        ArchiveXhrSummary.as_view(),
-        name='archive-xhr-summary'
-    ),
-    url(
-        r'^archive/xhr/graphs$',
-        ArchiveXhrGraphs.as_view(),
-        name='archive-xhr-graphs'
-    ),
+    url(r'^archive/xhr/summary$', ArchiveXhrSummary.as_view(), name='archive-xhr-summary'),
+    url(r'^archive/xhr/graphs$', ArchiveXhrGraphs.as_view(), name='archive-xhr-graphs'),
     url(r'^statistics$', Statistics.as_view(), name='statistics'),
-    url(
-        r'^trends$',
-        cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()),
-        name='trends'
-    ),
+    url(r'^trends$', cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()), name='trends'),
     url(r'^compare$', Compare.as_view(), name='compare'),
 
     # Maintainance view.
@@ -43,9 +31,5 @@ urlpatterns = [
     url(r'^export/csv$', login_required(ExportAsCsv.as_view()), name='export-as-csv'),
 
     url(r'^configuration$', login_required(Configuration.as_view()), name='configuration'),
-    url(
-        r'^configuration/force-backup$',
-        login_required(ForceBackup.as_view()),
-        name='configuration-force-backup'
-    ),
+    url(r'^configuration/force-backup$', login_required(ForceBackup.as_view()), name='configuration-force-backup')
 ]

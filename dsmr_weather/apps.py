@@ -28,6 +28,4 @@ class AppConfig(AppConfig):
         if raw or sender.__name__ == 'Migration':
             return
 
-        print(sender.__name__, kwargs)
-
         dsmr_weather.services.read_weather()

@@ -61,10 +61,9 @@ def analyze():
     if consumption_date == now.date():
         return
 
-    # Do not create status until we've passed the next day for over 30 minutes. Required due to
-    # somewhat delayed gas update by meters.
-    if dsmr_backend.services.get_capabilities(capability='gas') \
-            and now.time() < time(hour=1, minute=15):
+    # Do not create status until we've passed the next day for over 30 minutes. Required due to omewhat delayed gas
+    # update by meters.
+    if dsmr_backend.services.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
         # Skip for a moment.
         return
 
@@ -76,8 +75,7 @@ def analyze():
     ))
 
     with transaction.atomic():
-        # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly
-        # anyway.
+        # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly anyway.
         create_daily_statistics(day=consumption_date)
 
         for current_hour in range(0, 24 + 1):  # Current day + midnight of next day.

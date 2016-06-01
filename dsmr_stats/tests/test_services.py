@@ -37,9 +37,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(HourStatistics.objects.exists())
 
         # This should delay statistics generation. Because day has not yet passed.
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 12, hour=1, minute=5)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=1, minute=5))
         dsmr_stats.services.analyze()
 
         if dsmr_backend.services.get_capabilities(capability='gas'):
@@ -50,9 +48,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(HourStatistics.objects.count(), 0)
 
         # Still too soon.
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 13, hour=1, minute=5)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=1, minute=5))
         dsmr_stats.services.analyze()
 
         if dsmr_backend.services.get_capabilities(capability='gas'):
@@ -93,9 +89,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(HourStatistics.objects.exists())
 
     def test_create_hourly_statistics_integrity(self):
-        day_start = timezone.make_aware(
-            timezone.datetime(2015, 12, 13, hour=0)
-        )
+        day_start = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=0))
         ec_kwargs = {
             'delivered_1': 0,
             'returned_1': 0,
@@ -121,9 +115,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_analyze_service_skip_current_day(self, now_mock):
         """ Tests whether analysis postpones current day. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
 
         # Drop fixtures and create data of today.
         ElectricityConsumption.objects.all().delete()
@@ -184,9 +176,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.core.cache.cache.clear')
     @mock.patch('django.utils.timezone.now')
     def test_analyze_service_clear_cache(self, now_mock, clear_cache_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1, hour=2)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=2))
         dsmr_stats.services.analyze()
         self.assertTrue(clear_cache_mock.called)
 

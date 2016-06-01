@@ -57,9 +57,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_reading_values(self, now_mock):
         """ Test whether dsmr_datalogger reads the correct values. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 4, 10, hour=14, minute=30, second=15)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 4, 10, hour=14, minute=30, second=15))
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())

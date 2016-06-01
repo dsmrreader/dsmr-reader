@@ -46,9 +46,7 @@ class Trends(TemplateView):
 
         for current in average_consumption_by_hour:
             graph_data['x_hours'].append('{}:00'.format(int(current['hour_start'])))
-            current['avg_electricity'] = (
-                current['avg_electricity1'] + current['avg_electricity2']
-            ) / 2
+            current['avg_electricity'] = (current['avg_electricity1'] + current['avg_electricity2']) / 2
 
             graph_data['avg_electricity_consumed'].append(
                 float(dsmr_consumption.services.round_decimal(current['avg_electricity']))
