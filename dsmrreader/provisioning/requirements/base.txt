@@ -1,9 +1,9 @@
-Django==1.8.12
+Django==1.8.13
 django-colorfield==0.1.10
 django-flat-theme==1.1.3
 django-solo==1.1.2
-dropbox==6.2
-gunicorn==19.4.5
-pyserial==3.0.1
+dropbox==6.5
+gunicorn==19.6
+pyserial==3.1.1
 python-dateutil==2.5.3
 pytz==2016.4
