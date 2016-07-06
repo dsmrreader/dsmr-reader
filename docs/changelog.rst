@@ -8,6 +8,7 @@ v1.3.0 - 2016-??-??
 - Colors for charts (`#137 <https://github.com/dennissiemensma/dsmr-reader/issues/137>`_).
 - Data export: Mindergas.nl (`#10 <https://github.com/dennissiemensma/dsmr-reader/issues/10>`_).
 - Requirement upgrade (`#143 <https://github.com/dennissiemensma/dsmr-reader/issues/143>`_).
+- Installation wizard for first time use (`#139 <https://github.com/dennissiemensma/dsmr-reader/issues/139>`_).
 
 
 v1.2.0 - 2016-05-18
