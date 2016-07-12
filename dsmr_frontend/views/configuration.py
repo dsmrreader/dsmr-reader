@@ -9,6 +9,7 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
+from dsmr_mindergas.models.settings import MinderGasSettings
 
 
 class Configuration(TemplateView):
@@ -23,6 +24,7 @@ class Configuration(TemplateView):
         context_data['weather_settings'] = WeatherSettings.get_solo()
         context_data['backup_settings'] = BackupSettings.get_solo()
         context_data['dropbox_settings'] = DropboxSettings.get_solo()
+        context_data['mindergas_settings'] = MinderGasSettings.get_solo()
         return context_data
 
 

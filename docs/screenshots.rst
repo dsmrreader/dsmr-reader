@@ -104,4 +104,10 @@ Pick your own colors for the graphs displayed:
     :target: _static/screenshots/admin_graph_colors.png
     :alt: Backup settings
 
+The application supports the daily export of your gas meter positions (if any) to your personal mindergas.nl account.
+
+.. image:: _static/screenshots/mindergas_admin.png
+    :target: _static/screenshots/mindergas_admin.png
+    :alt: Mindergas settings
+
 There are several additional backend pages for the other configuration options as well. 
