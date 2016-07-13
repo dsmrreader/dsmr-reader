@@ -1,5 +1,8 @@
 import struct
 
+from django.utils import translation
+from django.utils.translation import ugettext as _
+
 
 def hex_color_to_rgb(hex_color):
     """
@@ -8,3 +11,15 @@ def hex_color_to_rgb(hex_color):
     """
     hex_color = hex_color.replace('#', '')
     return struct.unpack('BBB', bytes.fromhex(hex_color))
+
+
+def get_translated_string(text, language='nl'):
+    """ Forces translation of a string in a language. """
+    # Credits to: http://www.technomancy.org/python/django-i18n-manually-turn-on-a-language/
+    old_lang = translation.get_language()
+
+    translation.activate(language)
+    translated_text = _(text)
+    translation.activate(old_lang)
+
+    return translated_text

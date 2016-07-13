@@ -7,7 +7,7 @@ Dropbox: Automated backup sync
 
 Make sure you have a Dropbox-account or sign up for one. 
 Now go to `Dropbox Apps <https://www.dropbox.com/developers/apps>`_ and click **"Create app"** in top right corner.
-  
+
 .. image:: _static/faq/dropbox_apps_overview.png
     :target: _static/faq/dropbox_apps_overview.png
     :alt: Dropbox Apps
