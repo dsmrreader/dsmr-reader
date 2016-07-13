@@ -7,6 +7,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_frontend.models.message import Notification
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
@@ -23,6 +24,7 @@ class Dashboard(TemplateView):
         context_data = super(Dashboard, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['frontend_settings'] = frontend_settings
+        context_data['notifications'] = Notification.objects.unread()
 
         electricity = ElectricityConsumption.objects.all().order_by('read_at')
         gas = GasConsumption.objects.all().order_by('read_at')

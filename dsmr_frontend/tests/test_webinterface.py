@@ -14,6 +14,7 @@ from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings
+from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_api.models import APISettings
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
@@ -297,6 +298,9 @@ class TestViews(TestCase):
 
         self.assertIn('weather_settings', response.context)
         self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
+
+        self.assertIn('mindergas_settings', response.context)
+        self.assertIsInstance(response.context['mindergas_settings'], MinderGasSettings)
 
     @mock.patch('django.utils.timezone.now')
     def test_configuration_force_backup(self, now_mock):

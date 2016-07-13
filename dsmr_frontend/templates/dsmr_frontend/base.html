@@ -8,15 +8,10 @@
         <title>{% block title %}{% endblock %} | DSMR Reader</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         {% block stylesheets %}
-        <!-- bootstrap 3.0.2 -->
         <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-        <!-- font Awesome -->
         <link href="{% static 'dsmr_frontend/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
-        <!-- Ionicons -->
         <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}" rel="stylesheet" type="text/css" />
-        <!-- google font -->
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}" rel='stylesheet' type='text/css'>
-        <!-- Theme style -->
         <link href="{% static 'dsmr_frontend/css/style.css' %}" rel="stylesheet" type="text/css" />
         {% endblock %}
         
@@ -119,6 +114,14 @@
 				                <i class="fa fa-cogs"></i> <span>{% trans "Configuration" %} &nbsp; <i class="fa fa-lock" title="{% trans 'Authentication required' %}"></i></span>
 				            </a>
 			            </li>
+                        <li>
+                            &nbsp;
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:docs' %}" target="_blank">
+                                <i class="fa fa-question"></i> <span>{% trans "Documentation" %}</span>
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
