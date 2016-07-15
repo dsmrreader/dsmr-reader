@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+v1.4.0 - 2016-xx-xx
+^^^^^^^^^^^^^^^^^^^
+- 
+
+
 v1.3.0 - 2016-07-15
 ^^^^^^^^^^^^^^^^^^^
 - API endpoint for datalogger (`#140 <https://github.com/dennissiemensma/dsmr-reader/issues/140>`_).
