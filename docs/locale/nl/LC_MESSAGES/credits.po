@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 21:04+0200\n"
+"POT-Creation-Date: 2016-07-12 22:40+0200\n"
 "PO-Revision-Date: 2016-04-07 20:22+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -55,22 +55,27 @@ msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
 msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
 
 #: ../../credits.rst:16
+#, fuzzy
+msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
+msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
+
+#: ../../credits.rst:18
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr "`Supervisor <http://supervisord.org/>`_"
 
-#: ../../credits.rst:18
+#: ../../credits.rst:20
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr "`MySQL <https://www.mysql.com/>`_"
 
-#: ../../credits.rst:20
+#: ../../credits.rst:22
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr "`MariaDB <https://mariadb.org/>`_"
 
-#: ../../credits.rst:22
+#: ../../credits.rst:24
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
-#: ../../credits.rst:24
+#: ../../credits.rst:26
 msgid ""
 "`Director Responsive Admin <http://web-apps.ninja/director-free-"
 "responsive-admin-template/>`_"
@@ -78,45 +83,51 @@ msgstr ""
 "`Director Responsive Admin <http://web-apps.ninja/director-free-"
 "responsive-admin-template/>`_"
 
-#: ../../credits.rst:26
+#: ../../credits.rst:28
 msgid "`Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 msgstr "`Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
-#: ../../credits.rst:28
+#: ../../credits.rst:30
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
-#: ../../credits.rst:30
+#: ../../credits.rst:32
 msgid "`Github <https://github.com/>`_"
 msgstr "`Github <https://github.com/>`_"
 
-#: ../../credits.rst:32
+#: ../../credits.rst:34
 msgid "`TravisCI <https://travis-ci.org>`_"
 msgstr "`TravisCI <https://travis-ci.org>`_"
 
-#: ../../credits.rst:34
+#: ../../credits.rst:36
 msgid "`Codecov <https://codecov.io>`_"
 msgstr "`Codecov <https://codecov.io>`_"
 
-#: ../../credits.rst:36
+#: ../../credits.rst:38
 msgid "`Read The Docs <https://readthedocs.org/>`_"
 msgstr "`Read The Docs <https://readthedocs.org/>`_"
 
-#: ../../credits.rst:38
+#: ../../credits.rst:40
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
-#: ../../credits.rst:40
+#: ../../credits.rst:42
 msgid ""
 "`Full Page Screen Capture <https://chrome.google.com/webstore/detail"
 "/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr ""
 
 #: ../../credits.rst:44
+msgid ""
+"`Twitter Bootstrap Wizard <https://github.com/VinceG/twitter-bootstrap-"
+"wizard>`_"
+msgstr ""
+
+#: ../../credits.rst:48
 msgid "Testers & contributors"
 msgstr "Testers & mensen met bijdrage"
 
-#: ../../credits.rst:46
+#: ../../credits.rst:50
 msgid ""
 "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github "
 "profile <https://github.com/jeroenpeters1986>`_)"
@@ -124,7 +135,7 @@ msgstr ""
 "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github "
 "profile <https://github.com/jeroenpeters1986>`_)"
 
-#: ../../credits.rst:47
+#: ../../credits.rst:51
 msgid ""
 "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github"
 " profile <https://github.com/danielterhorst>`_)"
@@ -132,7 +143,7 @@ msgstr ""
 "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github"
 " profile <https://github.com/danielterhorst>`_)"
 
-#: ../../credits.rst:48
+#: ../../credits.rst:52
 #, fuzzy
 msgid ""
 "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
@@ -141,32 +152,32 @@ msgstr ""
 "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github "
 "profile <https://github.com/jeroenpeters1986>`_)"
 
-#: ../../credits.rst:49
+#: ../../credits.rst:53
 #, fuzzy
 msgid "\"WatskeBart\" (`Github profile <https://github.com/WatskeBart>`_)"
 msgstr "`Github <https://github.com/>`_"
 
-#: ../../credits.rst:50
+#: ../../credits.rst:54
 msgid "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
 msgstr "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
 
-#: ../../credits.rst:51
+#: ../../credits.rst:55
 msgid "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
 msgstr "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
 
-#: ../../credits.rst:55
+#: ../../credits.rst:59
 msgid "DSMR help"
 msgstr "DSMR hulp"
 
-#: ../../credits.rst:57
+#: ../../credits.rst:61
 msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 msgstr "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 
-#: ../../credits.rst:59
+#: ../../credits.rst:63
 msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 msgstr "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 
-#: ../../credits.rst:61
+#: ../../credits.rst:65
 msgid ""
 "`Joost van der Linde "
 "<https://sites.google.com/site/nta8130p1smartmeter/home>`_"
@@ -174,7 +185,7 @@ msgstr ""
 "`Joost van der Linde "
 "<https://sites.google.com/site/nta8130p1smartmeter/home>`_"
 
-#: ../../credits.rst:63
+#: ../../credits.rst:67
 msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
 msgstr "`SOS Solutions <https://www.sossolutions.nl/>`_"
 

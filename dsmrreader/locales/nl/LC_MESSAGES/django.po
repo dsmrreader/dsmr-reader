@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 21:10+0200\n"
-"PO-Revision-Date: 2016-05-18 21:10+0100\n"
+"POT-Creation-Date: 2016-07-15 21:48+0200\n"
+"PO-Revision-Date: 2016-07-13 22:58+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -17,6 +17,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "API"
+msgstr "API"
+
+msgid "Allow API calls"
+msgstr "Sta API-calls toe"
+
+msgid "Whether the API is available for use."
+msgstr "Geeft aan of de API beschikbaar is voor gebruik."
+
+msgid "Auth Key"
+msgstr "Authorisatiesleutel"
+
+msgid "The auth key used to authenticate for this API."
+msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
+
+msgid "API configuration"
+msgstr "API-configuratie"
+
+msgid "API is disabled"
+msgstr "API is uitgeschakeld"
+
+msgid "Invalid auth key"
+msgstr "Ongeldige autorisatiesleutel"
+
+msgid "Invalid data"
+msgstr "Ongeldige gegevens"
+
+msgid "Failed to parse telegram"
+msgstr "Inlezen telegram mislukt"
 
 msgid "Backend"
 msgstr "Achterkant"
@@ -250,7 +280,7 @@ msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
 
 msgid "Frontend"
-msgstr "Weergave"
+msgstr "Interface"
 
 msgid "Day"
 msgstr "Dag"
@@ -264,14 +294,56 @@ msgstr "CSV"
 msgid "Clears the entire cache."
 msgstr "Gooit de volledige cache leeg."
 
+msgid "Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!"
+msgstr "Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configuratie-pagina!"
+
+msgid "You may check the status of your readings and data in the Status page."
+msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."
+
 msgid "Reverse dashboard graphs"
 msgstr "Keer dashboard-grafieken om"
 
 msgid "Whether graphs are rendered with an reversed X-axis"
 msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
 
+msgid "Electricity delivered color"
+msgstr "Kleur elektriciteitsverbruik"
+
+msgid "Graph color for electricity delivered (default + high tariff)"
+msgstr "Grafiekkleur voor elektriciteitsverbruik (standaard + hoogtarief)"
+
+msgid "Electricity delivered color (alternative)"
+msgstr "Kleur elektriciteitsverbruik (alternatief)"
+
+msgid "Graph color for electricity delivered (low tariff)"
+msgstr "Grafiekkleur voor elektriciteitsverbruik (laagtarief)"
+
+msgid "Electricity returned color"
+msgstr "Kleur teruglevering elektriciteit"
+
+msgid "Graph color for electricity returned (default + high tariff)"
+msgstr "Grafiekkleur voor elektriciteit teruglevering (standaard + hoogtarief)"
+
+msgid "Electricity returned color (alternative)"
+msgstr "Kleur teruglevering elektriciteit (alternatief)"
+
+msgid "Graph color for electricity returned (low tariff)"
+msgstr "Grafiekkleur voor elektriciteit teruglevering (laagtarief)"
+
+msgid "Gas delivered color"
+msgstr "Kleur gasverbruik"
+
+msgid "Graph color for gas delivered"
+msgstr "Grafiekkleur voor gasverbruik"
+
+msgid "Temperature color"
+msgstr "Temperatuurkleur"
+
+msgid "Graph color for temperatures read"
+msgstr "Grafiekkleur voor temperatuurmetingen"
+
 msgid "Frontend configuration"
-msgstr "Weergaveconfiguratie"
+msgstr "Interfaceconfiguratie"
 
 msgid "Archive"
 msgstr "Archief"
@@ -351,6 +423,9 @@ msgstr "Inloggen vereist"
 msgid "Configuration"
 msgstr "Configuratie"
 
+msgid "Documentation"
+msgstr "Documentatie"
+
 msgid "DSMR (Dutch Smart Meter Requirements) reader"
 msgstr "DSMR (Dutch Smart Meter Requirements) reader"
 
@@ -372,8 +447,11 @@ msgstr "Basisselectie"
 msgid "Compare with selection"
 msgstr "Te vergelijken selectie"
 
-msgid "All settings"
-msgstr "Alle instellingen"
+msgid "View all settings"
+msgstr "Bekijk alle instellingen"
+
+msgid "Edit"
+msgstr "Bewerk"
 
 msgid "Setting"
 msgstr "Instelling"
@@ -389,6 +467,15 @@ msgstr "Watt"
 
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
+
+msgid "Notifications"
+msgstr "Notificaties"
+
+msgid "Delete notification"
+msgstr "Verwijder notificatie"
+
+msgid "View page"
+msgstr "Bekijk pagina"
 
 msgid "This month"
 msgstr "Huidige maand"
@@ -634,6 +721,33 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 msgid "Electricity tariff ratio (passed month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
+msgid "MinderGas.nl"
+msgstr "MinderGas.nl"
+
+msgid "It's now possible to automatically export your gas meter positions to your own Mindergas.nl account! See the FAQ in the documentation for a guide on how to create and/or link your account."
+msgstr "Het is nu ook mogelijk om je gasmeterstanden automatisch door te geven aan je persoonlijke Mindergas.nl-account! Bekijk de FAQ in de documentatie voor meer informatie over hoe je een account aanmaakt en/of koppelt aan de applicatie."
+
+msgid "Export data to MinderGas"
+msgstr "Exporteer gegevens naar MinderGas"
+
+msgid "Whether we should export your gas readings (if any) to your MinderGas.nl account."
+msgstr "Bepaalt of we je meterstanden dagelijks moeten uploaden naar je eigen account op MinderGas.nl."
+
+msgid "MinderGas authentication token"
+msgstr "MinderGas.nl Authenticatietoken (API)"
+
+msgid "The authentication token used to authenticate for the MinderGas API. More information can be found here: https://www.mindergas.nl/member/api"
+msgstr "Authenticatietoken voor de API-toegang van je persoonlijk account bij MinderGas. Kijk hier voor meer informatie: https://www.mindergas.nl/member/api"
+
+msgid "Next export"
+msgstr "Volgende synchronisatie"
+
+msgid "Timestamp of the next export. Automatically updated by application."
+msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
+
+msgid "MinderGas.nl configuration"
+msgstr "MinderGas.nl-configuratie"
+
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
@@ -853,236 +967,5 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
-#~ msgid "DSMR reader"
-#~ msgstr "DSMR-reader"
-
-#~ msgid "Electricity 1 price"
-#~ msgstr "Elektriciteitstarief 1 (laag)"
-
-#~ msgid "Electricity 2 price"
-#~ msgstr "Elektriciteitstarief 2 (piek)"
-
-#~ msgid "View current release"
-#~ msgstr "Bekijk huidige versie"
-
-#~ msgid "Deploy"
-#~ msgstr "Uitrollen"
-
-#~ msgid "Updating/deploying DSMR-reader"
-#~ msgstr "Bezig met bijwerken/uitrollen van DSMR-reader"
-
-#~ msgid "Please note that this may take a while, depending on your device..."
-#~ msgstr "Dit kan enige tijd in beslag nemen, afhankelijk van de snelheid van je apparaat..."
-
-#~ msgid "Info regarding the version of this application. Automatic updates are not available (mostly due to privacy reasons), but you should be able to update manually."
-#~ msgstr "Versie-informatie. Automatische updates zijn niet mogelijk, voornamelijk wegens privacy-overwegingen, maar je kun wel handmatig bijwerken naar een nieuwere versie."
-
-#~ msgid "Updates"
-#~ msgstr "Updates"
-
-#~ msgid "Check for updates"
-#~ msgstr "Controleer op updates"
-
-#~ msgid "Last week"
-#~ msgstr "Afgelopen week"
-
-#~ msgid "Last two weeks"
-#~ msgstr "Afgelopen twee weken"
-
-#~ msgid "Last three weeks"
-#~ msgstr "Afgelopen drie weken"
-
-#~ msgid "Last four weeks"
-#~ msgstr "Afgelopen vier weken"
-
-#~ msgid "Last five weeks"
-#~ msgstr "Afgelopen vijf weken"
-
-#~ msgid "Recent history weeks"
-#~ msgstr "Weken in recente historie"
-
-#~ msgid "The number of weeks displayed in the recent history overview."
-#~ msgstr "Het aantal weken dat getoond wordt in het recente historie overzicht."
-
-#~ msgid "History"
-#~ msgstr "Geschiedenis"
-
-#~ msgid "Summary of past %(days_ago)s days"
-#~ msgstr "Overzicht van de afgelopen %(days_ago)s dagen"
-
-#~ msgid "Daily cost"
-#~ msgstr "Dagelijkse kosten"
-
-#~ msgid "(in &euro;)"
-#~ msgstr "(in &euro;)"
-
-#~ msgid "Daily electricity usage"
-#~ msgstr "Dagelijks elektriciteitsverbruik"
-
-#~ msgid "Daily electricity returned"
-#~ msgstr "Dagelijks elektriciteit teruggeleverd"
-
-#~ msgid "Daily gas usage"
-#~ msgstr "Dagelijks gasverbruik"
-
-#~ msgid "(in &deg;C)"
-#~ msgstr "(in &deg;C)"
-
-#~ msgid "Weather tracking is currently disabled. Enable this feature in weather settings to view temperatures (read hourly)."
-#~ msgstr "Weergegevens worden momenteel niet bijgehouden. Schakel dit bij weerinstellingen in om temperatuurmetingen te weergeven (uurlijks)."
-
-#~ msgid "Electricity 1 cost (low tariff)"
-#~ msgstr "Elektriciteit 1 kosten (daltarief)"
-
-#~ msgid "Electricity 2 cost (high tariff)"
-#~ msgstr "Elektriciteit 2 kosten (piektarief)"
-
-#~ msgid "Gas cost"
-#~ msgstr "Gaskosten"
-
-#~ msgid "Theme by"
-#~ msgstr "Thema door"
-
-#~ msgid "Number of times data read from your meter. Should be updated every 15 seconds."
-#~ msgstr "Aantal keer dat data uit je meter is uitgelezen. Zou elke 15 seconden uitgevoerd moeten worden."
-
-#~ msgid "Most data is processed with a small delay, but should take no longer than a minute to update. Gas consumption however, is only updated once a hour."
-#~ msgstr "De meeste gegevens worden op de achtergrond verwerkt met een kleine vertraging. Echter zou het verwerken daarvan niet langer dan een minuut moeten duren. Uitgezonderd gasverbruik, wat elk uur verwerkt wordt."
-
-#~ msgid "Based on readings until this moment"
-#~ msgstr "Gebaseerd op metingen tot nu toe"
-
-#~ msgid "Average hourly electricity 1 (low tariff) consumed in kWh"
-#~ msgstr "Gemiddeld verbruik elektriciteit 1 (daltarief) per daguur in kWh"
-
-#~ msgid "Average hourly electricity 2 (high tariff) consumed in kWh"
-#~ msgstr "Gemiddeld verbruik elektriciteit 2 (piektarief) per daguur in kWh"
-
-#~ msgid "Average hourly electricity 1 return (low tariff) yield in kWh"
-#~ msgstr "Verhouding gemiddelde opbrengst/teruglevering elektriciteit 1 (daltarief) per daguur in kWh"
-
-#~ msgid "Average hourly electricity 2 return (high tariff) yield in kWh"
-#~ msgstr "Verhouding gemiddelde opbrengst/teruglevering elektriciteit 2 (piektarief) per daguur in kWh"
-
-#~ msgid "Average hourly electricity demand in Watt"
-#~ msgstr "Gemiddelde elektriciteitsvraag per daguur in Watt"
-
-#~ msgid "Recent electricity delivered (watt)"
-#~ msgstr "Recent elektriciteitsverbruik  (Watt)"
-
-#~ msgid "Daily cost in the past %(days_ago)s days"
-#~ msgstr "Dagelijkse kosten in de afgelopen %(days_ago)s dagen"
-
-#~ msgid "Daily electricity usage in the past %(days_ago)s days"
-#~ msgstr "Dagelijks elektriciteitsverbruik in de afgelopen %(days_ago)s dagen"
-
-#~ msgid "Daily electricity returned in the past %(days_ago)s days"
-#~ msgstr "Dagelijks elektriciteitsteruglevering in de afgelopen %(days_ago)s dagen"
-
-#~ msgid "Daily gas usage in the past %(days_ago)s days"
-#~ msgstr "Dagelijks gasverbruik in de afgelopen %(days_ago)s dagen"
-
-#~ msgid "Recent"
-#~ msgstr "Recent"
-
-#~ msgid "delivered"
-#~ msgstr "geleverd"
-
-#~ msgid "returned"
-#~ msgstr "teruggeleverd"
-
-#~ msgid "gas consumed in hour"
-#~ msgstr "gas verbruikt in uur tijd"
-
-#~ msgid "Display capabilities"
-#~ msgstr "Weergavemogelijkheden"
-
-#~ msgid "Available"
-#~ msgstr "Beschikbaar"
-
-#~ msgid "Type"
-#~ msgstr "Soort"
-
-#~ msgid "Watt returned"
-#~ msgstr "Watt teruggeleverd"
-
-#~ msgid "m<sup>3</sup> gas consumed in hour"
-#~ msgstr "m<sup>3</sup> gas verbruikt in uur tijd"
-
-#~ msgid "Compacts existing DSMR readings into consumption points."
-#~ msgstr "Voegt bestaande DSMR uitlezingen samen in verbruiksgegevens."
-
-#~ msgid "The max number of readings to compact this run (default: %(default)s)"
-#~ msgstr "Het maximum aantal uitlezingen dat per keer gegroepeerd wordt  (standaard: %(default)s)"
-
-#~ msgid "DEPRECATED: Moved to settings in database."
-#~ msgstr "UITGEFASEERD: Instellingen zijn verplaatst naar de database."
-
-#~ msgid "Purges all consumption data (DELETES IT!) and marks all readings as unprocessed.Only use this when changing compact grouping AND YOU HAVE ALL HISTORIC READINGS!"
-#~ msgstr "Wist alle verbruiksgegevens (VERWIJDERT HET!) en markeert alle uitlezingen als onverwerkt. Gebruik dit alleen als je wisselt van groeperingsnauwkeurigheid EN JE ALLE DSMR-METINGEN NOG HEBT!"
-
-#~ msgid "dsmr_stats_compactor is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_backend"
-#~ msgstr "dsmr_stats_compactor wordt UITGEFASEERD in versie 1.0, gebruik alsjeblieft dsmr_backend"
-
-#~ msgid "Polls the serial port for DSMR telegram and performs a reading."
-#~ msgstr "Controleert de seriele poort voor DSMR-gegevens en leest deze uit."
-
-#~ msgid "COM-port connected to Smartmeter (default: %(default)s)"
-#~ msgstr "COM-poort die verbonden is met je slimme meter (standaard: %(default)s)"
-
-#~ msgid "dsmr_stats_datalogger is DEPRECATED, and will be REMOVED in v1.0, please use dsmr_datalogger"
-#~ msgstr "dsmr_stats_datalogger wordt UITGEFASEERD in versie 1.0, gebruik alsjeblieft dsmr_datalogger"
-
-#~ msgid "Your current trends and statistics settings do not allow to track trends! You should enable it to have accurate (or any) data below."
-#~ msgstr "Je huidige trends- en statistiekeninstellingen staan niet toe om trends bij te houden. Pas dit aan om accurate (of uberhaupt) gegevens  hieronder te zien."
-
-#~ msgid "Trends might be recalculated retroactively, depending on whether all historic DSMR source readings are still available."
-#~ msgstr "Trends kunnen met terugwerkende kracht berekend worden, mits alle historische DSMR-uitlezingen nog beschikbaar zijn."
-
-#~ msgid "Track trends"
-#~ msgstr "Houd trends bij"
-
-#~ msgid "Whether we should track trends by storing daily consumption summaries."
-#~ msgstr "Geeft aan of we trends over het dagelijkse verbruik bijhouden en opslaan."
-
-#~ msgid "Trends & statistics configuration"
-#~ msgstr "Trends- & statistiekenconfiguratie"
-
-#~ msgid "Value"
-#~ msgstr "Waarde"
-
-#~ msgid "This page displays all settings and the status of them. You can change them here"
-#~ msgstr "Deze pagina geeft een overzicht van alle instellingen en hun waarde. Je kunt ze hier veranderen"
-
-#~ msgid "BAUD rate"
-#~ msgstr "BAUD-waarde"
-
-#~ msgid "BAUD rate used for Smartmeter. 115200 for DSMR v4, 9600 for older versions"
-#~ msgstr "BAUD-waarde gebruikt door slimme meter. 115200 voor DSMR versie 4, 9600 voor oudere versies"
-
-#~ msgid "GRAPH_SHORT_DATETIME l, P"
-#~ msgstr "GRAPH_SHORT_DATETIME l G:i"
-
-#~ msgid "GRAPH_SHORT_DATE_FORMAT D, N jS"
-#~ msgstr "GRAPH_SHORT_DATE_FORMAT D j b"
-
-#~ msgid "GRAPH_LONG_DATE_FORMAT l F jS, Y"
-#~ msgstr "GRAPH_LONG_DATE_FORMAT l j F Y"
-
-#~ msgid "Miscellaneous statistics"
-#~ msgstr "Overige statistieken"
-
-#~ msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
-#~ msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor hoogtarief."
-
-#~ msgid "Electricity 2"
-#~ msgstr "Elektriciteit 2"
-
-#~ msgid "in kWh"
-#~ msgstr "in kWh"
-
-#~ msgid "in m<sup>3</sup>"
-#~ msgstr "in m<sup>3</sup>"
-
-#~ msgid "Average electricity usage per hour"
-#~ msgstr "Gemiddelde energievraag per uur"
+#~ msgid "Test"
+#~ msgstr "Banaaa"

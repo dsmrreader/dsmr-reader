@@ -6,6 +6,7 @@ from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
+from dsmr_frontend.models.settings import FrontendSettings
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
@@ -19,6 +20,7 @@ class Trends(TemplateView):
 
         context_data = super(Trends, self).get_context_data(**kwargs)
         context_data['capabilities'] = capabilities
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         context_data['day_statistics_count'] = DayStatistics.objects.count()
         context_data['hour_statistics_count'] = HourStatistics.objects.count()
@@ -44,9 +46,7 @@ class Trends(TemplateView):
 
         for current in average_consumption_by_hour:
             graph_data['x_hours'].append('{}:00'.format(int(current['hour_start'])))
-            current['avg_electricity'] = (
-                current['avg_electricity1'] + current['avg_electricity2']
-            ) / 2
+            current['avg_electricity'] = (current['avg_electricity1'] + current['avg_electricity2']) / 2
 
             graph_data['avg_electricity_consumed'].append(
                 float(dsmr_consumption.services.round_decimal(current['avg_electricity']))

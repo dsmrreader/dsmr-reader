@@ -30,10 +30,7 @@ class Statistics(TemplateView):
             pass
 
         # Use stats
-        context_data['slumber_consumption_watt'] = dsmr_consumption.services.\
-            calculate_slumber_consumption_watt()
-
-        context_data['min_max_consumption_watt'] = dsmr_consumption.services.\
-            calculate_min_max_consumption_watt()
+        context_data['slumber_consumption_watt'] = dsmr_consumption.services.calculate_slumber_consumption_watt()
+        context_data['min_max_consumption_watt'] = dsmr_consumption.services.calculate_min_max_consumption_watt()
 
         return context_data

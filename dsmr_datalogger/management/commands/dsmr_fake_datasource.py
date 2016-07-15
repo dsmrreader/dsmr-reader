@@ -42,9 +42,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
         if not options.get('acked_warning'):
-            raise CommandError(_(
-                'Intended usage is NOT production! Force by using --ack-to-mess-up-my-data'
-            ))
+            raise CommandError(_('Intended usage is NOT production! Force by using --ack-to-mess-up-my-data'))
 
         self._inject(options)
 
@@ -53,9 +51,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         """ Calls the regular DSMR datalogger, but injects it with random data using mock. """
 
         # Prepare some random data, but which makes sense.
-        read_telegram_mock.return_value = self._generate_data(
-            options['with_gas'], options['with_electricity_returned']
-        )
+        read_telegram_mock.return_value = self._generate_data(options['with_gas'], options['with_electricity_returned'])
         call_command('dsmr_datalogger', run_once=True)
 
     def _generate_data(self, with_gas, with_electricity_returned):

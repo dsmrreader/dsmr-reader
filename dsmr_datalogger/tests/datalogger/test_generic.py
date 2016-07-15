@@ -179,9 +179,7 @@ class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
         datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_3
         datalogger_settings.save()
 
-        self.assertEqual(
-            DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_3
-        )
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_3)
 
         connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 9600)
@@ -190,9 +188,7 @@ class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
 
     def test_dsmr_version_4(self):
         """ Test connection parameters for DSMR v4. """
-        self.assertEqual(
-            DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_4
-        )
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_4)
 
         connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 115200)

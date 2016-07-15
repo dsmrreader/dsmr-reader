@@ -13,6 +13,8 @@ Software
 
 - `Django Solo <https://github.com/lazybird/django-solo>`_
 
+- `Django Colorfield <https://github.com/jaredly/django-colorfield>`_
+
 - `Supervisor <http://supervisord.org/>`_
 
 - `MySQL <https://www.mysql.com/>`_
@@ -38,6 +40,8 @@ Software
 - `MW <http://bettermotherfuckingwebsite.com/>`_
 
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
+
+- `Twitter Bootstrap Wizard <https://github.com/VinceG/twitter-bootstrap-wizard>`_
 
 
 Testers & contributors

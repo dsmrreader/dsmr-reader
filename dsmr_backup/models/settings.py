@@ -10,16 +10,12 @@ class BackupSettings(SingletonModel):
     daily_backup = models.BooleanField(
         default=True,
         verbose_name=_('Backup daily'),
-        help_text=_(
-            'Create a backup of your data daily. Stored locally, but can be exported using Dropbox.'
-        )
+        help_text=_('Create a backup of your data daily. Stored locally, but can be exported using Dropbox.')
     )
     compress = models.BooleanField(
         default=True,
         verbose_name=_('Compress'),
-        help_text=_(
-            'Create backups in compressed (gzip) format, saving a significant amount of disk space.'
-        )
+        help_text=_('Create backups in compressed (gzip) format, saving a significant amount of disk space.')
     )
     backup_time = models.TimeField(
         default=time(hour=2),
@@ -71,9 +67,7 @@ class DropboxSettings(SingletonModel):
         null=True,
         blank=True,
         verbose_name=_('Latest sync'),
-        help_text=_(
-            'Timestamp of latest sync with Dropbox. Automatically updated by application.'
-        )
+        help_text=_('Timestamp of latest sync with Dropbox. Automatically updated by application.')
     )
 
     def __str__(self):

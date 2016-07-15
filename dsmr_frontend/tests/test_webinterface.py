@@ -8,12 +8,14 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_backup.models.settings import BackupSettings
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
+from dsmr_backup.models.settings import BackupSettings
+from dsmr_mindergas.models.settings import MinderGasSettings
+from dsmr_api.models import APISettings
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 from dsmr_frontend.forms import ExportAsCsvForm
@@ -67,9 +69,7 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
 
         weather_settings = WeatherSettings.get_solo()
         weather_settings.track = True
@@ -108,9 +108,7 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_archive(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         response = self.client.get(
             reverse('{}:archive'.format(self.namespace))
         )
@@ -147,9 +145,7 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_statistics(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         response = self.client.get(
             reverse('{}:statistics'.format(self.namespace))
         )
@@ -161,9 +157,7 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_trends(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         response = self.client.get(
             reverse('{}:trends'.format(self.namespace))
         )
@@ -187,9 +181,7 @@ class TestViews(TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_compare(self, now_mock):
         """ Basicly the same view (context vars) as the archive view. """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         response = self.client.get(
             reverse('{}:compare'.format(self.namespace))
         )
@@ -198,9 +190,7 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_status(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         response = self.client.get(
             reverse('{}:status'.format(self.namespace))
         )
@@ -277,9 +267,7 @@ class TestViews(TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_configuration(self, now_mock):
         view_url = reverse('{}:configuration'.format(self.namespace))
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
 
         # Check login required.
         response = self.client.get(view_url)
@@ -293,6 +281,12 @@ class TestViews(TestCase):
         response = self.client.get(view_url)
 
         self.assertEqual(response.status_code, 200)
+        self.assertIn('api_settings', response.context)
+        self.assertIsInstance(response.context['api_settings'], APISettings)
+
+        self.assertIn('backup_settings', response.context)
+        self.assertIsInstance(response.context['backup_settings'], BackupSettings)
+
         self.assertIn('consumption_settings', response.context)
         self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)
 
@@ -305,12 +299,13 @@ class TestViews(TestCase):
         self.assertIn('weather_settings', response.context)
         self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
 
+        self.assertIn('mindergas_settings', response.context)
+        self.assertIsInstance(response.context['mindergas_settings'], MinderGasSettings)
+
     @mock.patch('django.utils.timezone.now')
     def test_configuration_force_backup(self, now_mock):
         view_url = reverse('{}:configuration-force-backup'.format(self.namespace))
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 1)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         backup_settings = BackupSettings.get_solo()
         backup_settings.latest_backup = now_mock.return_value
         backup_settings.save()

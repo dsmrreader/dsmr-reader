@@ -51,8 +51,10 @@ INSTALLED_APPS = (
 
     # Third party apps/plugins.
     'solo.apps.SoloAppConfig',
+    'colorfield',
 
     # Local project apps.
+    'dsmr_api.apps.AppConfig',
     'dsmr_datalogger.apps.AppConfig',
     'dsmr_consumption.apps.AppConfig',
     'dsmr_weather.apps.AppConfig',
@@ -60,6 +62,7 @@ INSTALLED_APPS = (
     'dsmr_backend.apps.AppConfig',
     'dsmr_frontend.apps.AppConfig',
     'dsmr_backup.apps.AppConfig',
+    'dsmr_mindergas.apps.AppConfig',
 )
 
 MIDDLEWARE_CLASSES = (

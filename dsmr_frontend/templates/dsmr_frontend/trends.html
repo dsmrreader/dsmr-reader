@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load humanize %}
 {% load i18n %} 
+{% load hex_to_rgb %}
 
 {% block title %}{% trans "Trends" %}{% endblock %}
 {% block header %}{% trans "Trends" %} &nbsp; <i class="fa fa-bar-chart"></i>{% endblock %}
@@ -146,13 +147,13 @@
 	            var data = [
                     {
                         value: {{ electricity_by_tariff_week.electricity2|floatformat:"0" }},
-                        color: "rgba(255,0,0,1)",
+                        color: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
                         highlight: "#5AD3D1",
                         label: "{% trans 'Electricity 2 (high tariff)' %}"
                     },
 	                {
 	                    value: {{ electricity_by_tariff_week.electricity1|floatformat:"0" }},
-                        color:"rgba(160,0,0,1)",
+                        color:"rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
 	                    highlight: "#5AD3D1",
 	                    label: "{% trans 'Electricity 1 (low tariff)' %}"
 	                }
@@ -168,13 +169,13 @@
                 var data = [
                     {
                         value: {{ electricity_by_tariff_month.electricity2|floatformat:"0" }},
-                        color: "rgba(255,0,0,1)",
+                        color: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
                         highlight: "#5AD3D1",
                         label: "{% trans 'Electricity 2 (high tariff)' %}"
                     },
                     {
                         value: {{ electricity_by_tariff_month.electricity1|floatformat:"0" }},
-                        color:"rgba(160,0,0,1)",
+                        color:"rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
                         highlight: "#5AD3D1",
                         label: "{% trans 'Electricity 1 (low tariff)' %}"
                     }
@@ -192,8 +193,8 @@
                     datasets: [{
                         data: {{ avg_electricity_consumed|safe }},
                         label: "{% trans 'Electricity' %}",                      
-                        fillColor: "#F05050",
-                        strokeColor: "#F05050",
+                        fillColor: "{{frontend_settings.electricity_delivered_color}}",
+                        strokeColor: "{{frontend_settings.electricity_delivered_color}}",
                         highlightFill: "#5AD3D1",
                         highlightStroke: "#5AD3D1"
                     }]
@@ -214,8 +215,8 @@
                     datasets: [{
                         data: {{ avg_electricity_returned|safe }},
                         label: "{% trans 'Electricity returned' %}",                      
-                        fillColor: "rgba(39,194,76,1)",
-                        strokeColor: "rgba(39,194,76,1)",
+                        fillColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                        strokeColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
                         highlightFill: "#5AD3D1",
                         highlightStroke: "#5AD3D1"
                     }]
@@ -235,8 +236,8 @@
                     datasets: [{
                         data: {{ avg_gas_consumption|safe }},
                         label: "{% trans 'Gas' %}",                      
-                        fillColor: "rgba(250,133,0,1)",
-                        strokeColor: "rgba(250,133,0,1)",
+                        fillColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+                        strokeColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
                         highlightFill: "#5AD3D1",
                         highlightStroke: "#5AD3D1"
                     }]

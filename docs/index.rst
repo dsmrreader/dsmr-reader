@@ -8,6 +8,7 @@ DSMR Reader's documentation
    screenshots
    installation
    application
+   api
    faq
    changelog
    contributing
