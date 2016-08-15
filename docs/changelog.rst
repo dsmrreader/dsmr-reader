@@ -2,9 +2,9 @@ Changelog
 =========
 
 
-v1.4.0 - 2016-xx-xx
+v1.3.1 - 2016-xx-xx
 ^^^^^^^^^^^^^^^^^^^
-- 
+- CSS large margin-bottom(`#144 <https://github.com/dennissiemensma/dsmr-reader/issues/144>`_).
 
 
 v1.3.0 - 2016-07-15
