@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+v1.4.0 - 2016-xx-16xx
+^^^^^^^^^^^^^^^^^^^
+- xxx (`#xxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxx>`_).
+
+
 v1.3.1 - 2016-08-16
 ^^^^^^^^^^^^^^^^^^^
 - CSS large margin-bottom (`#144 <https://github.com/dennissiemensma/dsmr-reader/issues/144>`_).
