@@ -18,6 +18,13 @@ LOGGING = {
 # Only available (and required) for tests, so inject it here.
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.append('django_nose')
+INSTALLED_APPS.remove('debug_toolbar')
+
+# Disable DDT.
+MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
+MIDDLEWARE_CLASSES.remove('debug_toolbar.middleware.DebugToolbarMiddleware')
+
+INTERNAL_IPS = None
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [

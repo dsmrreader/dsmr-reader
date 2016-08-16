@@ -22,3 +22,12 @@ LOGGING = {
         },
     },
 }
+
+INSTALLED_APPS = list(INSTALLED_APPS)
+INSTALLED_APPS.append('debug_toolbar')
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
+MIDDLEWARE_CLASSES.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+INTERNAL_IPS = '127.0.0.1'

@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v1.3.1 - 2016-08-16
+^^^^^^^^^^^^^^^^^^^
+- CSS large margin-bottom (`#144 <https://github.com/dennissiemensma/dsmr-reader/issues/144>`_).
+- Django security releases issued: 1.8.14 (`#147 <https://github.com/dennissiemensma/dsmr-reader/issues/147>`_).
+- Requirements update (August 2016) (`#148 <https://github.com/dennissiemensma/dsmr-reader/issues/148>`_).
+- Query performance improvements (`#149 <https://github.com/dennissiemensma/dsmr-reader/issues/149>`_).
+
+
 v1.3.0 - 2016-07-15
 ^^^^^^^^^^^^^^^^^^^
 - API endpoint for datalogger (`#140 <https://github.com/dennissiemensma/dsmr-reader/issues/140>`_).

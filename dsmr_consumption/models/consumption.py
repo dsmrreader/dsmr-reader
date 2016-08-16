@@ -28,12 +28,14 @@ class ElectricityConsumption(models.Model):
     currently_delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Actual electricity power delivered (+P) in 1 Watt resolution")
+        help_text=_("Actual electricity power delivered (+P) in 1 Watt resolution"),
+        db_index=True
     )
     currently_returned = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Actual electricity power received (-P) in 1 Watt resolution")
+        help_text=_("Actual electricity power received (-P) in 1 Watt resolution"),
+        db_index=True
     )
 
     def __str__(self):
