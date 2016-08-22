@@ -2,11 +2,12 @@ import os
 
 from django.utils import timezone
 from django.conf import settings
-from dropbox.client import DropboxClient
-from dropbox import rest
+from dropbox import Dropbox
+from dropbox.exceptions import ApiError
 
 from dsmr_backup.models.settings import DropboxSettings
 import dsmr_backup.services.backup
+from dropbox.files import UploadSessionCursor, CommitInfo
 
 
 def sync():
@@ -56,23 +57,38 @@ def upload_chunked(file_path):
     dropbox_settings = DropboxSettings.get_solo()
     file_name = os.path.split(file_path)[-1]
 
-    # From Dropbox docs.
     retries = 3
-    client = DropboxClient(dropbox_settings.access_token)
+    dbx = Dropbox(dropbox_settings.access_token)
 
-    size = os.stat(file_path).st_size
-    file_handle = open(file_path, 'rb')
+    CHUNK_SIZE = 1 * 1024 * 1024  # In Bytes.
 
-    uploader = client.get_chunked_uploader(file_handle, size)
+    with open(file_path, 'rb') as file_handle:
+        result = dbx.files_upload_session_start(f='')
 
-    while uploader.offset < size:
-        try:
-            uploader.upload_chunked(chunk_size=1 * 1024 * 1024)
-        except rest.ErrorResponse:   # pragma: no cover
-            retries -= 1  # pragma: no cover
+        # For some reason Dropbox want us to track this.
+        session_cursor = UploadSessionCursor(session_id=result.session_id, offset=0)
+        data = file_handle.read(CHUNK_SIZE)
 
-            if retries == 0:  # pragma: no cover
-                raise IOError("Failed to upload to dropbox")  # pragma: no cover
+        while data != b"":
+            try:
+                dbx.files_upload_session_append_v2(f=data, cursor=session_cursor)
+            except ApiError as error:   # pragma: no cover
+                retries -= 1  # pragma: no cover
 
-    # This will commit the file and persist it in Dropbox. Due to rotating backups we MUST override.
-    uploader.finish(file_name, overwrite=True)
+                if retries == 0:  # pragma: no cover
+                    raise IOError("Failed to upload to dropbox: {}".format(error))  # pragma: no cover
+
+                continue  # Retry.
+
+            session_cursor.offset += len(data)
+            data = file_handle.read(CHUNK_SIZE)
+
+    # This will commit the file and persist it in Dropbox.
+    dbx.files_upload_session_finish(
+        f='',
+        cursor=session_cursor,
+        commit=CommitInfo(
+            path='/{}'.format(file_name),  # The slash indicates it's relative to the root of app folder.
+            autorename=False
+        )
+    )

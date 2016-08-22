@@ -2,9 +2,9 @@ Changelog
 =========
 
 
-v1.4.0 - 2016-xx-16xx
+v1.4.0 - 2016-xx-xx
 ^^^^^^^^^^^^^^^^^^^
-- xxx (`#xxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxx>`_).
+- Dropbox API v1 deprecated (`#142 <https://github.com/dennissiemensma/dsmr-reader/issues/142>`_).
 
 
 v1.3.1 - 2016-08-16
