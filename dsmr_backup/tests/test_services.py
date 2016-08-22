@@ -214,16 +214,25 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             dsmr_backup.services.dropbox.sync()
             self.assertFalse(upload_chunked_mock.called)
 
-    @mock.patch('dropbox.client.DropboxClient.get_chunked_uploader')
-    def test_upload_chunked(self, chunked_uploader_mock):
+    @mock.patch('dropbox.Dropbox.files_upload_session_start')
+    @mock.patch('dropbox.Dropbox.files_upload_session_append_v2')
+    @mock.patch('dropbox.Dropbox.files_upload_session_finish')
+    def test_upload_chunked(self, session_finish_mock, session_append_mock, session_start_mock):
         DATA = b'Lots of data.'
-        uploader_mock = mock.MagicMock()
-        type(uploader_mock).offset = mock.PropertyMock(side_effect=[0, 5, 10, len(DATA), len(DATA)])
-        chunked_uploader_mock.return_value = uploader_mock
+        session_start_result = mock.MagicMock()
+        type(session_start_result).session_id = mock.PropertyMock(side_effect=['session-xxxxx'])
+        session_start_mock.return_value = session_start_result
+
+        self.assertFalse(session_start_mock.called)
+        self.assertFalse(session_append_mock.called)
+        self.assertFalse(session_finish_mock.called)
 
         with tempfile.NamedTemporaryFile() as temp_file:
             temp_file.write(DATA)
             temp_file.flush()
 
             dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
-            self.assertTrue(uploader_mock.finish.called)
+
+        self.assertTrue(session_start_mock.called)
+        self.assertTrue(session_append_mock.called)
+        self.assertTrue(session_finish_mock.called)
