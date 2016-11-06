@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'dsmr_frontend.apps.AppConfig',
     'dsmr_backup.apps.AppConfig',
     'dsmr_mindergas.apps.AppConfig',
+    'dsmr_notification.apps.AppConfig',
 )
 
 MIDDLEWARE_CLASSES = (
