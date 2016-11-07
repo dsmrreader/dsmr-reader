@@ -1,21 +1,57 @@
-from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 import requests
 
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
 from dsmr_notification.models.settings import NotificationSetting
-from dsmr_consumption.models.consumption import GasConsumption
 from dsmr_stats.models import DayStatistics
 
 
-def should_notify():
+def should_notify(settings):
     """ Checks whether we should notify """
-    settings = NotificationSetting.get_solo()
-    return settings.send_notification or False
+
+    # Only when enabled and token set.
+    if not settings.send_notification or not settings.api_key:
+        return False
+
+    # Only when it's time..
+    if settings.next_notification is not None \
+            and timezone.localtime(timezone.now()).date() < settings.next_notification:
+        return False
+
+    return True
+
+
+def send_notification(api_url, api_key, notification_message):
+    """ Sends notification using the preferred service  """
+
+    response = requests.post(api_url, {
+        'apikey': api_key,
+        'priority': '-2',
+        'application': 'DSMR-Reader',
+        'event': str(_('Daily usage notification')),
+        'description': notification_message
+    })
+
+    if response.status_code != 200:
+        raise AssertionError('Push-notification failed: %s (HTTP%s)'.format(
+            response.text, response.status_code))
+
+    return True
+
+
+def set_next_notification(settings, now):
+    """ Set the next moment for notifications to be allowed again """
+    tomorrow = (now + timezone.timedelta(hours=24)).date()
+    settings.next_notification = tomorrow
+    settings.save()
 
 
 def notify():
-    """ Exports readings and costs for notifications. """
-    if not should_notify():
+    """ Sends notifications about daily energy usage """
+    settings = NotificationSetting.get_solo()
+
+    if not should_notify(settings):
         return
 
     # Just post the latest reading of the day before.
@@ -31,10 +67,10 @@ def notify():
         stats = DayStatistics.objects.get(
             day=(midnight - timezone.timedelta(hours=1))
         )
-    except IndexError:
-        raise AssertionError('Push-notification failed: no data')
+    except DayStatistics.DoesNotExist:
+        return  # Try again some other time
 
-    settings = NotificationSetting.get_solo()
+
 
     notification_api_url = NotificationSetting.NOTIFICATION_API_URL.get(
         settings.notification_service)
@@ -49,15 +85,5 @@ def notify():
         stats.gas
     )
 
-    # Send API by
-    response = requests.post(notification_api_url, {
-        'apikey': settings.api_key,
-        'priority': '-2',
-        'application': 'DSMR-Reader',
-        'event': str(_('Daily usage notification')),
-        'description': message
-    })
-
-    if response.status_code != 200:
-        raise AssertionError('Push-notification failed: %s (HTTP%s)'.format(
-            response.text, response.status_code))
+    send_notification(notification_api_url, settings.api_key, message)
+    set_next_notification(settings, today)

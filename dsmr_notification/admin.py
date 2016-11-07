@@ -7,4 +7,4 @@ from dsmr_notification.models.settings import NotificationSetting
 
 @admin.register(NotificationSetting)
 class NotificationSettingsAdmin(SingletonModelAdmin):
-    pass
+    readonly_fields = ('next_notification', )

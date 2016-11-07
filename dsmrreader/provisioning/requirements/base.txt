@@ -1,4 +1,4 @@
-Django==1.8.14
+Django==1.8.16
 django-colorfield==0.1.10
 django-debug-toolbar==1.5
 django-flat-theme==1.1.3

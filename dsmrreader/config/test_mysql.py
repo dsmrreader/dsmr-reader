@@ -6,9 +6,9 @@ from dsmrreader.config.test import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dsmrreader',  # Will be adjusted to 'test_*' by Django.
-        'USER': 'dsmrreader',
-        'PASSWORD': 'dsmrreader',
+        'NAME': 'dsmrtest',  # Will be adjusted to 'test_*' by Django.
+        'USER': 'dsmrtest',
+        'PASSWORD': 'dsmrtest',
         'HOST': '127.0.0.1',
     }
 }
