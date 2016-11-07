@@ -13,7 +13,7 @@ Dependencies & requirements
 
  - Recommended and tested with, but any OS satisfying the requirements should do fine.
 
-- **Python 3.3 / 3.4**
+- **Python 3.3 / 3.4 / 3.5**
 - **PostgreSQL 9+ or MySQL / MariaDB 5.5+**
 
  - I highly recommend *PostgreSQL* due to builtin support for timezones.

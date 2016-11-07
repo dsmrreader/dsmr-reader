@@ -5,6 +5,7 @@ Changelog
 v1.4.0 - 2016-xx-xx
 ^^^^^^^^^^^^^^^^^^^
 - Dropbox API v1 deprecated (`#142 <https://github.com/dennissiemensma/dsmr-reader/issues/142>`_).
+- Support for Python 3.5 (`#55 <https://github.com/dennissiemensma/dsmr-reader/issues/55>`_).
 
 
 v1.3.1 - 2016-08-16
