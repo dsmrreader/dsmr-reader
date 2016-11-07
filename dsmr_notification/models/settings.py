@@ -47,6 +47,15 @@ class NotificationSetting(SingletonModel):
             'https://www.prowlapp.com/ to download and use the apps.'
         )
     )
+    next_notification = models.DateField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Next notification'),
+        help_text=_(
+            'Timestamp of the next notification. Managed by application.'
+        )
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

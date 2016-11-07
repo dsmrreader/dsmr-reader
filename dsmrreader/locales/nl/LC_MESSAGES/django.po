@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-06 20:29+0100\n"
-"PO-Revision-Date: 2016-11-06 20:31+0100\n"
+"POT-Creation-Date: 2016-11-07 07:58+0100\n"
+"PO-Revision-Date: 2016-11-07 07:58+0100\n"
 "Last-Translator: Jeroen Peters <jeroenpeters1986@gmail.com>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -1377,11 +1377,22 @@ msgstr ""
 "sturen. Bezoek https://notifymyandroid.com/ of https://www.prowlapp.com/ om "
 "de apps te downloaden en te gebruiken."
 
+#: dsmr_notification/models/settings.py:54
+#| msgid "Delete notification"
+msgid "Next notification"
+msgstr "Volgende notificatie"
+
 #: dsmr_notification/models/settings.py:56
+#| msgid "Timestamp of the next export. Automatically updated by application."
+msgid "Timestamp of the next notification. Managed by application."
+msgstr ""
+"Tijdstip van de volgende notificatie. Applicatie werkt dit automatisch bij."
+
+#: dsmr_notification/models/settings.py:65
 msgid "Notification configuration"
 msgstr "Verbruiksconfiguratie"
 
-#: dsmr_notification/services.py:42
+#: dsmr_notification/services.py:51
 msgid ""
 "Your daily usage statics for {}\n"
 "Total cost: € {}\n"
@@ -1393,7 +1404,7 @@ msgstr ""
 "Elektriciteit: {} kWh\n"
 "Gas: {} m3"
 
-#: dsmr_notification/services.py:57
+#: dsmr_notification/services.py:66
 msgid "Daily usage notification"
 msgstr "Dagelijkse verbruiksnotificatie"
 

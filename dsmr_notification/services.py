@@ -1,20 +1,30 @@
-from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 import requests
 
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
 from dsmr_notification.models.settings import NotificationSetting
-from dsmr_consumption.models.consumption import GasConsumption
 from dsmr_stats.models import DayStatistics
 
 
 def should_notify():
     """ Checks whether we should notify """
     settings = NotificationSetting.get_solo()
-    return settings.send_notification or False
+
+    # Only when enabled and token set.
+    if not settings.send_notification or not settings.api_key:
+        return False
+
+    # Only when it's time..
+    if settings.next_notification is not None \
+            and timezone.localtime(timezone.now()).date() < settings.next_notification:
+        return False
+
+    return True
 
 
 def notify():
-    """ Exports readings and costs for notifications. """
+    """ Sends notifications about daily usage """
     if not should_notify():
         return
 
@@ -31,8 +41,9 @@ def notify():
         stats = DayStatistics.objects.get(
             day=(midnight - timezone.timedelta(hours=1))
         )
-    except IndexError:
-        raise AssertionError('Push-notification failed: no data')
+    except DayStatistics.DoesNotExist:
+        # raise AssertionError('No notification send, no data')
+        return  # Try again some other time
 
     settings = NotificationSetting.get_solo()
 
@@ -61,3 +72,8 @@ def notify():
     if response.status_code != 200:
         raise AssertionError('Push-notification failed: %s (HTTP%s)'.format(
             response.text, response.status_code))
+
+    # Push back for a day.
+    tomorrow = (today + timezone.timedelta(hours=24)).date()
+    settings.next_notification = tomorrow
+    settings.save()
