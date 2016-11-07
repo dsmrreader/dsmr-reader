@@ -214,21 +214,36 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             dsmr_backup.services.dropbox.sync()
             self.assertFalse(upload_chunked_mock.called)
 
+    @mock.patch('dropbox.Dropbox.files_upload')
     @mock.patch('dropbox.Dropbox.files_upload_session_start')
-    @mock.patch('dropbox.Dropbox.files_upload_session_append_v2')
+    @mock.patch('dropbox.Dropbox.files_upload_session_append')
     @mock.patch('dropbox.Dropbox.files_upload_session_finish')
-    def test_upload_chunked(self, session_finish_mock, session_append_mock, session_start_mock):
+    def test_upload_chunked(self, session_finish_mock, session_append_mock, session_start_mock, files_upload_mock):
         DATA = b'Lots of data.'
         session_start_result = mock.MagicMock()
         type(session_start_result).session_id = mock.PropertyMock(side_effect=['session-xxxxx'])
         session_start_mock.return_value = session_start_result
 
+        self.assertFalse(files_upload_mock.called)
         self.assertFalse(session_start_mock.called)
         self.assertFalse(session_append_mock.called)
         self.assertFalse(session_finish_mock.called)
 
         with tempfile.NamedTemporaryFile() as temp_file:
             temp_file.write(DATA)
+            temp_file.flush()
+
+            dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
+
+        # Only small file upload should be called.
+        self.assertTrue(files_upload_mock.called)
+        self.assertFalse(session_start_mock.called)
+        self.assertFalse(session_append_mock.called)
+        self.assertFalse(session_finish_mock.called)
+
+        # Large file upload (> 2 MB chunks).
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(DATA * 2 * 1024 * 1024)
             temp_file.flush()
 
             dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
