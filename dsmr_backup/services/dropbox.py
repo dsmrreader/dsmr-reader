@@ -2,12 +2,10 @@ import os
 
 from django.utils import timezone
 from django.conf import settings
-from dropbox import Dropbox
-from dropbox.exceptions import ApiError
+import dropbox
 
 from dsmr_backup.models.settings import DropboxSettings
 import dsmr_backup.services.backup
-from dropbox.files import UploadSessionCursor, CommitInfo
 
 
 def sync():
@@ -56,39 +54,35 @@ def upload_chunked(file_path):
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     dropbox_settings = DropboxSettings.get_solo()
     file_name = os.path.split(file_path)[-1]
+    dest_path = '/{}'.format(file_name)  # The slash indicates it's relative to the root of app folder.
 
-    retries = 3
-    dbx = Dropbox(dropbox_settings.access_token)
+    dbx = dropbox.Dropbox(dropbox_settings.access_token)
 
-    CHUNK_SIZE = 1 * 1024 * 1024  # In Bytes.
+    file_handle = open(file_path, 'rb')
+    file_size = os.path.getsize(file_path)
 
-    with open(file_path, 'rb') as file_handle:
-        result = dbx.files_upload_session_start(f='')
+    # Many thanks to https://stackoverflow.com/documentation/dropbox-api/409/uploading-a-file/1927/uploading-a-file-using-the-dropbox-python-sdk#t=201610181733061624381
+    CHUNK_SIZE = 2 * 1024 * 1024
 
-        # For some reason Dropbox want us to track this.
-        session_cursor = UploadSessionCursor(session_id=result.session_id, offset=0)
-        data = file_handle.read(CHUNK_SIZE)
+    # Small uploads should be transfers at one go.
+    if file_size <= CHUNK_SIZE:
+        dbx.files_upload(file_handle.read(), dest_path)
 
-        while data != b"":
-            try:
-                dbx.files_upload_session_append_v2(f=data, cursor=session_cursor)
-            except ApiError as error:   # pragma: no cover
-                retries -= 1  # pragma: no cover
+    # Large uploads can be sent in chunks.
+    else:
+        upload_session_start_result = dbx.files_upload_session_start(file_handle.read(CHUNK_SIZE))
 
-                if retries == 0:  # pragma: no cover
-                    raise IOError("Failed to upload to dropbox: {}".format(error))  # pragma: no cover
-
-                continue  # Retry.
-
-            session_cursor.offset += len(data)
-            data = file_handle.read(CHUNK_SIZE)
-
-    # This will commit the file and persist it in Dropbox.
-    dbx.files_upload_session_finish(
-        f='',
-        cursor=session_cursor,
-        commit=CommitInfo(
-            path='/{}'.format(file_name),  # The slash indicates it's relative to the root of app folder.
-            autorename=False
+        cursor = dropbox.files.UploadSessionCursor(
+            session_id=upload_session_start_result.session_id,
+            offset=file_handle.tell()
         )
-    )
+        commit = dropbox.files.CommitInfo(path=dest_path, autorename=False)
+
+        while file_handle.tell() < file_size:
+            if (file_size - file_handle.tell()) <= CHUNK_SIZE:
+                dbx.files_upload_session_finish(file_handle.read(CHUNK_SIZE), cursor, commit)
+            else:
+                dbx.files_upload_session_append(file_handle.read(CHUNK_SIZE), cursor.session_id, cursor.offset)
+                cursor.offset = file_handle.tell()
+
+    file_handle.close()
