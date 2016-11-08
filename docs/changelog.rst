@@ -8,6 +8,11 @@ v1.4.0 - 2016-xx-xx
 - Support for Python 3.5 (`#55 <https://github.com/dennissiemensma/dsmr-reader/issues/55>`_).
 
 
+v1.3.2 - 2016-11-08
+^^^^^^^^^^^^^^^^^^^
+- Requirements update (november 2016) (`#150 <https://github.com/dennissiemensma/dsmr-reader/issues/150>`_).
+
+
 v1.3.1 - 2016-08-16
 ^^^^^^^^^^^^^^^^^^^
 - CSS large margin-bottom (`#144 <https://github.com/dennissiemensma/dsmr-reader/issues/144>`_).
