@@ -57,6 +57,7 @@ def upload_chunked(file_path):
     dest_path = '/{}'.format(file_name)  # The slash indicates it's relative to the root of app folder.
 
     dbx = dropbox.Dropbox(dropbox_settings.access_token)
+    write_mode = dropbox.files.WriteMode.overwrite
 
     file_handle = open(file_path, 'rb')
     file_size = os.path.getsize(file_path)
@@ -66,7 +67,7 @@ def upload_chunked(file_path):
 
     # Small uploads should be transfers at one go.
     if file_size <= CHUNK_SIZE:
-        dbx.files_upload(file_handle.read(), dest_path)
+        dbx.files_upload(file_handle.read(), dest_path, mode=write_mode)
 
     # Large uploads can be sent in chunks.
     else:
@@ -76,7 +77,7 @@ def upload_chunked(file_path):
             session_id=upload_session_start_result.session_id,
             offset=file_handle.tell()
         )
-        commit = dropbox.files.CommitInfo(path=dest_path, autorename=False)
+        commit = dropbox.files.CommitInfo(path=dest_path, mode=write_mode)
 
         while file_handle.tell() < file_size:
             if (file_size - file_handle.tell()) <= CHUNK_SIZE:
