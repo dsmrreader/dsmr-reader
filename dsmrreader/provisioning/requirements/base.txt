@@ -6,6 +6,6 @@ django-solo==1.1.2
 dropbox==7.1.1
 gunicorn==19.6
 pyserial==3.2.1
-python-dateutil==2.5.3
+python-dateutil==2.6.0
 raven==5.31.0
 pytz==2016.7
