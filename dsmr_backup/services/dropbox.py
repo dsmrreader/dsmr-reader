@@ -69,7 +69,7 @@ def upload_chunked(file_path):
     if file_size <= CHUNK_SIZE:
         dbx.files_upload(file_handle.read(), dest_path, mode=write_mode)
 
-    # Large uploads can be sent in chunks.
+    # Large uploads can be sent in chunks, by creating a session allowing multiple separate uploads.
     else:
         upload_session_start_result = dbx.files_upload_session_start(file_handle.read(CHUNK_SIZE))
 
@@ -79,6 +79,8 @@ def upload_chunked(file_path):
         )
         commit = dropbox.files.CommitInfo(path=dest_path, mode=write_mode)
 
+        # We keep sending the data in chunks, until we reach the last one, then we instruct Dropbox to finish the upload
+        # by combining all the chunks sent previously.
         while file_handle.tell() < file_size:
             if (file_size - file_handle.tell()) <= CHUNK_SIZE:
                 dbx.files_upload_session_finish(file_handle.read(CHUNK_SIZE), cursor, commit)
