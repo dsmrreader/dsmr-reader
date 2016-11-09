@@ -34,7 +34,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
                 exception_traceback = traceback.format_tb(current_response.__traceback__, limit=100)
                 exception_traceback = "\n".join(exception_traceback)
 
-                self.stdout.write(' - {} :: {}'.format(current_receiver, exception_traceback))
+                self.stdout.write(' >>> Uncaught exception :: {}'.format(current_response))
+                self.stdout.write(' >>> {} :: {}'.format(current_receiver, exception_traceback))
                 self.stderr.write(exception_traceback)
                 signal_failures.append(exception_traceback)
 
