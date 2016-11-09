@@ -8,6 +8,10 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
         'console': {
             # logging handler that outputs log messages to terminal
             'class': 'logging.StreamHandler',
@@ -15,6 +19,10 @@ LOGGING = {
         },
     },
     'loggers': {
+        'root': {
+            'level': 'WARNING',
+            'handlers': ['sentry'],
+        },
         'django.db.backends': {
 #            'handlers': ['console'],
             'level': 'DEBUG',

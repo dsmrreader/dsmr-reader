@@ -1,5 +1,6 @@
 import re
 
+from raven.contrib.django.raven_compat.models import client as raven_client
 from serial.serialutil import SerialException
 from django.utils import timezone
 from django.conf import settings
@@ -69,6 +70,9 @@ def read_telegram():
         try:
             # Make sure weird characters are converted properly.
             data = str(data, 'utf-8')
+        except UnicodeDecodeError:
+            # This means we hit some unknown data, send it to Sentry, if possible.
+            raven_client.captureException()
         except TypeError:
             pass
 
