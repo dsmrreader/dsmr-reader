@@ -8,7 +8,9 @@ from dsmr_stats.models import DayStatistics
 
 
 def should_notify(settings):
-    """ Checks whether we should notify """
+    """ Checks whether we should notify
+    :param settings:
+    """
 
     # Only when enabled and token set.
     if not settings.send_notification or not settings.api_key:
@@ -22,26 +24,80 @@ def should_notify(settings):
     return True
 
 
+def get_notification_api_url(settings):
+    """ Retrieve the API url for the notification service
+    :param settings:
+    """
+    return NotificationSetting.NOTIFICATION_API_URL[
+        settings.notification_service]
+
+
+def get_notification_priority():
+    """ Get the priority indicator for the notification API's
+    :return:
+    """
+    return '-2'
+
+
+def get_notification_sender_name():
+    """ Get the sender name for the notification API's
+    :return:
+    """
+    return 'DSMR-Reader'
+
+
+def get_notification_event_name():
+    """ Get the event name for the notification API's
+    :return:
+    """
+    return str(_('Daily usage notification'))
+
+
+def create_notification_message(day, stats):
+    """
+    Create the action notification message
+    :param day:
+    :param stats:
+    :return:
+    """
+    return _('Your daily usage statics for {}\n'
+             'Total cost: € {}\n'
+             'Electricity: {} kWh\n'
+             'Gas: {} m3').format(
+        (day - timezone.timedelta(hours=1)).strftime("%d-%m-%Y"),
+        stats.total_cost,
+        (float(stats.electricity1)+float(stats.electricity2)),
+        stats.gas
+    )
+
+
 def send_notification(api_url, api_key, notification_message):
-    """ Sends notification using the preferred service  """
+    """ Sends notification using the preferred service
+    :param api_url:
+    :param api_key:
+    :param notification_message:
+    """
 
     response = requests.post(api_url, {
         'apikey': api_key,
-        'priority': '-2',
-        'application': 'DSMR-Reader',
-        'event': str(_('Daily usage notification')),
+        'priority': get_notification_priority(),
+        'application': get_notification_sender_name(),
+        'event': get_notification_event_name(),
         'description': notification_message
     })
 
     if response.status_code != 200:
-        raise AssertionError('Push-notification failed: %s (HTTP%s)'.format(
+        raise AssertionError('Notify API call failed: {0} (HTTP{1})'.format(
             response.text, response.status_code))
 
     return True
 
 
 def set_next_notification(settings, now):
-    """ Set the next moment for notifications to be allowed again """
+    """ Set the next moment for notifications to be allowed again
+    :param now:
+    :param settings:
+    """
     tomorrow = (now + timezone.timedelta(hours=24)).date()
     settings.next_notification = tomorrow
     settings.save()
@@ -64,26 +120,17 @@ def notify():
     ))
 
     try:
+        notification_api_url = get_notification_api_url(settings)
+    except KeyError:
+        raise AssertionError('Could not determine notification API url!')
+
+    try:
         stats = DayStatistics.objects.get(
             day=(midnight - timezone.timedelta(hours=1))
         )
     except DayStatistics.DoesNotExist:
-        return  # Try again some other time
+        return False  # Try again in a next run
 
-
-
-    notification_api_url = NotificationSetting.NOTIFICATION_API_URL.get(
-        settings.notification_service)
-
-    message = _('Your daily usage statics for {}\n'
-                'Total cost: € {}\n'
-                'Electricity: {} kWh\n'
-                'Gas: {} m3').format(
-        (midnight - timezone.timedelta(hours=1)).strftime("%d-%m-%Y"),
-        stats.total_cost,
-        (float(stats.electricity1)+float(stats.electricity2)),
-        stats.gas
-    )
-
+    message = create_notification_message(midnight, stats)
     send_notification(notification_api_url, settings.api_key, message)
     set_next_notification(settings, today)

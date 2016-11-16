@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 01:05+0100\n"
-"PO-Revision-Date: 2016-11-08 02:27+0100\n"
+"POT-Creation-Date: 2016-11-20 18:00+0100\n"
+"PO-Revision-Date: 2016-11-20 17:59+0100\n"
 "Last-Translator: Jeroen Peters <jeroenpeters1986@gmail.com>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -18,775 +18,1384 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: dsmr_api/apps.py:7
 msgid "API"
 msgstr "API"
 
+#: dsmr_api/models.py:10
 msgid "Allow API calls"
 msgstr "Sta API-calls toe"
 
+#: dsmr_api/models.py:11
 msgid "Whether the API is available for use."
 msgstr "Geeft aan of de API beschikbaar is voor gebruik."
 
+#: dsmr_api/models.py:17
 msgid "Auth Key"
 msgstr "Authorisatiesleutel"
 
+#: dsmr_api/models.py:18
 msgid "The auth key used to authenticate for this API."
 msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
 
+#: dsmr_api/models.py:26
 msgid "API configuration"
 msgstr "API-configuratie"
 
+#: dsmr_api/views.py:17
 msgid "API is disabled"
 msgstr "API is uitgeschakeld"
 
+#: dsmr_api/views.py:21
 msgid "Invalid auth key"
 msgstr "Ongeldige autorisatiesleutel"
 
+#: dsmr_api/views.py:27
 msgid "Invalid data"
 msgstr "Ongeldige gegevens"
 
+#: dsmr_api/views.py:36
 msgid "Failed to parse telegram"
 msgstr "Inlezen telegram mislukt"
 
+#: dsmr_backend/apps.py:12
 msgid "Backend"
 msgstr "Achterkant"
 
-msgid "Unsupported database engine \"{}\" active, some features might not work properly"
-msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
+#: dsmr_backend/apps.py:20
+msgid ""
+"Unsupported database engine \"{}\" active, some features might not work "
+"properly"
+msgstr ""
+"De database engine \"{}\" wordt niet actief ondersteund, sommige functies "
+"werken hierdoor mogelijk minder goed"
 
-msgid "Generates a generic event triggering apps for backend operations, cron-like."
-msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
+#: dsmr_backend/management/commands/dsmr_backend.py:12
+msgid ""
+"Generates a generic event triggering apps for backend operations, cron-like."
+msgstr ""
+"Genereert een generiek signaal dat gebruikt kan worden door plugins voor "
+"achtergrondoperaties, zoals cron."
 
+#: dsmr_backend/mixins.py:22
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer."
 
+#: dsmr_backup/apps.py:9
 msgid "Backup"
 msgstr "Backup"
 
+#: dsmr_backup/models/settings.py:12
 msgid "Backup daily"
 msgstr "Dagelijkse backup"
 
-msgid "Create a backup of your data daily. Stored locally, but can be exported using Dropbox."
-msgstr "Maak een dagelijkse backup van je gegevens. Wordt lokaal opgeslagen maar kan geexporteerd worden via Dropbox."
+#: dsmr_backup/models/settings.py:13
+msgid ""
+"Create a backup of your data daily. Stored locally, but can be exported "
+"using Dropbox."
+msgstr ""
+"Maak een dagelijkse backup van je gegevens. Wordt lokaal opgeslagen maar kan "
+"geexporteerd worden via Dropbox."
 
+#: dsmr_backup/models/settings.py:17
 msgid "Compress"
 msgstr "Comprimeren"
 
-msgid "Create backups in compressed (gzip) format, saving a significant amount of disk space."
-msgstr "Maak backups in gecomprimeerd (gzip) formaat, waarmee een aanzienlijke hoeveelheid schijfruimte bespaard wordt."
+#: dsmr_backup/models/settings.py:18
+msgid ""
+"Create backups in compressed (gzip) format, saving a significant amount of "
+"disk space."
+msgstr ""
+"Maak backups in gecomprimeerd (gzip) formaat, waarmee een aanzienlijke "
+"hoeveelheid schijfruimte bespaard wordt."
 
+#: dsmr_backup/models/settings.py:22
 msgid "Backup timestamp"
 msgstr "Tijdstip van backup"
 
-msgid "Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation."
-msgstr "Voorkeurstijdstip van dagelijkse backup. Ons advies is om een moment in de nacht te pakken, gezien het maken van een backup de werking van de applicatie kort kan onderbreken."
+#: dsmr_backup/models/settings.py:24
+msgid ""
+"Daily moment of creating the backup. You should prefer a nightly timestamp, "
+"as it might freeze or lock the application shortly during backup creation."
+msgstr ""
+"Voorkeurstijdstip van dagelijkse backup. Ons advies is om een moment in de "
+"nacht te pakken, gezien het maken van een backup de werking van de "
+"applicatie kort kan onderbreken."
 
+#: dsmr_backup/models/settings.py:32
 msgid "Latest backup"
 msgstr "Meest recente backup"
 
-msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
-msgstr "Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de backup wordt (eenmalig) de eerste keer genegeerd!"
+#: dsmr_backup/models/settings.py:34
+msgid ""
+"Timestamp of latest backup created. Automatically updated by application. "
+"Please note that the application will ignore the \"backup_time\" setting the "
+"first time used."
+msgstr ""
+"Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. "
+"N.B.: Het voorkeurstijdstip van de backup wordt (eenmalig) de eerste keer "
+"genegeerd!"
 
+#: dsmr_backup/models/settings.py:44
 msgid "Backup configuration"
 msgstr "Backupconfiguratie"
 
+#: dsmr_backup/models/settings.py:54
 msgid "Dropbox access token"
 msgstr "Dropbox 'access token'"
 
-msgid "The access token for your Dropbox account. You should register an App for your own Dropbox account (https://www.dropbox.com/developers/apps). Please select \"Permission type\" named \"App folder\" to restrict unneeded access. Backups will be synced to a dedicated folder in your account. After creating your App you should be able to generate an \"Access token\" and enter it here. For more information, see https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
-msgstr "Het 'access token' voor je Dropbox account. Hiervoor moet je onder je eigen account een applicatie registeren (https://www.dropbox.com/developers/apps). Zorg ervoor dat je bij \"Permission type\" kiest voor de optie \"App folder\" om de gedeelde toegang tot je account te beperken. Backups worden hierdoor in je account op een geïsoleerde locatie gezet. Zodra je in Dropbox een applicatie hebt toegevoegd, kun je een zogeheten \"Access token\" genereren en hier invullen. Zie voor meer informatie: https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
+#: dsmr_backup/models/settings.py:56
+msgid ""
+"The access token for your Dropbox account. You should register an App for "
+"your own Dropbox account (https://www.dropbox.com/developers/apps). Please "
+"select \"Permission type\" named \"App folder\" to restrict unneeded access. "
+"Backups will be synced to a dedicated folder in your account. After creating "
+"your App you should be able to generate an \"Access token\" and enter it "
+"here. For more information, see https://blogs.dropbox.com/developers/2014/05/"
+"generate-an-access-token-for-your-own-account"
+msgstr ""
+"Het 'access token' voor je Dropbox account. Hiervoor moet je onder je eigen "
+"account een applicatie registeren (https://www.dropbox.com/developers/apps). "
+"Zorg ervoor dat je bij \"Permission type\" kiest voor de optie \"App folder"
+"\" om de gedeelde toegang tot je account te beperken. Backups worden "
+"hierdoor in je account op een geïsoleerde locatie gezet. Zodra je in Dropbox "
+"een applicatie hebt toegevoegd, kun je een zogeheten \"Access token\" "
+"genereren en hier invullen. Zie voor meer informatie: https://blogs.dropbox."
+"com/developers/2014/05/generate-an-access-token-for-your-own-account"
 
+#: dsmr_backup/models/settings.py:69
 msgid "Latest sync"
 msgstr "Meest recente synchronisatie"
 
-msgid "Timestamp of latest sync with Dropbox. Automatically updated by application."
-msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
+#: dsmr_backup/models/settings.py:70
+msgid ""
+"Timestamp of latest sync with Dropbox. Automatically updated by application."
+msgstr ""
+"Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit "
+"automatisch bij."
 
+#: dsmr_backup/models/settings.py:78
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
 
+#: dsmr_consumption/apps.py:9
 msgid "Consumption"
 msgstr "Verbruik"
 
+#: dsmr_consumption/models/consumption.py:11
+#: dsmr_datalogger/models/reading.py:26
 msgid "Meter Reading electricity delivered to client (low tariff) in 0,001 kWh"
-msgstr "Meterstand van verbruikte elektriciteit (laagtarief) in stappen van 1 Watt uur"
+msgstr ""
+"Meterstand van verbruikte elektriciteit (laagtarief) in stappen van 1 Watt "
+"uur"
 
+#: dsmr_consumption/models/consumption.py:16
+#: dsmr_datalogger/models/reading.py:31
 msgid "Meter Reading electricity delivered by client (low tariff) in 0,001 kWh"
-msgstr "Meterstand van teruggeleverde elektriciteit (laagtarief) in stappen van 1 Watt uur"
+msgstr ""
+"Meterstand van teruggeleverde elektriciteit (laagtarief) in stappen van 1 "
+"Watt uur"
 
-msgid "Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"
-msgstr "Meterstand van verbruikte elektriciteit (piektarief) in stappen van 1 Watt uur"
+#: dsmr_consumption/models/consumption.py:21
+#: dsmr_datalogger/models/reading.py:36
+msgid ""
+"Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"
+msgstr ""
+"Meterstand van verbruikte elektriciteit (piektarief) in stappen van 1 Watt "
+"uur"
 
-msgid "Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"
-msgstr "Meterstand van teruggeleverde elektriciteit (piektarief) in stappen van 1 Watt uur"
+#: dsmr_consumption/models/consumption.py:26
+#: dsmr_datalogger/models/reading.py:41
+msgid ""
+"Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"
+msgstr ""
+"Meterstand van teruggeleverde elektriciteit (piektarief) in stappen van 1 "
+"Watt uur"
 
+#: dsmr_consumption/models/consumption.py:31
+#: dsmr_datalogger/models/reading.py:46
 msgid "Actual electricity power delivered (+P) in 1 Watt resolution"
 msgstr "Daadwerkelijk geleverde elektriciteit geleverd (-P) in 1 Watt stappen"
 
+#: dsmr_consumption/models/consumption.py:37
+#: dsmr_datalogger/models/reading.py:51
 msgid "Actual electricity power received (-P) in 1 Watt resolution"
 msgstr "Daadwerkelijk geleverde elektriciteit ontvangen (-P) in 1 Watt stappen"
 
+#: dsmr_consumption/models/consumption.py:56
+#: dsmr_datalogger/models/reading.py:63
 msgid "Last hourly value delivered to client"
 msgstr "Waarde wat er vorig uur is geleverd aan client"
 
+#: dsmr_consumption/models/consumption.py:62
 msgid "Actual value delivered to client, since the last hour"
 msgstr "Daadwerkelijke waarde geleverd aan client, vanaf het vorige uur"
 
+#: dsmr_consumption/models/energysupplier.py:23
 msgid "Start"
 msgstr "Start"
 
+#: dsmr_consumption/models/energysupplier.py:23
 msgid "Contract start"
 msgstr "Contract start"
 
+#: dsmr_consumption/models/energysupplier.py:24
 msgid "End"
 msgstr "Einde"
 
+#: dsmr_consumption/models/energysupplier.py:24
 msgid "Contract end"
 msgstr "Contract einde"
 
+#: dsmr_consumption/models/energysupplier.py:26
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:58
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:108
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:171
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:216
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:256
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:296
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:341
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:381
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:430
+#: dsmr_stats/models/note.py:8
 msgid "Description"
 msgstr "Omschrijving"
 
+#: dsmr_consumption/models/energysupplier.py:27
 msgid "For your own reference, i.e. the name of your supplier"
-msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
+msgstr ""
+"Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
 
+#: dsmr_consumption/models/energysupplier.py:30
+#: dsmr_stats/models/statistics.py:23
 msgid "Electricity 1 price (low tariff)"
 msgstr "Prijs elektriciteit 1 (daltarief)"
 
+#: dsmr_consumption/models/energysupplier.py:33
+#: dsmr_stats/models/statistics.py:26
 msgid "Electricity 2 price (high tariff)"
 msgstr "Prijs elektriciteit 2 (piektarief)"
 
+#: dsmr_consumption/models/energysupplier.py:35
+#: dsmr_stats/models/statistics.py:34
 msgid "Gas price"
 msgstr "Gasprijs"
 
+#: dsmr_consumption/models/energysupplier.py:38
 msgid "Energy Supplier"
 msgstr "Energieleverancier"
 
+#: dsmr_consumption/models/energysupplier.py:42
 msgid "Energy supplier price"
 msgstr "Tarief energieleverancier"
 
+#: dsmr_consumption/models/energysupplier.py:43
 msgid "Energy supplier prices"
 msgstr "Tarieven energieleverancier"
 
+#: dsmr_consumption/models/settings.py:11
 msgid "By reading (every 10 seconds)"
 msgstr "Per meting (elke 10 seconden)"
 
+#: dsmr_consumption/models/settings.py:12
 msgid "By minute"
 msgstr "Per minuut"
 
+#: dsmr_consumption/models/settings.py:18
 msgid "Compactor grouping type"
 msgstr "Metingen groeperen"
 
-msgid "Electricity readings are read every 10 seconds. We can group those for you."
-msgstr "Elektriciteitsmetingen vinden elke 10 seconden plaats. We kunnen ze voor je groeperen."
+#: dsmr_consumption/models/settings.py:19
+msgid ""
+"Electricity readings are read every 10 seconds. We can group those for you."
+msgstr ""
+"Elektriciteitsmetingen vinden elke 10 seconden plaats. We kunnen ze voor je "
+"groeperen."
 
+#: dsmr_consumption/models/settings.py:27
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
+#: dsmr_datalogger/apps.py:7
 msgid "Datalogger"
 msgstr "Datalogger"
 
+#: dsmr_datalogger/management/commands/dsmr_datalogger.py:10
 msgid "Performs an DSMR P1 telegram reading on the COM port."
 msgstr "Leest een DSMR P1 telegram uit van de COM-poort (meting)."
 
-msgid "Generates a FAKE reading. DO NOT USE in production! Used for integration checks."
-msgstr "Genereert een NEP-meting. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
+#: dsmr_datalogger/management/commands/dsmr_fake_datasource.py:14
+msgid ""
+"Generates a FAKE reading. DO NOT USE in production! Used for integration "
+"checks."
+msgstr ""
+"Genereert een NEP-meting. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor "
+"integratietests."
 
-msgid "Required option to acknowledge you that you WILL mess up your data with this."
-msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee je data kan verprutsen."
+#: dsmr_datalogger/management/commands/dsmr_fake_datasource.py:25
+msgid ""
+"Required option to acknowledge you that you WILL mess up your data with this."
+msgstr ""
+"Verplichte parameter om te bevestigen dat je beseft dat je hiermee je data "
+"kan verprutsen."
 
+#: dsmr_datalogger/management/commands/dsmr_fake_datasource.py:32
 msgid "Include gas consumption"
 msgstr "Neem gasverbruik mee"
 
+#: dsmr_datalogger/management/commands/dsmr_fake_datasource.py:39
 msgid "Include electricity returned (solar panels)"
 msgstr "neem teruglevering elektriciteit mee (zonnepanelen)"
 
-msgid "Intended usage is NOT production! Force by using --ack-to-mess-up-my-data"
-msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-my-data"
+#: dsmr_datalogger/management/commands/dsmr_fake_datasource.py:45
+msgid ""
+"Intended usage is NOT production! Force by using --ack-to-mess-up-my-data"
+msgstr ""
+"Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-"
+"my-data"
 
+#: dsmr_datalogger/models/reading.py:21 dsmr_datalogger/models/reading.py:83
 msgid "Timestamp indicating when the reading was taken, according to the meter"
 msgstr "Moment waarop de meting is gedaan, volgens de meter."
 
+#: dsmr_datalogger/models/reading.py:56
 msgid "Last hourly reading timestamp"
 msgstr "Tijdstip van laatste meting"
 
+#: dsmr_datalogger/models/reading.py:68
 msgid "Whether this reading has been processed for merging into statistics"
-msgstr "Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
+msgstr ""
+"Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
 
+#: dsmr_datalogger/models/reading.py:74
 msgid "DSMR reading"
 msgstr "DSMR-meting"
 
-msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
-msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor piektarief."
+#: dsmr_datalogger/models/reading.py:88
+msgid ""
+"Tariff indicator electricity. The tariff indicator can be used to switch "
+"tariff  dependent loads e.g boilers. This is responsibility of the P1 user. "
+"Note: Tariff code 1 is used for low tariff and tariff code 2 is used for "
+"normal tariff."
+msgstr ""
+"Tariefindicatie. Dit kan gebruikt worden om te wisselen met "
+"tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is "
+"voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor "
+"daltarief en tariefcode 2 voor piektarief."
 
+#: dsmr_datalogger/models/reading.py:96
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:66
 msgid "Number of power failures in any phases"
 msgstr "Aantal stroomstoringen in alle fases"
 
+#: dsmr_datalogger/models/reading.py:101
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:72
 msgid "Number of long power failures in any phase"
 msgstr "Aantal langdurige stroomstoringen in alle fases"
 
+#: dsmr_datalogger/models/reading.py:106
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:78
 msgid "Number of voltage sags/dips in phase L1"
 msgstr "Aantal spanningsdippen in fase L1"
 
+#: dsmr_datalogger/models/reading.py:111
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:84
 msgid "Number of voltage sags/dips in phase L2 (polyphase meters only)"
-msgstr "Aantal spanningsdippen in fase L2 (alleen voor meters met meerdere fasen)"
+msgstr ""
+"Aantal spanningsdippen in fase L2 (alleen voor meters met meerdere fasen)"
 
+#: dsmr_datalogger/models/reading.py:116
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:90
 msgid "Number of voltage sags/dips in phase L3 (polyphase meters only)"
-msgstr "Aantal spanningsdippen in fase L3 (alleen voor meters met meerdere fasen)"
+msgstr ""
+"Aantal spanningsdippen in fase L3 (alleen voor meters met meerdere fasen)"
 
+#: dsmr_datalogger/models/reading.py:121
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:96
 msgid "Number of voltage swells in phase L1"
 msgstr "Aantal spanningspieken in fase L1"
 
+#: dsmr_datalogger/models/reading.py:126
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:102
 msgid "Number of voltage swells in phase L2 (polyphase meters only)"
-msgstr "Aantal spanningspieken in fase L2 (alleen voor meters met meerdere fasen)"
+msgstr ""
+"Aantal spanningspieken in fase L2 (alleen voor meters met meerdere fasen)"
 
+#: dsmr_datalogger/models/reading.py:131
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:108
 msgid "Number of voltage swells in phase L3 (polyphase meters only)"
-msgstr "Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen)"
+msgstr ""
+"Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen)"
 
+#: dsmr_datalogger/models/reading.py:138
 msgid "DSMR Meter statistics"
 msgstr "Meterstatistieken"
 
+#: dsmr_datalogger/models/settings.py:11
 msgid "DSMR version 4"
 msgstr "DSMR-versie 4"
 
+#: dsmr_datalogger/models/settings.py:12
 msgid "DSMR version 2/3"
 msgstr "DSMR-versie 2/3"
 
+#: dsmr_datalogger/models/settings.py:17
 msgid "Poll P1 port"
 msgstr "Peil P1 poort"
 
-msgid "Whether we should track the P1 port on your smartmeter. Almost every feature inside this project requires this to be enabled. However, it might be disabled temporarily due to technical reasons, such as data migrations."
-msgstr "Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke functionaliteit binnen dit project vereist dat dit altijd aanstaat. Het kan desondanks zijn dat het tijdelijk uitgezet wordt, wegens technische redenen, zoals datamigraties (bij updates)."
+#: dsmr_datalogger/models/settings.py:19
+msgid ""
+"Whether we should track the P1 port on your smartmeter. Almost every feature "
+"inside this project requires this to be enabled. However, it might be "
+"disabled temporarily due to technical reasons, such as data migrations."
+msgstr ""
+"Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke "
+"functionaliteit binnen dit project vereist dat dit altijd aanstaat. Het kan "
+"desondanks zijn dat het tijdelijk uitgezet wordt, wegens technische redenen, "
+"zoals datamigraties (bij updates)."
 
+#: dsmr_datalogger/models/settings.py:26
 msgid "Track meter statistics"
 msgstr "Houd meterstatistieken bij"
 
-msgid "Whether we should track any extra statistics sent by the meter, such as the number of power failures of voltage dips. Data is not required for core features."
-msgstr "Geeft aan of we extra meterstatistieken moeten bijhouden, zoals het aantal stroomstoringen of spanningsdippen. Deze gegevens zijn niet nodig voor de basisfunctionaliteit."
+#: dsmr_datalogger/models/settings.py:28
+msgid ""
+"Whether we should track any extra statistics sent by the meter, such as the "
+"number of power failures of voltage dips. Data is not required for core "
+"features."
+msgstr ""
+"Geeft aan of we extra meterstatistieken moeten bijhouden, zoals het aantal "
+"stroomstoringen of spanningsdippen. Deze gegevens zijn niet nodig voor de "
+"basisfunctionaliteit."
 
+#: dsmr_datalogger/models/settings.py:36
 msgid "DSMR version"
 msgstr "DSMR-versie"
 
-msgid "The DSMR version your meter supports. Version should be printed on meter."
-msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
+#: dsmr_datalogger/models/settings.py:37
+msgid ""
+"The DSMR version your meter supports. Version should be printed on meter."
+msgstr ""
+"De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op "
+"de meter."
 
+#: dsmr_datalogger/models/settings.py:43
 msgid "COM-port"
 msgstr "COM-poort"
 
+#: dsmr_datalogger/models/settings.py:44
 msgid "COM-port connected to Smartmeter."
 msgstr "COM-poort die verbonden is met je slimme meter."
 
+#: dsmr_datalogger/models/settings.py:52
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
 
+#: dsmr_frontend/apps.py:7
 msgid "Frontend"
 msgstr "Interface"
 
+#: dsmr_frontend/forms.py:9 dsmr_stats/models/note.py:7
 msgid "Day"
 msgstr "Dag"
 
+#: dsmr_frontend/forms.py:10
 msgid "Hour"
 msgstr "Uur"
 
+#: dsmr_frontend/forms.py:14
 msgid "CSV"
 msgstr "CSV"
 
+#: dsmr_frontend/management/commands/dsmr_frontend_clear_cache.py:8
 msgid "Clears the entire cache."
 msgstr "Gooit de volledige cache leeg."
 
-msgid "Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!"
-msgstr "Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configuratie-pagina!"
+#: dsmr_frontend/migrations/0006_notifications_initial.py:24
+msgid ""
+"Welcome to DSMR-reader! Please make sure to check your settings in the "
+"Configuration page!"
+msgstr ""
+"Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configuratie-"
+"pagina!"
 
+#: dsmr_frontend/migrations/0006_notifications_initial.py:31
 msgid "You may check the status of your readings and data in the Status page."
 msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."
 
+#: dsmr_frontend/models/settings.py:11
 msgid "Reverse dashboard graphs"
 msgstr "Keer dashboard-grafieken om"
 
+#: dsmr_frontend/models/settings.py:12
 msgid "Whether graphs are rendered with an reversed X-axis"
 msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
 
+#: dsmr_frontend/models/settings.py:17
 msgid "Electricity delivered color"
 msgstr "Kleur elektriciteitsverbruik"
 
+#: dsmr_frontend/models/settings.py:18
 msgid "Graph color for electricity delivered (default + high tariff)"
 msgstr "Grafiekkleur voor elektriciteitsverbruik (standaard + hoogtarief)"
 
+#: dsmr_frontend/models/settings.py:22
 msgid "Electricity delivered color (alternative)"
 msgstr "Kleur elektriciteitsverbruik (alternatief)"
 
+#: dsmr_frontend/models/settings.py:23
 msgid "Graph color for electricity delivered (low tariff)"
 msgstr "Grafiekkleur voor elektriciteitsverbruik (laagtarief)"
 
+#: dsmr_frontend/models/settings.py:27
 msgid "Electricity returned color"
 msgstr "Kleur teruglevering elektriciteit"
 
+#: dsmr_frontend/models/settings.py:28
 msgid "Graph color for electricity returned (default + high tariff)"
 msgstr "Grafiekkleur voor elektriciteit teruglevering (standaard + hoogtarief)"
 
+#: dsmr_frontend/models/settings.py:32
 msgid "Electricity returned color (alternative)"
 msgstr "Kleur teruglevering elektriciteit (alternatief)"
 
+#: dsmr_frontend/models/settings.py:33
 msgid "Graph color for electricity returned (low tariff)"
 msgstr "Grafiekkleur voor elektriciteit teruglevering (laagtarief)"
 
+#: dsmr_frontend/models/settings.py:37
 msgid "Gas delivered color"
 msgstr "Kleur gasverbruik"
 
+#: dsmr_frontend/models/settings.py:38
 msgid "Graph color for gas delivered"
 msgstr "Grafiekkleur voor gasverbruik"
 
+#: dsmr_frontend/models/settings.py:42
 msgid "Temperature color"
 msgstr "Temperatuurkleur"
 
+#: dsmr_frontend/models/settings.py:43
 msgid "Graph color for temperatures read"
 msgstr "Grafiekkleur voor temperatuurmetingen"
 
+#: dsmr_frontend/models/settings.py:51
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:6
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:7
+#: dsmr_frontend/templates/dsmr_frontend/base.html:78
 msgid "Archive"
 msgstr "Archief"
 
-msgid "No data found. It can take up to one day before any data is visible here."
-msgstr "Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer gegevens zichtbaar."
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:14
+msgid ""
+"No data found. It can take up to one day before any data is visible here."
+msgstr ""
+"Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer "
+"gegevens zichtbaar."
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:23
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:24
 msgid "Select level of detail displayed"
 msgstr "Selecteer detailniveau"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:28
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:29
 msgid "Days"
 msgstr "Dagen"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:32
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:33
 msgid "Months"
 msgstr "Maanden"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:36
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:37
 msgid "Years"
 msgstr "Jaren"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:58
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:82
+#: dsmr_frontend/templates/dsmr_frontend/status.html:148
 msgid "Electricity usage"
 msgstr "Elektriciteitsverbruik"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:58
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:72
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:82
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:100
 msgid "(in kWh)"
 msgstr "(in kWh)"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:72
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:100
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:317
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:217
 msgid "Electricity returned"
 msgstr "Elektriciteit teruggeleverd"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:86
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:118
+#: dsmr_frontend/templates/dsmr_frontend/status.html:156
 msgid "Gas usage"
 msgstr "Gasverbruik"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:86
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:118
 msgid "(in m<sup>3</sup>)"
 msgstr "(in m<sup>3</sup>)"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:266
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:320
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:104
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:157
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:27
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:34
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:158
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:180
+#: dsmr_stats/models/statistics.py:11 dsmr_stats/models/statistics.py:62
 msgid "Electricity 1 (low tariff)"
 msgstr "Elektriciteit 1 (daltarief)"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:275
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:329
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:110
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:163
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:34
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:39
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:152
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:174
+#: dsmr_stats/models/statistics.py:14 dsmr_stats/models/statistics.py:65
 msgid "Electricity 2 (high tariff)"
 msgstr "Elektriciteit 2 (piektarief)"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:303
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:358
+#: dsmr_stats/models/statistics.py:17 dsmr_stats/models/statistics.py:68
 msgid "Electricity 1 returned (low tariff)"
 msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:312
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:367
 msgid "Electricity 1 returned (high tariff)"
 msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
+#: dsmr_frontend/templates/dsmr_frontend/archive.html:340
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:396
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:117
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:170
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:340
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:41
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:238
+#: dsmr_stats/models/statistics.py:31 dsmr_stats/models/statistics.py:75
 msgid "Gas"
 msgstr "Gas"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:37
+#: dsmr_frontend/templates/dsmr_frontend/base.html:38
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:57
+#: dsmr_frontend/templates/dsmr_frontend/status.html:28
 msgid "View releases"
 msgstr "Bekijk releases"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:73
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:7
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:8
 msgid "Dashboard"
 msgstr "Dashboard"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:83
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:7
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:8
 msgid "Trends"
 msgstr "Trends"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:88
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:6
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:7
 msgid "Statistics"
 msgstr "Statistieken"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:93
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:7
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:8
 msgid "Compare"
 msgstr "Vergelijk"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:101
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:57
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:107
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:170
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:215
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:255
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:295
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:340
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:380
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:429
+#: dsmr_frontend/templates/dsmr_frontend/status.html:6
+#: dsmr_frontend/templates/dsmr_frontend/status.html:7
 msgid "Status"
 msgstr "Status"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:109
+#: dsmr_frontend/templates/dsmr_frontend/export.html:6
+#: dsmr_frontend/templates/dsmr_frontend/export.html:7
 msgid "Export data"
 msgstr "Exporteer gegevens"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:109
+#: dsmr_frontend/templates/dsmr_frontend/base.html:114
 msgid "Authentication required"
 msgstr "Inloggen vereist"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:114
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:7
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:8
 msgid "Configuration"
 msgstr "Configuratie"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:122
 msgid "Documentation"
 msgstr "Documentatie"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:135
 msgid "DSMR (Dutch Smart Meter Requirements) reader"
 msgstr "DSMR (Dutch Smart Meter Requirements) reader"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:135
 msgid "created by"
 msgstr "gemaakt door"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:135
 msgid "View repository on Github"
 msgstr "Bekijk repository op Github"
 
+#: dsmr_frontend/templates/dsmr_frontend/base.html:137
 msgid "Theme created by"
 msgstr "Thema gemaakt door"
 
-msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
-msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:15
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:53
+#: dsmr_frontend/templates/dsmr_frontend/export.html:14
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:14
+#: dsmr_frontend/templates/dsmr_frontend/status.html:14
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:15
+msgid ""
+"No data found. Please make sure the datalogger is up and running and the "
+"backend process is running as well."
+msgstr ""
+"Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het "
+"achtergrondproces."
 
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:48
 msgid "Base selection"
 msgstr "Basisselectie"
 
+#: dsmr_frontend/templates/dsmr_frontend/compare.html:59
 msgid "Compare with selection"
 msgstr "Te vergelijken selectie"
 
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:13
 msgid "View all settings"
 msgstr "Bekijk alle instellingen"
 
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:47
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:80
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:97
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:144
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:161
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:188
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:205
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:228
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:245
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:268
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:285
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:313
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:330
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:353
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:370
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:404
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:421
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:452
 msgid "Edit"
 msgstr "Bewerk"
 
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:56
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:106
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:169
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:214
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:254
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:294
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:339
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:379
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:428
 msgid "Setting"
 msgstr "Instelling"
 
-msgid "This will simply alter the latest backup timestamp displayed above to a week ago."
-msgstr "Dit zorgt er simpelweg voor dat het tijdstip van de meest recente back-up een week in het verleden wordt gezet."
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:132
+msgid ""
+"This will simply alter the latest backup timestamp displayed above to a week "
+"ago."
+msgstr ""
+"Dit zorgt er simpelweg voor dat het tijdstip van de meest recente back-up "
+"een week in het verleden wordt gezet."
 
+#: dsmr_frontend/templates/dsmr_frontend/configuration.html:133
 msgid "Schedule new backup now"
 msgstr "Plan per direct nieuwe back-up in"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:14
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:23
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:137
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:141
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:145
 msgid "Watt"
 msgstr "Watt"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:32
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:99
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:152
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:21
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:29
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:62
 msgid "Notifications"
 msgstr "Notificaties"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:70
 msgid "Delete notification"
 msgstr "Verwijder notificatie"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:77
 msgid "View page"
 msgstr "Bekijk pagina"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:93
 msgid "This month"
 msgstr "Huidige maand"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:93
 msgid "until yesterday"
 msgstr "tot en met gisteren"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:99
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:152
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:21
 msgid "Consumed"
 msgstr "Verbruikt"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:99
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:100
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:152
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:153
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:21
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:22
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:29
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:31
 msgid "kWh"
 msgstr "kWh"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:100
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:153
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:22
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:31
 msgid "Returned"
 msgstr "Teruggeleverd"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:101
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:154
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:24
 msgid "Cost"
 msgstr "Kosten"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:124
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:177
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:48
 msgid "Total"
 msgstr "Totaal"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:144
 msgid "Add note for today"
 msgstr "Voeg notitie toe voor vandaag"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:193
 msgid "Recent electricity consumed (watt)"
 msgstr "Recent elektriciteitsverbruik (Watt)"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:208
 msgid "Recent electricity returned (watt)"
 msgstr "Recente teruglevering elektriciteit (Watt)"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:223
 msgid "Recent gas consumed (m<sup>3</sup>)"
 msgstr "Recent gasverbruik (m<sup>3</sup>)"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:238
 msgid "Recent temperatures (&deg;C)"
 msgstr "Recente temperatuurmetingen (&deg;C)"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:294
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:195
 msgid "Electricity"
 msgstr "Elektriciteit"
 
+#: dsmr_frontend/templates/dsmr_frontend/dashboard.html:363
 msgid "Temperature"
 msgstr "Temperatuur"
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:24
 msgid "Select data type"
 msgstr "Selecteer gegevenstype"
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:25
 msgid "Select the type of data you want to export."
 msgstr "Selecteer het soort gegevens dat je wil exporteren."
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:30
 msgid "Day totals"
 msgstr "Dagtotalen"
 
-msgid "Summary of each day. Contains electricity, gas and costs (if applicable)."
-msgstr "Samenvatting van elke dag. Bevat elektriciteit, gas en gemaakte kosten (wanneer van toepassing)."
+#: dsmr_frontend/templates/dsmr_frontend/export.html:31
+msgid ""
+"Summary of each day. Contains electricity, gas and costs (if applicable)."
+msgstr ""
+"Samenvatting van elke dag. Bevat elektriciteit, gas en gemaakte kosten "
+"(wanneer van toepassing)."
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:34
 msgid "Hour totals"
 msgstr "Uurtotalen"
 
-msgid "Summary of each hour read. Contains electricity and gas (if applicable)."
-msgstr "Samenvatting van elk uur. Bevat elektriciteit en gas (wanneer van toepassing)."
+#: dsmr_frontend/templates/dsmr_frontend/export.html:35
+msgid ""
+"Summary of each hour read. Contains electricity and gas (if applicable)."
+msgstr ""
+"Samenvatting van elk uur. Bevat elektriciteit en gas (wanneer van "
+"toepassing)."
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:47
 msgid "Select date range start"
 msgstr "Selecteer startdatum"
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:48
 msgid "Select starting day for export."
 msgstr "Selecteer startdatum voor export."
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:60
 msgid "Select date range end"
 msgstr "Selecteer einddatum"
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:61
 msgid "Select ending day for export."
 msgstr "Selecteer einddatum voor export."
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:75
 msgid "Select export format"
 msgstr "Selecteer export formaat"
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:76
 msgid "Choose a format the data will be exported in."
 msgstr "Kies een formaat waarin de data geëxporteerd wordt."
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:81
 msgid "Excel (.CSV)"
 msgstr "Excel (.CSV)"
 
+#: dsmr_frontend/templates/dsmr_frontend/export.html:82
 msgid "Exports the data in Comma Separated Format, which can be read by Excel."
-msgstr "Exporteert de gegevens in komma gescheiden formaat, die in te lezen is door Excel."
+msgstr ""
+"Exporteert de gegevens in komma gescheiden formaat, die in te lezen is door "
+"Excel."
 
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:12
 msgid "Add note for this date"
 msgstr "Voeg notitie toe voor deze datum"
 
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:23
 msgid "Energy price"
 msgstr "Energieprijs"
 
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:57
+#: dsmr_weather/apps.py:8
 msgid "Weather"
 msgstr "Weergegevens"
 
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:58
 msgid "Min."
 msgstr "Min."
 
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:59
 msgid "Max."
 msgstr "Max."
 
+#: dsmr_frontend/templates/dsmr_frontend/fragments/archive-xhr-statistics.html:61
 msgid "Avg."
 msgstr "Gem."
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:23
 msgid "Meter positions"
 msgstr "Meterstanden"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:29
 msgid "Delivered"
 msgstr "Geleverd"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:45
 msgid "Gas "
 msgstr "Gas"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:59
 msgid "Meter statistics"
 msgstr "Meterstatistieken"
 
-msgid "Tracking meter statistics is disabled. Enable this feature in the datalogger settings to view statistics."
-msgstr "Meterstatistieken worden niet bijgehouden. Schakel dit bij de dataloggerinstellingen in om de statistieken weer te geven."
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:115
+msgid ""
+"Tracking meter statistics is disabled. Enable this feature in the datalogger "
+"settings to view statistics."
+msgstr ""
+"Meterstatistieken worden niet bijgehouden. Schakel dit bij de "
+"dataloggerinstellingen in om de statistieken weer te geven."
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:127
 msgid "Usage statistics"
 msgstr "Verbruiksstatistieken"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:133
 msgid "Most common electricity consumption"
 msgstr "Veelvoorkomend elektriciteitsverbruik"
 
-msgid "Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home."
-msgstr "Gemiddeld elektriciteitsverbruik berekend over de vijf meest voorkomende waardes. Dit is vaak ook het (minimale) elektriciteitsverbruik van je woning."
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:135
+msgid ""
+"Average calculated among the top five most common electricity consumption "
+"read. This might also be the (minimum) constant electricity consumption in "
+"your home."
+msgstr ""
+"Gemiddeld elektriciteitsverbruik berekend over de vijf meest voorkomende "
+"waardes. Dit is vaak ook het (minimale) elektriciteitsverbruik van je woning."
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:140
 msgid "Lowest electricity consumption read"
 msgstr "Laagst gemeten elektriciteitsverbruik"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:144
 msgid "Highest electricity consumption read"
 msgstr "Hoogst gemeten elektriciteitsverbruik"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:159
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:166
 msgid "Unit price"
 msgstr "Prijs per eenheid"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:169
 msgid "Electricity 1 (per kWh)"
 msgstr "Elektriciteit 1 (per kWh)"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:173
 msgid "Electricity 2 (per kWh)"
 msgstr "Elektriciteit 2 (per kWh)"
 
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:177
 msgid "Gas (per m<sup>3</sup>)"
 msgstr "Gas (per m<sup>3</sup>)"
 
-msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
-msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
+#: dsmr_frontend/templates/dsmr_frontend/statistics.html:183
+msgid ""
+"No energy supplier prices found for today. Enable this feature in "
+"consumption settings to view prices."
+msgstr ""
+"Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de "
+"verbruiksinstellingen om de prijzen weer te geven."
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:22
+#: dsmr_frontend/templates/dsmr_frontend/status.html:27
 msgid "DSMR-reader"
 msgstr "DSMR-reader"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:27
 msgid "Current version"
 msgstr "Huidige versie"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:31
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:32
 msgid "View all releases"
 msgstr "Bekijk alle versies"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:44
 msgid "Readings"
 msgstr "Metingen"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:45
 msgid "Status regarding the latest data read from your meter."
 msgstr "Voortgang m.b.t. de meest recente gevens uit je meter."
 
-msgid "It has been a while since the latest meter reading. Your <strong>datalogger process</strong> might hang or has been crashed."
-msgstr "De laatste uitlezing van je meter is een tijdje geleden. Mogelijk hangt het <strong>datalogger proces</strong> of is deze gecrashed."
+#: dsmr_frontend/templates/dsmr_frontend/status.html:51
+msgid ""
+"It has been a while since the latest meter reading. Your <strong>datalogger "
+"process</strong> might hang or has been crashed."
+msgstr ""
+"De laatste uitlezing van je meter is een tijdje geleden. Mogelijk hangt het "
+"<strong>datalogger proces</strong> of is deze gecrashed."
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:56
 msgid "Latest reading"
 msgstr "Laatste meting"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:60
 msgid "First reading"
 msgstr "Eerste meting"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:64
 msgid "Total reading count"
 msgstr "Totaal aantal metingen"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:77
 msgid "Background"
 msgstr "Achtergrond"
 
-msgid "Status regarding processing readings, making them visible in other pages and graphs."
-msgstr "Voortgang met betrekking tot het verwerken van uitlezingen, waarna ze zichtbaar zijn in andere pagina's en grafieken."
+#: dsmr_frontend/templates/dsmr_frontend/status.html:78
+msgid ""
+"Status regarding processing readings, making them visible in other pages and "
+"graphs."
+msgstr ""
+"Voortgang met betrekking tot het verwerken van uitlezingen, waarna ze "
+"zichtbaar zijn in andere pagina's en grafieken."
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:83
 msgid "Unprocessed readings"
 msgstr "Onverwerkte metingen"
 
-msgid "There are too many unprocessed readings. Your <strong>backend process</strong> might hang or has been crashed."
-msgstr "Er zijn te veel onverwerkte metingen. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
+#: dsmr_frontend/templates/dsmr_frontend/status.html:91
+msgid ""
+"There are too many unprocessed readings. Your <strong>backend process</"
+"strong> might hang or has been crashed."
+msgstr ""
+"Er zijn te veel onverwerkte metingen. Mogelijk hangt het "
+"<strong>achtergrondproces</strong> of is deze gecrashed."
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:98
 msgid "Latest electricity consumption tracked"
 msgstr "Meest recente elektriciteitsverbruik verwerkt"
 
-msgid "It has been a while since electricity consumption was tracked. Your <strong>backend process</strong> might hang or has been crashed."
-msgstr "Het meest recente elektriciteitsverbruik is een tijdje geleden verwerkt. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
+#: dsmr_frontend/templates/dsmr_frontend/status.html:106
+msgid ""
+"It has been a while since electricity consumption was tracked. Your "
+"<strong>backend process</strong> might hang or has been crashed."
+msgstr ""
+"Het meest recente elektriciteitsverbruik is een tijdje geleden verwerkt. "
+"Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:114
 msgid "Latest gas consumption tracked"
 msgstr "Meest recente gasverbruik verwerkt"
 
-msgid "It has been a while since gas consumption was tracked. Your <strong>backend process</strong> might hang or has been crashed."
-msgstr "Het meest recente gasverbruik is een tijdje geleden verwerkt. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
+#: dsmr_frontend/templates/dsmr_frontend/status.html:122
+msgid ""
+"It has been a while since gas consumption was tracked. Your <strong>backend "
+"process</strong> might hang or has been crashed."
+msgstr ""
+"Het meest recente gasverbruik is een tijdje geleden verwerkt. Mogelijk hangt "
+"het <strong>achtergrondproces</strong> of is deze gecrashed."
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:138
 msgid "Data availability"
 msgstr "Beschikbaarheid gegevens"
 
-msgid "Based on readings until this moment. Electricity usage should be always available. Gas usage and electricity return depend on your home situation."
-msgstr "Gebaseerd op verwerkte metingen tot nu toe. Elektriciteitsverbruik zou altijd beschikbaar moeten zijn. Gasverbruik en elektriciteitsteruglevering hangen af van je thuissituatie."
+#: dsmr_frontend/templates/dsmr_frontend/status.html:139
+msgid ""
+"Based on readings until this moment. Electricity usage should be always "
+"available. Gas usage and electricity return depend on your home situation."
+msgstr ""
+"Gebaseerd op verwerkte metingen tot nu toe. Elektriciteitsverbruik zou "
+"altijd beschikbaar moeten zijn. Gasverbruik en elektriciteitsteruglevering "
+"hangen af van je thuissituatie."
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:144
 msgid "Data type"
 msgstr "Soort gegevens"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:145
 msgid "Read"
 msgstr "Gemeten"
 
+#: dsmr_frontend/templates/dsmr_frontend/status.html:152
 msgid "Electricity return"
 msgstr "Elektriciteitsteruglevering"
 
-msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account."
-msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen."
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:19
+msgid ""
+"All data below is calculated among all consumption tracked until a day ago. "
+"Untracked consumption and any usage of today is not taken into account."
+msgstr ""
+"Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en "
+"met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin "
+"niet meegenomen."
 
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:20
 #, python-format
-msgid "Current data displayed averages %(hour_statistics_count)s hour(s), among %(day_statistics_count)s day(s)."
-msgstr "Huidige gegevens betreffen gemiddelden over %(hour_statistics_count)s uren, verdeeld over %(day_statistics_count)s dag(en)."
+msgid ""
+"Current data displayed averages %(hour_statistics_count)s hour(s), among "
+"%(day_statistics_count)s day(s)."
+msgstr ""
+"Huidige gegevens betreffen gemiddelden over %(hour_statistics_count)s uren, "
+"verdeeld over %(day_statistics_count)s dag(en)."
 
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:29
 #, python-format
 msgid "Average hourly electricity consumed (in %%)"
 msgstr "Gemiddelde elektriciteitsverbruik per daguur (in %%)"
 
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:44
 #, python-format
 msgid "Average hourly electricity returned (in %%)"
 msgstr "Gemiddelde elektriciteit teruglevering per daguur (in %%)"
 
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:59
 #, python-format
 msgid "Average hourly gas consumed (in %%)"
 msgstr "Gemiddeld gasverbruik per daguur (in %%)"
 
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:74
 msgid "Electricity tariff ratio (passed week)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 
+#: dsmr_frontend/templates/dsmr_frontend/trends.html:87
 msgid "Electricity tariff ratio (passed month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
+#: dsmr_mindergas/apps.py:9
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
 
-msgid "It's now possible to automatically export your gas meter positions to your own Mindergas.nl account! See the FAQ in the documentation for a guide on how to create and/or link your account."
-msgstr "Het is nu ook mogelijk om je gasmeterstanden automatisch door te geven aan je persoonlijke Mindergas.nl-account! Bekijk de FAQ in de documentatie voor meer informatie over hoe je een account aanmaakt en/of koppelt aan de applicatie."
+#: dsmr_mindergas/migrations/0002_mindergas_notification.py:15
+msgid ""
+"It's now possible to automatically export your gas meter positions to your "
+"own Mindergas.nl account! See the FAQ in the documentation for a guide on "
+"how to create and/or link your account."
+msgstr ""
+"Het is nu ook mogelijk om je gasmeterstanden automatisch door te geven aan "
+"je persoonlijke Mindergas.nl-account! Bekijk de FAQ in de documentatie voor "
+"meer informatie over hoe je een account aanmaakt en/of koppelt aan de "
+"applicatie."
 
+#: dsmr_mindergas/models/settings.py:12
 msgid "Export data to MinderGas"
 msgstr "Exporteer gegevens naar MinderGas"
 
-msgid "Whether we should export your gas readings (if any) to your MinderGas.nl account."
-msgstr "Bepaalt of we je meterstanden dagelijks moeten uploaden naar je eigen account op MinderGas.nl."
+#: dsmr_mindergas/models/settings.py:14
+msgid ""
+"Whether we should export your gas readings (if any) to your MinderGas.nl "
+"account."
+msgstr ""
+"Bepaalt of we je meterstanden dagelijks moeten uploaden naar je eigen "
+"account op MinderGas.nl."
 
+#: dsmr_mindergas/models/settings.py:22
 msgid "MinderGas authentication token"
 msgstr "MinderGas.nl Authenticatietoken (API)"
 
-msgid "The authentication token used to authenticate for the MinderGas API. More information can be found here: https://www.mindergas.nl/member/api"
-msgstr "Authenticatietoken voor de API-toegang van je persoonlijk account bij MinderGas. Kijk hier voor meer informatie: https://www.mindergas.nl/member/api"
+#: dsmr_mindergas/models/settings.py:24
+msgid ""
+"The authentication token used to authenticate for the MinderGas API. More "
+"information can be found here: https://www.mindergas.nl/member/api"
+msgstr ""
+"Authenticatietoken voor de API-toegang van je persoonlijk account bij "
+"MinderGas. Kijk hier voor meer informatie: https://www.mindergas.nl/member/"
+"api"
 
+#: dsmr_mindergas/models/settings.py:32
 msgid "Next export"
 msgstr "Volgende synchronisatie"
 
+#: dsmr_mindergas/models/settings.py:34
 msgid "Timestamp of the next export. Automatically updated by application."
-msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
+msgstr ""
+"Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch "
+"bij."
 
+#: dsmr_mindergas/models/settings.py:43
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
 
+#: dsmr_notification/apps.py:9
 msgid "Usage notification"
 msgstr "Verbruiksnotificatie"
 
+#: dsmr_notification/models/settings.py:11
 msgid "NotifyMyAndroid"
 msgstr "NotifyMyAndroid"
 
+#: dsmr_notification/models/settings.py:12
 msgid "Prowl"
 msgstr "Prowl"
 
+#: dsmr_notification/models/settings.py:22
 msgid "Send notification"
 msgstr "Stuur notificatie"
 
-msgid "Whether or not you want to receive a notification of your daily usage on your smartphone"
-msgstr "Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone over je energieverbruik."
+#: dsmr_notification/models/settings.py:24
+msgid ""
+"Whether or not you want to receive a notification of your daily usage on "
+"your smartphone"
+msgstr ""
+"Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone "
+"over je energieverbruik."
 
+#: dsmr_notification/models/settings.py:32
 msgid "Notification service"
 msgstr "Notificatieservice"
 
+#: dsmr_notification/models/settings.py:34
 msgid "Which notification service to use for sending daily usage notifications"
-msgstr "Welke notificatieservice mag gebruikt worden om de notificaties mee te versturen"
+msgstr ""
+"Welke notificatieservice mag gebruikt worden om de notificaties mee te "
+"versturen"
 
+#: dsmr_notification/models/settings.py:43
 msgid "Notification service API key"
 msgstr "API sleutel voor notificatie service"
 
-msgid "The API key used send messages to your smartphone. Please visit https://notifymyandroid.com/ or https://www.prowlapp.com/ to download and use the apps."
-msgstr "De API sleutel die gebruikt wordt om notificaties naar je smartphone te sturen. Bezoek https://notifymyandroid.com/ of https://www.prowlapp.com/ om de apps te downloaden en te gebruiken."
+#: dsmr_notification/models/settings.py:45
+msgid ""
+"The API key used send messages to your smartphone. Please visit https://"
+"notifymyandroid.com/ or https://www.prowlapp.com/ to download and use the "
+"apps."
+msgstr ""
+"De API sleutel die gebruikt wordt om notificaties naar je smartphone te "
+"sturen. Bezoek https://notifymyandroid.com/ of https://www.prowlapp.com/ om "
+"de apps te downloaden en te gebruiken."
 
+#: dsmr_notification/models/settings.py:54
 msgid "Next notification"
 msgstr "Volgende notificatie"
 
+#: dsmr_notification/models/settings.py:56
 msgid "Timestamp of the next notification. Managed by application."
-msgstr "Tijdstip van de volgende notificatie. Applicatie werkt dit automatisch bij."
+msgstr ""
+"Tijdstip van de volgende notificatie. Applicatie werkt dit automatisch bij."
 
+#: dsmr_notification/models/settings.py:65
 msgid "Notification configuration"
 msgstr "Verbruiksnotificatie"
 
+#: dsmr_notification/services.py:53
+#: dsmr_notification/tests/test_notifications.py:26
 msgid "Daily usage notification"
 msgstr "Dagelijkse verbruiksnotificatie"
 
+#: dsmr_notification/services.py:63
 msgid ""
 "Your daily usage statics for {}\n"
 "Total cost: € {}\n"
@@ -798,222 +1407,315 @@ msgstr ""
 "Elektriciteit: {} kWh\n"
 "Gas: {} m3"
 
+#: dsmr_stats/apps.py:9
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
-msgid "Clears all statistics generated. Use this to regenerate them after altering prices."
-msgstr "Verwijdert alle (dag/uur)statistieken. Gebruik dit wanneer je de energieprijzen hebt aangepast."
+#: dsmr_stats/management/commands/dsmr_stats_clear_statistics.py:8
+msgid ""
+"Clears all statistics generated. Use this to regenerate them after altering "
+"prices."
+msgstr ""
+"Verwijdert alle (dag/uur)statistieken. Gebruik dit wanneer je de "
+"energieprijzen hebt aangepast."
 
-msgid "Required to acknowledge you that you WILL delete your statistics with this."
-msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gegenereerde) data verwijdert."
+#: dsmr_stats/management/commands/dsmr_stats_clear_statistics.py:17
+msgid ""
+"Required to acknowledge you that you WILL delete your statistics with this."
+msgstr ""
+"Verplichte parameter om te bevestigen dat je beseft dat je hiermee "
+"(gegenereerde) data verwijdert."
 
-msgid "Intended usage is NOT production! Force by using --ack-to-delete-my-data"
-msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-my-data"
+#: dsmr_stats/management/commands/dsmr_stats_clear_statistics.py:23
+msgid ""
+"Intended usage is NOT production! Force by using --ack-to-delete-my-data"
+msgstr ""
+"Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-"
+"my-data"
 
+#: dsmr_stats/models/note.py:12
 msgid "Note"
 msgstr "Notitie"
 
+#: dsmr_stats/models/note.py:13
 msgid "Notes"
 msgstr "Notities"
 
+#: dsmr_stats/models/statistics.py:7
 msgid "Date"
 msgstr "Datum"
 
+#: dsmr_stats/models/statistics.py:8
 msgid "Total cost"
 msgstr "Totale kosten"
 
+#: dsmr_stats/models/statistics.py:20 dsmr_stats/models/statistics.py:71
 msgid "Electricity 2 returned (high tariff)"
 msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
+#: dsmr_stats/models/statistics.py:39
 msgid "Lowest temperature"
 msgstr "Laagste temperatuur"
 
+#: dsmr_stats/models/statistics.py:42
 msgid "Highest temperature"
 msgstr "Hoogste temperatuur"
 
+#: dsmr_stats/models/statistics.py:45
 msgid "Average temperature"
 msgstr "Gemiddelde temperatuur"
 
+#: dsmr_stats/models/statistics.py:59
 msgid "Hour start"
 msgstr "Begintijd uur"
 
+#: dsmr_weather/buienradar.py:14
 msgid "Weather station Arcen"
 msgstr "Weerstation Arcen"
 
+#: dsmr_weather/buienradar.py:15
 msgid "Weather station Arnhem"
 msgstr "Weerstation Arnhem"
 
+#: dsmr_weather/buienradar.py:16
 msgid "Weather station Berkhout"
 msgstr "Weerstation Berkhout"
 
+#: dsmr_weather/buienradar.py:17
 msgid "Weather station Cadzand"
 msgstr "Weerstation Cadzand"
 
+#: dsmr_weather/buienradar.py:18
 msgid "Weather station De Bilt"
 msgstr "Weerstation De Bilt"
 
+#: dsmr_weather/buienradar.py:19
 msgid "Weather station Den Helder"
 msgstr "Weerstation Den Helder"
 
+#: dsmr_weather/buienradar.py:20
 msgid "Weather station Eindhoven"
 msgstr "Weerstation Eindhoven"
 
+#: dsmr_weather/buienradar.py:21
 msgid "Weather station Ell"
 msgstr "Weerstation Ell"
 
+#: dsmr_weather/buienradar.py:22
 msgid "Weather station Euro platform"
 msgstr "Weerstation Euro platform"
 
+#: dsmr_weather/buienradar.py:23
 msgid "Weather station Gilze Rijen"
 msgstr "Weerstation Gilze Rijen"
 
+#: dsmr_weather/buienradar.py:24
 msgid "Weather station Groenlo-Hupsel"
 msgstr "Weerstation Groenlo-Hupsel"
 
+#: dsmr_weather/buienradar.py:25
 msgid "Weather station Groningen"
 msgstr "Weerstation Groningen"
 
+#: dsmr_weather/buienradar.py:26
 msgid "Weather station Hansweert"
 msgstr "Weerstation Hansweert"
 
+#: dsmr_weather/buienradar.py:27
 msgid "Weather station Heino"
 msgstr "Weerstation Heino"
 
+#: dsmr_weather/buienradar.py:28
 msgid "Weather station Herwijnen"
 msgstr "Weerstation Herwijnen"
 
+#: dsmr_weather/buienradar.py:29
 msgid "Weather station Hoek van Holland"
 msgstr "Weerstation Hoek van Holland"
 
+#: dsmr_weather/buienradar.py:30
 msgid "Weather station Hoofdplaat"
 msgstr "Weerstation Hoofdplaat"
 
+#: dsmr_weather/buienradar.py:31
 msgid "Weather station Hoogeveen"
 msgstr "Weerstation Hoogeveen"
 
+#: dsmr_weather/buienradar.py:32
 msgid "Weather station Hoorn Terschelling"
 msgstr "Weerstation Hoorn Terschelling"
 
+#: dsmr_weather/buienradar.py:33
 msgid "Weather station Houtribdijk"
 msgstr "Weerstation Houtribdijk"
 
+#: dsmr_weather/buienradar.py:34
 msgid "Weather station Huibertgat"
 msgstr "Weerstation Huibertgat"
 
+#: dsmr_weather/buienradar.py:35
 msgid "Weather station IJmond"
 msgstr "Weerstation IJmond"
 
+#: dsmr_weather/buienradar.py:36
 msgid "Weather station IJmuiden"
 msgstr "Weerstation IJmuiden"
 
+#: dsmr_weather/buienradar.py:37
 msgid "Weather station Katwijk"
 msgstr "Weerstation Katwijk"
 
+#: dsmr_weather/buienradar.py:38
 msgid "Weather station Lauwersoog"
 msgstr "Weerstation Lauwersoog"
 
+#: dsmr_weather/buienradar.py:39
 msgid "Weather station LE Goeree"
 msgstr "Weerstation LE Goeree"
 
+#: dsmr_weather/buienradar.py:40
 msgid "Weather station Leeuwarden"
 msgstr "Weerstation Leeuwarden"
 
+#: dsmr_weather/buienradar.py:41
 msgid "Weather station Lelystad"
 msgstr "Weerstation Lelystad"
 
+#: dsmr_weather/buienradar.py:42
 msgid "Weather station Lopik-Cabauw"
 msgstr "Weerstation Lopik-Cabauw"
 
+#: dsmr_weather/buienradar.py:43
 msgid "Weather station Maastricht"
 msgstr "Weerstation Maastricht"
 
+#: dsmr_weather/buienradar.py:44
 msgid "Weather station Marknesse"
 msgstr "Weerstation Marknesse"
 
+#: dsmr_weather/buienradar.py:45
 msgid "Weather station Nieuw Beerta"
 msgstr "Weerstation Nieuw Beerta"
 
+#: dsmr_weather/buienradar.py:46
 msgid "Weather station Oosterschelde"
 msgstr "Weerstation Oosterschelde"
 
+#: dsmr_weather/buienradar.py:47
 msgid "Weather station Rotterdam"
 msgstr "Weerstation Rotterdam"
 
+#: dsmr_weather/buienradar.py:48
 msgid "Weather station Rotterdam Geulhaven"
 msgstr "Weerstation Rotterdam Geulhaven"
 
+#: dsmr_weather/buienradar.py:49
 msgid "Weather station Schaar"
 msgstr "Weerstation Schaar"
 
+#: dsmr_weather/buienradar.py:50
 msgid "Weather station Schiphol"
 msgstr "Weerstation Schiphol"
 
+#: dsmr_weather/buienradar.py:51
 msgid "Weather station Stavenisse"
 msgstr "Weerstation Stavenisse"
 
+#: dsmr_weather/buienradar.py:52
 msgid "Weather station Stavoren"
 msgstr "Weerstation Stavoren"
 
+#: dsmr_weather/buienradar.py:53
 msgid "Weather station Tholen"
 msgstr "Weerstation Tholen"
 
+#: dsmr_weather/buienradar.py:54
 msgid "Weather station Twente"
 msgstr "Weerstation Twente"
 
+#: dsmr_weather/buienradar.py:55
 msgid "Weather station Vlakte aan de Raan"
 msgstr "Weerstation Vlakte aan de Raan"
 
+#: dsmr_weather/buienradar.py:56
 msgid "Weather station Vlieland"
 msgstr "Weerstation Vlieland"
 
+#: dsmr_weather/buienradar.py:57
 msgid "Weather station Vlissingen"
 msgstr "Weerstation Vlissingen"
 
+#: dsmr_weather/buienradar.py:58
 msgid "Weather station Volkel"
 msgstr "Weerstation Volkel"
 
+#: dsmr_weather/buienradar.py:59
 msgid "Weather station Voorschoten"
 msgstr "Weerstation Voorschoten"
 
+#: dsmr_weather/buienradar.py:60
 msgid "Weather station Westdorpe"
 msgstr "Weerstation Westdorpe"
 
+#: dsmr_weather/buienradar.py:61
 msgid "Weather station Wijdenes"
 msgstr "Weerstation Wijdenes"
 
+#: dsmr_weather/buienradar.py:62
 msgid "Weather station Wijk aan Zee"
 msgstr "Weerstation Wijk aan Zee"
 
+#: dsmr_weather/buienradar.py:63
 msgid "Weather station Woensdrecht"
 msgstr "Weerstation Woensdrecht"
 
+#: dsmr_weather/buienradar.py:64
 msgid "Weather station Zeeplatform F-3"
 msgstr "Weerstation Zeeplatform F-3"
 
+#: dsmr_weather/buienradar.py:65
 msgid "Weather station Zeeplatform K13"
 msgstr "Weerstation Zeeplatform K13"
 
+#: dsmr_weather/models/reading.py:11
 msgid "Temperature (in ℃)"
 msgstr "Temperatuur (in ℃)"
 
+#: dsmr_weather/models/settings.py:12
 msgid "Track weather"
 msgstr "Houd weergegevens bij"
 
-msgid "Whether we should track and log outside temperatures using an external service. Current service integrated is Buienradar"
-msgstr "Geeft aan of we buitentemperaturen meten via een externe dienst, en ze bijhouden. Huidig gebruikte dienst is Buienradar"
+#: dsmr_weather/models/settings.py:14
+msgid ""
+"Whether we should track and log outside temperatures using an external "
+"service. Current service integrated is Buienradar"
+msgstr ""
+"Geeft aan of we buitentemperaturen meten via een externe dienst, en ze "
+"bijhouden. Huidig gebruikte dienst is Buienradar"
 
+#: dsmr_weather/models/settings.py:21
 msgid "Buienradar weather station"
 msgstr "Buienradar weerstation"
 
-msgid "The weather station used to measure and log outside temperatures. Choose one nearby. See http://www.buienradar.nl/weerkaarten/temperatuur for a map of all locations."
-msgstr "Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op te slaan. Kies een locatie zo dicht mogelijk bij huis. Zie http://www.buienradar.nl/weerkaarten/temperatuur voor een kaart van alle locaties."
+#: dsmr_weather/models/settings.py:23
+msgid ""
+"The weather station used to measure and log outside temperatures. Choose one "
+"nearby. See http://www.buienradar.nl/weerkaarten/temperatuur for a map of "
+"all locations."
+msgstr ""
+"Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op te "
+"slaan. Kies een locatie zo dicht mogelijk bij huis. Zie http://www."
+"buienradar.nl/weerkaarten/temperatuur voor een kaart van alle locaties."
 
+#: dsmr_weather/models/settings.py:33
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
+#: dsmrreader/config/base.py:155
 msgid "Dutch"
 msgstr "Nederlands"
 
+#: dsmrreader/config/base.py:156
 msgid "English"
 msgstr "Engels"
 
