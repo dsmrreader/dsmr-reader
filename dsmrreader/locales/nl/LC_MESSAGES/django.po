@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-22 22:40+0200\n"
-"PO-Revision-Date: 2016-07-13 22:58+0100\n"
+"POT-Creation-Date: 2016-11-20 18:04+0100\n"
+"PO-Revision-Date: 2016-11-20 18:04+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid "API"
@@ -153,6 +153,9 @@ msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier
 msgid "Electricity 1 price (low tariff)"
 msgstr "Prijs elektriciteit 1 (daltarief)"
 
+msgid "Are you using a single tariff? Please enter the same price twice and enable \"Merge electricity tariffs\" in the frontend configuration"
+msgstr "Betaal je elektriciteit voor een enkel tarief? Vul dan hier tweemaal dezelfde prijs in en vink \"Voeg tarieven samen\" aan in de interfaceconfiguratie"
+
 msgid "Electricity 2 price (high tariff)"
 msgstr "Prijs elektriciteit 2 (piektarief)"
 
@@ -201,6 +204,9 @@ msgstr "Neem gasverbruik mee"
 msgid "Include electricity returned (solar panels)"
 msgstr "neem teruglevering elektriciteit mee (zonnepanelen)"
 
+msgid "Intended usage is NOT production! Only allowed when DEBUG = True"
+msgstr "Bedoeld voor gebruik buiten productie. Alleen mogelijk wanneer instelling DEBUG = True"
+
 msgid "Intended usage is NOT production! Force by using --ack-to-mess-up-my-data"
 msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-my-data"
 
@@ -213,8 +219,11 @@ msgstr "Tijdstip van laatste meting"
 msgid "Whether this reading has been processed for merging into statistics"
 msgstr "Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
 
-msgid "DSMR reading"
-msgstr "DSMR-meting"
+msgid "DSMR reading (read only)"
+msgstr "DSMR-uitlezing (alleen lezen)"
+
+msgid "DSMR readings (read only)"
+msgstr "DSMR-uitlezing (alleen lezen)"
 
 msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
 msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor piektarief."
@@ -243,8 +252,8 @@ msgstr "Aantal spanningspieken in fase L2 (alleen voor meters met meerdere fasen
 msgid "Number of voltage swells in phase L3 (polyphase meters only)"
 msgstr "Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen)"
 
-msgid "DSMR Meter statistics"
-msgstr "Meterstatistieken"
+msgid "DSMR Meter statistics (read only)"
+msgstr "Meterstatistieken (alleen lezen)"
 
 msgid "DSMR version 4"
 msgstr "DSMR-versie 4"
@@ -300,11 +309,20 @@ msgstr "Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configura
 msgid "You may check the status of your readings and data in the Status page."
 msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."
 
+msgid "It's now possible to have the electricity tariffs merged to a single one. This might come handy when you pay your energy supplier fo a single tariff instead of high/low. You can enable this feature in  frontend configuration: 'Merge electricity tariffs'"
+msgstr "Vanaf nu is het mogelijk om de elektriciteitstarieven samen te voegen tot enkeltarief. Dit komt van pas wanneer je energieleverancier je slechts één tarief in rekening brengt voor zowel piek als dal. Je kunt dit inschakelen in de interfaceconfiguratie bij  \"Voeg tarieven samen\""
+
 msgid "Reverse dashboard graphs"
 msgstr "Keer dashboard-grafieken om"
 
 msgid "Whether graphs are rendered with an reversed X-axis"
 msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
+
+msgid "Merge electricity tariffs"
+msgstr "Voeg tarieven samen"
+
+msgid "Whether you are using a single electricity tariff and both (high/low) should be displayed merged"
+msgstr "Bepaalt of de elektriciteitstarieven samengevoegd moeten worden (wanneer je voor een enkel tarief betaalt)"
 
 msgid "Electricity delivered color"
 msgstr "Kleur elektriciteitsverbruik"
@@ -378,21 +396,6 @@ msgstr "Gasverbruik"
 msgid "(in m<sup>3</sup>)"
 msgstr "(in m<sup>3</sup>)"
 
-msgid "Electricity 1 (low tariff)"
-msgstr "Elektriciteit 1 (daltarief)"
-
-msgid "Electricity 2 (high tariff)"
-msgstr "Elektriciteit 2 (piektarief)"
-
-msgid "Electricity 1 returned (low tariff)"
-msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
-
-msgid "Electricity 1 returned (high tariff)"
-msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
-
-msgid "Gas"
-msgstr "Gas"
-
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
 
@@ -465,9 +468,6 @@ msgstr "Plan per direct nieuwe back-up in"
 msgid "Watt"
 msgstr "Watt"
 
-msgid "m<sup>3</sup>"
-msgstr "m<sup>3</sup>"
-
 msgid "Notifications"
 msgstr "Notificaties"
 
@@ -489,11 +489,26 @@ msgstr "Verbruikt"
 msgid "kWh"
 msgstr "kWh"
 
+msgid "m<sup>3</sup>"
+msgstr "m<sup>3</sup>"
+
 msgid "Returned"
 msgstr "Teruggeleverd"
 
 msgid "Cost"
 msgstr "Kosten"
+
+msgid "Electricity (single tariff)"
+msgstr "Elektriciteit (enkel tarief)"
+
+msgid "Electricity 1 (low tariff)"
+msgstr "Elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
+
+msgid "Gas"
+msgstr "Gas"
 
 msgid "Total"
 msgstr "Totaal"
@@ -615,15 +630,6 @@ msgstr "Huidige energietarieven"
 msgid "Unit price"
 msgstr "Prijs per eenheid"
 
-msgid "Electricity 1 (per kWh)"
-msgstr "Elektriciteit 1 (per kWh)"
-
-msgid "Electricity 2 (per kWh)"
-msgstr "Elektriciteit 2 (per kWh)"
-
-msgid "Gas (per m<sup>3</sup>)"
-msgstr "Gas (per m<sup>3</sup>)"
-
 msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
 msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
 
@@ -696,30 +702,35 @@ msgstr "Gemeten"
 msgid "Electricity return"
 msgstr "Elektriciteitsteruglevering"
 
-msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account."
-msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen."
+msgid "Untracked consumption in the past (and today), is not taken into account."
+msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
 
 #, python-format
-msgid "Current data displayed averages %(hour_statistics_count)s hour(s), among %(day_statistics_count)s day(s)."
-msgstr "Huidige gegevens betreffen gemiddelden over %(hour_statistics_count)s uren, verdeeld over %(day_statistics_count)s dag(en)."
+msgid "Average hourly electricity consumed (in %%) within the past 4 weeks"
+msgstr "Gemiddelde elektriciteitsverbruik per daguur (in %%) van de afgelopen 4 weken"
 
 #, python-format
-msgid "Average hourly electricity consumed (in %%)"
-msgstr "Gemiddelde elektriciteitsverbruik per daguur (in %%)"
+msgid "Average hourly electricity returned (in %%) within the past 4 weeks"
+msgstr "Gemiddelde elektriciteit teruglevering per daguur (in %%) van de afgelopen 4 weken"
 
 #, python-format
-msgid "Average hourly electricity returned (in %%)"
-msgstr "Gemiddelde elektriciteit teruglevering per daguur (in %%)"
-
-#, python-format
-msgid "Average hourly gas consumed (in %%)"
-msgstr "Gemiddeld gasverbruik per daguur (in %%)"
+msgid "Average hourly gas consumed (in %%) within the past 4 weeks"
+msgstr "Gemiddeld gasverbruik per daguur (in %%) van de afgelopen 4 weken"
 
 msgid "Electricity tariff ratio (passed week)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 
 msgid "Electricity tariff ratio (passed month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
+
+msgid "Electricity returned (single tariff)"
+msgstr "Elektriciteit teruggeleverd (enkel tarief)"
+
+msgid "Electricity 1 returned (low tariff)"
+msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+
+msgid "Electricity 2 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
@@ -751,6 +762,9 @@ msgstr "MinderGas.nl-configuratie"
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
+msgid "Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks."
+msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
+
 msgid "Clears all statistics generated. Use this to regenerate them after altering prices."
 msgstr "Verwijdert alle (dag/uur)statistieken. Gebruik dit wanneer je de energieprijzen hebt aangepast."
 
@@ -772,9 +786,6 @@ msgstr "Datum"
 msgid "Total cost"
 msgstr "Totale kosten"
 
-msgid "Electricity 2 returned (high tariff)"
-msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
-
 msgid "Lowest temperature"
 msgstr "Laagste temperatuur"
 
@@ -784,8 +795,14 @@ msgstr "Hoogste temperatuur"
 msgid "Average temperature"
 msgstr "Gemiddelde temperatuur"
 
+msgid "Day statistics (read only)"
+msgstr "Dagstatistieken (alleen lezen)"
+
 msgid "Hour start"
 msgstr "Begintijd uur"
+
+msgid "Hour statistics (read only)"
+msgstr "Uurstatistieken (alleen lezen)"
 
 msgid "Weather station Arcen"
 msgstr "Weerstation Arcen"
@@ -966,6 +983,24 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account."
+#~ msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen."
+
+#~ msgid "Current data displayed averages %(hour_statistics_count)s hour(s), among %(day_statistics_count)s day(s)."
+#~ msgstr "Huidige gegevens betreffen gemiddelden over %(hour_statistics_count)s uren, verdeeld over %(day_statistics_count)s dag(en)."
+
+#~ msgid "Electricity 1 (per kWh)"
+#~ msgstr "Elektriciteit 1 (per kWh)"
+
+#~ msgid "Electricity 2 (per kWh)"
+#~ msgstr "Elektriciteit 2 (per kWh)"
+
+#~ msgid "Gas (per m<sup>3</sup>)"
+#~ msgstr "Gas (per m<sup>3</sup>)"
+
+#~ msgid "Electricity 1 returned (high tariff)"
+#~ msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
 #~ msgid "Test"
 #~ msgstr "Banaaa"

@@ -101,9 +101,28 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(compress_mock.called)
         self.assertFalse(subprocess_mock.called)
         self.assertIsNone(BackupSettings.get_solo().latest_backup)
+        self.assertTrue(BackupSettings.get_solo().compress)
 
         dsmr_backup.services.backup.create()
         self.assertTrue(compress_mock.called)
+        self.assertTrue(subprocess_mock.called)
+
+        self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
+
+    @mock.patch('subprocess.Popen')
+    @mock.patch('dsmr_backup.services.backup.compress')
+    def test_create_without_compress(self, compress_mock, subprocess_mock):
+        backup_settings = BackupSettings.get_solo()
+        backup_settings.compress = False
+        backup_settings.save()
+
+        self.assertFalse(compress_mock.called)
+        self.assertFalse(subprocess_mock.called)
+        self.assertIsNone(BackupSettings.get_solo().latest_backup)
+        self.assertFalse(BackupSettings.get_solo().compress)
+
+        dsmr_backup.services.backup.create()
+        self.assertFalse(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
 
         self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
@@ -156,6 +175,19 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
 
         dsmr_backup.services.dropbox.sync()
         self.assertFalse(upload_chunked_mock.called)
+
+    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('django.utils.timezone.now')
+    def test_sync_initial(self, now_mock, upload_chunked_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+
+        # Initial project state.
+        dropbox_settings = DropboxSettings.get_solo()
+        dropbox_settings.latest_sync = None
+        dropbox_settings.save()
+
+        dsmr_backup.services.dropbox.sync()
+        self.assertTrue(upload_chunked_mock.called)
 
     @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
     @mock.patch('django.utils.timezone.now')

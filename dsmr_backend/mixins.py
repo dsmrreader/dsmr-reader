@@ -5,6 +5,7 @@ import os
 
 from django.utils.translation import ugettext as _
 from django.conf import settings
+from django.contrib import admin
 
 
 class InfiniteManagementCommandMixin(object):
@@ -73,3 +74,16 @@ class InfiniteManagementCommandMixin(object):
         # If we get called, then we must gracefully exit.
         self._keep_alive = False
         self.stdout.write('Detected signal #{}, exiting on next run...'.format(signum))
+
+
+class ReadOnlyAdminModel(admin.ModelAdmin):
+    """ Read only model for Django admin. """
+    def __init__(self, *args, **kwargs):
+        super(ReadOnlyAdminModel, self).__init__(*args, **kwargs)
+        self.readonly_fields = self.model._meta.get_all_field_names()
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

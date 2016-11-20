@@ -2,7 +2,7 @@ from datetime import time
 import math
 
 from dateutil.relativedelta import relativedelta
-from django.db import transaction, connection
+from django.db import transaction, connection, models
 from django.db.models.aggregates import Avg, Sum, Min, Max
 from django.core.cache import cache
 from django.utils import timezone
@@ -164,8 +164,8 @@ def electricity_tariff_percentage(start_date):
     return totals
 
 
-def average_consumption_by_hour():
-    """ Calculates the average consumption by hour. Measured over all consumption data. """
+def average_consumption_by_hour(max_weeks_ago):
+    """ Calculates the average consumption by hour. Measured over all consumption data of the past X months. """
     sql_extra = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
         'postgresql': "date_part('hour', hour_start)",
@@ -179,13 +179,18 @@ def average_consumption_by_hour():
     if set_time_zone_sql:
         connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])  # pragma: no cover
 
-    hour_statistics = HourStatistics.objects.extra({
+    hour_statistics = HourStatistics.objects.filter(
+        # This greatly helps reducing the queryset size, but also makes it more relevant.
+        hour_start__gt=timezone.now() - timezone.timedelta(weeks=max_weeks_ago)
+    ).extra({
         'hour_start': sql_extra
     }).values('hour_start').order_by('hour_start').annotate(
         avg_electricity1=Avg('electricity1'),
         avg_electricity2=Avg('electricity2'),
         avg_electricity1_returned=Avg('electricity1_returned'),
         avg_electricity2_returned=Avg('electricity2_returned'),
+        avg_electricity_merged=Avg(models.F('electricity1') + models.F('electricity2')),
+        avg_electricity_returned_merged=Avg(models.F('electricity1_returned') + models.F('electricity2_returned')),
         avg_gas=Avg('gas'),
     )
     # Force evaluation, as we want to reset timezone in cursor below.
@@ -208,6 +213,9 @@ def range_statistics(start, end):
         electricity2=Sum('electricity2'),
         electricity2_cost=Sum('electricity2_cost'),
         electricity2_returned=Sum('electricity2_returned'),
+        electricity_merged=Sum(models.F('electricity1') + models.F('electricity2')),
+        electricity_cost_merged=Sum(models.F('electricity1_cost') + models.F('electricity2_cost')),
+        electricity_returned_merged=Sum(models.F('electricity1_returned') + models.F('electricity2_returned')),
         gas=Sum('gas'),
         gas_cost=Sum('gas_cost'),
         temperature_min=Min('lowest_temperature'),

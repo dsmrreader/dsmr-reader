@@ -1,6 +1,17 @@
 Frequently Asked Questions (FAQ)
 ================================
 
+
+I only pay for a single electricity tariff but I see two!
+---------------------------------------------------------
+DSMR (and your energy supplier) always read both high and low tariff from your meter. 
+It's possible however that you are only paying for a single tariff. 
+In that case your energy supplier will simply merge both high and low tariffs to make it look like you have a single one.
+
+This application displays separate tariffs by default, but supports merging them to a single one as well.
+Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option '**Merge electricity tariffs**' in the frontend configuration.
+
+
 Dropbox: Automated backup sync
 ------------------------------
 *How can I link my Dropbox account for backups?*
@@ -46,11 +57,11 @@ Please note that due to policies of mindergas.nl it's not allowed to retroactive
 Therefor this is not supported by the application. You can however, enter them manually on their website. 
 
 
-Recalculate prices
-------------------
+Recalculate prices retroactively
+--------------------------------
 *I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?*
 
-You can flush your statistics by executing:
+Statistics for each day are generated once, the day after. However, you can flush your statistics by executing:
 
 ``./manage.py dsmr_stats_clear_statistics --ack-to-delete-my-data``
 

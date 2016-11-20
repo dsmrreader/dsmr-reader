@@ -19,6 +19,7 @@ from dsmr_api.models import APISettings
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 from dsmr_frontend.forms import ExportAsCsvForm
+from dsmr_frontend.models.message import Notification
 
 
 class TestViews(TestCase):
@@ -69,7 +70,7 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
 
         weather_settings = WeatherSettings.get_solo()
         weather_settings.track = True
@@ -88,14 +89,12 @@ class TestViews(TestCase):
                 len(json.loads(response.context['electricity_y'])), 0
             )
 
-            self.assertGreater(response.context['latest_electricity'], 0)
             self.assertTrue(response.context['track_temperature'])
             self.assertIn('consumption', response.context)
 
         if self.support_gas:
             self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
             self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
-            self.assertEqual(response.context['latest_gas'], 0)
 
         # Test whether reverse graphs work.
         frontend_settings = FrontendSettings.get_solo()
@@ -105,6 +104,13 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
         )
+        self.assertEqual(response.status_code, 200)
+
+        # XHR views.
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-header'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200, response.content)
 
     @mock.patch('django.utils.timezone.now')
     def test_archive(self, now_mock):
@@ -120,17 +126,22 @@ class TestViews(TestCase):
             'date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT'),
         }
         for current_level in ('days', 'months', 'years'):
-            data.update({'level': current_level})
-            response = self.client.get(
-                reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
-            )
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('capabilities', response.context)
+            # Test both with tariffs sparated and merged.
+            for merge in (False, True):
+                frontend_settings = FrontendSettings.get_solo()
+                frontend_settings.merge_electricity_tariffs = merge
+                frontend_settings.save()
 
-            response = self.client.get(
-                reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
-            )
-            self.assertEqual(response.status_code, 200)
+                data.update({'level': current_level})
+                response = self.client.get(
+                    reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+                )
+                self.assertEqual(response.status_code, 200)
+
+                response = self.client.get(
+                    reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
+                )
+                self.assertEqual(response.status_code, 200, response.content)
 
         # Invalid XHR.
         data.update({'level': 'INVALID DATA'})
@@ -325,14 +336,40 @@ class TestViews(TestCase):
 
         success_url = reverse('{}:configuration'.format(self.namespace))
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], 'http://testserver{}'.format(success_url)
-        )
+        self.assertEqual(response['Location'], 'http://testserver{}'.format(success_url))
+
         # Setting should have been altered.
         self.assertEqual(
             BackupSettings.get_solo().latest_backup,
             now_mock.return_value - timezone.timedelta(days=7)
         )
+
+    def test_notification_read(self):
+        view_url = reverse('{}:notification-read'.format(self.namespace))
+        notification = Notification.objects.create(message='TEST', redirect_to='fake')
+        self.assertFalse(notification.read)
+
+        # Check login required.
+        response = self.client.post(view_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
+        )
+
+        # Login and retest.
+        self.client.login(username='testuser', password='passwd')
+        response = self.client.post(view_url)
+
+        response = self.client.post(view_url, data={'id': notification.pk})
+        self.assertEqual(response.status_code, 302)
+
+        # Notification should be altered now.
+        self.assertTrue(Notification.objects.get(pk=notification.pk).read)
+
+    def test_docs_redirect(self):
+        response = self.client.get(reverse('{}:docs'.format(self.namespace)))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response['Location'].startswith('https://dsmr-reader.readthedocs.io'))
 
 
 class TestViewsWithoutData(TestViews):

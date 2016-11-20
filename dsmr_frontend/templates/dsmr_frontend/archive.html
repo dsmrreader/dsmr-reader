@@ -47,9 +47,12 @@
             </div>
         </div>
         <div class="col-md-8">
+            <div id="summary-loader" style="display: none;"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
             <div id="summary-holder"></div>
         </div>
     </div>
+    
+    <div id="chart-loader" style="display: none;"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
     
     <div class="row" id="electricity-chart-holder" style="display: none;">
         <div class="col-md-12">
@@ -121,10 +124,12 @@
                 legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
                 {% endverbatim %}
             }
-            var g_electricity_chart_instance = undefined;
-            var g_electricity_returned_chart_instance = undefined;
-            var g_gas_chart_instance = undefined;
             
+            var g_chart_instances = {
+	            electricity: undefined,
+	            electricity_returned: undefined,
+	            gas: undefined,
+            }
             var g_datepicker_view_mode = 'days';
             
         	$(document).ready(function(){
@@ -213,6 +218,8 @@
              */
             function update_summary(selected_date)
             {
+            	$("#summary-loader").show();
+            	
                 $.ajax({
                     url: "{% url 'frontend:archive-xhr-summary' %}",
                     data: {
@@ -220,6 +227,7 @@
                         'level': g_datepicker_view_mode
                     },
                 }).done(function(data) {
+                	$("#summary-loader").hide();
                     $("#summary-holder").html(data);
                 });
             }
@@ -229,6 +237,8 @@
              */
             function update_graphs(selected_date)
             {
+            	$("#chart-loader").show();
+            	
                 $.ajax({
                     url: "{% url 'frontend:archive-xhr-graphs' %}",
                     dataType: "json",
@@ -237,126 +247,68 @@
                         'level': g_datepicker_view_mode
                     },
                 }).done(function(response) {
-                	var capabilities = response.capabilities;
-                	var data = response.data;
+                    $("#chart-loader").hide();
                 	
-                	if (capabilities.electricity)
-               		{
-	                    render_electricity_chart(data.x, data.electricity1, data.electricity2);
-               		}
-                    
-                    if (capabilities.electricity_returned)
+                    var charts = response.charts;
+                	
+                    if (charts.electricity)
                     {
-                    	render_electricity_returned_chart(data.x, data.electricity1_returned, data.electricity2_returned);
+                    	render_chart(
+                    		'electricity',
+                    		"#electricity-chart-holder",
+                    		"#electricity-chart",
+                    		"#electricity-chart-legend",
+                    		charts.electricity
+                    	);
                     }
-
-                    if (capabilities.gas)
+                    
+                    if (charts.electricity_returned)
+                    {
+                        render_chart(
+                       		'electricity_returned',
+                            "#electricity-returned-chart-holder",
+                            "#electricity-returned-chart",
+                            "#electricity-returned-chart-legend",
+                            charts.electricity_returned
+                        );
+                    }
+                	
+                    if (charts.gas)
                    	{
-                        render_gas_chart(data.x, data.gas);
+                        render_chart(
+                       		'gas',
+                            "#gas-chart-holder",
+                            "#gas-chart",
+                            null,
+                            charts.gas
+                        );
                    	}
                 });
             }
-        	
-            function render_electricity_chart(labels, electricity1, electricity2)
-            {
-                var data = {
-                    labels: labels,
-                    datasets: [{
-                        data: electricity1,
-                        label: "{% trans 'Electricity 1 (low tariff)' %}",                        
-                        fillColor: "rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(255,0,0,1)"
-                    }, {
-                        data: electricity2,
-                        label: "{% trans 'Electricity 2 (high tariff)' %}",                        
-                        fillColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(255,0,0,1)"
-                    }]
-                };
-                
-                if (g_electricity_chart_instance)
-                {
-                	g_electricity_chart_instance.destroy();
-                }
-                $("#electricity-chart-holder").show();
-
-                var ctx = $("#electricity-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#electricity-chart").parent().height();
-                g_electricity_chart_instance = new Chart(ctx).Line(data, line_options);
-                $("#electricity-chart-legend").html(g_electricity_chart_instance.generateLegend());
-            }
-                
-            function render_electricity_returned_chart(labels, electricity1_returned, electricity2_returned)
-            {
-                var data = {
-                    labels: labels,
-                    datasets: [{
-                        data: electricity1_returned,
-                        label: "{% trans 'Electricity 1 returned (low tariff)' %}",                       
-                        fillColor: "rgba({{frontend_settings.electricity_returned_alternate_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.electricity_returned_alternate_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.electricity_returned_alternate_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(200,200,100,1)"
-                    }, {
-                        data: electricity2_returned,
-                        label: "{% trans 'Electricity 1 returned (high tariff)' %}",                       
-                        fillColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(39,194,76,1)"
-                    }]
-                };
-                     
-                if (g_electricity_returned_chart_instance)
-                {
-                	g_electricity_returned_chart_instance.destroy();
-                }
-                $("#electricity-returned-chart-holder").show();
-
-                var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#electricity-returned-chart").parent().height();
-                g_electricity_returned_chart_instance = new Chart(ctx).Line(data, line_options);
-                $("#electricity-returned-chart-legend").html(g_electricity_returned_chart_instance.generateLegend());
-            }
             
-            function render_gas_chart(labels, gas)
+            function render_chart(global_instance_key, holder_id, chart_id, legend_id, chart_info)
             {
                 var data = {
-                    labels: labels,
-                    datasets: [{
-                        data: gas,
-                        label: "{% trans 'Gas' %}",                       
-                        fillColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(150,150,150,1)"
-                    }]
+                    labels: chart_info.labels,
+                    datasets: chart_info.datasets
                 };
                 
-                if (g_gas_chart_instance)
-               	{
-                	g_gas_chart_instance.destroy();
-               	}
-                $("#gas-chart-holder").show();
+                if (g_chart_instances[global_instance_key])
+                {
+                	g_chart_instances[global_instance_key].destroy();
+                }
 
-                var ctx = $("#gas-chart").show().get(0).getContext("2d");
-                ctx.canvas.height = $("#gas-chart").parent().height();
-                g_gas_chart_instance = new Chart(ctx).Line(data, line_options);
-            }
+                $(holder_id).show();
+
+                var ctx = $(chart_id).get(0).getContext("2d");
+                ctx.canvas.height = $(chart_id).parent().height();
+                g_chart_instances[global_instance_key] = new Chart(ctx).Line(data, line_options);
+                
+                if (legend_id)
+                {
+	                $(legend_id).html(g_chart_instances[global_instance_key].generateLegend());
+                }
+            }           
 
             </script>
 {% endblock %}

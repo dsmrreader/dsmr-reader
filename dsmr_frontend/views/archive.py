@@ -6,6 +6,7 @@ from dateutil.relativedelta import relativedelta
 from django.views.generic.base import TemplateView, View
 from django.http.response import HttpResponse
 from django.utils import timezone, formats
+from django.utils.translation import ugettext as _
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -13,6 +14,7 @@ from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
 import dsmr_backend.services
 import dsmr_stats.services
+from dsmr_frontend.templatetags.hex_to_rgb import hex_to_rgb
 
 
 class Archive(TemplateView):
@@ -43,6 +45,7 @@ class ArchiveXhrSummary(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(ArchiveXhrSummary, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
             self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
@@ -83,14 +86,18 @@ class ArchiveXhrSummary(TemplateView):
 class ArchiveXhrGraphs(View):
     """ XHR view for fetching the hour statistics of a day, JSON encoded. """
     def get(self, request):
+        capabilities = dsmr_backend.services.get_capabilities()
+        frontend_settings = FrontendSettings.get_solo()
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
             self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
         selected_level = self.request.GET['level']
         data = defaultdict(list)
-        x_extra = None
+        charts = {}
+        x_format_callback = None
         FIELDS = (
-            'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas'
+            'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'electricity_merged',
+            'electricity_returned_merged', 'gas'
         )
 
         # Zoom to hourly data.
@@ -101,7 +108,7 @@ class ArchiveXhrGraphs(View):
             ).order_by('hour_start')
             x_format = 'DSMR_GRAPH_SHORT_TIME_FORMAT'
             x_axis = 'hour_start'
-            x_extra = timezone.localtime
+            x_format_callback = timezone.localtime
 
         # Zoom to daily data.
         elif selected_level == 'months':
@@ -131,8 +138,8 @@ class ArchiveXhrGraphs(View):
             except AttributeError:
                 x_value = current_item[x_axis]
 
-            if x_extra:
-                x_value = x_extra(x_value)
+            if x_format_callback:
+                x_value = x_format_callback(x_value)
 
             data['x'].append(formats.date_format(x_value, x_format))
 
@@ -144,10 +151,101 @@ class ArchiveXhrGraphs(View):
 
                 data[current_field].append(float(y_value))
 
+        if frontend_settings.merge_electricity_tariffs:
+            charts['electricity'] = {
+                'labels': data['x'],
+                'datasets': [{
+                    'data': data['electricity_merged'],
+                    'label': _('Electricity (single tariff)'),
+                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'pointStrokeColor': "#fff",
+                    'pointHighlightFill': "#fff",
+                    'pointHighlightStroke': "rgba(255,0,0,1)"
+                }]
+            }
+        else:
+            charts['electricity'] = {
+                'labels': data['x'],
+                'datasets': [{
+                    'data': data['electricity1'],
+                    'label': _('Electricity 1 (low tariff)'),
+                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_alternate_color)),
+                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_alternate_color)),
+                    'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_alternate_color)),
+                    'pointStrokeColor': "#fff",
+                    'pointHighlightFill': "#fff",
+                    'pointHighlightStroke': "rgba(255,0,0,1)"
+                }, {
+                    'data': data['electricity2'],
+                    'label': _('Electricity 2 (high tariff)'),
+                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'pointStrokeColor': "#fff",
+                    'pointHighlightFill': "#fff",
+                    'pointHighlightStroke': "rgba(255,0,0,1)"
+                }]
+            }
+
+        if capabilities['electricity_returned']:
+            if frontend_settings.merge_electricity_tariffs:
+                charts['electricity_returned'] = {
+                    'labels': data['x'],
+                    'datasets': [{
+                        'data': data['electricity_returned_merged'],
+                        'label': _('Electricity returned (single tariff)'),
+                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'pointStrokeColor': "#fff",
+                        'pointHighlightFill': "#fff",
+                        'pointHighlightStroke': "rgba(39,194,76,1)"
+                    }]
+                }
+            else:
+                charts['electricity_returned'] = {
+                    'labels': data['x'],
+                    'datasets': [{
+                        'data': data['electricity1_returned'],
+                        'label': _('Electricity 1 returned (low tariff)'),
+                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_returned_alternate_color)),
+                        'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_alternate_color)),
+                        'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_alternate_color)),
+                        'pointStrokeColor': "#fff",
+                        'pointHighlightFill': "#fff",
+                        'pointHighlightStroke': "rgba(200,200,100,1)"
+                    }, {
+                        'data': data['electricity2_returned'],
+                        'label': _('Electricity 2 returned (high tariff)'),
+                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'pointStrokeColor': "#fff",
+                        'pointHighlightFill': "#fff",
+                        'pointHighlightStroke': "rgba(39,194,76,1)"
+                    }]
+                }
+
+        if capabilities['gas']:
+            charts['gas'] = {
+                'labels': data['x'],
+                'datasets': [{
+                    'data': data['gas'],
+                    'label': _('Gas'),
+                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
+                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
+                    'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
+                    'pointStrokeColor': "#fff",
+                    'pointHighlightFill': "#fff",
+                    'pointHighlightStroke': "rgba(150,150,150,1)"
+                }]
+            }
+
         return HttpResponse(
             json.dumps({
-                'capabilities': dsmr_backend.services.get_capabilities(),
-                'data': data,
+                'charts': charts,
             }),
             content_type='application/json'
         )

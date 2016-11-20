@@ -259,6 +259,11 @@
 	                            <td><i class="fa fa-{{ frontend_settings.reverse_dashboard_graphs|yesno:'check-square-o,square-o' }} fa-lg"></i></td>
 	                            <td>{% model_meta_info frontend_settings 'reverse_dashboard_graphs' 'help_text' %}</td>
 	                        </tr>
+                            <tr>
+                                <td>{% model_meta_info frontend_settings 'merge_electricity_tariffs' 'verbose_name' %}</td>
+                                <td><i class="fa fa-{{ frontend_settings.merge_electricity_tariffs|yesno:'check-square-o,square-o' }} fa-lg"></i></td>
+                                <td>{% model_meta_info frontend_settings 'merge_electricity_tariffs' 'help_text' %}</td>
+                            </tr>
 	                    </table>
 
                         <div class="row">

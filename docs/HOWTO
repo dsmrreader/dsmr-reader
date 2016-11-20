@@ -1,0 +1,11 @@
+Updating translations: 
+
+    (cd into CURRENT folder first, cd docs)
+    make gettext && sphinx-intl update -p _build/locale -l nl
+
+
+
+Running local docs server (@ http://127.0.0.1:10000):
+
+    (cd into PROJECT folder first, cd ..)
+    sphinx-autobuild docs docs/_build/html -p 10000

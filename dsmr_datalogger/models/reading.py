@@ -71,7 +71,8 @@ class DsmrReading(models.Model):
     class Meta:
         default_permissions = tuple()
         ordering = ['timestamp']
-        verbose_name = _('DSMR reading')
+        verbose_name = _('DSMR reading (read only)')
+        verbose_name_plural = _('DSMR readings (read only)')
 
     def __str__(self):
         return '{}: {} kWh'.format(self.id, self.timestamp, self.electricity_currently_delivered)
@@ -135,7 +136,8 @@ class MeterStatistics(SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('DSMR Meter statistics')
+        verbose_name = _('DSMR Meter statistics (read only)')
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return '{} @ {}'.format(self.__class__.__name__, self.timestamp)

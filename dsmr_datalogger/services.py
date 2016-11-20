@@ -106,7 +106,7 @@ def telegram_to_reading(data):
         """ Legacy support for DSMR 2.x gas. """
         legacy_gas_line = current_line
 
-        if next_line.startswith('('):
+        if next_line.startswith('('):  # pragma: no cover
             legacy_gas_line = current_line + next_line
 
         legacy_gas_result = re.search(
