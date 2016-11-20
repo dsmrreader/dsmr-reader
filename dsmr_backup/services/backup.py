@@ -79,7 +79,7 @@ def create():
             stdout=open(backup_file, 'w')  # pragma: no cover
         )
     # SQLite backup.
-    elif connection.vendor == 'sqlite':
+    elif connection.vendor == 'sqlite':  # pragma: no cover
         backup_process = subprocess.Popen(
             [
                 'sqlite3',
@@ -87,7 +87,7 @@ def create():
                 '.dump',
             ],
             stdout=open(backup_file, 'w')
-        )
+        )   # pragma: no cover
     else:
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))  # pragma: no cover
 
