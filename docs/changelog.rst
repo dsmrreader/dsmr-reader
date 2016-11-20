@@ -7,6 +7,7 @@ v1.4.0 - 2016-xx-xx
 - Dropbox API v1 deprecated (`#142 <https://github.com/dennissiemensma/dsmr-reader/issues/142>`_).
 - Support for Python 3.5 (`#55 <https://github.com/dennissiemensma/dsmr-reader/issues/55>`_).
 - Support for both single and high/low tariff (`#130 <https://github.com/dennissiemensma/dsmr-reader/issues/130>`_).
+- Improve code coverage (`#151 <https://github.com/dennissiemensma/dsmr-reader/issues/151>`_).
 
 
 v1.3.2 - 2016-11-08
