@@ -18,4 +18,4 @@ class AppConfig(AppConfig):
         # Import below prevents an AppRegistryNotReady error on Django init.
         import dsmr_backup.services.backup
         dsmr_backup.services.backup.check()
-        dsmr_backup.services.backup.sync()
+        dsmr_backup.services.backup.sync()  # pragma: no cover

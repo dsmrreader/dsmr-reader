@@ -13,7 +13,7 @@ class AppConfig(AppConfig):
 
     def ready(self):
         """ Performs an DB engine check, as we maintain some engine specific queries. """
-        if (connection.vendor not in settings.DSMR_SUPPORTED_DB_VENDORS):
+        if (connection.vendor not in settings.DSMR_SUPPORTED_DB_VENDORS):  # pragma: no cover
             # Temporary for backwards compatibility
             warnings.showwarning(
                 _(

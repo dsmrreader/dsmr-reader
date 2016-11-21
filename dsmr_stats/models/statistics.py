@@ -53,10 +53,6 @@ class DayStatistics(models.Model):
     def electricity_returned_merged(self):
         return self.electricity1_returned + self.electricity2_returned
 
-    @property
-    def electricity_cost_merged(self):
-        return self.electricity1_cost + self.electricity2_cost
-
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Day statistics (read only)')

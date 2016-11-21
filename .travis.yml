@@ -33,7 +33,7 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin create dsmrreader; fi"
 
 script: 
-  - ./manage.py test --noinput --with-coverage
+  - ./manage.py test --noinput
 
 after_success:
   - codecov
