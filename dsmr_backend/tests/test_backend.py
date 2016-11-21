@@ -69,3 +69,10 @@ class TestBackend(InterceptStdoutMixin, TestCase):
             'No changes detected\n',
             'Pending model changes found, missing in migrations!'
         )
+
+    def test_internal_check(self):
+        """ Tests whether Django passes it's internal 'check' command. """
+        self.assertEqual(
+            self._intercept_command_stdout('check', dry_run=True),
+            'System check identified no issues (0 silenced).\n',
+        )

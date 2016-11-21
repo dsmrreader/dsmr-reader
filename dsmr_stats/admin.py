@@ -28,7 +28,7 @@ class NoteAdmin(admin.ModelAdmin):
 class DayStatisticsAdmin(ReadOnlyAdminModel):
     """ Read only model. """
     ordering = ['-day']
-    list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'electricity_cost_merged', 'total_cost')
+    list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'total_cost')
 
 
 @admin.register(HourStatistics)
