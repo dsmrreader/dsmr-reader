@@ -10,6 +10,7 @@ v1.4.0 - 2016-xx-xx
 - Improve code coverage (`#151 <https://github.com/dennissiemensma/dsmr-reader/issues/151>`_).
 - Add new note from Dashboard has wrong time format (`#159 <https://github.com/dennissiemensma/dsmr-reader/issues/159>`_).
 - Display estimated price for current usage in Dashboard (`#155 <https://github.com/dennissiemensma/dsmr-reader/issues/155>`_).
+- Restyle configuration overview (`#156 <https://github.com/dennissiemensma/dsmr-reader/issues/156>`_).
 
 
 v1.3.2 - 2016-11-08

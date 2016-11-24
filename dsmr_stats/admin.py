@@ -1,3 +1,4 @@
+from django.contrib.admin.filters import DateFieldListFilter
 from django.contrib import admin
 from django.forms import widgets
 from django.db import models
@@ -29,6 +30,9 @@ class DayStatisticsAdmin(ReadOnlyAdminModel):
     """ Read only model. """
     ordering = ['-day']
     list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'total_cost')
+    list_filter = (
+        ('day', DateFieldListFilter),
+    )
 
 
 @admin.register(HourStatistics)
@@ -36,3 +40,6 @@ class HourStatisticsAdmin(ReadOnlyAdminModel):
     """ Read only model. """
     ordering = ['-hour_start']
     list_display = ('hour_start', 'electricity_merged', 'electricity_returned_merged')
+    list_filter = (
+        ('hour_start', DateFieldListFilter),
+    )

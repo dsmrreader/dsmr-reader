@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-24 20:19+0100\n"
-"PO-Revision-Date: 2016-11-24 18:40+0100\n"
+"POT-Creation-Date: 2016-11-24 21:43+0100\n"
+"PO-Revision-Date: 2016-11-24 21:43+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -426,8 +426,11 @@ msgstr "Inloggen vereist"
 msgid "Configuration"
 msgstr "Configuratie"
 
-msgid "Documentation"
-msgstr "Documentatie"
+msgid "Documentation / FAQ"
+msgstr "Documentatie / FAQ"
+
+msgid "Feedback"
+msgstr "Feedback"
 
 msgid "DSMR (Dutch Smart Meter Requirements) reader"
 msgstr "DSMR (Dutch Smart Meter Requirements) reader"
@@ -449,21 +452,6 @@ msgstr "Basisselectie"
 
 msgid "Compare with selection"
 msgstr "Te vergelijken selectie"
-
-msgid "View all settings"
-msgstr "Bekijk alle instellingen"
-
-msgid "Edit"
-msgstr "Bewerk"
-
-msgid "Setting"
-msgstr "Instelling"
-
-msgid "This will simply alter the latest backup timestamp displayed above to a week ago."
-msgstr "Dit zorgt er simpelweg voor dat het tijdstip van de meest recente back-up een week in het verleden wordt gezet."
-
-msgid "Schedule new backup now"
-msgstr "Plan per direct nieuwe back-up in"
 
 msgid "Watt"
 msgstr "Watt"
@@ -986,6 +974,21 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "View all settings"
+#~ msgstr "Bekijk alle instellingen"
+
+#~ msgid "Edit"
+#~ msgstr "Bewerk"
+
+#~ msgid "Setting"
+#~ msgstr "Instelling"
+
+#~ msgid "This will simply alter the latest backup timestamp displayed above to a week ago."
+#~ msgstr "Dit zorgt er simpelweg voor dat het tijdstip van de meest recente back-up een week in het verleden wordt gezet."
+
+#~ msgid "Schedule new backup now"
+#~ msgstr "Plan per direct nieuwe back-up in"
 
 #~ msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account."
 #~ msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen."

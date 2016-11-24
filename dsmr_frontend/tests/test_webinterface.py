@@ -9,15 +9,10 @@ from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
-from dsmr_consumption.models.settings import ConsumptionSettings
-from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
-from dsmr_backup.models.settings import BackupSettings
-from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
-from dsmr_api.models import APISettings
 import dsmr_consumption.services
 from dsmr_frontend.forms import ExportAsCsvForm
 from dsmr_frontend.models.message import Notification
@@ -303,75 +298,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
 
-    @mock.patch('django.utils.timezone.now')
-    def test_configuration(self, now_mock):
-        view_url = reverse('{}:configuration'.format(self.namespace))
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-
-        # Check login required.
-        response = self.client.get(view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
-        )
-
-        # Login and retest
-        self.client.login(username='testuser', password='passwd')
-        response = self.client.get(view_url)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('api_settings', response.context)
-        self.assertIsInstance(response.context['api_settings'], APISettings)
-
-        self.assertIn('backup_settings', response.context)
-        self.assertIsInstance(response.context['backup_settings'], BackupSettings)
-
-        self.assertIn('consumption_settings', response.context)
-        self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)
-
-        self.assertIn('datalogger_settings', response.context)
-        self.assertIsInstance(response.context['datalogger_settings'], DataloggerSettings)
-
-        self.assertIn('frontend_settings', response.context)
-        self.assertIsInstance(response.context['frontend_settings'], FrontendSettings)
-
-        self.assertIn('weather_settings', response.context)
-        self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
-
-        self.assertIn('mindergas_settings', response.context)
-        self.assertIsInstance(response.context['mindergas_settings'], MinderGasSettings)
-
-    @mock.patch('django.utils.timezone.now')
-    def test_configuration_force_backup(self, now_mock):
-        view_url = reverse('{}:configuration-force-backup'.format(self.namespace))
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-        backup_settings = BackupSettings.get_solo()
-        backup_settings.latest_backup = now_mock.return_value
-        backup_settings.save()
-
-        self.assertEqual(BackupSettings.get_solo().latest_backup, now_mock.return_value)
-
-        # Check login required.
-        response = self.client.post(view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], 'http://testserver/configuration/admin/login/?next={}'.format(view_url)
-        )
-
-        # Login and retest.
-        self.client.login(username='testuser', password='passwd')
-        response = self.client.post(view_url)
-
-        success_url = reverse('{}:configuration'.format(self.namespace))
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], 'http://testserver{}'.format(success_url))
-
-        # Setting should have been altered.
-        self.assertEqual(
-            BackupSettings.get_solo().latest_backup,
-            now_mock.return_value - timezone.timedelta(days=7)
-        )
-
     def test_notification_read(self):
         view_url = reverse('{}:notification-read'.format(self.namespace))
         notification = Notification.objects.create(message='TEST', redirect_to='fake')
@@ -394,10 +320,11 @@ class TestViews(TestCase):
         # Notification should be altered now.
         self.assertTrue(Notification.objects.get(pk=notification.pk).read)
 
-    def test_docs_redirect(self):
-        response = self.client.get(reverse('{}:docs'.format(self.namespace)))
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(response['Location'].startswith('https://dsmr-reader.readthedocs.io'))
+    def test_read_the_docs_redirects(self):
+        for current in ('docs', 'feedback'):
+            response = self.client.get(reverse('{}:{}-redirect'.format(self.namespace, current)))
+            self.assertEqual(response.status_code, 302)
+            self.assertTrue(response['Location'].startswith('https://dsmr-reader.readthedocs.io'))
 
 
 class TestViewsWithoutData(TestViews):

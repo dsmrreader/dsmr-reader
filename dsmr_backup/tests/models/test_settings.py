@@ -15,6 +15,9 @@ class TestBackupSettings(TestCase):
         """ Model should be registered in Django Admin. """
         self.assertTrue(site.is_registered(BackupSettings))
 
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+
     def test_daily_backup(self):
         self.assertTrue(self.instance.daily_backup)
 
@@ -36,6 +39,9 @@ class TestDropboxSettings(TestCase):
     def test_admin(self):
         """ Model should be registered in Django Admin. """
         self.assertTrue(site.is_registered(DropboxSettings))
+
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
     def test_access_token(self):
         self.assertIsNone(self.instance.access_token)

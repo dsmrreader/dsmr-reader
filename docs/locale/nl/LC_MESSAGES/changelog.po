@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 20:07+0100\n"
+"POT-Creation-Date: 2016-11-24 21:10+0100\n"
 "PO-Revision-Date: 2016-04-18 22:10+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -43,674 +43,698 @@ msgid ""
 "<https://github.com/dennissiemensma/dsmr-reader/issues/130>`_)."
 msgstr ""
 
+#: ../../changelog.rst:10
+msgid ""
+"Improve code coverage (`#151 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/151>`_)."
+msgstr ""
+
+#: ../../changelog.rst:11
+msgid ""
+"Add new note from Dashboard has wrong time format (`#159 "
+"<https://github.com/dennissiemensma/dsmr-reader/issues/159>`_)."
+msgstr ""
+
+#: ../../changelog.rst:12
+msgid ""
+"Display estimated price for current usage in Dashboard (`#155 "
+"<https://github.com/dennissiemensma/dsmr-reader/issues/155>`_)."
+msgstr ""
+
 #: ../../changelog.rst:13
+msgid ""
+"Restyle configuration overview (`#156 <https://github.com/dennissiemensma"
+"/dsmr-reader/issues/156>`_)."
+msgstr ""
+
+#: ../../changelog.rst:17
 msgid "v1.3.2 - 2016-11-08"
 msgstr ""
 
-#: ../../changelog.rst:14
+#: ../../changelog.rst:18
 msgid ""
 "Requirements update (november 2016) (`#150 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/150>`_)."
 msgstr ""
 
-#: ../../changelog.rst:18
+#: ../../changelog.rst:22
 msgid "v1.3.1 - 2016-08-16"
 msgstr ""
 
-#: ../../changelog.rst:19
+#: ../../changelog.rst:23
 msgid ""
 "CSS large margin-bottom (`#144 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/144>`_)."
 msgstr ""
 
-#: ../../changelog.rst:20
+#: ../../changelog.rst:24
 msgid ""
 "Django security releases issued: 1.8.14 (`#147 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/147>`_)."
 msgstr ""
 
-#: ../../changelog.rst:21
+#: ../../changelog.rst:25
 msgid ""
 "Requirements update (August 2016) (`#148 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/148>`_)."
 msgstr ""
 
-#: ../../changelog.rst:22
+#: ../../changelog.rst:26
 msgid ""
 "Query performance improvements (`#149 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/149>`_)."
 msgstr ""
 
-#: ../../changelog.rst:26
+#: ../../changelog.rst:30
 msgid "v1.3.0 - 2016-07-15"
 msgstr ""
 
-#: ../../changelog.rst:27
+#: ../../changelog.rst:31
 msgid ""
 "API endpoint for datalogger (`#140 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/140>`_)."
 msgstr ""
 
-#: ../../changelog.rst:28
+#: ../../changelog.rst:32
 msgid ""
 "Colors for charts (`#137 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/137>`_)."
 msgstr ""
 
-#: ../../changelog.rst:29
+#: ../../changelog.rst:33
 msgid ""
 "Data export: Mindergas.nl (`#10 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/10>`_)."
 msgstr ""
 
-#: ../../changelog.rst:30
+#: ../../changelog.rst:34
 msgid ""
 "Requirement upgrade (`#143 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/143>`_)."
 msgstr ""
 
-#: ../../changelog.rst:31
+#: ../../changelog.rst:35
 msgid ""
 "Installation wizard for first time use (`#139 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/139>`_)."
 msgstr ""
 
-#: ../../changelog.rst:35
+#: ../../changelog.rst:39
 msgid "v1.2.0 - 2016-05-18"
 msgstr ""
 
-#: ../../changelog.rst:36
+#: ../../changelog.rst:40
 msgid ""
 "Energy supplier prices does not indicate tariff type (Django admin) "
 "(`#126 <https://github.com/dennissiemensma/dsmr-reader/issues/126>`_)."
 msgstr ""
 
-#: ../../changelog.rst:37
+#: ../../changelog.rst:41
 msgid ""
 "Requirements update (`#128 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/128>`_)."
 msgstr ""
 
-#: ../../changelog.rst:38
+#: ../../changelog.rst:42
 msgid ""
 "Force backup (`#123 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/123>`_)."
 msgstr ""
 
-#: ../../changelog.rst:39
+#: ../../changelog.rst:43
 msgid ""
 "Update clean-install.md (`#131 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/131>`_)."
 msgstr ""
 
-#: ../../changelog.rst:40
+#: ../../changelog.rst:44
 msgid ""
 "Improve data export field names (`#132 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/132>`_)."
 msgstr ""
 
-#: ../../changelog.rst:41
+#: ../../changelog.rst:45
 msgid ""
 "Display average temperature in archive (`#122 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/122>`_)."
 msgstr ""
 
-#: ../../changelog.rst:42
+#: ../../changelog.rst:46
 msgid ""
 "Pie charts on trends page overlap their canvas (`#136 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/136>`_)."
 msgstr ""
 
-#: ../../changelog.rst:43
+#: ../../changelog.rst:47
 msgid ""
 "'Slumber' consumption (`#115 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/115>`_)."
 msgstr ""
 
-#: ../../changelog.rst:44
+#: ../../changelog.rst:48
 msgid ""
 "Show lowest & highest Watt peaks (`#138 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/138>`_)."
 msgstr ""
 
-#: ../../changelog.rst:45
+#: ../../changelog.rst:49
 msgid ""
 "Allow day & hour statistics reset due to changing energy prices (`#95 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/95>`_)."
 msgstr ""
 
-#: ../../changelog.rst:49
+#: ../../changelog.rst:53
 msgid "v1.1.2 - 2016-05-01"
 msgstr ""
 
-#: ../../changelog.rst:50
+#: ../../changelog.rst:54
 msgid ""
 "Trends page giving errors (when lacking data) (`#125 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/125>`_)."
 msgstr ""
 
-#: ../../changelog.rst:54
+#: ../../changelog.rst:58
 msgid "v1.1.1 - 2016-04-27"
 msgstr ""
 
-#: ../../changelog.rst:55
+#: ../../changelog.rst:59
 msgid ""
 "Improve readme (`#124 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/124>`_)."
 msgstr ""
 
-#: ../../changelog.rst:59
+#: ../../changelog.rst:63
 msgid "v1.1.0 - 2016-04-23"
 msgstr ""
 
-#: ../../changelog.rst:60
+#: ../../changelog.rst:64
 msgid ""
 "Autorefresh dashboard (`#117 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/117>`_)."
 msgstr ""
 
-#: ../../changelog.rst:61
+#: ../../changelog.rst:65
 msgid ""
 "Improve line graphs' visibility (`#111 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/111>`_)."
 msgstr ""
 
-#: ../../changelog.rst:62
+#: ../../changelog.rst:66
 msgid ""
 "Easily add notes (`#110 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/110>`_)."
 msgstr ""
 
-#: ../../changelog.rst:63
+#: ../../changelog.rst:67
 msgid ""
 "Export data points in CSV format (`#2 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/2>`_)."
 msgstr ""
 
-#: ../../changelog.rst:64
+#: ../../changelog.rst:68
 msgid ""
 "Allow day/month/year comparison (`#94 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/94>`_)."
 msgstr ""
 
-#: ../../changelog.rst:65
+#: ../../changelog.rst:69
 msgid ""
 "Docs: Add FAQ and generic application info (`#113 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/113>`_)."
 msgstr ""
 
-#: ../../changelog.rst:66
+#: ../../changelog.rst:70
 msgid ""
 "Support for Iskra meter (DSMR 2.x) (`#120 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/120>`_)."
 msgstr ""
 
-#: ../../changelog.rst:70
+#: ../../changelog.rst:74
 msgid "v1.0.1 - 2016-04-07"
 msgstr ""
 
-#: ../../changelog.rst:71
+#: ../../changelog.rst:75
 msgid ""
 "Update licence to OSI compatible one (`#119 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/119>`_)."
 msgstr ""
 
-#: ../../changelog.rst:75
+#: ../../changelog.rst:79
 msgid "v1.0.0 - 2016-04-07"
 msgstr ""
 
-#: ../../changelog.rst:76
+#: ../../changelog.rst:80
 msgid "First official stable release."
 msgstr "Eerste officiële stabiele release."
 
-#: ../../changelog.rst:80
+#: ../../changelog.rst:84
 msgid "[β] v0.1 (2015-10-29) to 0.16 (2016-04-06)"
 msgstr ""
 
-#: ../../changelog.rst:81
+#: ../../changelog.rst:85
 msgid ""
 "All previous beta releases/changes have been combined to a single list "
 "below:"
 msgstr ""
 
-#: ../../changelog.rst:83
+#: ../../changelog.rst:87
 msgid ""
 "Move documentation to wiki or RTD (`#90 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/90>`_)."
 msgstr ""
 
-#: ../../changelog.rst:84
+#: ../../changelog.rst:88
 msgid ""
 "Translate README to Dutch (`#16 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/16>`_)."
 msgstr ""
 
-#: ../../changelog.rst:85
+#: ../../changelog.rst:89
 msgid ""
 "Delete (recent) history page (`#112 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/112>`_)."
 msgstr ""
 
-#: ../../changelog.rst:86
+#: ../../changelog.rst:90
 msgid ""
 "Display most recent temperature in dashboard (`#114 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/114>`_)."
 msgstr ""
 
-#: ../../changelog.rst:87
+#: ../../changelog.rst:91
 msgid ""
 "Upgrade Django to 1.8.12 (`#118 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/118>`_)."
 msgstr ""
 
-#: ../../changelog.rst:89
+#: ../../changelog.rst:93
 msgid ""
 "Redesign trends page (`#97 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/97>`_)."
 msgstr ""
 
-#: ../../changelog.rst:90
+#: ../../changelog.rst:94
 msgid ""
 "Support for summer time (`#105 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/105>`_)."
 msgstr ""
 
-#: ../../changelog.rst:91
+#: ../../changelog.rst:95
 msgid ""
 "Support for Daylight Saving Time (DST) transition (`#104 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/104>`_)."
 msgstr ""
 
-#: ../../changelog.rst:92
+#: ../../changelog.rst:96
 msgid ""
 "Add (error) hints to status page (`#106 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/106>`_)."
 msgstr ""
 
-#: ../../changelog.rst:93
+#: ../../changelog.rst:97
 msgid ""
 "Keep track of version (`#108 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/108>`_)."
 msgstr ""
 
-#: ../../changelog.rst:95
+#: ../../changelog.rst:99
 msgid ""
 "Django 1.8.11 released (`#82 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/82>`_)."
 msgstr ""
 
-#: ../../changelog.rst:96
+#: ../../changelog.rst:100
 msgid ""
 "Prevent tests from failing due to moment of execution (`#88 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/88>`_)."
 msgstr ""
 
-#: ../../changelog.rst:97
+#: ../../changelog.rst:101
 msgid ""
 "Statistics page meter positions are broken (`#93 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/93>`_)."
 msgstr ""
 
-#: ../../changelog.rst:98
+#: ../../changelog.rst:102
 msgid ""
 "Archive only shows graph untill 23:00 (11 pm) (`#77 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/77>`_)."
 msgstr ""
 
-#: ../../changelog.rst:99
+#: ../../changelog.rst:103
 msgid ""
 "Trends page crashes due to nullable fields average (`#100 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/100>`_)."
 msgstr ""
 
-#: ../../changelog.rst:100
+#: ../../changelog.rst:104
 msgid ""
 "Trends: Plot peak and off-peak relative to each other (`#99 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/99>`_)."
 msgstr ""
 
-#: ../../changelog.rst:101
+#: ../../changelog.rst:105
 msgid ""
 "Monitor requirements with requires.io (`#101 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/101>`_)."
 msgstr ""
 
-#: ../../changelog.rst:102
+#: ../../changelog.rst:106
 msgid ""
 "Terminology (`#41 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/41>`_)."
 msgstr ""
 
-#: ../../changelog.rst:103
+#: ../../changelog.rst:107
 msgid ""
 "Obsolete signals in dsmr_consumption (`#63 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/63>`_)."
 msgstr ""
 
-#: ../../changelog.rst:104
+#: ../../changelog.rst:108
 msgid ""
 "Individual app testing coverage (`#64 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/64>`_)."
 msgstr ""
 
-#: ../../changelog.rst:105
+#: ../../changelog.rst:109
 msgid ""
 "Support for extra devices on other M-bus (0-n:24.1) (`#92 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/92>`_)."
 msgstr ""
 
-#: ../../changelog.rst:106
+#: ../../changelog.rst:110
 msgid ""
 "Separate post-deployment commands (`#102 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/102>`_)."
 msgstr ""
 
-#: ../../changelog.rst:108
+#: ../../changelog.rst:112
 msgid ""
 "Show exceptions in production (webinterface) (`#87 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/87>`_)."
 msgstr ""
 
-#: ../../changelog.rst:109
+#: ../../changelog.rst:113
 msgid ""
 "Keep Supervisor processes running (`#79 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/79>`_)."
 msgstr ""
 
-#: ../../changelog.rst:110
+#: ../../changelog.rst:114
 msgid ""
 "Hourly stats of 22:00:00+00 every day lack gas (`#78 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/78>`_)."
 msgstr ""
 
-#: ../../changelog.rst:111
+#: ../../changelog.rst:115
 msgid ""
 "Test Travis-CI with MySQL + MariaDB + PostgreSQL (`#54 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/54>`_)."
 msgstr ""
 
-#: ../../changelog.rst:112
+#: ../../changelog.rst:116
 msgid ""
 "PostgreSQL tests + nosetests + coverage failure: unrecognized "
 "configuration parameter \"foreign_key_checks\" (`#62 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/62>`_)."
 msgstr ""
 
-#: ../../changelog.rst:113
+#: ../../changelog.rst:117
 msgid ""
 "Performance check (`#83 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/83>`_)."
 msgstr ""
 
-#: ../../changelog.rst:114
+#: ../../changelog.rst:118
 msgid ""
 "Allow month & year archive (`#66 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/66>`_)."
 msgstr ""
 
-#: ../../changelog.rst:115
+#: ../../changelog.rst:119
 msgid ""
 "Graphs keep increasing height on tablet (`#89 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/89>`_)."
 msgstr ""
 
-#: ../../changelog.rst:117
+#: ../../changelog.rst:121
 msgid ""
 "Delete StatsSettings(.track) settings model (`#71 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/71>`_)."
 msgstr ""
 
-#: ../../changelog.rst:118
+#: ../../changelog.rst:122
 msgid ""
 "Drop deprecated commands (`#22 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/22>`_)."
 msgstr ""
 
-#: ../../changelog.rst:119
+#: ../../changelog.rst:123
 msgid ""
 "Datalogger doesn't work properly with DSMR 4.2 (KAIFA-METER) (`#73 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/73>`_)."
 msgstr ""
 
-#: ../../changelog.rst:120
+#: ../../changelog.rst:124
 msgid ""
 "Dashboard month statistics costs does not add up (`#75 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/75>`_)."
 msgstr ""
 
-#: ../../changelog.rst:121
+#: ../../changelog.rst:125
 msgid ""
 "Log unhandled exceptions and errors (`#65 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/65>`_)."
 msgstr ""
 
-#: ../../changelog.rst:122
+#: ../../changelog.rst:126
 msgid ""
 "Datalogger crashes with IntegrityError because 'timestamp' is null (`#74 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/74>`_)."
 msgstr ""
 
-#: ../../changelog.rst:123
+#: ../../changelog.rst:127
 msgid ""
 "Trends are always shown in UTC (`#76 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/76>`_)."
 msgstr ""
 
-#: ../../changelog.rst:124
+#: ../../changelog.rst:128
 msgid ""
 "Squash migrations (`#31 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/31>`_)."
 msgstr ""
 
-#: ../../changelog.rst:125
+#: ../../changelog.rst:129
 msgid ""
 "Display 'electricity returned' graph in dashboard (`#81 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/81>`_)."
 msgstr ""
 
-#: ../../changelog.rst:126
+#: ../../changelog.rst:130
 msgid ""
 "Optional gas (and electricity returned) capabilities tracking (`#70 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/70>`_)."
 msgstr ""
 
-#: ../../changelog.rst:127
+#: ../../changelog.rst:131
 msgid ""
 "Add 'electricity returned' to trends page (`#84 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/84>`_)."
 msgstr ""
 
-#: ../../changelog.rst:129
+#: ../../changelog.rst:133
 msgid ""
 "Archive: View past days details (`#61 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/61>`_)."
 msgstr ""
 
-#: ../../changelog.rst:130
+#: ../../changelog.rst:134
 msgid ""
 "Dashboard: Consumption total for current month (`#60 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/60>`_)."
 msgstr ""
 
-#: ../../changelog.rst:131
+#: ../../changelog.rst:135
 msgid ""
 "Check whether gas readings are optional (`#34 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/34>`_)."
 msgstr ""
 
-#: ../../changelog.rst:132
+#: ../../changelog.rst:136
 msgid ""
 "Django security releases issued: 1.8.10 (`#68 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/68>`_)."
 msgstr ""
 
-#: ../../changelog.rst:133
+#: ../../changelog.rst:137
 msgid ""
 "Notes display in archive (`#69 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/69>`_)."
 msgstr ""
 
-#: ../../changelog.rst:135
+#: ../../changelog.rst:139
 msgid ""
 "Status page/alerts when features are disabled/unavailable (`#45 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/45>`_)."
 msgstr ""
 
-#: ../../changelog.rst:136
+#: ../../changelog.rst:140
 msgid ""
 "Integrate Travis CI (`#48 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/48>`_)."
 msgstr ""
 
-#: ../../changelog.rst:137
+#: ../../changelog.rst:141
 msgid ""
 "Testing coverage (`#38 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/38>`_)."
 msgstr ""
 
-#: ../../changelog.rst:138
+#: ../../changelog.rst:142
 msgid ""
 "Implement automatic backups & Dropbox cloud storage (`#44 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/44>`_)."
 msgstr ""
 
-#: ../../changelog.rst:139
+#: ../../changelog.rst:143
 msgid ""
 "Link code coverage service to repository (`#56 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/56>`_)."
 msgstr ""
 
-#: ../../changelog.rst:140
+#: ../../changelog.rst:144
 msgid ""
 "Explore timezone.localtime() as replacement for datetime.astimezone() "
 "(`#50 <https://github.com/dennissiemensma/dsmr-reader/issues/50>`_)."
 msgstr ""
 
-#: ../../changelog.rst:141
+#: ../../changelog.rst:145
 msgid ""
 "Align GasConsumption.read_at to represent the start of hour (`#40 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/40>`_)."
 msgstr ""
 
-#: ../../changelog.rst:143
+#: ../../changelog.rst:147
 msgid ""
 "Cleanup unused static files (`#47 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/47>`_)."
 msgstr ""
 
-#: ../../changelog.rst:144
+#: ../../changelog.rst:148
 msgid ""
 "Investigated mysql_tzinfo_to_sql — Load the Time Zone Tables (`#35 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/35>`_)."
 msgstr ""
 
-#: ../../changelog.rst:145
+#: ../../changelog.rst:149
 msgid ""
 "Make additional DSMR data optional (`#46 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/46>`_)."
 msgstr ""
 
-#: ../../changelog.rst:146
+#: ../../changelog.rst:150
 msgid ""
 "Localize graph x-axis (`#42 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/42>`_)."
 msgstr ""
 
-#: ../../changelog.rst:147
+#: ../../changelog.rst:151
 msgid ""
 "Added graph formatting string to gettext file (`#42 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/42>`_)."
 msgstr ""
 
-#: ../../changelog.rst:148
+#: ../../changelog.rst:152
 msgid ""
 "Different colors for peak & off-peak electricity (`#52 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/52>`_)."
 msgstr ""
 
-#: ../../changelog.rst:149
+#: ../../changelog.rst:153
 msgid ""
 "Admin: Note widget (`#51 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/51>`_)."
 msgstr ""
 
-#: ../../changelog.rst:150
+#: ../../changelog.rst:154
 msgid ""
 "Allow GUI to run without data (`#26 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/26>`_)."
 msgstr ""
 
-#: ../../changelog.rst:152
+#: ../../changelog.rst:156
 msgid ""
 "Moved project to GitHub (`#28 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/28>`_)."
 msgstr ""
 
-#: ../../changelog.rst:153
+#: ../../changelog.rst:157
 msgid "Added stdout to dsmr_backend to reflect progress."
 msgstr ""
 
-#: ../../changelog.rst:154
+#: ../../changelog.rst:158
 msgid ""
 "Restore note usage in GUI (`#39 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/39>`_)."
 msgstr ""
 
-#: ../../changelog.rst:156
+#: ../../changelog.rst:160
 msgid ""
 "Store daily, weekly, monthly and yearly statistics (`#3 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/3>`_)."
 msgstr ""
 
-#: ../../changelog.rst:157
+#: ../../changelog.rst:161
 msgid ""
 "Improved Recent History page performance a bit. (as result of `#3 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/3>`_)"
 msgstr ""
 
-#: ../../changelog.rst:158
+#: ../../changelog.rst:162
 msgid ""
 "Updates ChartJS library tot 1.1, disposing django-chartjs plugin. Labels "
 "finally work! (as result of `#3 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/3>`_)"
 msgstr ""
 
-#: ../../changelog.rst:159
+#: ../../changelog.rst:163
 msgid ""
 "Added trends page. (as result of `#3 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/3>`_)"
 msgstr ""
 
-#: ../../changelog.rst:161
+#: ../../changelog.rst:165
 msgid ""
 "Recent history setting: set range (`#29 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/29>`_)."
 msgstr ""
 
-#: ../../changelog.rst:162
+#: ../../changelog.rst:166
 msgid ""
 "Mock required for test: dsmr_weather.test_weather_tracking (`#32 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/32>`_)."
 msgstr ""
 
-#: ../../changelog.rst:164
+#: ../../changelog.rst:168
 msgid ""
 "Massive refactoring: Separating apps & using signals (`#19 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/19>`_)."
 msgstr ""
 
-#: ../../changelog.rst:165
+#: ../../changelog.rst:169
 msgid ""
 "README update: Exit character for cu (`#27 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/27>`_, by Jeroen "
 "Peters)."
 msgstr ""
 
-#: ../../changelog.rst:166
+#: ../../changelog.rst:170
 msgid "Fixed untranslated strings in admin interface."
 msgstr ""
 
-#: ../../changelog.rst:167
+#: ../../changelog.rst:171
 msgid "Upgraded Django to 1.8.9."
 msgstr ""
 

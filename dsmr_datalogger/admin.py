@@ -1,3 +1,4 @@
+from django.contrib.admin.filters import DateFieldListFilter
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 
@@ -16,6 +17,9 @@ class DsmrReadingAdmin(ReadOnlyAdminModel):
     """ Read only model. """
     ordering = ['-timestamp']
     list_display = ('timestamp', 'electricity_currently_delivered', 'electricity_currently_returned')
+    list_filter = (
+        ('timestamp', DateFieldListFilter),
+    )
 
 
 @admin.register(MeterStatistics)

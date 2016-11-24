@@ -17,7 +17,7 @@ def insert_notifications(apps, schema_editor):
                 " frontend configuration: 'Merge electricity tariffs'"
             )
         ),
-        redirect_to='frontend:configuration'
+        redirect_to='admin:index'
     )
 
 

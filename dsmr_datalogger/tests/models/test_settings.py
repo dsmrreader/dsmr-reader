@@ -13,6 +13,9 @@ class TestSettings(TestCase):
         """ Model should be registered in Django Admin. """
         self.assertTrue(site.is_registered(DataloggerSettings))
 
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+
     def test_track(self):
         self.assertTrue(self.instance.track)
 

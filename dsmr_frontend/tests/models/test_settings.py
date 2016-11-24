@@ -13,6 +13,9 @@ class TestSettings(TestCase):
         """ Model should be registered in Django Admin. """
         self.assertTrue(site.is_registered(FrontendSettings))
 
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+
     def test_reverse_dashboard_graphs(self):
         self.assertFalse(self.instance.reverse_dashboard_graphs)
 
