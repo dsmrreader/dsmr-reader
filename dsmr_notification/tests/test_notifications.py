@@ -113,8 +113,12 @@ class TestServices(TestCase):
         settings.next_notification = timezone.localtime(timezone.now())
         settings.save()
 
-        with self.assertRaises(AssertionError):
-            dsmr_notification.services.notify()
+        if self.fixtures:
+            with self.assertRaises(AssertionError):
+                dsmr_notification.services.notify()
+        else:
+            # When having no data, this should NOT raise an exception.
+            return dsmr_notification.services.notify()
 
         with self.assertRaisesMessage(
                 AssertionError, 'Notify API call failed: Forbidden (HTTP403)'):
@@ -143,7 +147,11 @@ class TestServices(TestCase):
         dsmr_notification.services.notify()
 
         settings = NotificationSetting.get_solo()
-        self.assertTrue(requests_post_mock.called)
+
+        if self.fixtures:
+            self.assertTrue(requests_post_mock.called)
+        else:
+            return self.assertFalse(requests_post_mock.called)
 
         nma_url = dsmr_notification.services.get_notification_api_url(settings)
         yesterday = (timezone.localtime(timezone.now()) -
@@ -167,7 +175,12 @@ class TestServices(TestCase):
 
 
 class TestServicesWithoutGas(TestServices):
-    """ TSame tests, but without having any gas data. """
+    """ Same tests, but without having any gas data. """
     def setUp(self):
         super(TestServicesWithoutGas, self).setUp()
         DayStatistics.objects.all().update(gas=None)
+
+
+class TestServicesWithoutAnyData(TestServices):
+    """ TSame tests, but without having any data at all. """
+    fixtures = []
