@@ -137,7 +137,7 @@
                     {{ consumption.day }}
                     
                     <small class="pull-right">
-                        <a href="{% url 'admin:dsmr_stats_note_add' %}?day={% now 'd-m-Y' %}">
+                        <a href="{% url 'admin:dsmr_stats_note_add' %}?day={% now 'DJANGO_DATE_FORMAT' %}">
                             <span class="badge bg-green"><i class="fa fa-plus"></i> &nbsp; {% trans "Add note for today" %}</span>
                         </a>
                     </small>
