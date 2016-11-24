@@ -5,8 +5,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy
 
 from dsmr_notification.models.settings import NotificationSetting
-import dsmr_notification.services
 from dsmr_stats.models.statistics import DayStatistics
+import dsmr_notification.services
 
 
 class TestServices(TestCase):
@@ -164,3 +164,10 @@ class TestServices(TestCase):
         tomorrow = (timezone.localtime(timezone.now()) +
                     timezone.timedelta(hours=24)).date()
         self.assertEqual(settings.next_notification, tomorrow)
+
+
+class TestServicesWithoutGas(TestServices):
+    """ TSame tests, but without having any gas data. """
+    def setUp(self):
+        super(TestServicesWithoutGas, self).setUp()
+        DayStatistics.objects.all().update(gas=None)

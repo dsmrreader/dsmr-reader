@@ -63,7 +63,11 @@ def create_notification_message(day, stats):
     day_date = (day - timezone.timedelta(hours=1)).strftime("%d-%m-%Y")
     total_cost = formats.number_format(dsmr_consumption.services.round_decimal(stats.total_cost))
     total_electricity = formats.number_format(dsmr_consumption.services.round_decimal(stats.electricity_merged))
-    total_gas = formats.number_format(dsmr_consumption.services.round_decimal(stats.gas))
+
+    if stats.gas is not None:
+        total_gas = formats.number_format(dsmr_consumption.services.round_decimal(stats.gas))
+    else:
+        total_gas = '-'
 
     return _(
         'Your daily usage statistics for {}\n'
