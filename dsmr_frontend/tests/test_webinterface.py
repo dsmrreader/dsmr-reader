@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
@@ -15,8 +16,8 @@ from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings
 from dsmr_mindergas.models.settings import MinderGasSettings
+from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 from dsmr_api.models import APISettings
-from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 from dsmr_frontend.forms import ExportAsCsvForm
 from dsmr_frontend.models.message import Notification
@@ -28,7 +29,8 @@ class TestViews(TestCase):
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
         'dsmr_frontend/EnergySupplierPrice.json',
-        'dsmr_frontend/test_statistics.json'
+        'dsmr_frontend/test_statistics.json',
+        'dsmr_frontend/test_meterstatistics.json',
     ]
     namespace = 'frontend'
     support_data = True
@@ -106,11 +108,37 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200)
 
-        # XHR views.
-        response = self.client.get(
-            reverse('{}:dashboard-xhr-header'.format(self.namespace))
-        )
-        self.assertEqual(response.status_code, 200, response.content)
+    @mock.patch('django.utils.timezone.now')
+    def test_dashboard_xhr_header(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
+
+        # This makes sure all possible code paths are covered.
+        for current_tariff in (None, 1, 2):
+            if MeterStatistics.objects.exists():
+                meter_statistics = MeterStatistics.get_solo()
+                meter_statistics.electricity_tariff = current_tariff
+                meter_statistics.save()
+
+            response = self.client.get(
+                reverse('{}:dashboard-xhr-header'.format(self.namespace))
+            )
+            self.assertEqual(response.status_code, 200, response.content)
+            self.assertEqual(response['Content-Type'], 'application/json')
+
+            # No response when no data at all.
+            if self.support_data:
+                json_response = json.loads(response.content.decode("utf-8"))
+                self.assertIn('timestamp', json_response)
+                self.assertIn('currently_delivered', json_response)
+                self.assertIn('currently_returned', json_response)
+
+                # Costs only makes sense when set.
+                if EnergySupplierPrice.objects.exists() and MeterStatistics.objects.exists() \
+                        and current_tariff is not None:
+                    self.assertIn('latest_electricity_cost', json_response)
+                    self.assertEqual(
+                        json_response['latest_electricity_cost'], '0.23' if current_tariff == 1 else '0.46'
+                    )
 
     @mock.patch('django.utils.timezone.now')
     def test_archive(self, now_mock):
@@ -388,13 +416,22 @@ class TestViewsWithoutData(TestViews):
         self.assertFalse(DayStatistics.objects.exists())
 
 
+class TestViewsWithoutPrices(TestViews):
+    """ Same tests as above, but without any price data as it's flushed in setUp().  """
+    def setUp(self):
+        super(TestViewsWithoutPrices, self).setUp()
+        EnergySupplierPrice.objects.all().delete()
+        self.assertFalse(EnergySupplierPrice.objects.exists())
+
+
 class TestViewsWithoutGas(TestViews):
     """ Same tests as above, but without any GAS related data.  """
     fixtures = [
         'dsmr_frontend/test_dsmrreading_without_gas.json',
         'dsmr_frontend/test_note.json',
         'dsmr_frontend/EnergySupplierPrice.json',
-        'dsmr_frontend/test_statistics.json'
+        'dsmr_frontend/test_statistics.json',
+        'dsmr_frontend/test_meterstatistics.json',
     ]
     support_gas = False
 

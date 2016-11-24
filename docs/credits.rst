@@ -53,7 +53,7 @@ Testers & contributors
 - "WatskeBart" (`Github profile <https://github.com/WatskeBart>`_)
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
-- "sevickson" (`Github profile <https://github.com/sevickson>`_)
+- Sevickson (`Github profile <https://github.com/sevickson>`_)
 
 
 DSMR help

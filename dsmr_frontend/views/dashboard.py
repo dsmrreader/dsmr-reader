@@ -6,11 +6,12 @@ from django.http.response import HttpResponse
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
-from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
@@ -99,7 +100,7 @@ class Dashboard(TemplateView):
 
 
 class DashboardXhrHeader(View):
-    """ XHR view for fetching the dashboard header, displaying latest readings, HTML response. """
+    """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, HTML response. """
     def get(self, request):
         data = {}
 
@@ -107,10 +108,35 @@ class DashboardXhrHeader(View):
             latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
         except IndexError:
             # Don't even bother when no data available.
+            return HttpResponse(json.dumps(data), content_type='application/json')
+
+        data['timestamp'] = naturaltime(latest_reading.timestamp)
+        data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
+        data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
+
+        try:
+            # This WILL fail when we either have no prices at all or conflicting ranges.
+            prices = EnergySupplierPrice.objects.by_date(target_date=timezone.now().date())
+        except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
+            return HttpResponse(json.dumps(data), content_type='application/json')
+
+        # We need to current tariff to get the right price.
+        tariff = MeterStatistics.get_solo().electricity_tariff
+        currently_delivered = latest_reading.electricity_currently_delivered
+        cost_per_hour = None
+
+        tariff_map = {
+            1: prices.electricity_1_price,
+            2: prices.electricity_2_price,
+        }
+
+        try:
+            cost_per_hour = currently_delivered * tariff_map[tariff]
+        except KeyError:
             pass
         else:
-            data['timestamp'] = naturaltime(latest_reading.timestamp)
-            data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
-            data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
+            data['latest_electricity_cost'] = formats.number_format(
+                dsmr_consumption.services.round_decimal(cost_per_hour)
+            )
 
         return HttpResponse(json.dumps(data), content_type='application/json')

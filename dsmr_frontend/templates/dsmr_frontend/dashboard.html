@@ -18,7 +18,9 @@
 	<li>
 	    <a href="" onclick="return false;" style="cursor: default;">
 	        <span class="badge bg-red"><i class="fa fa-bolt"></i> 
-	        &nbsp; <span id="latest_electricity"><i class="fa fa-refresh fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}</span>
+		        &nbsp; <span id="latest_electricity"><i class="fa fa-refresh fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}
+		        &nbsp; <small id="latest_electricity_cost"></small>
+	        </span>
 	    </a>
 	</li>
 	{% endif %}
@@ -289,7 +291,7 @@
             
                 /* Auto refresh. */
                 update_header();
-                setInterval(function(){ update_header(); }, 5000);
+                setInterval(function(){ update_header(); }, 3000);
             });
             
             /**
@@ -307,6 +309,11 @@
                     $("#latest_timestamp").html(response.timestamp);
                     $("#latest_electricity").html(response.currently_delivered);
                     $("#latest_electricity_returned").html(response.currently_returned);
+                    
+                    if (response.latest_electricity_cost)
+                    {
+	                    $("#latest_electricity_cost").html("&euro; " + response.latest_electricity_cost + " {% trans 'per hour' %}");
+                    }
                 });
             }
             
