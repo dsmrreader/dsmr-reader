@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-24 21:43+0100\n"
-"PO-Revision-Date: 2016-11-24 21:43+0100\n"
+"POT-Creation-Date: 2016-11-24 22:40+0100\n"
+"PO-Revision-Date: 2016-11-24 22:23+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -750,6 +750,56 @@ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisc
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
 
+msgid "Usage notification"
+msgstr "Verbruiksnotificatie"
+
+msgid "NotifyMyAndroid"
+msgstr "NotifyMyAndroid"
+
+msgid "Prowl"
+msgstr "Prowl"
+
+msgid "Send notification"
+msgstr "Stuur notificatie"
+
+msgid "Whether or not you want to receive a notification of your daily usage on your smartphone"
+msgstr "Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone over je energieverbruik."
+
+msgid "Notification service"
+msgstr "Notificatieservice"
+
+msgid "Which notification service to use for sending daily usage notifications"
+msgstr "Welke notificatieservice mag gebruikt worden om de notificaties mee te versturen"
+
+msgid "Notification service API key"
+msgstr "API sleutel voor notificatie service"
+
+msgid "The API key used send messages to your smartphone. Please visit https://notifymyandroid.com/ or https://www.prowlapp.com/ to download and use the apps."
+msgstr "De API sleutel die gebruikt wordt om notificaties naar je smartphone te sturen. Bezoek https://notifymyandroid.com/ of https://www.prowlapp.com/ om de apps te downloaden en te gebruiken."
+
+msgid "Next notification"
+msgstr "Volgende notificatie"
+
+msgid "Timestamp of the next notification. Managed by application."
+msgstr "Tijdstip van de volgende notificatie. Applicatie werkt dit automatisch bij."
+
+msgid "Notification configuration"
+msgstr "Notificatieconfiguratie"
+
+msgid "Daily usage notification"
+msgstr "Dagelijkse verbruiksnotificatie"
+
+msgid ""
+"Your daily usage statistics for {}\n"
+"Total cost: € {}\n"
+"Electricity: {} kWh\n"
+"Gas: {} m3"
+msgstr ""
+"Dagelijkse verbruiksstatistieken voor {}\n"
+"Totale kosten: € {}\n"
+"Elektriciteit: {} kWh\n"
+"Gas: {} m3"
+
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
@@ -974,21 +1024,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "View all settings"
-#~ msgstr "Bekijk alle instellingen"
-
-#~ msgid "Edit"
-#~ msgstr "Bewerk"
-
-#~ msgid "Setting"
-#~ msgstr "Instelling"
-
-#~ msgid "This will simply alter the latest backup timestamp displayed above to a week ago."
-#~ msgstr "Dit zorgt er simpelweg voor dat het tijdstip van de meest recente back-up een week in het verleden wordt gezet."
-
-#~ msgid "Schedule new backup now"
-#~ msgstr "Plan per direct nieuwe back-up in"
 
 #~ msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account."
 #~ msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen."

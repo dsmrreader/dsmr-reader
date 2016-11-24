@@ -61,7 +61,7 @@ def analyze():
     if consumption_date == now.date():
         return
 
-    # Do not create status until we've passed the next day for over 30 minutes. Required due to omewhat delayed gas
+    # Do not create status until we've passed the next day for over 30 minutes. Required due to somewhat delayed gas
     # update by meters.
     if dsmr_backend.services.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
         # Skip for a moment.
