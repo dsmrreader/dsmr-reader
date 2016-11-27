@@ -1,8 +1,0 @@
-[run]
-#branch = True
-#include = ./*
-#omit = ./*/migrations/*
-#  ./dsmr_backend/mixins.py
-
-#[html]
-#directory = coverage_report
