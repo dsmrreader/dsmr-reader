@@ -1,0 +1,15 @@
+[
+{
+    "pk": 95,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.005",
+        "returned_2": "0.000",
+        "currently_delivered": "0.158",
+        "delivered_1": "595.187",
+        "read_at": "2015-12-11T23:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+}
+]

@@ -1,10 +1,11 @@
 import requests
-from django.utils import timezone, formats
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from dsmr_notification.models.settings import NotificationSetting
 from dsmr_stats.models.statistics import DayStatistics
 import dsmr_consumption.services
+import dsmr_backend.services
 
 
 def should_notify(settings):
@@ -60,21 +61,24 @@ def create_notification_message(day, stats):
     :param stats:
     :return:
     """
+    capabilities = dsmr_backend.services.get_capabilities()
     day_date = (day - timezone.timedelta(hours=1)).strftime("%d-%m-%Y")
-    total_cost = formats.number_format(dsmr_consumption.services.round_decimal(stats.total_cost))
-    total_electricity = formats.number_format(dsmr_consumption.services.round_decimal(stats.electricity_merged))
+    message = _('Your daily usage statistics for {}\n').format(day_date)
 
-    if stats.gas is not None:
-        total_gas = formats.number_format(dsmr_consumption.services.round_decimal(stats.gas))
-    else:
-        total_gas = '-'
+    if capabilities['electricity']:
+        electricity_merged = dsmr_consumption.services.round_decimal(stats.electricity_merged)
+        message += _('Electricity consumed: {} kWh\n').format(electricity_merged)
 
-    return _(
-        'Your daily usage statistics for {}\n'
-        'Total cost: € {}\n'
-        'Electricity: {} kWh\n'
-        'Gas: {} m3'
-    ).format(day_date, total_cost, total_electricity, total_gas)
+    if capabilities['electricity_returned']:
+        electricity_returned_merged = dsmr_consumption.services.round_decimal(stats.electricity_returned_merged)
+        message += _('Electricity returned: {} kWh\n').format(electricity_returned_merged)
+
+    if capabilities['gas']:
+        gas = dsmr_consumption.services.round_decimal(stats.gas)
+        message += _('Gas consumed: {} m3\n').format(gas)
+
+    message += _('Total cost: € {}').format(dsmr_consumption.services.round_decimal(stats.total_cost))
+    return message
 
 
 def send_notification(api_url, api_key, notification_message):
@@ -83,7 +87,6 @@ def send_notification(api_url, api_key, notification_message):
     :param api_key:
     :param notification_message:
     """
-
     response = requests.post(api_url, {
         'apikey': api_key,
         'priority': get_notification_priority(),

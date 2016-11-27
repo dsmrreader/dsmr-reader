@@ -4,14 +4,20 @@ from django.test import TestCase
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy
 
+from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_notification.models.settings import NotificationSetting
 from dsmr_stats.models.statistics import DayStatistics
 import dsmr_notification.services
+import dsmr_backend
 
 
 class TestServices(TestCase):
     """ Test dsmr_notification functions """
-    fixtures = ['dsmr_notification/test_daystatistics.json']
+    fixtures = [
+        'dsmr_notification/test_daystatistics.json',
+        'dsmr_notification/test_electricity_consumption.json',
+        'dsmr_notification/test_gas_consumption.json',
+    ]
 
     def test_hardcoded_properties(self):
         """ Notifications: Test service-delivered hardcoded values """
@@ -28,6 +34,13 @@ class TestServices(TestCase):
 
     def test_should_notify_default(self):
         """ Notifications: Test should_notify() default behaviour. """
+
+        settings = NotificationSetting.get_solo()
+        self.assertFalse(settings.send_notification)
+        self.assertFalse(dsmr_notification.services.should_notify(settings))
+
+    def test_should_notify_skip(self):
+        """ Notifications: Test whether should_notify() skips current day. """
 
         settings = NotificationSetting.get_solo()
         self.assertFalse(settings.send_notification)
@@ -176,11 +189,29 @@ class TestServices(TestCase):
 
 class TestServicesWithoutGas(TestServices):
     """ Same tests, but without having any gas data. """
+    fixtures = [
+        'dsmr_notification/test_daystatistics.json',
+    ]
+
     def setUp(self):
         super(TestServicesWithoutGas, self).setUp()
         DayStatistics.objects.all().update(gas=None)
+        self.assertFalse(dsmr_backend.services.get_capabilities(capability='gas'))
+
+
+class TestServicesWithoutElectricityReturned(TestServices):
+    """ Same tests, but without having any electricity returned. """
+    def setUp(self):
+        super(TestServicesWithoutElectricityReturned, self).setUp()
+        DayStatistics.objects.all().update(electricity1_returned=0, electricity2_returned=0)
+        ElectricityConsumption.objects.update(currently_returned=0)
+        self.assertFalse(dsmr_backend.services.get_capabilities(capability='electricity_returned'))
 
 
 class TestServicesWithoutAnyData(TestServices):
     """ TSame tests, but without having any data at all. """
     fixtures = []
+
+    def setUp(self):
+        super(TestServicesWithoutAnyData, self).setUp()
+        self.assertFalse(dsmr_backend.services.get_capabilities(capability='any'))
