@@ -1,11 +1,20 @@
-Updating translations: 
+Running localhost docs server:
 
-    (cd into CURRENT folder first, cd docs)
-    make gettext && sphinx-intl update -p _build/locale -l nl
+- (cd into CURRENT folder first: cd docs)
+- sphinx-autobuild . _build/html -p 10000
+- Visit http://127.0.0.1:10000
 
 
 
-Running local docs server (@ http://127.0.0.1:10000):
+Updating translations after editing RST files: 
 
-    (cd into PROJECT folder first, cd ..)
-    sphinx-autobuild docs docs/_build/html -p 10000
+- (cd into CURRENT folder first: cd docs)
+- make gettext && sphinx-intl update -p _build/locale -l nl
+
+
+
+Checking (Dutch) translations results by building locally:
+
+- (cd into CURRENT folder first: cd docs)
+- make -e SPHINXOPTS="-D language='nl'" html
+- view generated HTML in: docs/_build/html
