@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 22:43+0200\n"
-"PO-Revision-Date: 2016-04-07 20:22+0100\n"
+"POT-Creation-Date: 2016-11-24 21:41+0100\n"
+"PO-Revision-Date: 2016-11-24 21:41+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.5.4\n"
+"Generated-By: Babel 2.3.4\n"
 "Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../contributing.rst:2
 msgid "Contributing"
@@ -23,63 +23,60 @@ msgstr "Bijdrage leveren"
 
 #: ../../contributing.rst:3
 msgid "Would you like to contribute or help this project in any way?"
-msgstr ""
-"Wil je bijdragen aan dit project? Kijk dan hieronder hoe je kunt helpen."
+msgstr "Wil je bijdragen aan dit project? Kijk dan hieronder hoe je kunt helpen."
 
-#: ../../contributing.rst:6
+#: ../../contributing.rst:7
+msgid "Feedback"
+msgstr "Feedback"
+
+#: ../../contributing.rst:8
+msgid ""
+"All feedback and any input is, as always, very much appreciated! `Please "
+"create an issue on Github <https://github.com/dennissiemensma/dsmr-reader/"
+"issues/new>`_."
+msgstr ""
+"Feedback wordt, in alle soorten en maten, altijd erg gewaardeerd! Je kunt je "
+"input delen door `op Github een ticket aan te maken met je vraag of opmerking "
+"<https://github.com/dennissiemensma/dsmr-reader/issues/new>`_."
+
+#: ../../contributing.rst:10
+msgid ""
+"It doesn't matter whether you run into problems getting started in this guide "
+"or just want to get in touch, just fire away!"
+msgstr ""
+"Het maakt niet uit of je ergens tegenaan loopt of gewoon in contact wil komen, "
+"vraag maar raak!"
+
+#: ../../contributing.rst:14
 msgid "P1 telegram snapshot"
 msgstr "P1 telegram voorbeeld"
 
-#: ../../contributing.rst:7
+#: ../../contributing.rst:15
 msgid ""
 "Please start by `creating an issue on Github <https://github.com/"
-"dennissiemensma/dsmr-reader/issues/new>`_ with a snapshot of a DSMR "
-"telegram. It will help me in improving support for multiple meter vendors "
-"and home situations."
+"dennissiemensma/dsmr-reader/issues/new>`_ with a snapshot of a DSMR telegram. "
+"It will help me in improving support for multiple meter vendors and home "
+"situations."
 msgstr ""
-"Het helpt enorm wanneer je `op Github een ticket aanmaakt <https://github."
-"com/dennissiemensma/dsmr-reader/issues/new>`_ met daarin een voorbeeld van "
-"de DSMR-gegevens die je meter terugstuurt. Dit helpt mij bij het verbeteren "
-"van de datalogger en om ondersteuning te bieden voor diverse meter-"
-"leveranciers."
+"Het helpt enorm wanneer je `op Github een ticket aanmaakt <https://github.com/"
+"dennissiemensma/dsmr-reader/issues/new>`_ met daarin een voorbeeld van de DSMR-"
+"gegevens die je meter terugstuurt. Dit helpt mij bij het verbeteren van de "
+"datalogger en om ondersteuning te bieden voor diverse meter-leveranciers."
 
-#: ../../contributing.rst:9
+#: ../../contributing.rst:17
 msgid ""
 "You can find the telegram by executing ``sudo supervisorctl tail -n 100 "
 "dsmr_datalogger`` on your DSMR-reader system."
 msgstr ""
-"Het DSMR telegram kun je terugvinden door het volgende commando uit te "
-"voeren als root-gebruiker: ``sudo supervisorctl tail -n 100 "
-"dsmr_datalogger``."
+"Het DSMR telegram kun je terugvinden door het volgende commando uit te voeren "
+"als root-gebruiker: ``sudo supervisorctl tail -n 100 dsmr_datalogger``."
 
-#: ../../contributing.rst:11
+#: ../../contributing.rst:19
 msgid ""
-"*You should omit your unique meter identification*, for privacy reasons, "
-"which are the lines starting with ``0-0:96.1.1`` or ``0-1:96.1.0``, followed "
-"by the meter ID, represented as a long string of many digits."
+"*You should omit your unique meter identification*, for privacy reasons, which "
+"are the lines starting with ``0-0:96.1.1`` or ``0-1:96.1.0``, followed by the "
+"meter ID, represented as a long string of many digits."
 msgstr ""
 "*Laat, indien mogelijk, je unieke meter-identificatienummer weg* wegens "
 "privacy redenen. Dit is een lange nummerreeks in regels die beginnen met "
 "``0-0:96.1.1`` of ``0-1:96.1.0``."
-
-#: ../../contributing.rst:14
-msgid "Feedback"
-msgstr "Feedback"
-
-#: ../../contributing.rst:15
-msgid ""
-"Also all feedback and any input is, as always, very much appreciated! "
-"`Please create an issue on Github <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/new>`_."
-msgstr ""
-"Daarnaast wordt feedback, in alle soorten en maten, altijd erg gewaardeerd! "
-"Je kunt je input delen door `op Github een ticket aan te maken met je vraag "
-"of opmerking <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_."
-
-#: ../../contributing.rst:17
-msgid ""
-"It doesn't matter whether you run into problems getting started in this "
-"guide or just want to get in touch, just fire away!"
-msgstr ""
-"Het maakt niet uit of je ergens tegenaan loopt of gewoon in contact wil "
-"komen, vraag maar raak!"

@@ -180,8 +180,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_stats.services.analyze()
         self.assertTrue(clear_cache_mock.called)
 
-    def test_average_consumption_by_hour(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_average_consumption_by_hour(self, now_mock):
         """ Test whether timezones are converted properly when grouping hours. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 25, 12))
         HourStatistics.objects.create(
             # This should be stored with local timezone, so +1.
             hour_start=timezone.make_aware(timezone.datetime(2016, 1, 1, 12)),
@@ -190,7 +192,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             electricity1_returned=0,
             electricity2_returned=0,
         )
-        hour_stat = dsmr_stats.services.average_consumption_by_hour()[0]
+        hour_stat = dsmr_stats.services.average_consumption_by_hour(max_weeks_ago=4)[0]
 
         # @see "Trends are always shown in UTC #76", only PostgreSQL can fix this.
         if connection.vendor == 'postgresql':
@@ -215,6 +217,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(statistics['electricity2'], 200)
         self.assertEqual(statistics['electricity2_cost'], 2)
         self.assertEqual(statistics['electricity2_returned'], 22)
+        self.assertEqual(statistics['electricity_merged'], 300)
+        self.assertEqual(statistics['electricity_cost_merged'], 3)
+        self.assertEqual(statistics['electricity_returned_merged'], 33)
         self.assertEqual(statistics['gas'], 300)
         self.assertEqual(statistics['gas_cost'], 3)
 
@@ -243,6 +248,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(data['electricity2'], daily['electricity2'])
         self.assertEqual(data['electricity2_cost'], daily['electricity2_cost'])
         self.assertEqual(data['electricity2_returned'], daily['electricity2_returned'])
+        self.assertEqual(data['electricity_merged'], daily['electricity1'] + daily['electricity2'])
+        self.assertEqual(data['electricity_cost_merged'], daily['electricity1_cost'] + daily['electricity2_cost'])
+        self.assertEqual(data['electricity_returned_merged'], daily['electricity1_returned'] + daily['electricity2_returned'])
         self.assertEqual(data['gas'], daily['gas'])
         self.assertEqual(data['gas_cost'], daily['gas_cost'])
 
@@ -268,6 +276,16 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(data['electricity2'], daily['electricity2'] * days_in_month)
         self.assertEqual(data['electricity2_cost'], daily['electricity2_cost'] * days_in_month)
         self.assertEqual(data['electricity2_returned'], daily['electricity2_returned'] * days_in_month)
+        self.assertEqual(
+            data['electricity_merged'], (daily['electricity1'] + daily['electricity2']) * days_in_month
+        )
+        self.assertEqual(
+            data['electricity_cost_merged'], (daily['electricity1_cost'] + daily['electricity2_cost']) * days_in_month
+        )
+        self.assertEqual(
+            data['electricity_returned_merged'],
+            (daily['electricity1_returned'] + daily['electricity2_returned']) * days_in_month
+        )
         self.assertEqual(data['gas'], daily['gas'] * days_in_month)
         self.assertEqual(data['gas_cost'], daily['gas_cost'] * days_in_month)
 
@@ -293,6 +311,16 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(data['electricity2'], daily['electricity2'] * days_in_year)
         self.assertEqual(data['electricity2_cost'], daily['electricity2_cost'] * days_in_year)
         self.assertEqual(data['electricity2_returned'], daily['electricity2_returned'] * days_in_year)
+        self.assertEqual(
+            data['electricity_merged'], (daily['electricity1'] + daily['electricity2']) * days_in_year
+        )
+        self.assertEqual(
+            data['electricity_cost_merged'], (daily['electricity1_cost'] + daily['electricity2_cost']) * days_in_year
+        )
+        self.assertEqual(
+            data['electricity_returned_merged'],
+            (daily['electricity1_returned'] + daily['electricity2_returned']) * days_in_year
+        )
         self.assertEqual(data['gas'], daily['gas'] * days_in_year)
         self.assertEqual(data['gas_cost'], daily['gas_cost'] * days_in_year)
 

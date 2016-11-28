@@ -110,7 +110,7 @@
                             </a>
                         </li>
                         <li>
-				            <a href="{% url 'frontend:configuration' %}">
+				            <a href="{% url 'admin:index' %}">
 				                <i class="fa fa-cogs"></i> <span>{% trans "Configuration" %} &nbsp; <i class="fa fa-lock" title="{% trans 'Authentication required' %}"></i></span>
 				            </a>
 			            </li>
@@ -118,8 +118,13 @@
                             &nbsp;
                         </li>
                         <li>
-                            <a href="{% url 'frontend:docs' %}" target="_blank">
-                                <i class="fa fa-question"></i> <span>{% trans "Documentation" %}</span>
+                            <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
+                                <i class="fa fa-question"></i> <span>{% trans "Documentation / FAQ" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
+                                <i class="fa fa-bullhorn"></i> <span>{% trans "Feedback" %}</span>
                             </a>
                         </li>
                     </ul>

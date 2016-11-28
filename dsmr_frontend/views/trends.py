@@ -29,7 +29,7 @@ class Trends(TemplateView):
             return context_data
 
         # Average of real consumption/return per hour.
-        average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour()
+        average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour(max_weeks_ago=4)
 
         context_data['avg_consumption_x'] = json.dumps(
             ['{}:00'.format(int(x['hour_start'])) for x in average_consumption_by_hour]

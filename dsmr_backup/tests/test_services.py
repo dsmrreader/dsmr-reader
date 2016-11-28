@@ -101,9 +101,28 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(compress_mock.called)
         self.assertFalse(subprocess_mock.called)
         self.assertIsNone(BackupSettings.get_solo().latest_backup)
+        self.assertTrue(BackupSettings.get_solo().compress)
 
         dsmr_backup.services.backup.create()
         self.assertTrue(compress_mock.called)
+        self.assertTrue(subprocess_mock.called)
+
+        self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
+
+    @mock.patch('subprocess.Popen')
+    @mock.patch('dsmr_backup.services.backup.compress')
+    def test_create_without_compress(self, compress_mock, subprocess_mock):
+        backup_settings = BackupSettings.get_solo()
+        backup_settings.compress = False
+        backup_settings.save()
+
+        self.assertFalse(compress_mock.called)
+        self.assertFalse(subprocess_mock.called)
+        self.assertIsNone(BackupSettings.get_solo().latest_backup)
+        self.assertFalse(BackupSettings.get_solo().compress)
+
+        dsmr_backup.services.backup.create()
+        self.assertFalse(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
 
         self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
@@ -156,6 +175,19 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
 
         dsmr_backup.services.dropbox.sync()
         self.assertFalse(upload_chunked_mock.called)
+
+    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('django.utils.timezone.now')
+    def test_sync_initial(self, now_mock, upload_chunked_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+
+        # Initial project state.
+        dropbox_settings = DropboxSettings.get_solo()
+        dropbox_settings.latest_sync = None
+        dropbox_settings.save()
+
+        dsmr_backup.services.dropbox.sync()
+        self.assertTrue(upload_chunked_mock.called)
 
     @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
     @mock.patch('django.utils.timezone.now')
@@ -214,16 +246,40 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             dsmr_backup.services.dropbox.sync()
             self.assertFalse(upload_chunked_mock.called)
 
-    @mock.patch('dropbox.client.DropboxClient.get_chunked_uploader')
-    def test_upload_chunked(self, chunked_uploader_mock):
+    @mock.patch('dropbox.Dropbox.files_upload')
+    @mock.patch('dropbox.Dropbox.files_upload_session_start')
+    @mock.patch('dropbox.Dropbox.files_upload_session_append')
+    @mock.patch('dropbox.Dropbox.files_upload_session_finish')
+    def test_upload_chunked(self, session_finish_mock, session_append_mock, session_start_mock, files_upload_mock):
         DATA = b'Lots of data.'
-        uploader_mock = mock.MagicMock()
-        type(uploader_mock).offset = mock.PropertyMock(side_effect=[0, 5, 10, len(DATA), len(DATA)])
-        chunked_uploader_mock.return_value = uploader_mock
+        session_start_result = mock.MagicMock()
+        type(session_start_result).session_id = mock.PropertyMock(side_effect=['session-xxxxx'])
+        session_start_mock.return_value = session_start_result
+
+        self.assertFalse(files_upload_mock.called)
+        self.assertFalse(session_start_mock.called)
+        self.assertFalse(session_append_mock.called)
+        self.assertFalse(session_finish_mock.called)
 
         with tempfile.NamedTemporaryFile() as temp_file:
             temp_file.write(DATA)
             temp_file.flush()
 
             dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
-            self.assertTrue(uploader_mock.finish.called)
+
+        # Only small file upload should be called.
+        self.assertTrue(files_upload_mock.called)
+        self.assertFalse(session_start_mock.called)
+        self.assertFalse(session_append_mock.called)
+        self.assertFalse(session_finish_mock.called)
+
+        # Large file upload (> 2 MB chunks).
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(DATA * 2 * 1024 * 1024)
+            temp_file.flush()
+
+            dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
+
+        self.assertTrue(session_start_mock.called)
+        self.assertTrue(session_append_mock.called)
+        self.assertTrue(session_finish_mock.called)

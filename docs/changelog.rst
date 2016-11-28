@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v1.4.0 - 2016-11-28
+^^^^^^^^^^^^^^^^^^^
+- Push notifications for Notify My Android / Prowl (iOS), written by Jeroen Peters (`#152 <https://github.com/dennissiemensma/dsmr-reader/issues/152>`_).
+- Support for both single and high/low tariff (`#130 <https://github.com/dennissiemensma/dsmr-reader/issues/130>`_).
+- Add new note from Dashboard has wrong time format (`#159 <https://github.com/dennissiemensma/dsmr-reader/issues/159>`_).
+- Display estimated price for current usage in Dashboard (`#155 <https://github.com/dennissiemensma/dsmr-reader/issues/155>`_).
+- Dropbox API v1 deprecated in June 2017 (`#142 <https://github.com/dennissiemensma/dsmr-reader/issues/142>`_).
+- Support for Python 3.5 (`#55 <https://github.com/dennissiemensma/dsmr-reader/issues/55>`_).
+- Improve code coverage (`#151 <https://github.com/dennissiemensma/dsmr-reader/issues/151>`_).
+- Restyle configuration overview (`#156 <https://github.com/dennissiemensma/dsmr-reader/issues/156>`_).
+- Capability based push notifications (`#165 <https://github.com/dennissiemensma/dsmr-reader/issues/165>`_).
+
+
 v1.3.2 - 2016-11-08
 ^^^^^^^^^^^^^^^^^^^
 - Requirements update (november 2016) (`#150 <https://github.com/dennissiemensma/dsmr-reader/issues/150>`_).

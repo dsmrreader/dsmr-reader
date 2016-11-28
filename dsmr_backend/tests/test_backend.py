@@ -31,6 +31,22 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         # We must disconnect to prevent other tests from failing, since this is no database action.
         dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)
 
+    @mock.patch('raven.contrib.django.raven_compat.models.client.captureException')
+    def test_raven_handler(self, raven_mock):
+        """ Test whether Raven gets called as expectedly, sending any exceptions to Sentry. """
+
+        def _fake_signal_troublemaker(*args, **kwargs):
+            raise AssertionError("Please report me to Raven as I'm a very annoying crash!")
+
+        dsmr_backend.signals.backend_called.connect(receiver=_fake_signal_troublemaker)
+        self.assertFalse(raven_mock.called)
+
+        with self.assertRaises(CommandError):
+            # Signal should crash, rasing a command error.
+            self._intercept_command_stdout('dsmr_backend')
+
+        self.assertTrue(raven_mock.called)
+
     def test_supported_vendors(self):
         """ Check whether supported vendors is as expected. """
         self.assertEqual(
@@ -52,4 +68,11 @@ class TestBackend(InterceptStdoutMixin, TestCase):
             self._intercept_command_stdout('makemigrations', dry_run=True),
             'No changes detected\n',
             'Pending model changes found, missing in migrations!'
+        )
+
+    def test_internal_check(self):
+        """ Tests whether Django passes it's internal 'check' command. """
+        self.assertEqual(
+            self._intercept_command_stdout('check', dry_run=True),
+            'System check identified no issues (0 silenced).\n',
         )

@@ -8,17 +8,14 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_consumption.models.settings import ConsumptionSettings
-from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
-from dsmr_backup.models.settings import BackupSettings
-from dsmr_mindergas.models.settings import MinderGasSettings
-from dsmr_api.models import APISettings
-from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 import dsmr_consumption.services
 from dsmr_frontend.forms import ExportAsCsvForm
+from dsmr_frontend.models.message import Notification
 
 
 class TestViews(TestCase):
@@ -27,7 +24,8 @@ class TestViews(TestCase):
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
         'dsmr_frontend/EnergySupplierPrice.json',
-        'dsmr_frontend/test_statistics.json'
+        'dsmr_frontend/test_statistics.json',
+        'dsmr_frontend/test_meterstatistics.json',
     ]
     namespace = 'frontend'
     support_data = True
@@ -69,7 +67,7 @@ class TestViews(TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
 
         weather_settings = WeatherSettings.get_solo()
         weather_settings.track = True
@@ -88,14 +86,12 @@ class TestViews(TestCase):
                 len(json.loads(response.context['electricity_y'])), 0
             )
 
-            self.assertGreater(response.context['latest_electricity'], 0)
             self.assertTrue(response.context['track_temperature'])
             self.assertIn('consumption', response.context)
 
         if self.support_gas:
             self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
             self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
-            self.assertEqual(response.context['latest_gas'], 0)
 
         # Test whether reverse graphs work.
         frontend_settings = FrontendSettings.get_solo()
@@ -105,6 +101,39 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
         )
+        self.assertEqual(response.status_code, 200)
+
+    @mock.patch('django.utils.timezone.now')
+    def test_dashboard_xhr_header(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
+
+        # This makes sure all possible code paths are covered.
+        for current_tariff in (None, 1, 2):
+            if MeterStatistics.objects.exists():
+                meter_statistics = MeterStatistics.get_solo()
+                meter_statistics.electricity_tariff = current_tariff
+                meter_statistics.save()
+
+            response = self.client.get(
+                reverse('{}:dashboard-xhr-header'.format(self.namespace))
+            )
+            self.assertEqual(response.status_code, 200, response.content)
+            self.assertEqual(response['Content-Type'], 'application/json')
+
+            # No response when no data at all.
+            if self.support_data:
+                json_response = json.loads(response.content.decode("utf-8"))
+                self.assertIn('timestamp', json_response)
+                self.assertIn('currently_delivered', json_response)
+                self.assertIn('currently_returned', json_response)
+
+                # Costs only makes sense when set.
+                if EnergySupplierPrice.objects.exists() and MeterStatistics.objects.exists() \
+                        and current_tariff is not None:
+                    self.assertIn('latest_electricity_cost', json_response)
+                    self.assertEqual(
+                        json_response['latest_electricity_cost'], '0.23' if current_tariff == 1 else '0.46'
+                    )
 
     @mock.patch('django.utils.timezone.now')
     def test_archive(self, now_mock):
@@ -120,17 +149,22 @@ class TestViews(TestCase):
             'date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT'),
         }
         for current_level in ('days', 'months', 'years'):
-            data.update({'level': current_level})
-            response = self.client.get(
-                reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
-            )
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('capabilities', response.context)
+            # Test both with tariffs sparated and merged.
+            for merge in (False, True):
+                frontend_settings = FrontendSettings.get_solo()
+                frontend_settings.merge_electricity_tariffs = merge
+                frontend_settings.save()
 
-            response = self.client.get(
-                reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
-            )
-            self.assertEqual(response.status_code, 200)
+                data.update({'level': current_level})
+                response = self.client.get(
+                    reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+                )
+                self.assertEqual(response.status_code, 200)
+
+                response = self.client.get(
+                    reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
+                )
+                self.assertEqual(response.status_code, 200, response.content)
 
         # Invalid XHR.
         data.update({'level': 'INVALID DATA'})
@@ -264,75 +298,33 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
 
-    @mock.patch('django.utils.timezone.now')
-    def test_configuration(self, now_mock):
-        view_url = reverse('{}:configuration'.format(self.namespace))
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-
-        # Check login required.
-        response = self.client.get(view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
-        )
-
-        # Login and retest
-        self.client.login(username='testuser', password='passwd')
-        response = self.client.get(view_url)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('api_settings', response.context)
-        self.assertIsInstance(response.context['api_settings'], APISettings)
-
-        self.assertIn('backup_settings', response.context)
-        self.assertIsInstance(response.context['backup_settings'], BackupSettings)
-
-        self.assertIn('consumption_settings', response.context)
-        self.assertIsInstance(response.context['consumption_settings'], ConsumptionSettings)
-
-        self.assertIn('datalogger_settings', response.context)
-        self.assertIsInstance(response.context['datalogger_settings'], DataloggerSettings)
-
-        self.assertIn('frontend_settings', response.context)
-        self.assertIsInstance(response.context['frontend_settings'], FrontendSettings)
-
-        self.assertIn('weather_settings', response.context)
-        self.assertIsInstance(response.context['weather_settings'], WeatherSettings)
-
-        self.assertIn('mindergas_settings', response.context)
-        self.assertIsInstance(response.context['mindergas_settings'], MinderGasSettings)
-
-    @mock.patch('django.utils.timezone.now')
-    def test_configuration_force_backup(self, now_mock):
-        view_url = reverse('{}:configuration-force-backup'.format(self.namespace))
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-        backup_settings = BackupSettings.get_solo()
-        backup_settings.latest_backup = now_mock.return_value
-        backup_settings.save()
-
-        self.assertEqual(BackupSettings.get_solo().latest_backup, now_mock.return_value)
+    def test_notification_read(self):
+        view_url = reverse('{}:notification-read'.format(self.namespace))
+        notification = Notification.objects.create(message='TEST', redirect_to='fake')
+        self.assertFalse(notification.read)
 
         # Check login required.
         response = self.client.post(view_url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/configuration/admin/login/?next={}'.format(view_url)
+            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
         )
 
         # Login and retest.
         self.client.login(username='testuser', password='passwd')
         response = self.client.post(view_url)
 
-        success_url = reverse('{}:configuration'.format(self.namespace))
+        response = self.client.post(view_url, data={'id': notification.pk})
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], 'http://testserver{}'.format(success_url)
-        )
-        # Setting should have been altered.
-        self.assertEqual(
-            BackupSettings.get_solo().latest_backup,
-            now_mock.return_value - timezone.timedelta(days=7)
-        )
+
+        # Notification should be altered now.
+        self.assertTrue(Notification.objects.get(pk=notification.pk).read)
+
+    def test_read_the_docs_redirects(self):
+        for current in ('docs', 'feedback'):
+            response = self.client.get(reverse('{}:{}-redirect'.format(self.namespace, current)))
+            self.assertEqual(response.status_code, 302)
+            self.assertTrue(response['Location'].startswith('https://dsmr-reader.readthedocs.io'))
 
 
 class TestViewsWithoutData(TestViews):
@@ -351,13 +343,22 @@ class TestViewsWithoutData(TestViews):
         self.assertFalse(DayStatistics.objects.exists())
 
 
+class TestViewsWithoutPrices(TestViews):
+    """ Same tests as above, but without any price data as it's flushed in setUp().  """
+    def setUp(self):
+        super(TestViewsWithoutPrices, self).setUp()
+        EnergySupplierPrice.objects.all().delete()
+        self.assertFalse(EnergySupplierPrice.objects.exists())
+
+
 class TestViewsWithoutGas(TestViews):
     """ Same tests as above, but without any GAS related data.  """
     fixtures = [
         'dsmr_frontend/test_dsmrreading_without_gas.json',
         'dsmr_frontend/test_note.json',
         'dsmr_frontend/EnergySupplierPrice.json',
-        'dsmr_frontend/test_statistics.json'
+        'dsmr_frontend/test_statistics.json',
+        'dsmr_frontend/test_meterstatistics.json',
     ]
     support_gas = False
 

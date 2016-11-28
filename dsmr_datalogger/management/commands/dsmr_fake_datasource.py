@@ -4,10 +4,12 @@ import random
 import time
 
 from django.core.management.base import BaseCommand, CommandError
-from dsmr_backend.mixins import InfiniteManagementCommandMixin
 from django.utils.translation import ugettext as _
 from django.core.management import call_command
 from django.utils import timezone
+from django.conf import settings
+
+from dsmr_backend.mixins import InfiniteManagementCommandMixin
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
@@ -41,6 +43,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
+        if not settings.DEBUG:
+            raise CommandError(_('Intended usage is NOT production! Only allowed when DEBUG = True'))
+
         if not options.get('acked_warning'):
             raise CommandError(_('Intended usage is NOT production! Force by using --ack-to-mess-up-my-data'))
 

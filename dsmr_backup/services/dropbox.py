@@ -2,8 +2,7 @@ import os
 
 from django.utils import timezone
 from django.conf import settings
-from dropbox.client import DropboxClient
-from dropbox import rest
+import dropbox
 
 from dsmr_backup.models.settings import DropboxSettings
 import dsmr_backup.services.backup
@@ -55,24 +54,38 @@ def upload_chunked(file_path):
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     dropbox_settings = DropboxSettings.get_solo()
     file_name = os.path.split(file_path)[-1]
+    dest_path = '/{}'.format(file_name)  # The slash indicates it's relative to the root of app folder.
 
-    # From Dropbox docs.
-    retries = 3
-    client = DropboxClient(dropbox_settings.access_token)
+    dbx = dropbox.Dropbox(dropbox_settings.access_token)
+    write_mode = dropbox.files.WriteMode.overwrite
 
-    size = os.stat(file_path).st_size
     file_handle = open(file_path, 'rb')
+    file_size = os.path.getsize(file_path)
 
-    uploader = client.get_chunked_uploader(file_handle, size)
+    # Many thanks to https://stackoverflow.com/documentation/dropbox-api/409/uploading-a-file/1927/uploading-a-file-using-the-dropbox-python-sdk#t=201610181733061624381
+    CHUNK_SIZE = 2 * 1024 * 1024
 
-    while uploader.offset < size:
-        try:
-            uploader.upload_chunked(chunk_size=1 * 1024 * 1024)
-        except rest.ErrorResponse:   # pragma: no cover
-            retries -= 1  # pragma: no cover
+    # Small uploads should be transfers at one go.
+    if file_size <= CHUNK_SIZE:
+        dbx.files_upload(file_handle.read(), dest_path, mode=write_mode)
 
-            if retries == 0:  # pragma: no cover
-                raise IOError("Failed to upload to dropbox")  # pragma: no cover
+    # Large uploads can be sent in chunks, by creating a session allowing multiple separate uploads.
+    else:
+        upload_session_start_result = dbx.files_upload_session_start(file_handle.read(CHUNK_SIZE))
 
-    # This will commit the file and persist it in Dropbox. Due to rotating backups we MUST override.
-    uploader.finish(file_name, overwrite=True)
+        cursor = dropbox.files.UploadSessionCursor(
+            session_id=upload_session_start_result.session_id,
+            offset=file_handle.tell()
+        )
+        commit = dropbox.files.CommitInfo(path=dest_path, mode=write_mode)
+
+        # We keep sending the data in chunks, until we reach the last one, then we instruct Dropbox to finish the upload
+        # by combining all the chunks sent previously.
+        while file_handle.tell() < file_size:
+            if (file_size - file_handle.tell()) <= CHUNK_SIZE:
+                dbx.files_upload_session_finish(file_handle.read(CHUNK_SIZE), cursor, commit)
+            else:
+                dbx.files_upload_session_append(file_handle.read(CHUNK_SIZE), cursor.session_id, cursor.offset)
+                cursor.offset = file_handle.tell()
+
+    file_handle.close()

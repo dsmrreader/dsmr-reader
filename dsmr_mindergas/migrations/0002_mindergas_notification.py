@@ -16,7 +16,7 @@ def insert_notifications(apps, schema_editor):
                 "See the FAQ in the documentation for a guide on how to create and/or link your account."
             )
         ),
-        redirect_to='frontend:docs'
+        redirect_to='frontend:docs-redirect'
     )
 
 

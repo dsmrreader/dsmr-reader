@@ -1,6 +1,17 @@
 Frequently Asked Questions (FAQ)
 ================================
 
+
+I only pay for a single electricity tariff but I see two!
+---------------------------------------------------------
+DSMR (and your energy supplier) always read both high and low tariff from your meter. 
+It's possible however that you are only paying for a single tariff. 
+In that case your energy supplier will simply merge both high and low tariffs to make it look like you have a single one.
+
+This application displays separate tariffs by default, but supports merging them to a single one as well.
+Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option '**Merge electricity tariffs**' in the frontend configuration.
+
+
 Dropbox: Automated backup sync
 ------------------------------
 *How can I link my Dropbox account for backups?*
@@ -46,11 +57,59 @@ Please note that due to policies of mindergas.nl it's not allowed to retroactive
 Therefor this is not supported by the application. You can however, enter them manually on their website. 
 
 
-Recalculate prices
-------------------
+Usage notification: Daily usage statistics on your smartphone
+-------------------------------------------------------------
+*Which services for sending notifications are supported?*
+
+Currently, two mobile platforms are supported: Android and iOS.
+The supported app for Android is `NotifyMyAndroid <https://www.notifymyandroid.com>`_. 
+The supported app for iOS is `Prowl <https://www.prowlapp.com>`_. 
+
+
+*How do I setup usage notifications?*
+
+Make sure you either have NotifyMyAndroid or Prowl installed on your smartphone. If you don't, visit your platforms app store to download the app and sign up for an account. Then, make sure to get your API key from the notificationservice that you prefer. For instruction on obtaining the API key, please read below.
+
+In the DSMR-reader settings for the Usagenotifications, tick the Send Notifications checkbox and select the notification service you want to use. Then copy the API key from the notification service and paste in into the the textbox for the API key. When you save these settings, your first notification should be sent after midnight. Don't worry, the notification will be sent with low priority and will not wake you up.
+
+
+*How do I obtain my API key for NotifyMyAndroid?*
+
+After you have downloaded NotifyMyAndroid and signed up for an account you should be able to `login to your account <https://www.notifymyandroid.com/index.jsp>`_. 
+Now go to "`My Account <https://www.notifymyandroid.com/account.jsp>`_", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, please click **"Generate New Key"**.
+
+.. image:: _static/faq/notifications-notify-my-android-create-key.png
+    :target: _static/faq/notifications-notify-my-android-create-key.png
+    :alt: NotifyMyAndroid My Account overview
+    
+When a new key is generated, you will see it immediatly. Your key is listed like in the screenshot below (the red box marks your API key).
+
+.. image:: _static/faq/notifications-notify-my-android-get-key.png
+    :target: _static/faq/notifications-notify-my-android-get-key.png
+    :alt: NotifyMyAndroid Get Your API Key
+
+
+*How do I obtain my API key for Prowl?*
+
+After you have downloaded Prowl and signed up for an account you should be able to `login to your account <https://www.prowlapp.com/login.php>`_. 
+Now go to "`API Keys <https://www.prowlapp.com/api_settings.php>`_", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, input a name and click **"Generate Key"**.
+
+.. image:: _static/faq/notifications-prowl-create-key.png
+    :target: _static/faq/notifications-prowl-key.png
+    :alt: Prowl My Account overview
+    
+When a new key is generated, you will see it immediatly. Your key is listed like in the screenshot below (the red box marks your API key).
+
+.. image:: _static/faq/notifications-prowl-get-key.png
+    :target: _static/faq/notifications-prowl-get-key.png
+    :alt: Prowl Get Your API Key
+
+
+Recalculate prices retroactively
+--------------------------------
 *I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?*
 
-You can flush your statistics by executing:
+Statistics for each day are generated once, the day after. However, you can flush your statistics by executing:
 
 ``./manage.py dsmr_stats_clear_statistics --ack-to-delete-my-data``
 

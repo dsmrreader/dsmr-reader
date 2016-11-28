@@ -45,8 +45,18 @@ class DayStatistics(models.Model):
         max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Average temperature')
     )
 
+    @property
+    def electricity_merged(self):
+        return self.electricity1 + self.electricity2
+
+    @property
+    def electricity_returned_merged(self):
+        return self.electricity1_returned + self.electricity2_returned
+
     class Meta:
         default_permissions = tuple()
+        verbose_name = _('Day statistics (read only)')
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return '{}: {}'.format(
@@ -74,8 +84,18 @@ class HourStatistics(models.Model):
     # Gas readings are optional/not guaranteed. But need to be zero due to averages.
     gas = models.DecimalField(max_digits=9, decimal_places=3, default=0, verbose_name=_('Gas'))
 
+    @property
+    def electricity_merged(self):
+        return self.electricity1 + self.electricity2
+
+    @property
+    def electricity_returned_merged(self):
+        return self.electricity1_returned + self.electricity2_returned
+
     class Meta:
         default_permissions = tuple()
+        verbose_name = _('Hour statistics (read only)')
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return '{}: {}'.format(

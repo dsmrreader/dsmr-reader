@@ -16,8 +16,7 @@
     </div>
 {% else %}
     <div class="alert alert-info" role="alert">
-    {% blocktrans %}All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account.{% endblocktrans %}
-    {% blocktrans %}Current data displayed averages {{ hour_statistics_count }} hour(s), among {{ day_statistics_count }} day(s).{% endblocktrans %}
+    {% blocktrans %}Untracked consumption in the past (and today), is not taken into account.{% endblocktrans %}
     </div>
 {% endif %}
 
@@ -26,7 +25,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity consumed (in %){% endblocktrans %}
+                    {% blocktrans %}Average hourly electricity consumed (in %) within the past 4 weeks{% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-electricity-consumed-chart"></canvas>
@@ -41,7 +40,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly electricity returned (in %){% endblocktrans %}
+                    {% blocktrans %}Average hourly electricity returned (in %) within the past 4 weeks{% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-electricity-returned-chart"></canvas>
@@ -56,7 +55,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% blocktrans %}Average hourly gas consumed (in %){% endblocktrans %}
+                    {% blocktrans %}Average hourly gas consumed (in %) within the past 4 weeks{% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
                     <canvas id="average-gas-consumed-chart"></canvas>
@@ -66,7 +65,7 @@
     </div>
     {% endif %}
 
-    {% if capabilities.electricity %}
+    {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel" style="padding-bottom: 24px;">
@@ -126,12 +125,15 @@
                 Chart.defaults.global.animation = false;
                 Chart.defaults.global.segmentShowStroke = true;
 
-            {% if capabilities.electricity %}
+            {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
                 render_electricity_consumption_by_tariff_week_chart();
                 render_electricity_consumption_by_tariff_month_chart();
-                render_average_electricity_consumed_chart();
             {% endif %}
 
+            {% if capabilities.electricity %}
+                render_average_electricity_consumed_chart();
+            {% endif %}
+            
             {% if capabilities.electricity_returned %}
                 render_average_electricity_returned_chart();
             {% endif %}

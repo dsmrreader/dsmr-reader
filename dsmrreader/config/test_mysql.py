@@ -2,11 +2,13 @@
 from dsmrreader.config.test import *
 
 
-# Use for TESTING only: GRANT ALL PRIVILEGES ON test_dsmrreader.* TO 'dsmrreader'@'localhost';
+# Use for TESTING only:
+#   mysqladmin create test_dsmrtest
+#   GRANT ALL PRIVILEGES ON test_dsmrreader.* TO 'dsmrreader'@'localhost';
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dsmrreader',  # Will be adjusted to 'test_*' by Django.
+        'NAME': 'dsmrtest',  # Will be prefixed with 'test_' by Django.
         'USER': 'dsmrreader',
         'PASSWORD': 'dsmrreader',
         'HOST': '127.0.0.1',

@@ -36,7 +36,7 @@ else
 fi
 
 
-# Management commands have some mechanisme builtin as well for this.
+# Management commands have some builtin mechanism as well for this.
 echo ""
 echo " * Reloading backend process..."
 if [ -f /var/tmp/dsmrreader--dsmr_backend.pid ];

@@ -41,8 +41,6 @@ Software
 
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
 
-- `Twitter Bootstrap Wizard <https://github.com/VinceG/twitter-bootstrap-wizard>`_
-
 
 Testers & contributors
 ----------------------
@@ -53,6 +51,7 @@ Testers & contributors
 - "WatskeBart" (`Github profile <https://github.com/WatskeBart>`_)
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
+- Sevickson (`Github profile <https://github.com/sevickson>`_)
 
 
 DSMR help

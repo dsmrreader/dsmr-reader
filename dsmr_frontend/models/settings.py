@@ -11,6 +11,11 @@ class FrontendSettings(SingletonModel):
         verbose_name=_('Reverse dashboard graphs'),
         help_text=_('Whether graphs are rendered with an reversed X-axis')
     )
+    merge_electricity_tariffs = models.BooleanField(
+        default=False,
+        verbose_name=_('Merge electricity tariffs'),
+        help_text=_('Whether you are using a single electricity tariff and both (high/low) should be displayed merged')
+    )
 
     electricity_delivered_color = ColorField(
         default='#F05050',

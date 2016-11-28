@@ -3,6 +3,7 @@ language: python
 python:
   - "3.3"
   - "3.4"
+  - "3.5"
   
 services:
   - postgresql
@@ -32,7 +33,7 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin create dsmrreader; fi"
 
 script: 
-  - ./manage.py test --noinput --with-coverage
+  - ./manage.py test --noinput
 
 after_success:
   - codecov

@@ -119,5 +119,5 @@ class ExportAsCsv(BaseFormView):
         elif isinstance(data, datetime.datetime):
             return formats.date_format(data, 'DSMR_EXPORT_DATETIME_FORMAT')
 
-        elif isinstance(data, datetime.date):
+        elif isinstance(data, datetime.date):  # pragma: no cover
             return formats.date_format(data, 'DSMR_DATEPICKER_DATE_FORMAT')

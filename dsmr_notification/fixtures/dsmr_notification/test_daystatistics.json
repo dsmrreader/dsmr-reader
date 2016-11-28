@@ -1,0 +1,36 @@
+[
+{
+    "pk": 1,
+    "fields": {
+        "electricity2_cost": "12.00",
+        "day": "2016-11-16",
+        "gas": "0.009",
+        "electricity2": "2",
+        "electricity2_returned": "4",
+        "total_cost": "13.37",
+        "electricity1_returned": "0.5",
+        "electricity1": "1",
+        "average_temperature": "0.0",
+        "gas_cost": "1.00",
+        "electricity1_cost": "0.37"
+    },
+    "model": "dsmr_stats.daystatistics"
+},
+{
+    "pk": 2,
+    "fields": {
+        "electricity2_cost": "0.00",
+        "day": "2016-11-17",
+        "gas": "6.107",
+        "electricity2": "0.000",
+        "electricity2_returned": "0.000",
+        "total_cost": "4.03",
+        "electricity1_returned": "0.000",
+        "electricity1": "2.107",
+        "average_temperature": "0.0",
+        "gas_cost": "3.59",
+        "electricity1_cost": "0.44"
+    },
+    "model": "dsmr_stats.daystatistics"
+}
+]
