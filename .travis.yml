@@ -4,12 +4,21 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
+  - "3.5-dev"
+  - "3.6-dev"
+  - "nightly" # currently points to 3.7-dev
+  
+matrix:
+  allow_failures:
+    - python: 3.6-dev
+    - python: nightly
   
 services:
   - postgresql
   - mysql
   
 addons:
+  # 9.5 is not yet available for container based builds: https://docs.travis-ci.com/user/database-setup/#PostgreSQL
   postgresql: "9.4"
 
 env:
@@ -32,7 +41,7 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin create dsmrreader; fi"
 
 script: 
-  - py.test --cov --cov-report=term
+  - py.test --pylama --cov --cov-report=term
   
 after_success:
   - codecov

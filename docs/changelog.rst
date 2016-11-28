@@ -5,6 +5,7 @@ Changelog
 v1.5.0 - xxxx-xx-xx
 ^^^^^^^^^^^^^^^^^^^
 - Switch Nosetests to Pytest (+ pytest-cov) (`#167 <https://github.com/dennissiemensma/dsmr-reader/issues/167>`_).
+- PyLama code audit (+ pytest-cov) (`#158 <https://github.com/dennissiemensma/dsmr-reader/issues/158>`_).
 
 
 v1.4.0 - 2016-11-28

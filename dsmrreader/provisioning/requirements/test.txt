@@ -1,3 +1,4 @@
 polib==1.0.7
+pylama==7.2.3
 pytest-cov==2.4.0
 pytest-django==3.1.2

@@ -85,7 +85,7 @@ class ArchiveXhrSummary(TemplateView):
 
 class ArchiveXhrGraphs(View):
     """ XHR view for fetching the hour statistics of a day, JSON encoded. """
-    def get(self, request):
+    def get(self, request):  # noqa: C901
         capabilities = dsmr_backend.services.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
@@ -171,9 +171,15 @@ class ArchiveXhrGraphs(View):
                 'datasets': [{
                     'data': data['electricity1'],
                     'label': _('Electricity 1 (low tariff)'),
-                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_alternate_color)),
-                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_alternate_color)),
-                    'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_alternate_color)),
+                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(
+                        frontend_settings.electricity_delivered_alternate_color
+                    )),
+                    'strokeColor': "rgba({},1)".format(hex_to_rgb(
+                        frontend_settings.electricity_delivered_alternate_color
+                    )),
+                    'pointColor': "rgba({},1)".format(hex_to_rgb(
+                        frontend_settings.electricity_delivered_alternate_color
+                    )),
                     'pointStrokeColor': "#fff",
                     'pointHighlightFill': "#fff",
                     'pointHighlightStroke': "rgba(255,0,0,1)"
@@ -210,9 +216,15 @@ class ArchiveXhrGraphs(View):
                     'datasets': [{
                         'data': data['electricity1_returned'],
                         'label': _('Electricity 1 returned (low tariff)'),
-                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_returned_alternate_color)),
-                        'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_alternate_color)),
-                        'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_alternate_color)),
+                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(
+                            frontend_settings.electricity_returned_alternate_color
+                        )),
+                        'strokeColor': "rgba({},1)".format(hex_to_rgb(
+                            frontend_settings.electricity_returned_alternate_color
+                        )),
+                        'pointColor': "rgba({},1)".format(hex_to_rgb(
+                            frontend_settings.electricity_returned_alternate_color
+                        )),
                         'pointStrokeColor': "#fff",
                         'pointHighlightFill': "#fff",
                         'pointHighlightStroke': "rgba(200,200,100,1)"

@@ -160,7 +160,8 @@ def day_consumption(day):
         consumption['electricity2'] * consumption['electricity2_unit_price']
     )
     consumption['electricity_merged'] = consumption['electricity1'] + consumption['electricity2']
-    consumption['electricity_returned_merged'] = consumption['electricity1_returned'] + consumption['electricity2_returned']
+    consumption['electricity_returned_merged'] = \
+        consumption['electricity1_returned'] + consumption['electricity2_returned']
     consumption['electricity_cost_merged'] = consumption['electricity1_cost'] + consumption['electricity2_cost']
     consumption['total_cost'] = round_decimal(
         consumption['electricity1_cost'] + consumption['electricity2_cost']

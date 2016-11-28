@@ -86,7 +86,7 @@ def read_telegram():
             return buffer
 
 
-def telegram_to_reading(data):
+def telegram_to_reading(data):  # noqa: C901
     """
     Converts a P1 telegram to a DSMR reading, which will be stored in database.
     """

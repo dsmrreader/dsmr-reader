@@ -62,7 +62,8 @@ def upload_chunked(file_path):
     file_handle = open(file_path, 'rb')
     file_size = os.path.getsize(file_path)
 
-    # Many thanks to https://stackoverflow.com/documentation/dropbox-api/409/uploading-a-file/1927/uploading-a-file-using-the-dropbox-python-sdk#t=201610181733061624381
+    # Many thanks to https://stackoverflow.com/documentation/dropbox-api/409/uploading-a-file/1927/uploading-a-file-usin
+    # g-the-dropbox-python-sdk#t=201610181733061624381
     CHUNK_SIZE = 2 * 1024 * 1024
 
     # Small uploads should be transfers at one go.
