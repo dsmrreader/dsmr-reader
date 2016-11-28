@@ -1,0 +1,2 @@
+# For some reason Travis needs to be forced installing this version, or the build pretend like it doesn't know 'pytest'.
+pytest==3.0.4

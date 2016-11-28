@@ -17,14 +17,13 @@ env:
   - DB=mysql DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.mysql'
   - DB=postgresql DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.postgresql'
 
-before_install:
-  - pip install codecov
-
 install: 
-  - pip install -r dsmrreader/provisioning/requirements/base.txt
-  - pip install -r dsmrreader/provisioning/requirements/test.txt
-  - pip install -r dsmrreader/provisioning/requirements/postgresql.txt
-  - pip install -r dsmrreader/provisioning/requirements/mysql.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/travis.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/base.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/test.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/postgresql.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/mysql.txt
+  - pip3 install codecov
 
 before_script:
   - sh -c "if [ '$DB' = 'postgresql' ]; then dropdb -U postgres --if-exists dsmrreader; fi"
@@ -33,7 +32,7 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin create dsmrreader; fi"
 
 script: 
-  - ./manage.py test --noinput
-
+  - py.test --cov --cov-report=term
+  
 after_success:
   - codecov
