@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v1.4.0 - 2016-11-XX
+v1.4.0 - 2016-11-28
 ^^^^^^^^^^^^^^^^^^^
 - Push notifications for Notify My Android / Prowl (iOS), written by Jeroen Peters (`#152 <https://github.com/dennissiemensma/dsmr-reader/issues/152>`_).
 - Support for both single and high/low tariff (`#130 <https://github.com/dennissiemensma/dsmr-reader/issues/130>`_).
