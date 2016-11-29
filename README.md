@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/dennissiemensma/dsmr-reader.svg?branch=master)](https://travis-ci.org/dennissiemensma/dsmr-reader)
-[![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=v1.4.0)](https://codecov.io/gh/dennissiemensma/dsmr-reader/branch/v1.4.0)
+[![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=master)](https://codecov.io/gh/dennissiemensma/dsmr-reader/branch/master)
 [![Requirements Status](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=master)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=master)
 [![Documentation Status](http://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](http://dsmr-reader.readthedocs.io/en/latest/?badge=latest)
 
