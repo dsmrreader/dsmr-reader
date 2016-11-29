@@ -80,7 +80,7 @@ class ReadOnlyAdminModel(admin.ModelAdmin):
     """ Read only model for Django admin. """
     def __init__(self, *args, **kwargs):
         super(ReadOnlyAdminModel, self).__init__(*args, **kwargs)
-        self.readonly_fields = self.model._meta.get_all_field_names()
+        self.readonly_fields = [x.name for x in self.model._meta.get_fields()]
 
     def has_add_permission(self, request, obj=None):
         return False

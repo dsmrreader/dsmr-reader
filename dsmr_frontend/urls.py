@@ -1,5 +1,4 @@
 from django.views.decorators.cache import cache_page
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls import url
 
@@ -33,8 +32,8 @@ urlpatterns = [
     url(r'^feedback-redirect$', FeedbackRedirect.as_view(), name='feedback-redirect'),
 
     # Views requiring authentication.
-    url(r'^export$', login_required(Export.as_view()), name='export'),
-    url(r'^export/csv$', login_required(ExportAsCsv.as_view()), name='export-as-csv'),
+    url(r'^export$', Export.as_view(), name='export'),
+    url(r'^export/csv$', ExportAsCsv.as_view(), name='export-as-csv'),
 
-    url(r'^notification-read$', login_required(NotificationRead.as_view()), name='notification-read'),
+    url(r'^notification-read$', NotificationRead.as_view(), name='notification-read'),
 ]

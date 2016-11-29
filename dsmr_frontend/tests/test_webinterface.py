@@ -42,7 +42,7 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next=/admin/'
+            response['Location'], '/admin/login/?next=/admin/'
         )
 
     @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
@@ -250,7 +250,7 @@ class TestViews(TestCase):
         response = self.client.get(view_url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
+            response['Location'], 'admin/login/?next={}'.format(view_url)
         )
 
         # Login and retest
@@ -273,7 +273,7 @@ class TestViews(TestCase):
         response = self.client.post(view_url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/export/admin/login/?next={}'.format(view_url)
+            response['Location'], 'admin/login/?next={}'.format(view_url)
         )
 
         # Login and retest, without post data.
@@ -282,7 +282,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             # Invalid form redirects to previous page.
-            response['Location'], 'http://testserver{}'.format(
+            response['Location'], '{}'.format(
                 reverse('{}:export'.format(self.namespace))
             )
         )
@@ -307,7 +307,7 @@ class TestViews(TestCase):
         response = self.client.post(view_url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
+            response['Location'], 'admin/login/?next={}'.format(view_url)
         )
 
         # Login and retest.

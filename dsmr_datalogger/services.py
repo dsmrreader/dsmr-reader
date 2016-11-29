@@ -92,13 +92,13 @@ def telegram_to_reading(data):  # noqa: C901
     """
 
     def _get_reading_fields():
-        reading_fields = DsmrReading._meta.get_all_field_names()
+        reading_fields = [x.name for x in DsmrReading._meta.get_fields()]
         reading_fields.remove('id')
         reading_fields.remove('processed')
         return reading_fields
 
     def _get_statistics_fields():
-        reading_fields = MeterStatistics._meta.get_all_field_names()
+        reading_fields = [x.name for x in MeterStatistics._meta.get_fields()]
         reading_fields.remove('id')
         return reading_fields
 

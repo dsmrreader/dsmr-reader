@@ -3,7 +3,7 @@ from dsmrreader.config.development import *
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
 #         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dsmrreader',  # Database name.
         'USER': 'dsmrreader',

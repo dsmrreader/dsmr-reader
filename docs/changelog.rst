@@ -6,6 +6,17 @@ v1.5.0 - xxxx-xx-xx
 ^^^^^^^^^^^^^^^^^^^
 - Switch Nosetests to Pytest (+ pytest-cov) (`#167 <https://github.com/dennissiemensma/dsmr-reader/issues/167>`_).
 - PyLama code audit (+ pytest-cov) (`#158 <https://github.com/dennissiemensma/dsmr-reader/issues/158>`_).
+- Double upgrade of Django framework ``Django 1.8`` -> ``Django 1.9`` -> ``Django 1.10`` (`#103 <https://github.com/dennissiemensma/dsmr-reader/issues/103>`_).
+- **Change in Python support**: 
+
+  - The support for ``Python 3.3`` has been **dropped** due to the Django upgrade (`#103 <https://github.com/dennissiemensma/dsmr-reader/issues/103>`_).
+  - There is **experimental support** for ``Python 3.6`` and ``Python 3.7 (nightly)`` as the unittests are `now built against those versions <https://travis-ci.org/dennissiemensma/dsmr-reader/branches>`_ as well (`#167 <https://github.com/dennissiemensma/dsmr-reader/issues/167>`_). 
+
+- **Legacy warning**:
+
+  - The migrations that were squashed together in (`#31 <https://github.com/dennissiemensma/dsmr-reader/issues/31>`_) have been **removed**. This will only affect you when you are currently still running a dsmrreader-version of **before** ``v0.13 (β)``. 
+  - If you are indeed still running ``< v0.13 (β)``, please upgrade to ``v1.4`` first (!), followed by an upgrade to ``v1.5``. 
+
 
 
 v1.4.0 - 2016-11-28
@@ -15,10 +26,12 @@ v1.4.0 - 2016-11-28
 - Add new note from Dashboard has wrong time format (`#159 <https://github.com/dennissiemensma/dsmr-reader/issues/159>`_).
 - Display estimated price for current usage in Dashboard (`#155 <https://github.com/dennissiemensma/dsmr-reader/issues/155>`_).
 - Dropbox API v1 deprecated in June 2017 (`#142 <https://github.com/dennissiemensma/dsmr-reader/issues/142>`_).
-- Support for Python 3.5 (`#55 <https://github.com/dennissiemensma/dsmr-reader/issues/55>`_).
 - Improve code coverage (`#151 <https://github.com/dennissiemensma/dsmr-reader/issues/151>`_).
 - Restyle configuration overview (`#156 <https://github.com/dennissiemensma/dsmr-reader/issues/156>`_).
 - Capability based push notifications (`#165 <https://github.com/dennissiemensma/dsmr-reader/issues/165>`_).
+- **Change in Python support**: 
+
+  - Support for ``Python 3.5`` has been added officially (`#55 <https://github.com/dennissiemensma/dsmr-reader/issues/55>`_).
 
 
 v1.3.2 - 2016-11-08

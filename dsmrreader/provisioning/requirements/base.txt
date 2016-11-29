@@ -1,11 +1,10 @@
-Django==1.8.16
+django==1.10.3
 django-colorfield==0.1.10
 django-debug-toolbar==1.6
-django-flat-theme==1.1.4
 django-solo==1.1.2
 dropbox==7.1.1
 gunicorn==19.6
 pyserial==3.2.1
 python-dateutil==2.6.0
-raven==5.31.0
+raven==5.32.0
 pytz==2016.7

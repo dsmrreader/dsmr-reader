@@ -25,7 +25,7 @@ Dependencies & requirements
 - **Minimal 100 MB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
 
  - More disk space is required for storing all reader data captured (optional). I generally advise to use a 8+ GB SD card. 
- - The readings will take 90+ % of the disk space. I plan however to add some kind of retention to it later, keeping the data (of many years) far below the 500 MB. 
+ - The readings will take 90+ percent of the disk space. I plan however to add some kind of retention to it later, keeping the data (of many years) far below the 500 MB. 
 
 - **Smart meter P1 data cable** 
 
