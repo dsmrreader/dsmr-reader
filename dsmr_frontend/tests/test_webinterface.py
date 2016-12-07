@@ -13,9 +13,9 @@ from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
-import dsmr_consumption.services
 from dsmr_frontend.forms import ExportAsCsvForm
 from dsmr_frontend.models.message import Notification
+import dsmr_consumption.services
 
 
 class TestViews(TestCase):
@@ -231,7 +231,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertIn('capabilities', response.context)
-        self.assertIn('total_reading_count', response.context)
         self.assertIn('unprocessed_readings', response.context)
 
         if 'latest_reading' in response.context:
@@ -243,6 +242,21 @@ class TestViews(TestCase):
 
         if 'latest_gc' in response.context:
             self.assertIn('delta_since_latest_gc', response.context)
+
+    @mock.patch('dsmr_backend.services.is_latest_version')
+    def test_status_xhr_update_checker(self, is_latest_version_mock):
+        for boolean in (True, False):
+            is_latest_version_mock.return_value = boolean
+
+            response = self.client.get(
+                reverse('{}:status-xhr-check-for-updates'.format(self.namespace))
+            )
+            self.assertEqual(response.status_code, 200, response.content)
+            self.assertEqual(response['Content-Type'], 'application/json')
+
+            json_response = json.loads(response.content.decode("utf-8"))
+            self.assertIn('update_available', json_response)
+            self.assertEqual(json_response['update_available'], not boolean)  # Inverted, because latest = no updates.
 
     def test_export(self):
         view_url = reverse('{}:export'.format(self.namespace))

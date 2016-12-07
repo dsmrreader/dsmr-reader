@@ -8,7 +8,7 @@ from dsmr_frontend.views.statistics import Statistics
 from dsmr_frontend.views.trends import Trends
 from dsmr_frontend.views.compare import Compare
 from dsmr_frontend.views.export import Export, ExportAsCsv
-from dsmr_frontend.views.status import Status
+from dsmr_frontend.views.status import Status, XhrUpdateChecker
 from dsmr_frontend.views.notification import NotificationRead
 from dsmr_frontend.views.generic import DocsRedirect, FeedbackRedirect
 
@@ -24,8 +24,9 @@ urlpatterns = [
     url(r'^trends$', cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()), name='trends'),
     url(r'^compare$', Compare.as_view(), name='compare'),
 
-    # Maintainance view.
+    # Technical information.
     url(r'^status$', Status.as_view(), name='status'),
+    url(r'^status/xhr/check-for-updates$', XhrUpdateChecker.as_view(), name='status-xhr-check-for-updates'),
 
     # Generic redirects to external (help) pages.
     url(r'^docs-redirect$', DocsRedirect.as_view(), name='docs-redirect'),

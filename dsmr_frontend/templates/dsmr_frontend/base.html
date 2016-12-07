@@ -54,7 +54,7 @@
                         {% block header_right %}{% endblock %}
                         
 					    <li>
-					        <a href="http://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/latest/changelog.html" target="_blank" title="{% trans 'View releases' %}">
+					        <a href="{% url 'frontend:status' %}" title="{% trans 'View releases' %}">
 					            <small>v{{ dsmr_version }}</small>
 					        </a>
 					    </li>

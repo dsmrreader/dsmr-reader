@@ -57,21 +57,7 @@ It luckily happened only a month after running my own readings, but imagine all 
 
 Application updates (bug fixes & new features)
 ----------------------------------------------
-The current setup is based on the 'latest' version of the application, called the `master` branch. I will add versions/releases later, possibly by using PIP. 
-
-For now you can always update your application to the latest version by executing **deploy.sh**, located in the root of the project. 
-Make sure to execute it while logged in as the `dsmr` user. It will make sure to check, fetch and apply any changes released::
-
-   ./deploy.sh
-
-Summary of deployment script steps:
-
-- GIT pull (codebase update).
-- PIP update requirements.
-- Apply any database migrations.
-- Sync static files to Nginx folder.
-- Reload Gunicorn application server.
-- Clear any caches.
+:doc:`This information can be found here<faq>`.
 
 
 Public webinterface warning

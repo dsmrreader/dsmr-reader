@@ -24,12 +24,20 @@
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
-                            <td class="col-md-6">{% trans "Current version" %} {% trans "DSMR-reader" %}</td>
+                            <td class="col-md-6">{% trans "Current application version" %}</td>
                             <td class="col-md-6"><a href="https://github.com/dennissiemensma/dsmr-reader/releases/" target="_blank" title="{% trans 'View releases' %}">v{{ dsmr_version }}</a></td>
                         </tr>
                         <tr>
-                            <td class="col-md-6">{% trans "Changelog" %}</td>
-                            <td class="col-md-6"><a href="http://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/latest/changelog.html" target="_blank">{% trans 'View all releases' %}</a></td>
+                            <td class="col-md-6">{% trans "Check for updates" %}</td>
+                            <td class="col-md-6">
+                                <a class="btn btn-success" href="#" id="check_for_updates"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Check now' %}</a>
+                                <div id="loader" style="display: none;"><i class="fa fa-refresh fa-spin fa-fw"></i> &nbsp; {% trans 'Currently checking for updates...' %}</div>
+                                <div id="update_available" class="alert alert-warning" role="alert" style="display: none;">
+	                                <i class="fa fa-exclamation"></i> &nbsp; {% blocktrans %}There is a newer version available!{% endblocktrans %} 
+	                                <a href="https://github.com/dennissiemensma/dsmr-reader/releases" target="_blank">{% trans 'View the latest release' %}</a> {% trans 'for the changelog and further upgrade instructions.' %}
+	                            </div>
+                                <div id="no_update_available" class="alert alert-info" role="alert" style="display: none;"><i class="fa fa-smile-o"></i> &nbsp; {% blocktrans %}You are already running the latest version released.{% endblocktrans %}</div>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -59,10 +67,6 @@
                         <tr>
                             <td class="col-md-6">{% trans "First reading" %}</td>
                             <td class="col-md-6">{% if first_reading %}<span class="badge bg-navy">{{ first_reading.timestamp|default:'-' }}</span>{% endif %}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Total reading count" %}</td>
-                            <td><span class="badge bg-navy">{{ total_reading_count|intcomma }}</span></td>
                         </tr>
                     </table>
                 </div>
@@ -146,15 +150,15 @@
                         </tr>
                         <tr>
                             <td><span class="badge bg-red">&nbsp;<i class="fa fa-bolt fa-lg"></i>&nbsp;</span> &nbsp; {% trans "Electricity usage" %}</td>
-                            <td><i class="fa fa-{{ capabilities.electricity|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td><i class="fa fa-{{ capabilities.electricity|yesno:'check-square-o,close' }} fa-lg"></i></td>
                         </tr>
                         <tr>
                             <td><span class="badge bg-green">&nbsp;<i class="fa fa-bolt fa-lg"></i>&nbsp;</span> &nbsp; {% trans "Electricity return" %}</td>
-                            <td><i class="fa fa-{{ capabilities.electricity_returned|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td><i class="fa fa-{{ capabilities.electricity_returned|yesno:'check-square-o,close' }} fa-lg"></i></td>
                         </tr>
                         <tr>
                             <td><span class="badge bg-orange"><i class="fa fa-fire fa-lg"></i></span> &nbsp; {% trans "Gas usage" %}</td>
-                            <td><i class="fa fa-{{ capabilities.gas|yesno:'check-square-o,close' }} fa-lg"></td>
+                            <td><i class="fa fa-{{ capabilities.gas|yesno:'check-square-o,close' }} fa-lg"></i></td>
                         </tr>
                     </table>
                 </div>
@@ -163,4 +167,43 @@
     </div><!-- /.row -->
 
 </section>
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#check_for_updates").click(function(){
+			check_for_updates();
+			return false;
+		});
+	});
+	
+	/**
+	 * Updates the header.
+	 */
+	function check_for_updates()
+	{
+		$("#check_for_updates").hide();
+	    $("#loader").show();
+	    console.log($("#loader"));
+	    $.ajax({
+	        dataType: "json",
+	        url: "{% url 'frontend:status-xhr-check-for-updates' %}",
+	    }).done(function(response) {
+	        $("#loader").hide();
+
+	        if (response.update_available)
+	        {
+	        	$("#update_available").show();
+	        }
+	        else
+        	{
+	        	$("#no_update_available").show();
+        	}
+	    });
+	}
+
+</script>
 {% endblock %}

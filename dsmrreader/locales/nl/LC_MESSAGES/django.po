@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 21:06+0100\n"
-"PO-Revision-Date: 2016-11-27 17:57+0100\n"
+"POT-Creation-Date: 2016-12-07 19:02+0100\n"
+"PO-Revision-Date: 2016-12-06 21:04+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -627,14 +627,29 @@ msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbrui
 msgid "DSMR-reader"
 msgstr "DSMR-reader"
 
-msgid "Current version"
-msgstr "Huidige versie"
+msgid "Current application version"
+msgstr "Huidige applicatieversie"
 
-msgid "Changelog"
-msgstr "Wijzigingenoverzicht"
+msgid "Check for updates"
+msgstr "Controleer voor updates"
 
-msgid "View all releases"
-msgstr "Bekijk alle versies"
+msgid "Check now"
+msgstr "Controleer nu"
+
+msgid "Currently checking for updates..."
+msgstr "Bezig met controleren op updates..."
+
+msgid "There is a newer version available!"
+msgstr "Er is een nieuwere versie beschikbaar!"
+
+msgid "View the latest release"
+msgstr "Bekijk de laatste release"
+
+msgid "for the changelog and further upgrade instructions."
+msgstr "voor alle wijzigingen en upgrade-instructies."
+
+msgid "You are already running the latest version released."
+msgstr "Je draait al de meest recente versie."
 
 msgid "Readings"
 msgstr "Metingen"
@@ -650,9 +665,6 @@ msgstr "Laatste meting"
 
 msgid "First reading"
 msgstr "Eerste meting"
-
-msgid "Total reading count"
-msgstr "Totaal aantal metingen"
 
 msgid "Background"
 msgstr "Achtergrond"
@@ -1031,6 +1043,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Changelog"
+#~ msgstr "Wijzigingenoverzicht"
+
+#~ msgid "View all releases"
+#~ msgstr "Bekijk alle versies"
+
+#~ msgid "Total reading count"
+#~ msgstr "Totaal aantal metingen"
 
 #~ msgid ""
 #~ "Your daily usage statistics for {}\n"

@@ -1,4 +1,7 @@
-from django.views.generic.base import TemplateView
+import json
+
+from django.views.generic.base import View, TemplateView
+from django.http.response import HttpResponse
 from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -12,7 +15,6 @@ class Status(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(Status, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
-        context_data['total_reading_count'] = DsmrReading.objects.count()
         context_data['unprocessed_readings'] = DsmrReading.objects.unprocessed().count()
 
         try:
@@ -34,3 +36,12 @@ class Status(TemplateView):
             context_data['delta_since_latest_gc'] = (timezone.now() - context_data['latest_gc'].read_at).seconds
 
         return context_data
+
+
+class XhrUpdateChecker(View):
+    """ XHR view performing a version check versus Github. """
+    def get(self, request):
+        return HttpResponse(
+            json.dumps({'update_available': not dsmr_backend.services.is_latest_version()}),
+            content_type='application/json'
+        )

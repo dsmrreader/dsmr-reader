@@ -100,7 +100,7 @@ class Dashboard(TemplateView):
 
 
 class DashboardXhrHeader(View):
-    """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, HTML response. """
+    """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
         data = {}
 

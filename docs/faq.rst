@@ -2,6 +2,28 @@ Frequently Asked Questions (FAQ)
 ================================
 
 
+How can I update my application?
+--------------------------------
+The version you are running is always based on the 'latest' version of the application, called the `master` branch.
+Every once in a while there may be updates. Since ``v1.5`` you can also easily check for updates by using the application's Status page.
+
+Before updating, **please make sure you have a recent backup of your database**! :doc:`More information about backups can be found here<application>`.
+
+You can update your application to the latest version by executing **deploy.sh**, located in the root of the project. 
+Make sure to execute it while logged in as the ``dsmr`` user::
+
+   ./deploy.sh
+
+It will make sure to check, fetch and apply any changes released. Summary of deployment script steps:
+
+- GIT pull (codebase update).
+- PIP update requirements.
+- Apply any database migrations.
+- Sync static files to Nginx folder.
+- Reload Gunicorn application server.
+- Clear any caches.
+
+
 I only pay for a single electricity tariff but I see two!
 ---------------------------------------------------------
 DSMR (and your energy supplier) always read both high and low tariff from your meter. 
@@ -9,7 +31,7 @@ It's possible however that you are only paying for a single tariff.
 In that case your energy supplier will simply merge both high and low tariffs to make it look like you have a single one.
 
 This application displays separate tariffs by default, but supports merging them to a single one as well.
-Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option '**Merge electricity tariffs**' in the frontend configuration.
+Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option ``Merge electricity tariffs`` in the frontend configuration.
 
 
 Dropbox: Automated backup sync
@@ -120,4 +142,4 @@ Feature/bug report
 ------------------
 *How can I propose a feature or report a bug I've found?*
 
-`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_
+`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_.

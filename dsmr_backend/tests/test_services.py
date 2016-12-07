@@ -1,3 +1,5 @@
+from unittest import mock
+
 from django.test import TestCase
 from django.utils import timezone
 
@@ -122,3 +124,26 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertTrue(dsmr_backend.services.get_capabilities('weather'))
         self.assertTrue(capabilities['weather'])
         self.assertTrue(capabilities['any'])
+
+
+@mock.patch('requests.get')
+class TestIslatestVersion(TestCase):
+    response_older = b"from django.utils.version import get_version\n" \
+        b"VERSION = (1, 2, 0, 'final', 0)\n" \
+        b"__version__ = get_version(VERSION)\n"
+
+    response_newer = b"from django.utils.version import get_version\n" \
+        b"VERSION = (1, 5, 1, 'final', 0)\n" \
+        b"__version__ = get_version(VERSION)\n"
+
+    def test_true(self, request_mock):
+        response_mock = mock.MagicMock(content=self.response_older)
+        request_mock.return_value = response_mock
+
+        self.assertTrue(dsmr_backend.services.is_latest_version())
+
+    def test_false(self, request_mock):
+        response_mock = mock.MagicMock(content=self.response_newer)
+        request_mock.return_value = response_mock
+
+        self.assertFalse(dsmr_backend.services.is_latest_version())

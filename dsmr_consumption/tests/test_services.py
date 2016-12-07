@@ -1,8 +1,8 @@
 from decimal import Decimal
+from unittest import mock
 
 from django.test import TestCase
 from django.utils import timezone
-from unittest import mock
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
