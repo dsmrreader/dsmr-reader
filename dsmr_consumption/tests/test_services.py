@@ -44,6 +44,29 @@ class TestServices(InterceptStdoutMixin, TestCase):
         else:
             self.assertEqual(GasConsumption.objects.count(), 0)
 
+    def test_duplicate_processing(self):
+        """ Duplicate readings should not crash the compactor when not grouping. """
+        # Default is grouping by minute, so make sure to revert that here.
+        consumption_settings = ConsumptionSettings.get_solo()
+        consumption_settings.compactor_grouping_type = ConsumptionSettings.COMPACTOR_GROUPING_BY_READING
+        consumption_settings.save()
+
+        # Just duplicate one, as it will cause: IntegrityError UNIQUE constraint failed: ElectricityConsumption.read_at
+        duplicate_reading = DsmrReading.objects.all()[0]
+        duplicate_reading.pk = None
+        duplicate_reading.save()
+
+        dsmr_consumption.services.compact_all()
+
+        self.assertTrue(DsmrReading.objects.processed().exists())
+        self.assertFalse(DsmrReading.objects.unprocessed().exists())
+        self.assertEqual(ElectricityConsumption.objects.count(), 3)
+
+        if self.support_gas_readings:
+            self.assertEqual(GasConsumption.objects.count(), 2)
+        else:
+            self.assertEqual(GasConsumption.objects.count(), 0)
+
     @mock.patch('django.utils.timezone.now')
     def test_grouping(self, now_mock):
         """ Test grouping per minute, instead of the default 10-second interval. """

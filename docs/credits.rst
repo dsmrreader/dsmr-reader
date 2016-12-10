@@ -52,6 +52,7 @@ Testers & contributors
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - Sevickson (`Github profile <https://github.com/sevickson>`_)
+- Koen Volleberg (`Github profile <https://github.com/kvolleberg>`_)
 
 
 DSMR help
