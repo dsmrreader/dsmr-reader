@@ -27,7 +27,7 @@ def compact(dsmr_reading):
 
     # Electricity should be unique, because it's the reading with the lowest interval anyway.
     if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
-        ElectricityConsumption.objects.create(
+        ElectricityConsumption.objects.get_or_create(
             read_at=dsmr_reading.timestamp,
             delivered_1=dsmr_reading.electricity_delivered_1,
             returned_1=dsmr_reading.electricity_returned_1,

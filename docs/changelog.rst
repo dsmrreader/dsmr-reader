@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v1.4.1 - 2016-12-12
+^^^^^^^^^^^^^^^^^^^
+- Consumption chart hangs due to unique_key violation (`#174 <https://github.com/dennissiemensma/dsmr-reader/issues/174>`_).
+- NoReverseMatch at / Reverse for 'docs' (`#175 <https://github.com/dennissiemensma/dsmr-reader/issues/175>`_).
+
+
 v1.4.0 - 2016-11-28
 ^^^^^^^^^^^^^^^^^^^
 - Push notifications for Notify My Android / Prowl (iOS), written by Jeroen Peters (`#152 <https://github.com/dennissiemensma/dsmr-reader/issues/152>`_).
