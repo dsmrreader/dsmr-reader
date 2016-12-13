@@ -28,7 +28,13 @@
                             <td class="col-md-6"><a href="https://github.com/dennissiemensma/dsmr-reader/releases/" target="_blank" title="{% trans 'View releases' %}">v{{ dsmr_version }}</a></td>
                         </tr>
                         <tr>
-                            <td class="col-md-6">{% trans "Check for updates" %}</td>
+                            <td class="col-md-6">
+                                {% trans "Check for updates" %} 
+                                <br />
+                                
+                                <a id="version_check_info" href="#"><small>{% trans "How does it work?" %}</small></a>
+                                <small id="version_check_info_text" style="display: none;">{% blocktrans %}The application will compare "VERSION = (x,x,x)" in your local dsmrreader/__init__.py file with the latest one available on Github.{% endblocktrans %}</small>
+                            </td>
                             <td class="col-md-6">
                                 <a class="btn btn-success" href="#" id="check_for_updates"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Check now' %}</a>
                                 <div id="loader" style="display: none;"><i class="fa fa-refresh fa-spin fa-fw"></i> &nbsp; {% trans 'Currently checking for updates...' %}</div>
@@ -174,10 +180,16 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#check_for_updates").click(function(){
-			check_for_updates();
+		$("#version_check_info").click(function(){
+			$(this).hide();
+			$("#version_check_info_text").show();
 			return false;
 		});
+		
+        $("#check_for_updates").click(function(){
+            check_for_updates();
+            return false;
+        });
 	});
 	
 	/**

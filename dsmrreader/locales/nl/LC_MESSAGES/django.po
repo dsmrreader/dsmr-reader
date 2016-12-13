@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-13 21:33+0100\n"
-"PO-Revision-Date: 2016-11-27 17:57+0100\n"
+"POT-Creation-Date: 2016-12-13 21:54+0100\n"
+"PO-Revision-Date: 2016-12-13 21:54+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -632,6 +632,12 @@ msgstr "Huidige applicatieversie"
 
 msgid "Check for updates"
 msgstr "Controleer voor updates"
+
+msgid "How does it work?"
+msgstr "Hoe werkt dit?"
+
+msgid "The application will compare \"VERSION = (x,x,x)\" in your local dsmrreader/__init__.py file with the latest one available on Github."
+msgstr "De applicatie vergelijkt \"VERSION = (x,x,x)\" in het lokale dsmrreader/__init__.py bestand met de meest recente versie op Github."
 
 msgid "Check now"
 msgstr "Controleer nu"
