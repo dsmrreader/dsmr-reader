@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 20:07+0100\n"
-"PO-Revision-Date: 2016-11-29 00:02+0100\n"
+"POT-Creation-Date: 2016-12-13 21:20+0100\n"
+"PO-Revision-Date: 2016-12-13 21:28+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
@@ -104,7 +104,6 @@ msgstr ""
 "het algemeen adviseer ik minimaal een 8 GB SD-kaart."
 
 #: ../../installation.rst:28
-#, python-format
 msgid ""
 "The readings will take 90+ percent of the disk space. I plan however to add "
 "some kind of retention to it later, keeping the data (of many years) far below "
@@ -699,14 +698,11 @@ msgstr ""
 
 #: ../../installation.rst:314
 msgid ""
-"Please note that due to Supervisor's output buffering **it might take a minute "
-"or two before you see any output**. You should see similar output as the ``cu``-"
-"command printed earlier in the installation process."
+"You should see similar output as the ``cu``-command printed earlier in the "
+"installation process."
 msgstr ""
-"Doordat Supervisor de **logbestanden buffert** kan het een minuut of twee duren "
-"voordat je daadwerkelijk wat terugziet. Uiteindelijk zou je ongeveer dezelfde "
-"lap tekst moeten zien als toen we handmatig gemeten hebben met het ``cu``-"
-"programma."
+"Uiteindelijk zou je ongeveer dezelfde lap tekst moeten zien als toen we "
+"handmatig gemeten hebben met het ``cu``-programma."
 
 #: ../../installation.rst:316
 msgid ""

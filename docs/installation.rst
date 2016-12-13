@@ -311,7 +311,7 @@ Example of everything running well::
 
     supervisor> tail -f dsmr_datalogger
     
-Please note that due to Supervisor's output buffering **it might take a minute or two before you see any output**. You should see similar output as the ``cu``-command printed earlier in the installation process.
+You should see similar output as the ``cu``-command printed earlier in the installation process.
 
 Want to quit supervisor? ``CTRL + C`` to stop tail and ``CTRL + D`` once to exit supervisor command line.
 
