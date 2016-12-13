@@ -281,9 +281,9 @@ Go back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` once).
 Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. 
 It's also configured to bring the entire application up again after a shutdown or reboot.
 
-- Each job has it's own configuration file, so make sure to copy them all::
+- Copy the configuration file for Supervisor::
 
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr-reader.conf /etc/supervisor/conf.d/
 
 - Login to ``supervisorctl`` management console::
 

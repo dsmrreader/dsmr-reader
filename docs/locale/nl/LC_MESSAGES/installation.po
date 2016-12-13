@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-13 21:20+0100\n"
-"PO-Revision-Date: 2016-12-13 21:28+0100\n"
+"POT-Creation-Date: 2016-12-13 21:58+0100\n"
+"PO-Revision-Date: 2016-12-13 21:59+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
@@ -655,9 +655,8 @@ msgstr ""
 "draaien."
 
 #: ../../installation.rst:284
-msgid "Each job has it's own configuration file, so make sure to copy them all::"
-msgstr ""
-"Elk process heeft zijn eigen configuratiebestand, dus kopieer ze allemaal::"
+msgid "Copy the configuration file for Supervisor::"
+msgstr "Kopieer het configuratie-bestand voor Supervisor::"
 
 #: ../../installation.rst:288
 msgid "Login to ``supervisorctl`` management console::"
@@ -722,3 +721,8 @@ msgstr ""
 
 #~ msgid "Import example prices::"
 #~ msgstr "Importeer voorbeeldprijzen::"
+
+#~ msgid ""
+#~ "Each job has it's own configuration file, so make sure to copy them all::"
+#~ msgstr ""
+#~ "Elk process heeft zijn eigen configuratiebestand, dus kopieer ze allemaal::"
