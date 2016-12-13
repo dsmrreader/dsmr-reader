@@ -4,7 +4,7 @@ from django.conf.urls import url
 
 from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
-from dsmr_frontend.views.statistics import Statistics
+from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
 from dsmr_frontend.views.trends import Trends
 from dsmr_frontend.views.compare import Compare
 from dsmr_frontend.views.export import Export, ExportAsCsv
@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^archive/xhr/summary$', ArchiveXhrSummary.as_view(), name='archive-xhr-summary'),
     url(r'^archive/xhr/graphs$', ArchiveXhrGraphs.as_view(), name='archive-xhr-graphs'),
     url(r'^statistics$', Statistics.as_view(), name='statistics'),
+    url(r'^statistics/xhr/data$', StatisticsXhrData.as_view(), name='statistics-xhr-data'),
     url(r'^trends$', cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()), name='trends'),
     url(r'^compare$', Compare.as_view(), name='compare'),
 

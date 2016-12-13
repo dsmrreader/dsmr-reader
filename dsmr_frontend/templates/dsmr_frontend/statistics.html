@@ -134,15 +134,30 @@
                                 <br />
                                 {% blocktrans %}Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home.{% endblocktrans %}</small>
                             </td>
-                            <td class="col-md-6"><span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ slumber_consumption_watt|intcomma|default:'-' }} &nbsp; {% trans "Watt" %}</span></td>
+                            <td class="col-md-6">
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
+	                            <span class="badge bg-red xhr-hidden-panel" style="display: none;">
+	                               <i class="fa fa-bolt"></i> &nbsp; <span id="slumber_consumption_watt"></span> &nbsp; {% trans "Watt" %}
+	                            </span>
+                            </td>
                         </tr>
                         <tr>
                             <td>{% trans "Lowest electricity consumption read" %}</td>
-                            <td><span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ min_max_consumption_watt.min_watt|intcomma|default:'-' }} &nbsp; {% trans "Watt" %}</span></td>
+                            <td>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
+	                            <span class="badge bg-red xhr-hidden-panel" style="display: none;">
+	                                <i class="fa fa-bolt"></i> &nbsp; <span id="min_consumption_watt"></span> &nbsp; {% trans "Watt" %}
+	                            </span>
+                            </td>
                         </tr>
                         <tr>
                             <td>{% trans "Highest electricity consumption read" %}</td>
-                            <td><span class="badge bg-red"><i class="fa fa-bolt"></i> &nbsp; {{ min_max_consumption_watt.max_watt|intcomma|default:'-' }} &nbsp; {% trans "Watt" %}</span></td>
+                            <td>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
+	                            <span class="badge bg-red xhr-hidden-panel" style="display: none;">
+	                               <i class="fa fa-bolt"></i> &nbsp; <span id="max_consumption_watt"></span> &nbsp; {% trans "Watt" %}
+	                            </span>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -192,3 +207,32 @@
 
 </section>
 {% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+    	fetch_xhr_data();
+    });
+    
+    function fetch_xhr_data()
+    {
+        $.ajax({
+            dataType: "json",
+            url: "{% url 'frontend:statistics-xhr-data' %}",
+        }).done(function(response) {
+            $(".xhr-loader").hide();
+            
+            $("#slumber_consumption_watt").html(response.slumber_consumption_watt);
+            $("#min_consumption_watt").html(response.min_consumption_watt);
+            $("#max_consumption_watt").html(response.max_consumption_watt);
+
+            $(".xhr-hidden-panel").show();
+        });
+    }
+
+</script>
+{% endblock %}
+

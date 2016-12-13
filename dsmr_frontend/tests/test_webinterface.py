@@ -189,6 +189,18 @@ class TestViews(TestCase):
         if DsmrReading.objects.exists():
             self.assertIn('latest_reading', response.context)
 
+    def test_statistics_xhr_data(self):
+        response = self.client.get(
+            reverse('{}:statistics-xhr-data'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+        self.assertEqual(response['Content-Type'], 'application/json')
+
+        json_response = json.loads(response.content.decode("utf-8"))
+        self.assertIn('slumber_consumption_watt', json_response)
+        self.assertIn('min_consumption_watt', json_response)
+        self.assertIn('max_consumption_watt', json_response)
+
     @mock.patch('django.utils.timezone.now')
     def test_trends(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))

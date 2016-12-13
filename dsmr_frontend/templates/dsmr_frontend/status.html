@@ -199,7 +199,7 @@
 	{
 		$("#check_for_updates").hide();
 	    $("#loader").show();
-	    console.log($("#loader"));
+
 	    $.ajax({
 	        dataType: "json",
 	        url: "{% url 'frontend:status-xhr-check-for-updates' %}",
