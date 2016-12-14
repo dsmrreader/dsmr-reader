@@ -10,6 +10,8 @@ v1.5.0 - 2017-01-xx
 - Version checker at github (`#166 <https://github.com/dennissiemensma/dsmr-reader/issues/166>`_).
 - Force ``PYTHONUNBUFFERED`` for supervisor commands (`#176 <https://github.com/dennissiemensma/dsmr-reader/issues/176>`_).
 - Improve Statistics page performance (`#173 <https://github.com/dennissiemensma/dsmr-reader/issues/173>`_).
+- Status page visualisation (`#172 <https://github.com/dennissiemensma/dsmr-reader/issues/172>`_).
+
 - **Change in Python support**: 
 
   - The support for ``Python 3.3`` has been **dropped** due to the Django upgrade (`#103 <https://github.com/dennissiemensma/dsmr-reader/issues/103>`_).

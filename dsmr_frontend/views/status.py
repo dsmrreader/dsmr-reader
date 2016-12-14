@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_stats.models.statistics import DayStatistics
 import dsmr_backend.services
 
 
@@ -19,7 +20,6 @@ class Status(TemplateView):
 
         try:
             context_data['latest_reading'] = DsmrReading.objects.all().order_by('-pk')[0]
-            context_data['first_reading'] = DsmrReading.objects.all().order_by('pk')[0]
         except IndexError:
             pass
         else:
@@ -29,11 +29,20 @@ class Status(TemplateView):
 
         if context_data['capabilities']['electricity']:
             context_data['latest_ec'] = ElectricityConsumption.objects.all().order_by('-pk')[0]
-            context_data['delta_since_latest_ec'] = (timezone.now() - context_data['latest_ec'].read_at).seconds
+            context_data['minutes_since_latest_ec'] = (timezone.now() - context_data['latest_ec'].read_at).seconds / 60
 
         if context_data['capabilities']['gas']:
             context_data['latest_gc'] = GasConsumption.objects.all().order_by('-pk')[0]
-            context_data['delta_since_latest_gc'] = (timezone.now() - context_data['latest_gc'].read_at).seconds
+            context_data['hours_since_latest_gc'] = (timezone.now() - context_data['latest_gc'].read_at).seconds / 3600
+
+        try:
+            context_data['latest_day_statistics'] = DayStatistics.objects.all().order_by('-day')[0]
+        except IndexError:
+            pass
+        else:
+            context_data['days_since_latest_day_statistics'] = (
+                timezone.now().date() - context_data['latest_day_statistics'].day
+            ).days
 
         return context_data
 

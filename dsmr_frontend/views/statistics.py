@@ -41,6 +41,7 @@ class StatisticsXhrData(View):
         min_max_consumption_watt = dsmr_consumption.services.calculate_min_max_consumption_watt()
 
         data = {
+            'total_reading_count': DsmrReading.objects.all().count(),
             'slumber_consumption_watt': dsmr_consumption.services.calculate_slumber_consumption_watt(),
             'min_consumption_watt': min_max_consumption_watt['min_watt'],
             'max_consumption_watt': min_max_consumption_watt['max_watt'],

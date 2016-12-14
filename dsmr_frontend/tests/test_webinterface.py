@@ -197,6 +197,7 @@ class TestViews(TestCase):
         self.assertEqual(response['Content-Type'], 'application/json')
 
         json_response = json.loads(response.content.decode("utf-8"))
+        self.assertIn('total_reading_count', json_response)
         self.assertIn('slumber_consumption_watt', json_response)
         self.assertIn('min_consumption_watt', json_response)
         self.assertIn('max_consumption_watt', json_response)
@@ -245,15 +246,20 @@ class TestViews(TestCase):
         self.assertIn('capabilities', response.context)
         self.assertIn('unprocessed_readings', response.context)
 
+        if self.support_data:
+            self.assertIn('latest_day_statistics', response.context)
+            self.assertIn('days_since_latest_day_statistics', response.context)
+
         if 'latest_reading' in response.context:
-            self.assertIn('first_reading', response.context)
             self.assertIn('delta_since_latest_reading', response.context)
 
         if 'latest_ec' in response.context:
-            self.assertIn('delta_since_latest_ec', response.context)
+            self.assertIn('latest_ec', response.context)
+            self.assertIn('minutes_since_latest_ec', response.context)
 
         if 'latest_gc' in response.context:
-            self.assertIn('delta_since_latest_gc', response.context)
+            self.assertIn('latest_gc', response.context)
+            self.assertIn('hours_since_latest_gc', response.context)
 
     @mock.patch('dsmr_backend.services.is_latest_version')
     def test_status_xhr_update_checker(self, is_latest_version_mock):
