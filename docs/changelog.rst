@@ -11,6 +11,7 @@ v1.5.0 - 2017-01-xx
 - Force ``PYTHONUNBUFFERED`` for supervisor commands (`#176 <https://github.com/dennissiemensma/dsmr-reader/issues/176>`_).
 - Improve Statistics page performance (`#173 <https://github.com/dennissiemensma/dsmr-reader/issues/173>`_).
 - Status page visualisation (`#172 <https://github.com/dennissiemensma/dsmr-reader/issues/172>`_).
+- Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-reader/issues/127>`_).
 
 - **Change in Python support**: 
 

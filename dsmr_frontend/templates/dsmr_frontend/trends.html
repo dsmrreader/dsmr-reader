@@ -73,7 +73,6 @@
                     {% blocktrans %}Electricity tariff ratio (passed week){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
-                    <div id="electricity-by-tariff-week-chart-legend"></div>
                     <canvas id="electricity-by-tariff-week-chart"></canvas>
                 </div>
             </div>
@@ -86,7 +85,6 @@
                     {% blocktrans %}Electricity tariff ratio (passed month){% endblocktrans %}
                 </header>
                 <div class="panel-body" style="height: 350px;">
-                    <div id="electricity-by-tariff-month-chart-legend"></div>
                     <canvas id="electricity-by-tariff-month-chart"></canvas>
                 </div>
             </div>
@@ -99,24 +97,21 @@
 
 {% block javascript %}
 {{ block.super }}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
+
+
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart-2.4.0.min.js' %}"></script>
         <script type="text/javascript">
-            var pie_options = {
-                {% verbatim %}
-                tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%",
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=segments[i].fillColor%>\"><%if(segments[i].label){%><%=segments[i].label%><%}%></span></li><%}%></ul>"
-                {% endverbatim %}
-            }
-        
-            var bar_options = {
+            var chart_options = {
                 /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
                 pointHitDetectionRadius: 5,
                 pointDotRadius: 2.5,
-                
-                {% verbatim %}
-                tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%",
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
-                {% endverbatim %}
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
 	        }
 	        
         	$(document).ready(function(){
@@ -126,8 +121,16 @@
                 Chart.defaults.global.segmentShowStroke = true;
 
             {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
-                render_electricity_consumption_by_tariff_week_chart();
-                render_electricity_consumption_by_tariff_month_chart();
+                render_ratio_chart(
+               		"electricity-by-tariff-week-chart",
+            		{{ electricity_by_tariff_week.electricity1|floatformat:"0" }},
+            		{{ electricity_by_tariff_week.electricity2|floatformat:"0" }}
+           		);
+                render_ratio_chart(
+                    "electricity-by-tariff-month-chart",
+                    {{ electricity_by_tariff_month.electricity1|floatformat:"0" }},
+                    {{ electricity_by_tariff_month.electricity2|floatformat:"0" }}
+                );
             {% endif %}
 
             {% if capabilities.electricity %}
@@ -144,59 +147,59 @@
         	});
 
 	    {% if capabilities.electricity %}
-	        function render_electricity_consumption_by_tariff_week_chart()
+
+	        function render_ratio_chart(chart_id, electricity1, electricity2)
 	        {
-	            var data = [
-                    {
-                        value: {{ electricity_by_tariff_week.electricity2|floatformat:"0" }},
-                        color: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
-                        highlight: "#5AD3D1",
-                        label: "{% trans 'Electricity 2 (high tariff)' %}"
-                    },
-	                {
-	                    value: {{ electricity_by_tariff_week.electricity1|floatformat:"0" }},
-                        color:"rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
-	                    highlight: "#5AD3D1",
-	                    label: "{% trans 'Electricity 1 (low tariff)' %}"
-	                }
-	            ]
-                var ctx = $("#electricity-by-tariff-week-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#electricity-by-tariff-week-chart").parent().height();
-                var chart_instance = new Chart(ctx).Pie(data, pie_options);	        	
-                $("#electricity-by-tariff-week-chart-legend").html(chart_instance.generateLegend());
+	            var data = {
+	                datasets: [
+	                    {
+	                        label: "{% trans 'Electricity 2 (high tariff)' %} (%)",
+	                        backgroundColor: [
+	                            'rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)'
+	                        ],
+	                        borderColor: [
+	                            'rgba(255,99,132,1)'
+	                        ],
+	                        borderWidth: 1,
+	                        data: [
+	                            {{ electricity_by_tariff_week.electricity2|floatformat:"0" }}
+	                        ],
+	                    },
+	                    {
+	                        label: "{% trans 'Electricity 1 (low tariff)' %} (%)",
+	                        backgroundColor: [
+	                            'rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)'
+	                        ],
+	                        borderColor: [
+	                            'rgba(255, 159, 64, 1)'
+	                        ],
+	                        borderWidth: 1,
+	                        data: [
+	                            {{ electricity_by_tariff_week.electricity1|floatformat:"0" }}
+	                        ],
+	                    }
+	                ]
+	            };              
+	            
+	            var ctx = $("#" + chart_id).get(0).getContext("2d");
+	            ctx.canvas.height = $("#" + chart_id).parent().height();
+	            
+	            var chart_instance = new Chart(ctx, {
+	                type: 'bar',
+	                data: data,
+	                options: chart_options
+	            });  
 	        }
-	        
-            function render_electricity_consumption_by_tariff_month_chart()
-            {
-                var data = [
-                    {
-                        value: {{ electricity_by_tariff_month.electricity2|floatformat:"0" }},
-                        color: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
-                        highlight: "#5AD3D1",
-                        label: "{% trans 'Electricity 2 (high tariff)' %}"
-                    },
-                    {
-                        value: {{ electricity_by_tariff_month.electricity1|floatformat:"0" }},
-                        color:"rgba({{frontend_settings.electricity_delivered_alternate_color|hex_to_rgb}},1)",
-                        highlight: "#5AD3D1",
-                        label: "{% trans 'Electricity 1 (low tariff)' %}"
-                    }
-                ]
-                var ctx = $("#electricity-by-tariff-month-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#electricity-by-tariff-month-chart").parent().height();
-                var chart_instance = new Chart(ctx).Pie(data, pie_options);             
-                $("#electricity-by-tariff-month-chart-legend").html(chart_instance.generateLegend());
-            }
-	    
+	  
             function render_average_electricity_consumed_chart()
             {
                 var data = {
                     labels: {{ x_hours|safe }},
                     datasets: [{
                         data: {{ avg_electricity_consumed|safe }},
-                        label: "{% trans 'Electricity' %}",                      
-                        fillColor: "{{frontend_settings.electricity_delivered_color}}",
-                        strokeColor: "{{frontend_settings.electricity_delivered_color}}",
+                        label: "{% trans 'Electricity' %} (%)",                      
+                        backgroundColor: "{{frontend_settings.electricity_delivered_color}}",
+                        borderColor: "{{frontend_settings.electricity_delivered_color}}",
                         highlightFill: "#5AD3D1",
                         highlightStroke: "#5AD3D1"
                     }]
@@ -204,9 +207,14 @@
                 
                 var ctx = $("#average-electricity-consumed-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#average-electricity-consumed-chart").parent().height();
-                new Chart(ctx).Bar(data, bar_options);
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: chart_options
+                }); 
             }
-                       
+            
         {% endif %}
 
         {% if capabilities.electricity_returned %}
@@ -216,9 +224,9 @@
                     labels: {{ x_hours|safe }},
                     datasets: [{
                         data: {{ avg_electricity_returned|safe }},
-                        label: "{% trans 'Electricity returned' %}",                      
-                        fillColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                        strokeColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                        label: "{% trans 'Electricity returned' %} (%)",                      
+                        backgroundColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                        borderColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
                         highlightFill: "#5AD3D1",
                         highlightStroke: "#5AD3D1"
                     }]
@@ -226,7 +234,12 @@
             	
                 var ctx = $("#average-electricity-returned-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#average-electricity-returned-chart").parent().height();
-                new Chart(ctx).Bar(data, bar_options);
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: chart_options
+                }); 
             }
         {% endif %}
             
@@ -237,9 +250,9 @@
                     labels: {{ x_hours|safe }},
                     datasets: [{
                         data: {{ avg_gas_consumption|safe }},
-                        label: "{% trans 'Gas' %}",                      
-                        fillColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
-                        strokeColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+                        label: "{% trans 'Gas' %} (%)",                      
+                        backgroundColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+                        borderColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
                         highlightFill: "#5AD3D1",
                         highlightStroke: "#5AD3D1"
                     }]
@@ -247,7 +260,12 @@
             	
                 var ctx = $("#average-gas-consumed-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#average-gas-consumed-chart").parent().height();
-                new Chart(ctx).Bar(data, bar_options);
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: chart_options
+                }); 
             }
         {% endif %}
 		</script>

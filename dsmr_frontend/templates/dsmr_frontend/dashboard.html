@@ -259,12 +259,16 @@
 
 {% block javascript %}
 {{ block.super }}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart-2.4.0.min.js' %}"></script>
         <script type="text/javascript">
             var line_options = {
-                /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
-                pointHitDetectionRadius: 3,
-                pointDotRadius: 2.5,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
             }
         
             $(document).ready(function(){
@@ -316,8 +320,8 @@
                     }
                 });
             }
-            
-       {% if capabilities.electricity %}
+
+        {% if capabilities.electricity %}
             function render_electricity_chart()
             {
                 var data = {
@@ -325,18 +329,21 @@
                     datasets: [{
                         data: {{ electricity_y|safe }},
                         label: "{% trans 'Electricity' %}",                     
-                        fillColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
+                        backgroundColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
+                        borderColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
                         pointColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(255,0,0,1)"
+                        pointborderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
                     }]
                 };
     
                 var ctx = $("#electricity-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#electricity-chart").parent().height();
-                new Chart(ctx).Line(data, line_options);
+                new Chart(ctx, {
+                    type: 'line',
+                	data: data,
+                	options: line_options
+               	});
             }
         {% endif %}
         
@@ -348,18 +355,21 @@
                      datasets: [{
                          data: {{ electricity_returned_y|safe }},
                          label: "{% trans 'Electricity returned' %}",                     
-                         fillColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
-                         strokeColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                         backgroundColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
+                         borderColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
                          pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                         pointStrokeColor: "#fff",
-                         pointHighlightFill: "#fff",
-                         pointHighlightStroke: "rgba(39,194,76,1)"
+                         pointborderColor: "#fff",
+                         pointHoverBackgroundColor: "#fff",
                      }]
                  };
      
                  var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
                  ctx.canvas.height = $("#electricity-returned-chart").parent().height();
-                 new Chart(ctx).Line(data, line_options);
+                 new Chart(ctx, {
+                     type: 'line',
+                     data: data,
+                     options: line_options
+                 });
              }
          {% endif %}
             
@@ -371,18 +381,21 @@
                     datasets: [{
                         data: {{ gas_y|safe }},
                         label: "{% trans 'Gas' %}",                     
-                        fillColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+                        backgroundColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
+                        borderColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
                         pointColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(150,150,150,1)"
+                        pointborderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
                     }]
                 };
 
                 var ctx = $("#gas-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#gas-chart").parent().height();
-                new Chart(ctx).Line(data, line_options);
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: line_options
+                });
             }
             {% endif %}
 
@@ -394,18 +407,20 @@
                     datasets: [{
                         data: {{ temperature_y|safe }},
                         label: "{% trans 'Temperature' %}",                       
-                        fillColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
+                        backgroundColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},0.1)",
+                        borderColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
                         pointColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(150,150,150,1)"
+                        pointborderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
                     }]
                 };
 
                 var ctx = $("#temperature-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#temperature-chart").parent().height();
-                new Chart(ctx).Line(data, line_options);
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data
+                });
             }
         {% endif %}
         </script>

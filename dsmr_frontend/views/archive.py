@@ -43,6 +43,8 @@ class ArchiveXhrSummary(TemplateView):
     template_name = 'dsmr_frontend/fragments/archive-xhr-statistics.html'
 
     def get_context_data(self, **kwargs):
+        from time import sleep
+        sleep(1)
         context_data = super(ArchiveXhrSummary, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
@@ -86,6 +88,8 @@ class ArchiveXhrSummary(TemplateView):
 class ArchiveXhrGraphs(View):
     """ XHR view for fetching the hour statistics of a day, JSON encoded. """
     def get(self, request):  # noqa: C901
+        from time import sleep
+        sleep(1)
         capabilities = dsmr_backend.services.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
@@ -157,12 +161,11 @@ class ArchiveXhrGraphs(View):
                 'datasets': [{
                     'data': data['electricity_merged'],
                     'label': _('Electricity (single tariff)'),
-                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
-                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'backgroundColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'borderColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
                     'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
                     'pointStrokeColor': "#fff",
-                    'pointHighlightFill': "#fff",
-                    'pointHighlightStroke': "rgba(255,0,0,1)"
+                    'pointHoverBackgroundColor': "#fff",
                 }]
             }
         else:
@@ -171,27 +174,25 @@ class ArchiveXhrGraphs(View):
                 'datasets': [{
                     'data': data['electricity1'],
                     'label': _('Electricity 1 (low tariff)'),
-                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(
+                    'backgroundColor': "rgba({},0.1)".format(hex_to_rgb(
                         frontend_settings.electricity_delivered_alternate_color
                     )),
-                    'strokeColor': "rgba({},1)".format(hex_to_rgb(
+                    'borderColor': "rgba({},1)".format(hex_to_rgb(
                         frontend_settings.electricity_delivered_alternate_color
                     )),
                     'pointColor': "rgba({},1)".format(hex_to_rgb(
                         frontend_settings.electricity_delivered_alternate_color
                     )),
                     'pointStrokeColor': "#fff",
-                    'pointHighlightFill': "#fff",
-                    'pointHighlightStroke': "rgba(255,0,0,1)"
+                    'pointHoverBackgroundColor': "#fff",
                 }, {
                     'data': data['electricity2'],
                     'label': _('Electricity 2 (high tariff)'),
-                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
-                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'backgroundColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
+                    'borderColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
                     'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_delivered_color)),
                     'pointStrokeColor': "#fff",
-                    'pointHighlightFill': "#fff",
-                    'pointHighlightStroke': "rgba(255,0,0,1)"
+                    'pointHoverBackgroundColor': "#fff",
                 }]
             }
 
@@ -202,12 +203,13 @@ class ArchiveXhrGraphs(View):
                     'datasets': [{
                         'data': data['electricity_returned_merged'],
                         'label': _('Electricity returned (single tariff)'),
-                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
-                        'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'backgroundColor': "rgba({},0.1)".format(hex_to_rgb(
+                            frontend_settings.electricity_returned_color
+                        )),
+                        'borderColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
                         'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
                         'pointStrokeColor': "#fff",
-                        'pointHighlightFill': "#fff",
-                        'pointHighlightStroke': "rgba(39,194,76,1)"
+                        'pointHoverBackgroundColor': "#fff",
                     }]
                 }
             else:
@@ -216,27 +218,27 @@ class ArchiveXhrGraphs(View):
                     'datasets': [{
                         'data': data['electricity1_returned'],
                         'label': _('Electricity 1 returned (low tariff)'),
-                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(
+                        'backgroundColor': "rgba({},0.1)".format(hex_to_rgb(
                             frontend_settings.electricity_returned_alternate_color
                         )),
-                        'strokeColor': "rgba({},1)".format(hex_to_rgb(
+                        'borderColor': "rgba({},1)".format(hex_to_rgb(
                             frontend_settings.electricity_returned_alternate_color
                         )),
                         'pointColor': "rgba({},1)".format(hex_to_rgb(
                             frontend_settings.electricity_returned_alternate_color
                         )),
                         'pointStrokeColor': "#fff",
-                        'pointHighlightFill': "#fff",
-                        'pointHighlightStroke': "rgba(200,200,100,1)"
+                        'pointHoverBackgroundColor': "#fff",
                     }, {
                         'data': data['electricity2_returned'],
                         'label': _('Electricity 2 returned (high tariff)'),
-                        'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
-                        'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
+                        'backgroundColor': "rgba({},0.1)".format(hex_to_rgb(
+                            frontend_settings.electricity_returned_color
+                        )),
+                        'borderColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
                         'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.electricity_returned_color)),
                         'pointStrokeColor': "#fff",
-                        'pointHighlightFill': "#fff",
-                        'pointHighlightStroke': "rgba(39,194,76,1)"
+                        'pointHoverBackgroundColor': "#fff",
                     }]
                 }
 
@@ -246,12 +248,11 @@ class ArchiveXhrGraphs(View):
                 'datasets': [{
                     'data': data['gas'],
                     'label': _('Gas'),
-                    'fillColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
-                    'strokeColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
+                    'backgroundColor': "rgba({},0.1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
+                    'borderColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
                     'pointColor': "rgba({},1)".format(hex_to_rgb(frontend_settings.gas_delivered_color)),
                     'pointStrokeColor': "#fff",
-                    'pointHighlightFill': "#fff",
-                    'pointHighlightStroke': "rgba(150,150,150,1)"
+                    'pointHoverBackgroundColor': "#fff",
                 }]
             }
 
