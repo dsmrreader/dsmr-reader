@@ -2,6 +2,20 @@ Credits
 =======
 Software used and contributers are listed below. Please note and respect their licences as well, if any apply.
 
+
+Testers & contributors
+----------------------
+
+- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github profile <https://github.com/jeroenpeters1986>`_)
+- `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github profile <https://github.com/danielterhorst>`_)
+- `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_ (`Github profile <https://github.com/sdeleeuw>`_)
+- "WatskeBart" (`Github profile <https://github.com/WatskeBart>`_)
+- `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
+- `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
+- Sevickson (`Github profile <https://github.com/sevickson>`_)
+- Koen Volleberg (`Github profile <https://github.com/kvolleberg>`_)
+
+
 Software
 --------
 
@@ -40,19 +54,6 @@ Software
 - `MW <http://bettermotherfuckingwebsite.com/>`_
 
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
-
-
-Testers & contributors
-----------------------
-
-- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github profile <https://github.com/jeroenpeters1986>`_)
-- `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github profile <https://github.com/danielterhorst>`_)
-- `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_ (`Github profile <https://github.com/sdeleeuw>`_)
-- "WatskeBart" (`Github profile <https://github.com/WatskeBart>`_)
-- `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
-- `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
-- Sevickson (`Github profile <https://github.com/sevickson>`_)
-- Koen Volleberg (`Github profile <https://github.com/kvolleberg>`_)
 
 
 DSMR help
