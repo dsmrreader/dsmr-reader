@@ -1,10 +1,6 @@
 #!/bin/bash
 
 echo ""
-echo "--- Running Pylama for code audit..."
-pylama
-
-echo ""
 echo "--- Testing with SQLite (4 processes)..."
 pytest --pylama --cov --cov-report=html:coverage_report/html --cov-report=term --ds=dsmrreader.config.test_sqlite -n 4
 
@@ -17,3 +13,7 @@ pytest --pylama --cov --cov-report=html:coverage_report/html --cov-report=term -
 echo ""
 echo "--- Testing with MySQL (1 proces due to concurrency limitations)..."
 pytest --pylama --cov --cov-report=html:coverage_report/html --cov-report=term --ds=dsmrreader.config.test_mysql
+
+echo ""
+echo "--- Running Pylama for code audit..."
+pylama

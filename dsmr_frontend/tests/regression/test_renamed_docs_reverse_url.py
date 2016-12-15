@@ -1,11 +1,11 @@
 from django.db.migrations.executor import MigrationExecutor
+from django.db.migrations.recorder import MigrationRecorder
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.db import connection
 from django.apps import apps
 
 from dsmr_frontend.models.message import Notification
-from django.db.migrations.recorder import MigrationRecorder
 
 
 class TestRegression(TestCase):
