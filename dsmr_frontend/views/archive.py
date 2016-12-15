@@ -43,8 +43,6 @@ class ArchiveXhrSummary(TemplateView):
     template_name = 'dsmr_frontend/fragments/archive-xhr-statistics.html'
 
     def get_context_data(self, **kwargs):
-        from time import sleep
-        sleep(1)
         context_data = super(ArchiveXhrSummary, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
@@ -88,8 +86,6 @@ class ArchiveXhrSummary(TemplateView):
 class ArchiveXhrGraphs(View):
     """ XHR view for fetching the hour statistics of a day, JSON encoded. """
     def get(self, request):  # noqa: C901
-        from time import sleep
-        sleep(1)
         capabilities = dsmr_backend.services.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
