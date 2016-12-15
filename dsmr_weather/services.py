@@ -8,13 +8,26 @@ from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.buienradar import BUIENRADAR_API_URL, BUIENRADAR_XPATH
 
 
-def read_weather():
-    """ Reads the current weather state, if enabled, and stores it. """
-    # Only when explicitly enabled in settings.
+def should_sync():
+    """ Checks whether we should sync yet. """
     weather_settings = WeatherSettings.get_solo()
 
     if not weather_settings.track:
+        return False
+
+    if weather_settings.next_sync is not None and timezone.now() < weather_settings.next_sync:
+        return False
+
+    return True
+
+
+def read_weather():
+    """ Reads the current weather state, if enabled, and stores it. """
+    # Only when explicitly enabled in settings.
+    if not should_sync():
         return
+
+    weather_settings = WeatherSettings.get_solo()
 
     # Fetch XML from API.
     request = urllib.request.urlopen(BUIENRADAR_API_URL)
@@ -33,5 +46,8 @@ def read_weather():
     # Gas readings trigger these readings, so the 'read at' timestamp should be somewhat in sync.
     # Therefor we align temperature readings with them, having them grouped by hour that is..
     read_at = timezone.now().replace(minute=0, second=0, microsecond=0)
-
     TemperatureReading.objects.create(read_at=read_at, degrees_celcius=temperature)
+
+    # Push next sync back for an hour.
+    weather_settings.next_sync = timezone.now() + timezone.timedelta(hours=1)
+    weather_settings.save()

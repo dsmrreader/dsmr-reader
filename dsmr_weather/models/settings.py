@@ -24,6 +24,15 @@ class WeatherSettings(SingletonModel):
             'See http://www.buienradar.nl/weerkaarten/temperatuur for a map of all locations.'
         )
     )
+    next_sync = models.DateTimeField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Next export'),
+        help_text=_(
+            'Timestamp of the next sync. Automatically updated by application.'
+        )
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

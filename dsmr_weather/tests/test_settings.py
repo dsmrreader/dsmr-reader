@@ -21,3 +21,6 @@ class TestSettings(TestCase):
 
     def test_buienradar_station(self):
         self.assertEqual(self.instance.buienradar_station, 6260)
+
+    def test_next_sync(self):
+        self.assertFalse(self.instance.next_sync)

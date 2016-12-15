@@ -8,18 +8,42 @@ from django.utils import timezone
 
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
-from dsmr_consumption.models.consumption import GasConsumption
 import dsmr_weather.services
 
 
 class TestDsmrWeatherServices(TestCase):
     """ Test services. """
-    @mock.patch('dsmr_weather.services.read_weather')
-    def test_consumption_creation_signal(self, service_mock):
-        """ Test incoming signal handling, set in app config. """
-        self.assertFalse(service_mock.called)
-        GasConsumption.objects.create(read_at=timezone.now(), delivered=0, currently_delivered=0)
-        self.assertTrue(service_mock.called)
+    @mock.patch('urllib.request.urlopen')
+    def test_next_sync(self, urlopen_mock):
+        """ Test next_sync setting. """
+        # We just want to see whether it's called.
+        urlopen_mock.side_effect = AssertionError('MOCK')
+
+        weather_settings = WeatherSettings.get_solo()
+        weather_settings.track = True
+        weather_settings.save()
+
+        self.assertTrue(weather_settings.track)
+        self.assertIsNone(weather_settings.next_sync)
+        self.assertFalse(urlopen_mock.called)
+
+        with self.assertRaises(AssertionError):
+            dsmr_weather.services.read_weather()
+
+        # The default next_sync setting should allow initial sync.
+        self.assertTrue(urlopen_mock.called)
+
+        # Now disallow.
+        weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=15)
+        weather_settings.save()
+
+        urlopen_mock.reset_mock()
+        self.assertFalse(urlopen_mock.called)
+
+        dsmr_weather.services.read_weather()
+
+        # Should be skipped now.
+        self.assertFalse(urlopen_mock.called)
 
     def test_weather_tracking(self):
         """ Tests whether temperature readings are skipped when tracking is disabled. """
@@ -33,7 +57,11 @@ class TestDsmrWeatherServices(TestCase):
         """ Tests whether temperature readings are skipped when tracking is disabled. """
         weather_settings = WeatherSettings.get_solo()
         weather_settings.track = True
+        weather_settings.next_sync = timezone.now() - timezone.timedelta(minutes=15)
         weather_settings.save()
+        weather_settings.refresh_from_db()
+
+        self.assertGreater(timezone.now(), weather_settings.next_sync)
 
         # Fake URL opener and its http response object used for reading data.
         http_response_mock = mock.MagicMock()
@@ -56,3 +84,6 @@ class TestDsmrWeatherServices(TestCase):
         reading = TemperatureReading.objects.get()
         self.assertEqual(weather_settings.buienradar_station, 6260)
         self.assertEqual(reading.degrees_celcius, Decimal('4.8'))
+
+        # Make sure that the next_sync is pushed forward as well.
+        weather_settings = WeatherSettings.get_solo()
