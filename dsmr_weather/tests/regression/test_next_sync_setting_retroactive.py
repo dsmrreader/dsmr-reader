@@ -19,9 +19,9 @@ class TestRegression(TestCase):
     def app(self):
         return apps.get_containing_app_config(type(self).__module__).name
 
-    def test_no_reverse_match_docs(self):
-        """ Test whether the docs URL in old notfications are converted to their new location. """
-        now = timezone.now()
+    def test_next_sync_setting_retroactive(self):
+        """ Test whether the migration can also handle existing data. """
+        now = timezone.now().replace(microsecond=0)
 
         TemperatureReading.objects.create(
             read_at=now + timezone.timedelta(hours=1),
