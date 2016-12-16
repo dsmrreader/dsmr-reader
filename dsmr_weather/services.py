@@ -49,5 +49,5 @@ def read_weather():
     TemperatureReading.objects.create(read_at=read_at, degrees_celcius=temperature)
 
     # Push next sync back for an hour.
-    weather_settings.next_sync = timezone.now() + timezone.timedelta(hours=1)
+    weather_settings.next_sync = read_at + timezone.timedelta(hours=1)
     weather_settings.save()
