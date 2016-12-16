@@ -2,6 +2,8 @@ import json
 
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.views.generic.base import TemplateView, View
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse
 from django.utils import formats, timezone
 
@@ -140,3 +142,11 @@ class DashboardXhrHeader(View):
             )
 
         return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DashboardXhrNotificationRead(View):
+    """ XHR view for marking an in-app notification as read. """
+    def post(self, request):
+        Notification.objects.filter(pk=self.request.POST['id'], read=False).update(read=True)
+        return HttpResponse(json.dumps({}), content_type='application/json')

@@ -7,7 +7,7 @@ python -c 'import dsmrreader ; print(dsmrreader.__version__)'
 
 echo ""
 echo ""
-echo " Please make sure you've read any RELEASE NOTES before deploying, since some"
+echo " Please make sure you've read EACH release note BEFORE deploying, since some"
 echo " changes might not always be backwards compatible or depend on your database!"
 echo ""
 echo "     >>>   https://github.com/dennissiemensma/dsmr-reader/releases   <<<"

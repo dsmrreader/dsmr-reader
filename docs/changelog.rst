@@ -1,18 +1,25 @@
 Changelog
 =========
 
+Upgrading
+^^^^^^^^^
+
+- Please make sure you have a fresh **database backup** before upgrading! `See docs about back-ups <http://dsmr-reader.readthedocs.io/en/latest/application.html#data-preservation-backups>`_.
+- Upgrading is very easy due to a builtin mechanism. `See docs about deploying upgrades <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
+
 
 v1.5.0 - 2017-01-xx
 ^^^^^^^^^^^^^^^^^^^
 - Weather graph not showing when no gas data is available (`#170 <https://github.com/dennissiemensma/dsmr-reader/issues/170>`_).
+- Status page visualisation (`#172 <https://github.com/dennissiemensma/dsmr-reader/issues/172>`_).
+- Improve Statistics page performance (`#173 <https://github.com/dennissiemensma/dsmr-reader/issues/173>`_).
+- Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-reader/issues/127>`_).
+- Version checker at github (`#166 <https://github.com/dennissiemensma/dsmr-reader/issues/166>`_).
+- Remove required login for dismissal of in-app notifications (`#179 <https://github.com/dennissiemensma/dsmr-reader/issues/179>`_).
 - Switch Nosetests to Pytest (+ pytest-cov) (`#167 <https://github.com/dennissiemensma/dsmr-reader/issues/167>`_).
 - PyLama code audit (+ pytest-cov) (`#158 <https://github.com/dennissiemensma/dsmr-reader/issues/158>`_).
 - Double upgrade of Django framework ``Django 1.8`` -> ``Django 1.9`` -> ``Django 1.10`` (`#103 <https://github.com/dennissiemensma/dsmr-reader/issues/103>`_).
-- Version checker at github (`#166 <https://github.com/dennissiemensma/dsmr-reader/issues/166>`_).
 - Force ``PYTHONUNBUFFERED`` for supervisor commands (`#176 <https://github.com/dennissiemensma/dsmr-reader/issues/176>`_).
-- Improve Statistics page performance (`#173 <https://github.com/dennissiemensma/dsmr-reader/issues/173>`_).
-- Status page visualisation (`#172 <https://github.com/dennissiemensma/dsmr-reader/issues/172>`_).
-- Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-reader/issues/127>`_).
 
 - **Change in Python support**: 
 

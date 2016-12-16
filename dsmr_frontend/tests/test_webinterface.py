@@ -135,6 +135,18 @@ class TestViews(TestCase):
                         json_response['latest_electricity_cost'], '0.23' if current_tariff == 1 else '0.46'
                     )
 
+    def test_dashboard_xhr_notification_read(self):
+        view_url = reverse('{}:dashboard-xhr-notification-read'.format(self.namespace))
+        notification = Notification.objects.create(message='TEST', redirect_to='fake')
+        self.assertFalse(notification.read)
+
+        response = self.client.post(view_url, data={'id': notification.pk})
+        self.assertEqual(response.status_code, 200)
+
+        # Notification should be altered now.
+        notification.refresh_from_db()
+        self.assertTrue(notification.read)
+
     @mock.patch('django.utils.timezone.now')
     def test_archive(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
@@ -329,28 +341,6 @@ class TestViews(TestCase):
         response = self.client.post(view_url, data=post_data)
         self.assertEqual(response.status_code, 200)
         io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
-
-    def test_notification_read(self):
-        view_url = reverse('{}:notification-read'.format(self.namespace))
-        notification = Notification.objects.create(message='TEST', redirect_to='fake')
-        self.assertFalse(notification.read)
-
-        # Check login required.
-        response = self.client.post(view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], 'admin/login/?next={}'.format(view_url)
-        )
-
-        # Login and retest.
-        self.client.login(username='testuser', password='passwd')
-        response = self.client.post(view_url)
-
-        response = self.client.post(view_url, data={'id': notification.pk})
-        self.assertEqual(response.status_code, 302)
-
-        # Notification should be altered now.
-        self.assertTrue(Notification.objects.get(pk=notification.pk).read)
 
     def test_read_the_docs_redirects(self):
         for current in ('docs', 'feedback'):
