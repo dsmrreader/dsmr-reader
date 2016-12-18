@@ -13,7 +13,7 @@ Listed in any order, but sorted by name.
 - `Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_
 - `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ 
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
-- `Koen Volleberg <https://github.com/kvolleberg>`_
+- Koen Volleberg
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `Sevickson <https://github.com/sevickson>`_
 - "`WatskeBart <https://github.com/WatskeBart>`_"
