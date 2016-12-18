@@ -10,10 +10,11 @@ Upgrading
 
 v1.5.0 - 2017-01-xx
 ^^^^^^^^^^^^^^^^^^^
+- Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-reader/issues/127>`_).
+- Display last 24 hours on dashboard (`#164 <https://github.com/dennissiemensma/dsmr-reader/issues/164>`_).
 - Weather graph not showing when no gas data is available (`#170 <https://github.com/dennissiemensma/dsmr-reader/issues/170>`_).
 - Status page visualisation (`#172 <https://github.com/dennissiemensma/dsmr-reader/issues/172>`_).
 - Improve Statistics page performance (`#173 <https://github.com/dennissiemensma/dsmr-reader/issues/173>`_).
-- Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-reader/issues/127>`_).
 - Version checker at github (`#166 <https://github.com/dennissiemensma/dsmr-reader/issues/166>`_).
 - Remove required login for dismissal of in-app notifications (`#179 <https://github.com/dennissiemensma/dsmr-reader/issues/179>`_).
 - Switch Nosetests to Pytest (+ pytest-cov) (`#167 <https://github.com/dennissiemensma/dsmr-reader/issues/167>`_).
