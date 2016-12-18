@@ -3,17 +3,20 @@ Credits
 Software used and contributers are listed below. Please note and respect their licences as well, if any apply.
 
 
-Testers & contributors
-----------------------
+Many thanks to the contributions of the following people 
+--------------------------------------------------------
+Listed in any order, but sorted by name.
 
-- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github profile <https://github.com/jeroenpeters1986>`_)
-- `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github profile <https://github.com/danielterhorst>`_)
-- `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_ (`Github profile <https://github.com/sdeleeuw>`_)
-- "WatskeBart" (`Github profile <https://github.com/WatskeBart>`_)
-- `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
-- Sevickson (`Github profile <https://github.com/sevickson>`_)
-- Koen Volleberg (`Github profile <https://github.com/kvolleberg>`_)
+- `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
+- `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
+- `Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_
+- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ 
+- `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
+- `Koen Volleberg <https://github.com/kvolleberg>`_
+- `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
+- `Sevickson <https://github.com/sevickson>`_
+- "`WatskeBart <https://github.com/WatskeBart>`_"
 
 
 Software
