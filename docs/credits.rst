@@ -3,15 +3,21 @@ Credits
 Software used and contributers are listed below. Please note and respect their licences as well, if any apply.
 
 
-Many thanks to the contributions of the following people 
---------------------------------------------------------
-Listed in any order, but sorted by name.
+Special thanks for supplying code contributions
+-----------------------------------------------
+
+- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ 
+
+
+Also many thanks to the contributions of
+----------------------------------------
+Listed in any order, sorted by name.
 
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_
-- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ 
+- `Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_ 
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
 - Koen Volleberg
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
@@ -66,6 +72,6 @@ Dutch Smart Meter reading specifications, data cables, examples and hints:
 
 - `Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_
 
-- `Joost van der Linde <https://sites.google.com/site/nta8130p1smartmeter/home>`_
+- `Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard.nl/>`_
 
 - `SOS Solutions <https://www.sossolutions.nl/>`_
