@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-15 22:35+0100\n"
-"PO-Revision-Date: 2016-12-15 22:27+0100\n"
+"POT-Creation-Date: 2016-12-19 21:12+0100\n"
+"PO-Revision-Date: 2016-12-19 20:42+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -312,12 +312,6 @@ msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."
 msgid "It's now possible to have the electricity tariffs merged to a single one. This might come handy when you pay your energy supplier fo a single tariff instead of high/low. You can enable this feature in  frontend configuration: 'Merge electricity tariffs'"
 msgstr "Vanaf nu is het mogelijk om de elektriciteitstarieven samen te voegen tot enkeltarief. Dit komt van pas wanneer je energieleverancier je slechts één tarief in rekening brengt voor zowel piek als dal. Je kunt dit inschakelen in de interfaceconfiguratie bij  \"Voeg tarieven samen\""
 
-msgid "Reverse dashboard graphs"
-msgstr "Keer dashboard-grafieken om"
-
-msgid "Whether graphs are rendered with an reversed X-axis"
-msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
-
 msgid "Merge electricity tariffs"
 msgstr "Voeg tarieven samen"
 
@@ -462,7 +456,10 @@ msgstr "Verwijder notificatie"
 msgid "View page"
 msgstr "Bekijk pagina"
 
-msgid "This month"
+msgid "Display current month"
+msgstr "Toon huidige maand"
+
+msgid "Current month"
 msgstr "Huidige maand"
 
 msgid "until yesterday"
@@ -503,6 +500,30 @@ msgstr "Voeg notitie toe voor vandaag"
 
 msgid "Recent electricity consumed (watt)"
 msgstr "Recent elektriciteitsverbruik (Watt)"
+
+msgid "Go backward by 60 units"
+msgstr "Ga 60 eenheden achteruit"
+
+msgid "Go backward by 30 units"
+msgstr "Ga 30 eenheden achteruit"
+
+msgid "Go backward by 15 units"
+msgstr "Ga 15 eenheden achteruit"
+
+msgid "Scroll electricity graph(s)"
+msgstr "Scroll door elektriciteitsgrafiek(en)"
+
+msgid "You can go back up to one week"
+msgstr "Je kunt tot een week geleden bekijken"
+
+msgid "Go forward by 15 units"
+msgstr "Ga 15 eenheden vooruit"
+
+msgid "Go forward by 30 units"
+msgstr "Ga 30 eenheden vooruit"
+
+msgid "Go forward by 60 units"
+msgstr "Ga 60 eenheden vooruit"
 
 msgid "Recent electricity returned (watt)"
 msgstr "Recente teruglevering elektriciteit (Watt)"
@@ -1049,6 +1070,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Reverse dashboard graphs"
+#~ msgstr "Keer dashboard-grafieken om"
+
+#~ msgid "Whether graphs are rendered with an reversed X-axis"
+#~ msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
+
+#~ msgid "This month"
+#~ msgstr "Huidige maand"
 
 #~ msgid "DSMR (Dutch Smart Meter Requirements) reader"
 #~ msgstr "DSMR (Dutch Smart Meter Requirements) reader"

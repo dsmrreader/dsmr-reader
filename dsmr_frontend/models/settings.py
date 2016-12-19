@@ -6,11 +6,6 @@ from colorfield.fields import ColorField
 
 class FrontendSettings(SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
-    reverse_dashboard_graphs = models.BooleanField(
-        default=False,
-        verbose_name=_('Reverse dashboard graphs'),
-        help_text=_('Whether graphs are rendered with an reversed X-axis')
-    )
     merge_electricity_tariffs = models.BooleanField(
         default=False,
         verbose_name=_('Merge electricity tariffs'),

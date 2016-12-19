@@ -1,10 +1,8 @@
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
 
-
-class TestRegression(InterceptStdoutMixin, TestCase):
+class TestRegression(TestCase):
     """ Regression. """
     fixtures = ['dsmr_frontend/test_dsmrreading.json']
 

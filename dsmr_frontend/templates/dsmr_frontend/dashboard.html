@@ -70,15 +70,21 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 
     {% if month_statistics %}
-    <div class="row consumption-block">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a id="month_statistics_button" class="btn btn-primary" href="#">{% trans "Display current month" %}</a>
+            <br /> <br />
+        </div>
+    </div>
+    <div class="row consumption-block xhr-hidden" id="month_statistics_holder">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "This month" %} <small>({% trans "until yesterday" %})</small>
+                    {% trans "Current month" %} <small>({% trans "until yesterday" %})</small>
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
@@ -126,7 +132,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 
     {% if consumption %}
@@ -189,9 +195,9 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
-    
+
     {% if capabilities.electricity %}
     <div class="row">
         <div class="col-md-12">
@@ -202,9 +208,37 @@
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-chart"></canvas>
                 </div>
+
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
+    
+    <div class="row text-center">
+        <div class="col-md-offset-1 col-md-1">
+            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="60" title="{% trans 'Go backward by 60 units' %}"><i class="fa fa-fast-backward"></i></a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="30" title="{% trans 'Go backward by 30 units' %}"><i class="fa fa-step-backward"></i></a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="15" title="{% trans 'Go backward by 15 units' %}"><i class="fa fa-backward"></i></a>
+        </div>
+        <div class="col-md-4">
+            {% trans 'Scroll electricity graph(s)' %}
+            <br />
+            <small>{% trans 'You can go back up to one week' %}</small>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-15" title="{% trans 'Go forward by 15 units' %}"><i class="fa fa-forward"></i></a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-30" title="{% trans 'Go forward by 30 units' %}"><i class="fa fa-step-forward"></i></a>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-60" title="{% trans 'Go forward by 60 units' %}"><i class="fa fa-fast-forward"></i></a>
+        </div>
+    </div>
+    <br />
     {% endif %}
     
     {% if capabilities.electricity_returned %}
@@ -219,7 +253,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 
     {% if capabilities.gas %}
@@ -234,7 +268,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
     
     {% if capabilities.weather %}
@@ -249,7 +283,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 </section>
 {% endblock %}
@@ -268,40 +302,51 @@
                     }]
                 }
             }
-        
+            var g_chart_instances = {
+                electricity: undefined,
+                electricity_returned: undefined,
+                gas: undefined,
+                temperature: undefined,
+            }
+            var g_chart_offset = 0;
+            
             $(document).ready(function(){
                 $(".delete-notification").click(function(){
                 	var notification_id = $(this).attr("data-notification-id");
                 	$(this).html('<i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>')
                 	mark_notification_read(this, notification_id);
                 	return false
-                });            	
-            	
-            	
+                });
+                
+                $("#month_statistics_button").click(function(){
+                    $(this).parent().hide();
+                    $("#month_statistics_holder").show();
+                    return false
+                });                
+                
+                $(".x-offset-control").click(function(){
+                    g_chart_offset += parseInt($(this).attr('data-offset'));
+                    
+                    /* Restrict range, server doesn't allow it either anyway. */
+                    if (g_chart_offset < 0)
+                   	{
+                    	g_chart_offset = 0;
+                   	}
+                    
+                    update_graphs();
+                    return false
+                });          
+                
                 Chart.defaults.global.responsive = true;
                 Chart.defaults.global.maintainAspectRatio = false;
                 Chart.defaults.global.animation = false;
                 Chart.defaults.global.segmentShowStroke = true;
                 
-            {% if capabilities.electricity %}
-                render_electricity_chart();
-            {% endif %}
-
-            {% if capabilities.electricity_returned %}
-                render_electricity_returned_chart();
-            {% endif %}
-            
-            {% if capabilities.gas %}
-                render_gas_chart();
-            {% endif %}
-
-            {% if capabilities.weather %}
-                render_temperature_chart();
-            {% endif %}
-            
                 /* Auto refresh. */
                 update_header();
                 setInterval(function(){ update_header(); }, 2500);
+                
+                initialize_graphs();
             });
             
             /* Updates the header containing the current electricity usage or return. */
@@ -325,6 +370,58 @@
                 });
             }
             
+            function initialize_graphs()
+            {
+                $.ajax({
+                    dataType: "json",
+                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?units_offset=" + g_chart_offset,
+                }).done(function(response) {
+                    if (response.capabilities.electricity)
+                    {
+                        render_electricity_chart(response.electricity_x, response.electricity_y);
+                    }
+
+                    if (response.capabilities.electricity_returned)
+                    {
+                        render_electricity_returned_chart(response.electricity_x, response.electricity_returned_y);
+                    }
+                    
+                    if (response.capabilities.gas)
+                    {
+                        render_gas_chart(response.gas_x, response.gas_y);
+                    }
+
+                    if (response.capabilities.weather)
+                    {
+                        render_temperature_chart(response.temperature_x, response.temperature_y);
+                    }
+                	
+                 // duration is the time for the animation of the redraw in milliseconds
+                 // lazy is a boolean. if true, the animation can be interrupted by other animations
+//                 myLineChart.data.datasets[0].data[2] = 50; // Would update the first dataset's value of 'March' to be 50
+//                 myLineChart.update(); // Calling update now animates the position of March from 90 to 50.
+                });
+            }
+            
+            /* Updates all graph information. */
+            function update_graphs()
+            {
+                $.ajax({
+                    dataType: "json",
+                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?units_offset=" + g_chart_offset,
+                }).done(function(response) {
+                    if (response.capabilities.electricity)
+                    {
+                    	update_chart("electricity", response.electricity_x, response.electricity_y);
+                    }
+
+                    if (response.capabilities.electricity_returned)
+                    {
+                    	update_chart("electricity_returned", response.electricity_x, response.electricity_returned_y);
+                    }
+                });
+            }
+            
             /* Mark a notification as read. */
             function mark_notification_read(button_handle, notification_id)
             {
@@ -332,19 +429,26 @@
                     dataType: "json",
                     url: "{% url 'frontend:dashboard-xhr-notification-read' %}",
                     type: "POST",
-                    data: {"id": notification_id},
+                    data: {"notification_id": notification_id},
                 }).done(function(response) {
                 	$(button_handle).parent().remove();
                 });
-            }           
-
-        {% if capabilities.electricity %}
-            function render_electricity_chart()
+            }
+            
+            function update_chart(chart_key, data_x, data_y)
+            {
+                g_chart_instances[chart_key].data.labels = data_x;
+                g_chart_instances[chart_key].data.datasets[0].data = data_y;
+                g_chart_instances[chart_key].update();
+            }
+            
+            
+            function render_electricity_chart(electricity_x, electricity_y)
             {
                 var data = {
-                    labels: {{ electricity_x|safe }},
+                    labels: electricity_x,
                     datasets: [{
-                        data: {{ electricity_y|safe }},
+                        data: electricity_y,
                         label: "{% trans 'Electricity' %}",                     
                         backgroundColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
                         borderColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
@@ -356,47 +460,45 @@
     
                 var ctx = $("#electricity-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#electricity-chart").parent().height();
-                new Chart(ctx, {
+                
+                g_chart_instances["electricity"] = new Chart(ctx, {
                     type: 'line',
                 	data: data,
                 	options: line_options
                	});
             }
-        {% endif %}
-        
-        {% if capabilities.electricity_returned %}
-             function render_electricity_returned_chart()
-             {
-                 var data = {
-                     labels: {{ electricity_x|safe }},
-                     datasets: [{
-                         data: {{ electricity_returned_y|safe }},
-                         label: "{% trans 'Electricity returned' %}",                     
-                         backgroundColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
-                         borderColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                         pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                         pointborderColor: "#fff",
-                         pointHoverBackgroundColor: "#fff",
-                     }]
-                 };
-     
-                 var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
-                 ctx.canvas.height = $("#electricity-returned-chart").parent().height();
-                 new Chart(ctx, {
-                     type: 'line',
-                     data: data,
-                     options: line_options
-                 });
-             }
-         {% endif %}
-            
-        {% if capabilities.gas %}
-            function render_gas_chart()
+
+            function render_electricity_returned_chart(electricity_x, electricity_returned_y)
             {
                 var data = {
-                    labels: {{ gas_x|safe }},
+                    labels: electricity_x,
                     datasets: [{
-                        data: {{ gas_y|safe }},
+                        data: electricity_returned_y,
+                        label: "{% trans 'Electricity returned' %}",                     
+                        backgroundColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
+                        borderColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                        pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+                        pointborderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                    }]
+                };
+    
+                var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
+                ctx.canvas.height = $("#electricity-returned-chart").parent().height();
+                
+                g_chart_instances["electricity_returned"] = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: line_options
+                });
+            }
+            
+            function render_gas_chart(gas_x, gas_y)
+            {
+                var data = {
+                    labels: gas_x,
+                    datasets: [{
+                        data: gas_y,
                         label: "{% trans 'Gas' %}",                     
                         backgroundColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
                         borderColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
@@ -408,21 +510,20 @@
 
                 var ctx = $("#gas-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#gas-chart").parent().height();
-                new Chart(ctx, {
+                
+                g_chart_instances["gas"] = new Chart(ctx, {
                     type: 'line',
                     data: data,
                     options: line_options
                 });
             }
-            {% endif %}
 
-        {% if capabilities.weather %}
-            function render_temperature_chart()
+            function render_temperature_chart(temperature_x, temperature_y)
             {
                 var data = {
-                    labels: {{ temperature_x|safe }},
+                    labels: temperature_x,
                     datasets: [{
-                        data: {{ temperature_y|safe }},
+                        data: temperature_y,
                         label: "{% trans 'Temperature' %}",                       
                         backgroundColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},0.1)",
                         borderColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
@@ -434,12 +535,12 @@
 
                 var ctx = $("#temperature-chart").get(0).getContext("2d");
                 ctx.canvas.height = $("#temperature-chart").parent().height();
-                new Chart(ctx, {
+                
+                g_chart_instances["temperature"] = new Chart(ctx, {
                     type: 'line',
                     data: data
                 });
             }
-        {% endif %}
         </script>
 
 {% endblock %}

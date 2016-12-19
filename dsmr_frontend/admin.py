@@ -6,4 +6,4 @@ from .models.settings import FrontendSettings
 
 @admin.register(FrontendSettings)
 class FrontendSettingsAdmin(SingletonModelAdmin):
-    list_display = ('reverse_dashboard_graphs', )
+    list_display = ('merge_electricity_tariffs', )

@@ -77,31 +77,10 @@ class TestViews(TestCase):
             reverse('{}:dashboard'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('track_temperature', response.context)
 
         if self.support_data:
-            self.assertGreater(
-                len(json.loads(response.context['electricity_x'])), 0
-            )
-            self.assertGreater(
-                len(json.loads(response.context['electricity_y'])), 0
-            )
-
-            self.assertTrue(response.context['track_temperature'])
             self.assertIn('consumption', response.context)
-
-        if self.support_gas:
-            self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
-            self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
-
-        # Test whether reverse graphs work.
-        frontend_settings = FrontendSettings.get_solo()
-        frontend_settings.reverse_dashboard_graphs = True
-        frontend_settings.save()
-
-        response = self.client.get(
-            reverse('{}:dashboard'.format(self.namespace))
-        )
-        self.assertEqual(response.status_code, 200)
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard_xhr_header(self, now_mock):
@@ -135,12 +114,53 @@ class TestViews(TestCase):
                         json_response['latest_electricity_cost'], '0.23' if current_tariff == 1 else '0.46'
                     )
 
+    @mock.patch('django.utils.timezone.now')
+    def test_dashboard_xhr_graphs(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
+
+        if self.support_data:
+            weather_settings = WeatherSettings.get_solo()
+            weather_settings.track = True
+            weather_settings.save()
+
+        # Send seperate offset as well.
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-graphs'.format(self.namespace)),
+            data={'units_offset': 24}
+        )
+        self.assertEqual(response.status_code, 200)
+
+        # Send invalid offset.
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-graphs'.format(self.namespace)),
+            data={'units_offset': 'abc'}
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-graphs'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200)
+        json_content = json.loads(response.content.decode("utf8"))
+
+        if self.support_data:
+            self.assertGreater(
+                len(json_content['electricity_x']), 0
+            )
+            self.assertGreater(
+                len(json_content['electricity_y']), 0
+            )
+
+        if self.support_gas:
+            self.assertGreater(len(json_content['gas_x']), 0)
+            self.assertGreater(len(json_content['gas_y']), 0)
+
     def test_dashboard_xhr_notification_read(self):
         view_url = reverse('{}:dashboard-xhr-notification-read'.format(self.namespace))
         notification = Notification.objects.create(message='TEST', redirect_to='fake')
         self.assertFalse(notification.read)
 
-        response = self.client.post(view_url, data={'id': notification.pk})
+        response = self.client.post(view_url, data={'notification_id': notification.pk})
         self.assertEqual(response.status_code, 200)
 
         # Notification should be altered now.
