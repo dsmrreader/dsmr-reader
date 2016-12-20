@@ -7,30 +7,34 @@ Dependencies & requirements
 ---------------------------
 - **RaspberryPi 2 or 3**
 
- - RaspberryPi 1 should work decently, but I do not actively support it.
+ - The RaspberryPi 1 tends to be **too slow** for this project, as it requires multi core processing.
+ - You can also run it on a server near your smart meter, as long as it satisfies the other requirements as well.
 
 - **Raspbian OS**
 
  - Recommended and tested with, but any OS satisfying the requirements should do fine.
 
-- **Python 3.3 / 3.4 / 3.5**
+- **Python 3.4+**
+
+ - Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
+
 - **PostgreSQL 9+ or MySQL / MariaDB 5.5+**
 
- - I highly recommend *PostgreSQL* due to builtin support for timezones.
+ - I **highly recommend** ``PostgreSQL`` due to builtin support for timezones.
 
-- **Smart Meter** with support for **at least DSMR 4.0/4.2** and **P1 telegram port**
+- **Smart Meter** with support for **at least DSMR 4.x+** and a **P1 telegram port**
 
  - Tested so far with Landis+Gyr E350, Kaifa. Telegram port looks like an RJ11 (phone) socket.
 
-- **Minimal 100 MB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
+- **Minimal 1 GB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
 
  - More disk space is required for storing all reader data captured (optional). I generally advise to use a 8+ GB SD card. 
- - The readings will take 90+ percent of the disk space. I plan however to add some kind of retention to it later, keeping the data (of many years) far below the 500 MB. 
+ - The readings will take about 90+ percent of the disk space. Retention is on it's way for a future release in 2017. 
 
 - **Smart meter P1 data cable** 
 
-  - Can be purchased online and they cost around 15 tot 20 Euro's each.
-
+ - Can be purchased online and they cost around 15 tot 20 Euro's each.
+ 
 - **Basic Linux knowledge for deployment, debugging and troubleshooting**
 
  - It just really helps if you know what you are doing.
@@ -41,7 +45,7 @@ Dependencies & requirements
 
 The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **PostgreSQL** (Option B.) **MySQL/MariaDB**. 
 
-*If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for DST transitions).*
+*If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for daylight saving time transitions).*
 
 (Option A.) PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -116,21 +120,7 @@ Our user also requires dialout permissions. So allow the user to perform a dialo
 
     sudo usermod -a -G dialout dsmr
 
-
-4. Webserver/Nginx (part 1)
----------------------------
-
-*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
-
-Django will copy all static files to a separate directory, used by Nginx to serve statics. Therefor it requires (write) access to it::
-
-    sudo mkdir -p /var/www/dsmrreader/static
-    
-    sudo chown -R dsmr:dsmr /var/www/dsmrreader/
-
-*The reason for splitting the webserver chapter in two steps, is because the application requires the directory created above to exist. And Nginx requires the application to exist (cloned) before running (and to copy its virtual hosts file), resulting in an dependency loop.*
-
-Either proceed to the next heading for a test reading or continue at step 5.
+Either proceed to the next heading **for a test reading** or continue at chapter 4.
 
 
 Your first reading (optional)
@@ -154,11 +144,25 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 - To exit cu, type "``q.``", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``.
 
 
+4. Webserver/Nginx (part 1)
+---------------------------
+
+*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
+
+- Make sure you are still acting here as ``root`` or ``sudo`` user.
+
+Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefor it requires (write) access to it::
+
+    sudo mkdir -p /var/www/dsmrreader/static
+    
+    sudo chown -R dsmr:dsmr /var/www/dsmrreader/
+
+
 5. Clone project code from Github
 ---------------------------------
 Now is the time to clone the code from the repository into the homedir we created. 
 
-- Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
+- Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
 
 - Clone the repository::
 
@@ -247,24 +251,27 @@ It allows us to have Nginx serve static files outside our project/code root.
     ./manage.py collectstatic --noinput
 
 Create an application superuser. Django will prompt you for a password. The credentials generated can be used to access the administration panel inside the application.  
-Alter username and email if you prefer other credentials, but email is not (yet) used in the application anyway. 
+Alter username and email if you prefer other credentials, but email is not used in the application anyway.
 
-Since you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset: ``./manage.py changepassword admin``
-
-- Create user inside application::
+- Create your user::
 
     ./manage.py createsuperuser --username admin --email root@localhost
+
+**Note**: Because you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset::
+
+    ./manage.py changepassword admin
+
 
     
 9. Webserver/Nginx (part 2)
 ---------------------------
-Go back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` once).
+Go back to ``root`` / ``sudo`` user to config webserver (press ``CTRL + D`` once).
 
 - **OPTIONAL**: Remove the default Nginx vhost (*only when you do not use it yourself*)::
 
     sudo rm /etc/nginx/sites-enabled/default
 
-- Copy application vhost, *it will listen to any hostname* (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
+- Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
 
@@ -289,13 +296,13 @@ It's also configured to bring the entire application up again after a shutdown o
 
     sudo supervisorctl
 
-- Enter these commands (listed after the ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::
+- Enter these commands (**listed after the** ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::
 
     supervisor> reread
 
     supervisor> update
     
-Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with '``status``' a few times.
+Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times.
 
 - When still in ``supervisorctl``'s console, type::
 
@@ -303,9 +310,9 @@ Three processes should be started or running. Make sure they don't end up in ``E
 
 Example of everything running well::
 
-    dsmr_backend                     STARTING
-    dsmr_datalogger                  RUNNING
-    dsmr_webinterface                RUNNING
+    dsmr_backend                     RUNNING    pid 123, uptime 0:00:06
+    dsmr_datalogger                  RUNNING    pid 456, uptime 0:00:07
+    dsmr_webinterface                RUNNING    pid 789, uptime 0:00:07
 
 - Want to check whether the datalogger works? Just tail it's log in supervisor with::
 
@@ -313,7 +320,7 @@ Example of everything running well::
     
 You should see similar output as the ``cu``-command printed earlier in the installation process.
 
-Want to quit supervisor? ``CTRL + C`` to stop tail and ``CTRL + D`` once to exit supervisor command line.
+Want to quit supervisor? ``CTRL + C`` to stop tailing and then ``CTRL + D`` once to exit supervisor command line.
 
 
-You now should have everything up and running! We're almost done, but only need to check a just few more things in the next chapters.
+You now should have everything up and running! We're almost done and just need to do a few last things on the next page.

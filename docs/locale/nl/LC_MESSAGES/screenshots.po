@@ -8,15 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 22:40+0200\n"
-"PO-Revision-Date: 2016-07-12 22:40+0100\n"
+"POT-Creation-Date: 2016-12-20 14:32+0100\n"
+"PO-Revision-Date: 2016-12-20 14:33+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.5.4\n"
+"Generated-By: Babel 2.3.4\n"
+"Language-Team: \n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../screenshots.rst:2
 msgid "Screenshots"
@@ -36,20 +37,20 @@ msgstr "Zonnepanelen & teruglevering electriciteit"
 
 #: ../../screenshots.rst:8
 msgid ""
-"Note that **I do not have solar panels at home**, but the application "
-"however **does support plotting any electricity returned**."
+"Note that **I do not have solar panels at home**, but the application however "
+"**does support plotting any electricity returned**."
 msgstr ""
 "Wees ervan bewust dat **ik thuis geen zonnepanelen heb**, maar dat de "
 "applicatie daar **wel ondersteuning voor heeft qua weergave teruglevering "
-"elektriciteit**"
+"elektriciteit**."
 
 #: ../../screenshots.rst:10
 msgid ""
-"Therefor there aren't any graphs of them in the screenshots, but the users "
+"Therefor there aren't always graphs of them in the screenshots, but the users "
 "who do have them, will have additional green graphs rendered in the "
 "application."
 msgstr ""
-"Daarom staan er daarvan geen grafieken in deze screenshots, maar de "
+"Daarom staan er daar niet altijd grafieken van in deze screenshots, maar de "
 "gebruikers die ze wel thuis hebben, zullen overal een extra groene grafiek "
 "zien binnen de applicatie."
 
@@ -74,9 +75,9 @@ msgid ""
 "The archive allows you to go back to any moment tracked. The data can be "
 "plotted either on day, month or year level."
 msgstr ""
-"Het archief stelt je in staat om terug in de tijd te gaan naar elke moment "
-"dat gemeten is met de applicatie. Gegevens kunnen getoond worden op "
-"verschillende detailniveaus: per dag, per maand en per jaar."
+"Het archief stelt je in staat om terug in de tijd te gaan naar elke moment dat "
+"gemeten is met de applicatie. Gegevens kunnen getoond worden op verschillende "
+"detailniveaus: per dag, per maand en per jaar."
 
 #: ../../screenshots.rst:32
 msgid "Trends"
@@ -103,11 +104,9 @@ msgid "Compare"
 msgstr "Vergelijk"
 
 #: ../../screenshots.rst:51
-msgid ""
-"This page allows you to compare two days, months or years tracked before."
+msgid "This page allows you to compare two days, months or years tracked before."
 msgstr ""
-"Met deze pagina vergelijk je eenvoudig twee dagen, maanden of jaren met "
-"elkaar."
+"Met deze pagina vergelijk je eenvoudig twee dagen, maanden of jaren met elkaar."
 
 #: ../../screenshots.rst:59
 msgid "Status"
@@ -120,8 +119,8 @@ msgid ""
 "indicated here."
 msgstr ""
 "De statuspagina weergeeft de 'gezondheid' van de applicatie en die van de "
-"dataverwerking. Mochten er problemen zijn met het verzamelen van gegevens "
-"dan zou dat hier zichtbaar moeten zijn."
+"dataverwerking. Mochten er problemen zijn met het verzamelen van gegevens dan "
+"zou dat hier zichtbaar moeten zijn."
 
 #: ../../screenshots.rst:68
 msgid "Export"
@@ -132,59 +131,58 @@ msgid ""
 "Want to export day totals or hourly data to Excel? This page allows you to "
 "export the data in .CSV format."
 msgstr ""
-"Wil je alle dag- of uurtotalen exporteren om in Excel te bekijken? Dat kan "
-"via deze pagina door ze te exporteren in .CSV-formaat."
+"Wil je alle dag- of uurtotalen exporteren om in Excel te bekijken? Dat kan via "
+"deze pagina door ze te exporteren in .CSV-formaat."
 
 #: ../../screenshots.rst:77
-msgid "Configuration"
-msgstr "Configuratie"
+msgid "Settings"
+msgstr "instellingen"
 
 #: ../../screenshots.rst:78
+msgid ""
+"The project is written using Django and some of it's backend pages are "
+"displayed below."
+msgstr ""
+"Het project is gemaakt met Django en hieronder staan enkele beheerderspagina's "
+"daarvan."
+
+#: ../../screenshots.rst:80
 msgid ""
 "The application has quite some features, such are temperature tracking, "
 "automated backups and Dropbox intergration. This page displays the status of "
 "them all."
 msgstr ""
 "De applicatie heeft behoorlijk wat features, zoals buitentemperatuur "
-"bijhouden, geautomatiseerde back-ups en Dropbox-integratie. Op deze pagina "
-"kun je een overzicht vinden van alle instellingen."
-
-#: ../../screenshots.rst:86
-msgid "Settings"
-msgstr "instellingen"
+"bijhouden, geautomatiseerde back-ups en Dropbox-integratie. Op deze pagina kun "
+"je een overzicht vinden van alle instellingen."
 
 #: ../../screenshots.rst:87
-msgid ""
-"The project is written using Django and some of it's backend pages are "
-"displayed below."
-msgstr ""
-"Het project is gemaakt met Django en hieronder staan enkele "
-"beheerderspagina's daarvan."
-
-#: ../../screenshots.rst:89
 msgid "Here you may manage your energy prices:"
 msgstr "Hier kun je je energieprijzen beheren:"
 
-#: ../../screenshots.rst:95
+#: ../../screenshots.rst:93
 msgid "This allows you to alter your backup settings:"
 msgstr "Hiermee beheer je de instellingen voor je back-ups:"
 
-#: ../../screenshots.rst:101
+#: ../../screenshots.rst:99
 msgid "Pick your own colors for the graphs displayed:"
 msgstr "Kies je eigen kleuren voor de grafieken:"
 
-#: ../../screenshots.rst:107
+#: ../../screenshots.rst:105
 msgid ""
-"The application supports the daily export of your gas meter positions (if "
-"any) to your personal mindergas.nl account."
+"The application supports the daily export of your gas meter positions (if any) "
+"to your personal mindergas.nl account."
 msgstr ""
-"De applicatie ondersteunt het dagelijks exporteren van je gasmeterstanden "
-"naar je eigen account bij mindergas.nl."
+"De applicatie ondersteunt het dagelijks exporteren van je gasmeterstanden naar "
+"je eigen account bij mindergas.nl."
 
-#: ../../screenshots.rst:113
+#: ../../screenshots.rst:111
 msgid ""
-"There are several additional backend pages for the other configuration "
-"options as well."
+"There are several additional backend pages for the other configuration options "
+"as well."
 msgstr ""
 "Er zijn nog diverse andere beheerpagina's beschikbaar voor de overige "
 "configuratie-instellingen."
+
+#~ msgid "Configuration"
+#~ msgstr "Configuratie"

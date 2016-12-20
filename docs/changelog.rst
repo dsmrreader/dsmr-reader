@@ -21,6 +21,8 @@ v1.5.0 - 2017-01-xx
 - PyLama code audit (+ pytest-cov) (`#158 <https://github.com/dennissiemensma/dsmr-reader/issues/158>`_).
 - Double upgrade of Django framework ``Django 1.8`` -> ``Django 1.9`` -> ``Django 1.10`` (`#103 <https://github.com/dennissiemensma/dsmr-reader/issues/103>`_).
 - Force ``PYTHONUNBUFFERED`` for supervisor commands (`#176 <https://github.com/dennissiemensma/dsmr-reader/issues/176>`_).
+- Documentation updates for v1.5 (`#171 <https://github.com/dennissiemensma/dsmr-reader/issues/171>`_).
+
 
 - **Change in Python support**: 
 

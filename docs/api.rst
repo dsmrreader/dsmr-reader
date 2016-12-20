@@ -19,7 +19,7 @@ Authentication
 ^^^^^^^^^^^^^^
 Besides allowing the API to listen for requests, you will also need use the generated API Auth Key. 
 It can be found on the same page as in the screenshot above. The configuration page will also display it, but only partly.
-Feel free to alter the API Auth Key when required. The application randomly generates one initially for you. 
+Feel free to alter the API Auth Key when required. The application initially randomly generates one for you. 
 
 You should pass it in the header of every API call. The header should be defined as ``X-AUTHKEY``. See below for an example. 
 

@@ -1,6 +1,5 @@
 Credits
 =======
-Software used and contributers are listed below. Please note and respect their licences as well, if any apply.
 
 
 Special thanks for supplying code contributions
@@ -27,10 +26,9 @@ Listed in any order, sorted by name.
 
 Software
 --------
+Please note and respect their licences, if any, as well.
 
 - `Raspbian <https://www.raspbian.org/>`_
-
-- `Raspbian minimal unattended netinstaller <https://github.com/debian-pi/raspbian-ua-netinst>`_
 
 - `Django Project <https://www.djangoproject.com/>`_
 
@@ -65,8 +63,8 @@ Software
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
 
 
-DSMR help
----------
+Misc
+----
 
 Dutch Smart Meter reading specifications, data cables, examples and hints:
 

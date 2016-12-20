@@ -24,16 +24,6 @@ It will make sure to check, fetch and apply any changes released. Summary of dep
 - Clear any caches.
 
 
-I only pay for a single electricity tariff but I see two!
----------------------------------------------------------
-DSMR (and your energy supplier) always read both high and low tariff from your meter. 
-It's possible however that you are only paying for a single tariff. 
-In that case your energy supplier will simply merge both high and low tariffs to make it look like you have a single one.
-
-This application displays separate tariffs by default, but supports merging them to a single one as well.
-Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option ``Merge electricity tariffs`` in the frontend configuration.
-
-
 Dropbox: Automated backup sync
 ------------------------------
 *How can I link my Dropbox account for backups?*
@@ -125,6 +115,16 @@ When a new key is generated, you will see it immediatly. Your key is listed like
 .. image:: _static/faq/notifications-prowl-get-key.png
     :target: _static/faq/notifications-prowl-get-key.png
     :alt: Prowl Get Your API Key
+
+
+I only pay for a single electricity tariff but I see two!
+---------------------------------------------------------
+DSMR (and your energy supplier) always read both high and low tariff from your meter. 
+It's possible however that you are only paying for a single tariff. 
+In that case your energy supplier will simply merge both high and low tariffs to make it look like you have a single one.
+
+This application displays separate tariffs by default, but supports merging them to a single one as well.
+Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option ``Merge electricity tariffs`` in the frontend configuration.
 
 
 Recalculate prices retroactively
