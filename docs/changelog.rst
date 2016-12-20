@@ -22,7 +22,7 @@ v1.5.0 - 2017-01-xx
 - Double upgrade of Django framework ``Django 1.8`` -> ``Django 1.9`` -> ``Django 1.10`` (`#103 <https://github.com/dennissiemensma/dsmr-reader/issues/103>`_).
 - Force ``PYTHONUNBUFFERED`` for supervisor commands (`#176 <https://github.com/dennissiemensma/dsmr-reader/issues/176>`_).
 - Documentation updates for v1.5 (`#171 <https://github.com/dennissiemensma/dsmr-reader/issues/171>`_).
-
+- Requirements update for v1.5 (december 2016) (`#182 <https://github.com/dennissiemensma/dsmr-reader/issues/182>`_).
 
 - **Change in Python support**: 
 
