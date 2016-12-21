@@ -19,6 +19,7 @@ Listed in any order, sorted by name.
 - `Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_ 
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
 - Koen Volleberg
+- `Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `Sevickson <https://github.com/sevickson>`_
 - "`WatskeBart <https://github.com/WatskeBart>`_"
