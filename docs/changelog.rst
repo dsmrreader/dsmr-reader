@@ -17,6 +17,7 @@ v1.5.0 - 2017-01-xx
 - Improve Statistics page performance (`#173 <https://github.com/dennissiemensma/dsmr-reader/issues/173>`_).
 - Version checker at github (`#166 <https://github.com/dennissiemensma/dsmr-reader/issues/166>`_).
 - Remove required login for dismissal of in-app notifications (`#179 <https://github.com/dennissiemensma/dsmr-reader/issues/179>`_).
+- Round numbers displayed in GUI to 2 decimals (`#183 <https://github.com/dennissiemensma/dsmr-reader/issues/183>`_).
 - Switch Nosetests to Pytest (+ pytest-cov) (`#167 <https://github.com/dennissiemensma/dsmr-reader/issues/167>`_).
 - PyLama code audit (+ pytest-cov) (`#158 <https://github.com/dennissiemensma/dsmr-reader/issues/158>`_).
 - Double upgrade of Django framework ``Django 1.8`` -> ``Django 1.9`` -> ``Django 1.10`` (`#103 <https://github.com/dennissiemensma/dsmr-reader/issues/103>`_).

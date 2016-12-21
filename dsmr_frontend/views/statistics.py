@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.humanize.templatetags.humanize import intcomma
 from django.views.generic.base import TemplateView, View
 from django.http.response import HttpResponse
 from django.utils import timezone
@@ -41,7 +42,7 @@ class StatisticsXhrData(View):
         min_max_consumption_watt = dsmr_consumption.services.calculate_min_max_consumption_watt()
 
         data = {
-            'total_reading_count': DsmrReading.objects.all().count(),
+            'total_reading_count': intcomma(DsmrReading.objects.all().count()),
             'slumber_consumption_watt': dsmr_consumption.services.calculate_slumber_consumption_watt(),
             'min_consumption_watt': min_max_consumption_watt['min_watt'],
             'max_consumption_watt': min_max_consumption_watt['max_watt'],
