@@ -133,6 +133,10 @@ class MeterStatistics(SingletonModel):
         null=True,
         default=None
     )
+    rejected_telegrams = models.IntegerField(
+        help_text=_("Number of rejected telegrams due to invalid CRC checksum"),
+        default=0
+    )
 
     class Meta:
         default_permissions = tuple()

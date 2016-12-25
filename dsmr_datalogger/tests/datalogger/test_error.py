@@ -45,7 +45,7 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
             "1-0:31.7.0(000*A)\r\n",
             "1-0:21.7.0(00.143*kW)\r\n",
             "1-0:22.7.0(00.000*kW)\r\n",
-            "!74B0\n",
+            "!A97E\n",
         ]
 
     @mock.patch('serial.Serial.open')

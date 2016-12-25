@@ -51,7 +51,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
             "0-1:24.2.1(151110190000W)(00845.206*m3)\r\n",
             "0-1:24.4.0(1)\r\n",
-            "!D19A\n",
+            "!AF0C\n",
         ]
 
     @mock.patch('serial.Serial.open')

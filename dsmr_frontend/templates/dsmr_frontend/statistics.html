@@ -73,6 +73,12 @@
                                 </span>
                             </td>
                         </tr>
+                        {% if meter_statistics.rejected_telegrams %}
+                        <tr>
+                            <td>{% trans "Number of rejected telegrams due to invalid CRC checksum" %}</td>
+                            <td><span class="badge bg-black">{{ meter_statistics.rejected_telegrams|default:'-' }}</span></td>
+                        </tr>
+                        {% endif %}
                     </table>
                 </div>
             </div>

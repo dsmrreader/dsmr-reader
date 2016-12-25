@@ -18,7 +18,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "\r\n",
             "1-3:0.2.8(42)\r\n",
             "0-0:1.0.0(160210203034W)\r\n",
-            "0-0:96.1.1(xxxxxxxxxxxxx)\r\n",
+            "0-0:96.1.1(123456789012345678901234567890)\r\n",
             "1-0:1.8.1(000756.849*kWh)\r\n",
             "1-0:2.8.1(000000.000*kWh)\r\n",
             "1-0:1.8.2(000714.405*kWh)\r\n",
@@ -47,9 +47,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "1-0:42.7.0(00.000*kW)\r\n",
             "1-0:62.7.0(00.000*kW)\r\n",
             "0-1:24.1.0(003)\r\n",
-            "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
+            "0-1:96.1.0(098765432109876543210987654321)\r\n",
             "0-1:24.2.1(160210200000W)(01197.484*m3)\r\n",
-            "!AD8D\n",
+            "!6285\n",
         ]
 
     @mock.patch('serial.Serial.open')

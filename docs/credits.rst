@@ -74,3 +74,6 @@ Dutch Smart Meter reading specifications, data cables, examples and hints:
 - `Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard.nl/>`_
 
 - `SOS Solutions <https://www.sossolutions.nl/>`_
+
+- `Nico Di Rocco <http://nrocco.github.io/>`_
+
