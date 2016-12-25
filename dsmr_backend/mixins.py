@@ -62,6 +62,7 @@ class InfiniteManagementCommandMixin(object):
 
             if self.sleep_time is not None:
                 self.stdout.write('Command completed. Sleeping for {} second(s)...'.format(self.sleep_time))
+                self.stdout.write('')
                 time.sleep(self.sleep_time)  # Do not hammer.
 
         self.stdout.write('Exited due to signal detection')

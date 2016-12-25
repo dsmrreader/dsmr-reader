@@ -74,6 +74,9 @@ def analyze():
         hour=0,
     ))
 
+    # For backend logging in Supervisor.
+    print(' - Creating day & hour statistics for: {}.'.format(day_start))
+
     with transaction.atomic():
         # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly anyway.
         create_daily_statistics(day=consumption_date)

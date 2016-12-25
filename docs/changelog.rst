@@ -39,6 +39,7 @@ v1.5.0 - 2017-01-xx
 - Force ``PYTHONUNBUFFERED`` for supervisor commands (`#176 <https://github.com/dennissiemensma/dsmr-reader/issues/176>`_).
 - Documentation updates for v1.5 (`#171 <https://github.com/dennissiemensma/dsmr-reader/issues/171>`_).
 - Requirements update for v1.5 (december 2016) (`#182 <https://github.com/dennissiemensma/dsmr-reader/issues/182>`_).
+- Improved backend process logging (`#184 <https://github.com/dennissiemensma/dsmr-reader/issues/184>`_).
 
 
 v1.4.1 - 2016-12-12

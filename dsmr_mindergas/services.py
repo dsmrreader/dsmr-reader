@@ -33,6 +33,9 @@ def export():
     if not should_export():
         return
 
+    # For backend logging in Supervisor.
+    print(' - Exporting gas meter position to MinderGas.')
+
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
     midnight = timezone.make_aware(timezone.datetime(

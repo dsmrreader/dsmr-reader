@@ -27,6 +27,9 @@ def read_weather():
     if not should_sync():
         return
 
+    # For backend logging in Supervisor.
+    print(' - Performing temperature reading at Buienradar.')
+
     weather_settings = WeatherSettings.get_solo()
 
     # Fetch XML from API.

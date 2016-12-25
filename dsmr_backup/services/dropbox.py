@@ -52,6 +52,9 @@ def sync():
 
 def upload_chunked(file_path):
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
+    # For backend logging in Supervisor.
+    print(' - Uploading file to Dropbox: {}.'.format(file_path))
+
     dropbox_settings = DropboxSettings.get_solo()
     file_name = os.path.split(file_path)[-1]
     dest_path = '/{}'.format(file_name)  # The slash indicates it's relative to the root of app folder.

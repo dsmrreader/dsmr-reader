@@ -15,7 +15,9 @@ from dsmr_stats.models.note import Note
 
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
-    for current_reading in DsmrReading.objects.unprocessed()[0:1000]:
+    unprocessed_readings = DsmrReading.objects.unprocessed()[0:1000]
+
+    for current_reading in unprocessed_readings:
         compact(dsmr_reading=current_reading)
 
 
@@ -100,6 +102,9 @@ def compact(dsmr_reading):
 
     dsmr_reading.processed = True
     dsmr_reading.save(update_fields=['processed'])
+
+    # For backend logging in Supervisor.
+    print(' - Processed reading: {}.'.format(timezone.localtime(dsmr_reading.timestamp)))
 
 
 def consumption_by_range(start, end):
