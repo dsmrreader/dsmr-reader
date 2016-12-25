@@ -119,9 +119,6 @@ def notify():
     if not should_notify(settings):
         return
 
-    # For backend logging in Supervisor.
-    print(' - Creating new notification containing daily usage.')
-
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
     midnight = timezone.make_aware(timezone.datetime(
@@ -142,6 +139,9 @@ def notify():
         )
     except DayStatistics.DoesNotExist:
         return False  # Try again in a next run
+
+    # For backend logging in Supervisor.
+    print(' - Creating new notification containing daily usage.')
 
     message = create_notification_message(midnight, stats)
     send_notification(notification_api_url, settings.api_key, message)
