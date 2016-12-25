@@ -5,9 +5,14 @@ Using the application
 
 DSMR 2.x (legacy)
 -----------------
-Note: The application's default DSMR version used is 4.x. This version is also the **default** for any recent smart meters placed at your home. 
 
-*Make sure to alter this setting in the backend's configuration page to DSMR 2.x when required!*
+.. note::
+    
+    Note: The application's default DSMR version used is 4.x. This version is also the **default** for any recent smart meters placed at your home. 
+
+.. warning::
+    
+    Make sure to alter this setting in the backend's configuration page to DSMR 2.x when required!
 
 
 Viewing the application
@@ -30,9 +35,12 @@ You surely want to ``reboot`` your device and check whether everything comes up 
 
 Data preservation & backups
 ---------------------------
-You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip or ignore this.
-Actually, it happened to myself quite soon after I started, as I somehow managed to corrupt my SD storage card, losing all my data on it.
-It luckily happened only a month after running my own readings, but imagine all the data you'll lose when it will contain readings taken over several years.
+
+.. note::
+
+    You **should (or must)** make sure to periodically BACKUP your data! It's one of the most common mistakes to skip or ignore this.
+    Actually, it happened to myself quite soon after I started, as I somehow managed to corrupt my SD storage card, losing all my data on it.
+    It luckily happened only a month after running my own readings, but imagine all the data you'll lose when it will contain readings taken over several years.
 
 - The SD card is by far **the weakest link** of this setup and **will** fail you some day.
 
@@ -57,12 +65,18 @@ Everything OK? Congratulations, this was the hardest part and now the fun begins
 
 Application updates (bug fixes & new features)
 ----------------------------------------------
-:doc:`This information can be found here<faq>`.
+
+.. seealso::
+    
+    :doc:`This information can be found here<faq>`.
 
 
 Public webinterface warning
 ---------------------------
-**NOTE**: If you expose your application to the outside world or a public network, you might want to take additional steps:
+
+.. warning::
+
+    If you expose your application to the outside world or a public network, you might want to take additional steps:
 
 - Please make sure to **alter** the ``SECRET_KEY`` setting in your ``dsmrreader/settings.py``.
 
@@ -72,7 +86,9 @@ Public webinterface warning
 
 - You should also have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string `using one of the many generators found online <https://www.transip.nl/htpasswd/>`_. 
 
- - It's safe to use them, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**. 
+.. warning::
+    
+    It's safe to a htpasswd generator, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**. 
 
 - Paste the htpasswd string in ``/etc/nginx/htpasswd``.
 

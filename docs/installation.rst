@@ -1,6 +1,9 @@
 Installation
 ============
-The installation guide may take about *half an hour max* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
+
+.. note::
+
+    The installation guide may take about *half an hour max* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
 
 Dependencies & requirements
@@ -45,7 +48,9 @@ Dependencies & requirements
 
 The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **PostgreSQL** (Option B.) **MySQL/MariaDB**. 
 
-*If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for daylight saving time transitions).*
+.. note::
+
+    If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for daylight saving time transitions).
 
 (Option A.) PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -125,7 +130,10 @@ Either proceed to the next heading **for a test reading** or continue at chapter
 
 Your first reading (optional)
 -----------------------------
-**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected.
+
+.. note::
+
+    **OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected.
 
 - Now login as the user we have just created, to perform our very first reading! ::
 
@@ -211,7 +219,9 @@ Therefor I created two default (Django-)settings files you can copy, one for eac
 
 The ``base.txt`` contains requirements which the application needs anyway, no matter which backend you've choosen.
 
-- (!) Note: **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
+.. note::
+
+    **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
 (Option A.) PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -257,7 +267,9 @@ Alter username and email if you prefer other credentials, but email is not used 
 
     ./manage.py createsuperuser --username admin --email root@localhost
 
-**Note**: Because you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset::
+.. note::
+
+    Because you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset::
 
     ./manage.py changepassword admin
 
@@ -267,9 +279,12 @@ Alter username and email if you prefer other credentials, but email is not used 
 ---------------------------
 Go back to ``root`` / ``sudo`` user to config webserver (press ``CTRL + D`` once).
 
-- **OPTIONAL**: Remove the default Nginx vhost (*only when you do not use it yourself*)::
+.. note::
 
-    sudo rm /etc/nginx/sites-enabled/default
+    **OPTIONAL**: Remove the default Nginx vhost (*only when you do not use it yourself*)::
+
+        sudo rm /etc/nginx/sites-enabled/default
+
 
 - Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 
