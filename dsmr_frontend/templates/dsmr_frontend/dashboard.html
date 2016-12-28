@@ -238,29 +238,17 @@
     
     {% if capabilities.electricity %}
     <div class="row text-center">
-        <div class="col-md-offset-1 col-md-1">
-            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="60" title="{% trans 'Go backward by 60 units' %}"><i class="fa fa-fast-backward"></i></a>
-        </div>
-        <div class="col-md-1">
-            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="30" title="{% trans 'Go backward by 30 units' %}"><i class="fa fa-step-backward"></i></a>
-        </div>
-        <div class="col-md-1">
-            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="5" title="{% trans 'Go backward by 5 units' %}"><i class="fa fa-backward"></i></a>
-        </div>
-        <div class="col-md-4">
-            {% trans 'Scroll electricity graph(s)' %}
-            <br />
-            <small>{% trans 'You can scroll back until one week ago.' %}</small>
-        </div>
-        <div class="col-md-1">
-            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-5" title="{% trans 'Go forward by 5 units' %}"><i class="fa fa-forward"></i></a>
-        </div>
-        <div class="col-md-1">
-            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-30" title="{% trans 'Go forward by 30 units' %}"><i class="fa fa-step-forward"></i></a>
-        </div>
-        <div class="col-md-1">
-            <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-60" title="{% trans 'Go forward by 60 units' %}"><i class="fa fa-fast-forward"></i></a>
-        </div>
+         {% trans 'Scroll electricity graph(s)' %} <small>({% trans 'You can scroll back until one week ago.' %})</small>
+         <br /><br />
+    </div>
+    <div class="row text-center">
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="60" title="{% trans 'Go backward by 60 units' %}"><i class="fa fa-fast-backward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="30" title="{% trans 'Go backward by 30 units' %}"><i class="fa fa-step-backward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="5" title="{% trans 'Go backward by 5 units' %}"><i class="fa fa-backward"></i></a>
+        &nbsp;
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-5" title="{% trans 'Go forward by 5 units' %}"><i class="fa fa-forward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-30" title="{% trans 'Go forward by 30 units' %}"><i class="fa fa-step-forward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-60" title="{% trans 'Go forward by 60 units' %}"><i class="fa fa-fast-forward"></i></a>
     </div>
     <br />
     {% endif %}

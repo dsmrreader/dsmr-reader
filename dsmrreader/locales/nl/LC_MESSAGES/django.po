@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-28 19:50+0100\n"
+"POT-Creation-Date: 2016-12-28 20:26+0100\n"
 "PO-Revision-Date: 2016-12-28 19:39+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
@@ -543,6 +543,12 @@ msgstr "Toon elektriciteitsfasen"
 msgid "Recent distribution of electricity phases P+ (Watt)"
 msgstr "Recente distributie elektriciteitsfasen P+ (Watt)"
 
+msgid "Scroll electricity graph(s)"
+msgstr "Scroll door elektriciteitsgrafiek(en)"
+
+msgid "You can scroll back until one week ago."
+msgstr "Je kunt tot een week terugscrollen."
+
 msgid "Go backward by 60 units"
 msgstr "Ga 60 eenheden achteruit"
 
@@ -551,12 +557,6 @@ msgstr "Ga 30 eenheden achteruit"
 
 msgid "Go backward by 5 units"
 msgstr "Ga 5 eenheden achteruit"
-
-msgid "Scroll electricity graph(s)"
-msgstr "Scroll door elektriciteitsgrafiek(en)"
-
-msgid "You can scroll back until one week ago."
-msgstr "Je kunt tot een week terugscrollen."
 
 msgid "Go forward by 5 units"
 msgstr "Ga 5 eenheden vooruit"

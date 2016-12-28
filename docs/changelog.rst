@@ -30,6 +30,8 @@ v1.5.0 - 2017-01-xx
   - The migrations that were squashed together in (`#31 <https://github.com/dennissiemensma/dsmr-reader/issues/31>`_) have been **removed**. This will only affect you when you are currently still running a dsmrreader-version of **before** ``v0.13 (β)``. 
   - If you are indeed still running ``< v0.13 (β)``, please upgrade to ``v1.4`` first (!), followed by an upgrade to ``v1.5``. 
 
+**Tickets resolved in this release:**
+
 - Verify telegrams' CRC (`#188 <https://github.com/dennissiemensma/dsmr-reader/issues/188>`_).
 - Display last 24 hours on dashboard (`#164 <https://github.com/dennissiemensma/dsmr-reader/issues/164>`_).
 - Status page visualisation (`#172 <https://github.com/dennissiemensma/dsmr-reader/issues/172>`_).
@@ -51,6 +53,9 @@ v1.5.0 - 2017-01-xx
 
 v1.4.1 - 2016-12-12
 ^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
 - Consumption chart hangs due to unique_key violation (`#174 <https://github.com/dennissiemensma/dsmr-reader/issues/174>`_).
 - NoReverseMatch at / Reverse for 'docs' (`#175 <https://github.com/dennissiemensma/dsmr-reader/issues/175>`_).
 
@@ -60,6 +65,8 @@ v1.4.0 - 2016-11-28
 .. warning:: **Change in Python support**
 
   - Support for ``Python 3.5`` has been added officially (`#55 <https://github.com/dennissiemensma/dsmr-reader/issues/55>`_).
+
+**Tickets resolved in this release:**
 
 - Push notifications for Notify My Android / Prowl (iOS), written by Jeroen Peters (`#152 <https://github.com/dennissiemensma/dsmr-reader/issues/152>`_).
 - Support for both single and high/low tariff (`#130 <https://github.com/dennissiemensma/dsmr-reader/issues/130>`_).
@@ -73,11 +80,15 @@ v1.4.0 - 2016-11-28
 
 v1.3.2 - 2016-11-08
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - Requirements update (november 2016) (`#150 <https://github.com/dennissiemensma/dsmr-reader/issues/150>`_).
 
 
 v1.3.1 - 2016-08-16
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - CSS large margin-bottom (`#144 <https://github.com/dennissiemensma/dsmr-reader/issues/144>`_).
 - Django security releases issued: 1.8.14 (`#147 <https://github.com/dennissiemensma/dsmr-reader/issues/147>`_).
 - Requirements update (August 2016) (`#148 <https://github.com/dennissiemensma/dsmr-reader/issues/148>`_).
@@ -86,6 +97,8 @@ v1.3.1 - 2016-08-16
 
 v1.3.0 - 2016-07-15
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - API endpoint for datalogger (`#140 <https://github.com/dennissiemensma/dsmr-reader/issues/140>`_).
 - Colors for charts (`#137 <https://github.com/dennissiemensma/dsmr-reader/issues/137>`_).
 - Data export: Mindergas.nl (`#10 <https://github.com/dennissiemensma/dsmr-reader/issues/10>`_).
@@ -95,6 +108,8 @@ v1.3.0 - 2016-07-15
 
 v1.2.0 - 2016-05-18
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - Energy supplier prices does not indicate tariff type (Django admin) (`#126 <https://github.com/dennissiemensma/dsmr-reader/issues/126>`_).
 - Requirements update (`#128 <https://github.com/dennissiemensma/dsmr-reader/issues/128>`_).
 - Force backup (`#123 <https://github.com/dennissiemensma/dsmr-reader/issues/123>`_).
@@ -109,16 +124,22 @@ v1.2.0 - 2016-05-18
 
 v1.1.2 - 2016-05-01
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - Trends page giving errors (when lacking data) (`#125 <https://github.com/dennissiemensma/dsmr-reader/issues/125>`_).
 
 
 v1.1.1 - 2016-04-27
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - Improve readme (`#124 <https://github.com/dennissiemensma/dsmr-reader/issues/124>`_).
 
 
 v1.1.0 - 2016-04-23
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - Autorefresh dashboard (`#117 <https://github.com/dennissiemensma/dsmr-reader/issues/117>`_).
 - Improve line graphs' visibility (`#111 <https://github.com/dennissiemensma/dsmr-reader/issues/111>`_).
 - Easily add notes (`#110 <https://github.com/dennissiemensma/dsmr-reader/issues/110>`_).
@@ -130,6 +151,8 @@ v1.1.0 - 2016-04-23
 
 v1.0.1 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
+**Tickets resolved in this release:**
+
 - Update licence to OSI compatible one (`#119 <https://github.com/dennissiemensma/dsmr-reader/issues/119>`_).
 
 
@@ -140,7 +163,9 @@ v1.0.0 - 2016-04-07
 
 [β] v0.1 (2015-10-29) to 0.16 (2016-04-06)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-All previous beta releases/changes have been combined to a single list below:
+.. note::
+
+    All previous beta releases/changes have been combined to a single list below.
 
 - Move documentation to wiki or RTD (`#90 <https://github.com/dennissiemensma/dsmr-reader/issues/90>`_).
 - Translate README to Dutch (`#16 <https://github.com/dennissiemensma/dsmr-reader/issues/16>`_).
