@@ -20,13 +20,6 @@ git fetch
 
 echo ""
 echo ""
-echo " --- The following changes will be applied (if any):"
-echo ""
-git log --pretty=format:'[%h] %s (%ar)' ..origin/master
-
-
-echo ""
-echo ""
 echo " --- Merging/updating checkout."
 git merge FETCH_HEAD
 
