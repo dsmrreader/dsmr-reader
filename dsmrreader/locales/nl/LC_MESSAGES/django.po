@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-25 23:52+0100\n"
-"PO-Revision-Date: 2016-12-25 14:14+0100\n"
+"POT-Creation-Date: 2016-12-28 19:39+0100\n"
+"PO-Revision-Date: 2016-12-28 19:39+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -125,6 +125,15 @@ msgstr "Daadwerkelijk geleverde elektriciteit geleverd (-P) in 1 Watt stappen"
 
 msgid "Actual electricity power received (-P) in 1 Watt resolution"
 msgstr "Daadwerkelijk geleverde elektriciteit ontvangen (-P) in 1 Watt stappen"
+
+msgid "Instantaneous active power L1 (+P) in W resolution"
+msgstr "Actief stroomverbruik van fase L1 (+P) in Watt"
+
+msgid "Instantaneous active power L2 (+P) in W resolution"
+msgstr "Actief stroomverbruik van fase L2 (+P) in Watt"
+
+msgid "Instantaneous active power L3 (+P) in W resolution"
+msgstr "Actief stroomverbruik van fase L3 (+P) in Watt"
 
 msgid "Last hourly value delivered to client"
 msgstr "Waarde wat er vorig uur is geleverd aan client"
@@ -276,6 +285,12 @@ msgstr "Houd meterstatistieken bij"
 msgid "Whether we should track any extra statistics sent by the meter, such as the number of power failures of voltage dips. Data is not required for core features."
 msgstr "Geeft aan of we extra meterstatistieken moeten bijhouden, zoals het aantal stroomstoringen of spanningsdippen. Deze gegevens zijn niet nodig voor de basisfunctionaliteit."
 
+msgid "Track electricity phases"
+msgstr "Houd elektriciteitsfasen bij"
+
+msgid "Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this."
+msgstr "Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer aanwezig). Standaard heeft iedereen één fase thuis, maar sommige slimme meters zijn aangesloten op drie fasen. Bijvoorbeeld voor zonnepanelen of elektrisch koken. Deze feature is alleen nuttig (en werkt tevens alleen) wanneer er daadwerkelijk drie fasen aanwezig zijn. Het dashboard toont deze gegevens wanneer dit ingeschakeld is."
+
 msgid "DSMR version"
 msgstr "DSMR-versie"
 
@@ -350,6 +365,24 @@ msgstr "Kleur gasverbruik"
 
 msgid "Graph color for gas delivered"
 msgstr "Grafiekkleur voor gasverbruik"
+
+msgid "Phase L1 color"
+msgstr "Kleur fase L1"
+
+msgid "Graph color for phase L1"
+msgstr "Grafiekkleur voor fase L1"
+
+msgid "Phase L2 color"
+msgstr "Kleur fase L2"
+
+msgid "Graph color for phase L2 (when available)"
+msgstr "Grafiekkleur voor fase L2 (wanneer beschikbaar)"
+
+msgid "Phase L3 color"
+msgstr "Kleur fase L3"
+
+msgid "Graph color for phase L3 (when available)"
+msgstr "Grafiekkleur voor fase L3 (wanneer beschikbaar)"
 
 msgid "Temperature color"
 msgstr "Temperatuurkleur"
@@ -501,8 +534,14 @@ msgstr "Totaal"
 msgid "Add note for today"
 msgstr "Voeg notitie toe voor vandaag"
 
-msgid "Recent electricity consumed (watt)"
+msgid "Recent electricity consumed (Watt)"
 msgstr "Recent elektriciteitsverbruik (Watt)"
+
+msgid "Display electricity phases"
+msgstr "Toon elektriciteitsfasen"
+
+msgid "Recent distribution of electricity phases P+ (Watt)"
+msgstr "Recente distributie elektriciteitsfasen P+ (Watt)"
 
 msgid "Go backward by 60 units"
 msgstr "Ga 60 eenheden achteruit"
@@ -510,17 +549,17 @@ msgstr "Ga 60 eenheden achteruit"
 msgid "Go backward by 30 units"
 msgstr "Ga 30 eenheden achteruit"
 
-msgid "Go backward by 15 units"
-msgstr "Ga 15 eenheden achteruit"
+msgid "Go backward by 5 units"
+msgstr "Ga 5 eenheden achteruit"
 
 msgid "Scroll electricity graph(s)"
 msgstr "Scroll door elektriciteitsgrafiek(en)"
 
-msgid "You can go back up to one week"
-msgstr "Je kunt tot een week geleden bekijken"
+msgid "You can scroll back until one week ago."
+msgstr "Je kunt tot een week terugscrollen."
 
-msgid "Go forward by 15 units"
-msgstr "Ga 15 eenheden vooruit"
+msgid "Go forward by 5 units"
+msgstr "Ga 5 eenheden vooruit"
 
 msgid "Go forward by 30 units"
 msgstr "Ga 30 eenheden vooruit"
@@ -528,7 +567,7 @@ msgstr "Ga 30 eenheden vooruit"
 msgid "Go forward by 60 units"
 msgstr "Ga 60 eenheden vooruit"
 
-msgid "Recent electricity returned (watt)"
+msgid "Recent electricity returned (Watt)"
 msgstr "Recente teruglevering elektriciteit (Watt)"
 
 msgid "Recent gas consumed (m<sup>3</sup>)"
@@ -542,6 +581,15 @@ msgstr "per uur"
 
 msgid "Electricity"
 msgstr "Elektriciteit"
+
+msgid "Phase L1"
+msgstr "Fase L1"
+
+msgid "Phase L2"
+msgstr "Fase L2"
+
+msgid "Phase L3"
+msgstr "Fase L3"
 
 msgid "Temperature"
 msgstr "Temperatuur"
@@ -849,9 +897,6 @@ msgstr "Totale kosten: € {}"
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
-msgid "Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks."
-msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
-
 msgid "Clears all statistics generated. Use this to regenerate them after altering prices."
 msgstr "Verwijdert alle (dag/uur)statistieken. Gebruik dit wanneer je de energieprijzen hebt aangepast."
 
@@ -860,6 +905,9 @@ msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gege
 
 msgid "Intended usage is NOT production! Force by using --ack-to-delete-my-data"
 msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-my-data"
+
+msgid "Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks."
+msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
 
 msgid "Note"
 msgstr "Notitie"
