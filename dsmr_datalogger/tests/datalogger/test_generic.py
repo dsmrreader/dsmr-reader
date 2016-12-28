@@ -1,3 +1,4 @@
+from decimal import Decimal
 from unittest import mock
 
 from django.core.management import CommandError
@@ -26,6 +27,51 @@ class TestDsmrDataloggerTracking(InterceptStdoutMixin, TestCase):
 
 
 class TestServices(TestCase):
+    fake_telegram = None
+
+    def setUp(self):
+        self.fake_telegram = ''.join([
+            "/XMX5LGBBFFB123456789\r\n",
+            "\r\n",
+            "1-3:0.2.8(40)\r\n",
+            "0-0:1.0.0(151110192959W)\r\n",
+            "0-0:96.1.1(xxxxxxxxxxxxx)\r\n",
+            "1-0:1.8.1(000510.747*kWh)\r\n",
+            "1-0:2.8.1(000000.123*kWh)\r\n",
+            "1-0:1.8.2(000500.013*kWh)\r\n",
+            "1-0:2.8.2(000123.456*kWh)\r\n",
+            "0-0:96.14.0(0001)\r\n",
+            "1-0:1.7.0(00.192*kW)\r\n",
+            "1-0:2.7.0(00.123*kW)\r\n",
+            "0-0:17.0.0(999.9*kW)\r\n",
+            "0-0:96.3.10(1)\r\n",
+            "0-0:96.7.21(00003)\r\n",
+            "0-0:96.7.9(00000)\r\n",
+            "1-0:99.97.0(0)(0-0:96.7.19)\r\n",
+            "1-0:32.32.0(00002)\r\n",
+            "1-0:52.32.0(00002)\r\n",
+            "1-0:72.32.0(00000)\r\n",
+            "1-0:32.36.0(00000)\r\n",
+            "1-0:52.36.0(00000)\r\n",
+            "1-0:72.36.0(00000)\r\n",
+            "0-0:96.13.1()\r\n",
+            "0-0:96.13.0()\r\n",
+            "1-0:31.7.0(000*A)\r\n",
+            "1-0:51.7.0(000*A)\r\n",
+            "1-0:71.7.0(001*A)\r\n",
+            "1-0:21.7.0(00.123*kW)\r\n",
+            "1-0:41.7.0(00.456*kW)\r\n",
+            "1-0:61.7.0(00.789*kW)\r\n",
+            "1-0:22.7.0(00.000*kW)\r\n",
+            "1-0:42.7.0(00.000*kW)\r\n",
+            "1-0:62.7.0(00.000*kW)\r\n",
+            "0-1:24.1.0(003)\r\n",
+            "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
+            "0-1:24.2.1(151110190000W)(00845.206*m3)\r\n",
+            "0-1:24.4.0(1)\r\n",
+            "!8CC9\n",
+        ])
+
     def test_reading_timestamp_to_datetime(self):
         result = dsmr_datalogger.services.reading_timestamp_to_datetime('151110192959W')
         expected_result = timezone.make_aware(timezone.datetime(2015, 11, 10, 19, 29, 59))
@@ -69,7 +115,7 @@ class TestServices(TestCase):
         datalogger_settings.track_meter_statistics = False
         datalogger_settings.save()
 
-        fake_telegram = ''.join([
+        telegram = ''.join([
             "/XMX5LGBBFFB123456789\r\n",
             "\r\n",
             "1-3:0.2.8(40)\r\n",
@@ -112,7 +158,7 @@ class TestServices(TestCase):
         ])
 
         self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
-        dsmr_datalogger.services.telegram_to_reading(data=fake_telegram)
+        dsmr_datalogger.services.telegram_to_reading(data=telegram)
         self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Unaffected
 
         # Try again, but now with tracking settings enabled.
@@ -121,7 +167,7 @@ class TestServices(TestCase):
         datalogger_settings.save()
 
         self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
-        dsmr_datalogger.services.telegram_to_reading(data=fake_telegram)
+        dsmr_datalogger.services.telegram_to_reading(data=telegram)
 
         # Should be populated now.
         meter_statistics = MeterStatistics.get_solo()
@@ -130,6 +176,32 @@ class TestServices(TestCase):
         self.assertEqual(meter_statistics.power_failure_count, 3)
         self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)
         self.assertEqual(meter_statistics.voltage_sag_count_l2, 2)
+
+    def test_track_phases(self):
+        datalogger_settings = DataloggerSettings.get_solo()
+        datalogger_settings.track_phases = False
+        datalogger_settings.save()
+
+        self.assertFalse(DsmrReading.objects.all().exists())
+
+        dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
+
+        my_reading = DsmrReading.objects.get()
+        self.assertIsNone(my_reading.phase_currently_delivered_l1)
+        self.assertIsNone(my_reading.phase_currently_delivered_l2)
+        self.assertIsNone(my_reading.phase_currently_delivered_l3)
+
+        # Try again, but now with tracking settings enabled.
+        DataloggerSettings.objects.all().update(track_phases=True)
+
+        DsmrReading.objects.all().delete()
+        dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
+
+        # Should be populated now.
+        my_reading = DsmrReading.objects.get()
+        self.assertEqual(my_reading.phase_currently_delivered_l1, Decimal('0.123'))
+        self.assertEqual(my_reading.phase_currently_delivered_l2, Decimal('0.456'))
+        self.assertEqual(my_reading.phase_currently_delivered_l3, Decimal('0.789'))
 
     @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')
     def test_extra_devices_mbus_hack(self, *mocks):

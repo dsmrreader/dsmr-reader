@@ -24,6 +24,10 @@ def get_capabilities(capability=None):
             # with testing data. So we just have to wait for the first power returned.
             currently_returned__gt=0
         ).exists(),
+        'multi_phases': ElectricityConsumption.objects.filter(
+            phase_currently_delivered_l2__isnull=False,
+            phase_currently_delivered_l3__isnull=False
+        ).exists(),
         'gas': GasConsumption.objects.exists(),
         'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
     }

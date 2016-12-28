@@ -6,6 +6,10 @@ Installation
     The installation guide may take about *half an hour max* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
 
+.. contents::
+    :depth: 2
+
+
 Dependencies & requirements
 ---------------------------
 - **RaspberryPi 2 or 3**

@@ -19,6 +19,7 @@ from dsmr_frontend.forms import DashboardGraphForm, DashboardNotificationReadFor
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
+from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class Dashboard(TemplateView):
@@ -29,6 +30,7 @@ class Dashboard(TemplateView):
         weather_settings = WeatherSettings.get_solo()
         context_data = super(Dashboard, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = frontend_settings
         context_data['track_temperature'] = weather_settings.track
         context_data['notifications'] = Notification.objects.unread()
@@ -138,6 +140,12 @@ class DashboardXhrGraphs(View):
         ]
         data['gas_y'] = [float(x.currently_delivered) for x in gas]
 
+        # Some users have multiple phases installed.
+        if DataloggerSettings.get_solo().track_phases and data['capabilities']['multi_phases']:
+            data['phases_l1_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l1')
+            data['phases_l2_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l2')
+            data['phases_l3_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l3')
+
         if WeatherSettings.get_solo().track:
             data['temperature_x'] = [
                 formats.date_format(
@@ -146,8 +154,15 @@ class DashboardXhrGraphs(View):
                 for x in temperature
             ]
             data['temperature_y'] = [float(x.degrees_celcius) for x in temperature]
-        print('data', data)
+
         return HttpResponse(json.dumps(data), content_type='application/json')
+
+    def _parse_phases_data(self, data, field):
+        return [
+            float(getattr(x, field) * 1000)
+            if getattr(x, field) else 0
+            for x in data
+        ]
 
 
 @method_decorator(csrf_exempt, name='dispatch')

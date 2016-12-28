@@ -9,12 +9,13 @@ from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
-from dsmr_frontend.forms import ExportAsCsvForm
 from dsmr_frontend.models.message import Notification
+from dsmr_frontend.forms import ExportAsCsvForm
 import dsmr_consumption.services
 
 
@@ -123,12 +124,16 @@ class TestViews(TestCase):
             weather_settings.track = True
             weather_settings.save()
 
+            # Test with phases feature switched on as well.
+            DataloggerSettings.get_solo()
+            DataloggerSettings.objects.update(track_phases=True)
+
         # Send seperate offset as well.
         response = self.client.get(
             reverse('{}:dashboard-xhr-graphs'.format(self.namespace)),
             data={'units_offset': 24}
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
 
         # Send invalid offset.
         response = self.client.get(
@@ -140,7 +145,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:dashboard-xhr-graphs'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         json_content = json.loads(response.content.decode("utf8"))
 
         if self.support_data:
@@ -150,6 +155,10 @@ class TestViews(TestCase):
             self.assertGreater(
                 len(json_content['electricity_y']), 0
             )
+
+            self.assertIn('phases_l1_y', json_content)
+            self.assertIn('phases_l2_y', json_content)
+            self.assertIn('phases_l3_y', json_content)
 
         if self.support_gas:
             self.assertGreater(len(json_content['gas_x']), 0)

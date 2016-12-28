@@ -113,7 +113,8 @@ def verify_telegram_checksum(data):
     calculated_checksum = crc16_function(telegram)  # For example: 56708
 
     if telegram_checksum != calculated_checksum:
-        raise InvalidTelegramChecksum('{} (telegram) != {} (calculated)'.format(telegram_checksum, calculated_checksum))
+        raise InvalidTelegramChecksum('{} (telegram) != {} (calculated) {}'.format(
+            telegram_checksum, calculated_checksum, hex(calculated_checksum).upper()))
 
 
 def telegram_to_reading(data):  # noqa: C901
@@ -218,16 +219,25 @@ def telegram_to_reading(data):  # noqa: C901
     if parsed_reading['timestamp'] is None:
         parsed_reading['timestamp'] = timezone.now()
 
+    datalogger_settings = DataloggerSettings.get_solo()
+
+    # Optional tracking of phases, but since we already mapped this above, just remove it again... :]
+    if not datalogger_settings.track_phases:
+        parsed_reading.update({
+            'phase_currently_delivered_l1': None,
+            'phase_currently_delivered_l2': None,
+            'phase_currently_delivered_l3': None,
+        })
+
     # Now we need to split reading & statistics. So we split the dict here.
     reading_kwargs = {k: parsed_reading[k] for k in _get_reading_fields()}
     new_reading = DsmrReading.objects.create(**reading_kwargs)
 
     # Optional feature.
-    if DataloggerSettings.get_solo().track_meter_statistics:
+    if datalogger_settings.track_meter_statistics:
         statistics_kwargs = {k: parsed_reading[k] for k in _get_statistics_fields()}
         # There should already be one in database, created when migrating.
         MeterStatistics.objects.all().update(**statistics_kwargs)
-
     return new_reading
 
 

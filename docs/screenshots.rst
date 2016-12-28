@@ -3,6 +3,10 @@ Screenshots
 Below you can find some screenshots of the application. Please read the note below regarding solar panels and support for them.
 
 
+.. contents::
+    :depth: 2
+
+
 Solar panels & electricity returned
 -----------------------------------
 

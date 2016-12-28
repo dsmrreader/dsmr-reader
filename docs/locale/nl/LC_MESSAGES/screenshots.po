@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 14:32+0100\n"
-"PO-Revision-Date: 2016-12-20 14:33+0100\n"
+"POT-Creation-Date: 2016-12-22 21:09+0100\n"
+"PO-Revision-Date: 2016-12-22 21:10+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"Language-Team: \n"
 "Language: nl\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
@@ -31,11 +31,15 @@ msgstr ""
 "Hieronder staan enkele screenshots van de applicatie. Lees hieronder ook de "
 "notitie met betrekking tot zonnepanelen en de ondersteuning daarvoor."
 
-#: ../../screenshots.rst:7
+#: ../../screenshots.rst
+msgid "Contents"
+msgstr "Inhoud"
+
+#: ../../screenshots.rst:11
 msgid "Solar panels & electricity returned"
 msgstr "Zonnepanelen & teruglevering electriciteit"
 
-#: ../../screenshots.rst:8
+#: ../../screenshots.rst:12
 msgid ""
 "Note that **I do not have solar panels at home**, but the application however "
 "**does support plotting any electricity returned**."
@@ -44,7 +48,7 @@ msgstr ""
 "applicatie daar **wel ondersteuning voor heeft qua weergave teruglevering "
 "elektriciteit**."
 
-#: ../../screenshots.rst:10
+#: ../../screenshots.rst:14
 msgid ""
 "Therefor there aren't always graphs of them in the screenshots, but the users "
 "who do have them, will have additional green graphs rendered in the "
@@ -54,11 +58,11 @@ msgstr ""
 "gebruikers die ze wel thuis hebben, zullen overal een extra groene grafiek "
 "zien binnen de applicatie."
 
-#: ../../screenshots.rst:14
+#: ../../screenshots.rst:18
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ../../screenshots.rst:15
+#: ../../screenshots.rst:19
 msgid ""
 "The dashboard displays the latest information regarding any consumption of "
 "today and the current month so far."
@@ -66,11 +70,11 @@ msgstr ""
 "Het dashboard weergeeft de meest recente informatie over je energieverbruik "
 "van vandaag en de lopende maand tot nu toe."
 
-#: ../../screenshots.rst:23
+#: ../../screenshots.rst:27
 msgid "Archive"
 msgstr "Archief"
 
-#: ../../screenshots.rst:24
+#: ../../screenshots.rst:28
 msgid ""
 "The archive allows you to go back to any moment tracked. The data can be "
 "plotted either on day, month or year level."
@@ -79,19 +83,19 @@ msgstr ""
 "gemeten is met de applicatie. Gegevens kunnen getoond worden op verschillende "
 "detailniveaus: per dag, per maand en per jaar."
 
-#: ../../screenshots.rst:32
+#: ../../screenshots.rst:36
 msgid "Trends"
 msgstr "Trends"
 
-#: ../../screenshots.rst:33
+#: ../../screenshots.rst:37
 msgid "Trends are an average summary of your daily consumption and habits."
 msgstr "Trends weergeven je gemiddelde energieverbruik en gewoontes."
 
-#: ../../screenshots.rst:41
+#: ../../screenshots.rst:45
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../../screenshots.rst:42
+#: ../../screenshots.rst:46
 msgid ""
 "The statistics page will display the current state of your meter and the "
 "energy prices currently apply (if any)."
@@ -99,20 +103,20 @@ msgstr ""
 "De statistiekenpagina weergeeft de huidige staat van je slimme meter en de "
 "huidige energietarieven (wanneer van toepassing)."
 
-#: ../../screenshots.rst:50
+#: ../../screenshots.rst:54
 msgid "Compare"
 msgstr "Vergelijk"
 
-#: ../../screenshots.rst:51
+#: ../../screenshots.rst:55
 msgid "This page allows you to compare two days, months or years tracked before."
 msgstr ""
 "Met deze pagina vergelijk je eenvoudig twee dagen, maanden of jaren met elkaar."
 
-#: ../../screenshots.rst:59
+#: ../../screenshots.rst:63
 msgid "Status"
 msgstr "Status"
 
-#: ../../screenshots.rst:60
+#: ../../screenshots.rst:64
 msgid ""
 "The status page will show the 'health' of the application and any data "
 "tracked. If there are any problems regarding data handling, they should be "
@@ -122,11 +126,11 @@ msgstr ""
 "dataverwerking. Mochten er problemen zijn met het verzamelen van gegevens dan "
 "zou dat hier zichtbaar moeten zijn."
 
-#: ../../screenshots.rst:68
+#: ../../screenshots.rst:72
 msgid "Export"
 msgstr "Exporteren"
 
-#: ../../screenshots.rst:69
+#: ../../screenshots.rst:73
 msgid ""
 "Want to export day totals or hourly data to Excel? This page allows you to "
 "export the data in .CSV format."
@@ -134,11 +138,11 @@ msgstr ""
 "Wil je alle dag- of uurtotalen exporteren om in Excel te bekijken? Dat kan via "
 "deze pagina door ze te exporteren in .CSV-formaat."
 
-#: ../../screenshots.rst:77
+#: ../../screenshots.rst:81
 msgid "Settings"
 msgstr "instellingen"
 
-#: ../../screenshots.rst:78
+#: ../../screenshots.rst:82
 msgid ""
 "The project is written using Django and some of it's backend pages are "
 "displayed below."
@@ -146,7 +150,7 @@ msgstr ""
 "Het project is gemaakt met Django en hieronder staan enkele beheerderspagina's "
 "daarvan."
 
-#: ../../screenshots.rst:80
+#: ../../screenshots.rst:84
 msgid ""
 "The application has quite some features, such are temperature tracking, "
 "automated backups and Dropbox intergration. This page displays the status of "
@@ -156,19 +160,19 @@ msgstr ""
 "bijhouden, geautomatiseerde back-ups en Dropbox-integratie. Op deze pagina kun "
 "je een overzicht vinden van alle instellingen."
 
-#: ../../screenshots.rst:87
+#: ../../screenshots.rst:91
 msgid "Here you may manage your energy prices:"
 msgstr "Hier kun je je energieprijzen beheren:"
 
-#: ../../screenshots.rst:93
+#: ../../screenshots.rst:97
 msgid "This allows you to alter your backup settings:"
 msgstr "Hiermee beheer je de instellingen voor je back-ups:"
 
-#: ../../screenshots.rst:99
+#: ../../screenshots.rst:103
 msgid "Pick your own colors for the graphs displayed:"
 msgstr "Kies je eigen kleuren voor de grafieken:"
 
-#: ../../screenshots.rst:105
+#: ../../screenshots.rst:109
 msgid ""
 "The application supports the daily export of your gas meter positions (if any) "
 "to your personal mindergas.nl account."
@@ -176,7 +180,7 @@ msgstr ""
 "De applicatie ondersteunt het dagelijks exporteren van je gasmeterstanden naar "
 "je eigen account bij mindergas.nl."
 
-#: ../../screenshots.rst:111
+#: ../../screenshots.rst:115
 msgid ""
 "There are several additional backend pages for the other configuration options "
 "as well."

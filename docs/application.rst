@@ -1,7 +1,10 @@
-
-
 Using the application
 =====================
+
+
+.. contents::
+    :depth: 2
+
 
 DSMR 2.x (legacy)
 -----------------

@@ -1,4 +1,5 @@
 from decimal import Decimal
+from time import sleep
 import random
 
 from django.core.management.base import BaseCommand, CommandError
@@ -39,6 +40,8 @@ class Command(BaseCommand):
         factor = Decimal(random.random())  # Between 0.0 and 1.0, change every day.
         print('Using existing consumption as base, multiplied by {}'.format(factor))
 
+        sleep(1)  # Allow to abort when random number sucks.
+
         print('Altering readings... (might take quite some time)')
         DsmrReading.objects.all().order_by('-pk').update(
             electricity_returned_1=models.F('electricity_delivered_1') * factor,
@@ -51,6 +54,9 @@ class Command(BaseCommand):
             returned_1=models.F('delivered_1') * factor,
             returned_2=models.F('delivered_2') * factor,
             currently_returned=models.F('currently_delivered') * factor,
+            phase_currently_delivered_l1=models.F('currently_delivered') * factor,  # Split.
+            phase_currently_delivered_l2=models.F('currently_delivered') * (1 - factor),  # Remainder of split.
+            phase_currently_delivered_l3=0.005,  # Weird constant, to keep it simple.
         )
 
         print('Altering hour statistics...')

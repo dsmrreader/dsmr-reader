@@ -1,6 +1,12 @@
 Changelog
 =========
 
+
+.. contents::
+    :depth: 2
+
+
+
 Upgrading
 ^^^^^^^^^
 Please make sure you have a fresh **database backup** before upgrading! Upgrading is very easy due to a builtin mechanism. 
@@ -25,10 +31,11 @@ v1.5.0 - 2017-01-xx
   - If you are indeed still running ``< v0.13 (β)``, please upgrade to ``v1.4`` first (!), followed by an upgrade to ``v1.5``. 
 
 - Verify telegrams' CRC (`#188 <https://github.com/dennissiemensma/dsmr-reader/issues/188>`_).
-- Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-reader/issues/127>`_).
 - Display last 24 hours on dashboard (`#164 <https://github.com/dennissiemensma/dsmr-reader/issues/164>`_).
-- Weather graph not showing when no gas data is available (`#170 <https://github.com/dennissiemensma/dsmr-reader/issues/170>`_).
 - Status page visualisation (`#172 <https://github.com/dennissiemensma/dsmr-reader/issues/172>`_).
+- Store and display phases consumption (`#161 <https://github.com/dennissiemensma/dsmr-reader/issues/161>`_).
+- Weather graph not showing when no gas data is available (`#170 <https://github.com/dennissiemensma/dsmr-reader/issues/170>`_).
+- Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-reader/issues/127>`_).
 - Improve Statistics page performance (`#173 <https://github.com/dennissiemensma/dsmr-reader/issues/173>`_).
 - Version checker at github (`#166 <https://github.com/dennissiemensma/dsmr-reader/issues/166>`_).
 - Remove required login for dismissal of in-app notifications (`#179 <https://github.com/dennissiemensma/dsmr-reader/issues/179>`_).

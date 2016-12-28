@@ -8,15 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-18 22:09+0200\n"
+"POT-Creation-Date: 2016-12-22 21:09+0100\n"
 "PO-Revision-Date: 2016-04-07 21:57+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
-"Language: nl\n"
+"Generated-By: Babel 2.3.4\n"
 
 #: ../../licence.rst:2
 msgid "Licence (GNU GPLv3)"
@@ -26,32 +25,36 @@ msgstr "Licentie (GNU GPLv3)"
 msgid "**Copyright (C) 2015/2016 Dennis Siemensma**"
 msgstr ""
 
-#: ../../licence.rst:7
-msgid "GNU GENERAL PUBLIC LICENSE"
-msgstr ""
-
-#: ../../licence.rst:9
-msgid "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007"
+#: ../../licence.rst
+msgid "Licence"
 msgstr ""
 
 #: ../../licence.rst:12
+msgid "GNU GENERAL PUBLIC LICENSE"
+msgstr ""
+
+#: ../../licence.rst:14
+msgid "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007"
+msgstr ""
+
+#: ../../licence.rst:17
 msgid ""
 "Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/> "
 "Everyone is permitted to copy and distribute verbatim copies of this "
 "license document, but changing it is not allowed."
 msgstr ""
 
-#: ../../licence.rst:17
+#: ../../licence.rst:22
 msgid "Preamble"
 msgstr ""
 
-#: ../../licence.rst:19
+#: ../../licence.rst:24
 msgid ""
 "The GNU General Public License is a free, copyleft license for software "
 "and other kinds of works."
 msgstr ""
 
-#: ../../licence.rst:22
+#: ../../licence.rst:27
 msgid ""
 "The licenses for most software and other practical works are designed to "
 "take away your freedom to share and change the works.  By contrast, the "
@@ -63,7 +66,7 @@ msgid ""
 "your programs, too."
 msgstr ""
 
-#: ../../licence.rst:31
+#: ../../licence.rst:36
 msgid ""
 "When we speak of free software, we are referring to freedom, not price.  "
 "Our General Public Licenses are designed to make sure that you have the "
@@ -73,7 +76,7 @@ msgid ""
 " that you know you can do these things."
 msgstr ""
 
-#: ../../licence.rst:38
+#: ../../licence.rst:43
 msgid ""
 "To protect your rights, we need to prevent others from denying you these "
 "rights or asking you to surrender the rights.  Therefore, you have "
@@ -81,7 +84,7 @@ msgid ""
 "you modify it: responsibilities to respect the freedom of others."
 msgstr ""
 
-#: ../../licence.rst:43
+#: ../../licence.rst:48
 msgid ""
 "For example, if you distribute copies of such a program, whether gratis "
 "or for a fee, you must pass on to the recipients the same freedoms that "
@@ -90,14 +93,14 @@ msgid ""
 "rights."
 msgstr ""
 
-#: ../../licence.rst:49
+#: ../../licence.rst:54
 msgid ""
 "Developers that use the GNU GPL protect your rights with two steps: (1) "
 "assert copyright on the software, and (2) offer you this License giving "
 "you legal permission to copy, distribute and/or modify it."
 msgstr ""
 
-#: ../../licence.rst:53
+#: ../../licence.rst:58
 msgid ""
 "For the developers' and authors' protection, the GPL clearly explains "
 "that there is no warranty for this free software.  For both users' and "
@@ -106,7 +109,7 @@ msgid ""
 "authors of previous versions."
 msgstr ""
 
-#: ../../licence.rst:59
+#: ../../licence.rst:64
 msgid ""
 "Some devices are designed to deny users access to install or run modified"
 " versions of the software inside them, although the manufacturer can do "
@@ -120,7 +123,7 @@ msgid ""
 "to protect the freedom of users."
 msgstr ""
 
-#: ../../licence.rst:70
+#: ../../licence.rst:75
 msgid ""
 "Finally, every program is threatened constantly by software patents. "
 "States should not allow patents to restrict development and use of "
@@ -130,38 +133,38 @@ msgid ""
 "patents cannot be used to render the program non-free."
 msgstr ""
 
-#: ../../licence.rst:77
+#: ../../licence.rst:82
 msgid ""
 "The precise terms and conditions for copying, distribution and "
 "modification follow."
 msgstr ""
 
-#: ../../licence.rst:81
+#: ../../licence.rst:86
 msgid "TERMS AND CONDITIONS"
 msgstr ""
 
-#: ../../licence.rst:84
+#: ../../licence.rst:89
 msgid "0. Definitions."
 msgstr ""
 
-#: ../../licence.rst:86
+#: ../../licence.rst:91
 msgid "\"This License\" refers to version 3 of the GNU General Public License."
 msgstr ""
 
-#: ../../licence.rst:88
+#: ../../licence.rst:93
 msgid ""
 "\"Copyright\" also means copyright-like laws that apply to other kinds of"
 " works, such as semiconductor masks."
 msgstr ""
 
-#: ../../licence.rst:91
+#: ../../licence.rst:96
 msgid ""
 "\"The Program\" refers to any copyrightable work licensed under this "
 "License.  Each licensee is addressed as \"you\".  \"Licensees\" and "
 "\"recipients\" may be individuals or organizations."
 msgstr ""
 
-#: ../../licence.rst:95
+#: ../../licence.rst:100
 msgid ""
 "To \"modify\" a work means to copy from or adapt all or part of the work "
 "in a fashion requiring copyright permission, other than the making of an "
@@ -169,13 +172,13 @@ msgid ""
 "earlier work or a work \"based on\" the earlier work."
 msgstr ""
 
-#: ../../licence.rst:100
+#: ../../licence.rst:105
 msgid ""
 "A \"covered work\" means either the unmodified Program or a work based on"
 " the Program."
 msgstr ""
 
-#: ../../licence.rst:103
+#: ../../licence.rst:108
 msgid ""
 "To \"propagate\" a work means to do anything with it that, without "
 "permission, would make you directly or secondarily liable for "
@@ -185,14 +188,14 @@ msgid ""
 "public, and in some countries other activities as well."
 msgstr ""
 
-#: ../../licence.rst:110
+#: ../../licence.rst:115
 msgid ""
 "To \"convey\" a work means any kind of propagation that enables other "
 "parties to make or receive copies.  Mere interaction with a user through "
 "a computer network, with no transfer of a copy, is not conveying."
 msgstr ""
 
-#: ../../licence.rst:114
+#: ../../licence.rst:119
 msgid ""
 "An interactive user interface displays \"Appropriate Legal Notices\" to "
 "the extent that it includes a convenient and prominently visible feature "
@@ -204,18 +207,18 @@ msgid ""
 "item in the list meets this criterion."
 msgstr ""
 
-#: ../../licence.rst:124
+#: ../../licence.rst:129
 msgid "1. Source Code."
 msgstr ""
 
-#: ../../licence.rst:126
+#: ../../licence.rst:131
 msgid ""
 "The \"source code\" for a work means the preferred form of the work for "
 "making modifications to it.  \"Object code\" means any non-source form of"
 " a work."
 msgstr ""
 
-#: ../../licence.rst:130
+#: ../../licence.rst:135
 msgid ""
 "A \"Standard Interface\" means an interface that either is an official "
 "standard defined by a recognized standards body, or, in the case of "
@@ -223,7 +226,7 @@ msgid ""
 "widely used among developers working in that language."
 msgstr ""
 
-#: ../../licence.rst:135
+#: ../../licence.rst:140
 msgid ""
 "The \"System Libraries\" of an executable work include anything, other "
 "than the work as a whole, that (a) is included in the normal form of "
@@ -237,7 +240,7 @@ msgid ""
 "or an object code interpreter used to run it."
 msgstr ""
 
-#: ../../licence.rst:146
+#: ../../licence.rst:151
 msgid ""
 "The \"Corresponding Source\" for a work in object code form means all the"
 " source code needed to generate, install, and (for an executable work) "
@@ -253,21 +256,21 @@ msgid ""
 "parts of the work."
 msgstr ""
 
-#: ../../licence.rst:159
+#: ../../licence.rst:164
 msgid ""
 "The Corresponding Source need not include anything that users can "
 "regenerate automatically from other parts of the Corresponding Source."
 msgstr ""
 
-#: ../../licence.rst:163
+#: ../../licence.rst:168
 msgid "The Corresponding Source for a work in source code form is that same work."
 msgstr ""
 
-#: ../../licence.rst:167
+#: ../../licence.rst:172
 msgid "2. Basic Permissions."
 msgstr ""
 
-#: ../../licence.rst:169
+#: ../../licence.rst:174
 msgid ""
 "All rights granted under this License are granted for the term of "
 "copyright on the Program, and are irrevocable provided the stated "
@@ -278,7 +281,7 @@ msgid ""
 "rights of fair use or other equivalent, as provided by copyright law."
 msgstr ""
 
-#: ../../licence.rst:177
+#: ../../licence.rst:182
 msgid ""
 "You may make, run and propagate covered works that you do not convey, "
 "without conditions so long as your license otherwise remains in force.  "
@@ -292,18 +295,18 @@ msgid ""
 "copyrighted material outside their relationship with you."
 msgstr ""
 
-#: ../../licence.rst:188
+#: ../../licence.rst:193
 msgid ""
 "Conveying under any other circumstances is permitted solely under the "
 "conditions stated below.  Sublicensing is not allowed; section 10 makes "
 "it unnecessary."
 msgstr ""
 
-#: ../../licence.rst:193
+#: ../../licence.rst:198
 msgid "3. Protecting Users' Legal Rights From Anti-Circumvention Law."
 msgstr ""
 
-#: ../../licence.rst:195
+#: ../../licence.rst:200
 msgid ""
 "No covered work shall be deemed part of an effective technological "
 "measure under any applicable law fulfilling obligations under article 11 "
@@ -311,7 +314,7 @@ msgid ""
 " prohibiting or restricting circumvention of such measures."
 msgstr ""
 
-#: ../../licence.rst:201
+#: ../../licence.rst:206
 msgid ""
 "When you convey a covered work, you waive any legal power to forbid "
 "circumvention of technological measures to the extent such circumvention "
@@ -322,11 +325,11 @@ msgid ""
 "technological measures."
 msgstr ""
 
-#: ../../licence.rst:210
+#: ../../licence.rst:215
 msgid "4. Conveying Verbatim Copies."
 msgstr ""
 
-#: ../../licence.rst:212
+#: ../../licence.rst:217
 msgid ""
 "You may convey verbatim copies of the Program's source code as you "
 "receive it, in any medium, provided that you conspicuously and "
@@ -337,30 +340,30 @@ msgid ""
 " this License along with the Program."
 msgstr ""
 
-#: ../../licence.rst:220
+#: ../../licence.rst:225
 msgid ""
 "You may charge any price or no price for each copy that you convey, and "
 "you may offer support or warranty protection for a fee."
 msgstr ""
 
-#: ../../licence.rst:224
+#: ../../licence.rst:229
 msgid "5. Conveying Modified Source Versions."
 msgstr ""
 
-#: ../../licence.rst:226
+#: ../../licence.rst:231
 msgid ""
 "You may convey a work based on the Program, or the modifications to "
 "produce it from the Program, in the form of source code under the terms "
 "of section 4, provided that you also meet all of these conditions:"
 msgstr ""
 
-#: ../../licence.rst:230
+#: ../../licence.rst:235
 msgid ""
 "a) The work must carry prominent notices stating that you modified it, "
 "and giving a relevant date."
 msgstr ""
 
-#: ../../licence.rst:233
+#: ../../licence.rst:238
 msgid ""
 "b) The work must carry prominent notices stating that it is released "
 "under this License and any conditions added under section 7.  This "
@@ -368,7 +371,7 @@ msgid ""
 "notices\"."
 msgstr ""
 
-#: ../../licence.rst:238
+#: ../../licence.rst:243
 msgid ""
 "c) You must license the entire work, as a whole, under this License to "
 "anyone who comes into possession of a copy.  This License will therefore "
@@ -379,7 +382,7 @@ msgid ""
 "received it."
 msgstr ""
 
-#: ../../licence.rst:246
+#: ../../licence.rst:251
 msgid ""
 "d) If the work has interactive user interfaces, each must display "
 "Appropriate Legal Notices; however, if the Program has interactive "
@@ -387,7 +390,7 @@ msgid ""
 "not make them do so."
 msgstr ""
 
-#: ../../licence.rst:251
+#: ../../licence.rst:256
 msgid ""
 "A compilation of a covered work with other separate and independent "
 "works, which are not by their nature extensions of the covered work, and "
@@ -399,11 +402,11 @@ msgid ""
 "does not cause this License to apply to the other parts of the aggregate."
 msgstr ""
 
-#: ../../licence.rst:262
+#: ../../licence.rst:267
 msgid "6. Conveying Non-Source Forms."
 msgstr ""
 
-#: ../../licence.rst:264
+#: ../../licence.rst:269
 msgid ""
 "You may convey a covered work in object code form under the terms of "
 "sections 4 and 5, provided that you also convey the machine-readable "
@@ -411,7 +414,7 @@ msgid ""
 "ways:"
 msgstr ""
 
-#: ../../licence.rst:269
+#: ../../licence.rst:274
 msgid ""
 "a) Convey the object code in, or embodied in, a physical product "
 "(including a physical distribution medium), accompanied by the "
@@ -419,7 +422,7 @@ msgid ""
 "for software interchange."
 msgstr ""
 
-#: ../../licence.rst:274
+#: ../../licence.rst:279
 msgid ""
 "b) Convey the object code in, or embodied in, a physical product "
 "(including a physical distribution medium), accompanied by a written "
@@ -433,7 +436,7 @@ msgid ""
 "Corresponding Source from a network server at no charge."
 msgstr ""
 
-#: ../../licence.rst:286
+#: ../../licence.rst:291
 msgid ""
 "c) Convey individual copies of the object code with a copy of the written"
 " offer to provide the Corresponding Source.  This alternative is allowed "
@@ -441,7 +444,7 @@ msgid ""
 "object code with such an offer, in accord with subsection 6b."
 msgstr ""
 
-#: ../../licence.rst:292
+#: ../../licence.rst:297
 msgid ""
 "d) Convey the object code by offering access from a designated place "
 "(gratis or for a charge), and offer equivalent access to the "
@@ -457,7 +460,7 @@ msgid ""
 "requirements."
 msgstr ""
 
-#: ../../licence.rst:305
+#: ../../licence.rst:310
 msgid ""
 "e) Convey the object code using peer-to-peer transmission, provided you "
 "inform other peers where the object code and Corresponding Source of the "
@@ -465,14 +468,14 @@ msgid ""
 "subsection 6d."
 msgstr ""
 
-#: ../../licence.rst:310
+#: ../../licence.rst:315
 msgid ""
 "A separable portion of the object code, whose source code is excluded "
 "from the Corresponding Source as a System Library, need not be included "
 "in conveying the object code work."
 msgstr ""
 
-#: ../../licence.rst:314
+#: ../../licence.rst:319
 msgid ""
 "A \"User Product\" is either (1) a \"consumer product\", which means any "
 "tangible personal property which is normally used for personal, family, "
@@ -488,7 +491,7 @@ msgid ""
 " represent the only significant mode of use of the product."
 msgstr ""
 
-#: ../../licence.rst:327
+#: ../../licence.rst:332
 msgid ""
 "\"Installation Information\" for a User Product means any methods, "
 "procedures, authorization keys, or other information required to install "
@@ -499,7 +502,7 @@ msgid ""
 "modification has been made."
 msgstr ""
 
-#: ../../licence.rst:335
+#: ../../licence.rst:340
 msgid ""
 "If you convey an object code work under this section in, or with, or "
 "specifically for use in, a User Product, and the conveying occurs as part"
@@ -513,7 +516,7 @@ msgid ""
 "ROM)."
 msgstr ""
 
-#: ../../licence.rst:346
+#: ../../licence.rst:351
 msgid ""
 "The requirement to provide Installation Information does not include a "
 "requirement to continue to provide support service, warranty, or updates "
@@ -524,7 +527,7 @@ msgid ""
 "protocols for communication across the network."
 msgstr ""
 
-#: ../../licence.rst:354
+#: ../../licence.rst:359
 msgid ""
 "Corresponding Source conveyed, and Installation Information provided, in "
 "accord with this section must be in a format that is publicly documented "
@@ -533,11 +536,11 @@ msgid ""
 "copying."
 msgstr ""
 
-#: ../../licence.rst:361
+#: ../../licence.rst:366
 msgid "7. Additional Terms."
 msgstr ""
 
-#: ../../licence.rst:363
+#: ../../licence.rst:368
 msgid ""
 "\"Additional permissions\" are terms that supplement the terms of this "
 "License by making exceptions from one or more of its conditions. "
@@ -549,7 +552,7 @@ msgid ""
 "without regard to the additional permissions."
 msgstr ""
 
-#: ../../licence.rst:372
+#: ../../licence.rst:377
 msgid ""
 "When you convey a copy of a covered work, you may at your option remove "
 "any additional permissions from that copy, or from any part of it.  "
@@ -559,46 +562,46 @@ msgid ""
 "have or can give appropriate copyright permission."
 msgstr ""
 
-#: ../../licence.rst:379
+#: ../../licence.rst:384
 msgid ""
 "Notwithstanding any other provision of this License, for material you add"
 " to a covered work, you may (if authorized by the copyright holders of "
 "that material) supplement the terms of this License with terms:"
 msgstr ""
 
-#: ../../licence.rst:383
+#: ../../licence.rst:388
 msgid ""
 "a) Disclaiming warranty or limiting liability differently from the terms "
 "of sections 15 and 16 of this License; or"
 msgstr ""
 
-#: ../../licence.rst:386
+#: ../../licence.rst:391
 msgid ""
 "b) Requiring preservation of specified reasonable legal notices or author"
 " attributions in that material or in the Appropriate Legal Notices "
 "displayed by works containing it; or"
 msgstr ""
 
-#: ../../licence.rst:390
+#: ../../licence.rst:395
 msgid ""
 "c) Prohibiting misrepresentation of the origin of that material, or "
 "requiring that modified versions of such material be marked in reasonable"
 " ways as different from the original version; or"
 msgstr ""
 
-#: ../../licence.rst:394
+#: ../../licence.rst:399
 msgid ""
 "d) Limiting the use for publicity purposes of names of licensors or "
 "authors of the material; or"
 msgstr ""
 
-#: ../../licence.rst:397
+#: ../../licence.rst:402
 msgid ""
 "e) Declining to grant rights under trademark law for use of some trade "
 "names, trademarks, or service marks; or"
 msgstr ""
 
-#: ../../licence.rst:400
+#: ../../licence.rst:405
 msgid ""
 "f) Requiring indemnification of licensors and authors of that material by"
 " anyone who conveys the material (or modified versions of it) with "
@@ -607,7 +610,7 @@ msgid ""
 " authors."
 msgstr ""
 
-#: ../../licence.rst:406
+#: ../../licence.rst:411
 msgid ""
 "All other non-permissive additional terms are considered \"further "
 "restrictions\" within the meaning of section 10.  If the Program as you "
@@ -620,7 +623,7 @@ msgid ""
 "relicensing or conveying."
 msgstr ""
 
-#: ../../licence.rst:416
+#: ../../licence.rst:421
 msgid ""
 "If you add terms to a covered work in accord with this section, you must "
 "place, in the relevant source files, a statement of the additional terms "
@@ -628,18 +631,18 @@ msgid ""
 "applicable terms."
 msgstr ""
 
-#: ../../licence.rst:421
+#: ../../licence.rst:426
 msgid ""
 "Additional terms, permissive or non-permissive, may be stated in the form"
 " of a separately written license, or stated as exceptions; the above "
 "requirements apply either way."
 msgstr ""
 
-#: ../../licence.rst:426
+#: ../../licence.rst:431
 msgid "8. Termination."
 msgstr ""
 
-#: ../../licence.rst:428
+#: ../../licence.rst:433
 msgid ""
 "You may not propagate or modify a covered work except as expressly "
 "provided under this License.  Any attempt otherwise to propagate or "
@@ -648,7 +651,7 @@ msgid ""
 "paragraph of section 11)."
 msgstr ""
 
-#: ../../licence.rst:434
+#: ../../licence.rst:439
 msgid ""
 "However, if you cease all violation of this License, then your license "
 "from a particular copyright holder is reinstated (a) provisionally, "
@@ -658,7 +661,7 @@ msgid ""
 "after the cessation."
 msgstr ""
 
-#: ../../licence.rst:441
+#: ../../licence.rst:446
 msgid ""
 "Moreover, your license from a particular copyright holder is reinstated "
 "permanently if the copyright holder notifies you of the violation by some"
@@ -667,7 +670,7 @@ msgid ""
 "you cure the violation prior to 30 days after your receipt of the notice."
 msgstr ""
 
-#: ../../licence.rst:448
+#: ../../licence.rst:453
 msgid ""
 "Termination of your rights under this section does not terminate the "
 "licenses of parties who have received copies or rights from you under "
@@ -676,11 +679,11 @@ msgid ""
 "material under section 10."
 msgstr ""
 
-#: ../../licence.rst:455
+#: ../../licence.rst:460
 msgid "9. Acceptance Not Required for Having Copies."
 msgstr ""
 
-#: ../../licence.rst:457
+#: ../../licence.rst:462
 msgid ""
 "You are not required to accept this License in order to receive or run a "
 "copy of the Program.  Ancillary propagation of a covered work occurring "
@@ -692,11 +695,11 @@ msgid ""
 "indicate your acceptance of this License to do so."
 msgstr ""
 
-#: ../../licence.rst:467
+#: ../../licence.rst:472
 msgid "10. Automatic Licensing of Downstream Recipients."
 msgstr ""
 
-#: ../../licence.rst:469
+#: ../../licence.rst:474
 msgid ""
 "Each time you convey a covered work, the recipient automatically receives"
 " a license from the original licensors, to run, modify and propagate that"
@@ -704,7 +707,7 @@ msgid ""
 "compliance by third parties with this License."
 msgstr ""
 
-#: ../../licence.rst:474
+#: ../../licence.rst:479
 msgid ""
 "An \"entity transaction\" is a transaction transferring control of an "
 "organization, or substantially all assets of one, or subdividing an "
@@ -717,7 +720,7 @@ msgid ""
 "get it with reasonable efforts."
 msgstr ""
 
-#: ../../licence.rst:484
+#: ../../licence.rst:489
 msgid ""
 "You may not impose any further restrictions on the exercise of the rights"
 " granted or affirmed under this License.  For example, you may not impose"
@@ -728,18 +731,18 @@ msgid ""
 "the Program or any portion of it."
 msgstr ""
 
-#: ../../licence.rst:493
+#: ../../licence.rst:498
 msgid "11. Patents."
 msgstr ""
 
-#: ../../licence.rst:495
+#: ../../licence.rst:500
 msgid ""
 "A \"contributor\" is a copyright holder who authorizes use under this "
 "License of the Program or a work on which the Program is based.  The work"
 " thus licensed is called the contributor's \"contributor version\"."
 msgstr ""
 
-#: ../../licence.rst:499
+#: ../../licence.rst:504
 msgid ""
 "A contributor's \"essential patent claims\" are all patent claims owned "
 "or controlled by the contributor, whether already acquired or hereafter "
@@ -751,7 +754,7 @@ msgid ""
 " a manner consistent with the requirements of this License."
 msgstr ""
 
-#: ../../licence.rst:509
+#: ../../licence.rst:514
 msgid ""
 "Each contributor grants you a non-exclusive, worldwide, royalty-free "
 "patent license under the contributor's essential patent claims, to make, "
@@ -759,7 +762,7 @@ msgid ""
 " the contents of its contributor version."
 msgstr ""
 
-#: ../../licence.rst:514
+#: ../../licence.rst:519
 msgid ""
 "In the following three paragraphs, a \"patent license\" is any express "
 "agreement or commitment, however denominated, not to enforce a patent "
@@ -769,7 +772,7 @@ msgid ""
 "patent against the party."
 msgstr ""
 
-#: ../../licence.rst:521
+#: ../../licence.rst:526
 msgid ""
 "If you convey a covered work, knowingly relying on a patent license, and "
 "the Corresponding Source of the work is not available for anyone to copy,"
@@ -786,7 +789,7 @@ msgid ""
 " believe are valid."
 msgstr ""
 
-#: ../../licence.rst:535
+#: ../../licence.rst:540
 msgid ""
 "If, pursuant to or in connection with a single transaction or "
 "arrangement, you convey, or propagate by procuring conveyance of, a "
@@ -797,7 +800,7 @@ msgid ""
 "based on it."
 msgstr ""
 
-#: ../../licence.rst:543
+#: ../../licence.rst:548
 msgid ""
 "A patent license is \"discriminatory\" if it does not include within the "
 "scope of its coverage, prohibits the exercise of, or is conditioned on "
@@ -815,18 +818,18 @@ msgid ""
 "to 28 March 2007."
 msgstr ""
 
-#: ../../licence.rst:558
+#: ../../licence.rst:563
 msgid ""
 "Nothing in this License shall be construed as excluding or limiting any "
 "implied license or other defenses to infringement that may otherwise be "
 "available to you under applicable patent law."
 msgstr ""
 
-#: ../../licence.rst:563
+#: ../../licence.rst:568
 msgid "12. No Surrender of Others' Freedom."
 msgstr ""
 
-#: ../../licence.rst:565
+#: ../../licence.rst:570
 msgid ""
 "If conditions are imposed on you (whether by court order, agreement or "
 "otherwise) that contradict the conditions of this License, they do not "
@@ -840,11 +843,11 @@ msgid ""
 "Program."
 msgstr ""
 
-#: ../../licence.rst:576
+#: ../../licence.rst:581
 msgid "13. Use with the GNU Affero General Public License."
 msgstr ""
 
-#: ../../licence.rst:578
+#: ../../licence.rst:583
 msgid ""
 "Notwithstanding any other provision of this License, you have permission "
 "to link or combine any covered work with a work licensed under version 3 "
@@ -856,11 +859,11 @@ msgid ""
 " such."
 msgstr ""
 
-#: ../../licence.rst:588
+#: ../../licence.rst:593
 msgid "14. Revised Versions of this License."
 msgstr ""
 
-#: ../../licence.rst:590
+#: ../../licence.rst:595
 msgid ""
 "The Free Software Foundation may publish revised and/or new versions of "
 "the GNU General Public License from time to time.  Such new versions will"
@@ -868,7 +871,7 @@ msgid ""
 " address new problems or concerns."
 msgstr ""
 
-#: ../../licence.rst:595
+#: ../../licence.rst:600
 msgid ""
 "Each version is given a distinguishing version number.  If the Program "
 "specifies that a certain numbered version of the GNU General Public "
@@ -880,7 +883,7 @@ msgid ""
 "Foundation."
 msgstr ""
 
-#: ../../licence.rst:604
+#: ../../licence.rst:609
 msgid ""
 "If the Program specifies that a proxy can decide which future versions of"
 " the GNU General Public License can be used, that proxy's public "
@@ -888,18 +891,18 @@ msgid ""
 " that version for the Program."
 msgstr ""
 
-#: ../../licence.rst:609
+#: ../../licence.rst:614
 msgid ""
 "Later license versions may give you additional or different permissions."
 "  However, no additional obligations are imposed on any author or "
 "copyright holder as a result of your choosing to follow a later version."
 msgstr ""
 
-#: ../../licence.rst:615
+#: ../../licence.rst:620
 msgid "15. Disclaimer of Warranty."
 msgstr ""
 
-#: ../../licence.rst:617
+#: ../../licence.rst:622
 msgid ""
 "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY "
 "APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT "
@@ -911,11 +914,11 @@ msgid ""
 " THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION."
 msgstr ""
 
-#: ../../licence.rst:627
+#: ../../licence.rst:632
 msgid "16. Limitation of Liability."
 msgstr ""
 
-#: ../../licence.rst:629
+#: ../../licence.rst:634
 msgid ""
 "IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING "
 "WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS"
@@ -928,11 +931,11 @@ msgid ""
 "POSSIBILITY OF SUCH DAMAGES."
 msgstr ""
 
-#: ../../licence.rst:640
+#: ../../licence.rst:645
 msgid "17. Interpretation of Sections 15 and 16."
 msgstr ""
 
-#: ../../licence.rst:642
+#: ../../licence.rst:647
 msgid ""
 "If the disclaimer of warranty and limitation of liability provided above "
 "cannot be given local legal effect according to their terms, reviewing "
@@ -942,7 +945,7 @@ msgid ""
 "return for a fee."
 msgstr ""
 
-#: ../../licence.rst:649
+#: ../../licence.rst:654
 msgid "END OF TERMS AND CONDITIONS"
 msgstr ""
 

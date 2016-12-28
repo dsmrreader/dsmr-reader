@@ -2,6 +2,10 @@ Frequently Asked Questions (FAQ)
 ================================
 
 
+.. contents::
+    :depth: 2
+
+
 How can I update my application?
 --------------------------------
 The version you are running is always based on the 'latest' version of the application, called the `master` branch.
@@ -22,7 +26,7 @@ It will make sure to check, fetch and apply any changes released. Summary of dep
 - PIP update requirements.
 - Apply any database migrations.
 - Sync static files to Nginx folder.
-- Reload Gunicorn application server.
+- Reload Gunicorn application server (web interface) and backend processes (such as the datalogger).
 - Clear any caches.
 
 
@@ -91,7 +95,7 @@ In the DSMR-reader settings for the Usagenotifications, tick the Send Notificati
 
 *How do I obtain my API key for NotifyMyAndroid?*
 
-After you have downloaded NotifyMyAndroid and signed up for an account you should be able to `login to your account <https://www.notifymyandroid.com/index.jsp>`_. 
+After you have downloaded NotifyMyAndroid and signed up for an account you should be able to `login to your NotifyMyAndroid account <https://www.notifymyandroid.com/index.jsp>`_. 
 Now go to "`My Account <https://www.notifymyandroid.com/account.jsp>`_", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, please click **"Generate New Key"**.
 
 .. image:: _static/faq/notifications-notify-my-android-create-key.png
@@ -107,7 +111,7 @@ When a new key is generated, you will see it immediatly. Your key is listed like
 
 *How do I obtain my API key for Prowl?*
 
-After you have downloaded Prowl and signed up for an account you should be able to `login to your account <https://www.prowlapp.com/login.php>`_. 
+After you have downloaded Prowl and signed up for an account you should be able to `login to your Prowl account <https://www.prowlapp.com/login.php>`_. 
 Now go to "`API Keys <https://www.prowlapp.com/api_settings.php>`_", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, input a name and click **"Generate Key"**.
 
 .. image:: _static/faq/notifications-prowl-create-key.png
@@ -129,6 +133,24 @@ In that case your energy supplier will simply merge both high and low tariffs to
 
 This application displays separate tariffs by default, but supports merging them to a single one as well.
 Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option ``Merge electricity tariffs`` in the frontend configuration.
+
+
+I want to see my electricity phases as well
+-------------------------------------------
+Since ``DSMR-reader v1.5`` it's possible to track your ``P+`` (consumption) phases as well. You will need to enable this in the ``Datalogger configuration``.
+There is a setting called ``Track electricity phases``. When active, this will log the current usage of those phases and plot these on the Dashboard page.
+
+Please keep in mind:
+
+- This will **not work retroactively**. The datalogger always discards all data not used.
+- This feature will only work when your smart meter is connected to **three phases**. Even when having the setting enabled.
+- When having tracking phases enabled, you should see a button in the Dashboard called ``Display electricity phases``. Click on it to show the graph.
+
+You should see something similar to:
+
+.. image:: _static/screenshots/phases.png
+    :target: _static/screenshots/phases.png
+    :alt: Phases
 
 
 Recalculate prices retroactively

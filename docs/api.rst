@@ -3,6 +3,9 @@ API
 The application has a simple, one-command API for remote dataloggers.
 
 
+.. contents::
+
+
 Configuration
 -------------
 

@@ -37,6 +37,30 @@ class ElectricityConsumption(models.Model):
         help_text=_("Actual electricity power received (-P) in 1 Watt resolution"),
         db_index=True
     )
+    phase_currently_delivered_l1 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L1 (+P) in W resolution"),
+        db_index=True
+    )
+    phase_currently_delivered_l2 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L2 (+P) in W resolution"),
+        db_index=True
+    )
+    phase_currently_delivered_l3 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L3 (+P) in W resolution"),
+        db_index=True
+    )
 
     def __str__(self):
         return '{} | {}: {} Watt'.format(

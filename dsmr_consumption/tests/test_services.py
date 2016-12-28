@@ -33,6 +33,13 @@ class TestServices(InterceptStdoutMixin, TestCase):
         consumption_settings.compactor_grouping_type = ConsumptionSettings.COMPACTOR_GROUPING_BY_READING
         consumption_settings.save()
 
+        self.assertFalse(
+            ElectricityConsumption.objects.filter(
+                phase_currently_delivered_l2__isnull=False,
+                phase_currently_delivered_l3__isnull=False
+            ).exists()
+        )
+
         dsmr_consumption.services.compact_all()
 
         self.assertTrue(DsmrReading.objects.processed().exists())
@@ -43,6 +50,13 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(GasConsumption.objects.count(), 2)
         else:
             self.assertEqual(GasConsumption.objects.count(), 0)
+
+        self.assertTrue(
+            ElectricityConsumption.objects.filter(
+                phase_currently_delivered_l2__isnull=False,
+                phase_currently_delivered_l3__isnull=False
+            ).exists()
+        )
 
     def test_duplicate_processing(self):
         """ Duplicate readings should not crash the compactor when not grouping. """

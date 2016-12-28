@@ -37,6 +37,9 @@ def compact(dsmr_reading):
             returned_2=dsmr_reading.electricity_returned_2,
             currently_delivered=dsmr_reading.electricity_currently_delivered,
             currently_returned=dsmr_reading.electricity_currently_returned,
+            phase_currently_delivered_l1=dsmr_reading.phase_currently_delivered_l1,
+            phase_currently_delivered_l2=dsmr_reading.phase_currently_delivered_l2,
+            phase_currently_delivered_l3=dsmr_reading.phase_currently_delivered_l3,
         )
     # Grouping by minute requires some distinction and history checking.
     else:
@@ -60,7 +63,10 @@ def compact(dsmr_reading):
                 max_delivered_1=Max('electricity_delivered_1'),
                 max_delivered_2=Max('electricity_delivered_2'),
                 max_returned_1=Max('electricity_returned_1'),
-                max_returned_2=Max('electricity_returned_2')
+                max_returned_2=Max('electricity_returned_2'),
+                avg_phase_delivered_l1=Avg('phase_currently_delivered_l1'),
+                avg_phase_delivered_l2=Avg('phase_currently_delivered_l2'),
+                avg_phase_delivered_l3=Avg('phase_currently_delivered_l3'),
             )
 
             # This instance is the average/max and combined result.
@@ -72,6 +78,9 @@ def compact(dsmr_reading):
                 returned_2=grouped_reading['max_returned_2'],
                 currently_delivered=grouped_reading['avg_delivered'],
                 currently_returned=grouped_reading['avg_returned'],
+                phase_currently_delivered_l1=grouped_reading['avg_phase_delivered_l1'],
+                phase_currently_delivered_l2=grouped_reading['avg_phase_delivered_l2'],
+                phase_currently_delivered_l3=grouped_reading['avg_phase_delivered_l3'],
             )
 
     # Gas is optional.
