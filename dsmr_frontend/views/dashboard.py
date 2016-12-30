@@ -124,9 +124,15 @@ class DashboardXhrGraphs(View):
         gas = gas[::-1]
         temperature = temperature[::-1]
 
+        # By default we only display the time, scrolling should enable a more verbose x-axis.
+        graph_x_format = 'DSMR_GRAPH_SHORT_TIME_FORMAT'
+
+        if units_offset > 0:
+            graph_x_format = 'DSMR_GRAPH_LONG_TIME_FORMAT'
+
         data['electricity_x'] = [
             formats.date_format(
-                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
+                timezone.localtime(x.read_at), graph_x_format
             )
             for x in electricity
         ]
