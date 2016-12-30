@@ -164,6 +164,14 @@ Statistics for each day are generated once, the day after. However, you can flus
 The application will delete all statistics and (slowly) regenerate them in the background. Just make sure the source data is still there.
 
 
+I'm not seeing any gas readings
+-------------------------------
+Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render. 
+The gas meter positions are only be updated once per hour (for DSMR v4).
+The Status page will give you insight in this as well.
+
+
+
 Feature/bug report
 ------------------
 *How can I propose a feature or report a bug I've found?*
