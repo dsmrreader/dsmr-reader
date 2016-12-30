@@ -205,7 +205,7 @@
                 <header class="panel-heading">
                     {% trans "Recent electricity consumed (Watt)" %}
                 </header>
-                <div class="panel-body" style="height: 250px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="electricity-chart"></canvas>
                 </div>
 
@@ -228,7 +228,7 @@
                 <header class="panel-heading">
                     {% trans "Recent distribution of electricity phases P+ (Watt)" %}
                 </header>
-                <div class="panel-body" style="height: 250px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="electricity-phases-chart"></canvas>
                 </div>
             </div>
@@ -238,7 +238,8 @@
     
     {% if capabilities.electricity %}
     <div class="row text-center">
-         {% trans 'Scroll electricity graph(s)' %} <small>({% trans 'You can scroll back until one week ago.' %})</small>
+         <div>{% trans 'Scroll electricity graph(s)' %}</div> 
+         <small>({% trans 'You can scroll back until one week ago.' %})</small>
          <br /><br />
     </div>
     <div class="row text-center">
@@ -260,7 +261,7 @@
                 <header class="panel-heading">
                     {% trans "Recent electricity returned (Watt)" %}
                 </header>
-                <div class="panel-body" style="height: 250px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="electricity-returned-chart"></canvas>
                 </div>
             </div>
@@ -275,7 +276,7 @@
                 <header class="panel-heading">
                     {% trans "Recent gas consumed (m<sup>3</sup>)" %}
                 </header>
-                <div class="panel-body" style="height: 250px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="gas-chart"></canvas>
                 </div>
             </div>
@@ -290,7 +291,7 @@
                 <header class="panel-heading">
                     {% trans "Recent temperatures (&deg;C)" %}
                 </header>
-                <div class="panel-body" style="height: 250px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="temperature-chart"></canvas>
                 </div>
             </div>
