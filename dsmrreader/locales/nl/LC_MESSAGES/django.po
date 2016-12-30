@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 20:58+0100\n"
-"PO-Revision-Date: 2016-12-28 19:39+0100\n"
+"POT-Creation-Date: 2016-12-30 21:10+0100\n"
+"PO-Revision-Date: 2016-12-30 21:11+0100\n"
 "Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -462,9 +462,6 @@ msgstr "Documentatie / FAQ"
 msgid "Feedback"
 msgstr "Feedback"
 
-msgid "By"
-msgstr "Door"
-
 msgid "View repository on Github"
 msgstr "Bekijk repository op Github"
 
@@ -546,8 +543,8 @@ msgstr "Recente distributie elektriciteitsfasen P+ (Watt)"
 msgid "Scroll electricity graph(s)"
 msgstr "Scroll door elektriciteitsgrafiek(en)"
 
-msgid "You can scroll back until one week ago."
-msgstr "Je kunt tot een week terugscrollen."
+msgid "You can scroll back until one week ago"
+msgstr "Je kunt tot een week terugscrollen"
 
 msgid "Go backward by 60 units"
 msgstr "Ga 60 eenheden achteruit"
@@ -1121,6 +1118,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "By"
+#~ msgstr "Door"
 
 #~ msgid "The number of telegrams this application has rejected due to invalid CRC checksum testing"
 #~ msgstr "Het aantal DSMR telegrammen dat genegeerd wegens een foutieve CRC checksum"
