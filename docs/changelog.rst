@@ -17,7 +17,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
     - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
 
 
-v1.5.0 - 2017-01-xx
+v1.5.0 - 2017-01-01
 ^^^^^^^^^^^^^^^^^^^
 
 .. warning:: **Change in Python support** 
