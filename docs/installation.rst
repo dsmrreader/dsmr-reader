@@ -15,7 +15,12 @@ Dependencies & requirements
 - **RaspberryPi 2 or 3**
 
  - The RaspberryPi 1 tends to be **too slow** for this project, as it requires multi core processing.
- - You can also run it on a server near your smart meter, as long as it satisfies the other requirements as well.
+
+.. note::
+
+    - **Alternative #1**: You can also run it on any server near your smart meter, as long as it satisfies the other requirements.
+    
+    - **Alternative #2**: The application supports receiving P1 telegrams using an API, so you can also run it on a server outside your home. (:doc:`API DOCS<api>`)
 
 - **Raspbian OS**
 
@@ -23,7 +28,9 @@ Dependencies & requirements
 
 - **Python 3.4+**
 
- - Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
+.. warning::
+
+    Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
 
 - **PostgreSQL 9+ or MySQL / MariaDB 5.5+**
 
