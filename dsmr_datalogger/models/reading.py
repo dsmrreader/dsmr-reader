@@ -50,6 +50,27 @@ class DsmrReading(models.Model):
         decimal_places=3,
         help_text=_("Actual electricity power received (-P) in 1 Watt resolution")
     )
+    phase_currently_delivered_l1 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L1 (+P) in W resolution")
+    )
+    phase_currently_delivered_l2 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L2 (+P) in W resolution")
+    )
+    phase_currently_delivered_l3 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L3 (+P) in W resolution")
+    )
     extra_device_timestamp = models.DateTimeField(
         null=True,
         default=None,
@@ -132,6 +153,10 @@ class MeterStatistics(SingletonModel):
         help_text=_("Number of voltage swells in phase L3 (polyphase meters only)"),
         null=True,
         default=None
+    )
+    rejected_telegrams = models.IntegerField(
+        help_text=_("Number of rejected telegrams due to invalid CRC checksum"),
+        default=0
     )
 
     class Meta:

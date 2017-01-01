@@ -12,7 +12,8 @@
         <link href="{% static 'dsmr_frontend/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}" rel='stylesheet' type='text/css'>
-        <link href="{% static 'dsmr_frontend/css/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/css/style.css' %}?r=2" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/css/dsmrreader.css' %}" rel="stylesheet" type="text/css" />
         {% endblock %}
         
         <link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicon.png' %}">
@@ -54,7 +55,7 @@
                         {% block header_right %}{% endblock %}
                         
 					    <li>
-					        <a href="http://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/latest/changelog.html" target="_blank" title="{% trans 'View releases' %}">
+					        <a href="{% url 'frontend:status' %}" title="{% trans 'View releases' %}">
 					            <small>v{{ dsmr_version }}</small>
 					        </a>
 					    </li>
@@ -111,7 +112,7 @@
                         </li>
                         <li>
 				            <a href="{% url 'admin:index' %}">
-				                <i class="fa fa-cogs"></i> <span>{% trans "Configuration" %} &nbsp; <i class="fa fa-lock" title="{% trans 'Authentication required' %}"></i></span>
+				                <i class="fa fa-sliders"></i> <span>{% trans "Configuration" %} &nbsp; <i class="fa fa-lock" title="{% trans 'Authentication required' %}"></i></span>
 				            </a>
 			            </li>
                         <li>
@@ -130,22 +131,24 @@
                     </ul>
                 </section>
                 <!-- /.sidebar -->
+                
+                <div class="row copyright">
+                    <small>
+	                    <a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}">Dennis Siemensma</a> &copy; 2015 - {% now "Y" %}
+                    </small>
+                    <br />
+                    <small>{% trans "Theme by" %} <a href="http://web-apps.ninja/" target="_blank">web-apps.ninja</a> &copy; 2015</small>
+                </div>
             </aside>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
 	            <div class="clearfix"></div>
 				{% block content %}{% endblock %}
-				
-				<div class="row" style="text-align: center; color: grey;">
-		            <small>&ldquo;{% trans "DSMR (Dutch Smart Meter Requirements) reader" %}&rdquo; {% trans "created by" %} <a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}">Dennis Siemensma</a> &copy; 2015 - 2016</small>
-		            |
-		            <small>{% trans "Theme created by" %} <a href="http://web-apps.ninja/" target="_blank">web-apps.ninja</a> &copy; 2015</small>
-				</div>
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
 		{% block javascript %}
-        <script src="{% static 'dsmr_frontend/js/jquery-1.9.1.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'dsmr_frontend/js/jquery-3.1.1.min.js' %}" type="text/javascript"></script>
 
         <script src="{% static 'dsmr_frontend/js/bootstrap.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'dsmr_frontend/js/Director/app.js' %}?v=2" type="text/javascript"></script>

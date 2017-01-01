@@ -1,13 +1,35 @@
 Credits
 =======
-Software used and contributers are listed below. Please note and respect their licences as well, if any apply.
+
+
+Special thanks for supplying code contributions
+-----------------------------------------------
+
+- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ 
+
+
+Also many thanks to the contributions of
+----------------------------------------
+Listed in any order, sorted by name.
+
+- `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
+- `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
+- `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
+- `Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_
+- `Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_ 
+- `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
+- Koen Volleberg
+- `Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_
+- `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
+- `Sevickson <https://github.com/sevickson>`_
+- "`WatskeBart <https://github.com/WatskeBart>`_"
+
 
 Software
 --------
+Please note and respect their licences, if any, as well.
 
 - `Raspbian <https://www.raspbian.org/>`_
-
-- `Raspbian minimal unattended netinstaller <https://github.com/debian-pi/raspbian-ua-netinst>`_
 
 - `Django Project <https://www.djangoproject.com/>`_
 
@@ -41,27 +63,19 @@ Software
 
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
 
-
-Testers & contributors
-----------------------
-
-- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ (`Github profile <https://github.com/jeroenpeters1986>`_)
-- `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_ (`Github profile <https://github.com/danielterhorst>`_)
-- `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_ (`Github profile <https://github.com/sdeleeuw>`_)
-- "WatskeBart" (`Github profile <https://github.com/WatskeBart>`_)
-- `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
-- `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
-- Sevickson (`Github profile <https://github.com/sevickson>`_)
-- Koen Volleberg (`Github profile <https://github.com/kvolleberg>`_)
+- `Buienradar <http://www.buienradar.nl>`_
 
 
-DSMR help
----------
+Misc
+----
 
 Dutch Smart Meter reading specifications, data cables, examples and hints:
 
 - `Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_
 
-- `Joost van der Linde <https://sites.google.com/site/nta8130p1smartmeter/home>`_
+- `Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard.nl/>`_
 
 - `SOS Solutions <https://www.sossolutions.nl/>`_
+
+- `Nico Di Rocco <http://nrocco.github.io/>`_
+

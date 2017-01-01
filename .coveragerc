@@ -1,0 +1,8 @@
+[run]
+branch = True
+include = ./*
+
+omit = ./*/__init__.py
+  ./*/tests/*
+  ./*/migrations/*
+  ./dsmr_backend/mixins.py

@@ -7,3 +7,4 @@ from dsmr_weather.models.settings import WeatherSettings
 @admin.register(WeatherSettings)
 class WeatherSettingsAdmin(SingletonModelAdmin):
     list_display = ('track', 'buienradar_station')
+    readonly_fields = ('next_sync', )

@@ -16,7 +16,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
-        self.stdout.write('Broadcasting backend signal @ {}...'.format(timezone.localtime(timezone.now())))
+        self.stdout.write('{}: Calling backend services'.format(timezone.localtime(timezone.now())))
 
         # send_robust() guarantees the every listener receives this signal.
         responses = dsmr_backend.signals.backend_called.send_robust(None)

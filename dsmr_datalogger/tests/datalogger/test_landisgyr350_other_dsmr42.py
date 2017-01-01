@@ -7,6 +7,7 @@ import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
@@ -39,7 +40,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-2:24.1.0(003)\r\n",
             "0-2:96.1.0(xxxxxxx)\r\n",
             "0-2:24.2.1(160317220000W)(01438.997*m3)\r\n",
-            "!D625\n",
+            "!888A\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -61,6 +62,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
 
     def test_reading_values(self):
         """ Test whether dsmr_datalogger reads the correct values. """
+        DataloggerSettings.get_solo()
+        DataloggerSettings.objects.all().update(track_phases=True)
+
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
@@ -79,6 +83,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             datetime(2016, 3, 17, 21, 0, 0, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('1438.997'))
+        self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.187'))
+        self.assertEqual(reading.phase_currently_delivered_l2, None)
+        self.assertEqual(reading.phase_currently_delivered_l3, None)
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()

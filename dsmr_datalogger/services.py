@@ -1,13 +1,16 @@
 import re
 
 from serial.serialutil import SerialException
+from django.db.models.expressions import F
 from django.utils import timezone
 from django.conf import settings
 import serial
+import crcmod
 import pytz
 
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_datalogger.exceptions import InvalidTelegramChecksum
 from dsmr_datalogger.dsmr import DSMR_MAPPING
 
 
@@ -18,11 +21,13 @@ def get_dsmr_connection_parameters():
             'baudrate': 9600,
             'bytesize': serial.SEVENBITS,
             'parity': serial.PARITY_EVEN,
+            'crc': False,
         },
         DataloggerSettings.DSMR_VERSION_4: {
             'baudrate': 115200,
             'bytesize': serial.EIGHTBITS,
             'parity': serial.PARITY_NONE,
+            'crc': True,
         },
     }
 
@@ -86,20 +91,47 @@ def read_telegram():
             return buffer
 
 
-def telegram_to_reading(data):
+def verify_telegram_checksum(data):
+    """
+    Verifies telegram by checking it's CRC. Raises exception on failure. DSMR docs state:
+    CRC is a CRC16 value calculated over the preceding characters in the data message (from / to ! using the polynomial)
+    """
+    matches = re.search(r'^(/[^!]+!)([A-Z0-9]{4,4})', data)
+
+    try:
+        content, crc = matches.groups()
+    except AttributeError:
+        # AttributeError: 'NoneType' object has no attribute 'groups'. This happens where there is not support for CRC.
+        raise InvalidTelegramChecksum('CRC not found')
+
+    telegram = content.encode('ascii')  # TypeError: Unicode-objects must be encoded before calculating a CRC
+
+    # DSMR docs: "The CRC value is represented as 4 hexadecimal characters (MSB first)". So just flip it back to int.
+    telegram_checksum = int('0x{}'.format(crc), 0)  # For example: DD84 -> 0xDD84 -> 56708
+
+    crc16_function = crcmod.predefined.mkPredefinedCrcFun('crc16')
+    calculated_checksum = crc16_function(telegram)  # For example: 56708
+
+    if telegram_checksum != calculated_checksum:
+        raise InvalidTelegramChecksum('{} (telegram) != {} (calculated) {}'.format(
+            telegram_checksum, calculated_checksum, hex(calculated_checksum).upper()))
+
+
+def telegram_to_reading(data):  # noqa: C901
     """
     Converts a P1 telegram to a DSMR reading, which will be stored in database.
     """
 
     def _get_reading_fields():
-        reading_fields = DsmrReading._meta.get_all_field_names()
+        reading_fields = [x.name for x in DsmrReading._meta.get_fields()]
         reading_fields.remove('id')
         reading_fields.remove('processed')
         return reading_fields
 
     def _get_statistics_fields():
-        reading_fields = MeterStatistics._meta.get_all_field_names()
+        reading_fields = [x.name for x in MeterStatistics._meta.get_fields()]
         reading_fields.remove('id')
+        reading_fields.remove('rejected_telegrams')
         return reading_fields
 
     def _convert_legacy_dsmr_gas_line(parsed_reading, current_line, next_line):
@@ -125,6 +157,18 @@ def telegram_to_reading(data):
         )
         parsed_reading['extra_device_delivered'] = legacy_gas_result.group(2)
         return parsed_reading
+
+    # Discard CRC check when any support is lacking anyway.
+    connection_parameters = get_dsmr_connection_parameters()
+
+    if connection_parameters['crc']:
+        try:
+            # Verify telegram by checking it's CRC.
+            verify_telegram_checksum(data=data)
+        except InvalidTelegramChecksum:
+            # Hook to keep track of failed readings count.
+            MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
+            raise
 
     # Defaults all fields to NULL.
     parsed_reading = {k: None for k in _get_reading_fields() + _get_statistics_fields()}
@@ -175,16 +219,25 @@ def telegram_to_reading(data):
     if parsed_reading['timestamp'] is None:
         parsed_reading['timestamp'] = timezone.now()
 
+    datalogger_settings = DataloggerSettings.get_solo()
+
+    # Optional tracking of phases, but since we already mapped this above, just remove it again... :]
+    if not datalogger_settings.track_phases:
+        parsed_reading.update({
+            'phase_currently_delivered_l1': None,
+            'phase_currently_delivered_l2': None,
+            'phase_currently_delivered_l3': None,
+        })
+
     # Now we need to split reading & statistics. So we split the dict here.
     reading_kwargs = {k: parsed_reading[k] for k in _get_reading_fields()}
     new_reading = DsmrReading.objects.create(**reading_kwargs)
 
     # Optional feature.
-    if DataloggerSettings.get_solo().track_meter_statistics:
+    if datalogger_settings.track_meter_statistics:
         statistics_kwargs = {k: parsed_reading[k] for k in _get_statistics_fields()}
         # There should already be one in database, created when migrating.
         MeterStatistics.objects.all().update(**statistics_kwargs)
-
     return new_reading
 
 

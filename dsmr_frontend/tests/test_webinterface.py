@@ -9,13 +9,14 @@ from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
-import dsmr_consumption.services
-from dsmr_frontend.forms import ExportAsCsvForm
 from dsmr_frontend.models.message import Notification
+from dsmr_frontend.forms import ExportAsCsvForm
+import dsmr_consumption.services
 
 
 class TestViews(TestCase):
@@ -42,7 +43,7 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next=/admin/'
+            response['Location'], '/admin/login/?next=/admin/'
         )
 
     @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
@@ -77,31 +78,10 @@ class TestViews(TestCase):
             reverse('{}:dashboard'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('track_temperature', response.context)
 
         if self.support_data:
-            self.assertGreater(
-                len(json.loads(response.context['electricity_x'])), 0
-            )
-            self.assertGreater(
-                len(json.loads(response.context['electricity_y'])), 0
-            )
-
-            self.assertTrue(response.context['track_temperature'])
             self.assertIn('consumption', response.context)
-
-        if self.support_gas:
-            self.assertGreater(len(json.loads(response.context['gas_x'])), 0)
-            self.assertGreater(len(json.loads(response.context['gas_y'])), 0)
-
-        # Test whether reverse graphs work.
-        frontend_settings = FrontendSettings.get_solo()
-        frontend_settings.reverse_dashboard_graphs = True
-        frontend_settings.save()
-
-        response = self.client.get(
-            reverse('{}:dashboard'.format(self.namespace))
-        )
-        self.assertEqual(response.status_code, 200)
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard_xhr_header(self, now_mock):
@@ -134,6 +114,67 @@ class TestViews(TestCase):
                     self.assertEqual(
                         json_response['latest_electricity_cost'], '0.23' if current_tariff == 1 else '0.46'
                     )
+
+    @mock.patch('django.utils.timezone.now')
+    def test_dashboard_xhr_graphs(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
+
+        if self.support_data:
+            weather_settings = WeatherSettings.get_solo()
+            weather_settings.track = True
+            weather_settings.save()
+
+            # Test with phases feature switched on as well.
+            DataloggerSettings.get_solo()
+            DataloggerSettings.objects.update(track_phases=True)
+
+        # Send seperate offset as well.
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-graphs'.format(self.namespace)),
+            data={'units_offset': 24}
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+
+        # Send invalid offset.
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-graphs'.format(self.namespace)),
+            data={'units_offset': 'abc'}
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-graphs'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+        json_content = json.loads(response.content.decode("utf8"))
+
+        if self.support_data:
+            self.assertGreater(
+                len(json_content['electricity_x']), 0
+            )
+            self.assertGreater(
+                len(json_content['electricity_y']), 0
+            )
+
+            self.assertIn('phases_l1_y', json_content)
+            self.assertIn('phases_l2_y', json_content)
+            self.assertIn('phases_l3_y', json_content)
+
+        if self.support_gas:
+            self.assertGreater(len(json_content['gas_x']), 0)
+            self.assertGreater(len(json_content['gas_y']), 0)
+
+    def test_dashboard_xhr_notification_read(self):
+        view_url = reverse('{}:dashboard-xhr-notification-read'.format(self.namespace))
+        notification = Notification.objects.create(message='TEST', redirect_to='fake')
+        self.assertFalse(notification.read)
+
+        response = self.client.post(view_url, data={'notification_id': notification.pk})
+        self.assertEqual(response.status_code, 200)
+
+        # Notification should be altered now.
+        notification.refresh_from_db()
+        self.assertTrue(notification.read)
 
     @mock.patch('django.utils.timezone.now')
     def test_archive(self, now_mock):
@@ -189,6 +230,19 @@ class TestViews(TestCase):
         if DsmrReading.objects.exists():
             self.assertIn('latest_reading', response.context)
 
+    def test_statistics_xhr_data(self):
+        response = self.client.get(
+            reverse('{}:statistics-xhr-data'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+        self.assertEqual(response['Content-Type'], 'application/json')
+
+        json_response = json.loads(response.content.decode("utf-8"))
+        self.assertIn('total_reading_count', json_response)
+        self.assertIn('slumber_consumption_watt', json_response)
+        self.assertIn('min_consumption_watt', json_response)
+        self.assertIn('max_consumption_watt', json_response)
+
     @mock.patch('django.utils.timezone.now')
     def test_trends(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
@@ -231,18 +285,37 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertIn('capabilities', response.context)
-        self.assertIn('total_reading_count', response.context)
         self.assertIn('unprocessed_readings', response.context)
 
+        if self.support_data:
+            self.assertIn('latest_day_statistics', response.context)
+            self.assertIn('days_since_latest_day_statistics', response.context)
+
         if 'latest_reading' in response.context:
-            self.assertIn('first_reading', response.context)
             self.assertIn('delta_since_latest_reading', response.context)
 
         if 'latest_ec' in response.context:
-            self.assertIn('delta_since_latest_ec', response.context)
+            self.assertIn('latest_ec', response.context)
+            self.assertIn('minutes_since_latest_ec', response.context)
 
         if 'latest_gc' in response.context:
-            self.assertIn('delta_since_latest_gc', response.context)
+            self.assertIn('latest_gc', response.context)
+            self.assertIn('hours_since_latest_gc', response.context)
+
+    @mock.patch('dsmr_backend.services.is_latest_version')
+    def test_status_xhr_update_checker(self, is_latest_version_mock):
+        for boolean in (True, False):
+            is_latest_version_mock.return_value = boolean
+
+            response = self.client.get(
+                reverse('{}:status-xhr-check-for-updates'.format(self.namespace))
+            )
+            self.assertEqual(response.status_code, 200, response.content)
+            self.assertEqual(response['Content-Type'], 'application/json')
+
+            json_response = json.loads(response.content.decode("utf-8"))
+            self.assertIn('update_available', json_response)
+            self.assertEqual(json_response['update_available'], not boolean)  # Inverted, because latest = no updates.
 
     def test_export(self):
         view_url = reverse('{}:export'.format(self.namespace))
@@ -250,7 +323,7 @@ class TestViews(TestCase):
         response = self.client.get(view_url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
+            response['Location'], 'admin/login/?next={}'.format(view_url)
         )
 
         # Login and retest
@@ -273,7 +346,7 @@ class TestViews(TestCase):
         response = self.client.post(view_url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
-            response['Location'], 'http://testserver/export/admin/login/?next={}'.format(view_url)
+            response['Location'], 'admin/login/?next={}'.format(view_url)
         )
 
         # Login and retest, without post data.
@@ -282,7 +355,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             # Invalid form redirects to previous page.
-            response['Location'], 'http://testserver{}'.format(
+            response['Location'], '{}'.format(
                 reverse('{}:export'.format(self.namespace))
             )
         )
@@ -297,28 +370,6 @@ class TestViews(TestCase):
         response = self.client.post(view_url, data=post_data)
         self.assertEqual(response.status_code, 200)
         io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
-
-    def test_notification_read(self):
-        view_url = reverse('{}:notification-read'.format(self.namespace))
-        notification = Notification.objects.create(message='TEST', redirect_to='fake')
-        self.assertFalse(notification.read)
-
-        # Check login required.
-        response = self.client.post(view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], 'http://testserver/admin/login/?next={}'.format(view_url)
-        )
-
-        # Login and retest.
-        self.client.login(username='testuser', password='passwd')
-        response = self.client.post(view_url)
-
-        response = self.client.post(view_url, data={'id': notification.pk})
-        self.assertEqual(response.status_code, 302)
-
-        # Notification should be altered now.
-        self.assertTrue(Notification.objects.get(pk=notification.pk).read)
 
     def test_read_the_docs_redirects(self):
         for current in ('docs', 'feedback'):

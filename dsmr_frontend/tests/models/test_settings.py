@@ -16,9 +16,6 @@ class TestSettings(TestCase):
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
-    def test_reverse_dashboard_graphs(self):
-        self.assertFalse(self.instance.reverse_dashboard_graphs)
-
     def test_merge_electricity_tariffs(self):
         self.assertFalse(self.instance.merge_electricity_tariffs)
 
@@ -36,6 +33,15 @@ class TestSettings(TestCase):
 
     def test_gas_delivered_color(self):
         self.assertEqual(self.instance.gas_delivered_color, '#FF851B')
+
+    def test_phase_delivered_l1_color(self):
+        self.assertEqual(self.instance.phase_delivered_l1_color, '#A47448')
+
+    def test_phase_delivered_l2_color(self):
+        self.assertEqual(self.instance.phase_delivered_l2_color, '#A4484E')
+
+    def test_phase_delivered_l3_color(self):
+        self.assertEqual(self.instance.phase_delivered_l3_color, '#A44882')
 
     def test_temperature_color(self):
         self.assertEqual(self.instance.temperature_color, '#0073B7')

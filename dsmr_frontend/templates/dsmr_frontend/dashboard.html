@@ -49,38 +49,42 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Notifications" %} &nbsp; <span class="badge badge-danger">{{ notifications.count }}</span>
+                    {% trans "Notifications" %}
                 </header>
                 <div class="panel-body">
                     {% for current_notification in notifications %}
                     <div class="alert alert-warning" role="alert">
-                        <form action="{% url 'frontend:notification-read' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="id" value="{{ current_notification.pk }}" />
-                            <button class="btn btn-sm btn-danger" title="{% trans 'Delete notification' %}"><i class="fa fa-trash"></i></button>
-                            &nbsp;
+                        <button class="btn btn-sm btn-danger delete-notification" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Delete notification' %}">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                        &nbsp;
 
-	                        {{ current_notification.message }}
+                        {% if current_notification.redirect_to %}
+                        <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}">{% trans "View page" %}</a>
+                        &nbsp;
+                        {% endif %}
 
-	                        {% if current_notification.redirect_to %}
-	                        &nbsp;
-	                        <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}">{% trans "View page" %}</a>
-	                        {% endif %}
-                        </form>
+                        {{ current_notification.message }}
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 
     {% if month_statistics %}
-    <div class="row consumption-block">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a id="month_statistics_button" class="btn btn-primary" href="#">{% trans "Display current month" %}</a>
+            <br /> <br />
+        </div>
+    </div>
+    <div class="row consumption-block xhr-hidden" id="month_statistics_holder">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "This month" %} <small>({% trans "until yesterday" %})</small>
+                    {% trans "Current month" %} <small>({% trans "until yesterday" %})</small>
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
@@ -93,28 +97,28 @@
                         {% if frontend_settings.merge_electricity_tariffs %}
 			            <tr>
 			                <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %}{% endif %}</td>
-			                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity_merged|default:'-' }} </span>{% endif %}</td>
-			                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity_returned_merged|default:'-' }}{% endif %}</span></td>
+			                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+			                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
 			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
 			            </tr>
 			            {% else %}
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 1 (low tariff)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity1|default:'-' }} </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity1_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity1_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 2 (high tariff)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity2|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity2_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity2_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% endif %}
                         {% if capabilities.gas %}
                         <tr>
                             <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ month_statistics.gas|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ month_statistics.gas|default:'-'|floatformat:2 }}</span></td>
                             <td>&nbsp;</td>
                             <td><span class="badge bg-black">{{ month_statistics.gas_cost|default:'-' }}</span></td>
                         </tr>
@@ -128,7 +132,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 
     {% if consumption %}
@@ -155,21 +159,21 @@
                         {% if frontend_settings.merge_electricity_tariffs %}
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity_merged|default:'-' }} </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity_returned_merged|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% else %}
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 1 (low tariff)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity1|default:'-' }} </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity1_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity1_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity 2 (high tariff)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity2|default:'-' }}{% endif %}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity2_returned|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity2_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% endif %}
@@ -177,7 +181,7 @@
                         {% if capabilities.gas %}
                         <tr>
                             <td> {% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ consumption.gas|default:'-' }}</span></td>
+                            <td><span class="badge bg-orange">{{ consumption.gas|default:'-'|floatformat:2 }}</span></td>
                             <td>&nbsp;</td>
                             <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
                         </tr>
@@ -191,22 +195,63 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
-    
+
     {% if capabilities.electricity %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Recent electricity consumed (watt)" %}
+                    {% trans "Recent electricity consumed (Watt)" %}
                 </header>
-                <div class="panel-body" style="height: 200px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="electricity-chart"></canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    
+    {% if datalogger_settings.track_phases and capabilities.multi_phases %}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a id="phases_button" class="btn btn-primary" href="#">{% trans "Display electricity phases" %}</a>
+            <br /> <br />
+        </div>
+    </div>
+    <div class="row xhr-hidden" id="phases_holder">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent distribution of electricity phases P+ (Watt)" %}
+                </header>
+                <div class="panel-body" style="height: 300px;">
+                    <canvas id="electricity-phases-chart"></canvas>
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
+    {% endif %}   
+    
+    {% if capabilities.electricity %}
+    <div class="row text-center">
+         <div>{% trans 'Scroll electricity graph(s)' %}</div> 
+         <small>({% trans 'You can scroll back until one week ago' %})</small>
+         <br /><br />
+    </div>
+    <div class="row text-center">
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="60" title="{% trans 'Go backward by 60 units' %}"><i class="fa fa-fast-backward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="30" title="{% trans 'Go backward by 30 units' %}"><i class="fa fa-step-backward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="5" title="{% trans 'Go backward by 5 units' %}"><i class="fa fa-backward"></i></a>
+        &nbsp;
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-5" title="{% trans 'Go forward by 5 units' %}"><i class="fa fa-forward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-30" title="{% trans 'Go forward by 30 units' %}"><i class="fa fa-step-forward"></i></a>
+        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-60" title="{% trans 'Go forward by 60 units' %}"><i class="fa fa-fast-forward"></i></a>
+    </div>
+    <br />
     {% endif %}
     
     {% if capabilities.electricity_returned %}
@@ -214,14 +259,14 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Recent electricity returned (watt)" %}
+                    {% trans "Recent electricity returned (Watt)" %}
                 </header>
-                <div class="panel-body" style="height: 200px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="electricity-returned-chart"></canvas>
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 
     {% if capabilities.gas %}
@@ -231,12 +276,12 @@
                 <header class="panel-heading">
                     {% trans "Recent gas consumed (m<sup>3</sup>)" %}
                 </header>
-                <div class="panel-body" style="height: 200px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="gas-chart"></canvas>
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
     
     {% if capabilities.weather %}
@@ -246,12 +291,12 @@
                 <header class="panel-heading">
                     {% trans "Recent temperatures (&deg;C)" %}
                 </header>
-                <div class="panel-body" style="height: 200px;">
+                <div class="panel-body" style="height: 300px;">
                     <canvas id="temperature-chart"></canvas>
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
+    </div>
     {% endif %}
 </section>
 {% endblock %}
@@ -259,44 +304,72 @@
 
 {% block javascript %}
 {{ block.super }}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart-2.4.0.min.js' %}"></script>
         <script type="text/javascript">
             var line_options = {
-                /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
-                pointHitDetectionRadius: 3,
-                pointDotRadius: 2.5,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
             }
-        
+            var g_chart_instances = {
+                electricity: undefined,
+                electricity_returned: undefined,
+                gas: undefined,
+                phases: undefined,
+                temperature: undefined,
+            }
+            var g_chart_offset = 0;
+            
             $(document).ready(function(){
+                $(".delete-notification").click(function(){
+                	var notification_id = $(this).attr("data-notification-id");
+                	$(this).html('<i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>')
+                	mark_notification_read(this, notification_id);
+                	return false
+                });
+                
+                $("#month_statistics_button").click(function(){
+                    $(this).parent().hide();
+                    $("#month_statistics_holder").show();
+                    return false
+                });                
+                
+                $("#phases_button").click(function(){
+                    $(this).parent().hide();
+                    $("#phases_holder").show();
+                    return false
+                });                
+                
+                $(".x-offset-control").click(function(){
+                    g_chart_offset += parseInt($(this).attr('data-offset'));
+                    
+                    /* Restrict range, server doesn't allow it either anyway. */
+                    if (g_chart_offset < 0)
+                   	{
+                    	g_chart_offset = 0;
+                   	}
+                    
+                    update_graphs();
+                    return false
+                });          
+                
                 Chart.defaults.global.responsive = true;
                 Chart.defaults.global.maintainAspectRatio = false;
                 Chart.defaults.global.animation = false;
                 Chart.defaults.global.segmentShowStroke = true;
                 
-            {% if capabilities.electricity %}
-                render_electricity_chart();
-            {% endif %}
-
-            {% if capabilities.electricity_returned %}
-                render_electricity_returned_chart();
-            {% endif %}
-            
-            {% if capabilities.gas %}
-                render_gas_chart();
-            {% endif %}
-
-            {% if capabilities.weather %}
-                render_temperature_chart();
-            {% endif %}
-            
                 /* Auto refresh. */
                 update_header();
-                setInterval(function(){ update_header(); }, 3000);
+                setInterval(function(){ update_header(); }, 2500);
+                
+                initialize_graphs();
             });
             
-            /**
-             * Updates the header.
-             */
+            /* Updates the header containing the current electricity usage or return. */
             function update_header()
             {
                 $("#header-loader").show();
@@ -317,97 +390,195 @@
                 });
             }
             
-       {% if capabilities.electricity %}
-            function render_electricity_chart()
+            function initialize_graphs()
             {
-                var data = {
-                    labels: {{ electricity_x|safe }},
-                    datasets: [{
-                        data: {{ electricity_y|safe }},
-                        label: "{% trans 'Electricity' %}",                     
-                        fillColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(255,0,0,1)"
-                    }]
-                };
-    
-                var ctx = $("#electricity-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#electricity-chart").parent().height();
-                new Chart(ctx).Line(data, line_options);
+                $.ajax({
+                    dataType: "json",
+                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?units_offset=" + g_chart_offset,
+                }).done(function(response) {
+                    if (response.capabilities.electricity)
+                    {
+                        render_chart(
+                            'electricity',
+                            "#electricity-chart",
+                            response.electricity_x,
+                            [{
+                                data: response.electricity_y,
+                                label: "{% trans 'Electricity' %}",                     
+                                backgroundColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},0.1)",
+                                borderColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
+                                pointColor: "rgba({{frontend_settings.electricity_delivered_color|hex_to_rgb}},1)",
+                                pointborderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                            }]
+                        );
+                    }
+
+                    if (response.capabilities.electricity_returned)
+                    {
+                    	render_chart(
+	                        'electricity_returned',
+	                        "#electricity-returned-chart",
+	                        response.electricity_x,
+	                        [{
+	                            data: response.electricity_returned_y,
+	                            label: "{% trans 'Electricity returned' %}",                     
+	                            backgroundColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
+	                            borderColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+	                            pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
+	                            pointborderColor: "#fff",
+	                            pointHoverBackgroundColor: "#fff",
+	                        }]
+                        );
+                    }
+                    
+                    if (response.capabilities.gas)
+                    {
+                    	render_chart(
+                            'gas',
+                            "#gas-chart",
+                            response.gas_x,
+	                    	[{
+	                            data: response.gas_y,
+	                            label: "{% trans 'Gas' %}",                     
+	                            backgroundColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
+	                            borderColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+	                            pointColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
+	                            pointborderColor: "#fff",
+	                            pointHoverBackgroundColor: "#fff",
+	                        }]
+	                    );
+                    }
+{% if datalogger_settings.track_phases and capabilities.multi_phases %}
+                    if (response.capabilities.multi_phases)
+                    {
+                        render_chart(
+                            'phases',
+                            "#electricity-phases-chart",
+                            response.electricity_x,
+                            [{
+                                data: response.phases_l1_y,
+                                label: "{% trans 'Phase L1' %}",                     
+                                backgroundColor: "rgba({{frontend_settings.phase_delivered_l1_color|hex_to_rgb}},0.1)",
+                                borderColor: "rgba({{frontend_settings.phase_delivered_l1_color|hex_to_rgb}},1)",
+                                pointColor: "rgba({{frontend_settings.phase_delivered_l1_color|hex_to_rgb}},1)",
+                                pointborderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                            },
+                            {
+                                data: response.phases_l2_y,
+                                label: "{% trans 'Phase L2' %}",                     
+                                backgroundColor: "rgba({{frontend_settings.phase_delivered_l2_color|hex_to_rgb}},0.1)",
+                                borderColor: "rgba({{frontend_settings.phase_delivered_l2_color|hex_to_rgb}},1)",
+                                pointColor: "rgba({{frontend_settings.phase_delivered_l2_color|hex_to_rgb}},1)",
+                                pointborderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                            },
+                            {
+                                data: response.phases_l3_y,
+                                label: "{% trans 'Phase L3' %}",                     
+                                backgroundColor: "rgba({{frontend_settings.phase_delivered_l3_color|hex_to_rgb}},0.1)",
+                                borderColor: "rgba({{frontend_settings.phase_delivered_l3_color|hex_to_rgb}},1)",
+                                pointColor: "rgba({{frontend_settings.phase_delivered_l3_color|hex_to_rgb}},1)",
+                                pointborderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                            }]
+                        );
+                    }
+{% endif %}
+                    
+                    if (response.capabilities.weather)
+                    {
+                        render_chart(
+                            'temperature',
+                            "#temperature-chart",
+                            response.temperature_x,
+                            [{
+                                data: response.temperature_y,
+                                label: "{% trans 'Temperature' %}",                       
+                                backgroundColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},0.1)",
+                                borderColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
+                                pointColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
+                                pointborderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                            }]
+                        );
+                    }
+                });
             }
-        {% endif %}
-        
-        {% if capabilities.electricity_returned %}
-             function render_electricity_returned_chart()
-             {
-                 var data = {
-                     labels: {{ electricity_x|safe }},
-                     datasets: [{
-                         data: {{ electricity_returned_y|safe }},
-                         label: "{% trans 'Electricity returned' %}",                     
-                         fillColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},0.1)",
-                         strokeColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                         pointColor: "rgba({{frontend_settings.electricity_returned_color|hex_to_rgb}},1)",
-                         pointStrokeColor: "#fff",
-                         pointHighlightFill: "#fff",
-                         pointHighlightStroke: "rgba(39,194,76,1)"
-                     }]
-                 };
-     
-                 var ctx = $("#electricity-returned-chart").get(0).getContext("2d");
-                 ctx.canvas.height = $("#electricity-returned-chart").parent().height();
-                 new Chart(ctx).Line(data, line_options);
-             }
-         {% endif %}
             
-        {% if capabilities.gas %}
-            function render_gas_chart()
+            /* Updates all graph information. */
+            function update_graphs()
+            {
+                $.ajax({
+                    dataType: "json",
+                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?units_offset=" + g_chart_offset,
+                }).done(function(response) {
+                    if (response.capabilities.electricity)
+                    {
+                    	update_chart("electricity", response.electricity_x, [response.electricity_y]);
+                    }
+
+                    if (response.capabilities.electricity_returned)
+                    {
+                    	update_chart("electricity_returned", response.electricity_x, [response.electricity_returned_y]);
+                    }
+                    
+{% if datalogger_settings.track_phases and capabilities.multi_phases %}
+                    if (response.capabilities.multi_phases)
+                   	{
+                        update_chart("phases", response.electricity_x, [response.phases_l1_y, response.phases_l2_y, response.phases_l3_y]);
+                   	}
+{% endif %}
+                });
+            }
+            
+            /* Mark a notification as read. */
+            function mark_notification_read(button_handle, notification_id)
+            {
+                $.ajax({
+                    dataType: "json",
+                    url: "{% url 'frontend:dashboard-xhr-notification-read' %}",
+                    type: "POST",
+                    data: {"notification_id": notification_id},
+                }).done(function(response) {
+                	$(button_handle).parent().remove();
+                });
+            }
+            
+            function update_chart(chart_key, data_x, datasets)
+            {
+                g_chart_instances[chart_key].data.labels = data_x;
+                
+                $.each(datasets, function (index, value) {
+	                g_chart_instances[chart_key].data.datasets[index].data = datasets[index];
+                });
+
+                g_chart_instances[chart_key].update();
+            }
+            
+            function render_chart(global_instance_key, chart_id, labels, datasets)
             {
                 var data = {
-                    labels: {{ gas_x|safe }},
-                    datasets: [{
-                        data: {{ gas_y|safe }},
-                        label: "{% trans 'Gas' %}",                     
-                        fillColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.gas_delivered_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(150,150,150,1)"
-                    }]
+                    labels: labels,
+                    datasets: datasets
                 };
+                
+                if (g_chart_instances[global_instance_key])
+                {
+                    g_chart_instances[global_instance_key].destroy();
+                }
 
-                var ctx = $("#gas-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#gas-chart").parent().height();
-                new Chart(ctx).Line(data, line_options);
-            }
-            {% endif %}
+                var ctx = $(chart_id).get(0).getContext("2d");
+                ctx.canvas.height = $(chart_id).parent().height();
+                
+                g_chart_instances[global_instance_key] = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: line_options
+                });
+            } 
 
-        {% if capabilities.weather %}
-            function render_temperature_chart()
-            {
-                var data = {
-                    labels: {{ temperature_x|safe }},
-                    datasets: [{
-                        data: {{ temperature_y|safe }},
-                        label: "{% trans 'Temperature' %}",                       
-                        fillColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},0.1)",
-                        strokeColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
-                        pointColor: "rgba({{frontend_settings.temperature_color|hex_to_rgb}},1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(150,150,150,1)"
-                    }]
-                };
-
-                var ctx = $("#temperature-chart").get(0).getContext("2d");
-                ctx.canvas.height = $("#temperature-chart").parent().height();
-                new Chart(ctx).Line(data, line_options);
-            }
-        {% endif %}
-        </script>
+            </script>
 
 {% endblock %}

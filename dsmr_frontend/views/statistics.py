@@ -1,4 +1,8 @@
-from django.views.generic.base import TemplateView
+import json
+
+from django.contrib.humanize.templatetags.humanize import intcomma
+from django.views.generic.base import TemplateView, View
+from django.http.response import HttpResponse
 from django.utils import timezone
 
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
@@ -29,8 +33,19 @@ class Statistics(TemplateView):
         except EnergySupplierPrice.DoesNotExist:
             pass
 
-        # Use stats
-        context_data['slumber_consumption_watt'] = dsmr_consumption.services.calculate_slumber_consumption_watt()
-        context_data['min_max_consumption_watt'] = dsmr_consumption.services.calculate_min_max_consumption_watt()
-
         return context_data
+
+
+class StatisticsXhrData(View):
+    """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
+    def get(self, request):
+        min_max_consumption_watt = dsmr_consumption.services.calculate_min_max_consumption_watt()
+
+        data = {
+            'total_reading_count': intcomma(DsmrReading.objects.all().count()),
+            'slumber_consumption_watt': dsmr_consumption.services.calculate_slumber_consumption_watt(),
+            'min_consumption_watt': min_max_consumption_watt['min_watt'],
+            'max_consumption_watt': min_max_consumption_watt['max_watt'],
+        }
+
+        return HttpResponse(json.dumps(data), content_type='application/json')

@@ -1,15 +1,30 @@
 language: python
 
 python:
-  - "3.3"
-  - "3.4"
-  - "3.5"
+  - 3.4
+  - 3.5
+  - 3.5-dev
+  - 3.6-dev
+  - nightly # currently points to 3.7-dev
+  
+matrix:
+  allow_failures:
+    # Was never supported by dsmrreader anyway.
+    - python: 2.7
+  
+    # Support dropped since Django 1.9. It actually breaks in Django.
+    - python: 3.3
+    
+    # Not officially supported by DSMR-reader, but we want to look ahead.
+    - python: 3.6-dev
+    - python: nightly
   
 services:
   - postgresql
   - mysql
   
 addons:
+  # 9.5 is not yet available for container based builds: https://docs.travis-ci.com/user/database-setup/#PostgreSQL
   postgresql: "9.4"
 
 env:
@@ -17,14 +32,13 @@ env:
   - DB=mysql DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.mysql'
   - DB=postgresql DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.postgresql'
 
-before_install:
-  - pip install codecov
-
 install: 
-  - pip install -r dsmrreader/provisioning/requirements/base.txt
-  - pip install -r dsmrreader/provisioning/requirements/test.txt
-  - pip install -r dsmrreader/provisioning/requirements/postgresql.txt
-  - pip install -r dsmrreader/provisioning/requirements/mysql.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/travis.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/base.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/test.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/postgresql.txt
+  - pip3 install -r dsmrreader/provisioning/requirements/mysql.txt
+  - pip3 install codecov
 
 before_script:
   - sh -c "if [ '$DB' = 'postgresql' ]; then dropdb -U postgres --if-exists dsmrreader; fi"
@@ -33,7 +47,7 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin create dsmrreader; fi"
 
 script: 
-  - ./manage.py test --noinput
-
+  - py.test --pylama --cov --cov-report=term
+  
 after_success:
   - codecov

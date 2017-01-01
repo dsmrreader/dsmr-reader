@@ -140,6 +140,9 @@ def notify():
     except DayStatistics.DoesNotExist:
         return False  # Try again in a next run
 
+    # For backend logging in Supervisor.
+    print(' - Creating new notification containing daily usage.')
+
     message = create_notification_message(midnight, stats)
     send_notification(notification_api_url, settings.api_key, message)
     set_next_notification(settings, today)

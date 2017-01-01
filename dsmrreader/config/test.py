@@ -15,30 +15,12 @@ LOGGING = {
     },
 }
 
-# Only available (and required) for tests, so inject it here.
-INSTALLED_APPS = list(INSTALLED_APPS)
-INSTALLED_APPS.append('django_nose')
-INSTALLED_APPS.remove('debug_toolbar')
 
 # Disable DDT.
+INSTALLED_APPS = list(INSTALLED_APPS)
+INSTALLED_APPS.remove('debug_toolbar')
+
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
 MIDDLEWARE_CLASSES.remove('debug_toolbar.middleware.DebugToolbarMiddleware')
 
 INTERNAL_IPS = None
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = [
-    '--cover-erase',
-    '--cover-html',
-    '--cover-html-dir=coverage_report/html',
-]
-
-DATABASES = {
-    'default': {
-        'ENGINE': None,  # Sub configs should set this.
-        'NAME': 'dsmrreader',  # Will be adjusted to 'test_*' by Django.
-        'USER': 'dsmrreader',
-        'PASSWORD': 'dsmrreader',
-        'HOST': '127.0.0.1',
-    }
-}

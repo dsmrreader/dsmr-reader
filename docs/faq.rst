@@ -2,14 +2,32 @@ Frequently Asked Questions (FAQ)
 ================================
 
 
-I only pay for a single electricity tariff but I see two!
----------------------------------------------------------
-DSMR (and your energy supplier) always read both high and low tariff from your meter. 
-It's possible however that you are only paying for a single tariff. 
-In that case your energy supplier will simply merge both high and low tariffs to make it look like you have a single one.
+.. contents::
+    :depth: 2
 
-This application displays separate tariffs by default, but supports merging them to a single one as well.
-Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option '**Merge electricity tariffs**' in the frontend configuration.
+
+How can I update my application?
+--------------------------------
+The version you are running is always based on the 'latest' version of the application, called the `master` branch.
+Every once in a while there may be updates. Since ``v1.5`` you can also easily check for updates by using the application's Status page.
+
+.. warning::
+    
+    Before updating, **please make sure you have a recent backup of your database**! :doc:`More information about backups can be found here<application>`.
+
+You can update your application to the latest version by executing **deploy.sh**, located in the root of the project. 
+Make sure to execute it while logged in as the ``dsmr`` user::
+
+   ./deploy.sh
+
+It will make sure to check, fetch and apply any changes released. Summary of deployment script steps:
+
+- GIT pull (codebase update).
+- PIP update requirements.
+- Apply any database migrations.
+- Sync static files to Nginx folder.
+- Reload Gunicorn application server (web interface) and backend processes (such as the datalogger).
+- Clear any caches.
 
 
 Dropbox: Automated backup sync
@@ -53,8 +71,10 @@ Now go to "`Meterstand API <https://www.mindergas.nl/member/api>`_" and click on
 Copy the authentication token generated and paste in into the DSMR-reader settings for the Mindergas.nl-configuration.
 Obviously the export only works when there are any gas readings at all and you have ticked the 'export' checkbox in the Mindergas.nl-configuration as well.
 
-Please note that due to policies of mindergas.nl it's not allowed to retroactively upload meter positions using the API. 
-Therefor this is not supported by the application. You can however, enter them manually on their website. 
+.. note::
+
+    Please note that due to policies of mindergas.nl it's not allowed to retroactively upload meter positions using the API. 
+    Therefor this is not supported by the application. You can however, enter them manually on their website. 
 
 
 Usage notification: Daily usage statistics on your smartphone
@@ -75,7 +95,7 @@ In the DSMR-reader settings for the Usagenotifications, tick the Send Notificati
 
 *How do I obtain my API key for NotifyMyAndroid?*
 
-After you have downloaded NotifyMyAndroid and signed up for an account you should be able to `login to your account <https://www.notifymyandroid.com/index.jsp>`_. 
+After you have downloaded NotifyMyAndroid and signed up for an account you should be able to `login to your NotifyMyAndroid account <https://www.notifymyandroid.com/index.jsp>`_. 
 Now go to "`My Account <https://www.notifymyandroid.com/account.jsp>`_", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, please click **"Generate New Key"**.
 
 .. image:: _static/faq/notifications-notify-my-android-create-key.png
@@ -91,7 +111,7 @@ When a new key is generated, you will see it immediatly. Your key is listed like
 
 *How do I obtain my API key for Prowl?*
 
-After you have downloaded Prowl and signed up for an account you should be able to `login to your account <https://www.prowlapp.com/login.php>`_. 
+After you have downloaded Prowl and signed up for an account you should be able to `login to your Prowl account <https://www.prowlapp.com/login.php>`_. 
 Now go to "`API Keys <https://www.prowlapp.com/api_settings.php>`_", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, input a name and click **"Generate Key"**.
 
 .. image:: _static/faq/notifications-prowl-create-key.png
@@ -105,6 +125,34 @@ When a new key is generated, you will see it immediatly. Your key is listed like
     :alt: Prowl Get Your API Key
 
 
+I only pay for a single electricity tariff but I see two!
+---------------------------------------------------------
+DSMR (and your energy supplier) always read both high and low tariff from your meter. 
+It's possible however that you are only paying for a single tariff. 
+In that case your energy supplier will simply merge both high and low tariffs to make it look like you have a single one.
+
+This application displays separate tariffs by default, but supports merging them to a single one as well.
+Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option ``Merge electricity tariffs`` in the frontend configuration.
+
+
+I want to see my electricity phases as well
+-------------------------------------------
+Since ``DSMR-reader v1.5`` it's possible to track your ``P+`` (consumption) phases as well. You will need to enable this in the ``Datalogger configuration``.
+There is a setting called ``Track electricity phases``. When active, this will log the current usage of those phases and plot these on the Dashboard page.
+
+Please keep in mind:
+
+- This will **not work retroactively**. The datalogger always discards all data not used.
+- This feature will only work when your smart meter is connected to **three phases**. Even when having the setting enabled.
+- When having tracking phases enabled, you should see a button in the Dashboard called ``Display electricity phases``. Click on it to show the graph.
+
+You should see something similar to:
+
+.. image:: _static/screenshots/phases.png
+    :target: _static/screenshots/phases.png
+    :alt: Phases
+
+
 Recalculate prices retroactively
 --------------------------------
 *I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?*
@@ -116,8 +164,18 @@ Statistics for each day are generated once, the day after. However, you can flus
 The application will delete all statistics and (slowly) regenerate them in the background. Just make sure the source data is still there.
 
 
+I'm not seeing any gas readings
+-------------------------------
+Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render. 
+The gas meter positions are only be updated once per hour (for DSMR v4).
+The Status page will give you insight in this as well.
+
+
+
 Feature/bug report
 ------------------
 *How can I propose a feature or report a bug I've found?*
 
-`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_
+.. seealso::
+    
+    `Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_.

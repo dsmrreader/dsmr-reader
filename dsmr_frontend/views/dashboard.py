@@ -2,7 +2,10 @@ import json
 
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.views.generic.base import TemplateView, View
-from django.http.response import HttpResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.edit import FormView
+from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -12,78 +15,25 @@ from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
+from dsmr_frontend.forms import DashboardGraphForm, DashboardNotificationReadForm
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
+from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class Dashboard(TemplateView):
     template_name = 'dsmr_frontend/dashboard.html'
-    electricity_max = 30  # Minutes or readings.
-    gas_max = 25  # Hours.
-    temperature_max = gas_max
 
     def get_context_data(self, **kwargs):
         frontend_settings = FrontendSettings.get_solo()
         weather_settings = WeatherSettings.get_solo()
         context_data = super(Dashboard, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = frontend_settings
         context_data['track_temperature'] = weather_settings.track
         context_data['notifications'] = Notification.objects.unread()
-
-        electricity = ElectricityConsumption.objects.all().order_by('read_at')
-        gas = GasConsumption.objects.all().order_by('read_at')
-        temperature = TemperatureReading.objects.all().order_by('read_at')
-
-        # User might want to sort things backwards.
-        if frontend_settings.reverse_dashboard_graphs:
-            electricity = electricity.reverse()[:self.electricity_max]
-            gas = gas.reverse()[:self.gas_max]
-            temperature = temperature.reverse()[:self.temperature_max]
-        else:
-            # We can't slice using negative offsets, so we should fetch a (quick) count first. However, counts tend to
-            # be slow, so we need to filter first by, let's say, the last week.
-            electricity = electricity.filter(read_at__gt=timezone.now() - timezone.timedelta(days=7))
-
-            electricity_offset = max(0, electricity.count() - self.electricity_max)
-            gas_offset = max(0, gas.count() - self.gas_max)
-            temperature_offset = max(0, temperature.count() - self.temperature_max)
-
-            electricity = electricity[electricity_offset:]
-            gas = gas[gas_offset:]
-            temperature = temperature[temperature_offset:]
-
-        context_data['electricity_x'] = json.dumps(
-            [formats.date_format(
-                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
-            ) for x in electricity]
-        )
-        context_data['electricity_y'] = json.dumps(
-            [float(x.currently_delivered * 1000) for x in electricity]
-        )
-        context_data['electricity_returned_y'] = json.dumps(
-            [float(x.currently_returned * 1000) for x in electricity]
-        )
-
-        context_data['gas_x'] = json.dumps(
-            [formats.date_format(
-                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
-            ) for x in gas]
-        )
-        context_data['gas_y'] = json.dumps(
-            [float(x.currently_delivered) for x in gas]
-        )
-
-        if weather_settings.track:
-            context_data['temperature_x'] = json.dumps(
-                [formats.date_format(
-                    timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
-                ) for x in temperature]
-            )
-            context_data['temperature_y'] = json.dumps(
-                [float(x.degrees_celcius) for x in temperature]
-            )
 
         try:
             latest_electricity = ElectricityConsumption.objects.all().order_by('-read_at')[0]
@@ -100,7 +50,7 @@ class Dashboard(TemplateView):
 
 
 class DashboardXhrHeader(View):
-    """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, HTML response. """
+    """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
         data = {}
 
@@ -140,3 +90,92 @@ class DashboardXhrHeader(View):
             )
 
         return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+class DashboardXhrGraphs(View):
+    """ XHR view for fetching all dashboard data. """
+    MAX_ITEMS = 30
+
+    def get(self, request):
+        data = {}
+        data['capabilities'] = dsmr_backend.services.get_capabilities()
+
+        form = DashboardGraphForm(request.GET)
+
+        if not form.is_valid():
+            return HttpResponseBadRequest(form.errors)
+
+        # Optimize queries for large datasets by restricting the data to the last week in the first place.
+        base_timestamp = timezone.now() - timezone.timedelta(days=7)
+
+        electricity = ElectricityConsumption.objects.filter(read_at__gt=base_timestamp).order_by('-read_at')
+        gas = GasConsumption.objects.filter(read_at__gt=base_timestamp).order_by('-read_at')
+        temperature = TemperatureReading.objects.filter(read_at__gt=base_timestamp).order_by('-read_at')
+
+        # Apply any offset requested by the user, for electricity.
+        units_offset = form.cleaned_data.get('units_offset')
+        electricity = electricity[units_offset:units_offset + self.MAX_ITEMS]
+
+        gas = gas[:self.MAX_ITEMS]
+        temperature = temperature[:self.MAX_ITEMS]
+
+        # Reverse all sets gain.
+        electricity = electricity[::-1]
+        gas = gas[::-1]
+        temperature = temperature[::-1]
+
+        # By default we only display the time, scrolling should enable a more verbose x-axis.
+        graph_x_format = 'DSMR_GRAPH_SHORT_TIME_FORMAT'
+
+        if units_offset > 0:
+            graph_x_format = 'DSMR_GRAPH_LONG_TIME_FORMAT'
+
+        data['electricity_x'] = [
+            formats.date_format(
+                timezone.localtime(x.read_at), graph_x_format
+            )
+            for x in electricity
+        ]
+        data['electricity_y'] = [float(x.currently_delivered * 1000) for x in electricity]
+        data['electricity_returned_y'] = [float(x.currently_returned * 1000) for x in electricity]
+
+        data['gas_x'] = [
+            formats.date_format(
+                timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
+            ) for x in gas
+        ]
+        data['gas_y'] = [float(x.currently_delivered) for x in gas]
+
+        # Some users have multiple phases installed.
+        if DataloggerSettings.get_solo().track_phases and data['capabilities']['multi_phases']:
+            data['phases_l1_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l1')
+            data['phases_l2_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l2')
+            data['phases_l3_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l3')
+
+        if WeatherSettings.get_solo().track:
+            data['temperature_x'] = [
+                formats.date_format(
+                    timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
+                )
+                for x in temperature
+            ]
+            data['temperature_y'] = [float(x.degrees_celcius) for x in temperature]
+
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+    def _parse_phases_data(self, data, field):
+        return [
+            float(getattr(x, field) * 1000)
+            if getattr(x, field) else 0
+            for x in data
+        ]
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DashboardXhrNotificationRead(FormView):
+    """ XHR view for marking an in-app notification as read. """
+    form_class = DashboardNotificationReadForm
+
+    def form_valid(self, form):
+        Notification.objects.filter(pk=form.cleaned_data['notification_id'], read=False).update(read=True)
+        return HttpResponse(json.dumps({}), content_type='application/json')

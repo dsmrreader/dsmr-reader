@@ -15,8 +15,6 @@ def initialize_meter_statistics(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    replaces = [('dsmr_datalogger', '0001_initial'), ('dsmr_datalogger', '0002_add_meter_statistics'), ('dsmr_datalogger', '0003_split_dsmr_reading_fields'), ('dsmr_datalogger', '0004_multiple_dsmr_version_support'), ('dsmr_datalogger', '0005_optional_gas_readings')]
-
     dependencies = [
     ]
 

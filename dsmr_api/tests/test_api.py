@@ -1,3 +1,5 @@
+from unittest import mock
+
 from django.test.testcases import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse
@@ -98,7 +100,8 @@ class TestAPI(TestCase):
         self.assertEqual(response.status_code, 500)
         self.assertEqual(response.content, b'Failed to parse telegram')
 
-    def test_okay(self, service_mock=None):
+    @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')
+    def test_okay(self, verify_telegram_checksum_mock):
         self.assertFalse(DsmrReading.objects.exists())
 
         response = self.client.post(
@@ -107,6 +110,8 @@ class TestAPI(TestCase):
             HTTP_X_AUTHKEY=self._api_settings.auth_key
         )
 
+        # Disable CRC for this test, as it's tested elsewhere. But verify that it was called anyway.
+        self.assertTrue(verify_telegram_checksum_mock.called)
         self.assertTrue(DsmrReading.objects.exists())
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content, b'')

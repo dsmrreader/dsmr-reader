@@ -1,3 +1,5 @@
+from unittest import mock
+
 from django.test import TestCase
 from django.utils import timezone
 
@@ -28,12 +30,14 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(capabilities['electricity'])
         self.assertFalse(capabilities['electricity_returned'])
         self.assertFalse(capabilities['gas'])
+        self.assertFalse(capabilities['multi_phases'])
         self.assertFalse(capabilities['weather'])
         self.assertFalse(capabilities['any'])
 
         self.assertFalse(dsmr_backend.services.get_capabilities('electricity'))
         self.assertFalse(dsmr_backend.services.get_capabilities('electricity_returned'))
         self.assertFalse(dsmr_backend.services.get_capabilities('gas'))
+        self.assertFalse(dsmr_backend.services.get_capabilities('multi_phases'))
         self.assertFalse(dsmr_backend.services.get_capabilities('weather'))
         self.assertFalse(dsmr_backend.services.get_capabilities('any'))
 
@@ -55,6 +59,43 @@ class TestServices(InterceptStdoutMixin, TestCase):
         capabilities = dsmr_backend.services.get_capabilities()
         self.assertTrue(dsmr_backend.services.get_capabilities('electricity'))
         self.assertTrue(capabilities['electricity'])
+        self.assertTrue(capabilities['any'])
+
+    def test_multi_phases_capabilities(self):
+        """ Capability check for multiple phases. """
+        capabilities = dsmr_backend.services.get_capabilities()
+        self.assertFalse(capabilities['multi_phases'])
+        self.assertFalse(capabilities['any'])
+
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+            phase_currently_delivered_l1=1,
+        )
+
+        # Should fail.
+        self.assertFalse(dsmr_backend.services.get_capabilities('multi_phases'))
+
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=1),
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+            phase_currently_delivered_l2=1,
+            phase_currently_delivered_l3=1,
+        )
+        capabilities = dsmr_backend.services.get_capabilities()
+        self.assertTrue(dsmr_backend.services.get_capabilities('multi_phases'))
+
+        self.assertTrue(capabilities['multi_phases'])
         self.assertTrue(capabilities['any'])
 
     def test_electricity_returned_capabilities(self):
@@ -122,3 +163,26 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertTrue(dsmr_backend.services.get_capabilities('weather'))
         self.assertTrue(capabilities['weather'])
         self.assertTrue(capabilities['any'])
+
+
+@mock.patch('requests.get')
+class TestIslatestVersion(TestCase):
+    response_older = b"from django.utils.version import get_version\n" \
+        b"VERSION = (1, 2, 0, 'final', 0)\n" \
+        b"__version__ = get_version(VERSION)\n"
+
+    response_newer = b"from django.utils.version import get_version\n" \
+        b"VERSION = (1, 5, 1, 'final', 0)\n" \
+        b"__version__ = get_version(VERSION)\n"
+
+    def test_true(self, request_mock):
+        response_mock = mock.MagicMock(content=self.response_older)
+        request_mock.return_value = response_mock
+
+        self.assertTrue(dsmr_backend.services.is_latest_version())
+
+    def test_false(self, request_mock):
+        response_mock = mock.MagicMock(content=self.response_newer)
+        request_mock.return_value = response_mock
+
+        self.assertFalse(dsmr_backend.services.is_latest_version())

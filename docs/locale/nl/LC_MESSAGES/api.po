@@ -6,17 +6,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-19 22:24+0200\n"
-"PO-Revision-Date: 2016-05-19 22:32+0100\n"
-"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: DSMR Reader v1.x\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2016-01-01 00:00+0100\n"
+"PO-Revision-Date: 2017-01-01 00:00+0100\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.5.4\n"
+"Generated-By: Babel 2.3.4\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../api.rst:2
 msgid "API"
@@ -28,42 +30,46 @@ msgstr ""
 "De applicatie heeft een eenvoudige, enkele API-call voor dataloggers op "
 "afstand."
 
-#: ../../api.rst:7
+#: ../../api.rst
+msgid "Contents"
+msgstr "Inhoud"
+
+#: ../../api.rst:10
 msgid "Configuration"
 msgstr "Configuratie"
 
-#: ../../api.rst:10
+#: ../../api.rst:13
 msgid "Enable API"
 msgstr "API inschakelen"
 
-#: ../../api.rst:12
+#: ../../api.rst:15
 msgid ""
-"By default the API is disabled in the application. You may enable it in your "
-"configuration or admin settings."
+"By default the API is disabled in the application. You may enable it in "
+"your configuration or admin settings."
 msgstr ""
-"Standaard is de API in de applicatie uitgeschakeld. Je kunt deze inschakelen "
-"in het configuratiescherm of beheerderpaneel."
+"Standaard is de API in de applicatie uitgeschakeld. Je kunt deze "
+"inschakelen in het configuratiescherm of beheerderpaneel."
 
-#: ../../api.rst:19
+#: ../../api.rst:22
 msgid "Authentication"
 msgstr "Autorisatie"
 
-#: ../../api.rst:20
+#: ../../api.rst:23
 msgid ""
-"Besides allowing the API to listen for requests, you will also need use the "
-"generated API Auth Key. It can be found on the same page as in the "
+"Besides allowing the API to listen for requests, you will also need use "
+"the generated API Auth Key. It can be found on the same page as in the "
 "screenshot above. The configuration page will also display it, but only "
 "partly. Feel free to alter the API Auth Key when required. The application "
-"randomly generates one initially for you."
+"initially randomly generates one for you."
 msgstr ""
 "Naast het inschakelen van de API zul je ook een (automatisch) gegenereerde "
-"API autorisatiesleutel moeten gebruiken. Deze kun je terugvinden op dezelfde "
-"pagina als in bovenstaand screenshot. Op de configuratiepagina staat de "
-"sleutel ook, maar slechts ten delete. Pas overigens gerust de API "
-"autorisatiesleutel naar wens aan. De applicatie genereert eenmalig initieel "
-"een voor je."
+"API autorisatiesleutel moeten gebruiken. Deze kun je terugvinden op "
+"dezelfde pagina als in bovenstaand screenshot. Op de configuratiepagina "
+"staat de sleutel ook, maar slechts ten delete. Pas overigens gerust de API "
+"autorisatiesleutel naar wens aan. De applicatie genereert initieel "
+"(eenmalig) een voor je."
 
-#: ../../api.rst:24
+#: ../../api.rst:27
 msgid ""
 "You should pass it in the header of every API call. The header should be "
 "defined as ``X-AUTHKEY``. See below for an example."
@@ -71,27 +77,27 @@ msgstr ""
 "Je moet deze gebruiken voor elke API call die je uitvoert. De header heet "
 "``X-AUTHKEY``. Zie hieronder voor een voorbeeld."
 
-#: ../../api.rst:27
+#: ../../api.rst:30
 msgid "Examples"
 msgstr "Voorbeelden"
 
-#: ../../api.rst:29
+#: ../../api.rst:32
 msgid "Using ``cURL``::"
 msgstr "Met ``cURL``::"
 
-#: ../../api.rst:35
+#: ../../api.rst:38
 msgid "Using ``requests``::"
 msgstr "Met ``requests``::"
 
-#: ../../api.rst:45
+#: ../../api.rst:48
 msgid "API calls"
 msgstr "API calls"
 
-#: ../../api.rst:48
+#: ../../api.rst:51
 msgid "POST ``/api/v1`` ``/datalogger/dsmrreading``"
 msgstr "POST ``/api/v1`` ``/datalogger/dsmrreading``"
 
-#: ../../api.rst:49
+#: ../../api.rst:52
 msgid ""
 "This allows you to insert a raw telegram, read from your meter remotely, "
 "into the application as if it was read locally using the serial cable."
@@ -99,28 +105,28 @@ msgstr ""
 "Dit staat je toe om een ruwe telegram aan de applicatie door te geven, "
 "wanneer je deze op afstand uitleest."
 
-#: ../../api.rst:51
+#: ../../api.rst:54
 msgid "Method: ``POST``"
 msgstr "Methode: ``POST``"
 
-#: ../../api.rst:52
+#: ../../api.rst:55
 msgid ""
 "Data: ``telegram`` (as raw string containing all linefeeds ``\\n``, and "
 "carriage returns ``\\r``, as well!)"
 msgstr ""
-"Data: ``telegram`` (als een ruwe tekenreeks inclusief zowel alle regeleindes "
-"``\\n`` als 'carriage returns' ``\\r``)"
-
-#: ../../api.rst:53
-msgid "Status code returned: ``HTTP 200`` on success, any other on failure."
-msgstr ""
-"Status code resultaat: ``HTTP 200`` wanneer succesvol, elke andere code bij "
-"falen."
+"Data: ``telegram`` (als een ruwe tekenreeks inclusief zowel alle "
+"regeleindes ``\\n`` als 'carriage returns' ``\\r``)"
 
 #: ../../api.rst:56
+msgid "Status code returned: ``HTTP 200`` on success, any other on failure."
+msgstr ""
+"Status code resultaat: ``HTTP 200`` wanneer succesvol, elke andere code "
+"bij falen."
+
+#: ../../api.rst:59
 msgid "Example"
 msgstr "Voorbeeld"
 
-#: ../../api.rst:58
+#: ../../api.rst:61
 msgid "(using the ``requests`` library available on PIP)::"
 msgstr "(met de ``requests`` tool beschikbaar in PIP)::"

@@ -22,6 +22,9 @@ class TestSettings(TestCase):
     def test_track_meter_statistics(self):
         self.assertTrue(self.instance.track_meter_statistics)
 
+    def test_track_phases(self):
+        self.assertFalse(self.instance.track_phases)
+
     def test_dsmr_version(self):
         self.assertEqual(self.instance.dsmr_version, DataloggerSettings.DSMR_VERSION_4)
 

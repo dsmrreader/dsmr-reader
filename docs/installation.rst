@@ -1,36 +1,54 @@
 Installation
 ============
-The installation guide may take about *half an hour max* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
+
+.. note::
+
+    The installation guide may take about *half an hour max* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
+
+
+.. contents::
+    :depth: 2
 
 
 Dependencies & requirements
 ---------------------------
 - **RaspberryPi 2 or 3**
 
- - RaspberryPi 1 should work decently, but I do not actively support it.
+ - The RaspberryPi 1 tends to be **too slow** for this project, as it requires multi core processing.
+
+.. note::
+
+    - **Alternative #1**: You can also run it on any server near your smart meter, as long as it satisfies the other requirements.
+    
+    - **Alternative #2**: The application supports receiving P1 telegrams using an API, so you can also run it on a server outside your home. (:doc:`API DOCS<api>`)
 
 - **Raspbian OS**
 
  - Recommended and tested with, but any OS satisfying the requirements should do fine.
 
-- **Python 3.3 / 3.4 / 3.5**
+- **Python 3.4+**
+
+.. warning::
+
+    Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
+
 - **PostgreSQL 9+ or MySQL / MariaDB 5.5+**
 
- - I highly recommend *PostgreSQL* due to builtin support for timezones.
+ - I **highly recommend** ``PostgreSQL`` due to builtin support for timezones.
 
-- **Smart Meter** with support for **at least DSMR 4.0/4.2** and **P1 telegram port**
+- **Smart Meter** with support for **at least DSMR 4.x+** and a **P1 telegram port**
 
  - Tested so far with Landis+Gyr E350, Kaifa. Telegram port looks like an RJ11 (phone) socket.
 
-- **Minimal 100 MB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
+- **Minimal 1 GB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
 
  - More disk space is required for storing all reader data captured (optional). I generally advise to use a 8+ GB SD card. 
- - The readings will take 90+ procent of the disk space. I plan however to add some kind of retention to it later, keeping the data (of many years) far below the 500 MB. 
+ - The readings will take about 90+ percent of the disk space. Retention is on it's way for a future release in 2017. 
 
 - **Smart meter P1 data cable** 
 
-  - Can be purchased online and they cost around 15 tot 20 Euro's each.
-
+ - Can be purchased online and they cost around 15 tot 20 Euro's each.
+ 
 - **Basic Linux knowledge for deployment, debugging and troubleshooting**
 
  - It just really helps if you know what you are doing.
@@ -41,7 +59,9 @@ Dependencies & requirements
 
 The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **PostgreSQL** (Option B.) **MySQL/MariaDB**. 
 
-*If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for DST transitions).*
+.. note::
+
+    If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for daylight saving time transitions).
 
 (Option A.) PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -78,7 +98,7 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
 - Create database::
 
-    sudo mysqladmin --defaults-file=/etc/mysql/debian.cnf create dsmrreader
+    sudo mysqladmin create dsmrreader
 
 - Create database user::
 
@@ -90,7 +110,7 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
 - Flush privileges to activate them::
 
-    sudo mysqladmin --defaults-file=/etc/mysql/debian.cnf reload
+    sudo mysqladmin reload --defaults-file=/etc/mysql/debian.cnf
 
 
 2. Dependencies
@@ -116,26 +136,15 @@ Our user also requires dialout permissions. So allow the user to perform a dialo
 
     sudo usermod -a -G dialout dsmr
 
-
-4. Webserver/Nginx (part 1)
----------------------------
-
-*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
-
-Django will copy all static files to a separate directory, used by Nginx to serve statics. Therefor it requires (write) access to it::
-
-    sudo mkdir -p /var/www/dsmrreader/static
-    
-    sudo chown -R dsmr:dsmr /var/www/dsmrreader/
-
-*The reason for splitting the webserver chapter in two steps, is because the application requires the directory created above to exist. And Nginx requires the application to exist (cloned) before running (and to copy its virtual hosts file), resulting in an dependency loop.*
-
-Either proceed to the next heading for a test reading or continue at step 5.
+Either proceed to the next heading **for a test reading** or continue at chapter 4.
 
 
 Your first reading (optional)
 -----------------------------
-**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected.
+
+.. note::
+
+    **OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected.
 
 - Now login as the user we have just created, to perform our very first reading! ::
 
@@ -154,11 +163,25 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 - To exit cu, type "``q.``", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``.
 
 
+4. Webserver/Nginx (part 1)
+---------------------------
+
+*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
+
+- Make sure you are still acting here as ``root`` or ``sudo`` user.
+
+Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefor it requires (write) access to it::
+
+    sudo mkdir -p /var/www/dsmrreader/static
+    
+    sudo chown -R dsmr:dsmr /var/www/dsmrreader/
+
+
 5. Clone project code from Github
 ---------------------------------
 Now is the time to clone the code from the repository into the homedir we created. 
 
-- Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
+- Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
 
 - Clone the repository::
 
@@ -181,22 +204,29 @@ Although it's just a folder inside our user's homedir, it's very effective as it
 
     mkdir ~/.virtualenvs
 
-- Create a new virtualenv, we usually use the same name for it as the application or project. Note that it's important to specify **python3** as the default interpreter::
+- Create a new virtualenv, we usually use the same name for it as the application or project::
 
     virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3
 
-Now *activate* the environment. It effectively directs all aliases for software installed in the virtualenv to the binaries inside the virtualenv.
-I.e. the Python binary inside ``/usr/bin/python`` won't be used when the virtualenv is activated, but ``/home/dsmr/.virtualenvs/dsmrreader/bin/python`` will be instead.
+.. note::
 
-- Activate virtualenv & cd to project::
+    Note that it's important to specify **Python 3** as the default interpreter.
+
+- Put both commands below in the ``dsmr`` user's ``~/.bashrc`` file with your favorite text editor::
 
     source ~/.virtualenvs/dsmrreader/bin/activate
     
     cd ~/dsmr-reader
 
-You might want to put the ``source ~/.virtualenvs/dsmrreader/bin/activate`` command above in the user's ``~/.bashrc`` (logout and login to test).
+This will both **activate** the virtual environment and cd you into the right directory on your **next login** as ``dsmr`` user.
 
-I also advice to put the ``cd ~/dsmr-reader`` in there as well, which will cd you directly inside the project folder on login.
+.. note::
+    
+    You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``.
+
+    You should see the terminal have a ``(dsmrreader)`` prefix now, for example: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``
+
+Make sure you've read and executed the note above, because you'll need it for the next chapter. 
 
 
 7. Application configuration & setup
@@ -207,7 +237,9 @@ Therefor I created two default (Django-)settings files you can copy, one for eac
 
 The ``base.txt`` contains requirements which the application needs anyway, no matter which backend you've choosen.
 
-- (!) Note: **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
+.. note::
+
+    **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
 (Option A.) PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -247,24 +279,37 @@ It allows us to have Nginx serve static files outside our project/code root.
     ./manage.py collectstatic --noinput
 
 Create an application superuser. Django will prompt you for a password. The credentials generated can be used to access the administration panel inside the application.  
-Alter username and email if you prefer other credentials, but email is not (yet) used in the application anyway. 
+Alter username and email if you prefer other credentials, but email is not used in the application anyway.
 
-Since you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset: ``./manage.py changepassword admin``
-
-- Create user inside application::
+- Create your user::
 
     ./manage.py createsuperuser --username admin --email root@localhost
+
+.. note::
+
+    Because you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset::
+
+    ./manage.py changepassword admin
+
+You've almost completed the installation now.
 
     
 9. Webserver/Nginx (part 2)
 ---------------------------
-Go back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` once).
 
-- **OPTIONAL**: Remove the default Nginx vhost (*only when you do not use it yourself*)::
+.. note::
 
-    sudo rm /etc/nginx/sites-enabled/default
+    This installation guide asumes you run the Nginx webserver for this application only.
+    
+    It's possible to have other applications use Nginx as well, but that requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will copy below.
 
-- Copy application vhost, *it will listen to any hostname* (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
+Go back to ``root`` / ``sudo`` user to configure the webserver (press ``CTRL + D`` once).
+
+Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::
+
+        sudo rm /etc/nginx/sites-enabled/default
+
+- Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
 
@@ -281,21 +326,21 @@ Go back to ``root``/``sudo-user`` to config webserver (press ``CTRL + D`` once).
 Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. 
 It's also configured to bring the entire application up again after a shutdown or reboot.
 
-- Each job has it's own configuration file, so make sure to copy them all::
+- Copy the configuration file for Supervisor::
 
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_*.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr-reader.conf /etc/supervisor/conf.d/
 
 - Login to ``supervisorctl`` management console::
 
     sudo supervisorctl
 
-- Enter these commands (listed after the ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::
+- Enter these commands (**listed after the** ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::
 
     supervisor> reread
 
     supervisor> update
     
-Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with '``status``' a few times.
+Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times.
 
 - When still in ``supervisorctl``'s console, type::
 
@@ -303,17 +348,17 @@ Three processes should be started or running. Make sure they don't end up in ``E
 
 Example of everything running well::
 
-    dsmr_backend                     STARTING
-    dsmr_datalogger                  RUNNING
-    dsmr_webinterface                RUNNING
+    dsmr_backend                     RUNNING    pid 123, uptime 0:00:06
+    dsmr_datalogger                  RUNNING    pid 456, uptime 0:00:07
+    dsmr_webinterface                RUNNING    pid 789, uptime 0:00:07
 
 - Want to check whether the datalogger works? Just tail it's log in supervisor with::
 
     supervisor> tail -f dsmr_datalogger
     
-Please note that due to Supervisor's output buffering **it might take a minute or two before you see any output**. You should see similar output as the ``cu``-command printed earlier in the installation process.
+You should see similar output as the ``cu``-command printed earlier in the installation process.
 
-Want to quit supervisor? ``CTRL + C`` to stop tail and ``CTRL + D`` once to exit supervisor command line.
+Want to quit supervisor? ``CTRL + C`` to stop tailing and then ``CTRL + D`` once to exit supervisor command line.
 
 
-You now should have everything up and running! We're almost done, but only need to check a just few more things in the next chapters.
+You now should have everything up and running! We're almost done and just need to do a few last things on the next page.

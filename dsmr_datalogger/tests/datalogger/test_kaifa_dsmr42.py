@@ -7,6 +7,7 @@ import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
@@ -36,7 +37,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "1-0:31.7.0(000*A)\r\n",
             "1-0:21.7.0(00.143*kW)\r\n",
             "1-0:22.7.0(00.000*kW)\r\n",
-            "!74B0\n",
+            "!A97E\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -58,6 +59,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
 
     def test_reading_values(self):
         """ Test whether dsmr_datalogger reads the correct values. """
+        DataloggerSettings.get_solo()
+        DataloggerSettings.objects.all().update(track_phases=True)
+
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
@@ -71,8 +75,11 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(reading.electricity_returned_2, Decimal('0'))
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.143'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(reading.extra_device_timestamp, None)
-        self.assertEqual(reading.extra_device_delivered, None)
+        self.assertIsNone(reading.extra_device_timestamp)
+        self.assertIsNone(reading.extra_device_delivered)
+        self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.143'))
+        self.assertEqual(reading.phase_currently_delivered_l2, None)
+        self.assertEqual(reading.phase_currently_delivered_l3, None)
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertEqual(meter_statistics.electricity_tariff, 2)

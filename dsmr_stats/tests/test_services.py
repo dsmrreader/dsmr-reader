@@ -250,7 +250,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(data['electricity2_returned'], daily['electricity2_returned'])
         self.assertEqual(data['electricity_merged'], daily['electricity1'] + daily['electricity2'])
         self.assertEqual(data['electricity_cost_merged'], daily['electricity1_cost'] + daily['electricity2_cost'])
-        self.assertEqual(data['electricity_returned_merged'], daily['electricity1_returned'] + daily['electricity2_returned'])
+        self.assertEqual(
+            data['electricity_returned_merged'], daily['electricity1_returned'] + daily['electricity2_returned']
+        )
         self.assertEqual(data['gas'], daily['gas'])
         self.assertEqual(data['gas_cost'], daily['gas_cost'])
 

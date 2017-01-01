@@ -34,6 +34,8 @@ def check():
         # Postpone when the user's backup time preference has not been passed yet.
         return
 
+    # For backend logging in Supervisor.
+    print(' - Creating new backup.')
     create()
 
 

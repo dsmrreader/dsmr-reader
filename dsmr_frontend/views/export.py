@@ -1,10 +1,11 @@
 import datetime
 import csv
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import StreamingHttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import BaseFormView
 from django.core.urlresolvers import reverse
-from django.http.response import StreamingHttpResponse
 from django.utils import timezone, formats
 from django.shortcuts import redirect
 
@@ -14,7 +15,7 @@ import dsmr_backend.services
 from decimal import Decimal
 
 
-class Export(TemplateView):
+class Export(LoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/export.html'
 
     def get_context_data(self, **kwargs):
@@ -35,7 +36,7 @@ class Export(TemplateView):
         return context_data
 
 
-class ExportAsCsv(BaseFormView):
+class ExportAsCsv(LoginRequiredMixin, BaseFormView):
     """ Exports the selected data in CSV format. """
     form_class = ExportAsCsvForm
 

@@ -167,6 +167,9 @@ img {
   width: auto;
 }
 /*alert*/
+.alert-gray {
+  background-color: #C1C1C1;
+}
 .alert-danger {
   background-color: #fad5d5;
 }

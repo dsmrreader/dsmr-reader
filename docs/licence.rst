@@ -3,6 +3,11 @@ Licence (GNU GPLv3)
 
 **Copyright (C) 2015/2016 Dennis Siemensma**
 
+
+.. contents:: Licence
+
+
+
 GNU GENERAL PUBLIC LICENSE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 

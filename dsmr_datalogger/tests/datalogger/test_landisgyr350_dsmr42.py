@@ -7,6 +7,7 @@ import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
@@ -18,7 +19,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "\r\n",
             "1-3:0.2.8(42)\r\n",
             "0-0:1.0.0(160210203034W)\r\n",
-            "0-0:96.1.1(xxxxxxxxxxxxx)\r\n",
+            "0-0:96.1.1(123456789012345678901234567890)\r\n",
             "1-0:1.8.1(000756.849*kWh)\r\n",
             "1-0:2.8.1(000000.000*kWh)\r\n",
             "1-0:1.8.2(000714.405*kWh)\r\n",
@@ -40,16 +41,16 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "1-0:31.7.0(000*A)\r\n",
             "1-0:51.7.0(000*A)\r\n",
             "1-0:71.7.0(001*A)\r\n",
-            "1-0:21.7.0(00.000*kW)\r\n",
-            "1-0:41.7.0(00.000*kW)\r\n",
-            "1-0:61.7.0(00.110*kW)\r\n",
+            "1-0:21.7.0(00.123*kW)\r\n",
+            "1-0:41.7.0(00.456*kW)\r\n",
+            "1-0:61.7.0(00.789*kW)\r\n",
             "1-0:22.7.0(00.000*kW)\r\n",
             "1-0:42.7.0(00.000*kW)\r\n",
             "1-0:62.7.0(00.000*kW)\r\n",
             "0-1:24.1.0(003)\r\n",
-            "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
+            "0-1:96.1.0(098765432109876543210987654321)\r\n",
             "0-1:24.2.1(160210200000W)(01197.484*m3)\r\n",
-            "!AD8D\n",
+            "!48F4\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -71,6 +72,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
 
     def test_reading_values(self):
         """ Test whether dsmr_datalogger reads the correct values. """
+        DataloggerSettings.get_solo()
+        DataloggerSettings.objects.all().update(track_phases=True)
+
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
@@ -89,6 +93,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             datetime(2016, 2, 10, 19, 0, 0, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('1197.484'))
+        self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.123'))
+        self.assertEqual(reading.phase_currently_delivered_l2, Decimal('0.456'))
+        self.assertEqual(reading.phase_currently_delivered_l3, Decimal('0.789'))
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()

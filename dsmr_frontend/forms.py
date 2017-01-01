@@ -18,3 +18,19 @@ class ExportAsCsvForm(forms.Form):
     start_date = forms.DateField()
     end_date = forms.DateField()
     export_format = forms.ChoiceField(choices=EXPORT_FORMATS)
+
+
+class DashboardGraphForm(forms.Form):
+    units_offset = forms.IntegerField(required=False)
+
+    def clean_units_offset(self):
+        units_offset = self.cleaned_data['units_offset']
+
+        if units_offset is None or units_offset < 0:
+            units_offset = 0
+
+        return units_offset
+
+
+class DashboardNotificationReadForm(forms.Form):
+    notification_id = forms.IntegerField()

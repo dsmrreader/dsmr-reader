@@ -16,6 +16,23 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self._intercept_command_stdout('dsmr_backend')
         self.assertTrue(signal_mock.called)
 
+    @mock.patch('dsmr_backup.services.backup.check')
+    @mock.patch('dsmr_backup.services.backup.sync')
+    @mock.patch('dsmr_consumption.services.compact_all')
+    @mock.patch('dsmr_mindergas.services.export')
+    @mock.patch('dsmr_notification.services.notify')
+    @mock.patch('dsmr_stats.services.analyze')
+    @mock.patch('dsmr_weather.services.read_weather')
+    def test_backend_creation_signal_receivers(self, *mocks):
+        """ Test whether outgoing signal is received. """
+        for current in mocks:
+            self.assertFalse(current.called)
+
+        self._intercept_command_stdout('dsmr_backend')
+
+        for current in mocks:
+            self.assertTrue(current.called)
+
     def test_robust_signal(self):
         """ Test whether the signal is robust, handling any exceptions. """
 

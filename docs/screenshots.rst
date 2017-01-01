@@ -3,11 +3,18 @@ Screenshots
 Below you can find some screenshots of the application. Please read the note below regarding solar panels and support for them.
 
 
+.. contents::
+    :depth: 2
+
+
 Solar panels & electricity returned
 -----------------------------------
-Note that **I do not have solar panels at home**, but the application however **does support plotting any electricity returned**.
 
-Therefor there aren't any graphs of them in the screenshots, but the users who do have them, will have additional green graphs rendered in the application.  
+.. note::
+    
+    Note that **I do not have solar panels at home**, but the application however **does support plotting any electricity returned**.
+
+Therefor there aren't always graphs of them in the screenshots, but the users who do have them, will have additional green graphs rendered in the application.  
 
 
 Dashboard
@@ -73,18 +80,16 @@ Want to export day totals or hourly data to Excel? This page allows you to expor
     :alt: Export
 
 
-Configuration
--------------
-The application has quite some features, such are temperature tracking, automated backups and Dropbox intergration. This page displays the status of them all.
-
-.. image:: _static/screenshots/configuration.png
-    :target: _static/screenshots/configuration.png
-    :alt: Configuration
-
-
 Settings
 --------
 The project is written using Django and some of it's backend pages are displayed below.
+
+The application has quite some features, such are temperature tracking, automated backups and Dropbox intergration. This page displays the status of them all.
+
+.. image:: _static/screenshots/admin.png
+    :target: _static/screenshots/admin.png
+    :alt: Configuration
+
 
 Here you may manage your energy prices:
 

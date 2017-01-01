@@ -6,8 +6,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    replaces = [('dsmr_stats', '0001_initial'), ('dsmr_stats', '0001_renamed_migrations'), ('dsmr_stats', '0002_consumption_models'), ('dsmr_stats', '0003_consumption_date_fields'), ('dsmr_stats', '0004_energysupplierprice_models'), ('dsmr_stats', '0005_energysupplierprice_description'), ('dsmr_stats', '0006_energysupplierprice_defaults'), ('dsmr_stats', '0007_daily_user_notes'), ('dsmr_stats', '0008_statssettings_model'), ('dsmr_stats', '0009_reverse_dashboard_graphs_setting'), ('dsmr_stats', '0010_split_models_among_apps'), ('dsmr_stats', '0011_delete_moved_models'), ('dsmr_stats', '0012_meta'), ('dsmr_stats', '0013_drop_old_statistics_model'), ('dsmr_stats', '0014_settings_model'), ('dsmr_stats', '0015_trend_statistics_model'), ('dsmr_stats', '0016_drop_stats_settings')]
-
     dependencies = [
         ('dsmr_weather', '0001_weather_models'),
         ('dsmr_frontend', '0001_initial'),

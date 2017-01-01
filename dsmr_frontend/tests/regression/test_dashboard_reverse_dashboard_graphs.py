@@ -1,10 +1,11 @@
+from unittest import mock
 import json
 
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_frontend.models.settings import FrontendSettings
 
 
 class TestRegression(TestCase):
@@ -14,14 +15,21 @@ class TestRegression(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_energysupplierprice_matching_query_does_not_exist(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_dashboard_reverse_dashboard_graphs(self, now_mock):
         """ Test whether default sorting slices consumption as intended. """
-        self.assertFalse(FrontendSettings().get_solo().reverse_dashboard_graphs)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 16))
+
         self.assertEqual(ElectricityConsumption.objects.count(), 1)
         self.assertEqual(GasConsumption.objects.count(), 100)
 
         response = self.client.get(reverse('frontend:dashboard'))
-        self.assertIn('gas_x', response.context)
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(reverse('frontend:dashboard-xhr-graphs'))
+        self.assertEqual(response.status_code, 200)
+        json_content = json.loads(response.content.decode("utf8"))
 
         # This will fail when the fix has been reverted.
-        self.assertEqual(json.loads(response.context['gas_x'])[0], '1 a.m.')
+        self.assertIn('gas_x', json_content)
+        self.assertEqual(json_content['gas_x'][0], '8 p.m.')

@@ -29,6 +29,15 @@ class DataloggerSettings(SingletonModel):
             'power failures of voltage dips. Data is not required for core features.'
         )
     )
+    track_phases = models.BooleanField(
+        default=False,
+        verbose_name=_('Track electricity phases'),
+        help_text=_(
+            'Whether we should track your phases (if any) as well. By default you only have one phase, but some meters '
+            'have three due to solar panels or an electric stove. This feature is only useful (and will only work) '
+            'when actually you have three phases. The dashboard will display any data read, after enabling this.'
+        )
+    )
 
     dsmr_version = models.IntegerField(
         default=DSMR_VERSION_4,

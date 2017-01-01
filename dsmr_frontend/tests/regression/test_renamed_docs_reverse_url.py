@@ -1,11 +1,11 @@
 from django.db.migrations.executor import MigrationExecutor
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.db.migrations.recorder import MigrationRecorder
+from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.db import connection
 from django.apps import apps
 
 from dsmr_frontend.models.message import Notification
-from django.db.migrations.recorder import MigrationRecorder
 
 
 class TestRegression(TestCase):
@@ -28,9 +28,9 @@ class TestRegression(TestCase):
             redirect_to='frontend:docs',  # Non-existing legacy.
         )
 
-        with self.assertRaises(NoReverseMatch):
-            # This SHOULD crash.
-            self.client.get(reverse('frontend:dashboard'))
+        # This SHOULD crash.
+        response = self.client.get(reverse('frontend:dashboard'))
+        self.assertEqual(response.status_code, 500)
 
         # Now we fake applying the migration (again for this test).
         MigrationRecorder.Migration.objects.filter(app='dsmr_frontend', name='0009_docs_no_reverse_match').delete()

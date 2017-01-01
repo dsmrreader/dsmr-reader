@@ -6,94 +6,102 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-18 22:09+0200\n"
-"PO-Revision-Date: 2016-04-18 22:11+0100\n"
-"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
-"Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Project-Id-Version: DSMR Reader v1.x\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2016-01-01 00:00+0100\n"
+"PO-Revision-Date: 2017-01-01 00:00+0100\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
+"Generated-By: Babel 2.3.4\n"
 "Language: nl\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../intro.rst:2
 msgid "Introduction"
 msgstr "Introductie"
 
 #: ../../intro.rst:5
-msgid "Why"
-msgstr "Waarom"
+msgid "Project mission & goals"
+msgstr "Projectmissie & doelen"
 
 #: ../../intro.rst:6
-msgid ""
-"There are plenty of 'scripts' and websites available for performing DSMR "
-"readings. This project however is a full stack solution and allows you to "
-"keep your own data for yourself, on your own RaspberryPi."
+msgid "Provide an easy to use setup for logging your own energy consumption."
 msgstr ""
-"Er zijn natuurlijk al tal van scripts en websites die tevens je slimme meter "
-"en het verbruik kunnen uitlezen. Het grote voordeel van dit project echter "
-"is dat je alle data zelf kan opslaan en beheren op je RaspberryPi."
+"Een gemakkelijk te gebruiken oplossing voor het bijhouden van je eigen "
+"energieverbruik."
+
+#: ../../intro.rst:7
+msgid ""
+"Keeping your data for yourself (all data is stored locally and untracked "
+"as well)."
+msgstr ""
+"Alle gegevens zijn eigendom van jezelf (alle data wordt lokaal opgeslagen "
+"en wordt niet gedeeld met de buitenwereld)."
 
 #: ../../intro.rst:8
-msgid ""
-"The project was originally started 'just for fun and learning', but kept "
-"growing until eventually other people were interested in using it "
-"theirselves as well. I also longed for a while to contribute something back "
-"to the open source community and this seemed the right project for it."
-msgstr ""
-"Oorspronkelijk is het project gestart ter lering en vermaak. Echter bleef "
-"het groeien en na verloop van tijd vonden diverse mensen in de omgeving het "
-"interessant genoeg voor thuisgebruik. Ik zocht daarnaast sowieso al een tijd "
-"naar iets om te open-sourcen en dit leek me er de perfecte kandidaat voor."
-
-#: ../../intro.rst:11
-msgid "Skill"
-msgstr "Vaardigheid"
+msgid "Always free to use (it's open source on Github as well)."
+msgstr "Altijd gratis te gebruiken (en tevens open-source op Github)."
 
 #: ../../intro.rst:12
+msgid "Why?"
+msgstr "Waarom?"
+
+#: ../../intro.rst:13
 msgid ""
-"The project is well documented, but requires a certain 'Unix skill' as you "
-"will need to install several dependencies using the command line."
+"Because open-source triggers the community to collaborate even more and "
+"bring out the best ideas! In the last year, many other cool DSMR-projects "
+"were launched as well!"
 msgstr ""
-"Het project is behoorlijk gedocumenteerd, maar vereist desondanks een zekere "
-"Unix-vaardigheid. Je zult namelijk handmatig diverse afhankelijkheden moeten "
-"installeren via de command line."
+"Omdat open-source het beste in een community naar boven brengt en zorgt "
+"voor nieuwe ideëen of inzichten. In het afgelopen jaar zijn er tevens tal "
+"andere coole DSMR-projecten gestart!"
 
-#: ../../intro.rst:14
-msgid ""
-"I advise to only use this tool when you have basic Linux knowledge or have "
-"any interest in the components used. I might create an installer script "
-"later, but I'll focus on building more features first."
-msgstr ""
-"Ik raad je aan deze tool alleen te gebruiken wanneer je enige Linux-"
-"basiskennis hebt. Of wanneer je interesse hebt in de gebruikte componenten. "
-"Wellicht maak ik later nog een installatiescript, maar ik zal mij in de "
-"eerste instantie focussen op het bouwen van nieuwe features."
-
-#: ../../intro.rst:18
-msgid "Github"
-msgstr "Github"
-
-#: ../../intro.rst:19
-msgid ""
-"The project can be found here: https://github.com/dennissiemensma/dsmr-reader"
-msgstr ""
-"Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
-"reader"
-
-#: ../../intro.rst:23
+#: ../../intro.rst:17
 msgid "Languages"
 msgstr "Talen"
 
-#: ../../intro.rst:24
+#: ../../intro.rst:18
 msgid ""
 "The entire application and it's code is written in English. The entire "
 "interface however is also translated into Dutch and will be triggered "
 "depending on you browser's language preference."
 msgstr ""
-"De gehele applicatie, en bijbehorende code, is in het Engels geschreven. De "
-"grafische interface is echter ook in het Nederlands beschikbaar. Deze wordt "
-"getoond afhankelijk van de taalinstelling van je webbrowser."
+"De gehele applicatie, en bijbehorende code, is in het Engels geschreven. "
+"De grafische interface is echter ook in het Nederlands beschikbaar. Deze "
+"wordt getoond afhankelijk van de taalinstelling van je webbrowser."
+
+#: ../../intro.rst:22
+msgid "Skill"
+msgstr "Vaardigheid"
+
+#: ../../intro.rst:23
+msgid ""
+"The project is well documented, but requires a certain 'Unix skill' as you "
+"will need to install several dependencies using the command line."
+msgstr ""
+"Het project is behoorlijk gedocumenteerd, maar vereist desondanks een "
+"zekere Unix-vaardigheid. Je zult namelijk handmatig diverse "
+"afhankelijkheden moeten installeren via de command line."
+
+#: ../../intro.rst:25
+msgid ""
+"I advise to only use this tool when you have basic Linux knowledge or have "
+"any interest in the components used."
+msgstr ""
+"Ik raad je aan deze tool alleen te gebruiken wanneer je enige Linux-"
+"basiskennis hebt. Of wanneer je interesse hebt in de gebruikte componenten."
+
+#: ../../intro.rst:29
+msgid "Github"
+msgstr "Github"
+
+#: ../../intro.rst:30
+msgid ""
+"The project can be found here: https://github.com/dennissiemensma/dsmr-"
+"reader"
+msgstr ""
+"Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
+"reader"

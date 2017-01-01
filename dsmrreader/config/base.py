@@ -36,10 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    # Must be inserted BEFORE contrib because it's an admin skin.
-    # django-flat-theme is officially merged in Django 1.9, however this is pre-1.9 (due to LTS).
-    'flat',
-
     # Django internals.
     'django.contrib.admin',
     'django.contrib.auth',
@@ -137,8 +133,7 @@ USE_THOUSAND_SEPARATOR = True
 # is fine (and still fast) for RaspberryPi, preserving memory usage.
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/django_cache',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'TIMEOUT': 60,
         'OPTIONS': {
             'MAX_ENTRIES': 100
@@ -169,3 +164,5 @@ DSMR_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
 DSMR_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
 
 DSMR_VERSION = dsmrreader.__version__
+DSMR_RAW_VERSION = dsmrreader.VERSION
+DSMR_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/__init__.py'

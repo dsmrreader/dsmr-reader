@@ -62,6 +62,7 @@ class InfiniteManagementCommandMixin(object):
 
             if self.sleep_time is not None:
                 self.stdout.write('Command completed. Sleeping for {} second(s)...'.format(self.sleep_time))
+                self.stdout.write('')
                 time.sleep(self.sleep_time)  # Do not hammer.
 
         self.stdout.write('Exited due to signal detection')
@@ -80,7 +81,7 @@ class ReadOnlyAdminModel(admin.ModelAdmin):
     """ Read only model for Django admin. """
     def __init__(self, *args, **kwargs):
         super(ReadOnlyAdminModel, self).__init__(*args, **kwargs)
-        self.readonly_fields = self.model._meta.get_all_field_names()
+        self.readonly_fields = [x.name for x in self.model._meta.get_fields()]
 
     def has_add_permission(self, request, obj=None):
         return False

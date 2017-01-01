@@ -6,11 +6,6 @@ from colorfield.fields import ColorField
 
 class FrontendSettings(SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
-    reverse_dashboard_graphs = models.BooleanField(
-        default=False,
-        verbose_name=_('Reverse dashboard graphs'),
-        help_text=_('Whether graphs are rendered with an reversed X-axis')
-    )
     merge_electricity_tariffs = models.BooleanField(
         default=False,
         verbose_name=_('Merge electricity tariffs'),
@@ -41,6 +36,21 @@ class FrontendSettings(SingletonModel):
         default='#FF851B',
         verbose_name=_('Gas delivered color'),
         help_text=_("Graph color for gas delivered")
+    )
+    phase_delivered_l1_color = ColorField(
+        default='#A47448',
+        verbose_name=_('Phase L1 color'),
+        help_text=_("Graph color for phase L1")
+    )
+    phase_delivered_l2_color = ColorField(
+        default='#A4484E',
+        verbose_name=_('Phase L2 color'),
+        help_text=_("Graph color for phase L2 (when available)")
+    )
+    phase_delivered_l3_color = ColorField(
+        default='#A44882',
+        verbose_name=_('Phase L3 color'),
+        help_text=_("Graph color for phase L3 (when available)")
     )
     temperature_color = ColorField(
         default='#0073B7',

@@ -67,15 +67,16 @@
     
     
     <div class="row">
+        <div id="summary-loader1" class="xhr-hidden text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
         <div class="col-md-12" id="summary-holder1"></div>
     </div>   
     
     <div class="row">
+        <div id="summary-loader2" class="xhr-hidden text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
         <div class="col-md-12" id="summary-holder2"></div>
     </div>   
 
-
-    <div class="row" id="electricity-chart-holder" style="display: none;">
+    <div class="row xhr-hidden chart-holder" id="electricity-chart-holder">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -83,17 +84,15 @@
                 </header>
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-chart1"></canvas>
-                    <div id="electricity-chart-legend1"></div>
                 </div>
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-chart2"></canvas>
-                    <div id="electricity-chart-legend2"></div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="row" id="electricity-returned-chart-holder" style="display: none;">
+    <div class="row xhr-hidden chart-holder" id="electricity-returned-chart-holder">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -101,17 +100,15 @@
                 </header>
                  <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-returned-chart1"></canvas>
-                    <div id="electricity-returned-chart-legend1"></div>
                 </div>
                 <div class="panel-body" style="height: 200px;">
                     <canvas id="electricity-returned-chart2"></canvas>
-                    <div id="electricity-returned-chart-legend2"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row" id="gas-chart-holder" style="display: none;">
+    <div class="row xhr-hidden chart-holder" id="gas-chart-holder">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -138,23 +135,23 @@
 {% block javascript %}
         {{ block.super }}
         {% get_current_language as LANGUAGE_CODE %}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-2.17.1.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.en.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.nl.min.js' %}"></script>
 
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart-2.4.0.min.js' %}"></script>
 
         <script type="text/javascript">
             var line_options = {
-                /* Not available globally, but it fixes duplicate tooltips being triggered by x-axis data points close to each other. */
-                pointHitDetectionRadius: 5,
-                pointDotRadius: 2.5,
-                
-                {% verbatim %}
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"display: inline; margin-right: 24px; font-weight: bold;\"><span style=\"color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
-                {% endverbatim %}
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
             }
             
             var g_chart_instances = {
@@ -256,6 +253,9 @@
              */
             function update_summary(selected_date, id_postfix)
             {
+                $("#summary-holder" + id_postfix).hide();
+            	$("#summary-loader" + id_postfix).show();
+            	
                 $.ajax({
                     url: "{% url 'frontend:archive-xhr-summary' %}",
                     data: {
@@ -263,7 +263,8 @@
                         'level': g_datepicker_view_mode
                     },
                 }).done(function(data) {
-                    $("#summary-holder" + id_postfix).html(data);
+                    $("#summary-loader" + id_postfix).hide();
+                    $("#summary-holder" + id_postfix).html(data).show();
                 });
             }
             
@@ -288,7 +289,6 @@
                             'electricity_' + id_postfix,
                             "#electricity-chart-holder",
                             "#electricity-chart" + id_postfix,
-                            "#electricity-chart-legend" + id_postfix,
                             charts.electricity
                         );
                     }
@@ -299,7 +299,6 @@
                             'electricity_returned_' + id_postfix,
                             "#electricity-returned-chart-holder",
                             "#electricity-returned-chart" + id_postfix,
-                            "#electricity-returned-chart-legend" + id_postfix,
                             charts.electricity_returned
                         );
                     }
@@ -310,14 +309,13 @@
                             'gas_' + id_postfix,
                             "#gas-chart-holder",
                             "#gas-chart" + id_postfix,
-                            null,
                             charts.gas
                         );
                     }
                 });
             }
             
-            function render_chart(global_instance_key, holder_id, chart_id, legend_id, chart_info)
+            function render_chart(global_instance_key, holder_id, chart_id, chart_info)
             {
                 var data = {
                     labels: chart_info.labels,
@@ -333,12 +331,11 @@
 
                 var ctx = $(chart_id).get(0).getContext("2d");
                 ctx.canvas.height = $(chart_id).parent().height();
-                g_chart_instances[global_instance_key] = new Chart(ctx).Line(data, line_options);
-                
-                if (legend_id)
-                {
-                    $(legend_id).html(g_chart_instances[global_instance_key].generateLegend());
-                }
+                g_chart_instances[global_instance_key] = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: line_options
+                });
             }
             
         </script>

@@ -9,4 +9,4 @@ class AppConfig(AppConfig):
     def ready(self):
         # For some weird reason Django proposes this model for DELETION when executing 'makemigrations'.
         # This seems to prevent it somehow...
-        from .models.message import Notification
+        from .models.message import Notification  # noqa: W0611

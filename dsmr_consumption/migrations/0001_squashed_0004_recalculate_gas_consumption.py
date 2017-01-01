@@ -6,10 +6,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    replaces = [('dsmr_consumption', '0001_initial'), ('dsmr_consumption', '0002_split_dsmr_reading_fields'), ('dsmr_consumption', '0003_realign_gas_read_at'), ('dsmr_consumption', '0004_recalculate_gas_consumption')]
-
     dependencies = [
-        ('dsmr_datalogger', '0003_split_dsmr_reading_fields'),
     ]
 
     operations = [
