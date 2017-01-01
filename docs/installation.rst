@@ -103,7 +103,7 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
 - Flush privileges to activate them::
 
-    mysqladmin reload
+    sudo mysqladmin reload --defaults-file=/etc/mysql/debian.cnf
 
 
 2. Dependencies
@@ -197,22 +197,29 @@ Although it's just a folder inside our user's homedir, it's very effective as it
 
     mkdir ~/.virtualenvs
 
-- Create a new virtualenv, we usually use the same name for it as the application or project. Note that it's important to specify **python3** as the default interpreter::
+- Create a new virtualenv, we usually use the same name for it as the application or project::
 
     virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3
 
-Now *activate* the environment. It effectively directs all aliases for software installed in the virtualenv to the binaries inside the virtualenv.
-I.e. the Python binary inside ``/usr/bin/python`` won't be used when the virtualenv is activated, but ``/home/dsmr/.virtualenvs/dsmrreader/bin/python`` will be instead.
+.. note::
 
-- Activate virtualenv & cd to project::
+    Note that it's important to specify **Python 3** as the default interpreter.
+
+- Put both commands below in the ``dsmr`` user's ``~/.bashrc`` file with your favorite text editor::
 
     source ~/.virtualenvs/dsmrreader/bin/activate
     
     cd ~/dsmr-reader
 
-You might want to put the ``source ~/.virtualenvs/dsmrreader/bin/activate`` command above in the user's ``~/.bashrc`` (logout and login to test).
+This will both **activate** the virtual environment and cd you into the right directory on your **next login** as ``dsmr`` user.
 
-I also advice to put the ``cd ~/dsmr-reader`` in there as well, which will cd you directly inside the project folder on login.
+.. note::
+    
+    You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``.
+
+    You should see the terminal have a ``(dsmrreader)`` prefix now, for example: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``
+
+Make sure you've read and executed the note above, because you'll need it for the next chapter. 
 
 
 7. Application configuration & setup
@@ -277,18 +284,23 @@ Alter username and email if you prefer other credentials, but email is not used 
 
     ./manage.py changepassword admin
 
+You've almost completed the installation now.
 
     
 9. Webserver/Nginx (part 2)
 ---------------------------
-Go back to ``root`` / ``sudo`` user to config webserver (press ``CTRL + D`` once).
 
 .. note::
 
-    **OPTIONAL**: Remove the default Nginx vhost (*only when you do not use it yourself*)::
+    This installation guide asumes you run the Nginx webserver for this application only.
+    
+    It's possible to have other applications use Nginx as well, but that requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will copy below.
+
+Go back to ``root`` / ``sudo`` user to configure the webserver (press ``CTRL + D`` once).
+
+Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::
 
         sudo rm /etc/nginx/sites-enabled/default
-
 
 - Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 

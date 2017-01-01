@@ -6,12 +6,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-25 22:49+0100\n"
-"PO-Revision-Date: 2016-12-20 00:33+0100\n"
-"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
-"Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Project-Id-Version: DSMR Reader v1.x\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2016-01-01 00:00+0100\n"
+"PO-Revision-Date: 2017-01-01 00:00+0100\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -163,29 +163,33 @@ msgid ""
 "/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr ""
 
-#: ../../credits.rst:68
+#: ../../credits.rst:66
+msgid "`Buienradar <http://www.buienradar.nl>`_"
+msgstr ""
+
+#: ../../credits.rst:70
 msgid "Misc"
 msgstr "Overig"
 
-#: ../../credits.rst:70
+#: ../../credits.rst:72
 msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 msgstr "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 
-#: ../../credits.rst:72
+#: ../../credits.rst:74
 msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 msgstr ""
 
-#: ../../credits.rst:74
+#: ../../credits.rst:76
 msgid ""
 "`Joost van der Linde (smartmeterdashboard) "
 "<http://www.smartmeterdashboard.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:76
+#: ../../credits.rst:78
 msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:78
+#: ../../credits.rst:80
 msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 msgstr ""
 

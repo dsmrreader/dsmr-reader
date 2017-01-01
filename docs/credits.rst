@@ -63,6 +63,8 @@ Please note and respect their licences, if any, as well.
 
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
 
+- `Buienradar <http://www.buienradar.nl>`_
+
 
 Misc
 ----

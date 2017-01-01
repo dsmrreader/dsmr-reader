@@ -5,12 +5,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader\n"
+"Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 21:10+0100\n"
-"PO-Revision-Date: 2016-12-30 21:11+0100\n"
-"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
-"Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2017-01-01 14:45+0100\n"
+"PO-Revision-Date: 2017-01-01 00:00+0100\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1118,107 +1118,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "By"
-#~ msgstr "Door"
-
-#~ msgid "The number of telegrams this application has rejected due to invalid CRC checksum testing"
-#~ msgstr "Het aantal DSMR telegrammen dat genegeerd wegens een foutieve CRC checksum"
-
-#~ msgid "Reverse dashboard graphs"
-#~ msgstr "Keer dashboard-grafieken om"
-
-#~ msgid "Whether graphs are rendered with an reversed X-axis"
-#~ msgstr "Bepaalt of de x-as van grafieken zijn omgedraaid"
-
-#~ msgid "This month"
-#~ msgstr "Huidige maand"
-
-#~ msgid "DSMR (Dutch Smart Meter Requirements) reader"
-#~ msgstr "DSMR (Dutch Smart Meter Requirements) reader"
-
-#~ msgid "created by"
-#~ msgstr "gemaakt door"
-
-#~ msgid "DSMR-reader"
-#~ msgstr "DSMR-reader"
-
-#~ msgid "Readings"
-#~ msgstr "Metingen"
-
-#~ msgid "Status regarding the latest data read from your meter."
-#~ msgstr "Voortgang m.b.t. de meest recente gevens uit je meter."
-
-#~ msgid "It has been a while since the latest meter reading. Your <strong>datalogger process</strong> might hang or has been crashed."
-#~ msgstr "De laatste uitlezing van je meter is een tijdje geleden. Mogelijk hangt het <strong>datalogger proces</strong> of is deze gecrashed."
-
-#~ msgid "First reading"
-#~ msgstr "Eerste meting"
-
-#~ msgid "Background"
-#~ msgstr "Achtergrond"
-
-#~ msgid "Status regarding processing readings, making them visible in other pages and graphs."
-#~ msgstr "Voortgang met betrekking tot het verwerken van uitlezingen, waarna ze zichtbaar zijn in andere pagina's en grafieken."
-
-#~ msgid "There are too many unprocessed readings. Your <strong>backend process</strong> might hang or has been crashed."
-#~ msgstr "Er zijn te veel onverwerkte metingen. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
-
-#~ msgid "Latest electricity consumption tracked"
-#~ msgstr "Meest recente elektriciteitsverbruik verwerkt"
-
-#~ msgid "It has been a while since electricity consumption was tracked. Your <strong>backend process</strong> might hang or has been crashed."
-#~ msgstr "Het meest recente elektriciteitsverbruik is een tijdje geleden verwerkt. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
-
-#~ msgid "Latest gas consumption tracked"
-#~ msgstr "Meest recente gasverbruik verwerkt"
-
-#~ msgid "It has been a while since gas consumption was tracked. Your <strong>backend process</strong> might hang or has been crashed."
-#~ msgstr "Het meest recente gasverbruik is een tijdje geleden verwerkt. Mogelijk hangt het <strong>achtergrondproces</strong> of is deze gecrashed."
-
-#~ msgid "Data availability"
-#~ msgstr "Beschikbaarheid gegevens"
-
-#~ msgid "Based on readings until this moment. Electricity usage should be always available. Gas usage and electricity return depend on your home situation."
-#~ msgstr "Gebaseerd op verwerkte metingen tot nu toe. Elektriciteitsverbruik zou altijd beschikbaar moeten zijn. Gasverbruik en elektriciteitsteruglevering hangen af van je thuissituatie."
-
-#~ msgid "Data type"
-#~ msgstr "Soort gegevens"
-
-#~ msgid "Read"
-#~ msgstr "Gemeten"
-
-#~ msgid "Changelog"
-#~ msgstr "Wijzigingenoverzicht"
-
-#~ msgid "View all releases"
-#~ msgstr "Bekijk alle versies"
-
-#~ msgid ""
-#~ "Your daily usage statistics for {}\n"
-#~ "Total cost: € {}\n"
-#~ "Electricity: {} kWh\n"
-#~ "Gas: {} m3"
-#~ msgstr ""
-#~ "Dagelijkse verbruiksstatistieken voor {}\n"
-#~ "Totale kosten: € {}\n"
-#~ "Elektriciteit: {} kWh\n"
-#~ "Gas: {} m3"
-
-#~ msgid "All data below is calculated among all consumption tracked until a day ago. Untracked consumption and any usage of today is not taken into account."
-#~ msgstr "Alle onderstaande gegevens zijn gebaseerd op al het gemeten verbruik tot en met gisteren. Ongemeten verbruik en het verbruik van vandaag worden hierin niet meegenomen."
-
-#~ msgid "Current data displayed averages %(hour_statistics_count)s hour(s), among %(day_statistics_count)s day(s)."
-#~ msgstr "Huidige gegevens betreffen gemiddelden over %(hour_statistics_count)s uren, verdeeld over %(day_statistics_count)s dag(en)."
-
-#~ msgid "Electricity 2 (per kWh)"
-#~ msgstr "Elektriciteit 2 (per kWh)"
-
-#~ msgid "Gas (per m<sup>3</sup>)"
-#~ msgstr "Gas (per m<sup>3</sup>)"
-
-#~ msgid "Electricity 1 returned (high tariff)"
-#~ msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
-
-#~ msgid "Test"
-#~ msgstr "Banaaa"

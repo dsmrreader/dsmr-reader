@@ -4,16 +4,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 00:22+0100\n"
-"PO-Revision-Date: 2016-11-24 21:41+0100\n"
-"Last-Translator: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
-"Language-Team: Dennis Siemensma <dsmr@dennissiemensma.nl>\n"
+"Project-Id-Version: DSMR Reader v1.x\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2017-01-01 14:41+0100\n"
+"PO-Revision-Date: 2017-01-01 14:44+0100\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../contributing.rst:2
 msgid "Contributing"
@@ -29,19 +31,39 @@ msgstr "Feedback"
 
 #: ../../contributing.rst:8
 msgid ""
-"All feedback and any input is, as always, very much appreciated! `Please "
-"create an issue on Github <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/new>`_."
+"All feedback and any input is, as always, very much appreciated! It doesn't "
+"matter whether you run into problems getting started in this guide or just "
+"want to get in touch, just fire away!"
 msgstr ""
-"Feedback wordt, in alle soorten en maten, altijd erg gewaardeerd! Je kunt"
-" je input delen door `op Github een ticket aan te maken met je vraag of "
-"opmerking <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_."
+"Het maakt niet uit of je ergens tegenaan loopt of gewoon in contact wil komen, "
+"vraag maar raak!"
 
-#: ../../contributing.rst:10
+#: ../../contributing.rst:13
 msgid ""
-"It doesn't matter whether you run into problems getting started in this "
-"guide or just want to get in touch, just fire away!"
+"`Please create an issue on Github <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/new>`_ to get in contact."
 msgstr ""
-"Het maakt niet uit of je ergens tegenaan loopt of gewoon in contact wil "
-"komen, vraag maar raak!"
+"`Maak op Github een ticket aan met je vraag of opmerking <https://github.com/"
+"dennissiemensma/dsmr-reader/issues/new>`_."
 
+#: ../../contributing.rst:17
+msgid "Pull requests"
+msgstr "Pull requests"
+
+#: ../../contributing.rst:18
+msgid ""
+"Pull requests are appreciated, but please note that you should discuss any "
+"changes with a Github ticket first. It would be a shame if you'd put any "
+"effort in something that won't get merged after all."
+msgstr ""
+"Pull requests worden gewaardeerd, maar wees ervan bewust dat je wijzigingen "
+"het beste eerst kunt bespreken op Github via een ticket. Het zou zonde zijn "
+"wanneer je namelijk tijd steekt in iets wat achteraf niet gemerged wordt."
+
+#: ../../contributing.rst:21
+msgid ""
+"Also, please do not create pull requests for the ``master`` branch, but always "
+"point it to ``development``."
+msgstr ""
+"Tot slot, zorg ervoor dat pull requests altijd naar de ``development`` branch "
+"wijzen en niet de ``master``."
