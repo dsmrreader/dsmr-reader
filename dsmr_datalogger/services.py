@@ -113,8 +113,7 @@ def verify_telegram_checksum(data):
     calculated_checksum = crc16_function(telegram)  # For example: 56708
 
     if telegram_checksum != calculated_checksum:
-        raise InvalidTelegramChecksum('{} (telegram) != {} (calculated) {}'.format(
-            telegram_checksum, calculated_checksum, hex(calculated_checksum).upper()))
+        raise InvalidTelegramChecksum('{} (telegram) != {} (calculated)'.format(telegram_checksum, calculated_checksum))
 
 
 def telegram_to_reading(data):  # noqa: C901
