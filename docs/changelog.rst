@@ -17,6 +17,16 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
     - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
 
 
+
+v1.6.0 - 2017-xx-xx
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- xxxxxxxx (`#yyy <https://github.com/dennissiemensma/dsmr-reader/issues/yyy>`_).
+
+
+
 v1.5.0 - 2017-01-01
 ^^^^^^^^^^^^^^^^^^^
 
