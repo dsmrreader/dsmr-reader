@@ -365,6 +365,7 @@
                 /* Auto refresh. */
                 update_header();
                 setInterval(function(){ update_header(); }, 2500);
+                setInterval(function(){ update_graphs(); }, 5000);
                 
                 initialize_graphs();
             });
