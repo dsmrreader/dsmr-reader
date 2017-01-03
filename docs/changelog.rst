@@ -23,7 +23,7 @@ v1.6.0 - 2017-xx-xx
 
 **Tickets resolved in this release:**
 
-- xxxxxxxx (`#yyy <https://github.com/dennissiemensma/dsmr-reader/issues/yyy>`_).
+- Extend API docs with additional example (`#185 <https://github.com/dennissiemensma/dsmr-reader/issues/185>`_).
 
 
 
