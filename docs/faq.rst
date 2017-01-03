@@ -135,8 +135,8 @@ This application displays separate tariffs by default, but supports merging them
 Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option ``Merge electricity tariffs`` in the frontend configuration.
 
 
-I want to see my electricity phases as well
--------------------------------------------
+I want to see the load of each electricity phase as well
+---------------------------------------------------------
 Since ``DSMR-reader v1.5`` it's possible to track your ``P+`` (consumption) phases as well. You will need to enable this in the ``Datalogger configuration``.
 There is a setting called ``Track electricity phases``. When active, this will log the current usage of those phases and plot these on the Dashboard page.
 
@@ -170,6 +170,58 @@ Please make sure that your meter supports reading gas consumption and that you'v
 The gas meter positions are only be updated once per hour (for DSMR v4).
 The Status page will give you insight in this as well.
 
+
+How do I restore a database backup?
+-----------------------------------
+
+.. warning::
+
+    Restoring a backup will replace any existing data stored in the database and is irreversible! 
+
+.. note::
+
+    Do you need a complete reinstall of DSMR-reader as well? 
+    Then please :doc:`follow the install guide<installation>` and restore the database backup **using the notes at the end of chapter 1**. 
+
+Only want to restore the database?
+
+- This asumes you are still running the same application version as the backup was created in.
+
+- Stop the application first with ``sudo supervisorctl stop all``. This will disconnect it from the database as well.
+
+For **PostgreSQL** restores::
+
+    sudo sudo -u postgres dropdb dsmrreader
+    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+    
+    # Either restore an uncompressed (.sql) backup:
+    sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
+    
+    # OR
+    
+    # Restore a compressed (.gz) backup with:
+    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
+
+
+For **MySQL** restores::
+
+    sudo mysqladmin create dsmrreader
+    sudo mysqladmin drop dsmrreader
+    
+    # Either restore an uncompressed (.sql) backup:
+    cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+    
+    # OR
+    
+    # Restore a compressed (.gz) backup with:
+    zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+
+
+- Start the application again with ``sudo supervisorctl start all``.
+
+.. note::
+
+    In case the version differs, you can try forcing a deployment reload by: ``sudo su - dsmr`` and then executing ``./post-deploy.sh``.
 
 
 Feature/bug report

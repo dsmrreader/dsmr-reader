@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2017-01-01 14:54+0100\n"
-"PO-Revision-Date: 2017-01-01 14:56+0100\n"
+"POT-Creation-Date: 2017-01-03 19:26+0100\n"
+"PO-Revision-Date: 2017-01-03 19:29+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -180,7 +180,7 @@ msgstr ""
 "PostgreSQL te kiezen. Dit vanwege de uitstekende ingebouwde ondersteuning voor "
 "tijdzones (nodig voor zomer-/wintertijd)."
 
-#: ../../installation.rst:67 ../../installation.rst:245
+#: ../../installation.rst:67 ../../installation.rst:269
 msgid "(Option A.) PostgreSQL"
 msgstr "(Keuze A.) PostgreSQL"
 
@@ -192,7 +192,7 @@ msgstr ""
 "Installeer PostgreSQL. Daarnaast is ``postgresql-server-dev-all`` nodig voor "
 "het installeren van de VirtualEnv later."
 
-#: ../../installation.rst:70 ../../installation.rst:95
+#: ../../installation.rst:70 ../../installation.rst:107
 msgid "Install database::"
 msgstr "Installeer database::"
 
@@ -215,7 +215,7 @@ msgstr ""
 "(!) Negeer voor de volgende drie commando's de foutmelding: '*could not change "
 "directory to \"/root\": Permission denied*'."
 
-#: ../../installation.rst:78 ../../installation.rst:103
+#: ../../installation.rst:78 ../../installation.rst:115
 msgid "Create database user::"
 msgstr "Creëer databasegebruiker::"
 
@@ -229,11 +229,25 @@ msgstr ""
 msgid "Set password for database user::"
 msgstr "Stel wachtwoord in voor databasegebruiker::"
 
-#: ../../installation.rst:92 ../../installation.rst:253
+#: ../../installation.rst:92
+msgid ""
+"**Optional**: Do you need to restore a **PostgreSQL** database backup as well?"
+msgstr ""
+"**Optioneel**: Wil je ook nog een **PostgreSQL** database back-up herstellen?"
+
+#: ../../installation.rst:94 ../../installation.rst:131
+msgid "Restore an uncompressed (``.sql``) backup with::"
+msgstr "Herstel een ongecomprimeerde (``.sql``) back-up met::"
+
+#: ../../installation.rst:98 ../../installation.rst:135
+msgid "Or restore a compressed (``.gz``) backup with::"
+msgstr "Of herstel een gecomprimeerde (``.gz``) back-up met::"
+
+#: ../../installation.rst:104 ../../installation.rst:277
 msgid "(Option B.) MySQL/MariaDB"
 msgstr "(Keuze B.) MySQL/MariaDB"
 
-#: ../../installation.rst:93
+#: ../../installation.rst:105
 msgid ""
 "Install MariaDB. You can also choose to install the closed source MySQL, as "
 "they should be interchangeable anyway. ``libmysqlclient-dev`` is required for "
@@ -243,23 +257,27 @@ msgstr ""
 "installeren. Welke je ook kiest, ``libmysqlclient-dev`` is later nodig voor de "
 "VirtualEnv."
 
-#: ../../installation.rst:99
+#: ../../installation.rst:111
 msgid "Create database::"
 msgstr "Creëer database::"
 
-#: ../../installation.rst:107
+#: ../../installation.rst:119
 msgid "Set privileges for database user::"
 msgstr "Stel rechten in voor databasegebruiker::"
 
-#: ../../installation.rst:111
+#: ../../installation.rst:123
 msgid "Flush privileges to activate them::"
 msgstr "Pas de databaserechten toe::"
 
-#: ../../installation.rst:117
+#: ../../installation.rst:129
+msgid "**Optional**: Do you need to restore a **MySQL** database backup as well?"
+msgstr "**Optioneel**: Wil je ook nog een **MySQL** database back-up herstellen?"
+
+#: ../../installation.rst:141
 msgid "2. Dependencies"
 msgstr "2. Afhankelijkheden"
 
-#: ../../installation.rst:118
+#: ../../installation.rst:142
 msgid ""
 "Now you'll have to install several utilities, required for the Nginx webserver, "
 "Gunicorn application server and cloning the application code from the Github "
@@ -269,7 +287,7 @@ msgstr ""
 "de Gunicorn applicatieserver en voor het binnenhalen van de code van de "
 "applicatie vanaf Github::"
 
-#: ../../installation.rst:122
+#: ../../installation.rst:146
 msgid ""
 "Install ``cu``. The CU program allows easy testing for your DSMR serial "
 "connection. It's very basic but also very effective to simply test whether your "
@@ -279,11 +297,11 @@ msgstr ""
 "verbinding testen naar je slimme meter toe. Erg handig om te kijken of dat "
 "überhaupt al lekker werkt."
 
-#: ../../installation.rst:128
+#: ../../installation.rst:152
 msgid "3. Application user"
 msgstr "3. Applicatiegebruiker"
 
-#: ../../installation.rst:129
+#: ../../installation.rst:153
 msgid ""
 "The application runs as ``dsmr`` user by default. This way we do not have to "
 "run the application as ``root``, which is a bad practice anyway."
@@ -291,7 +309,7 @@ msgstr ""
 "De applicatie draait standaard onder de gebruiker ``dsmr``. Hierdoor heeft het "
 "geen ``root``-rechten (nodig), wat over het algemeen zeer afgeraden wordt."
 
-#: ../../installation.rst:131
+#: ../../installation.rst:155
 msgid ""
 "Create user with homedir. The application code and virtualenv will reside in "
 "this directory as well::"
@@ -299,7 +317,7 @@ msgstr ""
 "Maak een aparte gebruiker aan met eigen homedir. De code voor de applicatie en "
 "VirtualEnv zetten we later hier in::"
 
-#: ../../installation.rst:135
+#: ../../installation.rst:159
 msgid ""
 "Our user also requires dialout permissions. So allow the user to perform a "
 "dialout by adding it to the ``dialout`` group::"
@@ -307,7 +325,7 @@ msgstr ""
 "De gebruiker heeft ook toegang nodig om de kabel te kunnen uitlezen. Hiervoor "
 "voegen de we gebruiker toe aan de groep ``dialout``::"
 
-#: ../../installation.rst:139
+#: ../../installation.rst:163
 msgid ""
 "Either proceed to the next heading **for a test reading** or continue at "
 "chapter 4."
@@ -315,11 +333,11 @@ msgstr ""
 "Ga ofwel door naar het volgende hoofdstuk **voor een testmeting** of ga direct "
 "door naar stap 4."
 
-#: ../../installation.rst:143
+#: ../../installation.rst:167
 msgid "Your first reading (optional)"
 msgstr "Je allereerste (optionele) meting"
 
-#: ../../installation.rst:147
+#: ../../installation.rst:171
 msgid ""
 "**OPTIONAL**: You may skip this section as it's not required for the "
 "application to install. However, if you have never read your meter's P1 "
@@ -331,7 +349,7 @@ msgstr ""
 "nog nooit eerder je P1-poort hebt uitgelezen. Hiermee verzeker je jezelf ook "
 "dat de applicatie straks dezelfde (werkende) toegang heeft voor de metingen."
 
-#: ../../installation.rst:149
+#: ../../installation.rst:173
 msgid ""
 "Now login as the user we have just created, to perform our very first "
 "reading! ::"
@@ -339,15 +357,15 @@ msgstr ""
 "Log nu in als de gebruiker die we zojuist hebben aangemaakt voor de eerste "
 "testmeting! ::"
 
-#: ../../installation.rst:153
+#: ../../installation.rst:177
 msgid "Test with ``cu`` for **DSMR 4+**::"
 msgstr "Test met ``cu`` voor **DSMR 4+**::"
 
-#: ../../installation.rst:157
+#: ../../installation.rst:181
 msgid "Or test with ``cu`` for **DSMR 2.2** (untested)::"
 msgstr "Of test met ``cu`` voor **DSMR 2.2** (ongetest)::"
 
-#: ../../installation.rst:161
+#: ../../installation.rst:185
 msgid ""
 "You now should see something similar to ``Connected.`` and a wall of text and "
 "numbers *within 10 seconds*. Nothing? Try different BAUD rate, as mentioned "
@@ -360,7 +378,7 @@ msgstr ""
 "Of `kijk op een nuttig weblog <http://gejanssen.com/howto/Slimme-meter-uitlezen/"
 ">`_."
 
-#: ../../installation.rst:163
+#: ../../installation.rst:187
 msgid ""
 "To exit cu, type \"``q.``\", hit Enter and wait for a few seconds. It should "
 "exit with the message ``Disconnected.``."
@@ -368,11 +386,11 @@ msgstr ""
 "Om cu af te sluiten, typ \"``q.``\", druk op Enter en wacht voor een paar "
 "seconden. Het programma sluit af met de melding ``Disconnected.``."
 
-#: ../../installation.rst:167
+#: ../../installation.rst:191
 msgid "4. Webserver/Nginx (part 1)"
 msgstr "4. Webserver/Nginx (deel 1)"
 
-#: ../../installation.rst:169
+#: ../../installation.rst:193
 msgid ""
 "*We will now prepare the webserver, Nginx. It will serve all application's "
 "static files directly and proxy any application requests to the backend, "
@@ -382,11 +400,11 @@ msgstr ""
 "bestanden en geeft de applicatie-verzoeken door naar de backend, waar de "
 "applicatie in Gunicorn draait onder Supervisor. Deze stellen we later in.*"
 
-#: ../../installation.rst:171
+#: ../../installation.rst:195
 msgid "Make sure you are still acting here as ``root`` or ``sudo`` user."
 msgstr "Zorg ervoor dat je hier nog steeds ``root``- of ``sudo``-gebruiker bent."
 
-#: ../../installation.rst:173
+#: ../../installation.rst:197
 msgid ""
 "Django will later copy all static files to the directory below, used by Nginx "
 "to serve statics. Therefor it requires (write) access to it::"
@@ -394,11 +412,11 @@ msgstr ""
 "Django kopieert alle statische bestanden naar een aparte map, die weer door "
 "Nginx gebruikt wordt. Daarom is er tevens (schrijf)toegang voor nodig::"
 
-#: ../../installation.rst:181
+#: ../../installation.rst:205
 msgid "5. Clone project code from Github"
 msgstr "5. Kloon project code vanaf Github"
 
-#: ../../installation.rst:182
+#: ../../installation.rst:206
 msgid ""
 "Now is the time to clone the code from the repository into the homedir we "
 "created."
@@ -406,7 +424,7 @@ msgstr ""
 "Nu kunnen we de code van de applicatie van Github downloaden en in de homedir "
 "zetten die we net aangemaakt hebben."
 
-#: ../../installation.rst:184
+#: ../../installation.rst:208
 msgid ""
 "Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - "
 "dsmr``)"
@@ -414,11 +432,11 @@ msgstr ""
 "Zorg ervoor dat je ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: "
 "``sudo su - dsmr``)"
 
-#: ../../installation.rst:186
+#: ../../installation.rst:210
 msgid "Clone the repository::"
 msgstr "Kloon de repository::"
 
-#: ../../installation.rst:190
+#: ../../installation.rst:214
 msgid ""
 "This may take a few seconds. When finished, you should see a new folder called "
 "``dsmr-reader``, containing a clone of the Github repository."
@@ -427,11 +445,11 @@ msgstr ""
 "genaamd ``dsmr-reader``, met daarin een kopie van de repository zoals die op "
 "Github staat."
 
-#: ../../installation.rst:194
+#: ../../installation.rst:218
 msgid "6. Virtualenv"
 msgstr "6. VirtualEnv"
 
-#: ../../installation.rst:196
+#: ../../installation.rst:220
 msgid ""
 "The dependencies our application uses are stored in a separate environment, "
 "also called **VirtualEnv**."
@@ -439,7 +457,7 @@ msgstr ""
 "Alle (externe) afhankelijkheden worden opgeslagen in een aparte omgeving, ook "
 "wel **VirtualEnv** genoemd."
 
-#: ../../installation.rst:198
+#: ../../installation.rst:222
 msgid ""
 "Although it's just a folder inside our user's homedir, it's very effective as "
 "it allows us to keep dependencies isolated or to run different versions of the "
@@ -452,7 +470,7 @@ msgstr ""
 "dat dat elkaar bijt. Meer informatie hierover `kan hier gevonden worden <http://"
 "docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
 
-#: ../../installation.rst:201
+#: ../../installation.rst:225
 msgid ""
 "Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - "
 "dsmr``)"
@@ -460,11 +478,11 @@ msgstr ""
 "Zorg ervoor dat je nog steeds ingelogd bent als ``dsmr``-gebruiker (zo niet, "
 "typ dan: ``sudo su - dsmr``)"
 
-#: ../../installation.rst:203
+#: ../../installation.rst:227
 msgid "Create folder for the virtualenv(s) of this user::"
 msgstr "Maak map aan voor de VirtualEnv van deze gebruiker::"
 
-#: ../../installation.rst:207
+#: ../../installation.rst:231
 msgid ""
 "Create a new virtualenv, we usually use the same name for it as the application "
 "or project::"
@@ -472,14 +490,14 @@ msgstr ""
 "Maak een nieuwe VirtualEnv aan. Het is gebruikelijk om hiervoor dezelfde naam "
 "te gebruiken als die van de applicatie of het project."
 
-#: ../../installation.rst:213
+#: ../../installation.rst:237
 msgid ""
 "Note that it's important to specify **Python 3** as the default interpreter."
 msgstr ""
 "N.B.: het is belangrijk dat je voor deze VirtualEnv aangeeft dat **Python 3** "
 "de gewenste standaardversie is::"
 
-#: ../../installation.rst:215
+#: ../../installation.rst:239
 msgid ""
 "Put both commands below in the ``dsmr`` user's ``~/.bashrc`` file with your "
 "favorite text editor::"
@@ -487,7 +505,7 @@ msgstr ""
 "Zet beide commands in het ``~/.bashrc`` bestand van de ``dsmr`` gebruiker met "
 "je favoriete bestandseditor::"
 
-#: ../../installation.rst:221
+#: ../../installation.rst:245
 msgid ""
 "This will both **activate** the virtual environment and cd you into the right "
 "directory on your **next login** as ``dsmr`` user."
@@ -495,7 +513,7 @@ msgstr ""
 "Hiermee wordt zowel de VirtualEnv geactiveerd �n ga je direct naar de juiste "
 "map. Dit werkt de **eerstvolgende keer** dat je inlogt als ``dsmr`` gebruiker."
 
-#: ../../installation.rst:225
+#: ../../installation.rst:249
 msgid ""
 "You can easily test whether you've configured this correctly by logging out the "
 "``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``."
@@ -503,7 +521,7 @@ msgstr ""
 "Je kunt dit vrij gemakkelijk testen door uit te loggen als ``dsmr`` gebruiker "
 "(met CTRL + D) en vervolgens weer in te loggen met ``sudo su - dsmr``."
 
-#: ../../installation.rst:227
+#: ../../installation.rst:251
 msgid ""
 "You should see the terminal have a ``(dsmrreader)`` prefix now, for example: "
 "``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
@@ -511,7 +529,7 @@ msgstr ""
 "Als het goed is heeft je terminal nu een ``(dsmrreader)`` prefix, bijvoorbeeld: "
 "``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
 
-#: ../../installation.rst:229
+#: ../../installation.rst:253
 msgid ""
 "Make sure you've read and executed the note above, because you'll need it for "
 "the next chapter."
@@ -519,11 +537,11 @@ msgstr ""
 "Zorg ervoor dat je bovenstaande notities hebt gelezen �n uitgevoerd, aangezien "
 "ze nodig zijn voor het volgende hoofdstuk."
 
-#: ../../installation.rst:233
+#: ../../installation.rst:257
 msgid "7. Application configuration & setup"
 msgstr "7. Applicatieconfiguratie"
 
-#: ../../installation.rst:234
+#: ../../installation.rst:258
 msgid ""
 "Earlier in this guide you had to choose for either **(A.) PostgreSQL** or "
 "**(B.) MySQL/MariaDB**. Our application needs to know which backend used in "
@@ -533,7 +551,7 @@ msgstr ""
 "ofwel **(B.) MySQL/MariaDB**. De applicatie moet zelf ook weten met welke "
 "variant hij communiceert."
 
-#: ../../installation.rst:236
+#: ../../installation.rst:260
 msgid ""
 "Therefor I created two default (Django-)settings files you can copy, one for "
 "each backend. The application will also need the appropriate database client, "
@@ -546,7 +564,7 @@ msgstr ""
 "Daarvoor heb ik ook een tweetal requirements-bestanden gemaakt, waar alles al "
 "in staat wat nodig is. Zoals bijvoorbeeld Django en de databaseverbinding."
 
-#: ../../installation.rst:238
+#: ../../installation.rst:262
 msgid ""
 "The ``base.txt`` contains requirements which the application needs anyway, no "
 "matter which backend you've choosen."
@@ -554,7 +572,7 @@ msgstr ""
 "Het bestand ``base.txt`` bevat alle afhankelijkheden die de applicatie sowieso "
 "nodig heeft, ongeacht de databasekeuze die je gemaakt hebt."
 
-#: ../../installation.rst:242
+#: ../../installation.rst:266
 msgid ""
 "**Installation of the requirements below might take a while**, depending on "
 "your Internet connection, RaspberryPi speed and resources (generally CPU) "
@@ -565,15 +583,15 @@ msgstr ""
 "verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te maken wanneer dit "
 "lang lijkt te duren. :]"
 
-#: ../../installation.rst:246
+#: ../../installation.rst:270
 msgid "Did you choose PostgreSQL? Then execute these two lines::"
 msgstr "Heb je gekozen voor PostgreSQL? Voer dan deze twee regels uit::"
 
-#: ../../installation.rst:254
+#: ../../installation.rst:278
 msgid "Or did you choose MySQL/MariaDB? Execute these two commands::"
 msgstr "Of heb je gekozen voor MySQL/MariaDB? Voer dan deze twee commando's uit::"
 
-#: ../../installation.rst:261
+#: ../../installation.rst:285
 msgid ""
 "Did everything install without fatal errors? If either of the database clients "
 "refuses to install due to missing files/configs, make sure you've installed "
@@ -588,11 +606,11 @@ msgstr ""
 "(voor **MySQL**) geïnstalleerd, tegelijkertijd met de databaseserver. Die zijn "
 "namelijk hiervoor nodig."
 
-#: ../../installation.rst:267
+#: ../../installation.rst:291
 msgid "8. Bootstrapping"
 msgstr "8. Initialisatie"
 
-#: ../../installation.rst:268
+#: ../../installation.rst:292
 msgid ""
 "Now it's time to bootstrap the application and check whether all settings are "
 "good and requirements are met."
@@ -600,11 +618,11 @@ msgstr ""
 "Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie proberen te "
 "initialiseren."
 
-#: ../../installation.rst:270
+#: ../../installation.rst:294
 msgid "Execute this to initialize the database we've created earlier::"
 msgstr "Voer dit uit om de database te initialiseren::"
 
-#: ../../installation.rst:274
+#: ../../installation.rst:298
 msgid ""
 "Prepare static files for webinterface. This will copy all static files to the "
 "directory we created for Nginx earlier in the process. It allows us to have "
@@ -615,11 +633,11 @@ msgstr ""
 "hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden kan hosten buiten "
 "de code-bestanden."
 
-#: ../../installation.rst:277
+#: ../../installation.rst:301
 msgid "Sync static files::"
 msgstr "Synchroniseer statische bestanden::"
 
-#: ../../installation.rst:281
+#: ../../installation.rst:305
 msgid ""
 "Create an application superuser. Django will prompt you for a password. The "
 "credentials generated can be used to access the administration panel inside the "
@@ -631,11 +649,11 @@ msgstr ""
 "applicatie gebruiken. Indien gewenst kun je een andere gebruikersnaam kiezen. "
 "Het e-mailadres maakt niet uit, want de applicatie ondersteunt toch geen e-mail."
 
-#: ../../installation.rst:284
+#: ../../installation.rst:308
 msgid "Create your user::"
 msgstr "Creëer je eigen gebruiker::"
 
-#: ../../installation.rst:290
+#: ../../installation.rst:314
 msgid ""
 "Because you have shell access you may reset your user's password at any time "
 "(in case you forget it). Just enter this for a password reset::"
@@ -643,15 +661,15 @@ msgstr ""
 "Wachtwoord ooit vergeten? Via de command line kun je je wachtwoord (bij "
 "verlies) hiermee aanpassen::"
 
-#: ../../installation.rst:294
+#: ../../installation.rst:318
 msgid "You've almost completed the installation now."
 msgstr "Je bent op dit punt bijna klaar met de installatie."
 
-#: ../../installation.rst:298
+#: ../../installation.rst:322
 msgid "9. Webserver/Nginx (part 2)"
 msgstr "9. Webserver/Nginx (deel 2)"
 
-#: ../../installation.rst:302
+#: ../../installation.rst:326
 msgid ""
 "This installation guide asumes you run the Nginx webserver for this application "
 "only."
@@ -659,7 +677,7 @@ msgstr ""
 "Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver alleen "
 "gebruikt voor deze applicatie."
 
-#: ../../installation.rst:304
+#: ../../installation.rst:328
 msgid ""
 "It's possible to have other applications use Nginx as well, but that requires "
 "you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will "
@@ -669,7 +687,7 @@ msgstr ""
 "daarvoor zul je de wildcard moet weghalen in de ``dsmr-webinterface`` vhost, "
 "die je hieronder kopieert."
 
-#: ../../installation.rst:306
+#: ../../installation.rst:330
 msgid ""
 "Go back to ``root`` / ``sudo`` user to configure the webserver (press ``CTRL + "
 "D`` once)."
@@ -677,7 +695,7 @@ msgstr ""
 "Ga terug naar de ``root`` / ``sudo``-gebruiker om de webserver in te stellen "
 "(druk op ``CTRL + D``)."
 
-#: ../../installation.rst:308
+#: ../../installation.rst:332
 msgid ""
 "Remove the default Nginx vhost (**only when you do not use it yourself, see the "
 "note above**)::"
@@ -685,7 +703,7 @@ msgstr ""
 "Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf gebruikt** "
 "(zie de notitie hierboven)::"
 
-#: ../../installation.rst:312
+#: ../../installation.rst:336
 msgid ""
 "Copy application vhost, **it will listen to any hostname** (wildcard), but you "
 "may change that if you feel like you need to. It won't affect the application "
@@ -694,18 +712,18 @@ msgstr ""
 "Kopieer de vhost voor de applicatie. Deze luistert standaard naar **elke "
 "hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te passen::"
 
-#: ../../installation.rst:316
+#: ../../installation.rst:340
 msgid ""
 "Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::"
 msgstr ""
 "Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad Nginx "
 "vervolgens wanneer de ``configtest`` lukt::"
 
-#: ../../installation.rst:325
+#: ../../installation.rst:349
 msgid "10. Supervisor"
 msgstr "10. Supervisor"
 
-#: ../../installation.rst:326
+#: ../../installation.rst:350
 msgid ""
 "Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run "
 "our application's web interface and background jobs used. It's also configured "
@@ -716,15 +734,15 @@ msgstr ""
 "Supervisor ervoor dat deze processen bij het (opnieuw) opstarten automatisch "
 "draaien."
 
-#: ../../installation.rst:329
+#: ../../installation.rst:353
 msgid "Copy the configuration file for Supervisor::"
 msgstr "Kopieer het configuratie-bestand voor Supervisor::"
 
-#: ../../installation.rst:333
+#: ../../installation.rst:357
 msgid "Login to ``supervisorctl`` management console::"
 msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
 
-#: ../../installation.rst:337
+#: ../../installation.rst:361
 msgid ""
 "Enter these commands (**listed after the** ``>``). It will ask Supervisor to "
 "recheck its config directory and use/reload the files::"
@@ -732,7 +750,7 @@ msgstr ""
 "Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor dat "
 "Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
 
-#: ../../installation.rst:343
+#: ../../installation.rst:367
 msgid ""
 "Three processes should be started or running. Make sure they don't end up in "
 "``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few "
@@ -742,15 +760,15 @@ msgstr ""
 "uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn gekomen. Je "
 "kunt het overzicht verversen door ``status`` te typen."
 
-#: ../../installation.rst:345
+#: ../../installation.rst:369
 msgid "When still in ``supervisorctl``'s console, type::"
 msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"
 
-#: ../../installation.rst:349
+#: ../../installation.rst:373
 msgid "Example of everything running well::"
 msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
-#: ../../installation.rst:355
+#: ../../installation.rst:379
 msgid ""
 "Want to check whether the datalogger works? Just tail it's log in supervisor "
 "with::"
@@ -758,7 +776,7 @@ msgstr ""
 "Wil je controleren of de datalogger zijn werk goed doet? Bekijk dan het "
 "logbestand in supervisor met::"
 
-#: ../../installation.rst:359
+#: ../../installation.rst:383
 msgid ""
 "You should see similar output as the ``cu``-command printed earlier in the "
 "installation process."
@@ -766,7 +784,7 @@ msgstr ""
 "Uiteindelijk zou je ongeveer dezelfde lap tekst moeten zien als toen we "
 "handmatig gemeten hebben met het ``cu``-programma."
 
-#: ../../installation.rst:361
+#: ../../installation.rst:385
 msgid ""
 "Want to quit supervisor? ``CTRL + C`` to stop tailing and then ``CTRL + D`` "
 "once to exit supervisor command line."
@@ -774,7 +792,7 @@ msgstr ""
 "Wil je uit supervisor? Druk dan op ``CTRL + C`` om het logbestand niet meer te "
 "bekijken en vervolgens op ``CTRL + D`` om uit supervisor te gaan."
 
-#: ../../installation.rst:364
+#: ../../installation.rst:388
 msgid ""
 "You now should have everything up and running! We're almost done and just need "
 "to do a few last things on the next page."
