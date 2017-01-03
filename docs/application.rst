@@ -47,7 +47,8 @@ Data preservation & backups
 
 - The SD card is by far **the weakest link** of this setup and **will** fail you some day.
 
-- The application will, by default, create a backup every night. However, as the data is still stored **locally** on your 'vulnerable' SD card, you must export it off your RaspberryPi as well. 
+- The application will, by default, create a backup every night. These are stored in ``/home/pi/dsmr-reader/backups`` as *.gz files (compressed archives that can be opened by 7-Zip on Windows for example).
+However, as the data is still stored **locally** on your 'vulnerable' SD card, you must export it off your RaspberryPi as well. 
 
 - There is an builtin option to have backups synced to your **Dropbox**, *without exposing your Dropbox account and your private files in it*. 
 
