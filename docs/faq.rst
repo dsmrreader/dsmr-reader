@@ -135,7 +135,7 @@ This application displays separate tariffs by default, but supports merging them
 Just make sure that you apply the **same price to both electricity 1 and 2** and enable the option ``Merge electricity tariffs`` in the frontend configuration.
 
 
-I want to see my electricity phases as well
+I want to see the load of each electricity phase as well
 -------------------------------------------
 Since ``DSMR-reader v1.5`` it's possible to track your ``P+`` (consumption) phases as well. You will need to enable this in the ``Datalogger configuration``.
 There is a setting called ``Track electricity phases``. When active, this will log the current usage of those phases and plot these on the Dashboard page.
