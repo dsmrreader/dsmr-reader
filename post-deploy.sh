@@ -2,6 +2,22 @@
 
 echo ""
 echo ""
+echo " --- Checking whether VirtualEnv is activated."
+python -c 'import sys; exit_code = 0 if hasattr(sys, "real_prefix") else 1; sys.exit(exit_code);'
+
+if [ $? -ne 0 ]; then
+    echo "     [i] ----- Activating 'dsmrreader' VirtualEnv..."
+    source ~/.virtualenvs/dsmrreader/bin/activate
+    
+    if [ $? -ne 0 ]; then
+        echo "     [!] FAILED to switch to 'dsmrreader' VirtualEnv (is it installed?)"
+        exit;
+    fi
+fi
+
+
+echo ""
+echo ""
 echo " --- Checking & synchronizing base requirements for changes."
 pip3 install -r dsmrreader/provisioning/requirements/base.txt
 

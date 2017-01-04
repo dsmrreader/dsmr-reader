@@ -172,7 +172,7 @@ class TestIslatestVersion(TestCase):
         b"__version__ = get_version(VERSION)\n"
 
     response_newer = b"from django.utils.version import get_version\n" \
-        b"VERSION = (1, 15, 1, 'final', 0)\n" \
+        b"VERSION = (1, 25, 1, 'final', 0)\n" \
         b"__version__ = get_version(VERSION)\n"
 
     def test_true(self, request_mock):

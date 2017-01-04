@@ -7,7 +7,7 @@ export GIT_PAGER=cat
 
 # Abort when user not sure.
 if [ $? -ne 0 ]; then
-    echo "[!] pre-deployment: user aborted or script failed"
+    echo "[!] Halted in pre-deployment: Either user ABORTED or script FAILED"
     exit;
 fi
 

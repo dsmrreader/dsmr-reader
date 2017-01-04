@@ -29,6 +29,20 @@ v1.6.0 - 2017-xx-xx
 
 
 
+v1.5.1 - 2017-01-04
+^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+    This patch contains no new features and **only solves upgrading issues** for some users.
+
+
+**Tickets resolved in this release:**
+
+- Fix for issues `#200 <https://github.com/dennissiemensma/dsmr-reader/issues/200>`_ & `#217 <https://github.com/dennissiemensma/dsmr-reader/issues/217>`_, which is caused by omitting the switch to the VirtualEnv. This was not documented well enough in early versions of this project, causing failed upgrades. 
+
+
+
 v1.5.0 - 2017-01-01
 ^^^^^^^^^^^^^^^^^^^
 
