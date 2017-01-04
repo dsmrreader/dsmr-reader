@@ -1,3 +1,4 @@
+import random
 import json
 
 from django.utils import timezone
@@ -22,10 +23,7 @@ def should_export():
     if not capabilities['gas']:
         return False
 
-    if settings.next_export is not None and timezone.localtime(timezone.now()).date() < settings.next_export:
-        return False
-
-    return True
+    return dsmr_backend.services.is_timestamp_passed(timestamp=settings.next_export)
 
 
 def export():
@@ -53,8 +51,7 @@ def export():
     except IndexError:
         # Just continue, even though we have no data... yet.
         last_gas_reading = None
-
-    if last_gas_reading:
+    else:
         settings = MinderGasSettings.get_solo()
 
         # Register telegram by simply sending it to the application with a POST request.
@@ -70,8 +67,10 @@ def export():
         if response.status_code != 201:
             raise AssertionError('MinderGas upload failed: %s (HTTP %s)'.format(response.text, response.status_code))
 
-    # Push back for a day.
-    tomorrow = (today + timezone.timedelta(hours=24)).date()
+    # Push back for a day and a bit.
+    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(5, 59))
+    print(' - Delaying the next export to MinderGas until:', next_export)
+
     settings = MinderGasSettings.get_solo()
-    settings.next_export = tomorrow
+    settings.next_export = next_export
     settings.save()

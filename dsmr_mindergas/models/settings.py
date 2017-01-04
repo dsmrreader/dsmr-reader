@@ -25,7 +25,7 @@ class MinderGasSettings(SingletonModel):
             'More information can be found here: https://www.mindergas.nl/member/api'
         )
     )
-    next_export = models.DateField(
+    next_export = models.DateTimeField(
         default=None,
         null=True,
         blank=True,

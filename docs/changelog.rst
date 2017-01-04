@@ -24,6 +24,7 @@ v1.6.0 - 2017-xx-xx
 **Tickets resolved in this release:**
 
 - Automatic refresh of dashboard charts (`#210 <https://github.com/dennissiemensma/dsmr-reader/issues/210>`_).
+- Mindergas.nl API: Tijdstip van verzending willekeurig maken (`#204 <https://github.com/dennissiemensma/dsmr-reader/issues/204>`_).
 - Extend API docs with additional example (`#185 <https://github.com/dennissiemensma/dsmr-reader/issues/185>`_).
 - Docs: How to restore backup (`#190 <https://github.com/dennissiemensma/dsmr-reader/issues/190>`_).
 

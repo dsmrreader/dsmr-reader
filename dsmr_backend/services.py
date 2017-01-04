@@ -3,6 +3,7 @@ import re
 
 import requests
 from django.conf import settings
+from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
@@ -49,3 +50,11 @@ def is_latest_version():
     remote_version = '.'.join(remote_version.groups())
 
     return StrictVersion(local_version) >= StrictVersion(remote_version)
+
+
+def is_timestamp_passed(timestamp):
+    """ Generic service to check whether a timestamp has passed/is happening or is empty (None). """
+    if timestamp is None:
+        return True
+
+    return timezone.now() >= timestamp

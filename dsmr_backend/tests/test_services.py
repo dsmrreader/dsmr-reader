@@ -186,3 +186,24 @@ class TestIslatestVersion(TestCase):
         request_mock.return_value = response_mock
 
         self.assertFalse(dsmr_backend.services.is_latest_version())
+
+
+class TestIsLocalTimestampPassed(TestCase):
+    @mock.patch('django.utils.timezone.now')
+    def test_true(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1, hour=13, minute=37))
+
+        self.assertTrue(
+            dsmr_backend.services.is_timestamp_passed(timestamp=timezone.now() - timezone.timedelta(minutes=1))
+        )
+        self.assertTrue(
+            dsmr_backend.services.is_timestamp_passed(timestamp=timezone.now())
+        )
+
+    def test_false(self):
+        self.assertFalse(
+            dsmr_backend.services.is_timestamp_passed(timestamp=timezone.now() + timezone.timedelta(minutes=1))
+        )
+
+    def test_none(self):
+        self.assertTrue(dsmr_backend.services.is_timestamp_passed(None))
