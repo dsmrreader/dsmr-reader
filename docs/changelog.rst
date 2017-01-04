@@ -17,6 +17,19 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
     - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
 
 
+v1.5.1 - 2017-01-04
+^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+    This patch contains no new features and **only solves upgrading issues** for some users.
+
+
+**Tickets resolved in this release:**
+
+- Fix for issues `#200 <https://github.com/dennissiemensma/dsmr-reader/issues/200>`_ & `#217 <https://github.com/dennissiemensma/dsmr-reader/issues/217>`_, which is caused by omitting the switch to the VirtualEnv. This was not documented well enough in early versions of this project, causing failed upgrades. 
+
+
 v1.5.0 - 2017-01-01
 ^^^^^^^^^^^^^^^^^^^
 
