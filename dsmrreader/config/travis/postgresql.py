@@ -1,4 +1,4 @@
-from dsmrreader.config.test_postgresql import *
+from dsmrreader.config.test.postgresql import *
 
 
 # https://docs.travis-ci.com/user/database-setup/#PostgreSQL

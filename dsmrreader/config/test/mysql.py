@@ -1,5 +1,5 @@
 """ Tests with MySQL backend. """
-from dsmrreader.config.test import *
+from dsmrreader.config.test.base import *
 
 
 # Use for TESTING only:

@@ -3,7 +3,7 @@ Production configs should not be committed into version control.
 However, since this project is localhost only, I do not care ;-)
 """
 
-from dsmrreader.config.development import *
+from dsmrreader.config.base import *
 
 
 DEBUG = False
@@ -14,3 +14,30 @@ DATABASES = None  # Please use one of the prepared configs for your database bac
 STATIC_ROOT = '/var/www/dsmrreader/static'
 
 CACHES['default']['TIMEOUT'] = 1 * 60
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s @ %(module)s | %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, '..', 'logs', 'django.log'),
+            'formatter': 'verbose',
+            'maxBytes': 5 * 1024 * 1024,  # 5 MB max.
+            'backupCount': 7,
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+}

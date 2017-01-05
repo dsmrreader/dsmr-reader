@@ -1,5 +1,5 @@
 """ Tests with PostgreSQL backend. """
-from dsmrreader.config.test import *
+from dsmrreader.config.test.base import *
 
 
 # Use for TESTING only: ALTER USER dsmrreader CREATEDB;

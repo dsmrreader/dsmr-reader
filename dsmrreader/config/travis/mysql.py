@@ -1,4 +1,4 @@
-from dsmrreader.config.test_mysql import *
+from dsmrreader.config.test.mysql import *
 
 
 # https://docs.travis-ci.com/user/database-setup/#MySQL

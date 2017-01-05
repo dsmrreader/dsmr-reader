@@ -163,6 +163,6 @@ DSMR_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
 
 DSMR_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
 
-DSMR_VERSION = dsmrreader.__version__
+DSMRREADER_VERSION = dsmrreader.__version__
 DSMR_RAW_VERSION = dsmrreader.VERSION
 DSMR_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/__init__.py'

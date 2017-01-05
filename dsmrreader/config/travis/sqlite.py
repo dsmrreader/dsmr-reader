@@ -1,1 +1,1 @@
-from dsmrreader.config.test_sqlite import *
+from dsmrreader.config.test.sqlite import *

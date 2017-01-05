@@ -27,6 +27,7 @@ v1.6.0 - 2017-xx-xx
 - Mindergas.nl API: Tijdstip van verzending willekeurig maken (`#204 <https://github.com/dennissiemensma/dsmr-reader/issues/204>`_).
 - Extend API docs with additional example (`#185 <https://github.com/dennissiemensma/dsmr-reader/issues/185>`_).
 - Docs: How to restore backup (`#190 <https://github.com/dennissiemensma/dsmr-reader/issues/190>`_).
+- Log errors occured to file (`#181 <https://github.com/dennissiemensma/dsmr-reader/issues/181>`_).
 
 
 
