@@ -5,6 +5,7 @@ from django.test import TestCase
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDataloggerError(InterceptStdoutMixin, TestCase):
@@ -132,3 +133,21 @@ class TestDataloggerCrcError(InterceptStdoutMixin, TestCase):
         self._intercept_command_stdout('dsmr_datalogger')
 
         self.assertFalse(DsmrReading.objects.exists())
+
+    @mock.patch('serial.Serial.open')
+    @mock.patch('serial.Serial.readline')
+    def test_okay(self, serial_readline_mock, serial_open_mock):
+        """ Fake & process an DSMR vX telegram reading. """
+        serial_open_mock.return_value = None
+        serial_readline_mock.side_effect = self._dsmr_dummy_data()
+
+        # The big difference here is that CRc verification should be off.
+        datalogger_settings = DataloggerSettings.get_solo()
+        datalogger_settings.verify_telegram_crc = False
+        datalogger_settings.save()
+
+        self.assertFalse(DsmrReading.objects.exists())
+
+        self._intercept_command_stdout('dsmr_datalogger')
+
+        self.assertTrue(DsmrReading.objects.exists())
