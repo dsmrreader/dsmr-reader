@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 18:24+0100\n"
-"PO-Revision-Date: 2017-01-01 00:00+0100\n"
+"POT-Creation-Date: 2017-01-08 20:29+0100\n"
+"PO-Revision-Date: 2017-01-08 20:19+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -290,6 +290,12 @@ msgstr "Houd elektriciteitsfasen bij"
 
 msgid "Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this."
 msgstr "Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer aanwezig). Standaard heeft iedereen één fase thuis, maar sommige slimme meters zijn aangesloten op drie fasen. Bijvoorbeeld voor zonnepanelen of elektrisch koken. Deze feature is alleen nuttig (en werkt tevens alleen) wanneer er daadwerkelijk drie fasen aanwezig zijn. Het dashboard toont deze gegevens wanneer dit ingeschakeld is."
+
+msgid "Verify telegram CRC"
+msgstr "Controleer de CRC van telegrammen"
+
+msgid "Whether we should verify the CRC of any telegrams read by / sent to the application."
+msgstr "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten controleren."
 
 msgid "DSMR version"
 msgstr "DSMR-versie"

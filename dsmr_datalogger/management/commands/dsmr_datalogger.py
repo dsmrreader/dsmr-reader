@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_datalogger.exceptions import InvalidTelegramChecksum
 import dsmr_datalogger.services
 
 
@@ -24,4 +25,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         # Reflect output to STDOUT for logging and convenience.
         self.stdout.write(telegram)
 
-        dsmr_datalogger.services.telegram_to_reading(data=telegram)
+        try:
+            dsmr_datalogger.services.telegram_to_reading(data=telegram)
+        except InvalidTelegramChecksum:
+            # The service called already logs the error.
+            pass

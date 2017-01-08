@@ -25,6 +25,9 @@ class TestSettings(TestCase):
     def test_track_phases(self):
         self.assertFalse(self.instance.track_phases)
 
+    def test_verify_telegram_crc(self):
+        self.assertTrue(self.instance.verify_telegram_crc)
+
     def test_dsmr_version(self):
         self.assertEqual(self.instance.dsmr_version, DataloggerSettings.DSMR_VERSION_4)
 

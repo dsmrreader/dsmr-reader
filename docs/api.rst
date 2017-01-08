@@ -33,7 +33,7 @@ Examples
 
 Using ``cURL``::
 
-   curl http://YOUR-DSMR-URL/api/v1/endpointX \
+   curl http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading \
         -d 'telegram=xxxxx' \
         -H 'X-AUTHKEY: YOUR-DSMR-API-AUTHKEY'
         

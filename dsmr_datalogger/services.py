@@ -1,3 +1,5 @@
+import logging
+import base64
 import re
 
 from serial.serialutil import SerialException
@@ -12,6 +14,9 @@ from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.exceptions import InvalidTelegramChecksum
 from dsmr_datalogger.dsmr import DSMR_MAPPING
+
+
+logger = logging.getLogger('dsmrreader')
 
 
 def get_dsmr_connection_parameters():
@@ -102,7 +107,10 @@ def verify_telegram_checksum(data):
         content, crc = matches.groups()
     except AttributeError:
         # AttributeError: 'NoneType' object has no attribute 'groups'. This happens where there is not support for CRC.
-        raise InvalidTelegramChecksum('CRC not found')
+        content = crc = None
+
+    if not content or not crc:
+        raise InvalidTelegramChecksum('Content or CRC data not found')
 
     telegram = content.encode('ascii')  # TypeError: Unicode-objects must be encoded before calculating a CRC
 
@@ -113,7 +121,9 @@ def verify_telegram_checksum(data):
     calculated_checksum = crc16_function(telegram)  # For example: 56708
 
     if telegram_checksum != calculated_checksum:
-        raise InvalidTelegramChecksum('{} (telegram) != {} (calculated)'.format(telegram_checksum, calculated_checksum))
+        raise InvalidTelegramChecksum(
+            'CRC mismatch: {} (telegram) != {} (calculated)'.format(telegram_checksum, calculated_checksum)
+        )
 
 
 def telegram_to_reading(data):  # noqa: C901
@@ -157,16 +167,22 @@ def telegram_to_reading(data):  # noqa: C901
         parsed_reading['extra_device_delivered'] = legacy_gas_result.group(2)
         return parsed_reading
 
-    # Discard CRC check when any support is lacking anyway.
+    # We will log the telegrams in base64 for convenience and debugging 'n stuff.
+    base64_data = base64.b64encode(data.encode())
+    datalogger_settings = DataloggerSettings.get_solo()
+
+    # Discard CRC check when any support is lacking anyway. Or when it's disabled.
     connection_parameters = get_dsmr_connection_parameters()
 
-    if connection_parameters['crc']:
+    if connection_parameters['crc'] and datalogger_settings.verify_telegram_crc:
         try:
             # Verify telegram by checking it's CRC.
             verify_telegram_checksum(data=data)
-        except InvalidTelegramChecksum:
+        except InvalidTelegramChecksum as error:
             # Hook to keep track of failed readings count.
             MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
+            logger.warning('Rejected telegram (base64 encoded): {}'.format(base64_data))
+            logger.exception(error)
             raise
 
     # Defaults all fields to NULL.
@@ -218,8 +234,6 @@ def telegram_to_reading(data):  # noqa: C901
     if parsed_reading['timestamp'] is None:
         parsed_reading['timestamp'] = timezone.now()
 
-    datalogger_settings = DataloggerSettings.get_solo()
-
     # Optional tracking of phases, but since we already mapped this above, just remove it again... :]
     if not datalogger_settings.track_phases:
         parsed_reading.update({
@@ -237,6 +251,8 @@ def telegram_to_reading(data):  # noqa: C901
         statistics_kwargs = {k: parsed_reading[k] for k in _get_statistics_fields()}
         # There should already be one in database, created when migrating.
         MeterStatistics.objects.all().update(**statistics_kwargs)
+
+    logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
     return new_reading
 
 
