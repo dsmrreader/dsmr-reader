@@ -1,11 +1,17 @@
+import logging
+
 from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden,\
     HttpResponseBadRequest, HttpResponseServerError, HttpResponse
 from django.views.generic.base import View
 from django.utils.translation import ugettext as _
 
+from dsmr_datalogger.exceptions import InvalidTelegramChecksum
 from dsmr_api.models import APISettings
 from dsmr_api.forms import DsmrReadingForm
 import dsmr_datalogger.services
+
+
+logger = logging.getLogger('dsmrreader')
 
 
 class DataloggerDsmrReading(View):
@@ -24,12 +30,16 @@ class DataloggerDsmrReading(View):
 
         # Data omitted.
         if not post_form.is_valid():
+            logger.warning('API validation failed with POST data: {}'.format(request.POST))
             return HttpResponseBadRequest(_('Invalid data'))
+
+        dsmr_reading = None
 
         try:
             dsmr_reading = dsmr_datalogger.services.telegram_to_reading(data=post_form.cleaned_data['telegram'])
-        except:
-            dsmr_reading = None
+        except InvalidTelegramChecksum:
+            # The service called already logs the error.
+            pass
 
         # Data invalid.
         if not dsmr_reading:

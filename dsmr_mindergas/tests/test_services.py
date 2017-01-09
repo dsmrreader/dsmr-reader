@@ -44,7 +44,7 @@ class TestServices(TestCase):
     def test_should_export_no_need(self, now_mock):
         """ Test should_export() when not needed, yet. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=5))
-        tomorrow = (timezone.localtime(timezone.now()) + timezone.timedelta(hours=24)).date()
+        tomorrow = timezone.localtime(timezone.now()) + timezone.timedelta(hours=24)
 
         settings = MinderGasSettings.get_solo()
         settings.export = True
@@ -101,6 +101,29 @@ class TestServices(TestCase):
         # Nothing should happen, as there is no data.
         dsmr_mindergas.services.export()
         self.assertIsNone(settings.next_export)
+
+    @mock.patch('requests.post')
+    @mock.patch('dsmr_mindergas.services.should_export')
+    @mock.patch('django.utils.timezone.now')
+    def test_export_random_schedule(self, now_mock, should_export_mock, requests_post_mock):
+        """ Test export() setting the next export randomly. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=5))
+        should_export_mock.return_value = True
+        requests_post_mock.return_value = mock.MagicMock(status_code=201, text='Fake accept')
+
+        # We should at least have two different values (out of 10 attempts)
+        random_values = []
+
+        for _ in range(0, 10):
+            dsmr_mindergas.services.export()
+
+            settings = MinderGasSettings.get_solo()
+            self.assertIsNotNone(settings.next_export)
+            random_values.append(settings.next_export)
+
+        # Make unique and count them.
+        random_values = list(set(random_values))
+        self.assertGreater(len(random_values), 2)
 
     @mock.patch('requests.post')
     @mock.patch('dsmr_mindergas.services.should_export')

@@ -38,6 +38,11 @@ class DataloggerSettings(SingletonModel):
             'when actually you have three phases. The dashboard will display any data read, after enabling this.'
         )
     )
+    verify_telegram_crc = models.BooleanField(
+        default=True,
+        verbose_name=_('Verify telegram CRC'),
+        help_text=_('Whether we should verify the CRC of any telegrams read by / sent to the application.')
+    )
 
     dsmr_version = models.IntegerField(
         default=DSMR_VERSION_4,
@@ -45,7 +50,6 @@ class DataloggerSettings(SingletonModel):
         verbose_name=_('DSMR version'),
         help_text=_('The DSMR version your meter supports. Version should be printed on meter.')
     )
-
     com_port = models.CharField(
         max_length=196,
         default='/dev/ttyUSB0',

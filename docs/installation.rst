@@ -87,6 +87,18 @@ Does Postgres not start due to locales? Try: ``dpkg-reconfigure locales``.  Stil
 
     sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
 
+.. note::
+
+    **Optional**: Do you need to restore a **PostgreSQL** database backup as well?
+    
+    Restore an uncompressed (``.sql``) backup with::
+    
+        sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
+
+    Or restore a compressed (``.gz``) backup with::
+    
+        zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
+
 
 (Option B.) MySQL/MariaDB
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -111,6 +123,18 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 - Flush privileges to activate them::
 
     sudo mysqladmin reload --defaults-file=/etc/mysql/debian.cnf
+
+.. note::
+
+    **Optional**: Do you need to restore a **MySQL** database backup as well?
+    
+    Restore an uncompressed (``.sql``) backup with::
+    
+        cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+
+    Or restore a compressed (``.gz``) backup with::
+    
+        zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
 
 
 2. Dependencies

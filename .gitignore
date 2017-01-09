@@ -5,4 +5,5 @@
 /dsmrreader/settings.py
 /coverage_report/
 /backups/
+/logs/
 /.coverage

@@ -77,7 +77,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
 
     def test_version(self):
         """ Verify version setting. """
-        self.assertIsNotNone(settings.DSMR_VERSION)
+        self.assertIsNotNone(settings.DSMRREADER_VERSION)
 
     def test_pending_migrations(self):
         """ Tests whether there are any model changes, which are not reflected in migrations. """

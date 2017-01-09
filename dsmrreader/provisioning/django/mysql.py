@@ -8,7 +8,7 @@ DATABASES = {
         'USER': 'dsmrreader',
         'PASSWORD': 'dsmrreader',
         'HOST': 'localhost',
-        'CONN_MAX_AGE': 300,
+        'CONN_MAX_AGE': 60,
     }
 }
 

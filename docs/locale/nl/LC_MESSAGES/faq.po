@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2016-01-01 00:00+0100\n"
-"PO-Revision-Date: 2017-01-01 00:00+0100\n"
+"POT-Creation-Date: 2017-01-03 20:52+0100\n"
+"PO-Revision-Date: 2017-01-03 20:58+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "MIME-Version: 1.0\n"
@@ -319,8 +319,8 @@ msgstr ""
 "interfaceconfiguratie."
 
 #: ../../faq.rst:139
-msgid "I want to see my electricity phases as well"
-msgstr "Ik wil mijn elektriciteitsfasen ook inzien"
+msgid "I want to see the load of each electricity phase as well"
+msgstr "Ik wil het elektriciteitsverbruik per fase ook kunnen zien"
 
 #: ../../faq.rst:140
 msgid ""
@@ -417,15 +417,78 @@ msgstr ""
 "sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
 "geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:176
+#: ../../faq.rst:175
+msgid "How do I restore a database backup?"
+msgstr "Hoe zet ik een databaseback-up terug?"
+
+#: ../../faq.rst:179
+msgid ""
+"Restoring a backup will replace any existing data stored in the database and "
+"is irreversible!"
+msgstr ""
+"Het herstellen van een back-up vervangt de bestaande data in de database en is "
+"onomkeerbaar!"
+
+#: ../../faq.rst:183
+msgid ""
+"Do you need a complete reinstall of DSMR-reader as well? Then please :doc:"
+"`follow the install guide<installation>` and restore the database backup "
+"**using the notes at the end of chapter 1**."
+msgstr ""
+"Heb je tevens een complete herinstallatie van DSMR-reader nodig? :doc:`Volg "
+"dan de installatiehandleiding<installation>` en herstel de databaseback-up "
+"volgens  **de notities aan het einde van hoofdstuk 1**."
+
+#: ../../faq.rst:186
+msgid "Only want to restore the database?"
+msgstr "Wil je alleen een databaseback-up terugzetten?"
+
+#: ../../faq.rst:188
+msgid ""
+"This asumes you are still running the same application version as the backup "
+"was created in."
+msgstr ""
+"Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie draait als "
+"waarmee de back-up is gemaakt."
+
+#: ../../faq.rst:190
+msgid ""
+"Stop the application first with ``sudo supervisorctl stop all``. This will "
+"disconnect it from the database as well."
+msgstr ""
+"Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit zorgt "
+"er ook voor dat de databaseverbinding van de applicatie verdwijnt."
+
+#: ../../faq.rst:192
+msgid "For **PostgreSQL** restores::"
+msgstr "Voor herstellen van **PostgreSQL**::"
+
+#: ../../faq.rst:206
+msgid "For **MySQL** restores::"
+msgstr "Voor herstellen van **MySQL**::"
+
+#: ../../faq.rst:220
+msgid "Start the application again with ``sudo supervisorctl start all``."
+msgstr "Start de applicatie weer met ``sudo supervisorctl start all``."
+
+#: ../../faq.rst:224
+msgid ""
+"In case the version differs, you can try forcing a deployment reload by: "
+"``sudo su - dsmr`` and then executing ``./post-deploy.sh``."
+msgstr ""
+"Mocht de versie toch verschillen, dan kun je proberen om de applicatie te "
+"herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-deploy."
+"sh`` uit."
+
+#: ../../faq.rst:228
 msgid "Feature/bug report"
 msgstr "Verzoek/fout melden"
 
-#: ../../faq.rst:177
+#: ../../faq.rst:229
 msgid "*How can I propose a feature or report a bug I've found?*"
 msgstr "*Hoe kan ik een verzoek indienen of een fout melden?*"
 
-#: ../../faq.rst:181
+#: ../../faq.rst:233
 msgid ""
 "`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/new>`_."

@@ -1,3 +1,4 @@
+import random
 import json
 
 from django.utils import timezone
@@ -22,10 +23,7 @@ def should_export():
     if not capabilities['gas']:
         return False
 
-    if settings.next_export is not None and timezone.localtime(timezone.now()).date() < settings.next_export:
-        return False
-
-    return True
+    return dsmr_backend.services.is_timestamp_passed(timestamp=settings.next_export)
 
 
 def export():
@@ -34,7 +32,7 @@ def export():
         return
 
     # For backend logging in Supervisor.
-    print(' - Exporting gas meter position to MinderGas.')
+    print(' - Attempting to export gas meter position to MinderGas.')
 
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
@@ -53,9 +51,10 @@ def export():
     except IndexError:
         # Just continue, even though we have no data... yet.
         last_gas_reading = None
-
-    if last_gas_reading:
+        print(' - No gas readings found to export to MinderGas')
+    else:
         settings = MinderGasSettings.get_solo()
+        print(' - Exporting gas meter position to MinderGas:', last_gas_reading.delivered)
 
         # Register telegram by simply sending it to the application with a POST request.
         response = requests.post(
@@ -70,8 +69,10 @@ def export():
         if response.status_code != 201:
             raise AssertionError('MinderGas upload failed: %s (HTTP %s)'.format(response.text, response.status_code))
 
-    # Push back for a day.
-    tomorrow = (today + timezone.timedelta(hours=24)).date()
+    # Push back for a day and a bit.
+    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(15, 59))
+    print(' - Delaying the next export to MinderGas until:', next_export)
+
     settings = MinderGasSettings.get_solo()
-    settings.next_export = tomorrow
+    settings.next_export = next_export
     settings.save()
