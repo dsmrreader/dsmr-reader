@@ -68,7 +68,7 @@ def export():
             raise AssertionError('MinderGas upload failed: %s (HTTP %s)'.format(response.text, response.status_code))
 
     # Push back for a day and a bit.
-    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(5, 59))
+    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(15, 59))
     print(' - Delaying the next export to MinderGas until:', next_export)
 
     settings = MinderGasSettings.get_solo()
