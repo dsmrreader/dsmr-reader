@@ -31,8 +31,7 @@ def export():
     if not should_export():
         return
 
-    # For backend logging in Supervisor.
-    print(' - Attempting to export gas meter position to MinderGas.')
+    print(' - MinderGas | Attempting to upload gas meter position.')
 
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
@@ -43,6 +42,9 @@ def export():
         hour=0,
     ))
 
+    # Push back for a day and a bit.
+    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(15, 59))
+
     try:
         last_gas_reading = GasConsumption.objects.filter(
             # Slack of six hours to make sure we have any valid reading at all.
@@ -51,10 +53,10 @@ def export():
     except IndexError:
         # Just continue, even though we have no data... yet.
         last_gas_reading = None
-        print(' - No gas readings found to export to MinderGas')
+        print(' - MinderGas | No gas readings found for uploading')
     else:
         settings = MinderGasSettings.get_solo()
-        print(' - Exporting gas meter position to MinderGas:', last_gas_reading.delivered)
+        print(' - MinderGas | Uploading gas meter position: {}'.format(last_gas_reading.delivered))
 
         # Register telegram by simply sending it to the application with a POST request.
         response = requests.post(
@@ -67,12 +69,11 @@ def export():
         )
 
         if response.status_code != 201:
-            raise AssertionError('MinderGas upload failed: %s (HTTP %s)'.format(response.text, response.status_code))
+            # Try again in an hour.
+            next_export = midnight + timezone.timedelta(hours=1)
+            print(' [!] MinderGas upload failed (HTTP {}): {}'.format(response.status_code, response.text))
 
-    # Push back for a day and a bit.
-    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(15, 59))
-    print(' - Delaying the next export to MinderGas until:', next_export)
-
+    print(' - MinderGas | Delaying the next upload until: {}'.format(next_export))
     settings = MinderGasSettings.get_solo()
     settings.next_export = next_export
     settings.save()

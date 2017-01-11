@@ -18,6 +18,15 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.5.3 - 2017-01-11
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- Improve MinderGas API client implementation  (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
+
+
+
 v1.5.2 - 2017-01-09
 ^^^^^^^^^^^^^^^^^^^
 

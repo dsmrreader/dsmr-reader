@@ -142,11 +142,11 @@ class TestServices(TestCase):
         for current_error_code in (401, 422):
             requests_post_mock.return_value = mock.MagicMock(status_code=current_error_code, text='Error message')
 
-            with self.assertRaises(AssertionError):
-                dsmr_mindergas.services.export()
+            dsmr_mindergas.services.export()
 
         settings = MinderGasSettings.get_solo()
-        self.assertIsNone(settings.next_export)
+        # This should be set one hour forward now.
+        self.assertEqual(settings.next_export, timezone.make_aware(timezone.datetime(2015, 12, 12, hour=1, minute=0)))
         self.assertTrue(requests_post_mock.called)
 
     @mock.patch('requests.post')
