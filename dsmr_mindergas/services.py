@@ -32,7 +32,7 @@ def export():
         return
 
     # For backend logging in Supervisor.
-    print(' - Exporting gas meter position to MinderGas.')
+    print(' - Attempting to export gas meter position to MinderGas.')
 
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
@@ -43,6 +43,9 @@ def export():
         hour=0,
     ))
 
+    # Push back for a day and a bit.
+    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(15, 59))
+
     try:
         last_gas_reading = GasConsumption.objects.filter(
             # Slack of six hours to make sure we have any valid reading at all.
@@ -51,8 +54,10 @@ def export():
     except IndexError:
         # Just continue, even though we have no data... yet.
         last_gas_reading = None
+        print(' - No gas readings found to export to MinderGas')
     else:
         settings = MinderGasSettings.get_solo()
+        print(' - Exporting gas meter position to MinderGas:', last_gas_reading.delivered)
 
         # Register telegram by simply sending it to the application with a POST request.
         response = requests.post(
@@ -65,12 +70,10 @@ def export():
         )
 
         if response.status_code != 201:
-            raise AssertionError('MinderGas upload failed: %s (HTTP %s)'.format(response.text, response.status_code))
+            print(' [!] MinderGas upload failed (HTTP {}): {}'.format(response.status_code, response.text))
+            next_export = midnight + timezone.timedelta(hours=1)  # try again in an hour.
 
-    # Push back for a day and a bit.
-    next_export = midnight + timezone.timedelta(hours=24, minutes=random.randint(15, 59))
     print(' - Delaying the next export to MinderGas until:', next_export)
-
     settings = MinderGasSettings.get_solo()
     settings.next_export = next_export
     settings.save()
