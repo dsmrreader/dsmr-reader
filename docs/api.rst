@@ -68,7 +68,7 @@ Example
 (using the ``requests`` library available on PIP)::
 
     import requests  # Tested with requests==2.9.1
-    
+
     # Fake buffer.
     telegram_string = ''.join([
         "/KFM5KAIFA-METER\r\n",
@@ -95,14 +95,14 @@ Example
         "1-0:22.7.0(00.000*kW)\r\n",
         "!74B0\n",
     ])
-    
+
     # Register telegram by simply sending it to the application with a POST request.
     response = requests.post(
         'http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading',
         headers={'X-AUTHKEY': 'YOUR-DSMR-API-AUTHKEY'},
         data={'telegram': telegram_string},
     )
-       
+
     # You will receive a status 200 when successful.
     if response.status_code != 200:
         # Or you will find the error (hint) in the reponse body on failure.
@@ -140,29 +140,29 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
     from serial.serialutil import SerialException
     import requests
     import serial
-    
-    
+
+
     API_SERVERS = (
         ('http://HOST-OR-IP-ONE/api/v1/datalogger/dsmrreading', 'APIKEY-BLABLABLA-ABCDEFGHI'),
     ###    ('http://HOST-OR-IP-TWO/api/v1/datalogger/dsmrreading', 'APIKEY-BLABLABLA-JKLMNOPQR'),
     )
-    
-    
+
+
     def main():
         print ('Starting...')
-    
+
         while True:
             telegram = read_telegram()
             print('Read telegram', telegram)
-    
+
             for current_server in API_SERVERS:
                 api_url, api_key = current_server
                 send_telegram(telegram, api_url, api_key)
                 print('Sent telegram to:', api_url)
-    
+
             sleep(1)
-    
-    
+
+
     def read_telegram():
         """ Reads the serial port until we can create a reading point. """
         serial_handle = serial.Serial()
@@ -174,13 +174,13 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
         serial_handle.xonxoff = 1
         serial_handle.rtscts = 0
         serial_handle.timeout = 20
-    
+
         # This might fail, but nothing we can do so just let it crash.
         serial_handle.open()
-    
+
         telegram_start_seen = False
         telegram = ''
-    
+
         # Just keep fetching data until we got what we were looking for.
         while True:
             try:
@@ -189,27 +189,30 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
                 # Something else and unexpected failed.
                 print('Serial connection failed:', error)
                 return
-    
+
             try:
                 # Make sure weird characters are converted properly.
                 data = str(data, 'utf-8')
             except TypeError:
                 pass
-    
+
             # This guarantees we will only parse complete telegrams. (issue #74)
             if data.startswith('/'):
                 telegram_start_seen = True
-    
+
+                # But make sure to RESET any data collected as well! (issue #212)
+                buffer = ''
+
             # Delay any logging until we've seen the start of a telegram.
             if telegram_start_seen:
                 telegram += data
-    
+
             # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
             if data.startswith('!') and telegram_start_seen:
                 serial_handle.close()
                 return telegram
-    
-    
+
+
     def send_telegram(telegram, api_url, api_key):
         # Register telegram by simply sending it to the application with a POST request.
         response = requests.post(
@@ -217,13 +220,13 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
             headers={'X-AUTHKEY': api_key},
             data={'telegram': telegram},
         )
-    
+
         # You will receive a status 200 when successful.
         if response.status_code != 200:
             # Or you will find the error (hint) in the response body on failure.
             print('[!] Error: {}'.format(response.text))
-    
-    
+
+
     if __name__ == '__main__':
         main()
 

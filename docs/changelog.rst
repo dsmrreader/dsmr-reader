@@ -18,12 +18,22 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.5.4 - 2017-01-12
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- Improve datalogger for DSMR v5.0 (`#212 <https://github.com/dennissiemensma/dsmr-reader/issues/212>`_).
+- Fixed another bug in MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
+
+
+
 v1.5.3 - 2017-01-11
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
-- Improve MinderGas API client implementation  (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
+- Improve MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
 
 
 
@@ -88,6 +98,7 @@ v1.5.0 - 2017-01-01
 - Improved backend process logging (`#184 <https://github.com/dennissiemensma/dsmr-reader/issues/184>`_).
 
 
+
 v1.4.1 - 2016-12-12
 ^^^^^^^^^^^^^^^^^^^
 
@@ -95,6 +106,7 @@ v1.4.1 - 2016-12-12
 
 - Consumption chart hangs due to unique_key violation (`#174 <https://github.com/dennissiemensma/dsmr-reader/issues/174>`_).
 - NoReverseMatch at / Reverse for 'docs' (`#175 <https://github.com/dennissiemensma/dsmr-reader/issues/175>`_).
+
 
 
 v1.4.0 - 2016-11-28
@@ -115,11 +127,13 @@ v1.4.0 - 2016-11-28
 - Capability based push notifications (`#165 <https://github.com/dennissiemensma/dsmr-reader/issues/165>`_).
 
 
+
 v1.3.2 - 2016-11-08
 ^^^^^^^^^^^^^^^^^^^
 **Tickets resolved in this release:**
 
 - Requirements update (november 2016) (`#150 <https://github.com/dennissiemensma/dsmr-reader/issues/150>`_).
+
 
 
 v1.3.1 - 2016-08-16
@@ -132,6 +146,7 @@ v1.3.1 - 2016-08-16
 - Query performance improvements (`#149 <https://github.com/dennissiemensma/dsmr-reader/issues/149>`_).
 
 
+
 v1.3.0 - 2016-07-15
 ^^^^^^^^^^^^^^^^^^^
 **Tickets resolved in this release:**
@@ -141,6 +156,7 @@ v1.3.0 - 2016-07-15
 - Data export: Mindergas.nl (`#10 <https://github.com/dennissiemensma/dsmr-reader/issues/10>`_).
 - Requirement upgrade (`#143 <https://github.com/dennissiemensma/dsmr-reader/issues/143>`_).
 - Installation wizard for first time use (`#139 <https://github.com/dennissiemensma/dsmr-reader/issues/139>`_).
+
 
 
 v1.2.0 - 2016-05-18
@@ -159,6 +175,7 @@ v1.2.0 - 2016-05-18
 - Allow day & hour statistics reset due to changing energy prices (`#95 <https://github.com/dennissiemensma/dsmr-reader/issues/95>`_).
 
 
+
 v1.1.2 - 2016-05-01
 ^^^^^^^^^^^^^^^^^^^
 **Tickets resolved in this release:**
@@ -166,11 +183,13 @@ v1.1.2 - 2016-05-01
 - Trends page giving errors (when lacking data) (`#125 <https://github.com/dennissiemensma/dsmr-reader/issues/125>`_).
 
 
+
 v1.1.1 - 2016-04-27
 ^^^^^^^^^^^^^^^^^^^
 **Tickets resolved in this release:**
 
 - Improve readme (`#124 <https://github.com/dennissiemensma/dsmr-reader/issues/124>`_).
+
 
 
 v1.1.0 - 2016-04-23
@@ -186,6 +205,7 @@ v1.1.0 - 2016-04-23
 - Support for Iskra meter (DSMR 2.x) (`#120 <https://github.com/dennissiemensma/dsmr-reader/issues/120>`_).
 
 
+
 v1.0.1 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
 **Tickets resolved in this release:**
@@ -193,9 +213,11 @@ v1.0.1 - 2016-04-07
 - Update licence to OSI compatible one (`#119 <https://github.com/dennissiemensma/dsmr-reader/issues/119>`_).
 
 
+
 v1.0.0 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
 - First official stable release.
+
 
 
 [β] v0.1 (2015-10-29) to 0.16 (2016-04-06)
