@@ -86,6 +86,9 @@ def read_telegram():
         if data.startswith('/'):
             telegram_start_seen = True
 
+            # But make sure to RESET any data collected as well! (issue #212)
+            buffer = ''
+
         # Delay any logging until we've seen the start of a telegram.
         if telegram_start_seen:
             buffer += data
