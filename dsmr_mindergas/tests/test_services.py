@@ -130,7 +130,7 @@ class TestServices(TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_export_fail(self, now_mock, should_export_mock, requests_post_mock):
         """ Test export() failing by denied API call. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=5))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=4, minute=45))
         should_export_mock.return_value = True
 
         settings = MinderGasSettings.get_solo()
@@ -145,8 +145,9 @@ class TestServices(TestCase):
             dsmr_mindergas.services.export()
 
         settings = MinderGasSettings.get_solo()
+
         # This should be set one hour forward now.
-        self.assertEqual(settings.next_export, timezone.make_aware(timezone.datetime(2015, 12, 12, hour=1, minute=0)))
+        self.assertEqual(settings.next_export, timezone.now() + timezone.timedelta(hours=1))
         self.assertTrue(requests_post_mock.called)
 
     @mock.patch('requests.post')

@@ -24,6 +24,7 @@ v1.5.4 - 2017-01-12
 **Tickets resolved in this release:**
 
 - Improve datalogger for DSMR v5.0 (`#212 <https://github.com/dennissiemensma/dsmr-reader/issues/212>`_).
+- Fixed another bug in MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
 
 
 

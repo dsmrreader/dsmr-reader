@@ -70,7 +70,7 @@ def export():
 
         if response.status_code != 201:
             # Try again in an hour.
-            next_export = midnight + timezone.timedelta(hours=1)
+            next_export = timezone.now() + timezone.timedelta(hours=1)
             print(' [!] MinderGas upload failed (HTTP {}): {}'.format(response.status_code, response.text))
 
     print(' - MinderGas | Delaying the next upload until: {}'.format(next_export))
