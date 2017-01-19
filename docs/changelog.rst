@@ -18,6 +18,15 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.5.5 - 2017-01-19
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- Remove readonly restriction for editing statistics in admin interface (`#242 <https://github.com/dennissiemensma/dsmr-reader/issues/242>`_).
+
+
+
 v1.5.4 - 2017-01-12
 ^^^^^^^^^^^^^^^^^^^
 

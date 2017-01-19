@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.forms import widgets
 from django.db import models
 
-from dsmr_backend.mixins import ReadOnlyAdminModel
 from .models.note import Note
 from .models.statistics import HourStatistics, DayStatistics
 
@@ -26,7 +25,7 @@ class NoteAdmin(admin.ModelAdmin):
 
 
 @admin.register(DayStatistics)
-class DayStatisticsAdmin(ReadOnlyAdminModel):
+class DayStatisticsAdmin(admin.ModelAdmin):
     """ Read only model. """
     ordering = ['-day']
     list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'total_cost')
@@ -36,7 +35,7 @@ class DayStatisticsAdmin(ReadOnlyAdminModel):
 
 
 @admin.register(HourStatistics)
-class HourStatisticsAdmin(ReadOnlyAdminModel):
+class HourStatisticsAdmin(admin.ModelAdmin):
     """ Read only model. """
     ordering = ['-hour_start']
     list_display = ('hour_start', 'electricity_merged', 'electricity_returned_merged')
