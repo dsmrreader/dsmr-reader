@@ -55,7 +55,7 @@ class DayStatistics(models.Model):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Day statistics (read only)')
+        verbose_name = _('Day statistics (automatically generated data)')
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -94,7 +94,7 @@ class HourStatistics(models.Model):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Hour statistics (read only)')
+        verbose_name = _('Hour statistics (automatically generated data)')
         verbose_name_plural = verbose_name
 
     def __str__(self):
