@@ -35,6 +35,25 @@ v1.5.4 - 2017-01-12
 
 
 
+v1.5.5 - 2017-01-19
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- Remove readonly restriction for editing statistics in admin interface (`#242 <https://github.com/dennissiemensma/dsmr-reader/issues/242>`_).
+
+
+
+v1.5.4 - 2017-01-12
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- Improve datalogger for DSMR v5.0 (`#212 <https://github.com/dennissiemensma/dsmr-reader/issues/212>`_).
+- Fixed another bug in MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
+
+
+
 v1.5.3 - 2017-01-11
 ^^^^^^^^^^^^^^^^^^^
 
