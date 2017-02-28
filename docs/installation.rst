@@ -134,7 +134,7 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
     Or restore a compressed (``.gz``) backup with::
     
-        zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+        zcat <PATH-TO-MYSQL-BACKUP.sql.gz | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
 
 
 2. Dependencies
