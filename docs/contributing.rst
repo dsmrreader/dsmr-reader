@@ -3,10 +3,10 @@ Contributing
 Would you like to contribute or help this project in any way?
 
 
-Feedback
---------
-All feedback and any input is, as always, very much appreciated! 
-It doesn't matter whether you run into problems getting started in this guide or just want to get in touch, just fire away!
+Feedback / Bugs / Contact
+-------------------------
+Any feedback or input is appreciated. 
+It doesn't matter whether you run into problems or just want to get in touch, just fire away!
 
 .. seealso::
     

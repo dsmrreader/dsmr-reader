@@ -17,12 +17,40 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
     - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
 
 
+
+v1.6.0 - 2017-xx-xx
+^^^^^^^^^^^^^^^^^^^
+
+.. warning::
+
+    Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` and will be discontinued completely in a later release.
+    Please use a PostgreSQL database instead. Users already running MySQL will be supported in migrating at a later moment.
+
+.. note::
+
+    **Change in API:**
+    The telegram creation API now returns an ``HTTP 201`` response when successful.
+    An ``HTTP 200`` was returned in former versions.
+    :doc:`View API docs<api>`.
+
+
+**Tickets resolved in this release:**
+
+- API request should return HTTP 201 instead of HTTP 200 (`#211 <https://github.com/dennissiemensma/dsmr-reader/issues/211>`_).
+- Support for DSMR-firmware v5.0 (`#221 <https://github.com/dennissiemensma/dsmr-reader/issues/221>`_).
+- Redesign: Status page (`#237 <https://github.com/dennissiemensma/dsmr-reader/issues/237>`_).
+- Req: Add iOS icon for Bookmark (`#249 <https://github.com/dennissiemensma/dsmr-reader/issues/249>`_).
+- Docs: Explain settings/options (`#232 <https://github.com/dennissiemensma/dsmr-reader/issues/232>`_).
+
+
+
 v1.5.5 - 2017-01-19
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
 - Remove readonly restriction for editing statistics in admin interface (`#242 <https://github.com/dennissiemensma/dsmr-reader/issues/242>`_).
+
 
 
 v1.5.4 - 2017-01-12

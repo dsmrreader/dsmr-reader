@@ -15,7 +15,7 @@ Because open-source triggers the community to collaborate even more and bring ou
 
 Languages
 ---------
-The entire application and it's code is written in English. The entire interface however is also translated into Dutch and will be triggered depending on you browser's language preference.
+The entire application and it's code is written in English. The interface is also translated into Dutch and will be triggered depending on your browser's language preference.
 
 
 Skill

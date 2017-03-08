@@ -80,8 +80,9 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
         serial_readline_mock.side_effect = [eintr_error] + self._dsmr_dummy_data()
         self.assertFalse(DsmrReading.objects.exists())
 
+        # This should cancel the entire operation now.
         self._intercept_command_stdout('dsmr_datalogger')
-        self.assertTrue(DsmrReading.objects.exists())
+        self.assertFalse(DsmrReading.objects.exists())
 
         # Everything else should be reraised.
         serial_readline_mock.side_effect = SerialException('Unexpected error from Serial')

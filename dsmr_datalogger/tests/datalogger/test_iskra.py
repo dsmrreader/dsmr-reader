@@ -7,7 +7,8 @@ from django.utils import timezone
 import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 
 
@@ -15,7 +16,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
     """ Test Iskra meter, unknown DSMR version. """
     def setUp(self):
         datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_3
+        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2
         datalogger_settings.save()
 
     def _dsmr_dummy_data(self):

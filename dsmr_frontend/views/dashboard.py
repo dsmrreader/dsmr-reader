@@ -9,17 +9,18 @@ from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_frontend.forms import DashboardGraphForm, DashboardNotificationReadForm
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
-from dsmr_frontend.forms import DashboardGraphForm, DashboardNotificationReadForm
+from dsmr_datalogger.models.settings import DataloggerSettings
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
-from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class Dashboard(TemplateView):

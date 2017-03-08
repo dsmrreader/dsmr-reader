@@ -14,13 +14,17 @@ Dependencies & requirements
 ---------------------------
 - **RaspberryPi 2 or 3**
 
- - The RaspberryPi 1 tends to be **too slow** for this project, as it requires multi core processing.
-
 .. note::
 
     - **Alternative #1**: You can also run it on any server near your smart meter, as long as it satisfies the other requirements.
     
     - **Alternative #2**: The application supports receiving P1 telegrams using an API, so you can also run it on a server outside your home. (:doc:`API DOCS<api>`)
+
+.. warning::
+
+    The RaspberryPi 1 tends to be **too slow** for this project, as it requires multi core processing.
+    
+    You can however run just the datalogger client on an old RaspberryPi, :doc:`see for the API for a howto and example scripts<api>`.
 
 - **Raspbian OS**
 
@@ -32,13 +36,16 @@ Dependencies & requirements
 
     Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
 
-- **PostgreSQL 9+ or MySQL / MariaDB 5.5+**
+- **PostgreSQL 9+ database**
 
- - I **highly recommend** ``PostgreSQL`` due to builtin support for timezones.
+.. warning::
+
+    Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` and will be discontinued completely in a later release.
+    Please use a PostgreSQL database instead. Users already running MySQL will be supported in migrating at a later moment.
 
 - **Smart Meter** with support for **at least DSMR 4.x+** and a **P1 telegram port**
 
- - Tested so far with Landis+Gyr E350, Kaifa. Telegram port looks like an RJ11 (phone) socket.
+ - Tested so far with Landis+Gyr E350, Kaifa.
 
 - **Minimal 1 GB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
 
@@ -54,24 +61,21 @@ Dependencies & requirements
  - It just really helps if you know what you are doing.
 
 
-1. Database backend
--------------------
+1. Database backend (PostgreSQL)
+--------------------------------
 
-The application stores by default all readings taken from the serial cable. Depending on your needs, you can choose for either (Option A.) **PostgreSQL** (Option B.) **MySQL/MariaDB**. 
+The application stores by default all readings taken from the serial cable.
+There is support for **PostgreSQL**, and there used to be support for **MySQL/MariaDB** as well.
+The latter is currently deprecated by this project and support will be discontinued in a future release. 
 
-.. note::
-
-    If you have no idea what to choose, I generally advise to pick PostgreSQL, as it has builtin support for (local) timezone handling (required for daylight saving time transitions).
-
-(Option A.) PostgreSQL
-^^^^^^^^^^^^^^^^^^^^^^
 Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv installation later in this guide.
 
 - Install database::
 
     sudo apt-get install -y postgresql postgresql-server-dev-all
 
-Does Postgres not start due to locales? Try: ``dpkg-reconfigure locales``.  Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
+Does Postgres not start due to locales? Try: ``dpkg-reconfigure locales``. 
+Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
 
 (!) Ignore any '*could not change directory to "/root": Permission denied*' errors for the following three commands.
 
@@ -99,10 +103,17 @@ Does Postgres not start due to locales? Try: ``dpkg-reconfigure locales``.  Stil
     
         zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
 
+Now continue at chapter 2 below (Dependencies).
 
-(Option B.) MySQL/MariaDB
+(Legacy) MySQL/MariaDB
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. ``libmysqlclient-dev`` is required for the virtualenv installation later in this guide.
+.. warning::
+
+    Support for the MySQL database backend is deprecated and will be removed in a later release.
+    Please use a PostgreSQL database instead. Users already running MySQL will be supported in migrating at a later moment.
+    
+Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. 
+``libmysqlclient-dev`` is required for the virtualenv installation later in this guide.
 
 - Install database::
 
@@ -110,7 +121,7 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
 - Create database::
 
-    sudo mysqladmin create dsmrreader
+    sudo mysqladmin --defaults-file=/etc/mysql/debian.cnf create dsmrreader
 
 - Create database user::
 
@@ -122,7 +133,7 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
 - Flush privileges to activate them::
 
-    sudo mysqladmin reload --defaults-file=/etc/mysql/debian.cnf
+    sudo mysqladmin --defaults-file=/etc/mysql/debian.cnf reload
 
 .. note::
 
@@ -130,11 +141,11 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
     
     Restore an uncompressed (``.sql``) backup with::
     
-        cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+        cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
 
     Or restore a compressed (``.gz``) backup with::
     
-        zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+        zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
 
 
 2. Dependencies
@@ -143,7 +154,8 @@ Now you'll have to install several utilities, required for the Nginx webserver, 
 
     sudo apt-get install -y nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper
 
-Install ``cu``. The CU program allows easy testing for your DSMR serial connection. It's very basic but also very effective to simply test whether your serial cable setup works properly. ::
+Install ``cu``. The CU program allows easy testing for your DSMR serial connection. 
+It's very basic but also very effective to simply test whether your serial cable setup works properly::
 
     sudo apt-get install -y cu
 
@@ -255,9 +267,8 @@ Make sure you've read and executed the note above, because you'll need it for th
 
 7. Application configuration & setup
 ------------------------------------
-Earlier in this guide you had to choose for either **(A.) PostgreSQL** or **(B.) MySQL/MariaDB**. Our application needs to know which backend used in order to communicate with it. 
-
-Therefor I created two default (Django-)settings files you can copy, one for each backend. The application will also need the appropriate database client, which is not installed by default. For this I also created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. 
+The application will also need the appropriate database client, which is not installed by default. 
+For this I created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. 
 
 The ``base.txt`` contains requirements which the application needs anyway, no matter which backend you've choosen.
 
@@ -265,7 +276,7 @@ The ``base.txt`` contains requirements which the application needs anyway, no ma
 
     **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
-(Option A.) PostgreSQL
+PostgreSQL
 ^^^^^^^^^^^^^^^^^^^^^^
 - Did you choose PostgreSQL? Then execute these two lines::
 
@@ -273,18 +284,27 @@ The ``base.txt`` contains requirements which the application needs anyway, no ma
 
     pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/postgresql.txt
 
-(Option B.) MySQL/MariaDB
+
+Did everything install without fatal errors? If the database client refuses to install due to missing files/configs, 
+make sure you've installed ``postgresql-server-dev-all`` earlier in the process, when you installed the database server itself.
+
+Continue to chapter 8 (Bootstrapping).
+
+(Legacy) MySQL/MariaDB
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+.. warning::
+
+    Support for the MySQL database backend is deprecated and will be removed in a later release.
+    Please use a PostgreSQL database instead. Users already running MySQL will be supported in migrating at a later moment.
+
 - Or did you choose MySQL/MariaDB? Execute these two commands::
 
     cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
 
     pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
 
-
-Did everything install without fatal errors? If either of the database clients refuses to install due to missing files/configs, 
-make sure you've installed ``postgresql-server-dev-all`` (for **PostgreSQL**) or ``libmysqlclient-dev`` (for **MySQL**) earlier in the process, 
-when you installed the database server itself.
+Did everything install without fatal errors? If the database client refuses to install due to missing files/configs, 
+make sure you've installed ``libmysqlclient-dev`` earlier in the process, when you installed the database server itself.
 
 
 8. Bootstrapping

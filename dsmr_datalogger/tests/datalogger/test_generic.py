@@ -9,7 +9,8 @@ import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.exceptions import InvalidTelegramChecksum
 import dsmr_datalogger.services
 
@@ -111,10 +112,6 @@ class TestServices(TestCase):
         self.assertEqual(result, expected_result)
 
     def test_track_meter_statistics(self):
-        datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.track_meter_statistics = False
-        datalogger_settings.save()
-
         telegram = ''.join([
             "/XMX5LGBBFFB123456789\r\n",
             "\r\n",
@@ -159,18 +156,10 @@ class TestServices(TestCase):
 
         self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
         dsmr_datalogger.services.telegram_to_reading(data=telegram)
-        self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Unaffected
-
-        # Try again, but now with tracking settings enabled.
-        datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.track_meter_statistics = True
-        datalogger_settings.save()
-
-        self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
-        dsmr_datalogger.services.telegram_to_reading(data=telegram)
 
         # Should be populated now.
         meter_statistics = MeterStatistics.get_solo()
+        self.assertEqual(meter_statistics.dsmr_version, '40')
         self.assertIsNotNone(meter_statistics.electricity_tariff)
         self.assertEqual(meter_statistics.electricity_tariff, 1)
         self.assertEqual(meter_statistics.power_failure_count, 3)
@@ -292,6 +281,11 @@ class TestServices(TestCase):
         ]
 
         with self.assertRaises(InvalidTelegramChecksum):
+            # Empty.
+            dsmr_datalogger.services.verify_telegram_checksum(data='')
+
+        with self.assertRaises(InvalidTelegramChecksum):
+            # Invalid checksum.
             dsmr_datalogger.services.verify_telegram_checksum(data=''.join(telegram))
 
         # Again, with the correct checksum.
@@ -300,22 +294,22 @@ class TestServices(TestCase):
 
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
-    def test_dsmr_version_3(self):
-        """ Test connection parameters for DSMR v2/3. """
+    def test_dsmr_version_2(self):
+        """ Test connection parameters for DSMR v2. """
         datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_3
+        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2
         datalogger_settings.save()
 
-        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_3)
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_2)
 
         connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 9600)
         self.assertEqual(connection_parameters['bytesize'], serial.SEVENBITS)
         self.assertEqual(connection_parameters['parity'], serial.PARITY_EVEN)
 
-    def test_dsmr_version_4(self):
-        """ Test connection parameters for DSMR v4. """
-        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_4)
+    def test_dsmr_version_4_plus(self):
+        """ Test connection parameters for DSMR v4+. """
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_4_PLUS)
 
         connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 115200)

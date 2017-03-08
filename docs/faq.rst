@@ -15,10 +15,10 @@ Every once in a while there may be updates. Since ``v1.5`` you can also easily c
     
     Before updating, **please make sure you have a recent backup of your database**! :doc:`More information about backups can be found here<application>`.
 
-You can update your application to the latest version by executing **deploy.sh**, located in the root of the project. 
+You can update your application to the latest version by executing **upgrade.sh**, located in the root of the project. 
 Make sure to execute it while logged in as the ``dsmr`` user::
 
-   ./deploy.sh
+   ./upgrade.sh
 
 It will make sure to check, fetch and apply any changes released. Summary of deployment script steps:
 
@@ -189,6 +189,8 @@ Only want to restore the database?
 
 - Stop the application first with ``sudo supervisorctl stop all``. This will disconnect it from the database as well.
 
+- Importing the data could take a long time. It took MySQL 15 minutes to import nearly 3 million readings, from a compressed backup, on a RaspberryPi 3. 
+
 For **PostgreSQL** restores::
 
     sudo sudo -u postgres dropdb dsmrreader
@@ -209,12 +211,12 @@ For **MySQL** restores::
     sudo mysqladmin drop dsmrreader
     
     # Either restore an uncompressed (.sql) backup:
-    cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+    cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
     
     # OR
     
     # Restore a compressed (.gz) backup with:
-    zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql -D dsmrreader --defaults-file=/etc/mysql/debian.cnf
+    zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
 
 
 - Start the application again with ``sudo supervisorctl start all``.

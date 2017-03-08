@@ -16,6 +16,7 @@ DSMR_MAPPING = {
     '0-1:24.2.1': ('extra_device_timestamp', 'extra_device_delivered'),
 
     # Static data, stored in database but only record of the last reading is preserved.
+    '1-3:0.2.8': 'dsmr_version',
     '0-0:96.14.0': 'electricity_tariff',
     '0-0:96.7.21': 'power_failure_count',
     '0-0:96.7.9': 'long_power_failure_count',

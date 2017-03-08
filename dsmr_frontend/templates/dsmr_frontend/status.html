@@ -32,8 +32,8 @@
                                 {% trans "Check for updates" %} 
                                 <br />
                                 
-                                <a id="version_check_info" href="#"><small>{% trans "How does it work?" %}</small></a>
-                                <small id="version_check_info_text" class="xhr-hidden">{% blocktrans %}The application will compare "VERSION = (x,x,x)" in your local dsmrreader/__init__.py file with the latest one available on Github.{% endblocktrans %}</small>
+                                <a class="help-trigger" href="#"><small>{% trans "How does it work?" %}</small></a>
+                                <small class="xhr-hidden">{% blocktrans %}The application will compare "VERSION = (x,x,x)" in your local dsmrreader/__init__.py file with the latest one available on Github.{% endblocktrans %}</small>
                             </td>
                             <td class="col-md-6">
                                 <a class="btn btn-success" href="#" id="check_for_updates"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Check now' %}</a>
@@ -58,7 +58,7 @@
                     <i class="fa fa-plug"></i> &nbsp; {% trans "P1 DSMR telegrams" %} <br />
                 </header>
                 <div class="panel-body">
-                    {% if delta_since_latest_reading == None or delta_since_latest_reading > 60 %}
+                    {% if delta_since_latest_reading == None or delta_since_latest_reading > 90 %}
                     <div class="alert alert-danger" role="alert">
                         <span class="fa fa-frown-o fa-2x"></span> 
                         {% blocktrans %}It has been a while since the latest telegram reading.{% endblocktrans %}
@@ -70,6 +70,15 @@
 
                         {% trans "Most recent reading" %}: 
                         <strong>{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% else %}{% trans "No data." %}{% endif %}</strong>
+                    </div>
+
+                    <div>
+	                    <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+	                    <small class="xhr-hidden">
+		                    {% blocktrans %}The telegrams are either read from the DSMR_DATALOGGER process or sent via the API.{% endblocktrans %}
+		                    {% blocktrans %}Each telegram read from your smart meter is stored and queued for processing first.{% endblocktrans %}
+		                    {% blocktrans %}Each new telegram is (only) used to display the latest reading, in the top right corner of the Dashboard page.{% endblocktrans %}
+		                </small>
                     </div>
                 </div>
             </div>
@@ -102,6 +111,15 @@
                     {% endif %}
 
                     {% trans "Unprocessed telegrams" %}: <strong>{{ unprocessed_readings|default:'-' }}</strong>
+                    </div>
+                    
+                    <div>
+                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <small class="xhr-hidden">
+	                        {% blocktrans %}This indicates how many stored telegrams are waiting to be processed.{% endblocktrans %}
+		                    {% blocktrans %}This should reset around each minute mark, depending on whether you've enabled grouping readings in the configuration.{% endblocktrans %}
+		                    {% blocktrans %}The stored telegrams are processed by the DSMR_BACKEND process and thus can be processed retroactively as well (by design).{% endblocktrans %}
+	                    </small>
                     </div>
                 </div>
             </div>
@@ -144,6 +162,14 @@
                         <span class="fa fa-close fa-2x"></span> {% trans "No data." %}
                     </div>
                     {% endif %}
+                    
+                    <div>
+                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <small class="xhr-hidden">
+                            {% blocktrans %}When telegrams are processed, they are split into electricity and gas (when available) consumption nodes.{% endblocktrans %}
+                            {% blocktrans %}These consumption nodes are plotted in the graphs displayed on the Dashboard page.{% endblocktrans %}
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,6 +198,14 @@
                         <span class="fa fa-close fa-2x"></span> {% trans "No data." %}
                     </div>
                     {% endif %}
+                    
+                    <div>
+                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <small class="xhr-hidden">
+                            {% blocktrans %}When telegrams are processed, they are split into electricity and gas (when available) consumption nodes.{% endblocktrans %}
+                            {% blocktrans %}These consumption nodes are plotted in the graphs displayed on the Dashboard page.{% endblocktrans %}
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -207,6 +241,14 @@
                         <span class="fa fa-close fa-2x"></span> {% trans "Electricity usage" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
+                    
+                    <div>
+                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <small class="xhr-hidden">
+                            {% blocktrans %}The consumption nodes reflect the capabilities of your smart meter.{% endblocktrans %}
+                            {% blocktrans %}The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages.{% endblocktrans %}
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -226,6 +268,13 @@
                     </div>
                     {% endif %}
                     
+                    <div>
+                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <small class="xhr-hidden">
+                            {% blocktrans %}The consumption nodes reflect the capabilities of your smart meter.{% endblocktrans %}
+                            {% blocktrans %}The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages.{% endblocktrans %}
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -244,6 +293,14 @@
                         <span class="fa fa-close fa-2x"></span> {% trans "Gas usage" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
+                    
+                    <div>
+                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <small class="xhr-hidden">
+                            {% blocktrans %}The consumption nodes reflect the capabilities of your smart meter.{% endblocktrans %}
+                            {% blocktrans %}The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages.{% endblocktrans %}
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -268,7 +325,6 @@
             <div class="panel">
                 <header class="panel-heading">
                     <i class="fa fa-cogs"></i> &nbsp; {% trans "Day &amp; hour statistics" %}<br />
-                    <small>{% blocktrans %}For day totals, archive and trends. Calculated once a day (few hours after midnight).{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
                     {% if days_since_latest_day_statistics == None or days_since_latest_day_statistics > 1 %}
@@ -283,6 +339,15 @@
                         {% trans "Data processing is on schedule" %}: <strong>{{ latest_day_statistics.day }}</strong>
                     </div>
                     {% endif %}
+                    
+                    <div>
+                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <small class="xhr-hidden">
+                            {% blocktrans %}At the end of each day (around 1 a.m.) all consumption nodes will be aggregated to statistics nodes.{% endblocktrans %}
+                            {% blocktrans %}These statistics nodes consist of daily and hourly consumption totals (due to performance).{% endblocktrans %}
+                            {% blocktrans %}They are used in many pages displaying long term data, such as the Archive, Trends and Compare pages.{% endblocktrans %}
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -296,11 +361,11 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#version_check_info").click(function(){
-			$(this).hide();
-			$("#version_check_info_text").show();
-			return false;
-		});
+        $(".help-trigger").click(function(){
+        	$(this).next().show();
+            $(this).remove();
+            return false;
+        });
 		
         $("#check_for_updates").click(function(){
             check_for_updates();

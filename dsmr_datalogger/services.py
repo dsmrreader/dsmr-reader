@@ -10,7 +10,8 @@ import serial
 import crcmod
 import pytz
 
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.exceptions import InvalidTelegramChecksum
 from dsmr_datalogger.dsmr import DSMR_MAPPING
@@ -22,13 +23,13 @@ logger = logging.getLogger('dsmrreader')
 def get_dsmr_connection_parameters():
     """ Returns the communication settings required for the DSMR version set. """
     DSMR_VERSION_MAPPING = {
-        DataloggerSettings.DSMR_VERSION_3: {
+        DataloggerSettings.DSMR_VERSION_2: {
             'baudrate': 9600,
             'bytesize': serial.SEVENBITS,
             'parity': serial.PARITY_EVEN,
             'crc': False,
         },
-        DataloggerSettings.DSMR_VERSION_4: {
+        DataloggerSettings.DSMR_VERSION_4_PLUS: {
             'baudrate': 115200,
             'bytesize': serial.EIGHTBITS,
             'parity': serial.PARITY_NONE,
@@ -43,7 +44,7 @@ def get_dsmr_connection_parameters():
 
 
 def read_telegram():
-    """ Reads the serial port until we can create a reading point. """
+    """ Reads the serial port until we've read a full DSMR telegram. Keeps yielding the telegrams. """
     connection_parameters = get_dsmr_connection_parameters()
 
     serial_handle = serial.Serial()
@@ -70,8 +71,8 @@ def read_telegram():
             data = serial_handle.readline()
         except SerialException as error:
             if str(error) == 'read failed: [Errno 4] Interrupted system call':
-                # If we were signaled to stop, we still have to finish our loop.
-                continue
+                # If we were signaled to stop, act as if we caused it ourselves
+                raise StopIteration('Interrupted system call (by user?)')
 
             # Something else and unexpected failed.
             raise
@@ -95,8 +96,11 @@ def read_telegram():
 
         # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
         if data.startswith('!') and telegram_start_seen:
-            serial_handle.close()
-            return buffer
+            yield buffer
+
+            # Now reset again.
+            telegram_start_seen = False
+            buffer = ''
 
 
 def verify_telegram_checksum(data):
@@ -104,7 +108,7 @@ def verify_telegram_checksum(data):
     Verifies telegram by checking it's CRC. Raises exception on failure. DSMR docs state:
     CRC is a CRC16 value calculated over the preceding characters in the data message (from / to ! using the polynomial)
     """
-    matches = re.search(r'^(/[^!]+!)([A-Z0-9]{4,4})', data)
+    matches = re.search(r'^(/[^!]+!)([A-Z0-9]{4})', data)
 
     try:
         content, crc = matches.groups()
@@ -129,46 +133,39 @@ def verify_telegram_checksum(data):
         )
 
 
+def _convert_legacy_dsmr_gas_line(parsed_reading, current_line, next_line):
+    """ Legacy support for DSMR 2.x gas. """
+    legacy_gas_line = current_line
+
+    if next_line.startswith('('):  # pragma: no cover
+        legacy_gas_line = current_line + next_line
+
+    legacy_gas_result = re.search(
+        r'[^(]+\((\d+)\)\(\d+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
+        legacy_gas_line
+    )
+    gas_timestamp = legacy_gas_result.group(1)
+
+    if timezone.now().dst() != timezone.timedelta(0):
+        gas_timestamp += 'S'
+    else:
+        gas_timestamp += 'W'
+
+    parsed_reading['extra_device_timestamp'] = reading_timestamp_to_datetime(
+        string=gas_timestamp
+    )
+    parsed_reading['extra_device_delivered'] = legacy_gas_result.group(2)
+    return parsed_reading
+
+
 def telegram_to_reading(data):  # noqa: C901
     """
     Converts a P1 telegram to a DSMR reading, which will be stored in database.
     """
-
-    def _get_reading_fields():
-        reading_fields = [x.name for x in DsmrReading._meta.get_fields()]
-        reading_fields.remove('id')
-        reading_fields.remove('processed')
-        return reading_fields
-
-    def _get_statistics_fields():
-        reading_fields = [x.name for x in MeterStatistics._meta.get_fields()]
-        reading_fields.remove('id')
-        reading_fields.remove('rejected_telegrams')
-        return reading_fields
-
-    def _convert_legacy_dsmr_gas_line(parsed_reading, current_line, next_line):
-        """ Legacy support for DSMR 2.x gas. """
-        legacy_gas_line = current_line
-
-        if next_line.startswith('('):  # pragma: no cover
-            legacy_gas_line = current_line + next_line
-
-        legacy_gas_result = re.search(
-            r'[^(]+\((\d+)\)\(\d+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
-            legacy_gas_line
-        )
-        gas_timestamp = legacy_gas_result.group(1)
-
-        if timezone.now().dst() != timezone.timedelta(0):
-            gas_timestamp += 'S'
-        else:
-            gas_timestamp += 'W'
-
-        parsed_reading['extra_device_timestamp'] = reading_timestamp_to_datetime(
-            string=gas_timestamp
-        )
-        parsed_reading['extra_device_delivered'] = legacy_gas_result.group(2)
-        return parsed_reading
+    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ('id', 'processed')]
+    STATISTICS_FIELDS = [
+        x.name for x in MeterStatistics._meta.get_fields() if x.name not in ('id', 'rejected_telegrams')
+    ]
 
     # We will log the telegrams in base64 for convenience and debugging 'n stuff.
     base64_data = base64.b64encode(data.encode())
@@ -189,7 +186,7 @@ def telegram_to_reading(data):  # noqa: C901
             raise
 
     # Defaults all fields to NULL.
-    parsed_reading = {k: None for k in _get_reading_fields() + _get_statistics_fields()}
+    parsed_reading = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
     field_splitter = re.compile(r'([^(]+)\((.+)\)')
     lines_read = data.split("\r\n")
 
@@ -246,14 +243,14 @@ def telegram_to_reading(data):  # noqa: C901
         })
 
     # Now we need to split reading & statistics. So we split the dict here.
-    reading_kwargs = {k: parsed_reading[k] for k in _get_reading_fields()}
+    reading_kwargs = {k: parsed_reading[k] for k in READING_FIELDS}
+    statistics_kwargs = {k: parsed_reading[k] for k in STATISTICS_FIELDS}
+
+    # Reading will be processed later.
     new_reading = DsmrReading.objects.create(**reading_kwargs)
 
-    # Optional feature.
-    if datalogger_settings.track_meter_statistics:
-        statistics_kwargs = {k: parsed_reading[k] for k in _get_statistics_fields()}
-        # There should already be one in database, created when migrating.
-        MeterStatistics.objects.all().update(**statistics_kwargs)
+    # There should already be one in database, created when migrating.
+    MeterStatistics.objects.all().update(**statistics_kwargs)
 
     logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
     return new_reading

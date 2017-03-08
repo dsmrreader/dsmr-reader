@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 
 
 class TestDsmrReading(TestCase):
@@ -23,6 +24,11 @@ class TestDsmrReading(TestCase):
     def test_str(self):
         """ Model should override string formatting. """
         self.assertNotEqual(str(self.instance), 'DsmrReading')
+
+    def test_managers(self):
+        self.assertTrue(DsmrReading.objects.unprocessed().exists())
+        DsmrReading.objects.all().update(processed=True)
+        self.assertTrue(DsmrReading.objects.processed().exists())
 
 
 class TestMeterStatistics(TestCase):

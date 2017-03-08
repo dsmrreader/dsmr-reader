@@ -5,11 +5,11 @@ from solo.models import SingletonModel
 
 class DataloggerSettings(SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
-    DSMR_VERSION_4 = 4
-    DSMR_VERSION_3 = 3
+    DSMR_VERSION_4_PLUS = 4
+    DSMR_VERSION_2 = 3  # Yes that is a three and it's legacy.
     DSMR_VERSION_CHOICES = (
-        (DSMR_VERSION_4, _('DSMR version 4')),
-        (DSMR_VERSION_3, _('DSMR version 2/3')),
+        (DSMR_VERSION_4_PLUS, _('DSMR version 4+')),
+        (DSMR_VERSION_2, _('DSMR version 2')),
     )
 
     track = models.BooleanField(
@@ -19,14 +19,6 @@ class DataloggerSettings(SingletonModel):
             'Whether we should track the P1 port on your smartmeter. Almost every feature inside '
             'this project requires this to be enabled. However, it might be disabled temporarily '
             'due to technical reasons, such as data migrations.'
-        )
-    )
-    track_meter_statistics = models.BooleanField(
-        default=True,
-        verbose_name=_('Track meter statistics'),
-        help_text=_(
-            'Whether we should track any extra statistics sent by the meter, such as the number of '
-            'power failures of voltage dips. Data is not required for core features.'
         )
     )
     track_phases = models.BooleanField(
@@ -45,7 +37,7 @@ class DataloggerSettings(SingletonModel):
     )
 
     dsmr_version = models.IntegerField(
-        default=DSMR_VERSION_4,
+        default=DSMR_VERSION_4_PLUS,
         choices=DSMR_VERSION_CHOICES,
         verbose_name=_('DSMR version'),
         help_text=_('The DSMR version your meter supports. Version should be printed on meter.')

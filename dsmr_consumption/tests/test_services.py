@@ -8,6 +8,7 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
+from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
 
 
@@ -18,6 +19,8 @@ class TestServices(InterceptStdoutMixin, TestCase):
     def setUp(self):
         self.support_gas_readings = True
         self.assertEqual(DsmrReading.objects.all().count(), 3)
+        MeterStatistics.get_solo()
+        MeterStatistics.objects.all().update(dsmr_version='42')
 
         if self.support_gas_readings:
             self.assertTrue(DsmrReading.objects.unprocessed().exists())
@@ -48,6 +51,14 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         if self.support_gas_readings:
             self.assertEqual(GasConsumption.objects.count(), 2)
+            self.assertEqual(
+                [x.read_at for x in GasConsumption.objects.all()],
+                [
+                    # Asume a one hour backtrack.
+                    timezone.make_aware(timezone.datetime(2015, 11, 10, hour=18), timezone.utc),
+                    timezone.make_aware(timezone.datetime(2015, 11, 10, hour=19), timezone.utc)
+                ]
+            )
         else:
             self.assertEqual(GasConsumption.objects.count(), 0)
 
@@ -258,6 +269,42 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         self.assertEqual(min_max['min_watt'], 250)
         self.assertEqual(min_max['max_watt'], 6123)
+
+
+class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
+    """ Biggest difference is the interval of gas readings. """
+    fixtures = ['dsmr_consumption/test_dsmrreading_v5.json']
+
+    def setUp(self):
+        self.assertEqual(DsmrReading.objects.all().count(), 6)
+        self.assertTrue(DsmrReading.objects.unprocessed().exists())
+        ConsumptionSettings.get_solo()
+        MeterStatistics.get_solo()
+        MeterStatistics.objects.all().update(dsmr_version='50')
+
+    def test_processing_grouped(self):
+        dsmr_consumption.services.compact_all()
+
+        self.assertTrue(DsmrReading.objects.processed().exists())
+        self.assertFalse(DsmrReading.objects.unprocessed().exists())
+        self.assertEqual(GasConsumption.objects.count(), 4)
+        self.assertEqual(
+            [float(x.currently_delivered) for x in GasConsumption.objects.all()],
+            [0.0, 0.05, 0.03, 0.07]
+        )
+
+    def test_processing_ungrouped(self):
+        ConsumptionSettings.objects.update(compactor_grouping_type=ConsumptionSettings.COMPACTOR_GROUPING_BY_READING)
+
+        dsmr_consumption.services.compact_all()
+
+        self.assertTrue(DsmrReading.objects.processed().exists())
+        self.assertFalse(DsmrReading.objects.unprocessed().exists())
+        self.assertEqual(GasConsumption.objects.count(), 6)
+        self.assertEqual(
+            [float(x.currently_delivered) for x in GasConsumption.objects.all()],
+            [0.0, 0.05, 0.01, 0.01, 0.01, 0.07]
+        )
 
 
 class TestServicesWithoutGas(TestServices):

@@ -6,7 +6,8 @@ from django.test import TestCase
 import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 
 
@@ -99,6 +100,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()
+        self.assertEqual(meter_statistics.dsmr_version, '42')
         self.assertEqual(meter_statistics.electricity_tariff, 2)
         self.assertEqual(meter_statistics.power_failure_count, 3)
         self.assertEqual(meter_statistics.long_power_failure_count, 0)

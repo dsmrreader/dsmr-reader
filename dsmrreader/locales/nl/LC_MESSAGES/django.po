@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-19 19:33+0100\n"
-"PO-Revision-Date: 2017-01-19 19:10+0100\n"
+"POT-Creation-Date: 2017-03-08 20:38+0100\n"
+"PO-Revision-Date: 2017-02-19 18:22+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -60,6 +60,12 @@ msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer."
 
+msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>"
+msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>"
+
+msgid "Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync\">FAQ in documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync\">FAQ in documentatie</a>"
+
 msgid "Backup"
 msgstr "Backup"
 
@@ -92,9 +98,6 @@ msgstr "Backupconfiguratie"
 
 msgid "Dropbox access token"
 msgstr "Dropbox 'access token'"
-
-msgid "The access token for your Dropbox account. You should register an App for your own Dropbox account (https://www.dropbox.com/developers/apps). Please select \"Permission type\" named \"App folder\" to restrict unneeded access. Backups will be synced to a dedicated folder in your account. After creating your App you should be able to generate an \"Access token\" and enter it here. For more information, see https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
-msgstr "Het 'access token' voor je Dropbox account. Hiervoor moet je onder je eigen account een applicatie registeren (https://www.dropbox.com/developers/apps). Zorg ervoor dat je bij \"Permission type\" kiest voor de optie \"App folder\" om de gedeelde toegang tot je account te beperken. Backups worden hierdoor in je account op een geïsoleerde locatie gezet. Zodra je in Dropbox een applicatie hebt toegevoegd, kun je een zogeheten \"Access token\" genereren en hier invullen. Zie voor meer informatie: https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
 
 msgid "Latest sync"
 msgstr "Meest recente synchronisatie"
@@ -135,11 +138,17 @@ msgstr "Actief stroomverbruik van fase L2 (+P) in Watt"
 msgid "Instantaneous active power L3 (+P) in W resolution"
 msgstr "Actief stroomverbruik van fase L3 (+P) in Watt"
 
-msgid "Last hourly value delivered to client"
-msgstr "Waarde wat er vorig uur is geleverd aan client"
+msgid "Electricity consumption"
+msgstr "Elektriciteitsverbruik"
 
-msgid "Actual value delivered to client, since the last hour"
-msgstr "Daadwerkelijke waarde geleverd aan client, vanaf het vorige uur"
+msgid "Last meter position read"
+msgstr "Laatst gelezen meterstand"
+
+msgid "Delivered value, based on the previous reading"
+msgstr "Aantal geleverd, gebaseerd op de voorgaande meting"
+
+msgid "Gas consumption"
+msgstr "Gasverbruik"
 
 msgid "Start"
 msgstr "Start"
@@ -225,6 +234,9 @@ msgstr "Moment waarop de meting is gedaan, volgens de meter."
 msgid "Last hourly reading timestamp"
 msgstr "Tijdstip van laatste meting"
 
+msgid "Last hourly value delivered to client"
+msgstr "Meest recente meterstand"
+
 msgid "Whether this reading has been processed for merging into statistics"
 msgstr "Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
 
@@ -233,6 +245,48 @@ msgstr "DSMR-uitlezing (alleen lezen)"
 
 msgid "DSMR readings (read only)"
 msgstr "DSMR-uitlezing (alleen lezen)"
+
+msgid "DSMR version 4+"
+msgstr "DSMR-versie 4+"
+
+msgid "DSMR version 2"
+msgstr "DSMR-versie 2"
+
+msgid "Poll P1 port"
+msgstr "Peil P1 poort"
+
+msgid "Whether we should track the P1 port on your smartmeter. Almost every feature inside this project requires this to be enabled. However, it might be disabled temporarily due to technical reasons, such as data migrations."
+msgstr "Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke functionaliteit binnen dit project vereist dat dit altijd aanstaat. Het kan desondanks zijn dat het tijdelijk uitgezet wordt, wegens technische redenen, zoals datamigraties (bij updates)."
+
+msgid "Track electricity phases"
+msgstr "Houd elektriciteitsfasen bij"
+
+msgid "Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this."
+msgstr "Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer aanwezig). Standaard heeft iedereen één fase thuis, maar sommige slimme meters zijn aangesloten op drie fasen. Bijvoorbeeld voor zonnepanelen of elektrisch koken. Deze feature is alleen nuttig (en werkt tevens alleen) wanneer er daadwerkelijk drie fasen aanwezig zijn. Het dashboard toont deze gegevens wanneer dit ingeschakeld is."
+
+msgid "Verify telegram CRC"
+msgstr "Controleer de CRC van telegrammen"
+
+msgid "Whether we should verify the CRC of any telegrams read by / sent to the application."
+msgstr "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten controleren."
+
+msgid "DSMR version"
+msgstr "DSMR-versie"
+
+msgid "The DSMR version your meter supports. Version should be printed on meter."
+msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
+
+msgid "COM-port"
+msgstr "COM-poort"
+
+msgid "COM-port connected to Smartmeter."
+msgstr "COM-poort die verbonden is met je slimme meter."
+
+msgid "Datalogger configuration"
+msgstr "Dataloggerconfiguratie"
+
+msgid "Timestamp indicating when the reading was taken"
+msgstr "Moment waarop de meting is gedaan"
 
 msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff."
 msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor piektarief."
@@ -266,51 +320,6 @@ msgstr "Aantal genegeerde DSMR telegrammen wegens een foutieve CRC checksum"
 
 msgid "DSMR Meter statistics (read only)"
 msgstr "Meterstatistieken (alleen lezen)"
-
-msgid "DSMR version 4"
-msgstr "DSMR-versie 4"
-
-msgid "DSMR version 2/3"
-msgstr "DSMR-versie 2/3"
-
-msgid "Poll P1 port"
-msgstr "Peil P1 poort"
-
-msgid "Whether we should track the P1 port on your smartmeter. Almost every feature inside this project requires this to be enabled. However, it might be disabled temporarily due to technical reasons, such as data migrations."
-msgstr "Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke functionaliteit binnen dit project vereist dat dit altijd aanstaat. Het kan desondanks zijn dat het tijdelijk uitgezet wordt, wegens technische redenen, zoals datamigraties (bij updates)."
-
-msgid "Track meter statistics"
-msgstr "Houd meterstatistieken bij"
-
-msgid "Whether we should track any extra statistics sent by the meter, such as the number of power failures of voltage dips. Data is not required for core features."
-msgstr "Geeft aan of we extra meterstatistieken moeten bijhouden, zoals het aantal stroomstoringen of spanningsdippen. Deze gegevens zijn niet nodig voor de basisfunctionaliteit."
-
-msgid "Track electricity phases"
-msgstr "Houd elektriciteitsfasen bij"
-
-msgid "Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this."
-msgstr "Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer aanwezig). Standaard heeft iedereen één fase thuis, maar sommige slimme meters zijn aangesloten op drie fasen. Bijvoorbeeld voor zonnepanelen of elektrisch koken. Deze feature is alleen nuttig (en werkt tevens alleen) wanneer er daadwerkelijk drie fasen aanwezig zijn. Het dashboard toont deze gegevens wanneer dit ingeschakeld is."
-
-msgid "Verify telegram CRC"
-msgstr "Controleer de CRC van telegrammen"
-
-msgid "Whether we should verify the CRC of any telegrams read by / sent to the application."
-msgstr "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten controleren."
-
-msgid "DSMR version"
-msgstr "DSMR-versie"
-
-msgid "The DSMR version your meter supports. Version should be printed on meter."
-msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
-
-msgid "COM-port"
-msgstr "COM-poort"
-
-msgid "COM-port connected to Smartmeter."
-msgstr "COM-poort die verbonden is met je slimme meter."
-
-msgid "Datalogger configuration"
-msgstr "Dataloggerconfiguratie"
 
 msgid "Frontend"
 msgstr "Interface"
@@ -471,8 +480,11 @@ msgstr "Feedback"
 msgid "View repository on Github"
 msgstr "Bekijk repository op Github"
 
-msgid "Theme by"
-msgstr "Thema door"
+msgid "Credits to"
+msgstr "Credits aan"
+
+msgid "View Hall of Fame"
+msgstr "Bekijk Hall of Fame"
 
 msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
@@ -678,9 +690,6 @@ msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
 msgid "Meter statistics"
 msgstr "Meterstatistieken"
 
-msgid "Tracking meter statistics is disabled. Enable this feature in the datalogger settings to view statistics."
-msgstr "Meterstatistieken worden niet bijgehouden. Schakel dit bij de dataloggerinstellingen in om de statistieken weer te geven."
-
 msgid "Usage statistics"
 msgstr "Verbruiksstatistieken"
 
@@ -750,6 +759,18 @@ msgstr "Meest recente meting"
 msgid "No data."
 msgstr "Geen gegevens."
 
+msgid "Click for more information"
+msgstr "Klik hier voor meer informatie"
+
+msgid "The telegrams are either read from the DSMR_DATALOGGER process or sent via the API."
+msgstr "De telegrammen worden ofwel door het DSMR_DATALOGGER process gelezen of komen binnen via de API."
+
+msgid "Each telegram read from your smart meter is stored and queued for processing first."
+msgstr "Elke telegram uit je slimme meter wordt eerst alleen opgeslagen voor verwerking."
+
+msgid "Each new telegram is (only) used to display the latest reading, in the top right corner of the Dashboard page."
+msgstr "Elk nieuw telegram wordt (alleen) initieel gebruikt om de laatste meting te tonen in het Dashboard, rechts bovenin de pagina."
+
 msgid "Telegram processing"
 msgstr "Telegramverwerking"
 
@@ -758,6 +779,15 @@ msgstr "Er zijn te veel onverwerkte telegrammen."
 
 msgid "Unprocessed telegrams"
 msgstr "Onverwerkte telegrammen"
+
+msgid "This indicates how many stored telegrams are waiting to be processed."
+msgstr "Dit geeft aan hoeveel opgeslagen telegrammen er wachten op verwerking."
+
+msgid "This should reset around each minute mark, depending on whether you've enabled grouping readings in the configuration."
+msgstr "Deze teller zou ongeveer elke minuut moeten resetten, afhankelijk van of je het groeperen van metingen in de configuratie hebt ingeschakeld."
+
+msgid "The stored telegrams are processed by the DSMR_BACKEND process and thus can be processed retroactively as well (by design)."
+msgstr "De opgeslagen telegrammen worden verwerkt door het DSMR_BACKEND proces. Daardoor kunnen ze tevens met terugwerkende kracht verwerkt worden."
 
 msgid "Electricity statistics"
 msgstr "Elektriciteitsstatistieken"
@@ -771,8 +801,20 @@ msgstr "Dataverwerking loopt achter"
 msgid "Data processing is on schedule"
 msgstr "Dataverwerking is op schema"
 
+msgid "When telegrams are processed, they are split into electricity and gas (when available) consumption nodes."
+msgstr "Wanneer telegrammen verwerkt worden, splitst de applicatie ze in consumptie nodes voor elektriciteit en gas (wanneer beschikbaar)."
+
+msgid "These consumption nodes are plotted in the graphs displayed on the Dashboard page."
+msgstr "Deze consumptie nodes worden gebruikt in de grafieken van het Dashboard."
+
 msgid "Gas statistics"
 msgstr "Gasstatistieken"
+
+msgid "The consumption nodes reflect the capabilities of your smart meter."
+msgstr "The consumptie nodes reflecteren de gegevensstromen van je slimme meter."
+
+msgid "The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages."
+msgstr "De status van elk van deze (drie) gegevensstromen staat hier weergegeven. Deze bepalen tevens welke grafieken allemaal beschikbaar zijn binnen de applicatie."
 
 msgid "Electricity return"
 msgstr "Elektriciteitsteruglevering"
@@ -780,8 +822,14 @@ msgstr "Elektriciteitsteruglevering"
 msgid "Day &amp; hour statistics"
 msgstr "Dag- &amp; uurstatistieken"
 
-msgid "For day totals, archive and trends. Calculated once a day (few hours after midnight)."
-msgstr "Voor dagtotalen, archief en trends. Wordt dagelijks berekend (paar uur na middernacht)."
+msgid "At the end of each day (around 1 a.m.) all consumption nodes will be aggregated to statistics nodes."
+msgstr "Aan het einde van elke dag (rond 1 uur 's nachts) worden alle consumptie nodes geaggregeerd naar statistieken nodes."
+
+msgid "These statistics nodes consist of daily and hourly consumption totals (due to performance)."
+msgstr "Deze statistieken nodes bevatten dagtotalen en uurtotalen van je verbruik (wegens performance)."
+
+msgid "They are used in many pages displaying long term data, such as the Archive, Trends and Compare pages."
+msgstr "Deze worden gebruikt in pagina's die lange termijn gegevens tonen, zoals het Archief, Trends en de Vergelijk pagina's."
 
 msgid "Untracked consumption in the past (and today), is not taken into account."
 msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
@@ -813,6 +861,9 @@ msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
 msgid "Electricity 2 returned (high tariff)"
 msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
+msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentatie</a>"
+
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
 
@@ -839,6 +890,9 @@ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisc
 
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
+
+msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentation</a>"
+msgstr "Gedetailleerde instructies voor het instellen van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentatie</a>"
 
 msgid "Usage notification"
 msgstr "Verbruiksnotificatie"
@@ -1125,5 +1179,8 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
-#~ msgid "Day statistics (read only)"
-#~ msgstr "Dagstatistieken (alleen lezen)"
+#~ msgid "The access token for your Dropbox account. You should register an App for your own Dropbox account (https://www.dropbox.com/developers/apps). Please select \"Permission type\" named \"App folder\" to restrict unneeded access. Backups will be synced to a dedicated folder in your account. After creating your App you should be able to generate an \"Access token\" and enter it here. For more information, see https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
+#~ msgstr "Het 'access token' voor je Dropbox account. Hiervoor moet je onder je eigen account een applicatie registeren (https://www.dropbox.com/developers/apps). Zorg ervoor dat je bij \"Permission type\" kiest voor de optie \"App folder\" om de gedeelde toegang tot je account te beperken. Backups worden hierdoor in je account op een geïsoleerde locatie gezet. Zodra je in Dropbox een applicatie hebt toegevoegd, kun je een zogeheten \"Access token\" genereren en hier invullen. Zie voor meer informatie: https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
+
+#~ msgid "Theme by"
+#~ msgstr "Thema door"

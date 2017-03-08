@@ -19,9 +19,6 @@ class TestSettings(TestCase):
     def test_track(self):
         self.assertTrue(self.instance.track)
 
-    def test_track_meter_statistics(self):
-        self.assertTrue(self.instance.track_meter_statistics)
-
     def test_track_phases(self):
         self.assertFalse(self.instance.track_phases)
 
@@ -29,7 +26,7 @@ class TestSettings(TestCase):
         self.assertTrue(self.instance.verify_telegram_crc)
 
     def test_dsmr_version(self):
-        self.assertEqual(self.instance.dsmr_version, DataloggerSettings.DSMR_VERSION_4)
+        self.assertEqual(self.instance.dsmr_version, DataloggerSettings.DSMR_VERSION_4_PLUS)
 
     def test_com_port(self):
         self.assertEqual(self.instance.com_port, '/dev/ttyUSB0')

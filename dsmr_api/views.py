@@ -18,17 +18,14 @@ class DataloggerDsmrReading(View):
     def post(self, request):
         api_settings = APISettings.get_solo()
 
-        # API disabled.
         if not api_settings.allow:
             return HttpResponseNotAllowed(permitted_methods=['POST'], content=_('API is disabled'))
 
-        # Auth key mismatch.
         if request.META.get('HTTP_X_AUTHKEY') != api_settings.auth_key:
             return HttpResponseForbidden(content=_('Invalid auth key'))
 
         post_form = DsmrReadingForm(request.POST)
 
-        # Data omitted.
         if not post_form.is_valid():
             logger.warning('API validation failed with POST data: {}'.format(request.POST))
             return HttpResponseBadRequest(_('Invalid data'))
@@ -41,8 +38,7 @@ class DataloggerDsmrReading(View):
             # The service called already logs the error.
             pass
 
-        # Data invalid.
         if not dsmr_reading:
             return HttpResponseServerError(content=_('Failed to parse telegram'))
 
-        return HttpResponse()
+        return HttpResponse(status=201)

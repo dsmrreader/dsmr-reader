@@ -92,7 +92,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
     def test_get_backup_directory(self):
         self.assertEqual(
             dsmr_backup.services.backup.get_backup_directory(),
-            os.path.join(settings.BASE_DIR, '..', settings.DSMR_BACKUP_DIRECTORY)
+            os.path.join(settings.BASE_DIR, '..', settings.DSMRREADER_BACKUP_DIRECTORY)
         )
 
     @mock.patch('subprocess.Popen')

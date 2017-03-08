@@ -43,9 +43,9 @@ def get_capabilities(capability=None):
 
 def is_latest_version():
     """ Checks whether the current version is the latest one available on Github. """
-    response = requests.get(settings.DSMR_LATEST_VERSION_FILE)
+    response = requests.get(settings.DSMRREADER_LATEST_VERSION_FILE)
 
-    local_version = '{}.{}.{}'.format(* settings.DSMR_RAW_VERSION[:3])
+    local_version = '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3])
     remote_version = re.search(r'^VERSION = \((\d+), (\d+), (\d+),', str(response.content, 'utf-8'), flags=re.MULTILINE)
     remote_version = '.'.join(remote_version.groups())
 
