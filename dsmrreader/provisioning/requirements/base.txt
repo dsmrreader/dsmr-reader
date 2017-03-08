@@ -1,11 +1,11 @@
 crcmod==1.7
-django==1.10.5
+django==1.10.6
 django-colorfield==0.1.12
-django-debug-toolbar==1.6
+django-debug-toolbar==1.7
 django-solo==1.1.2
-dropbox==7.1.1
-gunicorn==19.6
-pyserial==3.2.1
+dropbox==7.2.1
+gunicorn==19.7.0
+pyserial==3.3
 python-dateutil==2.6.0
-raven==5.32.0
+raven==6.0.0
 pytz==2016.10
