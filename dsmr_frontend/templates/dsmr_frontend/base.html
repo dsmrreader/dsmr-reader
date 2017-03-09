@@ -1,6 +1,8 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -143,7 +145,7 @@
 	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank" title="{% trans 'View repository on Github' %}">Dennis Siemensma</a> 2015 - {% now "Y" %}
                     </small>
                     <br />
-                    <small>{% trans "Credits to" %}: <a href="https://dsmr-reader.readthedocs.io/en/latest/credits.html" target="_blank">{% trans "View Hall of Fame" %}</a></small>
+                    <small>{% trans "Credits to" %}: <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/latest/credits.html" target="_blank">{% trans "View Hall of Fame" %}</a></small>
                     <br />
                     <br />
                     <small><a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}"><img src="{% static 'dsmr_frontend/img/GitHub-Mark-32px.png' %}" /> {% trans 'View repository on Github' %}</a></small>
