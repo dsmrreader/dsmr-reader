@@ -16,7 +16,11 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
-    unprocessed_readings = DsmrReading.objects.unprocessed()[0:1000]
+    MAX_READINGS = 128
+    unprocessed_readings = DsmrReading.objects.unprocessed()[0:MAX_READINGS]
+    print(' - Trying to process {} reading(s), capped at {} max per run'.format(
+        len(unprocessed_readings), MAX_READINGS
+    ))
 
     for current_reading in unprocessed_readings:
         compact(dsmr_reading=current_reading)
@@ -47,7 +51,7 @@ def compact(dsmr_reading):
     dsmr_reading.save(update_fields=['processed'])
 
     # For backend logging in Supervisor.
-    print(' - Processed reading: {}.'.format(timezone.localtime(dsmr_reading.timestamp)))
+    print(' - Processed reading: {}'.format(dsmr_reading))
 
 
 def _compact_electricity(dsmr_reading, grouping_type, reading_start):

@@ -1,5 +1,6 @@
-from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.db import models
+from django.utils import timezone
 
 
 class DsmrReadingManager(models.Manager):
@@ -95,4 +96,6 @@ class DsmrReading(models.Model):
         verbose_name_plural = _('DSMR readings (read only)')
 
     def __str__(self):
-        return '{}: {} kWh'.format(self.id, self.timestamp, self.electricity_currently_delivered)
+        return '{} @ {} ({} kW)'.format(
+            self.id, timezone.localtime(self.timestamp), self.electricity_currently_delivered
+        )
