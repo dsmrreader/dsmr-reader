@@ -44,7 +44,7 @@ def get_dsmr_connection_parameters():
 
 
 def read_telegram():
-    """ Reads the serial port until we've read a full DSMR telegram. Keeps yielding the telegrams. """
+    """ Reads the serial port until we can create a reading point. """
     connection_parameters = get_dsmr_connection_parameters()
 
     serial_handle = serial.Serial()
@@ -71,8 +71,8 @@ def read_telegram():
             data = serial_handle.readline()
         except SerialException as error:
             if str(error) == 'read failed: [Errno 4] Interrupted system call':
-                # If we were signaled to stop, act as if we caused it ourselves
-                raise StopIteration('Interrupted system call (by user?)')
+                # If we were signaled to stop, we still have to finish our loop.
+                continue
 
             # Something else and unexpected failed.
             raise
@@ -96,11 +96,8 @@ def read_telegram():
 
         # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
         if data.startswith('!') and telegram_start_seen:
-            yield buffer
-
-            # Now reset again.
-            telegram_start_seen = False
-            buffer = ''
+            serial_handle.close()
+            return buffer
 
 
 def verify_telegram_checksum(data):

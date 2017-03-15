@@ -16,13 +16,7 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
-    MAX_READINGS = 128
-    unprocessed_readings = DsmrReading.objects.unprocessed()[0:MAX_READINGS]
-    print(' - Trying to process {} reading(s), capped at {} max per run'.format(
-        len(unprocessed_readings), MAX_READINGS
-    ))
-
-    for current_reading in unprocessed_readings:
+    for current_reading in DsmrReading.objects.unprocessed()[0:128]:
         compact(dsmr_reading=current_reading)
 
 
