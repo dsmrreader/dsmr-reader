@@ -6,7 +6,17 @@
 
 {% block title %}{% trans "Dashboard" %}{% endblock %}
 {% block header %}{% trans "Dashboard" %} &nbsp; <i class="fa fa-dashboard"></i>{% endblock %}
-    
+
+
+{% block stylesheets %}
+	{{ block.super }}
+	
+	<style>
+        a.electricity-scroll-button { background-color: {{frontend_settings.electricity_delivered_color}} !important; }
+        a.gas-scroll-button { background-color: {{frontend_settings.gas_delivered_color}} !important; }
+	</style>
+{% endblock %}
+
 {% block header_right %}
     <li>
         <a href="" onclick="return false;" style="cursor: default;">
@@ -243,13 +253,13 @@
          <br /><br />
     </div>
     <div class="row text-center">
-        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="60" title="{% trans 'Go backward by 60 units' %}"><i class="fa fa-fast-backward"></i></a>
-        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="30" title="{% trans 'Go backward by 30 units' %}"><i class="fa fa-step-backward"></i></a>
-        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="5" title="{% trans 'Go backward by 5 units' %}"><i class="fa fa-backward"></i></a>
+        <a class="btn btn-lg btn-danger x-electricity-offset-control" href="#" data-offset="60" title="{% trans 'Go backward by 60 units' %}"><i class="fa fa-fast-backward"></i></a>
+        <a class="btn btn-lg btn-danger x-electricity-offset-control" href="#" data-offset="30" title="{% trans 'Go backward by 30 units' %}"><i class="fa fa-step-backward"></i></a>
+        <a class="btn btn-lg btn-danger x-electricity-offset-control" href="#" data-offset="5" title="{% trans 'Go backward by 5 units' %}"><i class="fa fa-backward"></i></a>
         &nbsp;
-        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-5" title="{% trans 'Go forward by 5 units' %}"><i class="fa fa-forward"></i></a>
-        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-30" title="{% trans 'Go forward by 30 units' %}"><i class="fa fa-step-forward"></i></a>
-        <a class="btn btn-lg btn-primary x-offset-control" href="#" data-offset="-60" title="{% trans 'Go forward by 60 units' %}"><i class="fa fa-fast-forward"></i></a>
+        <a class="btn btn-lg btn-danger x-electricity-offset-control" href="#" data-offset="-5" title="{% trans 'Go forward by 5 units' %}"><i class="fa fa-forward"></i></a>
+        <a class="btn btn-lg btn-danger x-electricity-offset-control" href="#" data-offset="-30" title="{% trans 'Go forward by 30 units' %}"><i class="fa fa-step-forward"></i></a>
+        <a class="btn btn-lg btn-danger x-electricity-offset-control" href="#" data-offset="-60" title="{% trans 'Go forward by 60 units' %}"><i class="fa fa-fast-forward"></i></a>
     </div>
     <br />
     {% endif %}
@@ -282,6 +292,22 @@
             </div>
         </div>
     </div>
+
+    <div class="row text-center">
+         <div>{% trans 'Scroll gas graph(s)' %}</div> 
+         <small>({% trans 'You can scroll back until one week ago' %})</small>
+         <br /><br />
+    </div>
+    <div class="row text-center">
+        <a class="btn btn-lg btn-warning x-gas-offset-control gas-scroll-button" href="#" data-offset="60" title="{% trans 'Go backward by 60 units' %}"><i class="fa fa-fast-backward"></i></a>
+        <a class="btn btn-lg btn-warning x-gas-offset-control gas-scroll-button" href="#" data-offset="30" title="{% trans 'Go backward by 30 units' %}"><i class="fa fa-step-backward"></i></a>
+        <a class="btn btn-lg btn-warning x-gas-offset-control gas-scroll-button" href="#" data-offset="5" title="{% trans 'Go backward by 5 units' %}"><i class="fa fa-backward"></i></a>
+        &nbsp;
+        <a class="btn btn-lg btn-warning x-gas-offset-control gas-scroll-button" href="#" data-offset="-5" title="{% trans 'Go forward by 5 units' %}"><i class="fa fa-forward"></i></a>
+        <a class="btn btn-lg btn-warning x-gas-offset-control gas-scroll-button" href="#" data-offset="-30" title="{% trans 'Go forward by 30 units' %}"><i class="fa fa-step-forward"></i></a>
+        <a class="btn btn-lg btn-warning x-gas-offset-control gas-scroll-button" href="#" data-offset="-60" title="{% trans 'Go forward by 60 units' %}"><i class="fa fa-fast-forward"></i></a>
+    </div>
+    <br />
     {% endif %}
     
     {% if capabilities.weather %}
@@ -322,7 +348,8 @@
                 phases: undefined,
                 temperature: undefined,
             }
-            var g_chart_offset = 0;
+            var g_chart_electricity_offset = 0;
+            var g_chart_gas_offset = 0;
             
             $(document).ready(function(){
                 $(".delete-notification").click(function(){
@@ -342,16 +369,29 @@
                     $(this).parent().hide();
                     $("#phases_holder").show();
                     return false
-                });                
+                });
                 
-                $(".x-offset-control").click(function(){
-                    g_chart_offset += parseInt($(this).attr('data-offset'));
+                $(".x-electricity-offset-control").click(function(){
+                    g_chart_electricity_offset += parseInt($(this).attr('data-offset'));
                     
                     /* Restrict range, server doesn't allow it either anyway. */
-                    if (g_chart_offset < 0)
-                   	{
-                    	g_chart_offset = 0;
-                   	}
+                    if (g_chart_electricity_offset < 0)
+                    {
+                        g_chart_electricity_offset = 0;
+                    }
+                    
+                    update_graphs();
+                    return false
+                });   
+                
+                $(".x-gas-offset-control").click(function(){
+                	g_chart_gas_offset += parseInt($(this).attr('data-offset'));
+                    
+                    /* Restrict range, server doesn't allow it either anyway. */
+                    if (g_chart_gas_offset < 0)
+                    {
+                    	g_chart_gas_offset = 0;
+                    }
                     
                     update_graphs();
                     return false
@@ -395,7 +435,7 @@
             {
                 $.ajax({
                     dataType: "json",
-                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?units_offset=" + g_chart_offset,
+                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?electricity_offset=" + g_chart_electricity_offset,
                 }).done(function(response) {
                     if (response.capabilities.electricity)
                     {
@@ -513,7 +553,7 @@
             {
                 $.ajax({
                     dataType: "json",
-                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?units_offset=" + g_chart_offset,
+                    url: "{% url 'frontend:dashboard-xhr-graphs' %}?electricity_offset=" + g_chart_electricity_offset + "&gas_offset=" + g_chart_gas_offset,
                 }).done(function(response) {
                     if (response.capabilities.electricity)
                     {
@@ -531,6 +571,11 @@
                         update_chart("phases", response.electricity_x, [response.phases_l1_y, response.phases_l2_y, response.phases_l3_y]);
                    	}
 {% endif %}
+
+					if (response.capabilities.gas)
+					{
+					    update_chart("gas", response.gas_x, [response.gas_y]);
+					}
                 });
             }
             

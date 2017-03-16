@@ -132,14 +132,14 @@ class TestViews(TestCase):
         # Send seperate offset as well.
         response = self.client.get(
             reverse('{}:dashboard-xhr-graphs'.format(self.namespace)),
-            data={'units_offset': 24}
+            data={'electricity_offset': 24}
         )
         self.assertEqual(response.status_code, 200, response.content)
 
         # Send invalid offset.
         response = self.client.get(
             reverse('{}:dashboard-xhr-graphs'.format(self.namespace)),
-            data={'units_offset': 'abc'}
+            data={'electricity_offset': 'abc'}
         )
         self.assertEqual(response.status_code, 400)
 

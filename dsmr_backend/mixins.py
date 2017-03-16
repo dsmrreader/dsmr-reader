@@ -6,7 +6,6 @@ import os
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.contrib import admin
-from django.utils import timezone
 
 
 class InfiniteManagementCommandMixin(object):
@@ -62,9 +61,7 @@ class InfiniteManagementCommandMixin(object):
             self.run(**options)
 
             if self.sleep_time is not None:
-                self.stdout.write(
-                    '{}: Command completed. Sleeping for {} second(s)...'.format(timezone.now(), self.sleep_time)
-                )
+                self.stdout.write('Command completed. Sleeping for {} second(s)...'.format(self.sleep_time))
                 self.stdout.write('')
                 time.sleep(self.sleep_time)  # Do not hammer.
 
