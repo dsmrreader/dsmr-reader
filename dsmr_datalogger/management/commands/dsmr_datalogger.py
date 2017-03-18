@@ -10,13 +10,13 @@ import dsmr_datalogger.services
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Performs an DSMR P1 telegram reading on the COM port.')
     name = __name__  # Required for PID file.
-    sleep_time = 1
+    sleep_time = 0.25
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
         datalogger_settings = DataloggerSettings.get_solo()
 
-        # This should only by disabled when performing huge migrations.
+        # This should only be disabled when performing huge migrations.
         if not datalogger_settings.track:
             raise CommandError("Datalogger tracking is DISABLED!")
 

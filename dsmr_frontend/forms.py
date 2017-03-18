@@ -21,15 +21,22 @@ class ExportAsCsvForm(forms.Form):
 
 
 class DashboardGraphForm(forms.Form):
-    units_offset = forms.IntegerField(required=False)
+    electricity_offset = forms.IntegerField(required=False)
+    gas_offset = forms.IntegerField(required=False)
 
-    def clean_units_offset(self):
-        units_offset = self.cleaned_data['units_offset']
+    def _clean_offset(self, offset_type):
+        offset = self.cleaned_data[offset_type]
 
-        if units_offset is None or units_offset < 0:
-            units_offset = 0
+        if offset is None or offset < 0:
+            offset = 0
 
-        return units_offset
+        return offset
+
+    def clean_electricity_offset(self):
+        return self._clean_offset('electricity_offset')
+
+    def clean_gas_offset(self):
+        return self._clean_offset('gas_offset')
 
 
 class DashboardNotificationReadForm(forms.Form):

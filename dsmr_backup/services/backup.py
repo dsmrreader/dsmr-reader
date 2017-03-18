@@ -41,7 +41,7 @@ def check():
 
 def get_backup_directory():
     """ Returns the path to the directory where all backups are stored locally. """
-    return os.path.join(settings.BASE_DIR, '..', settings.DSMR_BACKUP_DIRECTORY)
+    return os.path.join(settings.BASE_DIR, '..', settings.DSMRREADER_BACKUP_DIRECTORY)
 
 
 def create():

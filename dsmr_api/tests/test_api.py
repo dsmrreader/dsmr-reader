@@ -113,5 +113,5 @@ class TestAPI(TestCase):
         # Disable CRC for this test, as it's tested elsewhere. But verify that it was called anyway.
         self.assertTrue(verify_telegram_checksum_mock.called)
         self.assertTrue(DsmrReading.objects.exists())
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
         self.assertEqual(response.content, b'')

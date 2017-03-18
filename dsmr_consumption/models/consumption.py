@@ -69,21 +69,23 @@ class ElectricityConsumption(models.Model):
 
     class Meta:
         default_permissions = tuple()
+        verbose_name = _('Electricity consumption')
+        verbose_name_plural = verbose_name
 
 
 class GasConsumption(models.Model):
-    """ Hourly consumption (usage), interpolated on the previous value read the hour before. """
+    """ Interpolated gas reading, containing the actualy usage, based on the reading before (if any). """
     read_at = models.DateTimeField(unique=True)
     delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Last hourly value delivered to client")
+        help_text=_("Last meter position read")
     )
     # This value is not provided by DSMR so we calculate the difference relative to the previous reading.
     currently_delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Actual value delivered to client, since the last hour")
+        help_text=_("Delivered value, based on the previous reading")
     )
 
     def __str__(self):
@@ -93,3 +95,5 @@ class GasConsumption(models.Model):
 
     class Meta:
         default_permissions = tuple()
+        verbose_name = _('Gas consumption')
+        verbose_name_plural = verbose_name

@@ -1,7 +1,7 @@
 import traceback
 
 from raven.contrib.django.raven_compat.models import client as raven_client
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext as _
 from django.utils import timezone
 
@@ -38,7 +38,3 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
                 self.stdout.write(' >>> {} :: {}'.format(current_receiver, exception_traceback))
                 self.stderr.write(exception_traceback)
                 signal_failures.append(exception_traceback)
-
-        if signal_failures:
-            # Reflect any error to output for convenience.
-            raise CommandError(signal_failures)

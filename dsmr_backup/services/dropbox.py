@@ -20,7 +20,7 @@ def sync():
 
     if dropbox_settings.latest_sync:
         next_sync_interval = dropbox_settings.latest_sync + timezone.timedelta(
-            hours=settings.DSMR_DROPBOX_SYNC_INTERVAL
+            hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
         )
 
     if next_sync_interval and timezone.now() < next_sync_interval:

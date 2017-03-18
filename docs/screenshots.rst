@@ -7,16 +7,6 @@ Below you can find some screenshots of the application. Please read the note bel
     :depth: 2
 
 
-Solar panels & electricity returned
------------------------------------
-
-.. note::
-    
-    Note that **I do not have solar panels at home**, but the application however **does support plotting any electricity returned**.
-
-Therefor there aren't always graphs of them in the screenshots, but the users who do have them, will have additional green graphs rendered in the application.  
-
-
 Dashboard
 ---------
 The dashboard displays the latest information regarding any consumption of today and the current month so far.

@@ -92,7 +92,6 @@
                     {% trans "Meter statistics" %}
                 </header>
                 <div class="panel-body">
-                    {% if datalogger_settings.track_meter_statistics %}
                     <table class="table table-condensed">
                         {% if meter_statistics.power_failure_count %}
                         <tr>
@@ -143,11 +142,6 @@
                         </tr>
                         {% endif %}
                     </table>
-                    {% else %}
-	                    <div class="alert alert-info" role="alert">
-	                    {% blocktrans %}Tracking meter statistics is disabled. Enable this feature in the datalogger settings to view statistics.{% endblocktrans %}
-	                    </div>
-                    {% endif %}
                 </div>
             </div>
         </div>

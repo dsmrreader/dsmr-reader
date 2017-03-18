@@ -4,7 +4,8 @@ from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import ReadOnlyAdminModel
 from .models.settings import DataloggerSettings
-from .models.reading import DsmrReading, MeterStatistics
+from .models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 
 
 @admin.register(DataloggerSettings)

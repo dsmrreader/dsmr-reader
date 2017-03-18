@@ -1,6 +1,5 @@
 from unittest import mock
 
-from django.core.management import CommandError
 from django.test import TestCase
 from django.conf import settings
 
@@ -41,10 +40,6 @@ class TestBackend(InterceptStdoutMixin, TestCase):
 
         dsmr_backend.signals.backend_called.connect(receiver=_fake_signal_troublemaker)
 
-        with self.assertRaises(CommandError):
-            # Signal should crash, rasing a command error.
-            self._intercept_command_stdout('dsmr_backend')
-
         # We must disconnect to prevent other tests from failing, since this is no database action.
         dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)
 
@@ -58,16 +53,13 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         dsmr_backend.signals.backend_called.connect(receiver=_fake_signal_troublemaker)
         self.assertFalse(raven_mock.called)
 
-        with self.assertRaises(CommandError):
-            # Signal should crash, rasing a command error.
-            self._intercept_command_stdout('dsmr_backend')
-
+        self._intercept_command_stdout('dsmr_backend')
         self.assertTrue(raven_mock.called)
 
     def test_supported_vendors(self):
         """ Check whether supported vendors is as expected. """
         self.assertEqual(
-            settings.DSMR_SUPPORTED_DB_VENDORS,
+            settings.DSMRREADER_SUPPORTED_DB_VENDORS,
             ('postgresql', 'mysql')
         )
 

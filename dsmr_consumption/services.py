@@ -11,13 +11,12 @@ from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
+from dsmr_datalogger.models.statistics import MeterStatistics
 
 
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
-    unprocessed_readings = DsmrReading.objects.unprocessed()[0:1000]
-
-    for current_reading in unprocessed_readings:
+    for current_reading in DsmrReading.objects.unprocessed()[0:128]:
         compact(dsmr_reading=current_reading)
 
 
@@ -27,6 +26,32 @@ def compact(dsmr_reading):
     """
     grouping_type = ConsumptionSettings.get_solo().compactor_grouping_type
 
+    # Grouping by minute requires some distinction and history checking.
+    reading_start = timezone.datetime.combine(
+        dsmr_reading.timestamp.date(),
+        time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
+    ).replace(tzinfo=pytz.UTC)
+
+    if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE:
+        # Postpone when current minute hasn't passed yet.
+        if timezone.now() <= reading_start + timezone.timedelta(minutes=1):
+            return
+
+    # Create consumption records.
+    _compact_electricity(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)
+    _compact_gas(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)
+
+    dsmr_reading.processed = True
+    dsmr_reading.save(update_fields=['processed'])
+
+    # For backend logging in Supervisor.
+    print(' - Processed reading: {}'.format(dsmr_reading))
+
+
+def _compact_electricity(dsmr_reading, grouping_type, reading_start):
+    """
+    Compacts any DSMR readings to electricity consumption records, optionally grouped.
+    """
     # Electricity should be unique, because it's the reading with the lowest interval anyway.
     if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
         ElectricityConsumption.objects.get_or_create(
@@ -41,79 +66,84 @@ def compact(dsmr_reading):
             phase_currently_delivered_l2=dsmr_reading.phase_currently_delivered_l2,
             phase_currently_delivered_l3=dsmr_reading.phase_currently_delivered_l3,
         )
-    # Grouping by minute requires some distinction and history checking.
+        return
+
+    minute_end = reading_start + timezone.timedelta(minutes=1)
+
+    # We might have multiple readings per minute, so there is a chance we already parsed it a moment ago.
+    if ElectricityConsumption.objects.filter(read_at=minute_end).exists():
+        return
+
+    grouped_reading = DsmrReading.objects.filter(
+        timestamp__gte=reading_start, timestamp__lt=minute_end
+    ).aggregate(
+        avg_delivered=Avg('electricity_currently_delivered'),
+        avg_returned=Avg('electricity_currently_returned'),
+        max_delivered_1=Max('electricity_delivered_1'),
+        max_delivered_2=Max('electricity_delivered_2'),
+        max_returned_1=Max('electricity_returned_1'),
+        max_returned_2=Max('electricity_returned_2'),
+        avg_phase_delivered_l1=Avg('phase_currently_delivered_l1'),
+        avg_phase_delivered_l2=Avg('phase_currently_delivered_l2'),
+        avg_phase_delivered_l3=Avg('phase_currently_delivered_l3'),
+    )
+
+    # This instance is the average/max and combined result.
+    ElectricityConsumption.objects.create(
+        read_at=minute_end,
+        delivered_1=grouped_reading['max_delivered_1'],
+        returned_1=grouped_reading['max_returned_1'],
+        delivered_2=grouped_reading['max_delivered_2'],
+        returned_2=grouped_reading['max_returned_2'],
+        currently_delivered=grouped_reading['avg_delivered'],
+        currently_returned=grouped_reading['avg_returned'],
+        phase_currently_delivered_l1=grouped_reading['avg_phase_delivered_l1'],
+        phase_currently_delivered_l2=grouped_reading['avg_phase_delivered_l2'],
+        phase_currently_delivered_l3=grouped_reading['avg_phase_delivered_l3'],
+    )
+
+
+def _compact_gas(dsmr_reading, grouping_type, **kwargs):
+    """
+    Compacts any DSMR readings to gas consumption records, optionally grouped. Only when there is support for gas.
+
+    There is quite some distinction between DSMR v4 and v5. DSMR v4 will update only once per hour and backtracks the
+    time by reporting it over the previous hour.
+    DSMR v5 will just allow small intervals, depending on whether the readings are grouped per minute or not.
+    """
+    if not dsmr_reading.extra_device_timestamp or not dsmr_reading.extra_device_delivered:
+        # Some households aren't connected to a gas meter at all.
+        return
+
+    read_at = dsmr_reading.extra_device_timestamp
+    dsmr_version = MeterStatistics.get_solo().dsmr_version
+
+    # User requests grouping? We will truncate the 'seconds' marker, which will only affect DSMR v5 readings.
+    if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE:
+        read_at = read_at.replace(second=0, microsecond=0)
+
+    # DSMR v4 readings should reflect to the previous hour, to keep it compatible with the existing implementation.
+    if dsmr_version is not None and dsmr_version.startswith('4'):
+        read_at = read_at - timezone.timedelta(hours=1)
+
+    # We will not override data, just ignore it then. DSMR v4 will hit this a lot, DSMR v5 not.
+    if GasConsumption.objects.filter(read_at=read_at).exists():
+        return
+
+    # DSMR does not expose current gas rate, so we have to calculate it ourselves, relative to the previous gas
+    # consumption, if any.
+    try:
+        previous = GasConsumption.objects.all().order_by('-read_at')[0]
+    except IndexError:
+        gas_diff = 0
     else:
-        minute_start = timezone.datetime.combine(
-            dsmr_reading.timestamp.date(),
-            time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
-        ).replace(tzinfo=pytz.UTC)
-        minute_end = minute_start + timezone.timedelta(minutes=1)
+        gas_diff = dsmr_reading.extra_device_delivered - previous.delivered
 
-        # Postpone when current minute hasn't passed yet.
-        if timezone.now() <= minute_end:
-            return
-
-        # We might have six readings per minute, so there is a chance we already parsed it.
-        if not ElectricityConsumption.objects.filter(read_at=minute_end).exists():
-            grouped_reading = DsmrReading.objects.filter(
-                timestamp__gte=minute_start, timestamp__lt=minute_end
-            ).aggregate(
-                avg_delivered=Avg('electricity_currently_delivered'),
-                avg_returned=Avg('electricity_currently_returned'),
-                max_delivered_1=Max('electricity_delivered_1'),
-                max_delivered_2=Max('electricity_delivered_2'),
-                max_returned_1=Max('electricity_returned_1'),
-                max_returned_2=Max('electricity_returned_2'),
-                avg_phase_delivered_l1=Avg('phase_currently_delivered_l1'),
-                avg_phase_delivered_l2=Avg('phase_currently_delivered_l2'),
-                avg_phase_delivered_l3=Avg('phase_currently_delivered_l3'),
-            )
-
-            # This instance is the average/max and combined result.
-            ElectricityConsumption.objects.create(
-                read_at=minute_end,
-                delivered_1=grouped_reading['max_delivered_1'],
-                returned_1=grouped_reading['max_returned_1'],
-                delivered_2=grouped_reading['max_delivered_2'],
-                returned_2=grouped_reading['max_returned_2'],
-                currently_delivered=grouped_reading['avg_delivered'],
-                currently_returned=grouped_reading['avg_returned'],
-                phase_currently_delivered_l1=grouped_reading['avg_phase_delivered_l1'],
-                phase_currently_delivered_l2=grouped_reading['avg_phase_delivered_l2'],
-                phase_currently_delivered_l3=grouped_reading['avg_phase_delivered_l3'],
-            )
-
-    # Gas is optional.
-    if dsmr_reading.extra_device_timestamp and dsmr_reading.extra_device_delivered:
-        # Gas however is only read (or updated) once every hour, so we should check for any duplicates
-        # as they will exist at some point.
-        passed_hour_start = dsmr_reading.extra_device_timestamp - timezone.timedelta(hours=1)
-
-        if not GasConsumption.objects.filter(read_at=passed_hour_start).exists():
-            # DSMR does not expose current gas rate, so we have to calculate
-            # it ourselves, relative to the previous gas consumption, if any.
-            try:
-                previous_gas_consumption = GasConsumption.objects.get(
-                    # Compare to reading before, if any.
-                    read_at=passed_hour_start - timezone.timedelta(hours=1)
-                )
-            except GasConsumption.DoesNotExist:
-                gas_diff = 0
-            else:
-                gas_diff = dsmr_reading.extra_device_delivered - previous_gas_consumption.delivered
-
-            GasConsumption.objects.create(
-                # Gas consumption is aligned to start of the hour.
-                read_at=passed_hour_start,
-                delivered=dsmr_reading.extra_device_delivered,
-                currently_delivered=gas_diff
-            )
-
-    dsmr_reading.processed = True
-    dsmr_reading.save(update_fields=['processed'])
-
-    # For backend logging in Supervisor.
-    print(' - Processed reading: {}.'.format(timezone.localtime(dsmr_reading.timestamp)))
+    GasConsumption.objects.create(
+        read_at=read_at,
+        delivered=dsmr_reading.extra_device_delivered,
+        currently_delivered=gas_diff
+    )
 
 
 def consumption_by_range(start, end):

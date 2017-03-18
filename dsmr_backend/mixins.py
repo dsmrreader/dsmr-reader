@@ -29,7 +29,7 @@ class InfiniteManagementCommandMixin(object):
 
     def _write_pid_file(self):
         self._pid_file = os.path.join(
-            settings.DSMR_MANAGEMENT_COMMANDS_PID_FOLDER,
+            settings.DSMRREADER_MANAGEMENT_COMMANDS_PID_FOLDER,
             'dsmrreader--{}.pid'.format(self.name.split('.')[-1])  # Set in management command.
         )
         with open(self._pid_file, 'w') as file_handle:
@@ -55,7 +55,7 @@ class InfiniteManagementCommandMixin(object):
 
         # We simply keep executing the management command until we are told otherwise.
         self._keep_alive = True
-        print('Starting INFINITE command loop...')  # Just to make sure it gets printed.
+        print('Starting infinite command loop...')  # Just to make sure it gets printed.
 
         while self._keep_alive:
             self.run(**options)

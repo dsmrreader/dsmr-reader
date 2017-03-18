@@ -1,21 +1,21 @@
 from decimal import Decimal, ROUND_UP
-from unittest import mock
 import random
 import time
 
+import crcmod
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import ugettext as _
-from django.core.management import call_command
 from django.utils import timezone
 from django.conf import settings
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
+import dsmr_datalogger.services
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a FAKE reading. DO NOT USE in production! Used for integration checks.')
     name = __name__  # Required for PID file.
-    sleep_time = 10
+    sleep_time = 1
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
@@ -49,15 +49,10 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         if not options.get('acked_warning'):
             raise CommandError(_('Intended usage is NOT production! Force by using --ack-to-mess-up-my-data'))
 
-        self._inject(options)
+        telegram = self._generate_data(options['with_gas'], options['with_electricity_returned'])
+        print(telegram)  # For convenience
 
-    @mock.patch('dsmr_datalogger.services.read_telegram')
-    def _inject(self, options, read_telegram_mock):
-        """ Calls the regular DSMR datalogger, but injects it with random data using mock. """
-
-        # Prepare some random data, but which makes sense.
-        read_telegram_mock.return_value = self._generate_data(options['with_gas'], options['with_electricity_returned'])
-        call_command('dsmr_datalogger', run_once=True)
+        dsmr_datalogger.services.telegram_to_reading(data=telegram)
 
     def _generate_data(self, with_gas, with_electricity_returned):
         """ Generates 'random' data, but in a way that it keeps incrementing. """
@@ -75,10 +70,10 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         electricity_base = second_since * 0.00005  # Averages around 1500/1600 kWh for a year.
 
         electricity_1 = electricity_base
-        electricity_2 = electricity_1 * 0.8  # Consumption during daylight is a bit lower.
+        electricity_2 = electricity_1 * 0.6  # Consumption during daylight is a bit lower.
         electricity_1_returned = 0
         electricity_2_returned = 0
-        gas = electricity_base * 0.6  # Random as well.
+        gas = electricity_base * 0.3  # Random as well.
 
         currently_delivered = random.randint(0, 1500) * 0.001  # kW
         currently_returned = 0
@@ -89,54 +84,64 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             currently_returned = random.randint(0, 2500) * 0.001  # kW
 
         data = [
-            "/XMX5LGBBFFB123456789\n",
-            "\n",
-            "1-3:0.2.8(40)\n",
-            "0-0:1.0.0({timestamp}W)\n".format(
+            "/XMX5LGBBFFB123456789\r\n",
+            "\r\n",
+            "1-3:0.2.8(40)\r\n",
+            "0-0:1.0.0({timestamp}W)\r\n".format(
                 timestamp=now.strftime('%y%m%d%H%M%S')
             ),
-            "0-0:96.1.1(FAKE-FAKE-FAKE-FAKE-FAKE)\n",
-            "1-0:1.8.1({}*kWh)\n".format(self._round_precision(electricity_1, 10)),
-            "1-0:2.8.1({}*kWh)\n".format(self._round_precision(electricity_1_returned, 10)),
-            "1-0:1.8.2({}*kWh)\n".format(self._round_precision(electricity_2, 10)),
-            "1-0:2.8.2({}*kWh)\n".format(self._round_precision(electricity_2_returned, 10)),
-            "0-0:96.14.0(0001)\n",  # Should switch high/low tariff, but not used anyway.
-            "1-0:1.7.0({}*kW)\n".format(self._round_precision(currently_delivered, 6)),
-            "1-0:2.7.0({}*kW)\n".format(self._round_precision(currently_returned, 6)),
-            "0-0:96.7.21(00003)\n",
-            "0-0:96.7.9(00000)\n",
-            "1-0:99.97.0(0)(0-0:96.7.19)\n",
-            "1-0:32.32.0(00001)\n",
-            "1-0:52.32.0(00002)\n",
-            "1-0:72.32.0(00003)\n",
-            "1-0:32.36.0(00000)\n",
-            "1-0:52.36.0(00000)\n",
-            "1-0:72.36.0(00000)\n",
-            "0-0:96.13.1()\n",
-            "0-0:96.13.0()\n",
-            "1-0:31.7.0(000*A)\n",
-            "1-0:51.7.0(000*A)\n",
-            "1-0:71.7.0(001*A)\n",
-            "1-0:21.7.0(00.000*kW)\n",
-            "1-0:41.7.0(00.000*kW)\n",
-            "1-0:61.7.0({}*kW)\n".format(self._round_precision(currently_delivered, 6)),
-            "1-0:22.7.0(00.000*kW)\n",
-            "1-0:42.7.0(00.000*kW)\n",
-            "1-0:62.7.0(00.000*kW)\n",
-
-            "!D19A\n",
+            "0-0:96.1.1(FAKE-FAKE-FAKE-FAKE-FAKE)\r\n",
+            "1-0:1.8.1({}*kWh)\r\n".format(self._round_precision(electricity_1, 10)),
+            "1-0:2.8.1({}*kWh)\r\n".format(self._round_precision(electricity_1_returned, 10)),
+            "1-0:1.8.2({}*kWh)\r\n".format(self._round_precision(electricity_2, 10)),
+            "1-0:2.8.2({}*kWh)\r\n".format(self._round_precision(electricity_2_returned, 10)),
+            "0-0:96.14.0(0001)\r\n",  # Should switch high/low tariff, but not used anyway.
+            "1-0:1.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered, 6)),
+            "1-0:2.7.0({}*kW)\r\n".format(self._round_precision(currently_returned, 6)),
+            "0-0:96.7.21(00003)\r\n",
+            "0-0:96.7.9(00000)\r\n",
+            "1-0:99.97.0(0)(0-0:96.7.19)\r\n",
+            "1-0:32.32.0(00001)\r\n",
+            "1-0:52.32.0(00002)\r\n",
+            "1-0:72.32.0(00003)\r\n",
+            "1-0:32.36.0(00000)\r\n",
+            "1-0:52.36.0(00000)\r\n",
+            "1-0:72.36.0(00000)\r\n",
+            "0-0:96.13.1()\r\n",
+            "0-0:96.13.0()\r\n",
+            "1-0:31.7.0(000*A)\r\n",
+            "1-0:51.7.0(000*A)\r\n",
+            "1-0:71.7.0(001*A)\r\n",
+            "1-0:21.7.0(00.000*kW)\r\n",
+            "1-0:41.7.0(00.000*kW)\r\n",
+            "1-0:61.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered, 6)),
+            "1-0:22.7.0(00.000*kW)\r\n",
+            "1-0:42.7.0(00.000*kW)\r\n",
+            "1-0:62.7.0(00.000*kW)\r\n",
         ]
 
         if with_gas:
             data += [
-                "0-1:24.1.0(003)\n",
-                "0-1:96.1.0(FAKE-FAKE-FAKE-FAKE-FAKE)\n",
-                "0-1:24.2.1({}W)({}*m3)\n".format(
+                "0-1:24.1.0(003)\r\n",
+                "0-1:96.1.0(FAKE-FAKE-FAKE-FAKE-FAKE)\r\n",
+                "0-1:24.2.1({}W)({}*m3)\r\n".format(
                     now.strftime('%y%m%d%H0000'), self._round_precision(gas, 9)
                 ),
             ]
 
-        return ''.join(data)
+        data += ["!"]
+        telegram = "".join(data)
+
+        # Sign the data with CRC as well.
+        crc16_function = crcmod.predefined.mkPredefinedCrcFun('crc16')
+
+        unicode_telegram = telegram.encode('ascii')
+        calculated_checksum = crc16_function(unicode_telegram)
+
+        hexed_checksum = hex(calculated_checksum)[2:].upper()
+        hexed_checksum = '{:0>4}'.format(hexed_checksum)  # Zero any spacing on the left hand size.
+
+        return "{}{}".format(telegram, hexed_checksum)
 
     def _round_precision(self, float_number, fill_count):
         """ Rounds the number for precision. """

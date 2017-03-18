@@ -5,7 +5,8 @@ from django.views.generic.base import TemplateView, View
 from django.http.response import HttpResponse
 from django.utils import timezone
 
-from dsmr_datalogger.models.reading import DsmrReading, MeterStatistics
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.settings import DataloggerSettings
 import dsmr_backend.services

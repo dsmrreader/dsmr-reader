@@ -58,9 +58,14 @@ This allows you to insert a raw telegram, read from your meter remotely, into th
 
 Parameters
 ~~~~~~~~~~
+
+.. note::
+
+    Since ``v1.6`` this call now returns ``HTTP 201`` instead of ``HTTP 200`` when successful.
+
 - Method: ``POST``
 - Data: ``telegram`` (as raw string containing all linefeeds ``\n``, and carriage returns ``\r``, as well!)
-- Status code returned: ``HTTP 200`` on success, any other on failure.
+- Status code returned: ``HTTP 201`` on success, any other on failure.
 
 Example
 ~~~~~~~
@@ -103,8 +108,8 @@ Example
         data={'telegram': telegram_string},
     )
 
-    # You will receive a status 200 when successful.
-    if response.status_code != 200:
+    # You will receive a status 201 when successful.
+    if response.status_code != 201:
         # Or you will find the error (hint) in the reponse body on failure.
         print('Error: {}'.format(response.text))
 
@@ -151,14 +156,15 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
     def main():
         print ('Starting...')
 
-        while True:
-            telegram = read_telegram()
-            print('Read telegram', telegram)
+        for telegram in read_telegram():
+            print('Telegram read')
+            print(telegram)
 
             for current_server in API_SERVERS:
                 api_url, api_key = current_server
+
+                print('Sending telegram to:', api_url)
                 send_telegram(telegram, api_url, api_key)
-                print('Sent telegram to:', api_url)
 
             sleep(1)
 
@@ -179,7 +185,7 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
         serial_handle.open()
 
         telegram_start_seen = False
-        telegram = ''
+        buffer = ''
 
         # Just keep fetching data until we got what we were looking for.
         while True:
@@ -188,7 +194,7 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
             except SerialException as error:
                 # Something else and unexpected failed.
                 print('Serial connection failed:', error)
-                return
+                raise StopIteration()  # Break out of yield.
 
             try:
                 # Make sure weird characters are converted properly.
@@ -205,12 +211,15 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
 
             # Delay any logging until we've seen the start of a telegram.
             if telegram_start_seen:
-                telegram += data
+                buffer += data
 
             # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
             if data.startswith('!') and telegram_start_seen:
-                serial_handle.close()
-                return telegram
+                yield buffer
+
+                # Reset the flow again.
+                telegram_start_seen = False
+                buffer = ''
 
 
     def send_telegram(telegram, api_url, api_key):
@@ -221,14 +230,14 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
             data={'telegram': telegram},
         )
 
-        # You will receive a status 200 when successful.
-        if response.status_code != 200:
-            # Or you will find the error (hint) in the response body on failure.
-            print('[!] Error: {}'.format(response.text))
-
+        # Old versions of DSMR-reader return 200, new ones 201.
+        if response.status_code not in (200, 201):
+            # Or you will find the error (hint) in the reponse body on failure.
+            print('API error: {}'.format(response.text))
 
     if __name__ == '__main__':
         main()
+
 
 
 Supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf``::

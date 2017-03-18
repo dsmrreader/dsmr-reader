@@ -23,9 +23,14 @@ class Status(TemplateView):
         except IndexError:
             pass
         else:
-            context_data['delta_since_latest_reading'] = (
-                timezone.now() - context_data['latest_reading'].timestamp
-            ).seconds
+            # It seems that smart meters sometimes have their clock set into the future as well.
+            if context_data['latest_reading'].timestamp > timezone.now():
+                context_data['delta_since_latest_reading'] = 0
+                context_data['latest_reading'].timestamp = timezone.now()
+            else:
+                context_data['delta_since_latest_reading'] = (
+                    timezone.now() - context_data['latest_reading'].timestamp
+                ).seconds
 
         if context_data['capabilities']['electricity']:
             context_data['latest_ec'] = ElectricityConsumption.objects.all().order_by('-pk')[0]

@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016, Dennis Siemensma
+# This file is distributed under the same license as the DSMR Reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader 1.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-19 18:05+0100\n"
+"PO-Revision-Date: 2017-02-19 18:15+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../troubleshooting.rst:2
+msgid "Troubleshooting"
+msgstr "Hulp bij problemen"
+
+#: ../../troubleshooting.rst:3
+msgid ""
+"If the application happens to stall unexpectedly, you can perform some "
+"debugging on your end."
+msgstr ""
+"Mocht de applicatie onverwachts stoppen, dan kun je zelf het volgende "
+"doen om te kijken of je een oorzaak kan vinden."
+
+#: ../../troubleshooting.rst:6
+msgid "Status page"
+msgstr "Status-pagina"
+
+#: ../../troubleshooting.rst:7
+msgid ""
+"The first place to look at is the Status page in the application. Does "
+"it display any error or is it lagging data processing?"
+msgstr ""
+"Als eerste kun je het beste naar de Status-pagina gaan. Staat daar een "
+"foutmelding of loopt de dataverwerking achter?"
+
+#: ../../troubleshooting.rst:13
+msgid "Supervisor"
+msgstr "Supervisor"
+
+#: ../../troubleshooting.rst:14
+msgid ""
+"You can also view the Supervisor logfiles, depending on whether your "
+"datalogger, webinterface or the data processing is broken. The logfiles "
+"are located by default in ``/var/log/supervisor/``. You should find logs "
+"here regarding the ``dsmr_datalogger``, ``dsmr_backend`` and "
+"``dsmr_webinterface`` processes."
+msgstr ""
+"Je kunt ook de Supervisor-logfiles bekijken, afhankelijk van of je "
+"datalogger, webinterface of dataverwerking gestopt is. De logfiles staan "
+"standaard in ``/var/log/supervisor/``. Je vindt hier logfiles voor de "
+"``dsmr_datalogger``, ``dsmr_backend`` en ``dsmr_webinterface`` processen."
+
+#: ../../troubleshooting.rst:18
+msgid ""
+"Another option is to tail the (recent) logs in Supervisor. Enter the "
+"control panel with ``sudo supervisorctl`` and type ``tail -f "
+"PROCESSNAME`` to follow one. The process names are the ones you see when "
+"you started the control panel, or you can just enter ``status`` to see "
+"them. You can also use ``start``, ``stop`` or ``restart`` on the "
+"processes to give control them."
+msgstr ""
+"Eventueel kun je ook de (recente) logfiles direct in Supervisor "
+"bekijken. Ga naar het beheerpaneel met ``sudo supervisorctl`` en typ "
+"``tail -f PROCESNAAM`` om er een te volgen. De procesnamen zijn degene "
+"die je ziet wanneer je het beheerpaneel opende. Je kunt ook ``status`` "
+"typen om ze allemaal te weergeven. Gebruik ``start``, ``stop`` of "
+"``restart`` om de processen verder te beheren."
+
+#: ../../troubleshooting.rst:26
+msgid "Appplication / Django"
+msgstr "Appplicatie / Django"
+
+#: ../../troubleshooting.rst:27
+msgid ""
+"The application has it's own logfiles as well. You can find them in the "
+"``logs`` directory inside the project folder. The ``django.log`` will "
+"list any internal errors regarding the Django framework it's using. The "
+"other logfile ``dsmrreader.log`` contains all readings it received, in "
+"base64 format."
+msgstr ""
+"De applicatie heeft zelf ook logfiles. Deze vindt je in de ``logs`` "
+"directory binnenin het project. De ``django.log`` bevat alle interne "
+"fouten m.b.t. het gebruikte Django framework. De andere logfile, "
+"``dsmrreader.log`` bevat doorgaans alle ontvangen metingen, in base64-"
+"formaat."
+
+#: ../../troubleshooting.rst:35
+msgid "Contact"
+msgstr "Contact"
+
+#: ../../troubleshooting.rst:36
+msgid ""
+"Are you unable to resolve your problem or do you need any help? :doc:"
+"`More information can be found here<contributing>`."
+msgstr ""
+"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun "
+"je hier vinden<contributing>`."

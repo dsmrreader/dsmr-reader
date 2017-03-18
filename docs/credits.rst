@@ -1,5 +1,5 @@
-Credits
-=======
+Credits / Hall of Fame
+======================
 
 
 Special thanks for supplying code contributions
@@ -25,9 +25,9 @@ Listed in any order, sorted by name.
 - "`WatskeBart <https://github.com/WatskeBart>`_"
 
 
-Software
---------
-Please note and respect their licences, if any, as well.
+Software used
+-------------
+Please note and respect their licences as well, if any. Credits to the following software and projects:
 
 - `Raspbian <https://www.raspbian.org/>`_
 
@@ -47,7 +47,9 @@ Please note and respect their licences, if any, as well.
 
 - `Director Responsive Admin <http://web-apps.ninja/director-free-responsive-admin-template/>`_
 
-- `Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_
+- Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_
+
+- `Real Favicon Generator <http://realfavicongenerator.net>`_
 
 - `Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_
 

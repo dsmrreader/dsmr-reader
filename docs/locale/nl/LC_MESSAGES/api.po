@@ -8,16 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2017-01-02 21:13+0100\n"
-"PO-Revision-Date: 2017-01-02 21:24+0100\n"
+"POT-Creation-Date: 2017-02-16 15:58+0100\n"
+"PO-Revision-Date: 2017-01-21 14:17+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"Language: nl\n"
-"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../api.rst:2
 msgid "API"
@@ -29,12 +27,8 @@ msgid ""
 "allows you to run the datalogger and application separately."
 msgstr ""
 "De applicatie heeft een eenvoudige, enkele API-call voor dataloggers op "
-"afstand. Hiermee kun je de datalogger en applicatie gescheiden van elkaar "
-"draaien."
-
-#: ../../api.rst
-msgid "Contents"
-msgstr "Inhoud"
+"afstand. Hiermee kun je de datalogger en applicatie gescheiden van elkaar"
+" draaien."
 
 #: ../../api.rst:10
 msgid "Configuration"
@@ -46,13 +40,13 @@ msgstr "API inschakelen"
 
 #: ../../api.rst:15
 msgid ""
-"The API is disabled by default in the application. You may enable it in your "
-"configuration or admin settings."
+"The API is disabled by default in the application. You may enable it in "
+"your configuration or admin settings."
 msgstr ""
-"Standaard is de API in de applicatie uitgeschakeld. Je kunt deze inschakelen "
-"in het configuratiescherm of beheerderpaneel."
+"Standaard is de API in de applicatie uitgeschakeld. Je kunt deze "
+"inschakelen in het configuratiescherm of beheerderpaneel."
 
-#: ../../api.rst:18 ../../api.rst:66
+#: ../../api.rst:18 ../../api.rst:71
 msgid "Example"
 msgstr "Voorbeeld"
 
@@ -62,26 +56,26 @@ msgstr "Autorisatie"
 
 #: ../../api.rst:25
 msgid ""
-"Besides allowing the API to listen for requests, you will also need use the "
-"generated API Auth Key. It can be found on the same page as in the "
+"Besides allowing the API to listen for requests, you will also need use "
+"the generated API Auth Key. It can be found on the same page as in the "
 "screenshot above. The configuration page will also display it, but only "
-"partly. Feel free to alter the API Auth Key when required. The application "
-"initially generates one randomly for you."
+"partly. Feel free to alter the API Auth Key when required. The "
+"application initially generates one randomly for you."
 msgstr ""
-"Naast het inschakelen van de API zul je ook een (automatisch) gegenereerde "
-"API autorisatiesleutel moeten gebruiken. Deze kun je terugvinden op dezelfde "
-"pagina als in bovenstaand screenshot. Op de configuratiepagina staat de "
-"sleutel ook, maar slechts ten delete. Pas overigens gerust de API "
-"autorisatiesleutel naar wens aan. De applicatie genereert initieel "
-"(eenmalig) een voor je."
+"Naast het inschakelen van de API zul je ook een (automatisch) "
+"gegenereerde API autorisatiesleutel moeten gebruiken. Deze kun je "
+"terugvinden op dezelfde pagina als in bovenstaand screenshot. Op de "
+"configuratiepagina staat de sleutel ook, maar slechts ten delete. Pas "
+"overigens gerust de API autorisatiesleutel naar wens aan. De applicatie "
+"genereert initieel (eenmalig) een voor je."
 
 #: ../../api.rst:29
 msgid ""
 "You should pass it in the header of every API call. The header should be "
 "defined as ``X-AUTHKEY``. See below for an example."
 msgstr ""
-"Je moet deze gebruiken voor elke API call die je uitvoert. De header heet "
-"``X-AUTHKEY``. Zie hieronder voor een voorbeeld."
+"Je moet deze gebruiken voor elke API call die je uitvoert. De header heet"
+" ``X-AUTHKEY``. Zie hieronder voor een voorbeeld."
 
 #: ../../api.rst:32
 msgid "Examples"
@@ -119,74 +113,86 @@ msgstr ""
 msgid "Parameters"
 msgstr "Parameters"
 
-#: ../../api.rst:61
+#: ../../api.rst:64
+msgid ""
+"Since ``v1.6`` this call now returns ``HTTP 201`` instead of ``HTTP 200``"
+" when successful."
+msgstr ""
+"Sinds ``v1.6`` geeft deze call ``HTTP 201`` terug in plaats van ``HTTP "
+"200``, wanneer succesvol."
+
+#: ../../api.rst:66
 msgid "Method: ``POST``"
 msgstr "Methode: ``POST``"
 
-#: ../../api.rst:62
+#: ../../api.rst:67
 msgid ""
 "Data: ``telegram`` (as raw string containing all linefeeds ``\\n``, and "
 "carriage returns ``\\r``, as well!)"
 msgstr ""
-"Data: ``telegram`` (als een ruwe tekenreeks inclusief zowel alle regeleindes "
-"``\\n`` als 'carriage returns' ``\\r``)"
-
-#: ../../api.rst:63
-msgid "Status code returned: ``HTTP 200`` on success, any other on failure."
-msgstr ""
-"Status code resultaat: ``HTTP 200`` wanneer succesvol, elke andere code bij "
-"falen."
+"Data: ``telegram`` (als een ruwe tekenreeks inclusief zowel alle "
+"regeleindes ``\\n`` als 'carriage returns' ``\\r``)"
 
 #: ../../api.rst:68
+msgid "Status code returned: ``HTTP 201`` on success, any other on failure."
+msgstr ""
+"Status code resultaat: ``HTTP 201`` wanneer succesvol, elke andere code "
+"bij falen."
+
+#: ../../api.rst:73
 msgid "(using the ``requests`` library available on PIP)::"
 msgstr "(met de ``requests`` tool beschikbaar in PIP)::"
 
-#: ../../api.rst:113
+#: ../../api.rst:118
 msgid "Script"
 msgstr "Script"
 
-#: ../../api.rst:114
-msgid ""
-"Below is a more detailed script you can use to run via Supervisor. It will "
-"send telegrams to one or multiple instances of DSMR-reader."
-msgstr ""
-"Hieronder staat een uitgebreider script die je via Supervisor kan draaien. "
-"Dit script stuurt telegrammen door naar één of meerdere instanties van DSMR-"
-"reader."
-
 #: ../../api.rst:119
 msgid ""
-"You will still require the ``dsmr`` user and VirtualEnv, :doc:`as discussed "
-"in the install guide<installation>` in **chapters 3 and 6**!"
+"Below is a more detailed script you can use to run via Supervisor. It "
+"will send telegrams to one or multiple instances of DSMR-reader."
 msgstr ""
-"Je hebt nog steeds de ``dsmr`` gebruiker en VirtualEnv nodig, :doc:`zoals "
-"besproken in de installatiehandleiding<installation>` in **hoofdstukken 3 en "
-"6**!"
+"Hieronder staat een uitgebreider script die je via Supervisor kan "
+"draaien. Dit script stuurt telegrammen door naar één of meerdere "
+"instanties van DSMR-reader."
 
-#: ../../api.rst:121
+#: ../../api.rst:124
+msgid ""
+"You will still require the ``dsmr`` user and VirtualEnv, :doc:`as "
+"discussed in the install guide<installation>` in **chapters 3 and 6**!"
+msgstr ""
+"Je hebt nog steeds de ``dsmr`` gebruiker en VirtualEnv nodig, :doc:`zoals"
+" besproken in de installatiehandleiding<installation>` in **hoofdstukken "
+"3 en 6**!"
+
+#: ../../api.rst:126
 msgid "**VirtualEnv**::"
 msgstr "**VirtualEnv**::"
 
-#: ../../api.rst:130
+#: ../../api.rst:135
 msgid "The serial connection in this example is based on ``DSMR v4``."
 msgstr ""
-"De seriële verbinding in het voorbeeld hieronder is gebaseerd op ``DSMR v4``."
+"De seriële verbinding in het voorbeeld hieronder is gebaseerd op ``DSMR "
+"v4``."
 
-#: ../../api.rst:134
+#: ../../api.rst:139
 msgid "Don't forget to insert your own configuration below in ``API_SERVERS``."
 msgstr ""
 "Vergeet niet om je eigen configuratie hieronder in te stellen in  "
 "``API_SERVERS``."
 
-#: ../../api.rst:136
+#: ../../api.rst:141
 msgid "Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::"
 msgstr "Client bestand in ``/home/dsmr/dsmr_datalogger_api_client.py``::"
 
-#: ../../api.rst:231
+#: ../../api.rst:243
 msgid "Supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf``::"
-msgstr ""
-"Supervisor configuratie in ``/etc/supervisor/conf.d/dsmr-client.conf``::"
+msgstr "Supervisor configuratie in ``/etc/supervisor/conf.d/dsmr-client.conf``::"
 
-#: ../../api.rst:248
+#: ../../api.rst:260
 msgid "**Supervisor**::"
 msgstr "**Supervisor**::"
+
+#~ msgid "Contents"
+#~ msgstr "Inhoud"
+
