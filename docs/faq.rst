@@ -15,10 +15,10 @@ Every once in a while there may be updates. Since ``v1.5`` you can also easily c
     
     Before updating, **please make sure you have a recent backup of your database**! :doc:`More information about backups can be found here<application>`.
 
-You can update your application to the latest version by executing **upgrade.sh**, located in the root of the project. 
+You can update your application to the latest version by executing **deploy.sh**, located in the root of the project. 
 Make sure to execute it while logged in as the ``dsmr`` user::
 
-   ./upgrade.sh
+   ./deploy.sh
 
 It will make sure to check, fetch and apply any changes released. Summary of deployment script steps:
 
