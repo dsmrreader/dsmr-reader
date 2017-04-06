@@ -50,10 +50,10 @@ msgstr ""
 #: ../../faq.rst:18
 msgid ""
 "You can update your application to the latest version by executing "
-"**upgrade.sh**, located in the root of the project. Make sure to execute "
+"**deploy.sh**, located in the root of the project. Make sure to execute "
 "it while logged in as the ``dsmr`` user::"
 msgstr ""
-"Je kun je applicatie bijwerken door het script **upgrade.sh** uit te "
+"Je kun je applicatie bijwerken door het script **deploy.sh** uit te "
 "voeren, die in zich in de hoofdmap van het project bevindt. Zorg er wel "
 "voor dat je ingelogd bent als ``dsmr`` gebruiker op de terminal::"
 
