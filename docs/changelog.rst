@@ -17,6 +17,14 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
     - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
 
 
+v1.6.1 - 2017-04-06
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#298 <https://github.com/dennissiemensma/dsmr-reader/issues/298>`_] Update requirements (Django 1.10.7)
+
+
 
 v1.6.0 - 2017-03-18
 ^^^^^^^^^^^^^^^^^^^
