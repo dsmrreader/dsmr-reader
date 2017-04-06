@@ -1,5 +1,5 @@
 crcmod==1.7
-django==1.10.6
+django==1.10.7
 django-colorfield==0.1.12
 django-debug-toolbar==1.7
 django-solo==1.1.2

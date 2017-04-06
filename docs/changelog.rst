@@ -21,6 +21,15 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 v1.6.0 - 2017-03-18
 ^^^^^^^^^^^^^^^^^^^
 
+**Tickets resolved in this release:**
+
+- [`#298 <https://github.com/dennissiemensma/dsmr-reader/issues/298>`_] Update requirements (Django 1.10.7)
+
+
+
+v1.6.0 - 2017-03-18
+^^^^^^^^^^^^^^^^^^^
+
 .. warning::
 
     Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` and will be discontinued completely in a later release.
