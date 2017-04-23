@@ -231,7 +231,7 @@ class TestDataloggerDuplicateData(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_reading_values(self, now_mock):
         """ Test whether dsmr_datalogger reads the correct values. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 4, 10, hour=14, minute=30, second=15))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 2, 1, hour=0, minute=0, second=0))
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
@@ -251,3 +251,67 @@ class TestDataloggerDuplicateData(InterceptStdoutMixin, TestCase):
             timezone.datetime(2017, 1, 10, 19, 40, 9, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('123.456'))
+
+
+class TestFutureTelegrams(InterceptStdoutMixin, TestCase):
+    def _dsmr_dummy_data(self):
+        return [
+            "/XMX5LGBBFFB123456789\r\n",
+            "\r\n",
+            "1-3:0.2.8(40)\r\n",
+            "0-0:1.0.0(170102120000W)\r\n",  # <<< +1 day and some.
+            "0-0:96.1.1(xxxxxxxxxxxxx)\r\n",
+            "1-0:1.8.1(000510.747*kWh)\r\n",
+            "1-0:2.8.1(000000.123*kWh)\r\n",
+            "1-0:1.8.2(000500.013*kWh)\r\n",
+            "1-0:2.8.2(000123.456*kWh)\r\n",
+            "0-0:96.14.0(0001)\r\n",
+            "1-0:1.7.0(00.192*kW)\r\n",
+            "1-0:2.7.0(00.123*kW)\r\n",
+            "0-0:17.0.0(999.9*kW)\r\n",
+            "0-0:96.3.10(1)\r\n",
+            "0-0:96.7.21(00003)\r\n",
+            "0-0:96.7.9(00000)\r\n",
+            "1-0:99.97.0(0)(0-0:96.7.19)\r\n",
+            "1-0:32.32.0(00002)\r\n",
+            "1-0:52.32.0(00002)\r\n",
+            "1-0:72.32.0(00000)\r\n",
+            "1-0:32.36.0(00000)\r\n",
+            "1-0:52.36.0(00000)\r\n",
+            "1-0:72.36.0(00000)\r\n",
+            "0-0:96.13.1()\r\n",
+            "0-0:96.13.0()\r\n",
+            "1-0:31.7.0(000*A)\r\n",
+            "1-0:51.7.0(000*A)\r\n",
+            "1-0:71.7.0(001*A)\r\n",
+            "1-0:21.7.0(00.123*kW)\r\n",
+            "1-0:41.7.0(00.456*kW)\r\n",
+            "1-0:61.7.0(00.789*kW)\r\n",
+            "1-0:22.7.0(00.000*kW)\r\n",
+            "1-0:42.7.0(00.000*kW)\r\n",
+            "1-0:62.7.0(00.000*kW)\r\n",
+            "0-1:24.1.0(003)\r\n",
+            "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
+            "0-1:24.2.1(170102120000W)(00845.206*m3)\r\n",  # <<< +1 day and some.
+            "0-1:24.4.0(1)\r\n",
+            "!XXXX\n",
+        ]
+
+    @mock.patch('django.utils.timezone.now')
+    @mock.patch('serial.Serial.open')
+    @mock.patch('serial.Serial.readline')
+    def test_discard_telegram_with_future_timestamp(self, serial_readline_mock, serial_open_mock, now_mock):
+        """ Telegrams with timestamps in the (far) future should be rejected. """
+        serial_open_mock.return_value = None
+        serial_readline_mock.side_effect = self._dsmr_dummy_data()
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1, hour=9, minute=0, second=0))
+
+        datalogger_settings = DataloggerSettings.get_solo()
+        datalogger_settings.verify_telegram_crc = False  # Not important for this test.
+        datalogger_settings.save()
+
+        self.assertFalse(DsmrReading.objects.exists())
+        self._intercept_command_stdout('dsmr_datalogger')
+
+        # It should be discarded.
+        self.assertFalse(DsmrReading.objects.exists())

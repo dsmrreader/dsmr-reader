@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class DayStatistics(models.Model):
     """ Daily consumption usage summary. """
-    day = models.DateField(unique=True, verbose_name=_('Date'))
+    day = models.DateField(unique=True, db_index=True, verbose_name=_('Date'))
     total_cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('Total cost'))
 
     electricity1 = models.DecimalField(
@@ -57,6 +57,7 @@ class DayStatistics(models.Model):
         default_permissions = tuple()
         verbose_name = _('Day statistics (automatically generated data)')
         verbose_name_plural = verbose_name
+        ordering = ['day']
 
     def __str__(self):
         return '{}: {}'.format(
@@ -66,7 +67,7 @@ class DayStatistics(models.Model):
 
 class HourStatistics(models.Model):
     """ Hourly consumption usage summary. """
-    hour_start = models.DateTimeField(unique=True, verbose_name=_('Hour start'))
+    hour_start = models.DateTimeField(unique=True, db_index=True, verbose_name=_('Hour start'))
 
     electricity1 = models.DecimalField(
         max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 (low tariff)')
@@ -96,6 +97,7 @@ class HourStatistics(models.Model):
         default_permissions = tuple()
         verbose_name = _('Hour statistics (automatically generated data)')
         verbose_name_plural = verbose_name
+        ordering = ['hour_start']
 
     def __str__(self):
         return '{}: {}'.format(

@@ -5,7 +5,7 @@ from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden,\
 from django.views.generic.base import View
 from django.utils.translation import ugettext as _
 
-from dsmr_datalogger.exceptions import InvalidTelegramChecksum
+from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_api.models import APISettings
 from dsmr_api.forms import DsmrReadingForm
 import dsmr_datalogger.services
@@ -34,7 +34,7 @@ class DataloggerDsmrReading(View):
 
         try:
             dsmr_reading = dsmr_datalogger.services.telegram_to_reading(data=post_form.cleaned_data['telegram'])
-        except InvalidTelegramChecksum:
+        except InvalidTelegramError:
             # The service called already logs the error.
             pass
 
