@@ -17,6 +17,16 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
     - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
 
 
+v1.6.2 - 2017-04-23
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#269 <https://github.com/dennissiemensma/dsmr-reader/issues/269>`_] x-as gasgrafiek geeft rare waarden aan
+- [`#303 <https://github.com/dennissiemensma/dsmr-reader/issues/303>`_] Archive page's default day sorting
+
+
+
 v1.6.1 - 2017-04-06
 ^^^^^^^^^^^^^^^^^^^
 
