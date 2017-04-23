@@ -13,7 +13,7 @@ import pytz
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
-from dsmr_datalogger.exceptions import InvalidTelegramChecksum
+from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.dsmr import DSMR_MAPPING
 
 
@@ -114,7 +114,7 @@ def verify_telegram_checksum(data):
         content = crc = None
 
     if not content or not crc:
-        raise InvalidTelegramChecksum('Content or CRC data not found')
+        raise InvalidTelegramError('Content or CRC data not found')
 
     telegram = content.encode('ascii')  # TypeError: Unicode-objects must be encoded before calculating a CRC
 
@@ -125,7 +125,7 @@ def verify_telegram_checksum(data):
     calculated_checksum = crc16_function(telegram)  # For example: 56708
 
     if telegram_checksum != calculated_checksum:
-        raise InvalidTelegramChecksum(
+        raise InvalidTelegramError(
             'CRC mismatch: {} (telegram) != {} (calculated)'.format(telegram_checksum, calculated_checksum)
         )
 
@@ -175,7 +175,7 @@ def telegram_to_reading(data):  # noqa: C901
         try:
             # Verify telegram by checking it's CRC.
             verify_telegram_checksum(data=data)
-        except InvalidTelegramChecksum as error:
+        except InvalidTelegramError as error:
             # Hook to keep track of failed readings count.
             MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
             logger.warning('Rejected telegram (base64 encoded): {}'.format(base64_data))
@@ -230,6 +230,16 @@ def telegram_to_reading(data):  # noqa: C901
     # Hack for DSMR 2.x legacy, which lacks timestamp info..
     if parsed_reading['timestamp'] is None:
         parsed_reading['timestamp'] = timezone.now()
+
+    # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
+    discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
+
+    if parsed_reading['timestamp'] > discard_timestamp or (
+            parsed_reading['extra_device_timestamp'] is not None and
+            parsed_reading['extra_device_timestamp'] > discard_timestamp):
+        error_message = 'Discarded telegram with future timestamp: {}'.format(data)
+        logger.error(error_message)
+        raise InvalidTelegramError(error_message)
 
     # Optional tracking of phases, but since we already mapped this above, just remove it again... :]
     if not datalogger_settings.track_phases:

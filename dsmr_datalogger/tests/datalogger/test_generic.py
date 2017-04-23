@@ -11,7 +11,7 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_datalogger.exceptions import InvalidTelegramChecksum
+from dsmr_datalogger.exceptions import InvalidTelegramError
 import dsmr_datalogger.services
 
 
@@ -280,11 +280,11 @@ class TestServices(TestCase):
             "!D19A\n",
         ]
 
-        with self.assertRaises(InvalidTelegramChecksum):
+        with self.assertRaises(InvalidTelegramError):
             # Empty.
             dsmr_datalogger.services.verify_telegram_checksum(data='')
 
-        with self.assertRaises(InvalidTelegramChecksum):
+        with self.assertRaises(InvalidTelegramError):
             # Invalid checksum.
             dsmr_datalogger.services.verify_telegram_checksum(data=''.join(telegram))
 

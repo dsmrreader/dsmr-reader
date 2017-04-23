@@ -1,2 +1,2 @@
-class InvalidTelegramChecksum(IOError):
+class InvalidTelegramError(IOError):
     pass
