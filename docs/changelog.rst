@@ -76,65 +76,6 @@ v1.5.4 - 2017-01-12
 
 
 
-v1.6.0 - 2017-03-18
-^^^^^^^^^^^^^^^^^^^
-
-**Tickets resolved in this release:**
-
-- [`#298 <https://github.com/dennissiemensma/dsmr-reader/issues/298>`_] Update requirements (Django 1.10.7)
-
-
-
-v1.6.0 - 2017-03-18
-^^^^^^^^^^^^^^^^^^^
-
-.. warning::
-
-    Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` and will be discontinued completely in a later release.
-    Please use a PostgreSQL database instead. Users already running MySQL will be supported in easily migrating to PostgreSQL in the future.
-
-.. note::
-
-    **Change in API:**
-    The telegram creation API now returns an ``HTTP 201`` response when successful.
-    An ``HTTP 200`` was returned in former versions.
-    :doc:`View API docs<api>`.
-
-
-**Tickets resolved in this release:**
-
-- [`#221 <https://github.com/dennissiemensma/dsmr-reader/issues/221>`_] Support for DSMR-firmware v5.0.
-- [`#237 <https://github.com/dennissiemensma/dsmr-reader/issues/237>`_] Redesign: Status page.
-- [`#249 <https://github.com/dennissiemensma/dsmr-reader/issues/249>`_] Req: Add iOS icon for Bookmark.
-- [`#232 <https://github.com/dennissiemensma/dsmr-reader/issues/232>`_] Docs: Explain settings/options.
-- [`#260 <https://github.com/dennissiemensma/dsmr-reader/issues/260>`_] Add link to readthedocs in Django for Dropbox instructions.
-- [`#211 <https://github.com/dennissiemensma/dsmr-reader/issues/211>`_] API request should return HTTP 201 instead of HTTP 200.
-- [`#191 <https://github.com/dennissiemensma/dsmr-reader/issues/191>`_] Deprecate MySQL support.
-- [`#251 <https://github.com/dennissiemensma/dsmr-reader/issues/251>`_] Buienradar Uncaught exception.
-- [`#257 <https://github.com/dennissiemensma/dsmr-reader/issues/257>`_] Requirements update (February 2017).
-- [`#274 <https://github.com/dennissiemensma/dsmr-reader/issues/274>`_] Requirements update (March 2017).
-
-
-
-v1.5.5 - 2017-01-19
-^^^^^^^^^^^^^^^^^^^
-
-**Tickets resolved in this release:**
-
-- Remove readonly restriction for editing statistics in admin interface (`#242 <https://github.com/dennissiemensma/dsmr-reader/issues/242>`_).
-
-
-
-v1.5.4 - 2017-01-12
-^^^^^^^^^^^^^^^^^^^
-
-**Tickets resolved in this release:**
-
-- Improve datalogger for DSMR v5.0 (`#212 <https://github.com/dennissiemensma/dsmr-reader/issues/212>`_).
-- Fixed another bug in MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
-
-
-
 v1.5.5 - 2017-01-19
 ^^^^^^^^^^^^^^^^^^^
 

@@ -25,11 +25,11 @@ class Archive(TemplateView):
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
 
-        day_statistics = DayStatistics.objects.all().order_by('pk')
+        day_statistics = DayStatistics.objects.all().order_by('day')
 
         try:
             context_data['start_date'] = day_statistics[0].day
-            context_data['end_date'] = day_statistics.order_by('-pk')[0].day
+            context_data['end_date'] = day_statistics.order_by('-day')[0].day
         except IndexError:
             pass
 
