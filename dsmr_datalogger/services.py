@@ -17,7 +17,8 @@ from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.dsmr import DSMR_MAPPING
 
 
-logger = logging.getLogger('dsmrreader')
+dsmrreader_logger = logging.getLogger('dsmrreader')
+django_logger = logging.getLogger('django')
 
 
 def get_dsmr_connection_parameters():
@@ -178,8 +179,8 @@ def telegram_to_reading(data):  # noqa: C901
         except InvalidTelegramError as error:
             # Hook to keep track of failed readings count.
             MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
-            logger.warning('Rejected telegram (base64 encoded): {}'.format(base64_data))
-            logger.exception(error)
+            dsmrreader_logger.warning('Rejected telegram (base64 encoded): {}'.format(base64_data))
+            dsmrreader_logger.exception(error)
             raise
 
     # Defaults all fields to NULL.
@@ -238,7 +239,7 @@ def telegram_to_reading(data):  # noqa: C901
             parsed_reading['extra_device_timestamp'] is not None and
             parsed_reading['extra_device_timestamp'] > discard_timestamp):
         error_message = 'Discarded telegram with future timestamp: {}'.format(data)
-        logger.error(error_message)
+        django_logger.error(error_message)
         raise InvalidTelegramError(error_message)
 
     # Optional tracking of phases, but since we already mapped this above, just remove it again... :]
@@ -259,7 +260,7 @@ def telegram_to_reading(data):  # noqa: C901
     # There should already be one in database, created when migrating.
     MeterStatistics.objects.all().update(**statistics_kwargs)
 
-    logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
+    dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
     return new_reading
 
 
