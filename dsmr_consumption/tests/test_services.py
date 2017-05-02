@@ -270,6 +270,31 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(min_max['min_watt'], 250)
         self.assertEqual(min_max['max_watt'], 6123)
 
+    def test_clear_consumption(self):
+        # Prepare some test data that should be deleted.
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=1,
+            returned_1=1,
+            delivered_2=2,
+            returned_2=2,
+            currently_delivered=0.25,
+            currently_returned=0,
+        )
+        GasConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered=100,
+            currently_delivered=1,
+        )
+
+        self.assertTrue(ElectricityConsumption.objects.exists())
+        self.assertTrue(GasConsumption.objects.exists())
+
+        dsmr_consumption.services.clear_consumption()
+
+        self.assertFalse(ElectricityConsumption.objects.exists())
+        self.assertFalse(GasConsumption.objects.exists())
+
 
 class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
     """ Biggest difference is the interval of gas readings. """

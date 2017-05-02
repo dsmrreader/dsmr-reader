@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.views.decorators.csrf import csrf_exempt
 
-from dsmr_api.views import DataloggerDsmrReading
+from dsmr_api.views.v1 import DataloggerDsmrReading
 
 
 urlpatterns = [

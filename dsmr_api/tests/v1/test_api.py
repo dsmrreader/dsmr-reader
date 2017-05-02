@@ -8,9 +8,9 @@ from dsmr_api.models import APISettings
 from dsmr_datalogger.models.reading import DsmrReading
 
 
-class TestAPI(TestCase):
+class TestAPIv1(TestCase):
     """ Test whether views render at all. """
-    namespace = 'api'
+    namespace = 'api-v1'
 
     def setUp(self):
         self.client = Client()
@@ -20,6 +20,7 @@ class TestAPI(TestCase):
 
         # Since we're only having one call anyway.
         self._api_url = reverse('{}:datalogger-dsmrreading'.format(self.namespace))
+        self.assertEqual(self._api_url, '/api/v1/datalogger/dsmrreading')
 
         self._telegram = ''.join([
             "/KFM5KAIFA-METER\r\n",

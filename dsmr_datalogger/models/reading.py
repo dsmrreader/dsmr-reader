@@ -18,70 +18,71 @@ class DsmrReading(models.Model):
     objects = DsmrReadingManager()
 
     timestamp = models.DateTimeField(
-        help_text=_("Timestamp indicating when the reading was taken, according to the meter")
+        db_index=True,
+        help_text=_("Timestamp indicating when the reading was taken, according to the smart meter")
     )
     electricity_delivered_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter Reading electricity delivered to client (low tariff) in 0,001 kWh")
+        help_text=_("Meter position stating electricity delivered (low tariff) in kWh")
     )
     electricity_returned_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter Reading electricity delivered by client (low tariff) in 0,001 kWh")
+        help_text=_("Meter position stating electricity returned (low tariff) in kWh")
     )
     electricity_delivered_2 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh")
+        help_text=_("Meter position stating electricity delivered (normal tariff) in kWh")
     )
     electricity_returned_2 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh")
+        help_text=_("Meter position stating electricity returned (normal tariff) in kWh")
     )
     electricity_currently_delivered = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Actual electricity power delivered (+P) in 1 Watt resolution")
+        help_text=_("Current electricity delivered in kW")
     )
     electricity_currently_returned = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Actual electricity power received (-P) in 1 Watt resolution")
+        help_text=_("Current electricity returned in kW")
     )
     phase_currently_delivered_l1 = models.DecimalField(
         null=True,
         default=None,
         max_digits=9,
         decimal_places=3,
-        help_text=_("Instantaneous active power L1 (+P) in W resolution")
+        help_text=_("Current electricity used by phase L1 (in kW)")
     )
     phase_currently_delivered_l2 = models.DecimalField(
         null=True,
         default=None,
         max_digits=9,
         decimal_places=3,
-        help_text=_("Instantaneous active power L2 (+P) in W resolution")
+        help_text=_("Current electricity used by phase L2 (in kW)")
     )
     phase_currently_delivered_l3 = models.DecimalField(
         null=True,
         default=None,
         max_digits=9,
         decimal_places=3,
-        help_text=_("Instantaneous active power L3 (+P) in W resolution")
+        help_text=_("Current electricity used by phase L3 (in kW)")
     )
     extra_device_timestamp = models.DateTimeField(
         null=True,
         default=None,
-        help_text=_("Last hourly reading timestamp")
+        help_text=_("Last timestamp read from the extra device connected (gas meter)")
     )
     extra_device_delivered = models.DecimalField(
         null=True,
         default=None,
         max_digits=9,
         decimal_places=3,
-        help_text=_("Last hourly value delivered to client")
+        help_text=_("Last value read from the extra device connected (gas meter)")
     )
     processed = models.BooleanField(
         default=False,

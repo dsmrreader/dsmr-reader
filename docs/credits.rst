@@ -30,42 +30,26 @@ Software used
 Please note and respect their licences as well, if any. Credits to the following software and projects:
 
 - `Raspbian <https://www.raspbian.org/>`_
-
 - `Django Project <https://www.djangoproject.com/>`_
-
 - `Django Solo <https://github.com/lazybird/django-solo>`_
-
 - `Django Colorfield <https://github.com/jaredly/django-colorfield>`_
-
 - `Supervisor <http://supervisord.org/>`_
-
 - `MySQL <https://www.mysql.com/>`_
-
 - `MariaDB <https://mariadb.org/>`_
-
 - `PostgreSQL <http://www.postgresql.org/>`_
-
 - `Director Responsive Admin <http://web-apps.ninja/director-free-responsive-admin-template/>`_
-
 - Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_
-
 - `Real Favicon Generator <http://realfavicongenerator.net>`_
-
 - `Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_
-
 - `Github <https://github.com/>`_
-
 - `TravisCI <https://travis-ci.org>`_
-
 - `Codecov <https://codecov.io>`_
-
 - `Read The Docs <https://readthedocs.org/>`_
-
 - `MW <http://bettermotherfuckingwebsite.com/>`_
-
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
-
 - `Buienradar <http://www.buienradar.nl>`_
+- `Django REST Framework <http://www.django-rest-framework.org>`_
+- `Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_
 
 
 Misc

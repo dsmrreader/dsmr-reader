@@ -16,7 +16,7 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
-    for current_reading in DsmrReading.objects.unprocessed()[0:128]:
+    for current_reading in DsmrReading.objects.unprocessed()[0:1024]:
         compact(dsmr_reading=current_reading)
 
 
@@ -288,3 +288,9 @@ def calculate_min_max_consumption_watt():
             min_max[x] = int(min_max[x] * 1000)
 
     return min_max
+
+
+def clear_consumption():
+    """ Clears ALL consumption data ever generated. """
+    ElectricityConsumption.objects.all().delete()
+    GasConsumption.objects.all().delete()
