@@ -17,6 +17,28 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
     - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
 
 
+
+v1.7.0 - 2017-05-04
+^^^^^^^^^^^^^^^^^^^
+
+.. warning::
+
+    Please note that the ``dsmr_datalogger.0007_dsmrreading_timestamp_index`` migration **will take quite some time**, as it adds an index on one of the largest database tables!
+    
+    It has been timed to take **around two minutes** on a RaspberryPi 3 with ``4.3+ million`` readings on PostgreSQL. Results may differ on **slower RaspberryPi's** or **with MySQL**.
+
+
+.. note::
+
+    The API-docs for the new v2 API `can be found here <https://dsmr-reader.readthedocs.io/en/latest/api.html>`_.
+
+
+**Tickets resolved in this release:**
+
+- [`#230 <https://github.com/dennissiemensma/dsmr-reader/issues/230>`_] Support for exporting data via API
+
+
+
 v1.6.2 - 2017-04-23
 ^^^^^^^^^^^^^^^^^^^
 
