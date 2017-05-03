@@ -25,7 +25,7 @@ v1.7.0 - 2017-05-04
 
     Please note that the ``dsmr_datalogger.0007_dsmrreading_timestamp_index`` migration **will take quite some time**, as it adds an index on one of the largest database tables!
     
-    It has been timed to take **around two minutes** on a RaspberryPi 3 with ``4.3+ million`` readings on PostgreSQL. Results may differ on **slower RaspberryPi's** or **with MySQL**.
+    It takes **around two minutes** on a RaspberryPi 2 & 3 with ``4.3+ million`` readings on PostgreSQL. Results may differ on **slower RaspberryPi's** or **with MySQL**.
 
 
 .. note::
