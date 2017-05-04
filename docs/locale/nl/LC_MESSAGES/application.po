@@ -307,6 +307,3 @@ msgstr ""
 "informatie over dit onderwerp `zie de Nginx documentatie "
 "<https://www.nginx.com/resources/admin-guide/restricting-access/>`_."
 
-#~ msgid "Contents"
-#~ msgstr "Inhoudsopgave"
-

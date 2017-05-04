@@ -945,6 +945,3 @@ msgstr ""
 msgid "END OF TERMS AND CONDITIONS"
 msgstr ""
 
-#~ msgid "Licence"
-#~ msgstr ""
-

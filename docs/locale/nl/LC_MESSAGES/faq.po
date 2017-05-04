@@ -511,6 +511,3 @@ msgstr ""
 "`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/new>`_."
 
-#~ msgid "Contents"
-#~ msgstr "Inhoud"
-

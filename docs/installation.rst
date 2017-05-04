@@ -204,7 +204,7 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 
 *We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
 
-- Make sure you are still acting here as ``root`` or ``sudo`` user.
+- Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user.
 
 Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefor it requires (write) access to it::
 
@@ -347,7 +347,7 @@ You've almost completed the installation now.
     
     It's possible to have other applications use Nginx as well, but that requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will copy below.
 
-Go back to ``root`` / ``sudo`` user to configure the webserver (press ``CTRL + D`` once).
+- Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user.
 
 Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::
 

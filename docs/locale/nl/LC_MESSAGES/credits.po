@@ -211,9 +211,3 @@ msgstr ""
 msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 msgstr ""
 
-#~ msgid "`Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
-#~ msgstr ""
-
-#~ msgid "Credits"
-#~ msgstr "Credits"
-

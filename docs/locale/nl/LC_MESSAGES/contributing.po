@@ -67,5 +67,3 @@ msgstr ""
 "Tot slot, zorg ervoor dat pull requests altijd naar de ``development`` branch "
 "wijzen en niet de ``master``."
 
-#~ msgid "Feedback"
-#~ msgstr "Feedback"
