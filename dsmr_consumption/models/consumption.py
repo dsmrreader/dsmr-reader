@@ -74,7 +74,7 @@ class ElectricityConsumption(models.Model):
 
 
 class GasConsumption(models.Model):
-    """ Interpolated gas reading, containing the actualy usage, based on the reading before (if any). """
+    """ Interpolated gas reading, containing the actual usage, based on the reading before (if any). """
     read_at = models.DateTimeField(unique=True)
     delivered = models.DecimalField(
         max_digits=9,

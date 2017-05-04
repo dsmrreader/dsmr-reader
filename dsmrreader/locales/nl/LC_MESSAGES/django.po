@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 17:06+0100\n"
-"PO-Revision-Date: 2017-03-17 00:36+0100\n"
+"POT-Creation-Date: 2017-05-04 19:20+0200\n"
+"PO-Revision-Date: 2017-05-01 22:56+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -36,18 +36,6 @@ msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
 msgid "API configuration"
 msgstr "API-configuratie"
 
-msgid "API is disabled"
-msgstr "API is uitgeschakeld"
-
-msgid "Invalid auth key"
-msgstr "Ongeldige autorisatiesleutel"
-
-msgid "Invalid data"
-msgstr "Ongeldige gegevens"
-
-msgid "Failed to parse telegram"
-msgstr "Inlezen telegram mislukt"
-
 msgid "Backend"
 msgstr "Achterkant"
 
@@ -62,6 +50,15 @@ msgstr "Bedoeld voor gebruik buiten productie. Alleen mogelijk wanneer instellin
 
 msgid "Generates a generic event triggering apps for backend operations, cron-like."
 msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
+
+msgid "Deletes all aggregated data generated. Such as consumption and (day/hour) statistics. This command does NOT affect any readings stored. In fact, you should NEVER run this, unless you still have each and EVERY reading stored, as the application will attempt to recalculate all aggregated data deleted retroactively, using each reading stored."
+msgstr "Verwijdert alle geaggregeerde gegevens, zoals verbruik en dag/uur-statistieken. Dit heeft GEEN invloed op alle opgeslagen metingen. Let op: draai dit NOOIT tenzij je absoluut zeker weet dat je ELKE meting nog opgeslagen hebt. De applicatie gaat namelijk proberen om alle geaggregeerde gegevens opnieuw uit te rekenen, aan de hand van de opgeslagen metingen."
+
+msgid "Required to acknowledge you that you WILL delete your statistics with this."
+msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gegenereerde) data verwijdert."
+
+msgid "Intended usage is NOT production! Force by using --ack-to-delete-my-data"
+msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-my-data"
 
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer."
@@ -231,14 +228,41 @@ msgstr "neem teruglevering elektriciteit mee (zonnepanelen)"
 msgid "Intended usage is NOT production! Force by using --ack-to-mess-up-my-data"
 msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-my-data"
 
-msgid "Timestamp indicating when the reading was taken, according to the meter"
+msgid "Timestamp indicating when the reading was taken, according to the smart meter"
 msgstr "Moment waarop de meting is gedaan, volgens de meter."
 
-msgid "Last hourly reading timestamp"
-msgstr "Tijdstip van laatste meting"
+msgid "Meter position stating electricity delivered (low tariff) in kWh"
+msgstr "Meterstand van verbruikte elektriciteit (laagtarief) in kWh"
 
-msgid "Last hourly value delivered to client"
-msgstr "Meest recente meterstand"
+msgid "Meter position stating electricity returned (low tariff) in kWh"
+msgstr "Meterstand van teruggeleverde elektriciteit (laagtarief) in kWh"
+
+msgid "Meter position stating electricity delivered (normal tariff) in kWh"
+msgstr "Meterstand van verbruikte elektriciteit (piektarief) in kWh"
+
+msgid "Meter position stating electricity returned (normal tariff) in kWh"
+msgstr "Meterstand van teruggeleverde elektriciteit (piektarief) kWh"
+
+msgid "Current electricity delivered in kW"
+msgstr "Huidig elektriciteitsverbruik in kW"
+
+msgid "Current electricity returned in kW"
+msgstr "Huidige teruglevering elektriciteit in kW"
+
+msgid "Current electricity used by phase L1 (in kW)"
+msgstr "Huidig elektriciteitsverbruik in fase L1 (in kW)"
+
+msgid "Current electricity used by phase L2 (in kW)"
+msgstr "Huidig elektriciteitsverbruik in fase L2 (in kW)"
+
+msgid "Current electricity used by phase L3 (in kW)"
+msgstr "Huidig elektriciteitsverbruik in fase L3 (in kW)"
+
+msgid "Last timestamp read from the extra device connected (gas meter)"
+msgstr "Tijdstip van meting door de externe (gas)meter"
+
+msgid "Last value read from the extra device connected (gas meter)"
+msgstr "Meterstand van de externe (gas)meter"
 
 msgid "Whether this reading has been processed for merging into statistics"
 msgstr "Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
@@ -474,8 +498,8 @@ msgstr "Inloggen vereist"
 msgid "Configuration"
 msgstr "Configuratie"
 
-msgid "Documentation / FAQ"
-msgstr "Documentatie / FAQ"
+msgid "Help / FAQ"
+msgstr "Help / FAQ"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -963,15 +987,6 @@ msgstr "Totale kosten: € {}"
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
-msgid "Clears all statistics generated. Use this to regenerate them after altering prices."
-msgstr "Verwijdert alle (dag/uur)statistieken. Gebruik dit wanneer je de energieprijzen hebt aangepast."
-
-msgid "Required to acknowledge you that you WILL delete your statistics with this."
-msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gegenereerde) data verwijdert."
-
-msgid "Intended usage is NOT production! Force by using --ack-to-delete-my-data"
-msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-my-data"
-
 msgid "Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks."
 msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
 
@@ -1187,6 +1202,32 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "API is disabled"
+#~ msgstr "API is uitgeschakeld"
+
+#~ msgid "Invalid auth key"
+#~ msgstr "Ongeldige autorisatiesleutel"
+
+#~ msgid "API user not found"
+#~ msgstr "API gebruiker niet gevonden"
+
+#~ msgid "Invalid data"
+#~ msgstr "Ongeldige gegevens"
+
+#~ msgid "Failed to parse telegram"
+#~ msgstr "Inlezen telegram mislukt"
+
+#~ msgid "Last hourly value delivered to client according to the extra device connected"
+#~ msgstr "Meest recente meterstand, volgens de externe (gas)meter"
+
+#, fuzzy
+#~| msgid "Documentation / FAQ"
+#~ msgid "API Documentation"
+#~ msgstr "Documentatie / FAQ"
+
+#~ msgid "Clears all statistics generated. Use this to regenerate them after altering prices."
+#~ msgstr "Verwijdert alle (dag/uur)statistieken. Gebruik dit wanneer je de energieprijzen hebt aangepast."
 
 #~ msgid "The access token for your Dropbox account. You should register an App for your own Dropbox account (https://www.dropbox.com/developers/apps). Please select \"Permission type\" named \"App folder\" to restrict unneeded access. Backups will be synced to a dedicated folder in your account. After creating your App you should be able to generate an \"Access token\" and enter it here. For more information, see https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
 #~ msgstr "Het 'access token' voor je Dropbox account. Hiervoor moet je onder je eigen account een applicatie registeren (https://www.dropbox.com/developers/apps). Zorg ervoor dat je bij \"Permission type\" kiest voor de optie \"App folder\" om de gedeelde toegang tot je account te beperken. Backups worden hierdoor in je account op een geïsoleerde locatie gezet. Zodra je in Dropbox een applicatie hebt toegevoegd, kun je een zogeheten \"Access token\" genereren en hier invullen. Zie voor meer informatie: https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"

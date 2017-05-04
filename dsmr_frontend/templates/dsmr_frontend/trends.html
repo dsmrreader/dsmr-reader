@@ -184,7 +184,7 @@
 	            var ctx = $("#" + chart_id).get(0).getContext("2d");
 	            ctx.canvas.height = $("#" + chart_id).parent().height();
 	            
-	            var chart_instance = new Chart(ctx, {
+	            new Chart(ctx, {
 	                type: 'bar',
 	                data: data,
 	                options: chart_options

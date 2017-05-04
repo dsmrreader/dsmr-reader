@@ -1,0 +1,53 @@
+[
+{
+    "fields": {
+        "electricity_delivered_1": "528.750",
+        "extra_device_timestamp": "2015-11-10T19:00:00Z",
+        "extra_device_delivered": "845.888",
+        "electricity_returned_2": "123.456",
+        "electricity_currently_delivered": "0.247",
+        "timestamp": "2015-11-10T19:40:47Z",
+        "electricity_returned_1": "0.456",
+        "electricity_currently_returned": "0.123",
+        "processed": true,
+        "electricity_delivered_2": "525.500"
+    },
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 1
+},
+{
+    "fields": {
+        "electricity_delivered_1": "529.750",
+        "extra_device_timestamp": "2015-11-10T19:00:00Z",
+        "extra_device_delivered": "845.898",
+        "electricity_returned_2": "123.567",
+        "electricity_currently_delivered": "0.750",
+        "timestamp": "2015-11-10T19:40:57Z",
+        "electricity_returned_1": "0.567",
+        "electricity_currently_returned": "0.123",
+        "processed": true,
+        "electricity_delivered_2": "527.500"
+    },
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 2
+},
+{
+    "fields": {
+        "electricity_delivered_1": "530.750",
+        "extra_device_timestamp": "2015-11-10T20:00:00Z",
+        "extra_device_delivered": "845.898",
+        "electricity_returned_2": "123.678",
+        "electricity_currently_delivered": "1.123",
+        "timestamp": "2015-11-10T19:41:07Z",
+        "electricity_returned_1": "0.678",
+        "electricity_currently_returned": "0.123",
+        "processed": true,
+        "electricity_delivered_2": "528.500",
+        "phase_currently_delivered_l1": "0.123",
+        "phase_currently_delivered_l2": "0.456",
+        "phase_currently_delivered_l3": "0.789"
+    },
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 3
+}
+]

@@ -1,0 +1,158 @@
+[
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14551,
+    "fields": {
+        "hour_start": "2015-12-11T21:00:00Z",
+        "electricity1": "0.000",
+        "electricity2": "0.349",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14552,
+    "fields": {
+        "hour_start": "2015-12-11T23:00:00Z",
+        "electricity1": "0.027",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14553,
+    "fields": {
+        "hour_start": "2015-12-12T23:00:00Z",
+        "electricity1": "0.068",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.019"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14554,
+    "fields": {
+        "hour_start": "2015-12-13T00:00:00Z",
+        "electricity1": "0.129",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.175"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14555,
+    "fields": {
+        "hour_start": "2015-12-13T01:00:00Z",
+        "electricity1": "0.011",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14556,
+    "fields": {
+        "hour_start": "2015-12-13T23:00:00Z",
+        "electricity1": "0.108",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14557,
+    "fields": {
+        "hour_start": "2015-12-14T00:00:00Z",
+        "electricity1": "0.001",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14558,
+    "fields": {
+        "hour_start": "2015-12-14T23:00:00Z",
+        "electricity1": "0.327",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.009"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14559,
+    "fields": {
+        "hour_start": "2015-12-15T00:00:00Z",
+        "electricity1": "0.115",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.604"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14560,
+    "fields": {
+        "hour_start": "2015-12-15T01:00:00Z",
+        "electricity1": "0.100",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14561,
+    "fields": {
+        "hour_start": "2015-12-15T23:00:00Z",
+        "electricity1": "0.211",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.010"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14562,
+    "fields": {
+        "hour_start": "2015-12-16T00:00:00Z",
+        "electricity1": "0.079",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+},
+{
+    "model": "dsmr_stats.hourstatistics",
+    "pk": 14563,
+    "fields": {
+        "hour_start": "2015-12-16T23:00:00Z",
+        "electricity1": "0.053",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "gas": "0.000"
+    }
+}
+]

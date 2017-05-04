@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2017-02-18 00:28+0100\n"
+"POT-Creation-Date: 2017-05-02 21:26+0200\n"
 "PO-Revision-Date: 2017-01-01 00:00+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -99,113 +99,115 @@ msgstr ""
 msgid "`Raspbian <https://www.raspbian.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:34
+#: ../../credits.rst:33
 msgid "`Django Project <https://www.djangoproject.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:36
+#: ../../credits.rst:34
 msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
 msgstr ""
 
-#: ../../credits.rst:38
+#: ../../credits.rst:35
 msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 msgstr ""
 
-#: ../../credits.rst:40
+#: ../../credits.rst:36
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:42
+#: ../../credits.rst:37
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:44
+#: ../../credits.rst:38
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:46
+#: ../../credits.rst:39
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:48
+#: ../../credits.rst:40
 msgid ""
 "`Director Responsive Admin <http://web-apps.ninja/director-free-"
 "responsive-admin-template/>`_"
 msgstr ""
 
-#: ../../credits.rst:50
+#: ../../credits.rst:41
 msgid ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 msgstr ""
 
-#: ../../credits.rst:52
+#: ../../credits.rst:42
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr ""
 
-#: ../../credits.rst:54
+#: ../../credits.rst:43
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:56
+#: ../../credits.rst:44
 msgid "`Github <https://github.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:58
+#: ../../credits.rst:45
 msgid "`TravisCI <https://travis-ci.org>`_"
 msgstr ""
 
-#: ../../credits.rst:60
+#: ../../credits.rst:46
 msgid "`Codecov <https://codecov.io>`_"
 msgstr ""
 
-#: ../../credits.rst:62
+#: ../../credits.rst:47
 msgid "`Read The Docs <https://readthedocs.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:64
+#: ../../credits.rst:48
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:66
+#: ../../credits.rst:49
 msgid ""
 "`Full Page Screen Capture <https://chrome.google.com/webstore/detail"
 "/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr ""
 
-#: ../../credits.rst:68
+#: ../../credits.rst:50
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr ""
 
-#: ../../credits.rst:72
+#: ../../credits.rst:51
+msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
+msgstr ""
+
+#: ../../credits.rst:52
+msgid "`Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_"
+msgstr ""
+
+#: ../../credits.rst:56
 msgid "Misc"
 msgstr "Overig"
 
-#: ../../credits.rst:74
+#: ../../credits.rst:58
 msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 msgstr "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 
-#: ../../credits.rst:76
+#: ../../credits.rst:60
 msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 msgstr ""
 
-#: ../../credits.rst:78
+#: ../../credits.rst:62
 msgid ""
 "`Joost van der Linde (smartmeterdashboard) "
 "<http://www.smartmeterdashboard.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:80
+#: ../../credits.rst:64
 msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:82
+#: ../../credits.rst:66
 msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 msgstr ""
-
-#~ msgid "`Favicon <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
-#~ msgstr ""
-
-#~ msgid "Credits"
-#~ msgstr "Credits"
 

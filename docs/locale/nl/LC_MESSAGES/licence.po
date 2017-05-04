@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2016-01-01 00:00+0100\n"
+"POT-Creation-Date: 2017-05-02 21:26+0200\n"
 "PO-Revision-Date: 2017-01-01 00:00+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -23,10 +23,6 @@ msgstr "Licentie (GNU GPLv3)"
 
 #: ../../licence.rst:4
 msgid "**Copyright (C) 2015/2016 Dennis Siemensma**"
-msgstr ""
-
-#: ../../licence.rst
-msgid "Licence"
 msgstr ""
 
 #: ../../licence.rst:12

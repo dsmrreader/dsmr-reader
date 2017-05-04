@@ -1,0 +1,135 @@
+[
+{
+    "model": "dsmr_stats.daystatistics",
+    "pk": 756,
+    "fields": {
+        "day": "2015-12-11",
+        "total_cost": "0.08",
+        "electricity1": "0.000",
+        "electricity2": "0.349",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "electricity1_cost": "0.00",
+        "electricity2_cost": "0.08",
+        "gas": "0.000",
+        "gas_cost": "0.00",
+        "lowest_temperature": "0.0",
+        "highest_temperature": "0.0",
+        "average_temperature": "0.0"
+    }
+},
+{
+    "model": "dsmr_stats.daystatistics",
+    "pk": 757,
+    "fields": {
+        "day": "2015-12-12",
+        "total_cost": "0.01",
+        "electricity1": "0.027",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "electricity1_cost": "0.01",
+        "electricity2_cost": "0.00",
+        "gas": "0.000",
+        "gas_cost": "0.00",
+        "lowest_temperature": "0.0",
+        "highest_temperature": "0.0",
+        "average_temperature": "0.0"
+    }
+},
+{
+    "model": "dsmr_stats.daystatistics",
+    "pk": 758,
+    "fields": {
+        "day": "2015-12-13",
+        "total_cost": "0.16",
+        "electricity1": "0.210",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "electricity1_cost": "0.05",
+        "electricity2_cost": "0.00",
+        "gas": "0.175",
+        "gas_cost": "0.11",
+        "lowest_temperature": "0.0",
+        "highest_temperature": "0.0",
+        "average_temperature": "0.0"
+    }
+},
+{
+    "model": "dsmr_stats.daystatistics",
+    "pk": 759,
+    "fields": {
+        "day": "2015-12-14",
+        "total_cost": "0.03",
+        "electricity1": "0.110",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "electricity1_cost": "0.03",
+        "electricity2_cost": "0.00",
+        "gas": "0.000",
+        "gas_cost": "0.00",
+        "lowest_temperature": "0.0",
+        "highest_temperature": "0.0",
+        "average_temperature": "0.0"
+    }
+},
+{
+    "model": "dsmr_stats.daystatistics",
+    "pk": 760,
+    "fields": {
+        "day": "2015-12-15",
+        "total_cost": "0.48",
+        "electricity1": "0.547",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "electricity1_cost": "0.12",
+        "electricity2_cost": "0.00",
+        "gas": "0.604",
+        "gas_cost": "0.36",
+        "lowest_temperature": "0.0",
+        "highest_temperature": "0.0",
+        "average_temperature": "0.0"
+    }
+},
+{
+    "model": "dsmr_stats.daystatistics",
+    "pk": 761,
+    "fields": {
+        "day": "2015-12-16",
+        "total_cost": "0.07",
+        "electricity1": "0.293",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "electricity1_cost": "0.07",
+        "electricity2_cost": "0.00",
+        "gas": "0.000",
+        "gas_cost": "0.00",
+        "lowest_temperature": "0.0",
+        "highest_temperature": "0.0",
+        "average_temperature": "0.0"
+    }
+},
+{
+    "model": "dsmr_stats.daystatistics",
+    "pk": 762,
+    "fields": {
+        "day": "2015-12-17",
+        "total_cost": "0.02",
+        "electricity1": "0.053",
+        "electricity2": "0.000",
+        "electricity1_returned": "0.000",
+        "electricity2_returned": "0.000",
+        "electricity1_cost": "0.02",
+        "electricity2_cost": "0.00",
+        "gas": "0.000",
+        "gas_cost": "0.00",
+        "lowest_temperature": "0.0",
+        "highest_temperature": "0.0",
+        "average_temperature": "0.0"
+    }
+}
+]

@@ -48,6 +48,8 @@ INSTALLED_APPS = (
     # Third party apps/plugins.
     'solo.apps.SoloAppConfig',
     'colorfield',
+    'django_filters',
+    'rest_framework',
 
     # Local project apps.
     'dsmr_api.apps.AppConfig',
@@ -100,7 +102,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dsmrreader.wsgi.application'
 
-LOGIN_URL = 'admin/login/'
+LOGIN_URL = 'admin:login'
+LOGOUT_URL = 'admin:logout'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -154,6 +157,27 @@ LANGUAGES = (
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
 
 
+""" Django Rest Framework. """
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.OrderingFilter',
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dsmr_api.authentication.HeaderAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 25,
+}
+
+
 """ DSMR Project settings. """
 
 DSMRREADER_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
@@ -166,3 +190,5 @@ DSMRREADER_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
 DSMRREADER_VERSION = dsmrreader.__version__
 DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/__init__.py'
+
+DSMRREADER_REST_FRAMEWORK_API_USER = 'api-user'
