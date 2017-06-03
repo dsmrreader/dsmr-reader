@@ -81,15 +81,15 @@ Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` an
 
 - Create database user::
 
-    sudo sudo -u postgres createuser -DSR dsmrreader
+    sudo -u postgres createuser -DSR dsmrreader
 
 - Create database, owned by the database user we just created::
 
-    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+    sudo -u postgres createdb -O dsmrreader dsmrreader
 
 - Set password for database user::
 
-    sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+    sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
 
 .. note::
 
