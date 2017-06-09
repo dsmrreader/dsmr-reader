@@ -182,6 +182,9 @@ REST_FRAMEWORK = {
 
 DSMRREADER_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
 
+DSMRREADER_BACKUP_PG_DUMP = 'pg_dump'
+DSMRREADER_BACKUP_MYSQLDUMP = 'mysqldump'
+DSMRREADER_BACKUP_SQLITE = 'sqlite3'
 DSMRREADER_BACKUP_DIRECTORY = 'backups'  # Relative to project root.
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
 
