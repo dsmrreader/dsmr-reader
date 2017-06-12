@@ -10,6 +10,7 @@ DSMR Reader's documentation
    application
    settings
    api
+   mqtt
    troubleshooting
    faq
    changelog

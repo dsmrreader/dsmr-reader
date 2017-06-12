@@ -8,6 +8,7 @@ djangorestframework==3.6.2
 django-solo==1.1.2
 dropbox==7.2.1
 gunicorn==19.7.0
+paho-mqtt==1.2.3
 pyserial==3.3
 python-dateutil==2.6.0
 pytz==2016.10

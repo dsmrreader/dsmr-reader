@@ -25,3 +25,8 @@ pytest --pylama --cov --cov-report=html:coverage_report/html --cov-report=term -
 echo ""
 echo "--- Testing with MySQL (1 proces due to concurrency limitations)..."
 pytest --pylama --cov --cov-report=html:coverage_report/html --cov-report=term --ds=dsmrreader.config.test.mysql
+
+
+# Remove annoying headers that get regenerated every time.
+sed -i '/"PO-Revision-Date:/d' dsmrreader/locales/nl/LC_MESSAGES/django.po
+sed -i '/"POT-Creation-Date:/d' dsmrreader/locales/nl/LC_MESSAGES/django.po
