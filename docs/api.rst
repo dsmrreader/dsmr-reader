@@ -293,6 +293,8 @@ Creates a reading from direct values, omitting the need for the telegram.
     Therefor inserting historic data might require you to delete all aggregated data using the ``./manage.py dsmr_backend_delete_aggregated_data`` command.
     
     This will process all readings again, from the very first start, and aggregate them (and **will** take a long time depending on your reading count).
+    
+    Please note that the datalogger may interfere. If your stats are not correctly after regenerating, try it again while having your datalogger disabled.
 
 
 URI
