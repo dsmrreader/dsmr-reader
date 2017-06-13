@@ -1,8 +1,13 @@
+import logging
+
 from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _
 import django.db.models.signals
 
 import dsmr_datalogger.signals
+
+
+logger = logging.getLogger('dsmrreader')
 
 
 class AppConfig(AppConfig):
@@ -36,9 +41,9 @@ class AppConfig(AppConfig):
         try:
             dsmr_mqtt.services.publish_json_dsmr_reading(reading=instance)
         except Exception as error:
-            print('publish_json_dsmr_reading() failed: {}'.format(error))
+            logger.error('publish_json_dsmr_reading() failed: {}'.format(error))
 
         try:
             dsmr_mqtt.services.publish_split_topic_dsmr_reading(reading=instance)
         except Exception as error:
-            print('publish_split_topic_dsmr_reading() failed: {}'.format(error))
+            logger.error('publish_split_topic_dsmr_reading() failed: {}'.format(error))

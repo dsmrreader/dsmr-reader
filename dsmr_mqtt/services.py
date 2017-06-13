@@ -1,4 +1,5 @@
 import configparser
+import logging
 import json
 
 from django.core import serializers
@@ -6,6 +7,9 @@ import paho.mqtt.publish as publish
 
 from dsmr_mqtt.models.settings import MQTTBrokerSettings, RawTelegramMQTTSettings, JSONTelegramMQTTSettings,\
     SplitTopicTelegramMQTTSettings
+
+
+logger = logging.getLogger('dsmrreader')
 
 
 def get_broker_configuration():
@@ -42,7 +46,7 @@ def publish_raw_dsmr_telegram(data):
     try:
         publish.single(topic=raw_settings.topic, payload=data, **broker_kwargs)
     except ValueError as error:
-        print('MQTT | {}'.format(error))
+        logger.error('MQTT publish_raw_dsmr_telegram() | {}'.format(error))
 
 
 def publish_json_dsmr_reading(reading):
@@ -73,7 +77,7 @@ def publish_json_dsmr_reading(reading):
     try:
         publish.single(topic=json_settings.topic, payload=json_reading, **broker_kwargs)
     except ValueError as error:
-        print('MQTT | {}'.format(error))
+        logger.error('MQTT publish_json_dsmr_reading() | {}'.format(error))
 
 
 def publish_split_topic_dsmr_reading(reading):
@@ -90,9 +94,11 @@ def publish_split_topic_dsmr_reading(reading):
 
     mqtt_messages = []
     serialized_reading = json.loads(serializers.serialize('json', [reading]))
+    reading_fields = dict(serialized_reading[0]['fields'].items())
+    reading_fields['id'] = serialized_reading[0]['pk']
 
     # Copy all fields described in the mapping.
-    for k, v in serialized_reading[0]['fields'].items():
+    for k, v in reading_fields.items():
         if k not in topic_mapping:
             continue
 
@@ -106,4 +112,4 @@ def publish_split_topic_dsmr_reading(reading):
     try:
         publish.multiple(msgs=mqtt_messages, **broker_kwargs)
     except ValueError as error:
-        print('MQTT | {}'.format(error))
+        logger.error('MQTT publish_split_topic_dsmr_reading() | {}'.format(error))

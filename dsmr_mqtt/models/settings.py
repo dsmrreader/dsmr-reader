@@ -125,19 +125,19 @@ class SplitTopicTelegramMQTTSettings(SingletonModel):
         default='''
 [mapping]
 # READING FIELD = TOPIC PATH
-id = dsmr/telegram/id
-timestamp = dsmr/telegram/timestamp
-electricity_delivered_1 = dsmr/telegram/electricity_delivered_1
-electricity_returned_1 = dsmr/telegram/electricity_returned_1
-electricity_delivered_2 = dsmr/telegram/electricity_delivered_2
-electricity_returned_2 = dsmr/telegram/electricity_returned_2
-electricity_currently_delivered = dsmr/telegram/electricity_currently_delivered
-electricity_currently_returned = dsmr/telegram/electricity_currently_returned
-phase_currently_delivered_l1 = dsmr/telegram/phase_currently_delivered_l1
-phase_currently_delivered_l2 = dsmr/telegram/phase_currently_delivered_l2
-phase_currently_delivered_l3 = dsmr/telegram/phase_currently_delivered_l3
-extra_device_timestamp = dsmr/telegram/extra_device_timestamp
-extra_device_delivered = dsmr/telegram/extra_device_delivered
+id = dsmr/reading/id
+timestamp = dsmr/reading/timestamp
+electricity_delivered_1 = dsmr/reading/electricity_delivered_1
+electricity_returned_1 = dsmr/reading/electricity_returned_1
+electricity_delivered_2 = dsmr/reading/electricity_delivered_2
+electricity_returned_2 = dsmr/reading/electricity_returned_2
+electricity_currently_delivered = dsmr/reading/electricity_currently_delivered
+electricity_currently_returned = dsmr/reading/electricity_currently_returned
+phase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1
+phase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2
+phase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3
+extra_device_timestamp = dsmr/reading/extra_device_timestamp
+extra_device_delivered = dsmr/reading/extra_device_delivered
 ''',
         verbose_name=_('Formatting'),
         help_text=_('Maps the field names to separate topics sent to the broker.')
