@@ -1274,7 +1274,3 @@ msgstr ""
 #: ../../changelog.rst:422
 msgid "Upgraded Django to 1.8.9."
 msgstr ""
-
-#~ msgid ""
-#~ msgstr ""
-
