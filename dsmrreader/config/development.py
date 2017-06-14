@@ -20,6 +20,16 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
+        'django': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        'dsmrreader': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
     },
 }
 

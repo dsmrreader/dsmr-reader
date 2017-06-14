@@ -18,6 +18,17 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.8.0 - 2017-06-14
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#141 <https://github.com/dennissiemensma/dsmr-reader/issues/141>`_] Add MQTT support to publish readings
+- [`#331 <https://github.com/dennissiemensma/dsmr-reader/issues/331>`_] Requirements update (June 2016)
+- [`#299 <https://github.com/dennissiemensma/dsmr-reader/issues/299>`_] Support Python 3.6
+
+
+
 v1.7.0 - 2017-05-04
 ^^^^^^^^^^^^^^^^^^^
 

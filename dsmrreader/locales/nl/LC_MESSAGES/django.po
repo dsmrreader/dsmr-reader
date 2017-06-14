@@ -7,8 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-04 19:20+0200\n"
-"PO-Revision-Date: 2017-05-01 22:56+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -924,6 +922,162 @@ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisc
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
 
+msgid "These broker settings apply to all enabled MQTT configurations."
+msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
+
+msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
+msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
+
+msgid ""
+"Triggered by any method of reading insertion (datalogger or API). Allows you to send newly created readings to the MQTT broker, as a JSON message. You can alter the field names used in the JSON message. Removing lines will remove fields from the message as well. Default value:\n"
+"<pre>\n"
+"[mapping]\n"
+"id = id\n"
+"timestamp = timestamp\n"
+"electricity_delivered_1 = electricity_delivered_1\n"
+"electricity_returned_1 = electricity_returned_1\n"
+"electricity_delivered_2 = electricity_delivered_2\n"
+"electricity_returned_2 = electricity_returned_2\n"
+"electricity_currently_delivered = electricity_currently_delivered\n"
+"electricity_currently_returned = electricity_currently_returned\n"
+"phase_currently_delivered_l1 = phase_currently_delivered_l1\n"
+"phase_currently_delivered_l2 = phase_currently_delivered_l2\n"
+"phase_currently_delivered_l3 = phase_currently_delivered_l3\n"
+"extra_device_timestamp = extra_device_timestamp\n"
+"extra_device_delivered = extra_device_delivered\n"
+"</pre>\n"
+msgstr ""
+"Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, in JSON-formaat. Je kunt de veldnamen aanpassen die in het JSON-bericht gebruikt worden. Standaardwaarden:\n"
+"<pre>\n"
+"[mapping]\n"
+"id = id\n"
+"timestamp = timestamp\n"
+"electricity_delivered_1 = electricity_delivered_1\n"
+"electricity_returned_1 = electricity_returned_1\n"
+"electricity_delivered_2 = electricity_delivered_2\n"
+"electricity_returned_2 = electricity_returned_2\n"
+"electricity_currently_delivered = electricity_currently_delivered\n"
+"electricity_currently_returned = electricity_currently_returned\n"
+"phase_currently_delivered_l1 = phase_currently_delivered_l1\n"
+"phase_currently_delivered_l2 = phase_currently_delivered_l2\n"
+"phase_currently_delivered_l3 = phase_currently_delivered_l3\n"
+"extra_device_timestamp = extra_device_timestamp\n"
+"extra_device_delivered = extra_device_delivered\n"
+"</pre>\n"
+
+msgid ""
+"Triggered by any method of reading insertion (datalogger or API). Allows you to send newly created readings to the MQTT broker, splitted per field. You can designate each field name to a different topic. Removing lines will prevent those fields from being broadcast as well. Default value:\n"
+"<pre>\n"
+"[mapping]\n"
+"id = dsmr/reading/id\n"
+"timestamp = dsmr/reading/timestamp\n"
+"electricity_delivered_1 = dsmr/reading/electricity_delivered_1\n"
+"electricity_returned_1 = dsmr/reading/electricity_returned_1\n"
+"electricity_delivered_2 = dsmr/reading/electricity_delivered_2\n"
+"electricity_returned_2 = dsmr/reading/electricity_returned_2\n"
+"electricity_currently_delivered = dsmr/reading/electricity_currently_delivered\n"
+"electricity_currently_returned = dsmr/reading/electricity_currently_returned\n"
+"phase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1\n"
+"phase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2\n"
+"phase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3\n"
+"extra_device_timestamp = dsmr/reading/extra_device_timestamp\n"
+"extra_device_delivered = dsmr/reading/extra_device_delivered\n"
+"</pre>\n"
+msgstr ""
+"Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, gesplitst op een apart topic per veld. Je kunt daarmee elke veldnaam toewijzen op een aparte topic. Standaardwaarden:\n"
+"\n"
+"<pre>\n"
+"[mapping]\n"
+"id = dsmr/reading/id\n"
+"timestamp = dsmr/reading/timestamp\n"
+"electricity_delivered_1 = dsmr/reading/electricity_delivered_1\n"
+"electricity_returned_1 = dsmr/reading/electricity_returned_1\n"
+"electricity_delivered_2 = dsmr/reading/electricity_delivered_2\n"
+"electricity_returned_2 = dsmr/reading/electricity_returned_2\n"
+"electricity_currently_delivered = dsmr/reading/electricity_currently_delivered\n"
+"electricity_currently_returned = dsmr/reading/electricity_currently_returned\n"
+"phase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1\n"
+"phase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2\n"
+"phase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3\n"
+"extra_device_timestamp = dsmr/reading/extra_device_timestamp\n"
+"extra_device_delivered = dsmr/reading/extra_device_delivered\n"
+"</pre>\n"
+
+msgid "MQTT"
+msgstr "MQTT"
+
+msgid "Hostname"
+msgstr "Hostnaam"
+
+msgid "The hostname of the broker to send MQTT messages to."
+msgstr "De hostnaam om MQTT-berichten naar te versturen."
+
+msgid "Port"
+msgstr "Poort"
+
+msgid "The port of the broker to send MQTT messages to."
+msgstr "De poort om MQTT-berichten naar te versturen."
+
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+msgid "Optional: The username required for authentication (if any)."
+msgstr "Optioneel: De gebruikersnaam voor authenticatie (indien nodig)."
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Optional: The password required for authentication (if any)."
+msgstr "Optioneel: het wachtwoord voor authenticatie (indien nodig)."
+
+msgid "Client ID"
+msgstr "Client ID"
+
+msgid "The client ID used to identify DSMR-reader sending the MQTT messages."
+msgstr "Het Client ID dat gebruikt wordt om DSMR-reader te identificeren bij het versturen van de MQTT berichten."
+
+msgid "MQTT broker configuration"
+msgstr "MQTT broker configuratie"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "Whether any raw telegrams received are sent to the broker."
+msgstr "Geeft aan of onbewerkte telegrammen verstuurd worden naar de broker."
+
+msgid "Topic path"
+msgstr "Topic pad"
+
+msgid "The topic to send the raw telegrams to."
+msgstr "Het topic om de onbewerkte telegrammen naar te versturen."
+
+msgid "MQTT raw telegram configuration"
+msgstr "MQTT onbewerkte telegram configuratie"
+
+msgid "Whether parsed telegrams are sent to the broker, in JSON format."
+msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broker, in JSON formaat."
+
+msgid "The topic to send the parsed JSON telegrams to."
+msgstr "Het topic om de JSON telegrammen naar te versturen."
+
+msgid "Formatting"
+msgstr "Formaat"
+
+msgid "Maps the field names used in the JSON message sent to the broker."
+msgstr "Mapt de veldnamen die gebruikt worden in het JSON-bericht naar de broker toe."
+
+msgid "MQTT JSON telegram configuration"
+msgstr "MQTT JSON telegram configuratie"
+
+msgid "Whether parsed telegrams are sent to the broker, having each field sent to a different topic."
+msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broker, gesplitst op een apart veld per topic."
+
+msgid "Maps the field names to separate topics sent to the broker."
+msgstr "Mapt de veldnamen naar topics, die gebruikt worden in individuele berichten naar de broker toe."
+
+msgid "MQTT split topic telegram configuration"
+msgstr "MQTT gesplitste topic telegram configuratie"
+
 msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het instellen van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentatie</a>"
 
@@ -1202,35 +1356,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "API is disabled"
-#~ msgstr "API is uitgeschakeld"
-
-#~ msgid "Invalid auth key"
-#~ msgstr "Ongeldige autorisatiesleutel"
-
-#~ msgid "API user not found"
-#~ msgstr "API gebruiker niet gevonden"
-
-#~ msgid "Invalid data"
-#~ msgstr "Ongeldige gegevens"
-
-#~ msgid "Failed to parse telegram"
-#~ msgstr "Inlezen telegram mislukt"
-
-#~ msgid "Last hourly value delivered to client according to the extra device connected"
-#~ msgstr "Meest recente meterstand, volgens de externe (gas)meter"
-
-#, fuzzy
-#~| msgid "Documentation / FAQ"
-#~ msgid "API Documentation"
-#~ msgstr "Documentatie / FAQ"
-
-#~ msgid "Clears all statistics generated. Use this to regenerate them after altering prices."
-#~ msgstr "Verwijdert alle (dag/uur)statistieken. Gebruik dit wanneer je de energieprijzen hebt aangepast."
-
-#~ msgid "The access token for your Dropbox account. You should register an App for your own Dropbox account (https://www.dropbox.com/developers/apps). Please select \"Permission type\" named \"App folder\" to restrict unneeded access. Backups will be synced to a dedicated folder in your account. After creating your App you should be able to generate an \"Access token\" and enter it here. For more information, see https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
-#~ msgstr "Het 'access token' voor je Dropbox account. Hiervoor moet je onder je eigen account een applicatie registeren (https://www.dropbox.com/developers/apps). Zorg ervoor dat je bij \"Permission type\" kiest voor de optie \"App folder\" om de gedeelde toegang tot je account te beperken. Backups worden hierdoor in je account op een geïsoleerde locatie gezet. Zodra je in Dropbox een applicatie hebt toegevoegd, kun je een zogeheten \"Access token\" genereren en hier invullen. Zie voor meer informatie: https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account"
-
-#~ msgid "Theme by"
-#~ msgstr "Thema door"

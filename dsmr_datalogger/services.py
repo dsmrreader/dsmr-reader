@@ -15,6 +15,7 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.dsmr import DSMR_MAPPING
+import dsmr_datalogger.signals
 
 
 dsmrreader_logger = logging.getLogger('dsmrreader')
@@ -259,6 +260,9 @@ def telegram_to_reading(data):  # noqa: C901
 
     # There should already be one in database, created when migrating.
     MeterStatistics.objects.all().update(**statistics_kwargs)
+
+    # Broadcast this telegram as signal.
+    dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data=data)
 
     dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
     return new_reading

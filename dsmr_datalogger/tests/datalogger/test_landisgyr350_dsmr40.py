@@ -111,3 +111,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(meter_statistics.voltage_swell_count_l1, 0)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, 0)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, 0)
+
+    @mock.patch('dsmr_datalogger.signals.raw_telegram.send_robust')
+    def test_raw_telegram_signal_sent(self, signal_mock):
+        self.assertFalse(signal_mock.called)
+        self._fake_dsmr_reading()
+        self.assertTrue(signal_mock.called)

@@ -6,10 +6,12 @@ DSMR Reader's documentation
    
    intro
    screenshots
+   requirements
    installation
    application
    settings
    api
+   mqtt
    troubleshooting
    faq
    changelog

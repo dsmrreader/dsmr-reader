@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2017-05-02 21:26+0200\n"
-"PO-Revision-Date: 2017-05-02 22:37+0200\n"
+"POT-Creation-Date: 2017-06-13 21:18+0200\n"
+"PO-Revision-Date: 2017-06-13 21:21+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,8 +47,8 @@ msgstr ""
 "Standaard is de API in de applicatie uitgeschakeld. Je kunt deze inschakelen "
 "in het configuratiescherm of beheerderpaneel."
 
-#: ../../api.rst:18 ../../api.rst:79 ../../api.rst:330 ../../api.rst:627
-#: ../../api.rst:687
+#: ../../api.rst:18 ../../api.rst:79 ../../api.rst:332 ../../api.rst:629
+#: ../../api.rst:689
 msgid "Example"
 msgstr "Voorbeeld"
 
@@ -112,8 +112,8 @@ msgstr ""
 "Sinds ``DSMR-reader v1.6`` geeft deze call ``HTTP 201`` terug in plaats van "
 "``HTTP 200``, wanneer succesvol."
 
-#: ../../api.rst:63 ../../api.rst:299 ../../api.rst:404 ../../api.rst:606
-#: ../../api.rst:666
+#: ../../api.rst:63 ../../api.rst:301 ../../api.rst:406 ../../api.rst:608
+#: ../../api.rst:668
 msgid "URI"
 msgstr "URI"
 
@@ -121,8 +121,8 @@ msgstr "URI"
 msgid "Full path: ``/api/v1/datalogger/dsmrreading``"
 msgstr "Volledig pad: ``/api/v1/datalogger/dsmrreading``"
 
-#: ../../api.rst:68 ../../api.rst:304 ../../api.rst:409 ../../api.rst:611
-#: ../../api.rst:671
+#: ../../api.rst:68 ../../api.rst:306 ../../api.rst:411 ../../api.rst:613
+#: ../../api.rst:673
 msgid "Parameters"
 msgstr "Parameters"
 
@@ -134,8 +134,8 @@ msgstr ""
 "``telegram`` (*string*)  - De ruwe telegram tekenreeks inclusief alle "
 "regeleindes ``\\n`` en 'carriage returns' ``\\r``."
 
-#: ../../api.rst:74 ../../api.rst:325 ../../api.rst:420 ../../api.rst:622
-#: ../../api.rst:682
+#: ../../api.rst:74 ../../api.rst:327 ../../api.rst:422 ../../api.rst:624
+#: ../../api.rst:684
 msgid "Response"
 msgstr "Respons (van de server)"
 
@@ -239,15 +239,24 @@ msgstr ""
 "vanaf het begin, en ze opnieuw aggregeert. Dit **zal** lang duren, afhankelijk "
 "van hoeveel metingen er opgeslagen zijn."
 
-#: ../../api.rst:300 ../../api.rst:405
+#: ../../api.rst:297
+msgid ""
+"Please note that the datalogger may interfere. If your stats are not correctly "
+"after regenerating, try it again while having your datalogger disabled."
+msgstr ""
+"N.B.: De datalogger kan soms in de weg zitten. Mocht blijken dat de "
+"statistieken niet kloppen na hergenereren, dan kun je het eventueel nogmaals "
+"proberen de datalogger uitgeschakeld."
+
+#: ../../api.rst:302 ../../api.rst:407
 msgid "Full path: ``/api/v2/datalogger/dsmrreading``"
 msgstr "Volledig pad: ``/api/v2/datalogger/dsmrreading``"
 
-#: ../../api.rst:305
+#: ../../api.rst:307
 msgid "**[R]** = Required field"
 msgstr "**[R]** = Verplicht veld"
 
-#: ../../api.rst:307
+#: ../../api.rst:309
 msgid ""
 "**[R]** ``timestamp`` (*datetime*) - Timestamp indicating when the reading was "
 "taken, according to the smart meter"
@@ -255,7 +264,7 @@ msgstr ""
 "**[R]** ``timestamp`` (*datetime*) - Moment waarop de meting is gedaan, "
 "volgens de meter"
 
-#: ../../api.rst:308
+#: ../../api.rst:310
 msgid ""
 "**[R]** ``electricity_currently_delivered`` (*float*) - Current electricity "
 "delivered in kW"
@@ -263,7 +272,7 @@ msgstr ""
 "**[R]** ``electricity_currently_delivered`` (*float*) - Huidig "
 "elektriciteitsverbruik in kW"
 
-#: ../../api.rst:309
+#: ../../api.rst:311
 msgid ""
 "**[R]** ``electricity_currently_returned`` (*float*) - Current electricity "
 "returned in kW"
@@ -271,7 +280,7 @@ msgstr ""
 "**[R]** ``electricity_currently_returned`` (*float*) - Huidige teruglevering "
 "elektriciteit in kW"
 
-#: ../../api.rst:310
+#: ../../api.rst:312
 msgid ""
 "**[R]** ``electricity_delivered_1`` (*float*) - Meter position stating "
 "electricity delivered (low tariff) in kWh"
@@ -279,7 +288,7 @@ msgstr ""
 "**[R]** ``electricity_delivered_1`` (*float*) - Meterstand van verbruikte "
 "elektriciteit (laagtarief) in kWh"
 
-#: ../../api.rst:311
+#: ../../api.rst:313
 msgid ""
 "**[R]** ``electricity_delivered_2`` (*float*) - Meter position stating "
 "electricity delivered (normal tariff) in kWh"
@@ -287,7 +296,7 @@ msgstr ""
 "**[R]** ``electricity_delivered_2`` (*float*) - Meterstand van verbruikte "
 "elektriciteit (piektarief) in kWh"
 
-#: ../../api.rst:312
+#: ../../api.rst:314
 msgid ""
 "**[R]** ``electricity_returned_1`` (*float*) - Meter position stating "
 "electricity returned (low tariff) in kWh"
@@ -295,7 +304,7 @@ msgstr ""
 "**[R]** ``electricity_returned_1`` (*float*) - Meterstand van teruggeleverde "
 "elektriciteit (laagtarief) in kWh"
 
-#: ../../api.rst:313
+#: ../../api.rst:315
 msgid ""
 "**[R]** ``electricity_returned_2`` (*float*) - Meter position stating "
 "electricity returned (normal tariff) in kWh"
@@ -303,7 +312,7 @@ msgstr ""
 "**[R]** ``electricity_returned_2`` (*float*) -Meterstand van teruggeleverde "
 "elektriciteit (piektarief) in kWh"
 
-#: ../../api.rst:314
+#: ../../api.rst:316
 msgid ""
 "``phase_currently_delivered_l1`` (*float*) - Current electricity used by phase "
 "L1 (in kW)"
@@ -311,7 +320,7 @@ msgstr ""
 "``phase_currently_delivered_l1`` (*float*) - Huidig elektriciteitsverbruik in "
 "fase L1 (in kW)"
 
-#: ../../api.rst:315
+#: ../../api.rst:317
 msgid ""
 "``phase_currently_delivered_l2`` (*float*) - Current electricity used by phase "
 "L2 (in kW)"
@@ -319,7 +328,7 @@ msgstr ""
 "``phase_currently_delivered_l2`` (*float*) - Huidig elektriciteitsverbruik in "
 "fase L2 (in kW)"
 
-#: ../../api.rst:316
+#: ../../api.rst:318
 msgid ""
 "``phase_currently_delivered_l3`` (*float*) - Current electricity used by phase "
 "L3 (in kW)"
@@ -327,7 +336,7 @@ msgstr ""
 "``phase_currently_delivered_l3`` (*float*) - Huidig elektriciteitsverbruik in "
 "fase L3 (in kW)"
 
-#: ../../api.rst:317
+#: ../../api.rst:319
 msgid ""
 "``extra_device_timestamp`` (*datetime*) - Last timestamp read from the extra "
 "device connected (gas meter)"
@@ -335,14 +344,14 @@ msgstr ""
 "``extra_device_timestamp`` (*datetime*) - Tijdstip van meting door de externe "
 "(gas)meter"
 
-#: ../../api.rst:318
+#: ../../api.rst:320
 msgid ""
 "``extra_device_delivered`` (*float*) - Last value read from the extra device "
 "connected (gas meter)"
 msgstr ""
 "``extra_device_delivered`` (*float*) - Meterstand van de externe (gas)meter"
 
-#: ../../api.rst:322
+#: ../../api.rst:324
 msgid ""
 "**datetime format** = ``YYYY-MM-DDThh:mm[:ss][+HH:MM|-HH:MM|Z]``, i.e.: "
 "``2017-01-01T12:00:00+01`` (CET), ``2017-04-15T12:00:00+02`` (CEST) or "
@@ -352,7 +361,7 @@ msgstr ""
 "bijvoorbeeld: ``2017-01-01T12:00:00+01`` (CET), ``2017-04-15T12:00:00+02`` "
 "(CEST) of ``2017-04-15T100:00:00Z`` (UTC)."
 
-#: ../../api.rst:326
+#: ../../api.rst:328
 msgid ""
 "``HTTP 201`` on success. Body contains the reading created in JSON format. Any "
 "other status code on failure."
@@ -360,27 +369,27 @@ msgstr ""
 "``HTTP 201`` wanneer succesvol. Elke andere status code bij falen. De respons "
 "bevat de aangemaakte meting in JSON-formaat."
 
-#: ../../api.rst:331
+#: ../../api.rst:333
 msgid "**Data** to insert::"
 msgstr "**Data** te verwerken::"
 
-#: ../../api.rst:342 ../../api.rst:431 ../../api.rst:487 ../../api.rst:541
+#: ../../api.rst:344 ../../api.rst:433 ../../api.rst:489 ../../api.rst:543
 msgid "Using **cURL** (commandline)::"
 msgstr "Met **cURL** (commandline)::"
 
-#: ../../api.rst:350 ../../api.rst:437 ../../api.rst:493 ../../api.rst:548
+#: ../../api.rst:352 ../../api.rst:439 ../../api.rst:495 ../../api.rst:550
 msgid "Using **requests** (Python)::"
 msgstr "Met ``requests`` (Python)::"
 
-#: ../../api.rst:375 ../../api.rst:453 ../../api.rst:509 ../../api.rst:564
+#: ../../api.rst:377 ../../api.rst:455 ../../api.rst:511 ../../api.rst:566
 msgid "**Result**::"
 msgstr "**Resultaat**::"
 
-#: ../../api.rst:398
+#: ../../api.rst:400
 msgid "``GET`` - ``datalogger/dsmrreading``"
 msgstr "``GET`` - ``datalogger/dsmrreading``"
 
-#: ../../api.rst:400
+#: ../../api.rst:402
 msgid ""
 "Retrieves any readings stored. The readings are either constructed from "
 "incoming telegrams or were created using this API."
@@ -388,11 +397,11 @@ msgstr ""
 "Haalt opgeslagen metingen op. De metingen komen ofwel voort uit telegrammen of "
 "zijn handmatig aangemaakt via deze API."
 
-#: ../../api.rst:410 ../../api.rst:612 ../../api.rst:672
+#: ../../api.rst:412 ../../api.rst:614 ../../api.rst:674
 msgid "All parameters are optional."
 msgstr "Alle parameters zijn optioneel."
 
-#: ../../api.rst:412
+#: ../../api.rst:414
 msgid ""
 "``timestamp__gte`` (*datetime*) - Limits the result to any readings having a "
 "timestamp **higher or equal** to this parameter."
@@ -400,7 +409,7 @@ msgstr ""
 "``timestamp__gte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **hoger of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:413
+#: ../../api.rst:415
 msgid ""
 "``timestamp__lte`` (*datetime*) - Limits the result to any readings having a "
 "timestamp **lower or equal** to this parameter."
@@ -408,7 +417,7 @@ msgstr ""
 "``timestamp__lte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **lager of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:414
+#: ../../api.rst:416
 msgid ""
 "``ordering`` (*string*) - Use ``-timestamp`` to sort **descending**. Omit or "
 "use ``timestamp`` to sort **ascending** (default)."
@@ -417,7 +426,7 @@ msgstr ""
 "Laat de parameter weg of gebruik ``timestamp`` om **oplopend** te sorteren "
 "(standaard)."
 
-#: ../../api.rst:415 ../../api.rst:617 ../../api.rst:677
+#: ../../api.rst:417 ../../api.rst:619 ../../api.rst:679
 msgid ""
 "``offset`` (*integer*) - When iterating large resultsets, the offset "
 "determines the starting point."
@@ -425,7 +434,7 @@ msgstr ""
 "``offset`` (*integer*) - Bij het doorlopen van vele resultaten kun je hiermee "
 "het startpunt bepalen."
 
-#: ../../api.rst:416 ../../api.rst:618 ../../api.rst:678
+#: ../../api.rst:418 ../../api.rst:620 ../../api.rst:680
 msgid ""
 "``limit`` (*integer*) - Limits the resultset size returned. Omit for "
 "maintaining the default limit (**25**)."
@@ -433,7 +442,7 @@ msgstr ""
 "``limit`` (*integer*) - Beperkt het aantal resultaten dat teruggegeven wordt. "
 "Laat deze parameter weg voor de standaardwaarde (**25**)."
 
-#: ../../api.rst:421 ../../api.rst:623 ../../api.rst:683
+#: ../../api.rst:423 ../../api.rst:625 ../../api.rst:685
 msgid ""
 "``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other "
 "status code on failure."
@@ -441,11 +450,11 @@ msgstr ""
 "``HTTP 200`` wanneer succesvol. Het antwoord bevat de resultaten in JSON-"
 "formaat. Geeft elke andere status code terug bij falen."
 
-#: ../../api.rst:427
+#: ../../api.rst:429
 msgid "Example 1 - Fetch all readings"
 msgstr "Voorbeeld 1 - Haal alle metingen op"
 
-#: ../../api.rst:428
+#: ../../api.rst:430
 msgid ""
 "This demonstrates how to fetch all readings stored, without using any of the "
 "parameters."
@@ -453,11 +462,11 @@ msgstr ""
 "Dit toont hoe je alle opgeslagen metingen kunt ophalen, zonder gebruik te "
 "maken van de parameters."
 
-#: ../../api.rst:483
+#: ../../api.rst:485
 msgid "Example 2 - Fetch latest reading"
 msgstr "Voorbeeld 2 - Haal de laatste meting op"
 
-#: ../../api.rst:484
+#: ../../api.rst:486
 msgid ""
 "This demonstrates how to fetch the latest reading stored. Therefor we request "
 "all readings, sort them descending by timestamp and limit the result to only "
@@ -467,11 +476,11 @@ msgstr ""
 "alle metingen op, sorteren deze aflopend op tijdstip en beperken het resultaat "
 "tot één."
 
-#: ../../api.rst:537
+#: ../../api.rst:539
 msgid "Example 3 - Fetch readings by month"
 msgstr "Voorbeeld 3 - Haal alle metingen van een specifieke maand op"
 
-#: ../../api.rst:538
+#: ../../api.rst:540
 msgid ""
 "This demonstrates how to fetch all readings within a month. We limit the "
 "search by specifying the month start and end."
@@ -479,7 +488,7 @@ msgstr ""
 "Dit toont hoe je alle metingen van één maand kan ophalen. Hiervoor beperken we "
 "de zoekopdracht tot het begin en einde van de betreffende maand."
 
-#: ../../api.rst:594
+#: ../../api.rst:596
 msgid ""
 "Please note that all timestamps **returned** are in **UTC (CET -1 / CEST "
 "-2)**. This is indicated as well by the timestamps ending with a 'Z' (Zulu "
@@ -489,11 +498,11 @@ msgstr ""
 "-2)**-formaat zijn. Dit is ook te zien aan elke instantie die eindigt met "
 "'Z' (Zulu tijdzone)."
 
-#: ../../api.rst:601
+#: ../../api.rst:603
 msgid "``GET`` - ``statistics/day``"
 msgstr "``GET`` - ``statistics/day``"
 
-#: ../../api.rst:602
+#: ../../api.rst:604
 msgid ""
 "Retrieves any **aggregated day statistics**. Please note that these are "
 "generated a few hours **after midnight**."
@@ -501,11 +510,11 @@ msgstr ""
 "Haalt **geaggregeerde dagstatistieken** op. Deze worden elke dag een paar uur "
 "**ná middernacht** gegenereerd."
 
-#: ../../api.rst:607
+#: ../../api.rst:609
 msgid "Full path: ``/api/v2/statistics/day``"
 msgstr "Volledig pad: ``/api/v2/statistics/day``"
 
-#: ../../api.rst:614
+#: ../../api.rst:616
 msgid ""
 "``day__gte`` (*date*) - Limits the result to any statistics having their date "
 "**higher or equal** to this parameter."
@@ -513,7 +522,7 @@ msgstr ""
 "``day__gte`` (*date*) - Beperkt het resultaat tot alle datums die **hoger of "
 "gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:615
+#: ../../api.rst:617
 msgid ""
 "``day__lte`` (*date*) - Limits the result to any statistics having their date "
 "**lower or equal** to this parameter."
@@ -521,7 +530,7 @@ msgstr ""
 "``day__lte`` (*date*) - Beperkt het resultaat tot alle datums die **lager of "
 "gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:616
+#: ../../api.rst:618
 msgid ""
 "``ordering`` (*string*) - Use ``-day`` to sort **descending**. Omit or use "
 "``day`` to sort **ascending** (default)."
@@ -529,7 +538,7 @@ msgstr ""
 "``ordering`` (*string*) - Gebruik ``-day`` om **aflopend** te sorteren. Laat "
 "de parameter weg of gebruik ``day`` om **oplopend** te sorteren (standaard)."
 
-#: ../../api.rst:628 ../../api.rst:688
+#: ../../api.rst:630 ../../api.rst:690
 msgid ""
 "All the :ref:`generic DSMRREADING examples <generic-examples-anchor>` apply "
 "here as well, since only the ``timestamp`` field differs."
@@ -537,15 +546,15 @@ msgstr ""
 "Alle :ref:`generieke DSMRREADING voorbeelden <generic-examples-anchor>` zijn "
 "hier tevens van toepassing, gezien alleen het ``timestamp`` field afwijkt."
 
-#: ../../api.rst:630 ../../api.rst:690
+#: ../../api.rst:632 ../../api.rst:692
 msgid "**Data structure returned**::"
 msgstr "**Datastructuur**::"
 
-#: ../../api.rst:661
+#: ../../api.rst:663
 msgid "``GET`` - ``statistics/hour``"
 msgstr "``GET`` - ``statistics/hour``"
 
-#: ../../api.rst:662
+#: ../../api.rst:664
 msgid ""
 "Retrieves any **aggregated hourly statistics**. Please note that these are "
 "generated a few hours **after midnight**."
@@ -553,11 +562,11 @@ msgstr ""
 "Haalt **geaggregeerde uurstatistieken** op. Deze worden elke dag een paar uur "
 "**ná middernacht** gegenereerd."
 
-#: ../../api.rst:667
+#: ../../api.rst:669
 msgid "Full path: ``/api/v2/statistics/hour``"
 msgstr "Volledig pad: ``/api/v2/statistics/hour``"
 
-#: ../../api.rst:674
+#: ../../api.rst:676
 msgid ""
 "``hour_start__gte`` (*datetime*) - Limits the result to any statistics having "
 "their datetime (hour start) **higher or equal** to this parameter."
@@ -565,7 +574,7 @@ msgstr ""
 "``hour_start__gte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **hoger of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:675
+#: ../../api.rst:677
 msgid ""
 "``hour_start__lte`` (*datetime*) - Limits the result to any statistics having "
 "their datetime (hour start) **lower or equal** to this parameter."
@@ -573,7 +582,7 @@ msgstr ""
 "``hour_start__lte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **lager of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:676
+#: ../../api.rst:678
 msgid ""
 "``ordering`` (*string*) - Use ``-hour_start`` to sort **descending**. Omit or "
 "use ``hour_start`` to sort **ascending** (default)."
@@ -581,4 +590,3 @@ msgstr ""
 "``ordering`` (*string*) - Gebruik ``-hour_start`` om **aflopend** te sorteren. "
 "Laat de parameter weg of gebruik ``hour_start`` om **oplopend** te sorteren "
 "(standaard)."
-
