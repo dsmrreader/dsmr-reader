@@ -553,7 +553,7 @@ Using **requests** (Python)::
     import json
 
     response = requests.get(
-        'http://YOUR-DSMR-URL/api/v2/statistics/day?read_at__gte=2017-02-01 00:00:00&read_at__lte=2017-03-01 00:00:00',
+        'http://YOUR-DSMR-URL/api/v2/statistics/day?timestamp__gte=2017-02-01 00:00:00&timestamp__lte=2017-03-01 00:00:00',
         headers={'X-AUTHKEY': 'YOUR-API-KEY'},
     )
 
