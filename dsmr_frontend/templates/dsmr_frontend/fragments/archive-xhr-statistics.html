@@ -56,7 +56,9 @@
             </tr>
             <tr>
                 <td style="font-weight: bold;">{% trans "Total" %}</td>
-                <td colspan="3">&nbsp;</td>
+                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
+                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                <td>&nbsp;</td>
                 <td><span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span></td>
             </tr>
             {% if statistics.temperature_avg %}
