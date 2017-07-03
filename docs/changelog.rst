@@ -18,12 +18,12 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.9.0 - 2017-xx-xx
+v1.8.1 - 2017-xx-xx
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
-- [`#xxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxx>`_] yyyyyyyyyyy
+- [`#339 <https://github.com/dennissiemensma/dsmr-reader/issues/339>`_] Upgrade Dropbox-client to v8.x 
 
 
 

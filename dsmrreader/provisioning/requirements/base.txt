@@ -6,10 +6,11 @@ django-debug-toolbar==1.8
 django-filter==1.0.4
 djangorestframework==3.6.3
 django-solo==1.1.2
-dropbox==7.3.1
+dropbox==8.0.0
 gunicorn==19.7.1
 paho-mqtt==1.2.3
 pyserial==3.3
 python-dateutil==2.6.0
 pytz==2017.2
 raven==6.1.0
+requests==2.18.1
