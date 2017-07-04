@@ -250,7 +250,7 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
 Supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf``::
 
     [program:dsmr_client_datalogger]
-    command=/usr/bin/nice -n 5 /home/dsmr/.virtualenvs/dsmrclient/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
+    command=/usr/bin/nice -n 5 /home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
     pidfile=/var/tmp/dsmrreader--%(program_name)s.pid
     user=dsmr
     group=dsmr
@@ -553,7 +553,7 @@ Using **requests** (Python)::
     import json
 
     response = requests.get(
-        'http://YOUR-DSMR-URL/api/v2/statistics/day?read_at__gte=2017-02-01 00:00:00&read_at__lte=2017-03-01 00:00:00',
+        'http://YOUR-DSMR-URL/api/v2/statistics/day?timestamp__gte=2017-02-01 00:00:00&timestamp__lte=2017-03-01 00:00:00',
         headers={'X-AUTHKEY': 'YOUR-API-KEY'},
     )
 
