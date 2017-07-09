@@ -135,7 +135,8 @@
                         {% endif %}
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
-                            <td colspan="2">&nbsp;</td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{{ month_statistics.total_cost|default:'-' }}</span></td>
                         </tr>
                     </table>                
