@@ -709,6 +709,9 @@ msgstr "Geleverd"
 msgid "Gas "
 msgstr "Gas"
 
+msgid "Meter statistics"
+msgstr "Meterstatistieken"
+
 msgid "Telegram readings"
 msgstr "Telegram-metingen"
 
@@ -718,8 +721,8 @@ msgstr "Totaal aantal metingen"
 msgid "The number of P1 DSMR telegrams read and stored in the application."
 msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
 
-msgid "Meter statistics"
-msgstr "Meterstatistieken"
+msgid "Show"
+msgstr "Toon"
 
 msgid "Usage statistics"
 msgstr "Verbruiksstatistieken"
