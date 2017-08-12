@@ -56,39 +56,6 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Telegram readings" %}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <td class="col-md-6">
-                                {% trans "Total reading count" %} <small>
-                                <br />
-                                {% blocktrans %}The number of P1 DSMR telegrams read and stored in the application.{% endblocktrans %}</small>
-                            </td>
-                            <td class="col-md-6">
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
-                                <span class="badge bg-black xhr-hidden">
-                                   <span id="total_reading_count"></span>
-                                </span>
-                            </td>
-                        </tr>
-                        {% if meter_statistics.rejected_telegrams %}
-                        <tr>
-                            <td>{% trans "Number of rejected telegrams due to invalid CRC checksum" %}</td>
-                            <td><span class="badge bg-black">{{ meter_statistics.rejected_telegrams|default:'-' }}</span></td>
-                        </tr>
-                        {% endif %}
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
                     {% trans "Meter statistics" %}
                 </header>
                 <div class="panel-body">
@@ -146,7 +113,41 @@
             </div>
         </div>
     </div>
-    
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Telegram readings" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="col-md-6">
+                                {% trans "Total reading count" %} <small>
+                                <br />
+                                {% blocktrans %}The number of P1 DSMR telegrams read and stored in the application.{% endblocktrans %}</small>
+                            </td>
+                            <td class="col-md-6 ">
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
+                                <span class="badge bg-black xhr-hidden">
+                                   <span id="total_reading_count"></span>
+                                </span>
+                            </td>
+                        </tr>
+                        {% if meter_statistics.rejected_telegrams %}
+                        <tr>
+                            <td>{% trans "Number of rejected telegrams due to invalid CRC checksum" %}</td>
+                            <td><span class="badge bg-black">{{ meter_statistics.rejected_telegrams|default:'-' }}</span></td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -162,7 +163,8 @@
                                 {% blocktrans %}Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home.{% endblocktrans %}</small>
                             </td>
                             <td class="col-md-6">
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
 	                            <span class="badge bg-red xhr-hidden">
 	                               <i class="fa fa-bolt"></i> &nbsp; <span id="slumber_consumption_watt"></span> &nbsp; {% trans "Watt" %}
 	                            </span>
@@ -171,7 +173,8 @@
                         <tr>
                             <td>{% trans "Lowest electricity consumption read" %}</td>
                             <td>
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
 	                            <span class="badge bg-red xhr-hidden">
 	                                <i class="fa fa-bolt"></i> &nbsp; <span id="min_consumption_watt"></span> &nbsp; {% trans "Watt" %}
 	                            </span>
@@ -180,7 +183,8 @@
                         <tr>
                             <td>{% trans "Highest electricity consumption read" %}</td>
                             <td>
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
 	                            <span class="badge bg-red xhr-hidden">
 	                               <i class="fa fa-bolt"></i> &nbsp; <span id="max_consumption_watt"></span> &nbsp; {% trans "Watt" %}
 	                            </span>
@@ -241,11 +245,17 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-    	fetch_xhr_data();
+    	$('.trigger-extra-statistics').click(function(){
+    	    $('.trigger-extra-statistics').hide();
+   		    fetch_xhr_data();
+   		    return false;
+    	})
     });
     
     function fetch_xhr_data()
     {
+        $(".xhr-loader").removeClass("hidden").show();
+
         $.ajax({
             dataType: "json",
             url: "{% url 'frontend:statistics-xhr-data' %}",
@@ -257,7 +267,7 @@
             $("#min_consumption_watt").html(response.min_consumption_watt);
             $("#max_consumption_watt").html(response.max_consumption_watt);
             
-            $(".xhr-hidden").show();
+	        $(".xhr-hidden").show();
         });
     }
 

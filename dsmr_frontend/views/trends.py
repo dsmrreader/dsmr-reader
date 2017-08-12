@@ -41,8 +41,7 @@ class Trends(TemplateView):
 
         context_data['electricity_by_tariff_month'] = dsmr_stats.services.\
             electricity_tariff_percentage(start_date=now.date() - relativedelta(months=1))
-        print(context_data['electricity_by_tariff_week'])
-        print(context_data['electricity_by_tariff_month'])
+
         graph_data = defaultdict(list)
 
         for current in average_consumption_by_hour:
