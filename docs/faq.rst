@@ -159,7 +159,7 @@ Recalculate prices retroactively
 
 Statistics for each day are generated once, the day after. However, you can flush your statistics by executing:
 
-``./manage.py dsmr_stats_clear_statistics --ack-to-delete-my-data``
+``./manage.py dsmr_backend_delete_aggregated_data --ack-to-delete-my-data``
 
 The application will delete all statistics and (slowly) regenerate them in the background. Just make sure the source data is still there.
 
