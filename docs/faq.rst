@@ -18,6 +18,7 @@ Every once in a while there may be updates. Since ``v1.5`` you can also easily c
 You can update your application to the latest version by executing **deploy.sh**, located in the root of the project. 
 Make sure to execute it while logged in as the ``dsmr`` user::
 
+   sudo su - dsmr
    ./deploy.sh
 
 It will make sure to check, fetch and apply any changes released. Summary of deployment script steps:
