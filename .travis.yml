@@ -1,5 +1,8 @@
 language: python
 
+# https://github.com/travis-ci/travis-ci/issues/8331
+dist: precise
+
 # https://docs.travis-ci.com/user/languages/python/
 python:
   - 3.4
