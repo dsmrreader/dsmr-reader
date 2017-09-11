@@ -8,6 +8,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %} | DSMR Reader</title>
+        <meta name="mobile-web-app-capable" content="yes">
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         {% block stylesheets %}
         <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
@@ -18,6 +19,7 @@
         <link href="{% static 'dsmr_frontend/css/dsmrreader.css' %}?r=2" rel="stylesheet" type="text/css" />
         {% endblock %}
 
+        <link rel="shortcut icon" sizes="192x192" href="{% static 'dsmr_frontend/img/favicons/android-chrome-192x192.png' %}">
         <link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon.png' %}">
 		<link rel="apple-touch-icon" sizes="180x180" href="{% static 'dsmr_frontend/img/favicons/apple-touch-icon.png' %}">
 		<link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-32x32.png' %}" sizes="32x32">
