@@ -1,1 +1,1 @@
-mysqlclient==1.3.10
+mysqlclient==1.3.12
