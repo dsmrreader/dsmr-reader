@@ -61,7 +61,13 @@ class DashboardXhrHeader(View):
             # Don't even bother when no data available.
             return HttpResponse(json.dumps(data), content_type='application/json')
 
-        data['timestamp'] = naturaltime(latest_reading.timestamp)
+        latest_timestamp = latest_reading.timestamp
+
+        # In case the smart meter is running a clock in the future.
+        if latest_timestamp > timezone.now():
+            latest_timestamp = timezone.now()
+
+        data['timestamp'] = naturaltime(latest_timestamp)
         data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
         data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
 
