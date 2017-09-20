@@ -1,4 +1,5 @@
 from unittest import mock
+from decimal import Decimal
 
 from django.db import connection
 from django.test import TestCase
@@ -12,7 +13,6 @@ import dsmr_stats.services
 
 
 class TestServices(InterceptStdoutMixin, TestCase):
-    """ Test 'dsmr_backend' management command. """
     fixtures = ['dsmr_stats/electricity-consumption.json', 'dsmr_stats/gas-consumption.json']
 
     def _get_statistics_dict(self, target_date):
@@ -88,6 +88,32 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
 
+    def test_create_hourly_gas_statistics_dsmr4(self):
+        if not dsmr_backend.services.get_capabilities(capability='gas'):
+            return self.skipTest('No gas')
+
+        day_start = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0))
+        GasConsumption.objects.filter(pk__in=(32, 33)).delete()  # Pretend we only have 1 gas reading per hour.
+
+        self.assertFalse(HourStatistics.objects.exists())
+        dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
+        self.assertEqual(HourStatistics.objects.count(), 1)
+
+        stats = HourStatistics.objects.get()
+        self.assertEqual(stats.gas, Decimal('0.509'))
+
+    def test_create_hourly_gas_statistics_dsmr5(self):
+        if not dsmr_backend.services.get_capabilities(capability='gas'):
+            return self.skipTest('No gas')
+
+        day_start = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0))
+        self.assertFalse(HourStatistics.objects.exists())
+        dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
+        self.assertEqual(HourStatistics.objects.count(), 1)
+
+        stats = HourStatistics.objects.get()
+        self.assertEqual(stats.gas, Decimal('0.125'))
+
     def test_create_hourly_statistics_integrity(self):
         day_start = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=0))
         ec_kwargs = {
@@ -104,7 +130,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
         self.assertEqual(HourStatistics.objects.count(), 1)
 
-        # Should NOT raised any exception.
+        # Should NOT raise any exception.
         dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
 
     def test_analyze_service_without_data(self):
