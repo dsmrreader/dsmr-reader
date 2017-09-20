@@ -38,7 +38,8 @@ Listed in any order, sorted by name.
 - `trbs <https://github.com/trbs>`_
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
-   
+- `xirixiz <https://github.com/xirixiz>`_
+
  
 Software used
 -------------
