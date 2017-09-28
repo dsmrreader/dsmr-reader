@@ -2,10 +2,10 @@
 {
     "fields": {
         "start": "2015-01-01",
-        "electricity_1_price": "0.20123",
+        "electricity_delivered_1_price": "0.20123",
         "gas_price": "0.58685",
         "end": "2016-01-25",
-        "electricity_2_price": "0.40123",
+        "electricity_delivered_2_price": "0.40123",
         "description": "Nederlandse Energie Maatschappij"
     },
     "model": "dsmr_consumption.energysupplierprice",

@@ -26,7 +26,7 @@ class EnergySupplierPrice(models.Model):
         max_length=255, null=True, blank=True, verbose_name=_('Description'),
         help_text=_('For your own reference, i.e. the name of your supplier')
     )
-    electricity_1_price = models.DecimalField(
+    electricity_delivered_1_price = models.DecimalField(
         max_digits=11,
         decimal_places=5,
         default=0,
@@ -36,7 +36,7 @@ class EnergySupplierPrice(models.Model):
             'in the frontend configuration'
         )
     )
-    electricity_2_price = models.DecimalField(
+    electricity_delivered_2_price = models.DecimalField(
         max_digits=11,
         decimal_places=5,
         default=0,
@@ -46,7 +46,27 @@ class EnergySupplierPrice(models.Model):
             'in the frontend configuration'
         )
     )
-    gas_price = models.DecimalField(max_digits=11, decimal_places=5, default=0, verbose_name=_('Gas price'))
+    gas_price = models.DecimalField(
+        max_digits=11,
+        decimal_places=5,
+        default=0,
+        verbose_name=_('Gas price'),
+        help_text=_('Set to zero when unused')
+    )
+    electricity_returned_1_price = models.DecimalField(
+        max_digits=11,
+        decimal_places=5,
+        default=0,
+        verbose_name=_('Electricity returned 1 price (low tariff)'),
+        help_text=_('Set to zero when unused')
+    )
+    electricity_returned_2_price = models.DecimalField(
+        max_digits=11,
+        decimal_places=5,
+        default=0,
+        verbose_name=_('Electricity returned 2 price (high tariff)'),
+        help_text=_('Set to zero when unused')
+    )
 
     def __str__(self):
         return self.description or ugettext('Energy Supplier')

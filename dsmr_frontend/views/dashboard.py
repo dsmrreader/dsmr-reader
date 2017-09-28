@@ -83,8 +83,8 @@ class DashboardXhrHeader(View):
         cost_per_hour = None
 
         tariff_map = {
-            1: prices.electricity_1_price,
-            2: prices.electricity_2_price,
+            1: prices.electricity_delivered_1_price,
+            2: prices.electricity_delivered_2_price,
         }
 
         try:

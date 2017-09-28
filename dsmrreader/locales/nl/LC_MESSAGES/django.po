@@ -43,6 +43,9 @@ msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functie
 msgid "Resets the environment for development purposes. Not intended for production."
 msgstr "Reset de omgeving voor ontwikkelingsdoeleinden. Niet bedoeld voor gebruik in productie."
 
+msgid "Whether the API should be disabled."
+msgstr "Geeft aan of de API uitgeschakeld is."
+
 msgid "Intended usage is NOT production! Only allowed when DEBUG = True"
 msgstr "Bedoeld voor gebruik buiten productie. Alleen mogelijk wanneer instelling DEBUG = True"
 
@@ -51,12 +54,6 @@ msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor
 
 msgid "Deletes all aggregated data generated. Such as consumption and (day/hour) statistics. This command does NOT affect any readings stored. In fact, you should NEVER run this, unless you still have each and EVERY reading stored, as the application will attempt to recalculate all aggregated data deleted retroactively, using each reading stored."
 msgstr "Verwijdert alle geaggregeerde gegevens, zoals verbruik en dag/uur-statistieken. Dit heeft GEEN invloed op alle opgeslagen metingen. Let op: draai dit NOOIT tenzij je absoluut zeker weet dat je ELKE meting nog opgeslagen hebt. De applicatie gaat namelijk proberen om alle geaggregeerde gegevens opnieuw uit te rekenen, aan de hand van de opgeslagen metingen."
-
-msgid "Required to acknowledge you that you WILL delete your statistics with this."
-msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gegenereerde) data verwijdert."
-
-msgid "Intended usage is NOT production! Force by using --ack-to-delete-my-data"
-msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-my-data"
 
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer."
@@ -181,6 +178,15 @@ msgstr "Prijs elektriciteit 2 (piektarief)"
 msgid "Gas price"
 msgstr "Gasprijs"
 
+msgid "Set to zero when unused"
+msgstr "Stel in op nul wanneer ongebruikt"
+
+msgid "Electricity returned 1 price (low tariff)"
+msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
+
+msgid "Electricity returned 2 price (high tariff)"
+msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
+
 msgid "Energy Supplier"
 msgstr "Energieleverancier"
 
@@ -222,6 +228,9 @@ msgstr "Neem gasverbruik mee"
 
 msgid "Include electricity returned (solar panels)"
 msgstr "neem teruglevering elektriciteit mee (zonnepanelen)"
+
+msgid "The offset in hours, can both be positive as negative (to go back in time)."
+msgstr "De afwijking in uren, kan zowel positief als negatief zijn (om terug in de tijd te gaan)."
 
 msgid "Intended usage is NOT production! Force by using --ack-to-mess-up-my-data"
 msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-my-data"
@@ -1359,3 +1368,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Required to acknowledge you that you WILL delete your statistics with this."
+#~ msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gegenereerde) data verwijdert."
+
+#~ msgid "Intended usage is NOT production! Force by using --ack-to-delete-my-data"
+#~ msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-my-data"

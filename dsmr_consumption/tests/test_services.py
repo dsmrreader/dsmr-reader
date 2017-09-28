@@ -13,7 +13,7 @@ import dsmr_consumption.services
 
 
 class TestServices(InterceptStdoutMixin, TestCase):
-    fixtures = ['dsmr_consumption/test_dsmrreading.json']
+    fixtures = ['dsmr_consumption/test_dsmrreading.json', 'dsmr_consumption/test_energysupplierprice.json']
     support_gas_readings = None
 
     def setUp(self):
@@ -138,9 +138,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
         ElectricityConsumption.objects.create(
             read_at=now,  # Now.
             delivered_1=1,
-            returned_1=1,
+            returned_1=1.5,
             delivered_2=2,
-            returned_2=2,
+            returned_2=2.5,
             currently_delivered=10,
             currently_returned=20,
         )
@@ -166,9 +166,14 @@ class TestServices(InterceptStdoutMixin, TestCase):
         data = dsmr_consumption.services.day_consumption(day=now)
         self.assertIsInstance(data, dict)
         self.assertEqual(data['electricity1'], 1)
-        self.assertEqual(data['electricity1_returned'], 2)
+        self.assertEqual(data['electricity1_returned'], Decimal('1.5'))
         self.assertEqual(data['electricity2'], 3)
-        self.assertEqual(data['electricity2_returned'], 4)
+        self.assertEqual(data['electricity2_returned'], Decimal('3.5'))
+        self.assertEqual(data['electricity_merged'], 4)
+        self.assertEqual(data['electricity_returned_merged'], 5)
+        self.assertEqual(data['electricity1_cost'], Decimal('0.25'))
+        self.assertEqual(data['electricity2_cost'], Decimal('0.75'))
+        self.assertEqual(data['total_cost'], 1)
 
         GasConsumption.objects.create(
             read_at=now,  # Now.
@@ -298,7 +303,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
 class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
     """ Biggest difference is the interval of gas readings. """
-    fixtures = ['dsmr_consumption/test_dsmrreading_v5.json']
+    fixtures = ['dsmr_consumption/test_dsmrreading_v5.json', 'dsmr_consumption/test_energysupplierprice.json']
 
     def setUp(self):
         self.assertEqual(DsmrReading.objects.all().count(), 6)
@@ -333,7 +338,7 @@ class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
 
 
 class TestServicesWithoutGas(TestServices):
-    fixtures = ['dsmr_consumption/test_dsmrreading_without_gas.json']
+    fixtures = ['dsmr_consumption/test_dsmrreading_without_gas.json', 'dsmr_consumption/test_energysupplierprice.json']
 
     def setUp(self):
         super(TestServicesWithoutGas, self).setUp()
