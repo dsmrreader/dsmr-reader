@@ -221,9 +221,8 @@ def day_consumption(day):
         consumption['gas'] = last_reading.delivered - first_reading.delivered
         consumption['gas_start'] = first_reading.delivered
         consumption['gas_end'] = last_reading.delivered
-        consumption['gas_unit_price'] = daily_energy_price.gas_price
         consumption['gas_cost'] = round_decimal(
-            consumption['gas'] * consumption['gas_unit_price']
+            consumption['gas'] * daily_energy_price.gas_price
         )
         consumption['total_cost'] += consumption['gas_cost']
 
@@ -242,6 +241,7 @@ def day_consumption(day):
     consumption['average_temperature'] = temperature_readings.aggregate(
         avg_temperature=Avg('degrees_celcius'),
     )['avg_temperature'] or 0
+    consumption['average_temperature'] = round_decimal(consumption['average_temperature'])
 
     return consumption
 

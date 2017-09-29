@@ -1,4 +1,33 @@
+from unittest import mock
+
+from django.utils import timezone
+
 from dsmr_api.tests.v2 import APIv2TestCase
+
+
+class TestToday(APIv2TestCase):
+    fixtures = ['dsmr_api/test_electricity_consumption.json', 'dsmr_api/test_electricity_consumption.json']
+
+    @mock.patch('django.utils.timezone.now')
+    def test_get(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
+
+        # No data.
+        result = self._request('today-consumption')
+        self.assertEqual(result, 'No electricity readings found for: 2017-01-01')
+
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=12))
+        result = self._request('today-consumption')
+
+        self.assertEqual(result['day'], '2015-12-12')
+
+        FIELDS = (
+            'day', 'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned',
+            'electricity1_cost', 'electricity2_cost', 'total_cost'
+        )
+
+        for x in FIELDS:
+            self.assertIn(x, result.keys())
 
 
 class TestElectricity(APIv2TestCase):
