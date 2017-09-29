@@ -599,6 +599,56 @@ Using **requests** (Python)::
 ----
     
 
+``GET`` - ``consumption/today``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the consumption of the current day so far.
+
+
+URI
+~~~
+Full path: ``/api/v2/consumption/today``
+
+
+Parameters
+~~~~~~~~~~
+None.
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Data structure returned**::
+
+    {
+        "day": "2017-09-28",
+        "electricity1": 0.716,
+        "electricity1_cost": 0.12,
+        "electricity1_returned": 0,
+        "electricity2": 3.403,
+        "electricity2_cost": 0.63,
+        "electricity2_returned": 0,
+        "gas": 0.253,
+        "gas_cost": 0.15,
+        "total_cost": 0.9,
+    }
+
+
+----
+    
+    
+``GET`` - ``statistics/hour``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Retrieves any **aggregated hourly statistics**. Please note that these are generated a few hours **after midnight**.
+
+    
+----
+    
+
 ``GET`` - ``statistics/day``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Retrieves any **aggregated day statistics**. Please note that these are generated a few hours **after midnight**.
