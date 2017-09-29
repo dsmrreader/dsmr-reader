@@ -35,6 +35,7 @@ Listed in any order, sorted by name.
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `Sevickson <https://github.com/sevickson>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
+- `thommy101 <https://github.com/thommy101>`_
 - `TopdRob <https://github.com/TopdRob>`_
 - `trbs <https://github.com/trbs>`_
 - `voipmeister <https://github.com/voipmeister>`_

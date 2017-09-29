@@ -32,6 +32,7 @@ v1.9.0 - 2017-10-29
 - [`#273 <https://github.com/dennissiemensma/dsmr-reader/issues/273>`_] Docker (by xirixiz) reference in docs
 - [`#286 <https://github.com/dennissiemensma/dsmr-reader/issues/286>`_] Na gebruik admin-pagina's geen (eenvoudige) mogelijkheid voor terugkeren naar de site
 - [`#332 <https://github.com/dennissiemensma/dsmr-reader/issues/332>`_] Launch full screen on iOS device when opening from homescreen
+- [`#276 <https://github.com/dennissiemensma/dsmr-reader/issues/276>`_] Display error compare page on mobile
 - [`#288 <https://github.com/dennissiemensma/dsmr-reader/issues/288>`_] Add info to FAQ
 - [`#320 <https://github.com/dennissiemensma/dsmr-reader/issues/320>`_] auto refresh op statussen op statuspagina
 - [`#314 <https://github.com/dennissiemensma/dsmr-reader/issues/314>`_] Add web-applicatie mogelijkheid ala pihole
@@ -39,7 +40,7 @@ v1.9.0 - 2017-10-29
 - [`#270 <https://github.com/dennissiemensma/dsmr-reader/issues/270>`_] Public Webinterface Warning (readthedocs.io)
 - [`#231 <https://github.com/dennissiemensma/dsmr-reader/issues/231>`_] Contributors update
 - [`#300 <https://github.com/dennissiemensma/dsmr-reader/issues/300>`_] Upgrade to Django 1.11 LTS
-
+ 
 
 
 v1.8.2 - 2017-08-12
