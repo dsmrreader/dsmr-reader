@@ -8,8 +8,11 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %} | DSMR Reader</title>
+
         <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
         {% block stylesheets %}
         <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />

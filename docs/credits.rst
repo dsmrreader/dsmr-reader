@@ -11,11 +11,12 @@ Special thanks for supplying code contributions
 Also many thanks to the contributions (reporting) of
 ----------------------------------------------------
 Listed in any order, sorted by name.
-
+ 
 - `balk77 <https://github.com/balk77>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - `dajappie <https://github.com/dajappie>`_
 - `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
+- `emilkwaaitaal <https://github.com/emilkwaaitaal>`_
 - `fpompert <https://github.com/fpompert>`_
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `goegol <https://github.com/goegol>`_
