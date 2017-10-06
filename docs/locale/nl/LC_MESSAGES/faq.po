@@ -189,8 +189,8 @@ msgid "PVOutput.org: Automated electricity consumption export"
 msgstr "PVOutput.org: Automatisch exporteren van verbruik"
 
 #: ../../faq.rst:83
-msgid "*How can I link my PVOputput.org account?*"
-msgstr "*Hoe kan ik mijn PVOputput.org-account koppelen?*"
+msgid "*How can I link my PVOutput.org account?*"
+msgstr "*Hoe kan ik mijn PVOutput.org-account koppelen?*"
 
 #: ../../faq.rst:85
 msgid ""

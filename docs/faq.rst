@@ -80,7 +80,7 @@ Obviously the export only works when there are any gas readings at all and you h
 
 PVOutput.org: Automated electricity consumption export
 ------------------------------------------------------
-*How can I link my PVOputput.org account?*
+*How can I link my PVOutput.org account?*
 
 Make sure you have a PVOutput.org account, or `signup for an account <https://pvoutput.org/>`_.
 You will have to configure your account and PV system(s). For any support doing that, please `see this page <https://pvoutput.org/help.html#overview-getting-started>`_ for more information.
