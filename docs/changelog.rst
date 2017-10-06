@@ -18,7 +18,6 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-<<<<<<< HEAD
 v1.9.0 - 2017-10-29
 ^^^^^^^^^^^^^^^^^^^
 
@@ -51,8 +50,6 @@ v1.9.0 - 2017-10-29
  
 
 
-=======
->>>>>>> refs/heads/master
 v1.8.2 - 2017-08-12
 ^^^^^^^^^^^^^^^^^^^
 
