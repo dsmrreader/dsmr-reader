@@ -1150,6 +1150,60 @@ msgstr "Gas verbruikt: {} m3\n"
 msgid "Total cost: € {}"
 msgstr "Totale kosten: € {}"
 
+msgid "Implements the following API call: https://pvoutput.org/help.html#api-addstatus"
+msgstr "Implementeert de volgende API call: https://pvoutput.org/help.html#api-addstatus"
+
+msgid "PVOutput"
+msgstr "PVOutput"
+
+msgid "API key"
+msgstr "API key"
+
+msgid "The API key for your PVOutput account. Listed in PVOutput at Settings -> \"API Settings\"."
+msgstr "De API-key voor je PVOutput-account. Terug te vinden in PVOutput onder Instellingen -> \"API Settings\"."
+
+msgid "System ID (digit)"
+msgstr "System ID (cijfer)"
+
+msgid "The \"System ID\" for your device. Listed in PVOutput at Settings -> \"Registered Systems\"."
+msgstr "Het \"Systeem ID\" voor je apparaat. Terug te vinden in PVOutput onder Instellingen -> \"Registered Systems\"."
+
+msgid "PVOutput: API configuration"
+msgstr "PVOutput: API-configuratie"
+
+msgid "5 minutes"
+msgstr "5 minuten"
+
+msgid "10 minutes"
+msgstr "10 minuten"
+
+msgid "15 minutes"
+msgstr "15 minuten"
+
+msgid "Whether the system uploads consumption using the Add Status Service API call."
+msgstr "Geeft aan of het systeem status-updates doorgeeft via de \"Add Status Service\" API call."
+
+msgid "Upload interval"
+msgstr "Upload interval"
+
+msgid "The interval between each upload (in minutes). Please make sure this matches the device settings."
+msgstr "De interval tussen elke upload (in minuten). Zorg ervoor dat dit overeenkomt met de apparaatinstellingen in PVOutput."
+
+msgid "Upload delay (minutes)"
+msgstr "Uploadvertraging (in minuten)"
+
+msgid "An artificial delay in uploading data to PVOutput. E.g.: When you set this to \"5\" and the application uploads the data at 10:45, then only data between 0:00 and 10:40 will be taken into account for upload at that moment. It effectively limits its upload data search by \"X minutes ago\"."
+msgstr "Een kunstmatige vertraging in het uploaden van gegevens naar PVOutput. Voorbeeld: Wanneer je dit instelt op \"5\" en de applicatie probeert om 10:45 gegevens te uploaden, dan worden alleen gegevens tussen 0:00 en 10:40 gebruikt. Effectief beperkt deze instelling dus de zoekradius met \"X minuten geleden\"."
+
+msgid "PVOutput: Processing delay (minutes)"
+msgstr "PVOutput: Verwerkingsvertraging (in minuten)"
+
+msgid "[!]: This feature is ONLY available when you have a DONATOR account for PVOutput.org! Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)"
+msgstr "[!] Deze feature is alleen beschikbaar wanneer je een DONATIE-account bij PVOutput.org hebt! Deze parameter staat het vertraagd verwerken van gegevens toe. Je kunt de vertraging instellen op een aantal minuten. Toegestaan: leeg veld of 0 tot 120 (minuten)"
+
+msgid "PVOutput: Add Status configuration"
+msgstr "PVOutput: \"Add Status\" configuratie"
+
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
@@ -1368,6 +1422,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "PVOutput: Delay"
+#~ msgstr "PVOutput: Vertraging"
 
 #~ msgid "Required to acknowledge you that you WILL delete your statistics with this."
 #~ msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gegenereerde) data verwijdert."

@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'dsmr_mindergas.apps.AppConfig',
     'dsmr_notification.apps.AppConfig',
     'dsmr_mqtt.apps.AppConfig',
+    'dsmr_pvoutput.apps.AppConfig',
 )
 
 MIDDLEWARE_CLASSES = (
