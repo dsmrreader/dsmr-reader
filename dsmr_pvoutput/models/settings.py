@@ -56,7 +56,7 @@ class PVOutputAddStatusSettings(SingletonModel):
     )
     upload_delay = models.IntegerField(
         default=0,
-        validators=[MinValueValidator(0), MaxValueValidator(15)],
+        validators=[MinValueValidator(0), MaxValueValidator(30)],
         verbose_name=_('Upload delay (minutes)'),
         help_text=_(
             'An artificial delay in uploading data to PVOutput. E.g.: When you set this to "5" and the application '
