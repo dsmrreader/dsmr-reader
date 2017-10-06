@@ -23,6 +23,7 @@ v1.9.0 - 2017-10-29
 
 **Tickets resolved in this release:**
 
+- [`#9 <https://github.com/dennissiemensma/dsmr-reader/issues/9>`_] Data export: PVOutput
 - [`#163 <https://github.com/dennissiemensma/dsmr-reader/issues/163>`_] Allow separate prices/costs for electricity returned
 - [`#337 <https://github.com/dennissiemensma/dsmr-reader/issues/337>`_] API mogelijkheid voor ophalen 'dashboard' waarden
 - [`#284 <https://github.com/dennissiemensma/dsmr-reader/issues/284>`_] Automatische backups geven alleen lege bestanden
