@@ -21,6 +21,12 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 v1.9.0 - 2017-10-29
 ^^^^^^^^^^^^^^^^^^^
 
+.. note::
+
+    This release contains an update for the API framework, which `has a fix for some timezone issues <https://github.com/encode/django-rest-framework/issues/3732>`_.
+    You may experience different output regarding to datetime formatting when using the API.
+
+
 **Tickets resolved in this release:**
 
 - [`#9 <https://github.com/dennissiemensma/dsmr-reader/issues/9>`_] Data export: PVOutput
