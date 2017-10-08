@@ -18,7 +18,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.9.0 - 2017-10-29
+v1.9.0 - 2017-10-08
 ^^^^^^^^^^^^^^^^^^^
 
 .. note::
