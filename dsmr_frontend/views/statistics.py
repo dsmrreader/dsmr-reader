@@ -40,13 +40,12 @@ class Statistics(TemplateView):
 class StatisticsXhrData(View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
-        min_max_consumption_watt = dsmr_consumption.services.calculate_min_max_consumption_watt()
-
         data = {
             'total_reading_count': intcomma(DsmrReading.objects.all().count()),
             'slumber_consumption_watt': dsmr_consumption.services.calculate_slumber_consumption_watt(),
-            'min_consumption_watt': min_max_consumption_watt['min_watt'],
-            'max_consumption_watt': min_max_consumption_watt['max_watt'],
         }
+
+        min_max_consumption_watt = dsmr_consumption.services.calculate_min_max_consumption_watt()
+        data.update(min_max_consumption_watt)
 
         return HttpResponse(json.dumps(data), content_type='application/json')

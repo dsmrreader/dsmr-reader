@@ -2,8 +2,8 @@ from datetime import time
 from decimal import Decimal, ROUND_UP
 import pytz
 
-from django.utils import timezone
 from django.db.models import Avg, Min, Max, Count
+from django.utils import timezone, formats
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -279,19 +279,37 @@ def calculate_slumber_consumption_watt():
 
 
 def calculate_min_max_consumption_watt():
-    """ Returns the lowest and highest Wattage consumed. """
-    min_max = ElectricityConsumption.objects.filter(
-        currently_delivered__gt=0
-    ).aggregate(
-        min_watt=Min('currently_delivered'),
-        max_watt=Max('currently_delivered')
-    )
+    """ Returns the lowest and highest Wattage consumed for each phase. """
+    FIELDS = {
+        'total_min': ('currently_delivered', ''),
+        'total_max': ('currently_delivered', '-'),
+        'l1_max': ('phase_currently_delivered_l1', '-'),
+        'l2_max': ('phase_currently_delivered_l2', '-'),
+        'l3_max': ('phase_currently_delivered_l3', '-'),
+    }
+    data = {}
 
-    for x in min_max.keys():
-        if min_max[x]:
-            min_max[x] = int(min_max[x] * 1000)
+    for name, args in FIELDS.items():
+        field, sorting = args
 
-    return min_max
+        try:
+            read_at, value = ElectricityConsumption.objects.filter(**{
+                '{}__gt'.format(field): 0,  # Skip (obvious) zero values.
+                '{}__isnull'.format(field): False,  # And skip empty data.
+            }).order_by(
+                '{}{}'.format(sorting, field)
+            ).values_list('read_at', field)[0]
+        except IndexError:
+            continue
+
+        data.update({
+            name: (
+                formats.date_format(timezone.localtime(read_at), 'DSMR_GRAPH_LONG_DATE_FORMAT'),
+                int(value * 1000)
+            )
+        })
+
+    return data
 
 
 def clear_consumption():

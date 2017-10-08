@@ -171,25 +171,57 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>{% trans "Lowest electricity consumption read" %}</td>
-                            <td>
+                            <td class="col-md-6">{% trans "Lowest wattage" %}</td>
+                            <td class="col-md-6">
                                 <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
                                 <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
 	                            <span class="badge bg-red xhr-hidden">
-	                                <i class="fa fa-bolt"></i> &nbsp; <span id="min_consumption_watt"></span> &nbsp; {% trans "Watt" %}
+	                                <i class="fa fa-bolt"></i> &nbsp; <span id="total_min_consumption_watt"></span> &nbsp; {% trans "Watt" %} &nbsp; - &nbsp; <span id="total_min_consumption_timestamp"></span>
 	                            </span>
                             </td>
                         </tr>
                         <tr>
-                            <td>{% trans "Highest electricity consumption read" %}</td>
-                            <td>
+                            <td class="col-md-6">{% trans "Highest wattage" %}</td>
+                            <td class="col-md-6">
                                 <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
                                 <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
 	                            <span class="badge bg-red xhr-hidden">
-	                               <i class="fa fa-bolt"></i> &nbsp; <span id="max_consumption_watt"></span> &nbsp; {% trans "Watt" %}
+	                               <i class="fa fa-bolt"></i> &nbsp; <span id="total_max_consumption_watt"></span> &nbsp; {% trans "Watt" %} &nbsp; - &nbsp; <span id="total_max_consumption_timestamp"></span>
 	                            </span>
                             </td>
                         </tr>
+                        {% if datalogger_settings.track_phases and capabilities.multi_phases %}
+                        <tr id="l1_max_consumption" class="hidden">
+                            <td class="col-md-6">{% trans "Highest wattage (L1)" %}</td>
+                            <td class="col-md-6">
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
+                                <span class="badge bg-red xhr-hidden">
+                                   <i class="fa fa-bolt"></i> &nbsp; <span id="l1_max_consumption_watt"></span> &nbsp; {% trans "Watt" %} &nbsp; - &nbsp; <span id="l1_max_consumption_timestamp"></span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr id="l2_max_consumption" class="hidden">
+                            <td class="col-md-6">{% trans "Highest wattage (L2)" %}</td>
+                            <td class="col-md-6">
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
+                                <span class="badge bg-red xhr-hidden">
+                                   <i class="fa fa-bolt"></i> &nbsp; <span id="l2_max_consumption_watt"></span> &nbsp; {% trans "Watt" %} &nbsp; - &nbsp; <span id="l2_max_consumption_timestamp"></span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr id="l3_max_consumption" class="hidden">
+                            <td class="col-md-6">{% trans "Highest wattage (L3)" %}</td>
+                            <td class="col-md-6">
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fa fa-spinner fa-pulse fa-fw hidden"></i>
+                                <span class="badge bg-red">
+                                   <i class="fa fa-bolt"></i> &nbsp; <span id="l3_max_consumption_watt"></span> &nbsp; {% trans "Watt" %} &nbsp; - &nbsp; <span id="l3_max_consumption_timestamp"></span>
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
                     </table>
                 </div>
             </div>
@@ -264,9 +296,35 @@
             
             $("#total_reading_count").html(response.total_reading_count);
             $("#slumber_consumption_watt").html(response.slumber_consumption_watt);
-            $("#min_consumption_watt").html(response.min_consumption_watt);
-            $("#max_consumption_watt").html(response.max_consumption_watt);
             
+            if (response.total_min) {
+                $("#total_min_consumption_timestamp").html(response.total_min[0]);
+                $("#total_min_consumption_watt").html(response.total_min[1]);
+            }
+            
+            if (response.total_max) {
+                $("#total_max_consumption_timestamp").html(response.total_max[0]);
+                $("#total_max_consumption_watt").html(response.total_max[1]);
+            }
+            
+            if (response.l1_max) {
+                $("#l1_max_consumption_timestamp").html(response.l1_max[0]);
+                $("#l1_max_consumption_watt").html(response.l1_max[1]);
+                $("#l1_max_consumption").removeClass("hidden").show();
+            }
+            
+            if (response.l2_max) {
+                $("#l2_max_consumption_timestamp").html(response.l2_max[0]);
+                $("#l2_max_consumption_watt").html(response.l2_max[1]);
+                $("#l2_max_consumption").removeClass("hidden").show();
+            }
+            
+            if (response.l3_max) {
+                $("#l3_max_consumption_timestamp").html(response.l3_max[0]);
+                $("#l3_max_consumption_watt").html(response.l3_max[1]);
+                $("#l3_max_consumption").removeClass("hidden").show();
+            }
+           
 	        $(".xhr-hidden").show();
         });
     }

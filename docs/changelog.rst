@@ -30,7 +30,7 @@ v1.10 - 2017-xx-xx
 **Tickets resolved in this release:**
 
 - [`#305 <https://github.com/dennissiemensma/dsmr-reader/issues/305>`_] Trend staafdiagrammen afgelopen week / afgelopen maand altijd gelijk
-
+- [`#194 <https://github.com/dennissiemensma/dsmr-reader/issues/194>`_] Add timestamp to highest and lowest Watt occurance
 
 
 v1.9.0 - 2017-10-08
