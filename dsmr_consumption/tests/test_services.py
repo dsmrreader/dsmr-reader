@@ -246,7 +246,12 @@ class TestServices(InterceptStdoutMixin, TestCase):
         # Average = 250 + 250 + 1000 / 3 = 500.
         self.assertEqual(most_common, 500)
 
-    def test_calculate_min_max_consumption_watt(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_calculate_min_max_consumption_watt(self, now_mock):
+        now_mock.return_value = timezone.localtime(timezone.make_aware(
+            timezone.datetime(2017, 1, 1, hour=12)
+        ))
+
         result = dsmr_consumption.services.calculate_min_max_consumption_watt()
         self.assertNotIn('total_min', result)
         self.assertNotIn('total_max', result)
@@ -267,7 +272,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             returned_1=0,
             delivered_2=0,
             returned_2=0,
-            currently_delivered=0.25,
+            currently_delivered=1.35,
             currently_returned=0,
             phase_currently_delivered_l2=0.75,
         )
@@ -283,19 +288,19 @@ class TestServices(InterceptStdoutMixin, TestCase):
         )
         result = dsmr_consumption.services.calculate_min_max_consumption_watt()
 
-        self.assertEqual(result['total_min'][0], 'Sunday October 8th, 2017')
+        self.assertEqual(result['total_min'][0], 'Sunday January 1st, 2017')
         self.assertEqual(result['total_min'][1], 250)
 
-        self.assertEqual(result['total_max'][0], 'Tuesday October 10th, 2017')
+        self.assertEqual(result['total_max'][0], 'Tuesday January 3rd, 2017')
         self.assertEqual(result['total_max'][1], 6123)
 
-        self.assertEqual(result['l1_max'][0], 'Sunday October 8th, 2017')
+        self.assertEqual(result['l1_max'][0], 'Sunday January 1st, 2017')
         self.assertEqual(result['l1_max'][1], 500)
 
-        self.assertEqual(result['l2_max'][0], 'Monday October 9th, 2017')
+        self.assertEqual(result['l2_max'][0], 'Monday January 2nd, 2017')
         self.assertEqual(result['l2_max'][1], 750)
 
-        self.assertEqual(result['l3_max'][0], 'Tuesday October 10th, 2017')
+        self.assertEqual(result['l3_max'][0], 'Tuesday January 3rd, 2017')
         self.assertEqual(result['l3_max'][1], 1500)
 
     def test_clear_consumption(self):
