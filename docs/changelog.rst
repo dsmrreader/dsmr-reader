@@ -18,6 +18,21 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.10 - 2017-xx-xx
+^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+    This release contains an update for the API framework, which `has a fix for some timezone issues <https://github.com/encode/django-rest-framework/issues/3732>`_.
+    You may experience different output regarding to datetime formatting when using the API.
+
+
+**Tickets resolved in this release:**
+
+- [`#305 <https://github.com/dennissiemensma/dsmr-reader/issues/305>`_] Trend staafdiagrammen afgelopen week / afgelopen maand altijd gelijk
+
+
+
 v1.9.0 - 2017-10-08
 ^^^^^^^^^^^^^^^^^^^
 
