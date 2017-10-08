@@ -1,0 +1,41 @@
+[
+{
+    "pk": 1,
+    "fields": {
+        "delivered_1": "2000.000",
+        "delivered_2": "1500.000",
+        "returned_1": "1000.000",
+        "returned_2": "250.000",
+        "currently_returned": "0.500",
+        "currently_delivered": "1.500",
+        "read_at": "2017-10-01T02:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 11,
+    "fields": {
+        "delivered_1": "2003.000",
+        "delivered_2": "1500.000",
+        "returned_1": "1005.000",
+        "returned_2": "250.000",
+        "currently_returned": "1.750",
+        "currently_delivered": "1.000",
+        "read_at": "2017-10-01T11:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 12,
+    "fields": {
+        "delivered_1": "2005.000",
+        "delivered_2": "1500.000",
+        "returned_1": "1006.000",
+        "returned_2": "250.000",
+        "currently_returned": "1.050",
+        "currently_delivered": "1.500",
+        "read_at": "2017-10-01T13:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+}
+]

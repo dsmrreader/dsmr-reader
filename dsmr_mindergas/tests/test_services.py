@@ -10,7 +10,6 @@ import dsmr_mindergas.services
 
 
 class TestServices(TestCase):
-    """ Test 'dsmr_backend' management command. """
     fixtures = ['dsmr_mindergas/gas-consumption.json']
 
     @mock.patch('django.utils.timezone.now')
@@ -22,6 +21,7 @@ class TestServices(TestCase):
         self.assertFalse(settings.export)
         self.assertIsNone(settings.auth_token)
         self.assertIsNone(settings.next_export)
+
         self.assertFalse(dsmr_mindergas.services.should_export())
 
     @mock.patch('django.utils.timezone.now')

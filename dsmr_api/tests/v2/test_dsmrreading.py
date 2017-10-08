@@ -65,7 +65,7 @@ class TestDsmrreading(APIv2TestCase):
         # Again, with UTC.
         TELEGRAM['timestamp'] = '2017-01-01T00:00:00Z'
         resultset = self._request('dsmrreading', expected_code=201, method='post', data=TELEGRAM)
-        self.assertEqual(resultset['timestamp'], '2017-01-01T00:00:00Z')
+        self.assertEqual(resultset['timestamp'], '2017-01-01T01:00:00+01:00')
         self.assertEqual(DsmrReading.objects.all().count(), 5)
 
         # Now with optional data.
@@ -76,8 +76,8 @@ class TestDsmrreading(APIv2TestCase):
         TELEGRAM['phase_currently_delivered_l2'] = 0.75
         TELEGRAM['phase_currently_delivered_l3'] = 0.25
         resultset = self._request('dsmrreading', expected_code=201, method='post', data=TELEGRAM)
-        self.assertEqual(resultset['timestamp'], '2017-01-02T00:00:00Z')
-        self.assertEqual(resultset['extra_device_timestamp'], '2017-01-02T01:00:00Z')
+        self.assertEqual(resultset['timestamp'], '2017-01-02T01:00:00+01:00')
+        self.assertEqual(resultset['extra_device_timestamp'], '2017-01-02T02:00:00+01:00')
         self.assertEqual(float(resultset['extra_device_delivered']), 1234)
         self.assertEqual(float(resultset['phase_currently_delivered_l1']), 0.5)
         self.assertEqual(float(resultset['phase_currently_delivered_l2']), 0.75)

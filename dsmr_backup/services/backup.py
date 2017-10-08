@@ -58,7 +58,7 @@ def create():
                 settings.DSMRREADER_BACKUP_PG_DUMP,
                 '--host={}'.format(settings.DATABASES['default']['HOST']),
                 '--user={}'.format(settings.DATABASES['default']['USER']),
-                '--dbname={}'.format(settings.DATABASES['default']['NAME']),
+                settings.DATABASES['default']['NAME'],
             ], env={
                 'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
             },

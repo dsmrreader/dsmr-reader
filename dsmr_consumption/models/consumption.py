@@ -62,6 +62,15 @@ class ElectricityConsumption(models.Model):
         db_index=True
     )
 
+    def __sub__(self, other):
+        """ Allows models to be subtracted from each other. """
+        data = {}
+
+        for current in ('delivered_1', 'returned_1', 'delivered_2', 'returned_2'):
+            data.update({current: getattr(self, current) - getattr(other, current)})
+
+        return data
+
     def __str__(self):
         return '{} | {}: {} Watt'.format(
             self.__class__.__name__, self.read_at, self.currently_delivered * 1000

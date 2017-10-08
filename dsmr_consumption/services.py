@@ -169,10 +169,10 @@ def day_consumption(day):
 
     try:
         # This WILL fail when we either have no prices at all or conflicting ranges.
-        consumption['daily_energy_price'] = EnergySupplierPrice.objects.by_date(target_date=day)
+        daily_energy_price = EnergySupplierPrice.objects.by_date(target_date=day)
     except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
         # Default to zero prices.
-        consumption['daily_energy_price'] = EnergySupplierPrice()
+        daily_energy_price = EnergySupplierPrice()
 
     electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)
 
@@ -183,6 +183,8 @@ def day_consumption(day):
 
     first_reading = electricity_readings[0]
     last_reading = electricity_readings[electricity_reading_count - 1]
+
+    consumption['latest_consumption'] = last_reading
     consumption['electricity1'] = last_reading.delivered_1 - first_reading.delivered_1
     consumption['electricity2'] = last_reading.delivered_2 - first_reading.delivered_2
     consumption['electricity1_start'] = first_reading.delivered_1
@@ -195,21 +197,23 @@ def day_consumption(day):
     consumption['electricity1_returned_end'] = last_reading.returned_1
     consumption['electricity2_returned_start'] = first_reading.returned_2
     consumption['electricity2_returned_end'] = last_reading.returned_2
-    consumption['electricity1_unit_price'] = consumption['daily_energy_price'].electricity_1_price
-    consumption['electricity2_unit_price'] = consumption['daily_energy_price'].electricity_2_price
-    consumption['electricity1_cost'] = round_decimal(
-        consumption['electricity1'] * consumption['electricity1_unit_price']
-    )
-    consumption['electricity2_cost'] = round_decimal(
-        consumption['electricity2'] * consumption['electricity2_unit_price']
-    )
     consumption['electricity_merged'] = consumption['electricity1'] + consumption['electricity2']
     consumption['electricity_returned_merged'] = \
         consumption['electricity1_returned'] + consumption['electricity2_returned']
-    consumption['electricity_cost_merged'] = consumption['electricity1_cost'] + consumption['electricity2_cost']
-    consumption['total_cost'] = round_decimal(
-        consumption['electricity1_cost'] + consumption['electricity2_cost']
+
+    # Cost per tariff + direction.
+    consumption['electricity1_cost'] = round_decimal(
+        (consumption['electricity1'] * daily_energy_price.electricity_delivered_1_price) -
+        (consumption['electricity1_returned'] * daily_energy_price.electricity_returned_1_price)
     )
+    consumption['electricity2_cost'] = round_decimal(
+        (consumption['electricity2'] * daily_energy_price.electricity_delivered_2_price) -
+        (consumption['electricity2_returned'] * daily_energy_price.electricity_returned_2_price)
+    )
+
+    # Totals.
+    consumption['electricity_cost_merged'] = consumption['electricity1_cost'] + consumption['electricity2_cost']
+    consumption['total_cost'] = round_decimal(consumption['electricity_cost_merged'])
 
     # Gas readings are optional, as not all meters support this.
     if gas_readings.exists():
@@ -219,9 +223,8 @@ def day_consumption(day):
         consumption['gas'] = last_reading.delivered - first_reading.delivered
         consumption['gas_start'] = first_reading.delivered
         consumption['gas_end'] = last_reading.delivered
-        consumption['gas_unit_price'] = consumption['daily_energy_price'].gas_price
         consumption['gas_cost'] = round_decimal(
-            consumption['gas'] * consumption['gas_unit_price']
+            consumption['gas'] * daily_energy_price.gas_price
         )
         consumption['total_cost'] += consumption['gas_cost']
 
@@ -240,6 +243,7 @@ def day_consumption(day):
     consumption['average_temperature'] = temperature_readings.aggregate(
         avg_temperature=Avg('degrees_celcius'),
     )['avg_temperature'] or 0
+    consumption['average_temperature'] = round_decimal(consumption['average_temperature'])
 
     return consumption
 

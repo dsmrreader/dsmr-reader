@@ -137,9 +137,14 @@ def create_hourly_statistics(hour_start):
     creation_kwargs['electricity1_returned'] = electricity_end.returned_1 - electricity_start.returned_1
     creation_kwargs['electricity2_returned'] = electricity_end.returned_2 - electricity_start.returned_2
 
-    if gas_readings.exists():
-        # Gas readings are unique per hour anyway.
+    # DSMR v4.
+    if len(gas_readings) == 1:
         creation_kwargs['gas'] = gas_readings[0].currently_delivered
+
+    # DSMR v5
+    elif len(gas_readings) > 1:
+        gas_readings = list(gas_readings)
+        creation_kwargs['gas'] = gas_readings[-1].delivered - gas_readings[0].delivered
 
     HourStatistics.objects.create(**creation_kwargs)
 

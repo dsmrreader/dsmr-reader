@@ -1,0 +1,14 @@
+[{
+    "model": "dsmr_consumption.energysupplierprice",
+    "pk": 1,
+    "fields": {
+        "start": "2015-01-01",
+        "end": null,
+        "description": "Test",
+        "electricity_delivered_1_price": "1.00000",
+        "electricity_delivered_2_price": "2.00000",
+        "gas_price": "5.00000",
+        "electricity_returned_1_price": "0.50000",
+        "electricity_returned_2_price": "1.50000"
+    }
+}]

@@ -17,6 +17,7 @@ consumption_url_patterns = [
     url(r'^gas$', views.GasConsumptionViewSet.as_view({
         'get': 'list',
     }), name='gas-consumption'),
+    url(r'^today$', views.TodayConsumptionView.as_view(), name='today-consumption'),
 ]
 
 statistics_url_patterns = [

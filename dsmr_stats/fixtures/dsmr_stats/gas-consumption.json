@@ -277,5 +277,23 @@
         "delivered": "962.558",
         "currently_delivered": "0.009"
     }
+},
+{
+    "pk": 32,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2015-12-11T23:20:00Z",
+        "delivered": "956.761",
+        "currently_delivered": "0.022"
+    }
+},
+{
+    "pk": 33,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2015-12-11T23:40:00Z",
+        "delivered": "956.864",
+        "currently_delivered": "0.103"
+    }
 }
 ]
