@@ -44,15 +44,15 @@ Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` an
 
 - Create database user::
 
-    sudo sudo -u postgres createuser -DSR dsmrreader
+    sudo -u postgres createuser -DSR dsmrreader
 
 - Create database, owned by the database user we just created::
 
-    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+    sudo -u postgres createdb -O dsmrreader dsmrreader
 
 - Set password for database user::
 
-    sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+    sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
 
 .. note::
 
@@ -60,11 +60,11 @@ Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` an
     
     Restore an uncompressed (``.sql``) backup with::
     
-        sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
+        sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
 
     Or restore a compressed (``.gz``) backup with::
     
-        zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
+        zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo -u postgres psql dsmrreader
 
 Now continue at chapter 2 below (Dependencies).
 
