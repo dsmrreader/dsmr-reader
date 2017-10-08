@@ -235,16 +235,16 @@ Only want to restore the database?
 
 For **PostgreSQL** restores::
 
-    sudo sudo -u postgres dropdb dsmrreader
-    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+    sudo -u postgres dropdb dsmrreader
+    sudo -u postgres createdb -O dsmrreader dsmrreader
     
     # Either restore an uncompressed (.sql) backup:
-    sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
+    sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
     
     # OR
     
     # Restore a compressed (.gz) backup with:
-    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
+    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo -u postgres psql dsmrreader
 
 
 For **MySQL** restores::
