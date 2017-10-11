@@ -12,8 +12,12 @@ DSMR Reader's documentation
    settings
    api
    mqtt
-   troubleshooting
+   mindergas
+   pvoutput
+   dropbox
+   notifications
    faq
+   troubleshooting
    changelog
    contributing
    credits

@@ -52,7 +52,7 @@ msgid "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_"
 msgstr ""
 
 #: ../../credits.rst:19
-msgid "`dbmnl  <https://github.com/dbmnl >`_"
+msgid "`dbmnl <https://github.com/dbmnl>`_"
 msgstr ""
 
 #: ../../credits.rst:20
@@ -282,4 +282,7 @@ msgstr ""
 #: ../../credits.rst:85
 msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 msgstr ""
+
+#~ msgid "`dbmnl  <https://github.com/dbmnl >`_"
+#~ msgstr ""
 

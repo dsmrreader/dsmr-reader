@@ -1,5 +1,5 @@
-Settings
-========
+Backend settings
+================
 
 The application has several settings available, which you can edit in the Configuration page.
 The default settings should work fine, although it's recommended to enable syncing backups using Dropbox. 

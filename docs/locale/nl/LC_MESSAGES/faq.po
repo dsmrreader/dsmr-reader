@@ -97,306 +97,51 @@ msgstr "Gooit de cache leeg."
 msgid "Dropbox: Automated backup sync"
 msgstr "Dropbox: Automatisch backups uploaden"
 
-#: ../../faq.rst:36
-msgid "*How can I link my Dropbox account for backups?*"
-msgstr "*Hoe kan ik mijn Dropbox-account koppelen voor de backups?*"
+#: ../../faq.rst:37
+msgid ":doc:`More information can be found here<dropbox>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<dropbox>`."
 
-#: ../../faq.rst:38
-msgid ""
-"Make sure you have a Dropbox-account or sign up for one. Now go to `Dropbox "
-"Apps <https://www.dropbox.com/developers/apps>`_ and click **\"Create app\"** "
-"in top right corner."
-msgstr ""
-"Zorg allereerst dat je een Dropbox-account hebt. Ga vervolgens naar `Dropbox "
-"Apps <https://www.dropbox.com/developers/apps>`_ en klik op **\"Create app\"** "
-"rechtsbovenin."
-
-#: ../../faq.rst:45
-msgid ""
-"Choose the following options: (1) **Dropbox API** and (2) **App folder**. Then "
-"enter a name for your app (3), this will also be used as directory name within "
-"the Apps-folder of your Dropbox."
-msgstr ""
-"Kies de volgende opties:  (1) **Dropbox API** en (2) **App folder**. Voer "
-"vervolgens een naam voor je app in (3), deze wordt ook gebruikt als naam van "
-"de submap binnen je Apps-folder in Dropbox."
-
-#: ../../faq.rst:52
-msgid ""
-"The app should be created in developer-mode. You can generate an access token "
-"for yourself by clicking the **\"Generate\"** button somewhere below."
-msgstr ""
-"The app is als het goed is nu aangemaakt in developer-modus. Je kunt nog een "
-"toegangstoken genereren door op de knop **\"Generate\"** te klikken, die "
-"verderop onderaan de pagina staat."
-
-#: ../../faq.rst:58
-msgid ""
-"Copy the generated access token to the DSMR-reader settings for the Dropbox-"
-"configuration. The DSMR-reader application should sync any backups created "
-"shortly."
-msgstr ""
-"Kopieer de gegenereerde toegangstoken naar de DSMR-reader instellingen onder "
-"Dropbox-configuratie. DSMR-reader zou vrij vlot gemaakte backups moeten "
-"uploaden naar je Dropbox-account."
-
-#: ../../faq.rst:62
+#: ../../faq.rst:41
 msgid "Mindergas.nl: Automated gas meter position export"
 msgstr "Mindergas.nl: Automatisch gasmeterstanden exporteren"
 
-#: ../../faq.rst:63
-msgid "*How can I link my mindergas.nl account?*"
-msgstr "*Hoe kan ik mijn mindergas.nl-account koppelen?*"
+#: ../../faq.rst:43
+msgid ":doc:`More information can be found here<mindergas>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<mindergas>`."
 
-#: ../../faq.rst:65
-msgid ""
-"Make sure you have a Mindergas.nl account or `signup for one <https://www."
-"mindergas.nl/users/sign_up>`_. Now go to \"`Meterstand API <https://www."
-"mindergas.nl/member/api>`_\" and click on the button located below **"
-"\"Authenticatietoken\"**."
-msgstr ""
-"Zorg ervoor dat je een mindergas.nl-account hebt of `registreer je op hun "
-"website <https://www.mindergas.nl/users/sign_up>`_. Ga nu naar \"`Meterstand "
-"API <https://www.mindergas.nl/member/api>`_\" en klik op de knop onder het "
-"kopje **\"Authenticatietoken\"**."
-
-#: ../../faq.rst:72
-msgid ""
-"Copy the authentication token generated and paste in into the DSMR-reader "
-"settings for the Mindergas.nl-configuration. Obviously the export only works "
-"when there are any gas readings at all and you have ticked the 'export' "
-"checkbox in the Mindergas.nl-configuration as well."
-msgstr ""
-"Kopieer de gegenereerde authenticatietoken in de DSMR-reader instellingen "
-"onder Mindergas.nl-configuratie. Vanzelfsprekend werkt deze feature alleen "
-"wanneer er gas gemeten wordt, en wanneer je de optie 'Exporteer gegevens naar "
-"MinderGas' aangevinkt hebt in dezelfde configuratie."
-
-#: ../../faq.rst:77
-msgid ""
-"Please note that due to policies of mindergas.nl it's not allowed to "
-"retroactively upload meter positions using the API. Therefor this is not "
-"supported by the application. You can however, enter them manually on their "
-"website."
-msgstr ""
-"N.B.: Wegens het beleid van mindergas.nl is het niet toegestaan om met "
-"terugwerkende kracht meterstanden door te geven via de API. De applicatie "
-"ondersteunt dat om die reden niet. Je kunt oude meterstanden echter wel via "
-"hun website handmatig invoeren, indien gewenst."
-
-#: ../../faq.rst:82
+#: ../../faq.rst:47
 msgid "PVOutput.org: Automated electricity consumption export"
 msgstr "PVOutput.org: Automatisch exporteren van verbruik"
 
-#: ../../faq.rst:83
-msgid "*How can I link my PVOutput.org account?*"
-msgstr "*Hoe kan ik mijn PVOutput.org-account koppelen?*"
+#: ../../faq.rst:49
+msgid ":doc:`More information can be found here<pvoutput>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<pvoutput>`."
 
-#: ../../faq.rst:85
-msgid ""
-"Make sure you have a PVOutput.org account, or `signup for an account <https://"
-"pvoutput.org/>`_. You will have to configure your account and PV system(s). "
-"For any support doing that, please `see this page <https://pvoutput.org/help."
-"html#overview-getting-started>`_ for more information."
-msgstr ""
-"Zorg ervoor dat je een PVOutput.org-account hebt, of `registreer er een "
-"<https://pvoutput.org/>`_. Vervolgens zul je je account en zonnesystemen "
-"moeten configureren. Voor ondersteuning hoe dat moet, `zie de documentatie "
-"<https://pvoutput.org/help.html#overview-getting-started>`_ voor meer "
-"informatie."
-
-#: ../../faq.rst:88
-msgid ""
-"In order to link DSMR-reader to your account, please write down the \"API Key"
-"\" and \"System ID\" from your PVOutput account. You can find them near the "
-"bottom of the \"Settings\" page in PVOutput."
-msgstr ""
-"Om DSMR-reader te koppelen met je account, noteer de \"API Key\" en \"System ID"
-"\" zoals je PVOutput-account aangeeft. Deze zijn terug te vinden onder "
-"\"Settings\", binnen PVOutput."
-
-#: ../../faq.rst:96
-msgid ""
-"Enter those values in DSMR-reader's admin pages, at \"PVOutput: API "
-"configuration\". Make sure to enter both:"
-msgstr ""
-"Vul deze gegevens in de configuratiepagina's van DSMR-reader in, bij: "
-"\"PVOutput: API-configuratie\". Zowel:"
-
-#: ../../faq.rst:98
-msgid "API Key"
-msgstr "API Key"
-
-#: ../../faq.rst:99
-msgid "System ID"
-msgstr "System ID"
-
-#: ../../faq.rst:107
-msgid ""
-"Now navigate to another settings page in DSMR-reader: \"PVOutput: \"Add Status"
-"\" configuration\"."
-msgstr ""
-"Navigeer nu naar een andere pagina met instellingen binnen DSMR-reader, "
-"genaamd \"PVOutput: Add Status configuratie\"."
-
-#: ../../faq.rst:109
-msgid "Enable uploading the consumption."
-msgstr "Schakel het uploaden van je verbruik in."
-
-#: ../../faq.rst:110
-msgid ""
-"Choose an interval between the uploads. You can configure this as well on the "
-"PVOutput's end, in Device Settings."
-msgstr ""
-"Kies een interval tussen de uploads. Je kunt dit tevens instellen aan de kant "
-"van PVOutput, onder Device Settings."
-
-#: ../../faq.rst:111
-msgid ""
-"Optionally, choose an upload delay X (in minutes). If set, DSMR-reader will "
-"not use data of the past X minutes."
-msgstr ""
-"Voer optioneel een uploadvertraging X in. Wanneer ingesteld, zal DSMR-reader "
-"geen data gebruiken van de afgelopen X minuten."
-
-#: ../../faq.rst:112
-msgid ""
-"Optionally, you can choose to enter a **processing delay in minutes** for "
-"PVOutput. Please note that PVOutput will only allow this when you have a **"
-"\"Donation\" account** on their website. If you do not have one, they will "
-"reject each API call you make, until you disable (clear) this option in DSMR-"
-"reader."
-msgstr ""
-"Optioneel kun je ervoor kiezen om PVOutput de gegevens **vertraagd te laten "
-"verwerken**. Let op, dit is een feature van PVOutput die alleen beschikbaar is "
-"wanneer je daar een **\"Donatie\" account** hebt. Indien dat niet het geval "
-"is, zal PVOutput elke API-call weigeren, totdat je dit uitschakelt (veld "
-"leegmaakt) in DSMR-reader."
-
-#: ../../faq.rst:119
-msgid ""
-"If you configured everything correctly, you should see some addional data in "
-"PVOutput listed under \"Your Outputs\" momentarily."
-msgstr ""
-"Indien je alles correct hebt ingesteld, zul je op korte termijn extra gegevens "
-"moeten zien in PVOutput onder \"Your Outputs\"."
-
-#: ../../faq.rst:123
+#: ../../faq.rst:53
 msgid "Usage notification: Daily usage statistics on your smartphone"
 msgstr "Verbruiksnotificaties: Dagelijkse verbruiksstatistieken op je smartphone"
 
-#: ../../faq.rst:124
-msgid "*Which services for sending notifications are supported?*"
-msgstr "*Welke services voor het sturen van notificaties worden ondersteund?*"
+#: ../../faq.rst:55
+msgid ":doc:`More information can be found here<notifications>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<notifications>`."
 
-#: ../../faq.rst:126
-msgid ""
-"Currently, two mobile platforms are supported: Android and iOS. The supported "
-"app for Android is `NotifyMyAndroid <https://www.notifymyandroid.com>`_. The "
-"supported app for iOS is `Prowl <https://www.prowlapp.com>`_."
-msgstr ""
-"Op dit moment worden twee platforms ondersteund: Android en iOS. De "
-"ondersteunde app voor Android is `NotifyMyAndroid <https://www.notifymyandroid."
-"com>`_. De ondersteunde app voor iOS is `Prowl <https://www.prowlapp.com>`_."
-
-#: ../../faq.rst:131
-msgid "*How do I setup usage notifications?*"
-msgstr "*Hoe stel ik verbruiksnotificaties in?*"
-
-#: ../../faq.rst:133
-msgid ""
-"Make sure you either have NotifyMyAndroid or Prowl installed on your "
-"smartphone. If you don't, visit your platforms app store to download the app "
-"and sign up for an account. Then, make sure to get your API key from the "
-"notificationservice that you prefer. For instruction on obtaining the API key, "
-"please read below."
-msgstr ""
-"Zorg ervoor dat je NotifyMyAndroid of Prowl hebt geïnstalleerd op je "
-"smartphone. Als dat niet het geval is, bezoek dan de app store van je "
-"platform, download de gewenste app en maak daarvoor een account. Daarna haal "
-"je de API key voor de notificatieservice die je wilt gebruiken op. Om te lezen "
-"hoe dat werkt, lees dan de instructies bij de volgende kopjes."
-
-#: ../../faq.rst:135
-msgid ""
-"In the DSMR-reader settings for the Usagenotifications, tick the Send "
-"Notifications checkbox and select the notification service you want to use. "
-"Then copy the API key from the notification service and paste in into the the "
-"textbox for the API key. When you save these settings, your first notification "
-"should be sent after midnight. Don't worry, the notification will be sent with "
-"low priority and will not wake you up."
-msgstr ""
-"In de DSMR-reader instellingen voor de Verbruiksnotificaties zet je een vinkje "
-"bij Stuur Notificaties en selecteer daaronder welke notificatieservice je wilt "
-"gebruiken. Kopieeër daarna de API key van de notificatieservice en plak deze "
-"in het tekstveld voor de API key. Als je deze instellingen opslaat zul je na "
-"middernacht je eerste notificatie ontvangen. Geen nood, de notificatie wordt "
-"altijd verstuurd met lage prioriteit, deze maakt je dus niet wakker."
-
-#: ../../faq.rst:138
-msgid "*How do I obtain my API key for NotifyMyAndroid?*"
-msgstr "*Hoe haal ik de API key op voor NotifyMyAndroid?*"
-
-#: ../../faq.rst:140
-msgid ""
-"After you have downloaded NotifyMyAndroid and signed up for an account you "
-"should be able to `login to your NotifyMyAndroid account <https://www."
-"notifymyandroid.com/index.jsp>`_. Now go to \"`My Account <https://www."
-"notifymyandroid.com/account.jsp>`_\", you should see an overview of your "
-"current API keys if you have any. To create an API key for the DSMR-reader, "
-"please click **\"Generate New Key\"**."
-msgstr ""
-"Nadat je NotifyMyAndroid hebt gedownload en een account hebt aangemaakt zou je "
-"moeten kunnen `inloggen op je NotifyMyAndroid-account <https://www."
-"notifymyandroid.com/index.jsp>`_. Ga nu naar \"`My Account <https://www."
-"notifymyandroid.com/account.jsp>`_\" om een overzicht van je account de API "
-"keys te krijgen als je deze al hebt. Om een API key voor de DSMR-reader te "
-"genereren klik je op **\"Generate New Key\"**."
-
-#: ../../faq.rst:147 ../../faq.rst:163
-msgid ""
-"When a new key is generated, you will see it immediatly. Your key is listed "
-"like in the screenshot below (the red box marks your API key)."
-msgstr ""
-"Als er een nieuwe key is gegenereerd, zie je deze direct. De key is te vinden "
-"zoals in onderstaande screenshot (er staat een rood kader om de key)."
-
-#: ../../faq.rst:154
-msgid "*How do I obtain my API key for Prowl?*"
-msgstr "*Hoe haal ik de API key op voor Prowl?*"
-
-#: ../../faq.rst:156
-msgid ""
-"After you have downloaded Prowl and signed up for an account you should be "
-"able to `login to your Prowl account <https://www.prowlapp.com/login.php>`_. "
-"Now go to \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\", you "
-"should see an overview of your current API keys if you have any. To create an "
-"API key for the DSMR-reader, input a name and click **\"Generate Key\"**."
-msgstr ""
-"Nadat je Prowl hebt gedownload en een account hebt aangemaakt zou je moeten "
-"kunnen `inloggen op je Prowl-account <https://www.prowlapp.com/login.php>`_. "
-"Ga nu naar \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\" om een "
-"overzicht van je API keys te krijgen als je deze al hebt. Om een API key voor "
-"de DSMR-reader te genereren geef je een naam op en klik je op **\"Generate Key"
-"\"**."
-
-#: ../../faq.rst:171
+#: ../../faq.rst:59
 msgid "I only pay for a single electricity tariff but I see two!"
 msgstr "Ik betaal voor een enkel tarief maar ik zie er twee!"
 
-#: ../../faq.rst:172
+#: ../../faq.rst:60
 msgid ""
-"DSMR (and your energy supplier) always read both high and low tariff from your "
-"meter. It's possible however that you are only paying for a single tariff. In "
-"that case your energy supplier will simply merge both high and low tariffs to "
-"make it look like you have a single one."
+"DSMR (and your energy supplier) always reads both high and low tariff from "
+"your meter. It's possible however that you are only paying for a single "
+"tariff. In that case your energy supplier will simply merge both high and low "
+"tariffs to make it look like you have a single one."
 msgstr ""
 "DSMR (en je energieleverancier) lezen altijd zowel hoog als laag tarief van je "
 "meter uit. Het is desondanks mogelijk dat je betaalt voor slechts één tarief. "
 "In dat geval voegt jouw energieleverancier het hoge en lage tarief samen zodat "
 "het lijkt alsof je een enkel tarief hebt."
 
-#: ../../faq.rst:176
+#: ../../faq.rst:64
 msgid ""
 "This application displays separate tariffs by default, but supports merging "
 "them to a single one as well. Just make sure that you apply the **same price "
@@ -409,11 +154,11 @@ msgstr ""
 "elektriciteit** en dat je de optie ``Voeg tarieven samen`` aanzet in de "
 "interfaceconfiguratie."
 
-#: ../../faq.rst:181
+#: ../../faq.rst:69
 msgid "I want to see the load of each electricity phase as well"
 msgstr "Ik wil het elektriciteitsverbruik per fase ook kunnen zien"
 
-#: ../../faq.rst:182
+#: ../../faq.rst:70
 msgid ""
 "Since ``DSMR-reader v1.5`` it's possible to track your ``P+`` (consumption) "
 "phases as well. You will need to enable this in the ``Datalogger "
@@ -427,11 +172,11 @@ msgstr ""
 "elektriciteitsfasen bij``. Zodra ingeschakeld, zal de applicatie het verbruik "
 "per fase vastleggen in tonen in een grafiek in het Dashboard."
 
-#: ../../faq.rst:185
+#: ../../faq.rst:73
 msgid "Please keep in mind:"
 msgstr "Houd in gedachten:"
 
-#: ../../faq.rst:187
+#: ../../faq.rst:75
 msgid ""
 "This will **not work retroactively**. The datalogger always discards all data "
 "not used."
@@ -439,7 +184,7 @@ msgstr ""
 "Dit werkt **niet met terugwerkende kracht**. De datalogger gooit namelijk alle "
 "gegevens weg die niet nodig zijn."
 
-#: ../../faq.rst:188
+#: ../../faq.rst:76
 msgid ""
 "This feature will only work when your smart meter is connected to **three "
 "phases**. Even when having the setting enabled."
@@ -447,7 +192,7 @@ msgstr ""
 "Deze feature werkt alleen wanneer je slimme meter ook daadwerkelijk is "
 "aangesloten op **drie fasen**. Zelfs wanneer de optie is ingeschakeld."
 
-#: ../../faq.rst:189
+#: ../../faq.rst:77
 msgid ""
 "When having tracking phases enabled, you should see a button in the Dashboard "
 "called ``Display electricity phases``. Click on it to show the graph."
@@ -456,15 +201,15 @@ msgstr ""
 "een knop genaamd ``Toon elektriciteitsfasen``. Klik die aan om de grafiek te "
 "tonen."
 
-#: ../../faq.rst:191
+#: ../../faq.rst:79
 msgid "You should see something similar to:"
 msgstr "Je zult iets zien in de trend van:"
 
-#: ../../faq.rst:199
+#: ../../faq.rst:87
 msgid "Recalculate prices retroactively"
 msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
 
-#: ../../faq.rst:200
+#: ../../faq.rst:88
 msgid ""
 "*I've adjusted my energy prices but there are no changes! How can I regenerate "
 "them with my new prices?*"
@@ -472,7 +217,7 @@ msgstr ""
 "*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe "
 "kan ik de nieuwe prijzen doorvoeren?*"
 
-#: ../../faq.rst:202
+#: ../../faq.rst:90
 msgid ""
 "Statistics for each day are generated once, the day after. However, you can "
 "flush your statistics by executing:"
@@ -480,11 +225,11 @@ msgstr ""
 "Dagstatistieken worden dagelijks eenmalig gegenereerd. Het is echter wel "
 "mogelijk om deze te resetten door het volgende te doen:"
 
-#: ../../faq.rst:204
+#: ../../faq.rst:92
 msgid "``./manage.py dsmr_backend_delete_aggregated_data``"
 msgstr "``./manage.py dsmr_backend_delete_aggregated_data``"
 
-#: ../../faq.rst:206
+#: ../../faq.rst:94
 msgid ""
 "The application will delete all statistics and (slowly) regenerate them in the "
 "background. Just make sure the source data is still there."
@@ -492,11 +237,11 @@ msgstr ""
 "De applicatie verwijdert alle statistieken en genereert ze (langzaam) weer op "
 "de achtergrond. Zorg er wel voor dat alle brongegevens intact zijn."
 
-#: ../../faq.rst:210
+#: ../../faq.rst:98
 msgid "I'm not seeing any gas readings"
 msgstr "Ik zie geen gasverbruik"
 
-#: ../../faq.rst:211
+#: ../../faq.rst:99
 msgid ""
 "Please make sure that your meter supports reading gas consumption and that "
 "you've waited for a few hours for any graphs to render. The gas meter "
@@ -508,11 +253,11 @@ msgstr ""
 "sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
 "geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:217
+#: ../../faq.rst:105
 msgid "How do I restore a database backup?"
 msgstr "Hoe zet ik een databaseback-up terug?"
 
-#: ../../faq.rst:221
+#: ../../faq.rst:109
 msgid ""
 "Restoring a backup will replace any existing data stored in the database and "
 "is irreversible!"
@@ -520,7 +265,7 @@ msgstr ""
 "Het herstellen van een back-up vervangt de bestaande data in de database en is "
 "onomkeerbaar!"
 
-#: ../../faq.rst:225
+#: ../../faq.rst:113
 msgid ""
 "Do you need a complete reinstall of DSMR-reader as well? Then please :doc:"
 "`follow the install guide<installation>` and restore the database backup "
@@ -530,11 +275,11 @@ msgstr ""
 "dan de installatiehandleiding<installation>` en herstel de databaseback-up "
 "volgens  **de notities aan het einde van hoofdstuk 1**."
 
-#: ../../faq.rst:228
+#: ../../faq.rst:116
 msgid "Only want to restore the database?"
 msgstr "Wil je alleen een databaseback-up terugzetten?"
 
-#: ../../faq.rst:230
+#: ../../faq.rst:118
 msgid ""
 "This asumes you are still running the same application version as the backup "
 "was created in."
@@ -542,7 +287,7 @@ msgstr ""
 "Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie draait als "
 "waarmee de back-up is gemaakt."
 
-#: ../../faq.rst:232
+#: ../../faq.rst:120
 msgid ""
 "Stop the application first with ``sudo supervisorctl stop all``. This will "
 "disconnect it from the database as well."
@@ -550,7 +295,7 @@ msgstr ""
 "Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit zorgt "
 "er ook voor dat de databaseverbinding van de applicatie verdwijnt."
 
-#: ../../faq.rst:234
+#: ../../faq.rst:122
 msgid ""
 "Importing the data could take a long time. It took MySQL 15 minutes to import "
 "nearly 3 million readings, from a compressed backup, on a RaspberryPi 3."
@@ -559,19 +304,19 @@ msgstr ""
 "het ongeveer een kwartier om 3 miljoen metingen te importeren, vanuit een "
 "gecomprimeerde back-up op een RaspberryPi 3."
 
-#: ../../faq.rst:236
+#: ../../faq.rst:124
 msgid "For **PostgreSQL** restores::"
 msgstr "Voor herstellen van **PostgreSQL**::"
 
-#: ../../faq.rst:250
+#: ../../faq.rst:138
 msgid "For **MySQL** restores::"
 msgstr "Voor herstellen van **MySQL**::"
 
-#: ../../faq.rst:264
+#: ../../faq.rst:152
 msgid "Start the application again with ``sudo supervisorctl start all``."
 msgstr "Start de applicatie weer met ``sudo supervisorctl start all``."
 
-#: ../../faq.rst:268
+#: ../../faq.rst:156
 msgid ""
 "In case the version differs, you can try forcing a deployment reload by: "
 "``sudo su - dsmr`` and then executing ``./post-deploy.sh``."
@@ -580,18 +325,261 @@ msgstr ""
 "herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-deploy."
 "sh`` uit."
 
-#: ../../faq.rst:272
+#: ../../faq.rst:160
 msgid "Feature/bug report"
 msgstr "Verzoek/fout melden"
 
-#: ../../faq.rst:273
+#: ../../faq.rst:161
 msgid "*How can I propose a feature or report a bug I've found?*"
 msgstr "*Hoe kan ik een verzoek indienen of een fout melden?*"
 
-#: ../../faq.rst:277
+#: ../../faq.rst:165
 msgid ""
 "`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/new>`_."
 msgstr ""
 "`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-reader/"
 "issues/new>`_."
+
+#~ msgid "*How can I link my Dropbox account for backups?*"
+#~ msgstr "*Hoe kan ik mijn Dropbox-account koppelen voor de backups?*"
+
+#~ msgid ""
+#~ "Make sure you have a Dropbox-account or sign up for one. Now go to `Dropbox "
+#~ "Apps <https://www.dropbox.com/developers/apps>`_ and click **\"Create app"
+#~ "\"** in top right corner."
+#~ msgstr ""
+#~ "Zorg allereerst dat je een Dropbox-account hebt. Ga vervolgens naar "
+#~ "`Dropbox Apps <https://www.dropbox.com/developers/apps>`_ en klik op **"
+#~ "\"Create app\"** rechtsbovenin."
+
+#~ msgid ""
+#~ "Choose the following options: (1) **Dropbox API** and (2) **App folder**. "
+#~ "Then enter a name for your app (3), this will also be used as directory "
+#~ "name within the Apps-folder of your Dropbox."
+#~ msgstr ""
+#~ "Kies de volgende opties:  (1) **Dropbox API** en (2) **App folder**. Voer "
+#~ "vervolgens een naam voor je app in (3), deze wordt ook gebruikt als naam "
+#~ "van de submap binnen je Apps-folder in Dropbox."
+
+#~ msgid ""
+#~ "The app should be created in developer-mode. You can generate an access "
+#~ "token for yourself by clicking the **\"Generate\"** button somewhere below."
+#~ msgstr ""
+#~ "The app is als het goed is nu aangemaakt in developer-modus. Je kunt nog "
+#~ "een toegangstoken genereren door op de knop **\"Generate\"** te klikken, "
+#~ "die verderop onderaan de pagina staat."
+
+#~ msgid ""
+#~ "Copy the generated access token to the DSMR-reader settings for the Dropbox-"
+#~ "configuration. The DSMR-reader application should sync any backups created "
+#~ "shortly."
+#~ msgstr ""
+#~ "Kopieer de gegenereerde toegangstoken naar de DSMR-reader instellingen "
+#~ "onder Dropbox-configuratie. DSMR-reader zou vrij vlot gemaakte backups "
+#~ "moeten uploaden naar je Dropbox-account."
+
+#~ msgid "*How can I link my mindergas.nl account?*"
+#~ msgstr "*Hoe kan ik mijn mindergas.nl-account koppelen?*"
+
+#~ msgid ""
+#~ "Make sure you have a Mindergas.nl account or `signup for one <https://www."
+#~ "mindergas.nl/users/sign_up>`_. Now go to \"`Meterstand API <https://www."
+#~ "mindergas.nl/member/api>`_\" and click on the button located below **"
+#~ "\"Authenticatietoken\"**."
+#~ msgstr ""
+#~ "Zorg ervoor dat je een mindergas.nl-account hebt of `registreer je op hun "
+#~ "website <https://www.mindergas.nl/users/sign_up>`_. Ga nu naar "
+#~ "\"`Meterstand API <https://www.mindergas.nl/member/api>`_\" en klik op de "
+#~ "knop onder het kopje **\"Authenticatietoken\"**."
+
+#~ msgid ""
+#~ "Copy the authentication token generated and paste in into the DSMR-reader "
+#~ "settings for the Mindergas.nl-configuration. Obviously the export only "
+#~ "works when there are any gas readings at all and you have ticked the "
+#~ "'export' checkbox in the Mindergas.nl-configuration as well."
+#~ msgstr ""
+#~ "Kopieer de gegenereerde authenticatietoken in de DSMR-reader instellingen "
+#~ "onder Mindergas.nl-configuratie. Vanzelfsprekend werkt deze feature alleen "
+#~ "wanneer er gas gemeten wordt, en wanneer je de optie 'Exporteer gegevens "
+#~ "naar MinderGas' aangevinkt hebt in dezelfde configuratie."
+
+#~ msgid ""
+#~ "Please note that due to policies of mindergas.nl it's not allowed to "
+#~ "retroactively upload meter positions using the API. Therefor this is not "
+#~ "supported by the application. You can however, enter them manually on their "
+#~ "website."
+#~ msgstr ""
+#~ "N.B.: Wegens het beleid van mindergas.nl is het niet toegestaan om met "
+#~ "terugwerkende kracht meterstanden door te geven via de API. De applicatie "
+#~ "ondersteunt dat om die reden niet. Je kunt oude meterstanden echter wel via "
+#~ "hun website handmatig invoeren, indien gewenst."
+
+#~ msgid "*How can I link my PVOutput.org account?*"
+#~ msgstr "*Hoe kan ik mijn PVOutput.org-account koppelen?*"
+
+#~ msgid ""
+#~ "Make sure you have a PVOutput.org account, or `signup for an account "
+#~ "<https://pvoutput.org/>`_. You will have to configure your account and PV "
+#~ "system(s). For any support doing that, please `see this page <https://"
+#~ "pvoutput.org/help.html#overview-getting-started>`_ for more information."
+#~ msgstr ""
+#~ "Zorg ervoor dat je een PVOutput.org-account hebt, of `registreer er een "
+#~ "<https://pvoutput.org/>`_. Vervolgens zul je je account en zonnesystemen "
+#~ "moeten configureren. Voor ondersteuning hoe dat moet, `zie de documentatie "
+#~ "<https://pvoutput.org/help.html#overview-getting-started>`_ voor meer "
+#~ "informatie."
+
+#~ msgid ""
+#~ "In order to link DSMR-reader to your account, please write down the \"API "
+#~ "Key\" and \"System ID\" from your PVOutput account. You can find them near "
+#~ "the bottom of the \"Settings\" page in PVOutput."
+#~ msgstr ""
+#~ "Om DSMR-reader te koppelen met je account, noteer de \"API Key\" en "
+#~ "\"System ID\" zoals je PVOutput-account aangeeft. Deze zijn terug te vinden "
+#~ "onder \"Settings\", binnen PVOutput."
+
+#~ msgid ""
+#~ "Enter those values in DSMR-reader's admin pages, at \"PVOutput: API "
+#~ "configuration\". Make sure to enter both:"
+#~ msgstr ""
+#~ "Vul deze gegevens in de configuratiepagina's van DSMR-reader in, bij: "
+#~ "\"PVOutput: API-configuratie\". Zowel:"
+
+#~ msgid "API Key"
+#~ msgstr "API Key"
+
+#~ msgid "System ID"
+#~ msgstr "System ID"
+
+#~ msgid ""
+#~ "Now navigate to another settings page in DSMR-reader: \"PVOutput: \"Add "
+#~ "Status\" configuration\"."
+#~ msgstr ""
+#~ "Navigeer nu naar een andere pagina met instellingen binnen DSMR-reader, "
+#~ "genaamd \"PVOutput: Add Status configuratie\"."
+
+#~ msgid "Enable uploading the consumption."
+#~ msgstr "Schakel het uploaden van je verbruik in."
+
+#~ msgid ""
+#~ "Choose an interval between the uploads. You can configure this as well on "
+#~ "the PVOutput's end, in Device Settings."
+#~ msgstr ""
+#~ "Kies een interval tussen de uploads. Je kunt dit tevens instellen aan de "
+#~ "kant van PVOutput, onder Device Settings."
+
+#~ msgid ""
+#~ "Optionally, choose an upload delay X (in minutes). If set, DSMR-reader will "
+#~ "not use data of the past X minutes."
+#~ msgstr ""
+#~ "Voer optioneel een uploadvertraging X in. Wanneer ingesteld, zal DSMR-"
+#~ "reader geen data gebruiken van de afgelopen X minuten."
+
+#~ msgid ""
+#~ "Optionally, you can choose to enter a **processing delay in minutes** for "
+#~ "PVOutput. Please note that PVOutput will only allow this when you have a **"
+#~ "\"Donation\" account** on their website. If you do not have one, they will "
+#~ "reject each API call you make, until you disable (clear) this option in "
+#~ "DSMR-reader."
+#~ msgstr ""
+#~ "Optioneel kun je ervoor kiezen om PVOutput de gegevens **vertraagd te laten "
+#~ "verwerken**. Let op, dit is een feature van PVOutput die alleen beschikbaar "
+#~ "is wanneer je daar een **\"Donatie\" account** hebt. Indien dat niet het "
+#~ "geval is, zal PVOutput elke API-call weigeren, totdat je dit uitschakelt "
+#~ "(veld leegmaakt) in DSMR-reader."
+
+#~ msgid ""
+#~ "If you configured everything correctly, you should see some addional data "
+#~ "in PVOutput listed under \"Your Outputs\" momentarily."
+#~ msgstr ""
+#~ "Indien je alles correct hebt ingesteld, zul je op korte termijn extra "
+#~ "gegevens moeten zien in PVOutput onder \"Your Outputs\"."
+
+#~ msgid "*Which services for sending notifications are supported?*"
+#~ msgstr "*Welke services voor het sturen van notificaties worden ondersteund?*"
+
+#~ msgid ""
+#~ "Currently, two mobile platforms are supported: Android and iOS. The "
+#~ "supported app for Android is `NotifyMyAndroid <https://www.notifymyandroid."
+#~ "com>`_. The supported app for iOS is `Prowl <https://www.prowlapp.com>`_."
+#~ msgstr ""
+#~ "Op dit moment worden twee platforms ondersteund: Android en iOS. De "
+#~ "ondersteunde app voor Android is `NotifyMyAndroid <https://www."
+#~ "notifymyandroid.com>`_. De ondersteunde app voor iOS is `Prowl <https://www."
+#~ "prowlapp.com>`_."
+
+#~ msgid "*How do I setup usage notifications?*"
+#~ msgstr "*Hoe stel ik verbruiksnotificaties in?*"
+
+#~ msgid ""
+#~ "Make sure you either have NotifyMyAndroid or Prowl installed on your "
+#~ "smartphone. If you don't, visit your platforms app store to download the "
+#~ "app and sign up for an account. Then, make sure to get your API key from "
+#~ "the notificationservice that you prefer. For instruction on obtaining the "
+#~ "API key, please read below."
+#~ msgstr ""
+#~ "Zorg ervoor dat je NotifyMyAndroid of Prowl hebt geïnstalleerd op je "
+#~ "smartphone. Als dat niet het geval is, bezoek dan de app store van je "
+#~ "platform, download de gewenste app en maak daarvoor een account. Daarna "
+#~ "haal je de API key voor de notificatieservice die je wilt gebruiken op. Om "
+#~ "te lezen hoe dat werkt, lees dan de instructies bij de volgende kopjes."
+
+#~ msgid ""
+#~ "In the DSMR-reader settings for the Usagenotifications, tick the Send "
+#~ "Notifications checkbox and select the notification service you want to use. "
+#~ "Then copy the API key from the notification service and paste in into the "
+#~ "the textbox for the API key. When you save these settings, your first "
+#~ "notification should be sent after midnight. Don't worry, the notification "
+#~ "will be sent with low priority and will not wake you up."
+#~ msgstr ""
+#~ "In de DSMR-reader instellingen voor de Verbruiksnotificaties zet je een "
+#~ "vinkje bij Stuur Notificaties en selecteer daaronder welke "
+#~ "notificatieservice je wilt gebruiken. Kopieeër daarna de API key van de "
+#~ "notificatieservice en plak deze in het tekstveld voor de API key. Als je "
+#~ "deze instellingen opslaat zul je na middernacht je eerste notificatie "
+#~ "ontvangen. Geen nood, de notificatie wordt altijd verstuurd met lage "
+#~ "prioriteit, deze maakt je dus niet wakker."
+
+#~ msgid "*How do I obtain my API key for NotifyMyAndroid?*"
+#~ msgstr "*Hoe haal ik de API key op voor NotifyMyAndroid?*"
+
+#~ msgid ""
+#~ "After you have downloaded NotifyMyAndroid and signed up for an account you "
+#~ "should be able to `login to your NotifyMyAndroid account <https://www."
+#~ "notifymyandroid.com/index.jsp>`_. Now go to \"`My Account <https://www."
+#~ "notifymyandroid.com/account.jsp>`_\", you should see an overview of your "
+#~ "current API keys if you have any. To create an API key for the DSMR-reader, "
+#~ "please click **\"Generate New Key\"**."
+#~ msgstr ""
+#~ "Nadat je NotifyMyAndroid hebt gedownload en een account hebt aangemaakt zou "
+#~ "je moeten kunnen `inloggen op je NotifyMyAndroid-account <https://www."
+#~ "notifymyandroid.com/index.jsp>`_. Ga nu naar \"`My Account <https://www."
+#~ "notifymyandroid.com/account.jsp>`_\" om een overzicht van je account de API "
+#~ "keys te krijgen als je deze al hebt. Om een API key voor de DSMR-reader te "
+#~ "genereren klik je op **\"Generate New Key\"**."
+
+#~ msgid ""
+#~ "When a new key is generated, you will see it immediatly. Your key is listed "
+#~ "like in the screenshot below (the red box marks your API key)."
+#~ msgstr ""
+#~ "Als er een nieuwe key is gegenereerd, zie je deze direct. De key is te "
+#~ "vinden zoals in onderstaande screenshot (er staat een rood kader om de key)."
+
+#~ msgid "*How do I obtain my API key for Prowl?*"
+#~ msgstr "*Hoe haal ik de API key op voor Prowl?*"
+
+#~ msgid ""
+#~ "After you have downloaded Prowl and signed up for an account you should be "
+#~ "able to `login to your Prowl account <https://www.prowlapp.com/login."
+#~ "php>`_. Now go to \"`API Keys <https://www.prowlapp.com/api_settings.php>`_"
+#~ "\", you should see an overview of your current API keys if you have any. To "
+#~ "create an API key for the DSMR-reader, input a name and click **\"Generate "
+#~ "Key\"**."
+#~ msgstr ""
+#~ "Nadat je Prowl hebt gedownload en een account hebt aangemaakt zou je moeten "
+#~ "kunnen `inloggen op je Prowl-account <https://www.prowlapp.com/login."
+#~ "php>`_. Ga nu naar \"`API Keys <https://www.prowlapp.com/api_settings.php>`_"
+#~ "\" om een overzicht van je API keys te krijgen als je deze al hebt. Om een "
+#~ "API key voor de DSMR-reader te genereren geef je een naam op en klik je op "
+#~ "**\"Generate Key\"**."

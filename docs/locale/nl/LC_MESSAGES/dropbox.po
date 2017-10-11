@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016, Dennis Siemensma
+# This file is distributed under the same license as the DSMR Reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader v1.x\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../dropbox.rst:2
+msgid "Integration: Dropbox"
+msgstr "Integratie: Dropbox"
+
+#: ../../dropbox.rst:10
+msgid "Dropbox: Automated backup sync"
+msgstr "Dropbox: Automatisch backups uploaden"
+
+#: ../../dropbox.rst:11
+msgid "*How can I link my Dropbox account for backups?*"
+msgstr "*Hoe kan ik mijn Dropbox-account koppelen voor de backups?*"
+
+#: ../../dropbox.rst:13
+msgid ""
+"Make sure you have a Dropbox-account or sign up for one. Now go to `Dropbox "
+"Apps <https://www.dropbox.com/developers/apps>`_ and click **\"Create app\"** "
+"in top right corner."
+msgstr ""
+"Zorg allereerst dat je een Dropbox-account hebt. Ga vervolgens naar `Dropbox "
+"Apps <https://www.dropbox.com/developers/apps>`_ en klik op **\"Create app\"** "
+"rechtsbovenin."
+
+#: ../../dropbox.rst:20
+msgid ""
+"Choose the following options: (1) **Dropbox API** and (2) **App folder**. Then "
+"enter a name for your app (3), this will also be used as directory name within "
+"the Apps-folder of your Dropbox."
+msgstr ""
+"Kies de volgende opties:  (1) **Dropbox API** en (2) **App folder**. Voer "
+"vervolgens een naam voor je app in (3), deze wordt ook gebruikt als naam van "
+"de submap binnen je Apps-folder in Dropbox."
+
+#: ../../dropbox.rst:27
+msgid ""
+"The app should be created in developer-mode. You can generate an access token "
+"for yourself by clicking the **\"Generate\"** button somewhere below."
+msgstr ""
+"The app is als het goed is nu aangemaakt in developer-modus. Je kunt nog een "
+"toegangstoken genereren door op de knop **\"Generate\"** te klikken, die "
+"verderop onderaan de pagina staat."
+
+#: ../../dropbox.rst:33
+msgid ""
+"Copy the generated access token to the DSMR-reader settings for the Dropbox-"
+"configuration. The DSMR-reader application should sync any backups created "
+"shortly."
+msgstr ""
+"Kopieer de gegenereerde toegangstoken naar de DSMR-reader instellingen onder "
+"Dropbox-configuratie. DSMR-reader zou vrij vlot gemaakte backups moeten "
+"uploaden naar je Dropbox-account."
