@@ -23,12 +23,13 @@ v1.10 - 2017-xx-xx
 
 .. note::
 
-    This release contains an update for the API framework, which `has a fix for some timezone issues <https://github.com/encode/django-rest-framework/issues/3732>`_.
-    You may experience different output regarding to datetime formatting when using the API.
+   This releases turns telegram logging **off by default**. 
+   If you wish to continue using this feature, add ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``settings.py`` and reload the application.
 
 
 **Tickets resolved in this release:**
 
+- [`#365 <https://github.com/dennissiemensma/dsmr-reader/issues/365>`_] Turn telegram logging off by default
 - [`#305 <https://github.com/dennissiemensma/dsmr-reader/issues/305>`_] Trend staafdiagrammen afgelopen week / afgelopen maand altijd gelijk
 - [`#194 <https://github.com/dennissiemensma/dsmr-reader/issues/194>`_] Add timestamp to highest and lowest Watt occurance
 - [`#363 <https://github.com/dennissiemensma/dsmr-reader/issues/363>`_] Show electricity_merged in the Total row for current month - by helmo

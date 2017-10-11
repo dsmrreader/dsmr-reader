@@ -197,3 +197,6 @@ DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/__init__.py'
 
 DSMRREADER_REST_FRAMEWORK_API_USER = 'api-user'
+
+# Whether telegrams are logged, in base64 format. Only required for debugging.
+DSMRREADER_LOG_TELEGRAMS = False

@@ -27,7 +27,10 @@ Appplication / Django
 The application has it's own logfiles as well.
 You can find them in the ``logs`` directory inside the project folder. 
 The ``django.log`` will list any internal errors regarding the Django framework it's using.
-The other logfile ``dsmrreader.log`` contains all readings it received, in base64 format. 
+The other logfile ``dsmrreader.log`` contains application logging, if enabled.
+
+You can log all telegrams received, in base64 format, by adding ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings.py`` config. 
+Make sure that you execute ``./reload.sh`` after changing the settings. It should now log the telegrams into ``dsmrreader.log``.
 
 
 

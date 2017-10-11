@@ -264,7 +264,9 @@ def telegram_to_reading(data):  # noqa: C901
     # Broadcast this telegram as signal.
     dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data=data)
 
-    dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
+    if settings.DSMRREADER_LOG_TELEGRAMS:
+        dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
+
     return new_reading
 
 

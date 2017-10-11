@@ -292,6 +292,12 @@ class TestServices(TestCase):
         telegram[-1] = "!58C8\n"
         dsmr_datalogger.services.verify_telegram_checksum(data=''.join(telegram))
 
+    @mock.patch('django.conf.settings.DSMRREADER_LOG_TELEGRAMS')
+    def test_telegram_logging_setting_coverage(self, settings_mock):
+        """ Purely a coverage test. """
+        settings_mock.return_value = True
+        dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
+
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
     def test_dsmr_version_2(self):
