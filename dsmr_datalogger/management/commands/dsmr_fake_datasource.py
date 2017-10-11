@@ -125,12 +125,12 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:31.7.0(000*A)\r\n",
             "1-0:51.7.0(000*A)\r\n",
             "1-0:71.7.0(001*A)\r\n",
-            "1-0:21.7.0(00.000*kW)\r\n",
-            "1-0:41.7.0(00.000*kW)\r\n",
+            "1-0:21.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered * 0.5, 6)),
+            "1-0:41.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered * 0.75, 6)),
             "1-0:61.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered, 6)),
-            "1-0:22.7.0(00.000*kW)\r\n",
-            "1-0:42.7.0(00.000*kW)\r\n",
-            "1-0:62.7.0(00.000*kW)\r\n",
+            "1-0:22.7.0({}*kW)\r\n".format(self._round_precision(currently_returned * 0.5, 6)),
+            "1-0:42.7.0({}*kW)\r\n".format(self._round_precision(currently_returned * 0.75, 6)),
+            "1-0:62.7.0({}*kW)\r\n".format(self._round_precision(currently_returned, 6)),
         ]
 
         if with_gas:
