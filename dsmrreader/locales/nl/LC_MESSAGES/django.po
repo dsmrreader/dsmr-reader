@@ -742,11 +742,20 @@ msgstr "Veelvoorkomend elektriciteitsverbruik"
 msgid "Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home."
 msgstr "Gemiddeld elektriciteitsverbruik berekend over de vijf meest voorkomende waardes. Dit is vaak ook het (minimale) elektriciteitsverbruik van je woning."
 
-msgid "Lowest electricity consumption read"
-msgstr "Laagst gemeten elektriciteitsverbruik"
+msgid "Lowest wattage"
+msgstr "Laagste wattage"
 
-msgid "Highest electricity consumption read"
-msgstr "Hoogst gemeten elektriciteitsverbruik"
+msgid "Highest wattage"
+msgstr "Hoogste wattage"
+
+msgid "Highest wattage (L1)"
+msgstr "Hoogste wattage (L1)"
+
+msgid "Highest wattage (L2)"
+msgstr "Hoogste wattage (L2)"
+
+msgid "Highest wattage (L3)"
+msgstr "Hoogste wattage (L3)"
 
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
@@ -1422,6 +1431,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Lowest electricity consumption read"
+#~ msgstr "Laagst gemeten elektriciteitsverbruik"
+
+#~ msgid "Highest electricity consumption read"
+#~ msgstr "Hoogst gemeten elektriciteitsverbruik"
 
 #~ msgid "PVOutput: Delay"
 #~ msgstr "PVOutput: Vertraging"

@@ -16,6 +16,7 @@ Listed in any order, sorted by name.
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - `dajappie <https://github.com/dajappie>`_
 - `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
+- `dbmnl <https://github.com/dbmnl>`_
 - `emilkwaaitaal <https://github.com/emilkwaaitaal>`_
 - `fpompert <https://github.com/fpompert>`_
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_

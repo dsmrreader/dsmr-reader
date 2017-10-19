@@ -83,20 +83,33 @@ msgid ""
 "The application has it's own logfiles as well. You can find them in the "
 "``logs`` directory inside the project folder. The ``django.log`` will "
 "list any internal errors regarding the Django framework it's using. The "
-"other logfile ``dsmrreader.log`` contains all readings it received, in "
-"base64 format."
+"other logfile ``dsmrreader.log`` contains application logging, if "
+"enabled."
 msgstr ""
 "De applicatie heeft zelf ook logfiles. Deze vindt je in de ``logs`` "
 "directory binnenin het project. De ``django.log`` bevat alle interne "
 "fouten m.b.t. het gebruikte Django framework. De andere logfile, "
 "``dsmrreader.log`` bevat doorgaans alle ontvangen metingen, in base64-"
-"formaat."
+"formaat en wanneer ingeschakeld."
 
-#: ../../troubleshooting.rst:35
+#: ../../troubleshooting.rst:32
+msgid ""
+"You can log all telegrams received, in base64 format, by adding "
+"``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings.py`` "
+"config. Make sure that you execute ``./reload.sh`` after changing the "
+"settings. It should now log the telegrams into ``dsmrreader.log``."
+msgstr ""
+"Je kunt alle ontvangen telegrammen loggen, in base64-formaat, door de "
+"regel ``DSMRREADER_LOG_TELEGRAMS = True`` toe te voegen aan je "
+"instellingen in ``dsmrreader/settings.py``. Zorg er wel voor dat je ``./"
+"reload.sh`` uitvoert na het doorvoeren van je wijzigingen. Als het goed "
+"is worden nu de telegrammen gelogd in  ``dsmrreader.log``."
+
+#: ../../troubleshooting.rst:38
 msgid "Contact"
 msgstr "Contact"
 
-#: ../../troubleshooting.rst:36
+#: ../../troubleshooting.rst:39
 msgid ""
 "Are you unable to resolve your problem or do you need any help? :doc:"
 "`More information can be found here<contributing>`."

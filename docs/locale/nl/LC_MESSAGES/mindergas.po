@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016, Dennis Siemensma
+# This file is distributed under the same license as the DSMR Reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader v1.x\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../mindergas.rst:2
+msgid "Integration: MinderGas.nl"
+msgstr "Integratie: MinderGas.nl"
+
+#: ../../mindergas.rst:10
+msgid "Mindergas.nl: Automated gas meter position export"
+msgstr "Mindergas.nl: Automatisch gasmeterstanden exporteren"
+
+#: ../../mindergas.rst:11
+msgid "*How can I link my mindergas.nl account?*"
+msgstr "*Hoe kan ik mijn mindergas.nl-account koppelen?*"
+
+#: ../../mindergas.rst:13
+msgid ""
+"Make sure you have a Mindergas.nl account or `signup for one <https://www."
+"mindergas.nl/users/sign_up>`_. Now go to \"`Meterstand API <https://www."
+"mindergas.nl/member/api>`_\" and click on the button located below **"
+"\"Authenticatietoken\"**."
+msgstr ""
+"Zorg ervoor dat je een mindergas.nl-account hebt of `registreer je op hun "
+"website <https://www.mindergas.nl/users/sign_up>`_. Ga nu naar \"`Meterstand "
+"API <https://www.mindergas.nl/member/api>`_\" en klik op de knop onder het "
+"kopje **\"Authenticatietoken\"**."
+
+#: ../../mindergas.rst:20
+msgid ""
+"Copy the authentication token generated and paste in into the DSMR-reader "
+"settings for the Mindergas.nl-configuration. Obviously the export only works "
+"when there are any gas readings at all and you have ticked the 'export' "
+"checkbox in the Mindergas.nl-configuration as well."
+msgstr ""
+"Kopieer de gegenereerde authenticatietoken in de DSMR-reader instellingen "
+"onder Mindergas.nl-configuratie. Vanzelfsprekend werkt deze feature alleen "
+"wanneer er gas gemeten wordt, en wanneer je de optie 'Exporteer gegevens naar "
+"MinderGas' aangevinkt hebt in dezelfde configuratie."
+
+#: ../../mindergas.rst:25
+msgid ""
+"Please note that due to policies of mindergas.nl it's not allowed to "
+"retroactively upload meter positions using the API. Therefor this is not "
+"supported by the application. You can however, enter them manually on their "
+"website."
+msgstr ""
+"N.B.: Wegens het beleid van mindergas.nl is het niet toegestaan om met "
+"terugwerkende kracht meterstanden door te geven via de API. De applicatie "
+"ondersteunt dat om die reden niet. Je kunt oude meterstanden echter wel via "
+"hun website handmatig invoeren, indien gewenst."

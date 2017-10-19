@@ -52,9 +52,14 @@ class TestViews(TestCase):
 
         json_response = json.loads(response.content.decode("utf-8"))
         self.assertIn('total_reading_count', json_response)
-        self.assertIn('slumber_consumption_watt', json_response)
-        self.assertIn('min_consumption_watt', json_response)
-        self.assertIn('max_consumption_watt', json_response)
+
+        if self.support_data:
+            self.assertIn('slumber_consumption_watt', json_response)
+            self.assertIn('total_min', json_response)
+            self.assertIn('total_max', json_response)
+            self.assertIn('l1_max', json_response)
+            self.assertIn('l2_max', json_response)
+            self.assertIn('l3_max', json_response)
 
 
 class TestViewsWithoutData(TestViews):

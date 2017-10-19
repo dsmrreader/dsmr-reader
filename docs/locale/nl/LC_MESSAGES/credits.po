@@ -52,110 +52,114 @@ msgid "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_"
 msgstr ""
 
 #: ../../credits.rst:19
-msgid "`emilkwaaitaal <https://github.com/emilkwaaitaal>`_"
+msgid "`dbmnl <https://github.com/dbmnl>`_"
 msgstr ""
 
 #: ../../credits.rst:20
-msgid "`fpompert <https://github.com/fpompert>`_"
+msgid "`emilkwaaitaal <https://github.com/emilkwaaitaal>`_"
 msgstr ""
 
 #: ../../credits.rst:21
-msgid "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
+msgid "`fpompert <https://github.com/fpompert>`_"
 msgstr ""
 
 #: ../../credits.rst:22
-msgid "`goegol <https://github.com/goegol>`_"
+msgid "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
 msgstr ""
 
 #: ../../credits.rst:23
-msgid "`Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_"
+msgid "`goegol <https://github.com/goegol>`_"
 msgstr ""
 
 #: ../../credits.rst:24
-msgid "`helmo <https://github.com/helmo>`_"
+msgid "`Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_"
 msgstr ""
 
 #: ../../credits.rst:25
-msgid "`Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_"
+msgid "`helmo <https://github.com/helmo>`_"
 msgstr ""
 
 #: ../../credits.rst:26
-msgid "`Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_"
+msgid "`Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_"
 msgstr ""
 
 #: ../../credits.rst:27
-msgid "Koen Volleberg"
+msgid "`Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_"
 msgstr ""
 
 #: ../../credits.rst:28
-msgid "`MarsWarrior <https://github.com/MarsWarrior>`_"
+msgid "Koen Volleberg"
 msgstr ""
 
 #: ../../credits.rst:29
-msgid "`mbnn <https://github.com/mbnn>`_"
+msgid "`MarsWarrior <https://github.com/MarsWarrior>`_"
 msgstr ""
 
 #: ../../credits.rst:30
-msgid "`michielvisser <https://github.com/michielvisser>`_"
+msgid "`mbnn <https://github.com/mbnn>`_"
 msgstr ""
 
 #: ../../credits.rst:31
-msgid "`mkruiver <https://github.com/mkruiver>`_"
+msgid "`michielvisser <https://github.com/michielvisser>`_"
 msgstr ""
 
 #: ../../credits.rst:32
-msgid "`Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_"
+msgid "`mkruiver <https://github.com/mkruiver>`_"
 msgstr ""
 
 #: ../../credits.rst:33
-msgid "`perryodk <https://github.com/perryodk>`_"
+msgid "`Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_"
 msgstr ""
 
 #: ../../credits.rst:34
-msgid "`pyrocumulus <https://github.com/pyrocumulus>`_"
+msgid "`perryodk <https://github.com/perryodk>`_"
 msgstr ""
 
 #: ../../credits.rst:35
-msgid "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
+msgid "`pyrocumulus <https://github.com/pyrocumulus>`_"
 msgstr ""
 
 #: ../../credits.rst:36
-msgid "`Sevickson <https://github.com/sevickson>`_"
+msgid "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
 msgstr ""
 
 #: ../../credits.rst:37
-msgid "`ThinkPadNL <https://github.com/ThinkPadNL>`_"
+msgid "`Sevickson <https://github.com/sevickson>`_"
 msgstr ""
 
 #: ../../credits.rst:38
-msgid "`thommy101 <https://github.com/thommy101>`_"
+msgid "`ThinkPadNL <https://github.com/ThinkPadNL>`_"
 msgstr ""
 
 #: ../../credits.rst:39
-msgid "`TopdRob <https://github.com/TopdRob>`_"
+msgid "`thommy101 <https://github.com/thommy101>`_"
 msgstr ""
 
 #: ../../credits.rst:40
-msgid "`trbs <https://github.com/trbs>`_"
+msgid "`TopdRob <https://github.com/TopdRob>`_"
 msgstr ""
 
 #: ../../credits.rst:41
-msgid "`voipmeister <https://github.com/voipmeister>`_"
+msgid "`trbs <https://github.com/trbs>`_"
 msgstr ""
 
 #: ../../credits.rst:42
-msgid "`WatskeBart <https://github.com/WatskeBart>`_"
+msgid "`voipmeister <https://github.com/voipmeister>`_"
 msgstr ""
 
 #: ../../credits.rst:43
+msgid "`WatskeBart <https://github.com/WatskeBart>`_"
+msgstr ""
+
+#: ../../credits.rst:44
 msgid "`xirixiz <https://github.com/xirixiz>`_"
 msgstr ""
 
-#: ../../credits.rst:47
+#: ../../credits.rst:48
 msgid "Software used"
 msgstr "Gebruikte software"
 
-#: ../../credits.rst:48
+#: ../../credits.rst:49
 msgid ""
 "Please note and respect their licences as well, if any. Credits to the "
 "following software and projects:"
@@ -163,119 +167,122 @@ msgstr ""
 "Houd rekening met eventuele licenties/restricties van deze software, "
 "wanneer van toepassing. Met dank aan de volgende software en projecten:"
 
-#: ../../credits.rst:50
+#: ../../credits.rst:51
 msgid "`Raspbian <https://www.raspbian.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:51
+#: ../../credits.rst:52
 msgid "`Django Project <https://www.djangoproject.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:52
+#: ../../credits.rst:53
 msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
 msgstr ""
 
-#: ../../credits.rst:53
+#: ../../credits.rst:54
 msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 msgstr ""
 
-#: ../../credits.rst:54
+#: ../../credits.rst:55
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:55
+#: ../../credits.rst:56
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:56
+#: ../../credits.rst:57
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:57
+#: ../../credits.rst:58
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:58
+#: ../../credits.rst:59
 msgid ""
 "`Director Responsive Admin <http://web-apps.ninja/director-free-"
 "responsive-admin-template/>`_"
 msgstr ""
 
-#: ../../credits.rst:59
+#: ../../credits.rst:60
 msgid ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 msgstr ""
 
-#: ../../credits.rst:60
+#: ../../credits.rst:61
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr ""
 
-#: ../../credits.rst:61
+#: ../../credits.rst:62
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:62
+#: ../../credits.rst:63
 msgid "`Github <https://github.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:63
+#: ../../credits.rst:64
 msgid "`TravisCI <https://travis-ci.org>`_"
 msgstr ""
 
-#: ../../credits.rst:64
+#: ../../credits.rst:65
 msgid "`Codecov <https://codecov.io>`_"
 msgstr ""
 
-#: ../../credits.rst:65
+#: ../../credits.rst:66
 msgid "`Read The Docs <https://readthedocs.org/>`_"
 msgstr ""
 
-#: ../../credits.rst:66
+#: ../../credits.rst:67
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr ""
 
-#: ../../credits.rst:67
+#: ../../credits.rst:68
 msgid ""
 "`Full Page Screen Capture <https://chrome.google.com/webstore/detail"
 "/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr ""
 
-#: ../../credits.rst:68
+#: ../../credits.rst:69
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr ""
 
-#: ../../credits.rst:69
+#: ../../credits.rst:70
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr ""
 
-#: ../../credits.rst:70
+#: ../../credits.rst:71
 msgid "`Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_"
 msgstr ""
 
-#: ../../credits.rst:74
+#: ../../credits.rst:75
 msgid "Misc"
 msgstr "Overig"
 
-#: ../../credits.rst:76
+#: ../../credits.rst:77
 msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 msgstr "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 
-#: ../../credits.rst:78
+#: ../../credits.rst:79
 msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 msgstr ""
 
-#: ../../credits.rst:80
+#: ../../credits.rst:81
 msgid ""
 "`Joost van der Linde (smartmeterdashboard) "
 "<http://www.smartmeterdashboard.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:82
+#: ../../credits.rst:83
 msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:84
+#: ../../credits.rst:85
 msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 msgstr ""
+
+#~ msgid "`dbmnl  <https://github.com/dbmnl >`_"
+#~ msgstr ""
 

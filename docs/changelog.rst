@@ -18,6 +18,25 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.10.0 - 2017-10-19
+^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+   This releases turns telegram logging **off by default**. 
+   If you wish to continue using this feature, add ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``settings.py`` and reload the application.
+
+
+**Tickets resolved in this release:**
+
+- [`#363 <https://github.com/dennissiemensma/dsmr-reader/issues/363>`_] Show electricity_merged in the Total row for current month - by helmo
+- [`#305 <https://github.com/dennissiemensma/dsmr-reader/issues/305>`_] Trend staafdiagrammen afgelopen week / afgelopen maand altijd gelijk
+- [`#194 <https://github.com/dennissiemensma/dsmr-reader/issues/194>`_] Add timestamp to highest and lowest Watt occurance
+- [`#365 <https://github.com/dennissiemensma/dsmr-reader/issues/365>`_] Turn telegram logging off by default
+- [`#366 <https://github.com/dennissiemensma/dsmr-reader/issues/366>`_] Restructure docs
+
+
+
 v1.9.0 - 2017-10-08
 ^^^^^^^^^^^^^^^^^^^
 
