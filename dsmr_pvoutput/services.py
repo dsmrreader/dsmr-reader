@@ -15,13 +15,6 @@ def should_export():
     if not status_settings.export or not api_settings.auth_token or not api_settings.system_identifier:
         return False
 
-    # Nonsense when having no data.
-    capabilities = dsmr_backend.services.get_capabilities()
-
-    if not capabilities['electricity_returned']:
-        print(' - [!] PVOutput | No electricity return recorded by application!')
-        return False
-
     return dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_export)
 
 

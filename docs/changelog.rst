@@ -24,6 +24,7 @@ v1.11.0 - 2017-xx-xx
 **Tickets resolved in this release:**
 
 - [`#368 <https://github.com/dennissiemensma/dsmr-reader/issues/368>`_] Gebruik van os.environ.get - by ju5t
+- [`#370 <https://github.com/dennissiemensma/dsmr-reader/issues/370>`_] Pvoutput upload zonder teruglevering
 
 
 
