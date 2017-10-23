@@ -25,6 +25,7 @@ Listed in any order, sorted by name.
 - `helmo <https://github.com/helmo>`_
 - `Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_ 
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
+- `ju5t <https://github.com/ju5t>`_
 - Koen Volleberg
 - `MarsWarrior <https://github.com/MarsWarrior>`_
 - `mbnn <https://github.com/mbnn>`_
@@ -43,7 +44,7 @@ Listed in any order, sorted by name.
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
 
- 
+
 Software used
 -------------
 Please note and respect their licences as well, if any. Credits to the following software and projects:
