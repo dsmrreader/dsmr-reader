@@ -12,6 +12,7 @@ Also many thanks to the contributions (reporting) of
 ----------------------------------------------------
 Listed in any order, sorted by name.
  
+- `allureGOT <https://github.com/allureGOT>`_
 - `balk77 <https://github.com/balk77>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - `dajappie <https://github.com/dajappie>`_
