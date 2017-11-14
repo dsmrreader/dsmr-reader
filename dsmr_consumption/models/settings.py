@@ -8,7 +8,7 @@ class ConsumptionSettings(SingletonModel):
     COMPACTOR_GROUPING_BY_READING = 1
     COMPACTOR_GROUPING_BY_MINUTE = 2
     COMPACTOR_GROUPING_CHOICES = (
-        (COMPACTOR_GROUPING_BY_READING, _('By reading (every 10 seconds)')),
+        (COMPACTOR_GROUPING_BY_READING, _('By reading (every X seconds)')),
         (COMPACTOR_GROUPING_BY_MINUTE, _('By minute')),
     )
 
@@ -16,7 +16,7 @@ class ConsumptionSettings(SingletonModel):
         choices=COMPACTOR_GROUPING_CHOICES,
         default=COMPACTOR_GROUPING_BY_MINUTE,
         verbose_name=_('Compactor grouping type'),
-        help_text=_('Electricity readings are read every 10 seconds. We can group those for you.')
+        help_text=_('Electricity readings are read every X seconds. We can group those for you.')
     )
 
     def __str__(self):
