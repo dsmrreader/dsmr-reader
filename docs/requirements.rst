@@ -19,12 +19,12 @@ OS / hardware
     - **Alternative #2**: The application supports receiving P1 telegrams using an API, so you can also run it on a server outside your home. (:doc:`API DOCS<api>`)
 
 
-**RaspberryPi 2 / 3 or Linux server**
+**RaspberryPi 3 or Linux server**
 
 
 .. warning::
 
-    The RaspberryPi 1 tends to be **too slow** for this project, as it requires multi core processing.
+    The RaspberryPi 1 and 2 tend to be **too slow** for this project, as it requires multi core processing.
     
     You can however run just the datalogger client on an old RaspberryPi, :doc:`see for the API for a howto and example scripts<api>`.
 
