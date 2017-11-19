@@ -2,7 +2,7 @@ from django.views.decorators.cache import cache_page
 from django.conf import settings
 from django.conf.urls import url
 
-from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, Dashboard, DashboardXhrConsumption, \
+from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, DashboardXhrConsumption, \
     DashboardXhrGraphs, DashboardXhrNotificationRead
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
 from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
