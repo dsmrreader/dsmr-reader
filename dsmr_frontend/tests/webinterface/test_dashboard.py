@@ -50,9 +50,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('track_temperature', response.context)
 
-        if self.support_data:
-            self.assertIn('consumption', response.context)
-
     @mock.patch('django.utils.timezone.now')
     def test_dashboard_xhr_header(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
@@ -94,6 +91,16 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200, response.content)
         self.assertEqual(response['Content-Type'], 'application/json')
+
+    def test_dashboard_xhr_consumption(self):
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-consumption'.format(self.namespace))
+        )
+
+        self.assertEqual(response.status_code, 200, response.content)
+
+        if self.support_data:
+            self.assertIn('consumption', response.context)
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard_xhr_graphs(self, now_mock):
