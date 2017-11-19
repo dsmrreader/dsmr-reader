@@ -2,8 +2,8 @@ from django.views.decorators.cache import cache_page
 from django.conf import settings
 from django.conf.urls import url
 
-from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, DashboardXhrGraphs, \
-    DashboardXhrNotificationRead
+from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, Dashboard, DashboardXhrConsumption, \
+    DashboardXhrGraphs, DashboardXhrNotificationRead
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
 from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
 from dsmr_frontend.views.trends import Trends
@@ -17,6 +17,7 @@ urlpatterns = [
     # Public views.
     url(r'^$', Dashboard.as_view(), name='dashboard'),
     url(r'^xhr/header$', DashboardXhrHeader.as_view(), name='dashboard-xhr-header'),
+    url(r'^xhr/consumption', DashboardXhrConsumption.as_view(), name='dashboard-xhr-consumption'),
     url(r'^xhr/graphs$', DashboardXhrGraphs.as_view(), name='dashboard-xhr-graphs'),
     url(r'^xhr/notification-read$', DashboardXhrNotificationRead.as_view(), name='dashboard-xhr-notification-read'),
     url(r'^archive$', Archive.as_view(), name='archive'),
