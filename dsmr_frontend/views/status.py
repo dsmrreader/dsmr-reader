@@ -5,6 +5,7 @@ from django.http.response import HttpResponse
 from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_stats.models.statistics import DayStatistics
 import dsmr_backend.services
@@ -17,6 +18,24 @@ class Status(TemplateView):
         context_data = super(Status, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['unprocessed_readings'] = DsmrReading.objects.unprocessed().count()
+
+        consumption_settings = ConsumptionSettings.get_solo()
+        if consumption_settings.compactor_grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
+            # If data is grouped by reading then 30 unprocessed readings is too much
+            context_data['unprocessed_readings_overflow'] = context_data['unprocessed_readings'] > 30
+        else:
+            # Get oldest unprocessed reading
+            try:
+                latest_unprocessed_reading = DsmrReading.objects.unprocessed().order_by('pk')[0]
+            except IndexError:
+                # No readings, so no overflow
+                context_data['unprocessed_readings_overflow'] = False
+            else:
+                delta_since_latest_unprocessed_reading = (
+                    timezone.now() - latest_unprocessed_reading.timestamp
+                ).seconds
+                # If data is grouped by minute then not having processed a 2 minute old reading is too much
+                context_data['unprocessed_readings_overflow'] = delta_since_latest_unprocessed_reading > 120
 
         try:
             context_data['latest_reading'] = DsmrReading.objects.all().order_by('-pk')[0]
