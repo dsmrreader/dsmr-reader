@@ -100,7 +100,7 @@
                     <i class="fa fa-cogs"></i> &nbsp; {% trans "Telegram processing" %} <br />
                 </header>
                 <div class="panel-body">
-                    {% if unprocessed_readings > 30 %}
+                    {% if unprocessed_reading_span > 300 %}
                     <div class="alert alert-danger" role="alert">
                         <span class="fa fa-frown-o fa-2x"></span> 
                         {% blocktrans %}There are too many unprocessed telegrams.{% endblocktrans %}

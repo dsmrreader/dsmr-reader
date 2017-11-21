@@ -19,6 +19,13 @@ class Status(TemplateView):
         context_data['unprocessed_readings'] = DsmrReading.objects.unprocessed().count()
 
         try:
+            first_unprocessed_reading = DsmrReading.objects.unprocessed().order_by('timestamp')[0]
+        except IndexError:
+            context_data['unprocessed_reading_span'] = None
+        else:
+            context_data['unprocessed_reading_span'] = (timezone.now() - first_unprocessed_reading.timestamp).seconds
+
+        try:
             context_data['latest_reading'] = DsmrReading.objects.all().order_by('-pk')[0]
         except IndexError:
             pass

@@ -23,6 +23,7 @@ v1.11.0 - 2017-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#387 <https://github.com/dennissiemensma/dsmr-reader/issues/387>`_] There are too many unprocessed telegrams - by HugoDaBosss
 - [`#368 <https://github.com/dennissiemensma/dsmr-reader/issues/368>`_] Gebruik van os.environ.get - by ju5t
 - [`#370 <https://github.com/dennissiemensma/dsmr-reader/issues/370>`_] Pvoutput upload zonder teruglevering
 - [`#371 <https://github.com/dennissiemensma/dsmr-reader/issues/371>`_] fonts via https laden

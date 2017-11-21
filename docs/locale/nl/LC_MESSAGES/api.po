@@ -16,8 +16,6 @@ msgstr ""
 "Generated-By: Babel 2.3.4\n"
 "Language: nl\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 #: ../../api.rst:2
 msgid "API"

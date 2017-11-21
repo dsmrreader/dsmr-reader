@@ -41,10 +41,21 @@ class TestViews(TestCase):
 
         self.assertIn('capabilities', response.context)
         self.assertIn('unprocessed_readings', response.context)
+        self.assertIn('unprocessed_reading_span', response.context)
 
         if self.support_data:
             self.assertIn('latest_day_statistics', response.context)
             self.assertIn('days_since_latest_day_statistics', response.context)
+            self.assertIsNone(response.context['unprocessed_reading_span'])
+
+            # Check unprocessed count as well.
+            DsmrReading.objects.update(processed=False)
+            response = self.client.get(
+                reverse('{}:status'.format(self.namespace))
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.context['unprocessed_readings'], 3)
+            self.assertEqual(response.context['unprocessed_reading_span'], 11953)
 
         if 'latest_reading' in response.context:
             self.assertIn('delta_since_latest_reading', response.context)
