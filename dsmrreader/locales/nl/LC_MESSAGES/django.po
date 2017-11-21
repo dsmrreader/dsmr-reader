@@ -583,9 +583,6 @@ msgstr "Gas"
 msgid "Total"
 msgstr "Totaal"
 
-msgid "Add note for today"
-msgstr "Voeg notitie toe voor vandaag"
-
 msgid "Recent electricity consumed (Watt)"
 msgstr "Recent elektriciteitsverbruik (Watt)"
 
@@ -708,6 +705,9 @@ msgstr "Max."
 
 msgid "Avg."
 msgstr "Gem."
+
+msgid "Add note for today"
+msgstr "Voeg notitie toe voor vandaag"
 
 msgid "Meter positions"
 msgstr "Meterstanden"
