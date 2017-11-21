@@ -1,0 +1,57 @@
+{% load humanize %}
+{% load i18n %} 
+{% load l10n %}
+
+<div class="panel">
+    <header class="panel-heading">
+        {{ consumption.day }}
+
+        <small class="pull-right">
+            <a href="{% url 'admin:dsmr_stats_note_add' %}?day={% now 'DJANGO_DATE_FORMAT' %}">
+                <span class="badge bg-green"><i class="fa fa-plus"></i> &nbsp; {% trans "Add note for today" %}</span>
+            </a>
+        </small>
+    </header>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <tr>
+                <th class="col-md-6"></th>
+                <th class="col-md-2">{% if capabilities.electricity %}{% trans "Consumed" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}{% endif %}){% endif %}</th>
+                <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
+                <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
+            </tr>
+            {% if frontend_settings.merge_electricity_tariffs %}<tr>
+                <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %}{% endif %}</td>
+                <td><span class="badge bg-red" id="consumption_electrity_merged">{% if capabilities.electricity %}{{ consumption.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                <td><span class="badge bg-green" id="consumption_electrity_returned_merged">{% if capabilities.electricity_returned %}{{ consumption.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
+            </tr>
+            {% else %}<tr>
+                <td>{% if capabilities.electricity %}{% trans "Electricity 1 (low tariff)" %}{% endif %}</td>
+                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity1_cost|default:'-' }}{% endif %}</span></td>
+            </tr><tr>
+                <td>{% if capabilities.electricity %}{% trans "Electricity 2 (high tariff)" %}{% endif %}</td>
+                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity2_cost|default:'-' }}{% endif %}</span></td>
+            </tr>
+            {% endif %}
+
+            {% if capabilities.gas %}<tr>
+                <td> {% trans "Gas" %}</td>
+                <td><span class="badge bg-orange">{{ consumption.gas|default:'-'|floatformat:2 }}</span></td>
+                <td>&nbsp;</td>
+                <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td style="font-weight: bold;">{% trans "Total" %}</td>
+                <td><span class="badge bg-red">{% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}{{ consumption.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
+                <td><span class="badge bg-green">{% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs%}{{ consumption.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                <td><span class="badge bg-black">{{ consumption.total_cost|default:'-' }}</span></td>
+            </tr>
+        </table>
+    </div>
+</div>
