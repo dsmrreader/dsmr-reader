@@ -23,17 +23,19 @@ class Status(TemplateView):
         if consumption_settings.compactor_grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
             # If data is grouped by reading then 30 unprocessed readings is too much
             context_data['unprocessed_readings_overflow'] = context_data['unprocessed_readings'] > 30
-        # If the number of unprocessed readings is 0, getting the oldest reading will give trouble
-        elif context_data['unprocessed_readings'] == 0:
-            context_data['unprocessed_readings_overflow'] = False
         else:
             # Get oldest unprocessed reading
-            latest_unprocessed_reading = DsmrReading.objects.unprocessed().order_by('pk')[0]
-            delta_since_latest_unprocessed_reading = (
-                timezone.now() - latest_unprocessed_reading.timestamp
-            ).seconds
-            # If data is grouped by minute then not having processed a 2 minute old reading is too much
-            context_data['unprocessed_readings_overflow'] = delta_since_latest_unprocessed_reading > 120
+            try:
+                latest_unprocessed_reading = DsmrReading.objects.unprocessed().order_by('pk')[0]
+            except IndexError:
+                # No readings, so no overflow
+                context_data['unprocessed_readings_overflow'] = False
+            else:
+                delta_since_latest_unprocessed_reading = (
+                    timezone.now() - latest_unprocessed_reading.timestamp
+                ).seconds
+                # If data is grouped by minute then not having processed a 2 minute old reading is too much
+                context_data['unprocessed_readings_overflow'] = delta_since_latest_unprocessed_reading > 120
 
         try:
             context_data['latest_reading'] = DsmrReading.objects.all().order_by('-pk')[0]
