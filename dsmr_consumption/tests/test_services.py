@@ -81,6 +81,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         # Just duplicate one, as it will cause: IntegrityError UNIQUE constraint failed: ElectricityConsumption.read_at
         duplicate_reading = DsmrReading.objects.all()[0]
         duplicate_reading.pk = None
+        duplicate_reading.electricity_currently_delivered *= 2  # Make it differ.
         duplicate_reading.save()
 
         dsmr_consumption.services.compact_all()

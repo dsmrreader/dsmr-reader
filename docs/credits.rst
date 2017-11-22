@@ -11,7 +11,12 @@ Special thanks for supplying code contributions
 Also many thanks to the contributions (reporting) of
 ----------------------------------------------------
 Listed in any order, sorted by name.
+<<<<<<< HEAD
 
+=======
+ 
+- `allureGOT <https://github.com/allureGOT>`_
+>>>>>>> refs/heads/378-duplicate-timestamp-handling
 - `balk77 <https://github.com/balk77>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - `dajappie <https://github.com/dajappie>`_
