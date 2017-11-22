@@ -23,6 +23,7 @@ v1.11.0 - 2017-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#382 <https://github.com/dennissiemensma/dsmr-reader/issues/382>`_] Archief klopt niet
 - [`#385 <https://github.com/dennissiemensma/dsmr-reader/issues/385>`_] Ververs dagverbruik op dashboard automatisch - by HugoDaBosss
 - [`#387 <https://github.com/dennissiemensma/dsmr-reader/issues/387>`_] There are too many unprocessed telegrams - by HugoDaBosss
 - [`#368 <https://github.com/dennissiemensma/dsmr-reader/issues/368>`_] Gebruik van os.environ.get - by ju5t

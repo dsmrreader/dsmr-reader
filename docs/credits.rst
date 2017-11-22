@@ -20,6 +20,7 @@ Listed in any order, sorted by name.
 - `emilkwaaitaal <https://github.com/emilkwaaitaal>`_
 - `fpompert <https://github.com/fpompert>`_
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
+- `gertjuhh <https://github.com/gertjuhh>`_
 - `goegol <https://github.com/goegol>`_
 - `Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_
 - `helmo <https://github.com/helmo>`_
@@ -44,7 +45,7 @@ Listed in any order, sorted by name.
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
-
+ 
 
 Software used
 -------------

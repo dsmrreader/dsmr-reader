@@ -8,6 +8,7 @@ from django.utils import timezone
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
+from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_backend.services
 import dsmr_stats.services
 
@@ -87,6 +88,43 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_stats.services.analyze()
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
+
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_service_block(self, now_mock):
+        """ Checks whether unprocessed readings block statistics generation. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=3))
+
+        self.assertTrue(ElectricityConsumption.objects.exists())
+        self.assertFalse(DayStatistics.objects.exists())
+        self.assertFalse(HourStatistics.objects.exists())
+
+        # Verify block for unprocessed readings later on.
+        DsmrReading.objects.create(
+            timestamp=timezone.now() - timezone.timedelta(hours=12),
+            electricity_delivered_1=1,
+            electricity_returned_1=1,
+            electricity_delivered_2=1,
+            electricity_returned_2=1,
+            electricity_currently_delivered=1,
+            electricity_currently_returned=1,
+            processed=False,
+        )
+        self.assertTrue(DsmrReading.objects.unprocessed().exists())
+
+        dsmr_stats.services.analyze()
+
+        self.assertFalse(DayStatistics.objects.exists())
+        self.assertFalse(HourStatistics.objects.exists())
+
+        # Try again, without any blocking readings left.
+        DsmrReading.objects.unprocessed().delete()
+        self.assertFalse(DsmrReading.objects.unprocessed().exists())
+
+        dsmr_stats.services.analyze()
+
+        if dsmr_backend.services.get_capabilities('any'):
+            self.assertTrue(DayStatistics.objects.exists())
+            self.assertTrue(HourStatistics.objects.exists())
 
     def test_create_hourly_gas_statistics_dsmr4(self):
         if not dsmr_backend.services.get_capabilities(capability='gas'):

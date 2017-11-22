@@ -52,9 +52,6 @@ msgstr "Bedoeld voor gebruik buiten productie. Alleen mogelijk wanneer instellin
 msgid "Generates a generic event triggering apps for backend operations, cron-like."
 msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
 
-msgid "Deletes all aggregated data generated. Such as consumption and (day/hour) statistics. This command does NOT affect any readings stored. In fact, you should NEVER run this, unless you still have each and EVERY reading stored, as the application will attempt to recalculate all aggregated data deleted retroactively, using each reading stored."
-msgstr "Verwijdert alle geaggregeerde gegevens, zoals verbruik en dag/uur-statistieken. Dit heeft GEEN invloed op alle opgeslagen metingen. Let op: draai dit NOOIT tenzij je absoluut zeker weet dat je ELKE meting nog opgeslagen hebt. De applicatie gaat namelijk proberen om alle geaggregeerde gegevens opnieuw uit te rekenen, aan de hand van de opgeslagen metingen."
-
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer."
 
@@ -1431,18 +1428,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "Lowest electricity consumption read"
-#~ msgstr "Laagst gemeten elektriciteitsverbruik"
-
-#~ msgid "Highest electricity consumption read"
-#~ msgstr "Hoogst gemeten elektriciteitsverbruik"
-
-#~ msgid "PVOutput: Delay"
-#~ msgstr "PVOutput: Vertraging"
-
-#~ msgid "Required to acknowledge you that you WILL delete your statistics with this."
-#~ msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee (gegenereerde) data verwijdert."
-
-#~ msgid "Intended usage is NOT production! Force by using --ack-to-delete-my-data"
-#~ msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-delete-my-data"
