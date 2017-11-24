@@ -3,6 +3,7 @@ from decimal import Decimal, ROUND_UP
 import pytz
 
 from django.db.models import Avg, Min, Max, Count
+from django.db.utils import IntegrityError
 from django.utils import timezone, formats
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -52,20 +53,25 @@ def _compact_electricity(dsmr_reading, grouping_type, reading_start):
     """
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
     """
-    # Electricity should be unique, because it's the reading with the lowest interval anyway.
+    # Electricity should be unique, because it's the reading with the smallest interval anyway.
     if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
-        ElectricityConsumption.objects.get_or_create(
-            read_at=dsmr_reading.timestamp,
-            delivered_1=dsmr_reading.electricity_delivered_1,
-            returned_1=dsmr_reading.electricity_returned_1,
-            delivered_2=dsmr_reading.electricity_delivered_2,
-            returned_2=dsmr_reading.electricity_returned_2,
-            currently_delivered=dsmr_reading.electricity_currently_delivered,
-            currently_returned=dsmr_reading.electricity_currently_returned,
-            phase_currently_delivered_l1=dsmr_reading.phase_currently_delivered_l1,
-            phase_currently_delivered_l2=dsmr_reading.phase_currently_delivered_l2,
-            phase_currently_delivered_l3=dsmr_reading.phase_currently_delivered_l3,
-        )
+        try:
+            ElectricityConsumption.objects.get_or_create(
+                read_at=dsmr_reading.timestamp,
+                delivered_1=dsmr_reading.electricity_delivered_1,
+                returned_1=dsmr_reading.electricity_returned_1,
+                delivered_2=dsmr_reading.electricity_delivered_2,
+                returned_2=dsmr_reading.electricity_returned_2,
+                currently_delivered=dsmr_reading.electricity_currently_delivered,
+                currently_returned=dsmr_reading.electricity_currently_returned,
+                phase_currently_delivered_l1=dsmr_reading.phase_currently_delivered_l1,
+                phase_currently_delivered_l2=dsmr_reading.phase_currently_delivered_l2,
+                phase_currently_delivered_l3=dsmr_reading.phase_currently_delivered_l3,
+            )
+        except IntegrityError:
+            # This might happen, even though rarely, when the same timestamp with different values comes by.
+            pass
+
         return
 
     minute_end = reading_start + timezone.timedelta(minutes=1)

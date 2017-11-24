@@ -10,11 +10,12 @@ from django.conf import settings
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 import dsmr_backend.services
 
 
-def analyze():
+def analyze():  # noqa: C901
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
     try:
         # Determine the starting date used to construct new statistics.
@@ -61,8 +62,7 @@ def analyze():
     if consumption_date == now.date():
         return
 
-    # Do not create status until we've passed the next day for over 30 minutes. Required due to somewhat delayed gas
-    # update by meters.
+    # Do not create status until we've passed the next day by a margin. Required due to delayed gas update by meters.
     if dsmr_backend.services.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
         # Skip for a moment.
         return
@@ -73,6 +73,15 @@ def analyze():
         day=consumption_date.day,
         hour=0,
     ))
+
+    # Also, make sure we have processed all readings from that day.
+    day_processed = not DsmrReading.objects.unprocessed().filter(
+        timestamp__gte=day_start,
+        timestamp__lte=day_start + timezone.timedelta(hours=24),
+    ).exists()
+
+    if not day_processed:
+        return
 
     # For backend logging in Supervisor.
     print(' - Creating day & hour statistics for: {}.'.format(day_start))

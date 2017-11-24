@@ -56,16 +56,16 @@ msgstr ""
 "draaien. (:doc:`API DOCS<api>`)"
 
 #: ../../requirements.rst:22
-msgid "**RaspberryPi 2 / 3 or Linux server**"
-msgstr "**RaspberryPi 2 / 3 of Linux server**"
+msgid "**RaspberryPi 3 or Linux server**"
+msgstr "**RaspberryPi 3 of Linux server**"
 
 #: ../../requirements.rst:27
 msgid ""
-"The RaspberryPi 1 tends to be **too slow** for this project, as it requires "
-"multi core processing."
+"The RaspberryPi 1 and 2 tend to be **too slow** for this project, as it "
+"requires multi core processing."
 msgstr ""
-"De RaspberryPi 1 lijkt **te traag** voor het draaien van dit project, gezien "
-"meerdere processoren vrijwel vereist zijn."
+"De RaspberryPi 1 en 2 lijken **te traag** voor het draaien van dit project, "
+"gezien meerdere processoren vrijwel vereist zijn."
 
 #: ../../requirements.rst:29
 msgid ""

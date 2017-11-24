@@ -18,6 +18,21 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.11.0 - 2017-xx-xx
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#382 <https://github.com/dennissiemensma/dsmr-reader/issues/382>`_] Archief klopt niet
+- [`#385 <https://github.com/dennissiemensma/dsmr-reader/issues/385>`_] Ververs dagverbruik op dashboard automatisch - by HugoDaBosss
+- [`#387 <https://github.com/dennissiemensma/dsmr-reader/issues/387>`_] There are too many unprocessed telegrams - by HugoDaBosss
+- [`#368 <https://github.com/dennissiemensma/dsmr-reader/issues/368>`_] Gebruik van os.environ.get - by ju5t
+- [`#370 <https://github.com/dennissiemensma/dsmr-reader/issues/370>`_] Pvoutput upload zonder teruglevering
+- [`#371 <https://github.com/dennissiemensma/dsmr-reader/issues/371>`_] fonts via https laden
+- [`#378 <https://github.com/dennissiemensma/dsmr-reader/issues/378>`_] Processing of telegrams stalled
+
+
+
 v1.10.0 - 2017-10-19
 ^^^^^^^^^^^^^^^^^^^^
 

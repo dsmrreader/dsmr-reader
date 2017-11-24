@@ -38,18 +38,6 @@ class TestServices(TestCase):
         self.assertFalse(dsmr_pvoutput.services.should_export())
 
     @mock.patch('django.utils.timezone.now')
-    def test_should_not_export(self, now_mock):
-        """ Test should_export() without data. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
-        self._apply_fake_settings()
-
-        # Drop all gas data.
-        ElectricityConsumption.objects.all().delete()
-        self.assertFalse(ElectricityConsumption.objects.exists())
-
-        self.assertFalse(dsmr_pvoutput.services.should_export())
-
-    @mock.patch('django.utils.timezone.now')
     def test_should_export_no_need(self, now_mock):
         """ Test should_export() when not needed, yet. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))

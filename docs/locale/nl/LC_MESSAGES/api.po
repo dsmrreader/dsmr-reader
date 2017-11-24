@@ -244,7 +244,7 @@ msgid ""
 msgstr ""
 "N.B.: De datalogger kan soms in de weg zitten. Mocht blijken dat de "
 "statistieken niet kloppen na hergenereren, dan kun je het eventueel nogmaals "
-"proberen de datalogger uitgeschakeld."
+"proberen met de datalogger uitgeschakeld."
 
 #: ../../api.rst:302 ../../api.rst:407
 msgid "Full path: ``/api/v2/datalogger/dsmrreading``"
