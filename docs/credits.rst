@@ -28,7 +28,7 @@ Listed in any order, sorted by name.
 - `HugoDaBosss <https://github.com/HugoDaBosss>`_
 - `Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_ 
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
-- `jorisvervuurt <https://github.com/jorisvervuurt>`_
+- `Joris Vervuurt <https://github.com/jorisvervuurt>`_
 - `ju5t <https://github.com/ju5t>`_
 - Koen Volleberg
 - `MarsWarrior <https://github.com/MarsWarrior>`_

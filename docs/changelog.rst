@@ -23,7 +23,7 @@ v1.12.0 - 2017-xx-xx
 
 **Tickets resolved in this release:**
 
-- [`#398 <https://github.com/dennissiemensma/dsmr-reader/issues/398>`_] iOS Web App: prevent same-window links from being opened externally - by jorisvervuurt
+- [`#398 <https://github.com/dennissiemensma/dsmr-reader/issues/398>`_] iOS Web App: prevent same-window links from being opened externally - by Joris Vervuurt
 
 
 
