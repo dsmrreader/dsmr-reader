@@ -7,7 +7,7 @@ Dedicated constants for Buienradar, external weather service.
 Moved outside settings and model definitions to keep things separated and isolated.
 It also allows us to choose an other external weather service more easily.
 """
-BUIENRADAR_API_URL = 'http://api.buienradar.nl/'
+BUIENRADAR_API_URL = 'https://api.buienradar.nl/'
 BUIENRADAR_XPATH = './/weerstations/weerstation[@id="{weather_station_id}"]/temperatuurGC'
 
 BUIENRADAR_STATIONS = (
