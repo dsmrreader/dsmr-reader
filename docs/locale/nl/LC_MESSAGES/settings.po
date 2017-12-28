@@ -215,7 +215,7 @@ msgid ""
 "Whether you want to track phases. :doc:`More information about this "
 "feature can be found in the FAQ<faq>`."
 msgstr ""
-"Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer "
+"Geeft aan of de elektriciteitsfasen moeten worden bijhouden (indien "
 "aanwezig). :doc:`Meer informatie over deze feature kun je terugvinden in "
 "de FAQ<faq>`."
 
@@ -229,7 +229,7 @@ msgid ""
 "for DSMR 4+."
 msgstr ""
 "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten "
-"controleren. Alleen beschikbaar voor DSMR 4+."
+"verifiëren. Alleen beschikbaar voor DSMR 4+."
 
 #: ../../settings.rst:104
 msgid "``DSMR version``"
