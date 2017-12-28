@@ -36,7 +36,7 @@ msgid ""
 "The dashboard displays the latest information regarding any consumption "
 "of today and the current month so far."
 msgstr ""
-"Het dashboard weergeeft de meest recente informatie over je "
+"Het dashboard geeft de meest recente informatie weer over je "
 "energieverbruik van vandaag en de lopende maand tot nu toe."
 
 #: ../../screenshots.rst:20
@@ -48,7 +48,7 @@ msgid ""
 "The archive allows you to go back to any moment tracked. The data can be "
 "plotted either on day, month or year level."
 msgstr ""
-"Het archief stelt je in staat om terug in de tijd te gaan naar elke "
+"Het archief stelt je in staat om terug in de tijd te gaan naar elk "
 "moment dat gemeten is met de applicatie. Gegevens kunnen getoond worden "
 "op verschillende detailniveaus: per dag, per maand en per jaar."
 
@@ -58,7 +58,7 @@ msgstr "Trends"
 
 #: ../../screenshots.rst:30
 msgid "Trends are an average summary of your daily consumption and habits."
-msgstr "Trends weergeven je gemiddelde energieverbruik en gewoontes."
+msgstr "Trends geven je gemiddelde energieverbruik en gewoontes weer."
 
 #: ../../screenshots.rst:38
 msgid "Statistics"
@@ -69,8 +69,8 @@ msgid ""
 "The statistics page will display the current state of your meter and the "
 "energy prices currently apply (if any)."
 msgstr ""
-"De statistiekenpagina weergeeft de huidige staat van je slimme meter en "
-"de huidige energietarieven (wanneer van toepassing)."
+"De statistiekenpagina geeft de huidige staat van je slimme meter en "
+"de huidige energietarieven weer (wanneer van toepassing)."
 
 #: ../../screenshots.rst:47
 msgid "Compare"
@@ -92,8 +92,8 @@ msgid ""
 "tracked. If there are any problems regarding data handling, they should "
 "be indicated here."
 msgstr ""
-"De statuspagina weergeeft de 'gezondheid' van de applicatie en die van de"
-" dataverwerking. Mochten er problemen zijn met het verzamelen van "
+"De statuspagina geeft de 'gezondheid' van de applicatie en die van de"
+" dataverwerking weer. Mochten er problemen zijn met het verzamelen van "
 "gegevens dan zou dat hier zichtbaar moeten zijn."
 
 #: ../../screenshots.rst:65
