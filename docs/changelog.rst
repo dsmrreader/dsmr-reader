@@ -23,6 +23,8 @@ v1.12.0 - 2017-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#405 <https://github.com/dennissiemensma/dsmr-reader/issues/405>`_] More updates to the Dutch translation of the documentation - by lckarssen
+- [`#404 <https://github.com/dennissiemensma/dsmr-reader/issues/404>`_] Fix minor typo in Dutch translation - by lckarssen
 - [`#398 <https://github.com/dennissiemensma/dsmr-reader/issues/398>`_] iOS Web App: prevent same-window links from being opened externally - by Joris Vervuurt
 - [`#399 <https://github.com/dennissiemensma/dsmr-reader/issues/399>`_] Veel calls naar api.buienradar
 

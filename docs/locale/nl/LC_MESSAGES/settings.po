@@ -215,7 +215,7 @@ msgid ""
 "Whether you want to track phases. :doc:`More information about this "
 "feature can be found in the FAQ<faq>`."
 msgstr ""
-"Geeft aan of de elektriciteitsfasen moeten worden bijhouden (indien "
+"Geeft aan of de elektriciteitsfasen getraceerd worden (indien "
 "aanwezig). :doc:`Meer informatie over deze feature kun je terugvinden in "
 "de FAQ<faq>`."
 

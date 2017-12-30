@@ -31,6 +31,7 @@ Listed in any order, sorted by name.
 - `Joris Vervuurt <https://github.com/jorisvervuurt>`_
 - `ju5t <https://github.com/ju5t>`_
 - Koen Volleberg
+- `lckarssen <https://github.com/lckarssen>`_
 - `MarsWarrior <https://github.com/MarsWarrior>`_
 - `mbnn <https://github.com/mbnn>`_
 - `michielvisser <https://github.com/michielvisser>`_
