@@ -65,7 +65,7 @@ msgid ""
 "requires multi core processing."
 msgstr ""
 "De RaspberryPi 1 en 2 lijken **te traag** voor het draaien van dit project, "
-"gezien meerdere processoren vrijwel vereist zijn."
+"aangezien meerdere processoren vereist zijn."
 
 #: ../../requirements.rst:29
 msgid ""
@@ -73,7 +73,7 @@ msgid ""
 "`see for the API for a howto and example scripts<api>`."
 msgstr ""
 "Je kunt echter wel alleen een datalogger client draaien op een oude "
-"RaspberryPi, :doc:`zie de API -documentatie voor meer informatie en "
+"RaspberryPi, :doc:`zie de API-documentatie voor meer informatie en "
 "voorbeeldscripts<api>`."
 
 #: ../../requirements.rst:34
@@ -162,7 +162,7 @@ msgstr "**Slimme meter P1 data kabel**"
 
 #: ../../requirements.rst:72
 msgid "Can be purchased online and they cost around 15 tot 20 Euro's each."
-msgstr "Je kunt deze online bestellen voor ongeveer 15 a 20 Euro."
+msgstr "Je kunt deze online bestellen voor ongeveer 15 à 20 Euro."
 
 #: ../../requirements.rst:76
 msgid "Misc"
@@ -175,7 +175,7 @@ msgstr ""
 
 #: ../../requirements.rst:80
 msgid "It just really helps if you know what you are doing."
-msgstr "Het scheelt eenmaal een hoop wanneer je weet waar je mee bezig bent."
+msgstr "Het scheelt nu eenmaal een hoop wanneer je weet waar je mee bezig bent."
 
 #~ msgid "**Raspbian OS**"
 #~ msgstr "**Raspbian OS**"
