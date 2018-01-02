@@ -895,10 +895,10 @@ msgstr "Gemiddelde elektriciteit teruglevering per daguur (in %%) van de afgelop
 msgid "Average hourly gas consumed (in %%) within the past 4 weeks"
 msgstr "Gemiddeld gasverbruik per daguur (in %%) van de afgelopen 4 weken"
 
-msgid "Electricity tariff ratio (passed week)"
+msgid "Electricity tariff ratio (past week)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 
-msgid "Electricity tariff ratio (passed month)"
+msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
 msgid "Electricity returned (single tariff)"

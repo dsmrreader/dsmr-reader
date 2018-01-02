@@ -18,7 +18,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.12.0 - 2017-xx-xx
+v1.12.0 - 2018-xx-xx
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
@@ -27,6 +27,7 @@ v1.12.0 - 2017-xx-xx
 - [`#404 <https://github.com/dennissiemensma/dsmr-reader/issues/404>`_] Fix minor typo in Dutch translation - by lckarssen
 - [`#398 <https://github.com/dennissiemensma/dsmr-reader/issues/398>`_] iOS Web App: prevent same-window links from being opened externally - by Joris Vervuurt
 - [`#399 <https://github.com/dennissiemensma/dsmr-reader/issues/399>`_] Veel calls naar api.buienradar
+- [`#406 <https://github.com/dennissiemensma/dsmr-reader/issues/406>`_] Spelling correction trends page
 
 
 
