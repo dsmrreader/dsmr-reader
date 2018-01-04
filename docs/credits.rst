@@ -11,7 +11,7 @@ Special thanks for supplying code contributions
 Also many thanks to the contributions (reporting) of
 ----------------------------------------------------
 Listed in any order, sorted by name.
- 
+  
 - `allureGOT <https://github.com/allureGOT>`_
 - `balk77 <https://github.com/balk77>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
@@ -34,6 +34,7 @@ Listed in any order, sorted by name.
 - `lckarssen <https://github.com/lckarssen>`_
 - `MarsWarrior <https://github.com/MarsWarrior>`_
 - `mbnn <https://github.com/mbnn>`_
+- `meijjaa <https://github.com/meijjaa>`_
 - `michielvisser <https://github.com/michielvisser>`_
 - `mkruiver <https://github.com/mkruiver>`_
 - `Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_
