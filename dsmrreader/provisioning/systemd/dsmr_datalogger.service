@@ -1,0 +1,19 @@
+[Unit]
+Description=DSMR Reader
+After=network.target
+
+[Service]
+Type=simple
+User=dsmr
+Group=dsmr
+StandardOutput=null
+StandardError=journal
+Nice=5
+WorkingDirectory=/home/dsmr/dsmr-reader/
+PIDFile=/var/tmp/dsmrreader--dsmr_datalogger.pid
+ExecStart=/home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr-reader/manage.py dsmr_datalogger
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

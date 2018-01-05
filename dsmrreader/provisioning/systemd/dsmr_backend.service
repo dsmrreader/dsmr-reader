@@ -1,0 +1,19 @@
+[Unit]
+Description=DSMR Backend
+After=network.target
+
+[Service]
+Type=simple
+User=dsmr
+Group=dsmr
+StandardOutput=null
+StandardError=journal
+Nice=10
+WorkingDirectory=/home/dsmr/dsmr-reader/
+PIDFile=/var/tmp/dsmrreader--dsmr_backend.pid
+ExecStart=/home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr-reader/manage.py dsmr_backend
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
