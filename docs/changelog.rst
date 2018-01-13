@@ -23,6 +23,7 @@ v1.12.0 - 2018-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#72 <https://github.com/dennissiemensma/dsmr-reader/issues/72>`_] Source data retention
 - [`#414 <https://github.com/dennissiemensma/dsmr-reader/issues/414>`_] add systemd service files - by meijjaa
 - [`#405 <https://github.com/dennissiemensma/dsmr-reader/issues/405>`_] More updates to the Dutch translation of the documentation - by lckarssen
 - [`#404 <https://github.com/dennissiemensma/dsmr-reader/issues/404>`_] Fix minor typo in Dutch translation - by lckarssen

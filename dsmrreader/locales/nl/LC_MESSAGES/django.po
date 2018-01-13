@@ -208,6 +208,9 @@ msgstr "Elektriciteitsmetingen vinden elke X seconden plaats. We kunnen ze voor 
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
+msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/retention.html\">Retention documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/retention.html\">Retentie-documentatie</a>"
+
 msgid "Datalogger"
 msgstr "Datalogger"
 
@@ -315,6 +318,30 @@ msgstr "COM-poort die verbonden is met je slimme meter."
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
+
+msgid "None (keep all readings)"
+msgstr "Geen (behoud alle metingen)"
+
+msgid "Discard most readings after one week"
+msgstr "Verwijder de meeste metingen na een week"
+
+msgid "Discard most readings after one month"
+msgstr "Verwijder de meeste metingen na een maand"
+
+msgid "Discard most readings after six months"
+msgstr "Verwijder de meeste metingen na een halfjaar"
+
+msgid "Discard most readings after one year"
+msgstr "Verwijder de meeste metingen na een jaar"
+
+msgid "Data retention"
+msgstr "Dataretentie"
+
+msgid "The lifetime of readings, before discarding them."
+msgstr "De levensduur van metingen, voordat ze verwijderd worden."
+
+msgid "Retention configuration"
+msgstr "Retentieconfiguratie"
 
 msgid "Timestamp indicating when the reading was taken"
 msgstr "Moment waarop de meting is gedaan"
@@ -1216,6 +1243,9 @@ msgstr "Trends & statistieken"
 msgid "Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks."
 msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
 
+msgid "Regenerates missing statistics, if any."
+msgstr "Hergenereert missende statistieken, wanneer van toepassing."
+
 msgid "Note"
 msgstr "Notitie"
 
@@ -1428,3 +1458,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "By default the application stores all readings taken. As there might be DSMR-readings about every second, this results in several millions of readings each year. This may cause degraded performance. For that reason you might want to apply retention to this data. Please note that enabling this feature will NOT discard ALL readings, as it will PRESERVE the first and last reading of each hour."
+#~ msgstr "Standaard bewaart de applicatie alle metingen. Echter, gezien metingen elke seconde binnen kunnen komen, kan dat leiden tot miljoenen metingen per jaar. Dit kan op den duur verslechterde performance veroorzaken. Daarom is het mogelijk om retentie toe te passen op de gegevens. N.B.: Deze feature gooit NIET alle metingen weg en bewaart van elk uur de eerste en laatste."
+
+#~ msgid "Discard most readings after 24 hours"
+#~ msgstr "Verwijder de meeste metingen na 24 uur"

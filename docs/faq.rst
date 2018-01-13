@@ -156,6 +156,15 @@ For **MySQL** restores::
     In case the version differs, you can try forcing a deployment reload by: ``sudo su - dsmr`` and then executing ``./post-deploy.sh``.
 
 
+How do I enable timezone support for MySQL?
+-------------------------------------------
+
+`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql.html>`_ for more information about how to enable timezone support on MySQL.
+On recent versions it should be as simple as executing the following command as root/sudo user::
+
+    mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
+
+
 Feature/bug report
 ------------------
 *How can I propose a feature or report a bug I've found?*

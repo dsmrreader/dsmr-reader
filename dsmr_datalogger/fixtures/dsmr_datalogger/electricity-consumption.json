@@ -1,0 +1,875 @@
+[
+{
+    "pk": 95,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.158",
+        "delivered_1": "595.187",
+        "read_at": "2016-12-11T23:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 96,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.157",
+        "delivered_1": "595.190",
+        "read_at": "2016-12-11T23:01:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 97,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.159",
+        "delivered_1": "595.193",
+        "read_at": "2016-12-11T23:02:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 98,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.158",
+        "delivered_1": "595.196",
+        "read_at": "2016-12-11T23:03:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 99,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.083",
+        "delivered_1": "595.197",
+        "read_at": "2016-12-11T23:04:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 100,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.069",
+        "delivered_1": "595.198",
+        "read_at": "2016-12-11T23:05:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 101,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.064",
+        "delivered_1": "595.200",
+        "read_at": "2016-12-11T23:06:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 102,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.112",
+        "delivered_1": "595.201",
+        "read_at": "2016-12-11T23:07:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 103,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.123",
+        "delivered_1": "595.203",
+        "read_at": "2016-12-11T23:08:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 104,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.120",
+        "delivered_1": "595.205",
+        "read_at": "2016-12-11T23:09:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 105,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.122",
+        "delivered_1": "595.207",
+        "read_at": "2016-12-11T23:10:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 106,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.123",
+        "delivered_1": "595.210",
+        "read_at": "2016-12-11T23:11:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 107,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.122",
+        "delivered_1": "595.212",
+        "read_at": "2016-12-11T23:12:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 108,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.121",
+        "delivered_1": "595.213",
+        "read_at": "2016-12-11T23:13:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 109,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.078",
+        "delivered_1": "595.215",
+        "read_at": "2016-12-11T23:14:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 110,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.074",
+        "delivered_1": "595.216",
+        "read_at": "2016-12-11T23:15:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 111,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.074",
+        "delivered_1": "595.217",
+        "read_at": "2016-12-11T23:16:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 112,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.074",
+        "delivered_1": "595.219",
+        "read_at": "2016-12-11T23:17:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 113,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.072",
+        "delivered_1": "595.220",
+        "read_at": "2016-12-11T23:18:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 114,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.053",
+        "delivered_1": "595.221",
+        "read_at": "2016-12-11T23:19:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 115,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.050",
+        "delivered_1": "595.222",
+        "read_at": "2016-12-11T23:20:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 116,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.048",
+        "delivered_1": "595.223",
+        "read_at": "2016-12-11T23:21:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 117,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.048",
+        "delivered_1": "595.223",
+        "read_at": "2016-12-11T23:22:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 118,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.049",
+        "delivered_1": "595.224",
+        "read_at": "2016-12-11T23:23:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 119,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.049",
+        "delivered_1": "595.225",
+        "read_at": "2016-12-11T23:24:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 120,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.049",
+        "delivered_1": "595.226",
+        "read_at": "2016-12-11T23:25:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 121,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.048",
+        "delivered_1": "595.227",
+        "read_at": "2016-12-11T23:26:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 122,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.048",
+        "delivered_1": "595.227",
+        "read_at": "2016-12-11T23:27:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 123,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.049",
+        "delivered_1": "595.228",
+        "read_at": "2016-12-11T23:28:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 124,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.121",
+        "delivered_1": "595.231",
+        "read_at": "2016-12-11T23:29:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 125,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.138",
+        "delivered_1": "595.233",
+        "read_at": "2016-12-11T23:30:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 126,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.133",
+        "delivered_1": "595.235",
+        "read_at": "2016-12-11T23:31:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 127,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.131",
+        "delivered_1": "595.237",
+        "read_at": "2016-12-11T23:32:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 128,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.130",
+        "delivered_1": "595.239",
+        "read_at": "2016-12-11T23:33:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 129,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.130",
+        "delivered_1": "595.241",
+        "read_at": "2016-12-11T23:34:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 130,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.130",
+        "delivered_1": "595.244",
+        "read_at": "2016-12-11T23:35:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 131,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.130",
+        "delivered_1": "595.246",
+        "read_at": "2016-12-11T23:36:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 132,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.128",
+        "delivered_1": "595.248",
+        "read_at": "2016-12-11T23:37:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 133,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.149",
+        "delivered_1": "595.250",
+        "read_at": "2016-12-11T23:38:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 134,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.193",
+        "delivered_1": "595.254",
+        "read_at": "2016-12-11T23:39:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 135,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.192",
+        "delivered_1": "595.257",
+        "read_at": "2016-12-11T23:40:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 136,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.191",
+        "delivered_1": "595.260",
+        "read_at": "2016-12-11T23:41:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 137,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.190",
+        "delivered_1": "595.263",
+        "read_at": "2016-12-11T23:42:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 138,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.129",
+        "delivered_1": "595.266",
+        "read_at": "2016-12-11T23:43:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 139,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.113",
+        "delivered_1": "595.268",
+        "read_at": "2016-12-11T23:44:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 140,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.112",
+        "delivered_1": "595.269",
+        "read_at": "2016-12-11T23:45:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 141,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.112",
+        "delivered_1": "595.271",
+        "read_at": "2016-12-11T23:46:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 142,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.113",
+        "delivered_1": "595.273",
+        "read_at": "2016-12-11T23:47:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 143,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.112",
+        "delivered_1": "595.275",
+        "read_at": "2016-12-11T23:48:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 144,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.112",
+        "delivered_1": "595.277",
+        "read_at": "2016-12-11T23:49:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 145,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.110",
+        "delivered_1": "595.279",
+        "read_at": "2016-12-11T23:50:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 146,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.111",
+        "delivered_1": "595.281",
+        "read_at": "2016-12-11T23:51:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 147,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.111",
+        "delivered_1": "595.283",
+        "read_at": "2016-12-11T23:52:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 148,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.112",
+        "delivered_1": "595.285",
+        "read_at": "2016-12-11T23:53:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 149,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.110",
+        "delivered_1": "595.286",
+        "read_at": "2016-12-11T23:54:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 150,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.111",
+        "delivered_1": "595.288",
+        "read_at": "2016-12-11T23:55:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 151,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.112",
+        "delivered_1": "595.290",
+        "read_at": "2016-12-11T23:56:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 152,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.111",
+        "delivered_1": "595.292",
+        "read_at": "2016-12-11T23:57:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 153,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.110",
+        "delivered_1": "595.294",
+        "read_at": "2016-12-11T23:58:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 154,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.110",
+        "delivered_1": "595.296",
+        "read_at": "2016-12-11T23:59:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 155,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.111",
+        "delivered_1": "595.298",
+        "read_at": "2016-12-12T00:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 156,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.111",
+        "delivered_1": "595.300",
+        "read_at": "2016-12-12T00:01:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 214,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.108",
+        "delivered_1": "595.427",
+        "read_at": "2016-12-12T00:59:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 215,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.109",
+        "delivered_1": "595.428",
+        "read_at": "2016-12-12T01:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 216,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.110",
+        "delivered_1": "595.430",
+        "read_at": "2016-12-12T01:01:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 217,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.109",
+        "delivered_1": "595.428",
+        "read_at": "2016-12-15T01:00:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 218,
+    "fields": {
+        "returned_1": "0.000",
+        "delivered_2": "593.558",
+        "currently_returned": "0.000",
+        "returned_2": "0.000",
+        "currently_delivered": "0.110",
+        "delivered_1": "595.430",
+        "read_at": "2016-12-15T01:01:00Z"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+}
+
+
+]

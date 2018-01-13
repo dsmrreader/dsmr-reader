@@ -1,0 +1,990 @@
+[
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629376,
+    "fields": {
+        "timestamp": "2016-10-02T18:17:44Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.887",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.177",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.161",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629377,
+    "fields": {
+        "timestamp": "2016-10-02T18:17:54Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.887",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.175",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.158",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629378,
+    "fields": {
+        "timestamp": "2016-10-02T18:18:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.888",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.175",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.159",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629379,
+    "fields": {
+        "timestamp": "2016-10-02T18:18:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.888",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.173",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.156",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629380,
+    "fields": {
+        "timestamp": "2016-10-02T18:18:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.889",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.175",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.158",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629381,
+    "fields": {
+        "timestamp": "2016-10-02T18:18:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.889",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.189",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.173",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629382,
+    "fields": {
+        "timestamp": "2016-10-02T18:18:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.890",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.174",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.158",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629383,
+    "fields": {
+        "timestamp": "2016-10-02T18:18:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.890",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.183",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.167",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629384,
+    "fields": {
+        "timestamp": "2016-10-02T18:19:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.891",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.165",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.149",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629385,
+    "fields": {
+        "timestamp": "2016-10-02T18:19:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.891",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.170",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.154",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629386,
+    "fields": {
+        "timestamp": "2016-10-02T18:19:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.891",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.192",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.176",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629387,
+    "fields": {
+        "timestamp": "2016-10-02T18:19:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.892",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.177",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.161",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629388,
+    "fields": {
+        "timestamp": "2016-10-02T18:19:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.892",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.175",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.159",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629389,
+    "fields": {
+        "timestamp": "2016-10-02T18:19:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.893",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.190",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.174",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629390,
+    "fields": {
+        "timestamp": "2016-10-02T18:20:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.893",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.176",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.160",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629391,
+    "fields": {
+        "timestamp": "2016-10-02T18:20:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.894",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.177",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.161",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629392,
+    "fields": {
+        "timestamp": "2016-10-02T18:20:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.894",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.174",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.158",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629393,
+    "fields": {
+        "timestamp": "2016-10-02T18:20:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.895",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.185",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.169",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629394,
+    "fields": {
+        "timestamp": "2016-10-02T18:20:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.895",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.180",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.164",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629395,
+    "fields": {
+        "timestamp": "2016-10-02T18:20:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.896",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.177",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.160",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629396,
+    "fields": {
+        "timestamp": "2016-10-02T18:21:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.896",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.173",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.157",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629397,
+    "fields": {
+        "timestamp": "2016-10-02T18:21:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.897",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.573",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.557",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629398,
+    "fields": {
+        "timestamp": "2016-10-02T18:21:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.900",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.852",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.835",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629399,
+    "fields": {
+        "timestamp": "2016-10-02T18:21:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.903",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.966",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.950",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629400,
+    "fields": {
+        "timestamp": "2016-10-02T18:21:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.905",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.914",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.898",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629401,
+    "fields": {
+        "timestamp": "2016-10-02T18:21:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.907",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.908",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.892",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629402,
+    "fields": {
+        "timestamp": "2016-10-02T18:22:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.910",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.879",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.863",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629403,
+    "fields": {
+        "timestamp": "2016-10-02T18:22:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.912",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.902",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.885",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629404,
+    "fields": {
+        "timestamp": "2016-10-02T18:22:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.915",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.888",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.871",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629405,
+    "fields": {
+        "timestamp": "2016-10-02T18:22:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.918",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.882",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.017",
+        "phase_currently_delivered_l2": "0.866",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629406,
+    "fields": {
+        "timestamp": "2016-10-02T18:22:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.920",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.883",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.867",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629407,
+    "fields": {
+        "timestamp": "2016-10-02T18:22:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.922",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.877",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.017",
+        "phase_currently_delivered_l2": "0.860",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629408,
+    "fields": {
+        "timestamp": "2016-10-02T18:23:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.925",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.875",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.859",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629409,
+    "fields": {
+        "timestamp": "2016-10-02T18:23:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.927",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.873",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.857",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629410,
+    "fields": {
+        "timestamp": "2016-10-02T18:23:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.930",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.896",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.880",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629411,
+    "fields": {
+        "timestamp": "2016-10-02T18:23:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.933",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.888",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.872",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629412,
+    "fields": {
+        "timestamp": "2016-10-02T18:23:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.934",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.883",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.867",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629413,
+    "fields": {
+        "timestamp": "2016-10-02T18:23:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.937",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.874",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.858",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629414,
+    "fields": {
+        "timestamp": "2016-10-02T18:24:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.939",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.880",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.864",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629415,
+    "fields": {
+        "timestamp": "2016-10-02T18:24:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.942",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.875",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.858",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629416,
+    "fields": {
+        "timestamp": "2016-10-02T18:24:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.944",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.879",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.862",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629417,
+    "fields": {
+        "timestamp": "2016-10-02T18:24:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.947",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.882",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.865",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629418,
+    "fields": {
+        "timestamp": "2016-10-02T18:24:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.949",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.882",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.866",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629419,
+    "fields": {
+        "timestamp": "2016-10-02T18:24:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.952",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.888",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.017",
+        "phase_currently_delivered_l2": "0.871",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629420,
+    "fields": {
+        "timestamp": "2016-10-02T18:25:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.954",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.892",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.875",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629421,
+    "fields": {
+        "timestamp": "2016-10-02T18:25:15Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.957",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.897",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.880",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629422,
+    "fields": {
+        "timestamp": "2016-10-02T18:25:25Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.959",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.895",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.879",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629423,
+    "fields": {
+        "timestamp": "2016-10-02T18:25:35Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.962",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.877",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.861",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629424,
+    "fields": {
+        "timestamp": "2016-10-02T18:25:45Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.964",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.878",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.862",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629425,
+    "fields": {
+        "timestamp": "2016-10-02T18:25:55Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.967",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.883",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.867",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629426,
+    "fields": {
+        "timestamp": "2016-10-02T18:26:05Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.969",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.881",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.864",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+},
+{
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 5629427,
+    "fields": {
+        "timestamp": "2016-10-02T18:26:16Z",
+        "electricity_delivered_1": "2242.770",
+        "electricity_returned_1": "0.000",
+        "electricity_delivered_2": "2148.971",
+        "electricity_returned_2": "0.000",
+        "electricity_currently_delivered": "0.878",
+        "electricity_currently_returned": "0.000",
+        "phase_currently_delivered_l1": "0.016",
+        "phase_currently_delivered_l2": "0.861",
+        "phase_currently_delivered_l3": "0.000",
+        "extra_device_timestamp": "2016-10-02T18:00:00Z",
+        "extra_device_delivered": "2002.418",
+        "processed": true
+    }
+}
+]

@@ -10,6 +10,7 @@ DSMR Reader's documentation
    installation
    application
    settings
+   retention
    api
    mqtt
    mindergas

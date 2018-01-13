@@ -13,23 +13,23 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.5.1\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../settings.rst:2
-#, fuzzy
 msgid "Backend settings"
-msgstr "Database/Django instellingen"
+msgstr "Backend-instellingen"
 
 #: ../../settings.rst:4
 msgid ""
-"The application has several settings available, which you can edit in the"
-" Configuration page. The default settings should work fine, although it's"
-" recommended to enable syncing backups using Dropbox."
+"The application has several settings available, which you can edit in the "
+"Configuration page. The default settings should work fine, although it's "
+"recommended to enable syncing backups using Dropbox."
 msgstr ""
-"De applicatie heeft diverse instellingen die je kunt bewerken in de "
-"Configuratie-pagina. De standaardinstellingen zouden afdoende moeten "
-"werken, al is het wel aan te raden de back-ups te synchroniseren via "
-"Dropbox."
+"De applicatie heeft diverse instellingen die je kunt bewerken in de Configuratie-"
+"pagina. De standaardinstellingen zouden afdoende moeten werken, al is het wel "
+"aan te raden de back-ups te synchroniseren via Dropbox."
 
 #: ../../settings.rst:11
 msgid "Database/Django settings"
@@ -41,21 +41,19 @@ msgstr "``dsmrreader/settings.py``"
 
 #: ../../settings.rst:14
 msgid ""
-"In case you want to alter the database settings, or any other Django "
-"settings, please modify (or add) them to the ``dsmrreader/settings.py`` "
-"file."
+"In case you want to alter the database settings, or any other Django settings, "
+"please modify (or add) them to the ``dsmrreader/settings.py`` file."
 msgstr ""
-"Wanneer je de database-instellingen (of die van Django) wilt wijzigen, "
-"voer deze dan door in  ``dsmrreader/settings.py``."
+"Wanneer je de database-instellingen (of die van Django) wilt wijzigen, voer deze "
+"dan door in  ``dsmrreader/settings.py``."
 
 #: ../../settings.rst:16
 msgid ""
-"Make sure to reload the application afterwards to persist the changes "
-"you've made, by executing ``./reload.sh`` or restarting the Supervisor "
-"processes."
+"Make sure to reload the application afterwards to persist the changes you've "
+"made, by executing ``./reload.sh`` or restarting the Supervisor processes."
 msgstr ""
-"Zorg ervoor dat je de applicatie herlaad na je wijzigingen, door "
-"``./reload.sh`` uit te voeren, of de Supervisor-processen te herstarten."
+"Zorg ervoor dat je de applicatie herlaad na je wijzigingen, door ``./reload.sh`` "
+"uit te voeren, of de Supervisor-processen te herstarten."
 
 #: ../../settings.rst:20
 msgid "API configuration"
@@ -63,11 +61,11 @@ msgstr "API-configuratie"
 
 #: ../../settings.rst:22
 msgid ""
-"The application does have an API, but it's disabled by default. You can "
-"enable it by activating the \"Allow API calls\" option."
+"The application does have an API, but it's disabled by default. You can enable "
+"it by activating the \"Allow API calls\" option."
 msgstr ""
-"De applicatie heeft een API, maar die is standaard uitgeschakeld. Je kunt"
-" deze inschakelen met de \"Sta API-calls toe\" optie."
+"De applicatie heeft een API, maar die is standaard uitgeschakeld. Je kunt deze "
+"inschakelen met de \"Sta API-calls toe\" optie."
 
 #: ../../settings.rst:26
 msgid "``Allow API calls``"
@@ -91,13 +89,12 @@ msgstr "Backupconfiguratie"
 
 #: ../../settings.rst:37
 msgid ""
-"The application creates a daily database backup by default. You choose "
-"whether you want to have it compressed or in raw SQL form. The timestamp "
-"of the backup can be altered as well."
+"The application creates a daily database backup by default. You choose whether "
+"you want to have it compressed or in raw SQL form. The timestamp of the backup "
+"can be altered as well."
 msgstr ""
-"De applicatie maakt standaard dagelijks een databaseback-up. Je kunt "
-"hiermee aangegeven in welke compressievorm en tevens het tijdstip van de "
-"back-up."
+"De applicatie maakt standaard dagelijks een databaseback-up. Je kunt hiermee "
+"aangegeven in welke compressievorm en tevens het tijdstip van de back-up."
 
 #: ../../settings.rst:42
 msgid "``Backup daily``"
@@ -113,8 +110,8 @@ msgstr "``Comprimeren``"
 
 #: ../../settings.rst:47
 msgid ""
-"Enable this to have the backups compressed in gzip format. Highly "
-"recommended as it will make backups up to 10 times smaller!"
+"Enable this to have the backups compressed in gzip format. Highly recommended as "
+"it will make backups up to 10 times smaller!"
 msgstr ""
 "Zet dit aan om de back-ups in gzip-formaat op te slaan. Dit wordt sterk "
 "aanbevolen, gezien het de back-ups tot 10 x kleiner maakt!"
@@ -133,13 +130,13 @@ msgstr "Dropbox-configuratie"
 
 #: ../../settings.rst:58
 msgid ""
-"There is a Dropbox integration available to safely transfer each daily "
-"backup into your Dropbox account. :doc:`More information about this "
-"feature can be found in the FAQ<faq>`."
+"There is a Dropbox integration available to safely transfer each daily backup "
+"into your Dropbox account. :doc:`More information about this feature can be "
+"found in the FAQ<faq>`."
 msgstr ""
-"Er is een koppeling mogelijk met je eigen Dropbox-account om de back-ups "
-"veilig te stellen. :doc:`Meer informatie over deze feature kun je "
-"terugvinden in de FAQ<faq>`."
+"Er is een koppeling mogelijk met je eigen Dropbox-account om de back-ups veilig "
+"te stellen. :doc:`Meer informatie over deze feature kun je terugvinden in de "
+"FAQ<faq>`."
 
 #: ../../settings.rst:62
 msgid "``Dropbox access token``"
@@ -147,11 +144,11 @@ msgstr "``Dropbox 'access token'``"
 
 #: ../../settings.rst:63
 msgid ""
-"Enter your Dropbox access token here. Leave blank or clear to disable "
-"Dropbox integration."
+"Enter your Dropbox access token here. Leave blank or clear to disable Dropbox "
+"integration."
 msgstr ""
-"Voer hier je Dropbox-access token in. Laat leeg om de Dropbox-koppeling "
-"uit te schakelen."
+"Voer hier je Dropbox-access token in. Laat leeg om de Dropbox-koppeling uit te "
+"schakelen."
 
 #: ../../settings.rst:68
 msgid "Consumption configuration"
@@ -160,12 +157,11 @@ msgstr "Verbruiksconfiguratie"
 #: ../../settings.rst:69
 msgid ""
 "The consumption settings determine how the application should handle the "
-"separate readings. The default behaviour is to group all readings each "
-"minute. This can be disabled."
+"separate readings. The default behaviour is to group all readings each minute. "
+"This can be disabled."
 msgstr ""
-"De verbruiksinstellingen bepalen hoe de applicatie omgaat met de "
-"individuele metingen. Standaard groepeert de applicatie de metingen per "
-"minuut."
+"De verbruiksinstellingen bepalen hoe de applicatie omgaat met de individuele "
+"metingen. Standaard groepeert de applicatie de metingen per minuut."
 
 #: ../../settings.rst:73
 msgid "``Compactor grouping type``"
@@ -181,14 +177,13 @@ msgstr "Tarieven energieleverancier"
 
 #: ../../settings.rst:80
 msgid ""
-"You can enter all your energy contract prices here. The application will "
-"use them (when available) to calculate the consumption of each day. "
-":doc:`See the FAQ on how to retroactivily adjust prices (if "
-"needed)<faq>`."
+"You can enter all your energy contract prices here. The application will use "
+"them (when available) to calculate the consumption of each day. :doc:`See the "
+"FAQ on how to retroactivily adjust prices (if needed)<faq>`."
 msgstr ""
-"Je kunt hier je energietarieven invoeren. De applicatie gebruikt deze dan"
-" om je dagelijkse verbruik te berekenen. :doc:`Zie de FAQ hoe je dit "
-"eventueel met terugwerkende kracht kan doen (indien nodig)<faq>`."
+"Je kunt hier je energietarieven invoeren. De applicatie gebruikt deze dan om je "
+"dagelijkse verbruik te berekenen. :doc:`Zie de FAQ hoe je dit eventueel met "
+"terugwerkende kracht kan doen (indien nodig)<faq>`."
 
 #: ../../settings.rst:87
 msgid "Datalogger configuration"
@@ -212,12 +207,11 @@ msgstr "``Houd elektriciteitsfasen bij``"
 
 #: ../../settings.rst:96
 msgid ""
-"Whether you want to track phases. :doc:`More information about this "
-"feature can be found in the FAQ<faq>`."
+"Whether you want to track phases. :doc:`More information about this feature can "
+"be found in the FAQ<faq>`."
 msgstr ""
-"Geeft aan of de elektriciteitsfasen getraceerd worden (indien "
-"aanwezig). :doc:`Meer informatie over deze feature kun je terugvinden in "
-"de FAQ<faq>`."
+"Geeft aan of de elektriciteitsfasen getraceerd worden (indien aanwezig). :doc:"
+"`Meer informatie over deze feature kun je terugvinden in de FAQ<faq>`."
 
 #: ../../settings.rst:100
 msgid "``Verify telegram CRC``"
@@ -225,8 +219,8 @@ msgstr "``Controleer de CRC van telegrammen``"
 
 #: ../../settings.rst:101
 msgid ""
-"Whether the application should verify the incoming data. Only available "
-"for DSMR 4+."
+"Whether the application should verify the incoming data. Only available for DSMR "
+"4+."
 msgstr ""
 "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten "
 "verifiëren. Alleen beschikbaar voor DSMR 4+."
@@ -240,8 +234,8 @@ msgid ""
 "The DSMR version your smart meter has. Used to determine how the serial "
 "connection should work."
 msgstr ""
-"De DSMR-versie die je slimme meter ondersteunt. Wordt gebruikt om te "
-"bepalen hoe de seriele verbinding werkt."
+"De DSMR-versie die je slimme meter ondersteunt. Wordt gebruikt om te bepalen hoe "
+"de seriele verbinding werkt."
 
 #: ../../settings.rst:108
 msgid "``COM-port``"
@@ -252,142 +246,160 @@ msgid "The COM port your cable can be read from."
 msgstr "COM-poort die verbonden is met je slimme meter."
 
 #: ../../settings.rst:114
-msgid "Frontend configuration"
-msgstr "Interfaceconfiguratie"
+msgid "Retention configuration"
+msgstr "Retentieconfiguratie"
 
 #: ../../settings.rst:115
-msgid "This applies to the visualisation in the application."
-msgstr "Dit heeft betrekking op de visuele weergave in de applicatie."
+msgid "Data retention applied to the readings stored in the application."
+msgstr ""
+"Dataretentie van toepassing op de opgeslagen metingen binnen de applicatie."
 
 #: ../../settings.rst:118
-msgid "``Merge electricity tariffs``"
-msgstr "``Voeg tarieven samen``"
+msgid "``Data retention``"
+msgstr "``Dataretentie``"
 
 #: ../../settings.rst:119
 msgid ""
-"Whether to merge the high and low tariffs. :doc:`More information about "
-"this feature can be found in the FAQ<faq>`."
+"Whether to delete old readings, and which period of time should have elapsed, "
+"before deleting them."
 msgstr ""
-"Bepaalt of de elektriciteitstarieven samengevoegd moeten worden (wanneer "
-"je voor een enkel tarief betaalt). :doc:`Meer informatie over deze "
-"feature kun je terugvinden in de FAQ<faq>`."
+"Geeft aan of oude metingen verwijderd mogen worden, en welke tijdsduur daar "
+"minimaal overgeen gegaan moet zijn."
 
-#: ../../settings.rst:123
+#: ../../settings.rst:124
+msgid "Frontend configuration"
+msgstr "Interfaceconfiguratie"
+
+#: ../../settings.rst:125
+msgid "This applies to the visualisation in the application."
+msgstr "Dit heeft betrekking op de visuele weergave in de applicatie."
+
+#: ../../settings.rst:128
+msgid "``Merge electricity tariffs``"
+msgstr "``Voeg tarieven samen``"
+
+#: ../../settings.rst:129
+msgid ""
+"Whether to merge the high and low tariffs. :doc:`More information about this "
+"feature can be found in the FAQ<faq>`."
+msgstr ""
+"Bepaalt of de elektriciteitstarieven samengevoegd moeten worden (wanneer je voor "
+"een enkel tarief betaalt). :doc:`Meer informatie over deze feature kun je "
+"terugvinden in de FAQ<faq>`."
+
+#: ../../settings.rst:133
 msgid "``**** color``"
 msgstr "``Kleur ****``"
 
-#: ../../settings.rst:124
+#: ../../settings.rst:134
 msgid "Multiple colors can be set here for the graphs."
 msgstr "Je kunt hier diverse kleuren instellen voor de grafieken."
 
-#: ../../settings.rst:129
+#: ../../settings.rst:139
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
 
-#: ../../settings.rst:130
+#: ../../settings.rst:140
 msgid ""
-"Optional connection with your account at MinderGas.nl. :doc:`More "
-"information about this feature can be found in the FAQ<faq>`."
+"Optional connection with your account at MinderGas.nl. :doc:`More information "
+"about this feature can be found in the FAQ<faq>`."
 msgstr ""
-"Optionele integratie met je MinderGas.nl-account. :doc:`Meer informatie "
-"over deze feature kun je terugvinden in de FAQ<faq>`."
+"Optionele integratie met je MinderGas.nl-account. :doc:`Meer informatie over "
+"deze feature kun je terugvinden in de FAQ<faq>`."
 
-#: ../../settings.rst:135
+#: ../../settings.rst:145
 msgid "``Export data to MinderGas``"
 msgstr "``Exporteer gegevens naar MinderGas``"
 
-#: ../../settings.rst:136
+#: ../../settings.rst:146
 msgid "Whether to enable the connecting with MinderGas."
 msgstr ""
-"Bepaalt of we je meterstanden dagelijks moeten uploaden naar je eigen "
-"account op MinderGas.nl."
+"Bepaalt of we je meterstanden dagelijks moeten uploaden naar je eigen account op "
+"MinderGas.nl."
 
-#: ../../settings.rst:139
+#: ../../settings.rst:149
 msgid "``MinderGas authentication token``"
 msgstr "``MinderGas.nl Authenticatietoken (API)``"
 
-#: ../../settings.rst:140
+#: ../../settings.rst:150
 msgid "API token for your MinderGas.nl account."
 msgstr ""
-"Authenticatietoken voor de API-toegang van je persoonlijk account bij "
-"MinderGas."
+"Authenticatietoken voor de API-toegang van je persoonlijk account bij MinderGas."
 
-#: ../../settings.rst:145
+#: ../../settings.rst:155
 msgid "Notes"
 msgstr "Notities"
 
-#: ../../settings.rst:146
+#: ../../settings.rst:156
 msgid ""
-"You can leave personal notes for yourself here. Such as when you were on "
-"holiday or experimented with the heater settings."
+"You can leave personal notes for yourself here. Such as when you were on holiday "
+"or experimented with the heater settings."
 msgstr ""
-"Je kunt hier persoonlijke notities voor jezelf achterlaten. Zoals wanneer"
-" je op vakantie bent of hebt geëxperimenteerd met de verwarming."
+"Je kunt hier persoonlijke notities voor jezelf achterlaten. Zoals wanneer je op "
+"vakantie bent of hebt geëxperimenteerd met de verwarming."
 
-#: ../../settings.rst:152
+#: ../../settings.rst:162
 msgid "Notification configuration"
 msgstr "Notificatieconfiguratie"
 
-#: ../../settings.rst:153
+#: ../../settings.rst:163
 msgid ""
-"Allows sending daily notifications to your phone. :doc:`More information "
-"about this feature can be found in the FAQ<faq>`."
+"Allows sending daily notifications to your phone. :doc:`More information about "
+"this feature can be found in the FAQ<faq>`."
 msgstr ""
-"Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone "
-"over je energieverbruik. :doc:`Meer informatie over deze feature kun je "
-"terugvinden in de FAQ<faq>`."
+"Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone over je "
+"energieverbruik. :doc:`Meer informatie over deze feature kun je terugvinden in "
+"de FAQ<faq>`."
 
-#: ../../settings.rst:157
+#: ../../settings.rst:167
 msgid "``Send notification``"
 msgstr "``Stuur notificatie``"
 
-#: ../../settings.rst:158 ../../settings.rst:176
+#: ../../settings.rst:168 ../../settings.rst:186
 msgid "Whether to enable this feature."
 msgstr "Geeft aan of deze feature aanstaat."
 
-#: ../../settings.rst:161
+#: ../../settings.rst:171
 msgid "``Notification service``"
 msgstr "``Notificatieservice``"
 
-#: ../../settings.rst:162
+#: ../../settings.rst:172
 msgid "The notification service you are using."
 msgstr "De notificatieservice die je gebruikt."
 
-#: ../../settings.rst:165
+#: ../../settings.rst:175
 msgid "``Notification service API key``"
 msgstr "``API sleutel voor notificatie service``"
 
-#: ../../settings.rst:166
+#: ../../settings.rst:176
 msgid "API token for your account of the notification service."
 msgstr ""
-"De API sleutel die gebruikt wordt om notificaties naar je smartphone te "
-"sturen. "
+"De API sleutel die gebruikt wordt om notificaties naar je smartphone te sturen. "
 
-#: ../../settings.rst:170
+#: ../../settings.rst:180
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
-#: ../../settings.rst:171
+#: ../../settings.rst:181
 msgid ""
-"There is support for tracking outside temperatures for a fixed number of "
-"weather stations. :doc:`More information about this feature can be found "
-"in the FAQ<faq>`."
+"There is support for tracking outside temperatures for a fixed number of weather "
+"stations. :doc:`More information about this feature can be found in the "
+"FAQ<faq>`."
 msgstr ""
-"Er is ondersteuning voor het uitlezen van de temperatuur  :doc:`Meer "
-"informatie over deze feature kun je terugvinden in de FAQ<faq>`."
+"Er is ondersteuning voor het uitlezen van de temperatuur  :doc:`Meer informatie "
+"over deze feature kun je terugvinden in de FAQ<faq>`."
 
-#: ../../settings.rst:175
+#: ../../settings.rst:185
 msgid "``Track weather``"
 msgstr "``Houd weergegevens bij``"
 
-#: ../../settings.rst:179
+#: ../../settings.rst:189
 msgid "``Buienradar weather station``"
 msgstr "``Buienradar weerstation``"
 
-#: ../../settings.rst:180
+#: ../../settings.rst:190
 msgid "The fixed weather station you wish to use."
 msgstr "Het weerstation die je wilt gebruiken."
 
 #~ msgid "Settings"
 #~ msgstr "Instellingen"
-

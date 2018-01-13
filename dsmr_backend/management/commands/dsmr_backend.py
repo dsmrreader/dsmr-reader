@@ -28,7 +28,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
                 try:
                     # Raven should capture each exception encountered (below).
                     raise current_response
-                except:
+                except Exception:
                     raven_client.captureException()
 
                 # Add and print traceback to help debugging any issues raised.

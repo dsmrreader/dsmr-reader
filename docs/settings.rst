@@ -110,6 +110,16 @@ The COM port your cable can be read from.
 
 
 
+Retention configuration
+-----------------------
+Data retention applied to the readings stored in the application.
+
+``Data retention``
+~~~~~~~~~~~~~~~~~~
+Whether to delete old readings, and which period of time should have elapsed, before deleting them.
+
+
+
 Frontend configuration
 ----------------------
 This applies to the visualisation in the application.
