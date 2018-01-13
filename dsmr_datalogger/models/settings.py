@@ -77,7 +77,9 @@ class RetentionSettings(SingletonModel):
         default=RETENTION_NONE,
         choices=RETENTION_CHOICES,
         verbose_name=_('Data retention'),
-        help_text=_('The lifetime of readings, before discarding them.')
+        help_text=_(
+            'The lifetime of readings, before discarding them. Please note that retention is applied during night time '
+            'currently, between midnight and six in the morning.')
     )
 
     def __str__(self):

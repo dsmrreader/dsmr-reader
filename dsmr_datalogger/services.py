@@ -302,6 +302,12 @@ def apply_data_retention():
         # No retention enabled at all (default behaviour).
         return
 
+    current_hour = timezone.now().hour
+
+    # Only cleanup during nights. Allow from midnight to six a.m.
+    if current_hour > 6:
+        return
+
     # Each run should be capped, for obvious performance reasons.
     MAX_HOURS_CLEANUP = 24
 

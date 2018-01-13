@@ -17,6 +17,25 @@ class TestRetention(TestCase):
     ]
 
     @mock.patch('django.utils.timezone.now')
+    def test_retention_timestamp_restrictions(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25, hour=12))
+
+        RetentionSettings.get_solo()
+        RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_WEEK)
+
+        # Retention should do nothing, since it's noon.
+        self.assertEqual(DsmrReading.objects.count(), 52)
+        dsmr_datalogger.services.apply_data_retention()
+        self.assertEqual(DsmrReading.objects.count(), 52)
+
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25, hour=5))
+
+        # Retention should kick in now.
+        self.assertEqual(DsmrReading.objects.count(), 52)
+        dsmr_datalogger.services.apply_data_retention()
+        self.assertEqual(DsmrReading.objects.count(), 2)
+
+    @mock.patch('django.utils.timezone.now')
     def test_apply_data_retention(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
 

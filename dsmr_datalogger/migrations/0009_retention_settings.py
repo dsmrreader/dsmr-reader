@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='RetentionSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('data_retention_in_hours', models.IntegerField(blank=True, choices=[(None, 'None (keep all readings)'), (168, 'Discard most readings after one week'), (672, 'Discard most readings after one month'), (4032, 'Discard most readings after six months'), (8064, 'Discard most readings after one year')], default=None, help_text='The lifetime of readings, before discarding them.', null=True, verbose_name='Data retention')),
+                ('data_retention_in_hours', models.IntegerField(blank=True, choices=[(None, 'None (keep all readings)'), (168, 'Discard most readings after one week'), (672, 'Discard most readings after one month'), (4032, 'Discard most readings after six months'), (8064, 'Discard most readings after one year')], default=None, help_text='The lifetime of readings, before discarding them. Please note that retention is applied during night time currently, between midnight and six in the morning.', null=True, verbose_name='Data retention')),
             ],
             options={
                 'verbose_name': 'Retention configuration',

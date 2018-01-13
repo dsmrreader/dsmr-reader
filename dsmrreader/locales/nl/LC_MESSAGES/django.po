@@ -337,8 +337,8 @@ msgstr "Verwijder de meeste metingen na een jaar"
 msgid "Data retention"
 msgstr "Dataretentie"
 
-msgid "The lifetime of readings, before discarding them."
-msgstr "De levensduur van metingen, voordat ze verwijderd worden."
+msgid "The lifetime of readings, before discarding them. Please note that retention is applied during night time currently, between midnight and six in the morning."
+msgstr "De levenduur van metingen, voordat ze opgeschoond worden. N.B.: Momenteel wordt retentie alleen doorgevoerd tijdens de nachturen, tussen middernacht en zes uur 's ochtends."
 
 msgid "Retention configuration"
 msgstr "Retentieconfiguratie"
@@ -1458,6 +1458,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "The lifetime of readings, before discarding them."
+#~ msgstr "De levensduur van metingen, voordat ze verwijderd worden."
 
 #~ msgid "By default the application stores all readings taken. As there might be DSMR-readings about every second, this results in several millions of readings each year. This may cause degraded performance. For that reason you might want to apply retention to this data. Please note that enabling this feature will NOT discard ALL readings, as it will PRESERVE the first and last reading of each hour."
 #~ msgstr "Standaard bewaart de applicatie alle metingen. Echter, gezien metingen elke seconde binnen kunnen komen, kan dat leiden tot miljoenen metingen per jaar. Dit kan op den duur verslechterde performance veroorzaken. Daarom is het mogelijk om retentie toe te passen op de gegevens. N.B.: Deze feature gooit NIET alle metingen weg en bewaart van elk uur de eerste en laatste."
