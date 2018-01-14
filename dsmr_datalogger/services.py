@@ -3,6 +3,8 @@ import base64
 import re
 
 from serial.serialutil import SerialException
+from django.db.models.functions.datetime import TruncHour
+from django.db.models.aggregates import Count
 from django.db.models.expressions import F
 from django.utils import timezone
 from django.conf import settings
@@ -12,7 +14,8 @@ import pytz
 
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSettings
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.dsmr import DSMR_MAPPING
 import dsmr_datalogger.signals
@@ -286,3 +289,77 @@ def reading_timestamp_to_datetime(string):
     is_dst = timestamp.group(7) == 'S'
     local_timezone = pytz.timezone(settings.TIME_ZONE)
     return local_timezone.localize(meter_timestamp, is_dst=is_dst).astimezone(pytz.utc)
+
+
+def apply_data_retention():
+    """
+    When data retention is enabled, this discards all data applicable for retention. Keeps at least one data point per
+    hour available.
+    """
+    settings = RetentionSettings.get_solo()
+
+    if settings.data_retention_in_hours is None:
+        # No retention enabled at all (default behaviour).
+        return
+
+    current_hour = timezone.now().hour
+
+    # Only cleanup during nights. Allow from midnight to six a.m.
+    if current_hour > 6:
+        return
+
+    # Each run should be capped, for obvious performance reasons.
+    MAX_HOURS_CLEANUP = 24
+
+    # These models should be rotated with retention. Dict value is the datetime field used.
+    MODELS_TO_CLEANUP = {
+        DsmrReading.objects.processed(): 'timestamp',
+        ElectricityConsumption.objects.all(): 'read_at',
+        GasConsumption.objects.all(): 'read_at',
+    }
+
+    retention_date = timezone.now() - timezone.timedelta(hours=settings.data_retention_in_hours)
+
+    # We need to force UTC here, to avoid AmbiguousTimeError's on DST changes.
+    timezone.activate(pytz.UTC)
+
+    for base_queryset, datetime_field in MODELS_TO_CLEANUP.items():
+        hours_to_cleanup = base_queryset.filter(
+            **{'{}__lt'.format(datetime_field): retention_date}
+        ).annotate(
+            item_hour=TruncHour(datetime_field)
+        ).values('item_hour').annotate(
+            item_count=Count('id')
+        ).order_by().filter(
+            item_count__gt=2
+        ).order_by('item_hour').values_list(
+            'item_hour', flat=True
+        )[:MAX_HOURS_CLEANUP]
+
+        hours_to_cleanup = list(hours_to_cleanup)  # Force evaluation.
+
+        if not hours_to_cleanup:
+            continue
+
+        for current_hour in hours_to_cleanup:
+
+            # Fetch all data per hour.
+            data_set = base_queryset.filter(
+                **{
+                    '{}__gte'.format(datetime_field): current_hour,
+                    '{}__lt'.format(datetime_field): current_hour + timezone.timedelta(hours=1),
+                }
+            )
+
+            # Extract the first/last item, so we can exclude it.
+            # NOTE: Want to alter this? Please update "item_count__gt=2" above as well!
+            keeper_pks = [
+                data_set.order_by(datetime_field)[0].pk,
+                data_set.order_by('-{}'.format(datetime_field))[0].pk
+            ]
+
+            # Now drop all others.
+            print('Retention | Cleaning up: {} ({})'.format(current_hour, data_set[0].__class__.__name__))
+            data_set.exclude(pk__in=keeper_pks).delete()
+
+    timezone.deactivate()

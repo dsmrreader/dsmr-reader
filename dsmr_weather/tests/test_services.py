@@ -14,8 +14,11 @@ import dsmr_weather.services
 class TestDsmrWeatherServices(TestCase):
     """ Test services. """
     @mock.patch('urllib.request.urlopen')
-    def test_next_sync(self, urlopen_mock):
+    @mock.patch('django.utils.timezone.now')
+    def test_next_sync(self, now_mock, urlopen_mock):
         """ Test next_sync setting. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
+
         # We just want to see whether it's called.
         urlopen_mock.side_effect = AssertionError('MOCK')
 
@@ -26,9 +29,14 @@ class TestDsmrWeatherServices(TestCase):
         self.assertTrue(weather_settings.track)
         self.assertIsNone(weather_settings.next_sync)
         self.assertFalse(urlopen_mock.called)
+        self.assertFalse(TemperatureReading.objects.all().exists())
 
-        with self.assertRaises(AssertionError):
-            dsmr_weather.services.read_weather()
+        # Any errors fetching the data should result in a retry later.
+        dsmr_weather.services.read_weather()
+
+        weather_settings = WeatherSettings.get_solo()
+        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertEqual(weather_settings.next_sync, timezone.now() + timezone.timedelta(minutes=5))
 
         # The default next_sync setting should allow initial sync.
         self.assertTrue(urlopen_mock.called)

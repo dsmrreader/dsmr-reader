@@ -18,6 +18,23 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.12.0 - 2018-01-14
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#72 <https://github.com/dennissiemensma/dsmr-reader/issues/72>`_] Source data retention
+- [`#414 <https://github.com/dennissiemensma/dsmr-reader/issues/414>`_] add systemd service files - by meijjaa
+- [`#405 <https://github.com/dennissiemensma/dsmr-reader/issues/405>`_] More updates to the Dutch translation of the documentation - by lckarssen
+- [`#404 <https://github.com/dennissiemensma/dsmr-reader/issues/404>`_] Fix minor typo in Dutch translation - by lckarssen
+- [`#398 <https://github.com/dennissiemensma/dsmr-reader/issues/398>`_] iOS Web App: prevent same-window links from being opened externally - by Joris Vervuurt
+- [`#399 <https://github.com/dennissiemensma/dsmr-reader/issues/399>`_] Veel calls naar api.buienradar
+- [`#406 <https://github.com/dennissiemensma/dsmr-reader/issues/406>`_] Spelling correction trends page
+- [`#413 <https://github.com/dennissiemensma/dsmr-reader/issues/413>`_] Hoge CPU belasting op rpi 2 icm DSMR 5.0 meter
+- [`#419 <https://github.com/dennissiemensma/dsmr-reader/issues/419>`_] Requirements update (January 2018)
+
+
+
 v1.11.0 - 2017-11-24
 ^^^^^^^^^^^^^^^^^^^^
 

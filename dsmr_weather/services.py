@@ -33,8 +33,17 @@ def read_weather():
 
     weather_settings = WeatherSettings.get_solo()
 
-    # Fetch XML from API.
-    request = urllib.request.urlopen(BUIENRADAR_API_URL)
+    try:
+        # Fetch XML from API.
+        request = urllib.request.urlopen(BUIENRADAR_API_URL)
+    except Exception as e:
+        print(' [!] Failed reading temperature: {}'.format(e))
+
+        # Try again in 5 minutes.
+        weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=5)
+        weather_settings.save()
+        return
+
     response_bytes = request.read()
     request.close()
     response_string = response_bytes.decode("utf8")

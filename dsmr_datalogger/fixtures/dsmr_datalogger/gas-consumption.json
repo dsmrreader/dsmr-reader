@@ -1,0 +1,299 @@
+[
+{
+    "pk": 1,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-11T20:00:00Z",
+        "delivered": "956.212",
+        "currently_delivered": "0.000"
+    }
+},
+{
+    "pk": 2,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-11T21:00:00Z",
+        "delivered": "956.221",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 3,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-11T22:00:00Z",
+        "delivered": "956.230",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 4,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-11T23:00:00Z",
+        "delivered": "956.739",
+        "currently_delivered": "0.509"
+    }
+},
+{
+    "pk": 5,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T00:00:00Z",
+        "delivered": "957.893",
+        "currently_delivered": "1.154"
+    }
+},
+{
+    "pk": 6,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T01:00:00Z",
+        "delivered": "958.559",
+        "currently_delivered": "0.666"
+    }
+},
+{
+    "pk": 7,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T02:00:00Z",
+        "delivered": "958.568",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 8,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T03:00:00Z",
+        "delivered": "958.577",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 9,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T04:00:00Z",
+        "delivered": "958.586",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 10,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T05:00:00Z",
+        "delivered": "958.595",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 11,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T06:00:00Z",
+        "delivered": "958.595",
+        "currently_delivered": "0.000"
+    }
+},
+{
+    "pk": 12,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T07:00:00Z",
+        "delivered": "959.336",
+        "currently_delivered": "0.741"
+    }
+},
+{
+    "pk": 13,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T08:00:00Z",
+        "delivered": "960.444",
+        "currently_delivered": "1.108"
+    }
+},
+{
+    "pk": 14,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T09:00:00Z",
+        "delivered": "960.509",
+        "currently_delivered": "0.065"
+    }
+},
+{
+    "pk": 15,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T10:00:00Z",
+        "delivered": "960.509",
+        "currently_delivered": "0.000"
+    }
+},
+{
+    "pk": 16,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T11:00:00Z",
+        "delivered": "960.518",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 17,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T12:00:00Z",
+        "delivered": "960.527",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 18,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T13:00:00Z",
+        "delivered": "960.536",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 19,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T14:00:00Z",
+        "delivered": "960.545",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 20,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T15:00:00Z",
+        "delivered": "960.554",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 21,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T16:00:00Z",
+        "delivered": "960.564",
+        "currently_delivered": "0.010"
+    }
+},
+{
+    "pk": 22,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T17:00:00Z",
+        "delivered": "961.651",
+        "currently_delivered": "1.087"
+    }
+},
+{
+    "pk": 23,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T18:00:00Z",
+        "delivered": "962.309",
+        "currently_delivered": "0.658"
+    }
+},
+{
+    "pk": 24,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T19:00:00Z",
+        "delivered": "962.319",
+        "currently_delivered": "0.010"
+    }
+},
+{
+    "pk": 25,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T20:00:00Z",
+        "delivered": "962.328",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 26,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T21:00:00Z",
+        "delivered": "962.337",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 27,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T22:00:00Z",
+        "delivered": "962.346",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 28,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-12T23:00:00Z",
+        "delivered": "962.365",
+        "currently_delivered": "0.019"
+    }
+},
+{
+    "pk": 29,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-13T00:00:00Z",
+        "delivered": "962.540",
+        "currently_delivered": "0.175"
+    }
+},
+{
+    "pk": 30,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-13T01:00:00Z",
+        "delivered": "962.549",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 31,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-13T02:00:00Z",
+        "delivered": "962.558",
+        "currently_delivered": "0.009"
+    }
+},
+{
+    "pk": 32,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-13T02:20:00Z",
+        "delivered": "956.761",
+        "currently_delivered": "0.022"
+    }
+},
+{
+    "pk": 33,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2016-12-13T02:40:00Z",
+        "delivered": "956.864",
+        "currently_delivered": "0.103"
+    }
+}
+]

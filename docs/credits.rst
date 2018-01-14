@@ -11,12 +11,8 @@ Special thanks for supplying code contributions
 Also many thanks to the contributions (reporting) of
 ----------------------------------------------------
 Listed in any order, sorted by name.
-<<<<<<< HEAD
-
-=======
- 
+  
 - `allureGOT <https://github.com/allureGOT>`_
->>>>>>> refs/heads/378-duplicate-timestamp-handling
 - `balk77 <https://github.com/balk77>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - `dajappie <https://github.com/dajappie>`_
@@ -32,10 +28,13 @@ Listed in any order, sorted by name.
 - `HugoDaBosss <https://github.com/HugoDaBosss>`_
 - `Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_ 
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
+- `Joris Vervuurt <https://github.com/jorisvervuurt>`_
 - `ju5t <https://github.com/ju5t>`_
 - Koen Volleberg
+- `lckarssen <https://github.com/lckarssen>`_
 - `MarsWarrior <https://github.com/MarsWarrior>`_
 - `mbnn <https://github.com/mbnn>`_
+- `meijjaa <https://github.com/meijjaa>`_
 - `michielvisser <https://github.com/michielvisser>`_
 - `mkruiver <https://github.com/mkruiver>`_
 - `Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_
@@ -51,7 +50,7 @@ Listed in any order, sorted by name.
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
  
-
+ 
 Software used
 -------------
 Please note and respect their licences as well, if any. Credits to the following software and projects:

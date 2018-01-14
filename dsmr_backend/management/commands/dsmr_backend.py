@@ -4,6 +4,7 @@ from raven.contrib.django.raven_compat.models import client as raven_client
 from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext as _
 from django.utils import timezone
+from django.conf import settings
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
 import dsmr_backend.signals
@@ -12,7 +13,7 @@ import dsmr_backend.signals
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a generic event triggering apps for backend operations, cron-like.')
     name = __name__  # Required for PID file.
-    sleep_time = 1
+    sleep_time = settings.DSMRREADER_BACKEND_SLEEP
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
@@ -27,7 +28,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
                 try:
                     # Raven should capture each exception encountered (below).
                     raise current_response
-                except:
+                except Exception:
                     raven_client.captureException()
 
                 # Add and print traceback to help debugging any issues raised.
