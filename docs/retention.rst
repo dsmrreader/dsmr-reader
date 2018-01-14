@@ -10,17 +10,27 @@ Please note that enabling this feature will **not discard all readings**, as it 
 .. contents::
 
 
+Notes / warnings
+----------------
+* The application will **slowly** apply retention **during night**, cleaning up a maximum of 24 hours worth of data on each backend run executed.
+
+* Enabling retention will prevent you from regenerating past day statistics with different prices (due to loss of accuracy).
+
+* PostgreSQL does not free up unused disk space immediately. If you've enabled retention for the first time, make sure to run the following command once after a few days::
+
+    # Switch to PostgreSQL user.
+    sudo su - postgres
+    
+    # This may take a while and slow your application, depending on your database size!
+    vacuumdb -a -f -v
+
+
+
 How to enable
 -------------
 
 The admin configuration has a section called "Retention configuration". 
 You can specify whether you want retention at all and set the lifetime of the data being stored. 
-
-
-Notes
------
-Please note that the application will **slowly** apply retention, cleaning up a maximum of 24 hours worth of data on each backend run executed.
-
 
 
 Data affected
