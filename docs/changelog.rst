@@ -23,7 +23,7 @@ v1.13.0 - 2018-xx-xx
 
 **Tickets resolved in this release:**
 
-- [`#xxxxxxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxxxxxxx>`_] xxxxxxxxxxxxxxxxx
+- [`#396 <https://github.com/dennissiemensma/dsmr-reader/issues/396>`_] Gecombineerd tarief tonen op 'Statistieken'-pagina
 
 
 

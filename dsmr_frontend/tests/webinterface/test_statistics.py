@@ -1,4 +1,5 @@
 from unittest import mock
+from decimal import Decimal
 import json
 
 from django.test import TestCase, Client
@@ -42,6 +43,10 @@ class TestViews(TestCase):
 
         if DsmrReading.objects.exists():
             self.assertIn('latest_reading', response.context)
+            self.assertIn('delivered_sum', response.context)
+            self.assertIn('returned_sum', response.context)
+            self.assertEqual(response.context['delivered_sum'], Decimal('1059.250'))
+            self.assertEqual(response.context['returned_sum'], Decimal('124.356'))
 
     def test_statistics_xhr_data(self):
         response = self.client.get(

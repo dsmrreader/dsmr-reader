@@ -21,9 +21,15 @@ class Statistics(TemplateView):
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
 
         try:
-            context_data['latest_reading'] = DsmrReading.objects.all().order_by('-pk')[0]
+            latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
         except IndexError:
             pass
+        else:
+            context_data['latest_reading'] = latest_reading
+            context_data['delivered_sum'] = latest_reading.electricity_delivered_1 + \
+                latest_reading.electricity_delivered_2
+            context_data['returned_sum'] = latest_reading.electricity_returned_1 + \
+                latest_reading.electricity_returned_2
 
         today = timezone.localtime(timezone.now()).date()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()

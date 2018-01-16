@@ -40,6 +40,14 @@
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_2|default:'-' }}{% endif %}</span></td>
                         </tr>
+                        {% if latest_reading and delivered_sum %}
+                        <tr>
+                            <td>{% trans "Electricity (tariffs combined)" %}</td>
+                            <td><span class="badge bg-red">{{ delivered_sum|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ returned_sum|default:'-' }}{% endif %}</span></td>
+                        </tr>
+                        {% endif %}
+                        
                         {% if capabilities.gas %}
                         <tr>
                             <td>{% trans "Gas " %}</td>
