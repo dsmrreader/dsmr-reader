@@ -66,6 +66,11 @@ INSTALLED_APPS = (
     'dsmr_pvoutput.apps.AppConfig',
 )
 
+MIDDLEWARE = (
+    # Debug toolbar.
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',

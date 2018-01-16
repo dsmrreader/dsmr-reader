@@ -2,7 +2,7 @@ from unittest import mock
 
 from django.test.testcases import TestCase
 from django.test.client import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from dsmr_api.models import APISettings
 from dsmr_datalogger.models.reading import DsmrReading

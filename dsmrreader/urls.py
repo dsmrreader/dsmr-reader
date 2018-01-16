@@ -4,9 +4,9 @@ from django.conf import settings
 
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^api/', include('dsmr_api.urls')),
-    url(r'^', include('dsmr_frontend.urls', namespace='frontend')),
+    url(r'^', include('dsmr_frontend.urls')),
 ]
 
 if settings.DEBUG:
