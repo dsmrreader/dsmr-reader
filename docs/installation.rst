@@ -24,6 +24,19 @@ Docker (alternative)
 Not interested in Docker? Follow the instructions in the chapters below if you wish to install this project the regular way.
 
 
+Quick install
+-------------
+
+Use the latest installation script (only works for Raspbian)::
+    
+    # Make sure you are sudo or root user when executing this.
+    curl -L https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/provisioning/installer/install_dsmrreader_raspbian.sh | bash
+    
+    # Does it not work due to: "bash: curl: command not found"? Install cURL and try again:
+    apt-get install curl
+
+
+
 1. Database backend (PostgreSQL)
 --------------------------------
 

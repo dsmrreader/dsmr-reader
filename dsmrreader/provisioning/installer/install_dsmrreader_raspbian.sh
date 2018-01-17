@@ -36,7 +36,6 @@ sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr
 sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
 
 # Application user
-echo "PLEASE ENTER THE DESIRED PASSWORD (TWICE) FOR YOUR NEW 'admin' USER IN THE APPLICATION:"
 sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --username admin --email root@localhost
 
 # Nginx
