@@ -26,10 +26,29 @@ Not interested in Docker? Follow the instructions in the chapters below if you w
 
 Method A: Quick install
 -----------------------
-For advanced users. A summary of all commands listed under Method C::
+For advanced users. A summary of all commands listed under Method B.
+
+Start::
 
     # Packages
     sudo apt-get install -y postgresql postgresql-server-dev-all nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper
+    
+.. note::
+    
+    Does PostgreSQL not start/create the cluster due to locales? I.e.:: 
+    
+      Error: The locale requested by the environment is invalid.
+      Error: could not create default cluster. Please create it manually with
+    
+      pg_createcluster 9.4 main --start
+ 
+    
+    Try: ``dpkg-reconfigure locales``. 
+    
+    Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
+    Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using).
+
+Continue::
     
     # Database
     sudo sudo -u postgres createuser -DSR dsmrreader
@@ -45,14 +64,14 @@ For advanced users. A summary of all commands listed under Method C::
     sudo chown -R dsmr:dsmr /var/www/dsmrreader/
     
     # Code checkout
-    git clone https://github.com/dennissiemensma/dsmr-reader.git /home/dsmr/dsmr-reader
-    chown -R dsmr:dsmr /home/dsmr/
+    sudo git clone https://github.com/dennissiemensma/dsmr-reader.git /home/dsmr/dsmr-reader
+    sudo chown -R dsmr:dsmr /home/dsmr/
     
     # Virtual env
     sudo sudo -u dsmr mkdir /home/dsmr/.virtualenvs
     sudo sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3
-    echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc
-    echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc
+    sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
+    sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
     
     # Config & requirements
     sudo sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/postgresql.py /home/dsmr/dsmr-reader/dsmrreader/settings.py
@@ -77,24 +96,7 @@ For advanced users. A summary of all commands listed under Method C::
     sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --username admin --email root@localhost
 
 
-Method B: Installation script
------------------------------
-
-For quick installation. Use the latest installation script (only works for Raspbian)::
-    
-    # Make sure you are sudo or root user when executing this.
-    curl -L https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/provisioning/installer/install_dsmrreader_raspbian.sh | bash
-    
-    # Finally, create application user (and enter the password you want to use)
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --username admin --email root@localhost
-    
-.. note::
-
-    Does it not work due to: "bash: curl: command not found"? Install cURL and try again:
-    ``apt-get install curl``
-
-
-Method C: Manually
+Method B: Manually
 ------------------
 For others users who want some addition explaination about what they are exactly doing/installing.
 
@@ -111,8 +113,20 @@ Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv
 
     sudo apt-get install -y postgresql postgresql-server-dev-all
 
-Does Postgres not start due to locales? Try: ``dpkg-reconfigure locales``. 
-Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
+.. note::
+    
+    Does PostgreSQL not start/create the cluster due to locales? I.e.:: 
+    
+      Error: The locale requested by the environment is invalid.
+      Error: could not create default cluster. Please create it manually with
+    
+      pg_createcluster 9.4 main --start
+ 
+    
+    Try: ``dpkg-reconfigure locales``. 
+    
+    Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
+    Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using).
 
 (!) Ignore any '*could not change directory to "/root": Permission denied*' errors for the following three commands.
 
