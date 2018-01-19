@@ -26,6 +26,7 @@ v1.13.0 - 2018-xx-xx
 - [`#203 <https://github.com/dennissiemensma/dsmr-reader/issues/203>`_] One-click installer
 - [`#396 <https://github.com/dennissiemensma/dsmr-reader/issues/396>`_] Gecombineerd tarief tonen op 'Statistieken'-pagina
 - [`#268 <https://github.com/dennissiemensma/dsmr-reader/issues/268>`_] Data preservation/backups - by WatskeBart
+- [`#425 <https://github.com/dennissiemensma/dsmr-reader/issues/425>`_] Requests for donating a beer or coffee
 
 
 
