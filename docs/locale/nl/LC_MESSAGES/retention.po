@@ -17,6 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 1.8.7.1\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: ../../retention.rst:2
 msgid "Retention"
@@ -41,9 +43,9 @@ msgid ""
 "it will **preserve the first and last reading of each hour**."
 msgstr ""
 "Uiteindelijk zorgt dit voor **slechtere performance** in ofwel de applicatie "
-"of database. Daarom zul je wellicht retentie willen inschakelen. Let op: Het "
-"inschakelen van retentie **gooi niet alle metingen weg**, want **van elk uur "
-"wordt de eerste en laatste meting bewaard**."
+"of database. Daarom zul je wellicht retentie willen toepassen op deze "
+"gegevens. Let op: Het inschakelen van deze feature **gooit niet alle metingen "
+"weg**, want **van elk uur wordt de eerste en laatste meting bewaard**."
 
 #: ../../retention.rst:14
 msgid "Notes / warnings"
