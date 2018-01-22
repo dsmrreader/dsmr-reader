@@ -739,6 +739,9 @@ msgstr "Meterstanden"
 msgid "Delivered"
 msgstr "Geleverd"
 
+msgid "Electricity (tariffs combined)"
+msgstr "Elektriciteit (tarieven gecombineerd)"
+
 msgid "Gas "
 msgstr "Gas"
 

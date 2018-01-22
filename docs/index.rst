@@ -22,4 +22,5 @@ DSMR Reader's documentation
    changelog
    contributing
    credits
+   donations
    licence

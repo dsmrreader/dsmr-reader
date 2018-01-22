@@ -24,8 +24,84 @@ Docker (alternative)
 Not interested in Docker? Follow the instructions in the chapters below if you wish to install this project the regular way.
 
 
+Method A: Quick install
+-----------------------
+For advanced users. A summary of all commands listed under Method B.
+
+Start::
+
+    # Packages
+    sudo apt-get install -y postgresql postgresql-server-dev-all nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper
+    
+.. note::
+    
+    Does PostgreSQL not start/create the cluster due to locales? I.e.:: 
+    
+      Error: The locale requested by the environment is invalid.
+      Error: could not create default cluster. Please create it manually with
+    
+      pg_createcluster 9.4 main --start
+ 
+    
+    Try: ``dpkg-reconfigure locales``. 
+    
+    Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
+    Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using).
+
+Continue::
+    
+    # Database
+    sudo sudo -u postgres createuser -DSR dsmrreader
+    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+    sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+    
+    # System user
+    sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
+    sudo usermod -a -G dialout dsmr
+    
+    # Nginx
+    sudo mkdir -p /var/www/dsmrreader/static
+    sudo chown -R dsmr:dsmr /var/www/dsmrreader/
+    
+    # Code checkout
+    sudo git clone https://github.com/dennissiemensma/dsmr-reader.git /home/dsmr/dsmr-reader
+    sudo chown -R dsmr:dsmr /home/dsmr/
+    
+    # Virtual env
+    sudo sudo -u dsmr mkdir /home/dsmr/.virtualenvs
+    sudo sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3
+    sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
+    sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
+    
+    # Config & requirements
+    sudo sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/postgresql.py /home/dsmr/dsmr-reader/dsmrreader/settings.py
+    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/postgresql.txt
+    
+    # Setup
+    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
+    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
+    
+    # Nginx
+    sudo rm /etc/nginx/sites-enabled/default
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
+    sudo service nginx configtest
+    sudo service nginx reload
+    
+    # Supervisor
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr-reader.conf /etc/supervisor/conf.d/
+    sudo supervisorctl reread
+    sudo supervisorctl update
+    
+    # Create application user
+    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --username admin --email root@localhost
+
+
+Method B: Manually
+------------------
+For others users who want some addition explaination about what they are exactly doing/installing.
+
 1. Database backend (PostgreSQL)
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The application stores by default all readings taken from the serial cable.
 There is support for **PostgreSQL**, and there used to be support for **MySQL/MariaDB** as well.
@@ -37,8 +113,20 @@ Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv
 
     sudo apt-get install -y postgresql postgresql-server-dev-all
 
-Does Postgres not start due to locales? Try: ``dpkg-reconfigure locales``. 
-Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
+.. note::
+    
+    Does PostgreSQL not start/create the cluster due to locales? I.e.:: 
+    
+      Error: The locale requested by the environment is invalid.
+      Error: could not create default cluster. Please create it manually with
+    
+      pg_createcluster 9.4 main --start
+ 
+    
+    Try: ``dpkg-reconfigure locales``. 
+    
+    Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
+    Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using).
 
 (!) Ignore any '*could not change directory to "/root": Permission denied*' errors for the following three commands.
 
@@ -69,7 +157,7 @@ Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` an
 Now continue at chapter 2 below (Dependencies).
 
 (Legacy) MySQL/MariaDB
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 .. warning::
 
     Support for the MySQL database backend is deprecated and will be removed in a later release.
@@ -112,7 +200,7 @@ Install MariaDB. You can also choose to install the closed source MySQL, as they
 
 
 2. Dependencies
----------------
+^^^^^^^^^^^^^^^
 Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the Github repository::
 
     sudo apt-get install -y nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper
@@ -124,7 +212,7 @@ It's very basic but also very effective to simply test whether your serial cable
 
     
 3. Application user
--------------------
+^^^^^^^^^^^^^^^^^^^
 The application runs as ``dsmr`` user by default. This way we do not have to run the application as ``root``, which is a bad practice anyway.
 
 Create user with homedir. The application code and virtualenv will reside in this directory as well::
@@ -139,7 +227,7 @@ Either proceed to the next heading **for a test reading** or continue at chapter
 
 
 Your first reading (optional)
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
@@ -163,7 +251,7 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 
 
 4. Webserver/Nginx (part 1)
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
 
@@ -177,7 +265,7 @@ Django will later copy all static files to the directory below, used by Nginx to
 
 
 5. Clone project code from Github
----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Now is the time to clone the code from the repository into the homedir we created. 
 
 - Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
@@ -190,7 +278,7 @@ This may take a few seconds. When finished, you should see a new folder called `
 
 
 6. Virtualenv
--------------
+^^^^^^^^^^^^^
 
 The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**. 
 
@@ -229,7 +317,7 @@ Make sure you've read and executed the note above, because you'll need it for th
 
 
 7. Application configuration & setup
-------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The application will also need the appropriate database client, which is not installed by default. 
 For this I created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. 
 
@@ -240,7 +328,7 @@ The ``base.txt`` contains requirements which the application needs anyway, no ma
     **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
 PostgreSQL
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 - Did you choose PostgreSQL? Then execute these two lines::
 
     cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
@@ -254,7 +342,7 @@ make sure you've installed ``postgresql-server-dev-all`` earlier in the process,
 Continue to chapter 8 (Bootstrapping).
 
 (Legacy) MySQL/MariaDB
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 .. warning::
 
     Support for the MySQL database backend is deprecated and will be removed in a later release.
@@ -271,7 +359,7 @@ make sure you've installed ``libmysqlclient-dev`` earlier in the process, when y
 
 
 8. Bootstrapping
-----------------
+^^^^^^^^^^^^^^^^
 Now it's time to bootstrap the application and check whether all settings are good and requirements are met.
  
 - Execute this to initialize the database we've created earlier::
@@ -302,7 +390,7 @@ You've almost completed the installation now.
 
     
 9. Webserver/Nginx (part 2)
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
@@ -329,7 +417,7 @@ Remove the default Nginx vhost (**only when you do not use it yourself, see the 
 
 
 10. Supervisor
---------------
+^^^^^^^^^^^^^^
 Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. 
 It's also configured to bring the entire application up again after a shutdown or reboot.
 
