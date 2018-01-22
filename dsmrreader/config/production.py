@@ -56,9 +56,6 @@ LOGGING = {
 
 
 # Disable Django Toolbar.
-INSTALLED_APPS = list(INSTALLED_APPS)
-INSTALLED_APPS.remove('debug_toolbar')
-
 MIDDLEWARE = list(MIDDLEWARE)
 MIDDLEWARE.remove('debug_toolbar.middleware.DebugToolbarMiddleware')
 
