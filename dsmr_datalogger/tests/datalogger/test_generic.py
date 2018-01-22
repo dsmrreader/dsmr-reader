@@ -24,7 +24,7 @@ class TestDsmrDataloggerTracking(InterceptStdoutMixin, TestCase):
 
         # Datalogger should crash with error.
         with self.assertRaisesMessage(CommandError, 'Datalogger tracking is DISABLED!'):
-            self._intercept_command_stdout('dsmr_datalogger')
+            self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
 
 class TestServices(TestCase):

@@ -8,6 +8,6 @@ class InterceptStdoutMixin(object):
     def _intercept_command_stdout(self, command, **kwargs):
         stdout = StringIO()
         stderr = StringIO()  # Only to mute.
-        call_command(command, stdout=stdout, stderr=stderr, run_once=True, **kwargs)
+        call_command(command, stdout=stdout, stderr=stderr, **kwargs)
         stdout.seek(0)
         return stdout.read()

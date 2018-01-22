@@ -52,7 +52,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
 
         self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):

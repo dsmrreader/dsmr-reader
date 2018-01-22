@@ -5,7 +5,8 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('dsmr_api.urls')),
+    url(r'^api/v1/', include('dsmr_api.urls.v1')),
+    url(r'^api/v2/', include('dsmr_api.urls.v2')),
     url(r'^', include('dsmr_frontend.urls')),
 ]
 
