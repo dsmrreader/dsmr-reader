@@ -67,7 +67,8 @@ class InfiniteManagementCommandMixin(object):
                 time.sleep(self.sleep_time)  # Do not hammer.
 
             # Check database connection after each run. This will force Django to reconnect as well, when having issues.
-            connection.close()
+            if settings.DSMRREADER_RECONNECT_DATABASE:
+                connection.close()
 
         self.stdout.write('Exited due to signal detection')
         sys.exit(0)

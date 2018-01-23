@@ -206,3 +206,6 @@ DSMRREADER_DATALOGGER_SLEEP = 0.25
 
 # Whether telegrams are logged, in base64 format. Only required for debugging.
 DSMRREADER_LOG_TELEGRAMS = False
+
+# Whether the backend process (and datalogger) reconnects to the DB after each run.
+DSMRREADER_RECONNECT_DATABASE = True
