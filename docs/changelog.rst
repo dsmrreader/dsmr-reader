@@ -27,8 +27,8 @@ v1.13.0 - 2018-xx-xx
 - [`#396 <https://github.com/dennissiemensma/dsmr-reader/issues/396>`_] Gecombineerd tarief tonen op 'Statistieken'-pagina
 - [`#268 <https://github.com/dennissiemensma/dsmr-reader/issues/268>`_] Data preservation/backups - by WatskeBart
 - [`#425 <https://github.com/dennissiemensma/dsmr-reader/issues/425>`_] Requests for donating a beer or coffee
+- [`#427 <https://github.com/dennissiemensma/dsmr-reader/issues/427>`_] Reconnect to postgresql
 - [`#394 <https://github.com/dennissiemensma/dsmr-reader/issues/394>`_] Django 2.0 
-
 
 
 v1.12.0 - 2018-01-14
