@@ -2,6 +2,7 @@
 [![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=master)](https://codecov.io/gh/dennissiemensma/dsmr-reader/branch/master)
 [![Documentation Status](https://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](https://dsmr-reader.readthedocs.io/en/latest/?badge=latest)
 [![Requirements Status](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=master)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=master)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://dsmr-reader.readthedocs.io/en/latest/donations.html)
 
 # DSMR Reader Datalogger/GUI
 

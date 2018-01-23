@@ -63,7 +63,7 @@ def read_weather():
 
     try:
         TemperatureReading.objects.create(read_at=read_at, degrees_celcius=Decimal(temperature))
-    except:
+    except Exception:
         # Try again in 5 minutes.
         weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=5)
     else:

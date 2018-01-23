@@ -12,7 +12,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
     def test_backend_creation_signal(self, signal_mock):
         """ Test outgoing signal. """
         self.assertFalse(signal_mock.called)
-        self._intercept_command_stdout('dsmr_backend')
+        self._intercept_command_stdout('dsmr_backend', run_once=True)
         self.assertTrue(signal_mock.called)
 
     @mock.patch('dsmr_backup.services.backup.check')
@@ -27,7 +27,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         for current in mocks:
             self.assertFalse(current.called)
 
-        self._intercept_command_stdout('dsmr_backend')
+        self._intercept_command_stdout('dsmr_backend', run_once=True)
 
         for current in mocks:
             self.assertTrue(current.called)
@@ -53,7 +53,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         dsmr_backend.signals.backend_called.connect(receiver=_fake_signal_troublemaker)
         self.assertFalse(raven_mock.called)
 
-        self._intercept_command_stdout('dsmr_backend')
+        self._intercept_command_stdout('dsmr_backend', run_once=True)
         self.assertTrue(raven_mock.called)
 
     def test_supported_vendors(self):
@@ -82,6 +82,6 @@ class TestBackend(InterceptStdoutMixin, TestCase):
     def test_internal_check(self):
         """ Tests whether Django passes it's internal 'check' command. """
         self.assertEqual(
-            self._intercept_command_stdout('check', dry_run=True),
+            self._intercept_command_stdout('check'),
             'System check identified no issues (0 silenced).\n',
         )

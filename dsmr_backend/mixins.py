@@ -6,6 +6,7 @@ import os
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.contrib import admin
+from django.db import connection
 
 
 class InfiniteManagementCommandMixin(object):
@@ -64,6 +65,10 @@ class InfiniteManagementCommandMixin(object):
                 self.stdout.write('Command completed. Sleeping for {} second(s)...'.format(self.sleep_time))
                 self.stdout.write('')
                 time.sleep(self.sleep_time)  # Do not hammer.
+
+            # Check database connection after each run. This will force Django to reconnect as well, when having issues.
+            if settings.DSMRREADER_RECONNECT_DATABASE:
+                connection.close()
 
         self.stdout.write('Exited due to signal detection')
         sys.exit(0)

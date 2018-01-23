@@ -3,12 +3,13 @@ msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
-"Language: nl\n"
+"Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../application.rst:2
@@ -201,18 +202,32 @@ msgstr ""
 "eindelijk gebruikmaken van de applicatie en je energieverbruik meten."
 
 #: ../../application.rst:73
+msgid "Optional: Setting up an USB drive for backups"
+msgstr "Optioneel: Een USB-drive gebruiken voor backup's"
+
+#: ../../application.rst:77
+msgid ""
+"For more information about (optionally) setting up an USB drive for backups, "
+"see `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/268>`_."
+msgstr ""
+"Voor meer informatie om (optioneel) een USB-drive te gebruiken voor backup's, "
+"zie `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/268>`_."
+
+#: ../../application.rst:82
 msgid "Application updates (bug fixes & new features)"
 msgstr "Applicatie updates (bugfixes & nieuwe mogelijkheden)"
 
-#: ../../application.rst:77
+#: ../../application.rst:86
 msgid ":doc:`This information can be found here<faq>`."
 msgstr ":doc:`Deze informatie kun je hier terugvinden<faq>`."
 
-#: ../../application.rst:81
+#: ../../application.rst:90
 msgid "Public webinterface warning"
 msgstr "Waarschuwing voor publiekelijke toegang"
 
-#: ../../application.rst:85
+#: ../../application.rst:94
 msgid ""
 "If you expose your application to the outside world or a public network, you "
 "might want to take additional steps:"
@@ -220,7 +235,7 @@ msgstr ""
 "Wanneer je de applicatie koppelt aan het Internet wil je sowieso extra "
 "maatregelen nemen:"
 
-#: ../../application.rst:87
+#: ../../application.rst:96
 msgid ""
 "Please make sure to **alter** the ``SECRET_KEY`` setting in your ``dsmrreader/"
 "settings.py``."
@@ -228,7 +243,7 @@ msgstr ""
 "Zorg ervoor dat je de instelling ``SECRET_KEY`` wijzigt in het bestand "
 "``dsmrreader/settings.py``."
 
-#: ../../application.rst:89
+#: ../../application.rst:98
 msgid ""
 "Don't forget to run ``./post-deploy.sh`` in the project's root, which will "
 "force the application to gracefully reload itself and apply the new settings "
@@ -238,7 +253,7 @@ msgstr ""
 "hoogste map van project), die ervoor zorgt dat de hele applicatie zichzelf "
 "herlaadt en daarmee de nieuwe instellingen per direct gebruikt."
 
-#: ../../application.rst:91
+#: ../../application.rst:100
 msgid ""
 "Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu."
 "com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for "
@@ -248,7 +263,7 @@ msgstr ""
 "ubuntu.com/UncomplicatedFirewall>`_) and beperk al het toegestane verkeer tot "
 "poort ``22`` (puur voor jezelf) en poort ``80``."
 
-#: ../../application.rst:93
+#: ../../application.rst:102
 msgid ""
 "You should also have Nginx restrict application access when exposing it to the "
 "Internet. Simply generate an htpasswd string `using one of the many generators "
@@ -259,11 +274,11 @@ msgstr ""
 "tekenreeks via `een van de vele websites die dit voor je kunnen doen <https://"
 "www.transip.nl/htpasswd/>`_."
 
-#: ../../application.rst:95
+#: ../../application.rst:104
 msgid "Paste the htpasswd string in ``/etc/nginx/htpasswd``."
 msgstr "Plak de htpasswd-tekenreeks in het bestand ``/etc/nginx/htpasswd``."
 
-#: ../../application.rst:99
+#: ../../application.rst:108
 msgid ""
 "It's safe to a htpasswd generator, **just make sure to NEVER enter personal "
 "credentials** there **used for other applications or personal accounts**."
@@ -272,7 +287,7 @@ msgstr ""
 "persoonlijke informatie of gegevens invoert die je ook op andere websites "
 "gebruikt**!"
 
-#: ../../application.rst:103
+#: ../../application.rst:112
 msgid ""
 "Alternatively you can generate a ``htpasswd`` file locally, by installing "
 "``sudo apt-get install apache2-utils`` and running ``sudo htpasswd -c /etc/"
@@ -283,11 +298,11 @@ msgstr ""
 "``sudo htpasswd -c /etc/nginx/htpasswd USERNAME`` uit te voeren (waarbij "
 "``USERNAME`` je gewenste gebruikersnaam is)."
 
-#: ../../application.rst:105
+#: ../../application.rst:114
 msgid "The command will prompt you to enter a password for it."
 msgstr "Het command vraagt vervolgens om een wachtwoord voor het account."
 
-#: ../../application.rst:108
+#: ../../application.rst:117
 msgid ""
 "Open the site's vhost in ``/etc/nginx/sites-enabled/dsmr-webinterface`` and "
 "**uncomment** the following lines (remove the ##)::"
@@ -295,15 +310,15 @@ msgstr ""
 "Open de website's vhost in ``/etc/nginx/sites-enabled/dsmr-webinterface`` en "
 "schakel de volgende regels in (verwijder de ## tekens)::"
 
-#: ../../application.rst:113
+#: ../../application.rst:122
 msgid "Now make sure you didn't insert any typo's by running::"
 msgstr "Zorg ervoor dat je geen typefouten hebt gemaakt door te controleren met::"
 
-#: ../../application.rst:117
+#: ../../application.rst:126
 msgid "And reload with::"
 msgstr "En herlaad met::"
 
-#: ../../application.rst:121
+#: ../../application.rst:130
 msgid ""
 "You should be prompted for login credentials the next time your browser "
 "accesses the application. For more information regarding this topic, see the "

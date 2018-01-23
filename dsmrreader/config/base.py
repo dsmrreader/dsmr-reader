@@ -66,13 +66,15 @@ INSTALLED_APPS = (
     'dsmr_pvoutput.apps.AppConfig',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
+    # Debug toolbar.
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -204,3 +206,6 @@ DSMRREADER_DATALOGGER_SLEEP = 0.25
 
 # Whether telegrams are logged, in base64 format. Only required for debugging.
 DSMRREADER_LOG_TELEGRAMS = False
+
+# Whether the backend process (and datalogger) reconnects to the DB after each run.
+DSMRREADER_RECONNECT_DATABASE = True

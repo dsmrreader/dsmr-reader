@@ -2,7 +2,7 @@ from unittest import mock
 import json
 
 from django.test import TestCase, Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption

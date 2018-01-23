@@ -13,6 +13,8 @@ from dsmr_frontend.views.status import Status, XhrUpdateChecker
 from dsmr_frontend.views.generic import DocsRedirect, FeedbackRedirect
 
 
+app_name = 'frontend'
+
 urlpatterns = [
     # Public views.
     url(r'^$', Dashboard.as_view(), name='dashboard'),

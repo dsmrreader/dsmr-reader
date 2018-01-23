@@ -3,6 +3,8 @@ from django.conf.urls import url, include
 from dsmr_api.views import v2 as views
 
 
+app_name = 'api-v2'
+
 datalogger_url_patterns = [
     url(r'^dsmrreading$', views.DsmrReadingViewSet.as_view({
         'get': 'list',

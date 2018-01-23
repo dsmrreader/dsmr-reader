@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import StreamingHttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import BaseFormView
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils import timezone, formats
 from django.shortcuts import redirect
 

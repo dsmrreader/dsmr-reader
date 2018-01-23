@@ -16,11 +16,11 @@ LOGGING = {
 }
 
 
-# Disable DDT.
+# Disable Django Toolbar.
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.remove('debug_toolbar')
 
-MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
-MIDDLEWARE_CLASSES.remove('debug_toolbar.middleware.DebugToolbarMiddleware')
+MIDDLEWARE = list(MIDDLEWARE)
+MIDDLEWARE.remove('debug_toolbar.middleware.DebugToolbarMiddleware')
 
 INTERNAL_IPS = None
