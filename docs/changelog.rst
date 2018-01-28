@@ -18,12 +18,12 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.14.0 - 2018-xx-xx
+v1.13.1 - 2018-xx-xx
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
-- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxx>`_] xxxxxxxxx
+- [`#428 <https://github.com/dennissiemensma/dsmr-reader/issues/428>`_] Django 2.0: Null characters are not allowed (esp8266)
 
 
 
