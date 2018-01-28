@@ -116,3 +116,17 @@ class TestAPIv1(TestCase):
         self.assertTrue(DsmrReading.objects.exists())
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.content, b'')
+
+    @mock.patch('dsmr_datalogger.services.telegram_to_reading')
+    def test_null_data_validation(self, telegram_to_reading_mock):
+        """ Shallow data verification. """
+        response = self.client.post(
+            self._api_url,
+            data={'telegram': '\x00' + self._telegram},  # Add null byte.
+            HTTP_X_AUTHKEY=self._api_settings.auth_key
+        )
+        self.assertTrue(telegram_to_reading_mock.called)
+
+        # Make sure null characters are stripped.
+        self.assertNotIn('\x00', telegram_to_reading_mock.call_args[1]['data'])
+        self.assertEqual(response.status_code, 201)
