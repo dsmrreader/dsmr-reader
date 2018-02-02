@@ -18,6 +18,15 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.13.2 - 2018-02-02
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#431 <https://github.com/dennissiemensma/dsmr-reader/issues/431>`_] Django security releases issued: 2.0.2
+
+
+
 v1.13.1 - 2018-01-28
 ^^^^^^^^^^^^^^^^^^^^
 
