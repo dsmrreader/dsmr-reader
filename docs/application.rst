@@ -99,7 +99,7 @@ Public webinterface warning
 
 - Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for yourself) and port ``80``.
 
-- You should also have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string `using one of the many generators found online <https://www.transip.nl/htpasswd/>`_. 
+- You should also have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string `using one of the many generators found online <http://www.htaccesstools.com/htpasswd-generator/>`_. 
 
 - Paste the htpasswd string in ``/etc/nginx/htpasswd``.
 

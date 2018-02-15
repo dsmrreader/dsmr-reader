@@ -18,6 +18,15 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.14.0 - 2018-xx-xx
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#436 <https://github.com/dennissiemensma/dsmr-reader/issues/436>`_] Provide built-in authentication method for public webinterface
+
+
+
 v1.13.2 - 2018-02-02
 ^^^^^^^^^^^^^^^^^^^^
 
