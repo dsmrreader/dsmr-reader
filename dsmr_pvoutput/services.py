@@ -1,4 +1,5 @@
 from django.utils import timezone
+import datetime
 import requests
 
 from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings, PVOutputAPISettings
@@ -23,10 +24,24 @@ def schedule_next_export():
     status_settings = PVOutputAddStatusSettings.get_solo()
 
     next_export = timezone.now() + timezone.timedelta(minutes=status_settings.upload_interval)
-    print(' - PVOutput | Delaying the next export until: {}'.format(next_export))
+    next_export = round_to_nearest_upload_interval(date=next_export, round_to_minutes=status_settings.upload_interval)
 
+    print(' - PVOutput | Delaying the next export until: {}'.format(next_export))
+    
     status_settings.next_export = next_export
     status_settings.save()
+
+
+def round_to_nearest_upload_interval(date=None, round_to_minutes=5):
+    if (date == None):
+        date = timezone.now()
+
+    round_to_seconds = round_to_minutes*60
+
+    seconds = (date.replace(tzinfo=None) - date.min).seconds
+    rounding = (seconds+round_to_seconds/2) // round_to_seconds * round_to_seconds
+
+    return date + datetime.timedelta(0, rounding-seconds, -date.microsecond)
 
 
 def export():
