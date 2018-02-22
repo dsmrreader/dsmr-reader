@@ -1,5 +1,4 @@
 from django.utils import timezone
-import datetime
 import requests
 
 from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings, PVOutputAPISettings
@@ -21,27 +20,25 @@ def should_export():
 
 def schedule_next_export():
     """ Schedules the next export, according to user preference. """
-    status_settings = PVOutputAddStatusSettings.get_solo()
-
-    next_export = timezone.now() + timezone.timedelta(minutes=status_settings.upload_interval)
-    next_export = round_to_nearest_upload_interval(date=next_export, round_to_minutes=status_settings.upload_interval)
-
+    next_export = get_next_export()
     print(' - PVOutput | Delaying the next export until: {}'.format(next_export))
 
+    status_settings = PVOutputAddStatusSettings.get_solo()
     status_settings.next_export = next_export
     status_settings.save()
 
 
-def round_to_nearest_upload_interval(date=None, round_to_minutes=5):
-    if date is None:
-        date = timezone.now()
+def get_next_export():
+    """ Rounds the timestamp to the nearest upload interval, preventing the uploads to shift forward. """
+    status_settings = PVOutputAddStatusSettings.get_solo()
 
-    round_to_seconds = round_to_minutes*60
+    next_export = timezone.now() + timezone.timedelta(minutes=status_settings.upload_interval)
 
-    seconds = (date.replace(tzinfo=None) - date.min).seconds
-    rounding = (seconds+round_to_seconds/2) // round_to_seconds * round_to_seconds
+    # Make sure it shifts back to the closest interval point possible.
+    minute_marker = next_export.minute
+    minute_marker = minute_marker - (minute_marker % status_settings.upload_interval)
 
-    return date + datetime.timedelta(0, rounding-seconds, -date.microsecond)
+    return next_export.replace(minute=minute_marker, second=0)
 
 
 def export():

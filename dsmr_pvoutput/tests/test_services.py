@@ -47,6 +47,25 @@ class TestServices(TestCase):
         self.assertFalse(dsmr_pvoutput.services.should_export())
 
     @mock.patch('django.utils.timezone.now')
+    def test_get_next_export(self, now_mock):
+        PVOutputAddStatusSettings.get_solo()
+
+        PVOutputAddStatusSettings.objects.update(upload_interval=PVOutputAddStatusSettings.INTERVAL_5_MINUTES)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 2, 1, minute=13))
+        result = dsmr_pvoutput.services.get_next_export()
+        self.assertEqual(result.minute, 15)
+
+        PVOutputAddStatusSettings.objects.update(upload_interval=PVOutputAddStatusSettings.INTERVAL_15_MINUTES)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 2, 1, minute=25))
+        result = dsmr_pvoutput.services.get_next_export()
+        self.assertEqual(result.minute, 30)
+
+        # Pass hour mark.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 2, 1, minute=59))
+        result = dsmr_pvoutput.services.get_next_export()
+        self.assertEqual(result.minute, 0)
+
+    @mock.patch('django.utils.timezone.now')
     def test_should_export_okay(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
         self._apply_fake_settings()
