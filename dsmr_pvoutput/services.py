@@ -27,13 +27,13 @@ def schedule_next_export():
     next_export = round_to_nearest_upload_interval(date=next_export, round_to_minutes=status_settings.upload_interval)
 
     print(' - PVOutput | Delaying the next export until: {}'.format(next_export))
-    
+
     status_settings.next_export = next_export
     status_settings.save()
 
 
 def round_to_nearest_upload_interval(date=None, round_to_minutes=5):
-    if (date == None):
+    if date is None:
         date = timezone.now()
 
     round_to_seconds = round_to_minutes*60
