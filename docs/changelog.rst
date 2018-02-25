@@ -24,6 +24,7 @@ v1.14.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#436 <https://github.com/dennissiemensma/dsmr-reader/issues/436>`_] Update docs: authentication method for public webinterface
+- [`#445 <https://github.com/dennissiemensma/dsmr-reader/issues/445>`_] Upload/export to PVoutput doesn't work
 
 
 
