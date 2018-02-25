@@ -59,7 +59,10 @@ class InfiniteManagementCommandMixin(object):
         print('Starting infinite command loop...')  # Just to make sure it gets printed.
 
         while self._keep_alive:
-            self.run(**options)
+            try:
+                self.run(**options)
+            except Exception as error:
+                self.stdout.write(' [!] Exception raised in run(): {}'.format(error))
 
             if self.sleep_time is not None:
                 self.stdout.write('Command completed. Sleeping for {} second(s)...'.format(self.sleep_time))
