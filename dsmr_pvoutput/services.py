@@ -20,13 +20,25 @@ def should_export():
 
 def schedule_next_export():
     """ Schedules the next export, according to user preference. """
+    next_export = get_next_export()
+    print(' - PVOutput | Delaying the next export until: {}'.format(next_export))
+
+    status_settings = PVOutputAddStatusSettings.get_solo()
+    status_settings.next_export = next_export
+    status_settings.save()
+
+
+def get_next_export():
+    """ Rounds the timestamp to the nearest upload interval, preventing the uploads to shift forward. """
     status_settings = PVOutputAddStatusSettings.get_solo()
 
     next_export = timezone.now() + timezone.timedelta(minutes=status_settings.upload_interval)
-    print(' - PVOutput | Delaying the next export until: {}'.format(next_export))
 
-    status_settings.next_export = next_export
-    status_settings.save()
+    # Make sure it shifts back to the closest interval point possible.
+    minute_marker = next_export.minute
+    minute_marker = minute_marker - (minute_marker % status_settings.upload_interval)
+
+    return next_export.replace(minute=minute_marker, second=0)
 
 
 def export():
