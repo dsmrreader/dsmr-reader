@@ -1,6 +1,5 @@
 import traceback
 
-from raven.contrib.django.raven_compat.models import client as raven_client
 from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext as _
 from django.utils import timezone
@@ -25,12 +24,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
         for current_receiver, current_response in responses:
             if isinstance(current_response, Exception):
-                try:
-                    # Raven should capture each exception encountered (below).
-                    raise current_response
-                except Exception:
-                    raven_client.captureException()
-
                 # Add and print traceback to help debugging any issues raised.
                 exception_traceback = traceback.format_tb(current_response.__traceback__, limit=100)
                 exception_traceback = "\n".join(exception_traceback)
