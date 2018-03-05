@@ -2,11 +2,10 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from dsmr_mqtt.models.settings import MQTTBrokerSettings, RawTelegramMQTTSettings, JSONTelegramMQTTSettings,\
-    SplitTopicTelegramMQTTSettings
+from dsmr_mqtt.models import settings
 
 
-@admin.register(MQTTBrokerSettings)
+@admin.register(settings.MQTTBrokerSettings)
 class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -20,7 +19,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     )
 
 
-@admin.register(RawTelegramMQTTSettings)
+@admin.register(settings.RawTelegramMQTTSettings)
 class RawTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -35,7 +34,7 @@ class RawTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     )
 
 
-@admin.register(JSONTelegramMQTTSettings)
+@admin.register(settings.JSONTelegramMQTTSettings)
 class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -70,7 +69,7 @@ extra_device_delivered = extra_device_delivered
     )
 
 
-@admin.register(SplitTopicTelegramMQTTSettings)
+@admin.register(settings.SplitTopicTelegramMQTTSettings)
 class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -97,6 +96,40 @@ phase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2
 phase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3
 extra_device_timestamp = dsmr/reading/extra_device_timestamp
 extra_device_delivered = dsmr/reading/extra_device_delivered
+</pre>
+'''
+                )
+            }
+        ),
+    )
+
+
+@admin.register(settings.JSONDayTotalsMQTTSettings)
+class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'topic', 'formatting'],
+                'description': _(
+                    'Triggered by any method of reading insertion (datalogger or API). '
+                    'Send the current day totals to the broker. You can alter the the field names used in the JSON '
+                    'message. Removing lines will remove fields from the message as well. '
+                    '''Default value:
+<pre>
+[mapping]
+# DATA = JSON FIELD
+electricity1 = electricity1
+electricity2 = electricity2
+electricity1_returned = electricity1_returned
+electricity2_returned = electricity2_returned
+electricity_merged = electricity_merged
+electricity_returned_merged = electricity_returned_merged
+electricity1_cost = electricity1_cost
+electricity2_cost = electricity2_cost
+electricity_cost_merged = electricity_cost_merged
+gas = gas
+gas_cost = gas_cost
+total_cost = total_cost
 </pre>
 '''
                 )

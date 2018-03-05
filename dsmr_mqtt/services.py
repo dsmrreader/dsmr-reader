@@ -3,10 +3,13 @@ import logging
 import json
 
 from django.core import serializers
+from django.utils import timezone
 import paho.mqtt.publish as publish
 
 from dsmr_mqtt.models.settings import MQTTBrokerSettings, RawTelegramMQTTSettings, JSONTelegramMQTTSettings,\
-    SplitTopicTelegramMQTTSettings
+    SplitTopicTelegramMQTTSettings, JSONDayTotalsMQTTSettings
+from dsmr_consumption.models.consumption import ElectricityConsumption
+import dsmr_consumption.services
 
 
 logger = logging.getLogger('dsmrreader')
@@ -113,3 +116,44 @@ def publish_split_topic_dsmr_reading(reading):
         publish.multiple(msgs=mqtt_messages, **broker_kwargs)
     except ValueError as error:
         logger.error('MQTT publish_split_topic_dsmr_reading() | {}'.format(error))
+
+
+def publish_json_day_totals_overview():
+    """ Publishes a JSON formatted DSMR reading to a broker, if set and enabled. """
+    json_settings = JSONDayTotalsMQTTSettings.get_solo()
+
+    if not json_settings.enabled:
+        return
+
+    try:
+        latest_electricity = ElectricityConsumption.objects.all().order_by('-read_at')[0]
+    except IndexError:
+        # Don't even bother when no data available.
+        return
+
+    day_consumption = dsmr_consumption.services.day_consumption(
+        day=timezone.localtime(latest_electricity.read_at).date()
+    )
+
+    # User specified formatting.
+    config_parser = configparser.ConfigParser()
+    config_parser.read_string(json_settings.formatting)
+    json_mapping = config_parser['mapping']
+
+    json_dict = {}
+
+    # Copy all fields described in the mapping.
+    for k, v in day_consumption.items():
+        if k not in json_mapping:
+            continue
+
+        config_key = json_mapping[k]
+        json_dict[config_key] = v
+
+    json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
+    broker_kwargs = get_broker_configuration()
+
+    try:
+        publish.single(topic=json_settings.topic, payload=json_data, **broker_kwargs)
+    except ValueError as error:
+        logger.error('MQTT publish_json_day_totals_overview() | {}'.format(error))

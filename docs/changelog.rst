@@ -26,6 +26,8 @@ v1.14.0 - 2018-xx-xx
 - [`#441 <https://github.com/dennissiemensma/dsmr-reader/issues/441>`_] PVOutput exports schedulen naar ingestelde upload interval - by pyrocumulus
 - [`#436 <https://github.com/dennissiemensma/dsmr-reader/issues/436>`_] Update docs: authentication method for public webinterface
 - [`#445 <https://github.com/dennissiemensma/dsmr-reader/issues/445>`_] Upload/export to PVoutput doesn't work
+- [`#367 <https://github.com/dennissiemensma/dsmr-reader/issues/367>`_] Dagverbruik en teruglevering via MQTT
+- [`#447 <https://github.com/dennissiemensma/dsmr-reader/issues/447>`_] Kosten via MQTT
 
 
 

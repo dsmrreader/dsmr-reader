@@ -1,11 +1,13 @@
 from unittest import mock
+import json
 
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_mqtt.models.settings import MQTTBrokerSettings, RawTelegramMQTTSettings, JSONTelegramMQTTSettings,\
-    SplitTopicTelegramMQTTSettings
+from dsmr_mqtt.models import settings
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 import dsmr_datalogger.signals
 import dsmr_mqtt.services
 
@@ -30,6 +32,7 @@ class TestServices(TestCase):
 
     @mock.patch('dsmr_mqtt.services.publish_json_dsmr_reading')
     @mock.patch('dsmr_mqtt.services.publish_split_topic_dsmr_reading')
+    @mock.patch('dsmr_mqtt.services.publish_json_day_totals_overview')
     def test_create_reading_signal(self, *service_mocks):
         self.assertFalse(all([x.called for x in service_mocks]))
         self._create_dsmrreading()
@@ -53,7 +56,7 @@ class TestServices(TestCase):
         self.assertFalse(all([x.called for x in service_mocks]))
 
     def test_get_broker_configuration(self):
-        broker_settings = MQTTBrokerSettings.get_solo()
+        broker_settings = settings.MQTTBrokerSettings.get_solo()
         broker_dict = dsmr_mqtt.services.get_broker_configuration()
 
         self.assertEqual(broker_dict['hostname'], broker_settings.hostname)
@@ -71,7 +74,7 @@ class TestServices(TestCase):
 
     @mock.patch('paho.mqtt.publish.single')
     def test_publish_raw_dsmr_telegram(self, mqtt_mock):
-        raw_settings = RawTelegramMQTTSettings.get_solo()
+        raw_settings = settings.RawTelegramMQTTSettings.get_solo()
 
         # Disabled by default.
         self.assertFalse(raw_settings.enabled)
@@ -91,7 +94,7 @@ class TestServices(TestCase):
 
     @mock.patch('paho.mqtt.publish.single')
     def test_publish_json_dsmr_reading(self, mqtt_mock):
-        json_settings = JSONTelegramMQTTSettings.get_solo()
+        json_settings = settings.JSONTelegramMQTTSettings.get_solo()
         dsmr_reading = self._create_dsmrreading()
 
         # Mapping.
@@ -132,7 +135,7 @@ extra_device_delivered = mmm
 
     @mock.patch('paho.mqtt.publish.multiple')
     def test_publish_split_topic_dsmr_reading(self, mqtt_mock):
-        split_topic_settings = SplitTopicTelegramMQTTSettings.get_solo()
+        split_topic_settings = settings.SplitTopicTelegramMQTTSettings.get_solo()
         dsmr_reading = self._create_dsmrreading()
 
         # Mapping.
@@ -170,3 +173,137 @@ extra_device_delivered = dsmr/telegram/extra_device_delivered
         # On error.
         mqtt_mock.side_effect = ValueError('Invalid host.')
         dsmr_mqtt.services.publish_split_topic_dsmr_reading(reading=dsmr_reading)
+
+    @mock.patch('paho.mqtt.publish.single')
+    def test_publish_json_day_totals_overview(self, mqtt_mock):
+        json_settings = settings.JSONDayTotalsMQTTSettings.get_solo()
+        reading = self._create_dsmrreading()
+
+        # Mapping.
+        json_settings.formatting = '''
+[mapping]
+# DATA = JSON FIELD
+electricity1 = aaa
+electricity2 = bbb
+electricity1_returned = ccc
+electricity2_returned = ddd
+electricity_merged = eee
+electricity_returned_merged = fff
+electricity1_cost = ggg
+electricity2_cost = hhh
+electricity_cost_merged = iii
+gas = jjj
+gas_cost = kkk
+total_cost = lll
+'''
+        json_settings.save()
+
+        # Disabled by default.
+        self.assertFalse(json_settings.enabled)
+        self.assertFalse(mqtt_mock.called)
+        dsmr_mqtt.services.publish_json_day_totals_overview()
+        self.assertFalse(mqtt_mock.called)
+
+        # Now enabled, but no data, so should fail.
+        json_settings.enabled = True
+        json_settings.save()
+        dsmr_mqtt.services.publish_json_day_totals_overview()
+        self.assertFalse(mqtt_mock.called)
+
+        # Required for consumption to return any data.
+        ElectricityConsumption.objects.bulk_create([
+            ElectricityConsumption(
+                read_at=reading.timestamp,
+                delivered_1=0,
+                delivered_2=0,
+                returned_1=0,
+                returned_2=0,
+                currently_delivered=0,
+                currently_returned=0,
+            ),
+            ElectricityConsumption(
+                read_at=reading.timestamp + timezone.timedelta(seconds=1),
+                delivered_1=12,
+                delivered_2=14,
+                returned_1=3,
+                returned_2=5,
+                currently_delivered=0,
+                currently_returned=0,
+            ),
+        ])
+
+        # Should be okay now.
+        json_settings.enabled = True
+        json_settings.save()
+        dsmr_mqtt.services.publish_json_day_totals_overview()
+        self.assertTrue(mqtt_mock.called)
+
+        _, _, result = mqtt_mock.mock_calls[0]
+        result = json.loads(result['payload'])
+
+        # Without gas or costs.
+        self.assertEqual(result['aaa'], '12.000')
+        self.assertEqual(result['bbb'], '14.000')
+        self.assertEqual(result['ccc'], '3.000')
+        self.assertEqual(result['ddd'], '5.000')
+        self.assertEqual(result['eee'], '26.000')
+        self.assertEqual(result['fff'], '8.000')
+        self.assertEqual(result['ggg'], '0.00')
+        self.assertEqual(result['hhh'], '0.00')
+        self.assertEqual(result['iii'], '0.00')
+        self.assertEqual(result['lll'], '0.00')
+
+        # With gas.
+        GasConsumption.objects.create(
+            read_at=reading.timestamp,
+            delivered=1,
+            currently_delivered=0,
+        )
+        GasConsumption.objects.create(
+            read_at=reading.timestamp + timezone.timedelta(seconds=1),
+            delivered=5.5,
+            currently_delivered=0,
+        )
+
+        mqtt_mock.reset_mock()
+        dsmr_mqtt.services.publish_json_day_totals_overview()
+
+        _, _, result = mqtt_mock.mock_calls[0]
+        result = json.loads(result['payload'])
+
+        self.assertEqual(result['jjj'], '4.500')
+        self.assertEqual(result['kkk'], '0.00')
+
+        # With costs.
+        EnergySupplierPrice.objects.create(
+            start=reading.timestamp,
+            end=reading.timestamp,
+            description='Test',
+            electricity_delivered_1_price=3,
+            electricity_delivered_2_price=5,
+            gas_price=8,
+            electricity_returned_1_price=1,
+            electricity_returned_2_price=2,
+        )
+        mqtt_mock.reset_mock()
+        dsmr_mqtt.services.publish_json_day_totals_overview()
+        '''
+        [mapping]
+        # DATA = JSON FIELD
+        electricity1_cost = ggg
+        electricity2_cost = hhh
+        electricity_cost_merged = iii
+        gas_cost = kkk
+        total_cost = lll
+        '''
+        _, _, result = mqtt_mock.mock_calls[0]
+        result = json.loads(result['payload'])
+
+        self.assertEqual(result['ggg'], '33.00')
+        self.assertEqual(result['hhh'], '60.00')
+        self.assertEqual(result['iii'], '93.00')
+        self.assertEqual(result['lll'], '129.00')
+
+        # On error.
+        mqtt_mock.side_effect = ValueError('Invalid host.')
+        dsmr_mqtt.services.publish_json_day_totals_overview()

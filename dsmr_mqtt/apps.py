@@ -47,3 +47,8 @@ class AppConfig(AppConfig):
             dsmr_mqtt.services.publish_split_topic_dsmr_reading(reading=instance)
         except Exception as error:
             logger.error('publish_split_topic_dsmr_reading() failed: {}'.format(error))
+
+        try:
+            dsmr_mqtt.services.publish_json_day_totals_overview()
+        except Exception as error:
+            logger.error('publish_json_dashboard_overview() failed: {}'.format(error))
