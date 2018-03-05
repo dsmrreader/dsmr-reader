@@ -192,9 +192,16 @@ electricity_returned_merged = fff
 electricity1_cost = ggg
 electricity2_cost = hhh
 electricity_cost_merged = iii
+
 gas = jjj
 gas_cost = kkk
 total_cost = lll
+
+energy_supplier_price_electricity_delivered_1 = mmm
+energy_supplier_price_electricity_delivered_2 = nnn
+energy_supplier_price_electricity_returned_1 = ooo
+energy_supplier_price_electricity_returned_2 = ppp
+energy_supplier_price_gas = qqq
 '''
         json_settings.save()
 
@@ -281,21 +288,13 @@ total_cost = lll
             description='Test',
             electricity_delivered_1_price=3,
             electricity_delivered_2_price=5,
-            gas_price=8,
             electricity_returned_1_price=1,
             electricity_returned_2_price=2,
+            gas_price=8,
         )
         mqtt_mock.reset_mock()
         dsmr_mqtt.services.publish_json_day_totals_overview()
-        '''
-        [mapping]
-        # DATA = JSON FIELD
-        electricity1_cost = ggg
-        electricity2_cost = hhh
-        electricity_cost_merged = iii
-        gas_cost = kkk
-        total_cost = lll
-        '''
+
         _, _, result = mqtt_mock.mock_calls[0]
         result = json.loads(result['payload'])
 
@@ -303,6 +302,12 @@ total_cost = lll
         self.assertEqual(result['hhh'], '60.00')
         self.assertEqual(result['iii'], '93.00')
         self.assertEqual(result['lll'], '129.00')
+
+        self.assertEqual(result['mmm'], '3.00000')
+        self.assertEqual(result['nnn'], '5.00000')
+        self.assertEqual(result['ooo'], '1.00000')
+        self.assertEqual(result['ppp'], '2.00000')
+        self.assertEqual(result['qqq'], '8.00000')
 
         # On error.
         mqtt_mock.side_effect = ValueError('Invalid host.')

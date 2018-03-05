@@ -127,9 +127,18 @@ electricity_returned_merged = electricity_returned_merged
 electricity1_cost = electricity1_cost
 electricity2_cost = electricity2_cost
 electricity_cost_merged = electricity_cost_merged
+
+# Gas (if any)
 gas = gas
 gas_cost = gas_cost
 total_cost = total_cost
+
+# Your energy supplier prices (if set)
+energy_supplier_price_electricity_delivered_1 = energy_supplier_price_electricity_delivered_1
+energy_supplier_price_electricity_delivered_2 = energy_supplier_price_electricity_delivered_2
+energy_supplier_price_electricity_returned_1 = energy_supplier_price_electricity_returned_1
+energy_supplier_price_electricity_returned_2 = energy_supplier_price_electricity_returned_2
+energy_supplier_price_gas = energy_supplier_price_gas
 </pre>
 '''
                 )
