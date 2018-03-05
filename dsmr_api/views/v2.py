@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -31,6 +33,7 @@ class TodayConsumptionView(APIView):
         'electricity2_returned_end', 'electricity_cost_merged', 'electricity_merged', 'electricity_returned_merged',
         'average_temperature', 'lowest_temperature', 'highest_temperature', 'latest_consumption'
     )
+    DEFAULT_ZERO_FIELDS = ('gas', 'gas_cost')  # These might miss during the first hour of each day.
 
     def get(self, request):
         try:
@@ -44,6 +47,11 @@ class TodayConsumptionView(APIView):
         for x in self.IGNORE_FIELDS:
             if x in day_totals.keys():
                 del day_totals[x]
+
+        # Default these, if omitted.
+        for x in self.DEFAULT_ZERO_FIELDS:
+            if x not in day_totals.keys():
+                day_totals[x] = Decimal(0)
 
         return Response(day_totals)
 
