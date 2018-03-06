@@ -117,11 +117,12 @@ def publish_split_topic_dsmr_reading(reading):
         logger.error('MQTT publish_split_topic_dsmr_reading() | {}'.format(error))
 
 
-def publish_json_day_totals_overview():
-    """ Publishes a JSON formatted DSMR reading to a broker, if set and enabled. """
+def publish_day_totals():
+    """ Publishes day totals to a broker, if set and enabled. """
     json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
+    split_topic_settings = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
 
-    if not json_settings.enabled:
+    if not json_settings.enabled and not split_topic_settings.enabled:
         return
 
     try:
@@ -134,11 +135,27 @@ def publish_json_day_totals_overview():
         day=timezone.localtime(latest_electricity.read_at).date()
     )
 
-    # User specified formatting.
+    mqtt_messages = []
+
+    if json_settings.enabled:
+        mqtt_messages += day_totals_as_json(day_consumption, json_settings)
+
+    if split_topic_settings.enabled:
+        mqtt_messages += day_totals_per_topic(day_consumption, split_topic_settings)
+
+    broker_kwargs = get_broker_configuration()
+
+    try:
+        publish.multiple(msgs=mqtt_messages, **broker_kwargs)
+    except ValueError as error:
+        logger.error('MQTT publish_day_totals() | {}'.format(error))
+
+
+def day_totals_as_json(day_consumption, json_settings):
+    """ Converts day consumption to JSON format. """
     config_parser = configparser.ConfigParser()
     config_parser.read_string(json_settings.formatting)
     json_mapping = config_parser['mapping']
-
     json_dict = {}
 
     # Copy all fields described in the mapping.
@@ -150,9 +167,29 @@ def publish_json_day_totals_overview():
         json_dict[config_key] = v
 
     json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
-    broker_kwargs = get_broker_configuration()
 
-    try:
-        publish.single(topic=json_settings.topic, payload=json_data, **broker_kwargs)
-    except ValueError as error:
-        logger.error('MQTT publish_json_day_totals_overview() | {}'.format(error))
+    return [{
+        'topic': json_settings.topic,
+        'payload': json_data,
+    }]
+
+
+def day_totals_per_topic(day_consumption, split_topic_settings):
+    """ Converts day consumption to split topic messages. """
+    config_parser = configparser.ConfigParser()
+    config_parser.read_string(split_topic_settings.formatting)
+    topic_mapping = config_parser['mapping']
+
+    mqtt_messages = []
+
+    # Copy all fields described in the mapping.
+    for k, v in day_consumption.items():
+        if k not in topic_mapping:
+            continue
+
+        mqtt_messages.append({
+            'topic': topic_mapping[k],
+            'payload': float(v),
+        })
+
+    return mqtt_messages

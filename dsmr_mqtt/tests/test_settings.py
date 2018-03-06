@@ -43,7 +43,7 @@ class TestJSONTelegramSettings(TestCase):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
 
-class SplitTopicTelegramMQTTSettingsSettings(TestCase):
+class SplitTopicTelegramMQTTSettings(TestCase):
     """ Tests for settings defaults. """
     def setUp(self):
         self.instance = telegram.SplitTopicTelegramMQTTSettings.get_solo()
@@ -64,6 +64,19 @@ class JSONDayTotalsMQTTSettings(TestCase):
     def test_admin(self):
         """ Model should be registered in Django Admin. """
         self.assertTrue(site.is_registered(day_totals.JSONDayTotalsMQTTSettings))
+
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+
+
+class SplitTopicDayTotalsMQTTSettings(TestCase):
+    """ Tests for settings defaults. """
+    def setUp(self):
+        self.instance = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
+
+    def test_admin(self):
+        """ Model should be registered in Django Admin. """
+        self.assertTrue(site.is_registered(day_totals.SplitTopicDayTotalsMQTTSettings))
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))

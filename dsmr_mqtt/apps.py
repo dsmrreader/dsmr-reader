@@ -49,6 +49,6 @@ class AppConfig(AppConfig):
             logger.error('publish_split_topic_dsmr_reading() failed: {}'.format(error))
 
         try:
-            dsmr_mqtt.services.publish_json_day_totals_overview()
+            dsmr_mqtt.services.publish_day_totals()
         except Exception as error:
-            logger.error('publish_json_dashboard_overview() failed: {}'.format(error))
+            logger.error('publish_day_totals() failed: {}'.format(error))
