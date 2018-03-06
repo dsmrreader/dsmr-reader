@@ -4,7 +4,7 @@ import json
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_mqtt.models import settings
+from dsmr_mqtt.models.settings import broker, day_totals, telegram
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -56,7 +56,7 @@ class TestServices(TestCase):
         self.assertFalse(all([x.called for x in service_mocks]))
 
     def test_get_broker_configuration(self):
-        broker_settings = settings.MQTTBrokerSettings.get_solo()
+        broker_settings = broker.MQTTBrokerSettings.get_solo()
         broker_dict = dsmr_mqtt.services.get_broker_configuration()
 
         self.assertEqual(broker_dict['hostname'], broker_settings.hostname)
@@ -74,7 +74,7 @@ class TestServices(TestCase):
 
     @mock.patch('paho.mqtt.publish.single')
     def test_publish_raw_dsmr_telegram(self, mqtt_mock):
-        raw_settings = settings.RawTelegramMQTTSettings.get_solo()
+        raw_settings = telegram.RawTelegramMQTTSettings.get_solo()
 
         # Disabled by default.
         self.assertFalse(raw_settings.enabled)
@@ -94,7 +94,7 @@ class TestServices(TestCase):
 
     @mock.patch('paho.mqtt.publish.single')
     def test_publish_json_dsmr_reading(self, mqtt_mock):
-        json_settings = settings.JSONTelegramMQTTSettings.get_solo()
+        json_settings = telegram.JSONTelegramMQTTSettings.get_solo()
         dsmr_reading = self._create_dsmrreading()
 
         # Mapping.
@@ -135,7 +135,7 @@ extra_device_delivered = mmm
 
     @mock.patch('paho.mqtt.publish.multiple')
     def test_publish_split_topic_dsmr_reading(self, mqtt_mock):
-        split_topic_settings = settings.SplitTopicTelegramMQTTSettings.get_solo()
+        split_topic_settings = telegram.SplitTopicTelegramMQTTSettings.get_solo()
         dsmr_reading = self._create_dsmrreading()
 
         # Mapping.
@@ -176,7 +176,7 @@ extra_device_delivered = dsmr/telegram/extra_device_delivered
 
     @mock.patch('paho.mqtt.publish.single')
     def test_publish_json_day_totals_overview(self, mqtt_mock):
-        json_settings = settings.JSONDayTotalsMQTTSettings.get_solo()
+        json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
         reading = self._create_dsmrreading()
 
         # Mapping.

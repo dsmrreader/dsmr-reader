@@ -1,17 +1,17 @@
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
-from dsmr_mqtt.models import settings
+from dsmr_mqtt.models.settings import broker, day_totals, telegram
 
 
 class TestBrokerSettings(TestCase):
     """ Tests for settings defaults. """
     def setUp(self):
-        self.instance = settings.MQTTBrokerSettings.get_solo()
+        self.instance = broker.MQTTBrokerSettings.get_solo()
 
     def test_admin(self):
         """ Model should be registered in Django Admin. """
-        self.assertTrue(site.is_registered(settings.MQTTBrokerSettings))
+        self.assertTrue(site.is_registered(broker.MQTTBrokerSettings))
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
@@ -20,11 +20,11 @@ class TestBrokerSettings(TestCase):
 class TestRawTelegramSettings(TestCase):
     """ Tests for settings defaults. """
     def setUp(self):
-        self.instance = settings.RawTelegramMQTTSettings.get_solo()
+        self.instance = telegram.RawTelegramMQTTSettings.get_solo()
 
     def test_admin(self):
         """ Model should be registered in Django Admin. """
-        self.assertTrue(site.is_registered(settings.RawTelegramMQTTSettings))
+        self.assertTrue(site.is_registered(telegram.RawTelegramMQTTSettings))
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
@@ -33,11 +33,11 @@ class TestRawTelegramSettings(TestCase):
 class TestJSONTelegramSettings(TestCase):
     """ Tests for settings defaults. """
     def setUp(self):
-        self.instance = settings.JSONTelegramMQTTSettings.get_solo()
+        self.instance = telegram.JSONTelegramMQTTSettings.get_solo()
 
     def test_admin(self):
         """ Model should be registered in Django Admin. """
-        self.assertTrue(site.is_registered(settings.JSONTelegramMQTTSettings))
+        self.assertTrue(site.is_registered(telegram.JSONTelegramMQTTSettings))
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
@@ -46,11 +46,11 @@ class TestJSONTelegramSettings(TestCase):
 class SplitTopicTelegramMQTTSettingsSettings(TestCase):
     """ Tests for settings defaults. """
     def setUp(self):
-        self.instance = settings.SplitTopicTelegramMQTTSettings.get_solo()
+        self.instance = telegram.SplitTopicTelegramMQTTSettings.get_solo()
 
     def test_admin(self):
         """ Model should be registered in Django Admin. """
-        self.assertTrue(site.is_registered(settings.SplitTopicTelegramMQTTSettings))
+        self.assertTrue(site.is_registered(telegram.SplitTopicTelegramMQTTSettings))
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
@@ -59,11 +59,11 @@ class SplitTopicTelegramMQTTSettingsSettings(TestCase):
 class JSONDayTotalsMQTTSettings(TestCase):
     """ Tests for settings defaults. """
     def setUp(self):
-        self.instance = settings.JSONDayTotalsMQTTSettings.get_solo()
+        self.instance = day_totals.JSONDayTotalsMQTTSettings.get_solo()
 
     def test_admin(self):
         """ Model should be registered in Django Admin. """
-        self.assertTrue(site.is_registered(settings.JSONDayTotalsMQTTSettings))
+        self.assertTrue(site.is_registered(day_totals.JSONDayTotalsMQTTSettings))
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))

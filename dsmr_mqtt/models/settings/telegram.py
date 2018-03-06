@@ -3,52 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
 
-class MQTTBrokerSettings(SingletonModel):
-    """ MQTT broker connection. """
-    hostname = models.CharField(
-        max_length=256,
-        null=True,
-        default=None,
-        verbose_name=_('Hostname'),
-        help_text=_('The hostname of the broker to send MQTT messages to.')
-    )
-    port = models.IntegerField(
-        null=True,
-        default=1883,
-        verbose_name=_('Port'),
-        help_text=_('The port of the broker to send MQTT messages to.')
-    )
-    username = models.CharField(
-        max_length=256,
-        null=True,
-        blank=True,
-        default=None,
-        verbose_name=_('Username'),
-        help_text=_('Optional: The username required for authentication (if any).')
-    )
-    password = models.CharField(
-        max_length=256,
-        null=True,
-        blank=True,
-        default=None,
-        verbose_name=_('Password'),
-        help_text=_('Optional: The password required for authentication (if any).')
-    )
-    client_id = models.CharField(
-        max_length=256,
-        default='DSMR-reader',
-        verbose_name=_('Client ID'),
-        help_text=_('The client ID used to identify DSMR-reader sending the MQTT messages.')
-    )
-
-    def __str__(self):
-        return self._meta.verbose_name.title()
-
-    class Meta:
-        default_permissions = tuple()
-        verbose_name = _('MQTT broker configuration')
-
-
 class RawTelegramMQTTSettings(SingletonModel):
     """ MQTT raw telegrams. """
     enabled = models.BooleanField(
@@ -149,54 +103,3 @@ extra_device_delivered = dsmr/reading/extra_device_delivered
     class Meta:
         default_permissions = tuple()
         verbose_name = _('MQTT split topic telegram configuration')
-
-
-class JSONDayTotalsMQTTSettings(SingletonModel):
-    """ MQTT JSON Dashboard overview. """
-    enabled = models.BooleanField(
-        default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether the day totals are sent to the broker, in JSON format.')
-    )
-    topic = models.CharField(
-        max_length=256,
-        default='dsmr/day-totals',
-        verbose_name=_('Topic path'),
-        help_text=_('The topic to send the JSON formatted message to.')
-    )
-    formatting = models.TextField(
-        default='''
-[mapping]
-# DATA = JSON FIELD
-electricity1 = electricity1
-electricity2 = electricity2
-electricity1_returned = electricity1_returned
-electricity2_returned = electricity2_returned
-electricity_merged = electricity_merged
-electricity_returned_merged = electricity_returned_merged
-electricity1_cost = electricity1_cost
-electricity2_cost = electricity2_cost
-electricity_cost_merged = electricity_cost_merged
-
-# Gas (if any)
-gas = gas
-gas_cost = gas_cost
-total_cost = total_cost
-
-# Your energy supplier prices (if set)
-energy_supplier_price_electricity_delivered_1 = energy_supplier_price_electricity_delivered_1
-energy_supplier_price_electricity_delivered_2 = energy_supplier_price_electricity_delivered_2
-energy_supplier_price_electricity_returned_1 = energy_supplier_price_electricity_returned_1
-energy_supplier_price_electricity_returned_2 = energy_supplier_price_electricity_returned_2
-energy_supplier_price_gas = energy_supplier_price_gas
-''',
-        verbose_name=_('Formatting'),
-        help_text=_('Maps the field names used in the JSON message sent to the broker.')
-    )
-
-    def __str__(self):
-        return self._meta.verbose_name.title()
-
-    class Meta:
-        default_permissions = tuple()
-        verbose_name = _('MQTT JSON day totals configuration')

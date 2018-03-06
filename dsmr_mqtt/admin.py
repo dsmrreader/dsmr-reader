@@ -2,10 +2,10 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from dsmr_mqtt.models import settings
+from dsmr_mqtt.models.settings import broker, day_totals, telegram
 
 
-@admin.register(settings.MQTTBrokerSettings)
+@admin.register(broker.MQTTBrokerSettings)
 class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -19,7 +19,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     )
 
 
-@admin.register(settings.RawTelegramMQTTSettings)
+@admin.register(telegram.RawTelegramMQTTSettings)
 class RawTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -34,7 +34,7 @@ class RawTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     )
 
 
-@admin.register(settings.JSONTelegramMQTTSettings)
+@admin.register(telegram.JSONTelegramMQTTSettings)
 class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -69,7 +69,7 @@ extra_device_delivered = extra_device_delivered
     )
 
 
-@admin.register(settings.SplitTopicTelegramMQTTSettings)
+@admin.register(telegram.SplitTopicTelegramMQTTSettings)
 class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -104,7 +104,7 @@ extra_device_delivered = dsmr/reading/extra_device_delivered
     )
 
 
-@admin.register(settings.JSONDayTotalsMQTTSettings)
+@admin.register(day_totals.JSONDayTotalsMQTTSettings)
 class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (

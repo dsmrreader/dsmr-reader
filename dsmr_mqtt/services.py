@@ -6,8 +6,7 @@ from django.core import serializers
 from django.utils import timezone
 import paho.mqtt.publish as publish
 
-from dsmr_mqtt.models.settings import MQTTBrokerSettings, RawTelegramMQTTSettings, JSONTelegramMQTTSettings,\
-    SplitTopicTelegramMQTTSettings, JSONDayTotalsMQTTSettings
+from dsmr_mqtt.models.settings import broker, day_totals, telegram
 from dsmr_consumption.models.consumption import ElectricityConsumption
 import dsmr_consumption.services
 
@@ -17,7 +16,7 @@ logger = logging.getLogger('dsmrreader')
 
 def get_broker_configuration():
     """ Returns the broker configuration from the settings, in dict format, ready to use with paho.mqtt. """
-    broker_settings = MQTTBrokerSettings.get_solo()
+    broker_settings = broker.MQTTBrokerSettings.get_solo()
 
     kwargs = {
         'hostname': broker_settings.hostname,
@@ -39,7 +38,7 @@ def get_broker_configuration():
 
 def publish_raw_dsmr_telegram(data):
     """ Publishes a raw DSMR telegram string to a broker, if set and enabled. """
-    raw_settings = RawTelegramMQTTSettings.get_solo()
+    raw_settings = telegram.RawTelegramMQTTSettings.get_solo()
 
     if not raw_settings.enabled:
         return
@@ -54,7 +53,7 @@ def publish_raw_dsmr_telegram(data):
 
 def publish_json_dsmr_reading(reading):
     """ Publishes a JSON formatted DSMR reading to a broker, if set and enabled. """
-    json_settings = JSONTelegramMQTTSettings.get_solo()
+    json_settings = telegram.JSONTelegramMQTTSettings.get_solo()
 
     if not json_settings.enabled:
         return
@@ -85,7 +84,7 @@ def publish_json_dsmr_reading(reading):
 
 def publish_split_topic_dsmr_reading(reading):
     """ Publishes a DSMR reading to a broker, formatted in multiple topic per field name, if set and enabled. """
-    split_topic_settings = SplitTopicTelegramMQTTSettings.get_solo()
+    split_topic_settings = telegram.SplitTopicTelegramMQTTSettings.get_solo()
 
     if not split_topic_settings.enabled:
         return
@@ -120,7 +119,7 @@ def publish_split_topic_dsmr_reading(reading):
 
 def publish_json_day_totals_overview():
     """ Publishes a JSON formatted DSMR reading to a broker, if set and enabled. """
-    json_settings = JSONDayTotalsMQTTSettings.get_solo()
+    json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
 
     if not json_settings.enabled:
         return
