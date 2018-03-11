@@ -348,97 +348,81 @@ energy_supplier_price_gas = dsmr/qqq
         self.assertEqual(result['ppp'], '2.00000')
         self.assertEqual(result['qqq'], '8.00000')
 
-#     @mock.patch('paho.mqtt.publish.multiple')
-#     def test_split_topic(self, mqtt_mock):
-#         # Required for consumption to return any data.
-#         ElectricityConsumption.objects.bulk_create([
-#             ElectricityConsumption(
-#                 read_at=self.reading.timestamp,
-#                 delivered_1=0,
-#                 delivered_2=0,
-#                 returned_1=0,
-#                 returned_2=0,
-#                 currently_delivered=0,
-#                 currently_returned=0,
-#             ),
-#             ElectricityConsumption(
-#                 read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
-#                 delivered_1=12,
-#                 delivered_2=14,
-#                 returned_1=3,
-#                 returned_2=5,
-#                 currently_delivered=0,
-#                 currently_returned=0,
-#             ),
-#         ])
-#
-#         # Should be okay now.
-#         self.json_settings.enabled = True
-#         self.json_settings.save()
-#         dsmr_mqtt.services.publish_day_totals()
-#         self.assertTrue(mqtt_mock.called)
-#
-#         _, _, mqtt_messages = mqtt_mock.mock_calls[0]['msgs']
-#         print('mqtt_messages', mqtt_messages)
-#         # Without gas or costs.
-#         self.assertEqual(mqtt_messages['aaa'], '12.000')
-#         self.assertEqual(mqtt_messages['bbb'], '14.000')
-#         self.assertEqual(mqtt_messages['ccc'], '3.000')
-#         self.assertEqual(mqtt_messages['ddd'], '5.000')
-#         self.assertEqual(mqtt_messages['eee'], '26.000')
-#         self.assertEqual(mqtt_messages['fff'], '8.000')
-#         self.assertEqual(mqtt_messages['ggg'], '0.00')
-#         self.assertEqual(mqtt_messages['hhh'], '0.00')
-#         self.assertEqual(mqtt_messages['iii'], '0.00')
-#         self.assertEqual(mqtt_messages['lll'], '0.00')
-#
-#         # With gas.
-#         GasConsumption.objects.create(
-#             read_at=self.reading.timestamp,
-#             delivered=1,
-#             currently_delivered=0,
-#         )
-#         GasConsumption.objects.create(
-#             read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
-#             delivered=5.5,
-#             currently_delivered=0,
-#         )
-#
-#         mqtt_mock.reset_mock()
-#         dsmr_mqtt.services.publish_day_totals()
-#
-#         _, _, mqtt_messages = mqtt_mock.mock_calls[0]['msgs']
-#
-#         self.assertEqual(mqtt_messages['jjj'], '4.500')
-#         self.assertEqual(mqtt_messages['kkk'], '0.00')
-#
-#         # With costs.
-#         EnergySupplierPrice.objects.create(
-#             start=self.reading.timestamp,
-#             end=self.reading.timestamp,
-#             description='Test',
-#             electricity_delivered_1_price=3,
-#             electricity_delivered_2_price=5,
-#             electricity_returned_1_price=1,
-#             electricity_returned_2_price=2,
-#             gas_price=8,
-#         )
-#         mqtt_mock.reset_mock()
-#         dsmr_mqtt.services.publish_day_totals()
-#
-#         _, _, mqtt_messages = mqtt_mock.mock_calls[0]['msgs']
-#
-#         self.assertEqual(mqtt_messages['ggg'], '33.00')
-#         self.assertEqual(mqtt_messages['hhh'], '60.00')
-#         self.assertEqual(mqtt_messages['iii'], '93.00')
-#         self.assertEqual(mqtt_messages['lll'], '129.00')
-#
-#         self.assertEqual(mqtt_messages['mmm'], '3.00000')
-#         self.assertEqual(mqtt_messages['nnn'], '5.00000')
-#         self.assertEqual(mqtt_messages['ooo'], '1.00000')
-#         self.assertEqual(mqtt_messages['ppp'], '2.00000')
-#         self.assertEqual(mqtt_messages['qqq'], '8.00000')
-#
-#         # On error.
-#         mqtt_mock.side_effect = ValueError('Invalid host.')
-#         dsmr_mqtt.services.publish_day_totals()
+    @mock.patch('paho.mqtt.publish.multiple')
+    def test_split_topic(self, mqtt_mock):
+        # Required for consumption to return any data.
+        ElectricityConsumption.objects.bulk_create([
+            ElectricityConsumption(
+                read_at=self.reading.timestamp,
+                delivered_1=0,
+                delivered_2=0,
+                returned_1=0,
+                returned_2=0,
+                currently_delivered=0,
+                currently_returned=0,
+            ),
+            ElectricityConsumption(
+                read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
+                delivered_1=12,
+                delivered_2=14,
+                returned_1=3,
+                returned_2=5,
+                currently_delivered=0,
+                currently_returned=0,
+            ),
+        ])
+        GasConsumption.objects.create(
+            read_at=self.reading.timestamp,
+            delivered=1,
+            currently_delivered=0,
+        )
+        GasConsumption.objects.create(
+            read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
+            delivered=5.5,
+            currently_delivered=0,
+        )
+        EnergySupplierPrice.objects.create(
+            start=self.reading.timestamp,
+            end=self.reading.timestamp,
+            description='Test',
+            electricity_delivered_1_price=3,
+            electricity_delivered_2_price=5,
+            electricity_returned_1_price=1,
+            electricity_returned_2_price=2,
+            gas_price=8,
+        )
+
+        # Should be okay now.
+        self.split_topic_settings.enabled = True
+        self.split_topic_settings.save()
+        dsmr_mqtt.services.publish_day_totals()
+        self.assertTrue(mqtt_mock.called)
+
+        _, _, kwargs = mqtt_mock.mock_calls[0]
+        mqtt_messages = kwargs['msgs']
+
+        # Without gas or costs.
+        self.assertIn({'payload': 12.0, 'topic': 'dsmr/aaa'}, mqtt_messages)
+        self.assertIn({'payload': 14.0, 'topic': 'dsmr/bbb'}, mqtt_messages)
+        self.assertIn({'payload': 3.0, 'topic': 'dsmr/ccc'}, mqtt_messages)
+        self.assertIn({'payload': 5.0, 'topic': 'dsmr/ddd'}, mqtt_messages)
+        self.assertIn({'payload': 26.0, 'topic': 'dsmr/eee'}, mqtt_messages)
+        self.assertIn({'payload': 8.0, 'topic': 'dsmr/fff'}, mqtt_messages)
+
+        self.assertIn({'payload': 4.5, 'topic': 'dsmr/jjj'}, mqtt_messages)
+        self.assertIn({'payload': 36.0, 'topic': 'dsmr/kkk'}, mqtt_messages)
+
+        self.assertIn({'payload': 33.0, 'topic': 'dsmr/ggg'}, mqtt_messages)
+        self.assertIn({'payload': 60.0, 'topic': 'dsmr/hhh'}, mqtt_messages)
+        self.assertIn({'payload': 93.0, 'topic': 'dsmr/iii'}, mqtt_messages)
+        self.assertIn({'payload': 129.0, 'topic': 'dsmr/lll'}, mqtt_messages)
+
+        self.assertIn({'payload': 3.0, 'topic': 'dsmr/mmm'}, mqtt_messages)
+        self.assertIn({'payload': 5.0, 'topic': 'dsmr/nnn'}, mqtt_messages)
+        self.assertIn({'payload': 1.0, 'topic': 'dsmr/ooo'}, mqtt_messages)
+        self.assertIn({'payload': 2.0, 'topic': 'dsmr/ppp'}, mqtt_messages)
+        self.assertIn({'payload': 8.0, 'topic': 'dsmr/qqq'}, mqtt_messages)
+
+        # On error.
+        mqtt_mock.side_effect = ValueError('Invalid host.')
+        dsmr_mqtt.services.publish_day_totals()

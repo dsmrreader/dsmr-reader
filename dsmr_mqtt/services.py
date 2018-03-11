@@ -158,7 +158,7 @@ def day_totals_as_json(day_consumption, json_settings):
     json_mapping = config_parser['mapping']
     json_dict = {}
 
-    # Copy all fields described in the mapping.
+    # Use mapping to setup fields for JSON message.
     for k, v in day_consumption.items():
         if k not in json_mapping:
             continue
@@ -182,7 +182,7 @@ def day_totals_per_topic(day_consumption, split_topic_settings):
 
     mqtt_messages = []
 
-    # Copy all fields described in the mapping.
+    # Use mapping to setup fields for each message/topic.
     for k, v in day_consumption.items():
         if k not in topic_mapping:
             continue
