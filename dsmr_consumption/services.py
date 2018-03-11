@@ -234,9 +234,17 @@ def day_consumption(day):
         )
         consumption['total_cost'] += consumption['gas_cost']
 
+    # Current prices as well.
+    consumption['energy_supplier_price_electricity_delivered_1'] = daily_energy_price.electricity_delivered_1_price
+    consumption['energy_supplier_price_electricity_delivered_2'] = daily_energy_price.electricity_delivered_2_price
+    consumption['energy_supplier_price_electricity_returned_1'] = daily_energy_price.electricity_returned_1_price
+    consumption['energy_supplier_price_electricity_returned_2'] = daily_energy_price.electricity_returned_2_price
+    consumption['energy_supplier_price_gas'] = daily_energy_price.gas_price
+
+    # Any notes of that day.
     consumption['notes'] = Note.objects.filter(day=day).values_list('description', flat=True)
 
-    # Remperature readings are not mandatory as well.
+    # Temperature readings are not mandatory as well.
     temperature_readings = TemperatureReading.objects.filter(
         read_at__gte=day_start, read_at__lt=day_end,
     ).order_by('read_at')
