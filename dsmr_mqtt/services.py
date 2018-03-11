@@ -189,7 +189,7 @@ def day_totals_per_topic(day_consumption, split_topic_settings):
 
         mqtt_messages.append({
             'topic': topic_mapping[k],
-            'payload': float(v),
+            'payload': str(v),
         })
 
     return mqtt_messages

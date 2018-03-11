@@ -402,26 +402,26 @@ energy_supplier_price_gas = dsmr/qqq
         mqtt_messages = kwargs['msgs']
 
         # Without gas or costs.
-        self.assertIn({'payload': 12.0, 'topic': 'dsmr/aaa'}, mqtt_messages)
-        self.assertIn({'payload': 14.0, 'topic': 'dsmr/bbb'}, mqtt_messages)
-        self.assertIn({'payload': 3.0, 'topic': 'dsmr/ccc'}, mqtt_messages)
-        self.assertIn({'payload': 5.0, 'topic': 'dsmr/ddd'}, mqtt_messages)
-        self.assertIn({'payload': 26.0, 'topic': 'dsmr/eee'}, mqtt_messages)
-        self.assertIn({'payload': 8.0, 'topic': 'dsmr/fff'}, mqtt_messages)
+        self.assertIn({'payload': '12.000', 'topic': 'dsmr/aaa'}, mqtt_messages)
+        self.assertIn({'payload': '14.000', 'topic': 'dsmr/bbb'}, mqtt_messages)
+        self.assertIn({'payload': '3.000', 'topic': 'dsmr/ccc'}, mqtt_messages)
+        self.assertIn({'payload': '5.000', 'topic': 'dsmr/ddd'}, mqtt_messages)
+        self.assertIn({'payload': '26.000', 'topic': 'dsmr/eee'}, mqtt_messages)
+        self.assertIn({'payload': '8.000', 'topic': 'dsmr/fff'}, mqtt_messages)
 
-        self.assertIn({'payload': 4.5, 'topic': 'dsmr/jjj'}, mqtt_messages)
-        self.assertIn({'payload': 36.0, 'topic': 'dsmr/kkk'}, mqtt_messages)
+        self.assertIn({'payload': '4.500', 'topic': 'dsmr/jjj'}, mqtt_messages)
+        self.assertIn({'payload': '36.00', 'topic': 'dsmr/kkk'}, mqtt_messages)
 
-        self.assertIn({'payload': 33.0, 'topic': 'dsmr/ggg'}, mqtt_messages)
-        self.assertIn({'payload': 60.0, 'topic': 'dsmr/hhh'}, mqtt_messages)
-        self.assertIn({'payload': 93.0, 'topic': 'dsmr/iii'}, mqtt_messages)
-        self.assertIn({'payload': 129.0, 'topic': 'dsmr/lll'}, mqtt_messages)
+        self.assertIn({'payload': '33.00', 'topic': 'dsmr/ggg'}, mqtt_messages)
+        self.assertIn({'payload': '60.00', 'topic': 'dsmr/hhh'}, mqtt_messages)
+        self.assertIn({'payload': '93.00', 'topic': 'dsmr/iii'}, mqtt_messages)
+        self.assertIn({'payload': '129.00', 'topic': 'dsmr/lll'}, mqtt_messages)
 
-        self.assertIn({'payload': 3.0, 'topic': 'dsmr/mmm'}, mqtt_messages)
-        self.assertIn({'payload': 5.0, 'topic': 'dsmr/nnn'}, mqtt_messages)
-        self.assertIn({'payload': 1.0, 'topic': 'dsmr/ooo'}, mqtt_messages)
-        self.assertIn({'payload': 2.0, 'topic': 'dsmr/ppp'}, mqtt_messages)
-        self.assertIn({'payload': 8.0, 'topic': 'dsmr/qqq'}, mqtt_messages)
+        self.assertIn({'payload': '3.00000', 'topic': 'dsmr/mmm'}, mqtt_messages)
+        self.assertIn({'payload': '5.00000', 'topic': 'dsmr/nnn'}, mqtt_messages)
+        self.assertIn({'payload': '1.00000', 'topic': 'dsmr/ooo'}, mqtt_messages)
+        self.assertIn({'payload': '2.00000', 'topic': 'dsmr/ppp'}, mqtt_messages)
+        self.assertIn({'payload': '8.00000', 'topic': 'dsmr/qqq'}, mqtt_messages)
 
         # On error.
         mqtt_mock.side_effect = ValueError('Invalid host.')
