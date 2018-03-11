@@ -2,11 +2,10 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from dsmr_mqtt.models.settings import MQTTBrokerSettings, RawTelegramMQTTSettings, JSONTelegramMQTTSettings,\
-    SplitTopicTelegramMQTTSettings
+from dsmr_mqtt.models.settings import broker, day_totals, telegram
 
 
-@admin.register(MQTTBrokerSettings)
+@admin.register(broker.MQTTBrokerSettings)
 class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -20,7 +19,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     )
 
 
-@admin.register(RawTelegramMQTTSettings)
+@admin.register(telegram.RawTelegramMQTTSettings)
 class RawTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -35,7 +34,7 @@ class RawTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     )
 
 
-@admin.register(JSONTelegramMQTTSettings)
+@admin.register(telegram.JSONTelegramMQTTSettings)
 class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -70,7 +69,7 @@ extra_device_delivered = extra_device_delivered
     )
 
 
-@admin.register(SplitTopicTelegramMQTTSettings)
+@admin.register(telegram.SplitTopicTelegramMQTTSettings)
 class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
@@ -97,6 +96,93 @@ phase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2
 phase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3
 extra_device_timestamp = dsmr/reading/extra_device_timestamp
 extra_device_delivered = dsmr/reading/extra_device_delivered
+</pre>
+'''
+                )
+            }
+        ),
+    )
+
+
+@admin.register(day_totals.JSONDayTotalsMQTTSettings)
+class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'topic', 'formatting'],
+                'description': _(
+                    'Triggered by any method of reading insertion (datalogger or API). '
+                    'Send the current day totals to the broker. You can alter the the field names used in the JSON '
+                    'message. Removing lines will remove fields from the message as well. '
+                    '''Default value:
+<pre>
+[mapping]
+# DATA = JSON FIELD
+electricity1 = electricity1
+electricity2 = electricity2
+electricity1_returned = electricity1_returned
+electricity2_returned = electricity2_returned
+electricity_merged = electricity_merged
+electricity_returned_merged = electricity_returned_merged
+electricity1_cost = electricity1_cost
+electricity2_cost = electricity2_cost
+electricity_cost_merged = electricity_cost_merged
+
+# Gas (if any)
+gas = gas
+gas_cost = gas_cost
+total_cost = total_cost
+
+# Your energy supplier prices (if set)
+energy_supplier_price_electricity_delivered_1 = energy_supplier_price_electricity_delivered_1
+energy_supplier_price_electricity_delivered_2 = energy_supplier_price_electricity_delivered_2
+energy_supplier_price_electricity_returned_1 = energy_supplier_price_electricity_returned_1
+energy_supplier_price_electricity_returned_2 = energy_supplier_price_electricity_returned_2
+energy_supplier_price_gas = energy_supplier_price_gas
+</pre>
+'''
+                )
+            }
+        ),
+    )
+
+
+@admin.register(day_totals.SplitTopicDayTotalsMQTTSettings)
+class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'formatting'],
+                'description': _(
+                    'Triggered by any method of reading insertion (datalogger or API). '
+                    'Allows you to send day totals (dashboard) to the MQTT broker, splitted per field. You can '
+                    'designate each field name to a different topic. Removing lines will prevent those fields from '
+                    'being broadcast as well. '
+                    '''Default value:
+<pre>
+[mapping]
+# DATA = JSON FIELD
+electricity1 = dsmr/day-totals/electricity1
+electricity2 = dsmr/day-totals/electricity2
+electricity1_returned = dsmr/day-totals/electricity1_returned
+electricity2_returned = dsmr/day-totals/electricity2_returned
+electricity_merged = dsmr/day-totals/electricity_merged
+electricity_returned_merged = dsmr/day-totals/electricity_returned_merged
+electricity1_cost = dsmr/day-totals/electricity1_cost
+electricity2_cost = dsmr/day-totals/electricity2_cost
+electricity_cost_merged = dsmr/day-totals/electricity_cost_merged
+
+# Gas (if any)
+gas = dsmr/day-totals/gas
+gas_cost = dsmr/day-totals/gas_cost
+total_cost = dsmr/day-totals/total_cost
+
+# Your energy supplier prices (if set)
+energy_supplier_price_electricity_delivered_1 = dsmr/day-totals/energy_supplier_price_electricity_delivered_1
+energy_supplier_price_electricity_delivered_2 = dsmr/day-totals/energy_supplier_price_electricity_delivered_2
+energy_supplier_price_electricity_returned_1 = dsmr/day-totals/energy_supplier_price_electricity_returned_1
+energy_supplier_price_electricity_returned_2 = dsmr/day-totals/energy_supplier_price_electricity_returned_2
+energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas
 </pre>
 '''
                 )

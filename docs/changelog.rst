@@ -18,6 +18,20 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.14.0 - 2018-03-11
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#441 <https://github.com/dennissiemensma/dsmr-reader/issues/441>`_] PVOutput exports schedulen naar ingestelde upload interval - by pyrocumulus
+- [`#436 <https://github.com/dennissiemensma/dsmr-reader/issues/436>`_] Update docs: authentication method for public webinterface
+- [`#445 <https://github.com/dennissiemensma/dsmr-reader/issues/445>`_] Upload/export to PVoutput doesn't work
+- [`#432 <https://github.com/dennissiemensma/dsmr-reader/issues/432>`_] [API] Gas cost missing at start of day 
+- [`#367 <https://github.com/dennissiemensma/dsmr-reader/issues/367>`_] Dagverbruik en teruglevering via MQTT
+- [`#447 <https://github.com/dennissiemensma/dsmr-reader/issues/447>`_] Kosten via MQTT
+
+
+
 v1.13.2 - 2018-02-02
 ^^^^^^^^^^^^^^^^^^^^
 

@@ -23,7 +23,7 @@ pytest --pylama --cov --cov-report=html:coverage_report/html --cov-report=term -
 
 
 echo ""
-echo "--- Testing with MySQL (1 proces due to concurrency limitations)..."
+echo "--- Testing with MySQL (1 process due to concurrency limitations)..."
 pytest --pylama --cov --cov-report=html:coverage_report/html --cov-report=term --ds=dsmrreader.config.test.mysql
 
 

@@ -43,18 +43,17 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         # We must disconnect to prevent other tests from failing, since this is no database action.
         dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)
 
-    @mock.patch('raven.contrib.django.raven_compat.models.client.captureException')
-    def test_raven_handler(self, raven_mock):
-        """ Test whether Raven gets called as expectedly, sending any exceptions to Sentry. """
-
+    @mock.patch('traceback.format_tb')
+    def test_signal_exception_handling(self, format_tb_mock):
+        """ Tests signal exception handling. """
         def _fake_signal_troublemaker(*args, **kwargs):
-            raise AssertionError("Please report me to Raven as I'm a very annoying crash!")
+            raise AssertionError("Crash")
 
         dsmr_backend.signals.backend_called.connect(receiver=_fake_signal_troublemaker)
-        self.assertFalse(raven_mock.called)
+        self.assertFalse(format_tb_mock.called)
 
         self._intercept_command_stdout('dsmr_backend', run_once=True)
-        self.assertTrue(raven_mock.called)
+        self.assertTrue(format_tb_mock.called)
 
     def test_supported_vendors(self):
         """ Check whether supported vendors is as expected. """
