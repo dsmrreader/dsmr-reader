@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram
+from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics
 
 
 class TestBrokerSettings(TestCase):
@@ -77,6 +77,19 @@ class SplitTopicDayTotalsMQTTSettings(TestCase):
     def test_admin(self):
         """ Model should be registered in Django Admin. """
         self.assertTrue(site.is_registered(day_totals.SplitTopicDayTotalsMQTTSettings))
+
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+
+
+class SplitTopicMeterStatisticsMQTTSettings(TestCase):
+    """ Tests for settings defaults. """
+    def setUp(self):
+        self.instance = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
+
+    def test_admin(self):
+        """ Model should be registered in Django Admin. """
+        self.assertTrue(site.is_registered(meter_statistics.SplitTopicMeterStatisticsMQTTSettings))
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))

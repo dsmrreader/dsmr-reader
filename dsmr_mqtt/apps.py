@@ -52,3 +52,8 @@ class AppConfig(AppConfig):
             dsmr_mqtt.services.publish_day_totals()
         except Exception as error:
             logger.error('publish_day_totals() failed: {}'.format(error))
+
+        try:
+            dsmr_mqtt.services.publish_split_topic_meter_statistics()
+        except Exception as error:
+            logger.error('publish_split_topic_meter_statistics() failed: {}'.format(error))
