@@ -179,10 +179,22 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(data['electricity1_cost'], Decimal('0.25'))
             self.assertEqual(data['electricity2_cost'], Decimal('0.75'))
             self.assertEqual(data['total_cost'], 1)
+
+            self.assertEqual(data['energy_supplier_price_electricity_delivered_1'], 1)
+            self.assertEqual(data['energy_supplier_price_electricity_delivered_2'], 2)
+            self.assertEqual(data['energy_supplier_price_electricity_returned_1'], 0.5)
+            self.assertEqual(data['energy_supplier_price_electricity_returned_2'], 1.5)
+            self.assertEqual(data['energy_supplier_price_gas'], 5)
         else:
             self.assertEqual(data['electricity1_cost'], 0)
             self.assertEqual(data['electricity2_cost'], 0)
             self.assertEqual(data['total_cost'], 0)
+
+            self.assertEqual(data['energy_supplier_price_electricity_delivered_1'], 0)
+            self.assertEqual(data['energy_supplier_price_electricity_delivered_2'], 0)
+            self.assertEqual(data['energy_supplier_price_electricity_returned_1'], 0)
+            self.assertEqual(data['energy_supplier_price_electricity_returned_2'], 0)
+            self.assertEqual(data['energy_supplier_price_gas'], 0)
 
         GasConsumption.objects.create(
             read_at=now,  # Now.

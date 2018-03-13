@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'default_permissions': (),
-                'verbose_name': 'MQTT broker configuration',
+                'verbose_name': 'MQTT: Broker/connection configuration',
             },
         ),
         migrations.CreateModel(
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'default_permissions': (),
-                'verbose_name': 'MQTT raw telegram configuration',
+                'verbose_name': 'MQTT: Telegram (as raw string) configuration',
             },
         ),
         migrations.CreateModel(
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'default_permissions': (),
-                'verbose_name': 'MQTT JSON telegram configuration',
+                'verbose_name': 'MQTT: Telegram (as JSON) configuration',
             },
         ),
         migrations.CreateModel(
@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
                 ('formatting', models.TextField(default='\n[mapping]\n# READING FIELD = TOPIC PATH\nid = dsmr/reading/id\ntimestamp = dsmr/reading/timestamp\nelectricity_delivered_1 = dsmr/reading/electricity_delivered_1\nelectricity_returned_1 = dsmr/reading/electricity_returned_1\nelectricity_delivered_2 = dsmr/reading/electricity_delivered_2\nelectricity_returned_2 = dsmr/reading/electricity_returned_2\nelectricity_currently_delivered = dsmr/reading/electricity_currently_delivered\nelectricity_currently_returned = dsmr/reading/electricity_currently_returned\nphase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1\nphase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2\nphase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3\nextra_device_timestamp = dsmr/reading/extra_device_timestamp\nextra_device_delivered = dsmr/reading/extra_device_delivered\n', help_text='Maps the field names to separate topics sent to the broker.', verbose_name='Formatting')),
             ],
             options={
-                'verbose_name': 'MQTT split topic telegram configuration',
+                'verbose_name': 'MQTT: Telegram (per split topic) configuration',
                 'default_permissions': (),
             },
         ),

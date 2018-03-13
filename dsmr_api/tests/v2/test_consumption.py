@@ -23,11 +23,19 @@ class TestToday(APIv2TestCase):
 
         FIELDS = (
             'day', 'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned',
-            'electricity1_cost', 'electricity2_cost', 'total_cost'
+            'electricity1_cost', 'electricity2_cost', 'gas', 'gas_cost', 'total_cost'
         )
 
         for x in FIELDS:
             self.assertIn(x, result.keys())
+
+
+class TestTodayWithGas(TestToday):
+    fixtures = [
+        'dsmr_api/test_electricity_consumption.json',
+        'dsmr_api/test_electricity_consumption.json',
+        'dsmr_api/test_gas_consumption.json'
+    ]
 
 
 class TestElectricity(APIv2TestCase):
