@@ -64,7 +64,7 @@ class SplitTopicDayTotalsMQTTSettings(SingletonModel):
     formatting = models.TextField(
         default='''
 [mapping]
-# DATA = JSON FIELD
+# DATA = TOPIC PATH
 electricity1 = dsmr/day-totals/electricity1
 electricity2 = dsmr/day-totals/electricity2
 electricity1_returned = dsmr/day-totals/electricity1_returned
@@ -96,4 +96,4 @@ energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT:  Day totals (per split topic) configuration')
+        verbose_name = _('MQTT: Day totals (per split topic) configuration')

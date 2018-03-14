@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram
+from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics
 
 
 @admin.register(broker.MQTTBrokerSettings)
@@ -183,6 +183,40 @@ energy_supplier_price_electricity_delivered_2 = dsmr/day-totals/energy_supplier_
 energy_supplier_price_electricity_returned_1 = dsmr/day-totals/energy_supplier_price_electricity_returned_1
 energy_supplier_price_electricity_returned_2 = dsmr/day-totals/energy_supplier_price_electricity_returned_2
 energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas
+</pre>
+'''
+                )
+            }
+        ),
+    )
+
+
+@admin.register(meter_statistics.SplitTopicMeterStatisticsMQTTSettings)
+class SplitTopicMeterStatisticsMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'formatting'],
+                'description': _(
+                    'Triggered by any method of reading insertion (datalogger or API). '
+                    'Allows you to send meter statistics to the MQTT broker, splitted per field. You can '
+                    'designate each field name to a different topic. Removing lines will prevent those fields from '
+                    'being broadcast as well. '
+                    '''Default value:
+<pre>
+[mapping]
+# DATA = TOPIC PATH
+dsmr_version = dsmr/meter-stats/dsmr_version
+electricity_tariff = dsmr/meter-stats/electricity_tariff
+power_failure_count = dsmr/meter-stats/power_failure_count
+long_power_failure_count = dsmr/meter-stats/long_power_failure_count
+voltage_sag_count_l1 = dsmr/meter-stats/voltage_sag_count_l1
+voltage_sag_count_l2 = dsmr/meter-stats/voltage_sag_count_l2
+voltage_sag_count_l3 = dsmr/meter-stats/voltage_sag_count_l3
+voltage_swell_count_l1 = dsmr/meter-stats/voltage_swell_count_l1
+voltage_swell_count_l2 = dsmr/meter-stats/voltage_swell_count_l2
+voltage_swell_count_l3 = dsmr/meter-stats/voltage_swell_count_l3
+rejected_telegrams = dsmr/meter-stats/rejected_telegrams
 </pre>
 '''
                 )

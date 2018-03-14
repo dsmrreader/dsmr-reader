@@ -6,8 +6,9 @@ from django.core import serializers
 from django.utils import timezone
 import paho.mqtt.publish as publish
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram
+from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
 
 
@@ -83,7 +84,7 @@ def publish_json_dsmr_reading(reading):
 
 
 def publish_split_topic_dsmr_reading(reading):
-    """ Publishes a DSMR reading to a broker, formatted in multiple topic per field name, if set and enabled. """
+    """ Publishes a DSMR reading to a broker, formatted in a separate topic per field name, if set and enabled. """
     split_topic_settings = telegram.SplitTopicTelegramMQTTSettings.get_solo()
 
     if not split_topic_settings.enabled:
@@ -193,3 +194,38 @@ def day_totals_per_topic(day_consumption, split_topic_settings):
         })
 
     return mqtt_messages
+
+
+def publish_split_topic_meter_statistics():
+    """ Publishes meter statistics to a broker, formatted in a separate topic per field name, if set and enabled. """
+    split_topic_settings = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
+
+    if not split_topic_settings.enabled:
+        return
+
+    # User specified formatting.
+    config_parser = configparser.ConfigParser()
+    config_parser.read_string(split_topic_settings.formatting)
+    topic_mapping = config_parser['mapping']
+
+    mqtt_messages = []
+    serialized_reading = json.loads(serializers.serialize('json', [MeterStatistics.get_solo()]))
+    reading_fields = dict(serialized_reading[0]['fields'].items())
+    reading_fields['id'] = serialized_reading[0]['pk']
+
+    # Copy all fields described in the mapping.
+    for k, v in reading_fields.items():
+        if k not in topic_mapping:
+            continue
+
+        mqtt_messages.append({
+            'topic': topic_mapping[k],
+            'payload': v,
+        })
+
+    broker_kwargs = get_broker_configuration()
+
+    try:
+        publish.multiple(msgs=mqtt_messages, **broker_kwargs)
+    except ValueError as error:
+        logger.error('MQTT publish_split_topic_meter_statistics() | {}'.format(error))
