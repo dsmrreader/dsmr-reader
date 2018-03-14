@@ -23,7 +23,7 @@ v1.15.0 - 2018-xx-xx
 
 **Tickets resolved in this release:**
 
-- [`#xxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxx>`_] yyyyyyyyyyyyyyy
+- [`#449 <https://github.com/dennissiemensma/dsmr-reader/issues/449>`_] Meterstatistieken via MQTT beschikbaar
 
 
 
