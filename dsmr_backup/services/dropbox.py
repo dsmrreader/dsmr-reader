@@ -1,10 +1,12 @@
 import os
 
+from django.utils.translation import ugettext_lazy as gettext
 from django.utils import timezone
 from django.conf import settings
 import dropbox
 
 from dsmr_backup.models.settings import DropboxSettings
+from dsmr_frontend.models.message import Notification
 import dsmr_backup.services.backup
 
 
@@ -32,22 +34,44 @@ def sync():
     for (_, _, filenames) in os.walk(backup_directory):
         for current_file in filenames:
             current_file_path = os.path.join(backup_directory, current_file)
-            file_stats = os.stat(current_file_path)
-
-            # Ignore empty files.
-            if file_stats.st_size == 0:
-                continue
-
-            last_modified = timezone.datetime.fromtimestamp(file_stats.st_mtime)
-            last_modified = timezone.make_aware(last_modified)
-
-            # Ignore when file was not altered since last sync.
-            if dropbox_settings.latest_sync and last_modified < dropbox_settings.latest_sync:
-                continue
-
-            upload_chunked(file_path=current_file_path)
+            check_synced_file(file_path=current_file_path, dropbox_settings=dropbox_settings)
 
     DropboxSettings.objects.update(latest_sync=timezone.now())
+
+
+def check_synced_file(file_path, dropbox_settings):
+
+    file_stats = os.stat(file_path)
+
+    # Ignore empty files.
+    if file_stats.st_size == 0:
+        return
+
+    last_modified = timezone.datetime.fromtimestamp(file_stats.st_mtime)
+    last_modified = timezone.make_aware(last_modified)
+
+    # Ignore when file was not altered since last sync.
+    if dropbox_settings.latest_sync and last_modified < dropbox_settings.latest_sync:
+        return
+
+    try:
+        upload_chunked(file_path=file_path)
+    except dropbox.exceptions.ApiError as exception:
+        print(' - Dropbox error: {}'.format(exception.error))
+
+        if 'insufficient_space' in str(exception.error):
+            # Notify user.
+            Notification.objects.create(message=gettext(
+                "[{}] Unable to upload files to Dropbox due to insufficient space. "
+                "Ignoring new files for the next {} hours...".format(
+                    timezone.now(), settings.DSMRREADER_DROPBOX_ERROR_INTERVAL
+                )
+            ))
+            DropboxSettings.objects.update(
+                latest_sync=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
+            )
+
+        raise
 
 
 def upload_chunked(file_path):

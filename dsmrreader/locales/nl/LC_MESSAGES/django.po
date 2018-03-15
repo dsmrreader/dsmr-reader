@@ -103,6 +103,9 @@ msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
 
+msgid "[{}] Unable to upload files to Dropbox due to insufficient space. Ignoring new files for the next {} hours..."
+msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox voor de komende {} uur: Onvoldoende ruimte in Dropbox-account..."
+
 msgid "Consumption"
 msgstr "Verbruik"
 
