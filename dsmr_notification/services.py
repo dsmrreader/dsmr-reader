@@ -1,23 +1,24 @@
-import requests
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
+import requests
 
-from dsmr_notification.models.settings import NotificationSetting
+from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
 from dsmr_stats.models.statistics import DayStatistics
+from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 import dsmr_backend.services
 
 
-def should_notify(settings):
-    """ Checks whether we should notify
-    :param settings:
-    """
+def should_notify():
+    """ Checks whether we should notify """
+    settings = NotificationSetting.get_solo()
 
     # Only when enabled and token set.
-    if not settings.send_notification or not settings.api_key:
+    if settings.notification_service is None or not settings.api_key:
         return False
 
-    # Only when it's time..
+    # Only when it's time.
     if settings.next_notification is not None \
             and timezone.localtime(timezone.now()).date() < settings.next_notification:
         return False
@@ -25,42 +26,8 @@ def should_notify(settings):
     return True
 
 
-def get_notification_api_url(settings):
-    """ Retrieve the API url for the notification service
-    :param settings:
-    """
-    return NotificationSetting.NOTIFICATION_API_URL[
-        settings.notification_service]
-
-
-def get_notification_priority():
-    """ Get the priority indicator for the notification API's
-    :return:
-    """
-    return '-2'
-
-
-def get_notification_sender_name():
-    """ Get the sender name for the notification API's
-    :return:
-    """
-    return 'DSMR-Reader'
-
-
-def get_notification_event_name():
-    """ Get the event name for the notification API's
-    :return:
-    """
-    return str(_('Daily usage notification'))
-
-
 def create_notification_message(day, stats):
-    """
-    Create the action notification message
-    :param day:
-    :param stats:
-    :return:
-    """
+    """ Create the action notification message """
     capabilities = dsmr_backend.services.get_capabilities()
     day_date = (day - timezone.timedelta(hours=1)).strftime("%d-%m-%Y")
     message = _('Your daily usage statistics for {}\n').format(day_date)
@@ -81,32 +48,24 @@ def create_notification_message(day, stats):
     return message
 
 
-def send_notification(api_url, api_key, notification_message):
-    """ Sends notification using the preferred service
-    :param api_url:
-    :param api_key:
-    :param notification_message:
-    """
+def send_notification(api_url, api_key, notification_message, title):
+    """ Sends notification using the preferred service """
     response = requests.post(api_url, {
         'apikey': api_key,
-        'priority': get_notification_priority(),
-        'application': get_notification_sender_name(),
-        'event': get_notification_event_name(),
+        'priority': '-2',
+        'application': 'DSMR-Reader',
+        'event': title,
         'description': notification_message
     })
 
     if response.status_code != 200:
-        raise AssertionError('Notify API call failed: {0} (HTTP{1})'.format(
-            response.text, response.status_code))
+        raise AssertionError('Notify API call failed: {0} (HTTP{1})'.format(response.text, response.status_code))
 
     return True
 
 
 def set_next_notification(settings, now):
-    """ Set the next moment for notifications to be allowed again
-    :param now:
-    :param settings:
-    """
+    """ Set the next moment for notifications to be allowed again """
     tomorrow = (now + timezone.timedelta(hours=24)).date()
     settings.next_notification = tomorrow
     settings.save()
@@ -116,7 +75,7 @@ def notify():
     """ Sends notifications about daily energy usage """
     settings = NotificationSetting.get_solo()
 
-    if not should_notify(settings):
+    if not should_notify():
         return
 
     # Just post the latest reading of the day before.
@@ -128,10 +87,7 @@ def notify():
         hour=0,
     ))
 
-    try:
-        notification_api_url = get_notification_api_url(settings)
-    except KeyError:
-        raise AssertionError('Could not determine notification API url!')
+    notification_api_url = NotificationSetting.NOTIFICATION_API_URL[settings.notification_service]
 
     try:
         stats = DayStatistics.objects.get(
@@ -144,5 +100,27 @@ def notify():
     print(' - Creating new notification containing daily usage.')
 
     message = create_notification_message(midnight, stats)
-    send_notification(notification_api_url, settings.api_key, message)
+    send_notification(notification_api_url, settings.api_key, message, str(_('Daily usage notification')))
     set_next_notification(settings, today)
+
+
+def check_status():
+    """ Checks the status of the application. """
+    status_settings = StatusNotificationSetting.get_solo()
+
+    if not dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_check):
+        return
+
+    # Check for recent data.
+    has_recent_reading = DsmrReading.objects.filter(
+        timestamp__gt=timezone.now() - timezone.timedelta(minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES)
+    ).exists()
+
+    if has_recent_reading:
+        return
+
+    # Alert!
+
+    StatusNotificationSetting.objects.update(
+        next_check=timezone.now() + settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
+    )

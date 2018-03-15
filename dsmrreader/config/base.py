@@ -203,10 +203,16 @@ DSMRREADER_REST_FRAMEWORK_API_USER = 'api-user'
 
 # Sleep durations for infinity processes. Update these in your own config if you wish to alter them.
 DSMRREADER_BACKEND_SLEEP = 1
-DSMRREADER_DATALOGGER_SLEEP = 0.25
+DSMRREADER_DATALOGGER_SLEEP = 0.5
 
 # Whether telegrams are logged, in base64 format. Only required for debugging.
 DSMRREADER_LOG_TELEGRAMS = False
 
 # Whether the backend process (and datalogger) reconnects to the DB after each run.
 DSMRREADER_RECONNECT_DATABASE = True
+
+# Maximum interval allowed since the latest reading, before ringing any alarms.
+DSMRREADER_STATUS_READING_OFFSET_MINUTES = 15
+
+# The cooldown period until the next status notification will be sent.
+DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12

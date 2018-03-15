@@ -26,13 +26,6 @@ def insert_notifications(apps, schema_editor):
         redirect_to='admin:index'
     )
 
-    Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(
-            text=_('You may check the status of your readings and data in the Status page.')
-        ),
-        redirect_to='frontend:status'
-    )
-
 
 class Migration(migrations.Migration):
     dependencies = [

@@ -18,3 +18,4 @@ class AppConfig(AppConfig):
         # Import below prevents an AppRegistryNotReady error on Django init.
         import dsmr_notification.services
         dsmr_notification.services.notify()
+        dsmr_notification.services.check_status()

@@ -11,10 +11,10 @@ import dsmr_backend.services
 
 def should_export():
     """ Checks whether we should export data yet. Once every day. """
-    settings = MinderGasSettings.get_solo()
+    mindergas_settings = MinderGasSettings.get_solo()
 
     # Only when enabled and token set.
-    if not settings.export or not settings.auth_token:
+    if not mindergas_settings.export or not mindergas_settings.auth_token:
         return False
 
     # Nonsense when having no data.
@@ -23,7 +23,7 @@ def should_export():
     if not capabilities['gas']:
         return False
 
-    return dsmr_backend.services.is_timestamp_passed(timestamp=settings.next_export)
+    return dsmr_backend.services.is_timestamp_passed(timestamp=mindergas_settings.next_export)
 
 
 def export():
@@ -55,13 +55,13 @@ def export():
         last_gas_reading = None
         print(' - MinderGas | No gas readings found for uploading')
     else:
-        settings = MinderGasSettings.get_solo()
+        mindergas_settings = MinderGasSettings.get_solo()
         print(' - MinderGas | Uploading gas meter position: {}'.format(last_gas_reading.delivered))
 
         # Register telegram by simply sending it to the application with a POST request.
         response = requests.post(
             MinderGasSettings.API_URL,
-            headers={'Content-Type': 'application/json', 'AUTH-TOKEN': settings.auth_token},
+            headers={'Content-Type': 'application/json', 'AUTH-TOKEN': mindergas_settings.auth_token},
             data=json.dumps({
                 'date': last_gas_reading.read_at.date().isoformat(),
                 'reading': str(last_gas_reading.delivered)
@@ -74,6 +74,6 @@ def export():
             print(' [!] MinderGas upload failed (HTTP {}): {}'.format(response.status_code, response.text))
 
     print(' - MinderGas | Delaying the next upload until: {}'.format(next_export))
-    settings = MinderGasSettings.get_solo()
-    settings.next_export = next_export
-    settings.save()
+    mindergas_settings = MinderGasSettings.get_solo()
+    mindergas_settings.next_export = next_export
+    mindergas_settings.save()

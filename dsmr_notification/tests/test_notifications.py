@@ -2,7 +2,6 @@ from unittest import mock
 
 from django.test import TestCase
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy
 
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_notification.models.settings import NotificationSetting
@@ -19,63 +18,47 @@ class TestServices(TestCase):
         'dsmr_notification/test_gas_consumption.json',
     ]
 
-    def test_hardcoded_properties(self):
-        """ Notifications: Test service-delivered hardcoded values """
-
-        sender_priority = dsmr_notification.services.get_notification_priority()
-        sender_name = dsmr_notification.services.get_notification_sender_name()
-        sender_event = dsmr_notification.services.get_notification_event_name()
-
-        self.assertEqual('-2', sender_priority)
-        self.assertEqual('DSMR-Reader', sender_name)
-        self.assertEquals(type(str('dsmr')), type(sender_event))
-        self.assertEqual(ugettext_lazy('Daily usage notification'),
-                         sender_event)
-
     def test_should_notify_default(self):
         """ Notifications: Test should_notify() default behaviour. """
 
         settings = NotificationSetting.get_solo()
-        self.assertFalse(settings.send_notification)
-        self.assertFalse(dsmr_notification.services.should_notify(settings))
+        self.assertIsNone(settings.notification_service)
+        self.assertFalse(dsmr_notification.services.should_notify())
 
-    def test_should_notify_skip(self):
+    @mock.patch('dsmr_notification.services.should_notify')
+    def test_should_notify_skip(self, should_notify_mock):
         """ Notifications: Test whether should_notify() skips current day. """
+        should_notify_mock.return_value = False
 
         settings = NotificationSetting.get_solo()
-        self.assertFalse(settings.send_notification)
-        self.assertFalse(dsmr_notification.services.should_notify(settings))
+        self.assertIsNone(settings.notification_service)
+        self.assertFalse(dsmr_notification.services.notify())
 
     def test_should_notify_set(self):
         """ Notifications: Test should_notify()'s output when service is set """
 
         settings = NotificationSetting.get_solo()
-        settings.send_notification = True
         settings.notification_service = NotificationSetting.NOTIFICATION_NMA
         settings.save()
-        self.assertTrue(settings.send_notification)
 
         # Should fail because we haven't set an API key
-        self.assertFalse(dsmr_notification.services.should_notify(settings))
+        self.assertFalse(dsmr_notification.services.should_notify())
 
         settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         settings.save()
-        self.assertTrue(dsmr_notification.services.should_notify(settings))
+        self.assertTrue(dsmr_notification.services.should_notify())
 
         settings.next_notification = None
-        dsmr_notification.services.set_next_notification(
-            settings, timezone.make_aware(timezone.datetime(2116, 11, 16)))
-        self.assertFalse(dsmr_notification.services.should_notify(settings))
+        dsmr_notification.services.set_next_notification(settings, timezone.make_aware(timezone.datetime(2116, 11, 16)))
+        self.assertFalse(dsmr_notification.services.should_notify())
 
     @mock.patch('django.utils.timezone.now')
     def test_set_next_notification_date(self, now_mock):
         """ Notifications: Test if next notification date is set """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 16))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 16))
 
         now = timezone.localtime(timezone.now())
-        tomorrow = (timezone.localtime(timezone.now()) +
-                    timezone.timedelta(hours=24)).date()
+        tomorrow = (timezone.localtime(timezone.now()) + timezone.timedelta(hours=24)).date()
 
         settings = NotificationSetting.get_solo()
         settings.next_notification = now
@@ -85,25 +68,12 @@ class TestServices(TestCase):
 
         self.assertEqual(settings.next_notification, tomorrow)
 
-    def test_invalid_api_url(self):
-        """ Notifications: Test if inappropriate services get caught """
-
-        settings = NotificationSetting.get_solo()
-        settings.send_notification = True
-        settings.notification_service = 'DSMR-Reader-Rulez'
-        settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
-        settings.save()
-
-        with self.assertRaises(AssertionError):
-            dsmr_notification.services.notify()
-
     def test_no_daystatistics(self):
         """ Notifications: Test no notification because of no stats"""
 
         DayStatistics.objects.all().delete()
 
         settings = NotificationSetting.get_solo()
-        settings.send_notification = True
         settings.notification_service = NotificationSetting.NOTIFICATION_NMA
         settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         settings.save()
@@ -114,13 +84,10 @@ class TestServices(TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_notification_api_fail(self, now_mock, requests_post_mock):
         """ Notifications: Test API failure for notify() """
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 17, hour=0, minute=5))
-        requests_post_mock.return_value = mock.MagicMock(
-            status_code=403, text='Forbidden')
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
+        requests_post_mock.return_value = mock.MagicMock(status_code=403, text='Forbidden')
 
         settings = NotificationSetting.get_solo()
-        settings.send_notification = True
         settings.notification_service = NotificationSetting.NOTIFICATION_NMA
         settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         settings.next_notification = timezone.localtime(timezone.now())
@@ -141,17 +108,13 @@ class TestServices(TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_notifications(self, now_mock, requests_post_mock):
         """ Notifications: Test notify() (actual notification sender)"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 17, hour=0, minute=5))
-        requests_post_mock.return_value = mock.MagicMock(
-            status_code=200, text='OK')
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
+        requests_post_mock.return_value = mock.MagicMock(status_code=200, text='OK')
 
         settings = NotificationSetting.get_solo()
-        self.assertFalse(settings.send_notification)
         self.assertIsNone(settings.next_notification)
         self.assertFalse(requests_post_mock.called)
 
-        settings.send_notification = True
         settings.notification_service = NotificationSetting.NOTIFICATION_NMA
         settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         settings.next_notification = timezone.localtime(timezone.now())
@@ -166,9 +129,8 @@ class TestServices(TestCase):
         else:
             return self.assertFalse(requests_post_mock.called)
 
-        nma_url = dsmr_notification.services.get_notification_api_url(settings)
-        yesterday = (timezone.localtime(timezone.now()) -
-                     timezone.timedelta(hours=24)).date()
+        nma_url = NotificationSetting.NOTIFICATION_API_URL[settings.notification_service]
+        yesterday = (timezone.localtime(timezone.now()) - timezone.timedelta(hours=24)).date()
         stats = DayStatistics.objects.get(day=yesterday)
         api_msg = dsmr_notification.services.create_notification_message(yesterday, stats)
         self.assertTrue(yesterday.strftime("%d-%m-%Y") in api_msg)
@@ -176,14 +138,13 @@ class TestServices(TestCase):
         # Dissect call
         requests_post_mock.assert_called_once_with(nma_url, {
             'apikey': settings.api_key,
-            'priority': dsmr_notification.services.get_notification_priority(),
-            'application': dsmr_notification.services.get_notification_sender_name(),
-            'event': dsmr_notification.services.get_notification_event_name(),
+            'priority': '-2',
+            'application': 'DSMR-Reader',
+            'event': 'Daily usage notification',
             'description': api_msg
         })
 
-        tomorrow = (timezone.localtime(timezone.now()) +
-                    timezone.timedelta(hours=24)).date()
+        tomorrow = (timezone.localtime(timezone.now()) + timezone.timedelta(hours=24)).date()
         self.assertEqual(settings.next_notification, tomorrow)
 
 
