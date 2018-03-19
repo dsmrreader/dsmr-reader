@@ -1354,6 +1354,12 @@ msgstr "Totale kosten: € {}"
 msgid "Daily usage notification"
 msgstr "Dagelijkse verbruiksnotificatie"
 
+msgid "It has been over an hour since the last reading received. Please check your datalogger."
+msgstr "Er is meer dan een uur verstreken sinds de laatst ontvangen meting. Controleer de datalogger."
+
+msgid "Datalogger check"
+msgstr "Dataloggercontrole"
+
 msgid "Implements the following API call: https://pvoutput.org/help.html#api-addstatus"
 msgstr "Implementeert de volgende API call: https://pvoutput.org/help.html#api-addstatus"
 

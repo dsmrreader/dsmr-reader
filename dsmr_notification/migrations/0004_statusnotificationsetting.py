@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
             name='StatusNotificationSetting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('next_check', models.DateField(blank=True, default=None, help_text='Timestamp of the next check. Managed by application.', null=True, verbose_name='Next check')),
+                ('next_check', models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next check. Managed by application.', null=True, verbose_name='Next check')),
             ],
             options={
                 'default_permissions': (),

@@ -212,7 +212,7 @@ DSMRREADER_LOG_TELEGRAMS = False
 DSMRREADER_RECONNECT_DATABASE = True
 
 # Maximum interval allowed since the latest reading, before ringing any alarms.
-DSMRREADER_STATUS_READING_OFFSET_MINUTES = 15
+DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60
 
 # The cooldown period until the next status notification will be sent.
 DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12

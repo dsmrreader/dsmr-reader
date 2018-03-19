@@ -62,7 +62,7 @@ class NotificationSetting(SingletonModel):
 
 class StatusNotificationSetting(SingletonModel):
     """ Periodic check of the application status at regular intervals. Notifies when something is a miss. """
-    next_check = models.DateField(
+    next_check = models.DateTimeField(
         default=None,
         null=True,
         blank=True,
