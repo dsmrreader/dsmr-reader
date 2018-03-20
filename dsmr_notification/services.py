@@ -129,6 +129,7 @@ def check_status():
         )
 
     # Alert!
+    print(' - Sending notification about datalogger lagging behind...')
     send_notification(
         NotificationSetting.NOTIFICATION_API_URL[notification_settings.notification_service],
         notification_settings.api_key,
