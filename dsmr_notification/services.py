@@ -110,7 +110,8 @@ def check_status():
     status_settings = StatusNotificationSetting.get_solo()
     notification_settings = NotificationSetting.get_solo()
 
-    if not dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_check):
+    if notification_settings.notification_service is None or \
+            not dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_check):
         return
 
     if not DsmrReading.objects.exists():
