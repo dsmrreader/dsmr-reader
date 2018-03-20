@@ -28,7 +28,7 @@ class StatusNotificationSettingAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': [],
+                'fields': ['next_check'],
                 'description': _(
                     'System checks for sending status notifications when the datalogger is lagging behind.'
                 )
