@@ -1,0 +1,81 @@
+from unittest import mock
+
+from django.test import TestCase
+
+from dsmr_mqtt.models.settings import meter_statistics
+from dsmr_datalogger.models.statistics import MeterStatistics
+import dsmr_mqtt.services
+
+
+class TestDaytotals(TestCase):
+    def setUp(self):
+        self.split_topic_settings = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
+
+        # Mapping.
+        self.split_topic_settings.formatting = '''
+[mapping]
+# DATA = JSON FIELD
+dsmr_version = dsmr/aaa
+electricity_tariff = dsmr/bbb
+power_failure_count = dsmr/ccc
+long_power_failure_count = dsmr/ddd
+voltage_sag_count_l1 = dsmr/eee
+voltage_sag_count_l2 = dsmr/fff
+voltage_sag_count_l3 = dsmr/ggg
+voltage_swell_count_l1 = dsmr/hhh
+voltage_swell_count_l2 = dsmr/iii
+voltage_swell_count_l3 = dsmr/jjj
+rejected_telegrams = dsmr/kkk
+'''
+        self.split_topic_settings.save()
+
+    @mock.patch('paho.mqtt.publish.multiple')
+    def test_disabled(self, mqtt_mock):
+        self.assertFalse(self.split_topic_settings.enabled)
+        self.assertFalse(mqtt_mock.called)
+
+        dsmr_mqtt.services.publish_split_topic_meter_statistics()
+        self.assertFalse(mqtt_mock.called)
+
+    @mock.patch('paho.mqtt.publish.multiple')
+    def test_split_topic(self, mqtt_mock):
+        MeterStatistics.objects.all().update(**{
+            "timestamp": "2018-03-13T19:52:14Z",
+            "dsmr_version": "42",
+            "electricity_tariff": 2,
+            "power_failure_count": 5,
+            "long_power_failure_count": 2,
+            "voltage_sag_count_l1": 2,
+            "voltage_sag_count_l2": 2,
+            "voltage_sag_count_l3": 0,
+            "voltage_swell_count_l1": 0,
+            "voltage_swell_count_l2": 0,
+            "voltage_swell_count_l3": 0,
+            "rejected_telegrams": 96
+        })
+
+        # Should be okay now.
+        self.split_topic_settings.enabled = True
+        self.split_topic_settings.save()
+        dsmr_mqtt.services.publish_split_topic_meter_statistics()
+        self.assertTrue(mqtt_mock.called)
+
+        _, _, kwargs = mqtt_mock.mock_calls[0]
+        mqtt_messages = kwargs['msgs']
+
+        # Without gas or costs.
+        self.assertIn({'payload': '42', 'topic': 'dsmr/aaa'}, mqtt_messages)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/bbb'}, mqtt_messages)
+        self.assertIn({'payload': 5, 'topic': 'dsmr/ccc'}, mqtt_messages)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/ddd'}, mqtt_messages)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/eee'}, mqtt_messages)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/fff'}, mqtt_messages)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/ggg'}, mqtt_messages)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/hhh'}, mqtt_messages)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/iii'}, mqtt_messages)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/jjj'}, mqtt_messages)
+        self.assertIn({'payload': 96, 'topic': 'dsmr/kkk'}, mqtt_messages)
+
+        # On error.
+        mqtt_mock.side_effect = ValueError('Invalid host.')
+        dsmr_mqtt.services.publish_split_topic_meter_statistics()

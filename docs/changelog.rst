@@ -18,6 +18,17 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.15.0 - 2018-03-21
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#449 <https://github.com/dennissiemensma/dsmr-reader/issues/449>`_] Meterstatistieken via MQTT beschikbaar
+- [`#208 <https://github.com/dennissiemensma/dsmr-reader/issues/208>`_] Notificatie bij uitblijven gegevens uit slimme meter
+- [`#342 <https://github.com/dennissiemensma/dsmr-reader/issues/342>`_] Backup to dropbox never finish (free plan no more space)
+
+
+
 v1.14.0 - 2018-03-11
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -25,6 +36,7 @@ v1.14.0 - 2018-03-11
 
 - [`#441 <https://github.com/dennissiemensma/dsmr-reader/issues/441>`_] PVOutput exports schedulen naar ingestelde upload interval - by pyrocumulus
 - [`#436 <https://github.com/dennissiemensma/dsmr-reader/issues/436>`_] Update docs: authentication method for public webinterface
+- [`#449 <https://github.com/dennissiemensma/dsmr-reader/issues/449>`_] Meterstatistieken via MQTT beschikbaar
 - [`#445 <https://github.com/dennissiemensma/dsmr-reader/issues/445>`_] Upload/export to PVoutput doesn't work
 - [`#432 <https://github.com/dennissiemensma/dsmr-reader/issues/432>`_] [API] Gas cost missing at start of day 
 - [`#367 <https://github.com/dennissiemensma/dsmr-reader/issues/367>`_] Dagverbruik en teruglevering via MQTT

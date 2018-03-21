@@ -6,9 +6,11 @@ from unittest import mock
 from django.test import TestCase
 from django.utils import timezone
 from django.conf import settings
+import dropbox
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
+from dsmr_frontend.models.message import Notification
 import dsmr_backup.services.backup
 import dsmr_backup.services.dropbox
 
@@ -245,6 +247,47 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             # File should be ignored, as it's modification timestamp is before latest sync.
             dsmr_backup.services.dropbox.sync()
             self.assertFalse(upload_chunked_mock.called)
+
+    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('django.utils.timezone.now')
+    def test_sync_insufficient_space(self, now_mock, upload_chunked_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2000, 1, 1))
+
+        # Crash the party, no more space available!
+        upload_chunked_mock.side_effect = dropbox.exceptions.ApiError(
+            12345,
+            "UploadError('path', UploadWriteFailed(reason=WriteError('insufficient_space', None), ...)",
+            'x',
+            'y'
+        )
+
+        Notification.objects.all().delete()
+        self.assertEqual(Notification.objects.count(), 0)
+
+        with self.assertRaises(dropbox.exceptions.ApiError):
+            dsmr_backup.services.dropbox.sync()
+
+        # Warning message should be created and next sync should be skipped ahead.
+        self.assertEqual(Notification.objects.count(), 1)
+        self.assertGreater(
+            DropboxSettings.get_solo().latest_sync, timezone.now() + timezone.timedelta(
+                hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL - 1
+                )
+        )
+
+        # Test alternate path.
+        DropboxSettings.objects.update(latest_sync=timezone.now() - timezone.timedelta(hours=24))
+        upload_chunked_mock.side_effect = dropbox.exceptions.ApiError(
+            12345,
+            "UploadError('path', UploadWriteFailed(reason=WriteError('other_error', None), ...)",
+            'x',
+            'y'
+        )
+
+        with self.assertRaises(dropbox.exceptions.ApiError):
+            dsmr_backup.services.dropbox.sync()
+
+        self.assertEqual(Notification.objects.count(), 1)
 
     @mock.patch('dropbox.Dropbox.files_upload')
     @mock.patch('dropbox.Dropbox.files_upload_session_start')

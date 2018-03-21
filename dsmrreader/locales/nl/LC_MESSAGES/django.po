@@ -103,6 +103,9 @@ msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
 
+msgid "[{}] Unable to upload files to Dropbox due to insufficient space. Ignoring new files for the next {} hours..."
+msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox voor de komende {} uur: Onvoldoende ruimte in Dropbox-account..."
+
 msgid "Consumption"
 msgstr "Verbruik"
 
@@ -396,12 +399,6 @@ msgstr "Gooit de volledige cache leeg."
 
 msgid "Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!"
 msgstr "Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configuratie-pagina!"
-
-msgid "You may check the status of your readings and data in the Status page."
-msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."
-
-msgid "It's now possible to have the electricity tariffs merged to a single one. This might come handy when you pay your energy supplier fo a single tariff instead of high/low. You can enable this feature in  frontend configuration: 'Merge electricity tariffs'"
-msgstr "Vanaf nu is het mogelijk om de elektriciteitstarieven samen te voegen tot enkeltarief. Dit komt van pas wanneer je energieleverancier je slechts één tarief in rekening brengt voor zowel piek als dal. Je kunt dit inschakelen in de interfaceconfiguratie bij  \"Voeg tarieven samen\""
 
 msgid "Merge electricity tariffs"
 msgstr "Voeg tarieven samen"
@@ -946,9 +943,6 @@ msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hie
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
 
-msgid "It's now possible to automatically export your gas meter positions to your own Mindergas.nl account! See the FAQ in the documentation for a guide on how to create and/or link your account."
-msgstr "Het is nu ook mogelijk om je gasmeterstanden automatisch door te geven aan je persoonlijke Mindergas.nl-account! Bekijk de FAQ in de documentatie voor meer informatie over hoe je een account aanmaakt en/of koppelt aan de applicatie."
-
 msgid "Export data to MinderGas"
 msgstr "Exporteer gegevens naar MinderGas"
 
@@ -1162,6 +1156,42 @@ msgstr ""
 "\n"
 "</pre>\n"
 
+msgid ""
+"Triggered by any method of reading insertion (datalogger or API). Allows you to send meter statistics to the MQTT broker, splitted per field. You can designate each field name to a different topic. Removing lines will prevent those fields from being broadcast as well. Default value:\n"
+"<pre>\n"
+"[mapping]\n"
+"# DATA = TOPIC PATH\n"
+"dsmr_version = dsmr/meter-stats/dsmr_version\n"
+"electricity_tariff = dsmr/meter-stats/electricity_tariff\n"
+"power_failure_count = dsmr/meter-stats/power_failure_count\n"
+"long_power_failure_count = dsmr/meter-stats/long_power_failure_count\n"
+"voltage_sag_count_l1 = dsmr/meter-stats/voltage_sag_count_l1\n"
+"voltage_sag_count_l2 = dsmr/meter-stats/voltage_sag_count_l2\n"
+"voltage_sag_count_l3 = dsmr/meter-stats/voltage_sag_count_l3\n"
+"voltage_swell_count_l1 = dsmr/meter-stats/voltage_swell_count_l1\n"
+"voltage_swell_count_l2 = dsmr/meter-stats/voltage_swell_count_l2\n"
+"voltage_swell_count_l3 = dsmr/meter-stats/voltage_swell_count_l3\n"
+"rejected_telegrams = dsmr/meter-stats/rejected_telegrams\n"
+"</pre>\n"
+msgstr ""
+"Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om meter statistieken door te sturen naar de MQTT broker, gesplitst op een apart topic per veld. Je kunt daarmee elke veldnaam toewijzen op een aparte topic. Standaardwaarden:\n"
+"\n"
+"<pre>\n"
+"[mapping]\n"
+"# DATA = TOPIC PATH\n"
+"dsmr_version = dsmr/meter-stats/dsmr_version\n"
+"electricity_tariff = dsmr/meter-stats/electricity_tariff\n"
+"power_failure_count = dsmr/meter-stats/power_failure_count\n"
+"long_power_failure_count = dsmr/meter-stats/long_power_failure_count\n"
+"voltage_sag_count_l1 = dsmr/meter-stats/voltage_sag_count_l1\n"
+"voltage_sag_count_l2 = dsmr/meter-stats/voltage_sag_count_l2\n"
+"voltage_sag_count_l3 = dsmr/meter-stats/voltage_sag_count_l3\n"
+"voltage_swell_count_l1 = dsmr/meter-stats/voltage_swell_count_l1\n"
+"voltage_swell_count_l2 = dsmr/meter-stats/voltage_swell_count_l2\n"
+"voltage_swell_count_l3 = dsmr/meter-stats/voltage_swell_count_l3\n"
+"rejected_telegrams = dsmr/meter-stats/rejected_telegrams\n"
+"</pre>\n"
+
 msgid "MQTT"
 msgstr "MQTT"
 
@@ -1225,8 +1255,14 @@ msgstr "Geeft aan of dagtotalen worden doorgestuurd naar de broker, gesplitst op
 msgid "Maps the field names to separate topics sent to the broker."
 msgstr "Mapt de veldnamen naar topics, die gebruikt worden in individuele berichten naar de broker toe."
 
-msgid "MQTT:  Day totals (per split topic) configuration"
+msgid "MQTT: Day totals (per split topic) configuration"
 msgstr "MQTT: Dagtotalen (per gesplitst topic) configuratie"
+
+msgid "Whether meter statistics are sent to the broker, having each field sent to a different topic."
+msgstr "Geeft aan of meterstatistieken worden doorgestuurd naar de broker, gesplitst op een apart veld per topic."
+
+msgid "MQTT: Meter Statistics (per split topic) configuration"
+msgstr "MQTT: Meterstatistieken (per gesplitst topic) configuratie"
 
 msgid "Whether any raw telegrams received are sent to the broker."
 msgstr "Geeft aan of onbewerkte telegrammen verstuurd worden naar de broker."
@@ -1255,23 +1291,20 @@ msgstr "MQTT: Telegram (per gesplitst topic) configuratie"
 msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het instellen van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentatie</a>"
 
+msgid "System checks for sending status notifications when the datalogger is lagging behind."
+msgstr "Systeemcontroles voor het versturen van notificaties wanneer de datalogger achterloopt."
+
 msgid "Usage notification"
 msgstr "Verbruiksnotificatie"
 
-msgid "There is now support for pushing notifications to your phone, summarizing your daily totals! Both Android and iOS are supported. See the FAQ in the documentation for more information."
-msgstr "Vanaf nu is er ondersteuning voor het versturen van push notificaties naar je telefoon, met daarin je dagelijkse verbruik. Zie voor meer informatie de documentatie / FAQ."
+msgid "--- Disabled ---"
+msgstr "--- Uitgeschakeld ---"
 
 msgid "NotifyMyAndroid"
 msgstr "NotifyMyAndroid"
 
 msgid "Prowl"
 msgstr "Prowl"
-
-msgid "Send notification"
-msgstr "Stuur notificatie"
-
-msgid "Whether or not you want to receive a notification of your daily usage on your smartphone"
-msgstr "Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone over je energieverbruik."
 
 msgid "Notification service"
 msgstr "Notificatieservice"
@@ -1294,8 +1327,14 @@ msgstr "Tijdstip van de volgende notificatie. Applicatie werkt dit automatisch b
 msgid "Notification configuration"
 msgstr "Notificatieconfiguratie"
 
-msgid "Daily usage notification"
-msgstr "Dagelijkse verbruiksnotificatie"
+msgid "Next check"
+msgstr "Volgende controle"
+
+msgid "Timestamp of the next check. Managed by application."
+msgstr "Tijdstip van de volgende controle. Applicatie werkt dit automatisch bij."
+
+msgid "Status notification configuration"
+msgstr "Statusnotificatie-configuratie"
 
 msgid "Your daily usage statistics for {}\n"
 msgstr "Dagelijkse verbruiksstatistieken voor {}\n"
@@ -1311,6 +1350,15 @@ msgstr "Gas verbruikt: {} m3\n"
 
 msgid "Total cost: € {}"
 msgstr "Totale kosten: € {}"
+
+msgid "Daily usage notification"
+msgstr "Dagelijkse verbruiksnotificatie"
+
+msgid "It has been over an hour since the last reading received. Please check your datalogger."
+msgstr "Er is meer dan een uur verstreken sinds de laatst ontvangen meting. Controleer de datalogger."
+
+msgid "Datalogger check"
+msgstr "Dataloggercontrole"
 
 msgid "Implements the following API call: https://pvoutput.org/help.html#api-addstatus"
 msgstr "Implementeert de volgende API call: https://pvoutput.org/help.html#api-addstatus"
@@ -1587,6 +1635,24 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "You may check the status of your readings and data in the Status page."
+#~ msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."
+
+#~ msgid "It's now possible to have the electricity tariffs merged to a single one. This might come handy when you pay your energy supplier fo a single tariff instead of high/low. You can enable this feature in  frontend configuration: 'Merge electricity tariffs'"
+#~ msgstr "Vanaf nu is het mogelijk om de elektriciteitstarieven samen te voegen tot enkeltarief. Dit komt van pas wanneer je energieleverancier je slechts één tarief in rekening brengt voor zowel piek als dal. Je kunt dit inschakelen in de interfaceconfiguratie bij  \"Voeg tarieven samen\""
+
+#~ msgid "It's now possible to automatically export your gas meter positions to your own Mindergas.nl account! See the FAQ in the documentation for a guide on how to create and/or link your account."
+#~ msgstr "Het is nu ook mogelijk om je gasmeterstanden automatisch door te geven aan je persoonlijke Mindergas.nl-account! Bekijk de FAQ in de documentatie voor meer informatie over hoe je een account aanmaakt en/of koppelt aan de applicatie."
+
+#~ msgid "There is now support for pushing notifications to your phone, summarizing your daily totals! Both Android and iOS are supported. See the FAQ in the documentation for more information."
+#~ msgstr "Vanaf nu is er ondersteuning voor het versturen van push notificaties naar je telefoon, met daarin je dagelijkse verbruik. Zie voor meer informatie de documentatie / FAQ."
+
+#~ msgid "Send notification"
+#~ msgstr "Stuur notificatie"
+
+#~ msgid "Whether or not you want to receive a notification of your daily usage on your smartphone"
+#~ msgstr "Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone over je energieverbruik."
 
 #~ msgid "MQTT JSON telegram configuration"
 #~ msgstr "MQTT JSON telegram configuratie"
