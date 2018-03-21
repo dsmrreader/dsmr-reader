@@ -18,13 +18,13 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.15.0 - 2018-xx-xx
+v1.15.0 - 2018-03-21
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
-- [`#208 <https://github.com/dennissiemensma/dsmr-reader/issues/208>`_] Notificatie bij uitblijven gegevens uit slimme meter
 - [`#449 <https://github.com/dennissiemensma/dsmr-reader/issues/449>`_] Meterstatistieken via MQTT beschikbaar
+- [`#208 <https://github.com/dennissiemensma/dsmr-reader/issues/208>`_] Notificatie bij uitblijven gegevens uit slimme meter
 - [`#342 <https://github.com/dennissiemensma/dsmr-reader/issues/342>`_] Backup to dropbox never finish (free plan no more space)
 
 
