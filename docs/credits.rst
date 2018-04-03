@@ -37,6 +37,7 @@ Listed in any order, sorted by name.
 - `meijjaa <https://github.com/meijjaa>`_
 - `michielvisser <https://github.com/michielvisser>`_
 - `mkruiver <https://github.com/mkruiver>`_
+- `mrvanes <https://github.com/mrvanes>`_ 
 - `Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_
 - `perryodk <https://github.com/perryodk>`_
 - `pyrocumulus <https://github.com/pyrocumulus>`_

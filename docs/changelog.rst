@@ -23,7 +23,7 @@ v1.16.0 - 2018-xx-xx
 
 **Tickets resolved in this release:**
 
-- [`#xxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxx>`_] yyyyyyyyyyyyyyyyyyyyyyyyyy
+- [`#458 <https://github.com/dennissiemensma/dsmr-reader/issues/458>`_] DSMR v2.x parse-fout - by mrvanes 
 
 
 
