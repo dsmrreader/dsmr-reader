@@ -116,6 +116,9 @@ Public webinterface warning
 
 - Open the site's vhost in ``/etc/nginx/sites-enabled/dsmr-webinterface`` and **uncomment** the following lines (remove the ##)::
 
+    ##    satisfy    any;
+    ##    allow      192.168.1.0/24;
+    ##    deny       all;
     ##    auth_basic "Restricted application";
     ##    auth_basic_user_file /etc/nginx/htpasswd;
     

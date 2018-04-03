@@ -11,15 +11,20 @@ Special thanks for supplying code contributions
 Also many thanks to the contributions (reporting) of
 ----------------------------------------------------
 Listed in any order, sorted by name.
-  
+
 - `allureGOT <https://github.com/allureGOT>`_
 - `balk77 <https://github.com/balk77>`_
+- `Baseje <https://github.com/Baseje>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
+- `Calimerorulez <https://github.com/Calimerorulez>`_
 - `dajappie <https://github.com/dajappie>`_
 - `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
 - `dbmnl <https://github.com/dbmnl>`_
 - `emilkwaaitaal <https://github.com/emilkwaaitaal>`_
+- `Ernst79 <https://github.com/Ernst79>`_
+- `f0nt4 <https://github.com/f0nt4>`_
 - `fpompert <https://github.com/fpompert>`_
+- `FutureCow <https://github.com/FutureCow>`_
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `gertjuhh <https://github.com/gertjuhh>`_
 - `goegol <https://github.com/goegol>`_
@@ -28,8 +33,10 @@ Listed in any order, sorted by name.
 - `HugoDaBosss <https://github.com/HugoDaBosss>`_
 - `Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_ 
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
+- `joopy <https://github.com/joopy>`_
 - `Joris Vervuurt <https://github.com/jorisvervuurt>`_
 - `ju5t <https://github.com/ju5t>`_
+- `jwveldhuis <https://github.com/jwveldhuis>`_
 - Koen Volleberg
 - `lckarssen <https://github.com/lckarssen>`_
 - `MarsWarrior <https://github.com/MarsWarrior>`_
@@ -41,6 +48,7 @@ Listed in any order, sorted by name.
 - `Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_
 - `perryodk <https://github.com/perryodk>`_
 - `pyrocumulus <https://github.com/pyrocumulus>`_
+- `raoulteeuwen  <https://github.com/raoulteeuwen >`_
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `Sevickson <https://github.com/sevickson>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_

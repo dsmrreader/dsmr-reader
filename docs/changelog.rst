@@ -24,6 +24,7 @@ v1.16.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#458 <https://github.com/dennissiemensma/dsmr-reader/issues/458>`_] DSMR v2.x parse-fout - by mrvanes 
+- [`#455 <https://github.com/dennissiemensma/dsmr-reader/issues/455>`_] DOCS: Handleiding Nginx authenticatie uitbreiden - by FutureCow 
 
 
 
