@@ -18,6 +18,18 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.16.0 - 2018-04-04
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#458 <https://github.com/dennissiemensma/dsmr-reader/issues/458>`_] DSMR v2.x parse-fout - by mrvanes 
+- [`#455 <https://github.com/dennissiemensma/dsmr-reader/issues/455>`_] DOCS: Handleiding Nginx authenticatie uitbreiden - by FutureCow 
+- [`#461 <https://github.com/dennissiemensma/dsmr-reader/issues/461>`_] Requirements update April 2018
+- Fixed some missing names on the contribution page in the DOCS
+
+
+
 v1.15.0 - 2018-03-21
 ^^^^^^^^^^^^^^^^^^^^
 

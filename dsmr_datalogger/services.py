@@ -143,7 +143,7 @@ def _convert_legacy_dsmr_gas_line(parsed_reading, current_line, next_line):
         legacy_gas_line = current_line + next_line
 
     legacy_gas_result = re.search(
-        r'[^(]+\((\d+)\)\(\d+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
+        r'[^(]+\((\d+)\)\(\w+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
         legacy_gas_line
     )
     gas_timestamp = legacy_gas_result.group(1)

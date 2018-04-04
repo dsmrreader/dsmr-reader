@@ -6,8 +6,12 @@ server {
     listen      80;
     server_name _;  # No hostname available? Just use the underscore for wildcard matching. :]
 
-##	# Uncomment these lines to force additional authentication on application access.
-##  # Do not forget to generate a password first in '/etc/nginx/htpasswd' and then RELOAD nginx!
+	# Uncomment these lines below to force additional authentication on application access.
+	# NOTE: Alter the IP-range '192.168.1.0/24' if you are using a different one (i.e.: 10.0.x.x)!
+    # WARNING: Do not forget to generate a password first in '/etc/nginx/htpasswd' and then RELOAD nginx (TEST IT)!
+##    satisfy    any;
+##    allow      192.168.1.0/24;
+##    deny       all;
 ##    auth_basic "Restricted application";
 ##    auth_basic_user_file /etc/nginx/htpasswd;
 
