@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from dsmr_pvoutput.models.settings import PVOutputAPISettings, PVOutputAddStatusSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_pvoutput.services
 
 
@@ -87,8 +88,11 @@ class TestServices(TestCase):
         should_export_mock.return_value = False
         self._apply_fake_settings()
 
-        # Nothing should happen.
-        dsmr_pvoutput.services.export()
+        try:
+            # Nothing should happen.
+            dsmr_pvoutput.services.export()
+        except DelayNextCall:
+            pass
 
         self.assertTrue(should_export_mock.called)
 
@@ -108,8 +112,12 @@ class TestServices(TestCase):
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(requests_mock.called)
 
-        # Nothing should happen, as there is no data.
-        dsmr_pvoutput.services.export()
+        try:
+            # Nothing should happen, as there is no data.
+            dsmr_pvoutput.services.export()
+        except DelayNextCall:
+            pass
+
         self.assertFalse(requests_mock.called)
 
     @mock.patch('requests.post')
@@ -122,7 +130,12 @@ class TestServices(TestCase):
         self._apply_fake_settings()
 
         requests_post_mock.return_value = mock.MagicMock(status_code=400, text='Error message')
-        dsmr_pvoutput.services.export()
+
+        try:
+            dsmr_pvoutput.services.export()
+        except DelayNextCall:
+            pass
+
         settings = PVOutputAddStatusSettings.get_solo()
 
         self.assertEqual(settings.next_export, timezone.now() + timezone.timedelta(minutes=5))
@@ -141,7 +154,10 @@ class TestServices(TestCase):
 
         self.assertFalse(requests_post_mock.called)
 
-        dsmr_pvoutput.services.export()
+        try:
+            dsmr_pvoutput.services.export()
+        except DelayNextCall:
+            pass
 
         self.assertIsNotNone(PVOutputAddStatusSettings.get_solo().next_export)
         self.assertTrue(requests_post_mock.called)
@@ -167,7 +183,10 @@ class TestServices(TestCase):
         requests_post_mock.reset_mock()
         PVOutputAddStatusSettings.objects.update(processing_delay=5, next_export=None)
 
-        dsmr_pvoutput.services.export()
+        try:
+            dsmr_pvoutput.services.export()
+        except DelayNextCall:
+            pass
 
         self.assertIsNotNone(PVOutputAddStatusSettings.get_solo().next_export)
         self.assertTrue(requests_post_mock.called)

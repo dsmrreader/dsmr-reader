@@ -3,6 +3,7 @@ import requests
 
 from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings, PVOutputAPISettings
 from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_backend.services
 
 
@@ -27,6 +28,8 @@ def schedule_next_export():
     status_settings.next_export = next_export
     status_settings.save()
 
+    raise DelayNextCall(timestamp=next_export)
+
 
 def get_next_export():
     """ Rounds the timestamp to the nearest upload interval, preventing the uploads to shift forward. """
@@ -44,7 +47,7 @@ def get_next_export():
 def export():
     """ Exports data to PVOutput, calling Add Status. """
     if not should_export():
-        return
+        raise DelayNextCall(minutes=1)
 
     api_settings = PVOutputAPISettings.get_solo()
     status_settings = PVOutputAddStatusSettings.get_solo()
@@ -58,7 +61,7 @@ def export():
 
     if not ecs.exists():
         print(' [!] PVOutput: No data found for {}'.format(local_now))
-        return schedule_next_export()
+        schedule_next_export()
 
     first = ecs[0]
     last = ecs.order_by('-read_at')[0]

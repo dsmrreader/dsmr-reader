@@ -1,8 +1,8 @@
 from unittest import mock
-from datetime import datetime
 from decimal import Decimal
 
 from django.test import TestCase
+from django.utils import timezone
 import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
@@ -71,7 +71,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         reading = DsmrReading.objects.get()
         self.assertEqual(
             reading.timestamp,
-            datetime(2016, 3, 17, 21, 10, 58, tzinfo=pytz.UTC)
+            timezone.datetime(2016, 3, 17, 21, 10, 58, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.electricity_delivered_1, Decimal('1255.252'))
         self.assertEqual(reading.electricity_returned_1, Decimal('0'))
@@ -81,7 +81,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
         self.assertEqual(
             reading.extra_device_timestamp,
-            datetime(2016, 3, 17, 21, 0, 0, tzinfo=pytz.UTC)
+            timezone.datetime(2016, 3, 17, 21, 0, 0, tzinfo=pytz.UTC)
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('1438.997'))
         self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.187'))

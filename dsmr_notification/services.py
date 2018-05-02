@@ -6,6 +6,7 @@ import requests
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_consumption.services
 import dsmr_backend.services
 
@@ -64,20 +65,12 @@ def send_notification(api_url, api_key, notification_message, title):
     return True
 
 
-def set_next_notification(today):
-    """ Set the next moment for notifications to be allowed again """
-    tomorrow = (today + timezone.timedelta(hours=24)).date()
-    NotificationSetting.objects.update(
-        next_notification=tomorrow
-    )
-
-
 def notify():
     """ Sends notifications about daily energy usage """
     notification_settings = NotificationSetting.get_solo()
 
     if not should_notify():
-        return
+        raise DelayNextCall(minutes=1)
 
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
@@ -95,14 +88,20 @@ def notify():
             day=(midnight - timezone.timedelta(hours=1))
         )
     except DayStatistics.DoesNotExist:
-        return False  # Try again in a next run
+        # Try again in a next run
+        raise DelayNextCall(hours=1)
 
     # For backend logging in Supervisor.
     print(' - Creating new notification containing daily usage.')
 
     message = create_consumption_notification_message(midnight, stats)
     send_notification(notification_api_url, notification_settings.api_key, message, str(_('Daily usage notification')))
-    set_next_notification(today)
+
+    tomorrow = (today + timezone.timedelta(hours=24)).date()
+    NotificationSetting.objects.update(next_notification=tomorrow)
+
+    next_call = timezone.make_aware(timezone.datetime.combine(tomorrow, timezone.datetime.min.time()))
+    raise DelayNextCall(timestamp=next_call)
 
 
 def check_status():
@@ -112,12 +111,13 @@ def check_status():
 
     if notification_settings.notification_service is None or \
             not dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_check):
-        return
+        raise DelayNextCall(minutes=1)
 
     if not DsmrReading.objects.exists():
-        return StatusNotificationSetting.objects.update(
+        StatusNotificationSetting.objects.update(
             next_check=timezone.now() + timezone.timedelta(minutes=5)
         )
+        raise DelayNextCall(minutes=5)
 
     # Check for recent data.
     has_recent_reading = DsmrReading.objects.filter(
@@ -125,9 +125,10 @@ def check_status():
     ).exists()
 
     if has_recent_reading:
-        return StatusNotificationSetting.objects.update(
+        StatusNotificationSetting.objects.update(
             next_check=timezone.now() + timezone.timedelta(minutes=5)
         )
+        raise DelayNextCall(minutes=5)
 
     # Alert!
     print(' - Sending notification about datalogger lagging behind...')
@@ -138,6 +139,7 @@ def check_status():
         str(_('Datalogger check'))
     )
 
-    StatusNotificationSetting.objects.update(
-        next_check=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS)
-    )
+    next_check = timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS)
+    StatusNotificationSetting.objects.update(next_check=next_check)
+
+    raise DelayNextCall(timestamp=next_check)

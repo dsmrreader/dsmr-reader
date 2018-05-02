@@ -7,12 +7,13 @@ from django.db.utils import IntegrityError
 from django.utils import timezone, formats
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
-from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_weather.models.reading import TemperatureReading
-from dsmr_stats.models.note import Note
+from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.statistics import MeterStatistics
+from dsmr_weather.models.reading import TemperatureReading
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_backend.exceptions import DelayNextCall
+from dsmr_stats.models.note import Note
 
 
 def compact_all():
@@ -35,8 +36,10 @@ def compact(dsmr_reading):
 
     if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE:
         # Postpone when current minute hasn't passed yet.
+        next_minute = reading_start + timezone.timedelta(minutes=1)
+
         if timezone.now() <= reading_start + timezone.timedelta(minutes=1):
-            return
+            raise DelayNextCall(timestamp=next_minute)
 
     # Create consumption records.
     _compact_electricity(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)

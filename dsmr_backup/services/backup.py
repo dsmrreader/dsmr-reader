@@ -10,6 +10,7 @@ from django.utils import formats
 
 
 from dsmr_backup.models.settings import BackupSettings
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_backup.services.dropbox
 
 
@@ -19,11 +20,11 @@ def check():
 
     # Skip when backups disabled.
     if not backup_settings.daily_backup:
-        return
+        raise DelayNextCall(hours=1)
 
     # Postpone when we already created a backup today.
     if backup_settings.latest_backup and backup_settings.latest_backup.date() == timezone.now().date():
-        return
+        raise DelayNextCall(hours=1)
 
     # Timezone magic to make sure we select and combine the CURRENT day, in the user's timezone.
     next_backup_timestamp = timezone.make_aware(timezone.datetime.combine(
@@ -32,7 +33,7 @@ def check():
 
     if backup_settings.latest_backup and timezone.now() < next_backup_timestamp:
         # Postpone when the user's backup time preference has not been passed yet.
-        return
+        raise DelayNextCall(timestamp=next_backup_timestamp)
 
     # For backend logging in Supervisor.
     print(' - Creating new backup.')

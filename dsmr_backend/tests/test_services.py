@@ -176,15 +176,11 @@ class TestIslatestVersion(TestCase):
         b"__version__ = get_version(VERSION)\n"
 
     def test_true(self, request_mock):
-        response_mock = mock.MagicMock(content=self.response_older)
-        request_mock.return_value = response_mock
-
+        request_mock.return_value = mock.MagicMock(content=self.response_older)
         self.assertTrue(dsmr_backend.services.is_latest_version())
 
     def test_false(self, request_mock):
-        response_mock = mock.MagicMock(content=self.response_newer)
-        request_mock.return_value = response_mock
-
+        request_mock.return_value = mock.MagicMock(content=self.response_newer)
         self.assertFalse(dsmr_backend.services.is_latest_version())
 
 

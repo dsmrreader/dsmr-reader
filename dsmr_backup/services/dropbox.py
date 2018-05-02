@@ -7,6 +7,7 @@ import dropbox
 
 from dsmr_backup.models.settings import DropboxSettings
 from dsmr_frontend.models.message import Notification
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_backup.services.backup
 
 
@@ -15,7 +16,7 @@ def sync():
 
     # Skip when either no token was entered.
     if not dropbox_settings.access_token:
-        return
+        raise DelayNextCall(hours=1)
 
     #  Or when we already synced within the last hour.
     next_sync_interval = None
@@ -26,7 +27,7 @@ def sync():
         )
 
     if next_sync_interval and timezone.now() < next_sync_interval:
-        return
+        raise DelayNextCall(timestamp=next_sync_interval)
 
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
 

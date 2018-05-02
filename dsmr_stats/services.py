@@ -11,6 +11,7 @@ from django.conf import settings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_consumption.services
 import dsmr_backend.services
 
@@ -26,7 +27,7 @@ def analyze():  # noqa: C901
             first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]
         except IndexError:
             # Well, it seems we don't have any consumption logged (yet) at all.
-            return
+            raise DelayNextCall(minutes=1)
 
         # We should use the day before the first consumption.
         read_at = timezone.localtime(first_consumption.read_at)
@@ -53,19 +54,21 @@ def analyze():  # noqa: C901
         ).order_by('read_at')[0]
     except IndexError:
         # Happens when no data is available yet.
-        return
+        raise DelayNextCall(hours=1)
 
     consumption_date = timezone.localtime(consumption_found.read_at).date()
     now = timezone.localtime(timezone.now())
+    next_midnight = timezone.datetime.combine(now + timezone.timedelta(hours=24), timezone.datetime.min.time())
+    next_midnight = timezone.make_aware(next_midnight)
 
     # Skip today, try again tomorrow. As we need a full day to pass first.
     if consumption_date == now.date():
-        return
+        raise DelayNextCall(timestamp=next_midnight)
 
     # Do not create status until we've passed the next day by a margin. Required due to delayed gas update by meters.
     if dsmr_backend.services.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
         # Skip for a moment.
-        return
+        raise DelayNextCall(timestamp=next_midnight)
 
     day_start = timezone.make_aware(timezone.datetime(
         year=consumption_date.year,
@@ -81,7 +84,7 @@ def analyze():  # noqa: C901
     ).exists()
 
     if not day_processed:
-        return
+        raise DelayNextCall(minutes=15)
 
     # For backend logging in Supervisor.
     print(' - Creating day & hour statistics for: {}.'.format(day_start))

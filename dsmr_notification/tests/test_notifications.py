@@ -6,9 +6,10 @@ from django.utils import timezone
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
 from dsmr_stats.models.statistics import DayStatistics
+from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_notification.services
 import dsmr_backend
-from dsmr_datalogger.models.reading import DsmrReading
 
 
 class TestServices(TestCase):
@@ -33,7 +34,11 @@ class TestServices(TestCase):
 
         notification_settings = NotificationSetting.get_solo()
         self.assertIsNone(notification_settings.notification_service)
-        self.assertFalse(dsmr_notification.services.notify())
+
+        try:
+            dsmr_notification.services.notify()
+        except DelayNextCall:
+            pass
 
     def test_should_notify_set(self):
         """ Notifications: Test should_notify()'s output when service is set """
@@ -49,9 +54,11 @@ class TestServices(TestCase):
         notification_settings.save()
         self.assertTrue(dsmr_notification.services.should_notify())
 
-        notification_settings.next_notification = None
-        dsmr_notification.services.set_next_notification(timezone.make_aware(timezone.datetime(2116, 11, 16)))
-        self.assertFalse(dsmr_notification.services.should_notify())
+        today = timezone.make_aware(timezone.datetime(2116, 11, 16))
+        tomorrow = (today + timezone.timedelta(hours=24)).date()
+        NotificationSetting.objects.update(next_notification=tomorrow)
+
+        dsmr_notification.services.should_notify()
 
     @mock.patch('django.utils.timezone.now')
     def test_set_next_notification_date(self, now_mock):
@@ -64,9 +71,9 @@ class TestServices(TestCase):
         notification_settings.next_notification = now.date()
         notification_settings.save()
 
-        dsmr_notification.services.set_next_notification(now)
-
+        NotificationSetting.objects.update(next_notification=(now + timezone.timedelta(hours=24)).date())
         notification_settings = NotificationSetting.get_solo()
+
         self.assertEqual(notification_settings.next_notification, tomorrow)
 
     def test_no_daystatistics(self):
@@ -79,7 +86,10 @@ class TestServices(TestCase):
         notification_settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         notification_settings.save()
 
-        self.assertFalse(dsmr_notification.services.notify())
+        try:
+            dsmr_notification.services.notify()
+        except DelayNextCall:
+            pass
 
     @mock.patch('requests.post')
     @mock.patch('django.utils.timezone.now')
@@ -96,14 +106,22 @@ class TestServices(TestCase):
 
         if self.fixtures:
             with self.assertRaises(AssertionError):
-                dsmr_notification.services.notify()
-        else:
-            # When having no data, this should NOT raise an exception.
-            return dsmr_notification.services.notify()
+                try:
+                    dsmr_notification.services.notify()
+                except DelayNextCall:
+                    pass
 
-        with self.assertRaisesMessage(
-                AssertionError, 'Notify API call failed: Forbidden (HTTP403)'):
-            dsmr_notification.services.notify()
+            with self.assertRaisesMessage(AssertionError, 'Notify API call failed: Forbidden (HTTP403)'):
+                try:
+                    dsmr_notification.services.notify()
+                except DelayNextCall:
+                    pass
+        else:
+            try:
+                # When having no data, this should NOT raise an exception.
+                return dsmr_notification.services.notify()
+            except DelayNextCall:
+                pass
 
     @mock.patch('requests.post')
     @mock.patch('django.utils.timezone.now')
@@ -121,7 +139,10 @@ class TestServices(TestCase):
         notification_settings.next_notification = timezone.localtime(timezone.now())
         notification_settings.save()
 
-        dsmr_notification.services.notify()
+        try:
+            dsmr_notification.services.notify()
+        except DelayNextCall:
+            pass
 
         notification_settings = NotificationSetting.get_solo()
 
@@ -163,12 +184,21 @@ class TestServices(TestCase):
 
         # Schedule ahead.
         StatusNotificationSetting.objects.update(next_check=timezone.now() + timezone.timedelta(minutes=1))
-        dsmr_notification.services.check_status()
+
+        try:
+            dsmr_notification.services.check_status()
+        except DelayNextCall:
+            pass
 
         # No data.
         StatusNotificationSetting.objects.update(next_check=timezone.now())
         DsmrReading.objects.all().delete()
-        dsmr_notification.services.check_status()
+
+        try:
+            dsmr_notification.services.check_status()
+        except DelayNextCall:
+            pass
+
         self.assertGreater(StatusNotificationSetting.get_solo().next_check, timezone.now())
 
         # Recent data.
@@ -182,7 +212,11 @@ class TestServices(TestCase):
             electricity_currently_delivered=5,
             electricity_currently_returned=6,
         )
-        dsmr_notification.services.check_status()
+
+        try:
+            dsmr_notification.services.check_status()
+        except DelayNextCall:
+            pass
 
         self.assertGreater(StatusNotificationSetting.get_solo().next_check, timezone.now())
         self.assertFalse(requests_post_mock.called)
@@ -204,7 +238,12 @@ class TestServices(TestCase):
         nma_url = NotificationSetting.NOTIFICATION_API_URL[notification_settings.notification_service]
 
         self.assertFalse(requests_post_mock.called)
-        dsmr_notification.services.check_status()
+
+        try:
+            dsmr_notification.services.check_status()
+        except DelayNextCall:
+            pass
+
         self.assertTrue(requests_post_mock.called)
 
         # Dissect call

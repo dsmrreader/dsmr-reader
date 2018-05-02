@@ -9,6 +9,7 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_backend.services
 import dsmr_stats.services
 
@@ -32,25 +33,29 @@ class TestServices(InterceptStdoutMixin, TestCase):
         }
 
     @mock.patch('django.utils.timezone.now')
-    def test_analyze_service(self, now_mock):
+    def test_analyze_service_fail(self, now_mock):
         self.assertTrue(ElectricityConsumption.objects.exists())
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
 
         # This should delay statistics generation. Because day has not yet passed.
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=1, minute=5))
-        dsmr_stats.services.analyze()
 
-        if dsmr_backend.services.get_capabilities(capability='gas'):
-            self.assertEqual(DayStatistics.objects.count(), 0)
-            self.assertEqual(HourStatistics.objects.count(), 0)
-        else:
-            self.assertEqual(DayStatistics.objects.count(), 0)
-            self.assertEqual(HourStatistics.objects.count(), 0)
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
+
+        self.assertEqual(DayStatistics.objects.count(), 0)
+        self.assertEqual(HourStatistics.objects.count(), 0)
 
         # Still too soon.
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=1, minute=5))
-        dsmr_stats.services.analyze()
+
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
 
         if dsmr_backend.services.get_capabilities(capability='gas'):
             self.assertEqual(DayStatistics.objects.count(), 0)
@@ -59,9 +64,45 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(DayStatistics.objects.count(), 1)
             self.assertEqual(HourStatistics.objects.count(), 3)
 
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_service_no_data(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=1, minute=20))
+
+        # Without any data, fallback.
+        for current_model in (DayStatistics, HourStatistics, ElectricityConsumption):
+            current_model.objects.all().delete()
+
+        self.assertFalse(ElectricityConsumption.objects.exists())
+
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
+
+        self.assertFalse(DayStatistics.objects.exists())
+        self.assertFalse(HourStatistics.objects.exists())
+
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_service_okay(self, now_mock):
+        self.assertTrue(ElectricityConsumption.objects.exists())
+        self.assertFalse(DayStatistics.objects.exists())
+        self.assertFalse(HourStatistics.objects.exists())
+
+        # Still too soon.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=1, minute=5))
+
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
+
         # Now we exceed the delay threshold, causing stats to be generated.
-        now_mock.return_value += timezone.timedelta(minutes=15)
-        dsmr_stats.services.analyze()
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=1, minute=20))
+
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
 
         if dsmr_backend.services.get_capabilities(capability='gas'):
             self.assertEqual(DayStatistics.objects.count(), 1)
@@ -70,24 +111,23 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(DayStatistics.objects.count(), 2)
             self.assertEqual(HourStatistics.objects.count(), 4)
 
-        # Second run should skip first day.
-        dsmr_stats.services.analyze()
+        try:
+            # Second run should skip first day.
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
+
         self.assertEqual(DayStatistics.objects.count(), 2)
         self.assertEqual(HourStatistics.objects.count(), 4)
 
-        # Third run should have no effect, as our fixtures are limited to a few days.
-        dsmr_stats.services.analyze()
+        try:
+            # Third run should have no effect, as our fixtures are limited to a few days.
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
+
         self.assertEqual(DayStatistics.objects.count(), 2)
         self.assertEqual(HourStatistics.objects.count(), 4)
-
-        # Without any data, fallback.
-        for current_model in (DayStatistics, HourStatistics, ElectricityConsumption):
-            current_model.objects.all().delete()
-
-        self.assertFalse(ElectricityConsumption.objects.exists())
-        dsmr_stats.services.analyze()
-        self.assertFalse(DayStatistics.objects.exists())
-        self.assertFalse(HourStatistics.objects.exists())
 
     @mock.patch('django.utils.timezone.now')
     def test_analyze_service_block(self, now_mock):
@@ -111,7 +151,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         )
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
 
-        dsmr_stats.services.analyze()
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
 
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
@@ -120,7 +163,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         DsmrReading.objects.unprocessed().delete()
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
 
-        dsmr_stats.services.analyze()
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
 
         if dsmr_backend.services.get_capabilities('any'):
             self.assertTrue(DayStatistics.objects.exists())
@@ -174,7 +220,11 @@ class TestServices(InterceptStdoutMixin, TestCase):
     def test_analyze_service_without_data(self):
         first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]
         first_consumption.read_at = first_consumption.read_at + timezone.timedelta()
-        dsmr_stats.services.analyze()
+
+        try:
+            dsmr_stats.services.analyze()
+        except DelayNextCall:
+            pass
 
     @mock.patch('django.utils.timezone.now')
     def test_analyze_service_skip_current_day(self, now_mock):
@@ -209,7 +259,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         try:
             dsmr_stats.services.analyze()
-        except LookupError:
+        except DelayNextCall:
             pass
 
         # Analysis should be skipped, as all source data is faked into being generated today.

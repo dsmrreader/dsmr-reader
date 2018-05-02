@@ -17,6 +17,7 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.exceptions import InvalidTelegramError
+from dsmr_backend.exceptions import DelayNextCall
 from dsmr_datalogger.dsmr import DSMR_MAPPING
 import dsmr_datalogger.signals
 
@@ -300,13 +301,13 @@ def apply_data_retention():
 
     if settings.data_retention_in_hours is None:
         # No retention enabled at all (default behaviour).
-        return
+        raise DelayNextCall(hours=1)
 
-    current_hour = timezone.now().hour
+    this_hour = timezone.localtime(timezone.now()).hour
 
     # Only cleanup during nights. Allow from midnight to six a.m.
-    if current_hour > 6:
-        return
+    if this_hour > 6:
+        raise DelayNextCall(hours=24 - this_hour)
 
     # Each run should be capped, for obvious performance reasons.
     MAX_HOURS_CLEANUP = 24

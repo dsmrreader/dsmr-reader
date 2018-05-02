@@ -7,6 +7,7 @@ from django.utils import timezone
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.buienradar import BUIENRADAR_API_URL, BUIENRADAR_XPATH
+from dsmr_backend.exceptions import DelayNextCall
 
 
 def should_sync():
@@ -26,7 +27,7 @@ def read_weather():
     """ Reads the current weather state, if enabled, and stores it. """
     # Only when explicitly enabled in settings.
     if not should_sync():
-        return
+        raise DelayNextCall(minutes=1)
 
     # For backend logging in Supervisor.
     print(' - Performing temperature reading at Buienradar.')
@@ -42,7 +43,7 @@ def read_weather():
         # Try again in 5 minutes.
         weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=5)
         weather_settings.save()
-        return
+        raise DelayNextCall(minutes=5)
 
     response_bytes = request.read()
     request.close()
@@ -71,3 +72,4 @@ def read_weather():
         weather_settings.next_sync = read_at + timezone.timedelta(hours=1)
 
     weather_settings.save()
+    raise DelayNextCall(timestamp=weather_settings.next_sync)

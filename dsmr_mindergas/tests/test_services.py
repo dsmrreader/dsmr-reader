@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_consumption.models.consumption import GasConsumption
+from dsmr_backend.exceptions import DelayNextCall
 import dsmr_mindergas.services
 
 
@@ -77,8 +78,11 @@ class TestServices(TestCase):
         self.assertIsNone(settings.next_export)
         self.assertFalse(should_export_mock.called)
 
-        # Nothing should happen.
-        dsmr_mindergas.services.export()
+        try:
+            # Nothing should happen.
+            dsmr_mindergas.services.export()
+        except DelayNextCall:
+            pass
 
         self.assertTrue(should_export_mock.called)
         self.assertIsNone(settings.next_export)
@@ -98,8 +102,12 @@ class TestServices(TestCase):
         self.assertFalse(settings.export)
         self.assertIsNone(settings.next_export)
 
-        # Nothing should happen, as there is no data.
-        dsmr_mindergas.services.export()
+        try:
+            # Nothing should happen, as there is no data.
+            dsmr_mindergas.services.export()
+        except DelayNextCall:
+            pass
+
         self.assertIsNone(settings.next_export)
 
     @mock.patch('requests.post')
@@ -115,7 +123,11 @@ class TestServices(TestCase):
         random_values = []
 
         for _ in range(0, 10):
-            dsmr_mindergas.services.export()
+
+            try:
+                dsmr_mindergas.services.export()
+            except DelayNextCall:
+                pass
 
             settings = MinderGasSettings.get_solo()
             self.assertIsNotNone(settings.next_export)
@@ -142,7 +154,10 @@ class TestServices(TestCase):
         for current_error_code in (401, 422):
             requests_post_mock.return_value = mock.MagicMock(status_code=current_error_code, text='Error message')
 
-            dsmr_mindergas.services.export()
+            try:
+                dsmr_mindergas.services.export()
+            except DelayNextCall:
+                pass
 
         settings = MinderGasSettings.get_solo()
 
@@ -164,7 +179,11 @@ class TestServices(TestCase):
         self.assertIsNone(settings.next_export)
         self.assertFalse(requests_post_mock.called)
 
-        dsmr_mindergas.services.export()
+        try:
+            dsmr_mindergas.services.export()
+        except DelayNextCall:
+            pass
+
         settings = MinderGasSettings.get_solo()
         self.assertIsNotNone(settings.next_export)
         self.assertTrue(requests_post_mock.called)
