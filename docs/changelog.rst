@@ -24,7 +24,7 @@ v1.17.0 - 2018-05-xx
 
 **Tickets resolved in this release:**
 
-- [`#453 <https://github.com/dennissiemensma/dsmr-reader/issues/453>`_] Rewrite backend flow
+- [`#475 <https://github.com/dennissiemensma/dsmr-reader/issues/475>`_] Notify my android service ended
 - [`#471 <https://github.com/dennissiemensma/dsmr-reader/issues/471>`_] Requirements update (May 2018)
 
 
