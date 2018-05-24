@@ -1,6 +1,4 @@
 from distutils.version import StrictVersion
-import traceback
-import sys
 import re
 
 import requests
@@ -10,7 +8,6 @@ from django.utils import timezone
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
-from dsmr_backend.models import ScheduledCall
 
 
 def get_capabilities(capability=None):
@@ -61,30 +58,3 @@ def is_timestamp_passed(timestamp):
         return True
 
     return timezone.now() >= timestamp
-
-
-def process_scheduled_calls():
-    """ Calls the backend and all services required. """
-    calls = ScheduledCall.objects.callable()
-    sys.stdout.write('{}: Calling {} backend service(s)\n'.format(
-        timezone.localtime(timezone.now()), len(calls)
-    ))
-
-    for current in calls:
-        sys.stdout.write(' > {} Executing: {}\n'.format(
-            timezone.localtime(timezone.now()), current
-        ))
-
-        try:
-            current.execute()
-        except Exception as error:
-            # Add and print traceback to help debugging any issues raised.
-            exception_traceback = traceback.format_tb(error.__traceback__, limit=100)
-            exception_traceback = "\n".join(exception_traceback)
-
-            sys.stdout.write(' >>> Uncaught exception :: {}\n'.format(error))
-            sys.stdout.write(' >>> {} :: {}\n'.format(current, exception_traceback))
-            sys.stderr.write(exception_traceback)
-
-            # Do not hammer.
-            current.delay(timezone.timedelta(seconds=10))

@@ -8,7 +8,6 @@ from django.utils import timezone
 
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
-from dsmr_backend.exceptions import DelayNextCall
 import dsmr_weather.services
 
 
@@ -32,11 +31,8 @@ class TestDsmrWeatherServices(TestCase):
         self.assertFalse(urlopen_mock.called)
         self.assertFalse(TemperatureReading.objects.all().exists())
 
-        try:
-            # Any errors fetching the data should result in a retry later.
-            dsmr_weather.services.read_weather()
-        except DelayNextCall:
-            pass
+        # Any errors fetching the data should result in a retry later.
+        dsmr_weather.services.read_weather()
 
         weather_settings = WeatherSettings.get_solo()
         self.assertFalse(TemperatureReading.objects.all().exists())
@@ -52,10 +48,7 @@ class TestDsmrWeatherServices(TestCase):
         urlopen_mock.reset_mock()
         self.assertFalse(urlopen_mock.called)
 
-        try:
-            dsmr_weather.services.read_weather()
-        except DelayNextCall:
-            pass
+        dsmr_weather.services.read_weather()
 
         # Should be skipped now.
         self.assertFalse(urlopen_mock.called)
@@ -64,12 +57,7 @@ class TestDsmrWeatherServices(TestCase):
         """ Tests whether temperature readings are skipped when tracking is disabled. """
         self.assertFalse(WeatherSettings.get_solo().track)
         self.assertFalse(TemperatureReading.objects.all().exists())
-
-        try:
-            dsmr_weather.services.read_weather()
-        except DelayNextCall:
-            pass
-
+        dsmr_weather.services.read_weather()
         self.assertFalse(TemperatureReading.objects.all().exists())
 
     @mock.patch('urllib.request.urlopen')
@@ -99,12 +87,7 @@ class TestDsmrWeatherServices(TestCase):
         urlopen_mock.return_value = http_response_mock
 
         self.assertFalse(TemperatureReading.objects.all().exists())
-
-        try:
-            dsmr_weather.services.read_weather()
-        except DelayNextCall:
-            pass
-
+        dsmr_weather.services.read_weather()
         self.assertTrue(TemperatureReading.objects.all().exists())
 
         # Test data snapshot read 4.8 degrees @ De Bilt.
@@ -143,12 +126,7 @@ class TestDsmrWeatherServices(TestCase):
         urlopen_mock.return_value = http_response_mock
 
         self.assertFalse(TemperatureReading.objects.all().exists())
-
-        try:
-            dsmr_weather.services.read_weather()
-        except DelayNextCall:
-            pass
-
+        dsmr_weather.services.read_weather()
         self.assertFalse(TemperatureReading.objects.all().exists())
 
         # Make sure that the next_sync is pushed forward as well.

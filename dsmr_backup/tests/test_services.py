@@ -11,7 +11,6 @@ import dropbox
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
 from dsmr_frontend.models.message import Notification
-from dsmr_backend.exceptions import DelayNextCall
 import dsmr_backup.services.backup
 import dsmr_backup.services.dropbox
 
@@ -26,12 +25,8 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(BackupSettings.get_solo().daily_backup)
         self.assertFalse(create_backup_mock.called)
 
-        try:
-            # Should create initial backup.
-            dsmr_backup.services.backup.check()
-        except DelayNextCall:
-            pass
-
+        # Should create initial backup.
+        dsmr_backup.services.backup.check()
         self.assertFalse(create_backup_mock.called)
 
     @mock.patch('dsmr_backup.services.backup.create')
@@ -61,12 +56,8 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
         self.assertFalse(create_backup_mock.called)
 
-        try:
-            # Should not do anything.
-            dsmr_backup.services.backup.check()
-        except DelayNextCall:
-            pass
-
+        # Should not do anything.
+        dsmr_backup.services.backup.check()
         self.assertFalse(create_backup_mock.called)
 
         backup_settings.latest_backup = now - timezone.timedelta(days=1)
@@ -90,12 +81,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
 
         # Should not do anything, we should backup a minute from now.
         self.assertFalse(create_backup_mock.called)
-
-        try:
-            dsmr_backup.services.backup.check()
-        except DelayNextCall:
-            pass
-
+        dsmr_backup.services.backup.check()
         self.assertFalse(create_backup_mock.called)
 
         # Should be fine to backup now. Passed prefered time of user.
@@ -189,11 +175,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(upload_chunked_mock.called)
 
-        try:
-            dsmr_backup.services.dropbox.sync()
-        except DelayNextCall:
-            pass
-
+        dsmr_backup.services.dropbox.sync()
         self.assertFalse(upload_chunked_mock.called)
 
     @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
@@ -238,11 +220,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(get_backup_directory_mock.called)
 
-        try:
-            dsmr_backup.services.dropbox.sync()
-        except DelayNextCall:
-            pass
-
+        dsmr_backup.services.dropbox.sync()
         self.assertFalse(get_backup_directory_mock.called)
 
     @mock.patch('dsmr_backup.services.backup.get_backup_directory')
@@ -294,7 +272,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
         self.assertGreater(
             DropboxSettings.get_solo().latest_sync, timezone.now() + timezone.timedelta(
                 hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL - 1
-            )
+                )
         )
 
         # Test alternate path.

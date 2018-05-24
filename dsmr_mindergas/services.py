@@ -6,7 +6,6 @@ import requests
 
 from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_consumption.models.consumption import GasConsumption
-from dsmr_backend.exceptions import DelayNextCall
 import dsmr_backend.services
 
 
@@ -30,7 +29,7 @@ def should_export():
 def export():
     """ Exports gas readings to the MinderGas website. """
     if not should_export():
-        raise DelayNextCall(hours=1)
+        return
 
     print(' - MinderGas | Attempting to upload gas meter position.')
 
@@ -78,5 +77,3 @@ def export():
     mindergas_settings = MinderGasSettings.get_solo()
     mindergas_settings.next_export = next_export
     mindergas_settings.save()
-
-    raise DelayNextCall(timestamp=next_export)

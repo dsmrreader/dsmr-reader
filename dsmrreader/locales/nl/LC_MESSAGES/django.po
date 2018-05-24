@@ -34,9 +34,6 @@ msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
 msgid "API configuration"
 msgstr "API-configuratie"
 
-msgid "Time until next call"
-msgstr "Tijdsduur tot volgende call"
-
 msgid "Backend"
 msgstr "Achterkant"
 
@@ -57,15 +54,6 @@ msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor
 
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer."
-
-msgid "Timestamp indicating the next execution for this call"
-msgstr "Tijdstip van de volgende aanroep"
-
-msgid "Scheduled call (read only)"
-msgstr "Ingeplande call (alleen lezen)"
-
-msgid "Scheduled calls (read only)"
-msgstr "Ingeplande calls (alleen lezen)"
 
 msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>"

@@ -9,7 +9,6 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_backend.exceptions import DelayNextCall
 import dsmr_consumption.services
 
 
@@ -109,10 +108,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dr.timestamp = timezone.now()
         dr.save()
 
-        try:
-            dsmr_consumption.services.compact_all()
-        except DelayNextCall:
-            pass
+        dsmr_consumption.services.compact_all()
 
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
