@@ -39,7 +39,7 @@ class TestServices(TestCase):
         """ Notifications: Test should_notify()'s output when service is set """
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = NotificationSetting.NOTIFICATION_NMA
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.save()
 
         # Should fail because we haven't set an API key
@@ -75,7 +75,7 @@ class TestServices(TestCase):
         DayStatistics.objects.all().delete()
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = NotificationSetting.NOTIFICATION_NMA
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         notification_settings.save()
 
@@ -89,7 +89,7 @@ class TestServices(TestCase):
         requests_post_mock.return_value = mock.MagicMock(status_code=403, text='Forbidden')
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = NotificationSetting.NOTIFICATION_NMA
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         notification_settings.next_notification = timezone.localtime(timezone.now())
         notification_settings.save()
@@ -116,7 +116,7 @@ class TestServices(TestCase):
         self.assertIsNone(notification_settings.next_notification)
         self.assertFalse(requests_post_mock.called)
 
-        notification_settings.notification_service = NotificationSetting.NOTIFICATION_NMA
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.api_key = 'es7sh2d-DSMR-Reader-Rulez-iweu732'
         notification_settings.next_notification = timezone.localtime(timezone.now())
         notification_settings.save()
@@ -157,7 +157,7 @@ class TestServices(TestCase):
 
         StatusNotificationSetting.get_solo()
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = NotificationSetting.NOTIFICATION_NMA
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.api_key = 'test'
         notification_settings.save()
 

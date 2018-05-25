@@ -1297,11 +1297,11 @@ msgstr "Systeemcontroles voor het versturen van notificaties wanneer de datalogg
 msgid "Usage notification"
 msgstr "Verbruiksnotificatie"
 
+msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
+msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
+
 msgid "--- Disabled ---"
 msgstr "--- Uitgeschakeld ---"
-
-msgid "NotifyMyAndroid"
-msgstr "NotifyMyAndroid"
 
 msgid "Prowl"
 msgstr "Prowl"
@@ -1635,6 +1635,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "NotifyMyAndroid"
+#~ msgstr "NotifyMyAndroid"
 
 #~ msgid "You may check the status of your readings and data in the Status page."
 #~ msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."

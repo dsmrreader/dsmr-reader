@@ -5,18 +5,15 @@ from solo.models import SingletonModel
 
 class NotificationSetting(SingletonModel):
     NOTIFICATION_NONE = None
-    NOTIFICATION_NMA = 'nma'
     NOTIFICATION_PROWL = 'prowl'
 
     NOTIFICATION_CHOICES = (
         (NOTIFICATION_NONE, _('--- Disabled ---')),
-        (NOTIFICATION_NMA, _('NotifyMyAndroid')),
         (NOTIFICATION_PROWL, _('Prowl')),
     )
 
     NOTIFICATION_API_URL = {
         NOTIFICATION_NONE: None,
-        NOTIFICATION_NMA: 'https://www.notifymyandroid.com/publicapi/notify',
         NOTIFICATION_PROWL: 'https://api.prowlapp.com/publicapi/add'
     }
 
