@@ -24,7 +24,7 @@ v1.18.0 - 2018-06-xx
 
 **Tickets resolved in this release:**
 
-- [`#xxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxx>`_] xxxxxxxxxxxxx
+- [`#479 <https://github.com/dennissiemensma/dsmr-reader/issues/479>`_] Tijdsnotatie grafieken gelijktrekken
 
 
 

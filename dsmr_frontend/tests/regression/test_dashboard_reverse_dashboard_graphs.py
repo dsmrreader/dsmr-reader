@@ -32,4 +32,4 @@ class TestRegression(TestCase):
 
         # This will fail when the fix has been reverted.
         self.assertIn('gas_x', json_content)
-        self.assertEqual(json_content['gas_x'][0], '8 p.m.')
+        self.assertEqual(json_content['gas_x'][0], '20:00')
