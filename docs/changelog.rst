@@ -19,6 +19,16 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.18.0 - 2018-06-xx
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#xxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxx>`_] xxxxxxxxxxxxx
+
+
+
+
 v1.17.0 - 2018-05-25
 ^^^^^^^^^^^^^^^^^^^^
 
