@@ -7,8 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-04 22:26+0200\n"
-"PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -1305,9 +1303,6 @@ msgstr "Systeemcontroles voor het versturen van notificaties wanneer de datalogg
 msgid "Notification apps"
 msgstr "Notificatie Apps"
 
-msgid "Tests notification system"
-msgstr "Test notificatiesysteem"
-
 msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
 msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
 
@@ -1649,6 +1644,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Tests notification system"
+#~ msgstr "Test notificatiesysteem"
 
 #~ msgid "Usage notification"
 #~ msgstr "Verbruiksnotificatie"

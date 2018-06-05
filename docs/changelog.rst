@@ -18,7 +18,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.18.0 - 2018-06-04
+v1.18.0 - 2018-06-05
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
