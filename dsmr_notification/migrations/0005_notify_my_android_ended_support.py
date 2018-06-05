@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy
 
 
 def migrate_forward(apps, schema_editor):
+    """ Clears API settings if we used NMA. """
     NotificationSetting = apps.get_model('dsmr_notification', 'NotificationSetting')
     _, _ = NotificationSetting.objects.get_or_create()
 
@@ -12,7 +13,7 @@ def migrate_forward(apps, schema_editor):
         return
 
     # Did we use NMA? Disable it.
-    NotificationSetting.objects.update(notification_service=None, api_key=None)
+    NotificationSetting.objects.update(notification_service=None, api_key=None, next_notification=None)
 
     import dsmr_frontend.services
     Notification = apps.get_model('dsmr_frontend', 'Notification')
@@ -23,6 +24,11 @@ def migrate_forward(apps, schema_editor):
     )
 
 
+def migrate_backward(apps, schema_editor):
+    """ We can't restore deleted data. """
+    pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -31,7 +37,7 @@ class Migration(migrations.Migration):
 
     operations = [
         # Backwards migration not possible, field was removed before.
-        migrations.RunPython(migrate_forward),
+        migrations.RunPython(migrate_forward, migrate_backward),
 
         migrations.AlterField(
             model_name='notificationsetting',

@@ -6,7 +6,7 @@ import dsmr_backend.signals
 
 class AppConfig(AppConfig):
     name = 'dsmr_notification'
-    verbose_name = _('Usage notification')
+    verbose_name = _('Notification apps')
 
     def ready(self):
         dsmr_backend.signals.backend_called.connect(

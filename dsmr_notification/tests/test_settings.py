@@ -19,8 +19,14 @@ class TestSettings(TestCase):
     def test_notification_service(self):
         self.assertIsNone(self.instance.notification_service)
 
-    def test_api_key(self):
-        self.assertIsNone(self.instance.api_key)
+    def test_pushover_api_key(self):
+        self.assertIsNone(self.instance.pushover_api_key)
+
+    def test_pushover_user_key(self):
+        self.assertIsNone(self.instance.pushover_user_key)
+
+    def test_prowl_api_key(self):
+        self.assertIsNone(self.instance.prowl_api_key)
 
     def test_next_notification(self):
         self.assertIsNone(self.instance.next_notification)

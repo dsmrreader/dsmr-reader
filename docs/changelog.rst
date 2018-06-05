@@ -18,6 +18,16 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.18.0 - 2018-06-05
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#246 <https://github.com/dennissiemensma/dsmr-reader/issues/246>`_] Add support for Pushover
+- [`#479 <https://github.com/dennissiemensma/dsmr-reader/issues/479>`_] Tijdsnotatie grafieken gelijktrekken
+- [`#480 <https://github.com/dennissiemensma/dsmr-reader/issues/480>`_] Requirements update (June 2018) 
+
+
 
 v1.17.0 - 2018-05-25
 ^^^^^^^^^^^^^^^^^^^^

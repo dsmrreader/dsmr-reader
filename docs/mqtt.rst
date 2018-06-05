@@ -1,5 +1,5 @@
-MQTT
-====
+Integration: MQTT
+=================
 
 The application supports sending MQTT messages to your broker.
 

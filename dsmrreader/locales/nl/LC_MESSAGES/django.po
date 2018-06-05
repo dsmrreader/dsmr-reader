@@ -1291,17 +1291,26 @@ msgstr "MQTT: Telegram (per gesplitst topic) configuratie"
 msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het instellen van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentatie</a>"
 
+msgid "Only applies when using Pushover"
+msgstr "Alleen van toepassing voor Pushover"
+
+msgid "Only applies when using Prowl"
+msgstr "Alleen van toepassing voor Prowl"
+
 msgid "System checks for sending status notifications when the datalogger is lagging behind."
 msgstr "Systeemcontroles voor het versturen van notificaties wanneer de datalogger achterloopt."
 
-msgid "Usage notification"
-msgstr "Verbruiksnotificatie"
+msgid "Notification apps"
+msgstr "Notificatie Apps"
 
 msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
 msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
 
 msgid "--- Disabled ---"
 msgstr "--- Uitgeschakeld ---"
+
+msgid "Pushover"
+msgstr "Pushover"
 
 msgid "Prowl"
 msgstr "Prowl"
@@ -1312,11 +1321,14 @@ msgstr "Notificatieservice"
 msgid "Which notification service to use for sending daily usage notifications"
 msgstr "Welke notificatieservice mag gebruikt worden om de notificaties mee te versturen"
 
-msgid "Notification service API key"
-msgstr "API sleutel voor notificatie service"
+msgid "API key"
+msgstr "API key"
 
-msgid "The API key used send messages to your smartphone. Please visit https://notifymyandroid.com/ or https://www.prowlapp.com/ to download and use the apps."
-msgstr "De API sleutel die gebruikt wordt om notificaties naar je smartphone te sturen. Bezoek https://notifymyandroid.com/ of https://www.prowlapp.com/ om de apps te downloaden en te gebruiken."
+msgid "The API key of your Pushover Application"
+msgstr "De API key van je Pushover Applicatie"
+
+msgid "Your User Key displayed in your Pushover dashboard"
+msgstr "De \"User Key\" zoals terug te vinden in je Pushover dashboard"
 
 msgid "Next notification"
 msgstr "Volgende notificatie"
@@ -1324,8 +1336,8 @@ msgstr "Volgende notificatie"
 msgid "Timestamp of the next notification. Managed by application."
 msgstr "Tijdstip van de volgende notificatie. Applicatie werkt dit automatisch bij."
 
-msgid "Notification configuration"
-msgstr "Notificatieconfiguratie"
+msgid "Notification Apps configuration"
+msgstr "Notificatie Apps configuratie"
 
 msgid "Next check"
 msgstr "Volgende controle"
@@ -1365,9 +1377,6 @@ msgstr "Implementeert de volgende API call: https://pvoutput.org/help.html#api-a
 
 msgid "PVOutput"
 msgstr "PVOutput"
-
-msgid "API key"
-msgstr "API key"
 
 msgid "The API key for your PVOutput account. Listed in PVOutput at Settings -> \"API Settings\"."
 msgstr "De API-key voor je PVOutput-account. Terug te vinden in PVOutput onder Instellingen -> \"API Settings\"."
@@ -1635,6 +1644,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Tests notification system"
+#~ msgstr "Test notificatiesysteem"
+
+#~ msgid "Usage notification"
+#~ msgstr "Verbruiksnotificatie"
+
+#~ msgid "Notification service API key"
+#~ msgstr "API sleutel voor notificatie service"
+
+#~ msgid "The API key used send messages to your smartphone. Please visit https://notifymyandroid.com/ or https://www.prowlapp.com/ to download and use the apps."
+#~ msgstr "De API sleutel die gebruikt wordt om notificaties naar je smartphone te sturen. Bezoek https://notifymyandroid.com/ of https://www.prowlapp.com/ om de apps te downloaden en te gebruiken."
 
 #~ msgid "NotifyMyAndroid"
 #~ msgstr "NotifyMyAndroid"
