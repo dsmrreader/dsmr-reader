@@ -32,7 +32,9 @@ class Command(BaseCommand):
         BackupSettings.objects.update(daily_backup=False)
         DropboxSettings.objects.update(access_token=None)
         MinderGasSettings.objects.update(export=False, auth_token=None)
-        NotificationSetting.objects.update(notification_service=None, api_key=None)
+        NotificationSetting.objects.update(
+            notification_service=None, pushover_api_key=None, pushover_user_key=None, prowl_api_key=None
+        )
         Notification.objects.update(read=True)
 
         try:

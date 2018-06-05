@@ -15,6 +15,7 @@
 
 import sys
 import os
+import datetime
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -48,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'DSMR Reader'
-copyright = '2016, Dennis Siemensma'
+copyright = '2015 - {}, Dennis Siemensma'.format(datetime.datetime.now().year)
 author = 'Dennis Siemensma'
 
 # The version info for the project you're documenting, acts as replacement for
