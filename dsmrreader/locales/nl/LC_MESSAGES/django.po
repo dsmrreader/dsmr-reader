@@ -460,6 +460,9 @@ msgstr "Temperatuurkleur"
 msgid "Graph color for temperatures read"
 msgstr "Grafiekkleur voor temperatuurmetingen"
 
+msgid "The number of items displayed on the X-axis of the dashboard graphs"
+msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
+
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
 

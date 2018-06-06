@@ -114,11 +114,10 @@ class DashboardXhrConsumption(TemplateView):
 
 class DashboardXhrGraphs(View):
     """ XHR view for fetching all dashboard data. """
-    MAX_ITEMS = 30
-
     def get(self, request):
         data = {}
         data['capabilities'] = dsmr_backend.services.get_capabilities()
+        frontend_settings = FrontendSettings.get_solo()
 
         form = DashboardGraphForm(request.GET)
 
@@ -134,12 +133,12 @@ class DashboardXhrGraphs(View):
 
         # Apply any offset requested by the user.
         electricity_offset = form.cleaned_data.get('electricity_offset')
-        electricity = electricity[electricity_offset:electricity_offset + self.MAX_ITEMS]
+        electricity = electricity[electricity_offset:electricity_offset + frontend_settings.dashboard_graph_width]
 
         gas_offset = form.cleaned_data.get('gas_offset')
-        gas = gas[gas_offset:gas_offset + self.MAX_ITEMS]
+        gas = gas[gas_offset:gas_offset + frontend_settings.dashboard_graph_width]
 
-        temperature = temperature[:self.MAX_ITEMS]
+        temperature = temperature[:frontend_settings.dashboard_graph_width]
 
         # Reverse all sets gain.
         electricity = electricity[::-1]
