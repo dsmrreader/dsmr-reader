@@ -81,7 +81,7 @@ def export():
     if status_settings.processing_delay:
         data.update({'delay': status_settings.processing_delay})
 
-    print(' - PVOutput | Uploading data @ {}'.format(data['t']))
+    print(' - PVOutput | Uploading data @ {}'.format(data))
     response = requests.post(
         PVOutputAddStatusSettings.API_URL,
         headers={
