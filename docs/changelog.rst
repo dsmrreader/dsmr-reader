@@ -24,6 +24,7 @@ v1.19.0 - 2018-06-xx
 **Tickets resolved in this release:**
 
 - [`#482 <https://github.com/dennissiemensma/dsmr-reader/issues/482>`_] Aantal items op X-as in dashboardgrafiek variabel maken
+- [`#390 <https://github.com/dennissiemensma/dsmr-reader/issues/390>`_] Gas- en elektriciteitsverbruik vanaf start energie contract
 
 
 

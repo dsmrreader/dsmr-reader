@@ -11,6 +11,7 @@ from dsmr_frontend.views.compare import Compare
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status, XhrUpdateChecker
 from dsmr_frontend.views.generic import DocsRedirect, FeedbackRedirect
+from dsmr_frontend.views.energy_contracts import EnergyContracts
 
 
 app_name = 'frontend'
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'^archive/xhr/graphs$', ArchiveXhrGraphs.as_view(), name='archive-xhr-graphs'),
     url(r'^statistics$', Statistics.as_view(), name='statistics'),
     url(r'^statistics/xhr/data$', StatisticsXhrData.as_view(), name='statistics-xhr-data'),
+    url(r'^energy-contracts$', EnergyContracts.as_view(), name='energy-contracts'),
     url(r'^trends$', cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()), name='trends'),
     url(r'^compare$', Compare.as_view(), name='compare'),
 

@@ -330,3 +330,29 @@ def clear_consumption():
     """ Clears ALL consumption data ever generated. """
     ElectricityConsumption.objects.all().delete()
     GasConsumption.objects.all().delete()
+
+
+def summarize_energy_contracts():
+    """ Returns a summery of all energy contracts and some statistics along them. """
+    import dsmr_stats.services  # Prevents circular import.
+
+    data = []
+
+    for current in EnergySupplierPrice.objects.all().order_by('-start'):
+        summary = dsmr_stats.services.range_statistics(start=current.start, end=current.end or timezone.now().date())
+
+        data.append({
+            'description': current.description,
+            'start': current.start,
+            'end': current.end,
+            'summary': summary,
+            'prices': {
+                'electricity_delivered_1_price': current.electricity_delivered_1_price,
+                'electricity_delivered_2_price': current.electricity_delivered_2_price,
+                'gas_price': current.gas_price,
+                'electricity_returned_1_price': current.electricity_returned_1_price,
+                'electricity_returned_2_price': current.electricity_returned_2_price,
+            }
+        })
+
+    return data

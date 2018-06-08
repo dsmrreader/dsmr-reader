@@ -6,7 +6,7 @@
         "gas_price": "0.58685",
         "end": "2016-01-25",
         "electricity_delivered_2_price": "0.40123",
-        "description": "Nederlandse Energie Maatschappij"
+        "description": "Fake Energy Company"
     },
     "model": "dsmr_consumption.energysupplierprice",
     "pk": 1

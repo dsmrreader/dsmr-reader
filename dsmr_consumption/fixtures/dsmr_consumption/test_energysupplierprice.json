@@ -3,7 +3,7 @@
     "pk": 1,
     "fields": {
         "start": "2015-01-01",
-        "end": null,
+        "end": "2018-01-01",
         "description": "Test",
         "electricity_delivered_1_price": "1.00000",
         "electricity_delivered_2_price": "2.00000",

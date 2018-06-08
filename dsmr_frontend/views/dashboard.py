@@ -27,13 +27,11 @@ class Dashboard(TemplateView):
     template_name = 'dsmr_frontend/dashboard.html'
 
     def get_context_data(self, **kwargs):
-        frontend_settings = FrontendSettings.get_solo()
-        weather_settings = WeatherSettings.get_solo()
         context_data = super(Dashboard, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
-        context_data['frontend_settings'] = frontend_settings
-        context_data['track_temperature'] = weather_settings.track
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
+        context_data['track_temperature'] = WeatherSettings.get_solo().track
         context_data['notifications'] = Notification.objects.unread()
 
         today = timezone.localtime(timezone.now()).date()
