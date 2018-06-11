@@ -3,6 +3,7 @@ import requests
 
 from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings, PVOutputAPISettings
 from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_pvoutput.signals import pvoutput_upload
 import dsmr_backend.services
 
 
@@ -82,6 +83,8 @@ def export():
         data.update({'delay': status_settings.processing_delay})
 
     print(' - PVOutput | Uploading data @ {}'.format(data))
+    pvoutput_upload.send_robust(None, data=data)
+
     response = requests.post(
         PVOutputAddStatusSettings.API_URL,
         headers={

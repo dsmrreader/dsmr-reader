@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'dsmr_notification.apps.AppConfig',
     'dsmr_mqtt.apps.AppConfig',
     'dsmr_pvoutput.apps.AppConfig',
+    'dsmr_plugins.apps.AppConfig',
 )
 
 MIDDLEWARE = (
@@ -216,3 +217,6 @@ DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60
 
 # The cooldown period until the next status notification will be sent.
 DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
+
+# Plugins.
+DSMRREADER_PLUGINS = []
