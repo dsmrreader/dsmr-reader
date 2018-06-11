@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -10,9 +9,6 @@ from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_frontend.forms import DashboardGraphForm, DashboardNotificationReadForm
-from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
@@ -42,50 +38,10 @@ class Dashboard(TemplateView):
 class DashboardXhrHeader(View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
-        data = {}
-
-        try:
-            latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
-        except IndexError:
-            # Don't even bother when no data available.
-            return HttpResponse(json.dumps(data), content_type='application/json')
-
-        latest_timestamp = latest_reading.timestamp
-
-        # In case the smart meter is running a clock in the future.
-        if latest_timestamp > timezone.now():
-            latest_timestamp = timezone.now()
-
-        data['timestamp'] = naturaltime(latest_timestamp)
-        data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
-        data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
-
-        try:
-            # This WILL fail when we either have no prices at all or conflicting ranges.
-            prices = EnergySupplierPrice.objects.by_date(target_date=timezone.now().date())
-        except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
-            return HttpResponse(json.dumps(data), content_type='application/json')
-
-        # We need to current tariff to get the right price.
-        tariff = MeterStatistics.get_solo().electricity_tariff
-        currently_delivered = latest_reading.electricity_currently_delivered
-        cost_per_hour = None
-
-        tariff_map = {
-            1: prices.electricity_delivered_1_price,
-            2: prices.electricity_delivered_2_price,
-        }
-
-        try:
-            cost_per_hour = currently_delivered * tariff_map[tariff]
-        except KeyError:
-            pass
-        else:
-            data['latest_electricity_cost'] = formats.number_format(
-                dsmr_consumption.services.round_decimal(cost_per_hour)
-            )
-
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return HttpResponse(
+            json.dumps(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=True)),
+            content_type='application/json'
+        )
 
 
 class DashboardXhrConsumption(TemplateView):

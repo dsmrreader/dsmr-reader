@@ -3,10 +3,12 @@ from unittest import mock
 from django.utils import timezone
 
 from dsmr_api.tests.v2 import APIv2TestCase
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_datalogger.models.statistics import MeterStatistics
 
 
 class TestToday(APIv2TestCase):
-    fixtures = ['dsmr_api/test_electricity_consumption.json', 'dsmr_api/test_electricity_consumption.json']
+    fixtures = ['dsmr_api/test_electricity_consumption.json']
 
     @mock.patch('django.utils.timezone.now')
     def test_get(self, now_mock):
@@ -36,6 +38,35 @@ class TestTodayWithGas(TestToday):
         'dsmr_api/test_electricity_consumption.json',
         'dsmr_api/test_gas_consumption.json'
     ]
+
+
+class ElectricityLive(APIv2TestCase):
+    fixtures = ['dsmr_api/test_dsmrreading.json']
+
+    @mock.patch('django.utils.timezone.now')
+    def test_get(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 7, 2))
+
+        # Without prices.
+        result = self._request('electricity-live')
+        self.assertEqual(result['timestamp'], '2016-07-01T20:00:00Z')
+        self.assertEqual(result['currently_returned'], 123)
+        self.assertEqual(result['currently_delivered'], 1123)
+
+        # Now with prices.
+        EnergySupplierPrice.objects.create(
+            start=timezone.now().date(),
+            end=(timezone.now() + timezone.timedelta(hours=24)).date(),
+            electricity_delivered_1_price=0.010,
+            electricity_delivered_2_price=0.020,
+        )
+        MeterStatistics.objects.update(electricity_tariff=1)
+
+        result = self._request('electricity-live')
+        self.assertEqual(result['timestamp'], '2016-07-01T20:00:00Z')
+        self.assertEqual(result['currently_returned'], 123)
+        self.assertEqual(result['currently_delivered'], 1123)
+        self.assertEqual(result['cost_per_hour'], '0.02')
 
 
 class TestElectricity(APIv2TestCase):

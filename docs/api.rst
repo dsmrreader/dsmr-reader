@@ -637,18 +637,48 @@ Example
         "total_cost": 0.9,
     }
 
-
-----
-    
-    
-``GET`` - ``statistics/hour``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Retrieves any **aggregated hourly statistics**. Please note that these are generated a few hours **after midnight**.
-
     
 ----
     
 
+``GET`` - ``consumption/electricity-live``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the live electricity consumption, containing the same data as the Dashboard header.
+
+
+URI
+~~~
+Full path: ``/api/v2/consumption/electricity-live``
+
+
+Parameters
+~~~~~~~~~~
+None.
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Note**: ``cost_per_hour`` is only available when you've set energy prices.
+
+**Data structure returned**::
+
+    {
+        "timestamp": "2016-07-01T20:00:00Z",
+        "currently_returned": 0,
+        "currently_delivered":1123,
+        "cost_per_hour": 0.02,
+    }
+
+
+----
+    
+    
 ``GET`` - ``statistics/day``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Retrieves any **aggregated day statistics**. Please note that these are generated a few hours **after midnight**.

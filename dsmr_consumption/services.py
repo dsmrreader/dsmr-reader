@@ -2,6 +2,7 @@ from datetime import time
 from decimal import Decimal, ROUND_UP
 import pytz
 
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.db.models import Avg, Min, Max, Count
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
@@ -260,6 +261,56 @@ def day_consumption(day):
     consumption['average_temperature'] = round_decimal(consumption['average_temperature'])
 
     return consumption
+
+
+def live_electricity_consumption(use_naturaltime=True):
+    """ Returns the current latest/live consumption. """
+    data = {}
+
+    try:
+        latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
+    except IndexError:
+        # Don't even bother when no data available.
+        return data
+
+    latest_timestamp = latest_reading.timestamp
+
+    # In case the smart meter is running a clock in the future.
+    if latest_timestamp > timezone.now():
+        latest_timestamp = timezone.now()
+
+    data['timestamp'] = latest_timestamp
+    data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
+    data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
+
+    if use_naturaltime:
+        data['timestamp'] = naturaltime(data['timestamp'])
+
+    try:
+        # This WILL fail when we either have no prices at all or conflicting ranges.
+        prices = EnergySupplierPrice.objects.by_date(target_date=timezone.now().date())
+    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
+        return data
+
+    # We need to current tariff to get the right price.
+    tariff = MeterStatistics.get_solo().electricity_tariff
+    cost_per_hour = None
+
+    tariff_map = {
+        1: prices.electricity_delivered_1_price,
+        2: prices.electricity_delivered_2_price,
+    }
+
+    try:
+        cost_per_hour = latest_reading.electricity_currently_delivered * tariff_map[tariff]
+    except KeyError:
+        pass
+    else:
+        data['cost_per_hour'] = formats.number_format(
+            round_decimal(cost_per_hour)
+        )
+
+    return data
 
 
 def round_decimal(decimal_price):
