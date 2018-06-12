@@ -56,6 +56,11 @@ class TodayConsumptionView(APIView):
         return Response(day_totals)
 
 
+class ElectricityLiveView(APIView):
+    def get(self, request):
+        return Response(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=False))
+
+
 class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     FIELD = 'read_at'
     queryset = ElectricityConsumption.objects.all()

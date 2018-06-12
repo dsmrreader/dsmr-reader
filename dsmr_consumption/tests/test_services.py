@@ -10,10 +10,15 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 
 
 class TestServices(InterceptStdoutMixin, TestCase):
-    fixtures = ['dsmr_consumption/test_dsmrreading.json', 'dsmr_consumption/test_energysupplierprice.json']
+    fixtures = [
+        'dsmr_consumption/test_dsmrreading.json',
+        'dsmr_consumption/test_energysupplierprice.json',
+        'dsmr_consumption/test_statistics.json',
+    ]
     support_gas_readings = None
     support_prices = None
 
@@ -341,6 +346,33 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(GasConsumption.objects.exists())
 
+    @mock.patch('django.utils.timezone.now')
+    def test_summarize_energy_contracts(self, now_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2017, 1, 2)
+        )
+
+        # Fetch inside our expected range.
+        energy_contracts = dsmr_consumption.services.summarize_energy_contracts()
+
+        if not EnergySupplierPrice.objects.exists():
+            return self.assertEqual(len(energy_contracts), 0)
+
+        summary = energy_contracts[0]['summary']
+
+        self.assertEqual(summary['electricity1'], Decimal('2.732'))
+        self.assertEqual(summary['electricity1_cost'], Decimal('0.57'))
+        self.assertEqual(summary['electricity1_returned'], Decimal('0.000'))
+        self.assertEqual(summary['electricity2'], Decimal('0.549'))
+        self.assertEqual(summary['electricity2_cost'], Decimal('0.12'))
+        self.assertEqual(summary['electricity2_returned'], Decimal('0.000'))
+        self.assertEqual(summary['electricity_merged'], Decimal('3.281'))
+        self.assertEqual(summary['electricity_cost_merged'], Decimal('0.69'))
+        self.assertEqual(summary['electricity_returned_merged'], Decimal('0.000'))
+        self.assertEqual(summary['gas'], Decimal('6.116'))
+        self.assertEqual(summary['gas_cost'], Decimal('3.60'))
+        self.assertEqual(summary['total_cost'], Decimal('4.29'))
+
 
 class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
     """ Biggest difference is the interval of gas readings. """
@@ -379,7 +411,11 @@ class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
 
 
 class TestServicesWithoutGas(TestServices):
-    fixtures = ['dsmr_consumption/test_dsmrreading_without_gas.json', 'dsmr_consumption/test_energysupplierprice.json']
+    fixtures = [
+        'dsmr_consumption/test_dsmrreading_without_gas.json',
+        'dsmr_consumption/test_energysupplierprice.json',
+        'dsmr_consumption/test_statistics.json',
+    ]
 
     def setUp(self):
         super(TestServicesWithoutGas, self).setUp()
@@ -387,7 +423,7 @@ class TestServicesWithoutGas(TestServices):
 
 
 class TestServicesWithoutPrices(TestServices):
-    fixtures = ['dsmr_consumption/test_dsmrreading.json']
+    fixtures = ['dsmr_consumption/test_dsmrreading.json', 'dsmr_consumption/test_statistics.json']
 
     def setUp(self):
         super(TestServicesWithoutPrices, self).setUp()

@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -10,9 +9,6 @@ from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_frontend.forms import DashboardGraphForm, DashboardNotificationReadForm
-from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
@@ -27,13 +23,11 @@ class Dashboard(TemplateView):
     template_name = 'dsmr_frontend/dashboard.html'
 
     def get_context_data(self, **kwargs):
-        frontend_settings = FrontendSettings.get_solo()
-        weather_settings = WeatherSettings.get_solo()
         context_data = super(Dashboard, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
-        context_data['frontend_settings'] = frontend_settings
-        context_data['track_temperature'] = weather_settings.track
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
+        context_data['track_temperature'] = WeatherSettings.get_solo().track
         context_data['notifications'] = Notification.objects.unread()
 
         today = timezone.localtime(timezone.now()).date()
@@ -44,50 +38,10 @@ class Dashboard(TemplateView):
 class DashboardXhrHeader(View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
-        data = {}
-
-        try:
-            latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
-        except IndexError:
-            # Don't even bother when no data available.
-            return HttpResponse(json.dumps(data), content_type='application/json')
-
-        latest_timestamp = latest_reading.timestamp
-
-        # In case the smart meter is running a clock in the future.
-        if latest_timestamp > timezone.now():
-            latest_timestamp = timezone.now()
-
-        data['timestamp'] = naturaltime(latest_timestamp)
-        data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
-        data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
-
-        try:
-            # This WILL fail when we either have no prices at all or conflicting ranges.
-            prices = EnergySupplierPrice.objects.by_date(target_date=timezone.now().date())
-        except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
-            return HttpResponse(json.dumps(data), content_type='application/json')
-
-        # We need to current tariff to get the right price.
-        tariff = MeterStatistics.get_solo().electricity_tariff
-        currently_delivered = latest_reading.electricity_currently_delivered
-        cost_per_hour = None
-
-        tariff_map = {
-            1: prices.electricity_delivered_1_price,
-            2: prices.electricity_delivered_2_price,
-        }
-
-        try:
-            cost_per_hour = currently_delivered * tariff_map[tariff]
-        except KeyError:
-            pass
-        else:
-            data['latest_electricity_cost'] = formats.number_format(
-                dsmr_consumption.services.round_decimal(cost_per_hour)
-            )
-
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return HttpResponse(
+            json.dumps(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=True)),
+            content_type='application/json'
+        )
 
 
 class DashboardXhrConsumption(TemplateView):
@@ -114,11 +68,10 @@ class DashboardXhrConsumption(TemplateView):
 
 class DashboardXhrGraphs(View):
     """ XHR view for fetching all dashboard data. """
-    MAX_ITEMS = 30
-
     def get(self, request):
         data = {}
         data['capabilities'] = dsmr_backend.services.get_capabilities()
+        frontend_settings = FrontendSettings.get_solo()
 
         form = DashboardGraphForm(request.GET)
 
@@ -134,12 +87,12 @@ class DashboardXhrGraphs(View):
 
         # Apply any offset requested by the user.
         electricity_offset = form.cleaned_data.get('electricity_offset')
-        electricity = electricity[electricity_offset:electricity_offset + self.MAX_ITEMS]
+        electricity = electricity[electricity_offset:electricity_offset + frontend_settings.dashboard_graph_width]
 
         gas_offset = form.cleaned_data.get('gas_offset')
-        gas = gas[gas_offset:gas_offset + self.MAX_ITEMS]
+        gas = gas[gas_offset:gas_offset + frontend_settings.dashboard_graph_width]
 
-        temperature = temperature[:self.MAX_ITEMS]
+        temperature = temperature[:frontend_settings.dashboard_graph_width]
 
         # Reverse all sets gain.
         electricity = electricity[::-1]

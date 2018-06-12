@@ -77,9 +77,9 @@ class TestViews(TestCase):
                 # Costs only makes sense when set.
                 if EnergySupplierPrice.objects.exists() and MeterStatistics.objects.exists() \
                         and current_tariff is not None:
-                    self.assertIn('latest_electricity_cost', json_response)
+                    self.assertIn('cost_per_hour', json_response)
                     self.assertEqual(
-                        json_response['latest_electricity_cost'], '0.23' if current_tariff == 1 else '0.46'
+                        json_response['cost_per_hour'], '0.23' if current_tariff == 1 else '0.46'
                     )
 
     def test_dashboard_xhr_header_future(self):

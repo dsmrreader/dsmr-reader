@@ -1,5 +1,6 @@
-from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import ugettext_lazy as _
+from django.db import models
 from solo.models import SingletonModel
 from colorfield.fields import ColorField
 
@@ -56,6 +57,11 @@ class FrontendSettings(SingletonModel):
         default='#0073B7',
         verbose_name=_('Temperature color'),
         help_text=_("Graph color for temperatures read")
+    )
+    dashboard_graph_width = models.IntegerField(
+        default=30,
+        validators=[MinValueValidator(30), MaxValueValidator(120)],
+        help_text=_("The number of items displayed on the X-axis of the dashboard graphs")
     )
 
     def __str__(self):

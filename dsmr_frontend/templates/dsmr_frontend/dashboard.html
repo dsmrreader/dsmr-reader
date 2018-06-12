@@ -29,7 +29,7 @@
 	    <a href="" onclick="return false;" style="cursor: default;">
 	        <span class="badge bg-red"><i class="fa fa-bolt"></i> 
 		        &nbsp; <span id="latest_electricity"><i class="fa fa-refresh fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}
-		        &nbsp; <small id="latest_electricity_cost"></small>
+		        &nbsp; <small id="cost_per_hour"></small>
 	        </span>
 	    </a>
 	</li>
@@ -373,9 +373,9 @@
                     $("#latest_electricity").html(response.currently_delivered);
                     $("#latest_electricity_returned").html(response.currently_returned);
                     
-                    if (response.latest_electricity_cost)
+                    if (response.cost_per_hour)
                     {
-	                    $("#latest_electricity_cost").html("&euro; " + response.latest_electricity_cost + " {% trans 'per hour' %}");
+	                    $("#cost_per_hour").html("&euro; " + response.cost_per_hour + " {% trans 'per hour' %}");
                     }
                 });
             }

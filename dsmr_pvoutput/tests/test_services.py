@@ -131,7 +131,8 @@ class TestServices(TestCase):
     @mock.patch('requests.post')
     @mock.patch('dsmr_pvoutput.services.should_export')
     @mock.patch('django.utils.timezone.now')
-    def test_export_okay(self, now_mock, should_export_mock, requests_post_mock):
+    @mock.patch('dsmr_pvoutput.signals.pvoutput_upload.send_robust')
+    def test_export_okay(self, send_robust_mock, now_mock, should_export_mock, requests_post_mock):
         """ Test export() as designed. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
 
@@ -140,11 +141,13 @@ class TestServices(TestCase):
         self._apply_fake_settings()
 
         self.assertFalse(requests_post_mock.called)
+        self.assertFalse(send_robust_mock.called)
 
         dsmr_pvoutput.services.export()
 
         self.assertIsNotNone(PVOutputAddStatusSettings.get_solo().next_export)
         self.assertTrue(requests_post_mock.called)
+        self.assertTrue(send_robust_mock.called)
 
         # Check API parameters.
         api_settings = PVOutputAPISettings.get_solo()
@@ -165,12 +168,14 @@ class TestServices(TestCase):
 
         # With processing delay as well.
         requests_post_mock.reset_mock()
+        send_robust_mock.reset_mock()
         PVOutputAddStatusSettings.objects.update(processing_delay=5, next_export=None)
 
         dsmr_pvoutput.services.export()
 
         self.assertIsNotNone(PVOutputAddStatusSettings.get_solo().next_export)
         self.assertTrue(requests_post_mock.called)
+        self.assertTrue(send_robust_mock.called)
 
         api_settings = PVOutputAPISettings.get_solo()
         requests_post_mock.assert_called_once_with(

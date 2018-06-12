@@ -460,6 +460,9 @@ msgstr "Temperatuurkleur"
 msgid "Graph color for temperatures read"
 msgstr "Grafiekkleur voor temperatuurmetingen"
 
+msgid "The number of items displayed on the X-axis of the dashboard graphs"
+msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
+
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
 
@@ -510,6 +513,9 @@ msgstr "Trends"
 
 msgid "Statistics"
 msgstr "Statistieken"
+
+msgid "Energy contracts"
+msgstr "Energiecontracten"
 
 msgid "Compare"
 msgstr "Vergelijk"
@@ -666,6 +672,21 @@ msgstr "Fase L3"
 
 msgid "Temperature"
 msgstr "Temperatuur"
+
+msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
+msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
+
+msgid "Also, any electricity returned is not taken into account for the cost, the kWh is only displayed for your convenience."
+msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten, alleen de kWh wordt hier getoond."
+
+msgid "Show contract prices"
+msgstr "Toon contractprijzen"
+
+msgid "Electricity 1 returned price (low tariff)"
+msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 returned price (high tariff)"
+msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
 
 msgid "Select data type"
 msgstr "Selecteer gegevenstype"

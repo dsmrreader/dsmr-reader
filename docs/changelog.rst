@@ -18,6 +18,18 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.19.0 - 2018-06-12
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#390 <https://github.com/dennissiemensma/dsmr-reader/issues/390>`_] Gas- en elektriciteitsverbruik vanaf start energie contract
+- [`#482 <https://github.com/dennissiemensma/dsmr-reader/issues/482>`_] Aantal items op X-as in dashboardgrafiek variabel maken
+- [`#407 <https://github.com/dennissiemensma/dsmr-reader/issues/407>`_] Plugin System (More than one pvoutput account) 
+- [`#462 <https://github.com/dennissiemensma/dsmr-reader/issues/462>`_] Get live usage trough API
+
+
+
 v1.18.0 - 2018-06-05
 ^^^^^^^^^^^^^^^^^^^^
 
