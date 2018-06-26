@@ -789,3 +789,30 @@ All the :ref:`generic DSMRREADING examples <generic-examples-anchor>` apply here
     }
 
 
+----
+
+
+``GET`` - ``application/version``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns version of DSMR-reader you are running.
+
+
+URI
+~~~
+Full path: ``/api/v2/application/version``
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Data structure returned**::
+
+    {
+        "version": "1.20.0",
+    }
+

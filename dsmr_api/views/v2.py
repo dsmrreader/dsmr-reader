@@ -4,6 +4,7 @@ from rest_framework import mixins, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.utils import timezone
+from django.conf import settings
 
 from dsmr_consumption.serializers.consumption import ElectricityConsumptionSerializer, GasConsumptionSerializer
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -95,3 +96,10 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
     filter_class = HourStatisticsFilter
     ordering_fields = (FIELD, )
     ordering = FIELD
+
+
+class VersionView(APIView):
+    def get(self, request):
+        return Response({
+            'version': '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3]),
+        })
