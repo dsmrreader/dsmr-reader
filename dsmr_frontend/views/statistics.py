@@ -31,6 +31,7 @@ class Statistics(TemplateView):
 
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['meter_statistics'] = MeterStatistics.get_solo()
+        context_data['energy_prices'] = dsmr_consumption.services.current_energy_contract()
 
         return context_data
 
