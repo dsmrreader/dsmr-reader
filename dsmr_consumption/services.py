@@ -389,7 +389,6 @@ def current_energy_contract():
     data = []
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
-        summary = dsmr_stats.services.range_statistics(start=current.start, end=current.end or timezone.now().date())
         if current.start < timezone.now().date() and current.end >timezone.now().date():
 
             return {
