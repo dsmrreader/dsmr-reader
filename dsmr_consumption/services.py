@@ -389,8 +389,7 @@ def current_energy_contract():
     data = []
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
-        if current.start < timezone.now().date() and current.end >timezone.now().date():
-
+        if current.start < timezone.now().date() and current.end > timezone.now().date():
             return {
                 'description': current.description,
                 'start': current.start,
