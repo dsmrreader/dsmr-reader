@@ -385,7 +385,6 @@ def clear_consumption():
 
 def current_energy_contract():
     """Return the current energe contract. """
-    data = []
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
         if current.start < timezone.now().date() and current.end > timezone.now().date():
