@@ -38,6 +38,7 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('capabilities', response.context)
+        self.assertIn('energy_prices', response.context)
 
         if DsmrReading.objects.exists():
             self.assertIn('latest_reading', response.context)

@@ -24,6 +24,7 @@ v1.20.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#484 <https://github.com/dennissiemensma/dsmr-reader/issues/484>`_] API call om huidige versie terug te geven
+- [`#485 <https://github.com/dennissiemensma/dsmr-reader/issues/485>`_] Retrieve the current energycontract for the statistics page - helmo
 
 
 
