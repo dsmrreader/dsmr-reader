@@ -383,6 +383,23 @@ def clear_consumption():
     GasConsumption.objects.all().delete()
 
 
+def current_energy_contract():
+    """Return the current energe contract. """
+
+    for current in EnergySupplierPrice.objects.all().order_by('-start'):
+        if current.start < timezone.now().date() and current.end > timezone.now().date():
+            return {
+                'description': current.description,
+                'start': current.start,
+                'end': current.end,
+                'electricity_delivered_1_price': current.electricity_delivered_1_price,
+                'electricity_delivered_2_price': current.electricity_delivered_2_price,
+                'gas_price': current.gas_price,
+                'electricity_returned_1_price': current.electricity_returned_1_price,
+                'electricity_returned_2_price': current.electricity_returned_2_price,
+            }
+
+
 def summarize_energy_contracts():
     """ Returns a summery of all energy contracts and some statistics along them. """
     import dsmr_stats.services  # Prevents circular import.
