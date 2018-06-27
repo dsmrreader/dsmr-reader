@@ -385,7 +385,6 @@ def clear_consumption():
 
 def current_energy_contract():
     """Return the current energe contract. """
-    import dsmr_stats.services  # Prevents circular import.
     data = []
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
