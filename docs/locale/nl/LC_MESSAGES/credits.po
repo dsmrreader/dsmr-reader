@@ -276,9 +276,7 @@ msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr ""
 
 #: ../../credits.rst:78
-msgid ""
-"`Director Responsive Admin <http://web-apps.ninja/director-free-"
-"responsive-admin-template/>`_"
+msgid "Director Responsive Admin template (website is offline)"
 msgstr ""
 
 #: ../../credits.rst:79
@@ -329,33 +327,29 @@ msgstr ""
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr ""
 
-#: ../../credits.rst:90
-msgid "`Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_"
-msgstr ""
-
-#: ../../credits.rst:94
+#: ../../credits.rst:93
 msgid "Misc"
 msgstr "Overig"
 
-#: ../../credits.rst:96
+#: ../../credits.rst:95
 msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 msgstr "Dutch Smart Meter reading specifications, data cables, examples and hints:"
 
-#: ../../credits.rst:98
+#: ../../credits.rst:97
 msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 msgstr ""
 
-#: ../../credits.rst:100
+#: ../../credits.rst:99
 msgid ""
 "`Joost van der Linde (smartmeterdashboard) "
 "<http://www.smartmeterdashboard.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:102
+#: ../../credits.rst:101
 msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
 msgstr ""
 
-#: ../../credits.rst:104
+#: ../../credits.rst:103
 msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 msgstr ""
 
@@ -366,5 +360,14 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "`raoulteeuwen <https://github.com/raoulteeuwen >`_"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "`Director Responsive Admin <http://web-"
+#~ "apps.ninja/director-free-responsive-admin-"
+#~ "template/>`_"
+#~ msgstr ""
+
+#~ msgid "`Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_"
 #~ msgstr ""
 

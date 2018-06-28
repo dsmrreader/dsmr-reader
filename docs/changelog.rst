@@ -26,6 +26,7 @@ v1.20.0 - 2018-xx-xx
 - [`#484 <https://github.com/dennissiemensma/dsmr-reader/issues/484>`_] API call om huidige versie terug te geven
 - [`#291 <https://github.com/dennissiemensma/dsmr-reader/issues/291>`_] API option to get status info
 - [`#485 <https://github.com/dennissiemensma/dsmr-reader/issues/485>`_] Retrieve the current energycontract for the statistics page - helmo
+- [`#486 <https://github.com/dennissiemensma/dsmr-reader/issues/486>`_] Plugin documentation
 
 
 
