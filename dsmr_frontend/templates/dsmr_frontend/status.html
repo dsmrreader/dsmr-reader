@@ -145,7 +145,7 @@
                     <small>{% blocktrans %}For dashboard display.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
-                    {% if status.electricity.minutes_since %}
+                    {% if status.electricity.latest %}
                         {% if status.electricity.minutes_since == None or status.electricity.minutes_since > 2 %}
 	                    <div class="alert alert-danger" role="alert">
 	                        <span class="fa fa-frown-o fa-2x"></span>
