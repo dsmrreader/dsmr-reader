@@ -15,6 +15,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_api.filters import DsmrReadingFilter, DayStatisticsFilter, ElectricityConsumptionFilter,\
     GasConsumptionFilter, HourStatisticsFilter
 import dsmr_consumption.services
+import dsmr_backend.services
 
 
 class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -103,3 +104,8 @@ class VersionView(APIView):
         return Response({
             'version': '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3]),
         })
+
+
+class StatusView(APIView):
+    def get(self, request):
+        return Response(dsmr_backend.services.status_info())

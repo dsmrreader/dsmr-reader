@@ -794,7 +794,7 @@ All the :ref:`generic DSMRREADING examples <generic-examples-anchor>` apply here
 
 ``GET`` - ``application/version``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Returns version of DSMR-reader you are running.
+Returns the version of DSMR-reader you are running.
 
 
 URI
@@ -816,3 +816,60 @@ Example
         "version": "1.20.0",
     }
 
+
+
+
+----
+
+
+``GET`` - ``application/status``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the status of DSMR-reader, containing the same data as displayed on the Status page.
+
+
+URI
+~~~
+Full path: ``/api/v2/application/status``
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Data structure returned**::
+
+    {
+        "readings": {
+            "latest": "2018-06-28T03:58:54Z",
+            "unprocessed": {
+                "count": 0,
+                "seconds_since": null
+            },
+            "seconds_since": 47870
+        },
+        "gas": {
+            "latest": "2018-06-28T02:00:00Z",
+            "hours_since": 15
+        },
+        "capabilities": {
+            "gas": true,
+            "any": true,
+            "weather": true,
+            "electricity_returned": false,
+            "electricity": true,
+            "multi_phases": true
+        },
+        "electricity": {
+            "latest": "2018-06-28T03:59:00Z",
+            "minutes_since": 798
+        },
+        "statistics": {
+            "latest": "2018-06-27",
+            "days_since": 1
+        }
+    }
+    

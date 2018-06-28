@@ -27,6 +27,10 @@ msgstr ""
 "De applicatie ondersteunt het versturen van MQTT-berichten naar je eigen "
 "broker toe."
 
+#: ../../mqtt.rst:7
+msgid "Contents"
+msgstr ""
+
 #: ../../mqtt.rst:10
 msgid "Events"
 msgstr "Events"

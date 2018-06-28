@@ -40,33 +40,38 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertIn('capabilities', response.context)
-        self.assertIn('unprocessed_readings', response.context)
-        self.assertIn('unprocessed_reading_span', response.context)
+        self.assertIn('status', response.context)
+        status_context = response.context['status']
+
+        self.assertIn('readings', status_context)
+        self.assertIn('electricity', status_context)
+        self.assertIn('gas', status_context)
+        self.assertIn('statistics', status_context)
 
         if self.support_data:
-            self.assertIn('latest_day_statistics', response.context)
-            self.assertIn('days_since_latest_day_statistics', response.context)
-            self.assertIsNone(response.context['unprocessed_reading_span'])
+            self.assertIn('latest', status_context['statistics'])
+            self.assertIn('days_since', status_context['statistics'])
+            self.assertIsNone(status_context['readings']['unprocessed']['seconds_since'])
+            self.assertEqual(status_context['readings']['unprocessed']['count'], 0)
 
             # Check unprocessed count as well.
             DsmrReading.objects.update(processed=False)
             response = self.client.get(
                 reverse('{}:status'.format(self.namespace))
             )
+            status_context = response.context['status']
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(response.context['unprocessed_readings'], 3)
-            self.assertEqual(response.context['unprocessed_reading_span'], 11953)
+            self.assertEqual(status_context['readings']['unprocessed']['count'], 3)
+            self.assertEqual(status_context['readings']['unprocessed']['seconds_since'], 4418353)
 
-        if 'latest_reading' in response.context:
-            self.assertIn('delta_since_latest_reading', response.context)
+        if 'latest' in status_context['readings']:
+            self.assertIn('seconds_since', status_context['readings'])
 
-        if 'latest_ec' in response.context:
-            self.assertIn('latest_ec', response.context)
-            self.assertIn('minutes_since_latest_ec', response.context)
+        if 'latest' in status_context['electricity']:
+            self.assertIn('minutes_since', status_context['electricity'])
 
-        if 'latest_gc' in response.context:
-            self.assertIn('latest_gc', response.context)
-            self.assertIn('hours_since_latest_gc', response.context)
+        if 'latest' in status_context['gas']:
+            self.assertIn('hours_since', status_context['gas'])
 
     @mock.patch('django.utils.timezone.now')
     def test_status_back_to_the_future(self, now_mock):
@@ -87,8 +92,9 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # These should be reset for convenience.
-        self.assertEqual(response.context['latest_reading'].timestamp, timezone.now())
-        self.assertEqual(response.context['delta_since_latest_reading'], 0)
+        status_context = response.context['status']
+        self.assertEqual(status_context['readings']['latest'], timezone.now())
+        self.assertEqual(status_context['readings']['seconds_since'], 0)
 
     @mock.patch('dsmr_backend.services.is_latest_version')
     def test_status_xhr_update_checker(self, is_latest_version_mock):
