@@ -75,7 +75,7 @@ Please note and respect their licences as well, if any. Credits to the following
 - `MySQL <https://www.mysql.com/>`_
 - `MariaDB <https://mariadb.org/>`_
 - `PostgreSQL <http://www.postgresql.org/>`_
-- `Director Responsive Admin <http://web-apps.ninja/director-free-responsive-admin-template/>`_
+- Director Responsive Admin template (website is offline) 
 - Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_
 - `Real Favicon Generator <http://realfavicongenerator.net>`_
 - `Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_
@@ -87,7 +87,6 @@ Please note and respect their licences as well, if any. Credits to the following
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
 - `Buienradar <http://www.buienradar.nl>`_
 - `Django REST Framework <http://www.django-rest-framework.org>`_
-- `Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_
 
 
 Misc
