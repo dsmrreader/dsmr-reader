@@ -17,6 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 1.8.7.1\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: ../../retention.rst:2
 msgid "Retention"
@@ -130,7 +132,7 @@ msgstr "Dit data type is afkomstig van de gasmetergegevens uit de DSMR-metingen.
 
 #: ../../retention.rst:53
 msgid "Data kept/unaffected"
-msgstr "Uitgesloten gegevens"
+msgstr "Buitengesloten gegevens"
 
 #: ../../retention.rst:54
 msgid ""
