@@ -18,7 +18,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.20.0 - 2018-xx-xx
+v1.20.0 - 2018-07-04
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
@@ -27,6 +27,7 @@ v1.20.0 - 2018-xx-xx
 - [`#291 <https://github.com/dennissiemensma/dsmr-reader/issues/291>`_] API option to get status info
 - [`#485 <https://github.com/dennissiemensma/dsmr-reader/issues/485>`_] Retrieve the current energycontract for the statistics page - helmo
 - [`#486 <https://github.com/dennissiemensma/dsmr-reader/issues/486>`_] Plugin documentation
+- [`#487 <https://github.com/dennissiemensma/dsmr-reader/issues/487>`_] Requirements update (July 2018)
 
 
 
