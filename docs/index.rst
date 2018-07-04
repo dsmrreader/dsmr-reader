@@ -12,6 +12,7 @@ DSMR Reader's documentation
    settings
    retention
    api
+   plugins
    mqtt
    mindergas
    pvoutput

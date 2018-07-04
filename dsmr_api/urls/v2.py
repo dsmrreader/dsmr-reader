@@ -32,8 +32,14 @@ statistics_url_patterns = [
     }), name='hour-statistics'),
 ]
 
+application_url_patterns = [
+    url(r'^version$', views.VersionView.as_view(), name='application-version'),
+    url(r'^status$', views.StatusView.as_view(), name='application-status'),
+]
+
 urlpatterns = [
     url(r'^datalogger/', include(datalogger_url_patterns)),
     url(r'^consumption/', include(consumption_url_patterns)),
     url(r'^statistics/', include(statistics_url_patterns)),
+    url(r'^application/', include(application_url_patterns)),
 ]

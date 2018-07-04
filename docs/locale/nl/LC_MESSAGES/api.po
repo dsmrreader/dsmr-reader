@@ -51,7 +51,8 @@ msgstr ""
 "in het configuratiescherm of beheerderpaneel."
 
 #: ../../api.rst:18 ../../api.rst:79 ../../api.rst:332 ../../api.rst:623
-#: ../../api.rst:665 ../../api.rst:709 ../../api.rst:769
+#: ../../api.rst:665 ../../api.rst:709 ../../api.rst:769 ../../api.rst:811
+#: ../../api.rst:841
 msgid "Example"
 msgstr "Voorbeeld"
 
@@ -116,7 +117,8 @@ msgstr ""
 "``HTTP 200``, wanneer succesvol."
 
 #: ../../api.rst:63 ../../api.rst:301 ../../api.rst:406 ../../api.rst:608
-#: ../../api.rst:650 ../../api.rst:688 ../../api.rst:748
+#: ../../api.rst:650 ../../api.rst:688 ../../api.rst:748 ../../api.rst:801
+#: ../../api.rst:831
 msgid "URI"
 msgstr "URI"
 
@@ -138,7 +140,8 @@ msgstr ""
 "regeleindes ``\\n`` en 'carriage returns' ``\\r``."
 
 #: ../../api.rst:74 ../../api.rst:327 ../../api.rst:422 ../../api.rst:618
-#: ../../api.rst:660 ../../api.rst:704 ../../api.rst:764
+#: ../../api.rst:660 ../../api.rst:704 ../../api.rst:764 ../../api.rst:806
+#: ../../api.rst:836
 msgid "Response"
 msgstr "Respons (van de server)"
 
@@ -446,7 +449,7 @@ msgstr ""
 "Laat deze parameter weg voor de standaardwaarde (**25**)."
 
 #: ../../api.rst:423 ../../api.rst:619 ../../api.rst:661 ../../api.rst:705
-#: ../../api.rst:765
+#: ../../api.rst:765 ../../api.rst:807 ../../api.rst:837
 msgid ""
 "``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other "
 "status code on failure."
@@ -519,6 +522,7 @@ msgid "None."
 msgstr "Geen."
 
 #: ../../api.rst:625 ../../api.rst:669 ../../api.rst:712 ../../api.rst:772
+#: ../../api.rst:813 ../../api.rst:843
 msgid "**Data structure returned**::"
 msgstr "**Datastructuur**::"
 
@@ -633,3 +637,31 @@ msgstr ""
 "``ordering`` (*string*) - Gebruik ``-hour_start`` om **aflopend** te sorteren. "
 "Laat de parameter weg of gebruik ``hour_start`` om **oplopend** te sorteren "
 "(standaard)."
+
+#: ../../api.rst:796
+msgid "``GET`` - ``application/version``"
+msgstr "``GET`` - ``application/version``"
+
+#: ../../api.rst:797
+msgid "Returns the version of DSMR-reader you are running."
+msgstr "Geeft terug welke versie van DSMR-reader je momenteel draait."
+
+#: ../../api.rst:802
+msgid "Full path: ``/api/v2/application/version``"
+msgstr "Volledig pad: ``/api/v2/application/version``"
+
+#: ../../api.rst:826
+msgid "``GET`` - ``application/status``"
+msgstr "``GET`` - ``application/status``"
+
+#: ../../api.rst:827
+msgid ""
+"Returns the status of DSMR-reader, containing the same data as displayed on "
+"the Status page."
+msgstr ""
+"Geeft de status van DSMR-reader terug, vergelijkbaar aan de gegevens die "
+"getoond worden op de Status-pagina."
+
+#: ../../api.rst:832
+msgid "Full path: ``/api/v2/application/status``"
+msgstr "Volledig pad: ``/api/v2/application/status``"

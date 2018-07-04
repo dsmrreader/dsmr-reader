@@ -130,7 +130,7 @@ msgstr "Dit data type is afkomstig van de gasmetergegevens uit de DSMR-metingen.
 
 #: ../../retention.rst:53
 msgid "Data kept/unaffected"
-msgstr "Uitgesloten gegevens"
+msgstr "Buitengesloten gegevens"
 
 #: ../../retention.rst:54
 msgid ""

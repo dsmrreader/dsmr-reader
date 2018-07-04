@@ -11,12 +11,13 @@ Special thanks for supplying code contributions
 Also many thanks to the contributions (reporting) of
 ----------------------------------------------------
 Listed in any order, sorted by name.
-
+ 
 - `allureGOT <https://github.com/allureGOT>`_
 - `balk77 <https://github.com/balk77>`_
 - `Baseje <https://github.com/Baseje>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
 - `Calimerorulez <https://github.com/Calimerorulez>`_
+- `Cyw00d <https://github.com/Cyw00d>`_
 - `dajappie <https://github.com/dajappie>`_
 - `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
 - `dbmnl <https://github.com/dbmnl>`_
@@ -54,12 +55,14 @@ Listed in any order, sorted by name.
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
 - `thommy101 <https://github.com/thommy101>`_
 - `TopdRob <https://github.com/TopdRob>`_
+- `tpjanssen <https://github.com/tpjanssen>`_
 - `trbs <https://github.com/trbs>`_
+- `ualex73 <https://github.com/ualex73>`_
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
- 
- 
+
+
 Software used
 -------------
 Please note and respect their licences as well, if any. Credits to the following software and projects:
@@ -72,7 +75,7 @@ Please note and respect their licences as well, if any. Credits to the following
 - `MySQL <https://www.mysql.com/>`_
 - `MariaDB <https://mariadb.org/>`_
 - `PostgreSQL <http://www.postgresql.org/>`_
-- `Director Responsive Admin <http://web-apps.ninja/director-free-responsive-admin-template/>`_
+- Director Responsive Admin template (website is offline) 
 - Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_
 - `Real Favicon Generator <http://realfavicongenerator.net>`_
 - `Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_
@@ -84,7 +87,6 @@ Please note and respect their licences as well, if any. Credits to the following
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
 - `Buienradar <http://www.buienradar.nl>`_
 - `Django REST Framework <http://www.django-rest-framework.org>`_
-- `Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_
 
 
 Misc

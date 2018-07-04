@@ -58,7 +58,7 @@
                     <i class="fa fa-plug"></i> &nbsp; {% trans "P1 DSMR telegrams" %} <br />
                 </header>
                 <div class="panel-body">
-                    {% if delta_since_latest_reading == None or delta_since_latest_reading > 90 %}
+                    {% if status.readings.seconds_since == None or status.readings.seconds_since > 90 %}
                     <div class="alert alert-danger" role="alert">
                         <span class="fa fa-frown-o fa-2x"></span> 
                         {% blocktrans %}It has been a while since the latest telegram reading.{% endblocktrans %}
@@ -69,7 +69,7 @@
                     {% endif %}
 
                         {% trans "Most recent reading" %}: 
-                        <strong>{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% else %}{% trans "No data." %}{% endif %}</strong>
+                        <strong>{% if status.readings.latest %}{{ status.readings.latest|naturaltime }}{% else %}{% trans "No data." %}{% endif %}</strong>
                     </div>
 
                     <div>
@@ -100,7 +100,7 @@
                     <i class="fa fa-cogs"></i> &nbsp; {% trans "Telegram processing" %} <br />
                 </header>
                 <div class="panel-body">
-                    {% if unprocessed_reading_span > 300 %}
+                    {% if status.readings.unprocessed.seconds_since > 300 %}
                     <div class="alert alert-danger" role="alert">
                         <span class="fa fa-frown-o fa-2x"></span> 
                         {% blocktrans %}There are too many unprocessed telegrams.{% endblocktrans %}
@@ -110,7 +110,7 @@
                         <span class="fa fa-smile-o fa-2x"></span> 
                     {% endif %}
 
-                    {% trans "Unprocessed telegrams" %}: <strong>{{ unprocessed_readings|default:'-' }}</strong>
+                    {% trans "Unprocessed telegrams" %}: <strong>{{ status.readings.unprocessed.count|default:'-' }}</strong>
                     </div>
                     
                     <div>
@@ -145,16 +145,16 @@
                     <small>{% blocktrans %}For dashboard display.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
-                    {% if latest_ec %}
-                        {% if minutes_since_latest_ec == None or minutes_since_latest_ec > 2 %}
+                    {% if status.electricity.latest %}
+                        {% if status.electricity.minutes_since == None or status.electricity.minutes_since > 2 %}
 	                    <div class="alert alert-danger" role="alert">
 	                        <span class="fa fa-frown-o fa-2x"></span>
-	                        {% trans "Data processing is lagging behind" %}: <strong>{{ latest_ec.read_at|naturaltime }}</strong>
+	                        {% trans "Data processing is lagging behind" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
                         </div>
                         {% else %}
 	                    <div class="alert alert-success" role="alert">
 	                        <span class="fa fa-check-square-o fa-2x"></span>
-	                        {% trans "Data processing is on schedule" %}: <strong>{{ latest_ec.read_at|naturaltime }}</strong>
+	                        {% trans "Data processing is on schedule" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
 	                    </div>
 	                    {% endif %}
                     {% else %}
@@ -181,16 +181,16 @@
                     <small>{% blocktrans %}For dashboard display.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
-                    {% if latest_gc %}
-                        {% if hours_since_latest_gc == None or hours_since_latest_gc > 3 %}
+                    {% if status.gas.latest %}
+                        {% if status.gas.hours_since == None or status.gas.hours_since > 3 %}
                         <div class="alert alert-danger" role="alert">
                             <span class="fa fa-frown-o fa-2x"></span>
-                            {% trans "Data processing is lagging behind" %}: <strong>{{ latest_gc.read_at|naturaltime }}</strong>
+                            {% trans "Data processing is lagging behind" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                         </div>
                         {% else %}
                         <div class="alert alert-success" role="alert">
                             <span class="fa fa-check-square-o fa-2x"></span>
-                            {% trans "Data processing is on schedule" %}: <strong>{{ latest_gc.read_at|naturaltime }}</strong>
+                            {% trans "Data processing is on schedule" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                         </div>
                         {% endif %}
                     {% else %}
@@ -327,16 +327,16 @@
                     <i class="fa fa-cogs"></i> &nbsp; {% trans "Day &amp; hour statistics" %}<br />
                 </header>
                 <div class="panel-body">
-                    {% if days_since_latest_day_statistics == None or days_since_latest_day_statistics > 1 %}
+                    {% if status.statistics.days_since == None or status.statistics.days_since > 1 %}
                     <div class="alert alert-danger" role="alert">
                         <span class="fa fa-frown-o fa-2x"></span>
                         {% trans "Data processing is lagging behind" %}: 
-                        <strong>{% if latest_day_statistics %}{{ latest_day_statistics.day }}{% else %}{% trans "No data." %}{% endif %}</strong>
+                        <strong>{% if status.statistics.latest %}{{ status.statistics.latest }}{% else %}{% trans "No data." %}{% endif %}</strong>
                     </div>
                     {% else %}
                     <div class="alert alert-success" role="alert">
                         <span class="fa fa-check-square-o fa-2x"></span>
-                        {% trans "Data processing is on schedule" %}: <strong>{{ latest_day_statistics.day }}</strong>
+                        {% trans "Data processing is on schedule" %}: <strong>{{ status.statistics.latest }}</strong>
                     </div>
                     {% endif %}
                     
