@@ -38,14 +38,15 @@ def get_capabilities(capability=None):
             'gas': GasConsumption.objects.exists(),
             'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
         }
+
+        # Override capabilities when requested.
+        if settings.DSMRREADER_DISABLED_CAPABILITIES:
+            for k in capabilities.keys():
+                if k in settings.DSMRREADER_DISABLED_CAPABILITIES:
+                    capabilities[k] = False
+
         capabilities['any'] = any(capabilities.values())
         cache.set('capabilities', capabilities)
-
-    # Override capabilities when requested.
-    if settings.DSMRREADER_DISABLED_CAPABILITIES:
-        for k in capabilities.keys():
-            if k in settings.DSMRREADER_DISABLED_CAPABILITIES:
-                capabilities[k] = False
 
     # Single selection.
     if capability is not None:
