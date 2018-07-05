@@ -27,7 +27,6 @@ class Dashboard(TemplateView):
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
-        context_data['track_temperature'] = WeatherSettings.get_solo().track
         context_data['notifications'] = Notification.objects.unread()
 
         today = timezone.localtime(timezone.now()).date()

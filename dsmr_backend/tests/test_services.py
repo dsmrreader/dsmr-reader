@@ -1,5 +1,6 @@
 from unittest import mock
 
+from django.test.utils import override_settings
 from django.test import TestCase
 from django.utils import timezone
 
@@ -163,6 +164,46 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertTrue(dsmr_backend.services.get_capabilities('weather'))
         self.assertTrue(capabilities['weather'])
         self.assertTrue(capabilities['any'])
+
+    @override_settings(DSMRREADER_DISABLED_CAPABILITIES=['electricity'])
+    def test_disabled_capabilities(self):
+        """ Whether DSMRREADER_DISABLED_CAPABILITIES affects the outcome. """
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+        )
+
+        capabilities = dsmr_backend.services.get_capabilities()
+        self.assertFalse(dsmr_backend.services.get_capabilities('electricity'))
+        self.assertFalse(capabilities['electricity'])
+
+    @mock.patch('django.core.cache.cache.set')
+    @mock.patch('django.core.cache.cache.get')
+    def test_capability_caching(self, get_cache_mock, set_cache_mock):
+        get_cache_mock.return_value = None
+
+        self.assertFalse(get_cache_mock.called)
+        self.assertFalse(set_cache_mock.called)
+
+        first_capabilities = dsmr_backend.services.get_capabilities()
+
+        self.assertTrue(get_cache_mock.called)
+        self.assertTrue(set_cache_mock.called)
+
+        # Now we should retreive from cache.
+        set_cache_mock.reset_mock()
+        get_cache_mock.return_value = first_capabilities  # Fake caching.
+
+        second_capabilities = dsmr_backend.services.get_capabilities()
+
+        self.assertTrue(get_cache_mock.called)
+        self.assertFalse(set_cache_mock.called)
+        self.assertEqual(first_capabilities, second_capabilities)
 
 
 @mock.patch('requests.get')

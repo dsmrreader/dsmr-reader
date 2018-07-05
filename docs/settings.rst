@@ -1,4 +1,4 @@
-Backend settings
+Settings
 ================
 
 The application has several settings available, which you can edit in the Configuration page.
@@ -189,3 +189,62 @@ Whether to enable this feature.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The fixed weather station you wish to use.
 
+
+Custom ``dsmrreader/settings.py`` settings
+------------------------------------------
+Some project settings can be changed (or overridden) in the ``dsmrreader/settings.py`` file. 
+Removing any of these settings from your file will force using the default value.
+
+Make sure to reload the application afterwards to persist the changes you've made, by executing ``./reload.sh`` or restarting the Supervisor processes.
+
+
+``DSMRREADER_BACKEND_SLEEP``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The number of seconds the application will sleep after completing a backend run. Prevents hammering on your hardware. 
+
+Defaults to ``DSMRREADER_BACKEND_SLEEP = 1``.
+
+
+``DSMRREADER_DATALOGGER_SLEEP``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The number of seconds the application will sleep after reading data from the datalogger (API excluded). Prevents hammering on your hardware. 
+
+Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``.
+
+
+``DSMRREADER_LOG_TELEGRAMS``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Whether telegrams are logged, in base64 format. Only required for debugging.
+
+Defaults to ``DSMRREADER_LOG_TELEGRAMS = False``.
+
+
+``DSMRREADER_RECONNECT_DATABASE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Whether the backend process (and datalogger) reconnects to the DB after each run. Prevents some hanging connections in some situations.
+
+Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``.
+
+
+``DSMRREADER_STATUS_READING_OFFSET_MINUTES``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Maximum interval in hours allowed since the latest reading, before ringing any alarms.
+
+Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``.
+
+
+``DSMRREADER_PLUGINS``
+~~~~~~~~~~~~~~~~~~~~~~
+:doc:`More information about this feature can be found here<plugins>`.
+
+Defaults to ``DSMRREADER_PLUGINS = []``.
+
+
+``DSMRREADER_DISABLED_CAPABILITIES``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Whether to override (disable) capabilities. Only use if you want to disable a capability that your smart meter keeps reporting.
+For example you've switched from using gas to an alternative energy source. Or your smart meter contains electricity returned data, but you do not own any solar panels.
+
+Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``.
+
+Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', 'electricity_returned']``.

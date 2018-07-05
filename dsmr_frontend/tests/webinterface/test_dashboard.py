@@ -48,7 +48,6 @@ class TestViews(TestCase):
             reverse('{}:dashboard'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200)
-        self.assertIn('track_temperature', response.context)
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard_xhr_header(self, now_mock):

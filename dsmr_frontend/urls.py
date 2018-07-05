@@ -1,5 +1,3 @@
-from django.views.decorators.cache import cache_page
-from django.conf import settings
 from django.conf.urls import url
 
 from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, DashboardXhrConsumption, \
@@ -29,7 +27,7 @@ urlpatterns = [
     url(r'^statistics$', Statistics.as_view(), name='statistics'),
     url(r'^statistics/xhr/data$', StatisticsXhrData.as_view(), name='statistics-xhr-data'),
     url(r'^energy-contracts$', EnergyContracts.as_view(), name='energy-contracts'),
-    url(r'^trends$', cache_page(settings.CACHES['default']['TIMEOUT'])(Trends.as_view()), name='trends'),
+    url(r'^trends$', Trends.as_view(), name='trends'),
     url(r'^compare$', Compare.as_view(), name='compare'),
 
     # Technical information.

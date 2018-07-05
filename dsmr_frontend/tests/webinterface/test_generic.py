@@ -1,8 +1,9 @@
 from unittest import mock
 
+from django.test.utils import override_settings
+from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
-from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -45,12 +46,11 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 500)
 
-    @mock.patch('django.conf.settings.DEBUG')
+    @override_settings(DEBUG=True)
     @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
-    def test_http_500_development(self, get_context_data_mock, debug_setting_mock):
+    def test_http_500_development(self, get_context_data_mock):
         """ Verify that the middleware is allowing Django to jump in when not in production. """
         get_context_data_mock.side_effect = SyntaxError('Meh')
-        debug_setting_mock.return_value = True
 
         with self.assertRaises(SyntaxError):
             self.client.get(

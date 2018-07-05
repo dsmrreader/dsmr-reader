@@ -18,9 +18,7 @@ def should_export():
         return False
 
     # Nonsense when having no data.
-    capabilities = dsmr_backend.services.get_capabilities()
-
-    if not capabilities['gas']:
+    if not dsmr_backend.services.get_capabilities(capability='gas'):
         return False
 
     return dsmr_backend.services.is_timestamp_passed(timestamp=mindergas_settings.next_export)
