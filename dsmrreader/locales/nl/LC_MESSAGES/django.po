@@ -100,11 +100,20 @@ msgstr "Meest recente synchronisatie"
 msgid "Timestamp of latest sync with Dropbox. Automatically updated by application."
 msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
 
+msgid "Next sync"
+msgstr "Volgende synchronisatie"
+
+msgid "Timestamp of next sync with Dropbox. Automatically updated by application."
+msgstr "Tijdstip van de volgende synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
+
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
 
-msgid "[{}] Unable to upload files to Dropbox due to insufficient space. Ignoring new files for the next {} hours..."
-msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox voor de komende {} uur: Onvoldoende ruimte in Dropbox-account..."
+msgid "[{}] Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
+msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
+
+msgid "[{}] Unable to upload files to Dropbox due to {}. Removing credentials..."
+msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
 
 msgid "Consumption"
 msgstr "Verbruik"
