@@ -87,6 +87,7 @@ Please note and respect their licences as well, if any. Credits to the following
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_
 - `Buienradar <http://www.buienradar.nl>`_
 - `Django REST Framework <http://www.django-rest-framework.org>`_
+- `eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_
 
 
 Misc

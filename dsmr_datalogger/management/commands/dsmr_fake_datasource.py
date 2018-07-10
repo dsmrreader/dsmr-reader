@@ -15,7 +15,7 @@ import dsmr_datalogger.services
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a FAKE reading. DO NOT USE in production! Used for integration checks.')
     name = __name__  # Required for PID file.
-    sleep_time = 1
+    sleep_time = 2
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)

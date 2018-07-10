@@ -2,6 +2,7 @@ from distutils.version import StrictVersion
 import re
 
 import requests
+from django.db.migrations.recorder import MigrationRecorder
 from django.conf import settings
 from django.utils import timezone
 from django.core.cache import cache
@@ -144,3 +145,11 @@ def status_info():
         ).days
 
     return status
+
+
+def is_recent_installation():
+    """ Checks whether this is a new installation, by checking the interval to the first migration. """
+    has_old_migration = MigrationRecorder.Migration.objects.filter(
+        applied__lt=timezone.now() - timezone.timedelta(hours=24)
+    ).exists()
+    return not has_old_migration

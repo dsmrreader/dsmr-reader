@@ -1,6 +1,8 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+import dsmr_backend.services
+
 
 class ExportAsCsvForm(forms.Form):
     DATA_TYPE_DAY = 'day'
@@ -20,23 +22,31 @@ class ExportAsCsvForm(forms.Form):
     export_format = forms.ChoiceField(choices=EXPORT_FORMATS)
 
 
-class DashboardGraphForm(forms.Form):
-    electricity_offset = forms.IntegerField(required=False)
-    gas_offset = forms.IntegerField(required=False)
+class DashboardElectricityConsumptionForm(forms.Form):
+    delivered = forms.BooleanField(required=False, initial=False)
+    returned = forms.BooleanField(required=False, initial=False)
+    phases = forms.BooleanField(required=False, initial=False)
 
-    def _clean_offset(self, offset_type):
-        offset = self.cleaned_data[offset_type]
+    def __init__(self, *args, **kwargs):
+        self.capabilities = dsmr_backend.services.get_capabilities()
+        super(DashboardElectricityConsumptionForm, self).__init__(*args, **kwargs)
 
-        if offset is None or offset < 0:
-            offset = 0
+    def _clean_type(self, field, capability):
+        value = self.cleaned_data[field]
 
-        return offset
+        if value and not self.capabilities[capability]:
+            raise forms.ValidationError(capability)
 
-    def clean_electricity_offset(self):
-        return self._clean_offset('electricity_offset')
+        return value
 
-    def clean_gas_offset(self):
-        return self._clean_offset('gas_offset')
+    def clean_delivered(self):
+        return self._clean_type('delivered', 'electricity')
+
+    def clean_returned(self):
+        return self._clean_type('returned', 'electricity_returned')
+
+    def clean_phases(self):
+        return self._clean_type('phases', 'multi_phases')
 
 
 class DashboardNotificationReadForm(forms.Form):

@@ -15,6 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -409,6 +411,9 @@ msgstr "Gooit de volledige cache leeg."
 msgid "Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!"
 msgstr "Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configuratie-pagina!"
 
+msgid "The graphs on the Dashboard have been replaced this release and are now scrollable. The graphs on the Trends page have been updated as well."
+msgstr "De grafieken op het Dashboard zijn vervangen en vanaf deze release scrollbaar. De grafieken op de Trends-pagina zijn eveneens bijgewerkt."
+
 msgid "Merge electricity tariffs"
 msgstr "Voeg tarieven samen"
 
@@ -619,68 +624,23 @@ msgstr "Gas"
 msgid "Total"
 msgstr "Totaal"
 
-msgid "Recent electricity consumed (Watt)"
-msgstr "Recent elektriciteitsverbruik (Watt)"
+msgid "Recent electricity consumed (Watt) in the past 24 hours"
+msgstr "Recent elektriciteitsverbruik (Watt) in de afgelopen 24 uur"
 
-msgid "Display electricity phases"
-msgstr "Toon elektriciteitsfasen"
+msgid "Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph."
+msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Sleep de grafiek naar links of rechts, of gebruik de horizontale scrollbalk onder de grafiek."
 
-msgid "Recent distribution of electricity phases P+ (Watt)"
-msgstr "Recente distributie elektriciteitsfasen P+ (Watt)"
+msgid "Recent distribution of electricity phases P+ (Watt) in the past 24 hours"
+msgstr "Recente distributie elektriciteitsfasen P+ (Watt) in de afgelopen 24 uur"
 
-msgid "Scroll electricity graph(s)"
-msgstr "Scroll door elektriciteitsgrafiek(en)"
+msgid "Recent gas consumed (m<sup>3</sup>) in the past 24 hours"
+msgstr "Recent gasverbruik (m<sup>3</sup>) in de afgelopen 24 uur"
 
-msgid "You can scroll back until one week ago"
-msgstr "Je kunt tot een week terugscrollen"
-
-msgid "Go backward by 60 units"
-msgstr "Ga 60 eenheden achteruit"
-
-msgid "Go backward by 30 units"
-msgstr "Ga 30 eenheden achteruit"
-
-msgid "Go backward by 5 units"
-msgstr "Ga 5 eenheden achteruit"
-
-msgid "Go forward by 5 units"
-msgstr "Ga 5 eenheden vooruit"
-
-msgid "Go forward by 30 units"
-msgstr "Ga 30 eenheden vooruit"
-
-msgid "Go forward by 60 units"
-msgstr "Ga 60 eenheden vooruit"
-
-msgid "Recent electricity returned (Watt)"
-msgstr "Recente teruglevering elektriciteit (Watt)"
-
-msgid "Recent gas consumed (m<sup>3</sup>)"
-msgstr "Recent gasverbruik (m<sup>3</sup>)"
-
-msgid "Scroll gas graph(s)"
-msgstr "Scroll door gasgrafiek"
-
-msgid "Recent temperatures (&deg;C)"
-msgstr "Recente temperatuurmetingen (&deg;C)"
+msgid "Recent temperatures (&deg;C) in the past 24 hours"
+msgstr "Recente temperatuurmetingen (&deg;C) in de afgelopen 24 uur"
 
 msgid "per hour"
 msgstr "per uur"
-
-msgid "Electricity"
-msgstr "Elektriciteit"
-
-msgid "Phase L1"
-msgstr "Fase L1"
-
-msgid "Phase L2"
-msgstr "Fase L2"
-
-msgid "Phase L3"
-msgstr "Fase L3"
-
-msgid "Temperature"
-msgstr "Temperatuur"
 
 msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
 msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
@@ -916,6 +876,9 @@ msgstr "Deze consumptie nodes worden gebruikt in de grafieken van het Dashboard.
 msgid "Gas statistics"
 msgstr "Gasstatistieken"
 
+msgid "Electricity"
+msgstr "Elektriciteit"
+
 msgid "The consumption nodes reflect the capabilities of your smart meter."
 msgstr "De consumptie nodes reflecteren de gegevensstromen van je slimme meter."
 
@@ -941,16 +904,16 @@ msgid "Untracked consumption in the past (and today), is not taken into account.
 msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
 
 #, python-format
-msgid "Average hourly electricity consumed (in %%) within the past 4 weeks"
-msgstr "Gemiddelde elektriciteitsverbruik per daguur (in %%) van de afgelopen 4 weken"
+msgid "Average electricity consumed each hour (in %%) within the past 4 weeks"
+msgstr "Gemiddelde elektriciteitsverbruik uur (in %%) van de afgelopen 4 weken"
 
 #, python-format
-msgid "Average hourly electricity returned (in %%) within the past 4 weeks"
-msgstr "Gemiddelde elektriciteit teruglevering per daguur (in %%) van de afgelopen 4 weken"
+msgid "Average electricity returned each hour (in %%) within the past 4 weeks"
+msgstr "Gemiddelde elektriciteitsteruglevering per uur (in %%) van de afgelopen 4 weken"
 
 #, python-format
-msgid "Average hourly gas consumed (in %%) within the past 4 weeks"
-msgstr "Gemiddeld gasverbruik per daguur (in %%) van de afgelopen 4 weken"
+msgid "Average gas consumed each hour (in %%) within the past 4 weeks"
+msgstr "Gemiddeld gasverbruik per uur (in %%) van de afgelopen 4 weken"
 
 msgid "Electricity tariff ratio (past week)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
@@ -1674,6 +1637,51 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Display electricity phases"
+#~ msgstr "Toon elektriciteitsfasen"
+
+#~ msgid "Scroll electricity graph(s)"
+#~ msgstr "Scroll door elektriciteitsgrafiek(en)"
+
+#~ msgid "You can scroll back until one week ago"
+#~ msgstr "Je kunt tot een week terugscrollen"
+
+#~ msgid "Go backward by 60 units"
+#~ msgstr "Ga 60 eenheden achteruit"
+
+#~ msgid "Go backward by 30 units"
+#~ msgstr "Ga 30 eenheden achteruit"
+
+#~ msgid "Go backward by 5 units"
+#~ msgstr "Ga 5 eenheden achteruit"
+
+#~ msgid "Go forward by 5 units"
+#~ msgstr "Ga 5 eenheden vooruit"
+
+#~ msgid "Go forward by 30 units"
+#~ msgstr "Ga 30 eenheden vooruit"
+
+#~ msgid "Go forward by 60 units"
+#~ msgstr "Ga 60 eenheden vooruit"
+
+#~ msgid "Recent electricity returned (Watt)"
+#~ msgstr "Recente teruglevering elektriciteit (Watt)"
+
+#~ msgid "Scroll gas graph(s)"
+#~ msgstr "Scroll door gasgrafiek"
+
+#~ msgid "Phase L1"
+#~ msgstr "Fase L1"
+
+#~ msgid "Phase L2"
+#~ msgstr "Fase L2"
+
+#~ msgid "Phase L3"
+#~ msgstr "Fase L3"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatuur"
 
 #~ msgid "Tests notification system"
 #~ msgstr "Test notificatiesysteem"

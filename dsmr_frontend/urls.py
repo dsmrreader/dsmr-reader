@@ -1,10 +1,11 @@
 from django.conf.urls import url
 
 from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, DashboardXhrConsumption, \
-    DashboardXhrGraphs, DashboardXhrNotificationRead
+    DashboardXhrNotificationRead, DashboardXhrElectricityConsumption, DashboardXhrGasConsumption, \
+    DashboardXhrTemperature
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
 from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
-from dsmr_frontend.views.trends import Trends
+from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXhrElectricityByTariff
 from dsmr_frontend.views.compare import Compare
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status, XhrUpdateChecker
@@ -19,7 +20,9 @@ urlpatterns = [
     url(r'^$', Dashboard.as_view(), name='dashboard'),
     url(r'^xhr/header$', DashboardXhrHeader.as_view(), name='dashboard-xhr-header'),
     url(r'^xhr/consumption', DashboardXhrConsumption.as_view(), name='dashboard-xhr-consumption'),
-    url(r'^xhr/graphs$', DashboardXhrGraphs.as_view(), name='dashboard-xhr-graphs'),
+    url(r'^xhr/electricity', DashboardXhrElectricityConsumption.as_view(), name='dashboard-xhr-electricity'),
+    url(r'^xhr/gas', DashboardXhrGasConsumption.as_view(), name='dashboard-xhr-gas'),
+    url(r'^xhr/temperature', DashboardXhrTemperature.as_view(), name='dashboard-xhr-temperature'),
     url(r'^xhr/notification-read$', DashboardXhrNotificationRead.as_view(), name='dashboard-xhr-notification-read'),
     url(r'^archive$', Archive.as_view(), name='archive'),
     url(r'^archive/xhr/summary$', ArchiveXhrSummary.as_view(), name='archive-xhr-summary'),
@@ -28,6 +31,12 @@ urlpatterns = [
     url(r'^statistics/xhr/data$', StatisticsXhrData.as_view(), name='statistics-xhr-data'),
     url(r'^energy-contracts$', EnergyContracts.as_view(), name='energy-contracts'),
     url(r'^trends$', Trends.as_view(), name='trends'),
+    url(r'^trends/xhr/avg-consumption$', TrendsXhrAvgConsumption.as_view(), name='trends-xhr-avg-consumption'),
+    url(
+        r'^trends/xhr/consumption-by-tariff$',
+        TrendsXhrElectricityByTariff.as_view(),
+        name='trends-xhr-consumption-by-tariff'
+    ),
     url(r'^compare$', Compare.as_view(), name='compare'),
 
     # Technical information.
