@@ -8,15 +8,17 @@ from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_frontend.forms import DashboardGraphForm, DashboardNotificationReadForm
+from dsmr_frontend.forms import DashboardNotificationReadForm, DashboardElectricityConsumptionForm
 from dsmr_weather.models.reading import TemperatureReading
-from dsmr_weather.models.settings import WeatherSettings
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.settings import DataloggerSettings
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
+
+
+XHR_RECENT_CONSUMPTION_HOURS_AGO = 24
 
 
 class Dashboard(TemplateView):
@@ -27,7 +29,6 @@ class Dashboard(TemplateView):
         context_data['capabilities'] = dsmr_backend.services.get_capabilities()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
-        context_data['track_temperature'] = WeatherSettings.get_solo().track
         context_data['notifications'] = Notification.objects.unread()
 
         today = timezone.localtime(timezone.now()).date()
@@ -66,88 +67,97 @@ class DashboardXhrConsumption(TemplateView):
         return context_data
 
 
-class DashboardXhrGraphs(View):
-    """ XHR view for fetching all dashboard data. """
-    def get(self, request):
-        data = {}
-        data['capabilities'] = dsmr_backend.services.get_capabilities()
-        frontend_settings = FrontendSettings.get_solo()
-
-        form = DashboardGraphForm(request.GET)
+class DashboardXhrElectricityConsumption(View):
+    """ XHR view for fetching the electricity consumption graph data, in JSON. """
+    def get(self, request):  # noqa: C901
+        form = DashboardElectricityConsumptionForm(request.GET)
 
         if not form.is_valid():
-            return HttpResponseBadRequest(form.errors)
+            return HttpResponseBadRequest(
+                json.dumps({'errors': form.errors}),
+                content_type='application/json'
+            )
+
+        data = {
+            'read_at': [],
+            'currently_delivered': [],
+            'currently_returned': [],
+            'phases': {
+                'l1': [],
+                'l2': [],
+                'l3': [],
+            },
+        }
 
         # Optimize queries for large datasets by restricting the data to the last week in the first place.
-        base_timestamp = timezone.now() - timezone.timedelta(days=7)
+        base_timestamp = timezone.now() - timezone.timedelta(hours=XHR_RECENT_CONSUMPTION_HOURS_AGO)
+        electricity = ElectricityConsumption.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
-        electricity = ElectricityConsumption.objects.filter(read_at__gt=base_timestamp).order_by('-read_at')
-        gas = GasConsumption.objects.filter(read_at__gt=base_timestamp).order_by('-read_at')
-        temperature = TemperatureReading.objects.filter(read_at__gt=base_timestamp).order_by('-read_at')
+        for current in electricity:
+            read_at = formats.date_format(timezone.localtime(current.read_at), 'DSMR_GRAPH_LONG_TIME_FORMAT')
+            data['read_at'].append(read_at)
 
-        # Apply any offset requested by the user.
-        electricity_offset = form.cleaned_data.get('electricity_offset')
-        electricity = electricity[electricity_offset:electricity_offset + frontend_settings.dashboard_graph_width]
+            if form.cleaned_data.get('delivered'):
+                data['currently_delivered'].append(float(current.currently_delivered) * 1000)  # kW -> W.
 
-        gas_offset = form.cleaned_data.get('gas_offset')
-        gas = gas[gas_offset:gas_offset + frontend_settings.dashboard_graph_width]
+            if form.cleaned_data.get('returned'):
+                data['currently_returned'].append(float(current.currently_returned) * 1000)  # kW -> W.
 
-        temperature = temperature[:frontend_settings.dashboard_graph_width]
+            if form.cleaned_data.get('phases'):
+                data['phases']['l1'].append(float(current.phase_currently_delivered_l1) * 1000)  # kW -> W.
+                data['phases']['l2'].append(float(current.phase_currently_delivered_l2) * 1000)  # kW -> W.
+                data['phases']['l3'].append(float(current.phase_currently_delivered_l3) * 1000)  # kW -> W.
 
-        # Reverse all sets gain.
-        electricity = electricity[::-1]
-        gas = gas[::-1]
-        temperature = temperature[::-1]
+        return HttpResponse(
+            json.dumps(data),
+            content_type='application/json'
+        )
 
-        # By default we only display the time, scrolling should enable a more verbose x-axis.
-        graph_x_format_electricity = 'DSMR_GRAPH_SHORT_TIME_FORMAT'
-        graph_x_format_gas = 'DSMR_GRAPH_SHORT_TIME_FORMAT'
 
-        if electricity_offset > 0:
-            graph_x_format_electricity = 'DSMR_GRAPH_LONG_TIME_FORMAT'
+class DashboardXhrGasConsumption(View):
+    """ XHR view for fetching the gas consumption graph data, in JSON. """
+    def get(self, request):  # noqa: C901
+        data = {
+            'read_at': [],
+            'currently_delivered': [],
+        }
 
-        if gas_offset > 0:
-            graph_x_format_gas = 'DSMR_GRAPH_LONG_TIME_FORMAT'
+        # Optimize queries for large datasets by restricting the data to the last week in the first place.
+        base_timestamp = timezone.now() - timezone.timedelta(hours=XHR_RECENT_CONSUMPTION_HOURS_AGO)
+        gas = GasConsumption.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
-        data['electricity_x'] = [
-            formats.date_format(
-                timezone.localtime(x.read_at), graph_x_format_electricity
-            )
-            for x in electricity
-        ]
-        data['electricity_y'] = [float(x.currently_delivered * 1000) for x in electricity]
-        data['electricity_returned_y'] = [float(x.currently_returned * 1000) for x in electricity]
+        for current in gas:
+            read_at = formats.date_format(timezone.localtime(current.read_at), 'DSMR_GRAPH_LONG_TIME_FORMAT')
+            data['read_at'].append(read_at)
+            data['currently_delivered'].append(float(current.currently_delivered))
 
-        data['gas_x'] = [
-            formats.date_format(
-                timezone.localtime(x.read_at), graph_x_format_gas
-            ) for x in gas
-        ]
-        data['gas_y'] = [float(x.currently_delivered) for x in gas]
+        return HttpResponse(
+            json.dumps(data),
+            content_type='application/json'
+        )
 
-        # Some users have multiple phases installed.
-        if DataloggerSettings.get_solo().track_phases and data['capabilities']['multi_phases']:
-            data['phases_l1_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l1')
-            data['phases_l2_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l2')
-            data['phases_l3_y'] = self._parse_phases_data(electricity, 'phase_currently_delivered_l3')
 
-        if WeatherSettings.get_solo().track:
-            data['temperature_x'] = [
-                formats.date_format(
-                    timezone.localtime(x.read_at), 'DSMR_GRAPH_SHORT_TIME_FORMAT'
-                )
-                for x in temperature
-            ]
-            data['temperature_y'] = [float(x.degrees_celcius) for x in temperature]
+class DashboardXhrTemperature(View):
+    """ XHR view for fetching the temperature graph data, in JSON. """
+    def get(self, request):  # noqa: C901
+        data = {
+            'read_at': [],
+            'degrees_celcius': [],
+        }
 
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        # Optimize queries for large datasets by restricting the data to the last week in the first place.
+        base_timestamp = timezone.now() - timezone.timedelta(hours=XHR_RECENT_CONSUMPTION_HOURS_AGO)
+        temperature = TemperatureReading.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
-    def _parse_phases_data(self, data, field):
-        return [
-            float(getattr(x, field) * 1000)
-            if getattr(x, field) else 0
-            for x in data
-        ]
+        for current in temperature:
+            read_at = formats.date_format(timezone.localtime(current.read_at), 'DSMR_GRAPH_LONG_TIME_FORMAT')
+            data['read_at'].append(read_at)
+            data['degrees_celcius'].append(float(current.degrees_celcius))
+
+        return HttpResponse(
+            json.dumps(data),
+            content_type='application/json'
+        )
 
 
 @method_decorator(csrf_exempt, name='dispatch')

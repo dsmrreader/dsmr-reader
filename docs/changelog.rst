@@ -18,6 +18,17 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.21.0 - 2018-07-11
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#489 <https://github.com/dennissiemensma/dsmr-reader/issues/489>`_] eCharts improved graphs for data zooming/scrolling
+- [`#434 <https://github.com/dennissiemensma/dsmr-reader/issues/434>`_] Omit gas readings all together
+- [`#264 <https://github.com/dennissiemensma/dsmr-reader/issues/264>`_] Check Dropbox API token and display error messages in GUI
+
+
+
 v1.20.0 - 2018-07-04
 ^^^^^^^^^^^^^^^^^^^^
 

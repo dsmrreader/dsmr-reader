@@ -26,15 +26,15 @@ class BackupSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(DropboxSettings)
 class DropboxSettingsAdmin(SingletonModelAdmin):
-    list_display = ('access_token', )
-    readonly_fields = ('latest_sync', )
+    list_display = ('access_token', 'latest_sync')
+    readonly_fields = ('latest_sync', 'next_sync')
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
     }
     fieldsets = (
         (
             None, {
-                'fields': ['access_token', 'latest_sync'],
+                'fields': ['access_token', 'latest_sync', 'next_sync'],
                 'description': _(
                     'Detailed instructions for configuring Dropbox can be found here: <a href="https://dsmr-reader.read'
                     'thedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync">FAQ in documentation</a>'

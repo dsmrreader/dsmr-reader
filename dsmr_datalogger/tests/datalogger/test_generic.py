@@ -2,6 +2,7 @@ from decimal import Decimal
 from unittest import mock
 
 from django.core.management import CommandError
+from django.test.utils import override_settings
 from django.test import TestCase
 from django.utils import timezone
 import serial
@@ -292,10 +293,9 @@ class TestServices(TestCase):
         telegram[-1] = "!58C8\n"
         dsmr_datalogger.services.verify_telegram_checksum(data=''.join(telegram))
 
-    @mock.patch('django.conf.settings.DSMRREADER_LOG_TELEGRAMS')
-    def test_telegram_logging_setting_coverage(self, settings_mock):
+    @override_settings(DSMRREADER_LOG_TELEGRAMS=True)
+    def test_telegram_logging_setting_coverage(self):
         """ Purely a coverage test. """
-        settings_mock.return_value = True
         dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
 
 

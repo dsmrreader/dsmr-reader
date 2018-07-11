@@ -9,17 +9,18 @@ msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
+"Language: nl\n"
 "Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
-"Language: nl\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../settings.rst:2
-msgid "Backend settings"
-msgstr "Backend-instellingen"
+msgid "Settings"
+msgstr "Instellingen"
 
 #: ../../settings.rst:4
 msgid ""
@@ -30,6 +31,10 @@ msgstr ""
 "De applicatie heeft diverse instellingen die je kunt bewerken in de Configuratie-"
 "pagina. De standaardinstellingen zouden afdoende moeten werken, al is het wel "
 "aan te raden de back-ups te synchroniseren via Dropbox."
+
+#: ../../settings.rst:8
+msgid "Contents"
+msgstr "Inhoud"
 
 #: ../../settings.rst:11
 msgid "Database/Django settings"
@@ -47,13 +52,13 @@ msgstr ""
 "Wanneer je de database-instellingen (of die van Django) wilt wijzigen, voer deze "
 "dan door in  ``dsmrreader/settings.py``."
 
-#: ../../settings.rst:16
+#: ../../settings.rst:16 ../../settings.rst:198
 msgid ""
 "Make sure to reload the application afterwards to persist the changes you've "
 "made, by executing ``./reload.sh`` or restarting the Supervisor processes."
 msgstr ""
-"Zorg ervoor dat je de applicatie herlaad na je wijzigingen, door ``./reload.sh`` "
-"uit te voeren, of de Supervisor-processen te herstarten."
+"Zorg ervoor dat je de applicatie herlaadt na je wijzigingen, door ``./reload."
+"sh`` uit te voeren, of de Supervisor-processen te herstarten."
 
 #: ../../settings.rst:20
 msgid "API configuration"
@@ -401,5 +406,136 @@ msgstr "``Buienradar weerstation``"
 msgid "The fixed weather station you wish to use."
 msgstr "Het weerstation die je wilt gebruiken."
 
-#~ msgid "Settings"
-#~ msgstr "Instellingen"
+#: ../../settings.rst:194
+msgid "Custom ``dsmrreader/settings.py`` settings"
+msgstr "Handmatige ``dsmrreader/settings.py`` instellingen"
+
+#: ../../settings.rst:195
+msgid ""
+"Some project settings can be changed (or overridden) in the ``dsmrreader/"
+"settings.py`` file. Removing any of these settings from your file will force "
+"using the default value."
+msgstr ""
+"Sommige projectinstellingen kunnen aangepast (of toegevoegd) worden aan het "
+"``dsmrreader/settings.py`` bestand. Het weghalen van deze instellingen zorgt "
+"ervoor dat de standaardwaarden weer gebruikt worden."
+
+#: ../../settings.rst:202
+msgid "``DSMRREADER_BACKEND_SLEEP``"
+msgstr "``DSMRREADER_BACKEND_SLEEP``"
+
+#: ../../settings.rst:203
+msgid ""
+"The number of seconds the application will sleep after completing a backend run. "
+"Prevents hammering on your hardware."
+msgstr ""
+"Het aantal seconden dat de applicatie wacht na het voltooien van een backend "
+"run. Voorkomt hoge load op je hardware."
+
+#: ../../settings.rst:205
+msgid "Defaults to ``DSMRREADER_BACKEND_SLEEP = 1``."
+msgstr "Standaardwaarde ``DSMRREADER_BACKEND_SLEEP = 1``."
+
+#: ../../settings.rst:209
+msgid "``DSMRREADER_DATALOGGER_SLEEP``"
+msgstr "``DSMRREADER_DATALOGGER_SLEEP``"
+
+#: ../../settings.rst:210
+msgid ""
+"The number of seconds the application will sleep after reading data from the "
+"datalogger (API excluded). Prevents hammering on your hardware."
+msgstr ""
+"Het aantal seconden dat de applicatie wacht na het uitlezen van de datalogger "
+"(uitgezonderd API). Voorkomt hoge load op je hardware."
+
+#: ../../settings.rst:212
+msgid "Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``."
+msgstr "Standaardwaarde ``DSMRREADER_DATALOGGER_SLEEP = 0.5``."
+
+#: ../../settings.rst:216
+msgid "``DSMRREADER_LOG_TELEGRAMS``"
+msgstr "``DSMRREADER_LOG_TELEGRAMS``"
+
+#: ../../settings.rst:217
+msgid ""
+"Whether telegrams are logged, in base64 format. Only required for debugging."
+msgstr ""
+"Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor "
+"debuggen."
+
+#: ../../settings.rst:219
+msgid "Defaults to ``DSMRREADER_LOG_TELEGRAMS = False``."
+msgstr "Standaardwaarde ``DSMRREADER_LOG_TELEGRAMS = False``."
+
+#: ../../settings.rst:223
+msgid "``DSMRREADER_RECONNECT_DATABASE``"
+msgstr "``DSMRREADER_RECONNECT_DATABASE``"
+
+#: ../../settings.rst:224
+msgid ""
+"Whether the backend process (and datalogger) reconnects to the DB after each "
+"run. Prevents some hanging connections in some situations."
+msgstr ""
+"Geeft aan of de backend na elke run opnieuw moet verbinden naar de database. Dit "
+"voorkomt in enkele gevallen hangende verbindingen."
+
+#: ../../settings.rst:226
+msgid "Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``."
+msgstr "Standaardwaarde ``DSMRREADER_RECONNECT_DATABASE = True``."
+
+#: ../../settings.rst:230
+msgid "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
+msgstr "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
+
+#: ../../settings.rst:231
+msgid ""
+"Maximum interval in hours allowed since the latest reading, before ringing any "
+"alarms."
+msgstr ""
+"Maximale toegestane interval, in aantal uren, sinds de laatste meting, voordat "
+"er alarmbellen af gaan."
+
+#: ../../settings.rst:233
+msgid "Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
+msgstr "Standaardwaarde ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
+
+#: ../../settings.rst:237
+msgid "``DSMRREADER_PLUGINS``"
+msgstr "``DSMRREADER_PLUGINS``"
+
+#: ../../settings.rst:238
+msgid ":doc:`More information about this feature can be found here<plugins>`."
+msgstr ":doc:`Meer informatie over deze feature kun je hier terugvinden<plugins>`."
+
+#: ../../settings.rst:240
+msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
+msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."
+
+#: ../../settings.rst:244
+msgid "``DSMRREADER_DISABLED_CAPABILITIES``"
+msgstr "``DSMRREADER_DISABLED_CAPABILITIES``"
+
+#: ../../settings.rst:245
+msgid ""
+"Whether to override (disable) capabilities. Only use if you want to disable a "
+"capability that your smart meter keeps reporting. For example you've switched "
+"from using gas to an alternative energy source. Or your smart meter contains "
+"electricity returned data, but you do not own any solar panels."
+msgstr ""
+"Geeft aan om 'capabilities' van de applicaties uit te schakelen. Gebruik dit "
+"alleen wanneer je iets wilt uitschakelen wat je blijft terugkomen in je slimme "
+"meter. Bijvoorbeeld wanneer je gewisseld bent van gas naar een alternatieve "
+"energiebron. Of wanneer je slimme meter data bevat voor teruggeleverde energie "
+"en je uberhaupt geen zonnepanelen hebt."
+
+#: ../../settings.rst:248
+msgid "Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``."
+msgstr "Standaardwaarde ``DSMRREADER_DISABLED_CAPABILITIES = []``."
+
+#: ../../settings.rst:250
+msgid ""
+"Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
+"'electricity_returned']``."
+msgstr ""
+"Voorbeeldgebruik ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
+"'electricity_returned']``."

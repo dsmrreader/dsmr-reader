@@ -2,8 +2,10 @@ from distutils.version import StrictVersion
 import re
 
 import requests
+from django.db.migrations.recorder import MigrationRecorder
 from django.conf import settings
 from django.utils import timezone
+from django.core.cache import cache
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
@@ -19,22 +21,33 @@ def get_capabilities(capability=None):
 
     Optionally returns a single capability when requested.
     """
-    capabilities = {
-        # We rely on consumption because DSMR readings might be flushed in the future.
-        'electricity': ElectricityConsumption.objects.exists(),
-        'electricity_returned': ElectricityConsumption.objects.filter(
-            # We can not rely on meter positions, as the manufacturer sometimes initializes meters
-            # with testing data. So we just have to wait for the first power returned.
-            currently_returned__gt=0
-        ).exists(),
-        'multi_phases': ElectricityConsumption.objects.filter(
-            phase_currently_delivered_l2__isnull=False,
-            phase_currently_delivered_l3__isnull=False
-        ).exists(),
-        'gas': GasConsumption.objects.exists(),
-        'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
-    }
-    capabilities['any'] = any(capabilities.values())
+    capabilities = cache.get('capabilities')  # Caching time should be very low, but enough to make it matter.
+
+    if capabilities is None:
+        capabilities = {
+            # We rely on consumption because DSMR readings might be flushed in the future.
+            'electricity': ElectricityConsumption.objects.exists(),
+            'electricity_returned': ElectricityConsumption.objects.filter(
+                # We can not rely on meter positions, as the manufacturer sometimes initializes meters
+                # with testing data. So we just have to wait for the first power returned.
+                currently_returned__gt=0
+            ).exists(),
+            'multi_phases': ElectricityConsumption.objects.filter(
+                phase_currently_delivered_l2__isnull=False,
+                phase_currently_delivered_l3__isnull=False
+            ).exists(),
+            'gas': GasConsumption.objects.exists(),
+            'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
+        }
+
+        # Override capabilities when requested.
+        if settings.DSMRREADER_DISABLED_CAPABILITIES:
+            for k in capabilities.keys():
+                if k in settings.DSMRREADER_DISABLED_CAPABILITIES:
+                    capabilities[k] = False
+
+        capabilities['any'] = any(capabilities.values())
+        cache.set('capabilities', capabilities)
 
     # Single selection.
     if capability is not None:
@@ -132,3 +145,11 @@ def status_info():
         ).days
 
     return status
+
+
+def is_recent_installation():
+    """ Checks whether this is a new installation, by checking the interval to the first migration. """
+    has_old_migration = MigrationRecorder.Migration.objects.filter(
+        applied__lt=timezone.now() - timezone.timedelta(hours=24)
+    ).exists()
+    return not has_old_migration

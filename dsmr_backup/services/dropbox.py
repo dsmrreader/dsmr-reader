@@ -17,15 +17,7 @@ def sync():
     if not dropbox_settings.access_token:
         return
 
-    #  Or when we already synced within the last hour.
-    next_sync_interval = None
-
-    if dropbox_settings.latest_sync:
-        next_sync_interval = dropbox_settings.latest_sync + timezone.timedelta(
-            hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
-        )
-
-    if next_sync_interval and timezone.now() < next_sync_interval:
+    if dropbox_settings.next_sync and dropbox_settings.next_sync > timezone.now():
         return
 
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
@@ -36,11 +28,16 @@ def sync():
             current_file_path = os.path.join(backup_directory, current_file)
             check_synced_file(file_path=current_file_path, dropbox_settings=dropbox_settings)
 
-    DropboxSettings.objects.update(latest_sync=timezone.now())
+    # Try again in a while.
+    DropboxSettings.objects.update(
+        latest_sync=timezone.now(),
+        next_sync=timezone.now() + timezone.timedelta(
+            hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
+        )
+    )
 
 
 def check_synced_file(file_path, dropbox_settings):
-
     file_stats = os.stat(file_path)
 
     # Ignore empty files.
@@ -56,19 +53,36 @@ def check_synced_file(file_path, dropbox_settings):
 
     try:
         upload_chunked(file_path=file_path)
-    except dropbox.exceptions.ApiError as exception:
-        print(' - Dropbox error: {}'.format(exception.error))
+    except dropbox.exceptions.DropboxException as exception:
+        error_message = str(exception.error)
+        print(' - Dropbox error: {}'.format(error_message))
 
-        if 'insufficient_space' in str(exception.error):
-            # Notify user.
+        if 'insufficient_space' in error_message:
             Notification.objects.create(message=gettext(
-                "[{}] Unable to upload files to Dropbox due to insufficient space. "
+                "[{}] Unable to upload files to Dropbox due to {}. "
                 "Ignoring new files for the next {} hours...".format(
-                    timezone.now(), settings.DSMRREADER_DROPBOX_ERROR_INTERVAL
+                    timezone.now(),
+                    error_message,
+                    settings.DSMRREADER_DROPBOX_ERROR_INTERVAL
                 )
             ))
             DropboxSettings.objects.update(
-                latest_sync=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
+                latest_sync=timezone.now(),
+                next_sync=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
+            )
+
+        # Do not bother trying again.
+        if 'invalid_access_token' in error_message:
+            Notification.objects.create(message=gettext(
+                "[{}] Unable to upload files to Dropbox due to {}. Removing credentials...".format(
+                    timezone.now(),
+                    error_message
+                )
+            ))
+            DropboxSettings.objects.update(
+                latest_sync=timezone.now(),
+                next_sync=None,
+                access_token=None
             )
 
         raise

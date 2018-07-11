@@ -137,15 +137,11 @@ FORMAT_MODULE_PATH = [
 ]
 USE_THOUSAND_SEPARATOR = True
 
-# Caching framework. Normally we should prefer memcached, but file-based cache
-# is fine (and still fast) for RaspberryPi, preserving memory usage.
+# Caching framework. Advantages of caching in memory but without requiring memcached installed.
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': 60,
-        'OPTIONS': {
-            'MAX_ENTRIES': 100
-        }
+        'TIMEOUT': 10,
     }
 }
 
@@ -220,3 +216,6 @@ DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
 
 # Plugins.
 DSMRREADER_PLUGINS = []
+
+# Whether to override (disable) capabilities.
+DSMRREADER_DISABLED_CAPABILITIES = []
