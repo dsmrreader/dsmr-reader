@@ -18,12 +18,12 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.22.0 - 2018-xx-xx
+v1.21.1 - 2018-07-14
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
-- [`#xxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_] xxxxxxxxxxxxxxxxxxxxx
+- [`#492 <https://github.com/dennissiemensma/dsmr-reader/issues/492>`_] Fixed some issues with eCharts (improvements)
 
 
 

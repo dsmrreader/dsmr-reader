@@ -149,9 +149,11 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200, response.content)
 
         json_content = json.loads(response.content.decode("utf8"))
+        self.assertGreater(json_content['latest_delta_id'], 0)
         self.assertEqual(
             json_content,
             {
+                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
                 'read_at': ['Sat 23:00', 'Sun 0:00'],
                 'currently_delivered': [2500.0, 1500.0],
                 'currently_returned': [200.0, 100.0],
@@ -189,6 +191,32 @@ class TestViews(TestCase):
         self.assertEqual(json_content['phases']['l1'], [])
         self.assertEqual(json_content['phases']['l2'], [])
         self.assertEqual(json_content['phases']['l3'], [])
+
+        # Send again, but with small delta update.
+        old_latest_delta_id = json_content['latest_delta_id']
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-electricity'.format(self.namespace)),
+            data={'delivered': True, 'returned': True, 'phases': True, 'latest_delta_id': old_latest_delta_id}
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+
+        # The delta sorting of this test is completely wrong, because the consumptions are created backwards above.
+        json_content = json.loads(response.content.decode("utf8"))
+        self.assertGreater(json_content['latest_delta_id'], old_latest_delta_id)
+        self.assertEqual(
+            json_content,
+            {
+                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
+                'read_at': ['Sat 23:00'],
+                'currently_delivered': [2500.0],
+                'currently_returned': [200.0],
+                'phases': {
+                    'l1': [750.0],
+                    'l2': [500.0],
+                    'l3': [1250.0],
+                }
+            }
+        )
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard_xhr_gas(self, now_mock):
