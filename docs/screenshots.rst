@@ -43,6 +43,15 @@ The statistics page will display the current state of your meter and the energy 
     :alt: Statistics
 
 
+Energy contracts
+----------------
+Summary of all your contracts and the amount of energy consumed/generated. 
+
+.. image:: _static/screenshots/energy-contracts.png
+    :target: _static/screenshots/energy-contracts.png
+    :alt: Energy contracts
+
+
 Compare
 -------
 This page allows you to compare two days, months or years tracked before. 
