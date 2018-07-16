@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	var echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
-	echarts_gas_graph.showLoading();
+	echarts_gas_graph.showLoading('default', echarts_loading_options);
 	
 	/* Init graph. */
 	$.get(echarts_gas_graph_url, function (xhr_data) {

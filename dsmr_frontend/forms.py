@@ -26,6 +26,7 @@ class DashboardElectricityConsumptionForm(forms.Form):
     delivered = forms.BooleanField(required=False, initial=False)
     returned = forms.BooleanField(required=False, initial=False)
     phases = forms.BooleanField(required=False, initial=False)
+    latest_delta_id = forms.IntegerField(required=False, initial=None)
 
     def __init__(self, *args, **kwargs):
         self.capabilities = dsmr_backend.services.get_capabilities()

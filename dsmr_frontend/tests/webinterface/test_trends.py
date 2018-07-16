@@ -83,10 +83,10 @@ class TestViews(TestCase):
 
         self.assertIn('week', json_response)
         self.assertIn('month', json_response)
-        self.assertIn({'value': 84, 'name': 'electricity1'}, json_response['week'])
-        self.assertIn({'value': 16, 'name': 'electricity2'}, json_response['week'])
-        self.assertIn({'value': 84, 'name': 'electricity1'}, json_response['month'])
-        self.assertIn({'value': 16, 'name': 'electricity2'}, json_response['month'])
+        self.assertIn({'value': 84, 'name': 'Electricity 1 (low tariff)'}, json_response['week'])
+        self.assertIn({'value': 16, 'name': 'Electricity 2 (high tariff)'}, json_response['week'])
+        self.assertIn({'value': 84, 'name': 'Electricity 1 (low tariff)'}, json_response['month'])
+        self.assertIn({'value': 16, 'name': 'Electricity 2 (high tariff)'}, json_response['month'])
 
 
 class TestViewsWithoutData(TestViews):

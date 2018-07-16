@@ -21,8 +21,10 @@ $(document).ready(function(){
         ]
     };
 	
-	echarts_electricity_by_tariff_week_graph.showLoading();
-	echarts_electricity_by_tariff_month_graph.showLoading();
+	
+	
+	echarts_electricity_by_tariff_week_graph.showLoading('default', echarts_loading_options);
+	echarts_electricity_by_tariff_month_graph.showLoading('default', echarts_loading_options);
 	
 	/* Init graphs. */
 	$.get(echarts_by_tariff_url, function (xhr_data) {

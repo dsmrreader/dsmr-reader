@@ -79,6 +79,7 @@ class DashboardXhrElectricityConsumption(View):
             )
 
         data = {
+            'latest_delta_id': 0,
             'read_at': [],
             'currently_delivered': [],
             'currently_returned': [],
@@ -89,12 +90,19 @@ class DashboardXhrElectricityConsumption(View):
             },
         }
 
+        # Optional delta.
+        latest_delta_id = form.cleaned_data.get('latest_delta_id')
+
         # Optimize queries for large datasets by restricting the data to the last week in the first place.
         base_timestamp = timezone.now() - timezone.timedelta(hours=XHR_RECENT_CONSUMPTION_HOURS_AGO)
         electricity = ElectricityConsumption.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
+        if latest_delta_id:
+            electricity = electricity.filter(id__gt=latest_delta_id)
+
         for current in electricity:
             read_at = formats.date_format(timezone.localtime(current.read_at), 'DSMR_GRAPH_LONG_TIME_FORMAT')
+
             data['read_at'].append(read_at)
 
             if form.cleaned_data.get('delivered'):
@@ -107,6 +115,8 @@ class DashboardXhrElectricityConsumption(View):
                 data['phases']['l1'].append(float(current.phase_currently_delivered_l1) * 1000)  # kW -> W.
                 data['phases']['l2'].append(float(current.phase_currently_delivered_l2) * 1000)  # kW -> W.
                 data['phases']['l3'].append(float(current.phase_currently_delivered_l3) * 1000)  # kW -> W.
+
+            data['latest_delta_id'] = current.id
 
         return HttpResponse(
             json.dumps(data),

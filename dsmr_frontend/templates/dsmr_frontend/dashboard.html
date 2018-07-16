@@ -218,6 +218,7 @@
 
     <script type="text/javascript">
         var dashboard_graph_width = {{ frontend_settings.dashboard_graph_width }};
+        var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
     </script>
 
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts-common-4.1.0.rc2.min.js' %}"></script>
@@ -232,7 +233,7 @@
         
         var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
         var electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
-        var echarts_electricity_graph_interval = 30;
+        var echarts_electricity_graph_interval = 5;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/electricity.js' %}"></script>
 {% endif %}
@@ -244,7 +245,7 @@
         var phase_delivered_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
         var phase_delivered_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
         var phase_delivered_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
-        var echarts_phases_graph_interval = 30;
+        var echarts_phases_graph_interval = 5;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/phases.js' %}"></script>
 {% endif %}

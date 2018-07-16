@@ -15,8 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -638,6 +636,9 @@ msgstr "Recent gasverbruik (m<sup>3</sup>) in de afgelopen 24 uur"
 
 msgid "Recent temperatures (&deg;C) in the past 24 hours"
 msgstr "Recente temperatuurmetingen (&deg;C) in de afgelopen 24 uur"
+
+msgid "Loading..."
+msgstr "Bezig met laden..."
 
 msgid "per hour"
 msgstr "per uur"
@@ -1637,93 +1638,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "Display electricity phases"
-#~ msgstr "Toon elektriciteitsfasen"
-
-#~ msgid "Scroll electricity graph(s)"
-#~ msgstr "Scroll door elektriciteitsgrafiek(en)"
-
-#~ msgid "You can scroll back until one week ago"
-#~ msgstr "Je kunt tot een week terugscrollen"
-
-#~ msgid "Go backward by 60 units"
-#~ msgstr "Ga 60 eenheden achteruit"
-
-#~ msgid "Go backward by 30 units"
-#~ msgstr "Ga 30 eenheden achteruit"
-
-#~ msgid "Go backward by 5 units"
-#~ msgstr "Ga 5 eenheden achteruit"
-
-#~ msgid "Go forward by 5 units"
-#~ msgstr "Ga 5 eenheden vooruit"
-
-#~ msgid "Go forward by 30 units"
-#~ msgstr "Ga 30 eenheden vooruit"
-
-#~ msgid "Go forward by 60 units"
-#~ msgstr "Ga 60 eenheden vooruit"
-
-#~ msgid "Recent electricity returned (Watt)"
-#~ msgstr "Recente teruglevering elektriciteit (Watt)"
-
-#~ msgid "Scroll gas graph(s)"
-#~ msgstr "Scroll door gasgrafiek"
-
-#~ msgid "Phase L1"
-#~ msgstr "Fase L1"
-
-#~ msgid "Phase L2"
-#~ msgstr "Fase L2"
-
-#~ msgid "Phase L3"
-#~ msgstr "Fase L3"
-
-#~ msgid "Temperature"
-#~ msgstr "Temperatuur"
-
-#~ msgid "Tests notification system"
-#~ msgstr "Test notificatiesysteem"
-
-#~ msgid "Usage notification"
-#~ msgstr "Verbruiksnotificatie"
-
-#~ msgid "Notification service API key"
-#~ msgstr "API sleutel voor notificatie service"
-
-#~ msgid "The API key used send messages to your smartphone. Please visit https://notifymyandroid.com/ or https://www.prowlapp.com/ to download and use the apps."
-#~ msgstr "De API sleutel die gebruikt wordt om notificaties naar je smartphone te sturen. Bezoek https://notifymyandroid.com/ of https://www.prowlapp.com/ om de apps te downloaden en te gebruiken."
-
-#~ msgid "NotifyMyAndroid"
-#~ msgstr "NotifyMyAndroid"
-
-#~ msgid "You may check the status of your readings and data in the Status page."
-#~ msgstr "Je kunt de status van de metingen bekijken op de Status-pagina."
-
-#~ msgid "It's now possible to have the electricity tariffs merged to a single one. This might come handy when you pay your energy supplier fo a single tariff instead of high/low. You can enable this feature in  frontend configuration: 'Merge electricity tariffs'"
-#~ msgstr "Vanaf nu is het mogelijk om de elektriciteitstarieven samen te voegen tot enkeltarief. Dit komt van pas wanneer je energieleverancier je slechts één tarief in rekening brengt voor zowel piek als dal. Je kunt dit inschakelen in de interfaceconfiguratie bij  \"Voeg tarieven samen\""
-
-#~ msgid "It's now possible to automatically export your gas meter positions to your own Mindergas.nl account! See the FAQ in the documentation for a guide on how to create and/or link your account."
-#~ msgstr "Het is nu ook mogelijk om je gasmeterstanden automatisch door te geven aan je persoonlijke Mindergas.nl-account! Bekijk de FAQ in de documentatie voor meer informatie over hoe je een account aanmaakt en/of koppelt aan de applicatie."
-
-#~ msgid "There is now support for pushing notifications to your phone, summarizing your daily totals! Both Android and iOS are supported. See the FAQ in the documentation for more information."
-#~ msgstr "Vanaf nu is er ondersteuning voor het versturen van push notificaties naar je telefoon, met daarin je dagelijkse verbruik. Zie voor meer informatie de documentatie / FAQ."
-
-#~ msgid "Send notification"
-#~ msgstr "Stuur notificatie"
-
-#~ msgid "Whether or not you want to receive a notification of your daily usage on your smartphone"
-#~ msgstr "Bepaalt of je een dagelijkse notificatie wilt ontvangen op je smartphone over je energieverbruik."
-
-#~ msgid "MQTT JSON telegram configuration"
-#~ msgstr "MQTT JSON telegram configuratie"
-
-#~ msgid "The lifetime of readings, before discarding them."
-#~ msgstr "De levensduur van metingen, voordat ze verwijderd worden."
-
-#~ msgid "By default the application stores all readings taken. As there might be DSMR-readings about every second, this results in several millions of readings each year. This may cause degraded performance. For that reason you might want to apply retention to this data. Please note that enabling this feature will NOT discard ALL readings, as it will PRESERVE the first and last reading of each hour."
-#~ msgstr "Standaard bewaart de applicatie alle metingen. Echter, gezien metingen elke seconde binnen kunnen komen, kan dat leiden tot miljoenen metingen per jaar. Dit kan op den duur verslechterde performance veroorzaken. Daarom is het mogelijk om retentie toe te passen op de gegevens. N.B.: Deze feature gooit NIET alle metingen weg en bewaart van elk uur de eerste en laatste."
-
-#~ msgid "Discard most readings after 24 hours"
-#~ msgstr "Verwijder de meeste metingen na 24 uur"
