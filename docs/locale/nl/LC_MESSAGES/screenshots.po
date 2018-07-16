@@ -8,12 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2018-07-16 20:40+0200\n"
+"PO-Revision-Date: 2018-07-16 20:41+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.5.1\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../screenshots.rst:2
 msgid "Screenshots"
@@ -21,11 +25,15 @@ msgstr "Screenshots"
 
 #: ../../screenshots.rst:3
 msgid ""
-"Below you can find some screenshots of the application. Please read the "
-"note below regarding solar panels and support for them."
+"Below you can find some screenshots of the application. Please read the note "
+"below regarding solar panels and support for them."
 msgstr ""
-"Hieronder staan enkele screenshots van de applicatie. Lees hieronder ook "
-"de notitie met betrekking tot zonnepanelen en de ondersteuning daarvoor."
+"Hieronder staan enkele screenshots van de applicatie. Lees hieronder ook de "
+"notitie met betrekking tot zonnepanelen en de ondersteuning daarvoor."
+
+#: ../../screenshots.rst:8
+msgid "Contents"
+msgstr "Inhoudsopgave"
 
 #: ../../screenshots.rst:11
 msgid "Dashboard"
@@ -33,11 +41,11 @@ msgstr "Dashboard"
 
 #: ../../screenshots.rst:12
 msgid ""
-"The dashboard displays the latest information regarding any consumption "
-"of today and the current month so far."
+"The dashboard displays the latest information regarding any consumption of "
+"today and the current month so far."
 msgstr ""
-"Het dashboard geeft de meest recente informatie weer over je "
-"energieverbruik van vandaag en de lopende maand tot nu toe."
+"Het dashboard geeft de meest recente informatie weer over je energieverbruik "
+"van vandaag en de lopende maand tot nu toe."
 
 #: ../../screenshots.rst:20
 msgid "Archive"
@@ -48,9 +56,9 @@ msgid ""
 "The archive allows you to go back to any moment tracked. The data can be "
 "plotted either on day, month or year level."
 msgstr ""
-"Het archief stelt je in staat om terug in de tijd te gaan naar elk "
-"moment dat gemeten is met de applicatie. Gegevens kunnen getoond worden "
-"op verschillende detailniveaus: per dag, per maand en per jaar."
+"Het archief stelt je in staat om terug in de tijd te gaan naar elk moment dat "
+"gemeten is met de applicatie. Gegevens kunnen getoond worden op verschillende "
+"detailniveaus: per dag, per maand en per jaar."
 
 #: ../../screenshots.rst:29
 msgid "Trends"
@@ -66,94 +74,103 @@ msgstr "Statistieken"
 
 #: ../../screenshots.rst:39
 msgid ""
-"The statistics page will display the current state of your meter and the "
-"energy prices currently apply (if any)."
+"The statistics page will display the current state of your meter and the energy "
+"prices currently apply (if any)."
 msgstr ""
-"De statistiekenpagina geeft de huidige staat van je slimme meter en "
-"de huidige energietarieven weer (wanneer van toepassing)."
+"De statistiekenpagina geeft de huidige staat van je slimme meter en de huidige "
+"energietarieven weer (wanneer van toepassing)."
 
 #: ../../screenshots.rst:47
+msgid "Energy contracts"
+msgstr "Energiecontracten"
+
+#: ../../screenshots.rst:48
+msgid "Summary of all your contracts and the amount of energy consumed/generated."
+msgstr ""
+"Overzicht van alle energiecontracten en de hoeveelheid verbruikte/geleverde "
+"energie."
+
+#: ../../screenshots.rst:56
 msgid "Compare"
 msgstr "Vergelijk"
 
-#: ../../screenshots.rst:48
+#: ../../screenshots.rst:57
 msgid "This page allows you to compare two days, months or years tracked before."
 msgstr ""
-"Met deze pagina vergelijk je eenvoudig twee dagen, maanden of jaren met "
-"elkaar."
+"Met deze pagina vergelijk je eenvoudig twee dagen, maanden of jaren met elkaar."
 
-#: ../../screenshots.rst:56
+#: ../../screenshots.rst:65
 msgid "Status"
 msgstr "Status"
 
-#: ../../screenshots.rst:57
+#: ../../screenshots.rst:66
 msgid ""
-"The status page will show the 'health' of the application and any data "
-"tracked. If there are any problems regarding data handling, they should "
-"be indicated here."
+"The status page will show the 'health' of the application and any data tracked. "
+"If there are any problems regarding data handling, they should be indicated "
+"here."
 msgstr ""
-"De statuspagina geeft de 'gezondheid' van de applicatie en die van de"
-" dataverwerking weer. Mochten er problemen zijn met het verzamelen van "
-"gegevens dan zou dat hier zichtbaar moeten zijn."
+"De statuspagina geeft de 'gezondheid' van de applicatie en die van de "
+"dataverwerking weer. Mochten er problemen zijn met het verzamelen van gegevens "
+"dan zou dat hier zichtbaar moeten zijn."
 
-#: ../../screenshots.rst:65
+#: ../../screenshots.rst:74
 msgid "Export"
 msgstr "Exporteren"
 
-#: ../../screenshots.rst:66
+#: ../../screenshots.rst:75
 msgid ""
-"Want to export day totals or hourly data to Excel? This page allows you "
-"to export the data in .CSV format."
+"Want to export day totals or hourly data to Excel? This page allows you to "
+"export the data in .CSV format."
 msgstr ""
-"Wil je alle dag- of uurtotalen exporteren om in Excel te bekijken? Dat "
-"kan via deze pagina door ze te exporteren in .CSV-formaat."
+"Wil je alle dag- of uurtotalen exporteren om in Excel te bekijken? Dat kan via "
+"deze pagina door ze te exporteren in .CSV-formaat."
 
-#: ../../screenshots.rst:74
+#: ../../screenshots.rst:83
 msgid "Settings"
 msgstr "instellingen"
 
-#: ../../screenshots.rst:75
+#: ../../screenshots.rst:84
 msgid ""
 "The project is written using Django and some of it's backend pages are "
 "displayed below."
 msgstr ""
-"Het project is gemaakt met Django en hieronder staan enkele "
-"beheerderspagina's daarvan."
+"Het project is gemaakt met Django en hieronder staan enkele beheerderspagina's "
+"daarvan."
 
-#: ../../screenshots.rst:77
+#: ../../screenshots.rst:86
 msgid ""
 "The application has quite some features, such are temperature tracking, "
-"automated backups and Dropbox intergration. This page displays the status"
-" of them all."
+"automated backups and Dropbox intergration. This page displays the status of "
+"them all."
 msgstr ""
-"De applicatie heeft behoorlijk wat features, zoals buitentemperatuur "
-"bijhouden, geautomatiseerde back-ups en Dropbox-integratie. Op deze "
-"pagina kun je een overzicht vinden van alle instellingen."
+"De applicatie heeft behoorlijk wat features, zoals buitentemperatuur bijhouden, "
+"geautomatiseerde back-ups en Dropbox-integratie. Op deze pagina kun je een "
+"overzicht vinden van alle instellingen."
 
-#: ../../screenshots.rst:84
+#: ../../screenshots.rst:93
 msgid "Here you may manage your energy prices:"
 msgstr "Hier kun je je energieprijzen beheren:"
 
-#: ../../screenshots.rst:90
+#: ../../screenshots.rst:99
 msgid "This allows you to alter your backup settings:"
 msgstr "Hiermee beheer je de instellingen voor je back-ups:"
 
-#: ../../screenshots.rst:96
+#: ../../screenshots.rst:105
 msgid "Pick your own colors for the graphs displayed:"
 msgstr "Kies je eigen kleuren voor de grafieken:"
 
-#: ../../screenshots.rst:102
+#: ../../screenshots.rst:111
 msgid ""
-"The application supports the daily export of your gas meter positions (if"
-" any) to your personal mindergas.nl account."
+"The application supports the daily export of your gas meter positions (if any) "
+"to your personal mindergas.nl account."
 msgstr ""
-"De applicatie ondersteunt het dagelijks exporteren van je gasmeterstanden"
-" naar je eigen account bij mindergas.nl."
+"De applicatie ondersteunt het dagelijks exporteren van je gasmeterstanden naar "
+"je eigen account bij mindergas.nl."
 
-#: ../../screenshots.rst:108
+#: ../../screenshots.rst:117
 msgid ""
-"There are several additional backend pages for the other configuration "
-"options as well."
+"There are several additional backend pages for the other configuration options "
+"as well."
 msgstr ""
 "Er zijn nog diverse andere beheerpagina's beschikbaar voor de overige "
 "configuratie-instellingen."
