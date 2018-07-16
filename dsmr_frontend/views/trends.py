@@ -1,6 +1,7 @@
 import json
 
 from django.views.generic.base import TemplateView, View
+from django.utils.translation import ugettext as _
 from django.http.response import HttpResponse
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
@@ -67,6 +68,10 @@ class TrendsXhrElectricityByTariff(View):
     def get(self, request):  # noqa: C901
         capabilities = dsmr_backend.services.get_capabilities()
         data = {}
+        translation_mapping = {
+            'electricity1': _('Electricity 1 (low tariff)'),
+            'electricity2': _('Electricity 2 (high tariff)'),
+        }
 
         if not capabilities['any']:
             return HttpResponse(json.dumps(data), content_type='application/json')
@@ -76,12 +81,12 @@ class TrendsXhrElectricityByTariff(View):
         month_date = now.date() - relativedelta(months=1)
 
         data['week'] = [
-            {'name': k, 'value': v}
+            {'name': translation_mapping[k], 'value': v}
             for k, v in
             dsmr_stats.services.electricity_tariff_percentage(start_date=week_date).items()
         ]
         data['month'] = [
-            {'name': k, 'value': v}
+            {'name': translation_mapping[k], 'value': v}
             for k, v in
             dsmr_stats.services.electricity_tariff_percentage(start_date=month_date).items()
         ]

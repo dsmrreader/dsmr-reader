@@ -80,7 +80,7 @@ $(document).ready(function(){
         ]
     };
 	
-	echarts_phases_graph.showLoading();
+	echarts_phases_graph.showLoading('default', echarts_loading_options);
 	
 	/* Init graph. */
 	$.get(echarts_phases_graph_url, function (xhr_data) {

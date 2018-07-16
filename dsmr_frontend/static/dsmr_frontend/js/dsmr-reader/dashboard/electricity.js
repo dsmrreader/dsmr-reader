@@ -72,7 +72,7 @@ $(document).ready(function(){
     };
 	
 	
-	echarts_electricity_graph.showLoading();
+	echarts_electricity_graph.showLoading('default', echarts_loading_options);
 	
 	/* Init graph. */
 	$.get(echarts_electricity_graph_url, function (xhr_data) {

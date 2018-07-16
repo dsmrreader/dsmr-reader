@@ -15,8 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -638,6 +636,9 @@ msgstr "Recent gasverbruik (m<sup>3</sup>) in de afgelopen 24 uur"
 
 msgid "Recent temperatures (&deg;C) in the past 24 hours"
 msgstr "Recente temperatuurmetingen (&deg;C) in de afgelopen 24 uur"
+
+msgid "Loading..."
+msgstr "Bezig met laden..."
 
 msgid "per hour"
 msgstr "per uur"
@@ -1637,6 +1638,16 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#, fuzzy
+#~| msgid "Electricity"
+#~ msgid "Electricity 1"
+#~ msgstr "Elektriciteit"
+
+#, fuzzy
+#~| msgid "Electricity"
+#~ msgid "Electricity 2"
+#~ msgstr "Elektriciteit"
 
 #~ msgid "Display electricity phases"
 #~ msgstr "Toon elektriciteitsfasen"
