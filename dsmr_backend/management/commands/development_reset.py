@@ -4,10 +4,11 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
-from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_notification.models.settings import NotificationSetting
-from dsmr_api.models import APISettings
+from dsmr_consumption.models.settings import ConsumptionSettings
+from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_frontend.models.message import Notification
+from dsmr_api.models import APISettings
 
 
 class Command(BaseCommand):
@@ -31,6 +32,7 @@ class Command(BaseCommand):
         APISettings.objects.update(allow=not options['no_api'], auth_key='test')
         BackupSettings.objects.update(daily_backup=False)
         DropboxSettings.objects.update(access_token=None)
+        ConsumptionSettings.objects.update(compactor_grouping_type=ConsumptionSettings.COMPACTOR_GROUPING_BY_READING)
         MinderGasSettings.objects.update(export=False, auth_token=None)
         NotificationSetting.objects.update(
             notification_service=None, pushover_api_key=None, pushover_user_key=None, prowl_api_key=None

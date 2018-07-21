@@ -16,6 +16,7 @@ Listed in any order, sorted by name.
 - `balk77 <https://github.com/balk77>`_
 - `Baseje <https://github.com/Baseje>`_
 - `Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_
+- `Bl4ckviper <https://github.com/Bl4ckviper>`_
 - `Calimerorulez <https://github.com/Calimerorulez>`_
 - `Cyw00d <https://github.com/Cyw00d>`_
 - `dajappie <https://github.com/dajappie>`_

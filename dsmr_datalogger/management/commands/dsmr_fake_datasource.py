@@ -91,10 +91,10 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         currently_delivered = random.randint(0, 1500) * 0.001  # kW
         currently_returned = 0
 
-        if with_electricity_returned:
-            electricity_1_returned = electricity_1 * 0.1  # Random though of solar panel during night.
-            electricity_2_returned = electricity_1 * 1.25  # Random number.
-            currently_returned = random.randint(0, 2500) * 0.001  # kW
+        # Randomly switch between electricity delivered and returned for a more realistic graph.
+        if with_electricity_returned and random.randint(0, 1) == 0:
+            currently_returned = currently_delivered
+            currently_delivered = 0
 
         data = [
             "/XMX5LGBBFFB123456789\r\n",
