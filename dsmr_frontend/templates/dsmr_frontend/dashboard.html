@@ -235,7 +235,7 @@
         var electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
         var echarts_electricity_graph_interval = 5;
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/electricity.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/electricity.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.multi_phases %}
@@ -247,7 +247,7 @@
         var phase_delivered_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
         var echarts_phases_graph_interval = 5;
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/phases.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/phases.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.gas %}
@@ -255,7 +255,7 @@
         var echarts_gas_graph_url = "{% url 'frontend:dashboard-xhr-gas' %}";
         var gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/gas.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/gas.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.weather %}
@@ -263,7 +263,7 @@
         var echarts_temperature_graph_url = "{% url 'frontend:dashboard-xhr-temperature' %}";
         var temperature_color = "{{ frontend_settings.temperature_color }}";
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/temperature.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/temperature.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
  
     <script type="text/javascript">

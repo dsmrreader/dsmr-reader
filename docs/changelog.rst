@@ -25,6 +25,7 @@ v1.22.0 - 2018-xx-x
 
 - [`#493 <https://github.com/dennissiemensma/dsmr-reader/issues/493>`_] Requirements update (July 2018)
 - [`#495 <https://github.com/dennissiemensma/dsmr-reader/issues/495>`_] Update documentation screenshots
+- [`#498 <https://github.com/dennissiemensma/dsmr-reader/issues/498>`_] Frontend improvements
 - [`#xxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxx>`_] xxxxxxxxxxx
 
 

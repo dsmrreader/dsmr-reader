@@ -108,9 +108,9 @@
         var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
         var electricity_delivered_alternate_color = "{{ frontend_settings.electricity_delivered_alternate_color }}";
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/trends/average.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/trends/average.js' %}?r=v{{ dsmr_version }}"></script>
     
     {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/trends/tariff.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/trends/tariff.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 {% endblock %}
