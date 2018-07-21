@@ -77,6 +77,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             currently_delivered=0,
             currently_returned=0,
             phase_currently_delivered_l1=1,
+            phase_currently_returned_l1=2,
         )
 
         # Should fail.
@@ -92,6 +93,8 @@ class TestServices(InterceptStdoutMixin, TestCase):
             currently_returned=0,
             phase_currently_delivered_l2=1,
             phase_currently_delivered_l3=1,
+            phase_currently_returned_l2=2,
+            phase_currently_returned_l3=2,
         )
         capabilities = dsmr_backend.services.get_capabilities()
         self.assertTrue(dsmr_backend.services.get_capabilities('multi_phases'))

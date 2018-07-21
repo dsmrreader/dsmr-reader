@@ -26,7 +26,7 @@ $(document).ready(function(){
         ],
         yAxis: [
             {
-                type : 'value',
+                type : 'value'
             }
         ],
         dataZoom: [

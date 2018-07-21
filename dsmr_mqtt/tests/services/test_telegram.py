@@ -95,8 +95,11 @@ electricity_currently_returned = hhh
 phase_currently_delivered_l1 = iii
 phase_currently_delivered_l2 = jjj
 phase_currently_delivered_l3 = kkk
-extra_device_timestamp = lll
-extra_device_delivered = mmm
+phase_currently_returned_l1 = lll
+phase_currently_returned_l2 = mmm
+phase_currently_returned_l3 = nnn
+extra_device_timestamp = ooo
+extra_device_delivered = ppp
 '''
         json_settings.save()
 
@@ -136,6 +139,9 @@ electricity_currently_returned = dsmr/telegram/electricity_currently_returned
 phase_currently_delivered_l1 = dsmr/telegram/phase_currently_delivered_l1
 phase_currently_delivered_l2 = dsmr/telegram/phase_currently_delivered_l2
 phase_currently_delivered_l3 = dsmr/telegram/phase_currently_delivered_l3
+phase_currently_returned_l1 = dsmr/telegram/phase_currently_returned_l1
+phase_currently_returned_l2 = dsmr/telegram/phase_currently_returned_l2
+phase_currently_returned_l3 = dsmr/telegram/phase_currently_returned_l3
 extra_device_timestamp = dsmr/telegram/extra_device_timestamp
 extra_device_delivered = dsmr/telegram/extra_device_delivered
 '''

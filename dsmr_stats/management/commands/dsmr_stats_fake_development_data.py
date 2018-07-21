@@ -57,6 +57,9 @@ class Command(BaseCommand):
             phase_currently_delivered_l1=models.F('currently_delivered') * factor,  # Split.
             phase_currently_delivered_l2=models.F('currently_delivered') * (1 - factor),  # Remainder of split.
             phase_currently_delivered_l3=0.005,  # Weird constant, to keep it simple.
+            phase_currently_returned_l1=models.F('currently_returned') * factor,  # Split.
+            phase_currently_returned_l2=models.F('currently_returned') * (1 - factor),  # Remainder of split.
+            phase_currently_returned_l3=0.005,  # Weird constant, to keep it simple.
         )
 
         print('Altering hour statistics...')

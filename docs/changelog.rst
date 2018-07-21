@@ -23,11 +23,11 @@ v1.22.0 - 2018-xx-x
 
 **Tickets resolved in this release:**
 
-- [`#493 <https://github.com/dennissiemensma/dsmr-reader/issues/493>`_] Requirements update (July 2018)
+- [`#296 <https://github.com/dennissiemensma/dsmr-reader/issues/296>`_] 3 fasen teruglevering
+- [`#501 <https://github.com/dennissiemensma/dsmr-reader/issues/501>`_] Lijn grafiek bij geen teruglevering
 - [`#495 <https://github.com/dennissiemensma/dsmr-reader/issues/495>`_] Update documentation screenshots
 - [`#498 <https://github.com/dennissiemensma/dsmr-reader/issues/498>`_] Frontend improvements
-- [`#501 <https://github.com/dennissiemensma/dsmr-reader/issues/501>`_] Lijn grafiek bij geen teruglevering
-- [`#xxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxx>`_] xxxxxxxxxxx
+- [`#493 <https://github.com/dennissiemensma/dsmr-reader/issues/493>`_] Requirements update (July 2018)
 
 
 

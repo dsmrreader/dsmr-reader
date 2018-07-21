@@ -23,7 +23,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         return [
             "/ISk5\2MT382-1003\r\n",
             "\r\n",
-            "0-0:96.1.1(xxxxxxxxxxx)\r\n",
+            "0-0:96.1.1(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "1-0:1.8.1(01234.784*kWh)\r\n",
             "1-0:1.8.2(04321.725*kWh)\r\n",
             "1-0:2.8.1(00000.000*kWh)\r\n",
@@ -36,7 +36,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-0:96.13.1()\r\n",
             "0-0:96.13.0()\r\n",
             "0-1:24.1.0(3)\r\n",
-            "0-1:96.1.0(xxxxxxxxxxxx)\r\n",
+            "0-1:96.1.0(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "0-1:24.3.0(160410130000)(2C)(60)(1)(0-1:24.2.1)(m3)\r\n",
             "(07890.693)\r\n",
             "0-1:24.4.0(1)\r\n",

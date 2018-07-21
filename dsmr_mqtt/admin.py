@@ -59,6 +59,9 @@ electricity_currently_returned = electricity_currently_returned
 phase_currently_delivered_l1 = phase_currently_delivered_l1
 phase_currently_delivered_l2 = phase_currently_delivered_l2
 phase_currently_delivered_l3 = phase_currently_delivered_l3
+phase_currently_returned_l1 = phase_currently_returned_l1
+phase_currently_returned_l2 = phase_currently_returned_l2
+phase_currently_returned_l3 = phase_currently_returned_l3
 extra_device_timestamp = extra_device_timestamp
 extra_device_delivered = extra_device_delivered
 </pre>
@@ -94,6 +97,9 @@ electricity_currently_returned = dsmr/reading/electricity_currently_returned
 phase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1
 phase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2
 phase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3
+phase_currently_returned_l1 = dsmr/reading/phase_currently_returned_l1
+phase_currently_returned_l2 = dsmr/reading/phase_currently_returned_l2
+phase_currently_returned_l3 = dsmr/reading/phase_currently_returned_l3
 extra_device_timestamp = dsmr/reading/extra_device_timestamp
 extra_device_delivered = dsmr/reading/extra_device_delivered
 </pre>
