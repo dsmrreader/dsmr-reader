@@ -18,7 +18,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.22.0 - 2018-07-23
+v1.22.0 - 2018-07-22
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
