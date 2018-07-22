@@ -28,6 +28,15 @@ v1.23.0 - 2018-xx-xx
 
 
 
+v1.22.1 - 2018-07-22
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#506 <https://github.com/dennissiemensma/dsmr-reader/issues/506>`_] Fasen-grafiek hangt op 'loading'
+
+
+
 v1.22.0 - 2018-07-22
 ^^^^^^^^^^^^^^^^^^^^
 

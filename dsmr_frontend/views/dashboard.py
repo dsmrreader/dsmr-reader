@@ -117,9 +117,10 @@ class DashboardXhrElectricityConsumption(View):
                 data['currently_returned'].append(float(current.currently_returned) * 1000)
 
             if form.cleaned_data.get('phases'):
-                data['phases_delivered']['l1'].append(float(current.phase_currently_delivered_l1) * 1000)
-                data['phases_delivered']['l2'].append(float(current.phase_currently_delivered_l2) * 1000)
-                data['phases_delivered']['l3'].append(float(current.phase_currently_delivered_l3) * 1000)
+                # 'or 0' is required due to empty data.
+                data['phases_delivered']['l1'].append(float(current.phase_currently_delivered_l1 or 0) * 1000)
+                data['phases_delivered']['l2'].append(float(current.phase_currently_delivered_l2 or 0) * 1000)
+                data['phases_delivered']['l3'].append(float(current.phase_currently_delivered_l3 or 0) * 1000)
 
                 if form.cleaned_data.get('returned'):
                     # 'or 0' is required due to backwards compatibility.
