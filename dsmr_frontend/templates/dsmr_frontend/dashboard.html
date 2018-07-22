@@ -5,7 +5,7 @@
 {% load hex_to_rgb %}
 
 {% block title %}{% trans "Dashboard" %}{% endblock %}
-{% block header %}{% trans "Dashboard" %} &nbsp; <i class="fa fa-dashboard"></i>{% endblock %}
+{% block header %}{% trans "Dashboard" %} &nbsp; <i class="fas fa-tachometer-alt"></i>{% endblock %}
 
 {% block header_right %}
     <li style="width: 150px; text-align: right">
@@ -17,8 +17,8 @@
 	{% if capabilities.electricity %}
 	<li>
 	    <a href="" onclick="return false;" style="cursor: default;">
-	        <span class="badge bg-red"><i class="fa fa-bolt"></i> 
-		        &nbsp; <span id="latest_electricity"><i class="fa fa-refresh fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}
+	        <span class="badge bg-red"><i class="fas fa-bolt"></i> 
+		        &nbsp; <span id="latest_electricity"><i class="fas fa-sync fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}
 		        &nbsp; <small id="cost_per_hour"></small>
 	        </span>
 	    </a>
@@ -28,8 +28,8 @@
 	{% if capabilities.electricity_returned  %}
 	<li>
 	    <a href="" onclick="return false;" style="cursor: default;">
-	        <span class="badge bg-green"><i class="fa fa-bolt"></i> 
-	        &nbsp; <span id="latest_electricity_returned"><i class="fa fa-refresh fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}</span>
+	        <span class="badge bg-green"><i class="fas fa-bolt"></i> 
+	        &nbsp; <span id="latest_electricity_returned"><i class="fas fa-sync fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}</span>
 	    </a>
 	</li>
 	{% endif %}
@@ -40,7 +40,7 @@
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
 {% endif %}
 
@@ -55,7 +55,7 @@
                     {% for current_notification in notifications %}
                     <div class="alert alert-warning" role="alert">
                         <button class="btn btn-sm btn-danger delete-notification" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Delete notification' %}">
-                            <i class="fa fa-remove"></i>
+                            <i class="fas fa-times"></i>
                         </button>
                         &nbsp;
 
@@ -139,7 +139,7 @@
     {% if capabilities.electricity or capabilities.electricity_returned or capabilities.gas %}
     <div class="row consumption-block">
         <div class="col-md-12">
-            <div id="consumption-loader" class="xhr-hidden text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+            <div id="consumption-loader" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
             <div id="consumption-holder"></div>
         </div>
     </div>
@@ -276,7 +276,7 @@
         $(document).ready(function(){
             $(".delete-notification").click(function(){
             	var notification_id = $(this).attr("data-notification-id");
-            	$(this).html('<i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>')
+            	$(this).html('<i class="fas fa-spinner fa-pulse fa-fw xhr-loader"></i>')
             	mark_notification_read(this, notification_id);
             	return false
             });

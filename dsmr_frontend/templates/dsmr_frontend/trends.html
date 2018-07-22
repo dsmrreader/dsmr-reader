@@ -5,14 +5,14 @@
 {% load hex_to_rgb %}
 
 {% block title %}{% trans "Trends" %}{% endblock %}
-{% block header %}{% trans "Trends" %} &nbsp; <i class="fa fa-bar-chart"></i>{% endblock %}
+{% block header %}{% trans "Trends" %} &nbsp; <i class="fas fa-chart-bar"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
 {% else %}
     <div class="alert alert-info" role="alert">

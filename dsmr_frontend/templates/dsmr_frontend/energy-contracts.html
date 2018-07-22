@@ -4,19 +4,19 @@
 {% load i18n %}
 
 {% block title %}{% trans "Energy contracts" %}{% endblock %}
-{% block header %}{% trans "Energy contracts" %} &nbsp; <i class="fa fa-list"></i>{% endblock %}
+{% block header %}{% trans "Energy contracts" %} &nbsp; <i class="fas fa-newspaper"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
 {% endif %}
 
 <div class="alert alert-info" role="alert">
-    <span class="fa fa-exclamation fa-2x"></span> 
+    <span class="fas fa-exclamation fa-2x"></span> 
     {% blocktrans %}Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier.{% endblocktrans %}
     {% blocktrans %}Also, any electricity returned is not taken into account for the cost, the kWh is only displayed for your convenience.{% endblocktrans %}
 </div>

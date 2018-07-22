@@ -38,6 +38,7 @@ class Command(BaseCommand):
             notification_service=None, pushover_api_key=None, pushover_user_key=None, prowl_api_key=None
         )
         Notification.objects.update(read=True)
+        Notification.objects.create(message='Development reset completed.')
 
         try:
             # Reset passwd.
