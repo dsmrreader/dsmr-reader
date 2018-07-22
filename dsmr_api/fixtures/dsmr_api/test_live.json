@@ -45,7 +45,10 @@
         "electricity_delivered_2": "528.500",
         "phase_currently_delivered_l1": "0.123",
         "phase_currently_delivered_l2": "0.456",
-        "phase_currently_delivered_l3": "0.789"
+        "phase_currently_delivered_l3": "0.789",
+        "phase_currently_returned_l1": "0.222",
+        "phase_currently_returned_l2": "0.444",
+        "phase_currently_returned_l3": "0.666"
     },
     "model": "dsmr_datalogger.dsmrreading",
     "pk": 3

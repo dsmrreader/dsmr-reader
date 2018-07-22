@@ -11,6 +11,9 @@ DSMR_MAPPING = {
     '1-0:21.7.0': 'phase_currently_delivered_l1',
     '1-0:41.7.0': 'phase_currently_delivered_l2',
     '1-0:61.7.0': 'phase_currently_delivered_l3',
+    '1-0:22.7.0': 'phase_currently_returned_l1',
+    '1-0:42.7.0': 'phase_currently_returned_l2',
+    '1-0:62.7.0': 'phase_currently_returned_l3',
 
     # For some reason this identifier contains two fields, therefor we split them.
     '0-1:24.2.1': ('extra_device_timestamp', 'extra_device_delivered'),

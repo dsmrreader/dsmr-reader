@@ -2,7 +2,14 @@ $(document).ready(function(){
 	
 	var echarts_phases_graph = echarts.init(document.getElementById('echarts-phases-graph'));
     var echarts_phases_initial_options = {
-        color: [phase_delivered_l1_color, phase_delivered_l2_color, phase_delivered_l3_color],
+        color: [
+        	phase_delivered_l1_color,
+        	phase_delivered_l2_color,
+        	phase_delivered_l3_color,
+        	phase_returned_l1_color,
+        	phase_returned_l2_color,
+        	phase_returned_l3_color
+        ],
     	tooltip : {
             trigger: 'axis',
             axisPointer: {
@@ -27,7 +34,7 @@ $(document).ready(function(){
         ],
         yAxis: [
             {
-                type : 'value',
+                type : 'value'
             }
         ],
         dataZoom: [
@@ -55,26 +62,50 @@ $(document).ready(function(){
         series : [
             {
             	smooth: true,
-                name: 'Watt (L1)',
+                name: 'Watt (L1+)',
                 type: 'line',
                 areaStyle: {},
-                stack: 'dummy',
+                stack: 'delivered',
                 data: null
             },
             {
             	smooth: true,
-                name: 'Watt (L2)',
+                name: 'Watt (L2+)',
                 type: 'line',
                 areaStyle: {},
-                stack: 'dummy',
+                stack: 'delivered',
                 data: null
             },
             {
             	smooth: true,
-                name: 'Watt (L3)',
+                name: 'Watt (L3+)',
                 type: 'line',
                 areaStyle: {},
-                stack: 'dummy',
+                stack: 'delivered',
+                data: null
+            },
+            {
+            	smooth: true,
+                name: 'Watt (L1-)',
+                type: 'line',
+                areaStyle: {},
+                stack: 'returned',
+                data: null
+            },
+            {
+            	smooth: true,
+                name: 'Watt (L2-)',
+                type: 'line',
+                areaStyle: {},
+                stack: 'returned',
+                data: null
+            },
+            {
+            	smooth: true,
+                name: 'Watt (L3-)',
+                type: 'line',
+                areaStyle: {},
+                stack: 'returned',
                 data: null
             }
         ]
@@ -93,9 +124,12 @@ $(document).ready(function(){
 
 	    /* Different set of options, to prevent the dataZoom being reset on each update. */
 	    echarts_phases_update_options.xAxis[0].data = xhr_data.read_at;
-	    echarts_phases_update_options.series[0].data = xhr_data.phases.l1;
-	    echarts_phases_update_options.series[1].data = xhr_data.phases.l2;
-	    echarts_phases_update_options.series[2].data = xhr_data.phases.l3;
+	    echarts_phases_update_options.series[0].data = xhr_data.phases_delivered.l1;
+	    echarts_phases_update_options.series[1].data = xhr_data.phases_delivered.l2;
+	    echarts_phases_update_options.series[2].data = xhr_data.phases_delivered.l3;
+	    echarts_phases_update_options.series[3].data = xhr_data.phases_returned.l1;
+	    echarts_phases_update_options.series[4].data = xhr_data.phases_returned.l2;
+	    echarts_phases_update_options.series[5].data = xhr_data.phases_returned.l3;
 	    echarts_phases_graph.setOption(echarts_phases_update_options);
 	    
 	    var latest_delta_id = xhr_data.latest_delta_id;
@@ -113,9 +147,12 @@ $(document).ready(function(){
 				for (var i = 0 ; i < xhr_data.read_at.length ; i++)
 				{
 					echarts_phases_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
-					echarts_phases_update_options.series[0].data.push(xhr_data.phases.l1[i]);
-					echarts_phases_update_options.series[1].data.push(xhr_data.phases.l2[i]);
-					echarts_phases_update_options.series[2].data.push(xhr_data.phases.l3[i]);
+					echarts_phases_update_options.series[0].data.push(xhr_data.phases_delivered.l1[i]);
+					echarts_phases_update_options.series[1].data.push(xhr_data.phases_delivered.l2[i]);
+					echarts_phases_update_options.series[2].data.push(xhr_data.phases_delivered.l3[i]);
+					echarts_phases_update_options.series[3].data.push(xhr_data.phases_returned.l1[i]);
+					echarts_phases_update_options.series[4].data.push(xhr_data.phases_returned.l2[i]);
+					echarts_phases_update_options.series[5].data.push(xhr_data.phases_returned.l3[i]);
 				}
 				
 				latest_delta_id = xhr_data.latest_delta_id;

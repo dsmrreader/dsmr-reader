@@ -316,6 +316,9 @@ Parameters
 - ``phase_currently_delivered_l1`` (*float*) - Current electricity used by phase L1 (in kW)
 - ``phase_currently_delivered_l2`` (*float*) - Current electricity used by phase L2 (in kW)
 - ``phase_currently_delivered_l3`` (*float*) - Current electricity used by phase L3 (in kW)
+- ``phase_currently_returned_l1`` (*float*) - Current electricity returned by phase L1 (in kW)
+- ``phase_currently_returned_l2`` (*float*) - Current electricity returned by phase L2 (in kW)
+- ``phase_currently_returned_l3`` (*float*) - Current electricity returned by phase L3 (in kW)
 - ``extra_device_timestamp`` (*datetime*) - Last timestamp read from the extra device connected (gas meter)
 - ``extra_device_delivered`` (*float*) - Last value read from the extra device connected (gas meter)
 
@@ -388,6 +391,9 @@ Using **requests** (Python)::
         "phase_currently_delivered_l1": null,
         "phase_currently_delivered_l2": null,
         "phase_currently_delivered_l3": null,
+        "phase_currently_returned_l1": null,
+        "phase_currently_returned_l2": null,
+        "phase_currently_returned_l3": null,
         "extra_device_timestamp": null,
         "extra_device_delivered": null
     }
@@ -473,6 +479,9 @@ Using **requests** (Python)::
                 "phase_currently_delivered_l1": null,
                 "phase_currently_delivered_l2": null,
                 "phase_currently_delivered_l3": null,
+                "phase_currently_returned_l1": null,
+                "phase_currently_returned_l2": null,
+                "phase_currently_returned_l3": null,
                 "extra_device_timestamp": "2015-12-11T21:00:00Z",
                 "extra_device_delivered": "956.212"
             },
@@ -528,6 +537,9 @@ Using **requests** (Python)::
                 "phase_currently_delivered_l1": "0.024",
                 "phase_currently_delivered_l2": "0.054",
                 "phase_currently_delivered_l3": "0.000",
+                "phase_currently_returned_l1": "0.000",
+                "phase_currently_returned_l2": "0.000",
+                "phase_currently_returned_l3": "0.000",
                 "extra_device_timestamp": "2017-04-29T03:00:00Z",
                 "extra_device_delivered": "1971.929"
             }
@@ -583,6 +595,9 @@ Using **requests** (Python)::
                 "phase_currently_delivered_l1": "0.017",
                 "phase_currently_delivered_l2": "0.058",
                 "phase_currently_delivered_l3": "0.000",
+                "phase_currently_returned_l1": "0.000",
+                "phase_currently_returned_l2": "0.000",
+                "phase_currently_returned_l3": "0.000",
                 "extra_device_timestamp": "2017-01-31T22:00:00Z",
                 "extra_device_delivered": "1835.904"
             },

@@ -18,6 +18,19 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
+v1.22.0 - 2018-07-22
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#296 <https://github.com/dennissiemensma/dsmr-reader/issues/296>`_] 3 fasen teruglevering
+- [`#501 <https://github.com/dennissiemensma/dsmr-reader/issues/501>`_] Lijn grafiek bij geen teruglevering
+- [`#495 <https://github.com/dennissiemensma/dsmr-reader/issues/495>`_] Update documentation screenshots
+- [`#498 <https://github.com/dennissiemensma/dsmr-reader/issues/498>`_] Frontend improvements
+- [`#493 <https://github.com/dennissiemensma/dsmr-reader/issues/493>`_] Requirements update (July 2018)
+
+
+
 v1.21.1 - 2018-07-16
 ^^^^^^^^^^^^^^^^^^^^
 

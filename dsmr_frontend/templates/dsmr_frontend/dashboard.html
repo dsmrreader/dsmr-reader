@@ -166,7 +166,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Recent distribution of electricity phases P+ (Watt) in the past 24 hours" %}
+                    {% trans "Recent distribution of electricity phases (Watt) in the past 24 hours" %}
                 </header>
                 <div class="panel-body">
                     <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
@@ -185,7 +185,6 @@
                     {% trans "Recent gas consumed (m<sup>3</sup>) in the past 24 hours" %}
                 </header>
                 <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
                     <div id="echarts-gas-graph" style="width: 100%; height: 300px;"></div>
                 </div>
             </div>
@@ -201,7 +200,6 @@
                     {% trans "Recent temperatures (&deg;C) in the past 24 hours" %}
                 </header>
                 <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
                     <div id="echarts-temperature-graph" style="width: 100%; height: 300px;"></div>
                 </div>
 
@@ -235,19 +233,27 @@
         var electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
         var echarts_electricity_graph_interval = 5;
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/electricity.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/electricity.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.multi_phases %}
     <script type="text/javascript">
         var echarts_phases_graph_url = "{% url 'frontend:dashboard-xhr-electricity' %}?phases=True";
         
+        {% if capabilities.electricity_returned %}
+        echarts_phases_graph_url += "&returned=True";
+        {% endif %}
+        
         var phase_delivered_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
         var phase_delivered_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
         var phase_delivered_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+        var phase_returned_l1_color = "{{ frontend_settings.phase_returned_l1_color }}";
+        var phase_returned_l2_color = "{{ frontend_settings.phase_returned_l2_color }}";
+        var phase_returned_l3_color = "{{ frontend_settings.phase_returned_l3_color }}";
+        
         var echarts_phases_graph_interval = 5;
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/phases.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/phases.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.gas %}
@@ -255,7 +261,7 @@
         var echarts_gas_graph_url = "{% url 'frontend:dashboard-xhr-gas' %}";
         var gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/gas.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/gas.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.weather %}
@@ -263,7 +269,7 @@
         var echarts_temperature_graph_url = "{% url 'frontend:dashboard-xhr-temperature' %}";
         var temperature_color = "{{ frontend_settings.temperature_color }}";
     </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/temperature.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/temperature.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
  
     <script type="text/javascript">

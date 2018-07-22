@@ -13,6 +13,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.161",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -32,6 +35,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.158",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -51,6 +57,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.159",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -70,6 +79,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.156",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -89,6 +101,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.158",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -108,6 +123,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.173",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -127,6 +145,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.158",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -146,6 +167,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.167",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -165,6 +189,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.149",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -184,6 +211,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.154",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -203,6 +233,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.176",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -222,6 +255,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.161",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -241,6 +277,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.159",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -260,6 +299,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.174",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -279,6 +321,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.160",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -298,6 +343,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.161",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -317,6 +365,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.158",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -336,6 +387,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.169",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -355,6 +409,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.164",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -374,6 +431,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.160",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -393,6 +453,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.157",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -412,6 +475,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.557",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -431,6 +497,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.835",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -450,6 +519,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.950",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -469,6 +541,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.898",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -488,6 +563,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.892",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -507,6 +585,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.863",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -526,6 +607,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.885",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -545,6 +629,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.871",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -564,6 +651,9 @@
         "phase_currently_delivered_l1": "0.017",
         "phase_currently_delivered_l2": "0.866",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -583,6 +673,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.867",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -602,6 +695,9 @@
         "phase_currently_delivered_l1": "0.017",
         "phase_currently_delivered_l2": "0.860",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -621,6 +717,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.859",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -640,6 +739,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.857",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -659,6 +761,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.880",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -678,6 +783,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.872",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -697,6 +805,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.867",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -716,6 +827,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.858",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -735,6 +849,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.864",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -754,6 +871,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.858",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -773,6 +893,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.862",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -792,6 +915,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.865",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -811,6 +937,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.866",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -830,6 +959,9 @@
         "phase_currently_delivered_l1": "0.017",
         "phase_currently_delivered_l2": "0.871",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -849,6 +981,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.875",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -868,6 +1003,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.880",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -887,6 +1025,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.879",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -906,6 +1047,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.861",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -925,6 +1069,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.862",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -944,6 +1091,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.867",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -963,6 +1113,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.864",
         "phase_currently_delivered_l3": "0.000",
+         "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true
@@ -982,6 +1135,9 @@
         "phase_currently_delivered_l1": "0.016",
         "phase_currently_delivered_l2": "0.861",
         "phase_currently_delivered_l3": "0.000",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.222",
+        "phase_currently_returned_l3": "0.333",
         "extra_device_timestamp": "2016-10-02T18:00:00Z",
         "extra_device_delivered": "2002.418",
         "processed": true

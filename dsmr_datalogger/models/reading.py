@@ -89,6 +89,27 @@ class DsmrReading(models.Model):
         db_index=True,
         help_text=_("Whether this reading has been processed for merging into statistics")
     )
+    phase_currently_returned_l1 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Current electricity returned by phase L1 (in kW)")
+    )
+    phase_currently_returned_l2 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Current electricity returned by phase L2 (in kW)")
+    )
+    phase_currently_returned_l3 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Current electricity returned by phase L3 (in kW)")
+    )
 
     class Meta:
         default_permissions = tuple()

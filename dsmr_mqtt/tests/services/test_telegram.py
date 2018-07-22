@@ -1,4 +1,5 @@
 from unittest import mock
+import json
 
 from django.test import TestCase
 from django.utils import timezone
@@ -19,6 +20,12 @@ class TestServices(TestCase):
             electricity_returned_2=4,
             electricity_currently_delivered=5,
             electricity_currently_returned=6,
+            phase_currently_delivered_l1=0.25,
+            phase_currently_delivered_l2=0.35,
+            phase_currently_delivered_l3=0.3,
+            phase_currently_returned_l1=0.5,
+            phase_currently_returned_l2=0.75,
+            phase_currently_returned_l3=1.25,
         )
 
 
@@ -76,7 +83,11 @@ class TestTelegramAndReading(TestServices):
         dsmr_mqtt.services.publish_raw_dsmr_telegram(data='test')
 
     @mock.patch('paho.mqtt.publish.multiple')
-    def test_publish_json_dsmr_reading(self, mqtt_mock):
+    @mock.patch('django.utils.timezone.now')
+    def test_publish_json_dsmr_reading(self, now_mock, mqtt_mock):
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2018, 1, 1)
+        )
         json_settings = telegram.JSONTelegramMQTTSettings.get_solo()
         dsmr_reading = self._create_dsmrreading()
 
@@ -95,8 +106,11 @@ electricity_currently_returned = hhh
 phase_currently_delivered_l1 = iii
 phase_currently_delivered_l2 = jjj
 phase_currently_delivered_l3 = kkk
-extra_device_timestamp = lll
-extra_device_delivered = mmm
+phase_currently_returned_l1 = lll
+phase_currently_returned_l2 = mmm
+phase_currently_returned_l3 = nnn
+extra_device_timestamp = ooo
+extra_device_delivered = ppp
 '''
         json_settings.save()
 
@@ -111,6 +125,27 @@ extra_device_delivered = mmm
         json_settings.save()
         dsmr_mqtt.services.publish_json_dsmr_reading(reading=dsmr_reading)
         self.assertTrue(mqtt_mock.called)
+
+        _, args, _ = mqtt_mock.mock_calls[0]
+        payload = json.loads(args[0][0]['payload'])
+        print(payload)
+
+        self.assertEqual(payload['aaa'], DsmrReading.objects.get().pk)
+        self.assertEqual(payload['bbb'], '2018-01-01T00:00:00+01:00')
+        self.assertEqual(payload['ccc'], 1)
+        self.assertEqual(payload['ddd'], 2)
+        self.assertEqual(payload['eee'], 3)
+        self.assertEqual(payload['fff'], 4)
+        self.assertEqual(payload['ggg'], 5)
+        self.assertEqual(payload['hhh'], 6)
+        self.assertEqual(payload['iii'], 0.25)
+        self.assertEqual(payload['jjj'], 0.35)
+        self.assertEqual(payload['kkk'], 0.3)
+        self.assertEqual(payload['lll'], 0.5)
+        self.assertEqual(payload['mmm'], 0.75)
+        self.assertEqual(payload['nnn'], 1.25)
+        self.assertIsNone(payload['ooo'])
+        self.assertIsNone(payload['ppp'])
 
         # On error.
         mqtt_mock.side_effect = ValueError('Invalid host.')
@@ -136,6 +171,9 @@ electricity_currently_returned = dsmr/telegram/electricity_currently_returned
 phase_currently_delivered_l1 = dsmr/telegram/phase_currently_delivered_l1
 phase_currently_delivered_l2 = dsmr/telegram/phase_currently_delivered_l2
 phase_currently_delivered_l3 = dsmr/telegram/phase_currently_delivered_l3
+phase_currently_returned_l1 = dsmr/telegram/phase_currently_returned_l1
+phase_currently_returned_l2 = dsmr/telegram/phase_currently_returned_l2
+phase_currently_returned_l3 = dsmr/telegram/phase_currently_returned_l3
 extra_device_timestamp = dsmr/telegram/extra_device_timestamp
 extra_device_delivered = dsmr/telegram/extra_device_delivered
 '''

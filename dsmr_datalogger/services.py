@@ -129,9 +129,15 @@ def verify_telegram_checksum(data):
     crc16_function = crcmod.predefined.mkPredefinedCrcFun('crc16')
     calculated_checksum = crc16_function(telegram)  # For example: 56708
 
+    # HEX format.
+    hex_telegram_checksum = '{:0>4}'.format(hex(telegram_checksum)[2:].upper())
+    hex_calculated_checksum = '{:0>4}'.format(hex(calculated_checksum)[2:].upper())
+
     if telegram_checksum != calculated_checksum:
         raise InvalidTelegramError(
-            'CRC mismatch: {} (telegram) != {} (calculated)'.format(telegram_checksum, calculated_checksum)
+            'CRC mismatch: {} / {} (telegram) != {} / {} (calculated)'.format(
+                telegram_checksum, hex_telegram_checksum, calculated_checksum, hex_calculated_checksum
+            )
         )
 
 
@@ -252,6 +258,9 @@ def telegram_to_reading(data):  # noqa: C901
             'phase_currently_delivered_l1': None,
             'phase_currently_delivered_l2': None,
             'phase_currently_delivered_l3': None,
+            'phase_currently_returned_l1': None,
+            'phase_currently_returned_l2': None,
+            'phase_currently_returned_l3': None,
         })
 
     # Now we need to split reading & statistics. So we split the dict here.

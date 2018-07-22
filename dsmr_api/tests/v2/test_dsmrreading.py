@@ -58,6 +58,9 @@ class TestDsmrreading(APIv2TestCase):
         self.assertIsNone(resultset['phase_currently_delivered_l1'])
         self.assertIsNone(resultset['phase_currently_delivered_l2'])
         self.assertIsNone(resultset['phase_currently_delivered_l3'])
+        self.assertIsNone(resultset['phase_currently_returned_l1'])
+        self.assertIsNone(resultset['phase_currently_returned_l2'])
+        self.assertIsNone(resultset['phase_currently_returned_l3'])
         self.assertIsNone(resultset['extra_device_timestamp'])
         self.assertIsNone(resultset['extra_device_delivered'])
         self.assertEqual(DsmrReading.objects.all().count(), 4)
@@ -75,6 +78,9 @@ class TestDsmrreading(APIv2TestCase):
         TELEGRAM['phase_currently_delivered_l1'] = 0.5
         TELEGRAM['phase_currently_delivered_l2'] = 0.75
         TELEGRAM['phase_currently_delivered_l3'] = 0.25
+        TELEGRAM['phase_currently_returned_l1'] = 1.5
+        TELEGRAM['phase_currently_returned_l2'] = 1.75
+        TELEGRAM['phase_currently_returned_l3'] = 1.25
         resultset = self._request('dsmrreading', expected_code=201, method='post', data=TELEGRAM)
         self.assertEqual(resultset['timestamp'], '2017-01-02T01:00:00+01:00')
         self.assertEqual(resultset['extra_device_timestamp'], '2017-01-02T02:00:00+01:00')
@@ -82,4 +88,7 @@ class TestDsmrreading(APIv2TestCase):
         self.assertEqual(float(resultset['phase_currently_delivered_l1']), 0.5)
         self.assertEqual(float(resultset['phase_currently_delivered_l2']), 0.75)
         self.assertEqual(float(resultset['phase_currently_delivered_l3']), 0.25)
+        self.assertEqual(float(resultset['phase_currently_returned_l1']), 1.5)
+        self.assertEqual(float(resultset['phase_currently_returned_l2']), 1.75)
+        self.assertEqual(float(resultset['phase_currently_returned_l3']), 1.25)
         self.assertEqual(DsmrReading.objects.all().count(), 6)

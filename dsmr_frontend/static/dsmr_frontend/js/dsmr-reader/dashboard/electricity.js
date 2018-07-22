@@ -26,7 +26,7 @@ $(document).ready(function(){
         ],
         yAxis: [
             {
-                type : 'value',
+                type : 'value'
             }
         ],
         dataZoom: [
@@ -57,7 +57,6 @@ $(document).ready(function(){
                 name: 'Watt (+)',
                 type: 'line',
                 areaStyle: {},
-                stack: 'dummy',
                 data: null
             },
             {
@@ -65,7 +64,6 @@ $(document).ready(function(){
                 name: 'Watt (-)',
                 type: 'line',
                 areaStyle: {},
-                stack: 'dummy',
                 data: null
             }
         ]

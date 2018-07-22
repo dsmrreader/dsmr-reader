@@ -40,18 +40,33 @@ class FrontendSettings(SingletonModel):
     )
     phase_delivered_l1_color = ColorField(
         default='#A47448',
-        verbose_name=_('Phase L1 color'),
-        help_text=_("Graph color for phase L1")
+        verbose_name=_('Phase L1+ (delivered) color'),
+        help_text=_("Graph color for phase L1+")
     )
     phase_delivered_l2_color = ColorField(
         default='#A4484E',
-        verbose_name=_('Phase L2 color'),
-        help_text=_("Graph color for phase L2 (when available)")
+        verbose_name=_('Phase L2+ (delivered) color'),
+        help_text=_("Graph color for phase L2+ (when available)")
     )
     phase_delivered_l3_color = ColorField(
         default='#A44882',
-        verbose_name=_('Phase L3 color'),
-        help_text=_("Graph color for phase L3 (when available)")
+        verbose_name=_('Phase L3+ (delivered) color'),
+        help_text=_("Graph color for phase L3+ (when available)")
+    )
+    phase_returned_l1_color = ColorField(
+        default='#2E7D32',
+        verbose_name=_('Phase L1- (returned) color'),
+        help_text=_("Graph color for phase L1-")
+    )
+    phase_returned_l2_color = ColorField(
+        default='#8BC34A',
+        verbose_name=_('Phase L2- (returned) color'),
+        help_text=_("Graph color for phase L2- (when available)")
+    )
+    phase_returned_l3_color = ColorField(
+        default='#9E9D24',
+        verbose_name=_('Phase L3- (returned) color'),
+        help_text=_("Graph color for phase L3- (when available)")
     )
     temperature_color = ColorField(
         default='#0073B7',

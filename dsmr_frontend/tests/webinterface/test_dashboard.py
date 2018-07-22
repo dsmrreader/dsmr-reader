@@ -124,6 +124,9 @@ class TestViews(TestCase):
                 phase_currently_delivered_l1=0.5,
                 phase_currently_delivered_l2=0.25,
                 phase_currently_delivered_l3=0.75,
+                phase_currently_returned_l1=2.5,
+                phase_currently_returned_l2=2.25,
+                phase_currently_returned_l3=2.75,
             )
             ElectricityConsumption.objects.create(
                 read_at=timezone.now() - timezone.timedelta(hours=1),
@@ -136,6 +139,9 @@ class TestViews(TestCase):
                 phase_currently_delivered_l1=0.75,
                 phase_currently_delivered_l2=0.5,
                 phase_currently_delivered_l3=1.25,
+                phase_currently_returned_l1=3.5,
+                phase_currently_returned_l2=3.25,
+                phase_currently_returned_l3=3.75,
             )
 
         response = self.client.get(
@@ -157,10 +163,15 @@ class TestViews(TestCase):
                 'read_at': ['Sat 23:00', 'Sun 0:00'],
                 'currently_delivered': [2500.0, 1500.0],
                 'currently_returned': [200.0, 100.0],
-                'phases': {
+                'phases_delivered': {
                     'l1': [750.0, 500.0],
                     'l2': [500.0, 250.0],
                     'l3': [1250.0, 750.0],
+                },
+                'phases_returned': {
+                    'l1': [3500.0, 2500.0],
+                    'l2': [3250.0, 2250.0],
+                    'l3': [3750.0, 2750.0],
                 }
             }
         )
@@ -176,9 +187,29 @@ class TestViews(TestCase):
         self.assertNotEqual(json_content['read_at'], [])
         self.assertNotEqual(json_content['currently_delivered'], [])
         self.assertNotEqual(json_content['currently_returned'], [])
-        self.assertEqual(json_content['phases']['l1'], [])
-        self.assertEqual(json_content['phases']['l2'], [])
-        self.assertEqual(json_content['phases']['l3'], [])
+        self.assertEqual(json_content['phases_delivered']['l1'], [])
+        self.assertEqual(json_content['phases_delivered']['l2'], [])
+        self.assertEqual(json_content['phases_delivered']['l3'], [])
+        self.assertEqual(json_content['phases_returned']['l1'], [])
+        self.assertEqual(json_content['phases_returned']['l2'], [])
+        self.assertEqual(json_content['phases_returned']['l3'], [])
+
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-electricity'.format(self.namespace)),
+            data={'delivered': True, 'returned': False, 'phases': True}
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+
+        json_content = json.loads(response.content.decode("utf8"))
+        self.assertNotEqual(json_content['read_at'], [])
+        self.assertNotEqual(json_content['currently_delivered'], [])
+        self.assertEqual(json_content['currently_returned'], [])
+        self.assertNotEqual(json_content['phases_delivered']['l1'], [])
+        self.assertNotEqual(json_content['phases_delivered']['l2'], [])
+        self.assertNotEqual(json_content['phases_delivered']['l3'], [])
+        self.assertEqual(json_content['phases_returned']['l1'], [])
+        self.assertEqual(json_content['phases_returned']['l2'], [])
+        self.assertEqual(json_content['phases_returned']['l3'], [])
 
         response = self.client.get(
             reverse('{}:dashboard-xhr-electricity'.format(self.namespace)),
@@ -188,9 +219,12 @@ class TestViews(TestCase):
         self.assertNotEqual(json_content['read_at'], [])
         self.assertEqual(json_content['currently_delivered'], [])
         self.assertEqual(json_content['currently_returned'], [])
-        self.assertEqual(json_content['phases']['l1'], [])
-        self.assertEqual(json_content['phases']['l2'], [])
-        self.assertEqual(json_content['phases']['l3'], [])
+        self.assertEqual(json_content['phases_delivered']['l1'], [])
+        self.assertEqual(json_content['phases_delivered']['l2'], [])
+        self.assertEqual(json_content['phases_delivered']['l3'], [])
+        self.assertEqual(json_content['phases_returned']['l1'], [])
+        self.assertEqual(json_content['phases_returned']['l2'], [])
+        self.assertEqual(json_content['phases_returned']['l3'], [])
 
         # Send again, but with small delta update.
         old_latest_delta_id = json_content['latest_delta_id']
@@ -210,10 +244,15 @@ class TestViews(TestCase):
                 'read_at': ['Sat 23:00'],
                 'currently_delivered': [2500.0],
                 'currently_returned': [200.0],
-                'phases': {
+                'phases_delivered': {
                     'l1': [750.0],
                     'l2': [500.0],
                     'l3': [1250.0],
+                },
+                'phases_returned': {
+                    'l1': [3500.0],
+                    'l2': [3250.0],
+                    'l3': [3750.0],
                 }
             }
         )
