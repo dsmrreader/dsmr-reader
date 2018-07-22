@@ -53,6 +53,7 @@ Listed in any order, sorted by name.
 - `raoulteeuwen <https://github.com/raoulteeuwen>`_
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `Sevickson <https://github.com/sevickson>`_
+- `TampertK <https://github.com/TampertK>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
 - `thommy101 <https://github.com/thommy101>`_
 - `TopdRob <https://github.com/TopdRob>`_
@@ -63,7 +64,7 @@ Listed in any order, sorted by name.
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
 
-
+ 
 Software used
 -------------
 Please note and respect their licences as well, if any. Credits to the following software and projects:

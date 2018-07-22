@@ -257,6 +257,14 @@ class TestViews(TestCase):
             }
         )
 
+        # Fix for bug #506.
+        ElectricityConsumption.objects.update(phase_currently_delivered_l1=None)
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-electricity'.format(self.namespace)),
+            data={'delivered': True, 'returned': True, 'phases': True}
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+
     @mock.patch('django.utils.timezone.now')
     def test_dashboard_xhr_gas(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 7, 1))
