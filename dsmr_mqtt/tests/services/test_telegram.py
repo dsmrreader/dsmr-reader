@@ -130,7 +130,7 @@ extra_device_delivered = ppp
         payload = json.loads(args[0][0]['payload'])
         print(payload)
 
-        self.assertEqual(payload['aaa'], 1)
+        self.assertEqual(payload['aaa'], DsmrReading.objects.get().pk)
         self.assertEqual(payload['bbb'], '2018-01-01T00:00:00+01:00')
         self.assertEqual(payload['ccc'], 1)
         self.assertEqual(payload['ddd'], 2)
