@@ -8,6 +8,9 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
+from dsmr_backup.models.settings import BackupSettings, DropboxSettings
+from dsmr_mindergas.models.settings import MinderGasSettings
+from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 import dsmr_backend.services
 
 
@@ -188,6 +191,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
     @mock.patch('django.core.cache.cache.set')
     @mock.patch('django.core.cache.cache.get')
     def test_capability_caching(self, get_cache_mock, set_cache_mock):
+        """ Whether capabilities are cached. """
         get_cache_mock.return_value = None
 
         self.assertFalse(get_cache_mock.called)
@@ -207,6 +211,42 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertTrue(get_cache_mock.called)
         self.assertFalse(set_cache_mock.called)
         self.assertEqual(first_capabilities, second_capabilities)
+
+    @mock.patch('django.utils.timezone.now')
+    def test_status_info(self, now_mock):
+        """ Application status info dict. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1))
+
+        BackupSettings.get_solo()
+        BackupSettings.objects.update(daily_backup=False)
+        tools_status = dsmr_backend.services.status_info()['tools']
+
+        # Tools should be asserted, other content is tested in dsmr_frontend.
+        self.assertFalse(tools_status['backup']['enabled'])
+        self.assertFalse(tools_status['dropbox']['enabled'])
+        self.assertFalse(tools_status['pvoutput']['enabled'])
+        self.assertFalse(tools_status['mindergas']['enabled'])
+        self.assertIsNone(tools_status['backup']['latest_backup'])
+        self.assertIsNone(tools_status['dropbox']['latest_sync'])
+        self.assertIsNone(tools_status['pvoutput']['latest_sync'])
+        self.assertIsNone(tools_status['mindergas']['latest_sync'])
+
+        # Now when enabled.
+        BackupSettings.objects.update(daily_backup=True, latest_backup=timezone.now())
+        DropboxSettings.objects.update(access_token='xxx', latest_sync=timezone.now())
+        MinderGasSettings.objects.update(export=True, latest_sync=timezone.now())
+        PVOutputAddStatusSettings.objects.update(export=True, latest_sync=timezone.now())
+
+        tools_status = dsmr_backend.services.status_info()['tools']
+
+        self.assertTrue(tools_status['backup']['enabled'])
+        self.assertTrue(tools_status['dropbox']['enabled'])
+        self.assertTrue(tools_status['pvoutput']['enabled'])
+        self.assertTrue(tools_status['mindergas']['enabled'])
+        self.assertEqual(tools_status['backup']['latest_backup'], timezone.now())
+        self.assertEqual(tools_status['dropbox']['latest_sync'], timezone.now())
+        self.assertEqual(tools_status['pvoutput']['latest_sync'], timezone.now())
+        self.assertEqual(tools_status['mindergas']['latest_sync'], timezone.now())
 
 
 @mock.patch('requests.get')

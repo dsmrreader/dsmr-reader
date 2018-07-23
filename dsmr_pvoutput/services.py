@@ -96,5 +96,8 @@ def export():
 
     if response.status_code != 200:
         print(' [!] PVOutput upload failed (HTTP {}): {}'.format(response.status_code, response.text))
+    else:
+        status_settings.latest_sync = timezone.now()
+        status_settings.save()
 
     schedule_next_export()

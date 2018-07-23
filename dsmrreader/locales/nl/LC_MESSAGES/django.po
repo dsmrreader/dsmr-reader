@@ -937,6 +937,18 @@ msgstr "Deze statistieken nodes bevatten dagtotalen en uurtotalen van je verbrui
 msgid "They are used in many pages displaying long term data, such as the Archive, Trends and Compare pages."
 msgstr "Deze worden gebruikt in pagina's die lange termijn gegevens tonen, zoals het Archief, Trends en de Vergelijk pagina's."
 
+msgid "Tools"
+msgstr "Tools"
+
+msgid "Latest Dropbox sync"
+msgstr "Meest recente synchronisatie met Dropbox"
+
+msgid "Latest MinderGas sync"
+msgstr "Meest recente synchronisatie met MinderGas"
+
+msgid "Latest PVOutput sync"
+msgstr "Meest recente synchronisatie met PVOutput"
+
 msgid "Untracked consumption in the past (and today), is not taken into account."
 msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
 
@@ -984,6 +996,9 @@ msgstr "MinderGas.nl Authenticatietoken (API)"
 
 msgid "The authentication token used to authenticate for the MinderGas API. More information can be found here: https://www.mindergas.nl/member/api"
 msgstr "Authenticatietoken voor de API-toegang van je persoonlijk account bij MinderGas. Kijk hier voor meer informatie: https://www.mindergas.nl/member/api"
+
+msgid "Timestamp of latest sync with MinderGas. Automatically updated by application."
+msgstr "Tijdstip van de laatste synchronisatie met MinderGas. Applicatie werkt dit automatisch bij."
 
 msgid "Next export"
 msgstr "Volgende synchronisatie"
@@ -1461,6 +1476,9 @@ msgstr "PVOutput: Verwerkingsvertraging (in minuten)"
 
 msgid "[!]: This feature is ONLY available when you have a DONATOR account for PVOutput.org! Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)"
 msgstr "[!] Deze feature is alleen beschikbaar wanneer je een DONATIE-account bij PVOutput.org hebt! Deze parameter staat het vertraagd verwerken van gegevens toe. Je kunt de vertraging instellen op een aantal minuten. Toegestaan: leeg veld of 0 tot 120 (minuten)"
+
+msgid "Timestamp of latest sync with PVOutput. Automatically updated by application."
+msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt dit automatisch bij."
 
 msgid "PVOutput: Add Status configuration"
 msgstr "PVOutput: \"Add Status\" configuratie"

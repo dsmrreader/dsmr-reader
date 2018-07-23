@@ -123,10 +123,11 @@ class TestServices(TestCase):
 
         requests_post_mock.return_value = mock.MagicMock(status_code=400, text='Error message')
         dsmr_pvoutput.services.export()
-        settings = PVOutputAddStatusSettings.get_solo()
+        status_settings = PVOutputAddStatusSettings.get_solo()
 
-        self.assertEqual(settings.next_export, timezone.now() + timezone.timedelta(minutes=5))
+        self.assertEqual(status_settings.next_export, timezone.now() + timezone.timedelta(minutes=5))
         self.assertTrue(requests_post_mock.called)
+        self.assertIsNone(status_settings.latest_sync)
 
     @mock.patch('requests.post')
     @mock.patch('dsmr_pvoutput.services.should_export')
@@ -173,7 +174,9 @@ class TestServices(TestCase):
 
         dsmr_pvoutput.services.export()
 
-        self.assertIsNotNone(PVOutputAddStatusSettings.get_solo().next_export)
+        status_settings = PVOutputAddStatusSettings.get_solo()
+        self.assertIsNotNone(status_settings.next_export)
+        self.assertEqual(status_settings.latest_sync, timezone.now())
         self.assertTrue(requests_post_mock.called)
         self.assertTrue(send_robust_mock.called)
 

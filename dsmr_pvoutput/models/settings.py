@@ -85,6 +85,13 @@ class PVOutputAddStatusSettings(SingletonModel):
             'Timestamp of the next export. Automatically updated by application.'
         )
     )
+    latest_sync = models.DateTimeField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Latest sync'),
+        help_text=_('Timestamp of latest sync with PVOutput. Automatically updated by application.')
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()
