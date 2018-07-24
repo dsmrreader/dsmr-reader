@@ -14,13 +14,17 @@
     <div class="alert alert-danger" role="alert">
         <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
+{% elif not has_statistics %}
+    <div class="alert alert-info" role="alert">
+    {% blocktrans %}No day/hour statistics are generated yet. Please wait for the next day.{% endblocktrans %}
+    </div>  
 {% else %}
     <div class="alert alert-info" role="alert">
     {% blocktrans %}Untracked consumption in the past (and today), is not taken into account.{% endblocktrans %}
     </div>
 {% endif %}
 
-    {% if capabilities.electricity %}
+    {% if capabilities.electricity and has_statistics %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -35,7 +39,7 @@
     </div>
     {% endif %}
     
-    {% if capabilities.electricity_returned %}
+    {% if capabilities.electricity_returned and has_statistics %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -50,7 +54,7 @@
     </div>
     {% endif %}
     
-    {% if capabilities.gas %}
+    {% if capabilities.gas and has_statistics %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -65,7 +69,7 @@
     </div>
     {% endif %}
 
-    {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
+    {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs and has_statistics %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel" style="padding-bottom: 24px;">

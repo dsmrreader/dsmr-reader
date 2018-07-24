@@ -949,6 +949,9 @@ msgstr "Meest recente synchronisatie met MinderGas"
 msgid "Latest PVOutput sync"
 msgstr "Meest recente synchronisatie met PVOutput"
 
+msgid "No day/hour statistics are generated yet. Please wait for the next day."
+msgstr "Er zijn momenteel nog geen dag-/uurstatistieken gegenereerd. Wacht op de volgende dag."
+
 msgid "Untracked consumption in the past (and today), is not taken into account."
 msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
 

@@ -7,6 +7,7 @@ from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_consumption.services
 import dsmr_backend.services
 import dsmr_stats.services
@@ -21,6 +22,8 @@ class Trends(TemplateView):
         context_data = super(Trends, self).get_context_data(**kwargs)
         context_data['capabilities'] = capabilities
         context_data['frontend_settings'] = FrontendSettings.get_solo()
+        context_data['has_statistics'] = DayStatistics.objects.exists() and HourStatistics.objects.exists()
+
         return context_data
 
 
@@ -73,7 +76,7 @@ class TrendsXhrElectricityByTariff(View):
             'electricity2': _('Electricity 2 (high tariff)'),
         }
 
-        if not capabilities['any']:
+        if not capabilities['any'] or not DayStatistics.objects.exists():
             return HttpResponse(json.dumps(data), content_type='application/json')
 
         now = timezone.localtime(timezone.now())

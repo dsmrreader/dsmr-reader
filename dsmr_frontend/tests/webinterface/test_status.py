@@ -37,7 +37,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:status'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
 
         self.assertIn('capabilities', response.context)
         self.assertIn('status', response.context)
@@ -60,7 +60,7 @@ class TestViews(TestCase):
                 reverse('{}:status'.format(self.namespace))
             )
             status_context = response.context['status']
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 200, response.content)
             self.assertEqual(status_context['readings']['unprocessed']['count'], 3)
             self.assertEqual(status_context['readings']['unprocessed']['seconds_since'], 4418353)
 
@@ -89,7 +89,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:status'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
 
         # These should be reset for convenience.
         status_context = response.context['status']

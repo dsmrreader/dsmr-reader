@@ -31,7 +31,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:energy-contracts'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
 
         self.assertIn('frontend_settings', response.context)

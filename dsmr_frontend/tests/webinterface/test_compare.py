@@ -36,7 +36,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:compare'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
 
 
