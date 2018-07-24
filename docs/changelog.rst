@@ -24,6 +24,7 @@ v1.23.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#xxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxx>`_] xxxxxxx
+- [`#463 <https://github.com/dennissiemensma/dsmr-reader/issues/463>`_] MQTT: Telegram als JSON, tijdzones
 - [`#508 <https://github.com/dennissiemensma/dsmr-reader/issues/508>`_] Trend-grafiek kan niet gegenereerd worden
 - [`#292 <https://github.com/dennissiemensma/dsmr-reader/issues/292>`_] Statuspagina: onderdelen 'backup' en 'mindergas upload' toevoegen
 - [`#499 <https://github.com/dennissiemensma/dsmr-reader/issues/499>`_] Upgrade Font Awesome to v5

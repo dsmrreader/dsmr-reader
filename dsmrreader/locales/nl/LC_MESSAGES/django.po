@@ -1339,6 +1339,12 @@ msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broke
 msgid "The topic to send the parsed JSON telegrams to."
 msgstr "Het topic om de JSON telegrammen naar te versturen."
 
+msgid "Use local timezone"
+msgstr "Gebruik lokale tijdszone"
+
+msgid "Whether to use the local timezone ({}) in the timestamp sent."
+msgstr "Geeft aan dat de lokale tijdzone ({}) gebruikt wordt in het tijdstip."
+
 msgid "MQTT: Telegram (as JSON) configuration"
 msgstr "MQTT: Telegram (als JSON) configuratie"
 

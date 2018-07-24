@@ -59,11 +59,14 @@ def publish_json_dsmr_reading(reading):
     if not json_settings.enabled:
         return
 
+    # Default to UTC, but allow local timezone on demand (#463).
+    if json_settings.use_local_timezone:
+        reading.convert_to_local_timezone()
+
     # User specified formatting.
     config_parser = configparser.ConfigParser()
     config_parser.read_string(json_settings.formatting)
     json_mapping = config_parser['mapping']
-
     json_dict = {}
 
     # Copy all fields described in the mapping.
@@ -89,6 +92,10 @@ def publish_split_topic_dsmr_reading(reading):
 
     if not split_topic_settings.enabled:
         return
+
+    # Default to UTC, but allow local timezone on demand (#463).
+    if split_topic_settings.use_local_timezone:
+        reading.convert_to_local_timezone()
 
     # User specified formatting.
     config_parser = configparser.ConfigParser()

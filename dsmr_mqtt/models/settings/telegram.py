@@ -1,5 +1,6 @@
-from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
+from django.db import models
 from solo.models import SingletonModel
 
 
@@ -62,6 +63,13 @@ extra_device_delivered = extra_device_delivered
         verbose_name=_('Formatting'),
         help_text=_('Maps the field names used in the JSON message sent to the broker.')
     )
+    use_local_timezone = models.BooleanField(
+        default=False,
+        verbose_name=_('Use local timezone'),
+        help_text=_('Whether to use the local timezone ({}) in the timestamp sent.'.format(
+            settings.TIME_ZONE
+        ))
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()
@@ -101,6 +109,13 @@ extra_device_delivered = dsmr/reading/extra_device_delivered
 ''',
         verbose_name=_('Formatting'),
         help_text=_('Maps the field names to separate topics sent to the broker.')
+    )
+    use_local_timezone = models.BooleanField(
+        default=False,
+        verbose_name=_('Use local timezone'),
+        help_text=_('Whether to use the local timezone ({}) in the timestamp sent.'.format(
+            settings.TIME_ZONE
+        ))
     )
 
     def __str__(self):

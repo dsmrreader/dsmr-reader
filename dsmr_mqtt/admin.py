@@ -39,7 +39,7 @@ class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ['enabled', 'topic', 'formatting'],
+                'fields': ['enabled', 'topic', 'formatting', 'use_local_timezone'],
                 'description': _(
                     'Triggered by any method of reading insertion (datalogger or API). '
                     'Allows you to send newly created readings to the MQTT broker, as a JSON message. You can alter '
@@ -77,7 +77,7 @@ class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ['enabled', 'formatting'],
+                'fields': ['enabled', 'formatting', 'use_local_timezone'],
                 'description': _(
                     'Triggered by any method of reading insertion (datalogger or API). '
                     'Allows you to send newly created readings to the MQTT broker, splitted per field. You can '
