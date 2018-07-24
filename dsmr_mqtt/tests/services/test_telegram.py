@@ -26,6 +26,7 @@ class TestServices(TestCase):
             phase_currently_returned_l1=0.5,
             phase_currently_returned_l2=0.75,
             phase_currently_returned_l3=1.25,
+            extra_device_timestamp=timezone.now() + timezone.timedelta(hours=12)
         )
 
 
@@ -143,7 +144,7 @@ extra_device_delivered = ppp
         self.assertEqual(payload['lll'], 0.5)
         self.assertEqual(payload['mmm'], 0.75)
         self.assertEqual(payload['nnn'], 1.25)
-        self.assertIsNone(payload['ooo'])
+        self.assertEqual(payload['ooo'], '2018-01-01T12:00:00Z')
         self.assertIsNone(payload['ppp'])
 
         # Check timezone conversion.
@@ -154,6 +155,7 @@ extra_device_delivered = ppp
         _, args, _ = mqtt_mock.mock_calls[0]
         payload = json.loads(args[0][0]['payload'])
         self.assertEqual(payload['bbb'], '2018-01-01T01:00:00+01:00')  # No longer UTC.
+        self.assertEqual(payload['ooo'], '2018-01-01T13:00:00+01:00')  # No longer UTC.
 
         # On error.
         mqtt_mock.side_effect = ValueError('Invalid host.')
@@ -210,6 +212,11 @@ extra_device_delivered = dsmr/telegram/extra_device_delivered
             'topic': 'dsmr/telegram/timestamp'
         }
         self.assertIn(expected, kwargs['msgs'])
+        expected = {
+            'payload': '2018-01-01T12:00:00Z',
+            'topic': 'dsmr/telegram/extra_device_timestamp'
+        }
+        self.assertIn(expected, kwargs['msgs'])
 
         # Check timezone conversion.
         telegram.SplitTopicTelegramMQTTSettings.objects.update(use_local_timezone=True)
@@ -220,6 +227,11 @@ extra_device_delivered = dsmr/telegram/extra_device_delivered
         expected = {
             'payload': '2018-01-01T01:00:00+01:00',  # No longer UTC.
             'topic': 'dsmr/telegram/timestamp'
+        }
+        self.assertIn(expected, kwargs['msgs'])
+        expected = {
+            'payload': '2018-01-01T13:00:00+01:00',  # No longer UTC.
+            'topic': 'dsmr/telegram/extra_device_timestamp'
         }
         self.assertIn(expected, kwargs['msgs'])
 

@@ -52,6 +52,7 @@ Listed in any order, sorted by name.
 - `pyrocumulus <https://github.com/pyrocumulus>`_
 - `raoulteeuwen <https://github.com/raoulteeuwen>`_
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
+- `sanderdw <https://github.com/sanderdw>`_
 - `Sevickson <https://github.com/sevickson>`_
 - `TampertK <https://github.com/TampertK>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
