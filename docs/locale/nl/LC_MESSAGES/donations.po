@@ -19,33 +19,36 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../donations.rst:2
-msgid "Donations"
-msgstr "Donaties"
+msgid "Donations / tips"
+msgstr "Donaties / fooien"
 
 #: ../../donations.rst:4
 msgid ""
-"Do you like this project and do you want to buy me a beer or coffee? You "
-"are always welcome to make a small donation as a token of appreciation!"
+"Do you like this project or does it help you alot? And do you want to "
+"tip me or buy me a beer or coffee? You are always welcome to make a "
+"small donation as a token of appreciation!"
 msgstr ""
-"Waardeer je dit project en wil je mij trakteren op een biertje of kop "
-"koffie? Een kleine donatie als bedankje wordt altijd gewaardeerd!"
+"Waardeer je dit project of helpt het je thuis? En wil je mij trakteren "
+"op een biertje of kop koffie? Een kleine donatie als bedankje wordt "
+"altijd gewaardeerd!"
 
-#: ../../donations.rst:8
-msgid "`Donate using PayPal <https://www.paypal.me/DSiemensma>`_"
-msgstr "`Doneer via PayPal <https://www.paypal.me/DSiemensma>`_"
-
-#: ../../donations.rst:12
+#: ../../donations.rst:7
 msgid ""
 "Know that this project **will always be free to use** and I already do "
-"make a living with my regular job."
+"make a decent salary with my regular job. =)"
 msgstr ""
 "Weet dat dit project **altijd gratis te gebruiken zal zijn** en dat ik "
-"momenteel al rondkom met mijn doordeweekse baan."
+"momenteel al prima rondkom met mijn doordeweekse baan. Ik hoef er niet "
+"van rond te komen. =)"
+
+#: ../../donations.rst:10
+msgid "Link: `Donate using PayPal <https://www.paypal.me/DSiemensma>`_"
+msgstr "Link: `Doneer via PayPal <https://www.paypal.me/DSiemensma>`_"
 
 #: ../../donations.rst:14
 msgid ""
 "Please do not pressure me by \"donating for new features\", but only for "
-"liking what you are using so far... Thanks! =)"
+"liking what you are using so far... Thanks!"
 msgstr ""
 "Doneer alleen uit waardering voor wat je tot nu toe gebruikt en "
-"alsjeblieft niet voor nieuwe features. Bedankt! =)"
+"alsjeblieft niet voor nieuwe features. Bedankt!"

@@ -453,25 +453,41 @@ msgid "Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``."
 msgstr "Standaardwaarde ``DSMRREADER_DATALOGGER_SLEEP = 0.5``."
 
 #: ../../settings.rst:216
+msgid "``DSMRREADER_MQTT_SLEEP``"
+msgstr "``DSMRREADER_MQTT_SLEEP``"
+
+#: ../../settings.rst:217
+msgid ""
+"The number of seconds the application will sleep after reading and publishing "
+"the outgoing MQTT message queue. Prevents hammering on your hardware."
+msgstr ""
+"Het aantal seconden dat de applicatie wacht na het verwerken van een batch "
+"uitgaande MQTT-berichten. Voorkomt hoge load op je hardware."
+
+#: ../../settings.rst:219
+msgid "Defaults to ``DSMRREADER_MQTT_SLEEP = 1``."
+msgstr "Standaardwaarde: ``DSMRREADER_MQTT_SLEEP = 1``."
+
+#: ../../settings.rst:223
 msgid "``DSMRREADER_LOG_TELEGRAMS``"
 msgstr "``DSMRREADER_LOG_TELEGRAMS``"
 
-#: ../../settings.rst:217
+#: ../../settings.rst:224
 msgid ""
 "Whether telegrams are logged, in base64 format. Only required for debugging."
 msgstr ""
 "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor "
 "debuggen."
 
-#: ../../settings.rst:219
+#: ../../settings.rst:226
 msgid "Defaults to ``DSMRREADER_LOG_TELEGRAMS = False``."
 msgstr "Standaardwaarde ``DSMRREADER_LOG_TELEGRAMS = False``."
 
-#: ../../settings.rst:223
+#: ../../settings.rst:230
 msgid "``DSMRREADER_RECONNECT_DATABASE``"
 msgstr "``DSMRREADER_RECONNECT_DATABASE``"
 
-#: ../../settings.rst:224
+#: ../../settings.rst:231
 msgid ""
 "Whether the backend process (and datalogger) reconnects to the DB after each "
 "run. Prevents some hanging connections in some situations."
@@ -479,15 +495,15 @@ msgstr ""
 "Geeft aan of de backend na elke run opnieuw moet verbinden naar de database. Dit "
 "voorkomt in enkele gevallen hangende verbindingen."
 
-#: ../../settings.rst:226
+#: ../../settings.rst:233
 msgid "Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``."
 msgstr "Standaardwaarde ``DSMRREADER_RECONNECT_DATABASE = True``."
 
-#: ../../settings.rst:230
+#: ../../settings.rst:237
 msgid "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
 msgstr "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
 
-#: ../../settings.rst:231
+#: ../../settings.rst:238
 msgid ""
 "Maximum interval in hours allowed since the latest reading, before ringing any "
 "alarms."
@@ -495,27 +511,27 @@ msgstr ""
 "Maximale toegestane interval, in aantal uren, sinds de laatste meting, voordat "
 "er alarmbellen af gaan."
 
-#: ../../settings.rst:233
+#: ../../settings.rst:240
 msgid "Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
 msgstr "Standaardwaarde ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
 
-#: ../../settings.rst:237
+#: ../../settings.rst:244
 msgid "``DSMRREADER_PLUGINS``"
 msgstr "``DSMRREADER_PLUGINS``"
 
-#: ../../settings.rst:238
+#: ../../settings.rst:245
 msgid ":doc:`More information about this feature can be found here<plugins>`."
 msgstr ":doc:`Meer informatie over deze feature kun je hier terugvinden<plugins>`."
 
-#: ../../settings.rst:240
+#: ../../settings.rst:247
 msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
 msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."
 
-#: ../../settings.rst:244
+#: ../../settings.rst:251
 msgid "``DSMRREADER_DISABLED_CAPABILITIES``"
 msgstr "``DSMRREADER_DISABLED_CAPABILITIES``"
 
-#: ../../settings.rst:245
+#: ../../settings.rst:252
 msgid ""
 "Whether to override (disable) capabilities. Only use if you want to disable a "
 "capability that your smart meter keeps reporting. For example you've switched "
@@ -528,11 +544,11 @@ msgstr ""
 "energiebron. Of wanneer je slimme meter data bevat voor teruggeleverde energie "
 "en je uberhaupt geen zonnepanelen hebt."
 
-#: ../../settings.rst:248
+#: ../../settings.rst:255
 msgid "Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 msgstr "Standaardwaarde ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 
-#: ../../settings.rst:250
+#: ../../settings.rst:257
 msgid ""
 "Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
 "'electricity_returned']``."

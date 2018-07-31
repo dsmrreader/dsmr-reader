@@ -9,16 +9,25 @@ from .models.settings import BackupSettings, DropboxSettings
 
 @admin.register(BackupSettings)
 class BackupSettingsAdmin(SingletonModelAdmin):
-    list_display = ('daily_backup', 'compress', 'backup_time')
     readonly_fields = ('latest_backup', )
     fieldsets = (
         (
             None, {
-                'fields': ['daily_backup', 'compress', 'backup_time', 'latest_backup'],
+                'fields': ['daily_backup', 'backup_time'],
                 'description': _(
                     'Detailed instructions for restoring a backup can be found here: <a href="https://dsmr-reader.readt'
                     'hedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup">FAQ in documentation</a>'
                 )
+            }
+        ),
+        (
+            _('Advanced'), {
+                'fields': ['compress'],
+            }
+        ),
+        (
+            _('Automatic fields'), {
+                'fields': ['latest_backup']
             }
         ),
     )
@@ -26,7 +35,6 @@ class BackupSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(DropboxSettings)
 class DropboxSettingsAdmin(SingletonModelAdmin):
-    list_display = ('access_token', 'latest_sync')
     readonly_fields = ('latest_sync', 'next_sync')
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
@@ -34,11 +42,16 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ['access_token', 'latest_sync', 'next_sync'],
+                'fields': ['access_token'],
                 'description': _(
                     'Detailed instructions for configuring Dropbox can be found here: <a href="https://dsmr-reader.read'
                     'thedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync">FAQ in documentation</a>'
                 )
+            }
+        ),
+        (
+            _('Automatic fields'), {
+                'fields': ['latest_sync', 'next_sync']
             }
         ),
     )

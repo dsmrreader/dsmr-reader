@@ -16,6 +16,10 @@ msgstr ""
 msgid "Frequently Asked Questions (FAQ)"
 msgstr "Veelgestelde vragen (FAQ)"
 
+#: ../../faq.rst:7
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
 #: ../../faq.rst:10
 msgid "How can I update my application?"
 msgstr "Hoe kan ik mijn applicatie bijwerken?"
@@ -336,15 +340,40 @@ msgstr ""
 "recente versies is het een kwestie van onderstaand commando uitvoeren als root/"
 "sudo-gebruiker::"
 
-#: ../../faq.rst:169
+#: ../../faq.rst:170
+msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
+msgstr ""
+"Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of hoger?"
+
+#: ../../faq.rst:172
+msgid ""
+"Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for "
+"processing MQTT messages (``dsmr_mqtt``). Fresh installations automatically "
+"include the ``dsmr_mqtt`` process. Existing installations however, should add "
+"``dsmr_mqtt`` manually. Instructions:"
+msgstr ""
+"Vanaf DSMR-reader  ``v1.23.0`` is een apart proces nodig voor het het "
+"versturen van MQTT-berichten (``dsmr_mqtt``). Nieuwe installaties bevatten al "
+"automatisch dit ``dsmr_mqtt`` proces. Bestaande installaties zullen "
+"``dsmr_mqtt`` echter handmatig moeten toevoegen. Instructies:"
+
+#: ../../faq.rst:175
+msgid "Please upgrade to ``v1.23.0`` or higher first."
+msgstr "Upgrade eerst naar  ``v1.23.0`` of hoger."
+
+#: ../../faq.rst:176
+msgid "Now execute the following commands as **root/sudo-user**::"
+msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
+
+#: ../../faq.rst:186
 msgid "Feature/bug report"
 msgstr "Verzoek/fout melden"
 
-#: ../../faq.rst:170
+#: ../../faq.rst:187
 msgid "*How can I propose a feature or report a bug I've found?*"
 msgstr "*Hoe kan ik een verzoek indienen of een fout melden?*"
 
-#: ../../faq.rst:174
+#: ../../faq.rst:191
 msgid ""
 "`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/new>`_."

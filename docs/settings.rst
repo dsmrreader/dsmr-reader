@@ -212,6 +212,13 @@ The number of seconds the application will sleep after reading data from the dat
 Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``.
 
 
+``DSMRREADER_MQTT_SLEEP``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The number of seconds the application will sleep after reading and publishing the outgoing MQTT message queue. Prevents hammering on your hardware. 
+
+Defaults to ``DSMRREADER_MQTT_SLEEP = 1``.
+
+
 ``DSMRREADER_LOG_TELEGRAMS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Whether telegrams are logged, in base64 format. Only required for debugging.

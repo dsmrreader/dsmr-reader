@@ -6,8 +6,8 @@ from django.utils import timezone
 
 from dsmr_mqtt.models.settings import telegram
 from dsmr_datalogger.models.reading import DsmrReading
+import dsmr_mqtt.services.callbacks
 import dsmr_datalogger.signals
-import dsmr_mqtt.services
 
 
 class TestServices(TestCase):
@@ -31,16 +31,16 @@ class TestServices(TestCase):
 
 
 class TestTelegramAndReading(TestServices):
-    @mock.patch('dsmr_mqtt.services.publish_raw_dsmr_telegram')
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_raw_dsmr_telegram')
     def test_raw_telegram_signal(self, service_mock):
         self.assertFalse(service_mock.called)
         dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data='test')
         self.assertTrue(service_mock.called)
 
-    @mock.patch('dsmr_mqtt.services.publish_json_dsmr_reading')
-    @mock.patch('dsmr_mqtt.services.publish_split_topic_dsmr_reading')
-    @mock.patch('dsmr_mqtt.services.publish_day_totals')
-    @mock.patch('dsmr_mqtt.services.publish_split_topic_meter_statistics')
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_json_dsmr_reading')
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading')
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_day_consumption')
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics')
     def test_create_reading_signal(self, *service_mocks):
         self.assertFalse(all([x.called for x in service_mocks]))
         self._create_dsmrreading()
@@ -63,29 +63,25 @@ class TestTelegramAndReading(TestServices):
         DsmrReading.objects.all().update(electricity_currently_delivered=10)
         self.assertFalse(all([x.called for x in service_mocks]))
 
-    @mock.patch('paho.mqtt.publish.single')
-    def test_publish_raw_dsmr_telegram(self, mqtt_mock):
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
+    def test_publish_raw_dsmr_telegram(self, create_message_mock):
         raw_settings = telegram.RawTelegramMQTTSettings.get_solo()
 
         # Disabled by default.
         self.assertFalse(raw_settings.enabled)
-        self.assertFalse(mqtt_mock.called)
-        dsmr_mqtt.services.publish_raw_dsmr_telegram(data='test')
-        self.assertFalse(mqtt_mock.called)
+        self.assertFalse(create_message_mock.called)
+        dsmr_mqtt.services.callbacks.publish_raw_dsmr_telegram(data='test')
+        self.assertFalse(create_message_mock.called)
 
         # Now enabled.
         raw_settings.enabled = True
         raw_settings.save()
-        dsmr_mqtt.services.publish_raw_dsmr_telegram(data='test')
-        self.assertTrue(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_raw_dsmr_telegram(data='test')
+        self.assertTrue(create_message_mock.called)
 
-        # On error.
-        mqtt_mock.side_effect = ValueError('Invalid host.')
-        dsmr_mqtt.services.publish_raw_dsmr_telegram(data='test')
-
-    @mock.patch('paho.mqtt.publish.multiple')
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
     @mock.patch('django.utils.timezone.now')
-    def test_publish_json_dsmr_reading(self, now_mock, mqtt_mock):
+    def test_publish_json_dsmr_reading(self, now_mock, create_message_mock):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2018, 1, 1), timezone=timezone.utc
         )
@@ -117,18 +113,18 @@ extra_device_delivered = ppp
 
         # Disabled by default.
         self.assertFalse(json_settings.enabled)
-        self.assertFalse(mqtt_mock.called)
-        dsmr_mqtt.services.publish_json_dsmr_reading(reading=dsmr_reading)
-        self.assertFalse(mqtt_mock.called)
+        self.assertFalse(create_message_mock.called)
+        dsmr_mqtt.services.callbacks.publish_json_dsmr_reading(reading=dsmr_reading)
+        self.assertFalse(create_message_mock.called)
 
         # Now enabled.
         json_settings.enabled = True
         json_settings.save()
-        dsmr_mqtt.services.publish_json_dsmr_reading(reading=dsmr_reading)
-        self.assertTrue(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_json_dsmr_reading(reading=dsmr_reading)
+        self.assertTrue(create_message_mock.called)
 
-        _, args, _ = mqtt_mock.mock_calls[0]
-        payload = json.loads(args[0][0]['payload'])
+        _, _, kwargs = create_message_mock.mock_calls[0]
+        payload = json.loads(kwargs['payload'])
 
         self.assertEqual(payload['aaa'], DsmrReading.objects.get().pk)
         self.assertEqual(payload['bbb'], '2018-01-01T00:00:00Z')
@@ -149,21 +145,18 @@ extra_device_delivered = ppp
 
         # Check timezone conversion.
         telegram.JSONTelegramMQTTSettings.objects.update(use_local_timezone=True)
-        mqtt_mock.reset_mock()
+        create_message_mock.reset_mock()
 
-        dsmr_mqtt.services.publish_json_dsmr_reading(reading=dsmr_reading)
-        _, args, _ = mqtt_mock.mock_calls[0]
-        payload = json.loads(args[0][0]['payload'])
+        dsmr_mqtt.services.callbacks.publish_json_dsmr_reading(reading=dsmr_reading)
+        _, _, kwargs = create_message_mock.mock_calls[0]
+        payload = json.loads(kwargs['payload'])
+
         self.assertEqual(payload['bbb'], '2018-01-01T01:00:00+01:00')  # No longer UTC.
         self.assertEqual(payload['ooo'], '2018-01-01T13:00:00+01:00')  # No longer UTC.
 
-        # On error.
-        mqtt_mock.side_effect = ValueError('Invalid host.')
-        dsmr_mqtt.services.publish_json_dsmr_reading(reading=dsmr_reading)
-
-    @mock.patch('paho.mqtt.publish.multiple')
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
     @mock.patch('django.utils.timezone.now')
-    def test_publish_split_topic_dsmr_reading(self, now_mock, mqtt_mock):
+    def test_publish_split_topic_dsmr_reading(self, now_mock, create_message_mock):
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2018, 1, 1), timezone=timezone.utc
         )
@@ -195,46 +188,44 @@ extra_device_delivered = dsmr/telegram/extra_device_delivered
 
         # Disabled by default.
         self.assertFalse(split_topic_settings.enabled)
-        self.assertFalse(mqtt_mock.called)
-        dsmr_mqtt.services.publish_split_topic_dsmr_reading(reading=dsmr_reading)
-        self.assertFalse(mqtt_mock.called)
+        self.assertFalse(create_message_mock.called)
+        dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading(reading=dsmr_reading)
+        self.assertFalse(create_message_mock.called)
 
         # Now enabled.
+        create_message_mock.reset_mock()
         split_topic_settings.enabled = True
         split_topic_settings.save()
-        dsmr_mqtt.services.publish_split_topic_dsmr_reading(reading=dsmr_reading)
-        self.assertTrue(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading(reading=dsmr_reading)
+        self.assertTrue(create_message_mock.called)
 
         # Assert timezone UTC for this test.
-        _, _, kwargs = mqtt_mock.mock_calls[0]
+        called_kwargs = [x[1] for x in create_message_mock.call_args_list]
         expected = {
             'payload': '2018-01-01T00:00:00Z',
             'topic': 'dsmr/telegram/timestamp'
         }
-        self.assertIn(expected, kwargs['msgs'])
+        self.assertIn(expected, called_kwargs)
         expected = {
             'payload': '2018-01-01T12:00:00Z',
             'topic': 'dsmr/telegram/extra_device_timestamp'
         }
-        self.assertIn(expected, kwargs['msgs'])
+        self.assertIn(expected, called_kwargs)
 
         # Check timezone conversion.
         telegram.SplitTopicTelegramMQTTSettings.objects.update(use_local_timezone=True)
-        mqtt_mock.reset_mock()
+        create_message_mock.reset_mock()
 
-        dsmr_mqtt.services.publish_split_topic_dsmr_reading(reading=dsmr_reading)
-        _, _, kwargs = mqtt_mock.mock_calls[0]
+        dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading(reading=dsmr_reading)
+
+        called_kwargs = [x[1] for x in create_message_mock.call_args_list]
         expected = {
             'payload': '2018-01-01T01:00:00+01:00',  # No longer UTC.
             'topic': 'dsmr/telegram/timestamp'
         }
-        self.assertIn(expected, kwargs['msgs'])
+        self.assertIn(expected, called_kwargs)
         expected = {
             'payload': '2018-01-01T13:00:00+01:00',  # No longer UTC.
             'topic': 'dsmr/telegram/extra_device_timestamp'
         }
-        self.assertIn(expected, kwargs['msgs'])
-
-        # On error.
-        mqtt_mock.side_effect = ValueError('Invalid host.')
-        dsmr_mqtt.services.publish_split_topic_dsmr_reading(reading=dsmr_reading)
+        self.assertIn(expected, called_kwargs)

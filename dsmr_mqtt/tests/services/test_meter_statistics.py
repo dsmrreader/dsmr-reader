@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from dsmr_mqtt.models.settings import meter_statistics
 from dsmr_datalogger.models.statistics import MeterStatistics
-import dsmr_mqtt.services
+import dsmr_mqtt.services.callbacks
 
 
 class TestDaytotals(TestCase):
@@ -29,16 +29,16 @@ rejected_telegrams = dsmr/kkk
 '''
         self.split_topic_settings.save()
 
-    @mock.patch('paho.mqtt.publish.multiple')
-    def test_disabled(self, mqtt_mock):
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
+    def test_disabled(self, create_message_mock):
         self.assertFalse(self.split_topic_settings.enabled)
-        self.assertFalse(mqtt_mock.called)
+        self.assertFalse(create_message_mock.called)
 
-        dsmr_mqtt.services.publish_split_topic_meter_statistics()
-        self.assertFalse(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics()
+        self.assertFalse(create_message_mock.called)
 
-    @mock.patch('paho.mqtt.publish.multiple')
-    def test_split_topic(self, mqtt_mock):
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
+    def test_split_topic(self, create_message_mock):
         MeterStatistics.objects.all().update(**{
             "timestamp": "2018-03-13T19:52:14Z",
             "dsmr_version": "42",
@@ -57,25 +57,20 @@ rejected_telegrams = dsmr/kkk
         # Should be okay now.
         self.split_topic_settings.enabled = True
         self.split_topic_settings.save()
-        dsmr_mqtt.services.publish_split_topic_meter_statistics()
-        self.assertTrue(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics()
+        self.assertTrue(create_message_mock.called)
 
-        _, _, kwargs = mqtt_mock.mock_calls[0]
-        mqtt_messages = kwargs['msgs']
+        called_kwargs = [x[1] for x in create_message_mock.call_args_list]
 
         # Without gas or costs.
-        self.assertIn({'payload': '42', 'topic': 'dsmr/aaa'}, mqtt_messages)
-        self.assertIn({'payload': 2, 'topic': 'dsmr/bbb'}, mqtt_messages)
-        self.assertIn({'payload': 5, 'topic': 'dsmr/ccc'}, mqtt_messages)
-        self.assertIn({'payload': 2, 'topic': 'dsmr/ddd'}, mqtt_messages)
-        self.assertIn({'payload': 2, 'topic': 'dsmr/eee'}, mqtt_messages)
-        self.assertIn({'payload': 2, 'topic': 'dsmr/fff'}, mqtt_messages)
-        self.assertIn({'payload': 0, 'topic': 'dsmr/ggg'}, mqtt_messages)
-        self.assertIn({'payload': 0, 'topic': 'dsmr/hhh'}, mqtt_messages)
-        self.assertIn({'payload': 0, 'topic': 'dsmr/iii'}, mqtt_messages)
-        self.assertIn({'payload': 0, 'topic': 'dsmr/jjj'}, mqtt_messages)
-        self.assertIn({'payload': 96, 'topic': 'dsmr/kkk'}, mqtt_messages)
-
-        # On error.
-        mqtt_mock.side_effect = ValueError('Invalid host.')
-        dsmr_mqtt.services.publish_split_topic_meter_statistics()
+        self.assertIn({'payload': '42', 'topic': 'dsmr/aaa'}, called_kwargs)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/bbb'}, called_kwargs)
+        self.assertIn({'payload': 5, 'topic': 'dsmr/ccc'}, called_kwargs)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/ddd'}, called_kwargs)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/eee'}, called_kwargs)
+        self.assertIn({'payload': 2, 'topic': 'dsmr/fff'}, called_kwargs)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/ggg'}, called_kwargs)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/hhh'}, called_kwargs)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/iii'}, called_kwargs)
+        self.assertIn({'payload': 0, 'topic': 'dsmr/jjj'}, called_kwargs)
+        self.assertIn({'payload': 96, 'topic': 'dsmr/kkk'}, called_kwargs)

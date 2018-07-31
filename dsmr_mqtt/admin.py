@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
 from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics
+from dsmr_mqtt.models import queue
 
 
 @admin.register(broker.MQTTBrokerSettings)
@@ -10,10 +11,23 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ['hostname', 'port', 'username', 'password', 'client_id'],
+                'fields': ['hostname', 'port', 'secure', 'client_id'],
+                'description': _(
+                    'Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself.'
+                )
+            }
+        ),
+        (
+            _('Advanced'), {
+                'fields': ['username', 'password', 'qos'],
                 'description': _(
                     'These broker settings apply to all enabled MQTT configurations.'
                 )
+            }
+        ),
+        (
+            _('Debugging'), {
+                'fields': ['debug'],
             }
         ),
     )
@@ -168,27 +182,27 @@ class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
 <pre>
 [mapping]
 # DATA = JSON FIELD
-electricity1 = dsmr/day-totals/electricity1
-electricity2 = dsmr/day-totals/electricity2
-electricity1_returned = dsmr/day-totals/electricity1_returned
-electricity2_returned = dsmr/day-totals/electricity2_returned
-electricity_merged = dsmr/day-totals/electricity_merged
-electricity_returned_merged = dsmr/day-totals/electricity_returned_merged
-electricity1_cost = dsmr/day-totals/electricity1_cost
-electricity2_cost = dsmr/day-totals/electricity2_cost
-electricity_cost_merged = dsmr/day-totals/electricity_cost_merged
+electricity1 = dsmr/day-consumption/electricity1
+electricity2 = dsmr/day-consumption/electricity2
+electricity1_returned = dsmr/day-consumption/electricity1_returned
+electricity2_returned = dsmr/day-consumption/electricity2_returned
+electricity_merged = dsmr/day-consumption/electricity_merged
+electricity_returned_merged = dsmr/day-consumption/electricity_returned_merged
+electricity1_cost = dsmr/day-consumption/electricity1_cost
+electricity2_cost = dsmr/day-consumption/electricity2_cost
+electricity_cost_merged = dsmr/day-consumption/electricity_cost_merged
 
 # Gas (if any)
-gas = dsmr/day-totals/gas
-gas_cost = dsmr/day-totals/gas_cost
-total_cost = dsmr/day-totals/total_cost
+gas = dsmr/day-consumption/gas
+gas_cost = dsmr/day-consumption/gas_cost
+total_cost = dsmr/day-consumption/total_cost
 
 # Your energy supplier prices (if set)
-energy_supplier_price_electricity_delivered_1 = dsmr/day-totals/energy_supplier_price_electricity_delivered_1
-energy_supplier_price_electricity_delivered_2 = dsmr/day-totals/energy_supplier_price_electricity_delivered_2
-energy_supplier_price_electricity_returned_1 = dsmr/day-totals/energy_supplier_price_electricity_returned_1
-energy_supplier_price_electricity_returned_2 = dsmr/day-totals/energy_supplier_price_electricity_returned_2
-energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas
+energy_supplier_price_electricity_delivered_1 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_1
+energy_supplier_price_electricity_delivered_2 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_2
+energy_supplier_price_electricity_returned_1 = dsmr/day-consumption/energy_supplier_price_electricity_returned_1
+energy_supplier_price_electricity_returned_2 = dsmr/day-consumption/energy_supplier_price_electricity_returned_2
+energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas
 </pre>
 '''
                 )
@@ -229,3 +243,8 @@ rejected_telegrams = dsmr/meter-stats/rejected_telegrams
             }
         ),
     )
+
+
+@admin.register(queue.Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('topic', 'payload')

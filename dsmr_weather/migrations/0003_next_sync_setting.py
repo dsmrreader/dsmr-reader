@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='weathersettings',
             name='next_sync',
-            field=models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next sync. Automatically updated by application.', null=True, verbose_name='Next export'),
+            field=models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next sync. Automatically updated by application.', null=True, verbose_name='Next sync'),
         ),
     ]

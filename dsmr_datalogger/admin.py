@@ -11,12 +11,22 @@ from .models.statistics import MeterStatistics
 
 @admin.register(DataloggerSettings)
 class DataloggerSettingsAdmin(SingletonModelAdmin):
-    list_display = ('com_port', )
+    fieldsets = (
+        (
+            None, {
+                'fields': ['track', 'track_phases'],
+            }
+        ),
+        (
+            _('Advanced'), {
+                'fields': ['com_port', 'dsmr_version', 'verify_telegram_crc'],
+            }
+        ),
+    )
 
 
 @admin.register(RetentionSettings)
 class RetentionSettingsAdmin(SingletonModelAdmin):
-    list_display = ('data_retention_in_hours', )
     fieldsets = (
         (
             None, {

@@ -30,7 +30,7 @@
 		<link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-16x16.png' %}" sizes="16x16">
 		<link rel="manifest" href="{% static 'dsmr_frontend/img/favicons/manifest.json' %}">
 		<link rel="mask-icon" href="{% static 'dsmr_frontend/img/favicons/safari-pinned-tab.svg' %}">
-		<meta name="theme-color" content="#ffffff">
+		<meta name="theme-color" content="#2B3A45">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -82,7 +82,7 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:archive' %}">
-                                <i class="fas fa-history"></i> &nbsp; <span>{% trans "Archive" %}</span>
+                                <i class="fas fa-clock"></i> &nbsp; <span>{% trans "Archive" %}</span>
                             </a>
                         </li>
                         <li>
@@ -118,30 +118,40 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:export' %}">
-                                <i class="fas fa-download"></i> &nbsp; <span>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></span>
+                                <i class="fa-xs fas fa-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
                             </a>
                         </li>
                         <li>
 				            <a href="{% url 'admin:index' %}" target="_blank">
-				                <i class="fas fa-sliders-h"></i> &nbsp; <span>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></span>
+				                <i class="fa-xs fas fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
 			            </li>
                         <li>
                             &nbsp;
                         </li>
                         <li>
+                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">
+                                <i class="fa-xs fas fa-history"></i> &nbsp; <small>{% trans "Changelog" %}</small>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
-                                <i class="fas fa-question"></i> &nbsp; <span>{% trans "Help / FAQ" %}</span>
+                                <i class="fa-xs fas fa-question"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                                <i class="fas fa-bullhorn"></i> &nbsp; <span>{% trans "Feedback" %}</span>
+                                <i class="fa-xs fas fa-bullhorn"></i> &nbsp; <small>{% trans "Feedback" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
+                                <i class="fa-xs fas fa-hand-holding-usd"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
                             </a>
                         </li>
                     </ul>
                 </section>
-                
+
                 <div class="row copyright">
                     <small>
 	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015 - {% now "Y" %}

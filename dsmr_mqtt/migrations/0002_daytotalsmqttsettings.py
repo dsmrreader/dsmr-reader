@@ -14,12 +14,12 @@ class Migration(migrations.Migration):
             name='JSONDayTotalsMQTTSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('enabled', models.BooleanField(default=False, help_text='Whether the day totals are sent to the broker, in JSON format.', verbose_name='Enabled')),
-                ('topic', models.CharField(default='dsmr/day-totals', help_text='The topic to send the JSON formatted message to.', max_length=256, verbose_name='Topic path')),
+                ('enabled', models.BooleanField(default=False, help_text='Whether the day consumption is sent to the broker, in JSON format.', verbose_name='Enabled')),
+                ('topic', models.CharField(default='dsmr/day-consumption', help_text='The topic to send the JSON formatted message to.', max_length=256, verbose_name='Topic path')),
                 ('formatting', models.TextField(default='\n[mapping]\n# DATA = JSON FIELD\nelectricity1 = electricity1\nelectricity2 = electricity2\nelectricity1_returned = electricity1_returned\nelectricity2_returned = electricity2_returned\nelectricity_merged = electricity_merged\nelectricity_returned_merged = electricity_returned_merged\nelectricity1_cost = electricity1_cost\nelectricity2_cost = electricity2_cost\nelectricity_cost_merged = electricity_cost_merged\n\n# Gas (if any)\ngas = gas\ngas_cost = gas_cost\ntotal_cost = total_cost\n\n# Your energy supplier prices (if set)\nenergy_supplier_price_electricity_delivered_1 = energy_supplier_price_electricity_delivered_1\nenergy_supplier_price_electricity_delivered_2 = energy_supplier_price_electricity_delivered_2\nenergy_supplier_price_electricity_returned_1 = energy_supplier_price_electricity_returned_1\nenergy_supplier_price_electricity_returned_2 = energy_supplier_price_electricity_returned_2\nenergy_supplier_price_gas = energy_supplier_price_gas\n', help_text='Maps the field names used in the JSON message sent to the broker.', verbose_name='Formatting')),
             ],
             options={
-                'verbose_name': 'MQTT: Day totals (as JSON) configuration',
+                'verbose_name': 'MQTT: Day consumption (as JSON) configuration',
                 'default_permissions': (),
             },
         ),
@@ -27,11 +27,11 @@ class Migration(migrations.Migration):
             name='SplitTopicDayTotalsMQTTSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('enabled', models.BooleanField(default=False, help_text='Whether day totals are sent to the broker, having each field sent to a different topic.', verbose_name='Enabled')),
-                ('formatting', models.TextField(default='\n[mapping]\n# DATA = TOPIC PATH\nelectricity1 = dsmr/day-totals/electricity1\nelectricity2 = dsmr/day-totals/electricity2\nelectricity1_returned = dsmr/day-totals/electricity1_returned\nelectricity2_returned = dsmr/day-totals/electricity2_returned\nelectricity_merged = dsmr/day-totals/electricity_merged\nelectricity_returned_merged = dsmr/day-totals/electricity_returned_merged\nelectricity1_cost = dsmr/day-totals/electricity1_cost\nelectricity2_cost = dsmr/day-totals/electricity2_cost\nelectricity_cost_merged = dsmr/day-totals/electricity_cost_merged\n\n# Gas (if any)\ngas = dsmr/day-totals/gas\ngas_cost = dsmr/day-totals/gas_cost\ntotal_cost = dsmr/day-totals/total_cost\n\n# Your energy supplier prices (if set)\nenergy_supplier_price_electricity_delivered_1 = dsmr/day-totals/energy_supplier_price_electricity_delivered_1\nenergy_supplier_price_electricity_delivered_2 = dsmr/day-totals/energy_supplier_price_electricity_delivered_2\nenergy_supplier_price_electricity_returned_1 = dsmr/day-totals/energy_supplier_price_electricity_returned_1\nenergy_supplier_price_electricity_returned_2 = dsmr/day-totals/energy_supplier_price_electricity_returned_2\nenergy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas\n', help_text='Maps the field names to separate topics sent to the broker.', verbose_name='Formatting')),
+                ('enabled', models.BooleanField(default=False, help_text='Whether day consumption is sent to the broker, having each field sent to a different topic.', verbose_name='Enabled')),
+                ('formatting', models.TextField(default='\n[mapping]\n# DATA = TOPIC PATH\nelectricity1 = dsmr/day-consumption/electricity1\nelectricity2 = dsmr/day-consumption/electricity2\nelectricity1_returned = dsmr/day-consumption/electricity1_returned\nelectricity2_returned = dsmr/day-consumption/electricity2_returned\nelectricity_merged = dsmr/day-consumption/electricity_merged\nelectricity_returned_merged = dsmr/day-consumption/electricity_returned_merged\nelectricity1_cost = dsmr/day-consumption/electricity1_cost\nelectricity2_cost = dsmr/day-consumption/electricity2_cost\nelectricity_cost_merged = dsmr/day-consumption/electricity_cost_merged\n\n# Gas (if any)\ngas = dsmr/day-consumption/gas\ngas_cost = dsmr/day-consumption/gas_cost\ntotal_cost = dsmr/day-consumption/total_cost\n\n# Your energy supplier prices (if set)\nenergy_supplier_price_electricity_delivered_1 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_1\nenergy_supplier_price_electricity_delivered_2 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_2\nenergy_supplier_price_electricity_returned_1 = dsmr/day-consumption/energy_supplier_price_electricity_returned_1\nenergy_supplier_price_electricity_returned_2 = dsmr/day-consumption/energy_supplier_price_electricity_returned_2\nenergy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas\n', help_text='Maps the field names to separate topics sent to the broker.', verbose_name='Formatting')),
             ],
             options={
-                'verbose_name': 'MQTT: Day totals (per split topic) configuration',
+                'verbose_name': 'MQTT: Day consumption (per split topic) configuration',
                 'default_permissions': (),
             },
         ),

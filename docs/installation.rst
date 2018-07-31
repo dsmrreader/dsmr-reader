@@ -17,8 +17,10 @@ Docker (alternative)
 
     There is also a Docker version available for DSMR-reader. It's hosted and maintained by a third party. More information can be found here:
 
-    Github: https://github.com/xirixiz/dsmr-reader-docker
+    Github: https://github.com/ualex73/dsmr-reader-docker
+    Docker hub: https://hub.docker.com/r/ualex73/dsmr-reader-docker/
 
+    Github: https://github.com/xirixiz/dsmr-reader-docker
     Docker hub: https://hub.docker.com/r/xirixiz/dsmr-reader-docker/
     
 Not interested in Docker? Follow the instructions in the chapters below if you wish to install this project the regular way.

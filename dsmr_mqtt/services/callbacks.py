@@ -1,40 +1,14 @@
 import configparser
-import logging
 import json
 
 from django.core import serializers
 from django.utils import timezone
-import paho.mqtt.publish as publish
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics
+from dsmr_mqtt.models.settings import day_totals, telegram, meter_statistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
+from dsmr_mqtt.models import queue
 import dsmr_consumption.services
-
-
-logger = logging.getLogger('dsmrreader')
-
-
-def get_broker_configuration():
-    """ Returns the broker configuration from the settings, in dict format, ready to use with paho.mqtt. """
-    broker_settings = broker.MQTTBrokerSettings.get_solo()
-
-    kwargs = {
-        'hostname': broker_settings.hostname,
-        'port': broker_settings.port,
-        'client_id': broker_settings.client_id,
-        'auth': None,
-    }
-
-    if broker_settings.username and broker_settings.password:
-        kwargs.update({
-            'auth': {
-                'username': broker_settings.username,
-                'password': broker_settings.password,
-            }
-        })
-
-    return kwargs
 
 
 def publish_raw_dsmr_telegram(data):
@@ -44,12 +18,7 @@ def publish_raw_dsmr_telegram(data):
     if not raw_settings.enabled:
         return
 
-    broker_kwargs = get_broker_configuration()
-
-    try:
-        publish.single(topic=raw_settings.topic, payload=data, **broker_kwargs)
-    except ValueError as error:
-        logger.error('MQTT publish_raw_dsmr_telegram() | {}'.format(error))
+    queue.Message.objects.create(topic=raw_settings.topic, payload=data)
 
 
 def publish_json_dsmr_reading(reading):
@@ -78,12 +47,7 @@ def publish_json_dsmr_reading(reading):
         json_dict[config_key] = v
 
     json_reading = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
-    broker_kwargs = get_broker_configuration()
-
-    try:
-        publish.single(topic=json_settings.topic, payload=json_reading, **broker_kwargs)
-    except ValueError as error:
-        logger.error('MQTT publish_json_dsmr_reading() | {}'.format(error))
+    queue.Message.objects.create(topic=json_settings.topic, payload=json_reading)
 
 
 def publish_split_topic_dsmr_reading(reading):
@@ -102,7 +66,6 @@ def publish_split_topic_dsmr_reading(reading):
     config_parser.read_string(split_topic_settings.formatting)
     topic_mapping = config_parser['mapping']
 
-    mqtt_messages = []
     serialized_reading = json.loads(serializers.serialize('json', [reading]))
     reading_fields = dict(serialized_reading[0]['fields'].items())
     reading_fields['id'] = serialized_reading[0]['pk']
@@ -112,21 +75,11 @@ def publish_split_topic_dsmr_reading(reading):
         if k not in topic_mapping:
             continue
 
-        mqtt_messages.append({
-            'topic': topic_mapping[k],
-            'payload': v,
-        })
-
-    broker_kwargs = get_broker_configuration()
-
-    try:
-        publish.multiple(msgs=mqtt_messages, **broker_kwargs)
-    except ValueError as error:
-        logger.error('MQTT publish_split_topic_dsmr_reading() | {}'.format(error))
+        queue.Message.objects.create(topic=topic_mapping[k], payload=v)
 
 
-def publish_day_totals():
-    """ Publishes day totals to a broker, if set and enabled. """
+def publish_day_consumption():
+    """ Publishes day consumption to a broker, if set and enabled. """
     json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
     split_topic_settings = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
 
@@ -143,20 +96,11 @@ def publish_day_totals():
         day=timezone.localtime(latest_electricity.read_at).date()
     )
 
-    mqtt_messages = []
-
     if json_settings.enabled:
-        mqtt_messages += day_totals_as_json(day_consumption, json_settings)
+        day_totals_as_json(day_consumption, json_settings)
 
     if split_topic_settings.enabled:
-        mqtt_messages += day_totals_per_topic(day_consumption, split_topic_settings)
-
-    broker_kwargs = get_broker_configuration()
-
-    try:
-        publish.multiple(msgs=mqtt_messages, **broker_kwargs)
-    except ValueError as error:
-        logger.error('MQTT publish_day_totals() | {}'.format(error))
+        day_totals_per_topic(day_consumption, split_topic_settings)
 
 
 def day_totals_as_json(day_consumption, json_settings):
@@ -175,11 +119,7 @@ def day_totals_as_json(day_consumption, json_settings):
         json_dict[config_key] = v
 
     json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
-
-    return [{
-        'topic': json_settings.topic,
-        'payload': json_data,
-    }]
+    queue.Message.objects.create(topic=json_settings.topic, payload=json_data)
 
 
 def day_totals_per_topic(day_consumption, split_topic_settings):
@@ -188,19 +128,12 @@ def day_totals_per_topic(day_consumption, split_topic_settings):
     config_parser.read_string(split_topic_settings.formatting)
     topic_mapping = config_parser['mapping']
 
-    mqtt_messages = []
-
     # Use mapping to setup fields for each message/topic.
     for k, v in day_consumption.items():
         if k not in topic_mapping:
             continue
 
-        mqtt_messages.append({
-            'topic': topic_mapping[k],
-            'payload': str(v),
-        })
-
-    return mqtt_messages
+        queue.Message.objects.create(topic=topic_mapping[k], payload=v)
 
 
 def publish_split_topic_meter_statistics():
@@ -215,7 +148,6 @@ def publish_split_topic_meter_statistics():
     config_parser.read_string(split_topic_settings.formatting)
     topic_mapping = config_parser['mapping']
 
-    mqtt_messages = []
     serialized_reading = json.loads(serializers.serialize('json', [MeterStatistics.get_solo()]))
     reading_fields = dict(serialized_reading[0]['fields'].items())
     reading_fields['id'] = serialized_reading[0]['pk']
@@ -225,14 +157,4 @@ def publish_split_topic_meter_statistics():
         if k not in topic_mapping:
             continue
 
-        mqtt_messages.append({
-            'topic': topic_mapping[k],
-            'payload': v,
-        })
-
-    broker_kwargs = get_broker_configuration()
-
-    try:
-        publish.multiple(msgs=mqtt_messages, **broker_kwargs)
-    except ValueError as error:
-        logger.error('MQTT publish_split_topic_meter_statistics() | {}'.format(error))
+        queue.Message.objects.create(topic=topic_mapping[k], payload=v)

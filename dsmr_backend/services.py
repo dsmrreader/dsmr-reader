@@ -221,6 +221,6 @@ def status_info():
 def is_recent_installation():
     """ Checks whether this is a new installation, by checking the interval to the first migration. """
     has_old_migration = MigrationRecorder.Migration.objects.filter(
-        applied__lt=timezone.now() - timezone.timedelta(hours=24)
+        applied__lt=timezone.now() - timezone.timedelta(hours=1)
     ).exists()
     return not has_old_migration

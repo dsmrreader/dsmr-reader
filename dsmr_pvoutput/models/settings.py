@@ -71,9 +71,8 @@ class PVOutputAddStatusSettings(SingletonModel):
         validators=[MinValueValidator(0), MaxValueValidator(120)],
         verbose_name=_('PVOutput: Processing delay (minutes)'),
         help_text=_(
-            '[!]: This feature is ONLY available when you have a DONATOR account for PVOutput.org! Leave EMPTY to '
-            'disable the feature. This parameter allows the processing of the data to be delayed, by the specified '
-            'number of minutes. Allowed values: empty or 0 to 120 (minutes)'
+            'Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, '
+            'by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)'
         )
     )
     next_export = models.DateTimeField(

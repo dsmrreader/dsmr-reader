@@ -8,11 +8,11 @@ class JSONDayTotalsMQTTSettings(SingletonModel):
     enabled = models.BooleanField(
         default=False,
         verbose_name=_('Enabled'),
-        help_text=_('Whether the day totals are sent to the broker, in JSON format.')
+        help_text=_('Whether the day consumption is sent to the broker, in JSON format.')
     )
     topic = models.CharField(
         max_length=256,
-        default='dsmr/day-totals',
+        default='dsmr/day-consumption',
         verbose_name=_('Topic path'),
         help_text=_('The topic to send the JSON formatted message to.')
     )
@@ -51,7 +51,7 @@ energy_supplier_price_gas = energy_supplier_price_gas
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Day totals (as JSON) configuration')
+        verbose_name = _('MQTT: Day consumption (as JSON) configuration')
 
 
 class SplitTopicDayTotalsMQTTSettings(SingletonModel):
@@ -59,33 +59,33 @@ class SplitTopicDayTotalsMQTTSettings(SingletonModel):
     enabled = models.BooleanField(
         default=False,
         verbose_name=_('Enabled'),
-        help_text=_('Whether day totals are sent to the broker, having each field sent to a different topic.')
+        help_text=_('Whether day consumption is sent to the broker, having each field sent to a different topic.')
     )
     formatting = models.TextField(
         default='''
 [mapping]
 # DATA = TOPIC PATH
-electricity1 = dsmr/day-totals/electricity1
-electricity2 = dsmr/day-totals/electricity2
-electricity1_returned = dsmr/day-totals/electricity1_returned
-electricity2_returned = dsmr/day-totals/electricity2_returned
-electricity_merged = dsmr/day-totals/electricity_merged
-electricity_returned_merged = dsmr/day-totals/electricity_returned_merged
-electricity1_cost = dsmr/day-totals/electricity1_cost
-electricity2_cost = dsmr/day-totals/electricity2_cost
-electricity_cost_merged = dsmr/day-totals/electricity_cost_merged
+electricity1 = dsmr/day-consumption/electricity1
+electricity2 = dsmr/day-consumption/electricity2
+electricity1_returned = dsmr/day-consumption/electricity1_returned
+electricity2_returned = dsmr/day-consumption/electricity2_returned
+electricity_merged = dsmr/day-consumption/electricity_merged
+electricity_returned_merged = dsmr/day-consumption/electricity_returned_merged
+electricity1_cost = dsmr/day-consumption/electricity1_cost
+electricity2_cost = dsmr/day-consumption/electricity2_cost
+electricity_cost_merged = dsmr/day-consumption/electricity_cost_merged
 
 # Gas (if any)
-gas = dsmr/day-totals/gas
-gas_cost = dsmr/day-totals/gas_cost
-total_cost = dsmr/day-totals/total_cost
+gas = dsmr/day-consumption/gas
+gas_cost = dsmr/day-consumption/gas_cost
+total_cost = dsmr/day-consumption/total_cost
 
 # Your energy supplier prices (if set)
-energy_supplier_price_electricity_delivered_1 = dsmr/day-totals/energy_supplier_price_electricity_delivered_1
-energy_supplier_price_electricity_delivered_2 = dsmr/day-totals/energy_supplier_price_electricity_delivered_2
-energy_supplier_price_electricity_returned_1 = dsmr/day-totals/energy_supplier_price_electricity_returned_1
-energy_supplier_price_electricity_returned_2 = dsmr/day-totals/energy_supplier_price_electricity_returned_2
-energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas
+energy_supplier_price_electricity_delivered_1 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_1
+energy_supplier_price_electricity_delivered_2 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_2
+energy_supplier_price_electricity_returned_1 = dsmr/day-consumption/energy_supplier_price_electricity_returned_1
+energy_supplier_price_electricity_returned_2 = dsmr/day-consumption/energy_supplier_price_electricity_returned_2
+energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas
 ''',
         verbose_name=_('Formatting'),
         help_text=_('Maps the field names to separate topics sent to the broker.')
@@ -96,4 +96,4 @@ energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Day totals (per split topic) configuration')
+        verbose_name = _('MQTT: Day consumption (per split topic) configuration')

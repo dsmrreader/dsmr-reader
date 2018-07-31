@@ -58,6 +58,12 @@ msgstr "Forceert enkele uitvoer."
 msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>"
 
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+msgid "Automatic fields"
+msgstr "Automatische velden"
+
 msgid "Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync\">FAQ in documentatie</a>"
 
@@ -409,6 +415,27 @@ msgstr "Aantal genegeerde DSMR telegrammen wegens een foutieve CRC checksum"
 msgid "DSMR Meter statistics (read only)"
 msgstr "Meterstatistieken (alleen lezen)"
 
+msgid "Interface"
+msgstr "Interface"
+
+msgid "Electricity delivered"
+msgstr "Elektriciteitsverbruik"
+
+msgid "Electricity returned"
+msgstr "Elektriciteit teruggeleverd"
+
+msgid "Gas"
+msgstr "Gas"
+
+msgid "Phases P+"
+msgstr "Fasen P+"
+
+msgid "Phases P-"
+msgstr "Fasen P-"
+
+msgid "Temperature"
+msgstr "Temperatuur"
+
 msgid "Frontend"
 msgstr "Interface"
 
@@ -538,9 +565,6 @@ msgstr "Elektriciteitsverbruik"
 msgid "(in kWh)"
 msgstr "(in kWh)"
 
-msgid "Electricity returned"
-msgstr "Elektriciteit teruggeleverd"
-
 msgid "Gas usage"
 msgstr "Gasverbruik"
 
@@ -580,11 +604,17 @@ msgstr "Inloggen vereist"
 msgid "Configuration"
 msgstr "Configuratie"
 
+msgid "Changelog"
+msgstr "Wijzigingenoverzicht"
+
 msgid "Help / FAQ"
 msgstr "Help / FAQ"
 
 msgid "Feedback"
 msgstr "Feedback"
+
+msgid "Donations / tips"
+msgstr "Donaties"
 
 msgid "Credits to"
 msgstr "Credits aan"
@@ -651,9 +681,6 @@ msgstr "Elektriciteit 1 (daltarief)"
 
 msgid "Electricity 2 (high tariff)"
 msgstr "Elektriciteit 2 (piektarief)"
-
-msgid "Gas"
-msgstr "Gas"
 
 msgid "Total"
 msgstr "Totaal"
@@ -1012,8 +1039,14 @@ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisc
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
 
+msgid "Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself."
+msgstr "Het wijzigen van elke instelling hier zou ervoor moeten zorgen dat <strong>dsmr_mqtt</strong> zichzelf automatisch herstart."
+
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
+
+msgid "Debugging"
+msgstr "Debuggen"
 
 msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
 msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
@@ -1165,54 +1198,54 @@ msgid ""
 "<pre>\n"
 "[mapping]\n"
 "# DATA = JSON FIELD\n"
-"electricity1 = dsmr/day-totals/electricity1\n"
-"electricity2 = dsmr/day-totals/electricity2\n"
-"electricity1_returned = dsmr/day-totals/electricity1_returned\n"
-"electricity2_returned = dsmr/day-totals/electricity2_returned\n"
-"electricity_merged = dsmr/day-totals/electricity_merged\n"
-"electricity_returned_merged = dsmr/day-totals/electricity_returned_merged\n"
-"electricity1_cost = dsmr/day-totals/electricity1_cost\n"
-"electricity2_cost = dsmr/day-totals/electricity2_cost\n"
-"electricity_cost_merged = dsmr/day-totals/electricity_cost_merged\n"
+"electricity1 = dsmr/day-consumption/electricity1\n"
+"electricity2 = dsmr/day-consumption/electricity2\n"
+"electricity1_returned = dsmr/day-consumption/electricity1_returned\n"
+"electricity2_returned = dsmr/day-consumption/electricity2_returned\n"
+"electricity_merged = dsmr/day-consumption/electricity_merged\n"
+"electricity_returned_merged = dsmr/day-consumption/electricity_returned_merged\n"
+"electricity1_cost = dsmr/day-consumption/electricity1_cost\n"
+"electricity2_cost = dsmr/day-consumption/electricity2_cost\n"
+"electricity_cost_merged = dsmr/day-consumption/electricity_cost_merged\n"
 "\n"
 "# Gas (if any)\n"
-"gas = dsmr/day-totals/gas\n"
-"gas_cost = dsmr/day-totals/gas_cost\n"
-"total_cost = dsmr/day-totals/total_cost\n"
+"gas = dsmr/day-consumption/gas\n"
+"gas_cost = dsmr/day-consumption/gas_cost\n"
+"total_cost = dsmr/day-consumption/total_cost\n"
 "\n"
 "# Your energy supplier prices (if set)\n"
-"energy_supplier_price_electricity_delivered_1 = dsmr/day-totals/energy_supplier_price_electricity_delivered_1\n"
-"energy_supplier_price_electricity_delivered_2 = dsmr/day-totals/energy_supplier_price_electricity_delivered_2\n"
-"energy_supplier_price_electricity_returned_1 = dsmr/day-totals/energy_supplier_price_electricity_returned_1\n"
-"energy_supplier_price_electricity_returned_2 = dsmr/day-totals/energy_supplier_price_electricity_returned_2\n"
-"energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas\n"
+"energy_supplier_price_electricity_delivered_1 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_1\n"
+"energy_supplier_price_electricity_delivered_2 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_2\n"
+"energy_supplier_price_electricity_returned_1 = dsmr/day-consumption/energy_supplier_price_electricity_returned_1\n"
+"energy_supplier_price_electricity_returned_2 = dsmr/day-consumption/energy_supplier_price_electricity_returned_2\n"
+"energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas\n"
 "</pre>\n"
 msgstr ""
 "Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om de huidige dagtotalen te laten doorsturen naar de MQTT broker, gesplitst per topic. Je kunt de topics aanpassen waar de velden naar toe gestuurd worden. Standaardwaarden:\n"
 "<pre>\n"
 "[mapping]\n"
 "# DATA = JSON FIELD\n"
-"electricity1 = dsmr/day-totals/electricity1\n"
-"electricity2 = dsmr/day-totals/electricity2\n"
-"electricity1_returned = dsmr/day-totals/electricity1_returned\n"
-"electricity2_returned = dsmr/day-totals/electricity2_returned\n"
-"electricity_merged = dsmr/day-totals/electricity_merged\n"
-"electricity_returned_merged = dsmr/day-totals/electricity_returned_merged\n"
-"electricity1_cost = dsmr/day-totals/electricity1_cost\n"
-"electricity2_cost = dsmr/day-totals/electricity2_cost\n"
-"electricity_cost_merged = dsmr/day-totals/electricity_cost_merged\n"
+"electricity1 = dsmr/day-consumption/electricity1\n"
+"electricity2 = dsmr/day-consumption/electricity2\n"
+"electricity1_returned = dsmr/day-consumption/electricity1_returned\n"
+"electricity2_returned = dsmr/day-consumption/electricity2_returned\n"
+"electricity_merged = dsmr/day-consumption/electricity_merged\n"
+"electricity_returned_merged = dsmr/day-consumption/electricity_returned_merged\n"
+"electricity1_cost = dsmr/day-consumption/electricity1_cost\n"
+"electricity2_cost = dsmr/day-consumption/electricity2_cost\n"
+"electricity_cost_merged = dsmr/day-consumption/electricity_cost_merged\n"
 "\n"
 "# Gas (if any)\n"
-"gas = dsmr/day-totals/gas\n"
-"gas_cost = dsmr/day-totals/gas_cost\n"
-"total_cost = dsmr/day-totals/total_cost\n"
+"gas = dsmr/day-consumption/gas\n"
+"gas_cost = dsmr/day-consumption/gas_cost\n"
+"total_cost = dsmr/day-consumption/total_cost\n"
 "\n"
 "# Your energy supplier prices (if set)\n"
-"energy_supplier_price_electricity_delivered_1 = dsmr/day-totals/energy_supplier_price_electricity_delivered_1\n"
-"energy_supplier_price_electricity_delivered_2 = dsmr/day-totals/energy_supplier_price_electricity_delivered_2\n"
-"energy_supplier_price_electricity_returned_1 = dsmr/day-totals/energy_supplier_price_electricity_returned_1\n"
-"energy_supplier_price_electricity_returned_2 = dsmr/day-totals/energy_supplier_price_electricity_returned_2\n"
-"energy_supplier_price_gas = dsmr/day-totals/energy_supplier_price_gas\n"
+"energy_supplier_price_electricity_delivered_1 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_1\n"
+"energy_supplier_price_electricity_delivered_2 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_2\n"
+"energy_supplier_price_electricity_returned_1 = dsmr/day-consumption/energy_supplier_price_electricity_returned_1\n"
+"energy_supplier_price_electricity_returned_2 = dsmr/day-consumption/energy_supplier_price_electricity_returned_2\n"
+"energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas\n"
 "\n"
 "</pre>\n"
 
@@ -1255,6 +1288,27 @@ msgstr ""
 msgid "MQTT"
 msgstr "MQTT"
 
+msgid "Dedicated MQTT client for publishing messages to the broker."
+msgstr "Afzonderlijke MQTT client voor het publiceren van berichten naar de broker."
+
+msgid "MQTT now requires a separate process in Supervisor. Please read the changelog for more instructions."
+msgstr "MQTT vereist voortaan een apart proces in Supervisor. Zie het wijzigingenoverzicht voor verdere instructies."
+
+msgid "MQTT: Outgoing message"
+msgstr "MQTT: Uitgaand bericht"
+
+msgid "MQTT: Outgoing messages"
+msgstr "MQTT: Uitgaande berichten"
+
+msgid "INSECURE - No SSL/TLS"
+msgstr "ONVEILIG - Geen SSL/TLS"
+
+msgid "SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certficates)"
+msgstr "VEILIG (CERT_NONE) - Validatiefouten worden genegeerd (bij onvertrouwde of verlopen certificaten)"
+
+msgid "SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate"
+msgstr "VEILIG (CERT_REQUIRED) - Vereist een geldig/vertrouwd certificaat"
+
 msgid "Hostname"
 msgstr "Hostnaam"
 
@@ -1264,8 +1318,14 @@ msgstr "De hostnaam om MQTT-berichten naar te versturen."
 msgid "Port"
 msgstr "Poort"
 
-msgid "The port of the broker to send MQTT messages to."
-msgstr "De poort om MQTT-berichten naar te versturen."
+msgid "MQTT: 1883 - MQTTS: 8883"
+msgstr "MQTT: 1883 - MQTTS: 8883"
+
+msgid "Secure (SSL/TLS)"
+msgstr "Beveiliging (SSL/TLS)"
+
+msgid "Whether the client should use a secure connection. Select SECURE (CERT_NONE) for self-signed certificates. Make sure to use the appropriate MQTT(S) port as well."
+msgstr "Geeft aan of er gebruikt gemaakt moet worden van een beveiligde verbinding. Kies voor VEILIG (CERT_NONE) wanneer je een self-signed certificaat gebruikt. Zorg er ook voor dat je de bijbehorende MQTT(S)-poort gebruikt."
 
 msgid "Username"
 msgstr "Gebruikersnaam"
@@ -1285,14 +1345,32 @@ msgstr "Client ID"
 msgid "The client ID used to identify DSMR-reader sending the MQTT messages."
 msgstr "Het Client ID dat gebruikt wordt om DSMR-reader te identificeren bij het versturen van de MQTT berichten."
 
+msgid "Quality Of Service"
+msgstr "Quality Of Service"
+
+msgid "QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages."
+msgstr "QoS 0: Beste performance, maar onbetoruwbaar (ontworpen voor betrouwbare verbindingen, zoals bekabelde netwerken). QoS 1: Gemiddelde performance, maar betrouwbaar. LET OP: Kan ervoor zorgen dat berichten dubbel verzonden worden! QoS 2: Traagste performance, maar betrouwbaar en voorkomt het versturen van dubbele berichten."
+
+msgid "Enable debug logging"
+msgstr "Schakel debug logging in"
+
+msgid "Whether the client should display debug information in the logs."
+msgstr "Geeft aan of de client debug-informatie in de logs moet wegschrijven."
+
+msgid "Restart required"
+msgstr "Herstart vereist"
+
+msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
+msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
+
 msgid "MQTT: Broker/connection configuration"
 msgstr "MQTT: Broker/verbinding-configuratie"
 
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-msgid "Whether the day totals are sent to the broker, in JSON format."
-msgstr "Geeft aan of de dagtotalen worden doorgestuurd naar de broker, in JSON formaat."
+msgid "Whether the day consumption is sent to the broker, in JSON format."
+msgstr "Geeft aan of het dagverbruik wordt doorgestuurd naar de broker, in JSON formaat."
 
 msgid "Topic path"
 msgstr "Topic pad"
@@ -1306,17 +1384,17 @@ msgstr "Formaat"
 msgid "Maps the field names used in the JSON message sent to the broker."
 msgstr "Mapt de veldnamen die gebruikt worden in het JSON-bericht naar de broker toe."
 
-msgid "MQTT: Day totals (as JSON) configuration"
-msgstr "MQTT: Dagtotalen (als JSON) configuratie"
+msgid "MQTT: Day consumption (as JSON) configuration"
+msgstr "MQTT: Dagverbruik (als JSON) configuratie"
 
-msgid "Whether day totals are sent to the broker, having each field sent to a different topic."
-msgstr "Geeft aan of dagtotalen worden doorgestuurd naar de broker, gesplitst op een apart veld per topic."
+msgid "Whether day consumption is sent to the broker, having each field sent to a different topic."
+msgstr "Geeft aan of het dagverbruik wordt doorgestuurd naar de broker, gesplitst op een apart veld per topic."
 
 msgid "Maps the field names to separate topics sent to the broker."
 msgstr "Mapt de veldnamen naar topics, die gebruikt worden in individuele berichten naar de broker toe."
 
-msgid "MQTT: Day totals (per split topic) configuration"
-msgstr "MQTT: Dagtotalen (per gesplitst topic) configuratie"
+msgid "MQTT: Day consumption (per split topic) configuration"
+msgstr "MQTT: Dagverbruik (per gesplitst topic) configuratie"
 
 msgid "Whether meter statistics are sent to the broker, having each field sent to a different topic."
 msgstr "Geeft aan of meterstatistieken worden doorgestuurd naar de broker, gesplitst op een apart veld per topic."
@@ -1438,8 +1516,14 @@ msgstr "Er is meer dan een uur verstreken sinds de laatst ontvangen meting. Cont
 msgid "Datalogger check"
 msgstr "Dataloggercontrole"
 
-msgid "Implements the following API call: https://pvoutput.org/help.html#api-addstatus"
-msgstr "Implementeert de volgende API call: https://pvoutput.org/help.html#api-addstatus"
+msgid "Implements the following API call: <a href=\"https://pvoutput.org/help.html#api-addstatus\" target=\"_blank\">Add Status Service</a>"
+msgstr "Implementeert de volgende API call: <a href=\"https://pvoutput.org/help.html#api-addstatus\" target=\"_blank\">Add Status Service</a>"
+
+msgid "PVOutput Donators"
+msgstr "PVOutput Donators"
+
+msgid "This feature is ONLY available when you have a DONATOR account for PVOutput.org. For more information see: <a href=\"https://pvoutput.org/donate.jsp\" target=\"_blank\">Donating to PVOutput</a>  and <a href=\"https://pvoutput.org/help.html#donations\" target=\"_blank\">Bonus Features</a>."
+msgstr "Deze feature is alleen beschikbaar wanneer je koppelt aan een PVOutput DONATOR account. Voor meer informatie zie: <a href=\"https://pvoutput.org/donate.jsp\" target=\"_blank\">Doneren aan PVOutput</a>  en <a href=\"https://pvoutput.org/help.html#donations\" target=\"_blank\">Bonus Features</a>."
 
 msgid "PVOutput"
 msgstr "PVOutput"
@@ -1483,8 +1567,8 @@ msgstr "Een kunstmatige vertraging in het uploaden van gegevens naar PVOutput. V
 msgid "PVOutput: Processing delay (minutes)"
 msgstr "PVOutput: Verwerkingsvertraging (in minuten)"
 
-msgid "[!]: This feature is ONLY available when you have a DONATOR account for PVOutput.org! Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)"
-msgstr "[!] Deze feature is alleen beschikbaar wanneer je een DONATIE-account bij PVOutput.org hebt! Deze parameter staat het vertraagd verwerken van gegevens toe. Je kunt de vertraging instellen op een aantal minuten. Toegestaan: leeg veld of 0 tot 120 (minuten)"
+msgid "Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)"
+msgstr "Laat dit veld leeg om uit te schakelen. Deze parameter staat het vertraagd verwerken van gegevens toe. Je kunt de vertraging instellen op een aantal minuten. Toegestaan: leeg veld of 0 tot 120 (minuten)"
 
 msgid "Timestamp of latest sync with PVOutput. Automatically updated by application."
 msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt dit automatisch bij."
@@ -1530,6 +1614,12 @@ msgstr "Begintijd uur"
 
 msgid "Hour statistics (automatically generated data)"
 msgstr "Uurstatistieken (automatisch gegenereerd)"
+
+msgid "Buienradar"
+msgstr "Buienradar"
+
+msgid "See <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> for a map of all locations."
+msgstr "Zie <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> voor een kaart van alle locaties."
 
 msgid "Weather station Arcen"
 msgstr "Weerstation Arcen"
@@ -1699,8 +1789,8 @@ msgstr "Geeft aan of we buitentemperaturen meten via een externe dienst, en ze b
 msgid "Buienradar weather station"
 msgstr "Buienradar weerstation"
 
-msgid "The weather station used to measure and log outside temperatures. Choose one nearby. See http://www.buienradar.nl/weerkaarten/temperatuur for a map of all locations."
-msgstr "Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op te slaan. Kies een locatie zo dicht mogelijk bij huis. Zie http://www.buienradar.nl/weerkaarten/temperatuur voor een kaart van alle locaties."
+msgid "The weather station used to measure and log outside temperatures. Choose one nearby."
+msgstr "Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op te slaan. Kies een locatie zo dicht mogelijk bij huis."
 
 msgid "Timestamp of the next sync. Automatically updated by application."
 msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit automatisch bij."
@@ -1713,3 +1803,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "The port of the broker to send MQTT messages to."
+#~ msgstr "De poort om MQTT-berichten naar te versturen."
+
+#~ msgid "Tests MQTT setup."
+#~ msgstr "Test MQTT setup."

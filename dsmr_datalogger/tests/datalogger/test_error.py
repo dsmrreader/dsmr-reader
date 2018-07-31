@@ -89,8 +89,7 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
         DsmrReading.objects.all().delete()
         self.assertFalse(DsmrReading.objects.exists())
 
-        with self.assertRaises(SerialException):
-            self._intercept_command_stdout('dsmr_datalogger', run_once=True)
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
         self.assertFalse(DsmrReading.objects.exists())
 
