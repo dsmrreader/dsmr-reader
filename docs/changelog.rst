@@ -20,6 +20,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 v1.23.0 - 2018-08-01
 ^^^^^^^^^^^^^^^^^^^^
+
 .. warning::
 
     Support for **MQTT** has been completely reworked in this release and now **requires** a new ``dsmr_mqtt`` process in Supervisor.
