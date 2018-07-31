@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
 from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics
+from dsmr_backend.mixins import ReadOnlyAdminModel
 from dsmr_mqtt.models import queue
 
 
@@ -246,5 +247,5 @@ rejected_telegrams = dsmr/meter-stats/rejected_telegrams
 
 
 @admin.register(queue.Message)
-class MessageAdmin(admin.ModelAdmin):
+class MessageAdmin(ReadOnlyAdminModel):
     list_display = ('topic', 'payload')

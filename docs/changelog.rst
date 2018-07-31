@@ -18,7 +18,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.23.0 - 2018-xx-xx
+v1.23.0 - 2018-08-01
 ^^^^^^^^^^^^^^^^^^^^
 .. warning::
 
@@ -28,7 +28,6 @@ v1.23.0 - 2018-xx-xx
 
 **Tickets resolved in this release:**
 
-- [`#xxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxx>`_] xxxxxxx
 - [`#509 <https://github.com/dennissiemensma/dsmr-reader/issues/509>`_] MQTT refactoring
 - [`#417 <https://github.com/dennissiemensma/dsmr-reader/issues/417>`_] --- MQTT does connect/publish/disconnect for EACH message - every second
 - [`#505 <https://github.com/dennissiemensma/dsmr-reader/issues/505>`_] --- SSL/TLS support for MQTT

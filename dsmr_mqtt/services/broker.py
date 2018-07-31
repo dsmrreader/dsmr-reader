@@ -1,6 +1,7 @@
 import time
 import ssl
 
+from django.conf import settings
 import paho.mqtt.client as paho
 
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
@@ -54,13 +55,16 @@ def run(mqtt_client):
 
     broker_settings = MQTTBrokerSettings.get_solo()
 
-    for current in queue.Message.objects.all()[0:50]:  # Keep batches small.
+    for current in queue.Message.objects.all()[0:settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE]:  # Keep batches small.
         mqtt_client.publish(
             topic=current.topic,
             payload=current.payload,
             qos=broker_settings.qos
         )
         current.delete()
+
+    # Delete any overflow in messages.
+    queue.Message.objects.all().delete()
 
 
 def on_connect(client, userdata, flags, rc):

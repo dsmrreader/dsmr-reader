@@ -2,6 +2,7 @@ from unittest import mock
 import ssl
 
 from django.test import TestCase
+from django.conf import settings
 import paho.mqtt.client as paho
 
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
@@ -156,6 +157,27 @@ class TestBroker(TestCase):
 
         self.assertTrue(loop_mock.called)
         self.assertTrue(publish_mock.called)
+
+    @mock.patch('paho.mqtt.client.Client.loop')
+    @mock.patch('paho.mqtt.client.Client.publish')
+    def test_run_cleanup(self, publish_mock, *mocks):
+        """ Test whether any excess of messages is cleared. """
+        client = paho.Client('xxx')
+
+        for x in range(0, settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE * 2):
+            queue.Message.objects.create(topic='z', payload=x)
+
+        self.assertEqual(queue.Message.objects.count(), settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE * 2)
+
+        dsmr_mqtt.services.broker.run(mqtt_client=client)
+
+        self.assertEqual(publish_mock.call_count, settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE)
+
+        # We assert that the first X messages were sent, rest is deleted.
+        for x in range(0, settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE):
+            publish_mock.assert_any_call(topic='z', payload=str(x), qos=0)
+
+        self.assertFalse(queue.Message.objects.exists())
 
     @mock.patch('paho.mqtt.client.Client.reconnect')
     def test_on_disconnect(self, reconnect_mock):
