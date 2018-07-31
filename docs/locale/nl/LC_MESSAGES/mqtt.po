@@ -11,15 +11,16 @@ msgstr ""
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../mqtt.rst:2
 msgid "Integration: MQTT"
-msgstr ""
+msgstr "Integratie: MQTT"
 
 #: ../../mqtt.rst:4
 msgid "The application supports sending MQTT messages to your broker."
@@ -29,7 +30,7 @@ msgstr ""
 
 #: ../../mqtt.rst:7
 msgid "Contents"
-msgstr ""
+msgstr "Inhoudsopgave"
 
 #: ../../mqtt.rst:10
 msgid "Events"
@@ -45,11 +46,11 @@ msgstr "Onbewerkte telegrammen"
 
 #: ../../mqtt.rst:15
 msgid ""
-"Each time a telegram is read via the v1 API or datalogger. You can have "
-"the entire telegram string passed on to your MQTT broker."
+"Each time a telegram is read via the v1 API or datalogger. You can have the "
+"entire telegram string passed on to your MQTT broker."
 msgstr ""
-"Elke keer dat een telegram is is uitgelezen via de v1 API of datalogger. "
-"Je kunt het gehele telegram 1-op-1 doorsturen naar je MQTT-broker."
+"Elke keer dat een telegram is is uitgelezen via de v1 API of datalogger. Je "
+"kunt het gehele telegram 1-op-1 doorsturen naar je MQTT-broker."
 
 #: ../../mqtt.rst:19
 msgid "Reading creation"
@@ -57,13 +58,13 @@ msgstr "Meting aangemaakt"
 
 #: ../../mqtt.rst:20
 msgid ""
-"Each time a new reading is parsed, either created by the datalogger or "
-"v1/v2 API. You can have each parsed reading passed on to your broker "
-"either in JSON format or on a per-field per-topic basis."
+"Each time a new reading is parsed, either created by the datalogger or v1/v2 "
+"API. You can have each parsed reading passed on to your broker either in JSON "
+"format or on a per-field per-topic basis."
 msgstr ""
-"Elke keer dat er een nieuwe meting is opgeslagen, ofwel via de datalogger"
-" ofwel via de v1/v2 API. Je kunt elke nieuwe meting doorsturen naar je "
-"broker in ofwel JSON-formaat, ofwel los per veld per topic."
+"Elke keer dat er een nieuwe meting is opgeslagen, ofwel via de datalogger "
+"ofwel via de v1/v2 API. Je kunt elke nieuwe meting doorsturen naar je broker "
+"in ofwel JSON-formaat, ofwel los per veld per topic."
 
 #: ../../mqtt.rst:25
 msgid "Configuration"
@@ -71,11 +72,11 @@ msgstr "Configuratie"
 
 #: ../../mqtt.rst:26
 msgid ""
-"Support for MQTT is disabled by default in the application. You may "
-"enable it in your configuration or admin settings."
+"Support for MQTT is disabled by default in the application. You may enable it "
+"in your configuration or admin settings."
 msgstr ""
-"Ondersteuning voor MQTT is standard uitgeschakeld. Je kunt dit "
-"inschakelen in de configuratie/admin-instellingen."
+"Ondersteuning voor MQTT is standard uitgeschakeld. Je kunt dit inschakelen in "
+"de configuratie/admin-instellingen."
 
 #: ../../mqtt.rst:31
 msgid "Broker configuration"
@@ -86,9 +87,8 @@ msgid ""
 "The broker configuration allows you to set the hostname and port of your "
 "broker. Optionally, you can enter any credentials here as well."
 msgstr ""
-"De brokerconfiguratie stelt je in staat om de hostnaam en poort van je "
-"broker in te stellen. Optioneel kun je hier ook benodigde inloggegevens "
-"invoeren."
+"De brokerconfiguratie stelt je in staat om de hostnaam en poort van je broker "
+"in te stellen. Optioneel kun je hier ook benodigde inloggegevens invoeren."
 
 #: ../../mqtt.rst:41
 msgid "Raw telegram configuration"
@@ -96,12 +96,12 @@ msgstr "Onbewerkte telegram configuratie"
 
 #: ../../mqtt.rst:42
 msgid ""
-"This allows you to send each raw telegram received to your broker. Just "
-"enable it and enter the topic path it should be sent to."
+"This allows you to send each raw telegram received to your broker. Just enable "
+"it and enter the topic path it should be sent to."
 msgstr ""
-"Dit zorgt ervoor dat elk onbewerkt telegram 1-op-1 wordt doorgestuurd "
-"naar je broker. Je hoeft dit alleen in te schakelen en het topic in te "
-"voeren waar het naartoe gestuurd mag worden."
+"Dit zorgt ervoor dat elk onbewerkt telegram 1-op-1 wordt doorgestuurd naar je "
+"broker. Je hoeft dit alleen in te schakelen en het topic in te voeren waar het "
+"naartoe gestuurd mag worden."
 
 #: ../../mqtt.rst:51
 msgid "JSON telegram configuration"
@@ -109,23 +109,20 @@ msgstr "JSON telegram configuratie"
 
 #: ../../mqtt.rst:52
 msgid ""
-"This allows you to send each reading created to your broker, in JSON "
-"format. You can alter the field names used, by changing their name on the"
-" right hand side. You may even remove the lines of the fields you wish to"
-" omit at all."
+"This allows you to send each reading created to your broker, in JSON format. "
+"You can alter the field names used, by changing their name on the right hand "
+"side. You may even remove the lines of the fields you wish to omit at all."
 msgstr ""
 "Dit stelt je in staat om elke aangemaakte meting naar je broker door te "
-"sturen, in JSON-formaat. Je hebt invloed op de naamgeving van de velden, "
-"door deze aan de rechterzijde aan te passen. Je kunt ook regels weghalen "
-"waarvan je de velden uberhaupt niet wenst te zien."
+"sturen, in JSON-formaat. Je hebt invloed op de naamgeving van de velden, door "
+"deze aan de rechterzijde aan te passen. Je kunt ook regels weghalen waarvan je "
+"de velden uberhaupt niet wenst te zien."
 
 #: ../../mqtt.rst:60
 msgid ""
-"For example, this will format the JSON message to only contain these "
-"fields::"
+"For example, this will format the JSON message to only contain these fields::"
 msgstr ""
-"Voorbeeld: Dit zorgt ervoor dat het JSON-bericht alleen deze velden "
-"bevat::"
+"Voorbeeld: Dit zorgt ervoor dat het JSON-bericht alleen deze velden bevat::"
 
 #: ../../mqtt.rst:77
 msgid "Split topic telegram configuration"
@@ -134,24 +131,21 @@ msgstr "Gesplitste topic telegram configuratie"
 #: ../../mqtt.rst:78
 msgid ""
 "This allows you to send each reading created, but splitted in multiple "
-"messages. For each field you can designate a separate topic, by changing "
-"their path on the right hand side. You can remove the lines of the fields"
-" you wish to"
+"messages. For each field you can designate a separate topic, by changing their "
+"path on the right hand side. You can remove the lines of the fields you wish to"
 msgstr ""
-"Dit stelt je in staat om elke nieuwe meting door te sturen naar je "
-"broker, maar in gesplitst formaat over meerdere berichten. Voor elk veld "
-"kun je een topic toewijzen waar de waarde naartoe gestuurd kan worden. "
-"Verwijder de regels van de velden die je überhaupt niet gebruikt om ze "
-"uit te schakelen."
+"Dit stelt je in staat om elke nieuwe meting door te sturen naar je broker, "
+"maar in gesplitst formaat over meerdere berichten. Voor elk veld kun je een "
+"topic toewijzen waar de waarde naartoe gestuurd kan worden. Verwijder de "
+"regels van de velden die je überhaupt niet gebruikt om ze uit te schakelen."
 
 #: ../../mqtt.rst:86
 msgid ""
-"For example, this will make the application only broadcast these fields "
-"to their topics::"
+"For example, this will make the application only broadcast these fields to "
+"their topics::"
 msgstr ""
-"Voorbeeld: Dit zorgt ervoor dat de applicatie alleen deze velden "
-"doorstuurt naar hun topics::"
+"Voorbeeld: Dit zorgt ervoor dat de applicatie alleen deze velden doorstuurt "
+"naar hun topics::"
 
 #~ msgid "MQTT"
 #~ msgstr "MQTT"
-

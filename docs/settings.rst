@@ -240,6 +240,13 @@ Maximum interval in hours allowed since the latest reading, before ringing any a
 Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``.
 
 
+``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Number of queued MQTT messages the application will retain. Any excess will be purged.
+
+Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``.
+
+
 ``DSMRREADER_PLUGINS``
 ~~~~~~~~~~~~~~~~~~~~~~
 :doc:`More information about this feature can be found here<plugins>`.

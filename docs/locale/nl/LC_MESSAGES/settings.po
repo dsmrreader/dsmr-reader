@@ -516,22 +516,38 @@ msgid "Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
 msgstr "Standaardwaarde ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
 
 #: ../../settings.rst:244
+msgid "``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``"
+msgstr "``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``"
+
+#: ../../settings.rst:245
+msgid ""
+"Number of queued MQTT messages the application will retain. Any excess will be "
+"purged."
+msgstr ""
+"Het aantal MQTT-berichten dat de applicatie vasthoudt. Alle overtollige "
+"berichten worden verwijderd."
+
+#: ../../settings.rst:247
+msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
+msgstr "Standaardwaarde: ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
+
+#: ../../settings.rst:251
 msgid "``DSMRREADER_PLUGINS``"
 msgstr "``DSMRREADER_PLUGINS``"
 
-#: ../../settings.rst:245
+#: ../../settings.rst:252
 msgid ":doc:`More information about this feature can be found here<plugins>`."
 msgstr ":doc:`Meer informatie over deze feature kun je hier terugvinden<plugins>`."
 
-#: ../../settings.rst:247
+#: ../../settings.rst:254
 msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
 msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."
 
-#: ../../settings.rst:251
+#: ../../settings.rst:258
 msgid "``DSMRREADER_DISABLED_CAPABILITIES``"
 msgstr "``DSMRREADER_DISABLED_CAPABILITIES``"
 
-#: ../../settings.rst:252
+#: ../../settings.rst:259
 msgid ""
 "Whether to override (disable) capabilities. Only use if you want to disable a "
 "capability that your smart meter keeps reporting. For example you've switched "
@@ -544,11 +560,11 @@ msgstr ""
 "energiebron. Of wanneer je slimme meter data bevat voor teruggeleverde energie "
 "en je uberhaupt geen zonnepanelen hebt."
 
-#: ../../settings.rst:255
+#: ../../settings.rst:262
 msgid "Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 msgstr "Standaardwaarde ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 
-#: ../../settings.rst:257
+#: ../../settings.rst:264
 msgid ""
 "Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
 "'electricity_returned']``."
