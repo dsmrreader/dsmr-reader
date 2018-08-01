@@ -31,6 +31,7 @@ class InfiniteManagementCommandMixin(object):
 
     def handle(self, **options):
         """ Called by Django to run command. We relay to run() ourselves and keep it running. """
+        self._write_pid_file()
         self.data = self.initialize()
 
         if options.get('run_once'):
@@ -44,8 +45,6 @@ class InfiniteManagementCommandMixin(object):
 
     def run_loop(self, **options):
         """ Runs in an infinite loop, until we're signaled to stop. """
-        self._write_pid_file()
-
         # Supervisor defaults to TERM and our deploy script uses HUP.
         signal.signal(signal.SIGHUP, self._signal_handler)
         signal.signal(signal.SIGTERM, self._signal_handler)
