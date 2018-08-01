@@ -54,7 +54,7 @@ fi
 
 # Management commands have some builtin mechanism as well for this.
 printf "%-50s" " * Reloading process: dsmr_backend"
-if [ -f /var/tmp/dsmrreader--.pid ];
+if [ -f /var/tmp/dsmrreader--dsmr_backend.pid ];
 then
     cat /var/tmp/dsmrreader--dsmr_backend.pid | xargs kill -HUP
     echo "   [OK]"
