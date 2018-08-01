@@ -82,7 +82,7 @@ def export():
     if status_settings.processing_delay:
         data.update({'delay': status_settings.processing_delay})
 
-    print(' - PVOutput | Uploading data @ {}'.format(data))
+    print(' - PVOutput | Uploading data: {}'.format(data))
     pvoutput_upload.send_robust(None, data=data)
 
     response = requests.post(
