@@ -30,7 +30,7 @@ The ``django.log`` will list any internal errors regarding the Django framework 
 The other logfile ``dsmrreader.log`` contains application logging, if enabled.
 
 You can log all telegrams received, in base64 format, by adding ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings.py`` config. 
-Make sure that you execute ``./reload.sh`` after changing the settings. It should now log the telegrams into ``dsmrreader.log``.
+Make sure that you execute ``./post-deploy.sh`` after changing the settings. It should now log the telegrams into ``dsmrreader.log``.
 
 
 

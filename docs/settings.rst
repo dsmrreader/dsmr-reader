@@ -13,7 +13,7 @@ Database/Django settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 In case you want to alter the database settings, or any other Django settings, please modify (or add) them to the ``dsmrreader/settings.py`` file.
 
-Make sure to reload the application afterwards to persist the changes you've made, by executing ``./reload.sh`` or restarting the Supervisor processes.
+Make sure to reload the application afterwards to persist the changes you've made, by executing ``./post-deploy.sh`` or restarting the Supervisor processes.
 
 
 API configuration
@@ -195,7 +195,7 @@ Custom ``dsmrreader/settings.py`` settings
 Some project settings can be changed (or overridden) in the ``dsmrreader/settings.py`` file. 
 Removing any of these settings from your file will force using the default value.
 
-Make sure to reload the application afterwards to persist the changes you've made, by executing ``./reload.sh`` or restarting the Supervisor processes.
+Make sure to reload the application afterwards to persist the changes you've made, by executing ``./post-deploy.sh`` or restarting the Supervisor processes.
 
 
 ``DSMRREADER_BACKEND_SLEEP``
