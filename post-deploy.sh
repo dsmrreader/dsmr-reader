@@ -41,47 +41,47 @@ echo " --- Reloading app code..."
 
 # Sending a HANGUP signal to Gunicorn's master process will gracefully reload its children.
 echo ""
-printf "%-40s" " * Reloading Gunicorn (webinterface)..."
+printf "%-50s" " * Reloading process: dsmr_webinterface (Gunicorn)"
 
 if [ -f /var/tmp/gunicorn--dsmr_webinterface.pid ];
 then
     cat /var/tmp/gunicorn--dsmr_webinterface.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [FAIL] PID file does not exist! (yet?)"
+    echo "   [FAILED] PID file does not exist! (yet?)"
 fi
 
 
 # Management commands have some builtin mechanism as well for this.
-printf "%-40s" " * Reloading backend process..."
-if [ -f /var/tmp/dsmrreader--dsmr_backend.pid ];
+printf "%-50s" " * Reloading process: dsmr_backend"
+if [ -f /var/tmp/dsmrreader--.pid ];
 then
     cat /var/tmp/dsmrreader--dsmr_backend.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [FAIL] PID file does not exist! (yet?)"
+    echo "   [FAILED] PID file does not exist! (yet?)"
 fi
 
 
-printf "%-40s" " * Reloading datalogger process..."
+printf "%-50s" " * Reloading process: dsmr_datalogger"
 
 if [ -f /var/tmp/dsmrreader--dsmr_datalogger.pid ];
 then
     cat /var/tmp/dsmrreader--dsmr_datalogger.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [FAIL] PID file does not exist! (yet?)"
+    echo "   [FAILED] PID file does not exist! (yet?)"
 fi
 
 
-printf "%-40s" " * Reloading MQTT process..."
+printf "%-50s" " * Reloading process: dsmr_mqtt"
 
 if [ -f /var/tmp/dsmrreader--dsmr_mqtt.pid ];
 then
     cat /var/tmp/dsmrreader--dsmr_mqtt.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [FAIL] PID file does not exist! (yet?)"
+    echo "   [FAILED] PID file does not exist! (yet?)"
 fi
 
 
