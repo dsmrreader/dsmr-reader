@@ -163,18 +163,19 @@ class TestBroker(TestCase):
     def test_run_cleanup(self, publish_mock, *mocks):
         """ Test whether any excess of messages is cleared. """
         client = paho.Client('xxx')
+        MAX = settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
 
-        for x in range(0, settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE * 2):
+        for x in range(1, MAX * 2 + 1):
             queue.Message.objects.create(topic='z', payload=x)
 
-        self.assertEqual(queue.Message.objects.count(), settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE * 2)
+        self.assertEqual(queue.Message.objects.count(), MAX * 2)
 
         dsmr_mqtt.services.broker.run(mqtt_client=client)
 
-        self.assertEqual(publish_mock.call_count, settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE)
+        self.assertEqual(publish_mock.call_count, MAX)
 
-        # We assert that the first X messages were sent, rest is deleted.
-        for x in range(0, settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE):
+        # We assert that the LAST X messages were sent, rest is deleted.
+        for x in range(MAX + 1, MAX * 2 + 1):
             publish_mock.assert_any_call(topic='z', payload=str(x), qos=0)
 
         self.assertFalse(queue.Message.objects.exists())

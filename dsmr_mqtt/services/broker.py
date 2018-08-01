@@ -55,7 +55,10 @@ def run(mqtt_client):
 
     broker_settings = MQTTBrokerSettings.get_solo()
 
-    for current in queue.Message.objects.all()[0:settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE]:  # Keep batches small.
+    # Keep batches small, only send the latest X messages. The rest will be purged (in case of delay).
+    message_queue = queue.Message.objects.all().order_by('-pk')[0:settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE]
+
+    for current in message_queue:
         mqtt_client.publish(
             topic=current.topic,
             payload=current.payload,
