@@ -9,7 +9,7 @@
         {% if selected_level == 'days' %}
         <small class="pull-right">
             <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}">
-                <span class="badge bg-green"><i class="fa fa-plus"></i> &nbsp; {% trans "Add note for this date" %}</span>
+                <span class="badge bg-green"><i class="fas fa-plus"></i> &nbsp; {% trans "Add note for this date" %}</span>
             </a>
         </small>
         {% endif %}
@@ -77,7 +77,7 @@
         
 {% if notes %}
 	    {% for current_note in notes %}
-	    <div class="alert alert-warning" role="alert"><i class="fa fa-comments-o"></i> {{ current_note.description }}</div>
+	    <div class="alert alert-warning" role="alert"><i class="fas fa-comments"></i> {{ current_note.description }}</div>
 	    {% endfor %}
 {% endif %}
     </div>

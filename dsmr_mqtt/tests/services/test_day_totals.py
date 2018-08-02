@@ -1,4 +1,5 @@
 from unittest import mock
+from decimal import Decimal
 import json
 
 from django.test import TestCase
@@ -8,7 +9,7 @@ from dsmr_mqtt.models.settings import day_totals
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
-import dsmr_mqtt.services
+import dsmr_mqtt.services.callbacks
 
 
 class TestServices(TestCase):
@@ -81,26 +82,26 @@ energy_supplier_price_gas = dsmr/qqq
 '''
         self.split_topic_settings.save()
 
-    @mock.patch('paho.mqtt.publish.multiple')
-    def test_disabled(self, mqtt_mock):
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
+    def test_disabled(self, create_message_mock):
         self.assertFalse(self.json_settings.enabled)
         self.assertFalse(self.split_topic_settings.enabled)
-        self.assertFalse(mqtt_mock.called)
+        self.assertFalse(create_message_mock.called)
 
-        dsmr_mqtt.services.publish_day_totals()
-        self.assertFalse(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_day_consumption()
+        self.assertFalse(create_message_mock.called)
 
-    @mock.patch('paho.mqtt.publish.multiple')
-    def test_no_data(self, mqtt_mock):
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
+    def test_no_data(self, create_message_mock):
         self.json_settings.enabled = True
         self.json_settings.save()
 
-        self.assertFalse(mqtt_mock.called)
-        dsmr_mqtt.services.publish_day_totals()
-        self.assertFalse(mqtt_mock.called)
+        self.assertFalse(create_message_mock.called)
+        dsmr_mqtt.services.callbacks.publish_day_consumption()
+        self.assertFalse(create_message_mock.called)
 
-    @mock.patch('paho.mqtt.publish.multiple')
-    def test_json(self, mqtt_mock):
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
+    def test_json(self, create_message_mock):
         # Required for consumption to return any data.
         ElectricityConsumption.objects.bulk_create([
             ElectricityConsumption(
@@ -126,11 +127,11 @@ energy_supplier_price_gas = dsmr/qqq
         # Should be okay now.
         self.json_settings.enabled = True
         self.json_settings.save()
-        dsmr_mqtt.services.publish_day_totals()
-        self.assertTrue(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_day_consumption()
+        self.assertTrue(create_message_mock.called)
 
-        _, _, result = mqtt_mock.mock_calls[0]
-        result = json.loads(result['msgs'][0]['payload'])
+        _, _, result = create_message_mock.mock_calls[0]
+        result = json.loads(result['payload'])
 
         # Without gas or costs.
         self.assertEqual(result['aaa'], '12.000')
@@ -156,11 +157,11 @@ energy_supplier_price_gas = dsmr/qqq
             currently_delivered=0,
         )
 
-        mqtt_mock.reset_mock()
-        dsmr_mqtt.services.publish_day_totals()
+        create_message_mock.reset_mock()
+        dsmr_mqtt.services.callbacks.publish_day_consumption()
 
-        _, _, result = mqtt_mock.mock_calls[0]
-        result = json.loads(result['msgs'][0]['payload'])
+        _, _, result = create_message_mock.mock_calls[0]
+        result = json.loads(result['payload'])
 
         self.assertEqual(result['jjj'], '4.500')
         self.assertEqual(result['kkk'], '0.00')
@@ -176,11 +177,11 @@ energy_supplier_price_gas = dsmr/qqq
             electricity_returned_2_price=2,
             gas_price=8,
         )
-        mqtt_mock.reset_mock()
-        dsmr_mqtt.services.publish_day_totals()
+        create_message_mock.reset_mock()
+        dsmr_mqtt.services.callbacks.publish_day_consumption()
 
-        _, _, result = mqtt_mock.mock_calls[0]
-        result = json.loads(result['msgs'][0]['payload'])
+        _, _, result = create_message_mock.mock_calls[0]
+        result = json.loads(result['payload'])
 
         self.assertEqual(result['ggg'], '33.00')
         self.assertEqual(result['hhh'], '60.00')
@@ -193,8 +194,8 @@ energy_supplier_price_gas = dsmr/qqq
         self.assertEqual(result['ppp'], '2.00000')
         self.assertEqual(result['qqq'], '8.00000')
 
-    @mock.patch('paho.mqtt.publish.multiple')
-    def test_split_topic(self, mqtt_mock):
+    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
+    def test_split_topic(self, create_message_mock):
         # Required for consumption to return any data.
         ElectricityConsumption.objects.bulk_create([
             ElectricityConsumption(
@@ -240,34 +241,29 @@ energy_supplier_price_gas = dsmr/qqq
         # Should be okay now.
         self.split_topic_settings.enabled = True
         self.split_topic_settings.save()
-        dsmr_mqtt.services.publish_day_totals()
-        self.assertTrue(mqtt_mock.called)
+        dsmr_mqtt.services.callbacks.publish_day_consumption()
+        self.assertTrue(create_message_mock.called)
 
-        _, _, kwargs = mqtt_mock.mock_calls[0]
-        mqtt_messages = kwargs['msgs']
+        called_kwargs = [x[1] for x in create_message_mock.call_args_list]
 
         # Without gas or costs.
-        self.assertIn({'payload': '12.000', 'topic': 'dsmr/aaa'}, mqtt_messages)
-        self.assertIn({'payload': '14.000', 'topic': 'dsmr/bbb'}, mqtt_messages)
-        self.assertIn({'payload': '3.000', 'topic': 'dsmr/ccc'}, mqtt_messages)
-        self.assertIn({'payload': '5.000', 'topic': 'dsmr/ddd'}, mqtt_messages)
-        self.assertIn({'payload': '26.000', 'topic': 'dsmr/eee'}, mqtt_messages)
-        self.assertIn({'payload': '8.000', 'topic': 'dsmr/fff'}, mqtt_messages)
+        self.assertIn({'payload': Decimal('12.000'), 'topic': 'dsmr/aaa'}, called_kwargs)
+        self.assertIn({'payload': Decimal('14.000'), 'topic': 'dsmr/bbb'}, called_kwargs)
+        self.assertIn({'payload': Decimal('3.000'), 'topic': 'dsmr/ccc'}, called_kwargs)
+        self.assertIn({'payload': Decimal('5.000'), 'topic': 'dsmr/ddd'}, called_kwargs)
+        self.assertIn({'payload': Decimal('26.000'), 'topic': 'dsmr/eee'}, called_kwargs)
+        self.assertIn({'payload': Decimal('8.000'), 'topic': 'dsmr/fff'}, called_kwargs)
 
-        self.assertIn({'payload': '4.500', 'topic': 'dsmr/jjj'}, mqtt_messages)
-        self.assertIn({'payload': '36.00', 'topic': 'dsmr/kkk'}, mqtt_messages)
+        self.assertIn({'payload': Decimal('4.500'), 'topic': 'dsmr/jjj'}, called_kwargs)
+        self.assertIn({'payload': Decimal('36.00'), 'topic': 'dsmr/kkk'}, called_kwargs)
 
-        self.assertIn({'payload': '33.00', 'topic': 'dsmr/ggg'}, mqtt_messages)
-        self.assertIn({'payload': '60.00', 'topic': 'dsmr/hhh'}, mqtt_messages)
-        self.assertIn({'payload': '93.00', 'topic': 'dsmr/iii'}, mqtt_messages)
-        self.assertIn({'payload': '129.00', 'topic': 'dsmr/lll'}, mqtt_messages)
+        self.assertIn({'payload': Decimal('33.00'), 'topic': 'dsmr/ggg'}, called_kwargs)
+        self.assertIn({'payload': Decimal('60.00'), 'topic': 'dsmr/hhh'}, called_kwargs)
+        self.assertIn({'payload': Decimal('93.00'), 'topic': 'dsmr/iii'}, called_kwargs)
+        self.assertIn({'payload': Decimal('129.00'), 'topic': 'dsmr/lll'}, called_kwargs)
 
-        self.assertIn({'payload': '3.00000', 'topic': 'dsmr/mmm'}, mqtt_messages)
-        self.assertIn({'payload': '5.00000', 'topic': 'dsmr/nnn'}, mqtt_messages)
-        self.assertIn({'payload': '1.00000', 'topic': 'dsmr/ooo'}, mqtt_messages)
-        self.assertIn({'payload': '2.00000', 'topic': 'dsmr/ppp'}, mqtt_messages)
-        self.assertIn({'payload': '8.00000', 'topic': 'dsmr/qqq'}, mqtt_messages)
-
-        # On error.
-        mqtt_mock.side_effect = ValueError('Invalid host.')
-        dsmr_mqtt.services.publish_day_totals()
+        self.assertIn({'payload': Decimal('3.00000'), 'topic': 'dsmr/mmm'}, called_kwargs)
+        self.assertIn({'payload': Decimal('5.00000'), 'topic': 'dsmr/nnn'}, called_kwargs)
+        self.assertIn({'payload': Decimal('1.00000'), 'topic': 'dsmr/ooo'}, called_kwargs)
+        self.assertIn({'payload': Decimal('2.00000'), 'topic': 'dsmr/ppp'}, called_kwargs)
+        self.assertIn({'payload': Decimal('8.00000'), 'topic': 'dsmr/qqq'}, called_kwargs)

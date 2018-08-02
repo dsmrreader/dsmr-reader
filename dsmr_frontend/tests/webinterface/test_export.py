@@ -41,7 +41,7 @@ class TestViews(TestCase):
         # Login and retest
         self.client.login(username='testuser', password='passwd')
         response = self.client.get(view_url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('start_date', response.context)
         self.assertIn('end_date', response.context)
 
@@ -74,13 +74,13 @@ class TestViews(TestCase):
 
         # Day export.
         response = self.client.post(view_url, data=post_data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.streaming_content)
         io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
 
         # Hour export.
         post_data['data_type'] = ExportAsCsvForm.DATA_TYPE_HOUR
         response = self.client.post(view_url, data=post_data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.streaming_content)
         io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
 
 

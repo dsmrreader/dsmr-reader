@@ -15,7 +15,8 @@
 
         {% block stylesheets %}
         <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'dsmr_frontend/css/font-awesome.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/fontawesome-5.1.1/css/solid.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/fontawesome-5.1.1/css/fontawesome.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}" rel='stylesheet' type='text/css'>
         <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
@@ -28,14 +29,14 @@
 		<link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-32x32.png' %}" sizes="32x32">
 		<link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-16x16.png' %}" sizes="16x16">
 		<link rel="manifest" href="{% static 'dsmr_frontend/img/favicons/manifest.json' %}">
-		<link rel="mask-icon" href="{% static 'dsmr_frontend/img/favicons/safari-pinned-tab.svg' %}" color="#5bbad5">
-		<meta name="theme-color" content="#ffffff">
+		<link rel="mask-icon" href="{% static 'dsmr_frontend/img/favicons/safari-pinned-tab.svg' %}">
+		<meta name="theme-color" content="#2B3A45">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+          <script src="{% static 'dsmr_frontend/js/Director/html5shiv.js' %}"></script>
+          <script src="{% static 'dsmr_frontend/js/Director/respond.min.js' %}"></script>
         <![endif]-->
     </head>
     <body class="skin-black">
@@ -76,32 +77,32 @@
                     <ul class="sidebar-menu">
                         <li>
                             <a href="{% url 'frontend:dashboard' %}">
-                                <i class="fa fa-dashboard"></i> <span>{% trans "Dashboard" %}</span>
+                                <i class="fas fa-tachometer-alt"></i> &nbsp; <span>{% trans "Dashboard" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:archive' %}">
-                                <i class="fa fa-history"></i> <span>{% trans "Archive" %}</span>
+                                <i class="fas fa-clock"></i> &nbsp; <span>{% trans "Archive" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:trends' %}">
-                                <i class="fa fa-bar-chart"></i> <span>{% trans "Trends" %}</span>
+                                <i class="fas fa-chart-bar"></i> &nbsp; <span>{% trans "Trends" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:statistics' %}">
-                                <i class="fa fa-list"></i> <span>{% trans "Statistics" %}</span>
+                                <i class="fas fa-list"></i> &nbsp; <span>{% trans "Statistics" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:energy-contracts' %}">
-                                <i class="fa fa-newspaper-o"></i> <span>{% trans "Energy contracts" %}</span>
+                                <i class="fas fa-newspaper"></i> &nbsp; <span>{% trans "Energy contracts" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:compare' %}">
-                                <i class="fa fa-balance-scale"></i> <span>{% trans "Compare" %}</span>
+                                <i class="fas fa-balance-scale"></i> &nbsp; <span>{% trans "Compare" %}</span>
                             </a>
                         </li>
                         <li>
@@ -109,7 +110,7 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:status' %}">
-                                <i class="fa fa-heartbeat"></i> <span>{% trans "Status" %}</span>
+                                <i class="fas fa-heartbeat"></i> &nbsp; <span>{% trans "Status" %}</span>
                             </a>
                         </li>
                         <li>
@@ -117,30 +118,40 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:export' %}">
-                                <i class="fa fa-download"></i> <span>{% trans "Export data" %} &nbsp; <i class="fa fa-lock" title="{% trans 'Authentication required' %}"></i></span>
+                                <i class="fa-xs fas fa-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
                             </a>
                         </li>
                         <li>
 				            <a href="{% url 'admin:index' %}" target="_blank">
-				                <i class="fa fa-sliders"></i> <span>{% trans "Configuration" %} &nbsp; <i class="fa fa-lock" title="{% trans 'Authentication required' %}"></i></span>
+				                <i class="fa-xs fas fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
 			            </li>
                         <li>
                             &nbsp;
                         </li>
                         <li>
+                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">
+                                <i class="fa-xs fas fa-history"></i> &nbsp; <small>{% trans "Changelog" %}</small>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
-                                <i class="fa fa-question"></i> <span>{% trans "Help / FAQ" %}</span>
+                                <i class="fa-xs fas fa-question"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                                <i class="fa fa-bullhorn"></i> <span>{% trans "Feedback" %}</span>
+                                <i class="fa-xs fas fa-bullhorn"></i> &nbsp; <small>{% trans "Feedback" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
+                                <i class="fa-xs fas fa-hand-holding-usd"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
                             </a>
                         </li>
                     </ul>
                 </section>
-                
+
                 <div class="row copyright">
                     <small>
 	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015 - {% now "Y" %}

@@ -11,9 +11,17 @@ class ReadTheDocsRedirectView(RedirectView):
         return super(ReadTheDocsRedirectView, self).get(request, *args, **kwargs)
 
 
+class ChangelogRedirect(ReadTheDocsRedirectView):
+    subpage = 'changelog.html'
+
+
 class DocsRedirect(ReadTheDocsRedirectView):
     subpage = 'faq.html'
 
 
 class FeedbackRedirect(ReadTheDocsRedirectView):
     subpage = 'contributing.html'
+
+
+class DonationsRedirect(ReadTheDocsRedirectView):
+    subpage = 'donations.html'

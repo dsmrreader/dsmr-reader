@@ -5,14 +5,14 @@
 {% load hex_to_rgb %}
 
 {% block title %}{% trans "Compare" %}{% endblock %}
-{% block header %}{% trans "Compare" %} &nbsp; <i class="fa fa-balance-scale"></i>{% endblock %}
+{% block header %}{% trans "Compare" %} &nbsp; <i class="fas fa-balance-scale"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
 {% endif %}
 
@@ -27,15 +27,15 @@
                     <div class="row">
 	                    <div class="col-md-4 date-selector">
 	                        {% trans "Days" %} <br />
-	                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days" style="cursor: pointer;"><i class="fa fa-calendar-check-o"></i></span>
+	                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days" style="cursor: pointer;"><i class="fas fa-calendar-check"></i></span>
 	                    </div>
 	                    <div class="col-md-4 date-selector">
 	                        {% trans "Months" %} <br />
-	                        <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months" style="cursor: pointer;"><i class="fa fa-calendar-check-o"></i></span>
+	                        <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months" style="cursor: pointer;"><i class="fas fa-calendar-check"></i></span>
 	                    </div>
 	                    <div class="col-md-4 date-selector">
 	                        {% trans "Years" %} <br />
-	                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years" style="cursor: pointer;"><i class="fa fa-calendar-check-o"></i></span>
+	                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years" style="cursor: pointer;"><i class="fas fa-calendar-check"></i></span>
 	                    </div>
                     </div>
                 </div>
@@ -67,12 +67,12 @@
     
     
     <div class="row">
-        <div id="summary-loader1" class="xhr-hidden text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+        <div id="summary-loader1" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
         <div class="col-md-12" id="summary-holder1"></div>
     </div>   
     
     <div class="row">
-        <div id="summary-loader2" class="xhr-hidden text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+        <div id="summary-loader2" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
         <div class="col-md-12" id="summary-holder2"></div>
     </div>   
 

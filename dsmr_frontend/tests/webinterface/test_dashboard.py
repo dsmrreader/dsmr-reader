@@ -49,7 +49,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:dashboard'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('frontend_settings', response.context)
         self.assertEqual(
             response.context['frontend_settings'].dashboard_graph_width,
@@ -328,7 +328,7 @@ class TestViews(TestCase):
         self.assertFalse(notification.read)
 
         response = self.client.post(view_url, data={'notification_id': notification.pk})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
 
         # Notification should be altered now.
         notification.refresh_from_db()

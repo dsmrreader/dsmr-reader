@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='MQTTBrokerSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hostname', models.CharField(default=None, help_text='The hostname of the broker to send MQTT messages to.', max_length=256, null=True, verbose_name='Hostname')),
+                ('hostname', models.CharField(blank=True, default=None, help_text='The hostname of the broker to send MQTT messages to.', max_length=256, null=True, verbose_name='Hostname')),
                 ('port', models.IntegerField(default=1883, help_text='The port of the broker to send MQTT messages to.', null=True, verbose_name='Port')),
                 ('username', models.CharField(blank=True, default=None, help_text='Optional: The username required for authentication (if any).', max_length=256, null=True, verbose_name='Username')),
                 ('password', models.CharField(blank=True, default=None, help_text='Optional: The password required for authentication (if any).', max_length=256, null=True, verbose_name='Password')),

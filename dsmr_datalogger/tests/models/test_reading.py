@@ -1,3 +1,5 @@
+from unittest import mock
+
 from django.test import TestCase
 from django.utils import timezone
 
@@ -6,7 +8,9 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 
 
 class TestDsmrReading(TestCase):
-    def setUp(self):
+    @mock.patch('django.utils.timezone.now')
+    def setUp(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1), timezone=timezone.utc)
         self.instance = DsmrReading.objects.create(
             timestamp=timezone.now(),
             electricity_delivered_1=1,
@@ -29,6 +33,28 @@ class TestDsmrReading(TestCase):
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
         DsmrReading.objects.all().update(processed=True)
         self.assertTrue(DsmrReading.objects.processed().exists())
+
+    @mock.patch('django.utils.timezone.now')
+    def test_convert_to_local_timezone(self, now_mock):
+        """ Test altering the timezone formatting for the timestamps. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1), timezone=timezone.utc)
+
+        self.assertEqual(str(self.instance.timestamp), '2018-01-01 00:00:00+00:00')
+        self.assertIsNone(self.instance.extra_device_timestamp)
+
+        # Only timestamp.
+        self.instance.convert_to_local_timezone()
+        self.assertEqual(str(self.instance.timestamp), '2018-01-01 01:00:00+01:00')
+        self.assertIsNone(self.instance.extra_device_timestamp)
+
+        # Now extra device.
+        self.instance.extra_device_timestamp = timezone.now() + timezone.timedelta(hours=12)
+        self.assertEqual(str(self.instance.extra_device_timestamp), '2018-01-01 12:00:00+00:00')
+
+        # Both.
+        self.instance.convert_to_local_timezone()
+        self.assertEqual(str(self.instance.timestamp), '2018-01-01 01:00:00+01:00')
+        self.assertEqual(str(self.instance.extra_device_timestamp), '2018-01-01 13:00:00+01:00')
 
 
 class TestMeterStatistics(TestCase):

@@ -34,7 +34,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:trends'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
         self.assertIn('frontend_settings', response.context)
 
@@ -44,7 +44,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:trends-xhr-avg-consumption'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         json_response = json.loads(response.content.decode("utf-8"))
 
         if not self.support_data:
@@ -66,7 +66,7 @@ class TestViews(TestCase):
         )
         json_response = json.loads(response.content.decode("utf-8"))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertEqual(len(json_response['electricity_returned']), 0)
 
     @mock.patch('django.utils.timezone.now')
@@ -75,7 +75,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         json_response = json.loads(response.content.decode("utf-8"))
 
         if not self.support_data:
@@ -87,6 +87,13 @@ class TestViews(TestCase):
         self.assertIn({'value': 16, 'name': 'Electricity 2 (high tariff)'}, json_response['week'])
         self.assertIn({'value': 84, 'name': 'Electricity 1 (low tariff)'}, json_response['month'])
         self.assertIn({'value': 16, 'name': 'Electricity 2 (high tariff)'}, json_response['month'])
+
+        # Test with no stats available (yet).
+        DayStatistics.objects.all().delete()
+        response = self.client.get(
+            reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200, response.content)
 
 
 class TestViewsWithoutData(TestViews):

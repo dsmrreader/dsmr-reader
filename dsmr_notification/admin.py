@@ -10,7 +10,7 @@ class NotificationSettingsAdmin(SingletonModelAdmin):
     readonly_fields = ('next_notification', )
     fieldsets = (
         (None, {
-            'fields': ['notification_service', 'next_notification'],
+            'fields': ['notification_service'],
             'description': _(
                 'Detailed instructions for configuring notifications can be found here: '
                 '<a href="https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-'
@@ -25,6 +25,11 @@ class NotificationSettingsAdmin(SingletonModelAdmin):
             'fields': ['prowl_api_key'],
             'description': _('Only applies when using Prowl')
         }),
+        (
+            _('Automatic fields'), {
+                'fields': ['next_notification']
+            }
+        ),
     )
 
 
@@ -33,7 +38,7 @@ class StatusNotificationSettingAdmin(SingletonModelAdmin):
     readonly_fields = ('next_check', )
     fieldsets = (
         (
-            None, {
+            _('Automatic fields'), {
                 'fields': ['next_check'],
                 'description': _(
                     'System checks for sending status notifications when the datalogger is lagging behind.'

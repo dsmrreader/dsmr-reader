@@ -13,7 +13,7 @@ Database/Django settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 In case you want to alter the database settings, or any other Django settings, please modify (or add) them to the ``dsmrreader/settings.py`` file.
 
-Make sure to reload the application afterwards to persist the changes you've made, by executing ``./reload.sh`` or restarting the Supervisor processes.
+Make sure to reload the application afterwards to persist the changes you've made, by executing ``./post-deploy.sh`` or restarting the Supervisor processes.
 
 
 API configuration
@@ -195,7 +195,7 @@ Custom ``dsmrreader/settings.py`` settings
 Some project settings can be changed (or overridden) in the ``dsmrreader/settings.py`` file. 
 Removing any of these settings from your file will force using the default value.
 
-Make sure to reload the application afterwards to persist the changes you've made, by executing ``./reload.sh`` or restarting the Supervisor processes.
+Make sure to reload the application afterwards to persist the changes you've made, by executing ``./post-deploy.sh`` or restarting the Supervisor processes.
 
 
 ``DSMRREADER_BACKEND_SLEEP``
@@ -210,6 +210,13 @@ Defaults to ``DSMRREADER_BACKEND_SLEEP = 1``.
 The number of seconds the application will sleep after reading data from the datalogger (API excluded). Prevents hammering on your hardware. 
 
 Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``.
+
+
+``DSMRREADER_MQTT_SLEEP``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The number of seconds the application will sleep after reading and publishing the outgoing MQTT message queue. Prevents hammering on your hardware. 
+
+Defaults to ``DSMRREADER_MQTT_SLEEP = 1``.
 
 
 ``DSMRREADER_LOG_TELEGRAMS``
@@ -231,6 +238,13 @@ Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``.
 Maximum interval in hours allowed since the latest reading, before ringing any alarms.
 
 Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``.
+
+
+``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Number of queued MQTT messages the application will retain. Any excess will be purged.
+
+Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``.
 
 
 ``DSMRREADER_PLUGINS``

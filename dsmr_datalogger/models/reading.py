@@ -117,6 +117,13 @@ class DsmrReading(models.Model):
         verbose_name = _('DSMR reading (read only)')
         verbose_name_plural = _('DSMR readings (read only)')
 
+    def convert_to_local_timezone(self):
+        """ Converts the timestamp to the local time zone used. Only affects this instance, does not update record! """
+        self.timestamp = timezone.localtime(self.timestamp)
+
+        if self.extra_device_timestamp:
+            self.extra_device_timestamp = timezone.localtime(self.extra_device_timestamp)
+
     def __str__(self):
         return '{} @ {} ({} kW)'.format(
             self.id, timezone.localtime(self.timestamp), self.electricity_currently_delivered

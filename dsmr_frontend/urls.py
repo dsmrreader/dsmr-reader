@@ -9,7 +9,7 @@ from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXh
 from dsmr_frontend.views.compare import Compare
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status, XhrUpdateChecker
-from dsmr_frontend.views.generic import DocsRedirect, FeedbackRedirect
+from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect
 from dsmr_frontend.views.energy_contracts import EnergyContracts
 
 
@@ -44,8 +44,10 @@ urlpatterns = [
     url(r'^status/xhr/check-for-updates$', XhrUpdateChecker.as_view(), name='status-xhr-check-for-updates'),
 
     # Generic redirects to external (help) pages.
+    url(r'^changelog-redirect$', ChangelogRedirect.as_view(), name='changelog-redirect'),
     url(r'^docs-redirect$', DocsRedirect.as_view(), name='docs-redirect'),
     url(r'^feedback-redirect$', FeedbackRedirect.as_view(), name='feedback-redirect'),
+    url(r'^donations-redirect$', DonationsRedirect.as_view(), name='donations-redirect'),
 
     # Views requiring authentication.
     url(r'^export$', Export.as_view(), name='export'),

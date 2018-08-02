@@ -11,12 +11,17 @@ class MinderGasSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ['export', 'auth_token', 'next_export'],
+                'fields': ['export', 'auth_token'],
                 'description': _(
                     'Detailed instructions for configuring MinderGas.nl can be found here: <a href="https://dsmr-reader'
                     '.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export">'
                     'FAQ in documentation</a>'
                 )
+            }
+        ),
+        (
+            _('Automatic fields'), {
+                'fields': ['next_export']
             }
         ),
     )

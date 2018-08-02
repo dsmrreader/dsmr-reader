@@ -1,12 +1,17 @@
 import signal
 import time
-import sys
 import os
 
+from django.core.management.base import CommandError
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.contrib import admin
 from django.db import connection
+
+
+class StopInfiniteRun(StopIteration):
+    """ Triggers InfiniteManagementCommandMixin to stop the current loop. """
+    pass
 
 
 class InfiniteManagementCommandMixin(object):
@@ -24,9 +29,83 @@ class InfiniteManagementCommandMixin(object):
             help=_('Forces single run, overriding Infinite Command mixin')
         )
 
+    def handle(self, **options):
+        """ Called by Django to run command. We relay to run() ourselves and keep it running. """
+        self._write_pid_file()
+        self.data = self.initialize()
+
+        if options.get('run_once'):
+            # Only tests should use this. Or when developing a command.
+            self.run_once(**options)
+        else:
+            self.run_loop(**options)
+
+        self.shutdown()
+        self.stdout.write('Exited')
+
+    def run_loop(self, **options):
+        """ Runs in an infinite loop, until we're signaled to stop. """
+        # Supervisor defaults to TERM and our deploy script uses HUP.
+        signal.signal(signal.SIGHUP, self._signal_handler)
+        signal.signal(signal.SIGTERM, self._signal_handler)
+
+        # We simply keep executing the management command until we are told otherwise.
+        self._keep_alive = True
+        self.stdout.write('Starting infinite command loop...')  # Just to make sure it gets printed.
+
+        while self._keep_alive:
+            self.run_once(**options)
+
+            # Do not hammer.
+            if self.sleep_time is not None:
+                self.stdout.write('Sleeping {} sec(s)'.format(self.sleep_time))
+                self.stdout.write('')
+                time.sleep(self.sleep_time)
+
+            # Check database connection after each run. This will force Django to reconnect as well, when having issues.
+            if settings.DSMRREADER_RECONNECT_DATABASE:
+                connection.close()
+
+    def run_once(self, **options):
+        """ Runs the management command exactly once. """
+        try:
+            self.run(data=self.data, **options)
+        except CommandError:
+            # Pass tru.
+            raise
+        except StopInfiniteRun:
+            # Explicit exit.
+            self.stdout.write(' [i] Detected StopInfiniteRun exception')
+            self._stop()
+        except Exception as error:
+            # Unforeseen errors.
+            self.stdout.write(' [!] Exception raised in run(): {}'.format(error))
+
+    def initialize(self):
+        """ Called once. Override and handle any initialization required. """
+        pass
+
+    def shutdown(self):
+        """ Called once. Override and handle any cleanup required. """
+        pass
+
+    def run(self, *args, **options):
+        raise NotImplementedError('Subclasses of InfiniteManagementCommandMixin must provide a run() method')
+
     def __del__(self):
+        """ Tear down, always called on destruction. """
         if self._pid_file:
             self._remove_pid_file()
+
+    def _signal_handler(self, signum, frame):
+        # If we get called, then we must gracefully exit.
+        self.stdout.write('Detected signal #{}'.format(signum))
+        self._stop()
+
+    def _stop(self):
+        """ Sets the flag for ending the command on next flag check. """
+        self._keep_alive = False
+        self.stdout.write('Exiting on next run...')
 
     def _write_pid_file(self):
         self._pid_file = os.path.join(
@@ -41,48 +120,6 @@ class InfiniteManagementCommandMixin(object):
             os.unlink(self._pid_file)
         except IOError:
             pass
-
-    def handle(self, **options):
-        """ Called by Django to run command. We relay to run() ourselves and keep it running. """
-        if options.get('run_once'):
-            # Only tests should use this.
-            return self.run(**options)
-
-        self._write_pid_file()
-
-        # Supervisor defaults to TERM and our deploy script uses HUP.
-        signal.signal(signal.SIGHUP, self._signal_handler)
-        signal.signal(signal.SIGTERM, self._signal_handler)
-
-        # We simply keep executing the management command until we are told otherwise.
-        self._keep_alive = True
-        print('Starting infinite command loop...')  # Just to make sure it gets printed.
-
-        while self._keep_alive:
-            try:
-                self.run(**options)
-            except Exception as error:
-                self.stdout.write(' [!] Exception raised in run(): {}'.format(error))
-
-            if self.sleep_time is not None:
-                self.stdout.write('Command completed. Sleeping for {} second(s)...'.format(self.sleep_time))
-                self.stdout.write('')
-                time.sleep(self.sleep_time)  # Do not hammer.
-
-            # Check database connection after each run. This will force Django to reconnect as well, when having issues.
-            if settings.DSMRREADER_RECONNECT_DATABASE:
-                connection.close()
-
-        self.stdout.write('Exited due to signal detection')
-        sys.exit(0)
-
-    def run(self, *args, **options):
-        raise NotImplementedError('Subclasses of InfiniteManagementCommandMixin must provide a run() method')
-
-    def _signal_handler(self, signum, frame):
-        # If we get called, then we must gracefully exit.
-        self._keep_alive = False
-        self.stdout.write('Detected signal #{}, exiting on next run...'.format(signum))
 
 
 class ReadOnlyAdminModel(admin.ModelAdmin):

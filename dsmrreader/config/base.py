@@ -201,6 +201,7 @@ DSMRREADER_REST_FRAMEWORK_API_USER = 'api-user'
 # Sleep durations for infinity processes. Update these in your own config if you wish to alter them.
 DSMRREADER_BACKEND_SLEEP = 1
 DSMRREADER_DATALOGGER_SLEEP = 0.5
+DSMRREADER_MQTT_SLEEP = 1
 
 # Whether telegrams are logged, in base64 format. Only required for debugging.
 DSMRREADER_LOG_TELEGRAMS = False
@@ -213,6 +214,9 @@ DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60
 
 # The cooldown period until the next status notification will be sent.
 DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
+
+# Number of queued MQTT messages the application will retain. Any excess will be purged.
+DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100
 
 # Plugins.
 DSMRREADER_PLUGINS = []

@@ -13,8 +13,30 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 .. seealso:: 
 
-    - `About back-ups <http://dsmr-reader.readthedocs.io/en/latest/application.html#data-preservation-backups>`_.
-    - `About upgrading <http://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
+    - `About back-ups <https://dsmr-reader.readthedocs.io/en/latest/application.html#data-preservation-backups>`_.
+    - `About upgrading <https://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
+
+
+
+v1.23.0 - 2018-08-02
+^^^^^^^^^^^^^^^^^^^^
+
+.. warning::
+
+    Support for **MQTT** has been completely reworked in this release and now **requires** a new ``dsmr_mqtt`` process in Supervisor.
+    `Additional steps for upgrading can be found here <https://dsmr-reader.readthedocs.io/en/latest/application.html#how-do-i-retain-mqtt-support-when-upgrading-to-v1-23-0-or-higher>`_.
+
+
+**Tickets resolved in this release:**
+
+- [`#509 <https://github.com/dennissiemensma/dsmr-reader/issues/509>`_] MQTT refactoring
+- [`#417 <https://github.com/dennissiemensma/dsmr-reader/issues/417>`_] --- MQTT does connect/publish/disconnect for EACH message - every second
+- [`#505 <https://github.com/dennissiemensma/dsmr-reader/issues/505>`_] --- SSL/TLS support for MQTT
+- [`#481 <https://github.com/dennissiemensma/dsmr-reader/issues/481>`_] --- Memory Leak in dsmr_datalogger / MQTT
+- [`#463 <https://github.com/dennissiemensma/dsmr-reader/issues/463>`_] MQTT: Telegram als JSON, tijdzones
+- [`#508 <https://github.com/dennissiemensma/dsmr-reader/issues/508>`_] Trend-grafiek kan niet gegenereerd worden
+- [`#292 <https://github.com/dennissiemensma/dsmr-reader/issues/292>`_] Statuspagina: onderdelen 'backup' en 'mindergas upload' toevoegen
+- [`#499 <https://github.com/dennissiemensma/dsmr-reader/issues/499>`_] Upgrade Font Awesome to v5
 
 
 

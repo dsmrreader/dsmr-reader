@@ -71,9 +71,8 @@ class PVOutputAddStatusSettings(SingletonModel):
         validators=[MinValueValidator(0), MaxValueValidator(120)],
         verbose_name=_('PVOutput: Processing delay (minutes)'),
         help_text=_(
-            '[!]: This feature is ONLY available when you have a DONATOR account for PVOutput.org! Leave EMPTY to '
-            'disable the feature. This parameter allows the processing of the data to be delayed, by the specified '
-            'number of minutes. Allowed values: empty or 0 to 120 (minutes)'
+            'Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, '
+            'by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)'
         )
     )
     next_export = models.DateTimeField(
@@ -84,6 +83,13 @@ class PVOutputAddStatusSettings(SingletonModel):
         help_text=_(
             'Timestamp of the next export. Automatically updated by application.'
         )
+    )
+    latest_sync = models.DateTimeField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Latest sync'),
+        help_text=_('Timestamp of latest sync with PVOutput. Automatically updated by application.')
     )
 
     def __str__(self):

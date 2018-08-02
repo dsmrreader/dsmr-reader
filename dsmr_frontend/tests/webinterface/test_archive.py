@@ -37,7 +37,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:archive'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
 
         # XHR's.
@@ -60,7 +60,7 @@ class TestViews(TestCase):
                 response = self.client.get(
                     reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
                 )
-                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.status_code, 200, response.content)
 
                 response = self.client.get(
                     reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
