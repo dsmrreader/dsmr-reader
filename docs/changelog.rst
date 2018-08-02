@@ -24,7 +24,7 @@ v1.23.0 - 2018-08-02
 .. warning::
 
     Support for **MQTT** has been completely reworked in this release and now **requires** a new ``dsmr_mqtt`` process in Supervisor.
-    `Additional steps for upgrading can be found here <https://dsmr-reader.readthedocs.io/en/latest/application.html#how-do-i-retain-mqtt-support-when-upgrading-to-v1-23-0-or-higher>`_.
+    `Additional steps for upgrading can be found here <https://dsmr-reader.readthedocs.io/en/latest/faq.html#how-do-i-retain-mqtt-support-when-upgrading-to-v1-23-0-or-higher>`_.
 
 
 **Tickets resolved in this release:**
