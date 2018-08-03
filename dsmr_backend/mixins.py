@@ -128,6 +128,12 @@ class ReadOnlyAdminModel(admin.ModelAdmin):
         super(ReadOnlyAdminModel, self).__init__(*args, **kwargs)
         self.readonly_fields = [x.name for x in self.model._meta.get_fields()]
 
+    def has_view_permission(self, request, obj=None):
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
     def has_add_permission(self, request, obj=None):
         return False
 

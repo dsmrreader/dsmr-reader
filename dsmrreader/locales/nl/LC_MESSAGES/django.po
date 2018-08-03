@@ -610,6 +610,9 @@ msgstr "Wijzigingenoverzicht"
 msgid "Help / FAQ"
 msgstr "Help / FAQ"
 
+msgid "API v2 Docs"
+msgstr "API v2 Docs"
+
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -1803,6 +1806,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+msgid "Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html"
+msgstr "Volledige documentatie beschikbaar op: https://dsmr-reader.readthedocs.io/nl/latest/api.html"
 
 #~ msgid "The port of the broker to send MQTT messages to."
 #~ msgstr "De poort om MQTT-berichten naar te versturen."
