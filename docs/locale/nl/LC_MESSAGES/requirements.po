@@ -9,17 +9,22 @@ msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
+"Language: nl\n"
 "Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
-"Language: nl\n"
+"Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../requirements.rst:2
 msgid "Requirements"
 msgstr "Vereisten"
+
+#: ../../requirements.rst:7
+msgid "Contents"
+msgstr "Inhoudsopgave"
 
 #: ../../requirements.rst:10
 msgid "OS / hardware"
@@ -31,8 +36,8 @@ msgstr "**Raspbian OS of Debian-gebaseerd OS**"
 
 #: ../../requirements.rst:13
 msgid ""
-"Recommended and tested with, but any OS satisfying the requirements should "
-"do fine."
+"Recommended and tested with, but any OS satisfying the requirements should do "
+"fine."
 msgstr ""
 "Aanbevolen en mee getest, al zou elk OS die dezelfde vereisten ondersteunt "
 "prima moeten zijn."
@@ -81,26 +86,34 @@ msgid "Python"
 msgstr "Python"
 
 #: ../../requirements.rst:36
-msgid "**Python 3.4+**"
-msgstr "**Python 3.4+**"
+msgid "**Python 3.5+**"
+msgstr "**Python 3.5+**"
 
 #: ../../requirements.rst:40
 msgid ""
 "Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader "
 "v1.5`` (due to Django)."
 msgstr ""
-"Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader "
-"v1.5`` (vanwege Django)."
+"Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader v1.5`` "
+"(vanwege Django)."
 
-#: ../../requirements.rst:44
+#: ../../requirements.rst:41
+msgid ""
+"Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader "
+"v1.24`` (due to Django)."
+msgstr ""
+"Ondersteuning voor ``Python 3.4`` is **vervallen** sinds ``DSMR-reader "
+"v1.24`` (vanwege Django)."
+
+#: ../../requirements.rst:45
 msgid "Database"
 msgstr "Database"
 
-#: ../../requirements.rst:46
+#: ../../requirements.rst:47
 msgid "**PostgreSQL 9+**"
 msgstr "**PostgreSQL 9+**"
 
-#: ../../requirements.rst:50
+#: ../../requirements.rst:51
 msgid ""
 "Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` and "
 "will be discontinued completely in a later release. Please use a PostgreSQL "
@@ -112,19 +125,19 @@ msgstr ""
 "daarom PostgreSQL. Gebruikers die dit project al op MySQL draaien krijgen in "
 "de toekomst ondersteuning om te migreren."
 
-#: ../../requirements.rst:55
+#: ../../requirements.rst:56
 msgid "Disk space"
 msgstr "Schijfruimte"
 
-#: ../../requirements.rst:57
+#: ../../requirements.rst:58
 msgid ""
 "**Minimal 1 GB of disk space on RaspberryPi (card)** (for application "
 "installation & virtualenv)."
 msgstr ""
-"**Minimaal 1 GB schijfruimte vereist op RaspberryPi (SD-kaart)** (ten "
-"behoeve van de applicatie en VirtualEnv)."
+"**Minimaal 1 GB schijfruimte vereist op RaspberryPi (SD-kaart)** (ten behoeve "
+"van de applicatie en VirtualEnv)."
 
-#: ../../requirements.rst:59
+#: ../../requirements.rst:60
 msgid ""
 "More disk space is required for storing all reader data captured (optional). "
 "I generally advise to use a 8+ GB SD card."
@@ -132,7 +145,7 @@ msgstr ""
 "Meer schijfruimte is nodig voor het opslaan van alle metingen (optioneel). "
 "Over het algemeen adviseer ik minimaal een 8 GB SD-kaart."
 
-#: ../../requirements.rst:60
+#: ../../requirements.rst:61
 msgid ""
 "The readings will take about 90+ percent of the disk space. Retention is on "
 "it's way for a future release in 2017."
@@ -140,11 +153,11 @@ msgstr ""
 "De metingen nemen zo'n 90+ procent van alle schijfruimte in beslag. Er komt "
 "echter een optie voor retentie in een toekomstige release in 2017."
 
-#: ../../requirements.rst:64
+#: ../../requirements.rst:65
 msgid "Cable"
 msgstr "Kabel"
 
-#: ../../requirements.rst:66
+#: ../../requirements.rst:67
 msgid ""
 "**Smart Meter** with support for **at least DSMR 4.x+** and a **P1 telegram "
 "port**"
@@ -152,28 +165,28 @@ msgstr ""
 "**Slimme meter** met ondersteuning voor **ten minste DSMR 4.x+** en een **P1 "
 "telegram poort**"
 
-#: ../../requirements.rst:68
+#: ../../requirements.rst:69
 msgid "Tested so far with Landis+Gyr E350, Kaifa."
 msgstr "Tot nu toe getest met: Landis+Gyr E350, Kaifa."
 
-#: ../../requirements.rst:70
+#: ../../requirements.rst:71
 msgid "**Smart meter P1 data cable**"
 msgstr "**Slimme meter P1 data kabel**"
 
-#: ../../requirements.rst:72
+#: ../../requirements.rst:73
 msgid "Can be purchased online and they cost around 15 tot 20 Euro's each."
 msgstr "Je kunt deze online bestellen voor ongeveer 15 à 20 Euro."
 
-#: ../../requirements.rst:76
+#: ../../requirements.rst:77
 msgid "Misc"
 msgstr "Overige"
 
-#: ../../requirements.rst:78
+#: ../../requirements.rst:79
 msgid "**Basic Linux knowledge for deployment, debugging and troubleshooting**"
 msgstr ""
 "**Basiskennis Linux voor het uitrollen en mogelijk debuggen van problemen**"
 
-#: ../../requirements.rst:80
+#: ../../requirements.rst:81
 msgid "It just really helps if you know what you are doing."
 msgstr "Het scheelt nu eenmaal een hoop wanneer je weet waar je mee bezig bent."
 

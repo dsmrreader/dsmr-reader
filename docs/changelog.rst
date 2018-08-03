@@ -21,9 +21,15 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 v1.24.0 - 2018-xx-xx
 ^^^^^^^^^^^^^^^^^^^^
 
+.. warning::
+
+    Support for Python ``3.4`` has been **dropped**!
+
+
 **Tickets resolved in this release:**
 
 - [`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add support for Python 3.7
+- [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
 
 
 

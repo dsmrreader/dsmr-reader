@@ -2,7 +2,9 @@
 [![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=master)](https://codecov.io/gh/dennissiemensma/dsmr-reader/branch/master)
 [![Documentation Status](https://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](https://dsmr-reader.readthedocs.io/en/latest/?badge=latest)
 [![Requirements Status](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=master)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=master)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://dsmr-reader.readthedocs.io/en/latest/donations.html)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/latest/donations.html)
+[![Python 3.5 & 3.6](https://img.shields.io/badge/python%203.5%20%26%203.6-supported-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/latest/requirements.html#python)
+[![Python 3.4](https://img.shields.io/badge/python%203.4-support%20ended-red.svg)](https://dsmr-reader.readthedocs.io/en/latest/requirements.html#python)
 
 
 # DSMR Reader Datalogger/GUI
@@ -16,6 +18,7 @@
 ## Project mission
 - **Always free to use** (for non-commercial use only).
 - **Keeping your data for yourself** (none of the data is stored outside your database, unless you explicitly upload it to a third party).
+
 
 ## Features
 - Application languages supported: **Dutch (Nederlands)**  and **English**. The language used in your browser dynamicly decides the language applied in the application.
