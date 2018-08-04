@@ -59,7 +59,7 @@ msgstr ""
 "fixes-new-features>`_."
 
 #: ../../changelog.rst:22
-msgid "v1.24.0 - 2018-xx-xx"
+msgid "v2.0.0 - 2018-xx-xx"
 msgstr ""
 
 #: ../../changelog.rst:26

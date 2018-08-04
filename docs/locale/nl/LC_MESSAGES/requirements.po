@@ -100,10 +100,10 @@ msgstr ""
 #: ../../requirements.rst:41
 msgid ""
 "Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader "
-"v1.24`` (due to Django)."
+"v2.0`` (due to Django)."
 msgstr ""
 "Ondersteuning voor ``Python 3.4`` is **vervallen** sinds ``DSMR-reader "
-"v1.24`` (vanwege Django)."
+"v2.0`` (vanwege Django)."
 
 #: ../../requirements.rst:45
 msgid "Database"
