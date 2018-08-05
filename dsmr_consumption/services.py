@@ -35,8 +35,13 @@ def compact(dsmr_reading):
     ).replace(tzinfo=pytz.UTC)
 
     if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE:
-        # Postpone when current minute hasn't passed yet.
-        if timezone.now() <= reading_start + timezone.timedelta(minutes=1):
+        system_time_past_minute = timezone.now() >= reading_start + timezone.timedelta(minutes=1)
+        reading_past_minute_exists = DsmrReading.objects.filter(
+            timestamp__gte=reading_start + timezone.timedelta(minutes=1)
+        ).exists()
+
+        # Postpone until the minute has passed on the system time. And when there are (new) readings beyond this minute.
+        if not system_time_past_minute or not reading_past_minute_exists:
             return
 
     # Create consumption records.
