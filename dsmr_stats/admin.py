@@ -2,9 +2,11 @@ from django.contrib.admin.filters import DateFieldListFilter
 from django.contrib import admin
 from django.forms import widgets
 from django.db import models
+from solo.admin import SingletonModelAdmin
 
 from .models.note import Note
-from .models.statistics import HourStatistics, DayStatistics
+from .models.statistics import HourStatistics, DayStatistics, ElectricityStatistics
+from dsmr_backend.mixins import ReadOnlyAdminModel
 
 
 @admin.register(Note)
@@ -42,3 +44,9 @@ class HourStatisticsAdmin(admin.ModelAdmin):
     list_filter = (
         ('hour_start', DateFieldListFilter),
     )
+
+
+@admin.register(ElectricityStatistics)
+class ElectricityStatisticsAdmin(SingletonModelAdmin, ReadOnlyAdminModel):
+    """ Read only model. """
+    pass

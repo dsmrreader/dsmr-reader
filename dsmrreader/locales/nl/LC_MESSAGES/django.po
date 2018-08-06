@@ -814,29 +814,26 @@ msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
 msgid "Show"
 msgstr "Toon"
 
-msgid "Usage statistics"
-msgstr "Verbruiksstatistieken"
+msgid "All time highs"
+msgstr "Allertijden records"
 
-msgid "Most common electricity consumption"
-msgstr "Veelvoorkomend elektriciteitsverbruik"
+msgid "Highest usage (L1+)"
+msgstr "Hoogste verbruik (L1+)"
 
-msgid "Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home."
-msgstr "Gemiddeld elektriciteitsverbruik berekend over de vijf meest voorkomende waardes. Dit is vaak ook het (minimale) elektriciteitsverbruik van je woning."
+msgid "Highest usage (L2+)"
+msgstr "Hoogste verbruik (L2+)"
 
-msgid "Lowest wattage"
-msgstr "Laagste wattage"
+msgid "Highest usage (L3+)"
+msgstr "Hoogste verbruik (L3+)"
 
-msgid "Highest wattage"
-msgstr "Hoogste wattage"
+msgid "Highest return (L1-)"
+msgstr "Hoogste teruglevering (L1-)"
 
-msgid "Highest wattage (L1)"
-msgstr "Hoogste wattage (L1)"
+msgid "Highest return (L2-)"
+msgstr "Hoogste teruglevering (L2-)"
 
-msgid "Highest wattage (L2)"
-msgstr "Hoogste wattage (L2)"
-
-msgid "Highest wattage (L3)"
-msgstr "Hoogste wattage (L3)"
+msgid "Highest return (L3-)"
+msgstr "Hoogste teruglevering (L3-)"
 
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
@@ -1618,6 +1615,42 @@ msgstr "Begintijd uur"
 msgid "Hour statistics (automatically generated data)"
 msgstr "Uurstatistieken (automatisch gegenereerd)"
 
+msgid "Timestamp of highest usage on L1+"
+msgstr "Moment van hoogste verbruik op L1+"
+
+msgid "Timestamp of highest usage on L2+"
+msgstr "Moment van hoogste verbruik op L2+"
+
+msgid "Timestamp of highest usage on L3+"
+msgstr "Moment van hoogste verbruik op L3+"
+
+msgid "Timestamp of highest return on L1-"
+msgstr "Moment van hoogste teruglevering op L1-"
+
+msgid "Timestamp of highest return on L2-"
+msgstr "Moment van hoogste teruglevering op L2-"
+
+msgid "Timestamp of highest return on L3-"
+msgstr "Moment van hoogste teruglevering op L3-"
+
+msgid "Highest usage on L1+ (in kWh)"
+msgstr "Hoogste verbruik op L1+ (in kWh)"
+
+msgid "Highest usage on L2+ (in kWh)"
+msgstr "Hoogste verbruik op L2+ (in kWh)"
+
+msgid "Highest usage on L3+ (in kWh)"
+msgstr "Hoogste verbruik op L3+ (in kWh)"
+
+msgid "Highest return on L1- (in kWh)"
+msgstr "Hoogste teruglevering op L1- (in kWh)"
+
+msgid "Highest return on L2- (in kWh)"
+msgstr "Hoogste teruglevering op L2- (in kWh)"
+
+msgid "Highest return on L3- (in kWh)"
+msgstr "Hoogste teruglevering op L3- (in kWh)"
+
 msgid "Buienradar"
 msgstr "Buienradar"
 
@@ -1809,9 +1842,3 @@ msgstr "Engels"
 
 msgid "Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html"
 msgstr "Volledige documentatie beschikbaar op: https://dsmr-reader.readthedocs.io/nl/latest/api.html"
-
-#~ msgid "The port of the broker to send MQTT messages to."
-#~ msgstr "De poort om MQTT-berichten naar te versturen."
-
-#~ msgid "Tests MQTT setup."
-#~ msgstr "Test MQTT setup."

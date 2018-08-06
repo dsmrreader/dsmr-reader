@@ -1,3 +1,4 @@
+from decimal import Decimal
 from datetime import time
 import math
 
@@ -8,7 +9,7 @@ from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
 
-from dsmr_stats.models.statistics import DayStatistics, HourStatistics
+from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
@@ -251,7 +252,6 @@ def month_statistics(target_date):
     """ Alias of daterange_statistics() for a month targeted. """
     start_of_month = timezone.datetime(year=target_date.year, month=target_date.month, day=1)
     end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
-
     return range_statistics(start=start_of_month, end=end_of_month)
 
 
@@ -259,5 +259,31 @@ def year_statistics(target_date):
     """ Alias of daterange_statistics() for a year targeted. """
     start_of_year = timezone.datetime(year=target_date.year, month=1, day=1)
     end_of_year = timezone.datetime.combine(start_of_year + relativedelta(years=1), time.min)
-
     return range_statistics(start=start_of_year, end=end_of_year)
+
+
+def update_electricity_statistics(reading):
+    """ Updates the ElectricityStatistics records. """
+    MAP = {
+        # Reading field: Stats record field.
+        'phase_currently_delivered_l1': 'highest_usage_l1',
+        'phase_currently_delivered_l2': 'highest_usage_l2',
+        'phase_currently_delivered_l3': 'highest_usage_l3',
+        'phase_currently_returned_l1': 'highest_return_l1',
+        'phase_currently_returned_l2': 'highest_return_l2',
+        'phase_currently_returned_l3': 'highest_return_l3',
+    }
+    stats = ElectricityStatistics.get_solo()
+    dirty = False
+
+    for reading_field, stat_field in MAP.items():
+        reading_value = getattr(reading, reading_field) or 0
+        highest_value = getattr(stats, '{}_value'.format(stat_field)) or 0
+
+        if reading_value and Decimal(reading_value) > Decimal(highest_value):
+            dirty = True
+            setattr(stats, '{}_value'.format(stat_field), reading_value)
+            setattr(stats, '{}_timestamp'.format(stat_field), reading.timestamp)
+
+    if dirty:
+        stats.save()

@@ -39,6 +39,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
         self.assertIn('energy_prices', response.context)
+        self.assertIn('electricity_statistics', response.context)
 
         if DsmrReading.objects.exists():
             self.assertIn('latest_reading', response.context)
@@ -56,14 +57,6 @@ class TestViews(TestCase):
 
         json_response = json.loads(response.content.decode("utf-8"))
         self.assertIn('total_reading_count', json_response)
-
-        if self.support_data:
-            self.assertIn('slumber_consumption_watt', json_response)
-            self.assertIn('total_min', json_response)
-            self.assertIn('total_max', json_response)
-            self.assertIn('l1_max', json_response)
-            self.assertIn('l2_max', json_response)
-            self.assertIn('l3_max', json_response)
 
 
 class TestViewsWithoutData(TestViews):
