@@ -15,3 +15,7 @@ class TestMessage(TestCase):
 
     def test_to_string(self):
         self.assertEqual(str(self.instance), '{}'.format(self.instance.topic))
+
+    def test_null_payload(self):
+        """ This caused many headaches in issue #515. """
+        Message.objects.create(topic='x', payload=None)
