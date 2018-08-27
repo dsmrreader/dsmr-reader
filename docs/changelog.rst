@@ -27,6 +27,7 @@ v1.24.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#494 <https://github.com/dennissiemensma/dsmr-reader/issues/494>`_] Extend Usage statistics to include return
+- [`#467 <https://github.com/dennissiemensma/dsmr-reader/issues/467>`_] PVO uploadtijden in sync houden
 - [`#513 <https://github.com/dennissiemensma/dsmr-reader/issues/513>`_] Data being ignored in telegram grouping
 - [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
 - [`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add support for Python 3.7
@@ -45,6 +46,15 @@ v1.23.1 - 2018-08-26
 
 
 ----
+
+
+v1.23.1 - 2018-08-26
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#515 <https://github.com/dennissiemensma/dsmr-reader/issues/515>`_] Missing mqtt values
+
 
 
 v1.23.0 - 2018-08-02

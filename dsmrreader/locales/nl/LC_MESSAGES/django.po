@@ -1558,11 +1558,11 @@ msgstr "Upload interval"
 msgid "The interval between each upload (in minutes). Please make sure this matches the device settings."
 msgstr "De interval tussen elke upload (in minuten). Zorg ervoor dat dit overeenkomt met de apparaatinstellingen in PVOutput."
 
-msgid "Upload delay (minutes)"
+msgid "Upload offset (minutes)"
 msgstr "Uploadvertraging (in minuten)"
 
-msgid "An artificial delay in uploading data to PVOutput. E.g.: When you set this to \"5\" and the application uploads the data at 10:45, then only data between 0:00 and 10:40 will be taken into account for upload at that moment. It effectively limits its upload data search by \"X minutes ago\"."
-msgstr "Een kunstmatige vertraging in het uploaden van gegevens naar PVOutput. Voorbeeld: Wanneer je dit instelt op \"5\" en de applicatie probeert om 10:45 gegevens te uploaden, dan worden alleen gegevens tussen 0:00 en 10:40 gebruikt. Effectief beperkt deze instelling dus de zoekradius met \"X minuten geleden\"."
+msgid "An artificial delay in uploading data to PVOutput. E.g.: When you set this to \"5\" and the application uploads the data at 10:45, then only data between until 10:40 will be taken into account. It effectively limits its upload data search by \"ignore the last X minutes\", where X is this setting."
+msgstr "Een kunstmatige vertraging in het uploaden van gegevens naar PVOutput. Voorbeeld: Wanneer je dit instelt op \"5\" en de applicatie probeert om 10:45 gegevens te uploaden, dan worden alleen gegevens tussen 0:00 en 10:40 gebruikt. Effectief zorgt deze instelling er dus voor dat de te uploaden data beperkt wordt met \"negeer data van de afgelopen X minuten\", waarbij X de waarde van deze instelling is."
 
 msgid "PVOutput: Processing delay (minutes)"
 msgstr "PVOutput: Verwerkingsvertraging (in minuten)"

@@ -39,7 +39,49 @@ def get_next_export():
     minute_marker = next_export.minute
     minute_marker = minute_marker - (minute_marker % status_settings.upload_interval)
 
-    return next_export.replace(minute=minute_marker, second=0)
+    return next_export.replace(minute=minute_marker, second=0, microsecond=0)
+
+
+def get_export_data(next_export, upload_delay):
+    """ Returns the data to export. Raises exception when 'not ready'. """
+    # Find the first and last consumption of today, taking any delay into account.
+    local_now = timezone.localtime(timezone.now())
+    search_start = local_now.replace(hour=0, minute=0, second=0)  # Midnight
+    search_end = local_now - timezone.timedelta(minutes=upload_delay)
+
+    ecs = ElectricityConsumption.objects.filter(read_at__gte=search_start, read_at__lte=search_end)
+
+    if not ecs.exists():
+        return None
+
+    first = ecs[0]
+    last = ecs.order_by('-read_at')[0]
+    consumption_timestamp = timezone.localtime(last.read_at)
+
+    if next_export is None:
+        # This should only happen once, on the first upload ever.
+        next_export = timezone.localtime(timezone.now())
+    else:
+        # Delay the export, until we have data that reaches at least the current upload time. (#467)
+        expected_data_timestamp = timezone.localtime(next_export - timezone.timedelta(minutes=upload_delay))
+
+        if consumption_timestamp < expected_data_timestamp:
+            print(' [i] PVOutput: Data found, not in sync. Last data timestamp < expected ({} < {})'.format(
+                consumption_timestamp, expected_data_timestamp
+            ))
+            raise LookupError()
+
+    diff = last - first  # Custom operator for convenience
+    total_consumption = diff['delivered_1'] + diff['delivered_2']
+    net_power = last.currently_delivered - last.currently_returned  # Negative when returning more Watt than requested.
+
+    return {
+        'd': consumption_timestamp.date().strftime('%Y%m%d'),
+        't': consumption_timestamp.time().strftime('%H:%M'),
+        'v3': int(total_consumption * 1000),  # Energy Consumption (Wh)
+        'v4': int(net_power * 1000),  # Power Consumption (W)
+        'n': 1,  # Net Flag, always enabled for smart meters
+    }
 
 
 def export():
@@ -50,33 +92,14 @@ def export():
     api_settings = PVOutputAPISettings.get_solo()
     status_settings = PVOutputAddStatusSettings.get_solo()
 
-    # Find the first and last consumption of today, taking any delay into account.
-    local_now = timezone.localtime(timezone.now())
-    start = local_now.replace(hour=0, minute=0, second=0)  # Midnight
-    end = local_now - timezone.timedelta(minutes=status_settings.upload_delay)
+    try:
+        data = get_export_data(next_export=status_settings.next_export, upload_delay=status_settings.upload_delay)
+    except LookupError:
+        return
 
-    ecs = ElectricityConsumption.objects.filter(read_at__gte=start, read_at__lte=end)
-
-    if not ecs.exists():
-        print(' [!] PVOutput: No data found for {}'.format(local_now))
+    if not data:
+        print(' [!] PVOutput: No data found (yet)')
         return schedule_next_export()
-
-    first = ecs[0]
-    last = ecs.order_by('-read_at')[0]
-    diff = last - first  # Custom operator
-
-    total_consumption = diff['delivered_1'] + diff['delivered_2']
-    net_power = last.currently_delivered - last.currently_returned  # Negative when returning more Watt than requested.
-
-    consumption_timestamp = timezone.localtime(last.read_at)
-
-    data = {
-        'd': consumption_timestamp.date().strftime('%Y%m%d'),
-        't': consumption_timestamp.time().strftime('%H:%M'),
-        'v3': int(total_consumption * 1000),  # Energy Consumption (Wh)
-        'v4': int(net_power * 1000),  # Power Consumption (W)
-        'n': 1,  # Net Flag, always enabled for smart meters
-    }
 
     # Optional, paid PVOutput feature.
     if status_settings.processing_delay:
