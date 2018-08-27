@@ -1,5 +1,5 @@
 polib==1.1.0
 pylama==7.4.3 ; python_version < '3.7'
 pytest-cov==2.5.1
-pytest-django==3.3.3
-pytest-xdist==1.22.5
+pytest-django==3.4.2
+pytest-xdist==1.23.0
