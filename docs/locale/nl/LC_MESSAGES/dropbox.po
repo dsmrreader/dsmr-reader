@@ -60,7 +60,7 @@ msgid ""
 "token for yourself by clicking the **\"Generate\"** button somewhere "
 "below."
 msgstr ""
-"The app is als het goed is nu aangemaakt in developer-modus. Je kunt nog "
+"De app is als het goed is nu aangemaakt in developer-modus. Je kunt nog "
 "een toegangstoken genereren door op de knop **\"Generate\"** te klikken, "
 "die verderop onderaan de pagina staat."
 
