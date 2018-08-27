@@ -36,6 +36,17 @@ v2.0.0 - 2018-xx-xx
 ----
 
 
+v1.23.1 - 2018-08-26
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#515 <https://github.com/dennissiemensma/dsmr-reader/issues/515>`_] Missing mqtt values
+
+
+----
+
+
 v1.23.0 - 2018-08-02
 ^^^^^^^^^^^^^^^^^^^^
 
