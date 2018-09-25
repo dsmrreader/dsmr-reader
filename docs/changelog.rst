@@ -31,7 +31,6 @@ v1.24.0 - 2018-xx-xx
 - [`#513 <https://github.com/dennissiemensma/dsmr-reader/issues/513>`_] Data being ignored in telegram grouping
 - [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
 - [`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add support for Python 3.7
-- [`#510 <https://github.com/dennissiemensma/dsmr-reader/issues/510>`_] Django 2.1 released
 
 
 ----
