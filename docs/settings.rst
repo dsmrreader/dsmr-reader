@@ -235,7 +235,7 @@ Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``.
 
 ``DSMRREADER_STATUS_READING_OFFSET_MINUTES``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Maximum interval in hours allowed since the latest reading, before ringing any alarms.
+Maximum interval in minutes allowed since the latest reading, before ringing any alarms.
 
 Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``.
 

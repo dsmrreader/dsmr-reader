@@ -8,6 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-27 20:03+0200\n"
+"PO-Revision-Date: 2018-09-27 20:03+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -505,11 +507,11 @@ msgstr "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
 
 #: ../../settings.rst:238
 msgid ""
-"Maximum interval in hours allowed since the latest reading, before ringing any "
+"Maximum interval in minutes allowed since the latest reading, before ringing any "
 "alarms."
 msgstr ""
-"Maximale toegestane interval, in aantal uren, sinds de laatste meting, voordat "
-"er alarmbellen af gaan."
+"Maximale toegestane interval, in minuten, sinds de laatste meting, voordat er "
+"alarmbellen af gaan."
 
 #: ../../settings.rst:240
 msgid "Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
