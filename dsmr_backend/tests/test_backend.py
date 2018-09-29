@@ -43,17 +43,17 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         # We must disconnect to prevent other tests from failing, since this is no database action.
         dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)
 
-    @mock.patch('traceback.format_tb')
-    def test_signal_exception_handling(self, format_tb_mock):
+    @mock.patch('logging.Logger.exception')
+    def test_signal_exception_handling(self, logging_mock):
         """ Tests signal exception handling. """
         def _fake_signal_troublemaker(*args, **kwargs):
             raise AssertionError("Crash")
 
         dsmr_backend.signals.backend_called.connect(receiver=_fake_signal_troublemaker)
-        self.assertFalse(format_tb_mock.called)
+        self.assertFalse(logging_mock.called)
 
         self._intercept_command_stdout('dsmr_backend', run_once=True)
-        self.assertTrue(format_tb_mock.called)
+        self.assertTrue(logging_mock.called)
 
     def test_supported_vendors(self):
         """ Check whether supported vendors is as expected. """

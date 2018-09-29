@@ -8,6 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-28 23:30+0200\n"
+"PO-Revision-Date: 2018-09-28 23:40+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -27,8 +29,8 @@ msgid ""
 "If the application happens to stall unexpectedly, you can perform some "
 "debugging on your end."
 msgstr ""
-"Mocht de applicatie onverwachts stoppen, dan kun je zelf het volgende "
-"doen om te kijken of je een oorzaak kan vinden."
+"Mocht de applicatie onverwachts stoppen, dan kun je zelf het volgende doen "
+"om te kijken of je een oorzaak kan vinden."
 
 #: ../../troubleshooting.rst:6
 msgid "Status page"
@@ -36,84 +38,182 @@ msgstr "Status-pagina"
 
 #: ../../troubleshooting.rst:7
 msgid ""
-"The first place to look at is the Status page in the application. Does "
-"it display any error or is it lagging data processing?"
+"The first place to look at is the Status page in the application. Does it "
+"display any errors or is it lagging data processing?"
 msgstr ""
 "Als eerste kun je het beste naar de Status-pagina gaan. Staat daar een "
 "foutmelding of loopt de dataverwerking achter?"
 
+#: ../../troubleshooting.rst:12
+msgid "Logging"
+msgstr "Logging"
+
 #: ../../troubleshooting.rst:13
+msgid ""
+"Starting from DSMR-reader ``v1.24`` all logging output has been reduced by "
+"default. You can, however, have the application log more verbose by "
+"increasing the logging level."
+msgstr ""
+"Vanaf DSMR-reader ``v1.24`` is alle logging van de applicatie beperkt. Je "
+"kunt de applicatie echter veel meer informatie laten loggen, door het "
+"loglevel aan te passen."
+
+#: ../../troubleshooting.rst:16
+msgid "Open the ``dsmrreader/settings.py`` file and look for the code below::"
+msgstr "Open ``dsmrreader/settings.py`` en zoek de onderstaande code::"
+
+#: ../../troubleshooting.rst:28
+msgid ""
+"**If you cannot find the code above, you've probably installed DSMR-reader "
+"before v1.24 and you can paste the code yourself in the file.**"
+msgstr ""
+"**Kun je de bovenstaande code niet kunt vinden? Dan heb je DSMR-reader "
+"waarschijnlijk vóór v1.24 geïnstalleerd. In dat geval kun je de code zelf in "
+"het bestand plakken.**"
+
+#: ../../troubleshooting.rst:29
+msgid "Now remove the ``#`` and set the value to ``DEBUG``."
+msgstr "Haal de ``#`` weg en zet de waarde op ``DEBUG``."
+
+#: ../../troubleshooting.rst:30
+msgid ""
+"Make sure that you execute ``./post-deploy.sh`` after changing the settings."
+msgstr ""
+"Zorg ervoor dat je ``./post-deploy.sh`` uitvoert na het doorvoeren van "
+"wijzigingen."
+
+#: ../../troubleshooting.rst:31
+msgid "Read below for more information about where to find the logging output."
+msgstr "Lees hieronder meer over waar je welke informatie kunt vinden."
+
+#: ../../troubleshooting.rst:35
 msgid "Supervisor"
 msgstr "Supervisor"
 
-#: ../../troubleshooting.rst:14
+#: ../../troubleshooting.rst:36
 msgid ""
-"You can also view the Supervisor logfiles, depending on whether your "
-"datalogger, webinterface or the data processing is broken. The logfiles "
-"are located by default in ``/var/log/supervisor/``. You should find logs "
-"here regarding the ``dsmr_datalogger``, ``dsmr_backend`` and "
-"``dsmr_webinterface`` processes."
+"You can view the Supervisor logfiles, depending on whether your datalogger, "
+"webinterface or the data processing is broken."
 msgstr ""
-"Je kunt ook de Supervisor-logfiles bekijken, afhankelijk van of je "
-"datalogger, webinterface of dataverwerking gestopt is. De logfiles staan "
-"standaard in ``/var/log/supervisor/``. Je vindt hier logfiles voor de "
-"``dsmr_datalogger``, ``dsmr_backend`` en ``dsmr_webinterface`` processen."
+"Je kunt de Supervisor-logfiles bekijken, afhankelijk of je datalogger, "
+"webinterface of backend-proces kapot is."
 
-#: ../../troubleshooting.rst:18
+#: ../../troubleshooting.rst:38 ../../troubleshooting.rst:50
+msgid "The logfiles are located by default in:"
+msgstr "De logbestanden zijn standaard te vinden in:"
+
+#: ../../troubleshooting.rst:40
 msgid ""
-"Another option is to tail the (recent) logs in Supervisor. Enter the "
-"control panel with ``sudo supervisorctl`` and type ``tail -f "
-"PROCESSNAME`` to follow one. The process names are the ones you see when "
-"you started the control panel, or you can just enter ``status`` to see "
-"them. You can also use ``start``, ``stop`` or ``restart`` on the "
-"processes to give control them."
+"``/var/log/supervisor/dsmr_backend.log`` *(Logs regarding the backend "
+"process)*"
 msgstr ""
-"Eventueel kun je ook de (recente) logfiles direct in Supervisor "
-"bekijken. Ga naar het beheerpaneel met ``sudo supervisorctl`` en typ "
-"``tail -f PROCESNAAM`` om er een te volgen. De procesnamen zijn degene "
-"die je ziet wanneer je het beheerpaneel opende. Je kunt ook ``status`` "
-"typen om ze allemaal te weergeven. Gebruik ``start``, ``stop`` of "
-"``restart`` om de processen verder te beheren."
+"``/var/log/supervisor/dsmr_backend.log`` *(Logs over het backend proces)*"
 
-#: ../../troubleshooting.rst:26
+#: ../../troubleshooting.rst:41
+msgid ""
+"``/var/log/supervisor/dsmr_datalogger.log`` *(Logs regarding the datalogger)*"
+msgstr ""
+"``/var/log/supervisor/dsmr_datalogger.log`` *(Logs over de datalogger)*"
+
+#: ../../troubleshooting.rst:42
+msgid ""
+"``/var/log/supervisor/dsmr_webinterface.log`` *(Logs regarding the "
+"webinterface)*"
+msgstr ""
+"``/var/log/supervisor/dsmr_webinterface.log`` *(Logs over de webinterface)*"
+
+#: ../../troubleshooting.rst:46
 msgid "Appplication / Django"
 msgstr "Appplicatie / Django"
 
-#: ../../troubleshooting.rst:27
+#: ../../troubleshooting.rst:47
 msgid ""
 "The application has it's own logfiles as well. You can find them in the "
-"``logs`` directory inside the project folder. The ``django.log`` will "
-"list any internal errors regarding the Django framework it's using. The "
-"other logfile ``dsmrreader.log`` contains application logging, if "
-"enabled."
+"``logs`` directory inside the project folder."
 msgstr ""
-"De applicatie heeft zelf ook logfiles. Deze vindt je in de ``logs`` "
-"directory binnenin het project. De ``django.log`` bevat alle interne "
-"fouten m.b.t. het gebruikte Django framework. De andere logfile, "
-"``dsmrreader.log`` bevat doorgaans alle ontvangen metingen, in base64-"
-"formaat en wanneer ingeschakeld."
+"De applicatie heeft ook eigen logfiles. Je kunt deze vinden in de ``logs`` "
+"directory binnen de projectmap."
 
-#: ../../troubleshooting.rst:32
+#: ../../troubleshooting.rst:52
+msgid ""
+"``/home/dsmr/dsmr-reader/logs/django.log`` *(lists any internal errors "
+"regarding the Django framework it's using)*"
+msgstr ""
+"``/home/dsmr/dsmr-reader/logs/django.log`` *(bevat interne foutmeldingen "
+"over het gebruikte Django framework)*"
+
+#: ../../troubleshooting.rst:53
+msgid ""
+"``/home/dsmr/dsmr-reader/logs/dsmrreader.log`` *(contains application "
+"logging, if enabled)*"
+msgstr ""
+"``/home/dsmr/dsmr-reader/logs/dsmrreader.log`` *(bevat applicatie-logging, "
+"wanneer ingeschakeld)*"
+
+#: ../../troubleshooting.rst:57
+msgid "Telegrams"
+msgstr "Telegrammen"
+
+#: ../../troubleshooting.rst:58
 msgid ""
 "You can log all telegrams received, in base64 format, by adding "
 "``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings.py`` "
-"config. Make sure that you execute ``./post-deploy.sh`` after changing "
-"the settings. It should now log the telegrams into ``dsmrreader.log``."
+"config. Make sure that you execute ``./post-deploy.sh`` after changing the "
+"settings. It should now log the telegrams into ``dsmrreader.log``."
 msgstr ""
-"Je kunt alle ontvangen telegrammen loggen, in base64-formaat, door de "
-"regel ``DSMRREADER_LOG_TELEGRAMS = True`` toe te voegen aan je "
-"instellingen in ``dsmrreader/settings.py``. Zorg er wel voor dat je ``./"
-"post-deploy.sh`` uitvoert na het doorvoeren van je wijzigingen. Als het "
-"goed is worden nu de telegrammen gelogd in  ``dsmrreader.log``."
+"Je kunt alle ontvangen telegrammen loggen, in base64-formaat, door de regel "
+"``DSMRREADER_LOG_TELEGRAMS = True`` toe te voegen aan je instellingen in "
+"``dsmrreader/settings.py``. Zorg er wel voor dat je ``./post-deploy.sh`` "
+"uitvoert na het doorvoeren van je wijzigingen. Als het goed is worden nu de "
+"telegrammen gelogd in  ``dsmrreader.log``."
 
-#: ../../troubleshooting.rst:38
+#: ../../troubleshooting.rst:64
 msgid "Contact"
 msgstr "Contact"
 
-#: ../../troubleshooting.rst:39
+#: ../../troubleshooting.rst:65
 msgid ""
-"Are you unable to resolve your problem or do you need any help? :doc:"
-"`More information can be found here<contributing>`."
+"Are you unable to resolve your problem or do you need any help? :doc:`More "
+"information can be found here<contributing>`."
 msgstr ""
-"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun "
-"je hier vinden<contributing>`."
+"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun je "
+"hier vinden<contributing>`."
+
+#~ msgid ""
+#~ "You can also view the Supervisor logfiles, depending on whether your "
+#~ "datalogger, webinterface or the data processing is broken. The logfiles "
+#~ "are located by default in ``/var/log/supervisor/``. You should find logs "
+#~ "here regarding the ``dsmr_datalogger``, ``dsmr_backend`` and "
+#~ "``dsmr_webinterface`` processes."
+#~ msgstr ""
+#~ "Je kunt ook de Supervisor-logfiles bekijken, afhankelijk van of je "
+#~ "datalogger, webinterface of dataverwerking gestopt is. De logfiles staan "
+#~ "standaard in ``/var/log/supervisor/``. Je vindt hier logfiles voor de "
+#~ "``dsmr_datalogger``, ``dsmr_backend`` en ``dsmr_webinterface`` processen."
+
+#~ msgid ""
+#~ "Another option is to tail the (recent) logs in Supervisor. Enter the "
+#~ "control panel with ``sudo supervisorctl`` and type ``tail -f "
+#~ "PROCESSNAME`` to follow one. The process names are the ones you see when "
+#~ "you started the control panel, or you can just enter ``status`` to see "
+#~ "them. You can also use ``start``, ``stop`` or ``restart`` on the "
+#~ "processes to give control them."
+#~ msgstr ""
+#~ "Eventueel kun je ook de (recente) logfiles direct in Supervisor bekijken. "
+#~ "Ga naar het beheerpaneel met ``sudo supervisorctl`` en typ ``tail -f "
+#~ "PROCESNAAM`` om er een te volgen. De procesnamen zijn degene die je ziet "
+#~ "wanneer je het beheerpaneel opende. Je kunt ook ``status`` typen om ze "
+#~ "allemaal te weergeven. Gebruik ``start``, ``stop`` of ``restart`` om de "
+#~ "processen verder te beheren."
+
+#~ msgid ""
+#~ "The application has it's own logfiles as well. You can find them in the "
+#~ "``logs`` directory inside the project folder. The ``django.log`` will "
+#~ "list any internal errors regarding the Django framework it's using. The "
+#~ "other logfile ``dsmrreader.log`` contains application logging, if enabled."
+#~ msgstr ""
+#~ "De applicatie heeft zelf ook logfiles. Deze vindt je in de ``logs`` "
+#~ "directory binnenin het project. De ``django.log`` bevat alle interne "
+#~ "fouten m.b.t. het gebruikte Django framework. De andere logfile, "
+#~ "``dsmrreader.log`` bevat doorgaans alle ontvangen metingen, in base64-"
+#~ "formaat en wanneer ingeschakeld."

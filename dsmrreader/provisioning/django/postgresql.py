@@ -27,3 +27,14 @@ DATABASES = {
 }
 
 SECRET_KEY = os.environ.get('SECRET_KEY', DSMRREADER_SECRET_KEY)
+
+
+"""
+    Enable and change the logging level below to alter the verbosity of the (backend) command(s).
+    - DEBUG:             Log everything.
+    - INFO:              Log most things.
+    - WARNING (default): Log only warnings and errors.
+
+    Restart the commands in Supervisor to apply any changes.
+"""
+# LOGGING['loggers']['commands']['level'] = 'DEBUG'

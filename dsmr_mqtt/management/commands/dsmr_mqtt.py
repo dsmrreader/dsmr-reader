@@ -1,3 +1,5 @@
+import logging
+
 from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext as _
 from django.conf import settings
@@ -5,6 +7,9 @@ from django.conf import settings
 from dsmr_backend.mixins import InfiniteManagementCommandMixin, StopInfiniteRun
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 import dsmr_mqtt.services.broker
+
+
+logger = logging.getLogger('commands')
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
@@ -31,7 +36,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         # Check on each run. In case MQTT was either disabled, enabled or settings were changed.
         if broker_settings.restart_required:
             MQTTBrokerSettings.objects.update(restart_required=False)
-            print('MQTT | --- Detected settings change, requiring process restart, stopping...')
+            logger.warning('MQTT | --- Detected settings change, requiring process restart, stopping...')
             raise StopInfiniteRun()
 
         dsmr_mqtt.services.broker.run(mqtt_client=self.mqtt_client)

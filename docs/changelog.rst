@@ -21,7 +21,8 @@ v1.24.0 - 2018-xx-xx
 
 .. warning::
 
-    Support for Python ``3.4`` has been **dropped**!
+    The default logging level of the backend has been lowered to reduce I/O.
+    See ``Logging`` on `this documentation page <https://dsmr-reader.readthedocs.io/nl/latest/troubleshooting.html>`_ for more information.
 
 
 **Tickets resolved in this release:**
@@ -31,6 +32,7 @@ v1.24.0 - 2018-xx-xx
 - [`#513 <https://github.com/dennissiemensma/dsmr-reader/issues/513>`_] Data being ignored in telegram grouping
 - [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
 - [`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add support for Python 3.7
+- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring
 
 
 ----

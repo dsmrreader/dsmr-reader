@@ -1,3 +1,4 @@
+import logging
 import os
 
 from django.utils.translation import ugettext_lazy as gettext
@@ -8,6 +9,9 @@ import dropbox
 from dsmr_backup.models.settings import DropboxSettings
 from dsmr_frontend.models.message import Notification
 import dsmr_backup.services.backup
+
+
+logger = logging.getLogger('commands')
 
 
 def sync():
@@ -55,7 +59,7 @@ def check_synced_file(file_path, dropbox_settings):
         upload_chunked(file_path=file_path)
     except dropbox.exceptions.DropboxException as exception:
         error_message = str(exception.error)
-        print(' - Dropbox error: {}'.format(error_message))
+        logger.error(' - Dropbox error: %s', error_message)
 
         if 'insufficient_space' in error_message:
             Notification.objects.create(message=gettext(
@@ -91,7 +95,7 @@ def check_synced_file(file_path, dropbox_settings):
 def upload_chunked(file_path):
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     # For backend logging in Supervisor.
-    print(' - Uploading file to Dropbox: {}.'.format(file_path))
+    logger.info(' - Uploading file to Dropbox: %s', file_path)
 
     dropbox_settings = DropboxSettings.get_solo()
     file_name = os.path.split(file_path)[-1]

@@ -1,5 +1,6 @@
 from datetime import time
 from decimal import Decimal, ROUND_UP
+import logging
 import pytz
 
 from django.contrib.humanize.templatetags.humanize import naturaltime
@@ -14,6 +15,9 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.statistics import MeterStatistics
+
+
+logger = logging.getLogger('commands')
 
 
 def compact_all():
@@ -52,7 +56,7 @@ def compact(dsmr_reading):
     dsmr_reading.save(update_fields=['processed'])
 
     # For backend logging in Supervisor.
-    print(' - Processed reading: {}'.format(dsmr_reading))
+    logger.debug(' - Processed reading: %s', dsmr_reading)
 
 
 def _compact_electricity(dsmr_reading, grouping_type, reading_start):

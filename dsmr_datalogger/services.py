@@ -23,6 +23,7 @@ import dsmr_datalogger.signals
 
 dsmrreader_logger = logging.getLogger('dsmrreader')
 django_logger = logging.getLogger('django')
+commands_logger = logging.getLogger('commands')
 
 
 def get_dsmr_connection_parameters():
@@ -368,7 +369,7 @@ def apply_data_retention():
             ]
 
             # Now drop all others.
-            print('Retention | Cleaning up: {} ({})'.format(current_hour, data_set[0].__class__.__name__))
+            commands_logger.debug('Retention | Cleaning up: %s (%s)', current_hour, data_set[0].__class__.__name__)
             data_set.exclude(pk__in=keeper_pks).delete()
 
     timezone.deactivate()

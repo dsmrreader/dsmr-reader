@@ -1,3 +1,5 @@
+import logging
+
 from decimal import Decimal
 from datetime import time
 import math
@@ -14,6 +16,9 @@ from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
 import dsmr_backend.services
+
+
+logger = logging.getLogger('commands')
 
 
 def analyze():  # noqa: C901
@@ -85,7 +90,7 @@ def analyze():  # noqa: C901
         return
 
     # For backend logging in Supervisor.
-    print(' - Creating day & hour statistics for: {}.'.format(day_start))
+    logger.debug(' - Creating day & hour statistics for: %s', day_start)
 
     with transaction.atomic():
         # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly anyway.

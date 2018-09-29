@@ -1,3 +1,5 @@
+import logging
+
 from django.utils import timezone
 import requests
 
@@ -5,6 +7,9 @@ from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings, PVOutputAPI
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_pvoutput.signals import pvoutput_upload
 import dsmr_backend.services
+
+
+logger = logging.getLogger('commands')
 
 
 def should_export():
@@ -22,7 +27,7 @@ def should_export():
 def schedule_next_export():
     """ Schedules the next export, according to user preference. """
     next_export = get_next_export()
-    print(' - PVOutput | Delaying the next export until: {}'.format(next_export))
+    logger.debug(' - PVOutput | Delaying the next export until: %s', timezone.localtime(next_export))
 
     status_settings = PVOutputAddStatusSettings.get_solo()
     status_settings.next_export = next_export
@@ -66,9 +71,11 @@ def get_export_data(next_export, upload_delay):
         expected_data_timestamp = timezone.localtime(next_export - timezone.timedelta(minutes=upload_delay))
 
         if consumption_timestamp < expected_data_timestamp:
-            print(' [i] PVOutput: Data found, not in sync. Last data timestamp < expected ({} < {})'.format(
-                consumption_timestamp, expected_data_timestamp
-            ))
+            logger.warning(
+                ' [i] PVOutput: Data found, not in sync. Last data timestamp < expected (%s < %s)',
+                consumption_timestamp,
+                expected_data_timestamp
+            )
             raise LookupError()
 
     diff = last - first  # Custom operator for convenience
@@ -98,14 +105,14 @@ def export():
         return
 
     if not data:
-        print(' [!] PVOutput: No data found (yet)')
+        logger.warning(' [!] PVOutput: No data found (yet)')
         return schedule_next_export()
 
     # Optional, paid PVOutput feature.
     if status_settings.processing_delay:
         data.update({'delay': status_settings.processing_delay})
 
-    print(' - PVOutput | Uploading data: {}'.format(data))
+    logger.debug(' - PVOutput | Uploading data: %s', data)
     pvoutput_upload.send_robust(None, data=data)
 
     response = requests.post(
@@ -118,7 +125,7 @@ def export():
     )
 
     if response.status_code != 200:
-        print(' [!] PVOutput upload failed (HTTP {}): {}'.format(response.status_code, response.text))
+        logger.error(' [!] PVOutput upload failed (HTTP %s): %s', response.status_code, response.text)
     else:
         status_settings.latest_sync = timezone.now()
         status_settings.save()
