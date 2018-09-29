@@ -16,7 +16,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v1.24.0 - 2018-xx-xx
+v1.24.0 - 2018-09-29
 ^^^^^^^^^^^^^^^^^^^^
 
 .. warning::
