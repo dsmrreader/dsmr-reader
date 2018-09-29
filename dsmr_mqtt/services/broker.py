@@ -1,3 +1,4 @@
+import logging
 import time
 import ssl
 
@@ -9,12 +10,15 @@ from dsmr_mqtt.models import queue
 from dsmr_backend.mixins import StopInfiniteRun
 
 
+logger = logging.getLogger('commands')
+
+
 def initialize():
     """ Initializes the MQTT client and returns client instance. """
     broker_settings = MQTTBrokerSettings.get_solo()
 
     if not broker_settings.hostname:
-        print('MQTT | No hostname found in settings, restarting in a minute...')
+        logger.warning('MQTT | No hostname found in settings, restarting in a minute...')
         time.sleep(60)
         raise StopInfiniteRun()
 
@@ -31,18 +35,18 @@ def initialize():
 
     # SSL/TLS.
     if broker_settings.secure == MQTTBrokerSettings.SECURE_CERT_NONE:
-        print('MQTT | Initializing secure connection (ssl.CERT_NONE)')
+        logger.debug('MQTT | Initializing secure connection (ssl.CERT_NONE)')
         mqtt_client.tls_set(cert_reqs=ssl.CERT_NONE)
     elif broker_settings.secure == MQTTBrokerSettings.SECURE_CERT_REQUIRED:
-        print('MQTT | Initializing secure connection (ssl.CERT_REQUIRED)')
+        logger.debug('MQTT | Initializing secure connection (ssl.CERT_REQUIRED)')
         mqtt_client.tls_set(cert_reqs=ssl.CERT_REQUIRED)
     else:
-        print('MQTT | Initializing insecure connection (no TLS)')
+        logger.debug('MQTT | Initializing insecure connection (no TLS)')
 
     try:
         mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port)
     except Exception as error:
-        print('MQTT | Failed to connect to broker, restarting in a minute: {}'.format(error))
+        logger.error('MQTT | Failed to connect to broker, restarting in a minute: %s', error)
         time.sleep(60)
         raise StopInfiniteRun()
 
@@ -81,10 +85,10 @@ def on_connect(client, userdata, flags, rc):
         4: 'Connection refused - bad username or password',
         5: 'Connection refused - not authorised',
     }
-    print('MQTT | Paho client: on_connect(userdata, flags, rc)', userdata, flags, rc)
+    logger.debug('MQTT | Paho client: on_connect(userdata, flags, rc) %s %s %s', userdata, flags, rc)
 
     try:
-        print('MQTT | --- {} : {} -> {}'.format(client._host, client._port, RC_MAPPING[rc]))
+        logger.debug('MQTT | --- %s : %s -> %s'.format(client._host, client._port, RC_MAPPING[rc]))
     except KeyError:
         pass
 
@@ -96,23 +100,23 @@ def on_disconnect(client, userdata, rc):
         If MQTT_ERR_SUCCESS (0), the callback was called in response to a disconnect() call.
         If any other value the disconnection was unexpected, such as might be caused by a network error.
     """
-    print('MQTT | Paho client: on_disconnect(userdata, rc)', userdata, rc)
+    logger.debug('MQTT | Paho client: on_disconnect(userdata, rc) %s %s', userdata, rc)
 
     if rc != paho.MQTT_ERR_SUCCESS:
-        print('MQTT | --- Unexpected disconnect, re-connecting...')
+        logger.warning('MQTT | --- Unexpected disconnect, re-connecting...')
 
         try:
             client.reconnect()
         except Exception as error:
-            print('MQTT | Failed to re-connect to broker: {}'.format(error))
+            logger.error('MQTT | Failed to re-connect to broker: %s', error)
             raise StopInfiniteRun()  # Don't bother even to continue, just reset everything.
 
 
 def on_log(client, userdata, level, buf):
     """ MQTT client callback for logging. Outputs some debug logging. """
-    print('MQTT | Paho client: on_log(userdata, level, buf)', userdata, level, buf)
+    logger.debug('MQTT | Paho client: on_log(userdata, level, buf) %s %s %s', userdata, level, buf)
 
 
 def on_publish(client, userdata, mid):
     """ MQTT client callback for publishing. Outputs some debug logging. """
-    print('MQTT | Paho client: on_publish(userdata, mid)', userdata, mid)
+    logger.debug('MQTT | Paho client: on_publish(userdata, mid) %s %s', userdata, mid)

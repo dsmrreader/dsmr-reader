@@ -73,6 +73,41 @@ class TestServices(TestCase):
         self.assertEqual(result.second, 0)
 
     @mock.patch('django.utils.timezone.now')
+    def test_get_export_data(self, now_mock):
+        """ Complexity to make sure the upload is in sync. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 9, 30, hour=15))
+        self._apply_fake_settings()
+
+        # Too soon, no data in today's range.
+        result = dsmr_pvoutput.services.get_export_data(next_export=timezone.now(), upload_delay=0)
+        self.assertIsNone(result)
+
+        # First sync, next day.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.
+        result = dsmr_pvoutput.services.get_export_data(next_export=None, upload_delay=0)
+        self.assertEqual(result, {'d': '20171001', 'n': 1, 't': '13:00', 'v3': 4000, 'v4': -750})
+
+        # Now with all test EC's.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))  # Include all 3 EC's.
+        result = dsmr_pvoutput.services.get_export_data(next_export=None, upload_delay=0)
+        self.assertEqual(result, {'d': '20171001', 'n': 1, 't': '15:00', 'v3': 7000, 'v4': 450})
+
+        # Now with delay, should not be allowed, as we wait for more data.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.
+        with self.assertRaises(LookupError):
+            dsmr_pvoutput.services.get_export_data(next_export=timezone.now(), upload_delay=1)
+
+        # Again with delay, but we move forward in time.
+        now_mock.return_value = now_mock.return_value + timezone.timedelta(minutes=1)
+        result = dsmr_pvoutput.services.get_export_data(
+            next_export=timezone.now(), upload_delay=1
+        )
+
+        # Make delay again just fall off, failing.
+        with self.assertRaises(LookupError):
+            dsmr_pvoutput.services.get_export_data(next_export=timezone.now(), upload_delay=2)
+
+    @mock.patch('django.utils.timezone.now')
     def test_should_export_okay(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
         self._apply_fake_settings()
@@ -114,28 +149,57 @@ class TestServices(TestCase):
 
     @mock.patch('requests.post')
     @mock.patch('dsmr_pvoutput.services.should_export')
+    @mock.patch('dsmr_pvoutput.services.get_export_data')
     @mock.patch('django.utils.timezone.now')
-    def test_export_fail(self, now_mock, should_export_mock, requests_post_mock):
+    def test_export_fail(self, now_mock, export_data_mock, should_export_mock, requests_post_mock):
         """ Test export() failing by denied API call. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
+        export_data_mock.return_value = {'x': 'y'}  # Unimportant for this test.
         should_export_mock.return_value = True
         self._apply_fake_settings()
 
         requests_post_mock.return_value = mock.MagicMock(status_code=400, text='Error message')
         dsmr_pvoutput.services.export()
-        status_settings = PVOutputAddStatusSettings.get_solo()
 
+        status_settings = PVOutputAddStatusSettings.get_solo()
         self.assertEqual(status_settings.next_export, timezone.now() + timezone.timedelta(minutes=5))
         self.assertTrue(requests_post_mock.called)
         self.assertIsNone(status_settings.latest_sync)
 
     @mock.patch('requests.post')
     @mock.patch('dsmr_pvoutput.services.should_export')
+    @mock.patch('dsmr_pvoutput.services.get_export_data')
     @mock.patch('django.utils.timezone.now')
     @mock.patch('dsmr_pvoutput.signals.pvoutput_upload.send_robust')
-    def test_export_okay(self, send_robust_mock, now_mock, should_export_mock, requests_post_mock):
+    def test_export_postponed(
+        self, send_robust_mock, now_mock, export_data_mock, should_export_mock, requests_post_mock
+    ):
+        """ Test export() but failing due to lack of data ready. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=1))
+
+        should_export_mock.return_value = True
+        export_data_mock.side_effect = LookupError()  # Emulate.
+        requests_post_mock.return_value = mock.MagicMock(status_code=200, text='Fake accept')
+        self._apply_fake_settings()
+
+        self.assertFalse(requests_post_mock.called)
+        self.assertFalse(send_robust_mock.called)
+
+        dsmr_pvoutput.services.export()
+
+        # Nothing should happen.
+        self.assertFalse(requests_post_mock.called)
+        self.assertFalse(send_robust_mock.called)
+
+    @mock.patch('requests.post')
+    @mock.patch('dsmr_pvoutput.services.should_export')
+    @mock.patch('dsmr_pvoutput.services.get_export_data')
+    @mock.patch('django.utils.timezone.now')
+    @mock.patch('dsmr_pvoutput.signals.pvoutput_upload.send_robust')
+    def test_export_okay(self, send_robust_mock, now_mock, export_data_mock, should_export_mock, requests_post_mock):
         """ Test export() as designed. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
+        export_data_mock.return_value = {'x': 'y'}  # Unimportant for this test.
 
         should_export_mock.return_value = True
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text='Fake accept')
@@ -158,13 +222,7 @@ class TestServices(TestCase):
                 'X-Pvoutput-Apikey': api_settings.auth_token,
                 'X-Pvoutput-SystemId': api_settings.system_identifier,
             },
-            data={
-                'd': '20171001',
-                'n': 1,
-                't': '13:00',
-                'v3': 3000,
-                'v4': -750,
-            },
+            data={'x': 'y'},
         )
 
         # With processing delay as well.
@@ -188,11 +246,7 @@ class TestServices(TestCase):
                 'X-Pvoutput-SystemId': api_settings.system_identifier,
             },
             data={
-                'd': '20171001',
+                'x': 'y',
                 'delay': 5,
-                'n': 1,
-                't': '13:00',
-                'v3': 3000,
-                'v4': -750,
             },
         )

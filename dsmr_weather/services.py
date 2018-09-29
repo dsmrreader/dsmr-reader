@@ -1,12 +1,16 @@
 import xml.etree.ElementTree as ET
-import urllib.request
 from decimal import Decimal
+import urllib.request
+import logging
 
 from django.utils import timezone
 
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.buienradar import BUIENRADAR_API_URL, BUIENRADAR_XPATH
+
+
+logger = logging.getLogger('commands')
 
 
 def should_sync():
@@ -29,7 +33,7 @@ def read_weather():
         return
 
     # For backend logging in Supervisor.
-    print(' - Performing temperature reading at Buienradar.')
+    logger.debug(' - Performing temperature reading at Buienradar.')
 
     weather_settings = WeatherSettings.get_solo()
 
@@ -37,7 +41,7 @@ def read_weather():
         # Fetch XML from API.
         request = urllib.request.urlopen(BUIENRADAR_API_URL)
     except Exception as e:
-        print(' [!] Failed reading temperature: {}'.format(e))
+        logger.error(' [!] Failed reading temperature: %s', e)
 
         # Try again in 5 minutes.
         weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=5)
@@ -55,7 +59,7 @@ def read_weather():
     )
     temperature_element = root.find(xpath)
     temperature = temperature_element.text
-    print(' - Read temperature: {}'.format(temperature))
+    logger.debug(' - Read temperature: %s', temperature)
 
     # Gas readings trigger these readings, so the 'read at' timestamp should be somewhat in sync.
     # Therefor we align temperature readings with them, having them grouped by hour that is..

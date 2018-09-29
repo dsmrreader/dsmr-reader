@@ -7,6 +7,7 @@ from dsmr_backup.models.settings import BackupSettings, DropboxSettings
 from dsmr_notification.models.settings import NotificationSetting
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
+from dsmr_pvoutput.models.settings import PVOutputAPISettings
 from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_api.models import APISettings
@@ -42,6 +43,7 @@ class Command(BaseCommand):
         MQTTBrokerSettings.objects.update(
             port=8883, secure=MQTTBrokerSettings.SECURE_CERT_NONE, debug=True, username='user', password='password'
         )
+        PVOutputAPISettings.objects.update(auth_token=None, system_identifier=None)
         queue.Message.objects.all().delete()
         Notification.objects.update(read=True)
         Notification.objects.create(message='Development reset completed.')

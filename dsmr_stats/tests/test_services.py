@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_stats.models.statistics import DayStatistics, HourStatistics
+from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_backend.services
 import dsmr_stats.services
@@ -404,6 +404,70 @@ class TestServices(InterceptStdoutMixin, TestCase):
         # Now try again without data.
         DayStatistics.objects.all().delete()
         percentages = dsmr_stats.services.electricity_tariff_percentage(start_date=target_date.date())
+
+    @mock.patch('dsmr_stats.services.update_electricity_statistics')
+    def test_dsmr_update_electricity_statistics_signal(self, service_mock):
+        """ Test reading creation signal connects service. """
+        self.assertFalse(service_mock.called)
+        reading = DsmrReading.objects.create(
+            timestamp=timezone.now(),
+            electricity_delivered_1=0,
+            electricity_returned_1=0,
+            electricity_delivered_2=0,
+            electricity_returned_2=0,
+            electricity_currently_delivered=0,
+            electricity_currently_returned=0,
+        )
+        service_mock.assert_called_once_with(reading=reading)
+
+    @mock.patch('django.utils.timezone.now')
+    def test_update_electricity_statistics(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=0))
+        stats = ElectricityStatistics.get_solo()
+        self.assertIsNone(stats.highest_usage_l1_value)
+        self.assertIsNone(stats.highest_usage_l2_value)
+        self.assertIsNone(stats.highest_usage_l3_value)
+        self.assertIsNone(stats.highest_return_l1_value)
+        self.assertIsNone(stats.highest_return_l2_value)
+        self.assertIsNone(stats.highest_return_l3_value)
+
+        # This has to differ, to make sure the right timestamp is used.
+        reading_timestamp = timezone.now()
+        reading = DsmrReading.objects.create(
+            timestamp=reading_timestamp,
+            electricity_delivered_1=0,
+            electricity_returned_1=0,
+            electricity_delivered_2=0,
+            electricity_returned_2=0,
+            electricity_currently_delivered=0.6,
+            electricity_currently_returned=1.6,
+            phase_currently_delivered_l1=0.1,
+            phase_currently_delivered_l2=0.2,
+            phase_currently_delivered_l3=0.3,
+            phase_currently_returned_l1=1.1,
+            phase_currently_returned_l2=1.2,
+            phase_currently_returned_l3=1.3,
+        )
+
+        # Alter time, processing of reading is later.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=12))
+        self.assertNotEqual(reading_timestamp, timezone.now())
+        dsmr_stats.services.update_electricity_statistics(reading=reading)
+
+        # Should be updated now.
+        stats = ElectricityStatistics.get_solo()
+        self.assertEqual(stats.highest_usage_l1_value, Decimal('0.100'))
+        self.assertEqual(stats.highest_usage_l2_value, Decimal('0.200'))
+        self.assertEqual(stats.highest_usage_l3_value, Decimal('0.300'))
+        self.assertEqual(stats.highest_return_l1_value, Decimal('1.100'))
+        self.assertEqual(stats.highest_return_l2_value, Decimal('1.200'))
+        self.assertEqual(stats.highest_return_l3_value, Decimal('1.300'))
+        self.assertEqual(stats.highest_usage_l1_timestamp, reading_timestamp)
+        self.assertEqual(stats.highest_usage_l2_timestamp, reading_timestamp)
+        self.assertEqual(stats.highest_usage_l3_timestamp, reading_timestamp)
+        self.assertEqual(stats.highest_return_l1_timestamp, reading_timestamp)
+        self.assertEqual(stats.highest_return_l2_timestamp, reading_timestamp)
+        self.assertEqual(stats.highest_return_l3_timestamp, reading_timestamp)
 
 
 class TestServicesWithoutGas(TestServices):

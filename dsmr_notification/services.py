@@ -1,3 +1,5 @@
+import logging
+
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
@@ -9,6 +11,9 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_frontend.models.message import Notification
 import dsmr_consumption.services
 import dsmr_backend.services
+
+
+logger = logging.getLogger('commands')
 
 
 def notify_pre_check():
@@ -92,7 +97,7 @@ def send_notification(message, title):
 
     # Invalid request, do not retry.
     if str(response.status_code).startswith('4'):
-        print(' - Notification API returned client error, wiping settings...')
+        logger.error(' - Notification API returned client error, wiping settings...')
         NotificationSetting.objects.update(
             notification_service=None,
             pushover_api_key=None,
@@ -107,7 +112,7 @@ def send_notification(message, title):
 
     # Server error, delay a bit.
     elif str(response.status_code).startswith('5'):
-        print(' - Notification API returned server error, retrying later...')
+        logger.warning(' - Notification API returned server error, retrying later...')
         NotificationSetting.objects.update(
             next_notification=timezone.now() + timezone.timedelta(minutes=5)
         )
@@ -150,7 +155,7 @@ def notify():
         return  # Try again in a next run
 
     # For backend logging in Supervisor.
-    print(' - Creating new notification containing daily usage.')
+    logger.debug(' - Creating new notification containing daily usage.')
 
     message = create_consumption_message(midnight, stats)
     send_notification(message, str(_('Daily usage notification')))
@@ -182,9 +187,9 @@ def check_status():
         )
 
     # Alert!
-    print(' - Sending notification about datalogger lagging behind...')
+    logger.debug(' - Sending notification about datalogger lagging behind...')
     send_notification(
-        str(_('It has been over an hour since the last reading received. Please check your datalogger.')),
+        str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.')),
         str(_('Datalogger check'))
     )
 

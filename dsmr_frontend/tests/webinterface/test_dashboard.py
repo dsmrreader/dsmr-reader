@@ -15,7 +15,6 @@ from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.reading import DsmrReading
-import dsmr_consumption.services
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.reading import TemperatureReading
 
@@ -25,9 +24,11 @@ class TestViews(TestCase):
     fixtures = [
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
+        'dsmr_frontend/test_gas_consumption.json',
     ]
     namespace = 'frontend'
     support_data = True
@@ -36,7 +37,6 @@ class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
-        dsmr_consumption.services.compact_all()
 
     @mock.patch('django.utils.timezone.now')
     def test_dashboard(self, now_mock):
@@ -364,9 +364,10 @@ class TestViewsWithoutGas(TestViews):
     fixtures = [
         'dsmr_frontend/test_dsmrreading_without_gas.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
     ]
     support_gas = False
 

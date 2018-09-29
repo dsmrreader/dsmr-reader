@@ -45,6 +45,10 @@ msgstr ""
 "gegevens. Let op: Het inschakelen van deze feature **gooit niet alle metingen "
 "weg**, want **van elk uur wordt de eerste en laatste meting bewaard**."
 
+#: ../../retention.rst:11
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
 #: ../../retention.rst:14
 msgid "Notes / warnings"
 msgstr "Opmerkingen / waarschuwingen"

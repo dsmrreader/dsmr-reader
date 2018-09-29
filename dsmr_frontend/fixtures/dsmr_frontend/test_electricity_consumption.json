@@ -1,0 +1,40 @@
+[
+{
+    "model": "dsmr_consumption.electricityconsumption",
+    "pk": 1,
+    "fields": {
+        "read_at": "2015-11-10T19:41:00Z",
+        "delivered_1": "529.750",
+        "returned_1": "0.567",
+        "delivered_2": "527.500",
+        "returned_2": "123.567",
+        "currently_delivered": "0.498",
+        "currently_returned": "0.123",
+        "phase_currently_delivered_l1": null,
+        "phase_currently_delivered_l2": null,
+        "phase_currently_delivered_l3": null,
+        "phase_currently_returned_l1": null,
+        "phase_currently_returned_l2": null,
+        "phase_currently_returned_l3": null
+    }
+},
+{
+    "model": "dsmr_consumption.electricityconsumption",
+    "pk": 2,
+    "fields": {
+        "read_at": "2015-11-10T19:42:00Z",
+        "delivered_1": "530.750",
+        "returned_1": "0.678",
+        "delivered_2": "528.500",
+        "returned_2": "123.678",
+        "currently_delivered": "1.123",
+        "currently_returned": "0.123",
+        "phase_currently_delivered_l1": "0.123",
+        "phase_currently_delivered_l2": "0.456",
+        "phase_currently_delivered_l3": "0.789",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.333",
+        "phase_currently_returned_l3": "0.555"
+    }
+}
+]

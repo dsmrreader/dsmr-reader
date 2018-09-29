@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from solo.models import SingletonModel
 
 
 class DayStatistics(models.Model):
@@ -103,3 +104,67 @@ class HourStatistics(models.Model):
         return '{}: {}'.format(
             self.__class__.__name__, self.hour_start
         )
+
+
+class ElectricityStatistics(SingletonModel):
+    """ Keeps track of the highest electricity statistics per phase. """
+    highest_usage_l1_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest usage on L1+')
+    )
+    highest_usage_l2_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest usage on L2+')
+    )
+    highest_usage_l3_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest usage on L3+')
+    )
+    highest_return_l1_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest return on L1-')
+    )
+    highest_return_l2_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest return on L2-')
+    )
+    highest_return_l3_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest return on L3-')
+    )
+
+    highest_usage_l1_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest usage on L1+ (in kWh)')
+    )
+    highest_usage_l2_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest usage on L2+ (in kWh)')
+    )
+    highest_usage_l3_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest usage on L3+ (in kWh)')
+    )
+    highest_return_l1_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest return on L1- (in kWh)')
+    )
+    highest_return_l2_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest return on L2- (in kWh)')
+    )
+    highest_return_l3_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest return on L3- (in kWh)')
+    )
+
+    def export(self):
+        """ Converts the data in to ready to use format. """
+        data = self.__dict__
+
+        for key in data.keys():
+            if key.endswith('_value'):
+                try:
+                    data[key] = int(data[key] * 1000) or 0
+                except TypeError:
+                    data[key] = 0
+
+        return data
+
+    class Meta:
+        default_permissions = tuple()
+        verbose_name = _('Electricity statistics')

@@ -1,5 +1,3 @@
-*Let op: Het DSMR-reader project is gefocused op het uitlezen van de slimme meter en om die data met jou op zoveel mogelijk manieren te delen. Het inlezen van andere (externe) data in DSMR-reader valt buiten de scope van dit project.*
-
 ### Jouw omgeving
 *(Indien van toepassing)*
 * DSMR-reader versie *(rechtsbovenin applicatie zichtbaar)*: `v1.X.Y`

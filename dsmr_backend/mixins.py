@@ -1,3 +1,4 @@
+import logging
 import signal
 import time
 import os
@@ -7,6 +8,9 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.contrib import admin
 from django.db import connection
+
+
+logger = logging.getLogger('commands')
 
 
 class StopInfiniteRun(StopIteration):
@@ -41,7 +45,7 @@ class InfiniteManagementCommandMixin(object):
             self.run_loop(**options)
 
         self.shutdown()
-        self.stdout.write('Exited')
+        logger.info('Exited')
 
     def run_loop(self, **options):
         """ Runs in an infinite loop, until we're signaled to stop. """
@@ -51,15 +55,14 @@ class InfiniteManagementCommandMixin(object):
 
         # We simply keep executing the management command until we are told otherwise.
         self._keep_alive = True
-        self.stdout.write('Starting infinite command loop...')  # Just to make sure it gets printed.
+        logger.debug('Starting infinite command loop...')  # Just to make sure it gets printed.
 
         while self._keep_alive:
             self.run_once(**options)
 
             # Do not hammer.
             if self.sleep_time is not None:
-                self.stdout.write('Sleeping {} sec(s)'.format(self.sleep_time))
-                self.stdout.write('')
+                logger.debug('Sleeping %s sec(s)', self.sleep_time)
                 time.sleep(self.sleep_time)
 
             # Check database connection after each run. This will force Django to reconnect as well, when having issues.
@@ -75,11 +78,11 @@ class InfiniteManagementCommandMixin(object):
             raise
         except StopInfiniteRun:
             # Explicit exit.
-            self.stdout.write(' [i] Detected StopInfiniteRun exception')
+            logger.warning(' [i] Detected StopInfiniteRun exception')
             self._stop()
         except Exception as error:
             # Unforeseen errors.
-            self.stdout.write(' [!] Exception raised in run(): {}'.format(error))
+            logger.warning(' [!] Exception raised in run(): %s', error)
 
     def initialize(self):
         """ Called once. Override and handle any initialization required. """
@@ -99,13 +102,13 @@ class InfiniteManagementCommandMixin(object):
 
     def _signal_handler(self, signum, frame):
         # If we get called, then we must gracefully exit.
-        self.stdout.write('Detected signal #{}'.format(signum))
+        logger.warning('Detected signal #%s', signum)
         self._stop()
 
     def _stop(self):
         """ Sets the flag for ending the command on next flag check. """
         self._keep_alive = False
-        self.stdout.write('Exiting on next run...')
+        logger.warning('Exiting on next run...')
 
     def _write_pid_file(self):
         self._pid_file = os.path.join(
@@ -127,6 +130,12 @@ class ReadOnlyAdminModel(admin.ModelAdmin):
     def __init__(self, *args, **kwargs):
         super(ReadOnlyAdminModel, self).__init__(*args, **kwargs)
         self.readonly_fields = [x.name for x in self.model._meta.get_fields()]
+
+    def has_view_permission(self, request, obj=None):
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
     def has_add_permission(self, request, obj=None):
         return False

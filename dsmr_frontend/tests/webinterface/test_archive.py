@@ -18,9 +18,11 @@ class TestViews(TestCase):
     fixtures = [
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
+        'dsmr_frontend/test_gas_consumption.json',
     ]
     namespace = 'frontend'
     support_data = True
@@ -108,9 +110,10 @@ class TestViewsWithoutGas(TestViews):
     fixtures = [
         'dsmr_frontend/test_dsmrreading_without_gas.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
     ]
     support_gas = False
 

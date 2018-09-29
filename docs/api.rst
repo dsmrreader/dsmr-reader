@@ -201,7 +201,7 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
             except SerialException as error:
                 # Something else and unexpected failed.
                 print('Serial connection failed:', error)
-                raise StopIteration()  # Break out of yield.
+                return  # Break out of yield.
 
             try:
                 # Make sure weird characters are converted properly.

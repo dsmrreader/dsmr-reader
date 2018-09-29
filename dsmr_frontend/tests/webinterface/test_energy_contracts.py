@@ -8,13 +8,12 @@ from django.urls import reverse
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics
-import dsmr_consumption.services
 
 
 class TestViews(TestCase):
     """ Test whether views render at all. """
     fixtures = [
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
     ]
     namespace = 'frontend'
@@ -23,7 +22,6 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        dsmr_consumption.services.compact_all()
 
     @mock.patch('django.utils.timezone.now')
     def test_energy_contracts(self, now_mock):
@@ -85,7 +83,7 @@ class TestViewsWithoutPrices(TestViews):
 class TestViewsWithoutGas(TestViews):
     """ Same tests as above, but without any GAS related data.  """
     fixtures = [
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
     ]
     support_gas = False

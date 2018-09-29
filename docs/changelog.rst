@@ -2,10 +2,6 @@ Changelog
 =========
 
 
-.. contents::
-    :depth: 2
-
-
 
 Upgrading
 ^^^^^^^^^
@@ -15,6 +11,50 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
     - `About back-ups <https://dsmr-reader.readthedocs.io/en/latest/application.html#data-preservation-backups>`_.
     - `About upgrading <https://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
+
+
+----
+
+
+v1.24.0 - 2018-09-29
+^^^^^^^^^^^^^^^^^^^^
+
+.. warning::
+
+    The default logging level of the backend has been lowered to reduce I/O.
+    See ``Logging`` on `this documentation page <https://dsmr-reader.readthedocs.io/nl/latest/troubleshooting.html>`_ for more information.
+
+
+**Tickets resolved in this release:**
+
+- [`#494 <https://github.com/dennissiemensma/dsmr-reader/issues/494>`_] Extend Usage statistics to include return
+- [`#467 <https://github.com/dennissiemensma/dsmr-reader/issues/467>`_] PVO uploadtijden in sync houden
+- [`#513 <https://github.com/dennissiemensma/dsmr-reader/issues/513>`_] Data being ignored in telegram grouping
+- [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
+- [`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add support for Python 3.7
+- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring
+
+
+----
+
+
+v1.23.1 - 2018-08-26
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#515 <https://github.com/dennissiemensma/dsmr-reader/issues/515>`_] Missing mqtt values
+
+
+----
+
+
+v1.23.1 - 2018-08-26
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#515 <https://github.com/dennissiemensma/dsmr-reader/issues/515>`_] Missing mqtt values
 
 
 
@@ -48,6 +88,8 @@ v1.23.0 - 2018-08-02
 - [`#499 <https://github.com/dennissiemensma/dsmr-reader/issues/499>`_] Upgrade Font Awesome to v5
 
 
+----
+
 
 v1.22.1 - 2018-07-22
 ^^^^^^^^^^^^^^^^^^^^
@@ -56,6 +98,8 @@ v1.22.1 - 2018-07-22
 
 - [`#506 <https://github.com/dennissiemensma/dsmr-reader/issues/506>`_] Fasen-grafiek hangt op 'loading'
 
+
+----
 
 
 v1.22.0 - 2018-07-22
@@ -70,6 +114,8 @@ v1.22.0 - 2018-07-22
 - [`#493 <https://github.com/dennissiemensma/dsmr-reader/issues/493>`_] Requirements update (July 2018)
 
 
+----
+
 
 v1.21.1 - 2018-07-16
 ^^^^^^^^^^^^^^^^^^^^
@@ -79,6 +125,8 @@ v1.21.1 - 2018-07-16
 - [`#492 <https://github.com/dennissiemensma/dsmr-reader/issues/492>`_] Fixed some issues with eCharts (improvements)
 - [`#497 <https://github.com/dennissiemensma/dsmr-reader/issues/497>`_] Kleinigheidje: missende vertalingen
 
+
+----
 
 
 v1.21.0 - 2018-07-11
@@ -90,6 +138,8 @@ v1.21.0 - 2018-07-11
 - [`#434 <https://github.com/dennissiemensma/dsmr-reader/issues/434>`_] Omit gas readings all together
 - [`#264 <https://github.com/dennissiemensma/dsmr-reader/issues/264>`_] Check Dropbox API token and display error messages in GUI
 
+
+----
 
 
 v1.20.0 - 2018-07-04
@@ -104,6 +154,8 @@ v1.20.0 - 2018-07-04
 - [`#487 <https://github.com/dennissiemensma/dsmr-reader/issues/487>`_] Requirements update (July 2018)
 
 
+----
+
 
 v1.19.0 - 2018-06-12
 ^^^^^^^^^^^^^^^^^^^^
@@ -116,6 +168,8 @@ v1.19.0 - 2018-06-12
 - [`#462 <https://github.com/dennissiemensma/dsmr-reader/issues/462>`_] Get live usage trough API
 
 
+----
+
 
 v1.18.0 - 2018-06-05
 ^^^^^^^^^^^^^^^^^^^^
@@ -127,6 +181,8 @@ v1.18.0 - 2018-06-05
 - [`#480 <https://github.com/dennissiemensma/dsmr-reader/issues/480>`_] Requirements update (June 2018) 
 
 
+----
+
 
 v1.17.0 - 2018-05-25
 ^^^^^^^^^^^^^^^^^^^^
@@ -136,6 +192,8 @@ v1.17.0 - 2018-05-25
 - [`#475 <https://github.com/dennissiemensma/dsmr-reader/issues/475>`_] Notify my android service ended
 - [`#471 <https://github.com/dennissiemensma/dsmr-reader/issues/471>`_] Requirements update (May 2018)
 
+
+----
 
 
 v1.16.0 - 2018-04-04
@@ -149,6 +207,8 @@ v1.16.0 - 2018-04-04
 - Fixed some missing names on the contribution page in the DOCS
 
 
+----
+
 
 v1.15.0 - 2018-03-21
 ^^^^^^^^^^^^^^^^^^^^
@@ -159,6 +219,8 @@ v1.15.0 - 2018-03-21
 - [`#208 <https://github.com/dennissiemensma/dsmr-reader/issues/208>`_] Notificatie bij uitblijven gegevens uit slimme meter
 - [`#342 <https://github.com/dennissiemensma/dsmr-reader/issues/342>`_] Backup to dropbox never finish (free plan no more space)
 
+
+----
 
 
 v1.14.0 - 2018-03-11
@@ -175,6 +237,8 @@ v1.14.0 - 2018-03-11
 - [`#447 <https://github.com/dennissiemensma/dsmr-reader/issues/447>`_] Kosten via MQTT
 
 
+----
+
 
 v1.13.2 - 2018-02-02
 ^^^^^^^^^^^^^^^^^^^^
@@ -184,6 +248,8 @@ v1.13.2 - 2018-02-02
 - [`#431 <https://github.com/dennissiemensma/dsmr-reader/issues/431>`_] Django security releases issued: 2.0.2
 
 
+----
+
 
 v1.13.1 - 2018-01-28
 ^^^^^^^^^^^^^^^^^^^^
@@ -192,6 +258,8 @@ v1.13.1 - 2018-01-28
 
 - [`#428 <https://github.com/dennissiemensma/dsmr-reader/issues/428>`_] Django 2.0: Null characters are not allowed in telegram (esp8266)
 
+
+----
 
 
 v1.13.0 - 2018-01-23
@@ -205,6 +273,8 @@ v1.13.0 - 2018-01-23
 - [`#425 <https://github.com/dennissiemensma/dsmr-reader/issues/425>`_] Requests for donating a beer or coffee
 - [`#427 <https://github.com/dennissiemensma/dsmr-reader/issues/427>`_] Reconnect to postgresql
 - [`#394 <https://github.com/dennissiemensma/dsmr-reader/issues/394>`_] Django 2.0 
+
+----
 
 
 v1.12.0 - 2018-01-14
@@ -223,6 +293,8 @@ v1.12.0 - 2018-01-14
 - [`#419 <https://github.com/dennissiemensma/dsmr-reader/issues/419>`_] Requirements update (January 2018)
 
 
+----
+
 
 v1.11.0 - 2017-11-24
 ^^^^^^^^^^^^^^^^^^^^
@@ -238,6 +310,8 @@ v1.11.0 - 2017-11-24
 - [`#378 <https://github.com/dennissiemensma/dsmr-reader/issues/378>`_] Processing of telegrams stalled
 
 
+----
+
 
 v1.10.0 - 2017-10-19
 ^^^^^^^^^^^^^^^^^^^^
@@ -248,6 +322,9 @@ v1.10.0 - 2017-10-19
    If you wish to continue using this feature, add ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``settings.py`` and reload the application.
 
 
+----
+
+
 **Tickets resolved in this release:**
 
 - [`#363 <https://github.com/dennissiemensma/dsmr-reader/issues/363>`_] Show electricity_merged in the Total row for current month - by helmo
@@ -256,6 +333,8 @@ v1.10.0 - 2017-10-19
 - [`#365 <https://github.com/dennissiemensma/dsmr-reader/issues/365>`_] Turn telegram logging off by default
 - [`#366 <https://github.com/dennissiemensma/dsmr-reader/issues/366>`_] Restructure docs
 
+
+----
 
 
 v1.9.0 - 2017-10-08
@@ -289,6 +368,8 @@ v1.9.0 - 2017-10-08
 - [`#300 <https://github.com/dennissiemensma/dsmr-reader/issues/300>`_] Upgrade to Django 1.11 LTS
  
 
+----
+
 
 v1.8.2 - 2017-08-12
 ^^^^^^^^^^^^^^^^^^^
@@ -298,6 +379,8 @@ v1.8.2 - 2017-08-12
 - [`#346 <https://github.com/dennissiemensma/dsmr-reader/issues/346>`_] Defer statistics page XHR 
 
 
+----
+
 
 v1.8.1 - 2017-07-04
 ^^^^^^^^^^^^^^^^^^^
@@ -306,6 +389,8 @@ v1.8.1 - 2017-07-04
 
 - [`#339 <https://github.com/dennissiemensma/dsmr-reader/issues/339>`_] Upgrade Dropbox-client to v8.x 
 
+
+----
 
 
 v1.8.0 - 2017-06-14
@@ -317,6 +402,8 @@ v1.8.0 - 2017-06-14
 - [`#331 <https://github.com/dennissiemensma/dsmr-reader/issues/331>`_] Requirements update (June 2016)
 - [`#299 <https://github.com/dennissiemensma/dsmr-reader/issues/299>`_] Support Python 3.6
 
+
+----
 
 
 v1.7.0 - 2017-05-04
@@ -339,6 +426,8 @@ v1.7.0 - 2017-05-04
 - [`#230 <https://github.com/dennissiemensma/dsmr-reader/issues/230>`_] Support for exporting data via API
 
 
+----
+
 
 v1.6.2 - 2017-04-23
 ^^^^^^^^^^^^^^^^^^^
@@ -349,6 +438,8 @@ v1.6.2 - 2017-04-23
 - [`#303 <https://github.com/dennissiemensma/dsmr-reader/issues/303>`_] Archive page's default day sorting
 
 
+----
+
 
 v1.6.1 - 2017-04-06
 ^^^^^^^^^^^^^^^^^^^
@@ -357,6 +448,8 @@ v1.6.1 - 2017-04-06
 
 - [`#298 <https://github.com/dennissiemensma/dsmr-reader/issues/298>`_] Update requirements (Django 1.10.7)
 
+
+----
 
 
 v1.6.0 - 2017-03-18
@@ -389,6 +482,8 @@ v1.6.0 - 2017-03-18
 - [`#274 <https://github.com/dennissiemensma/dsmr-reader/issues/274>`_] Requirements update (March 2017).
 
 
+----
+
 
 v1.5.5 - 2017-01-19
 ^^^^^^^^^^^^^^^^^^^
@@ -397,6 +492,8 @@ v1.5.5 - 2017-01-19
 
 - Remove readonly restriction for editing statistics in admin interface (`#242 <https://github.com/dennissiemensma/dsmr-reader/issues/242>`_).
 
+
+----
 
 
 v1.5.4 - 2017-01-12
@@ -408,6 +505,8 @@ v1.5.4 - 2017-01-12
 - Fixed another bug in MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
 
 
+----
+
 
 v1.5.5 - 2017-01-19
 ^^^^^^^^^^^^^^^^^^^
@@ -416,6 +515,8 @@ v1.5.5 - 2017-01-19
 
 - Remove readonly restriction for editing statistics in admin interface (`#242 <https://github.com/dennissiemensma/dsmr-reader/issues/242>`_).
 
+
+----
 
 
 v1.5.4 - 2017-01-12
@@ -426,6 +527,8 @@ v1.5.4 - 2017-01-12
 - Improve datalogger for DSMR v5.0 (`#212 <https://github.com/dennissiemensma/dsmr-reader/issues/212>`_).
 - Fixed another bug in MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
 
+
+----
 
 
 v1.5.3 - 2017-01-11
@@ -435,6 +538,8 @@ v1.5.3 - 2017-01-11
 
 - Improve MinderGas API client implementation (`#228 <https://github.com/dennissiemensma/dsmr-reader/issues/228>`_).
 
+
+----
 
 
 v1.5.2 - 2017-01-09
@@ -449,6 +554,8 @@ v1.5.2 - 2017-01-09
 - Log errors occured to file (`#181 <https://github.com/dennissiemensma/dsmr-reader/issues/181>`_).
 
 
+----
+
 
 v1.5.1 - 2017-01-04
 ^^^^^^^^^^^^^^^^^^^
@@ -462,6 +569,8 @@ v1.5.1 - 2017-01-04
 
 - Fix for issues `#200 <https://github.com/dennissiemensma/dsmr-reader/issues/200>`_ & `#217 <https://github.com/dennissiemensma/dsmr-reader/issues/217>`_, which is caused by omitting the switch to the VirtualEnv. This was not documented well enough in early versions of this project, causing failed upgrades. 
 
+
+----
 
 
 v1.5.0 - 2017-01-01
@@ -498,6 +607,8 @@ v1.5.0 - 2017-01-01
 - Improved backend process logging (`#184 <https://github.com/dennissiemensma/dsmr-reader/issues/184>`_).
 
 
+----
+
 
 v1.4.1 - 2016-12-12
 ^^^^^^^^^^^^^^^^^^^
@@ -507,6 +618,8 @@ v1.4.1 - 2016-12-12
 - Consumption chart hangs due to unique_key violation (`#174 <https://github.com/dennissiemensma/dsmr-reader/issues/174>`_).
 - NoReverseMatch at / Reverse for 'docs' (`#175 <https://github.com/dennissiemensma/dsmr-reader/issues/175>`_).
 
+
+----
 
 
 v1.4.0 - 2016-11-28
@@ -527,6 +640,8 @@ v1.4.0 - 2016-11-28
 - Capability based push notifications (`#165 <https://github.com/dennissiemensma/dsmr-reader/issues/165>`_).
 
 
+----
+
 
 v1.3.2 - 2016-11-08
 ^^^^^^^^^^^^^^^^^^^
@@ -534,6 +649,8 @@ v1.3.2 - 2016-11-08
 
 - Requirements update (november 2016) (`#150 <https://github.com/dennissiemensma/dsmr-reader/issues/150>`_).
 
+
+----
 
 
 v1.3.1 - 2016-08-16
@@ -546,6 +663,8 @@ v1.3.1 - 2016-08-16
 - Query performance improvements (`#149 <https://github.com/dennissiemensma/dsmr-reader/issues/149>`_).
 
 
+----
+
 
 v1.3.0 - 2016-07-15
 ^^^^^^^^^^^^^^^^^^^
@@ -557,6 +676,8 @@ v1.3.0 - 2016-07-15
 - Requirement upgrade (`#143 <https://github.com/dennissiemensma/dsmr-reader/issues/143>`_).
 - Installation wizard for first time use (`#139 <https://github.com/dennissiemensma/dsmr-reader/issues/139>`_).
 
+
+----
 
 
 v1.2.0 - 2016-05-18
@@ -583,6 +704,8 @@ v1.1.2 - 2016-05-01
 - Trends page giving errors (when lacking data) (`#125 <https://github.com/dennissiemensma/dsmr-reader/issues/125>`_).
 
 
+----
+
 
 v1.1.1 - 2016-04-27
 ^^^^^^^^^^^^^^^^^^^
@@ -590,6 +713,8 @@ v1.1.1 - 2016-04-27
 
 - Improve readme (`#124 <https://github.com/dennissiemensma/dsmr-reader/issues/124>`_).
 
+
+----
 
 
 v1.1.0 - 2016-04-23
@@ -605,6 +730,8 @@ v1.1.0 - 2016-04-23
 - Support for Iskra meter (DSMR 2.x) (`#120 <https://github.com/dennissiemensma/dsmr-reader/issues/120>`_).
 
 
+----
+
 
 v1.0.1 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
@@ -613,11 +740,15 @@ v1.0.1 - 2016-04-07
 - Update licence to OSI compatible one (`#119 <https://github.com/dennissiemensma/dsmr-reader/issues/119>`_).
 
 
+----
+
 
 v1.0.0 - 2016-04-07
 ^^^^^^^^^^^^^^^^^^^
 - First official stable release.
 
+
+----
 
 
 [β] v0.1 (2015-10-29) to 0.16 (2016-04-06)

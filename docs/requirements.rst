@@ -33,11 +33,12 @@ OS / hardware
 Python
 ^^^^^^
 
-**Python 3.4+**
+**Python 3.5+**
 
 .. warning::
 
-    Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
+    - Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
+    - Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader v2.0`` (due to Django).
 
 
 Database

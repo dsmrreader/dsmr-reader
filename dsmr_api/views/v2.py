@@ -19,6 +19,13 @@ import dsmr_backend.services
 
 
 class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    list:
+    Returns a list of DSMR-readings.
+
+    create:
+    Creates a new DSMR-reading.
+    """
     FIELD = 'timestamp'
     queryset = DsmrReading.objects.all()
     serializer_class = DsmrReadingSerializer
@@ -28,7 +35,7 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
 
 
 class TodayConsumptionView(APIView):
-    """ Returns the consumption (so far) of the current day. """
+    """ Returns the consumption of the current day (so far). """
     IGNORE_FIELDS = (
         'electricity1_start', 'electricity2_start', 'electricity1_end', 'electricity2_end', 'notes', 'gas_start',
         'gas_end', 'electricity1_returned_start', 'electricity2_returned_start', 'electricity1_returned_end',
@@ -59,11 +66,13 @@ class TodayConsumptionView(APIView):
 
 
 class ElectricityLiveView(APIView):
+    """ Returns the current electricity usage. """
     def get(self, request):
         return Response(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=False))
 
 
 class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Lists electricity consumption. """
     FIELD = 'read_at'
     queryset = ElectricityConsumption.objects.all()
     serializer_class = ElectricityConsumptionSerializer
@@ -73,6 +82,7 @@ class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Lists gas consumption. """
     FIELD = 'read_at'
     queryset = GasConsumption.objects.all()
     serializer_class = GasConsumptionSerializer
@@ -82,6 +92,7 @@ class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class DayStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Lists day statistics. """
     FIELD = 'day'
     queryset = DayStatistics.objects.all()
     serializer_class = DayStatisticsSerializer
@@ -91,6 +102,7 @@ class DayStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Lists hour statistics. """
     FIELD = 'hour_start'
     queryset = HourStatistics.objects.all()
     serializer_class = HourStatisticsSerializer
@@ -100,6 +112,7 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class VersionView(APIView):
+    """ Returns the current version of DSMR-reader. """
     def get(self, request):
         return Response({
             'version': '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3]),
@@ -107,5 +120,6 @@ class VersionView(APIView):
 
 
 class StatusView(APIView):
+    """ Returns an overview of all services and their status. Similar to the Status page in the webinterface. """
     def get(self, request):
         return Response(dsmr_backend.services.status_info())
