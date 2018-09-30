@@ -79,11 +79,11 @@ class InfiniteManagementCommandMixin(object):
             raise
         except StopInfiniteRun:
             # Explicit exit.
-            logger.warning(' [i] Detected StopInfiniteRun exception')
+            logger.info(' [i] Detected StopInfiniteRun exception')
             self._stop()
         except Exception as error:
             # Unforeseen errors.
-            logger.warning(' [!] Exception raised in run(): %s', error)
+            logger.error(' [!] Exception raised in run(): %s', error)
 
     def initialize(self):
         """ Called once. Override and handle any initialization required. """
@@ -103,13 +103,13 @@ class InfiniteManagementCommandMixin(object):
 
     def _signal_handler(self, signum, frame):
         # If we get called, then we must gracefully exit.
-        logger.warning('Detected signal #%s', signum)
+        logger.info('Detected signal #%s', signum)
         self._stop()
 
     def _stop(self):
         """ Sets the flag for ending the command on next flag check. """
         self._keep_alive = False
-        logger.warning('Exiting on next run...')
+        logger.info('Exiting on next run...')
 
     def _write_pid_file(self):
         self._pid_file = os.path.join(
