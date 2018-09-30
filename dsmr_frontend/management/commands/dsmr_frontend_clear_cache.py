@@ -1,7 +1,12 @@
+import logging
+
 from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext as _
 from django.core.cache import caches
 from django.conf import settings
+
+
+logger = logging.getLogger('commands')
 
 
 class Command(BaseCommand):
@@ -9,7 +14,7 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         for cache_key in settings.CACHES.keys():
-            self.stdout.write('Clearing cache: {}'.format(cache_key))
+            logger.info('Clearing cache: %s', cache_key)
             caches[cache_key].clear()
 
-        self.stdout.write('Done')
+        logger.info('Done')

@@ -21,6 +21,7 @@ v1.25.0 - 2018-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring
 - [`#xxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxxxxxx>`_] yyyyyyyyyyyyyyyy
 
 

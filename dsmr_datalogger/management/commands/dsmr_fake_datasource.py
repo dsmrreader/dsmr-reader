@@ -1,4 +1,5 @@
 from decimal import Decimal, ROUND_UP
+import logging
 import random
 import time
 
@@ -10,6 +11,9 @@ from django.conf import settings
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
 import dsmr_datalogger.services
+
+
+logger = logging.getLogger('commands')
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
@@ -61,7 +65,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             options['with_electricity_returned'],
             options['hour_offset']
         )
-        print(telegram)  # For convenience
+        logger.info("\n%s", telegram)  # For convenience
 
         dsmr_datalogger.services.telegram_to_reading(data=telegram)
 
@@ -70,12 +74,12 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         now = timezone.now() + timezone.timedelta(hours=int(hour_offset))
         now = timezone.localtime(now)  # Must be local.
 
-        self.stdout.write('-' * 32)
-        self.stdout.write(str(now))
-        self.stdout.write('with gas: {}'.format(with_gas))
-        self.stdout.write('with electricity returned: {}'.format(with_electricity_returned))
-        self.stdout.write('-' * 32)
-        self.stdout.write('')
+        logger.debug('-' * 32)
+        logger.debug(str(now))
+        logger.debug('with gas: %s', with_gas)
+        logger.debug('with electricity returned: %s', with_electricity_returned)
+        logger.debug('-' * 32)
+        logger.debug('')
 
         # 1420070400: 01 Jan 2015 00:00:00 GMT
         current_unix_time = time.mktime(now.timetuple())
