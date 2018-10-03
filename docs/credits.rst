@@ -60,11 +60,12 @@ Listed in any order, sorted by name.
 - `TopdRob <https://github.com/TopdRob>`_
 - `tpjanssen <https://github.com/tpjanssen>`_
 - `trbs <https://github.com/trbs>`_
+- `trizz <https://github.com/trizz>`_
 - `ualex73 <https://github.com/ualex73>`_
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
-
+ 
  
 Software used
 -------------

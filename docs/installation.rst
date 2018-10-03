@@ -15,14 +15,23 @@ Docker (alternative)
 --------------------
 .. seealso::
 
-    There is also a Docker version available for DSMR-reader. It's hosted and maintained by a third party. More information can be found here:
+    There are also a Docker versions available for DSMR-reader. These are hosted and maintained by third parties. More information can be found here:
 
-    Github: https://github.com/ualex73/dsmr-reader-docker
-    Docker hub: https://hub.docker.com/r/ualex73/dsmr-reader-docker/
-
-    Github: https://github.com/xirixiz/dsmr-reader-docker
-    Docker hub: https://hub.docker.com/r/xirixiz/dsmr-reader-docker/
+    DSMR-reader in Docker by `ualex73`:
     
+    * **Github**: https://github.com/ualex73/dsmr-reader-docker
+    * **Docker hub**: https://hub.docker.com/r/ualex73/dsmr-reader-docker/
+
+    DSMR-reader in Docker by `xirixiz`:
+    
+    * **Github**: https://github.com/xirixiz/dsmr-reader-docker
+    * **Docker hub**: https://hub.docker.com/r/xirixiz/dsmr-reader-docker/
+    
+    Datalogger in Docker by `trizz`:
+    
+    * **Github**: https://github.com/trizz/dsmr-remote-datalogger
+    * **Docker hub**: https://hub.docker.com/r/trizz/dsmr-remote-datalogger/
+
 Not interested in Docker? Follow the instructions in the chapters below if you wish to install this project the regular way.
 
 
