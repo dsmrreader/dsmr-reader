@@ -289,6 +289,9 @@
             update_header();
             setInterval(function(){ update_header(); }, 2500);
             setInterval(function(){ update_consumption(); }, 20000)
+            
+            /* Reload entire page after 15 minutes. */
+            setInterval(function(){ location.reload(); }, 15 * 60 * 1000)
 
             initialize_consumption();
         });
