@@ -21,8 +21,11 @@ v1.25.0 - 2018-xx-xx
 
 **Tickets resolved in this release:**
 
-- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Fixed a Javascript bug in Archive and Compare pages, causing the selection to glitch
 - [`#527 <https://github.com/dennissiemensma/dsmr-reader/issues/527>`_] Docker DSMR Datalogger (by trizz)
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Convert Archive page to eCharts
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Simplified Compare page
+- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring (datalogger)
 - [`#xxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxxxxxx>`_] yyyyyyyyyyyyyyyy
 
 
@@ -43,9 +46,10 @@ v1.24.0 - 2018-09-29
 - [`#494 <https://github.com/dennissiemensma/dsmr-reader/issues/494>`_] Extend Usage statistics to include return
 - [`#467 <https://github.com/dennissiemensma/dsmr-reader/issues/467>`_] PVO uploadtijden in sync houden
 - [`#513 <https://github.com/dennissiemensma/dsmr-reader/issues/513>`_] Data being ignored in telegram grouping
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Convert archive & comparison pages to eCharts
 - [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
 - [`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add support for Python 3.7
-- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring
+- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring (backend)
 
 
 ----

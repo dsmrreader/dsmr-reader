@@ -2,7 +2,6 @@
 {% load humanize %} 
 {% load static %} 
 {% load i18n %}
-{% load hex_to_rgb %}
 
 {% block title %}{% trans "Compare" %}{% endblock %}
 {% block header %}{% trans "Compare" %} &nbsp; <i class="fas fa-balance-scale"></i>{% endblock %}
@@ -18,31 +17,33 @@
 
 {% if capabilities.any and start_date and end_date %}
     <div class="row">
-        <div class="col-md-4">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Select level of detail displayed{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <div class="row">
-	                    <div class="col-md-4 date-selector">
-	                        {% trans "Days" %} <br />
-	                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days" style="cursor: pointer;"><i class="fas fa-calendar-check"></i></span>
-	                    </div>
-	                    <div class="col-md-4 date-selector">
-	                        {% trans "Months" %} <br />
-	                        <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months" style="cursor: pointer;"><i class="fas fa-calendar-check"></i></span>
-	                    </div>
-	                    <div class="col-md-4 date-selector">
-	                        {% trans "Years" %} <br />
-	                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years" style="cursor: pointer;"><i class="fas fa-calendar-check"></i></span>
-	                    </div>
+        <div class="panel">
+            <header class="panel-heading">
+                {% blocktrans %}Select level of detail displayed{% endblocktrans %}
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="date-selector col-sm-4">
+                        {% trans "Days" %} <br />
+                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
+                    </div>
+
+                    <div class="date-selector col-sm-4">
+                        {% trans "Months" %} <br />
+                        <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
+                    </div>
+
+                    <div class="date-selector col-sm-4">
+                        {% trans "Years" %} <br />
+                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-4">
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Base selection{% endblocktrans %}
@@ -53,7 +54,7 @@
             </div>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Compare with selection{% endblocktrans %}
@@ -67,62 +68,9 @@
     
     
     <div class="row">
-        <div id="summary-loader1" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
-        <div class="col-md-12" id="summary-holder1"></div>
+        <div id="summary-loader" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+        <div class="col-md-12" id="summary-holder"></div>
     </div>   
-    
-    <div class="row">
-        <div id="summary-loader2" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
-        <div class="col-md-12" id="summary-holder2"></div>
-    </div>   
-
-    <div class="row xhr-hidden chart-holder" id="electricity-chart-holder">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Electricity usage{% endblocktrans %} {% trans "(in kWh)" %}
-                </header>
-                <div class="panel-body" style="height: 200px;">
-                    <canvas id="electricity-chart1"></canvas>
-                </div>
-                <div class="panel-body" style="height: 200px;">
-                    <canvas id="electricity-chart2"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row xhr-hidden chart-holder" id="electricity-returned-chart-holder">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Electricity returned{% endblocktrans %} {% trans "(in kWh)" %}
-                </header>
-                 <div class="panel-body" style="height: 200px;">
-                    <canvas id="electricity-returned-chart1"></canvas>
-                </div>
-                <div class="panel-body" style="height: 200px;">
-                    <canvas id="electricity-returned-chart2"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row xhr-hidden chart-holder" id="gas-chart-holder">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Gas usage{% endblocktrans %} {% trans "(in m<sup>3</sup>)" %}
-                </header>
-                <div class="panel-body" style="height: 200px;">
-                    <canvas id="gas-chart1"></canvas>
-                </div>
-                <div class="panel-body" style="height: 200px;">
-                    <canvas id="gas-chart2"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endif %}
 </section>
 {% endblock %}
@@ -133,210 +81,24 @@
 {% endblock %}
 
 {% block javascript %}
-        {{ block.super }}
-        {% get_current_language as LANGUAGE_CODE %}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.22.2.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    {{ block.super }}
+    {% get_current_language as LANGUAGE_CODE %}
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.22.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
 
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.en.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.nl.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.en.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.nl.min.js' %}"></script>
 
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/chartjs/Chart-2.4.0.min.js' %}"></script>
+    <script type="text/javascript">
+        /* Settings. */
+        var datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
+        var datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
+        var datepicker_locale_format = "{{ datepicker_locale_format }}";
+        var datepicker_language_code = "{{ LANGUAGE_CODE }}";
 
-        <script type="text/javascript">
-            var line_options = {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
-            }
-            
-            var g_chart_instances = {
-                electricity_1: undefined,
-                electricity_2: undefined,
-                electricity_returned_1: undefined,
-                electricity_returned_2: undefined,
-                gas_1: undefined,
-                gas_2: undefined,
-            }
-            
-            var g_datepicker_view_mode = 'months';
-            
-            $(document).ready(function(){
-                Chart.defaults.global.responsive = true;
-                Chart.defaults.global.maintainAspectRatio = false;
-                Chart.defaults.global.animation = false;
-                
-                initialize_datepicker('1');
-                initialize_datepicker('2');
-                
-                $("#datepicker_trigger_days").click(function(){
-                    g_datepicker_view_mode = 'days';
-                    initialize_datepicker('1')
-                    initialize_datepicker('2')
-                });
-                
-                $("#datepicker_trigger_months").click(function(){
-                    g_datepicker_view_mode = 'months';
-                    initialize_datepicker('1')
-                    initialize_datepicker('2')
-                });
-                
-                $("#datepicker_trigger_years").click(function(){
-                    g_datepicker_view_mode = 'years';
-                    initialize_datepicker('1')
-                    initialize_datepicker('2')
-                });
-            });
-            
-            /**
-             * Resets the datepicker. Required because options cannot be changed dynamically.
-             */
-            function initialize_datepicker(id_postfix)
-            {
-                $('.datepicker-trigger').removeClass('st-green').addClass('st-gray');
-                $('#datepicker_trigger_' + g_datepicker_view_mode).removeClass('st-gray').addClass('st-green');
-                
-                if ($('#datepicker' + id_postfix).children().length > 0) 
-                {
-                    $('#datepicker' + id_postfix).datepicker('remove');
-                }
-                
-                $('#datepicker' + id_postfix).datepicker({
-                    startView: g_datepicker_view_mode,
-                    minViewMode: g_datepicker_view_mode,
-                    maxViewMode: 'years',
-                    calendarWeeks: true,
-                    todayHighlight: true,
-                    startDate: '{{ start_date|date:datepicker_date_format }}',
-                    endDate: '{{ end_date|date:datepicker_date_format }}',
-                    format: "{{ datepicker_locale_format }}",
-                    language: "{{ LANGUAGE_CODE }}"
-                }).on('changeDate', function(e) {
-                    if (g_datepicker_view_mode != 'days')
-                    {
-                        return;
-                    }
-                    update_view(e.date, id_postfix);
-                    
-                }).on('changeMonth', function(e) {
-                    if (g_datepicker_view_mode != 'months')
-                    {
-                        return;
-                    }
-                    update_view(e.date, id_postfix);
-                    
-                }).on('changeYear', function(e) {
-                    if (g_datepicker_view_mode != 'years')
-                    {
-                        return;
-                    }
-                    update_view(e.date, id_postfix);
-                    
-                });
-            }
-            
-            /**
-             * Shortcut for updating both XHR views.
-             */
-            function update_view(selected_date, id_postfix)
-            {
-                update_summary(selected_date, id_postfix);
-                update_graphs(selected_date, id_postfix);
-            }
-            
-            /**
-             * Updates the upper view, which is the summary table.
-             */
-            function update_summary(selected_date, id_postfix)
-            {
-                $("#summary-holder" + id_postfix).hide();
-            	$("#summary-loader" + id_postfix).show();
-            	
-                $.ajax({
-                    url: "{% url 'frontend:archive-xhr-summary' %}",
-                    data: {
-                        'date': moment(selected_date).format('{{ datepicker_locale_format }}'.toUpperCase()),
-                        'level': g_datepicker_view_mode
-                    },
-                }).done(function(data) {
-                    $("#summary-loader" + id_postfix).hide();
-                    $("#summary-holder" + id_postfix).html(data).show();
-                });
-            }
-            
-            /**
-             * Updates the lower view, which are the graphs displayed.
-             */
-            function update_graphs(selected_date, id_postfix)
-            {
-                $.ajax({
-                    url: "{% url 'frontend:archive-xhr-graphs' %}",
-                    dataType: "json",
-                    data: {
-                        'date': moment(selected_date).format('{{ datepicker_locale_format }}'.toUpperCase()),
-                        'level': g_datepicker_view_mode
-                    },
-                }).done(function(response) {
-                    var charts = response.charts;
-                    
-                    if (charts.electricity)
-                    {
-                        render_chart(
-                            'electricity_' + id_postfix,
-                            "#electricity-chart-holder",
-                            "#electricity-chart" + id_postfix,
-                            charts.electricity
-                        );
-                    }
-                    
-                    if (charts.electricity_returned)
-                    {
-                        render_chart(
-                            'electricity_returned_' + id_postfix,
-                            "#electricity-returned-chart-holder",
-                            "#electricity-returned-chart" + id_postfix,
-                            charts.electricity_returned
-                        );
-                    }
-                    
-                    if (charts.gas)
-                    {
-                        render_chart(
-                            'gas_' + id_postfix,
-                            "#gas-chart-holder",
-                            "#gas-chart" + id_postfix,
-                            charts.gas
-                        );
-                    }
-                });
-            }
-            
-            function render_chart(global_instance_key, holder_id, chart_id, chart_info)
-            {
-                var data = {
-                    labels: chart_info.labels,
-                    datasets: chart_info.datasets
-                };
-                
-                if (g_chart_instances[global_instance_key])
-                {
-                    g_chart_instances[global_instance_key].destroy();
-                }
-
-                $(holder_id).show();
-
-                var ctx = $(chart_id).get(0).getContext("2d");
-                ctx.canvas.height = $(chart_id).parent().height();
-                g_chart_instances[global_instance_key] = new Chart(ctx, {
-                    type: 'line',
-                    data: data,
-                    options: line_options
-                });
-            }
-            
-        </script>
+        /* XHR. */
+        var compare_xhr_summary_url = "{% url 'frontend:compare-xhr-summary' %}";
+    </script>
+    
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/compare/compare.js' %}?r=v{{ dsmr_version }}"></script>
 {% endblock %}

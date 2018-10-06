@@ -559,6 +559,9 @@ msgstr "Maanden"
 msgid "Years"
 msgstr "Jaren"
 
+msgid "Pick a day, month or year"
+msgstr "Kies een day, maand of jaar"
+
 msgid "Electricity usage"
 msgstr "Elektriciteitsverbruik"
 
@@ -568,8 +571,26 @@ msgstr "(in kWh)"
 msgid "Gas usage"
 msgstr "Gasverbruik"
 
-msgid "(in m<sup>3</sup>)"
-msgstr "(in m<sup>3</sup>)"
+msgid "(in m³)"
+msgstr "(in m³)"
+
+msgid "Electricity 1 (low tariff)"
+msgstr "Elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
+
+msgid "Electricity 1 returned (low tariff)"
+msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+
+msgid "Electricity 2 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
+
+msgid "Electricity (single tariff)"
+msgstr "Elektriciteit (enkel tarief)"
+
+msgid "Electricity returned (single tariff)"
+msgstr "Elektriciteit teruggeleverd (enkel tarief)"
 
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
@@ -580,6 +601,9 @@ msgstr "Bekijk releases"
 msgid "Dashboard"
 msgstr "Dashboard"
 
+msgid "Compare"
+msgstr "Vergelijk"
+
 msgid "Trends"
 msgstr "Trends"
 
@@ -588,9 +612,6 @@ msgstr "Statistieken"
 
 msgid "Energy contracts"
 msgstr "Energiecontracten"
-
-msgid "Compare"
-msgstr "Vergelijk"
 
 msgid "Status"
 msgstr "Status"
@@ -675,15 +696,6 @@ msgstr "Teruggeleverd"
 
 msgid "Cost"
 msgstr "Kosten"
-
-msgid "Electricity (single tariff)"
-msgstr "Elektriciteit (enkel tarief)"
-
-msgid "Electricity 1 (low tariff)"
-msgstr "Elektriciteit 1 (daltarief)"
-
-msgid "Electricity 2 (high tariff)"
-msgstr "Elektriciteit 2 (piektarief)"
 
 msgid "Total"
 msgstr "Totaal"
@@ -783,6 +795,15 @@ msgstr "Max."
 
 msgid "Avg."
 msgstr "Gem."
+
+msgid "Difference"
+msgstr "Verschil"
+
+msgid "in kWh"
+msgstr "in kWh"
+
+msgid "in m<sup>3</sup>"
+msgstr "in m<sup>3</sup>"
 
 msgid "Add note for today"
 msgstr "Voeg notitie toe voor vandaag"
@@ -999,15 +1020,6 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 
 msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
-
-msgid "Electricity returned (single tariff)"
-msgstr "Elektriciteit teruggeleverd (enkel tarief)"
-
-msgid "Electricity 1 returned (low tariff)"
-msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
-
-msgid "Electricity 2 returned (high tariff)"
-msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
 msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentatie</a>"

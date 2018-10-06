@@ -32,3 +32,7 @@ div.date-selector {
     min-height: 100px;
     height: 100px;
 }
+
+.datepicker-trigger {
+	cursor: pointer;
+}

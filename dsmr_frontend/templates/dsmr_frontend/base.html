@@ -86,6 +86,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{% url 'frontend:compare' %}">
+                                <i class="fas fa-balance-scale"></i> &nbsp; <span>{% trans "Compare" %}</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{% url 'frontend:trends' %}">
                                 <i class="fas fa-chart-bar"></i> &nbsp; <span>{% trans "Trends" %}</span>
                             </a>
@@ -98,11 +103,6 @@
                         <li>
                             <a href="{% url 'frontend:energy-contracts' %}">
                                 <i class="fas fa-newspaper"></i> &nbsp; <span>{% trans "Energy contracts" %}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'frontend:compare' %}">
-                                <i class="fas fa-balance-scale"></i> &nbsp; <span>{% trans "Compare" %}</span>
                             </a>
                         </li>
                         <li>
