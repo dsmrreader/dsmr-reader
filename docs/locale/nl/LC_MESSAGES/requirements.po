@@ -148,7 +148,7 @@ msgstr ""
 #: ../../requirements.rst:61
 msgid ""
 "The readings will take about 90+ percent of the disk space. Retention is on "
-"it's way for a future release in 2017."
+"its way for a future release in 2017."
 msgstr ""
 "De metingen nemen zo'n 90+ procent van alle schijfruimte in beslag. Er komt "
 "echter een optie voor retentie in een toekomstige release in 2017."

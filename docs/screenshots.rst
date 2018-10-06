@@ -81,7 +81,7 @@ Want to export day totals or hourly data to Excel? This page allows you to expor
 
 Settings
 --------
-The project is written using Django and some of it's backend pages are displayed below.
+The project is written using Django and some of its backend pages are displayed below.
 
 The application has quite some features, such are temperature tracking, automated backups and Dropbox intergration. This page displays the status of them all.
 

@@ -129,7 +129,7 @@ msgstr "instellingen"
 
 #: ../../screenshots.rst:84
 msgid ""
-"The project is written using Django and some of it's backend pages are "
+"The project is written using Django and some of its backend pages are "
 "displayed below."
 msgstr ""
 "Het project is gemaakt met Django en hieronder staan enkele beheerderspagina's "

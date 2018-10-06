@@ -44,7 +44,7 @@ The logfiles are located by default in:
 
 Appplication / Django
 ---------------------
-The application has it's own logfiles as well.
+The application has its own logfiles as well.
 You can find them in the ``logs`` directory inside the project folder.
 
 The logfiles are located by default in:
