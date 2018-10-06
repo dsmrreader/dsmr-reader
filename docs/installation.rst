@@ -15,7 +15,7 @@ Docker (alternative)
 --------------------
 .. seealso::
 
-    There are also a Docker versions available for DSMR-reader. These are hosted and maintained by third parties. More information can be found here:
+    There are also Docker versions available for DSMR-reader. These are hosted and maintained by third parties. More information can be found here:
 
     DSMR-reader in Docker by `ualex73`:
     
@@ -458,7 +458,7 @@ Example of everything running well::
     dsmr_datalogger                  RUNNING    pid 456, uptime 0:00:07
     dsmr_webinterface                RUNNING    pid 789, uptime 0:00:07
 
-- Want to check whether the datalogger works? Just tail it's log in supervisor with::
+- Want to check whether the datalogger works? Just tail its log in supervisor with::
 
     supervisor> tail -f dsmr_datalogger
     

@@ -744,7 +744,7 @@ msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
 #: ../../installation.rst:461
 msgid ""
-"Want to check whether the datalogger works? Just tail it's log in supervisor "
+"Want to check whether the datalogger works? Just tail its log in supervisor "
 "with::"
 msgstr ""
 "Wil je controleren of de datalogger zijn werk goed doet? Bekijk dan het "

@@ -62,7 +62,7 @@ msgstr "Talen"
 #: ../../intro.rst:18
 #, fuzzy
 msgid ""
-"The entire application and it's code is written in English. The interface"
+"The entire application and its code is written in English. The interface"
 " is also translated into Dutch and will be triggered depending on your "
 "browser's language preference."
 msgstr ""
