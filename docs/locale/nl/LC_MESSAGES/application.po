@@ -284,7 +284,7 @@ msgstr "Plak de htpasswd-tekenreeks in het bestand ``/etc/nginx/htpasswd``."
 
 #: ../../application.rst:108
 msgid ""
-"It's safe to a htpasswd generator, **just make sure to NEVER enter personal "
+"It's safe to use a htpasswd generator, **just make sure to NEVER enter personal "
 "credentials** there **used for other applications or personal accounts**."
 msgstr ""
 "Je kunt een htpassw-generator veilig gebruiken **zolang je maar NOOIT "

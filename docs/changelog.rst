@@ -5,9 +5,10 @@ Changelog
 
 Upgrading
 ^^^^^^^^^
+
 Please make sure you have a fresh **database backup** before upgrading! Upgrading is very easy due to a builtin mechanism. 
 
-.. seealso:: 
+.. seealso::
 
     - `About back-ups <https://dsmr-reader.readthedocs.io/en/latest/application.html#data-preservation-backups>`_.
     - `About upgrading <https://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
@@ -22,7 +23,8 @@ v1.25.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Fixed a Javascript bug in Archive and Compare pages, causing the selection to glitch
-- [`#527 <https://github.com/dennissiemensma/dsmr-reader/issues/527>`_] Docker DSMR Datalogger (by trizz)
+- [`#527 <https://github.com/dennissiemensma/dsmr-reader/issues/527>`_] Docker DSMR Datalogger - by trizz
+- [`#533 <https://github.com/dennissiemensma/dsmr-reader/issues/533>`_] General English language fixes - by Oliver Payne
 - [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Convert Archive page to eCharts
 - [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Simplified Compare page
 - [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring (datalogger)

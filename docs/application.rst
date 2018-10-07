@@ -105,7 +105,7 @@ Public webinterface warning
 
 .. warning::
     
-    It's safe to a htpasswd generator, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**.
+    It's safe to use a htpasswd generator, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**.
     
 .. seealso::
     

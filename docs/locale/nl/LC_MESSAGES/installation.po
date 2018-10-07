@@ -40,10 +40,10 @@ msgstr "Docker (alternatief)"
 
 #: ../../installation.rst:18
 msgid ""
-"There are also a Docker versions available for DSMR-reader. These are hosted "
-"and maintained by third parties. More information can be found here:"
+"There are also Docker versions available for DSMR-reader. These are hosted and "
+"maintained by third parties. More information can be found here:"
 msgstr ""
-"Er zijn tevens een Docker-versies beschikbaar voor DSMR-reader. Deze worden "
+"Er zijn tevens Docker-versies beschikbaar voor DSMR-reader. Deze worden "
 "onderhouden door derde partijen. Meer informatie hierover is hier te vinden:"
 
 #: ../../installation.rst:20
@@ -744,7 +744,7 @@ msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
 #: ../../installation.rst:461
 msgid ""
-"Want to check whether the datalogger works? Just tail it's log in supervisor "
+"Want to check whether the datalogger works? Just tail its log in supervisor "
 "with::"
 msgstr ""
 "Wil je controleren of de datalogger zijn werk goed doet? Bekijk dan het "

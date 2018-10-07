@@ -126,7 +126,7 @@ msgstr "Appplicatie / Django"
 
 #: ../../troubleshooting.rst:47
 msgid ""
-"The application has it's own logfiles as well. You can find them in the "
+"The application has its own logfiles as well. You can find them in the "
 "``logs`` directory inside the project folder."
 msgstr ""
 "De applicatie heeft ook eigen logfiles. Je kunt deze vinden in de ``logs`` "
@@ -205,7 +205,7 @@ msgstr ""
 #~ "processen verder te beheren."
 
 #~ msgid ""
-#~ "The application has it's own logfiles as well. You can find them in the "
+#~ "The application has its own logfiles as well. You can find them in the "
 #~ "``logs`` directory inside the project folder. The ``django.log`` will "
 #~ "list any internal errors regarding the Django framework it's using. The "
 #~ "other logfile ``dsmrreader.log`` contains application logging, if enabled."
