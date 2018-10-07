@@ -30,10 +30,10 @@ You may enable it in your configuration or admin settings.
 Broker configuration
 ^^^^^^^^^^^^^^^^^^^^
 The broker configuration allows you to set the hostname and port of your broker. 
-Optionally, you can enter any credentials here as well.
+Optionally, you can enable SSL (if your broker supports it), credentials and the Quality of Service used for MQTT messaging.
 
-.. image:: _static/screenshots/mqtt_broker.png
-    :target: _static/screenshots/mqtt_broker.png
+.. image:: _static/screenshots/admin/mqttbrokersettings.png
+    :target: _static/screenshots/admin/mqttbrokersettings.png
     :alt: MQTT broker config
 
 
@@ -42,8 +42,8 @@ Raw telegram configuration
 This allows you to send each raw telegram received to your broker. 
 Just enable it and enter the topic path it should be sent to.
 
-.. image:: _static/screenshots/mqtt_raw.png
-    :target: _static/screenshots/mqtt_raw.png
+.. image:: _static/screenshots/admin/rawtelegrammqttsettings.png
+    :target: _static/screenshots/admin/rawtelegrammqttsettings.png
     :alt: MQTT raw telegram
 
 
@@ -53,8 +53,8 @@ This allows you to send each reading created to your broker, in JSON format.
 You can alter the field names used, by changing their name on the right hand side.
 You may even remove the lines of the fields you wish to omit at all.
 
-.. image:: _static/screenshots/mqtt_json.png
-    :target: _static/screenshots/mqtt_json.png
+.. image:: _static/screenshots/admin/jsontelegrammqttsettings.png
+    :target: _static/screenshots/admin/jsontelegrammqttsettings.png
     :alt: MQTT json telegram
 
 For example, this will format the JSON message to only contain these fields::
@@ -79,8 +79,8 @@ This allows you to send each reading created, but splitted in multiple messages.
 For each field you can designate a separate topic, by changing their path on the right hand side.
 You can remove the lines of the fields you wish to 
 
-.. image:: _static/screenshots/mqtt_split.png
-    :target: _static/screenshots/mqtt_split.png
+.. image:: _static/screenshots/admin/splittopictelegrammqttsettings.png
+    :target: _static/screenshots/admin/splittopictelegrammqttsettings.png
     :alt: MQTT split telegram
 
 For example, this will make the application only broadcast these fields to their topics::

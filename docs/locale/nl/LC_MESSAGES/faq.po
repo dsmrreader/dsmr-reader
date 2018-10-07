@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-10-07 16:35+0200\n"
+"PO-Revision-Date: 2018-10-07 16:48+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -159,17 +161,15 @@ msgstr "Ik wil het elektriciteitsverbruik per fase ook kunnen zien"
 
 #: ../../faq.rst:70
 msgid ""
-"Since ``DSMR-reader v1.5`` it's possible to track your ``P+`` (consumption) "
-"phases as well. You will need to enable this in the ``Datalogger "
-"configuration``. There is a setting called ``Track electricity phases``. When "
-"active, this will log the current usage of those phases and plot these on the "
-"Dashboard page."
+"Since ``DSMR-reader v1.5`` it's possible to track your electricity phases as "
+"well. You will need to enable this in the ``Datalogger configuration``. There "
+"is a setting called ``Track electricity phases``. When active, this will log "
+"the current usage of those phases and plot these on the Dashboard page."
 msgstr ""
-"Sinds ``DSMR-reader v1.5`` is het mogelijk om je ``P+`` (verbruik) "
-"elektriciteitsfasen in te zien. Dit is een aparte optie die je zelf moet "
-"inschakelen in ``Dataloggerconfiguratie``. De instelling heet daar ``Houd "
-"elektriciteitsfasen bij``. Zodra ingeschakeld, zal de applicatie het verbruik "
-"per fase vastleggen in tonen in een grafiek in het Dashboard."
+"Sinds ``DSMR-reader v1.5`` is het mogelijk om je elektriciteitsfasen in te "
+"zien. Dit is een aparte optie die je zelf moet inschakelen in "
+"``Dataloggerconfiguratie``. De instelling heet daar ``Houd elektriciteitsfasen "
+"bij``."
 
 #: ../../faq.rst:73
 msgid "Please keep in mind:"
@@ -193,22 +193,17 @@ msgstr ""
 
 #: ../../faq.rst:77
 msgid ""
-"When having tracking phases enabled, you should see a button in the Dashboard "
-"called ``Display electricity phases``. Click on it to show the graph."
+"When having tracking phases enabled, you should see new graph in the "
+"Dashboard, plotting the phases in it."
 msgstr ""
-"Wanneer het bijhouden van de fasen is ingeschakeld, zie je op het Dashboard "
-"een knop genaamd ``Toon elektriciteitsfasen``. Klik die aan om de grafiek te "
-"tonen."
+"Wanneer het bijhouden van de fasen is ingeschakeld, zie je in het Dashboard "
+"een nieuwe grafiek voor de electriciteitsfasen."
 
-#: ../../faq.rst:79
-msgid "You should see something similar to:"
-msgstr "Je zult iets zien in de trend van:"
-
-#: ../../faq.rst:87
+#: ../../faq.rst:81
 msgid "Recalculate prices retroactively"
 msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
 
-#: ../../faq.rst:88
+#: ../../faq.rst:82
 msgid ""
 "*I've adjusted my energy prices but there are no changes! How can I regenerate "
 "them with my new prices?*"
@@ -216,7 +211,7 @@ msgstr ""
 "*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe "
 "kan ik de nieuwe prijzen doorvoeren?*"
 
-#: ../../faq.rst:90
+#: ../../faq.rst:84
 msgid ""
 "Statistics for each day are generated once, the day after. However, you can "
 "flush your statistics by executing:"
@@ -224,11 +219,11 @@ msgstr ""
 "Dagstatistieken worden dagelijks eenmalig gegenereerd. Het is echter wel "
 "mogelijk om deze te resetten door het volgende te doen:"
 
-#: ../../faq.rst:92
+#: ../../faq.rst:86
 msgid "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 msgstr "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 
-#: ../../faq.rst:94
+#: ../../faq.rst:88
 msgid ""
 "The application will delete all statistics and (slowly) regenerate them in the "
 "background. Just make sure the source data is still there."
@@ -236,11 +231,11 @@ msgstr ""
 "De applicatie verwijdert alle statistieken en genereert ze (langzaam) weer op "
 "de achtergrond. Zorg er wel voor dat alle brongegevens intact zijn."
 
-#: ../../faq.rst:98
+#: ../../faq.rst:92
 msgid "I'm not seeing any gas readings"
 msgstr "Ik zie geen gasverbruik"
 
-#: ../../faq.rst:99
+#: ../../faq.rst:93
 msgid ""
 "Please make sure that your meter supports reading gas consumption and that "
 "you've waited for a few hours for any graphs to render. The gas meter "
@@ -252,11 +247,11 @@ msgstr ""
 "sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
 "geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:105
+#: ../../faq.rst:99
 msgid "How do I restore a database backup?"
 msgstr "Hoe zet ik een databaseback-up terug?"
 
-#: ../../faq.rst:109
+#: ../../faq.rst:103
 msgid ""
 "Restoring a backup will replace any existing data stored in the database and "
 "is irreversible!"
@@ -264,7 +259,7 @@ msgstr ""
 "Het herstellen van een back-up vervangt de bestaande data in de database en is "
 "onomkeerbaar!"
 
-#: ../../faq.rst:113
+#: ../../faq.rst:107
 msgid ""
 "Do you need a complete reinstall of DSMR-reader as well? Then please :doc:"
 "`follow the install guide<installation>` and restore the database backup "
@@ -274,11 +269,11 @@ msgstr ""
 "dan de installatiehandleiding<installation>` en herstel de databaseback-up "
 "volgens  **de notities aan het einde van hoofdstuk 1**."
 
-#: ../../faq.rst:116
+#: ../../faq.rst:110
 msgid "Only want to restore the database?"
 msgstr "Wil je alleen een databaseback-up terugzetten?"
 
-#: ../../faq.rst:118
+#: ../../faq.rst:112
 msgid ""
 "This asumes you are still running the same application version as the backup "
 "was created in."
@@ -286,7 +281,7 @@ msgstr ""
 "Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie draait als "
 "waarmee de back-up is gemaakt."
 
-#: ../../faq.rst:120
+#: ../../faq.rst:114
 msgid ""
 "Stop the application first with ``sudo supervisorctl stop all``. This will "
 "disconnect it from the database as well."
@@ -294,7 +289,7 @@ msgstr ""
 "Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit zorgt "
 "er ook voor dat de databaseverbinding van de applicatie verdwijnt."
 
-#: ../../faq.rst:122
+#: ../../faq.rst:116
 msgid ""
 "Importing the data could take a long time. It took MySQL 15 minutes to import "
 "nearly 3 million readings, from a compressed backup, on a RaspberryPi 3."
@@ -303,19 +298,19 @@ msgstr ""
 "het ongeveer een kwartier om 3 miljoen metingen te importeren, vanuit een "
 "gecomprimeerde back-up op een RaspberryPi 3."
 
-#: ../../faq.rst:124
+#: ../../faq.rst:118
 msgid "For **PostgreSQL** restores::"
 msgstr "Voor herstellen van **PostgreSQL**::"
 
-#: ../../faq.rst:138
+#: ../../faq.rst:132
 msgid "For **MySQL** restores::"
 msgstr "Voor herstellen van **MySQL**::"
 
-#: ../../faq.rst:152
+#: ../../faq.rst:146
 msgid "Start the application again with ``sudo supervisorctl start all``."
 msgstr "Start de applicatie weer met ``sudo supervisorctl start all``."
 
-#: ../../faq.rst:156
+#: ../../faq.rst:150
 msgid ""
 "In case the version differs, you can try forcing a deployment reload by: "
 "``sudo su - dsmr`` and then executing ``./post-deploy.sh``."
@@ -324,11 +319,11 @@ msgstr ""
 "herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-deploy."
 "sh`` uit."
 
-#: ../../faq.rst:160
+#: ../../faq.rst:154
 msgid "How do I enable timezone support for MySQL?"
 msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
-#: ../../faq.rst:162
+#: ../../faq.rst:156
 msgid ""
 "`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql."
 "html>`_ for more information about how to enable timezone support on MySQL. On "
@@ -340,12 +335,12 @@ msgstr ""
 "recente versies is het een kwestie van onderstaand commando uitvoeren als root/"
 "sudo-gebruiker::"
 
-#: ../../faq.rst:170
+#: ../../faq.rst:164
 msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
 msgstr ""
 "Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of hoger?"
 
-#: ../../faq.rst:172
+#: ../../faq.rst:166
 msgid ""
 "Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for "
 "processing MQTT messages (``dsmr_mqtt``). Fresh installations automatically "
@@ -357,26 +352,29 @@ msgstr ""
 "automatisch dit ``dsmr_mqtt`` proces. Bestaande installaties zullen "
 "``dsmr_mqtt`` echter handmatig moeten toevoegen. Instructies:"
 
-#: ../../faq.rst:175
+#: ../../faq.rst:169
 msgid "Please upgrade to ``v1.23.0`` or higher first."
 msgstr "Upgrade eerst naar  ``v1.23.0`` of hoger."
 
-#: ../../faq.rst:176
+#: ../../faq.rst:170
 msgid "Now execute the following commands as **root/sudo-user**::"
 msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
 
-#: ../../faq.rst:186
+#: ../../faq.rst:180
 msgid "Feature/bug report"
 msgstr "Verzoek/fout melden"
 
-#: ../../faq.rst:187
+#: ../../faq.rst:181
 msgid "*How can I propose a feature or report a bug I've found?*"
 msgstr "*Hoe kan ik een verzoek indienen of een fout melden?*"
 
-#: ../../faq.rst:191
+#: ../../faq.rst:185
 msgid ""
 "`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/new>`_."
 msgstr ""
 "`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-reader/"
 "issues/new>`_."
+
+#~ msgid "You should see something similar to:"
+#~ msgstr "Je zult iets zien in de trend van:"

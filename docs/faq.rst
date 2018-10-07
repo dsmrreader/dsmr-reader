@@ -67,20 +67,14 @@ Just make sure that you apply the **same price to both electricity 1 and 2** and
 
 I want to see the load of each electricity phase as well
 ---------------------------------------------------------
-Since ``DSMR-reader v1.5`` it's possible to track your ``P+`` (consumption) phases as well. You will need to enable this in the ``Datalogger configuration``.
+Since ``DSMR-reader v1.5`` it's possible to track your electricity phases as well. You will need to enable this in the ``Datalogger configuration``.
 There is a setting called ``Track electricity phases``. When active, this will log the current usage of those phases and plot these on the Dashboard page.
 
 Please keep in mind:
 
 - This will **not work retroactively**. The datalogger always discards all data not used.
 - This feature will only work when your smart meter is connected to **three phases**. Even when having the setting enabled.
-- When having tracking phases enabled, you should see a button in the Dashboard called ``Display electricity phases``. Click on it to show the graph.
-
-You should see something similar to:
-
-.. image:: _static/screenshots/phases.png
-    :target: _static/screenshots/phases.png
-    :alt: Phases
+- When having tracking phases enabled, you should see new graph in the Dashboard, plotting the phases in it.
 
 
 Recalculate prices retroactively
