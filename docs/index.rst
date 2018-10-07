@@ -8,6 +8,9 @@ DSMR Reader's documentation
    screenshots
    requirements
    installation
+   installation_quick
+   installation_extended
+   installation_docker
    application
    settings
    retention

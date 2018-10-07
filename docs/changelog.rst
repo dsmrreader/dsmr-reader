@@ -29,7 +29,7 @@ v1.25.0 - 2018-xx-xx
 - [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Simplified Compare page
 - [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring (datalogger)
 - [`#523 <https://github.com/dennissiemensma/dsmr-reader/issues/523>`_] Automatische gas consumption dashboard
-- [`#xxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxxxxxx>`_] yyyyyyyyyyyyyyyy
+- [`#532 <https://github.com/dennissiemensma/dsmr-reader/issues/532>`_] Update documentation
 
 
 ----
