@@ -16,6 +16,8 @@ msgstr ""
 "Generated-By: Babel 2.3.4\n"
 "Language: nl\n"
 "X-Generator: Poedit 1.8.7.1\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: ../../intro.rst:2
 msgid "Introduction"
@@ -37,7 +39,7 @@ msgid ""
 "as well)."
 msgstr ""
 "Alle gegevens zijn eigendom van jezelf (alle data wordt lokaal opgeslagen "
-"en wordt niet gedeeld met de buitenwereld)."
+"en wordt niet zomaar gedeeld met de buitenwereld)."
 
 #: ../../intro.rst:8
 msgid "Always free to use (it's open source on Github as well)."
@@ -80,8 +82,8 @@ msgid ""
 "The project is well documented, but requires a certain 'Unix skill' as you "
 "will need to install several dependencies using the command line."
 msgstr ""
-"Het project is behoorlijk gedocumenteerd, maar vereist desondanks een "
-"zekere Unix-vaardigheid. Je zult namelijk handmatig diverse "
+"Het project is behoorlijk in detail gedocumenteerd, maar vereist "
+"desondanks een zekere Unix-vaardigheid. Je zult namelijk handmatig diverse "
 "afhankelijkheden moeten installeren via de command line."
 
 #: ../../intro.rst:25

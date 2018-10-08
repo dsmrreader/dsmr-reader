@@ -57,8 +57,8 @@ Disk space
 
 **Minimal 1 GB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
 
- - More disk space is required for storing all reader data captured (optional). I generally advise to use a 8+ GB SD card. 
- - The readings will take about 90+ percent of the disk space. Retention is on its way for a future release in 2017. 
+ - More disk space is required for storing all reader data captured (optional). I generally advise to use an 8+ GB SD card. 
+ - The readings will take about 90+ percent of the disk space used by the application. You can enable retention to have all readings cleaned up periodically. This will make the application barely use any disk space at all (depending on your settings).
 
 
 Cable
