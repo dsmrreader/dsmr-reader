@@ -7,8 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-10-07 22:07+0200\n"
-"PO-Revision-Date: 2018-10-07 22:14+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -688,96 +686,3 @@ msgstr ""
 msgid ":doc:`Finished? Go to setting up the application<application>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<application>`."
 
-#~ msgid "Method B: Installation script"
-#~ msgstr "Methode B: Installatiescript"
-
-#~ msgid ""
-#~ "For quick installation. Use the latest installation script (only works for "
-#~ "Raspbian)::"
-#~ msgstr ""
-#~ "Voor een snelle installatie. Gebruik het meest recente installatiescript "
-#~ "(werkt alleen voor Raspbian)::"
-
-#~ msgid ""
-#~ "Does it not work due to: \"bash: curl: command not found\"? Install cURL and "
-#~ "try again: ``apt-get install curl``"
-#~ msgstr ""
-#~ "Werkt het niet wegens: \"bash: curl: command not found\"? Installeer dan "
-#~ "cURL en probeer opnieuw: ``apt-get install curl`"
-
-#~ msgid "Github: https://github.com/xirixiz/dsmr-reader-docker"
-#~ msgstr "Github: https://github.com/xirixiz/dsmr-reader-docker"
-
-#~ msgid "Docker (alternative)"
-#~ msgstr "Docker (alternatief)"
-
-#~ msgid ""
-#~ "There are also Docker versions available for DSMR-reader. These are hosted "
-#~ "and maintained by third parties. More information can be found here:"
-#~ msgstr ""
-#~ "Er zijn tevens Docker-versies beschikbaar voor DSMR-reader. Deze worden "
-#~ "onderhouden door derde partijen. Meer informatie hierover is hier te vinden:"
-
-#~ msgid "DSMR-reader in Docker by `ualex73`:"
-#~ msgstr "DSMR-reader in Docker door `ualex73`:"
-
-#~ msgid "**Github**: https://github.com/ualex73/dsmr-reader-docker"
-#~ msgstr "**Github**: https://github.com/ualex73/dsmr-reader-docker"
-
-#~ msgid "**Docker hub**: https://hub.docker.com/r/ualex73/dsmr-reader-docker/"
-#~ msgstr "**Docker hub**: https://hub.docker.com/r/ualex73/dsmr-reader-docker/"
-
-#~ msgid "DSMR-reader in Docker by `xirixiz`:"
-#~ msgstr "DSMR-reader in Docker door `xirixiz`:"
-
-#~ msgid "**Github**: https://github.com/xirixiz/dsmr-reader-docker"
-#~ msgstr "**Github**: https://github.com/xirixiz/dsmr-reader-docker"
-
-#~ msgid "**Docker hub**: https://hub.docker.com/r/xirixiz/dsmr-reader-docker/"
-#~ msgstr "**Docker hub**: https://hub.docker.com/r/xirixiz/dsmr-reader-docker/"
-
-#~ msgid "Datalogger in Docker by `trizz`:"
-#~ msgstr "Datalogger in Docker door `trizz`:"
-
-#~ msgid "**Github**: https://github.com/trizz/dsmr-remote-datalogger"
-#~ msgstr "**Github**: https://github.com/trizz/dsmr-remote-datalogger"
-
-#~ msgid "**Docker hub**: https://hub.docker.com/r/trizz/dsmr-remote-datalogger/"
-#~ msgstr "**Docker hub**: https://hub.docker.com/r/trizz/dsmr-remote-datalogger/"
-
-#~ msgid ""
-#~ "Not interested in Docker? Follow the instructions in the chapters below if "
-#~ "you wish to install this project the regular way."
-#~ msgstr ""
-#~ "Geen interesse in Docker? Volg dan de instructies in de hoofdstukken "
-#~ "hieronder om dit project handmatig te installeren."
-
-#~ msgid "Method A: Quick install"
-#~ msgstr "Methode A: Snelle installatie"
-
-#~ msgid "For advanced users. A summary of all commands listed under Method B."
-#~ msgstr ""
-#~ "Voor geavanceerde gebruikers. Een overzicht van alle commando's gebruikt "
-#~ "onder Methode B::"
-
-#~ msgid "Start::"
-#~ msgstr "Begin::"
-
-#~ msgid "Continue::"
-#~ msgstr "Ga verder::"
-
-#~ msgid "Method B: Manually"
-#~ msgstr "Methode B: Handmatig"
-
-#~ msgid ""
-#~ "For others users who want some addition explaination about what they are "
-#~ "exactly doing/installing."
-#~ msgstr ""
-#~ "Voor alle andere gebruikers, die graag willen weten wat ze exact uitvoeren."
-
-#~ msgid ""
-#~ "You now should have everything up and running! We're almost done and just "
-#~ "need to do a few last things on the next page."
-#~ msgstr ""
-#~ "Alles zou nu moeten werken! We zijn bijna klaar, op een paar laatste dingen "
-#~ "na in het volgende hoofdstuk."
