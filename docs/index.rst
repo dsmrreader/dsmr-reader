@@ -5,7 +5,6 @@ DSMR Reader's documentation
    :maxdepth: 2
    
    intro
-   screenshots
    requirements
    installation
    installation_quick
@@ -27,4 +26,5 @@ DSMR Reader's documentation
    contributing
    credits
    donations
+   screenshots
    licence
