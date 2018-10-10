@@ -11,6 +11,14 @@ DSMR Reader's documentation
    installation_extended
    installation_docker
    application
+
+   dashboard
+   archive
+   compare
+   trends
+   statistics
+   energy_contracts
+   
    settings
    retention
    api

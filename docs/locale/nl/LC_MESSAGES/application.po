@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2018-10-09 20:14+0200\n"
+"PO-Revision-Date: 2018-10-09 20:15+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -26,25 +28,25 @@ msgstr "DSMR 2.x (oude meters)"
 
 #: ../../application.rst:14
 msgid ""
-"Note: The application's default DSMR version used is 4.x. This version is also "
-"the **default** for any recent smart meters placed at your home."
+"Note: The application's default DSMR version used is ``DSMR 4.x``. This version "
+"is also the **default** for any recent smart meters placed at your home."
 msgstr ""
-"N.B.: De standaard DSMR-versie die de applicatie gebruikt is DSMR 4.x. Dit is "
-"namelijk de **standaardversie** voor nieuwe/recent geplaatste slimme meters."
+"N.B.: Standaard gebruikt de applicatie ``DSMR 4.x``. Dit is namelijk de "
+"**standaardversie** voor nieuwe/recent geplaatste slimme meters."
 
-#: ../../application.rst:18
+#: ../../application.rst:16
 msgid ""
-"Make sure to alter this setting in the backend's configuration page to DSMR 2.x "
-"when required!"
+"Make sure to alter this setting in the backend's configuration page to ``DSMR 2."
+"x`` when required!"
 msgstr ""
-"Wanneer je een meter met DSMR 2.x hebt, zul je deze in het beheerderpaneel "
+"Wanneer je een meter met ``DSMR 2.x`` hebt, zul je deze in het beheerderpaneel "
 "onder ``dataloggerconfiguratie`` moet instellen."
 
-#: ../../application.rst:22
+#: ../../application.rst:20
 msgid "Accessing the application"
 msgstr "De applicatie benaderen"
 
-#: ../../application.rst:23
+#: ../../application.rst:21
 msgid ""
 "Now it's time to view the application in your browser to check whether the GUI "
 "works as well. Just enter the ip address or hostname of your RaspberryPi in "
@@ -53,7 +55,7 @@ msgstr ""
 "Dit is het moment om de applicatie te bekijken in je browser om te zien of "
 "alles naar behoren werkt. Vul het IP-adres van je RaspberryPi in je browser."
 
-#: ../../application.rst:25
+#: ../../application.rst:23
 msgid ""
 "Did you install using a monitor attached to the RaspberryPi and you don't know "
 "what address your device has? Just type ``ifconfig | grep addr`` and it should "
@@ -63,7 +65,7 @@ msgstr ""
 "je het IP-adres niet? Typ in dat geval het volgende in en je krijgt het IP-"
 "adres te zien: ``ifconfig | grep addr``"
 
-#: ../../application.rst:31
+#: ../../application.rst:29
 msgid ""
 "In this example the ip address is ``192.168.178.150``. If possible, you should "
 "assign a static ip address to your device in your router. This will make sure "
@@ -73,11 +75,11 @@ msgstr ""
 "apparaat een vast IP-adres te geven in je router. Dit zorgt ervoor dat je de "
 "applicatie altijd op dezelfde locatie kan terugvinden."
 
-#: ../../application.rst:35
+#: ../../application.rst:33
 msgid "Reboot test"
 msgstr "Herstart-test"
 
-#: ../../application.rst:36
+#: ../../application.rst:34
 msgid ""
 "You surely want to ``reboot`` your device and check whether everything comes up "
 "automatically again with ``sudo supervisorctl status``. This will make sure "
@@ -88,11 +90,11 @@ msgstr ""
 "status``. Dit zorgt ervoor dat je datalogger eventuele stroomstoringen "
 "overleeft (of wanneer je zelf de stroom eraf haalt)."
 
-#: ../../application.rst:40
+#: ../../application.rst:38
 msgid "Data preservation & backups"
 msgstr "Databehoud & backups"
 
-#: ../../application.rst:44
+#: ../../application.rst:42
 msgid ""
 "You **should (or must)** make sure to periodically BACKUP your data! It's one "
 "of the most common mistakes to skip or ignore this. Actually, it happened to "
@@ -107,7 +109,7 @@ msgstr ""
 "gegevens kwijt. Stel je voor dat je jaren met historische data kwijtraakt, zou "
 "zonde zijn!"
 
-#: ../../application.rst:48
+#: ../../application.rst:46
 msgid ""
 "The SD card is by far **the weakest link** of this setup and **will** fail you "
 "some day."
@@ -115,11 +117,11 @@ msgstr ""
 "De SD-kaart is verreweg **de zwakste schakel** in dit geheel and **gaat "
 "gegarandeerd kapot** op een dag."
 
-#: ../../application.rst:50
+#: ../../application.rst:48
 msgid "The application will, by default, create a database backup every night."
 msgstr "De applicatie maakt standaard elke nacht een back-up."
 
-#: ../../application.rst:52
+#: ../../application.rst:50
 msgid ""
 "You can find them in the ``backups`` folder of the application. They either "
 "have a ``.sql`` or ``.gz`` extension, depending on whether compression is "
@@ -129,7 +131,7 @@ msgstr ""
 "herkennen aan een ``.sql`` of ``.gz`` extensie, afhankelijk de gekozen "
 "compressie-instellingen in de back-upconfiguratie."
 
-#: ../../application.rst:53
+#: ../../application.rst:51
 msgid ""
 "However, as the data is still stored **locally** on your 'vulnerable' SD card, "
 "you must export it off your RaspberryPi as well."
@@ -138,7 +140,7 @@ msgstr ""
 "kaart. Je zult die data dus moeten kopieren naar een locatie buiten je "
 "RaspberryPi om."
 
-#: ../../application.rst:55
+#: ../../application.rst:53
 msgid ""
 "There is an builtin option to have backups synced to your **Dropbox**, *without "
 "exposing your Dropbox account and your private files in it*."
@@ -147,7 +149,7 @@ msgstr ""
 "uploaden. *Zonder dat de applicatie toegang tot je (privé) bestanden in je "
 "Dropbox-account heeft*."
 
-#: ../../application.rst:57
+#: ../../application.rst:55
 msgid ""
 "Please either use this service or manage offloading backups on your own (see "
 "below)."
@@ -155,12 +157,12 @@ msgstr ""
 "Zorg ervoor dat je ofwel deze feature gebruikt ofwel zelf back-ups maakt en ze "
 "regelmatig ergens heen kopieert (zie hieronder)."
 
-#: ../../application.rst:59
+#: ../../application.rst:57
 msgid "You may also decide to run backups outside the application."
 msgstr ""
 "Je kunt er tevens voor kiezen om zelf backups buiten de applicatie om te maken."
 
-#: ../../application.rst:61
+#: ../../application.rst:59
 msgid ""
 "There are example backup scripts available in ``dsmrreader/provisioning/"
 "postgresql/psql-backup.sh`` for **PostgreSQL**, which I dump to a separately "
@@ -171,7 +173,7 @@ msgstr ""
 "handmatig een back-up te maken naar een USB-stick die aan mijn RaspberryPi "
 "hangt."
 
-#: ../../application.rst:63
+#: ../../application.rst:61
 msgid ""
 "For **MySQL/MariaDB** you can use ``dsmrreader/provisioning/mysql/mysql-backup."
 "sh``."
@@ -179,7 +181,7 @@ msgstr ""
 "Voor **MySQL/MariaDB** kun je dit script gebruiken: ``dsmrreader/provisioning/"
 "mysql/mysql-backup.sh``."
 
-#: ../../application.rst:65
+#: ../../application.rst:63
 msgid ""
 "Make sure to schedule the backup scripts as cronjob and also verify that it "
 "actually works, by running ``run-parts -v /etc/cron.daily``."
@@ -187,7 +189,7 @@ msgstr ""
 "Zorg ervoor dat je de back-ups via een 'daily cronjob' hebt ingepland en test "
 "dat door het volgende uit te voeren:  ``run-parts -v /etc/cron.daily``."
 
-#: ../../application.rst:67
+#: ../../application.rst:65
 msgid ""
 "Also, check your free disk space once in a while. I will implement automatic "
 "cleanup settings later, allowing you to choose your own retention (for all the "
@@ -197,7 +199,7 @@ msgstr ""
 "mogelijkheid toevoegen om oude metingen (niet de dagtotalen) te verwijderen na "
 "een X-periode."
 
-#: ../../application.rst:69
+#: ../../application.rst:67
 msgid ""
 "Everything OK? Congratulations, this was the hardest part and now the fun "
 "begins by monitoring your energy consumption."
@@ -205,11 +207,11 @@ msgstr ""
 "Alles gelukt? Gefeliciteerd! Dit was het lastigste gedeelte en nu kun je "
 "eindelijk gebruikmaken van de applicatie en je energieverbruik meten."
 
-#: ../../application.rst:73
+#: ../../application.rst:71
 msgid "Optional: Setting up an USB drive for backups"
 msgstr "Optioneel: Een USB-drive gebruiken voor backup's"
 
-#: ../../application.rst:77
+#: ../../application.rst:75
 msgid ""
 "For more information about (optionally) setting up an USB drive for backups, "
 "see `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-"
@@ -219,19 +221,19 @@ msgstr ""
 "zie `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/268>`_."
 
-#: ../../application.rst:82
+#: ../../application.rst:80
 msgid "Application updates (bug fixes & new features)"
 msgstr "Applicatie updates (bugfixes & nieuwe mogelijkheden)"
 
-#: ../../application.rst:86
+#: ../../application.rst:84
 msgid ":doc:`This information can be found here<faq>`."
 msgstr ":doc:`Deze informatie kun je hier terugvinden<faq>`."
 
-#: ../../application.rst:90
+#: ../../application.rst:88
 msgid "Public webinterface warning"
 msgstr "Waarschuwing voor publiekelijke toegang"
 
-#: ../../application.rst:94
+#: ../../application.rst:92
 msgid ""
 "If you expose your application to the outside world or a public network, you "
 "might want to take additional steps:"
@@ -239,7 +241,7 @@ msgstr ""
 "Wanneer je de applicatie koppelt aan het Internet wil je sowieso extra "
 "maatregelen nemen:"
 
-#: ../../application.rst:96
+#: ../../application.rst:94
 msgid ""
 "Please make sure to **alter** the ``SECRET_KEY`` setting in your ``dsmrreader/"
 "settings.py``."
@@ -247,7 +249,7 @@ msgstr ""
 "Zorg ervoor dat je de instelling ``SECRET_KEY`` wijzigt in het bestand "
 "``dsmrreader/settings.py``."
 
-#: ../../application.rst:98
+#: ../../application.rst:96
 msgid ""
 "Don't forget to run ``./post-deploy.sh`` in the project's root, which will "
 "force the application to gracefully reload itself and apply the new settings "
@@ -257,7 +259,7 @@ msgstr ""
 "hoogste map van project), die ervoor zorgt dat de hele applicatie zichzelf "
 "herlaadt en daarmee de nieuwe instellingen per direct gebruikt."
 
-#: ../../application.rst:100
+#: ../../application.rst:98
 msgid ""
 "Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu."
 "com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for "
@@ -267,7 +269,7 @@ msgstr ""
 "ubuntu.com/UncomplicatedFirewall>`_) and beperk al het toegestane verkeer tot "
 "poort ``22`` (puur voor jezelf) en poort ``80``."
 
-#: ../../application.rst:102
+#: ../../application.rst:100
 msgid ""
 "You should also have Nginx restrict application access when exposing it to the "
 "Internet. Simply generate an htpasswd string `using one of the many generators "
@@ -278,11 +280,11 @@ msgstr ""
 "tekenreeks via `een van de vele websites die dit voor je kunnen doen <https://"
 "www.transip.nl/htpasswd/>`_."
 
-#: ../../application.rst:104
+#: ../../application.rst:102
 msgid "Paste the htpasswd string in ``/etc/nginx/htpasswd``."
 msgstr "Plak de htpasswd-tekenreeks in het bestand ``/etc/nginx/htpasswd``."
 
-#: ../../application.rst:108
+#: ../../application.rst:106
 msgid ""
 "It's safe to use a htpasswd generator, **just make sure to NEVER enter personal "
 "credentials** there **used for other applications or personal accounts**."
@@ -291,7 +293,7 @@ msgstr ""
 "persoonlijke informatie of gegevens invoert die je ook op andere websites "
 "gebruikt**!"
 
-#: ../../application.rst:112
+#: ../../application.rst:110
 msgid ""
 "Alternatively you can generate a ``htpasswd`` file locally, by installing "
 "``sudo apt-get install apache2-utils`` and running ``sudo htpasswd -c /etc/"
@@ -302,11 +304,11 @@ msgstr ""
 "``sudo htpasswd -c /etc/nginx/htpasswd USERNAME`` uit te voeren (waarbij "
 "``USERNAME`` je gewenste gebruikersnaam is)."
 
-#: ../../application.rst:114
+#: ../../application.rst:112
 msgid "The command will prompt you to enter a password for it."
 msgstr "Het command vraagt vervolgens om een wachtwoord voor het account."
 
-#: ../../application.rst:117
+#: ../../application.rst:115
 msgid ""
 "Open the site's vhost in ``/etc/nginx/sites-enabled/dsmr-webinterface`` and "
 "**uncomment** the following lines (remove the ##)::"
@@ -314,15 +316,15 @@ msgstr ""
 "Open de website's vhost in ``/etc/nginx/sites-enabled/dsmr-webinterface`` en "
 "schakel de volgende regels in (verwijder de ## tekens)::"
 
-#: ../../application.rst:125
+#: ../../application.rst:123
 msgid "Now make sure you didn't insert any typo's by running::"
 msgstr "Zorg ervoor dat je geen typefouten hebt gemaakt door te controleren met::"
 
-#: ../../application.rst:129
+#: ../../application.rst:127
 msgid "And reload with::"
 msgstr "En herlaad met::"
 
-#: ../../application.rst:133
+#: ../../application.rst:131
 msgid ""
 "You should be prompted for login credentials the next time your browser "
 "accesses the application. For more information regarding this topic, see the "
