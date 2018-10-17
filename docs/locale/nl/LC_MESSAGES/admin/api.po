@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2018, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-15 20:40+0200\n"
+"PO-Revision-Date: 2018-10-17 18:11+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../admin/api.rst:2
+msgid "Admin: API"
+msgstr "Admin: API"
+
+#: ../../admin/api.rst:4
+msgid ""
+"Configure the API if you need it to supply telegrams or simply read data "
+"from DSMR-reader."
+msgstr ""
+"Configureer de API wanneer je deze nodig hebt voor het pushen van "
+"telegrammen. Of wanneer je simpelweg data uit DSMR-reader wilt halen."
+
+#: ../../admin/api.rst:6
+msgid ""
+"By default a random API key will be generated. You can enter your own if "
+"you want to. :doc:`You can find the API documentation here.<../api>`"
+msgstr ""
+"Standaard wordt er een willekeurige authenticatiesleutel gegenereerd. Je "
+"kunt  :doc:`hier API-documentatie vinden<../api>` voor meer informatie."

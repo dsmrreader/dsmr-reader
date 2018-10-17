@@ -2,32 +2,42 @@ DSMR Reader's documentation
 ===========================
 
 .. toctree::
-   :maxdepth: 2
-   
+   :maxdepth: 1
+
    intro
    requirements
+
    installation
-   installation_quick
-   installation_extended
-   installation_docker
+   installation/quick
+   installation/explained
+   installation/docker
+
    application
 
-   dashboard
-   archive
-   compare
-   trends
-   statistics
-   energy_contracts
-   
+   frontend/dashboard
+   frontend/archive
+   frontend/compare
+   frontend/trends
+   frontend/statistics
+   frontend/energy_contracts
+   frontend/status
+   frontend/export
+
+   admin/api
+   admin/backup_dropbox
+   admin/datalogger
+   admin/interface
+   admin/mindergas
+   admin/mqtt
+   admin/notifications
+   admin/pvoutput
+   admin/consumption
+   admin/weather
+
    settings
-   retention
    api
    plugins
-   mqtt
-   mindergas
-   pvoutput
-   dropbox
-   notifications
+
    faq
    troubleshooting
    changelog

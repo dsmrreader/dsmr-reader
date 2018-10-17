@@ -1,16 +1,16 @@
+
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../faq.rst:2
 msgid "Frequently Asked Questions (FAQ)"
@@ -26,15 +26,15 @@ msgstr "Hoe kan ik mijn applicatie bijwerken?"
 
 #: ../../faq.rst:11
 msgid ""
-"The version you are running is always based on the 'latest' version of the "
-"application, called the `master` branch. Every once in a while there may be "
-"updates. Since ``v1.5`` you can also easily check for updates by using the "
-"application's Status page."
+"The version you are running is always based on the 'latest' version of "
+"the application, called the `master` branch. Every once in a while there "
+"may be updates. Since ``v1.5`` you can also easily check for updates by "
+"using the application's Status page."
 msgstr ""
-"De versie die je draait is altijd gebaseerd op de 'laatste' versie van de "
-"applicatie, ook wel de `master` branch genoemd. Met enige regelmaat zijn er "
-"updates beschikbaar. Sinds ``v1.5`` kun je dit ook eenvoudig controleren op de "
-"Status-pagina van de applicatie."
+"De versie die je draait is altijd gebaseerd op de 'laatste' versie van de"
+" applicatie, ook wel de `master` branch genoemd. Met enige regelmaat zijn"
+" er updates beschikbaar. Sinds ``v1.5`` kun je dit ook eenvoudig "
+"controleren op de Status-pagina van de applicatie."
 
 #: ../../faq.rst:16
 msgid ""
@@ -42,27 +42,28 @@ msgid ""
 "database**! :doc:`More information about backups can be found "
 "here<application>`."
 msgstr ""
-"Voordat je bijwerkt, **zorg ervoor dat je in ieder geval een recente back-up "
-"van je database hebt**! :doc:`Meer informatie over back-ups kun je hier "
-"vinden<application>`."
+"Voordat je bijwerkt, **zorg ervoor dat je in ieder geval een recente "
+"back-up van je database hebt**! :doc:`Meer informatie over back-ups kun "
+"je hier vinden<application>`."
 
 #: ../../faq.rst:18
 msgid ""
-"You can update your application to the latest version by executing **deploy."
-"sh**, located in the root of the project. Make sure to execute it while logged "
-"in as the ``dsmr`` user::"
+"You can update your application to the latest version by executing "
+"**deploy.sh**, located in the root of the project. Make sure to execute "
+"it while logged in as the ``dsmr`` user::"
 msgstr ""
-"Je kun je applicatie bijwerken door het script **deploy.sh** uit te voeren, "
-"die in zich in de hoofdmap van het project bevindt. Zorg er wel voor dat je "
-"ingelogd bent als ``dsmr`` gebruiker op de terminal::"
+"Je kun je applicatie bijwerken door het script **deploy.sh** uit te "
+"voeren, die in zich in de hoofdmap van het project bevindt. Zorg er wel "
+"voor dat je ingelogd bent als ``dsmr`` gebruiker op de terminal::"
 
 #: ../../faq.rst:24
 msgid ""
-"It will make sure to check, fetch and apply any changes released. Summary of "
-"deployment script steps:"
+"It will make sure to check, fetch and apply any changes released. Summary"
+" of deployment script steps:"
 msgstr ""
 "Dit zorgt ervoor dat alle wijzigingen op een juiste volgorde worden "
-"binnengehaald en toegepast. Een overzicht van wat dit uitrol-script exact doet:"
+"binnengehaald en toegepast. Een overzicht van wat dit uitrol-script exact"
+" doet:"
 
 #: ../../faq.rst:26
 msgid "GIT pull (codebase update)."
@@ -82,297 +83,321 @@ msgstr "Synchroniseert statische bestanden naar de Nginx map."
 
 #: ../../faq.rst:30
 msgid ""
-"Reload Gunicorn application server (web interface) and backend processes (such "
-"as the datalogger)."
+"Reload Gunicorn application server (web interface) and backend processes "
+"(such as the datalogger)."
 msgstr ""
-"Herlaadt de Gunicorn-applicatieserver (webinterface) en achtergrondprocessen "
-"(zoals de datalogger)."
+"Herlaadt de Gunicorn-applicatieserver (webinterface) en "
+"achtergrondprocessen (zoals de datalogger)."
 
 #: ../../faq.rst:31
 msgid "Clear any caches."
 msgstr "Gooit de cache leeg."
 
 #: ../../faq.rst:35
-msgid "Dropbox: Automated backup sync"
-msgstr "Dropbox: Automatisch backups uploaden"
-
-#: ../../faq.rst:37
-msgid ":doc:`More information can be found here<dropbox>`."
-msgstr ":doc:`Meer informatie kun je hier terugvinden<dropbox>`."
-
-#: ../../faq.rst:41
-msgid "Mindergas.nl: Automated gas meter position export"
-msgstr "Mindergas.nl: Automatisch gasmeterstanden exporteren"
-
-#: ../../faq.rst:43
-msgid ":doc:`More information can be found here<mindergas>`."
-msgstr ":doc:`Meer informatie kun je hier terugvinden<mindergas>`."
-
-#: ../../faq.rst:47
-msgid "PVOutput.org: Automated electricity consumption export"
-msgstr "PVOutput.org: Automatisch exporteren van verbruik"
-
-#: ../../faq.rst:49
-msgid ":doc:`More information can be found here<pvoutput>`."
-msgstr ":doc:`Meer informatie kun je hier terugvinden<pvoutput>`."
-
-#: ../../faq.rst:53
-msgid "Usage notification: Daily usage statistics on your smartphone"
-msgstr "Verbruiksnotificaties: Dagelijkse verbruiksstatistieken op je smartphone"
-
-#: ../../faq.rst:55
-msgid ":doc:`More information can be found here<notifications>`."
-msgstr ":doc:`Meer informatie kun je hier terugvinden<notifications>`."
-
-#: ../../faq.rst:59
-msgid "I only pay for a single electricity tariff but I see two!"
-msgstr "Ik betaal voor een enkel tarief maar ik zie er twee!"
-
-#: ../../faq.rst:60
-msgid ""
-"DSMR (and your energy supplier) always reads both high and low tariff from "
-"your meter. It's possible however that you are only paying for a single "
-"tariff. In that case your energy supplier will simply merge both high and low "
-"tariffs to make it look like you have a single one."
-msgstr ""
-"DSMR (en je energieleverancier) lezen altijd zowel hoog als laag tarief van je "
-"meter uit. Het is desondanks mogelijk dat je betaalt voor slechts één "
-"tarief. In dat geval voegt jouw energieleverancier het hoge en lage tarief "
-"samen zodat het lijkt alsof je een enkel tarief hebt."
-
-#: ../../faq.rst:64
-msgid ""
-"This application displays separate tariffs by default, but supports merging "
-"them to a single one as well. Just make sure that you apply the **same price "
-"to both electricity 1 and 2** and enable the option ``Merge electricity "
-"tariffs`` in the frontend configuration."
-msgstr ""
-"Deze applicatie weergeeft standaard gescheiden tarieven, maar heeft wel "
-"ondersteuning om ze samen te voegen (net zoals je energieleverancier doet). "
-"Zorg er wel voor dat je **dezelfde prijs invult bij hoog en laag tarief voor "
-"elektriciteit** en dat je de optie ``Voeg tarieven samen`` aanzet in de "
-"interfaceconfiguratie."
-
-#: ../../faq.rst:69
-msgid "I want to see the load of each electricity phase as well"
-msgstr "Ik wil het elektriciteitsverbruik per fase ook kunnen zien"
-
-#: ../../faq.rst:70
-msgid ""
-"Since ``DSMR-reader v1.5`` it's possible to track your electricity phases as "
-"well. You will need to enable this in the ``Datalogger configuration``. There "
-"is a setting called ``Track electricity phases``. When active, this will log "
-"the current usage of those phases and plot these on the Dashboard page."
-msgstr ""
-"Sinds ``DSMR-reader v1.5`` is het mogelijk om je elektriciteitsfasen in te "
-"zien. Dit is een aparte optie die je zelf moet inschakelen in "
-"``Dataloggerconfiguratie``. De instelling heet daar ``Houd elektriciteitsfasen "
-"bij``."
-
-#: ../../faq.rst:73
-msgid "Please keep in mind:"
-msgstr "Houd in gedachten:"
-
-#: ../../faq.rst:75
-msgid ""
-"This will **not work retroactively**. The datalogger always discards all data "
-"not used."
-msgstr ""
-"Dit werkt **niet met terugwerkende kracht**. De datalogger gooit namelijk alle "
-"gegevens weg die niet nodig zijn."
-
-#: ../../faq.rst:76
-msgid ""
-"This feature will only work when your smart meter is connected to **three "
-"phases**. Even when having the setting enabled."
-msgstr ""
-"Deze feature werkt alleen wanneer je slimme meter ook daadwerkelijk is "
-"aangesloten op **drie fasen**. Zelfs wanneer de optie is ingeschakeld."
-
-#: ../../faq.rst:77
-msgid ""
-"When having tracking phases enabled, you should see new graph in the "
-"Dashboard, plotting the phases in it."
-msgstr ""
-"Wanneer het bijhouden van de fasen is ingeschakeld, zie je in het Dashboard "
-"een nieuwe grafiek voor de electriciteitsfasen."
-
-#: ../../faq.rst:81
 msgid "Recalculate prices retroactively"
 msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
 
-#: ../../faq.rst:82
+#: ../../faq.rst:36
 msgid ""
-"*I've adjusted my energy prices but there are no changes! How can I regenerate "
-"them with my new prices?*"
+"*I've adjusted my energy prices but there are no changes! How can I "
+"regenerate them with my new prices?*"
 msgstr ""
-"*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe "
-"kan ik de nieuwe prijzen doorvoeren?*"
+"*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil!"
+" Hoe kan ik de nieuwe prijzen doorvoeren?*"
 
-#: ../../faq.rst:84
+#: ../../faq.rst:38
 msgid ""
-"Statistics for each day are generated once, the day after. However, you can "
-"flush your statistics by executing:"
+"Statistics for each day are generated once, the day after. However, you "
+"can flush your statistics by executing:"
 msgstr ""
 "Dagstatistieken worden dagelijks eenmalig gegenereerd. Het is echter wel "
 "mogelijk om deze te resetten door het volgende te doen:"
 
-#: ../../faq.rst:86
+#: ../../faq.rst:40
 msgid "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 msgstr "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 
-#: ../../faq.rst:88
+#: ../../faq.rst:42
 msgid ""
-"The application will delete all statistics and (slowly) regenerate them in the "
-"background. Just make sure the source data is still there."
+"The application will delete all statistics and (slowly) regenerate them "
+"in the background. Just make sure the source data is still there."
 msgstr ""
-"De applicatie verwijdert alle statistieken en genereert ze (langzaam) weer op "
-"de achtergrond. Zorg er wel voor dat alle brongegevens intact zijn."
+"De applicatie verwijdert alle statistieken en genereert ze (langzaam) "
+"weer op de achtergrond. Zorg er wel voor dat alle brongegevens intact "
+"zijn."
 
-#: ../../faq.rst:92
+#: ../../faq.rst:46
 msgid "I'm not seeing any gas readings"
 msgstr "Ik zie geen gasverbruik"
 
-#: ../../faq.rst:93
+#: ../../faq.rst:47
 msgid ""
-"Please make sure that your meter supports reading gas consumption and that "
-"you've waited for a few hours for any graphs to render. The gas meter "
-"positions are only be updated once per hour (for DSMR v4). The Status page "
-"will give you insight in this as well."
+"Please make sure that your meter supports reading gas consumption and "
+"that you've waited for a few hours for any graphs to render. The gas "
+"meter positions are only be updated once per hour (for DSMR v4). The "
+"Status page will give you insight in this as well."
 msgstr ""
 "Wees er allereerst zeker van dat je slimme meter uberhaupt gasverbruik "
-"registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden worden "
-"sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
-"geeft je hier overigens ook inzicht in."
+"registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden "
+"worden sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De "
+"Status-pagina geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:99
+#: ../../faq.rst:53
 msgid "How do I restore a database backup?"
 msgstr "Hoe zet ik een databaseback-up terug?"
 
-#: ../../faq.rst:103
+#: ../../faq.rst:57
 msgid ""
-"Restoring a backup will replace any existing data stored in the database and "
-"is irreversible!"
+"Restoring a backup will replace any existing data stored in the database "
+"and is irreversible!"
 msgstr ""
-"Het herstellen van een back-up vervangt de bestaande data in de database en is "
-"onomkeerbaar!"
+"Het herstellen van een back-up vervangt de bestaande data in de database "
+"en is onomkeerbaar!"
 
-#: ../../faq.rst:107
+#: ../../faq.rst:61
 msgid ""
-"Do you need a complete reinstall of DSMR-reader as well? Then please :doc:"
-"`follow the install guide<installation>` and restore the database backup "
-"**using the notes at the end of chapter 1**."
+"Do you need a complete reinstall of DSMR-reader as well? Then please "
+":doc:`follow the install guide<installation>` and restore the database "
+"backup **using the notes at the end of chapter 1**."
 msgstr ""
-"Heb je tevens een complete herinstallatie van DSMR-reader nodig? :doc:`Volg "
-"dan de installatiehandleiding<installation>` en herstel de databaseback-up "
-"volgens  **de notities aan het einde van hoofdstuk 1**."
+"Heb je tevens een complete herinstallatie van DSMR-reader nodig? "
+":doc:`Volg dan de installatiehandleiding<installation>` en herstel de "
+"databaseback-up volgens  **de notities aan het einde van hoofdstuk 1**."
 
-#: ../../faq.rst:110
+#: ../../faq.rst:64
 msgid "Only want to restore the database?"
 msgstr "Wil je alleen een databaseback-up terugzetten?"
 
-#: ../../faq.rst:112
+#: ../../faq.rst:66
 msgid ""
-"This asumes you are still running the same application version as the backup "
-"was created in."
+"This asumes you are still running the same application version as the "
+"backup was created in."
 msgstr ""
-"Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie draait als "
-"waarmee de back-up is gemaakt."
+"Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie "
+"draait als waarmee de back-up is gemaakt."
 
-#: ../../faq.rst:114
+#: ../../faq.rst:68
 msgid ""
-"Stop the application first with ``sudo supervisorctl stop all``. This will "
-"disconnect it from the database as well."
+"Stop the application first with ``sudo supervisorctl stop all``. This "
+"will disconnect it from the database as well."
 msgstr ""
-"Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit zorgt "
-"er ook voor dat de databaseverbinding van de applicatie verdwijnt."
+"Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit "
+"zorgt er ook voor dat de databaseverbinding van de applicatie verdwijnt."
 
-#: ../../faq.rst:116
+#: ../../faq.rst:70
 msgid ""
-"Importing the data could take a long time. It took MySQL 15 minutes to import "
-"nearly 3 million readings, from a compressed backup, on a RaspberryPi 3."
+"Importing the data could take a long time. It took MySQL 15 minutes to "
+"import nearly 3 million readings, from a compressed backup, on a "
+"RaspberryPi 3."
 msgstr ""
-"Het importeren van de gegevens kan enige tijd in beslag nemen. Op MySQL duurt "
-"het ongeveer een kwartier om 3 miljoen metingen te importeren, vanuit een "
-"gecomprimeerde back-up op een RaspberryPi 3."
+"Het importeren van de gegevens kan enige tijd in beslag nemen. Op MySQL "
+"duurt het ongeveer een kwartier om 3 miljoen metingen te importeren, "
+"vanuit een gecomprimeerde back-up op een RaspberryPi 3."
 
-#: ../../faq.rst:118
+#: ../../faq.rst:72
 msgid "For **PostgreSQL** restores::"
 msgstr "Voor herstellen van **PostgreSQL**::"
 
-#: ../../faq.rst:132
+#: ../../faq.rst:86
 msgid "For **MySQL** restores::"
 msgstr "Voor herstellen van **MySQL**::"
 
-#: ../../faq.rst:146
+#: ../../faq.rst:100
 msgid "Start the application again with ``sudo supervisorctl start all``."
 msgstr "Start de applicatie weer met ``sudo supervisorctl start all``."
 
-#: ../../faq.rst:150
+#: ../../faq.rst:104
 msgid ""
 "In case the version differs, you can try forcing a deployment reload by: "
 "``sudo su - dsmr`` and then executing ``./post-deploy.sh``."
 msgstr ""
-"Mocht de versie toch verschillen, dan kun je proberen om de applicatie te "
-"herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-deploy."
-"sh`` uit."
+"Mocht de versie toch verschillen, dan kun je proberen om de applicatie te"
+" herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-"
+"deploy.sh`` uit."
 
-#: ../../faq.rst:154
+#: ../../faq.rst:108
 msgid "How do I enable timezone support for MySQL?"
 msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
-#: ../../faq.rst:156
+#: ../../faq.rst:110
 msgid ""
-"`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql."
-"html>`_ for more information about how to enable timezone support on MySQL. On "
-"recent versions it should be as simple as executing the following command as "
-"root/sudo user::"
+"`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-"
+"to-sql.html>`_ for more information about how to enable timezone support "
+"on MySQL. On recent versions it should be as simple as executing the "
+"following command as root/sudo user::"
 msgstr ""
-"`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-"
-"to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op MySQL. Op "
-"recente versies is het een kwestie van onderstaand commando uitvoeren als root/"
-"sudo-gebruiker::"
+"`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-"
+"tzinfo-to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op "
+"MySQL. Op recente versies is het een kwestie van onderstaand commando "
+"uitvoeren als root/sudo-gebruiker::"
 
-#: ../../faq.rst:164
+#: ../../faq.rst:118
 msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
 msgstr ""
-"Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of hoger?"
+"Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of "
+"hoger?"
 
-#: ../../faq.rst:166
+#: ../../faq.rst:120
 msgid ""
 "Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for "
-"processing MQTT messages (``dsmr_mqtt``). Fresh installations automatically "
-"include the ``dsmr_mqtt`` process. Existing installations however, should add "
-"``dsmr_mqtt`` manually. Instructions:"
+"processing MQTT messages (``dsmr_mqtt``). Fresh installations "
+"automatically include the ``dsmr_mqtt`` process. Existing installations "
+"however, should add ``dsmr_mqtt`` manually. Instructions:"
 msgstr ""
 "Vanaf DSMR-reader  ``v1.23.0`` is een apart proces nodig voor het het "
-"versturen van MQTT-berichten (``dsmr_mqtt``). Nieuwe installaties bevatten al "
-"automatisch dit ``dsmr_mqtt`` proces. Bestaande installaties zullen "
-"``dsmr_mqtt`` echter handmatig moeten toevoegen. Instructies:"
+"versturen van MQTT-berichten (``dsmr_mqtt``). Nieuwe installaties "
+"bevatten al automatisch dit ``dsmr_mqtt`` proces. Bestaande installaties "
+"zullen ``dsmr_mqtt`` echter handmatig moeten toevoegen. Instructies:"
 
-#: ../../faq.rst:169
+#: ../../faq.rst:123
 msgid "Please upgrade to ``v1.23.0`` or higher first."
 msgstr "Upgrade eerst naar  ``v1.23.0`` of hoger."
 
-#: ../../faq.rst:170
+#: ../../faq.rst:124
 msgid "Now execute the following commands as **root/sudo-user**::"
 msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
 
-#: ../../faq.rst:180
+#: ../../faq.rst:134
 msgid "Feature/bug report"
 msgstr "Verzoek/fout melden"
 
-#: ../../faq.rst:181
+#: ../../faq.rst:135
 msgid "*How can I propose a feature or report a bug I've found?*"
 msgstr "*Hoe kan ik een verzoek indienen of een fout melden?*"
 
-#: ../../faq.rst:185
+#: ../../faq.rst:139
 msgid ""
 "`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/new>`_."
 msgstr ""
-"`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-reader/"
-"issues/new>`_."
+"`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/new>`_."
 
 #~ msgid "You should see something similar to:"
 #~ msgstr "Je zult iets zien in de trend van:"
+
+#~ msgid "Dropbox: Automated backup sync"
+#~ msgstr "Dropbox: Automatisch backups uploaden"
+
+#~ msgid ":doc:`More information can be found here<admin/backup_dropbox>`."
+#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<dropbox>`."
+
+#~ msgid "Mindergas.nl: Automated gas meter position export"
+#~ msgstr "Mindergas.nl: Automatisch gasmeterstanden exporteren"
+
+#~ msgid ":doc:`More information can be found here<admin/mindergas>`."
+#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<mindergas>`."
+
+#~ msgid "PVOutput.org: Automated electricity consumption export"
+#~ msgstr "PVOutput.org: Automatisch exporteren van verbruik"
+
+#~ msgid ":doc:`More information can be found here<pvoutput>`."
+#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<pvoutput>`."
+
+#~ msgid "Usage notification: Daily usage statistics on your smartphone"
+#~ msgstr ""
+#~ "Verbruiksnotificaties: Dagelijkse verbruiksstatistieken"
+#~ " op je smartphone"
+
+#~ msgid ":doc:`More information can be found here<notifications>`."
+#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<notifications>`."
+
+#~ msgid "I only pay for a single electricity tariff but I see two!"
+#~ msgstr "Ik betaal voor een enkel tarief maar ik zie er twee!"
+
+#~ msgid ""
+#~ "DSMR (and your energy supplier) always"
+#~ " reads both high and low tariff "
+#~ "from your meter. It's possible however"
+#~ " that you are only paying for a"
+#~ " single tariff. In that case your "
+#~ "energy supplier will simply merge both"
+#~ " high and low tariffs to make "
+#~ "it look like you have a single "
+#~ "one."
+#~ msgstr ""
+#~ "DSMR (en je energieleverancier) lezen "
+#~ "altijd zowel hoog als laag tarief "
+#~ "van je meter uit. Het is "
+#~ "desondanks mogelijk dat je betaalt voor"
+#~ " slechts één tarief. In dat geval"
+#~ " voegt jouw energieleverancier het hoge "
+#~ "en lage tarief samen zodat het "
+#~ "lijkt alsof je een enkel tarief "
+#~ "hebt."
+
+#~ msgid ""
+#~ "This application displays separate tariffs "
+#~ "by default, but supports merging them"
+#~ " to a single one as well. Just"
+#~ " make sure that you apply the "
+#~ "**same price to both electricity 1 "
+#~ "and 2** and enable the option "
+#~ "``Merge electricity tariffs`` in the "
+#~ "frontend configuration."
+#~ msgstr ""
+#~ "Deze applicatie weergeeft standaard gescheiden"
+#~ " tarieven, maar heeft wel ondersteuning "
+#~ "om ze samen te voegen (net zoals"
+#~ " je energieleverancier doet). Zorg er "
+#~ "wel voor dat je **dezelfde prijs "
+#~ "invult bij hoog en laag tarief "
+#~ "voor elektriciteit** en dat je de "
+#~ "optie ``Voeg tarieven samen`` aanzet in"
+#~ " de interfaceconfiguratie."
+
+#~ msgid "I want to see the load of each electricity phase as well"
+#~ msgstr "Ik wil het elektriciteitsverbruik per fase ook kunnen zien"
+
+#~ msgid ""
+#~ "Since ``DSMR-reader v1.5`` it's possible"
+#~ " to track your electricity phases as"
+#~ " well. You will need to enable "
+#~ "this in the ``Datalogger configuration``. "
+#~ "There is a setting called ``Track "
+#~ "electricity phases``. When active, this "
+#~ "will log the current usage of "
+#~ "those phases and plot these on the"
+#~ " Dashboard page."
+#~ msgstr ""
+#~ "Sinds ``DSMR-reader v1.5`` is het "
+#~ "mogelijk om je elektriciteitsfasen in te"
+#~ " zien. Dit is een aparte optie "
+#~ "die je zelf moet inschakelen in "
+#~ "``Dataloggerconfiguratie``. De instelling heet "
+#~ "daar ``Houd elektriciteitsfasen bij``."
+
+#~ msgid "Please keep in mind:"
+#~ msgstr "Houd in gedachten:"
+
+#~ msgid ""
+#~ "This will **not work retroactively**. "
+#~ "The datalogger always discards all data"
+#~ " not used."
+#~ msgstr ""
+#~ "Dit werkt **niet met terugwerkende "
+#~ "kracht**. De datalogger gooit namelijk "
+#~ "alle gegevens weg die niet nodig "
+#~ "zijn."
+
+#~ msgid ""
+#~ "This feature will only work when "
+#~ "your smart meter is connected to "
+#~ "**three phases**. Even when having the"
+#~ " setting enabled."
+#~ msgstr ""
+#~ "Deze feature werkt alleen wanneer je "
+#~ "slimme meter ook daadwerkelijk is "
+#~ "aangesloten op **drie fasen**. Zelfs "
+#~ "wanneer de optie is ingeschakeld."
+
+#~ msgid ""
+#~ "When having tracking phases enabled, you"
+#~ " should see new graph in the "
+#~ "Dashboard, plotting the phases in it."
+#~ msgstr ""
+#~ "Wanneer het bijhouden van de fasen "
+#~ "is ingeschakeld, zie je in het "
+#~ "Dashboard een nieuwe grafiek voor de "
+#~ "electriciteitsfasen."
+

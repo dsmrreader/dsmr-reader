@@ -15,8 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../installation.rst:2
@@ -31,32 +29,31 @@ msgstr "Methode A: Snelle installatie"
 msgid ""
 "Contains just a list of commands needed for the installation of DSMR-reader."
 msgstr ""
-"Bevat alleen een lijst met commando's nodig voor de installatie van DSMR-"
-"reader."
+"Bevat alleen een lijst met commando's nodig voor de installatie van DSMR-reader."
 
 #: ../../installation.rst:8
-msgid ":doc:`Go to quick installation instructions here.<installation_quick>`"
+msgid ":doc:`Go to quick installation instructions here.<installation/quick>`"
 msgstr ""
-":doc:`Ga hier naar de instructies voor de snelle installatie."
-"<installation_quick>`"
+":doc:`Ga hier naar de instructies voor de snelle installatie.<installation/"
+"quick>`"
 
 #: ../../installation.rst:12
-msgid "Method B: Extended installation"
-msgstr "Methode B: Uitgebreide installatie"
+msgid "Method B: Explained installation"
+msgstr "Methode B: Toegelichte installatie"
 
 #: ../../installation.rst:13
 msgid ""
-"For others users who want some addition explanation about what they are "
-"exactly doing/installing."
+"For others users who want some addition explanation about what they are exactly "
+"doing/installing."
 msgstr ""
 "Voor alle andere gebruikers, die graag willen weten wat ze exact uitvoeren."
 
 #: ../../installation.rst:15
 msgid ""
-":doc:`Go to extended installation instructions here.<installation_extended>`"
+":doc:`Go to explained installation instructions here.<installation/explained>`"
 msgstr ""
-":doc:`Ga hier naar de instructies voor de uitgebreide installatie."
-"<installation_extended>`"
+":doc:`Ga hier naar de instructies voor de toegelichte installatie.<installation/"
+"explained>`"
 
 #: ../../installation.rst:19
 msgid "Docker installation (alternative)"
@@ -64,11 +61,10 @@ msgstr "Docker-installatie (alternatief)"
 
 #: ../../installation.rst:20
 msgid "Use DSMR-reader in Docker. Containers are maintained by third parties."
-msgstr ""
-"Gebruik DSMR-reader in Docker. Containers worden bijgehouden door derden."
+msgstr "Gebruik DSMR-reader in Docker. Containers worden bijgehouden door derden."
 
 #: ../../installation.rst:22
-msgid ":doc:`Go to Docker installation instructions here.<installation_docker>`"
+msgid ":doc:`Go to Docker installation instructions here.<installation/docker>`"
 msgstr ""
-":doc:`Ga hier naar de instructies voor de Docker-installatie."
-"<installation_docker>`"
+":doc:`Ga hier naar de instructies voor de Docker-installatie.<installation/"
+"docker>`"

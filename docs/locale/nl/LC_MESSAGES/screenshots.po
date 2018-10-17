@@ -36,11 +36,11 @@ msgstr "Dashboard"
 
 #: ../../screenshots.rst:14
 msgid ""
-"The dashboard displays the latest information regarding any consumption of "
-"today and the current month so far."
+"The dashboard displays the latest information regarding any consumption of today "
+"and the current month so far."
 msgstr ""
-"Het dashboard geeft de meest recente informatie weer over je energieverbruik "
-"van vandaag en de lopende maand tot nu toe."
+"Het dashboard geeft de meest recente informatie weer over je energieverbruik van "
+"vandaag en de lopende maand tot nu toe."
 
 #: ../../screenshots.rst:22
 msgid "Archive"
@@ -48,8 +48,8 @@ msgstr "Archief"
 
 #: ../../screenshots.rst:24
 msgid ""
-"The archive allows you to go back to any moment tracked. The data can be "
-"plotted either on day, month or year level."
+"The archive allows you to go back to any moment tracked. The data can be plotted "
+"either on day, month or year level."
 msgstr ""
 "Het archief stelt je in staat om terug in de tijd te gaan naar elk moment dat "
 "gemeten is met de applicatie. Gegevens kunnen getoond worden op verschillende "
@@ -124,8 +124,7 @@ msgid "Settings: Overview"
 msgstr "Instellingen: Overzicht"
 
 #: ../../screenshots.rst:92
-msgid ""
-"The application has quite some features and most of them can be configured."
+msgid "The application has quite some features and most of them can be configured."
 msgstr ""
 "De applicatie heeft behoorlijk wat mogelijkheden en de meesten daarvan stel je "
 "zelf in."
@@ -173,8 +172,8 @@ msgid ""
 "be deleted."
 msgstr ""
 "Alle brondata wordt voor onbepaalde tijd bewaard. Je kunt echter retentie "
-"toepassen, waarbij de brondata slechts voor een bepaalde periode bewaard "
-"blijft. Dagstatistieken worden nooit opgeschoond."
+"toepassen, waarbij de brondata slechts voor een bepaalde periode bewaard blijft. "
+"Dagstatistieken worden nooit opgeschoond."
 
 #: ../../screenshots.rst:140
 msgid "Settings: Interface"
@@ -205,7 +204,7 @@ msgid "There is support for MQTT messaging with a lot of options."
 msgstr "Er is ondersteuning voor MQTT met een hoop verschillende opties."
 
 #: ../../screenshots.rst:165
-msgid "Get the day totals als JSON."
+msgid "Get the day totals as JSON."
 msgstr "Haal de dagtotalen op in JSON-formaat."
 
 #: ../../screenshots.rst:171 ../../screenshots.rst:195
@@ -238,8 +237,7 @@ msgstr "Instellingen: PVOutput"
 
 #: ../../screenshots.rst:215
 msgid "Link your PVOutput account to upload your electricity returned."
-msgstr ""
-"Koppel je PVOutput-account om je teruggeleverde electriciteit te uploaden."
+msgstr "Koppel je PVOutput-account om je teruggeleverde electriciteit te uploaden."
 
 #: ../../screenshots.rst:228
 msgid "Settings: Consumption"

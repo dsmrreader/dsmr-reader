@@ -1,5 +1,5 @@
-API
-===
+API Documentation
+=================
 The application has an API allowing you to insert/create readings and retrieve statistics.
 
 
@@ -16,8 +16,8 @@ The API is disabled by default in the application. You may enable it in your con
 
 Example
 ~~~~~~~
-.. image:: _static/screenshots/admin/apisettings.png
-    :target: _static/screenshots/admin/apisettings.png
+.. image:: static/screenshots/admin/apisettings.png
+    :target: static/screenshots/admin/apisettings.png
     :alt: API admin settings
 
 Authenticating

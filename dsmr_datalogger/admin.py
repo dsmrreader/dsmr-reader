@@ -33,7 +33,7 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
                 'fields': ['data_retention_in_hours'],
                 'description': _(
                     'Detailed instructions for configuring data retention can be found here: '
-                    '<a href="https://dsmr-reader.readthedocs.io/nl/latest/retention.html">Retention documentation</a>'
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/latest/admin/datalogger.html">Documentation</a>'
                 )
             }
         ),

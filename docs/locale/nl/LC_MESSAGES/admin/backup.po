@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2018, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-11 21:00+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../admin/backup.rst:2
+msgid "Screenshots"
+msgstr ""
+
+#: ../../admin/backup.rst:4
+msgid "Below you can find screenshots of the application."
+msgstr ""
+
+#: ../../admin/backup.rst:9
+msgid "Contents"
+msgstr ""
+
+#: ../../admin/backup.rst:12
+msgid "Dashboard"
+msgstr ""
+
+#: ../../admin/backup.rst:14
+msgid ""
+"The dashboard displays the latest information regarding any consumption "
+"of today and the current month so far."
+msgstr ""
+
+#: ../../admin/backup.rst:22
+msgid "Archive"
+msgstr ""
+
+#: ../../admin/backup.rst:24
+msgid ""
+"The archive allows you to go back to any moment tracked. The data can be "
+"plotted either on day, month or year level."
+msgstr ""
+
+#: ../../admin/backup.rst:32
+msgid "Compare"
+msgstr ""
+
+#: ../../admin/backup.rst:33
+msgid "This page allows you to compare two days, months or years tracked before."
+msgstr ""
+
+#: ../../admin/backup.rst:41
+msgid "Trends"
+msgstr ""
+
+#: ../../admin/backup.rst:43
+msgid "Trends are an average summary of your daily consumption and habits."
+msgstr ""
+
+#: ../../admin/backup.rst:51
+msgid "Statistics"
+msgstr ""
+
+#: ../../admin/backup.rst:53
+msgid ""
+"The statistics page will display the current state of your meter and the "
+"energy prices currently apply (if any)."
+msgstr ""
+
+#: ../../admin/backup.rst:61
+msgid "Energy contracts"
+msgstr ""
+
+#: ../../admin/backup.rst:63
+msgid "Summary of all your contracts and the amount of energy consumed/generated."
+msgstr ""
+
+#: ../../admin/backup.rst:71
+msgid "Status"
+msgstr ""
+
+#: ../../admin/backup.rst:73
+msgid ""
+"The status page shows the 'health' of the application and any data "
+"tracked. If there are any problems regarding data handling, they should "
+"be highlighted here."
+msgstr ""
+
+#: ../../admin/backup.rst:82
+msgid "Export"
+msgstr ""
+
+#: ../../admin/backup.rst:83
+msgid ""
+"Want to export day totals or hourly data to Excel? This page allows you "
+"to export the data in .CSV format."
+msgstr ""
+
+#: ../../admin/backup.rst:91
+msgid "Settings: Overview"
+msgstr ""
+
+#: ../../admin/backup.rst:92
+msgid ""
+"The application has quite some features and most of them can be "
+"configured."
+msgstr ""
+
+#: ../../admin/backup.rst:100
+msgid "Settings: API"
+msgstr ""
+
+#: ../../admin/backup.rst:101
+msgid ""
+"Configure the API if you need it to supply telegrams or simply read data "
+"from DSMR-reader."
+msgstr ""
+
+#: ../../admin/backup.rst:109
+msgid "Settings: Backup & Dropbox"
+msgstr ""
+
+#: ../../admin/backup.rst:110
+msgid "By default the application backs up your data locally."
+msgstr ""
+
+#: ../../admin/backup.rst:116
+msgid ""
+"You can use your Dropbox-account to make sure your backups are safely "
+"stored in your account."
+msgstr ""
+
+#: ../../admin/backup.rst:124
+msgid "Settings: Datalogger & retention"
+msgstr ""
+
+#: ../../admin/backup.rst:125
+msgid "Configure the builtin datalogger."
+msgstr ""
+
+#: ../../admin/backup.rst:131
+msgid ""
+"All source data read is stored indefinitely, but you can apply retention,"
+" only keeping the source data for a certain amount of time. Day "
+"statistics will never be deleted."
+msgstr ""
+
+#: ../../admin/backup.rst:140
+msgid "Settings: Interface"
+msgstr ""
+
+#: ../../admin/backup.rst:141
+msgid "You can change most colors used in graphs to your personal flavor."
+msgstr ""
+
+#: ../../admin/backup.rst:149
+msgid "Settings: MinderGas.nl"
+msgstr ""
+
+#: ../../admin/backup.rst:150
+msgid ""
+"Link your MinderGas.nl-account to have DSMR-reader upload your gas meter "
+"position daily."
+msgstr ""
+
+#: ../../admin/backup.rst:158
+msgid "Settings: MQTT"
+msgstr ""
+
+#: ../../admin/backup.rst:159
+msgid "There is support for MQTT messaging with a lot of options."
+msgstr ""
+
+#: ../../admin/backup.rst:165
+msgid "Get the day totals als JSON."
+msgstr ""
+
+#: ../../admin/backup.rst:171 ../../admin/backup.rst:195
+msgid "Or splitted per topic."
+msgstr ""
+
+#: ../../admin/backup.rst:177
+msgid "Statistics of your meter."
+msgstr ""
+
+#: ../../admin/backup.rst:183
+msgid "Telegram as JSON."
+msgstr ""
+
+#: ../../admin/backup.rst:189
+msgid "Or in raw format."
+msgstr ""
+
+#: ../../admin/backup.rst:203
+msgid "Settings: Notifications"
+msgstr ""
+
+#: ../../admin/backup.rst:205
+msgid "Notifications on your phone using Prowl or Pushover."
+msgstr ""
+
+#: ../../admin/backup.rst:213
+msgid "Settings: PVOutput"
+msgstr ""
+
+#: ../../admin/backup.rst:215
+msgid "Link your PVOutput account to upload your electricity returned."
+msgstr ""
+
+#: ../../admin/backup.rst:228
+msgid "Settings: Consumption"
+msgstr ""
+
+#: ../../admin/backup.rst:236
+msgid "Settings: Temperatures"
+msgstr ""
+
+#: ../../admin/backup.rst:238
+msgid "Keep track of the temperatures outside using the Buienradar API."
+msgstr ""
+

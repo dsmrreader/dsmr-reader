@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='frontendsettings',
             name='dashboard_graph_width',
-            field=models.IntegerField(default=30, help_text='The number of items displayed on the X-axis of the dashboard graphs', validators=[django.core.validators.MinValueValidator(30), django.core.validators.MaxValueValidator(120)]),
+            field=models.IntegerField(default=30, verbose_name='Dashboard graph width', help_text='The number of items displayed on the X-axis of the dashboard graphs', validators=[django.core.validators.MinValueValidator(30), django.core.validators.MaxValueValidator(120)]),
         ),
     ]
