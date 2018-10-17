@@ -8,6 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2018-10-17 18:30+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -55,7 +57,7 @@ msgstr ""
 "fixes-new-features>`_."
 
 #: ../../changelog.rst:21
-msgid "v1.25.0 - 2018-xx-xx"
+msgid "v1.25.0 - 2018-10-18"
 msgstr ""
 
 #: ../../changelog.rst:23 ../../changelog.rst:47 ../../changelog.rst:64
@@ -124,7 +126,7 @@ msgstr ""
 #: ../../changelog.rst:32
 msgid ""
 "[`#532 <https://github.com/dennissiemensma/dsmr-reader/issues/532>`_] "
-"Update documentation"
+"Update documentation (complete overhaul)"
 msgstr ""
 
 #: ../../changelog.rst:39
@@ -2054,5 +2056,13 @@ msgstr ""
 #~ msgid ""
 #~ "[`#xxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-"
 #~ "reader/issues/xxxxxxxxxxxxxxxx>`_] yyyyyyyyyyyyyyyy"
+#~ msgstr ""
+
+#~ msgid "v1.25.0 - 2018-xx-xx"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "[`#532 <https://github.com/dennissiemensma/dsmr-"
+#~ "reader/issues/532>`_] Update documentation"
 #~ msgstr ""
 
