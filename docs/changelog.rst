@@ -17,7 +17,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v1.25.0 - 2018-xx-xx
+v1.25.0 - 2018-10-18
 ^^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
@@ -29,7 +29,7 @@ v1.25.0 - 2018-xx-xx
 - [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Simplified Compare page
 - [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring (datalogger)
 - [`#523 <https://github.com/dennissiemensma/dsmr-reader/issues/523>`_] Automatische gas consumption dashboard
-- [`#532 <https://github.com/dennissiemensma/dsmr-reader/issues/532>`_] Update documentation
+- [`#532 <https://github.com/dennissiemensma/dsmr-reader/issues/532>`_] Update documentation (complete overhaul)
 
 
 ----
