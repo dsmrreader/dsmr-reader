@@ -47,6 +47,7 @@ Listed in any order, sorted by name.
 - `michielvisser <https://github.com/michielvisser>`_
 - `mkruiver <https://github.com/mkruiver>`_
 - `mrvanes <https://github.com/mrvanes>`_ 
+- `Oliver Payne <https://github.com/olipayne>`_ 
 - `Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_
 - `perryodk <https://github.com/perryodk>`_
 - `pyrocumulus <https://github.com/pyrocumulus>`_
@@ -60,11 +61,12 @@ Listed in any order, sorted by name.
 - `TopdRob <https://github.com/TopdRob>`_
 - `tpjanssen <https://github.com/tpjanssen>`_
 - `trbs <https://github.com/trbs>`_
+- `trizz <https://github.com/trizz>`_
 - `ualex73 <https://github.com/ualex73>`_
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
-
+ 
  
 Software used
 -------------

@@ -45,7 +45,7 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
                 'fields': ['access_token'],
                 'description': _(
                     'Detailed instructions for configuring Dropbox can be found here: <a href="https://dsmr-reader.read'
-                    'thedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync">FAQ in documentation</a>'
+                    'thedocs.io/nl/latest/admin/backup_dropbox.html">Documentation</a>'
                 )
             }
         ),

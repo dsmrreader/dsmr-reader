@@ -2,7 +2,6 @@
 {% load static %}
 {% load humanize %}
 {% load i18n %} 
-{% load hex_to_rgb %}
 
 {% block title %}{% trans "Dashboard" %}{% endblock %}
 {% block header %}{% trans "Dashboard" %} &nbsp; <i class="fas fa-tachometer-alt"></i>{% endblock %}
@@ -213,13 +212,12 @@
 
 {% block javascript %}
     {{ block.super }}
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts-common-4.1.0.rc2.min.js' %}"></script>
 
     <script type="text/javascript">
         var dashboard_graph_width = {{ frontend_settings.dashboard_graph_width }};
         var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
     </script>
-
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts-common-4.1.0.rc2.min.js' %}"></script>
 
 {% if capabilities.electricity %}
     <script type="text/javascript">
@@ -291,6 +289,9 @@
             update_header();
             setInterval(function(){ update_header(); }, 2500);
             setInterval(function(){ update_consumption(); }, 20000)
+            
+            /* Reload entire page after 15 minutes. */
+            setInterval(function(){ location.reload(); }, 15 * 60 * 1000)
 
             initialize_consumption();
         });

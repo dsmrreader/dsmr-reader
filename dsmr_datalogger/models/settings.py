@@ -6,9 +6,9 @@ from solo.models import SingletonModel
 class DataloggerSettings(SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
     DSMR_VERSION_4_PLUS = 4
-    DSMR_VERSION_2 = 3  # Yes that is a three and it's legacy.
+    DSMR_VERSION_2 = 3  # Yes, that is indeed a three and it's called "legacy" ;]
     DSMR_VERSION_CHOICES = (
-        (DSMR_VERSION_4_PLUS, _('DSMR version 4+')),
+        (DSMR_VERSION_4_PLUS, _('DSMR version 4/5')),
         (DSMR_VERSION_2, _('DSMR version 2')),
     )
 

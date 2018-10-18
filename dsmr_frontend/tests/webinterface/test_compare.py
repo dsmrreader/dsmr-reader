@@ -1,12 +1,13 @@
 from unittest import mock
 
 from django.test import TestCase, Client
-from django.utils import timezone
+from django.utils import timezone, formats
 from django.urls import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics
 
 
@@ -38,6 +39,38 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
+
+    @mock.patch('django.utils.timezone.now')
+    def test_compare_xhr(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+        response = self.client.get(
+            reverse('{}:archive'.format(self.namespace))
+        )
+        # XHR's.
+        data = {
+            'base_date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT'),
+            'comparison_date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT'),
+        }
+
+        for current_level in ('days', 'months', 'years'):
+            # Test both with tariffs separated and merged.
+            for merge in (False, True):
+                frontend_settings = FrontendSettings.get_solo()
+                frontend_settings.merge_electricity_tariffs = merge
+                frontend_settings.save()
+
+                data.update({'level': current_level})
+                response = self.client.get(
+                    reverse('{}:compare-xhr-summary'.format(self.namespace)), data=data
+                )
+                self.assertEqual(response.status_code, 200, response.content)
+
+        # Invalid XHR.
+        data.update({'level': 'INVALID DATA'})
+        response = self.client.get(
+            reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+        )
+        self.assertEqual(response.status_code, 500)
 
 
 class TestViewsWithoutData(TestViews):

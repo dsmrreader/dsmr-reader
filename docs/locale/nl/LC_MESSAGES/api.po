@@ -19,8 +19,8 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../api.rst:2
-msgid "API"
-msgstr "API"
+msgid "API Documentation"
+msgstr "API-documentatie"
 
 #: ../../api.rst:3
 msgid ""
@@ -689,3 +689,6 @@ msgstr ""
 #: ../../api.rst:847
 msgid "Full path: ``/api/v2/application/status``"
 msgstr "Volledig pad: ``/api/v2/application/status``"
+
+#~ msgid "API"
+#~ msgstr "API"

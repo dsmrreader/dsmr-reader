@@ -5,12 +5,31 @@ Changelog
 
 Upgrading
 ^^^^^^^^^
+
 Please make sure you have a fresh **database backup** before upgrading! Upgrading is very easy due to a builtin mechanism. 
 
-.. seealso:: 
+.. seealso::
 
     - `About back-ups <https://dsmr-reader.readthedocs.io/en/latest/application.html#data-preservation-backups>`_.
     - `About upgrading <https://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
+
+
+----
+
+
+v1.25.0 - 2018-10-18
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Fixed a Javascript bug in Archive and Compare pages, causing the selection to glitch
+- [`#527 <https://github.com/dennissiemensma/dsmr-reader/issues/527>`_] Docker DSMR Datalogger - by trizz
+- [`#533 <https://github.com/dennissiemensma/dsmr-reader/issues/533>`_] General English language fixes - by Oliver Payne
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Convert Archive page to eCharts
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Simplified Compare page
+- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring (datalogger)
+- [`#523 <https://github.com/dennissiemensma/dsmr-reader/issues/523>`_] Automatische gas consumption dashboard
+- [`#532 <https://github.com/dennissiemensma/dsmr-reader/issues/532>`_] Update documentation (complete overhaul)
 
 
 ----
@@ -30,9 +49,10 @@ v1.24.0 - 2018-09-29
 - [`#494 <https://github.com/dennissiemensma/dsmr-reader/issues/494>`_] Extend Usage statistics to include return
 - [`#467 <https://github.com/dennissiemensma/dsmr-reader/issues/467>`_] PVO uploadtijden in sync houden
 - [`#513 <https://github.com/dennissiemensma/dsmr-reader/issues/513>`_] Data being ignored in telegram grouping
+- [`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] Convert archive & comparison pages to eCharts
 - [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
 - [`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add support for Python 3.7
-- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring
+- [`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] Logging refactoring (backend)
 
 
 ----
@@ -57,6 +77,8 @@ v1.23.1 - 2018-08-26
 - [`#515 <https://github.com/dennissiemensma/dsmr-reader/issues/515>`_] Missing mqtt values
 
 
+----
+
 
 v1.23.1 - 2018-08-26
 ^^^^^^^^^^^^^^^^^^^^
@@ -65,6 +87,8 @@ v1.23.1 - 2018-08-26
 
 - [`#515 <https://github.com/dennissiemensma/dsmr-reader/issues/515>`_] Missing mqtt values
 
+
+----
 
 
 v1.23.0 - 2018-08-02

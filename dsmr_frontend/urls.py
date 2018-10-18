@@ -6,7 +6,7 @@ from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, Dashboa
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
 from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
 from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXhrElectricityByTariff
-from dsmr_frontend.views.compare import Compare
+from dsmr_frontend.views.compare import Compare, CompareXhrSummary
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status, XhrUpdateChecker
 from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect
@@ -38,6 +38,7 @@ urlpatterns = [
         name='trends-xhr-consumption-by-tariff'
     ),
     path('compare', Compare.as_view(), name='compare'),
+    path('compare/xhr/summary', CompareXhrSummary.as_view(), name='compare-xhr-summary'),
 
     # Technical information.
     path('status', Status.as_view(), name='status'),

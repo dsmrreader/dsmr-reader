@@ -76,6 +76,7 @@ class FrontendSettings(SingletonModel):
     dashboard_graph_width = models.IntegerField(
         default=30,
         validators=[MinValueValidator(30), MaxValueValidator(120)],
+        verbose_name=_('Dashboard graph width'),
         help_text=_("The number of items displayed on the X-axis of the dashboard graphs")
     )
 

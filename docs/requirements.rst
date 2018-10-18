@@ -6,23 +6,22 @@ Requirements
     :depth: 2
 
 
-OS / hardware
-^^^^^^^^^^^^^
-**Raspbian OS or Debian based OS**
+OS: ``Raspbian OS``
+^^^^^^^^^^^^^^^^^^^
 
- - Recommended and tested with, but any OS satisfying the requirements should do fine.
+*(Or similar. Raspbian is recommended and tested with, but any satisfying the requirements should do fine)*
 
 .. note::
 
     - **Alternative #1**: You can also run it on any server near your smart meter, as long as it satisfies the other requirements.
     
-    - **Alternative #2**: The application supports receiving P1 telegrams using an API, so you can also run it on a server outside your home. (:doc:`API DOCS<api>`)
+    - **Alternative #2**: The application supports receiving P1 telegrams using an API, so you can also run it on a server outside your home. (:doc:`API docs here<api>`)
 
 
-**RaspberryPi 3 or Linux server**
+Hardware: ``RaspberryPi 3 or Linux server``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-.. warning::
+.. note::
 
     The RaspberryPi 1 and 2 tend to be **too slow** for this project, as it requires multi core processing.
     
@@ -30,53 +29,36 @@ OS / hardware
 
 
 
-Python
-^^^^^^
-
-**Python 3.5+**
+Python: ``3.5+``
+^^^^^^^^^^^^^^^^
 
 .. warning::
 
     - Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` (due to Django).
-    - Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader v2.0`` (due to Django).
+    - Support for ``Python 3.4`` will be **discontinued** ``late 2018/begin 2019`` (due to Django & Python ``3.4`` End of Life).
 
 
-Database
-^^^^^^^^
+Database: ``PostgreSQL 9+``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**PostgreSQL 9+**
-
-.. warning::
+.. note::
 
     Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` and will be discontinued completely in a later release.
-    Please use a PostgreSQL database instead. Users already running MySQL will be supported in migrating at a later moment.
+    Please use a PostgreSQL database instead.
 
 
-Disk space
-^^^^^^^^^^
+Disk space: ``1+ GB``
+^^^^^^^^^^^^^^^^^^^^^
 
-**Minimal 1 GB of disk space on RaspberryPi (card)** (for application installation & virtualenv). 
+*(For application installation & virtualenv)*
 
- - More disk space is required for storing all reader data captured (optional). I generally advise to use a 8+ GB SD card. 
- - The readings will take about 90+ percent of the disk space. Retention is on it's way for a future release in 2017. 
-
-
-Cable
-^^^^^
-
-**Smart Meter** with support for **at least DSMR 4.x+** and a **P1 telegram port**
-
- - Tested so far with Landis+Gyr E350, Kaifa.
-
-**Smart meter P1 data cable** 
-
- - Can be purchased online and they cost around 15 tot 20 Euro's each.
+ - More disk space is required for storing all reader data captured (optional). I generally advise to use an 8+ GB SD card, depending on whether you keep all readings stored.
+ - The readings will take about 90+ percent of the disk space used by the application. You can enable retention to have all readings cleaned up periodically. This will make the application barely use any disk space at all (depending on your settings).
 
 
-Misc
-^^^^
+P1 telegram cable
+^^^^^^^^^^^^^^^^^
 
-**Basic Linux knowledge for deployment, debugging and troubleshooting**
+- **Smart Meter** with support for **at least DSMR 4.x+** and a **P1 telegram port**
 
- - It just really helps if you know what you are doing.
-
+-  **Smart meter P1 data cable** *(Can be purchased online and they cost around EUR 15,- to 20,-)*

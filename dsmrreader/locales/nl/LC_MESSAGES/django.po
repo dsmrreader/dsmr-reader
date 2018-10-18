@@ -64,8 +64,8 @@ msgstr "Geavanceerd"
 msgid "Automatic fields"
 msgstr "Automatische velden"
 
-msgid "Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync\">FAQ in documentation</a>"
-msgstr "Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#dropbox-automated-backup-sync\">FAQ in documentatie</a>"
+msgid "Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentatie</a>"
 
 msgid "Backup"
 msgstr "Backup"
@@ -235,8 +235,8 @@ msgstr "Elektriciteitsmetingen vinden elke X seconden plaats. We kunnen ze voor 
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
-msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/retention.html\">Retention documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/retention.html\">Retentie-documentatie</a>"
+msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/datalogger.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/datalogger.html\">Documentatie</a>"
 
 msgid "Datalogger"
 msgstr "Datalogger"
@@ -316,8 +316,8 @@ msgstr "DSMR-uitlezing (alleen lezen)"
 msgid "DSMR readings (read only)"
 msgstr "DSMR-uitlezing (alleen lezen)"
 
-msgid "DSMR version 4+"
-msgstr "DSMR-versie 4+"
+msgid "DSMR version 4/5"
+msgstr "DSMR-versie 4/5"
 
 msgid "DSMR version 2"
 msgstr "DSMR-versie 2"
@@ -535,6 +535,9 @@ msgstr "Temperatuurkleur"
 msgid "Graph color for temperatures read"
 msgstr "Grafiekkleur voor temperatuurmetingen"
 
+msgid "Dashboard graph width"
+msgstr "Dashboard grafiek breedte"
+
 msgid "The number of items displayed on the X-axis of the dashboard graphs"
 msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
 
@@ -559,6 +562,9 @@ msgstr "Maanden"
 msgid "Years"
 msgstr "Jaren"
 
+msgid "Pick a day, month or year"
+msgstr "Kies een day, maand of jaar"
+
 msgid "Electricity usage"
 msgstr "Elektriciteitsverbruik"
 
@@ -568,8 +574,26 @@ msgstr "(in kWh)"
 msgid "Gas usage"
 msgstr "Gasverbruik"
 
-msgid "(in m<sup>3</sup>)"
-msgstr "(in m<sup>3</sup>)"
+msgid "(in m³)"
+msgstr "(in m³)"
+
+msgid "Electricity 1 (low tariff)"
+msgstr "Elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
+
+msgid "Electricity 1 returned (low tariff)"
+msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+
+msgid "Electricity 2 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
+
+msgid "Electricity (single tariff)"
+msgstr "Elektriciteit (enkel tarief)"
+
+msgid "Electricity returned (single tariff)"
+msgstr "Elektriciteit teruggeleverd (enkel tarief)"
 
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
@@ -580,6 +604,9 @@ msgstr "Bekijk releases"
 msgid "Dashboard"
 msgstr "Dashboard"
 
+msgid "Compare"
+msgstr "Vergelijk"
+
 msgid "Trends"
 msgstr "Trends"
 
@@ -588,9 +615,6 @@ msgstr "Statistieken"
 
 msgid "Energy contracts"
 msgstr "Energiecontracten"
-
-msgid "Compare"
-msgstr "Vergelijk"
 
 msgid "Status"
 msgstr "Status"
@@ -675,15 +699,6 @@ msgstr "Teruggeleverd"
 
 msgid "Cost"
 msgstr "Kosten"
-
-msgid "Electricity (single tariff)"
-msgstr "Elektriciteit (enkel tarief)"
-
-msgid "Electricity 1 (low tariff)"
-msgstr "Elektriciteit 1 (daltarief)"
-
-msgid "Electricity 2 (high tariff)"
-msgstr "Elektriciteit 2 (piektarief)"
 
 msgid "Total"
 msgstr "Totaal"
@@ -783,6 +798,15 @@ msgstr "Max."
 
 msgid "Avg."
 msgstr "Gem."
+
+msgid "Difference"
+msgstr "Verschil"
+
+msgid "in kWh"
+msgstr "in kWh"
+
+msgid "in m<sup>3</sup>"
+msgstr "in m<sup>3</sup>"
 
 msgid "Add note for today"
 msgstr "Voeg notitie toe voor vandaag"
@@ -1000,17 +1024,8 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
-msgid "Electricity returned (single tariff)"
-msgstr "Elektriciteit teruggeleverd (enkel tarief)"
-
-msgid "Electricity 1 returned (low tariff)"
-msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
-
-msgid "Electricity 2 returned (high tariff)"
-msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
-
-msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentation</a>"
-msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentatie</a>"
+msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/mindergas.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/mindergas.html\">Documentatie</a>"
 
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
@@ -1432,8 +1447,8 @@ msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broke
 msgid "MQTT: Telegram (per split topic) configuration"
 msgstr "MQTT: Telegram (per gesplitst topic) configuratie"
 
-msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentation</a>"
-msgstr "Gedetailleerde instructies voor het instellen van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentatie</a>"
+msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/notifications.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/notifications.html\">Documentatie</a>"
 
 msgid "Only applies when using Pushover"
 msgstr "Alleen van toepassing voor Pushover"
@@ -1842,3 +1857,9 @@ msgstr "Engels"
 
 msgid "Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html"
 msgstr "Volledige documentatie beschikbaar op: https://dsmr-reader.readthedocs.io/nl/latest/api.html"
+
+#~ msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentation</a>"
+#~ msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentatie</a>"
+
+#~ msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentation</a>"
+#~ msgstr "Gedetailleerde instructies voor het instellen van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentatie</a>"

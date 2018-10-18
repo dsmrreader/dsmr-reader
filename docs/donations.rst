@@ -1,14 +1,10 @@
 Donations / tips
 ================
 
-Do you like this project or does it help you alot? And do you want to tip me or buy me a beer or coffee?
-You are always welcome to make a small donation as a token of appreciation!
+Do you like this project or has it given you a lot of insight in your energy consumption?
+And would you like to return me the favor and buy me a beer/coffee?
 
-Know that this project **will always be free to use** and I already do make a decent salary with my regular job. =)
+You are always welcome to make any amount of donation, as a token of appreciation!
 
 Link: `Donate using PayPal <https://www.paypal.me/DSiemensma>`_
 ---------------------------------------------------------------
-
-.. note::
-
-    Please do not pressure me by "donating for new features", but only for liking what you are using so far... Thanks!

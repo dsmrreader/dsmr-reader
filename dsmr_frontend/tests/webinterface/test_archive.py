@@ -52,7 +52,7 @@ class TestViews(TestCase):
             self.assertEqual(response.context['end_date'], date(2016, 1, 2))
 
         for current_level in ('days', 'months', 'years'):
-            # Test both with tariffs sparated and merged.
+            # Test both with tariffs separated and merged.
             for merge in (False, True):
                 frontend_settings = FrontendSettings.get_solo()
                 frontend_settings.merge_electricity_tariffs = merge

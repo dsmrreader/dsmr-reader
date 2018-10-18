@@ -1,5 +1,5 @@
-Using the application
-=====================
+Setting up the application
+==========================
 
 
 .. contents::
@@ -11,15 +11,13 @@ DSMR 2.x (legacy)
 
 .. note::
     
-    Note: The application's default DSMR version used is 4.x. This version is also the **default** for any recent smart meters placed at your home. 
+    Note: The application's default DSMR version used is ``DSMR 4.x``. This version is also the **default** for any recent smart meters placed at your home. 
 
-.. warning::
-    
-    Make sure to alter this setting in the backend's configuration page to DSMR 2.x when required!
+    Make sure to alter this setting in the backend's configuration page to ``DSMR 2.x`` when required!
 
 
-Viewing the application
------------------------
+Accessing the application
+-------------------------
 Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser. 
 
 Did you install using a monitor attached to the RaspberryPi and you don't know what address your device has? Just type ``ifconfig | grep addr`` and it should display an ip address, for example::
@@ -105,7 +103,7 @@ Public webinterface warning
 
 .. warning::
     
-    It's safe to a htpasswd generator, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**.
+    It's safe to use a htpasswd generator, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**.
     
 .. seealso::
     

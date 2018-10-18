@@ -108,7 +108,7 @@ def read_telegram():
 
 def verify_telegram_checksum(data):
     """
-    Verifies telegram by checking it's CRC. Raises exception on failure. DSMR docs state:
+    Verifies telegram by checking its CRC. Raises exception on failure. DSMR docs state:
     CRC is a CRC16 value calculated over the preceding characters in the data message (from / to ! using the polynomial)
     """
     matches = re.search(r'^(/[^!]+!)([A-Z0-9]{4})', data)
@@ -185,7 +185,7 @@ def telegram_to_reading(data):  # noqa: C901
 
     if connection_parameters['crc'] and datalogger_settings.verify_telegram_crc:
         try:
-            # Verify telegram by checking it's CRC.
+            # Verify telegram by checking its CRC.
             verify_telegram_checksum(data=data)
         except InvalidTelegramError as error:
             # Hook to keep track of failed readings count.
