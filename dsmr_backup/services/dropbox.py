@@ -1,11 +1,17 @@
+import logging
 import os
 
+from django.utils.translation import ugettext_lazy as gettext
 from django.utils import timezone
 from django.conf import settings
 import dropbox
 
 from dsmr_backup.models.settings import DropboxSettings
+from dsmr_frontend.models.message import Notification
 import dsmr_backup.services.backup
+
+
+logger = logging.getLogger('commands')
 
 
 def sync():
@@ -15,15 +21,7 @@ def sync():
     if not dropbox_settings.access_token:
         return
 
-    #  Or when we already synced within the last hour.
-    next_sync_interval = None
-
-    if dropbox_settings.latest_sync:
-        next_sync_interval = dropbox_settings.latest_sync + timezone.timedelta(
-            hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
-        )
-
-    if next_sync_interval and timezone.now() < next_sync_interval:
+    if dropbox_settings.next_sync and dropbox_settings.next_sync > timezone.now():
         return
 
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
@@ -32,28 +30,72 @@ def sync():
     for (_, _, filenames) in os.walk(backup_directory):
         for current_file in filenames:
             current_file_path = os.path.join(backup_directory, current_file)
-            file_stats = os.stat(current_file_path)
+            check_synced_file(file_path=current_file_path, dropbox_settings=dropbox_settings)
 
-            # Ignore empty files.
-            if file_stats.st_size == 0:
-                continue
+    # Try again in a while.
+    DropboxSettings.objects.update(
+        latest_sync=timezone.now(),
+        next_sync=timezone.now() + timezone.timedelta(
+            hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
+        )
+    )
 
-            last_modified = timezone.datetime.fromtimestamp(file_stats.st_mtime)
-            last_modified = timezone.make_aware(last_modified)
 
-            # Ignore when file was not altered since last sync.
-            if dropbox_settings.latest_sync and last_modified < dropbox_settings.latest_sync:
-                continue
+def check_synced_file(file_path, dropbox_settings):
+    file_stats = os.stat(file_path)
 
-            upload_chunked(file_path=current_file_path)
+    # Ignore empty files.
+    if file_stats.st_size == 0:
+        return
 
-    DropboxSettings.objects.update(latest_sync=timezone.now())
+    last_modified = timezone.datetime.fromtimestamp(file_stats.st_mtime)
+    last_modified = timezone.make_aware(last_modified)
+
+    # Ignore when file was not altered since last sync.
+    if dropbox_settings.latest_sync and last_modified < dropbox_settings.latest_sync:
+        return
+
+    try:
+        upload_chunked(file_path=file_path)
+    except dropbox.exceptions.DropboxException as exception:
+        error_message = str(exception.error)
+        logger.error(' - Dropbox error: %s', error_message)
+
+        if 'insufficient_space' in error_message:
+            Notification.objects.create(message=gettext(
+                "[{}] Unable to upload files to Dropbox due to {}. "
+                "Ignoring new files for the next {} hours...".format(
+                    timezone.now(),
+                    error_message,
+                    settings.DSMRREADER_DROPBOX_ERROR_INTERVAL
+                )
+            ))
+            DropboxSettings.objects.update(
+                latest_sync=timezone.now(),
+                next_sync=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
+            )
+
+        # Do not bother trying again.
+        if 'invalid_access_token' in error_message:
+            Notification.objects.create(message=gettext(
+                "[{}] Unable to upload files to Dropbox due to {}. Removing credentials...".format(
+                    timezone.now(),
+                    error_message
+                )
+            ))
+            DropboxSettings.objects.update(
+                latest_sync=timezone.now(),
+                next_sync=None,
+                access_token=None
+            )
+
+        raise
 
 
 def upload_chunked(file_path):
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     # For backend logging in Supervisor.
-    print(' - Uploading file to Dropbox: {}.'.format(file_path))
+    logger.info(' - Uploading file to Dropbox: %s', file_path)
 
     dropbox_settings = DropboxSettings.get_solo()
     file_name = os.path.split(file_path)[-1]

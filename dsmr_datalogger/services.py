@@ -3,6 +3,8 @@ import base64
 import re
 
 from serial.serialutil import SerialException
+from django.db.models.functions.datetime import TruncHour
+from django.db.models.aggregates import Count
 from django.db.models.expressions import F
 from django.utils import timezone
 from django.conf import settings
@@ -12,7 +14,8 @@ import pytz
 
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSettings
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.dsmr import DSMR_MAPPING
 import dsmr_datalogger.signals
@@ -20,6 +23,7 @@ import dsmr_datalogger.signals
 
 dsmrreader_logger = logging.getLogger('dsmrreader')
 django_logger = logging.getLogger('django')
+commands_logger = logging.getLogger('commands')
 
 
 def get_dsmr_connection_parameters():
@@ -104,7 +108,7 @@ def read_telegram():
 
 def verify_telegram_checksum(data):
     """
-    Verifies telegram by checking it's CRC. Raises exception on failure. DSMR docs state:
+    Verifies telegram by checking its CRC. Raises exception on failure. DSMR docs state:
     CRC is a CRC16 value calculated over the preceding characters in the data message (from / to ! using the polynomial)
     """
     matches = re.search(r'^(/[^!]+!)([A-Z0-9]{4})', data)
@@ -126,9 +130,15 @@ def verify_telegram_checksum(data):
     crc16_function = crcmod.predefined.mkPredefinedCrcFun('crc16')
     calculated_checksum = crc16_function(telegram)  # For example: 56708
 
+    # HEX format.
+    hex_telegram_checksum = '{:0>4}'.format(hex(telegram_checksum)[2:].upper())
+    hex_calculated_checksum = '{:0>4}'.format(hex(calculated_checksum)[2:].upper())
+
     if telegram_checksum != calculated_checksum:
         raise InvalidTelegramError(
-            'CRC mismatch: {} (telegram) != {} (calculated)'.format(telegram_checksum, calculated_checksum)
+            'CRC mismatch: {} / {} (telegram) != {} / {} (calculated)'.format(
+                telegram_checksum, hex_telegram_checksum, calculated_checksum, hex_calculated_checksum
+            )
         )
 
 
@@ -140,7 +150,7 @@ def _convert_legacy_dsmr_gas_line(parsed_reading, current_line, next_line):
         legacy_gas_line = current_line + next_line
 
     legacy_gas_result = re.search(
-        r'[^(]+\((\d+)\)\(\d+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
+        r'[^(]+\((\d+)\)\(\w+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
         legacy_gas_line
     )
     gas_timestamp = legacy_gas_result.group(1)
@@ -175,7 +185,7 @@ def telegram_to_reading(data):  # noqa: C901
 
     if connection_parameters['crc'] and datalogger_settings.verify_telegram_crc:
         try:
-            # Verify telegram by checking it's CRC.
+            # Verify telegram by checking its CRC.
             verify_telegram_checksum(data=data)
         except InvalidTelegramError as error:
             # Hook to keep track of failed readings count.
@@ -249,6 +259,9 @@ def telegram_to_reading(data):  # noqa: C901
             'phase_currently_delivered_l1': None,
             'phase_currently_delivered_l2': None,
             'phase_currently_delivered_l3': None,
+            'phase_currently_returned_l1': None,
+            'phase_currently_returned_l2': None,
+            'phase_currently_returned_l3': None,
         })
 
     # Now we need to split reading & statistics. So we split the dict here.
@@ -264,7 +277,9 @@ def telegram_to_reading(data):  # noqa: C901
     # Broadcast this telegram as signal.
     dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data=data)
 
-    dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
+    if settings.DSMRREADER_LOG_TELEGRAMS:
+        dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
+
     return new_reading
 
 
@@ -284,3 +299,77 @@ def reading_timestamp_to_datetime(string):
     is_dst = timestamp.group(7) == 'S'
     local_timezone = pytz.timezone(settings.TIME_ZONE)
     return local_timezone.localize(meter_timestamp, is_dst=is_dst).astimezone(pytz.utc)
+
+
+def apply_data_retention():
+    """
+    When data retention is enabled, this discards all data applicable for retention. Keeps at least one data point per
+    hour available.
+    """
+    settings = RetentionSettings.get_solo()
+
+    if settings.data_retention_in_hours is None:
+        # No retention enabled at all (default behaviour).
+        return
+
+    current_hour = timezone.now().hour
+
+    # Only cleanup during nights. Allow from midnight to six a.m.
+    if current_hour > 6:
+        return
+
+    # Each run should be capped, for obvious performance reasons.
+    MAX_HOURS_CLEANUP = 24
+
+    # These models should be rotated with retention. Dict value is the datetime field used.
+    MODELS_TO_CLEANUP = {
+        DsmrReading.objects.processed(): 'timestamp',
+        ElectricityConsumption.objects.all(): 'read_at',
+        GasConsumption.objects.all(): 'read_at',
+    }
+
+    retention_date = timezone.now() - timezone.timedelta(hours=settings.data_retention_in_hours)
+
+    # We need to force UTC here, to avoid AmbiguousTimeError's on DST changes.
+    timezone.activate(pytz.UTC)
+
+    for base_queryset, datetime_field in MODELS_TO_CLEANUP.items():
+        hours_to_cleanup = base_queryset.filter(
+            **{'{}__lt'.format(datetime_field): retention_date}
+        ).annotate(
+            item_hour=TruncHour(datetime_field)
+        ).values('item_hour').annotate(
+            item_count=Count('id')
+        ).order_by().filter(
+            item_count__gt=2
+        ).order_by('item_hour').values_list(
+            'item_hour', flat=True
+        )[:MAX_HOURS_CLEANUP]
+
+        hours_to_cleanup = list(hours_to_cleanup)  # Force evaluation.
+
+        if not hours_to_cleanup:
+            continue
+
+        for current_hour in hours_to_cleanup:
+
+            # Fetch all data per hour.
+            data_set = base_queryset.filter(
+                **{
+                    '{}__gte'.format(datetime_field): current_hour,
+                    '{}__lt'.format(datetime_field): current_hour + timezone.timedelta(hours=1),
+                }
+            )
+
+            # Extract the first/last item, so we can exclude it.
+            # NOTE: Want to alter this? Please update "item_count__gt=2" above as well!
+            keeper_pks = [
+                data_set.order_by(datetime_field)[0].pk,
+                data_set.order_by('-{}'.format(datetime_field))[0].pk
+            ]
+
+            # Now drop all others.
+            commands_logger.debug('Retention | Cleaning up: %s (%s)', current_hour, data_set[0].__class__.__name__)
+            data_set.exclude(pk__in=keeper_pks).delete()
+
+    timezone.deactivate()

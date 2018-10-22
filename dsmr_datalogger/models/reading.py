@@ -89,12 +89,40 @@ class DsmrReading(models.Model):
         db_index=True,
         help_text=_("Whether this reading has been processed for merging into statistics")
     )
+    phase_currently_returned_l1 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Current electricity returned by phase L1 (in kW)")
+    )
+    phase_currently_returned_l2 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Current electricity returned by phase L2 (in kW)")
+    )
+    phase_currently_returned_l3 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Current electricity returned by phase L3 (in kW)")
+    )
 
     class Meta:
         default_permissions = tuple()
         ordering = ['timestamp']
         verbose_name = _('DSMR reading (read only)')
         verbose_name_plural = _('DSMR readings (read only)')
+
+    def convert_to_local_timezone(self):
+        """ Converts the timestamp to the local time zone used. Only affects this instance, does not update record! """
+        self.timestamp = timezone.localtime(self.timestamp)
+
+        if self.extra_device_timestamp:
+            self.extra_device_timestamp = timezone.localtime(self.extra_device_timestamp)
 
     def __str__(self):
         return '{} @ {} ({} kW)'.format(

@@ -1,5 +1,5 @@
-API
-===
+API Documentation
+=================
 The application has an API allowing you to insert/create readings and retrieve statistics.
 
 
@@ -16,8 +16,8 @@ The API is disabled by default in the application. You may enable it in your con
 
 Example
 ~~~~~~~
-.. image:: _static/screenshots/admin_api_settings.png
-    :target: _static/screenshots/admin_api_settings.png
+.. image:: static/screenshots/admin/apisettings.png
+    :target: static/screenshots/admin/apisettings.png
     :alt: API admin settings
 
 Authenticating
@@ -201,7 +201,7 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
             except SerialException as error:
                 # Something else and unexpected failed.
                 print('Serial connection failed:', error)
-                raise StopIteration()  # Break out of yield.
+                return  # Break out of yield.
 
             try:
                 # Make sure weird characters are converted properly.
@@ -250,7 +250,7 @@ Client file in ``/home/dsmr/dsmr_datalogger_api_client.py``::
 Supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf``::
 
     [program:dsmr_client_datalogger]
-    command=/usr/bin/nice -n 5 /home/dsmr/.virtualenvs/dsmrclient/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
+    command=/usr/bin/nice -n 5 /home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
     pidfile=/var/tmp/dsmrreader--%(program_name)s.pid
     user=dsmr
     group=dsmr
@@ -316,6 +316,9 @@ Parameters
 - ``phase_currently_delivered_l1`` (*float*) - Current electricity used by phase L1 (in kW)
 - ``phase_currently_delivered_l2`` (*float*) - Current electricity used by phase L2 (in kW)
 - ``phase_currently_delivered_l3`` (*float*) - Current electricity used by phase L3 (in kW)
+- ``phase_currently_returned_l1`` (*float*) - Current electricity returned by phase L1 (in kW)
+- ``phase_currently_returned_l2`` (*float*) - Current electricity returned by phase L2 (in kW)
+- ``phase_currently_returned_l3`` (*float*) - Current electricity returned by phase L3 (in kW)
 - ``extra_device_timestamp`` (*datetime*) - Last timestamp read from the extra device connected (gas meter)
 - ``extra_device_delivered`` (*float*) - Last value read from the extra device connected (gas meter)
 
@@ -388,6 +391,9 @@ Using **requests** (Python)::
         "phase_currently_delivered_l1": null,
         "phase_currently_delivered_l2": null,
         "phase_currently_delivered_l3": null,
+        "phase_currently_returned_l1": null,
+        "phase_currently_returned_l2": null,
+        "phase_currently_returned_l3": null,
         "extra_device_timestamp": null,
         "extra_device_delivered": null
     }
@@ -473,6 +479,9 @@ Using **requests** (Python)::
                 "phase_currently_delivered_l1": null,
                 "phase_currently_delivered_l2": null,
                 "phase_currently_delivered_l3": null,
+                "phase_currently_returned_l1": null,
+                "phase_currently_returned_l2": null,
+                "phase_currently_returned_l3": null,
                 "extra_device_timestamp": "2015-12-11T21:00:00Z",
                 "extra_device_delivered": "956.212"
             },
@@ -528,6 +537,9 @@ Using **requests** (Python)::
                 "phase_currently_delivered_l1": "0.024",
                 "phase_currently_delivered_l2": "0.054",
                 "phase_currently_delivered_l3": "0.000",
+                "phase_currently_returned_l1": "0.000",
+                "phase_currently_returned_l2": "0.000",
+                "phase_currently_returned_l3": "0.000",
                 "extra_device_timestamp": "2017-04-29T03:00:00Z",
                 "extra_device_delivered": "1971.929"
             }
@@ -553,7 +565,7 @@ Using **requests** (Python)::
     import json
 
     response = requests.get(
-        'http://YOUR-DSMR-URL/api/v2/statistics/day?read_at__gte=2017-02-01 00:00:00&read_at__lte=2017-03-01 00:00:00',
+        'http://YOUR-DSMR-URL/api/v2/statistics/day?timestamp__gte=2017-02-01 00:00:00&timestamp__lte=2017-03-01 00:00:00',
         headers={'X-AUTHKEY': 'YOUR-API-KEY'},
     )
 
@@ -583,6 +595,9 @@ Using **requests** (Python)::
                 "phase_currently_delivered_l1": "0.017",
                 "phase_currently_delivered_l2": "0.058",
                 "phase_currently_delivered_l3": "0.000",
+                "phase_currently_returned_l1": "0.000",
+                "phase_currently_returned_l2": "0.000",
+                "phase_currently_returned_l3": "0.000",
                 "extra_device_timestamp": "2017-01-31T22:00:00Z",
                 "extra_device_delivered": "1835.904"
             },
@@ -599,6 +614,86 @@ Using **requests** (Python)::
 ----
     
 
+``GET`` - ``consumption/today``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the consumption of the current day so far.
+
+
+URI
+~~~
+Full path: ``/api/v2/consumption/today``
+
+
+Parameters
+~~~~~~~~~~
+None.
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Data structure returned**::
+
+    {
+        "day": "2017-09-28",
+        "electricity1": 0.716,
+        "electricity1_cost": 0.12,
+        "electricity1_returned": 0,
+        "electricity2": 3.403,
+        "electricity2_cost": 0.63,
+        "electricity2_returned": 0,
+        "gas": 0.253,
+        "gas_cost": 0.15,
+        "total_cost": 0.9,
+    }
+
+    
+----
+    
+
+``GET`` - ``consumption/electricity-live``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the live electricity consumption, containing the same data as the Dashboard header.
+
+
+URI
+~~~
+Full path: ``/api/v2/consumption/electricity-live``
+
+
+Parameters
+~~~~~~~~~~
+None.
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Note**: ``cost_per_hour`` is only available when you've set energy prices.
+
+**Data structure returned**::
+
+    {
+        "timestamp": "2016-07-01T20:00:00Z",
+        "currently_returned": 0,
+        "currently_delivered":1123,
+        "cost_per_hour": 0.02,
+    }
+
+
+----
+    
+    
 ``GET`` - ``statistics/day``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Retrieves any **aggregated day statistics**. Please note that these are generated a few hours **after midnight**.
@@ -709,3 +804,87 @@ All the :ref:`generic DSMRREADING examples <generic-examples-anchor>` apply here
     }
 
 
+----
+
+
+``GET`` - ``application/version``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the version of DSMR-reader you are running.
+
+
+URI
+~~~
+Full path: ``/api/v2/application/version``
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Data structure returned**::
+
+    {
+        "version": "1.20.0",
+    }
+
+
+
+
+----
+
+
+``GET`` - ``application/status``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the status of DSMR-reader, containing the same data as displayed on the Status page.
+
+
+URI
+~~~
+Full path: ``/api/v2/application/status``
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+**Data structure returned**::
+
+    {
+        "readings": {
+            "latest": "2018-06-28T03:58:54Z",
+            "unprocessed": {
+                "count": 0,
+                "seconds_since": null
+            },
+            "seconds_since": 47870
+        },
+        "gas": {
+            "latest": "2018-06-28T02:00:00Z",
+            "hours_since": 15
+        },
+        "capabilities": {
+            "gas": true,
+            "any": true,
+            "weather": true,
+            "electricity_returned": false,
+            "electricity": true,
+            "multi_phases": true
+        },
+        "electricity": {
+            "latest": "2018-06-28T03:59:00Z",
+            "minutes_since": 798
+        },
+        "statistics": {
+            "latest": "2018-06-27",
+            "days_since": 1
+        }
+    }
+    

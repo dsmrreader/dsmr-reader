@@ -19,7 +19,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "\r\n",
             "1-3:0.2.8(40)\r\n",
             "0-0:1.0.0(151110192959W)\r\n",
-            "0-0:96.1.1(xxxxxxxxxxxxx)\r\n",
+            "0-0:96.1.1(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "1-0:1.8.1(000510.747*kWh)\r\n",
             "1-0:2.8.1(000000.123*kWh)\r\n",
             "1-0:1.8.2(000500.013*kWh)\r\n",
@@ -46,14 +46,14 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "1-0:21.7.0(00.123*kW)\r\n",
             "1-0:41.7.0(00.456*kW)\r\n",
             "1-0:61.7.0(00.789*kW)\r\n",
-            "1-0:22.7.0(00.000*kW)\r\n",
-            "1-0:42.7.0(00.000*kW)\r\n",
-            "1-0:62.7.0(00.000*kW)\r\n",
+            "1-0:22.7.0(00.111*kW)\r\n",
+            "1-0:42.7.0(00.555*kW)\r\n",
+            "1-0:62.7.0(00.999*kW)\r\n",
             "0-1:24.1.0(003)\r\n",
-            "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
+            "0-1:96.1.0(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "0-1:24.2.1(151110190000W)(00845.206*m3)\r\n",
             "0-1:24.4.0(1)\r\n",
-            "!8CC9\n",
+            "!4038\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -63,7 +63,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
 
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
@@ -98,6 +98,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.123'))
         self.assertEqual(reading.phase_currently_delivered_l2, Decimal('0.456'))
         self.assertEqual(reading.phase_currently_delivered_l3, Decimal('0.789'))
+        self.assertEqual(reading.phase_currently_returned_l1, Decimal('0.111'))
+        self.assertEqual(reading.phase_currently_returned_l2, Decimal('0.555'))
+        self.assertEqual(reading.phase_currently_returned_l3, Decimal('0.999'))
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()

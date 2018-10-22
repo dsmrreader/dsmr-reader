@@ -4,23 +4,21 @@ language: python
 python:
   - 3.4
   - 3.5
-  - 3.5-dev
   - 3.6
+  - 3.5-dev
   - 3.6-dev
   - 3.7-dev
-  
+
 matrix:
   allow_failures:
-    # Look ahead.
     - python: 3.5-dev
     - python: 3.6-dev
-    - python: 3.7-dev
     - python: nightly
-  
+
 services:
   - postgresql
   - mysql
-  
+
 addons:
   # https://docs.travis-ci.com/user/database-setup/#PostgreSQL
   postgresql: "9.4"
@@ -41,11 +39,18 @@ install:
 before_script:
   - sh -c "if [ '$DB' = 'postgresql' ]; then dropdb -U postgres --if-exists dsmrreader; fi"
   - sh -c "if [ '$DB' = 'postgresql' ]; then createdb -U postgres dsmrreader; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql mysql; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'drop database IF EXISTS dsmrreader;' -u root; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysqladmin create dsmrreader; fi"
 
+  # https://github.com/travis-ci/travis-ci/issues/8331
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e \"GRANT ALL PRIVILEGES ON dsmrreader.* TO 'travis'@'%';\" -u root; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e \"GRANT ALL PRIVILEGES ON test_dsmrreader.* TO 'travis'@'%';\" -u root; fi"
+
 script: 
-  - py.test --pylama --cov --cov-report=term
-  
+  - py.test --cov --cov-report=term
+  # Only perform code audit when the package was installed.
+  - sh -c "if [ `command -v pylama` ] ; then pylama; else echo 'SKIPPED pylama code audit' ; fi"
+
 after_success:
   - codecov

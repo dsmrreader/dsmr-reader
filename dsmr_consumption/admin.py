@@ -9,7 +9,7 @@ from .models.settings import ConsumptionSettings
 
 @admin.register(ConsumptionSettings)
 class ConsumptionSettingsAdmin(SingletonModelAdmin):
-    list_display = ('compactor_grouping_type', )
+    pass
 
 
 @admin.register(EnergySupplierPrice)

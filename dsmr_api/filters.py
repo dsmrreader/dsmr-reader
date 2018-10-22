@@ -7,8 +7,8 @@ from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 
 class DsmrReadingFilter(filters.FilterSet):
     FIELD = 'timestamp'
-    timestamp__gte = filters.DateTimeFilter(name=FIELD, lookup_expr='gte')
-    timestamp__lte = filters.DateTimeFilter(name=FIELD, lookup_expr='lte')
+    timestamp__gte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='gte')
+    timestamp__lte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='lte')
 
     class Meta:
         model = DsmrReading
@@ -17,8 +17,8 @@ class DsmrReadingFilter(filters.FilterSet):
 
 class ElectricityConsumptionFilter(filters.FilterSet):
     FIELD = 'read_at'
-    read_at__gte = filters.DateTimeFilter(name=FIELD, lookup_expr='gte')
-    read_at__lte = filters.DateTimeFilter(name=FIELD, lookup_expr='lte')
+    read_at__gte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='gte')
+    read_at__lte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='lte')
 
     class Meta:
         model = ElectricityConsumption
@@ -27,8 +27,8 @@ class ElectricityConsumptionFilter(filters.FilterSet):
 
 class GasConsumptionFilter(filters.FilterSet):
     FIELD = 'read_at'
-    read_at__gte = filters.DateTimeFilter(name=FIELD, lookup_expr='gte')
-    read_at__lte = filters.DateTimeFilter(name=FIELD, lookup_expr='lte')
+    read_at__gte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='gte')
+    read_at__lte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='lte')
 
     class Meta:
         model = GasConsumption
@@ -37,8 +37,8 @@ class GasConsumptionFilter(filters.FilterSet):
 
 class DayStatisticsFilter(filters.FilterSet):
     FIELD = 'day'
-    day__gte = filters.DateFilter(name=FIELD, lookup_expr='gte')
-    day__lte = filters.DateFilter(name=FIELD, lookup_expr='lte')
+    day__gte = filters.DateFilter(field_name=FIELD, lookup_expr='gte')
+    day__lte = filters.DateFilter(field_name=FIELD, lookup_expr='lte')
 
     class Meta:
         model = DayStatistics
@@ -47,8 +47,8 @@ class DayStatisticsFilter(filters.FilterSet):
 
 class HourStatisticsFilter(filters.FilterSet):
     FIELD = 'hour_start'
-    hour_start__gte = filters.DateTimeFilter(name=FIELD, lookup_expr='gte')
-    hour_start__lte = filters.DateTimeFilter(name=FIELD, lookup_expr='lte')
+    hour_start__gte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='gte')
+    hour_start__lte = filters.DateTimeFilter(field_name=FIELD, lookup_expr='lte')
 
     class Meta:
         model = HourStatistics

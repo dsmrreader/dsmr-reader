@@ -4,14 +4,14 @@
 {% load i18n %}
 
 {% block title %}{% trans "Statistics" %}{% endblock %}
-{% block header %}{% trans "Statistics" %} &nbsp; <i class="fa fa-list"></i>{% endblock %}
+{% block header %}{% trans "Statistics" %} &nbsp; <i class="fas fa-list"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
 {% endif %}
 
@@ -40,43 +40,18 @@
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_2|default:'-' }}{% endif %}</span></td>
                         </tr>
+                        {% if latest_reading and delivered_sum %}
+                        <tr>
+                            <td>{% trans "Electricity (tariffs combined)" %}</td>
+                            <td><span class="badge bg-red">{{ delivered_sum|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ returned_sum|default:'-' }}{% endif %}</span></td>
+                        </tr>
+                        {% endif %}
+                        
                         {% if capabilities.gas %}
                         <tr>
                             <td>{% trans "Gas " %}</td>
                             <td colspan="2"><span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-' }}</span></td>
-                        </tr>
-                        {% endif %}
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Telegram readings" %}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <td class="col-md-6">
-                                {% trans "Total reading count" %} <small>
-                                <br />
-                                {% blocktrans %}The number of P1 DSMR telegrams read and stored in the application.{% endblocktrans %}</small>
-                            </td>
-                            <td class="col-md-6">
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
-                                <span class="badge bg-black xhr-hidden">
-                                   <span id="total_reading_count"></span>
-                                </span>
-                            </td>
-                        </tr>
-                        {% if meter_statistics.rejected_telegrams %}
-                        <tr>
-                            <td>{% trans "Number of rejected telegrams due to invalid CRC checksum" %}</td>
-                            <td><span class="badge bg-black">{{ meter_statistics.rejected_telegrams|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
                     </table>
@@ -146,52 +121,124 @@
             </div>
         </div>
     </div>
-    
+ 
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Usage statistics" %}
+                    {% trans "Telegram readings" %}
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tr>
                             <td class="col-md-6">
-                                {% trans "Most common electricity consumption" %} <small>
+                                {% trans "Total reading count" %} <small>
                                 <br />
-                                {% blocktrans %}Average calculated among the top five most common electricity consumption read. This might also be the (minimum) constant electricity consumption in your home.{% endblocktrans %}</small>
+                                {% blocktrans %}The number of P1 DSMR telegrams read and stored in the application.{% endblocktrans %}</small>
                             </td>
-                            <td class="col-md-6">
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
-	                            <span class="badge bg-red xhr-hidden">
-	                               <i class="fa fa-bolt"></i> &nbsp; <span id="slumber_consumption_watt"></span> &nbsp; {% trans "Watt" %}
-	                            </span>
+                            <td class="col-md-6 ">
+                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fas fa-sync"></i> &nbsp; {% trans 'Show' %}</a>
+                                <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
+                                <span class="badge bg-black xhr-hidden">
+                                   <span id="total_reading_count"></span>
+                                </span>
                             </td>
                         </tr>
+                        {% if meter_statistics.rejected_telegrams %}
                         <tr>
-                            <td>{% trans "Lowest electricity consumption read" %}</td>
-                            <td>
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
-	                            <span class="badge bg-red xhr-hidden">
-	                                <i class="fa fa-bolt"></i> &nbsp; <span id="min_consumption_watt"></span> &nbsp; {% trans "Watt" %}
-	                            </span>
-                            </td>
+                            <td>{% trans "Number of rejected telegrams due to invalid CRC checksum" %}</td>
+                            <td><span class="badge bg-black">{{ meter_statistics.rejected_telegrams|default:'-' }}</span></td>
                         </tr>
-                        <tr>
-                            <td>{% trans "Highest electricity consumption read" %}</td>
-                            <td>
-                                <i class="fa fa-spinner fa-pulse fa-fw xhr-loader"></i>
-	                            <span class="badge bg-red xhr-hidden">
-	                               <i class="fa fa-bolt"></i> &nbsp; <span id="max_consumption_watt"></span> &nbsp; {% trans "Watt" %}
-	                            </span>
-                            </td>
-                        </tr>
+                        {% endif %}
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
+   
+    {% if electricity_statistics %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "All time highs" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        {% if electricity_statistics.highest_usage_l1_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest usage (L1+)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_usage_l1_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_usage_l1_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.highest_usage_l2_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest usage (L2+)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_usage_l2_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_usage_l2_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.highest_usage_l3_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest usage (L3+)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_usage_l3_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_usage_l3_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        
+                        {% if electricity_statistics.highest_return_l1_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest return (L1-)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-green">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_return_l1_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_return_l1_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.highest_return_l2_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest return (L2-)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-green">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_return_l2_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_return_l2_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.highest_return_l3_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest return (L3-)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-green">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_return_l3_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_return_l3_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
 {% endif %}
     
     <div class="row">
@@ -209,11 +256,11 @@
                         </tr>
                         <tr>
                             <td class="col-md-6">{% trans "Electricity 1 price (low tariff)" %}</td>
-                            <td class="col-md-6"><span class="badge bg-black">{{ energy_prices.electricity_1_price }}</span></td>
+                            <td class="col-md-6"><span class="badge bg-black">{{ energy_prices.electricity_delivered_1_price }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Electricity 2 price (high tariff)" %}</td>
-                            <td><span class="badge bg-black">{{ energy_prices.electricity_2_price }}</span></td>
+                            <td><span class="badge bg-black">{{ energy_prices.electricity_delivered_2_price }}</span></td>
                         </tr>
                         <tr>
                             <td>{% trans "Gas price" %}</td>
@@ -222,9 +269,9 @@
                     </table>
                     {% else %}
                         <div class="alert alert-info" role="alert">
-                            <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No energy supplier prices found for today. Enable this feature in consumption settings to view prices.{% endblocktrans %}
+                            <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No energy supplier prices found for today. Enable this feature in consumption settings to view prices.{% endblocktrans %}
                             &nbsp;
-                            <a href="{% url 'admin:dsmr_consumption_energysupplierprice_add' %}" class="btn btn-primary"><i class="fa fa-cogs"></i></a>
+                            <a href="{% url 'admin:dsmr_consumption_energysupplierprice_add' %}" class="btn btn-primary"><i class="fas fa-cogs"></i></a>
                         </div>
                     {% endif %}
                 </div>
@@ -241,23 +288,24 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-    	fetch_xhr_data();
+    	$('.trigger-extra-statistics').click(function(){
+    	    $('.trigger-extra-statistics').hide();
+   		    fetch_xhr_data();
+   		    return false;
+    	})
     });
     
     function fetch_xhr_data()
     {
+        $(".xhr-loader").removeClass("hidden").show();
+
         $.ajax({
             dataType: "json",
             url: "{% url 'frontend:statistics-xhr-data' %}",
         }).done(function(response) {
             $(".xhr-loader").hide();
-            
             $("#total_reading_count").html(response.total_reading_count);
-            $("#slumber_consumption_watt").html(response.slumber_consumption_watt);
-            $("#min_consumption_watt").html(response.min_consumption_watt);
-            $("#max_consumption_watt").html(response.max_consumption_watt);
-            
-            $(".xhr-hidden").show();
+	        $(".xhr-hidden").show();
         });
     }
 

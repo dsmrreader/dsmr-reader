@@ -3,7 +3,7 @@ from datetime import date
 
 from django.test import TestCase, Client
 from django.utils import timezone, formats
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -18,9 +18,11 @@ class TestViews(TestCase):
     fixtures = [
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
+        'dsmr_frontend/test_gas_consumption.json',
     ]
     namespace = 'frontend'
     support_data = True
@@ -37,7 +39,7 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:archive'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
 
         # XHR's.
@@ -50,7 +52,7 @@ class TestViews(TestCase):
             self.assertEqual(response.context['end_date'], date(2016, 1, 2))
 
         for current_level in ('days', 'months', 'years'):
-            # Test both with tariffs sparated and merged.
+            # Test both with tariffs separated and merged.
             for merge in (False, True):
                 frontend_settings = FrontendSettings.get_solo()
                 frontend_settings.merge_electricity_tariffs = merge
@@ -60,7 +62,7 @@ class TestViews(TestCase):
                 response = self.client.get(
                     reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
                 )
-                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.status_code, 200, response.content)
 
                 response = self.client.get(
                     reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
@@ -108,9 +110,10 @@ class TestViewsWithoutGas(TestViews):
     fixtures = [
         'dsmr_frontend/test_dsmrreading_without_gas.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
     ]
     support_gas = False
 

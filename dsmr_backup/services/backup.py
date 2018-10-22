@@ -1,4 +1,5 @@
 import subprocess
+import logging
 import shutil
 import gzip
 import os
@@ -8,9 +9,11 @@ from django.utils import timezone
 from django.conf import settings
 from django.utils import formats
 
-
 from dsmr_backup.models.settings import BackupSettings
 import dsmr_backup.services.dropbox
+
+
+logger = logging.getLogger('commands')
 
 
 def check():
@@ -35,7 +38,7 @@ def check():
         return
 
     # For backend logging in Supervisor.
-    print(' - Creating new backup.')
+    logger.info(' - Creating new backup.')
     create()
 
 
@@ -58,7 +61,7 @@ def create():
                 settings.DSMRREADER_BACKUP_PG_DUMP,
                 '--host={}'.format(settings.DATABASES['default']['HOST']),
                 '--user={}'.format(settings.DATABASES['default']['USER']),
-                '--dbname={}'.format(settings.DATABASES['default']['NAME']),
+                settings.DATABASES['default']['NAME'],
             ], env={
                 'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
             },

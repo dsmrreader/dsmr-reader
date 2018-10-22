@@ -2,6 +2,7 @@ from decimal import Decimal
 from unittest import mock
 
 from django.core.management import CommandError
+from django.test.utils import override_settings
 from django.test import TestCase
 from django.utils import timezone
 import serial
@@ -24,7 +25,7 @@ class TestDsmrDataloggerTracking(InterceptStdoutMixin, TestCase):
 
         # Datalogger should crash with error.
         with self.assertRaisesMessage(CommandError, 'Datalogger tracking is DISABLED!'):
-            self._intercept_command_stdout('dsmr_datalogger')
+            self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
 
 class TestServices(TestCase):
@@ -42,8 +43,8 @@ class TestServices(TestCase):
             "1-0:1.8.2(000500.013*kWh)\r\n",
             "1-0:2.8.2(000123.456*kWh)\r\n",
             "0-0:96.14.0(0001)\r\n",
-            "1-0:1.7.0(00.192*kW)\r\n",
-            "1-0:2.7.0(00.123*kW)\r\n",
+            "1-0:1.7.0(00.999*kW)\r\n",
+            "1-0:2.7.0(01.332*kW)\r\n",
             "0-0:17.0.0(999.9*kW)\r\n",
             "0-0:96.3.10(1)\r\n",
             "0-0:96.7.21(00003)\r\n",
@@ -60,17 +61,17 @@ class TestServices(TestCase):
             "1-0:31.7.0(000*A)\r\n",
             "1-0:51.7.0(000*A)\r\n",
             "1-0:71.7.0(001*A)\r\n",
-            "1-0:21.7.0(00.123*kW)\r\n",
-            "1-0:41.7.0(00.456*kW)\r\n",
-            "1-0:61.7.0(00.789*kW)\r\n",
-            "1-0:22.7.0(00.000*kW)\r\n",
-            "1-0:42.7.0(00.000*kW)\r\n",
-            "1-0:62.7.0(00.000*kW)\r\n",
+            "1-0:21.7.0(00.111*kW)\r\n",
+            "1-0:41.7.0(00.333*kW)\r\n",
+            "1-0:61.7.0(00.555*kW)\r\n",
+            "1-0:22.7.0(00.222*kW)\r\n",
+            "1-0:42.7.0(00.444*kW)\r\n",
+            "1-0:62.7.0(00.666*kW)\r\n",
             "0-1:24.1.0(003)\r\n",
             "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
             "0-1:24.2.1(151110190000W)(00845.206*m3)\r\n",
             "0-1:24.4.0(1)\r\n",
-            "!8CC9\n",
+            "!45FF\n",
         ])
 
     def test_reading_timestamp_to_datetime(self):
@@ -179,6 +180,9 @@ class TestServices(TestCase):
         self.assertIsNone(my_reading.phase_currently_delivered_l1)
         self.assertIsNone(my_reading.phase_currently_delivered_l2)
         self.assertIsNone(my_reading.phase_currently_delivered_l3)
+        self.assertIsNone(my_reading.phase_currently_returned_l1)
+        self.assertIsNone(my_reading.phase_currently_returned_l2)
+        self.assertIsNone(my_reading.phase_currently_returned_l3)
 
         # Try again, but now with tracking settings enabled.
         DataloggerSettings.objects.all().update(track_phases=True)
@@ -188,9 +192,12 @@ class TestServices(TestCase):
 
         # Should be populated now.
         my_reading = DsmrReading.objects.get()
-        self.assertEqual(my_reading.phase_currently_delivered_l1, Decimal('0.123'))
-        self.assertEqual(my_reading.phase_currently_delivered_l2, Decimal('0.456'))
-        self.assertEqual(my_reading.phase_currently_delivered_l3, Decimal('0.789'))
+        self.assertEqual(my_reading.phase_currently_delivered_l1, Decimal('0.111'))
+        self.assertEqual(my_reading.phase_currently_delivered_l2, Decimal('0.333'))
+        self.assertEqual(my_reading.phase_currently_delivered_l3, Decimal('0.555'))
+        self.assertEqual(my_reading.phase_currently_returned_l1, Decimal('0.222'))
+        self.assertEqual(my_reading.phase_currently_returned_l2, Decimal('0.444'))
+        self.assertEqual(my_reading.phase_currently_returned_l3, Decimal('0.666'))
 
     @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')
     def test_extra_devices_mbus_hack(self, *mocks):
@@ -291,6 +298,11 @@ class TestServices(TestCase):
         # Again, with the correct checksum.
         telegram[-1] = "!58C8\n"
         dsmr_datalogger.services.verify_telegram_checksum(data=''.join(telegram))
+
+    @override_settings(DSMRREADER_LOG_TELEGRAMS=True)
+    def test_telegram_logging_setting_coverage(self):
+        """ Purely a coverage test. """
+        dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
 
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):

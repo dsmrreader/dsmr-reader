@@ -6,3 +6,4 @@ omit = ./*/__init__.py
   ./*/tests/*
   ./*/migrations/*
   ./dsmr_backend/mixins.py
+  ./dsmr_plugins/modules/*

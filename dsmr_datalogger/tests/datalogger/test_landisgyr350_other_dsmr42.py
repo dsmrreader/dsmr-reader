@@ -20,7 +20,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "\r\n",
             "1-3:0.2.8(42)\r\n",
             "0-0:1.0.0(160317221058W)\r\n",
-            "0-0:96.1.1(xxxxxxxxxxxxxx)\r\n",
+            "0-0:96.1.1(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "1-0:1.8.1(001255.252*kWh)\r\n",
             "1-0:2.8.1(000000.000*kWh)\r\n",
             "1-0:1.8.2(001284.838*kWh)\r\n",
@@ -37,11 +37,11 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-0:96.13.0()\r\n",
             "1-0:31.7.0(001*A)\r\n",
             "1-0:21.7.0(00.187*kW)\r\n",
-            "1-0:22.7.0(00.000*kW)\r\n",
+            "1-0:22.7.0(00.999*kW)\r\n",
             "0-2:24.1.0(003)\r\n",
-            "0-2:96.1.0(xxxxxxx)\r\n",
+            "0-2:96.1.0(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "0-2:24.2.1(160317220000W)(01438.997*m3)\r\n",
-            "!888A\n",
+            "!17B5\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -52,7 +52,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
 
         self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
@@ -85,8 +85,11 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         )
         self.assertEqual(reading.extra_device_delivered, Decimal('1438.997'))
         self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.187'))
-        self.assertEqual(reading.phase_currently_delivered_l2, None)
-        self.assertEqual(reading.phase_currently_delivered_l3, None)
+        self.assertIsNone(reading.phase_currently_delivered_l2)
+        self.assertIsNone(reading.phase_currently_delivered_l3)
+        self.assertEqual(reading.phase_currently_returned_l1, Decimal('0.999'))
+        self.assertIsNone(reading.phase_currently_returned_l2)
+        self.assertIsNone(reading.phase_currently_returned_l3)
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()

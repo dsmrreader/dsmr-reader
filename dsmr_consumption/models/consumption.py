@@ -61,6 +61,36 @@ class ElectricityConsumption(models.Model):
         help_text=_("Instantaneous active power L3 (+P) in W resolution"),
         db_index=True
     )
+    phase_currently_returned_l1 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L1 (-P) in W resolution"),
+    )
+    phase_currently_returned_l2 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L2 (-P) in W resolution"),
+    )
+    phase_currently_returned_l3 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_("Instantaneous active power L3 (-P) in W resolution"),
+    )
+
+    def __sub__(self, other):
+        """ Allows models to be subtracted from each other. """
+        data = {}
+
+        for current in ('delivered_1', 'returned_1', 'delivered_2', 'returned_2'):
+            data.update({current: getattr(self, current) - getattr(other, current)})
+
+        return data
 
     def __str__(self):
         return '{} | {}: {} Watt'.format(

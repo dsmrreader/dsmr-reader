@@ -20,7 +20,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "\r\n",
             "1-3:0.2.8(42)\r\n",
             "0-0:1.0.0(160303164347W)\r\n",
-            "0-0:96.1.1(*******************************)\r\n",
+            "0-0:96.1.1(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "1-0:1.8.1(001073.079*kWh)\r\n",
             "1-0:1.8.2(001263.199*kWh)\r\n",
             "1-0:2.8.1(000000.000*kWh)\r\n",
@@ -37,8 +37,8 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-0:96.13.0()\r\n",
             "1-0:31.7.0(000*A)\r\n",
             "1-0:21.7.0(00.143*kW)\r\n",
-            "1-0:22.7.0(00.000*kW)\r\n",
-            "!A97E\n",
+            "1-0:22.7.0(00.321*kW)\r\n",
+            "!0422\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -49,7 +49,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
 
         self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
@@ -79,8 +79,11 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertIsNone(reading.extra_device_timestamp)
         self.assertIsNone(reading.extra_device_delivered)
         self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.143'))
-        self.assertEqual(reading.phase_currently_delivered_l2, None)
-        self.assertEqual(reading.phase_currently_delivered_l3, None)
+        self.assertIsNone(reading.phase_currently_delivered_l2)
+        self.assertIsNone(reading.phase_currently_delivered_l3)
+        self.assertEqual(reading.phase_currently_returned_l1, Decimal('0.321'))
+        self.assertIsNone(reading.phase_currently_returned_l2)
+        self.assertIsNone(reading.phase_currently_returned_l3)
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertEqual(meter_statistics.dsmr_version, '42')
@@ -88,11 +91,11 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(meter_statistics.power_failure_count, 6)
         self.assertEqual(meter_statistics.long_power_failure_count, 3)
         self.assertEqual(meter_statistics.voltage_sag_count_l1, 0)
-        self.assertEqual(meter_statistics.voltage_sag_count_l2, None)
-        self.assertEqual(meter_statistics.voltage_sag_count_l3, None)
+        self.assertIsNone(meter_statistics.voltage_sag_count_l2)
+        self.assertIsNone(meter_statistics.voltage_sag_count_l3)
         self.assertEqual(meter_statistics.voltage_swell_count_l1, 0)
-        self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
-        self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
+        self.assertIsNone(meter_statistics.voltage_swell_count_l2)
+        self.assertIsNone(meter_statistics.voltage_swell_count_l3)
 
     @mock.patch('dsmr_datalogger.signals.raw_telegram.send_robust')
     def test_raw_telegram_signal_sent(self, signal_mock):

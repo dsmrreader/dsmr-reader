@@ -20,15 +20,14 @@ class WeatherSettings(SingletonModel):
         default=6260,  # "De Bilt"
         verbose_name=_('Buienradar weather station'),
         help_text=_(
-            'The weather station used to measure and log outside temperatures. Choose one nearby. '
-            'See http://www.buienradar.nl/weerkaarten/temperatuur for a map of all locations.'
+            'The weather station used to measure and log outside temperatures. Choose one nearby.'
         )
     )
     next_sync = models.DateTimeField(
         default=None,
         null=True,
         blank=True,
-        verbose_name=_('Next export'),
+        verbose_name=_('Next sync'),
         help_text=_(
             'Timestamp of the next sync. Automatically updated by application.'
         )

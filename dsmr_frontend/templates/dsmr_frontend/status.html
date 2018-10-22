@@ -4,14 +4,14 @@
 {% load i18n %}
 
 {% block title %}{% trans "Status" %}{% endblock %}
-{% block header %}{% trans "Status" %} &nbsp; <i class="fa fa-heartbeat"></i>{% endblock %}
+{% block header %}{% trans "Status" %} &nbsp; <i class="fas fa-heartbeat"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
-        <span class="fa fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+        <span class="fas fa-exclamation"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
     </div>
 {% endif %}
 
@@ -19,7 +19,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fa fa-cube"></i> &nbsp; {% trans "Application" %} <br />
+                    <i class="fas fa-cube"></i> &nbsp; {% trans "Application" %} <br />
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
@@ -36,13 +36,13 @@
                                 <small class="xhr-hidden">{% blocktrans %}The application will compare "VERSION = (x,x,x)" in your local dsmrreader/__init__.py file with the latest one available on Github.{% endblocktrans %}</small>
                             </td>
                             <td class="col-md-6">
-                                <a class="btn btn-success" href="#" id="check_for_updates"><i class="fa fa-refresh"></i> &nbsp; {% trans 'Check now' %}</a>
-                                <div id="loader" class="xhr-hidden"><i class="fa fa-refresh fa-spin fa-fw"></i> &nbsp; {% trans 'Currently checking for updates...' %}</div>
+                                <a class="btn btn-success" href="#" id="check_for_updates"><i class="fas fa-sync"></i> &nbsp; {% trans 'Check now' %}</a>
+                                <div id="loader" class="xhr-hidden"><i class="fas fa-sync fa-spin fa-fw"></i> &nbsp; {% trans 'Currently checking for updates...' %}</div>
                                 <div id="update_available" class="alert alert-warning xhr-hidden" role="alert">
-	                                <i class="fa fa-exclamation fa-2x"></i> &nbsp; {% blocktrans %}There is a newer version available!{% endblocktrans %} 
+	                                <i class="fas fa-exclamation"></i> &nbsp; {% blocktrans %}There is a newer version available!{% endblocktrans %} 
 	                                <a href="https://github.com/dennissiemensma/dsmr-reader/releases" target="_blank">{% trans 'View the latest release' %}</a> {% trans 'for the changelog and further upgrade instructions.' %}
 	                            </div>
-                                <div id="no_update_available" class="alert alert-info xhr-hidden" role="alert"><i class="fa fa-smile-o fa-2x"></i> &nbsp; {% blocktrans %}You are already running the latest version released.{% endblocktrans %}</div>
+                                <div id="no_update_available" class="alert alert-info xhr-hidden" role="alert"><i class="fas fa-check-square"></i> &nbsp; {% blocktrans %}You are already running the latest version released.{% endblocktrans %}</div>
                             </td>
                         </tr>
                     </table>
@@ -55,21 +55,21 @@
         <div class="col-md-offset-3 col-md-6">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fa fa-plug"></i> &nbsp; {% trans "P1 DSMR telegrams" %} <br />
+                    <i class="fas fa-plug"></i> &nbsp; {% trans "P1 DSMR telegrams" %} <br />
                 </header>
                 <div class="panel-body">
-                    {% if delta_since_latest_reading == None or delta_since_latest_reading > 90 %}
+                    {% if status.readings.seconds_since == None or status.readings.seconds_since > 90 %}
                     <div class="alert alert-danger" role="alert">
-                        <span class="fa fa-frown-o fa-2x"></span> 
+                        <span class="fas fa-exclamation-circle"></span> 
                         {% blocktrans %}It has been a while since the latest telegram reading.{% endblocktrans %}
                         <br /><br />
                     {% else %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fa fa-smile-o fa-2x"></span> 
+                        <span class="fas fa-check-square"></span> 
                     {% endif %}
 
                         {% trans "Most recent reading" %}: 
-                        <strong>{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% else %}{% trans "No data." %}{% endif %}</strong>
+                        <strong>{% if status.readings.latest %}{{ status.readings.latest|naturaltime }}{% else %}{% trans "No data." %}{% endif %}</strong>
                     </div>
 
                     <div>
@@ -87,7 +87,7 @@
                  
     <div class="row text-center">
         <div class="col-md-offset-5 col-md-2">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>
     </div>
     
@@ -97,20 +97,20 @@
         <div class="col-md-offset-3 col-md-6">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fa fa-cogs"></i> &nbsp; {% trans "Telegram processing" %} <br />
+                    <i class="fas fa-cogs"></i> &nbsp; {% trans "Telegram processing" %} <br />
                 </header>
                 <div class="panel-body">
-                    {% if unprocessed_readings > 30 %}
+                    {% if status.readings.unprocessed.seconds_since > 300 %}
                     <div class="alert alert-danger" role="alert">
-                        <span class="fa fa-frown-o fa-2x"></span> 
+                        <span class="fas fa-exclamation-circle"></span> 
                         {% blocktrans %}There are too many unprocessed telegrams.{% endblocktrans %}
                         <br /><br />
                     {% else %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fa fa-smile-o fa-2x"></span> 
+                        <span class="fas fa-check-square"></span> 
                     {% endif %}
 
-                    {% trans "Unprocessed telegrams" %}: <strong>{{ unprocessed_readings|default:'-' }}</strong>
+                    {% trans "Unprocessed telegrams" %}: <strong>{{ status.readings.unprocessed.count|default:'-' }}</strong>
                     </div>
                     
                     <div>
@@ -128,10 +128,10 @@
                  
     <div class="row text-center">
         <div class="col-md-8">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>
         <div class="col-md-2">
-            <i class="fa fa-long-arrow-down fa-3x fa-rotate-315" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x fa-rotate-315" aria-hidden="true"></i>
         </div>    
     </div>
                           
@@ -141,25 +141,25 @@
         <div class="col-md-8">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fa fa-cogs"></i> &nbsp; {% trans "Electricity statistics" %} <br />
+                    <i class="fas fa-bolt"></i> &nbsp; {% trans "Electricity statistics" %} <br />
                     <small>{% blocktrans %}For dashboard display.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
-                    {% if latest_ec %}
-                        {% if minutes_since_latest_ec == None or minutes_since_latest_ec > 2 %}
+                    {% if status.electricity.latest %}
+                        {% if status.electricity.minutes_since == None or status.electricity.minutes_since > 2 %}
 	                    <div class="alert alert-danger" role="alert">
-	                        <span class="fa fa-frown-o fa-2x"></span>
-	                        {% trans "Data processing is lagging behind" %}: <strong>{{ latest_ec.read_at|naturaltime }}</strong>
+	                        <span class="fas fa-exclamation-circle"></span>
+	                        {% trans "Data processing is lagging behind" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
                         </div>
                         {% else %}
 	                    <div class="alert alert-success" role="alert">
-	                        <span class="fa fa-check-square-o fa-2x"></span>
-	                        {% trans "Data processing is on schedule" %}: <strong>{{ latest_ec.read_at|naturaltime }}</strong>
+	                        <span class="fas fa-check-square"></span>
+	                        {% trans "Data processing is on schedule" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
 	                    </div>
 	                    {% endif %}
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fa fa-close fa-2x"></span> {% trans "No data." %}
+                        <span class="fas fa-exclamation-circle"></span> {% trans "No data." %}
                     </div>
                     {% endif %}
                     
@@ -177,25 +177,25 @@
         <div class="col-md-4">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fa fa-cogs"></i> &nbsp; {% trans "Gas statistics" %} <br />
+                    <i class="fas fa-fire"></i> &nbsp; {% trans "Gas statistics" %} <br />
                     <small>{% blocktrans %}For dashboard display.{% endblocktrans %}</small>
                 </header>
                 <div class="panel-body">
-                    {% if latest_gc %}
-                        {% if hours_since_latest_gc == None or hours_since_latest_gc > 3 %}
+                    {% if status.gas.latest %}
+                        {% if status.gas.hours_since == None or status.gas.hours_since > 3 %}
                         <div class="alert alert-danger" role="alert">
-                            <span class="fa fa-frown-o fa-2x"></span>
-                            {% trans "Data processing is lagging behind" %}: <strong>{{ latest_gc.read_at|naturaltime }}</strong>
+                            <span class="fas fa-exclamation-circle"></span>
+                            {% trans "Data processing is lagging behind" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                         </div>
                         {% else %}
                         <div class="alert alert-success" role="alert">
-                            <span class="fa fa-check-square-o fa-2x"></span>
-                            {% trans "Data processing is on schedule" %}: <strong>{{ latest_gc.read_at|naturaltime }}</strong>
+                            <span class="fas fa-check-square"></span>
+                            {% trans "Data processing is on schedule" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                         </div>
                         {% endif %}
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fa fa-close fa-2x"></span> {% trans "No data." %}
+                        <span class="fas fa-exclamation-circle"></span> {% trans "No data." %}
                     </div>
                     {% endif %}
                     
@@ -213,13 +213,13 @@
     
     <div class="row text-center">
         <div class="col-md-4">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>
         <div class="col-md-4">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>
         <div class="col-md-4">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>    
     </div>
                           
@@ -229,16 +229,16 @@
         <div class="col-md-4">
             <div class="panel">
                 <header class="panel-heading">
-                    <span class="badge bg-red">&nbsp;<i class="fa fa-bolt fa-lg"></i>&nbsp;</span> &nbsp; {% trans "Electricity" %} <br />
+                    <span class="badge bg-red">&nbsp;<i class="fas fa-bolt fa-lg"></i>&nbsp;</span> &nbsp; {% trans "Electricity" %} <br />
                 </header>
                 <div class="panel-body">
                     {% if capabilities.electricity %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fa fa-check-square-o fa-2x"></span> {% trans "Electricity usage" %}
+                        <span class="fas fa-check-square"></span> {% trans "Electricity usage" %}
                     </div>
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fa fa-close fa-2x"></span> {% trans "Electricity usage" %}: <strong>{% trans "No data." %}</strong>
+                        <span class="fas fa-exclamation-circle"></span> {% trans "Electricity usage" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
                     
@@ -255,16 +255,16 @@
         <div class="col-md-4">
             <div class="panel">
                 <header class="panel-heading">
-                    <span class="badge bg-green">&nbsp;<i class="fa fa-bolt fa-lg"></i>&nbsp;</span> &nbsp; {% trans "Electricity" %} <br />
+                    <span class="badge bg-green">&nbsp;<i class="fas fa-bolt fa-lg"></i>&nbsp;</span> &nbsp; {% trans "Electricity" %} <br />
                 </header>
                 <div class="panel-body">
                     {% if capabilities.electricity_returned %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fa fa-check-square-o fa-2x"></span> {% trans "Electricity return" %}
+                        <span class="fas fa-check-square"></span> {% trans "Electricity return" %}
                     </div>
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fa fa-close fa-2x"></span> {% trans "Electricity return" %}: <strong>{% trans "No data." %}</strong>
+                        <span class="fas fa-exclamation-circle"></span> {% trans "Electricity return" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
                     
@@ -281,16 +281,16 @@
         <div class="col-md-4">
             <div class="panel">
                 <header class="panel-heading">
-                    <span class="badge bg-orange"><i class="fa fa-fire fa-lg"></i></span> &nbsp; {% trans "Gas" %} <br />
+                    <span class="badge bg-orange"><i class="fas fa-fire fa-lg"></i></span> &nbsp; {% trans "Gas" %} <br />
                 </header>
                 <div class="panel-body">
                     {% if capabilities.gas %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fa fa-check-square-o fa-2x"></span> {% trans "Gas usage" %}
+                        <span class="fas fa-check-square"></span> {% trans "Gas usage" %}
                     </div>
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fa fa-close fa-2x"></span> {% trans "Gas usage" %}: <strong>{% trans "No data." %}</strong>
+                        <span class="fas fa-exclamation-circle"></span> {% trans "Gas usage" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
                     
@@ -308,13 +308,13 @@
                  
     <div class="row text-center">
         <div class="col-md-4">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>
         <div class="col-md-4">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>
         <div class="col-md-4">
-            <i class="fa fa-long-arrow-down fa-3x" aria-hidden="true"></i>
+            <i class="fas fa-long-arrow-alt-down fa-3x" aria-hidden="true"></i>
         </div>    
     </div>
                           
@@ -324,19 +324,19 @@
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fa fa-cogs"></i> &nbsp; {% trans "Day &amp; hour statistics" %}<br />
+                    <i class="fas fa-history"></i> &nbsp; {% trans "Day &amp; hour statistics" %}<br />
                 </header>
                 <div class="panel-body">
-                    {% if days_since_latest_day_statistics == None or days_since_latest_day_statistics > 1 %}
+                    {% if status.statistics.days_since == None or status.statistics.days_since > 1 %}
                     <div class="alert alert-danger" role="alert">
-                        <span class="fa fa-frown-o fa-2x"></span>
+                        <span class="fas fa-exclamation-circle"></span>
                         {% trans "Data processing is lagging behind" %}: 
-                        <strong>{% if latest_day_statistics %}{{ latest_day_statistics.day }}{% else %}{% trans "No data." %}{% endif %}</strong>
+                        <strong>{% if status.statistics.latest %}{{ status.statistics.latest }}{% else %}{% trans "No data." %}{% endif %}</strong>
                     </div>
                     {% else %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fa fa-check-square-o fa-2x"></span>
-                        {% trans "Data processing is on schedule" %}: <strong>{{ latest_day_statistics.day }}</strong>
+                        <span class="fas fa-check-square"></span>
+                        {% trans "Data processing is on schedule" %}: <strong>{{ status.statistics.latest }}</strong>
                     </div>
                     {% endif %}
                     
@@ -352,51 +352,56 @@
             </div>
         </div>
     </div>
+                          
+    <br />
+                
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fas fa-cogs"></i> &nbsp; {% trans "Tools" %}<br />
+                </header>
+                <div class="panel-body">
+                    {% if status.tools.backup.enabled %}
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-hdd"></i>
+                        {% trans "Latest backup" %}: <strong>{{ status.tools.backup.latest_backup|default:'-' }}</strong>
+                    </div>
+                    {% endif %}
+
+                    {% if status.tools.dropbox.enabled %}
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-upload"></i>
+                        {% trans "Latest Dropbox sync" %}: <strong>{{ status.tools.dropbox.latest_sync|default:'-' }}</strong>
+                    </div>
+                    {% endif %}
+
+                    {% if status.tools.mindergas.enabled %}
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-upload"></i>
+                        {% trans "Latest MinderGas sync" %}: <strong>{{ status.tools.mindergas.latest_sync|default:'-' }}</strong>
+                    </div>
+                    {% endif %}
+
+                    {% if status.tools.pvoutput.enabled %}
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-upload"></i>
+                        {% trans "Latest PVOutput sync" %}: <strong>{{ status.tools.pvoutput.latest_sync|default:'-' }}</strong>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
 {% endblock %}
 
 {% block javascript %}
-{{ block.super }}
-<script type="text/javascript">
-
-	$(document).ready(function(){
-        $(".help-trigger").click(function(){
-        	$(this).next().show();
-            $(this).remove();
-            return false;
-        });
-		
-        $("#check_for_updates").click(function(){
-            check_for_updates();
-            return false;
-        });
-	});
-	
-	/**
-	 * Updates the header.
-	 */
-	function check_for_updates()
-	{
-		$("#check_for_updates").hide();
-	    $("#loader").show();
-
-	    $.ajax({
-	        dataType: "json",
-	        url: "{% url 'frontend:status-xhr-check-for-updates' %}",
-	    }).done(function(response) {
-	        $("#loader").hide();
-
-	        if (response.update_available)
-	        {
-	        	$("#update_available").show();
-	        }
-	        else
-        	{
-	        	$("#no_update_available").show();
-        	}
-	    });
-	}
-
-</script>
+    {{ block.super }}
+    
+	<script type="text/javascript">
+	    var status_update_url = "{% url 'frontend:status-xhr-check-for-updates' %}";
+	</script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/status/status.js' %}?r=v{{ dsmr_version }}"></script>
 {% endblock %}

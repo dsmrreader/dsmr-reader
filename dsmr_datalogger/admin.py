@@ -1,16 +1,43 @@
 from django.contrib.admin.filters import DateFieldListFilter
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import ReadOnlyAdminModel
-from .models.settings import DataloggerSettings
+from .models.settings import DataloggerSettings, RetentionSettings
 from .models.reading import DsmrReading
-from dsmr_datalogger.models.statistics import MeterStatistics
+from .models.statistics import MeterStatistics
 
 
 @admin.register(DataloggerSettings)
 class DataloggerSettingsAdmin(SingletonModelAdmin):
-    list_display = ('com_port', )
+    fieldsets = (
+        (
+            None, {
+                'fields': ['track', 'track_phases'],
+            }
+        ),
+        (
+            _('Advanced'), {
+                'fields': ['com_port', 'dsmr_version', 'verify_telegram_crc'],
+            }
+        ),
+    )
+
+
+@admin.register(RetentionSettings)
+class RetentionSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['data_retention_in_hours'],
+                'description': _(
+                    'Detailed instructions for configuring data retention can be found here: '
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/latest/admin/datalogger.html">Documentation</a>'
+                )
+            }
+        ),
+    )
 
 
 @admin.register(DsmrReading)

@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import StreamingHttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import BaseFormView
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils import timezone, formats
 from django.shortcuts import redirect
 
@@ -96,7 +96,7 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
 
     def _generate_csv_row(self, writer, data, fields):
         if not data:
-            raise StopIteration()
+            return
 
         # Write header, but use the fields' verbose name.
         data_class = data[0].__class__
@@ -110,8 +110,6 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
                     getattr(current_data, current_field)
                 ) for current_field in fields
             ])
-
-        raise StopIteration()
 
     def _serialize_field(self, data):
         if isinstance(data, Decimal):

@@ -1,5 +1,5 @@
-Using the application
-=====================
+Setting up the application
+==========================
 
 
 .. contents::
@@ -11,15 +11,13 @@ DSMR 2.x (legacy)
 
 .. note::
     
-    Note: The application's default DSMR version used is 4.x. This version is also the **default** for any recent smart meters placed at your home. 
+    Note: The application's default DSMR version used is ``DSMR 4.x``. This version is also the **default** for any recent smart meters placed at your home. 
 
-.. warning::
-    
-    Make sure to alter this setting in the backend's configuration page to DSMR 2.x when required!
+    Make sure to alter this setting in the backend's configuration page to ``DSMR 2.x`` when required!
 
 
-Viewing the application
------------------------
+Accessing the application
+-------------------------
 Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser. 
 
 Did you install using a monitor attached to the RaspberryPi and you don't know what address your device has? Just type ``ifconfig | grep addr`` and it should display an ip address, for example::
@@ -69,6 +67,15 @@ Data preservation & backups
 Everything OK? Congratulations, this was the hardest part and now the fun begins by monitoring your energy consumption.
 
 
+Optional: Setting up an USB drive for backups
+---------------------------------------------
+
+.. seealso::
+    
+    For more information about (optionally) setting up an USB drive for backups, see `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-reader/issues/268>`_.
+
+
+
 Application updates (bug fixes & new features)
 ----------------------------------------------
 
@@ -92,14 +99,24 @@ Public webinterface warning
 
 - You should also have Nginx restrict application access when exposing it to the Internet. Simply generate an htpasswd string `using one of the many generators found online <https://www.transip.nl/htpasswd/>`_. 
 
+- Paste the htpasswd string in ``/etc/nginx/htpasswd``.
+
 .. warning::
     
-    It's safe to a htpasswd generator, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**. 
+    It's safe to use a htpasswd generator, **just make sure to NEVER enter personal credentials** there **used for other applications or personal accounts**.
+    
+.. seealso::
+    
+    Alternatively you can generate a ``htpasswd`` file locally, by installing ``sudo apt-get install apache2-utils`` and running ``sudo htpasswd -c /etc/nginx/htpasswd USERNAME`` (where ``USERNAME`` is your desired username).
+    
+    The command will prompt you to enter a password for it. 
 
-- Paste the htpasswd string in ``/etc/nginx/htpasswd``.
 
 - Open the site's vhost in ``/etc/nginx/sites-enabled/dsmr-webinterface`` and **uncomment** the following lines (remove the ##)::
 
+    ##    satisfy    any;
+    ##    allow      192.168.1.0/24;
+    ##    deny       all;
     ##    auth_basic "Restricted application";
     ##    auth_basic_user_file /etc/nginx/htpasswd;
     

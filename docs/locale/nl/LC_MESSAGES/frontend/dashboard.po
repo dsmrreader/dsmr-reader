@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2018, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-10 16:27+0200\n"
+"PO-Revision-Date: 2018-10-10 18:20+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../dashboard.rst:2
+msgid "Application: Dashboard"
+msgstr "Applicatie: Dashboard"
+
+#: ../../dashboard.rst:4
+msgid ""
+"The dashboard displays the latest information regarding the consumption "
+"of today. You can view the total consumption for current month as well. "
+"The graphs can be zoomed and display data up to the last 24 hours."
+msgstr ""
+"Het dashboard weergeeft de meeste actuele informatie over je verbruik "
+"vandaag. Je kunt hier ook het totale verbruik van de huidige maand "
+"zien. Alle grafieken kunnen uitgezoomd worden en weergegeven gegevens "
+"tot 24 uur geleden."
+
+#: ../../dashboard.rst:8
+msgid ""
+"If your meter supports it, you can also see your gas consumption and "
+"electricity returned."
+msgstr ""
+"Je ziet hier ook je gasverbruik en teruglevering elektriciteit, mits je "
+"meter dat ondersteunt."

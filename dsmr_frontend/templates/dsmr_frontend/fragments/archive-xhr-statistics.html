@@ -9,7 +9,7 @@
         {% if selected_level == 'days' %}
         <small class="pull-right">
             <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}">
-                <span class="badge bg-green"><i class="fa fa-plus"></i> &nbsp; {% trans "Add note for this date" %}</span>
+                <span class="badge bg-green"><i class="fas fa-plus"></i> &nbsp; {% trans "Add note for this date" %}</span>
             </a>
         </small>
         {% endif %}
@@ -28,7 +28,7 @@
                 <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %}{% endif %}</td>
                 <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
                 <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                <td><span class="badge bg-facebook">{% if energy_price %}{{ energy_price.electricity_1_price|default:'-' }}{% endif %}</span></td>
+                <td><span class="badge bg-facebook">{% if energy_price %}{{ energy_price.electricity_delivered_1_price|default:'-' }}{% endif %}</span></td>
                 <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
             </tr>
             {% else %}
@@ -36,14 +36,14 @@
                 <td>{% if capabilities.electricity %}{% trans "Electricity 1 (low tariff)" %}{% endif %}</td>
                 <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
                 <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                <td><span class="badge bg-facebook">{% if energy_price %}{{ energy_price.electricity_1_price|default:'-' }}{% endif %}</span></td>
+                <td><span class="badge bg-facebook">{% if energy_price %}{{ energy_price.electricity_delivered_1_price|default:'-' }}{% endif %}</span></td>
                 <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics.electricity1_cost|default:'-' }}{% endif %}</span></td>
             </tr>
             <tr>
                 <td>{% if capabilities.electricity %}{% trans "Electricity 2 (high tariff)" %}{% endif %}</td>
                 <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
                 <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                <td><span class="badge bg-facebook">{% if energy_price %}{{ energy_price.electricity_2_price|default:'-' }}{% endif %}</span></td>
+                <td><span class="badge bg-facebook">{% if energy_price %}{{ energy_price.electricity_delivered_2_price|default:'-' }}{% endif %}</span></td>
                 <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics.electricity2_cost|default:'-' }}{% endif %}</span></td>
             </tr>
             {% endif %}
@@ -56,7 +56,9 @@
             </tr>
             <tr>
                 <td style="font-weight: bold;">{% trans "Total" %}</td>
-                <td colspan="3">&nbsp;</td>
+                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
+                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                <td>&nbsp;</td>
                 <td><span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span></td>
             </tr>
             {% if statistics.temperature_avg %}
@@ -75,7 +77,7 @@
         
 {% if notes %}
 	    {% for current_note in notes %}
-	    <div class="alert alert-warning" role="alert"><i class="fa fa-comments-o"></i> {{ current_note.description }}</div>
+	    <div class="alert alert-warning" role="alert"><i class="fas fa-comments"></i> {{ current_note.description }}</div>
 	    {% endfor %}
 {% endif %}
     </div>

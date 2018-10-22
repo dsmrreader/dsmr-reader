@@ -6,7 +6,7 @@ import dsmr_backend.signals
 
 class AppConfig(AppConfig):
     name = 'dsmr_notification'
-    verbose_name = _('Usage notification')
+    verbose_name = _('Notification apps')
 
     def ready(self):
         dsmr_backend.signals.backend_called.connect(
@@ -18,3 +18,4 @@ class AppConfig(AppConfig):
         # Import below prevents an AppRegistryNotReady error on Django init.
         import dsmr_notification.services
         dsmr_notification.services.notify()
+        dsmr_notification.services.check_status()

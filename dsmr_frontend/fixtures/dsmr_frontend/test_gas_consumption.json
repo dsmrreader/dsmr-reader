@@ -1,0 +1,11 @@
+[
+{
+    "model": "dsmr_consumption.gasconsumption",
+    "pk": 1,
+    "fields": {
+        "read_at": "2015-11-10T19:00:00Z",
+        "delivered": "845.888",
+        "currently_delivered": "0.000"
+    }
+}
+]

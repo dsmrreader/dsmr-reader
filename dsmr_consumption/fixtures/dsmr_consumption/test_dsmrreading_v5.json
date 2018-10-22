@@ -61,7 +61,10 @@
         "electricity_delivered_2": "528.500",
         "phase_currently_delivered_l1": "0.123",
         "phase_currently_delivered_l2": "0.456",
-        "phase_currently_delivered_l3": "0.789"
+        "phase_currently_delivered_l3": "0.789",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.333",
+        "phase_currently_returned_l3": "0.555"
     },
     "model": "dsmr_datalogger.dsmrreading",
     "pk": 102
@@ -80,7 +83,10 @@
         "electricity_delivered_2": "528.500",
         "phase_currently_delivered_l1": "0.123",
         "phase_currently_delivered_l2": "0.456",
-        "phase_currently_delivered_l3": "0.789"
+        "phase_currently_delivered_l3": "0.789",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.333",
+        "phase_currently_returned_l3": "0.555"
     },
     "model": "dsmr_datalogger.dsmrreading",
     "pk": 103
@@ -99,9 +105,34 @@
         "electricity_delivered_2": "528.500",
         "phase_currently_delivered_l1": "0.123",
         "phase_currently_delivered_l2": "0.456",
-        "phase_currently_delivered_l3": "0.789"
+        "phase_currently_delivered_l3": "0.789",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.333",
+        "phase_currently_returned_l3": "0.555"
     },
     "model": "dsmr_datalogger.dsmrreading",
     "pk": 104
+},
+{
+    "fields": {
+        "extra_device_timestamp": "2015-11-10T20:03:30Z",
+        "extra_device_delivered": "1.15",
+        "electricity_delivered_1": "530.750",
+        "electricity_returned_2": "123.678",
+        "electricity_currently_delivered": "1.123",
+        "timestamp": "2015-11-10T19:42:00Z",
+        "electricity_returned_1": "0.678",
+        "electricity_currently_returned": "0.123",
+        "processed": false,
+        "electricity_delivered_2": "528.500",
+        "phase_currently_delivered_l1": "0.123",
+        "phase_currently_delivered_l2": "0.456",
+        "phase_currently_delivered_l3": "0.789",
+        "phase_currently_returned_l1": "0.111",
+        "phase_currently_returned_l2": "0.333",
+        "phase_currently_returned_l3": "0.555"
+    },
+    "model": "dsmr_datalogger.dsmrreading",
+    "pk": 105
 }
 ]

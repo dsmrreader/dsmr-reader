@@ -3,14 +3,13 @@ import json
 
 from django.test import TestCase, Client
 from django.utils import timezone
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
-import dsmr_consumption.services
 
 
 class TestViews(TestCase):
@@ -18,9 +17,11 @@ class TestViews(TestCase):
     fixtures = [
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
+        'dsmr_frontend/test_gas_consumption.json',
     ]
     namespace = 'frontend'
     support_data = True
@@ -29,7 +30,6 @@ class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
-        dsmr_consumption.services.compact_all()
 
     @mock.patch('django.utils.timezone.now')
     def test_status(self, now_mock):
@@ -37,25 +37,41 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:status'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
 
         self.assertIn('capabilities', response.context)
-        self.assertIn('unprocessed_readings', response.context)
+        self.assertIn('status', response.context)
+        status_context = response.context['status']
+
+        self.assertIn('readings', status_context)
+        self.assertIn('electricity', status_context)
+        self.assertIn('gas', status_context)
+        self.assertIn('statistics', status_context)
 
         if self.support_data:
-            self.assertIn('latest_day_statistics', response.context)
-            self.assertIn('days_since_latest_day_statistics', response.context)
+            self.assertIn('latest', status_context['statistics'])
+            self.assertIn('days_since', status_context['statistics'])
+            self.assertIsNone(status_context['readings']['unprocessed']['seconds_since'])
+            self.assertEqual(status_context['readings']['unprocessed']['count'], 0)
 
-        if 'latest_reading' in response.context:
-            self.assertIn('delta_since_latest_reading', response.context)
+            # Check unprocessed count as well.
+            DsmrReading.objects.update(processed=False)
+            response = self.client.get(
+                reverse('{}:status'.format(self.namespace))
+            )
+            status_context = response.context['status']
+            self.assertEqual(response.status_code, 200, response.content)
+            self.assertEqual(status_context['readings']['unprocessed']['count'], 3)
+            self.assertEqual(status_context['readings']['unprocessed']['seconds_since'], 4418353)
 
-        if 'latest_ec' in response.context:
-            self.assertIn('latest_ec', response.context)
-            self.assertIn('minutes_since_latest_ec', response.context)
+        if 'latest' in status_context['readings']:
+            self.assertIn('seconds_since', status_context['readings'])
 
-        if 'latest_gc' in response.context:
-            self.assertIn('latest_gc', response.context)
-            self.assertIn('hours_since_latest_gc', response.context)
+        if 'latest' in status_context['electricity']:
+            self.assertIn('minutes_since', status_context['electricity'])
+
+        if 'latest' in status_context['gas']:
+            self.assertIn('hours_since', status_context['gas'])
 
     @mock.patch('django.utils.timezone.now')
     def test_status_back_to_the_future(self, now_mock):
@@ -73,11 +89,12 @@ class TestViews(TestCase):
         response = self.client.get(
             reverse('{}:status'.format(self.namespace))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.content)
 
         # These should be reset for convenience.
-        self.assertEqual(response.context['latest_reading'].timestamp, timezone.now())
-        self.assertEqual(response.context['delta_since_latest_reading'], 0)
+        status_context = response.context['status']
+        self.assertEqual(status_context['readings']['latest'], timezone.now())
+        self.assertEqual(status_context['readings']['seconds_since'], 0)
 
     @mock.patch('dsmr_backend.services.is_latest_version')
     def test_status_xhr_update_checker(self, is_latest_version_mock):
@@ -124,9 +141,10 @@ class TestViewsWithoutGas(TestViews):
     fixtures = [
         'dsmr_frontend/test_dsmrreading_without_gas.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
     ]
     support_gas = False
 

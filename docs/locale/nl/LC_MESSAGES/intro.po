@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2017-02-18 00:28+0100\n"
-"PO-Revision-Date: 2017-01-01 00:00+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.5.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../intro.rst:2
 msgid "Introduction"
@@ -36,69 +37,41 @@ msgid ""
 "Keeping your data for yourself (all data is stored locally and untracked "
 "as well)."
 msgstr ""
-"Alle gegevens zijn eigendom van jezelf (alle data wordt lokaal opgeslagen"
-" en wordt niet gedeeld met de buitenwereld)."
+"Alle gegevens zijn eigendom van jezelf (alle data wordt lokaal opgeslagen "
+"en wordt niet zomaar gedeeld met de buitenwereld)."
 
 #: ../../intro.rst:8
 msgid "Always free to use (it's open source on Github as well)."
 msgstr "Altijd gratis te gebruiken (en tevens open-source op Github)."
 
 #: ../../intro.rst:12
-msgid "Why?"
-msgstr "Waarom?"
-
-#: ../../intro.rst:13
-msgid ""
-"Because open-source triggers the community to collaborate even more and "
-"bring out the best ideas! In the last year, many other cool DSMR-projects"
-" were launched as well!"
-msgstr ""
-"Omdat open-source het beste in een community naar boven brengt en zorgt "
-"voor nieuwe ideëen of inzichten. In het afgelopen jaar zijn er tevens tal"
-" andere coole DSMR-projecten gestart!"
-
-#: ../../intro.rst:17
 msgid "Languages"
 msgstr "Talen"
 
-#: ../../intro.rst:18
-#, fuzzy
+#: ../../intro.rst:13
 msgid ""
-"The entire application and it's code is written in English. The interface"
-" is also translated into Dutch and will be triggered depending on your "
+"The entire application and its code is written in English. The interface "
+"is also translated into Dutch and will be triggered depending on your "
 "browser's language preference."
 msgstr ""
 "De gehele applicatie, en bijbehorende code, is in het Engels geschreven. "
 "De grafische interface is echter ook in het Nederlands beschikbaar. Deze "
 "wordt getoond afhankelijk van de taalinstelling van je webbrowser."
 
-#: ../../intro.rst:22
-msgid "Skill"
-msgstr "Vaardigheid"
+#: ../../intro.rst:18
+msgid "Screenshots"
+msgstr "Screenshots"
+
+#: ../../intro.rst:19
+msgid ":doc:`For screenshots & features see this page<screenshots>`."
+msgstr ""
+":doc:`Voor screenshots en mogelijkheden, zie deze pagina<screenshots>`."
 
 #: ../../intro.rst:23
-msgid ""
-"The project is well documented, but requires a certain 'Unix skill' as "
-"you will need to install several dependencies using the command line."
-msgstr ""
-"Het project is behoorlijk gedocumenteerd, maar vereist desondanks een "
-"zekere Unix-vaardigheid. Je zult namelijk handmatig diverse "
-"afhankelijkheden moeten installeren via de command line."
-
-#: ../../intro.rst:25
-msgid ""
-"I advise to only use this tool when you have basic Linux knowledge or "
-"have any interest in the components used."
-msgstr ""
-"Ik raad je aan deze tool alleen te gebruiken wanneer je enige Linux-"
-"basiskennis hebt. Of wanneer je interesse hebt in de gebruikte "
-"componenten."
-
-#: ../../intro.rst:29
 msgid "Github"
 msgstr "Github"
 
-#: ../../intro.rst:30
+#: ../../intro.rst:24
 msgid ""
 "The project can be found here: https://github.com/dennissiemensma/dsmr-"
 "reader"
@@ -106,3 +79,33 @@ msgstr ""
 "Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
 "reader"
 
+#~ msgid "Why?"
+#~ msgstr "Waarom?"
+
+#~ msgid ""
+#~ "Because open-source triggers the community to collaborate even more and "
+#~ "bring out the best ideas! In the last year, many other cool DSMR-"
+#~ "projects were launched as well!"
+#~ msgstr ""
+#~ "Omdat open-source het beste in een community naar boven brengt en zorgt "
+#~ "voor nieuwe ideëen of inzichten. In het afgelopen jaar zijn er tevens "
+#~ "tal andere coole DSMR-projecten gestart!"
+
+#~ msgid "Skill"
+#~ msgstr "Vaardigheid"
+
+#~ msgid ""
+#~ "The project is well documented, but requires a certain 'Unix skill' as "
+#~ "you will need to install several dependencies using the command line."
+#~ msgstr ""
+#~ "Het project is behoorlijk in detail gedocumenteerd, maar vereist "
+#~ "desondanks een zekere Unix-vaardigheid. Je zult namelijk handmatig "
+#~ "diverse afhankelijkheden moeten installeren via de command line."
+
+#~ msgid ""
+#~ "I advise to only use this tool when you have basic Linux knowledge or "
+#~ "have any interest in the components used."
+#~ msgstr ""
+#~ "Ik raad je aan deze tool alleen te gebruiken wanneer je enige Linux-"
+#~ "basiskennis hebt. Of wanneer je interesse hebt in de gebruikte "
+#~ "componenten."

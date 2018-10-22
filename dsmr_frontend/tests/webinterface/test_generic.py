@@ -1,13 +1,13 @@
 from unittest import mock
 
-from django.test import TestCase, Client
-from django.core.urlresolvers import reverse
+from django.test.utils import override_settings
 from django.contrib.auth.models import User
+from django.test import TestCase, Client
+from django.urls import reverse
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics
-import dsmr_consumption.services
 
 
 class TestViews(TestCase):
@@ -15,9 +15,11 @@ class TestViews(TestCase):
     fixtures = [
         'dsmr_frontend/test_dsmrreading.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
+        'dsmr_frontend/test_gas_consumption.json',
     ]
     namespace = 'frontend'
     support_data = True
@@ -26,7 +28,6 @@ class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
-        dsmr_consumption.services.compact_all()
 
     def test_admin(self):
         response = self.client.get(
@@ -45,12 +46,11 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 500)
 
-    @mock.patch('django.conf.settings.DEBUG')
+    @override_settings(DEBUG=True)
     @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
-    def test_http_500_development(self, get_context_data_mock, debug_setting_mock):
+    def test_http_500_development(self, get_context_data_mock):
         """ Verify that the middleware is allowing Django to jump in when not in production. """
         get_context_data_mock.side_effect = SyntaxError('Meh')
-        debug_setting_mock.return_value = True
 
         with self.assertRaises(SyntaxError):
             self.client.get(
@@ -93,9 +93,10 @@ class TestViewsWithoutGas(TestViews):
     fixtures = [
         'dsmr_frontend/test_dsmrreading_without_gas.json',
         'dsmr_frontend/test_note.json',
-        'dsmr_frontend/EnergySupplierPrice.json',
+        'dsmr_frontend/test_energysupplierprice.json',
         'dsmr_frontend/test_statistics.json',
         'dsmr_frontend/test_meterstatistics.json',
+        'dsmr_frontend/test_electricity_consumption.json',
     ]
     support_gas = False
 

@@ -63,15 +63,19 @@ INSTALLED_APPS = (
     'dsmr_mindergas.apps.AppConfig',
     'dsmr_notification.apps.AppConfig',
     'dsmr_mqtt.apps.AppConfig',
+    'dsmr_pvoutput.apps.AppConfig',
+    'dsmr_plugins.apps.AppConfig',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
+    # Debug toolbar.
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -133,15 +137,11 @@ FORMAT_MODULE_PATH = [
 ]
 USE_THOUSAND_SEPARATOR = True
 
-# Caching framework. Normally we should prefer memcached, but file-based cache
-# is fine (and still fast) for RaspberryPi, preserving memory usage.
+# Caching framework. Advantages of caching in memory but without requiring memcached installed.
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': 60,
-        'OPTIONS': {
-            'MAX_ENTRIES': 100
-        }
+        'TIMEOUT': 10,
     }
 }
 
@@ -156,6 +156,58 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
+
+
+""" Python Logging. """
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)-8s %(message)s'
+        },
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)-8s @ %(module)s | %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'django_file': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, '..', 'logs', 'django.log'),
+            'formatter': 'verbose',
+            'maxBytes': 5 * 1024 * 1024,  # 5 MB max.
+            'backupCount': 7,
+        },
+        'dsmrreader_file': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, '..', 'logs', 'dsmrreader.log'),
+            'formatter': 'verbose',
+            'maxBytes': 5 * 1024 * 1024,  # 5 MB max.
+            'backupCount': 7,
+        },
+    },
+    'loggers': {
+        'commands': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['django_file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        'dsmrreader': {
+            'handlers': ['dsmrreader_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
 
 
 """ Django Rest Framework. """
@@ -188,6 +240,7 @@ DSMRREADER_BACKUP_MYSQLDUMP = 'mysqldump'
 DSMRREADER_BACKUP_SQLITE = 'sqlite3'
 DSMRREADER_BACKUP_DIRECTORY = 'backups'  # Relative to project root.
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
+DSMRREADER_DROPBOX_ERROR_INTERVAL = 12  # Skip new files for 12 hours when insufficient space in Dropbox account.
 
 DSMRREADER_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
 
@@ -196,3 +249,29 @@ DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/__init__.py'
 
 DSMRREADER_REST_FRAMEWORK_API_USER = 'api-user'
+
+# Sleep durations for infinity processes. Update these in your own config if you wish to alter them.
+DSMRREADER_BACKEND_SLEEP = 1
+DSMRREADER_DATALOGGER_SLEEP = 0.5
+DSMRREADER_MQTT_SLEEP = 1
+
+# Whether telegrams are logged, in base64 format. Only required for debugging.
+DSMRREADER_LOG_TELEGRAMS = False
+
+# Whether the backend process (and datalogger) reconnects to the DB after each run.
+DSMRREADER_RECONNECT_DATABASE = True
+
+# Maximum interval allowed since the latest reading, before ringing any alarms.
+DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60
+
+# The cooldown period until the next status notification will be sent.
+DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
+
+# Number of queued MQTT messages the application will retain. Any excess will be purged.
+DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100
+
+# Plugins.
+DSMRREADER_PLUGINS = []
+
+# Whether to override (disable) capabilities.
+DSMRREADER_DISABLED_CAPABILITIES = []

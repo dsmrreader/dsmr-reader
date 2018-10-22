@@ -25,6 +25,13 @@ class MinderGasSettings(SingletonModel):
             'More information can be found here: https://www.mindergas.nl/member/api'
         )
     )
+    latest_sync = models.DateTimeField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Latest sync'),
+        help_text=_('Timestamp of latest sync with MinderGas. Automatically updated by application.')
+    )
     next_export = models.DateTimeField(
         default=None,
         null=True,

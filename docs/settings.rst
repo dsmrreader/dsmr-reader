@@ -1,181 +1,75 @@
-Settings
-========
+Other settings
+==============
 
-The application has several settings available, which you can edit in the Configuration page.
-The default settings should work fine, although it's recommended to enable syncing backups using Dropbox. 
+Some project settings can be changed (or overridden) in the ``dsmrreader/settings.py`` file. 
+Removing any of these settings from your file will force using the default value.
+
+Make sure to reload the application afterwards to persist the changes you've made by executing ``./post-deploy.sh`` or restarting the Supervisor processes.
 
 .. contents::
 
 
-Database/Django settings
-------------------------
-``dsmrreader/settings.py``
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-In case you want to alter the database settings, or any other Django settings, please modify (or add) them to the ``dsmrreader/settings.py`` file.
-
-Make sure to reload the application afterwards to persist the changes you've made, by executing ``./reload.sh`` or restarting the Supervisor processes.
-
-
-API configuration
------------------
-
-The application does have an API, but it's disabled by default.
-You can enable it by activating the "Allow API calls" option.
-
-``Allow API calls``
-~~~~~~~~~~~~~~~~~~~
-Whether the API is enabled.
-
-``Auth Key``
-~~~~~~~~~~~~
-The auth key used for authentication.
-
-
-
-Backup configuration
---------------------
-The application creates a daily database backup by default. 
-You choose whether you want to have it compressed or in raw SQL form.
-The timestamp of the backup can be altered as well.
-
-``Backup daily``
-~~~~~~~~~~~~~~~~
-Whether to created backups at all.
-
-``Compress``
-~~~~~~~~~~~~
-Enable this to have the backups compressed in gzip format.
-Highly recommended as it will make backups up to 10 times smaller!  
-
-``Backup timestamp``
-~~~~~~~~~~~~~~~~~~~~
-Timestamp of the daily backup.
-
-
-
-Dropbox configuration
----------------------
-There is a Dropbox integration available to safely transfer each daily backup into your Dropbox account.
-:doc:`More information about this feature can be found in the FAQ<faq>`.
-
-``Dropbox access token``
-~~~~~~~~~~~~~~~~~~~~~~~~
-Enter your Dropbox access token here. Leave blank or clear to disable Dropbox integration.
-
-
-
-Consumption configuration
--------------------------
-The consumption settings determine how the application should handle the separate readings.
-The default behaviour is to group all readings each minute. This can be disabled.
-
-``Compactor grouping type``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The density of the readings, visible in the application as consumption.
-
-
-
-Energy supplier prices
-----------------------
-You can enter all your energy contract prices here. 
-The application will use them (when available) to calculate the consumption of each day.
-:doc:`See the FAQ on how to retroactivily adjust prices (if needed)<faq>`.
-
-
-
-Datalogger configuration
-------------------------
-This configuration applies to how to read your smart meter.
-
-``Poll P1 port``
-~~~~~~~~~~~~~~~~
-Do not disable this. Will be removed next release.
-
-``Track electricity phases``
+``DSMRREADER_BACKEND_SLEEP``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Whether you want to track phases. 
-:doc:`More information about this feature can be found in the FAQ<faq>`.
+The number of seconds the application will sleep after completing a backend run. Prevents hammering on your hardware. 
 
-``Verify telegram CRC``
-~~~~~~~~~~~~~~~~~~~~~~~
-Whether the application should verify the incoming data. Only available for DSMR 4+.
-
-``DSMR version``
-~~~~~~~~~~~~~~~~
-The DSMR version your smart meter has. Used to determine how the serial connection should work.
-
-``COM-port``
-~~~~~~~~~~~~
-The COM port your cable can be read from.
+Defaults to ``DSMRREADER_BACKEND_SLEEP = 1``.
 
 
+``DSMRREADER_DATALOGGER_SLEEP``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The number of seconds the application will sleep after reading data from the datalogger (API excluded). Prevents hammering on your hardware. 
 
-Frontend configuration
-----------------------
-This applies to the visualisation in the application.
-
-``Merge electricity tariffs``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Whether to merge the high and low tariffs. 
-:doc:`More information about this feature can be found in the FAQ<faq>`.
-
-``**** color``
-~~~~~~~~~~~~~~
-Multiple colors can be set here for the graphs.
+Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``.
 
 
+``DSMRREADER_MQTT_SLEEP``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The number of seconds the application will sleep after reading and publishing the outgoing MQTT message queue. Prevents hammering on your hardware. 
 
-MinderGas.nl configuration
---------------------------
-Optional connection with your account at MinderGas.nl. 
-:doc:`More information about this feature can be found in the FAQ<faq>`.
+Defaults to ``DSMRREADER_MQTT_SLEEP = 1``.
 
 
-``Export data to MinderGas``
+``DSMRREADER_LOG_TELEGRAMS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Whether to enable the connecting with MinderGas.
+Whether telegrams are logged, in base64 format. Only required for debugging.
 
-``MinderGas authentication token``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-API token for your MinderGas.nl account.
+Defaults to ``DSMRREADER_LOG_TELEGRAMS = False``.
 
 
+``DSMRREADER_RECONNECT_DATABASE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Whether the backend process (and datalogger) reconnects to the DB after each run. Prevents some hanging connections in some situations.
 
-Notes
------
-You can leave personal notes for yourself here. 
-Such as when you were on holiday or experimented with the heater settings. 
-
-
-
-Notification configuration
---------------------------
-Allows sending daily notifications to your phone. 
-:doc:`More information about this feature can be found in the FAQ<faq>`.
-
-``Send notification``
-~~~~~~~~~~~~~~~~~~~~~
-Whether to enable this feature.
-
-``Notification service``
-~~~~~~~~~~~~~~~~~~~~~~~~
-The notification service you are using.
-
-``Notification service API key``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-API token for your account of the notification service.
+Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``.
 
 
-Weather configuration
----------------------
-There is support for tracking outside temperatures for a fixed number of weather stations. 
-:doc:`More information about this feature can be found in the FAQ<faq>`.
+``DSMRREADER_STATUS_READING_OFFSET_MINUTES``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Maximum interval in minutes allowed since the latest reading, before ringing any alarms.
 
-``Track weather``
-~~~~~~~~~~~~~~~~~
-Whether to enable this feature.
+Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``.
 
-``Buienradar weather station``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The fixed weather station you wish to use.
 
+``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Number of queued MQTT messages the application will retain. Any excess will be purged.
+
+Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``.
+
+
+``DSMRREADER_PLUGINS``
+~~~~~~~~~~~~~~~~~~~~~~
+:doc:`More information about this feature can be found here<plugins>`.
+
+Defaults to ``DSMRREADER_PLUGINS = []``.
+
+
+``DSMRREADER_DISABLED_CAPABILITIES``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Whether to override (disable) capabilities. Only use if you want to disable a capability that your smart meter keeps reporting.
+For example you've switched from using gas to an alternative energy source. Or your smart meter contains electricity returned data, but you do not own any solar panels.
+
+Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``.
+
+Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', 'electricity_returned']``.

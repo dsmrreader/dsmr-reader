@@ -58,7 +58,7 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
         """ Fake & process an DSMR vX telegram reading. """
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
     def test_telegram_buffer_reset(self):
         """ Test whether an incomplete telegram gets dicarded. """
@@ -80,7 +80,7 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
         serial_readline_mock.side_effect = [eintr_error] + self._dsmr_dummy_data()
         self.assertFalse(DsmrReading.objects.exists())
 
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
         self.assertTrue(DsmrReading.objects.exists())
 
         # Everything else should be reraised.
@@ -89,8 +89,7 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
         DsmrReading.objects.all().delete()
         self.assertFalse(DsmrReading.objects.exists())
 
-        with self.assertRaises(SerialException):
-            self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
         self.assertFalse(DsmrReading.objects.exists())
 
@@ -133,7 +132,7 @@ class TestDataloggerCrcError(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(DsmrReading.objects.exists())
 
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
         self.assertFalse(DsmrReading.objects.exists())
 
@@ -151,7 +150,7 @@ class TestDataloggerCrcError(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(DsmrReading.objects.exists())
 
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
         self.assertTrue(DsmrReading.objects.exists())
 
@@ -219,7 +218,7 @@ class TestDataloggerDuplicateData(InterceptStdoutMixin, TestCase):
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
 
         self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
@@ -311,7 +310,7 @@ class TestFutureTelegrams(InterceptStdoutMixin, TestCase):
         datalogger_settings.save()
 
         self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger')
+        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
         # It should be discarded.
         self.assertFalse(DsmrReading.objects.exists())
