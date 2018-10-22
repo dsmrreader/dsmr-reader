@@ -35,19 +35,19 @@
 
 
 ### Dashboard
-![Dashboard](docs/_static/screenshots/dashboard.png)
+![Dashboard](docs/static/screenshots/frontend/dashboard.png)
 
 
 ### Archive
-![Archive](docs/_static/screenshots/archive.png)
+![Archive](docs/static/screenshots/frontend/archive.png)
 
 
 ### Trends
-![Archive](docs/_static/screenshots/trends.png)
+![Archive](docs/static/screenshots/frontend/trends.png)
 
 
 ### Energy contracts
-![Archive](docs/_static/screenshots/energy-contracts.png)
+![Archive](docs/static/screenshots/frontend/energy-contracts.png)
 
 
 ## Screenshots
