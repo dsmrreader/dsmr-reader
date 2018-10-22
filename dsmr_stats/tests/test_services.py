@@ -469,6 +469,51 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(stats.highest_return_l2_timestamp, reading_timestamp)
         self.assertEqual(stats.highest_return_l3_timestamp, reading_timestamp)
 
+    @mock.patch('django.utils.timezone.now')
+    def test_update_electricity_statistics_single_phase(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=0))
+        stats = ElectricityStatistics.get_solo()
+        self.assertIsNone(stats.highest_usage_l1_value)
+        self.assertIsNone(stats.highest_usage_l2_value)
+        self.assertIsNone(stats.highest_usage_l3_value)
+        self.assertIsNone(stats.highest_return_l1_value)
+        self.assertIsNone(stats.highest_return_l2_value)
+        self.assertIsNone(stats.highest_return_l3_value)
+
+        # This has to differ, to make sure the right timestamp is used.
+        reading_timestamp = timezone.now()
+        reading = DsmrReading.objects.create(
+            timestamp=reading_timestamp,
+            electricity_delivered_1=0,
+            electricity_returned_1=0,
+            electricity_delivered_2=0,
+            electricity_returned_2=0,
+            electricity_currently_delivered=0.6,
+            electricity_currently_returned=1.6,
+            phase_currently_delivered_l1=0.1,
+            phase_currently_returned_l1=1.1,
+        )
+
+        # Alter time, processing of reading is later.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=12))
+        self.assertNotEqual(reading_timestamp, timezone.now())
+        dsmr_stats.services.update_electricity_statistics(reading=reading)
+
+        # Should be updated now.
+        stats = ElectricityStatistics.get_solo()
+        self.assertEqual(stats.highest_usage_l1_value, Decimal('0.100'))
+        self.assertEqual(stats.highest_usage_l2_value, None)
+        self.assertEqual(stats.highest_usage_l3_value, None)
+        self.assertEqual(stats.highest_return_l1_value, Decimal('1.100'))
+        self.assertEqual(stats.highest_return_l2_value, None)
+        self.assertEqual(stats.highest_return_l3_value, None)
+        self.assertEqual(stats.highest_usage_l1_timestamp, reading_timestamp)
+        self.assertEqual(stats.highest_usage_l2_timestamp, None)
+        self.assertEqual(stats.highest_usage_l3_timestamp, None)
+        self.assertEqual(stats.highest_return_l1_timestamp, reading_timestamp)
+        self.assertEqual(stats.highest_return_l2_timestamp, None)
+        self.assertEqual(stats.highest_return_l3_timestamp, None)
+
 
 class TestServicesWithoutGas(TestServices):
     fixtures = ['dsmr_stats/electricity-consumption.json']

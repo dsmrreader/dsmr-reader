@@ -17,6 +17,17 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v1.25.1 - 2018-10-22
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#537 <https://github.com/dennissiemensma/dsmr-reader/issues/537>`_] Fix screenshot urls - by pyrocumulus
+
+
+----
+
+
 v1.25.0 - 2018-10-18
 ^^^^^^^^^^^^^^^^^^^^
 
