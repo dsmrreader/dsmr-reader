@@ -23,6 +23,7 @@ v1.26.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#xxxxxxxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxxxx>`_] yyyyyyyyyyyyyyyyyyyy
+- [`#536 <https://github.com/dennissiemensma/dsmr-reader/issues/536>`_] Retentie-verbeteringen
 
 
 ----

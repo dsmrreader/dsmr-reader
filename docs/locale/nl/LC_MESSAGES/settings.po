@@ -8,6 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-23 18:30+0200\n"
+"PO-Revision-Date: 2018-10-23 18:32+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -156,22 +158,57 @@ msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
 msgstr "Standaardwaarde: ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
 
 #: ../../settings.rst:62
+msgid "``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``"
+msgstr "``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``"
+
+#: ../../settings.rst:63
+msgid ""
+"The maximum number of hours that will be cleaned up during one retention run. "
+"Raise this value if you have a lot of readings to clean up and it takes too long."
+msgstr ""
+"Het maximum aantal uren dat per keer opgeschoond wordt met retentie. Verhoog "
+"deze waarde wanneer je een hoop metingen hebt om op te schonen en het erg lang "
+"duurt."
+
+#: ../../settings.rst:66
+msgid "Defaults to ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``."
+msgstr "Standaardwaarde ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``."
+
+#: ../../settings.rst:70
+msgid "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
+msgstr "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
+
+#: ../../settings.rst:71
+msgid ""
+"Sets the maximum hour of the day that retention will run. Retention always "
+"starts after midnight, when enabled. I.e.: changing it to ``8`` will prevent new "
+"retention runs after 8 A.M."
+msgstr ""
+"Stelt de maximumtijd in waarop retentie op een dag mag draaien. Retentie draait "
+"altijd vanaf middernacht, mits ingeschakeld. Bijvoorbeeld: een waarde van ``8`` "
+"zorgt ervoor dat retentie niet meer wordt gestart ná 8 uur in de ochtend."
+
+#: ../../settings.rst:75
+msgid "Defaults to ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
+msgstr "Standaardwaarde ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
+
+#: ../../settings.rst:79
 msgid "``DSMRREADER_PLUGINS``"
 msgstr "``DSMRREADER_PLUGINS``"
 
-#: ../../settings.rst:63
+#: ../../settings.rst:80
 msgid ":doc:`More information about this feature can be found here<plugins>`."
 msgstr ":doc:`Meer informatie over deze feature kun je hier terugvinden<plugins>`."
 
-#: ../../settings.rst:65
+#: ../../settings.rst:82
 msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
 msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."
 
-#: ../../settings.rst:69
+#: ../../settings.rst:86
 msgid "``DSMRREADER_DISABLED_CAPABILITIES``"
 msgstr "``DSMRREADER_DISABLED_CAPABILITIES``"
 
-#: ../../settings.rst:70
+#: ../../settings.rst:87
 msgid ""
 "Whether to override (disable) capabilities. Only use if you want to disable a "
 "capability that your smart meter keeps reporting. For example you've switched "
@@ -184,11 +221,11 @@ msgstr ""
 "energiebron. Of wanneer je slimme meter data bevat voor teruggeleverde energie "
 "en je uberhaupt geen zonnepanelen hebt."
 
-#: ../../settings.rst:73
+#: ../../settings.rst:90
 msgid "Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 msgstr "Standaardwaarde ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 
-#: ../../settings.rst:75
+#: ../../settings.rst:92
 msgid ""
 "Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
 "'electricity_returned']``."

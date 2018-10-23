@@ -270,6 +270,12 @@ DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
 # Number of queued MQTT messages the application will retain. Any excess will be purged.
 DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100
 
+# Number of hours to cleanup in one run of applying retention.
+DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
+
+# Retention will no longer start when this hour has passed (i.e.: 6 A.M.)
+DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6
+
 # Plugins.
 DSMRREADER_PLUGINS = []
 
