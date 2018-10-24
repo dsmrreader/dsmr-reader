@@ -21,14 +21,14 @@
 
 
 ## Features
-- Application languages supported: **Dutch (Nederlands)**  and **English**. The language used in your browser dynamicly decides the language applied in the application.
+- Application languages supported: **Dutch (Nederlands)**  and **English**. The language used in your browser dynamically decides the language used in the application.
 - Optional Support for **exporting data to third-parties**: MinderGas.nl, PVOutput.org.
 - Also supports local exports: CSV, SQL back-ups & optional daily upload to Dropbox.
 - Notifications on your devices, supporting **Pushover** and **Prowl** apps!
 - Optional data rotation/retention, keeping your dataset small and portable.
 - Compare two days, months or years with each other.
 - REST API to either insert or read data realtime.
-- Keep track of certain events by sticking your own notes to a day, reminding yourself what happened that day.
+- Keep track of certain events by adding your own notes to a day, reminding yourself what happened that day.
 - Support for MQTT export.
 - Extendable plug-in system.
 - Scrollable graphs.
