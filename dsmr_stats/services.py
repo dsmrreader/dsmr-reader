@@ -269,23 +269,38 @@ def year_statistics(target_date):
 
 def update_electricity_statistics(reading):
     """ Updates the ElectricityStatistics records. """
-    MAP = {
-        # Reading field: Stats record field.
-        'phase_currently_delivered_l1': 'highest_usage_l1',
-        'phase_currently_delivered_l2': 'highest_usage_l2',
-        'phase_currently_delivered_l3': 'highest_usage_l3',
-        'phase_currently_returned_l1': 'highest_return_l1',
-        'phase_currently_returned_l2': 'highest_return_l2',
-        'phase_currently_returned_l3': 'highest_return_l3',
+    MAPPING = {
+        # Stats record field: Reading field.
+        'highest_usage_l1': 'phase_currently_delivered_l1',
+        'highest_usage_l2': 'phase_currently_delivered_l2',
+        'highest_usage_l3': 'phase_currently_delivered_l3',
+        'highest_return_l1': 'phase_currently_returned_l1',
+        'highest_return_l2': 'phase_currently_returned_l2',
+        'highest_return_l3': 'phase_currently_returned_l3',
+
+        'lowest_usage_l1': 'phase_currently_delivered_l1',
+        'lowest_usage_l2': 'phase_currently_delivered_l2',
+        'lowest_usage_l3': 'phase_currently_delivered_l3',
     }
     stats = ElectricityStatistics.get_solo()
     dirty = False
 
-    for reading_field, stat_field in MAP.items():
+    for stat_field, reading_field in MAPPING.items():
         reading_value = getattr(reading, reading_field) or 0
-        highest_value = getattr(stats, '{}_value'.format(stat_field)) or 0
+        top_value = getattr(stats, '{}_value'.format(stat_field)) or 0
 
-        if reading_value and Decimal(reading_value) > Decimal(highest_value):
+        if top_value == 0 and stat_field.startswith('lowest'):
+            top_value = 9999999
+
+        reading_value = Decimal(str(reading_value))
+        top_value = Decimal(str(top_value))
+
+        if not reading_value:
+            continue
+
+        # Depending on what we track, compare to the current high (or low).
+        if (stat_field.startswith('lowest') and reading_value < top_value) or \
+                (stat_field.startswith('highest') and reading_value > top_value):
             dirty = True
             setattr(stats, '{}_value'.format(stat_field), reading_value)
             setattr(stats, '{}_timestamp'.format(stat_field), reading.timestamp)

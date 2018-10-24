@@ -11,8 +11,7 @@
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-danger" role="alert">
-        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
-    </div>
+        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}</div>
 {% endif %}
 
 {% if capabilities.any %}
@@ -156,14 +155,15 @@
         </div>
     </div>
    
-    {% if electricity_statistics %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "All time highs" %}
+                    {% trans "All time highs & lows" %}
                 </header>
                 <div class="panel-body">
+                
+                {% if electricity_statistics and datalogger_settings.track_phases %}
                     <table class="table table-condensed">
                         {% if electricity_statistics.highest_usage_l1_value %}
                         <tr>
@@ -194,6 +194,40 @@
                                 <span class="badge bg-red">
                                    <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_usage_l3_value }} &nbsp; 
                                    {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_usage_l3_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        {% if electricity_statistics.lowest_usage_l1_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Lowest usage (L1+)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.lowest_usage_l1_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.lowest_usage_l1_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.lowest_usage_l2_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Lowest usage (L2+)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.lowest_usage_l2_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.lowest_usage_l2_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.lowest_usage_l3_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Lowest usage (L3+)" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.lowest_usage_l3_value }} &nbsp; 
+                                   {% trans "Watt" %} &nbsp; - &nbsp; {{ electricity_statistics.lowest_usage_l3_timestamp }}
                                 </span>
                             </td>
                         </tr>
@@ -233,11 +267,13 @@
                         </tr>
                         {% endif %}
                     </table>
+                    {% else %}
+                        <small>{% blocktrans %}Enable "Track electricity phases" in the Datalogger Configuration to track this data.{% endblocktrans %}</small>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    {% endif %}
     
 {% endif %}
     

@@ -55,6 +55,7 @@ Listed in any order, sorted by name.
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `sanderdw <https://github.com/sanderdw>`_
 - `Sevickson <https://github.com/sevickson>`_
+- `swerveshot <https://github.com/swerveshot>`_
 - `TampertK <https://github.com/TampertK>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
 - `thommy101 <https://github.com/thommy101>`_

@@ -112,15 +112,3 @@ msgid ""
 msgstr ""
 "Indien je alles correct hebt ingesteld, zul je op korte termijn extra "
 "gegevens moeten zien in PVOutput onder \"Your Outputs\"."
-
-#~ msgid "Integration: PVOutput"
-#~ msgstr "Integratie: PVOutput"
-
-#~ msgid "Contents"
-#~ msgstr "Inhoudsopgave"
-
-#~ msgid "PVOutput.org: Automated electricity consumption export"
-#~ msgstr "PVOutput.org: Automatisch exporteren van verbruik"
-
-#~ msgid "*How can I link my PVOutput.org account?*"
-#~ msgstr "*Hoe kan ik mijn PVOutput.org-account koppelen?*"
