@@ -63,6 +63,7 @@ Listed in any order, sorted by name.
 - `trbs <https://github.com/trbs>`_
 - `trizz <https://github.com/trizz>`_
 - `ualex73 <https://github.com/ualex73>`_
+- `vavdb <https://github.com/vavdb>`_
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
