@@ -1,14 +1,16 @@
 from unittest import mock
 
-from django.test import TestCase
 from django.utils import timezone
+from django.test import TestCase
+from django.conf import settings
+import pytz
 
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
 from dsmr_stats.models.statistics import DayStatistics
+from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_notification.services
 import dsmr_backend
-from dsmr_datalogger.models.reading import DsmrReading
 
 
 class TestServices(TestCase):
@@ -80,8 +82,38 @@ class TestServices(TestCase):
         notification_settings = NotificationSetting.get_solo()
         self.assertEqual(
             notification_settings.next_notification,
-            timezone.make_aware(timezone.datetime(2016, 11, 17, 2, 0, 0))
+            timezone.make_aware(timezone.datetime(2016, 11, 17, 6, 0, 0))
         )
+
+    @mock.patch('django.utils.timezone.now')
+    def test_set_next_notification_date_for_dst_change(self, now_mock):
+        """ Notifications: Test if next notification date is set due to DST change """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 10, 27, 2, 0, 0))  # Do NOT change hour.
+        now = timezone.localtime(timezone.now())
+        NotificationSetting.objects.update(next_notification=now)
+
+        # This used to trigger a AmbiguousTimeError.
+        dsmr_notification.services.set_next_notification()
+
+        notification_settings = NotificationSetting.get_solo()
+        next_notification = timezone.localtime(notification_settings.next_notification)
+        expected = timezone.datetime(2018, 10, 28, 6, 0, 0)
+        expected = timezone.localtime(timezone.make_aware(expected, pytz.timezone(settings.TIME_ZONE), is_dst=True))
+        print(next_notification, expected)
+        self.assertEqual(next_notification, expected)
+
+        # Check other way around as well, in March.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2019, 3, 30, 1, 0, 0))  # Do NOT change hour.
+        now = timezone.localtime(timezone.now())
+        NotificationSetting.objects.update(next_notification=now)
+
+        dsmr_notification.services.set_next_notification()
+
+        notification_settings = NotificationSetting.get_solo()
+        next_notification = timezone.localtime(notification_settings.next_notification)
+        expected = timezone.datetime(2019, 3, 31, 6, 0, 0)
+        expected = timezone.localtime(timezone.make_aware(expected, pytz.timezone(settings.TIME_ZONE), is_dst=True))
+        self.assertEqual(next_notification, expected)
 
     @mock.patch('dsmr_notification.services.send_notification')
     def test_no_daystatistics(self, send_notification_mock):

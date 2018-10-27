@@ -1,3 +1,4 @@
+import traceback
 import logging
 
 from django.core.management.base import BaseCommand
@@ -25,5 +26,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
         for __, current_response in responses:
             if isinstance(current_response, Exception):
-                logger.error('Uncaught exception')
-                logger.exception(current_response)
+                # Add and print traceback to help debugging any issues raised.
+                exception_traceback = traceback.format_tb(current_response.__traceback__, limit=100)
+                exception_traceback = "\n".join(exception_traceback)
+                logger.critical('Uncaught exception: %s', exception_traceback)
