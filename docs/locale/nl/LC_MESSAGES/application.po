@@ -332,6 +332,3 @@ msgstr ""
 "up te zien, waarin je gevraagd wordt om in te loggen. Voor meer informatie over "
 "dit onderwerp `zie de Nginx documentatie <https://www.nginx.com/resources/admin-"
 "guide/restricting-access/>`_."
-
-#~ msgid "Viewing the application"
-#~ msgstr "Bekijk applicatie"

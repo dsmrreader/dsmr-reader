@@ -838,8 +838,8 @@ msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
 msgid "Show"
 msgstr "Toon"
 
-msgid "All time highs"
-msgstr "Allertijden records"
+msgid "All time highs & lows"
+msgstr "Hoogte- en laagte records"
 
 msgid "Highest usage (L1+)"
 msgstr "Hoogste verbruik (L1+)"
@@ -850,6 +850,15 @@ msgstr "Hoogste verbruik (L2+)"
 msgid "Highest usage (L3+)"
 msgstr "Hoogste verbruik (L3+)"
 
+msgid "Lowest usage (L1+)"
+msgstr "Laagste verbruik (L1+)"
+
+msgid "Lowest usage (L2+)"
+msgstr "Laagste verbruik (L2+)"
+
+msgid "Lowest usage (L3+)"
+msgstr "Laagste verbruik (L3+)"
+
 msgid "Highest return (L1-)"
 msgstr "Hoogste teruglevering (L1-)"
 
@@ -858,6 +867,9 @@ msgstr "Hoogste teruglevering (L2-)"
 
 msgid "Highest return (L3-)"
 msgstr "Hoogste teruglevering (L3-)"
+
+msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
+msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden. "
 
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
@@ -1648,6 +1660,15 @@ msgstr "Moment van hoogste teruglevering op L2-"
 msgid "Timestamp of highest return on L3-"
 msgstr "Moment van hoogste teruglevering op L3-"
 
+msgid "Timestamp of lowest usage on L1+"
+msgstr "Moment van laagste verbruik op L1+"
+
+msgid "Timestamp of lowest usage on L2+"
+msgstr "Moment van laagste verbruik op L2+"
+
+msgid "Timestamp of lowest usage on L3+"
+msgstr "Moment van laagste verbruik op L3+"
+
 msgid "Highest usage on L1+ (in kWh)"
 msgstr "Hoogste verbruik op L1+ (in kWh)"
 
@@ -1665,6 +1686,15 @@ msgstr "Hoogste teruglevering op L2- (in kWh)"
 
 msgid "Highest return on L3- (in kWh)"
 msgstr "Hoogste teruglevering op L3- (in kWh)"
+
+msgid "Lowest usage on L1+ (in kWh)"
+msgstr "Laagste verbruik op L1+ (in kWh)"
+
+msgid "Lowest usage on L2+ (in kWh)"
+msgstr "Laagste verbruik op L2+ (in kWh)"
+
+msgid "Lowest usage on L3+ (in kWh)"
+msgstr "Laagste verbruik op L3+ (in kWh)"
 
 msgid "Buienradar"
 msgstr "Buienradar"
@@ -1857,9 +1887,3 @@ msgstr "Engels"
 
 msgid "Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html"
 msgstr "Volledige documentatie beschikbaar op: https://dsmr-reader.readthedocs.io/nl/latest/api.html"
-
-#~ msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentation</a>"
-#~ msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#mindergas-nl-automated-gas-meter-position-export\">FAQ in documentatie</a>"
-
-#~ msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentation</a>"
-#~ msgstr "Gedetailleerde instructies voor het instellen van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#usage-notification-daily-usage-statistics-on-your-smartphone\">FAQ in documentatie</a>"

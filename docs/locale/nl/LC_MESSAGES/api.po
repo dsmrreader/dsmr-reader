@@ -689,6 +689,3 @@ msgstr ""
 #: ../../api.rst:847
 msgid "Full path: ``/api/v2/application/status``"
 msgstr "Volledig pad: ``/api/v2/application/status``"
-
-#~ msgid "API"
-#~ msgstr "API"

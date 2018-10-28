@@ -79,15 +79,3 @@ msgstr ""
 "Kopieer de gegenereerde toegangstoken naar de DSMR-reader instellingen "
 "onder Dropbox-configuratie. DSMR-reader zou vrij vlot gemaakte backups "
 "moeten uploaden naar je Dropbox-account."
-
-#~ msgid "Integration: Dropbox"
-#~ msgstr "Integratie: Dropbox"
-
-#~ msgid "Contents"
-#~ msgstr "Inhoudsopgave"
-
-#~ msgid "Dropbox: Automated backup sync"
-#~ msgstr "Dropbox: Automatisch backups uploaden"
-
-#~ msgid "*How can I link my Dropbox account for backups?*"
-#~ msgstr "*Hoe kan ik mijn Dropbox-account koppelen voor de backups?*"

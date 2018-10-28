@@ -306,20 +306,17 @@ def apply_data_retention():
     When data retention is enabled, this discards all data applicable for retention. Keeps at least one data point per
     hour available.
     """
-    settings = RetentionSettings.get_solo()
+    retention_settings = RetentionSettings.get_solo()
 
-    if settings.data_retention_in_hours is None:
+    if retention_settings.data_retention_in_hours is None:
         # No retention enabled at all (default behaviour).
         return
 
-    current_hour = timezone.now().hour
+    current_time = timezone.localtime(timezone.now())
 
     # Only cleanup during nights. Allow from midnight to six a.m.
-    if current_hour > 6:
+    if current_time.hour >= settings.DSMRREADER_RETENTION_UNTIL_THIS_HOUR:
         return
-
-    # Each run should be capped, for obvious performance reasons.
-    MAX_HOURS_CLEANUP = 24
 
     # These models should be rotated with retention. Dict value is the datetime field used.
     MODELS_TO_CLEANUP = {
@@ -328,7 +325,7 @@ def apply_data_retention():
         GasConsumption.objects.all(): 'read_at',
     }
 
-    retention_date = timezone.now() - timezone.timedelta(hours=settings.data_retention_in_hours)
+    retention_date = timezone.now() - timezone.timedelta(hours=retention_settings.data_retention_in_hours)
 
     # We need to force UTC here, to avoid AmbiguousTimeError's on DST changes.
     timezone.activate(pytz.UTC)
@@ -344,7 +341,7 @@ def apply_data_retention():
             item_count__gt=2
         ).order_by('item_hour').values_list(
             'item_hour', flat=True
-        )[:MAX_HOURS_CLEANUP]
+        )[:settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN]
 
         hours_to_cleanup = list(hours_to_cleanup)  # Force evaluation.
 

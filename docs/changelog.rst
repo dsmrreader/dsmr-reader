@@ -17,6 +17,19 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v1.26.0 - 2018-10-28
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#541 <https://github.com/dennissiemensma/dsmr-reader/issues/541>`_] AmbiguousTimeError causes excessive notifications
+- [`#535 <https://github.com/dennissiemensma/dsmr-reader/issues/535>`_] "All time low" implementeren
+- [`#536 <https://github.com/dennissiemensma/dsmr-reader/issues/536>`_] Retentie-verbeteringen
+
+
+----
+
+
 v1.25.1 - 2018-10-22
 ^^^^^^^^^^^^^^^^^^^^
 

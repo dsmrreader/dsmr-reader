@@ -122,15 +122,19 @@ def send_notification(message, title):
 
 def set_next_notification():
     """ Set the next moment for notifications to be allowed again """
-    tomorrow = timezone.now() + timezone.timedelta(hours=24)
-    NotificationSetting.objects.update(
-        next_notification=timezone.make_aware(timezone.datetime(
-            year=tomorrow.year,
-            month=tomorrow.month,
-            day=tomorrow.day,
-            hour=2,
-        ))
-    )
+    DAILY_NOTIFICATION_HOUR = 6
+
+    # DST can cause some trouble. We need to go forward and set the requested hour.
+    next_notification = timezone.now() + timezone.timedelta(hours=24)
+    next_notification = next_notification.replace(hour=DAILY_NOTIFICATION_HOUR, minute=0, second=0, microsecond=0)
+
+    # Now we recalculate our new timezone. This only changes twice a year due to DST.
+    next_notification = timezone.localtime(next_notification)
+
+    # And we have te replace the hour, again. Prevents sending notifications an hour early or late on the next day.
+    next_notification = next_notification.replace(hour=DAILY_NOTIFICATION_HOUR, minute=0, second=0, microsecond=0)
+
+    NotificationSetting.objects.update(next_notification=next_notification)
 
 
 def notify():
@@ -189,7 +193,9 @@ def check_status():
     # Alert!
     logger.debug(' - Sending notification about datalogger lagging behind...')
     send_notification(
-        str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.')),
+        str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.'.format(
+            settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
+        ))),
         str(_('Datalogger check'))
     )
 

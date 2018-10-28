@@ -55,6 +55,7 @@ Listed in any order, sorted by name.
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `sanderdw <https://github.com/sanderdw>`_
 - `Sevickson <https://github.com/sevickson>`_
+- `swerveshot <https://github.com/swerveshot>`_
 - `TampertK <https://github.com/TampertK>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
 - `thommy101 <https://github.com/thommy101>`_
@@ -63,6 +64,7 @@ Listed in any order, sorted by name.
 - `trbs <https://github.com/trbs>`_
 - `trizz <https://github.com/trizz>`_
 - `ualex73 <https://github.com/ualex73>`_
+- `vavdb <https://github.com/vavdb>`_
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_

@@ -24,7 +24,7 @@ Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``.
 
 
 ``DSMRREADER_MQTT_SLEEP``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 The number of seconds the application will sleep after reading and publishing the outgoing MQTT message queue. Prevents hammering on your hardware. 
 
 Defaults to ``DSMRREADER_MQTT_SLEEP = 1``.
@@ -52,10 +52,27 @@ Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``.
 
 
 ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Number of queued MQTT messages the application will retain. Any excess will be purged.
 
 Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``.
+
+
+``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The maximum number of hours that will be cleaned up during one retention run. 
+Raise this value if you have a lot of readings to clean up and it takes too long. 
+
+Defaults to ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``.
+
+
+``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sets the maximum hour of the day that retention will run. 
+Retention always starts after midnight, when enabled.
+I.e.: changing it to ``8`` will prevent new retention runs after 8 A.M.
+
+Defaults to ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``.
 
 
 ``DSMRREADER_PLUGINS``

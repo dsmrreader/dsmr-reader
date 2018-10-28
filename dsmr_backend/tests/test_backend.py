@@ -43,7 +43,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         # We must disconnect to prevent other tests from failing, since this is no database action.
         dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)
 
-    @mock.patch('logging.Logger.exception')
+    @mock.patch('logging.Logger.critical')
     def test_signal_exception_handling(self, logging_mock):
         """ Tests signal exception handling. """
         def _fake_signal_troublemaker(*args, **kwargs):

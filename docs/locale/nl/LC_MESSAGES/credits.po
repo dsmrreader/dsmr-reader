@@ -378,22 +378,3 @@ msgstr ""
 #: ../../credits.rst:109
 msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 msgstr ""
-
-#~ msgid "`dbmnl  <https://github.com/dbmnl >`_"
-#~ msgstr ""
-
-#~ msgid "`raoulteeuwen  <https://github.com/raoulteeuwen >`_"
-#~ msgstr ""
-
-#~ msgid "`raoulteeuwen <https://github.com/raoulteeuwen >`_"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "`Director Responsive Admin <http://web-"
-#~ "apps.ninja/director-free-responsive-admin-"
-#~ "template/>`_"
-#~ msgstr ""
-
-#~ msgid "`Swagger UI Themes <http://meostrander.com/swagger-ui-themes/>`_"
-#~ msgstr ""
-

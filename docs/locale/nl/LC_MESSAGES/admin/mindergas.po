@@ -68,12 +68,3 @@ msgstr ""
 "terugwerkende kracht meterstanden door te geven via de API. De "
 "applicatie ondersteunt dat om die reden niet. Je kunt oude meterstanden "
 "echter wel via hun website handmatig invoeren, indien gewenst."
-
-#~ msgid "Contents"
-#~ msgstr "Inhoudsopgave"
-
-#~ msgid "Mindergas.nl: Automated gas meter position export"
-#~ msgstr "Mindergas.nl: Automatisch gasmeterstanden exporteren"
-
-#~ msgid "*How can I link my mindergas.nl account?*"
-#~ msgstr "*Hoe kan ik mijn mindergas.nl-account koppelen?*"

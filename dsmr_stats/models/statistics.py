@@ -126,6 +126,15 @@ class ElectricityStatistics(SingletonModel):
     highest_return_l3_timestamp = models.DateTimeField(
         null=True, blank=True, default=None, verbose_name=_('Timestamp of highest return on L3-')
     )
+    lowest_usage_l1_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest usage on L1+')
+    )
+    lowest_usage_l2_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest usage on L2+')
+    )
+    lowest_usage_l3_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest usage on L3+')
+    )
 
     highest_usage_l1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
@@ -150,6 +159,18 @@ class ElectricityStatistics(SingletonModel):
     highest_return_l3_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
         verbose_name=_('Highest return on L3- (in kWh)')
+    )
+    lowest_usage_l1_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Lowest usage on L1+ (in kWh)')
+    )
+    lowest_usage_l2_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Lowest usage on L2+ (in kWh)')
+    )
+    lowest_usage_l3_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Lowest usage on L3+ (in kWh)')
     )
 
     def export(self):

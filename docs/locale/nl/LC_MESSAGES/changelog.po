@@ -8,8 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2018-10-17 18:30+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -2037,32 +2035,3 @@ msgstr ""
 #: ../../changelog.rst:868
 msgid "Upgraded Django to 1.8.9."
 msgstr ""
-
-#~ msgid "Contents"
-#~ msgstr "Inhoudsopgave"
-
-#~ msgid "v2.0.0 - 2018-xx-xx"
-#~ msgstr ""
-
-#~ msgid "Support for Python ``3.4`` has been **dropped**!"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "[`#527 <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/527>`_] Docker DSMR Datalogger "
-#~ "(by trizz)"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "[`#xxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/xxxxxxxxxxxxxxxx>`_] yyyyyyyyyyyyyyyy"
-#~ msgstr ""
-
-#~ msgid "v1.25.0 - 2018-xx-xx"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "[`#532 <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/532>`_] Update documentation"
-#~ msgstr ""
-
