@@ -22,7 +22,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def initialize(self):
         """ Set up persistent MQTT client. """
-        self.mqtt_client = dsmr_mqtt.services.broker.initialize()
+        while self.mqtt_client is None:
+            self.mqtt_client = dsmr_mqtt.services.broker.initialize()
 
     def shutdown(self):
         """ Disconnects the MQTT client gracefully. """

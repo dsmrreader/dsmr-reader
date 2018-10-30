@@ -18,9 +18,9 @@ def initialize():
     broker_settings = MQTTBrokerSettings.get_solo()
 
     if not broker_settings.hostname:
-        logger.warning('MQTT | No hostname found in settings, restarting in a minute...')
+        logger.warning('MQTT | No hostname found in settings, retrying in a minute...')
         time.sleep(60)
-        raise StopInfiniteRun()
+        return None
 
     mqtt_client = paho.Client(client_id=broker_settings.client_id)
     mqtt_client.on_connect = on_connect
