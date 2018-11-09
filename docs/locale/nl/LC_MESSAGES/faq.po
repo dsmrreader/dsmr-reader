@@ -1,16 +1,18 @@
-
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-11-09 15:39+0100\n"
+"PO-Revision-Date: 2018-11-09 15:40+0100\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../faq.rst:2
 msgid "Frequently Asked Questions (FAQ)"
@@ -26,15 +28,15 @@ msgstr "Hoe kan ik mijn applicatie bijwerken?"
 
 #: ../../faq.rst:11
 msgid ""
-"The version you are running is always based on the 'latest' version of "
-"the application, called the `master` branch. Every once in a while there "
-"may be updates. Since ``v1.5`` you can also easily check for updates by "
-"using the application's Status page."
+"The version you are running is always based on the 'latest' version of the "
+"application, called the `master` branch. Every once in a while there may be "
+"updates. Since ``v1.5`` you can also easily check for updates by using the "
+"application's Status page."
 msgstr ""
-"De versie die je draait is altijd gebaseerd op de 'laatste' versie van de"
-" applicatie, ook wel de `master` branch genoemd. Met enige regelmaat zijn"
-" er updates beschikbaar. Sinds ``v1.5`` kun je dit ook eenvoudig "
-"controleren op de Status-pagina van de applicatie."
+"De versie die je draait is altijd gebaseerd op de 'laatste' versie van de "
+"applicatie, ook wel de `master` branch genoemd. Met enige regelmaat zijn er "
+"updates beschikbaar. Sinds ``v1.5`` kun je dit ook eenvoudig controleren op de "
+"Status-pagina van de applicatie."
 
 #: ../../faq.rst:16
 msgid ""
@@ -42,28 +44,27 @@ msgid ""
 "database**! :doc:`More information about backups can be found "
 "here<application>`."
 msgstr ""
-"Voordat je bijwerkt, **zorg ervoor dat je in ieder geval een recente "
-"back-up van je database hebt**! :doc:`Meer informatie over back-ups kun "
-"je hier vinden<application>`."
+"Voordat je bijwerkt, **zorg ervoor dat je in ieder geval een recente back-up "
+"van je database hebt**! :doc:`Meer informatie over back-ups kun je hier "
+"vinden<application>`."
 
 #: ../../faq.rst:18
 msgid ""
-"You can update your application to the latest version by executing "
-"**deploy.sh**, located in the root of the project. Make sure to execute "
-"it while logged in as the ``dsmr`` user::"
+"You can update your application to the latest version by executing **deploy."
+"sh**, located in the root of the project. Make sure to execute it while logged "
+"in as the ``dsmr`` user::"
 msgstr ""
-"Je kun je applicatie bijwerken door het script **deploy.sh** uit te "
-"voeren, die in zich in de hoofdmap van het project bevindt. Zorg er wel "
-"voor dat je ingelogd bent als ``dsmr`` gebruiker op de terminal::"
+"Je kun je applicatie bijwerken door het script **deploy.sh** uit te voeren, die "
+"in zich in de hoofdmap van het project bevindt. Zorg er wel voor dat je "
+"ingelogd bent als ``dsmr`` gebruiker op de terminal::"
 
 #: ../../faq.rst:24
 msgid ""
-"It will make sure to check, fetch and apply any changes released. Summary"
-" of deployment script steps:"
+"It will make sure to check, fetch and apply any changes released. Summary of "
+"deployment script steps:"
 msgstr ""
 "Dit zorgt ervoor dat alle wijzigingen op een juiste volgorde worden "
-"binnengehaald en toegepast. Een overzicht van wat dit uitrol-script exact"
-" doet:"
+"binnengehaald en toegepast. Een overzicht van wat dit uitrol-script exact doet:"
 
 #: ../../faq.rst:26
 msgid "GIT pull (codebase update)."
@@ -83,193 +84,326 @@ msgstr "Synchroniseert statische bestanden naar de Nginx map."
 
 #: ../../faq.rst:30
 msgid ""
-"Reload Gunicorn application server (web interface) and backend processes "
-"(such as the datalogger)."
+"Reload Gunicorn application server (web interface) and backend processes (such "
+"as the datalogger)."
 msgstr ""
-"Herlaadt de Gunicorn-applicatieserver (webinterface) en "
-"achtergrondprocessen (zoals de datalogger)."
+"Herlaadt de Gunicorn-applicatieserver (webinterface) en achtergrondprocessen "
+"(zoals de datalogger)."
 
 #: ../../faq.rst:31
 msgid "Clear any caches."
 msgstr "Gooit de cache leeg."
 
 #: ../../faq.rst:35
-msgid "Recalculate prices retroactively"
-msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
-
-#: ../../faq.rst:36
-msgid ""
-"*I've adjusted my energy prices but there are no changes! How can I "
-"regenerate them with my new prices?*"
-msgstr ""
-"*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil!"
-" Hoe kan ik de nieuwe prijzen doorvoeren?*"
+msgid "How can I move the database location?"
+msgstr "Hoe kan ik de locatie van de gegevensopslag veranderen?"
 
 #: ../../faq.rst:38
 msgid ""
-"Statistics for each day are generated once, the day after. However, you "
-"can flush your statistics by executing:"
+"Changing the database data location can cause datacorruption. Only execute the "
+"step below if you understand what you are exactly doing!"
+msgstr ""
+"Het wijzigen van de dataopslag breng het gevaar van datacorruptie met zich mee. "
+"Voer onderstaande stappen alleen uit als je begrijpt wat je ermee doet!"
+
+#: ../../faq.rst:40
+msgid ""
+"Since the SD-card is quite vulnerable to wearing and corruption, you can run "
+"the database on a different disk or USB-stick. To do this, you will have to "
+"stop the application and database, change the database configuration, move the "
+"data and restart all processes again."
+msgstr ""
+"Gezien de SD-kaart gevoelig is voor slijtage en corruptie, kun je ervoor kiezen "
+"om de database op een andere disk of USB-stick te draaien. Om dit te realiseren "
+"zul je de applicatie en database moeten stoppen, de databaseconfiguratie "
+"aanpassen, dataopslag verplaatsen en alles weer opstarten."
+
+#: ../../faq.rst:43
+msgid ""
+"Make sure the OS has direct access the new location and **create a back-up "
+"first**!"
+msgstr ""
+"Zorg ervoor dat het OS toegang heeft tot de nieuwe locatie en **maak eerst een "
+"back-up**!"
+
+#: ../../faq.rst:45
+msgid ""
+"In the example below we will move the data from ``/var/lib/postgresql/`` to ``/"
+"data/postgresql/`` (which could be an external mount)."
+msgstr ""
+"In onderstaand voorbeeld verplaatsen we de dataopslag van  ``/var/lib/"
+"postgresql/`` naar ``/data/postgresql/`` (wat bijvoorbeeld op een externe disk "
+"zou kunnen zijn)."
+
+#: ../../faq.rst:47
+msgid ""
+"*Please note that \"9.5\" in the example below is just the version number of "
+"the database, and it may differ from your installation. The same steps however "
+"apply.*"
+msgstr ""
+"*N.B.: \"9.5\" in onderstaand voorbeeld is slechts het versienummer van de "
+"database en kan afwijken van je eigen situatie. Je kunt echter gewoon dezelfde "
+"stappen uitvoeren.*"
+
+#: ../../faq.rst:49
+msgid "Execute the commands below:"
+msgstr "Voer de onderstaande commando's uit:"
+
+#: ../../faq.rst:51
+msgid "Stop DSMR-reader: ``sudo supervisorctl stop all``"
+msgstr "Stop DSMR-reader: ``sudo supervisorctl stop all``"
+
+#: ../../faq.rst:53
+msgid "Stop database: ``sudo systemctl stop postgresql``"
+msgstr "Stop database: ``sudo systemctl stop postgresql``"
+
+#: ../../faq.rst:55
+msgid ""
+"Confirm that the database has stopped, you should see no more ``postgresql`` "
+"processes running: ``sudo ps faux | grep postgres``"
+msgstr ""
+"Controleer dat de database gestopt is, je zou geen processen meer moeten zien "
+"van ``postgresql`` met:  ``sudo ps faux | grep postgres``"
+
+#: ../../faq.rst:57
+msgid "Ensure the new location exists: ``sudo mkdir /data/postgresql/``"
+msgstr ""
+"Zorg ervoor dat de nieuwe locatie bestaat: ``sudo mkdir /data/postgresql/``"
+
+#: ../../faq.rst:59
+msgid ""
+"Move the database data folder: ``sudo mv /var/lib/postgresql/9.5/ /data/"
+"postgresql/9.5/``"
+msgstr ""
+"Verplaats nu de gehele data-map van de database: ``sudo mv /var/lib/"
+"postgresql/9.5/ /data/postgresql/9.5/``"
+
+#: ../../faq.rst:61
+msgid ""
+"Make sure the ``postgres`` user has access to the new location (and any parent "
+"folders in it's path): ``sudo chown -R postgres:postgres /data/``"
+msgstr ""
+"Zorg ervoor dat de ``postgres`` gebruiker toegang heeft tot de nieuwe locatie "
+"(en eventuele bovenliggende mappen in het pad): ``sudo chown -R postgres:"
+"postgres /data/``"
+
+#: ../../faq.rst:63
+msgid ""
+"Edit database configuration ``sudo vi /etc/postgresql/9.5/main/postgresql."
+"conf`` and find the line::"
+msgstr ""
+"Open de databaseconfiguratie met ``sudo vi /etc/postgresql/9.5/main/postgresql."
+"conf`` en vind de volgende regel::"
+
+#: ../../faq.rst:67
+msgid "Change it to your new location::"
+msgstr "Wijzig het naar de nieuwe locatie::"
+
+#: ../../faq.rst:71
+msgid "Save the file and start the database: ``sudo systemctl start postgresql``"
+msgstr ""
+"Sla het bestand op en start de database weer: ``sudo systemctl start "
+"postgresql``"
+
+#: ../../faq.rst:73
+msgid ""
+"Check whether the database is running again, you should see multiple processes: "
+"``sudo ps faux | grep postgres``"
+msgstr ""
+"Controleer of de database weer draait, je zou nu meerdere processen moeten "
+"zien:  ``sudo ps faux | grep postgres``"
+
+#: ../../faq.rst:75
+msgid ""
+"Does the database not start? Check its logs in ``/var/log/postgresql/`` for "
+"hints."
+msgstr ""
+"Wil de database niet starten? Bekijk dan de logs in  ``/var/log/postgresql/`` "
+"voor hints."
+
+#: ../../faq.rst:77
+msgid "Start DSMR-reader again: ``sudo supervisorctl start all``"
+msgstr "Start DSMR-reader weer met: ``sudo supervisorctl start all``"
+
+#: ../../faq.rst:79
+msgid "Everything should work as usual now, storing the data on the new location."
+msgstr ""
+"Alles zou weer moeten werken zoals voorheen, met de data voortaan op een andere "
+"locatie."
+
+#: ../../faq.rst:84
+msgid "Recalculate prices retroactively"
+msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
+
+#: ../../faq.rst:85
+msgid ""
+"*I've adjusted my energy prices but there are no changes! How can I regenerate "
+"them with my new prices?*"
+msgstr ""
+"*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe "
+"kan ik de nieuwe prijzen doorvoeren?*"
+
+#: ../../faq.rst:87
+msgid ""
+"Statistics for each day are generated once, the day after. However, you can "
+"flush your statistics by executing:"
 msgstr ""
 "Dagstatistieken worden dagelijks eenmalig gegenereerd. Het is echter wel "
 "mogelijk om deze te resetten door het volgende te doen:"
 
-#: ../../faq.rst:40
+#: ../../faq.rst:89
 msgid "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 msgstr "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 
-#: ../../faq.rst:42
+#: ../../faq.rst:91
 msgid ""
-"The application will delete all statistics and (slowly) regenerate them "
-"in the background. Just make sure the source data is still there."
+"The application will delete all statistics and (slowly) regenerate them in the "
+"background. Just make sure the source data is still there."
 msgstr ""
-"De applicatie verwijdert alle statistieken en genereert ze (langzaam) "
-"weer op de achtergrond. Zorg er wel voor dat alle brongegevens intact "
-"zijn."
+"De applicatie verwijdert alle statistieken en genereert ze (langzaam) weer op "
+"de achtergrond. Zorg er wel voor dat alle brongegevens intact zijn."
 
-#: ../../faq.rst:46
+#: ../../faq.rst:95
 msgid "I'm not seeing any gas readings"
 msgstr "Ik zie geen gasverbruik"
 
-#: ../../faq.rst:47
+#: ../../faq.rst:96
 msgid ""
-"Please make sure that your meter supports reading gas consumption and "
-"that you've waited for a few hours for any graphs to render. The gas "
-"meter positions are only be updated once per hour (for DSMR v4). The "
-"Status page will give you insight in this as well."
+"Please make sure that your meter supports reading gas consumption and that "
+"you've waited for a few hours for any graphs to render. The gas meter positions "
+"are only be updated once per hour (for DSMR v4). The Status page will give you "
+"insight in this as well."
 msgstr ""
 "Wees er allereerst zeker van dat je slimme meter uberhaupt gasverbruik "
-"registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden "
-"worden sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De "
-"Status-pagina geeft je hier overigens ook inzicht in."
+"registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden worden "
+"sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
+"geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:53
+#: ../../faq.rst:102
 msgid "How do I restore a database backup?"
 msgstr "Hoe zet ik een databaseback-up terug?"
 
-#: ../../faq.rst:57
+#: ../../faq.rst:106
 msgid ""
-"Restoring a backup will replace any existing data stored in the database "
-"and is irreversible!"
+"Restoring a backup will replace any existing data stored in the database and is "
+"irreversible!"
 msgstr ""
-"Het herstellen van een back-up vervangt de bestaande data in de database "
-"en is onomkeerbaar!"
-
-#: ../../faq.rst:61
-msgid ""
-"Do you need a complete reinstall of DSMR-reader as well? Then please "
-":doc:`follow the install guide<installation>` and restore the database "
-"backup **using the notes at the end of chapter 1**."
-msgstr ""
-"Heb je tevens een complete herinstallatie van DSMR-reader nodig? "
-":doc:`Volg dan de installatiehandleiding<installation>` en herstel de "
-"databaseback-up volgens  **de notities aan het einde van hoofdstuk 1**."
-
-#: ../../faq.rst:64
-msgid "Only want to restore the database?"
-msgstr "Wil je alleen een databaseback-up terugzetten?"
-
-#: ../../faq.rst:66
-msgid ""
-"This asumes you are still running the same application version as the "
-"backup was created in."
-msgstr ""
-"Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie "
-"draait als waarmee de back-up is gemaakt."
-
-#: ../../faq.rst:68
-msgid ""
-"Stop the application first with ``sudo supervisorctl stop all``. This "
-"will disconnect it from the database as well."
-msgstr ""
-"Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit "
-"zorgt er ook voor dat de databaseverbinding van de applicatie verdwijnt."
-
-#: ../../faq.rst:70
-msgid ""
-"Importing the data could take a long time. It took MySQL 15 minutes to "
-"import nearly 3 million readings, from a compressed backup, on a "
-"RaspberryPi 3."
-msgstr ""
-"Het importeren van de gegevens kan enige tijd in beslag nemen. Op MySQL "
-"duurt het ongeveer een kwartier om 3 miljoen metingen te importeren, "
-"vanuit een gecomprimeerde back-up op een RaspberryPi 3."
-
-#: ../../faq.rst:72
-msgid "For **PostgreSQL** restores::"
-msgstr "Voor herstellen van **PostgreSQL**::"
-
-#: ../../faq.rst:86
-msgid "For **MySQL** restores::"
-msgstr "Voor herstellen van **MySQL**::"
-
-#: ../../faq.rst:100
-msgid "Start the application again with ``sudo supervisorctl start all``."
-msgstr "Start de applicatie weer met ``sudo supervisorctl start all``."
-
-#: ../../faq.rst:104
-msgid ""
-"In case the version differs, you can try forcing a deployment reload by: "
-"``sudo su - dsmr`` and then executing ``./post-deploy.sh``."
-msgstr ""
-"Mocht de versie toch verschillen, dan kun je proberen om de applicatie te"
-" herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-"
-"deploy.sh`` uit."
-
-#: ../../faq.rst:108
-msgid "How do I enable timezone support for MySQL?"
-msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
+"Het herstellen van een back-up vervangt de bestaande data in de database en is "
+"onomkeerbaar!"
 
 #: ../../faq.rst:110
 msgid ""
-"`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-"
-"to-sql.html>`_ for more information about how to enable timezone support "
-"on MySQL. On recent versions it should be as simple as executing the "
-"following command as root/sudo user::"
+"Do you need a complete reinstall of DSMR-reader as well? Then please :doc:"
+"`follow the install guide<installation>` and restore the database backup "
+"**using the notes at the end of chapter 1**."
 msgstr ""
-"`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-"
-"tzinfo-to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op "
-"MySQL. Op recente versies is het een kwestie van onderstaand commando "
-"uitvoeren als root/sudo-gebruiker::"
+"Heb je tevens een complete herinstallatie van DSMR-reader nodig? :doc:`Volg dan "
+"de installatiehandleiding<installation>` en herstel de databaseback-up volgens  "
+"**de notities aan het einde van hoofdstuk 1**."
 
-#: ../../faq.rst:118
+#: ../../faq.rst:113
+msgid "Only want to restore the database?"
+msgstr "Wil je alleen een databaseback-up terugzetten?"
+
+#: ../../faq.rst:115
+msgid ""
+"This asumes you are still running the same application version as the backup "
+"was created in."
+msgstr ""
+"Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie draait als "
+"waarmee de back-up is gemaakt."
+
+#: ../../faq.rst:117
+msgid ""
+"Stop the application first with ``sudo supervisorctl stop all``. This will "
+"disconnect it from the database as well."
+msgstr ""
+"Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit zorgt er "
+"ook voor dat de databaseverbinding van de applicatie verdwijnt."
+
+#: ../../faq.rst:119
+msgid ""
+"Importing the data could take a long time. It took MySQL 15 minutes to import "
+"nearly 3 million readings, from a compressed backup, on a RaspberryPi 3."
+msgstr ""
+"Het importeren van de gegevens kan enige tijd in beslag nemen. Op MySQL duurt "
+"het ongeveer een kwartier om 3 miljoen metingen te importeren, vanuit een "
+"gecomprimeerde back-up op een RaspberryPi 3."
+
+#: ../../faq.rst:121
+msgid "For **PostgreSQL** restores::"
+msgstr "Voor herstellen van **PostgreSQL**::"
+
+#: ../../faq.rst:135
+msgid "For **MySQL** restores::"
+msgstr "Voor herstellen van **MySQL**::"
+
+#: ../../faq.rst:149
+msgid "Start the application again with ``sudo supervisorctl start all``."
+msgstr "Start de applicatie weer met ``sudo supervisorctl start all``."
+
+#: ../../faq.rst:153
+msgid ""
+"In case the version differs, you can try forcing a deployment reload by: ``sudo "
+"su - dsmr`` and then executing ``./post-deploy.sh``."
+msgstr ""
+"Mocht de versie toch verschillen, dan kun je proberen om de applicatie te "
+"herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-deploy."
+"sh`` uit."
+
+#: ../../faq.rst:157
+msgid "How do I enable timezone support for MySQL?"
+msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
+
+#: ../../faq.rst:159
+msgid ""
+"`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql."
+"html>`_ for more information about how to enable timezone support on MySQL. On "
+"recent versions it should be as simple as executing the following command as "
+"root/sudo user::"
+msgstr ""
+"`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-"
+"sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op MySQL. Op recente "
+"versies is het een kwestie van onderstaand commando uitvoeren als root/sudo-"
+"gebruiker::"
+
+#: ../../faq.rst:167
 msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
 msgstr ""
-"Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of "
-"hoger?"
+"Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of hoger?"
 
-#: ../../faq.rst:120
+#: ../../faq.rst:169
 msgid ""
 "Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for "
-"processing MQTT messages (``dsmr_mqtt``). Fresh installations "
-"automatically include the ``dsmr_mqtt`` process. Existing installations "
-"however, should add ``dsmr_mqtt`` manually. Instructions:"
+"processing MQTT messages (``dsmr_mqtt``). Fresh installations automatically "
+"include the ``dsmr_mqtt`` process. Existing installations however, should add "
+"``dsmr_mqtt`` manually. Instructions:"
 msgstr ""
-"Vanaf DSMR-reader  ``v1.23.0`` is een apart proces nodig voor het het "
-"versturen van MQTT-berichten (``dsmr_mqtt``). Nieuwe installaties "
-"bevatten al automatisch dit ``dsmr_mqtt`` proces. Bestaande installaties "
-"zullen ``dsmr_mqtt`` echter handmatig moeten toevoegen. Instructies:"
+"Vanaf DSMR-reader  ``v1.23.0`` is een apart proces nodig voor het het versturen "
+"van MQTT-berichten (``dsmr_mqtt``). Nieuwe installaties bevatten al automatisch "
+"dit ``dsmr_mqtt`` proces. Bestaande installaties zullen ``dsmr_mqtt`` echter "
+"handmatig moeten toevoegen. Instructies:"
 
-#: ../../faq.rst:123
+#: ../../faq.rst:172
 msgid "Please upgrade to ``v1.23.0`` or higher first."
 msgstr "Upgrade eerst naar  ``v1.23.0`` of hoger."
 
-#: ../../faq.rst:124
+#: ../../faq.rst:173
 msgid "Now execute the following commands as **root/sudo-user**::"
 msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
 
-#: ../../faq.rst:134
+#: ../../faq.rst:183
 msgid "Feature/bug report"
 msgstr "Verzoek/fout melden"
 
-#: ../../faq.rst:135
+#: ../../faq.rst:184
 msgid "*How can I propose a feature or report a bug I've found?*"
 msgstr "*Hoe kan ik een verzoek indienen of een fout melden?*"
 
-#: ../../faq.rst:139
+#: ../../faq.rst:188
 msgid ""
-"`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/new>`_."
+"`Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/"
+"issues/new>`_."
 msgstr ""
-"`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/new>`_."
-
+"`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-reader/"
+"issues/new>`_."
