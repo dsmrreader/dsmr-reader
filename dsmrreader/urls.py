@@ -1,4 +1,3 @@
-from django.utils.translation import ugettext_lazy as _
 from django.conf.urls import include
 from django.urls.conf import path
 from django.contrib import admin
@@ -12,7 +11,7 @@ urlpatterns = [
     path('api/v2/', include('dsmr_api.urls.v2')),
     path('docs/v2/', include_docs_urls(
         title='DSMR-reader API v2',
-        description=_('Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html'),
+        description='https://dsmr-reader.readthedocs.io/en/latest/api.html',
         authentication_classes=[],
         permission_classes=[]
     )),
