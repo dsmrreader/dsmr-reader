@@ -6,10 +6,18 @@ Frequently Asked Questions (FAQ)
     :depth: 2
 
 
+I need help!
+------------
+If you can't find the answer in the documentation, do not hesitate in looking for help.
+You can contact me using Github tickets.
+
+* `Create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_
+
+
 How can I update my application?
 --------------------------------
 The version you are running is always based on the 'latest' version of the application, called the `master` branch.
-Every once in a while there may be updates. Since ``v1.5`` you can also easily check for updates by using the application's Status page.
+Every once in a while there may be updates. You can also easily check for updates by using the application's Status page.
 
 .. warning::
     
@@ -176,13 +184,3 @@ Fresh installations automatically include the ``dsmr_mqtt`` process. Existing in
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr-reader.conf /etc/supervisor/conf.d/
     sudo supervisorctl reread
     sudo supervisorctl update
-
-
-
-Feature/bug report
-------------------
-*How can I propose a feature or report a bug I've found?*
-
-.. seealso::
-    
-    `Just create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_.
