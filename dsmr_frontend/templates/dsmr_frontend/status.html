@@ -9,12 +9,6 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-{% if not capabilities.any %}
-    <div class="alert alert-danger" role="alert">
-        <span class="fas fa-exclamation"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
-    </div>
-{% endif %}
-
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -25,14 +19,14 @@
                     <table class="table table-condensed">
                         <tr>
                             <td class="col-md-6">{% trans "Current version" %}</td>
-                            <td class="col-md-6"><a href="https://github.com/dennissiemensma/dsmr-reader/releases/" target="_blank" title="{% trans 'View releases' %}">v{{ dsmr_version }}</a></td>
+                            <td class="col-md-6"><a href="https://github.com/dennissiemensma/dsmr-reader/releases/" target="_blank" title="{% trans 'View releases' %}"><i class="fas fa-external-link-alt"></i> v{{ dsmr_version }}</a></td>
                         </tr>
                         <tr>
                             <td class="col-md-6">
                                 {% trans "Check for updates" %} 
                                 <br />
                                 
-                                <a class="help-trigger" href="#"><small>{% trans "How does it work?" %}</small></a>
+                                <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "How does it work?" %}</small></a>
                                 <small class="xhr-hidden">{% blocktrans %}The application will compare "VERSION = (x,x,x)" in your local dsmrreader/__init__.py file with the latest one available on Github.{% endblocktrans %}</small>
                             </td>
                             <td class="col-md-6">
@@ -42,7 +36,7 @@
 	                                <i class="fas fa-exclamation"></i> &nbsp; {% blocktrans %}There is a newer version available!{% endblocktrans %} 
 	                                <a href="https://github.com/dennissiemensma/dsmr-reader/releases" target="_blank">{% trans 'View the latest release' %}</a> {% trans 'for the changelog and further upgrade instructions.' %}
 	                            </div>
-                                <div id="no_update_available" class="alert alert-info xhr-hidden" role="alert"><i class="fas fa-check-square"></i> &nbsp; {% blocktrans %}You are already running the latest version released.{% endblocktrans %}</div>
+                                <div id="no_update_available" class="alert alert-info xhr-hidden" role="alert"><i class="fas fa-check"></i> &nbsp; {% blocktrans %}You are already running the latest version released.{% endblocktrans %}</div>
                             </td>
                         </tr>
                     </table>
@@ -60,12 +54,12 @@
                 <div class="panel-body">
                     {% if status.readings.seconds_since == None or status.readings.seconds_since > 90 %}
                     <div class="alert alert-danger" role="alert">
-                        <span class="fas fa-exclamation-circle"></span> 
+                        <span class="fas fa-exclamation-triangle"></span> 
                         {% blocktrans %}It has been a while since the latest telegram reading.{% endblocktrans %}
                         <br /><br />
                     {% else %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fas fa-check-square"></span> 
+                        <span class="fas fa-check"></span> 
                     {% endif %}
 
                         {% trans "Most recent reading" %}: 
@@ -73,7 +67,7 @@
                     </div>
 
                     <div>
-	                    <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+	                    <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
 	                    <small class="xhr-hidden">
 		                    {% blocktrans %}The telegrams are either read from the DSMR_DATALOGGER process or sent via the API.{% endblocktrans %}
 		                    {% blocktrans %}Each telegram read from your smart meter is stored and queued for processing first.{% endblocktrans %}
@@ -102,19 +96,19 @@
                 <div class="panel-body">
                     {% if status.readings.unprocessed.seconds_since > 300 %}
                     <div class="alert alert-danger" role="alert">
-                        <span class="fas fa-exclamation-circle"></span> 
+                        <span class="fas fa-exclamation-triangle"></span> 
                         {% blocktrans %}There are too many unprocessed telegrams.{% endblocktrans %}
                         <br /><br />
                     {% else %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fas fa-check-square"></span> 
+                        <span class="fas fa-check"></span> 
                     {% endif %}
 
                     {% trans "Unprocessed telegrams" %}: <strong>{{ status.readings.unprocessed.count|default:'-' }}</strong>
                     </div>
                     
                     <div>
-                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
                         <small class="xhr-hidden">
 	                        {% blocktrans %}This indicates how many stored telegrams are waiting to be processed.{% endblocktrans %}
 		                    {% blocktrans %}This should reset around each minute mark, depending on whether you've enabled grouping readings in the configuration.{% endblocktrans %}
@@ -148,23 +142,23 @@
                     {% if status.electricity.latest %}
                         {% if status.electricity.minutes_since == None or status.electricity.minutes_since > 2 %}
 	                    <div class="alert alert-danger" role="alert">
-	                        <span class="fas fa-exclamation-circle"></span>
+	                        <span class="fas fa-exclamation-triangle"></span>
 	                        {% trans "Data processing is lagging behind" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
                         </div>
                         {% else %}
 	                    <div class="alert alert-success" role="alert">
-	                        <span class="fas fa-check-square"></span>
+	                        <span class="fas fa-check"></span>
 	                        {% trans "Data processing is on schedule" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
 	                    </div>
 	                    {% endif %}
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fas fa-exclamation-circle"></span> {% trans "No data." %}
+                        <span class="fas fa-times-circle"></span> {% trans "No data." %}
                     </div>
                     {% endif %}
                     
                     <div>
-                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
                         <small class="xhr-hidden">
                             {% blocktrans %}When telegrams are processed, they are split into electricity and gas (when available) consumption nodes.{% endblocktrans %}
                             {% blocktrans %}These consumption nodes are plotted in the graphs displayed on the Dashboard page.{% endblocktrans %}
@@ -184,23 +178,23 @@
                     {% if status.gas.latest %}
                         {% if status.gas.hours_since == None or status.gas.hours_since > 3 %}
                         <div class="alert alert-danger" role="alert">
-                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="fas fa-exclamation-triangle"></span>
                             {% trans "Data processing is lagging behind" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                         </div>
                         {% else %}
                         <div class="alert alert-success" role="alert">
-                            <span class="fas fa-check-square"></span>
+                            <span class="fas fa-check"></span>
                             {% trans "Data processing is on schedule" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                         </div>
                         {% endif %}
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fas fa-exclamation-circle"></span> {% trans "No data." %}
+                        <span class="fas fa-times-circle"></span> {% trans "No data." %}
                     </div>
                     {% endif %}
                     
                     <div>
-                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
                         <small class="xhr-hidden">
                             {% blocktrans %}When telegrams are processed, they are split into electricity and gas (when available) consumption nodes.{% endblocktrans %}
                             {% blocktrans %}These consumption nodes are plotted in the graphs displayed on the Dashboard page.{% endblocktrans %}
@@ -234,16 +228,16 @@
                 <div class="panel-body">
                     {% if capabilities.electricity %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fas fa-check-square"></span> {% trans "Electricity usage" %}
+                        <span class="fas fa-check"></span> {% trans "Electricity usage" %}
                     </div>
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fas fa-exclamation-circle"></span> {% trans "Electricity usage" %}: <strong>{% trans "No data." %}</strong>
+                        <span class="fas fa-times-circle"></span> {% trans "Electricity usage" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
                     
                     <div>
-                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
                         <small class="xhr-hidden">
                             {% blocktrans %}The consumption nodes reflect the capabilities of your smart meter.{% endblocktrans %}
                             {% blocktrans %}The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages.{% endblocktrans %}
@@ -260,16 +254,16 @@
                 <div class="panel-body">
                     {% if capabilities.electricity_returned %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fas fa-check-square"></span> {% trans "Electricity return" %}
+                        <span class="fas fa-check"></span> {% trans "Electricity return" %}
                     </div>
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fas fa-exclamation-circle"></span> {% trans "Electricity return" %}: <strong>{% trans "No data." %}</strong>
+                        <span class="fas fa-times-circle"></span> {% trans "Electricity return" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
                     
                     <div>
-                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
                         <small class="xhr-hidden">
                             {% blocktrans %}The consumption nodes reflect the capabilities of your smart meter.{% endblocktrans %}
                             {% blocktrans %}The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages.{% endblocktrans %}
@@ -286,16 +280,16 @@
                 <div class="panel-body">
                     {% if capabilities.gas %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fas fa-check-square"></span> {% trans "Gas usage" %}
+                        <span class="fas fa-check"></span> {% trans "Gas usage" %}
                     </div>
                     {% else %}
                     <div class="alert alert-gray" role="alert">
-                        <span class="fas fa-exclamation-circle"></span> {% trans "Gas usage" %}: <strong>{% trans "No data." %}</strong>
+                        <span class="fas fa-times-circle"></span> {% trans "Gas usage" %}: <strong>{% trans "No data." %}</strong>
                     </div>
                     {% endif %}
                     
                     <div>
-                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
                         <small class="xhr-hidden">
                             {% blocktrans %}The consumption nodes reflect the capabilities of your smart meter.{% endblocktrans %}
                             {% blocktrans %}The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages.{% endblocktrans %}
@@ -328,20 +322,20 @@
                 </header>
                 <div class="panel-body">
                     {% if status.statistics.days_since == None or status.statistics.days_since > 1 %}
-                    <div class="alert alert-danger" role="alert">
-                        <span class="fas fa-exclamation-circle"></span>
+                    <div class="alert alert-gray" role="alert">
+                        <span class="fas fa-times-circle"></span>
                         {% trans "Data processing is lagging behind" %}: 
                         <strong>{% if status.statistics.latest %}{{ status.statistics.latest }}{% else %}{% trans "No data." %}{% endif %}</strong>
                     </div>
                     {% else %}
                     <div class="alert alert-success" role="alert">
-                        <span class="fas fa-check-square"></span>
+                        <span class="fas fa-check"></span>
                         {% trans "Data processing is on schedule" %}: <strong>{{ status.statistics.latest }}</strong>
                     </div>
                     {% endif %}
                     
                     <div>
-                        <a class="help-trigger" href="#"><small>{% trans "Click for more information" %}</small></a>
+                        <a class="help-trigger" href="#"><i class="fas fa-info-circle"></i> <small>{% trans "Click for more information" %}</small></a>
                         <small class="xhr-hidden">
                             {% blocktrans %}At the end of each day (around 1 a.m.) all consumption nodes will be aggregated to statistics nodes.{% endblocktrans %}
                             {% blocktrans %}These statistics nodes consist of daily and hourly consumption totals (due to performance).{% endblocktrans %}

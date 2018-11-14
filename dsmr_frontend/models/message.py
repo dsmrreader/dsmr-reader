@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 
@@ -16,3 +17,4 @@ class Notification(models.Model):
 
     class Meta:
         default_permissions = tuple()
+        verbose_name = _('Application notification')

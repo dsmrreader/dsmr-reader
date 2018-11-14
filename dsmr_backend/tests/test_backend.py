@@ -75,7 +75,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertEqual(
             self._intercept_command_stdout('makemigrations', dry_run=True),
             'No changes detected\n',
-            'Pending model changes found, missing in migrations!'
+            'Please run "./manage.py makemigrations"!'
         )
 
     def test_internal_check(self):

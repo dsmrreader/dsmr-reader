@@ -3,6 +3,7 @@ from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 
 from .models.settings import FrontendSettings
+from .models.message import Notification
 
 
 @admin.register(FrontendSettings)
@@ -63,3 +64,9 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
             }
         ),
     )
+
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ('message', 'read')
+    readonly_fields = ('message', 'redirect_to')

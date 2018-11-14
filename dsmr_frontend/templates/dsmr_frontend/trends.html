@@ -10,8 +10,8 @@
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
-    <div class="alert alert-danger" role="alert">
-        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+    <div class="alert alert-warning" role="alert">
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
     </div>
 {% elif not has_statistics %}
     <div class="alert alert-info" role="alert">
