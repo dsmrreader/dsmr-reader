@@ -29,6 +29,7 @@ Listed in any order, sorted by name.
 - `FutureCow <https://github.com/FutureCow>`_
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `gertjuhh <https://github.com/gertjuhh>`_
+- `glsf91 <https://github.com/glsf91>`_
 - `goegol <https://github.com/goegol>`_
 - `Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_
 - `helmo <https://github.com/helmo>`_
