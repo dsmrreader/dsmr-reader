@@ -39,6 +39,7 @@ function render_electricity_graph(xhr_data)
         xAxis: [
             {
                 type : 'category',
+                boundaryGap: false,
                 data : xhr_data.x
             }
         ],

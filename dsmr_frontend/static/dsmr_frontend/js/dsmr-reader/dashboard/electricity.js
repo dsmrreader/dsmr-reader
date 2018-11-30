@@ -21,6 +21,7 @@ $(document).ready(function(){
         xAxis: [
             {
                 type : 'category',
+                boundaryGap: false,
                 data : null
             }
         ],

@@ -31,7 +31,8 @@ $(document).ready(function(){
 	        },
 	        xAxis: [
 	            {
-	                type : 'category',
+				    type : 'category',
+				    boundaryGap: false,
 	                data : xhr_data.read_at
 	            }
 	        ],
