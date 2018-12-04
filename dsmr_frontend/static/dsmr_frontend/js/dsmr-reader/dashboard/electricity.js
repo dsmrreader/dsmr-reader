@@ -15,12 +15,13 @@ $(document).ready(function(){
         grid: {
             top: '12%',
             left: '1%',
-            right: '1%',
+            right: '2%',
             containLabel: true
         },
         xAxis: [
             {
                 type : 'category',
+                boundaryGap: false,
                 data : null
             }
         ],
@@ -48,6 +49,7 @@ $(document).ready(function(){
         xAxis: [
             {
                 type : 'category',
+                boundaryGap: false,
                 data : null
             }
         ],
