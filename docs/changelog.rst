@@ -23,6 +23,7 @@ v1.27.0 - 2018-xx-xx
 **Tickets resolved in this release:**
 
 - [`#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_] Plugin/hook voor doorsturen telegrammen
+- [`#560 <https://github.com/dennissiemensma/dsmr-reader/issues/560>`_] Added boundaryGap to improve charts - by jbrunink / Tijs van Noije
 - [`#xxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxx>`_] yyyyyyyyyyyyy
 
 

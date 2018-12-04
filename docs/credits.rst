@@ -38,6 +38,7 @@ Listed in any order, sorted by name.
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
 - `joopy <https://github.com/joopy>`_
 - `Joris Vervuurt <https://github.com/jorisvervuurt>`_
+- `jbrunink <https://github.com/jbrunink>`_
 - `ju5t <https://github.com/ju5t>`_
 - `jwveldhuis <https://github.com/jwveldhuis>`_
 - Koen Volleberg
@@ -60,6 +61,7 @@ Listed in any order, sorted by name.
 - `TampertK <https://github.com/TampertK>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
 - `thommy101 <https://github.com/thommy101>`_
+- Tijs van Noije
 - `TopdRob <https://github.com/TopdRob>`_
 - `tpjanssen <https://github.com/tpjanssen>`_
 - `trbs <https://github.com/trbs>`_
