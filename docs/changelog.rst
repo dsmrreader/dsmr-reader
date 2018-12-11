@@ -25,6 +25,7 @@ v1.27.0 - 2018-xx-xx
 - [`#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_] Plugin/hook voor doorsturen telegrammen
 - [`#560 <https://github.com/dennissiemensma/dsmr-reader/issues/560>`_] Added boundaryGap to improve charts - by jbrunink / Tijs van Noije
 - [`#561<https://github.com/dennissiemensma/dsmr-reader/issues/561>`_] Arrows on status page will now be hidden on small screens where they don't make sense anymore - by jbrunink
+- [`#426 <https://github.com/dennissiemensma/dsmr-reader/issues/426>`_] Temperatuurmetingen per uur inzichtelijk als CSV
 - [`#xxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxx>`_] yyyyyyyyyyyyy
 
 
