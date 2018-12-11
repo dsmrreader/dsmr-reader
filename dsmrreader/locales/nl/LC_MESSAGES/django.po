@@ -445,6 +445,9 @@ msgstr "Dag"
 msgid "Hour"
 msgstr "Uur"
 
+msgid "Temperatures"
+msgstr "Temperaturen"
+
 msgid "CSV"
 msgstr "CSV"
 
@@ -759,6 +762,9 @@ msgstr "Uurtotalen"
 
 msgid "Summary of each hour read. Contains electricity and gas (if applicable)."
 msgstr "Samenvatting van elk uur. Bevat elektriciteit en gas (wanneer van toepassing)."
+
+msgid "Summary of all temperatures read (if enabled)."
+msgstr "Overzicht van alle temperatuurmetingen (wanneer ingeschakeld)."
 
 msgid "Select date range start"
 msgstr "Selecteer startdatum"

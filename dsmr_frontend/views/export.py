@@ -1,3 +1,4 @@
+from decimal import Decimal
 import datetime
 import csv
 
@@ -10,9 +11,9 @@ from django.utils import timezone, formats
 from django.shortcuts import redirect
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
+from dsmr_weather.models.reading import TemperatureReading
 from dsmr_frontend.forms import ExportAsCsvForm
 import dsmr_backend.services
-from decimal import Decimal
 
 
 class Export(LoginRequiredMixin, TemplateView):
@@ -64,7 +65,7 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
                 'gas_cost', 'total_cost'
             ]
 
-        else:  # if data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
+        elif data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
             source_data = HourStatistics.objects.filter(
                 hour_start__gte=start_date, hour_start__lte=end_date
             ).order_by('hour_start')
@@ -72,6 +73,12 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
                 'hour_start', 'electricity1', 'electricity2', 'electricity1_returned',
                 'electricity2_returned', 'gas'
             ]
+
+        else:  # if data_type == ExportAsCsvForm.DATA_TYPE_TEMPERATURE:
+            source_data = TemperatureReading.objects.filter(
+                read_at__gte=start_date, read_at__lte=end_date
+            ).order_by('read_at')
+            export_fields = ['read_at', 'degrees_celcius']
 
         # Direct copy from Django docs.
         class Echo(object):
