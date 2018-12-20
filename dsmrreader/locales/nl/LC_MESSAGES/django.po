@@ -88,6 +88,12 @@ msgstr "Tijdstip van backup"
 msgid "Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation."
 msgstr "Voorkeurstijdstip van dagelijkse backup. Ons advies is om een moment in de nacht te pakken, gezien het maken van een backup de werking van de applicatie kort kan onderbreken."
 
+msgid "Backup storage folder"
+msgstr "Back-up opslag map"
+
+msgid "The folder to store the backups in. The default location is \"backups/\". Please make sure that the \"dsmr\" user both has read and write access to the folder."
+msgstr "De map waarin back-ups opgeslagen worden. De standaardlocatie is \"backups/\". N.B.: Zorg ervoor dat de \"dsmr\" gebruiker toegang en schrijfrechten heeft tot de map."
+
 msgid "Latest backup"
 msgstr "Meest recente backup"
 

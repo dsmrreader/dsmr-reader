@@ -1,7 +1,8 @@
+from unittest import mock
 import tempfile
+import shutil
 import gzip
 import os
-from unittest import mock
 
 from django.test import TestCase
 from django.utils import timezone
@@ -89,14 +90,31 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         self.assertTrue(create_backup_mock.called)
 
     def test_get_backup_directory(self):
+        # Default.
         self.assertEqual(
             dsmr_backup.services.backup.get_backup_directory(),
-            os.path.join(settings.BASE_DIR, '..', settings.DSMRREADER_BACKUP_DIRECTORY)
+            os.path.join(settings.BASE_DIR, '..', 'backups/')
+        )
+
+        # Custom.
+        FOLDER = '/var/tmp/test-dsmr'
+        backup_settings = BackupSettings.get_solo()
+        backup_settings.folder = FOLDER
+        backup_settings.save()
+
+        self.assertEqual(
+            dsmr_backup.services.backup.get_backup_directory(),
+            os.path.join(FOLDER)
         )
 
     @mock.patch('subprocess.Popen')
     @mock.patch('dsmr_backup.services.backup.compress')
     def test_create(self, compress_mock, subprocess_mock):
+        FOLDER = '/var/tmp/test-dsmr'
+        backup_settings = BackupSettings.get_solo()
+        backup_settings.folder = FOLDER
+        backup_settings.save()
+
         self.assertFalse(compress_mock.called)
         self.assertFalse(subprocess_mock.called)
         self.assertIsNone(BackupSettings.get_solo().latest_backup)
@@ -107,6 +125,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         self.assertTrue(subprocess_mock.called)
 
         self.assertIsNotNone(BackupSettings.get_solo().latest_backup)
+        shutil.rmtree(FOLDER)
 
     @mock.patch('subprocess.Popen')
     @mock.patch('dsmr_backup.services.backup.compress')

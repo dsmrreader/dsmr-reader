@@ -10,6 +10,9 @@ from .models.settings import BackupSettings, DropboxSettings
 @admin.register(BackupSettings)
 class BackupSettingsAdmin(SingletonModelAdmin):
     readonly_fields = ('latest_backup', )
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '64'})},
+    }
     fieldsets = (
         (
             None, {
@@ -22,7 +25,7 @@ class BackupSettingsAdmin(SingletonModelAdmin):
         ),
         (
             _('Advanced'), {
-                'fields': ['compress'],
+                'fields': ['folder', 'compress'],
             }
         ),
         (

@@ -37,22 +37,31 @@ def check():
         # Postpone when the user's backup time preference has not been passed yet.
         return
 
-    # For backend logging in Supervisor.
-    logger.info(' - Creating new backup.')
     create()
 
 
 def get_backup_directory():
     """ Returns the path to the directory where all backups are stored locally. """
-    return os.path.join(settings.BASE_DIR, '..', settings.DSMRREADER_BACKUP_DIRECTORY)
+    backup_directory = BackupSettings.get_solo().folder
+
+    if backup_directory.startswith('/'):
+        return os.path.abspath(backup_directory)
+    else:
+        return os.path.join(settings.BASE_DIR, '..', backup_directory)
 
 
 def create():
     """ Creates a backup of the database. Optionally gzipped. """
+    backup_directory = get_backup_directory()
+
+    if not os.path.exists(backup_directory):
+        os.mkdir(backup_directory)
+
     # Backup file with day name included, for weekly rotation.
-    backup_file = os.path.join(get_backup_directory(), 'dsmrreader-{}-backup-{}.sql'.format(
+    backup_file = os.path.join(backup_directory, 'dsmrreader-{}-backup-{}.sql'.format(
         connection.vendor, formats.date_format(timezone.now().date(), 'l')
     ))
+    logger.info(' - Creating new backup: %s', backup_file)
 
     # PostgreSQL backup.
     if connection.vendor == 'postgresql':  # pragma: no cover

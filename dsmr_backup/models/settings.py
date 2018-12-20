@@ -25,6 +25,15 @@ class BackupSettings(SingletonModel):
             'might freeze or lock the application shortly during backup creation.'
         )
     )
+    folder = models.CharField(
+        max_length=512,
+        default='backups/',
+        verbose_name=_('Backup storage folder'),
+        help_text=_(
+            'The folder to store the backups in. The default location is "backups/". '
+            'Please make sure that the "dsmr" user both has read and write access to the folder.'
+        ),
+    )
     latest_backup = models.DateTimeField(
         default=None,
         null=True,
