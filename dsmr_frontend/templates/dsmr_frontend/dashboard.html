@@ -37,11 +37,6 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-{% if not capabilities.any %}
-    <div class="alert alert-danger" role="alert">
-        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
-    </div>
-{% endif %}
 
     {% if notifications %}
     <div class="row">
@@ -52,14 +47,14 @@
                 </header>
                 <div class="panel-body">
                     {% for current_notification in notifications %}
-                    <div class="alert alert-warning" role="alert">
-                        <button class="btn btn-sm btn-danger delete-notification" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Delete notification' %}">
-                            <i class="fas fa-times"></i>
+                    <div class="alert alert-info" role="alert">
+                        <button class="btn btn-sm btn-success delete-notification" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Mark notification as read' %}">
+                            <i class="fas fa-check"></i>
                         </button>
                         &nbsp;
 
                         {% if current_notification.redirect_to %}
-                        <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}">{% trans "View page" %}</a>
+                        <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}"><i class="fas fa-external-link-alt"></i> {% trans "View page" %}</a>
                         &nbsp;
                         {% endif %}
 
@@ -72,7 +67,13 @@
     </div>
     {% endif %}
 
-    {% if month_statistics %}
+    {% if not capabilities.any %}
+    <div class="alert alert-warning" role="alert">
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktrans %}
+    </div>
+    {% endif %}
+
+    {% if month_statistics and capabilities.any %}
     <div class="row">
         <div class="col-md-12 text-center">
             <a id="month_statistics_button" class="btn btn-primary" href="#">{% trans "Display current month" %}</a>
@@ -212,7 +213,7 @@
 
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts-common-4.1.0.rc2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts-common-4.2.0.rc2.min.js' %}"></script>
 
     <script type="text/javascript">
         var dashboard_graph_width = {{ frontend_settings.dashboard_graph_width }};

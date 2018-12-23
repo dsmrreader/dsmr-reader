@@ -88,6 +88,12 @@ msgstr "Tijdstip van backup"
 msgid "Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation."
 msgstr "Voorkeurstijdstip van dagelijkse backup. Ons advies is om een moment in de nacht te pakken, gezien het maken van een backup de werking van de applicatie kort kan onderbreken."
 
+msgid "Backup storage folder"
+msgstr "Back-up opslag map"
+
+msgid "The folder to store the backups in. The default location is \"backups/\". Please make sure that the \"dsmr\" user both has read and write access to the folder."
+msgstr "De map waarin back-ups opgeslagen worden. De standaardlocatie is \"backups/\". N.B.: Zorg ervoor dat de \"dsmr\" gebruiker toegang en schrijfrechten heeft tot de map."
+
 msgid "Latest backup"
 msgstr "Meest recente backup"
 
@@ -445,6 +451,9 @@ msgstr "Dag"
 msgid "Hour"
 msgstr "Uur"
 
+msgid "Temperatures"
+msgstr "Temperaturen"
+
 msgid "CSV"
 msgstr "CSV"
 
@@ -456,6 +465,9 @@ msgstr "Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configura
 
 msgid "The graphs on the Dashboard have been replaced this release and are now scrollable. The graphs on the Trends page have been updated as well."
 msgstr "De grafieken op het Dashboard zijn vervangen en vanaf deze release scrollbaar. De grafieken op de Trends-pagina zijn eveneens bijgewerkt."
+
+msgid "Application notification"
+msgstr "Applicatienotificatie"
 
 msgid "Merge electricity tariffs"
 msgstr "Voeg tarieven samen"
@@ -547,8 +559,8 @@ msgstr "Interfaceconfiguratie"
 msgid "Archive"
 msgstr "Archief"
 
-msgid "No data found. It can take up to one day before any data is visible here."
-msgstr "Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer gegevens zichtbaar."
+msgid "No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader."
+msgstr "Nog geen dagstatistieken gevonden. Gegevens zijn hier doorgaans zichtbaar vanaf de tweede dag dat DSMR-reader draait."
 
 msgid "Select level of detail displayed"
 msgstr "Selecteer detailniveau"
@@ -655,9 +667,6 @@ msgstr "Bekijk repository op Github"
 msgid "View on Github"
 msgstr "Bekijk op Github"
 
-msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
-msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
-
 msgid "Base selection"
 msgstr "Basisselectie"
 
@@ -670,11 +679,14 @@ msgstr "Watt"
 msgid "Notifications"
 msgstr "Notificaties"
 
-msgid "Delete notification"
-msgstr "Verwijder notificatie"
+msgid "Mark notification as read"
+msgstr "Markeer notificatie als gelezen"
 
 msgid "View page"
 msgstr "Bekijk pagina"
+
+msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
+msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
 
 msgid "Display current month"
 msgstr "Toon huidige maand"
@@ -757,6 +769,9 @@ msgstr "Uurtotalen"
 msgid "Summary of each hour read. Contains electricity and gas (if applicable)."
 msgstr "Samenvatting van elk uur. Bevat elektriciteit en gas (wanneer van toepassing)."
 
+msgid "Summary of all temperatures read (if enabled)."
+msgstr "Overzicht van alle temperatuurmetingen (wanneer ingeschakeld)."
+
 msgid "Select date range start"
 msgstr "Selecteer startdatum"
 
@@ -810,6 +825,9 @@ msgstr "in m<sup>3</sup>"
 
 msgid "Add note for today"
 msgstr "Voeg notitie toe voor vandaag"
+
+msgid "No data found yet. This page should display data as soon as the first reading is processed by DSMR-reader."
+msgstr "Nog geen gegevens gevonden. Deze pagina weergeeft gegevens zodra de eerste meting door DSMR-reader is verwerkt."
 
 msgid "Meter positions"
 msgstr "Meterstanden"
@@ -1885,5 +1903,11 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
-msgid "Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html"
-msgstr "Volledige documentatie beschikbaar op: https://dsmr-reader.readthedocs.io/nl/latest/api.html"
+#~ msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
+#~ msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
+
+#~ msgid "No data found. It can take up to one day before any data is visible here."
+#~ msgstr "Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer gegevens zichtbaar."
+
+#~ msgid "Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html"
+#~ msgstr "Volledige documentatie beschikbaar op: https://dsmr-reader.readthedocs.io/nl/latest/api.html"

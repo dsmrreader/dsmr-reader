@@ -7,7 +7,7 @@
 [![Python 3.4](https://img.shields.io/badge/python%203.4-support%20ended-red.svg)](https://dsmr-reader.readthedocs.io/en/latest/requirements.html#python)
 
 
-# DSMR Reader Datalogger/GUI
+# DSMR-reader Datalogger/GUI
 
 
 ## Documentation (`English` & `Nederlands`)
@@ -34,21 +34,7 @@
 - Scrollable graphs.
 
 
-### Dashboard
-![Dashboard](docs/static/screenshots/frontend/dashboard.png)
-
-
-### Archive
-![Archive](docs/static/screenshots/frontend/archive.png)
-
-
-### Trends
-![Archive](docs/static/screenshots/frontend/trends.png)
-
-
-### Energy contracts
-![Archive](docs/static/screenshots/frontend/energy-contracts.png)
-
-
 ## Screenshots
 More screenshots can be found in the documentation at [Read The Docs](https://dsmr-reader.readthedocs.io/en/latest/screenshots.html).
+
+![Archive](docs/static/screenshots/frontend/archive.png)

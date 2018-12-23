@@ -29,6 +29,7 @@ Listed in any order, sorted by name.
 - `FutureCow <https://github.com/FutureCow>`_
 - `Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_
 - `gertjuhh <https://github.com/gertjuhh>`_
+- `glsf91 <https://github.com/glsf91>`_
 - `goegol <https://github.com/goegol>`_
 - `Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_
 - `helmo <https://github.com/helmo>`_
@@ -37,6 +38,7 @@ Listed in any order, sorted by name.
 - `Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_
 - `joopy <https://github.com/joopy>`_
 - `Joris Vervuurt <https://github.com/jorisvervuurt>`_
+- `jbrunink <https://github.com/jbrunink>`_
 - `ju5t <https://github.com/ju5t>`_
 - `jwveldhuis <https://github.com/jwveldhuis>`_
 - Koen Volleberg
@@ -59,6 +61,7 @@ Listed in any order, sorted by name.
 - `TampertK <https://github.com/TampertK>`_
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
 - `thommy101 <https://github.com/thommy101>`_
+- Tijs van Noije
 - `TopdRob <https://github.com/TopdRob>`_
 - `tpjanssen <https://github.com/tpjanssen>`_
 - `trbs <https://github.com/trbs>`_

@@ -83,6 +83,12 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200, response.streaming_content)
         io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
 
+        # Temperature export.
+        post_data['data_type'] = ExportAsCsvForm.DATA_TYPE_TEMPERATURE
+        response = self.client.post(view_url, data=post_data)
+        self.assertEqual(response.status_code, 200, response.streaming_content)
+        io.BytesIO(b"".join(response.streaming_content))  # Force generator evaluation.
+
 
 class TestViewsWithoutData(TestViews):
     """ Same tests as above, but without any data as it's flushed in setUp().  """

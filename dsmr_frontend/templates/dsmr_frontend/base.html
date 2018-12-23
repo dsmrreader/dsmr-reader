@@ -15,8 +15,8 @@
 
         {% block stylesheets %}
         <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'dsmr_frontend/fontawesome-5.1.1/css/solid.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'dsmr_frontend/fontawesome-5.1.1/css/fontawesome.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/fontawesome-5.5.0/css/solid.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/fontawesome-5.5.0/css/fontawesome.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}" rel='stylesheet' type='text/css'>
         <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
@@ -118,12 +118,12 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:export' %}">
-                                <i class="fa-xs fas fa-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+                                <i class="fas fa-xs fa-file-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
                             </a>
                         </li>
                         <li>
 				            <a href="{% url 'admin:index' %}" target="_blank">
-				                <i class="fa-xs fas fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+				                <i class="fas fa-xs fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
 			            </li>
                         <li>
@@ -131,27 +131,27 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">
-                                <i class="fa-xs fas fa-history"></i> &nbsp; <small>{% trans "Changelog" %}</small>
+                                <i class="fas fa-xs fa-history"></i> &nbsp; <small>{% trans "Changelog" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
-                                <i class="fa-xs fas fa-question"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
+                                <i class="fas fa-xs fa-question"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'api-docs:docs-index' %}" target="_blank">
-                                <i class="fa-xs fas fa-file-code"></i> &nbsp; <small>{% trans "API v2 Docs" %}</small>
+                                <i class="fas fa-xs fa-file-code"></i> &nbsp; <small>{% trans "API v2 Docs" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                                <i class="fa-xs fas fa-bullhorn"></i> &nbsp; <small>{% trans "Feedback" %}</small>
+                                <i class="fas fa-xs fa-bullhorn"></i> &nbsp; <small>{% trans "Feedback" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
-                                <i class="fa-xs fas fa-hand-holding-usd"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
+                                <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
                             </a>
                         </li>
                     </ul>

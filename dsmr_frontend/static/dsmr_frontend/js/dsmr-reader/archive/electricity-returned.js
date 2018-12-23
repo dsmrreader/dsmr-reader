@@ -33,12 +33,13 @@ function render_electricity_returned_graph(xhr_data)
         grid: {
             top: '12%',
             left: '1%',
-            right: '1%',
+            right: '2%',
             containLabel: true
         },
         xAxis: [
             {
                 type : 'category',
+                boundaryGap: false,
                 data : xhr_data.x
             }
         ],

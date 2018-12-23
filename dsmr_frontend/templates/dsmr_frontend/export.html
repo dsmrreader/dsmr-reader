@@ -4,16 +4,18 @@
 {% load i18n %}
 
 {% block title %}{% trans "Export data" %}{% endblock %}
-{% block header %}{% trans "Export data" %} &nbsp; <i class="fas fa-download"></i>{% endblock %}
+{% block header %}{% trans "Export data" %} &nbsp; <i class="fas fa-file-download"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
-    <div class="alert alert-danger" role="alert">
-        <span class="fas fa-exclamation fa-2x"></span> {% blocktrans %}No data found. Please make sure the datalogger is up and running and the backend process is running as well.{% endblocktrans %}
+
+    <div class="alert alert-warning" role="alert">
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
     </div>
-{% endif %}
+
+{% else %}
 
     <form action="{% url 'frontend:export-as-csv' %}" method="post" id="download_form">
     {% csrf_token %}
@@ -34,6 +36,13 @@
 	                            <td class="col-md-3"><input class="" type="radio" name="data_type" value="hour" id="data_hour_totals"> &nbsp; <label for="data_hour_totals">{% trans "Hour totals" %}</label></td>
 	                            <td class="col-md-9">{% blocktrans %}Summary of each hour read. Contains electricity and gas (if applicable).{% endblocktrans %}</td>
 	                        </tr>
+	                        <tr>
+	                           <td colspan="2">&nbsp;</td>
+	                        </tr>
+                            <tr>
+                                <td class="col-md-3"><input class="" type="radio" name="data_type" value="temperature" id="data_temperature"> &nbsp; <label for="data_temperature">{% trans "Temperatures" %}</label></td>
+                                <td class="col-md-9">{% blocktrans %}Summary of all temperatures read (if enabled).{% endblocktrans %}</td>
+                            </tr>
 	                    </table>
 	                </div>
 	            </div>
@@ -89,6 +98,7 @@
 	    
 	    <a href="#" id="download_button" class="btn btn-lg btn-primary"><i class="fas fa-download"></i> &nbsp; Download export</a>
     </form>
+{% endif %}
 
 </section>
 {% endblock %}

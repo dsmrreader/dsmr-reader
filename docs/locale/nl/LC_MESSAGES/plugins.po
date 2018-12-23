@@ -8,6 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-16 16:45+0100\n"
+"PO-Revision-Date: 2018-12-16 16:49+0100\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -166,8 +168,8 @@ msgstr ""
 "hebben, zoek dan contact via Github<contributing>`."
 
 #: ../../plugins.rst:64
-msgid "Example: Upload data to second PVOutput account"
-msgstr "Voorbeeld: Upload gegevens naar een tweede PVOutput-account"
+msgid "Example #1: Upload data to second PVOutput account"
+msgstr "Voorbeeld #1: Upload gegevens naar een tweede PVOutput-account"
 
 #: ../../plugins.rst:65
 msgid ""
@@ -179,13 +181,13 @@ msgstr ""
 "dsmr-reader/issues/407>`_, met het verzoek om gegevens te uploaden naar een "
 "tweede PVOutput-account."
 
-#: ../../plugins.rst:68
+#: ../../plugins.rst:68 ../../plugins.rst:108 ../../plugins.rst:159
 msgid "Settings file ``dsmrreader/settings.py`` (addition)::"
 msgstr "Settings bestand ``dsmrreader/settings.py`` (toevoeging)::"
 
 #: ../../plugins.rst:75
-msgid "Plugin file ``dsmr_plugins/modules/pvoutput.py``::"
-msgstr "Plugin bestand ``dsmr_plugins/modules/pvoutput.py``::"
+msgid "Plugin file ``dsmr_plugins/modules/pvoutput.py`` (new file)::"
+msgstr "Plugin bestand ``dsmr_plugins/modules/pvoutput.py`` (nieuw bestand)::"
 
 #: ../../plugins.rst:101
 msgid ""
@@ -194,3 +196,64 @@ msgid ""
 msgstr ""
 "N.B.: De variablen ``XXXXX`` en ``YYYYY`` vervang je door de API-"
 "credentials van je tweede PVOutput-account."
+
+#: ../../plugins.rst:105
+msgid "Example #2: Forwarding raw telegram data to another serial port"
+msgstr ""
+"Voorbeeld #2: Doorsturen van ruwe telegram-gegevens naar een andere seriële "
+"poort"
+
+#: ../../plugins.rst:106
+msgid ""
+"This is an example of issue `#557 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to "
+"another serial port."
+msgstr ""
+"Dit is een voorbeeld van issue `#557 <https://github.com/dennissiemensma/"
+"dsmr-reader/issues/557>`_, wat ervoor zorgt dat je DSMR-telegrammen kunt "
+"doorsturen naar een andere seriële poort."
+
+#: ../../plugins.rst:115
+msgid ""
+"Plugin file ``dsmr_plugins/modules/forward_telegram_to_serial.py`` (new "
+"file)::"
+msgstr ""
+"Plugin bestand ``dsmr_plugins/modules/forward_telegram_to_serial.py`` "
+"(nieuw bestand)::"
+
+#: ../../plugins.rst:152
+msgid ""
+"Note that the ``/dev/ttyUSBvA`` variable should be changed to the serial "
+"port used in your own situation."
+msgstr ""
+"N.B.: Je moet de ``/dev/ttyUSBvA`` variabele nog wijzigen naar de juiste "
+"seriële poort in je eigen situatie."
+
+#: ../../plugins.rst:156
+msgid "Example #3: Forwarding raw telegram data to another instance by API"
+msgstr ""
+"Voorbeeld #3: Doorsturen van ruwe telegram-gegevens naar een andere "
+"instantie van DSMR-reader, via de API"
+
+#: ../../plugins.rst:157
+msgid ""
+"This can be quite handy if you run multiple instances of DSMR-reader (i.e.: "
+"RaspberryPI + somewhere in cloud)."
+msgstr ""
+"Dit kan behoorlijk handig zijn wanneer je meerdere instanties van DSMR-"
+"reader draait (bijvoorbeeld op een Raspberry en gespiegeld in de cloud)."
+
+#: ../../plugins.rst:166
+msgid ""
+"Plugin file ``dsmr_plugins/modules/forward_telegram_to_api.py`` (new file)::"
+msgstr ""
+"Plugin bestand ``dsmr_plugins/modules/forward_telegram_to_api.py`` (nieuw "
+"bestand)::"
+
+#: ../../plugins.rst:199
+msgid ""
+"Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should be "
+"changed to your own preferences."
+msgstr ""
+"N.B.: De ``API_HOST``, ``API_KEY`` en ``TIMEOUT`` variabelen moet je nog "
+"wijzigen naar je eigen voorkeuren."

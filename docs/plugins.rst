@@ -60,8 +60,8 @@ More signals may be available for use, please be careful when binding Django sav
 :doc:`If you need any help or information, please seek contact via Github<contributing>`.
 
 
-Example: Upload data to second PVOutput account
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example #1: Upload data to second PVOutput account
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is an example of issue `#407 <https://github.com/dennissiemensma/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account.
 
 
@@ -72,7 +72,7 @@ Settings file ``dsmrreader/settings.py`` (addition)::
     ]
 
 
-Plugin file ``dsmr_plugins/modules/pvoutput.py``::
+Plugin file ``dsmr_plugins/modules/pvoutput.py`` (new file)::
 
     import requests
     
@@ -99,3 +99,101 @@ Plugin file ``dsmr_plugins/modules/pvoutput.py``::
 
 
 Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your second set of PVOutput API credentials.
+
+
+Example #2: Forwarding raw telegram data to another serial port
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This is an example of issue `#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another serial port.
+
+Settings file ``dsmrreader/settings.py`` (addition)::
+
+    DSMRREADER_PLUGINS = [
+        'dsmr_plugins.modules.forward_telegram_to_serial',
+    ]
+
+
+Plugin file ``dsmr_plugins/modules/forward_telegram_to_serial.py`` (new file)::
+
+    import serial
+    
+    from dsmr_datalogger.signals import raw_telegram
+    import dsmr_datalogger.services
+    
+    
+    def handle_forward_telegram_to_serial(sender, **kwargs):
+        DEST_PORT = '/dev/ttyUSBvA'
+        connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
+    
+        serial_handle = serial.Serial()
+        serial_handle.port = DEST_PORT
+        serial_handle.baudrate = connection_parameters['baudrate']
+        serial_handle.bytesize = connection_parameters['bytesize']
+        serial_handle.parity = connection_parameters['parity']
+        serial_handle.stopbits = serial.STOPBITS_ONE
+        serial_handle.xonxoff = 1
+        serial_handle.rtscts = 0
+        serial_handle.timeout = 1
+        serial_handle.write_timeout = 0.2
+    
+        try:
+            serial_handle.open()
+            bytes_sent = serial_handle.write(bytes(kwargs['data'], 'utf-8'))
+        except Exception as error:
+            print(error)
+        else:
+            print(' >>> Sent {} bytes to {}'.format(bytes_sent, DEST_PORT))
+    
+        serial_handle.close()
+    
+    
+    raw_telegram.connect(receiver=handle_forward_telegram_to_serial)
+
+
+Note that the ``/dev/ttyUSBvA`` variable should be changed to the serial port used in your own situation.
+
+
+Example #3: Forwarding raw telegram data to another instance by API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This can be quite handy if you run multiple instances of DSMR-reader (i.e.: RaspberryPI + somewhere in cloud).
+
+Settings file ``dsmrreader/settings.py`` (addition)::
+
+    DSMRREADER_PLUGINS = [
+        'dsmr_plugins.modules.forward_telegram_to_api',
+    ]
+
+
+Plugin file ``dsmr_plugins/modules/forward_telegram_to_api.py`` (new file)::
+
+    import requests
+    import logging
+    
+    from dsmr_datalogger.signals import raw_telegram
+    
+    
+    def handle_forward_telegram_to_api(sender, **kwargs):
+        API_HOST = 'https://YOUR-DSMR-HOST'  # Note: Check whether you use HTTP or SSL (HTTPS).
+        API_KEY = 'YOUR-API-KEY'
+        TIMEOUT = 5  # A low timeout prevents the application from hanging too long if the server is unavailable.
+    
+        try:
+            # Register telegram by simply sending it to the application with a POST request.
+            response = requests.post(
+                '{}/api/v1/datalogger/dsmrreading'.format(API_HOST),
+                headers={'X-AUTHKEY': API_KEY},
+                data={'telegram': kwargs['data']},
+                timeout=TIMEOUT
+            )
+        except Exception as error:
+            return logging.error(error)
+    
+        # You will receive a status 201 when successful.
+        if response.status_code != 201:
+            # Or you will find the error (hint) in the reponse body on failure.
+            logging.error('Server Error forwarding telegram: {}'.format(response.text))
+    
+    
+    raw_telegram.connect(receiver=handle_forward_telegram_to_api)
+
+
+Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should be changed to your own preferences. 
