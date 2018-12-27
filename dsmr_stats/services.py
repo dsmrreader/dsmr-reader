@@ -68,8 +68,8 @@ def analyze():  # noqa: C901
     if consumption_date == now.date():
         return
 
-    # Do not create status until we've passed the next day by a margin. Required due to delayed gas update by meters.
-    if dsmr_backend.services.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
+    # Do not create status until we've passed the first hour of the next day by a margin.
+    if now.time() < time(hour=1, minute=15):
         # Skip for a moment.
         return
 
@@ -80,10 +80,10 @@ def analyze():  # noqa: C901
         hour=0,
     ))
 
-    # Also, make sure we have processed all readings from that day.
+    # Also, make sure we have processed all readings from that day. Plus the first hour of the next day.
     day_processed = not DsmrReading.objects.unprocessed().filter(
         timestamp__gte=day_start,
-        timestamp__lte=day_start + timezone.timedelta(hours=24),
+        timestamp__lte=day_start + timezone.timedelta(hours=(24 + 1)),
     ).exists()
 
     if not day_processed:
