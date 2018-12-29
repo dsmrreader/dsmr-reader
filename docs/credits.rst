@@ -56,6 +56,7 @@ Listed in any order, sorted by name.
 - `raoulteeuwen <https://github.com/raoulteeuwen>`_
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `sanderdw <https://github.com/sanderdw>`_
+- `SaturnusDJ <https://github.com/SaturnusDJ>`_
 - `Sevickson <https://github.com/sevickson>`_
 - `swerveshot <https://github.com/swerveshot>`_
 - `TampertK <https://github.com/TampertK>`_

@@ -39,7 +39,7 @@ class TrendsXhrAvgConsumption(View):
         capabilities = dsmr_backend.services.get_capabilities()
         average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour(max_weeks_ago=4)
 
-        for current in reversed(average_consumption_by_hour):
+        for current in average_consumption_by_hour:
             hour_start = '{}:00 - {}:00'.format(int(current['hour_start']), int(current['hour_start']) + 1)
 
             avg_electricity = (current['avg_electricity1'] + current['avg_electricity2']) / 2

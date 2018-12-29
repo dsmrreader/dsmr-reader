@@ -17,6 +17,18 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v1.28.0 - xxxx-xx-xx
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#571 <https://github.com/dennissiemensma/dsmr-reader/issues/571>`_] Trends klok omdraaien
+- [`#xxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxx>`_] yyyyyyyyyyyyyyy
+
+
+----
+
+
 v1.27.0 - 2018-12-23
 ^^^^^^^^^^^^^^^^^^^^
 
