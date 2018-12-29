@@ -23,6 +23,7 @@ v1.28.0 - xxxx-xx-xx
 **Tickets resolved in this release:**
 
 - [`#571 <https://github.com/dennissiemensma/dsmr-reader/issues/571>`_] Trends klok omdraaien
+- [`#570 <https://github.com/dennissiemensma/dsmr-reader/issues/570>`_] Herinstallatie/verwijdering documenteren
 - [`#xxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxx>`_] yyyyyyyyyyyyyyy
 
 

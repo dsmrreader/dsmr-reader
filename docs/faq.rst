@@ -170,7 +170,6 @@ On recent versions it should be as simple as executing the following command as 
     mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
 
 
-
 How do I retain MQTT support when upgrading to v1.23.0 or higher?
 -----------------------------------------------------------------
 
@@ -184,3 +183,31 @@ Fresh installations automatically include the ``dsmr_mqtt`` process. Existing in
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr-reader.conf /etc/supervisor/conf.d/
     sudo supervisorctl reread
     sudo supervisorctl update
+
+
+How do I uninstall DSMR-reader?
+-------------------------------
+To remove DSMR-reader from your system, execute the following commands::
+
+    # Nginx.
+    sudo rm /etc/nginx/sites-enabled/dsmr-webinterface
+    sudo service nginx reload
+    sudo rm -rf /var/www/dsmrreader
+
+    # Supervisor.
+    sudo supervisorctl stop all
+    sudo rm /etc/supervisor/conf.d/dsmr-reader.conf
+    sudo supervisorctl reread
+    sudo supervisorctl update
+
+    # Homedir & user.
+    sudo rm -rf /home/dsmr/
+    sudo userdel dsmr
+
+To delete your data(base) as well::
+
+    sudo su - postgres dropdb dsmrreader
+
+Optionally, you can remove these packages::
+
+    sudo apt-get remove postgresql postgresql-server-dev-all nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
