@@ -86,6 +86,14 @@ def send_notification(message, title):
                 'description': message
             }
         },
+        NotificationSetting.NOTIFICATION_TELEGRAM: {
+            'url': NotificationSetting.TELEGRAM_API_URL + notification_settings.telegram_api_key,
+            'data': {
+                'chat_id': notification_settings.telegram_chat_id,
+                'disable_notification': 'true',
+                'text': message
+            }
+        },
     }
 
     response = requests.post(
@@ -103,7 +111,9 @@ def send_notification(message, title):
             pushover_api_key=None,
             pushover_user_key=None,
             prowl_api_key=None,
-            next_notification=None
+            next_notification=None,
+            telegram_api_key=None,
+            telegram_chat_id=None
         )
         Notification.objects.create(
             message='Notification API error, settings are reset. Error: {}'.format(response.text),

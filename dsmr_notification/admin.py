@@ -24,6 +24,10 @@ class NotificationSettingsAdmin(SingletonModelAdmin):
             'fields': ['prowl_api_key'],
             'description': _('Only applies when using Prowl')
         }),
+        ('Telegram', {
+            'fields': ['telegram_api_key', 'telegram_chat_id'],
+            'description': _('Only applies when using Telegram')
+        }),
         (
             _('Automatic fields'), {
                 'fields': ['next_notification']

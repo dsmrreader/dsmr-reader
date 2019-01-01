@@ -6,15 +6,18 @@ from solo.models import SingletonModel
 class NotificationSetting(SingletonModel):
     PUSHOVER_API_URL = 'https://api.pushover.net/1/messages.json'
     PROWL_API_URL = 'https://api.prowlapp.com/publicapi/add'
+    TELEGRAM_API_URL = 'https://api.telegram.org/bot'
 
     NOTIFICATION_NONE = None
     NOTIFICATION_PROWL = 'prowl'
     NOTIFICATION_PUSHOVER = 'pushover'
+    NOTIFICATION_TELEGRAM = 'telegram'
 
     NOTIFICATION_CHOICES = (
         (NOTIFICATION_NONE, _('--- Disabled ---')),
         (NOTIFICATION_PUSHOVER, _('Pushover')),
         (NOTIFICATION_PROWL, _('Prowl')),
+        (NOTIFICATION_TELEGRAM, _('Telegram')),
     )
 
     notification_service = models.CharField(
@@ -49,6 +52,20 @@ class NotificationSetting(SingletonModel):
         blank=True,
         default=None,
         help_text=_('Your User Key displayed in your Pushover dashboard'),
+    )
+    telegram_api_key = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        default=None,
+        help_text=_('Your Telegram bot token. The token looks something like 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11'),
+    )
+    telegram_chat_id = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        default=None,
+        help_text=_('Unique identifier for the target chat or username of the target channel (in the format @channelusername)'),
     )
     next_notification = models.DateTimeField(
         default=None,
