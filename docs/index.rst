@@ -37,6 +37,7 @@ DSMR Reader's documentation
    settings
    api
    plugins
+   development
 
    faq
    troubleshooting

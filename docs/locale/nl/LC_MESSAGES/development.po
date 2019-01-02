@@ -1,0 +1,282 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2019, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 21:22+0100\n"
+"PO-Revision-Date: 2019-01-02 21:33+0100\n"
+"Last-Translator: \n"
+"Language: nl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../development.rst:2
+msgid "Developing with DSMR-reader"
+msgstr "Ontwikkelen met DSMR-reader"
+
+#: ../../development.rst:6
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
+#: ../../development.rst:10
+msgid "In this document there are many references to::"
+msgstr "In dit document zijn er vele referenties naar::"
+
+#: ../../development.rst:14
+msgid ""
+"You will only have to execute it once per terminal session, to make sure you "
+"are working in the designated virtual env for DSMR-reader."
+msgstr ""
+"Je hoeft dit slechts eenmaal per terminal sessie uit te voeren, om er zeker "
+"van te zijn dat je in de betreffende virtual env werkt voor DSMR-reader."
+
+#: ../../development.rst:18
+msgid "Setting up a development environment in Ubuntu 18.04"
+msgstr "Ontwikkelomgeving inrichten voor Ubuntu 18.04"
+
+#: ../../development.rst:20
+msgid "System packages::"
+msgstr "Systeempackages::"
+
+#: ../../development.rst:24
+msgid "Clone DSMR-reader repository from Github::"
+msgstr "Kloon DSMR-reader repository van Github::"
+
+#: ../../development.rst:29
+msgid "Create virtualenv and install all packages::"
+msgstr "Maak virtualenv aan en installeer alle packages::"
+
+#: ../../development.rst:36
+msgid "Copy development config::"
+msgstr "Kopieer de ontwikkel config::"
+
+#: ../../development.rst:40
+msgid ""
+"Try a check, output should be something like ``System check identified no "
+"issues (0 silenced).``::"
+msgstr ""
+"Probeer het volgende, de output moet iets zijn in de trend van ``System "
+"check identified no issues (0 silenced).``::"
+
+#: ../../development.rst:44
+msgid "Run quick tests (with in-memory database)::"
+msgstr "Draai de snelle tests (via in-memory database)::"
+
+#: ../../development.rst:48
+msgid "Set up PostgreSQL test database::"
+msgstr "Stel PostgreSQL testdatabase in::"
+
+#: ../../development.rst:54
+msgid "Set up MySQL (or MariaDB) test database::"
+msgstr "Stel MySQL (of MariaDB) testdatabase in::"
+
+#: ../../development.rst:63
+msgid ""
+"Now check whether tests run well with all three database backends (this may "
+"take a while)::"
+msgstr ""
+"Controleer nu of de tests goed draaien met alle drie de database-backends "
+"(dit kan even duren)::"
+
+#: ../../development.rst:69
+msgid "Initial data to develop with"
+msgstr "Initiele gegevens om mee te ontwikkelen"
+
+#: ../../development.rst:71
+msgid ""
+"To be honest, the best initial/fixture data is simply a backup of your own "
+"system in production."
+msgstr ""
+"Om eerlijk te zijn, de beste ontwikkeldata zijn simpelweg gegevens uit je "
+"eigen productieomgeving."
+
+#: ../../development.rst:73
+msgid ""
+"Just import it as you should on your RaspberryPi. Copy a database backup to "
+"``/var/lib/postgresql/`` on your PC and import it::"
+msgstr ""
+"Importeer deze zoals je dat ook zou doen op je RaspberryPi. Kopieer een "
+"database-backup naar ``/var/lib/postgresql`` op je PC en importeer deze met::"
+
+#: ../../development.rst:86
+msgid ""
+"Please note that you should not run any (backend) processes in your DSMR-"
+"reader development environment, until you've unlinked all external services."
+msgstr ""
+"N.B.: Voorkom dat je (achtergrond)processen draait in je lokale DSMR-reader "
+"ontwikkelomgeving, totdat je alle externe diensten hebt ontkoppeld."
+
+#: ../../development.rst:88
+msgid "After importing the backup of your production system, simply run::"
+msgstr ""
+"Na het importeren van een backup van je eigen productieomgeving, voer "
+"simpelweg het volgende uit::"
+
+#: ../../development.rst:93
+msgid ""
+"This will remove all API keys and other links to externals systems, as well "
+"as reset the admin user credentials to ``admin / admin`` (user / password)."
+msgstr ""
+"Dit verwijdert alle API-keys en andere koppelingen naar externe systemen. "
+"Tevens wordt de admin-gebruiker gereset naar ``admin / admin`` (gebruiker / "
+"wachtwoord)."
+
+#: ../../development.rst:97
+msgid "Fake datalogger"
+msgstr "Nep datalogger"
+
+#: ../../development.rst:99
+msgid "There is a builtin command that can somewhat fake a datalogger::"
+msgstr ""
+"Er is een ingebouwd command voor een soort van datalogger die nepdata "
+"genereert::"
+
+#: ../../development.rst:104
+msgid ""
+"It will generate random data every second in a certain pattern and should be "
+"fine for basic testing."
+msgstr ""
+"Deze genereert elke seconde willekeurige gegevens in een bepaald patroon en "
+"is vaak meer dan afdoende voor simpele testdoeleinden."
+
+#: ../../development.rst:106
+msgid ""
+"Please note that it only inserts unprocessed readings, so you'll still have "
+"to run the ``./manage.py dsmr_backend --run-once`` command to have the "
+"readings processed."
+msgstr ""
+"N.B.: Hiermee worden alle onverwerkte metingen aangemaakt. Je zult ze nog "
+"steeds moeten verwerken door ``./manage.py dsmr_backend --run-once`` uit te "
+"voeren."
+
+#: ../../development.rst:110
+msgid "Running DSMR-reader locally"
+msgstr "DSMR-reader lokaal draaien"
+
+#: ../../development.rst:112
+msgid "You can run the Django development server with::"
+msgstr "Je kunt de Django-ontwikkelserver draaien met::"
+
+#: ../../development.rst:117
+msgid ""
+"The application will be accessible on: ``http://localhost:8000/``. Any code "
+"changes you make will let the application reload automatically."
+msgstr ""
+"De applicatie is nu bereikbaar op: ``http://localhost:8000/``. Elke "
+"codewijziging die je doet, wordt automatisch doorgevoerd en herlaadt de "
+"applicatie."
+
+#: ../../development.rst:122
+msgid "Tests"
+msgstr "Tests"
+
+#: ../../development.rst:124
+msgid "The easiest way to run tests is to use the in-memory tests::"
+msgstr "De makkelijkste manier om tests te draaien is via de in-memory tests::"
+
+#: ../../development.rst:129
+msgid "To test a single app within DSMR-reader, just append it::"
+msgstr ""
+"Om een enkele app in DSMR-reader te testen, geef deze simpelweg als extra "
+"argument op::"
+
+#: ../../development.rst:134
+msgid "To test all database backends, run::"
+msgstr "Om alle database-backends te testen, voer dit uit::"
+
+#: ../../development.rst:140
+msgid "Translations"
+msgstr "Vertalingen"
+
+#: ../../development.rst:142
+msgid ""
+"You can find the translations (.PO files) for the main application in "
+"``dsmrreader/locales/``. To regenerate them, just execute the ``./tools/"
+"quick-test.sh`` script, as one of the tests checks translations."
+msgstr ""
+"Je kunt de vertalingen (.PO-bestanden) voor de hoofdapplicatie vinden in "
+"``dsmrreader/locales/``. Om ze te hergenereren voer het ``./tools/quick-test."
+"sh`` script uit, zodat een van de tests de vertalingen opnieuw checkt."
+
+#: ../../development.rst:147
+msgid "Editing documentation"
+msgstr "Documentatie bijwerken"
+
+#: ../../development.rst:149
+msgid ""
+"The documentation is part of the repository and can be generated "
+"(automatically) with Sphinx::"
+msgstr ""
+"De documentatie is onderdeel van de repository en kan (automatisch) "
+"gegenereerd worden via Sphinx::"
+
+#: ../../development.rst:155
+msgid ""
+"You can now view the documentation in your browser by accessing: "
+"``http://127.0.0.1:10000``. Any changes you make will be reflected instantly "
+"in the browser, as Sphinx continuously checks for changed files."
+msgstr ""
+"Je kunt nu de documentatie bekijken in je browser op de volgende link: "
+"``http://127.0.0.1:10000``. Wijzigingen die je doorvoert worden direct "
+"automatisch bijgewerkt en getoond in je browser, gezien Sphinx daarvoor "
+"zorgt."
+
+#: ../../development.rst:160
+msgid "Translating documentation"
+msgstr "Documentatie vertalen"
+
+#: ../../development.rst:162
+msgid ""
+"Translations are done using gettext and .PO files. Regenerate the .PO files "
+"with::"
+msgstr ""
+"Vertalingen verlopen via .PO-bestanden met gettext. Hergenereer de .PO-"
+"bestanden met::"
+
+#: ../../development.rst:168
+msgid ""
+"The .PO files in ``docs/locale`` should be regenerated now. You can use "
+"``poedit`` to view and translate the files."
+msgstr ""
+"De .PO-bestanden in ``docs/locale`` zouden gehergenereerd moeten worden nu. "
+"Je kunt ``poedit`` gebruiken om de bestanden te bekijken en te vertalen."
+
+#: ../../development.rst:170
+msgid ""
+"After editing the .PO files, you can check the result by building the Dutch "
+"translations locally::"
+msgstr ""
+"Nadat je de .PO-bestanden hebt bewerkt, kun je de resultaten bekijken door "
+"de Nederlandse variant te genereren lokaal::"
+
+#: ../../development.rst:174
+msgid ""
+"Now view the generated HTML in your browser by opening: ``docs/_build/html/"
+"index.html``"
+msgstr ""
+"Bekijk nu de gegenereerde HTML in je browser door het volgende bestand te "
+"openen: ``docs/_build/html/index.html``"
+
+#: ../../development.rst:178
+msgid "Pull requests"
+msgstr "Pull requests"
+
+#: ../../development.rst:180
+msgid ""
+"Please make sure to always point any pull requests to the ``development`` "
+"branch of DSMR-reader, as the ``master`` branch will only be affected by "
+"release merges."
+msgstr ""
+"Zorg ervoor dat je pull requests altijd laat wijzen naar de ``development`` "
+"branch van DSMR-reader, gezien ``master`` alleen gebruikt wordt voor release-"
+"merges."

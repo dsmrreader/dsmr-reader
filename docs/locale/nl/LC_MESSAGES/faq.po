@@ -414,7 +414,7 @@ msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
 
 #: ../../faq.rst:189
 msgid "How do I uninstall DSMR-reader?"
-msgstr "Hoe deïnstalleer ik DSMR-reader?"
+msgstr "Hoe deinstalleer ik DSMR-reader?"
 
 #: ../../faq.rst:190
 msgid "To remove DSMR-reader from your system, execute the following commands::"
