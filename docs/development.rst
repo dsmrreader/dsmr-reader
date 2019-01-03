@@ -118,8 +118,10 @@ The application will be accessible on: ``http://localhost:8000/``.
 Any code changes you make will let the application reload automatically.
 
 
-Tests
------
+Tests and coverage
+------------------
+
+DSMR-reader's test coverage should remain as high as possible. Running tests will also analyze the test coverage in detail. 
 
 The easiest way to run tests is to use the in-memory tests::
 
@@ -135,6 +137,16 @@ To test all database backends, run::
 
 	source ~/.virtualenvs/dsmrreader/bin/activate
 	./tools/test-all.sh
+
+The test coverage should be visible in the terminal after running tests.
+There are detailed HTML pages available as well, after each test run, in ``coverage_report/html/index.html``. 
+Just open it with your browser to view the test coverage of each file and line.
+
+.. note::
+
+	A side effect of running tests is that it may also regenerate .PO files from the ``docs/`` folder. 
+	If you did not make any changes there, your should just ignore those changed files and revert them.
+	
 
 Translations
 ------------

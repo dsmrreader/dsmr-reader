@@ -8,8 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-02 21:22+0100\n"
-"PO-Revision-Date: 2019-01-02 21:33+0100\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -97,8 +95,8 @@ msgid ""
 "To be honest, the best initial/fixture data is simply a backup of your own "
 "system in production."
 msgstr ""
-"Om eerlijk te zijn, de beste ontwikkeldata zijn simpelweg gegevens uit je "
-"eigen productieomgeving."
+"De beste gegevens om mee te ontwikkelen zijn eerlijk gezegd simpelweg "
+"gegevens uit je eigen productieomgeving."
 
 #: ../../development.rst:73
 msgid ""
@@ -119,8 +117,8 @@ msgstr ""
 #: ../../development.rst:88
 msgid "After importing the backup of your production system, simply run::"
 msgstr ""
-"Na het importeren van een backup van je eigen productieomgeving, voer "
-"simpelweg het volgende uit::"
+"Voer simpelweg het volgende uit, na het importeren van een backup uit je "
+"eigen productieomgeving::"
 
 #: ../../development.rst:93
 msgid ""
@@ -155,7 +153,7 @@ msgid ""
 "to run the ``./manage.py dsmr_backend --run-once`` command to have the "
 "readings processed."
 msgstr ""
-"N.B.: Hiermee worden alle onverwerkte metingen aangemaakt. Je zult ze nog "
+"N.B.: Hiermee worden alleen onverwerkte metingen aangemaakt. Je zult ze nog "
 "steeds moeten verwerken door ``./manage.py dsmr_backend --run-once`` uit te "
 "voeren."
 
@@ -177,28 +175,60 @@ msgstr ""
 "applicatie."
 
 #: ../../development.rst:122
-msgid "Tests"
-msgstr "Tests"
+msgid "Tests and coverage"
+msgstr "Tests en dekking"
 
 #: ../../development.rst:124
+msgid ""
+"DSMR-reader's test coverage should remain as high as possible. Running tests "
+"will also analyze the test coverage in detail."
+msgstr ""
+"DSMR-reader's test dekking zou zo hoog mogelijk moeten blijven. Het draaien "
+"van tests zorgt er ook voor dat de test dekking in detail geanalyseerd wordt."
+
+#: ../../development.rst:126
 msgid "The easiest way to run tests is to use the in-memory tests::"
 msgstr "De makkelijkste manier om tests te draaien is via de in-memory tests::"
 
-#: ../../development.rst:129
+#: ../../development.rst:131
 msgid "To test a single app within DSMR-reader, just append it::"
 msgstr ""
-"Om een enkele app in DSMR-reader te testen, geef deze simpelweg als extra "
-"argument op::"
+"Om een enkele app binnen DSMR-reader te testen, geef je deze simpelweg als "
+"extra argument op::"
 
-#: ../../development.rst:134
+#: ../../development.rst:136
 msgid "To test all database backends, run::"
-msgstr "Om alle database-backends te testen, voer dit uit::"
+msgstr "Om alle database-backends te testen voer je het volgende uit::"
 
-#: ../../development.rst:140
+#: ../../development.rst:141
+msgid ""
+"The test coverage should be visible in the terminal after running tests. "
+"There are detailed HTML pages available as well, after each test run, in "
+"``coverage_report/html/index.html``. Just open it with your browser to view "
+"the test coverage of each file and line."
+msgstr ""
+"De test dekking zou na het draaien van tests zichtbaar moeten zijn in de "
+"terminal. Er zijn tevens gedetaileerde HTML-pagina's beschikbaar in "
+"``coverage_report/html/index.html``, na het draaien van tests. Je kunt deze "
+"openen met je browser om de test dekking in detail te zien per bestand en "
+"per regel code."
+
+#: ../../development.rst:147
+msgid ""
+"A side effect of running tests is that it may also regenerate .PO files from "
+"the ``docs/`` folder. If you did not make any changes there, your should "
+"just ignore those changed files and revert them."
+msgstr ""
+"Een mogelijk bijeffect van het draaien van tests is dat hiermee ook .PO-"
+"bestanden in de ``docs/`` map bijgewerkt worden. Als je daar geen "
+"wijzigingen in hebt gedaan, kun je die door de tests gewijzigde bestanden "
+"negeren."
+
+#: ../../development.rst:152
 msgid "Translations"
 msgstr "Vertalingen"
 
-#: ../../development.rst:142
+#: ../../development.rst:154
 msgid ""
 "You can find the translations (.PO files) for the main application in "
 "``dsmrreader/locales/``. To regenerate them, just execute the ``./tools/"
@@ -208,11 +238,11 @@ msgstr ""
 "``dsmrreader/locales/``. Om ze te hergenereren voer het ``./tools/quick-test."
 "sh`` script uit, zodat een van de tests de vertalingen opnieuw checkt."
 
-#: ../../development.rst:147
+#: ../../development.rst:159
 msgid "Editing documentation"
 msgstr "Documentatie bijwerken"
 
-#: ../../development.rst:149
+#: ../../development.rst:161
 msgid ""
 "The documentation is part of the repository and can be generated "
 "(automatically) with Sphinx::"
@@ -220,7 +250,7 @@ msgstr ""
 "De documentatie is onderdeel van de repository en kan (automatisch) "
 "gegenereerd worden via Sphinx::"
 
-#: ../../development.rst:155
+#: ../../development.rst:167
 msgid ""
 "You can now view the documentation in your browser by accessing: "
 "``http://127.0.0.1:10000``. Any changes you make will be reflected instantly "
@@ -228,14 +258,13 @@ msgid ""
 msgstr ""
 "Je kunt nu de documentatie bekijken in je browser op de volgende link: "
 "``http://127.0.0.1:10000``. Wijzigingen die je doorvoert worden direct "
-"automatisch bijgewerkt en getoond in je browser, gezien Sphinx daarvoor "
-"zorgt."
+"automatisch bijgewerkt en getoond in je browser, waar Sphinx voor zorgt."
 
-#: ../../development.rst:160
+#: ../../development.rst:172
 msgid "Translating documentation"
 msgstr "Documentatie vertalen"
 
-#: ../../development.rst:162
+#: ../../development.rst:174
 msgid ""
 "Translations are done using gettext and .PO files. Regenerate the .PO files "
 "with::"
@@ -243,23 +272,24 @@ msgstr ""
 "Vertalingen verlopen via .PO-bestanden met gettext. Hergenereer de .PO-"
 "bestanden met::"
 
-#: ../../development.rst:168
+#: ../../development.rst:180
 msgid ""
 "The .PO files in ``docs/locale`` should be regenerated now. You can use "
 "``poedit`` to view and translate the files."
 msgstr ""
-"De .PO-bestanden in ``docs/locale`` zouden gehergenereerd moeten worden nu. "
-"Je kunt ``poedit`` gebruiken om de bestanden te bekijken en te vertalen."
+"De .PO-bestanden in ``docs/locale`` zouden nu opnieuw gegenereerd moeten "
+"worden. Je kunt het programma ``poedit`` gebruiken om de bestanden te "
+"bekijken en te vertalen."
 
-#: ../../development.rst:170
+#: ../../development.rst:182
 msgid ""
 "After editing the .PO files, you can check the result by building the Dutch "
 "translations locally::"
 msgstr ""
-"Nadat je de .PO-bestanden hebt bewerkt, kun je de resultaten bekijken door "
-"de Nederlandse variant te genereren lokaal::"
+"Nadat je de .PO-bestanden hebt bijgewerkt, kun je de resultaten bekijken "
+"door de Nederlandse variant van de documentatie lokaal te genereren::"
 
-#: ../../development.rst:174
+#: ../../development.rst:186
 msgid ""
 "Now view the generated HTML in your browser by opening: ``docs/_build/html/"
 "index.html``"
@@ -267,11 +297,11 @@ msgstr ""
 "Bekijk nu de gegenereerde HTML in je browser door het volgende bestand te "
 "openen: ``docs/_build/html/index.html``"
 
-#: ../../development.rst:178
+#: ../../development.rst:190
 msgid "Pull requests"
 msgstr "Pull requests"
 
-#: ../../development.rst:180
+#: ../../development.rst:192
 msgid ""
 "Please make sure to always point any pull requests to the ``development`` "
 "branch of DSMR-reader, as the ``master`` branch will only be affected by "
@@ -280,3 +310,6 @@ msgstr ""
 "Zorg ervoor dat je pull requests altijd laat wijzen naar de ``development`` "
 "branch van DSMR-reader, gezien ``master`` alleen gebruikt wordt voor release-"
 "merges."
+
+#~ msgid "Tests"
+#~ msgstr "Tests"
