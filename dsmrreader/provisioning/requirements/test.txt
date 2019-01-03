@@ -2,4 +2,4 @@ polib==1.1.0
 pylama==7.6.6 ; python_version < '3.7' # Re-check since project seems alive again?
 pytest-cov==2.6.0
 pytest-django==3.4.4
-pytest-xdist==1.24.1
+pytest-xdist==1.25.0
