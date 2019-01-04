@@ -17,6 +17,24 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v1.28.0 - 2019-01-04
+^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+	This will be the last release for a few months until spring 2019.
+
+**Tickets resolved in this release:**
+
+- [`#571 <https://github.com/dennissiemensma/dsmr-reader/issues/571>`_] Trends klok omdraaien
+- [`#570 <https://github.com/dennissiemensma/dsmr-reader/issues/570>`_] Herinstallatie/verwijdering documenteren
+- [`#442 <https://github.com/dennissiemensma/dsmr-reader/issues/442>`_] Documentation: Development environment
+- Requirements update
+
+
+----
+
+
 v1.27.0 - 2018-12-23
 ^^^^^^^^^^^^^^^^^^^^
 

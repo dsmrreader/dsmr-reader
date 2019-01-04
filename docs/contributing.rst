@@ -13,9 +13,9 @@ It doesn't matter whether you run into problems or just want to get in touch, ju
     `Please create an issue on Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_ to get in contact.
 
 
-Pull requests
--------------
+Developing and creating pull requests
+-------------------------------------
 Pull requests are appreciated, but please note that you should discuss any changes with a Github ticket first. 
-It would be a shame if you'd put any effort in something that won't get merged after all.
+It would be a shame if you'd put any effort in something that won't get merged after all. 
 
-Also, please do not create pull requests for the ``master`` branch, but always point it to ``development``. 
+For more information about how to develop, :doc:`see the page dedicated to this topic<development>`.

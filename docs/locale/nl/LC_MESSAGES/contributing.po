@@ -7,13 +7,14 @@ msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
-"Language: nl\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Generated-By: Babel 2.6.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../contributing.rst:2
 msgid "Contributing"
@@ -44,8 +45,8 @@ msgstr ""
 "dennissiemensma/dsmr-reader/issues/new>`_."
 
 #: ../../contributing.rst:17
-msgid "Pull requests"
-msgstr "Pull requests"
+msgid "Developing and creating pull requests"
+msgstr "Ontwikkelen en pull requests aanmaken"
 
 #: ../../contributing.rst:18
 msgid ""
@@ -59,9 +60,18 @@ msgstr ""
 
 #: ../../contributing.rst:21
 msgid ""
-"Also, please do not create pull requests for the ``master`` branch, but always "
-"point it to ``development``."
+"For more information about how to develop, :doc:`see the page dedicated to "
+"this topic<development>`."
 msgstr ""
-"Tot slot, zorg ervoor dat pull requests altijd naar de ``development`` branch "
-"wijzen en niet de ``master``."
+"Voor meer informatie over hoe te ontwikkelen, :doc:`zie deze pagina "
+"daarvoor<development>`."
 
+#~ msgid "Pull requests"
+#~ msgstr "Pull requests"
+
+#~ msgid ""
+#~ "Also, please do not create pull requests for the ``master`` branch, but "
+#~ "always point it to ``development``."
+#~ msgstr ""
+#~ "Tot slot, zorg ervoor dat pull requests altijd naar de ``development`` "
+#~ "branch wijzen en niet de ``master``."

@@ -54,8 +54,10 @@ Listed in any order, sorted by name.
 - `perryodk <https://github.com/perryodk>`_
 - `pyrocumulus <https://github.com/pyrocumulus>`_
 - `raoulteeuwen <https://github.com/raoulteeuwen>`_
+- `rodeho <https://github.com/rodeho>`_
 - `Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_
 - `sanderdw <https://github.com/sanderdw>`_
+- `SaturnusDJ <https://github.com/SaturnusDJ>`_
 - `Sevickson <https://github.com/sevickson>`_
 - `swerveshot <https://github.com/swerveshot>`_
 - `TampertK <https://github.com/TampertK>`_
