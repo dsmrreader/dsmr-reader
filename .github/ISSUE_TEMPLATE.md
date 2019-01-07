@@ -1,3 +1,8 @@
+LET OP: Wegens verminderde beschikbaarheid tot aan medio april 2019,
+        kan het zijn dat de auteur minder snel of helemaal niet in de
+        gelegenheid is om te reageren. Zie ook issue #576.
+----
+
 ### Jouw omgeving
 *(Indien van toepassing)*
 * DSMR-reader versie *(rechtsbovenin applicatie zichtbaar)*: `v1.X.Y`
