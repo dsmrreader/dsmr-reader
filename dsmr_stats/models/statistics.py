@@ -164,43 +164,43 @@ class ElectricityStatistics(SingletonModel):
 
     highest_usage_l1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Highest usage on L1+ (in kWh)')
+        verbose_name=_('Highest usage on L1+ (in Watt)')
     )
     highest_usage_l2_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Highest usage on L2+ (in kWh)')
+        verbose_name=_('Highest usage on L2+ (in Watt)')
     )
     highest_usage_l3_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Highest usage on L3+ (in kWh)')
+        verbose_name=_('Highest usage on L3+ (in Watt)')
     )
     highest_return_l1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Highest return on L1- (in kWh)')
+        verbose_name=_('Highest return on L1- (in Watt)')
     )
     highest_day_return_l1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Highest return on L1- (in kWh)')
+        verbose_name=_('Highest return on L1- (in Watt)')
     )
     highest_return_l2_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Highest return on L2- (in kWh)')
+        verbose_name=_('Highest return on L2- (in Watt)')
     )
     highest_return_l3_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Highest return on L3- (in kWh)')
+        verbose_name=_('Highest return on L3- (in Watt)')
     )
     lowest_usage_l1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Lowest usage on L1+ (in kWh)')
+        verbose_name=_('Lowest usage on L1+ (in Watt)')
     )
     lowest_usage_l2_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Lowest usage on L2+ (in kWh)')
+        verbose_name=_('Lowest usage on L2+ (in Watt)')
     )
     lowest_usage_l3_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
-        verbose_name=_('Lowest usage on L3+ (in kWh)')
+        verbose_name=_('Lowest usage on L3+ (in Watt)')
     )
 
 
