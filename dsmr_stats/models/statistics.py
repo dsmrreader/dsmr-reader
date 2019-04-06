@@ -136,6 +136,26 @@ class ElectricityStatistics(SingletonModel):
         null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest usage on L3+')
     )
 
+    """ Day usage/return """
+    highest_day_usage_1_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest day usage')
+    )
+    highest_day_return_1_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest day return')
+    )
+    highest_day_usage_2_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest day usage')
+    )
+    highest_day_return_2_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of highest day return')
+    )
+    lowest_day_usage_1_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest day usage')
+    )
+    lowest_day_usage_2_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest day usage')
+    )
+
     highest_usage_l1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
         verbose_name=_('Highest usage on L1+ (in kWh)')
@@ -149,6 +169,10 @@ class ElectricityStatistics(SingletonModel):
         verbose_name=_('Highest usage on L3+ (in kWh)')
     )
     highest_return_l1_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest return on L1- (in kWh)')
+    )
+    highest_day_return_l1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
         verbose_name=_('Highest return on L1- (in kWh)')
     )
@@ -172,6 +196,35 @@ class ElectricityStatistics(SingletonModel):
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
         verbose_name=_('Lowest usage on L3+ (in kWh)')
     )
+
+
+    """ Day usage """
+    highest_day_usage_1_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest day usage 1 (in Wh)')
+    )
+    highest_day_usage_2_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest day usage 2 (in Wh)')
+    )
+    highest_day_return_1_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest day return 1 (in Wh)')
+    )
+    highest_day_return_2_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Highest day return 2 (in Wh)')
+    )
+    lowest_day_usage_1_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Lowest day usage 1 (in Wh)')
+    )
+    lowest_day_usage_2_value = models.DecimalField(
+        max_digits=9, decimal_places=3, null=True, blank=True, default=None,
+        verbose_name=_('Lowest day usage 2 (in Wh)')
+    )
+
+
 
     def export(self):
         """ Converts the data in to ready to use format. """

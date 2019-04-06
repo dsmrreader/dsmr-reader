@@ -164,6 +164,76 @@
                 </header>
                 <div class="panel-body">
                 
+                    <table class="table table-condensed">
+                        {% if electricity_statistics.highest_day_usage_1_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest day usage 1" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_day_usage_1_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_day_usage_1_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.highest_day_usage_2_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest day usage 2" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_day_usage_2_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_day_usage_2_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.highest_day_return_1_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest day return 1" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-green">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_day_return_1_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_day_return_1_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.highest_day_return_2_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Highest day return 2" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-green">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.highest_day_return_2_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.highest_day_return_2_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        {% if electricity_statistics.lowest_day_usage_1_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Lowest day usage 1" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.lowest_day_usage_1_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.lowest_day_usage_1_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.lowest_day_usage_2_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Lowest day usage 2" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-red">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.lowest_day_usage_2_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.lowest_day_usage_2_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </table
+>
                 {% if electricity_statistics and datalogger_settings.track_phases %}
                     <table class="table table-condensed">
                         {% if electricity_statistics.highest_usage_l1_value %}

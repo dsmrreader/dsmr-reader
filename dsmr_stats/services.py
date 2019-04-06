@@ -108,6 +108,43 @@ def create_daily_statistics(day):
     """ Calculates and persists both electricity and gas statistics for a day. Daily. """
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
+    """ Updates the ElectricityStatistics records. """
+    MAPPING = {
+        # Stats record field: Reading field.
+        'highest_day_usage_1': 'electricity1',
+        'highest_day_usage_2': 'electricity2',
+        'highest_day_return_1': 'electricity1_returned',
+        'highest_day_return_2': 'electricity2_returned',
+
+        'lowest_day_usage_1': 'electricity1',
+        'lowest_day_usage_2': 'electricity2',
+    }
+    stats = ElectricityStatistics.get_solo()
+    dirty = False
+
+    for stat_field, reading_field in MAPPING.items():
+        reading_value = consumption[reading_field]   #getattr(consumption, reading_field) or 0
+        top_value = getattr(stats, '{}_value'.format(stat_field)) or 0
+
+        if top_value == 0 and stat_field.startswith('lowest'):
+            top_value = 9999999
+
+        reading_value = Decimal(str(reading_value))
+        top_value = Decimal(str(top_value))
+
+        if not reading_value:
+            continue
+
+        # Depending on what we track, compare to the current high (or low).
+        if (stat_field.startswith('lowest') and reading_value < top_value) or \
+                (stat_field.startswith('highest') and reading_value > top_value):
+            dirty = True
+            setattr(stats, '{}_value'.format(stat_field), reading_value)
+            setattr(stats, '{}_timestamp'.format(stat_field), day.strftime("%Y-%m-%d"))
+
+    if dirty:
+        stats.save()
+
     return DayStatistics.objects.create(
         day=day,
         total_cost=consumption['total_cost'],
