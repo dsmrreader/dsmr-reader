@@ -232,6 +232,28 @@
                             </td>
                         </tr>
                         {% endif %}
+                        {% if electricity_statistics.lowest_day_return_1_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Lowest day return 1" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-green">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.lowest_day_return_1_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.lowest_day_return_1_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if electricity_statistics.lowest_day_return_2_value %}
+                        <tr>
+                            <td class="col-md-6">{% trans "Lowest day return 2" %}</td>
+                            <td class="col-md-6">
+                                <span class="badge bg-green">
+                                   <i class="fas fa-bolt"></i> &nbsp; {{ electricity_statistics.lowest_day_return_2_value }} &nbsp; 
+                                   {% trans "Wh" %} &nbsp; - &nbsp; {{ electricity_statistics.lowest_day_return_2_timestamp }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
                     </table
 >
                 {% if electricity_statistics and datalogger_settings.track_phases %}

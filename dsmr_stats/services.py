@@ -118,6 +118,8 @@ def create_daily_statistics(day):
 
         'lowest_day_usage_1': 'electricity1',
         'lowest_day_usage_2': 'electricity2',
+        'lowest_day_return_1': 'electricity1_returned',
+        'lowest_day_return_2': 'electricity2_returned',
     }
     stats = ElectricityStatistics.get_solo()
     dirty = False
