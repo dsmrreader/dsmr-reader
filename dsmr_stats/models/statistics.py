@@ -203,7 +203,6 @@ class ElectricityStatistics(SingletonModel):
         verbose_name=_('Lowest usage on L3+ (in Watt)')
     )
 
-
     """ Day usage """
     highest_day_usage_1_value = models.DecimalField(
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
@@ -237,8 +236,6 @@ class ElectricityStatistics(SingletonModel):
         max_digits=9, decimal_places=3, null=True, blank=True, default=None,
         verbose_name=_('Lowest day return 2 (in Wh)')
     )
-
-
 
     def export(self):
         """ Converts the data in to ready to use format. """
