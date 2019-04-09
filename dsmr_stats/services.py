@@ -111,13 +111,17 @@ def create_daily_statistics(day):
     """ Updates the ElectricityStatistics records. """
     MAPPING = {
         # Stats record field: Reading field.
+        'highest_day_usage': ['electricity1', 'electricity2'],
         'highest_day_usage_1': 'electricity1',
         'highest_day_usage_2': 'electricity2',
+        'highest_day_return': ['electricity1_returned', 'electricity2_returned'],
         'highest_day_return_1': 'electricity1_returned',
         'highest_day_return_2': 'electricity2_returned',
 
+        'lowest_day_usage': ['electricity1', 'electricity2'],
         'lowest_day_usage_1': 'electricity1',
         'lowest_day_usage_2': 'electricity2',
+        'lowest_day_return': ['electricity1_returned', 'electricity2_returned'],
         'lowest_day_return_1': 'electricity1_returned',
         'lowest_day_return_2': 'electricity2_returned',
     }
@@ -125,7 +129,11 @@ def create_daily_statistics(day):
     dirty = False
 
     for stat_field, reading_field in MAPPING.items():
-        reading_value = consumption[reading_field]   #getattr(consumption, reading_field) or 0
+        if isinstance(reading_field, list):
+            reading_value = consumption[reading_field[0]] + consumption[reading_field[1]]
+        else:
+            reading_value = consumption[reading_field]   #getattr(consumption, reading_field) or 0
+
         top_value = getattr(stats, '{}_value'.format(stat_field)) or 0
 
         if top_value == 0 and stat_field.startswith('lowest'):
