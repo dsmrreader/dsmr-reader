@@ -215,6 +215,7 @@ def clear_statistics():
     """ Clears ALL statistics ever generated. """
     DayStatistics.objects.all().delete()
     HourStatistics.objects.all().delete()
+    ElectricityStatistics.objects.all().delete()
 
 
 def electricity_tariff_percentage(start_date):
