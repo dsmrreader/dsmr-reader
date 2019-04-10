@@ -155,11 +155,17 @@ class ElectricityStatistics(SingletonModel):
     highest_day_return_2_timestamp = models.DateTimeField(
         null=True, blank=True, default=None, verbose_name=_('Timestamp of highest day return 2')
     )
+    lowest_day_usage_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest day usage')
+    )
     lowest_day_usage_1_timestamp = models.DateTimeField(
         null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest day usage 1')
     )
     lowest_day_usage_2_timestamp = models.DateTimeField(
         null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest day usage 2')
+    )
+    lowest_day_return_timestamp = models.DateTimeField(
+        null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest day return')
     )
     lowest_day_return_1_timestamp = models.DateTimeField(
         null=True, blank=True, default=None, verbose_name=_('Timestamp of lowest day return 1')
