@@ -47,6 +47,7 @@ Listed in any order, sorted by name.
 - `mbnn <https://github.com/mbnn>`_
 - `meijjaa <https://github.com/meijjaa>`_
 - `michielvisser <https://github.com/michielvisser>`_
+- `mjanssens <https://github.com/mjanssens>`_
 - `mkruiver <https://github.com/mkruiver>`_
 - `mrvanes <https://github.com/mrvanes>`_ 
 - `Oliver Payne <https://github.com/olipayne>`_ 
@@ -64,6 +65,7 @@ Listed in any order, sorted by name.
 - `ThinkPadNL <https://github.com/ThinkPadNL>`_
 - `thommy101 <https://github.com/thommy101>`_
 - Tijs van Noije
+- `Timdebruijn <https://github.com/Timdebruijn>`_
 - `TopdRob <https://github.com/TopdRob>`_
 - `tpjanssen <https://github.com/tpjanssen>`_
 - `trbs <https://github.com/trbs>`_

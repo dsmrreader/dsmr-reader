@@ -23,6 +23,9 @@ class TestRegression(TestCase):
 
     def test_no_reverse_match_docs(self):
         """ Test whether the docs URL in old notfications are converted to their new location. """
+        if connection.vendor == 'sqlite':  # pragma: no cover
+            return self.skipTest(reason='SQLite cannot be used while foreign key constraint checks are enabled')
+
         Notification.objects.create(
             message='Fake',
             redirect_to='frontend:docs',  # Non-existing legacy.
