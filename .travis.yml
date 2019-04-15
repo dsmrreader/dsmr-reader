@@ -1,9 +1,12 @@
+dist: xenial   # required for Python >= 3.7
+
 language: python
 
 # https://docs.travis-ci.com/user/languages/python/
 python:
   - 3.5
   - 3.6
+  - 3.7
   - 3.5-dev
   - 3.6-dev
   - 3.7-dev
@@ -12,6 +15,7 @@ matrix:
   allow_failures:
     - python: 3.5-dev
     - python: 3.6-dev
+    - python: 3.7-dev
     - python: nightly
 
 services:
