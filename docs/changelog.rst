@@ -18,14 +18,23 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 
 
-v1.29.0 - 2019-04-16
+v2.0.0 - 2019-04-16
 ^^^^^^^^^^^^^^^^^^^^
+
+.. warning:: **Change in Python support** 
+
+  - The support for ``Python 3.4`` has been **dropped** due to the Django upgrade (`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`.
+
 
 **Tickets resolved in this release:**
 
+
+- [`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] Drop support for Python 3.4
+- [`#510 <https://github.com/dennissiemensma/dsmr-reader/issues/510>`_] Django 2.1 released
 - [`#616 <https://github.com/dennissiemensma/dsmr-reader/issues/616>`_] Requirements update (April 2019)
 - [`#596 <https://github.com/dennissiemensma/dsmr-reader/issues/596>`_] Update django to 2.0.13 - by Timdebruijn
 - [`#580 <https://github.com/dennissiemensma/dsmr-reader/issues/580>`_] Django security releases issued: 2.0.10 - by mjanssens
+
 
 ----
 

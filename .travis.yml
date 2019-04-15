@@ -23,7 +23,8 @@ addons:
   postgresql: "9.4"
 
 env:
-  - DB=sqlite DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.sqlite'
+### Disabled until Travis upgrades SQLite.
+###  - DB=sqlite DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.sqlite'
   - DB=mysql DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.mysql'
   - DB=postgresql DJANGO_SETTINGS_MODULE='dsmrreader.config.travis.postgresql'
 
