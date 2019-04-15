@@ -2,7 +2,6 @@ language: python
 
 # https://docs.travis-ci.com/user/languages/python/
 python:
-  - 3.4
   - 3.5
   - 3.6
   - 3.5-dev
