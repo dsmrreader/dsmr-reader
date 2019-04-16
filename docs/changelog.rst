@@ -23,7 +23,7 @@ v2.0.0 - 2019-04-16
 
 .. warning:: **Change in Python support** 
 
-  - The support for ``Python 3.4`` has been **dropped** due to the Django upgrade (`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`.
+  - The support for ``Python 3.4`` has been **dropped** due to the Django upgrade (`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_).
 
 
 **Tickets resolved in this release:**
