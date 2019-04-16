@@ -302,7 +302,7 @@ def live_electricity_consumption(use_naturaltime=True):
     data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
 
     if use_naturaltime:
-        data['timestamp'] = naturaltime(data['timestamp'])
+        data['timestamp'] = str(naturaltime(data['timestamp']))
 
     try:
         # This WILL fail when we either have no prices at all or conflicting ranges.
@@ -327,7 +327,6 @@ def live_electricity_consumption(use_naturaltime=True):
         data['cost_per_hour'] = formats.number_format(
             round_decimal(cost_per_hour)
         )
-
     return data
 
 

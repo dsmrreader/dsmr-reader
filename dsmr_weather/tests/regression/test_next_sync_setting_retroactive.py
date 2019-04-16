@@ -21,6 +21,9 @@ class TestRegression(TestCase):
 
     def test_next_sync_setting_retroactive(self):
         """ Test whether the migration can also handle existing data. """
+        if connection.vendor == 'sqlite':  # pragma: no cover
+            return self.skipTest(reason='SQLite cannot be used while foreign key constraint checks are enabled')
+
         now = timezone.now().replace(microsecond=0)
 
         TemperatureReading.objects.create(

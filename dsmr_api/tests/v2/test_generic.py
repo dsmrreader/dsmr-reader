@@ -34,6 +34,9 @@ class APIv2TestCase(APIv2TestCase):
 
     def test_user_does_not_exist(self):
         """ Tests what happens when the API user was not created. """
+        if connection.vendor == 'sqlite':  # pragma: no cover
+            return self.skipTest(reason='SQLite cannot be used while foreign key constraint checks are enabled')
+
         # Roll back migration creating the API user.
         MigrationExecutor(connection=connection).migrate([(self.app, '0002_generate_random_auth_key')])
 

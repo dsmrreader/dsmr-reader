@@ -5,7 +5,6 @@ from django.test import TestCase, Client
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.db.models import F
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -90,7 +89,7 @@ class TestViews(TestCase):
 
     def test_dashboard_xhr_header_future(self):
         # Set timestamp to the future, so the view will reset the timestamp displayed to 'now'.
-        DsmrReading.objects.all().update(timestamp=F('timestamp') + timezone.timedelta(weeks=999))
+        DsmrReading.objects.all().update(timestamp=timezone.now() + timezone.timedelta(weeks=1))
 
         response = self.client.get(
             reverse('{}:dashboard-xhr-header'.format(self.namespace))
