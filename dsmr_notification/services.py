@@ -87,7 +87,7 @@ def send_notification(message, title):
             }
         },
         NotificationSetting.NOTIFICATION_TELEGRAM: {
-            'url': NotificationSetting.TELEGRAM_API_URL + notification_settings.telegram_api_key + '/sendMessage',
+            'url': '{}{}/sendMessage'.format(NotificationSetting.TELEGRAM_API_URL, notification_settings.telegram_api_key),
             'data': {
                 'chat_id': notification_settings.telegram_chat_id,
                 'disable_notification': 'true',
