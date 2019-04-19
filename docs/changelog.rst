@@ -15,13 +15,13 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.1.0 - 2019-**-**
+v2.0.2 - 2019-04-19
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
 
-- [`#xxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxx>`_] yyyyyyyyyyyyyyy
+- [`#620 <https://github.com/dennissiemensma/dsmr-reader/issues/620>`_] CVE-2019-11324 (urllib3)
 
 
 ----
