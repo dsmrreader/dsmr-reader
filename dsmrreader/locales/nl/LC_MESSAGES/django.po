@@ -13,7 +13,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid "API"
@@ -465,6 +465,12 @@ msgstr "Welkom bij DSMR-reader! Controleer eerst de instellingen in de Configura
 
 msgid "The graphs on the Dashboard have been replaced this release and are now scrollable. The graphs on the Trends page have been updated as well."
 msgstr "De grafieken op het Dashboard zijn vervangen en vanaf deze release scrollbaar. De grafieken op de Trends-pagina zijn eveneens bijgewerkt."
+
+msgid "DSMR-reader v2.0.0 adds security fixes and also marks the end of support for Python 3.4"
+msgstr "DSMR-reader v2.0.0 brengt enkele veiligheidspatches en markeert tevens het einde van de ondersteuning voor Python 3.4"
+
+msgid "DSMR-reader v2.0.1 adds two missing API calls in the documentation (/api/v2/consumption/)"
+msgstr "DSMR-reader v2.0.1 voegt twee ontbrekende API-calls toe aan de documentatie (/api/v2/consumption/)"
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
