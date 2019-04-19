@@ -21,16 +21,17 @@ def migrate_forward(apps, schema_editor):
         redirect_to='frontend:changelog-redirect'
     )
 
+
 def migrate_backward(apps, schema_editor):
     pass
 
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('dsmr_frontend', '0015_notification_meta'),
-    ]
-
     operations = [
         migrations.RunPython(migrate_forward, migrate_backward),
+    ]
+
+    dependencies = [
+        ('dsmr_frontend', '0015_notification_meta'),
     ]
