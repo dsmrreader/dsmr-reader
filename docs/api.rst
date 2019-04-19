@@ -610,6 +610,114 @@ Using **requests** (Python)::
 
     Please note that all timestamps **returned** are in **UTC (CET -1 / CEST -2)**. This is indicated as well by the timestamps ending with a 'Z' (Zulu timezone).
 
+
+----
+    
+    
+``GET`` - ``consumption/electricity``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Retrieves any data regarding **electricity consumption**. This is based on the readings processed.
+
+
+URI
+~~~
+Full path: ``/api/v2/consumption/electricity``
+
+
+Parameters
+~~~~~~~~~~
+All parameters are optional.
+
+- ``read_at__gte`` (*datetime*) - Limits the result to any records having a timestamp **higher or equal** to this parameter.
+- ``read_at__lte`` (*datetime*) - Limits the result to any records having a timestamp **lower or equal** to this parameter.
+- ``ordering`` (*string*) - Use ``-read_at`` to sort **descending**. Omit or use ``read_at`` to sort **ascending** (default).
+- ``offset`` (*integer*) - When iterating large resultsets, the offset determines the starting point.
+- ``limit`` (*integer*) - Limits the resultset size returned. Omit for maintaining the default limit (**25**).
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+**Data structure returned**::
+
+    {
+        "count": 96940,
+        "next": "http://YOUR-DSMR-URL/api/v2/consumption/electricity?offset=2",
+        "previous": null,
+	    "results": [
+	        {
+	            "id": 1728715,
+	            "read_at": "2019-04-19T10:58:00+02:00",
+	            "delivered_1": "3332.442",
+	            "returned_1": "0.000",
+	            "delivered_2": "3441.996",
+	            "returned_2": "0.000",
+	            "currently_delivered": "0.147",
+	            "currently_returned": "0.000",
+	            "phase_currently_delivered_l1": "0.013",
+	            "phase_currently_delivered_l2": "0.133",
+	            "phase_currently_delivered_l3": "0.000",
+	            "phase_currently_returned_l1": "0.000",
+	            "phase_currently_returned_l2": "0.000",
+	            "phase_currently_returned_l3": "0.000"
+	        },
+            ... <MORE RESULTS> ...
+	    ]
+    }
+
+
+----
+    
+    
+``GET`` - ``consumption/gas``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Retrieves any data regarding **gas consumption**. This is based on the readings processed.
+
+
+URI
+~~~
+Full path: ``/api/v2/consumption/gas``
+
+
+Parameters
+~~~~~~~~~~
+All parameters are optional.
+
+- ``read_at__gte`` (*datetime*) - Limits the result to any records having a timestamp **higher or equal** to this parameter.
+- ``read_at__lte`` (*datetime*) - Limits the result to any records having a timestamp **lower or equal** to this parameter.
+- ``ordering`` (*string*) - Use ``-read_at`` to sort **descending**. Omit or use ``read_at`` to sort **ascending** (default).
+- ``offset`` (*integer*) - When iterating large resultsets, the offset determines the starting point.
+- ``limit`` (*integer*) - Limits the resultset size returned. Omit for maintaining the default limit (**25**).
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+**Data structure returned**::
+
+    {
+        "count": 28794,
+        "next": "http://YOUR-DSMR-URL/api/v2/consumption/gas?offset=2",
+        "previous": null,
+	    "results": [
+	        {
+	            "id": 28858,
+	            "read_at": "2019-04-19T09:00:00+02:00",
+	            "delivered": "2850.598",
+	            "currently_delivered": "0.060"
+	        },
+            ... <MORE RESULTS> ...
+	    ]
+    }
+
     
 ----
     

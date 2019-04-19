@@ -1,8 +1,6 @@
 Changelog
 =========
 
-
-
 Upgrading
 ^^^^^^^^^
 
@@ -17,9 +15,21 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.0.1 - 2019-04-19
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+
+- [`#619 <https://github.com/dennissiemensma/dsmr-reader/issues/619>`_] Add missing API calls in documentation
+
+
+----
+
+
 
 v2.0.0 - 2019-04-16
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 .. warning:: **Change in Python support** 
 
