@@ -17,7 +17,8 @@ def migrate_forward(apps, schema_editor):
     Notification.objects.create(
         message=dsmr_frontend.services.get_translated_string(text=ugettext_lazy(
             "DSMR-reader v2.0.1 adds two missing API calls in the documentation (/api/v2/consumption/)"
-        ))
+        )),
+        redirect_to='frontend:changelog-redirect'
     )
 
 def migrate_backward(apps, schema_editor):
