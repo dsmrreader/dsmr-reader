@@ -15,6 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -471,6 +473,9 @@ msgstr "DSMR-reader v2.0.0 brengt enkele veiligheidspatches en markeert tevens h
 
 msgid "DSMR-reader v2.0.1 adds two missing API calls in the documentation (/api/v2/consumption/)"
 msgstr "DSMR-reader v2.0.1 voegt twee ontbrekende API-calls toe aan de documentatie (/api/v2/consumption/)"
+
+msgid "DSMR-reader v2.0.2 addresses an security issue in an external library (urllib3)"
+msgstr "DSMR-reader v2.0.2 verhelpt een beveiligingslek in gebruikte software van derden (urllib3)"
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
