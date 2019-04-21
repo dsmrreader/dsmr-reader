@@ -86,6 +86,16 @@ def send_notification(message, title):
                 'description': message
             }
         },
+        NotificationSetting.NOTIFICATION_TELEGRAM: {
+            'url': '{}{}/sendMessage'.format(
+                NotificationSetting.TELEGRAM_API_URL, notification_settings.telegram_api_key
+            ),
+            'data': {
+                'chat_id': notification_settings.telegram_chat_id,
+                'disable_notification': 'true',
+                'text': message
+            }
+        },
     }
 
     response = requests.post(
@@ -103,7 +113,9 @@ def send_notification(message, title):
             pushover_api_key=None,
             pushover_user_key=None,
             prowl_api_key=None,
-            next_notification=None
+            next_notification=None,
+            telegram_api_key=None,
+            telegram_chat_id=None
         )
         Notification.objects.create(
             message='Notification API error, settings are reset. Error: {}'.format(response.text),
@@ -131,7 +143,7 @@ def set_next_notification():
     # Now we recalculate our new timezone. This only changes twice a year due to DST.
     next_notification = timezone.localtime(next_notification)
 
-    # And we have te replace the hour, again. Prevents sending notifications an hour early or late on the next day.
+    # And we have to replace the hour, again. Prevents sending notifications an hour early or late on the next day.
     next_notification = next_notification.replace(hour=DAILY_NOTIFICATION_HOUR, minute=0, second=0, microsecond=0)
 
     NotificationSetting.objects.update(next_notification=next_notification)

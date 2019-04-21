@@ -15,6 +15,17 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.1.0 - 2019-04-xx
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#574 <https://github.com/dennissiemensma/dsmr-reader/issues/574>`_] Add Telegram notification support - by thommy101
+
+
+----
+
+
 v2.0.2 - 2019-04-19
 ^^^^^^^^^^^^^^^^^^^
 

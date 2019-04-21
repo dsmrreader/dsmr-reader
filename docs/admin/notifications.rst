@@ -58,3 +58,11 @@ When a new key is generated, you will see it immediatly. Your key is listed like
 .. image:: ../static/faq/notifications-prowl-get-key.png
     :target: ../static/faq/notifications-prowl-get-key.png
     :alt: Prowl Get Your API Key
+
+
+How do I obtain my API key for Telegram?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Please note that you can only use these notifications if you have your own (chat)bot with Telegram.
+
+More information about bots `can be found here <https://core.telegram.org/bots>`_.

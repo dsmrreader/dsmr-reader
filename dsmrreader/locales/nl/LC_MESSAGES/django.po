@@ -15,8 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -1497,11 +1495,17 @@ msgstr "Alleen van toepassing voor Pushover"
 msgid "Only applies when using Prowl"
 msgstr "Alleen van toepassing voor Prowl"
 
+msgid "Only applies when using your own Telegram bot"
+msgstr "Alleen van toepassing wanneer je je eigen Telegram-bot gebruikt"
+
 msgid "System checks for sending status notifications when the datalogger is lagging behind."
 msgstr "Systeemcontroles voor het versturen van notificaties wanneer de datalogger achterloopt."
 
 msgid "Notification apps"
 msgstr "Notificatie Apps"
+
+msgid "Sends a test notification to your device (if any)."
+msgstr "Stuurt een test notificatie naar je toestel (mits ingesteld)."
 
 msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
 msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
@@ -1514,6 +1518,9 @@ msgstr "Pushover"
 
 msgid "Prowl"
 msgstr "Prowl"
+
+msgid "Telegram"
+msgstr "Telegram"
 
 msgid "Notification service"
 msgstr "Notificatieservice"
@@ -1529,6 +1536,12 @@ msgstr "De API key van je Pushover Applicatie"
 
 msgid "Your User Key displayed in your Pushover dashboard"
 msgstr "De \"User Key\" zoals terug te vinden in je Pushover dashboard"
+
+msgid "Your Telegram bot token. The token looks something like 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+msgstr "Je telegram bot-token. Het token ziet er uit als: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+
+msgid "Unique identifier for the target chat (ID) or handle of the target channel (in the format @channelhandle)"
+msgstr "Unieke identifier van de doelchat of de handle van de doelchat (in het formaat @chathandle)"
 
 msgid "Next notification"
 msgstr "Volgende notificatie"
