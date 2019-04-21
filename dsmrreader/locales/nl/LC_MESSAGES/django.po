@@ -475,6 +475,9 @@ msgstr "DSMR-reader v2.0.1 voegt twee ontbrekende API-calls toe aan de documenta
 msgid "DSMR-reader v2.0.2 addresses an security issue in an external library (urllib3)"
 msgstr "DSMR-reader v2.0.2 verhelpt een beveiligingslek in gebruikte software van derden (urllib3)"
 
+msgid "DSMR-reader v2.1.0 adds support for Telegram-app notifications (bot only). Also, an API call was added to easily retrieve the latest gas consumption."
+msgstr "DSMR-reader v2.1.0 voegt ondersteuning toe voor Telegram-app notificaties (alleen voor bots). Daarnaast is er een API-call toegevoegd om het laatste gasverbruik op te halen."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
