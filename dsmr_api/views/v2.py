@@ -71,6 +71,12 @@ class ElectricityLiveView(APIView):
         return Response(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=False))
 
 
+class GasLiveView(APIView):
+    """ Returns the current gas usage. """
+    def get(self, request):
+        return Response(dsmr_consumption.services.live_gas_consumption())
+
+
 class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     """ Lists electricity consumption. """
     FIELD = 'read_at'

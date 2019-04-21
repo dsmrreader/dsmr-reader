@@ -51,8 +51,8 @@ msgstr ""
 "in het configuratiescherm of beheerderpaneel."
 
 #: ../../api.rst:18 ../../api.rst:79 ../../api.rst:335 ../../api.rst:644
-#: ../../api.rst:703 ../../api.rst:746 ../../api.rst:788 ../../api.rst:832
-#: ../../api.rst:892 ../../api.rst:934 ../../api.rst:964
+#: ../../api.rst:703 ../../api.rst:746 ../../api.rst:788 ../../api.rst:827
+#: ../../api.rst:870 ../../api.rst:930 ../../api.rst:972 ../../api.rst:1002
 msgid "Example"
 msgstr "Voorbeeld"
 
@@ -117,8 +117,8 @@ msgstr ""
 "``HTTP 200``, wanneer succesvol."
 
 #: ../../api.rst:63 ../../api.rst:301 ../../api.rst:412 ../../api.rst:623
-#: ../../api.rst:682 ../../api.rst:731 ../../api.rst:773 ../../api.rst:811
-#: ../../api.rst:871 ../../api.rst:924 ../../api.rst:954
+#: ../../api.rst:682 ../../api.rst:731 ../../api.rst:773 ../../api.rst:812
+#: ../../api.rst:849 ../../api.rst:909 ../../api.rst:962 ../../api.rst:992
 msgid "URI"
 msgstr "URI"
 
@@ -127,8 +127,8 @@ msgid "Full path: ``/api/v1/datalogger/dsmrreading``"
 msgstr "Volledig pad: ``/api/v1/datalogger/dsmrreading``"
 
 #: ../../api.rst:68 ../../api.rst:306 ../../api.rst:417 ../../api.rst:628
-#: ../../api.rst:687 ../../api.rst:736 ../../api.rst:778 ../../api.rst:816
-#: ../../api.rst:876
+#: ../../api.rst:687 ../../api.rst:736 ../../api.rst:778 ../../api.rst:817
+#: ../../api.rst:854 ../../api.rst:914
 msgid "Parameters"
 msgstr "Parameters"
 
@@ -141,8 +141,8 @@ msgstr ""
 "regeleindes ``\\n`` en 'carriage returns' ``\\r``!"
 
 #: ../../api.rst:74 ../../api.rst:330 ../../api.rst:428 ../../api.rst:639
-#: ../../api.rst:698 ../../api.rst:741 ../../api.rst:783 ../../api.rst:827
-#: ../../api.rst:887 ../../api.rst:929 ../../api.rst:959
+#: ../../api.rst:698 ../../api.rst:741 ../../api.rst:783 ../../api.rst:822
+#: ../../api.rst:865 ../../api.rst:925 ../../api.rst:967 ../../api.rst:997
 msgid "Response"
 msgstr "Respons (van de server)"
 
@@ -428,8 +428,8 @@ msgstr ""
 "Haalt opgeslagen metingen op. De metingen komen ofwel voort uit telegrammen of "
 "zijn handmatig aangemaakt via deze API."
 
-#: ../../api.rst:418 ../../api.rst:629 ../../api.rst:688 ../../api.rst:817
-#: ../../api.rst:877
+#: ../../api.rst:418 ../../api.rst:629 ../../api.rst:688 ../../api.rst:855
+#: ../../api.rst:915
 msgid "All parameters are optional."
 msgstr "Alle parameters zijn optioneel."
 
@@ -458,8 +458,8 @@ msgstr ""
 "Laat de parameter weg of gebruik ``timestamp`` om **oplopend** te sorteren "
 "(standaard)."
 
-#: ../../api.rst:423 ../../api.rst:634 ../../api.rst:693 ../../api.rst:822
-#: ../../api.rst:882
+#: ../../api.rst:423 ../../api.rst:634 ../../api.rst:693 ../../api.rst:860
+#: ../../api.rst:920
 msgid ""
 "``offset`` (*integer*) - When iterating large resultsets, the offset "
 "determines the starting point."
@@ -467,8 +467,8 @@ msgstr ""
 "``offset`` (*integer*) - Bij het doorlopen van vele resultaten kun je hiermee "
 "het startpunt bepalen."
 
-#: ../../api.rst:424 ../../api.rst:635 ../../api.rst:694 ../../api.rst:823
-#: ../../api.rst:883
+#: ../../api.rst:424 ../../api.rst:635 ../../api.rst:694 ../../api.rst:861
+#: ../../api.rst:921
 msgid ""
 "``limit`` (*integer*) - Limits the resultset size returned. Omit for "
 "maintaining the default limit (**25**)."
@@ -477,8 +477,8 @@ msgstr ""
 "Laat deze parameter weg voor de standaardwaarde (**25**)."
 
 #: ../../api.rst:429 ../../api.rst:640 ../../api.rst:699 ../../api.rst:742
-#: ../../api.rst:784 ../../api.rst:828 ../../api.rst:888 ../../api.rst:930
-#: ../../api.rst:960
+#: ../../api.rst:784 ../../api.rst:823 ../../api.rst:866 ../../api.rst:926
+#: ../../api.rst:968 ../../api.rst:998
 msgid ""
 "``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other "
 "status code on failure."
@@ -576,7 +576,8 @@ msgstr ""
 "(standaard)."
 
 #: ../../api.rst:645 ../../api.rst:704 ../../api.rst:748 ../../api.rst:792
-#: ../../api.rst:835 ../../api.rst:895 ../../api.rst:936 ../../api.rst:966
+#: ../../api.rst:831 ../../api.rst:873 ../../api.rst:933 ../../api.rst:974
+#: ../../api.rst:1004
 msgid "**Data structure returned**::"
 msgstr "**Datastructuur**::"
 
@@ -608,7 +609,7 @@ msgstr "Geeft het verbruik (tot nu toe) van de huidige dag terug."
 msgid "Full path: ``/api/v2/consumption/today``"
 msgstr "Volledig pad: ``/api/v2/consumption/today``"
 
-#: ../../api.rst:737 ../../api.rst:779
+#: ../../api.rst:737 ../../api.rst:779 ../../api.rst:818
 msgid "None."
 msgstr "Geen."
 
@@ -635,11 +636,31 @@ msgstr ""
 "**N.B.**: ``cost_per_hour`` is alleen beschikbaar wanneer je energieprijzen "
 "hebt ingesteld."
 
-#: ../../api.rst:806
+#: ../../api.rst:807
+msgid "``GET`` - ``consumption/gas-live``"
+msgstr "``GET`` - ``consumption/gas-live``"
+
+#: ../../api.rst:808
+msgid "Returns the latest gas consumption."
+msgstr "Geeft het meest recente gasverbruik weer."
+
+#: ../../api.rst:813
+msgid "Full path: ``/api/v2/consumption/gas-live``"
+msgstr "Volledig pad: ``/api/v2/consumption/gas-live``"
+
+#: ../../api.rst:829
+msgid ""
+"**Note**: ``cost_per_interval`` is only available when you've set energy "
+"prices."
+msgstr ""
+"**N.B.**: ``cost_per_interval`` is alleen beschikbaar wanneer je "
+"energieprijzen hebt ingesteld."
+
+#: ../../api.rst:844
 msgid "``GET`` - ``statistics/day``"
 msgstr "``GET`` - ``statistics/day``"
 
-#: ../../api.rst:807
+#: ../../api.rst:845
 msgid ""
 "Retrieves any **aggregated day statistics**. Please note that these are "
 "generated a few hours **after midnight**."
@@ -647,11 +668,11 @@ msgstr ""
 "Haalt **geaggregeerde dagstatistieken** op. Deze worden elke dag een paar uur "
 "**ná middernacht** gegenereerd."
 
-#: ../../api.rst:812
+#: ../../api.rst:850
 msgid "Full path: ``/api/v2/statistics/day``"
 msgstr "Volledig pad: ``/api/v2/statistics/day``"
 
-#: ../../api.rst:819
+#: ../../api.rst:857
 msgid ""
 "``day__gte`` (*date*) - Limits the result to any statistics having their date "
 "**higher or equal** to this parameter."
@@ -659,7 +680,7 @@ msgstr ""
 "``day__gte`` (*date*) - Beperkt het resultaat tot alle datums die **hoger of "
 "gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:820
+#: ../../api.rst:858
 msgid ""
 "``day__lte`` (*date*) - Limits the result to any statistics having their date "
 "**lower or equal** to this parameter."
@@ -667,7 +688,7 @@ msgstr ""
 "``day__lte`` (*date*) - Beperkt het resultaat tot alle datums die **lager of "
 "gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:821
+#: ../../api.rst:859
 msgid ""
 "``ordering`` (*string*) - Use ``-day`` to sort **descending**. Omit or use "
 "``day`` to sort **ascending** (default)."
@@ -675,7 +696,7 @@ msgstr ""
 "``ordering`` (*string*) - Gebruik ``-day`` om **aflopend** te sorteren. Laat "
 "de parameter weg of gebruik ``day`` om **oplopend** te sorteren (standaard)."
 
-#: ../../api.rst:833 ../../api.rst:893
+#: ../../api.rst:871 ../../api.rst:931
 msgid ""
 "All the :ref:`generic DSMRREADING examples <generic-examples-anchor>` apply "
 "here as well, since only the ``timestamp`` field differs."
@@ -683,11 +704,11 @@ msgstr ""
 "Alle :ref:`generieke DSMRREADING voorbeelden <generic-examples-anchor>` zijn "
 "hier tevens van toepassing, gezien alleen het ``timestamp`` field afwijkt."
 
-#: ../../api.rst:866
+#: ../../api.rst:904
 msgid "``GET`` - ``statistics/hour``"
 msgstr "``GET`` - ``statistics/hour``"
 
-#: ../../api.rst:867
+#: ../../api.rst:905
 msgid ""
 "Retrieves any **aggregated hourly statistics**. Please note that these are "
 "generated a few hours **after midnight**."
@@ -695,11 +716,11 @@ msgstr ""
 "Haalt **geaggregeerde uurstatistieken** op. Deze worden elke dag een paar uur "
 "**ná middernacht** gegenereerd."
 
-#: ../../api.rst:872
+#: ../../api.rst:910
 msgid "Full path: ``/api/v2/statistics/hour``"
 msgstr "Volledig pad: ``/api/v2/statistics/hour``"
 
-#: ../../api.rst:879
+#: ../../api.rst:917
 msgid ""
 "``hour_start__gte`` (*datetime*) - Limits the result to any statistics having "
 "their datetime (hour start) **higher or equal** to this parameter."
@@ -707,7 +728,7 @@ msgstr ""
 "``hour_start__gte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **hoger of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:880
+#: ../../api.rst:918
 msgid ""
 "``hour_start__lte`` (*datetime*) - Limits the result to any statistics having "
 "their datetime (hour start) **lower or equal** to this parameter."
@@ -715,7 +736,7 @@ msgstr ""
 "``hour_start__lte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **lager of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:881
+#: ../../api.rst:919
 msgid ""
 "``ordering`` (*string*) - Use ``-hour_start`` to sort **descending**. Omit or "
 "use ``hour_start`` to sort **ascending** (default)."
@@ -724,23 +745,23 @@ msgstr ""
 "Laat de parameter weg of gebruik ``hour_start`` om **oplopend** te sorteren "
 "(standaard)."
 
-#: ../../api.rst:919
+#: ../../api.rst:957
 msgid "``GET`` - ``application/version``"
 msgstr "``GET`` - ``application/version``"
 
-#: ../../api.rst:920
+#: ../../api.rst:958
 msgid "Returns the version of DSMR-reader you are running."
 msgstr "Geeft terug welke versie van DSMR-reader je momenteel draait."
 
-#: ../../api.rst:925
+#: ../../api.rst:963
 msgid "Full path: ``/api/v2/application/version``"
 msgstr "Volledig pad: ``/api/v2/application/version``"
 
-#: ../../api.rst:949
+#: ../../api.rst:987
 msgid "``GET`` - ``application/status``"
 msgstr "``GET`` - ``application/status``"
 
-#: ../../api.rst:950
+#: ../../api.rst:988
 msgid ""
 "Returns the status of DSMR-reader, containing the same data as displayed on "
 "the Status page."
@@ -748,6 +769,6 @@ msgstr ""
 "Geeft de status van DSMR-reader terug, vergelijkbaar aan de gegevens die "
 "getoond worden op de Status-pagina."
 
-#: ../../api.rst:955
+#: ../../api.rst:993
 msgid "Full path: ``/api/v2/application/status``"
 msgstr "Volledig pad: ``/api/v2/application/status``"

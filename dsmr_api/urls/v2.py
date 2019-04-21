@@ -18,6 +18,7 @@ consumption_url_patterns = [
     path('gas', views.GasConsumptionViewSet.as_view({'get': 'list'}), name='gas-consumption'),
     path('today', views.TodayConsumptionView.as_view(), name='today-consumption'),
     path('electricity-live', views.ElectricityLiveView.as_view(), name='electricity-live'),
+    path('gas-live', views.GasLiveView.as_view(), name='gas-live'),
 ]
 
 statistics_url_patterns = [

@@ -282,7 +282,7 @@ def day_consumption(day):
 
 
 def live_electricity_consumption(use_naturaltime=True):
-    """ Returns the current latest/live consumption. """
+    """ Returns the current latest/live electricity consumption. """
     data = {}
 
     try:
@@ -291,7 +291,7 @@ def live_electricity_consumption(use_naturaltime=True):
         # Don't even bother when no data available.
         return data
 
-    latest_timestamp = latest_reading.timestamp
+    latest_timestamp = timezone.localtime(latest_reading.timestamp)
 
     # In case the smart meter is running a clock in the future.
     if latest_timestamp > timezone.now():
@@ -327,6 +327,34 @@ def live_electricity_consumption(use_naturaltime=True):
         data['cost_per_hour'] = formats.number_format(
             round_decimal(cost_per_hour)
         )
+
+    return data
+
+
+def live_gas_consumption():
+    """ Returns the current latest/live gas consumption. """
+    data = {}
+
+    try:
+        latest_data = GasConsumption.objects.all().order_by('-read_at')[0]
+    except IndexError:
+        # Don't even bother when no data available.
+        return data
+
+    data['timestamp'] = timezone.localtime(latest_data.read_at)
+    data['currently_delivered'] = latest_data.currently_delivered
+
+    try:
+        # This WILL fail when we either have no prices at all or conflicting ranges.
+        prices = EnergySupplierPrice.objects.by_date(target_date=timezone.now().date())
+    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
+        return data
+
+    # Note that we use generic 'interval' here, as it may differ, depending on the smart meter's protocol version.
+    data['cost_per_interval'] = formats.number_format(
+        round_decimal(latest_data.currently_delivered * prices.gas_price)
+    )
+
     return data
 
 
