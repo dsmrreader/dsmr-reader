@@ -20,6 +20,7 @@ v2.1.0 - 2019-04-xx
 
 **Tickets resolved in this release:**
 
+- [`#518 <https://github.com/dennissiemensma/dsmr-reader/issues/518>`_] Aflezen telegram
 - [`#574 <https://github.com/dennissiemensma/dsmr-reader/issues/574>`_] Add Telegram notification support - by thommy101
 - [`#562 <https://github.com/dennissiemensma/dsmr-reader/issues/562>`_] API voor live gas verbruik
 

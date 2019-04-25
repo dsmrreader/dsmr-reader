@@ -418,6 +418,9 @@ msgstr "Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen
 msgid "Number of rejected telegrams due to invalid CRC checksum"
 msgstr "Aantal genegeerde DSMR telegrammen wegens een foutieve CRC checksum"
 
+msgid "The latest telegram succesfully read. Please note that only the last telegram is saved"
+msgstr "Het meest recente uitgelezen telegram. N.B.: Alleen het laatste telegram wordt opgeslagen"
+
 msgid "DSMR Meter statistics (read only)"
 msgstr "Meterstatistieken (alleen lezen)"
 
