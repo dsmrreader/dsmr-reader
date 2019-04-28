@@ -11,8 +11,19 @@ if [ $? -ne 0 ]; then
     
     if [ $? -ne 0 ]; then
         echo "     [!] FAILED to switch to 'dsmrreader' VirtualEnv (is it installed?)"
-        exit;
+        exit 1;
     fi
+fi
+
+
+echo ""
+echo ""
+echo " --- Checking Python version."
+./check_python_version.py
+
+if [ $? -ne 0 ]; then
+    echo "[!] Aborting post-deployment"
+    exit 1;
 fi
 
 
@@ -36,53 +47,8 @@ echo " --- Checking & synchronizing static file changes."
 
 echo ""
 echo ""
-echo " --- Reloading app code..."
-
-
-# Sending a HANGUP signal to Gunicorn's master process will gracefully reload its children.
-echo ""
-printf "%-50s" " * Reloading process: dsmr_webinterface (Gunicorn)"
-
-if [ -f /var/tmp/gunicorn--dsmr_webinterface.pid ];
-then
-    cat /var/tmp/gunicorn--dsmr_webinterface.pid | xargs kill -HUP
-    echo "   [OK]"
-else
-    echo "   [FAILED] PID file does not exist! (yet?)"
-fi
-
-
-# Management commands have some builtin mechanism as well for this.
-printf "%-50s" " * Reloading process: dsmr_backend"
-if [ -f /var/tmp/dsmrreader--dsmr_backend.pid ];
-then
-    cat /var/tmp/dsmrreader--dsmr_backend.pid | xargs kill -HUP
-    echo "   [OK]"
-else
-    echo "   [FAILED] PID file does not exist! (yet?)"
-fi
-
-
-printf "%-50s" " * Reloading process: dsmr_datalogger"
-
-if [ -f /var/tmp/dsmrreader--dsmr_datalogger.pid ];
-then
-    cat /var/tmp/dsmrreader--dsmr_datalogger.pid | xargs kill -HUP
-    echo "   [OK]"
-else
-    echo "   [FAILED] PID file does not exist! (yet?)"
-fi
-
-
-printf "%-50s" " * Reloading process: dsmr_mqtt"
-
-if [ -f /var/tmp/dsmrreader--dsmr_mqtt.pid ];
-then
-    cat /var/tmp/dsmrreader--dsmr_mqtt.pid | xargs kill -HUP
-    echo "   [OK]"
-else
-    echo "   [FAILED] PID file does not exist! (yet?)"
-fi
+echo " --- Reloading running apps..."
+./reload.sh
 
 
 echo ""
