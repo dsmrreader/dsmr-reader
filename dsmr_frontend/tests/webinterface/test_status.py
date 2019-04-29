@@ -96,7 +96,7 @@ class TestViews(TestCase):
         self.assertEqual(status_context['readings']['latest'], timezone.now())
         self.assertEqual(status_context['readings']['seconds_since'], 0)
 
-    @mock.patch('dsmr_backend.services.is_latest_version')
+    @mock.patch('dsmr_backend.services.backend.is_latest_version')
     def test_status_xhr_update_checker(self, is_latest_version_mock):
         for boolean in (True, False):
             is_latest_version_mock.return_value = boolean

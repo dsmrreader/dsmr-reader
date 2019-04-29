@@ -304,7 +304,7 @@ class TestServicesWithoutGas(TestServices):
     def setUp(self):
         super(TestServicesWithoutGas, self).setUp()
         DayStatistics.objects.all().update(gas=None)
-        self.assertFalse(dsmr_backend.services.get_capabilities(capability='gas'))
+        self.assertFalse(dsmr_backend.services.backend.get_capabilities(capability='gas'))
 
 
 class TestServicesWithoutElectricityReturned(TestServices):
@@ -313,7 +313,7 @@ class TestServicesWithoutElectricityReturned(TestServices):
         super(TestServicesWithoutElectricityReturned, self).setUp()
         DayStatistics.objects.all().update(electricity1_returned=0, electricity2_returned=0)
         ElectricityConsumption.objects.update(currently_returned=0)
-        self.assertFalse(dsmr_backend.services.get_capabilities(capability='electricity_returned'))
+        self.assertFalse(dsmr_backend.services.backend.get_capabilities(capability='electricity_returned'))
 
 
 class TestServicesWithoutAnyData(TestServices):
@@ -322,4 +322,4 @@ class TestServicesWithoutAnyData(TestServices):
 
     def setUp(self):
         super(TestServicesWithoutAnyData, self).setUp()
-        self.assertFalse(dsmr_backend.services.get_capabilities(capability='any'))
+        self.assertFalse(dsmr_backend.services.backend.get_capabilities(capability='any'))

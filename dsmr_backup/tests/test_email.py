@@ -1,0 +1,22 @@
+from unittest import mock
+
+from django.test import TestCase
+
+from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.models.schedule import ScheduledProcess
+import dsmr_backup.services.email
+
+
+class TestEmailServices(InterceptStdoutMixin, TestCase):
+    @mock.patch('dsmr_backup.services.backup.create_statistics_backup')
+    @mock.patch('dsmr_backend.services.email.send')
+    def test_run(self, send_mock, create_backup_mock):
+        sp = ScheduledProcess.objects.create(name='Test', module='fake.module')
+
+        self.assertFalse(create_backup_mock.called)
+        self.assertFalse(send_mock.called)
+
+        dsmr_backup.services.email.run(scheduled_process=sp)
+
+        self.assertTrue(create_backup_mock.called)
+        self.assertTrue(send_mock.called)

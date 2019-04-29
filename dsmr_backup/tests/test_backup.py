@@ -168,6 +168,9 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
 
         os.unlink(gzip_file)
 
+    def test_create_statistics_backup(self):
+        pass
+
     @mock.patch('dsmr_backup.services.dropbox.sync')
     def test_sync(self, dropbox_mock):
         self.assertFalse(dropbox_mock.called)

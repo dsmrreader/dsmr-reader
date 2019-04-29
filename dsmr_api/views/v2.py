@@ -15,7 +15,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_api.filters import DsmrReadingFilter, DayStatisticsFilter, ElectricityConsumptionFilter,\
     GasConsumptionFilter, HourStatisticsFilter
 import dsmr_consumption.services
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -128,4 +128,4 @@ class VersionView(APIView):
 class StatusView(APIView):
     """ Returns an overview of all services and their status. Similar to the Status page in the webinterface. """
     def get(self, request):
-        return Response(dsmr_backend.services.status_info())
+        return Response(dsmr_backend.services.backend.status_info())

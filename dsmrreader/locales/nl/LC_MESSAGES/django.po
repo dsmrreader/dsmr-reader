@@ -34,6 +34,12 @@ msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
 msgid "API configuration"
 msgstr "API-configuratie"
 
+msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails."
+msgstr "Vul hier je uitgaande e-mailgegevens in die DSMR-reader kan gebruiken om de e-mail te versturen"
+
+msgid "Time until next call"
+msgstr "Tijd tot volgende aanroep"
+
 msgid "Backend"
 msgstr "Achterkant"
 
@@ -55,6 +61,51 @@ msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer."
 
+msgid "Scheduled process"
+msgstr "Gepland proces"
+
+msgid "The language used in backend processes"
+msgstr "De gebruikte taal in achtergrondprocessen"
+
+msgid "Host"
+msgstr "Hostnaam"
+
+msgid "The hostname of the server used to send emails with"
+msgstr "De hostnaam van de server die gebruikt wordt om e-mails mee te versturen"
+
+msgid "Port"
+msgstr "Poort"
+
+msgid "The port used by the email server to send mail"
+msgstr "De poort van de server die gebruikt wordt om e-mails mee te versturen"
+
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+msgid "Optional: The username required to authenticate on the email server"
+msgstr "Optioneel: De gebruikersnaam voor authenticatie op de e-mailserver."
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Optional: The password required to authenticate on the email server"
+msgstr "Optioneel: Het wachtwoord voor authenticatie op de e-mailserver."
+
+msgid "Use TLS"
+msgstr "Gebruik TLS"
+
+msgid "Optional: Whether the email server uses TLS for encryption"
+msgstr "Optioneel: Geeft aan of de e-mailserver TLS gebruikt voor encryptie"
+
+msgid "Use SSL"
+msgstr "Gebruik SSL"
+
+msgid "Optional: Whether the email server uses SSL for encryption"
+msgstr "Optioneel: Geeft aan of de e-mailserver SSL gebruikt voor encryptie"
+
+msgid "Email configuration"
+msgstr "E-mailconfiguratie"
+
 msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>"
 
@@ -66,6 +117,9 @@ msgstr "Automatische velden"
 
 msgid "Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentatie</a>"
+
+msgid "You can have DSMR-reader email you a backup every once in a while. Please note that the backup will ONLY contain day and hour statistics, which are the most important data to preserve historically."
+msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail. N.B.: Deze back-up bevat alleen dag- en uurstatistics, de belangrijkste historische gegevens."
 
 msgid "Backup"
 msgstr "Backup"
@@ -121,11 +175,50 @@ msgstr "Tijdstip van de volgende synchronisatie met Dropbox. Applicatie werkt di
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
 
+msgid "Daily"
+msgstr "Dagelijks"
+
+msgid "Weekly"
+msgstr "Wekelijks"
+
+msgid "Every two weeks"
+msgstr "Elke twee weken"
+
+msgid "Every four weeks"
+msgstr "Elke vier weken"
+
+msgid "The email address to send the backup to"
+msgstr "Het e-mailadres waar de back-up naar gestuurd wordt"
+
+msgid "The frequency of sending backups per email"
+msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
+
+msgid "Latest email"
+msgstr "Meest recente e-mail"
+
+msgid "Timestamp of latest email sent successfully. Automatically updated by application"
+msgstr "Tijdstip van de laatst verzonden e-mail. Applicatie werkt dit automatisch bij."
+
+msgid "Next email"
+msgstr "Volgende e-mail"
+
+msgid "Timestamp of next email sent. Automatically updated by application"
+msgstr "Tijdstip van de volgende e-mail. Applicatie werkt dit automatisch bij."
+
+msgid "Email backup configuration"
+msgstr "Back-up per e-mail configuratie"
+
 msgid "[{}] Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
 msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
 
 msgid "[{}] Unable to upload files to Dropbox due to {}. Removing credentials..."
 msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
+
+msgid "DSMR-reader day/hour statistics backup"
+msgstr "DSMR-reader back-up van dag- en uurstatistieken"
+
+msgid "This is an automated email, containing a backup of the day and hour statistics in the attachment."
+msgstr "Dit is een automatisch verstuurde e-mail, met in de bijlage een back-up van de dag- en uurstatistieken."
 
 msgid "Consumption"
 msgstr "Verbruik"
@@ -478,8 +571,8 @@ msgstr "DSMR-reader v2.0.1 voegt twee ontbrekende API-calls toe aan de documenta
 msgid "DSMR-reader v2.0.2 addresses an security issue in an external library (urllib3)"
 msgstr "DSMR-reader v2.0.2 verhelpt een beveiligingslek in gebruikte software van derden (urllib3)"
 
-msgid "DSMR-reader v2.1.0 adds support for Telegram-app notifications (bot only). Also, an API call was added to easily retrieve the latest gas consumption."
-msgstr "DSMR-reader v2.1.0 voegt ondersteuning toe voor Telegram-app notificaties (alleen voor bots). Daarnaast is er een API-call toegevoegd om het laatste gasverbruik op te halen."
+msgid "DSMR-reader v2.1.0: (1) Adds support for Telegram-app notifications (for bots only). (2) Added a missing API call to easily retrieve the latest gas consumption. (3) Added support for backups (only day/hour statistics) using your email (server). (4) Added some extra checks regarding unsupported Python versions for future upgrades."
+msgstr "DSMR-reader v2.1.0: (1) Ondersteuning toegevoegd voor Telegram-app notificaties (alleen voor chatbots). (2) Missende API-call toegevoegd om eenvoudig het laatste gasverbruik in te zien. (3) Ondersteuning toegevoegd voor (dag/uurstatistieken) back-up's per e-mail via je eigen e-mailserver. (4) Ondersteuning toegevoegd voor enkele checks op niet-ondersteunde Python-versies, bij toekomstige upgrades."
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
@@ -1375,9 +1468,6 @@ msgstr "Hostnaam"
 msgid "The hostname of the broker to send MQTT messages to."
 msgstr "De hostnaam om MQTT-berichten naar te versturen."
 
-msgid "Port"
-msgstr "Poort"
-
 msgid "MQTT: 1883 - MQTTS: 8883"
 msgstr "MQTT: 1883 - MQTTS: 8883"
 
@@ -1387,14 +1477,8 @@ msgstr "Beveiliging (SSL/TLS)"
 msgid "Whether the client should use a secure connection. Select SECURE (CERT_NONE) for self-signed certificates. Make sure to use the appropriate MQTT(S) port as well."
 msgstr "Geeft aan of er gebruikt gemaakt moet worden van een beveiligde verbinding. Kies voor VEILIG (CERT_NONE) wanneer je een self-signed certificaat gebruikt. Zorg er ook voor dat je de bijbehorende MQTT(S)-poort gebruikt."
 
-msgid "Username"
-msgstr "Gebruikersnaam"
-
 msgid "Optional: The username required for authentication (if any)."
 msgstr "Optioneel: De gebruikersnaam voor authenticatie (indien nodig)."
-
-msgid "Password"
-msgstr "Wachtwoord"
 
 msgid "Optional: The password required for authentication (if any)."
 msgstr "Optioneel: het wachtwoord voor authenticatie (indien nodig)."
@@ -1932,6 +2016,30 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "DSMR-reader v2.1.0 adds support for Telegram-app notifications (bot only). Also, an API call was added to easily retrieve the latest gas consumption."
+#~ msgstr "DSMR-reader v2.1.0 voegt ondersteuning toe voor Telegram-app notificaties (alleen voor bots). Daarnaast is er een API-call toegevoegd om het laatste gasverbruik op te halen."
+
+#~ msgid "Email settings"
+#~ msgstr "E-mailinstellingen"
+
+#~ msgid "Email server: Host"
+#~ msgstr "E-mail server: Hostnaam (of server)"
+
+#~ msgid "Email server: Port"
+#~ msgstr "E-mail server: Poort"
+
+#~ msgid "Email server: Username"
+#~ msgstr "E-mail server: Gebruikersnaam"
+
+#~ msgid "Email server: Password"
+#~ msgstr "E-mail server: Wachtwoord"
+
+#~ msgid "Email server: Use TLS"
+#~ msgstr "E-mail server: Gebruik TLS"
+
+#~ msgid "Email server: Use SSL"
+#~ msgstr "E-mail server: Gebruik SSL"
 
 #~ msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
 #~ msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."

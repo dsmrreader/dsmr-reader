@@ -7,17 +7,19 @@ from django.utils.translation import ugettext_lazy
 def migrate_forward(apps, schema_editor):
     """ Notify user about the new graphs. """
     import dsmr_frontend.services
-    import dsmr_backend.services
+    import dsmr_backend.services.backend
 
-    if dsmr_backend.services.is_recent_installation():
+    if dsmr_backend.services.backend.is_recent_installation():
         # Skip for new installations.
         return
 
     Notification = apps.get_model('dsmr_frontend', 'Notification')
     Notification.objects.create(
         message=dsmr_frontend.services.get_translated_string(text=ugettext_lazy(
-            "DSMR-reader v2.1.0 adds support for Telegram-app notifications (bot only). "
-            "Also, an API call was added to easily retrieve the latest gas consumption."
+            "DSMR-reader v2.1.0: (1) Adds support for Telegram-app notifications (for bots only). "
+            "(2) Added a missing API call to easily retrieve the latest gas consumption. "
+            "(3) Added support for backups (only day/hour statistics) using your email (server). "
+            "(4) Added some extra checks regarding unsupported Python versions for future upgrades."
         )),
         redirect_to='frontend:changelog-redirect'
     )

@@ -1,10 +1,10 @@
+from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django.forms import TextInput
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from .models.settings import BackupSettings, DropboxSettings
+from .models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
 
 
 @admin.register(BackupSettings)
@@ -49,6 +49,31 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
                 'description': _(
                     'Detailed instructions for configuring Dropbox can be found here: <a href="https://dsmr-reader.read'
                     'thedocs.io/nl/latest/admin/backup_dropbox.html">Documentation</a>'
+                )
+            }
+        ),
+        (
+            _('Automatic fields'), {
+                'fields': ['latest_sync', 'next_sync']
+            }
+        ),
+    )
+
+
+@admin.register(EmailBackupSettings)
+class EmailBackupSettingsAdmin(SingletonModelAdmin):
+    readonly_fields = ('latest_sync', 'next_sync')
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '64'})},
+    }
+    fieldsets = (
+        (
+            None, {
+                'fields': ['email_to', 'interval'],
+                'description': _(
+                    'You can have DSMR-reader email you a backup every once in a while. Please note that the backup '
+                    'will ONLY contain day and hour statistics, which are the most important data to preserve '
+                    'historically.'
                 )
             }
         ),

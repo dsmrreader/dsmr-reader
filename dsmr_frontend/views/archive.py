@@ -11,7 +11,7 @@ from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
-import dsmr_backend.services
+import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
@@ -20,7 +20,7 @@ class Archive(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Archive, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         day_statistics = DayStatistics.objects.all().order_by('day')
@@ -42,7 +42,7 @@ class ArchiveXhrSummary(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(ArchiveXhrSummary, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
@@ -84,7 +84,7 @@ class ArchiveXhrSummary(TemplateView):
 class ArchiveXhrGraphs(View):
     """ XHR view for fetching the hour statistics of a day, JSON encoded. """
     def get(self, request):  # noqa: C901
-        capabilities = dsmr_backend.services.get_capabilities()
+        capabilities = dsmr_backend.services.backend.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
             self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')

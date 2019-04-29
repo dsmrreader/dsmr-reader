@@ -1,16 +1,17 @@
 import logging
 
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.conf import settings
 import requests
 
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
+from dsmr_backend.models.settings import BackendSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_frontend.models.message import Notification
 import dsmr_consumption.services
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 logger = logging.getLogger('commands')
@@ -41,7 +42,7 @@ def notify_pre_check():
 
 def create_consumption_message(day, stats):
     """ Create the action notification message """
-    capabilities = dsmr_backend.services.get_capabilities()
+    capabilities = dsmr_backend.services.backend.get_capabilities()
     day_date = (day - timezone.timedelta(hours=1)).strftime("%d-%m-%Y")
     message = _('Your daily usage statistics for {}\n').format(day_date)
 
@@ -173,8 +174,10 @@ def notify():
     # For backend logging in Supervisor.
     logger.debug(' - Creating new notification containing daily usage.')
 
-    message = create_consumption_message(midnight, stats)
-    send_notification(message, str(_('Daily usage notification')))
+    with translation.override(language=BackendSettings.get_solo().language):
+        message = create_consumption_message(midnight, stats)
+        send_notification(message, str(_('Daily usage notification')))
+
     set_next_notification()
 
 
@@ -184,7 +187,7 @@ def check_status():
     notification_settings = NotificationSetting.get_solo()
 
     if notification_settings.notification_service is None or \
-            not dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_check):
+            not dsmr_backend.services.backend.is_timestamp_passed(timestamp=status_settings.next_check):
         return
 
     if not DsmrReading.objects.exists():
@@ -204,12 +207,14 @@ def check_status():
 
     # Alert!
     logger.debug(' - Sending notification about datalogger lagging behind...')
-    send_notification(
-        str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.'.format(
-            settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
-        ))),
-        str(_('Datalogger check'))
-    )
+
+    with translation.override(language=BackendSettings.get_solo().language):
+        send_notification(
+            str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.'.format(
+                settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
+            ))),
+            str(_('Datalogger check'))
+        )
 
     StatusNotificationSetting.objects.update(
         next_check=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS)

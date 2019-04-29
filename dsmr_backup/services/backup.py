@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.utils import formats
 
+from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_backup.models.settings import BackupSettings
 import dsmr_backup.services.dropbox
 
@@ -107,12 +108,44 @@ def create():
 
     backup_process.wait()
     backup_settings = BackupSettings.get_solo()
+    logger.debug(' - Created backup: %s', backup_file)
 
     if backup_settings.compress:
-        compress(file_path=backup_file)
+        backup_file = compress(file_path=backup_file)
+        logger.debug(' - Compressed backup: %s', backup_file)
 
     backup_settings.latest_backup = timezone.now()
     backup_settings.save()
+
+
+def create_statistics_backup(folder):  # pragma: no cover
+    """ Creates a backup of the database, but only containing the day and hour statistics."""
+    if connection.vendor != 'postgresql':
+        # Only PostgreSQL support for newer features.
+        raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))
+
+    backup_file = os.path.join(folder, 'dsmrreader-{}-backup-{}.sql'.format(
+        connection.vendor, formats.date_format(timezone.now().date(), 'l')
+    ))
+
+    backup_process = subprocess.Popen(
+        [
+            settings.DSMRREADER_BACKUP_PG_DUMP,
+            '--host={}'.format(settings.DATABASES['default']['HOST']),
+            '--user={}'.format(settings.DATABASES['default']['USER']),
+            '--table={}'.format(DayStatistics._meta.db_table),
+            '--table={}'.format(HourStatistics._meta.db_table),
+            settings.DATABASES['default']['NAME'],
+        ], env={
+            'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
+        },
+        stdout=open(backup_file, 'w')
+    )
+
+    backup_process.wait()
+    backup_file = compress(file_path=backup_file)
+    logger.debug(' - Created and compressed statistics backup: %s', backup_file)
+    return backup_file
 
 
 def compress(file_path, compresslevel=1):
@@ -125,6 +158,7 @@ def compress(file_path, compresslevel=1):
             shutil.copyfileobj(f_in, f_out)
 
     os.unlink(file_path)
+    return file_path_gz
 
 
 def sync():

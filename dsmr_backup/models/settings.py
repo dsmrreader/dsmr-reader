@@ -6,7 +6,7 @@ from solo.models import SingletonModel
 
 
 class BackupSettings(SingletonModel):
-    """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    """ Generic backup settings. """
     daily_backup = models.BooleanField(
         default=True,
         verbose_name=_('Backup daily'),
@@ -54,7 +54,7 @@ class BackupSettings(SingletonModel):
 
 
 class DropboxSettings(SingletonModel):
-    """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    """ Dropbox backup upload settings. """
     access_token = models.CharField(
         max_length=128,
         default=None,
@@ -83,3 +83,52 @@ class DropboxSettings(SingletonModel):
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Dropbox configuration')
+
+
+class EmailBackupSettings(SingletonModel):
+    """ Backup by email settings. """
+    INTERVAL_DAILY = 1
+    INTERVAL_WEEKLY = 7
+    INTERVAL_BIWEEKLY = 14
+    INTERVAL_MONTHLY = 28
+
+    INTERVAL_CHOICES = (
+        (INTERVAL_DAILY, _('Daily')),
+        (INTERVAL_WEEKLY, _('Weekly')),
+        (INTERVAL_BIWEEKLY, _('Every two weeks')),
+        (INTERVAL_MONTHLY, _('Every four weeks')),
+    )
+
+    email_to = models.EmailField(
+        max_length=255,
+        default=None,
+        null=True,
+        blank=True,
+        help_text=_('The email address to send the backup to')
+    )
+    interval = models.IntegerField(
+        default=INTERVAL_DAILY,
+        choices=INTERVAL_CHOICES,
+        help_text=_('The frequency of sending backups per email')
+    )
+    latest_sync = models.DateTimeField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Latest email'),
+        help_text=_('Timestamp of latest email sent successfully. Automatically updated by application')
+    )
+    next_sync = models.DateTimeField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Next email'),
+        help_text=_('Timestamp of next email sent. Automatically updated by application')
+    )
+
+    def __str__(self):
+        return self._meta.verbose_name.title()
+
+    class Meta:
+        default_permissions = tuple()
+        verbose_name = _('Email backup configuration')

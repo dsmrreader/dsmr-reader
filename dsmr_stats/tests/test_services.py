@@ -9,7 +9,7 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
 from dsmr_datalogger.models.reading import DsmrReading
-import dsmr_backend.services
+import dsmr_backend.services.backend
 import dsmr_stats.services
 from dsmr_consumption.models.settings import ConsumptionSettings
 
@@ -49,7 +49,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=1, minute=5))
         dsmr_stats.services.analyze()
 
-        if dsmr_backend.services.get_capabilities(capability='gas'):
+        if dsmr_backend.services.backend.get_capabilities(capability='gas'):
             self.assertEqual(DayStatistics.objects.count(), 0)
             self.assertEqual(HourStatistics.objects.count(), 0)
         else:
@@ -60,7 +60,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         now_mock.return_value += timezone.timedelta(minutes=15)
         dsmr_stats.services.analyze()
 
-        if dsmr_backend.services.get_capabilities(capability='gas'):
+        if dsmr_backend.services.backend.get_capabilities(capability='gas'):
             self.assertEqual(DayStatistics.objects.count(), 1)
             self.assertEqual(HourStatistics.objects.count(), 3)
         else:
@@ -119,12 +119,12 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         dsmr_stats.services.analyze()
 
-        if dsmr_backend.services.get_capabilities('any'):
+        if dsmr_backend.services.backend.get_capabilities('any'):
             self.assertTrue(DayStatistics.objects.exists())
             self.assertTrue(HourStatistics.objects.exists())
 
     def test_create_hourly_gas_statistics_dsmr4(self):
-        if not dsmr_backend.services.get_capabilities(capability='gas'):
+        if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
             return self.skipTest('No gas')
 
         day_start = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0))
@@ -138,7 +138,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(stats.gas, Decimal('0.509'))
 
     def test_create_hourly_gas_statistics_dsmr5(self):
-        if not dsmr_backend.services.get_capabilities(capability='gas'):
+        if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
             return self.skipTest('No gas')
 
         day_start = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0))

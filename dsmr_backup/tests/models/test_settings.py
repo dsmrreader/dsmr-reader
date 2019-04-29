@@ -3,11 +3,10 @@ from datetime import time
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
-from dsmr_backup.models.settings import BackupSettings, DropboxSettings
+from dsmr_backup.models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
 
 
 class TestBackupSettings(TestCase):
-    """ Tests for settings defaults. """
     def setUp(self):
         self.instance = BackupSettings().get_solo()
 
@@ -32,7 +31,6 @@ class TestBackupSettings(TestCase):
 
 
 class TestDropboxSettings(TestCase):
-    """ Tests for settings defaults. """
     def setUp(self):
         self.instance = DropboxSettings().get_solo()
 
@@ -48,3 +46,21 @@ class TestDropboxSettings(TestCase):
 
     def test_latest_sync(self):
         self.assertIsNone(self.instance.latest_sync)
+
+
+class TestEmailBackupSettings(TestCase):
+    def setUp(self):
+        self.instance = EmailBackupSettings().get_solo()
+
+    def test_admin(self):
+        """ Model should be registered in Django Admin. """
+        self.assertTrue(site.is_registered(EmailBackupSettings))
+
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+
+    def test_email_to(self):
+        self.assertIsNone(self.instance.email_to)
+
+    def test_interval(self):
+        self.assertEqual(self.instance.interval, 1)

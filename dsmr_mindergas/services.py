@@ -7,7 +7,7 @@ import requests
 
 from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_consumption.models.consumption import GasConsumption
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 logger = logging.getLogger('commands')
@@ -22,10 +22,10 @@ def should_export():
         return False
 
     # Nonsense when having no data.
-    if not dsmr_backend.services.get_capabilities(capability='gas'):
+    if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
         return False
 
-    return dsmr_backend.services.is_timestamp_passed(timestamp=mindergas_settings.next_export)
+    return dsmr_backend.services.backend.is_timestamp_passed(timestamp=mindergas_settings.next_export)
 
 
 def export():
