@@ -9,7 +9,6 @@ from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.models.settings import BackendSettings, EmailSettings
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_backend.mixins import ReadOnlyAdminModel
 
 
 # There is no global admin.py, so we'll just disable Group & User here.
@@ -46,8 +45,10 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 
 
 @admin.register(ScheduledProcess)
-class ScheduledProcessAdmin(ReadOnlyAdminModel):
+class ScheduledProcessAdmin(admin.ModelAdmin):
     list_display = ('name', 'planned', 'next_call_naturaltime')
+    readonly_fields = ('name', 'module')
+    fields = ('name', 'module', 'planned')
 
     def next_call_naturaltime(self, obj):
         """ Fancy column to display time until next call, in relative time. """

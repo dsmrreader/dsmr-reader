@@ -19,7 +19,7 @@ class ScheduledProcess(models.Model):
     objects = ScheduledProcessManager()
     name = models.CharField(max_length=64)
     module = models.CharField(max_length=128, unique=True)
-    planned = models.DateTimeField(auto_now_add=True)
+    planned = models.DateTimeField(default=timezone.now)
 
     def execute(self):
         # Import the first part of the path, execute the last bit later.
