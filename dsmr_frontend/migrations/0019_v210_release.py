@@ -16,10 +16,13 @@ def migrate_forward(apps, schema_editor):
     Notification = apps.get_model('dsmr_frontend', 'Notification')
     Notification.objects.create(
         message=dsmr_frontend.services.get_translated_string(text=ugettext_lazy(
-            "DSMR-reader v2.1.0: (1) Adds support for Telegram-app notifications (for bots only). "
-            "(2) Added a missing API call to easily retrieve the latest gas consumption. "
-            "(3) Added support for backups (only day/hour statistics) using your email (server). "
-            "(4) Added some extra checks regarding unsupported Python versions for future upgrades."
+            'DSMR-reader v2.1.0: (1) Adds support for Telegram-app notifications (for bots only). '
+            '(2) Added a missing API call to easily retrieve the latest gas consumption. '
+            '(3) Added support for backups (only day/hour statistics) using your email (server). '
+            '(4) Added some extra checks regarding unsupported Python versions for future upgrades. '
+            '(5) Now allows Token authentication for the API, fixing the browsable API in the API docs. '
+            '(6) Changes the way backup file timestamps are compared among timezones, fixing a possible '
+            'issue for Docker users. (7) Updates some outdated dependencies.',
         )),
         redirect_to='frontend:changelog-redirect'
     )
