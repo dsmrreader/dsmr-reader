@@ -23,6 +23,7 @@ class APIv2TestCase(TestCase):
         response = getattr(self.client, method)(
             reverse('{}:{}'.format(self.NAMESPACE, view_name)),
             HTTP_X_AUTHKEY=self.api_settings.auth_key,
+            content_type='application/json',
             **kwargs
         )
         self.assertEqual(response.status_code, expected_code, response.content)

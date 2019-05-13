@@ -87,43 +87,25 @@ class DropboxSettings(SingletonModel):
 
 class EmailBackupSettings(SingletonModel):
     """ Backup by email settings. """
+    INTERVAL_NONE = None
     INTERVAL_DAILY = 1
     INTERVAL_WEEKLY = 7
     INTERVAL_BIWEEKLY = 14
     INTERVAL_MONTHLY = 28
 
     INTERVAL_CHOICES = (
+        (INTERVAL_NONE, _('--- Disabled ---')),
         (INTERVAL_DAILY, _('Daily')),
         (INTERVAL_WEEKLY, _('Weekly')),
         (INTERVAL_BIWEEKLY, _('Every two weeks')),
         (INTERVAL_MONTHLY, _('Every four weeks')),
     )
-
-    email_to = models.EmailField(
-        max_length=255,
-        default=None,
+    interval = models.IntegerField(
         null=True,
         blank=True,
-        help_text=_('The email address to send the backup to')
-    )
-    interval = models.IntegerField(
-        default=INTERVAL_DAILY,
+        default=INTERVAL_NONE,
         choices=INTERVAL_CHOICES,
         help_text=_('The frequency of sending backups per email')
-    )
-    latest_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Latest email'),
-        help_text=_('Timestamp of latest email sent successfully. Automatically updated by application')
-    )
-    next_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Next email'),
-        help_text=_('Timestamp of next email sent. Automatically updated by application')
     )
 
     def __str__(self):

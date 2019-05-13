@@ -24,4 +24,21 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Email backup configuration',
             },
         ),
+        migrations.RemoveField(
+            model_name='emailbackupsettings',
+            name='email_to',
+        ),
+        migrations.AlterField(
+            model_name='emailbackupsettings',
+            name='interval',
+            field=models.IntegerField(blank=True, choices=[(None, '--- Disabled ---'), (1, 'Daily'), (7, 'Weekly'), (14, 'Every two weeks'), (28, 'Every four weeks')], default=None, help_text='The frequency of sending backups per email', null=True),
+        ),
+        migrations.RemoveField(
+            model_name='emailbackupsettings',
+            name='latest_sync',
+        ),
+        migrations.RemoveField(
+            model_name='emailbackupsettings',
+            name='next_sync',
+        ),
     ]

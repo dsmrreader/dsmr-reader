@@ -34,8 +34,29 @@ msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
 msgid "API configuration"
 msgstr "API-configuratie"
 
-msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails."
-msgstr "Vul hier je uitgaande e-mailgegevens in die DSMR-reader kan gebruiken om de e-mail te versturen"
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails. <br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, port <strong>25</strong> and use <strong>TLS</strong>. Do not enter any username of password and enter your GMail address as \"Email to\" above."
+msgstr "Voer hier je uitgaande e-mailinstellingen in, welke gebruikt worden door DSMR-reader om je e-mails te sturen. <br><br>Heb je GMail? Voer dan als host <strong>aspmx.l.google.com</strong> in, als poort <strong>25</strong> en gebruik <strong>TLS</strong>. Voer vervolgens niet je gebruikersnaam of wachtwoord in. Vul je GMail-adres hierboven in als ontvanger."
+
+msgid "DSMR-reader email test"
+msgstr "DSMR-reader e-mail test"
+
+msgid "Test for your email settings."
+msgstr "Test voor je e-mailinstellingen"
+
+msgid "Failed to send test email: {}"
+msgstr "Versturen van e-mail test gefaald: {}"
+
+msgid "Email sent succesfully, please check your email inbox (and spam folder)."
+msgstr "E-mail is verstuurd. Controleer je Inbox (en Spam-folder)."
+
+msgid "Internals"
+msgstr "Intern"
+
+msgid "Reschedule a process here. Do not modify unless you know why to change it."
+msgstr "Herplan een process hier. Wijzig niets als je niet exact weet wat je doet."
 
 msgid "Time until next call"
 msgstr "Tijd tot volgende aanroep"
@@ -66,6 +87,9 @@ msgstr "Gepland proces"
 
 msgid "The language used in backend processes"
 msgstr "De gebruikte taal in achtergrondprocessen"
+
+msgid "The email address you want to send any emails to"
+msgstr "Het e-mailadres waar e-mails naar toegestuurd worden"
 
 msgid "Host"
 msgstr "Hostnaam"
@@ -106,11 +130,17 @@ msgstr "Optioneel: Geeft aan of de e-mailserver SSL gebruikt voor encryptie"
 msgid "Email configuration"
 msgstr "E-mailconfiguratie"
 
+msgid "Test your email settings with the button below."
+msgstr "Test je e-mailinstellingen met de knop hieronder."
+
+msgid "Optional: View your settings for sending backups by email here."
+msgstr "Optioneel: Bekijk hier je instellingen voor het versturen van back-ups per e-mail."
+
+msgid "Send test email"
+msgstr "Stuur een test e-mail"
+
 msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>"
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>"
-
-msgid "Advanced"
-msgstr "Geavanceerd"
 
 msgid "Automatic fields"
 msgstr "Automatische velden"
@@ -118,8 +148,11 @@ msgstr "Automatische velden"
 msgid "Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentatie</a>"
 
-msgid "You can have DSMR-reader email you a backup every once in a while. Please note that the backup will ONLY contain day and hour statistics, which are the most important data to preserve historically."
-msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail. N.B.: Deze back-up bevat alleen dag- en uurstatistics, de belangrijkste historische gegevens."
+msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
+msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
+
+msgid "Email backup is rescheduled for now."
+msgstr "E-mail back-up is herpland voor nu."
 
 msgid "Backup"
 msgstr "Backup"
@@ -175,6 +208,9 @@ msgstr "Tijdstip van de volgende synchronisatie met Dropbox. Applicatie werkt di
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
 
+msgid "--- Disabled ---"
+msgstr "--- Uitgeschakeld ---"
+
 msgid "Daily"
 msgstr "Dagelijks"
 
@@ -187,23 +223,8 @@ msgstr "Elke twee weken"
 msgid "Every four weeks"
 msgstr "Elke vier weken"
 
-msgid "The email address to send the backup to"
-msgstr "Het e-mailadres waar de back-up naar gestuurd wordt"
-
 msgid "The frequency of sending backups per email"
 msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
-
-msgid "Latest email"
-msgstr "Meest recente e-mail"
-
-msgid "Timestamp of latest email sent successfully. Automatically updated by application"
-msgstr "Tijdstip van de laatst verzonden e-mail. Applicatie werkt dit automatisch bij."
-
-msgid "Next email"
-msgstr "Volgende e-mail"
-
-msgid "Timestamp of next email sent. Automatically updated by application"
-msgstr "Tijdstip van de volgende e-mail. Applicatie werkt dit automatisch bij."
 
 msgid "Email backup configuration"
 msgstr "Back-up per e-mail configuratie"
@@ -219,6 +240,18 @@ msgstr "DSMR-reader back-up van dag- en uurstatistieken"
 
 msgid "This is an automated email, containing a backup of the day and hour statistics in the attachment."
 msgstr "Dit is een automatisch verstuurde e-mail, met in de bijlage een back-up van de dag- en uurstatistieken."
+
+msgid "Want to receive a fresh backup per email? Use the button below to reschedule the next backup to now."
+msgstr "Wil je een verse back-up ontvangen per e-mail? Gebruik dan de knop hieronder om de volgende back-up te herplannen naar nu."
+
+msgid "This allows the application to send a new backup per email (if enabled) to"
+msgstr "Staat de applicatie toe om een back-up per e-mail sturen (wanneer ingeschakeld) naar"
+
+msgid "edit email address here"
+msgstr "bewerk hier het e-mailadres"
+
+msgid "Reschedule to now"
+msgstr "Herplan naar nu"
 
 msgid "Consumption"
 msgstr "Verbruik"
@@ -903,6 +936,9 @@ msgstr "Excel (.CSV)"
 
 msgid "Exports the data in Comma Separated Format, which can be read by Excel."
 msgstr "Exporteert de gegevens in komma gescheiden formaat, die in te lezen is door Excel."
+
+msgid "Download export"
+msgstr "Download export"
 
 msgid "Add note for this date"
 msgstr "Voeg notitie toe voor deze datum"
@@ -1600,9 +1636,6 @@ msgstr "Stuurt een test notificatie naar je toestel (mits ingesteld)."
 msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
 msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
 
-msgid "--- Disabled ---"
-msgstr "--- Uitgeschakeld ---"
-
 msgid "Pushover"
 msgstr "Pushover"
 
@@ -2017,11 +2050,29 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Automatic fields are reset."
+#~ msgstr "Automatische velden zijn gereset."
+
+#~ msgid "Latest email"
+#~ msgstr "Meest recente e-mail"
+
+#~ msgid "Timestamp of latest email sent successfully. Automatically updated by application"
+#~ msgstr "Tijdstip van de laatst verzonden e-mail. Applicatie werkt dit automatisch bij."
+
+#~ msgid "Next email"
+#~ msgstr "Volgende e-mail"
+
+#~ msgid "Timestamp of next email sent. Automatically updated by application"
+#~ msgstr "Tijdstip van de volgende e-mail. Applicatie werkt dit automatisch bij."
+
+#~ msgid "Reset automatic fields"
+#~ msgstr "Reset automatische velden"
+
+#~ msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails."
+#~ msgstr "Vul hier je uitgaande e-mailgegevens in die DSMR-reader kan gebruiken om de e-mail te versturen"
+
 #~ msgid "DSMR-reader v2.1.0 adds support for Telegram-app notifications (bot only). Also, an API call was added to easily retrieve the latest gas consumption."
 #~ msgstr "DSMR-reader v2.1.0 voegt ondersteuning toe voor Telegram-app notificaties (alleen voor bots). Daarnaast is er een API-call toegevoegd om het laatste gasverbruik op te halen."
-
-#~ msgid "Email settings"
-#~ msgstr "E-mailinstellingen"
 
 #~ msgid "Email server: Host"
 #~ msgstr "E-mail server: Hostnaam (of server)"

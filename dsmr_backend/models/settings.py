@@ -15,6 +15,13 @@ class BackendSettings(SingletonModel):
 
 class EmailSettings(SingletonModel):
     """ Outgoing email settings. """
+    email_to = models.EmailField(
+        max_length=255,
+        default=None,
+        null=True,
+        blank=True,
+        help_text=_('The email address you want to send any emails to')
+    )
     host = models.CharField(
         max_length=255,
         default=None,

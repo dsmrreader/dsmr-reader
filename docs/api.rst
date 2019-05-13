@@ -26,7 +26,9 @@ Besides allowing the API to listen for requests, you will also need send your AP
 The API key can be found on the same page as in the screenshot above.
 The application generates one for you initially, but feel free to alter the API key when required.
 
-You should pass it in the header of every API call. The header should be defined as ``X-AUTHKEY``. See below for an example. 
+You should pass it in the header of every API call. The header should be defined as ``X-AUTHKEY`` with value ``<key>``. See below for an example. 
+
+Alternatively, since ``v2.1.0``, you can use ``Authorization`` with value ``Token <key>``.
 
 Examples
 ~~~~~~~~
@@ -35,13 +37,27 @@ Using ``cURL``::
 
    curl http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading \
         -d 'telegram=xxxxx' \
-        -H 'X-AUTHKEY: YOUR-API-KEY'
-        
+        -H 'X-AUTHKEY: <YOUR-API-KEY>'
+   
+   # Or use
+
+   curl http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading \
+        -d 'telegram=xxxxx' \
+        -H 'Authorization: Token <YOUR-API-KEY>'
+     
 Using ``requests``::
 
    requests.post(
         'http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading',
-        headers={'X-AUTHKEY': 'YOUR-API-KEY'},
+        headers={'X-AUTHKEY': '<YOUR-API-KEY>'},
+        data={'telegram': 'xxxxx'},
+   )
+   
+   # Or use
+
+   requests.post(
+        'http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading',
+        headers={'Authorization': 'Token <YOUR-API-KEY>'},
         data={'telegram': 'xxxxx'},
     )
 

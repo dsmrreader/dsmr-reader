@@ -3,6 +3,7 @@ from unittest import mock
 from django.test import TestCase
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backend.signals
 
 
@@ -10,7 +11,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backend.signals.backend_called.send_robust')
     @mock.patch('dsmr_backend.services.schedule.execute_scheduled_processes')
     def test_backend_creation_signal(self, exec_mock, signal_mock):
-        """ Test outgoing signal. """
+        """ Test outgoing signal and execute_scheduled_processes() being called. """
         self.assertFalse(signal_mock.called)
         self.assertFalse(exec_mock.called)
         self._intercept_command_stdout('dsmr_backend', run_once=True)
@@ -55,4 +56,30 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertFalse(logging_mock.called)
 
         self._intercept_command_stdout('dsmr_backend', run_once=True)
+        self.assertTrue(logging_mock.called)
+
+    @mock.patch('dsmr_backend.signals.backend_called.send_robust')
+    @mock.patch('logging.Logger.exception')
+    @mock.patch('dsmr_backend.models.schedule.ScheduledProcess.execute')
+    def test_execute_scheduled_processes_error(self, execute_mock, logging_mock, signal_mock):
+        """ Test execute_scheduled_processes()'s exception handling. """
+        ScheduledProcess.objects.create(name='test', module='fake.module')
+
+        self.assertFalse(execute_mock.called)
+        self.assertFalse(logging_mock.called)
+
+        # OK.
+        self._intercept_command_stdout('dsmr_backend', run_once=True)
+
+        self.assertTrue(execute_mock.called)
+        self.assertFalse(logging_mock.called)
+
+        execute_mock.reset_mock()
+        logging_mock.reset_mock()
+
+        # Exception.
+        execute_mock.side_effect = Exception("Chaos monkey")
+        self._intercept_command_stdout('dsmr_backend', run_once=True)
+
+        self.assertTrue(execute_mock.called)
         self.assertTrue(logging_mock.called)

@@ -4,7 +4,6 @@ from datetime import date
 from django.test import TestCase, Client
 from django.utils import timezone, formats
 from django.urls import reverse
-from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -30,7 +29,6 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
         dsmr_consumption.services.compact_all()
 
     @mock.patch('django.utils.timezone.now')

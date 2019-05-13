@@ -1,7 +1,6 @@
 from unittest import mock
 
 from django.test.utils import override_settings
-from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -27,7 +26,6 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
 
     def test_admin(self):
         response = self.client.get(

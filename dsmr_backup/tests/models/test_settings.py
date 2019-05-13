@@ -59,8 +59,5 @@ class TestEmailBackupSettings(TestCase):
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
-    def test_email_to(self):
-        self.assertIsNone(self.instance.email_to)
-
     def test_interval(self):
-        self.assertEqual(self.instance.interval, 1)
+        self.assertIsNone(self.instance.interval)

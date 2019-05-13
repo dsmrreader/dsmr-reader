@@ -1,0 +1,15 @@
+[
+{
+    "model": "dsmr_backend.emailsettings",
+    "pk": 1,
+    "fields": {
+        "email_to": "root@localhost",
+        "host": "server.tld",
+        "port": "123",
+        "username": "myuser",
+        "password": "mypass",
+        "use_tls": false,
+        "use_ssl": false
+    }
+}
+]

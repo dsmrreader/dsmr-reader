@@ -26,4 +26,9 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Email configuration',
             },
         ),
+        migrations.AddField(
+            model_name='emailsettings',
+            name='email_to',
+            field=models.EmailField(blank=True, default=None, help_text='The email address you want to send any emails to', max_length=255, null=True),
+        ),
     ]

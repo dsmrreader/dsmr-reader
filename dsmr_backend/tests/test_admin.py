@@ -1,3 +1,5 @@
+from unittest import mock
+
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls.base import reverse
@@ -11,6 +13,7 @@ class TestAdmin(TestCase):
     VIEWS = (
         'admin:dsmr_backend_scheduledprocess_changelist',
         'admin:dsmr_backend_emailsettings_changelist',
+        'admin:dsmr_backend_scheduledprocess_changelist',
     )
 
     def setUp(self):
@@ -40,3 +43,29 @@ class TestAdmin(TestCase):
         for current in self.VIEWS:
             response = self.client.get(reverse(current))
             self.assertEqual(response.status_code, 200)
+
+    @mock.patch('dsmr_backend.services.email.send')
+    def test_send_test_email(self, service_mock):
+        REVERSE = 'admin:dsmr_backend_emailsettings_changelist'
+        # Default.
+        response = self.client.post(reverse(REVERSE))
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(service_mock.called)
+
+        # OK.
+        service_mock.reset_mock()
+        response = self.client.post(
+            reverse(REVERSE),
+            data=dict(send_test_email='yes')
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(service_mock.called)
+
+        # Failed.
+        service_mock.reset_mock()
+        service_mock.side_effect = Exception("Chaos monkey")
+        response = self.client.post(
+            reverse(REVERSE),
+            data=dict(send_test_email='yes')
+        )
+        self.assertEqual(response.status_code, 302)

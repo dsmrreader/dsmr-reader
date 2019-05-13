@@ -5,6 +5,7 @@ from django.test import TestCase
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backup.services.email
+from dsmr_backup.models.settings import EmailBackupSettings
 
 
 class TestEmailServices(InterceptStdoutMixin, TestCase):
@@ -15,6 +16,14 @@ class TestEmailServices(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(create_backup_mock.called)
         self.assertFalse(send_mock.called)
+
+        dsmr_backup.services.email.run(scheduled_process=sp)
+
+        self.assertFalse(create_backup_mock.called)
+        self.assertFalse(send_mock.called)
+
+        # Now with settings enabled.
+        EmailBackupSettings.objects.all().update(interval=EmailBackupSettings.INTERVAL_DAILY)
 
         dsmr_backup.services.email.run(scheduled_process=sp)
 

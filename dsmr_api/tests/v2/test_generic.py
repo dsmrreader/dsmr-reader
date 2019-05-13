@@ -7,6 +7,10 @@ from dsmr_api.tests.v2 import APIv2TestCase
 
 
 class APIv2TestCase(APIv2TestCase):
+    @property
+    def app(self):
+        return apps.get_containing_app_config(type(self).__module__).name
+
     def test_disabled(self):
         """ Test API should be disabled. """
         APISettings.objects.all().update(allow=False)
@@ -27,10 +31,6 @@ class APIv2TestCase(APIv2TestCase):
         )
         self.assertEqual(response.status_code, 403)
 
-    @property
-    def app(self):
-        return apps.get_containing_app_config(type(self).__module__).name
-
     def test_user_does_not_exist(self):
         """ Tests what happens when the API user was not created. """
         User.objects.all().delete()
@@ -40,3 +40,19 @@ class APIv2TestCase(APIv2TestCase):
             HTTP_X_AUTHKEY=self.api_settings.auth_key,
         )
         self.assertEqual(response.status_code, 500)
+
+    def test_x_auth_header(self):
+        """ Tests primary auth header (X-AUTHKEY: <key>). """
+        response = self.client.get(
+            reverse('{}:dsmrreading'.format(self.NAMESPACE)),
+            HTTP_X_AUTHKEY=self.api_settings.auth_key
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_authorization_header(self):
+        """ Tests secondary auth header (AUTHORIZATION: Token <key>). """
+        response = self.client.get(
+            reverse('{}:dsmrreading'.format(self.NAMESPACE)),
+            HTTP_AUTHORIZATION='Token {}'.format(self.api_settings.auth_key)
+        )
+        self.assertEqual(response.status_code, 200)
