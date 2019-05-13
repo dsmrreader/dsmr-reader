@@ -50,9 +50,11 @@ def check_synced_file(file_path, dropbox_settings):
 
     last_modified = timezone.datetime.fromtimestamp(file_stats.st_mtime)
     last_modified = timezone.make_aware(last_modified)
+    last_modified = timezone.localtime(last_modified)
+    latest_sync = dropbox_settings.latest_sync
 
     # Ignore when file was not altered since last sync.
-    if dropbox_settings.latest_sync and last_modified < dropbox_settings.latest_sync:
+    if latest_sync and last_modified < timezone.localtime(latest_sync):
         return
 
     try:
