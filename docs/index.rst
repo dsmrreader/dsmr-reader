@@ -24,7 +24,9 @@ DSMR Reader's documentation
    frontend/export
 
    admin/api
+   admin/email
    admin/backup_dropbox
+   admin/email_backup
    admin/datalogger
    admin/interface
    admin/mindergas

@@ -6,12 +6,13 @@ Setting up the application
     :depth: 2
 
 
-DSMR 2.x (legacy)
------------------
+DSMR protocol v2.x (legacy)
+---------------------------
 
 .. note::
     
-    Note: The application's default DSMR version used is ``DSMR 4.x``. This version is also the **default** for any recent smart meters placed at your home. 
+    Note: The application's default DSMR-protocol version used is ``DSMR 4.x``. 
+    This version is also the **default** for any recent smart meters placed at your home. 
 
     Make sure to alter this setting in the backend's configuration page to ``DSMR 2.x`` when required!
 

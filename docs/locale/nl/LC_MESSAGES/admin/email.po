@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2019, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-16 17:55+0200\n"
+"PO-Revision-Date: 2019-05-15 21:19+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../admin/email.rst:2
+msgid "Admin: Email"
+msgstr "Admin: E-mail"
+
+#: ../../admin/email.rst:4
+msgid "The application may need to send emails for certain features."
+msgstr ""
+"Het kan nodig zijn dat de applicatie e-mail moet sturen voor bepaalde "
+"features."
+
+#: ../../admin/email.rst:6
+msgid ""
+"Nowadays sending email is a bit harder than it used to be, luckily due "
+"to spam prevention. If you have experience configuring your own email "
+"server, you can do this in the Backend Email settings."
+msgstr ""
+"Tegenwoordig is het versturen van e-mail wat minder makkelijk dan "
+"voorheen, gelukkig ten goede tegen spam. Wanneer je ervaring hebt met "
+"het instellen van je eigen e-mailserver, dan kun je dit doen bij de "
+"backend-instellingen voor e-mail."
+
+#: ../../admin/email.rst:9
+msgid ""
+"Alternatively you can use GMail, but then both the sender and receiver "
+"will be the same GMail address."
+msgstr ""
+"Als alternatief kun je GMail gebruiken om e-mail te versturen. Daarmee "
+"is echter de zender en ontvanger gelijk aan je eigen GMail-adres."
+
+#: ../../admin/email.rst:11
+msgid ""
+"To do so, use host ``aspmx.l.google.com``, port ``25``, ``Use TLS`` and "
+"leave the username and password **blank**."
+msgstr ""
+"Om dat te doen, gebruik host ``aspmx.l.google.com``, port ``25``, "
+"``Gebruik TLS`` en laat zowel de gebruikersnaam als wachtwoord **leeg**."
