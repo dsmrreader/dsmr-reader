@@ -34,6 +34,8 @@ author = 'Dennis Siemensma'
 extensions = [
 ]
 
+master_doc = 'index'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -54,3 +56,7 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+html_sidebars = {'**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'],}
+
+locale_dirs = ['locale/']   # path is example but recommended.
+gettext_compact = False
