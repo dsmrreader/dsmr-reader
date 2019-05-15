@@ -16,8 +16,8 @@ The API is disabled by default in the application. You may enable it in your con
 
 Example
 ~~~~~~~
-.. image:: static/screenshots/admin/apisettings.png
-    :target: static/screenshots/admin/apisettings.png
+.. image:: _static/screenshots/admin/apisettings.png
+    :target: _static/screenshots/admin/apisettings.png
     :alt: API admin settings
 
 Authenticating

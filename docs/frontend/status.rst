@@ -6,6 +6,6 @@ If there are any problems regarding data handling, they should be highlighted he
 
 You can also easily check for DSMR-reader updates here.
 
-.. image:: ../static/screenshots/frontend/status.png
-    :target: ../static/screenshots/frontend/status.png
+.. image:: ../_static/screenshots/frontend/status.png
+    :target: ../_static/screenshots/frontend/status.png
     :alt: Status

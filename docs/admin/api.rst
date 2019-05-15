@@ -7,6 +7,6 @@ By default a random API key will be generated. You can enter your own if you wan
 :doc:`You can find the API documentation here.<../api>`
 
 
-.. image:: ../static/screenshots/admin/apisettings.png
-    :target: ../static/screenshots/admin/apisettings.png
+.. image:: ../_static/screenshots/admin/apisettings.png
+    :target: ../_static/screenshots/admin/apisettings.png
     :alt: API
