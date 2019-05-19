@@ -15,7 +15,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.1.0 - 2019-05-16
+v2.1.0 - 2019-05-20
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
