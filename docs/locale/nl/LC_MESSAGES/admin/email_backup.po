@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2019, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-16 17:55+0200\n"
+"PO-Revision-Date: 2019-05-15 21:21+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../admin/email_backup.rst:2
+msgid "Admin: Email backup"
+msgstr "Admin: E-mail back-up"
+
+#: ../../admin/email_backup.rst:4
+msgid ""
+"You can have the application email you a partial backup of the database "
+"daily, (bi)weekly or monthly."
+msgstr ""
+"Je kunt de applicatie jezelf dagelijks, wekelijks of maandelijk een deel "
+"van de database toesturen als backup."
+
+#: ../../admin/email_backup.rst:8
+msgid ""
+"Please note that the backup being sent by email **only contains day/hour "
+"statistics** (as displayed in the Archive page)."
+msgstr ""
+"N.B.: Deze gedeeltelijke back-up bevat **alleen de dag- en "
+"uurstatistieken** (zoals weergegeven in de Archief-pagina)."
+
+#: ../../admin/email_backup.rst:10
+msgid ""
+"It should only be used in an emergency, when you are unable to restore a "
+"full backup of the database for some reason."
+msgstr ""
+"Het zou alleen gebruikt moeten worden in noodgevallen, wanneer je om wat "
+"voor reden dan ook niet in staat bent om een complete back-up van je "
+"database terug te zetten."
+
+#: ../../admin/email_backup.rst:13
+msgid ""
+"Before enabling this, make sure you've configured email settings as "
+"well, as the application needs an email server to do so. :doc:`Go to "
+"email settings here.<email>`"
+msgstr ""
+"Voordat je dit inschakelt, zorg ervoor dat je eerst de e-"
+"mailinstellingen goed hebt staan. De applicatie heeft namelijk een e-"
+"mailserver nodig om de e-mails te versturen. :doc:`Ga hier naar e-"
+"mailinstellingen.<email>`"

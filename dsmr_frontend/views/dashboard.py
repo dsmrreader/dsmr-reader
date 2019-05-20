@@ -14,7 +14,7 @@ from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.settings import DataloggerSettings
 import dsmr_consumption.services
-import dsmr_backend.services
+import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
@@ -26,7 +26,7 @@ class Dashboard(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Dashboard, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
         context_data['notifications'] = Notification.objects.unread()
@@ -51,7 +51,7 @@ class DashboardXhrConsumption(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(DashboardXhrConsumption, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         try:

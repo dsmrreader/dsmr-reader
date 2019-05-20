@@ -7,8 +7,8 @@ You will have to configure your account and PV system(s). For any support doing 
 In order to link DSMR-reader to your account, please write down the "API Key" and "System ID" from your PVOutput account. You can find them near the bottom of the "Settings" page in PVOutput.
 
 
-.. image:: ../static/faq/external_pvoutput_settings.png
-    :target: ../static/faq/external_pvoutput_settings.png
+.. image:: ../_static/faq/external_pvoutput_settings.png
+    :target: ../_static/faq/external_pvoutput_settings.png
     :alt: PVOutput account settings
 
 
@@ -18,8 +18,8 @@ Enter those values in DSMR-reader's admin pages, at "PVOutput: API configuration
     * System ID
 
 
-.. image:: ../static/faq/pvoutput_api.png
-    :target: ../static/faq/pvoutput_api.png
+.. image:: ../_static/faq/pvoutput_api.png
+    :target: ../_static/faq/pvoutput_api.png
     :alt: API settings
     
     
@@ -31,8 +31,8 @@ Now navigate to another settings page in DSMR-reader: "PVOutput: "Add Status" co
     * Optionally, you can choose to enter a **processing delay in minutes** for PVOutput. Please note that PVOutput will only allow this when you have a **"Donation" account** on their website. If you do not have one, they will reject each API call you make, until you disable (clear) this option in DSMR-reader. 
 
 
-.. image:: ../static/screenshots/admin/pvoutputaddstatussettings.png
-    :target: ../static/screenshots/admin/pvoutputaddstatussettings.png
+.. image:: ../_static/screenshots/admin/pvoutputaddstatussettings.png
+    :target: ../_static/screenshots/admin/pvoutputaddstatussettings.png
     :alt: PVOutput Add Status
 
 If you configured everything correctly, you should see some addional data in PVOutput listed under "Your Outputs" momentarily.

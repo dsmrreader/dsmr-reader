@@ -6,7 +6,7 @@ import requests
 from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings, PVOutputAPISettings
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_pvoutput.signals import pvoutput_upload
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 logger = logging.getLogger('commands')
@@ -21,7 +21,7 @@ def should_export():
     if not status_settings.export or not api_settings.auth_token or not api_settings.system_identifier:
         return False
 
-    return dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_export)
+    return dsmr_backend.services.backend.is_timestamp_passed(timestamp=status_settings.next_export)
 
 
 def schedule_next_export():

@@ -1,16 +1,17 @@
 import logging
 
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.conf import settings
 import requests
 
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
+from dsmr_backend.models.settings import BackendSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_frontend.models.message import Notification
 import dsmr_consumption.services
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 logger = logging.getLogger('commands')
@@ -41,7 +42,7 @@ def notify_pre_check():
 
 def create_consumption_message(day, stats):
     """ Create the action notification message """
-    capabilities = dsmr_backend.services.get_capabilities()
+    capabilities = dsmr_backend.services.backend.get_capabilities()
     day_date = (day - timezone.timedelta(hours=1)).strftime("%d-%m-%Y")
     message = _('Your daily usage statistics for {}\n').format(day_date)
 
@@ -86,6 +87,16 @@ def send_notification(message, title):
                 'description': message
             }
         },
+        NotificationSetting.NOTIFICATION_TELEGRAM: {
+            'url': '{}{}/sendMessage'.format(
+                NotificationSetting.TELEGRAM_API_URL, notification_settings.telegram_api_key
+            ),
+            'data': {
+                'chat_id': notification_settings.telegram_chat_id,
+                'disable_notification': 'true',
+                'text': message
+            }
+        },
     }
 
     response = requests.post(
@@ -103,7 +114,9 @@ def send_notification(message, title):
             pushover_api_key=None,
             pushover_user_key=None,
             prowl_api_key=None,
-            next_notification=None
+            next_notification=None,
+            telegram_api_key=None,
+            telegram_chat_id=None
         )
         Notification.objects.create(
             message='Notification API error, settings are reset. Error: {}'.format(response.text),
@@ -131,7 +144,7 @@ def set_next_notification():
     # Now we recalculate our new timezone. This only changes twice a year due to DST.
     next_notification = timezone.localtime(next_notification)
 
-    # And we have te replace the hour, again. Prevents sending notifications an hour early or late on the next day.
+    # And we have to replace the hour, again. Prevents sending notifications an hour early or late on the next day.
     next_notification = next_notification.replace(hour=DAILY_NOTIFICATION_HOUR, minute=0, second=0, microsecond=0)
 
     NotificationSetting.objects.update(next_notification=next_notification)
@@ -161,8 +174,10 @@ def notify():
     # For backend logging in Supervisor.
     logger.debug(' - Creating new notification containing daily usage.')
 
-    message = create_consumption_message(midnight, stats)
-    send_notification(message, str(_('Daily usage notification')))
+    with translation.override(language=BackendSettings.get_solo().language):
+        message = create_consumption_message(midnight, stats)
+        send_notification(message, str(_('Daily usage notification')))
+
     set_next_notification()
 
 
@@ -172,7 +187,7 @@ def check_status():
     notification_settings = NotificationSetting.get_solo()
 
     if notification_settings.notification_service is None or \
-            not dsmr_backend.services.is_timestamp_passed(timestamp=status_settings.next_check):
+            not dsmr_backend.services.backend.is_timestamp_passed(timestamp=status_settings.next_check):
         return
 
     if not DsmrReading.objects.exists():
@@ -192,12 +207,14 @@ def check_status():
 
     # Alert!
     logger.debug(' - Sending notification about datalogger lagging behind...')
-    send_notification(
-        str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.'.format(
-            settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
-        ))),
-        str(_('Datalogger check'))
-    )
+
+    with translation.override(language=BackendSettings.get_solo().language):
+        send_notification(
+            str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.'.format(
+                settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
+            ))),
+            str(_('Datalogger check'))
+        )
 
     StatusNotificationSetting.objects.update(
         next_check=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS)

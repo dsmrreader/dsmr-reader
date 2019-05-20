@@ -15,8 +15,8 @@ from dsmr_frontend.views.energy_contracts import EnergyContracts
 
 app_name = 'frontend'
 
+# Public views.
 urlpatterns = [
-    # Public views.
     path('', Dashboard.as_view(), name='dashboard'),
     path('xhr/header', DashboardXhrHeader.as_view(), name='dashboard-xhr-header'),
     path('xhr/consumption', DashboardXhrConsumption.as_view(), name='dashboard-xhr-consumption'),
@@ -40,7 +40,6 @@ urlpatterns = [
     path('compare', Compare.as_view(), name='compare'),
     path('compare/xhr/summary', CompareXhrSummary.as_view(), name='compare-xhr-summary'),
 
-    # Technical information.
     path('status', Status.as_view(), name='status'),
     path('status/xhr/check-for-updates', XhrUpdateChecker.as_view(), name='status-xhr-check-for-updates'),
 

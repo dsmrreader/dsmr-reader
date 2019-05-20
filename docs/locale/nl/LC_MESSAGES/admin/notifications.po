@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2018-10-16 21:15+0200\n"
-"PO-Revision-Date: 2018-10-17 18:21+0200\n"
+"POT-Creation-Date: 2019-04-18 19:43+0200\n"
+"PO-Revision-Date: 2019-04-18 19:47+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Generated-By: Babel 2.6.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../admin/notifications.rst:2
 msgid "Admin: Notifications"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: ../../admin/notifications.rst:27
 msgid "How do I obtain my API key for Pushover?"
-msgstr "Hoe haal ik de API key op voor Pushover?"
+msgstr "Hoe krijg ik mijn API key voor Pushover?"
 
 #: ../../admin/notifications.rst:29
 msgid ""
@@ -117,7 +117,7 @@ msgstr ""
 
 #: ../../admin/notifications.rst:45
 msgid "How do I obtain my API key for Prowl?"
-msgstr "Hoe haal ik de API key op voor Prowl?"
+msgstr "Hoe krijg ik mijn API key voor Prowl?"
 
 #: ../../admin/notifications.rst:47
 msgid ""
@@ -146,3 +146,23 @@ msgid ""
 msgstr ""
 "Als er een nieuwe key is gegenereerd, zie je deze direct. De key is te vinden "
 "zoals in onderstaande screenshot (er staat een rood kader om de key)."
+
+#: ../../admin/notifications.rst:64
+msgid "How do I obtain my API key for Telegram?"
+msgstr "Hoe krijg ik mijn API key voor Telegram?"
+
+#: ../../admin/notifications.rst:66
+msgid ""
+"Please note that you can only use these notifications if you have your own "
+"(chat)bot with Telegram."
+msgstr ""
+"N.B.: Je kunt deze notificaties alleen gebruiken wanneer je je eigen "
+"(chat)bot hebt bij Telegram."
+
+#: ../../admin/notifications.rst:68
+msgid ""
+"More information about bots `can be found here <https://core.telegram.org/"
+"bots>`_."
+msgstr ""
+"Meer informatie over bots  `kun je hier vinden <https://core.telegram.org/"
+"bots>`_."

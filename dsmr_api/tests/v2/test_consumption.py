@@ -5,6 +5,7 @@ from django.utils import timezone
 from dsmr_api.tests.v2 import APIv2TestCase
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.statistics import MeterStatistics
+from dsmr_consumption.models.consumption import GasConsumption
 
 
 class TestToday(APIv2TestCase):
@@ -49,7 +50,7 @@ class ElectricityLive(APIv2TestCase):
 
         # Without prices.
         result = self._request('electricity-live')
-        self.assertEqual(result['timestamp'], '2016-07-01T20:00:00Z')
+        self.assertEqual(result['timestamp'], '2016-07-01T22:00:00+02:00')
         self.assertEqual(result['currently_returned'], 123)
         self.assertEqual(result['currently_delivered'], 1123)
 
@@ -63,10 +64,47 @@ class ElectricityLive(APIv2TestCase):
         MeterStatistics.objects.update(electricity_tariff=1)
 
         result = self._request('electricity-live')
-        self.assertEqual(result['timestamp'], '2016-07-01T20:00:00Z')
+        self.assertEqual(result['timestamp'], '2016-07-01T22:00:00+02:00')
         self.assertEqual(result['currently_returned'], 123)
         self.assertEqual(result['currently_delivered'], 1123)
         self.assertEqual(result['cost_per_hour'], '0.02')
+
+
+class GasLive(APIv2TestCase):
+    @mock.patch('django.utils.timezone.now')
+    def test_get(self, now_mock):
+        # Without gas.
+        result = self._request('gas-live')
+        self.assertEqual(result, {})
+
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2019, 4, 20))
+        GasConsumption.objects.create(**{
+            "read_at": "2019-04-19T12:00:00+02:00",
+            "delivered": "123.456",
+            "currently_delivered": "0.000"
+        })
+        GasConsumption.objects.create(**{
+            "read_at": "2019-04-19T13:00:00+02:00",
+            "delivered": "125.000",
+            "currently_delivered": "1.544"
+        })
+
+        # Without prices.
+        result = self._request('gas-live')
+        self.assertEqual(result['timestamp'], '2019-04-19T13:00:00+02:00')
+        self.assertEqual(result['currently_delivered'], 1.544)
+
+        # Now with prices.
+        EnergySupplierPrice.objects.create(
+            start=timezone.now().date(),
+            end=(timezone.now() + timezone.timedelta(hours=24)).date(),
+            gas_price=0.50,
+        )
+
+        result = self._request('gas-live')
+        self.assertEqual(result['timestamp'], '2019-04-19T13:00:00+02:00')
+        self.assertEqual(result['currently_delivered'], 1.544)
+        self.assertEqual(result['cost_per_interval'], '0.78')
 
 
 class TestElectricity(APIv2TestCase):

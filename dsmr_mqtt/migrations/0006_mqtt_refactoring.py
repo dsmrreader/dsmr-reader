@@ -6,9 +6,9 @@ from django.db import migrations, models
 
 def migrate_forward(apps, schema_editor):
     """ Clears API settings if we used NMA. """
-    import dsmr_backend.services
+    import dsmr_backend.services.backend
 
-    if dsmr_backend.services.is_recent_installation():
+    if dsmr_backend.services.backend.is_recent_installation():
         return
 
     import dsmr_frontend.services

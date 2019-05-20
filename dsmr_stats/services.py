@@ -15,7 +15,7 @@ from dsmr_stats.models.statistics import DayStatistics, HourStatistics, Electric
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_consumption.services
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 logger = logging.getLogger('commands')
@@ -69,7 +69,7 @@ def analyze():  # noqa: C901
         return
 
     # Do not create status until we've passed the next day by a margin. Required due to delayed gas update by meters.
-    if dsmr_backend.services.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
+    if dsmr_backend.services.backend.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
         # Skip for a moment.
         return
 

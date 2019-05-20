@@ -96,7 +96,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             os.utime(temp_file.name, times=(1420070400, 1420070400))
             self.assertFalse(upload_chunked_mock.called)
 
-            # File should be ignored, as it's modification timestamp is before latest sync.
+            # File should be ignored, as its modification timestamp is before latest sync.
             dsmr_backup.services.dropbox.sync()
             self.assertFalse(upload_chunked_mock.called)
 

@@ -7,9 +7,9 @@ from django.utils.translation import ugettext_lazy
 def migrate_forward(apps, schema_editor):
     """ Notify user about the new graphs. """
     import dsmr_frontend.services
-    import dsmr_backend.services
+    import dsmr_backend.services.backend
 
-    if dsmr_backend.services.is_recent_installation():
+    if dsmr_backend.services.backend.is_recent_installation():
         # Skip for new installations.
         return
 

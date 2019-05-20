@@ -4,7 +4,6 @@ import json
 from django.test import TestCase, Client
 from django.utils import timezone
 from django.urls import reverse
-from django.contrib.auth.models import User
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -29,7 +28,6 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
 
     @mock.patch('django.utils.timezone.now')
     def test_status(self, now_mock):
@@ -96,7 +94,7 @@ class TestViews(TestCase):
         self.assertEqual(status_context['readings']['latest'], timezone.now())
         self.assertEqual(status_context['readings']['seconds_since'], 0)
 
-    @mock.patch('dsmr_backend.services.is_latest_version')
+    @mock.patch('dsmr_backend.services.backend.is_latest_version')
     def test_status_xhr_update_checker(self, is_latest_version_mock):
         for boolean in (True, False):
             is_latest_version_mock.return_value = boolean

@@ -6,6 +6,6 @@ If you are paying your energy supplier for a single tariff, you can have the app
 
 You can change most colors used in graphs to your personal flavor as well.
 
-.. image:: ../static/screenshots/admin/frontendsettings.png
-    :target: ../static/screenshots/admin/frontendsettings.png
+.. image:: ../_static/screenshots/admin/frontendsettings.png
+    :target: ../_static/screenshots/admin/frontendsettings.png
     :alt: Interface

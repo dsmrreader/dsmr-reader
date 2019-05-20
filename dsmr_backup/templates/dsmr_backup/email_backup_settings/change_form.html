@@ -1,0 +1,18 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+{% block submit_buttons_bottom %}
+
+    {{ block.super }}
+
+    <div class="submit-row" style="text-align: center;">
+        {% blocktrans %}Want to receive a fresh backup per email? Use the button below to reschedule the next backup to now.{% endblocktrans %}
+        <br>
+        {% blocktrans %}This allows the application to send a new backup per email (if enabled) to{% endblocktrans %}:
+        <br>
+        <strong>{{ email_address }}</strong> <small>(<a href="{% url 'admin:dsmr_backend_emailsettings_change' 1 %}">{% blocktrans %}edit email address here{% endblocktrans %}</a>)</small>
+        <br><br>
+        <input type="submit" value="{% trans 'Reschedule to now' %}" name="reschedule_process">
+    </div>
+
+{% endblock %}

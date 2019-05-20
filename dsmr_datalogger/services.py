@@ -272,6 +272,7 @@ def telegram_to_reading(data):  # noqa: C901
     new_reading = DsmrReading.objects.create(**reading_kwargs)
 
     # There should already be one in database, created when migrating.
+    statistics_kwargs['latest_telegram'] = data
     MeterStatistics.objects.all().update(**statistics_kwargs)
 
     # Broadcast this telegram as signal.

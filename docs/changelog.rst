@@ -15,6 +15,22 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.1.0 - 2019-05-20
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#635 <https://github.com/dennissiemensma/dsmr-reader/issues/635>`_] Requirements update (May 2019)
+- [`#518 <https://github.com/dennissiemensma/dsmr-reader/issues/518>`_] Aflezen telegram in GUI
+- [`#574 <https://github.com/dennissiemensma/dsmr-reader/issues/574>`_] Add Telegram notification support - by thommy101
+- [`#562 <https://github.com/dennissiemensma/dsmr-reader/issues/562>`_] API voor live gas verbruik
+- [`#555 <https://github.com/dennissiemensma/dsmr-reader/issues/555>`_] Ondersteuning voor back-up per e-mail
+- [`#613 <https://github.com/dennissiemensma/dsmr-reader/issues/613>`_] Eenduidige tijdzones voor back-ups in Docker
+- [`#606 <https://github.com/dennissiemensma/dsmr-reader/issues/606>`_] Authenticatie API browser
+
+----
+
+
 v2.0.2 - 2019-04-19
 ^^^^^^^^^^^^^^^^^^^
 

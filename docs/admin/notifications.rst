@@ -3,8 +3,8 @@ Admin: Notifications
 
 Notifications on your phone using Prowl or Pushover. 
 
-.. image:: ../static/screenshots/admin/notificationsetting.png
-    :target: ../static/screenshots/admin/notificationsetting.png
+.. image:: ../_static/screenshots/admin/notificationsetting.png
+    :target: ../_static/screenshots/admin/notificationsetting.png
     :alt: Notifications
 
 Currently, two mobile platforms are supported: Android and iOS.
@@ -36,8 +36,8 @@ Pushover requires you to enter two keys in DSMR-reader.
 * You will need the **User Key** displayed on the top right in the screenshot below. 
 * And you will need the **API key** for the application you've created in Pushover.
 
-.. image:: ../static/faq/notifications-pushover-get-key.png
-    :target: ../static/faq/notifications-pushover-get-key.png
+.. image:: ../_static/faq/notifications-pushover-get-key.png
+    :target: ../_static/faq/notifications-pushover-get-key.png
     :alt: Pushover Get Your API Key
 
 
@@ -49,12 +49,20 @@ After you have downloaded Prowl and signed up for an account you should be able 
 Now go to "`API Keys <https://www.prowlapp.com/api_settings.php>`_", you should see an overview of your current API keys if you have any. 
 To create an API key for the DSMR-reader, input a name and click **"Generate Key"**.
 
-.. image:: ../static/faq/notifications-prowl-create-key.png
-    :target: ../static/faq/notifications-prowl-key.png
+.. image:: ../_static/faq/notifications-prowl-create-key.png
+    :target: ../_static/faq/notifications-prowl-key.png
     :alt: Prowl My Account overview
     
 When a new key is generated, you will see it immediatly. Your key is listed like in the screenshot below (the red box marks your API key).
 
-.. image:: ../static/faq/notifications-prowl-get-key.png
-    :target: ../static/faq/notifications-prowl-get-key.png
+.. image:: ../_static/faq/notifications-prowl-get-key.png
+    :target: ../_static/faq/notifications-prowl-get-key.png
     :alt: Prowl Get Your API Key
+
+
+How do I obtain my API key for Telegram?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Please note that you can only use these notifications if you have your own (chat)bot with Telegram.
+
+More information about bots `can be found here <https://core.telegram.org/bots>`_.

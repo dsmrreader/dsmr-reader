@@ -15,9 +15,10 @@ datalogger_url_patterns = [
 
 consumption_url_patterns = [
     path('electricity', views.ElectricityConsumptionViewSet.as_view({'get': 'list'}), name='electricity-consumption'),
-    path('gas', views.GasConsumptionViewSet.as_view({'get': 'list'}), name='gas-consumption'),
-    path('today', views.TodayConsumptionView.as_view(), name='today-consumption'),
     path('electricity-live', views.ElectricityLiveView.as_view(), name='electricity-live'),
+    path('gas', views.GasConsumptionViewSet.as_view({'get': 'list'}), name='gas-consumption'),
+    path('gas-live', views.GasLiveView.as_view(), name='gas-live'),
+    path('today', views.TodayConsumptionView.as_view(), name='today-consumption'),
 ]
 
 statistics_url_patterns = [

@@ -9,7 +9,7 @@ from dateutil.relativedelta import relativedelta
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_consumption.services
-import dsmr_backend.services
+import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
@@ -17,7 +17,7 @@ class Trends(TemplateView):
     template_name = 'dsmr_frontend/trends.html'
 
     def get_context_data(self, **kwargs):
-        capabilities = dsmr_backend.services.get_capabilities()
+        capabilities = dsmr_backend.services.backend.get_capabilities()
 
         context_data = super(Trends, self).get_context_data(**kwargs)
         context_data['capabilities'] = capabilities
@@ -36,7 +36,7 @@ class TrendsXhrAvgConsumption(View):
             'gas': [],
         }
 
-        capabilities = dsmr_backend.services.get_capabilities()
+        capabilities = dsmr_backend.services.backend.get_capabilities()
         average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour(max_weeks_ago=4)
 
         for current in average_consumption_by_hour:
@@ -69,7 +69,7 @@ class TrendsXhrAvgConsumption(View):
 class TrendsXhrElectricityByTariff(View):
     """ XHR view for fetching electricity consumption by tariff, in JSON. """
     def get(self, request):  # noqa: C901
-        capabilities = dsmr_backend.services.get_capabilities()
+        capabilities = dsmr_backend.services.backend.get_capabilities()
         data = {}
         translation_mapping = {
             'electricity1': _('Electricity 1 (low tariff)'),

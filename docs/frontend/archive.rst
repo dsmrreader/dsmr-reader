@@ -5,6 +5,6 @@ The archive allows you to scroll through all historisch data captured by the app
 All data can be viewed on different levels: by day, by month and by year.
 
 
-.. image:: ../static/screenshots/frontend/archive.png
-    :target: ../static/screenshots/frontend/archive.png
+.. image:: ../_static/screenshots/frontend/archive.png
+    :target: ../_static/screenshots/frontend/archive.png
     :alt: Archive

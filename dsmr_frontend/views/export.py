@@ -13,7 +13,7 @@ from django.shortcuts import redirect
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_frontend.forms import ExportAsCsvForm
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 class Export(LoginRequiredMixin, TemplateView):
@@ -21,7 +21,7 @@ class Export(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Export, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.get_capabilities()
+        context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
 
         day_statistics = DayStatistics.objects.all().order_by('pk')
 

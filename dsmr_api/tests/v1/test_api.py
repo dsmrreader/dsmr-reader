@@ -71,11 +71,22 @@ class TestAPIv1(TestCase):
         self.assertNotEqual(response.status_code, 405)
 
     def test_auth_key(self):
+        """ Tests primary header to specify token. """
         response = self.client.post(self._api_url)
         self.assertEqual(response.status_code, 403)
         self.assertEqual(response.content, b'Invalid auth key')
 
         response = self.client.post(self._api_url, HTTP_X_AUTHKEY=self._api_settings.auth_key)
+        self.assertNotEqual(response.status_code, 403)
+
+    def test_alternative_auth_header(self):
+        """ Tests the alternative header to specify token. """
+        response = self.client.post(self._api_url)
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.content, b'Invalid auth key')
+        response = self.client.post(self._api_url, HTTP_AUTHORIZATION='Token {}'.format(
+            self._api_settings.auth_key
+        ))
         self.assertNotEqual(response.status_code, 403)
 
     def test_data_validation(self):

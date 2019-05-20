@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-import dsmr_backend.services
+import dsmr_backend.services.backend
 
 
 class ExportAsCsvForm(forms.Form):
@@ -31,7 +31,7 @@ class DashboardElectricityConsumptionForm(forms.Form):
     latest_delta_id = forms.IntegerField(required=False, initial=None)
 
     def __init__(self, *args, **kwargs):
-        self.capabilities = dsmr_backend.services.get_capabilities()
+        self.capabilities = dsmr_backend.services.backend.get_capabilities()
         super(DashboardElectricityConsumptionForm, self).__init__(*args, **kwargs)
 
     def _clean_type(self, field, capability):

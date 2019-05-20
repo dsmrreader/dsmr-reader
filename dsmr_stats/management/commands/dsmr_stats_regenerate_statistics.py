@@ -11,7 +11,6 @@ class Command(BaseCommand):
     help = _('Regenerates missing statistics, if any.')
 
     def handle(self, **options):
-        """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
         first_day = DsmrReading.objects.all()[0].timestamp
         days_diff = (timezone.now() - first_day).days
 

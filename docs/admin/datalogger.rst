@@ -4,8 +4,8 @@ Admin: Datalogger
 Configure the builtin datalogger. You can choose to have electricity phases tracked as well.
 The advanced options allow you to change the DSMR protocol version, but the default (v4/v5) should do fine for any recent placed smart meters.
 
-.. image:: ../static/screenshots/admin/dataloggersettings.png
-    :target: ../static/screenshots/admin/dataloggersettings.png
+.. image:: ../_static/screenshots/admin/dataloggersettings.png
+    :target: ../_static/screenshots/admin/dataloggersettings.png
     :alt: Datalogger
 
 
@@ -16,8 +16,8 @@ Eventually this **will cause degraded performance** in the application/database 
 Please note that enabling this feature will **not discard all readings**, as it will **preserve the first and last reading of each hour**.
 
 
-.. image:: ../static/screenshots/admin/retentionsettings.png
-    :target: ../static/screenshots/admin/retentionsettings.png
+.. image:: ../_static/screenshots/admin/retentionsettings.png
+    :target: ../_static/screenshots/admin/retentionsettings.png
     :alt: Datalogger
 
 

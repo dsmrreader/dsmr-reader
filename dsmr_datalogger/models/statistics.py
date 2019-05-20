@@ -68,6 +68,11 @@ class MeterStatistics(SingletonModel):
         help_text=_("Number of rejected telegrams due to invalid CRC checksum"),
         default=0
     )
+    latest_telegram = models.TextField(
+        help_text=_("The latest telegram succesfully read. Please note that only the last telegram is saved"),
+        null=True,
+        default=None
+    )
 
     class Meta:
         default_permissions = tuple()

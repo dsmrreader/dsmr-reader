@@ -12,3 +12,5 @@ DATABASES = {
         'CONN_MAX_AGE': 300,
     }
 }
+
+LOGGING['loggers']['commands']['level'] = 'DEBUG'

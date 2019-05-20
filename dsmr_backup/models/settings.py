@@ -6,7 +6,7 @@ from solo.models import SingletonModel
 
 
 class BackupSettings(SingletonModel):
-    """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    """ Generic backup settings. """
     daily_backup = models.BooleanField(
         default=True,
         verbose_name=_('Backup daily'),
@@ -54,7 +54,7 @@ class BackupSettings(SingletonModel):
 
 
 class DropboxSettings(SingletonModel):
-    """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    """ Dropbox backup upload settings. """
     access_token = models.CharField(
         max_length=128,
         default=None,
@@ -83,3 +83,34 @@ class DropboxSettings(SingletonModel):
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Dropbox configuration')
+
+
+class EmailBackupSettings(SingletonModel):
+    """ Backup by email settings. """
+    INTERVAL_NONE = None
+    INTERVAL_DAILY = 1
+    INTERVAL_WEEKLY = 7
+    INTERVAL_BIWEEKLY = 14
+    INTERVAL_MONTHLY = 28
+
+    INTERVAL_CHOICES = (
+        (INTERVAL_NONE, _('--- Disabled ---')),
+        (INTERVAL_DAILY, _('Daily')),
+        (INTERVAL_WEEKLY, _('Weekly')),
+        (INTERVAL_BIWEEKLY, _('Every two weeks')),
+        (INTERVAL_MONTHLY, _('Every four weeks')),
+    )
+    interval = models.IntegerField(
+        null=True,
+        blank=True,
+        default=INTERVAL_NONE,
+        choices=INTERVAL_CHOICES,
+        help_text=_('The frequency of sending backups per email')
+    )
+
+    def __str__(self):
+        return self._meta.verbose_name.title()
+
+    class Meta:
+        default_permissions = tuple()
+        verbose_name = _('Email backup configuration')
