@@ -12,12 +12,14 @@ class NotificationSetting(SingletonModel):
     NOTIFICATION_PROWL = 'prowl'
     NOTIFICATION_PUSHOVER = 'pushover'
     NOTIFICATION_TELEGRAM = 'telegram'
+    NOTIFICATION_EMAIL = 'email'
 
     NOTIFICATION_CHOICES = (
         (NOTIFICATION_NONE, _('--- Disabled ---')),
         (NOTIFICATION_PUSHOVER, _('Pushover')),
         (NOTIFICATION_PROWL, _('Prowl')),
         (NOTIFICATION_TELEGRAM, _('Telegram')),
+        (NOTIFICATION_EMAIL, _('Email')),
     )
 
     notification_service = models.CharField(

@@ -6,12 +6,13 @@ from django.conf import settings
 import requests
 
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
-from dsmr_backend.models.settings import BackendSettings
+from dsmr_backend.models.settings import BackendSettings, EmailSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_frontend.models.message import Notification
 import dsmr_consumption.services
 import dsmr_backend.services.backend
+import dsmr_backend.services.email
 
 
 logger = logging.getLogger('commands')
@@ -98,6 +99,15 @@ def send_notification(message, title):
             }
         },
     }
+
+    if notification_settings.notification_service == NotificationSetting.NOTIFICATION_EMAIL:
+        email_settings = EmailSettings.get_solo()
+        dsmr_backend.services.email.send(
+            to=email_settings.email_to,
+            subject=title,
+            body=message,
+        )
+        return
 
     response = requests.post(
         **DATA_FORMAT[notification_settings.notification_service]
