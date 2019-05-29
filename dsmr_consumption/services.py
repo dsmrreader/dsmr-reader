@@ -158,7 +158,7 @@ def _compact_gas(dsmr_reading, grouping_type, **kwargs):
     # DSMR does not expose current gas rate, so we have to calculate it ourselves, relative to the previous gas
     # consumption, if any.
     try:
-        previous = GasConsumption.objects.all().order_by('-read_at')[0]
+        previous = GasConsumption.objects.filter(read_at__lt=read_at).order_by('-read_at')[0]
     except IndexError:
         gas_diff = 0
     else:
