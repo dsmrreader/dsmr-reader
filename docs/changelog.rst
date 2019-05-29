@@ -20,6 +20,8 @@ v2.2.0 - 2019-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#647 <https://github.com/dennissiemensma/dsmr-reader/issues/647>`_] Fix for retroactivily inserting reading data - by drvdijk
+- [`#646 <https://github.com/dennissiemensma/dsmr-reader/issues/646>`_] Inladen oude gegevens gaat mis met live gas consumption
 - [`#xxxxxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxxxxxx>`_] xxxxxxxxxxxxxxxx
 
 

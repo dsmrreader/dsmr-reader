@@ -22,6 +22,7 @@ Listed in any order, sorted by name.
 - `dajappie <https://github.com/dajappie>`_
 - `Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_
 - `dbmnl <https://github.com/dbmnl>`_
+- `drvdijk <https://github.com/drvdijk>`_
 - `emilkwaaitaal <https://github.com/emilkwaaitaal>`_
 - `Ernst79 <https://github.com/Ernst79>`_
 - `f0nt4 <https://github.com/f0nt4>`_

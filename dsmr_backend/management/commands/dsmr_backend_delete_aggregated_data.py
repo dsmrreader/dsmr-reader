@@ -7,7 +7,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 
 class Command(BaseCommand):
     help = (
-        'Deletes all aggregated data generated. This command does NOT affect any readings stored.'
+        'Deletes all aggregated data generated. This command does NOT affect any readings stored. '
         'In fact, you should NEVER run this, unless you still have each and EVERY reading stored, '
         'as the application will attempt to recalculate all aggregated data deleted retroactively.'
     )

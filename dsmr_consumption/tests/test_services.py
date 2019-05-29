@@ -124,6 +124,79 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(GasConsumption.objects.count(), 0)
 
     @mock.patch('django.utils.timezone.now')
+    def test_extra_device_existing_data(self, now_mock):
+        """ Checks whether readings from the extra device are sorted correctly. """
+        now_mock.return_value = DsmrReading.objects.all().order_by('-timestamp')[0].timestamp
+
+        # Clear any gas data in reading.
+        DsmrReading.objects.all().update(extra_device_delivered=0)
+
+        # Default data for fields we do not care about.
+        reading_kwargs = dict(
+            electricity_delivered_1=0,
+            electricity_returned_1=0,
+            electricity_delivered_2=0,
+            electricity_returned_2=0,
+            electricity_currently_delivered=0,
+            electricity_currently_returned=0,
+        )
+
+        # Insert existing data.
+        GasConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered=75,
+            currently_delivered=0
+        )
+
+        # Starting point. MUST be BEFORE the fixture's date (2015-11-10).
+        default_reading_timestamp = timezone.now() - timezone.timedelta(weeks=52)
+
+        # Add some data, mixed timestamps, not in default order.
+        reading_timestamp = default_reading_timestamp
+        DsmrReading.objects.create(
+            timestamp=reading_timestamp,
+            extra_device_timestamp=reading_timestamp,
+            extra_device_delivered=3.0,
+            **reading_kwargs
+        )
+        reading_timestamp = default_reading_timestamp - timezone.timedelta(hours=2)  # Earlier
+        DsmrReading.objects.create(
+            timestamp=reading_timestamp,
+            extra_device_timestamp=reading_timestamp,
+            extra_device_delivered=2.0,
+            **reading_kwargs
+        )
+        reading_timestamp = default_reading_timestamp - timezone.timedelta(hours=3)  # Earlier as well
+        DsmrReading.objects.create(
+            timestamp=reading_timestamp,
+            extra_device_timestamp=reading_timestamp,
+            extra_device_delivered=1.0,
+            **reading_kwargs
+        )
+        reading_timestamp = default_reading_timestamp + timezone.timedelta(hours=1)  # Later than first one
+        DsmrReading.objects.create(
+            timestamp=reading_timestamp,
+            extra_device_timestamp=reading_timestamp,
+            extra_device_delivered=4.0,
+            **reading_kwargs
+        )
+        reading_timestamp = default_reading_timestamp + timezone.timedelta(hours=2)
+        DsmrReading.objects.create(
+            timestamp=reading_timestamp,
+            extra_device_timestamp=reading_timestamp,
+            extra_device_delivered=5.0,
+            **reading_kwargs
+        )
+
+        dsmr_consumption.services.compact_all()
+
+        # This should not happen anymore.
+        self.assertFalse(GasConsumption.objects.filter(currently_delivered__lt=0).exists())
+
+        # At least one should contain a value now.
+        self.assertTrue(GasConsumption.objects.filter(currently_delivered__gt=0).exists())
+
+    @mock.patch('django.utils.timezone.now')
     def test_grouping_timing_bug(self, now_mock):
         """ #513: Using the system time instead of telegram time, might ignore some readings. """
         now_mock.return_value = timezone.make_aware(
