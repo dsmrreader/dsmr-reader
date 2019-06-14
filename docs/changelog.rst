@@ -15,6 +15,19 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.2.0 - 2019-06-14
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#647 <https://github.com/dennissiemensma/dsmr-reader/issues/647>`_] Fix for retroactivily inserting reading data - by drvdijk
+- [`#646 <https://github.com/dennissiemensma/dsmr-reader/issues/646>`_] Inladen oude gegevens gaat mis met live gas consumption
+- [`#652 <https://github.com/dennissiemensma/dsmr-reader/issues/652>`_] Django security releases issued: 2.2.2
+
+
+----
+
+
 v2.1.0 - 2019-05-20
 ^^^^^^^^^^^^^^^^^^^
 
