@@ -97,6 +97,7 @@ def send_telegram(telegram, api_url, api_key):
         api_url,
         headers={'X-AUTHKEY': api_key},
         data={'telegram': telegram},
+        timeout=5,
     )
 
     # Old versions of DSMR-reader return 200, new ones 201.
