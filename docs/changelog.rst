@@ -15,6 +15,18 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.2.1 - 2019-07-03
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#665 <https://github.com/dennissiemensma/dsmr-reader/issues/665>`_] Django security releases issued: 2.2.3
+- [`#660 <https://github.com/dennissiemensma/dsmr-reader/issues/660>`_] Add a timeout to the datalogger web request - by Helmo
+
+
+----
+
+
 v2.2.0 - 2019-06-14
 ^^^^^^^^^^^^^^^^^^^
 

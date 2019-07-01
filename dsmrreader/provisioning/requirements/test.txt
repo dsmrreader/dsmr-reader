@@ -1,4 +1,4 @@
 polib==1.1.0
 pytest-cov==2.7.1
-pytest-django==3.5.0
-pytest-xdist==1.28.0
+pytest-django==3.5.1
+pytest-xdist==1.29.0
