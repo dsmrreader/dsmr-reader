@@ -24,6 +24,7 @@ DATABASES = {
         'USER': os.environ.get('DB_USER', DSMRREADER_USER),
         'PASSWORD': os.environ.get('DB_PASS', DSMRREADER_PASSWORD),
         'HOST': os.environ.get('DB_HOST', DSMRREADER_HOST),
+        'PORT': os.environ.get('DB_PORT', DSMRREADER_PORT),        
         'CONN_MAX_AGE': os.environ.get('CONN_MAX_AGE', DSMRREADER_CONN_MAX_AGE),
     }
 }
