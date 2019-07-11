@@ -8,6 +8,7 @@ DSMRREADER_NAME = 'dsmrreader'
 DSMRREADER_USER = 'dsmrreader'
 DSMRREADER_PASSWORD = 'dsmrreader'
 DSMRREADER_HOST = 'localhost'
+DSMRREADER_PORT = 3306
 DSMRREADER_CONN_MAX_AGE = 60
 
 # Change me when exposing your application to the outside world using the Internet!
@@ -22,6 +23,7 @@ DATABASES = {
         'USER': os.environ.get('DB_USER', DSMRREADER_USER),
         'PASSWORD': os.environ.get('DB_PASS', DSMRREADER_PASSWORD),
         'HOST': os.environ.get('DB_HOST', DSMRREADER_HOST),
+        'PORT': os.environ.get('DB_PORT', DSMRREADER_PORT),        
         'CONN_MAX_AGE': os.environ.get('CONN_MAX_AGE', DSMRREADER_CONN_MAX_AGE),
     }
 }
