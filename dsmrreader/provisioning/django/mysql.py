@@ -10,7 +10,6 @@ DSMRREADER_PASSWORD = 'dsmrreader'
 DSMRREADER_HOST = 'localhost'
 DSMRREADER_PORT = 3306
 DSMRREADER_CONN_MAX_AGE = 60
-DSMRREADER_BACKEND_SLEEP = 1
 
 # Change me when exposing your application to the outside world using the Internet!
 DSMRREADER_SECRET_KEY = 'Ww\=)|a:tKxz"u@p<<Cp~MaZ%dNIYX-#w2h-*Od{>1`c%l/MJ+'
