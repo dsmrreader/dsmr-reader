@@ -1,10 +1,9 @@
 [![Build Status](https://travis-ci.org/dennissiemensma/dsmr-reader.svg?branch=master)](https://travis-ci.org/dennissiemensma/dsmr-reader)
 [![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=master)](https://codecov.io/gh/dennissiemensma/dsmr-reader/branch/master)
 [![Documentation Status](https://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](https://dsmr-reader.readthedocs.io/en/latest/?badge=latest)
-[![Requirements Status](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=master)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=master)
+[![Python](https://img.shields.io/badge/python-%203.5%20&#47;%203.6%20&#47;%203.7-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/latest/requirements.html#python)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/latest/donations.html)
-[![Python 3.5 & 3.6](https://img.shields.io/badge/python%203.5%20%26%203.6-supported-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/latest/requirements.html#python)
-[![Python 3.4](https://img.shields.io/badge/python%203.4-support%20ended-red.svg)](https://dsmr-reader.readthedocs.io/en/latest/requirements.html#python)
+[![Requirements Status](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=master)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=master)
 
 
 # DSMR-reader Datalogger/GUI
@@ -37,4 +36,4 @@
 ## Screenshots
 More screenshots can be found in the documentation at [Read The Docs](https://dsmr-reader.readthedocs.io/en/latest/screenshots.html).
 
-![Archive](docs/static/screenshots/frontend/archive.png)
+![Archive](docs/_static/screenshots/frontend/archive.png)
