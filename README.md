@@ -1,10 +1,8 @@
-[![Build Status](https://travis-ci.org/dennissiemensma/dsmr-reader.svg?branch=master)](https://travis-ci.org/dennissiemensma/dsmr-reader)
-[![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=master)](https://codecov.io/gh/dennissiemensma/dsmr-reader/branch/master)
+[![CircleCI](https://circleci.com/gh/dennissiemensma/dsmr-reader/tree/master.svg?style=svg)](https://circleci.com/gh/dennissiemensma/dsmr-reader/tree/master)[![Coverage](https://codecov.io/github/dennissiemensma/dsmr-reader/coverage.svg?branch=master)](https://codecov.io/gh/dennissiemensma/dsmr-reader/branch/master)
 [![Documentation Status](https://readthedocs.org/projects/dsmr-reader/badge/?version=latest)](https://dsmr-reader.readthedocs.io/en/latest/?badge=latest)
 [![Python](https://img.shields.io/badge/python-%203.5%20&#47;%203.6%20&#47;%203.7-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/latest/requirements.html#python)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/latest/donations.html)
 [![Requirements Status](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=master)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=master)
-
 
 # DSMR-reader Datalogger/GUI
 

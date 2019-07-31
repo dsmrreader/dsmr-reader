@@ -112,6 +112,7 @@ Please note and respect their licences as well, if any. Credits to the following
 - `Buienradar <http://www.buienradar.nl>`_
 - `Django REST Framework <http://www.django-rest-framework.org>`_
 - `eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_
+- `CircleCI <https://circleci.com/>`_
 
 
 Misc
