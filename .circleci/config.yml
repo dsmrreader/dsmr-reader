@@ -20,11 +20,14 @@ x-postgresql-db-env: &postgresql-db-env
     POSTGRES_DB: test_dsmrreader
 
 
-# Python CircleCI 2.0 configuration file
+# Python CircleCI 2.x configuration file
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.5
+
 workflows:
     version: 2
     test-dsmrreader:
@@ -39,7 +42,7 @@ x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ 
 x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-v3-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/test.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/postgresql.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/mysql.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/ci.txt" }}
 x-test-command: &test-command |
     . ~/.virtualenvs/dsmr-reader/bin/activate
-    py.test
+    py.test --cov --cov-report=xml
 
 commands:
     code_checkout:
@@ -114,6 +117,7 @@ x-base-job: &base-job
         - code_checkout
         - virtualenv_setup
         - run_tests
+        - codecov/upload
 
 jobs:
     test-python35:
