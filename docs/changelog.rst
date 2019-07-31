@@ -15,13 +15,14 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.2.2 - 2019-07-30
+v2.2.2 - 2019-08-02
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
 - [`#667 <https://github.com/dennissiemensma/dsmr-reader/issues/667>`_] Add default value(s) for PORT - by xirixiz
 - [`#672 <https://github.com/dennissiemensma/dsmr-reader/issues/672>`_] Requirements update (July 2019)
+- [`#674 <https://github.com/dennissiemensma/dsmr-reader/issues/674>`_] Use CircleCI for tests
 
 
 ----
