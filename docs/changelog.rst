@@ -15,6 +15,17 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.2.3 - 2019-08-04
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#679 <https://github.com/dennissiemensma/dsmr-reader/issues/679>`_] Django 2.2.4 released
+
+
+----
+
+
 v2.2.2 - 2019-08-02
 ^^^^^^^^^^^^^^^^^^^
 
