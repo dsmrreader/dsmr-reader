@@ -304,7 +304,6 @@ function fix_sidebar() {
 }(jQuery));
 
 /*
- * TODO LIST CUSTOM PLUGIN
  * -----------------------
  * This plugin depends on iCheck plugin for checkbox and radio inputs
  */

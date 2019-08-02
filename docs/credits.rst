@@ -8,8 +8,8 @@ Special thanks for supplying code contributions
 - `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_ 
 
 
-Also many thanks to the contributions (reporting) of
-----------------------------------------------------
+Also many thanks to the contributions of
+----------------------------------------
 Listed in any order, sorted by name.
  
 - `allureGOT <https://github.com/allureGOT>`_
@@ -76,7 +76,16 @@ Listed in any order, sorted by name.
 - `voipmeister <https://github.com/voipmeister>`_
 - `WatskeBart <https://github.com/WatskeBart>`_
 - `xirixiz <https://github.com/xirixiz>`_
- 
+
+
+Additional thanks to
+--------------------
+JetBrains for providing me a free open-source licence to their products.
+
+.. image:: _static/misc/jetbrains-variant-4.png
+    :target: https://www.jetbrains.com/?from=DSMR-reader
+    :alt: Jetbrains
+
  
 Software used
 -------------
@@ -103,6 +112,7 @@ Please note and respect their licences as well, if any. Credits to the following
 - `Buienradar <http://www.buienradar.nl>`_
 - `Django REST Framework <http://www.django-rest-framework.org>`_
 - `eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_
+- `CircleCI <https://circleci.com/>`_
 
 
 Misc

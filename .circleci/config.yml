@@ -1,0 +1,171 @@
+# Dummy vars, used for anchors.
+x-django-db-env: &django-config-env
+    MYSQL_DJANGO_DB_HOST: 127.0.0.1
+    MYSQL_DJANGO_DB_NAME: dsmrreader   # NOT a typo, django prefixes "test_" automatically.
+    MYSQL_DJANGO_DB_USER: user
+    MYSQL_DJANGO_DB_PASSWORD: testpassword
+    PSQL_DJANGO_DB_HOST: 127.0.0.1
+    PSQL_DJANGO_DB_NAME: test_dsmrreader
+    PSQL_DJANGO_DB_USER: root
+
+x-mysql-db-env: &mysql-db-env
+   # https://circleci.com/docs/2.0/postgres-config/#example-mysql-project
+    MYSQL_ROOT_PASSWORD: rootpw
+    MYSQL_DATABASE: test_dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+    MYSQL_USER: user
+    MYSQL_PASSWORD: testpassword
+
+x-postgresql-db-env: &postgresql-db-env
+    # https://circleci.com/docs/2.0/postgres-config/
+    POSTGRES_USER: root
+    POSTGRES_DB: test_dsmrreader
+
+
+# Python CircleCI 2.x configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.5
+
+workflows:
+    version: 2
+    test-dsmrreader:
+        jobs:
+            - test-python35
+            - test-python36
+            - test-python37
+            - test-python38rc
+
+
+# Dummy vars, used for anchors.
+x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ .Revision }}
+x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-v3-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/test.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/postgresql.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/mysql.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/ci.txt" }}
+x-test-command: &test-command |
+    . ~/.virtualenvs/dsmr-reader/bin/activate
+    py.test --cov --cov-report=xml
+
+commands:
+    code_checkout:
+        steps:
+             - restore_cache:
+                 name: "Cache: Restore GIT checkout"
+                 key: *source-cache-key
+
+             - checkout
+
+             - save_cache:
+                 name: "Cache: Save GIT checkout"
+                 paths:
+                     - ".git"
+                 key: *source-cache-key
+
+    virtualenv_setup:
+        steps:
+            - restore_cache:
+                  name: "Cache: Restore virtualenv"
+                  key: *virtualenv-cache-key
+
+            - run:
+                  name: "Virtualenv + requirements installation"
+                  command: |
+                      sudo apt-get update && sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+                      mkdir -p ~/.virtualenvs/
+                      python3 -m venv ~/.virtualenvs/dsmr-reader
+                      . ~/.virtualenvs/dsmr-reader/bin/activate
+                      pip3 install --upgrade pip
+                      pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/test.txt -r dsmrreader/provisioning/requirements/ci.txt
+                      pip3 install -r dsmrreader/provisioning/requirements/mysql.txt -r dsmrreader/provisioning/requirements/postgresql.txt
+
+            - save_cache:
+                  name: "Cache: Save virtualenv"
+                  paths:
+                      - ~/.virtualenvs/dsmr-reader/
+                  key: *virtualenv-cache-key
+
+    run_tests:
+        steps:
+            - run:
+                name: "Check PyLama"
+                command: |
+                    . ~/.virtualenvs/dsmr-reader/bin/activate
+                    pylama
+
+            - run:
+                name: "Test SQLite"
+                environment:
+                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.sqlite
+                command: *test-command
+
+            - run:
+                name: "Test MySQL"
+                environment:
+                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.mysql
+                command: *test-command
+
+            - run:
+                name: "Test PostgreSQL"
+                environment:
+                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.postgresql
+                command: *test-command
+
+# Dummy vars, used for anchors.
+x-mysql-image: &mysql-image circleci/mysql:5
+x-postgresql-image: &postgresql-image circleci/postgres:9.6.2-alpine
+x-base-job: &base-job
+    working_directory: ~/repo
+    steps:
+        - code_checkout
+        - virtualenv_setup
+        - run_tests
+        - codecov/upload
+
+jobs:
+    test-python35:
+         <<: *base-job
+         docker:
+             - image: circleci/python:3.5-buster
+               environment: *django-config-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
+
+             - image: *postgresql-image
+               environment: *postgresql-db-env
+
+    test-python36:
+         <<: *base-job
+         docker:
+             - image: circleci/python:3.6-buster
+               environment: *django-config-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
+
+             - image: *postgresql-image
+               environment: *postgresql-db-env
+
+    test-python37:
+         <<: *base-job
+         docker:
+             - image: circleci/python:3.7-buster
+               environment: *django-config-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
+
+             - image: *postgresql-image
+               environment: *postgresql-db-env
+
+    test-python38rc:
+         <<: *base-job
+         docker:
+             - image: circleci/python:3.8-rc-buster
+               environment: *django-config-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
+
+             - image: *postgresql-image
+               environment: *postgresql-db-env
