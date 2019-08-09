@@ -191,7 +191,7 @@ msgid "Backup configuration"
 msgstr "Backupconfiguratie"
 
 msgid "Dropbox access token"
-msgstr "Dropbox 'access token'"
+msgstr "Dropbox access token"
 
 msgid "Latest sync"
 msgstr "Meest recente synchronisatie"
@@ -463,8 +463,8 @@ msgstr "Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke f
 msgid "Track electricity phases"
 msgstr "Houd elektriciteitsfasen bij"
 
-msgid "Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this."
-msgstr "Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer aanwezig). Standaard heeft iedereen één fase thuis, maar sommige slimme meters zijn aangesloten op drie fasen. Bijvoorbeeld voor zonnepanelen of elektrisch koken. Deze feature is alleen nuttig (en werkt tevens alleen) wanneer er daadwerkelijk drie fasen aanwezig zijn. Het dashboard toont deze gegevens wanneer dit ingeschakeld is."
+msgid "Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page"
+msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina."
 
 msgid "Verify telegram CRC"
 msgstr "Controleer de CRC van telegrammen"
@@ -981,9 +981,6 @@ msgstr "Geleverd"
 
 msgid "Electricity (tariffs combined)"
 msgstr "Elektriciteit (tarieven gecombineerd)"
-
-msgid "Gas "
-msgstr "Gas"
 
 msgid "Meter statistics"
 msgstr "Meterstatistieken"
@@ -2049,6 +2046,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Gas "
+#~ msgstr "Gas"
+
+#~ msgid "Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this."
+#~ msgstr "Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer aanwezig). Standaard heeft iedereen één fase thuis, maar sommige slimme meters zijn aangesloten op drie fasen. Bijvoorbeeld voor zonnepanelen of elektrisch koken. Deze feature is alleen nuttig (en werkt tevens alleen) wanneer er daadwerkelijk drie fasen aanwezig zijn. Het dashboard toont deze gegevens wanneer dit ingeschakeld is."
 
 #~ msgid "Automatic fields are reset."
 #~ msgstr "Automatische velden zijn gereset."

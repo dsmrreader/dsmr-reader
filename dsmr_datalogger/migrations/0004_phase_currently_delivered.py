@@ -30,6 +30,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dataloggersettings',
             name='track_phases',
-            field=models.BooleanField(default=False, help_text='Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this.', verbose_name='Track electricity phases'),
+            field=models.BooleanField(default=False, help_text='Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page', verbose_name='Track electricity phases'),
         ),
     ]

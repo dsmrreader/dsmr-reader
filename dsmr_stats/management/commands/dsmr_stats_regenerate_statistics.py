@@ -1,8 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext as _
-from django.utils import timezone
 
-from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_stats.models.statistics import DayStatistics
 import dsmr_stats.services
 
@@ -11,8 +10,9 @@ class Command(BaseCommand):
     help = _('Regenerates missing statistics, if any.')
 
     def handle(self, **options):
-        first_day = DsmrReading.objects.all()[0].timestamp
-        days_diff = (timezone.now() - first_day).days
+        first = ElectricityConsumption.objects.all()[0].read_at
+        last = ElectricityConsumption.objects.all().order_by('-read_at')[0].read_at
+        days_diff = (last - first).days
 
         analyzed_days = DayStatistics.objects.all().count()
         days_todo = days_diff - analyzed_days
