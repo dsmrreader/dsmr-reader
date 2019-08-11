@@ -229,12 +229,6 @@ msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
 msgid "Email backup configuration"
 msgstr "Back-up per e-mail configuratie"
 
-msgid "[{}] Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
-msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
-
-msgid "[{}] Unable to upload files to Dropbox due to {}. Removing credentials..."
-msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
-
 msgid "DSMR-reader day/hour statistics backup"
 msgstr "DSMR-reader back-up van dag- en uurstatistieken"
 
@@ -549,6 +543,15 @@ msgstr "Het meest recente uitgelezen telegram. N.B.: Alleen het laatste telegram
 
 msgid "DSMR Meter statistics (read only)"
 msgstr "Meterstatistieken (alleen lezen)"
+
+msgid "Dropbox"
+msgstr "Dropbox"
+
+msgid "[{}] Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
+msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
+
+msgid "[{}] Unable to upload files to Dropbox due to {}. Removing credentials..."
+msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
 
 msgid "Interface"
 msgstr "Interface"

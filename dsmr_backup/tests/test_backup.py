@@ -171,7 +171,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
     def test_create_statistics_backup(self):
         pass
 
-    @mock.patch('dsmr_backup.services.dropbox.sync')
+    @mock.patch('dsmr_dropbox.services.sync')
     def test_sync(self, dropbox_mock):
         self.assertFalse(dropbox_mock.called)
 

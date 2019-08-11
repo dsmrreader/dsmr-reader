@@ -11,7 +11,7 @@ from django.utils import formats
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_backup.models.settings import BackupSettings
-import dsmr_backup.services.dropbox
+import dsmr_dropbox.services
 
 
 logger = logging.getLogger('commands')
@@ -162,5 +162,5 @@ def compress(file_path, compresslevel=1):
 
 
 def sync():
-    """ Syncs all backups using cloud services. """
-    dsmr_backup.services.dropbox.sync()
+    """ Syncs backup folder with remote storage. """
+    dsmr_dropbox.services.sync()

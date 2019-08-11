@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'dsmr_backend.apps.AppConfig',
     'dsmr_frontend.apps.AppConfig',
     'dsmr_backup.apps.AppConfig',
+    'dsmr_dropbox.apps.AppConfig',
     'dsmr_mindergas.apps.AppConfig',
     'dsmr_notification.apps.AppConfig',
     'dsmr_mqtt.apps.AppConfig',

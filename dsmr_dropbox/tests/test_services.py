@@ -10,7 +10,7 @@ import dropbox
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_backup.models.settings import DropboxSettings
 from dsmr_frontend.models.message import Notification
-import dsmr_backup.services.dropbox
+import dsmr_dropbox.services
 
 
 class TestDropboxServices(InterceptStdoutMixin, TestCase):
@@ -19,7 +19,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
         dropbox_settings.access_token = 'FAKE'
         dropbox_settings.save()
 
-    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('dsmr_dropbox.services.upload_chunked')
     def test_sync_disabled(self, upload_chunked_mock):
         dropbox_settings = DropboxSettings.get_solo()
         dropbox_settings.access_token = None
@@ -27,10 +27,10 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(upload_chunked_mock.called)
 
-        dsmr_backup.services.dropbox.sync()
+        dsmr_dropbox.services.sync()
         self.assertFalse(upload_chunked_mock.called)
 
-    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('django.utils.timezone.now')
     def test_sync_initial(self, now_mock, upload_chunked_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
@@ -40,10 +40,10 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
         dropbox_settings.next_sync = None
         dropbox_settings.save()
 
-        dsmr_backup.services.dropbox.sync()
+        dsmr_dropbox.services.sync()
         self.assertTrue(upload_chunked_mock.called)
 
-    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('django.utils.timezone.now')
     def test_sync(self, now_mock, upload_chunked_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
@@ -56,7 +56,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(upload_chunked_mock.called)
         self.assertIsNotNone(DropboxSettings.get_solo().access_token)
 
-        dsmr_backup.services.dropbox.sync()
+        dsmr_dropbox.services.sync()
         self.assertTrue(upload_chunked_mock.called)
         self.assertNotEqual(DropboxSettings.get_solo().next_sync, old_next_sync)
 
@@ -72,11 +72,11 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(get_backup_directory_mock.called)
 
-        dsmr_backup.services.dropbox.sync()
+        dsmr_dropbox.services.sync()
         self.assertFalse(get_backup_directory_mock.called)
 
     @mock.patch('dsmr_backup.services.backup.get_backup_directory')
-    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('django.utils.timezone.now')
     def test_sync_last_modified(self, now_mock, upload_chunked_mock, get_backup_directory_mock):
         """ Test whether syncs are skipped when file was not modified. """
@@ -97,10 +97,10 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             self.assertFalse(upload_chunked_mock.called)
 
             # File should be ignored, as its modification timestamp is before latest sync.
-            dsmr_backup.services.dropbox.sync()
+            dsmr_dropbox.services.sync()
             self.assertFalse(upload_chunked_mock.called)
 
-    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('django.utils.timezone.now')
     def test_sync_insufficient_space(self, now_mock, upload_chunked_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2000, 1, 1))
@@ -117,7 +117,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(Notification.objects.count(), 0)
 
         with self.assertRaises(dropbox.exceptions.ApiError):
-            dsmr_backup.services.dropbox.sync()
+            dsmr_dropbox.services.sync()
 
         # Warning message should be created and next sync should be skipped ahead.
         self.assertEqual(Notification.objects.count(), 1)
@@ -127,7 +127,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             )
         )
 
-    @mock.patch('dsmr_backup.services.dropbox.upload_chunked')
+    @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('django.utils.timezone.now')
     def test_sync_invalid_access_token(self, now_mock, upload_chunked_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2000, 1, 1))
@@ -142,7 +142,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(Notification.objects.count(), 0)
 
         with self.assertRaises(dropbox.exceptions.AuthError):
-            dsmr_backup.services.dropbox.sync()
+            dsmr_dropbox.services.sync()
 
         # Warning message should be created and credetials should be wiped.
         dropbox_settings = DropboxSettings.get_solo()
@@ -170,7 +170,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             temp_file.write(DATA)
             temp_file.flush()
 
-            dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
+            dsmr_dropbox.services.upload_chunked(temp_file.name)
 
         # Only small file upload should be called.
         self.assertTrue(files_upload_mock.called)
@@ -183,7 +183,7 @@ class TestDropboxServices(InterceptStdoutMixin, TestCase):
             temp_file.write(DATA * 2 * 1024 * 1024)
             temp_file.flush()
 
-            dsmr_backup.services.dropbox.upload_chunked(temp_file.name)
+            dsmr_dropbox.services.upload_chunked(temp_file.name)
 
         self.assertTrue(session_start_mock.called)
         self.assertTrue(session_append_mock.called)
