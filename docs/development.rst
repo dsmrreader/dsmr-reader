@@ -31,7 +31,7 @@ Create virtualenv and install all packages::
     mkdir ~/.virtualenvs
     virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3
     source ~/.virtualenvs/dsmrreader/bin/activate
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt -r dsmrreader/provisioning/requirements/mysql.txt -r dsmrreader/provisioning/requirements/postgresql.txt -r dsmrreader/provisioning/requirements/test.txt
+    pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
 
 Copy development config::
 
