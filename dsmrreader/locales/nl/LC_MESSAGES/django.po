@@ -547,6 +547,9 @@ msgstr "Meterstatistieken (alleen lezen)"
 msgid "Dropbox"
 msgstr "Dropbox"
 
+msgid "Forces Dropbox sync."
+msgstr "Forceert Dropbox synchronisatie."
+
 msgid "[{}] Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
 msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
 

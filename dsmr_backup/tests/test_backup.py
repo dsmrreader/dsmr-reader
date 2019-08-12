@@ -93,7 +93,7 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         # Default.
         self.assertEqual(
             dsmr_backup.services.backup.get_backup_directory(),
-            os.path.join(settings.BASE_DIR, '..', 'backups/')
+            os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'backups/'))
         )
 
         # Custom.

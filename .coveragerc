@@ -7,3 +7,4 @@ omit = ./*/__init__.py
   ./*/migrations/*
   ./dsmr_backend/mixins.py
   ./dsmr_plugins/modules/*
+  ./dsmr_dropbox/dropboxinc/*
