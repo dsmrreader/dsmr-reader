@@ -190,7 +190,7 @@ def telegram_to_reading(data):  # noqa: C901
         except InvalidTelegramError as error:
             # Hook to keep track of failed readings count.
             MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
-            dsmrreader_logger.warning('Rejected telegram (base64 encoded): {}'.format(base64_data))
+            dsmrreader_logger.warning('Rejected telegram (base64 encoded): %s', base64_data)
             dsmrreader_logger.exception(error)
             raise
 
@@ -279,7 +279,7 @@ def telegram_to_reading(data):  # noqa: C901
     dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data=data)
 
     if settings.DSMRREADER_LOG_TELEGRAMS:
-        dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
+        dsmrreader_logger.info('Received telegram (base64 encoded): %s', base64_data)
 
     return new_reading
 

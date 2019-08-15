@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 import dsmr_backend.signals
 
 
-class AppConfig(AppConfig):
+class NotificationAppConfig(AppConfig):
     name = 'dsmr_notification'
     verbose_name = _('Notification apps')
 

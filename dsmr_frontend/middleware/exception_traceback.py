@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 
 
-class ExceptionTracebackMiddleware(object):
+class ExceptionTracebackMiddleware:
     """ Handles any uncaught exceptions crashing the webinterface, and displays them. """
     def __init__(self, get_response):
         self.get_response = get_response

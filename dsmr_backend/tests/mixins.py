@@ -3,7 +3,7 @@ from io import StringIO
 from django.core.management import call_command
 
 
-class InterceptStdoutMixin(object):
+class InterceptStdoutMixin:
     """ Supresses stdout for tests. Returns stdout. """
     def _intercept_command_stdout(self, command, *args, **kwargs):
         stdout = StringIO()

@@ -1,7 +1,5 @@
-import json
-
+from django.http import JsonResponse
 from django.views.generic.base import View, TemplateView
-from django.http.response import HttpResponse
 
 import dsmr_backend.services.backend
 
@@ -19,7 +17,6 @@ class Status(TemplateView):
 class XhrUpdateChecker(View):
     """ XHR view performing a version check versus Github. """
     def get(self, request):
-        return HttpResponse(
-            json.dumps({'update_available': not dsmr_backend.services.backend.is_latest_version()}),
-            content_type='application/json'
-        )
+        return JsonResponse({
+            'update_available': not dsmr_backend.services.backend.is_latest_version()
+        })

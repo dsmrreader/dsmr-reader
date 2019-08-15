@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 import dsmr_backend.signals
 
 
-class AppConfig(AppConfig):
+class MindergasAppConfig(AppConfig):
     name = 'dsmr_mindergas'
     verbose_name = _('MinderGas.nl')
 

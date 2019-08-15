@@ -6,7 +6,7 @@ from django.db import connection
 from django.conf import settings
 
 
-class AppConfig(AppConfig):
+class BackendAppConfig(AppConfig):
     """ The backend app solely exists for triggering a backend signal. """
     name = 'dsmr_backend'
     verbose_name = _('Backend')

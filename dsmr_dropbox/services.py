@@ -28,7 +28,7 @@ def sync():
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
 
     # Sync each file, recursively.
-    for (root, dirs, filenames) in os.walk(backup_directory):
+    for (root, _, filenames) in os.walk(backup_directory):
         for current_file in filenames:
             sync_file(
                 dropbox_settings=dropbox_settings,

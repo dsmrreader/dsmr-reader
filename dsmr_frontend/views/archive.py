@@ -1,10 +1,9 @@
 from collections import defaultdict
 from datetime import time
-import json
 
 from dateutil.relativedelta import relativedelta
+from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
-from django.http.response import HttpResponse
 from django.utils import timezone, formats
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
@@ -182,4 +181,4 @@ class ArchiveXhrGraphs(View):
                 'gas': data['gas'],
             }
 
-        return HttpResponse(json.dumps(response), content_type='application/json')
+        return JsonResponse(response)

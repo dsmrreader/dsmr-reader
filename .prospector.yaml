@@ -1,0 +1,23 @@
+#output-format: json
+
+strictness: medium
+test-warnings: false
+doc-warnings: false
+
+ignore-paths:
+  - docs/
+  - '/migrations/'
+  - dsmrreader/
+  - dsmr_plugins/modules/
+
+ignore-patterns:
+  - '.*/migrations/.*'
+
+pep8:
+  options:
+    max-line-length: 120
+  disable:
+      - E722
+
+mccabe:
+  run: false

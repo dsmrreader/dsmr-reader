@@ -58,8 +58,8 @@ def get_backup_directory():
 
     if backup_directory.startswith('/'):
         return os.path.abspath(backup_directory)
-    else:
-        return os.path.abspath(os.path.join(settings.BASE_DIR, '..', backup_directory))
+
+    return os.path.abspath(os.path.join(settings.BASE_DIR, '..', backup_directory))
 
 
 def create_full(folder):

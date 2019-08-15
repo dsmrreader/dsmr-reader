@@ -19,7 +19,7 @@ import hashlib
 import six
 
 
-class DropboxContentHasher(object):
+class DropboxContentHasher:
     """
     Computes a hash using the same algorithm that the Dropbox API uses for the
     the "content_hash" metadata field.
@@ -101,7 +101,7 @@ class DropboxContentHasher(object):
         return c
 
 
-class StreamHasher(object):
+class StreamHasher:
     """
     A wrapper around a file-like object (either for reading or writing)
     that hashes everything that passes through it.  Can be used with

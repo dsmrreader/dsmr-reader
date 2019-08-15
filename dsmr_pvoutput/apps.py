@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 import dsmr_backend.signals
 
 
-class AppConfig(AppConfig):
+class PvoutputAppConfig(AppConfig):
     name = 'dsmr_pvoutput'
     verbose_name = _('PVOutput')
 
