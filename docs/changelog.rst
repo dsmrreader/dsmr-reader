@@ -20,6 +20,7 @@ v2.3.0 - 2019-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#681 <https://github.com/dennissiemensma/dsmr-reader/issues/681>`_] Refactoring backups: improved/simplified Dropbox sync, added extra minimal backup
 - [`#682 <https://github.com/dennissiemensma/dsmr-reader/issues/682>`_] Updated help text for tracking phases
 
 
