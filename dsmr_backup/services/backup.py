@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.utils import formats
 
-from dsmr_stats.models.statistics import DayStatistics, HourStatistics
+from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings
 import dsmr_dropbox.services
 
@@ -38,7 +38,18 @@ def check():
         # Postpone when the user's backup time preference has not been passed yet.
         return
 
-    create()
+    # Create a partial, minimal backup first.
+    create_partial(
+        folder=os.path.join(get_backup_directory(), 'archive'),
+        models_to_backup=(DayStatistics, )
+    )
+
+    # Now create full.
+    create_full(folder=get_backup_directory())
+
+    backup_settings = BackupSettings.get_solo()
+    backup_settings.latest_backup = timezone.now()
+    backup_settings.save()
 
 
 def get_backup_directory():
@@ -51,18 +62,18 @@ def get_backup_directory():
         return os.path.abspath(os.path.join(settings.BASE_DIR, '..', backup_directory))
 
 
-def create():
+def create_full(folder):
     """ Creates a backup of the database. Optionally gzipped. """
-    backup_directory = get_backup_directory()
-
-    if not os.path.exists(backup_directory):
-        os.mkdir(backup_directory)
+    if not os.path.exists(folder):
+        logger.info(' - Creating non-existing backup folder: %s', folder)
+        os.makedirs(folder)
 
     # Backup file with day name included, for weekly rotation.
-    backup_file = os.path.join(backup_directory, 'dsmrreader-{}-backup-{}.sql'.format(
+    backup_file = os.path.join(folder, 'dsmrreader-{}-backup-{}.sql'.format(
         connection.vendor, formats.date_format(timezone.now().date(), 'l')
     ))
-    logger.info(' - Creating new backup: %s', backup_file)
+
+    logger.info(' - Creating new full backup: %s', backup_file)
 
     # PostgreSQL backup.
     if connection.vendor == 'postgresql':  # pragma: no cover
@@ -107,35 +118,33 @@ def create():
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))  # pragma: no cover
 
     backup_process.wait()
-    backup_settings = BackupSettings.get_solo()
-    logger.debug(' - Created backup: %s', backup_file)
-
-    if backup_settings.compress:
-        backup_file = compress(file_path=backup_file)
-        logger.debug(' - Compressed backup: %s', backup_file)
-
-    backup_settings.latest_backup = timezone.now()
-    backup_settings.save()
+    backup_file = compress(file_path=backup_file)
+    logger.debug(' - Created and compressed statistics backup: %s', backup_file)
 
 
-def create_statistics_backup(folder):  # pragma: no cover
-    """ Creates a backup of the database, but only containing the day and hour statistics."""
+def create_partial(folder, models_to_backup):  # pragma: no cover
+    """ Creates a backup of the database, but only containing a subset specified by models."""
     if connection.vendor != 'postgresql':
         # Only PostgreSQL support for newer features.
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))
 
-    backup_file = os.path.join(folder, 'dsmrreader-{}-backup-{}.sql'.format(
-        connection.vendor, formats.date_format(timezone.now().date(), 'l')
+    if not os.path.exists(folder):
+        logger.info(' - Creating non-existing backup folder: %s', folder)
+        os.makedirs(folder)
+
+    backup_file = os.path.join(folder, 'dsmrreader-{}-partial-backup-{}.sql'.format(
+        connection.vendor, formats.date_format(timezone.now().date(), 'Y-m-d')
     ))
 
+    logger.info(' - Creating new partial backup: %s', backup_file)
     backup_process = subprocess.Popen(
         [
             settings.DSMRREADER_BACKUP_PG_DUMP,
+            settings.DATABASES['default']['NAME'],
             '--host={}'.format(settings.DATABASES['default']['HOST']),
             '--user={}'.format(settings.DATABASES['default']['USER']),
-            '--table={}'.format(DayStatistics._meta.db_table),
-            '--table={}'.format(HourStatistics._meta.db_table),
-            settings.DATABASES['default']['NAME'],
+        ] + [
+            '--table={}'.format(x._meta.db_table) for x in models_to_backup
         ], env={
             'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
         },

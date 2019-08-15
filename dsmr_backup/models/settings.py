@@ -12,11 +12,6 @@ class BackupSettings(SingletonModel):
         verbose_name=_('Backup daily'),
         help_text=_('Create a backup of your data daily. Stored locally, but can be exported using Dropbox.')
     )
-    compress = models.BooleanField(
-        default=True,
-        verbose_name=_('Compress'),
-        help_text=_('Create backups in compressed (gzip) format, saving a significant amount of disk space.')
-    )
     backup_time = models.TimeField(
         default=time(hour=2),
         verbose_name=_('Backup timestamp'),

@@ -163,12 +163,6 @@ msgstr "Dagelijkse backup"
 msgid "Create a backup of your data daily. Stored locally, but can be exported using Dropbox."
 msgstr "Maak een dagelijkse backup van je gegevens. Wordt lokaal opgeslagen maar kan geexporteerd worden via Dropbox."
 
-msgid "Compress"
-msgstr "Comprimeren"
-
-msgid "Create backups in compressed (gzip) format, saving a significant amount of disk space."
-msgstr "Maak backups in gecomprimeerd (gzip) formaat, waarmee een aanzienlijke hoeveelheid schijfruimte bespaard wordt."
-
 msgid "Backup timestamp"
 msgstr "Tijdstip van backup"
 
@@ -2052,6 +2046,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Compress"
+#~ msgstr "Comprimeren"
+
+#~ msgid "Create backups in compressed (gzip) format, saving a significant amount of disk space."
+#~ msgstr "Maak backups in gecomprimeerd (gzip) formaat, waarmee een aanzienlijke hoeveelheid schijfruimte bespaard wordt."
 
 #~ msgid "Gas "
 #~ msgstr "Gas"

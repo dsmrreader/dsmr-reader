@@ -20,9 +20,6 @@ class TestBackupSettings(TestCase):
     def test_daily_backup(self):
         self.assertTrue(self.instance.daily_backup)
 
-    def test_compress(self):
-        self.assertTrue(self.instance.compress)
-
     def test_backup_time(self):
         self.assertTrue(self.instance.backup_time, time(hour=2))
 
