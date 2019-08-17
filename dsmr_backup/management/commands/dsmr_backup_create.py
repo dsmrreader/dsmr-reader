@@ -30,7 +30,7 @@ class Command(BaseCommand):
         if not options.get('full') and not options.get('compact'):
             raise CommandError('Missing --full or --compact argument')
 
-        base_folder = dsmr_backup.services.backup.get_backup_directory()
+        base_folder = os.path.join(dsmr_backup.services.backup.get_backup_directory(), 'manually')
 
         if options.get('full'):
             dsmr_backup.services.backup.create_full(
@@ -39,6 +39,6 @@ class Command(BaseCommand):
 
         if options.get('compact'):
             dsmr_backup.services.backup.create_partial(
-                folder=os.path.join(base_folder, 'archive'),
+                folder=base_folder,
                 models_to_backup=(DayStatistics, HourStatistics)
             )

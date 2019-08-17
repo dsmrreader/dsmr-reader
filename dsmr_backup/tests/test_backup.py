@@ -56,6 +56,23 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backup.services.backup.create_partial')
     @mock.patch('dsmr_backup.services.backup.create_full')
     @mock.patch('django.utils.timezone.now')
+    def test_check_backup_folders(self, now_mock, create_full_mock, create_partial_mock):
+        """ Test whether the backups use the expected folders. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=18))
+        base_dir = dsmr_backup.services.backup.get_backup_directory()
+
+        # Should create initial backup.
+        dsmr_backup.services.backup.check()
+
+        _, kwargs = create_partial_mock.call_args_list[0]
+        self.assertEqual(kwargs['folder'], os.path.join(base_dir, 'archive/2016/01'))
+
+        _, kwargs = create_full_mock.call_args_list[0]
+        self.assertEqual(kwargs['folder'], base_dir)
+
+    @mock.patch('dsmr_backup.services.backup.create_partial')
+    @mock.patch('dsmr_backup.services.backup.create_full')
+    @mock.patch('django.utils.timezone.now')
     def test_check_interval_restriction(self, now_mock, create_full_mock, create_partial_mock):
         """ Test whether backups are restricted by one backup per day. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=1, minute=5))

@@ -39,8 +39,14 @@ def check():
         return
 
     # Create a partial, minimal backup first.
+    today = timezone.localtime(timezone.now()).date()
     create_partial(
-        folder=os.path.join(get_backup_directory(), 'archive'),
+        folder=os.path.join(
+            get_backup_directory(),
+            'archive',
+            formats.date_format(today, 'Y'),
+            formats.date_format(today, 'm')
+        ),
         models_to_backup=(DayStatistics, )
     )
 

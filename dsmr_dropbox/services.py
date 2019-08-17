@@ -1,4 +1,5 @@
 import logging
+import time
 import os
 
 from django.utils.translation import ugettext_lazy as gettext
@@ -30,10 +31,15 @@ def sync():
     # Sync each file, recursively.
     for (root, _, filenames) in os.walk(backup_directory):
         for current_file in filenames:
+            abs_file_path = os.path.abspath(os.path.join(root, current_file))
+
+            if not should_sync_file(abs_file_path):
+                continue
+
             sync_file(
                 dropbox_settings=dropbox_settings,
                 local_root_dir=backup_directory,
-                abs_file_path=os.path.abspath(os.path.join(root, current_file))
+                abs_file_path=abs_file_path
             )
 
     # Try again in a while.
@@ -45,18 +51,37 @@ def sync():
     )
 
 
+def should_sync_file(abs_file_path):
+    """ Checks whether we should include this file for sync. """
+    file_stat = os.stat(abs_file_path)
+
+    # Ignore empty files.
+    if file_stat.st_size == 0:
+        logger.debug('Ignoring file: Zero Bytes: %s', abs_file_path)
+        return False
+
+    # Ignore file that haven't been updated in a while.
+    seconds_since_last_modification = int(time.time() - file_stat.st_mtime)
+
+    if seconds_since_last_modification > settings.DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME:
+        logger.debug(
+            'Ignoring file: Time since last modification too high (%s secs): %s',
+            seconds_since_last_modification,
+            abs_file_path
+        )
+        return False
+
+    return True
+
+
 def sync_file(dropbox_settings, local_root_dir, abs_file_path):
+    dbx = dropbox.Dropbox(dropbox_settings.access_token)
+
     # The path we use in our Dropbox app folder.
     relative_file_path = abs_file_path.replace(local_root_dir, '')
 
-    # Ignore empty files.
-    if os.stat(abs_file_path).st_size == 0:
-        return
-
-    # Check whether the file is already at Dropbox, if so, check its hash.
-    dbx = dropbox.Dropbox(dropbox_settings.access_token)
-
     try:
+        # Check whether the file is already at Dropbox, if so, check its hash.
         dropbox_meta = dbx.files_get_metadata(relative_file_path)
     except dropbox.exceptions.ApiError as exception:
         error_message = str(exception.error)
