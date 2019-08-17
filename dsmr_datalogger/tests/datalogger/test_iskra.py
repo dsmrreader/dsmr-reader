@@ -85,6 +85,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(reading.extra_device_delivered, Decimal('7890.693'))
 
         meter_statistics = MeterStatistics.get_solo()
+        self.assertIsNone(meter_statistics.dsmr_version)
         self.assertEqual(meter_statistics.electricity_tariff, 1)
         self.assertEqual(meter_statistics.power_failure_count, None)
         self.assertEqual(meter_statistics.long_power_failure_count, None)

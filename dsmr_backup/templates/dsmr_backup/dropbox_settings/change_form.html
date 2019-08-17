@@ -1,0 +1,12 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+
+{% block field_sets %}
+
+    {{ block.super }}
+
+    <div class="submit-row info" style="text-align: center;">
+        {% blocktrans %}Saving the configuration will reset the delay until the next sync.{% endblocktrans %}
+    </div>
+{% endblock %}

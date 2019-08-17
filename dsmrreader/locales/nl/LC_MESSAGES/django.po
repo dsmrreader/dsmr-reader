@@ -44,7 +44,7 @@ msgid "DSMR-reader email test"
 msgstr "DSMR-reader e-mail test"
 
 msgid "Test for your email settings."
-msgstr "Test voor je e-mailinstellingen"
+msgstr "Test voor je e-mailinstellingen."
 
 msgid "Failed to send test email: {}"
 msgstr "Versturen van e-mail test gefaald: {}"
@@ -80,7 +80,7 @@ msgid "Generates a generic event triggering apps for backend operations, cron-li
 msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
 
 msgid "Forces single run, overriding Infinite Command mixin"
-msgstr "Forceert enkele uitvoer."
+msgstr "Forceert enkele uitvoer"
 
 msgid "Scheduled process"
 msgstr "Gepland proces"
@@ -107,13 +107,13 @@ msgid "Username"
 msgstr "Gebruikersnaam"
 
 msgid "Optional: The username required to authenticate on the email server"
-msgstr "Optioneel: De gebruikersnaam voor authenticatie op de e-mailserver."
+msgstr "Optioneel: De gebruikersnaam voor authenticatie op de e-mailserver"
 
 msgid "Password"
 msgstr "Wachtwoord"
 
 msgid "Optional: The password required to authenticate on the email server"
-msgstr "Optioneel: Het wachtwoord voor authenticatie op de e-mailserver."
+msgstr "Optioneel: Het wachtwoord voor authenticatie op de e-mailserver"
 
 msgid "Use TLS"
 msgstr "Gebruik TLS"
@@ -139,20 +139,17 @@ msgstr "Optioneel: Bekijk hier je instellingen voor het versturen van back-ups p
 msgid "Send test email"
 msgstr "Stuur een test e-mail"
 
-msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>"
-msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>"
+msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
+msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
 
 msgid "Automatic fields"
 msgstr "Automatische velden"
 
-msgid "Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentatie</a>"
+msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentation</a>"
+msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentatie</a>"
 
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
-
-msgid "Email backup is rescheduled for now."
-msgstr "E-mail back-up is herpland voor nu."
 
 msgid "Backup"
 msgstr "Backup"
@@ -179,7 +176,7 @@ msgid "Latest backup"
 msgstr "Meest recente backup"
 
 msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
-msgstr "Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de backup wordt (eenmalig) de eerste keer genegeerd!"
+msgstr "Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de backup wordt (eenmalig) de eerste keer genegeerd."
 
 msgid "Backup configuration"
 msgstr "Backupconfiguratie"
@@ -229,17 +226,32 @@ msgstr "DSMR-reader back-up van dag- en uurstatistieken"
 msgid "This is an automated email, containing a backup of the day and hour statistics in the attachment."
 msgstr "Dit is een automatisch verstuurde e-mail, met in de bijlage een back-up van de dag- en uurstatistieken."
 
-msgid "Want to receive a fresh backup per email? Use the button below to reschedule the next backup to now."
-msgstr "Wil je een verse back-up ontvangen per e-mail? Gebruik dan de knop hieronder om de volgende back-up te herplannen naar nu."
+msgid "Saving the configuration will reset the delay until the next backup."
+msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende back-up."
 
-msgid "This allows the application to send a new backup per email (if enabled) to"
-msgstr "Staat de applicatie toe om een back-up per e-mail sturen (wanneer ingeschakeld) naar"
+msgid "Use Dropbox to secure all your backups"
+msgstr "Gebruik Dropbox voor het veiligstellen van je al back-up's"
+
+msgid "view Dropbox settings here"
+msgstr "bekijk hier instellingen voor Dropbox"
+
+msgid "Or use GMail/email for keeping smaller backups"
+msgstr "Of gebruik GMail/e-mail om kleinere back-up's te bewaren"
+
+msgid "view email backup settings here"
+msgstr "bekijk hier instellingen voor back-up per e-mail"
+
+msgid "Saving the configuration will reset the delay until the next sync."
+msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende synchronisatie."
+
+msgid "Emails are currently sent to"
+msgstr "E-mails worden momenteel verstuurd naar"
 
 msgid "edit email address here"
 msgstr "bewerk hier het e-mailadres"
 
-msgid "Reschedule to now"
-msgstr "Herplan naar nu"
+msgid "Saving the configuration will reset the delay until the next email backup."
+msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende back-up per e-mail."
 
 msgid "Consumption"
 msgstr "Verbruik"
@@ -374,7 +386,7 @@ msgid "Include gas consumption"
 msgstr "Neem gasverbruik mee"
 
 msgid "Include electricity returned (solar panels)"
-msgstr "neem teruglevering elektriciteit mee (zonnepanelen)"
+msgstr "Neem teruglevering elektriciteit mee (zonnepanelen)"
 
 msgid "The offset in hours, can both be positive as negative (to go back in time)."
 msgstr "De afwijking in uren, kan zowel positief als negatief zijn (om terug in de tijd te gaan)."
@@ -383,7 +395,7 @@ msgid "Intended usage is NOT production! Force by using --ack-to-mess-up-my-data
 msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-my-data"
 
 msgid "Timestamp indicating when the reading was taken, according to the smart meter"
-msgstr "Moment waarop de meting is gedaan, volgens de meter."
+msgstr "Moment waarop de meting is gedaan, volgens de meter"
 
 msgid "Meter position stating electricity delivered (low tariff) in kWh"
 msgstr "Meterstand van verbruikte elektriciteit (laagtarief) in kWh"
@@ -452,7 +464,7 @@ msgid "Track electricity phases"
 msgstr "Houd elektriciteitsfasen bij"
 
 msgid "Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page"
-msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina."
+msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina"
 
 msgid "Verify telegram CRC"
 msgstr "Controleer de CRC van telegrammen"
@@ -1028,7 +1040,7 @@ msgid "Highest return (L3-)"
 msgstr "Hoogste teruglevering (L3-)"
 
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
-msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden. "
+msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
 
 msgid "Current energy prices"
 msgstr "Huidige energietarieven"
@@ -2046,6 +2058,30 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Backup is rescheduled to now."
+#~ msgstr "Back-up is herpland naar nu."
+
+#~ msgid "Next sync is rescheduled."
+#~ msgstr "De volgende synchornisatie is herpland."
+
+#~ msgid "Email backup is rescheduled to now."
+#~ msgstr "Back-up per e-mail is herpland naar nu."
+
+#~ msgid "Want to create a fresh backup? Use the button below to reschedule the next backup."
+#~ msgstr "Wil je een verse back-up maken? Gebruik dan de knop hieronder om de volgende back-up te herplannen."
+
+#~ msgid "Reschedule to now"
+#~ msgstr "Herplan naar nu"
+
+#~ msgid "Want to sync now? Use the button below to reschedule the next sync to now."
+#~ msgstr "Wil je nu synchroniseren? Gebruik dan de knop hieronder om de volgende synchronisatie te herplannen."
+
+#~ msgid "Want to receive a fresh backup by email? Use the button below to reschedule the next email backup."
+#~ msgstr "Wil je een verse back-up ontvangen per e-mail? Gebruik dan de knop hieronder om de volgende back-up te herplannen."
+
+#~ msgid "This allows the application to send a new backup per email (if enabled) to"
+#~ msgstr "Staat de applicatie toe om een back-up per e-mail sturen (wanneer ingeschakeld) naar"
 
 #~ msgid "Compress"
 #~ msgstr "Comprimeren"
