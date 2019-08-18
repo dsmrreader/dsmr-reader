@@ -147,6 +147,7 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
         [
             settings.DSMRREADER_BACKUP_PG_DUMP,
             settings.DATABASES['default']['NAME'],
+            '--data-only',
             '--host={}'.format(settings.DATABASES['default']['HOST']),
             '--user={}'.format(settings.DATABASES['default']['USER']),
         ] + [
