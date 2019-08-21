@@ -208,7 +208,8 @@ def telegram_to_reading(data):  # noqa: C901
         code = result.group(1)
 
         # M-bus (0-n:24.1) cannot identify the type of device, see issue #92.
-        if code in ('0-2:24.2.1', '0-3:24.2.1', '0-4:24.2.1'):
+		# Added 0-1:24.2.3 => see issue #697 
+        if code in ('0-2:24.2.1', '0-3:24.2.1', '0-4:24.2.1', '0-1:24.2.3'):
             code = '0-1:24.2.1'
 
         # DSMR 2.x emits gas readings in different format.
