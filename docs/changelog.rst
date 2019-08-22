@@ -24,6 +24,7 @@ v2.3.0 - 2019-xx-xx
 - [`#638 <https://github.com/dennissiemensma/dsmr-reader/issues/638>`_] Dropbox / back-up sync per direct kunnen resetten
 - [`#682 <https://github.com/dennissiemensma/dsmr-reader/issues/682>`_] Updated help text for tracking phases
 - [`#696 <https://github.com/dennissiemensma/dsmr-reader/issues/696>`_] API-docs broke after upgrade
+- [`#697 <https://github.com/dennissiemensma/dsmr-reader/issues/697>`_] Gas wordt niet verwerkt uit telegram bij digitale meters in België - by floyson-reference
 
 
 ----
