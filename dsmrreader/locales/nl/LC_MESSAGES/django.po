@@ -7,6 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-27 20:11+0200\n"
+"PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -153,6 +155,9 @@ msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sture
 
 msgid "Backup"
 msgstr "Backup"
+
+msgid "Failed to create this directory, please check permissions: {}"
+msgstr "Fout bij aanmaken van de map, controleer de permissies:  {}"
 
 msgid "Backup daily"
 msgstr "Dagelijkse backup"

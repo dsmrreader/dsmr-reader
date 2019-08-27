@@ -58,9 +58,10 @@ def check():
     backup_settings.save()
 
 
-def get_backup_directory():
+def get_backup_directory(backup_directory=None):
     """ Returns the path to the directory where all backups are stored locally. """
-    backup_directory = BackupSettings.get_solo().folder
+    if not backup_directory:
+        backup_directory = BackupSettings.get_solo().folder
 
     if backup_directory.startswith('/'):
         return os.path.abspath(backup_directory)

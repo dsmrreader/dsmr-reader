@@ -6,6 +6,7 @@ from django.conf import settings
 from django.db import models
 from solo.admin import SingletonModelAdmin
 
+from dsmr_backup.forms import BackupSettingsAdminForm
 from .models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
 from dsmr_backend.models.settings import EmailSettings
 from dsmr_backend.models.schedule import ScheduledProcess
@@ -14,6 +15,7 @@ from dsmr_backend.models.schedule import ScheduledProcess
 @admin.register(BackupSettings)
 class BackupSettingsAdmin(SingletonModelAdmin):
     change_form_template = 'dsmr_backup/backup_settings/change_form.html'
+    form = BackupSettingsAdminForm
     readonly_fields = ('latest_backup', )
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
@@ -41,7 +43,6 @@ class BackupSettingsAdmin(SingletonModelAdmin):
     )
 
     def response_change(self, request, obj):
-        print('response_change response_change response_change response_change')
         BackupSettings.objects.all().update(latest_backup=None)
         return super(BackupSettingsAdmin, self).response_change(request, obj)
 

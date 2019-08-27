@@ -15,7 +15,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.3.0 - 2019-xx-xx
+v2.3.0 - 2019-09-01
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
@@ -25,6 +25,7 @@ v2.3.0 - 2019-xx-xx
 - [`#682 <https://github.com/dennissiemensma/dsmr-reader/issues/682>`_] Updated help text for tracking phases
 - [`#696 <https://github.com/dennissiemensma/dsmr-reader/issues/696>`_] API-docs broke after upgrade
 - [`#697 <https://github.com/dennissiemensma/dsmr-reader/issues/697>`_] Gas wordt niet verwerkt uit telegram bij digitale meters in België - by floyson-reference
+- [`#693 <https://github.com/dennissiemensma/dsmr-reader/issues/693>`_] Check backup creation path
 
 
 ----
