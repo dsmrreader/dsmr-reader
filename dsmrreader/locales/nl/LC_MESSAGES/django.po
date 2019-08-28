@@ -7,8 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-27 20:11+0200\n"
-"PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -804,8 +802,8 @@ msgstr "Wijzigingenoverzicht"
 msgid "Help / FAQ"
 msgstr "Help / FAQ"
 
-msgid "API v2 Docs"
-msgstr "API v2 Docs"
+msgid "API docs"
+msgstr "API docs"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -1065,8 +1063,8 @@ msgstr "Huidige versie"
 msgid "Check for updates"
 msgstr "Controleer voor updates"
 
-msgid "How does it work?"
-msgstr "Hoe werkt dit?"
+msgid "Explain"
+msgstr "Uitleg"
 
 msgid "The application will compare \"VERSION = (x,x,x)\" in your local dsmrreader/__init__.py file with the latest one available on Github."
 msgstr "De applicatie vergelijkt \"VERSION = (x,x,x)\" in het lokale dsmrreader/__init__.py bestand met de meest recente versie op Github."
@@ -1089,22 +1087,13 @@ msgstr "voor alle wijzigingen en upgrade-instructies."
 msgid "You are already running the latest version released."
 msgstr "Je draait al de meest recente versie."
 
-msgid "P1 DSMR telegrams"
-msgstr "P1 DSMR telegrammen"
+msgid "Telegrams"
+msgstr "Telegrammen"
 
-msgid "It has been a while since the latest telegram reading."
-msgstr "Het is een tijdje geleden sinds het laatste telegram uitgelezen is."
+msgid "Incoming telegrams/readings"
+msgstr "Inkomende telegrammen"
 
-msgid "Most recent reading"
-msgstr "Meest recente meting"
-
-msgid "No data."
-msgstr "Geen gegevens."
-
-msgid "Click for more information"
-msgstr "Klik hier voor meer informatie"
-
-msgid "The telegrams are either read from the DSMR_DATALOGGER process or sent via the API."
+msgid "The telegrams are either read from the DSMR_DATALOGGER process or received by the API."
 msgstr "De telegrammen worden ofwel door het DSMR_DATALOGGER process gelezen of komen binnen via de API."
 
 msgid "Each telegram read from your smart meter is stored and queued for processing first."
@@ -1113,14 +1102,20 @@ msgstr "Elke telegram uit je slimme meter wordt eerst alleen opgeslagen voor ver
 msgid "Each new telegram is (only) used to display the latest reading, in the top right corner of the Dashboard page."
 msgstr "Elk nieuw telegram wordt (alleen) initieel gebruikt om de laatste meting te tonen in het Dashboard, rechts bovenin de pagina."
 
-msgid "Telegram processing"
-msgstr "Telegramverwerking"
+msgid "It has been a while since the latest telegram was read."
+msgstr "Het is een tijdje geleden sinds het laatste telegram uitgelezen is."
 
-msgid "There are too many unprocessed telegrams."
-msgstr "Er zijn te veel onverwerkte telegrammen."
+msgid "Most recent reading"
+msgstr "Meest recente meting"
 
-msgid "Unprocessed telegrams"
-msgstr "Onverwerkte telegrammen"
+msgid "No data."
+msgstr "Geen gegevens."
+
+msgid "Data processing"
+msgstr "Dataverwerking"
+
+msgid "Telegrams to consumption"
+msgstr "Telegrammen voor berekenen verbruik"
 
 msgid "This indicates how many stored telegrams are waiting to be processed."
 msgstr "Dit geeft aan hoeveel opgeslagen telegrammen er wachten op verwerking."
@@ -1131,17 +1126,14 @@ msgstr "Deze teller zou ongeveer elke minuut moeten resetten, afhankelijk van of
 msgid "The stored telegrams are processed by the DSMR_BACKEND process and thus can be processed retroactively as well (by design)."
 msgstr "De opgeslagen telegrammen worden verwerkt door het DSMR_BACKEND proces. Daardoor kunnen ze tevens met terugwerkende kracht verwerkt worden."
 
-msgid "Electricity statistics"
-msgstr "Elektriciteitsstatistieken"
+msgid "There are too many unprocessed telegrams."
+msgstr "Er zijn te veel onverwerkte telegrammen."
 
-msgid "For dashboard display."
-msgstr "Voor het dashboard-overzicht."
+msgid "Unprocessed telegrams"
+msgstr "Onverwerkte telegrammen"
 
-msgid "Data processing is lagging behind"
-msgstr "Dataverwerking loopt achter"
-
-msgid "Data processing is on schedule"
-msgstr "Dataverwerking is op schema"
+msgid "Calculating electricity consumption"
+msgstr "Berekenen van elektriciteitsverbruik"
 
 msgid "When telegrams are processed, they are split into electricity and gas (when available) consumption nodes."
 msgstr "Wanneer telegrammen verwerkt worden, splitst de applicatie ze in consumptie nodes voor elektriciteit en gas (wanneer beschikbaar)."
@@ -1149,20 +1141,20 @@ msgstr "Wanneer telegrammen verwerkt worden, splitst de applicatie ze in consump
 msgid "These consumption nodes are plotted in the graphs displayed on the Dashboard page."
 msgstr "Deze consumptie nodes worden gebruikt in de grafieken van het Dashboard."
 
-msgid "Gas statistics"
-msgstr "Gasstatistieken"
+msgid "Recorded electricity consumption is lagging behind"
+msgstr "Het is even geleden dat elektriciteitsverbruik is gemeten"
 
-msgid "Electricity"
-msgstr "Elektriciteit"
+msgid "Recorded electricity consumption is on schedule"
+msgstr "Elektriciteitsverbruik recent gemeten"
 
-msgid "The consumption nodes reflect the capabilities of your smart meter."
-msgstr "De consumptie nodes reflecteren de gegevensstromen van je slimme meter."
+msgid "Calculating gas consumption"
+msgstr "Berekenen gasverbruik"
 
-msgid "The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages."
-msgstr "De status van elk van deze (drie) gegevensstromen staat hier weergegeven. Deze bepalen tevens welke grafieken allemaal beschikbaar zijn binnen de applicatie."
+msgid "Recorded gas consumption is lagging behind"
+msgstr "Het is even geleden dat gasverbruik is gemeten"
 
-msgid "Electricity return"
-msgstr "Elektriciteitsteruglevering"
+msgid "Recorded gas consumption is on schedule"
+msgstr "Gasverbruik recent gemeten"
 
 msgid "Day &amp; hour statistics"
 msgstr "Dag- &amp; uurstatistieken"
@@ -1176,6 +1168,12 @@ msgstr "Deze statistieken nodes bevatten dagtotalen en uurtotalen van je verbrui
 msgid "They are used in many pages displaying long term data, such as the Archive, Trends and Compare pages."
 msgstr "Deze worden gebruikt in pagina's die lange termijn gegevens tonen, zoals het Archief, Trends en de Vergelijk pagina's."
 
+msgid "Data processing is lagging behind"
+msgstr "Dataverwerking loopt achter"
+
+msgid "Data processing is on schedule"
+msgstr "Dataverwerking is op schema"
+
 msgid "Tools"
 msgstr "Tools"
 
@@ -1187,6 +1185,33 @@ msgstr "Meest recente synchronisatie met MinderGas"
 
 msgid "Latest PVOutput sync"
 msgstr "Meest recente synchronisatie met PVOutput"
+
+msgid "Capabilities"
+msgstr "Mogelijkheden"
+
+msgid "The capability nodes reflect the capabilities of your smart meter."
+msgstr "Dit reflecteert de gegevensstromen van je slimme meter."
+
+msgid "The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages."
+msgstr "De status van elk van deze (drie) gegevensstromen staat hier weergegeven. Deze bepalen tevens welke grafieken allemaal beschikbaar zijn binnen de applicatie."
+
+msgid "Electricity usage recorded"
+msgstr "Elektriciteitsverbruik is gemeten"
+
+msgid "No electricity usage recorded"
+msgstr "Geen elektriciteit gemeten"
+
+msgid "Electricity return recorded"
+msgstr "Teruglevering elektriciteit is gemeten"
+
+msgid "No electricity return recorded"
+msgstr "Geen teruglevering elektriciteit gemeten"
+
+msgid "Gas usage recorded"
+msgstr "Gasverbruik is gemeten"
+
+msgid "No gas usage recorded"
+msgstr "Geen gasverbruik gemeten"
 
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
 msgstr "Er zijn momenteel nog geen dag-/uurstatistieken gegenereerd. Wacht op de volgende dag."
@@ -1875,6 +1900,9 @@ msgstr "Laagste verbruik op L2+ (in kWh)"
 msgid "Lowest usage on L3+ (in kWh)"
 msgstr "Laagste verbruik op L3+ (in kWh)"
 
+msgid "Electricity statistics"
+msgstr "Elektriciteitsstatistieken"
+
 msgid "Buienradar"
 msgstr "Buienradar"
 
@@ -2063,6 +2091,27 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "How does it work?"
+#~ msgstr "Hoe werkt dit?"
+
+#~ msgid "P1 DSMR telegrams"
+#~ msgstr "P1 DSMR telegrammen"
+
+#~ msgid "Click for more information"
+#~ msgstr "Klik hier voor meer informatie"
+
+#~ msgid "For dashboard display."
+#~ msgstr "Voor het dashboard-overzicht."
+
+#~ msgid "Gas statistics"
+#~ msgstr "Gasstatistieken"
+
+#~ msgid "Electricity"
+#~ msgstr "Elektriciteit"
+
+#~ msgid "Electricity return"
+#~ msgstr "Elektriciteitsteruglevering"
 
 #~ msgid "Backup is rescheduled to now."
 #~ msgstr "Back-up is herpland naar nu."

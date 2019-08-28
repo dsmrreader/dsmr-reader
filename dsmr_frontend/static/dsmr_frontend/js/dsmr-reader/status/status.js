@@ -9,8 +9,9 @@ $(document).ready(function(){
         check_for_updates();
         return false;
     });
-    
-    setInterval(function(){ location.reload(); }, 10000);
+
+    // @TODO REVERT ME
+    // setInterval(function(){ location.reload(); }, 10000);
 
 });
 

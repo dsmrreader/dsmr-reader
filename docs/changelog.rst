@@ -26,6 +26,7 @@ v2.3.0 - 2019-09-01
 - [`#696 <https://github.com/dennissiemensma/dsmr-reader/issues/696>`_] API-docs broke after upgrade
 - [`#697 <https://github.com/dennissiemensma/dsmr-reader/issues/697>`_] Gas wordt niet verwerkt uit telegram bij digitale meters in België - by floyson-reference
 - [`#693 <https://github.com/dennissiemensma/dsmr-reader/issues/693>`_] Check backup creation path
+- [`#702 <https://github.com/dennissiemensma/dsmr-reader/issues/702>`_] MQTT-berichten stapelen zich op zonder MQTT-proces
 
 
 ----
