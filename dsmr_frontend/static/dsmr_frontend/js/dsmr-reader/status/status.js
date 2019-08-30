@@ -10,8 +10,7 @@ $(document).ready(function(){
         return false;
     });
 
-    // @TODO REVERT ME
-    // setInterval(function(){ location.reload(); }, 10000);
+    setInterval(function(){ location.reload(); }, 10000);
 
 });
 
