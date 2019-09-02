@@ -244,7 +244,7 @@
                             </td>
                             <td class="col-md-6">
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-hdd"></i>
+                                    <i class="fas fa-check"></i>
                                     {% trans "Latest backup" %}: <strong>{{ status.tools.backup.latest_backup|default:'-' }}</strong>
                                 </div>
                             </td>
@@ -258,7 +258,7 @@
                             </td>
                             <td class="col-md-6">
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-upload"></i>
+                                    <i class="fas fa-check"></i>
                                     {% trans "Latest Dropbox sync" %}: <strong>{{ status.tools.dropbox.latest_sync|default:'-' }}</strong>
                                 </div>
                             </td>
@@ -272,7 +272,7 @@
                             </td>
                             <td class="col-md-6">
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-upload"></i>
+                                    <i class="fas fa-check"></i>
                                     {% trans "Latest MinderGas sync" %}: <strong>{{ status.tools.mindergas.latest_sync|default:'-' }}</strong>
                                 </div>
                             </td>
@@ -286,12 +286,30 @@
                             </td>
                             <td class="col-md-6">
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-upload"></i>
+                                    <i class="fas fa-check"></i>
                                     {% trans "Latest PVOutput sync" %}: <strong>{{ status.tools.pvoutput.latest_sync|default:'-' }}</strong>
                                 </div>
                             </td>
                         </tr>
                         {% endif %}
+
+                        <tr>
+                            <td class="col-md-6">
+                                <strong>{% trans "MQTT messages" %}</strong>
+                            </td>
+                            <td class="col-md-6">
+                                {% if status.tools.mqtt.ok %}
+                                <div class="alert alert-info" role="alert">
+                                    <i class="fas fa-check"></i>
+                                {% else %}
+                                <div class="alert alert-danger" role="alert">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% endif %}
+                                    {% trans "Queued messages" %}: <strong>{{ status.tools.mqtt.pending_messages }}</strong>
+                                </div>
+                            </td>
+                        </tr>
+
                     </table>
                 </div>
             </div>

@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.core.cache import cache
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_mqtt.models.queue import Message
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_datalogger.models.reading import DsmrReading
@@ -144,6 +145,7 @@ def get_reading_status():
 
 def get_statistics_status():
     status = {
+        'ok': False,
         'latest': None,
         'days_since': None,
     }
@@ -156,8 +158,17 @@ def get_statistics_status():
         status['days_since'] = (
             timezone.now().date() - status['latest']
         ).days
+        status['ok'] = status['days_since'] < 2
 
     return status
+
+
+def get_mqtt_status():
+    message_count = Message.objects.all().count()
+    return {
+        'ok': message_count < settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE,
+        'pending_messages': message_count,
+    }
 
 
 def status_info():
@@ -187,6 +198,7 @@ def status_info():
                 'enabled': False,
                 'latest_sync': None,
             },
+            'mqtt': get_mqtt_status(),
         }
     }
 

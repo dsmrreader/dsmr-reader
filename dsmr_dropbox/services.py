@@ -29,18 +29,15 @@ def sync():
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
 
     # Sync each file, recursively.
-    for (root, _, filenames) in os.walk(backup_directory):
-        for current_file in filenames:
-            abs_file_path = os.path.abspath(os.path.join(root, current_file))
+    for current_file in list_files_in_dir(directory=backup_directory):
+        if not should_sync_file(current_file):
+            continue
 
-            if not should_sync_file(abs_file_path):
-                continue
-
-            sync_file(
-                dropbox_settings=dropbox_settings,
-                local_root_dir=backup_directory,
-                abs_file_path=abs_file_path
-            )
+        sync_file(
+            dropbox_settings=dropbox_settings,
+            local_root_dir=backup_directory,
+            abs_file_path=current_file
+        )
 
     # Try again in a while.
     DropboxSettings.objects.update(
@@ -49,6 +46,17 @@ def sync():
             hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
         )
     )
+
+
+def list_files_in_dir(directory):
+    """ Lists all files recursively in the specified (backup) directory. """
+    files = []
+
+    for (root, _, filenames) in os.walk(directory):
+        for current_file in filenames:
+            files.append(os.path.abspath(os.path.join(root, current_file)))
+
+    return files
 
 
 def should_sync_file(abs_file_path):

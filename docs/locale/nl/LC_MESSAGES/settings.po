@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Generated-By: Babel 2.7.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../settings.rst:2
 msgid "Other settings"
@@ -152,8 +152,8 @@ msgstr ""
 "berichten worden verwijderd."
 
 #: ../../settings.rst:58
-msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
-msgstr "Standaardwaarde: ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
+msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200``."
+msgstr "Standaardwaarde ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200``."
 
 #: ../../settings.rst:62
 msgid "``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``"
@@ -230,3 +230,6 @@ msgid ""
 msgstr ""
 "Voorbeeldgebruik ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
 "'electricity_returned']``."
+
+#~ msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
+#~ msgstr "Standaardwaarde: ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."

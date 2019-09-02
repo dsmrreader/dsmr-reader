@@ -1186,6 +1186,12 @@ msgstr "Meest recente synchronisatie met MinderGas"
 msgid "Latest PVOutput sync"
 msgstr "Meest recente synchronisatie met PVOutput"
 
+msgid "MQTT messages"
+msgstr "MQTT-berichten"
+
+msgid "Queued messages"
+msgstr "Wachtende berichten"
+
 msgid "Capabilities"
 msgstr "Mogelijkheden"
 
