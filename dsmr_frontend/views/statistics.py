@@ -1,8 +1,6 @@
-import json
-
 from django.contrib.humanize.templatetags.humanize import intcomma
+from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
-from django.http.response import HttpResponse
 from django.utils import timezone
 
 from dsmr_datalogger.models.reading import DsmrReading
@@ -48,6 +46,6 @@ class Statistics(TemplateView):
 class StatisticsXhrData(View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
-        return HttpResponse(json.dumps({
+        return JsonResponse({
             'total_reading_count': intcomma(DsmrReading.objects.all().count()),
-        }), content_type='application/json')
+        })

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../application.rst:2
@@ -123,12 +123,11 @@ msgstr "De applicatie maakt standaard elke nacht een back-up."
 #: ../../application.rst:51
 msgid ""
 "You can find them in the ``backups`` folder of the application. They either "
-"have a ``.sql`` or ``.gz`` extension, depending on whether compression is "
-"enabled in the backup configuration."
+"have a ``.sql`` or ``.gz`` extension, depending on whether they were compressed."
 msgstr ""
 "Je kunt ze terugvinden in de ``backups`` map van de applicatie. Ze zijn te "
-"herkennen aan een ``.sql`` of ``.gz`` extensie, afhankelijk de gekozen "
-"compressie-instellingen in de back-upconfiguratie."
+"herkennen aan een ``.sql`` of ``.gz`` extensie, afhankelijk van of ze "
+"gecomprimeerd zijn."
 
 #: ../../application.rst:52
 msgid ""

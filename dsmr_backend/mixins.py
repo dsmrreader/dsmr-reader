@@ -18,7 +18,7 @@ class StopInfiniteRun(StopIteration):
     pass
 
 
-class InfiniteManagementCommandMixin(object):
+class InfiniteManagementCommandMixin:
     """ Mixin for long running management commands, only stopping (gracefully) on SIGHUP signal. """
     sleep_time = None
     _keep_alive = None
@@ -87,11 +87,11 @@ class InfiniteManagementCommandMixin(object):
 
     def initialize(self):
         """ Called once. Override and handle any initialization required. """
-        pass
+        return
 
     def shutdown(self):
         """ Called once. Override and handle any cleanup required. """
-        pass
+        return
 
     def run(self, *args, **options):
         raise NotImplementedError('Subclasses of InfiniteManagementCommandMixin must provide a run() method')

@@ -5,7 +5,7 @@ import django.db.models.signals
 import dsmr_backend.signals
 
 
-class AppConfig(AppConfig):
+class StatsAppConfig(AppConfig):
     name = 'dsmr_stats'
     verbose_name = _('Trend & statistics')
 

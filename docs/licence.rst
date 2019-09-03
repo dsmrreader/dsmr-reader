@@ -3,7 +3,7 @@ License
 
 .. note:: 
 
-    **Copyright (c) 2015 - 2017 Dennis Siemensma**
+    **Copyright (c) 2015 Dennis Siemensma**
 
 
 .. seealso:: 

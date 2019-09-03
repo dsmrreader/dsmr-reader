@@ -1,10 +1,9 @@
-import json
 
+from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.edit import FormView
-from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -39,10 +38,7 @@ class Dashboard(TemplateView):
 class DashboardXhrHeader(View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
-        return HttpResponse(
-            json.dumps(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=True)),
-            content_type='application/json'
-        )
+        return JsonResponse(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=True))
 
 
 class DashboardXhrConsumption(TemplateView):
@@ -73,9 +69,11 @@ class DashboardXhrElectricityConsumption(View):
         form = DashboardElectricityConsumptionForm(request.GET)
 
         if not form.is_valid():
-            return HttpResponseBadRequest(
-                json.dumps({'errors': form.errors}),
-                content_type='application/json'
+            JsonResponse
+            return JsonResponse({
+                    'errors': form.errors
+                },
+                status=400
             )
 
         data = {
@@ -130,10 +128,7 @@ class DashboardXhrElectricityConsumption(View):
 
             data['latest_delta_id'] = current.id
 
-        return HttpResponse(
-            json.dumps(data),
-            content_type='application/json'
-        )
+        return JsonResponse(data)
 
 
 class DashboardXhrGasConsumption(View):
@@ -153,10 +148,7 @@ class DashboardXhrGasConsumption(View):
             data['read_at'].append(read_at)
             data['currently_delivered'].append(float(current.currently_delivered))
 
-        return HttpResponse(
-            json.dumps(data),
-            content_type='application/json'
-        )
+        return JsonResponse(data)
 
 
 class DashboardXhrTemperature(View):
@@ -176,10 +168,7 @@ class DashboardXhrTemperature(View):
             data['read_at'].append(read_at)
             data['degrees_celcius'].append(float(current.degrees_celcius))
 
-        return HttpResponse(
-            json.dumps(data),
-            content_type='application/json'
-        )
+        return JsonResponse(data)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -189,4 +178,4 @@ class DashboardXhrNotificationRead(FormView):
 
     def form_valid(self, form):
         Notification.objects.filter(pk=form.cleaned_data['notification_id'], read=False).update(read=True)
-        return HttpResponse(json.dumps({}), content_type='application/json')
+        return JsonResponse({})

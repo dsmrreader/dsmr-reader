@@ -1,0 +1,1 @@
+# Backups met alleen dagstatistieken, voor noodgevallen en tegen corrupte filesystems. Worden niet geroteerd.

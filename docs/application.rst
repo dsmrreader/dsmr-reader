@@ -48,7 +48,7 @@ Data preservation & backups
 
 - The application will, by default, create a database backup every night. 
 
- - You can find them in the ``backups`` folder of the application. They either have a ``.sql`` or ``.gz`` extension, depending on whether compression is enabled in the backup configuration.
+ - You can find them in the ``backups`` folder of the application. They either have a ``.sql`` or ``.gz`` extension, depending on whether they were compressed.
  - However, as the data is still stored **locally** on your 'vulnerable' SD card, you must export it off your RaspberryPi as well. 
 
 - There is an builtin option to have backups synced to your **Dropbox**, *without exposing your Dropbox account and your private files in it*. 

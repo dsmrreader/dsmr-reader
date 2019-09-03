@@ -10,7 +10,7 @@ import dsmr_datalogger.signals
 logger = logging.getLogger('dsmrreader')
 
 
-class AppConfig(AppConfig):
+class MqttAppConfig(AppConfig):
     # All imports below prevents an AppRegistryNotReady error on Django init.
     name = 'dsmr_mqtt'
     verbose_name = _('MQTT')
@@ -61,19 +61,19 @@ class AppConfig(AppConfig):
         try:
             dsmr_mqtt.services.callbacks.publish_json_dsmr_reading(reading=instance)
         except Exception as error:
-            logger.error('publish_json_dsmr_reading() failed: {}'.format(error))
+            logger.error('publish_json_dsmr_reading() failed: %s', error)
 
         try:
             dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading(reading=instance)
         except Exception as error:
-            logger.error('publish_split_topic_dsmr_reading() failed: {}'.format(error))
+            logger.error('publish_split_topic_dsmr_reading() failed: %s', error)
 
         try:
             dsmr_mqtt.services.callbacks.publish_day_consumption()
         except Exception as error:
-            logger.error('publish_day_consumption() failed: {}'.format(error))
+            logger.error('publish_day_consumption() failed: %s', error)
 
         try:
             dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics()
         except Exception as error:
-            logger.error('publish_split_topic_meter_statistics() failed: {}'.format(error))
+            logger.error('publish_split_topic_meter_statistics() failed: %s', error)

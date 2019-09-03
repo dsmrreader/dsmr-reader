@@ -25,6 +25,7 @@ Listed in any order, sorted by name.
 - `drvdijk <https://github.com/drvdijk>`_
 - `emilkwaaitaal <https://github.com/emilkwaaitaal>`_
 - `Ernst79 <https://github.com/Ernst79>`_
+- `floyson-reference <https://github.com/floyson-reference>`_
 - `f0nt4 <https://github.com/f0nt4>`_
 - `fpompert <https://github.com/fpompert>`_
 - `FutureCow <https://github.com/FutureCow>`_

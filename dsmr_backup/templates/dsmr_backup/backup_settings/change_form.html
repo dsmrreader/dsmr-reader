@@ -1,0 +1,14 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+
+{% block field_sets %}
+
+    {{ block.super }}
+
+    <div class="submit-row" style="text-align: center;">
+        {% blocktrans %}Saving the configuration will reset the delay until the next backup.{% endblocktrans %}
+        {% blocktrans %}Use Dropbox to secure all your backups{% endblocktrans %}, <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' 1 %}">{% blocktrans %}view Dropbox settings here{% endblocktrans %}</a>.
+        {% blocktrans %}Or use GMail/email for keeping smaller backups{% endblocktrans %}, <a href="{% url 'admin:dsmr_backup_emailbackupsettings_change' 1 %}">{% blocktrans %}view email backup settings here{% endblocktrans %}</a>.
+    </div>
+{% endblock %}

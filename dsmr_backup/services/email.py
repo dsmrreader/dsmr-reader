@@ -6,9 +6,9 @@ from django.utils import translation, timezone
 
 from dsmr_backup.models.settings import EmailBackupSettings
 from dsmr_backend.models.settings import BackendSettings, EmailSettings
+from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_backend.services.email
 import dsmr_backup.services.backup
-
 
 logger = logging.getLogger('commands')
 
@@ -22,7 +22,10 @@ def run(scheduled_process):
         return scheduled_process.delay(timezone.timedelta(days=1))
 
     temp_dir = tempfile.TemporaryDirectory()
-    backup_file = dsmr_backup.services.backup.create_statistics_backup(folder=temp_dir.name)
+    backup_file = dsmr_backup.services.backup.create_partial(
+        folder=temp_dir.name,
+        models_to_backup=(DayStatistics, HourStatistics)
+    )
 
     with translation.override(language=BackendSettings.get_solo().language):
         subject = _('DSMR-reader day/hour statistics backup')

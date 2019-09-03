@@ -1,8 +1,6 @@
-import json
-
+from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils.translation import ugettext as _
-from django.http.response import HttpResponse
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
@@ -63,7 +61,7 @@ class TrendsXhrAvgConsumption(View):
                     'value': float(dsmr_consumption.services.round_decimal(current['avg_gas']))
                 })
 
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return JsonResponse(data)
 
 
 class TrendsXhrElectricityByTariff(View):
@@ -77,7 +75,7 @@ class TrendsXhrElectricityByTariff(View):
         }
 
         if not capabilities['any'] or not DayStatistics.objects.exists():
-            return HttpResponse(json.dumps(data), content_type='application/json')
+            return JsonResponse(data)
 
         now = timezone.localtime(timezone.now())
         week_date = now.date() - timezone.timedelta(days=7)
@@ -94,4 +92,4 @@ class TrendsXhrElectricityByTariff(View):
             dsmr_stats.services.electricity_tariff_percentage(start_date=month_date).items()
         ]
 
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return JsonResponse(data)

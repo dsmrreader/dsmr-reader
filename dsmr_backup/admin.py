@@ -1,5 +1,4 @@
 from django.utils.translation import ugettext_lazy as _
-from django.http.response import HttpResponseRedirect
 from django.forms import TextInput
 from django.utils import timezone
 from django.contrib import admin
@@ -7,6 +6,7 @@ from django.conf import settings
 from django.db import models
 from solo.admin import SingletonModelAdmin
 
+from dsmr_backup.forms import BackupSettingsAdminForm
 from .models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
 from dsmr_backend.models.settings import EmailSettings
 from dsmr_backend.models.schedule import ScheduledProcess
@@ -14,6 +14,8 @@ from dsmr_backend.models.schedule import ScheduledProcess
 
 @admin.register(BackupSettings)
 class BackupSettingsAdmin(SingletonModelAdmin):
+    change_form_template = 'dsmr_backup/backup_settings/change_form.html'
+    form = BackupSettingsAdminForm
     readonly_fields = ('latest_backup', )
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
@@ -24,13 +26,13 @@ class BackupSettingsAdmin(SingletonModelAdmin):
                 'fields': ['daily_backup', 'backup_time'],
                 'description': _(
                     'Detailed instructions for restoring a backup can be found here: <a href="https://dsmr-reader.readt'
-                    'hedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup">FAQ in documentation</a>'
+                    'hedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup">FAQ in documentation</a>.'
                 )
             }
         ),
         (
             _('Advanced'), {
-                'fields': ['folder', 'compress'],
+                'fields': ['folder'],
             }
         ),
         (
@@ -40,9 +42,14 @@ class BackupSettingsAdmin(SingletonModelAdmin):
         ),
     )
 
+    def response_change(self, request, obj):
+        BackupSettings.objects.all().update(latest_backup=None)
+        return super(BackupSettingsAdmin, self).response_change(request, obj)
+
 
 @admin.register(DropboxSettings)
 class DropboxSettingsAdmin(SingletonModelAdmin):
+    change_form_template = 'dsmr_backup/dropbox_settings/change_form.html'
     readonly_fields = ('latest_sync', 'next_sync')
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
@@ -52,8 +59,9 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
             None, {
                 'fields': ['access_token'],
                 'description': _(
-                    'Detailed instructions for configuring Dropbox can be found here: <a href="https://dsmr-reader.read'
-                    'thedocs.io/nl/latest/admin/backup_dropbox.html">Documentation</a>'
+                    'This will synchronize backups to your Dropbox account. Detailed instructions for configuring '
+                    'Dropbox can be found here: <a href="https://dsmr-reader.readthedocs.io/nl/latest/admin/'
+                    'backup_dropbox.html">Documentation</a>'
                 )
             }
         ),
@@ -63,6 +71,10 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
             }
         ),
     )
+
+    def response_change(self, request, obj):
+        DropboxSettings.objects.all().update(next_sync=timezone.now())
+        return super(DropboxSettingsAdmin, self).response_change(request, obj)
 
 
 @admin.register(EmailBackupSettings)
@@ -91,12 +103,7 @@ class EmailBackupSettingsAdmin(SingletonModelAdmin):
         )
 
     def response_change(self, request, obj):
-        if 'reschedule_process' not in request.POST.keys():
-            return super(EmailBackupSettingsAdmin, self).response_change(request, obj)
-
         ScheduledProcess.objects.filter(
             module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
         ).update(planned=timezone.now())
-
-        self.message_user(request, _('Email backup is rescheduled for now.'))
-        return HttpResponseRedirect('.')
+        return super(EmailBackupSettingsAdmin, self).response_change(request, obj)

@@ -55,7 +55,7 @@ Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Number of queued MQTT messages the application will retain. Any excess will be purged.
 
-Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``.
+Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200``.
 
 
 ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``

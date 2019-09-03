@@ -88,13 +88,14 @@ def on_connect(client, userdata, flags, rc):
     logger.debug('MQTT | Paho client: on_connect(userdata, flags, rc) %s %s %s', userdata, flags, rc)
 
     try:
-        logger.debug('MQTT | --- %s : %s -> %s'.format(client._host, client._port, RC_MAPPING[rc]))
+        logger.debug('MQTT | --- %s : %s -> %s', client._host, client._port, RC_MAPPING[rc])
     except KeyError:
         pass
 
 
 def on_disconnect(client, userdata, rc):
     """ MQTT client callback for disconnecting. Outputs some debug logging. """
+
     """
     From the docs, rc value:
         If MQTT_ERR_SUCCESS (0), the callback was called in response to a disconnect() call.

@@ -3,7 +3,8 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from dsmr_backup.models.settings import BackupSettings, DropboxSettings
+from dsmr_backend.models.settings import EmailSettings
+from dsmr_backup.models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
 from dsmr_notification.models.settings import NotificationSetting
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
@@ -34,6 +35,8 @@ class Command(BaseCommand):
         # Just wipe all settings which can affect the environment.
         APISettings.objects.update(allow=not options['no_api'], auth_key='test')
         BackupSettings.objects.update(daily_backup=False)
+        EmailBackupSettings.objects.update(interval=EmailBackupSettings.INTERVAL_NONE)
+        EmailSettings.objects.update(email_to=None, host=None, port=None)
         DropboxSettings.objects.update(access_token=None)
         ConsumptionSettings.objects.update(compactor_grouping_type=ConsumptionSettings.COMPACTOR_GROUPING_BY_READING)
         MinderGasSettings.objects.update(export=False, auth_token=None)

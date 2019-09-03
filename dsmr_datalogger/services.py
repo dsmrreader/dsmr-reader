@@ -190,7 +190,7 @@ def telegram_to_reading(data):  # noqa: C901
         except InvalidTelegramError as error:
             # Hook to keep track of failed readings count.
             MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
-            dsmrreader_logger.warning('Rejected telegram (base64 encoded): {}'.format(base64_data))
+            dsmrreader_logger.warning('Rejected telegram (base64 encoded): %s', base64_data)
             dsmrreader_logger.exception(error)
             raise
 
@@ -208,7 +208,7 @@ def telegram_to_reading(data):  # noqa: C901
         code = result.group(1)
 
         # M-bus (0-n:24.1) cannot identify the type of device, see issue #92.
-        if code in ('0-2:24.2.1', '0-3:24.2.1', '0-4:24.2.1'):
+        if re.match(r'^0-\d:24\.2\.\d$', code):
             code = '0-1:24.2.1'
 
         # DSMR 2.x emits gas readings in different format.
@@ -279,7 +279,7 @@ def telegram_to_reading(data):  # noqa: C901
     dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data=data)
 
     if settings.DSMRREADER_LOG_TELEGRAMS:
-        dsmrreader_logger.info('Received telegram (base64 encoded): {}'.format(base64_data))
+        dsmrreader_logger.info('Received telegram (base64 encoded): %s', base64_data)
 
     return new_reading
 

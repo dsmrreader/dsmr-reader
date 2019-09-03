@@ -4,7 +4,7 @@ from django.apps import AppConfig
 from django.conf import settings
 
 
-class AppConfig(AppConfig):
+class PluginsAppConfig(AppConfig):
     name = 'dsmr_plugins'
 
     def ready(self):

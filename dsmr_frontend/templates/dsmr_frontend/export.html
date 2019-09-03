@@ -111,40 +111,21 @@
 {% block javascript %}
         {{ block.super }}
         {% get_current_language as LANGUAGE_CODE %}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.22.2.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.24.0.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
-
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.en.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'dsmr_frontend/js/bootstrap-datepicker/locales/bootstrap-datepicker.nl.min.js' %}"></script>
 
         <script type="text/javascript">
-            $(document).ready(function(){
-                initialize_datepicker('start_datepicker', '{{ start_date|date:datepicker_date_format }}', 'start_date');
-                initialize_datepicker('end_datepicker', '{{ end_date|date:datepicker_date_format }}', 'end_date');
-                
-                $("#download_button").click(function(){
-                	$("#download_form").submit();
-                	return false;
-                });
-            });
-            
-            function initialize_datepicker(datepicker_id, initial_date, input_id)
-            {
-            	$("#" + datepicker_id).datepicker({
-                    startView: 'months',
-                    minViewMode: 'days',
-                    maxViewMode: 'years',
-                    calendarWeeks: true,
-                    startDate: '{{ start_date|date:datepicker_date_format }}',
-                    endDate: '{{ end_date|date:datepicker_date_format }}',
-                    format: "{{ datepicker_locale_format }}",
-                    language: "{{ LANGUAGE_CODE }}"
+        /* Settings. */
+        var datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
+        var datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
+        var datepicker_locale_format = "{{ datepicker_locale_format }}";
+        var datepicker_language_code = "{{ LANGUAGE_CODE }}";
 
-            	}).on('changeDate', function(e) {
-                	var selected_date = moment(e.date).format('{{ datepicker_locale_format }}'.toUpperCase());
-                    $("#" + input_id).val(selected_date)
-
-                }).datepicker('update', initial_date).datepicker('setDate', initial_date);
-            }
+        /* XHR. */
+        var compare_xhr_summary_url = "{% url 'frontend:compare-xhr-summary' %}";
         </script>
+
+        <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/export/export.js' %}"></script>
 {% endblock %}

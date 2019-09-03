@@ -15,6 +15,23 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.3.0 - 2019-09-03
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#681 <https://github.com/dennissiemensma/dsmr-reader/issues/681>`_] Refactoring backups: improved/simplified Dropbox sync, added extra minimal backup
+- [`#638 <https://github.com/dennissiemensma/dsmr-reader/issues/638>`_] Dropbox / back-up sync per direct kunnen resetten
+- [`#682 <https://github.com/dennissiemensma/dsmr-reader/issues/682>`_] Updated help text for tracking phases
+- [`#696 <https://github.com/dennissiemensma/dsmr-reader/issues/696>`_] API-docs broke after upgrade
+- [`#697 <https://github.com/dennissiemensma/dsmr-reader/issues/697>`_] Gas wordt niet verwerkt uit telegram bij digitale meters in België - by floyson-reference
+- [`#693 <https://github.com/dennissiemensma/dsmr-reader/issues/693>`_] Check backup creation path
+- [`#702 <https://github.com/dennissiemensma/dsmr-reader/issues/702>`_] MQTT-berichten stapelen zich op zonder MQTT-proces
+
+
+----
+
+
 v2.2.3 - 2019-08-04
 ^^^^^^^^^^^^^^^^^^^
 

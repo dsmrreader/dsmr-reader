@@ -27,7 +27,7 @@ class DataloggerDsmrReading(View):
         post_form = DsmrReadingForm(request.POST)
 
         if not post_form.is_valid():
-            logger.warning('API validation failed with POST data: {}'.format(request.POST))
+            logger.warning('API validation failed with POST data: %s', request.POST)
             return HttpResponseBadRequest('Invalid data')
 
         dsmr_reading = None
