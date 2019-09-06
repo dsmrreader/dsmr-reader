@@ -36,13 +36,6 @@ class TestViews(TestCase):
             response['Location'], '/admin/login/?next=/admin/'
         )
 
-    def test_docs(self):
-        """ Tests whether API docs render without crashing. """
-        response = self.client.get(
-            reverse('api-docs:docs-index')
-        )
-        self.assertEqual(response.status_code, 200)
-
     @mock.patch('dsmr_frontend.views.dashboard.Dashboard.get_context_data')
     def test_http_500_production(self, get_context_data_mock):
         get_context_data_mock.side_effect = SyntaxError('Meh')

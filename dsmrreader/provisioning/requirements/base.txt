@@ -4,8 +4,7 @@ django==2.2.4
 django-colorfield==0.1.15
 django-debug-toolbar==2.0
 django-filter==2.2.0
-# 3.10+ is broken, do not upgrade below!
-djangorestframework==3.9.4
+djangorestframework==3.10.2
 django-solo==1.1.3
 dropbox==9.4.0
 gunicorn==19.9.0
