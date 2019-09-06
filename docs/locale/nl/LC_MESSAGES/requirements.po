@@ -15,148 +15,168 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Generated-By: Babel 2.7.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../requirements.rst:2
 msgid "Requirements"
 msgstr "Vereisten"
 
-#: ../../requirements.rst:7
-msgid "Contents"
-msgstr "Inhoudsopgave"
+#: ../../requirements.rst:6
+msgid "Hardware"
+msgstr "Hardware"
 
-#: ../../requirements.rst:10
-msgid "OS: ``Raspbian OS``"
-msgstr "OS: ``Raspbian OS``"
+#: ../../requirements.rst:7
+msgid "For datalogger only: **Any** RaspberryPi or similar"
+msgstr "Voor alleen-datalogger: **Elke** RaspberryPi of vergelijkbaar"
+
+#: ../../requirements.rst:8
+msgid "For full DSMR-reader: **RaspberryPi 3+** or similar"
+msgstr "Voor volledige DSMR-reader: **RaspberryPi 3+** of vergelijkbaar"
 
 #: ../../requirements.rst:12
-msgid ""
-"*(Or similar. Raspbian is recommended and tested with, but any satisfying the "
-"requirements should do fine)*"
-msgstr ""
-"*(Of gelijkwaardig. Raspbian is aanbevolen en wordt mee getest, al zou elk OS "
-"die dezelfde vereisten ondersteunt prima moeten zijn)*"
+msgid "Software"
+msgstr "Software"
+
+#: ../../requirements.rst:13
+msgid "OS: ``Raspbian OS`` or similar"
+msgstr "OS: ``Raspbian OS`` of vergelijkbaar"
+
+#: ../../requirements.rst:14
+msgid "Disk space: `1+ GB` (depends on whether you archive all readings)"
+msgstr "Schijfruimte: `1+ GB` (afhankelijk van gearchiveerde metingen)"
+
+#: ../../requirements.rst:15
+msgid "Python: `3.5` or higher"
+msgstr "Python: ``3.5`` of hoger"
 
 #: ../../requirements.rst:16
-msgid ""
-"**Alternative #1**: You can also run it on any server near your smart meter, as "
-"long as it satisfies the other requirements."
-msgstr ""
-"**Alternatief #1**: Je kunt dit natuurlijk ook draaien op een server vlakbij je "
-"slimme meter, zolang de vereisten maar ondersteund worden."
-
-#: ../../requirements.rst:18
-msgid ""
-"**Alternative #2**: The application supports receiving P1 telegrams using an "
-"API, so you can also run it on a server outside your home. (:doc:`API docs "
-"here<api>`)"
-msgstr ""
-"**Alternatief #2**: De applicatie ondersteunt het ontvangen van P1 telegrammen "
-"via een API, dus je kunt dit ook op een server buiten je huis draaien. (:doc:"
-"`API documentatie hier<api>`)"
-
-#: ../../requirements.rst:22
-msgid "Hardware: ``RaspberryPi 3 or Linux server``"
-msgstr "Hardware: ``RaspberryPi 3 of Linux server``"
-
-#: ../../requirements.rst:26
-msgid ""
-"The RaspberryPi 1 and 2 tend to be **too slow** for this project, as it requires "
-"multi core processing."
-msgstr ""
-"De RaspberryPi 1 en 2 lijken **te traag** voor het draaien van dit project, "
-"aangezien meerdere processoren vereist zijn."
-
-#: ../../requirements.rst:28
-msgid ""
-"You can however run just the datalogger client on an old RaspberryPi, :doc:`see "
-"for the API for a howto and example scripts<api>`."
-msgstr ""
-"Je kunt echter wel alleen een datalogger client draaien op een oude "
-"RaspberryPi, :doc:`zie de API-documentatie voor meer informatie en "
-"voorbeeldscripts<api>`."
-
-#: ../../requirements.rst:33
-msgid "Python: ``3.5+``"
-msgstr "Python: ``3.5+``"
-
-#: ../../requirements.rst:37
-msgid ""
-"Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5`` "
-"(due to Django)."
-msgstr ""
-"Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader v1.5`` "
-"(vanwege Django)."
-
-#: ../../requirements.rst:38
-msgid ""
-"Support for ``Python 3.4`` will be **discontinued** ``late 2018/begin 2019`` "
-"(due to Django & Python ``3.4`` End of Life)."
-msgstr ""
-"Ondersteuning voor ``Python 3.4`` **vervalt** ``eind 2018/begin 2019`` (vanwege "
-"Django &  Python ``3.4`` End of Life)."
-
-#: ../../requirements.rst:42
-msgid "Database: ``PostgreSQL 9+``"
-msgstr "Database: ``PostgreSQL 9+``"
-
-#: ../../requirements.rst:46
-msgid ""
-"Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` and "
-"will be discontinued completely in a later release. Please use a PostgreSQL "
-"database instead."
-msgstr ""
-"Gebruik van ``MySQL`` wordt **afgeraden** sinds ``DSMR-reader v1.6`` en "
-"ondersteuning hiervoor verdwijnt helemaal in een toekomstige versie. Gebruik "
-"daarom PostgreSQL."
-
-#: ../../requirements.rst:51
-msgid "Disk space: ``1+ GB``"
-msgstr "Schijfruimte: ``1+ GB``"
-
-#: ../../requirements.rst:53
-msgid "*(For application installation & virtualenv)*"
-msgstr "*(ten behoeve van de applicatie en VirtualEnv).*"
-
-#: ../../requirements.rst:55
-msgid ""
-"More disk space is required for storing all reader data captured (optional). I "
-"generally advise to use an 8+ GB SD card, depending on whether you keep all "
-"readings stored."
-msgstr ""
-"Meer schijfruimte is nodig voor het opslaan van alle metingen (optioneel). Over "
-"het algemeen adviseer ik minimaal een 8+ GB SD-kaart, afhankelijk van of je alle "
-"metingen bewaart."
-
-#: ../../requirements.rst:56
-msgid ""
-"The readings will take about 90+ percent of the disk space used by the "
-"application. You can enable retention to have all readings cleaned up "
-"periodically. This will make the application barely use any disk space at all "
-"(depending on your settings)."
-msgstr ""
-"De metingen nemen zo'n 90+ procent in van de door de applicatie gebruikte "
-"schijfruimte. Je kunt echter retentie inschakelen om de metingen periodiek op te "
-"schonen. Hierdoor gebruikt de applicatie relatief weinig schijfruimte "
-"(afhankelijk van je exacte instellingen)."
-
-#: ../../requirements.rst:60
 msgid "P1 telegram cable"
 msgstr "P1 telegram kabel"
 
-#: ../../requirements.rst:62
-msgid ""
-"**Smart Meter** with support for **at least DSMR 4.x+** and a **P1 telegram "
-"port**"
-msgstr ""
-"**Slimme meter** met ondersteuning voor **ten minste DSMR 4.x+** en een **P1 "
-"telegram poort**"
+#: ../../requirements.rst:17
+msgid "Smart Meter DSMR versions: `v2`, `v4` or `v5`"
+msgstr "Slimme meter DSMR versies: `v2`, `v4` of `v5`"
 
-#: ../../requirements.rst:64
+#: ../../requirements.rst:21
 msgid ""
-"**Smart meter P1 data cable** *(Can be purchased online and they cost around EUR "
-"15,- to 20,-)*"
+"Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader "
+"v1.5``"
 msgstr ""
-"**Smart meter P1 data kabel** *(Kan online besteld worden en kost rond de EUR "
-"15,- a 20,-)*"
+"Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader "
+"v1.5``"
+
+#: ../../requirements.rst:22
+msgid ""
+"Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader "
+"v2.0``"
+msgstr ""
+"Ondersteuning voor ``Python 3.4`` is **vervallen** sinds ``DSMR-reader "
+"v2.0``"
+
+#~ msgid "Contents"
+#~ msgstr "Inhoudsopgave"
+
+#~ msgid "OS: ``Raspbian OS``"
+#~ msgstr "OS: ``Raspbian OS``"
+
+#~ msgid ""
+#~ "*(Or similar. Raspbian is recommended and tested with, but any "
+#~ "satisfying the requirements should do fine)*"
+#~ msgstr ""
+#~ "*(Of gelijkwaardig. Raspbian is aanbevolen en wordt mee getest, al "
+#~ "zou elk OS die dezelfde vereisten ondersteunt prima moeten zijn)*"
+
+#~ msgid ""
+#~ "**Alternative #1**: You can also run it on any server near your smart "
+#~ "meter, as long as it satisfies the other requirements."
+#~ msgstr ""
+#~ "**Alternatief #1**: Je kunt dit natuurlijk ook draaien op een server "
+#~ "vlakbij je slimme meter, zolang de vereisten maar ondersteund worden."
+
+#~ msgid ""
+#~ "**Alternative #2**: The application supports receiving P1 telegrams "
+#~ "using an API, so you can also run it on a server outside your home. (:"
+#~ "doc:`API docs here<api>`)"
+#~ msgstr ""
+#~ "**Alternatief #2**: De applicatie ondersteunt het ontvangen van P1 "
+#~ "telegrammen via een API, dus je kunt dit ook op een server buiten je "
+#~ "huis draaien. (:doc:`API documentatie hier<api>`)"
+
+#~ msgid "Hardware: ``RaspberryPi 3 or Linux server``"
+#~ msgstr "Hardware: ``RaspberryPi 3 of Linux server``"
+
+#~ msgid ""
+#~ "The RaspberryPi 1 and 2 tend to be **too slow** for this project, as "
+#~ "it requires multi core processing."
+#~ msgstr ""
+#~ "De RaspberryPi 1 en 2 lijken **te traag** voor het draaien van dit "
+#~ "project, aangezien meerdere processoren vereist zijn."
+
+#~ msgid ""
+#~ "You can however run just the datalogger client on an old "
+#~ "RaspberryPi, :doc:`see for the API for a howto and example "
+#~ "scripts<api>`."
+#~ msgstr ""
+#~ "Je kunt echter wel alleen een datalogger client draaien op een oude "
+#~ "RaspberryPi, :doc:`zie de API-documentatie voor meer informatie en "
+#~ "voorbeeldscripts<api>`."
+
+#~ msgid ""
+#~ "Support for ``Python 3.4`` will be **discontinued** ``late 2018/begin "
+#~ "2019`` (due to Django & Python ``3.4`` End of Life)."
+#~ msgstr ""
+#~ "Ondersteuning voor ``Python 3.4`` **vervalt** ``eind 2018/begin "
+#~ "2019`` (vanwege Django &  Python ``3.4`` End of Life)."
+
+#~ msgid "Database: ``PostgreSQL 9+``"
+#~ msgstr "Database: ``PostgreSQL 9+``"
+
+#~ msgid ""
+#~ "Support for ``MySQL`` has been **deprecated** since ``DSMR-reader "
+#~ "v1.6`` and will be discontinued completely in a later release. Please "
+#~ "use a PostgreSQL database instead."
+#~ msgstr ""
+#~ "Gebruik van ``MySQL`` wordt **afgeraden** sinds ``DSMR-reader v1.6`` "
+#~ "en ondersteuning hiervoor verdwijnt helemaal in een toekomstige "
+#~ "versie. Gebruik daarom PostgreSQL."
+
+#~ msgid "Disk space: ``1+ GB``"
+#~ msgstr "Schijfruimte: ``1+ GB``"
+
+#~ msgid "*(For application installation & virtualenv)*"
+#~ msgstr "*(ten behoeve van de applicatie en VirtualEnv).*"
+
+#~ msgid ""
+#~ "More disk space is required for storing all reader data captured "
+#~ "(optional). I generally advise to use an 8+ GB SD card, depending on "
+#~ "whether you keep all readings stored."
+#~ msgstr ""
+#~ "Meer schijfruimte is nodig voor het opslaan van alle metingen "
+#~ "(optioneel). Over het algemeen adviseer ik minimaal een 8+ GB SD-"
+#~ "kaart, afhankelijk van of je alle metingen bewaart."
+
+#~ msgid ""
+#~ "The readings will take about 90+ percent of the disk space used by "
+#~ "the application. You can enable retention to have all readings "
+#~ "cleaned up periodically. This will make the application barely use "
+#~ "any disk space at all (depending on your settings)."
+#~ msgstr ""
+#~ "De metingen nemen zo'n 90+ procent in van de door de applicatie "
+#~ "gebruikte schijfruimte. Je kunt echter retentie inschakelen om de "
+#~ "metingen periodiek op te schonen. Hierdoor gebruikt de applicatie "
+#~ "relatief weinig schijfruimte (afhankelijk van je exacte instellingen)."
+
+#~ msgid ""
+#~ "**Smart Meter** with support for **at least DSMR 4.x+** and a **P1 "
+#~ "telegram port**"
+#~ msgstr ""
+#~ "**Slimme meter** met ondersteuning voor **ten minste DSMR 4.x+** en "
+#~ "een **P1 telegram poort**"
+
+#~ msgid ""
+#~ "**Smart meter P1 data cable** *(Can be purchased online and they cost "
+#~ "around EUR 15,- to 20,-)*"
+#~ msgstr ""
+#~ "**Smart meter P1 data kabel** *(Kan online besteld worden en kost "
+#~ "rond de EUR 15,- a 20,-)*"

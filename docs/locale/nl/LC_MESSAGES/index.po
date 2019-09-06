@@ -12,9 +12,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "Language: nl\n"
 
 #: ../../index.rst:2
 msgid "DSMR Reader's documentation"
-msgstr "DSMR Reader's documentatie"
+msgstr "DSMR-reader's documentatie"

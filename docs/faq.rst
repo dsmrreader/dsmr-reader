@@ -87,7 +87,6 @@ Execute the commands below:
 * Everything should work as usual now, storing the data on the new location.
 
 
-
 Recalculate prices retroactively
 --------------------------------
 *I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?*
@@ -211,3 +210,9 @@ To delete your data(base) as well::
 Optionally, you can remove these packages::
 
     sudo apt-get remove postgresql postgresql-server-dev-all nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
+
+
+How can I use the datalogger only and forward the telegrams?
+------------------------------------------------------------
+
+See :doc:`these datalogger instructions<installation/datalogger>` for more information.

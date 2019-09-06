@@ -8,6 +8,7 @@ DSMR Reader's documentation
    requirements
 
    installation
+   installation/datalogger
    installation/quick
    installation/explained
    installation/docker

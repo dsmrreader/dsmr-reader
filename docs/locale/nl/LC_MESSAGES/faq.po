@@ -9,8 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Generated-By: Babel 2.7.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../faq.rst:2
 msgid "Frequently Asked Questions (FAQ)"
@@ -249,11 +249,11 @@ msgstr ""
 "Alles zou weer moeten werken zoals voorheen, met de data voortaan op een andere "
 "locatie."
 
-#: ../../faq.rst:92
+#: ../../faq.rst:91
 msgid "Recalculate prices retroactively"
 msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
 
-#: ../../faq.rst:93
+#: ../../faq.rst:92
 msgid ""
 "*I've adjusted my energy prices but there are no changes! How can I regenerate "
 "them with my new prices?*"
@@ -261,7 +261,7 @@ msgstr ""
 "*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe "
 "kan ik de nieuwe prijzen doorvoeren?*"
 
-#: ../../faq.rst:95
+#: ../../faq.rst:94
 msgid ""
 "Statistics for each day are generated once, the day after. However, you can "
 "flush your statistics by executing:"
@@ -269,11 +269,11 @@ msgstr ""
 "Dagstatistieken worden dagelijks eenmalig gegenereerd. Het is echter wel "
 "mogelijk om deze te resetten door het volgende te doen:"
 
-#: ../../faq.rst:97
+#: ../../faq.rst:96
 msgid "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 msgstr "``./manage.py dsmr_backend_delete_aggregated_data --statistics``"
 
-#: ../../faq.rst:99
+#: ../../faq.rst:98
 msgid ""
 "The application will delete all statistics and (slowly) regenerate them in the "
 "background. Just make sure the source data is still there."
@@ -281,11 +281,11 @@ msgstr ""
 "De applicatie verwijdert alle statistieken en genereert ze (langzaam) weer op "
 "de achtergrond. Zorg er wel voor dat alle brongegevens intact zijn."
 
-#: ../../faq.rst:103
+#: ../../faq.rst:102
 msgid "I'm not seeing any gas readings"
 msgstr "Ik zie geen gasverbruik"
 
-#: ../../faq.rst:104
+#: ../../faq.rst:103
 msgid ""
 "Please make sure that your meter supports reading gas consumption and that "
 "you've waited for a few hours for any graphs to render. The gas meter positions "
@@ -297,11 +297,11 @@ msgstr ""
 "sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
 "geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:110
+#: ../../faq.rst:109
 msgid "How do I restore a database backup?"
 msgstr "Hoe zet ik een databaseback-up terug?"
 
-#: ../../faq.rst:114
+#: ../../faq.rst:113
 msgid ""
 "Restoring a backup will replace any existing data stored in the database and is "
 "irreversible!"
@@ -309,7 +309,7 @@ msgstr ""
 "Het herstellen van een back-up vervangt de bestaande data in de database en is "
 "onomkeerbaar!"
 
-#: ../../faq.rst:118
+#: ../../faq.rst:117
 msgid ""
 "Do you need a complete reinstall of DSMR-reader as well? Then please :doc:"
 "`follow the install guide<installation>` and restore the database backup "
@@ -319,11 +319,11 @@ msgstr ""
 "de installatiehandleiding<installation>` en herstel de databaseback-up volgens  "
 "**de notities aan het einde van hoofdstuk 1**."
 
-#: ../../faq.rst:121
+#: ../../faq.rst:120
 msgid "Only want to restore the database?"
 msgstr "Wil je alleen een databaseback-up terugzetten?"
 
-#: ../../faq.rst:123
+#: ../../faq.rst:122
 msgid ""
 "This asumes you are still running the same application version as the backup "
 "was created in."
@@ -331,7 +331,7 @@ msgstr ""
 "Dit gaat er overigens wel van uit dat je dezelfde applicatie-versie draait als "
 "waarmee de back-up is gemaakt."
 
-#: ../../faq.rst:125
+#: ../../faq.rst:124
 msgid ""
 "Stop the application first with ``sudo supervisorctl stop all``. This will "
 "disconnect it from the database as well."
@@ -339,7 +339,7 @@ msgstr ""
 "Stop als eerste de applicatie met ``sudo supervisorctl stop all``. Dit zorgt er "
 "ook voor dat de databaseverbinding van de applicatie verdwijnt."
 
-#: ../../faq.rst:127
+#: ../../faq.rst:126
 msgid ""
 "Importing the data could take a long time. It took MySQL 15 minutes to import "
 "nearly 3 million readings, from a compressed backup, on a RaspberryPi 3."
@@ -348,19 +348,19 @@ msgstr ""
 "het ongeveer een kwartier om 3 miljoen metingen te importeren, vanuit een "
 "gecomprimeerde back-up op een RaspberryPi 3."
 
-#: ../../faq.rst:129
+#: ../../faq.rst:128
 msgid "For **PostgreSQL** restores::"
 msgstr "Voor herstellen van **PostgreSQL**::"
 
-#: ../../faq.rst:143
+#: ../../faq.rst:142
 msgid "For **MySQL** restores::"
 msgstr "Voor herstellen van **MySQL**::"
 
-#: ../../faq.rst:157
+#: ../../faq.rst:156
 msgid "Start the application again with ``sudo supervisorctl start all``."
 msgstr "Start de applicatie weer met ``sudo supervisorctl start all``."
 
-#: ../../faq.rst:161
+#: ../../faq.rst:160
 msgid ""
 "In case the version differs, you can try forcing a deployment reload by: ``sudo "
 "su - dsmr`` and then executing ``./post-deploy.sh``."
@@ -369,11 +369,11 @@ msgstr ""
 "herladen. Log in met: ``sudo su - dsmr`` en voer vervolgens ``./post-deploy."
 "sh`` uit."
 
-#: ../../faq.rst:165
+#: ../../faq.rst:164
 msgid "How do I enable timezone support for MySQL?"
 msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
-#: ../../faq.rst:167
+#: ../../faq.rst:166
 msgid ""
 "`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql."
 "html>`_ for more information about how to enable timezone support on MySQL. On "
@@ -385,12 +385,12 @@ msgstr ""
 "versies is het een kwestie van onderstaand commando uitvoeren als root/sudo-"
 "gebruiker::"
 
-#: ../../faq.rst:174
+#: ../../faq.rst:173
 msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
 msgstr ""
 "Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of hoger?"
 
-#: ../../faq.rst:176
+#: ../../faq.rst:175
 msgid ""
 "Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for "
 "processing MQTT messages (``dsmr_mqtt``). Fresh installations automatically "
@@ -402,29 +402,42 @@ msgstr ""
 "dit ``dsmr_mqtt`` proces. Bestaande installaties zullen ``dsmr_mqtt`` echter "
 "handmatig moeten toevoegen. Instructies:"
 
-#: ../../faq.rst:179
+#: ../../faq.rst:178
 msgid "Please upgrade to ``v1.23.0`` or higher first."
 msgstr "Upgrade eerst naar  ``v1.23.0`` of hoger."
 
-#: ../../faq.rst:180
+#: ../../faq.rst:179
 msgid "Now execute the following commands as **root/sudo-user**::"
 msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
 
-#: ../../faq.rst:189
+#: ../../faq.rst:188
 msgid "How do I uninstall DSMR-reader?"
 msgstr "Hoe deinstalleer ik DSMR-reader?"
 
-#: ../../faq.rst:190
+#: ../../faq.rst:189
 msgid "To remove DSMR-reader from your system, execute the following commands::"
 msgstr "Om DSMR-reader van je systeem te verwijderen, voer het volgende uit::"
 
-#: ../../faq.rst:207
+#: ../../faq.rst:206
 msgid "To delete your data(base) as well::"
 msgstr "Om eveneens je data(base) te verwijderen::"
 
-#: ../../faq.rst:211
+#: ../../faq.rst:210
 msgid "Optionally, you can remove these packages::"
 msgstr "Eventueel kun je deze packages ook verwijderen::"
+
+#: ../../faq.rst:216
+msgid "How can I use the datalogger only and forward the telegrams?"
+msgstr ""
+"Hoe kan ik alleen de datalogger gebruiken voor het doorsturen van telegrammen?"
+
+#: ../../faq.rst:218
+msgid ""
+"See :doc:`these datalogger instructions<installation/datalogger>` for more "
+"information."
+msgstr ""
+"Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor meer "
+"informatie."
 
 #~ msgid "Feature/bug report"
 #~ msgstr "Verzoek/fout melden"

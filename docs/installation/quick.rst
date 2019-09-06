@@ -13,7 +13,7 @@ Start::
     
 .. note::
     
-    Does PostgreSQL not start/create the cluster due to locales? I.e.:: 
+    Does PostgreSQL not start/create the cluster due to locales? E.g.::
     
       Error: The locale requested by the environment is invalid.
       Error: could not create default cluster. Please create it manually with

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-10-11 20:55+0200\n"
-"PO-Revision-Date: 2018-10-16 17:00+0200\n"
+"POT-Creation-Date: 2019-09-04 21:42+0200\n"
+"PO-Revision-Date: 2019-09-06 21:05+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Generated-By: Babel 2.7.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../installation/quick.rst:2
 msgid "Installation: Quick"
@@ -38,7 +38,7 @@ msgid "Start::"
 msgstr "Begin::"
 
 #: ../../installation/quick.rst:16
-msgid "Does PostgreSQL not start/create the cluster due to locales? I.e.::"
+msgid "Does PostgreSQL not start/create the cluster due to locales? E.g.::"
 msgstr "Start PostgreSQL niet wegens een fout in 'locales'? Bijvoorbeeld::"
 
 #: ../../installation/quick.rst:24

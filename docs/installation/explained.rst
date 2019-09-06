@@ -3,7 +3,7 @@ Installation: Explained
 
 .. note::
 
-    The installation guide may take about *15 to 30 minutes* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
+    The installation guide may take about *15 to 30 minutes* (for RaspberryPi 3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
 
 .. contents::
@@ -25,7 +25,7 @@ Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv
 
 .. note::
     
-    Does PostgreSQL not start/create the cluster due to locales? I.e.:: 
+    Does PostgreSQL not start/create the cluster due to locales? E.g.::
     
       Error: The locale requested by the environment is invalid.
       Error: could not create default cluster. Please create it manually with
