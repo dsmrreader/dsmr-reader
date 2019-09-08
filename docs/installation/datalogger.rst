@@ -31,7 +31,7 @@ Execute::
     sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
     
     # Requirements
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pip install pyserial==3.2.1 requests==2.12.4
+    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.2.1 requests==2.12.4
 
 
 Script
