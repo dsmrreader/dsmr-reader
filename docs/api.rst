@@ -162,7 +162,18 @@ Creates a reading from direct values, omitting the need for the telegram.
 
     **Please note**: Readings are processed simultaneously. Inserting readings **retroactively** might result in undesired results due to the data processing, which is always reading ahead.
     
-    Therefor inserting historic data might require you to delete all aggregated data using the ``./manage.py dsmr_backend_delete_aggregated_data`` command.
+    Therefor inserting historic data might require you to delete all aggregated data using::
+
+        sudo su - postgres
+        psql dsmrreader
+        truncate dsmr_consumption_electricityconsumption;
+        truncate dsmr_consumption_gasconsumption;
+        truncate dsmr_stats_daystatistics;
+        truncate dsmr_stats_hourstatistics;
+
+        # This query can take a long time!
+        update dsmr_datalogger_dsmrreading set processed = False;
+
     
     This will process all readings again, from the very first start, and aggregate them (and **will** take a long time depending on your reading count).
     

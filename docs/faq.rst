@@ -91,11 +91,10 @@ Recalculate prices retroactively
 --------------------------------
 *I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?*
 
-Statistics for each day are generated once, the day after. However, you can flush your statistics by executing:
+Execute::
 
-``./manage.py dsmr_backend_delete_aggregated_data --statistics``
-
-The application will delete all statistics and (slowly) regenerate them in the background. Just make sure the source data is still there.
+    sudo su - dsmr
+    ./manage.py dsmr_stats_recalculate_prices
 
 
 I'm not seeing any gas readings

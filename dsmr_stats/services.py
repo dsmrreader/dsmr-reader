@@ -307,3 +307,15 @@ def update_electricity_statistics(reading):
 
     if dirty:
         stats.save()
+
+
+def recalculate_prices():
+    """ Retroactively sets the prices for all statistics. E.g.: When the user has altered the prices. """
+    for current_day in DayStatistics.objects.all():
+        prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
+
+        current_day.electricity1_cost = current_day.electricity1 * prices.electricity_delivered_1_price
+        current_day.electricity2_cost = current_day.electricity2 * prices.electricity_delivered_2_price
+        current_day.gas_cost = current_day.gas * prices.gas_price
+        current_day.total_cost = current_day.electricity1_cost + current_day.electricity2_cost + current_day.gas_cost
+        current_day.save()

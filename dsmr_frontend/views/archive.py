@@ -6,11 +6,12 @@ from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils import timezone, formats
 
+import dsmr_consumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
-from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
 import dsmr_backend.services.backend
+import dsmr_consumption.services
 import dsmr_stats.services
 
 
@@ -63,15 +64,7 @@ class ArchiveXhrSummary(TemplateView):
 
         # Only day level allows some additional data.
         if selected_level == 'days':
-            try:
-                # This WILL fail when we either have no prices at all or conflicting ranges.
-                context_data['energy_price'] = EnergySupplierPrice.objects.by_date(
-                    target_date=selected_datetime.date()
-                )
-            except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
-                # Default to zero prices.
-                context_data['energy_price'] = EnergySupplierPrice()
-
+            context_data['energy_price'] = dsmr_consumption.services.get_day_prices(day=selected_datetime.date())
             context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
 
         context_data['selected_level'] = selected_level

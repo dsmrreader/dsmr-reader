@@ -20,8 +20,8 @@ v2.4.0 - 2019-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#699 <https://github.com/dennissiemensma/dsmr-reader/issues/699>`_] Hergenereren dagtotalen verbeteren
 - [`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxxxxxxxx
-
 
 ----
 

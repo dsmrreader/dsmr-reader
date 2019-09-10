@@ -7,6 +7,7 @@ from django.utils import timezone
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_backend.services.backend
@@ -545,6 +546,42 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(stats.highest_return_l1_timestamp, reading_timestamp)
         self.assertEqual(stats.lowest_usage_l1_value, Decimal('0.050'))
         self.assertEqual(stats.lowest_usage_l1_timestamp, reading2.timestamp)
+
+    def test_recalculate_prices(self):
+        target_day = timezone.make_aware(timezone.datetime(2018, 1, 1))
+        EnergySupplierPrice.objects.create(
+            start=target_day.date(),
+            end=target_day.date(),
+            electricity_delivered_1_price=1,
+            electricity_delivered_2_price=2,
+            gas_price=5
+        )
+        DayStatistics.objects.create(
+            day=target_day.date(),
+            total_cost=12345,
+            electricity1=10,
+            electricity2=20,
+            electricity1_cost=15,
+            electricity2_cost=30,
+            gas=1,
+            gas_cost=7,
+            electricity1_returned=0,
+            electricity2_returned=0,
+        )
+
+        day_totals = DayStatistics.objects.all()[0]
+        self.assertEqual(day_totals.electricity1_cost, 15)
+        self.assertEqual(day_totals.electricity2_cost, 30)
+        self.assertEqual(day_totals.gas_cost, 7)
+        self.assertEqual(day_totals.total_cost, 12345)
+
+        dsmr_stats.services.recalculate_prices()
+
+        day_totals = DayStatistics.objects.all()[0]
+        self.assertEqual(day_totals.electricity1_cost, 10)
+        self.assertEqual(day_totals.electricity2_cost, 40)
+        self.assertEqual(day_totals.gas_cost, 5)
+        self.assertEqual(day_totals.total_cost, 55)
 
 
 class TestServicesWithoutGas(TestServices):

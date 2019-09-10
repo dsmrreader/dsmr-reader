@@ -99,7 +99,7 @@ Fake datalogger
 There is a builtin command that can somewhat fake a datalogger::
     
     source ~/.virtualenvs/dsmrreader/bin/activate
-    ./manage.py dsmr_fake_datasource --ack-to-mess-up-my-data --with-gas --with-electricity-returned
+    ./manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
 
 It will generate random data every second in a certain pattern and should be fine for basic testing. 
 

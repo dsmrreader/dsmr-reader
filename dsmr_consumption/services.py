@@ -193,13 +193,7 @@ def day_consumption(day):
     }
     day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
     day_end = day_start + timezone.timedelta(days=1)
-
-    try:
-        # This WILL fail when we either have no prices at all or conflicting ranges.
-        daily_energy_price = EnergySupplierPrice.objects.by_date(target_date=day)
-    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
-        # Default to zero prices.
-        daily_energy_price = EnergySupplierPrice()
+    daily_energy_price = get_day_prices(day=day)
 
     electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)
 
@@ -454,3 +448,13 @@ def summarize_energy_contracts():
         })
 
     return data
+
+
+def get_day_prices(day):
+    """ Returns the prices set for a day. """
+    try:
+        # This WILL fail when we either have no prices at all or conflicting ranges.
+        return EnergySupplierPrice.objects.by_date(target_date=day)
+    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
+        # Default to zero prices.
+        return EnergySupplierPrice()

@@ -82,6 +82,14 @@ msgstr "**Tickets opgelost in deze release:**"
 
 #: ../../changelog.rst:23
 msgid ""
+"[`#699 <https://github.com/dennissiemensma/dsmr-reader/issues/699>`_] "
+"Hergenereren dagtotalen verbeteren"
+msgstr ""
+"[`#699 <https://github.com/dennissiemensma/dsmr-reader/issues/699>`_] "
+"Hergenereren dagtotalen verbeteren"
+
+#: ../../changelog.rst:24
+msgid ""
 "[`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/"
 "xxxxx>`_] xxxxxxxxxxxx"
 msgstr ""

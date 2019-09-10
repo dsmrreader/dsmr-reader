@@ -24,13 +24,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
         parser.add_argument(
-            '--ack-to-mess-up-my-data',
-            action='store_true',
-            dest='acked_warning',
-            default=False,
-            help=_('Required option to acknowledge you that you WILL mess up your data with this.')
-        )
-        parser.add_argument(
             '--with-gas',
             action='store_true',
             dest='with_gas',
@@ -56,9 +49,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
         if not settings.DEBUG:
             raise CommandError(_('Intended usage is NOT production! Only allowed when DEBUG = True'))
-
-        if not options.get('acked_warning'):
-            raise CommandError(_('Intended usage is NOT production! Force by using --ack-to-mess-up-my-data'))
 
         telegram = self._generate_data(
             options['with_gas'],
