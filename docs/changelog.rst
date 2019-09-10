@@ -21,7 +21,9 @@ v2.4.0 - 2019-xx-xx
 **Tickets resolved in this release:**
 
 - [`#699 <https://github.com/dennissiemensma/dsmr-reader/issues/699>`_] Hergenereren dagtotalen verbeteren
+- [`#625 <https://github.com/dennissiemensma/dsmr-reader/issues/625>`_] Meter statistieken weergeven wanneer leeg
 - [`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxxxxxxxx
+
 
 ----
 

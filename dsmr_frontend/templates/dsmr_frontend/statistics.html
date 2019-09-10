@@ -68,54 +68,38 @@
                 </header>
                 <div class="panel-body">
                     <table class="table table-condensed">
-                        {% if meter_statistics.power_failure_count %}
                         <tr>
                             <td class="col-md-6">{% trans "Number of power failures in any phases" %}</td>
                             <td class="col-md-6"><span class="badge bg-black">{{ meter_statistics.power_failure_count|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
-                        {% if meter_statistics.long_power_failure_count %}
                         <tr>
                             <td>{% trans "Number of long power failures in any phase" %}</td>
                             <td><span class="badge bg-black">{{ meter_statistics.long_power_failure_count|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
-                        {% if meter_statistics.voltage_sag_count_l1 %}
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L1" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l1|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
-                        {% if meter_statistics.voltage_sag_count_l2 %}
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l2|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
-                        {% if meter_statistics.voltage_sag_count_l3 %}
                         <tr>
                             <td>{% trans "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l3|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
-                        {% if meter_statistics.voltage_swell_count_l1 %}
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L1" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l1|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
-                        {% if meter_statistics.voltage_swell_count_l2 %}
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l2|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
-                        {% if meter_statistics.voltage_swell_count_l3 %}
                         <tr>
                             <td>{% trans "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
                             <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l3|default:'-' }}</span></td>
                         </tr>
-                        {% endif %}
                     </table>
                 </div>
             </div>
