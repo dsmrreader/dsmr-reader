@@ -23,6 +23,7 @@ v2.4.0 - 2019-xx-xx
 - [`#699 <https://github.com/dennissiemensma/dsmr-reader/issues/699>`_] Hergenereren dagtotalen verbeteren
 - [`#625 <https://github.com/dennissiemensma/dsmr-reader/issues/625>`_] Meter statistieken weergeven wanneer leeg
 - [`#710 <https://github.com/dennissiemensma/dsmr-reader/issues/710>`_] Waarschuwingen risico's SD-kaartjes
+- [`#712 <https://github.com/dennissiemensma/dsmr-reader/issues/712>`_] Requirements update (September 2019)
 - [`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxxxxxxxx
 
 
