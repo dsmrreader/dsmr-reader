@@ -2,6 +2,10 @@ Installation
 ============
 
 
+.. warning::
+    **Possible storage issues**: :doc:`Please read this page as well before you start<data_integrity>`.
+
+
 Install datalogger only
 -----------------------
 Use this to only install the datalogger. You can then forward the telegrams to an installation of DSMR-reader hosted somewhere else.

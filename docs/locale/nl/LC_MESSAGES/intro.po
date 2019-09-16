@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Generated-By: Babel 2.7.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../intro.rst:2
 msgid "Introduction"
@@ -34,11 +34,11 @@ msgstr ""
 
 #: ../../intro.rst:7
 msgid ""
-"Keeping your data for yourself (all data is stored locally and untracked "
-"as well)."
+"Keeping your data for yourself (all data is stored locally and untracked as "
+"well)."
 msgstr ""
-"Alle gegevens zijn eigendom van jezelf (alle data wordt lokaal opgeslagen "
-"en wordt niet zomaar gedeeld met de buitenwereld)."
+"Alle gegevens zijn eigendom van jezelf (alle data wordt lokaal opgeslagen en "
+"wordt niet zomaar gedeeld met de buitenwereld)."
 
 #: ../../intro.rst:8
 msgid "Always free to use (it's open source on Github as well)."
@@ -50,13 +50,13 @@ msgstr "Talen"
 
 #: ../../intro.rst:13
 msgid ""
-"The entire application and its code is written in English. The interface "
-"is also translated into Dutch and will be triggered depending on your "
+"The entire application and its code is written and documented in English. The "
+"interface is translated into Dutch and will be enabled, depending on your "
 "browser's language preference."
 msgstr ""
-"De gehele applicatie, en bijbehorende code, is in het Engels geschreven. "
-"De grafische interface is echter ook in het Nederlands beschikbaar. Deze "
-"wordt getoond afhankelijk van de taalinstelling van je webbrowser."
+"De gehele applicatie, en bijbehorende code, is in het Engels geschreven. De "
+"grafische interface is echter ook in het Nederlands beschikbaar. Deze wordt "
+"getoond afhankelijk van de taalinstelling van je webbrowser."
 
 #: ../../intro.rst:18
 msgid "Screenshots"
@@ -64,17 +64,23 @@ msgstr "Screenshots"
 
 #: ../../intro.rst:19
 msgid ":doc:`For screenshots & features see this page<screenshots>`."
-msgstr ""
-":doc:`Voor screenshots en mogelijkheden, zie deze pagina<screenshots>`."
+msgstr ":doc:`Voor screenshots en mogelijkheden, zie deze pagina<screenshots>`."
 
 #: ../../intro.rst:23
+msgid "Storage issues"
+msgstr "Problemen met opslag"
+
+#: ../../intro.rst:24
+msgid ":doc:`Please read this page as well before you start<data_integrity>`."
+msgstr ":doc:`Lees deze pagina voordat je begint<data_integrity>`."
+
+#: ../../intro.rst:28
 msgid "Github"
 msgstr "Github"
 
-#: ../../intro.rst:24
+#: ../../intro.rst:29
 msgid ""
-"The project can be found here: https://github.com/dennissiemensma/dsmr-"
-"reader"
+"The project can be found here: https://github.com/dennissiemensma/dsmr-reader"
 msgstr ""
 "Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
 "reader"

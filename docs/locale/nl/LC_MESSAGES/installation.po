@@ -22,10 +22,18 @@ msgid "Installation"
 msgstr "Installatie"
 
 #: ../../installation.rst:6
+msgid ""
+"**Possible storage issues**: :doc:`Please read this page as well before you "
+"start<data_integrity>`."
+msgstr ""
+"**Mogelijke problemen met gegevensopslag**: :doc:`Lees deze pagina voordat je "
+"begint<data_integrity>`."
+
+#: ../../installation.rst:10
 msgid "Install datalogger only"
 msgstr "Installeer alleen de datalogger"
 
-#: ../../installation.rst:7
+#: ../../installation.rst:11
 msgid ""
 "Use this to only install the datalogger. You can then forward the telegrams to "
 "an installation of DSMR-reader hosted somewhere else."
@@ -34,7 +42,7 @@ msgstr ""
 "telegrammen doorsturen naar een andere installatie van DSMR-reader, die ergens "
 "anders draait."
 
-#: ../../installation.rst:9
+#: ../../installation.rst:13
 msgid ""
 ":doc:`Go to datalogger only installation instructions here.<installation/"
 "datalogger>`"
@@ -42,11 +50,11 @@ msgstr ""
 ":doc:`Ga hier naar de instructies voor de installatie van de datalogger."
 "<installation/datalogger>`"
 
-#: ../../installation.rst:13
+#: ../../installation.rst:17
 msgid "Install full DSMR-reader"
 msgstr "Installeer volledige versie van DSMR-reader"
 
-#: ../../installation.rst:14
+#: ../../installation.rst:18
 msgid ""
 "Use this to host both the datalogger and application on the same machine. You "
 "have several options:"
@@ -54,11 +62,11 @@ msgstr ""
 "Gebruik dit om zowel de datalogger als de applicatie op hetzelfde apparaat te "
 "installeren. Je hebt diverse opties:"
 
-#: ../../installation.rst:16
+#: ../../installation.rst:20
 msgid "**Quick installation**"
 msgstr "**Snelle installatie**"
 
-#: ../../installation.rst:18
+#: ../../installation.rst:22
 msgid ""
 "Contains just a list of commands needed for the installation of DSMR-reader. :"
 "doc:`Go to quick installation instructions here.<installation/quick>`"
@@ -67,11 +75,11 @@ msgstr ""
 "reader. :doc:`Ga hier naar instructies voor de snelle installatie."
 "<installation/quick>`"
 
-#: ../../installation.rst:21
+#: ../../installation.rst:25
 msgid "**Explained installation**"
 msgstr "**Toegelichte installatie**"
 
-#: ../../installation.rst:23
+#: ../../installation.rst:27
 msgid ""
 "For others users who want some addition explanation about what they are "
 "exactly doing/installing. :doc:`Go to explained installation instructions here."
@@ -81,11 +89,11 @@ msgstr ""
 "doc:`Ga hier naar instructies voor de toegelichte installatie.<installation/"
 "quick>`"
 
-#: ../../installation.rst:26
+#: ../../installation.rst:30
 msgid "**Docker installation**"
 msgstr "**Docker-installatie**"
 
-#: ../../installation.rst:28
+#: ../../installation.rst:32
 msgid ""
 "Use DSMR-reader in Docker. Containers are maintained by third parties. :doc:"
 "`Go to Docker installation instructions here.<installation/docker>`"

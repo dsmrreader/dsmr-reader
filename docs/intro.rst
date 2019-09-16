@@ -10,13 +10,18 @@ Project mission & goals
 
 Languages
 ---------
-The entire application and its code is written in English. 
-The interface is also translated into Dutch and will be triggered depending on your browser's language preference.
+The entire application and its code is written and documented in English.
+The interface is translated into Dutch and will be enabled, depending on your browser's language preference.
 
 
 Screenshots
 -----------
 :doc:`For screenshots & features see this page<screenshots>`.
+
+
+Storage issues
+--------------
+:doc:`Please read this page as well before you start<data_integrity>`.
 
 
 Github

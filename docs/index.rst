@@ -6,6 +6,7 @@ DSMR Reader's documentation
 
    intro
    requirements
+   data_integrity
 
    installation
    installation/datalogger
