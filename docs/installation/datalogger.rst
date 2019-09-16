@@ -46,6 +46,7 @@ Create a new file: ``/home/dsmr/dsmr_datalogger_api_client.py`` with contents::
     import serial
 
 
+    SLEEP = 0.5
     API_SERVERS = (
         ('http://HOST-OR-IP-ONE/api/v1/datalogger/dsmrreading', 'APIKEY-BLABLABLA-ABCDEFGHI'),
     ###    ('http://HOST-OR-IP-TWO/api/v1/datalogger/dsmrreading', 'APIKEY-BLABLABLA-JKLMNOPQR'),
@@ -65,7 +66,7 @@ Create a new file: ``/home/dsmr/dsmr_datalogger_api_client.py`` with contents::
                 print('Sending telegram to:', api_url)
                 send_telegram(telegram, api_url, api_key)
 
-            sleep(1)
+            sleep(SLEEP)
 
 
     def read_telegram():
