@@ -12,6 +12,7 @@ import requests
 import serial
 
 
+SLEEP = 0.5
 API_SERVERS = (
     # You can add multiple hosts here... just copy the line below and paste it directly under it.
     ('http://HOST-OR-IP/api/v1/datalogger/dsmrreading', 'APIKEY-BLABLABLA-ABCDEFGHI'),
@@ -35,7 +36,7 @@ def main():
             except Exception as error:
                 print('[!] {}'.format(error))
 
-        sleep(1)
+        sleep(SLEEP)
 
 
 def read_telegram():
