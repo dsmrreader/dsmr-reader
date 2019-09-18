@@ -24,7 +24,6 @@ def main():
 
     for telegram in read_telegram():
         print('Telegram read')
-        print(telegram)
 
         for current_server in API_SERVERS:
             api_url, api_key = current_server
