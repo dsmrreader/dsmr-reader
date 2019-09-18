@@ -3,6 +3,7 @@ import tempfile
 import shutil
 import gzip
 import os
+import io
 
 from django.db import connection
 from django.test import TestCase
@@ -11,6 +12,7 @@ from django.conf import settings
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_backup.models.settings import BackupSettings
+from dsmr_frontend.models.message import Notification
 from dsmr_stats.models.statistics import DayStatistics
 import dsmr_backup.services.backup
 
@@ -147,25 +149,60 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
 
     @mock.patch('subprocess.Popen')
     @mock.patch('dsmr_backup.services.backup.compress')
-    def test_create_full(self, compress_mock, subprocess_mock):
+    @mock.patch('dsmr_backup.services.backup.on_backup_failed')
+    def test_create_full(self, on_backup_failed_mock, compress_mock, subprocess_mock):
         FOLDER = '/var/tmp/test-dsmr/'
         BackupSettings.objects.all().update(folder=FOLDER)
+        handle_mock = mock.MagicMock()
+        handle_mock.returncode = 0
+        subprocess_mock.return_value = handle_mock
 
         self.assertFalse(compress_mock.called)
         self.assertFalse(subprocess_mock.called)
+        self.assertFalse(on_backup_failed_mock.called)
 
         dsmr_backup.services.backup.create_full(
             folder=dsmr_backup.services.backup.get_backup_directory()
         )
         self.assertTrue(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
+        self.assertFalse(on_backup_failed_mock.called)
+        compress_mock.reset_mock()
+        subprocess_mock.reset_mock()
 
         # Test again, different branch coverage, as folder now exists.
         dsmr_backup.services.backup.create_full(
             folder=dsmr_backup.services.backup.get_backup_directory()
         )
 
+        self.assertTrue(compress_mock.called)
+        self.assertTrue(subprocess_mock.called)
+
+        # Test unexpected exitcode.
+        handle_mock = mock.MagicMock()
+        handle_mock.returncode = -1
+        subprocess_mock.return_value = handle_mock
+
+        dsmr_backup.services.backup.create_full(
+            folder=dsmr_backup.services.backup.get_backup_directory()
+        )
+        self.assertTrue(on_backup_failed_mock.called)
+
         shutil.rmtree(FOLDER)
+
+    def test_on_backup_failed(self):
+        subprocess_mock = mock.MagicMock()
+        subprocess_mock.stderr = io.StringIO('error')
+        subprocess_mock.returncode = 0
+
+        Notification.objects.all().delete()
+        self.assertFalse(Notification.objects.all().exists())
+
+        # Exception should be rainsed and message created.
+        with self.assertRaises(IOError):
+            dsmr_backup.services.backup.on_backup_failed(process_handle=subprocess_mock)
+
+        self.assertTrue(Notification.objects.all().exists())
 
     @mock.patch('subprocess.Popen')
     @mock.patch('dsmr_backup.services.backup.compress')

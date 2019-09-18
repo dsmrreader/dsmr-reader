@@ -4,6 +4,7 @@ import shutil
 import gzip
 import os
 
+from django.utils.translation import ugettext as _
 from django.db import connection
 from django.utils import timezone
 from django.conf import settings
@@ -12,6 +13,7 @@ from django.utils import formats
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings
 import dsmr_dropbox.services
+import dsmr_frontend.services
 
 
 logger = logging.getLogger('commands')
@@ -119,12 +121,18 @@ def create_full(folder):
                 settings.DATABASES['default']['NAME'],
                 '.dump',
             ],
-            stdout=open(backup_file, 'w')
+            stdout=open(backup_file, 'w'),
+            stderr=subprocess.PIPE
         )   # pragma: no cover
     else:
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))  # pragma: no cover
 
     backup_process.wait()
+    logger.debug(' - Backup exit code: %s', backup_process.returncode)
+
+    if backup_process.returncode != 0:
+        on_backup_failed(process_handle=backup_process)
+
     backup_file = compress(file_path=backup_file)
     logger.debug(' - Created and compressed statistics backup: %s', backup_file)
 
@@ -156,13 +164,34 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
         ], env={
             'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
         },
-        stdout=open(backup_file, 'w')
+        stdout=open(backup_file, 'w'),
+        stderr=subprocess.PIPE
     )
 
     backup_process.wait()
+    logger.debug(' - Backup exit code: %s', backup_process.returncode)
+
+    if backup_process.returncode != 0:
+        on_backup_failed(process_handle=backup_process)
+
     backup_file = compress(file_path=backup_file)
     logger.debug(' - Created and compressed statistics backup: %s', backup_file)
     return backup_file
+
+
+def on_backup_failed(process_handle):
+    """ Triggered when backup creation fails. """
+    error_message = process_handle.stderr.read()
+    logger.critical(' - Unexpected exit code (%s) for backup: %s', process_handle.returncode, error_message)
+
+    current_date = formats.date_format(
+        timezone.localtime(timezone.now()).date()
+    )
+    dsmr_frontend.services.display_dashboard_message(message=_(
+        'Backup creation failed at {}, please check the dsmr_backend logfile.'.format(current_date)
+    ))
+
+    raise IOError(error_message)
 
 
 def compress(file_path, compresslevel=1):

@@ -15,7 +15,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.4.0 - 2019-xx-xx
+v2.4.0 - 2019-09-19
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
@@ -24,7 +24,7 @@ v2.4.0 - 2019-xx-xx
 - [`#625 <https://github.com/dennissiemensma/dsmr-reader/issues/625>`_] Meter statistieken weergeven wanneer leeg
 - [`#710 <https://github.com/dennissiemensma/dsmr-reader/issues/710>`_] Waarschuwingen risico's SD-kaartjes
 - [`#712 <https://github.com/dennissiemensma/dsmr-reader/issues/712>`_] Requirements update (September 2019)
-- [`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxxxxxxxx
+- [`#711 <https://github.com/dennissiemensma/dsmr-reader/issues/711>`_] Check exit code backups
 
 
 ----

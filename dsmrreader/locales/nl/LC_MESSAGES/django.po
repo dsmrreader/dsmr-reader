@@ -223,6 +223,9 @@ msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
 msgid "Email backup configuration"
 msgstr "Back-up per e-mail configuratie"
 
+msgid "Backup creation failed at {}, please check the dsmr_backend logfile."
+msgstr "Maken van back-up gefaald op {}, controleer de logfile van dsmr_backend."
+
 msgid "DSMR-reader day/hour statistics backup"
 msgstr "DSMR-reader back-up van dag- en uurstatistieken"
 

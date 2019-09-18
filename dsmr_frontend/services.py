@@ -3,6 +3,8 @@ import struct
 from django.utils import translation
 from django.utils.translation import ugettext as _
 
+from dsmr_frontend.models.message import Notification
+
 
 def hex_color_to_rgb(hex_color):
     """
@@ -23,3 +25,8 @@ def get_translated_string(text, language='nl'):
     translation.activate(old_lang)
 
     return translated_text
+
+
+def display_dashboard_message(message):
+    """ Displays a message on the dashboard, but prevents any UNREAD duplicates. """
+    Notification.objects.get_or_create(message=message, read=False)

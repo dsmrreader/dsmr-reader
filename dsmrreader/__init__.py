@@ -1,5 +1,5 @@
 """
-    Copyright (C) 2015/2016 Dennis Siemensma
+    Copyright (C) 2015 Dennis Siemensma
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,6 @@
 """
 from django.utils.version import get_version
 
-VERSION = (2, 4, 0, 'beta', 5)
+VERSION = (2, 4, 0, 'beta', 6)
 
 __version__ = get_version(VERSION)
