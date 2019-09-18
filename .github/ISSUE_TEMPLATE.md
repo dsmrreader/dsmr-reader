@@ -1,9 +1,12 @@
-### Jouw omgeving
-*(Indien van toepassing)*
-* DSMR-reader versie *(rechtsbovenin applicatie zichtbaar)*: `v2.X.Y`
-* Hardware *(RaspberryPi 2, 3 of iets anders)*: `RaspberryPi X...`
-* DSMR-protocol versie van slimme meter *(v2, v4 of v5)*: `v...`
+*Bedankt voor het aanmaken van een issue!*
+### Wat gebruik je?
+* DSMR-reader versie *(rechtsbovenin applicatie zichtbaar)*: `v2.xxx`
+* Hardware *(RaspberryPi 3, 4 of iets anders)*: `RaspberryPi ...`
+* DSMR-protocol slimme meter *(v2, v4 of v5)*: `v...`
 
-### Bug, wens of iets anders
-* Bijvoorbeeld stappen hoe een probleem te reproduceren is...
-* Of simpelweg een beschijving van een feature die je graag wenst te zien...
+### Bij fouten
+* Gaat er iets fout, maar weet je niet wat? [Bekijk de logfiles](https://dsmr-reader.readthedocs.io/nl/latest/troubleshooting.html) als startpunt.
+* Beschrijf de situatie waarin het mis gaat.
+
+### Overige
+*Beschrijf hier je verhaal...*
