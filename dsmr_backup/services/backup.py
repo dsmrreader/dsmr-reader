@@ -134,7 +134,7 @@ def create_full(folder):
         on_backup_failed(process_handle=backup_process)
 
     backup_file = compress(file_path=backup_file)
-    logger.debug(' - Created and compressed statistics backup: %s', backup_file)
+    logger.debug(' - Created and compressed full backup: %s', backup_file)
 
 
 def create_partial(folder, models_to_backup):  # pragma: no cover
