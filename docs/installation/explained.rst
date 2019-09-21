@@ -209,13 +209,17 @@ Although it's just a folder inside our user's homedir, it's very effective as it
 
     Note that it's important to specify **Python 3** as the default interpreter.
 
-- Put both commands below in the ``dsmr`` user's ``~/.bashrc`` file with your favorite text editor::
+- Each time you work as ``dsmr`` user, you will have to switch to the virtualenv with these commands::
 
     source ~/.virtualenvs/dsmrreader/bin/activate
-    
     cd ~/dsmr-reader
 
-This will both **activate** the virtual environment and cd you into the right directory on your **next login** as ``dsmr`` user.
+- Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::
+
+    sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> ~/.bashrc'
+    sh -c 'echo "cd ~/dsmr-reader" >> ~/.bashrc'
+
+This will both activate the virtual environment and cd you into the right directory on your **next login** as ``dsmr`` user.
 
 .. note::
     

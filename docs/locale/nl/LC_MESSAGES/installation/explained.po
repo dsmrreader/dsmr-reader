@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-06 20:53+0200\n"
-"PO-Revision-Date: 2019-09-06 21:05+0200\n"
+"POT-Creation-Date: 2019-09-21 20:52+0200\n"
+"PO-Revision-Date: 2019-09-21 20:54+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -124,11 +124,11 @@ msgstr "Of herstel een gecomprimeerde (``.gz``) back-up met::"
 msgid "Now continue at chapter 2 below (Dependencies)."
 msgstr "Ga door naar hoofdstuk 2 verderop (Dependencies)."
 
-#: ../../installation/explained.rst:70 ../../installation/explained.rst:255
+#: ../../installation/explained.rst:70 ../../installation/explained.rst:259
 msgid "(Legacy) MySQL/MariaDB"
 msgstr "(Legacy) MySQL/MariaDB"
 
-#: ../../installation/explained.rst:73 ../../installation/explained.rst:258
+#: ../../installation/explained.rst:73 ../../installation/explained.rst:262
 msgid ""
 "Support for the MySQL database backend is deprecated and will be removed in a "
 "later release. Please use a PostgreSQL database instead. Users already running "
@@ -291,7 +291,7 @@ msgstr ""
 "bestanden en geeft de applicatie-verzoeken door naar de backend, waar de "
 "applicatie in Gunicorn draait onder Supervisor. Deze stellen we later in.*"
 
-#: ../../installation/explained.rst:168 ../../installation/explained.rst:311
+#: ../../installation/explained.rst:168 ../../installation/explained.rst:315
 msgid ""
 "Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL "
 "+ D to log out of the ``dsmr`` user."
@@ -394,21 +394,30 @@ msgstr ""
 
 #: ../../installation/explained.rst:212
 msgid ""
-"Put both commands below in the ``dsmr`` user's ``~/.bashrc`` file with your "
-"favorite text editor::"
+"Each time you work as ``dsmr`` user, you will have to switch to the virtualenv "
+"with these commands::"
 msgstr ""
-"Zet beide commands in het ``~/.bashrc`` bestand van de ``dsmr`` gebruiker met "
-"je favoriete bestandseditor::"
+"Elke keer dat je als ``dsmr`` gebruiker werkt, zul je moeten wisselen naar de "
+"virtualenv met deze commando's::"
 
-#: ../../installation/explained.rst:218
+#: ../../installation/explained.rst:217
 msgid ""
-"This will both **activate** the virtual environment and cd you into the right "
+"Let's have both commands executed **automatically** every time we login as "
+"``dsmr`` user, by adding them ``~/.bashrc`` file::"
+msgstr ""
+"Laten we ervoor zorgen dat deze commando's **automatisch** uitgevoerd worden, "
+"zodra we inloggen als ``dsmr`` gebruiker. Dit doen we door ze toe te voegen aan "
+"het ``~/.bashrc`` bestand::"
+
+#: ../../installation/explained.rst:222
+msgid ""
+"This will both activate the virtual environment and cd you into the right "
 "directory on your **next login** as ``dsmr`` user."
 msgstr ""
 "Hiermee wordt zowel de VirtualEnv geactiveerd en ga je direct naar de juiste "
 "map. Dit werkt de **eerstvolgende keer** dat je inlogt als ``dsmr`` gebruiker."
 
-#: ../../installation/explained.rst:222
+#: ../../installation/explained.rst:226
 msgid ""
 "You can easily test whether you've configured this correctly by logging out the "
 "``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``."
@@ -416,7 +425,7 @@ msgstr ""
 "Je kunt dit vrij gemakkelijk testen door uit te loggen als ``dsmr`` gebruiker "
 "(met CTRL + D) en vervolgens weer in te loggen met ``sudo su - dsmr``."
 
-#: ../../installation/explained.rst:224
+#: ../../installation/explained.rst:228
 msgid ""
 "You should see the terminal have a ``(dsmrreader)`` prefix now, for example: "
 "``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
@@ -424,7 +433,7 @@ msgstr ""
 "Als het goed is heeft je terminal nu een ``(dsmrreader)`` prefix, bijvoorbeeld: "
 "``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
 
-#: ../../installation/explained.rst:226
+#: ../../installation/explained.rst:230
 msgid ""
 "Make sure you've read and executed the note above, because you'll need it for "
 "the next chapter."
@@ -432,11 +441,11 @@ msgstr ""
 "Zorg ervoor dat je de bovenstaande notitie hebt gelezen en uitgevoerd, "
 "aangezien ze nodig zijn voor het volgende hoofdstuk."
 
-#: ../../installation/explained.rst:230
+#: ../../installation/explained.rst:234
 msgid "7. Application configuration & setup"
 msgstr "7. Applicatieconfiguratie"
 
-#: ../../installation/explained.rst:231
+#: ../../installation/explained.rst:235
 msgid ""
 "The application will also need the appropriate database client, which is not "
 "installed by default. For this I created two ready-to-use requirements files, "
@@ -447,7 +456,7 @@ msgstr ""
 "opslaan. Daarvoor heb ik een tweetal requirements-bestanden gemaakt, waar alles "
 "al in staat wat nodig is. Zoals bijvoorbeeld Django en de databaseverbinding."
 
-#: ../../installation/explained.rst:234
+#: ../../installation/explained.rst:238
 msgid ""
 "The ``base.txt`` contains requirements which the application needs anyway, no "
 "matter which backend you've choosen."
@@ -455,7 +464,7 @@ msgstr ""
 "Het bestand ``base.txt`` bevat alle afhankelijkheden die de applicatie sowieso "
 "nodig heeft, ongeacht de databasekeuze die je gemaakt hebt."
 
-#: ../../installation/explained.rst:238
+#: ../../installation/explained.rst:242
 msgid ""
 "**Installation of the requirements below might take a while**, depending on "
 "your Internet connection, RaspberryPi speed and resources (generally CPU) "
@@ -466,15 +475,15 @@ msgstr ""
 "verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te maken wanneer dit "
 "lang lijkt te duren. :]"
 
-#: ../../installation/explained.rst:241
+#: ../../installation/explained.rst:245
 msgid "PostgreSQL"
 msgstr "PostgreSQL"
 
-#: ../../installation/explained.rst:242
+#: ../../installation/explained.rst:246
 msgid "Did you choose PostgreSQL? Then execute these two lines::"
 msgstr "Heb je gekozen voor PostgreSQL? Voer dan deze twee regels uit::"
 
-#: ../../installation/explained.rst:249
+#: ../../installation/explained.rst:253
 msgid ""
 "Did everything install without fatal errors? If the database client refuses to "
 "install due to missing files/configs, make sure you've installed ``postgresql-"
@@ -486,15 +495,15 @@ msgstr ""
 "installatie het volgende hebt uitgevoerd: als het goed is heb je ``postgresql-"
 "server-dev-all`` geïnstalleerd, tegelijkertijd met de databaseserver."
 
-#: ../../installation/explained.rst:252
+#: ../../installation/explained.rst:256
 msgid "Continue to chapter 8 (Bootstrapping)."
 msgstr "Ga door naar hoofdstuk 8 (Bootstrapping)."
 
-#: ../../installation/explained.rst:261
+#: ../../installation/explained.rst:265
 msgid "Or did you choose MySQL/MariaDB? Execute these two commands::"
 msgstr "Of heb je gekozen voor MySQL/MariaDB? Voer dan deze twee commando's uit::"
 
-#: ../../installation/explained.rst:267
+#: ../../installation/explained.rst:271
 msgid ""
 "Did everything install without fatal errors? If the database client refuses to "
 "install due to missing files/configs, make sure you've installed "
@@ -506,11 +515,11 @@ msgstr ""
 "installatie het volgende hebt uitgevoerd: als het goed is heb je "
 "``libmysqlclient-dev`` geïnstalleerd, tegelijkertijd met de databaseserver."
 
-#: ../../installation/explained.rst:272
+#: ../../installation/explained.rst:276
 msgid "8. Bootstrapping"
 msgstr "8. Initialisatie"
 
-#: ../../installation/explained.rst:273
+#: ../../installation/explained.rst:277
 msgid ""
 "Now it's time to bootstrap the application and check whether all settings are "
 "good and requirements are met."
@@ -518,11 +527,11 @@ msgstr ""
 "Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie proberen te "
 "initialiseren."
 
-#: ../../installation/explained.rst:275
+#: ../../installation/explained.rst:279
 msgid "Execute this to initialize the database we've created earlier::"
 msgstr "Voer dit uit om de database te initialiseren::"
 
-#: ../../installation/explained.rst:279
+#: ../../installation/explained.rst:283
 msgid ""
 "Prepare static files for webinterface. This will copy all static files to the "
 "directory we created for Nginx earlier in the process. It allows us to have "
@@ -533,11 +542,11 @@ msgstr ""
 "hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden kan hosten buiten "
 "de code-bestanden."
 
-#: ../../installation/explained.rst:282
+#: ../../installation/explained.rst:286
 msgid "Sync static files::"
 msgstr "Synchroniseer statische bestanden::"
 
-#: ../../installation/explained.rst:286
+#: ../../installation/explained.rst:290
 msgid ""
 "Create an application superuser. Django will prompt you for a password. The "
 "credentials generated can be used to access the administration panel inside the "
@@ -549,11 +558,11 @@ msgstr ""
 "applicatie gebruiken. Indien gewenst kun je een andere gebruikersnaam kiezen. "
 "Het e-mailadres maakt niet uit, want de applicatie ondersteunt toch geen e-mail."
 
-#: ../../installation/explained.rst:289
+#: ../../installation/explained.rst:293
 msgid "Create your user::"
 msgstr "Creëer je eigen gebruiker::"
 
-#: ../../installation/explained.rst:295
+#: ../../installation/explained.rst:299
 msgid ""
 "Because you have shell access you may reset your user's password at any time "
 "(in case you forget it). Just enter this for a password reset::"
@@ -561,15 +570,15 @@ msgstr ""
 "Wachtwoord ooit vergeten? Via de command line kun je je wachtwoord (bij "
 "verlies) hiermee aanpassen::"
 
-#: ../../installation/explained.rst:299
+#: ../../installation/explained.rst:303
 msgid "You've almost completed the installation now."
 msgstr "Je bent op dit punt bijna klaar met de installatie."
 
-#: ../../installation/explained.rst:303
+#: ../../installation/explained.rst:307
 msgid "9. Webserver/Nginx (part 2)"
 msgstr "9. Webserver/Nginx (deel 2)"
 
-#: ../../installation/explained.rst:307
+#: ../../installation/explained.rst:311
 msgid ""
 "This installation guide asumes you run the Nginx webserver for this application "
 "only."
@@ -577,7 +586,7 @@ msgstr ""
 "Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver alleen "
 "gebruikt voor deze applicatie."
 
-#: ../../installation/explained.rst:309
+#: ../../installation/explained.rst:313
 msgid ""
 "It's possible to have other applications use Nginx as well, but that requires "
 "you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will "
@@ -587,7 +596,7 @@ msgstr ""
 "daarvoor zul je de wildcard moet weghalen in de ``dsmr-webinterface`` vhost, "
 "die je hieronder kopieert."
 
-#: ../../installation/explained.rst:313
+#: ../../installation/explained.rst:317
 msgid ""
 "Remove the default Nginx vhost (**only when you do not use it yourself, see the "
 "note above**)::"
@@ -595,7 +604,7 @@ msgstr ""
 "Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf gebruikt** "
 "(zie de notitie hierboven)::"
 
-#: ../../installation/explained.rst:317
+#: ../../installation/explained.rst:321
 msgid ""
 "Copy application vhost, **it will listen to any hostname** (wildcard), but you "
 "may change that if you feel like you need to. It won't affect the application "
@@ -604,18 +613,18 @@ msgstr ""
 "Kopieer de vhost voor de applicatie. Deze luistert standaard naar **elke "
 "hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te passen::"
 
-#: ../../installation/explained.rst:321
+#: ../../installation/explained.rst:325
 msgid ""
 "Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::"
 msgstr ""
 "Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad Nginx "
 "vervolgens wanneer de ``configtest`` lukt::"
 
-#: ../../installation/explained.rst:330
+#: ../../installation/explained.rst:334
 msgid "10. Supervisor"
 msgstr "10. Supervisor"
 
-#: ../../installation/explained.rst:331
+#: ../../installation/explained.rst:335
 msgid ""
 "Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run "
 "our application's web interface and background jobs used. It's also configured "
@@ -626,15 +635,15 @@ msgstr ""
 "Supervisor ervoor dat deze processen bij het (opnieuw) opstarten automatisch "
 "draaien."
 
-#: ../../installation/explained.rst:334
+#: ../../installation/explained.rst:338
 msgid "Copy the configuration file for Supervisor::"
 msgstr "Kopieer het configuratie-bestand voor Supervisor::"
 
-#: ../../installation/explained.rst:338
+#: ../../installation/explained.rst:342
 msgid "Login to ``supervisorctl`` management console::"
 msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
 
-#: ../../installation/explained.rst:342
+#: ../../installation/explained.rst:346
 msgid ""
 "Enter these commands (**listed after the** ``>``). It will ask Supervisor to "
 "recheck its config directory and use/reload the files::"
@@ -642,7 +651,7 @@ msgstr ""
 "Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor dat "
 "Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
 
-#: ../../installation/explained.rst:348
+#: ../../installation/explained.rst:352
 msgid ""
 "Three processes should be started or running. Make sure they don't end up in "
 "``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few "
@@ -652,15 +661,15 @@ msgstr ""
 "uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn gekomen. Je "
 "kunt het overzicht verversen door ``status`` te typen."
 
-#: ../../installation/explained.rst:350
+#: ../../installation/explained.rst:354
 msgid "When still in ``supervisorctl``'s console, type::"
 msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"
 
-#: ../../installation/explained.rst:354
+#: ../../installation/explained.rst:358
 msgid "Example of everything running well::"
 msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
-#: ../../installation/explained.rst:360
+#: ../../installation/explained.rst:364
 msgid ""
 "Want to check whether the datalogger works? Just tail its log in supervisor "
 "with::"
@@ -668,7 +677,7 @@ msgstr ""
 "Wil je controleren of de datalogger zijn werk goed doet? Bekijk dan het "
 "logbestand in supervisor met::"
 
-#: ../../installation/explained.rst:364
+#: ../../installation/explained.rst:368
 msgid ""
 "You should see similar output as the ``cu``-command printed earlier in the "
 "installation process."
@@ -676,7 +685,7 @@ msgstr ""
 "Uiteindelijk zou je ongeveer dezelfde lap tekst moeten zien als toen we "
 "handmatig gemeten hebben met het ``cu``-programma."
 
-#: ../../installation/explained.rst:366
+#: ../../installation/explained.rst:370
 msgid ""
 "Want to quit supervisor? ``CTRL + C`` to stop tailing and then ``CTRL + D`` "
 "once to exit supervisor command line."
@@ -684,6 +693,13 @@ msgstr ""
 "Wil je uit supervisor? Druk dan op ``CTRL + C`` om het logbestand niet meer te "
 "bekijken en vervolgens op ``CTRL + D`` om uit supervisor te gaan."
 
-#: ../../installation/explained.rst:372
+#: ../../installation/explained.rst:376
 msgid ":doc:`Finished? Go to setting up the application<../application>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
+
+#~ msgid ""
+#~ "Put both commands below in the ``dsmr`` user's ``~/.bashrc`` file with your "
+#~ "favorite text editor::"
+#~ msgstr ""
+#~ "Zet beide commands in het ``~/.bashrc`` bestand van de ``dsmr`` gebruiker "
+#~ "met je favoriete bestandseditor::"
