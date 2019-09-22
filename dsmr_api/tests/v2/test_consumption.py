@@ -67,7 +67,7 @@ class ElectricityLive(APIv2TestCase):
         self.assertEqual(result['timestamp'], '2016-07-01T22:00:00+02:00')
         self.assertEqual(result['currently_returned'], 123)
         self.assertEqual(result['currently_delivered'], 1123)
-        self.assertEqual(result['cost_per_hour'], '0.02')
+        self.assertEqual(result['cost_per_hour'], '0.01')
 
 
 class GasLive(APIv2TestCase):
@@ -104,7 +104,7 @@ class GasLive(APIv2TestCase):
         result = self._request('gas-live')
         self.assertEqual(result['timestamp'], '2019-04-19T13:00:00+02:00')
         self.assertEqual(result['currently_delivered'], 1.544)
-        self.assertEqual(result['cost_per_interval'], '0.78')
+        self.assertEqual(result['cost_per_interval'], '0.77')
 
 
 class TestElectricity(APIv2TestCase):

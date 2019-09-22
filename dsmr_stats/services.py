@@ -314,8 +314,16 @@ def recalculate_prices():
     for current_day in DayStatistics.objects.all():
         prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
 
-        current_day.electricity1_cost = current_day.electricity1 * prices.electricity_delivered_1_price
-        current_day.electricity2_cost = current_day.electricity2 * prices.electricity_delivered_2_price
-        current_day.gas_cost = current_day.gas * prices.gas_price
-        current_day.total_cost = current_day.electricity1_cost + current_day.electricity2_cost + current_day.gas_cost
+        current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
+            current_day.electricity1 * prices.electricity_delivered_1_price
+        )
+        current_day.electricity2_cost = dsmr_consumption.services.round_decimal(
+            current_day.electricity2 * prices.electricity_delivered_2_price
+        )
+        current_day.gas_cost = dsmr_consumption.services.round_decimal(
+            current_day.gas * prices.gas_price
+        )
+        current_day.total_cost = dsmr_consumption.services.round_decimal(
+            current_day.electricity1_cost + current_day.electricity2_cost + current_day.gas_cost
+        )
         current_day.save()

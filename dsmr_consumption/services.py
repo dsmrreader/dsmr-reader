@@ -1,5 +1,5 @@
 from datetime import time
-from decimal import Decimal, ROUND_UP
+from decimal import Decimal, ROUND_HALF_UP
 import logging
 import pytz
 
@@ -359,7 +359,7 @@ def round_decimal(decimal_price):
     if not isinstance(decimal_price, Decimal):
         decimal_price = Decimal(str(decimal_price))
 
-    return decimal_price.quantize(Decimal('.01'), rounding=ROUND_UP)
+    return decimal_price.quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
 
 
 def calculate_slumber_consumption_watt():

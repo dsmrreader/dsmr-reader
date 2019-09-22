@@ -20,6 +20,7 @@ v2.5.0 - 2019-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#717 <https://github.com/dennissiemensma/dsmr-reader/issues/717>`_] Fixed the accuracy of rounding prices
 - [`#xxxxxxxxxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxxxxxxxxx>`_] xxxxxxxxxxxxxxxxxx
 
 
