@@ -1,7 +1,5 @@
-from decimal import Decimal
 from unittest import mock
 
-from django.core.management import CommandError
 from django.test.utils import override_settings
 from django.test import TestCase
 from django.utils import timezone
@@ -14,18 +12,6 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.exceptions import InvalidTelegramError
 import dsmr_datalogger.services
-
-
-class TestDsmrDataloggerTracking(InterceptStdoutMixin, TestCase):
-    def test_tracking_disabled(self):
-        """ Test whether datalogger can bij stopped by changing track setting. """
-        datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.track = False
-        datalogger_settings.save()
-
-        # Datalogger should crash with error.
-        with self.assertRaisesMessage(CommandError, 'Datalogger tracking is DISABLED!'):
-            self._intercept_command_stdout('dsmr_datalogger', run_once=True)
 
 
 class TestServices(TestCase):
@@ -166,38 +152,6 @@ class TestServices(TestCase):
         self.assertEqual(meter_statistics.power_failure_count, 3)
         self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)
         self.assertEqual(meter_statistics.voltage_sag_count_l2, 2)
-
-    def test_track_phases(self):
-        datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.track_phases = False
-        datalogger_settings.save()
-
-        self.assertFalse(DsmrReading.objects.all().exists())
-
-        dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
-
-        my_reading = DsmrReading.objects.get()
-        self.assertIsNone(my_reading.phase_currently_delivered_l1)
-        self.assertIsNone(my_reading.phase_currently_delivered_l2)
-        self.assertIsNone(my_reading.phase_currently_delivered_l3)
-        self.assertIsNone(my_reading.phase_currently_returned_l1)
-        self.assertIsNone(my_reading.phase_currently_returned_l2)
-        self.assertIsNone(my_reading.phase_currently_returned_l3)
-
-        # Try again, but now with tracking settings enabled.
-        DataloggerSettings.objects.all().update(track_phases=True)
-
-        DsmrReading.objects.all().delete()
-        dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
-
-        # Should be populated now.
-        my_reading = DsmrReading.objects.get()
-        self.assertEqual(my_reading.phase_currently_delivered_l1, Decimal('0.111'))
-        self.assertEqual(my_reading.phase_currently_delivered_l2, Decimal('0.333'))
-        self.assertEqual(my_reading.phase_currently_delivered_l3, Decimal('0.555'))
-        self.assertEqual(my_reading.phase_currently_returned_l1, Decimal('0.222'))
-        self.assertEqual(my_reading.phase_currently_returned_l2, Decimal('0.444'))
-        self.assertEqual(my_reading.phase_currently_returned_l3, Decimal('0.666'))
 
     @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')
     def test_extra_devices_mbus_hack(self, *mocks):

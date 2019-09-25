@@ -8,7 +8,6 @@ import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDataloggerError(InterceptStdoutMixin, TestCase):
@@ -131,28 +130,8 @@ class TestDataloggerCrcError(InterceptStdoutMixin, TestCase):
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
 
         self.assertFalse(DsmrReading.objects.exists())
-
         self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-
         self.assertFalse(DsmrReading.objects.exists())
-
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def test_okay(self, serial_readline_mock, serial_open_mock):
-        """ Fake & process an DSMR vX telegram reading. """
-        serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
-
-        # The big difference here is that CRC verification should be off.
-        datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.verify_telegram_crc = False
-        datalogger_settings.save()
-
-        self.assertFalse(DsmrReading.objects.exists())
-
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-
-        self.assertTrue(DsmrReading.objects.exists())
 
 
 class TestDataloggerDuplicateData(InterceptStdoutMixin, TestCase):
@@ -299,15 +278,12 @@ class TestFutureTelegrams(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     @mock.patch('serial.Serial.open')
     @mock.patch('serial.Serial.readline')
-    def test_discard_telegram_with_future_timestamp(self, serial_readline_mock, serial_open_mock, now_mock):
+    @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')  # Disable this, as it WILL fail.
+    def test_discard_telegram_with_future_timestamp(self, _, serial_readline_mock, serial_open_mock, now_mock):
         """ Telegrams with timestamps in the (far) future should be rejected. """
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dsmr_dummy_data()
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1, hour=9, minute=0, second=0))
-
-        datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.verify_telegram_crc = False  # Not important for this test.
-        datalogger_settings.save()
 
         self.assertFalse(DsmrReading.objects.exists())
         self._intercept_command_stdout('dsmr_datalogger', run_once=True)

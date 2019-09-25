@@ -68,21 +68,18 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(
-            reading.timestamp,
-            datetime(2016, 4, 10, 12, 30, 15, tzinfo=pytz.UTC)
-        )
+        self.assertEqual(reading.timestamp, datetime(2016, 4, 10, 12, 30, 15, tzinfo=pytz.UTC))
         self.assertEqual(reading.electricity_delivered_1, Decimal('1234.784'))
         self.assertEqual(reading.electricity_returned_1, Decimal('0'))
         self.assertEqual(reading.electricity_delivered_2, Decimal('4321.725'))
         self.assertEqual(reading.electricity_returned_2, Decimal('0.002'))
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.36'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(
-            reading.extra_device_timestamp,
-            datetime(2016, 4, 10, 11, 0, 0, tzinfo=pytz.UTC)
-        )
+        self.assertEqual(reading.extra_device_timestamp, datetime(2016, 4, 10, 11, 0, 0, tzinfo=pytz.UTC))
         self.assertEqual(reading.extra_device_delivered, Decimal('7890.693'))
+        self.assertIsNone(reading.phase_voltage_l1)
+        self.assertIsNone(reading.phase_voltage_l2)
+        self.assertIsNone(reading.phase_voltage_l3)
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertIsNone(meter_statistics.dsmr_version)
@@ -95,9 +92,3 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(meter_statistics.voltage_swell_count_l1, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
-
-    @mock.patch('dsmr_datalogger.signals.raw_telegram.send_robust')
-    def test_raw_telegram_signal_sent(self, signal_mock):
-        self.assertFalse(signal_mock.called)
-        self._fake_dsmr_reading()
-        self.assertTrue(signal_mock.called)

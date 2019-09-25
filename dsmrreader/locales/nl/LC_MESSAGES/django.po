@@ -298,6 +298,15 @@ msgstr "Actieve stroomteruglevering van fase L2 (-P) in Watt"
 msgid "Instantaneous active power L3 (-P) in W resolution"
 msgstr "Actieve stroomteruglevering van fase L3 (-P) in Watt"
 
+msgid "Current voltage for phase L1 (in V)"
+msgstr "Huidig voltage in fase L1 (in V)"
+
+msgid "Current voltage for phase L2 (in V)"
+msgstr "Huidig voltage in fase L2 (in V)"
+
+msgid "Current voltage for phase L3 (in V)"
+msgstr "Huidig voltage in fase L3 (in V)"
+
 msgid "Electricity consumption"
 msgstr "Elektriciteitsverbruik"
 
@@ -453,24 +462,6 @@ msgstr "DSMR-versie 4/5"
 
 msgid "DSMR version 2"
 msgstr "DSMR-versie 2"
-
-msgid "Poll P1 port"
-msgstr "Peil P1 poort"
-
-msgid "Whether we should track the P1 port on your smartmeter. Almost every feature inside this project requires this to be enabled. However, it might be disabled temporarily due to technical reasons, such as data migrations."
-msgstr "Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke functionaliteit binnen dit project vereist dat dit altijd aanstaat. Het kan desondanks zijn dat het tijdelijk uitgezet wordt, wegens technische redenen, zoals datamigraties (bij updates)."
-
-msgid "Track electricity phases"
-msgstr "Houd elektriciteitsfasen bij"
-
-msgid "Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page"
-msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina"
-
-msgid "Verify telegram CRC"
-msgstr "Controleer de CRC van telegrammen"
-
-msgid "Whether we should verify the CRC of any telegrams read by / sent to the application."
-msgstr "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten controleren."
 
 msgid "DSMR version"
 msgstr "DSMR-versie"
@@ -2088,6 +2079,24 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Verify telegram CRC"
+#~ msgstr "Controleer de CRC van telegrammen"
+
+#~ msgid "Whether we should verify the CRC of any telegrams read by / sent to the application."
+#~ msgstr "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten controleren."
+
+#~ msgid "Poll P1 port"
+#~ msgstr "Peil P1 poort"
+
+#~ msgid "Whether we should track the P1 port on your smartmeter. Almost every feature inside this project requires this to be enabled. However, it might be disabled temporarily due to technical reasons, such as data migrations."
+#~ msgstr "Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke functionaliteit binnen dit project vereist dat dit altijd aanstaat. Het kan desondanks zijn dat het tijdelijk uitgezet wordt, wegens technische redenen, zoals datamigraties (bij updates)."
+
+#~ msgid "Track electricity phases"
+#~ msgstr "Houd elektriciteitsfasen bij"
+
+#~ msgid "Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page"
+#~ msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina"
 
 #~ msgid "Debugging"
 #~ msgstr "Debuggen"

@@ -13,13 +13,8 @@ from .models.statistics import MeterStatistics
 class DataloggerSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
-            None, {
-                'fields': ['track', 'track_phases'],
-            }
-        ),
-        (
             _('Advanced'), {
-                'fields': ['com_port', 'dsmr_version', 'verify_telegram_crc'],
+                'fields': ['com_port', 'dsmr_version'],
             }
         ),
     )

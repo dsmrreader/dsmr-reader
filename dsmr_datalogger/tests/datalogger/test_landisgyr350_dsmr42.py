@@ -73,25 +73,18 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
     def test_reading_values(self):
         """ Test whether dsmr_datalogger reads the correct values. """
         DataloggerSettings.get_solo()
-        DataloggerSettings.objects.all().update(track_phases=True)
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(
-            reading.timestamp,
-            datetime(2016, 2, 10, 19, 30, 34, tzinfo=pytz.UTC)
-        )
+        self.assertEqual(reading.timestamp, datetime(2016, 2, 10, 19, 30, 34, tzinfo=pytz.UTC))
         self.assertEqual(reading.electricity_delivered_1, Decimal('756.849'))
         self.assertEqual(reading.electricity_returned_1, Decimal('0'))
         self.assertEqual(reading.electricity_delivered_2, Decimal('714.405'))
         self.assertEqual(reading.electricity_returned_2, Decimal('0'))
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.111'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(
-            reading.extra_device_timestamp,
-            datetime(2016, 2, 10, 19, 0, 0, tzinfo=pytz.UTC)
-        )
+        self.assertEqual(reading.extra_device_timestamp, datetime(2016, 2, 10, 19, 0, 0, tzinfo=pytz.UTC))
         self.assertEqual(reading.extra_device_delivered, Decimal('1197.484'))
         self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.123'))
         self.assertEqual(reading.phase_currently_delivered_l2, Decimal('0.456'))
@@ -99,6 +92,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(reading.phase_currently_returned_l1, Decimal('0.222'))
         self.assertEqual(reading.phase_currently_returned_l2, Decimal('0.444'))
         self.assertEqual(reading.phase_currently_returned_l3, Decimal('0.666'))
+        self.assertIsNone(reading.phase_voltage_l1)
+        self.assertIsNone(reading.phase_voltage_l2)
+        self.assertIsNone(reading.phase_voltage_l3)
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()
@@ -112,9 +108,3 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(meter_statistics.voltage_swell_count_l1, 0)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, 0)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, 0)
-
-    @mock.patch('dsmr_datalogger.signals.raw_telegram.send_robust')
-    def test_raw_telegram_signal_sent(self, signal_mock):
-        self.assertFalse(signal_mock.called)
-        self._fake_dsmr_reading()
-        self.assertTrue(signal_mock.called)

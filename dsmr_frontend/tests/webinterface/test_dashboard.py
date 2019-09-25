@@ -8,7 +8,6 @@ from django.urls import reverse
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_frontend.models.message import Notification
@@ -267,7 +266,6 @@ class TestViews(TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 7, 1))
 
         if self.support_data:
-            DataloggerSettings.objects.update(track_phases=True)
             GasConsumption.objects.create(
                 read_at=timezone.now(),
                 delivered=0,

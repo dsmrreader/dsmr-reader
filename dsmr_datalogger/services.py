@@ -178,12 +178,11 @@ def telegram_to_reading(data):  # noqa: C901
 
     # We will log the telegrams in base64 for convenience and debugging 'n stuff.
     base64_data = base64.b64encode(data.encode())
-    datalogger_settings = DataloggerSettings.get_solo()
 
     # Discard CRC check when any support is lacking anyway. Or when it's disabled.
     connection_parameters = get_dsmr_connection_parameters()
 
-    if connection_parameters['crc'] and datalogger_settings.verify_telegram_crc:
+    if connection_parameters['crc']:
         try:
             # Verify telegram by checking its CRC.
             verify_telegram_checksum(data=data)
@@ -226,7 +225,7 @@ def telegram_to_reading(data):  # noqa: C901
         value = result.group(2)
 
         # Drop units, as the database does not care for them.
-        value = value.replace('*kWh', '').replace('*kW', '').replace('*m3', '')
+        value = value.replace('*kWh', '').replace('*kW', '').replace('*m3', '').replace('*V', '')
 
         # Extra device parameters are placed on a single line, meh.
         if code == "0-1:24.2.1":
@@ -252,17 +251,6 @@ def telegram_to_reading(data):  # noqa: C901
         error_message = 'Discarded telegram with future timestamp: {}'.format(data)
         django_logger.error(error_message)
         raise InvalidTelegramError(error_message)
-
-    # Optional tracking of phases, but since we already mapped this above, just remove it again... :]
-    if not datalogger_settings.track_phases:
-        parsed_reading.update({
-            'phase_currently_delivered_l1': None,
-            'phase_currently_delivered_l2': None,
-            'phase_currently_delivered_l3': None,
-            'phase_currently_returned_l1': None,
-            'phase_currently_returned_l2': None,
-            'phase_currently_returned_l3': None,
-        })
 
     # Now we need to split reading & statistics. So we split the dict here.
     reading_kwargs = {k: parsed_reading[k] for k in READING_FIELDS}

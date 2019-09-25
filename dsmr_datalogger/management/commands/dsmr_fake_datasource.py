@@ -90,8 +90,11 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         currently_returned_l2 = 0
         currently_returned_l3 = 0
         currently_returned = 0
+        phase_voltage_l1 = random.randint(215, 250)
+        phase_voltage_l2 = random.randint(215, 250)
+        phase_voltage_l3 = random.randint(215, 250)
 
-        # Randomly switch between electricity delivered and returned each 5 seconds for a more realistic graph.
+        # Randomly switch between electricity delivered and returned each 5 seconds for a more 'realistic' graph.
         if with_electricity_returned and second_since % 10 < 5:
             currently_returned = currently_delivered
             currently_returned_l1 = currently_delivered_l1
@@ -128,6 +131,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:72.36.0(00000)\r\n",
             "0-0:96.13.1()\r\n",
             "0-0:96.13.0()\r\n",
+            "1-0:32.7.0({}.0*V)\r\n".format(phase_voltage_l1),
+            "1-0:52.7.0({}.1*V)\r\n".format(phase_voltage_l2),
+            "1-0:72.7.0({}.2*V)\r\n".format(phase_voltage_l3),
             "1-0:31.7.0(000*A)\r\n",
             "1-0:51.7.0(000*A)\r\n",
             "1-0:71.7.0(001*A)\r\n",
@@ -138,6 +144,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:42.7.0({}*kW)\r\n".format(self._round_precision(currently_returned_l2, 6)),
             "1-0:62.7.0({}*kW)\r\n".format(self._round_precision(currently_returned_l3, 6)),
         ]
+
 
         if with_gas:
             data += [

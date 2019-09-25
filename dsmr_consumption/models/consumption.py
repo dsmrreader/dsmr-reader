@@ -82,6 +82,27 @@ class ElectricityConsumption(models.Model):
         decimal_places=3,
         help_text=_("Instantaneous active power L3 (-P) in W resolution"),
     )
+    phase_voltage_l1 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=4,
+        decimal_places=1,
+        help_text=_("Current voltage for phase L1 (in V)")
+    )
+    phase_voltage_l2 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=4,
+        decimal_places=1,
+        help_text=_("Current voltage for phase L2 (in V)")
+    )
+    phase_voltage_l3 = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=4,
+        decimal_places=1,
+        help_text=_("Current voltage for phase L3 (in V)")
+    )
 
     def __sub__(self, other):
         """ Allows models to be subtracted from each other. """

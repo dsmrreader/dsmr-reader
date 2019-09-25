@@ -12,26 +12,6 @@ class DataloggerSettings(SingletonModel):
         (DSMR_VERSION_2, _('DSMR version 2')),
     )
 
-    track = models.BooleanField(
-        default=True,
-        verbose_name=_('Poll P1 port'),
-        help_text=_(
-            'Whether we should track the P1 port on your smartmeter. Almost every feature inside '
-            'this project requires this to be enabled. However, it might be disabled temporarily '
-            'due to technical reasons, such as data migrations.'
-        )
-    )
-    track_phases = models.BooleanField(
-        default=False,
-        verbose_name=_('Track electricity phases'),
-        help_text=_('Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page')
-    )
-    verify_telegram_crc = models.BooleanField(
-        default=True,
-        verbose_name=_('Verify telegram CRC'),
-        help_text=_('Whether we should verify the CRC of any telegrams read by / sent to the application.')
-    )
-
     dsmr_version = models.IntegerField(
         default=DSMR_VERSION_4_PLUS,
         choices=DSMR_VERSION_CHOICES,

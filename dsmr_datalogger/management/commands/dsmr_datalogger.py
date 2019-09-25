@@ -1,11 +1,10 @@
 import logging
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
-from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.exceptions import InvalidTelegramError
 import dsmr_datalogger.services
 
@@ -20,12 +19,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
-        datalogger_settings = DataloggerSettings.get_solo()
-
-        # This should only be disabled when performing huge migrations.
-        if not datalogger_settings.track:
-            raise CommandError("Datalogger tracking is DISABLED!")
-
         telegram = dsmr_datalogger.services.read_telegram()
         logger.info("\n%s", telegram)
 

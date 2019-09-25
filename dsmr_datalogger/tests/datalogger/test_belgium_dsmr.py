@@ -74,21 +74,18 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(
-            reading.timestamp,
-            datetime(2019, 8, 21, 19, 0, 25, tzinfo=pytz.UTC)
-        )
+        self.assertEqual(reading.timestamp, datetime(2019, 8, 21, 19, 0, 25, tzinfo=pytz.UTC))
         self.assertEqual(reading.electricity_delivered_1, Decimal('260.129'))
         self.assertEqual(reading.electricity_returned_1, Decimal('0.010'))
         self.assertEqual(reading.electricity_delivered_2, Decimal('338.681'))
         self.assertEqual(reading.electricity_returned_2, Decimal('0.425'))
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.261'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(
-            reading.extra_device_timestamp,
-            datetime(2019, 8, 21, 19, 0, 11, tzinfo=pytz.UTC)
-        )
+        self.assertEqual(reading.extra_device_timestamp, datetime(2019, 8, 21, 19, 0, 11, tzinfo=pytz.UTC))
         self.assertEqual(reading.extra_device_delivered, Decimal('29.553'))
+        self.assertEqual(reading.phase_voltage_l1, Decimal('231.0'))
+        self.assertEqual(reading.phase_voltage_l2, Decimal('0'))
+        self.assertEqual(reading.phase_voltage_l3, Decimal('230.9'))
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertIsNone(meter_statistics.dsmr_version)
@@ -101,9 +98,3 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(meter_statistics.voltage_swell_count_l1, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
-
-    @mock.patch('dsmr_datalogger.signals.raw_telegram.send_robust')
-    def test_raw_telegram_signal_sent(self, signal_mock):
-        self.assertFalse(signal_mock.called)
-        self._fake_dsmr_reading()
-        self.assertTrue(signal_mock.called)
