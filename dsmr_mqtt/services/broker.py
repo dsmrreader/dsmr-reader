@@ -25,10 +25,8 @@ def initialize():
     mqtt_client = paho.Client(client_id=broker_settings.client_id)
     mqtt_client.on_connect = on_connect
     mqtt_client.on_disconnect = on_disconnect
-
-    if broker_settings.debug:
-        mqtt_client.on_log = on_log
-        mqtt_client.on_publish = on_publish
+    mqtt_client.on_log = on_log
+    mqtt_client.on_publish = on_publish
 
     if broker_settings.username:
         mqtt_client.username_pw_set(broker_settings.username, broker_settings.password)

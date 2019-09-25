@@ -1279,9 +1279,6 @@ msgstr "Het wijzigen van elke instelling hier zou ervoor moeten zorgen dat <stro
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
 
-msgid "Debugging"
-msgstr "Debuggen"
-
 msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
 msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
 
@@ -1575,12 +1572,6 @@ msgstr "Quality Of Service"
 
 msgid "QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages."
 msgstr "QoS 0: Beste performance, maar onbetoruwbaar (ontworpen voor betrouwbare verbindingen, zoals bekabelde netwerken). QoS 1: Gemiddelde performance, maar betrouwbaar. LET OP: Kan ervoor zorgen dat berichten dubbel verzonden worden! QoS 2: Traagste performance, maar betrouwbaar en voorkomt het versturen van dubbele berichten."
-
-msgid "Enable debug logging"
-msgstr "Schakel debug logging in"
-
-msgid "Whether the client should display debug information in the logs."
-msgstr "Geeft aan of de client debug-informatie in de logs moet wegschrijven."
 
 msgid "Restart required"
 msgstr "Herstart vereist"
@@ -2097,6 +2088,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Debugging"
+#~ msgstr "Debuggen"
+
+#~ msgid "Enable debug logging"
+#~ msgstr "Schakel debug logging in"
+
+#~ msgid "Whether the client should display debug information in the logs."
+#~ msgstr "Geeft aan of de client debug-informatie in de logs moet wegschrijven."
 
 #~ msgid "Required option to acknowledge you that you WILL mess up your data with this."
 #~ msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee je data kan verprutsen."

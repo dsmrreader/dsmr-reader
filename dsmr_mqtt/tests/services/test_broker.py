@@ -87,24 +87,6 @@ class TestBroker(TestCase):
         self.assertTrue(sleep_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.connect')
-    def test_initialize_debug(self, *mocks):
-        """ Debug enabled. """
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(hostname='localhost')
-
-        mqtt_client = dsmr_mqtt.services.broker.initialize()
-
-        self.assertIsNone(mqtt_client.on_log)
-        self.assertIsNone(mqtt_client.on_publish)
-
-        MQTTBrokerSettings.objects.update(debug=True)
-        mqtt_client = dsmr_mqtt.services.broker.initialize()
-
-        # Check callbacks set.
-        self.assertEqual(mqtt_client.on_log, dsmr_mqtt.services.broker.on_log)
-        self.assertEqual(mqtt_client.on_publish, dsmr_mqtt.services.broker.on_publish)
-
-    @mock.patch('paho.mqtt.client.Client.connect')
     def test_initialize_credentials(self, *mocks):
         """ User/password set. """
         USER = 'x'

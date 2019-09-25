@@ -79,11 +79,6 @@ class MQTTBrokerSettings(SingletonModel):
             'QoS 2: Slowest performance, but reliable and prevents sending duplicate messages.'
         )
     )
-    debug = models.BooleanField(
-        default=False,
-        verbose_name=_('Enable debug logging'),
-        help_text=_('Whether the client should display debug information in the logs.')
-    )
     restart_required = models.BooleanField(
         default=False,
         verbose_name=_('Restart required'),

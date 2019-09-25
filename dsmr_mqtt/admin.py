@@ -26,11 +26,6 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
                 )
             }
         ),
-        (
-            _('Debugging'), {
-                'fields': ['debug'],
-            }
-        ),
     )
 
 
