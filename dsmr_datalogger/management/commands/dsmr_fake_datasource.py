@@ -145,7 +145,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:62.7.0({}*kW)\r\n".format(self._round_precision(currently_returned_l3, 6)),
         ]
 
-
         if with_gas:
             data += [
                 "0-1:24.1.0(003)\r\n",
