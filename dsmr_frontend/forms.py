@@ -28,6 +28,7 @@ class DashboardElectricityConsumptionForm(forms.Form):
     delivered = forms.BooleanField(required=False, initial=False)
     returned = forms.BooleanField(required=False, initial=False)
     phases = forms.BooleanField(required=False, initial=False)
+    voltage = forms.BooleanField(required=False, initial=False)
     latest_delta_id = forms.IntegerField(required=False, initial=None)
 
     def __init__(self, *args, **kwargs):
@@ -50,6 +51,9 @@ class DashboardElectricityConsumptionForm(forms.Form):
 
     def clean_phases(self):
         return self._clean_type('phases', 'multi_phases')
+
+    def clean_voltage(self):
+        return self._clean_type('voltage', 'voltage')
 
 
 class DashboardNotificationReadForm(forms.Form):

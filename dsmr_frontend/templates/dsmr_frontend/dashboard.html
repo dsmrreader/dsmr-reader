@@ -177,6 +177,22 @@
     </div>
     {% endif %}   
 
+    {% if capabilities.voltage %}
+    <div class="row" id="voltage_holder">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Phase voltages in the past 24 hours" %}
+                </header>
+                <div class="panel-body">
+                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
+                    <div id="echarts-voltage-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     {% if capabilities.gas %}
     <div class="row">
         <div class="col-md-12">
@@ -253,6 +269,18 @@
         var echarts_phases_graph_interval = 5;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/phases.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
+{% if capabilities.voltage %}
+    <script type="text/javascript">
+        var echarts_voltage_graph_url = "{% url 'frontend:dashboard-xhr-electricity' %}?voltage=True";
+        var voltage_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
+        var voltage_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
+        var voltage_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+
+        var echarts_voltage_graph_interval = 5;
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/voltage.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.gas %}

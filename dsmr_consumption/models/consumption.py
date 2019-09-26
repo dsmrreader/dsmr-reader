@@ -87,21 +87,24 @@ class ElectricityConsumption(models.Model):
         default=None,
         max_digits=4,
         decimal_places=1,
-        help_text=_("Current voltage for phase L1 (in V)")
+        help_text=_("Current voltage for phase L1 (in V)"),
+        db_index=True
     )
     phase_voltage_l2 = models.DecimalField(
         null=True,
         default=None,
         max_digits=4,
         decimal_places=1,
-        help_text=_("Current voltage for phase L2 (in V)")
+        help_text=_("Current voltage for phase L2 (in V)"),
+        db_index=True
     )
     phase_voltage_l3 = models.DecimalField(
         null=True,
         default=None,
         max_digits=4,
         decimal_places=1,
-        help_text=_("Current voltage for phase L3 (in V)")
+        help_text=_("Current voltage for phase L3 (in V)"),
+        db_index=True
     )
 
     def __sub__(self, other):

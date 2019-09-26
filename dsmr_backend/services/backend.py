@@ -40,6 +40,9 @@ def get_capabilities(capability=None):
                 phase_currently_delivered_l2__isnull=False,
                 phase_currently_delivered_l3__isnull=False
             ).exists(),
+            'voltage': ElectricityConsumption.objects.filter(
+                phase_voltage_l1__isnull=False,
+            ).exists(),
             'gas': GasConsumption.objects.exists(),
             'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
         }

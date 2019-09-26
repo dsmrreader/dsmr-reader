@@ -871,6 +871,9 @@ msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Sleep de grafiek naa
 msgid "Recent distribution of electricity phases (Watt) in the past 24 hours"
 msgstr "Recente distributie elektriciteitsfasen (Watt) in de afgelopen 24 uur"
 
+msgid "Phase voltages in the past 24 hours"
+msgstr "Fase voltages in de afgelopen 24 uur"
+
 msgid "Recent gas consumed (m<sup>3</sup>) in the past 24 hours"
 msgstr "Recent gasverbruik (m<sup>3</sup>) in de afgelopen 24 uur"
 

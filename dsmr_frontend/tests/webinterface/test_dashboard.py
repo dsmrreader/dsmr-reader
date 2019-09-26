@@ -123,6 +123,7 @@ class TestViews(TestCase):
                 phase_currently_returned_l1=2.5,
                 phase_currently_returned_l2=2.25,
                 phase_currently_returned_l3=2.75,
+                phase_voltage_l1=230,
             )
             ElectricityConsumption.objects.create(
                 read_at=timezone.now() - timezone.timedelta(hours=1),
@@ -138,6 +139,7 @@ class TestViews(TestCase):
                 phase_currently_returned_l1=3.5,
                 phase_currently_returned_l2=3.25,
                 phase_currently_returned_l3=3.75,
+                phase_voltage_l1=230,
             )
 
         response = self.client.get(
@@ -168,7 +170,8 @@ class TestViews(TestCase):
                     'l1': [3500.0, 2500.0],
                     'l2': [3250.0, 2250.0],
                     'l3': [3750.0, 2750.0],
-                }
+                },
+                'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
             }
         )
 
@@ -249,7 +252,36 @@ class TestViews(TestCase):
                     'l1': [3500.0],
                     'l2': [3250.0],
                     'l3': [3750.0],
-                }
+                },
+                'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
+            }
+        )
+
+        # Voltages
+        response = self.client.get(
+            reverse('{}:dashboard-xhr-electricity'.format(self.namespace)),
+            data={'voltage': True, 'latest_delta_id': old_latest_delta_id}
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+        json_content = json.loads(response.content.decode("utf8"))
+        self.assertEqual(
+            json_content,
+            {
+                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
+                'read_at': ['Sat 23:00'],
+                'currently_delivered': [],
+                'currently_returned': [],
+                'phases_delivered': {
+                    'l1': [],
+                    'l2': [],
+                    'l3': [],
+                },
+                'phases_returned': {
+                    'l1': [],
+                    'l2': [],
+                    'l3': [],
+                },
+                'phase_voltage': {'l1': [230], 'l2': [0.0], 'l3': [0.0]},
             }
         )
 

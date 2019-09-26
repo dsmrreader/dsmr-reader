@@ -91,6 +91,11 @@ class DashboardXhrElectricityConsumption(View):
                 'l2': [],
                 'l3': [],
             },
+            'phase_voltage': {
+                'l1': [],
+                'l2': [],
+                'l3': [],
+            },
         }
 
         # Optional delta.
@@ -125,6 +130,11 @@ class DashboardXhrElectricityConsumption(View):
                     data['phases_returned']['l1'].append(float(current.phase_currently_returned_l1 or 0) * 1000)
                     data['phases_returned']['l2'].append(float(current.phase_currently_returned_l2 or 0) * 1000)
                     data['phases_returned']['l3'].append(float(current.phase_currently_returned_l3 or 0) * 1000)
+
+            if form.cleaned_data.get('voltage'):
+                data['phase_voltage']['l1'].append(float(current.phase_voltage_l1 or 0))
+                data['phase_voltage']['l2'].append(float(current.phase_voltage_l2 or 0))
+                data['phase_voltage']['l3'].append(float(current.phase_voltage_l3 or 0))
 
             data['latest_delta_id'] = current.id
 
