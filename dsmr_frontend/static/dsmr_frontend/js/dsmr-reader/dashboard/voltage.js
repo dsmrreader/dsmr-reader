@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	var echarts_voltage_graph = echarts.init(document.getElementById('echarts-voltage-graph'));
     var echarts_voltage_initial_options = {
         color: [
@@ -26,13 +25,15 @@ $(document).ready(function(){
         xAxis: [
             {
                 type : 'category',
-                boundaryGap: false,
+                boundaryGap: true,  // Required here
                 data : null
             }
         ],
         yAxis: [
             {
-                type : 'value'
+                type : 'value',
+                min: 'dataMin',
+                max: 'dataMax'
             }
         ],
         dataZoom: [
@@ -54,30 +55,11 @@ $(document).ready(function(){
         xAxis: [
             {
                 type : 'category',
-                boundaryGap: false,
+                boundaryGap: true,  // Required here
                 data : null
             }
         ],
-        series : [
-            {
-            	smooth: true,
-                name: 'Volt (L1)',
-                type: 'line',
-                data: null
-            },
-            {
-            	smooth: true,
-                name: 'Volt (L2)',
-                type: 'line',
-                data: null
-            },
-            {
-            	smooth: true,
-                name: 'Volt (L3)',
-                type: 'line',
-                data: null
-            },
-        ]
+        series : null
     };
 	
 	echarts_voltage_graph.showLoading('default', echarts_loading_options);
@@ -85,7 +67,36 @@ $(document).ready(function(){
 	/* Init graph. */
 	$.get(echarts_voltage_graph_url, function (xhr_data) {
 	    echarts_voltage_graph.hideLoading();
-	    
+
+	    /* Dynamic phases. */
+        if (is_multi_phase) {
+            echarts_voltage_update_options.series = [
+                {
+                    name: 'Volt (L1)',
+                    type: 'line',
+                    data: null
+                },
+                {
+                    name: 'Volt (L2)',
+                    type: 'line',
+                    data: null
+                },
+                {
+                    name: 'Volt (L3)',
+                    type: 'line',
+                    data: null
+                },
+            ];
+        } else {
+            echarts_voltage_update_options.series = [
+                {
+                    name: 'Volt',
+                    type: 'line',
+                    data: null
+                }
+            ];
+        }
+
 	    /* Adjust default zooming to the number of default items we want to display. */
 	    var zoom_percent = 100 - (dashboard_graph_width / xhr_data.read_at.length * 100);
 	    echarts_voltage_initial_options.dataZoom[0].start = zoom_percent;
@@ -94,8 +105,12 @@ $(document).ready(function(){
 	    /* Different set of options, to prevent the dataZoom being reset on each update. */
 	    echarts_voltage_update_options.xAxis[0].data = xhr_data.read_at;
 	    echarts_voltage_update_options.series[0].data = xhr_data.phase_voltage.l1;
-	    echarts_voltage_update_options.series[1].data = xhr_data.phase_voltage.l2;
-	    echarts_voltage_update_options.series[2].data = xhr_data.phase_voltage.l3;
+
+	    if (is_multi_phase) {
+            echarts_voltage_update_options.series[1].data = xhr_data.phase_voltage.l2;
+	        echarts_voltage_update_options.series[2].data = xhr_data.phase_voltage.l3;
+        }
+
 	    echarts_voltage_graph.setOption(echarts_voltage_update_options);
 	    
 	    var latest_delta_id = xhr_data.latest_delta_id;
@@ -114,8 +129,11 @@ $(document).ready(function(){
 				{
 					echarts_voltage_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
 					echarts_voltage_update_options.series[0].data.push(xhr_data.phase_voltage.l1[i]);
-					echarts_voltage_update_options.series[1].data.push(xhr_data.phase_voltage.l2[i]);
-					echarts_voltage_update_options.series[2].data.push(xhr_data.phase_voltage.l3[i]);
+
+                    if (is_multi_phase) {
+                        echarts_voltage_update_options.series[1].data.push(xhr_data.phase_voltage.l2[i]);
+                        echarts_voltage_update_options.series[2].data.push(xhr_data.phase_voltage.l3[i]);
+                    }
 				}
 				
 				latest_delta_id = xhr_data.latest_delta_id;

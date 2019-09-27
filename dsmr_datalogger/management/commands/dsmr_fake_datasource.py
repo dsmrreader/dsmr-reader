@@ -90,9 +90,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         currently_returned_l2 = 0
         currently_returned_l3 = 0
         currently_returned = 0
-        phase_voltage_l1 = random.randint(215, 250)
-        phase_voltage_l2 = random.randint(215, 250)
-        phase_voltage_l3 = random.randint(215, 250)
+        phase_voltage_l1 = random.randint(225, 235)
+        phase_voltage_l2 = random.randint(225, 235)
+        phase_voltage_l3 = random.randint(225, 235)
 
         # Randomly switch between electricity delivered and returned each 5 seconds for a more 'realistic' graph.
         if with_electricity_returned and second_since % 10 < 5:

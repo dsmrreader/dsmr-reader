@@ -232,6 +232,7 @@
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.2.1.min.js' %}"></script>
 
     <script type="text/javascript">
+        var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
         var dashboard_graph_width = {{ frontend_settings.dashboard_graph_width }};
         var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
     </script>
