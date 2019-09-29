@@ -9,6 +9,7 @@ DSMR Reader's documentation
    data_integrity
 
    installation
+   installation/restore
    installation/datalogger
    installation/quick
    installation/explained

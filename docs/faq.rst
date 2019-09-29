@@ -29,14 +29,7 @@ Make sure to execute it while logged in as the ``dsmr`` user::
    sudo su - dsmr
    ./deploy.sh
 
-It will make sure to check, fetch and apply any changes released. Summary of deployment script steps:
 
-- GIT pull (codebase update).
-- PIP update requirements.
-- Apply any database migrations.
-- Sync static files to Nginx folder.
-- Reload Gunicorn application server (web interface) and backend processes (such as the datalogger).
-- Clear any caches.
 
 
 How can I move the database location?
@@ -107,56 +100,7 @@ The Status page will give you insight in this as well.
 How do I restore a database backup?
 -----------------------------------
 
-.. warning::
-
-    Restoring a backup will replace any existing data stored in the database and is irreversible! 
-
-.. note::
-
-    Do you need a complete reinstall of DSMR-reader as well? 
-    Then please :doc:`follow the install guide<installation>` and restore the database backup **using the notes at the end of chapter 1**. 
-
-Only want to restore the database?
-
-- This asumes you are still running the same application version as the backup was created in.
-
-- Stop the application first with ``sudo supervisorctl stop all``. This will disconnect it from the database as well.
-
-- Importing the data could take a long time. It took MySQL 15 minutes to import nearly 3 million readings, from a compressed backup, on a RaspberryPi 3. 
-
-For **PostgreSQL** restores::
-
-    sudo sudo -u postgres dropdb dsmrreader
-    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
-    
-    # Either restore an uncompressed (.sql) backup:
-    sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
-    
-    # OR
-    
-    # Restore a compressed (.gz) backup with:
-    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
-
-
-For **MySQL** restores::
-
-    sudo mysqladmin create dsmrreader
-    sudo mysqladmin drop dsmrreader
-    
-    # Either restore an uncompressed (.sql) backup:
-    cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
-    
-    # OR
-    
-    # Restore a compressed (.gz) backup with:
-    zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
-
-
-- Start the application again with ``sudo supervisorctl start all``.
-
-.. note::
-
-    In case the version differs, you can try forcing a deployment reload by: ``sudo su - dsmr`` and then executing ``./post-deploy.sh``.
+:doc:`See for instructions here <installation/restore>`.
 
 
 How do I enable timezone support for MySQL?
