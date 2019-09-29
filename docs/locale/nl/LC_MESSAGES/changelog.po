@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2019-09-29 12:46+0200\n"
-"PO-Revision-Date: 2019-09-29 12:46+0200\n"
+"POT-Creation-Date: 2019-09-29 17:54+0200\n"
+"PO-Revision-Date: 2019-09-29 17:55+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -54,8 +54,8 @@ msgstr ""
 "html#application-updates-bug-fixes-new-features>`_."
 
 #: ../../changelog.rst:19
-msgid "v2.5.0 - 2019-xx-xx"
-msgstr "v2.5.0 - 2019-xx-xx"
+msgid "v2.5.0 - 2019-10-01"
+msgstr "v2.5.0 - 2019-10-01"
 
 #: ../../changelog.rst:21 ../../changelog.rst:34 ../../changelog.rst:49
 #: ../../changelog.rst:66 ../../changelog.rst:77 ../../changelog.rst:90
@@ -3110,3 +3110,6 @@ msgstr "Upgraded Django to 1.8.9."
 #~ msgstr ""
 #~ "[`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/"
 #~ "xxxxx>`_] xxxxxxxxxxxx"
+
+#~ msgid "v2.5.0 - 2019-xx-xx"
+#~ msgstr "v2.5.0 - 2019-xx-xx"
