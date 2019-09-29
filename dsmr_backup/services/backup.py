@@ -86,44 +86,43 @@ def create_full(folder):
 
     # PostgreSQL backup.
     if connection.vendor == 'postgresql':  # pragma: no cover
-        backup_process = subprocess.Popen(
-            [
-                settings.DSMRREADER_BACKUP_PG_DUMP,
-                '--host={}'.format(settings.DATABASES['default']['HOST']),
-                '--user={}'.format(settings.DATABASES['default']['USER']),
-                settings.DATABASES['default']['NAME'],
-            ], env={
+        command = [
+            settings.DSMRREADER_BACKUP_PG_DUMP,
+            '--host={}'.format(settings.DATABASES['default']['HOST']),
+            '--user={}'.format(settings.DATABASES['default']['USER']),
+            settings.DATABASES['default']['NAME'],
+        ]
+        backup_process = subprocess.Popen(command, env={
                 'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
             },
             stdout=open(backup_file, 'w')  # pragma: no cover
         )
     # MySQL backup.
     elif connection.vendor == 'mysql':  # pragma: no cover
-        backup_process = subprocess.Popen(
-            [
-                settings.DSMRREADER_BACKUP_MYSQLDUMP,
-                '--compress',
-                '--hex-blob',
-                '--extended-insert',
-                '--quick',
-                '--host', settings.DATABASES['default']['HOST'],
-                '--user', settings.DATABASES['default']['USER'],
-                '--password={}'.format(settings.DATABASES['default']['PASSWORD']),
-                settings.DATABASES['default']['NAME'],
-            ],
-            stdout=open(backup_file, 'w')  # pragma: no cover
-        )
+        command = [
+            settings.DSMRREADER_BACKUP_MYSQLDUMP,
+            '--compress',
+            '--hex-blob',
+            '--extended-insert',
+            '--quick',
+            '--host', settings.DATABASES['default']['HOST'],
+            '--user', settings.DATABASES['default']['USER'],
+            '--password={}'.format(settings.DATABASES['default']['PASSWORD']),
+            settings.DATABASES['default']['NAME'],
+        ]
+        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover
     # SQLite backup.
     elif connection.vendor == 'sqlite':  # pragma: no cover
+        command = [
+            settings.DSMRREADER_BACKUP_SQLITE,
+            settings.DATABASES['default']['NAME'],
+            '.dump',
+        ]
         backup_process = subprocess.Popen(
-            [
-                settings.DSMRREADER_BACKUP_SQLITE,
-                settings.DATABASES['default']['NAME'],
-                '.dump',
-            ],
+            command,
             stdout=open(backup_file, 'w'),
             stderr=subprocess.PIPE
-        )   # pragma: no cover
+        )  # pragma: no cover
     else:
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))  # pragma: no cover
 
@@ -134,15 +133,11 @@ def create_full(folder):
         on_backup_failed(process_handle=backup_process)
 
     backup_file = compress(file_path=backup_file)
-    logger.debug(' - Created and compressed full backup: %s', backup_file)
+    logger.info(' - Created and compressed full backup: %s', backup_file)
 
 
 def create_partial(folder, models_to_backup):  # pragma: no cover
     """ Creates a backup of the database, but only containing a subset specified by models."""
-    if connection.vendor != 'postgresql':
-        # Only PostgreSQL support for newer features.
-        raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))
-
     if not os.path.exists(folder):
         logger.info(' - Creating non-existing backup folder: %s', folder)
         os.makedirs(folder)
@@ -152,8 +147,9 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
     ))
 
     logger.info(' - Creating new partial backup: %s', backup_file)
-    backup_process = subprocess.Popen(
-        [
+
+    if connection.vendor == 'postgresql':  # pragma: no cover
+        command = [
             settings.DSMRREADER_BACKUP_PG_DUMP,
             settings.DATABASES['default']['NAME'],
             '--data-only',
@@ -161,12 +157,34 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
             '--user={}'.format(settings.DATABASES['default']['USER']),
         ] + [
             '--table={}'.format(x._meta.db_table) for x in models_to_backup
-        ], env={
-            'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
-        },
-        stdout=open(backup_file, 'w'),
-        stderr=subprocess.PIPE
-    )
+        ]
+        backup_process = subprocess.Popen(
+            command,
+            env={
+                'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
+            },
+            stdout=open(backup_file, 'w'),
+            stderr=subprocess.PIPE
+        )
+    # MySQL backup.
+    elif connection.vendor == 'mysql':  # pragma: no cover
+        command = [
+            settings.DSMRREADER_BACKUP_MYSQLDUMP,
+            '--compress',
+            '--compact',
+            '--hex-blob',
+            '--extended-insert',
+            '--quick',
+            '--host', settings.DATABASES['default']['HOST'],
+            '--user', settings.DATABASES['default']['USER'],
+            '--password={}'.format(settings.DATABASES['default']['PASSWORD']),
+            settings.DATABASES['default']['NAME'],
+        ] + [
+            x._meta.db_table for x in models_to_backup
+        ]
+        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover
+    else:
+        raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))
 
     backup_process.wait()
     logger.debug(' - Backup exit code: %s', backup_process.returncode)
@@ -175,7 +193,7 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
         on_backup_failed(process_handle=backup_process)
 
     backup_file = compress(file_path=backup_file)
-    logger.debug(' - Created and compressed statistics backup: %s', backup_file)
+    logger.info(' - Created and compressed statistics backup: %s', backup_file)
     return backup_file
 
 

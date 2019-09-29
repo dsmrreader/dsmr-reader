@@ -22,6 +22,7 @@ v2.5.0 - 2019-xx-xx
 
 - [`#717 <https://github.com/dennissiemensma/dsmr-reader/issues/717>`_] Fixed the accuracy of rounding prices
 - [`#518 <https://github.com/dennissiemensma/dsmr-reader/issues/518>`_] Aflezen gegevens over voltages
+- [`#722 <https://github.com/dennissiemensma/dsmr-reader/issues/722>`_] Minimale backup (sinds v2.3.0) laat processen stoppen bij MySQL gebruikers
 
 
 ----
