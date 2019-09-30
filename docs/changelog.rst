@@ -23,7 +23,7 @@ v2.6.0 - 2019-xx-xx
 - [`#718 <https://github.com/dennissiemensma/dsmr-reader/issues/718>`_] Improve docs for restoring backups
 - [`#543 <https://github.com/dennissiemensma/dsmr-reader/issues/543>`_] MQTT alleen starten wanneer nodig
 - [`#723 <https://github.com/dennissiemensma/dsmr-reader/issues/723>`_] MQTT-waardes cachen
-- [`#xxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxx>`_] xxxxxxxx
+- [`#581 <https://github.com/dennissiemensma/dsmr-reader/issues/581>`_] Voltages via MQTT
 
 
 ----
