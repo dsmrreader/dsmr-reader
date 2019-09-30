@@ -14,7 +14,8 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
             None, {
                 'fields': ['hostname', 'port', 'secure', 'client_id'],
                 'description': _(
-                    'Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself.'
+                    'Detailed instructions for configuring MQTT can be found here: '
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/latest/mqtt.html">Documentation</a>'
                 )
             }
         ),

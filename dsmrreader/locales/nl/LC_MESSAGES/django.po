@@ -1039,15 +1039,6 @@ msgstr "Hoogste teruglevering (L3-)"
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
 msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
 
-msgid "Current energy prices"
-msgstr "Huidige energietarieven"
-
-msgid "Unit price"
-msgstr "Prijs per eenheid"
-
-msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
-msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
-
 msgid "Application"
 msgstr "Applicatie"
 
@@ -1267,8 +1258,8 @@ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisc
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
 
-msgid "Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself."
-msgstr "Het wijzigen van elke instelling hier zou ervoor moeten zorgen dat <strong>dsmr_mqtt</strong> zichzelf automatisch herstart."
+msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/mqtt.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/mqtt.html\">Documentatie</a>"
 
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
@@ -2082,6 +2073,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Current energy prices"
+#~ msgstr "Huidige energietarieven"
+
+#~ msgid "Unit price"
+#~ msgstr "Prijs per eenheid"
+
+#~ msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
+#~ msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
+
+#~ msgid "Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself."
+#~ msgstr "Het wijzigen van elke instelling hier zou ervoor moeten zorgen dat <strong>dsmr_mqtt</strong> zichzelf automatisch herstart."
 
 #~ msgid "Verify telegram CRC"
 #~ msgstr "Controleer de CRC van telegrammen"

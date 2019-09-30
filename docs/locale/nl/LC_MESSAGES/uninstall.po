@@ -1,0 +1,34 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2019, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../uninstall.rst:2
+msgid "Uninstall"
+msgstr ""
+
+#: ../../uninstall.rst:4
+msgid "To remove DSMR-reader from your system, execute the following commands::"
+msgstr ""
+
+#: ../../uninstall.rst:21
+msgid "To delete your data (the database) as well::"
+msgstr ""
+
+#: ../../uninstall.rst:25
+msgid "Optionally, you can remove these packages::"
+msgstr ""
+

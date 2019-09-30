@@ -16,69 +16,13 @@ You can contact me using Github tickets.
 
 How can I update my application?
 --------------------------------
-The version you are running is always based on the 'latest' version of the application, called the `master` branch.
-Every once in a while there may be updates. You can also easily check for updates by using the application's Status page.
 
-.. warning::
-    
-    Before updating, **please make sure you have a recent backup of your database**! :doc:`More information about backups can be found here<application>`.
-
-You can update your application to the latest version by executing **deploy.sh**, located in the root of the project. 
-Make sure to execute it while logged in as the ``dsmr`` user::
-
-   sudo su - dsmr
-   ./deploy.sh
-
-
+:doc:`See for instructions here <faq/update>`.
 
 
 How can I move the database location?
 -------------------------------------
-.. warning::
-
-    Changing the database data location can cause datacorruption. Only execute the step below if you understand what you are exactly doing!
-
-Since the SD-card is quite vulnerable to wearing and corruption, you can run the database on a different disk or USB-stick.
-To do this, you will have to stop the application and database, change the database configuration, move the data and restart all processes again.
-
-Make sure the OS has direct access the new location and **create a back-up first**!
-
-In the example below we will move the data from ``/var/lib/postgresql/`` to ``/data/postgresql/`` (which could be an external mount).
-
-*Please note that "9.5" in the example below is just the version number of the database, and it may differ from your installation. The same steps however apply.*
-
-Execute the commands below:
-
-* Stop DSMR-reader: ``sudo supervisorctl stop all``
-
-* Stop database: ``sudo systemctl stop postgresql``
-
-* Confirm that the database has stopped, you should see no more ``postgresql`` processes running: ``sudo ps faux | grep postgres``
-
-* Ensure the new location exists: ``sudo mkdir /data/postgresql/``
-
-* Move the database data folder: ``sudo mv /var/lib/postgresql/9.5/ /data/postgresql/9.5/``
-
-* Make sure the ``postgres`` user has access to the new location (and any parent folders in it's path): ``sudo chown -R postgres:postgres /data/``
-
-* Edit database configuration ``sudo vi /etc/postgresql/9.5/main/postgresql.conf`` and find the line::
-
-    data_directory = '/var/lib/postgresql/9.5/main'
-
-* Change it to your new location::
-
-    data_directory = '/data/postgresql/9.5/main'
-
-* Save the file and start the database: ``sudo systemctl start postgresql``
-
-* Check whether the database is running again, you should see multiple processes: ``sudo ps faux | grep postgres``
-
-* Does the database not start? Check its logs in ``/var/log/postgresql/`` for hints.
-
-* Start DSMR-reader again: ``sudo supervisorctl start all``
-
-* Everything should work as usual now, storing the data on the new location.
-
+:doc:`See for instructions here <faq/database>`.
 
 Recalculate prices retroactively
 --------------------------------
@@ -92,6 +36,7 @@ Execute::
 
 I'm not seeing any gas readings
 -------------------------------
+
 Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render. 
 The gas meter positions are only be updated once per hour (for DSMR v4).
 The Status page will give you insight in this as well.
@@ -115,44 +60,13 @@ On recent versions it should be as simple as executing the following command as 
 How do I retain MQTT support when upgrading to v1.23.0 or higher?
 -----------------------------------------------------------------
 
-Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for processing MQTT messages (``dsmr_mqtt``).
-Fresh installations automatically include the ``dsmr_mqtt`` process. Existing installations however, should add ``dsmr_mqtt`` manually. Instructions:
-
-* Please upgrade to ``v1.23.0`` or higher first.
-* Now execute the following commands as **root/sudo-user**::
-
-    # NOTE: This will overwrite /etc/supervisor/conf.d/dsmr-reader.conf
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr-reader.conf /etc/supervisor/conf.d/
-    sudo supervisorctl reread
-    sudo supervisorctl update
+:doc:`See for instructions here <mqtt>`.
 
 
 How do I uninstall DSMR-reader?
 -------------------------------
-To remove DSMR-reader from your system, execute the following commands::
 
-    # Nginx.
-    sudo rm /etc/nginx/sites-enabled/dsmr-webinterface
-    sudo service nginx reload
-    sudo rm -rf /var/www/dsmrreader
-
-    # Supervisor.
-    sudo supervisorctl stop all
-    sudo rm /etc/supervisor/conf.d/dsmr-reader.conf
-    sudo supervisorctl reread
-    sudo supervisorctl update
-
-    # Homedir & user.
-    sudo rm -rf /home/dsmr/
-    sudo userdel dsmr
-
-To delete your data(base) as well::
-
-    sudo su - postgres dropdb dsmrreader
-
-Optionally, you can remove these packages::
-
-    sudo apt-get remove postgresql postgresql-server-dev-all nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
+:doc:`See for instructions here <faq/uninstall>`.
 
 
 How can I use the datalogger only and forward the telegrams?

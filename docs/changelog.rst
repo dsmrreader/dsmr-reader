@@ -21,6 +21,7 @@ v2.6.0 - 2019-xx-xx
 **Tickets resolved in this release:**
 
 - [`#718 <https://github.com/dennissiemensma/dsmr-reader/issues/718>`_] Improve docs for restoring backups
+- [`#543 <https://github.com/dennissiemensma/dsmr-reader/issues/543>`_] MQTT alleen starten wanneer nodig
 - [`#xxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxx>`_] xxxxxxxx
 
 

@@ -41,10 +41,14 @@ DSMR Reader's documentation
 
    settings
    api
+   mqtt
    plugins
    development
 
    faq
+   faq/update
+   faq/database
+   faq/uninstall
    troubleshooting
    changelog
    contributing
