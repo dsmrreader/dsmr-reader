@@ -15,6 +15,9 @@ LOGGING = {
     },
 }
 
+# Disable caching.
+for k in CACHES.keys():
+    CACHES[k]['BACKEND'] = 'django.core.cache.backends.dummy.DummyCache'
 
 # Disable Django Toolbar.
 INSTALLED_APPS = list(INSTALLED_APPS)

@@ -82,26 +82,26 @@ energy_supplier_price_gas = dsmr/qqq
 '''
         self.split_topic_settings.save()
 
-    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
-    def test_disabled(self, create_message_mock):
+    @mock.patch('dsmr_mqtt.services.messages.queue_message')
+    def test_disabled(self, queue_message_mock):
         self.assertFalse(self.json_settings.enabled)
         self.assertFalse(self.split_topic_settings.enabled)
-        self.assertFalse(create_message_mock.called)
+        self.assertFalse(queue_message_mock.called)
 
         dsmr_mqtt.services.callbacks.publish_day_consumption()
-        self.assertFalse(create_message_mock.called)
+        self.assertFalse(queue_message_mock.called)
 
-    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
-    def test_no_data(self, create_message_mock):
+    @mock.patch('dsmr_mqtt.services.messages.queue_message')
+    def test_no_data(self, queue_message_mock):
         self.json_settings.enabled = True
         self.json_settings.save()
 
-        self.assertFalse(create_message_mock.called)
+        self.assertFalse(queue_message_mock.called)
         dsmr_mqtt.services.callbacks.publish_day_consumption()
-        self.assertFalse(create_message_mock.called)
+        self.assertFalse(queue_message_mock.called)
 
-    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
-    def test_json(self, create_message_mock):
+    @mock.patch('dsmr_mqtt.services.messages.queue_message')
+    def test_json(self, queue_message_mock):
         # Required for consumption to return any data.
         ElectricityConsumption.objects.bulk_create([
             ElectricityConsumption(
@@ -128,9 +128,9 @@ energy_supplier_price_gas = dsmr/qqq
         self.json_settings.enabled = True
         self.json_settings.save()
         dsmr_mqtt.services.callbacks.publish_day_consumption()
-        self.assertTrue(create_message_mock.called)
+        self.assertTrue(queue_message_mock.called)
 
-        _, _, result = create_message_mock.mock_calls[0]
+        _, _, result = queue_message_mock.mock_calls[0]
         result = json.loads(result['payload'])
 
         # Without gas or costs.
@@ -157,10 +157,10 @@ energy_supplier_price_gas = dsmr/qqq
             currently_delivered=0,
         )
 
-        create_message_mock.reset_mock()
+        queue_message_mock.reset_mock()
         dsmr_mqtt.services.callbacks.publish_day_consumption()
 
-        _, _, result = create_message_mock.mock_calls[0]
+        _, _, result = queue_message_mock.mock_calls[0]
         result = json.loads(result['payload'])
 
         self.assertEqual(result['jjj'], '4.500')
@@ -177,10 +177,10 @@ energy_supplier_price_gas = dsmr/qqq
             electricity_returned_2_price=2,
             gas_price=8,
         )
-        create_message_mock.reset_mock()
+        queue_message_mock.reset_mock()
         dsmr_mqtt.services.callbacks.publish_day_consumption()
 
-        _, _, result = create_message_mock.mock_calls[0]
+        _, _, result = queue_message_mock.mock_calls[0]
         result = json.loads(result['payload'])
 
         self.assertEqual(result['ggg'], '33.00')
@@ -194,8 +194,8 @@ energy_supplier_price_gas = dsmr/qqq
         self.assertEqual(result['ppp'], '2.00000')
         self.assertEqual(result['qqq'], '8.00000')
 
-    @mock.patch('dsmr_mqtt.models.queue.Message.objects.create')
-    def test_split_topic(self, create_message_mock):
+    @mock.patch('dsmr_mqtt.services.messages.queue_message')
+    def test_split_topic(self, queue_message_mock):
         # Required for consumption to return any data.
         ElectricityConsumption.objects.bulk_create([
             ElectricityConsumption(
@@ -242,9 +242,9 @@ energy_supplier_price_gas = dsmr/qqq
         self.split_topic_settings.enabled = True
         self.split_topic_settings.save()
         dsmr_mqtt.services.callbacks.publish_day_consumption()
-        self.assertTrue(create_message_mock.called)
+        self.assertTrue(queue_message_mock.called)
 
-        called_kwargs = [x[1] for x in create_message_mock.call_args_list]
+        called_kwargs = [x[1] for x in queue_message_mock.call_args_list]
 
         # Without gas or costs.
         self.assertIn({'payload': Decimal('12.000'), 'topic': 'dsmr/aaa'}, called_kwargs)
