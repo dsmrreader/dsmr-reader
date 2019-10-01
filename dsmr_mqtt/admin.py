@@ -14,7 +14,8 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
             None, {
                 'fields': ['hostname', 'port', 'secure', 'client_id'],
                 'description': _(
-                    'Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself.'
+                    'Detailed instructions for configuring MQTT can be found here: '
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/latest/mqtt.html">Documentation</a>'
                 )
             }
         ),
@@ -74,6 +75,9 @@ phase_currently_returned_l2 = phase_currently_returned_l2
 phase_currently_returned_l3 = phase_currently_returned_l3
 extra_device_timestamp = extra_device_timestamp
 extra_device_delivered = extra_device_delivered
+phase_voltage_l1 = phase_voltage_l1
+phase_voltage_l2 = phase_voltage_l2
+phase_voltage_l3 = phase_voltage_l3
 </pre>
 '''
                 )
@@ -112,6 +116,9 @@ phase_currently_returned_l2 = dsmr/reading/phase_currently_returned_l2
 phase_currently_returned_l3 = dsmr/reading/phase_currently_returned_l3
 extra_device_timestamp = dsmr/reading/extra_device_timestamp
 extra_device_delivered = dsmr/reading/extra_device_delivered
+phase_voltage_l1 = dsmr/reading/phase_voltage_l1
+phase_voltage_l2 = dsmr/reading/phase_voltage_l2
+phase_voltage_l3 = dsmr/reading/phase_voltage_l3
 </pre>
 '''
                 )

@@ -158,7 +158,7 @@ class TestBroker(TestCase):
 
         # We assert that the LAST X messages were sent, rest is deleted.
         for x in range(MAX + 1, MAX * 2 + 1):
-            publish_mock.assert_any_call(topic='z', payload=str(x), qos=0)
+            publish_mock.assert_any_call(topic='z', payload=str(x), qos=0, retain=True)
 
         self.assertFalse(queue.Message.objects.exists())
 

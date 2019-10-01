@@ -9,6 +9,7 @@ DSMR Reader's documentation
    data_integrity
 
    installation
+   installation/restore
    installation/datalogger
    installation/quick
    installation/explained
@@ -40,10 +41,14 @@ DSMR Reader's documentation
 
    settings
    api
+   mqtt
    plugins
    development
 
    faq
+   faq/update
+   faq/database
+   faq/uninstall
    troubleshooting
    changelog
    contributing

@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2019, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: X\n"
+"Report-Msgid-Bugs-To: github@dennissiemensma.nl\n"
+"POT-Creation-Date: 2019-09-04 21:42+0200\n"
+"PO-Revision-Date: 2019-09-29 19:39+0200\n"
+"Last-Translator: \n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../installation/restore.rst:2
+msgid "Installation: Restore database backup"
+msgstr "Installatie: Database back-up terugzetten"
+
+#: ../../installation/restore.rst:6
+msgid "Only follow these step if you want to restore a backup in PostgreSQL."
+msgstr ""
+"Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL "
+"wilt terugzetten."
+
+#: ../../installation/restore.rst:10
+msgid ""
+"Restoring a backup will replace any existing data stored in the database "
+"and is irreversible!"
+msgstr ""
+"Het terugzetten van een back-up overschrijft alle bestaande data en is "
+"onomkeerbaar!"
+
+#: ../../installation/restore.rst:12
+msgid ""
+"This assumes you've already reinstalled DSMR-reader and created an "
+"**empty** database."
+msgstr ""
+"Dit gaat er van uit dat je DSMR-reader al opnieuw geinstalleerd hebt en "
+"een **lege** database hebt aangemaakt."
+
+#: ../../installation/restore.rst:15
+msgid "Compressed (default)"
+msgstr "Gecomprimeerd (standaard)"
+
+#: ../../installation/restore.rst:16
+msgid "To restore a compressed backup (``.gz``), run::"
+msgstr ""
+"Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
+
+#: ../../installation/restore.rst:21
+msgid "Uncompressed (legacy)"
+msgstr "Ongecomprimeerd (legacy)"
+
+#: ../../installation/restore.rst:22
+msgid "To restore an uncompressed backup (``.sql``), run::"
+msgstr ""
+"Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"

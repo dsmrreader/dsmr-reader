@@ -15,6 +15,20 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.6.0 - 2019-xx-xx
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#718 <https://github.com/dennissiemensma/dsmr-reader/issues/718>`_] Improve docs for restoring backups
+- [`#543 <https://github.com/dennissiemensma/dsmr-reader/issues/543>`_] MQTT alleen starten wanneer nodig
+- [`#723 <https://github.com/dennissiemensma/dsmr-reader/issues/723>`_] MQTT-waardes cachen
+- [`#581 <https://github.com/dennissiemensma/dsmr-reader/issues/581>`_] Voltages via MQTT
+
+
+----
+
+
 v2.5.0 - 2019-10-01
 ^^^^^^^^^^^^^^^^^^^
 

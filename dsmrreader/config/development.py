@@ -2,7 +2,9 @@ from dsmrreader.config.base import *
 
 
 DEBUG = True
-CACHES['default']['TIMEOUT'] = 0
+
+for k in CACHES.keys():
+    CACHES[k]['TIMEOUT'] = 0
 
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.append('debug_toolbar')

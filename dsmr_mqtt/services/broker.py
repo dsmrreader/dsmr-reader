@@ -64,7 +64,8 @@ def run(mqtt_client):
         mqtt_client.publish(
             topic=current.topic,
             payload=current.payload,
-            qos=broker_settings.qos
+            qos=broker_settings.qos,
+            retain=True
         )
         current.delete()
 
