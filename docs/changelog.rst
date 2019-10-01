@@ -25,6 +25,7 @@ v2.6.0 - 2019-xx-xx
 - [`#723 <https://github.com/dennissiemensma/dsmr-reader/issues/723>`_] MQTT-waardes cachen
 - [`#581 <https://github.com/dennissiemensma/dsmr-reader/issues/581>`_] Voltages via MQTT
 - [`#584 <https://github.com/dennissiemensma/dsmr-reader/issues/584>`_] Foutmeldingen tonen in interface
+- [`#726 <https://github.com/dennissiemensma/dsmr-reader/issues/726>`_] Requirements update (October 2019)
 
 
 ----
