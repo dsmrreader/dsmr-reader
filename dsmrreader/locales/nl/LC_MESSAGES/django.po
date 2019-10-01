@@ -223,8 +223,8 @@ msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
 msgid "Email backup configuration"
 msgstr "Back-up per e-mail configuratie"
 
-msgid "Backup creation failed at {}, please check the dsmr_backend logfile."
-msgstr "Maken van back-up gefaald op {}, controleer de logfile van dsmr_backend."
+msgid "Backup creation failed, please check the dsmr_backend logfile."
+msgstr "Maken van back-up gefaald, controleer de logfile van dsmr_backend."
 
 msgid "DSMR-reader day/hour statistics backup"
 msgstr "DSMR-reader back-up van dag- en uurstatistieken"
@@ -547,11 +547,11 @@ msgstr "Dropbox"
 msgid "Forces Dropbox sync."
 msgstr "Forceert Dropbox synchronisatie."
 
-msgid "[{}] Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
-msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
+msgid "Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
+msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
 
-msgid "[{}] Unable to upload files to Dropbox due to {}. Removing credentials..."
-msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
+msgid "Unable to upload files to Dropbox due to {}. Removing credentials..."
+msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
 
 msgid "Interface"
 msgstr "Interface"
@@ -2081,6 +2081,9 @@ msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit au
 
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
+
+msgid "Failed to read Buienradar API"
+msgstr "Uitlezen van Buienradar API mislukt"
 
 msgid "Dutch"
 msgstr "Nederlands"
