@@ -15,7 +15,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
                 'fields': ['hostname', 'port', 'secure', 'client_id'],
                 'description': _(
                     'Detailed instructions for configuring MQTT can be found here: '
-                    '<a href="https://dsmr-reader.readthedocs.io/nl/latest/mqtt.html">Documentation</a>'
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html">Documentation</a>'
                 )
             }
         ),
