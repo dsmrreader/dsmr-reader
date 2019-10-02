@@ -1,4 +1,3 @@
-import hashlib
 import logging
 
 from django.conf import settings
@@ -23,17 +22,15 @@ def queue_message(topic, payload):
         return logger.warning('Ignoring %s to max messages in queue reached', topic)
 
     cache_storage = caches['mqtt']
+    cache_key = topic
+    cached_data = cache_storage.get(cache_key)
 
-    cache_key = '{}__{}'.format(topic, payload).encode('utf-8')
-    cache_key = hashlib.sha256(cache_key).hexdigest()
-
-    if cache_storage.get(cache_key):
+    # We could have cached the topic, but with different data. Only ignore exactly the same topic + data.
+    if cached_data is not None and cached_data == payload:
         return logger.debug('Ignoring %s due to cache', topic)
 
     _, created = queue.Message.objects.get_or_create(topic=topic, payload=payload)
-
-    # We do not care about the value cached, as it's already included in the cache key.
-    cache_storage.set(cache_key, True)
+    cache_storage.set(cache_key, payload)
 
     if not created:
         return logger.debug('Ignoring %s due to queue', topic)
