@@ -54,3 +54,14 @@ Starting MQTT
     sudo supervisorctl update
 
 * Executing ``sudo supervisorctl status`` should now include ``dsmr_mqtt`` with status ``RUNNING``.
+
+MQTT caching
+~~~~~~~~~~~~
+
+Since DSMR-reader ``v2.6`` MQTT messages are:
+
+* Sent with the ``retain`` flag, asking the broker to cache the latest value sent to each topic.
+* Cached for an hour, to reduce the number of duplicate messages sent.
+* Discarded when there is already another unsent message queued with the exact same topic and contents.
+
+This prevents duplicate messages and removes a significant overhead.

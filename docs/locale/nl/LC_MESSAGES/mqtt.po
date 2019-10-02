@@ -89,6 +89,39 @@ msgstr ""
 "Wanneer je ``sudo supervisorctl status`` uitvoert, zou je ``dsmr_mqtt`` moeten "
 "zien met status ``RUNNING``."
 
+#: ../../mqtt.rst:59
+msgid "MQTT caching"
+msgstr "MQTT cache"
+
+#: ../../mqtt.rst:61
+msgid "Since DSMR-reader ``v2.6`` MQTT messages are:"
+msgstr "Sinds DSMR-reader ``v2.6`` MQTT-berichten worden:"
+
+#: ../../mqtt.rst:63
+msgid ""
+"Sent with the ``retain`` flag, asking the broker to cache the latest value "
+"sent to each topic."
+msgstr ""
+"Verstuurd met de ``retain`` vlag, waardoor de broker de laatste waarde van elk "
+"topic bewaart."
+
+#: ../../mqtt.rst:64
+msgid "Cached for an hour, to reduce the number of duplicate messages sent."
+msgstr ""
+"Gecached gedurende een uur, om het aantal dubbele berichten te verminderen."
+
+#: ../../mqtt.rst:65
+msgid ""
+"Discarded when there is already another unsent message queued with the exact "
+"same topic and contents."
+msgstr ""
+"Genegeerd wanneer er al een soortgelijk onverstuurd bericht klaarstaat, met "
+"exact hetzelde topic en inhoud."
+
+#: ../../mqtt.rst:67
+msgid "This prevents duplicate messages and removes a significant overhead."
+msgstr "Dit zorgt voor aanzienlijk minder overhead."
+
 #~ msgid "Feature/bug report"
 #~ msgstr "Verzoek/fout melden"
 
