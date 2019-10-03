@@ -39,7 +39,7 @@ function initialize_datepicker(id_postfix)
     if ($('#datepicker' + id_postfix).children().length > 0) 
     {
  		/* Remove any previous events bound below. */
- 		$('#datepicker' + id_postfix).off().datepicker('remove');
+ 		$('#datepicker' + id_postfix).off().datepicker('destroy');
     }
     
     $('#datepicker' + id_postfix).datepicker({
