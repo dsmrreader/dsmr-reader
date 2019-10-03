@@ -26,7 +26,7 @@ v2.6.0 - 2019-10-06
 - [`#581 <https://github.com/dennissiemensma/dsmr-reader/issues/581>`_] Voltages via MQTT
 - [`#584 <https://github.com/dennissiemensma/dsmr-reader/issues/584>`_] Foutmeldingen tonen in interface
 - [`#726 <https://github.com/dennissiemensma/dsmr-reader/issues/726>`_] Requirements update (October 2019)
-- [`#615 <https://github.com/dennissiemensma/dsmr-reader/issues/615>`_] Dagstatistieken voor DSMR-v5 eerder genereren #
+- [`#615 <https://github.com/dennissiemensma/dsmr-reader/issues/615>`_] Dagstatistieken voor DSMR-v5 eerder genereren
 
 
 ----
