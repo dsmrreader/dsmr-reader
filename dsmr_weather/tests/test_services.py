@@ -29,13 +29,13 @@ class TestDsmrWeatherServices(TestCase):
         self.assertTrue(weather_settings.track)
         self.assertIsNone(weather_settings.next_sync)
         self.assertFalse(urlopen_mock.called)
-        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertFalse(TemperatureReading.objects.exists())
 
         # Any errors fetching the data should result in a retry later.
         dsmr_weather.services.read_weather()
 
         weather_settings = WeatherSettings.get_solo()
-        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertFalse(TemperatureReading.objects.exists())
         self.assertEqual(weather_settings.next_sync, timezone.now() + timezone.timedelta(minutes=5))
 
         # The default next_sync setting should allow initial sync.
@@ -56,9 +56,9 @@ class TestDsmrWeatherServices(TestCase):
     def test_weather_tracking(self):
         """ Tests whether temperature readings are skipped when tracking is disabled. """
         self.assertFalse(WeatherSettings.get_solo().track)
-        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertFalse(TemperatureReading.objects.exists())
         dsmr_weather.services.read_weather()
-        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertFalse(TemperatureReading.objects.exists())
 
     @mock.patch('urllib.request.urlopen')
     @mock.patch('django.utils.timezone.now')
@@ -86,9 +86,9 @@ class TestDsmrWeatherServices(TestCase):
 
         urlopen_mock.return_value = http_response_mock
 
-        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertFalse(TemperatureReading.objects.exists())
         dsmr_weather.services.read_weather()
-        self.assertTrue(TemperatureReading.objects.all().exists())
+        self.assertTrue(TemperatureReading.objects.exists())
 
         # Test data snapshot read 4.8 degrees @ De Bilt.
         reading = TemperatureReading.objects.get()
@@ -125,9 +125,9 @@ class TestDsmrWeatherServices(TestCase):
 
         urlopen_mock.return_value = http_response_mock
 
-        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertFalse(TemperatureReading.objects.exists())
         dsmr_weather.services.read_weather()
-        self.assertFalse(TemperatureReading.objects.all().exists())
+        self.assertFalse(TemperatureReading.objects.exists())
 
         # Make sure that the next_sync is pushed forward as well.
         weather_settings = WeatherSettings.get_solo()

@@ -136,12 +136,16 @@ FORMAT_MODULE_PATH = [
 ]
 USE_THOUSAND_SEPARATOR = True
 
-# Caching framework. Advantages of caching in memory but without requiring memcached installed.
+# Caching framework. LocMemCache: Advantages of caching in memory but without requiring memcached installed.
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'TIMEOUT': 10,
-    }
+    },
+    'mqtt': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'TIMEOUT': 3600,
+    },
 }
 
 # Static files (CSS, JavaScript, Images)

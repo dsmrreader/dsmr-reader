@@ -3,12 +3,13 @@ from decimal import Decimal
 import urllib.request
 import logging
 
+from django.utils.translation import ugettext as _
 from django.utils import timezone
 
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.buienradar import BUIENRADAR_API_URL, BUIENRADAR_XPATH
-
+import dsmr_frontend.services
 
 logger = logging.getLogger('commands')
 
@@ -42,6 +43,7 @@ def read_weather():
         request = urllib.request.urlopen(BUIENRADAR_API_URL)
     except Exception as e:
         logger.error(' [!] Failed reading temperature: %s', e)
+        dsmr_frontend.services.display_dashboard_message(message=_('Failed to read Buienradar API'))
 
         # Try again in 5 minutes.
         weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=5)

@@ -8,8 +8,25 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 
 .. seealso::
 
-    - `About back-ups <https://dsmr-reader.readthedocs.io/en/latest/application.html#data-preservation-backups>`_.
-    - `About upgrading <https://dsmr-reader.readthedocs.io/en/latest/application.html#application-updates-bug-fixes-new-features>`_.
+    - `About back-ups <https://dsmr-reader.readthedocs.io/en/v2/application.html#data-preservation-backups>`_.
+    - `About upgrading <https://dsmr-reader.readthedocs.io/en/v2/application.html#application-updates-bug-fixes-new-features>`_.
+
+
+----
+
+
+v2.6.0 - 2019-10-07
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#718 <https://github.com/dennissiemensma/dsmr-reader/issues/718>`_] Improve docs for restoring backups
+- [`#543 <https://github.com/dennissiemensma/dsmr-reader/issues/543>`_] MQTT alleen starten wanneer nodig
+- [`#723 <https://github.com/dennissiemensma/dsmr-reader/issues/723>`_] MQTT-waardes cachen
+- [`#581 <https://github.com/dennissiemensma/dsmr-reader/issues/581>`_] Voltages via MQTT
+- [`#584 <https://github.com/dennissiemensma/dsmr-reader/issues/584>`_] Foutmeldingen tonen in interface
+- [`#726 <https://github.com/dennissiemensma/dsmr-reader/issues/726>`_] Requirements update (October 2019)
+- [`#615 <https://github.com/dennissiemensma/dsmr-reader/issues/615>`_] Dagstatistieken voor DSMR-v5 eerder genereren
 
 
 ----
@@ -262,7 +279,7 @@ v1.24.0 - 2018-09-29
 .. warning::
 
     The default logging level of the backend has been lowered to reduce I/O.
-    See ``Logging`` on `this documentation page <https://dsmr-reader.readthedocs.io/nl/latest/troubleshooting.html>`_ for more information.
+    See ``Logging`` on `this documentation page <https://dsmr-reader.readthedocs.io/nl/v2/troubleshooting.html>`_ for more information.
 
 
 **Tickets resolved in this release:**
@@ -318,7 +335,7 @@ v1.23.0 - 2018-08-02
 .. warning::
 
     Support for **MQTT** has been completely reworked in this release and now **requires** a new ``dsmr_mqtt`` process in Supervisor.
-    `Additional steps for upgrading can be found here <https://dsmr-reader.readthedocs.io/en/latest/faq.html#how-do-i-retain-mqtt-support-when-upgrading-to-v1-23-0-or-higher>`_.
+    `Additional steps for upgrading can be found here <https://dsmr-reader.readthedocs.io/en/v2/faq.html#how-do-i-retain-mqtt-support-when-upgrading-to-v1-23-0-or-higher>`_.
 
 
 **Tickets resolved in this release:**
@@ -663,7 +680,7 @@ v1.7.0 - 2017-05-04
 
 .. note::
 
-    The API-docs for the new v2 API `can be found here <https://dsmr-reader.readthedocs.io/en/latest/api.html>`_.
+    The API-docs for the new v2 API `can be found here <https://dsmr-reader.readthedocs.io/en/v2/api.html>`_.
 
 
 **Tickets resolved in this release:**

@@ -139,14 +139,14 @@ msgstr "Optioneel: Bekijk hier je instellingen voor het versturen van back-ups p
 msgid "Send test email"
 msgstr "Stuur een test e-mail"
 
-msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
-msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
+msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
+msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
 
 msgid "Automatic fields"
 msgstr "Automatische velden"
 
-msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentation</a>"
-msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/backup_dropbox.html\">Documentatie</a>"
+msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/backup_dropbox.html\">Documentation</a>"
+msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/backup_dropbox.html\">Documentatie</a>"
 
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
@@ -223,8 +223,8 @@ msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
 msgid "Email backup configuration"
 msgstr "Back-up per e-mail configuratie"
 
-msgid "Backup creation failed at {}, please check the dsmr_backend logfile."
-msgstr "Maken van back-up gefaald op {}, controleer de logfile van dsmr_backend."
+msgid "Backup creation failed, please check the dsmr_backend logfile."
+msgstr "Maken van back-up gefaald, controleer de logfile van dsmr_backend."
 
 msgid "DSMR-reader day/hour statistics backup"
 msgstr "DSMR-reader back-up van dag- en uurstatistieken"
@@ -382,8 +382,8 @@ msgstr "Elektriciteitsmetingen vinden elke X seconden plaats. We kunnen ze voor 
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
-msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/datalogger.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/datalogger.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentatie</a>"
 
 msgid "Datalogger"
 msgstr "Datalogger"
@@ -547,11 +547,11 @@ msgstr "Dropbox"
 msgid "Forces Dropbox sync."
 msgstr "Forceert Dropbox synchronisatie."
 
-msgid "[{}] Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
-msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
+msgid "Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
+msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
 
-msgid "[{}] Unable to upload files to Dropbox due to {}. Removing credentials..."
-msgstr "[{}] Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
+msgid "Unable to upload files to Dropbox due to {}. Removing credentials..."
+msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
 
 msgid "Interface"
 msgstr "Interface"
@@ -612,6 +612,9 @@ msgstr "DSMR-reader v2.1.0: (1) Ondersteuning toegevoegd voor Telegram-app notif
 
 msgid "DSMR-reader v2.3.0: (1) Reworked Dropbox sync. (2) Simplified Status page and updated some libraries. (3) Some other minor fixes."
 msgstr "DSMR-reader v2.3.0: (1) Dropbox-synchronisatie aangepast. (2) Status-pagina versimpeld en wat tools bijgewerkt. (3) Diverse andere kleine fixes."
+
+msgid "DSMR-reader v2.6.0: Many changes related to MQTT. Messages are now sent using the RETAIN flag, telling the broker to cache the latest topic value received. This allows DSMR-reader to cache outgoing messages as well, preventing any duplicates sent."
+msgstr "DSMR-reader v2.6.0: Veel wijzigingen gerelateerd aan MQTT. Berichten worden nu verzonden met de RETAIN-vlag ingeschakeld. Dit zorgt ervoor dat de broker de laatst ontvangen waarde van een topic bewaart. Hierdoor kan DSMR-reader een hoop uitgaande berichten cachen en dat voorkomt een hoop onnodige, dubbele berichten."
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
@@ -1039,15 +1042,6 @@ msgstr "Hoogste teruglevering (L3-)"
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
 msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
 
-msgid "Current energy prices"
-msgstr "Huidige energietarieven"
-
-msgid "Unit price"
-msgstr "Prijs per eenheid"
-
-msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
-msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
-
 msgid "Application"
 msgstr "Applicatie"
 
@@ -1237,8 +1231,8 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
-msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/mindergas.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/mindergas.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/mindergas.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/mindergas.html\">Documentatie</a>"
 
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
@@ -1267,8 +1261,8 @@ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisc
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
 
-msgid "Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself."
-msgstr "Het wijzigen van elke instelling hier zou ervoor moeten zorgen dat <strong>dsmr_mqtt</strong> zichzelf automatisch herstart."
+msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentatie</a>"
 
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
@@ -1296,6 +1290,9 @@ msgid ""
 "phase_currently_returned_l3 = phase_currently_returned_l3\n"
 "extra_device_timestamp = extra_device_timestamp\n"
 "extra_device_delivered = extra_device_delivered\n"
+"phase_voltage_l1 = phase_voltage_l1\n"
+"phase_voltage_l2 = phase_voltage_l2\n"
+"phase_voltage_l3 = phase_voltage_l3\n"
 "</pre>\n"
 msgstr ""
 "Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, in JSON-formaat. Je kunt de veldnamen aanpassen die in het JSON-bericht gebruikt worden. Standaardwaarden:\n"
@@ -1317,6 +1314,10 @@ msgstr ""
 "phase_currently_returned_l3 = phase_currently_returned_l3\n"
 "extra_device_timestamp = extra_device_timestamp\n"
 "extra_device_delivered = extra_device_delivered\n"
+"phase_voltage_l1 = phase_voltage_l1\n"
+"phase_voltage_l2 = phase_voltage_l2\n"
+"phase_voltage_l3 = phase_voltage_l3\n"
+"\n"
 "</pre>\n"
 
 msgid ""
@@ -1339,6 +1340,9 @@ msgid ""
 "phase_currently_returned_l3 = dsmr/reading/phase_currently_returned_l3\n"
 "extra_device_timestamp = dsmr/reading/extra_device_timestamp\n"
 "extra_device_delivered = dsmr/reading/extra_device_delivered\n"
+"phase_voltage_l1 = dsmr/reading/phase_voltage_l1\n"
+"phase_voltage_l2 = dsmr/reading/phase_voltage_l2\n"
+"phase_voltage_l3 = dsmr/reading/phase_voltage_l3\n"
 "</pre>\n"
 msgstr ""
 "Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, gesplitst op een apart topic per veld. Je kunt daarmee elke veldnaam toewijzen op een aparte topic. Standaardwaarden:\n"
@@ -1361,6 +1365,10 @@ msgstr ""
 "phase_currently_returned_l3 = dsmr/reading/phase_currently_returned_l3\n"
 "extra_device_timestamp = dsmr/reading/extra_device_timestamp\n"
 "extra_device_delivered = dsmr/reading/extra_device_delivered\n"
+"phase_voltage_l1 = dsmr/reading/phase_voltage_l1\n"
+"phase_voltage_l2 = dsmr/reading/phase_voltage_l2\n"
+"phase_voltage_l3 = dsmr/reading/phase_voltage_l3\n"
+"\n"
 "</pre>\n"
 
 msgid ""
@@ -1642,8 +1650,8 @@ msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broke
 msgid "MQTT: Telegram (per split topic) configuration"
 msgstr "MQTT: Telegram (per gesplitst topic) configuratie"
 
-msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/notifications.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/latest/admin/notifications.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/notifications.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/notifications.html\">Documentatie</a>"
 
 msgid "Only applies when using Pushover"
 msgstr "Alleen van toepassing voor Pushover"
@@ -2077,11 +2085,26 @@ msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit au
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
+msgid "Failed to read Buienradar API"
+msgstr "Uitlezen van Buienradar API mislukt"
+
 msgid "Dutch"
 msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Current energy prices"
+#~ msgstr "Huidige energietarieven"
+
+#~ msgid "Unit price"
+#~ msgstr "Prijs per eenheid"
+
+#~ msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
+#~ msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
+
+#~ msgid "Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself."
+#~ msgstr "Het wijzigen van elke instelling hier zou ervoor moeten zorgen dat <strong>dsmr_mqtt</strong> zichzelf automatisch herstart."
 
 #~ msgid "Verify telegram CRC"
 #~ msgstr "Controleer de CRC van telegrammen"

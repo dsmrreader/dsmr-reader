@@ -7,8 +7,8 @@ from django.utils import timezone
 from dsmr_mqtt.models.settings import day_totals, telegram, meter_statistics
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_mqtt.models import queue
 import dsmr_consumption.services
+import dsmr_mqtt.services.messages
 
 
 def publish_raw_dsmr_telegram(data):
@@ -18,7 +18,7 @@ def publish_raw_dsmr_telegram(data):
     if not raw_settings.enabled:
         return
 
-    queue.Message.objects.create(topic=raw_settings.topic, payload=data)
+    dsmr_mqtt.services.messages.queue_message(topic=raw_settings.topic, payload=data)
 
 
 def publish_json_dsmr_reading(reading):
@@ -47,7 +47,7 @@ def publish_json_dsmr_reading(reading):
         json_dict[config_key] = v
 
     json_reading = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
-    queue.Message.objects.create(topic=json_settings.topic, payload=json_reading)
+    dsmr_mqtt.services.messages.queue_message(topic=json_settings.topic, payload=json_reading)
 
 
 def publish_split_topic_dsmr_reading(reading):
@@ -75,7 +75,7 @@ def publish_split_topic_dsmr_reading(reading):
         if k not in topic_mapping:
             continue
 
-        queue.Message.objects.create(topic=topic_mapping[k], payload=v)
+        dsmr_mqtt.services.messages.queue_message(topic=topic_mapping[k], payload=v)
 
 
 def publish_day_consumption():
@@ -119,7 +119,7 @@ def day_totals_as_json(day_consumption, json_settings):
         json_dict[config_key] = v
 
     json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
-    queue.Message.objects.create(topic=json_settings.topic, payload=json_data)
+    dsmr_mqtt.services.messages.queue_message(topic=json_settings.topic, payload=json_data)
 
 
 def day_totals_per_topic(day_consumption, split_topic_settings):
@@ -133,7 +133,7 @@ def day_totals_per_topic(day_consumption, split_topic_settings):
         if k not in topic_mapping:
             continue
 
-        queue.Message.objects.create(topic=topic_mapping[k], payload=v)
+        dsmr_mqtt.services.messages.queue_message(topic=topic_mapping[k], payload=v)
 
 
 def publish_split_topic_meter_statistics():
@@ -157,4 +157,4 @@ def publish_split_topic_meter_statistics():
         if k not in topic_mapping:
             continue
 
-        queue.Message.objects.create(topic=topic_mapping[k], payload=v)
+        dsmr_mqtt.services.messages.queue_message(topic=topic_mapping[k], payload=v)

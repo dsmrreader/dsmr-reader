@@ -2,16 +2,15 @@ import logging
 import time
 import os
 
-from django.utils.translation import ugettext_lazy as gettext
+from django.utils.translation import ugettext as _
 from django.utils import timezone
 from django.conf import settings
 import dropbox
 
 from dsmr_backup.models.settings import DropboxSettings
 from dsmr_dropbox.dropboxinc.dropbox_content_hasher import DropboxContentHasher
-from dsmr_frontend.models.message import Notification
 import dsmr_backup.services.backup
-
+import dsmr_frontend.services
 
 logger = logging.getLogger('commands')
 
@@ -52,7 +51,7 @@ def list_files_in_dir(directory):
     """ Lists all files recursively in the specified (backup) directory. """
     files = []
 
-    for (root, _, filenames) in os.walk(directory):
+    for (root, __, filenames) in os.walk(directory):
         for current_file in filenames:
             files.append(os.path.abspath(os.path.join(root, current_file)))
 
@@ -114,27 +113,25 @@ def sync_file(dropbox_settings, local_root_dir, abs_file_path):
         logger.error(' - Dropbox error: %s', error_message)
 
         if 'insufficient_space' in error_message:
-            Notification.objects.create(message=gettext(
-                "[{}] Unable to upload files to Dropbox due to {}. "
-                "Ignoring new files for the next {} hours...".format(
-                    timezone.now(),
-                    error_message,
-                    settings.DSMRREADER_DROPBOX_ERROR_INTERVAL
+            message = _(
+                "Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours...".format(
+                    error_message, settings.DSMRREADER_DROPBOX_ERROR_INTERVAL
                 )
-            ))
+            )
+            dsmr_frontend.services.display_dashboard_message(message=message)
             DropboxSettings.objects.update(
                 latest_sync=timezone.now(),
                 next_sync=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
             )
 
-        # Do not bother trying again.
+        # Auth error. Do not bother trying again.
         if 'invalid_access_token' in error_message:
-            Notification.objects.create(message=gettext(
-                "[{}] Unable to upload files to Dropbox due to {}. Removing credentials...".format(
-                    timezone.now(),
+            message = _(
+                "Unable to upload files to Dropbox due to {}. Removing credentials...".format(
                     error_message
                 )
-            ))
+            )
+            dsmr_frontend.services.display_dashboard_message(message=message)
             DropboxSettings.objects.update(
                 latest_sync=timezone.now(),
                 next_sync=None,

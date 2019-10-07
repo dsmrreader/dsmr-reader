@@ -5,7 +5,7 @@
 * DSMR-protocol slimme meter *(v2, v4 of v5)*: `v...`
 
 ### Bij fouten
-* Gaat er iets fout, maar weet je niet wat? [Bekijk de logfiles](https://dsmr-reader.readthedocs.io/nl/latest/troubleshooting.html) als startpunt.
+* Gaat er iets fout, maar weet je niet wat? [Bekijk de logfiles](https://dsmr-reader.readthedocs.io/nl/v2/troubleshooting.html) als startpunt.
 * Beschrijf de situatie waarin het mis gaat.
 
 ### Overige
