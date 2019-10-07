@@ -52,8 +52,8 @@ msgstr ""
 "html#application-updates-bug-fixes-new-features>`_."
 
 #: ../../changelog.rst:19
-msgid "v2.6.0 - 2019-10-06"
-msgstr "v2.6.0 - 2019-10-06"
+msgid "v2.6.0 - 2019-10-07"
+msgstr "v2.6.0 - 2019-10-07"
 
 #: ../../changelog.rst:21 ../../changelog.rst:38 ../../changelog.rst:51
 #: ../../changelog.rst:66 ../../changelog.rst:83 ../../changelog.rst:94

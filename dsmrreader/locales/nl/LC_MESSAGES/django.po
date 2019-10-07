@@ -613,6 +613,9 @@ msgstr "DSMR-reader v2.1.0: (1) Ondersteuning toegevoegd voor Telegram-app notif
 msgid "DSMR-reader v2.3.0: (1) Reworked Dropbox sync. (2) Simplified Status page and updated some libraries. (3) Some other minor fixes."
 msgstr "DSMR-reader v2.3.0: (1) Dropbox-synchronisatie aangepast. (2) Status-pagina versimpeld en wat tools bijgewerkt. (3) Diverse andere kleine fixes."
 
+msgid "DSMR-reader v2.6.0: Many changes related to MQTT. Messages are now sent using the RETAIN flag, telling the broker to cache the latest topic value received. This allows DSMR-reader to cache outgoing messages as well, preventing any duplicates sent."
+msgstr "DSMR-reader v2.6.0: Veel wijzigingen gerelateerd aan MQTT. Berichten worden nu verzonden met de RETAIN-vlag ingeschakeld. Dit zorgt ervoor dat de broker de laatst ontvangen waarde van een topic bewaart. Hierdoor kan DSMR-reader een hoop uitgaande berichten cachen en dat voorkomt een hoop onnodige, dubbele berichten."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
