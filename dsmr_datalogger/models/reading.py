@@ -146,6 +146,6 @@ class DsmrReading(models.Model):
             self.extra_device_timestamp = timezone.localtime(self.extra_device_timestamp)
 
     def __str__(self):
-        return '{} @ {} ({} kW)'.format(
-            self.id, timezone.localtime(self.timestamp), self.electricity_currently_delivered
+        return '{} @ {}'.format(
+            self.id, timezone.localtime(self.timestamp)
         )
