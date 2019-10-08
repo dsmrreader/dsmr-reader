@@ -7,6 +7,7 @@ DSMR Reader's documentation
    intro
    requirements
    data_integrity
+   troubleshooting
 
    installation
    installation/restore
@@ -49,7 +50,6 @@ DSMR Reader's documentation
    faq/update
    faq/database
    faq/uninstall
-   troubleshooting
    changelog
    contributing
    credits

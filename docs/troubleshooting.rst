@@ -13,6 +13,7 @@ Logging
 Starting from DSMR-reader ``v1.24`` all logging output has been reduced by default.
 You can, however, have the application log more verbose by increasing the logging level.
 
+* Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``.
 * Open the ``dsmrreader/settings.py`` file and look for the code below::
 
     """
@@ -25,10 +26,31 @@ You can, however, have the application log more verbose by increasing the loggin
     """
     # LOGGING['loggers']['commands']['level'] = 'DEBUG'
 
-* **If you cannot find the code above, you've probably installed DSMR-reader before v1.24 and you can paste the code yourself in the file.**
-* Now remove the ``#`` and set the value to ``DEBUG``.
-* Make sure that you execute ``./post-deploy.sh`` after changing the settings.
-* Read below for more information about where to find the logging output.
+.. warning::
+
+    **If you cannot find the code above**, you've probably installed DSMR-reader before v1.24.
+    You can add the following line to the end of the file::
+
+        LOGGING['loggers']['commands']['level'] = 'DEBUG'
+
+* Now remove the ``#`` from this line::
+
+    # LOGGING['loggers']['commands']['level'] = 'DEBUG'
+
+* To::
+
+    LOGGING['loggers']['commands']['level'] = 'DEBUG'
+
+* After editing the file, all processes need to be restarted. To do this, you can either execute::
+
+    ./post-deploy.sh
+
+* Or go back to the **sudo user** and execute::
+
+    CTRL+D
+    sudo supervisorctl restart all
+
+* All done! Read below for more information about where to find the log files.
 
 
 Supervisor
@@ -55,9 +77,10 @@ The logfiles are located by default in:
 
 Telegrams
 ---------
-You can log all telegrams received, in base64 format, by adding ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings.py`` config. 
+You can log all telegrams received for debugging, in **base64** format, by adding ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings.py`` config.
+
 Make sure that you execute ``./post-deploy.sh`` after changing the settings. 
-It should now log the telegrams into ``dsmrreader.log``.
+It should now log the telegrams (**base64** encoded) into ``dsmrreader.log``.
 
 
 Contact
