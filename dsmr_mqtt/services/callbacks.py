@@ -4,7 +4,7 @@ import json
 from django.core import serializers
 from django.utils import timezone
 
-from dsmr_mqtt.models.settings import day_totals, telegram, meter_statistics
+from dsmr_mqtt.models.settings import day_totals, telegram, meter_statistics, consumption
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
@@ -32,22 +32,7 @@ def publish_json_dsmr_reading(reading):
     if json_settings.use_local_timezone:
         reading.convert_to_local_timezone()
 
-    # User specified formatting.
-    config_parser = configparser.ConfigParser()
-    config_parser.read_string(json_settings.formatting)
-    json_mapping = config_parser['mapping']
-    json_dict = {}
-
-    # Copy all fields described in the mapping.
-    for k, v in reading.__dict__.items():
-        if k not in json_mapping:
-            continue
-
-        config_key = json_mapping[k]
-        json_dict[config_key] = v
-
-    json_reading = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
-    dsmr_mqtt.services.messages.queue_message(topic=json_settings.topic, payload=json_reading)
+    publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=reading)
 
 
 def publish_split_topic_dsmr_reading(reading):
@@ -61,21 +46,7 @@ def publish_split_topic_dsmr_reading(reading):
     if split_topic_settings.use_local_timezone:
         reading.convert_to_local_timezone()
 
-    # User specified formatting.
-    config_parser = configparser.ConfigParser()
-    config_parser.read_string(split_topic_settings.formatting)
-    topic_mapping = config_parser['mapping']
-
-    serialized_reading = json.loads(serializers.serialize('json', [reading]))
-    reading_fields = dict(serialized_reading[0]['fields'].items())
-    reading_fields['id'] = serialized_reading[0]['pk']
-
-    # Copy all fields described in the mapping.
-    for k, v in reading_fields.items():
-        if k not in topic_mapping:
-            continue
-
-        dsmr_mqtt.services.messages.queue_message(topic=topic_mapping[k], payload=v)
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=reading)
 
 
 def publish_day_consumption():
@@ -97,43 +68,17 @@ def publish_day_consumption():
     )
 
     if json_settings.enabled:
-        day_totals_as_json(day_consumption, json_settings)
+        publish_json_data(
+            topic=json_settings.topic,
+            mapping_format=json_settings.formatting,
+            data_source=day_consumption
+        )
 
     if split_topic_settings.enabled:
-        day_totals_per_topic(day_consumption, split_topic_settings)
-
-
-def day_totals_as_json(day_consumption, json_settings):
-    """ Converts day consumption to JSON format. """
-    config_parser = configparser.ConfigParser()
-    config_parser.read_string(json_settings.formatting)
-    json_mapping = config_parser['mapping']
-    json_dict = {}
-
-    # Use mapping to setup fields for JSON message.
-    for k, v in day_consumption.items():
-        if k not in json_mapping:
-            continue
-
-        config_key = json_mapping[k]
-        json_dict[config_key] = v
-
-    json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
-    dsmr_mqtt.services.messages.queue_message(topic=json_settings.topic, payload=json_data)
-
-
-def day_totals_per_topic(day_consumption, split_topic_settings):
-    """ Converts day consumption to split topic messages. """
-    config_parser = configparser.ConfigParser()
-    config_parser.read_string(split_topic_settings.formatting)
-    topic_mapping = config_parser['mapping']
-
-    # Use mapping to setup fields for each message/topic.
-    for k, v in day_consumption.items():
-        if k not in topic_mapping:
-            continue
-
-        dsmr_mqtt.services.messages.queue_message(topic=topic_mapping[k], payload=v)
+        publish_split_topic_data(
+            mapping_format=split_topic_settings.formatting,
+            data_source=day_consumption
+        )
 
 
 def publish_split_topic_meter_statistics():
@@ -143,18 +88,65 @@ def publish_split_topic_meter_statistics():
     if not split_topic_settings.enabled:
         return
 
-    # User specified formatting.
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=MeterStatistics.get_solo())
+
+
+def publish_json_gas_consumption(instance):
+    """ Publishes JSON formatted gas consumption to a broker, if set and enabled. """
+    json_settings = consumption.JSONGasConsumptionMQTTSettings.get_solo()
+
+    if not json_settings.enabled:
+        return
+
+    publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=instance)
+
+
+def publish_split_topic_gas_consumption(instance):
+    """ Publishes gas consumption to a broker, formatted in a separate topic per field name, if set and enabled. """
+    split_topic_settings = consumption.SplitTopicGasConsumptionMQTTSettings.get_solo()
+
+    if not split_topic_settings.enabled:
+        return
+
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=instance)
+
+
+def publish_json_data(topic, mapping_format, data_source):
+    """ Generic JSON data dispatcher. """
     config_parser = configparser.ConfigParser()
-    config_parser.read_string(split_topic_settings.formatting)
-    topic_mapping = config_parser['mapping']
+    config_parser.read_string(mapping_format)
+    json_mapping = config_parser['mapping']
+    json_dict = {}
 
-    serialized_reading = json.loads(serializers.serialize('json', [MeterStatistics.get_solo()]))
-    reading_fields = dict(serialized_reading[0]['fields'].items())
-    reading_fields['id'] = serialized_reading[0]['pk']
+    # Convert when not yet a dict.
+    if not isinstance(data_source, dict):
+        data_source = data_source.__dict__
 
-    # Copy all fields described in the mapping.
-    for k, v in reading_fields.items():
-        if k not in topic_mapping:
+    for k, v in data_source.items():
+        if k not in json_mapping:
             continue
 
-        dsmr_mqtt.services.messages.queue_message(topic=topic_mapping[k], payload=v)
+        config_key = json_mapping[k]
+        json_dict[config_key] = v
+
+    json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
+    dsmr_mqtt.services.messages.queue_message(topic=topic, payload=json_data)
+
+
+def publish_split_topic_data(mapping_format, data_source):
+    """ Generic split topic data dispatcher. """
+    config_parser = configparser.ConfigParser()
+    config_parser.read_string(mapping_format)
+    split_mapping = config_parser['mapping']
+
+    # Convert when not yet a dict.
+    if not isinstance(data_source, dict):
+        serialized_data = json.loads(serializers.serialize('json', [data_source]))
+        data_source = dict(serialized_data[0]['fields'].items())
+        data_source['id'] = serialized_data[0]['pk']
+
+    for k, v in data_source.items():
+        if k not in split_mapping:
+            continue
+
+        dsmr_mqtt.services.messages.queue_message(topic=split_mapping[k], payload=v)

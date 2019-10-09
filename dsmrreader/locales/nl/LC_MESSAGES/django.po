@@ -616,6 +616,9 @@ msgstr "DSMR-reader v2.3.0: (1) Dropbox-synchronisatie aangepast. (2) Status-pag
 msgid "DSMR-reader v2.6.0: Many changes related to MQTT. Messages are now sent using the RETAIN flag, telling the broker to cache the latest topic value received. This allows DSMR-reader to cache outgoing messages as well, preventing any duplicates sent."
 msgstr "DSMR-reader v2.6.0: Veel wijzigingen gerelateerd aan MQTT. Berichten worden nu verzonden met de RETAIN-vlag ingeschakeld. Dit zorgt ervoor dat de broker de laatst ontvangen waarde van een topic bewaart. Hierdoor kan DSMR-reader een hoop uitgaande berichten cachen en dat voorkomt een hoop onnodige, dubbele berichten."
 
+msgid "DSMR-reader v2.7.0: Added support in MQTT to share gas consumption to your MQTT broker. "
+msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te delen met je MQTT-broker."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
@@ -1518,6 +1521,40 @@ msgstr ""
 "rejected_telegrams = dsmr/meter-stats/rejected_telegrams\n"
 "</pre>\n"
 
+msgid ""
+"Triggered when a different gas reading is processed. Allows you to send gas consumption to the MQTT broker, as a JSON message. You can alter the field names used in the JSON message. Removing lines will remove fields from the message as well. Default value:\n"
+"<pre>\n"
+"[mapping]\n"
+"read_at = read_at\n"
+"delivered = delivered\n"
+"currently_delivered = currently_delivered\n"
+"</pre>\n"
+msgstr ""
+"Verstuurd wanneer een nieuwe gasmeting is verwerkt.  Staat je toe om de huidige waarden te laten doorsturen naar de MQTT broker, in JSON-formaat. Je kunt de veldnamen aanpassen die in het JSON-bericht gebruikt worden. Standaardwaarde:\n"
+"<pre>\n"
+"[mapping]\n"
+"read_at = read_at\n"
+"delivered = delivered\n"
+"currently_delivered = currently_delivered\n"
+"</pre>\n"
+
+msgid ""
+"Triggered when a different gas reading is processed. Allows you to send gas consumption to the MQTT broker, splitted per field. You can designate each field name to a different topic. Removing lines will prevent those fields from being broadcast as well. Default value:\n"
+"<pre>\n"
+"[mapping]\n"
+"read_at = dsmr/consumption/gas/read_at\n"
+"delivered = dsmr/consumption/gas/delivered\n"
+"currently_delivered = dsmr/consumption/gas/currently_delivered\n"
+"</pre>\n"
+msgstr ""
+"Verstuurd wanneer een nieuwe gasmeting is verwerkt. Staat je toe om de huidige waarden te laten doorsturen naar de MQTT broker, gesplitst per topic. Je kunt de topics aanpassen waar de velden naar toe gestuurd worden.Verstuurd wanneer een nieuwe gasmeting is verwerkt. Standaardwaarde:\n"
+"<pre>\n"
+"[mapping]\n"
+"read_at = dsmr/consumption/gas/read_at\n"
+"delivered = dsmr/consumption/gas/delivered\n"
+"currently_delivered = dsmr/consumption/gas/currently_delivered\n"
+"</pre>\n"
+
 msgid "MQTT"
 msgstr "MQTT"
 
@@ -1527,11 +1564,11 @@ msgstr "Afzonderlijke MQTT client voor het publiceren van berichten naar de brok
 msgid "MQTT now requires a separate process in Supervisor. Please read the changelog for more instructions."
 msgstr "MQTT vereist voortaan een apart proces in Supervisor. Zie het wijzigingenoverzicht voor verdere instructies."
 
-msgid "MQTT: Outgoing message"
-msgstr "MQTT: Uitgaand bericht"
+msgid "Outgoing MQTT message"
+msgstr "Uitgaand MQTT-bericht"
 
-msgid "MQTT: Outgoing messages"
-msgstr "MQTT: Uitgaande berichten"
+msgid "Outgoing MQTT messages"
+msgstr "Uitgaande MQTT-berichten"
 
 msgid "INSECURE - No SSL/TLS"
 msgstr "ONVEILIG - Geen SSL/TLS"
@@ -1581,20 +1618,20 @@ msgstr "Herstart vereist"
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
 
-msgid "MQTT: Broker/connection configuration"
-msgstr "MQTT: Broker/verbinding-configuratie"
+msgid "MQTT Broker/connection"
+msgstr "MQTT broker/verbinding"
 
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-msgid "Whether the day consumption is sent to the broker, in JSON format."
-msgstr "Geeft aan of het dagverbruik wordt doorgestuurd naar de broker, in JSON formaat."
+msgid "Whether gas consumption is sent to the broker, in JSON format."
+msgstr "Geeft aan of het gasverbruik wordt doorgestuurd naar de broker, in JSON formaat."
 
 msgid "Topic path"
 msgstr "Topic pad"
 
-msgid "The topic to send the JSON formatted message to."
-msgstr "Het topic om het JSON-bericht naar te versturen."
+msgid "The topic to send the parsed JSON telegrams to."
+msgstr "Het topic om de JSON telegrammen naar te versturen."
 
 msgid "Formatting"
 msgstr "Formaat"
@@ -1602,23 +1639,38 @@ msgstr "Formaat"
 msgid "Maps the field names used in the JSON message sent to the broker."
 msgstr "Mapt de veldnamen die gebruikt worden in het JSON-bericht naar de broker toe."
 
-msgid "MQTT: Day consumption (as JSON) configuration"
-msgstr "MQTT: Dagverbruik (als JSON) configuratie"
+msgid "(Data source) Gas consumption: JSON"
+msgstr "(Databron) Gasverbruik: JSON"
 
-msgid "Whether day consumption is sent to the broker, having each field sent to a different topic."
-msgstr "Geeft aan of het dagverbruik wordt doorgestuurd naar de broker, gesplitst op een apart veld per topic."
+msgid "Whether gas consumption is sent to the broker, having each field sent to a different topic."
+msgstr "Geeft aan of het gasverbruik wordt doorgestuurd naar de broker, gesplitst op een apart veld per topic."
 
 msgid "Maps the field names to separate topics sent to the broker."
 msgstr "Mapt de veldnamen naar topics, die gebruikt worden in individuele berichten naar de broker toe."
 
-msgid "MQTT: Day consumption (per split topic) configuration"
-msgstr "MQTT: Dagverbruik (per gesplitst topic) configuratie"
+msgid "(Data source) Gas consumption: Split topic"
+msgstr "(Databron) Gasverbruik: Gesplitst topic"
+
+msgid "Whether the day consumption is sent to the broker, in JSON format."
+msgstr "Geeft aan of het dagverbruik wordt doorgestuurd naar de broker, in JSON formaat."
+
+msgid "The topic to send the JSON formatted message to."
+msgstr "Het topic om het JSON-bericht naar te versturen."
+
+msgid "(Data source) Day consumption: JSON"
+msgstr "(Databron) Dagverbruik: JSON"
+
+msgid "Whether day consumption is sent to the broker, having each field sent to a different topic."
+msgstr "Geeft aan of het dagverbruik wordt doorgestuurd naar de broker, gesplitst op een apart veld per topic."
+
+msgid "(Data source) Day consumption: Split topic"
+msgstr "(Databron) Dagverbruik: Gesplitst topic"
 
 msgid "Whether meter statistics are sent to the broker, having each field sent to a different topic."
 msgstr "Geeft aan of meterstatistieken worden doorgestuurd naar de broker, gesplitst op een apart veld per topic."
 
-msgid "MQTT: Meter Statistics (per split topic) configuration"
-msgstr "MQTT: Meterstatistieken (per gesplitst topic) configuratie"
+msgid "(Data source) Meter Statistics: Split topic"
+msgstr "(Databron) Meterstatistieken: Gesplitst topic"
 
 msgid "Whether any raw telegrams received are sent to the broker."
 msgstr "Geeft aan of onbewerkte telegrammen verstuurd worden naar de broker."
@@ -1626,14 +1678,11 @@ msgstr "Geeft aan of onbewerkte telegrammen verstuurd worden naar de broker."
 msgid "The topic to send the raw telegrams to."
 msgstr "Het topic om de onbewerkte telegrammen naar te versturen."
 
-msgid "MQTT: Telegram (as raw string) configuration"
-msgstr "MQTT: Telegram (als onbewerkte string) configuratie"
+msgid "(Data source) Telegram: Raw"
+msgstr "(Databron) Telegram: Ruw"
 
 msgid "Whether parsed telegrams are sent to the broker, in JSON format."
 msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broker, in JSON formaat."
-
-msgid "The topic to send the parsed JSON telegrams to."
-msgstr "Het topic om de JSON telegrammen naar te versturen."
 
 msgid "Use local timezone"
 msgstr "Gebruik lokale tijdszone"
@@ -1641,14 +1690,14 @@ msgstr "Gebruik lokale tijdszone"
 msgid "Whether to use the local timezone ({}) in the timestamp sent."
 msgstr "Geeft aan dat de lokale tijdzone ({}) gebruikt wordt in het tijdstip."
 
-msgid "MQTT: Telegram (as JSON) configuration"
-msgstr "MQTT: Telegram (als JSON) configuratie"
+msgid "(Data source) Telegram: JSON"
+msgstr "(Databron) Telegram: JSON"
 
 msgid "Whether parsed telegrams are sent to the broker, having each field sent to a different topic."
 msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broker, gesplitst op een apart veld per topic."
 
-msgid "MQTT: Telegram (per split topic) configuration"
-msgstr "MQTT: Telegram (per gesplitst topic) configuratie"
+msgid "(Data source) Telegram: Split topic"
+msgstr "(Databron) Telegram: Gesplitst topic"
 
 msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/notifications.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/notifications.html\">Documentatie</a>"
@@ -2093,6 +2142,24 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "MQTT: Day consumption (as JSON) configuration"
+#~ msgstr "MQTT: Dagverbruik (als JSON) configuratie"
+
+#~ msgid "MQTT: Day consumption (per split topic) configuration"
+#~ msgstr "MQTT: Dagverbruik (per gesplitst topic) configuratie"
+
+#~ msgid "MQTT: Meter Statistics (per split topic) configuration"
+#~ msgstr "MQTT: Meterstatistieken (per gesplitst topic) configuratie"
+
+#~ msgid "MQTT: Telegram (as raw string) configuration"
+#~ msgstr "MQTT: Telegram (als onbewerkte string) configuratie"
+
+#~ msgid "MQTT: Telegram (as JSON) configuration"
+#~ msgstr "MQTT: Telegram (als JSON) configuratie"
+
+#~ msgid "MQTT: Telegram (per split topic) configuration"
+#~ msgstr "MQTT: Telegram (per gesplitst topic) configuratie"
 
 #~ msgid "Current energy prices"
 #~ msgstr "Huidige energietarieven"

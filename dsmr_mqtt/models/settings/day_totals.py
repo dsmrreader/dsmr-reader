@@ -51,7 +51,7 @@ energy_supplier_price_gas = energy_supplier_price_gas
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Day consumption (as JSON) configuration')
+        verbose_name = _('(Data source) Day consumption: JSON')
 
 
 class SplitTopicDayTotalsMQTTSettings(SingletonModel):
@@ -96,4 +96,4 @@ energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Day consumption (per split topic) configuration')
+        verbose_name = _('(Data source) Day consumption: Split topic')

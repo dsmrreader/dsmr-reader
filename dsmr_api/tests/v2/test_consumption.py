@@ -71,8 +71,9 @@ class ElectricityLive(APIv2TestCase):
 
 
 class GasLive(APIv2TestCase):
+    @mock.patch('django.db.models.signals.post_save.send')  # Disable signals for side effects.
     @mock.patch('django.utils.timezone.now')
-    def test_get(self, now_mock):
+    def test_get(self, now_mock, *mocks):
         # Without gas.
         result = self._request('gas-live')
         self.assertEqual(result, {})

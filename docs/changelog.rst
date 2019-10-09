@@ -22,7 +22,7 @@ v2.7.0 - 2019-xx-xx
 
 - [`#733 <https://github.com/dennissiemensma/dsmr-reader/issues/733>`_] Fixed weird field formatting for MQTT
 - [`#736 <https://github.com/dennissiemensma/dsmr-reader/issues/736>`_] Requirements upgrade (October 2019)
-- [`#xxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxx>`_] xxxxxxxxxx
+- [`#637 <https://github.com/dennissiemensma/dsmr-reader/issues/637>`_] Live gas gebruik via MQTT
 
 
 ----

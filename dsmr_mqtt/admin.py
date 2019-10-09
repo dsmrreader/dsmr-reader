@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics
+from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption
 from dsmr_backend.mixins import ReadOnlyAdminModel
 from dsmr_mqtt.models import queue
 
@@ -240,6 +240,56 @@ voltage_swell_count_l1 = dsmr/meter-stats/voltage_swell_count_l1
 voltage_swell_count_l2 = dsmr/meter-stats/voltage_swell_count_l2
 voltage_swell_count_l3 = dsmr/meter-stats/voltage_swell_count_l3
 rejected_telegrams = dsmr/meter-stats/rejected_telegrams
+</pre>
+'''
+                )
+            }
+        ),
+    )
+
+
+@admin.register(consumption.JSONGasConsumptionMQTTSettings)
+class JSONGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'topic', 'formatting'],
+                'description': _(
+                    'Triggered when a different gas reading is processed. '
+                    'Allows you to send gas consumption to the MQTT broker, as a JSON message. You can alter '
+                    'the field names used in the JSON message. Removing lines will remove fields from the message as '
+                    'well. '
+                    '''Default value:
+<pre>
+[mapping]
+read_at = read_at
+delivered = delivered
+currently_delivered = currently_delivered
+</pre>
+'''
+                )
+            }
+        ),
+    )
+
+
+@admin.register(consumption.SplitTopicGasConsumptionMQTTSettings)
+class SplitTopicGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'formatting'],
+                'description': _(
+                    'Triggered when a different gas reading is processed. '
+                    'Allows you to send gas consumption to the MQTT broker, splitted per field. You can '
+                    'designate each field name to a different topic. Removing lines will prevent those fields from '
+                    'being broadcast as well. '
+                    '''Default value:
+<pre>
+[mapping]
+read_at = dsmr/consumption/gas/read_at
+delivered = dsmr/consumption/gas/delivered
+currently_delivered = dsmr/consumption/gas/currently_delivered
 </pre>
 '''
                 )

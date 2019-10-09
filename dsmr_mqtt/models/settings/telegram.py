@@ -23,7 +23,7 @@ class RawTelegramMQTTSettings(SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Telegram (as raw string) configuration')
+        verbose_name = _('(Data source) Telegram: Raw')
 
 
 class JSONTelegramMQTTSettings(SingletonModel):
@@ -76,7 +76,7 @@ extra_device_delivered = extra_device_delivered
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Telegram (as JSON) configuration')
+        verbose_name = _('(Data source) Telegram: JSON')
 
 
 class SplitTopicTelegramMQTTSettings(SingletonModel):
@@ -123,4 +123,4 @@ extra_device_delivered = dsmr/reading/extra_device_delivered
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Telegram (per split topic) configuration')
+        verbose_name = _('(Data source) Telegram: Split topic')
