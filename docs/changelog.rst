@@ -20,6 +20,7 @@ v2.7.0 - 2019-xx-xx
 
 **Tickets resolved in this release:**
 
+- [`#733 <https://github.com/dennissiemensma/dsmr-reader/issues/733>`_] Fixed weird field formatting for MQTT
 - [`#xxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxx>`_] xxxxxxxxxx
 
 

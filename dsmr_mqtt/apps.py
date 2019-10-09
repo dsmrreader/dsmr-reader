@@ -6,7 +6,6 @@ import django.db.models.signals
 
 import dsmr_datalogger.signals
 
-
 logger = logging.getLogger('dsmrreader')
 
 
@@ -52,9 +51,14 @@ class MqttAppConfig(AppConfig):
         broker_settings.save(update_fields=['restart_required'])  # DO NOT CHANGE: Keep this save() + update_fields.
 
     def _on_dsmrreading_created_signal(self, instance, created, raw, **kwargs):
+        from dsmr_datalogger.models.reading import DsmrReading
+
         # Skip new or imported (fixture) instances.
         if not created or raw:
             return
+
+        # Refresh from database, as some decimal fields are strings (?) and mess up formatting. (#733)
+        instance = DsmrReading.objects.get(pk=instance.pk)
 
         import dsmr_mqtt.services.callbacks
 
