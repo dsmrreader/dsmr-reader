@@ -52,8 +52,8 @@ msgstr ""
 "html#application-updates-bug-fixes-new-features>`_."
 
 #: ../../changelog.rst:19
-msgid "v2.7.0 - 2019-xx-xx"
-msgstr "v2.7.0 - 2019-xx-xx"
+msgid "v2.7.0 - 2019-10-12"
+msgstr "v2.7.0 - 2019-10-12"
 
 #: ../../changelog.rst:21 ../../changelog.rst:34 ../../changelog.rst:51
 #: ../../changelog.rst:64 ../../changelog.rst:79 ../../changelog.rst:96
@@ -99,11 +99,11 @@ msgstr ""
 
 #: ../../changelog.rst:25
 msgid ""
-"[`#xxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/"
-"xxxxxxxxxx>`_] xxxxxxxxxx"
+"[`#637 <https://github.com/dennissiemensma/dsmr-reader/issues/637>`_] "
+"Live gas gebruik via MQTT"
 msgstr ""
-"[`#xxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/"
-"xxxxxxxxxx>`_] xxxxxxxxxx"
+"[`#637 <https://github.com/dennissiemensma/dsmr-reader/issues/637>`_] "
+"Live gas gebruik via MQTT"
 
 #: ../../changelog.rst:32
 msgid "v2.6.0 - 2019-10-07"
@@ -3210,3 +3210,13 @@ msgstr "Upgraded Django to 1.8.9."
 
 #~ msgid "v2.6.0 - 2019-xx-xx"
 #~ msgstr "v2.6.0 - 2019-xx-xx"
+
+#~ msgid "v2.7.0 - 2019-xx-xx"
+#~ msgstr "v2.7.0 - 2019-xx-xx"
+
+#~ msgid ""
+#~ "[`#xxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/"
+#~ "xxxxxxxxxx>`_] xxxxxxxxxx"
+#~ msgstr ""
+#~ "[`#xxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/"
+#~ "xxxxxxxxxx>`_] xxxxxxxxxx"
