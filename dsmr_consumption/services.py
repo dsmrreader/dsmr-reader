@@ -46,7 +46,7 @@ def compact(dsmr_reading):
 
         # Postpone until the minute has passed on the system time. And when there are (new) readings beyond this minute.
         if not system_time_past_minute or not reading_past_minute_exists:
-            return
+            return logger.debug('Waiting for newer readings before grouping data...')
 
     # Create consumption records.
     _compact_electricity(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)

@@ -15,6 +15,19 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.7.0 - 2019-10-10
+^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#733 <https://github.com/dennissiemensma/dsmr-reader/issues/733>`_] Fixed weird field formatting for MQTT
+- [`#736 <https://github.com/dennissiemensma/dsmr-reader/issues/736>`_] Requirements upgrade (October 2019)
+- [`#637 <https://github.com/dennissiemensma/dsmr-reader/issues/637>`_] Live gas gebruik via MQTT
+
+
+----
+
+
 v2.6.0 - 2019-10-07
 ^^^^^^^^^^^^^^^^^^^
 

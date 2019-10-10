@@ -1,11 +1,11 @@
 import logging
 
 from django.apps import AppConfig
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 import django.db.models.signals
 
 import dsmr_datalogger.signals
-
 
 logger = logging.getLogger('dsmrreader')
 
@@ -18,6 +18,7 @@ class MqttAppConfig(AppConfig):
     def ready(self):
         from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
         from dsmr_datalogger.models.reading import DsmrReading
+        from dsmr_consumption.models.consumption import GasConsumption
 
         dsmr_datalogger.signals.raw_telegram.connect(
             receiver=self._on_raw_telegram_signal,
@@ -33,7 +34,11 @@ class MqttAppConfig(AppConfig):
             dispatch_uid=self.__class__,
             sender=MQTTBrokerSettings
         )
-
+        django.db.models.signals.post_save.connect(
+            receiver=self._on_gas_consumption_created_signal,
+            dispatch_uid=self.__class__,
+            sender=GasConsumption
+        )
         # Required for model detection.
         import dsmr_mqtt.models.queue  # noqa
 
@@ -52,9 +57,14 @@ class MqttAppConfig(AppConfig):
         broker_settings.save(update_fields=['restart_required'])  # DO NOT CHANGE: Keep this save() + update_fields.
 
     def _on_dsmrreading_created_signal(self, instance, created, raw, **kwargs):
-        # Skip new or imported (fixture) instances.
+        from dsmr_datalogger.models.reading import DsmrReading
+
+        # Skip existing or imported (fixture) instances.
         if not created or raw:
             return
+
+        # Refresh from database, as some decimal fields are strings (?) and mess up formatting. (#733)
+        instance = DsmrReading.objects.get(pk=instance.pk)
 
         import dsmr_mqtt.services.callbacks
 
@@ -77,3 +87,23 @@ class MqttAppConfig(AppConfig):
             dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics()
         except Exception as error:
             logger.error('publish_split_topic_meter_statistics() failed: %s', error)
+
+    def _on_gas_consumption_created_signal(self, instance, created, raw, **kwargs):
+        # Skip existing or imported (fixture) instances.
+        if not created or raw:
+            return
+
+        import dsmr_mqtt.services.callbacks
+
+        # Force local timezone.
+        instance.read_at = timezone.localtime(instance.read_at)
+
+        try:
+            dsmr_mqtt.services.callbacks.publish_json_gas_consumption(instance=instance)
+        except Exception as error:
+            logger.error('publish_json_gas_consumption() failed: %s', error)
+
+        try:
+            dsmr_mqtt.services.callbacks.publish_split_topic_gas_consumption(instance=instance)
+        except Exception as error:
+            logger.error('publish_split_topic_gas_consumption() failed: %s', error)

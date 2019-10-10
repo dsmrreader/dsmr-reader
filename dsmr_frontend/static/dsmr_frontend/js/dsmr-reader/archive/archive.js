@@ -33,7 +33,7 @@ $(document).ready(function(){
  	if ($('#datepicker').children().length > 0) 
  	{
  		/* Remove any previous events bound below. */
- 		$('#datepicker').off().datepicker('remove');
+ 		$('#datepicker').off().datepicker('destroy');
  	}
  	
  	$('#datepicker').datepicker({

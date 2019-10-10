@@ -3,6 +3,9 @@ import signal
 import time
 import os
 
+import sys
+import traceback
+
 from django.core.management.base import CommandError
 from django.utils.translation import ugettext as _
 from django.conf import settings
@@ -81,9 +84,10 @@ class InfiniteManagementCommandMixin:
             # Explicit exit.
             logger.info(' [i] Detected StopInfiniteRun exception')
             self._stop()
-        except Exception as error:
+        except:
             # Unforeseen errors.
-            logger.error(' [!] Exception raised in run(): %s', error)
+            _, _, exc_traceback = sys.exc_info()
+            logger.error(' [!] Exception raised in run(): %s', traceback.format_exc())
 
     def initialize(self):
         """ Called once. Override and handle any initialization required. """

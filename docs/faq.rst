@@ -73,3 +73,9 @@ How can I use the datalogger only and forward the telegrams?
 ------------------------------------------------------------
 
 See :doc:`these datalogger instructions<installation/datalogger>` for more information.
+
+
+How can I check the logfiles?
+-----------------------------
+
+:doc:`See for instructions here <troubleshooting>`.

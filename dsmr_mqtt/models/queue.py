@@ -12,5 +12,5 @@ class Message(models.Model):
 
     class Meta:
         default_permissions = ('delete', )  # Do allow deletion.
-        verbose_name = _('MQTT: Outgoing message')
-        verbose_name_plural = _('MQTT: Outgoing messages')
+        verbose_name = _('Outgoing MQTT message')
+        verbose_name_plural = _('Outgoing MQTT messages')
