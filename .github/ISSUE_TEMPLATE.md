@@ -1,4 +1,3 @@
-*Bedankt voor het aanmaken van een issue!*
 ### Wat gebruik je?
 * DSMR-reader versie *(rechtsbovenin applicatie zichtbaar)*: `v2.xxx`
 * Hardware *(RaspberryPi 3, 4 of iets anders)*: `RaspberryPi ...`
