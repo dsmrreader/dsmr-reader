@@ -40,8 +40,21 @@ def get_next_day_to_generate():
         # Beginning of time.
         read_at = ElectricityConsumption.objects.all().order_by('read_at')[0].read_at
         return timezone.localtime(read_at).date()
-    else:
-        return latest_day + timezone.timedelta(days=1)
+
+    # Search for the next day with any consumption.
+    next_day = latest_day + timezone.timedelta(days=1)
+    search_start = timezone.datetime.combine(next_day, timezone.datetime.min.time())
+    search_start = timezone.make_aware(search_start)
+
+    try:
+        next_consumption = ElectricityConsumption.objects.filter(
+            read_at__gt=search_start
+        ).order_by('read_at')[0]
+    except IndexError:
+        # Last resort.
+        return next_day
+
+    return timezone.localtime(next_consumption.read_at).date()
 
 
 def analyze():
