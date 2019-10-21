@@ -15,12 +15,12 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.8.0 - 2019-xx-xx
+v2.8.0 - 2019-10-22
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
-- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_] xxxxxxx
+- [`#747 <https://github.com/dennissiemensma/dsmr-reader/issues/747>`_] Dagstatistieken stoppen bij periode missende gegevens
 
 
 ----
