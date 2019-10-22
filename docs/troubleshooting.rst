@@ -26,10 +26,6 @@ You can, however, have the application log more verbose by increasing the loggin
     """
     # LOGGING['loggers']['commands']['level'] = 'DEBUG'
 
-    # OR
-
-    LOGGING['loggers']['commands']['level'] = os.environ.get('DSMRREADER_LOGLEVEL')
-
 .. warning::
 
     **If you cannot find the code above**, you've probably installed DSMR-reader before v1.24.
