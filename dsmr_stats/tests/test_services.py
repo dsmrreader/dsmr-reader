@@ -49,6 +49,39 @@ class TestServices(InterceptStdoutMixin, TestCase):
             datetime.date(2015, 12, 12)
         )
 
+    @mock.patch('dsmr_backend.services.backend.get_capabilities')
+    @mock.patch('django.utils.timezone.now')
+    def test_get_next_day_with_gap(self, now_mock, capabilities_mock):
+        """ Data gaps should be skipped, as they won't be restored anyway. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+        capabilities_mock.return_value = False  # Disable gas check.
+        ElectricityConsumption.objects.create(
+            # Gap since 12-12-2015.
+            read_at=timezone.make_aware(timezone.datetime(2015, 12, 20)),
+            delivered_1=0,
+            delivered_2=0,
+            returned_1=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+        )
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2015, 12, 12)
+        )
+
+        dsmr_stats.services.analyze()
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2015, 12, 15)
+        )
+
+        dsmr_stats.services.analyze()
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2015, 12, 20)
+        )
+
     @mock.patch('django.utils.timezone.now')
     def test_get_next_day_to_generate_with_stats(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))

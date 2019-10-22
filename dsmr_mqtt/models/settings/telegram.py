@@ -59,6 +59,9 @@ phase_currently_returned_l2 = phase_currently_returned_l2
 phase_currently_returned_l3 = phase_currently_returned_l3
 extra_device_timestamp = extra_device_timestamp
 extra_device_delivered = extra_device_delivered
+phase_voltage_l1 = dsmr/reading/phase_voltage_l1
+phase_voltage_l2 = dsmr/reading/phase_voltage_l2
+phase_voltage_l3 = dsmr/reading/phase_voltage_l3
 ''',
         verbose_name=_('Formatting'),
         help_text=_('Maps the field names used in the JSON message sent to the broker.')
@@ -106,6 +109,9 @@ phase_currently_returned_l2 = dsmr/reading/phase_currently_returned_l2
 phase_currently_returned_l3 = dsmr/reading/phase_currently_returned_l3
 extra_device_timestamp = dsmr/reading/extra_device_timestamp
 extra_device_delivered = dsmr/reading/extra_device_delivered
+phase_voltage_l1 = dsmr/reading/phase_voltage_l1
+phase_voltage_l2 = dsmr/reading/phase_voltage_l2
+phase_voltage_l3 = dsmr/reading/phase_voltage_l3
 ''',
         verbose_name=_('Formatting'),
         help_text=_('Maps the field names to separate topics sent to the broker.')

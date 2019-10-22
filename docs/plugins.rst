@@ -197,3 +197,51 @@ Plugin file ``dsmr_plugins/modules/forward_telegram_to_api.py`` (new file)::
 
 
 Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should be changed to your own preferences. 
+
+
+Example #4: Forwarding DSMR readings in JSON format to some API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Use this to send DSMR readings in JSON format to some (arbitrary) API.
+
+Settings file ``dsmrreader/settings.py`` (addition)::
+
+    DSMRREADER_PLUGINS = [
+        'dsmr_plugins.modules.forward_json_dsmrreading_to_api',
+    ]
+
+
+Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new file)::
+
+    import requests
+    import json
+
+    from django.dispatch import receiver
+    from django.core import serializers
+    from django.utils import timezone
+    import django.db.models.signals
+
+
+    @receiver(django.db.models.signals.post_save)
+    def handle_forward_json_dsmrreading_to_api(sender, instance, created, raw, **kwargs):
+        # Skip new or imported (fixture) instances.
+        if not created or raw:
+            return
+
+        # Local time.
+        instance.timestamp = timezone.localtime(instance.timestamp)
+
+        if instance.extra_device_timestamp:
+            instance.extra_device_timestamp = timezone.localtime(instance.extra_device_timestamp)
+
+        serialized = json.loads(serializers.serialize('json', [instance]))
+        json_string = json.dumps(serialized[0]['fields'])
+
+        try:
+            requests.post(
+                'https://YOUR-DSMR-HOST/api/endpoint/',
+                data=json_string,
+                # A low timeout prevents DSMR-reader from hanging, when the remote server is unreachable.
+                timeout=5
+            )
+        except Exception as error:
+            print('forward_json_dsmrreading_to_api:', error)
