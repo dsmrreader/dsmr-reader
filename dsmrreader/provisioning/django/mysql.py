@@ -33,6 +33,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', DSMRREADER_SECRET_KEY)
 if os.environ.get('DSMRREADER_LOGLEVEL') is not None:
     LOGGING['loggers']['commands']['level'] = os.environ.get('DSMRREADER_LOGLEVEL')
 
+if os.environ.get('DSMRREADER_PLUGINS') is not None:
+    DSMRREADER_PLUGINS = os.environ.get('DSMRREADER_PLUGINS').split(',')
+
+
 """
     Enable and change the logging level below to alter the verbosity of the (backend) command(s).
     - DEBUG:             Log everything.
