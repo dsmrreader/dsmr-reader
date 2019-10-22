@@ -21,6 +21,7 @@ v2.8.0 - 2019-10-22
 **Tickets resolved in this release:**
 
 - [`#747 <https://github.com/dennissiemensma/dsmr-reader/issues/747>`_] Dagstatistieken stoppen bij periode missende gegevens
+- [`#748 <https://github.com/dennissiemensma/dsmr-reader/issues/748>`_] Verwerkte metingen in JSON doorsturen naar een API
 - [`#749 <https://github.com/dennissiemensma/dsmr-reader/issues/749>`_] make loglevel configurable by environmental variables - by jorkzijlstra
 
 
