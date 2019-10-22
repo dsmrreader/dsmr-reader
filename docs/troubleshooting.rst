@@ -24,17 +24,24 @@ You can, however, have the application log more verbose by increasing the loggin
     
         Restart the commands in Supervisor to apply any changes.
     """
+    # LOGGING['loggers']['commands']['level'] = 'DEBUG'
+
+    # OR
 
     LOGGING['loggers']['commands']['level'] = os.environ.get('DSMRREADER_LOGLEVEL')
 
 .. warning::
 
     **If you cannot find the code above**, you've probably installed DSMR-reader before v1.24.
-    You can update the following line to the end of the file::
+    You can add the following line to the end of the file::
 
-    LOGGING['loggers']['commands']['level'] = os.environ.get('DSMRREADER_LOGLEVEL')
+        LOGGING['loggers']['commands']['level'] = 'DEBUG'
 
-* Simply replace with::
+* Now remove the ``#`` from this line::
+
+    # LOGGING['loggers']['commands']['level'] = 'DEBUG'
+
+* To::
 
     LOGGING['loggers']['commands']['level'] = 'DEBUG'
 

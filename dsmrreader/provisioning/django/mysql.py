@@ -30,6 +30,8 @@ DATABASES = {
 
 SECRET_KEY = os.environ.get('SECRET_KEY', DSMRREADER_SECRET_KEY)
 
+if os.environ.get('DSMRREADER_LOGLEVEL') is not None:
+    LOGGING['loggers']['commands']['level'] = os.environ.get('DSMRREADER_LOGLEVEL')
 
 """
     Enable and change the logging level below to alter the verbosity of the (backend) command(s).
@@ -39,6 +41,4 @@ SECRET_KEY = os.environ.get('SECRET_KEY', DSMRREADER_SECRET_KEY)
 
     Restart the commands in Supervisor to apply any changes.
 """
-
-if os.environ.get('DSMRREADER_LOGLEVEL') is not None:
-    LOGGING['loggers']['commands']['level'] = os.environ.get('DSMRREADER_LOGLEVEL')
+# LOGGING['loggers']['commands']['level'] = 'DEBUG'
