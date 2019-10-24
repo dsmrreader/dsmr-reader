@@ -21,6 +21,7 @@ v2.9.0 - 2019-xx-xx
 **Tickets resolved in this release:**
 
 - [`#755 <https://github.com/dennissiemensma/dsmr-reader/issues/755>`_] Buienradar API bron/foutafhandeling verbeteren
+- [`#752 <https://github.com/dennissiemensma/dsmr-reader/issues/752>`_] Configurable plugins by environmental variables - by jorkzijlstra
 
 
 ----
