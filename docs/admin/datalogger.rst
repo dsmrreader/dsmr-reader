@@ -9,6 +9,9 @@ The advanced options allow you to change the DSMR protocol version, but the defa
     :alt: Datalogger
 
 
+Data cleanup/retention
+----------------------
+
 By default all DSMR-readings read by of sent to the application are stored indefinitely.
 DSMR v5 smart meters allow DSMR-readings to be recorded every second, resulting in over 30 million readings each year. 
 
@@ -23,7 +26,7 @@ Please note that enabling this feature will **not discard all readings**, as it 
 
 Notes / warnings
 ----------------
-* The application will **slowly** apply retention **during night**, cleaning up a maximum of 24 hours worth of data on each backend run executed.
+* The application will **slowly** apply retention, cleaning up a maximum of 24 hours worth of data on each backend run executed.
 
 * Enabling retention will prevent you from regenerating past day statistics with different prices (due to loss of accuracy).
 

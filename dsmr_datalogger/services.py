@@ -301,12 +301,6 @@ def apply_data_retention():
         # No retention enabled at all (default behaviour).
         return
 
-    current_time = timezone.localtime(timezone.now())
-
-    # Only cleanup during nights. Allow from midnight to six a.m.
-    if current_time.hour >= settings.DSMRREADER_RETENTION_UNTIL_THIS_HOUR:
-        return
-
     # These models should be rotated with retention. Dict value is the datetime field used.
     MODELS_TO_CLEANUP = {
         DsmrReading.objects.processed(): 'timestamp',

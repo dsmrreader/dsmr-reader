@@ -15,7 +15,7 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.9.0 - 2019-xx-xx
+v2.9.0 - 2019-10-25
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
@@ -23,6 +23,7 @@ v2.9.0 - 2019-xx-xx
 - [`#755 <https://github.com/dennissiemensma/dsmr-reader/issues/755>`_] Buienradar API bron/foutafhandeling verbeteren
 - [`#752 <https://github.com/dennissiemensma/dsmr-reader/issues/752>`_] Configurable plugins by environmental variables - by jorkzijlstra
 - [`#743 <https://github.com/dennissiemensma/dsmr-reader/issues/743>`_] Nginx: Sites-available gebruiken
+- [`#757 <https://github.com/dennissiemensma/dsmr-reader/issues/757>`_] Retentie op elk moment van de dag doorvoeren
 
 
 ----
