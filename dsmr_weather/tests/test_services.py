@@ -1,9 +1,7 @@
 from unittest import mock
 from decimal import Decimal
-import os
 
 from django.test import TestCase
-from django.conf import settings
 from django.utils import timezone
 
 from dsmr_weather.models.settings import WeatherSettings
@@ -12,123 +10,102 @@ import dsmr_weather.services
 
 
 class TestDsmrWeatherServices(TestCase):
-    """ Test services. """
-    @mock.patch('urllib.request.urlopen')
+    def setUp(self):
+        WeatherSettings.get_solo()
+
+    @mock.patch('dsmr_weather.services.get_temperature_from_api')
     @mock.patch('django.utils.timezone.now')
-    def test_next_sync(self, now_mock, urlopen_mock):
-        """ Test next_sync setting. """
+    def test_should_update(self, now_mock, get_temperature_from_api_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
 
-        # We just want to see whether it's called.
-        urlopen_mock.side_effect = AssertionError('MOCK')
-
-        weather_settings = WeatherSettings.get_solo()
-        weather_settings.track = True
-        weather_settings.save()
-
-        self.assertTrue(weather_settings.track)
-        self.assertIsNone(weather_settings.next_sync)
-        self.assertFalse(urlopen_mock.called)
-        self.assertFalse(TemperatureReading.objects.exists())
-
-        # Any errors fetching the data should result in a retry later.
+        # Disabled.
+        WeatherSettings.objects.all().update(track=False)
         dsmr_weather.services.read_weather()
+        self.assertFalse(get_temperature_from_api_mock.called)
 
-        weather_settings = WeatherSettings.get_solo()
-        self.assertFalse(TemperatureReading.objects.exists())
-        self.assertEqual(weather_settings.next_sync, timezone.now() + timezone.timedelta(minutes=5))
-
-        # The default next_sync setting should allow initial sync.
-        self.assertTrue(urlopen_mock.called)
-
-        # Now disallow.
-        weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=15)
-        weather_settings.save()
-
-        urlopen_mock.reset_mock()
-        self.assertFalse(urlopen_mock.called)
-
+        # Postpone.
+        WeatherSettings.objects.all().update(track=True, next_sync=timezone.now() + timezone.timedelta(minutes=5))
         dsmr_weather.services.read_weather()
+        self.assertFalse(get_temperature_from_api_mock.called)
 
-        # Should be skipped now.
-        self.assertFalse(urlopen_mock.called)
-
-    def test_weather_tracking(self):
-        """ Tests whether temperature readings are skipped when tracking is disabled. """
-        self.assertFalse(WeatherSettings.get_solo().track)
-        self.assertFalse(TemperatureReading.objects.exists())
+        # Allow.
+        WeatherSettings.objects.all().update(next_sync=timezone.now())
         dsmr_weather.services.read_weather()
-        self.assertFalse(TemperatureReading.objects.exists())
+        self.assertTrue(get_temperature_from_api_mock.called)
 
-    @mock.patch('urllib.request.urlopen')
+    @mock.patch('dsmr_frontend.services.display_dashboard_message')
+    @mock.patch('dsmr_weather.services.get_temperature_from_api')
     @mock.patch('django.utils.timezone.now')
-    def test_weather_parsing(self, now_mock, urlopen_mock):
-        """ Tests whether temperature readings are skipped when tracking is disabled. """
+    def test_exception_handling(self, now_mock, get_temperature_from_api_mock, display_dashboard_message_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
-        weather_settings = WeatherSettings.get_solo()
-        weather_settings.track = True
-        weather_settings.next_sync = timezone.now() - timezone.timedelta(minutes=15)
-        weather_settings.save()
-        weather_settings.refresh_from_db()
+        get_temperature_from_api_mock.side_effect = EnvironmentError('TEST')  # Simulate any exception.
 
-        self.assertGreater(timezone.now(), weather_settings.next_sync)
+        WeatherSettings.objects.all().update(track=True, next_sync=timezone.now())
 
-        # Fake URL opener and its http response object used for reading data.
-        http_response_mock = mock.MagicMock()
+        dsmr_weather.services.read_weather()
+        self.assertTrue(display_dashboard_message_mock.called)
+        self.assertEqual(WeatherSettings.get_solo().next_sync, timezone.now() + timezone.timedelta(minutes=5))
 
-        test_data_file = os.path.join(
-            settings.BASE_DIR, '..', 'dsmr_weather', 'tests', 'data', 'api.buienradar.nl.xml'
-        )
+    @mock.patch('requests.get')
+    @mock.patch('django.utils.timezone.now')
+    def test_okay(self, now_mock, requests_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
+        WeatherSettings.objects.all().update(track=True, next_sync=timezone.now() - timezone.timedelta(minutes=15))
 
-        with open(test_data_file, 'r') as data:
-            # Http response is in bytes, so make sure to equalize it.
-            http_response_mock.read.return_value = bytes(data.read(), encoding='utf-8')
-
-        urlopen_mock.return_value = http_response_mock
+        response_mock = mock.MagicMock()
+        response_mock.json.return_value = {
+            'actual': {
+                'stationmeasurements': [{
+                    'stationid': WeatherSettings.get_solo().buienradar_station,
+                    'groundtemperature': 123.4,
+                }]
+            }
+        }
+        type(response_mock).status_code = mock.PropertyMock(return_value=200)
+        requests_mock.return_value = response_mock
 
         self.assertFalse(TemperatureReading.objects.exists())
-        dsmr_weather.services.read_weather()
+        dsmr_weather.services.get_temperature_from_api()
+
         self.assertTrue(TemperatureReading.objects.exists())
-
-        # Test data snapshot read 4.8 degrees @ De Bilt.
-        reading = TemperatureReading.objects.get()
-        self.assertEqual(weather_settings.buienradar_station, 6260)
-        self.assertEqual(reading.degrees_celcius, Decimal('4.8'))
+        self.assertEqual(TemperatureReading.objects.get().degrees_celcius, Decimal('123.4'))
 
         # Make sure that the next_sync is pushed forward as well.
         weather_settings = WeatherSettings.get_solo()
         self.assertEqual(weather_settings.next_sync, timezone.now() + timezone.timedelta(hours=1))
 
-    @mock.patch('urllib.request.urlopen')
+    @mock.patch('requests.get')
     @mock.patch('django.utils.timezone.now')
-    def test_weather_parsing_error(self, now_mock, urlopen_mock):
-        """ Tests whether temperature readings are skipped when tracking is disabled. """
+    def test_fail_http(self, now_mock, requests_mock):
+        """ Test failing request. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
-        weather_settings = WeatherSettings.get_solo()
-        weather_settings.track = True
-        weather_settings.next_sync = timezone.now() - timezone.timedelta(minutes=15)
-        weather_settings.save()
-        weather_settings.refresh_from_db()
+        WeatherSettings.objects.all().update(track=True, next_sync=timezone.now() - timezone.timedelta(minutes=15))
 
-        self.assertGreater(timezone.now(), weather_settings.next_sync)
+        response_mock = mock.MagicMock()
+        type(response_mock).status_code = mock.PropertyMock(return_value=500)
+        requests_mock.return_value = response_mock
 
-        # Fake URL opener and its http response object used for reading data.
-        http_response_mock = mock.MagicMock()
+        with self.assertRaises(EnvironmentError):
+            dsmr_weather.services.get_temperature_from_api()
 
-        test_data_file = os.path.join(
-            settings.BASE_DIR, '..', 'dsmr_weather', 'tests', 'data', 'invalid-api.buienradar.nl.xml'
-        )
+    @mock.patch('requests.get')
+    @mock.patch('django.utils.timezone.now')
+    def test_fail_station(self, now_mock, requests_mock):
+        """ Test unable to find station ID. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
+        WeatherSettings.objects.all().update(track=True, next_sync=timezone.now() - timezone.timedelta(minutes=15))
 
-        with open(test_data_file, 'r') as data:
-            # Http response is in bytes, so make sure to equalize it.
-            http_response_mock.read.return_value = bytes(data.read(), encoding='utf-8')
+        response_mock = mock.MagicMock()
+        response_mock.json.return_value = {
+            'actual': {
+                'stationmeasurements': [{
+                    'stationid': 0000,
+                    'groundtemperature': 123,
+                }]
+            }
+        }
+        type(response_mock).status_code = mock.PropertyMock(return_value=200)
+        requests_mock.return_value = response_mock
 
-        urlopen_mock.return_value = http_response_mock
-
-        self.assertFalse(TemperatureReading.objects.exists())
-        dsmr_weather.services.read_weather()
-        self.assertFalse(TemperatureReading.objects.exists())
-
-        # Make sure that the next_sync is pushed forward as well.
-        weather_settings = WeatherSettings.get_solo()
-        self.assertEqual(weather_settings.next_sync, timezone.now() + timezone.timedelta(minutes=5))
+        with self.assertRaises(EnvironmentError):
+            dsmr_weather.services.get_temperature_from_api()

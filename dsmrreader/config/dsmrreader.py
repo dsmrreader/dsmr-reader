@@ -1,7 +1,7 @@
 import dsmrreader
 
 
-# Officially we only support PostgreSQL.
+# Officially we only support PostgreSQL, but w/e.
 DSMRREADER_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
 
 DSMRREADER_BACKUP_PG_DUMP = 'pg_dump'
@@ -53,3 +53,5 @@ DSMRREADER_PLUGINS = []
 
 # Whether to override (disable) capabilities.
 DSMRREADER_DISABLED_CAPABILITIES = []
+
+DSMRREADER_BUIENRADAR_API_URL = 'https://data.buienradar.nl/2.0/feed/json'

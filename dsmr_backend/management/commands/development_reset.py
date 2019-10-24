@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -13,6 +14,7 @@ from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_api.models import APISettings
 from dsmr_mqtt.models import queue
+from dsmr_weather.models.settings import WeatherSettings
 
 
 class Command(BaseCommand):
@@ -44,11 +46,12 @@ class Command(BaseCommand):
             notification_service=None, pushover_api_key=None, pushover_user_key=None, prowl_api_key=None
         )
         MQTTBrokerSettings.objects.update(
-            port=8883, secure=MQTTBrokerSettings.SECURE_CERT_NONE, debug=True, username='user', password='password'
+            port=8883, secure=MQTTBrokerSettings.SECURE_CERT_NONE, username='user', password='password'
         )
         PVOutputAPISettings.objects.update(auth_token=None, system_identifier=None)
         queue.Message.objects.all().delete()
         Notification.objects.update(read=True)
+        WeatherSettings.objects.all().update(next_sync=timezone.now())
         Notification.objects.create(message='Development reset completed.')
 
         try:
