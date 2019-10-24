@@ -254,7 +254,8 @@ Remove the default Nginx vhost (**only when you do not use it yourself, see the 
 
 - Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
+    sudo ln -s /etc/nginx/sites-available/dsmr-webinterface /etc/nginx/sites-enabled/
 
 - Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::
 
