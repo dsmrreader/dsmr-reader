@@ -1,21 +1,21 @@
-import xml.etree.ElementTree as ET
 from decimal import Decimal
-import urllib.request
 import logging
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.conf import settings
+import requests
 
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
-from dsmr_weather.buienradar import BUIENRADAR_API_URL, BUIENRADAR_XPATH
 import dsmr_frontend.services
+
 
 logger = logging.getLogger('commands')
 
 
-def should_sync():
-    """ Checks whether we should sync yet. """
+def should_update():
+    """ Checks whether we should update yet. """
     weather_settings = WeatherSettings.get_solo()
 
     if not weather_settings.track:
@@ -30,50 +30,41 @@ def should_sync():
 def read_weather():
     """ Reads the current weather state, if enabled, and stores it. """
     # Only when explicitly enabled in settings.
-    if not should_sync():
+    if not should_update():
         return
-
-    # For backend logging in Supervisor.
-    logger.debug(' - Performing temperature reading at Buienradar.')
-
-    weather_settings = WeatherSettings.get_solo()
 
     try:
-        # Fetch XML from API.
-        request = urllib.request.urlopen(BUIENRADAR_API_URL)
-    except Exception as e:
-        logger.error(' [!] Failed reading temperature: %s', e)
-        dsmr_frontend.services.display_dashboard_message(message=_('Failed to read Buienradar API'))
+        get_temperature_from_api()
+    except Exception as error:
+        logger.exception(error)
 
-        # Try again in 5 minutes.
-        weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=5)
-        weather_settings.save()
-        return
+        # On any error, just try again in 5 minutes.
+        WeatherSettings.objects.all().update(next_sync=timezone.now() + timezone.timedelta(minutes=5))
+        dsmr_frontend.services.display_dashboard_message(message=_(
+            'Failed to read Buienradar API: {}'.format(error)
+        ))
 
-    response_bytes = request.read()
-    request.close()
-    response_string = response_bytes.decode("utf8")
 
-    # Use simplified xPath engine to extract current temperature.
-    root = ET.fromstring(response_string)
-    xpath = BUIENRADAR_XPATH.format(
-        weather_station_id=weather_settings.buienradar_station
-    )
-    temperature_element = root.find(xpath)
-    temperature = temperature_element.text
+def get_temperature_from_api():
+    # For backend logging in Supervisor.
+    logger.debug(' - Reading temperature from Buienradar: %s', settings.DSMRREADER_BUIENRADAR_API_URL)
+    response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL)
+
+    if response.status_code != 200:
+        logger.error(' [!] Failed reading temperature: HTTP %s', response.status_code)
+        raise EnvironmentError('Unexpected status code received')
+
+    # Find our selected station.
+    station_id = WeatherSettings.get_solo().buienradar_station
+    station_data = [x for x in response.json()['actual']['stationmeasurements'] if x['stationid'] == station_id]
+
+    if not station_data:
+        raise EnvironmentError('Selected station info not found')
+
+    temperature = station_data[0]['groundtemperature']
     logger.debug(' - Read temperature: %s', temperature)
 
-    # Gas readings trigger these readings, so the 'read at' timestamp should be somewhat in sync.
-    # Therefor we align temperature readings with them, having them grouped by hour that is..
-    read_at = timezone.now().replace(minute=0, second=0, microsecond=0)
-
-    try:
-        TemperatureReading.objects.create(read_at=read_at, degrees_celcius=Decimal(temperature))
-    except Exception:
-        # Try again in 5 minutes.
-        weather_settings.next_sync = timezone.now() + timezone.timedelta(minutes=5)
-    else:
-        # Push next sync back for an hour.
-        weather_settings.next_sync = read_at + timezone.timedelta(hours=1)
-
-    weather_settings.save()
+    # Push next sync back for an hour.
+    hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)
+    TemperatureReading.objects.create(read_at=hour_mark, degrees_celcius=Decimal(temperature))
+    WeatherSettings.objects.all().update(next_sync=hour_mark + timezone.timedelta(hours=1))

@@ -619,6 +619,9 @@ msgstr "DSMR-reader v2.6.0: Veel wijzigingen gerelateerd aan MQTT. Berichten wor
 msgid "DSMR-reader v2.7.0: Added support in MQTT to share gas consumption to your MQTT broker. "
 msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te delen met je MQTT-broker."
 
+msgid "DSMR-reader v2.9.0: Buienradar changed their API. This update fixes the issue."
+msgstr "DSMR-reader v2.9.0: Buienradar heeft haar API aangepast. Deze update werkt het bij."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
@@ -1957,6 +1960,9 @@ msgstr "Buienradar"
 msgid "See <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> for a map of all locations."
 msgstr "Zie <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> voor een kaart van alle locaties."
 
+msgid "Temperature (in ℃)"
+msgstr "Temperatuur (in ℃)"
+
 msgid "Weather station Arcen"
 msgstr "Weerstation Arcen"
 
@@ -2113,9 +2119,6 @@ msgstr "Weerstation Zeeplatform F-3"
 msgid "Weather station Zeeplatform K13"
 msgstr "Weerstation Zeeplatform K13"
 
-msgid "Temperature (in ℃)"
-msgstr "Temperatuur (in ℃)"
-
 msgid "Track weather"
 msgstr "Houd weergegevens bij"
 
@@ -2134,8 +2137,8 @@ msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit au
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
-msgid "Failed to read Buienradar API"
-msgstr "Uitlezen van Buienradar API mislukt"
+msgid "Failed to read Buienradar API: {}"
+msgstr "Uitlezen van Buienradar API mislukt: {}"
 
 msgid "Dutch"
 msgstr "Nederlands"

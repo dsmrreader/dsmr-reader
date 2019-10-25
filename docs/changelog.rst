@@ -15,14 +15,15 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
-v2.8.0 - 2019-10-22
+v2.9.0 - 2019-10-25
 ^^^^^^^^^^^^^^^^^^^
 
 **Tickets resolved in this release:**
 
-- [`#747 <https://github.com/dennissiemensma/dsmr-reader/issues/747>`_] Dagstatistieken stoppen bij periode missende gegevens
-- [`#748 <https://github.com/dennissiemensma/dsmr-reader/issues/748>`_] Verwerkte metingen in JSON doorsturen naar een API
-- [`#749 <https://github.com/dennissiemensma/dsmr-reader/issues/749>`_] make loglevel configurable by environmental variables - by jorkzijlstra
+- [`#755 <https://github.com/dennissiemensma/dsmr-reader/issues/755>`_] Buienradar API bron/foutafhandeling verbeteren
+- [`#752 <https://github.com/dennissiemensma/dsmr-reader/issues/752>`_] Configurable plugins by environmental variables - by jorkzijlstra
+- [`#743 <https://github.com/dennissiemensma/dsmr-reader/issues/743>`_] Nginx: Sites-available gebruiken
+- [`#757 <https://github.com/dennissiemensma/dsmr-reader/issues/757>`_] Retentie op elk moment van de dag doorvoeren
 
 
 ----

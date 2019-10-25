@@ -1,7 +1,7 @@
 import dsmrreader
 
 
-# Officially we only support PostgreSQL.
+# Officially we only support PostgreSQL, but w/e.
 DSMRREADER_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
 
 DSMRREADER_BACKUP_PG_DUMP = 'pg_dump'
@@ -45,11 +45,10 @@ DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200
 # Number of hours to cleanup in one run of applying retention.
 DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
 
-# Retention will no longer start when this hour has passed (i.e.: 6 A.M.)
-DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6
-
 # Plugins.
 DSMRREADER_PLUGINS = []
 
 # Whether to override (disable) capabilities.
 DSMRREADER_DISABLED_CAPABILITIES = []
+
+DSMRREADER_BUIENRADAR_API_URL = 'https://data.buienradar.nl/2.0/feed/json'

@@ -11,12 +11,11 @@ msgstr ""
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../settings.rst:2
 msgid "Other settings"
@@ -24,21 +23,23 @@ msgstr "Overige instellingen"
 
 #: ../../settings.rst:4
 msgid ""
-"Some project settings can be changed (or overridden) in the ``dsmrreader/"
-"settings.py`` file. Removing any of these settings from your file will force "
-"using the default value."
+"Some project settings can be changed (or overridden) in the "
+"``dsmrreader/settings.py`` file. Removing any of these settings from your"
+" file will force using the default value."
 msgstr ""
-"Sommige projectinstellingen kunnen aangepast (of toegevoegd) worden aan het "
-"``dsmrreader/settings.py`` bestand. Het weghalen van deze instellingen zorgt "
-"ervoor dat de standaardwaarden weer gebruikt worden."
+"Sommige projectinstellingen kunnen aangepast (of toegevoegd) worden aan "
+"het ``dsmrreader/settings.py`` bestand. Het weghalen van deze "
+"instellingen zorgt ervoor dat de standaardwaarden weer gebruikt worden."
 
 #: ../../settings.rst:7
 msgid ""
-"Make sure to reload the application afterwards to persist the changes you've "
-"made by executing ``./post-deploy.sh`` or restarting the Supervisor processes."
+"Make sure to reload the application afterwards to persist the changes "
+"you've made by executing ``./post-deploy.sh`` or restarting the "
+"Supervisor processes."
 msgstr ""
-"Zorg ervoor dat je de applicatie herlaadt na je wijzigingen, door ``./post-"
-"deploy.sh`` uit te voeren, of de Supervisor-processen te herstarten."
+"Zorg ervoor dat je de applicatie herlaadt na je wijzigingen, door "
+"``./post-deploy.sh`` uit te voeren, of de Supervisor-processen te "
+"herstarten."
 
 #: ../../settings.rst:10
 msgid "Contents"
@@ -50,11 +51,11 @@ msgstr "``DSMRREADER_BACKEND_SLEEP``"
 
 #: ../../settings.rst:14
 msgid ""
-"The number of seconds the application will sleep after completing a backend run. "
-"Prevents hammering on your hardware."
+"The number of seconds the application will sleep after completing a "
+"backend run. Prevents hammering on your hardware."
 msgstr ""
-"Het aantal seconden dat de applicatie wacht na het voltooien van een backend "
-"run. Voorkomt hoge load op je hardware."
+"Het aantal seconden dat de applicatie wacht na het voltooien van een "
+"backend run. Voorkomt hoge load op je hardware."
 
 #: ../../settings.rst:16
 msgid "Defaults to ``DSMRREADER_BACKEND_SLEEP = 1``."
@@ -66,11 +67,11 @@ msgstr "``DSMRREADER_DATALOGGER_SLEEP``"
 
 #: ../../settings.rst:21
 msgid ""
-"The number of seconds the application will sleep after reading data from the "
-"datalogger (API excluded). Prevents hammering on your hardware."
+"The number of seconds the application will sleep after reading data from "
+"the datalogger (API excluded). Prevents hammering on your hardware."
 msgstr ""
-"Het aantal seconden dat de applicatie wacht na het uitlezen van de datalogger "
-"(uitgezonderd API). Voorkomt hoge load op je hardware."
+"Het aantal seconden dat de applicatie wacht na het uitlezen van de "
+"datalogger (uitgezonderd API). Voorkomt hoge load op je hardware."
 
 #: ../../settings.rst:23
 msgid "Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``."
@@ -82,11 +83,12 @@ msgstr "``DSMRREADER_MQTT_SLEEP``"
 
 #: ../../settings.rst:28
 msgid ""
-"The number of seconds the application will sleep after reading and publishing "
-"the outgoing MQTT message queue. Prevents hammering on your hardware."
+"The number of seconds the application will sleep after reading and "
+"publishing the outgoing MQTT message queue. Prevents hammering on your "
+"hardware."
 msgstr ""
-"Het aantal seconden dat de applicatie wacht na het verwerken van een batch "
-"uitgaande MQTT-berichten. Voorkomt hoge load op je hardware."
+"Het aantal seconden dat de applicatie wacht na het verwerken van een "
+"batch uitgaande MQTT-berichten. Voorkomt hoge load op je hardware."
 
 #: ../../settings.rst:30
 msgid "Defaults to ``DSMRREADER_MQTT_SLEEP = 1``."
@@ -98,10 +100,11 @@ msgstr "``DSMRREADER_LOG_TELEGRAMS``"
 
 #: ../../settings.rst:35
 msgid ""
-"Whether telegrams are logged, in base64 format. Only required for debugging."
+"Whether telegrams are logged, in base64 format. Only required for "
+"debugging."
 msgstr ""
-"Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor "
-"debuggen."
+"Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig "
+"voor debuggen."
 
 #: ../../settings.rst:37
 msgid "Defaults to ``DSMRREADER_LOG_TELEGRAMS = False``."
@@ -113,11 +116,11 @@ msgstr "``DSMRREADER_RECONNECT_DATABASE``"
 
 #: ../../settings.rst:42
 msgid ""
-"Whether the backend process (and datalogger) reconnects to the DB after each "
-"run. Prevents some hanging connections in some situations."
+"Whether the backend process (and datalogger) reconnects to the DB after "
+"each run. Prevents some hanging connections in some situations."
 msgstr ""
-"Geeft aan of de backend na elke run opnieuw moet verbinden naar de database. Dit "
-"voorkomt in enkele gevallen hangende verbindingen."
+"Geeft aan of de backend na elke run opnieuw moet verbinden naar de "
+"database. Dit voorkomt in enkele gevallen hangende verbindingen."
 
 #: ../../settings.rst:44
 msgid "Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``."
@@ -129,11 +132,11 @@ msgstr "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
 
 #: ../../settings.rst:49
 msgid ""
-"Maximum interval in minutes allowed since the latest reading, before ringing any "
-"alarms."
+"Maximum interval in minutes allowed since the latest reading, before "
+"ringing any alarms."
 msgstr ""
-"Maximale toegestane interval, in minuten, sinds de laatste meting, voordat er "
-"alarmbellen af gaan."
+"Maximale toegestane interval, in minuten, sinds de laatste meting, "
+"voordat er alarmbellen af gaan."
 
 #: ../../settings.rst:51
 msgid "Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
@@ -145,8 +148,8 @@ msgstr "``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``"
 
 #: ../../settings.rst:56
 msgid ""
-"Number of queued MQTT messages the application will retain. Any excess will be "
-"purged."
+"Number of queued MQTT messages the application will retain. Any excess "
+"will be purged."
 msgstr ""
 "Het aantal MQTT-berichten dat de applicatie vasthoudt. Alle overtollige "
 "berichten worden verwijderd."
@@ -161,69 +164,53 @@ msgstr "``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``"
 
 #: ../../settings.rst:63
 msgid ""
-"The maximum number of hours that will be cleaned up during one retention run. "
-"Raise this value if you have a lot of readings to clean up and it takes too long."
+"The maximum number of hours that will be cleaned up during one retention "
+"run. Raise this value if you have a lot of readings to clean up and it "
+"takes too long."
 msgstr ""
-"Het maximum aantal uren dat per keer opgeschoond wordt met retentie. Verhoog "
-"deze waarde wanneer je een hoop metingen hebt om op te schonen en het erg lang "
-"duurt."
+"Het maximum aantal uren dat per keer opgeschoond wordt met retentie. "
+"Verhoog deze waarde wanneer je een hoop metingen hebt om op te schonen en"
+" het erg lang duurt."
 
 #: ../../settings.rst:66
 msgid "Defaults to ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``."
 msgstr "Standaardwaarde ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``."
 
 #: ../../settings.rst:70
-msgid "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
-msgstr "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
-
-#: ../../settings.rst:71
-msgid ""
-"Sets the maximum hour of the day that retention will run. Retention always "
-"starts after midnight, when enabled. I.e.: changing it to ``8`` will prevent new "
-"retention runs after 8 A.M."
-msgstr ""
-"Stelt de maximumtijd in waarop retentie op een dag mag draaien. Retentie draait "
-"altijd vanaf middernacht, mits ingeschakeld. Bijvoorbeeld: een waarde van ``8`` "
-"zorgt ervoor dat retentie niet meer wordt gestart ná 8 uur in de ochtend."
-
-#: ../../settings.rst:75
-msgid "Defaults to ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
-msgstr "Standaardwaarde ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
-
-#: ../../settings.rst:79
 msgid "``DSMRREADER_PLUGINS``"
 msgstr "``DSMRREADER_PLUGINS``"
 
-#: ../../settings.rst:80
+#: ../../settings.rst:71
 msgid ":doc:`More information about this feature can be found here<plugins>`."
 msgstr ":doc:`Meer informatie over deze feature kun je hier terugvinden<plugins>`."
 
-#: ../../settings.rst:82
+#: ../../settings.rst:73
 msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
 msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."
 
-#: ../../settings.rst:86
+#: ../../settings.rst:77
 msgid "``DSMRREADER_DISABLED_CAPABILITIES``"
 msgstr "``DSMRREADER_DISABLED_CAPABILITIES``"
 
-#: ../../settings.rst:87
+#: ../../settings.rst:78
 msgid ""
-"Whether to override (disable) capabilities. Only use if you want to disable a "
-"capability that your smart meter keeps reporting. For example you've switched "
-"from using gas to an alternative energy source. Or your smart meter contains "
-"electricity returned data, but you do not own any solar panels."
+"Whether to override (disable) capabilities. Only use if you want to "
+"disable a capability that your smart meter keeps reporting. For example "
+"you've switched from using gas to an alternative energy source. Or your "
+"smart meter contains electricity returned data, but you do not own any "
+"solar panels."
 msgstr ""
-"Geeft aan om 'capabilities' van de applicaties uit te schakelen. Gebruik dit "
-"alleen wanneer je iets wilt uitschakelen wat je blijft terugkomen in je slimme "
-"meter. Bijvoorbeeld wanneer je gewisseld bent van gas naar een alternatieve "
-"energiebron. Of wanneer je slimme meter data bevat voor teruggeleverde energie "
-"en je uberhaupt geen zonnepanelen hebt."
+"Geeft aan om 'capabilities' van de applicaties uit te schakelen. Gebruik "
+"dit alleen wanneer je iets wilt uitschakelen wat je blijft terugkomen in "
+"je slimme meter. Bijvoorbeeld wanneer je gewisseld bent van gas naar een "
+"alternatieve energiebron. Of wanneer je slimme meter data bevat voor "
+"teruggeleverde energie en je uberhaupt geen zonnepanelen hebt."
 
-#: ../../settings.rst:90
+#: ../../settings.rst:81
 msgid "Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 msgstr "Standaardwaarde ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 
-#: ../../settings.rst:92
+#: ../../settings.rst:83
 msgid ""
 "Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
 "'electricity_returned']``."
@@ -233,3 +220,26 @@ msgstr ""
 
 #~ msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
 #~ msgstr "Standaardwaarde: ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
+
+#~ msgid "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
+#~ msgstr "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
+
+#~ msgid ""
+#~ "Sets the maximum hour of the day"
+#~ " that retention will run. Retention "
+#~ "always starts after midnight, when "
+#~ "enabled. I.e.: changing it to ``8`` "
+#~ "will prevent new retention runs after"
+#~ " 8 A.M."
+#~ msgstr ""
+#~ "Stelt de maximumtijd in waarop retentie"
+#~ " op een dag mag draaien. Retentie "
+#~ "draait altijd vanaf middernacht, mits "
+#~ "ingeschakeld. Bijvoorbeeld: een waarde van "
+#~ "``8`` zorgt ervoor dat retentie niet "
+#~ "meer wordt gestart ná 8 uur in "
+#~ "de ochtend."
+
+#~ msgid "Defaults to ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
+#~ msgstr "Standaardwaarde ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
+
