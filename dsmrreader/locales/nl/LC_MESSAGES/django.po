@@ -619,6 +619,9 @@ msgstr "DSMR-reader v2.6.0: Veel wijzigingen gerelateerd aan MQTT. Berichten wor
 msgid "DSMR-reader v2.7.0: Added support in MQTT to share gas consumption to your MQTT broker. "
 msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te delen met je MQTT-broker."
 
+msgid "DSMR-reader v2.9.0: Buienradar changed their API. This update fixes the issue."
+msgstr "DSMR-reader v2.9.0: Buienradar heeft haar API aangepast. Deze update werkt het bij."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
