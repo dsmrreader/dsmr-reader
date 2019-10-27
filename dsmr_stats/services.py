@@ -103,7 +103,10 @@ def create_statistics(target_day):
         # One day at a time to prevent backend blocking.
         create_daily_statistics(day=target_day)
 
-        for current_hour in range(0, 24 + 1):  # Current day + midnight of next day.
+        # We compute the hourly stats for every completed hour in the target day,
+        # i.e. the ones starting at 00:00, 01:00, ... , 23:00, covering the time
+        # till midnight of next day
+        for current_hour in range(0, 24):
             hour_start = start_of_day + timezone.timedelta(hours=current_hour)
             create_hourly_statistics(hour_start=hour_start)
 
