@@ -98,6 +98,19 @@ def create_statistics(target_day):
         day=target_day.day,
         hour=0,
     ))
+    # To handle the changes from/to DST (days with 25 or 23 hours), we build
+    # first a date object for the next day and then a timezone aware datetime
+    # out of it. On such days, this is *not* the same as adding directly a
+    # timezone.timedelta of 1 day
+    # 2019-10-27 00:00:00+02:00 + timezone.timedelta(days=1) = 2019-10-28 00:00:00+02:00
+    # while 2019-10-28 at midnight is 2019-10-28 00:00:00+01:00, 1 hour later!
+    next_day = target_day + timezone.timedelta(days=1)
+    end_of_day = timezone.make_aware(timezone.datetime(
+        year=next_day.year,
+        month=next_day.month,
+        day=next_day.day,
+        hour=0,
+    ))
 
     with transaction.atomic():
         # One day at a time to prevent backend blocking.
@@ -105,10 +118,12 @@ def create_statistics(target_day):
 
         # We compute the hourly stats for every completed hour in the target day,
         # i.e. the ones starting at 00:00, 01:00, ... , 23:00, covering the time
-        # till midnight of next day
-        for current_hour in range(0, 24):
-            hour_start = start_of_day + timezone.timedelta(hours=current_hour)
+        # till midnight of next day; to get there takes typically 24 hours, but
+        # when switching to/from  DST, exceptionnally 23 repsectively 25 hours
+        hour_start = start_of_day
+        while (hour_start < end_of_day):
             create_hourly_statistics(hour_start=hour_start)
+            hour_start = hour_start + timezone.timedelta(hours=1)
 
     # Reflect changes in cache.
     cache.clear()
