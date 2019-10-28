@@ -189,7 +189,7 @@ def consumption_by_range(start, end):
     ).order_by('read_at')
 
     gas_readings = GasConsumption.objects.filter(
-        read_at__gte=start, read_at__lt=end,
+        read_at__gte=start, read_at__lte=end,
     ).order_by('read_at')
 
     return electricity_readings, gas_readings
@@ -201,7 +201,10 @@ def day_consumption(day):
         'day': day
     }
     day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
-    day_end = day_start + timezone.timedelta(days=1)
+    # Carefull: next day midnight is not always 24 hours away, need to use timedelta on date
+    # and then create timezone-aware datetime
+    next_day = day + timezone.timedelta(days=1)
+    day_end = timezone.make_aware(timezone.datetime(year=next_day.year, month=next_day.month, day=next_day.day))
     daily_energy_price = get_day_prices(day=day)
 
     electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)
