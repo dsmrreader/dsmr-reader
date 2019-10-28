@@ -94,9 +94,12 @@ class ArchiveXhrGraphs(View):
 
         # Zoom to hourly data.
         if selected_level == 'days':
-            selected_date=selected_datetime.date()
-            next_date=selected_date + timezone.timedelta(days=1)
-            selected_day_end=timezone.make_aware(timezone.datetime(year=next_date.year,month=next_date.month,day=next_date.day))
+            selected_date = selected_datetime.date()
+            next_date = selected_date + timezone.timedelta(days=1)
+            selected_day_end = timezone.make_aware(timezone.datetime(
+                year=next_date.year,
+                month=next_date.month,
+                day=next_date.day))
             source_data = HourStatistics.objects.filter(
                 hour_start__gte=selected_datetime,
                 hour_start__lte=selected_day_end
