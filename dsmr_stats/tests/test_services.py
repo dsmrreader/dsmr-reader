@@ -394,6 +394,23 @@ class TestServices(InterceptStdoutMixin, TestCase):
         ).electricity1, Decimal('0.01'))
 
     @mock.patch('django.core.cache.cache.clear')
+    @mock.patch('dsmr_stats.services.create_daily_statistics')
+    @mock.patch('dsmr_stats.services.create_hourly_statistics')
+    @mock.patch('django.utils.timezone.now')
+    def test_create_statistics_hours_per_day_cet_cest(self, now_mock, hourly_mock, daily_mock, cache_mock):
+        """ Transitions to and from DST affect the number of hours logged of a day. Check it. """
+        # CET > CEST
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 29))
+        dsmr_stats.services.create_statistics(timezone.now().date())
+        self.assertEqual(hourly_mock.call_count, 23)
+        hourly_mock.reset_mock()
+
+        # CEST > CET
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 10, 25))
+        dsmr_stats.services.create_statistics(timezone.now().date())
+        self.assertEqual(hourly_mock.call_count, 25)
+
+    @mock.patch('django.core.cache.cache.clear')
     @mock.patch('django.utils.timezone.now')
     def test_create_statistics_clear_cache(self, now_mock, clear_cache_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 15))

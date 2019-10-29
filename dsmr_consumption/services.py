@@ -15,6 +15,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.statistics import MeterStatistics
+import dsmr_backend.services.backend
 
 
 logger = logging.getLogger('commands')
@@ -200,8 +201,9 @@ def day_consumption(day):
     consumption = {
         'day': day
     }
+    hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
     day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
-    day_end = day_start + timezone.timedelta(days=1)
+    day_end = day_start + timezone.timedelta(hours=hours_in_day)
     daily_energy_price = get_day_prices(day=day)
 
     electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)

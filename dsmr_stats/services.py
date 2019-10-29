@@ -14,8 +14,8 @@ from django.conf import settings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.reading import DsmrReading
-import dsmr_consumption.services
 import dsmr_backend.services.backend
+import dsmr_consumption.services
 
 
 logger = logging.getLogger('commands')
@@ -102,8 +102,9 @@ def create_statistics(target_day):
     with transaction.atomic():
         # One day at a time to prevent backend blocking.
         create_daily_statistics(day=target_day)
+        hours_in_day = dsmr_backend.services.backend.hours_in_day(day=target_day)
 
-        for current_hour in range(0, 24 + 1):  # Current day + midnight of next day.
+        for current_hour in range(0, hours_in_day):
             hour_start = start_of_day + timezone.timedelta(hours=current_hour)
             create_hourly_statistics(hour_start=hour_start)
 
