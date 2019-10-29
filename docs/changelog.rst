@@ -15,6 +15,17 @@ Please make sure you have a fresh **database backup** before upgrading! Upgradin
 ----
 
 
+v2.10.0 - 2019-xx-xx
+^^^^^^^^^^^^^^^^^^^^
+
+**Tickets resolved in this release:**
+
+- [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] Uurstatistieken missen de laatste minuut of seconde - by JeanMiK
+
+
+----
+
+
 v2.9.0 - 2019-10-25
 ^^^^^^^^^^^^^^^^^^^
 

@@ -185,11 +185,11 @@ def _compact_gas(dsmr_reading, grouping_type, **kwargs):
 def consumption_by_range(start, end):
     """ Calculates the consumption of a range specified. """
     electricity_readings = ElectricityConsumption.objects.filter(
-        read_at__gte=start, read_at__lt=end,
+        read_at__gte=start, read_at__lte=end,
     ).order_by('read_at')
 
     gas_readings = GasConsumption.objects.filter(
-        read_at__gte=start, read_at__lt=end,
+        read_at__gte=start, read_at__lte=end,
     ).order_by('read_at')
 
     return electricity_readings, gas_readings
