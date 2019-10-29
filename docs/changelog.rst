@@ -20,8 +20,9 @@ v2.10.0 - 2019-xx-xx
 
 **Tickets resolved in this release:**
 
-- [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] Uurstatistieken missen de laatste minuut of seconde - by JeanMiK
-- [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] Verkeerd aantal uren per dag bij wisseling zomertijd/wintertijd - by JeanMiK
+- [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] (1/2) Uurstatistieken missen de laatste minuut of seconde - by JeanMiK
+- [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] (2/2) Verkeerd aantal uren per dag bij wisseling zomertijd/wintertijd - by JeanMiK
+- [`#765 <https://github.com/dennissiemensma/dsmr-reader/issues/765>`_]  Requirements update (November 2019)
 
 
 ----
