@@ -242,6 +242,29 @@ def telegram_to_reading(data):  # noqa: C901
     if parsed_reading['timestamp'] is None:
         parsed_reading['timestamp'] = timezone.now()
 
+    # Smarty smartreaders in Luxembourg follow mostly the DSMR4 protocol, but they
+    # typically send only a single global electricity reading without split by tarif
+    # To work with the rest of the dsmr application, we will map the total consumption
+    # to tarif 1:
+    if (
+            parsed_reading['electricity_delivered_1'] is None and
+            parsed_reading['active_energy_delivered'] is not None
+       ):
+        parsed_reading['electricity_delivered_1'] = parsed_reading['active_energy_delivered']
+
+    if (
+            parsed_reading['electricity_returned_1'] is None and
+            parsed_reading['active_energy_returned'] is not None
+       ):
+        parsed_reading['electricity_returned_1'] = parsed_reading['active_energy_returned']
+
+    # ... and set the consumption of tarif 2 to 0
+    if parsed_reading['electricity_delivered_2'] is None:
+        parsed_reading['electricity_delivered_2'] = 0
+
+    if parsed_reading['electricity_returned_2'] is None:
+        parsed_reading['electricity_returned_2'] = 0
+
     # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
     discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
 
