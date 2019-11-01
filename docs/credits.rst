@@ -4,8 +4,8 @@ Credits / Hall of Fame
 Special thanks for supplying code contributions
 -----------------------------------------------
 - `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_
+- `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_
 - All the [other contributers for the past few years](https://github.com/dennissiemensma/dsmr-reader/graphs/contributors)!
-
 
 Also many thanks to the contributions of
 ----------------------------------------

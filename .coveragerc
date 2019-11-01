@@ -8,6 +8,7 @@ omit = ./*/__init__.py
   ./dsmr_backend/mixins.py
   ./dsmr_plugins/modules/*
   ./dsmr_dropbox/dropboxinc/*
+  ./dsmr_parser/*
 
 [html]
 directory = coverage_report/html

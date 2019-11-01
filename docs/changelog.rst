@@ -3,10 +3,11 @@ Changelog
 
 v2.10.0 - 2019-xx-xx
 
-
 - [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] (1/2) Uurstatistieken missen de laatste minuut of seconde - by JeanMiK
 - [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] (2/2) Verkeerd aantal uren per dag bij wisseling zomertijd/wintertijd - by JeanMiK
 - [`#765 <https://github.com/dennissiemensma/dsmr-reader/issues/765>`_]  Requirements update (November 2019)
+- [`#750 <https://github.com/dennissiemensma/dsmr-reader/issues/750>`_]  Piek- en dalmetingen omgedraaid (Belgische slimme meter)
+- [`#769 <https://github.com/dennissiemensma/dsmr-reader/issues/769>`_]  Enhance DSMR for ORBIS codes used by Smarty smartmeters in Luxembourg
 
 
 ----

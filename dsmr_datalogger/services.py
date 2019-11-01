@@ -1,6 +1,5 @@
 import logging
 import base64
-import re
 
 from serial.serialutil import SerialException
 from django.db.models.functions.datetime import TruncHour
@@ -9,7 +8,6 @@ from django.db.models.expressions import F
 from django.utils import timezone
 from django.conf import settings
 import serial
-import crcmod
 import pytz
 
 from dsmr_datalogger.models.reading import DsmrReading
@@ -17,7 +15,10 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.exceptions import InvalidTelegramError
-from dsmr_datalogger.dsmr import DSMR_MAPPING
+from dsmr_datalogger.mapping import DSMR_MAPPING
+from dsmr_parser import telegram_specifications
+from dsmr_parser.exceptions import InvalidChecksumError, ParseError
+from dsmr_parser.parsers import TelegramParser
 import dsmr_datalogger.signals
 
 
@@ -33,13 +34,13 @@ def get_dsmr_connection_parameters():
             'baudrate': 9600,
             'bytesize': serial.SEVENBITS,
             'parity': serial.PARITY_EVEN,
-            'crc': False,
+            'specifications': telegram_specifications.V2_2,
         },
         DataloggerSettings.DSMR_VERSION_4_PLUS: {
             'baudrate': 115200,
             'bytesize': serial.EIGHTBITS,
             'parity': serial.PARITY_NONE,
-            'crc': True,
+            'specifications': telegram_specifications.V5,
         },
     }
 
@@ -106,158 +107,73 @@ def read_telegram():
             return buffer
 
 
-def verify_telegram_checksum(data):
-    """
-    Verifies telegram by checking its CRC. Raises exception on failure. DSMR docs state:
-    CRC is a CRC16 value calculated over the preceding characters in the data message (from / to ! using the polynomial)
-    """
-    matches = re.search(r'^(/[^!]+!)([A-Z0-9]{4})', data)
+def telegram_to_reading(data):
+    """ Converts a P1 telegram to a DSMR reading, which will be stored in database. """
+    params = get_dsmr_connection_parameters()
+    parser = TelegramParser(params['specifications'])
 
-    try:
-        content, crc = matches.groups()
-    except AttributeError:
-        # AttributeError: 'NoneType' object has no attribute 'groups'. This happens where there is not support for CRC.
-        content = crc = None
-
-    if not content or not crc:
-        raise InvalidTelegramError('Content or CRC data not found')
-
-    telegram = content.encode('ascii')  # TypeError: Unicode-objects must be encoded before calculating a CRC
-
-    # DSMR docs: "The CRC value is represented as 4 hexadecimal characters (MSB first)". So just flip it back to int.
-    telegram_checksum = int('0x{}'.format(crc), 0)  # For example: DD84 -> 0xDD84 -> 56708
-
-    crc16_function = crcmod.predefined.mkPredefinedCrcFun('crc16')
-    calculated_checksum = crc16_function(telegram)  # For example: 56708
-
-    # HEX format.
-    hex_telegram_checksum = '{:0>4}'.format(hex(telegram_checksum)[2:].upper())
-    hex_calculated_checksum = '{:0>4}'.format(hex(calculated_checksum)[2:].upper())
-
-    if telegram_checksum != calculated_checksum:
-        raise InvalidTelegramError(
-            'CRC mismatch: {} / {} (telegram) != {} / {} (calculated)'.format(
-                telegram_checksum, hex_telegram_checksum, calculated_checksum, hex_calculated_checksum
-            )
-        )
-
-
-def _convert_legacy_dsmr_gas_line(parsed_reading, current_line, next_line):
-    """ Legacy support for DSMR 2.x gas. """
-    legacy_gas_line = current_line
-
-    if next_line.startswith('('):  # pragma: no cover
-        legacy_gas_line = current_line + next_line
-
-    legacy_gas_result = re.search(
-        r'[^(]+\((\d+)\)\(\w+\)\(\d+\)\(\d+\)\([0-9-.:]+\)\(m3\)\(([0-9.]+)\)',
-        legacy_gas_line
-    )
-    gas_timestamp = legacy_gas_result.group(1)
-
-    if timezone.now().dst() != timezone.timedelta(0):
-        gas_timestamp += 'S'
-    else:
-        gas_timestamp += 'W'
-
-    parsed_reading['extra_device_timestamp'] = reading_timestamp_to_datetime(
-        string=gas_timestamp
-    )
-    parsed_reading['extra_device_delivered'] = legacy_gas_result.group(2)
-    return parsed_reading
-
-
-def telegram_to_reading(data):  # noqa: C901
-    """
-    Converts a P1 telegram to a DSMR reading, which will be stored in database.
-    """
-    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ('id', 'processed')]
-    STATISTICS_FIELDS = [
-        x.name for x in MeterStatistics._meta.get_fields() if x.name not in ('id', 'rejected_telegrams')
-    ]
-
-    # We will log the telegrams in base64 for convenience and debugging 'n stuff.
+    # We will log the telegrams in base64 for convenience and debugging.
     base64_data = base64.b64encode(data.encode())
 
-    # Discard CRC check when any support is lacking anyway. Or when it's disabled.
-    connection_parameters = get_dsmr_connection_parameters()
+    if settings.DSMRREADER_LOG_TELEGRAMS:
+        dsmrreader_logger.info('Received telegram (base64 encoded): %s', base64_data)
 
-    if connection_parameters['crc']:
+    try:
+        parsed_telegram = parser.parse(data)
+    except (InvalidChecksumError, ParseError) as error:
+        # Hook to keep track of failed readings count.
+        MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
+        dsmrreader_logger.warning('Rejected telegram (%s) (base64 encoded): %s', error, base64_data)
+        dsmrreader_logger.exception(error)
+        raise InvalidTelegramError(error)
+
+    return _map_telegram_to_model(parsed_telegram=parsed_telegram, data=data)
+
+
+def _map_telegram_to_model(parsed_telegram, data):
+    """ Maps parsed telegram to the fields. """
+    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ('id', 'processed')]
+    STATISTICS_FIELDS = [
+        x.name for x in MeterStatistics._meta.get_fields() if x.name not in (
+            'id', 'rejected_telegrams', 'latest_telegram'
+        )
+    ]
+
+    model_fields = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
+
+    for obis_ref, target_field in DSMR_MAPPING.items():
         try:
-            # Verify telegram by checking its CRC.
-            verify_telegram_checksum(data=data)
-        except InvalidTelegramError as error:
-            # Hook to keep track of failed readings count.
-            MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
-            dsmrreader_logger.warning('Rejected telegram (base64 encoded): %s', base64_data)
-            dsmrreader_logger.exception(error)
-            raise
-
-    # Defaults all fields to NULL.
-    parsed_reading = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
-    field_splitter = re.compile(r'([^(]+)\((.+)\)')
-    lines_read = data.split("\r\n")
-
-    for index, current_line in enumerate(lines_read):
-        result = field_splitter.search(current_line)
-
-        if not result:
-            continue
-
-        code = result.group(1)
-
-        # M-bus (0-n:24.1) cannot identify the type of device, see issue #92.
-        if re.match(r'^0-\d:24\.2\.\d$', code):
-            code = '0-1:24.2.1'
-
-        # DSMR 2.x emits gas readings in different format.
-        if code == '0-1:24.3.0':
-            parsed_reading = _convert_legacy_dsmr_gas_line(
-                parsed_reading, current_line, lines_read[index + 1]
-            )
-            continue
-
-        try:
-            field = DSMR_MAPPING[code]
+            parsed_ref = parsed_telegram[obis_ref]
         except KeyError:
             continue
 
-        value = result.group(2)
-
-        # Drop units, as the database does not care for them.
-        value = value.replace('*kWh', '').replace('*kW', '').replace('*m3', '').replace('*V', '')
-
-        # Extra device parameters are placed on a single line, meh.
-        if code == "0-1:24.2.1":
-            timestamp_value, gas_usage = value.split(")(")
-            parsed_reading[field[0]] = reading_timestamp_to_datetime(string=timestamp_value)
-            parsed_reading[field[1]] = gas_usage
+        if isinstance(target_field, dict):
+            model_fields[target_field['value']] = parsed_ref.value
+            model_fields[target_field['datetime']] = parsed_ref.datetime
         else:
-            if field == "timestamp":
-                value = reading_timestamp_to_datetime(string=value)
+            model_fields[target_field] = parsed_ref.value
 
-            parsed_reading[field] = value
-
-    # Hack for DSMR 2.x legacy, which lacks timestamp info..
-    if parsed_reading['timestamp'] is None:
-        parsed_reading['timestamp'] = timezone.now()
+    # Hack for DSMR 2.x legacy, which lacks timestamp info.
+    model_fields['timestamp'] = model_fields['timestamp'] or timezone.now()
 
     # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
     discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
 
-    if parsed_reading['timestamp'] > discard_timestamp or (
-            parsed_reading['extra_device_timestamp'] is not None and
-            parsed_reading['extra_device_timestamp'] > discard_timestamp):
-        error_message = 'Discarded telegram with future timestamp: {}'.format(data)
+    if model_fields['timestamp'] > discard_timestamp or (
+            model_fields['extra_device_timestamp'] is not None and
+            model_fields['extra_device_timestamp'] > discard_timestamp):
+        error_message = 'Discarded telegram with future timestamp(s): {} / {}'.format(
+            model_fields['timestamp'], model_fields['extra_device_timestamp']
+        )
         django_logger.error(error_message)
         raise InvalidTelegramError(error_message)
 
     # Now we need to split reading & statistics. So we split the dict here.
-    reading_kwargs = {k: parsed_reading[k] for k in READING_FIELDS}
-    statistics_kwargs = {k: parsed_reading[k] for k in STATISTICS_FIELDS}
+    reading_kwargs = {k: model_fields[k] for k in READING_FIELDS}
+    statistics_kwargs = {k: model_fields[k] for k in STATISTICS_FIELDS}
 
     # Reading will be processed later.
-    new_reading = DsmrReading.objects.create(**reading_kwargs)
+    new_instance = DsmrReading.objects.create(**reading_kwargs)
 
     # There should already be one in database, created when migrating.
     statistics_kwargs['latest_telegram'] = data
@@ -266,28 +182,7 @@ def telegram_to_reading(data):  # noqa: C901
     # Broadcast this telegram as signal.
     dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data=data)
 
-    if settings.DSMRREADER_LOG_TELEGRAMS:
-        dsmrreader_logger.info('Received telegram (base64 encoded): %s', base64_data)
-
-    return new_reading
-
-
-def reading_timestamp_to_datetime(string):
-    """
-    Converts a string containing a timestamp to a timezone aware datetime.
-    """
-    timestamp = re.search(r'(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})(\d{2,2})([WS])+', string)
-    meter_timestamp = timezone.datetime(
-        year=2000 + int(timestamp.group(1)),
-        month=int(timestamp.group(2)),
-        day=int(timestamp.group(3)),
-        hour=int(timestamp.group(4)),
-        minute=int(timestamp.group(5)),
-        second=int(timestamp.group(6)),
-    )
-    is_dst = timestamp.group(7) == 'S'
-    local_timezone = pytz.timezone(settings.TIME_ZONE)
-    return local_timezone.localize(meter_timestamp, is_dst=is_dst).astimezone(pytz.utc)
+    return new_instance
 
 
 def apply_data_retention():
