@@ -60,3 +60,11 @@ ELECTRICITY_DELIVERED_TARIFF_ALL = (
     ELECTRICITY_DELIVERED_TARIFF_1,
     ELECTRICITY_DELIVERED_TARIFF_2
 )
+
+
+# Alternate codes for foreign countries.
+BELGIUM_ELECTRICITY_USED_TARIFF_1 = r'\d-\d:1\.8\.2.+?\r\n'  # Totale afname van energie in kWh nachttarief
+BELGIUM_ELECTRICITY_USED_TARIFF_2 = r'\d-\d:1\.8\.1.+?\r\n'  # 1.8.1 Totale afname van energie in kWh dagtarief
+BELGIUM_ELECTRICITY_DELIVERED_TARIFF_1 = r'\d-\d:2\.8\.2.+?\r\n'  # 2.8.2 Totale injectie van energie in kWh nachttarief
+BELGIUM_ELECTRICITY_DELIVERED_TARIFF_2 = r'\d-\d:2\.8\.1.+?\r\n'  # 2.8.1 Totale injectie van energie in kWh dagtarief
+BELGIUM_HOURLY_GAS_METER_READING = r'\d-\d:24\.2\.3.+?\r\n'  # Different code, same format.

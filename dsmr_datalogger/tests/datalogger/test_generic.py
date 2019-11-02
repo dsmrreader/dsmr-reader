@@ -215,13 +215,13 @@ class TestServices(TestCase):
 
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
-    def test_dsmr_version_2(self):
+    def test_dsmr_version_2_and_3(self):
         """ Test connection parameters for DSMR v2. """
         datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2
+        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2_3
         datalogger_settings.save()
 
-        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_2)
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_2_3)
 
         connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 9600)

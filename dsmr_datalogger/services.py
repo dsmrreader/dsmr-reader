@@ -15,8 +15,7 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.exceptions import InvalidTelegramError
-from dsmr_datalogger.mapping import DSMR_MAPPING
-from dsmr_parser import telegram_specifications
+from dsmr_parser import telegram_specifications, obis_references
 from dsmr_parser.exceptions import InvalidChecksumError, ParseError
 from dsmr_parser.parsers import TelegramParser
 import dsmr_datalogger.signals
@@ -30,23 +29,28 @@ commands_logger = logging.getLogger('commands')
 def get_dsmr_connection_parameters():
     """ Returns the communication settings required for the DSMR version set. """
     DSMR_VERSION_MAPPING = {
-        DataloggerSettings.DSMR_VERSION_2: {
-            'baudrate': 9600,
-            'bytesize': serial.SEVENBITS,
-            'parity': serial.PARITY_EVEN,
-            'specifications': telegram_specifications.V2_2,
-        },
-        DataloggerSettings.DSMR_VERSION_4_PLUS: {
-            'baudrate': 115200,
-            'bytesize': serial.EIGHTBITS,
-            'parity': serial.PARITY_NONE,
-            'specifications': telegram_specifications.V5,
-        },
+        DataloggerSettings.DSMR_VERSION_2_3: telegram_specifications.V2_2,
+        DataloggerSettings.DSMR_VERSION_4_PLUS: telegram_specifications.V5,
+        DataloggerSettings.DSMR_BELGIUM_FLUVIUS: telegram_specifications.BELGIUM_FLUVIUS,
+        DataloggerSettings.DSMR_LUXEMBOURG_SMARTY: telegram_specifications.LUXEMBOURG_SMARTY,
     }
 
     datalogger_settings = DataloggerSettings.get_solo()
-    connection_parameters = DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
-    connection_parameters['com_port'] = datalogger_settings.com_port
+    connection_parameters = {
+        'com_port': datalogger_settings.com_port,
+        'baudrate': 115200,
+        'bytesize': serial.EIGHTBITS,
+        'parity': serial.PARITY_NONE,
+    }
+
+    if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_2_3:
+        connection_parameters.update({
+            'baudrate': 9600,
+            'bytesize': serial.SEVENBITS,
+            'parity': serial.PARITY_EVEN,
+        })
+
+    connection_parameters.update(dict(specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]))
     return connection_parameters
 
 
@@ -140,20 +144,22 @@ def _map_telegram_to_model(parsed_telegram, data):
     ]
 
     model_fields = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
+    mapping = _get_dsmrreader_mapping(DataloggerSettings.get_solo().dsmr_version)
 
-    for obis_ref, target_field in DSMR_MAPPING.items():
+    for obis_ref, obis_data in parsed_telegram.items():
         try:
-            parsed_ref = parsed_telegram[obis_ref]
+            # Skip any fields we're not storing in our system.
+            target_field = mapping[obis_ref]
         except KeyError:
             continue
 
         if isinstance(target_field, dict):
-            model_fields[target_field['value']] = parsed_ref.value
-            model_fields[target_field['datetime']] = parsed_ref.datetime
+            model_fields[target_field['value']] = obis_data.value
+            model_fields[target_field['datetime']] = obis_data.datetime
         else:
-            model_fields[target_field] = parsed_ref.value
+            model_fields[target_field] = obis_data.value
 
-    # Hack for DSMR 2.x legacy, which lacks timestamp info.
+    # Defaults for exceptions.
     model_fields['timestamp'] = model_fields['timestamp'] or timezone.now()
 
     # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
@@ -248,3 +254,59 @@ def apply_data_retention():
             data_set.exclude(pk__in=keeper_pks).delete()
 
     timezone.deactivate()
+
+
+def _get_dsmrreader_mapping(version):
+    """ Returns the mapping for OBIS to DSMR-reader (model fields). """
+    SPLIT_GAS_FIELD = {
+        'value': 'extra_device_delivered',
+        'datetime': 'extra_device_timestamp',
+    }
+
+    # Data stored in database for every reading.
+    mapping = {
+        obis_references.P1_MESSAGE_TIMESTAMP: 'timestamp',
+        obis_references.ELECTRICITY_USED_TARIFF_1: 'electricity_delivered_1',
+        obis_references.ELECTRICITY_DELIVERED_TARIFF_1: 'electricity_returned_1',
+        obis_references.ELECTRICITY_USED_TARIFF_2: 'electricity_delivered_2',
+        obis_references.ELECTRICITY_DELIVERED_TARIFF_2: 'electricity_returned_2',
+        obis_references.CURRENT_ELECTRICITY_USAGE: 'electricity_currently_delivered',
+        obis_references.CURRENT_ELECTRICITY_DELIVERY: 'electricity_currently_returned',
+
+        obis_references.INSTANTANEOUS_ACTIVE_POWER_L1_POSITIVE: 'phase_currently_delivered_l1',
+        obis_references.INSTANTANEOUS_ACTIVE_POWER_L2_POSITIVE: 'phase_currently_delivered_l2',
+        obis_references.INSTANTANEOUS_ACTIVE_POWER_L3_POSITIVE: 'phase_currently_delivered_l3',
+        obis_references.INSTANTANEOUS_ACTIVE_POWER_L1_NEGATIVE: 'phase_currently_returned_l1',
+        obis_references.INSTANTANEOUS_ACTIVE_POWER_L2_NEGATIVE: 'phase_currently_returned_l2',
+        obis_references.INSTANTANEOUS_ACTIVE_POWER_L3_NEGATIVE: 'phase_currently_returned_l3',
+        obis_references.INSTANTANEOUS_VOLTAGE_L1: 'phase_voltage_l1',
+        obis_references.INSTANTANEOUS_VOLTAGE_L2: 'phase_voltage_l2',
+        obis_references.INSTANTANEOUS_VOLTAGE_L3: 'phase_voltage_l3',
+
+        # For some reason this identifier contains two fields, therefor we split them.
+        obis_references.HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,
+        obis_references.GAS_METER_READING: SPLIT_GAS_FIELD,  # Legacy
+
+        # Static data, stored in database but only data of the last reading is preserved.
+        obis_references.P1_MESSAGE_HEADER: 'dsmr_version',
+        obis_references.ELECTRICITY_ACTIVE_TARIFF: 'electricity_tariff',
+        obis_references.SHORT_POWER_FAILURE_COUNT: 'power_failure_count',
+        obis_references.LONG_POWER_FAILURE_COUNT: 'long_power_failure_count',
+        obis_references.VOLTAGE_SAG_L1_COUNT: 'voltage_sag_count_l1',
+        obis_references.VOLTAGE_SAG_L2_COUNT: 'voltage_sag_count_l2',
+        obis_references.VOLTAGE_SAG_L3_COUNT: 'voltage_sag_count_l3',
+        obis_references.VOLTAGE_SWELL_L1_COUNT: 'voltage_swell_count_l1',
+        obis_references.VOLTAGE_SWELL_L2_COUNT: 'voltage_swell_count_l2',
+        obis_references.VOLTAGE_SWELL_L3_COUNT: 'voltage_swell_count_l3',
+    }
+
+    if version == DataloggerSettings.DSMR_BELGIUM_FLUVIUS:
+        mapping.update({
+            obis_references.BELGIUM_HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,
+            obis_references.BELGIUM_ELECTRICITY_USED_TARIFF_1: 'electricity_delivered_1',
+            obis_references.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_1: 'electricity_returned_1',
+            obis_references.BELGIUM_ELECTRICITY_USED_TARIFF_2: 'electricity_delivered_2',
+            obis_references.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_2: 'electricity_returned_2',
+        })
+
+    return mapping

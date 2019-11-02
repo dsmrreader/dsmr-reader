@@ -33,7 +33,7 @@ V2_2 = {
         obis.VALVE_POSITION_GAS: CosemParser(ValueParser(str)),
         obis.GAS_METER_READING: MBusParser(
             ValueParser(timestamp),
-            ValueParser(str),  # DS: Changed from int
+            ValueParser(str),  # DS: Changed from int to str due to failing example telegram.
             ValueParser(int),
             ValueParser(int),
             ValueParser(str),
@@ -128,3 +128,55 @@ V5 = {
 }
 
 ALL = (V2_2, V3, V4, V5)
+
+# Copied from DSMR v5, with a few differences.
+BELGIUM_FLUVIUS = {
+    'checksum_support': True,
+    'objects': {
+        obis.P1_MESSAGE_HEADER: CosemParser(ValueParser(str)),
+        obis.P1_MESSAGE_TIMESTAMP: CosemParser(ValueParser(timestamp)),
+        obis.EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
+        obis.ELECTRICITY_IMPORTED_TOTAL: CosemParser(ValueParser(Decimal)),
+        obis.BELGIUM_ELECTRICITY_USED_TARIFF_1: CosemParser(ValueParser(Decimal)),  # Differs compared to V5
+        obis.BELGIUM_ELECTRICITY_USED_TARIFF_2: CosemParser(ValueParser(Decimal)),  # Differs compared to V5
+        obis.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_1: CosemParser(ValueParser(Decimal)),  # Differs compared to V5
+        obis.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_2: CosemParser(ValueParser(Decimal)),  # Differs compared to V5
+        obis.ELECTRICITY_ACTIVE_TARIFF: CosemParser(ValueParser(str)),
+        obis.CURRENT_ELECTRICITY_USAGE: CosemParser(ValueParser(Decimal)),
+        obis.CURRENT_ELECTRICITY_DELIVERY: CosemParser(ValueParser(Decimal)),
+        obis.LONG_POWER_FAILURE_COUNT: CosemParser(ValueParser(int)),
+        obis.SHORT_POWER_FAILURE_COUNT: CosemParser(ValueParser(int)),
+        obis.VOLTAGE_SAG_L1_COUNT: CosemParser(ValueParser(int)),
+        obis.VOLTAGE_SAG_L2_COUNT: CosemParser(ValueParser(int)),
+        obis.VOLTAGE_SAG_L3_COUNT: CosemParser(ValueParser(int)),
+        obis.VOLTAGE_SWELL_L1_COUNT: CosemParser(ValueParser(int)),
+        obis.VOLTAGE_SWELL_L2_COUNT: CosemParser(ValueParser(int)),
+        obis.VOLTAGE_SWELL_L3_COUNT: CosemParser(ValueParser(int)),
+        obis.INSTANTANEOUS_VOLTAGE_L1: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_VOLTAGE_L2: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_VOLTAGE_L3: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_CURRENT_L1: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_CURRENT_L2: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_CURRENT_L3: CosemParser(ValueParser(Decimal)),
+        obis.TEXT_MESSAGE: CosemParser(ValueParser(str)),
+        obis.DEVICE_TYPE: CosemParser(ValueParser(int)),
+        obis.INSTANTANEOUS_ACTIVE_POWER_L1_POSITIVE: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_ACTIVE_POWER_L2_POSITIVE: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_ACTIVE_POWER_L3_POSITIVE: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_ACTIVE_POWER_L1_NEGATIVE: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_ACTIVE_POWER_L2_NEGATIVE: CosemParser(ValueParser(Decimal)),
+        obis.INSTANTANEOUS_ACTIVE_POWER_L3_NEGATIVE: CosemParser(ValueParser(Decimal)),
+        obis.EQUIPMENT_IDENTIFIER_GAS: CosemParser(ValueParser(str)),
+        obis.BELGIUM_HOURLY_GAS_METER_READING: MBusParser(  # Differs compared to V5
+            ValueParser(timestamp),
+            ValueParser(Decimal)
+        )
+    }
+}
+
+# Copied from DSMR v5. Seems to lack some data.
+LUXEMBOURG_SMARTY = {
+    'checksum_support': True,
+    'objects': {
+    }
+}

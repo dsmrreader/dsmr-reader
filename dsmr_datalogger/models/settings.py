@@ -4,12 +4,15 @@ from solo.models import SingletonModel
 
 
 class DataloggerSettings(SingletonModel):
-    """ Singleton model restricted by django-solo plugin. Settings for this application only. """
     DSMR_VERSION_4_PLUS = 4
-    DSMR_VERSION_2 = 3  # Yes, that is indeed a three and it's called "legacy" ;]
+    DSMR_VERSION_2_3 = 3
+    DSMR_BELGIUM_FLUVIUS = 101
+    DSMR_LUXEMBOURG_SMARTY = 102
     DSMR_VERSION_CHOICES = (
-        (DSMR_VERSION_4_PLUS, _('DSMR version 4/5')),
-        (DSMR_VERSION_2, _('DSMR version 2')),
+        (DSMR_VERSION_4_PLUS, _('Netherlands - DSMR version 4/5 (default)')),
+        (DSMR_VERSION_2_3, _('Netherlands - DSMR version 2/3')),
+        (DSMR_BELGIUM_FLUVIUS, _('Belgium - Fluvius')),
+        (DSMR_LUXEMBOURG_SMARTY, _('Luxembourg - Smarty')),
     )
 
     dsmr_version = models.IntegerField(

@@ -16,7 +16,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
     """ Test Iskra meter, unknown DSMR version. """
     def setUp(self):
         datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2
+        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2_3
         datalogger_settings.save()
 
     def _dsmr_dummy_data(self):
