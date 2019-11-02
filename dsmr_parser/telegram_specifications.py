@@ -131,26 +131,15 @@ V5 = {
 ALL = (V2_2, V3, V4, V5)
 
 
-# A few minor differences, tariffs are swapped.
 BELGIUM_FLUVIUS = deepcopy(V5)
 BELGIUM_FLUVIUS['objects'].update({
-    obis.BELGIUM_ELECTRICITY_USED_TARIFF_1: CosemParser(ValueParser(Decimal)),
-    obis.BELGIUM_ELECTRICITY_USED_TARIFF_2: CosemParser(ValueParser(Decimal)),
-    obis.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_1: CosemParser(ValueParser(Decimal)),
-    obis.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_2: CosemParser(ValueParser(Decimal)),
     obis.BELGIUM_HOURLY_GAS_METER_READING: MBusParser(
         ValueParser(timestamp),
         ValueParser(Decimal)
     )
 })
 
-
-# Does not seem to support two tariffs.
 LUXEMBOURG_SMARTY = deepcopy(V5)
-del LUXEMBOURG_SMARTY['objects'][obis.ELECTRICITY_USED_TARIFF_1]
-del LUXEMBOURG_SMARTY['objects'][obis.ELECTRICITY_USED_TARIFF_2]
-del LUXEMBOURG_SMARTY['objects'][obis.ELECTRICITY_DELIVERED_TARIFF_1]
-del LUXEMBOURG_SMARTY['objects'][obis.ELECTRICITY_DELIVERED_TARIFF_2]
 LUXEMBOURG_SMARTY['objects'].update({
     obis.LUXEMBOURG_ELECTRICITY_USED_TARIFF_GLOBAL: CosemParser(ValueParser(Decimal)),
     obis.LUXEMBOURG_ELECTRICITY_DELIVERED_TARIFF_GLOBAL: CosemParser(ValueParser(Decimal)),

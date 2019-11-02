@@ -305,17 +305,9 @@ def _get_dsmrreader_mapping(version):
     if version == DataloggerSettings.DSMR_BELGIUM_FLUVIUS:
         mapping.update({
             obis_references.BELGIUM_HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,
-            obis_references.BELGIUM_ELECTRICITY_USED_TARIFF_1: 'electricity_delivered_1',
-            obis_references.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_1: 'electricity_returned_1',
-            obis_references.BELGIUM_ELECTRICITY_USED_TARIFF_2: 'electricity_delivered_2',
-            obis_references.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_2: 'electricity_returned_2',
         })
 
     if version == DataloggerSettings.DSMR_LUXEMBOURG_SMARTY:
-        del mapping[obis_references.ELECTRICITY_USED_TARIFF_1]
-        del mapping[obis_references.ELECTRICITY_USED_TARIFF_2]
-        del mapping[obis_references.ELECTRICITY_DELIVERED_TARIFF_1]
-        del mapping[obis_references.ELECTRICITY_DELIVERED_TARIFF_2]
         mapping.update({
             obis_references.LUXEMBOURG_ELECTRICITY_USED_TARIFF_GLOBAL: 'electricity_delivered_2',
             obis_references.LUXEMBOURG_ELECTRICITY_DELIVERED_TARIFF_GLOBAL: 'electricity_returned_2',
