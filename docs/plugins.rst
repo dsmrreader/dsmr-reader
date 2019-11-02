@@ -220,14 +220,13 @@ Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new fil
     from django.utils import timezone
     import django.db.models.signals
 
+    from dsmr_datalogger.models.reading import DsmrReading
 
-    @receiver(django.db.models.signals.post_save)
+    @receiver(django.db.models.signals.post_save, sender=DsmrReading)
     def handle_forward_json_dsmrreading_to_api(sender, instance, created, raw, **kwargs):
-        # Skip new or imported (fixture) instances.
         if not created or raw:
             return
 
-        # Local time.
         instance.timestamp = timezone.localtime(instance.timestamp)
 
         if instance.extra_device_timestamp:
