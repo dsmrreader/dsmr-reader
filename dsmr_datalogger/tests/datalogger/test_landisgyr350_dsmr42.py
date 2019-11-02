@@ -12,7 +12,7 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
-    """ Test Landis+Gyr 350 DSMR v4.2. """
+    """ Landis+Gyr 350 DSMR v4.2. """
     def _dsmr_dummy_data(self):
         return [
             "/XMX5LGBBFFB123456789\r\n",

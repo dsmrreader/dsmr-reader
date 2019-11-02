@@ -159,8 +159,10 @@ def _map_telegram_to_model(parsed_telegram, data):
         else:
             model_fields[target_field] = obis_data.value
 
-    # Defaults for exceptions.
+    # Defaults for telegrams with missing data.
     model_fields['timestamp'] = model_fields['timestamp'] or timezone.now()
+    model_fields['electricity_delivered_1'] = model_fields['electricity_delivered_1'] or 0
+    model_fields['electricity_returned_1'] = model_fields['electricity_returned_1'] or 0
 
     # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
     discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
@@ -307,6 +309,16 @@ def _get_dsmrreader_mapping(version):
             obis_references.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_1: 'electricity_returned_1',
             obis_references.BELGIUM_ELECTRICITY_USED_TARIFF_2: 'electricity_delivered_2',
             obis_references.BELGIUM_ELECTRICITY_DELIVERED_TARIFF_2: 'electricity_returned_2',
+        })
+
+    if version == DataloggerSettings.DSMR_LUXEMBOURG_SMARTY:
+        del mapping[obis_references.ELECTRICITY_USED_TARIFF_1]
+        del mapping[obis_references.ELECTRICITY_USED_TARIFF_2]
+        del mapping[obis_references.ELECTRICITY_DELIVERED_TARIFF_1]
+        del mapping[obis_references.ELECTRICITY_DELIVERED_TARIFF_2]
+        mapping.update({
+            obis_references.LUXEMBOURG_ELECTRICITY_USED_TARIFF_GLOBAL: 'electricity_delivered_2',
+            obis_references.LUXEMBOURG_ELECTRICITY_DELIVERED_TARIFF_GLOBAL: 'electricity_returned_2',
         })
 
     return mapping

@@ -13,7 +13,7 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
-    """ Test Belgium meter. """
+    """ Belgium Fluvius meter. """
     def setUp(self):
         DataloggerSettings.get_solo()
         DataloggerSettings.objects.all().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
