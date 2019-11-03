@@ -8,6 +8,7 @@ from django.db.models import Avg, Min, Max, Count
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
 
+from dsmr_consumption.exceptions import CompactorNotReadyError
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -24,7 +25,11 @@ logger = logging.getLogger('commands')
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
     for current_reading in DsmrReading.objects.unprocessed()[0:1024]:
-        compact(dsmr_reading=current_reading)
+        try:
+            compact(dsmr_reading=current_reading)
+        except CompactorNotReadyError:
+            # Try again next run, no use in retrying anyway.
+            return
 
 
 def compact(dsmr_reading):
@@ -47,7 +52,8 @@ def compact(dsmr_reading):
 
         # Postpone until the minute has passed on the system time. And when there are (new) readings beyond this minute.
         if not system_time_past_minute or not reading_past_minute_exists:
-            return logger.debug('Waiting for newer readings before grouping data...')
+            logger.debug('Compact: Waiting for newer readings before grouping data...')
+            raise CompactorNotReadyError()
 
     # Create consumption records.
     _compact_electricity(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)
