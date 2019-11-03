@@ -78,10 +78,10 @@ def analyze():
     if not consumption_found:
         return logger.debug('Stats: Missing consumption data for: %s', target_day)
 
-    # If we support gas, make sure we've received a gas reading on the next day.
+    # If we support gas, make sure we've received a gas reading on the next day (or later).
     if dsmr_backend.services.backend.get_capabilities(capability='gas') and \
-            not GasConsumption.objects.filter(read_at__date=next_day).exists():
-        return logger.debug('Waiting for first gas reading on the next day...')
+            not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
+        return logger.debug('Stats: Waiting for first gas reading on the next day...')
 
     create_statistics(target_day=target_day)
 
