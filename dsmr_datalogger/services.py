@@ -161,8 +161,8 @@ def _map_telegram_to_model(parsed_telegram, data):
 
     # Defaults for telegrams with missing data.
     model_fields['timestamp'] = model_fields['timestamp'] or timezone.now()
-    model_fields['electricity_delivered_1'] = model_fields['electricity_delivered_1'] or 0
-    model_fields['electricity_returned_1'] = model_fields['electricity_returned_1'] or 0
+    model_fields['electricity_delivered_2'] = model_fields['electricity_delivered_2'] or 0
+    model_fields['electricity_returned_2'] = model_fields['electricity_returned_2'] or 0
 
     # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
     discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
@@ -309,8 +309,8 @@ def _get_dsmrreader_mapping(version):
 
     if version == DataloggerSettings.DSMR_LUXEMBOURG_SMARTY:
         mapping.update({
-            obis_references.LUXEMBOURG_ELECTRICITY_USED_TARIFF_GLOBAL: 'electricity_delivered_2',
-            obis_references.LUXEMBOURG_ELECTRICITY_DELIVERED_TARIFF_GLOBAL: 'electricity_returned_2',
+            obis_references.LUXEMBOURG_ELECTRICITY_USED_TARIFF_GLOBAL: 'electricity_delivered_1',
+            obis_references.LUXEMBOURG_ELECTRICITY_DELIVERED_TARIFF_GLOBAL: 'electricity_returned_1',
         })
 
     return mapping
