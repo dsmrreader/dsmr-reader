@@ -47,11 +47,11 @@ def read_weather():
 
 def get_temperature_from_api():
     # For backend logging in Supervisor.
-    logger.debug(' - Reading temperature from Buienradar: %s', settings.DSMRREADER_BUIENRADAR_API_URL)
+    logger.debug('Buienradar: Reading temperature: %s', settings.DSMRREADER_BUIENRADAR_API_URL)
     response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL)
 
     if response.status_code != 200:
-        logger.error(' [!] Failed reading temperature: HTTP %s', response.status_code)
+        logger.error('Buienradar: Failed reading temperature: HTTP %s', response.status_code)
         raise EnvironmentError('Unexpected status code received')
 
     # Find our selected station.
@@ -62,7 +62,7 @@ def get_temperature_from_api():
         raise EnvironmentError('Selected station info not found')
 
     temperature = station_data[0]['groundtemperature']
-    logger.debug(' - Read temperature: %s', temperature)
+    logger.debug('Buienradar: Read temperature: %s', temperature)
 
     # Push next sync back for an hour.
     hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)

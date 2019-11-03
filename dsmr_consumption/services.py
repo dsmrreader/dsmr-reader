@@ -63,7 +63,7 @@ def compact(dsmr_reading):
     dsmr_reading.save(update_fields=['processed'])
 
     # For backend logging in Supervisor.
-    logger.debug(' - Processed reading: %s', dsmr_reading)
+    logger.debug('Compact: Processed reading: %s', dsmr_reading)
 
 
 def _compact_electricity(dsmr_reading, grouping_type, reading_start):

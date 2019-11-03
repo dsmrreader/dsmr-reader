@@ -87,7 +87,6 @@ def analyze():
 
 
 def create_statistics(target_day):
-    logger.debug(' - Creating day & hour statistics for: %s', target_day)
     start_of_day = timezone.make_aware(timezone.datetime(
         year=target_day.year,
         month=target_day.month,
@@ -110,6 +109,7 @@ def create_statistics(target_day):
 
 def create_daily_statistics(day):
     """ Calculates and persists both electricity and gas statistics for a day. Daily. """
+    logger.debug('Stats: Creating day statistics for: %s', day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
     return DayStatistics.objects.create(
@@ -134,6 +134,7 @@ def create_daily_statistics(day):
 
 def create_hourly_statistics(hour_start):
     """ Calculates and persists both electricity and gas statistics for a day. Hourly. """
+    logger.debug('Stats: Creating hour statistics for: %s', hour_start)
     hour_end = hour_start + timezone.timedelta(hours=1)
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
         start=hour_start, end=hour_end
@@ -147,7 +148,7 @@ def create_hourly_statistics(hour_start):
     }
 
     if HourStatistics.objects.filter(**creation_kwargs).exists():
-        return
+        return logger.debug('Stats: Skipping duplicate hour statistics for: %s', hour_start)
 
     electricity_start = electricity_readings[0]
     electricity_end = electricity_readings[electricity_readings.count() - 1]

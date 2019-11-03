@@ -33,7 +33,7 @@ def export():
     if not should_export():
         return
 
-    logger.debug(' - MinderGas | Attempting to upload gas meter position.')
+    logger.debug('MinderGas: Attempting to upload gas meter position.')
 
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
@@ -56,9 +56,9 @@ def export():
     except IndexError:
         # Just continue, even though we have no data... yet.
         last_gas_reading = None
-        logger.error(' - MinderGas | No gas readings found for uploading')
+        logger.error('MinderGas: No gas readings found for uploading')
     else:
-        logger.debug(' - MinderGas | Uploading gas meter position: %s', last_gas_reading.delivered)
+        logger.debug('MinderGas: Uploading gas meter position: %s', last_gas_reading.delivered)
 
         # Register telegram by simply sending it to the application with a POST request.
         response = requests.post(
@@ -78,6 +78,6 @@ def export():
             # Keep track.
             mindergas_settings.latest_sync = timezone.now()
 
-    logger.debug(' - MinderGas | Delaying the next upload until:%s', next_export)
+    logger.debug('MinderGas: Delaying the next upload until:%s', next_export)
     mindergas_settings.next_export = next_export
     mindergas_settings.save()

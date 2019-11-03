@@ -18,7 +18,7 @@ def run(scheduled_process):
     email_backup_settings = EmailBackupSettings.get_solo()
 
     if not email_backup_settings.interval:
-        logger.debug(' - Email backup interval not set, skipping backup for a day')
+        logger.debug('Email backup: Interval not set, skipping backup for a day')
         return scheduled_process.delay(timezone.timedelta(days=1))
 
     temp_dir = tempfile.TemporaryDirectory()
