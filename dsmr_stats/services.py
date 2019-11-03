@@ -23,12 +23,7 @@ logger = logging.getLogger('commands')
 
 def is_data_available():
     """ Checks whether data is available for stats. """
-    try:
-        ElectricityConsumption.objects.all().order_by('read_at')[0]
-    except IndexError:
-        return False
-
-    return True
+    return ElectricityConsumption.objects.all().exists()
 
 
 def get_next_day_to_generate():
@@ -60,6 +55,7 @@ def get_next_day_to_generate():
 def analyze():
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
     if not is_data_available():
+        logger.debug('Stats: No data available')
         return
 
     now = timezone.localtime(timezone.now())
@@ -68,19 +64,19 @@ def analyze():
 
     # Skip current day, wait until midnight.
     if target_day >= now.date():
-        return
+        return logger.debug('Stats: Waiting for day to pass: %s', target_day)
 
     # All readings of the day must be processed.
     unprocessed_readings = DsmrReading.objects.unprocessed().filter(timestamp__date=target_day).exists()
 
     if unprocessed_readings:
-        return logger.debug('Stats: Unprocessed readings found for %s', target_day)
+        return logger.debug('Stats: Found unprocessed readings for: %s', target_day)
 
     # Ensure we have any consumption.
     consumption_found = ElectricityConsumption.objects.filter(read_at__date=target_day).exists()
 
     if not consumption_found:
-        return logger.debug('Stats: No consumption found for %s', target_day)
+        return logger.debug('Stats: Missing consumption data for: %s', target_day)
 
     # If we support gas, make sure we've received a gas reading on the next day.
     if dsmr_backend.services.backend.get_capabilities(capability='gas') and \
