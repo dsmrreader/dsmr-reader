@@ -1,6 +1,14 @@
 Changelog
 =========
 
+v2.11.0 - 2019-xx-xx
+
+- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_] xxxxxxx
+
+
+----
+
+
 v2.10.0 - 2019-11-05
 
 - [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] (1/2) Uurstatistieken missen de laatste minuut of seconde - by JeanMiK
