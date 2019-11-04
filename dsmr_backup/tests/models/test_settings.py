@@ -1,8 +1,10 @@
 from datetime import time
 
+from django.conf import settings
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
 
 
@@ -58,3 +60,14 @@ class TestEmailBackupSettings(TestCase):
 
     def test_interval(self):
         self.assertIsNone(self.instance.interval)
+
+    def test_handle_backend_settings_update_hook(self):
+        query = ScheduledProcess.objects.filter(
+            module=settings.DSMRREADER_MODULE_EMAIL_BACKUP,
+            active=True
+        )
+        self.assertTrue(query.exists())
+
+        self.instance.interval = EmailBackupSettings.INTERVAL_NONE
+        self.instance.save()
+        self.assertFalse(query.exists())

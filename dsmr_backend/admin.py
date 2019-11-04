@@ -16,6 +16,7 @@ from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backend.services.email
 import logging
 
+
 # There is no global admin.py, so we'll just disable Group & User here.
 admin.site.unregister(Group)
 admin.site.unregister(User)
@@ -34,7 +35,7 @@ class BackendSettingsAdmin(SingletonModelAdmin):
 
 @receiver(django.db.models.signals.post_save, sender=BackendSettings)
 def handle_backend_settings_update(sender, instance, created, raw, **kwargs):
-    """ Hooks to update auto update process. """
+    """ Hook to toggle related scheduled process. """
     if created or raw:
         return
 
