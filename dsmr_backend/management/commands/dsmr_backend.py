@@ -13,5 +13,5 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
-        dsmr_backend.services.schedule.execute_scheduled_processes()
-        dsmr_backend.services.schedule.dispatch_signals()
+        dsmr_backend.services.schedule.execute_scheduled_processes()  # Future
+        dsmr_backend.services.schedule.dispatch_signals()  # Legacy

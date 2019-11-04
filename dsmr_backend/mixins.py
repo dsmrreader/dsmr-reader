@@ -49,7 +49,7 @@ class InfiniteManagementCommandMixin:
             self.run_loop(**options)
 
         self.shutdown()
-        logger.info('Exited')
+        logger.debug('DSMR_BACKEND: Exited')
 
     def run_loop(self, **options):
         """ Runs in an infinite loop, until we're signaled to stop. """
@@ -59,14 +59,14 @@ class InfiniteManagementCommandMixin:
 
         # We simply keep executing the management command until we are told otherwise.
         self._keep_alive = True
-        logger.debug('Starting infinite command loop...')  # Just to make sure it gets printed.
+        logger.debug('DSMR_BACKEND: Starting infinite command loop...')  # Just to make sure it gets printed.
 
         while self._keep_alive:
             self.run_once(**options)
 
             # Do not hammer.
             if self.sleep_time is not None:
-                logger.debug('Sleeping %s sec(s)', self.sleep_time)
+                logger.debug('DSMR_BACKEND: Sleeping %ss', self.sleep_time)
                 time.sleep(self.sleep_time)
 
             # Check database connection after each run. This will force Django to reconnect as well, when having issues.
@@ -82,12 +82,12 @@ class InfiniteManagementCommandMixin:
             raise
         except StopInfiniteRun:
             # Explicit exit.
-            logger.info(' [i] Detected StopInfiniteRun exception')
+            logger.info('DSMR_BACKEND: [i] Detected StopInfiniteRun exception')
             self._stop()
         except:
             # Unforeseen errors.
             _, _, exc_traceback = sys.exc_info()
-            logger.error(' [!] Exception raised in run(): %s', traceback.format_exc())
+            logger.error('DSMR_BACKEND: [!] Exception raised in run(): %s', traceback.format_exc())
 
     def initialize(self):
         """ Called once. Override and handle any initialization required. """
@@ -107,13 +107,13 @@ class InfiniteManagementCommandMixin:
 
     def _signal_handler(self, signum, frame):
         # If we get called, then we must gracefully exit.
-        logger.info('Detected signal #%s', signum)
+        logger.info('DSMR_BACKEND: Detected signal #%s', signum)
         self._stop()
 
     def _stop(self):
         """ Sets the flag for ending the command on next flag check. """
         self._keep_alive = False
-        logger.info('Exiting on next run...')
+        logger.info('DSMR_BACKEND: Exiting on next run...')
 
     def _write_pid_file(self):
         self._pid_file = os.path.join(

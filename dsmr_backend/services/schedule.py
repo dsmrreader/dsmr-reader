@@ -21,10 +21,10 @@ def dispatch_signals():
 def execute_scheduled_processes():
     """ Calls the backend and all services required. """
     calls = ScheduledProcess.objects.ready()
-    logger.debug('Calling %s backend service(s)', len(calls))
+    logger.debug('SP: %s backend service(s) ready to run', len(calls))
 
     for current in calls:
-        logger.debug('Executing: %s (%s)', current.name, current.module)
+        logger.debug('SP: Running "%s" (%s)', current.name, current.module)
 
         try:
             current.execute()
