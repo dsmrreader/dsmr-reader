@@ -112,7 +112,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "0-0:1.0.0({timestamp}W)\r\n".format(
                 timestamp=now.strftime('%y%m%d%H%M%S')
             ),
-            "0-0:96.1.1(FAKE-FAKE-FAKE-FAKE-FAKE)\r\n",
+            "0-0:96.1.1(12345678901234567890123456789000)\r\n",
             "1-0:1.8.1({}*kWh)\r\n".format(self._round_precision(electricity_1, 10)),
             "1-0:2.8.1({}*kWh)\r\n".format(self._round_precision(electricity_1_returned, 10)),
             "1-0:1.8.2({}*kWh)\r\n".format(self._round_precision(electricity_2, 10)),
@@ -148,7 +148,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         if with_gas:
             data += [
                 "0-1:24.1.0(003)\r\n",
-                "0-1:96.1.0(FAKE-FAKE-FAKE-FAKE-FAKE)\r\n",
+                "0-1:96.1.0(12345678901234567890123456789001)\r\n",
                 "0-1:24.2.1({}W)({}*m3)\r\n".format(
                     now.strftime('%y%m%d%H0000'), self._round_precision(gas, 9)
                 ),

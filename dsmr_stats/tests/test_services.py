@@ -1,3 +1,4 @@
+import datetime
 from unittest import mock
 from decimal import Decimal
 
@@ -9,10 +10,10 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
+from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_backend.services.backend
 import dsmr_stats.services
-from dsmr_consumption.models.settings import ConsumptionSettings
 
 
 class TestServices(InterceptStdoutMixin, TestCase):
@@ -33,124 +34,228 @@ class TestServices(InterceptStdoutMixin, TestCase):
             'gas_cost': 3,
         }
 
-    @mock.patch('django.utils.timezone.now')
-    def test_analyze_service(self, now_mock):
+    def test_no_data_available(self):
+        ElectricityConsumption.objects.all().delete()
+        self.assertFalse(dsmr_stats.services.is_data_available())
+
+    def test_data_available(self):
         self.assertTrue(ElectricityConsumption.objects.exists())
+        self.assertTrue(dsmr_stats.services.is_data_available())
+
+    def test_get_next_day_to_generate_no_stats(self):
         self.assertFalse(DayStatistics.objects.exists())
-        self.assertFalse(HourStatistics.objects.exists())
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2015, 12, 12)
+        )
 
-        # This should delay statistics generation. Because day has not yet passed.
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=1, minute=5))
+    @mock.patch('dsmr_backend.services.backend.get_capabilities')
+    @mock.patch('django.utils.timezone.now')
+    def test_get_next_day_with_gap(self, now_mock, capabilities_mock):
+        """ Data gaps should be skipped, as they won't be restored anyway. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+        capabilities_mock.return_value = False  # Disable gas check.
+        ElectricityConsumption.objects.create(
+            # Gap since 12-12-2015.
+            read_at=timezone.make_aware(timezone.datetime(2015, 12, 20)),
+            delivered_1=0,
+            delivered_2=0,
+            returned_1=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+        )
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2015, 12, 12)
+        )
+
         dsmr_stats.services.analyze()
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2015, 12, 15)
+        )
 
-        self.assertEqual(DayStatistics.objects.count(), 0)
-        self.assertEqual(HourStatistics.objects.count(), 0)
-
-        # Still too soon.
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=1, minute=5))
         dsmr_stats.services.analyze()
-
-        if dsmr_backend.services.backend.get_capabilities(capability='gas'):
-            self.assertEqual(DayStatistics.objects.count(), 0)
-            self.assertEqual(HourStatistics.objects.count(), 0)
-        else:
-            self.assertEqual(DayStatistics.objects.count(), 1)
-            self.assertEqual(HourStatistics.objects.count(), 3)
-
-        # Now we exceed the delay threshold, causing stats to be generated.
-        now_mock.return_value += timezone.timedelta(minutes=15)
-        dsmr_stats.services.analyze()
-
-        if dsmr_backend.services.backend.get_capabilities(capability='gas'):
-            self.assertEqual(DayStatistics.objects.count(), 1)
-            self.assertEqual(HourStatistics.objects.count(), 3)
-        else:
-            self.assertEqual(DayStatistics.objects.count(), 2)
-            self.assertEqual(HourStatistics.objects.count(), 4)
-
-        # Second run should skip first day.
-        dsmr_stats.services.analyze()
-        self.assertEqual(DayStatistics.objects.count(), 2)
-        self.assertEqual(HourStatistics.objects.count(), 4)
-
-        # Third run should have no effect, as our fixtures are limited to a few days.
-        dsmr_stats.services.analyze()
-        self.assertEqual(DayStatistics.objects.count(), 2)
-        self.assertEqual(HourStatistics.objects.count(), 4)
-
-        # Without any data, fallback.
-        for current_model in (DayStatistics, HourStatistics, ElectricityConsumption):
-            current_model.objects.all().delete()
-
-        self.assertFalse(ElectricityConsumption.objects.exists())
-        dsmr_stats.services.analyze()
-        self.assertFalse(DayStatistics.objects.exists())
-        self.assertFalse(HourStatistics.objects.exists())
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2015, 12, 20)
+        )
 
     @mock.patch('django.utils.timezone.now')
-    def test_analyze_service_block(self, now_mock):
-        """ Checks whether unprocessed readings block statistics generation. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=3))
+    def test_get_next_day_to_generate_with_stats(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
 
-        self.assertTrue(ElectricityConsumption.objects.exists())
-        self.assertFalse(DayStatistics.objects.exists())
-        self.assertFalse(HourStatistics.objects.exists())
+        DayStatistics.objects.create(**self._get_statistics_dict(
+            timezone.now()
+        ))
 
-        # Verify block for unprocessed readings later on.
+        self.assertTrue(DayStatistics.objects.exists())
+        self.assertEqual(
+            dsmr_stats.services.get_next_day_to_generate(),
+            datetime.date(2020, 1, 2)  # Next day
+        )
+
+    @mock.patch('dsmr_stats.services.is_data_available')
+    @mock.patch('dsmr_stats.services.get_next_day_to_generate')
+    def test_analyze_no_data(self, get_next_day_to_generate_mock, is_data_available_mock):
+        """ Fail analyze because here is no data. """
+        is_data_available_mock.return_value = False
+        dsmr_stats.services.analyze()
+
+        self.assertFalse(get_next_day_to_generate_mock.called)
+
+    @mock.patch('dsmr_stats.services.is_data_available')
+    @mock.patch('dsmr_stats.services.get_next_day_to_generate')
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_skip_current_day(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
+        """ Fail analyze because it's today. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
+        is_data_available_mock.return_value = True
+        get_next_day_to_generate_mock.return_value = timezone.now().date()  # Same day
+
+        dsmr_stats.services.analyze()
+
+    @mock.patch('dsmr_stats.services.is_data_available')
+    @mock.patch('dsmr_stats.services.get_next_day_to_generate')
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_check_unprocessed_readings(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
+        """ Fail analyze due to pending unprocessed readings. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
+        is_data_available_mock.return_value = True
+        target_datetime = timezone.now() - timezone.timedelta(days=1)
+        get_next_day_to_generate_mock.return_value = target_datetime.date()
+
         DsmrReading.objects.create(
-            timestamp=timezone.now() - timezone.timedelta(hours=12),
+            timestamp=target_datetime,
             electricity_delivered_1=1,
-            electricity_returned_1=1,
-            electricity_delivered_2=1,
-            electricity_returned_2=1,
-            electricity_currently_delivered=1,
-            electricity_currently_returned=1,
+            electricity_returned_1=2,
+            electricity_delivered_2=3,
+            electricity_returned_2=4,
+            electricity_currently_delivered=5,
+            electricity_currently_returned=6,
             processed=False,
         )
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
 
         dsmr_stats.services.analyze()
 
-        self.assertFalse(DayStatistics.objects.exists())
-        self.assertFalse(HourStatistics.objects.exists())
+    @mock.patch('dsmr_stats.services.is_data_available')
+    @mock.patch('dsmr_stats.services.get_next_day_to_generate')
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_no_consumption(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
+        """ Fail analyze due to no consumption available. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
+        is_data_available_mock.return_value = True
+        target_datetime = timezone.now() - timezone.timedelta(days=1)
+        get_next_day_to_generate_mock.return_value = target_datetime.date()
 
-        # Try again, without any blocking readings left.
-        DsmrReading.objects.unprocessed().delete()
-        self.assertFalse(DsmrReading.objects.unprocessed().exists())
+        ElectricityConsumption.objects.all().delete()
+        self.assertFalse(ElectricityConsumption.objects.exists())
 
         dsmr_stats.services.analyze()
 
-        if dsmr_backend.services.backend.get_capabilities('any'):
-            self.assertTrue(DayStatistics.objects.exists())
-            self.assertTrue(HourStatistics.objects.exists())
-
-    def test_create_hourly_gas_statistics_dsmr4(self):
+    @mock.patch('dsmr_stats.services.create_statistics')
+    @mock.patch('dsmr_stats.services.is_data_available')
+    @mock.patch('dsmr_stats.services.get_next_day_to_generate')
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_waiting_for_gas(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock,
+                                     create_statistics_mock):
+        """ Fail analyze due to missing gas reading. """
         if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
             return self.skipTest('No gas')
 
-        day_start = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0))
-        GasConsumption.objects.filter(pk__in=(32, 33)).delete()  # Pretend we only have 1 gas reading per hour.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
+        is_data_available_mock.return_value = True
+        target_datetime = timezone.now() - timezone.timedelta(days=1)
+        get_next_day_to_generate_mock.return_value = target_datetime.date()
 
-        self.assertFalse(HourStatistics.objects.exists())
-        dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
-        self.assertEqual(HourStatistics.objects.count(), 1)
+        ElectricityConsumption.objects.create(
+            read_at=target_datetime,
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=1,
+            currently_returned=2,
+        )
 
-        stats = HourStatistics.objects.get()
-        self.assertEqual(stats.gas, Decimal('0.509'))
+        dsmr_stats.services.analyze()
+        self.assertFalse(create_statistics_mock.called)  # Blocked
 
-    def test_create_hourly_gas_statistics_dsmr5(self):
+    @mock.patch('dsmr_stats.services.create_statistics')
+    @mock.patch('dsmr_stats.services.is_data_available')
+    @mock.patch('dsmr_stats.services.get_next_day_to_generate')
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_okay_with_gas(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock,
+                                   create_statistics_mock):
         if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
             return self.skipTest('No gas')
 
-        day_start = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0))
-        self.assertFalse(HourStatistics.objects.exists())
-        dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
+        is_data_available_mock.return_value = True
+        target_datetime = timezone.now() - timezone.timedelta(days=1)
+        get_next_day_to_generate_mock.return_value = target_datetime.date()
+
+        ElectricityConsumption.objects.create(
+            read_at=target_datetime,
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=1,
+            currently_returned=2,
+        )
+
+        GasConsumption.objects.create(
+            read_at=target_datetime + timezone.timedelta(days=1),  # Trigger to pass
+            delivered=1,
+            currently_delivered=2
+        )
+
+        dsmr_stats.services.analyze()
+        self.assertTrue(create_statistics_mock.called)
+
+    def test_create_hourly_statistics_dsmr_v4_gas(self):
+        hour_start = timezone.make_aware(timezone.datetime(2010, 1, 1, hour=12))
+        ec_kwargs = {
+            'delivered_1': 0,
+            'returned_1': 0,
+            'delivered_2': 0,
+            'returned_2': 0,
+            'currently_delivered': 0,
+            'currently_returned': 0,
+        }
+        ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
+        GasConsumption.objects.create(read_at=hour_start, delivered=5, currently_delivered=1)
+
+        self.assertEqual(HourStatistics.objects.count(), 0)
+        dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
         self.assertEqual(HourStatistics.objects.count(), 1)
+        self.assertEqual(HourStatistics.objects.all()[0].gas, 1)
 
-        stats = HourStatistics.objects.get()
-        self.assertEqual(stats.gas, Decimal('0.125'))
+    def test_create_hourly_statistics_dsmr_v5_gas(self):
+        hour_start = timezone.make_aware(timezone.datetime(2010, 1, 1, hour=12))
+        ec_kwargs = {
+            'delivered_1': 0,
+            'returned_1': 0,
+            'delivered_2': 0,
+            'returned_2': 0,
+            'currently_delivered': 0,
+            'currently_returned': 0,
+        }
+        ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
+        GasConsumption.objects.create(read_at=hour_start, delivered=5, currently_delivered=0)
+        GasConsumption.objects.create(
+            read_at=hour_start + timezone.timedelta(minutes=15), delivered=7, currently_delivered=1
+        )
 
-    def test_create_hourly_statistics_integrity(self):
+        self.assertEqual(HourStatistics.objects.count(), 0)
+        dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
+        self.assertEqual(HourStatistics.objects.count(), 1)
+        self.assertEqual(HourStatistics.objects.all()[0].gas, 2)
+
+    def test_create_hourly_statistics_exists(self):
         day_start = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=0))
         ec_kwargs = {
             'delivered_1': 0,
@@ -162,7 +267,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         }
         ElectricityConsumption.objects.create(read_at=day_start, **ec_kwargs)
 
-        self.assertFalse(HourStatistics.objects.exists())
+        self.assertEqual(HourStatistics.objects.count(), 0)
         dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
         self.assertEqual(HourStatistics.objects.count(), 1)
 
@@ -235,11 +340,81 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
 
+    @mock.patch('django.utils.timezone.now')
+    def test_hour_statistics_bounds(self, now_mock):
+        """ Test boundaries. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1, 12))
+        default_kwargs = dict(
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0
+        )
+        ElectricityConsumption.objects.all().delete()
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=0,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=58),
+            delivered_1=0.58,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=59),
+            delivered_1=0.59,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=60),
+            delivered_1=0.60,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=61),
+            delivered_1=0.61,
+            **default_kwargs
+        )
+        dsmr_stats.services.create_statistics(target_day=timezone.now().date())
+        self.assertEqual(HourStatistics.objects.all().count(), 3)  # First hour is empty.
+
+        # Fix for #766, hours should include the last second/minute as well.
+        self.assertEqual(HourStatistics.objects.get(
+            hour_start=timezone.now() - timezone.timedelta(hours=1)  # 11:00 CET
+        ).electricity1, Decimal('0.0'))
+
+        self.assertEqual(HourStatistics.objects.get(
+            hour_start=timezone.now() - timezone.timedelta(hours=0)  # 12:00 CET
+        ).electricity1, Decimal('0.60'))
+
+        self.assertEqual(HourStatistics.objects.get(
+            hour_start=timezone.now() + timezone.timedelta(hours=1)  # 13:00 CET
+        ).electricity1, Decimal('0.01'))
+
+    @mock.patch('django.core.cache.cache.clear')
+    @mock.patch('dsmr_stats.services.create_daily_statistics')
+    @mock.patch('dsmr_stats.services.create_hourly_statistics')
+    @mock.patch('django.utils.timezone.now')
+    def test_create_statistics_hours_per_day_cet_cest(self, now_mock, hourly_mock, daily_mock, cache_mock):
+        """ Transitions to and from DST affect the number of hours logged of a day. Check it. """
+        # CET > CEST
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 29))
+        dsmr_stats.services.create_statistics(timezone.now().date())
+        self.assertEqual(hourly_mock.call_count, 23)
+        hourly_mock.reset_mock()
+
+        # CEST > CET
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 10, 25))
+        dsmr_stats.services.create_statistics(timezone.now().date())
+        self.assertEqual(hourly_mock.call_count, 25)
+
     @mock.patch('django.core.cache.cache.clear')
     @mock.patch('django.utils.timezone.now')
-    def test_analyze_service_clear_cache(self, now_mock, clear_cache_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=2))
-        dsmr_stats.services.analyze()
+    def test_create_statistics_clear_cache(self, now_mock, clear_cache_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 15))
+        dsmr_stats.services.create_statistics(target_day=timezone.now().date())
         self.assertTrue(clear_cache_mock.called)
 
     @mock.patch('django.utils.timezone.now')

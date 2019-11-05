@@ -12,7 +12,7 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
-    """ Test Kaifa DSMR v4.2, without gas support. """
+    """ Kaifa DSMR v4.2, without gas support. """
 
     def _dsmr_dummy_data(self):
         return [

@@ -11,7 +11,7 @@ logger = logging.getLogger('commands')
 
 class ScheduledProcessManager(models.Manager):
     def ready(self):
-        return self.get_queryset().filter(planned__lte=timezone.now())
+        return self.get_queryset().filter(planned__lte=timezone.now(), active=True)
 
 
 class ScheduledProcess(models.Model):
@@ -19,7 +19,8 @@ class ScheduledProcess(models.Model):
     objects = ScheduledProcessManager()
     name = models.CharField(max_length=64)
     module = models.CharField(max_length=128, unique=True)
-    planned = models.DateTimeField(default=timezone.now)
+    planned = models.DateTimeField(default=timezone.now, db_index=True)
+    active = models.BooleanField(default=True, db_index=True)
 
     def execute(self):
         # Import the first part of the path, execute the last bit later.
@@ -33,13 +34,13 @@ class ScheduledProcess(models.Model):
 
     def delay(self, delta):
         """ Delays the next call by the given delta. """
-        logger.debug('Rescheduling %s with: %s', self.module, delta)
         self.planned = timezone.now() + delta
         self.save(update_fields=['planned'])
+        logger.debug('SP: Rescheduled %s (+ %s), next run planned at: %s', self.module, delta, self.planned)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions = []
         verbose_name = _('Scheduled process')

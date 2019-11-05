@@ -36,8 +36,7 @@ workflows:
             - test-python35
             - test-python36
             - test-python37
-### Fails (Sept '19): TypeError: decoding to str: need a bytes-like object, Context found
-###            - test-python38rc
+            - test-python38
 
 
 # Dummy vars, used for anchors.
@@ -159,10 +158,10 @@ jobs:
              - image: *postgresql-image
                environment: *postgresql-db-env
 
-    test-python38rc:
+    test-python38:
          <<: *base-job
          docker:
-             - image: circleci/python:3.8-rc-buster
+             - image: circleci/python:3.8-buster
                environment: *django-config-env
 
              - image: *mysql-image

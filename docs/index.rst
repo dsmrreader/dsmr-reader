@@ -5,10 +5,13 @@ DSMR Reader's documentation
    :maxdepth: 1
 
    intro
+   changelog
    requirements
    data_integrity
+   troubleshooting
 
    installation
+   installation/restore
    installation/datalogger
    installation/quick
    installation/explained
@@ -40,12 +43,14 @@ DSMR Reader's documentation
 
    settings
    api
+   mqtt
    plugins
    development
 
    faq
-   troubleshooting
-   changelog
+   faq/update
+   faq/database
+   faq/uninstall
    contributing
    credits
    donations

@@ -12,92 +12,95 @@ from django.utils import timezone
 from django.conf import settings
 
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
-from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.reading import DsmrReading
-import dsmr_consumption.services
 import dsmr_backend.services.backend
+import dsmr_consumption.services
 
 
 logger = logging.getLogger('commands')
 
 
-def analyze():  # noqa: C901
-    """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
+def is_data_available():
+    """ Checks whether data is available for stats. """
+    return ElectricityConsumption.objects.all().exists()
+
+
+def get_next_day_to_generate():
+    """ Returns the next day to generate statistics for. """
     try:
-        # Determine the starting date used to construct new statistics.
-        day_statistic = DayStatistics.objects.all().order_by('-day')[0]
+        # By default just take the previous day we have statistics for.
+        latest_day = DayStatistics.objects.all().order_by('-day')[0].day
     except IndexError:
-        try:
-            # This will happen either the first time or when all statistics were flushed manually.
-            first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]
-        except IndexError:
-            # Well, it seems we don't have any consumption logged (yet) at all.
-            return
+        # Beginning of time.
+        read_at = ElectricityConsumption.objects.all().order_by('read_at')[0].read_at
+        return timezone.localtime(read_at).date()
 
-        # We should use the day before the first consumption.
-        read_at = timezone.localtime(first_consumption.read_at)
-        latest_statistics_day = read_at.date()
-    else:
-        # As we'll be searching starting on this day, make sure to select the next one.
-        latest_statistics_day = timezone.make_aware(timezone.datetime(
-            year=day_statistic.day.year,
-            month=day_statistic.day.month,
-            day=day_statistic.day.day,
-        )) + timezone.timedelta(days=1)
-
-    # Localize, as we do not want to use UTC as day boundary.
-    search_start = timezone.make_aware(timezone.datetime(
-        year=latest_statistics_day.year,
-        month=latest_statistics_day.month,
-        day=latest_statistics_day.day,
-    ))
+    # Search for the next day with any consumption.
+    next_day = latest_day + timezone.timedelta(days=1)
+    search_start = timezone.datetime.combine(next_day, timezone.datetime.min.time())
+    search_start = timezone.make_aware(search_start)
 
     try:
-        # Find the first day of consumptions available. If any.
-        consumption_found = ElectricityConsumption.objects.filter(
+        next_consumption = ElectricityConsumption.objects.filter(
             read_at__gt=search_start
         ).order_by('read_at')[0]
     except IndexError:
-        # Happens when no data is available yet.
+        # Last resort.
+        return next_day
+
+    return timezone.localtime(next_consumption.read_at).date()
+
+
+def analyze():
+    """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
+    if not is_data_available():
+        logger.debug('Stats: No data available')
         return
 
-    consumption_date = timezone.localtime(consumption_found.read_at).date()
     now = timezone.localtime(timezone.now())
+    target_day = get_next_day_to_generate()
+    next_day = target_day + timezone.timedelta(days=1)
 
-    # Skip today, try again tomorrow. As we need a full day to pass first.
-    if consumption_date == now.date():
-        return
+    # Skip current day, wait until midnight.
+    if target_day >= now.date():
+        return logger.debug('Stats: Waiting for day to pass: %s', target_day)
 
-    # Do not create status until we've passed the next day by a margin. Required due to delayed gas update by meters.
-    if dsmr_backend.services.backend.get_capabilities(capability='gas') and now.time() < time(hour=1, minute=15):
-        # Skip for a moment.
-        return
+    # All readings of the day must be processed.
+    unprocessed_readings = DsmrReading.objects.unprocessed().filter(timestamp__date=target_day).exists()
 
-    day_start = timezone.make_aware(timezone.datetime(
-        year=consumption_date.year,
-        month=consumption_date.month,
-        day=consumption_date.day,
+    if unprocessed_readings:
+        return logger.debug('Stats: Found unprocessed readings for: %s', target_day)
+
+    # Ensure we have any consumption.
+    consumption_found = ElectricityConsumption.objects.filter(read_at__date=target_day).exists()
+
+    if not consumption_found:
+        return logger.debug('Stats: Missing consumption data for: %s', target_day)
+
+    # If we support gas, make sure we've received a gas reading on the next day (or later).
+    if dsmr_backend.services.backend.get_capabilities(capability='gas') and \
+            not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
+        return logger.debug('Stats: Waiting for first gas reading on the next day...')
+
+    create_statistics(target_day=target_day)
+
+
+def create_statistics(target_day):
+    start_of_day = timezone.make_aware(timezone.datetime(
+        year=target_day.year,
+        month=target_day.month,
+        day=target_day.day,
         hour=0,
     ))
 
-    # Also, make sure we have processed all readings from that day.
-    day_processed = not DsmrReading.objects.unprocessed().filter(
-        timestamp__gte=day_start,
-        timestamp__lte=day_start + timezone.timedelta(hours=24),
-    ).exists()
-
-    if not day_processed:
-        return
-
-    # For backend logging in Supervisor.
-    logger.debug(' - Creating day & hour statistics for: %s', day_start)
-
     with transaction.atomic():
-        # One day at a time to prevent backend blocking. Flushed statistics will be regenerated quickly anyway.
-        create_daily_statistics(day=consumption_date)
+        # One day at a time to prevent backend blocking.
+        create_daily_statistics(day=target_day)
+        hours_in_day = dsmr_backend.services.backend.hours_in_day(day=target_day)
 
-        for current_hour in range(0, 24 + 1):  # Current day + midnight of next day.
-            hour_start = day_start + timezone.timedelta(hours=current_hour)
+        for current_hour in range(0, hours_in_day):
+            hour_start = start_of_day + timezone.timedelta(hours=current_hour)
             create_hourly_statistics(hour_start=hour_start)
 
     # Reflect changes in cache.
@@ -106,6 +109,7 @@ def analyze():  # noqa: C901
 
 def create_daily_statistics(day):
     """ Calculates and persists both electricity and gas statistics for a day. Daily. """
+    logger.debug('Stats: Creating day statistics for: %s', day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
     return DayStatistics.objects.create(
@@ -130,6 +134,7 @@ def create_daily_statistics(day):
 
 def create_hourly_statistics(hour_start):
     """ Calculates and persists both electricity and gas statistics for a day. Hourly. """
+    logger.debug('Stats: Creating hour statistics for: %s', hour_start)
     hour_end = hour_start + timezone.timedelta(hours=1)
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
         start=hour_start, end=hour_end
@@ -143,7 +148,7 @@ def create_hourly_statistics(hour_start):
     }
 
     if HourStatistics.objects.filter(**creation_kwargs).exists():
-        return
+        return logger.debug('Stats: Skipping duplicate hour statistics for: %s', hour_start)
 
     electricity_start = electricity_readings[0]
     electricity_end = electricity_readings[electricity_readings.count() - 1]

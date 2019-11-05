@@ -16,7 +16,7 @@ echo "OK"
 
 echo ""
 echo "--- Testing with SQLite (4 processes)..."
-pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test.sqlite -n 4
+pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test.sqlite -n 2
 
 
 echo ""

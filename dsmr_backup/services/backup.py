@@ -202,11 +202,8 @@ def on_backup_failed(process_handle):
     error_message = process_handle.stderr.read()
     logger.critical(' - Unexpected exit code (%s) for backup: %s', process_handle.returncode, error_message)
 
-    current_date = formats.date_format(
-        timezone.localtime(timezone.now()).date()
-    )
     dsmr_frontend.services.display_dashboard_message(message=_(
-        'Backup creation failed at {}, please check the dsmr_backend logfile.'.format(current_date)
+        'Backup creation failed, please check the dsmr_backend logfile.'
     ))
 
     raise IOError(error_message)

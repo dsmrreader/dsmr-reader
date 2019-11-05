@@ -27,7 +27,7 @@ def should_export():
 def schedule_next_export():
     """ Schedules the next export, according to user preference. """
     next_export = get_next_export()
-    logger.debug(' - PVOutput | Delaying the next export until: %s', timezone.localtime(next_export))
+    logger.debug('PVOutput:  Delaying the next export until: %s', timezone.localtime(next_export))
 
     status_settings = PVOutputAddStatusSettings.get_solo()
     status_settings.next_export = next_export
@@ -112,7 +112,7 @@ def export():
     if status_settings.processing_delay:
         data.update({'delay': status_settings.processing_delay})
 
-    logger.debug(' - PVOutput | Uploading data: %s', data)
+    logger.debug('PVOutput: Uploading data: %s', data)
     pvoutput_upload.send_robust(None, data=data)
 
     response = requests.post(

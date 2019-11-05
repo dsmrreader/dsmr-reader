@@ -11,6 +11,18 @@ class BackendSettings(SingletonModel):
         choices=settings.LANGUAGES,
         verbose_name=_('The language used in backend processes'),
     )
+    automatic_update_checker = models.BooleanField(
+        default=True,
+        verbose_name=_('Automatically check for updates'),
+        help_text=_('Whether the application checks once in a while for new DSMR-reader release in Github'),
+    )
+
+    def __str__(self):
+        return self._meta.verbose_name.title()
+
+    class Meta:
+        default_permissions = tuple()
+        verbose_name = _('Backend configuration')
 
 
 class EmailSettings(SingletonModel):

@@ -30,7 +30,7 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
             "\r\n",
             "1-3:0.2.8(42)\r\n",
             "0-0:1.0.0(160303164347W)\r\n",
-            "0-0:96.1.1(*******************************)\r\n",
+            "0-0:96.1.1(12345678901234567890123456789012)\r\n",
             "1-0:1.8.1(001073.079*kWh)\r\n",
             "1-0:1.8.2(001263.199*kWh)\r\n",
             "1-0:2.8.1(000000.000*kWh)\r\n",
@@ -48,7 +48,7 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
             "1-0:31.7.0(000*A)\r\n",
             "1-0:21.7.0(00.143*kW)\r\n",
             "1-0:22.7.0(00.000*kW)\r\n",
-            "!A97E\n",
+            "!4BC6\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -101,7 +101,7 @@ class TestDataloggerCrcError(InterceptStdoutMixin, TestCase):
             "\r\n",
             "1-3:0.2.8(42)\r\n",
             "0-0:1.0.0(160303164347W)\r\n",
-            "0-0:96.1.1(*******************************)\r\n",
+            "0-0:96.1.1(12345678901234567890123456789012)\r\n",
             "1-0:1.8.1(001073.079*kWh)\r\n",
             "1-0:1.8.2(001263.199*kWh)\r\n",
             "1-0:2.8.1(000000.000*kWh)\r\n",
@@ -272,14 +272,13 @@ class TestFutureTelegrams(InterceptStdoutMixin, TestCase):
             "0-1:96.1.0(xxxxxxxxxxxxx)\r\n",
             "0-1:24.2.1(170102120000W)(00845.206*m3)\r\n",  # <<< +1 day and some.
             "0-1:24.4.0(1)\r\n",
-            "!XXXX\n",
+            "!2998\n",
         ]
 
     @mock.patch('django.utils.timezone.now')
     @mock.patch('serial.Serial.open')
     @mock.patch('serial.Serial.readline')
-    @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')  # Disable this, as it WILL fail.
-    def test_discard_telegram_with_future_timestamp(self, _, serial_readline_mock, serial_open_mock, now_mock):
+    def test_discard_telegram_with_future_timestamp(self, serial_readline_mock, serial_open_mock, now_mock):
         """ Telegrams with timestamps in the (far) future should be rejected. """
         serial_open_mock.return_value = None
         serial_readline_mock.side_effect = self._dsmr_dummy_data()

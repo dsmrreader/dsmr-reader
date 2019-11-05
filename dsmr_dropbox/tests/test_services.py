@@ -42,13 +42,15 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_dropbox.services.sync()
         self.assertTrue(sync_file_mock.called)
 
+    @mock.patch('dsmr_dropbox.services.list_files_in_dir')
     @mock.patch('dsmr_dropbox.services.sync_file')
     @mock.patch('dsmr_dropbox.services.should_sync_file')
     @mock.patch('dropbox.Dropbox.files_get_metadata')
     @mock.patch('django.utils.timezone.now')
-    def test_sync(self, now_mock, _, should_mock, sync_file_mock):
+    def test_sync(self, now_mock, _, should_mock, sync_file_mock, list_files_in_dir_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-        should_mock.side_effect = [False, True, True, True, True, True, True, True, True, True, True]  # Both branches.
+        should_mock.side_effect = [False, True]  # Both branches.
+        list_files_in_dir_mock.return_value = ['/tmp/fake1', '/tmp/fake2']
 
         old_next_sync = timezone.now() - timezone.timedelta(weeks=1)
         DropboxSettings.objects.all().update(next_sync=old_next_sync)

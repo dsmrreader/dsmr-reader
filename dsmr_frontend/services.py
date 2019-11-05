@@ -2,6 +2,8 @@ import struct
 
 from django.utils import translation
 from django.utils.translation import ugettext as _
+from django.utils import formats
+from django.utils import timezone
 
 from dsmr_frontend.models.message import Notification
 
@@ -27,6 +29,13 @@ def get_translated_string(text, language='nl'):
     return translated_text
 
 
-def display_dashboard_message(message):
-    """ Displays a message on the dashboard, but prevents any UNREAD duplicates. """
-    Notification.objects.get_or_create(message=message, read=False)
+def display_dashboard_message(message, redirect_to=None):
+    """ Displays a message with today's date on the dashboard, but prevents any UNREAD duplicates. """
+    today = formats.date_format(
+        timezone.localtime(timezone.now()).date()
+    )
+    Notification.objects.get_or_create(
+        message='{}: {}'.format(today, message),
+        redirect_to=redirect_to,
+        read=False
+    )

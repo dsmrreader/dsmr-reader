@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-16 20:43+0200\n"
+"POT-Creation-Date: 2019-10-24 22:41+0200\n"
 "PO-Revision-Date: 2018-10-16 18:16+0200\n"
 "Last-Translator: \n"
 "Language: nl_NL\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
+"Generated-By: Babel 2.7.0\n"
 
 #: ../../admin/datalogger.rst:2
 msgid "Admin: Datalogger"
@@ -36,7 +36,11 @@ msgstr ""
 "(v4/v5) is prima in de meeste gevallen voor recent geplaatste slimme "
 "meters."
 
-#: ../../admin/datalogger.rst:12
+#: ../../admin/datalogger.rst:13
+msgid "Data cleanup/retention"
+msgstr ""
+
+#: ../../admin/datalogger.rst:15
 msgid ""
 "By default all DSMR-readings read by of sent to the application are "
 "stored indefinitely. DSMR v5 smart meters allow DSMR-readings to be "
@@ -47,7 +51,7 @@ msgstr ""
 "dat er elke seconde een meting gedaan wordt, waardoor er tot meer dan 30 "
 "miljoen metingen per jaar opgeslagen worden."
 
-#: ../../admin/datalogger.rst:15
+#: ../../admin/datalogger.rst:18
 msgid ""
 "Eventually this **will cause degraded performance** in the "
 "application/database and for that reason you might want to apply "
@@ -61,21 +65,21 @@ msgstr ""
 "alle metingen weg**, want **van elk uur wordt de eerste en laatste meting"
 " bewaard**."
 
-#: ../../admin/datalogger.rst:25
+#: ../../admin/datalogger.rst:28
 msgid "Notes / warnings"
 msgstr "Opmerkingen / waarschuwingen"
 
-#: ../../admin/datalogger.rst:26
+#: ../../admin/datalogger.rst:29
+#, fuzzy
 msgid ""
-"The application will **slowly** apply retention **during night**, "
-"cleaning up a maximum of 24 hours worth of data on each backend run "
-"executed."
+"The application will **slowly** apply retention, cleaning up a maximum of"
+" 24 hours worth of data on each backend run executed."
 msgstr ""
 "Let op: De applicatie zal **langzaam** dataretentie toepassen **tijdens "
 "de nacht**, waarbij er telkens maximaal 24 uur aan gegevens wordt "
 "opgeschoond."
 
-#: ../../admin/datalogger.rst:28
+#: ../../admin/datalogger.rst:31
 msgid ""
 "Enabling retention will prevent you from regenerating past day statistics"
 " with different prices (due to loss of accuracy)."
@@ -84,7 +88,7 @@ msgstr ""
 " niet opnieuw kan hergenereren met een andere prijs (door verlies van "
 "nauwkeurigheid)."
 
-#: ../../admin/datalogger.rst:30
+#: ../../admin/datalogger.rst:33
 msgid ""
 "PostgreSQL does not free up unused disk space immediately. If you've "
 "enabled retention for the first time, make sure to run the following "
@@ -94,7 +98,7 @@ msgstr ""
 "voor het eerst retentie hebt ingeschakeld, zorg er voor dat je na een "
 "aantal dagen het volgende ten minste één keer uitvoert::"
 
-#: ../../admin/datalogger.rst:39
+#: ../../admin/datalogger.rst:42
 msgid ""
 "Historic data, such as Hour and Day Statistics are unaffected. These are "
 "aggregated from the Electricity & Gas Consumption data above. This is "
@@ -106,3 +110,4 @@ msgstr ""
 " en zijn tevens de enige belangrijke data die er voor de lange termijn "
 "toe doen. Bijvoorbeeld wanneer je terug wilt kijken naar een specifieke "
 "dag, maand of jaar."
+

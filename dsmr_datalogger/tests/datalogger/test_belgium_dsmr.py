@@ -13,18 +13,17 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
-    """ Test Iskra meter, unknown DSMR version. """
+    """ Belgium Fluvius meter. """
     def setUp(self):
-        datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2
-        datalogger_settings.save()
+        DataloggerSettings.get_solo()
+        DataloggerSettings.objects.all().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
 
     def _dsmr_dummy_data(self):
         return [
             "/FLU5\253769484_A\r\n",
             "\r\n",
             "0-0:96.1.4(50213)\r\n",
-            "0-0:96.1.1(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
+            "0-0:96.1.1(12345678901234567890123456789012)\r\n",
             "0-0:1.0.0(190821210025S)\r\n",
             "1-0:1.8.1(000260.129*kWh)\r\n",
             "1-0:1.8.2(000338.681*kWh)\r\n",
@@ -44,10 +43,10 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "1-0:31.4.0(999*A)\r\n",
             "0-0:96.13.0()\r\n",
             "0-1:24.1.0(003)\r\n",
-            "0-1:96.1.1(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
+            "0-1:96.1.1(12345678901234567890123456789012)\r\n",
             "0-1:24.4.0(1)\r\n",
             "0-1:24.2.3(190821210011S)(00029.553*m3)\r\n",
-            "!BE13"
+            "!EF8E"
         ]
 
     @mock.patch('serial.Serial.open')
@@ -70,7 +69,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_reading_values(self, now_mock):
         """ Test whether dsmr_datalogger reads the correct values. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2019, 8, 21, hour=22))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()

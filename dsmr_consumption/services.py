@@ -8,6 +8,7 @@ from django.db.models import Avg, Min, Max, Count
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
 
+from dsmr_consumption.exceptions import CompactorNotReadyError
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -15,6 +16,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.statistics import MeterStatistics
+import dsmr_backend.services.backend
 
 
 logger = logging.getLogger('commands')
@@ -23,7 +25,11 @@ logger = logging.getLogger('commands')
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
     for current_reading in DsmrReading.objects.unprocessed()[0:1024]:
-        compact(dsmr_reading=current_reading)
+        try:
+            compact(dsmr_reading=current_reading)
+        except CompactorNotReadyError:
+            # Try again next run, no use in retrying anyway.
+            return
 
 
 def compact(dsmr_reading):
@@ -46,7 +52,8 @@ def compact(dsmr_reading):
 
         # Postpone until the minute has passed on the system time. And when there are (new) readings beyond this minute.
         if not system_time_past_minute or not reading_past_minute_exists:
-            return
+            logger.debug('Compact: Waiting for newer readings before grouping data...')
+            raise CompactorNotReadyError()
 
     # Create consumption records.
     _compact_electricity(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)
@@ -56,7 +63,7 @@ def compact(dsmr_reading):
     dsmr_reading.save(update_fields=['processed'])
 
     # For backend logging in Supervisor.
-    logger.debug(' - Processed reading: %s', dsmr_reading)
+    logger.debug('Compact: Processed reading: %s', dsmr_reading)
 
 
 def _compact_electricity(dsmr_reading, grouping_type, reading_start):
@@ -185,11 +192,11 @@ def _compact_gas(dsmr_reading, grouping_type, **kwargs):
 def consumption_by_range(start, end):
     """ Calculates the consumption of a range specified. """
     electricity_readings = ElectricityConsumption.objects.filter(
-        read_at__gte=start, read_at__lt=end,
+        read_at__gte=start, read_at__lte=end,
     ).order_by('read_at')
 
     gas_readings = GasConsumption.objects.filter(
-        read_at__gte=start, read_at__lt=end,
+        read_at__gte=start, read_at__lte=end,
     ).order_by('read_at')
 
     return electricity_readings, gas_readings
@@ -200,8 +207,9 @@ def day_consumption(day):
     consumption = {
         'day': day
     }
+    hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
     day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
-    day_end = day_start + timezone.timedelta(days=1)
+    day_end = day_start + timezone.timedelta(hours=hours_in_day)
     daily_energy_price = get_day_prices(day=day)
 
     electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)

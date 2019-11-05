@@ -66,15 +66,6 @@ Raise this value if you have a lot of readings to clean up and it takes too long
 Defaults to ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``.
 
 
-``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Sets the maximum hour of the day that retention will run. 
-Retention always starts after midnight, when enabled.
-I.e.: changing it to ``8`` will prevent new retention runs after 8 A.M.
-
-Defaults to ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``.
-
-
 ``DSMRREADER_PLUGINS``
 ~~~~~~~~~~~~~~~~~~~~~~
 :doc:`More information about this feature can be found here<plugins>`.

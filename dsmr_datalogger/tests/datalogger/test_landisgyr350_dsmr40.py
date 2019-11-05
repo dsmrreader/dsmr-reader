@@ -12,13 +12,13 @@ from dsmr_datalogger.models.settings import DataloggerSettings
 
 
 class TestDatalogger(InterceptStdoutMixin, TestCase):
-    """ Test Landis+Gyr 350 DSMR v4.0. """
+    """ Landis+Gyr 350 DSMR v4.0. """
     def _dsmr_dummy_data(self):
         return [
             "/XMX5LGBBFFB123456789\r\n",
             "\r\n",
             "1-3:0.2.8(40)\r\n",
-            "0-0:1.0.0(151110192959W)\r\n",
+            "0-0:1.0.0(150701192959S)\r\n",
             "0-0:96.1.1(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "1-0:1.8.1(000510.747*kWh)\r\n",
             "1-0:2.8.1(000000.123*kWh)\r\n",
@@ -51,9 +51,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "1-0:62.7.0(00.999*kW)\r\n",
             "0-1:24.1.0(003)\r\n",
             "0-1:96.1.0(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
-            "0-1:24.2.1(151110190000W)(00845.206*m3)\r\n",
+            "0-1:24.2.1(150701190000s)(00845.206*m3)\r\n",
             "0-1:24.4.0(1)\r\n",
-            "!4038\n",
+            "!3F13\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -79,14 +79,14 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(reading.timestamp, datetime(2015, 11, 10, 18, 29, 59, tzinfo=pytz.UTC))
+        self.assertEqual(reading.timestamp, datetime(2015, 7, 1, 17, 29, 59, tzinfo=pytz.UTC))
         self.assertEqual(reading.electricity_delivered_1, Decimal('510.747'))
         self.assertEqual(reading.electricity_returned_1, Decimal('0.123'))
         self.assertEqual(reading.electricity_delivered_2, Decimal('500.013'))
         self.assertEqual(reading.electricity_returned_2, Decimal('123.456'))
         self.assertEqual(reading.electricity_currently_delivered, Decimal('0.192'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0.123'))
-        self.assertEqual(reading.extra_device_timestamp, datetime(2015, 11, 10, 18, 0, 0, tzinfo=pytz.UTC))
+        self.assertEqual(reading.extra_device_timestamp, datetime(2015, 7, 1, 17, 0, 0, tzinfo=pytz.UTC))
         self.assertEqual(reading.extra_device_delivered, Decimal('845.206'))
         self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.123'))
         self.assertEqual(reading.phase_currently_delivered_l2, Decimal('0.456'))

@@ -1,7 +1,12 @@
+import logging
+
 from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _
 
 import dsmr_backend.signals
+
+
+logger = logging.getLogger('commands')
 
 
 class WeatherAppConfig(AppConfig):
@@ -17,4 +22,5 @@ class WeatherAppConfig(AppConfig):
     def _on_backend_called_signal(self, sender, **kwargs):
         # Import below prevents an AppRegistryNotReady error on Django init.
         import dsmr_weather.services
+
         dsmr_weather.services.read_weather()

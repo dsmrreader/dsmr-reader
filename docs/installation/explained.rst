@@ -15,7 +15,7 @@ Installation: Explained
 
 The application stores by default all readings taken from the serial cable.
 There is support for **PostgreSQL**, and there used to be support for **MySQL/MariaDB** as well.
-The latter is currently deprecated by this project and support will be discontinued in a future release. 
+The latter is currently deprecated by this project and support will be removed in DSMR-reader v3.x.
 
 Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv installation later in this guide.
 
@@ -31,8 +31,7 @@ Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv
       Error: could not create default cluster. Please create it manually with
     
       pg_createcluster 9.4 main --start
- 
-    
+
     Try: ``dpkg-reconfigure locales``. 
     
     Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
@@ -51,62 +50,6 @@ Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv
 - Set password for database user::
 
     sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
-
-.. note::
-
-    **Optional**: Do you need to restore a **PostgreSQL** database backup as well?
-    
-    Restore an uncompressed (``.sql``) backup with::
-    
-        sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
-
-    Or restore a compressed (``.gz``) backup with::
-    
-        zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
-
-Now continue at chapter 2 below (Dependencies).
-
-(Legacy) MySQL/MariaDB
-^^^^^^^^^^^^^^^^^^^^^^
-.. warning::
-
-    Support for the MySQL database backend is deprecated and will be removed in a later release.
-    Please use a PostgreSQL database instead. Users already running MySQL will be supported in migrating at a later moment.
-    
-Install MariaDB. You can also choose to install the closed source MySQL, as they should be interchangeable anyway. 
-``libmysqlclient-dev`` is required for the virtualenv installation later in this guide.
-
-- Install database::
-
-    sudo apt-get install -y mariadb-server-10.0 libmysqlclient-dev
-
-- Create database::
-
-    sudo mysqladmin --defaults-file=/etc/mysql/debian.cnf create dsmrreader
-
-- Create database user::
-
-    echo "CREATE USER 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
-
-- Set privileges for database user::
-
-    echo "GRANT ALL ON dsmrreader.* TO 'dsmrreader'@'localhost';" | sudo mysql --defaults-file=/etc/mysql/debian.cnf -v
-
-- Flush privileges to activate them::
-
-    sudo mysqladmin --defaults-file=/etc/mysql/debian.cnf reload
-
-.. note::
-
-    **Optional**: Do you need to restore a **MySQL** database backup as well?
-    
-    Restore an uncompressed (``.sql``) backup with::
-    
-        cat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
-
-    Or restore a compressed (``.gz``) backup with::
-    
-        zcat <PATH-TO-MYSQL-BACKUP.sql.gz> | sudo mysql --defaults-file=/etc/mysql/debian.cnf -D dsmrreader
 
 
 2. Dependencies
@@ -241,9 +184,7 @@ The ``base.txt`` contains requirements which the application needs anyway, no ma
 
     **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
-PostgreSQL
-^^^^^^^^^^
-- Did you choose PostgreSQL? Then execute these two lines::
+Install dependencies::
 
     cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
 
@@ -253,23 +194,16 @@ PostgreSQL
 Did everything install without fatal errors? If the database client refuses to install due to missing files/configs, 
 make sure you've installed ``postgresql-server-dev-all`` earlier in the process, when you installed the database server itself.
 
-Continue to chapter 8 (Bootstrapping).
 
-(Legacy) MySQL/MariaDB
-^^^^^^^^^^^^^^^^^^^^^^
+Optional: Restore a database backup
+-----------------------------------
+
 .. warning::
 
-    Support for the MySQL database backend is deprecated and will be removed in a later release.
-    Please use a PostgreSQL database instead. Users already running MySQL will be supported in migrating at a later moment.
+    If you need to restore a database backup with your existing data, this is the moment to do it.
 
-- Or did you choose MySQL/MariaDB? Execute these two commands::
+Restoring a database backup? :doc:`See for instructions here <restore>`.
 
-    cp dsmrreader/provisioning/django/mysql.py dsmrreader/settings.py
-
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/mysql.txt
-
-Did everything install without fatal errors? If the database client refuses to install due to missing files/configs, 
-make sure you've installed ``libmysqlclient-dev`` earlier in the process, when you installed the database server itself.
 
 
 8. Bootstrapping
@@ -320,7 +254,8 @@ Remove the default Nginx vhost (**only when you do not use it yourself, see the 
 
 - Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-enabled/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
+    sudo ln -s /etc/nginx/sites-available/dsmr-webinterface /etc/nginx/sites-enabled/
 
 - Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::
 

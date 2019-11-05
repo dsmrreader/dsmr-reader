@@ -90,4 +90,4 @@ class MQTTBrokerSettings(SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Broker/connection configuration')
+        verbose_name = _('MQTT Broker/connection')

@@ -1,11 +1,35 @@
 from unittest import mock
 
+from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib.admin.sites import site
 
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_backend.models.settings import EmailSettings
+from dsmr_backend.models.settings import BackendSettings, EmailSettings
+
+
+class TestBackendSettings(TestCase):
+    def setUp(self):
+        self.instance = BackendSettings().get_solo()
+
+    def test_admin(self):
+        """ Model should be registered in Django Admin. """
+        self.assertTrue(site.is_registered(BackendSettings))
+
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+
+    def test_handle_backend_settings_update_hook(self):
+        query = ScheduledProcess.objects.filter(
+            module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER,
+            active=True
+        )
+        self.assertTrue(query.exists())
+
+        self.instance.automatic_update_checker = False
+        self.instance.save()
+        self.assertFalse(query.exists())
 
 
 class TestScheduledProcess(TestCase):
@@ -46,7 +70,6 @@ class TestScheduledProcess(TestCase):
 
 
 class EmailSettingsSettings(TestCase):
-    """ Tests for settings defaults. """
     def setUp(self):
         self.instance = EmailSettings().get_solo()
 

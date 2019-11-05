@@ -35,4 +35,4 @@ rejected_telegrams = dsmr/meter-stats/rejected_telegrams
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('MQTT: Meter Statistics (per split topic) configuration')
+        verbose_name = _('(Data source) Meter Statistics: Split topic')

@@ -196,13 +196,13 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
         subprocess_mock.returncode = 0
 
         Notification.objects.all().delete()
-        self.assertFalse(Notification.objects.all().exists())
+        self.assertFalse(Notification.objects.exists())
 
         # Exception should be rainsed and message created.
         with self.assertRaises(IOError):
             dsmr_backup.services.backup.on_backup_failed(process_handle=subprocess_mock)
 
-        self.assertTrue(Notification.objects.all().exists())
+        self.assertTrue(Notification.objects.exists())
 
     @mock.patch('subprocess.Popen')
     @mock.patch('dsmr_backup.services.backup.compress')

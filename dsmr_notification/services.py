@@ -172,7 +172,7 @@ def notify():
         return  # Try again in a next run
 
     # For backend logging in Supervisor.
-    logger.debug(' - Creating new notification containing daily usage.')
+    logger.debug('Notification:  Creating new notification containing daily usage.')
 
     with translation.override(language=BackendSettings.get_solo().language):
         message = create_consumption_message(midnight, stats)
@@ -206,7 +206,7 @@ def check_status():
         )
 
     # Alert!
-    logger.debug(' - Sending notification about datalogger lagging behind...')
+    logger.debug('Notification: Sending notification about datalogger lagging behind...')
 
     with translation.override(language=BackendSettings.get_solo().language):
         send_notification(
