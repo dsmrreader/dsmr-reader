@@ -6,7 +6,7 @@ from django.test.testcases import TestCase
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 
 
-class TestManagementCommand(InterceptStdoutMixin, TestCase):
+class TestCommands(InterceptStdoutMixin, TestCase):
     @override_settings(DEBUG=True)
     def test_clear_consumption(self):
         self._intercept_command_stdout('development_reset')
@@ -19,5 +19,4 @@ class TestManagementCommand(InterceptStdoutMixin, TestCase):
     @override_settings(DEBUG=True)
     def test_update_admin_user(self):
         User.objects.create_superuser('admin', 'root@localhost', 'admin')
-
         self._intercept_command_stdout('development_reset')

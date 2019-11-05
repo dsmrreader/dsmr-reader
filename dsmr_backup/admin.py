@@ -112,11 +112,8 @@ class EmailBackupSettingsAdmin(SingletonModelAdmin):
 
 
 @receiver(django.db.models.signals.post_save, sender=EmailBackupSettings)
-def handle_email_backup_settings_update(sender, instance, created, raw, **kwargs):
+def handle_email_backup_settings_update(sender, instance, **kwargs):
     """ Hook to toggle related scheduled process. """
-    if created or raw:
-        return
-
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
     ).update(active=instance.interval != EmailBackupSettings.INTERVAL_NONE)

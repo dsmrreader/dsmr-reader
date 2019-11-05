@@ -21,15 +21,14 @@ class TestBackendSettings(TestCase):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
     def test_handle_backend_settings_update_hook(self):
-        query = ScheduledProcess.objects.filter(
-            module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER,
-            active=True
-        )
-        self.assertTrue(query.exists())
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER)
+        self.assertTrue(sp.active)
 
         self.instance.automatic_update_checker = False
         self.instance.save()
-        self.assertFalse(query.exists())
+
+        sp.refresh_from_db()
+        self.assertFalse(sp.active)
 
 
 class TestScheduledProcess(TestCase):

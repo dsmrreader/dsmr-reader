@@ -14,7 +14,7 @@ from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 import dsmr_backend.services.backend
 
 
-class TestServices(InterceptStdoutMixin, TestCase):
+class TestBackend(InterceptStdoutMixin, TestCase):
     def test_data_capabilities(self):
         capabilities = dsmr_backend.services.backend.get_capabilities()
         self.assertIn('electricity', capabilities.keys())

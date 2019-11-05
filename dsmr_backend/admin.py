@@ -34,11 +34,8 @@ class BackendSettingsAdmin(SingletonModelAdmin):
 
 
 @receiver(django.db.models.signals.post_save, sender=BackendSettings)
-def handle_backend_settings_update(sender, instance, created, raw, **kwargs):
+def handle_backend_settings_update(sender, instance, **kwargs):
     """ Hook to toggle related scheduled process. """
-    if created or raw:
-        return
-
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
     ).update(active=instance.automatic_update_checker)

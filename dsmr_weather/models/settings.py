@@ -75,15 +75,6 @@ class WeatherSettings(SingletonModel):
             'The weather station used to measure and log outside temperatures. Choose one nearby.'
         )
     )
-    next_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Next sync'),
-        help_text=_(
-            'Timestamp of the next sync. Automatically updated by application.'
-        )
-    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

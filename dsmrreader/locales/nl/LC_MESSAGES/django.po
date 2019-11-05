@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-05 21:56+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -2152,9 +2153,6 @@ msgstr "Buienradar weerstation"
 msgid "The weather station used to measure and log outside temperatures. Choose one nearby."
 msgstr "Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op te slaan. Kies een locatie zo dicht mogelijk bij huis."
 
-msgid "Timestamp of the next sync. Automatically updated by application."
-msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit automatisch bij."
-
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
@@ -2166,6 +2164,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Timestamp of the next sync. Automatically updated by application."
+#~ msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit automatisch bij."
 
 #~ msgid "DSMR version 4/5"
 #~ msgstr "DSMR-versie 4/5"

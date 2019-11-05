@@ -18,6 +18,7 @@ DSMRREADER_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemen
 # Scheduled Process modules.
 DSMRREADER_MODULE_EMAIL_BACKUP = 'dsmr_backup.services.email.run'
 DSMRREADER_MODULE_AUTO_UPDATE_CHECKER = 'dsmr_backend.services.update_checker.run'
+DSMRREADER_MODULE_WEATHER_UPDATE = 'dsmr_weather.services.run'
 
 # Sleep durations for infinity processes. Update these in your own config if you wish to alter them.
 DSMRREADER_BACKEND_SLEEP = 1

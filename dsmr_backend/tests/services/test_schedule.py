@@ -1,13 +1,15 @@
 from unittest import mock
 
 from django.test import TestCase
+from django.utils import timezone
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_backend.models.schedule import ScheduledProcess
+import dsmr_backend.services.schedule
 import dsmr_backend.signals
 
 
-class TestBackend(InterceptStdoutMixin, TestCase):
+class TestSchedule(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backend.signals.backend_called.send_robust')
     @mock.patch('dsmr_backend.services.schedule.execute_scheduled_processes')
     def test_backend_creation_signal(self, exec_mock, signal_mock):
@@ -24,7 +26,6 @@ class TestBackend(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_mindergas.services.export')
     @mock.patch('dsmr_notification.services.notify')
     @mock.patch('dsmr_stats.services.analyze')
-    @mock.patch('dsmr_weather.services.read_weather')
     def test_backend_creation_signal_receivers(self, *mocks):
         """ Test whether outgoing signal is received. """
         for current in mocks:
@@ -83,3 +84,15 @@ class TestBackend(InterceptStdoutMixin, TestCase):
 
         self.assertTrue(execute_mock.called)
         self.assertTrue(logging_mock.called)
+
+    @mock.patch('dsmr_backup.services.email.run')
+    @mock.patch('dsmr_backend.services.update_checker.run')
+    @mock.patch('dsmr_weather.services.run')
+    def test_scheduled_processes_modules(self, *mocks):
+        """ Verify the number of processes and that their module is called. """
+        ScheduledProcess.objects.all().update(active=True, planned=timezone.now())
+        self.assertEqual(ScheduledProcess.objects.all().count(), 3)
+        self.assertFalse(any([x.called for x in mocks]))
+
+        dsmr_backend.services.schedule.execute_scheduled_processes()
+        self.assertTrue(all([x.called for x in mocks]))

@@ -32,4 +32,4 @@ def execute_scheduled_processes():
             logger.exception(error)
 
             # Do not hammer.
-            current.delay(timezone.timedelta(seconds=10))
+            current.delay(timezone.timedelta(seconds=30))

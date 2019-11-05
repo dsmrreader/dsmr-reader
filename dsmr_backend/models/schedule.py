@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.db import models
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
 logger = logging.getLogger('commands')
 
@@ -14,7 +15,7 @@ class ScheduledProcessManager(models.Manager):
         return self.get_queryset().filter(planned__lte=timezone.now(), active=True)
 
 
-class ScheduledProcess(models.Model):
+class ScheduledProcess(ModelUpdateMixin, models.Model):
     """ A scheduled process, not to be executed before the planned moment. """
     objects = ScheduledProcessManager()
     name = models.CharField(max_length=64)
@@ -34,9 +35,12 @@ class ScheduledProcess(models.Model):
 
     def delay(self, delta):
         """ Delays the next call by the given delta. """
-        self.planned = timezone.now() + delta
-        self.save(update_fields=['planned'])
-        logger.debug('SP: Rescheduled %s (+ %s), next run planned at: %s', self.module, delta, self.planned)
+        self.reschedule(planned_at=timezone.now() + delta)
+
+    def reschedule(self, planned_at):
+        """ Schedules the next call at a predetermined moment. """
+        self.update(planned=planned_at)
+        logger.debug('SP: Rescheduled "%s" to: %s', self.name, self.planned)
 
     def __str__(self):
         return self.name

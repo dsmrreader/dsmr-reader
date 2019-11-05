@@ -6,7 +6,7 @@ from dsmr_backend.models.settings import EmailSettings
 import dsmr_backend.services.email
 
 
-class TestServices(TestCase):
+class TestEmail(TestCase):
     def setUp(self):
         es = EmailSettings.get_solo()
         es.host = 'host'

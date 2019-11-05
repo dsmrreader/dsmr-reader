@@ -3,7 +3,7 @@ Changelog
 
 v2.11.0 - 2019-xx-xx
 
-- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_] xxxxxxx
+- [`#774 <https://github.com/dennissiemensma/dsmr-reader/issues/774>`_] Generic performance improvements
 
 
 ----
