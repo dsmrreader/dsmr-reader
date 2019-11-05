@@ -14,12 +14,10 @@ import dsmr_weather.services
 class TestDsmrWeatherServices(TestCase):
     schedule_process = None
 
-    @mock.patch('django.utils.timezone.now')
-    def setUp(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
+    def setUp(self):
         WeatherSettings.get_solo()
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE)
-        self.schedule_process.update(active=True, planned=timezone.now())
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2017, 1, 1)))
 
     @mock.patch('dsmr_frontend.services.display_dashboard_message')
     @mock.patch('dsmr_weather.services.get_temperature_from_api')
@@ -31,7 +29,6 @@ class TestDsmrWeatherServices(TestCase):
         dsmr_weather.services.run(self.schedule_process)
         self.assertTrue(display_dashboard_message_mock.called)
 
-        # 5 minute delay on error.
         self.schedule_process.refresh_from_db()
         self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(minutes=5))
 

@@ -40,7 +40,12 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
     def reschedule(self, planned_at):
         """ Schedules the next call at a predetermined moment. """
         self.update(planned=planned_at)
-        logger.debug('SP: Rescheduled "%s" to: %s', self.name, self.planned)
+        logger.debug(
+            'SP: Rescheduled "%s" to %s (ETA %s)',
+            self.name,
+            timezone.localtime(self.planned),
+            self.planned - timezone.now()
+        )
 
     def __str__(self):
         return self.name

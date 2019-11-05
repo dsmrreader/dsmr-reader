@@ -14,11 +14,9 @@ import dsmr_backend.signals
 class TestUpdateChecker(InterceptStdoutMixin, TestCase):
     schedule_process = None
 
-    @mock.patch('django.utils.timezone.now')
-    def setUp(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2010, 1, 1))
+    def setUp(self):
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER)
-        self.schedule_process.update(active=True, planned=timezone.now())
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2010, 1, 1)))
 
     @mock.patch('dsmr_backend.services.backend.is_latest_version')
     @mock.patch('django.utils.timezone.now')
