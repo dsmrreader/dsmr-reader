@@ -40,8 +40,8 @@ msgstr "Configuratie"
 
 #: ../../plugins.rst:11
 msgid ""
-"You can create plugins in their own file in ``dsmr_plugins/modules/plugin_name."
-"py``, where ``plugin_name`` is the name of your plugin."
+"You can create plugins in their own file in ``dsmr_plugins/modules/"
+"plugin_name.py``, where ``plugin_name`` is the name of your plugin."
 msgstr ""
 "Je kan plugins maken in hun eigen bestand in ``dsmr_plugins/modules/"
 "plugin_naam.py``, waar ``plugin_naam`` de naam van je plugin is."
@@ -93,10 +93,11 @@ msgstr "Gebeurtenissen / Signalen"
 
 #: ../../plugins.rst:34
 msgid ""
-"These are either dispatched by the Django framework or the application at some "
-"point."
+"These are either dispatched by the Django framework or the application at "
+"some point."
 msgstr ""
-"Deze worden verstuurd door ofwel het Django framework ofwel de applicatie zelf."
+"Deze worden verstuurd door ofwel het Django framework ofwel de applicatie "
+"zelf."
 
 #: ../../plugins.rst:37
 msgid "``dsmr_backend.signals.backend_called``"
@@ -107,8 +108,9 @@ msgid ""
 "Called by each iteration of the backend. Please use with caution, as it may "
 "block all backend operations when used improperly."
 msgstr ""
-"Aangeroepen bij elke iteratie van de backend. Gebruik dit terughoudend, gezien "
-"het alle backend-acties kan blokkeren wanneer het verkeerd gebruikt wordt."
+"Aangeroepen bij elke iteratie van de backend. Gebruik dit terughoudend, "
+"gezien het alle backend-acties kan blokkeren wanneer het verkeerd gebruikt "
+"wordt."
 
 #: ../../plugins.rst:43
 msgid "``dsmr_pvoutput.signals.pvoutput_upload``"
@@ -140,8 +142,9 @@ msgstr "``django.db.models.signals.post_save``"
 
 #: ../../plugins.rst:54
 msgid ""
-"Called by Django after saving new records to the database. Can be bound to the "
-"``DayStatistics`` model for example, to process daily statistics elsewhere."
+"Called by Django after saving new records to the database. Can be bound to "
+"the ``DayStatistics`` model for example, to process daily statistics "
+"elsewhere."
 msgstr ""
 "Aangeroepen door Django bij het opslaan van nieuwe databaserecords. Kan "
 "gekoppeld worden aan bijvoorbeeld het ``DayStatistics`` model, om dagelijkse "
@@ -176,16 +179,18 @@ msgstr ""
 "reader/issues/407>`_, met het verzoek om gegevens te uploaden naar een tweede "
 "PVOutput-account."
 
-#: ../../plugins.rst:68 ../../plugins.rst:108 ../../plugins.rst:159
-#: ../../plugins.rst:206
+#: ../../plugins.rst:68 ../../plugins.rst:109 ../../plugins.rst:160
+#: ../../plugins.rst:205
 msgid "Settings file ``dsmrreader/settings.py`` (addition)::"
 msgstr "Settings bestand ``dsmrreader/settings.py`` (toevoeging)::"
 
 #: ../../plugins.rst:75
-msgid "Plugin file ``dsmr_plugins/modules/pvoutput.py`` (new file)::"
-msgstr "Plugin bestand ``dsmr_plugins/modules/pvoutput.py`` (nieuw bestand)::"
+msgid "Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file)::"
+msgstr ""
+"Plugin bestand ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (nieuw "
+"bestand)::"
 
-#: ../../plugins.rst:101
+#: ../../plugins.rst:102
 msgid ""
 "Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your "
 "second set of PVOutput API credentials."
@@ -193,30 +198,31 @@ msgstr ""
 "N.B.: De variablen ``XXXXX`` en ``YYYYY`` vervang je door de API-credentials "
 "van je tweede PVOutput-account."
 
-#: ../../plugins.rst:105
+#: ../../plugins.rst:106
 msgid "Example #2: Forwarding raw telegram data to another serial port"
 msgstr ""
 "Voorbeeld #2: Doorsturen van ruwe telegram-gegevens naar een andere seriële "
 "poort"
 
-#: ../../plugins.rst:106
+#: ../../plugins.rst:107
 msgid ""
 "This is an example of issue `#557 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another "
 "serial port."
 msgstr ""
 "Dit is een voorbeeld van issue `#557 <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/557>`_, wat ervoor zorgt dat je DSMR-telegrammen kunt doorsturen "
-"naar een andere seriële poort."
+"reader/issues/557>`_, wat ervoor zorgt dat je DSMR-telegrammen kunt "
+"doorsturen naar een andere seriële poort."
 
-#: ../../plugins.rst:115
+#: ../../plugins.rst:116
 msgid ""
-"Plugin file ``dsmr_plugins/modules/forward_telegram_to_serial.py`` (new file)::"
+"Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new "
+"file)::"
 msgstr ""
-"Plugin bestand ``dsmr_plugins/modules/forward_telegram_to_serial.py`` (nieuw "
-"bestand)::"
+"Plugin bestand ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` "
+"(nieuw bestand)::"
 
-#: ../../plugins.rst:152
+#: ../../plugins.rst:153
 msgid ""
 "Note that the ``/dev/ttyUSBvA`` variable should be changed to the serial port "
 "used in your own situation."
@@ -224,13 +230,13 @@ msgstr ""
 "N.B.: Je moet de ``/dev/ttyUSBvA`` variabele nog wijzigen naar de juiste "
 "seriële poort in je eigen situatie."
 
-#: ../../plugins.rst:156
+#: ../../plugins.rst:157
 msgid "Example #3: Forwarding raw telegram data to another instance by API"
 msgstr ""
 "Voorbeeld #3: Doorsturen van ruwe telegram-gegevens naar een andere instantie "
 "van DSMR-reader, via de API"
 
-#: ../../plugins.rst:157
+#: ../../plugins.rst:158
 msgid ""
 "This can be quite handy if you run multiple instances of DSMR-reader (i.e.: "
 "RaspberryPI + somewhere in cloud)."
@@ -238,14 +244,15 @@ msgstr ""
 "Dit kan behoorlijk handig zijn wanneer je meerdere instanties van DSMR-reader "
 "draait (bijvoorbeeld op een Raspberry en gespiegeld in de cloud)."
 
-#: ../../plugins.rst:166
+#: ../../plugins.rst:167
 msgid ""
-"Plugin file ``dsmr_plugins/modules/forward_telegram_to_api.py`` (new file)::"
+"Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (new "
+"file)::"
 msgstr ""
-"Plugin bestand ``dsmr_plugins/modules/forward_telegram_to_api.py`` (nieuw "
+"Plugin bestand ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (nieuw "
 "bestand)::"
 
-#: ../../plugins.rst:199
+#: ../../plugins.rst:198
 msgid ""
 "Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should be "
 "changed to your own preferences."
@@ -253,17 +260,17 @@ msgstr ""
 "N.B.: De ``API_HOST``, ``API_KEY`` en ``TIMEOUT`` variabelen moet je nog "
 "wijzigen naar je eigen voorkeuren."
 
-#: ../../plugins.rst:203
+#: ../../plugins.rst:202
 msgid "Example #4: Forwarding DSMR readings in JSON format to some API"
 msgstr "Voorbeeld #4: Doorsturen van DSMR-metingen in JSON-formaat naar een API"
 
-#: ../../plugins.rst:204
+#: ../../plugins.rst:203
 msgid "Use this to send DSMR readings in JSON format to some (arbitrary) API."
 msgstr ""
 "Gebruik dit om DSMR-metingen in JSON-formaat naar een (willekeurige) API door "
 "te sturen."
 
-#: ../../plugins.rst:213
+#: ../../plugins.rst:212
 msgid ""
 "Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new "
 "file)::"

@@ -14,7 +14,7 @@ def send(to, subject, body, attachment=None):
     email_settings = EmailSettings.get_solo()
 
     logger.debug(
-        ' - Preparing to send email using mail server %s:%s',
+        'Email: Preparing to send email using mail server %s:%s',
         email_settings.host,
         email_settings.port
     )
@@ -39,5 +39,5 @@ def send(to, subject, body, attachment=None):
     if attachment:
         message.attach_file(attachment)
 
-    logger.debug(' - Sending an email to %s (%s)', to, subject)
+    logger.debug('Email backup: Sending an email to %s (%s)', to, subject)
     message.send()

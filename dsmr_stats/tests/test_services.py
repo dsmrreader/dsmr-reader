@@ -216,7 +216,46 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dsmr_stats.services.analyze()
         self.assertTrue(create_statistics_mock.called)
 
-    def test_create_hourly_statistics_integrity(self):
+    def test_create_hourly_statistics_dsmr_v4_gas(self):
+        hour_start = timezone.make_aware(timezone.datetime(2010, 1, 1, hour=12))
+        ec_kwargs = {
+            'delivered_1': 0,
+            'returned_1': 0,
+            'delivered_2': 0,
+            'returned_2': 0,
+            'currently_delivered': 0,
+            'currently_returned': 0,
+        }
+        ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
+        GasConsumption.objects.create(read_at=hour_start, delivered=5, currently_delivered=1)
+
+        self.assertEqual(HourStatistics.objects.count(), 0)
+        dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
+        self.assertEqual(HourStatistics.objects.count(), 1)
+        self.assertEqual(HourStatistics.objects.all()[0].gas, 1)
+
+    def test_create_hourly_statistics_dsmr_v5_gas(self):
+        hour_start = timezone.make_aware(timezone.datetime(2010, 1, 1, hour=12))
+        ec_kwargs = {
+            'delivered_1': 0,
+            'returned_1': 0,
+            'delivered_2': 0,
+            'returned_2': 0,
+            'currently_delivered': 0,
+            'currently_returned': 0,
+        }
+        ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
+        GasConsumption.objects.create(read_at=hour_start, delivered=5, currently_delivered=0)
+        GasConsumption.objects.create(
+            read_at=hour_start + timezone.timedelta(minutes=15), delivered=7, currently_delivered=1
+        )
+
+        self.assertEqual(HourStatistics.objects.count(), 0)
+        dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
+        self.assertEqual(HourStatistics.objects.count(), 1)
+        self.assertEqual(HourStatistics.objects.all()[0].gas, 2)
+
+    def test_create_hourly_statistics_exists(self):
         day_start = timezone.make_aware(timezone.datetime(2015, 12, 13, hour=0))
         ec_kwargs = {
             'delivered_1': 0,
@@ -228,7 +267,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         }
         ElectricityConsumption.objects.create(read_at=day_start, **ec_kwargs)
 
-        self.assertFalse(HourStatistics.objects.exists())
+        self.assertEqual(HourStatistics.objects.count(), 0)
         dsmr_stats.services.create_hourly_statistics(hour_start=day_start)
         self.assertEqual(HourStatistics.objects.count(), 1)
 
@@ -300,6 +339,76 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         self.assertFalse(DayStatistics.objects.exists())
         self.assertFalse(HourStatistics.objects.exists())
+
+    @mock.patch('django.utils.timezone.now')
+    def test_hour_statistics_bounds(self, now_mock):
+        """ Test boundaries. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1, 12))
+        default_kwargs = dict(
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0
+        )
+        ElectricityConsumption.objects.all().delete()
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=0,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=58),
+            delivered_1=0.58,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=59),
+            delivered_1=0.59,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=60),
+            delivered_1=0.60,
+            **default_kwargs
+        )
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=61),
+            delivered_1=0.61,
+            **default_kwargs
+        )
+        dsmr_stats.services.create_statistics(target_day=timezone.now().date())
+        self.assertEqual(HourStatistics.objects.all().count(), 3)  # First hour is empty.
+
+        # Fix for #766, hours should include the last second/minute as well.
+        self.assertEqual(HourStatistics.objects.get(
+            hour_start=timezone.now() - timezone.timedelta(hours=1)  # 11:00 CET
+        ).electricity1, Decimal('0.0'))
+
+        self.assertEqual(HourStatistics.objects.get(
+            hour_start=timezone.now() - timezone.timedelta(hours=0)  # 12:00 CET
+        ).electricity1, Decimal('0.60'))
+
+        self.assertEqual(HourStatistics.objects.get(
+            hour_start=timezone.now() + timezone.timedelta(hours=1)  # 13:00 CET
+        ).electricity1, Decimal('0.01'))
+
+    @mock.patch('django.core.cache.cache.clear')
+    @mock.patch('dsmr_stats.services.create_daily_statistics')
+    @mock.patch('dsmr_stats.services.create_hourly_statistics')
+    @mock.patch('django.utils.timezone.now')
+    def test_create_statistics_hours_per_day_cet_cest(self, now_mock, hourly_mock, daily_mock, cache_mock):
+        """ Transitions to and from DST affect the number of hours logged of a day. Check it. """
+        # CET > CEST
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 29))
+        dsmr_stats.services.create_statistics(timezone.now().date())
+        self.assertEqual(hourly_mock.call_count, 23)
+        hourly_mock.reset_mock()
+
+        # CEST > CET
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 10, 25))
+        dsmr_stats.services.create_statistics(timezone.now().date())
+        self.assertEqual(hourly_mock.call_count, 25)
 
     @mock.patch('django.core.cache.cache.clear')
     @mock.patch('django.utils.timezone.now')

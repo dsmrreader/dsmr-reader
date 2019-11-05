@@ -246,6 +246,17 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(tools_status['pvoutput']['latest_sync'], timezone.now())
         self.assertEqual(tools_status['mindergas']['latest_sync'], timezone.now())
 
+    @mock.patch('django.utils.timezone.now')
+    def test_hours_in_day(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 29))
+        self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 23)
+
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 7, 1))
+        self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 24)
+
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 10, 25))
+        self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 25)
+
 
 @mock.patch('requests.get')
 class TestIslatestVersion(TestCase):

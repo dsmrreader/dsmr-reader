@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.models import Group, User
@@ -7,6 +9,7 @@ from django.forms.widgets import TextInput
 from django.contrib import admin
 from django.db import models
 from solo.admin import SingletonModelAdmin
+import django.db.models.signals
 
 from dsmr_backend.models.settings import BackendSettings, EmailSettings
 from dsmr_backend.models.schedule import ScheduledProcess
@@ -23,10 +26,21 @@ class BackendSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ['language'],
+                'fields': ['language', 'automatic_update_checker'],
             }
         ),
     )
+
+
+@receiver(django.db.models.signals.post_save, sender=BackendSettings)
+def handle_backend_settings_update(sender, instance, created, raw, **kwargs):
+    """ Hooks to update auto update process. """
+    if created or raw:
+        return
+
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
+    ).update(active=instance.automatic_update_checker)
 
 
 @admin.register(EmailSettings)
@@ -81,13 +95,15 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(ScheduledProcess)
 class ScheduledProcessAdmin(admin.ModelAdmin):
-    list_display = ('name', 'planned', 'next_call_naturaltime')
-    readonly_fields = ('name', 'module')
+    list_display = ('active', 'name', 'planned', 'next_call_naturaltime')
+    readonly_fields = ('name', 'module', 'active')
+    list_display_links = ('name', 'planned')
+    actions = None
 
     fieldsets = (
         (
             _('Internals'), {
-                'fields': ['name', 'module'],
+                'fields': ['name', 'module', 'active'],
             }
         ),
         (
@@ -110,3 +126,9 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
         return naturaltime(planned)
 
     next_call_naturaltime.short_description = _('Time until next call')
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

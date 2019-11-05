@@ -5,6 +5,7 @@ DSMR Reader's documentation
    :maxdepth: 1
 
    intro
+   changelog
    requirements
    data_integrity
    troubleshooting
@@ -50,7 +51,6 @@ DSMR Reader's documentation
    faq/update
    faq/database
    faq/uninstall
-   changelog
    contributing
    credits
    donations

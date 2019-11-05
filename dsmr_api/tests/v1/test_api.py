@@ -27,7 +27,7 @@ class TestAPIv1(TestCase):
             "\r\n",
             "1-3:0.2.8(42)\r\n",
             "0-0:1.0.0(160303164347W)\r\n",
-            "0-0:96.1.1(*******************************)\r\n",
+            "0-0:96.1.1(12345678901234567890123456789012)\r\n",
             "1-0:1.8.1(001073.079*kWh)\r\n",
             "1-0:1.8.2(001263.199*kWh)\r\n",
             "1-0:2.8.1(000000.000*kWh)\r\n",
@@ -45,7 +45,7 @@ class TestAPIv1(TestCase):
             "1-0:31.7.0(000*A)\r\n",
             "1-0:21.7.0(00.143*kW)\r\n",
             "1-0:22.7.0(00.000*kW)\r\n",
-            "!74B0\n",
+            "!4BC6\n",
         ])
 
     def test_invalid_method(self):
@@ -112,8 +112,7 @@ class TestAPIv1(TestCase):
         self.assertEqual(response.status_code, 500)
         self.assertEqual(response.content, b'Failed to parse telegram')
 
-    @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')
-    def test_okay(self, verify_telegram_checksum_mock):
+    def test_okay(self):
         self.assertFalse(DsmrReading.objects.exists())
 
         response = self.client.post(
@@ -122,8 +121,6 @@ class TestAPIv1(TestCase):
             HTTP_X_AUTHKEY=self._api_settings.auth_key
         )
 
-        # Disable CRC for this test, as it's tested elsewhere. But verify that it was called anyway.
-        self.assertTrue(verify_telegram_checksum_mock.called)
         self.assertTrue(DsmrReading.objects.exists())
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.content, b'')

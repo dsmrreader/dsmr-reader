@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader v1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-04 21:46+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -88,6 +89,15 @@ msgstr "Gepland proces"
 msgid "The language used in backend processes"
 msgstr "De gebruikte taal in achtergrondprocessen"
 
+msgid "Automatically check for updates"
+msgstr "Controleer automatisch op updates"
+
+msgid "Whether the application checks once in a while for new DSMR-reader release in Github"
+msgstr "Geeft aan of de applicatie af en toe op Github controleert of er updates beschikbaar zijn"
+
+msgid "Backend configuration"
+msgstr "Backend-configuratie"
+
 msgid "The email address you want to send any emails to"
 msgstr "Het e-mailadres waar e-mails naar toegestuurd worden"
 
@@ -129,6 +139,9 @@ msgstr "Optioneel: Geeft aan of de e-mailserver SSL gebruikt voor encryptie"
 
 msgid "Email configuration"
 msgstr "E-mailconfiguratie"
+
+msgid "There is a newer version of DSMR-reader available. See the changelog for more information."
+msgstr "Er is een nieuwere versie van DSMR-reader beschikbaar. Zie het wijzigingenoverzicht voor meer informatie."
 
 msgid "Test your email settings with the button below."
 msgstr "Test je e-mailinstellingen met de knop hieronder."
@@ -457,11 +470,17 @@ msgstr "DSMR-uitlezing (alleen lezen)"
 msgid "DSMR readings (read only)"
 msgstr "DSMR-uitlezing (alleen lezen)"
 
-msgid "DSMR version 4/5"
-msgstr "DSMR-versie 4/5"
+msgid "Netherlands - DSMR version 4/5 (default)"
+msgstr "Nederlands - DSMR-versie 4/5 (standaard)"
 
-msgid "DSMR version 2"
-msgstr "DSMR-versie 2"
+msgid "Netherlands - DSMR version 2/3"
+msgstr "Nederlands - DSMR-versie 2/3"
+
+msgid "Belgium - Fluvius"
+msgstr "België - Fluvius"
+
+msgid "Luxembourg - Smarty"
+msgstr "Luxemburg - Smarty"
 
 msgid "DSMR version"
 msgstr "DSMR-versie"
@@ -621,6 +640,9 @@ msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te 
 
 msgid "DSMR-reader v2.9.0: Buienradar changed their API. This update fixes the issue."
 msgstr "DSMR-reader v2.9.0: Buienradar heeft haar API aangepast. Deze update werkt het bij."
+
+msgid "DSMR-reader v2.10.0: Added automatic update checker (weekly), enabled by default, you can disable it in the Backend settings. See changelog for more changes."
+msgstr "DSMR-reader v2.10.0: Automatische update checker (wekelijks) toegevoegd, standaard ingeschakeld. Wil je dit niet, dan kun je dit uitschakelen in de Backend-configuratie. Zie het wijzigingenoverzicht voor overige wijzigingen."
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
@@ -2145,6 +2167,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "DSMR version 4/5"
+#~ msgstr "DSMR-versie 4/5"
 
 #~ msgid "MQTT: Day consumption (as JSON) configuration"
 #~ msgstr "MQTT: Dagverbruik (als JSON) configuratie"

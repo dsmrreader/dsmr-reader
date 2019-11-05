@@ -1,4 +1,5 @@
 from distutils.version import StrictVersion
+import datetime
 import re
 
 import requests
@@ -239,3 +240,21 @@ def is_recent_installation():
         applied__lt=timezone.now() - timezone.timedelta(hours=1)
     ).exists()
     return not has_old_migration
+
+
+def hours_in_day(day):
+    """ Returns the number of hours in a day. Should always be 24, except in DST transitions. """
+    start = timezone.make_aware(timezone.datetime.combine(day, datetime.time.min))
+    end = start + timezone.timedelta(days=1)
+    start = timezone.localtime(start)
+    end = timezone.localtime(end)
+
+    # CEST -> CET
+    if start.dst() > end.dst():
+        return 25
+    # CET -> CEST
+    elif end.dst() > start.dst():
+        return 23
+    # Unchanged
+    else:
+        return 24

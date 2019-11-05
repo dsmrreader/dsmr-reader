@@ -22,424 +22,386 @@ msgstr ""
 msgid "Credits / Hall of Fame"
 msgstr "Credits / Hall of Fame"
 
-#: ../../credits.rst:6
+#: ../../credits.rst:5
 msgid "Special thanks for supplying code contributions"
 msgstr "Bijzondere dank voor de code-bijdragen van"
 
-#: ../../credits.rst:8
+#: ../../credits.rst:6
 msgid "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_"
 msgstr "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_"
 
-#: ../../credits.rst:12
+#: ../../credits.rst:7
+msgid "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_"
+msgstr "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_"
+
+#: ../../credits.rst:8
+msgid ""
+"All the [other contributers for the past few years](https://github.com/"
+"dennissiemensma/dsmr-reader/graphs/contributors)!"
+msgstr ""
+"Alle [overige bijdrages de afgelopen jaren](https://github.com/"
+"dennissiemensma/dsmr-reader/graphs/contributors)!"
+
+#: ../../credits.rst:11
 msgid "Also many thanks to the contributions of"
 msgstr "Dank voor de bijdrages van"
 
+#: ../../credits.rst:12
+msgid ""
+"Many [pull requests](https://github.com/dennissiemensma/dsmr-reader/pulls)."
+msgstr ""
+"Vele [pull requests](https://github.com/dennissiemensma/dsmr-reader/pulls)."
+
 #: ../../credits.rst:13
-msgid "Listed in any order, sorted by name."
-msgstr "Getoond in willekeurige belangrijkheid, gesorteerd op naam."
-
-#: ../../credits.rst:15
-msgid "`allureGOT <https://github.com/allureGOT>`_"
-msgstr "`allureGOT <https://github.com/allureGOT>`_"
-
-#: ../../credits.rst:16
-msgid "`balk77 <https://github.com/balk77>`_"
-msgstr "`balk77 <https://github.com/balk77>`_"
+msgid ""
+"All [the ideas, improvements and bugs reported](https://github.com/"
+"dennissiemensma/dsmr-reader/issues) for the past years."
+msgstr ""
+"Alle [ideeën, verbeteringenm suggesties en foutmeldingen](https://github.com/"
+"dennissiemensma/dsmr-reader/issues) de afgelopen jaren."
 
 #: ../../credits.rst:17
-msgid "`Baseje <https://github.com/Baseje>`_"
-msgstr "`Baseje <https://github.com/Baseje>`_"
-
-#: ../../credits.rst:18
-msgid "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
-msgstr "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
-
-#: ../../credits.rst:19
-msgid "`Bl4ckviper <https://github.com/Bl4ckviper>`_"
-msgstr "`Bl4ckviper <https://github.com/Bl4ckviper>`_"
-
-#: ../../credits.rst:20
-msgid "`Calimerorulez <https://github.com/Calimerorulez>`_"
-msgstr "`Calimerorulez <https://github.com/Calimerorulez>`_"
-
-#: ../../credits.rst:21
-msgid "`Cyw00d <https://github.com/Cyw00d>`_"
-msgstr "`Cyw00d <https://github.com/Cyw00d>`_"
-
-#: ../../credits.rst:22
-msgid "`dajappie <https://github.com/dajappie>`_"
-msgstr "`dajappie <https://github.com/dajappie>`_"
-
-#: ../../credits.rst:23
-msgid "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_"
-msgstr "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_"
-
-#: ../../credits.rst:24
-msgid "`dbmnl <https://github.com/dbmnl>`_"
-msgstr "`dbmnl <https://github.com/dbmnl>`_"
-
-#: ../../credits.rst:25
-msgid "`drvdijk <https://github.com/drvdijk>`_"
-msgstr "`drvdijk <https://github.com/drvdijk>`_"
-
-#: ../../credits.rst:26
-msgid "`emilkwaaitaal <https://github.com/emilkwaaitaal>`_"
-msgstr "`emilkwaaitaal <https://github.com/emilkwaaitaal>`_"
-
-#: ../../credits.rst:27
-msgid "`Ernst79 <https://github.com/Ernst79>`_"
-msgstr "`Ernst79 <https://github.com/Ernst79>`_"
-
-#: ../../credits.rst:28
-msgid "`floyson-reference <https://github.com/floyson-reference>`_"
-msgstr "`floyson-reference <https://github.com/floyson-reference>`_"
-
-#: ../../credits.rst:29
-msgid "`f0nt4 <https://github.com/f0nt4>`_"
-msgstr "`f0nt4 <https://github.com/f0nt4>`_"
-
-#: ../../credits.rst:30
-msgid "`fpompert <https://github.com/fpompert>`_"
-msgstr "`fpompert <https://github.com/fpompert>`_"
-
-#: ../../credits.rst:31
-msgid "`FutureCow <https://github.com/FutureCow>`_"
-msgstr "`FutureCow <https://github.com/FutureCow>`_"
-
-#: ../../credits.rst:32
-msgid "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
-msgstr "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
-
-#: ../../credits.rst:33
-msgid "`gertjuhh <https://github.com/gertjuhh>`_"
-msgstr "`gertjuhh <https://github.com/gertjuhh>`_"
-
-#: ../../credits.rst:34
-msgid "`glsf91 <https://github.com/glsf91>`_"
-msgstr "`glsf91 <https://github.com/glsf91>`_"
-
-#: ../../credits.rst:35
-msgid "`goegol <https://github.com/goegol>`_"
-msgstr "`goegol <https://github.com/goegol>`_"
-
-#: ../../credits.rst:36
-msgid "`Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_"
-msgstr "`Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_"
-
-#: ../../credits.rst:37
-msgid "`helmo <https://github.com/helmo>`_"
-msgstr "`helmo <https://github.com/helmo>`_"
-
-#: ../../credits.rst:38
-msgid "`HugoDaBosss <https://github.com/HugoDaBosss>`_"
-msgstr "`HugoDaBosss <https://github.com/HugoDaBosss>`_"
-
-#: ../../credits.rst:39
-msgid "`Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_"
-msgstr "`Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_"
-
-#: ../../credits.rst:40
-msgid "`Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_"
-msgstr "`Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_"
-
-#: ../../credits.rst:41
-msgid "`joopy <https://github.com/joopy>`_"
-msgstr "`joopy <https://github.com/joopy>`_"
-
-#: ../../credits.rst:42
-msgid "`Joris Vervuurt <https://github.com/jorisvervuurt>`_"
-msgstr "`Joris Vervuurt <https://github.com/jorisvervuurt>`_"
-
-#: ../../credits.rst:43
-msgid "`jbrunink <https://github.com/jbrunink>`_"
-msgstr "`jbrunink <https://github.com/jbrunink>`_"
-
-#: ../../credits.rst:44
-msgid "`ju5t <https://github.com/ju5t>`_"
-msgstr "`ju5t <https://github.com/ju5t>`_"
-
-#: ../../credits.rst:45
-msgid "`jwveldhuis <https://github.com/jwveldhuis>`_"
-msgstr "`jwveldhuis <https://github.com/jwveldhuis>`_"
-
-#: ../../credits.rst:46
-msgid "Koen Volleberg"
-msgstr "Koen Volleberg"
-
-#: ../../credits.rst:47
-msgid "`lckarssen <https://github.com/lckarssen>`_"
-msgstr "`lckarssen <https://github.com/lckarssen>`_"
-
-#: ../../credits.rst:48
-msgid "`MarsWarrior <https://github.com/MarsWarrior>`_"
-msgstr "`MarsWarrior <https://github.com/MarsWarrior>`_"
-
-#: ../../credits.rst:49
-msgid "`mbnn <https://github.com/mbnn>`_"
-msgstr "`mbnn <https://github.com/mbnn>`_"
-
-#: ../../credits.rst:50
-msgid "`meijjaa <https://github.com/meijjaa>`_"
-msgstr "`meijjaa <https://github.com/meijjaa>`_"
-
-#: ../../credits.rst:51
-msgid "`michielvisser <https://github.com/michielvisser>`_"
-msgstr "`michielvisser <https://github.com/michielvisser>`_"
-
-#: ../../credits.rst:52
-msgid "`mjanssens <https://github.com/mjanssens>`_"
-msgstr "`mjanssens <https://github.com/mjanssens>`_"
-
-#: ../../credits.rst:53
-msgid "`mkruiver <https://github.com/mkruiver>`_"
-msgstr "`mkruiver <https://github.com/mkruiver>`_"
-
-#: ../../credits.rst:54
-msgid "`mrvanes <https://github.com/mrvanes>`_"
-msgstr "`mrvanes <https://github.com/mrvanes>`_"
-
-#: ../../credits.rst:55
-msgid "`Oliver Payne <https://github.com/olipayne>`_"
-msgstr "`Oliver Payne <https://github.com/olipayne>`_"
-
-#: ../../credits.rst:56
-msgid "`Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_"
-msgstr "`Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_"
-
-#: ../../credits.rst:57
-msgid "`perryodk <https://github.com/perryodk>`_"
-msgstr "`perryodk <https://github.com/perryodk>`_"
-
-#: ../../credits.rst:58
-msgid "`pyrocumulus <https://github.com/pyrocumulus>`_"
-msgstr "`pyrocumulus <https://github.com/pyrocumulus>`_"
-
-#: ../../credits.rst:59
-msgid "`raoulteeuwen <https://github.com/raoulteeuwen>`_"
-msgstr "`raoulteeuwen <https://github.com/raoulteeuwen>`_"
-
-#: ../../credits.rst:60
-msgid "`rodeho <https://github.com/rodeho>`_"
-msgstr "`rodeho <https://github.com/rodeho>`_"
-
-#: ../../credits.rst:61
-msgid "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
-msgstr "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
-
-#: ../../credits.rst:62
-msgid "`sanderdw <https://github.com/sanderdw>`_"
-msgstr "`sanderdw <https://github.com/sanderdw>`_"
-
-#: ../../credits.rst:63
-msgid "`SaturnusDJ <https://github.com/SaturnusDJ>`_"
-msgstr "`SaturnusDJ <https://github.com/SaturnusDJ>`_"
-
-#: ../../credits.rst:64
-msgid "`Sevickson <https://github.com/sevickson>`_"
-msgstr "`Sevickson <https://github.com/sevickson>`_"
-
-#: ../../credits.rst:65
-msgid "`swerveshot <https://github.com/swerveshot>`_"
-msgstr "`swerveshot <https://github.com/swerveshot>`_"
-
-#: ../../credits.rst:66
-msgid "`TampertK <https://github.com/TampertK>`_"
-msgstr "`TampertK <https://github.com/TampertK>`_"
-
-#: ../../credits.rst:67
-msgid "`ThinkPadNL <https://github.com/ThinkPadNL>`_"
-msgstr "`ThinkPadNL <https://github.com/ThinkPadNL>`_"
-
-#: ../../credits.rst:68
-msgid "`thommy101 <https://github.com/thommy101>`_"
-msgstr "`thommy101 <https://github.com/thommy101>`_"
-
-#: ../../credits.rst:69
-msgid "Tijs van Noije"
-msgstr "Tijs van Noije"
-
-#: ../../credits.rst:70
-msgid "`Timdebruijn <https://github.com/Timdebruijn>`_"
-msgstr "`Timdebruijn <https://github.com/Timdebruijn>`_"
-
-#: ../../credits.rst:71
-msgid "`TopdRob <https://github.com/TopdRob>`_"
-msgstr "`TopdRob <https://github.com/TopdRob>`_"
-
-#: ../../credits.rst:72
-msgid "`tpjanssen <https://github.com/tpjanssen>`_"
-msgstr "`tpjanssen <https://github.com/tpjanssen>`_"
-
-#: ../../credits.rst:73
-msgid "`trbs <https://github.com/trbs>`_"
-msgstr "`trbs <https://github.com/trbs>`_"
-
-#: ../../credits.rst:74
-msgid "`trizz <https://github.com/trizz>`_"
-msgstr "`trizz <https://github.com/trizz>`_"
-
-#: ../../credits.rst:75
-msgid "`ualex73 <https://github.com/ualex73>`_"
-msgstr "`ualex73 <https://github.com/ualex73>`_"
-
-#: ../../credits.rst:76
-msgid "`vavdb <https://github.com/vavdb>`_"
-msgstr "`vavdb <https://github.com/vavdb>`_"
-
-#: ../../credits.rst:77
-msgid "`voipmeister <https://github.com/voipmeister>`_"
-msgstr "`voipmeister <https://github.com/voipmeister>`_"
-
-#: ../../credits.rst:78
-msgid "`WatskeBart <https://github.com/WatskeBart>`_"
-msgstr "`WatskeBart <https://github.com/WatskeBart>`_"
-
-#: ../../credits.rst:79
-msgid "`xirixiz <https://github.com/xirixiz>`_"
-msgstr "`xirixiz <https://github.com/xirixiz>`_"
-
-#: ../../credits.rst:83
 msgid "Additional thanks to"
 msgstr "Eveneens dank aan"
 
-#: ../../credits.rst:84
+#: ../../credits.rst:18
 msgid "JetBrains for providing me a free open-source licence to their products."
 msgstr ""
 "JetBrains voor het afgeven van een gratis open-source licentie voor haar "
 "producten."
 
-#: ../../credits.rst:92
+#: ../../credits.rst:26
 msgid "Software used"
 msgstr "Gebruikte software"
 
-#: ../../credits.rst:93
+#: ../../credits.rst:27
 msgid ""
-"Please note and respect their licences as well, if any. Credits to the following "
-"software and projects:"
+"Please note and respect their licences as well, if any. Credits to the "
+"following software and projects:"
 msgstr ""
-"Houd rekening met eventuele licenties/restricties van deze software, wanneer van "
-"toepassing. Met dank aan de volgende software en projecten:"
+"Houd rekening met eventuele licenties/restricties van deze software, wanneer "
+"van toepassing. Met dank aan de volgende software en projecten:"
 
-#: ../../credits.rst:95
+#: ../../credits.rst:29
 msgid "`Raspbian <https://www.raspbian.org/>`_"
 msgstr "`Raspbian <https://www.raspbian.org/>`_"
 
-#: ../../credits.rst:96
+#: ../../credits.rst:30
 msgid "`Django Project <https://www.djangoproject.com/>`_"
 msgstr "`Django Project <https://www.djangoproject.com/>`_"
 
-#: ../../credits.rst:97
+#: ../../credits.rst:31
 msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
 msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
 
-#: ../../credits.rst:98
+#: ../../credits.rst:32
 msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 msgstr "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 
-#: ../../credits.rst:99
+#: ../../credits.rst:33
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr "`Supervisor <http://supervisord.org/>`_"
 
-#: ../../credits.rst:100
+#: ../../credits.rst:34
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr "`MySQL <https://www.mysql.com/>`_"
 
-#: ../../credits.rst:101
+#: ../../credits.rst:35
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr "`MariaDB <https://mariadb.org/>`_"
 
-#: ../../credits.rst:102
+#: ../../credits.rst:36
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
-#: ../../credits.rst:103
+#: ../../credits.rst:37
 msgid "Director Responsive Admin template (website is offline)"
 msgstr "Director Responsive Admin template (website is offline)"
 
-#: ../../credits.rst:104
+#: ../../credits.rst:38
 msgid ""
-"Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://"
-"www.flaticon.com/free-icon/eco-energy_25013>`_"
+"Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
+"<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 msgstr ""
-"Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://"
-"www.flaticon.com/free-icon/eco-energy_25013>`_"
+"Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
+"<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
-#: ../../credits.rst:105
+#: ../../credits.rst:39
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 
-#: ../../credits.rst:106
+#: ../../credits.rst:40
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
-#: ../../credits.rst:107
+#: ../../credits.rst:41
 msgid "`Github <https://github.com/>`_"
 msgstr "`Github <https://github.com/>`_"
 
-#: ../../credits.rst:108
+#: ../../credits.rst:42
 msgid "`TravisCI <https://travis-ci.org>`_"
 msgstr "`TravisCI <https://travis-ci.org>`_"
 
-#: ../../credits.rst:109
+#: ../../credits.rst:43
 msgid "`Codecov <https://codecov.io>`_"
 msgstr "`Codecov <https://codecov.io>`_"
 
-#: ../../credits.rst:110
+#: ../../credits.rst:44
 msgid "`Read The Docs <https://readthedocs.org/>`_"
 msgstr "`Read The Docs <https://readthedocs.org/>`_"
 
-#: ../../credits.rst:111
+#: ../../credits.rst:45
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
-#: ../../credits.rst:112
+#: ../../credits.rst:46
 msgid ""
-"`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-"
-"screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
+"`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-"
+"page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr ""
-"`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-"
-"screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
+"`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-"
+"page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 
-#: ../../credits.rst:113
+#: ../../credits.rst:47
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr "`Buienradar <http://www.buienradar.nl>`_"
 
-#: ../../credits.rst:114
+#: ../../credits.rst:48
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr "`Django REST Framework <http://www.django-rest-framework.org>`_"
 
-#: ../../credits.rst:115
+#: ../../credits.rst:49
 msgid ""
-"`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_"
+"`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index."
+"html>`_"
 msgstr ""
-"`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_"
+"`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index."
+"html>`_"
 
-#: ../../credits.rst:116
+#: ../../credits.rst:50
 msgid "`CircleCI <https://circleci.com/>`_"
 msgstr "`CircleCI <https://circleci.com/>`_"
 
-#: ../../credits.rst:120
-msgid "Misc"
-msgstr "Overig"
+#~ msgid "Listed in any order, sorted by name."
+#~ msgstr "Getoond in willekeurige belangrijkheid, gesorteerd op naam."
 
-#: ../../credits.rst:122
-msgid "Dutch Smart Meter reading specifications, data cables, examples and hints:"
-msgstr "Dutch Smart Meter reading specifications, data cables, examples and hints:"
+#~ msgid "`allureGOT <https://github.com/allureGOT>`_"
+#~ msgstr "`allureGOT <https://github.com/allureGOT>`_"
 
-#: ../../credits.rst:124
-msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
-msgstr "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
+#~ msgid "`balk77 <https://github.com/balk77>`_"
+#~ msgstr "`balk77 <https://github.com/balk77>`_"
 
-#: ../../credits.rst:126
-msgid ""
-"`Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard.nl/>`_"
-msgstr ""
-"`Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard.nl/>`_"
+#~ msgid "`Baseje <https://github.com/Baseje>`_"
+#~ msgstr "`Baseje <https://github.com/Baseje>`_"
 
-#: ../../credits.rst:128
-msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
-msgstr "`SOS Solutions <https://www.sossolutions.nl/>`_"
+#~ msgid "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
+#~ msgstr "`Bert-Jan Vos <https://www.linkedin.com/in/bert-jan-vos-82011712>`_"
 
-#: ../../credits.rst:130
-msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
-msgstr "`Nico Di Rocco <http://nrocco.github.io/>`_"
+#~ msgid "`Bl4ckviper <https://github.com/Bl4ckviper>`_"
+#~ msgstr "`Bl4ckviper <https://github.com/Bl4ckviper>`_"
+
+#~ msgid "`Calimerorulez <https://github.com/Calimerorulez>`_"
+#~ msgstr "`Calimerorulez <https://github.com/Calimerorulez>`_"
+
+#~ msgid "`Cyw00d <https://github.com/Cyw00d>`_"
+#~ msgstr "`Cyw00d <https://github.com/Cyw00d>`_"
+
+#~ msgid "`dajappie <https://github.com/dajappie>`_"
+#~ msgstr "`dajappie <https://github.com/dajappie>`_"
+
+#~ msgid "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_"
+#~ msgstr "`Daniel ter Horst <https://www.linkedin.com/in/danielterhorst>`_"
+
+#~ msgid "`dbmnl <https://github.com/dbmnl>`_"
+#~ msgstr "`dbmnl <https://github.com/dbmnl>`_"
+
+#~ msgid "`drvdijk <https://github.com/drvdijk>`_"
+#~ msgstr "`drvdijk <https://github.com/drvdijk>`_"
+
+#~ msgid "`emilkwaaitaal <https://github.com/emilkwaaitaal>`_"
+#~ msgstr "`emilkwaaitaal <https://github.com/emilkwaaitaal>`_"
+
+#~ msgid "`Ernst79 <https://github.com/Ernst79>`_"
+#~ msgstr "`Ernst79 <https://github.com/Ernst79>`_"
+
+#~ msgid "`floyson-reference <https://github.com/floyson-reference>`_"
+#~ msgstr "`floyson-reference <https://github.com/floyson-reference>`_"
+
+#~ msgid "`f0nt4 <https://github.com/f0nt4>`_"
+#~ msgstr "`f0nt4 <https://github.com/f0nt4>`_"
+
+#~ msgid "`fpompert <https://github.com/fpompert>`_"
+#~ msgstr "`fpompert <https://github.com/fpompert>`_"
+
+#~ msgid "`FutureCow <https://github.com/FutureCow>`_"
+#~ msgstr "`FutureCow <https://github.com/FutureCow>`_"
+
+#~ msgid "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
+#~ msgstr "`Gert Schaafsma <https://www.linkedin.com/in/gertschaafsma>`_"
+
+#~ msgid "`gertjuhh <https://github.com/gertjuhh>`_"
+#~ msgstr "`gertjuhh <https://github.com/gertjuhh>`_"
+
+#~ msgid "`glsf91 <https://github.com/glsf91>`_"
+#~ msgstr "`glsf91 <https://github.com/glsf91>`_"
+
+#~ msgid "`goegol <https://github.com/goegol>`_"
+#~ msgstr "`goegol <https://github.com/goegol>`_"
+
+#~ msgid "`Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_"
+#~ msgstr "`Hans-Paul Hemelaar <https://www.linkedin.com/in/hanspaulhemelaar>`_"
+
+#~ msgid "`helmo <https://github.com/helmo>`_"
+#~ msgstr "`helmo <https://github.com/helmo>`_"
+
+#~ msgid "`HugoDaBosss <https://github.com/HugoDaBosss>`_"
+#~ msgstr "`HugoDaBosss <https://github.com/HugoDaBosss>`_"
+
+#~ msgid "`Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_"
+#~ msgstr "`Jelte Leijenaar <https://www.linkedin.com/in/jelteleijenaar>`_"
+
+#~ msgid "`Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_"
+#~ msgstr "`Jeroen Tielen <https://nl.linkedin.com/in/jeroentielen>`_"
+
+#~ msgid "`joopy <https://github.com/joopy>`_"
+#~ msgstr "`joopy <https://github.com/joopy>`_"
+
+#~ msgid "`Joris Vervuurt <https://github.com/jorisvervuurt>`_"
+#~ msgstr "`Joris Vervuurt <https://github.com/jorisvervuurt>`_"
+
+#~ msgid "`jbrunink <https://github.com/jbrunink>`_"
+#~ msgstr "`jbrunink <https://github.com/jbrunink>`_"
+
+#~ msgid "`ju5t <https://github.com/ju5t>`_"
+#~ msgstr "`ju5t <https://github.com/ju5t>`_"
+
+#~ msgid "`jwveldhuis <https://github.com/jwveldhuis>`_"
+#~ msgstr "`jwveldhuis <https://github.com/jwveldhuis>`_"
+
+#~ msgid "Koen Volleberg"
+#~ msgstr "Koen Volleberg"
+
+#~ msgid "`lckarssen <https://github.com/lckarssen>`_"
+#~ msgstr "`lckarssen <https://github.com/lckarssen>`_"
+
+#~ msgid "`MarsWarrior <https://github.com/MarsWarrior>`_"
+#~ msgstr "`MarsWarrior <https://github.com/MarsWarrior>`_"
+
+#~ msgid "`mbnn <https://github.com/mbnn>`_"
+#~ msgstr "`mbnn <https://github.com/mbnn>`_"
+
+#~ msgid "`meijjaa <https://github.com/meijjaa>`_"
+#~ msgstr "`meijjaa <https://github.com/meijjaa>`_"
+
+#~ msgid "`michielvisser <https://github.com/michielvisser>`_"
+#~ msgstr "`michielvisser <https://github.com/michielvisser>`_"
+
+#~ msgid "`mjanssens <https://github.com/mjanssens>`_"
+#~ msgstr "`mjanssens <https://github.com/mjanssens>`_"
+
+#~ msgid "`mkruiver <https://github.com/mkruiver>`_"
+#~ msgstr "`mkruiver <https://github.com/mkruiver>`_"
+
+#~ msgid "`mrvanes <https://github.com/mrvanes>`_"
+#~ msgstr "`mrvanes <https://github.com/mrvanes>`_"
+
+#~ msgid "`Oliver Payne <https://github.com/olipayne>`_"
+#~ msgstr "`Oliver Payne <https://github.com/olipayne>`_"
+
+#~ msgid "`Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_"
+#~ msgstr "`Paul Vinken <https://nl.linkedin.com/in/paul-vinken-934a7a44>`_"
+
+#~ msgid "`perryodk <https://github.com/perryodk>`_"
+#~ msgstr "`perryodk <https://github.com/perryodk>`_"
+
+#~ msgid "`pyrocumulus <https://github.com/pyrocumulus>`_"
+#~ msgstr "`pyrocumulus <https://github.com/pyrocumulus>`_"
+
+#~ msgid "`raoulteeuwen <https://github.com/raoulteeuwen>`_"
+#~ msgstr "`raoulteeuwen <https://github.com/raoulteeuwen>`_"
+
+#~ msgid "`rodeho <https://github.com/rodeho>`_"
+#~ msgstr "`rodeho <https://github.com/rodeho>`_"
+
+#~ msgid ""
+#~ "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
+#~ msgstr ""
+#~ "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
+
+#~ msgid "`sanderdw <https://github.com/sanderdw>`_"
+#~ msgstr "`sanderdw <https://github.com/sanderdw>`_"
+
+#~ msgid "`SaturnusDJ <https://github.com/SaturnusDJ>`_"
+#~ msgstr "`SaturnusDJ <https://github.com/SaturnusDJ>`_"
+
+#~ msgid "`Sevickson <https://github.com/sevickson>`_"
+#~ msgstr "`Sevickson <https://github.com/sevickson>`_"
+
+#~ msgid "`swerveshot <https://github.com/swerveshot>`_"
+#~ msgstr "`swerveshot <https://github.com/swerveshot>`_"
+
+#~ msgid "`TampertK <https://github.com/TampertK>`_"
+#~ msgstr "`TampertK <https://github.com/TampertK>`_"
+
+#~ msgid "`ThinkPadNL <https://github.com/ThinkPadNL>`_"
+#~ msgstr "`ThinkPadNL <https://github.com/ThinkPadNL>`_"
+
+#~ msgid "`thommy101 <https://github.com/thommy101>`_"
+#~ msgstr "`thommy101 <https://github.com/thommy101>`_"
+
+#~ msgid "Tijs van Noije"
+#~ msgstr "Tijs van Noije"
+
+#~ msgid "`Timdebruijn <https://github.com/Timdebruijn>`_"
+#~ msgstr "`Timdebruijn <https://github.com/Timdebruijn>`_"
+
+#~ msgid "`TopdRob <https://github.com/TopdRob>`_"
+#~ msgstr "`TopdRob <https://github.com/TopdRob>`_"
+
+#~ msgid "`tpjanssen <https://github.com/tpjanssen>`_"
+#~ msgstr "`tpjanssen <https://github.com/tpjanssen>`_"
+
+#~ msgid "`trbs <https://github.com/trbs>`_"
+#~ msgstr "`trbs <https://github.com/trbs>`_"
+
+#~ msgid "`trizz <https://github.com/trizz>`_"
+#~ msgstr "`trizz <https://github.com/trizz>`_"
+
+#~ msgid "`ualex73 <https://github.com/ualex73>`_"
+#~ msgstr "`ualex73 <https://github.com/ualex73>`_"
+
+#~ msgid "`vavdb <https://github.com/vavdb>`_"
+#~ msgstr "`vavdb <https://github.com/vavdb>`_"
+
+#~ msgid "`voipmeister <https://github.com/voipmeister>`_"
+#~ msgstr "`voipmeister <https://github.com/voipmeister>`_"
+
+#~ msgid "`WatskeBart <https://github.com/WatskeBart>`_"
+#~ msgstr "`WatskeBart <https://github.com/WatskeBart>`_"
+
+#~ msgid "`xirixiz <https://github.com/xirixiz>`_"
+#~ msgstr "`xirixiz <https://github.com/xirixiz>`_"
+
+#~ msgid "Misc"
+#~ msgstr "Overig"
+
+#~ msgid ""
+#~ "Dutch Smart Meter reading specifications, data cables, examples and hints:"
+#~ msgstr ""
+#~ "Dutch Smart Meter reading specifications, data cables, examples and hints:"
+
+#~ msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
+#~ msgstr "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
+
+#~ msgid ""
+#~ "`Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard."
+#~ "nl/>`_"
+#~ msgstr ""
+#~ "`Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard."
+#~ "nl/>`_"
+
+#~ msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
+#~ msgstr "`SOS Solutions <https://www.sossolutions.nl/>`_"
+
+#~ msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
+#~ msgstr "`Nico Di Rocco <http://nrocco.github.io/>`_"

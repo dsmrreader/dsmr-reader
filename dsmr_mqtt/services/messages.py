@@ -19,7 +19,7 @@ def queue_message(topic, payload):
     """
 
     if queue.Message.objects.all().count() >= settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:
-        return logger.warning('Ignoring %s to max messages in queue reached', topic)
+        return logger.warning('MQTT: Ignoring %s to max messages in queue reached', topic)
 
     cache_storage = caches['mqtt']
     cache_key = topic
@@ -27,12 +27,12 @@ def queue_message(topic, payload):
 
     # We could have cached the topic, but with different data. Only ignore exactly the same topic + data.
     if cached_data is not None and cached_data == payload:
-        return logger.debug('Ignoring %s due to cache', topic)
+        return logger.debug('MQTT: Ignoring %s due to cache', topic)
 
     _, created = queue.Message.objects.get_or_create(topic=topic, payload=payload)
     cache_storage.set(cache_key, payload)
 
     if not created:
-        return logger.debug('Ignoring %s due to queue', topic)
+        return logger.debug('MQTT: Ignoring %s due to queue', topic)
 
-    logger.debug('Queued message for %s', topic)
+    logger.debug('MQTT: Queued message for %s', topic)

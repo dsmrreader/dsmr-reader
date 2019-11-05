@@ -2,15 +2,13 @@ from unittest import mock
 
 from django.test.utils import override_settings
 from django.test import TestCase
-from django.utils import timezone
 import serial
-import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
-from dsmr_datalogger.exceptions import InvalidTelegramError
 import dsmr_datalogger.services
 
 
@@ -59,44 +57,6 @@ class TestServices(TestCase):
             "0-1:24.4.0(1)\r\n",
             "!45FF\n",
         ])
-
-    def test_reading_timestamp_to_datetime(self):
-        result = dsmr_datalogger.services.reading_timestamp_to_datetime('151110192959W')
-        expected_result = timezone.make_aware(timezone.datetime(2015, 11, 10, 19, 29, 59))
-        self.assertEqual(result, expected_result)
-        self.assertEqual(result.tzinfo, pytz.utc)
-
-        result = dsmr_datalogger.services.reading_timestamp_to_datetime('160401203040W')
-        expected_result = timezone.make_aware(timezone.datetime(2016, 4, 1, 20, 30, 40))
-        self.assertEqual(result, expected_result)
-        self.assertEqual(result.tzinfo, pytz.utc)
-
-        # Summer time.
-        result = dsmr_datalogger.services.reading_timestamp_to_datetime('160327042016S')
-        expected_result = timezone.make_aware(timezone.datetime(2016, 3, 27, 4, 20, 16))
-        self.assertEqual(result, expected_result)
-        self.assertEqual(result.tzinfo, pytz.utc)
-
-        """ Summer to winter transition is hard in DST, because the input is not UTC. """
-        # Last hour before winter time.
-        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030020000S')
-        expected_result = timezone.datetime(2016, 10, 30, 0, tzinfo=pytz.utc)
-        self.assertEqual(result, expected_result)
-
-        # Last second before winter time.
-        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030025959S')
-        expected_result = timezone.datetime(2016, 10, 30, 0, 59, 59, tzinfo=pytz.utc)
-        self.assertEqual(result, expected_result)
-
-        # First second in winter time.
-        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030020000W')
-        expected_result = timezone.datetime(2016, 10, 30, 1, tzinfo=pytz.utc)
-        self.assertEqual(result, expected_result)
-
-        # Last second of DST transition.
-        result = dsmr_datalogger.services.reading_timestamp_to_datetime('161030025959W')
-        expected_result = timezone.datetime(2016, 10, 30, 1, 59, 59, tzinfo=pytz.utc)
-        self.assertEqual(result, expected_result)
 
     def test_track_meter_statistics(self):
         telegram = ''.join([
@@ -153,8 +113,8 @@ class TestServices(TestCase):
         self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)
         self.assertEqual(meter_statistics.voltage_sag_count_l2, 2)
 
-    @mock.patch('dsmr_datalogger.services.verify_telegram_checksum')
-    def test_extra_devices_mbus_hack(self, *mocks):
+    @mock.patch('dsmr_parser.parsers.TelegramParser.validate_checksum')
+    def test_extra_devices_mbus_hack(self, _):
         """ Verify that the hack issue #92 is working. """
         fake_telegram = [
             "/XMX5LGBBFFB123456789\r\n",
@@ -197,7 +157,7 @@ class TestServices(TestCase):
             dsmr_datalogger.services.telegram_to_reading(data=''.join(fake_telegram))
             self.assertFalse(DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists())
 
-    def test_verify_telegram_checksum(self):
+    def test_validate_checksum(self):
         """ Verify that CRC checks. """
         telegram = [
             "/XMX5LGBBFFB123456789\r\n",
@@ -238,20 +198,15 @@ class TestServices(TestCase):
             "0-1:96.1.0(098765432109876543210987654321)\r\n",
             "0-1:24.2.1(151110190000W)(00845.206*m3)\r\n",
             "0-1:24.4.0(1)\r\n",
-            "!D19A\n",
+            "!0000\n",  # Invalid
         ]
 
         with self.assertRaises(InvalidTelegramError):
-            # Empty.
-            dsmr_datalogger.services.verify_telegram_checksum(data='')
+            dsmr_datalogger.services.telegram_to_reading(data=''.join(telegram))
 
-        with self.assertRaises(InvalidTelegramError):
-            # Invalid checksum.
-            dsmr_datalogger.services.verify_telegram_checksum(data=''.join(telegram))
-
-        # Again, with the correct checksum.
+        # Again, with the expected checksum.
         telegram[-1] = "!58C8\n"
-        dsmr_datalogger.services.verify_telegram_checksum(data=''.join(telegram))
+        dsmr_datalogger.services.telegram_to_reading(data=''.join(telegram))
 
     @override_settings(DSMRREADER_LOG_TELEGRAMS=True)
     def test_telegram_logging_setting_coverage(self):
@@ -260,13 +215,13 @@ class TestServices(TestCase):
 
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
-    def test_dsmr_version_2(self):
+    def test_dsmr_version_2_and_3(self):
         """ Test connection parameters for DSMR v2. """
         datalogger_settings = DataloggerSettings.get_solo()
-        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2
+        datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_2_3
         datalogger_settings.save()
 
-        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_2)
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_2_3)
 
         connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 9600)
