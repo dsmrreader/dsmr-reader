@@ -2,6 +2,7 @@
 
 from django.db import migrations
 from django.conf import settings
+from django.utils import timezone
 
 
 def migrate_forward(apps, schema_editor):
@@ -9,10 +10,15 @@ def migrate_forward(apps, schema_editor):
     ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
 
     WeatherSettings.objects.get_or_create()  # Ensure we have at least an instance.
+
+    # Do not conflict with latest reading.
+    next_update = (timezone.now() + timezone.timedelta(hours=1)).replace(minute=0, second=0)
+
     ScheduledProcess.objects.create(
         name='Weather update',
         module=settings.DSMRREADER_MODULE_WEATHER_UPDATE,
-        active=WeatherSettings.objects.get().track
+        active=WeatherSettings.objects.get().track,
+        planned=next_update,
     )
 
 

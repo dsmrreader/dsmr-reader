@@ -30,7 +30,7 @@ class TestDsmrWeatherServices(TestCase):
         self.assertTrue(display_dashboard_message_mock.called)
 
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(minutes=5))
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
     @mock.patch('requests.get')
     @mock.patch('django.utils.timezone.now')

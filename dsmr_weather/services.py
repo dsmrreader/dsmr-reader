@@ -21,8 +21,7 @@ def run(scheduled_process):
     except Exception as error:
         logger.exception(error)
 
-        # On any error, just try again in 5 minutes.
-        scheduled_process.delay(timezone.timedelta(minutes=5))
+        scheduled_process.delay(timezone.timedelta(hours=1))
         return dsmr_frontend.services.display_dashboard_message(message=_(
             'Failed to read Buienradar API: {}'.format(error)
         ))
