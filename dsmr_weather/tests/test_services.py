@@ -24,7 +24,7 @@ class TestDsmrWeatherServices(TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_exception_handling(self, now_mock, get_temperature_from_api_mock, display_dashboard_message_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
-        get_temperature_from_api_mock.side_effect = EnvironmentError('TEST')  # Simulate any exception.
+        get_temperature_from_api_mock.side_effect = AssertionError('TEST')  # Simulate any exception.
 
         dsmr_weather.services.run(self.schedule_process)
         self.assertTrue(display_dashboard_message_mock.called)
@@ -60,13 +60,22 @@ class TestDsmrWeatherServices(TestCase):
 
     @mock.patch('requests.get')
     @mock.patch('django.utils.timezone.now')
-    def test_fail_http(self, now_mock, requests_mock):
+    def test_fail_http_connection(self, now_mock, requests_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
+        requests_mock.side_effect = IOError('Failed to connect')  # Any error is fine.
+
+        with self.assertRaises(AssertionError):
+            dsmr_weather.services.get_temperature_from_api()
+
+    @mock.patch('requests.get')
+    @mock.patch('django.utils.timezone.now')
+    def test_fail_http_response(self, now_mock, requests_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
         response_mock = mock.MagicMock()
         type(response_mock).status_code = mock.PropertyMock(return_value=500)
         requests_mock.return_value = response_mock
 
-        with self.assertRaises(EnvironmentError):
+        with self.assertRaises(AssertionError):
             dsmr_weather.services.get_temperature_from_api()
 
     @mock.patch('requests.get')
@@ -85,5 +94,5 @@ class TestDsmrWeatherServices(TestCase):
         type(response_mock).status_code = mock.PropertyMock(return_value=200)
         requests_mock.return_value = response_mock
 
-        with self.assertRaises(EnvironmentError):
+        with self.assertRaises(AssertionError):
             dsmr_weather.services.get_temperature_from_api()

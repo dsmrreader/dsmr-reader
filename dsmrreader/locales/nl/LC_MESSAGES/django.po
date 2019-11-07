@@ -1300,8 +1300,8 @@ msgstr "Exporteren naar MinderGas gefaald: {}"
 msgid "No recent gas reading found"
 msgstr "Geen recente gasmeting gevonden"
 
-msgid "Invalid status code"
-msgstr "Ongeldige statuscode"
+msgid "Unexpected status code received"
+msgstr "Onverwachte statuscode ontvangen"
 
 msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentatie</a>"
@@ -2179,11 +2179,20 @@ msgstr "Weergegevensconfiguratie"
 msgid "Failed to read Buienradar API: {}"
 msgstr "Uitlezen van Buienradar API mislukt: {}"
 
+msgid "Failed to connect to or read from Buienradar API"
+msgstr "Kan niet verbinden naar of lezen van de Buienradar API"
+
+msgid "Selected station info not found"
+msgstr "Geselecteerd weerstation niet gevonden"
+
 msgid "Dutch"
 msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Invalid status code"
+#~ msgstr "Ongeldige statuscode"
 
 #~ msgid "Internals"
 #~ msgstr "Intern"

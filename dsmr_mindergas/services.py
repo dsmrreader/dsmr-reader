@@ -76,4 +76,4 @@ def export():
 
     if response.status_code != 201:
         logger.error('MinderGas: Upload failed (HTTP %s): %s', response.status_code, response.text)
-        raise AssertionError(_('Invalid status code'))
+        raise AssertionError(_('Unexpected status code received'))

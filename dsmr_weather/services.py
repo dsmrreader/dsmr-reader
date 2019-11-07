@@ -32,18 +32,23 @@ def run(scheduled_process):
 def get_temperature_from_api():
     # For backend logging in Supervisor.
     logger.debug('Buienradar: Reading temperature: %s', settings.DSMRREADER_BUIENRADAR_API_URL)
-    response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL)
+
+    try:
+        response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL)
+    except Exception as error:
+        logger.exception(error)
+        raise AssertionError(_('Failed to connect to or read from Buienradar API'))
 
     if response.status_code != 200:
         logger.error('Buienradar: Failed reading temperature: HTTP %s', response.status_code)
-        raise EnvironmentError('Unexpected status code received')
+        raise AssertionError(_('Unexpected status code received'))
 
     # Find our selected station.
     station_id = WeatherSettings.get_solo().buienradar_station
     station_data = [x for x in response.json()['actual']['stationmeasurements'] if x['stationid'] == station_id]
 
     if not station_data:
-        raise EnvironmentError('Selected station info not found')
+        raise AssertionError(_('Selected station info not found'))
 
     temperature = station_data[0]['groundtemperature']
     logger.debug('Buienradar: Read temperature: %s', temperature)
