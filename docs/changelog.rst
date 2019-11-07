@@ -5,6 +5,8 @@ v2.11.0 - 2019-xx-xx
 
 - [`#774 <https://github.com/dennissiemensma/dsmr-reader/issues/774>`_] Generic performance improvements
 - [`#776 <https://github.com/dennissiemensma/dsmr-reader/issues/776>`_] Meerdere foutmeldingen Buienradar API
+- [`#777 <https://github.com/dennissiemensma/dsmr-reader/issues/777>`_] Requirements update (November 2019)
+
 
 ----
 
