@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class WeatherSettings(SingletonModel):
+
+class WeatherSettings(ModelUpdateMixin, SingletonModel):
     BUIENRADAR_STATIONS = (
         (6391, _('Weather station Arcen')),
         (6275, _('Weather station Arnhem')),

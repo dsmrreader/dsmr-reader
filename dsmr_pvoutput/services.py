@@ -1,5 +1,6 @@
 import logging
 
+from django.conf import settings
 from django.utils import timezone
 import requests
 
@@ -118,6 +119,7 @@ def export():
     response = requests.post(
         PVOutputAddStatusSettings.API_URL,
         headers={
+            'User-Agent': settings.DSMRREADER_USER_AGENT,
             'X-Pvoutput-Apikey': api_settings.auth_token,
             'X-Pvoutput-SystemId': api_settings.system_identifier,
         },

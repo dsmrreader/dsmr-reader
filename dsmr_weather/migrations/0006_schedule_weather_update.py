@@ -9,16 +9,13 @@ def migrate_forward(apps, schema_editor):
     WeatherSettings = apps.get_model('dsmr_weather', 'WeatherSettings')
     ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
 
-    WeatherSettings.objects.get_or_create()  # Ensure we have at least an instance.
-
-    # Do not conflict with latest reading.
-    next_update = (timezone.now() + timezone.timedelta(hours=1)).replace(minute=0, second=0)
+    app_settings, _ = WeatherSettings.objects.get_or_create()  # Ensure we have at least an instance.
 
     ScheduledProcess.objects.create(
         name='Weather update',
         module=settings.DSMRREADER_MODULE_WEATHER_UPDATE,
-        active=WeatherSettings.objects.get().track,
-        planned=next_update,
+        active=app_settings.track,
+        planned=app_settings.next_sync or timezone.now(),
     )
 
 
@@ -31,6 +28,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(migrate_forward, migrate_backward),
+        migrations.RemoveField(
+            model_name='weathersettings',
+            name='next_sync',
+        ),
     ]
 
     dependencies = [

@@ -153,7 +153,7 @@
                                     {% endif %}
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times-circle"></span> {% trans "No data." %}
+                                    <span class="fas fa-times"></span> {% trans "No data." %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -187,7 +187,7 @@
                                     {% endif %}
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times-circle"></span> {% trans "No data." %}
+                                    <span class="fas fa-times"></span> {% trans "No data." %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -210,7 +210,7 @@
                             <td class="col-md-6">
                                 {% if status.statistics.days_since == None or status.statistics.days_since > 1 %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times-circle"></span>
+                                    <span class="fas fa-times"></span>
                                     {% trans "Data processing is lagging behind" %}:
                                     <strong>{% if status.statistics.latest %}{{ status.statistics.latest }}{% else %}{% trans "No data." %}{% endif %}</strong>
                                 </div>
@@ -228,6 +228,38 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fas fa-cogs"></i> &nbsp; {% trans "Scheduled processes" %} <br />
+                </header>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                    {%  for current in status.scheduled_processes %}
+                        <tr>
+                            <td class="col-md-6">
+                                <strong>{{ current.name }}</strong>
+                            </td>
+                            <td class="col-md-6">
+                                {% if current.active %}
+                                <div class="alert {% if current.planned >= status.now %}alert-success{% else %}alert-danger{% endif %}" role="alert">
+                                    {% trans "Last run" %}: <strong>{{ current.last_executed_at|naturaltime|default:'-' }}</strong>
+                                    <br>
+                                    <small>{% trans "Next" %}: <strong>{{ current.planned|naturaltime|default:'-' }}</strong></small>
+                                </div>
+                                {% else %}
+                                    <small>{% trans "Currently disabled or not configured." %}</small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -260,20 +292,6 @@
                                 <div class="alert alert-info" role="alert">
                                     <i class="fas fa-check"></i>
                                     {% trans "Latest Dropbox sync" %}: <strong>{{ status.tools.dropbox.latest_sync|default:'-' }}</strong>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endif %}
-
-                        {% if status.tools.mindergas.enabled %}
-                        <tr>
-                            <td class="col-md-6">
-                                <strong>{% trans "Latest MinderGas sync" %}</strong>
-                            </td>
-                            <td class="col-md-6">
-                                <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-check"></i>
-                                    {% trans "Latest MinderGas sync" %}: <strong>{{ status.tools.mindergas.latest_sync|default:'-' }}</strong>
                                 </div>
                             </td>
                         </tr>
@@ -343,7 +361,7 @@
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times-circle"></span> {% trans "No electricity usage recorded" %}
+                                    <span class="fas fa-times"></span> {% trans "No electricity usage recorded" %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -368,7 +386,7 @@
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times-circle"></span> {% trans "No electricity return recorded" %}
+                                    <span class="fas fa-times"></span> {% trans "No electricity return recorded" %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -393,7 +411,7 @@
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times-circle"></span> {% trans "No gas usage recorded" %}
+                                    <span class="fas fa-times"></span> {% trans "No gas usage recorded" %}
                                 </div>
                                 {% endif %}
                             </td>

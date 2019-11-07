@@ -24,7 +24,7 @@ class TestSettings(TestCase):
     def test_buienradar_station(self):
         self.assertEqual(self.instance.buienradar_station, 6260)
 
-    def test_handle_backend_settings_update_hook(self):
+    def test_handle_settings_update_hook(self):
         sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE)
         self.assertFalse(sp.active)
 

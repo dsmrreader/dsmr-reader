@@ -8,6 +8,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.core.cache import cache
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_mqtt.models.queue import Message
 from dsmr_weather.models.reading import TemperatureReading
@@ -15,7 +16,6 @@ from dsmr_weather.models.settings import WeatherSettings
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
-from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 
 
@@ -179,6 +179,8 @@ def status_info():
     """ Returns the status info of the application. """
     capabilities = get_capabilities()
     status = {
+        'now': timezone.now(),
+        'scheduled_processes': ScheduledProcess.objects.all().order_by('-active').values(),
         'capabilities': capabilities,
         'electricity': get_electricity_status(capabilities),
         'gas': get_gas_status(capabilities),
@@ -224,12 +226,6 @@ def status_info():
     if pvoutput_settings.export:
         status['tools']['pvoutput']['enabled'] = True
         status['tools']['pvoutput']['latest_sync'] = pvoutput_settings.latest_sync
-
-    mindergas_settings = MinderGasSettings.get_solo()
-
-    if mindergas_settings.export:
-        status['tools']['mindergas']['enabled'] = True
-        status['tools']['mindergas']['latest_sync'] = mindergas_settings.latest_sync
 
     return status
 

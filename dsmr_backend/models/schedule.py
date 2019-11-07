@@ -7,6 +7,7 @@ from django.db import models
 
 from dsmr_backend.mixins import ModelUpdateMixin
 
+
 logger = logging.getLogger('commands')
 
 
@@ -20,10 +21,25 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
     objects = ScheduledProcessManager()
     name = models.CharField(max_length=64)
     module = models.CharField(max_length=128, unique=True)
-    planned = models.DateTimeField(default=timezone.now, db_index=True)
-    active = models.BooleanField(default=True, db_index=True)
+    last_executed_at = models.DateTimeField(
+        null=True,
+        default=None,
+        help_text=_('The last moment this process ran (disregarding whether it succeeded or failed).'),
+    )
+    planned = models.DateTimeField(
+        default=timezone.now,
+        db_index=True,
+        help_text=_('The next moment this process will run again.'),
+    )
+    active = models.BooleanField(
+        default=True,
+        db_index=True,
+        help_text=_('Related configuration settings manage whether this process is active or disabled for you.'),
+    )
 
     def execute(self):
+        self.update(last_executed_at=timezone.now())
+
         # Import the first part of the path, execute the last bit later.
         splitted_path = self.module.split('.')
         import_path = '.'.join(splitted_path[:-1])

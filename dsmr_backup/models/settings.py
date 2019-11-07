@@ -4,8 +4,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class BackupSettings(SingletonModel):
+
+class BackupSettings(ModelUpdateMixin, SingletonModel):
     """ Generic backup settings. """
     daily_backup = models.BooleanField(
         default=True,
@@ -48,7 +50,7 @@ class BackupSettings(SingletonModel):
         verbose_name = _('Backup configuration')
 
 
-class DropboxSettings(SingletonModel):
+class DropboxSettings(ModelUpdateMixin, SingletonModel):
     """ Dropbox backup upload settings. """
     access_token = models.CharField(
         max_length=128,
@@ -80,7 +82,7 @@ class DropboxSettings(SingletonModel):
         verbose_name = _('Dropbox configuration')
 
 
-class EmailBackupSettings(SingletonModel):
+class EmailBackupSettings(ModelUpdateMixin, SingletonModel):
     """ Backup by email settings. """
     INTERVAL_NONE = None
     INTERVAL_DAILY = 1

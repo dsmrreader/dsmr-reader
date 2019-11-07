@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class DataloggerSettings(SingletonModel):
+
+class DataloggerSettings(ModelUpdateMixin, SingletonModel):
     DSMR_VERSION_4_PLUS = 4
     DSMR_VERSION_2_3 = 3
     DSMR_BELGIUM_FLUVIUS = 101
@@ -36,7 +38,7 @@ class DataloggerSettings(SingletonModel):
         verbose_name = _('Datalogger configuration')
 
 
-class RetentionSettings(SingletonModel):
+class RetentionSettings(ModelUpdateMixin, SingletonModel):
     RETENTION_NONE = None
     RETENTION_WEEK = 7 * 24
     RETENTION_MONTH = 4 * RETENTION_WEEK

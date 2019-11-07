@@ -61,7 +61,7 @@ class TestEmailBackupSettings(TestCase):
     def test_interval(self):
         self.assertIsNone(self.instance.interval)
 
-    def test_handle_backend_settings_update_hook(self):
+    def test_handle_settings_update_hook(self):
         sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_EMAIL_BACKUP)
         self.assertFalse(sp.active)
 

@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class ElectricityConsumption(models.Model):
+
+class ElectricityConsumption(ModelUpdateMixin, models.Model):
     """ Point in time of electricity consumption (usage), extracted from reading(s). """
     read_at = models.DateTimeField(unique=True)
     delivered_1 = models.DecimalField(
@@ -127,7 +129,7 @@ class ElectricityConsumption(models.Model):
         verbose_name_plural = verbose_name
 
 
-class GasConsumption(models.Model):
+class GasConsumption(ModelUpdateMixin, models.Model):
     """ Interpolated gas reading, containing the actual usage, based on the reading before (if any). """
     read_at = models.DateTimeField(unique=True)
     delivered = models.DecimalField(

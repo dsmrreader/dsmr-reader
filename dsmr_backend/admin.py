@@ -94,21 +94,21 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 @admin.register(ScheduledProcess)
 class ScheduledProcessAdmin(admin.ModelAdmin):
     list_display = ('active', 'name', 'planned', 'next_call_naturaltime')
-    readonly_fields = ('name', 'module', 'active')
+    readonly_fields = ('name', 'active')
     list_display_links = ('name', 'planned')
     actions = None
 
     fieldsets = (
         (
-            _('Internals'), {
-                'fields': ['name', 'module', 'active'],
+            None, {
+                'fields': ['active', 'name'],
             }
         ),
         (
             ('Next call'), {
                 'fields': ['planned'],
                 'description': _(
-                    _('Reschedule a process here. Do not modify unless you know why to change it.')
+                    _('Only reschedule a process if you really need to, as it could cause mistimings at some point.')
                 )
             }
         ),

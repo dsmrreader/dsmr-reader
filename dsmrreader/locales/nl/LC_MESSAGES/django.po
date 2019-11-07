@@ -52,11 +52,8 @@ msgstr "Versturen van e-mail test gefaald: {}"
 msgid "Email sent succesfully, please check your email inbox (and spam folder)."
 msgstr "E-mail is verstuurd. Controleer je Inbox (en Spam-folder)."
 
-msgid "Internals"
-msgstr "Intern"
-
-msgid "Reschedule a process here. Do not modify unless you know why to change it."
-msgstr "Herplan een process hier. Wijzig niets als je niet exact weet wat je doet."
+msgid "Only reschedule a process if you really need to, as it could cause mistimings at some point."
+msgstr "Herplan een proces alleen wanneer het noodzakelijk is, gezien het de timing tussen processen kan aantasten."
 
 msgid "Time until next call"
 msgstr "Tijd tot volgende aanroep"
@@ -81,6 +78,15 @@ msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor
 
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert enkele uitvoer"
+
+msgid "The last moment this process ran (disregarding whether it succeeded or failed)."
+msgstr "Laatste moment dat dit proces draaide (ongeacht of het proces zelf lukte of faalde)."
+
+msgid "The next moment this process will run again."
+msgstr "Het eerstevolgende moment dat dit proces weer draait."
+
+msgid "Related configuration settings manage whether this process is active or disabled for you."
+msgstr "Gerelateerd configuratieinstellingen bepalen of dit proces actief of uitgeschakeld is."
 
 msgid "Scheduled process"
 msgstr "Gepland proces"
@@ -1189,14 +1195,23 @@ msgstr "Dataverwerking loopt achter"
 msgid "Data processing is on schedule"
 msgstr "Dataverwerking is op schema"
 
+msgid "Scheduled processes"
+msgstr "Gepland proces"
+
+msgid "Last run"
+msgstr "Laatst gedraaid"
+
+msgid "Next"
+msgstr "Volgende"
+
+msgid "Currently disabled or not configured."
+msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
+
 msgid "Tools"
 msgstr "Tools"
 
 msgid "Latest Dropbox sync"
 msgstr "Meest recente synchronisatie met Dropbox"
-
-msgid "Latest MinderGas sync"
-msgstr "Meest recente synchronisatie met MinderGas"
 
 msgid "Latest PVOutput sync"
 msgstr "Meest recente synchronisatie met PVOutput"
@@ -1276,17 +1291,17 @@ msgstr "MinderGas.nl Authenticatietoken (API)"
 msgid "The authentication token used to authenticate for the MinderGas API. More information can be found here: https://www.mindergas.nl/member/api"
 msgstr "Authenticatietoken voor de API-toegang van je persoonlijk account bij MinderGas. Kijk hier voor meer informatie: https://www.mindergas.nl/member/api"
 
-msgid "Timestamp of latest sync with MinderGas. Automatically updated by application."
-msgstr "Tijdstip van de laatste synchronisatie met MinderGas. Applicatie werkt dit automatisch bij."
-
-msgid "Next export"
-msgstr "Volgende synchronisatie"
-
-msgid "Timestamp of the next export. Automatically updated by application."
-msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
-
 msgid "MinderGas.nl configuration"
 msgstr "MinderGas.nl-configuratie"
+
+msgid "Failed to export to MinderGas: {}"
+msgstr "Exporteren naar MinderGas gefaald: {}"
+
+msgid "No recent gas reading found"
+msgstr "Geen recente gasmeting gevonden"
+
+msgid "Invalid status code"
+msgstr "Ongeldige statuscode"
 
 msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentatie</a>"
@@ -1873,6 +1888,12 @@ msgstr "PVOutput: Verwerkingsvertraging (in minuten)"
 msgid "Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)"
 msgstr "Laat dit veld leeg om uit te schakelen. Deze parameter staat het vertraagd verwerken van gegevens toe. Je kunt de vertraging instellen op een aantal minuten. Toegestaan: leeg veld of 0 tot 120 (minuten)"
 
+msgid "Next export"
+msgstr "Volgende synchronisatie"
+
+msgid "Timestamp of the next export. Automatically updated by application."
+msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
+
 msgid "Timestamp of latest sync with PVOutput. Automatically updated by application."
 msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt dit automatisch bij."
 
@@ -2163,6 +2184,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Internals"
+#~ msgstr "Intern"
+
+#~ msgid "Reschedule a process here. Do not modify unless you know why to change it."
+#~ msgstr "Herplan een process hier. Wijzig niets als je niet exact weet wat je doet."
+
+#~ msgid "Latest MinderGas sync"
+#~ msgstr "Meest recente synchronisatie met MinderGas"
+
+#~ msgid "Timestamp of latest sync with MinderGas. Automatically updated by application."
+#~ msgstr "Tijdstip van de laatste synchronisatie met MinderGas. Applicatie werkt dit automatisch bij."
 
 #~ msgid "Timestamp of the next sync. Automatically updated by application."
 #~ msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit automatisch bij."

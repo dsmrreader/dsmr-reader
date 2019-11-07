@@ -10,8 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='weathersettings',
-            name='next_sync',
-        ),
+        # Moved to next migration.
     ]

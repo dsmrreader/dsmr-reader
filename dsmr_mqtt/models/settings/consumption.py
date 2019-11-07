@@ -2,8 +2,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class JSONGasConsumptionMQTTSettings(SingletonModel):
+
+class JSONGasConsumptionMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT JSON gas consumption. """
     enabled = models.BooleanField(
         default=False,
@@ -36,7 +38,7 @@ currently_delivered = currently_delivered
         verbose_name = _('(Data source) Gas consumption: JSON')
 
 
-class SplitTopicGasConsumptionMQTTSettings(SingletonModel):
+class SplitTopicGasConsumptionMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT splitted gas consumption per field, mapped to topics. """
     enabled = models.BooleanField(
         default=False,

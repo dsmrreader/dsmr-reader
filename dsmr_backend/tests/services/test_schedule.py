@@ -23,7 +23,6 @@ class TestSchedule(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backup.services.backup.check')
     @mock.patch('dsmr_backup.services.backup.sync')
     @mock.patch('dsmr_consumption.services.compact_all')
-    @mock.patch('dsmr_mindergas.services.export')
     @mock.patch('dsmr_notification.services.notify')
     def test_backend_creation_signal_receivers(self, *mocks):
         """ Test whether outgoing signal is received. """
@@ -88,10 +87,11 @@ class TestSchedule(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backend.services.update_checker.run')
     @mock.patch('dsmr_weather.services.run')
     @mock.patch('dsmr_stats.services.run')
+    @mock.patch('dsmr_mindergas.services.run')
     def test_scheduled_processes_modules(self, *mocks):
         """ Verify the number of processes and that their module is called. """
         ScheduledProcess.objects.all().update(active=True, planned=timezone.now())
-        self.assertEqual(ScheduledProcess.objects.all().count(), 4)
+        self.assertEqual(ScheduledProcess.objects.all().count(), 5)
         self.assertFalse(any([x.called for x in mocks]))
 
         dsmr_backend.services.schedule.execute_scheduled_processes()
