@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v2.11.0 - 2019-xx-xx
+v2.11.0 - 2019-11-09
 
 - [`#774 <https://github.com/dennissiemensma/dsmr-reader/issues/774>`_] Generic performance improvements
 - [`#776 <https://github.com/dennissiemensma/dsmr-reader/issues/776>`_] Meerdere foutmeldingen Buienradar API
