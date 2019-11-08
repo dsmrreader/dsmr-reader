@@ -1201,8 +1201,8 @@ msgstr "Gepland proces"
 msgid "Last run"
 msgstr "Laatst gedraaid"
 
-msgid "Next"
-msgstr "Volgende"
+msgid "Next run"
+msgstr "Volgende uitvoer"
 
 msgid "Currently disabled or not configured."
 msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
@@ -2190,6 +2190,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Next"
+#~ msgstr "Volgende"
 
 #~ msgid "Invalid status code"
 #~ msgstr "Ongeldige statuscode"

@@ -247,7 +247,7 @@
                                 <div class="alert {% if current.planned >= status.now %}alert-success{% else %}alert-danger{% endif %}" role="alert">
                                     {% trans "Last run" %}: <strong>{{ current.last_executed_at|naturaltime|default:'-' }}</strong>
                                     <br>
-                                    <small>{% trans "Next" %}: <strong>{{ current.planned|naturaltime|default:'-' }}</strong></small>
+                                    <small>{% trans "Next run" %}: <strong>{{ current.planned|naturaltime|default:'-' }}</strong></small>
                                 </div>
                                 {% else %}
                                     <small>{% trans "Currently disabled or not configured." %}</small>
