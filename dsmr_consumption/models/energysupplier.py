@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext, ugettext_lazy as _
 
+from dsmr_backend.mixins import ModelUpdateMixin
+
 
 class EnergySupplierPriceManager(models.Manager):
     def by_date(self, target_date):
@@ -13,7 +15,7 @@ class EnergySupplierPriceManager(models.Manager):
         )
 
 
-class EnergySupplierPrice(models.Model):
+class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     """
     Represents the price you are/were charged by your energy supplier.
     Prices are per unit, which is either one kWh power or m3 gas.

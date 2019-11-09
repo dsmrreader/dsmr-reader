@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class APISettings(SingletonModel):
+
+class APISettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
     allow = models.BooleanField(
         default=False,

@@ -1,3 +1,4 @@
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django.forms import TextInput
 from django.utils import timezone
@@ -5,6 +6,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.db import models
 from solo.admin import SingletonModelAdmin
+import django.db.models.signals
 
 from dsmr_backup.forms import BackupSettingsAdminForm
 from .models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
@@ -107,3 +109,11 @@ class EmailBackupSettingsAdmin(SingletonModelAdmin):
             module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
         ).update(planned=timezone.now())
         return super(EmailBackupSettingsAdmin, self).response_change(request, obj)
+
+
+@receiver(django.db.models.signals.post_save, sender=EmailBackupSettings)
+def handle_email_backup_settings_update(sender, instance, **kwargs):
+    """ Hook to toggle related scheduled process. """
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
+    ).update(active=instance.interval != EmailBackupSettings.INTERVAL_NONE)

@@ -2,10 +2,12 @@ import datetime
 from unittest import mock
 from decimal import Decimal
 
+from django.conf import settings
 from django.db import connection
 from django.test import TestCase
 from django.utils import timezone
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -18,6 +20,12 @@ import dsmr_stats.services
 
 class TestServices(InterceptStdoutMixin, TestCase):
     fixtures = ['dsmr_stats/electricity-consumption.json', 'dsmr_stats/gas-consumption.json']
+
+    schedule_process = None
+
+    def setUp(self):
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_STATS_GENERATOR)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2015, 1, 1)))
 
     def _get_statistics_dict(self, target_date):
         """ Used multiple times to setup proper day statistics data. """
@@ -70,13 +78,13 @@ class TestServices(InterceptStdoutMixin, TestCase):
             datetime.date(2015, 12, 12)
         )
 
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
         self.assertEqual(
             dsmr_stats.services.get_next_day_to_generate(),
             datetime.date(2015, 12, 15)
         )
 
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
         self.assertEqual(
             dsmr_stats.services.get_next_day_to_generate(),
             datetime.date(2015, 12, 20)
@@ -98,12 +106,17 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
     @mock.patch('dsmr_stats.services.is_data_available')
     @mock.patch('dsmr_stats.services.get_next_day_to_generate')
-    def test_analyze_no_data(self, get_next_day_to_generate_mock, is_data_available_mock):
+    @mock.patch('django.utils.timezone.now')
+    def test_analyze_no_data(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
         """ Fail analyze because here is no data. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
         is_data_available_mock.return_value = False
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
 
         self.assertFalse(get_next_day_to_generate_mock.called)
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
     @mock.patch('dsmr_stats.services.is_data_available')
     @mock.patch('dsmr_stats.services.get_next_day_to_generate')
@@ -114,7 +127,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         is_data_available_mock.return_value = True
         get_next_day_to_generate_mock.return_value = timezone.now().date()  # Same day
 
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(days=1))
 
     @mock.patch('dsmr_stats.services.is_data_available')
     @mock.patch('dsmr_stats.services.get_next_day_to_generate')
@@ -138,7 +154,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         )
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
 
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(minutes=5))
 
     @mock.patch('dsmr_stats.services.is_data_available')
     @mock.patch('dsmr_stats.services.get_next_day_to_generate')
@@ -153,7 +172,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         ElectricityConsumption.objects.all().delete()
         self.assertFalse(ElectricityConsumption.objects.exists())
 
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
     @mock.patch('dsmr_stats.services.create_statistics')
     @mock.patch('dsmr_stats.services.is_data_available')
@@ -180,8 +202,11 @@ class TestServices(InterceptStdoutMixin, TestCase):
             currently_returned=2,
         )
 
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
         self.assertFalse(create_statistics_mock.called)  # Blocked
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(minutes=5))
 
     @mock.patch('dsmr_stats.services.create_statistics')
     @mock.patch('dsmr_stats.services.is_data_available')
@@ -213,7 +238,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             currently_delivered=2
         )
 
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
         self.assertTrue(create_statistics_mock.called)
 
     def test_create_hourly_statistics_dsmr_v4_gas(self):
@@ -277,7 +302,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
     def test_analyze_service_without_data(self):
         first_consumption = ElectricityConsumption.objects.all().order_by('read_at')[0]
         first_consumption.read_at = first_consumption.read_at + timezone.timedelta()
-        dsmr_stats.services.analyze()
+        dsmr_stats.services.run(self.schedule_process)
 
     @mock.patch('django.utils.timezone.now')
     def test_analyze_service_skip_current_day(self, now_mock):
@@ -311,7 +336,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(HourStatistics.objects.exists())
 
         try:
-            dsmr_stats.services.analyze()
+            dsmr_stats.services.run(self.schedule_process)
         except LookupError:
             pass
 

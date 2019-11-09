@@ -8,11 +8,9 @@
 # DSMR-reader: Datalogger/archive for P1 DSMR Telegrams
 
 ## Project goal
-- **Free to use**: non-commercial use only.
 - **Own your own data**: data is stored on your own device.
+- **Free to use**: non-commercial use only.
 
-## Screenshots
-Check out some previews [in the documentation](https://dsmr-reader.readthedocs.io/en/v2/screenshots.html).
 
 ## Quick start
 - **Requirements**: [English](https://dsmr-reader.readthedocs.io/en/v2/requirements.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v2/requirements.html)
@@ -22,3 +20,8 @@ Check out some previews [in the documentation](https://dsmr-reader.readthedocs.i
 
 ## Other
 - **View full documentation**: [English](https://dsmr-reader.readthedocs.io/en/v2/index.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v2/index.html)
+
+## Screenshots
+Check out some previews [in the documentation](https://dsmr-reader.readthedocs.io/en/v2/screenshots.html).
+
+![Dashboard](https://dsmr-reader.readthedocs.io/en/v2/_static/screenshots/frontend/dashboard.png)

@@ -4,7 +4,7 @@ from django.conf import settings
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 
 
-class TestBackend(InterceptStdoutMixin, TestCase):
+class TestBackendInfra(InterceptStdoutMixin, TestCase):
     def test_supported_vendors(self):
         """ Check whether supported vendors is as expected. """
         self.assertEqual(

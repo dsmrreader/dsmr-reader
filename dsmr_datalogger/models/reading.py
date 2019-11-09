@@ -2,6 +2,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.utils import timezone
 
+from dsmr_backend.mixins import ModelUpdateMixin
+
 
 class DsmrReadingManager(models.Manager):
     def unprocessed(self):
@@ -11,7 +13,7 @@ class DsmrReadingManager(models.Manager):
         return self.get_queryset().filter(processed=True)
 
 
-class DsmrReading(models.Model):
+class DsmrReading(ModelUpdateMixin, models.Model):
     """
     Core data read from a P1 DSMR telegram (meter reading).
     """

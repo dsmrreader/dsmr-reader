@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class DayStatistics(models.Model):
+
+class DayStatistics(ModelUpdateMixin, models.Model):
     """ Daily consumption usage summary. """
     day = models.DateField(unique=True, db_index=True, verbose_name=_('Date'))
     total_cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('Total cost'))
@@ -66,7 +68,7 @@ class DayStatistics(models.Model):
         )
 
 
-class HourStatistics(models.Model):
+class HourStatistics(ModelUpdateMixin, models.Model):
     """ Hourly consumption usage summary. """
     hour_start = models.DateTimeField(unique=True, db_index=True, verbose_name=_('Hour start'))
 

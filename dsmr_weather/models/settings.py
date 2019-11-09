@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class WeatherSettings(SingletonModel):
+
+class WeatherSettings(ModelUpdateMixin, SingletonModel):
     BUIENRADAR_STATIONS = (
         (6391, _('Weather station Arcen')),
         (6275, _('Weather station Arnhem')),
@@ -73,15 +75,6 @@ class WeatherSettings(SingletonModel):
         verbose_name=_('Buienradar weather station'),
         help_text=_(
             'The weather station used to measure and log outside temperatures. Choose one nearby.'
-        )
-    )
-    next_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Next sync'),
-        help_text=_(
-            'Timestamp of the next sync. Automatically updated by application.'
         )
     )
 

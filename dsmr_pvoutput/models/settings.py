@@ -3,8 +3,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.validators import MinValueValidator, MaxValueValidator
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class PVOutputAPISettings(SingletonModel):
+
+class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
     auth_token = models.CharField(
         max_length=256,
         null=True,
@@ -30,7 +32,7 @@ class PVOutputAPISettings(SingletonModel):
         verbose_name = _('PVOutput: API configuration')
 
 
-class PVOutputAddStatusSettings(SingletonModel):
+class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
     """ API Docs: https://pvoutput.org/help.html#api-addstatus """
     API_URL = 'https://pvoutput.org/service/r2/addstatus.jsp'
 

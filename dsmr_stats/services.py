@@ -52,11 +52,11 @@ def get_next_day_to_generate():
     return timezone.localtime(next_consumption.read_at).date()
 
 
-def analyze():
+def run(scheduled_process):
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
     if not is_data_available():
         logger.debug('Stats: No data available')
-        return
+        return scheduled_process.delay(timezone.timedelta(hours=1))
 
     now = timezone.localtime(timezone.now())
     target_day = get_next_day_to_generate()
@@ -64,26 +64,35 @@ def analyze():
 
     # Skip current day, wait until midnight.
     if target_day >= now.date():
-        return logger.debug('Stats: Waiting for day to pass: %s', target_day)
+        logger.debug('Stats: Waiting for day to pass: %s', target_day)
+        return scheduled_process.reschedule(
+            timezone.make_aware(timezone.datetime.combine(next_day, time.min))
+        )
 
     # All readings of the day must be processed.
     unprocessed_readings = DsmrReading.objects.unprocessed().filter(timestamp__date=target_day).exists()
 
     if unprocessed_readings:
-        return logger.debug('Stats: Found unprocessed readings for: %s', target_day)
+        logger.debug('Stats: Found unprocessed readings for: %s', target_day)
+        return scheduled_process.delay(timezone.timedelta(minutes=5))
 
     # Ensure we have any consumption.
     consumption_found = ElectricityConsumption.objects.filter(read_at__date=target_day).exists()
 
     if not consumption_found:
-        return logger.debug('Stats: Missing consumption data for: %s', target_day)
+        logger.debug('Stats: Missing consumption data for: %s', target_day)
+        return scheduled_process.delay(timezone.timedelta(hours=1))
 
     # If we support gas, make sure we've received a gas reading on the next day (or later).
     if dsmr_backend.services.backend.get_capabilities(capability='gas') and \
             not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
-        return logger.debug('Stats: Waiting for first gas reading on the next day...')
+        logger.debug('Stats: Waiting for first gas reading on the next day...')
+        return scheduled_process.delay(timezone.timedelta(minutes=5))
 
     create_statistics(target_day=target_day)
+
+    # We keep trying until we've catched on to the current day (which will then delay it for a day above).
+    return scheduled_process.delay(timezone.timedelta(seconds=1))
 
 
 def create_statistics(target_day):

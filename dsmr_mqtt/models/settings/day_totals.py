@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class JSONDayTotalsMQTTSettings(SingletonModel):
+
+class JSONDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT JSON Dashboard overview. """
     enabled = models.BooleanField(
         default=False,
@@ -54,7 +56,7 @@ energy_supplier_price_gas = energy_supplier_price_gas
         verbose_name = _('(Data source) Day consumption: JSON')
 
 
-class SplitTopicDayTotalsMQTTSettings(SingletonModel):
+class SplitTopicDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT splitted day totals per field, mapped to topics. """
     enabled = models.BooleanField(
         default=False,

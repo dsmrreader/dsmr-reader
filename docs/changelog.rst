@@ -1,6 +1,17 @@
 Changelog
 =========
 
+v2.11.0 - 2019-11-09
+
+- [`#774 <https://github.com/dennissiemensma/dsmr-reader/issues/774>`_] Generic performance improvements
+- [`#776 <https://github.com/dennissiemensma/dsmr-reader/issues/776>`_] Meerdere foutmeldingen Buienradar API
+- [`#777 <https://github.com/dennissiemensma/dsmr-reader/issues/777>`_] Requirements update (November 2019)
+- [`#778 <https://github.com/dennissiemensma/dsmr-reader/issues/778>`_] Gas-metingen werken niet bij meerdere apparaten op m-bus
+
+
+----
+
+
 v2.10.0 - 2019-11-05
 
 - [`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] (1/2) Uurstatistieken missen de laatste minuut of seconde - by JeanMiK

@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class Note(models.Model):
+
+class Note(ModelUpdateMixin, models.Model):
     """ Daily note someone might place for some remarks about something related to consumption. """
     day = models.DateField(db_index=True, verbose_name=_('Day'))
     description = models.CharField(max_length=256, verbose_name=_('Description'))

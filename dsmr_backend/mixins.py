@@ -23,7 +23,8 @@ class StopInfiniteRun(StopIteration):
 
 class InfiniteManagementCommandMixin:
     """ Mixin for long running management commands, only stopping (gracefully) on SIGHUP signal. """
-    sleep_time = None
+    name = None  # Set in sub classes.
+    sleep_time = None  # Set in sub classes.
     _keep_alive = None
     _pid_file = None
 
@@ -49,7 +50,7 @@ class InfiniteManagementCommandMixin:
             self.run_loop(**options)
 
         self.shutdown()
-        logger.debug('DSMR_BACKEND: Exited')
+        logger.debug('%s: Exited', self.name)
 
     def run_loop(self, **options):
         """ Runs in an infinite loop, until we're signaled to stop. """
@@ -59,14 +60,14 @@ class InfiniteManagementCommandMixin:
 
         # We simply keep executing the management command until we are told otherwise.
         self._keep_alive = True
-        logger.debug('DSMR_BACKEND: Starting infinite command loop...')  # Just to make sure it gets printed.
+        logger.debug('%s: Starting infinite command loop...', self.name)  # Just to make sure it gets printed.
 
         while self._keep_alive:
             self.run_once(**options)
 
             # Do not hammer.
             if self.sleep_time is not None:
-                logger.debug('DSMR_BACKEND: Sleeping %ss', self.sleep_time)
+                logger.debug('%s: Sleeping %ss', self.name, self.sleep_time)
                 time.sleep(self.sleep_time)
 
             # Check database connection after each run. This will force Django to reconnect as well, when having issues.
@@ -82,12 +83,12 @@ class InfiniteManagementCommandMixin:
             raise
         except StopInfiniteRun:
             # Explicit exit.
-            logger.info('DSMR_BACKEND: [i] Detected StopInfiniteRun exception')
+            logger.info('%s: [i] Detected StopInfiniteRun exception', self.name)
             self._stop()
         except:
             # Unforeseen errors.
             _, _, exc_traceback = sys.exc_info()
-            logger.error('DSMR_BACKEND: [!] Exception raised in run(): %s', traceback.format_exc())
+            logger.error('%s: [!] Exception raised in run(): %s', self.name, traceback.format_exc())
 
     def initialize(self):
         """ Called once. Override and handle any initialization required. """
@@ -107,18 +108,18 @@ class InfiniteManagementCommandMixin:
 
     def _signal_handler(self, signum, frame):
         # If we get called, then we must gracefully exit.
-        logger.info('DSMR_BACKEND: Detected signal #%s', signum)
+        logger.info('%s: Detected signal #%s', self.name, signum)
         self._stop()
 
     def _stop(self):
         """ Sets the flag for ending the command on next flag check. """
         self._keep_alive = False
-        logger.info('DSMR_BACKEND: Exiting on next run...')
+        logger.info('%s: Exiting on next run...', self.name)
 
     def _write_pid_file(self):
         self._pid_file = os.path.join(
             settings.DSMRREADER_MANAGEMENT_COMMANDS_PID_FOLDER,
-            'dsmrreader--{}.pid'.format(self.name.split('.')[-1])  # Set in management command.
+            'dsmrreader--{}.pid'.format(self.name.split('.')[-1])
         )
         with open(self._pid_file, 'w') as file_handle:
             file_handle.write(str(os.getpid()))
@@ -130,7 +131,6 @@ class InfiniteManagementCommandMixin:
             pass
 
     def _check_logger_level(self):
-        # This will result in only logging errors, so make sure to clear that up.
         if logger.getEffectiveLevel() > logging.INFO:
             print(
                 'The current logging level only logs warnings and errors, to reduce I/O. More information can be '
@@ -155,3 +155,15 @@ class ReadOnlyAdminModel(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+class ModelUpdateMixin():
+    """ Add update() on Django model instance, similar to queryset.update(). """
+    def update(self, **updated_fields):
+        if not updated_fields:
+            return
+
+        for key, value in updated_fields.items():
+            setattr(self, key, value)
+
+        self.save(update_fields=updated_fields.keys())

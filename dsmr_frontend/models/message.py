@@ -1,13 +1,15 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
+from dsmr_backend.mixins import ModelUpdateMixin
+
 
 class NotificationManager(models.Manager):
     def unread(self):
         return self.get_queryset().filter(read=False)
 
 
-class Notification(models.Model):
+class Notification(ModelUpdateMixin, models.Model):
     """ Used to queue messages to end users. """
     objects = NotificationManager()
 

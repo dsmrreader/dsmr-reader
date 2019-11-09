@@ -1,5 +1,6 @@
 from unittest import mock
 
+from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
@@ -219,6 +220,7 @@ class TestServices(TestCase):
         requests_post_mock.assert_called_once_with(
             PVOutputAddStatusSettings.API_URL,
             headers={
+                'User-Agent': settings.DSMRREADER_USER_AGENT,
                 'X-Pvoutput-Apikey': api_settings.auth_token,
                 'X-Pvoutput-SystemId': api_settings.system_identifier,
             },
@@ -242,6 +244,7 @@ class TestServices(TestCase):
         requests_post_mock.assert_called_once_with(
             PVOutputAddStatusSettings.API_URL,
             headers={
+                'User-Agent': settings.DSMRREADER_USER_AGENT,
                 'X-Pvoutput-Apikey': api_settings.auth_token,
                 'X-Pvoutput-SystemId': api_settings.system_identifier,
             },

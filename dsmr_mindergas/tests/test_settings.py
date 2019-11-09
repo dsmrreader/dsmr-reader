@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_mindergas.models.settings import MinderGasSettings
 
 
@@ -22,5 +24,12 @@ class TestSettings(TestCase):
     def test_auth_token(self):
         self.assertIsNone(self.instance.auth_token)
 
-    def test_next_export(self):
-        self.assertIsNone(self.instance.next_export)
+    def test_handle_settings_update_hook(self):
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT)
+        self.assertFalse(sp.active)
+
+        self.instance.export = True
+        self.instance.save()
+
+        sp.refresh_from_db()
+        self.assertTrue(sp.active)

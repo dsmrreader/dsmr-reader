@@ -9,12 +9,11 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
-from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 import dsmr_backend.services.backend
 
 
-class TestServices(InterceptStdoutMixin, TestCase):
+class TestBackend(InterceptStdoutMixin, TestCase):
     def test_data_capabilities(self):
         capabilities = dsmr_backend.services.backend.get_capabilities()
         self.assertIn('electricity', capabilities.keys())
@@ -223,16 +222,13 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(tools_status['backup']['enabled'])
         self.assertFalse(tools_status['dropbox']['enabled'])
         self.assertFalse(tools_status['pvoutput']['enabled'])
-        self.assertFalse(tools_status['mindergas']['enabled'])
         self.assertIsNone(tools_status['backup']['latest_backup'])
         self.assertIsNone(tools_status['dropbox']['latest_sync'])
         self.assertIsNone(tools_status['pvoutput']['latest_sync'])
-        self.assertIsNone(tools_status['mindergas']['latest_sync'])
 
         # Now when enabled.
         BackupSettings.objects.update(daily_backup=True, latest_backup=timezone.now())
         DropboxSettings.objects.update(access_token='xxx', latest_sync=timezone.now())
-        MinderGasSettings.objects.update(export=True, latest_sync=timezone.now())
         PVOutputAddStatusSettings.objects.update(export=True, latest_sync=timezone.now())
 
         tools_status = dsmr_backend.services.backend.status_info()['tools']
@@ -240,11 +236,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertTrue(tools_status['backup']['enabled'])
         self.assertTrue(tools_status['dropbox']['enabled'])
         self.assertTrue(tools_status['pvoutput']['enabled'])
-        self.assertTrue(tools_status['mindergas']['enabled'])
         self.assertEqual(tools_status['backup']['latest_backup'], timezone.now())
         self.assertEqual(tools_status['dropbox']['latest_sync'], timezone.now())
         self.assertEqual(tools_status['pvoutput']['latest_sync'], timezone.now())
-        self.assertEqual(tools_status['mindergas']['latest_sync'], timezone.now())
 
     @mock.patch('django.utils.timezone.now')
     def test_hours_in_day(self, now_mock):
