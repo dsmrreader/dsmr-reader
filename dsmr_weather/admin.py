@@ -1,13 +1,16 @@
+from django.conf import settings
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
+import django.db.models.signals
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_weather.models.settings import WeatherSettings
 
 
 @admin.register(WeatherSettings)
 class WeatherSettingsAdmin(SingletonModelAdmin):
-    readonly_fields = ('next_sync', )
     fieldsets = (
         (
             None, {
@@ -22,9 +25,12 @@ class WeatherSettingsAdmin(SingletonModelAdmin):
                     'Buienradar weerstations</a> for a map of all locations.')
             }
         ),
-        (
-            _('Automatic fields'), {
-                'fields': ['next_sync']
-            }
-        ),
     )
+
+
+@receiver(django.db.models.signals.post_save, sender=WeatherSettings)
+def handle_weather_settings_update(sender, instance, **kwargs):
+    """ Hook to toggle related scheduled process. """
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_WEATHER_UPDATE
+    ).update(active=instance.track)

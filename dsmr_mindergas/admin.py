@@ -1,13 +1,16 @@
+from django.conf import settings
 from django.contrib import admin
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from solo.admin import SingletonModelAdmin
+import django.db.models.signals
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_mindergas.models.settings import MinderGasSettings
 
 
 @admin.register(MinderGasSettings)
 class MinderGasSettingsAdmin(SingletonModelAdmin):
-    readonly_fields = ('next_export', )
     fieldsets = (
         (
             None, {
@@ -18,9 +21,12 @@ class MinderGasSettingsAdmin(SingletonModelAdmin):
                 )
             }
         ),
-        (
-            _('Automatic fields'), {
-                'fields': ['next_export']
-            }
-        ),
     )
+
+
+@receiver(django.db.models.signals.post_save, sender=MinderGasSettings)
+def handle_mindergas_settings_update(sender, instance, **kwargs):
+    """ Hook to toggle related scheduled process. """
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT
+    ).update(active=instance.export)

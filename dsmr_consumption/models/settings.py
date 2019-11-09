@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class ConsumptionSettings(SingletonModel):
+
+class ConsumptionSettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
     COMPACTOR_GROUPING_BY_READING = 1
     COMPACTOR_GROUPING_BY_MINUTE = 2

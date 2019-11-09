@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class MinderGasSettings(SingletonModel):
+
+class MinderGasSettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
     API_URL = 'https://www.mindergas.nl/api/gas_meter_readings'
 
@@ -23,22 +25,6 @@ class MinderGasSettings(SingletonModel):
         help_text=_(
             'The authentication token used to authenticate for the MinderGas API. '
             'More information can be found here: https://www.mindergas.nl/member/api'
-        )
-    )
-    latest_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Latest sync'),
-        help_text=_('Timestamp of latest sync with MinderGas. Automatically updated by application.')
-    )
-    next_export = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Next export'),
-        help_text=_(
-            'Timestamp of the next export. Automatically updated by application.'
         )
     )
 

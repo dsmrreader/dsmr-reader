@@ -3,8 +3,10 @@ from django.conf import settings
 from django.db import models
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class BackendSettings(SingletonModel):
+
+class BackendSettings(ModelUpdateMixin, SingletonModel):
     language = models.CharField(
         max_length=32,
         default='nl',
@@ -25,7 +27,7 @@ class BackendSettings(SingletonModel):
         verbose_name = _('Backend configuration')
 
 
-class EmailSettings(SingletonModel):
+class EmailSettings(ModelUpdateMixin, SingletonModel):
     """ Outgoing email settings. """
     email_to = models.EmailField(
         max_length=255,

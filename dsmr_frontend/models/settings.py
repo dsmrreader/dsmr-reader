@@ -4,8 +4,10 @@ from django.db import models
 from solo.models import SingletonModel
 from colorfield.fields import ColorField
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class FrontendSettings(SingletonModel):
+
+class FrontendSettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
     merge_electricity_tariffs = models.BooleanField(
         default=False,

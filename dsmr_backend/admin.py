@@ -16,6 +16,7 @@ from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backend.services.email
 import logging
 
+
 # There is no global admin.py, so we'll just disable Group & User here.
 admin.site.unregister(Group)
 admin.site.unregister(User)
@@ -33,11 +34,8 @@ class BackendSettingsAdmin(SingletonModelAdmin):
 
 
 @receiver(django.db.models.signals.post_save, sender=BackendSettings)
-def handle_backend_settings_update(sender, instance, created, raw, **kwargs):
-    """ Hooks to update auto update process. """
-    if created or raw:
-        return
-
+def handle_backend_settings_update(sender, instance, **kwargs):
+    """ Hook to toggle related scheduled process. """
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
     ).update(active=instance.automatic_update_checker)
@@ -96,21 +94,21 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 @admin.register(ScheduledProcess)
 class ScheduledProcessAdmin(admin.ModelAdmin):
     list_display = ('active', 'name', 'planned', 'next_call_naturaltime')
-    readonly_fields = ('name', 'module', 'active')
+    readonly_fields = ('name', 'active')
     list_display_links = ('name', 'planned')
     actions = None
 
     fieldsets = (
         (
-            _('Internals'), {
-                'fields': ['name', 'module', 'active'],
+            None, {
+                'fields': ['active', 'name'],
             }
         ),
         (
             ('Next call'), {
                 'fields': ['planned'],
                 'description': _(
-                    _('Reschedule a process here. Do not modify unless you know why to change it.')
+                    _('Only reschedule a process if you really need to, as it could cause mistimings at some point.')
                 )
             }
         ),

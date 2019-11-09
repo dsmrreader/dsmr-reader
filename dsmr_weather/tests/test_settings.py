@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_weather.models.settings import WeatherSettings
 
 
@@ -22,5 +24,12 @@ class TestSettings(TestCase):
     def test_buienradar_station(self):
         self.assertEqual(self.instance.buienradar_station, 6260)
 
-    def test_next_sync(self):
-        self.assertFalse(self.instance.next_sync)
+    def test_handle_settings_update_hook(self):
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE)
+        self.assertFalse(sp.active)
+
+        self.instance.track = True
+        self.instance.save()
+
+        sp.refresh_from_db()
+        self.assertTrue(sp.active)

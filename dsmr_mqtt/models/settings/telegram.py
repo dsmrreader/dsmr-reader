@@ -3,8 +3,10 @@ from django.conf import settings
 from django.db import models
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class RawTelegramMQTTSettings(SingletonModel):
+
+class RawTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT raw telegrams. """
     enabled = models.BooleanField(
         default=False,
@@ -26,7 +28,7 @@ class RawTelegramMQTTSettings(SingletonModel):
         verbose_name = _('(Data source) Telegram: Raw')
 
 
-class JSONTelegramMQTTSettings(SingletonModel):
+class JSONTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT JSON telegram. """
     enabled = models.BooleanField(
         default=False,
@@ -82,7 +84,7 @@ phase_voltage_l3 = dsmr/reading/phase_voltage_l3
         verbose_name = _('(Data source) Telegram: JSON')
 
 
-class SplitTopicTelegramMQTTSettings(SingletonModel):
+class SplitTopicTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT splitted telegram per field, mapped to topics. """
     enabled = models.BooleanField(
         default=False,

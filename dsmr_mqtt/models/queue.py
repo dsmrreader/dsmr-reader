@@ -1,8 +1,10 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class Message(models.Model):
+
+class Message(ModelUpdateMixin, models.Model):
     """ Queued message for MQTT. """
     topic = models.CharField(max_length=255)
     payload = models.TextField(null=True, blank=True)

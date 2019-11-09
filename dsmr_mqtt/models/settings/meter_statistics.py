@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class SplitTopicMeterStatisticsMQTTSettings(SingletonModel):
+
+class SplitTopicMeterStatisticsMQTTSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT splitted meter statistics per field, mapped to topics. """
     enabled = models.BooleanField(
         default=False,

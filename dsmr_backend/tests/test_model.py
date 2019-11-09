@@ -20,16 +20,15 @@ class TestBackendSettings(TestCase):
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
-    def test_handle_backend_settings_update_hook(self):
-        query = ScheduledProcess.objects.filter(
-            module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER,
-            active=True
-        )
-        self.assertTrue(query.exists())
+    def test_handle_settings_update_hook(self):
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER)
+        self.assertTrue(sp.active)
 
         self.instance.automatic_update_checker = False
         self.instance.save()
-        self.assertFalse(query.exists())
+
+        sp.refresh_from_db()
+        self.assertFalse(sp.active)
 
 
 class TestScheduledProcess(TestCase):
@@ -53,8 +52,13 @@ class TestScheduledProcess(TestCase):
         self.instance.delay(timezone.timedelta(minutes=1))
         self.assertFalse(ScheduledProcess.objects.ready().exists())
 
-    def test_execute_ok(self):
+    @mock.patch('django.utils.timezone.now')
+    def test_execute_ok(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2000, 1, 1))
         self.assertEqual(self.instance.execute(), 'bla')
+
+        self.instance.refresh_from_db()
+        self.assertEqual(self.instance.last_executed_at, timezone.now())
 
     @mock.patch(MODULE)
     def test_execute_return(self, bla_mock):

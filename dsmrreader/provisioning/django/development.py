@@ -5,7 +5,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
 #         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dsmrreader',  # Database name.
+        'NAME': 'dsmrreader',
         'USER': 'dsmrreader',
         'PASSWORD': 'dsmrreader',
         'HOST': 'localhost',
@@ -14,3 +14,7 @@ DATABASES = {
 }
 
 LOGGING['loggers']['commands']['level'] = 'DEBUG'
+# LOGGING['loggers']['django.db'] = {
+#     'handlers': ['console'],
+#     'level': 'DEBUG',
+# }

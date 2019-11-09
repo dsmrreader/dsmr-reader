@@ -1,5 +1,4 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -14,7 +13,6 @@ from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_api.models import APISettings
 from dsmr_mqtt.models import queue
-from dsmr_weather.models.settings import WeatherSettings
 
 
 class Command(BaseCommand):
@@ -51,11 +49,9 @@ class Command(BaseCommand):
         PVOutputAPISettings.objects.update(auth_token=None, system_identifier=None)
         queue.Message.objects.all().delete()
         Notification.objects.update(read=True)
-        WeatherSettings.objects.all().update(next_sync=timezone.now())
         Notification.objects.create(message='Development reset completed.')
 
         try:
-            # Reset passwd.
             admin = User.objects.get(username='admin')
         except User.DoesNotExist:
             User.objects.create_superuser('admin', 'root@localhost', 'admin')

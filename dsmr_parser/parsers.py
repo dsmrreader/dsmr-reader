@@ -45,12 +45,11 @@ class TelegramParser(object):
         telegram = {}
 
         for signature, parser in self.telegram_specification['objects'].items():
-            match = re.search(signature, telegram_data, re.DOTALL)
+            # DSMR-reader #778: We might hit the same pattern multiple times. The last one matched will be leading.
+            matches = re.findall(signature, telegram_data, re.DOTALL)
 
-            # Some signatures are optional and may not be present,
-            # so only parse lines that match
-            if match:
-                telegram[signature] = parser.parse(match.group(0))
+            for current_match in matches:
+                telegram[signature] = parser.parse(current_match)
 
         return telegram
 

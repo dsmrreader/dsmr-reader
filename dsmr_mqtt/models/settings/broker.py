@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
 
+from dsmr_backend.mixins import ModelUpdateMixin
 
-class MQTTBrokerSettings(SingletonModel):
+
+class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
     """ MQTT broker connection. """
     INSECURE = 0
     SECURE_CERT_NONE = 1
