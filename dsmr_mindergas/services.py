@@ -38,11 +38,21 @@ def run(scheduled_process):
             'Failed to export to MinderGas: {}'.format(error)
         ))
 
-    # Push back for a day and a bit.
+    # Reschedule between 3 AM and 6 AM next day.
     midnight = timezone.localtime(timezone.make_aware(
         timezone.datetime.combine(timezone.now(), time.min)
     ))
-    scheduled_process.reschedule(midnight + timezone.timedelta(hours=24, minutes=random.randint(15, 59)))
+    next_midnight = midnight + timezone.timedelta(
+        hours=dsmr_backend.services.backend.hours_in_day(
+            day=timezone.now().date()
+        )
+    )
+    scheduled_process.reschedule(
+        next_midnight + timezone.timedelta(
+            hours=random.randint(3, 5),
+            minutes=random.randint(15, 59)
+        )
+    )
 
 
 def export():
@@ -60,7 +70,8 @@ def export():
     except IndexError:
         raise AssertionError(_('No recent gas reading found'))
 
-    logger.debug('MinderGas: Uploading gas meter position: %s', last_gas_reading.delivered)
+    reading_date = last_gas_reading.read_at.date().isoformat()
+    logger.debug('MinderGas: Uploading gas meter position: %s m3 @ %s', last_gas_reading.delivered, reading_date)
     response = requests.post(
         MinderGasSettings.API_URL,
         headers={
@@ -69,7 +80,7 @@ def export():
             'AUTH-TOKEN': mindergas_settings.auth_token
         },
         data=json.dumps({
-            'date': last_gas_reading.read_at.date().isoformat(),
+            'date': reading_date,
             'reading': str(last_gas_reading.delivered)
         }),
     )
