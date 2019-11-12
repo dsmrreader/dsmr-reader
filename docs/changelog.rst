@@ -2,9 +2,8 @@ Changelog
 =========
 
 
-v2.12.0 - 2019-xx-xx
+v2.12.1 - 2019-11-12
 
-- [`#xxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxx>`_] xxxxxx
 - [`#782 <https://github.com/dennissiemensma/dsmr-reader/issues/782>`_] Failed to export to MinderGas: Unexpected status code received
 
 
