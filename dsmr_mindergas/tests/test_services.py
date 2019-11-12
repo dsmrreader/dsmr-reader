@@ -56,10 +56,11 @@ class TestServices(TestCase):
 
         dsmr_mindergas.services.run(self.schedule_process)
 
+        # Next call has 3 hour range.
         self.assertTrue(export_mock.called)
         self.schedule_process.refresh_from_db()
-        self.assertGreater(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=24))
-        self.assertLess(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=25))
+        self.assertGreater(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=24 + 3))
+        self.assertLess(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=24 + 6))
 
     @mock.patch('dsmr_frontend.services.display_dashboard_message')
     @mock.patch('dsmr_backend.services.backend.get_capabilities')
