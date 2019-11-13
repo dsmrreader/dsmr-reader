@@ -1,11 +1,11 @@
-polib==1.1
-pylama==7.7
-pytest-cov==2.8
-pytest-django==3.7
-pytest-xdist==1.30
-sphinx==2.2
-sphinx-autobuild==0.7
-sphinx-intl==2.0
-sphinx-rtd-theme==0.4
+polib>=1.1,<1.2
+pylama>=7.7,<7.8
+pytest-cov>=2.8,<2.9
+pytest-django>=3.7,<3.8
+pytest-xdist>=1.30,<1.31
+sphinx>=2.2,<2.3
+sphinx-autobuild>=0.7,<0.8
+sphinx-intl>=2.0,<2.1
+sphinx-rtd-theme>=0.4,<0.5
 -r postgresql.txt
 -r mysql.txt
