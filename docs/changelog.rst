@@ -10,6 +10,14 @@ v2.12.0 - 2019-xx-xx
 ----
 
 
+v2.11.2 - 2019-11-13
+
+- [`#783 <https://github.com/dennissiemensma/dsmr-reader/issues/783>`_] Gunicorn 20.x breaks use of docker Alpine Linux
+
+
+----
+
+
 v2.11.1 - 2019-11-12
 
 - [`#782 <https://github.com/dennissiemensma/dsmr-reader/issues/782>`_] Failed to export to MinderGas: Unexpected status code received
