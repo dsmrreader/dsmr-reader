@@ -4,7 +4,7 @@ Changelog
 
 v2.12.0 - 2019-xx-xx
 
-- [`#xxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxx>`_] xxxxxx
+- [`#784 <https://github.com/dennissiemensma/dsmr-reader/issues/784>`_] Unpin requirements patches
 
 
 ----
