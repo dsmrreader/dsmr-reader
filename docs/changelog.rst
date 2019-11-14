@@ -5,6 +5,7 @@ Changelog
 v2.12.0 - 2019-xx-xx
 
 - [`#784 <https://github.com/dennissiemensma/dsmr-reader/issues/784>`_] Unpin requirements patches
+- [`#780 <https://github.com/dennissiemensma/dsmr-reader/issues/780>`_] backup direct comprimeren
 
 
 ----
