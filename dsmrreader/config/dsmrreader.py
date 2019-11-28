@@ -32,6 +32,8 @@ DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
 DSMRREADER_DROPBOX_ERROR_INTERVAL = 12  # Skip new files for 12 hours when insufficient space in Dropbox account.
 
+DSMRREADER_COMPACT_MAX = 1024  # Max telegrams to compact in a single run.
+
 # Whether telegrams are logged, in base64 format. Only required for debugging.
 DSMRREADER_LOG_TELEGRAMS = False
 
