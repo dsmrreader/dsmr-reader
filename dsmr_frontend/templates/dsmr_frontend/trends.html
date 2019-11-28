@@ -102,7 +102,7 @@
     
     {{ block.super }}
 
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.5.0.min.js' %}"></script>
     <script type="text/javascript">
         var echarts_avg_consumption_url = "{% url 'frontend:trends-xhr-avg-consumption' %}";
         var echarts_by_tariff_url = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
