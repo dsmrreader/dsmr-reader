@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v2.11.3 - 2019-12-08
+
+- [`#794 <https://github.com/dennissiemensma/dsmr-reader/issues/794>`_] Django security releases issued: 2.2.8
+
+
+----
+
+
 v2.11.2 - 2019-11-13
 
 - [`#783 <https://github.com/dennissiemensma/dsmr-reader/issues/783>`_] Gunicorn 20.x breaks use of docker Alpine Linux
