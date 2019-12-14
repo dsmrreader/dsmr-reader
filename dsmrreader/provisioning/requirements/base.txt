@@ -4,7 +4,7 @@ django>=2.2,<2.3
 django-colorfield>=0.1,<0.2
 django-debug-toolbar>=2.1,<2.2
 django-filter>=2.2,<2.3
-djangorestframework>=3.10,<3.11
+djangorestframework>=3.11,<3.12
 django-solo>=1.1,<1.2
 dropbox>=9.4,<9.5
 # Do not upgrade to 20.x yet, see #783
