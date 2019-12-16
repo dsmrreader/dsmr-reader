@@ -18,6 +18,7 @@ DSMR Reader's documentation
    installation/docker
 
    application
+   home_assistant
 
    frontend/dashboard
    frontend/archive

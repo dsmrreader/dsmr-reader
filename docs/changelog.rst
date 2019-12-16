@@ -2,8 +2,9 @@ Changelog
 =========
 
 
-v2.12.0 - 2019-12-14
+v2.12.0 - 2019-12-17
 
+- [`#761 <https://github.com/dennissiemensma/dsmr-reader/issues/761>`_] Home Assistant automatische integratie - by depl0y
 - [`#784 <https://github.com/dennissiemensma/dsmr-reader/issues/784>`_] Unpin requirements patches
 - [`#780 <https://github.com/dennissiemensma/dsmr-reader/issues/780>`_] Backup direct comprimeren
 - [`#790 <https://github.com/dennissiemensma/dsmr-reader/issues/790>`_] Updated graph library
