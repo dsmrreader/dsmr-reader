@@ -229,7 +229,7 @@
 
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.5.0.min.js' %}"></script>
 
     <script type="text/javascript">
         var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};

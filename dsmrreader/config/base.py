@@ -140,7 +140,7 @@ USE_THOUSAND_SEPARATOR = True
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': 10,
+        'TIMEOUT': 60,
     },
     'mqtt': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',

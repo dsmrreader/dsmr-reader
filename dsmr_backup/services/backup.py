@@ -1,6 +1,5 @@
 import subprocess
 import logging
-import shutil
 import gzip
 import os
 
@@ -78,7 +77,7 @@ def create_full(folder):
         os.makedirs(folder)
 
     # Backup file with day name included, for weekly rotation.
-    backup_file = os.path.join(folder, 'dsmrreader-{}-backup-{}.sql'.format(
+    backup_file = os.path.join(folder, 'dsmrreader-{}-backup-{}.sql.gz'.format(
         connection.vendor, formats.date_format(timezone.now().date(), 'l')
     ))
 
@@ -88,15 +87,10 @@ def create_full(folder):
     if connection.vendor == 'postgresql':  # pragma: no cover
         command = [
             settings.DSMRREADER_BACKUP_PG_DUMP,
+            settings.DATABASES['default']['NAME'],
             '--host={}'.format(settings.DATABASES['default']['HOST']),
             '--user={}'.format(settings.DATABASES['default']['USER']),
-            settings.DATABASES['default']['NAME'],
         ]
-        backup_process = subprocess.Popen(command, env={
-                'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
-            },
-            stdout=open(backup_file, 'w')  # pragma: no cover
-        )
     # MySQL backup.
     elif connection.vendor == 'mysql':  # pragma: no cover
         command = [
@@ -110,7 +104,6 @@ def create_full(folder):
             '--password={}'.format(settings.DATABASES['default']['PASSWORD']),
             settings.DATABASES['default']['NAME'],
         ]
-        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover
     # SQLite backup.
     elif connection.vendor == 'sqlite':  # pragma: no cover
         command = [
@@ -118,21 +111,27 @@ def create_full(folder):
             settings.DATABASES['default']['NAME'],
             '.dump',
         ]
-        backup_process = subprocess.Popen(
-            command,
-            stdout=open(backup_file, 'w'),
-            stderr=subprocess.PIPE
-        )  # pragma: no cover
     else:
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))  # pragma: no cover
 
-    backup_process.wait()
+    backup_process = subprocess.run(
+        command,
+        env={
+            'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
+        },
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )  # pragma: no cover
+
+    # Trade off compression level.
+    with gzip.open(backup_file, 'w', compresslevel=6) as gzip_handle:
+        gzip_handle.write(backup_process.stdout)
+
     logger.debug(' - Backup exit code: %s', backup_process.returncode)
 
     if backup_process.returncode != 0:
         on_backup_failed(process_handle=backup_process)
 
-    backup_file = compress(file_path=backup_file)
     logger.info(' - Created and compressed full backup: %s', backup_file)
 
 
@@ -142,13 +141,13 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
         logger.info(' - Creating non-existing backup folder: %s', folder)
         os.makedirs(folder)
 
-    backup_file = os.path.join(folder, 'dsmrreader-{}-partial-backup-{}.sql'.format(
+    backup_file = os.path.join(folder, 'dsmrreader-{}-partial-backup-{}.sql.gz'.format(
         connection.vendor, formats.date_format(timezone.now().date(), 'Y-m-d')
     ))
 
     logger.info(' - Creating new partial backup: %s', backup_file)
 
-    if connection.vendor == 'postgresql':  # pragma: no cover
+    if connection.vendor == 'postgresql':
         command = [
             settings.DSMRREADER_BACKUP_PG_DUMP,
             settings.DATABASES['default']['NAME'],
@@ -158,16 +157,8 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
         ] + [
             '--table={}'.format(x._meta.db_table) for x in models_to_backup
         ]
-        backup_process = subprocess.Popen(
-            command,
-            env={
-                'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
-            },
-            stdout=open(backup_file, 'w'),
-            stderr=subprocess.PIPE
-        )
     # MySQL backup.
-    elif connection.vendor == 'mysql':  # pragma: no cover
+    elif connection.vendor == 'mysql':
         command = [
             settings.DSMRREADER_BACKUP_MYSQLDUMP,
             '--compress',
@@ -182,24 +173,34 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
         ] + [
             x._meta.db_table for x in models_to_backup
         ]
-        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover
     else:
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))
 
-    backup_process.wait()
+    backup_process = subprocess.run(
+        command,
+        env={
+            'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
+        },
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+
+    # Partials should be as small as possible, so use max compression.
+    with gzip.open(backup_file, 'w', compresslevel=9) as gzip_handle:
+        gzip_handle.write(backup_process.stdout)
+
     logger.debug(' - Backup exit code: %s', backup_process.returncode)
 
     if backup_process.returncode != 0:
         on_backup_failed(process_handle=backup_process)
 
-    backup_file = compress(file_path=backup_file)
     logger.info(' - Created and compressed statistics backup: %s', backup_file)
     return backup_file
 
 
 def on_backup_failed(process_handle):
     """ Triggered when backup creation fails. """
-    error_message = process_handle.stderr.read()
+    error_message = process_handle.stderr
     logger.critical(' - Unexpected exit code (%s) for backup: %s', process_handle.returncode, error_message)
 
     dsmr_frontend.services.display_dashboard_message(message=_(
@@ -207,19 +208,6 @@ def on_backup_failed(process_handle):
     ))
 
     raise IOError(error_message)
-
-
-def compress(file_path, compresslevel=1):
-    """ Compresses a file using (fast) gzip. Removes source file when compression succeeded. """
-    file_path_gz = '{}.gz'.format(file_path)
-
-    # Straight from the Python 3x docs.
-    with open(file_path, 'rb') as f_in:
-        with gzip.open(file_path_gz, 'wb', compresslevel=compresslevel) as f_out:
-            shutil.copyfileobj(f_in, f_out)
-
-    os.unlink(file_path)
-    return file_path_gz
 
 
 def sync():
