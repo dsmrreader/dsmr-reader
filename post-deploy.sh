@@ -30,7 +30,7 @@ fi
 echo ""
 echo ""
 echo " --- Checking & synchronizing base requirements for changes."
-pip3 install -r dsmrreader/provisioning/requirements/base.txt --upgrade
+pip3 install -r dsmrreader/provisioning/requirements/base.txt
 
 
 echo ""
