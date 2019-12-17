@@ -33,7 +33,6 @@ workflows:
     version: 2
     test-dsmrreader:
         jobs:
-            - test-python35
             - test-python36
             - test-python37
             - test-python38
@@ -122,18 +121,6 @@ x-base-job: &base-job
         - codecov/upload
 
 jobs:
-    test-python35:
-         <<: *base-job
-         docker:
-             - image: circleci/python:3.5-buster
-               environment: *django-config-env
-
-             - image: *mysql-image
-               environment: *mysql-db-env
-
-             - image: *postgresql-image
-               environment: *postgresql-db-env
-
     test-python36:
          <<: *base-job
          docker:
