@@ -10,6 +10,10 @@ Prepare API
 Make sure to prepare the API at the DSMR-reader instance you'll forward the telegrams to.
 For more information configuring it, :doc:`see the API settings <../admin/api>`.
 
+.. warning::
+
+    If your smart meter only supports DSMR v2, make sure to change the DSMR version :doc:`in the datalogger settings <../admin/datalogger>`.
+
 
 Installation
 ------------
