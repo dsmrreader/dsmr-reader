@@ -1,7 +1,7 @@
 import struct
 
 from django.utils import translation
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.utils import formats
 from django.utils import timezone
 

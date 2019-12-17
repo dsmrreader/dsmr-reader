@@ -1,7 +1,7 @@
 import tempfile
 import logging
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils import translation, timezone
 
 from dsmr_backup.models.settings import EmailBackupSettings

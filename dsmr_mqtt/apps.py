@@ -2,7 +2,7 @@ import logging
 
 from django.apps import AppConfig
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import django.db.models.signals
 
 import dsmr_datalogger.signals

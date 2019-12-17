@@ -2,7 +2,7 @@
 import sys
 
 
-MINIMUM_VERSION = (3, 5, 0)
+MINIMUM_VERSION = (3, 6, 0)
 PREFERRED_VERSION = (3, 6, 0)
 
 
