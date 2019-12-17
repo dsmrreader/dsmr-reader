@@ -2,6 +2,7 @@ from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
 import logging
 import pytz
+from django.conf import settings
 
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.db.models import Avg, Min, Max, Count
@@ -24,7 +25,7 @@ logger = logging.getLogger('commands')
 
 def compact_all():
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
-    for current_reading in DsmrReading.objects.unprocessed()[0:1024]:
+    for current_reading in DsmrReading.objects.unprocessed()[0:settings.DSMRREADER_COMPACT_MAX]:
         try:
             compact(dsmr_reading=current_reading)
         except CompactorNotReadyError:

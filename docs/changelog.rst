@@ -2,6 +2,25 @@ Changelog
 =========
 
 
+v2.12.0 - 2019-12-17
+
+- [`#761 <https://github.com/dennissiemensma/dsmr-reader/issues/761>`_] Home Assistant automatische integratie - by depl0y
+- [`#784 <https://github.com/dennissiemensma/dsmr-reader/issues/784>`_] Unpin requirements patches
+- [`#780 <https://github.com/dennissiemensma/dsmr-reader/issues/780>`_] Backup direct comprimeren
+- [`#790 <https://github.com/dennissiemensma/dsmr-reader/issues/790>`_] Updated graph library
+
+
+----
+
+
+v2.11.3 - 2019-12-08
+
+- [`#794 <https://github.com/dennissiemensma/dsmr-reader/issues/794>`_] Django security releases issued: 2.2.8
+
+
+----
+
+
 v2.11.2 - 2019-11-13
 
 - [`#783 <https://github.com/dennissiemensma/dsmr-reader/issues/783>`_] Gunicorn 20.x breaks use of docker Alpine Linux
