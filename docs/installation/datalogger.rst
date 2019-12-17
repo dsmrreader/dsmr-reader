@@ -160,6 +160,7 @@ Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf`` wi
     startsecs=1
     startretries=100
     stopwaitsecs=20
+    redirect_stderr=true
     stdout_logfile=/var/log/supervisor/%(program_name)s.log
     stdout_logfile_maxbytes=10MB
     stdout_logfile_backups=3
