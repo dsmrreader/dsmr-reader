@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v2.12.1 - 2019-12-18
+
+- [`#780 <https://github.com/dennissiemensma/dsmr-reader/issues/780>`_] REVERTED: Backup direct comprimeren
+
+
+----
+
+
 v2.12.0 - 2019-12-17
 
 - [`#761 <https://github.com/dennissiemensma/dsmr-reader/issues/761>`_] Home Assistant automatische integratie - by depl0y
