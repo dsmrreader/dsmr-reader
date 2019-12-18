@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v2.13.0 - 2019-xx-xx
+
+- [`#730 <https://github.com/dennissiemensma/dsmr-reader/issues/730>`_] Standaard-range dashboard grafieken instelbaar maken #730
+
+
+----
+
+
 v2.12.0 - 2019-12-17
 
 - [`#761 <https://github.com/dennissiemensma/dsmr-reader/issues/761>`_] Home Assistant automatische integratie - by depl0y
