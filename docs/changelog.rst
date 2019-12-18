@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v3.0.0 - 2020-xx-xx
+
+.. warning:: **Change in Python support**
+
+  Support for ``Python 3.5`` has been **dropped** due to the Django upgrade (`#735 <https://github.com/dennissiemensma/dsmr-reader/issues/735>`_).
+
+- [`#735 <https://github.com/dennissiemensma/dsmr-reader/issues/735>`_] Drop support for Python 3.5
+- [`#734 <https://github.com/dennissiemensma/dsmr-reader/issues/734>`_] Upgrade to Django 3.x
+
+
+----
+
+
 v2.12.0 - 2019-12-17
 
 - [`#761 <https://github.com/dennissiemensma/dsmr-reader/issues/761>`_] Home Assistant automatische integratie - by depl0y
