@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v2.12.1 - 2019-12-18
+v2.12.1 - 2019-12-19
 
 - [`#780 <https://github.com/dennissiemensma/dsmr-reader/issues/780>`_] REVERTED: Backup direct comprimeren
 
