@@ -1,5 +1,7 @@
 from unittest import mock
+import tempfile
 import shutil
+import gzip
 import os
 import io
 
@@ -145,28 +147,27 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
             os.path.join(FOLDER)
         )
 
-        # Specify.
-        dir = dsmr_backup.services.backup.get_backup_directory(backup_directory='////var/tmp/')
-        self.assertEqual(dir, '/var/tmp')
-
-    @mock.patch('subprocess.run')
+    @mock.patch('subprocess.Popen')
+    @mock.patch('dsmr_backup.services.backup.compress')
     @mock.patch('dsmr_backup.services.backup.on_backup_failed')
-    def test_create_full(self, on_backup_failed_mock, subprocess_mock):
+    def test_create_full(self, on_backup_failed_mock, compress_mock, subprocess_mock):
         FOLDER = '/var/tmp/test-dsmr/'
         BackupSettings.objects.all().update(folder=FOLDER)
-        process_handle = mock.MagicMock()
-        type(process_handle).returncode = mock.PropertyMock(return_value=0)
-        type(process_handle).stdout = mock.PropertyMock(return_value=b'Test content')
-        subprocess_mock.return_value = process_handle
+        handle_mock = mock.MagicMock()
+        handle_mock.returncode = 0
+        subprocess_mock.return_value = handle_mock
 
+        self.assertFalse(compress_mock.called)
         self.assertFalse(subprocess_mock.called)
         self.assertFalse(on_backup_failed_mock.called)
 
         dsmr_backup.services.backup.create_full(
             folder=dsmr_backup.services.backup.get_backup_directory()
         )
+        self.assertTrue(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
         self.assertFalse(on_backup_failed_mock.called)
+        compress_mock.reset_mock()
         subprocess_mock.reset_mock()
 
         # Test again, different branch coverage, as folder now exists.
@@ -174,18 +175,19 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
             folder=dsmr_backup.services.backup.get_backup_directory()
         )
 
+        self.assertTrue(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
 
         # Test unexpected exitcode.
-        process_handle = mock.MagicMock()
-        type(process_handle).returncode = mock.PropertyMock(return_value=-1)
-        type(process_handle).stdout = mock.PropertyMock(return_value=b'Test content')
-        subprocess_mock.return_value = process_handle
+        handle_mock = mock.MagicMock()
+        handle_mock.returncode = -1
+        subprocess_mock.return_value = handle_mock
 
         dsmr_backup.services.backup.create_full(
             folder=dsmr_backup.services.backup.get_backup_directory()
         )
         self.assertTrue(on_backup_failed_mock.called)
+
         shutil.rmtree(FOLDER)
 
     def test_on_backup_failed(self):
@@ -202,14 +204,16 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
 
         self.assertTrue(Notification.objects.exists())
 
-    @mock.patch('subprocess.run')
-    def test_create_partial(self, subprocess_mock):
+    @mock.patch('subprocess.Popen')
+    @mock.patch('dsmr_backup.services.backup.compress')
+    def test_create_partial(self, compress_mock, subprocess_mock):
         if connection.vendor != 'postgres':  # pragma: no cover
             return self.skipTest(reason='Only PostgreSQL supported')
 
         FOLDER = '/var/tmp/test-dsmr'
         BackupSettings.objects.all().update(folder=FOLDER)
 
+        self.assertFalse(compress_mock.called)
         self.assertFalse(subprocess_mock.called)
         self.assertIsNone(BackupSettings.get_solo().latest_backup)
 
@@ -217,8 +221,33 @@ class TestBackupServices(InterceptStdoutMixin, TestCase):
             folder=dsmr_backup.services.backup.get_backup_directory(),
             models_to_backup=(DayStatistics, )
         )
+        self.assertTrue(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
+
         shutil.rmtree(FOLDER)
+
+    def test_compress(self):
+        TEST_STRING = b'TestTestTest-1234567890'
+        # Temp file without automtic deletion, as compress() should do that as well.
+        source_file = tempfile.NamedTemporaryFile(delete=False)
+        self.assertTrue(os.path.exists(source_file.name))
+        gzip_file = '{}.gz'.format(source_file.name)
+
+        source_file.write(TEST_STRING)
+        source_file.flush()
+        self.assertFalse(os.path.exists(gzip_file))
+
+        # Compress should drop old file and create a new one.
+        dsmr_backup.services.backup.compress(source_file.name)
+        self.assertFalse(os.path.exists(source_file.name))
+        self.assertTrue(os.path.exists(gzip_file))
+
+        # Decompress and verify content.
+        with gzip.open(gzip_file) as file_handle:
+            file_content = file_handle.read()
+            self.assertEqual(file_content, TEST_STRING)
+
+        os.unlink(gzip_file)
 
     @mock.patch('dsmr_dropbox.services.sync')
     def test_sync(self, dropbox_mock):
