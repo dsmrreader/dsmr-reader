@@ -75,7 +75,6 @@ commands:
                       . ~/.virtualenvs/dsmr-reader/bin/activate
                       pip3 install --upgrade pip
                       pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
-                      pip3 install -r dsmrreader/provisioning/requirements/mysql.txt -r dsmrreader/provisioning/requirements/postgresql.txt
 
             - save_cache:
                   name: "Cache: Save virtualenv"
