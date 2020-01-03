@@ -9,7 +9,7 @@ from dsmr_backend.models.settings import EmailSettings
 logger = logging.getLogger('commands')
 
 
-def send(to, subject, body, attachment=None):
+def send(email_from, email_to, subject, body, attachment=None):
     """ Sends an email using the outgoing email settings. """
     email_settings = EmailSettings.get_solo()
 
@@ -31,13 +31,13 @@ def send(to, subject, body, attachment=None):
     message = mail.EmailMessage(
         subject=subject,
         body=body,
-        from_email=to,
-        to=[to],
+        from_email=email_from,
+        to=[email_to],
         connection=email_backend,
     )
 
     if attachment:
         message.attach_file(attachment)
 
-    logger.debug('Email backup: Sending an email to %s (%s)', to, subject)
+    logger.debug('Email backup: Sending an email to %s (%s)', email_to, subject)
     message.send()

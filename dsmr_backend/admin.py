@@ -56,7 +56,7 @@ class EmailSettingsAdmin(SingletonModelAdmin):
         ),
         (
             _('Advanced'), {
-                'fields': ['host', 'port', 'username', 'password', 'use_tls', 'use_ssl'],
+                'fields': ['email_from', 'host', 'port', 'username', 'password', 'use_tls', 'use_ssl'],
                 'description': _(
                     'Enter your outgoing email settings here, which DSMR-reader will use to send emails. '
                     '<br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, '
@@ -79,7 +79,8 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 
         try:
             dsmr_backend.services.email.send(
-                email_settings.email_to,
+                email_from=email_settings.email_from,
+                email_to=email_settings.email_to,
                 subject=subject,
                 body=body
             )

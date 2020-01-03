@@ -29,6 +29,13 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
 
 class EmailSettings(ModelUpdateMixin, SingletonModel):
     """ Outgoing email settings. """
+    email_from = models.EmailField(
+        max_length=255,
+        default=None,
+        null=True,
+        blank=True,
+        help_text=_('The email address you want to send any emails from')
+    )
     email_to = models.EmailField(
         max_length=255,
         default=None,
@@ -70,12 +77,17 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
     use_tls = models.BooleanField(
         default=False,
         verbose_name=_('Use TLS'),
-        help_text=_('Optional: Whether the email server uses TLS for encryption')
+        help_text=_(
+            'Optional: Whether to use a TLS (secure) connection when talking to the SMTP server. '
+            'This is used for explicit TLS connections, generally on port 587')
     )
     use_ssl = models.BooleanField(
         default=False,
         verbose_name=_('Use SSL'),
-        help_text=_('Optional: Whether the email server uses SSL for encryption')
+        help_text=_(
+            'Optional: Whether to use an implicit TLS (secure) connection when talking to the SMTP server. '
+            'In most email documentation this type of TLS connection is referred to as SSL. '
+            'It is generally used on port 465')
     )
 
     def __str__(self):

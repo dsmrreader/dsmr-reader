@@ -103,6 +103,9 @@ msgstr "Geeft aan of de applicatie af en toe op Github controleert of er updates
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
 
+msgid "The email address you want to send any emails from"
+msgstr "Het e-mailadres waar e-mails van verzonden worden"
+
 msgid "The email address you want to send any emails to"
 msgstr "Het e-mailadres waar e-mails naar toegestuurd worden"
 
@@ -133,14 +136,14 @@ msgstr "Optioneel: Het wachtwoord voor authenticatie op de e-mailserver"
 msgid "Use TLS"
 msgstr "Gebruik TLS"
 
-msgid "Optional: Whether the email server uses TLS for encryption"
-msgstr "Optioneel: Geeft aan of de e-mailserver TLS gebruikt voor encryptie"
+msgid "Optional: Whether to use a TLS (secure) connection when talking to the SMTP server. This is used for explicit TLS connections, generally on port 587"
+msgstr "Optioneel: Geeft aan of explicit TLS gebruikt dient te worden voor communicatie naar de SMTP server. De standaardpoort is 587"
 
 msgid "Use SSL"
 msgstr "Gebruik SSL"
 
-msgid "Optional: Whether the email server uses SSL for encryption"
-msgstr "Optioneel: Geeft aan of de e-mailserver SSL gebruikt voor encryptie"
+msgid "Optional: Whether to use an implicit TLS (secure) connection when talking to the SMTP server. In most email documentation this type of TLS connection is referred to as SSL. It is generally used on port 465"
+msgstr "Optioneel: Geeft aan of implicit TLS gebruikt dient te worden voor communicatie naar de SMTP server. In meeste gevallen wordt dit SSL genoemd. De standaardpoort is 465"
 
 msgid "Email configuration"
 msgstr "E-mailconfiguratie"
