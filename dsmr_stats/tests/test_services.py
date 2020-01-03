@@ -201,12 +201,23 @@ class TestServices(InterceptStdoutMixin, TestCase):
             currently_delivered=1,
             currently_returned=2,
         )
+        GasConsumption.objects.all().delete()
+        GasConsumption.objects.create(
+            read_at=target_datetime,  # We had gas yesterday, but still waiting for the first one of today.
+            delivered=1,
+            currently_delivered=2
+        )
 
         dsmr_stats.services.run(self.schedule_process)
         self.assertFalse(create_statistics_mock.called)  # Blocked
 
         self.schedule_process.refresh_from_db()
         self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(minutes=5))
+
+        # Specifically validating an edge case situation of issue #818.
+        GasConsumption.objects.all().update(read_at=target_datetime - timezone.timedelta(days=7))
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertTrue(create_statistics_mock.called)  # Should now pass.
 
     @mock.patch('dsmr_stats.services.create_statistics')
     @mock.patch('dsmr_stats.services.is_data_available')
