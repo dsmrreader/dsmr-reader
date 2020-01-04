@@ -33,7 +33,8 @@ def run(scheduled_process):
 
     email_settings = EmailSettings.get_solo()
     dsmr_backend.services.email.send(
-        to=email_settings.email_to,
+        email_from=email_settings.email_from,
+        email_to=email_settings.email_to,
         subject=subject,
         body=body,
         attachment=backup_file
