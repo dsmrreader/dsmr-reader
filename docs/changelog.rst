@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v2.13.0 - 2019-xx-xx
+v2.13.0 - 2019-01-05
 
 - [`#819 <https://github.com/dennissiemensma/dsmr-reader/issues/819>`_] Add mail_from option and changed help text - by jbrunink
 - [`#730 <https://github.com/dennissiemensma/dsmr-reader/issues/730>`_] Standaard-range dashboard grafieken instelbaar maken
