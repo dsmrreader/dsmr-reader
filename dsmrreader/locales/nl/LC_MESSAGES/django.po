@@ -37,8 +37,8 @@ msgstr "API-configuratie"
 msgid "Advanced"
 msgstr "Geavanceerd"
 
-msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails. <br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, port <strong>25</strong> and use <strong>TLS</strong>. Do not enter any username of password and enter your GMail address as \"Email to\" above."
-msgstr "Voer hier je uitgaande e-mailinstellingen in, welke gebruikt worden door DSMR-reader om je e-mails te sturen. <br><br>Heb je GMail? Voer dan als host <strong>aspmx.l.google.com</strong> in, als poort <strong>25</strong> en gebruik <strong>TLS</strong>. Voer vervolgens niet je gebruikersnaam of wachtwoord in. Vul je GMail-adres hierboven in als ontvanger."
+msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails. <br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, port <strong>25</strong> and use <strong>TLS</strong>. Do NOT fill in any username of password, but just enter your GMail address as \"Email to\" above."
+msgstr "Voer hier je uitgaande e-mailinstellingen in, welke gebruikt worden door DSMR-reader om je e-mails te sturen. <br><br>Heb je GMail? Voer dan als host <strong>aspmx.l.google.com</strong> in, als poort <strong>25</strong> en gebruik <strong>TLS</strong>. Voer vervolgens NIET je gebruikersnaam of wachtwoord in. Vul je GMail-adres hierboven in als ontvanger."
 
 msgid "DSMR-reader email test"
 msgstr "DSMR-reader e-mail test"
@@ -49,8 +49,8 @@ msgstr "Test voor je e-mailinstellingen."
 msgid "Failed to send test email: {}"
 msgstr "Versturen van e-mail test gefaald: {}"
 
-msgid "Email sent succesfully, please check your email inbox (and spam folder)."
-msgstr "E-mail is verstuurd. Controleer je Inbox (en Spam-folder)."
+msgid "Email sent succesfully, please check your email inbox (or spam folder)."
+msgstr "E-mail is verstuurd. Controleer je Inbox (of Spam-folder)."
 
 msgid "Only reschedule a process if you really need to, as it could cause mistimings at some point."
 msgstr "Herplan een proces alleen wanneer het noodzakelijk is, gezien het de timing tussen processen kan aantasten."

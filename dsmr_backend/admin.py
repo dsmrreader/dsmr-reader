@@ -1,3 +1,5 @@
+import logging
+
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.dispatch import receiver
@@ -14,7 +16,6 @@ import django.db.models.signals
 from dsmr_backend.models.settings import BackendSettings, EmailSettings
 from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backend.services.email
-import logging
 
 
 # There is no global admin.py, so we'll just disable Group & User here.
@@ -61,7 +62,7 @@ class EmailSettingsAdmin(SingletonModelAdmin):
                     'Enter your outgoing email settings here, which DSMR-reader will use to send emails. '
                     '<br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, '
                     'port <strong>25</strong> and use <strong>TLS</strong>. '
-                    'Do not enter any username of password and enter your GMail address as "Email to" above.'
+                    'Do NOT fill in any username of password, but just enter your GMail address as "Email to" above.'
                 )
             }
         ),
@@ -88,7 +89,7 @@ class EmailSettingsAdmin(SingletonModelAdmin):
             self.message_user(request, _('Failed to send test email: {}'.format(error)), level=logging.ERROR)
             return HttpResponseRedirect('.')
 
-        self.message_user(request, _('Email sent succesfully, please check your email inbox (and spam folder).'))
+        self.message_user(request, _('Email sent succesfully, please check your email inbox (or spam folder).'))
         return HttpResponseRedirect('.')
 
 
