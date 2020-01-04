@@ -33,12 +33,14 @@ class Command(BaseCommand):
         base_folder = os.path.join(dsmr_backup.services.backup.get_backup_directory(), 'manually')
 
         if options.get('full'):
-            dsmr_backup.services.backup.create_full(
+            backup_file = dsmr_backup.services.backup.create_full(
                 folder=base_folder
             )
+            print('Created full backup:', backup_file)
 
         if options.get('compact'):
             dsmr_backup.services.backup.create_partial(
                 folder=base_folder,
                 models_to_backup=(DayStatistics, HourStatistics)
             )
+            print('Created partial backup:', backup_file)

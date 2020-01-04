@@ -59,7 +59,7 @@ Execute the following::
 
 If things went well, you should see a message like::
 
-    Created and compressed full backup: /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wednesday.sql.gz
+    Created full backup: /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wednesday.sql.gz
 
 Execute the following (your file name may differ!)::
 
