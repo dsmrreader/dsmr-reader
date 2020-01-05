@@ -17,6 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/restart_processes.rst:2
 msgid "FAQ: Restarting application processes"
@@ -28,7 +30,7 @@ msgid ""
 "g.: Due to altered settings that need to be reapplied to the processes."
 msgstr ""
 "Kan het voorkomen dat je DSMR-reader wilt of moet herstarten. "
-"Bijvoorbeeld vanwege instellingen die een herstart vereisten."
+"Bijvoorbeeld vanwege instellingen die een herstart vereisen."
 
 #: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/restart_processes.rst:7
 msgid "For a soft restart::"
