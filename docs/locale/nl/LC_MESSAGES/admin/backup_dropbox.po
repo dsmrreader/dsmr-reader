@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader v1.x\n"
+"Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "POT-Creation-Date: 2018-10-15 20:40+0200\n"
 "PO-Revision-Date: 2018-10-17 18:11+0200\n"

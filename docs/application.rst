@@ -59,8 +59,6 @@ Data preservation & backups
 
  - There are example backup scripts available in ``dsmrreader/provisioning/postgresql/psql-backup.sh`` for **PostgreSQL**, which I dump to a separately USB stick mounted on my RaspberryPi. 
 
- - For **MySQL/MariaDB** you can use ``dsmrreader/provisioning/mysql/mysql-backup.sh``.
- 
  - Make sure to schedule the backup scripts as cronjob and also verify that it actually works, by running ``run-parts -v /etc/cron.daily``.
 
 - Also, check your free disk space once in a while. I will implement automatic cleanup settings later, allowing you to choose your own retention (for all the source readings).

@@ -1,24 +1,22 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-30 21:09+0200\n"
-"PO-Revision-Date: 2019-09-30 21:09+0200\n"
-"Last-Translator: \n"
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
-"Language-Team: \n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../faq/database.rst:2
-msgid "FAQ: Database"
-msgstr "FAQ: Database"
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:2
+msgid "FAQ: Changing database location"
+msgstr "FAQ: Databaseopslag verplaatsen"
 
-#: ../../faq/database.rst:6
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:6
 msgid ""
 "Changing the database data location may cause data corruption. Only execute the "
 "step below if you understand what you are exactly doing!"
@@ -26,7 +24,7 @@ msgstr ""
 "Het wijzigen van de dataopslag breng het gevaar van datacorruptie met zich mee. "
 "Voer onderstaande stappen alleen uit als je begrijpt wat je ermee doet!"
 
-#: ../../faq/database.rst:8
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:8
 msgid ""
 "Since the SD-card is quite vulnerable to wearing and corruption, you can run "
 "the database on a different disk or USB-stick. To do this, you will have to "
@@ -38,7 +36,7 @@ msgstr ""
 "zul je de applicatie en database moeten stoppen, de databaseconfiguratie "
 "aanpassen, dataopslag verplaatsen en alles weer opstarten."
 
-#: ../../faq/database.rst:11
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:11
 msgid ""
 "Make sure the OS has direct access the new location and **create a back-up "
 "first**!"
@@ -46,7 +44,7 @@ msgstr ""
 "Zorg ervoor dat het OS toegang heeft tot de nieuwe locatie en **maak eerst een "
 "back-up**!"
 
-#: ../../faq/database.rst:13
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:13
 msgid ""
 "In the example below we will move the data from ``/var/lib/postgresql/`` to ``/"
 "data/postgresql/`` (which could be an external mount)."
@@ -55,7 +53,7 @@ msgstr ""
 "postgresql/`` naar ``/data/postgresql/`` (wat bijvoorbeeld op een externe disk "
 "zou kunnen zijn)."
 
-#: ../../faq/database.rst:15
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:15
 msgid ""
 "*Please note that \"9.5\" in the example below is just the version number of "
 "the database, and it may differ from your installation. The same steps however "
@@ -65,19 +63,19 @@ msgstr ""
 "database en kan afwijken van je eigen situatie. Je kunt echter gewoon dezelfde "
 "stappen uitvoeren.*"
 
-#: ../../faq/database.rst:17
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:17
 msgid "Execute the commands below:"
 msgstr "Voer de onderstaande commando's uit:"
 
-#: ../../faq/database.rst:19
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:19
 msgid "Stop DSMR-reader: ``sudo supervisorctl stop all``"
 msgstr "Stop DSMR-reader: ``sudo supervisorctl stop all``"
 
-#: ../../faq/database.rst:21
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:21
 msgid "Stop database: ``sudo systemctl stop postgresql``"
 msgstr "Stop database: ``sudo systemctl stop postgresql``"
 
-#: ../../faq/database.rst:23
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:23
 msgid ""
 "Confirm that the database has stopped, you should see no more ``postgresql`` "
 "processes running: ``sudo ps faux | grep postgres``"
@@ -85,12 +83,12 @@ msgstr ""
 "Controleer dat de database gestopt is, je zou geen processen meer moeten zien "
 "van ``postgresql`` met:  ``sudo ps faux | grep postgres``"
 
-#: ../../faq/database.rst:25
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:25
 msgid "Ensure the new location exists: ``sudo mkdir /data/postgresql/``"
 msgstr ""
 "Zorg ervoor dat de nieuwe locatie bestaat: ``sudo mkdir /data/postgresql/``"
 
-#: ../../faq/database.rst:27
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:27
 msgid ""
 "Move the database data folder: ``sudo mv /var/lib/postgresql/9.5/ /data/"
 "postgresql/9.5/``"
@@ -98,7 +96,7 @@ msgstr ""
 "Verplaats nu de gehele data-map van de database: ``sudo mv /var/lib/"
 "postgresql/9.5/ /data/postgresql/9.5/``"
 
-#: ../../faq/database.rst:29
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:29
 msgid ""
 "Make sure the ``postgres`` user has access to the new location (and any parent "
 "folders in it's path): ``sudo chown -R postgres:postgres /data/``"
@@ -107,7 +105,7 @@ msgstr ""
 "(en eventuele bovenliggende mappen in het pad): ``sudo chown -R postgres:"
 "postgres /data/``"
 
-#: ../../faq/database.rst:31
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:31
 msgid ""
 "Edit database configuration ``sudo vi /etc/postgresql/9.5/main/postgresql."
 "conf`` and find the line::"
@@ -115,17 +113,17 @@ msgstr ""
 "Open de databaseconfiguratie met ``sudo vi /etc/postgresql/9.5/main/postgresql."
 "conf`` en vind de volgende regel::"
 
-#: ../../faq/database.rst:35
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:35
 msgid "Change it to your new location::"
 msgstr "Wijzig het naar de nieuwe locatie::"
 
-#: ../../faq/database.rst:39
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:39
 msgid "Save the file and start the database: ``sudo systemctl start postgresql``"
 msgstr ""
 "Sla het bestand op en start de database weer: ``sudo systemctl start "
 "postgresql``"
 
-#: ../../faq/database.rst:41
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:41
 msgid ""
 "Check whether the database is running again, you should see multiple processes: "
 "``sudo ps faux | grep postgres``"
@@ -133,7 +131,7 @@ msgstr ""
 "Controleer of de database weer draait, je zou nu meerdere processen moeten "
 "zien:  ``sudo ps faux | grep postgres``"
 
-#: ../../faq/database.rst:43
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:43
 msgid ""
 "Does the database not start? Check its logs in ``/var/log/postgresql/`` for "
 "hints."
@@ -141,11 +139,11 @@ msgstr ""
 "Wil de database niet starten? Bekijk dan de logs in  ``/var/log/postgresql/`` "
 "voor hints."
 
-#: ../../faq/database.rst:45
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:45
 msgid "Start DSMR-reader again: ``sudo supervisorctl start all``"
 msgstr "Start DSMR-reader weer met: ``sudo supervisorctl start all``"
 
-#: ../../faq/database.rst:47
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:47
 msgid "Everything should work as usual now, storing the data on the new location."
 msgstr ""
 "Alles zou weer moeten werken zoals voorheen, met de data voortaan op een andere "
@@ -424,3 +422,6 @@ msgstr ""
 
 #~ msgid "FAQ / Database"
 #~ msgstr "FAQ / Database"
+
+#~ msgid "FAQ: Database"
+#~ msgstr "FAQ: Database"

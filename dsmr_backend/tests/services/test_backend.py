@@ -1,9 +1,9 @@
 from unittest import mock
 
-from django.test.utils import override_settings
 from django.test import TestCase
 from django.utils import timezone
 
+from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
@@ -168,22 +168,43 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertTrue(capabilities['weather'])
         self.assertTrue(capabilities['any'])
 
-    @override_settings(DSMRREADER_DISABLED_CAPABILITIES=['electricity'])
     def test_disabled_capabilities(self):
-        """ Whether DSMRREADER_DISABLED_CAPABILITIES affects the outcome. """
+        """ Whether disable capabilities affects the outcome. """
+        BackendSettings.get_solo()
         ElectricityConsumption.objects.create(
             read_at=timezone.now(),
-            delivered_1=0,
-            returned_1=0,
-            delivered_2=0,
-            returned_2=0,
-            currently_delivered=0,
-            currently_returned=0,
+            delivered_1=1,
+            returned_1=2,
+            delivered_2=3,
+            returned_2=4,
+            currently_delivered=5,
+            currently_returned=6,
+        )
+        GasConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered=1,
+            currently_delivered=1,
         )
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('electricity'))
-        self.assertFalse(capabilities['electricity'])
+        self.assertTrue(dsmr_backend.services.backend.get_capabilities('gas'))
+        self.assertTrue(capabilities['gas'])
+        self.assertTrue(dsmr_backend.services.backend.get_capabilities('electricity_returned'))
+        self.assertTrue(capabilities['electricity_returned'])
+
+        # Disable gas.
+        BackendSettings.objects.all().update(disable_gas_capability=True)
+
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        self.assertFalse(dsmr_backend.services.backend.get_capabilities('gas'))
+        self.assertFalse(capabilities['gas'])
+
+        # Disable return.
+        BackendSettings.objects.all().update(disable_electricity_returned_capability=True)
+
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        self.assertFalse(dsmr_backend.services.backend.get_capabilities('electricity_returned'))
+        self.assertFalse(capabilities['electricity_returned'])
 
     @mock.patch('django.core.cache.cache.set')
     @mock.patch('django.core.cache.cache.get')
