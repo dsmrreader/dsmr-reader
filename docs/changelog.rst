@@ -2,7 +2,9 @@ Changelog
 =========
 
 
-v2.14.0 - 2020-01-xx
+v2.14.0 - 2020-01-07
+
+*Some configuration options inside ``settings.py`` wererelocated or removed from the application. See [the docs](https://dsmr-reader.readthedocs.io/en/latest/settings.html) for the changes.*
 
 - [`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_] Move custom configuration in settings.py to database
 - [`#793 <https://github.com/dennissiemensma/dsmr-reader/issues/793>`_] Alle meldingen in 1x sluiten

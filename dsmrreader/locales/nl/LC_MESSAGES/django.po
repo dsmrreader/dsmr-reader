@@ -691,6 +691,9 @@ msgstr "DSMR-reader v2.9.0: Buienradar heeft haar API aangepast. Deze update wer
 msgid "DSMR-reader v2.10.0: Added automatic update checker (weekly), enabled by default, you can disable it in the Backend settings. See changelog for more changes."
 msgstr "DSMR-reader v2.10.0: Automatische update checker (wekelijks) toegevoegd, standaard ingeschakeld. Wil je dit niet, dan kun je dit uitschakelen in de Backend-configuratie. Zie het wijzigingenoverzicht voor overige wijzigingen."
 
+msgid "DSMR-reader v2.14.0: Some configuration options in setting.py were relocated or removed. This only affects you if you are using custom settings in setting.py. See the changelog for more information."
+msgstr "DSMR-reader v2.14.0: Sommige instellingen in settings.py zijn verplaatst of uitgefaseerd. Dit is alleen van belang wanneer je zelf handmatig instellingen hebt aangepast in settings.py. Zie de changelog voor meer informatie."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
