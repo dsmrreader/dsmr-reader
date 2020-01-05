@@ -1,5 +1,5 @@
-FAQ: Updating DSMR-reader
-=========================
+FAQ: Updating the application
+=============================
 
 The version you are running is always based on the 'latest' version of the application, called the `master` branch.
 Every once in a while there may be updates. You can also easily check for updates by using the application's Status page.

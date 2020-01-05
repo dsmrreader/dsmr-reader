@@ -2,7 +2,15 @@ Changelog
 =========
 
 
-v2.13.0 - 2019-01-05
+v2.14.0 - 2020-01-xx
+
+- [`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_]  Move custom configuration in settings.py to database
+
+
+----
+
+
+v2.13.0 - 2020-01-05
 
 - [`#819 <https://github.com/dennissiemensma/dsmr-reader/issues/819>`_] Add mail_from option and changed help text - by jbrunink
 - [`#730 <https://github.com/dennissiemensma/dsmr-reader/issues/730>`_] Standaard-range dashboard grafieken instelbaar maken
@@ -544,7 +552,6 @@ v1.10.0 - 2017-10-19
 .. note::
 
    This releases turns telegram logging **off by default**. 
-   If you wish to continue using this feature, add ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``settings.py`` and reload the application.
 
 
 ----

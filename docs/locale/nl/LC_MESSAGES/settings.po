@@ -17,11 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: ../../settings.rst:2
-msgid "Other settings"
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:2
+#, fuzzy
+msgid "Custom settings"
 msgstr "Overige instellingen"
 
-#: ../../settings.rst:4
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:6
+msgid ""
+"Since DSMR-reader ``v2.14.0`` these settings were moved to the "
+"webinterface or removed entirely."
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:9
 msgid ""
 "Some project settings can be changed (or overridden) in the "
 "``dsmrreader/settings.py`` file. Removing any of these settings from your"
@@ -31,7 +38,7 @@ msgstr ""
 "het ``dsmrreader/settings.py`` bestand. Het weghalen van deze "
 "instellingen zorgt ervoor dat de standaardwaarden weer gebruikt worden."
 
-#: ../../settings.rst:7
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:12
 msgid ""
 "Make sure to reload the application afterwards to persist the changes "
 "you've made by executing ``./post-deploy.sh`` or restarting the "
@@ -41,15 +48,25 @@ msgstr ""
 "``./post-deploy.sh`` uit te voeren, of de Supervisor-processen te "
 "herstarten."
 
-#: ../../settings.rst:10
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:15
 msgid "Contents"
 msgstr "Inhoud"
 
-#: ../../settings.rst:13
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:18
 msgid "``DSMRREADER_BACKEND_SLEEP``"
 msgstr "``DSMRREADER_BACKEND_SLEEP``"
 
-#: ../../settings.rst:14
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:22
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:34
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:46
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:58
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:119
+msgid ""
+"Since DSMR-reader ``v2.14.0`` this setting was **moved to the "
+"webinterface** and no longer effects the application!"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:24
 msgid ""
 "The number of seconds the application will sleep after completing a "
 "backend run. Prevents hammering on your hardware."
@@ -57,15 +74,15 @@ msgstr ""
 "Het aantal seconden dat de applicatie wacht na het voltooien van een "
 "backend run. Voorkomt hoge load op je hardware."
 
-#: ../../settings.rst:16
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:26
 msgid "Defaults to ``DSMRREADER_BACKEND_SLEEP = 1``."
 msgstr "Standaardwaarde ``DSMRREADER_BACKEND_SLEEP = 1``."
 
-#: ../../settings.rst:20
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:30
 msgid "``DSMRREADER_DATALOGGER_SLEEP``"
 msgstr "``DSMRREADER_DATALOGGER_SLEEP``"
 
-#: ../../settings.rst:21
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:36
 msgid ""
 "The number of seconds the application will sleep after reading data from "
 "the datalogger (API excluded). Prevents hammering on your hardware."
@@ -73,15 +90,15 @@ msgstr ""
 "Het aantal seconden dat de applicatie wacht na het uitlezen van de "
 "datalogger (uitgezonderd API). Voorkomt hoge load op je hardware."
 
-#: ../../settings.rst:23
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:38
 msgid "Defaults to ``DSMRREADER_DATALOGGER_SLEEP = 0.5``."
 msgstr "Standaardwaarde ``DSMRREADER_DATALOGGER_SLEEP = 0.5``."
 
-#: ../../settings.rst:27
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:42
 msgid "``DSMRREADER_MQTT_SLEEP``"
 msgstr "``DSMRREADER_MQTT_SLEEP``"
 
-#: ../../settings.rst:28
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:48
 msgid ""
 "The number of seconds the application will sleep after reading and "
 "publishing the outgoing MQTT message queue. Prevents hammering on your "
@@ -90,15 +107,15 @@ msgstr ""
 "Het aantal seconden dat de applicatie wacht na het verwerken van een "
 "batch uitgaande MQTT-berichten. Voorkomt hoge load op je hardware."
 
-#: ../../settings.rst:30
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:50
 msgid "Defaults to ``DSMRREADER_MQTT_SLEEP = 1``."
 msgstr "Standaardwaarde: ``DSMRREADER_MQTT_SLEEP = 1``."
 
-#: ../../settings.rst:34
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:54
 msgid "``DSMRREADER_LOG_TELEGRAMS``"
 msgstr "``DSMRREADER_LOG_TELEGRAMS``"
 
-#: ../../settings.rst:35
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:60
 msgid ""
 "Whether telegrams are logged, in base64 format. Only required for "
 "debugging."
@@ -106,15 +123,24 @@ msgstr ""
 "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig "
 "voor debuggen."
 
-#: ../../settings.rst:37
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:62
 msgid "Defaults to ``DSMRREADER_LOG_TELEGRAMS = False``."
 msgstr "Standaardwaarde ``DSMRREADER_LOG_TELEGRAMS = False``."
 
-#: ../../settings.rst:41
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:66
 msgid "``DSMRREADER_RECONNECT_DATABASE``"
 msgstr "``DSMRREADER_RECONNECT_DATABASE``"
 
-#: ../../settings.rst:42
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:70
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:82
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:94
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:106
+msgid ""
+"Since DSMR-reader ``v2.14.0`` this setting was **removed** and no longer "
+"effects the application!"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:72
 msgid ""
 "Whether the backend process (and datalogger) reconnects to the DB after "
 "each run. Prevents some hanging connections in some situations."
@@ -122,15 +148,15 @@ msgstr ""
 "Geeft aan of de backend na elke run opnieuw moet verbinden naar de "
 "database. Dit voorkomt in enkele gevallen hangende verbindingen."
 
-#: ../../settings.rst:44
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:74
 msgid "Defaults to ``DSMRREADER_RECONNECT_DATABASE = True``."
 msgstr "Standaardwaarde ``DSMRREADER_RECONNECT_DATABASE = True``."
 
-#: ../../settings.rst:48
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:78
 msgid "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
 msgstr "``DSMRREADER_STATUS_READING_OFFSET_MINUTES``"
 
-#: ../../settings.rst:49
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:84
 msgid ""
 "Maximum interval in minutes allowed since the latest reading, before "
 "ringing any alarms."
@@ -138,15 +164,15 @@ msgstr ""
 "Maximale toegestane interval, in minuten, sinds de laatste meting, "
 "voordat er alarmbellen af gaan."
 
-#: ../../settings.rst:51
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:86
 msgid "Defaults to ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
 msgstr "Standaardwaarde ``DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60``."
 
-#: ../../settings.rst:55
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:90
 msgid "``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``"
 msgstr "``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``"
 
-#: ../../settings.rst:56
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:96
 msgid ""
 "Number of queued MQTT messages the application will retain. Any excess "
 "will be purged."
@@ -154,15 +180,15 @@ msgstr ""
 "Het aantal MQTT-berichten dat de applicatie vasthoudt. Alle overtollige "
 "berichten worden verwijderd."
 
-#: ../../settings.rst:58
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:98
 msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200``."
 msgstr "Standaardwaarde ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200``."
 
-#: ../../settings.rst:62
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:102
 msgid "``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``"
 msgstr "``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN``"
 
-#: ../../settings.rst:63
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:108
 msgid ""
 "The maximum number of hours that will be cleaned up during one retention "
 "run. Raise this value if you have a lot of readings to clean up and it "
@@ -172,27 +198,15 @@ msgstr ""
 "Verhoog deze waarde wanneer je een hoop metingen hebt om op te schonen en"
 " het erg lang duurt."
 
-#: ../../settings.rst:66
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:111
 msgid "Defaults to ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``."
 msgstr "Standaardwaarde ``DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24``."
 
-#: ../../settings.rst:70
-msgid "``DSMRREADER_PLUGINS``"
-msgstr "``DSMRREADER_PLUGINS``"
-
-#: ../../settings.rst:71
-msgid ":doc:`More information about this feature can be found here<plugins>`."
-msgstr ":doc:`Meer informatie over deze feature kun je hier terugvinden<plugins>`."
-
-#: ../../settings.rst:73
-msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
-msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."
-
-#: ../../settings.rst:77
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:115
 msgid "``DSMRREADER_DISABLED_CAPABILITIES``"
 msgstr "``DSMRREADER_DISABLED_CAPABILITIES``"
 
-#: ../../settings.rst:78
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:121
 msgid ""
 "Whether to override (disable) capabilities. Only use if you want to "
 "disable a capability that your smart meter keeps reporting. For example "
@@ -206,11 +220,11 @@ msgstr ""
 "alternatieve energiebron. Of wanneer je slimme meter data bevat voor "
 "teruggeleverde energie en je uberhaupt geen zonnepanelen hebt."
 
-#: ../../settings.rst:81
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:124
 msgid "Defaults to ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 msgstr "Standaardwaarde ``DSMRREADER_DISABLED_CAPABILITIES = []``."
 
-#: ../../settings.rst:83
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/settings.rst:126
 msgid ""
 "Example usage ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
 "'electricity_returned']``."
@@ -242,4 +256,15 @@ msgstr ""
 
 #~ msgid "Defaults to ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
 #~ msgstr "Standaardwaarde ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
+
+#~ msgid "``DSMRREADER_PLUGINS``"
+#~ msgstr "``DSMRREADER_PLUGINS``"
+
+#~ msgid ":doc:`More information about this feature can be found here<plugins>`."
+#~ msgstr ""
+#~ ":doc:`Meer informatie over deze feature "
+#~ "kun je hier terugvinden<plugins>`."
+
+#~ msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
+#~ msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."
 

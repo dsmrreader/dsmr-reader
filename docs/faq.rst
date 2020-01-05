@@ -79,3 +79,9 @@ How can I check the logfiles?
 -----------------------------
 
 :doc:`See for instructions here <troubleshooting>`.
+
+
+How can I restart the application or processes?
+-----------------------------------------------
+
+:doc:`See for instructions here <faq/restart_processes>`.

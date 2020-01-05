@@ -1,6 +1,5 @@
 from unittest import mock
 
-from django.test.utils import override_settings
 from django.test import TestCase
 import serial
 
@@ -208,9 +207,10 @@ class TestServices(TestCase):
         telegram[-1] = "!58C8\n"
         dsmr_datalogger.services.telegram_to_reading(data=''.join(telegram))
 
-    @override_settings(DSMRREADER_LOG_TELEGRAMS=True)
     def test_telegram_logging_setting_coverage(self):
         """ Purely a coverage test. """
+        DataloggerSettings.get_solo()
+        DataloggerSettings.objects.all().update(log_telegrams=True)
         dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
 
 

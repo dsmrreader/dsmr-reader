@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='BackendSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('language', models.CharField(choices=[('nl', 'Dutch'), ('en', 'English')], default='nl', max_length=32, verbose_name='The language used in backend processes')),
+                ('language', models.CharField(choices=[('nl', 'Dutch'), ('en', 'English')], default='nl', max_length=32, help_text='The language used in backend processes')),
             ],
             options={
                 'abstract': False,
