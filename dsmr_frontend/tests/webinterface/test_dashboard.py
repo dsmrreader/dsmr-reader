@@ -10,7 +10,6 @@ from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
-from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.reading import TemperatureReading
@@ -47,6 +46,7 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('frontend_settings', response.context)
+        self.assertIn('notification_count', response.context)
         self.assertEqual(
             response.context['frontend_settings'].dashboard_graph_width,
             FrontendSettings.get_solo().dashboard_graph_width
@@ -348,18 +348,6 @@ class TestViews(TestCase):
             self.assertEqual(json_content, {'degrees_celcius': [30.0, 20.0], 'read_at': ['Sat 23:00', 'Sun 0:00']})
         else:
             self.assertEqual(json_content, {'read_at': [], 'degrees_celcius': []})
-
-    def test_dashboard_xhr_notification_read(self):
-        view_url = reverse('{}:dashboard-xhr-notification-read'.format(self.namespace))
-        notification = Notification.objects.create(message='TEST', redirect_to='fake')
-        self.assertFalse(notification.read)
-
-        response = self.client.post(view_url, data={'notification_id': notification.pk})
-        self.assertEqual(response.status_code, 200, response.content)
-
-        # Notification should be altered now.
-        notification.refresh_from_db()
-        self.assertTrue(notification.read)
 
 
 class TestViewsWithoutData(TestViews):

@@ -865,6 +865,9 @@ msgstr "Inloggen vereist"
 msgid "Configuration"
 msgstr "Configuratie"
 
+msgid "Notifications"
+msgstr "Notificaties"
+
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"
 
@@ -901,14 +904,14 @@ msgstr "Te vergelijken selectie"
 msgid "Watt"
 msgstr "Watt"
 
-msgid "Notifications"
-msgstr "Notificaties"
+msgid "Unread notifications"
+msgstr "Ongelezen notificaties"
 
-msgid "Mark notification as read"
-msgstr "Markeer notificatie als gelezen"
+msgid "Number of unread notifications"
+msgstr "Aantal ongelezen notificaties"
 
-msgid "View page"
-msgstr "Bekijk pagina"
+msgid "View"
+msgstr "Bekijk"
 
 msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
@@ -1056,6 +1059,27 @@ msgstr "in m<sup>3</sup>"
 
 msgid "Add note for today"
 msgstr "Voeg notitie toe voor vandaag"
+
+msgid "Unread Notifications"
+msgstr "Ongelezen notificaties"
+
+msgid "Mark all notifications as read"
+msgstr "Markeer alle notificaties als gelezen"
+
+msgid "Mark all as read"
+msgstr "Markeer allemaal als gelezen"
+
+msgid "Mark notification as read"
+msgstr "Markeer notificatie als gelezen"
+
+msgid "Mark as read"
+msgstr "Markeer als gelezen"
+
+msgid "View page"
+msgstr "Bekijk pagina"
+
+msgid "There are no unread notifications."
+msgstr "Er zijn geen ongelezen notificaties."
 
 msgid "No data found yet. This page should display data as soon as the first reading is processed by DSMR-reader."
 msgstr "Nog geen gegevens gevonden. Deze pagina weergeeft gegevens zodra de eerste meting door DSMR-reader is verwerkt."
@@ -2244,6 +2268,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "There are"
+#~ msgstr "Er zijn"
 
 #~ msgid "View Hall of Fame"
 #~ msgstr "Bekijk Hall of Fame"

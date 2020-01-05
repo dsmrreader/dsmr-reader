@@ -15,7 +15,7 @@
 
         {% block stylesheets %}
         <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'dsmr_frontend/fontawesome-free-5.10.2-web/css/all.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/fontawesome-free-5.12.0-web/css/all.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css">
         <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
@@ -105,7 +105,7 @@
                             </a>
                         </li>
                         <li>
-                            &nbsp;
+                            &nbsp;&nbsp;
                         </li>
                         <li>
                             <a href="{% url 'frontend:status' %}">
@@ -113,7 +113,7 @@
                             </a>
                         </li>
                         <li>
-                            &nbsp;
+                            &nbsp;&nbsp;
                         </li>
                         <li>
                             <a href="{% url 'frontend:export' %}">
@@ -123,6 +123,11 @@
                         <li>
 				            <a href="{% url 'admin:index' %}">
 				                <i class="fas fa-xs fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+				            </a>
+			            </li>
+                        <li>
+				            <a href="{% url 'frontend:notifications' %}">
+				                <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
 			            </li>
                         <li>

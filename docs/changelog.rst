@@ -4,7 +4,8 @@ Changelog
 
 v2.14.0 - 2020-01-xx
 
-- [`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_]  Move custom configuration in settings.py to database
+- [`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_] Move custom configuration in settings.py to database
+- [`#793 <https://github.com/dennissiemensma/dsmr-reader/issues/793>`_] Alle meldingen in 1x sluiten
 
 
 ----

@@ -56,5 +56,5 @@ class DashboardElectricityConsumptionForm(forms.Form):
         return self._clean_type('voltage', 'voltage')
 
 
-class DashboardNotificationReadForm(forms.Form):
+class NotificationReadForm(forms.Form):
     notification_id = forms.IntegerField()
