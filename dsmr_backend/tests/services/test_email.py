@@ -19,7 +19,11 @@ class TestEmail(TestCase):
     @mock.patch('django.core.mail.EmailMessage.send')
     @mock.patch('django.core.mail.EmailMessage.attach_file')
     def test_send_email(self, attach_file_mock, send_mock):
-        dsmr_backend.services.email.send(to='root@localhost', subject='Test', body='Body')
+        dsmr_backend.services.email.send(
+            email_from='root@localhost',
+            email_to='root@localhost',
+            subject='Test',
+            body='Body')
 
         self.assertTrue(send_mock.called)
         self.assertFalse(attach_file_mock.called)
@@ -27,7 +31,12 @@ class TestEmail(TestCase):
     @mock.patch('django.core.mail.EmailMessage.send')
     @mock.patch('django.core.mail.EmailMessage.attach_file')
     def test_send_email_with_attachment(self, attach_file_mock, send_mock):
-        dsmr_backend.services.email.send(to='root@localhost', subject='Test', body='Body', attachment='/tmp/test')
+        dsmr_backend.services.email.send(
+            email_from='root@localhost',
+            email_to='root@localhost',
+            subject='Test',
+            body='Body',
+            attachment='/tmp/test')
 
         self.assertTrue(send_mock.called)
         self.assertTrue(attach_file_mock.called)

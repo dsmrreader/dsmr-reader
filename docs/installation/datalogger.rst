@@ -10,6 +10,10 @@ Prepare API
 Make sure to prepare the API at the DSMR-reader instance you'll forward the telegrams to.
 For more information configuring it, :doc:`see the API settings <../admin/api>`.
 
+.. warning::
+
+    If your smart meter only supports DSMR v2, make sure to change the DSMR version :doc:`in the datalogger settings <../admin/datalogger>`.
+
 
 Installation
 ------------
@@ -160,6 +164,7 @@ Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf`` wi
     startsecs=1
     startretries=100
     stopwaitsecs=20
+    redirect_stderr=true
     stdout_logfile=/var/log/supervisor/%(program_name)s.log
     stdout_logfile_maxbytes=10MB
     stdout_logfile_backups=3

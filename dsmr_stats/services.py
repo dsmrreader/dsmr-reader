@@ -83,9 +83,12 @@ def run(scheduled_process):
         logger.debug('Stats: Missing consumption data for: %s', target_day)
         return scheduled_process.delay(timezone.timedelta(hours=1))
 
-    # If we support gas, make sure we've received a gas reading on the next day (or later).
-    if dsmr_backend.services.backend.get_capabilities(capability='gas') and \
-            not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
+    # If we recently supported gas, make sure we've received a gas reading on the next day (or later).
+    recently_gas_read = GasConsumption.objects.filter(
+        read_at__date__gte=target_day - timezone.timedelta(days=1)
+    ).exists()
+
+    if recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
         logger.debug('Stats: Waiting for first gas reading on the next day...')
         return scheduled_process.delay(timezone.timedelta(minutes=5))
 
