@@ -15,9 +15,11 @@ v3.0.0 - 2020-xx-xx
 ----
 
 
-v2.13.0 - 2019-xx-xx
+v2.13.0 - 2019-01-05
 
-- [`#730 <https://github.com/dennissiemensma/dsmr-reader/issues/730>`_] Standaard-range dashboard grafieken instelbaar maken #730
+- [`#819 <https://github.com/dennissiemensma/dsmr-reader/issues/819>`_] Add mail_from option and changed help text - by jbrunink
+- [`#730 <https://github.com/dennissiemensma/dsmr-reader/issues/730>`_] Standaard-range dashboard grafieken instelbaar maken
+- [`#818 <https://github.com/dennissiemensma/dsmr-reader/issues/818>`_] Dataverwerking loopt achter bij wisselen naar woning zonder gasmeter
 
 
 ----
