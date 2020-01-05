@@ -30,6 +30,11 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
                 )
             }
         ),
+        (
+            _('Debugging'), {
+                'fields': ['log_telegrams'],
+            }
+        ),
     )
 
 

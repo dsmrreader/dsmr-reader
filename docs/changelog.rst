@@ -552,7 +552,6 @@ v1.10.0 - 2017-10-19
 .. note::
 
    This releases turns telegram logging **off by default**. 
-   If you wish to continue using this feature, add ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``settings.py`` and reload the application.
 
 
 ----

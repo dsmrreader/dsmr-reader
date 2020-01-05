@@ -20,6 +20,9 @@ class Migration(migrations.Migration):
             process_sleep=decimal.Decimal(settings.DSMRREADER_MQTT_SLEEP)
         )
 
+    def migrate_backward(apps, schema_editor):
+        pass  # Nothing to do, but allow going backwards.
+
     dependencies = [
         ('dsmr_mqtt', '0012_mqtt_voltage_defaults'),
     ]
@@ -30,5 +33,5 @@ class Migration(migrations.Migration):
             name='process_sleep',
             field=models.DecimalField(decimal_places=1, default=1, help_text='The number of seconds the application will sleep after publishing the outgoing MQTT message queue.', max_digits=3, verbose_name='MQTT process sleep'),
         ),
-        migrations.RunPython(migrate_forward),
+        migrations.RunPython(migrate_forward, migrate_backward),
     ]

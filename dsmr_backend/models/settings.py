@@ -27,6 +27,19 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
             'The number of seconds the application will sleep after completing a backend run.'
         )
     )
+    disable_gas_capability = models.BooleanField(
+        default=False,
+        help_text=_(
+            'Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source.'
+        ),
+    )
+    disable_electricity_returned_capability = models.BooleanField(
+        default=False,
+        help_text=_(
+            'Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports '
+            'electricity returned data, but you do not own any solar panels.'
+        ),
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

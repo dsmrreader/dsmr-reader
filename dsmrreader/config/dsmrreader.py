@@ -35,10 +35,10 @@ DSMRREADER_DROPBOX_ERROR_INTERVAL = 12  # Skip new files for 12 hours when insuf
 DSMRREADER_COMPACT_MAX = 1024  # Max telegrams to compact in a single run.
 
 # Whether telegrams are logged, in base64 format. Only required for debugging.
-DSMRREADER_LOG_TELEGRAMS = False
+DSMRREADER_LOG_TELEGRAMS = False  # Will be REMOVED in v3.x+
 
-# Whether the backend process (and datalogger) reconnects to the DB after each run.
-DSMRREADER_RECONNECT_DATABASE = True
+# When processes should reconnect to the DB, to ensure the connection is still there.
+DSMRREADER_MAX_DATABASE_CONNECTION_SESSION_IN_SECONDS = 30 * 60
 
 # Maximum interval allowed since the latest reading, before ringing any alarms.
 DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60
@@ -54,8 +54,5 @@ DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
 
 # Plugins.
 DSMRREADER_PLUGINS = []
-
-# Whether to override (disable) capabilities.
-DSMRREADER_DISABLED_CAPABILITIES = []
 
 DSMRREADER_BUIENRADAR_API_URL = 'https://data.buienradar.nl/2.0/feed/json'

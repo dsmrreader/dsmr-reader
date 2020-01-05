@@ -1,30 +1,30 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"Last-Translator: \n"
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
-"Language-Team: \n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../faq.rst:2
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:2
 msgid "Frequently Asked Questions (FAQ)"
 msgstr "Veelgestelde vragen (FAQ)"
 
-#: ../../faq.rst:7
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:7
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../faq.rst:10
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:10
 msgid "I need help!"
 msgstr "Ik heb hulp nodig!"
 
-#: ../../faq.rst:11
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:11
 msgid ""
 "If you can't find the answer in the documentation, do not hesitate in looking "
 "for help. You can contact me using Github tickets."
@@ -32,7 +32,7 @@ msgstr ""
 "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan vooral "
 "niet om om hulp te vragen. Je kunt contact met mij opnemen via Github tickets."
 
-#: ../../faq.rst:14
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:14
 msgid ""
 "`Create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/"
 "issues/new>`_"
@@ -40,27 +40,27 @@ msgstr ""
 "`Maak een ticket aan op Github <https://github.com/dennissiemensma/dsmr-reader/"
 "issues/new>`_"
 
-#: ../../faq.rst:18
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:18
 msgid "How can I update my application?"
 msgstr "Hoe kan ik mijn applicatie bijwerken?"
 
-#: ../../faq.rst:20
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:20
 msgid ":doc:`See for instructions here <faq/update>`."
 msgstr ":doc:`Zie hier voor instructies<faq/update>`."
 
-#: ../../faq.rst:24
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:24
 msgid "How can I move the database location?"
 msgstr "Hoe kan ik de locatie van de gegevensopslag veranderen?"
 
-#: ../../faq.rst:25
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:25
 msgid ":doc:`See for instructions here <faq/database>`."
 msgstr ":doc:`Zie hier voor instructies<faq/database>`."
 
-#: ../../faq.rst:28
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:28
 msgid "Recalculate prices retroactively"
 msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
 
-#: ../../faq.rst:29
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:29
 msgid ""
 "*I've adjusted my energy prices but there are no changes! How can I regenerate "
 "them with my new prices?*"
@@ -68,15 +68,15 @@ msgstr ""
 "*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe "
 "kan ik de nieuwe prijzen doorvoeren?*"
 
-#: ../../faq.rst:31
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:31
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../faq.rst:38
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:38
 msgid "I'm not seeing any gas readings"
 msgstr "Ik zie geen gasverbruik"
 
-#: ../../faq.rst:40
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:40
 msgid ""
 "Please make sure that your meter supports reading gas consumption and that "
 "you've waited for a few hours for any graphs to render. The gas meter "
@@ -88,19 +88,19 @@ msgstr ""
 "sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
 "geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:46
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:46
 msgid "How do I restore a database backup?"
 msgstr "Hoe zet ik een databaseback-up terug?"
 
-#: ../../faq.rst:48
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:48
 msgid ":doc:`See for instructions here <installation/restore>`."
 msgstr ":doc:`Zie hier voor instructies<installation/restore>`."
 
-#: ../../faq.rst:52
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:52
 msgid "How do I enable timezone support for MySQL?"
 msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
-#: ../../faq.rst:54
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:54
 msgid ""
 "`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql."
 "html>`_ for more information about how to enable timezone support on MySQL. On "
@@ -112,29 +112,29 @@ msgstr ""
 "recente versies is het een kwestie van onderstaand commando uitvoeren als root/"
 "sudo-gebruiker::"
 
-#: ../../faq.rst:61
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:61
 msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
 msgstr ""
 "Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of hoger?"
 
-#: ../../faq.rst:63
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:63
 msgid ":doc:`See for instructions here <mqtt>`."
 msgstr ":doc:`Zie hier voor instructies<mqtt>`."
 
-#: ../../faq.rst:67
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:67
 msgid "How do I uninstall DSMR-reader?"
 msgstr "Hoe deinstalleer ik DSMR-reader?"
 
-#: ../../faq.rst:69
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:69
 msgid ":doc:`See for instructions here <faq/uninstall>`."
 msgstr ":doc:`Zie hier voor instructies<faq/uninstall>`."
 
-#: ../../faq.rst:73
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:73
 msgid "How can I use the datalogger only and forward the telegrams?"
 msgstr ""
 "Hoe kan ik alleen de datalogger gebruiken voor het doorsturen van telegrammen?"
 
-#: ../../faq.rst:75
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:75
 msgid ""
 "See :doc:`these datalogger instructions<installation/datalogger>` for more "
 "information."
@@ -142,13 +142,21 @@ msgstr ""
 "Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor meer "
 "informatie."
 
-#: ../../faq.rst:79
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:79
 msgid "How can I check the logfiles?"
 msgstr "How kan ik de logfiles bekijken?"
 
-#: ../../faq.rst:81
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:81
 msgid ":doc:`See for instructions here <troubleshooting>`."
 msgstr ":doc:`Zie hier voor instructies<troubleshooting>`."
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:85
+msgid "How can I restart the application or processes?"
+msgstr "Hoe de applicatie of processen herstarten?"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq.rst:87
+msgid ":doc:`See for instructions here <faq/restart_processes>`."
+msgstr ":doc:`Zie hier voor instructies<faq/restart_processes>`."
 
 #~ msgid "Feature/bug report"
 #~ msgstr "Verzoek/fout melden"

@@ -20,6 +20,8 @@ class Migration(migrations.Migration):
             process_sleep=decimal.Decimal(settings.DSMRREADER_BACKEND_SLEEP)
         )
 
+    def migrate_backward(apps, schema_editor):
+        pass  # Nothing to do, but allow going backwards.
 
     dependencies = [
         ('dsmr_backend', '0009_update_email_settings_mail_from'),
@@ -31,5 +33,5 @@ class Migration(migrations.Migration):
             name='process_sleep',
             field=models.DecimalField(decimal_places=1, default=1, help_text='The number of seconds the application will sleep after completing a backend run.', max_digits=3, verbose_name='Backend process sleep'),
         ),
-        migrations.RunPython(migrate_forward),
+        migrations.RunPython(migrate_forward, migrate_backward),
     ]

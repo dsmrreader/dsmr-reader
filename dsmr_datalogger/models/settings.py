@@ -38,6 +38,10 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
             'The number of seconds the application will sleep after reading data from the datalogger (API excluded).'
         )
     )
+    log_telegrams = models.BooleanField(
+        default=False,
+        help_text=_("Whether telegrams are logged, in base64 format. Only required for debugging.")
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

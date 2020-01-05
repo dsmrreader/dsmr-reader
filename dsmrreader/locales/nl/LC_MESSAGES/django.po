@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader v1.x\n"
+"Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -111,6 +111,12 @@ msgstr "Backend proces sleep"
 
 msgid "The number of seconds the application will sleep after completing a backend run."
 msgstr "Het aantal seconden dat de applicatie wacht na het voltooien van een backend run."
+
+msgid "Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source."
+msgstr "Geeft aan of gas uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer je geen gas (meer) gebruikt en ben overgestapt naar een andere energiebron."
+
+msgid "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels."
+msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) teruglevering heeft geregistreerd."
 
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
@@ -424,6 +430,9 @@ msgstr "N.B.: Je zult mogelijk het \"dsmr_datalogger\" proces moeten herstarten 
 msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
 msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
 
+msgid "Debugging"
+msgstr "Debuggen"
+
 msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentatie</a>"
 
@@ -528,6 +537,9 @@ msgstr "Datalogger proces sleep"
 
 msgid "The number of seconds the application will sleep after reading data from the datalogger (API excluded)."
 msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API uitgezonderd)."
+
+msgid "Whether telegrams are logged, in base64 format. Only required for debugging."
+msgstr "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor debugging."
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
@@ -871,8 +883,8 @@ msgstr "Donaties"
 msgid "Credits to"
 msgstr "Credits aan"
 
-msgid "View Hall of Fame"
-msgstr "Bekijk Hall of Fame"
+msgid "Many contributers"
+msgstr "Veel hulp van derden"
 
 msgid "View repository on Github"
 msgstr "Bekijk repository op Github"
@@ -2233,6 +2245,9 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "View Hall of Fame"
+#~ msgstr "Bekijk Hall of Fame"
+
 #~ msgid "Next"
 #~ msgstr "Volgende"
 
@@ -2304,9 +2319,6 @@ msgstr "Engels"
 
 #~ msgid "Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page"
 #~ msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina"
-
-#~ msgid "Debugging"
-#~ msgstr "Debuggen"
 
 #~ msgid "Enable debug logging"
 #~ msgstr "Schakel debug logging in"

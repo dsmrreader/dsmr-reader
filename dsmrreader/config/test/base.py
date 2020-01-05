@@ -27,6 +27,7 @@ MIDDLEWARE = list(MIDDLEWARE)
 MIDDLEWARE.remove('debug_toolbar.middleware.DebugToolbarMiddleware')
 
 INTERNAL_IPS = None
+DSMRREADER_MAX_DATABASE_CONNECTION_SESSION_IN_SECONDS = 9999  # Never
 
 DSMRREADER_PLUGINS = [
     'os',  # Bad example, but it works for testing anyway.
