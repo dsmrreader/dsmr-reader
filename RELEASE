@@ -1,0 +1,6 @@
+- Update dsmrreader/__init__.py to final version
+- Update CHANGELOG latest version + release date
+- Dump migration lock with: ./manage.py dsmrreader_lock_migrations
+- Commit/merge to release branch
+- Tag the version in Git
+- Add changelog info to tag in Github

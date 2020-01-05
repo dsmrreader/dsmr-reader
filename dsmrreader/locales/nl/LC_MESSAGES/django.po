@@ -34,8 +34,14 @@ msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
 msgid "API configuration"
 msgstr "API-configuratie"
 
+msgid "Updates"
+msgstr "Updates"
+
 msgid "Advanced"
 msgstr "Geavanceerd"
+
+msgid "Note: You will have to restart the \"dsmr_backend\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_backend\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails. <br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, port <strong>25</strong> and use <strong>TLS</strong>. Do NOT fill in any username of password, but just enter your GMail address as \"Email to\" above."
 msgstr "Voer hier je uitgaande e-mailinstellingen in, welke gebruikt worden door DSMR-reader om je e-mails te sturen. <br><br>Heb je GMail? Voer dan als host <strong>aspmx.l.google.com</strong> in, als poort <strong>25</strong> en gebruik <strong>TLS</strong>. Voer vervolgens NIET je gebruikersnaam of wachtwoord in. Vul je GMail-adres hierboven in als ontvanger."
@@ -99,6 +105,12 @@ msgstr "Controleer automatisch op updates"
 
 msgid "Whether the application checks once in a while for new DSMR-reader release in Github"
 msgstr "Geeft aan of de applicatie af en toe op Github controleert of er updates beschikbaar zijn"
+
+msgid "Backend process sleep"
+msgstr "Backend proces sleep"
+
+msgid "The number of seconds the application will sleep after completing a backend run."
+msgstr "Het aantal seconden dat de applicatie wacht na het voltooien van een backend run."
 
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
@@ -403,6 +415,15 @@ msgstr "Elektriciteitsmetingen vinden elke X seconden plaats. We kunnen ze voor 
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
+msgid "Protocol"
+msgstr "Protocol"
+
+msgid "Note: You might have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult mogelijk het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+
+msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+
 msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentatie</a>"
 
@@ -501,6 +522,12 @@ msgstr "COM-poort"
 
 msgid "COM-port connected to Smartmeter."
 msgstr "COM-poort die verbonden is met je slimme meter."
+
+msgid "Datalogger process sleep"
+msgstr "Datalogger proces sleep"
+
+msgid "The number of seconds the application will sleep after reading data from the datalogger (API excluded)."
+msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API uitgezonderd)."
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
@@ -644,7 +671,7 @@ msgid "DSMR-reader v2.6.0: Many changes related to MQTT. Messages are now sent u
 msgstr "DSMR-reader v2.6.0: Veel wijzigingen gerelateerd aan MQTT. Berichten worden nu verzonden met de RETAIN-vlag ingeschakeld. Dit zorgt ervoor dat de broker de laatst ontvangen waarde van een topic bewaart. Hierdoor kan DSMR-reader een hoop uitgaande berichten cachen en dat voorkomt een hoop onnodige, dubbele berichten."
 
 msgid "DSMR-reader v2.7.0: Added support in MQTT to share gas consumption to your MQTT broker. "
-msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te delen met je MQTT-broker."
+msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te delen met je MQTT-broker. "
 
 msgid "DSMR-reader v2.9.0: Buienradar changed their API. This update fixes the issue."
 msgstr "DSMR-reader v2.9.0: Buienradar heeft haar API aangepast. Deze update werkt het bij."
@@ -1309,8 +1336,14 @@ msgstr "Onverwachte statuscode ontvangen"
 msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentatie</a>"
 
+msgid "Misc"
+msgstr "Overig"
+
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
+
+msgid "Note: You will have to restart the \"dsmr_mqtt\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_mqtt\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
 msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
@@ -1659,6 +1692,12 @@ msgstr "Herstart vereist"
 
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
+
+msgid "MQTT process sleep"
+msgstr "MQTT proces sleep"
+
+msgid "The number of seconds the application will sleep after publishing the outgoing MQTT message queue."
+msgstr "Het aantal seconden dat de applicatie wacht na het versturen van alle MQTT-berichten."
 
 msgid "MQTT Broker/connection"
 msgstr "MQTT broker/verbinding"

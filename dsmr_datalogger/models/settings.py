@@ -29,6 +29,15 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('COM-port'),
         help_text=_('COM-port connected to Smartmeter.')
     )
+    process_sleep = models.DecimalField(
+        default=0.5,
+        max_digits=3,
+        decimal_places=1,
+        verbose_name=_('Datalogger process sleep'),
+        help_text=_(
+            'The number of seconds the application will sleep after reading data from the datalogger (API excluded).'
+        )
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

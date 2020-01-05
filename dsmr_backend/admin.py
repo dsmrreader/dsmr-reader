@@ -27,8 +27,17 @@ admin.site.unregister(User)
 class BackendSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
-            None, {
-                'fields': ['language', 'automatic_update_checker'],
+            _('Updates'), {
+                'fields': ['automatic_update_checker'],
+            }
+        ),
+        (
+            _('Advanced'), {
+                'fields': ['language', 'process_sleep'],
+                'description': _(
+                    'Note: You will have to restart the "dsmr_backend" process for any changes to apply. '
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html">FAQ</a>.'
+                )
             }
         ),
     )

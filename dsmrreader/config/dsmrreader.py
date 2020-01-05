@@ -24,9 +24,9 @@ DSMRREADER_MODULE_STATS_GENERATOR = 'dsmr_stats.services.run'
 DSMRREADER_MODULE_MINDERGAS_EXPORT = 'dsmr_mindergas.services.run'
 
 # Sleep durations for infinity processes. Update these in your own config if you wish to alter them.
-DSMRREADER_BACKEND_SLEEP = 1
-DSMRREADER_DATALOGGER_SLEEP = 0.5
-DSMRREADER_MQTT_SLEEP = 1
+DSMRREADER_BACKEND_SLEEP = 1  # Will be REMOVED in v3.x+
+DSMRREADER_DATALOGGER_SLEEP = 0.5  # Will be REMOVED in v3.x+
+DSMRREADER_MQTT_SLEEP = 1  # Will be REMOVED in v3.x+
 
 DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
