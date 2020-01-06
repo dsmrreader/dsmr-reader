@@ -270,9 +270,11 @@ Remove the default Nginx vhost (**only when you do not use it yourself, see the 
 Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. 
 It's also configured to bring the entire application up again after a shutdown or reboot.
 
-- Copy the configuration file for Supervisor::
+- Copy the configuration files for Supervisor::
 
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr-reader.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_datalogger.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_backend.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
 
 - Login to ``supervisorctl`` management console::
 

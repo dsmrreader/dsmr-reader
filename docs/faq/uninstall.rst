@@ -10,7 +10,7 @@ To remove DSMR-reader from your system, execute the following commands::
 
     # Supervisor.
     sudo supervisorctl stop all
-    sudo rm /etc/supervisor/conf.d/dsmr-reader.conf
+    sudo rm /etc/supervisor/conf.d/dsmr*.conf
     sudo supervisorctl reread
     sudo supervisorctl update
 

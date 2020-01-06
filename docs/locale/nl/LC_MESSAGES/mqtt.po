@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-01-06 21:03+0100\n"
+"PO-Revision-Date: 2020-01-06 21:07+0100\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -12,47 +14,20 @@ msgstr ""
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../mqtt.rst:2
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:2
 msgid "MQTT"
 msgstr "MQTT"
 
-#: ../../mqtt.rst:6
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:6
 msgid "Only follow these step if you have enabled MQTT."
 msgstr "Voer deze stappen alleen uit wanneer je MQTT hebt ingeschakeld."
 
-#: ../../mqtt.rst:10
-msgid "Older versions (< v1.23.0)"
-msgstr "Oudere versies (< v1.23.0)"
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:10
+msgid "Older versions (< v3.0.0)"
+msgstr "Oudere versies (< v3.0.0)"
 
-#: ../../mqtt.rst:12
-msgid ""
-"Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for "
-"processing MQTT messages (``dsmr_mqtt``)."
-msgstr ""
-"Vanaf DSMR-reader ``v1.23.0`` is er een toegewijd proces voor het versturen "
-"van MQTT-berichten (``dsmr_mqtt``)."
-
-#: ../../mqtt.rst:14
-msgid ""
-"Fresh installations automatically include the ``dsmr_mqtt`` process. Existing "
-"installations however, should add ``dsmr_mqtt`` manually. Instructions:"
-msgstr ""
-"Nieuwe installaties hebben al de configuratie voor het ``dsmr_mqtt`` proces. "
-"Bestaande installaties moeten deze handmatig toevoegen. Instructies:"
-
-#: ../../mqtt.rst:16
-msgid "Please upgrade to ``v1.23.0`` or higher first."
-msgstr "Upgrade eerst naar  ``v1.23.0`` of hoger."
-
-#: ../../mqtt.rst:17
-msgid "Now execute the following commands as **root/sudo-user**::"
-msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
-
-#: ../../mqtt.rst:24
-msgid "Starting MQTT"
-msgstr "MQTT starten"
-
-#: ../../mqtt.rst:26
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:12
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:48
 msgid ""
 "Execute ``sudo supervisorctl status`` and check whether it includes "
 "``dsmr_mqtt`` with status ``RUNNING``. If not, continue with the steps below."
@@ -60,28 +35,30 @@ msgstr ""
 "Voer ``sudo supervisorctl status`` uit en controleer of je ``dsmr_mqtt`` ziet "
 "met status ``RUNNING``. Zo niet, volg de stappen hieronder."
 
-#: ../../mqtt.rst:28
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:14
 msgid ""
 "Open ``/etc/supervisor/conf.d/dsmr-reader.conf`` (sudo required) and find::"
 msgstr "Open ``/etc/supervisor/conf.d/dsmr-reader.conf`` (sudo nodig) en zoek::"
 
-#: ../../mqtt.rst:41
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:27
 msgid "Change::"
 msgstr "Verander::"
 
-#: ../../mqtt.rst:45
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:31
 msgid "To::"
 msgstr "Naar::"
 
-#: ../../mqtt.rst:49
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:35
 msgid "Save the file."
 msgstr "Sla het bestand op."
 
-#: ../../mqtt.rst:51
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:37
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:54
 msgid "Apply changes::"
 msgstr "Pas de wijzigingen toe::"
 
-#: ../../mqtt.rst:56
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:42
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:59
 msgid ""
 "Executing ``sudo supervisorctl status`` should now include ``dsmr_mqtt`` with "
 "status ``RUNNING``."
@@ -89,15 +66,23 @@ msgstr ""
 "Wanneer je ``sudo supervisorctl status`` uitvoert, zou je ``dsmr_mqtt`` moeten "
 "zien met status ``RUNNING``."
 
-#: ../../mqtt.rst:59
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:46
+msgid "Recent versions (v3.0.0 or higher)"
+msgstr "Recente versies (v3.0.0 of hoger)"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:50
+msgid "Copy the MQTT process config::"
+msgstr "Kopieer het MQTT-configuratiebestand::"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:63
 msgid "MQTT caching"
 msgstr "MQTT cache"
 
-#: ../../mqtt.rst:61
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:65
 msgid "Since DSMR-reader ``v2.6`` MQTT messages are:"
 msgstr "Sinds DSMR-reader ``v2.6`` MQTT-berichten worden:"
 
-#: ../../mqtt.rst:63
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:67
 msgid ""
 "Sent with the ``retain`` flag, asking the broker to cache the latest value "
 "sent to each topic."
@@ -105,12 +90,12 @@ msgstr ""
 "Verstuurd met de ``retain`` vlag, waardoor de broker de laatste waarde van elk "
 "topic bewaart."
 
-#: ../../mqtt.rst:64
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:68
 msgid "Cached for an hour, to reduce the number of duplicate messages sent."
 msgstr ""
 "Gecached gedurende een uur, om het aantal dubbele berichten te verminderen."
 
-#: ../../mqtt.rst:65
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:69
 msgid ""
 "Discarded when there is already another unsent message queued with the exact "
 "same topic and contents."
@@ -118,7 +103,7 @@ msgstr ""
 "Genegeerd wanneer er al een soortgelijk onverstuurd bericht klaarstaat, met "
 "exact hetzelde topic en inhoud."
 
-#: ../../mqtt.rst:67
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/mqtt.rst:71
 msgid "This prevents duplicate messages and removes a significant overhead."
 msgstr "Dit zorgt voor aanzienlijk minder overhead."
 
@@ -486,3 +471,27 @@ msgstr "Dit zorgt voor aanzienlijk minder overhead."
 #~ msgstr ""
 #~ "Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor meer "
 #~ "informatie."
+
+#~ msgid ""
+#~ "Starting from ``v1.23.0`` DSMR-reader requires a dedicated process for "
+#~ "processing MQTT messages (``dsmr_mqtt``)."
+#~ msgstr ""
+#~ "Vanaf DSMR-reader ``v1.23.0`` is er een toegewijd proces voor het versturen "
+#~ "van MQTT-berichten (``dsmr_mqtt``)."
+
+#~ msgid ""
+#~ "Fresh installations automatically include the ``dsmr_mqtt`` process. "
+#~ "Existing installations however, should add ``dsmr_mqtt`` manually. "
+#~ "Instructions:"
+#~ msgstr ""
+#~ "Nieuwe installaties hebben al de configuratie voor het ``dsmr_mqtt`` "
+#~ "proces. Bestaande installaties moeten deze handmatig toevoegen. Instructies:"
+
+#~ msgid "Please upgrade to ``v1.23.0`` or higher first."
+#~ msgstr "Upgrade eerst naar  ``v1.23.0`` of hoger."
+
+#~ msgid "Now execute the following commands as **root/sudo-user**::"
+#~ msgstr "Voer nu de volgende commando's uit als **root/sudo-user**::"
+
+#~ msgid "Starting MQTT"
+#~ msgstr "MQTT starten"
