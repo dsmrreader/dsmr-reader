@@ -2,6 +2,15 @@ Changelog
 =========
 
 
+v2.14.1 - 2020-01-07
+
+
+- [`#827 <https://github.com/dennissiemensma/dsmr-reader/issues/827>`_] Mailbackup triggered elke halve minuut na v2.13+ update
+
+
+----
+
+
 v2.14.0 - 2020-01-07
 
 .. note::
