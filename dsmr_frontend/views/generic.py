@@ -25,3 +25,7 @@ class FeedbackRedirect(ReadTheDocsRedirectView):
 
 class DonationsRedirect(ReadTheDocsRedirectView):
     subpage = 'donations.html'
+
+
+class V3UpgradeRedirect(ReadTheDocsRedirectView):
+    subpage = 'faq/v3_upgrade.html'

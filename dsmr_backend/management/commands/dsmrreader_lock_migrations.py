@@ -19,6 +19,9 @@ class Command(InterceptStdoutMixin, BaseCommand):
         lock_content += "# Dump for DSMR-reader v{}\n".format(settings.DSMRREADER_VERSION)
 
         for line in self._intercept_command_stdout('showmigrations', no_color=True).split("\n"):
+            if line.startswith(' [ ]'):
+                raise AssertionError('Unapplied migration found:{}'.format(line))
+
             if not line.startswith(' [X]'):
                 if current_app:
                     lock_content += "./manage.py migrate {} {}\n".format(

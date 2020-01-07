@@ -9,7 +9,8 @@ from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXh
 from dsmr_frontend.views.compare import Compare, CompareXhrSummary
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status, XhrUpdateChecker
-from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect
+from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect, \
+    V3UpgradeRedirect
 from dsmr_frontend.views.energy_contracts import EnergyContracts
 
 
@@ -48,6 +49,7 @@ urlpatterns = [
     path('docs-redirect', DocsRedirect.as_view(), name='docs-redirect'),
     path('feedback-redirect', FeedbackRedirect.as_view(), name='feedback-redirect'),
     path('donations-redirect', DonationsRedirect.as_view(), name='donations-redirect'),
+    path('v3-upgrade-redirect', V3UpgradeRedirect.as_view(), name='v3-upgrade-redirect'),
 
     # Views requiring authentication.
     path('export', Export.as_view(), name='export'),
