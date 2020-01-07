@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core.cache import cache
 
 from dsmr_backend.models.schedule import ScheduledProcess
+from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_mqtt.models.queue import Message
 from dsmr_weather.models.reading import TemperatureReading
@@ -26,7 +27,8 @@ def get_capabilities(capability=None):
 
     Optionally returns a single capability when requested.
     """
-    capabilities = cache.get('capabilities')  # Caching time should be very low, but enough to make it matter.
+    # Caching time should be limited, but enough to make it matter, as this call is used A LOT.
+    capabilities = cache.get('capabilities')
 
     if capabilities is None:
         capabilities = {
@@ -49,10 +51,13 @@ def get_capabilities(capability=None):
         }
 
         # Override capabilities when requested.
-        if settings.DSMRREADER_DISABLED_CAPABILITIES:
-            for k in capabilities.keys():
-                if k in settings.DSMRREADER_DISABLED_CAPABILITIES:
-                    capabilities[k] = False
+        backend_settings = BackendSettings.get_solo()
+
+        if backend_settings.disable_gas_capability:
+            capabilities['gas'] = False
+
+        if backend_settings.disable_electricity_returned_capability:
+            capabilities['electricity_returned'] = False
 
         capabilities['any'] = any(capabilities.values())
         cache.set('capabilities', capabilities)

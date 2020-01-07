@@ -15,7 +15,7 @@
 
         {% block stylesheets %}
         <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'dsmr_frontend/fontawesome-free-5.10.2-web/css/all.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/fontawesome-free-5.12.0-web/css/all.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css">
         <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
@@ -105,7 +105,7 @@
                             </a>
                         </li>
                         <li>
-                            &nbsp;
+                            &nbsp;&nbsp;
                         </li>
                         <li>
                             <a href="{% url 'frontend:status' %}">
@@ -113,7 +113,7 @@
                             </a>
                         </li>
                         <li>
-                            &nbsp;
+                            &nbsp;&nbsp;
                         </li>
                         <li>
                             <a href="{% url 'frontend:export' %}">
@@ -121,8 +121,13 @@
                             </a>
                         </li>
                         <li>
-				            <a href="{% url 'admin:index' %}" target="_blank">
+				            <a href="{% url 'admin:index' %}">
 				                <i class="fas fa-xs fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+				            </a>
+			            </li>
+                        <li>
+				            <a href="{% url 'frontend:notifications' %}">
+				                <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
 			            </li>
                         <li>
@@ -161,7 +166,7 @@
 	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015 - {% now "Y" %}
                     </small>
                     <br />
-                    <small>{% trans "Credits to" %}: <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/latest/credits.html" target="_blank">{% trans "View Hall of Fame" %}</a></small>
+                    <small>{% trans "Credits to" %}: <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/latest/credits.html" target="_blank">{% trans "Many contributers" %}</a></small>
                     <br />
                     <br />
                     <small><a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}"><img src="{% static 'dsmr_frontend/img/GitHub-Mark-32px.png' %}" /> {% trans 'View on Github' %}</a></small>

@@ -1,13 +1,10 @@
 
 from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.views.generic.edit import FormView
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_frontend.forms import DashboardNotificationReadForm, DashboardElectricityConsumptionForm
+from dsmr_frontend.forms import DashboardElectricityConsumptionForm
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
@@ -28,7 +25,7 @@ class Dashboard(TemplateView):
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
-        context_data['notifications'] = Notification.objects.unread()
+        context_data['notification_count'] = Notification.objects.unread().count()
 
         today = timezone.localtime(timezone.now()).date()
         context_data['month_statistics'] = dsmr_stats.services.month_statistics(target_date=today)
@@ -179,13 +176,3 @@ class DashboardXhrTemperature(View):
             data['degrees_celcius'].append(float(current.degrees_celcius))
 
         return JsonResponse(data)
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class DashboardXhrNotificationRead(FormView):
-    """ XHR view for marking an in-app notification as read. """
-    form_class = DashboardNotificationReadForm
-
-    def form_valid(self, form):
-        Notification.objects.filter(pk=form.cleaned_data['notification_id'], read=False).update(read=True)
-        return JsonResponse({})

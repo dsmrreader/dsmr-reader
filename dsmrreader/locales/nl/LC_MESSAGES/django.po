@@ -5,8 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader v1.x\n"
+"Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-05 22:45+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -34,8 +35,14 @@ msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
 msgid "API configuration"
 msgstr "API-configuratie"
 
+msgid "Updates"
+msgstr "Updates"
+
 msgid "Advanced"
 msgstr "Geavanceerd"
+
+msgid "Note: You will have to restart the \"dsmr_backend\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_backend\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails. <br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, port <strong>25</strong> and use <strong>TLS</strong>. Do NOT fill in any username of password, but just enter your GMail address as \"Email to\" above."
 msgstr "Voer hier je uitgaande e-mailinstellingen in, welke gebruikt worden door DSMR-reader om je e-mails te sturen. <br><br>Heb je GMail? Voer dan als host <strong>aspmx.l.google.com</strong> in, als poort <strong>25</strong> en gebruik <strong>TLS</strong>. Voer vervolgens NIET je gebruikersnaam of wachtwoord in. Vul je GMail-adres hierboven in als ontvanger."
@@ -99,6 +106,18 @@ msgstr "Controleer automatisch op updates"
 
 msgid "Whether the application checks once in a while for new DSMR-reader release in Github"
 msgstr "Geeft aan of de applicatie af en toe op Github controleert of er updates beschikbaar zijn"
+
+msgid "Backend process sleep"
+msgstr "Backend proces sleep"
+
+msgid "The number of seconds the application will sleep after completing a backend run."
+msgstr "Het aantal seconden dat de applicatie wacht na het voltooien van een backend run."
+
+msgid "Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source."
+msgstr "Geeft aan of gas uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer je geen gas (meer) gebruikt en ben overgestapt naar een andere energiebron."
+
+msgid "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels."
+msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) teruglevering heeft geregistreerd."
 
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
@@ -403,6 +422,18 @@ msgstr "Elektriciteitsmetingen vinden elke X seconden plaats. We kunnen ze voor 
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
+msgid "Protocol"
+msgstr "Protocol"
+
+msgid "Note: You might have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult mogelijk het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+
+msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+
+msgid "Debugging"
+msgstr "Debuggen"
+
 msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentatie</a>"
 
@@ -501,6 +532,15 @@ msgstr "COM-poort"
 
 msgid "COM-port connected to Smartmeter."
 msgstr "COM-poort die verbonden is met je slimme meter."
+
+msgid "Datalogger process sleep"
+msgstr "Datalogger proces sleep"
+
+msgid "The number of seconds the application will sleep after reading data from the datalogger (API excluded)."
+msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API uitgezonderd)."
+
+msgid "Whether telegrams are logged, in base64 format. Only required for debugging."
+msgstr "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor debugging."
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
@@ -644,13 +684,16 @@ msgid "DSMR-reader v2.6.0: Many changes related to MQTT. Messages are now sent u
 msgstr "DSMR-reader v2.6.0: Veel wijzigingen gerelateerd aan MQTT. Berichten worden nu verzonden met de RETAIN-vlag ingeschakeld. Dit zorgt ervoor dat de broker de laatst ontvangen waarde van een topic bewaart. Hierdoor kan DSMR-reader een hoop uitgaande berichten cachen en dat voorkomt een hoop onnodige, dubbele berichten."
 
 msgid "DSMR-reader v2.7.0: Added support in MQTT to share gas consumption to your MQTT broker. "
-msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te delen met je MQTT-broker."
+msgstr "DSMR-reader v2.7.0: Ondersteuning aan MQTT toegevoegd om gasverbruik te delen met je MQTT-broker. "
 
 msgid "DSMR-reader v2.9.0: Buienradar changed their API. This update fixes the issue."
 msgstr "DSMR-reader v2.9.0: Buienradar heeft haar API aangepast. Deze update werkt het bij."
 
 msgid "DSMR-reader v2.10.0: Added automatic update checker (weekly), enabled by default, you can disable it in the Backend settings. See changelog for more changes."
 msgstr "DSMR-reader v2.10.0: Automatische update checker (wekelijks) toegevoegd, standaard ingeschakeld. Wil je dit niet, dan kun je dit uitschakelen in de Backend-configuratie. Zie het wijzigingenoverzicht voor overige wijzigingen."
+
+msgid "DSMR-reader v2.14.0: Some configuration options in setting.py were relocated or removed. This only affects you if you are using custom settings in setting.py. See the changelog for more information."
+msgstr "DSMR-reader v2.14.0: Sommige instellingen in settings.py zijn verplaatst of uitgefaseerd. Dit is alleen van belang wanneer je zelf handmatig instellingen hebt aangepast in settings.py. Zie de changelog voor meer informatie."
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
@@ -826,6 +869,9 @@ msgstr "Inloggen vereist"
 msgid "Configuration"
 msgstr "Configuratie"
 
+msgid "Notifications"
+msgstr "Notificaties"
+
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"
 
@@ -844,8 +890,8 @@ msgstr "Donaties"
 msgid "Credits to"
 msgstr "Credits aan"
 
-msgid "View Hall of Fame"
-msgstr "Bekijk Hall of Fame"
+msgid "Many contributers"
+msgstr "Veel hulp van derden"
 
 msgid "View repository on Github"
 msgstr "Bekijk repository op Github"
@@ -862,14 +908,14 @@ msgstr "Te vergelijken selectie"
 msgid "Watt"
 msgstr "Watt"
 
-msgid "Notifications"
-msgstr "Notificaties"
+msgid "Unread notifications"
+msgstr "Ongelezen notificaties"
 
-msgid "Mark notification as read"
-msgstr "Markeer notificatie als gelezen"
+msgid "Number of unread notifications"
+msgstr "Aantal ongelezen notificaties"
 
-msgid "View page"
-msgstr "Bekijk pagina"
+msgid "View"
+msgstr "Bekijk"
 
 msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
@@ -1017,6 +1063,27 @@ msgstr "in m<sup>3</sup>"
 
 msgid "Add note for today"
 msgstr "Voeg notitie toe voor vandaag"
+
+msgid "Unread Notifications"
+msgstr "Ongelezen notificaties"
+
+msgid "Mark all notifications as read"
+msgstr "Markeer alle notificaties als gelezen"
+
+msgid "Mark all as read"
+msgstr "Markeer allemaal als gelezen"
+
+msgid "Mark notification as read"
+msgstr "Markeer notificatie als gelezen"
+
+msgid "Mark as read"
+msgstr "Markeer als gelezen"
+
+msgid "View page"
+msgstr "Bekijk pagina"
+
+msgid "There are no unread notifications."
+msgstr "Er zijn geen ongelezen notificaties."
 
 msgid "No data found yet. This page should display data as soon as the first reading is processed by DSMR-reader."
 msgstr "Nog geen gegevens gevonden. Deze pagina weergeeft gegevens zodra de eerste meting door DSMR-reader is verwerkt."
@@ -1309,8 +1376,14 @@ msgstr "Onverwachte statuscode ontvangen"
 msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentatie</a>"
 
+msgid "Misc"
+msgstr "Overig"
+
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
+
+msgid "Note: You will have to restart the \"dsmr_mqtt\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_mqtt\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
 msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
@@ -1659,6 +1732,12 @@ msgstr "Herstart vereist"
 
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
+
+msgid "MQTT process sleep"
+msgstr "MQTT proces sleep"
+
+msgid "The number of seconds the application will sleep after publishing the outgoing MQTT message queue."
+msgstr "Het aantal seconden dat de applicatie wacht na het versturen van alle MQTT-berichten."
 
 msgid "MQTT Broker/connection"
 msgstr "MQTT broker/verbinding"
@@ -2194,6 +2273,12 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "There are"
+#~ msgstr "Er zijn"
+
+#~ msgid "View Hall of Fame"
+#~ msgstr "Bekijk Hall of Fame"
+
 #~ msgid "Next"
 #~ msgstr "Volgende"
 
@@ -2265,9 +2350,6 @@ msgstr "Engels"
 
 #~ msgid "Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page"
 #~ msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina"
-
-#~ msgid "Debugging"
-#~ msgstr "Debuggen"
 
 #~ msgid "Enable debug logging"
 #~ msgstr "Schakel debug logging in"

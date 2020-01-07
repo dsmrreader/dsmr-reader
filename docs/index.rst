@@ -50,6 +50,7 @@ DSMR Reader's documentation
 
    faq
    faq/update
+   faq/restart_processes
    faq/database
    faq/uninstall
    contributing

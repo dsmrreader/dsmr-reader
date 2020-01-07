@@ -1,24 +1,22 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-30 21:09+0200\n"
-"PO-Revision-Date: 2019-09-30 21:09+0200\n"
-"Last-Translator: \n"
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
-"Language-Team: \n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../faq/update.rst:2
-msgid "FAQ: Updating DSMR-reader"
-msgstr "FAQ: DSMR-reader updaten"
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:2
+msgid "FAQ: Updating the application"
+msgstr "FAQ: De applicatie updaten"
 
-#: ../../faq/update.rst:4
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:4
 msgid ""
 "The version you are running is always based on the 'latest' version of the "
 "application, called the `master` branch. Every once in a while there may be "
@@ -30,7 +28,7 @@ msgstr ""
 "updates beschikbaar. Je kunt dit ook eenvoudig controleren op de Status-pagina "
 "van de applicatie."
 
-#: ../../faq/update.rst:9
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:9
 msgid ""
 "Before updating, **please make sure you have a recent backup of your "
 "database**! :doc:`More information about backups can be found here<../"
@@ -40,7 +38,7 @@ msgstr ""
 "van je database hebt**! :doc:`Meer informatie over back-ups kun je hier "
 "vinden<../application>`."
 
-#: ../../faq/update.rst:11
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:11
 msgid ""
 "You can update your application to the latest version by executing **deploy."
 "sh**, located in the root of the project. Make sure to execute it while logged "
@@ -408,3 +406,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor meer "
 #~ "informatie."
+
+#~ msgid "FAQ: Updating DSMR-reader"
+#~ msgstr "FAQ: DSMR-reader updaten"
