@@ -1,5 +1,5 @@
-FAQ: Database
-=============
+FAQ: Changing database location
+===============================
 
 .. warning::
 

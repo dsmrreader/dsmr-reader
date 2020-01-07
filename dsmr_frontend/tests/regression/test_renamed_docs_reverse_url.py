@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db.migrations.executor import MigrationExecutor
 from django.db.migrations.recorder import MigrationRecorder
 from django.urls import reverse
@@ -19,7 +20,9 @@ class TestRegression(TestCase):
         return apps.get_containing_app_config(type(self).__module__).name
 
     def setUp(self):
+        self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
         self.client = Client()
+        self.client.login(username='testuser', password='passwd')
 
     def test_no_reverse_match_docs(self):
         """ Test whether the docs URL in old notfications are converted to their new location. """
@@ -28,11 +31,11 @@ class TestRegression(TestCase):
 
         Notification.objects.create(
             message='Fake',
-            redirect_to='frontend:docs',  # Non-existing legacy.
+            redirect_to='frontend:docs',  # URL was renamed at some point.
         )
 
         # This SHOULD crash.
-        response = self.client.get(reverse('frontend:dashboard'))
+        response = self.client.get(reverse('frontend:notifications'))
         self.assertEqual(response.status_code, 500)
 
         # Now we fake applying the migration (again for this test).
@@ -40,5 +43,5 @@ class TestRegression(TestCase):
         MigrationExecutor(connection=connection).migrate([(self.app, '0009_docs_no_reverse_match')])
 
         # The error should be fixed now.
-        response = self.client.get(reverse('frontend:dashboard'))
+        response = self.client.get(reverse('frontend:notifications'))
         self.assertEqual(response.status_code, 200)
