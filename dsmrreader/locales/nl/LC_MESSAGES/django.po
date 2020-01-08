@@ -13,8 +13,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -26,10 +28,10 @@ msgid "Whether the API is available for use."
 msgstr "Geeft aan of de API beschikbaar is voor gebruik."
 
 msgid "Auth Key"
-msgstr "Authorisatiesleutel"
+msgstr "Authenticatiesleutel"
 
 msgid "The auth key used to authenticate for this API."
-msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
+msgstr "De authenticatiesleutel om toegang te krijgen tot deze API."
 
 msgid "API configuration"
 msgstr "API-configuratie"
@@ -65,7 +67,7 @@ msgid "Time until next call"
 msgstr "Tijd tot volgende aanroep"
 
 msgid "Backend"
-msgstr "Achterkant"
+msgstr "Backend"
 
 msgid "Unsupported database engine \"{}\" active, some features might not work properly"
 msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
@@ -83,16 +85,16 @@ msgid "Generates a generic event triggering apps for backend operations, cron-li
 msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
 
 msgid "Forces single run, overriding Infinite Command mixin"
-msgstr "Forceert enkele uitvoer"
+msgstr "Forceert een enkele run"
 
 msgid "The last moment this process ran (disregarding whether it succeeded or failed)."
 msgstr "Laatste moment dat dit proces draaide (ongeacht of het proces zelf lukte of faalde)."
 
 msgid "The next moment this process will run again."
-msgstr "Het eerstevolgende moment dat dit proces weer draait."
+msgstr "Het eerstvolgende moment dat dit proces weer draait."
 
 msgid "Related configuration settings manage whether this process is active or disabled for you."
-msgstr "Gerelateerd configuratieinstellingen bepalen of dit proces actief of uitgeschakeld is."
+msgstr "Gerelateerde configuratie-instellingen bepalen of dit proces actief of uitgeschakeld is."
 
 msgid "Scheduled process"
 msgstr "Gepland proces"
@@ -191,22 +193,22 @@ msgid "You can have DSMR-reader email you a backup every once in a while.<br><br
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
 
 msgid "Backup"
-msgstr "Backup"
+msgstr "Back-up"
 
 msgid "Failed to create this directory, please check permissions: {}"
 msgstr "Fout bij aanmaken van de map, controleer de permissies:  {}"
 
 msgid "Backup daily"
-msgstr "Dagelijkse backup"
+msgstr "Dagelijkse back-up"
 
 msgid "Create a backup of your data daily. Stored locally, but can be exported using Dropbox."
-msgstr "Maak een dagelijkse backup van je gegevens. Wordt lokaal opgeslagen maar kan geexporteerd worden via Dropbox."
+msgstr "Maak een dagelijkse back-up van je gegevens. Wordt lokaal opgeslagen maar kan geëxporteerd worden via Dropbox."
 
 msgid "Backup timestamp"
-msgstr "Tijdstip van backup"
+msgstr "Tijdstip van back-up"
 
 msgid "Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation."
-msgstr "Voorkeurstijdstip van dagelijkse backup. Ons advies is om een moment in de nacht te pakken, gezien het maken van een backup de werking van de applicatie kort kan onderbreken."
+msgstr "Voorkeurstijdstip van dagelijkse back-up. Ons advies is om een moment in de nacht te pakken, gezien het maken van een back-up de werking van de applicatie kort kan onderbreken."
 
 msgid "Backup storage folder"
 msgstr "Back-up opslag map"
@@ -215,13 +217,13 @@ msgid "The folder to store the backups in. The default location is \"backups/\".
 msgstr "De map waarin back-ups opgeslagen worden. De standaardlocatie is \"backups/\". N.B.: Zorg ervoor dat de \"dsmr\" gebruiker toegang en schrijfrechten heeft tot de map."
 
 msgid "Latest backup"
-msgstr "Meest recente backup"
+msgstr "Meest recente back-up"
 
 msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
-msgstr "Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de backup wordt (eenmalig) de eerste keer genegeerd."
+msgstr "Moment van de laatst gemaakte back-up. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de back-up wordt (eenmalig) de eerste keer genegeerd."
 
 msgid "Backup configuration"
-msgstr "Backupconfiguratie"
+msgstr "Back-upconfiguratie"
 
 msgid "Dropbox access token"
 msgstr "Dropbox access token"
@@ -803,7 +805,7 @@ msgid "Years"
 msgstr "Jaren"
 
 msgid "Pick a day, month or year"
-msgstr "Kies een day, maand of jaar"
+msgstr "Kies een dag, maand of jaar"
 
 msgid "Electricity usage"
 msgstr "Elektriciteitsverbruik"
@@ -863,7 +865,7 @@ msgid "Export data"
 msgstr "Exporteer gegevens"
 
 msgid "Authentication required"
-msgstr "Inloggen vereist"
+msgstr "Authenticatie vereist"
 
 msgid "Configuration"
 msgstr "Configuratie"
@@ -1268,10 +1270,10 @@ msgid "Scheduled processes"
 msgstr "Gepland proces"
 
 msgid "Last run"
-msgstr "Laatst gedraaid"
+msgstr "Laatste run"
 
 msgid "Next run"
-msgstr "Volgende uitvoer"
+msgstr "Volgende run"
 
 msgid "Currently disabled or not configured."
 msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
