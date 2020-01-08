@@ -27,5 +27,12 @@ class DonationsRedirect(ReadTheDocsRedirectView):
     subpage = 'donations.html'
 
 
-class V3UpgradeRedirect(ReadTheDocsRedirectView):
-    subpage = 'faq/v3_upgrade.html'
+class V3UpgradeRedirect(RedirectView):
+    permanent = False
+    subpage = None
+    url = None
+
+    def get(self, request, *args, **kwargs):
+        # Overwrite the entire URL, because we need it to point to v3 branch.
+        self.url = 'https://dsmr-reader.readthedocs.io/{}/v3/faq/v3_upgrade.html'.format(request.LANGUAGE_CODE)
+        return super(V3UpgradeRedirect, self).get(request, *args, **kwargs)
