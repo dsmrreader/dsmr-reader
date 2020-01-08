@@ -86,6 +86,15 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Restart required'),
         help_text=_('Whether the process requires a restart, forcing the client-broker connection to be reset.')
     )
+    process_sleep = models.DecimalField(
+        default=1,
+        max_digits=3,
+        decimal_places=1,
+        verbose_name=_('MQTT process sleep'),
+        help_text=_(
+            'The number of seconds the application will sleep after publishing the outgoing MQTT message queue.'
+        )
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

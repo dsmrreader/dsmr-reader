@@ -41,6 +41,7 @@ def get_dsmr_connection_parameters():
         'baudrate': 115200,
         'bytesize': serial.EIGHTBITS,
         'parity': serial.PARITY_NONE,
+        'log_telegrams': datalogger_settings.log_telegrams,
     }
 
     if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_2_3:
@@ -119,7 +120,7 @@ def telegram_to_reading(data):
     # We will log the telegrams in base64 for convenience and debugging.
     base64_data = base64.b64encode(data.encode())
 
-    if settings.DSMRREADER_LOG_TELEGRAMS:
+    if params['log_telegrams']:
         dsmrreader_logger.info('Received telegram (base64 encoded): %s', base64_data)
 
     try:

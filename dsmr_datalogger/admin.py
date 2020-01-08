@@ -13,8 +13,26 @@ from .models.statistics import MeterStatistics
 class DataloggerSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
+            _('Protocol'), {
+                'fields': ['dsmr_version'],
+                'description': _(
+                    'Note: You might have to restart the "dsmr_datalogger" process for any changes to apply. '
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html">FAQ</a>.'
+                )
+            }
+        ),
+        (
             _('Advanced'), {
-                'fields': ['com_port', 'dsmr_version'],
+                'fields': ['com_port', 'process_sleep'],
+                'description': _(
+                    'Note: You will have to restart the "dsmr_datalogger" process for any changes to apply. '
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html">FAQ</a>.'
+                )
+            }
+        ),
+        (
+            _('Debugging'), {
+                'fields': ['log_telegrams'],
             }
         ),
     )

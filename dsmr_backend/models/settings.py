@@ -11,12 +11,34 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
         max_length=32,
         default='nl',
         choices=settings.LANGUAGES,
-        verbose_name=_('The language used in backend processes'),
+        help_text=_('The language used in backend processes'),
     )
     automatic_update_checker = models.BooleanField(
         default=True,
         verbose_name=_('Automatically check for updates'),
         help_text=_('Whether the application checks once in a while for new DSMR-reader release in Github'),
+    )
+    process_sleep = models.DecimalField(
+        default=1,
+        max_digits=3,
+        decimal_places=1,
+        verbose_name=_('Backend process sleep'),
+        help_text=_(
+            'The number of seconds the application will sleep after completing a backend run.'
+        )
+    )
+    disable_gas_capability = models.BooleanField(
+        default=False,
+        help_text=_(
+            'Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source.'
+        ),
+    )
+    disable_electricity_returned_capability = models.BooleanField(
+        default=False,
+        help_text=_(
+            'Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports '
+            'electricity returned data, but you do not own any solar panels.'
+        ),
     )
 
     def __str__(self):

@@ -4,33 +4,36 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR-reader \n"
-"Report-Msgid-Bugs-To: \n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/restart_processes.rst:2
 msgid "FAQ: Restarting application processes"
-msgstr ""
+msgstr "FAQ: Applicatie of processen herstarten"
 
 #: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/restart_processes.rst:4
 msgid ""
-"You might want or need to restart DSMR-reader manually at some time. "
-"E.g.: Due to altered settings that need to be reapplied to the processes."
+"You might want or need to restart DSMR-reader manually at some time. E."
+"g.: Due to altered settings that need to be reapplied to the processes."
 msgstr ""
+"Kan het voorkomen dat je DSMR-reader wilt of moet herstarten. "
+"Bijvoorbeeld vanwege instellingen die een herstart vereisen."
 
 #: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/restart_processes.rst:7
 msgid "For a soft restart::"
-msgstr ""
+msgstr "Voor een zachte herstart::"
 
 #: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/restart_processes.rst:13
 msgid "For a hard restart::"
-msgstr ""
-
+msgstr "Voor een harde/geforceerde herstart::"

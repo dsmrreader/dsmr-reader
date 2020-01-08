@@ -7,6 +7,7 @@ import sys
 import traceback
 
 from django.core.management.base import CommandError
+from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.conf import settings
 from django.contrib import admin
@@ -27,6 +28,7 @@ class InfiniteManagementCommandMixin:
     sleep_time = None  # Set in sub classes.
     _keep_alive = None
     _pid_file = None
+    _next_reconnect = None
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -61,6 +63,7 @@ class InfiniteManagementCommandMixin:
         # We simply keep executing the management command until we are told otherwise.
         self._keep_alive = True
         logger.debug('%s: Starting infinite command loop...', self.name)  # Just to make sure it gets printed.
+        self._update_next_reconnect()
 
         while self._keep_alive:
             self.run_once(**options)
@@ -70,9 +73,16 @@ class InfiniteManagementCommandMixin:
                 logger.debug('%s: Sleeping %ss', self.name, self.sleep_time)
                 time.sleep(self.sleep_time)
 
-            # Check database connection after each run. This will force Django to reconnect as well, when having issues.
-            if settings.DSMRREADER_RECONNECT_DATABASE:
+            # Reconnect to database connection after a while. Ensures the database is still there. See #427
+            if timezone.now() >= self._next_reconnect:
+                self._update_next_reconnect()
+                logger.debug('Reconnecting to database to refresh connection...')
                 connection.close()
+
+    def _update_next_reconnect(self):
+        self._next_reconnect = timezone.now() + timezone.timedelta(
+            seconds=settings.DSMRREADER_MAX_DATABASE_CONNECTION_SESSION_IN_SECONDS
+        )
 
     def run_once(self, **options):
         """ Runs the management command exactly once. """
@@ -88,7 +98,8 @@ class InfiniteManagementCommandMixin:
         except:
             # Unforeseen errors.
             _, _, exc_traceback = sys.exc_info()
-            logger.error('%s: [!] Exception raised in run(): %s', self.name, traceback.format_exc())
+            logger.error('%s: [!] Exception raised. %s', self.name, traceback.format_exc())
+            self._stop()
 
     def initialize(self):
         """ Called once. Override and handle any initialization required. """

@@ -1,15 +1,16 @@
 from django.urls.conf import path
 
 from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, DashboardXhrConsumption, \
-    DashboardXhrNotificationRead, DashboardXhrElectricityConsumption, DashboardXhrGasConsumption, \
-    DashboardXhrTemperature
+    DashboardXhrElectricityConsumption, DashboardXhrGasConsumption, DashboardXhrTemperature
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
+from dsmr_frontend.views.notifications import Notifications, XhrMarkNotificationRead, XhrMarkAllNotificationsRead
 from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
 from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXhrElectricityByTariff
 from dsmr_frontend.views.compare import Compare, CompareXhrSummary
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status, XhrUpdateChecker
-from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect
+from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect, \
+    V3UpgradeRedirect
 from dsmr_frontend.views.energy_contracts import EnergyContracts
 
 
@@ -23,7 +24,6 @@ urlpatterns = [
     path('xhr/electricity', DashboardXhrElectricityConsumption.as_view(), name='dashboard-xhr-electricity'),
     path('xhr/gas', DashboardXhrGasConsumption.as_view(), name='dashboard-xhr-gas'),
     path('xhr/temperature', DashboardXhrTemperature.as_view(), name='dashboard-xhr-temperature'),
-    path('xhr/notification-read', DashboardXhrNotificationRead.as_view(), name='dashboard-xhr-notification-read'),
     path('archive', Archive.as_view(), name='archive'),
     path('archive/xhr/summary', ArchiveXhrSummary.as_view(), name='archive-xhr-summary'),
     path('archive/xhr/graphs', ArchiveXhrGraphs.as_view(), name='archive-xhr-graphs'),
@@ -43,13 +43,22 @@ urlpatterns = [
     path('status', Status.as_view(), name='status'),
     path('status/xhr/check-for-updates', XhrUpdateChecker.as_view(), name='status-xhr-check-for-updates'),
 
+
     # Generic redirects to external (help) pages.
     path('changelog-redirect', ChangelogRedirect.as_view(), name='changelog-redirect'),
     path('docs-redirect', DocsRedirect.as_view(), name='docs-redirect'),
     path('feedback-redirect', FeedbackRedirect.as_view(), name='feedback-redirect'),
     path('donations-redirect', DonationsRedirect.as_view(), name='donations-redirect'),
+    path('v3-upgrade-redirect', V3UpgradeRedirect.as_view(), name='v3-upgrade-redirect'),
 
     # Views requiring authentication.
     path('export', Export.as_view(), name='export'),
     path('export/csv', ExportAsCsv.as_view(), name='export-as-csv'),
+    path('notifications', Notifications.as_view(), name='notifications'),
+    path('notifications/xhr/mark-read', XhrMarkNotificationRead.as_view(), name='notification-xhr-mark-read'),
+    path(
+        'notifications/xhr/mark-all-read',
+        XhrMarkAllNotificationsRead.as_view(),
+        name='notification-xhr-mark-all-read'
+    ),
 ]

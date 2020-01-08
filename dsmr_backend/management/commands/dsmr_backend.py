@@ -1,15 +1,17 @@
 from django.core.management.base import BaseCommand
 from django.utils.translation import gettext as _
-from django.conf import settings
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
 import dsmr_backend.services.schedule
+from dsmr_backend.models.settings import BackendSettings
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Generates a generic event triggering apps for backend operations, cron-like.')
     name = __name__  # Required for PID file.
-    sleep_time = settings.DSMRREADER_BACKEND_SLEEP
+
+    def initialize(self):
+        self.sleep_time = BackendSettings.get_solo().process_sleep
 
     def run(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """

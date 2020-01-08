@@ -20,10 +20,19 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
             }
         ),
         (
-            _('Advanced'), {
+            _('Misc'), {
                 'fields': ['username', 'password', 'qos'],
                 'description': _(
                     'These broker settings apply to all enabled MQTT configurations.'
+                )
+            }
+        ),
+        (
+            _('Advanced'), {
+                'fields': ['process_sleep'],
+                'description': _(
+                    'Note: You will have to restart the "dsmr_mqtt" process for any changes to apply. '
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html">FAQ</a>.'
                 )
             }
         ),

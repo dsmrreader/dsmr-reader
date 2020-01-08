@@ -1,5 +1,5 @@
-FAQ: Uninstall
-==============
+FAQ: Uninstalling the application
+=================================
 
 To remove DSMR-reader from your system, execute the following commands::
 

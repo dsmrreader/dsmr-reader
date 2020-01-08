@@ -16,7 +16,34 @@ v3.0.0 - 2020-01-xx
 ----
 
 
-v2.13.0 - 2019-01-05
+.. warning::
+
+    *This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.*
+
+
+v2.15.0 - 2020-01-xx
+
+
+- [`#825 <https://github.com/dennissiemensma/dsmr-reader/issues/825>`_] Last v2.x release
+
+
+----
+
+
+v2.14.0 - 2020-01-07
+
+.. note::
+
+    *Some configuration options inside ``settings.py`` were relocated or removed from the application. See `the docs <https://dsmr-reader.readthedocs.io/en/latest/settings.html>`_ for the changes.*
+
+- [`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_] Move custom configuration in settings.py to database
+- [`#793 <https://github.com/dennissiemensma/dsmr-reader/issues/793>`_] Alle meldingen in 1x sluiten
+
+
+----
+
+
+v2.13.0 - 2020-01-05
 
 - [`#819 <https://github.com/dennissiemensma/dsmr-reader/issues/819>`_] Add mail_from option and changed help text - by jbrunink
 - [`#730 <https://github.com/dennissiemensma/dsmr-reader/issues/730>`_] Standaard-range dashboard grafieken instelbaar maken
@@ -557,8 +584,7 @@ v1.10.0 - 2017-10-19
 
 .. note::
 
-   This releases turns telegram logging **off by default**. 
-   If you wish to continue using this feature, add ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``settings.py`` and reload the application.
+   This releases turns telegram logging **off by default**.
 
 
 ----

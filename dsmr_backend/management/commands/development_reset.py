@@ -46,7 +46,8 @@ class Command(BaseCommand):
             notification_service=None, pushover_api_key=None, pushover_user_key=None, prowl_api_key=None
         )
         MQTTBrokerSettings.objects.update(
-            port=8883, secure=MQTTBrokerSettings.SECURE_CERT_NONE, username='user', password='password'
+            hostname=None, port=8883, secure=MQTTBrokerSettings.SECURE_CERT_NONE, username='user', password='password',
+            client_id=''
         )
         PVOutputAPISettings.objects.update(auth_token=None, system_identifier=None)
         queue.Message.objects.all().delete()

@@ -1,20 +1,20 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"Last-Translator: \n"
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
-"Language-Team: \n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../faq/database.rst:2
-msgid "FAQ: Database"
-msgstr "FAQ: Database"
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/database.rst:2
+msgid "FAQ: Changing database location"
+msgstr "FAQ: Databaseopslag verplaatsen"
 
 #: ../../faq/database.rst:6
 msgid ""
