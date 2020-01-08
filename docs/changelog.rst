@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v3.0.0 - 2020-xx-xx
+v3.0.0 - 2020-01-xx
 
 .. warning:: **Change in Python support**
 
@@ -10,6 +10,7 @@ v3.0.0 - 2020-xx-xx
 
 - [`#735 <https://github.com/dennissiemensma/dsmr-reader/issues/735>`_] Drop support for Python 3.5
 - [`#734 <https://github.com/dennissiemensma/dsmr-reader/issues/734>`_] Upgrade to Django 3.x
+- [`#829 <https://github.com/dennissiemensma/dsmr-reader/issues/829>`_] Several Dutch translation fixes - by mjanssens
 
 
 ----

@@ -26,10 +26,10 @@ msgid "Whether the API is available for use."
 msgstr "Geeft aan of de API beschikbaar is voor gebruik."
 
 msgid "Auth Key"
-msgstr "Authorisatiesleutel"
+msgstr "Authenticatiesleutel"
 
 msgid "The auth key used to authenticate for this API."
-msgstr "De autorisatiesleutel om toegang te krijgen tot deze API."
+msgstr "De authenticatiesleutel om toegang te krijgen tot deze API."
 
 msgid "API configuration"
 msgstr "API-configuratie"
@@ -59,7 +59,7 @@ msgid "Time until next call"
 msgstr "Tijd tot volgende aanroep"
 
 msgid "Backend"
-msgstr "Achterkant"
+msgstr "Backend"
 
 msgid "Unsupported database engine \"{}\" active, some features might not work properly"
 msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
@@ -77,16 +77,16 @@ msgid "Generates a generic event triggering apps for backend operations, cron-li
 msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
 
 msgid "Forces single run, overriding Infinite Command mixin"
-msgstr "Forceert enkele uitvoer"
+msgstr "Forceert een enkele uitvoer"
 
 msgid "The last moment this process ran (disregarding whether it succeeded or failed)."
 msgstr "Laatste moment dat dit proces draaide (ongeacht of het proces zelf lukte of faalde)."
 
 msgid "The next moment this process will run again."
-msgstr "Het eerstevolgende moment dat dit proces weer draait."
+msgstr "Het eerstvolgende moment dat dit proces weer uitgevoerd wordt."
 
 msgid "Related configuration settings manage whether this process is active or disabled for you."
-msgstr "Gerelateerd configuratieinstellingen bepalen of dit proces actief of uitgeschakeld is."
+msgstr "Gerelateerde configuratie-instellingen bepalen of dit proces actief of uitgeschakeld is."
 
 msgid "Scheduled process"
 msgstr "Gepland proces"
@@ -173,22 +173,22 @@ msgid "You can have DSMR-reader email you a backup every once in a while.<br><br
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
 
 msgid "Backup"
-msgstr "Backup"
+msgstr "Back-up"
 
 msgid "Failed to create this directory, please check permissions: {}"
 msgstr "Fout bij aanmaken van de map, controleer de permissies:  {}"
 
 msgid "Backup daily"
-msgstr "Dagelijkse backup"
+msgstr "Dagelijkse back-up"
 
 msgid "Create a backup of your data daily. Stored locally, but can be exported using Dropbox."
-msgstr "Maak een dagelijkse backup van je gegevens. Wordt lokaal opgeslagen maar kan geexporteerd worden via Dropbox."
+msgstr "Maak een dagelijkse back-up van je gegevens. Wordt lokaal opgeslagen maar kan geëxporteerd worden via Dropbox."
 
 msgid "Backup timestamp"
-msgstr "Tijdstip van backup"
+msgstr "Tijdstip van back-up"
 
 msgid "Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation."
-msgstr "Voorkeurstijdstip van dagelijkse backup. Ons advies is om een moment in de nacht te pakken, gezien het maken van een backup de werking van de applicatie kort kan onderbreken."
+msgstr "Voorkeurstijdstip van dagelijkse back-up. Ons advies is om een moment in de nacht te pakken, gezien het maken van een back-up de werking van de applicatie kort kan onderbreken."
 
 msgid "Backup storage folder"
 msgstr "Back-up opslag map"
@@ -197,13 +197,13 @@ msgid "The folder to store the backups in. The default location is \"backups/\".
 msgstr "De map waarin back-ups opgeslagen worden. De standaardlocatie is \"backups/\". N.B.: Zorg ervoor dat de \"dsmr\" gebruiker toegang en schrijfrechten heeft tot de map."
 
 msgid "Latest backup"
-msgstr "Meest recente backup"
+msgstr "Meest recente back-up"
 
 msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
-msgstr "Moment van de laatst gemaakte backup. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de backup wordt (eenmalig) de eerste keer genegeerd."
+msgstr "Moment van de laatst gemaakte back-up. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de back-up wordt (eenmalig) de eerste keer genegeerd."
 
 msgid "Backup configuration"
-msgstr "Backupconfiguratie"
+msgstr "Back-upconfiguratie"
 
 msgid "Dropbox access token"
 msgstr "Dropbox access token"
@@ -761,7 +761,7 @@ msgid "Years"
 msgstr "Jaren"
 
 msgid "Pick a day, month or year"
-msgstr "Kies een day, maand of jaar"
+msgstr "Kies een dag, maand of jaar"
 
 msgid "Electricity usage"
 msgstr "Elektriciteitsverbruik"
@@ -821,7 +821,7 @@ msgid "Export data"
 msgstr "Exporteer gegevens"
 
 msgid "Authentication required"
-msgstr "Inloggen vereist"
+msgstr "Authenticatie vereist"
 
 msgid "Configuration"
 msgstr "Configuratie"
@@ -1202,7 +1202,7 @@ msgid "Scheduled processes"
 msgstr "Gepland proces"
 
 msgid "Last run"
-msgstr "Laatst gedraaid"
+msgstr "Meest recente uitvoer"
 
 msgid "Next run"
 msgstr "Volgende uitvoer"
@@ -2193,201 +2193,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "Next"
-#~ msgstr "Volgende"
-
-#~ msgid "Invalid status code"
-#~ msgstr "Ongeldige statuscode"
-
-#~ msgid "Internals"
-#~ msgstr "Intern"
-
-#~ msgid "Reschedule a process here. Do not modify unless you know why to change it."
-#~ msgstr "Herplan een process hier. Wijzig niets als je niet exact weet wat je doet."
-
-#~ msgid "Latest MinderGas sync"
-#~ msgstr "Meest recente synchronisatie met MinderGas"
-
-#~ msgid "Timestamp of latest sync with MinderGas. Automatically updated by application."
-#~ msgstr "Tijdstip van de laatste synchronisatie met MinderGas. Applicatie werkt dit automatisch bij."
-
-#~ msgid "Timestamp of the next sync. Automatically updated by application."
-#~ msgstr "Tijdstip van de volgende gegevenssynchronisatie. Applicatie werkt dit automatisch bij."
-
-#~ msgid "DSMR version 4/5"
-#~ msgstr "DSMR-versie 4/5"
-
-#~ msgid "MQTT: Day consumption (as JSON) configuration"
-#~ msgstr "MQTT: Dagverbruik (als JSON) configuratie"
-
-#~ msgid "MQTT: Day consumption (per split topic) configuration"
-#~ msgstr "MQTT: Dagverbruik (per gesplitst topic) configuratie"
-
-#~ msgid "MQTT: Meter Statistics (per split topic) configuration"
-#~ msgstr "MQTT: Meterstatistieken (per gesplitst topic) configuratie"
-
-#~ msgid "MQTT: Telegram (as raw string) configuration"
-#~ msgstr "MQTT: Telegram (als onbewerkte string) configuratie"
-
-#~ msgid "MQTT: Telegram (as JSON) configuration"
-#~ msgstr "MQTT: Telegram (als JSON) configuratie"
-
-#~ msgid "MQTT: Telegram (per split topic) configuration"
-#~ msgstr "MQTT: Telegram (per gesplitst topic) configuratie"
-
-#~ msgid "Current energy prices"
-#~ msgstr "Huidige energietarieven"
-
-#~ msgid "Unit price"
-#~ msgstr "Prijs per eenheid"
-
-#~ msgid "No energy supplier prices found for today. Enable this feature in consumption settings to view prices."
-#~ msgstr "Geen energieprijzen voor vandaag gevonden. Schakel dit in bij de verbruiksinstellingen om de prijzen weer te geven."
-
-#~ msgid "Changing any of these settings should trigger <strong>dsmr_mqtt</strong> to restart itself."
-#~ msgstr "Het wijzigen van elke instelling hier zou ervoor moeten zorgen dat <strong>dsmr_mqtt</strong> zichzelf automatisch herstart."
-
-#~ msgid "Verify telegram CRC"
-#~ msgstr "Controleer de CRC van telegrammen"
-
-#~ msgid "Whether we should verify the CRC of any telegrams read by / sent to the application."
-#~ msgstr "Geeft aan of we de CRC (checksum) van binnenkomende telegrammen moeten controleren."
-
-#~ msgid "Poll P1 port"
-#~ msgstr "Peil P1 poort"
-
-#~ msgid "Whether we should track the P1 port on your smartmeter. Almost every feature inside this project requires this to be enabled. However, it might be disabled temporarily due to technical reasons, such as data migrations."
-#~ msgstr "Geeft aan of we de P1-poort van je slimme meter uitlezen. Vrijwel elke functionaliteit binnen dit project vereist dat dit altijd aanstaat. Het kan desondanks zijn dat het tijdelijk uitgezet wordt, wegens technische redenen, zoals datamigraties (bij updates)."
-
-#~ msgid "Track electricity phases"
-#~ msgstr "Houd elektriciteitsfasen bij"
-
-#~ msgid "Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page"
-#~ msgstr "Houd ook fasen bij, samen met alle hoogste en laagste waarden per fase, voor de Statistieken-pagina"
-
-#~ msgid "Debugging"
-#~ msgstr "Debuggen"
-
-#~ msgid "Enable debug logging"
-#~ msgstr "Schakel debug logging in"
-
-#~ msgid "Whether the client should display debug information in the logs."
-#~ msgstr "Geeft aan of de client debug-informatie in de logs moet wegschrijven."
-
-#~ msgid "Required option to acknowledge you that you WILL mess up your data with this."
-#~ msgstr "Verplichte parameter om te bevestigen dat je beseft dat je hiermee je data kan verprutsen."
-
-#~ msgid "Intended usage is NOT production! Force by using --ack-to-mess-up-my-data"
-#~ msgstr "Bedoeld voor gebruik buiten productie. Forceer uitvoer met --ack-to-mess-up-my-data"
-
-#~ msgid "Regenerates missing statistics, if any."
-#~ msgstr "Hergenereert missende statistieken, wanneer van toepassing."
-
-#~ msgid "How does it work?"
-#~ msgstr "Hoe werkt dit?"
-
-#~ msgid "P1 DSMR telegrams"
-#~ msgstr "P1 DSMR telegrammen"
-
-#~ msgid "Click for more information"
-#~ msgstr "Klik hier voor meer informatie"
-
-#~ msgid "For dashboard display."
-#~ msgstr "Voor het dashboard-overzicht."
-
-#~ msgid "Gas statistics"
-#~ msgstr "Gasstatistieken"
-
-#~ msgid "Electricity"
-#~ msgstr "Elektriciteit"
-
-#~ msgid "Electricity return"
-#~ msgstr "Elektriciteitsteruglevering"
-
-#~ msgid "Backup is rescheduled to now."
-#~ msgstr "Back-up is herpland naar nu."
-
-#~ msgid "Next sync is rescheduled."
-#~ msgstr "De volgende synchornisatie is herpland."
-
-#~ msgid "Email backup is rescheduled to now."
-#~ msgstr "Back-up per e-mail is herpland naar nu."
-
-#~ msgid "Want to create a fresh backup? Use the button below to reschedule the next backup."
-#~ msgstr "Wil je een verse back-up maken? Gebruik dan de knop hieronder om de volgende back-up te herplannen."
-
-#~ msgid "Reschedule to now"
-#~ msgstr "Herplan naar nu"
-
-#~ msgid "Want to sync now? Use the button below to reschedule the next sync to now."
-#~ msgstr "Wil je nu synchroniseren? Gebruik dan de knop hieronder om de volgende synchronisatie te herplannen."
-
-#~ msgid "Want to receive a fresh backup by email? Use the button below to reschedule the next email backup."
-#~ msgstr "Wil je een verse back-up ontvangen per e-mail? Gebruik dan de knop hieronder om de volgende back-up te herplannen."
-
-#~ msgid "This allows the application to send a new backup per email (if enabled) to"
-#~ msgstr "Staat de applicatie toe om een back-up per e-mail sturen (wanneer ingeschakeld) naar"
-
-#~ msgid "Compress"
-#~ msgstr "Comprimeren"
-
-#~ msgid "Create backups in compressed (gzip) format, saving a significant amount of disk space."
-#~ msgstr "Maak backups in gecomprimeerd (gzip) formaat, waarmee een aanzienlijke hoeveelheid schijfruimte bespaard wordt."
-
-#~ msgid "Gas "
-#~ msgstr "Gas"
-
-#~ msgid "Whether we should track your phases (if any) as well. By default you only have one phase, but some meters have three due to solar panels or an electric stove. This feature is only useful (and will only work) when actually you have three phases. The dashboard will display any data read, after enabling this."
-#~ msgstr "Geeft aan of we de elektriciteitsfasen moeten bijhouden (wanneer aanwezig). Standaard heeft iedereen één fase thuis, maar sommige slimme meters zijn aangesloten op drie fasen. Bijvoorbeeld voor zonnepanelen of elektrisch koken. Deze feature is alleen nuttig (en werkt tevens alleen) wanneer er daadwerkelijk drie fasen aanwezig zijn. Het dashboard toont deze gegevens wanneer dit ingeschakeld is."
-
-#~ msgid "Automatic fields are reset."
-#~ msgstr "Automatische velden zijn gereset."
-
-#~ msgid "Latest email"
-#~ msgstr "Meest recente e-mail"
-
-#~ msgid "Timestamp of latest email sent successfully. Automatically updated by application"
-#~ msgstr "Tijdstip van de laatst verzonden e-mail. Applicatie werkt dit automatisch bij."
-
-#~ msgid "Next email"
-#~ msgstr "Volgende e-mail"
-
-#~ msgid "Timestamp of next email sent. Automatically updated by application"
-#~ msgstr "Tijdstip van de volgende e-mail. Applicatie werkt dit automatisch bij."
-
-#~ msgid "Reset automatic fields"
-#~ msgstr "Reset automatische velden"
-
-#~ msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails."
-#~ msgstr "Vul hier je uitgaande e-mailgegevens in die DSMR-reader kan gebruiken om de e-mail te versturen"
-
-#~ msgid "DSMR-reader v2.1.0 adds support for Telegram-app notifications (bot only). Also, an API call was added to easily retrieve the latest gas consumption."
-#~ msgstr "DSMR-reader v2.1.0 voegt ondersteuning toe voor Telegram-app notificaties (alleen voor bots). Daarnaast is er een API-call toegevoegd om het laatste gasverbruik op te halen."
-
-#~ msgid "Email server: Host"
-#~ msgstr "E-mail server: Hostnaam (of server)"
-
-#~ msgid "Email server: Port"
-#~ msgstr "E-mail server: Poort"
-
-#~ msgid "Email server: Username"
-#~ msgstr "E-mail server: Gebruikersnaam"
-
-#~ msgid "Email server: Password"
-#~ msgstr "E-mail server: Wachtwoord"
-
-#~ msgid "Email server: Use TLS"
-#~ msgstr "E-mail server: Gebruik TLS"
-
-#~ msgid "Email server: Use SSL"
-#~ msgstr "E-mail server: Gebruik SSL"
-
-#~ msgid "No data found. Please make sure the datalogger is up and running and the backend process is running as well."
-#~ msgstr "Geen gegevens gevonden. Zorg ervoor dat de datalogger draait, samen met het achtergrondproces."
-
-#~ msgid "No data found. It can take up to one day before any data is visible here."
-#~ msgstr "Geen gegevens gevonden. Pas na (de eerste) dagwisseling zijn hier meer gegevens zichtbaar."
-
-#~ msgid "Full documentation available at: https://dsmr-reader.readthedocs.io/en/latest/api.html"
-#~ msgstr "Volledige documentatie beschikbaar op: https://dsmr-reader.readthedocs.io/nl/latest/api.html"
