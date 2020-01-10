@@ -7,7 +7,7 @@ class ReadTheDocsRedirectView(RedirectView):
     url = None
 
     def get(self, request, *args, **kwargs):
-        self.url = 'https://dsmr-reader.readthedocs.io/{}/v2/{}'.format(request.LANGUAGE_CODE, self.subpage)
+        self.url = 'https://dsmr-reader.readthedocs.io/{}/v3/{}'.format(request.LANGUAGE_CODE, self.subpage)
         return super(ReadTheDocsRedirectView, self).get(request, *args, **kwargs)
 
 
