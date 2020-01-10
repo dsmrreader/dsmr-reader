@@ -874,9 +874,6 @@ msgstr "Configuratie"
 msgid "Notifications"
 msgstr "Notificaties"
 
-msgid "Upgrade to v3"
-msgstr "Upgrade naar v3"
-
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"
 
@@ -2277,3 +2274,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Upgrade to v3"
+#~ msgstr "Upgrade naar v3"
