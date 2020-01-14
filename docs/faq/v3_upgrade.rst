@@ -1,11 +1,11 @@
 Upgrading to DSMR-reader v3.x
 =============================
 
-DSMR-reader v3.x is backwards incompatible with 2.x. You will have to manually upgrade to make sure it will run properly.
+DSMR-reader ``v3.x`` is backwards incompatible with ``2.x``. You will have to manually upgrade to make sure it will run properly.
 
 
-1. Update to the latest v2.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Update to the latest ``v2.x`` version (``v2.15``)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 :doc:`See here for instructions<update>`.
 
@@ -13,14 +13,14 @@ DSMR-reader v3.x is backwards incompatible with 2.x. You will have to manually u
 2. Python version check
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-DSMR-reader 3.x requires ``Python 3.6`` or higher.
+DSMR-reader ``3.x`` requires ``Python 3.6`` or higher.
 
 Execute the following::
 
     sudo su - dsmr
-    python --version
+    python3 --version
 
-It should display the Python version. If you're already running the Python version above (or higher), you can ignore the next section.
+It should display the Python version. If you're already running ``Python 3.6`` (or higher), you can ignore the next section.
 
 
 3. Python version upgrade (part 1/2)
@@ -90,10 +90,10 @@ Now we're ready to remove the environment DSMR-reader uses.
 
 Execute the following::
 
-    su - dsmr
+    sudo su - dsmr
     deactivate
     cd ~
-    mv .virtualenvs/dsmrreader .virtualenvs/old-python-dsmrreader
+    mv .virtualenvs/dsmrreader .virtualenvs/v2-dsmrreader
 
     virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3.6
     source ~/.virtualenvs/dsmrreader/bin/activate
@@ -102,26 +102,29 @@ Execute the following::
 
     If you're getting any errors, you can revert to the old version by running::
 
-        su - dsmr
+        sudo su - dsmr
         deactivate
         cd ~
-        mv .virtualenvs/old-python-dsmrreader .virtualenvs/dsmrreader
+        mv .virtualenvs/v2-dsmrreader .virtualenvs/dsmrreader
+
+        cd dsmr-reader
+        ./deploy.sh
 
 Everything okay? Time to upgrade DSMR-reader to v3.x.
 
-6. Switching DSMR-reader to v3.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+6. Switching DSMR-reader to ``v3.x``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-DSMR-reader v3.x lives in a different branch, to prevent any users from unexpectedly updating to v3.x.
+DSMR-reader ``v3.x`` lives in a different branch, to prevent any users from unexpectedly updating to ``v3.x``.
 
 Execute the following::
 
-    su - dsmr
+    sudo su - dsmr
     git fetch
     git checkout -b v3 origin/v3
     git pull
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt --upgrade
+    pip3 install -r dsmrreader/provisioning/requirements/base.txt
     pip3 install -r dsmrreader/provisioning/requirements/postgresql.txt
     ./deploy.sh
 
-Great. You should now be on v3.x!
+Great. You should now be on ``v3.x``!

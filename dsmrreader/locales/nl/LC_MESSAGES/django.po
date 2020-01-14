@@ -694,9 +694,6 @@ msgstr "DSMR-reader v2.10.0: Automatische update checker (wekelijks) toegevoegd,
 msgid "DSMR-reader v2.14.0: Some configuration options in setting.py were relocated or removed. This only affects you if you are using custom settings in setting.py. See the changelog for more information."
 msgstr "DSMR-reader v2.14.0: Sommige instellingen in settings.py zijn verplaatst of uitgefaseerd. Dit is alleen van belang wanneer je zelf handmatig instellingen hebt aangepast in settings.py. Zie de changelog voor meer informatie."
 
-msgid "DSMR-reader v2.15.0: This is the last release on v2. Switching to v3 requires you to manually upgrade. Click the link for more information."
-msgstr "DSMR-reader v2.15.0: Dit is de laatste release op v2. Om te wisselen naar v3 zul je handmatig moeten upgraden. Klik de link voor meer informatie."
-
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
@@ -2274,6 +2271,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "DSMR-reader v2.15.0: This is the last release on v2. Switching to v3 requires you to manually upgrade. Click the link for more information."
+#~ msgstr "DSMR-reader v2.15.0: Dit is de laatste release op v2. Om te wisselen naar v3 zul je handmatig moeten upgraden. Klik de link voor meer informatie."
 
 #~ msgid "Upgrade to v3"
 #~ msgstr "Upgrade naar v3"
