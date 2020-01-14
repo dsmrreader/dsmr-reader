@@ -123,7 +123,6 @@ Execute the following::
     git fetch
     git checkout -b v3 origin/v3
     git pull
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt
     pip3 install -r dsmrreader/provisioning/requirements/postgresql.txt
     ./deploy.sh
 
