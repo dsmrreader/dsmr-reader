@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v3.0.0 - 2020-01-xx
+v3.0.0 - 2020-01-15
 
 .. warning:: **Change in Python support**
 
