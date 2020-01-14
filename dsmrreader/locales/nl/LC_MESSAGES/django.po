@@ -1246,6 +1246,9 @@ msgstr "Het is even geleden dat gasverbruik is gemeten"
 msgid "Recorded gas consumption is on schedule"
 msgstr "Gasverbruik recent gemeten"
 
+msgid "No data (or manually disabled)"
+msgstr "Geen gegevens (of handmatig uitgeschakeld)"
+
 msgid "Day &amp; hour statistics"
 msgstr "Dag- &amp; uurstatistieken"
 
@@ -1279,6 +1282,9 @@ msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
 msgid "Tools"
 msgstr "Tools"
 
+msgid "Latest"
+msgstr "Meest recent"
+
 msgid "Latest Dropbox sync"
 msgstr "Meest recente synchronisatie met Dropbox"
 
@@ -1309,14 +1315,14 @@ msgstr "Geen elektriciteit gemeten"
 msgid "Electricity return recorded"
 msgstr "Teruglevering elektriciteit is gemeten"
 
-msgid "No electricity return recorded"
-msgstr "Geen teruglevering elektriciteit gemeten"
+msgid "No electricity return recorded (or manually disabled)"
+msgstr "Geen teruglevering elektriciteit gemeten (of handmatig uitgeschakeld)"
 
 msgid "Gas usage recorded"
 msgstr "Gasverbruik is gemeten"
 
-msgid "No gas usage recorded"
-msgstr "Geen gasverbruik gemeten"
+msgid "No gas usage recorded (or manually disabled)"
+msgstr "Geen gasverbruik gemeten (of handmatig uitgeschakeld)"
 
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
 msgstr "Er zijn momenteel nog geen dag-/uurstatistieken gegenereerd. Wacht op de volgende dag."
