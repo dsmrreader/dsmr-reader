@@ -2,10 +2,15 @@ Changelog
 =========
 
 
-v2.14.1 - 2020-01-07
+.. warning::
+
+    *This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.*
 
 
-- [`#827 <https://github.com/dennissiemensma/dsmr-reader/issues/827>`_] Mailbackup triggered elke halve minuut na v2.13+ update
+v2.15.0 - 2020-01-15
+
+
+- [`#825 <https://github.com/dennissiemensma/dsmr-reader/issues/825>`_] Last v2.x release
 
 
 ----
@@ -15,7 +20,7 @@ v2.14.0 - 2020-01-07
 
 .. note::
 
-    *Some configuration options inside ``settings.py`` were relocated or removed from the application. See [the docs](https://dsmr-reader.readthedocs.io/en/latest/settings.html) for the changes.*
+    *Some configuration options inside ``settings.py`` were relocated or removed from the application. See `the docs <https://dsmr-reader.readthedocs.io/en/latest/settings.html>`_ for the changes.*
 
 - [`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_] Move custom configuration in settings.py to database
 - [`#793 <https://github.com/dennissiemensma/dsmr-reader/issues/793>`_] Alle meldingen in 1x sluiten

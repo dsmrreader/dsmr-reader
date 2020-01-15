@@ -61,6 +61,11 @@ class TestViews(TestCase):
             self.assertEqual(response.status_code, 302)
             self.assertTrue(response['Location'].startswith('https://dsmr-reader.readthedocs.io'))
 
+    def test_v3_upgrade_redirect(self):
+        response = self.client.get(reverse('{}:v3-upgrade-redirect'.format(self.namespace)))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], 'https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html')
+
 
 class TestViewsWithoutData(TestViews):
     """ Same tests as above, but without any data as it's flushed in setUp().  """

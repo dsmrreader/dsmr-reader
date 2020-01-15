@@ -14,7 +14,7 @@ DSMRREADER_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
 DSMRREADER_VERSION = dsmrreader.__version__
 DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_USER_AGENT = 'DSMR-reader v{}'.format(DSMRREADER_VERSION)
-DSMRREADER_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/master/dsmrreader/__init__.py'
+DSMRREADER_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/v3/dsmrreader/__init__.py'
 
 # Scheduled Process modules.
 DSMRREADER_MODULE_EMAIL_BACKUP = 'dsmr_backup.services.email.run'
