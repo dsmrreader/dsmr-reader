@@ -26,38 +26,39 @@ Besides allowing the API to listen for requests, you will also need send your AP
 The API key can be found on the same page as in the screenshot above.
 The application generates one for you initially, but feel free to alter the API key when required.
 
-You should pass it in the header of every API call. The header should be defined as ``X-AUTHKEY`` with value ``<key>``. See below for an example. 
-
-Alternatively, since ``v2.1.0``, you can use ``Authorization`` with value ``Token <key>``.
+You should pass it in the header of every API call. See below for an example.
+Since ``v2.1.0``, you should not longer use ``X-AUTHKEY``.
+Use ``Authorization`` with value ``Token <key>`` instead.
 
 Examples
 ~~~~~~~~
 
 Using ``cURL``::
 
-   curl http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading \
+    # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
+    curl http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading \
         -d 'telegram=xxxxx' \
-        -H 'X-AUTHKEY: <YOUR-API-KEY>'
+        -H 'Authorization: Token YOUR-API-KEY'
    
-   # Or use
+    # Or use
 
-   curl http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading \
+    curl http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading \
         -d 'telegram=xxxxx' \
-        -H 'Authorization: Token <YOUR-API-KEY>'
+        -H 'Authorization: Token YOUR-API-KEY'
      
 Using ``requests``::
 
-   requests.post(
+    requests.post(
         'http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading',
-        headers={'X-AUTHKEY': '<YOUR-API-KEY>'},
+        headers={'Authorization': 'Token YOUR-API-KEY'},
         data={'telegram': 'xxxxx'},
-   )
+    )
    
-   # Or use
+    # Or use
 
-   requests.post(
+    requests.post(
         'http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading',
-        headers={'Authorization': 'Token <YOUR-API-KEY>'},
+        headers={'Authorization': 'Token YOUR-API-KEY'},
         data={'telegram': 'xxxxx'},
     )
 
@@ -127,7 +128,7 @@ Example
     # Register telegram by simply sending it to the application with a POST request.
     response = requests.post(
         'http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading',
-        headers={'X-AUTHKEY': 'YOUR-API-KEY'},
+        headers={'Authorization': 'Token YOUR-API-KEY'},
         data={'telegram': telegram_string},
     )
 
@@ -229,10 +230,11 @@ Example
 
 Using **cURL** (commandline)::
 
+    # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
     # Please note that the plus symbol "+" has been replaced by "%2B" here, to make it work for cURL.
     curl http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading \
           -d 'timestamp=2017-04-15T00:00:00%2B02&electricity_currently_delivered=1.5&electricity_currently_returned=0.025&electricity_delivered_1=2000&electricity_delivered_2=3000&electricity_returned_1=0&electricity_returned_2=0' \
-          -H 'X-AUTHKEY: YOUR-API-KEY' | python -m json.tool
+          -H 'Authorization: Token YOUR-API-KEY' | python -m json.tool
 
 
 Using **requests** (Python)::
@@ -242,7 +244,7 @@ Using **requests** (Python)::
 
     response = requests.post(
         'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading',
-        headers={'X-AUTHKEY': 'YOUR-API-KEY'},
+        headers={'Authorization': 'Token YOUR-API-KEY'},
         data={
             'electricity_currently_delivered': 1.500,
             'electricity_currently_returned': 0.025,
@@ -321,8 +323,9 @@ This demonstrates how to fetch all readings stored, without using any of the par
 
 Using **cURL** (commandline)::
 
- curl 'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading' \
-      -H 'X-AUTHKEY: YOUR-API-KEY' | python -m json.tool
+    # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
+    curl 'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading' \
+      -H 'Authorization: Token YOUR-API-KEY' | python -m json.tool
 
 
 Using **requests** (Python)::
@@ -332,7 +335,7 @@ Using **requests** (Python)::
 
     response = requests.get(
         'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading',
-        headers={'X-AUTHKEY': 'YOUR-API-KEY'},
+        headers={'Authorization': 'Token YOUR-API-KEY'},
     )
 
     if response.status_code != 200:
@@ -380,8 +383,9 @@ This demonstrates how to fetch the latest reading stored. Therefor we request al
 
 Using **cURL** (commandline)::
 
+    # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
     curl 'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading?ordering=-timestamp&limit=1' \
-        -H 'X-AUTHKEY: YOUR-API-KEY' | python -m json.tool
+        -H 'Authorization: Token YOUR-API-KEY' | python -m json.tool
 
 
 Using **requests** (Python)::
@@ -391,7 +395,7 @@ Using **requests** (Python)::
 
     response = requests.get(
         'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading?ordering=-timestamp&limit=1',
-        headers={'X-AUTHKEY': 'YOUR-API-KEY'},
+        headers={'Authorization': 'Token YOUR-API-KEY'},
     )
 
     if response.status_code != 200:
@@ -437,9 +441,10 @@ This demonstrates how to fetch all readings within a month. We limit the search 
 
 Using **cURL** (commandline)::
 
+    # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
     # Note that the whitespace in the timestamps has been converted to '%20' for cURL.
     curl 'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading?timestamp__gte=2017-02-01%2000:00:00&timestamp__lte=2017-03-01%2000:00:00' \
-        -H 'X-AUTHKEY: YOUR-API-KEY' | python -m json.tool
+        -H 'Authorization: Token YOUR-API-KEY' | python -m json.tool
 
 
 Using **requests** (Python)::
@@ -449,7 +454,7 @@ Using **requests** (Python)::
 
     response = requests.get(
         'http://YOUR-DSMR-URL/api/v2/statistics/day?timestamp__gte=2017-02-01 00:00:00&timestamp__lte=2017-03-01 00:00:00',
-        headers={'X-AUTHKEY': 'YOUR-API-KEY'},
+        headers={'Authorization': 'Token YOUR-API-KEY'},
     )
 
     if response.status_code != 200:
@@ -460,7 +465,7 @@ Using **requests** (Python)::
         
 **Result**::
 
-    # This should present you a set of all readings in the month we selected.
+    # This should present you a set of all readings in the month selected.
     {
         "count": 240968,
         "next": "http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading?limit=25&offset=25&timestamp__gte=2017-02-01+00%3A00%3A00&timestamp__lte=2017-03-01+00%3A00%3A00",
@@ -495,7 +500,187 @@ Using **requests** (Python)::
 
 
 ----
-    
+
+
+``GET`` - ``/datalogger/meter-statistics``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Retrieve meter statistics.
+
+.. note::
+
+    This endpoint was added in DSMR-reader ``v3.1``
+
+
+URI
+~~~
+Full path: ``/api/v2/datalogger/meter-statistics``
+
+
+Parameters
+~~~~~~~~~~
+None.
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the data in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+
+Using **cURL** (commandline)::
+
+    # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
+    curl http://YOUR-DSMR-URL/api/v2/datalogger/meter-statistics \
+          -H 'Authorization: Token YOUR-API-KEY' | python -m json.tool
+
+
+**Result**::
+
+    {
+        "id": 1,
+        "timestamp": "2020-01-15T20:13:40+01:00",
+        "dsmr_version": "40",
+        "electricity_tariff": 1,
+        "power_failure_count": 3,
+        "long_power_failure_count": 0,
+        "voltage_sag_count_l1": 1,
+        "voltage_sag_count_l2": 2,
+        "voltage_sag_count_l3": 3,
+        "voltage_swell_count_l1": 0,
+        "voltage_swell_count_l2": 0,
+        "voltage_swell_count_l3": 0,
+        "rejected_telegrams": 99,
+        "latest_telegram": "/XMX5LGBBFFB123456789\r\n\r\n1-3:0.2.8(40)\r\n0-0:1.0.0(200115201340W)\r\n0-0:96.1.1(12345678901234567890123456789000)\r\n1-0:1.8.1(007952.261*kWh)\r\n1-0:2.8.1(000000.000*kWh)\r\n1-0:1.8.2(004771.357*kWh)\r\n1-0:2.8.2(000000.000*kWh)\r\n0-0:96.14.0(0001)\r\n1-0:1.7.0(02.507*kW)\r\n1-0:2.7.0(00.000*kW)\r\n0-0:96.7.21(00003)\r\n0-0:96.7.9(00000)\r\n1-0:99.97.0(0)(0-0:96.7.19)\r\n1-0:32.32.0(00001)\r\n1-0:52.32.0(00002)\r\n1-0:72.32.0(00003)\r\n1-0:32.36.0(00000)\r\n1-0:52.36.0(00000)\r\n1-0:72.36.0(00000)\r\n0-0:96.13.1()\r\n0-0:96.13.0()\r\n1-0:32.7.0(225.0*V)\r\n1-0:52.7.0(232.1*V)\r\n1-0:72.7.0(233.2*V)\r\n1-0:31.7.0(000*A)\r\n1-0:51.7.0(000*A)\r\n1-0:71.7.0(001*A)\r\n1-0:21.7.0(01.407*kW)\r\n1-0:41.7.0(00.765*kW)\r\n1-0:61.7.0(00.334*kW)\r\n1-0:22.7.0(00.000*kW)\r\n1-0:42.7.0(00.000*kW)\r\n1-0:62.7.0(00.000*kW)\r\n!013B"
+    }
+
+
+.. warning::
+
+    Please note that all timestamps **returned** are in **UTC (CET -1 / CEST -2)**. This is indicated as well by the timestamps ending with a 'Z' (Zulu timezone).
+
+
+----
+
+
+``PATCH`` - ``/datalogger/meter-statistics``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Manually updates any meter statistics fields.
+
+.. note::
+
+    This endpoint was added in DSMR-reader ``v3.1``
+
+
+.. warning::
+
+    You should **not use this if you're using the v1 datalogger to push your telegrams**, as they will collide and overwrite each other's data!
+
+
+URI
+~~~
+Full path: ``/api/v2/datalogger/meter-statistics``
+
+
+Parameters
+~~~~~~~~~~
+Since this is a ``PATCH`` operation, **all parameters are optional**.
+
+- ``timestamp`` (*datetime*) - Timestamp indicating the last update. The builtin datalogger uses the timestamp of the telegram for this.
+- ``dsmr_version`` (*string*) - DSMR protocol version string. Should be something like ``42`` (4.2) or ``50`` (5.0)
+- ``power_failure_count`` (*int*) - Number of power failures in any phase
+- ``long_power_failure_count`` (*int*) - Number of long power failures in any phase
+- ``voltage_sag_count_l1`` (*int*) - Number of voltage sags/dips in phase L1
+- ``voltage_sag_count_l2`` (*int*) - Number of voltage sags/dips in phase L2 (polyphase meters only)
+- ``voltage_sag_count_l3`` (*int*) - Number of voltage sags/dips in phase L3 (polyphase meters only)
+- ``voltage_swell_count_l1`` (*int*) - Number of voltage swells in phase L1
+- ``voltage_swell_count_l2`` (*int*) - Number of voltage swells in phase L2 (polyphase meters only)
+- ``voltage_swell_count_l3`` (*int*) - Number of voltage swells in phase L3 (polyphase meters only)
+- ``rejected_telegrams`` (*int*) - Number of rejected telegrams due to invalid CRC checksum
+- ``latest_telegram`` (*string*) - The latest telegram succesfully read
+
+All parameters, except for ``timestamp`` and ``rejected_telegrams`` are **nullable**. Send an empty value to make them ``null``.
+
+.. note::
+
+    **datetime format** = ``YYYY-MM-DDThh:mm[:ss][+HH:MM|-HH:MM|Z]``, i.e.: ``2017-01-01T12:00:00+01`` (CET), ``2017-04-15T12:00:00+02`` (CEST) or ``2017-04-15T100:00:00Z`` (UTC).
+
+
+Response
+~~~~~~~~
+``HTTP 200`` on success. Body contains the updated data in JSON format. Any other status code on failure.
+
+
+Example
+~~~~~~~
+**Data** to update::
+
+    timestamp: 2020-01-15T12:34:56+01
+    dsmr_version: '50'
+    power_failure_count: 1
+    voltage_sag_count_l1: 5
+    voltage_swell_count_l1: 6
+    latest_telegram: null
+
+
+Using **cURL** (commandline)::
+
+    # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
+    # Please note that the plus symbol "+" has been replaced by "%2B" here, to make it work for cURL.
+    curl --request PATCH http://YOUR-DSMR-URL/api/v2/datalogger/meter-statistics \
+          -d 'timestamp=2020-01-15T12:34:56%2B01&dsmr_version=50&power_failure_count=1&voltage_sag_count_l1=5&voltage_swell_count_l1=6&latest_telegram=' \
+          -H 'Authorization: Token YOUR-API-KEY' | python -m json.tool
+
+
+Using **requests** (Python)::
+
+    import requests
+    import json
+
+    response = requests.patch(
+        'http://YOUR-DSMR-URL/api/v2/datalogger/meter-statistics',
+        headers={'Authorization': 'Token YOUR-API-KEY'},
+        data={
+            'timestamp': '2020-01-15T12:34:56+01'
+            'dsmr_version': '50'
+            'power_failure_count': 1
+            'voltage_sag_count_l1': 5
+            'voltage_swell_count_l1': 6
+            'latest_telegram': None
+        }
+    )
+
+    if response.status_code != 200:
+        print('Error: {}'.format(response.text))
+    else:
+        print('Updated: {}'.format(json.loads(response.text)))
+
+
+**Result**::
+
+    {
+        "id": 1,
+        "timestamp": "2020-01-15T12:34:56+01:00",
+        "dsmr_version": "50",
+        "electricity_tariff": 1,
+        "power_failure_count": 1,
+        "long_power_failure_count": 0,
+        "voltage_sag_count_l1": 5,
+        "voltage_sag_count_l2": 2,
+        "voltage_sag_count_l3": 3,
+        "voltage_swell_count_l1": 6,
+        "voltage_swell_count_l2": 0,
+        "voltage_swell_count_l3": 0,
+        "rejected_telegrams": 99,
+        "latest_telegram": null
+    }
+
+
+----
+
     
 ``GET`` - ``consumption/electricity``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -916,4 +1101,3 @@ Example
             "days_since": 1
         }
     }
-    

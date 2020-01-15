@@ -20,8 +20,9 @@ class APIv2TestCase(TestCase):
         self.api_settings.save()
 
     def _request(self, view_name, method='get', expected_code=200, **kwargs):
+        path = reverse('{}:{}'.format(self.NAMESPACE, view_name))
         response = getattr(self.client, method)(
-            reverse('{}:{}'.format(self.NAMESPACE, view_name)),
+            path,
             HTTP_X_AUTHKEY=self.api_settings.auth_key,
             content_type='application/json',
             **kwargs

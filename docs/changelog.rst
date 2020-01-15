@@ -7,6 +7,7 @@ v3.1.0 - 2020-01-xx
 - [`#836 <https://github.com/dennissiemensma/dsmr-reader/issues/836>`_] Correct background of inactive icons in Archive - by JeanMiK
 - [`#828 <https://github.com/dennissiemensma/dsmr-reader/issues/828>`_] Status page displays disabled capabilities
 - [`#833 <https://github.com/dennissiemensma/dsmr-reader/issues/833>`_] Mqtt verbindt niet opnieuw na herstart mosquitto
+- [`#820 <https://github.com/dennissiemensma/dsmr-reader/issues/820>`_] Meterstatistieken doorgeven via API
 
 
 ----

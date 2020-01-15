@@ -11,6 +11,10 @@ datalogger_url_patterns = [
         'get': 'list',
         'post': 'create',
     }), name='dsmrreading'),
+    path('meter-statistics', views.MeterStatisticsViewSet.as_view({
+        'get': 'retrieve',
+        'patch': 'partial_update',
+    }), name='meter-statistics'),
 ]
 
 consumption_url_patterns = [

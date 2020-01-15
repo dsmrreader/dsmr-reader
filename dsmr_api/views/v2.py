@@ -8,6 +8,8 @@ from django.conf import settings
 
 from dsmr_consumption.serializers.consumption import ElectricityConsumptionSerializer, GasConsumptionSerializer
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_datalogger.models.statistics import MeterStatistics
+from dsmr_datalogger.serializers.statistics import MeterStatisticsSerializer
 from dsmr_stats.serializers.statistics import DayStatisticsSerializer, HourStatisticsSerializer
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_datalogger.serializers.reading import DsmrReadingSerializer
@@ -32,6 +34,15 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
     filterset_class = DsmrReadingFilter
     ordering_fields = (FIELD, )
     ordering = FIELD
+
+
+class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
+    """ Retrieves en updates meter statistics. """
+    serializer_class = MeterStatisticsSerializer
+
+    def get_object(self):
+        # This is a REALLY good combo with django-solo, as it fits perfectly for a singleton retreiver and updater!
+        return MeterStatistics.get_solo()
 
 
 class TodayConsumptionView(APIView):

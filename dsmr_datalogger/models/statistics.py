@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
 
@@ -7,7 +8,7 @@ class MeterStatistics(SingletonModel):
     """ Meter statistics, but only exists as a single record, containing the latest data. """
     timestamp = models.DateTimeField(
         help_text=_("Timestamp indicating when the reading was taken"),
-        auto_now=True
+        default=timezone.now
     )
     dsmr_version = models.CharField(
         help_text=_("DSMR version"),
@@ -25,7 +26,7 @@ class MeterStatistics(SingletonModel):
         default=None
     )
     power_failure_count = models.IntegerField(
-        help_text=_("Number of power failures in any phases"),
+        help_text=_("Number of power failures in any phase"),
         null=True,
         default=None
     )

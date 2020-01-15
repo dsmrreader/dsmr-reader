@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../api.rst:2
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:2
 msgid "API Documentation"
 msgstr "API-documentatie"
 
-#: ../../api.rst:3
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:3
 msgid ""
 "The application has an API allowing you to insert/create readings and retrieve "
 "statistics."
@@ -30,19 +30,19 @@ msgstr ""
 "De applicatie heeft een API waarmee metingen kunt aanmaken/opvragen en diverse "
 "statistieken uitlezen."
 
-#: ../../api.rst:7
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:7
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../api.rst:10
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:10
 msgid "Configuration & authentication"
 msgstr "Configuratie & authenticatie"
 
-#: ../../api.rst:13
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:13
 msgid "Enable API"
 msgstr "API inschakelen"
 
-#: ../../api.rst:15
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:15
 msgid ""
 "The API is disabled by default in the application. You may enable it in your "
 "configuration or admin settings."
@@ -50,17 +50,28 @@ msgstr ""
 "Standaard is de API in de applicatie uitgeschakeld. Je kunt deze inschakelen in "
 "het configuratiescherm of beheerderpaneel."
 
-#: ../../api.rst:18 ../../api.rst:95 ../../api.rst:218 ../../api.rst:527
-#: ../../api.rst:586 ../../api.rst:629 ../../api.rst:671 ../../api.rst:710
-#: ../../api.rst:753 ../../api.rst:813 ../../api.rst:855 ../../api.rst:885
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:18
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:96
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:219
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:531
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:618
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:712
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:771
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:814
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:856
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:895
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:938
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:998
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1040
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1070
 msgid "Example"
 msgstr "Voorbeeld"
 
-#: ../../api.rst:24
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:24
 msgid "Authenticating"
 msgstr "Authenticatie"
 
-#: ../../api.rst:25
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:25
 msgid ""
 "Besides allowing the API to listen for requests, you will also need send your "
 "API key with each request. The API key can be found on the same page as in the "
@@ -72,43 +83,35 @@ msgstr ""
 "screenshot hierboven. De applicatie maakt standaard een API-key voor je aan. "
 "Deze kun je eventueel zelf wijzigen wanneer daar de behoefte voor is."
 
-#: ../../api.rst:29
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:29
 msgid ""
-"You should pass it in the header of every API call. The header should be "
-"defined as ``X-AUTHKEY`` with value ``<key>``. See below for an example."
+"You should pass it in the header of every API call. See below for an example. "
+"Since ``v2.1.0``, you should not longer use ``X-AUTHKEY``. Use "
+"``Authorization`` with value ``Token <key>`` instead."
 msgstr ""
-"Je moet deze gebruiken voor elke API call die je uitvoert. De header heet ``X-"
-"AUTHKEY`` met waarde ``<key>``. Zie hieronder voor een voorbeeld."
 
-#: ../../api.rst:31
-msgid ""
-"Alternatively, since ``v2.1.0``, you can use ``Authorization`` with value "
-"``Token <key>``."
-msgstr ""
-"Als alternatief is het sinds ``v2.1.0`` mogelijk om ``Authorization`` met de "
-"waarde ``Token <key>`` te gebruiken."
-
-#: ../../api.rst:34
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:34
 msgid "Examples"
 msgstr "Voorbeelden"
 
-#: ../../api.rst:36
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:36
 msgid "Using ``cURL``::"
 msgstr "Met ``cURL``::"
 
-#: ../../api.rst:48
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:49
 msgid "Using ``requests``::"
 msgstr "Met ``requests``::"
 
-#: ../../api.rst:66
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:67
 msgid "[API v1] Remote datalogger"
 msgstr "[API v1] Remote datalogger"
 
-#: ../../api.rst:69 ../../api.rst:157
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:70
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:158
 msgid "``POST`` - ``datalogger/dsmrreading``"
 msgstr "``POST`` - ``datalogger/dsmrreading``"
 
-#: ../../api.rst:71
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:72
 msgid ""
 "This allows you to insert a raw telegram, into the application as if it was "
 "read locally using the serial cable."
@@ -116,7 +119,7 @@ msgstr ""
 "Dit staat je toe om een ruwe telegram aan de applicatie door te geven, wanneer "
 "je deze op afstand uitleest."
 
-#: ../../api.rst:75
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:76
 msgid ""
 "Since ``DSMR-reader v1.6`` this call now returns ``HTTP 201`` instead of ``HTTP "
 "200`` when successful."
@@ -124,23 +127,43 @@ msgstr ""
 "Sinds ``DSMR-reader v1.6`` geeft deze call ``HTTP 201`` terug in plaats van "
 "``HTTP 200``, wanneer succesvol."
 
-#: ../../api.rst:79 ../../api.rst:184 ../../api.rst:295 ../../api.rst:506
-#: ../../api.rst:565 ../../api.rst:614 ../../api.rst:656 ../../api.rst:695
-#: ../../api.rst:732 ../../api.rst:792 ../../api.rst:845 ../../api.rst:875
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:80
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:185
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:297
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:516
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:584
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:691
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:750
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:799
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:841
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:880
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:917
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:977
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1030
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1060
 msgid "URI"
 msgstr "URI"
 
-#: ../../api.rst:80
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:81
 msgid "Full path: ``/api/v1/datalogger/dsmrreading``"
 msgstr "Volledig pad: ``/api/v1/datalogger/dsmrreading``"
 
-#: ../../api.rst:84 ../../api.rst:189 ../../api.rst:300 ../../api.rst:511
-#: ../../api.rst:570 ../../api.rst:619 ../../api.rst:661 ../../api.rst:700
-#: ../../api.rst:737 ../../api.rst:797
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:85
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:190
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:302
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:521
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:589
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:696
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:755
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:804
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:846
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:885
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:922
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:982
 msgid "Parameters"
 msgstr "Parameters"
 
-#: ../../api.rst:86
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:87
 msgid ""
 "``telegram`` (*string*) - The raw telegram string containing all linefeeds ``"
 "\\n``, and carriage returns ``\\r``, as well!"
@@ -148,28 +171,39 @@ msgstr ""
 "``telegram`` (*string*)  - De ruwe telegram tekenreeks inclusief alle "
 "regeleindes ``\\n`` en 'carriage returns' ``\\r``!"
 
-#: ../../api.rst:90 ../../api.rst:213 ../../api.rst:311 ../../api.rst:522
-#: ../../api.rst:581 ../../api.rst:624 ../../api.rst:666 ../../api.rst:705
-#: ../../api.rst:748 ../../api.rst:808 ../../api.rst:850 ../../api.rst:880
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:91
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:214
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:313
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:526
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:613
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:707
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:766
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:809
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:851
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:890
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:933
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:993
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1035
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1065
 msgid "Response"
 msgstr "Respons (van de server)"
 
-#: ../../api.rst:91
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:92
 msgid ""
 "``HTTP 201`` on success, with empty body. Any other status code on failure."
 msgstr ""
 "``HTTP 201`` wanneer succesvol, met een lege respons. Elke andere status code "
 "bij falen."
 
-#: ../../api.rst:97
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:98
 msgid "(using the ``requests`` library available on PIP)::"
 msgstr "(met de ``requests`` tool beschikbaar in PIP)::"
 
-#: ../../api.rst:141
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:142
 msgid "Script"
 msgstr "Script"
 
-#: ../../api.rst:142
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:143
 msgid ""
 "You can use a script to run in Supervisor. It will send telegrams to one or "
 "multiple instances of DSMR-reader. For detailed installation instructions, see :"
@@ -180,21 +214,21 @@ msgstr ""
 "installatieinstructies, zie  :doc:`deze handleiding voor de "
 "datalogger<installation/datalogger>`."
 
-#: ../../api.rst:149
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:150
 msgid "[API v2] RESTful API"
 msgstr "[API v2] RESTful API"
 
-#: ../../api.rst:153
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:154
 msgid "These API calls are available since ``v1.7``."
 msgstr "Deze API-calls zijn beschikbaar sinds ``v1.7``."
 
-#: ../../api.rst:159
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:160
 msgid "Creates a reading from direct values, omitting the need for the telegram."
 msgstr ""
 "Maakt een meting aan zonder het telegram op te sturen, op basis van de "
 "meegegeven waarden."
 
-#: ../../api.rst:163
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:164
 msgid ""
 "**Please note**: Readings are processed simultaneously. Inserting readings "
 "**retroactively** might result in undesired results due to the data processing, "
@@ -204,14 +238,14 @@ msgstr ""
 "**terugwerkende kracht** toevoegt, kan dit leiden tot ongewenste resultaten in "
 "de dataverwerking, die altijd vooruit werkt."
 
-#: ../../api.rst:165
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:166
 msgid ""
 "Therefor inserting historic data might require you to delete all aggregated "
 "data using::"
 msgstr ""
 "Daarom kan het nodig zijn dat je alle geaggregeerde gegevens verwijdert met::"
 
-#: ../../api.rst:178
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:179
 msgid ""
 "This will process all readings again, from the very first start, and aggregate "
 "them (and **will** take a long time depending on your reading count)."
@@ -220,7 +254,7 @@ msgstr ""
 "vanaf het begin, en ze opnieuw aggregeert. Dit **zal** lang duren, afhankelijk "
 "van hoeveel metingen er opgeslagen zijn."
 
-#: ../../api.rst:180
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:181
 msgid ""
 "Please note that the datalogger may interfere. If your stats are not correctly "
 "after regenerating, try it again while having your datalogger disabled."
@@ -229,15 +263,16 @@ msgstr ""
 "statistieken niet kloppen na hergenereren, dan kun je het eventueel nogmaals "
 "proberen met de datalogger uitgeschakeld."
 
-#: ../../api.rst:185 ../../api.rst:296
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:186
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:298
 msgid "Full path: ``/api/v2/datalogger/dsmrreading``"
 msgstr "Volledig pad: ``/api/v2/datalogger/dsmrreading``"
 
-#: ../../api.rst:190
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:191
 msgid "**[R]** = Required field"
 msgstr "**[R]** = Verplicht veld"
 
-#: ../../api.rst:192
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:193
 msgid ""
 "**[R]** ``timestamp`` (*datetime*) - Timestamp indicating when the reading was "
 "taken, according to the smart meter"
@@ -245,7 +280,7 @@ msgstr ""
 "**[R]** ``timestamp`` (*datetime*) - Moment waarop de meting is gedaan, volgens "
 "de meter"
 
-#: ../../api.rst:193
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:194
 msgid ""
 "**[R]** ``electricity_currently_delivered`` (*float*) - Current electricity "
 "delivered in kW"
@@ -253,7 +288,7 @@ msgstr ""
 "**[R]** ``electricity_currently_delivered`` (*float*) - Huidig "
 "elektriciteitsverbruik in kW"
 
-#: ../../api.rst:194
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:195
 msgid ""
 "**[R]** ``electricity_currently_returned`` (*float*) - Current electricity "
 "returned in kW"
@@ -261,7 +296,7 @@ msgstr ""
 "**[R]** ``electricity_currently_returned`` (*float*) - Huidige teruglevering "
 "elektriciteit in kW"
 
-#: ../../api.rst:195
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:196
 msgid ""
 "**[R]** ``electricity_delivered_1`` (*float*) - Meter position stating "
 "electricity delivered (low tariff) in kWh"
@@ -269,7 +304,7 @@ msgstr ""
 "**[R]** ``electricity_delivered_1`` (*float*) - Meterstand van verbruikte "
 "elektriciteit (laagtarief) in kWh"
 
-#: ../../api.rst:196
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:197
 msgid ""
 "**[R]** ``electricity_delivered_2`` (*float*) - Meter position stating "
 "electricity delivered (normal tariff) in kWh"
@@ -277,7 +312,7 @@ msgstr ""
 "**[R]** ``electricity_delivered_2`` (*float*) - Meterstand van verbruikte "
 "elektriciteit (piektarief) in kWh"
 
-#: ../../api.rst:197
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:198
 msgid ""
 "**[R]** ``electricity_returned_1`` (*float*) - Meter position stating "
 "electricity returned (low tariff) in kWh"
@@ -285,7 +320,7 @@ msgstr ""
 "**[R]** ``electricity_returned_1`` (*float*) - Meterstand van teruggeleverde "
 "elektriciteit (laagtarief) in kWh"
 
-#: ../../api.rst:198
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:199
 msgid ""
 "**[R]** ``electricity_returned_2`` (*float*) - Meter position stating "
 "electricity returned (normal tariff) in kWh"
@@ -293,7 +328,7 @@ msgstr ""
 "**[R]** ``electricity_returned_2`` (*float*) -Meterstand van teruggeleverde "
 "elektriciteit (piektarief) in kWh"
 
-#: ../../api.rst:199
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:200
 msgid ""
 "``phase_currently_delivered_l1`` (*float*) - Current electricity used by phase "
 "L1 (in kW)"
@@ -301,7 +336,7 @@ msgstr ""
 "``phase_currently_delivered_l1`` (*float*) - Huidig elektriciteitsverbruik in "
 "fase L1 (in kW)"
 
-#: ../../api.rst:200
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:201
 msgid ""
 "``phase_currently_delivered_l2`` (*float*) - Current electricity used by phase "
 "L2 (in kW)"
@@ -309,7 +344,7 @@ msgstr ""
 "``phase_currently_delivered_l2`` (*float*) - Huidig elektriciteitsverbruik in "
 "fase L2 (in kW)"
 
-#: ../../api.rst:201
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:202
 msgid ""
 "``phase_currently_delivered_l3`` (*float*) - Current electricity used by phase "
 "L3 (in kW)"
@@ -317,7 +352,7 @@ msgstr ""
 "``phase_currently_delivered_l3`` (*float*) - Huidig elektriciteitsverbruik in "
 "fase L3 (in kW)"
 
-#: ../../api.rst:202
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:203
 msgid ""
 "``phase_currently_returned_l1`` (*float*) - Current electricity returned by "
 "phase L1 (in kW)"
@@ -325,7 +360,7 @@ msgstr ""
 "``phase_currently_returned_l1`` (*float*) - Huidig elektriciteitteruglevering "
 "in fase L1 (in kW)"
 
-#: ../../api.rst:203
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:204
 msgid ""
 "``phase_currently_returned_l2`` (*float*) - Current electricity returned by "
 "phase L2 (in kW)"
@@ -333,7 +368,7 @@ msgstr ""
 "``phase_currently_returned_l2`` (*float*) - Huidig elektriciteitteruglevering "
 "in fase L2 (in kW)"
 
-#: ../../api.rst:204
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:205
 msgid ""
 "``phase_currently_returned_l3`` (*float*) - Current electricity returned by "
 "phase L3 (in kW)"
@@ -341,7 +376,7 @@ msgstr ""
 "``phase_currently_returned_l3`` (*float*) - Huidig elektriciteitteruglevering "
 "in fase L3 (in kW)"
 
-#: ../../api.rst:205
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:206
 msgid ""
 "``extra_device_timestamp`` (*datetime*) - Last timestamp read from the extra "
 "device connected (gas meter)"
@@ -349,14 +384,15 @@ msgstr ""
 "``extra_device_timestamp`` (*datetime*) - Tijdstip van meting door de externe "
 "(gas)meter"
 
-#: ../../api.rst:206
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:207
 msgid ""
 "``extra_device_delivered`` (*float*) - Last value read from the extra device "
 "connected (gas meter)"
 msgstr ""
 "``extra_device_delivered`` (*float*) - Meterstand van de externe (gas)meter"
 
-#: ../../api.rst:210
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:211
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:609
 msgid ""
 "**datetime format** = ``YYYY-MM-DDThh:mm[:ss][+HH:MM|-HH:MM|Z]``, i.e.: "
 "``2017-01-01T12:00:00+01`` (CET), ``2017-04-15T12:00:00+02`` (CEST) or "
@@ -366,7 +402,7 @@ msgstr ""
 "bijvoorbeeld: ``2017-01-01T12:00:00+01`` (CET), ``2017-04-15T12:00:00+02`` "
 "(CEST) of ``2017-04-15T100:00:00Z`` (UTC)."
 
-#: ../../api.rst:214
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:215
 msgid ""
 "``HTTP 201`` on success. Body contains the reading created in JSON format. Any "
 "other status code on failure."
@@ -374,27 +410,41 @@ msgstr ""
 "``HTTP 201`` wanneer succesvol. Elke andere status code bij falen. De respons "
 "bevat de aangemaakte meting in JSON-formaat."
 
-#: ../../api.rst:219
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:220
 msgid "**Data** to insert::"
 msgstr "**Data** te verwerken::"
 
-#: ../../api.rst:230 ../../api.rst:322 ../../api.rst:381 ../../api.rst:438
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:231
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:324
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:384
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:442
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:533
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:629
 msgid "Using **cURL** (commandline)::"
 msgstr "Met **cURL** (commandline)::"
 
-#: ../../api.rst:238 ../../api.rst:328 ../../api.rst:387 ../../api.rst:445
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:240
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:331
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:391
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:450
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:638
 msgid "Using **requests** (Python)::"
 msgstr "Met ``requests`` (Python)::"
 
-#: ../../api.rst:263 ../../api.rst:344 ../../api.rst:403 ../../api.rst:461
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:265
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:347
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:407
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:466
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:540
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:662
 msgid "**Result**::"
 msgstr "**Resultaat**::"
 
-#: ../../api.rst:289
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:291
 msgid "``GET`` - ``datalogger/dsmrreading``"
 msgstr "``GET`` - ``datalogger/dsmrreading``"
 
-#: ../../api.rst:291
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:293
 msgid ""
 "Retrieves any readings stored. The readings are either constructed from "
 "incoming telegrams or were created using this API."
@@ -402,12 +452,15 @@ msgstr ""
 "Haalt opgeslagen metingen op. De metingen komen ofwel voort uit telegrammen of "
 "zijn handmatig aangemaakt via deze API."
 
-#: ../../api.rst:301 ../../api.rst:512 ../../api.rst:571 ../../api.rst:738
-#: ../../api.rst:798
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:303
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:697
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:756
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:923
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:983
 msgid "All parameters are optional."
 msgstr "Alle parameters zijn optioneel."
 
-#: ../../api.rst:303
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:305
 msgid ""
 "``timestamp__gte`` (*datetime*) - Limits the result to any readings having a "
 "timestamp **higher or equal** to this parameter."
@@ -415,7 +468,7 @@ msgstr ""
 "``timestamp__gte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **hoger of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:304
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:306
 msgid ""
 "``timestamp__lte`` (*datetime*) - Limits the result to any readings having a "
 "timestamp **lower or equal** to this parameter."
@@ -423,7 +476,7 @@ msgstr ""
 "``timestamp__lte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **lager of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:305
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:307
 msgid ""
 "``ordering`` (*string*) - Use ``-timestamp`` to sort **descending**. Omit or "
 "use ``timestamp`` to sort **ascending** (default)."
@@ -432,8 +485,11 @@ msgstr ""
 "Laat de parameter weg of gebruik ``timestamp`` om **oplopend** te sorteren "
 "(standaard)."
 
-#: ../../api.rst:306 ../../api.rst:517 ../../api.rst:576 ../../api.rst:743
-#: ../../api.rst:803
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:308
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:702
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:761
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:928
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:988
 msgid ""
 "``offset`` (*integer*) - When iterating large resultsets, the offset determines "
 "the starting point."
@@ -441,8 +497,11 @@ msgstr ""
 "``offset`` (*integer*) - Bij het doorlopen van vele resultaten kun je hiermee "
 "het startpunt bepalen."
 
-#: ../../api.rst:307 ../../api.rst:518 ../../api.rst:577 ../../api.rst:744
-#: ../../api.rst:804
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:309
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:703
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:762
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:929
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:989
 msgid ""
 "``limit`` (*integer*) - Limits the resultset size returned. Omit for "
 "maintaining the default limit (**25**)."
@@ -450,9 +509,16 @@ msgstr ""
 "``limit`` (*integer*) - Beperkt het aantal resultaten dat teruggegeven wordt. "
 "Laat deze parameter weg voor de standaardwaarde (**25**)."
 
-#: ../../api.rst:312 ../../api.rst:523 ../../api.rst:582 ../../api.rst:625
-#: ../../api.rst:667 ../../api.rst:706 ../../api.rst:749 ../../api.rst:809
-#: ../../api.rst:851 ../../api.rst:881
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:314
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:708
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:767
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:810
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:852
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:891
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:934
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:994
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1036
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1066
 msgid ""
 "``HTTP 200`` on success. Body contains the result(s) in JSON format. Any other "
 "status code on failure."
@@ -460,11 +526,11 @@ msgstr ""
 "``HTTP 200`` wanneer succesvol. Het antwoord bevat de resultaten in JSON-"
 "formaat. Geeft elke andere status code terug bij falen."
 
-#: ../../api.rst:318
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:320
 msgid "Example 1 - Fetch all readings"
 msgstr "Voorbeeld 1 - Haal alle metingen op"
 
-#: ../../api.rst:319
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:321
 msgid ""
 "This demonstrates how to fetch all readings stored, without using any of the "
 "parameters."
@@ -472,11 +538,11 @@ msgstr ""
 "Dit toont hoe je alle opgeslagen metingen kunt ophalen, zonder gebruik te maken "
 "van de parameters."
 
-#: ../../api.rst:377
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:380
 msgid "Example 2 - Fetch latest reading"
 msgstr "Voorbeeld 2 - Haal de laatste meting op"
 
-#: ../../api.rst:378
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:381
 msgid ""
 "This demonstrates how to fetch the latest reading stored. Therefor we request "
 "all readings, sort them descending by timestamp and limit the result to only "
@@ -486,11 +552,11 @@ msgstr ""
 "alle metingen op, sorteren deze aflopend op tijdstip en beperken het resultaat "
 "tot één."
 
-#: ../../api.rst:434
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:438
 msgid "Example 3 - Fetch readings by month"
 msgstr "Voorbeeld 3 - Haal alle metingen van een specifieke maand op"
 
-#: ../../api.rst:435
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:439
 msgid ""
 "This demonstrates how to fetch all readings within a month. We limit the search "
 "by specifying the month start and end."
@@ -498,7 +564,8 @@ msgstr ""
 "Dit toont hoe je alle metingen van één maand kan ophalen. Hiervoor beperken we "
 "de zoekopdracht tot het begin en einde van de betreffende maand."
 
-#: ../../api.rst:494
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:499
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:562
 msgid ""
 "Please note that all timestamps **returned** are in **UTC (CET -1 / CEST -2)**. "
 "This is indicated as well by the timestamps ending with a 'Z' (Zulu timezone)."
@@ -507,11 +574,148 @@ msgstr ""
 "-2)**-formaat zijn. Dit is ook te zien aan elke instantie die eindigt met "
 "'Z' (Zulu tijdzone)."
 
-#: ../../api.rst:501
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:506
+msgid "``GET`` - ``/datalogger/meter-statistics``"
+msgstr "``GET`` - ``/datalogger/meter-statistics``"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:508
+msgid "Retrieve meter statistics."
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:512
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:575
+msgid "This endpoint was added in DSMR-reader ``v3.1``"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:517
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:585
+msgid "Full path: ``/api/v2/datalogger/meter-statistics``"
+msgstr "Volledig pad: ``/api/v2/datalogger/meter-statistics``"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:522
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:805
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:847
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:886
+msgid "None."
+msgstr "Geen."
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:527
+msgid ""
+"``HTTP 200`` on success. Body contains the data in JSON format. Any other "
+"status code on failure."
+msgstr ""
+"``HTTP 200`` wanneer succesvol. Het antwoord bevat de gegevens in JSON-formaat. "
+"Geeft elke andere status code terug bij falen."
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:569
+msgid "``PATCH`` - ``/datalogger/meter-statistics``"
+msgstr "``PATCH`` - ``/datalogger/meter-statistics``"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:571
+msgid "Manually updates any meter statistics fields."
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:580
+msgid ""
+"You should **not use this if you're using the v1 datalogger to push your "
+"telegrams**, as they will collide and overwrite each other's data!"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:590
+msgid "Since this is a ``PATCH`` operation, **all parameters are optional**."
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:592
+msgid ""
+"``timestamp`` (*datetime*) - Timestamp indicating the last update. The builtin "
+"datalogger uses the timestamp of the telegram for this."
+msgstr ""
+"``timestamp`` (*datetime*) - Moment waarop de laatste update is gedaan. De "
+"ingebouwde datalogger gebruikt hiervoor het tijdstip in het telegram."
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:593
+msgid ""
+"``dsmr_version`` (*string*) - DSMR protocol version string. Should be something "
+"like ``42`` (4.2) or ``50`` (5.0)"
+msgstr ""
+"``dsmr_version`` (*string*) - DSMR protocol versie string. Moet iets zijn als "
+"``42`` (4.2) of ``50`` (5.0)"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:594
+msgid "``power_failure_count`` (*int*) - Number of power failures in any phase"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:595
+msgid ""
+"``long_power_failure_count`` (*int*) - Number of long power failures in any "
+"phase"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:596
+msgid "``voltage_sag_count_l1`` (*int*) - Number of voltage sags/dips in phase L1"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:597
+msgid ""
+"``voltage_sag_count_l2`` (*int*) - Number of voltage sags/dips in phase L2 "
+"(polyphase meters only)"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:598
+msgid ""
+"``voltage_sag_count_l3`` (*int*) - Number of voltage sags/dips in phase L3 "
+"(polyphase meters only)"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:599
+msgid "``voltage_swell_count_l1`` (*int*) - Number of voltage swells in phase L1"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:600
+msgid ""
+"``voltage_swell_count_l2`` (*int*) - Number of voltage swells in phase L2 "
+"(polyphase meters only)"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:601
+msgid ""
+"``voltage_swell_count_l3`` (*int*) - Number of voltage swells in phase L3 "
+"(polyphase meters only)"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:602
+msgid ""
+"``rejected_telegrams`` (*int*) - Number of rejected telegrams due to invalid "
+"CRC checksum"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:603
+msgid "``latest_telegram`` (*string*) - The latest telegram succesfully read"
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:605
+msgid ""
+"All parameters, except for ``timestamp`` and ``rejected_telegrams`` are "
+"**nullable**. Send an empty value to make them ``null``."
+msgstr ""
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:614
+msgid ""
+"``HTTP 200`` on success. Body contains the updated data in JSON format. Any "
+"other status code on failure."
+msgstr ""
+"``HTTP 200`` wanneer succesvol. Het antwoord bevat de bijgewerkte gegevens in "
+"JSON-formaat. Geeft elke andere status code terug bij falen."
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:619
+msgid "**Data** to update::"
+msgstr "**Data** bij te werken::"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:686
 msgid "``GET`` - ``consumption/electricity``"
 msgstr "``GET`` - ``consumption/electricity``"
 
-#: ../../api.rst:502
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:687
 msgid ""
 "Retrieves any data regarding **electricity consumption**. This is based on the "
 "readings processed."
@@ -519,11 +723,12 @@ msgstr ""
 "Geeft gegevens terug m.b.t. **elektriciteitsverbruik**. Dit is gebaseerd op "
 "verwerkte metingen."
 
-#: ../../api.rst:507
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:692
 msgid "Full path: ``/api/v2/consumption/electricity``"
 msgstr "Volledig pad: ``/api/v2/consumption/electricity``"
 
-#: ../../api.rst:514 ../../api.rst:573
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:699
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:758
 msgid ""
 "``read_at__gte`` (*datetime*) - Limits the result to any records having a "
 "timestamp **higher or equal** to this parameter."
@@ -531,7 +736,8 @@ msgstr ""
 "``read_at__gte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **hoger of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:515 ../../api.rst:574
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:700
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:759
 msgid ""
 "``read_at__lte`` (*datetime*) - Limits the result to any records having a "
 "timestamp **lower or equal** to this parameter."
@@ -539,7 +745,8 @@ msgstr ""
 "``read_at__lte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **lager of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:516 ../../api.rst:575
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:701
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:760
 msgid ""
 "``ordering`` (*string*) - Use ``-read_at`` to sort **descending**. Omit or use "
 "``read_at`` to sort **ascending** (default)."
@@ -548,17 +755,23 @@ msgstr ""
 "Laat de parameter weg of gebruik ``read_at`` om **oplopend** te sorteren "
 "(standaard)."
 
-#: ../../api.rst:528 ../../api.rst:587 ../../api.rst:631 ../../api.rst:675
-#: ../../api.rst:714 ../../api.rst:756 ../../api.rst:816 ../../api.rst:857
-#: ../../api.rst:887
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:713
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:772
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:816
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:860
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:899
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:941
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1001
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1042
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1072
 msgid "**Data structure returned**::"
 msgstr "**Datastructuur**::"
 
-#: ../../api.rst:560
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:745
 msgid "``GET`` - ``consumption/gas``"
 msgstr "``GET`` - ``consumption/gas``"
 
-#: ../../api.rst:561
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:746
 msgid ""
 "Retrieves any data regarding **gas consumption**. This is based on the readings "
 "processed."
@@ -566,31 +779,27 @@ msgstr ""
 "Geeft gegevens terug m.b.t. **gasverbruik**. Dit is gebaseerd op verwerkte "
 "metingen."
 
-#: ../../api.rst:566
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:751
 msgid "Full path: ``/api/v2/consumption/gas``"
 msgstr "Volledig pad: ``/api/v2/consumption/gas``"
 
-#: ../../api.rst:609
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:794
 msgid "``GET`` - ``consumption/today``"
 msgstr "``GET`` - ``consumption/today``"
 
-#: ../../api.rst:610
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:795
 msgid "Returns the consumption of the current day so far."
 msgstr "Geeft het verbruik (tot nu toe) van de huidige dag terug."
 
-#: ../../api.rst:615
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:800
 msgid "Full path: ``/api/v2/consumption/today``"
 msgstr "Volledig pad: ``/api/v2/consumption/today``"
 
-#: ../../api.rst:620 ../../api.rst:662 ../../api.rst:701
-msgid "None."
-msgstr "Geen."
-
-#: ../../api.rst:651
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:836
 msgid "``GET`` - ``consumption/electricity-live``"
 msgstr "``GET`` - ``consumption/electricity-live``"
 
-#: ../../api.rst:652
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:837
 msgid ""
 "Returns the live electricity consumption, containing the same data as the "
 "Dashboard header."
@@ -598,41 +807,41 @@ msgstr ""
 "Geeft het live elektriciteitsverbruik terug, feitelijk dezelfde gegevens als "
 "rechtsbovenin het Dashboard."
 
-#: ../../api.rst:657
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:842
 msgid "Full path: ``/api/v2/consumption/electricity-live``"
 msgstr "Volledig pad: ``/api/v2/consumption/electricity-live``"
 
-#: ../../api.rst:673
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:858
 msgid ""
 "**Note**: ``cost_per_hour`` is only available when you've set energy prices."
 msgstr ""
 "**N.B.**: ``cost_per_hour`` is alleen beschikbaar wanneer je energieprijzen "
 "hebt ingesteld."
 
-#: ../../api.rst:690
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:875
 msgid "``GET`` - ``consumption/gas-live``"
 msgstr "``GET`` - ``consumption/gas-live``"
 
-#: ../../api.rst:691
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:876
 msgid "Returns the latest gas consumption."
 msgstr "Geeft het meest recente gasverbruik weer."
 
-#: ../../api.rst:696
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:881
 msgid "Full path: ``/api/v2/consumption/gas-live``"
 msgstr "Volledig pad: ``/api/v2/consumption/gas-live``"
 
-#: ../../api.rst:712
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:897
 msgid ""
 "**Note**: ``cost_per_interval`` is only available when you've set energy prices."
 msgstr ""
 "**N.B.**: ``cost_per_interval`` is alleen beschikbaar wanneer je energieprijzen "
 "hebt ingesteld."
 
-#: ../../api.rst:727
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:912
 msgid "``GET`` - ``statistics/day``"
 msgstr "``GET`` - ``statistics/day``"
 
-#: ../../api.rst:728
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:913
 msgid ""
 "Retrieves any **aggregated day statistics**. Please note that these are "
 "generated a few hours **after midnight**."
@@ -640,11 +849,11 @@ msgstr ""
 "Haalt **geaggregeerde dagstatistieken** op. Deze worden elke dag een paar uur "
 "**ná middernacht** gegenereerd."
 
-#: ../../api.rst:733
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:918
 msgid "Full path: ``/api/v2/statistics/day``"
 msgstr "Volledig pad: ``/api/v2/statistics/day``"
 
-#: ../../api.rst:740
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:925
 msgid ""
 "``day__gte`` (*date*) - Limits the result to any statistics having their date "
 "**higher or equal** to this parameter."
@@ -652,7 +861,7 @@ msgstr ""
 "``day__gte`` (*date*) - Beperkt het resultaat tot alle datums die **hoger of "
 "gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:741
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:926
 msgid ""
 "``day__lte`` (*date*) - Limits the result to any statistics having their date "
 "**lower or equal** to this parameter."
@@ -660,7 +869,7 @@ msgstr ""
 "``day__lte`` (*date*) - Beperkt het resultaat tot alle datums die **lager of "
 "gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:742
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:927
 msgid ""
 "``ordering`` (*string*) - Use ``-day`` to sort **descending**. Omit or use "
 "``day`` to sort **ascending** (default)."
@@ -668,7 +877,8 @@ msgstr ""
 "``ordering`` (*string*) - Gebruik ``-day`` om **aflopend** te sorteren. Laat de "
 "parameter weg of gebruik ``day`` om **oplopend** te sorteren (standaard)."
 
-#: ../../api.rst:754 ../../api.rst:814
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:939
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:999
 msgid ""
 "All the :ref:`generic DSMRREADING examples <generic-examples-anchor>` apply "
 "here as well, since only the ``timestamp`` field differs."
@@ -676,11 +886,11 @@ msgstr ""
 "Alle :ref:`generieke DSMRREADING voorbeelden <generic-examples-anchor>` zijn "
 "hier tevens van toepassing, gezien alleen het ``timestamp`` field afwijkt."
 
-#: ../../api.rst:787
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:972
 msgid "``GET`` - ``statistics/hour``"
 msgstr "``GET`` - ``statistics/hour``"
 
-#: ../../api.rst:788
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:973
 msgid ""
 "Retrieves any **aggregated hourly statistics**. Please note that these are "
 "generated a few hours **after midnight**."
@@ -688,11 +898,11 @@ msgstr ""
 "Haalt **geaggregeerde uurstatistieken** op. Deze worden elke dag een paar uur "
 "**ná middernacht** gegenereerd."
 
-#: ../../api.rst:793
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:978
 msgid "Full path: ``/api/v2/statistics/hour``"
 msgstr "Volledig pad: ``/api/v2/statistics/hour``"
 
-#: ../../api.rst:800
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:985
 msgid ""
 "``hour_start__gte`` (*datetime*) - Limits the result to any statistics having "
 "their datetime (hour start) **higher or equal** to this parameter."
@@ -700,7 +910,7 @@ msgstr ""
 "``hour_start__gte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **hoger of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:801
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:986
 msgid ""
 "``hour_start__lte`` (*datetime*) - Limits the result to any statistics having "
 "their datetime (hour start) **lower or equal** to this parameter."
@@ -708,7 +918,7 @@ msgstr ""
 "``hour_start__lte`` (*datetime*) - Beperkt het resultaat tot alle "
 "(datum)tijdstippen die **lager of gelijk zijn aan** deze parameter."
 
-#: ../../api.rst:802
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:987
 msgid ""
 "``ordering`` (*string*) - Use ``-hour_start`` to sort **descending**. Omit or "
 "use ``hour_start`` to sort **ascending** (default)."
@@ -717,23 +927,23 @@ msgstr ""
 "Laat de parameter weg of gebruik ``hour_start`` om **oplopend** te sorteren "
 "(standaard)."
 
-#: ../../api.rst:840
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1025
 msgid "``GET`` - ``application/version``"
 msgstr "``GET`` - ``application/version``"
 
-#: ../../api.rst:841
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1026
 msgid "Returns the version of DSMR-reader you are running."
 msgstr "Geeft terug welke versie van DSMR-reader je momenteel draait."
 
-#: ../../api.rst:846
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1031
 msgid "Full path: ``/api/v2/application/version``"
 msgstr "Volledig pad: ``/api/v2/application/version``"
 
-#: ../../api.rst:870
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1055
 msgid "``GET`` - ``application/status``"
 msgstr "``GET`` - ``application/status``"
 
-#: ../../api.rst:871
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1056
 msgid ""
 "Returns the status of DSMR-reader, containing the same data as displayed on the "
 "Status page."
@@ -741,7 +951,7 @@ msgstr ""
 "Geeft de status van DSMR-reader terug, vergelijkbaar aan de gegevens die "
 "getoond worden op de Status-pagina."
 
-#: ../../api.rst:876
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:1061
 msgid "Full path: ``/api/v2/application/status``"
 msgstr "Volledig pad: ``/api/v2/application/status``"
 
@@ -782,3 +992,17 @@ msgstr "Volledig pad: ``/api/v2/application/status``"
 
 #~ msgid "**Supervisor**::"
 #~ msgstr "**Supervisor**::"
+
+#~ msgid ""
+#~ "You should pass it in the header of every API call. The header should be "
+#~ "defined as ``X-AUTHKEY`` with value ``<key>``. See below for an example."
+#~ msgstr ""
+#~ "Je moet deze gebruiken voor elke API call die je uitvoert. De header heet "
+#~ "``X-AUTHKEY`` met waarde ``<key>``. Zie hieronder voor een voorbeeld."
+
+#~ msgid ""
+#~ "Alternatively, since ``v2.1.0``, you can use ``Authorization`` with value "
+#~ "``Token <key>``."
+#~ msgstr ""
+#~ "Als alternatief is het sinds ``v2.1.0`` mogelijk om ``Authorization`` met de "
+#~ "waarde ``Token <key>`` te gebruiken."
