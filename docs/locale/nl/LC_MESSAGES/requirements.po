@@ -18,61 +18,69 @@ msgstr ""
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../requirements.rst:2
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:2
 msgid "Requirements"
 msgstr "Vereisten"
 
-#: ../../requirements.rst:6
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:6
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../../requirements.rst:7
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:7
 msgid "For datalogger only: **Any** RaspberryPi or similar"
 msgstr "Voor alleen-datalogger: **Elke** RaspberryPi of vergelijkbaar"
 
-#: ../../requirements.rst:8
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:8
 msgid "For full DSMR-reader: **RaspberryPi 3+** or similar"
 msgstr "Voor volledige DSMR-reader: **RaspberryPi 3+** of vergelijkbaar"
 
-#: ../../requirements.rst:12
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:12
 msgid "Software"
 msgstr "Software"
 
-#: ../../requirements.rst:13
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:13
 msgid "OS: ``Raspbian OS`` or similar"
 msgstr "OS: ``Raspbian OS`` of vergelijkbaar"
 
-#: ../../requirements.rst:14
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:14
 msgid "Disk space: `1+ GB` (depends on whether you archive all readings)"
 msgstr "Schijfruimte: `1+ GB` (afhankelijk van gearchiveerde metingen)"
 
-#: ../../requirements.rst:15
-msgid "Python: `3.5` or higher"
-msgstr "Python: ``3.5`` of hoger"
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:15
+msgid "Python: `3.6` or higher"
+msgstr "Python: ``3.6`` of hoger"
 
-#: ../../requirements.rst:16
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:16
 msgid "P1 telegram cable"
 msgstr "P1 telegram kabel"
 
-#: ../../requirements.rst:17
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:17
 msgid "Smart Meter DSMR versions: `v2`, `v4` or `v5`"
 msgstr "Slimme meter DSMR versies: `v2`, `v4` of `v5`"
 
-#: ../../requirements.rst:21
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:21
 msgid ""
-"Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader "
-"v1.5``"
+"Support for ``Python 3.5`` has been **discontinued** since ``DSMR-reader "
+"v3.0``"
 msgstr ""
-"Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader "
-"v1.5``"
+"Ondersteuning voor ``Python 3.5`` is **vervallen** sinds ``DSMR-reader "
+"v3.0``"
 
-#: ../../requirements.rst:22
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:22
 msgid ""
 "Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader "
 "v2.0``"
 msgstr ""
 "Ondersteuning voor ``Python 3.4`` is **vervallen** sinds ``DSMR-reader "
 "v2.0``"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/requirements.rst:23
+msgid ""
+"Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader "
+"v1.5``"
+msgstr ""
+"Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader "
+"v1.5``"
 
 #~ msgid "Contents"
 #~ msgstr "Inhoudsopgave"

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.dispatch import receiver
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 import django.db.models.signals

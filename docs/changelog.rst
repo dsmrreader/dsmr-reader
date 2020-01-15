@@ -2,6 +2,21 @@ Changelog
 =========
 
 
+v3.0.0 - 2020-01-15
+
+.. warning:: **Change in Python support**
+
+  Support for ``Python 3.5`` has been **dropped** due to the Django upgrade (`#735 <https://github.com/dennissiemensma/dsmr-reader/issues/735>`_).
+
+- [`#735 <https://github.com/dennissiemensma/dsmr-reader/issues/735>`_] Drop support for Python 3.5
+- [`#734 <https://github.com/dennissiemensma/dsmr-reader/issues/734>`_] Upgrade to Django 3.x
+- [`#829 <https://github.com/dennissiemensma/dsmr-reader/issues/829>`_] Several Dutch translation fixes - by mjanssens
+- [`#823 <https://github.com/dennissiemensma/dsmr-reader/issues/823>`_] Remove custom configuration in settings.py
+
+
+----
+
+
 .. warning::
 
     *This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.*
@@ -570,7 +585,7 @@ v1.10.0 - 2017-10-19
 
 .. note::
 
-   This releases turns telegram logging **off by default**. 
+   This releases turns telegram logging **off by default**.
 
 
 ----

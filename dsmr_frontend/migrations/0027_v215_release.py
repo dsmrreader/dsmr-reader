@@ -5,21 +5,8 @@ from django.utils.translation import ugettext_lazy
 
 
 def migrate_forward(apps, schema_editor):
-    import dsmr_frontend.services
-    import dsmr_backend.services.backend
-
-    if dsmr_backend.services.backend.is_recent_installation():
-        # Skip for new installations.
-        return
-
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
-    Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=ugettext_lazy(
-            'DSMR-reader v2.15.0: This is the last release on v2. Switching to v3 requires you to manually upgrade. '
-            'Click the link for more information.'
-        )),
-        redirect_to='frontend:v3-upgrade-redirect'
-    )
+    # If someone if using the v3-branch, we no longer require this migration. Code was removed in v3.
+    pass
 
 
 def migrate_backward(apps, schema_editor):

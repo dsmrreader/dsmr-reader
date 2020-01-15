@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Q
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from dsmr_backend.mixins import ModelUpdateMixin
 
@@ -71,7 +71,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     )
 
     def __str__(self):
-        return self.description or ugettext('Energy Supplier')
+        return self.description or gettext('Energy Supplier')
 
     class Meta:
         default_permissions = tuple()

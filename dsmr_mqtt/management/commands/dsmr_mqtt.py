@@ -1,7 +1,7 @@
 import logging
 
 from django.core.management.base import BaseCommand
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin, StopInfiniteRun
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings

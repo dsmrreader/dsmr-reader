@@ -23,7 +23,7 @@ copyright = '2015 - {}, Dennis Siemensma'.format(datetime.datetime.now().year)
 author = 'Dennis Siemensma'
 
 # The full version, including alpha/beta/rc tags
-#release = '2.x'
+# release = 'v3'
 
 
 # -- General configuration ---------------------------------------------------

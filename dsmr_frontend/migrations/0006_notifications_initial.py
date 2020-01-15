@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.utils import timezone
 from django.db import migrations
 from django.db.migrations.recorder import MigrationRecorder
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 def insert_notifications(apps, schema_editor):

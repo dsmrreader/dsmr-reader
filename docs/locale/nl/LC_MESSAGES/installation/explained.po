@@ -7,647 +7,661 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-29 19:25+0200\n"
-"PO-Revision-Date: 2019-09-29 19:29+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
-#: ../../installation/explained.rst:2
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:2
 msgid "Installation: Explained"
 msgstr "Installatie: Toegelicht"
 
-#: ../../installation/explained.rst:6
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:6
 msgid ""
-"The installation guide may take about *15 to 30 minutes* (for RaspberryPi 3), "
-"but it greatly depends on your Linux skills and whether you need to understand "
-"every step described in this guide."
+"The installation guide may take about *15 to 30 minutes* (for RaspberryPi"
+" 3), but it greatly depends on your Linux skills and whether you need to "
+"understand every step described in this guide."
 msgstr ""
 "Het installeren duurt naar verwachting zo'n *15 a 30 minuten* (op een "
-"RaspberryPi 3), maar hangt vooral af van je eigen vaardigheid op de command "
-"line."
+"RaspberryPi 3), maar hangt vooral af van je eigen vaardigheid op de "
+"command line."
 
-#: ../../installation/explained.rst:11
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:11
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../installation/explained.rst:14
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:14
 msgid "1. Database backend (PostgreSQL)"
 msgstr "1. Databaseopslag (PostgreSQL)"
 
-#: ../../installation/explained.rst:16
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:16
 msgid ""
-"The application stores by default all readings taken from the serial cable. "
-"There is support for **PostgreSQL**, and there used to be support for **MySQL/"
-"MariaDB** as well. The latter is currently deprecated by this project and "
-"support will be removed in DSMR-reader v3.x."
+"The application stores by default all readings taken from the serial "
+"cable. There is support for **PostgreSQL**, and there used to be support "
+"for **MySQL/MariaDB** as well. The latter is currently deprecated by this"
+" project and support will be removed in DSMR-reader v3.x."
 msgstr ""
-"De applicatie slaat de P1-metingen standaard op. Er is ondersteuning voor "
-"**PostgreSQL**, en voorheen ook voor **MySQL/MariaDB**.  Ondersteuning voor "
-"MySQL verdwijnt in DSMR-reader v 3.x."
+"De applicatie slaat de P1-metingen standaard op. Er is ondersteuning voor"
+" **PostgreSQL**, en voorheen ook voor **MySQL/MariaDB**.  Ondersteuning "
+"voor MySQL verdwijnt in DSMR-reader v 3.x."
 
-#: ../../installation/explained.rst:20
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:20
 msgid ""
 "Install PostgreSQL, ``postgresql-server-dev-all`` is required for the "
 "virtualenv installation later in this guide."
 msgstr ""
-"Installeer PostgreSQL. Daarnaast is ``postgresql-server-dev-all`` nodig voor "
-"het installeren van de VirtualEnv later."
+"Installeer PostgreSQL. Daarnaast is ``postgresql-server-dev-all`` nodig "
+"voor het installeren van de VirtualEnv later."
 
-#: ../../installation/explained.rst:22
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:22
 msgid "Install database::"
 msgstr "Installeer database::"
 
-#: ../../installation/explained.rst:28
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:28
 msgid "Does PostgreSQL not start/create the cluster due to locales? E.g.::"
 msgstr "Start PostgreSQL niet wegens een fout in 'locales'? Bijvoorbeeld::"
 
-#: ../../installation/explained.rst:35
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:35
 msgid "Try: ``dpkg-reconfigure locales``."
 msgstr "Probeer: ``dpkg-reconfigure locales``."
 
-#: ../../installation/explained.rst:37
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:37
 msgid ""
-"Still no luck? Try editing ``/etc/environment``, add ``LC_ALL=\"en_US."
-"utf-8\"`` and reboot. Then try ``pg_createcluster 9.4 main --start`` again (or "
-"whatever version you are using)."
+"Still no luck? Try editing ``/etc/environment``, add "
+"``LC_ALL=\"en_US.utf-8\"`` and reboot. Then try ``pg_createcluster 9.4 "
+"main --start`` again (or whatever version you are using)."
 msgstr ""
-"Werkt het nog steeds niet? Open dan dit bestand ``/etc/environment``, voeg "
-"onderaan de regel ``LC_ALL=\"en_US.utf-8\"`` toe en herstart het systeem. "
-"Probeer daarna ``pg_createcluster 9.4 main --start`` (of welke versie je ook "
-"gebruikt)."
+"Werkt het nog steeds niet? Open dan dit bestand ``/etc/environment``, "
+"voeg onderaan de regel ``LC_ALL=\"en_US.utf-8\"`` toe en herstart het "
+"systeem. Probeer daarna ``pg_createcluster 9.4 main --start`` (of welke "
+"versie je ook gebruikt)."
 
-#: ../../installation/explained.rst:40
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:40
 msgid ""
-"(!) Ignore any '*could not change directory to \"/root\": Permission denied*' "
-"errors for the following three commands."
+"(!) Ignore any '*could not change directory to \"/root\": Permission "
+"denied*' errors for the following three commands."
 msgstr ""
-"(!) Negeer voor de volgende drie commando's de foutmelding: '*could not change "
-"directory to \"/root\": Permission denied*'."
+"(!) Negeer voor de volgende drie commando's de foutmelding: '*could not "
+"change directory to \"/root\": Permission denied*'."
 
-#: ../../installation/explained.rst:42
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:42
 msgid "Create database user::"
 msgstr "Creëer databasegebruiker::"
 
-#: ../../installation/explained.rst:46
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:46
 msgid "Create database, owned by the database user we just created::"
 msgstr ""
 "Creëer database, met als eigenaar de databasegebruiker die we net hebben "
 "aangemaakt::"
 
-#: ../../installation/explained.rst:50
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:50
 msgid "Set password for database user::"
 msgstr "Stel wachtwoord in voor databasegebruiker::"
 
-#: ../../installation/explained.rst:56
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:56
 msgid "2. Dependencies"
 msgstr "2. Afhankelijkheden"
 
-#: ../../installation/explained.rst:57
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:57
 msgid ""
 "Now you'll have to install several utilities, required for the Nginx "
-"webserver, Gunicorn application server and cloning the application code from "
-"the Github repository::"
+"webserver, Gunicorn application server and cloning the application code "
+"from the Github repository::"
 msgstr ""
-"Tijd om diverse tools te installeren. Deze zijn nodig voor de Nginx webserver, "
-"de Gunicorn applicatieserver en voor het binnenhalen van de code van de "
-"applicatie vanaf Github::"
+"Tijd om diverse tools te installeren. Deze zijn nodig voor de Nginx "
+"webserver, de Gunicorn applicatieserver en voor het binnenhalen van de "
+"code van de applicatie vanaf Github::"
 
-#: ../../installation/explained.rst:61
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:61
 msgid ""
 "Install ``cu``. The CU program allows easy testing for your DSMR serial "
-"connection. It's very basic but also very effective to simply test whether "
-"your serial cable setup works properly::"
+"connection. It's very basic but also very effective to simply test "
+"whether your serial cable setup works properly::"
 msgstr ""
-"Installeer ``cu``. Met dit programmaatje kunnen kun je vrij gemakkelijk de "
-"DSMR-verbinding testen naar je slimme meter toe. Erg handig om te kijken of "
-"dat überhaupt al lekker werkt::"
+"Installeer ``cu``. Met dit programmaatje kunnen kun je vrij gemakkelijk "
+"de DSMR-verbinding testen naar je slimme meter toe. Erg handig om te "
+"kijken of dat überhaupt al lekker werkt::"
 
-#: ../../installation/explained.rst:68
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:68
 msgid "3. Application user"
 msgstr "3. Applicatiegebruiker"
 
-#: ../../installation/explained.rst:69
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:69
 msgid ""
-"The application runs as ``dsmr`` user by default. This way we do not have to "
-"run the application as ``root``, which is a bad practice anyway."
+"The application runs as ``dsmr`` user by default. This way we do not have"
+" to run the application as ``root``, which is a bad practice anyway."
 msgstr ""
-"De applicatie draait standaard onder de gebruiker ``dsmr``. Hierdoor heeft het "
-"geen ``root``-rechten (nodig), wat over het algemeen zeer afgeraden wordt."
+"De applicatie draait standaard onder de gebruiker ``dsmr``. Hierdoor "
+"heeft het geen ``root``-rechten (nodig), wat over het algemeen zeer "
+"afgeraden wordt."
 
-#: ../../installation/explained.rst:71
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:71
 msgid ""
-"Create user with homedir. The application code and virtualenv will reside in "
-"this directory as well::"
+"Create user with homedir. The application code and virtualenv will reside"
+" in this directory as well::"
 msgstr ""
-"Maak een aparte gebruiker aan met eigen homedir. De code voor de applicatie en "
-"VirtualEnv zetten we later hier in::"
+"Maak een aparte gebruiker aan met eigen homedir. De code voor de "
+"applicatie en VirtualEnv zetten we later hier in::"
 
-#: ../../installation/explained.rst:75
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:75
 msgid ""
-"Our user also requires dialout permissions. So allow the user to perform a "
-"dialout by adding it to the ``dialout`` group::"
+"Our user also requires dialout permissions. So allow the user to perform "
+"a dialout by adding it to the ``dialout`` group::"
 msgstr ""
-"De gebruiker heeft ook toegang nodig om de kabel te kunnen uitlezen. Hiervoor "
-"voegen de we gebruiker toe aan de groep ``dialout``::"
+"De gebruiker heeft ook toegang nodig om de kabel te kunnen uitlezen. "
+"Hiervoor voegen de we gebruiker toe aan de groep ``dialout``::"
 
-#: ../../installation/explained.rst:79
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:79
 msgid ""
 "Either proceed to the next heading **for a test reading** or continue at "
 "chapter 4."
 msgstr ""
-"Ga ofwel door naar het volgende hoofdstuk **voor een testmeting** of ga direct "
-"door naar stap 4."
+"Ga ofwel door naar het volgende hoofdstuk **voor een testmeting** of ga "
+"direct door naar stap 4."
 
-#: ../../installation/explained.rst:83
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:83
 msgid "Your first reading (optional)"
 msgstr "Je allereerste (optionele) meting"
 
-#: ../../installation/explained.rst:87
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:87
 msgid ""
 "**OPTIONAL**: You may skip this section as it's not required for the "
 "application to install. However, if you have never read your meter's P1 "
-"telegram port before, I recommend to perform an initial reading to make sure "
-"everything works as expected."
+"telegram port before, I recommend to perform an initial reading to make "
+"sure everything works as expected."
 msgstr ""
 "**OPTIONEEL**: Je kunt deze stap overslaan wanneer je al eerder een "
-"(test)meting hebt gedaan met je slimme meter. Ik raad het dus vooral aan als "
-"je nog nooit eerder je P1-poort hebt uitgelezen. Hiermee verzeker je jezelf "
-"ook dat de applicatie straks dezelfde (werkende) toegang heeft voor de "
-"metingen."
+"(test)meting hebt gedaan met je slimme meter. Ik raad het dus vooral aan "
+"als je nog nooit eerder je P1-poort hebt uitgelezen. Hiermee verzeker je "
+"jezelf ook dat de applicatie straks dezelfde (werkende) toegang heeft "
+"voor de metingen."
 
-#: ../../installation/explained.rst:89
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:89
 msgid ""
 "Now login as the user we have just created, to perform our very first "
 "reading! ::"
 msgstr ""
-"Log nu in als de gebruiker die we zojuist hebben aangemaakt voor de eerste "
-"testmeting! ::"
+"Log nu in als de gebruiker die we zojuist hebben aangemaakt voor de "
+"eerste testmeting! ::"
 
-#: ../../installation/explained.rst:93
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:93
 msgid "Test with ``cu`` for **DSMR 4+**::"
 msgstr "Test met ``cu`` voor **DSMR 4+**::"
 
-#: ../../installation/explained.rst:97
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:97
 msgid "Or test with ``cu`` for **DSMR 2.2** (untested)::"
 msgstr "Of test met ``cu`` voor **DSMR 2.2** (ongetest)::"
 
-#: ../../installation/explained.rst:101
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:101
 msgid ""
-"You now should see something similar to ``Connected.`` and a wall of text and "
-"numbers *within 10 seconds*. Nothing? Try different BAUD rate, as mentioned "
-"above. You might also check out a useful blog, `such as this one (Dutch) "
+"You now should see something similar to ``Connected.`` and a wall of text"
+" and numbers *within 10 seconds*. Nothing? Try different BAUD rate, as "
+"mentioned above. You might also check out a useful blog, `such as this "
+"one (Dutch) <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
+msgstr ""
+"Je zou nu iets moeten zien als ``Connected.``. Vervolgens krijg je, als "
+"het goed is, binnen tien seconden een hele lap tekst te zijn met een hoop"
+" cijfers. Werkt het niet? Probeer dan een andere BAUD-waarde, zoals "
+"hierboven beschreven. Of `kijk op een nuttig weblog "
 "<http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
-msgstr ""
-"Je zou nu iets moeten zien als ``Connected.``. Vervolgens krijg je, als het "
-"goed is, binnen tien seconden een hele lap tekst te zijn met een hoop cijfers. "
-"Werkt het niet? Probeer dan een andere BAUD-waarde, zoals hierboven "
-"beschreven. Of `kijk op een nuttig weblog <http://gejanssen.com/howto/Slimme-"
-"meter-uitlezen/>`_."
 
-#: ../../installation/explained.rst:103
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:103
 msgid ""
-"To exit cu, type \"``q.``\", hit Enter and wait for a few seconds. It should "
-"exit with the message ``Disconnected.``."
+"To exit cu, type \"``q.``\", hit Enter and wait for a few seconds. It "
+"should exit with the message ``Disconnected.``."
 msgstr ""
-"Om cu af te sluiten, typ \"``q.``\", druk op Enter en wacht voor een paar "
-"seconden. Het programma sluit af met de melding ``Disconnected.``."
+"Om cu af te sluiten, typ \"``q.``\", druk op Enter en wacht voor een paar"
+" seconden. Het programma sluit af met de melding ``Disconnected.``."
 
-#: ../../installation/explained.rst:107
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:107
 msgid "4. Webserver/Nginx (part 1)"
 msgstr "4. Webserver/Nginx (deel 1)"
 
-#: ../../installation/explained.rst:109
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:109
 msgid ""
-"*We will now prepare the webserver, Nginx. It will serve all application's "
-"static files directly and proxy any application requests to the backend, "
-"Gunicorn controlled by Supervisor, which we will configure later on.*"
+"*We will now prepare the webserver, Nginx. It will serve all "
+"application's static files directly and proxy any application requests to"
+" the backend, Gunicorn controlled by Supervisor, which we will configure "
+"later on.*"
 msgstr ""
-"*We configureren vervolgens de webserver (Nginx). Deze serveert alle statische "
-"bestanden en geeft de applicatie-verzoeken door naar de backend, waar de "
-"applicatie in Gunicorn draait onder Supervisor. Deze stellen we later in.*"
+"*We configureren vervolgens de webserver (Nginx). Deze serveert alle "
+"statische bestanden en geeft de applicatie-verzoeken door naar de "
+"backend, waar de applicatie in Gunicorn draait onder Supervisor. Deze "
+"stellen we later in.*"
 
-#: ../../installation/explained.rst:111 ../../installation/explained.rst:249
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:111
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:249
 msgid ""
-"Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL "
-"+ D to log out of the ``dsmr`` user."
+"Make sure you are acting here as ``root`` or ``sudo`` user. If not, press"
+" CTRL + D to log out of the ``dsmr`` user."
 msgstr ""
-"Zorg ervoor dat je hier ``root``- of ``sudo``-gebruiker bent. Zo niet, druk op "
-"CTRL + D om uit te loggen als ``dsmr`` gebruiker."
+"Zorg ervoor dat je hier ``root``- of ``sudo``-gebruiker bent. Zo niet, "
+"druk op CTRL + D om uit te loggen als ``dsmr`` gebruiker."
 
-#: ../../installation/explained.rst:113
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:113
 msgid ""
-"Django will later copy all static files to the directory below, used by Nginx "
-"to serve statics. Therefor it requires (write) access to it::"
+"Django will later copy all static files to the directory below, used by "
+"Nginx to serve statics. Therefor it requires (write) access to it::"
 msgstr ""
-"Django kopieert alle statische bestanden naar een aparte map, die weer door "
-"Nginx gebruikt wordt. Daarom is er tevens (schrijf)toegang voor nodig::"
+"Django kopieert alle statische bestanden naar een aparte map, die weer "
+"door Nginx gebruikt wordt. Daarom is er tevens (schrijf)toegang voor "
+"nodig::"
 
-#: ../../installation/explained.rst:121
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:121
 msgid "5. Clone project code from Github"
 msgstr "5. Kloon project code vanaf Github"
 
-#: ../../installation/explained.rst:122
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:122
 msgid ""
-"Now is the time to clone the code from the repository into the homedir we "
-"created."
+"Now is the time to clone the code from the repository into the homedir we"
+" created."
 msgstr ""
-"Nu kunnen we de code van de applicatie van Github downloaden en in de homedir "
-"zetten die we net aangemaakt hebben."
+"Nu kunnen we de code van de applicatie van Github downloaden en in de "
+"homedir zetten die we net aangemaakt hebben."
 
-#: ../../installation/explained.rst:124
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:124
 msgid ""
-"Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - "
-"dsmr``)"
+"Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo "
+"su - dsmr``)"
 msgstr ""
-"Zorg ervoor dat je ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: "
-"``sudo su - dsmr``)"
+"Zorg ervoor dat je ingelogd bent als ``dsmr``-gebruiker (zo niet, typ "
+"dan: ``sudo su - dsmr``)"
 
-#: ../../installation/explained.rst:126
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:126
 msgid "Clone the repository::"
 msgstr "Kloon de repository::"
 
-#: ../../installation/explained.rst:130
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:130
 msgid ""
-"This may take a few seconds. When finished, you should see a new folder called "
-"``dsmr-reader``, containing a clone of the Github repository."
+"This may take a few seconds. When finished, you should see a new folder "
+"called ``dsmr-reader``, containing a clone of the Github repository."
 msgstr ""
-"Dit kan enkele seconden in beslag nemen. Als het goed is zie je hierna een map "
-"genaamd ``dsmr-reader``, met daarin een kopie van de repository zoals die op "
-"Github staat."
+"Dit kan enkele seconden in beslag nemen. Als het goed is zie je hierna "
+"een map genaamd ``dsmr-reader``, met daarin een kopie van de repository "
+"zoals die op Github staat."
 
-#: ../../installation/explained.rst:134
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:134
 msgid "6. Virtualenv"
 msgstr "6. VirtualEnv"
 
-#: ../../installation/explained.rst:136
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:136
 msgid ""
-"The dependencies our application uses are stored in a separate environment, "
-"also called **VirtualEnv**."
+"The dependencies our application uses are stored in a separate "
+"environment, also called **VirtualEnv**."
 msgstr ""
-"Alle (externe) afhankelijkheden worden opgeslagen in een aparte omgeving, ook "
-"wel **VirtualEnv** genoemd."
+"Alle (externe) afhankelijkheden worden opgeslagen in een aparte omgeving,"
+" ook wel **VirtualEnv** genoemd."
 
-#: ../../installation/explained.rst:138
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:138
 msgid ""
-"Although it's just a folder inside our user's homedir, it's very effective as "
-"it allows us to keep dependencies isolated or to run different versions of the "
-"same package on the same machine. `More information about this subject can be "
-"found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
+"Although it's just a folder inside our user's homedir, it's very "
+"effective as it allows us to keep dependencies isolated or to run "
+"different versions of the same package on the same machine. `More "
+"information about this subject can be found here <http://docs.python-"
+"guide.org/en/latest/dev/virtualenvs/>`_."
 msgstr ""
-"Dit is allemaal erg handig, ondanks dat het feitelijk niets meer voorstelt dan "
-"een aparte map binnen de homedir van onze gebruiker. Hierdoor kunnen we "
-"namelijk meerdere versie van software op hetzelfde systeem installeren, zonder "
-"dat dat elkaar bijt. Meer informatie hierover `kan hier gevonden worden "
-"<http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
+"Dit is allemaal erg handig, ondanks dat het feitelijk niets meer "
+"voorstelt dan een aparte map binnen de homedir van onze gebruiker. "
+"Hierdoor kunnen we namelijk meerdere versie van software op hetzelfde "
+"systeem installeren, zonder dat dat elkaar bijt. Meer informatie hierover"
+" `kan hier gevonden worden <http://docs.python-"
+"guide.org/en/latest/dev/virtualenvs/>`_."
 
-#: ../../installation/explained.rst:141
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:141
 msgid ""
-"Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su "
-"- dsmr``)"
+"Make sure you are still acting as ``dsmr`` user (if not then enter: "
+"``sudo su - dsmr``)"
 msgstr ""
-"Zorg ervoor dat je nog steeds ingelogd bent als ``dsmr``-gebruiker (zo niet, "
-"typ dan: ``sudo su - dsmr``)"
+"Zorg ervoor dat je nog steeds ingelogd bent als ``dsmr``-gebruiker (zo "
+"niet, typ dan: ``sudo su - dsmr``)"
 
-#: ../../installation/explained.rst:143
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:143
 msgid "Create folder for the virtualenv(s) of this user::"
 msgstr "Maak map aan voor de VirtualEnv van deze gebruiker::"
 
-#: ../../installation/explained.rst:147
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:147
 msgid ""
 "Create a new virtualenv, we usually use the same name for it as the "
 "application or project::"
 msgstr ""
-"Maak een nieuwe VirtualEnv aan. Het is gebruikelijk om hiervoor dezelfde naam "
-"te gebruiken als die van de applicatie of het project."
+"Maak een nieuwe VirtualEnv aan. Het is gebruikelijk om hiervoor dezelfde "
+"naam te gebruiken als die van de applicatie of het project."
 
-#: ../../installation/explained.rst:153
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:153
 msgid ""
-"Note that it's important to specify **Python 3** as the default interpreter."
+"Note that it's important to specify **Python 3** as the default "
+"interpreter."
 msgstr ""
-"N.B.: het is belangrijk dat je voor deze VirtualEnv aangeeft dat **Python 3** "
-"de gewenste standaardversie is::"
+"N.B.: het is belangrijk dat je voor deze VirtualEnv aangeeft dat **Python"
+" 3** de gewenste standaardversie is::"
 
-#: ../../installation/explained.rst:155
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:155
 msgid ""
-"Each time you work as ``dsmr`` user, you will have to switch to the virtualenv "
-"with these commands::"
+"Each time you work as ``dsmr`` user, you will have to switch to the "
+"virtualenv with these commands::"
 msgstr ""
-"Elke keer dat je als ``dsmr`` gebruiker werkt, zul je moeten wisselen naar de "
-"virtualenv met deze commando's::"
+"Elke keer dat je als ``dsmr`` gebruiker werkt, zul je moeten wisselen "
+"naar de virtualenv met deze commando's::"
 
-#: ../../installation/explained.rst:160
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:160
 msgid ""
-"Let's have both commands executed **automatically** every time we login as "
-"``dsmr`` user, by adding them ``~/.bashrc`` file::"
+"Let's have both commands executed **automatically** every time we login "
+"as ``dsmr`` user, by adding them ``~/.bashrc`` file::"
 msgstr ""
-"Laten we ervoor zorgen dat deze commando's **automatisch** uitgevoerd worden, "
-"zodra we inloggen als ``dsmr`` gebruiker. Dit doen we door ze toe te voegen "
-"aan het ``~/.bashrc`` bestand::"
+"Laten we ervoor zorgen dat deze commando's **automatisch** uitgevoerd "
+"worden, zodra we inloggen als ``dsmr`` gebruiker. Dit doen we door ze toe"
+" te voegen aan het ``~/.bashrc`` bestand::"
 
-#: ../../installation/explained.rst:165
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:165
 msgid ""
-"This will both activate the virtual environment and cd you into the right "
-"directory on your **next login** as ``dsmr`` user."
+"This will both activate the virtual environment and cd you into the right"
+" directory on your **next login** as ``dsmr`` user."
 msgstr ""
-"Hiermee wordt zowel de VirtualEnv geactiveerd en ga je direct naar de juiste "
-"map. Dit werkt de **eerstvolgende keer** dat je inlogt als ``dsmr`` gebruiker."
+"Hiermee wordt zowel de VirtualEnv geactiveerd en ga je direct naar de "
+"juiste map. Dit werkt de **eerstvolgende keer** dat je inlogt als "
+"``dsmr`` gebruiker."
 
-#: ../../installation/explained.rst:169
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:169
 msgid ""
-"You can easily test whether you've configured this correctly by logging out "
-"the ``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``."
+"You can easily test whether you've configured this correctly by logging "
+"out the ``dsmr`` user (CTRL + D) and login again using ``sudo su - "
+"dsmr``."
 msgstr ""
-"Je kunt dit vrij gemakkelijk testen door uit te loggen als ``dsmr`` gebruiker "
-"(met CTRL + D) en vervolgens weer in te loggen met ``sudo su - dsmr``."
+"Je kunt dit vrij gemakkelijk testen door uit te loggen als ``dsmr`` "
+"gebruiker (met CTRL + D) en vervolgens weer in te loggen met ``sudo su - "
+"dsmr``."
 
-#: ../../installation/explained.rst:171
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:171
 msgid ""
-"You should see the terminal have a ``(dsmrreader)`` prefix now, for example: "
-"``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
+"You should see the terminal have a ``(dsmrreader)`` prefix now, for "
+"example: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
 msgstr ""
 "Als het goed is heeft je terminal nu een ``(dsmrreader)`` prefix, "
 "bijvoorbeeld: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
 
-#: ../../installation/explained.rst:173
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:173
 msgid ""
-"Make sure you've read and executed the note above, because you'll need it for "
-"the next chapter."
+"Make sure you've read and executed the note above, because you'll need it"
+" for the next chapter."
 msgstr ""
 "Zorg ervoor dat je de bovenstaande notitie hebt gelezen en uitgevoerd, "
 "aangezien ze nodig zijn voor het volgende hoofdstuk."
 
-#: ../../installation/explained.rst:177
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:177
 msgid "7. Application configuration & setup"
 msgstr "7. Applicatieconfiguratie"
 
-#: ../../installation/explained.rst:178
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:178
 msgid ""
-"The application will also need the appropriate database client, which is not "
-"installed by default. For this I created two ready-to-use requirements files, "
-"which will also install all other dependencies required, such as the Django "
-"framework."
+"The application will also need the appropriate database client, which is "
+"not installed by default. For this I created two ready-to-use "
+"requirements files, which will also install all other dependencies "
+"required, such as the Django framework."
 msgstr ""
 "De applicatie heeft een databaseconnector nodig om de gegevens te kunnen "
-"opslaan. Daarvoor heb ik een tweetal requirements-bestanden gemaakt, waar "
-"alles al in staat wat nodig is. Zoals bijvoorbeeld Django en de "
+"opslaan. Daarvoor heb ik een tweetal requirements-bestanden gemaakt, waar"
+" alles al in staat wat nodig is. Zoals bijvoorbeeld Django en de "
 "databaseverbinding."
 
-#: ../../installation/explained.rst:181
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:181
 msgid ""
-"The ``base.txt`` contains requirements which the application needs anyway, no "
-"matter which backend you've choosen."
+"The ``base.txt`` contains requirements which the application needs "
+"anyway, no matter which backend you've choosen."
 msgstr ""
-"Het bestand ``base.txt`` bevat alle afhankelijkheden die de applicatie sowieso "
-"nodig heeft, ongeacht de databasekeuze die je gemaakt hebt."
+"Het bestand ``base.txt`` bevat alle afhankelijkheden die de applicatie "
+"sowieso nodig heeft, ongeacht de databasekeuze die je gemaakt hebt."
 
-#: ../../installation/explained.rst:185
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:185
 msgid ""
-"**Installation of the requirements below might take a while**, depending on "
-"your Internet connection, RaspberryPi speed and resources (generally CPU) "
-"available. Nothing to worry about. :]"
+"**Installation of the requirements below might take a while**, depending "
+"on your Internet connection, RaspberryPi speed and resources (generally "
+"CPU) available. Nothing to worry about. :]"
 msgstr ""
-"**De installatie van de volgende afhankelijkheden kan enige tijd in beslag "
-"nemen**. Dit varieert en is sterk afhankelijk van de snelheid van je Internet-"
-"verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te maken wanneer dit "
-"lang lijkt te duren. :]"
+"**De installatie van de volgende afhankelijkheden kan enige tijd in "
+"beslag nemen**. Dit varieert en is sterk afhankelijk van de snelheid van "
+"je Internet-verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te "
+"maken wanneer dit lang lijkt te duren. :]"
 
-#: ../../installation/explained.rst:187
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:187
 msgid "Install dependencies::"
 msgstr "Installeer afhankelijkheden::"
 
-#: ../../installation/explained.rst:194
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:194
 msgid ""
-"Did everything install without fatal errors? If the database client refuses to "
-"install due to missing files/configs, make sure you've installed ``postgresql-"
-"server-dev-all`` earlier in the process, when you installed the database "
-"server itself."
+"Did everything install without fatal errors? If the database client "
+"refuses to install due to missing files/configs, make sure you've "
+"installed ``postgresql-server-dev-all`` earlier in the process, when you "
+"installed the database server itself."
 msgstr ""
 "Zonder problemen alles kunnen installeren? Mocht de database client niet "
-"willen installeren wegens missende bestanden, controleer dan of je eerder "
-"tijdens de installatie het volgende hebt uitgevoerd: als het goed is heb je "
-"``postgresql-server-dev-all`` geïnstalleerd, tegelijkertijd met de "
+"willen installeren wegens missende bestanden, controleer dan of je eerder"
+" tijdens de installatie het volgende hebt uitgevoerd: als het goed is heb"
+" je ``postgresql-server-dev-all`` geïnstalleerd, tegelijkertijd met de "
 "databaseserver."
 
-#: ../../installation/explained.rst:199
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:199
 msgid "Optional: Restore a database backup"
 msgstr "Optioneel: Database back-up terugzetten"
 
-#: ../../installation/explained.rst:203
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:203
 msgid ""
-"If you need to restore a database backup with your existing data, this is the "
-"moment to do it."
+"If you need to restore a database backup with your existing data, this is"
+" the moment to do it."
 msgstr ""
-"Indien je een back-up van de database wilt terugzetten met je oude gegevens, "
-"dit is het moment om dat te doen."
+"Indien je een back-up van de database wilt terugzetten met je oude "
+"gegevens, dit is het moment om dat te doen."
 
-#: ../../installation/explained.rst:205
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:205
 msgid "Restoring a database backup? :doc:`See for instructions here <restore>`."
-msgstr ""
-"Database back-up terugzetten? :doc:`Zie hier voor instructies <restore>`."
+msgstr "Database back-up terugzetten? :doc:`Zie hier voor instructies <restore>`."
 
-#: ../../installation/explained.rst:210
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:210
 msgid "8. Bootstrapping"
 msgstr "8. Initialisatie"
 
-#: ../../installation/explained.rst:211
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:211
 msgid ""
-"Now it's time to bootstrap the application and check whether all settings are "
-"good and requirements are met."
+"Now it's time to bootstrap the application and check whether all settings"
+" are good and requirements are met."
 msgstr ""
-"Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie proberen "
-"te initialiseren."
+"Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie "
+"proberen te initialiseren."
 
-#: ../../installation/explained.rst:213
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:213
 msgid "Execute this to initialize the database we've created earlier::"
 msgstr "Voer dit uit om de database te initialiseren::"
 
-#: ../../installation/explained.rst:217
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:217
 msgid ""
-"Prepare static files for webinterface. This will copy all static files to the "
-"directory we created for Nginx earlier in the process. It allows us to have "
-"Nginx serve static files outside our project/code root."
+"Prepare static files for webinterface. This will copy all static files to"
+" the directory we created for Nginx earlier in the process. It allows us "
+"to have Nginx serve static files outside our project/code root."
 msgstr ""
-"Ga nu bezig met de statische bestanden voor de webinterface. Dit kopieert alle "
-"statische bestanden in de map die we eerder, vlak na de installatie voor "
-"Nginx, hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden kan hosten "
-"buiten de code-bestanden."
+"Ga nu bezig met de statische bestanden voor de webinterface. Dit kopieert"
+" alle statische bestanden in de map die we eerder, vlak na de installatie"
+" voor Nginx, hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden"
+" kan hosten buiten de code-bestanden."
 
-#: ../../installation/explained.rst:220
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:220
 msgid "Sync static files::"
 msgstr "Synchroniseer statische bestanden::"
 
-#: ../../installation/explained.rst:224
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:224
 msgid ""
-"Create an application superuser. Django will prompt you for a password. The "
-"credentials generated can be used to access the administration panel inside "
-"the application. Alter username and email if you prefer other credentials, but "
-"email is not used in the application anyway."
+"Create an application superuser. Django will prompt you for a password. "
+"The credentials generated can be used to access the administration panel "
+"inside the application. Alter username and email if you prefer other "
+"credentials, but email is not used in the application anyway."
 msgstr ""
-"Maak een gebruiker aan voor binnen de applicatie. Django vraagt je om een "
-"wachtwoord te kiezen. Met deze gegevens kun je het beheerderspaneel binnen de "
-"applicatie gebruiken. Indien gewenst kun je een andere gebruikersnaam kiezen. "
-"Het e-mailadres maakt niet uit, want de applicatie ondersteunt toch geen e-"
-"mail."
+"Maak een gebruiker aan voor binnen de applicatie. Django vraagt je om een"
+" wachtwoord te kiezen. Met deze gegevens kun je het beheerderspaneel "
+"binnen de applicatie gebruiken. Indien gewenst kun je een andere "
+"gebruikersnaam kiezen. Het e-mailadres maakt niet uit, want de applicatie"
+" ondersteunt toch geen e-mail."
 
-#: ../../installation/explained.rst:227
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:227
 msgid "Create your user::"
 msgstr "Creëer je eigen gebruiker::"
 
-#: ../../installation/explained.rst:233
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:233
 msgid ""
-"Because you have shell access you may reset your user's password at any time "
-"(in case you forget it). Just enter this for a password reset::"
+"Because you have shell access you may reset your user's password at any "
+"time (in case you forget it). Just enter this for a password reset::"
 msgstr ""
 "Wachtwoord ooit vergeten? Via de command line kun je je wachtwoord (bij "
 "verlies) hiermee aanpassen::"
 
-#: ../../installation/explained.rst:237
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:237
 msgid "You've almost completed the installation now."
 msgstr "Je bent op dit punt bijna klaar met de installatie."
 
-#: ../../installation/explained.rst:241
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:241
 msgid "9. Webserver/Nginx (part 2)"
 msgstr "9. Webserver/Nginx (deel 2)"
 
-#: ../../installation/explained.rst:245
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:245
 msgid ""
 "This installation guide asumes you run the Nginx webserver for this "
 "application only."
 msgstr ""
-"Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver alleen "
-"gebruikt voor deze applicatie."
+"Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver "
+"alleen gebruikt voor deze applicatie."
 
-#: ../../installation/explained.rst:247
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:247
 msgid ""
-"It's possible to have other applications use Nginx as well, but that requires "
-"you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will "
-"copy below."
+"It's possible to have other applications use Nginx as well, but that "
+"requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, "
+"which you will copy below."
 msgstr ""
-"Het is uiteraard mogelijk dat andere applicaties ook Nginx gebruiken, maar "
-"daarvoor zul je de wildcard moet weghalen in de ``dsmr-webinterface`` vhost, "
-"die je hieronder kopieert."
+"Het is uiteraard mogelijk dat andere applicaties ook Nginx gebruiken, "
+"maar daarvoor zul je de wildcard moet weghalen in de ``dsmr-"
+"webinterface`` vhost, die je hieronder kopieert."
 
-#: ../../installation/explained.rst:251
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:251
 msgid ""
-"Remove the default Nginx vhost (**only when you do not use it yourself, see "
-"the note above**)::"
+"Remove the default Nginx vhost (**only when you do not use it yourself, "
+"see the note above**)::"
 msgstr ""
-"Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf gebruikt** "
-"(zie de notitie hierboven)::"
+"Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf "
+"gebruikt** (zie de notitie hierboven)::"
 
-#: ../../installation/explained.rst:255
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:255
 msgid ""
-"Copy application vhost, **it will listen to any hostname** (wildcard), but you "
-"may change that if you feel like you need to. It won't affect the application "
-"anyway::"
+"Copy application vhost, **it will listen to any hostname** (wildcard), "
+"but you may change that if you feel like you need to. It won't affect the"
+" application anyway::"
 msgstr ""
 "Kopieer de vhost voor de applicatie. Deze luistert standaard naar **elke "
-"hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te passen::"
+"hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te "
+"passen::"
 
-#: ../../installation/explained.rst:259
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:260
 msgid ""
-"Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::"
+"Let Nginx verify vhost syntax and reload Nginx when ``configtest`` "
+"passes::"
 msgstr ""
-"Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad Nginx "
-"vervolgens wanneer de ``configtest`` lukt::"
+"Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad "
+"Nginx vervolgens wanneer de ``configtest`` lukt::"
 
-#: ../../installation/explained.rst:268
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:269
 msgid "10. Supervisor"
 msgstr "10. Supervisor"
 
-#: ../../installation/explained.rst:269
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:270
 msgid ""
-"Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run "
-"our application's web interface and background jobs used. It's also configured "
-"to bring the entire application up again after a shutdown or reboot."
+"Now we configure `Supervisor <http://supervisord.org/>`_, which is used "
+"to run our application's web interface and background jobs used. It's "
+"also configured to bring the entire application up again after a shutdown"
+" or reboot."
 msgstr ""
-"We gaan nu `Supervisor <http://supervisord.org/>`_ configureren, die gebruikt "
-"wordt om de applicatie en achtergrondprocessen te draaien. Tevens zorgt "
-"Supervisor ervoor dat deze processen bij het (opnieuw) opstarten automatisch "
-"draaien."
+"We gaan nu `Supervisor <http://supervisord.org/>`_ configureren, die "
+"gebruikt wordt om de applicatie en achtergrondprocessen te draaien. "
+"Tevens zorgt Supervisor ervoor dat deze processen bij het (opnieuw) "
+"opstarten automatisch draaien."
 
-#: ../../installation/explained.rst:272
-msgid "Copy the configuration file for Supervisor::"
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:273
+#, fuzzy
+msgid "Copy the configuration files for Supervisor::"
 msgstr "Kopieer het configuratie-bestand voor Supervisor::"
 
-#: ../../installation/explained.rst:276
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:279
 msgid "Login to ``supervisorctl`` management console::"
 msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
 
-#: ../../installation/explained.rst:280
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:283
 msgid ""
-"Enter these commands (**listed after the** ``>``). It will ask Supervisor to "
-"recheck its config directory and use/reload the files::"
+"Enter these commands (**listed after the** ``>``). It will ask Supervisor"
+" to recheck its config directory and use/reload the files::"
 msgstr ""
-"Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor dat "
-"Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
+"Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor"
+" dat Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
 
-#: ../../installation/explained.rst:286
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:289
 msgid ""
-"Three processes should be started or running. Make sure they don't end up in "
-"``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few "
-"times."
+"Three processes should be started or running. Make sure they don't end up"
+" in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` "
+"command a few times."
 msgstr ""
 "Er draaien als het goed is altijd **drie** processen. Kijk goed of ze "
-"uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn gekomen. Je "
-"kunt het overzicht verversen door ``status`` te typen."
+"uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn "
+"gekomen. Je kunt het overzicht verversen door ``status`` te typen."
 
-#: ../../installation/explained.rst:288
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:291
 msgid "When still in ``supervisorctl``'s console, type::"
 msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"
 
-#: ../../installation/explained.rst:292
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:295
 msgid "Example of everything running well::"
 msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
-#: ../../installation/explained.rst:298
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:301
 msgid ""
-"Want to check whether the datalogger works? Just tail its log in supervisor "
-"with::"
+"Want to check whether the datalogger works? Just tail its log in "
+"supervisor with::"
 msgstr ""
 "Wil je controleren of de datalogger zijn werk goed doet? Bekijk dan het "
 "logbestand in supervisor met::"
 
-#: ../../installation/explained.rst:302
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:305
 msgid ""
-"You should see similar output as the ``cu``-command printed earlier in the "
-"installation process."
+"You should see similar output as the ``cu``-command printed earlier in "
+"the installation process."
 msgstr ""
 "Uiteindelijk zou je ongeveer dezelfde lap tekst moeten zien als toen we "
 "handmatig gemeten hebben met het ``cu``-programma."
 
-#: ../../installation/explained.rst:304
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:307
 msgid ""
-"Want to quit supervisor? ``CTRL + C`` to stop tailing and then ``CTRL + D`` "
-"once to exit supervisor command line."
+"Want to quit supervisor? ``CTRL + C`` to stop tailing and then ``CTRL + "
+"D`` once to exit supervisor command line."
 msgstr ""
-"Wil je uit supervisor? Druk dan op ``CTRL + C`` om het logbestand niet meer te "
-"bekijken en vervolgens op ``CTRL + D`` om uit supervisor te gaan."
+"Wil je uit supervisor? Druk dan op ``CTRL + C`` om het logbestand niet "
+"meer te bekijken en vervolgens op ``CTRL + D`` om uit supervisor te gaan."
 
-#: ../../installation/explained.rst:310
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/explained.rst:313
 msgid ":doc:`Finished? Go to setting up the application<../application>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
 
 #~ msgid ""
-#~ "Put both commands below in the ``dsmr`` user's ``~/.bashrc`` file with your "
-#~ "favorite text editor::"
+#~ "Put both commands below in the "
+#~ "``dsmr`` user's ``~/.bashrc`` file with "
+#~ "your favorite text editor::"
 #~ msgstr ""
-#~ "Zet beide commands in het ``~/.bashrc`` bestand van de ``dsmr`` gebruiker "
+#~ "Zet beide commands in het ``~/.bashrc``"
+#~ " bestand van de ``dsmr`` gebruiker "
 #~ "met je favoriete bestandseditor::"
 
 #~ msgid ""
-#~ "**Optional**: Do you need to restore a **PostgreSQL** database backup as "
+#~ "**Optional**: Do you need to restore "
+#~ "a **PostgreSQL** database backup as "
 #~ "well?"
 #~ msgstr ""
-#~ "**Optioneel**: Wil je ook nog een **PostgreSQL** database back-up "
-#~ "herstellen?"
+#~ "**Optioneel**: Wil je ook nog een "
+#~ "**PostgreSQL** database back-up herstellen?"
 
 #~ msgid "Restore an uncompressed (``.sql``) backup with::"
 #~ msgstr "Herstel een ongecomprimeerde (``.sql``) back-up met::"
@@ -662,23 +676,34 @@ msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
 #~ msgstr "(Legacy) MySQL/MariaDB"
 
 #~ msgid ""
-#~ "Support for the MySQL database backend is deprecated and will be removed in "
-#~ "a later release. Please use a PostgreSQL database instead. Users already "
-#~ "running MySQL will be supported in migrating at a later moment."
+#~ "Support for the MySQL database backend"
+#~ " is deprecated and will be removed"
+#~ " in a later release. Please use "
+#~ "a PostgreSQL database instead. Users "
+#~ "already running MySQL will be supported"
+#~ " in migrating at a later moment."
 #~ msgstr ""
-#~ "Gebruik van  MySQL-databases wordt afgeraden en de ondersteuning hiervoor "
-#~ "stopt in een latere release. Gebruik daarom PostgreSQL. Gebruikers die dit "
-#~ "project al op MySQL draaien krijgen in de toekomst ondersteuning om te "
+#~ "Gebruik van  MySQL-databases wordt "
+#~ "afgeraden en de ondersteuning hiervoor "
+#~ "stopt in een latere release. Gebruik "
+#~ "daarom PostgreSQL. Gebruikers die dit "
+#~ "project al op MySQL draaien krijgen "
+#~ "in de toekomst ondersteuning om te "
 #~ "migreren."
 
 #~ msgid ""
-#~ "Install MariaDB. You can also choose to install the closed source MySQL, as "
-#~ "they should be interchangeable anyway. ``libmysqlclient-dev`` is required "
-#~ "for the virtualenv installation later in this guide."
+#~ "Install MariaDB. You can also choose "
+#~ "to install the closed source MySQL, "
+#~ "as they should be interchangeable "
+#~ "anyway. ``libmysqlclient-dev`` is required "
+#~ "for the virtualenv installation later in"
+#~ " this guide."
 #~ msgstr ""
-#~ "Installeer MariaDB. Je kunt er ook voor kiezen om het closed-source MySQL "
-#~ "te installeren. Welke je ook kiest, ``libmysqlclient-dev`` is later nodig "
-#~ "voor de VirtualEnv."
+#~ "Installeer MariaDB. Je kunt er ook "
+#~ "voor kiezen om het closed-source "
+#~ "MySQL te installeren. Welke je ook "
+#~ "kiest, ``libmysqlclient-dev`` is later "
+#~ "nodig voor de VirtualEnv."
 
 #~ msgid "Create database::"
 #~ msgstr "Creëer database::"
@@ -700,15 +725,24 @@ msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
 
 #~ msgid "Or did you choose MySQL/MariaDB? Execute these two commands::"
 #~ msgstr ""
-#~ "Of heb je gekozen voor MySQL/MariaDB? Voer dan deze twee commando's uit::"
+#~ "Of heb je gekozen voor MySQL/MariaDB?"
+#~ " Voer dan deze twee commando's uit::"
 
 #~ msgid ""
-#~ "Did everything install without fatal errors? If the database client refuses "
-#~ "to install due to missing files/configs, make sure you've installed "
-#~ "``libmysqlclient-dev`` earlier in the process, when you installed the "
-#~ "database server itself."
+#~ "Did everything install without fatal "
+#~ "errors? If the database client refuses"
+#~ " to install due to missing "
+#~ "files/configs, make sure you've installed "
+#~ "``libmysqlclient-dev`` earlier in the "
+#~ "process, when you installed the database"
+#~ " server itself."
 #~ msgstr ""
-#~ "Zonder problemen alles kunnen installeren? Mocht de database client niet "
-#~ "willen installeren wegens missende bestanden, controleer dan of je eerder "
-#~ "tijdens de installatie het volgende hebt uitgevoerd: als het goed is heb je "
-#~ "``libmysqlclient-dev`` geïnstalleerd, tegelijkertijd met de databaseserver."
+#~ "Zonder problemen alles kunnen installeren? "
+#~ "Mocht de database client niet willen "
+#~ "installeren wegens missende bestanden, "
+#~ "controleer dan of je eerder tijdens "
+#~ "de installatie het volgende hebt "
+#~ "uitgevoerd: als het goed is heb je"
+#~ " ``libmysqlclient-dev`` geïnstalleerd, "
+#~ "tegelijkertijd met de databaseserver."
+

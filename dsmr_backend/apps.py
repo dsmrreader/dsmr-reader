@@ -1,6 +1,6 @@
 import warnings
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.apps import AppConfig
 from django.db import connection
 from django.conf import settings
