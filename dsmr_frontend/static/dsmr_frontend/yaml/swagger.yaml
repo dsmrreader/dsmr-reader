@@ -440,7 +440,7 @@ paths:
                   value:
                     id: 1
                     timestamp: '2020-01-15T20:13:40+01:00'
-                    dsmr_version: 42
+                    dsmr_version: '42'
                     electricity_tariff: 1
                     power_failure_count: 3
                     long_power_failure_count: 0
@@ -531,6 +531,26 @@ paths:
       responses:
         200:
           description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    id: 1
+                    timestamp: '2020-01-15T12:34:56+01:00'
+                    dsmr_version: '50'
+                    electricity_tariff: null
+                    power_failure_count: 1
+                    long_power_failure_count: 0
+                    voltage_sag_count_l1: 5
+                    voltage_sag_count_l2: 0
+                    voltage_sag_count_l3: 0
+                    voltage_swell_count_l1: 6
+                    voltage_swell_count_l2: 0
+                    voltage_swell_count_l3: 0
+                    rejected_telegrams: 104
+                    latest_telegram: null
         400:
           description: Bad request
         403:
