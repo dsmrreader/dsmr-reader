@@ -9,7 +9,7 @@
 			"name": "v1 API (datalogger)",
 			"item": [
 				{
-					"name": "Remote datalogger",
+					"name": "Create DSMR reading by telegram",
 					"request": {
 						"method": "POST",
 						"header": [
