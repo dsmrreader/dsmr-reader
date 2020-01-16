@@ -53,134 +53,290 @@
 			"name": "v2 API (REST)",
 			"item": [
 				{
-					"name": "Create DSMR-reading",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "timestamp",
-									"value": "2017-04-15T00:00:00+02",
-									"description": "Required",
-									"type": "text"
+					"name": "Datalogger",
+					"item": [
+						{
+							"name": "Create DSMR reading",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "timestamp",
+											"value": "2017-04-15T00:00:00+02",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity_currently_delivered",
+											"value": "1.500",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity_currently_returned",
+											"value": "0.025",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity_delivered_1",
+											"value": "2000",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity_delivered_2",
+											"value": "3000",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity_returned_1",
+											"value": "0",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity_returned_2",
+											"value": "0",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "phase_currently_delivered_l1",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phase_currently_delivered_l2",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phase_currently_delivered_l3",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phase_currently_returned_l1",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phase_currently_returned_l2",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phase_currently_returned_l3",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "extra_device_timestamp",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "extra_device_delivered",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										}
+									]
 								},
-								{
-									"key": "electricity_currently_delivered",
-									"value": "1.500",
-									"description": "Required",
-									"type": "text"
-								},
-								{
-									"key": "electricity_currently_returned",
-									"value": "0.025",
-									"description": "Required",
-									"type": "text"
-								},
-								{
-									"key": "electricity_delivered_1",
-									"value": "2000",
-									"description": "Required",
-									"type": "text"
-								},
-								{
-									"key": "electricity_delivered_2",
-									"value": "3000",
-									"description": "Required",
-									"type": "text"
-								},
-								{
-									"key": "electricity_returned_1",
-									"value": "0",
-									"description": "Required",
-									"type": "text"
-								},
-								{
-									"key": "electricity_returned_2",
-									"value": "0",
-									"description": "Required",
-									"type": "text"
-								},
-								{
-									"key": "phase_currently_delivered_l1",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "phase_currently_delivered_l2",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "phase_currently_delivered_l3",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "phase_currently_returned_l1",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "phase_currently_returned_l2",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "phase_currently_returned_l3",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "extra_device_timestamp",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "extra_device_delivered",
-									"value": "",
-									"description": "Optional",
-									"type": "text",
-									"disabled": true
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/dsmrreading",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"datalogger",
+										"dsmrreading"
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/dsmrreading",
-							"host": [
-								"{{DSMR-reader-API-host}}"
-							],
-							"path": [
-								"api",
-								"v2",
-								"datalogger",
-								"dsmrreading"
-							]
+						{
+							"name": "Retrieve DSMR readings",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/dsmrreading?timestamp__gte=2020-01-14 12:00:00&timestamp__lte=2020-01-20 12:00:00&ordering=-timestamp&offset=10&limit=5",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"datalogger",
+										"dsmrreading"
+									],
+									"query": [
+										{
+											"key": "timestamp__gte",
+											"value": "2020-01-14 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "timestamp__lte",
+											"value": "2020-01-20 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "ordering",
+											"value": "-timestamp",
+											"description": "Optional"
+										},
+										{
+											"key": "offset",
+											"value": "10",
+											"description": "Optional"
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Optional"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve meter statistics",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/meter-statistics",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"datalogger",
+										"meter-statistics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update meter statistics",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "timestamp",
+											"value": "2020-01-15T12:34:56+01",
+											"description": "Optional",
+											"type": "text"
+										},
+										{
+											"key": "dsmr_version",
+											"value": "42",
+											"description": "Optional",
+											"type": "text"
+										},
+										{
+											"key": "power_failure_count",
+											"value": "1",
+											"description": "Optional",
+											"type": "text"
+										},
+										{
+											"key": "voltage_sag_count_l1",
+											"value": "5",
+											"description": "Optional",
+											"type": "text"
+										},
+										{
+											"key": "voltage_swell_count_l1",
+											"value": "6",
+											"description": "Optional",
+											"type": "text"
+										},
+										{
+											"key": "latest_telegram",
+											"value": "",
+											"description": "Optional",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/meter-statistics",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"datalogger",
+										"meter-statistics"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}

@@ -147,7 +147,7 @@ paths:
       tags:
         - Datalogger
       operationId: v2_datalogger_dsmrreading_post
-      summary: Create DSMR-reading
+      summary: Create DSMR reading
       description: |
         Creates a reading from separate values, omitting the need for the original telegram.
 
@@ -170,6 +170,31 @@ paths:
         This will process all readings again, from the very first start, and aggregate them (and **will** take a long time, depending on your reading count).
 
         *The datalogger may interfere. If your stats are not correctly after regenerating, try it again while having your datalogger disabled.*
+      x-code-samples:
+        - lang: 'Python'
+          source: |
+            import requests
+            import json
+
+            # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
+            response = requests.post(
+                'http://YOUR-DSMR-URL/api/v2/datalogger/dsmrreading',
+                headers={'Authorization': 'Token YOUR-API-KEY'},
+                data={
+                    'electricity_currently_delivered': 1.500,
+                    'electricity_currently_returned': 0.025,
+                    'electricity_delivered_1': 2000,
+                    'electricity_delivered_2': 3000,
+                    'electricity_returned_1': 0,
+                    'electricity_returned_2': 0,
+                    'timestamp': '2017-04-15T00:00:00+02',
+                }
+            )
+
+            if response.status_code != 201:
+                print('Error: {}'.format(response.text))
+            else:
+                print('Created: {}'.format(json.loads(response.text)))
 
       requestBody:
         content:
@@ -285,3 +310,228 @@ paths:
         403:
           description: Forbidden
 
+    get:
+      tags:
+        - Datalogger
+      operationId: v2_datalogger_dsmrreading_get
+      summary: Retrieve DSMR readings
+      description: |
+        Retrieves any readings stored. The readings are either constructed from incoming telegrams or were created using this API.
+
+        *For example, fetching the latest reading created:*
+        ```
+        limit: 1
+        ordering: -timestamp
+        ```
+        ### All parameters are optional
+      parameters:
+        - in: query
+          name: timestamp__gte
+          schema:
+            type: string
+            format: date-time
+            example: '2020-01-14 12:00:00'
+          description: Limits the result to any readings having a timestamp **higher or equal** to this parameter.
+        - in: query
+          name: timestamp__lte
+          schema:
+            type: string
+            format: date-time
+            example: '2020-01-20 12:00:00'
+          description: Limits the result to any readings having a timestamp **lower or equal** to this parameter.
+        - in: query
+          name: ordering
+          schema:
+            type: string
+            default: timestamp
+            enum: ['timestamp', '-timestamp']
+            example: '-timestamp'
+          description: Omit or use ``timestamp`` to sort ascending. Use ``-timestamp`` to sort results descending.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            example: 10
+          description: When iterating large resultsets, the offset determines the starting point.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 25
+            example: 5
+          description: Limits the resultset size returned. Omit for maintaining the default limit (25).
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    count: 67152
+                    next: 'http://localhost:8000/api/v2/datalogger/dsmrreading?limit=25&offset=25'
+                    previous: null
+                    results:
+                      - id: 173367
+                        timestamp: '2016-01-01T01:00:06+01:00'
+                        electricity_delivered_1: 656.326
+                        electricity_returned_1: 0.000
+                        electricity_delivered_2: 630.937
+                        electricity_returned_2: 0.000
+                        electricity_currently_delivered: 0.127
+                        electricity_currently_returned: 0.000
+                        phase_currently_delivered_l1: null
+                        phase_currently_delivered_l2: null
+                        phase_currently_delivered_l3: null
+                        extra_device_timestamp: '2016-01-01T00:00:00+01:00'
+                        extra_device_delivered: 1038.847
+                        phase_currently_returned_l1: null
+                        phase_currently_returned_l2: null
+                        phase_currently_returned_l3: null
+                        phase_voltage_l1: null
+                        phase_voltage_l2: null
+                        phase_voltage_l3: null
+                      - id: 173725
+                        timestamp: '2016-01-01T01:59:53+01:00'
+                        electricity_delivered_1: 656.443
+                        electricity_returned_1: 0.000
+                        electricity_delivered_2: 630.937
+                        electricity_returned_2: 0.000
+                        electricity_currently_delivered: 0.063
+                        electricity_currently_returned: 0.000
+                        phase_currently_delivered_l1: null
+                        phase_currently_delivered_l2: null
+                        phase_currently_delivered_l3: null
+                        extra_device_timestamp: '2016-01-01T01:00:00+01:00'
+                        extra_device_delivered: 1040.011
+                        phase_currently_returned_l1: null
+                        phase_currently_returned_l2: null
+                        phase_currently_returned_l3: null
+                        phase_voltage_l1: null
+                        phase_voltage_l2: null
+                        phase_voltage_l3: null
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
+
+  /api/v2/datalogger/meter-statistics:
+    get:
+      tags:
+        - Datalogger
+      operationId: v2_datalogger_meterstatistics_get
+      summary: Retrieve meter statistics
+      description: |
+        Retrieve meter statistics extracted by the datalogger.
+
+        ### Since
+        *This endpoint was added in DSMR-reader ``v3.1.0``*
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    id: 1
+                    timestamp: '2020-01-15T20:13:40+01:00'
+                    dsmr_version: 42
+                    electricity_tariff: 1
+                    power_failure_count: 3
+                    long_power_failure_count: 0
+                    voltage_sag_count_l1: 1
+                    voltage_sag_count_l2: 2
+                    voltage_sag_count_l3: 3
+                    voltage_swell_count_l1: 0
+                    voltage_swell_count_l2: 0
+                    voltage_swell_count_l3: 0
+                    rejected_telegrams: 99
+                    latest_telegram: '/XMX5LGBBFFB123456789\r\n\r\n1-3:0.2.8(40)\r\n0-0:1.0.0(200115201340W)\r\n0-0:96.1.1(12345678901234567890123456789000)\r\n1-0:1.8.1(007952.261*kWh)\r\n1-0:2.8.1(000000.000*kWh)\r\n1-0:1.8.2(004771.357*kWh)\r\n1-0:2.8.2(000000.000*kWh)\r\n0-0:96.14.0(0001)\r\n1-0:1.7.0(02.507*kW)\r\n1-0:2.7.0(00.000*kW)\r\n0-0:96.7.21(00003)\r\n0-0:96.7.9(00000)\r\n1-0:99.97.0(0)(0-0:96.7.19)\r\n1-0:32.32.0(00001)\r\n1-0:52.32.0(00002)\r\n1-0:72.32.0(00003)\r\n1-0:32.36.0(00000)\r\n1-0:52.36.0(00000)\r\n1-0:72.36.0(00000)\r\n0-0:96.13.1()\r\n0-0:96.13.0()\r\n1-0:32.7.0(225.0*V)\r\n1-0:52.7.0(232.1*V)\r\n1-0:72.7.0(233.2*V)\r\n1-0:31.7.0(000*A)\r\n1-0:51.7.0(000*A)\r\n1-0:71.7.0(001*A)\r\n1-0:21.7.0(01.407*kW)\r\n1-0:41.7.0(00.765*kW)\r\n1-0:61.7.0(00.334*kW)\r\n1-0:22.7.0(00.000*kW)\r\n1-0:42.7.0(00.000*kW)\r\n1-0:62.7.0(00.000*kW)\r\n!013B'
+        403:
+          description: Forbidden
+    patch:
+      tags:
+        - Datalogger
+      operationId: v2_datalogger_meterstatistics_patch
+      summary: Update meter statistics
+      description: |
+        Manually update any meter statistics fields. Only use this when you're not using the built-in datalogger (of v1 telegram API).
+
+        ### Since
+        *This endpoint was added in DSMR-reader ``v3.1.0``*
+
+        ### All parameters are optional
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: Timestamp indicating the last update. The builtin datalogger uses the timestamp of the telegram for this.
+                dsmr_version:
+                  nullable: true
+                  type: integer
+                  description: DSMR protocol version string. Should be something like ``42`` (4.2) or ``50`` (5.0)
+                power_failure_count:
+                  nullable: true
+                  type: integer
+                  description: Number of power failures in any phase
+                long_power_failure_count:
+                  nullable: true
+                  type: integer
+                  description: Number of long power failures in any phase
+                voltage_sag_count_l1:
+                  nullable: true
+                  type: integer
+                  description: Number of voltage sags/dips in phase L1
+                voltage_sag_count_l2:
+                  nullable: true
+                  type: integer
+                  description: Number of voltage sags/dips in phase L2 (polyphase meters only)
+                voltage_sag_count_l3:
+                  nullable: true
+                  type: integer
+                  description: Number of voltage sags/dips in phase L3 (polyphase meters only)
+                voltage_swell_count_l1:
+                  nullable: true
+                  type: integer
+                  description: Number of voltage swells in phase L1
+                voltage_swell_count_l2:
+                  nullable: true
+                  type: integer
+                  description: Number of voltage swells in phase L2 (polyphase meters only)
+                voltage_swell_count_l3:
+                  nullable: true
+                  type: integer
+                  description: Number of voltage swells in phase L3 (polyphase meters only)
+                rejected_telegrams:
+                  type: integer
+                  description: Number of rejected telegrams due to invalid CRC checksum
+                latest_telegram:
+                  nullable: true
+                  type: string
+                  description: The latest telegram succesfully read
+            examples:
+              1:
+                value:
+                  timestamp: '2020-01-15T12:34:56+01'
+                  dsmr_version: '50'
+                  power_failure_count: 1
+                  voltage_sag_count_l1: 5
+                  voltage_swell_count_l1: 6
+                  latest_telegram: null
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
