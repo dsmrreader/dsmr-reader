@@ -1,0 +1,287 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+
+info:
+  title: DSMR-reader API
+  description: |
+    ## Postman examples
+    You can download the collection and variables below. Don't forget to set your API host and API key in the environment variables!
+
+    - [Download Postman collection](/static/dsmr_frontend/postman/collection.json)
+    - [Download Postman environment variables](/static/dsmr_frontend/postman/variables.json)
+
+    ## Datetime string format
+    Timezone aware ``YYYY-MM-DDThh:mm[:ss][+HH:MM|-HH:MM|Z]``, for example:
+    - ``2020-01-15T10:00:00Z`` (UTC)
+    - ``2020-01-15T12:00:00+01`` (CET)
+    - ``2020-01-15T12:00:00+02`` (CEST)
+
+externalDocs:
+  description: DSMR-reader general documentation
+  url: 'https://dsmr-reader.readthedocs.io/'
+
+securityDefinitions:
+  Token:
+    description: 'For each API request, include the ``Authorization`` header with value ``Token: YOUR_API_KEY``.'
+    type: apiKey
+    name: Token
+    in: header
+
+x-tagGroups:
+  - name: v1 API (datalogger)
+    tags:
+      - Remote datalogger
+  - name: v2 API (REST)
+    tags:
+      - Datalogger
+      - Consumption
+      - Statistics
+      - Application
+
+paths:
+  /api/v1/datalogger/dsmrreading:
+    post:
+      tags:
+        - Remote datalogger
+      operationId: v1_datalogger_dsmrreading
+      summary: Remote datalogger
+      description: |
+        This allows you to insert a raw telegram into the application, as if it was read locally using the serial cable.
+
+        You can use a script to run in Supervisor. It will send telegrams to one or multiple instances of DSMR-reader.
+        For detailed installation instructions, see [the installation guide for datalogger only](https://dsmr-reader.readthedocs.io/en/latest/installation/datalogger.html).
+
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                telegram:
+                  type: string
+                  description: The raw telegram string containing all linefeeds ``\n``, and carriage returns ``\r``, as well!
+            examples:
+              1:
+                value:
+                  telegram: |
+                    /KFM5KAIFA-METER\r\n
+                    \r\n
+                    1-3:0.2.8(42)\r\n
+                    0-0:1.0.0(160303164347W)\r\n
+                    0-0:96.1.1(*******************************)\r\n
+                    1-0:1.8.1(001073.079*kWh)\r\n
+                    1-0:1.8.2(001263.199*kWh)\r\n
+                    1-0:2.8.1(000000.000*kWh)\r\n
+                    1-0:2.8.2(000000.000*kWh)\r\n
+                    0-0:96.14.0(0002)\r\n
+                    1-0:1.7.0(00.143*kW)\r\n
+                    1-0:2.7.0(00.000*kW)\r\n
+                    0-0:96.7.21(00006)\r\n
+                    0-0:96.7.9(00003)\r\n
+                    1-0:99.97.0(1)(0-0:96.7.19)(000101000001W)(2147483647*s)\r\n
+                    1-0:32.32.0(00000)\r\n
+                    1-0:32.36.0(00000)\r\n
+                    0-0:96.13.1()\r\n
+                    0-0:96.13.0()\r\n
+                    1-0:31.7.0(000*A)\r\n
+                    1-0:21.7.0(00.143*kW)\r\n
+                    1-0:22.7.0(00.000*kW)\r\n
+                    !74B0\n
+      x-code-samples:
+        - lang: 'Python'
+          source: |
+            import requests
+
+            telegram_string = ''.join([
+                "/KFM5KAIFA-METER\r\n",
+                "\r\n",
+                "1-3:0.2.8(42)\r\n",
+                "0-0:1.0.0(160303164347W)\r\n",
+                "0-0:96.1.1(*******************************)\r\n",
+                "1-0:1.8.1(001073.079*kWh)\r\n",
+                "1-0:1.8.2(001263.199*kWh)\r\n",
+                "1-0:2.8.1(000000.000*kWh)\r\n",
+                "1-0:2.8.2(000000.000*kWh)\r\n",
+                "0-0:96.14.0(0002)\r\n",
+                "1-0:1.7.0(00.143*kW)\r\n",
+                "1-0:2.7.0(00.000*kW)\r\n",
+                "0-0:96.7.21(00006)\r\n",
+                "0-0:96.7.9(00003)\r\n",
+                "1-0:99.97.0(1)(0-0:96.7.19)(000101000001W)(2147483647*s)\r\n",
+                "1-0:32.32.0(00000)\r\n",
+                "1-0:32.36.0(00000)\r\n",
+                "0-0:96.13.1()\r\n",
+                "0-0:96.13.0()\r\n",
+                "1-0:31.7.0(000*A)\r\n",
+                "1-0:21.7.0(00.143*kW)\r\n",
+                "1-0:22.7.0(00.000*kW)\r\n",
+                "!74B0\n",
+            ])
+
+            # Don't forget to replace 'YOUR-DSMR-URL' and 'YOUR-API-KEY' with your own values.
+            response = requests.post(
+                'http://YOUR-DSMR-URL/api/v1/datalogger/dsmrreading',
+                headers={'Authorization': 'Token YOUR-API-KEY'},
+                data={'telegram': telegram_string},
+            )
+
+            # You will receive a status 201 when successful.
+            if response.status_code != 201:
+                # Or you will find the error (hint) in the reponse body on failure.
+                print('Error: {}'.format(response.text))
+
+      responses:
+        201:
+          description: Created
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
+        500:
+          description: Server error
+
+  /api/v2/datalogger/dsmrreading:
+    post:
+      tags:
+        - Datalogger
+      operationId: v2_datalogger_dsmrreading_post
+      summary: Create DSMR-reading
+      description: |
+        Creates a reading from separate values, omitting the need for the original telegram.
+
+        ### Note
+        Readings are processed simultaneously by the background process. Therefor inserting readings **retroactively** might result in undesired results.
+
+        Therefor inserting historic data might require you to delete all aggregated data using:
+        ```
+        sudo su - postgres
+        psql dsmrreader
+        truncate dsmr_consumption_electricityconsumption;
+        truncate dsmr_consumption_gasconsumption;
+        truncate dsmr_stats_daystatistics;
+        truncate dsmr_stats_hourstatistics;
+
+        # This query can take a long time!
+        update dsmr_datalogger_dsmrreading set processed = False;
+        ```
+
+        This will process all readings again, from the very first start, and aggregate them (and **will** take a long time, depending on your reading count).
+
+        *The datalogger may interfere. If your stats are not correctly after regenerating, try it again while having your datalogger disabled.*
+
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: Timestamp indicating when the reading was taken, according to the smart meter
+                electricity_currently_delivered:
+                  type: number
+                  format: float
+                  description: Current electricity delivered in kW
+                electricity_currently_returned:
+                  type: number
+                  format: float
+                  description: Current electricity returned in kW
+                electricity_delivered_1:
+                  type: integer
+                  description: Meter position stating electricity delivered (low tariff) in kWh
+                electricity_delivered_2:
+                  type: integer
+                  description: Meter position stating electricity delivered (normal tariff) in kWh
+                electricity_returned_1:
+                  type: integer
+                  description: Meter position stating electricity returned (low tariff) in kWh
+                electricity_returned_2:
+                  type: integer
+                  description: Meter position stating electricity returned (normal tariff) in kWh
+                phase_currently_delivered_l1:
+                  required: false
+                  type: number
+                  format: float
+                  description: Current electricity used by phase L1 (in kW)
+                phase_currently_delivered_l2:
+                  nullable: true
+                  type: number
+                  format: float
+                  description: Current electricity used by phase L2 (in kW)
+                phase_currently_delivered_l3:
+                  nullable: true
+                  type: number
+                  format: float
+                  description: Current electricity used by phase L3 (in kW)
+                phase_currently_returned_l1:
+                  nullable: true
+                  type: number
+                  format: float
+                  description: Current electricity returned by phase L1 (in kW)
+                phase_currently_returned_l2:
+                  nullable: true
+                  type: number
+                  format: float
+                  description: Current electricity returned by phase L2 (in kW)
+                phase_currently_returned_l3:
+                  nullable: true
+                  type: number
+                  format: float
+                  description: Current electricity returned by phase L3 (in kW)
+                extra_device_timestamp:
+                  nullable: true
+                  type: string
+                  format: date-time
+                  description: Last timestamp read from the extra device connected (gas meter)
+                extra_device_delivered:
+                  nullable: true
+                  type: number
+                  format: float
+                  description: Last value read from the extra device connected (gas meter)
+            examples:
+              1:
+                value:
+                  timestamp: '2017-04-15T00:00:00+02'
+                  electricity_currently_delivered: 1.500
+                  electricity_currently_returned: 0.025
+                  electricity_delivered_1: 2000
+                  electricity_delivered_2: 3000
+                  electricity_returned_1: 0
+                  electricity_returned_2: 0
+
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    id: 12185134
+                    timestamp: '2017-04-15T00:00:00+02:00'
+                    electricity_delivered_1: 2000.000
+                    electricity_returned_1: 0.000
+                    electricity_delivered_2: 3000.000
+                    electricity_returned_2: 0.000
+                    electricity_currently_delivered: 1.500
+                    electricity_currently_returned: 0.025
+                    phase_currently_delivered_l1: null
+                    phase_currently_delivered_l2: null
+                    phase_currently_delivered_l3: null
+                    extra_device_timestamp: null
+                    extra_device_delivered: null
+                    phase_currently_returned_l1: null
+                    phase_currently_returned_l2: null
+                    phase_currently_returned_l3: null
+                    phase_voltage_l1: null
+                    phase_voltage_l2: null
+                    phase_voltage_l3: null
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
+

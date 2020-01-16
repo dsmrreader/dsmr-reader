@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "5929f0d6-56f0-4a36-a4a6-088636f5c83a",
+		"name": "DSMR-reader [v3.1.0]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v1 API (datalogger)",
+			"item": [
+				{
+					"name": "Remote datalogger",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "telegram",
+									"value": "",
+									"description": "Due to linefeeds and carriage returns, getting an working example into Postman is very hard",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{DSMR-reader-API-host}}/api/v1/datalogger/dsmrreading",
+							"host": [
+								"{{DSMR-reader-API-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"datalogger",
+								"dsmrreading"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "v2 API (REST)",
+			"item": [
+				{
+					"name": "Create DSMR-reading",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "timestamp",
+									"value": "2017-04-15T00:00:00+02",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "electricity_currently_delivered",
+									"value": "1.500",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "electricity_currently_returned",
+									"value": "0.025",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "electricity_delivered_1",
+									"value": "2000",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "electricity_delivered_2",
+									"value": "3000",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "electricity_returned_1",
+									"value": "0",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "electricity_returned_2",
+									"value": "0",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "phase_currently_delivered_l1",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phase_currently_delivered_l2",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phase_currently_delivered_l3",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phase_currently_returned_l1",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phase_currently_returned_l2",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phase_currently_returned_l3",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "extra_device_timestamp",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "extra_device_delivered",
+									"value": "",
+									"description": "Optional",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/dsmrreading",
+							"host": [
+								"{{DSMR-reader-API-host}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"datalogger",
+								"dsmrreading"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "Token {{DSMR-reader-API-key}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9bd730c1-8c9a-4162-957e-dde7fe9031aa",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "22a981dd-3d57-4baf-99a7-01053bf5aaff",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

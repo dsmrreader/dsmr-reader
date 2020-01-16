@@ -20,6 +20,22 @@ Example
     :target: _static/screenshots/admin/apisettings.png
     :alt: API admin settings
 
+
+
+Documentation
+^^^^^^^^^^^^^
+The API-documentation has been moved to your local DSMR-reader installation and is available since DSMR-reader ``v3.1``.
+
+You can access it by selecting the ``API docs`` menu item in DSMR-reader ``v3.1+``.
+
+
+
+
+
+
+
+
+
 Authenticating
 ^^^^^^^^^^^^^^
 Besides allowing the API to listen for requests, you will also need send your API key with each request. 
