@@ -44,7 +44,12 @@ def initialize():
     try:
         mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port)
     except Exception as error:
-        logger.error('MQTT: Failed to connect to broker, restarting in a minute: %s', error)
+        logger.error(
+            'MQTT: Failed to connect to broker (%s : %s), restarting in a minute: %s',
+            broker_settings.hostname,
+            broker_settings.port,
+            error
+        )
         time.sleep(60)
         raise StopInfiniteRun()
 
@@ -53,12 +58,10 @@ def initialize():
 
 def run(mqtt_client):
     """ Reads any messages from the queue and publishing them to the MQTT broker. """
-    mqtt_client.loop()
-
-    broker_settings = MQTTBrokerSettings.get_solo()
 
     # Keep batches small, only send the latest X messages. The rest will be purged (in case of delay).
     message_queue = queue.Message.objects.all().order_by('-pk')[0:settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE]
+    broker_settings = MQTTBrokerSettings.get_solo()
 
     for current in message_queue:
         mqtt_client.publish(
@@ -71,6 +74,13 @@ def run(mqtt_client):
 
     # Delete any overflow in messages.
     queue.Message.objects.all().delete()
+
+    # Networking.
+    mqtt_client.loop(0.1)
+
+    # We cannot raise any exception in callbacks, this is our check point. This MUST be called AFTER the first loop().
+    if not mqtt_client.is_connected():
+        raise StopInfiniteRun()
 
 
 def on_connect(client, userdata, flags, rc):
@@ -109,7 +119,7 @@ def on_disconnect(client, userdata, rc):
             client.reconnect()
         except Exception as error:
             logger.error('MQTT: Failed to re-connect to broker: %s', error)
-            raise StopInfiniteRun()  # Don't bother even to continue, just reset everything.
+            client.disconnect()  # We cannot throw an exception here, so abort gracefully.
 
 
 def on_log(client, userdata, level, buf):

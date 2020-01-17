@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('electricity_tariff', models.IntegerField(help_text='Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff.')),
                 ('electricity_currently_delivered', models.DecimalField(decimal_places=3, help_text='Actual electricity power delivered (+P) in 1 Watt resolution', max_digits=9)),
                 ('electricity_currently_returned', models.DecimalField(decimal_places=3, help_text='Actual electricity power received (-P) in 1 Watt resolution', max_digits=9)),
-                ('power_failure_count', models.IntegerField(help_text='Number of power failures in any phases')),
+                ('power_failure_count', models.IntegerField(help_text='Number of power failures in any phase')),
                 ('long_power_failure_count', models.IntegerField(help_text='Number of long power failures in any phase')),
                 ('voltage_sag_count_l1', models.IntegerField(help_text='Number of voltage sags/dips in phase L1')),
                 ('voltage_sag_count_l2', models.IntegerField(help_text='Number of voltage sags/dips in phase L2 (polyphase meters only)')),
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('day', models.DateField(unique=True)),
-                ('power_failure_count', models.IntegerField(help_text='Number of power failures in any phases')),
+                ('power_failure_count', models.IntegerField(help_text='Number of power failures in any phase')),
                 ('long_power_failure_count', models.IntegerField(help_text='Number of long power failures in any phase')),
                 ('voltage_sag_count_l1', models.IntegerField(help_text='Number of voltage sags/dips in phase L1')),
                 ('voltage_sag_count_l2', models.IntegerField(help_text='Number of voltage sags/dips in phase L2 (polyphase meters only)')),

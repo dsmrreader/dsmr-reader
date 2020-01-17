@@ -1,0 +1,19 @@
+{
+	"id": "b7563cb9-cdcf-44dd-a8c1-2574813c3282",
+	"name": "DSMR-reader",
+	"values": [
+		{
+			"key": "DSMR-reader-API-host",
+			"value": "For example: http://192.168.1.123",
+			"enabled": true
+		},
+		{
+			"key": "DSMR-reader-API-key",
+			"value": "Get your API key from the DSMR-reader admin interface",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-01-15T21:32:24.926Z",
+	"_postman_exported_using": "Postman/7.14.0"
+}

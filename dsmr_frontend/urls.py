@@ -3,6 +3,7 @@ from django.urls.conf import path
 from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, DashboardXhrConsumption, \
     DashboardXhrElectricityConsumption, DashboardXhrGasConsumption, DashboardXhrTemperature
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
+from dsmr_frontend.views.docs import ApiDocs
 from dsmr_frontend.views.notifications import Notifications, XhrMarkNotificationRead, XhrMarkAllNotificationsRead
 from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
 from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXhrElectricityByTariff
@@ -42,6 +43,8 @@ urlpatterns = [
     path('status', Status.as_view(), name='status'),
     path('status/xhr/check-for-updates', XhrUpdateChecker.as_view(), name='status-xhr-check-for-updates'),
 
+    # Docs.
+    path('docs/api', ApiDocs.as_view(), name='api-docs'),
 
     # Generic redirects to external (help) pages.
     path('changelog-redirect', ChangelogRedirect.as_view(), name='changelog-redirect'),

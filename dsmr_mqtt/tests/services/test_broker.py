@@ -116,8 +116,10 @@ class TestBroker(TestCase):
         dsmr_mqtt.services.broker.on_connect(client, None, None, rc=-1)
 
     @mock.patch('paho.mqtt.client.Client.loop')
+    @mock.patch('paho.mqtt.client.Client.is_connected')
     @mock.patch('paho.mqtt.client.Client.publish')
-    def test_run(self, publish_mock, loop_mock):
+    def test_run(self, publish_mock, is_connected_mock, loop_mock):
+        is_connected_mock.return_value = True
         client = paho.Client('xxx')
 
         # Empty.
@@ -141,9 +143,22 @@ class TestBroker(TestCase):
         self.assertTrue(publish_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.loop')
+    @mock.patch('paho.mqtt.client.Client.is_connected')
     @mock.patch('paho.mqtt.client.Client.publish')
-    def test_run_cleanup(self, publish_mock, *mocks):
+    def test_run_disconnected(self, publish_mock, is_connected_mock, loop_mock):
+        """ Check whether we exit the command when we're disconnected at some point. """
+        is_connected_mock.return_value = False  # Connection failure.
+        client = paho.Client('xxx')
+
+        with self.assertRaises(StopInfiniteRun):
+            dsmr_mqtt.services.broker.run(mqtt_client=client)
+
+    @mock.patch('paho.mqtt.client.Client.loop')
+    @mock.patch('paho.mqtt.client.Client.is_connected')
+    @mock.patch('paho.mqtt.client.Client.publish')
+    def test_run_cleanup(self, publish_mock, is_connected_mock, *mocks):
         """ Test whether any excess of messages is cleared. """
+        is_connected_mock.return_value = True
         client = paho.Client('xxx')
         MAX = settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
 
@@ -182,15 +197,18 @@ class TestBroker(TestCase):
         dsmr_mqtt.services.broker.on_disconnect(client, None, rc=1)
         self.assertTrue(reconnect_mock.called)
 
+    @mock.patch('paho.mqtt.client.Client.disconnect')
     @mock.patch('paho.mqtt.client.Client.reconnect')
-    def test_reconnect_failed(self, reconnect_mock):
+    def test_reconnect_failed(self, reconnect_mock, disconnect_mock):
         """ Test callback reconnect, but still failing. """
         reconnect_mock.side_effect = ConnectionRefusedError()  # Fail.
         client = paho.Client('xxx')
 
-        # Still failing, command should be stopped.
-        with self.assertRaises(StopInfiniteRun):
-            dsmr_mqtt.services.broker.on_disconnect(client, None, rc=1)
+        # Still failing, disconnect() should be called.
+        reconnect_mock.side_effect = OSError('Some network failure...')
+        dsmr_mqtt.services.broker.on_disconnect(client, None, rc=1)
+
+        self.assertTrue(disconnect_mock.called)
 
     def test_on_log(self):
         """ Coverage test. """
