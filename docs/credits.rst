@@ -48,3 +48,4 @@ Please note and respect their licences as well, if any. Credits to the following
 - `Django REST Framework <http://www.django-rest-framework.org>`_
 - `eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_
 - `CircleCI <https://circleci.com/>`_
+- `ReDoc <https://github.com/Redocly/redoc>`_
