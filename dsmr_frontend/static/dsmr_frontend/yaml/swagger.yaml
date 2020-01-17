@@ -526,3 +526,548 @@ paths:
           description: Bad request
         403:
           description: Forbidden
+
+  /api/v2/consumption/electricity:
+    get:
+      tags:
+        - Consumption
+      operationId: v2_consumption_electricity_get
+      summary: Retrieve electricity consumption
+      description: |
+        Retrieves any data regarding electricity consumption. This is based on the readings processed.
+
+        ### All parameters are optional
+      parameters:
+        - in: query
+          name: read_at__gte
+          schema:
+            type: string
+            format: date-time
+            example: '2020-01-14 12:00:00'
+          description: Limits the result to any records having a timestamp **higher or equal** to this parameter.
+        - in: query
+          name: read_at__lte
+          schema:
+            type: string
+            format: date-time
+            example: '2020-01-20 12:00:00'
+          description: Limits the result to any records having a timestamp **lower or equal** to this parameter.
+        - in: query
+          name: ordering
+          schema:
+            type: string
+            default: read_at
+            enum: ['read_at', '-read_at']
+            example: '-read_at'
+          description: Omit or use ``read_at`` to sort ascending. Use ``-read_at`` to sort results descending.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            example: 10
+          description: When iterating large resultsets, the offset determines the starting point.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 25
+            example: 5
+          description: Limits the resultset size returned. Omit for maintaining the default limit (25).
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    count: 147
+                    next: 'http://localhost:8000/api/v2/consumption/electricity?limit=5&offset=15&ordering=-read_at&read_at__gte=2020-01-14+12%3A00%3A00&read_at__lte=2020-01-20+12%3A00%3A00'
+                    previous: 'http://localhost:8000/api/v2/consumption/electricity?limit=5&offset=5&ordering=-read_at&read_at__gte=2020-01-14+12%3A00%3A00&read_at__lte=2020-01-20+12%3A00%3A00'
+                    results:
+                      - id: 2037892
+                        read_at: '2020-01-14T19:17:50+01:00'
+                        delivered_1: 7947.774
+                        returned_1: 0.000
+                        delivered_2: 4768.665
+                        returned_2: 0.000
+                        currently_delivered: 1.895
+                        currently_returned: 0.000
+                        phase_currently_delivered_l1: 0.635
+                        phase_currently_delivered_l2: 0.084
+                        phase_currently_delivered_l3: 1.175
+                        phase_currently_returned_l1: 0.000
+                        phase_currently_returned_l2: 0.000
+                        phase_currently_returned_l3: 0.000
+                        phase_voltage_l1: 234.0
+                        phase_voltage_l2: 234.1
+                        phase_voltage_l3: 229.2
+                      - id: 2037891
+                        read_at: '2020-01-14T19:17:49+01:00'
+                        delivered_1: 7947.774
+                        returned_1: 0.000
+                        delivered_2: 4768.665
+                        returned_2: 0.000
+                        currently_delivered: 2.297
+                        currently_returned: 0.000
+                        phase_currently_delivered_l1: 1.139
+                        phase_currently_delivered_l2: 1.041
+                        phase_currently_delivered_l3: 0.119
+                        phase_currently_returned_l1: 0.000
+                        phase_currently_returned_l2: 0.000
+                        phase_currently_returned_l3: 0.000
+                        phase_voltage_l1: 231.0
+                        phase_voltage_l2: 232.1
+                        phase_voltage_l3: 229.2
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
+
+  /api/v2/consumption/gas:
+    get:
+      tags:
+        - Consumption
+      operationId: v2_consumption_gas_get
+      summary: Retrieve gas consumption
+      description: |
+        Retrieves any data regarding gas consumption. This is based on the readings processed.
+
+        ### All parameters are optional
+      parameters:
+        - in: query
+          name: read_at__gte
+          schema:
+            type: string
+            format: date-time
+            example: '2020-01-14 12:00:00'
+          description: Limits the result to any records having a timestamp **higher or equal** to this parameter.
+        - in: query
+          name: read_at__lte
+          schema:
+            type: string
+            format: date-time
+            example: '2020-01-20 12:00:00'
+          description: Limits the result to any records having a timestamp **lower or equal** to this parameter.
+        - in: query
+          name: ordering
+          schema:
+            type: string
+            default: read_at
+            enum: ['read_at', '-read_at']
+            example: '-read_at'
+          description: Omit or use ``read_at`` to sort ascending. Use ``-read_at`` to sort results descending.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            example: 10
+          description: When iterating large resultsets, the offset determines the starting point.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 25
+            example: 5
+          description: Limits the resultset size returned. Omit for maintaining the default limit (25).
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    count: 17
+                    next: 'http://localhost:8000/api/v2/consumption/gas?limit=5&offset=15&ordering=-read_at&read_at__gte=2020-01-14+12%3A00%3A00&read_at__lte=2020-01-20+12%3A00%3A00'
+                    previous: 'http://localhost:8000/api/v2/consumption/gas?limit=5&offset=5&ordering=-read_at&read_at__gte=2020-01-14+12%3A00%3A00&read_at__lte=2020-01-20+12%3A00%3A00'
+                    results:
+                      - id: 35162
+                        read_at: '2020-01-14T18:00:00+01:00'
+                        delivered: 3188.897
+                        currently_delivered: 0.000
+                      - id: 35161
+                        read_at: '2020-01-14T17:00:00+01:00'
+                        delivered: 3188.897
+                        currently_delivered: 0.000
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
+
+  /api/v2/consumption/today:
+    get:
+      tags:
+        - Consumption
+      operationId: v2_consumption_today_get
+      summary: Retrieve today's consumption
+      description: Returns the consumption of the current day so far.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    day: '2020-01-17'
+                    electricity1: 0.0
+                    electricity2: 0.0
+                    electricity1_returned: 0.0
+                    electricity2_returned: 0.0
+                    electricity1_cost: 0.0
+                    electricity2_cost: 0.0
+                    total_cost: 0.0
+                    energy_supplier_price_electricity_delivered_1: 0.20876
+                    energy_supplier_price_electricity_delivered_2: 0.22449
+                    energy_supplier_price_electricity_returned_1: 0.0
+                    energy_supplier_price_electricity_returned_2: 0.0
+                    energy_supplier_price_gas: 0.66977
+                    gas: 0.0
+                    gas_cost: 0.0
+        403:
+          description: Forbidden
+
+  /api/v2/consumption/electricity-live:
+    get:
+      tags:
+        - Consumption
+      operationId: v2_consumption_electricity_live_get
+      summary: Retrieve live electricity consumption
+      description: Returns the live electricity consumption, containing the same data as the Dashboard header.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    timestamp: '2020-01-15T05:59:54+01:00'
+                    currently_delivered: 53
+                    currently_returned: 0
+                    cost_per_hour: 0.01
+        403:
+          description: Forbidden
+
+  /api/v2/consumption/gas-live:
+    get:
+      tags:
+        - Consumption
+      operationId: v2_consumption_gas_live_get
+      summary: Retrieve live gas consumption
+      description: Returns the latest gas consumption.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    timestamp: '2020-01-15T04:00:00+01:00'
+                    currently_delivered: 0.0
+                    cost_per_interval: 0.00
+        403:
+          description: Forbidden
+
+  /api/v2/statistics/day:
+    get:
+      tags:
+        - Statistics
+      operationId: v2_statistics_day_get
+      summary: Retrieve day statistics
+      description: |
+        Retrieves any aggregated day statistics.
+
+        ### Note
+        *These are generated a few hours after midnight.*
+
+        ### All parameters are optional
+      parameters:
+        - in: query
+          name: day__gte
+          schema:
+            type: string
+            format: date
+            example: '2020-01-01'
+          description: Limits the result to any records having a timestamp **higher or equal** to this parameter.
+        - in: query
+          name: day__lte
+          schema:
+            type: string
+            format: date
+            example: '2020-01-20'
+          description: Limits the result to any records having a timestamp **lower or equal** to this parameter.
+        - in: query
+          name: ordering
+          schema:
+            type: string
+            default: day
+            enum: ['day', '-day']
+            example: '-day'
+          description: Omit or use ``day`` to sort ascending. Use ``-day`` to sort results descending.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            example: 10
+          description: When iterating large resultsets, the offset determines the starting point.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 25
+            example: 5
+          description: Limits the resultset size returned. Omit for maintaining the default limit (25).
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    count: 14
+                    next: null
+                    previous: 'http://localhost:8000/api/v2/statistics/day?day__gte=2020-01-01&day__lte=2020-01-20&limit=5&offset=5&ordering=-day'
+                    results:
+                      - id: 1735
+                        day: '2020-01-04'
+                        total_cost: 4.07
+                        electricity1: 8.386
+                        electricity2: 0.000
+                        electricity1_returned: 0.000
+                        electricity2_returned: 0.000
+                        electricity1_cost: 1.77
+                        electricity2_cost: 0.00
+                        gas: 3.528
+                        gas_cost: 2.30
+                        lowest_temperature: 1.8
+                        highest_temperature: 7.5
+                        average_temperature: 4.9
+                      - id: 1734
+                        day: '2020-01-03'
+                        total_cost: 2.90
+                        electricity1: 1.061
+                        electricity2: 3.768
+                        electricity1_returned: 0.000
+                        electricity2_returned: 0.000
+                        electricity1_cost: 0.22
+                        electricity2_cost: 0.87
+                        gas: 2.781
+                        gas_cost: 1.81
+                        lowest_temperature: 2.6
+                        highest_temperature: 9.3
+                        average_temperature: 7.1
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
+
+  /api/v2/statistics/hour:
+    get:
+      tags:
+        - Statistics
+      operationId: v2_statistics_hour_get
+      summary: Retrieve hour statistics
+      description: |
+        Retrieves any aggregated hour statistics.
+
+        ### Note
+        *These are generated a few hours after midnight.*
+
+        ### All parameters are optional
+      parameters:
+        - in: query
+          name: hour_start__gte
+          schema:
+            type: string
+            format: date
+            example: '2020-01-01 12:00:00'
+          description: Limits the result to any records having a timestamp **higher or equal** to this parameter.
+        - in: query
+          name: hour_start__lte
+          schema:
+            type: string
+            format: date
+            example: '2020-01-20 12:00:00'
+          description: Limits the result to any records having a timestamp **lower or equal** to this parameter.
+        - in: query
+          name: ordering
+          schema:
+            type: string
+            default: hour_start
+            enum: ['hour_start', '-hour_start']
+            example: '-hour_start'
+          description: Omit or use ``hour_start`` to sort ascending. Use ``-hour_start`` to sort results descending.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            example: 10
+          description: When iterating large resultsets, the offset determines the starting point.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 25
+            example: 5
+          description: Limits the resultset size returned. Omit for maintaining the default limit (25).
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    count: 324
+                    next: 'http://localhost:8000/api/v2/statistics/hour?hour_start__gte=2020-01-01+12%3A00%3A00&hour_start__lte=2020-01-20+12%3A00%3A00&limit=5&offset=15&ordering=-hour_start'
+                    previous: 'http://localhost:8000/api/v2/statistics/hour?hour_start__gte=2020-01-01+12%3A00%3A00&hour_start__lte=2020-01-20+12%3A00%3A00&limit=5&offset=5&ordering=-hour_start'
+                    results:
+                      - id: 38025
+                        hour_start: '2020-01-14T13:00:00+01:00'
+                        electricity1: 0.000
+                        electricity2: 0.085
+                        electricity1_returned: 0.000
+                        electricity2_returned: 0.000
+                        gas: 0.000
+                      - id: 38024
+                        hour_start: '2020-01-14T12:00:00+01:00'
+                        electricity1: 0.000
+                        electricity2: 0.091
+                        electricity1_returned: 0.000
+                        electricity2_returned: 0.000
+                        gas: 0.000
+        400:
+          description: Bad request
+        403:
+          description: Forbidden
+
+  /api/v2/application/version:
+    get:
+      tags:
+        - Application
+      operationId: v2_application_version_get
+      summary: Application version
+      description: Returns the version of DSMR-reader you are running.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    version: '3.1.0'
+        403:
+          description: Forbidden
+
+  /api/v2/application/status:
+    get:
+      deprecated: true
+      tags:
+        - Application
+      operationId: v2_application_status_get
+      summary: Application status
+      description: |
+        Returns the status of DSMR-reader, containing the same data as displayed on the Status page.
+
+        ### Deprecated
+        This endpoint is deprecated and may change or disappear in future releases!
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema: ~
+              examples:
+                1:
+                  value:
+                    now: '2020-01-17T19:38:18.019145Z'
+                    scheduled_processes:
+                      - id: 1
+                        name: 'Backup per email'
+                        module: 'dsmr_backup.services.email.run'
+                        last_executed_at: '2020-01-04T17:38:18.571147Z'
+                        planned: '2020-02-01T17:38:20.749607Z'
+                        active: true
+                      - id: 2
+                        name: 'Automatic update checker'
+                        module: 'dsmr_backend.services.update_checker.run'
+                        last_executed_at: '2020-01-13T21:16:17.753212Z'
+                        planned: '2020-01-20T21:16:18.076523Z'
+                        active: true
+                      - id: 4
+                        name: Weather update
+                        module: dsmr_weather.services.run
+                        last_executed_at: '2020-01-17T18:56:58.293757Z'
+                        planned: '2020-01-17T19:00:00Z'
+                        active: true
+                      - id: 3
+                        name: 'Generate day and hour statistics'
+                        module: 'dsmr_stats.services.run'
+                        last_executed_at: '2020-01-17T18:56:58.375397Z'
+                        planned: '2020-01-17T19:01:58.381268Z'
+                        active: true
+                      - id: 5
+                        name: 'Upload gas meter position to MinderGas.nl'
+                        module: 'dsmr_mindergas.services.run'
+                        last_executed_at: '2020-01-17T18:56:58.283306Z'
+                        planned: '2020-01-16T04:34:00Z'
+                        active: false
+                    capabilities:
+                        electricity: true
+                        electricity_returned: false
+                        multi_phases: true
+                        voltage: true
+                        gas: true
+                        weather: true
+                        any: true
+                    electricity:
+                        latest: '2020-01-17T18:58:43Z'
+                        minutes_since: 40
+                    gas:
+                        latest: '2020-01-15T03:00:00Z'
+                        hours_since: 65
+                    readings:
+                        latest: '2020-01-17T18:58:43Z'
+                        seconds_since: 2375
+                        unprocessed:
+                            count: 0
+                            seconds_since: null
+                    statistics:
+                        ok: false
+                        latest: '2020-01-14'
+                        days_since: 3
+                    tools:
+                        backup:
+                            enabled: false
+                            latest_backup: null
+                        dropbox:
+                            enabled: false
+                            latest_sync: null
+                        pvoutput:
+                            enabled: true
+                            latest_sync: '2019-05-09T03:55:02.298308Z'
+                        mindergas:
+                            enabled: false
+                            latest_sync: null
+                        mqtt:
+                            ok: true
+                            pending_messages: 22
+        403:
+          description: Forbidden

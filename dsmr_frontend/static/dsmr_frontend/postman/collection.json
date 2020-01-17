@@ -337,6 +337,378 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Consumption",
+					"item": [
+						{
+							"name": "Retrieve electricity consumption",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/electricity?read_at__gte=2020-01-14 12:00:00&read_at__lte=2020-01-20 12:00:00&ordering=-read_at&offset=10&limit=5",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"consumption",
+										"electricity"
+									],
+									"query": [
+										{
+											"key": "read_at__gte",
+											"value": "2020-01-14 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "read_at__lte",
+											"value": "2020-01-20 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "ordering",
+											"value": "-read_at",
+											"description": "Optional"
+										},
+										{
+											"key": "offset",
+											"value": "10",
+											"description": "Optional"
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Optional"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve gas consumption",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/gas?read_at__gte=2020-01-14 12:00:00&read_at__lte=2020-01-20 12:00:00&ordering=-read_at&offset=10&limit=5",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"consumption",
+										"gas"
+									],
+									"query": [
+										{
+											"key": "read_at__gte",
+											"value": "2020-01-14 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "read_at__lte",
+											"value": "2020-01-20 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "ordering",
+											"value": "-read_at",
+											"description": "Optional"
+										},
+										{
+											"key": "offset",
+											"value": "10",
+											"description": "Optional"
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Optional"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve today's consumption",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/today",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"consumption",
+										"today"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve live electricity consumption",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/electricity-live",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"consumption",
+										"electricity-live"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve live gas consumption",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/gas-live",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"consumption",
+										"gas-live"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Statistics",
+					"item": [
+						{
+							"name": "Retrieve day statistics",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/statistics/day?day__gte=2020-01-01&day__lte=2020-01-20&ordering=-day&offset=10&limit=5",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"statistics",
+										"day"
+									],
+									"query": [
+										{
+											"key": "day__gte",
+											"value": "2020-01-01",
+											"description": "Optional"
+										},
+										{
+											"key": "day__lte",
+											"value": "2020-01-20",
+											"description": "Optional"
+										},
+										{
+											"key": "ordering",
+											"value": "-day",
+											"description": "Optional"
+										},
+										{
+											"key": "offset",
+											"value": "10",
+											"description": "Optional"
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Optional"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve hour statistics",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/statistics/hour?hour_start__gte=2020-01-01 12:00:00&hour_start__lte=2020-01-20 12:00:00&ordering=-hour_start&offset=10&limit=5",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"statistics",
+										"hour"
+									],
+									"query": [
+										{
+											"key": "hour_start__gte",
+											"value": "2020-01-01 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "hour_start__lte",
+											"value": "2020-01-20 12:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "ordering",
+											"value": "-hour_start",
+											"description": "Optional"
+										},
+										{
+											"key": "offset",
+											"value": "10",
+											"description": "Optional"
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Optional"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Application",
+					"item": [
+						{
+							"name": "Application version",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/application/version",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"application",
+										"version"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Application status",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/application/status",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"application",
+										"status"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}

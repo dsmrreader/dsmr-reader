@@ -11,114 +11,119 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
-#: ../../credits.rst:2
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:2
 msgid "Credits / Hall of Fame"
 msgstr "Credits / Hall of Fame"
 
-#: ../../credits.rst:5
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:5
 msgid "Special thanks for supplying code contributions"
 msgstr "Bijzondere dank voor de code-bijdragen van"
 
-#: ../../credits.rst:6
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:6
 msgid "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_"
 msgstr "`Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_"
 
-#: ../../credits.rst:7
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:7
 msgid "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_"
 msgstr "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_"
 
-#: ../../credits.rst:8
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:8
 msgid ""
-"All the [other contributers for the past few years](https://github.com/"
-"dennissiemensma/dsmr-reader/graphs/contributors)!"
+"All the [other contributers for the past few "
+"years](https://github.com/dennissiemensma/dsmr-"
+"reader/graphs/contributors)!"
 msgstr ""
-"Alle [overige bijdrages de afgelopen jaren](https://github.com/"
-"dennissiemensma/dsmr-reader/graphs/contributors)!"
+"Alle [overige bijdrages de afgelopen "
+"jaren](https://github.com/dennissiemensma/dsmr-"
+"reader/graphs/contributors)!"
 
-#: ../../credits.rst:11
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:11
 msgid "Also many thanks to the contributions of"
 msgstr "Dank voor de bijdrages van"
 
-#: ../../credits.rst:12
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:12
 msgid ""
-"Many [pull requests](https://github.com/dennissiemensma/dsmr-reader/pulls)."
+"Many [pull requests](https://github.com/dennissiemensma/dsmr-"
+"reader/pulls)."
 msgstr ""
-"Vele [pull requests](https://github.com/dennissiemensma/dsmr-reader/pulls)."
+"Vele [pull requests](https://github.com/dennissiemensma/dsmr-"
+"reader/pulls)."
 
-#: ../../credits.rst:13
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:13
 msgid ""
-"All [the ideas, improvements and bugs reported](https://github.com/"
-"dennissiemensma/dsmr-reader/issues) for the past years."
+"All [the ideas, improvements and bugs "
+"reported](https://github.com/dennissiemensma/dsmr-reader/issues) for the "
+"past years."
 msgstr ""
-"Alle [ideeën, verbeteringenm suggesties en foutmeldingen](https://github.com/"
-"dennissiemensma/dsmr-reader/issues) de afgelopen jaren."
+"Alle [ideeën, verbeteringenm suggesties en "
+"foutmeldingen](https://github.com/dennissiemensma/dsmr-reader/issues) de "
+"afgelopen jaren."
 
-#: ../../credits.rst:17
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:17
 msgid "Additional thanks to"
 msgstr "Eveneens dank aan"
 
-#: ../../credits.rst:18
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:18
 msgid "JetBrains for providing me a free open-source licence to their products."
 msgstr ""
 "JetBrains voor het afgeven van een gratis open-source licentie voor haar "
 "producten."
 
-#: ../../credits.rst:26
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:26
 msgid "Software used"
 msgstr "Gebruikte software"
 
-#: ../../credits.rst:27
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:27
 msgid ""
 "Please note and respect their licences as well, if any. Credits to the "
 "following software and projects:"
 msgstr ""
-"Houd rekening met eventuele licenties/restricties van deze software, wanneer "
-"van toepassing. Met dank aan de volgende software en projecten:"
+"Houd rekening met eventuele licenties/restricties van deze software, "
+"wanneer van toepassing. Met dank aan de volgende software en projecten:"
 
-#: ../../credits.rst:29
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:29
 msgid "`Raspbian <https://www.raspbian.org/>`_"
 msgstr "`Raspbian <https://www.raspbian.org/>`_"
 
-#: ../../credits.rst:30
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:30
 msgid "`Django Project <https://www.djangoproject.com/>`_"
 msgstr "`Django Project <https://www.djangoproject.com/>`_"
 
-#: ../../credits.rst:31
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:31
 msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
 msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
 
-#: ../../credits.rst:32
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:32
 msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 msgstr "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 
-#: ../../credits.rst:33
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:33
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr "`Supervisor <http://supervisord.org/>`_"
 
-#: ../../credits.rst:34
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:34
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr "`MySQL <https://www.mysql.com/>`_"
 
-#: ../../credits.rst:35
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:35
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr "`MariaDB <https://mariadb.org/>`_"
 
-#: ../../credits.rst:36
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:36
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
-#: ../../credits.rst:37
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:37
 msgid "Director Responsive Admin template (website is offline)"
 msgstr "Director Responsive Admin template (website is offline)"
 
-#: ../../credits.rst:38
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:38
 msgid ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
@@ -126,61 +131,66 @@ msgstr ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
-#: ../../credits.rst:39
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:39
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 
-#: ../../credits.rst:40
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:40
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
-#: ../../credits.rst:41
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:41
 msgid "`Github <https://github.com/>`_"
 msgstr "`Github <https://github.com/>`_"
 
-#: ../../credits.rst:42
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:42
 msgid "`TravisCI <https://travis-ci.org>`_"
 msgstr "`TravisCI <https://travis-ci.org>`_"
 
-#: ../../credits.rst:43
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:43
 msgid "`Codecov <https://codecov.io>`_"
 msgstr "`Codecov <https://codecov.io>`_"
 
-#: ../../credits.rst:44
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:44
 msgid "`Read The Docs <https://readthedocs.org/>`_"
 msgstr "`Read The Docs <https://readthedocs.org/>`_"
 
-#: ../../credits.rst:45
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:45
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
-#: ../../credits.rst:46
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:46
 msgid ""
-"`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-"
-"page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
+"`Full Page Screen Capture <https://chrome.google.com/webstore/detail"
+"/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr ""
-"`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-"
-"page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
+"`Full Page Screen Capture <https://chrome.google.com/webstore/detail"
+"/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 
-#: ../../credits.rst:47
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:47
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr "`Buienradar <http://www.buienradar.nl>`_"
 
-#: ../../credits.rst:48
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:48
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr "`Django REST Framework <http://www.django-rest-framework.org>`_"
 
-#: ../../credits.rst:49
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:49
 msgid ""
-"`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index."
-"html>`_"
+"`eCharts Graphing <https://ecomfe.github.io/echarts-"
+"doc/public/en/index.html>`_"
 msgstr ""
-"`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index."
-"html>`_"
+"`eCharts Graphing <https://ecomfe.github.io/echarts-"
+"doc/public/en/index.html>`_"
 
-#: ../../credits.rst:50
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:50
 msgid "`CircleCI <https://circleci.com/>`_"
 msgstr "`CircleCI <https://circleci.com/>`_"
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/credits.rst:51
+#, fuzzy
+msgid "`ReDoc <https://github.com/Redocly/redoc>`_"
+msgstr "`Github <https://github.com/>`_"
 
 #~ msgid "Listed in any order, sorted by name."
 #~ msgstr "Getoond in willekeurige belangrijkheid, gesorteerd op naam."
@@ -324,9 +334,11 @@ msgstr "`CircleCI <https://circleci.com/>`_"
 #~ msgstr "`rodeho <https://github.com/rodeho>`_"
 
 #~ msgid ""
-#~ "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
+#~ "`Sander de Leeuw <https://www.linkedin.com/in"
+#~ "/sander-de-leeuw-58313aa0>`_"
 #~ msgstr ""
-#~ "`Sander de Leeuw <https://www.linkedin.com/in/sander-de-leeuw-58313aa0>`_"
+#~ "`Sander de Leeuw <https://www.linkedin.com/in"
+#~ "/sander-de-leeuw-58313aa0>`_"
 
 #~ msgid "`sanderdw <https://github.com/sanderdw>`_"
 #~ msgstr "`sanderdw <https://github.com/sanderdw>`_"
@@ -386,22 +398,25 @@ msgstr "`CircleCI <https://circleci.com/>`_"
 #~ msgstr "Overig"
 
 #~ msgid ""
-#~ "Dutch Smart Meter reading specifications, data cables, examples and hints:"
+#~ "Dutch Smart Meter reading specifications, "
+#~ "data cables, examples and hints:"
 #~ msgstr ""
-#~ "Dutch Smart Meter reading specifications, data cables, examples and hints:"
+#~ "Dutch Smart Meter reading specifications, "
+#~ "data cables, examples and hints:"
 
 #~ msgid "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 #~ msgstr "`Gé Janssen <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_"
 
 #~ msgid ""
-#~ "`Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard."
-#~ "nl/>`_"
+#~ "`Joost van der Linde (smartmeterdashboard) "
+#~ "<http://www.smartmeterdashboard.nl/>`_"
 #~ msgstr ""
-#~ "`Joost van der Linde (smartmeterdashboard) <http://www.smartmeterdashboard."
-#~ "nl/>`_"
+#~ "`Joost van der Linde (smartmeterdashboard) "
+#~ "<http://www.smartmeterdashboard.nl/>`_"
 
 #~ msgid "`SOS Solutions <https://www.sossolutions.nl/>`_"
 #~ msgstr "`SOS Solutions <https://www.sossolutions.nl/>`_"
 
 #~ msgid "`Nico Di Rocco <http://nrocco.github.io/>`_"
 #~ msgstr "`Nico Di Rocco <http://nrocco.github.io/>`_"
+
