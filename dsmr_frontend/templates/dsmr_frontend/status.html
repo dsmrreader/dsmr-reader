@@ -70,12 +70,12 @@
                             <td class="col-md-6">
                                 {% if status.readings.seconds_since == None or status.readings.seconds_since > 90 %}
                                 <div class="alert alert-danger" role="alert">
-                                    <span class="fas fa-exclamation-triangle"></span>
+                                    <span class="fas fa-exclamation-triangle"></span> &nbsp;
                                     {% blocktrans %}It has been a while since the latest telegram was read.{% endblocktrans %}
                                     <br /><br />
                                 {% else %}
                                 <div class="alert alert-success" role="alert">
-                                    <span class="fas fa-check"></span>
+                                    <span class="fas fa-check"></span> &nbsp;
                                 {% endif %}
                                     {% trans "Most recent reading" %}:
                                     <strong>{% if status.readings.latest %}{{ status.readings.latest|naturaltime }}{% else %}{% trans "No data." %}{% endif %}</strong>
@@ -113,12 +113,12 @@
                             <td class="col-md-6">
                                 {% if status.readings.unprocessed.seconds_since > 300 %}
                                 <div class="alert alert-danger" role="alert">
-                                    <span class="fas fa-exclamation-triangle"></span>
+                                    <span class="fas fa-exclamation-triangle"></span> &nbsp;
                                     {% blocktrans %}There are too many unprocessed telegrams.{% endblocktrans %}
                                     <br /><br />
                                 {% else %}
                                 <div class="alert alert-success" role="alert">
-                                    <span class="fas fa-check"></span>
+                                    <span class="fas fa-check"></span> &nbsp;
                                 {% endif %}
 
                                 {% trans "Unprocessed telegrams" %}: <strong>{{ status.readings.unprocessed.count|default:'-' }}</strong>
@@ -142,18 +142,18 @@
                                 {% if status.electricity.latest %}
                                     {% if status.electricity.minutes_since == None or status.electricity.minutes_since > 2 %}
                                     <div class="alert alert-danger" role="alert">
-                                        <span class="fas fa-exclamation-triangle"></span>
+                                        <span class="fas fa-exclamation-triangle"></span> &nbsp;
                                         {% trans "Recorded electricity consumption is lagging behind" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
                                     </div>
                                     {% else %}
                                     <div class="alert alert-success" role="alert">
-                                        <span class="fas fa-check"></span>
+                                        <span class="fas fa-check"></span> &nbsp;
                                         {% trans "Recorded electricity consumption is on schedule" %}: <strong>{{ status.electricity.latest|naturaltime }}</strong>
                                     </div>
                                     {% endif %}
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> {% trans "No data." %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No data." %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -173,21 +173,21 @@
                                 </div>
                             </td>
                             <td class="col-md-6">
-                                {% if status.gas.latest %}
+                                {% if capabilities.gas and status.gas.latest %}
                                     {% if status.gas.hours_since == None or status.gas.hours_since > 3 %}
                                     <div class="alert alert-danger" role="alert">
-                                        <span class="fas fa-exclamation-triangle"></span>
+                                        <span class="fas fa-exclamation-triangle"></span> &nbsp;
                                         {% trans "Recorded gas consumption is lagging behind" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                                     </div>
                                     {% else %}
                                     <div class="alert alert-success" role="alert">
-                                        <span class="fas fa-check"></span>
+                                        <span class="fas fa-check"></span> &nbsp;
                                         {% trans "Recorded gas consumption is on schedule" %}: <strong>{{ status.gas.latest|naturaltime }}</strong>
                                     </div>
                                     {% endif %}
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> {% trans "No data." %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No data (or manually disabled)" %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -210,13 +210,13 @@
                             <td class="col-md-6">
                                 {% if status.statistics.days_since == None or status.statistics.days_since > 1 %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span>
+                                    <span class="fas fa-times"></span> &nbsp;
                                     {% trans "Data processing is lagging behind" %}:
                                     <strong>{% if status.statistics.latest %}{{ status.statistics.latest }}{% else %}{% trans "No data." %}{% endif %}</strong>
                                 </div>
                                 {% else %}
                                 <div class="alert alert-success" role="alert">
-                                    <span class="fas fa-check"></span>
+                                    <span class="fas fa-check"></span> &nbsp;
                                     {% trans "Data processing is on schedule" %}: <strong>{{ status.statistics.latest }}</strong>
                                 </div>
                                 {% endif %}
@@ -276,8 +276,8 @@
                             </td>
                             <td class="col-md-6">
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-check"></i>
-                                    {% trans "Latest backup" %}: <strong>{{ status.tools.backup.latest_backup|default:'-' }}</strong>
+                                    <i class="fas fa-info"></i> &nbsp;
+                                    {% trans "Latest" %}: <strong>{{ status.tools.backup.latest_backup|default:'-' }}</strong>
                                 </div>
                             </td>
                         </tr>
@@ -290,8 +290,8 @@
                             </td>
                             <td class="col-md-6">
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-check"></i>
-                                    {% trans "Latest Dropbox sync" %}: <strong>{{ status.tools.dropbox.latest_sync|default:'-' }}</strong>
+                                    <i class="fas fa-info"></i> &nbsp;
+                                    {% trans "Latest" %}: <strong>{{ status.tools.dropbox.latest_sync|default:'-' }}</strong>
                                 </div>
                             </td>
                         </tr>
@@ -304,8 +304,8 @@
                             </td>
                             <td class="col-md-6">
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-check"></i>
-                                    {% trans "Latest PVOutput sync" %}: <strong>{{ status.tools.pvoutput.latest_sync|default:'-' }}</strong>
+                                    <i class="fas fa-info"></i> &nbsp;
+                                    {% trans "Latest" %}: <strong>{{ status.tools.pvoutput.latest_sync|default:'-' }}</strong>
                                 </div>
                             </td>
                         </tr>
@@ -318,7 +318,7 @@
                             <td class="col-md-6">
                                 {% if status.tools.mqtt.ok %}
                                 <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-check"></i>
+                                    <i class="fas fa-info"></i> &nbsp;
                                 {% else %}
                                 <div class="alert alert-danger" role="alert">
                                     <i class="fas fa-exclamation-triangle"></i>
@@ -357,11 +357,11 @@
                             <td class="col-md-6">
                                 {% if capabilities.electricity %}
                                 <div class="alert alert-info" role="alert">
-                                    <span class="fas fa-check"></span> {% trans "Electricity usage recorded" %}
+                                    <span class="fas fa-check"></span> &nbsp; {% trans "Electricity usage recorded" %}
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> {% trans "No electricity usage recorded" %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No electricity usage recorded" %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -382,11 +382,11 @@
                             <td class="col-md-6">
                                 {% if capabilities.electricity_returned %}
                                 <div class="alert alert-info" role="alert">
-                                    <span class="fas fa-check"></span> {% trans "Electricity return recorded" %}
+                                    <span class="fas fa-check"></span> &nbsp; {% trans "Electricity return recorded" %}
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> {% trans "No electricity return recorded" %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No electricity return recorded (or manually disabled)" %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -407,11 +407,11 @@
                             <td class="col-md-6">
                                 {% if capabilities.gas %}
                                 <div class="alert alert-info" role="alert">
-                                    <span class="fas fa-check"></span> {% trans "Gas usage recorded" %}
+                                    <span class="fas fa-check"></span> &nbsp; {% trans "Gas usage recorded" %}
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> {% trans "No gas usage recorded" %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No gas usage recorded (or manually disabled)" %}
                                 </div>
                                 {% endif %}
                             </td>
