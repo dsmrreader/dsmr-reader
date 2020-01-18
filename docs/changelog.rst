@@ -4,7 +4,9 @@ Changelog
 
 v3.2.0 - 2020-01-26
 
-- [`#841 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_]  Dropbox: Foutafhandeling ongeldig token werkt niet meer #841
+
+- [`#841 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_] Dropbox: Foutafhandeling ongeldig token werkt niet meer
+- [`#842 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_] Gasgrafiek als staafdiagram
 
 
 ----

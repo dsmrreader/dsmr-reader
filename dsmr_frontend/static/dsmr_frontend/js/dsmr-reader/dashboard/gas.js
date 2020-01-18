@@ -56,7 +56,7 @@ $(document).ready(function(){
 	        series : [
 	            {
 	                name: 'm³',
-	                type: 'line',
+	                type: 'bar',
 	                areaStyle: {},
 	                data: xhr_data.currently_delivered,
 	                smooth: true

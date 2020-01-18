@@ -51,7 +51,7 @@ function render_gas_graph(xhr_data)
             {
             	smooth: true,
                 name: text_gas,
-                type: 'line',
+                type: 'bar',
                 areaStyle: {},
                 data: xhr_data.gas
             }
