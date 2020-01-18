@@ -25,6 +25,7 @@ def sync():
     if dropbox_settings.next_sync and dropbox_settings.next_sync > timezone.now():
         return
 
+    check_access_token(dropbox_settings.access_token)
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
 
     # Sync each file, recursively.
@@ -33,7 +34,7 @@ def sync():
             continue
 
         sync_file(
-            dropbox_settings=dropbox_settings,
+            dropbox_access_token=dropbox_settings.access_token,
             local_root_dir=backup_directory,
             abs_file_path=current_file
         )
@@ -45,6 +46,28 @@ def sync():
             hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
         )
     )
+
+
+def check_access_token(dropbox_access_token):
+    """ Verify auth token validity. """
+    dbx = dropbox.Dropbox(dropbox_access_token)
+
+    try:
+        dbx.users_get_space_usage()
+    except (dropbox.exceptions.BadInputError, dropbox.exceptions.AuthError) as error:
+        logger.error(' - Dropbox auth error: %s', error)
+        message = _(
+            "Unable to authenticate with Dropbox, removing credentials. Error: {}".format(
+                error
+            )
+        )
+        dsmr_frontend.services.display_dashboard_message(message=message)
+        DropboxSettings.objects.update(
+            latest_sync=timezone.now(),
+            next_sync=None,
+            access_token=None
+        )
+        raise
 
 
 def list_files_in_dir(directory):
@@ -81,8 +104,8 @@ def should_sync_file(abs_file_path):
     return True
 
 
-def sync_file(dropbox_settings, local_root_dir, abs_file_path):
-    dbx = dropbox.Dropbox(dropbox_settings.access_token)
+def sync_file(dropbox_access_token, local_root_dir, abs_file_path):
+    dbx = dropbox.Dropbox(dropbox_access_token)
 
     # The path we use in our Dropbox app folder.
     relative_file_path = abs_file_path.replace(local_root_dir, '')
@@ -104,7 +127,7 @@ def sync_file(dropbox_settings, local_root_dir, abs_file_path):
 
     try:
         upload_chunked(
-            dropbox_settings=dropbox_settings,
+            dropbox_access_token=dropbox_access_token,
             local_file_path=abs_file_path,
             remote_file_path=relative_file_path
         )
@@ -124,28 +147,14 @@ def sync_file(dropbox_settings, local_root_dir, abs_file_path):
                 next_sync=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
             )
 
-        # Auth error. Do not bother trying again.
-        if 'invalid_access_token' in error_message:
-            message = _(
-                "Unable to upload files to Dropbox due to {}. Removing credentials...".format(
-                    error_message
-                )
-            )
-            dsmr_frontend.services.display_dashboard_message(message=message)
-            DropboxSettings.objects.update(
-                latest_sync=timezone.now(),
-                next_sync=None,
-                access_token=None
-            )
-
-        raise
+        raise  # pragma: no cover
 
 
-def upload_chunked(dropbox_settings, local_file_path, remote_file_path):
+def upload_chunked(dropbox_access_token, local_file_path, remote_file_path):
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     logger.info('Dropbox: Syncing file %s', remote_file_path)
 
-    dbx = dropbox.Dropbox(dropbox_settings.access_token)
+    dbx = dropbox.Dropbox(dropbox_access_token)
     write_mode = dropbox.files.WriteMode.overwrite
 
     file_handle = open(local_file_path, 'rb')
@@ -175,7 +184,7 @@ def upload_chunked(dropbox_settings, local_file_path, remote_file_path):
             if (file_size - file_handle.tell()) <= CHUNK_SIZE:
                 dbx.files_upload_session_finish(file_handle.read(CHUNK_SIZE), cursor, commit)
             else:
-                dbx.files_upload_session_append(file_handle.read(CHUNK_SIZE), cursor.session_id, cursor.offset)
+                dbx.files_upload_session_append_v2(file_handle.read(CHUNK_SIZE), cursor)
                 cursor.offset = file_handle.tell()
 
     file_handle.close()

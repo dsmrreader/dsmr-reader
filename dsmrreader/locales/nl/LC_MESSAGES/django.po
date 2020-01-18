@@ -613,11 +613,11 @@ msgstr "Dropbox"
 msgid "Forces Dropbox sync."
 msgstr "Forceert Dropbox synchronisatie."
 
+msgid "Unable to authenticate with Dropbox, removing credentials. Error: {}"
+msgstr "Kan niet authenticeren met Dropbox, inloggegevens weggehaald. Fout: {}"
+
 msgid "Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
 msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
-
-msgid "Unable to upload files to Dropbox due to {}. Removing credentials..."
-msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox wegens {}. Logingegevens voor Dropbox weggehaald..."
 
 msgid "Interface"
 msgstr "Interface"
@@ -2277,9 +2277,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "DSMR-reader v2.15.0: This is the last release on v2. Switching to v3 requires you to manually upgrade. Click the link for more information."
-#~ msgstr "DSMR-reader v2.15.0: Dit is de laatste release op v2. Om te wisselen naar v3 zul je handmatig moeten upgraden. Klik de link voor meer informatie."
-
-#~ msgid "Upgrade to v3"
-#~ msgstr "Upgrade naar v3"

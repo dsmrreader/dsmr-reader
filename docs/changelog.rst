@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.2.0 - 2020-01-26
+
+- [`#841 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_]  Dropbox: Foutafhandeling ongeldig token werkt niet meer #841
+
+
+----
+
+
 v3.1.0 - 2020-01-18
 
 - [`#836 <https://github.com/dennissiemensma/dsmr-reader/issues/836>`_] Correct background of inactive icons in Archive - by JeanMiK
