@@ -38,7 +38,7 @@ function render_gas_graph(xhr_data)
         xAxis: [
             {
                 type : 'category',
-                boundaryGap: false,
+                boundaryGap: true,  // Required when using bar graphs
                 data : xhr_data.x
             }
         ],

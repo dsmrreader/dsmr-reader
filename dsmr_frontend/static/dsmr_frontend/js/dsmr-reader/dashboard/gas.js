@@ -32,7 +32,7 @@ $(document).ready(function(){
 	        xAxis: [
 	            {
 	                type : 'category',
-                        boundaryGap: false,
+					boundaryGap: true,  // Required when using bar graphs
 	                data : xhr_data.read_at
 	            }
 	        ],
