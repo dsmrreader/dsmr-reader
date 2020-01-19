@@ -25,7 +25,7 @@ $(document).ready(function(){
         xAxis: [
             {
                 type : 'category',
-                boundaryGap: true,  // Required here
+                boundaryGap: false,
                 data : null
             }
         ],
@@ -55,7 +55,7 @@ $(document).ready(function(){
         xAxis: [
             {
                 type : 'category',
-                boundaryGap: true,  // Required here
+                boundaryGap: false,
                 data : null
             }
         ],

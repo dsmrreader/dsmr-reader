@@ -23,14 +23,16 @@ import dsmr_backend.services.backend
 logger = logging.getLogger('commands')
 
 
-def compact_all():
+def run(scheduled_process):
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
     for current_reading in DsmrReading.objects.unprocessed()[0:settings.DSMRREADER_COMPACT_MAX]:
         try:
             compact(dsmr_reading=current_reading)
         except CompactorNotReadyError:
-            # Try again next run, no use in retrying anyway.
-            return
+            # Try again in a while, since we can't do anything now anyway.
+            return scheduled_process.delay(timezone.timedelta(seconds=15))
+
+    scheduled_process.delay(timezone.timedelta(seconds=1))
 
 
 def compact(dsmr_reading):

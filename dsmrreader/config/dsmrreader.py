@@ -23,6 +23,7 @@ DSMRREADER_MODULE_AUTO_UPDATE_CHECKER = 'dsmr_backend.services.update_checker.ru
 DSMRREADER_MODULE_WEATHER_UPDATE = 'dsmr_weather.services.run'
 DSMRREADER_MODULE_STATS_GENERATOR = 'dsmr_stats.services.run'
 DSMRREADER_MODULE_MINDERGAS_EXPORT = 'dsmr_mindergas.services.run'
+DSMRREADER_MODULE_GENERATE_CONSUMPTION = 'dsmr_consumption.services.run'
 
 DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.

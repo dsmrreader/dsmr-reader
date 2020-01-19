@@ -1,9 +1,11 @@
 from decimal import Decimal
 from unittest import mock
 
+from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -21,6 +23,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
     ]
     support_gas_readings = None
     support_prices = None
+    schedule_process = None
 
     def setUp(self):
         self.support_gas_readings = True
@@ -36,6 +39,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         ConsumptionSettings.get_solo()
 
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_GENERATE_CONSUMPTION)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+
     def test_processing(self):
         """ Test fixed data parse outcome. """
         # Default is grouping by minute, so make sure to revert that here.
@@ -50,7 +56,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             ).exists()
         )
 
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
@@ -89,7 +95,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         duplicate_reading.electricity_currently_delivered *= 2  # Make it differ.
         duplicate_reading.save()
 
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())
@@ -102,7 +108,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_grouping(self, now_mock):
-        """ Test grouping per minute, instead of the default 10-second interval. """
+        """ Test grouping per minute, instead of the default X-second interval. """
         now_mock.return_value = timezone.make_aware(
             timezone.datetime(2015, 11, 10, hour=21)
         )
@@ -112,7 +118,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         dr.timestamp = timezone.now()
         dr.save()
 
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
 
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
         self.assertTrue(DsmrReading.objects.unprocessed().exists())
@@ -122,6 +128,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(GasConsumption.objects.count(), 1)
         else:
             self.assertEqual(GasConsumption.objects.count(), 0)
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(seconds=15))  # 15 s delay
 
     @mock.patch('django.utils.timezone.now')
     def test_extra_device_existing_data(self, now_mock):
@@ -188,7 +197,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             **reading_kwargs
         )
 
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
 
         # This should not happen anymore.
         self.assertFalse(GasConsumption.objects.filter(currently_delivered__lt=0).exists())
@@ -226,12 +235,12 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
         # This should do nothing, minute is not passed yet.
         self.assertFalse(ElectricityConsumption.objects.exists())
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
         self.assertFalse(ElectricityConsumption.objects.exists())
 
         # Pass minute. Fix should keep reading unprocessed.
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=0, minute=1, second=10))
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
         self.assertFalse(ElectricityConsumption.objects.exists())
 
         # Add afterwards in passed minute. It should still be ignored.
@@ -244,7 +253,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             electricity_currently_delivered=0,
             electricity_currently_returned=0,
         )
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
         self.assertFalse(ElectricityConsumption.objects.exists())
 
         # Now create a new reading in the next minute, it should finally trigger the grouping, as desired.
@@ -257,7 +266,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             electricity_currently_delivered=0,
             electricity_currently_returned=0,
         )
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
         self.assertTrue(ElectricityConsumption.objects.exists())
 
         # Check result, should be max of all three readings.
@@ -268,7 +277,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(GasConsumption.objects.exists())
 
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
 
         self.assertTrue(ElectricityConsumption.objects.exists())
 
@@ -516,6 +525,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
 class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
     """ Biggest difference is the interval of gas readings. """
     fixtures = ['dsmr_consumption/test_dsmrreading_v5.json', 'dsmr_consumption/test_energysupplierprice.json']
+    schedule_process = None
 
     def setUp(self):
         self.assertEqual(DsmrReading.objects.all().count(), 7)
@@ -524,11 +534,14 @@ class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
         MeterStatistics.get_solo()
         MeterStatistics.objects.all().update(dsmr_version='50')
 
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_GENERATE_CONSUMPTION)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+
     def test_processing_grouped(self):
         self.assertFalse(DsmrReading.objects.processed().exists())
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 7)
 
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
@@ -541,7 +554,7 @@ class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
     def test_processing_ungrouped(self):
         ConsumptionSettings.objects.update(compactor_grouping_type=ConsumptionSettings.COMPACTOR_GROUPING_BY_READING)
 
-        dsmr_consumption.services.compact_all()
+        dsmr_consumption.services.run(self.schedule_process)
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertFalse(DsmrReading.objects.unprocessed().exists())

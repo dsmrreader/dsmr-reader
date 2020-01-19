@@ -9,7 +9,6 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics
-import dsmr_consumption.services
 
 
 class TestViews(TestCase):
@@ -29,7 +28,6 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        dsmr_consumption.services.compact_all()
 
     @mock.patch('django.utils.timezone.now')
     def test_archive(self, now_mock):

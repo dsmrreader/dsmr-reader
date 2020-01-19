@@ -859,17 +859,17 @@ msgstr "Energiecontracten"
 msgid "Status"
 msgstr "Status"
 
-msgid "Export data"
-msgstr "Exporteer gegevens"
+msgid "Notifications"
+msgstr "Notificaties"
 
 msgid "Authentication required"
 msgstr "Authenticatie vereist"
 
+msgid "Export data"
+msgstr "Exporteer gegevens"
+
 msgid "Configuration"
 msgstr "Configuratie"
-
-msgid "Notifications"
-msgstr "Notificaties"
 
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"
@@ -1108,8 +1108,8 @@ msgstr "Totaal aantal metingen"
 msgid "The number of P1 DSMR telegrams read and stored in the application."
 msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
 
-msgid "Show"
-msgstr "Toon"
+msgid "Show count"
+msgstr "Toon aantal"
 
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
@@ -2277,3 +2277,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Show"
+#~ msgstr "Toon"

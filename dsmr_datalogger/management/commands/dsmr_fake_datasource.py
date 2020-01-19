@@ -71,10 +71,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         logger.debug('-' * 32)
         logger.debug('')
 
-        # 1420070400: 01 Jan 2015 00:00:00 GMT
         current_unix_time = time.mktime(now.timetuple())
-        second_since = int(current_unix_time - 1420070400)
-        electricity_base = second_since * 0.00005  # Averages around 1500/1600 kWh for a year.
+        second_since = int(current_unix_time - 1420070400)  # 1420070400: 01 Jan 2015 00:00:00 GMT
+        electricity_base = second_since * 0.0001  # Averages around 3000 kWh for a year.
 
         electricity_1 = electricity_base
         electricity_2 = electricity_1 * 0.6  # Consumption during daylight is a bit lower.
@@ -108,7 +107,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         data = [
             "/XMX5LGBBFFB123456789\r\n",
             "\r\n",
-            "1-3:0.2.8(40)\r\n",
+            "1-3:0.2.8(50)\r\n",
             "0-0:1.0.0({timestamp}W)\r\n".format(
                 timestamp=now.strftime('%y%m%d%H%M%S')
             ),
@@ -150,7 +149,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
                 "0-1:24.1.0(003)\r\n",
                 "0-1:96.1.0(12345678901234567890123456789001)\r\n",
                 "0-1:24.2.1({}W)({}*m3)\r\n".format(
-                    now.strftime('%y%m%d%H0000'), self._round_precision(gas, 9)
+                    now.strftime('%y%m%d%H%M00'), self._round_precision(gas, 9)
                 ),
             ]
 

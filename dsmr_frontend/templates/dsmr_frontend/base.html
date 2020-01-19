@@ -116,6 +116,11 @@
                             &nbsp;&nbsp;
                         </li>
                         <li>
+				            <a href="{% url 'frontend:notifications' %}">
+				                <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+				            </a>
+			            </li>
+                        <li>
                             <a href="{% url 'frontend:export' %}">
                                 <i class="fas fa-xs fa-file-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
                             </a>
@@ -123,11 +128,6 @@
                         <li>
 				            <a href="{% url 'admin:index' %}">
 				                <i class="fas fa-xs fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
-				            </a>
-			            </li>
-                        <li>
-				            <a href="{% url 'frontend:notifications' %}">
-				                <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
 			            </li>
                         <li>
