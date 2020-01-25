@@ -8,6 +8,8 @@ v3.1.1 - 2020-01-25
 
 
 ----
+
+
 v3.1.0 - 2020-01-18
 
 - [`#836 <https://github.com/dennissiemensma/dsmr-reader/issues/836>`_] Correct background of inactive icons in Archive - by JeanMiK
