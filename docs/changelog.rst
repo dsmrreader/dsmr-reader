@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v3.1.1 - 2020-01-25
+
+- [`#850 <https://github.com/dennissiemensma/dsmr-reader/issues/850>`_] No matching distribution found for PyCRC==1.21
+
+
+----
 v3.1.0 - 2020-01-18
 
 - [`#836 <https://github.com/dennissiemensma/dsmr-reader/issues/836>`_] Correct background of inactive icons in Archive - by JeanMiK
