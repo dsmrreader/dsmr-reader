@@ -10,9 +10,11 @@ dropbox==9.4.0
 # Do not upgrade to 20.x yet, see #783
 gunicorn==19.7
 paho-mqtt==1.5.0
-PyCRC==1.21
 pyserial==3.4
 python-dateutil==2.8.1
 pytz==2019.3
 requests==2.22.0
 urllib3==1.25.7
+
+# See #850, it seems pyCRC has been replaced?! And the old repository is no longer available.
+https://qpypi3.qpython.org/repository/1745924/PyCRC-1.21.tar.gz

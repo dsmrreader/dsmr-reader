@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v2.15.1 - 2020-01-25
+
+- [`#850 <https://github.com/dennissiemensma/dsmr-reader/issues/850>`_] No matching distribution found for PyCRC==1.21
+
+
+----
+
+
 .. warning::
 
     *This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.*
