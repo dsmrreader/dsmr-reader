@@ -46,7 +46,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         """ Test fixed data parse outcome. """
         # Default is grouping by minute, so make sure to revert that here.
         consumption_settings = ConsumptionSettings.get_solo()
-        consumption_settings.compactor_grouping_type = ConsumptionSettings.COMPACTOR_GROUPING_BY_READING
+        consumption_settings.electricity_grouping_type = ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING
         consumption_settings.save()
 
         self.assertFalse(
@@ -86,7 +86,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         """ Duplicate readings should not crash the compactor when not grouping. """
         # Default is grouping by minute, so make sure to revert that here.
         consumption_settings = ConsumptionSettings.get_solo()
-        consumption_settings.compactor_grouping_type = ConsumptionSettings.COMPACTOR_GROUPING_BY_READING
+        consumption_settings.electricity_grouping_type = ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING
         consumption_settings.save()
 
         # Just duplicate one, as it will cause: IntegrityError UNIQUE constraint failed: ElectricityConsumption.read_at
@@ -538,6 +538,7 @@ class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
         self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
 
     def test_processing_grouped(self):
+        ConsumptionSettings.objects.update(gas_grouping_type=ConsumptionSettings.GAS_GROUPING_BY_HOUR)
         self.assertFalse(DsmrReading.objects.processed().exists())
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 7)
 
@@ -545,14 +546,17 @@ class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
 
         self.assertTrue(DsmrReading.objects.processed().exists())
         self.assertEqual(DsmrReading.objects.unprocessed().count(), 1)
-        self.assertEqual(GasConsumption.objects.count(), 4)
+        self.assertEqual(GasConsumption.objects.count(), 2)
         self.assertEqual(
             [float(x.currently_delivered) for x in GasConsumption.objects.all()],
-            [0.0, 0.05, 0.03, 0.07]
+            [0.0, 0.15]
         )
 
     def test_processing_ungrouped(self):
-        ConsumptionSettings.objects.update(compactor_grouping_type=ConsumptionSettings.COMPACTOR_GROUPING_BY_READING)
+        ConsumptionSettings.objects.update(
+            electricity_grouping_type=ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING,
+            gas_grouping_type=ConsumptionSettings.GAS_GROUPING_BY_CHANGE,
+        )
 
         dsmr_consumption.services.run(self.schedule_process)
 

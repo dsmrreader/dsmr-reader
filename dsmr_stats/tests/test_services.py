@@ -680,7 +680,9 @@ class TestServices(InterceptStdoutMixin, TestCase):
 
     @mock.patch('django.utils.timezone.now')
     def test_update_electricity_statistics_single_phase(self, now_mock):
-        ConsumptionSettings.objects.update(compactor_grouping_type=ConsumptionSettings.COMPACTOR_GROUPING_BY_READING)
+        ConsumptionSettings.objects.update(
+            electricity_grouping_type=ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING
+        )
 
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=0))
         stats = ElectricityStatistics.get_solo()

@@ -40,7 +40,9 @@ class Command(BaseCommand):
             email_from=None, email_to=None, host=None, port=None, username=None, password=None
         )
         DropboxSettings.objects.update(access_token=None)
-        ConsumptionSettings.objects.update(compactor_grouping_type=ConsumptionSettings.COMPACTOR_GROUPING_BY_READING)
+        ConsumptionSettings.objects.update(
+            electricity_grouping_type=ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING
+        )
         MinderGasSettings.objects.update(export=False, auth_token=None)
         NotificationSetting.objects.update(
             notification_service=None, pushover_api_key=None, pushover_user_key=None, prowl_api_key=None

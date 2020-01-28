@@ -7,6 +7,7 @@ v3.2.0 - 2020-01-29
 
 - [`#841 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_] Dropbox: Foutafhandeling ongeldig token werkt niet meer
 - [`#842 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_] Gasgrafiek als staafdiagram
+- [`#844 <https://github.com/dennissiemensma/dsmr-reader/issues/844>`_] Gas optioneel kunnen groeperen per uur
 - [`#854 <https://github.com/dennissiemensma/dsmr-reader/issues/854>`_] Fixed doc version link on status page - by martijnb92
 
 

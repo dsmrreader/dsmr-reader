@@ -16,7 +16,7 @@ class TestSettings(TestCase):
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
-    def test_compactor_grouping_type(self):
+    def test_electricity_grouping_type(self):
         self.assertEqual(
-            self.instance.compactor_grouping_type, ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE
+            self.instance.electricity_grouping_type, ConsumptionSettings.ELECTRICITY_GROUPING_BY_MINUTE
         )

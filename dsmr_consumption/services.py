@@ -39,7 +39,7 @@ def compact(dsmr_reading):
     """
     Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute.
     """
-    grouping_type = ConsumptionSettings.get_solo().compactor_grouping_type
+    consumption_settings = ConsumptionSettings.get_solo()
 
     # Grouping by minute requires some distinction and history checking.
     reading_start = timezone.datetime.combine(
@@ -47,7 +47,7 @@ def compact(dsmr_reading):
         time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
     ).replace(tzinfo=pytz.UTC)
 
-    if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE:
+    if consumption_settings.electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_MINUTE:
         system_time_past_minute = timezone.now() >= reading_start + timezone.timedelta(minutes=1)
         reading_past_minute_exists = DsmrReading.objects.filter(
             timestamp__gte=reading_start + timezone.timedelta(minutes=1)
@@ -59,8 +59,15 @@ def compact(dsmr_reading):
             raise CompactorNotReadyError()
 
     # Create consumption records.
-    _compact_electricity(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)
-    _compact_gas(dsmr_reading=dsmr_reading, grouping_type=grouping_type, reading_start=reading_start)
+    _compact_electricity(
+        dsmr_reading=dsmr_reading,
+        electricity_grouping_type=consumption_settings.electricity_grouping_type,
+        reading_start=reading_start
+    )
+    _compact_gas(
+        dsmr_reading=dsmr_reading,
+        gas_grouping_type=consumption_settings.gas_grouping_type
+    )
 
     dsmr_reading.processed = True
     dsmr_reading.save(update_fields=['processed'])
@@ -69,12 +76,12 @@ def compact(dsmr_reading):
     logger.debug('Compact: Processed reading: %s', dsmr_reading)
 
 
-def _compact_electricity(dsmr_reading, grouping_type, reading_start):
+def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start):
     """
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
     """
-    # Electricity should be unique, because it's the reading with the smallest interval anyway.
-    if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_READING:
+
+    if electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING:
         try:
             ElectricityConsumption.objects.get_or_create(
                 read_at=dsmr_reading.timestamp,
@@ -147,38 +154,43 @@ def _compact_electricity(dsmr_reading, grouping_type, reading_start):
     )
 
 
-def _compact_gas(dsmr_reading, grouping_type, **kwargs):
+def _compact_gas(dsmr_reading, gas_grouping_type):
     """
     Compacts any DSMR readings to gas consumption records, optionally grouped. Only when there is support for gas.
 
     There is quite some distinction between DSMR v4 and v5. DSMR v4 will update only once per hour and backtracks the
     time by reporting it over the previous hour.
     DSMR v5 will just allow small intervals, depending on whether the readings are grouped per minute or not.
+
+    Since DSMR-reader v3.2 users are allowed to have their gas readings grouped per hour. This never affects DSMR v4,
+    only DSMR v5 users.
     """
     if not dsmr_reading.extra_device_timestamp or not dsmr_reading.extra_device_delivered:
         # Some households aren't connected to a gas meter at all.
         return
 
-    read_at = dsmr_reading.extra_device_timestamp
+    gas_read_at = dsmr_reading.extra_device_timestamp
     dsmr_version = MeterStatistics.get_solo().dsmr_version
 
-    # User requests grouping? We will truncate the 'seconds' marker, which will only affect DSMR v5 readings.
-    if grouping_type == ConsumptionSettings.COMPACTOR_GROUPING_BY_MINUTE:
-        read_at = read_at.replace(second=0, microsecond=0)
+    # User requests grouping? Truncate any precision, making the gas reading's timestamp collide with the previous one,
+    # until at least an hour passed by.
+    if gas_grouping_type == ConsumptionSettings.GAS_GROUPING_BY_HOUR:
+        gas_read_at = gas_read_at.replace(minute=0, second=0, microsecond=0)
 
     # DSMR v4 readings should reflect to the previous hour, to keep it compatible with the existing implementation.
     if dsmr_version is not None and dsmr_version.startswith('4'):
-        read_at = read_at - timezone.timedelta(hours=1)
+        gas_read_at = gas_read_at - timezone.timedelta(hours=1)
 
-    # We will not override data, just ignore it then. DSMR v4 will hit this a lot, DSMR v5 not.
-    if GasConsumption.objects.filter(read_at=read_at).exists():
+    # We will not override data, just ignore it. Also subject to DSMR v4 and grouped gas readings.
+    if GasConsumption.objects.filter(read_at=gas_read_at).exists():
         return
 
-    # DSMR does not expose current gas rate, so we have to calculate it ourselves, relative to the previous gas
-    # consumption, if any.
+    # DSMR protocol does not expose current gas rate, so we have to calculate it ourselves.
+    # Relative to the previous gas consumption, if any.
     try:
         previous = GasConsumption.objects.filter(
-            read_at__lt=read_at  # Prevents negative values when importing historic data.
+            # LT filter prevents negative values when importing historic data.
+            read_at__lt=gas_read_at
         ).order_by('-read_at')[0]
     except IndexError:
         gas_diff = 0
@@ -186,7 +198,7 @@ def _compact_gas(dsmr_reading, grouping_type, **kwargs):
         gas_diff = dsmr_reading.extra_device_delivered - previous.delivered
 
     GasConsumption.objects.create(
-        read_at=read_at,
+        read_at=gas_read_at,
         delivered=dsmr_reading.extra_device_delivered,
         currently_delivered=gas_diff
     )
