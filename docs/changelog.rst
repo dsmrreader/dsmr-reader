@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v3.2.0 - 2020-01-29
+v3.2.0 - 2020-01-31
 
 
 - [`#841 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_] Dropbox: Foutafhandeling ongeldig token werkt niet meer
