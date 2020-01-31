@@ -1,7 +1,6 @@
 import logging
 import re
-
-from PyCRC.CRC16 import CRC16
+from ctypes import c_ushort
 
 from dsmr_parser.objects import MBusObject, CosemObject
 from dsmr_parser.exceptions import ParseError, InvalidChecksumError
@@ -74,7 +73,7 @@ class TelegramParser(object):
                 'incomplete. The checksum and/or content values are missing.'
             )
 
-        calculated_crc = CRC16().calculate(checksum_contents.group(0))
+        calculated_crc = TelegramParser.crc16(checksum_contents.group(0))
         expected_crc = int(checksum_hex.group(0), base=16)
         calculated_crc_hex = '{:0>4}'.format(hex(calculated_crc)[2:].upper())
         expected_crc_hex = '{:0>4}'.format(hex(expected_crc)[2:].upper())
@@ -89,6 +88,29 @@ class TelegramParser(object):
                     expected_crc_hex
                 )
             )
+
+    @staticmethod
+    def crc16(telegram):
+        crc16_tab = []
+
+        for i in range(0, 256):
+            crc = c_ushort(i).value
+            for j in range(0, 8):
+                if (crc & 0x0001):
+                    crc = c_ushort(crc >> 1).value ^ 0xA001
+                else:
+                    crc = c_ushort(crc >> 1).value
+            crc16_tab.append(hex(crc))
+
+        crcValue = 0x0000
+
+        for c in telegram:
+            d = ord(c)
+            tmp = crcValue ^ d
+            rotated = c_ushort(crcValue >> 8).value
+            crcValue = rotated ^ int(crc16_tab[(tmp & 0x00ff)], 0)
+
+        return crcValue
 
 
 class DSMRObjectParser(object):
