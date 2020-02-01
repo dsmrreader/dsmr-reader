@@ -281,6 +281,7 @@
     <script type="text/javascript">
         var echarts_gas_graph_url = "{% url 'frontend:dashboard-xhr-gas' %}";
         var gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
+        var gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/gas.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}

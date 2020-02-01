@@ -9,6 +9,13 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 class FrontendSettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    GAS_GRAPH_STYLE_BAR = 'bar'
+    GAS_GRAPH_STYLE_LINE = 'line'
+    GAS_GRAPH_STYLES = (
+        (GAS_GRAPH_STYLE_BAR, _('Bar')),
+        (GAS_GRAPH_STYLE_LINE, _('Line')),
+    )
+
     merge_electricity_tariffs = models.BooleanField(
         default=False,
         verbose_name=_('Merge electricity tariffs'),
@@ -80,6 +87,13 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         validators=[MinValueValidator(30), MaxValueValidator(60 * 60 * 24)],
         verbose_name=_('Dashboard graph width'),
         help_text=_("The number of items displayed on the X-axis of the dashboard graphs")
+    )
+    gas_graph_style = models.CharField(
+        max_length=4,
+        choices=GAS_GRAPH_STYLES,
+        default=GAS_GRAPH_STYLE_BAR,
+        verbose_name=_('Gas graph style'),
+        help_text=_("Using the bar style will help you distinguish empty values better")
     )
 
     def __str__(self):

@@ -56,7 +56,7 @@ $(document).ready(function(){
 	        series : [
 	            {
 	                name: 'm³',
-	                type: 'bar',
+	                type: gas_graph_style,
 	                areaStyle: {},
 	                data: xhr_data.currently_delivered,
 	                smooth: true

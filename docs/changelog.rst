@@ -5,7 +5,7 @@ Changelog
 v3.3.0 - 2020-xx-xx
 
 
-- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_] xxxxxxx
+- [`#860 <https://github.com/dennissiemensma/dsmr-reader/issues/860>`_] Gasgrafiek handmatig instellen op staaf of lijn
 
 
 ----

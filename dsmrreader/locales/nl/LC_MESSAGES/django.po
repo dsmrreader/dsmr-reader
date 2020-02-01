@@ -709,6 +709,12 @@ msgstr "DSMR-reader v2.14.0: Sommige instellingen in settings.py zijn verplaatst
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
+msgid "Bar"
+msgstr "Staaf"
+
+msgid "Line"
+msgstr "Lijn"
+
 msgid "Merge electricity tariffs"
 msgstr "Voeg tarieven samen"
 
@@ -792,6 +798,12 @@ msgstr "Dashboard grafiek breedte"
 
 msgid "The number of items displayed on the X-axis of the dashboard graphs"
 msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
+
+msgid "Gas graph style"
+msgstr "Gafiekstijl voor gas"
+
+msgid "Using the bar style will help you distinguish empty values better"
+msgstr "Je kunt lege waardes beter onderscheiden wanneer je de staaf-grafiekstijl gebruikt"
 
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"

@@ -35,6 +35,7 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
             _('Gas'), {
                 'fields': [
                     'gas_delivered_color',
+                    'gas_graph_style',
                 ],
             }
         ),
