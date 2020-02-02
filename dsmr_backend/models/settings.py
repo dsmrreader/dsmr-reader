@@ -20,7 +20,7 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
     )
     process_sleep = models.DecimalField(
         default=1,
-        max_digits=3,
+        max_digits=4,
         decimal_places=1,
         verbose_name=_('Backend process sleep'),
         help_text=_(

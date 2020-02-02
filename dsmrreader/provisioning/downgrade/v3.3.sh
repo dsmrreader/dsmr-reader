@@ -2,7 +2,7 @@
 
 # Dump for DSMR-reader v3.3
 ./manage.py migrate dsmr_api 0003_create_api_user
-./manage.py migrate dsmr_backend 0012_fix_email_from
+./manage.py migrate dsmr_backend 0013_allow_higher_backend_sleep
 ./manage.py migrate dsmr_backup 0007_remove_backupsettings_compress
 ./manage.py migrate dsmr_consumption 0014_gas_grouping
 ./manage.py migrate dsmr_datalogger 0018_meterstatistics_no_autonow
