@@ -7,6 +7,7 @@ v3.3.0 - 2020-xx-xx
 
 - [`#860 <https://github.com/dennissiemensma/dsmr-reader/issues/860>`_] Gasgrafiek handmatig instellen op staaf of lijn
 - [`#862 <https://github.com/dennissiemensma/dsmr-reader/issues/862>`_] Hogere backend process sleep toestaan
+- [`#864 <https://github.com/dennissiemensma/dsmr-reader/issues/864>`_] Requirements upgrade (2020-1)
 
 
 ----

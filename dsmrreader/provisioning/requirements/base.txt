@@ -1,8 +1,8 @@
 coreapi==2.3.3
 crcmod==1.7
-django==3.0.2
+django==3.0.3
 django-colorfield==0.1.15
-django-debug-toolbar==2.1
+django-debug-toolbar==2.2
 django-filter==2.2.0
 djangorestframework==3.11
 django-solo==1.1.3
