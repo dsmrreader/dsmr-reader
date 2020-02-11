@@ -96,7 +96,7 @@ def send_telegram_to_remote_dsmrreader(telegram, api_url, api_key):
     )
 
     if response.status_code != 201:
-        logging.error('API error: HTTP %d - %s'.format(response.status_code, response.text))
+        logging.error('API error: HTTP %d - %s', response.status_code, response.text)
 
 
 def main():
