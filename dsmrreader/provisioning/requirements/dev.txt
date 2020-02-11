@@ -3,7 +3,7 @@ pylama==7.7.1
 pytest-cov==2.8.1
 pytest-django==3.8.0
 pytest-xdist==1.31.0
-sphinx==2.4.0
+sphinx==2.4.1
 sphinx-autobuild==0.7.1
 sphinx-intl==2.0.0
 sphinx-rtd-theme==0.4.3
