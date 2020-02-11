@@ -9,9 +9,8 @@ Frequently Asked Questions (FAQ)
 I need help!
 ------------
 If you can't find the answer in the documentation, do not hesitate in looking for help.
-You can contact me using Github tickets.
 
-* `Create a ticket at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_
+`Create an issue at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_
 
 
 How can I update my application?
@@ -85,3 +84,14 @@ How can I restart the application or processes?
 -----------------------------------------------
 
 :doc:`See for instructions here <faq/restart_processes>`.
+
+How do I fix errors such as ``DETAIL: Key (id)=(123) already exists``?
+----------------------------------------------------------------------
+
+This depends on the situation, but you can always try this yourself first::
+
+    # Note: dsmr_sqlsequencereset was added in DSMR-reader v3.3.0+
+    sudo su - dsmr
+    ./manage.py dsmr_sqlsequencereset
+
+If it does not resolve your issue, `ask for support <#i-need-help>`_.

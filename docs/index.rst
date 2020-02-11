@@ -9,6 +9,7 @@ DSMR Reader's documentation
    requirements
    data_integrity
    troubleshooting
+   faq
 
    installation
    installation/restore
@@ -48,7 +49,6 @@ DSMR Reader's documentation
    plugins
    development
 
-   faq
    faq/update
    faq/restart_processes
    faq/database
