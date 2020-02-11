@@ -105,6 +105,7 @@ Execute the following::
         sudo su - dsmr
         deactivate
         cd ~
+        mv .virtualenvs/dsmrreader .virtualenvs/v3-dsmrreader
         mv .virtualenvs/v2-dsmrreader .virtualenvs/dsmrreader
 
         cd dsmr-reader
