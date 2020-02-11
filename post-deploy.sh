@@ -36,6 +36,7 @@ pip3 install -r dsmrreader/provisioning/requirements/base.txt --upgrade
 echo ""
 echo ""
 echo " --- Checking & synchronizing database changes/migrations."
+./manage.py dsmr_sqlsequencereset
 ./manage.py migrate --noinput
 
 
