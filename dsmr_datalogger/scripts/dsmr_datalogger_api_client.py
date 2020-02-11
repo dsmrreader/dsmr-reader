@@ -4,7 +4,7 @@
     Installation:
         pip3 install pyserial==3.4 requests==2.22.0
 """
-
+import datetime
 import logging
 import time
 
@@ -40,7 +40,7 @@ def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts
     """
     Opens the serial port, keeps reading until we have a full telegram and yields the result to preserve the connection.
     """
-    logging.info('Opening serial port: %s', port)
+    logging.info('[%s] Opening serial port: %s', datetime.datetime.now(), port)
     serial_handle = serial.Serial(
         port=port,
         baudrate=baudrate,
@@ -90,26 +90,26 @@ def send_telegram_to_remote_dsmrreader(telegram, api_url, api_key):
     """ Registers a telegram by simply sending it to the application with a POST request. """
     response = requests.post(
         api_url,
-        headers={'HTTP_AUTHORIZATION': 'Token {}'.format(api_key)},
+        headers={'Authorization': 'Token {}'.format(api_key)},
         data={'telegram': telegram},
         timeout=60,  # Prevents this script from hanging indefinitely when the server or network is unavailable.
     )
 
     if response.status_code != 201:
-        logging.error('API error: HTTP %d - %s', response.status_code, response.text)
+        logging.error('[%s] API error: HTTP %d - %s', datetime.datetime.now(), response.status_code, response.text)
 
 
 def main():
     """ Entrypoint for command line execution. """
     logging.getLogger().setLevel(logging.INFO)
-    logging.info('Starting...')
+    logging.info('[%s] Starting...', datetime.datetime.now())
 
     for telegram in read_serial_port(**SERIAL_SETTINGS):
-        logging.info('Telegram read')
+        logging.info('[%s] Telegram read', datetime.datetime.now())
 
         for current_server in API_SERVERS:
             current_api_url, current_api_key = current_server
-            logging.info('Sending telegram to: %s', current_api_url)
+            logging.info('[%s] Sending telegram to: %s', datetime.datetime.now(), current_api_url)
 
             try:
                 send_telegram_to_remote_dsmrreader(

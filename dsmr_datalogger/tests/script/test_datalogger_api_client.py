@@ -73,7 +73,7 @@ class TestScript(TestCase):
         self.assertEqual(post_mock.call_args[0][0], 'http://localhost/api')
         self.assertEqual(post_mock.call_args[1], dict(
             data=dict(telegram='telegram-data'),
-            headers=dict(HTTP_AUTHORIZATION='Token ABC'),
+            headers=dict(Authorization='Token ABC'),
             timeout=60,
         ))
 
