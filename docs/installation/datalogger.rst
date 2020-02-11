@@ -54,9 +54,9 @@ Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this content
 Supervisor
 ----------
 
-Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_client_datalogger.conf`` with contents::
+Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` with contents::
 
-    [program:dsmr_client_datalogger]
+    [program:dsmr_remote_datalogger]
     command=/home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
     pidfile=/var/tmp/dsmrreader--%(program_name)s.pid
     user=dsmr
