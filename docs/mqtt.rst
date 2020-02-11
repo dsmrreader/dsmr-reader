@@ -15,7 +15,7 @@ Older versions (< v3.0.0)
 
     [program:dsmr_mqtt]
     environment=PYTHONUNBUFFERED=1
-    command=/usr/bin/nice -n 15 /home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr-reader/manage.py dsmr_mqtt
+    command=/home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr-reader/manage.py dsmr_mqtt
     directory=/home/dsmr/dsmr-reader/
     user=dsmr
     group=dsmr

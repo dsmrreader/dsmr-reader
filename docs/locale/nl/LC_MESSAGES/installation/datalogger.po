@@ -8,6 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-11 21:25+0100\n"
+"PO-Revision-Date: 2020-02-11 21:26+0100\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -18,120 +20,121 @@ msgstr ""
 "Generated-By: Babel 2.7.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:2
+#: ../../installation/datalogger.rst:2
 msgid "Installation: Datalogger only"
 msgstr "Installatie: Alleen datalogger"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:4
+#: ../../installation/datalogger.rst:4
 msgid ""
-"This will install a datalogger that will forward telegrams to another fully "
-"installed instance of DSMR-reader, using its API."
+"This will install a datalogger that will forward telegrams to another "
+"fully installed instance of DSMR-reader, using its API."
 msgstr ""
 "Dit installeert een datalogger, die telegrammen doorstuurt naar een andere "
 "volledige installatie van DSMR-reader, via de API."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:8
+#: ../../installation/datalogger.rst:8
 msgid "Prepare API"
 msgstr "Voorbereiding van de API"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:10
+#: ../../installation/datalogger.rst:10
 msgid ""
-"Make sure to prepare the API at the DSMR-reader instance you'll forward the "
-"telegrams to. For more information configuring it, :doc:`see the API settings "
-"<../admin/api>`."
+"Make sure to prepare the API at the DSMR-reader instance you'll forward "
+"the telegrams to. For more information configuring it, :doc:`see the API "
+"settings <../admin/api>`."
 msgstr ""
-"Zorg ervoor dat je de API inschakelt in de instantie van DSMR-reader, waar je "
-"alle telegrammen naar doorstuurt. Voor meer informatie over de API, :doc:`zie de "
-"API-configuratie <../admin/api>`."
+"Zorg ervoor dat je de API inschakelt in de instantie van DSMR-reader, waar "
+"je alle telegrammen naar doorstuurt. Voor meer informatie over de API, :"
+"doc:`zie de API-configuratie <../admin/api>`."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:15
+#: ../../installation/datalogger.rst:15
 msgid ""
-"If your smart meter only supports DSMR v2, make sure to change the DSMR version :"
-"doc:`in the datalogger settings <../admin/datalogger>`."
+"If your smart meter only supports DSMR v2, make sure to change the DSMR "
+"version :doc:`in the datalogger settings <../admin/datalogger>`."
 msgstr ""
-"Wanneer je slimme meter alleen DSMR v2 ondersteunt, zorg er dan voor dat je de "
-"DSMR-versie aanpast :doc:`in de datalogger-configuratie <../admin/datalogger>`."
+"Wanneer je slimme meter alleen DSMR v2 ondersteunt, zorg er dan voor dat "
+"je de DSMR-versie aanpast :doc:`in de datalogger-configuratie <../admin/"
+"datalogger>`."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:19
+#: ../../installation/datalogger.rst:19
 msgid "Installation"
 msgstr "Installatie"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:21
+#: ../../installation/datalogger.rst:21
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:42
+#: ../../installation/datalogger.rst:42
 msgid "Script"
 msgstr "Script"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:44
+#: ../../installation/datalogger.rst:44
 msgid ""
 "Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this "
 "content: `dsmr_datalogger_api_client.py on GitHub <https://github.com/"
 "dennissiemensma/dsmr-reader/blob/v3/dsmr_datalogger/scripts/"
 "dsmr_datalogger_api_client.py>`_"
 msgstr ""
-"Maak een nieuw bestand ``/home/dsmr/dsmr_datalogger_api_client.py`` met deze "
-"inhoud: `dsmr_datalogger_api_client.py op GitHub <https://github.com/"
+"Maak een nieuw bestand ``/home/dsmr/dsmr_datalogger_api_client.py`` met "
+"deze inhoud: `dsmr_datalogger_api_client.py op GitHub <https://github.com/"
 "dennissiemensma/dsmr-reader/blob/v3/dsmr_datalogger/scripts/"
 "dsmr_datalogger_api_client.py>`_"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:48
+#: ../../installation/datalogger.rst:48
 msgid ""
 "The serial connection in the script above is based on ``DSMR v4/v5``. When "
 "required, change these in ``SERIAL_SETTINGS`` in the script."
 msgstr ""
-"De seriele verbinding in bovenstaand script is gebaseerd op ``DSMR v4/v5``. "
-"Indien nodig, verander deze in ``SERIAL_SETTINGS`` in het script."
+"De seriele verbinding in bovenstaand script is gebaseerd op ``DSMR v4/"
+"v5``. Indien nodig, verander deze in ``SERIAL_SETTINGS`` in het script."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:52
+#: ../../installation/datalogger.rst:52
 msgid ""
 "Don't forget to insert your own API URL and API key as defined in "
 "``API_SERVERS`` in the script."
 msgstr ""
-"Vergeet niet om je eigen API URL en API key in te stellen in ``API_SERVERS`` "
-"binnen het script."
+"Vergeet niet om je eigen API URL en API key in te stellen in "
+"``API_SERVERS`` binnen het script."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:55
+#: ../../installation/datalogger.rst:55
 msgid "Supervisor"
 msgstr "Supervisor"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:57
+#: ../../installation/datalogger.rst:57
 msgid ""
-"Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf`` "
-"with contents::"
+"Create a new supervisor config in ``/etc/supervisor/conf.d/"
+"dsmr_client_datalogger.conf`` with contents::"
 msgstr ""
-"Maak een nieuwe Supervisor-config in ``/etc/supervisor/conf.d/dsmr-client.conf`` "
-"met inhoud::"
+"Maak een nieuwe Supervisor-config in ``/etc/supervisor/conf.d/"
+"dsmr_client_datalogger.conf`` met inhoud::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:75
+#: ../../installation/datalogger.rst:75
 msgid "Update and run **Supervisor**::"
 msgstr "Update en draai **Supervisor**::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:81
+#: ../../installation/datalogger.rst:81
 msgid "The script should now forward telegrams to the API URL you specified."
 msgstr ""
-"Het script zou nu telegrammen moeten doorsturen naar de API URL die je eerder "
-"hebt ingevoerd."
+"Het script zou nu telegrammen moeten doorsturen naar de API URL die je "
+"eerder hebt ingevoerd."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:85
+#: ../../installation/datalogger.rst:85
 msgid ""
 "If you make any changes to the script later, make sure to restart it with: "
 "``sudo supervisorctl update``"
 msgstr ""
-"Mocht je later zelf wijzigingen doorvoeren in het script, vergeet deze dan niet "
-"te herladen met: ``sudo supervisorctl update``"
+"Mocht je later zelf wijzigingen doorvoeren in het script, vergeet deze dan "
+"niet te herladen met: ``sudo supervisorctl update``"
 
 #~ msgid ""
 #~ "Create a new file: ``/home/dsmr/dsmr_datalogger_api_client.py`` with "
 #~ "contents::"
 #~ msgstr ""
-#~ "Maak een nieuw bestand:  ``/home/dsmr/dsmr_datalogger_api_client.py`` met "
-#~ "inhoud::"
+#~ "Maak een nieuw bestand:  ``/home/dsmr/dsmr_datalogger_api_client.py`` "
+#~ "met inhoud::"
 
 #~ msgid ""
-#~ "Don't forget to insert your own API URL and API key in the script above, in "
-#~ "``API_SERVERS``"
+#~ "Don't forget to insert your own API URL and API key in the script "
+#~ "above, in ``API_SERVERS``"
 #~ msgstr ""
-#~ "Vergeet niet om in bovenstaand script je eigen API URL en API sleutel te "
-#~ "gebruiken, in ``API_SERVERS``"
+#~ "Vergeet niet om in bovenstaand script je eigen API URL en API sleutel "
+#~ "te gebruiken, in ``API_SERVERS``"

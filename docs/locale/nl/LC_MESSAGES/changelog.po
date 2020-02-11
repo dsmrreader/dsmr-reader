@@ -9,6 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader \n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-11 21:25+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,948 +18,957 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:2
+#: ../../changelog.rst:2
 msgid "Changelog"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:5
+#: ../../changelog.rst:5
 msgid "v3.3.0 - 2020-xx-xx"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:8
+#: ../../changelog.rst:8
 msgid ""
 "[`#860 <https://github.com/dennissiemensma/dsmr-reader/issues/860>`_] "
 "Gasgrafiek handmatig instellen op staaf of lijn"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:9
+#: ../../changelog.rst:9
 msgid ""
 "[`#862 <https://github.com/dennissiemensma/dsmr-reader/issues/862>`_] "
 "Hogere backend process sleep toestaan"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:10
+#: ../../changelog.rst:10
 msgid ""
 "[`#864 <https://github.com/dennissiemensma/dsmr-reader/issues/864>`_] "
 "Requirements upgrade (2020-1)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:16
+#: ../../changelog.rst:11
+msgid ""
+"[`#847 <https://github.com/dennissiemensma/dsmr-reader/issues/847>`_] "
+"Datalogger improvements"
+msgstr ""
+
+#: ../../changelog.rst:17
+msgid "v3.2.1 - 2020-02-09"
+msgstr ""
+
+#: ../../changelog.rst:20
+msgid ""
+"[`#870 <https://github.com/dennissiemensma/dsmr-reader/issues/870>`_]  "
+"Django security releases issued: 3.0.3"
+msgstr ""
+
+#: ../../changelog.rst:26
 msgid "v3.2.0 - 2020-01-31"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:19
+#: ../../changelog.rst:29
 msgid ""
 "[`#841 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_] "
 "Dropbox: Foutafhandeling ongeldig token werkt niet meer"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:20
+#: ../../changelog.rst:30
 msgid ""
 "[`#842 <https://github.com/dennissiemensma/dsmr-reader/issues/841>`_] "
 "Gasgrafiek als staafdiagram"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:21
+#: ../../changelog.rst:31
 msgid ""
 "[`#844 <https://github.com/dennissiemensma/dsmr-reader/issues/844>`_] Gas"
 " optioneel kunnen groeperen per uur"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:22
+#: ../../changelog.rst:32
 msgid ""
 "[`#854 <https://github.com/dennissiemensma/dsmr-reader/issues/854>`_] "
 "Fixed doc version link on status page - by martijnb92"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:28
+#: ../../changelog.rst:38
 msgid "v3.1.1 - 2020-01-25"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:30
+#: ../../changelog.rst:40
 msgid ""
 "[`#850 <https://github.com/dennissiemensma/dsmr-reader/issues/850>`_] No "
 "matching distribution found for PyCRC==1.21"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:36
+#: ../../changelog.rst:46
 msgid "v3.1.0 - 2020-01-18"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:38
+#: ../../changelog.rst:48
 msgid ""
 "[`#836 <https://github.com/dennissiemensma/dsmr-reader/issues/836>`_] "
 "Correct background of inactive icons in Archive - by JeanMiK"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:39
+#: ../../changelog.rst:49
 msgid ""
 "[`#828 <https://github.com/dennissiemensma/dsmr-reader/issues/828>`_] "
 "Status page displays disabled capabilities"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:40
+#: ../../changelog.rst:50
 msgid ""
 "[`#833 <https://github.com/dennissiemensma/dsmr-reader/issues/833>`_] "
 "Mqtt verbindt niet opnieuw na herstart mosquitto"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:41
+#: ../../changelog.rst:51
 msgid ""
 "[`#820 <https://github.com/dennissiemensma/dsmr-reader/issues/820>`_] "
 "Meterstatistieken doorgeven via API"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:42
+#: ../../changelog.rst:52
 msgid ""
 "[`#839 <https://github.com/dennissiemensma/dsmr-reader/issues/839>`_] "
 "Convert API docs to OpenAPI format"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:43
+#: ../../changelog.rst:53
 msgid ""
 "[`#839 <https://github.com/dennissiemensma/dsmr-reader/issues/839>`_] "
 "Deprecated API endpoint `/api/v2/application/status`"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:49
+#: ../../changelog.rst:59
 msgid "v3.0.0 - 2020-01-15"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:51
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:308
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:836
+#: ../../changelog.rst:61 ../../changelog.rst:318 ../../changelog.rst:846
 msgid "**Change in Python support**"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:53
+#: ../../changelog.rst:63
 msgid ""
 "Support for ``Python 3.5`` has been **dropped** due to the Django upgrade"
 " (`#735 <https://github.com/dennissiemensma/dsmr-reader/issues/735>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:55
+#: ../../changelog.rst:65
 msgid ""
 "[`#735 <https://github.com/dennissiemensma/dsmr-reader/issues/735>`_] "
 "Drop support for Python 3.5"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:56
+#: ../../changelog.rst:66
 msgid ""
 "[`#734 <https://github.com/dennissiemensma/dsmr-reader/issues/734>`_] "
 "Upgrade to Django 3.x"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:57
+#: ../../changelog.rst:67
 msgid ""
 "[`#829 <https://github.com/dennissiemensma/dsmr-reader/issues/829>`_] "
 "Several Dutch translation fixes - by mjanssens"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:58
+#: ../../changelog.rst:68
 msgid ""
 "[`#823 <https://github.com/dennissiemensma/dsmr-reader/issues/823>`_] "
 "Remove custom configuration in settings.py"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:66
+#: ../../changelog.rst:76
 msgid ""
 "*This is the last release of DSMR-reader ``v2.x``. New features will only"
 " be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-"
 "reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.*"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:69
+#: ../../changelog.rst:79
 msgid "v2.15.0 - 2020-01-15"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:72
+#: ../../changelog.rst:82
 msgid ""
 "[`#825 <https://github.com/dennissiemensma/dsmr-reader/issues/825>`_] "
 "Last v2.x release"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:78
+#: ../../changelog.rst:88
 msgid "v2.14.0 - 2020-01-07"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:82
+#: ../../changelog.rst:92
 msgid ""
 "*Some configuration options inside ``settings.py`` were relocated or "
 "removed from the application. See `the docs <https://dsmr-"
 "reader.readthedocs.io/en/latest/settings.html>`_ for the changes.*"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:84
+#: ../../changelog.rst:94
 msgid ""
 "[`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_] "
 "Move custom configuration in settings.py to database"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:85
+#: ../../changelog.rst:95
 msgid ""
 "[`#793 <https://github.com/dennissiemensma/dsmr-reader/issues/793>`_] "
 "Alle meldingen in 1x sluiten"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:91
+#: ../../changelog.rst:101
 msgid "v2.13.0 - 2020-01-05"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:93
+#: ../../changelog.rst:103
 msgid ""
 "[`#819 <https://github.com/dennissiemensma/dsmr-reader/issues/819>`_] Add"
 " mail_from option and changed help text - by jbrunink"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:94
+#: ../../changelog.rst:104
 msgid ""
 "[`#730 <https://github.com/dennissiemensma/dsmr-reader/issues/730>`_] "
 "Standaard-range dashboard grafieken instelbaar maken"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:95
+#: ../../changelog.rst:105
 msgid ""
 "[`#818 <https://github.com/dennissiemensma/dsmr-reader/issues/818>`_] "
 "Dataverwerking loopt achter bij wisselen naar woning zonder gasmeter"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:101
+#: ../../changelog.rst:111
 msgid "v2.12.1 - 2019-12-19"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:103
+#: ../../changelog.rst:113
 msgid ""
 "[`#780 <https://github.com/dennissiemensma/dsmr-reader/issues/780>`_] "
 "REVERTED: Backup direct comprimeren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:109
+#: ../../changelog.rst:119
 msgid "v2.12.0 - 2019-12-17"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:111
+#: ../../changelog.rst:121
 msgid ""
 "[`#761 <https://github.com/dennissiemensma/dsmr-reader/issues/761>`_] "
 "Home Assistant automatische integratie - by depl0y"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:112
+#: ../../changelog.rst:122
 msgid ""
 "[`#784 <https://github.com/dennissiemensma/dsmr-reader/issues/784>`_] "
 "Unpin requirements patches"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:113
+#: ../../changelog.rst:123
 msgid ""
 "[`#780 <https://github.com/dennissiemensma/dsmr-reader/issues/780>`_] "
 "Backup direct comprimeren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:114
+#: ../../changelog.rst:124
 msgid ""
 "[`#790 <https://github.com/dennissiemensma/dsmr-reader/issues/790>`_] "
 "Updated graph library"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:120
+#: ../../changelog.rst:130
 msgid "v2.11.3 - 2019-12-08"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:122
+#: ../../changelog.rst:132
 msgid ""
 "[`#794 <https://github.com/dennissiemensma/dsmr-reader/issues/794>`_] "
 "Django security releases issued: 2.2.8"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:128
+#: ../../changelog.rst:138
 msgid "v2.11.2 - 2019-11-13"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:130
+#: ../../changelog.rst:140
 msgid ""
 "[`#783 <https://github.com/dennissiemensma/dsmr-reader/issues/783>`_] "
 "Gunicorn 20.x breaks use of docker Alpine Linux"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:136
+#: ../../changelog.rst:146
 msgid "v2.11.1 - 2019-11-12"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:138
+#: ../../changelog.rst:148
 msgid ""
 "[`#782 <https://github.com/dennissiemensma/dsmr-reader/issues/782>`_] "
 "Failed to export to MinderGas: Unexpected status code received"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:144
+#: ../../changelog.rst:154
 msgid "v2.11.0 - 2019-11-09"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:146
+#: ../../changelog.rst:156
 msgid ""
 "[`#774 <https://github.com/dennissiemensma/dsmr-reader/issues/774>`_] "
 "Generic performance improvements"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:147
+#: ../../changelog.rst:157
 msgid ""
 "[`#776 <https://github.com/dennissiemensma/dsmr-reader/issues/776>`_] "
 "Meerdere foutmeldingen Buienradar API"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:148
+#: ../../changelog.rst:158
 msgid ""
 "[`#777 <https://github.com/dennissiemensma/dsmr-reader/issues/777>`_] "
 "Requirements update (November 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:149
+#: ../../changelog.rst:159
 msgid ""
 "[`#778 <https://github.com/dennissiemensma/dsmr-reader/issues/778>`_] "
 "Gas-metingen werken niet bij meerdere apparaten op m-bus"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:155
+#: ../../changelog.rst:165
 msgid "v2.10.0 - 2019-11-05"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:157
+#: ../../changelog.rst:167
 msgid ""
 "[`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] "
 "(1/2) Uurstatistieken missen de laatste minuut of seconde - by JeanMiK"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:158
+#: ../../changelog.rst:168
 msgid ""
 "[`#766 <https://github.com/dennissiemensma/dsmr-reader/issues/766>`_] "
 "(2/2) Verkeerd aantal uren per dag bij wisseling zomertijd/wintertijd - "
 "by JeanMiK"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:159
+#: ../../changelog.rst:169
 msgid ""
 "[`#765 <https://github.com/dennissiemensma/dsmr-reader/issues/765>`_] "
 "Requirements update (November 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:160
+#: ../../changelog.rst:170
 msgid ""
 "[`#750 <https://github.com/dennissiemensma/dsmr-reader/issues/750>`_] "
 "Piek- en dalmetingen omgedraaid (Belgische slimme meter)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:161
+#: ../../changelog.rst:171
 msgid ""
 "[`#764 <https://github.com/dennissiemensma/dsmr-reader/issues/764>`_] "
 "Dataverwerking loopt achter"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:167
+#: ../../changelog.rst:177
 msgid "v2.9.0 - 2019-10-25"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:169
+#: ../../changelog.rst:179
 msgid ""
 "[`#755 <https://github.com/dennissiemensma/dsmr-reader/issues/755>`_] "
 "Buienradar API bron/foutafhandeling verbeteren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:170
+#: ../../changelog.rst:180
 msgid ""
 "[`#752 <https://github.com/dennissiemensma/dsmr-reader/issues/752>`_] "
 "Configurable plugins by environmental variables - by jorkzijlstra"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:171
+#: ../../changelog.rst:181
 msgid ""
 "[`#743 <https://github.com/dennissiemensma/dsmr-reader/issues/743>`_] "
 "Nginx: Sites-available gebruiken"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:172
+#: ../../changelog.rst:182
 msgid ""
 "[`#757 <https://github.com/dennissiemensma/dsmr-reader/issues/757>`_] "
 "Retentie op elk moment van de dag doorvoeren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:178
+#: ../../changelog.rst:188
 msgid "v2.7.0 - 2019-10-10"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:180
+#: ../../changelog.rst:190
 msgid ""
 "[`#733 <https://github.com/dennissiemensma/dsmr-reader/issues/733>`_] "
 "Fixed weird field formatting for MQTT"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:181
+#: ../../changelog.rst:191
 msgid ""
 "[`#736 <https://github.com/dennissiemensma/dsmr-reader/issues/736>`_] "
 "Requirements upgrade (October 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:182
+#: ../../changelog.rst:192
 msgid ""
 "[`#637 <https://github.com/dennissiemensma/dsmr-reader/issues/637>`_] "
 "Live gas gebruik via MQTT"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:188
+#: ../../changelog.rst:198
 msgid "v2.6.0 - 2019-10-07"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:190
+#: ../../changelog.rst:200
 msgid ""
 "[`#718 <https://github.com/dennissiemensma/dsmr-reader/issues/718>`_] "
 "Improve docs for restoring backups"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:191
+#: ../../changelog.rst:201
 msgid ""
 "[`#543 <https://github.com/dennissiemensma/dsmr-reader/issues/543>`_] "
 "MQTT alleen starten wanneer nodig"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:192
+#: ../../changelog.rst:202
 msgid ""
 "[`#723 <https://github.com/dennissiemensma/dsmr-reader/issues/723>`_] "
 "MQTT-waardes cachen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:193
+#: ../../changelog.rst:203
 msgid ""
 "[`#581 <https://github.com/dennissiemensma/dsmr-reader/issues/581>`_] "
 "Voltages via MQTT"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:194
+#: ../../changelog.rst:204
 msgid ""
 "[`#584 <https://github.com/dennissiemensma/dsmr-reader/issues/584>`_] "
 "Foutmeldingen tonen in interface"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:195
+#: ../../changelog.rst:205
 msgid ""
 "[`#726 <https://github.com/dennissiemensma/dsmr-reader/issues/726>`_] "
 "Requirements update (October 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:196
+#: ../../changelog.rst:206
 msgid ""
 "[`#615 <https://github.com/dennissiemensma/dsmr-reader/issues/615>`_] "
 "Dagstatistieken voor DSMR-v5 eerder genereren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:202
+#: ../../changelog.rst:212
 msgid "v2.5.0 - 2019-10-01"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:204
+#: ../../changelog.rst:214
 msgid ""
 "[`#717 <https://github.com/dennissiemensma/dsmr-reader/issues/717>`_] "
 "Fixed the accuracy of rounding prices"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:205
+#: ../../changelog.rst:215
 msgid ""
 "[`#518 <https://github.com/dennissiemensma/dsmr-reader/issues/518>`_] "
 "Aflezen gegevens over voltages"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:206
+#: ../../changelog.rst:216
 msgid ""
 "[`#722 <https://github.com/dennissiemensma/dsmr-reader/issues/722>`_] "
 "Minimale backup (sinds v2.3.0) laat processen stoppen bij MySQL "
 "gebruikers"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:212
+#: ../../changelog.rst:222
 msgid "v2.4.0 - 2019-09-19"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:214
+#: ../../changelog.rst:224
 msgid ""
 "[`#699 <https://github.com/dennissiemensma/dsmr-reader/issues/699>`_] "
 "Hergenereren dagtotalen verbeteren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:215
+#: ../../changelog.rst:225
 msgid ""
 "[`#625 <https://github.com/dennissiemensma/dsmr-reader/issues/625>`_] "
 "Meter statistieken weergeven wanneer leeg"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:216
+#: ../../changelog.rst:226
 msgid ""
 "[`#710 <https://github.com/dennissiemensma/dsmr-reader/issues/710>`_] "
 "Waarschuwingen risico's SD-kaartjes"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:217
+#: ../../changelog.rst:227
 msgid ""
 "[`#712 <https://github.com/dennissiemensma/dsmr-reader/issues/712>`_] "
 "Requirements update (September 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:218
+#: ../../changelog.rst:228
 msgid ""
 "[`#711 <https://github.com/dennissiemensma/dsmr-reader/issues/711>`_] "
 "Check backup exit codes"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:224
+#: ../../changelog.rst:234
 msgid "v2.3.0 - 2019-09-03"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:226
+#: ../../changelog.rst:236
 msgid ""
 "[`#681 <https://github.com/dennissiemensma/dsmr-reader/issues/681>`_] "
 "Refactoring backups: improved/simplified Dropbox sync, added extra "
 "minimal backup"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:227
+#: ../../changelog.rst:237
 msgid ""
 "[`#638 <https://github.com/dennissiemensma/dsmr-reader/issues/638>`_] "
 "Dropbox / back-up sync per direct kunnen resetten"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:228
+#: ../../changelog.rst:238
 msgid ""
 "[`#682 <https://github.com/dennissiemensma/dsmr-reader/issues/682>`_] "
 "Updated help text for tracking phases"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:229
+#: ../../changelog.rst:239
 msgid ""
 "[`#696 <https://github.com/dennissiemensma/dsmr-reader/issues/696>`_] "
 "API-docs broke after upgrade"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:230
+#: ../../changelog.rst:240
 msgid ""
 "[`#697 <https://github.com/dennissiemensma/dsmr-reader/issues/697>`_] Gas"
 " wordt niet verwerkt uit telegram bij digitale meters in België - by "
 "floyson-reference"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:231
+#: ../../changelog.rst:241
 msgid ""
 "[`#693 <https://github.com/dennissiemensma/dsmr-reader/issues/693>`_] "
 "Check backup creation path"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:232
+#: ../../changelog.rst:242
 msgid ""
 "[`#702 <https://github.com/dennissiemensma/dsmr-reader/issues/702>`_] "
 "MQTT-berichten stapelen zich op zonder MQTT-proces"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:238
+#: ../../changelog.rst:248
 msgid "v2.2.3 - 2019-08-04"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:240
+#: ../../changelog.rst:250
 msgid ""
 "[`#679 <https://github.com/dennissiemensma/dsmr-reader/issues/679>`_] "
 "Django 2.2.4 released"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:246
+#: ../../changelog.rst:256
 msgid "v2.2.2 - 2019-08-02"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:248
+#: ../../changelog.rst:258
 msgid ""
 "[`#667 <https://github.com/dennissiemensma/dsmr-reader/issues/667>`_] Add"
 " default value(s) for PORT - by xirixiz"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:249
+#: ../../changelog.rst:259
 msgid ""
 "[`#672 <https://github.com/dennissiemensma/dsmr-reader/issues/672>`_] "
 "Requirements update (July 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:250
+#: ../../changelog.rst:260
 msgid ""
 "[`#674 <https://github.com/dennissiemensma/dsmr-reader/issues/674>`_] Use"
 " CircleCI for tests"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:256
+#: ../../changelog.rst:266
 msgid "v2.2.1 - 2019-07-03"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:258
+#: ../../changelog.rst:268
 msgid ""
 "[`#665 <https://github.com/dennissiemensma/dsmr-reader/issues/665>`_] "
 "Django security releases issued: 2.2.3"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:259
+#: ../../changelog.rst:269
 msgid ""
 "[`#660 <https://github.com/dennissiemensma/dsmr-reader/issues/660>`_] Add"
 " a timeout to the datalogger web request - by Helmo"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:265
+#: ../../changelog.rst:275
 msgid "v2.2.0 - 2019-06-14"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:267
+#: ../../changelog.rst:277
 msgid ""
 "[`#647 <https://github.com/dennissiemensma/dsmr-reader/issues/647>`_] Fix"
 " for retroactivily inserting reading data - by drvdijk"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:268
+#: ../../changelog.rst:278
 msgid ""
 "[`#646 <https://github.com/dennissiemensma/dsmr-reader/issues/646>`_] "
 "Inladen oude gegevens gaat mis met live gas consumption"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:269
+#: ../../changelog.rst:279
 msgid ""
 "[`#652 <https://github.com/dennissiemensma/dsmr-reader/issues/652>`_] "
 "Django security releases issued: 2.2.2"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:275
+#: ../../changelog.rst:285
 msgid "v2.1.0 - 2019-05-20"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:277
+#: ../../changelog.rst:287
 msgid ""
 "[`#635 <https://github.com/dennissiemensma/dsmr-reader/issues/635>`_] "
 "Requirements update (May 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:278
+#: ../../changelog.rst:288
 msgid ""
 "[`#518 <https://github.com/dennissiemensma/dsmr-reader/issues/518>`_] "
 "Aflezen telegram in GUI"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:279
+#: ../../changelog.rst:289
 msgid ""
 "[`#574 <https://github.com/dennissiemensma/dsmr-reader/issues/574>`_] Add"
 " Telegram notification support - by thommy101"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:280
+#: ../../changelog.rst:290
 msgid ""
 "[`#562 <https://github.com/dennissiemensma/dsmr-reader/issues/562>`_] API"
 " voor live gas verbruik"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:281
+#: ../../changelog.rst:291
 msgid ""
 "[`#555 <https://github.com/dennissiemensma/dsmr-reader/issues/555>`_] "
 "Ondersteuning voor back-up per e-mail"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:282
+#: ../../changelog.rst:292
 msgid ""
 "[`#613 <https://github.com/dennissiemensma/dsmr-reader/issues/613>`_] "
 "Eenduidige tijdzones voor back-ups in Docker"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:283
+#: ../../changelog.rst:293
 msgid ""
 "[`#606 <https://github.com/dennissiemensma/dsmr-reader/issues/606>`_] "
 "Authenticatie API browser"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:288
+#: ../../changelog.rst:298
 msgid "v2.0.2 - 2019-04-19"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:291
+#: ../../changelog.rst:301
 msgid ""
 "[`#620 <https://github.com/dennissiemensma/dsmr-reader/issues/620>`_] "
 "CVE-2019-11324 (urllib3)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:297
+#: ../../changelog.rst:307
 msgid "v2.0.1 - 2019-04-19"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:300
+#: ../../changelog.rst:310
 msgid ""
 "[`#619 <https://github.com/dennissiemensma/dsmr-reader/issues/619>`_] Add"
 " missing API calls in documentation"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:306
+#: ../../changelog.rst:316
 msgid "v2.0.0 - 2019-04-16"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:310
+#: ../../changelog.rst:320
 msgid ""
 "The support for ``Python 3.4`` has been **dropped** due to the Django "
 "upgrade (`#512 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/512>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:313
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:402
+#: ../../changelog.rst:323 ../../changelog.rst:412
 msgid ""
 "[`#512 <https://github.com/dennissiemensma/dsmr-reader/issues/512>`_] "
 "Drop support for Python 3.4"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:314
+#: ../../changelog.rst:324
 msgid ""
 "[`#510 <https://github.com/dennissiemensma/dsmr-reader/issues/510>`_] "
 "Django 2.1 released"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:315
+#: ../../changelog.rst:325
 msgid ""
 "[`#616 <https://github.com/dennissiemensma/dsmr-reader/issues/616>`_] "
 "Requirements update (April 2019)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:316
+#: ../../changelog.rst:326
 msgid ""
 "[`#596 <https://github.com/dennissiemensma/dsmr-reader/issues/596>`_] "
 "Update django to 2.0.13 - by Timdebruijn"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:317
+#: ../../changelog.rst:327
 msgid ""
 "[`#580 <https://github.com/dennissiemensma/dsmr-reader/issues/580>`_] "
 "Django security releases issued: 2.0.10 - by mjanssens"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:323
+#: ../../changelog.rst:333
 msgid "v1.28.0 - 2019-01-04"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:327
+#: ../../changelog.rst:337
 msgid "This will be the last release for a few months until spring 2019."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:329
+#: ../../changelog.rst:339
 msgid ""
 "[`#571 <https://github.com/dennissiemensma/dsmr-reader/issues/571>`_] "
 "Trends klok omdraaien"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:330
+#: ../../changelog.rst:340
 msgid ""
 "[`#570 <https://github.com/dennissiemensma/dsmr-reader/issues/570>`_] "
 "Herinstallatie/verwijdering documenteren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:331
+#: ../../changelog.rst:341
 msgid ""
 "[`#442 <https://github.com/dennissiemensma/dsmr-reader/issues/442>`_] "
 "Documentation: Development environment"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:332
+#: ../../changelog.rst:342
 msgid "Requirements update"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:338
+#: ../../changelog.rst:348
 msgid "v1.27.0 - 2018-12-23"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:340
+#: ../../changelog.rst:350
 msgid ""
 "[`#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_] "
 "Plugin/hook voor doorsturen telegrammen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:341
+#: ../../changelog.rst:351
 msgid ""
 "[`#560 <https://github.com/dennissiemensma/dsmr-reader/issues/560>`_] "
 "Added boundaryGap to improve charts - by jbrunink / Tijs van Noije"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:342
+#: ../../changelog.rst:352
 msgid ""
 "[`#561 <https://github.com/dennissiemensma/dsmr-reader/issues/561>`_] "
 "Arrows on status page will now be hidden on small screens where they "
 "don't make sense anymore - by jbrunink"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:343
+#: ../../changelog.rst:353
 msgid ""
 "[`#426 <https://github.com/dennissiemensma/dsmr-reader/issues/426>`_] "
 "Temperatuurmetingen per uur inzichtelijk als CSV"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:344
+#: ../../changelog.rst:354
 msgid ""
 "[`#558 <https://github.com/dennissiemensma/dsmr-reader/issues/558>`_] "
 "Custom backup storage location"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:350
+#: ../../changelog.rst:360
 msgid "v1.26.1 - 2018-10-31"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:352
+#: ../../changelog.rst:362
 msgid ""
 "[`#545 <https://github.com/dennissiemensma/dsmr-reader/issues/545>`_] "
 "Requirements update (October 2018)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:358
+#: ../../changelog.rst:368
 msgid "v1.26.0 - 2018-10-28"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:360
+#: ../../changelog.rst:370
 msgid ""
 "[`#541 <https://github.com/dennissiemensma/dsmr-reader/issues/541>`_] "
 "AmbiguousTimeError causes excessive notifications"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:361
+#: ../../changelog.rst:371
 msgid ""
 "[`#535 <https://github.com/dennissiemensma/dsmr-reader/issues/535>`_] "
 "\"All time low\" implementeren"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:362
+#: ../../changelog.rst:372
 msgid ""
 "[`#536 <https://github.com/dennissiemensma/dsmr-reader/issues/536>`_] "
 "Retentie-verbeteringen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:368
+#: ../../changelog.rst:378
 msgid "v1.25.1 - 2018-10-22"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:370
+#: ../../changelog.rst:380
 msgid ""
 "[`#537 <https://github.com/dennissiemensma/dsmr-reader/issues/537>`_] Fix"
 " screenshot urls - by pyrocumulus"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:376
+#: ../../changelog.rst:386
 msgid "v1.25.0 - 2018-10-18"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:378
+#: ../../changelog.rst:388
 msgid ""
 "[`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] "
 "Fixed a Javascript bug in Archive and Compare pages, causing the "
 "selection to glitch"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:379
+#: ../../changelog.rst:389
 msgid ""
 "[`#527 <https://github.com/dennissiemensma/dsmr-reader/issues/527>`_] "
 "Docker DSMR Datalogger - by trizz"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:380
+#: ../../changelog.rst:390
 msgid ""
 "[`#533 <https://github.com/dennissiemensma/dsmr-reader/issues/533>`_] "
 "General English language fixes - by Oliver Payne"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:381
+#: ../../changelog.rst:391
 msgid ""
 "[`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] "
 "Convert Archive page to eCharts"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:382
+#: ../../changelog.rst:392
 msgid ""
 "[`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] "
 "Simplified Compare page"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:383
+#: ../../changelog.rst:393
 msgid ""
 "[`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] "
 "Logging refactoring (datalogger)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:384
+#: ../../changelog.rst:394
 msgid ""
 "[`#523 <https://github.com/dennissiemensma/dsmr-reader/issues/523>`_] "
 "Automatische gas consumption dashboard"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:385
+#: ../../changelog.rst:395
 msgid ""
 "[`#532 <https://github.com/dennissiemensma/dsmr-reader/issues/532>`_] "
 "Update documentation (complete overhaul)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:391
+#: ../../changelog.rst:401
 msgid "v1.24.0 - 2018-09-29"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:395
+#: ../../changelog.rst:405
 msgid ""
 "The default logging level of the backend has been lowered to reduce I/O. "
 "See ``Logging`` on `this documentation page <https://dsmr-"
 "reader.readthedocs.io/nl/v2/troubleshooting.html>`_ for more information."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:398
+#: ../../changelog.rst:408
 msgid ""
 "[`#494 <https://github.com/dennissiemensma/dsmr-reader/issues/494>`_] "
 "Extend Usage statistics to include return"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:399
+#: ../../changelog.rst:409
 msgid ""
 "[`#467 <https://github.com/dennissiemensma/dsmr-reader/issues/467>`_] PVO"
 " uploadtijden in sync houden"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:400
+#: ../../changelog.rst:410
 msgid ""
 "[`#513 <https://github.com/dennissiemensma/dsmr-reader/issues/513>`_] "
 "Data being ignored in telegram grouping"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:401
+#: ../../changelog.rst:411
 msgid ""
 "[`#514 <https://github.com/dennissiemensma/dsmr-reader/issues/514>`_] "
 "Convert archive & comparison pages to eCharts"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:403
+#: ../../changelog.rst:413
 msgid ""
 "[`#511 <https://github.com/dennissiemensma/dsmr-reader/issues/511>`_] Add"
 " support for Python 3.7"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:404
+#: ../../changelog.rst:414
 msgid ""
 "[`#526 <https://github.com/dennissiemensma/dsmr-reader/issues/526>`_] "
 "Logging refactoring (backend)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:410
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:418
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:426
+#: ../../changelog.rst:420 ../../changelog.rst:428 ../../changelog.rst:436
 msgid "v1.23.1 - 2018-08-26"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:412
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:420
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:428
+#: ../../changelog.rst:422 ../../changelog.rst:430 ../../changelog.rst:438
 msgid ""
 "[`#515 <https://github.com/dennissiemensma/dsmr-reader/issues/515>`_] "
 "Missing mqtt values"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:434
+#: ../../changelog.rst:444
 msgid "v1.23.0 - 2018-08-02"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:438
+#: ../../changelog.rst:448
 msgid ""
 "Support for **MQTT** has been completely reworked in this release and now"
 " **requires** a new ``dsmr_mqtt`` process in Supervisor. `Additional "
@@ -966,534 +977,533 @@ msgid ""
 "upgrading-to-v1-23-0-or-higher>`_."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:441
+#: ../../changelog.rst:451
 msgid ""
 "[`#509 <https://github.com/dennissiemensma/dsmr-reader/issues/509>`_] "
 "MQTT refactoring"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:442
+#: ../../changelog.rst:452
 msgid ""
 "[`#417 <https://github.com/dennissiemensma/dsmr-reader/issues/417>`_] ---"
 " MQTT does connect/publish/disconnect for EACH message - every second"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:443
+#: ../../changelog.rst:453
 msgid ""
 "[`#505 <https://github.com/dennissiemensma/dsmr-reader/issues/505>`_] ---"
 " SSL/TLS support for MQTT"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:444
+#: ../../changelog.rst:454
 msgid ""
 "[`#481 <https://github.com/dennissiemensma/dsmr-reader/issues/481>`_] ---"
 " Memory Leak in dsmr_datalogger / MQTT"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:445
+#: ../../changelog.rst:455
 msgid ""
 "[`#463 <https://github.com/dennissiemensma/dsmr-reader/issues/463>`_] "
 "MQTT: Telegram als JSON, tijdzones"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:446
+#: ../../changelog.rst:456
 msgid ""
 "[`#508 <https://github.com/dennissiemensma/dsmr-reader/issues/508>`_] "
 "Trend-grafiek kan niet gegenereerd worden"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:447
+#: ../../changelog.rst:457
 msgid ""
 "[`#292 <https://github.com/dennissiemensma/dsmr-reader/issues/292>`_] "
 "Statuspagina: onderdelen 'backup' en 'mindergas upload' toevoegen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:448
+#: ../../changelog.rst:458
 msgid ""
 "[`#499 <https://github.com/dennissiemensma/dsmr-reader/issues/499>`_] "
 "Upgrade Font Awesome to v5"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:454
+#: ../../changelog.rst:464
 msgid "v1.22.1 - 2018-07-22"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:456
+#: ../../changelog.rst:466
 msgid ""
 "[`#506 <https://github.com/dennissiemensma/dsmr-reader/issues/506>`_] "
 "Fasen-grafiek hangt op 'loading'"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:462
+#: ../../changelog.rst:472
 msgid "v1.22.0 - 2018-07-22"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:464
+#: ../../changelog.rst:474
 msgid ""
 "[`#296 <https://github.com/dennissiemensma/dsmr-reader/issues/296>`_] 3 "
 "fasen teruglevering"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:465
+#: ../../changelog.rst:475
 msgid ""
 "[`#501 <https://github.com/dennissiemensma/dsmr-reader/issues/501>`_] "
 "Lijn grafiek bij geen teruglevering"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:466
+#: ../../changelog.rst:476
 msgid ""
 "[`#495 <https://github.com/dennissiemensma/dsmr-reader/issues/495>`_] "
 "Update documentation screenshots"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:467
+#: ../../changelog.rst:477
 msgid ""
 "[`#498 <https://github.com/dennissiemensma/dsmr-reader/issues/498>`_] "
 "Frontend improvements"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:468
+#: ../../changelog.rst:478
 msgid ""
 "[`#493 <https://github.com/dennissiemensma/dsmr-reader/issues/493>`_] "
 "Requirements update (July 2018)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:474
+#: ../../changelog.rst:484
 msgid "v1.21.1 - 2018-07-16"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:476
+#: ../../changelog.rst:486
 msgid ""
 "[`#492 <https://github.com/dennissiemensma/dsmr-reader/issues/492>`_] "
 "Fixed some issues with eCharts (improvements)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:477
+#: ../../changelog.rst:487
 msgid ""
 "[`#497 <https://github.com/dennissiemensma/dsmr-reader/issues/497>`_] "
 "Kleinigheidje: missende vertalingen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:483
+#: ../../changelog.rst:493
 msgid "v1.21.0 - 2018-07-11"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:485
+#: ../../changelog.rst:495
 msgid ""
 "[`#489 <https://github.com/dennissiemensma/dsmr-reader/issues/489>`_] "
 "eCharts improved graphs for data zooming/scrolling"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:486
+#: ../../changelog.rst:496
 msgid ""
 "[`#434 <https://github.com/dennissiemensma/dsmr-reader/issues/434>`_] "
 "Omit gas readings all together"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:487
+#: ../../changelog.rst:497
 msgid ""
 "[`#264 <https://github.com/dennissiemensma/dsmr-reader/issues/264>`_] "
 "Check Dropbox API token and display error messages in GUI"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:493
+#: ../../changelog.rst:503
 msgid "v1.20.0 - 2018-07-04"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:495
+#: ../../changelog.rst:505
 msgid ""
 "[`#484 <https://github.com/dennissiemensma/dsmr-reader/issues/484>`_] API"
 " call om huidige versie terug te geven"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:496
+#: ../../changelog.rst:506
 msgid ""
 "[`#291 <https://github.com/dennissiemensma/dsmr-reader/issues/291>`_] API"
 " option to get status info"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:497
+#: ../../changelog.rst:507
 msgid ""
 "[`#485 <https://github.com/dennissiemensma/dsmr-reader/issues/485>`_] "
 "Retrieve the current energycontract for the statistics page - helmo"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:498
+#: ../../changelog.rst:508
 msgid ""
 "[`#486 <https://github.com/dennissiemensma/dsmr-reader/issues/486>`_] "
 "Plugin documentation"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:499
+#: ../../changelog.rst:509
 msgid ""
 "[`#487 <https://github.com/dennissiemensma/dsmr-reader/issues/487>`_] "
 "Requirements update (July 2018)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:505
+#: ../../changelog.rst:515
 msgid "v1.19.0 - 2018-06-12"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:507
+#: ../../changelog.rst:517
 msgid ""
 "[`#390 <https://github.com/dennissiemensma/dsmr-reader/issues/390>`_] "
 "Gas- en elektriciteitsverbruik vanaf start energie contract"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:508
+#: ../../changelog.rst:518
 msgid ""
 "[`#482 <https://github.com/dennissiemensma/dsmr-reader/issues/482>`_] "
 "Aantal items op X-as in dashboardgrafiek variabel maken"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:509
+#: ../../changelog.rst:519
 msgid ""
 "[`#407 <https://github.com/dennissiemensma/dsmr-reader/issues/407>`_] "
 "Plugin System (More than one pvoutput account)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:510
+#: ../../changelog.rst:520
 msgid ""
 "[`#462 <https://github.com/dennissiemensma/dsmr-reader/issues/462>`_] Get"
 " live usage trough API"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:516
+#: ../../changelog.rst:526
 msgid "v1.18.0 - 2018-06-05"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:518
+#: ../../changelog.rst:528
 msgid ""
 "[`#246 <https://github.com/dennissiemensma/dsmr-reader/issues/246>`_] Add"
 " support for Pushover"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:519
+#: ../../changelog.rst:529
 msgid ""
 "[`#479 <https://github.com/dennissiemensma/dsmr-reader/issues/479>`_] "
 "Tijdsnotatie grafieken gelijktrekken"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:520
+#: ../../changelog.rst:530
 msgid ""
 "[`#480 <https://github.com/dennissiemensma/dsmr-reader/issues/480>`_] "
 "Requirements update (June 2018)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:526
+#: ../../changelog.rst:536
 msgid "v1.17.0 - 2018-05-25"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:528
+#: ../../changelog.rst:538
 msgid ""
 "[`#475 <https://github.com/dennissiemensma/dsmr-reader/issues/475>`_] "
 "Notify my android service ended"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:529
+#: ../../changelog.rst:539
 msgid ""
 "[`#471 <https://github.com/dennissiemensma/dsmr-reader/issues/471>`_] "
 "Requirements update (May 2018)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:535
+#: ../../changelog.rst:545
 msgid "v1.16.0 - 2018-04-04"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:537
+#: ../../changelog.rst:547
 msgid ""
 "[`#458 <https://github.com/dennissiemensma/dsmr-reader/issues/458>`_] "
 "DSMR v2.x parse-fout - by mrvanes"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:538
+#: ../../changelog.rst:548
 msgid ""
 "[`#455 <https://github.com/dennissiemensma/dsmr-reader/issues/455>`_] "
 "DOCS: Handleiding Nginx authenticatie uitbreiden - by FutureCow"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:539
+#: ../../changelog.rst:549
 msgid ""
 "[`#461 <https://github.com/dennissiemensma/dsmr-reader/issues/461>`_] "
 "Requirements update April 2018"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:540
+#: ../../changelog.rst:550
 msgid "Fixed some missing names on the contribution page in the DOCS"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:546
+#: ../../changelog.rst:556
 msgid "v1.15.0 - 2018-03-21"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:548
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:560
+#: ../../changelog.rst:558 ../../changelog.rst:570
 msgid ""
 "[`#449 <https://github.com/dennissiemensma/dsmr-reader/issues/449>`_] "
 "Meterstatistieken via MQTT beschikbaar"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:549
+#: ../../changelog.rst:559
 msgid ""
 "[`#208 <https://github.com/dennissiemensma/dsmr-reader/issues/208>`_] "
 "Notificatie bij uitblijven gegevens uit slimme meter"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:550
+#: ../../changelog.rst:560
 msgid ""
 "[`#342 <https://github.com/dennissiemensma/dsmr-reader/issues/342>`_] "
 "Backup to dropbox never finish (free plan no more space)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:556
+#: ../../changelog.rst:566
 msgid "v1.14.0 - 2018-03-11"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:558
+#: ../../changelog.rst:568
 msgid ""
 "[`#441 <https://github.com/dennissiemensma/dsmr-reader/issues/441>`_] "
 "PVOutput exports schedulen naar ingestelde upload interval - by "
 "pyrocumulus"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:559
+#: ../../changelog.rst:569
 msgid ""
 "[`#436 <https://github.com/dennissiemensma/dsmr-reader/issues/436>`_] "
 "Update docs: authentication method for public webinterface"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:561
+#: ../../changelog.rst:571
 msgid ""
 "[`#445 <https://github.com/dennissiemensma/dsmr-reader/issues/445>`_] "
 "Upload/export to PVoutput doesn't work"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:562
+#: ../../changelog.rst:572
 msgid ""
 "[`#432 <https://github.com/dennissiemensma/dsmr-reader/issues/432>`_] "
 "[API] Gas cost missing at start of day"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:563
+#: ../../changelog.rst:573
 msgid ""
 "[`#367 <https://github.com/dennissiemensma/dsmr-reader/issues/367>`_] "
 "Dagverbruik en teruglevering via MQTT"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:564
+#: ../../changelog.rst:574
 msgid ""
 "[`#447 <https://github.com/dennissiemensma/dsmr-reader/issues/447>`_] "
 "Kosten via MQTT"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:570
+#: ../../changelog.rst:580
 msgid "v1.13.2 - 2018-02-02"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:572
+#: ../../changelog.rst:582
 msgid ""
 "[`#431 <https://github.com/dennissiemensma/dsmr-reader/issues/431>`_] "
 "Django security releases issued: 2.0.2"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:578
+#: ../../changelog.rst:588
 msgid "v1.13.1 - 2018-01-28"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:580
+#: ../../changelog.rst:590
 msgid ""
 "[`#428 <https://github.com/dennissiemensma/dsmr-reader/issues/428>`_] "
 "Django 2.0: Null characters are not allowed in telegram (esp8266)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:586
+#: ../../changelog.rst:596
 msgid "v1.13.0 - 2018-01-23"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:588
+#: ../../changelog.rst:598
 msgid ""
 "[`#203 <https://github.com/dennissiemensma/dsmr-reader/issues/203>`_] "
 "One-click installer"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:589
+#: ../../changelog.rst:599
 msgid ""
 "[`#396 <https://github.com/dennissiemensma/dsmr-reader/issues/396>`_] "
 "Gecombineerd tarief tonen op 'Statistieken'-pagina"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:590
+#: ../../changelog.rst:600
 msgid ""
 "[`#268 <https://github.com/dennissiemensma/dsmr-reader/issues/268>`_] "
 "Data preservation/backups - by WatskeBart"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:591
+#: ../../changelog.rst:601
 msgid ""
 "[`#425 <https://github.com/dennissiemensma/dsmr-reader/issues/425>`_] "
 "Requests for donating a beer or coffee"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:592
+#: ../../changelog.rst:602
 msgid ""
 "[`#427 <https://github.com/dennissiemensma/dsmr-reader/issues/427>`_] "
 "Reconnect to postgresql"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:593
+#: ../../changelog.rst:603
 msgid ""
 "[`#394 <https://github.com/dennissiemensma/dsmr-reader/issues/394>`_] "
 "Django 2.0"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:598
+#: ../../changelog.rst:608
 msgid "v1.12.0 - 2018-01-14"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:600
+#: ../../changelog.rst:610
 msgid ""
 "[`#72 <https://github.com/dennissiemensma/dsmr-reader/issues/72>`_] "
 "Source data retention"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:601
+#: ../../changelog.rst:611
 msgid ""
 "[`#414 <https://github.com/dennissiemensma/dsmr-reader/issues/414>`_] add"
 " systemd service files - by meijjaa"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:602
+#: ../../changelog.rst:612
 msgid ""
 "[`#405 <https://github.com/dennissiemensma/dsmr-reader/issues/405>`_] "
 "More updates to the Dutch translation of the documentation - by lckarssen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:603
+#: ../../changelog.rst:613
 msgid ""
 "[`#404 <https://github.com/dennissiemensma/dsmr-reader/issues/404>`_] Fix"
 " minor typo in Dutch translation - by lckarssen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:604
+#: ../../changelog.rst:614
 msgid ""
 "[`#398 <https://github.com/dennissiemensma/dsmr-reader/issues/398>`_] iOS"
 " Web App: prevent same-window links from being opened externally - by "
 "Joris Vervuurt"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:605
+#: ../../changelog.rst:615
 msgid ""
 "[`#399 <https://github.com/dennissiemensma/dsmr-reader/issues/399>`_] "
 "Veel calls naar api.buienradar"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:606
+#: ../../changelog.rst:616
 msgid ""
 "[`#406 <https://github.com/dennissiemensma/dsmr-reader/issues/406>`_] "
 "Spelling correction trends page"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:607
+#: ../../changelog.rst:617
 msgid ""
 "[`#413 <https://github.com/dennissiemensma/dsmr-reader/issues/413>`_] "
 "Hoge CPU belasting op rpi 2 icm DSMR 5.0 meter"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:608
+#: ../../changelog.rst:618
 msgid ""
 "[`#419 <https://github.com/dennissiemensma/dsmr-reader/issues/419>`_] "
 "Requirements update (January 2018)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:614
+#: ../../changelog.rst:624
 msgid "v1.11.0 - 2017-11-24"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:616
+#: ../../changelog.rst:626
 msgid ""
 "[`#382 <https://github.com/dennissiemensma/dsmr-reader/issues/382>`_] "
 "Archief klopt niet"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:617
+#: ../../changelog.rst:627
 msgid ""
 "[`#385 <https://github.com/dennissiemensma/dsmr-reader/issues/385>`_] "
 "Ververs dagverbruik op dashboard automatisch - by HugoDaBosss"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:618
+#: ../../changelog.rst:628
 msgid ""
 "[`#387 <https://github.com/dennissiemensma/dsmr-reader/issues/387>`_] "
 "There are too many unprocessed telegrams - by HugoDaBosss"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:619
+#: ../../changelog.rst:629
 msgid ""
 "[`#368 <https://github.com/dennissiemensma/dsmr-reader/issues/368>`_] "
 "Gebruik van os.environ.get - by ju5t"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:620
+#: ../../changelog.rst:630
 msgid ""
 "[`#370 <https://github.com/dennissiemensma/dsmr-reader/issues/370>`_] "
 "Pvoutput upload zonder teruglevering"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:621
+#: ../../changelog.rst:631
 msgid ""
 "[`#371 <https://github.com/dennissiemensma/dsmr-reader/issues/371>`_] "
 "fonts via https laden"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:622
+#: ../../changelog.rst:632
 msgid ""
 "[`#378 <https://github.com/dennissiemensma/dsmr-reader/issues/378>`_] "
 "Processing of telegrams stalled"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:628
+#: ../../changelog.rst:638
 msgid "v1.10.0 - 2017-10-19"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:632
+#: ../../changelog.rst:642
 msgid "This releases turns telegram logging **off by default**."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:637
+#: ../../changelog.rst:647
 msgid ""
 "[`#363 <https://github.com/dennissiemensma/dsmr-reader/issues/363>`_] "
 "Show electricity_merged in the Total row for current month - by helmo"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:638
+#: ../../changelog.rst:648
 msgid ""
 "[`#305 <https://github.com/dennissiemensma/dsmr-reader/issues/305>`_] "
 "Trend staafdiagrammen afgelopen week / afgelopen maand altijd gelijk"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:639
+#: ../../changelog.rst:649
 msgid ""
 "[`#194 <https://github.com/dennissiemensma/dsmr-reader/issues/194>`_] Add"
 " timestamp to highest and lowest Watt occurance"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:640
+#: ../../changelog.rst:650
 msgid ""
 "[`#365 <https://github.com/dennissiemensma/dsmr-reader/issues/365>`_] "
 "Turn telegram logging off by default"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:641
+#: ../../changelog.rst:651
 msgid ""
 "[`#366 <https://github.com/dennissiemensma/dsmr-reader/issues/366>`_] "
 "Restructure docs"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:647
+#: ../../changelog.rst:657
 msgid "v1.9.0 - 2017-10-08"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:651
+#: ../../changelog.rst:661
 msgid ""
 "This release contains an update for the API framework, which `has a fix "
 "for some timezone issues <https://github.com/encode/django-rest-"
@@ -1501,219 +1511,219 @@ msgid ""
 "to datetime formatting when using the API."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:654
+#: ../../changelog.rst:664
 msgid ""
 "[`#9 <https://github.com/dennissiemensma/dsmr-reader/issues/9>`_] Data "
 "export: PVOutput"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:655
+#: ../../changelog.rst:665
 msgid ""
 "[`#163 <https://github.com/dennissiemensma/dsmr-reader/issues/163>`_] "
 "Allow separate prices/costs for electricity returned"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:656
+#: ../../changelog.rst:666
 msgid ""
 "[`#337 <https://github.com/dennissiemensma/dsmr-reader/issues/337>`_] API"
 " mogelijkheid voor ophalen 'dashboard' waarden"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:657
+#: ../../changelog.rst:667
 msgid ""
 "[`#284 <https://github.com/dennissiemensma/dsmr-reader/issues/284>`_] "
 "Automatische backups geven alleen lege bestanden"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:658
+#: ../../changelog.rst:668
 msgid ""
 "[`#279 <https://github.com/dennissiemensma/dsmr-reader/issues/279>`_] "
 "Weather report with temperature '-' eventually results in stopped "
 "dsmr_backend"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:659
+#: ../../changelog.rst:669
 msgid ""
 "[`#245 <https://github.com/dennissiemensma/dsmr-reader/issues/245>`_] "
 "Grafiek gasverbruik doet wat vreemd na aantal uur geen nieuwe data"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:660
+#: ../../changelog.rst:670
 msgid ""
 "[`#272 <https://github.com/dennissiemensma/dsmr-reader/issues/272>`_] "
 "Dashboard - weergave huidig verbruik bij smalle weergave"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:661
+#: ../../changelog.rst:671
 msgid ""
 "[`#273 <https://github.com/dennissiemensma/dsmr-reader/issues/273>`_] "
 "Docker (by xirixiz) reference in docs"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:662
+#: ../../changelog.rst:672
 msgid ""
 "[`#286 <https://github.com/dennissiemensma/dsmr-reader/issues/286>`_] Na "
 "gebruik admin-pagina's geen (eenvoudige) mogelijkheid voor terugkeren "
 "naar de site"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:663
+#: ../../changelog.rst:673
 msgid ""
 "[`#332 <https://github.com/dennissiemensma/dsmr-reader/issues/332>`_] "
 "Launch full screen on iOS device when opening from homescreen"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:664
+#: ../../changelog.rst:674
 msgid ""
 "[`#276 <https://github.com/dennissiemensma/dsmr-reader/issues/276>`_] "
 "Display error compare page on mobile"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:665
+#: ../../changelog.rst:675
 msgid ""
 "[`#288 <https://github.com/dennissiemensma/dsmr-reader/issues/288>`_] Add"
 " info to FAQ"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:666
+#: ../../changelog.rst:676
 msgid ""
 "[`#320 <https://github.com/dennissiemensma/dsmr-reader/issues/320>`_] "
 "auto refresh op statussen op statuspagina"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:667
+#: ../../changelog.rst:677
 msgid ""
 "[`#314 <https://github.com/dennissiemensma/dsmr-reader/issues/314>`_] Add"
 " web-applicatie mogelijkheid ala pihole"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:668
+#: ../../changelog.rst:678
 msgid ""
 "[`#358 <https://github.com/dennissiemensma/dsmr-reader/issues/358>`_] "
 "Requirements update (September 2017)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:669
+#: ../../changelog.rst:679
 msgid ""
 "[`#270 <https://github.com/dennissiemensma/dsmr-reader/issues/270>`_] "
 "Public Webinterface Warning (readthedocs.io)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:670
+#: ../../changelog.rst:680
 msgid ""
 "[`#231 <https://github.com/dennissiemensma/dsmr-reader/issues/231>`_] "
 "Contributors update"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:671
+#: ../../changelog.rst:681
 msgid ""
 "[`#300 <https://github.com/dennissiemensma/dsmr-reader/issues/300>`_] "
 "Upgrade to Django 1.11 LTS"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:677
+#: ../../changelog.rst:687
 msgid "v1.8.2 - 2017-08-12"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:679
+#: ../../changelog.rst:689
 msgid ""
 "[`#346 <https://github.com/dennissiemensma/dsmr-reader/issues/346>`_] "
 "Defer statistics page XHR"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:685
+#: ../../changelog.rst:695
 msgid "v1.8.1 - 2017-07-04"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:687
+#: ../../changelog.rst:697
 msgid ""
 "[`#339 <https://github.com/dennissiemensma/dsmr-reader/issues/339>`_] "
 "Upgrade Dropbox-client to v8.x"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:693
+#: ../../changelog.rst:703
 msgid "v1.8.0 - 2017-06-14"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:695
+#: ../../changelog.rst:705
 msgid ""
 "[`#141 <https://github.com/dennissiemensma/dsmr-reader/issues/141>`_] Add"
 " MQTT support to publish readings"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:696
+#: ../../changelog.rst:706
 msgid ""
 "[`#331 <https://github.com/dennissiemensma/dsmr-reader/issues/331>`_] "
 "Requirements update (June 2016)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:697
+#: ../../changelog.rst:707
 msgid ""
 "[`#299 <https://github.com/dennissiemensma/dsmr-reader/issues/299>`_] "
 "Support Python 3.6"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:703
+#: ../../changelog.rst:713
 msgid "v1.7.0 - 2017-05-04"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:707
+#: ../../changelog.rst:717
 msgid ""
 "Please note that the ``dsmr_datalogger.0007_dsmrreading_timestamp_index``"
 " migration **will take quite some time**, as it adds an index on one of "
 "the largest database tables!"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:709
+#: ../../changelog.rst:719
 msgid ""
 "It takes **around two minutes** on a RaspberryPi 2 & 3 with ``> 4.3 "
 "million`` readings on PostgreSQL. Results may differ on **slower "
 "RaspberryPi's** or **with MySQL**."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:714
+#: ../../changelog.rst:724
 msgid ""
 "The API-docs for the new v2 API `can be found here <https://dsmr-"
 "reader.readthedocs.io/en/v2/api.html>`_."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:716
+#: ../../changelog.rst:726
 msgid ""
 "[`#230 <https://github.com/dennissiemensma/dsmr-reader/issues/230>`_] "
 "Support for exporting data via API"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:722
+#: ../../changelog.rst:732
 msgid "v1.6.2 - 2017-04-23"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:724
+#: ../../changelog.rst:734
 msgid ""
 "[`#269 <https://github.com/dennissiemensma/dsmr-reader/issues/269>`_] "
 "x-as gasgrafiek geeft rare waarden aan"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:725
+#: ../../changelog.rst:735
 msgid ""
 "[`#303 <https://github.com/dennissiemensma/dsmr-reader/issues/303>`_] "
 "Archive page's default day sorting"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:731
+#: ../../changelog.rst:741
 msgid "v1.6.1 - 2017-04-06"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:733
+#: ../../changelog.rst:743
 msgid ""
 "[`#298 <https://github.com/dennissiemensma/dsmr-reader/issues/298>`_] "
 "Update requirements (Django 1.10.7)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:739
+#: ../../changelog.rst:749
 msgid "v1.6.0 - 2017-03-18"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:743
+#: ../../changelog.rst:753
 msgid ""
 "Support for ``MySQL`` has been **deprecated** since ``DSMR-reader v1.6`` "
 "and will be discontinued completely in a later release. Please use a "
@@ -1721,159 +1731,154 @@ msgid ""
 "supported in easily migrating to PostgreSQL in the future."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:748
+#: ../../changelog.rst:758
 msgid ""
 "**Change in API:** The telegram creation API now returns an ``HTTP 201`` "
 "response when successful. An ``HTTP 200`` was returned in former "
 "versions. :doc:`View API docs<api>`."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:753
+#: ../../changelog.rst:763
 msgid ""
 "[`#221 <https://github.com/dennissiemensma/dsmr-reader/issues/221>`_] "
 "Support for DSMR-firmware v5.0."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:754
+#: ../../changelog.rst:764
 msgid ""
 "[`#237 <https://github.com/dennissiemensma/dsmr-reader/issues/237>`_] "
 "Redesign: Status page."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:755
+#: ../../changelog.rst:765
 msgid ""
 "[`#249 <https://github.com/dennissiemensma/dsmr-reader/issues/249>`_] "
 "Req: Add iOS icon for Bookmark."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:756
+#: ../../changelog.rst:766
 msgid ""
 "[`#232 <https://github.com/dennissiemensma/dsmr-reader/issues/232>`_] "
 "Docs: Explain settings/options."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:757
+#: ../../changelog.rst:767
 msgid ""
 "[`#260 <https://github.com/dennissiemensma/dsmr-reader/issues/260>`_] Add"
 " link to readthedocs in Django for Dropbox instructions."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:758
+#: ../../changelog.rst:768
 msgid ""
 "[`#211 <https://github.com/dennissiemensma/dsmr-reader/issues/211>`_] API"
 " request should return HTTP 201 instead of HTTP 200."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:759
+#: ../../changelog.rst:769
 msgid ""
 "[`#191 <https://github.com/dennissiemensma/dsmr-reader/issues/191>`_] "
 "Deprecate MySQL support."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:760
+#: ../../changelog.rst:770
 msgid ""
 "[`#251 <https://github.com/dennissiemensma/dsmr-reader/issues/251>`_] "
 "Buienradar Uncaught exception."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:761
+#: ../../changelog.rst:771
 msgid ""
 "[`#257 <https://github.com/dennissiemensma/dsmr-reader/issues/257>`_] "
 "Requirements update (February 2017)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:762
+#: ../../changelog.rst:772
 msgid ""
 "[`#274 <https://github.com/dennissiemensma/dsmr-reader/issues/274>`_] "
 "Requirements update (March 2017)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:768
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:785
+#: ../../changelog.rst:778 ../../changelog.rst:795
 msgid "v1.5.5 - 2017-01-19"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:770
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:787
+#: ../../changelog.rst:780 ../../changelog.rst:797
 msgid ""
 "Remove readonly restriction for editing statistics in admin interface "
 "(`#242 <https://github.com/dennissiemensma/dsmr-reader/issues/242>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:776
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:793
+#: ../../changelog.rst:786 ../../changelog.rst:803
 msgid "v1.5.4 - 2017-01-12"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:778
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:795
+#: ../../changelog.rst:788 ../../changelog.rst:805
 msgid ""
 "Improve datalogger for DSMR v5.0 (`#212 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/212>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:779
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:796
+#: ../../changelog.rst:789 ../../changelog.rst:806
 msgid ""
 "Fixed another bug in MinderGas API client implementation (`#228 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/228>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:802
+#: ../../changelog.rst:812
 msgid "v1.5.3 - 2017-01-11"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:804
+#: ../../changelog.rst:814
 msgid ""
 "Improve MinderGas API client implementation (`#228 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/228>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:810
+#: ../../changelog.rst:820
 msgid "v1.5.2 - 2017-01-09"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:812
+#: ../../changelog.rst:822
 msgid ""
 "Automatic refresh of dashboard charts (`#210 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/210>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:813
+#: ../../changelog.rst:823
 msgid ""
 "Mindergas.nl API: Tijdstip van verzending willekeurig maken (`#204 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/204>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:814
+#: ../../changelog.rst:824
 msgid ""
 "Extend API docs with additional example (`#185 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/185>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:815
+#: ../../changelog.rst:825
 msgid ""
 "Docs: How to restore backup (`#190 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/190>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:816
+#: ../../changelog.rst:826
 msgid ""
 "Log errors occured to file (`#181 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/181>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:822
+#: ../../changelog.rst:832
 msgid "v1.5.1 - 2017-01-04"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:826
+#: ../../changelog.rst:836
 msgid ""
 "This patch contains no new features and **only solves upgrading issues** "
 "for some users."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:828
+#: ../../changelog.rst:838
 msgid ""
 "Fix for issues `#200 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/200>`_ & `#217 <https://github.com/dennissiemensma/dsmr-"
@@ -1882,18 +1887,18 @@ msgid ""
 " project, causing failed upgrades."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:834
+#: ../../changelog.rst:844
 msgid "v1.5.0 - 2017-01-01"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:838
+#: ../../changelog.rst:848
 msgid ""
 "The support for ``Python 3.3`` has been **dropped** due to the Django "
 "upgrade (`#103 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/103>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:839
+#: ../../changelog.rst:849
 msgid ""
 "There is **experimental support** for ``Python 3.6`` and ``Python 3.7 "
 "(nightly)`` as the unittests are `now built against those versions <https"
@@ -1901,11 +1906,11 @@ msgid ""
 "<https://github.com/dennissiemensma/dsmr-reader/issues/167>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:841
+#: ../../changelog.rst:851
 msgid "**Legacy warning**"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:843
+#: ../../changelog.rst:853
 msgid ""
 "The migrations that were squashed together in (`#31 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/31>`_) have been "
@@ -1913,858 +1918,858 @@ msgid ""
 "running a dsmrreader-version of **before** ``v0.13 (β)``."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:844
+#: ../../changelog.rst:854
 msgid ""
 "If you are indeed still running ``< v0.13 (β)``, please upgrade to "
 "``v1.4`` first (!), followed by an upgrade to ``v1.5``."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:846
+#: ../../changelog.rst:856
 msgid ""
 "Verify telegrams' CRC (`#188 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/188>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:847
+#: ../../changelog.rst:857
 msgid ""
 "Display last 24 hours on dashboard (`#164 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/164>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:848
+#: ../../changelog.rst:858
 msgid ""
 "Status page visualisation (`#172 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/172>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:849
+#: ../../changelog.rst:859
 msgid ""
 "Store and display phases consumption (`#161 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/161>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:850
+#: ../../changelog.rst:860
 msgid ""
 "Weather graph not showing when no gas data is available (`#170 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/170>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:851
+#: ../../changelog.rst:861
 msgid ""
 "Upgrade to ChartJs 2.0 (`#127 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/127>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:852
+#: ../../changelog.rst:862
 msgid ""
 "Improve Statistics page performance (`#173 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/173>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:853
+#: ../../changelog.rst:863
 msgid ""
 "Version checker at github (`#166 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/166>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:854
+#: ../../changelog.rst:864
 msgid ""
 "Remove required login for dismissal of in-app notifications (`#179 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/179>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:855
+#: ../../changelog.rst:865
 msgid ""
 "Round numbers displayed in GUI to 2 decimals (`#183 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/183>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:856
+#: ../../changelog.rst:866
 msgid ""
 "Switch Nosetests to Pytest (+ pytest-cov) (`#167 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/167>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:857
+#: ../../changelog.rst:867
 msgid ""
 "PyLama code audit (+ pytest-cov) (`#158 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/158>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:858
+#: ../../changelog.rst:868
 msgid ""
 "Double upgrade of Django framework ``Django 1.8`` -> ``Django 1.9`` -> "
 "``Django 1.10`` (`#103 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/103>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:859
+#: ../../changelog.rst:869
 msgid ""
 "Force ``PYTHONUNBUFFERED`` for supervisor commands (`#176 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/176>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:860
+#: ../../changelog.rst:870
 msgid ""
 "Documentation updates for v1.5 (`#171 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/171>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:861
+#: ../../changelog.rst:871
 msgid ""
 "Requirements update for v1.5 (december 2016) (`#182 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/182>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:862
+#: ../../changelog.rst:872
 msgid ""
 "Improved backend process logging (`#184 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/184>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:868
+#: ../../changelog.rst:878
 msgid "v1.4.1 - 2016-12-12"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:870
+#: ../../changelog.rst:880
 msgid ""
 "Consumption chart hangs due to unique_key violation (`#174 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/174>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:871
+#: ../../changelog.rst:881
 msgid ""
 "NoReverseMatch at / Reverse for 'docs' (`#175 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/175>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:877
+#: ../../changelog.rst:887
 msgid "v1.4.0 - 2016-11-28 .. warning:: **Change in Python support**"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:880
+#: ../../changelog.rst:890
 msgid ""
 "Support for ``Python 3.5`` has been added officially (`#55 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/55>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:882
+#: ../../changelog.rst:892
 msgid ""
 "Push notifications for Notify My Android / Prowl (iOS), written by Jeroen"
 " Peters (`#152 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/152>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:883
+#: ../../changelog.rst:893
 msgid ""
 "Support for both single and high/low tariff (`#130 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/130>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:884
+#: ../../changelog.rst:894
 msgid ""
 "Add new note from Dashboard has wrong time format (`#159 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/159>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:885
+#: ../../changelog.rst:895
 msgid ""
 "Display estimated price for current usage in Dashboard (`#155 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/155>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:886
+#: ../../changelog.rst:896
 msgid ""
 "Dropbox API v1 deprecated in June 2017 (`#142 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/142>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:887
+#: ../../changelog.rst:897
 msgid ""
 "Improve code coverage (`#151 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/151>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:888
+#: ../../changelog.rst:898
 msgid ""
 "Restyle configuration overview (`#156 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/156>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:889
+#: ../../changelog.rst:899
 msgid ""
 "Capability based push notifications (`#165 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/165>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:895
+#: ../../changelog.rst:905
 msgid "v1.3.2 - 2016-11-08"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:897
+#: ../../changelog.rst:907
 msgid ""
 "Requirements update (november 2016) (`#150 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/150>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:903
+#: ../../changelog.rst:913
 msgid "v1.3.1 - 2016-08-16"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:905
+#: ../../changelog.rst:915
 msgid ""
 "CSS large margin-bottom (`#144 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/144>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:906
+#: ../../changelog.rst:916
 msgid ""
 "Django security releases issued: 1.8.14 (`#147 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/147>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:907
+#: ../../changelog.rst:917
 msgid ""
 "Requirements update (August 2016) (`#148 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/148>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:908
+#: ../../changelog.rst:918
 msgid ""
 "Query performance improvements (`#149 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/149>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:914
+#: ../../changelog.rst:924
 msgid "v1.3.0 - 2016-07-15"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:916
+#: ../../changelog.rst:926
 msgid ""
 "API endpoint for datalogger (`#140 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/140>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:917
+#: ../../changelog.rst:927
 msgid ""
 "Colors for charts (`#137 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/137>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:918
+#: ../../changelog.rst:928
 msgid ""
 "Data export: Mindergas.nl (`#10 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/10>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:919
+#: ../../changelog.rst:929
 msgid ""
 "Requirement upgrade (`#143 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/143>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:920
+#: ../../changelog.rst:930
 msgid ""
 "Installation wizard for first time use (`#139 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/139>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:926
+#: ../../changelog.rst:936
 msgid "v1.2.0 - 2016-05-18"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:928
+#: ../../changelog.rst:938
 msgid ""
 "Energy supplier prices does not indicate tariff type (Django admin) "
 "(`#126 <https://github.com/dennissiemensma/dsmr-reader/issues/126>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:929
+#: ../../changelog.rst:939
 msgid ""
 "Requirements update (`#128 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/128>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:930
+#: ../../changelog.rst:940
 msgid ""
 "Force backup (`#123 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/123>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:931
+#: ../../changelog.rst:941
 msgid ""
 "Update clean-install.md (`#131 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/131>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:932
+#: ../../changelog.rst:942
 msgid ""
 "Improve data export field names (`#132 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/132>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:933
+#: ../../changelog.rst:943
 msgid ""
 "Display average temperature in archive (`#122 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/122>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:934
+#: ../../changelog.rst:944
 msgid ""
 "Pie charts on trends page overlap their canvas (`#136 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/136>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:935
+#: ../../changelog.rst:945
 msgid ""
 "'Slumber' consumption (`#115 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/115>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:936
+#: ../../changelog.rst:946
 msgid ""
 "Show lowest & highest Watt peaks (`#138 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/138>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:937
+#: ../../changelog.rst:947
 msgid ""
 "Allow day & hour statistics reset due to changing energy prices (`#95 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/95>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:941
+#: ../../changelog.rst:951
 msgid "v1.1.2 - 2016-05-01"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:943
+#: ../../changelog.rst:953
 msgid ""
 "Trends page giving errors (when lacking data) (`#125 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/125>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:949
+#: ../../changelog.rst:959
 msgid "v1.1.1 - 2016-04-27"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:951
+#: ../../changelog.rst:961
 msgid ""
 "Improve readme (`#124 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/124>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:957
+#: ../../changelog.rst:967
 msgid "v1.1.0 - 2016-04-23"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:959
+#: ../../changelog.rst:969
 msgid ""
 "Autorefresh dashboard (`#117 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/117>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:960
+#: ../../changelog.rst:970
 msgid ""
 "Improve line graphs' visibility (`#111 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/111>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:961
+#: ../../changelog.rst:971
 msgid ""
 "Easily add notes (`#110 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/110>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:962
+#: ../../changelog.rst:972
 msgid ""
 "Export data points in CSV format (`#2 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/2>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:963
+#: ../../changelog.rst:973
 msgid ""
 "Allow day/month/year comparison (`#94 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/94>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:964
+#: ../../changelog.rst:974
 msgid ""
 "Docs: Add FAQ and generic application info (`#113 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/113>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:965
+#: ../../changelog.rst:975
 msgid ""
 "Support for Iskra meter (DSMR 2.x) (`#120 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/120>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:971
+#: ../../changelog.rst:981
 msgid "v1.0.1 - 2016-04-07"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:973
+#: ../../changelog.rst:983
 msgid ""
 "Update licence to OSI compatible one (`#119 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/119>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:979
+#: ../../changelog.rst:989
 msgid "v1.0.0 - 2016-04-07"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:981
+#: ../../changelog.rst:991
 msgid "First official stable release."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:987
+#: ../../changelog.rst:997
 msgid "[β] v0.1 (2015-10-29) to 0.16 (2016-04-06)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:991
+#: ../../changelog.rst:1001
 msgid ""
 "All previous beta releases/changes have been combined to a single list "
 "below."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:993
+#: ../../changelog.rst:1003
 msgid ""
 "Move documentation to wiki or RTD (`#90 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/90>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:994
+#: ../../changelog.rst:1004
 msgid ""
 "Translate README to Dutch (`#16 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/16>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:995
+#: ../../changelog.rst:1005
 msgid ""
 "Delete (recent) history page (`#112 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/112>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:996
+#: ../../changelog.rst:1006
 msgid ""
 "Display most recent temperature in dashboard (`#114 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/114>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:997
+#: ../../changelog.rst:1007
 msgid ""
 "Upgrade Django to 1.8.12 (`#118 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/118>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:999
+#: ../../changelog.rst:1009
 msgid ""
 "Redesign trends page (`#97 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/97>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1000
+#: ../../changelog.rst:1010
 msgid ""
 "Support for summer time (`#105 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/105>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1001
+#: ../../changelog.rst:1011
 msgid ""
 "Support for Daylight Saving Time (DST) transition (`#104 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/104>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1002
+#: ../../changelog.rst:1012
 msgid ""
 "Add (error) hints to status page (`#106 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/106>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1003
+#: ../../changelog.rst:1013
 msgid ""
 "Keep track of version (`#108 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/108>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1005
+#: ../../changelog.rst:1015
 msgid ""
 "Django 1.8.11 released (`#82 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/82>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1006
+#: ../../changelog.rst:1016
 msgid ""
 "Prevent tests from failing due to moment of execution (`#88 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/88>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1007
+#: ../../changelog.rst:1017
 msgid ""
 "Statistics page meter positions are broken (`#93 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/93>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1008
+#: ../../changelog.rst:1018
 msgid ""
 "Archive only shows graph untill 23:00 (11 pm) (`#77 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/77>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1009
+#: ../../changelog.rst:1019
 msgid ""
 "Trends page crashes due to nullable fields average (`#100 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/100>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1010
+#: ../../changelog.rst:1020
 msgid ""
 "Trends: Plot peak and off-peak relative to each other (`#99 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/99>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1011
+#: ../../changelog.rst:1021
 msgid ""
 "Monitor requirements with requires.io (`#101 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/101>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1012
+#: ../../changelog.rst:1022
 msgid ""
 "Terminology (`#41 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/41>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1013
+#: ../../changelog.rst:1023
 msgid ""
 "Obsolete signals in dsmr_consumption (`#63 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/63>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1014
+#: ../../changelog.rst:1024
 msgid ""
 "Individual app testing coverage (`#64 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/64>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1015
+#: ../../changelog.rst:1025
 msgid ""
 "Support for extra devices on other M-bus (0-n:24.1) (`#92 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/92>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1016
+#: ../../changelog.rst:1026
 msgid ""
 "Separate post-deployment commands (`#102 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/102>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1018
+#: ../../changelog.rst:1028
 msgid ""
 "Show exceptions in production (webinterface) (`#87 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/87>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1019
+#: ../../changelog.rst:1029
 msgid ""
 "Keep Supervisor processes running (`#79 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/79>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1020
+#: ../../changelog.rst:1030
 msgid ""
 "Hourly stats of 22:00:00+00 every day lack gas (`#78 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/78>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1021
+#: ../../changelog.rst:1031
 msgid ""
 "Test Travis-CI with MySQL + MariaDB + PostgreSQL (`#54 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/54>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1022
+#: ../../changelog.rst:1032
 msgid ""
 "PostgreSQL tests + nosetests + coverage failure: unrecognized "
 "configuration parameter \"foreign_key_checks\" (`#62 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/62>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1023
+#: ../../changelog.rst:1033
 msgid ""
 "Performance check (`#83 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/83>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1024
+#: ../../changelog.rst:1034
 msgid ""
 "Allow month & year archive (`#66 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/66>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1025
+#: ../../changelog.rst:1035
 msgid ""
 "Graphs keep increasing height on tablet (`#89 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/89>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1027
+#: ../../changelog.rst:1037
 msgid ""
 "Delete StatsSettings(.track) settings model (`#71 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/71>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1028
+#: ../../changelog.rst:1038
 msgid ""
 "Drop deprecated commands (`#22 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/22>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1029
+#: ../../changelog.rst:1039
 msgid ""
 "Datalogger doesn't work properly with DSMR 4.2 (KAIFA-METER) (`#73 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/73>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1030
+#: ../../changelog.rst:1040
 msgid ""
 "Dashboard month statistics costs does not add up (`#75 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/75>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1031
+#: ../../changelog.rst:1041
 msgid ""
 "Log unhandled exceptions and errors (`#65 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/65>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1032
+#: ../../changelog.rst:1042
 msgid ""
 "Datalogger crashes with IntegrityError because 'timestamp' is null (`#74 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/74>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1033
+#: ../../changelog.rst:1043
 msgid ""
 "Trends are always shown in UTC (`#76 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/76>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1034
+#: ../../changelog.rst:1044
 msgid ""
 "Squash migrations (`#31 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/31>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1035
+#: ../../changelog.rst:1045
 msgid ""
 "Display 'electricity returned' graph in dashboard (`#81 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/81>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1036
+#: ../../changelog.rst:1046
 msgid ""
 "Optional gas (and electricity returned) capabilities tracking (`#70 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/70>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1037
+#: ../../changelog.rst:1047
 msgid ""
 "Add 'electricity returned' to trends page (`#84 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/84>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1039
+#: ../../changelog.rst:1049
 msgid ""
 "Archive: View past days details (`#61 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/61>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1040
+#: ../../changelog.rst:1050
 msgid ""
 "Dashboard: Consumption total for current month (`#60 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/60>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1041
+#: ../../changelog.rst:1051
 msgid ""
 "Check whether gas readings are optional (`#34 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/34>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1042
+#: ../../changelog.rst:1052
 msgid ""
 "Django security releases issued: 1.8.10 (`#68 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/68>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1043
+#: ../../changelog.rst:1053
 msgid ""
 "Notes display in archive (`#69 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/69>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1045
+#: ../../changelog.rst:1055
 msgid ""
 "Status page/alerts when features are disabled/unavailable (`#45 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/45>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1046
+#: ../../changelog.rst:1056
 msgid ""
 "Integrate Travis CI (`#48 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/48>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1047
+#: ../../changelog.rst:1057
 msgid ""
 "Testing coverage (`#38 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/38>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1048
+#: ../../changelog.rst:1058
 msgid ""
 "Implement automatic backups & Dropbox cloud storage (`#44 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/44>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1049
+#: ../../changelog.rst:1059
 msgid ""
 "Link code coverage service to repository (`#56 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/56>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1050
+#: ../../changelog.rst:1060
 msgid ""
 "Explore timezone.localtime() as replacement for datetime.astimezone() "
 "(`#50 <https://github.com/dennissiemensma/dsmr-reader/issues/50>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1051
+#: ../../changelog.rst:1061
 msgid ""
 "Align GasConsumption.read_at to represent the start of hour (`#40 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/40>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1053
+#: ../../changelog.rst:1063
 msgid ""
 "Cleanup unused static files (`#47 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/47>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1054
+#: ../../changelog.rst:1064
 msgid ""
 "Investigated mysql_tzinfo_to_sql — Load the Time Zone Tables (`#35 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/35>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1055
+#: ../../changelog.rst:1065
 msgid ""
 "Make additional DSMR data optional (`#46 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/46>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1056
+#: ../../changelog.rst:1066
 msgid ""
 "Localize graph x-axis (`#42 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/42>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1057
+#: ../../changelog.rst:1067
 msgid ""
 "Added graph formatting string to gettext file (`#42 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/42>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1058
+#: ../../changelog.rst:1068
 msgid ""
 "Different colors for peak & off-peak electricity (`#52 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/52>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1059
+#: ../../changelog.rst:1069
 msgid ""
 "Admin: Note widget (`#51 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/51>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1060
+#: ../../changelog.rst:1070
 msgid ""
 "Allow GUI to run without data (`#26 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/26>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1062
+#: ../../changelog.rst:1072
 msgid ""
 "Moved project to GitHub (`#28 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/28>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1063
+#: ../../changelog.rst:1073
 msgid "Added stdout to dsmr_backend to reflect progress."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1064
+#: ../../changelog.rst:1074
 msgid ""
 "Restore note usage in GUI (`#39 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/39>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1066
+#: ../../changelog.rst:1076
 msgid ""
 "Store daily, weekly, monthly and yearly statistics (`#3 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/3>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1067
+#: ../../changelog.rst:1077
 msgid ""
 "Improved Recent History page performance a bit. (as result of `#3 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/3>`_)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1068
+#: ../../changelog.rst:1078
 msgid ""
 "Updates ChartJS library tot 1.1, disposing django-chartjs plugin. Labels "
 "finally work! (as result of `#3 <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/3>`_)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1069
+#: ../../changelog.rst:1079
 msgid ""
 "Added trends page. (as result of `#3 <https://github.com/dennissiemensma"
 "/dsmr-reader/issues/3>`_)"
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1071
+#: ../../changelog.rst:1081
 msgid ""
 "Recent history setting: set range (`#29 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/29>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1072
+#: ../../changelog.rst:1082
 msgid ""
 "Mock required for test: dsmr_weather.test_weather_tracking (`#32 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/32>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1074
+#: ../../changelog.rst:1084
 msgid ""
 "Massive refactoring: Separating apps & using signals (`#19 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/19>`_)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1075
+#: ../../changelog.rst:1085
 msgid ""
 "README update: Exit character for cu (`#27 "
 "<https://github.com/dennissiemensma/dsmr-reader/issues/27>`_, by Jeroen "
 "Peters)."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1076
+#: ../../changelog.rst:1086
 msgid "Fixed untranslated strings in admin interface."
 msgstr ""
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/changelog.rst:1077
+#: ../../changelog.rst:1087
 msgid "Upgraded Django to 1.8.9."
 msgstr ""
 
