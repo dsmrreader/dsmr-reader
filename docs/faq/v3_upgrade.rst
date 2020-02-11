@@ -103,13 +103,27 @@ Execute the following::
     If you're getting any errors, you can revert to the old version by running::
 
         sudo su - dsmr
+
+        # One of these checkouts might fail, but it's okay:
+        git checkout -b v2 origin/v2
+        git checkout v2
+
+        # Just make sure you're at v2 now:
+        git branch
+
         deactivate
         cd ~
         mv .virtualenvs/dsmrreader .virtualenvs/v3-dsmrreader
         mv .virtualenvs/v2-dsmrreader .virtualenvs/dsmrreader
 
-        cd dsmr-reader
+        # Now redeploy
+        logout
+        sudo su - dsmr
         ./deploy.sh
+
+        # (Re)start all processes
+        logout
+        sudo supervisorctl restart all
 
 Everything okay? Time to upgrade DSMR-reader to v3.x.
 
@@ -123,9 +137,19 @@ Execute the following::
     sudo su - dsmr
     git fetch
     git checkout -b v3 origin/v3
+
+    # Make sure you're at v3 now:
+    git branch
+
     git pull
     pip3 install -r dsmrreader/provisioning/requirements/base.txt
     pip3 install -r dsmrreader/provisioning/requirements/postgresql.txt
+
+    # Now redeploy
     ./deploy.sh
+
+    # (Re)start all processes
+    logout
+    sudo supervisorctl restart all
 
 Great. You should now be on ``v3.x``!
