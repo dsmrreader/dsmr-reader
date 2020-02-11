@@ -4,6 +4,7 @@ import random
 import time
 
 import crcmod
+import serial
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import gettext as _
 from django.utils import timezone
@@ -17,9 +18,9 @@ logger = logging.getLogger('commands')
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
-    help = _('Generates a FAKE reading. DO NOT USE in production! Used for integration checks.')
+    help = 'Generates a FAKE reading. DO NOT USE in production! Used for integration checks.'
     name = __name__  # Required for PID file.
-    sleep_time = 1
+    sleep_time = 5
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
@@ -28,21 +29,29 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             action='store_true',
             dest='with_gas',
             default=False,
-            help=_('Include gas consumption')
+            help='Optional: Include gas consumption'
         )
         parser.add_argument(
             '--with-electricity-returned',
             action='store_true',
             dest='with_electricity_returned',
             default=False,
-            help=_('Include electricity returned (solar panels)')
+            help='Optional: Include electricity returned (PV)'
         )
         parser.add_argument(
             '--hour-offset',
             action='store',
             dest='hour_offset',
             default=0,
-            help=_('The offset in hours, can both be positive as negative (to go back in time).')
+            help='Optional: The offset in hours, can both be positive as negative (to go back in time).'
+        )
+        parser.add_argument(
+            '--serial-port',
+            action='store',
+            dest='serial_port',
+            default=None,
+            metavar='/path/to/port',
+            help='Optional: The serial port to write the telegram to. Useful to simulate a real port.'
         )
 
     def run(self, **options):
@@ -57,7 +66,26 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         )
         logger.info("\n%s", telegram)  # For convenience
 
-        dsmr_datalogger.services.telegram_to_reading(data=telegram)
+        # Either write to port or just handle internally
+        if options['serial_port']:
+            logger.debug('Writing data to: %s', options['serial_port'])
+            self._write_to_port(serial_port=options['serial_port'], data=telegram)
+        else:
+            logger.debug('Writing data to: internal service')
+            dsmr_datalogger.services.telegram_to_reading(data=telegram)
+
+    def _write_to_port(self, serial_port, data):
+        serial_handle = serial.Serial(
+            port=serial_port,
+            baudrate=115200,
+            bytesize=serial.EIGHTBITS,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+            xonxoff=1,
+            rtscts=0,
+            timeout=0.5,
+        )
+        serial_handle.write(bytes(data, 'utf-8'))
 
     def _generate_data(self, with_gas, with_electricity_returned, hour_offset):
         """ Generates 'random' data, but in a way that it keeps incrementing. """
@@ -165,7 +193,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         hexed_checksum = hex(calculated_checksum)[2:].upper()
         hexed_checksum = '{:0>4}'.format(hexed_checksum)  # Zero any spacing on the left hand size.
 
-        return "{}{}".format(telegram, hexed_checksum)
+        return "{}{}\n".format(telegram, hexed_checksum)
 
     def _round_precision(self, float_number, fill_count):
         """ Rounds the number for precision. """

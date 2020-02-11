@@ -451,20 +451,8 @@ msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je
 msgid "Datalogger"
 msgstr "Datalogger"
 
-msgid "Performs an DSMR P1 telegram reading on the COM port."
-msgstr "Leest een DSMR P1 telegram uit van de COM-poort (meting)."
-
-msgid "Generates a FAKE reading. DO NOT USE in production! Used for integration checks."
-msgstr "Genereert een NEP-meting. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
-
-msgid "Include gas consumption"
-msgstr "Neem gasverbruik mee"
-
-msgid "Include electricity returned (solar panels)"
-msgstr "Neem teruglevering elektriciteit mee (zonnepanelen)"
-
-msgid "The offset in hours, can both be positive as negative (to go back in time)."
-msgstr "De afwijking in uren, kan zowel positief als negatief zijn (om terug in de tijd te gaan)."
+msgid "Performs an DSMR P1 telegram reading on the serial port."
+msgstr "Leest een DSMR P1 telegram uit van de seriële poort (meti."
 
 msgid "Timestamp indicating when the reading was taken, according to the smart meter"
 msgstr "Moment waarop de meting is gedaan, volgens de meter"
@@ -2301,6 +2289,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Generates a FAKE reading. DO NOT USE in production! Used for integration checks."
+#~ msgstr "Genereert een NEP-meting. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
+
+#~ msgid "Include gas consumption"
+#~ msgstr "Neem gasverbruik mee"
+
+#~ msgid "Include electricity returned (solar panels)"
+#~ msgstr "Neem teruglevering elektriciteit mee (zonnepanelen)"
+
+#~ msgid "The offset in hours, can both be positive as negative (to go back in time)."
+#~ msgstr "De afwijking in uren, kan zowel positief als negatief zijn (om terug in de tijd te gaan)."
 
 #~ msgid "By reading (every X seconds)"
 #~ msgstr "Per meting (elke X seconden)"

@@ -10,6 +10,7 @@ dropbox==9.4.0
 gunicorn==20.0.4
 paho-mqtt==1.5.0
 pyserial==3.4
+pyserial-asyncio==0.4
 python-dateutil==2.8.1
 pytz==2019.3
 requests==2.22.0

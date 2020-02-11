@@ -66,28 +66,37 @@ msgstr "Script"
 
 #: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:44
 msgid ""
-"Create a new file: ``/home/dsmr/dsmr_datalogger_api_client.py`` with contents::"
+"Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this "
+"content: `dsmr_datalogger_api_client.py on GitHub <https://github.com/"
+"dennissiemensma/dsmr-reader/blob/v3/dsmr_datalogger/scripts/"
+"dsmr_datalogger_api_client.py>`_"
 msgstr ""
-"Maak een nieuw bestand:  ``/home/dsmr/dsmr_datalogger_api_client.py`` met "
-"inhoud::"
+"Maak een nieuw bestand ``/home/dsmr/dsmr_datalogger_api_client.py`` met deze "
+"inhoud: `dsmr_datalogger_api_client.py op GitHub <https://github.com/"
+"dennissiemensma/dsmr-reader/blob/v3/dsmr_datalogger/scripts/"
+"dsmr_datalogger_api_client.py>`_"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:146
-msgid "The serial connection in the script above is based on ``DSMR v4/v5``"
-msgstr "De seriele verbinding in bovenstaand script is gebaseerd op ``DSMR v4/v5``"
-
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:150
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:48
 msgid ""
-"Don't forget to insert your own API URL and API key in the script above, in "
-"``API_SERVERS``"
+"The serial connection in the script above is based on ``DSMR v4/v5``. When "
+"required, change these in ``SERIAL_SETTINGS`` in the script."
 msgstr ""
-"Vergeet niet om in bovenstaand script je eigen API URL en API sleutel te "
-"gebruiken, in ``API_SERVERS``"
+"De seriele verbinding in bovenstaand script is gebaseerd op ``DSMR v4/v5``. "
+"Indien nodig, verander deze in ``SERIAL_SETTINGS`` in het script."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:153
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:52
+msgid ""
+"Don't forget to insert your own API URL and API key as defined in "
+"``API_SERVERS`` in the script."
+msgstr ""
+"Vergeet niet om je eigen API URL en API key in te stellen in ``API_SERVERS`` "
+"binnen het script."
+
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:55
 msgid "Supervisor"
 msgstr "Supervisor"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:155
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:57
 msgid ""
 "Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr-client.conf`` "
 "with contents::"
@@ -95,20 +104,34 @@ msgstr ""
 "Maak een nieuwe Supervisor-config in ``/etc/supervisor/conf.d/dsmr-client.conf`` "
 "met inhoud::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:173
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:75
 msgid "Update and run **Supervisor**::"
 msgstr "Update en draai **Supervisor**::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:179
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:81
 msgid "The script should now forward telegrams to the API URL you specified."
 msgstr ""
 "Het script zou nu telegrammen moeten doorsturen naar de API URL die je eerder "
 "hebt ingevoerd."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:183
+#: /home/dennis/PycharmProjects/dsmr-reader/docs/installation/datalogger.rst:85
 msgid ""
 "If you make any changes to the script later, make sure to restart it with: "
 "``sudo supervisorctl update``"
 msgstr ""
 "Mocht je later zelf wijzigingen doorvoeren in het script, vergeet deze dan niet "
 "te herladen met: ``sudo supervisorctl update``"
+
+#~ msgid ""
+#~ "Create a new file: ``/home/dsmr/dsmr_datalogger_api_client.py`` with "
+#~ "contents::"
+#~ msgstr ""
+#~ "Maak een nieuw bestand:  ``/home/dsmr/dsmr_datalogger_api_client.py`` met "
+#~ "inhoud::"
+
+#~ msgid ""
+#~ "Don't forget to insert your own API URL and API key in the script above, in "
+#~ "``API_SERVERS``"
+#~ msgstr ""
+#~ "Vergeet niet om in bovenstaand script je eigen API URL en API sleutel te "
+#~ "gebruiken, in ``API_SERVERS``"

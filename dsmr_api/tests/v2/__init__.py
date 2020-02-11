@@ -23,7 +23,7 @@ class APIv2TestCase(TestCase):
         path = reverse('{}:{}'.format(self.NAMESPACE, view_name))
         response = getattr(self.client, method)(
             path,
-            HTTP_X_AUTHKEY=self.api_settings.auth_key,
+            HTTP_AUTHORIZATION='Token {}'.format(self.api_settings.auth_key),
             content_type='application/json',
             **kwargs
         )

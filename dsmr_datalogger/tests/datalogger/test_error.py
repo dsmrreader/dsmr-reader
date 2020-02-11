@@ -74,11 +74,12 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
         """ Test whether interrupts are handled. """
         serial_open_mock.return_value = None
 
-        # First call raises expected exception, second call should just return data.
+        # First call raises expected exception.
         eintr_error = SerialException('read failed: [Errno 4] Interrupted system call')
         serial_readline_mock.side_effect = [eintr_error] + self._dsmr_dummy_data()
         self.assertFalse(DsmrReading.objects.exists())
 
+        # Second call should just return data.
         self._intercept_command_stdout('dsmr_datalogger', run_once=True)
         self.assertTrue(DsmrReading.objects.exists())
 

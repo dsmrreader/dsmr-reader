@@ -1,7 +1,6 @@
 import logging
 import base64
 
-from serial.serialutil import SerialException
 from django.db.models.functions.datetime import TruncHour
 from django.db.models.aggregates import Count
 from django.db.models.expressions import F
@@ -18,6 +17,7 @@ from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_parser import telegram_specifications, obis_references
 from dsmr_parser.exceptions import InvalidChecksumError, ParseError
 from dsmr_parser.parsers import TelegramParser
+from dsmr_datalogger.scripts.dsmr_datalogger_api_client import read_serial_port
 import dsmr_datalogger.signals
 
 
@@ -36,13 +36,17 @@ def get_dsmr_connection_parameters():
     }
 
     datalogger_settings = DataloggerSettings.get_solo()
-    connection_parameters = {
-        'com_port': datalogger_settings.com_port,
-        'baudrate': 115200,
-        'bytesize': serial.EIGHTBITS,
-        'parity': serial.PARITY_NONE,
-        'log_telegrams': datalogger_settings.log_telegrams,
-    }
+    connection_parameters = dict(
+        port=datalogger_settings.com_port,
+        baudrate=115200,
+        bytesize=serial.EIGHTBITS,
+        parity=serial.PARITY_NONE,
+        log_telegrams=datalogger_settings.log_telegrams,
+        stopbits=serial.STOPBITS_ONE,
+        xonxoff=1,
+        rtscts=0,
+        timeout=20,
+    )
 
     if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_2_3:
         connection_parameters.update({
@@ -51,65 +55,35 @@ def get_dsmr_connection_parameters():
             'parity': serial.PARITY_EVEN,
         })
 
-    connection_parameters.update(dict(specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]))
+    connection_parameters.update(dict(
+        specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
+    ))
+
     return connection_parameters
 
 
-def read_telegram():
-    """ Reads the serial port until we can create a reading point. """
+def read_and_process_telegram():
+    """ Reads the serial port until we have a full telegram to parse and processes it. """
+
+    # Partially reuse the remote datalogger.
     connection_parameters = get_dsmr_connection_parameters()
+    del connection_parameters['log_telegrams']
+    del connection_parameters['specifications']
 
-    serial_handle = serial.Serial()
-    serial_handle.port = connection_parameters['com_port']
-    serial_handle.baudrate = connection_parameters['baudrate']
-    serial_handle.bytesize = connection_parameters['bytesize']
-    serial_handle.parity = connection_parameters['parity']
-    serial_handle.stopbits = serial.STOPBITS_ONE
-    serial_handle.xonxoff = 1
-    serial_handle.rtscts = 0
-    serial_handle.timeout = 20
+    telegram_generator = read_serial_port(**connection_parameters)
 
-    # This might fail, but nothing we can do so just let it crash.
-    serial_handle.open()
-
-    telegram_start_seen = False
-    buffer = ''
-
-    # Just keep fetching data until we got what we were looking for.
     while True:
         try:
-            # Since #79 we use an infinite datalogger loop and signals to break out of it. Serial
-            # operations however do not work well with interrupts, so we'll have to check for E-INTR.
-            data = serial_handle.readline()
-        except SerialException as error:
-            if str(error) == 'read failed: [Errno 4] Interrupted system call':
-                # If we were signaled to stop, we still have to finish our loop.
-                continue
+            telegram = next(telegram_generator)
+        except Exception as error:
+            commands_logger.exception(error)
+        else:
+            try:
+                dsmr_datalogger.services.telegram_to_reading(data=telegram)
+            except InvalidTelegramError:
+                pass
 
-            # Something else and unexpected failed.
-            raise
-
-        try:
-            # Make sure weird characters are converted properly.
-            data = str(data, 'utf-8')
-        except TypeError:
-            pass
-
-        # This guarantees we will only parse complete telegrams. (issue #74)
-        if data.startswith('/'):
-            telegram_start_seen = True
-
-            # But make sure to RESET any data collected as well! (issue #212)
-            buffer = ''
-
-        # Delay any logging until we've seen the start of a telegram.
-        if telegram_start_seen:
-            buffer += data
-
-        # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
-        if data.startswith('!') and telegram_start_seen:
-            serial_handle.close()
-            return buffer
+        yield  # Give back control to mixin, but preserve the connection.
 
 
 def telegram_to_reading(data):
@@ -236,7 +210,6 @@ def apply_data_retention():
             continue
 
         for current_hour in hours_to_cleanup:
-
             # Fetch all data per hour.
             data_set = base_queryset.filter(
                 **{

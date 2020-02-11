@@ -35,119 +35,21 @@ Execute::
     sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
     
     # Requirements
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.2.1 requests==2.12.4
+    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.4 pyserial-asyncio==0.4 requests==2.22.0
 
 
 Script
 ------
 
-Create a new file: ``/home/dsmr/dsmr_datalogger_api_client.py`` with contents::
-
-    from time import sleep
-
-    from serial.serialutil import SerialException
-    import requests
-    import serial
-
-
-    SLEEP = 0.5
-    API_SERVERS = (
-        ('http://HOST-OR-IP-ONE/api/v1/datalogger/dsmrreading', 'APIKEY-BLABLABLA-ABCDEFGHI'),
-    ###    ('http://HOST-OR-IP-TWO/api/v1/datalogger/dsmrreading', 'APIKEY-BLABLABLA-JKLMNOPQR'),
-    )
-
-
-    def main():
-        print ('Starting...')
-
-        for telegram in read_telegram():
-            print('Telegram read')
-
-            for current_server in API_SERVERS:
-                api_url, api_key = current_server
-
-                print('Sending telegram to:', api_url)
-                send_telegram(telegram, api_url, api_key)
-
-            sleep(SLEEP)
-
-
-    def read_telegram():
-        """ Reads the serial port until we can create a reading point. """
-        serial_handle = serial.Serial()
-        serial_handle.port = '/dev/ttyUSB0'
-        serial_handle.baudrate = 115200
-        serial_handle.bytesize = serial.EIGHTBITS
-        serial_handle.parity = serial.PARITY_NONE
-        serial_handle.stopbits = serial.STOPBITS_ONE
-        serial_handle.xonxoff = 1
-        serial_handle.rtscts = 0
-        serial_handle.timeout = 20
-
-        serial_handle.open()
-
-        telegram_start_seen = False
-        buffer = ''
-
-        while True:
-            try:
-                data = serial_handle.readline()
-            except SerialException as error:
-                # Something else and unexpected failed.
-                print('Serial connection failed:', error)
-                return  # Break out of yield.
-
-            try:
-                # Make sure weird characters are converted properly.
-                data = str(data, 'utf-8')
-            except TypeError:
-                pass
-
-            # This guarantees we will only parse complete telegrams. (issue #74)
-            if data.startswith('/'):
-                telegram_start_seen = True
-
-                # But make sure to RESET any data collected as well! (issue #212)
-                buffer = ''
-
-            # Delay any logging until we've seen the start of a telegram.
-            if telegram_start_seen:
-                buffer += data
-
-            # Telegrams ends with '!' AND we saw the start. We should have a complete telegram now.
-            if data.startswith('!') and telegram_start_seen:
-                yield buffer
-
-                # Reset the flow again.
-                telegram_start_seen = False
-                buffer = ''
-
-
-    def send_telegram(telegram, api_url, api_key):
-        # Forward telegram by simply sending it to the application with a POST request.
-        response = requests.post(
-            api_url,
-            headers={'X-AUTHKEY': api_key},
-            data={'telegram': telegram},
-        )
-
-        # Older versions of DSMR-reader return 200, recent installations do 201.
-        if response.status_code not in (200, 201):
-            # Or you will find the error (hint) in the reponse body on failure.
-            print('API error: {}'.format(response.text))
-
-    if __name__ == '__main__':
-        main()
-
-
+Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this content: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dennissiemensma/dsmr-reader/blob/v3/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_
 
 .. note::
 
-    The serial connection in the script above is based on ``DSMR v4/v5``
+    The serial connection in the script above is based on ``DSMR v4/v5``. When required, change these in ``SERIAL_SETTINGS`` in the script.
 
 .. warning::
 
-    Don't forget to insert your own API URL and API key in the script above, in ``API_SERVERS``
+    Don't forget to insert your own API URL and API key as defined in ``API_SERVERS`` in the script.
 
 Supervisor
 ----------
