@@ -40,8 +40,8 @@ msgstr "Updates"
 msgid "Advanced"
 msgstr "Geavanceerd"
 
-msgid "Note: You will have to restart the \"dsmr_backend\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult het \"dsmr_backend\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgid "Note: You will have to restart the \"dsmr_backend\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_backend\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails. <br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, port <strong>25</strong> and use <strong>TLS</strong>. Do NOT fill in any username of password, but just enter your GMail address as \"Email to\" above."
 msgstr "Voer hier je uitgaande e-mailinstellingen in, welke gebruikt worden door DSMR-reader om je e-mails te sturen. <br><br>Heb je GMail? Voer dan als host <strong>aspmx.l.google.com</strong> in, als poort <strong>25</strong> en gebruik <strong>TLS</strong>. Voer vervolgens NIET je gebruikersnaam of wachtwoord in. Vul je GMail-adres hierboven in als ontvanger."

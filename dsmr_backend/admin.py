@@ -38,7 +38,7 @@ class BackendSettingsAdmin(SingletonModelAdmin):
                 ],
                 'description': _(
                     'Note: You will have to restart the "dsmr_backend" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html">FAQ</a>.'
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html">FAQ</a>.'
                 )
             }
         ),

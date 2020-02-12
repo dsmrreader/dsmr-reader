@@ -977,7 +977,7 @@ msgid ""
 "Support for **MQTT** has been completely reworked in this release and now"
 " **requires** a new ``dsmr_mqtt`` process in Supervisor. `Additional "
 "steps for upgrading can be found here <https://dsmr-"
-"reader.readthedocs.io/en/v2/faq.html#how-do-i-retain-mqtt-support-when-"
+"reader.readthedocs.io/en/v3/faq.html#how-do-i-retain-mqtt-support-when-"
 "upgrading-to-v1-23-0-or-higher>`_."
 msgstr ""
 
