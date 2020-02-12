@@ -17,7 +17,7 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
                 'fields': ['dsmr_version'],
                 'description': _(
                     'Note: You might have to restart the "dsmr_datalogger" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html">FAQ</a>.'
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html">FAQ</a>.'
                 )
             }
         ),
@@ -26,7 +26,7 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
                 'fields': ['com_port', 'process_sleep'],
                 'description': _(
                     'Note: You will have to restart the "dsmr_datalogger" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html">FAQ</a>.'
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html">FAQ</a>.'
                 )
             }
         ),
@@ -46,7 +46,7 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
                 'fields': ['data_retention_in_hours'],
                 'description': _(
                     'Detailed instructions for configuring data retention can be found here: '
-                    '<a href="https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html">Documentation</a>'
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/v3/admin/datalogger.html">Documentation</a>'
                 )
             }
         ),

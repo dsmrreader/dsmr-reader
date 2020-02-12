@@ -178,14 +178,14 @@ msgstr "Optioneel: Bekijk hier je instellingen voor het versturen van back-ups p
 msgid "Send test email"
 msgstr "Stuur een test e-mail"
 
-msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
-msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
+msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
+msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
 
 msgid "Automatic fields"
 msgstr "Automatische velden"
 
-msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/backup_dropbox.html\">Documentation</a>"
-msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/backup_dropbox.html\">Documentatie</a>"
+msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/backup_dropbox.html\">Documentation</a>"
+msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/backup_dropbox.html\">Documentatie</a>"
 
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
@@ -436,17 +436,17 @@ msgstr "Verbruiksconfiguratie"
 msgid "Protocol"
 msgstr "Protocol"
 
-msgid "Note: You might have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult mogelijk het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgid "Note: You might have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult mogelijk het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
 
-msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Debugging"
 msgstr "Debuggen"
 
-msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/datalogger.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/datalogger.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/datalogger.html\">Documentatie</a>"
 
 msgid "Datalogger"
 msgstr "Datalogger"
@@ -1360,8 +1360,8 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
-msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/mindergas.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/mindergas.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/mindergas.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/mindergas.html\">Documentatie</a>"
 
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
@@ -1837,8 +1837,8 @@ msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broke
 msgid "(Data source) Telegram: Split topic"
 msgstr "(Databron) Telegram: Gesplitst topic"
 
-msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/notifications.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/admin/notifications.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/notifications.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/notifications.html\">Documentatie</a>"
 
 msgid "Only applies when using Pushover"
 msgstr "Alleen van toepassing voor Pushover"

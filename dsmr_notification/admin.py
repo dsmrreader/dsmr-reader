@@ -13,7 +13,7 @@ class NotificationSettingsAdmin(SingletonModelAdmin):
             'fields': ['notification_service'],
             'description': _(
                 'Detailed instructions for configuring notifications can be found here: '
-                '<a href="https://dsmr-reader.readthedocs.io/nl/v2/admin/notifications.html">Documentation</a>'
+                '<a href="https://dsmr-reader.readthedocs.io/nl/v3/admin/notifications.html">Documentation</a>'
             )
         }),
         ('Pushover', {
