@@ -1390,8 +1390,8 @@ msgstr "Geen recente gasmeting gevonden"
 msgid "Unexpected status code received"
 msgstr "Onverwachte statuscode ontvangen"
 
-msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/mqtt.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/mqtt.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/mqtt.html\">Documentatie</a>"
 
 msgid "Misc"
 msgstr "Overig"
@@ -1399,8 +1399,8 @@ msgstr "Overig"
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
 
-msgid "Note: You will have to restart the \"dsmr_mqtt\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult het \"dsmr_mqtt\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v2/faq/restart_processes.html\">FAQ</a>."
+msgid "Note: You will have to restart the \"dsmr_mqtt\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
+msgstr "N.B.: Je zult het \"dsmr_mqtt\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
 msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
