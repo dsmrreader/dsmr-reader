@@ -2,6 +2,15 @@ Changelog
 =========
 
 
+v3.4.0 - 2020-xx-xx
+
+
+- [`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxxxxxxxxxxxxxxxx
+
+
+----
+
+
 v3.3.0 - 2020-02-12
 
 
