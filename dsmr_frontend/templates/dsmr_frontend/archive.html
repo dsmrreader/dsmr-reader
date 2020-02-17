@@ -128,6 +128,8 @@
         var datepicker_locale_format = "{{ datepicker_locale_format }}";
         var datepicker_language_code = "{{ LANGUAGE_CODE }}";
         var gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
+        var electricity_graph_style = "{{ frontend_settings.electricity_graph_style }}";
+        var stack_electricity_graphs = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
 
         /* XHR. */
         var archive_xhr_summary_url = "{% url 'frontend:archive-xhr-summary' %}";

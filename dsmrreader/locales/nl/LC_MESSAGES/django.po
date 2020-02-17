@@ -622,6 +622,9 @@ msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de kome
 msgid "Interface"
 msgstr "Interface"
 
+msgid "Graph style"
+msgstr "Grafiekstijl"
+
 msgid "Electricity delivered"
 msgstr "Elektriciteitsverbruik"
 
@@ -791,7 +794,19 @@ msgid "Gas graph style"
 msgstr "Gafiekstijl voor gas"
 
 msgid "Using the bar style will help you distinguish empty values better"
-msgstr "Je kunt lege waardes beter onderscheiden wanneer je de staaf-grafiekstijl gebruikt"
+msgstr "Je kunt lege waardes beter onderscheiden wanneer je staafgrafieken gebruikt"
+
+msgid "Electricity graph style"
+msgstr "Stijl van elektriciteitsgrafieken"
+
+msgid "Archive graphs only: Use the bar style to change visualisation"
+msgstr "Alleen Archief-grafieken: Gebruik staafgrafieken om de weergave te veranderen"
+
+msgid "Stack electricity graphs"
+msgstr "Stapel elektriciteitsgrafieken"
+
+msgid "Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better"
+msgstr "Alleen Archief-grafieken: Stapelen van grafieken, gecombineerd met staafgrafieken, onderscheiden de tarieven beter"
 
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"

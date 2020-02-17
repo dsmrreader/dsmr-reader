@@ -15,6 +15,11 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
             }
         ),
         (
+            _('Graph style'), {
+                'fields': ['electricity_graph_style', 'stack_electricity_graphs', 'gas_graph_style'],
+            }
+        ),
+        (
             _('Electricity delivered'), {
                 'fields': [
                     'electricity_delivered_color',
@@ -35,7 +40,6 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
             _('Gas'), {
                 'fields': [
                     'gas_delivered_color',
-                    'gas_graph_style',
                 ],
             }
         ),

@@ -5,7 +5,7 @@ Changelog
 v3.4.0 - 2020-xx-xx
 
 
-- [`#xxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxxxxxxxxxxxxxxxx
+- [`#883 <https://github.com/dennissiemensma/dsmr-reader/issues/883>`_] Show electricity usage as stacked bar chart
 
 
 ----

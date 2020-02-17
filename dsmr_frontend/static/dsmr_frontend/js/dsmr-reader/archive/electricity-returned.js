@@ -55,16 +55,18 @@ function render_electricity_returned_graph(xhr_data)
 	{
     	echarts_options.series = [
             {
+                stack: stack_electricity_graphs,
             	smooth: true,
                 name: text_electricity1_returned,
-                type: 'line',
+                type: electricity_graph_style,
                 areaStyle: {},
                 data: xhr_data.electricity1_returned
             },
             {
+                stack: stack_electricity_graphs,
             	smooth: true,
                 name: text_electricity2_returned,
-                type: 'line',
+                type: electricity_graph_style,
                 areaStyle: {},
                 data: xhr_data.electricity2_returned
             }
@@ -76,7 +78,7 @@ function render_electricity_returned_graph(xhr_data)
             {
             	smooth: true,
                 name: text_electricity_merged_returned,
-                type: 'line',
+                type: electricity_graph_style,
                 areaStyle: {},
                 data: xhr_data.electricity_returned_merged
             }

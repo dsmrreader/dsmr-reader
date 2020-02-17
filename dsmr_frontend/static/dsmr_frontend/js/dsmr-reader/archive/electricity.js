@@ -39,7 +39,7 @@ function render_electricity_graph(xhr_data)
         xAxis: [
             {
                 type : 'category',
-                boundaryGap: false,
+                boundaryGap: true,
                 data : xhr_data.x
             }
         ],
@@ -55,16 +55,18 @@ function render_electricity_graph(xhr_data)
 	{
     	echarts_options.series = [
             {
+                stack: stack_electricity_graphs,
             	smooth: true,
                 name: text_electricity1_delivered,
-                type: 'line',
+                type: electricity_graph_style,
                 areaStyle: {},
                 data: xhr_data.electricity1
             },
             {
+                stack: stack_electricity_graphs,
             	smooth: true,
                 name: text_electricity2_delivered,
-                type: 'line',
+                type: electricity_graph_style,
                 areaStyle: {},
                 data: xhr_data.electricity2
             }
@@ -76,7 +78,7 @@ function render_electricity_graph(xhr_data)
             {
             	smooth: true,
                 name: text_electricity_merged_delivered,
-                type: 'line',
+                type: electricity_graph_style,
                 areaStyle: {},
                 data: xhr_data.electricity_merged
             }
