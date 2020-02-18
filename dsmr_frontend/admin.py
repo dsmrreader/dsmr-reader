@@ -11,14 +11,30 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             _('Interface'), {
-                'fields': ['merge_electricity_tariffs', 'dashboard_graph_width'],
+                'fields': ['merge_electricity_tariffs'],
             }
         ),
         (
-            _('Graph style'), {
-                'fields': ['electricity_graph_style', 'stack_electricity_graphs', 'gas_graph_style'],
+            _('Graphs'), {
+                'fields': [
+                    'electricity_graph_style',
+                    'stack_electricity_graphs',
+                    'gas_graph_style',
+                    'dashboard_graph_width',
+                ],
             }
         ),
+        (
+            _('Tariff names'), {
+                'fields': [
+                    'tariff_1_delivered_name',
+                    'tariff_2_delivered_name',
+                    'tariff_1_returned_name',
+                    'tariff_2_returned_name',
+                ],
+            }
+        ),
+
         (
             _('Electricity delivered'), {
                 'fields': [

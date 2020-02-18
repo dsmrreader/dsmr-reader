@@ -48,7 +48,7 @@
 
 {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{% trans "Electricity 1 (low tariff)" %} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_1_delivered_name }} {% trans "in kWh" %}</td>
                 <td>{{ base.electricity1|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity1|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -62,7 +62,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{% trans "Electricity 2 (high tariff)" %} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_2_delivered_name }} {% trans "in kWh" %}</td>
                 <td>{{ base.electricity2|default:'-'|floatformat:2 }} </td>
                 <td>{{ comparison.electricity2|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -79,7 +79,7 @@
 
 {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{% trans "Electricity 1 returned (low tariff)" %} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_1_returned_name }} {% trans "in kWh" %}</td>
                 <td>{{ base.electricity1_returned|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity1_returned|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -93,7 +93,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{% trans "Electricity 2 returned (high tariff)" %} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_2_returned_name }} {% trans "in kWh" %}</td>
                 <td>{{ base.electricity2_returned|default:'-'|floatformat:2 }} </td>
                 <td>{{ comparison.electricity2_returned|default:'-'|floatformat:2 }}</td>
                 <td>

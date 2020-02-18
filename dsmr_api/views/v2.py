@@ -79,7 +79,7 @@ class TodayConsumptionView(APIView):
 class ElectricityLiveView(APIView):
     """ Returns the current electricity usage. """
     def get(self, request):
-        return Response(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=False))
+        return Response(dsmr_consumption.services.live_electricity_consumption())
 
 
 class GasLiveView(APIView):

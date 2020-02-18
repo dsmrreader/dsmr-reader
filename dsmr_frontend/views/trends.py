@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
-from django.utils.translation import gettext as _
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
@@ -68,10 +67,11 @@ class TrendsXhrElectricityByTariff(View):
     """ XHR view for fetching electricity consumption by tariff, in JSON. """
     def get(self, request):  # noqa: C901
         capabilities = dsmr_backend.services.backend.get_capabilities()
+        frontend_settings = FrontendSettings.get_solo()
         data = {}
         translation_mapping = {
-            'electricity1': _('Electricity 1 (low tariff)'),
-            'electricity2': _('Electricity 2 (high tariff)'),
+            'electricity1': frontend_settings.tariff_1_delivered_name,
+            'electricity2': frontend_settings.tariff_2_delivered_name,
         }
 
         if not capabilities['any'] or not DayStatistics.objects.exists():

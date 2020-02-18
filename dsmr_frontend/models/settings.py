@@ -109,6 +109,30 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
             "Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better"
         )
     )
+    tariff_1_delivered_name = models.CharField(
+        max_length=30,
+        default='Laagtarief',
+        verbose_name=_('Name of tariff 1 (delivered)'),
+        help_text=_("Defaults to 'low tariff' delivered")
+    )
+    tariff_2_delivered_name = models.CharField(
+        max_length=30,
+        default='Hoogtarief',
+        verbose_name=_('Name of tariff 2 (delivered)'),
+        help_text=_("Defaults to 'normal tariff' or 'high tariff' delivered")
+    )
+    tariff_1_returned_name = models.CharField(
+        max_length=30,
+        default='Laagtarief teruglevering',
+        verbose_name=_('Name of tariff 1 (returned)'),
+        help_text=_("Defaults to 'low tariff' returned")
+    )
+    tariff_2_returned_name = models.CharField(
+        max_length=30,
+        default='Hoogtarief teruglevering',
+        verbose_name=_('Name of tariff 2 (returned)'),
+        help_text=_("Defaults to 'normal tariff' or 'high tariff' returned")
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

@@ -107,10 +107,10 @@
         var text_electricity_returned_header = '{% blocktrans %}Electricity returned{% endblocktrans %} {% trans "(in kWh)" %}';
         var text_gas_header = '{% blocktrans %}Gas usage{% endblocktrans %} {% trans "(in m³)" %}';
 
-        var text_electricity1_delivered = '{% blocktrans %}Electricity 1 (low tariff){% endblocktrans %}';
-        var text_electricity2_delivered = '{% blocktrans %}Electricity 2 (high tariff){% endblocktrans %}';
-        var text_electricity1_returned = '{% blocktrans %}Electricity 1 returned (low tariff){% endblocktrans %}';
-        var text_electricity2_returned = '{% blocktrans %}Electricity 2 returned (high tariff){% endblocktrans %}';
+        var text_electricity1_delivered = '{{ frontend_settings.tariff_1_delivered_name }}';
+        var text_electricity2_delivered = '{{ frontend_settings.tariff_2_delivered_name }}';
+        var text_electricity1_returned = '{{ frontend_settings.tariff_1_returned_name }}';
+        var text_electricity2_returned = '{{ frontend_settings.tariff_2_returned_name }}';
         var text_electricity_merged_delivered = '{% blocktrans %}Electricity (single tariff){% endblocktrans %}';
         var text_electricity_merged_returned = '{% blocktrans %}Electricity returned (single tariff){% endblocktrans %}';
         var text_gas = '{% blocktrans %}Gas{% endblocktrans %}';

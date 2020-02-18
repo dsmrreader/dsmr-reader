@@ -622,8 +622,11 @@ msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de kome
 msgid "Interface"
 msgstr "Interface"
 
-msgid "Graph style"
-msgstr "Grafiekstijl"
+msgid "Graphs"
+msgstr "Grafieken"
+
+msgid "Tariff names"
+msgstr "Tariefnaamgeving"
 
 msgid "Electricity delivered"
 msgstr "Elektriciteitsverbruik"
@@ -696,6 +699,12 @@ msgstr "DSMR-reader v2.10.0: Automatische update checker (wekelijks) toegevoegd,
 
 msgid "DSMR-reader v2.14.0: Some configuration options in setting.py were relocated or removed. This only affects you if you are using custom settings in setting.py. See the changelog for more information."
 msgstr "DSMR-reader v2.14.0: Sommige instellingen in settings.py zijn verplaatst of uitgefaseerd. Dit is alleen van belang wanneer je zelf handmatig instellingen hebt aangepast in settings.py. Zie de changelog voor meer informatie."
+
+msgid "DSMR-reader v3.4.0 (1/2): Archive graphs are now in bar style + stacked by default. You can change or revert this using the admin interface in the Frontend configuration."
+msgstr "DSMR-reader v3.4.0 (1/2): Grafieken in het Archief zijn nu standaard staafgrafieken + gestapeld. Je kunt dit aanpassen of terugdraaien in de admin-interface in de Interfaceconfiguratie."
+
+msgid "DSMR-reader v3.4.0 (2/2): Starting this release you can (re)name the electricity tariffs yourself. Visit the admin interface in the Frontend configuration to use your own names."
+msgstr "DSMR-reader v3.4.0 (2/2): Vanaf deze release kun je zelf de naamgeving van de elektriciteitstarieven bepalen. Bezoek de admin-interface en ga dan naar Interfaceconfiguratie om je eigen naamgeving in te stellen."
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
@@ -808,6 +817,30 @@ msgstr "Stapel elektriciteitsgrafieken"
 msgid "Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better"
 msgstr "Alleen Archief-grafieken: Stapelen van grafieken, gecombineerd met staafgrafieken, onderscheiden de tarieven beter"
 
+msgid "Name of tariff 1 (delivered)"
+msgstr "Naam van tarief 1 (verbruik)"
+
+msgid "Defaults to 'low tariff' delivered"
+msgstr "Standaard: \"Laagtarief\" (verbruik)"
+
+msgid "Name of tariff 2 (delivered)"
+msgstr "Naam van tarief 2 (verbruik)"
+
+msgid "Defaults to 'normal tariff' or 'high tariff' delivered"
+msgstr "Standaard: \"Normaal tarief of hoogtarief\" (verbruik)"
+
+msgid "Name of tariff 1 (returned)"
+msgstr "Naam van tarief 1 (teruglevering)"
+
+msgid "Defaults to 'low tariff' returned"
+msgstr "Standaard: \"Laagtarief\" (teruglevering)"
+
+msgid "Name of tariff 2 (returned)"
+msgstr "Naam van tarief 2 (teruglevering)"
+
+msgid "Defaults to 'normal tariff' or 'high tariff' returned"
+msgstr "Standaard: \"Normaal tarief of hoogtarief\" (teruglevering)"
+
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
 
@@ -844,18 +877,6 @@ msgstr "Gasverbruik"
 msgid "(in m³)"
 msgstr "(in m³)"
 
-msgid "Electricity 1 (low tariff)"
-msgstr "Elektriciteit 1 (daltarief)"
-
-msgid "Electricity 2 (high tariff)"
-msgstr "Elektriciteit 2 (piektarief)"
-
-msgid "Electricity 1 returned (low tariff)"
-msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
-
-msgid "Electricity 2 returned (high tariff)"
-msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
-
 msgid "Electricity (single tariff)"
 msgstr "Elektriciteit (enkel tarief)"
 
@@ -864,9 +885,6 @@ msgstr "Elektriciteit teruggeleverd (enkel tarief)"
 
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
-
-msgid "View releases"
-msgstr "Bekijk releases"
 
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -1000,11 +1018,17 @@ msgstr "per uur"
 msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
 msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
 
-msgid "Also, any electricity returned is not taken into account for the cost, the kWh is only displayed for your convenience."
-msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten, alleen de kWh wordt hier getoond."
+msgid "Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience."
+msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten. De teruggeleverde kWh wordt hier alleen voor de volledigheid getoond."
 
 msgid "Show contract prices"
 msgstr "Toon contractprijzen"
+
+msgid "Electricity 1 price"
+msgstr "Prijs elektriciteit 1"
+
+msgid "Electricity 2 price"
+msgstr "Prijs elektriciteit 2"
 
 msgid "Electricity 1 returned price (low tariff)"
 msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
@@ -1176,6 +1200,9 @@ msgstr "Applicatie"
 
 msgid "Current version"
 msgstr "Huidige versie"
+
+msgid "View releases"
+msgstr "Bekijk releases"
 
 msgid "Check for updates"
 msgstr "Controleer voor updates"
@@ -2034,6 +2061,18 @@ msgstr "Datum"
 
 msgid "Total cost"
 msgstr "Totale kosten"
+
+msgid "Electricity 1 (low tariff)"
+msgstr "Elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
+
+msgid "Electricity 1 returned (low tariff)"
+msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+
+msgid "Electricity 2 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
 msgid "Lowest temperature"
 msgstr "Laagste temperatuur"

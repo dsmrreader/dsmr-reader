@@ -4,7 +4,6 @@ import logging
 import pytz
 from django.conf import settings
 
-from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.db.models import Avg, Min, Max, Count
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
@@ -14,6 +13,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.statistics import MeterStatistics
@@ -309,7 +309,7 @@ def day_consumption(day):
     return consumption
 
 
-def live_electricity_consumption(use_naturaltime=True):
+def live_electricity_consumption():
     """ Returns the current latest/live electricity consumption. """
     data = {}
 
@@ -329,8 +329,16 @@ def live_electricity_consumption(use_naturaltime=True):
     data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
     data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
 
-    if use_naturaltime:
-        data['timestamp'] = str(naturaltime(data['timestamp']))
+    tariff = MeterStatistics.get_solo().electricity_tariff
+    frontend_settings = FrontendSettings.get_solo()
+
+    try:
+        data['tariff_name'] = {
+            1: frontend_settings.tariff_1_delivered_name,
+            2: frontend_settings.tariff_2_delivered_name,
+        }[tariff]
+    except KeyError:
+        data['tariff_name'] = None
 
     try:
         # This WILL fail when we either have no prices at all or conflicting ranges.
@@ -338,19 +346,15 @@ def live_electricity_consumption(use_naturaltime=True):
     except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
         return data
 
-    # We need to current tariff to get the right price.
-    tariff = MeterStatistics.get_solo().electricity_tariff
-    cost_per_hour = None
-
-    tariff_map = {
+    tariff_price_map = {
         1: prices.electricity_delivered_1_price,
         2: prices.electricity_delivered_2_price,
     }
 
     try:
-        cost_per_hour = latest_reading.electricity_currently_delivered * tariff_map[tariff]
+        cost_per_hour = latest_reading.electricity_currently_delivered * tariff_price_map[tariff]
     except KeyError:
-        pass
+        data['cost_per_hour'] = None
     else:
         data['cost_per_hour'] = formats.number_format(
             round_decimal(cost_per_hour)

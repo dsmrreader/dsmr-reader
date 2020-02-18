@@ -10,7 +10,9 @@
 {% block header_right %}
     <li style="width: 150px; text-align: right">
         <a href="" onclick="return false;" style="cursor: default;">
-            <small style="color: #999999;"><span id="latest_timestamp"></span></small>
+            <small class="gray">
+                <small id="tariff_name"></small> <small id="latest_timestamp"></small>
+            </small>
         </a>
     </li>
     
@@ -18,9 +20,10 @@
 	<li>
 	    <a href="" onclick="return false;" style="cursor: default;">
 	        <span class="badge bg-red"><i class="fas fa-bolt"></i> 
-		        &nbsp; <span id="latest_electricity"><i class="fas fa-sync fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}
-		        &nbsp; <small id="cost_per_hour"></small>
+            &nbsp;   <span id="latest_electricity"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "Watt" %}
 	        </span>
+
+            <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
 	    </a>
 	</li>
 	{% endif %}
@@ -29,7 +32,7 @@
 	<li>
 	    <a href="" onclick="return false;" style="cursor: default;">
 	        <span class="badge bg-green"><i class="fas fa-bolt"></i> 
-	        &nbsp; <span id="latest_electricity_returned"><i class="fas fa-sync fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}</span>
+	        &nbsp; <span id="latest_electricity_returned"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "Watt" %}</span>
 	    </a>
 	</li>
 	{% endif %}
@@ -94,13 +97,13 @@
 			            </tr>
 			            {% else %}
                         <tr>
-                            <td>{% if capabilities.electricity %}{% trans "Electricity 1 (low tariff)" %}{% endif %}</td>
+                            <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }}{% endif %}</td>
                             <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity1_cost|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
-                            <td>{% if capabilities.electricity %}{% trans "Electricity 2 (high tariff)" %}{% endif %}</td>
+                            <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }}{% endif %}</td>
                             <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
                             <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity2_cost|default:'-' }}{% endif %}</span></td>
@@ -304,8 +307,7 @@
             });                
             
             /* Auto refresh. */
-            update_header();
-            setInterval(function(){ update_header(); }, 2500);
+            setInterval(function(){ update_header(); }, 1000);
             setInterval(function(){ update_consumption(); }, 20000)
             
             /* Reload entire page after 15 minutes. */
@@ -327,10 +329,11 @@
                 $("#latest_timestamp").html(response.timestamp);
                 $("#latest_electricity").html(response.currently_delivered);
                 $("#latest_electricity_returned").html(response.currently_returned);
-                
+                $("#tariff_name").html(response.tariff_name);
+
                 if (response.cost_per_hour)
                 {
-                    $("#cost_per_hour").html("&euro; " + response.cost_per_hour + " {% trans 'per hour' %}");
+                    $("#cost_per_hour").html("&euro; " + response.cost_per_hour + " {% trans 'per hour' %}").show();
                 }
             });
         }

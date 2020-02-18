@@ -36,3 +36,15 @@ div.date-selector {
 .datepicker-trigger {
 	cursor: pointer;
 }
+
+.italic {
+    font-style: italic;
+}
+
+.gray {
+    color: #999999;
+}
+
+.logo-version {
+    font-size: 11px;
+}

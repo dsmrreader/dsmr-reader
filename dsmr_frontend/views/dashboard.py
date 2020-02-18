@@ -1,4 +1,4 @@
-
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils import formats, timezone
@@ -35,7 +35,12 @@ class Dashboard(TemplateView):
 class DashboardXhrHeader(View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
-        return JsonResponse(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=True))
+        data = dsmr_consumption.services.live_electricity_consumption()
+
+        if data and data['timestamp']:
+            data['timestamp'] = str(naturaltime(data['timestamp']))
+
+        return JsonResponse(data)
 
 
 class DashboardXhrConsumption(TemplateView):
