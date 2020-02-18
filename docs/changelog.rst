@@ -8,6 +8,7 @@ v3.4.0 - 2020-02-20
 - [`#883 <https://github.com/dennissiemensma/dsmr-reader/issues/883>`_] Show electricity usage as stacked bar chart
 - [`#858 <https://github.com/dennissiemensma/dsmr-reader/issues/858>`_] Tarieven zelf naamgeven
 - [`#878 <https://github.com/dennissiemensma/dsmr-reader/issues/878>`_] Huidig tarief aangeven op het dashboard
+- [`#887 <https://github.com/dennissiemensma/dsmr-reader/issues/887>`_] Django-colorfield update
 
 
 ----
