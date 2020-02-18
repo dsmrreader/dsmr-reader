@@ -1,0 +1,31 @@
+{% load i18n %}
+
+
+<li style="width: 200px; text-align: right">
+    <a href="" onclick="return false;" style="cursor: default;">
+        <small class="gray">
+            <small id="tariff_name"></small> <small id="latest_timestamp"></small>
+        </small>
+    </a>
+</li>
+
+{% if capabilities.electricity %}
+<li>
+    <a href="" onclick="return false;" style="cursor: default;">
+        <span class="badge bg-red"><i class="fas fa-bolt"></i>
+        &nbsp;   <span id="latest_electricity"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "Watt" %}
+        </span>
+
+        <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
+    </a>
+</li>
+{% endif %}
+
+{% if capabilities.electricity_returned  %}
+<li>
+    <a href="" onclick="return false;" style="cursor: default;">
+        <span class="badge bg-green"><i class="fas fa-bolt"></i>
+        &nbsp; <span id="latest_electricity_returned"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "Watt" %}</span>
+    </a>
+</li>
+{% endif %}

@@ -5,12 +5,12 @@ Special thanks for supplying code contributions
 -----------------------------------------------
 - `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_
 - `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_
-- All the [other contributers for the past few years](https://github.com/dennissiemensma/dsmr-reader/graphs/contributors)!
+- All the `other contributers for the past few years <https://github.com/dennissiemensma/dsmr-reader/graphs/contributors>`_!
 
 Also many thanks to the contributions of
 ----------------------------------------
-- Many [pull requests](https://github.com/dennissiemensma/dsmr-reader/pulls).
-- All [the ideas, improvements and bugs reported](https://github.com/dennissiemensma/dsmr-reader/issues) for the past years.
+- Many `pull requests <https://github.com/dennissiemensma/dsmr-reader/pulls>`_.
+- All `the ideas, improvements and bugs reported <https://github.com/dennissiemensma/dsmr-reader/issues>`_ for the past years.
 
 
 Additional thanks to

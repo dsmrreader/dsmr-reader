@@ -1,0 +1,212 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %} 
+{% load l10n %}
+
+{% block title %}{% trans "Live graphs" %}{% endblock %}
+{% block header %}{% trans "Live graphs" %} &nbsp; <i class="fas fa-chart-line"></i>{% endblock %}
+
+{% block header_right %}
+    {% include "dsmr_frontend/includes/xhr-consumption-header.html" %}
+{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+
+    {% if not capabilities.any %}
+    <div class="alert alert-warning" role="alert">
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktrans %}
+    </div>
+    {% endif %}
+
+    {% if capabilities.electricity %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent electricity" %}
+                </header>
+                <div class="panel-body">
+                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
+                    <div id="echarts-electricity-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if capabilities.multi_phases %}
+    <div class="row" id="phases_holder">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent distribution of electricity phases" %}
+                </header>
+                <div class="panel-body">
+                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
+                    <div id="echarts-phases-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}   
+
+    {% if capabilities.voltage %}
+    <div class="row" id="voltage_holder">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent phase voltages" %}
+                </header>
+                <div class="panel-body">
+                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
+                    <div id="echarts-voltage-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if capabilities.gas %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent gas consumption" %}
+                </header>
+                <div class="panel-body">
+                    <div id="echarts-gas-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if capabilities.weather %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent temperatures" %}
+                </header>
+                <div class="panel-body">
+                    <div id="echarts-temperature-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.5.0.min.js' %}"></script>
+
+    <script type="text/javascript">
+        {% localize off %}
+        var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
+        var dashboard_graph_width = {{ frontend_settings.dashboard_graph_width }};
+        var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
+        {% endlocalize %}
+    </script>
+
+{% if capabilities.electricity %}
+    <script type="text/javascript">
+        var echarts_electricity_graph_url = "{% url 'frontend:live-xhr-electricity' %}?delivered=True";
+        
+        {% if capabilities.electricity_returned %}
+        echarts_electricity_graph_url += "&returned=True";
+        {% endif %}
+        
+        var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
+        var electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
+        var echarts_electricity_graph_interval = 5;
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
+{% if capabilities.multi_phases %}
+    <script type="text/javascript">
+        var echarts_phases_graph_url = "{% url 'frontend:live-xhr-electricity' %}?phases=True";
+        
+        {% if capabilities.electricity_returned %}
+        echarts_phases_graph_url += "&returned=True";
+        {% endif %}
+        
+        var phase_delivered_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
+        var phase_delivered_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
+        var phase_delivered_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+        var phase_returned_l1_color = "{{ frontend_settings.phase_returned_l1_color }}";
+        var phase_returned_l2_color = "{{ frontend_settings.phase_returned_l2_color }}";
+        var phase_returned_l3_color = "{{ frontend_settings.phase_returned_l3_color }}";
+        
+        var echarts_phases_graph_interval = 5;
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/phases.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
+{% if capabilities.voltage %}
+    <script type="text/javascript">
+        var echarts_voltage_graph_url = "{% url 'frontend:live-xhr-electricity' %}?voltage=True";
+        var voltage_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
+        var voltage_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
+        var voltage_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+
+        var echarts_voltage_graph_interval = 5;
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/voltage.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
+{% if capabilities.gas %}
+    <script type="text/javascript">
+        var echarts_gas_graph_url = "{% url 'frontend:live-xhr-gas' %}";
+        var gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
+        var gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/gas.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
+{% if capabilities.weather %}
+    <script type="text/javascript">
+        var echarts_temperature_graph_url = "{% url 'frontend:live-xhr-temperature' %}";
+        var temperature_color = "{{ frontend_settings.temperature_color }}";
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+ 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            setInterval(function(){ update_header(); }, 1000);
+
+            /* Reload entire page after 15 minutes. */
+            setInterval(function(){ location.reload(); }, 15 * 60 * 1000)
+        });
+
+        function update_header()
+        {
+            $("#header-loader").show();
+
+            $.ajax({
+                dataType: "json",
+                url: "{% url 'frontend:xhr-consumption-header' %}",
+            }).done(function(response) {
+                $("#header-loader").hide();
+                $("#latest_timestamp").html(response.timestamp);
+                $("#latest_electricity").html(response.currently_delivered);
+                $("#latest_electricity_returned").html(response.currently_returned);
+                $("#tariff_name").html(response.tariff_name);
+
+                if (response.cost_per_hour)
+                {
+                    $("#cost_per_hour").html("&euro; " + response.cost_per_hour + " {% trans 'per hour' %}").show();
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
