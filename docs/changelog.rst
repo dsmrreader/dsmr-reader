@@ -4,6 +4,7 @@ Changelog
 
 v3.4.0 - 2020-02-20
 
+- [`#879 <https://github.com/dennissiemensma/dsmr-reader/issues/879>`_] Soms 100% CPU load datalogger
 - [`#885 <https://github.com/dennissiemensma/dsmr-reader/issues/885>`_] Herindeling dashboard
 - [`#883 <https://github.com/dennissiemensma/dsmr-reader/issues/883>`_] Show electricity usage as stacked bar chart
 - [`#858 <https://github.com/dennissiemensma/dsmr-reader/issues/858>`_] Tarieven zelf naamgeven
