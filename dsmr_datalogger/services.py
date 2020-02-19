@@ -23,7 +23,6 @@ import dsmr_datalogger.signals
 
 
 dsmrreader_logger = logging.getLogger('dsmrreader')
-django_logger = logging.getLogger('django')
 commands_logger = logging.getLogger('commands')
 
 
@@ -99,6 +98,8 @@ def telegram_to_reading(data):
     if params['log_telegrams']:
         dsmrreader_logger.info('Received telegram (base64 encoded): %s', base64_data)
 
+    commands_logger.debug("Received telegram:\n%s", data)
+
     try:
         parsed_telegram = parser.parse(data)
     except (InvalidChecksumError, ParseError) as error:
@@ -150,7 +151,7 @@ def _map_telegram_to_model(parsed_telegram, data):
         error_message = 'Discarded telegram with future timestamp(s): {} / {}'.format(
             model_fields['timestamp'], model_fields['extra_device_timestamp']
         )
-        django_logger.error(error_message)
+        commands_logger.error(error_message)
         raise InvalidTelegramError(error_message)
 
     # Now we need to split reading & statistics. So we split the dict here.
