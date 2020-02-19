@@ -17,7 +17,7 @@ from django.db import connection
 logger = logging.getLogger('commands')
 
 
-class StopInfiniteRun(StopIteration):
+class StopInfiniteRun(EnvironmentError):
     """ Triggers InfiniteManagementCommandMixin to stop the current loop. """
     pass
 
