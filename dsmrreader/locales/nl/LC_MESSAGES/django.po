@@ -7,6 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-19 20:14+0100\n"
+"PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -85,17 +87,35 @@ msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert een enkele uitvoer"
 
+msgid "Name"
+msgstr "Naam"
+
+msgid "Module"
+msgstr "Module"
+
+msgid "Last executed at"
+msgstr "Laatst uitgevoerd op"
+
 msgid "The last moment this process ran (disregarding whether it succeeded or failed)."
 msgstr "Laatste moment dat dit proces draaide (ongeacht of het proces zelf lukte of faalde)."
 
+msgid "Planned"
+msgstr "Gepland"
+
 msgid "The next moment this process will run again."
 msgstr "Het eerstvolgende moment dat dit proces weer uitgevoerd wordt."
+
+msgid "Active"
+msgstr "Ingeschakeld"
 
 msgid "Related configuration settings manage whether this process is active or disabled for you."
 msgstr "Gerelateerde configuratie-instellingen bepalen of dit proces actief of uitgeschakeld is."
 
 msgid "Scheduled process"
 msgstr "Gepland proces"
+
+msgid "Language"
+msgstr "Taal"
 
 msgid "The language used in backend processes"
 msgstr "De gebruikte taal in achtergrondprocessen"
@@ -112,8 +132,14 @@ msgstr "Backend proces sleep"
 msgid "The number of seconds the application will sleep after completing a backend run."
 msgstr "Het aantal seconden dat de applicatie wacht na het voltooien van een backend run."
 
+msgid "Disable gas capability"
+msgstr "Schakel weergave gas uit"
+
 msgid "Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source."
 msgstr "Geeft aan of gas uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer je geen gas (meer) gebruikt en ben overgestapt naar een andere energiebron."
+
+msgid "Disable electricity returned capability"
+msgstr "Schakel weergave elektriciteitsteruglevering uit"
 
 msgid "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels."
 msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) teruglevering heeft geregistreerd."
@@ -121,8 +147,14 @@ msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de a
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
 
+msgid "Email from"
+msgstr "E-mailafzender"
+
 msgid "The email address you want to send any emails from"
 msgstr "Het e-mailadres waar e-mails van verzonden worden"
+
+msgid "Email to"
+msgstr "E-mailgeaddresseerde"
 
 msgid "The email address you want to send any emails to"
 msgstr "Het e-mailadres waar e-mails naar toegestuurd worden"
@@ -255,6 +287,9 @@ msgstr "Elke twee weken"
 
 msgid "Every four weeks"
 msgstr "Elke vier weken"
+
+msgid "Interval"
+msgstr "Frequentie"
 
 msgid "The frequency of sending backups per email"
 msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
@@ -537,6 +572,9 @@ msgstr "Datalogger proces sleep"
 
 msgid "The number of seconds the application will sleep after reading data from the datalogger (API excluded)."
 msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API uitgezonderd)."
+
+msgid "Log telegrams"
+msgstr "Log telegrammen"
 
 msgid "Whether telegrams are logged, in base64 format. Only required for debugging."
 msgstr "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor debugging."
@@ -2370,9 +2408,6 @@ msgstr "Engels"
 
 #~ msgid "Generates a FAKE reading. DO NOT USE in production! Used for integration checks."
 #~ msgstr "Genereert een NEP-meting. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
-
-#~ msgid "Include electricity returned (solar panels)"
-#~ msgstr "Neem teruglevering elektriciteit mee (zonnepanelen)"
 
 #~ msgid "The offset in hours, can both be positive as negative (to go back in time)."
 #~ msgstr "De afwijking in uren, kan zowel positief als negatief zijn (om terug in de tijd te gaan)."

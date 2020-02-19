@@ -40,6 +40,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
     )
     log_telegrams = models.BooleanField(
         default=False,
+        verbose_name=_('Log telegrams'),
         help_text=_("Whether telegrams are logged, in base64 format. Only required for debugging.")
     )
 

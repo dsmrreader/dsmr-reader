@@ -102,6 +102,7 @@ class EmailBackupSettings(ModelUpdateMixin, SingletonModel):
         blank=True,
         default=INTERVAL_NONE,
         choices=INTERVAL_CHOICES,
+        verbose_name=_('Interval'),
         help_text=_('The frequency of sending backups per email')
     )
 
