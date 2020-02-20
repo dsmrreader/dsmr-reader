@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-19 20:14+0100\n"
+"POT-Creation-Date: 2020-02-20 21:29+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -2117,6 +2117,9 @@ msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
 
 msgid "Electricity 2 returned (high tariff)"
 msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
+
+msgid "Gas cost"
+msgstr "Gaskosten"
 
 msgid "Lowest temperature"
 msgstr "Laagste temperatuur"
