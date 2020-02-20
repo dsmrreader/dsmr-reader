@@ -55,16 +55,16 @@ $(document).ready(function(){
         ],
         series : [
             {
-            	smooth: true,
                 name: 'Watt (+)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 data: null
             },
             {
-            	smooth: true,
                 name: 'Watt (-)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 data: null
             }

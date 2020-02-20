@@ -29,6 +29,7 @@ class DashboardElectricityConsumptionForm(forms.Form):
     returned = forms.BooleanField(required=False, initial=False)
     phases = forms.BooleanField(required=False, initial=False)
     voltage = forms.BooleanField(required=False, initial=False)
+    power_current = forms.BooleanField(required=False, initial=False)
     latest_delta_id = forms.IntegerField(required=False, initial=None)
 
     def __init__(self, *args, **kwargs):
@@ -39,7 +40,7 @@ class DashboardElectricityConsumptionForm(forms.Form):
         value = self.cleaned_data[field]
 
         if value and not self.capabilities[capability]:
-            raise forms.ValidationError(capability)
+            raise forms.ValidationError('Capability not enabled: {}'.format(capability))
 
         return value
 
@@ -54,6 +55,9 @@ class DashboardElectricityConsumptionForm(forms.Form):
 
     def clean_voltage(self):
         return self._clean_type('voltage', 'voltage')
+
+    def clean_power_current(self):
+        return self._clean_type('power_current', 'power_current')
 
 
 class NotificationReadForm(forms.Form):

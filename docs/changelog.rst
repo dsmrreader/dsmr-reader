@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.5.0 - 2020-xx-xx
+
+- [`#875 <https://github.com/dennissiemensma/dsmr-reader/issues/875>`_] Actuele Amperes weergeven
+
+
+----
+
+
 v3.4.0 - 2020-02-20
 
 - [`#879 <https://github.com/dennissiemensma/dsmr-reader/issues/879>`_] Soms 100% CPU load datalogger

@@ -63,6 +63,11 @@ class LiveXhrElectricityConsumption(View):
                 'l2': [],
                 'l3': [],
             },
+            'phase_power_current': {
+                'l1': [],
+                'l2': [],
+                'l3': [],
+            },
         }
 
         # Optional delta.
@@ -102,6 +107,11 @@ class LiveXhrElectricityConsumption(View):
                 data['phase_voltage']['l1'].append(float(current.phase_voltage_l1 or 0))
                 data['phase_voltage']['l2'].append(float(current.phase_voltage_l2 or 0))
                 data['phase_voltage']['l3'].append(float(current.phase_voltage_l3 or 0))
+
+            if form.cleaned_data.get('power_current'):
+                data['phase_power_current']['l1'].append(current.phase_power_current_l1 or 0)
+                data['phase_power_current']['l2'].append(current.phase_power_current_l2 or 0)
+                data['phase_power_current']['l3'].append(current.phase_power_current_l3 or 0)
 
             data['latest_delta_id'] = current.id
 

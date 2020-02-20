@@ -32,7 +32,7 @@ $(document).ready(function(){
 	        xAxis: [
 	            {
 	                type : 'category',
-					boundaryGap: true,  // Required when using bar graphs
+					boundaryGap: gas_graph_style == 'bar',
 	                data : xhr_data.read_at
 	            }
 	        ],
@@ -43,14 +43,7 @@ $(document).ready(function(){
 	        ],
 	        dataZoom: [
 	            {
-	                show: true,
-	                start: zoom_percent,
-	                end: 100
-	            },
-	            {
-	                type: 'inside',
-	                start: 0,
-	                end: 100
+	                show: false
 	            }
 	        ],
 	        series : [

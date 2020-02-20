@@ -38,7 +38,7 @@ function render_gas_graph(xhr_data)
         xAxis: [
             {
                 type : 'category',
-                boundaryGap: true,  // Required when using bar graphs
+                boundaryGap: gas_graph_style == 'bar',
                 data : xhr_data.x
             }
         ],
@@ -49,9 +49,9 @@ function render_gas_graph(xhr_data)
         ],
         series : [
             {
-            	smooth: true,
                 name: text_gas,
                 type: gas_graph_style,
+                smooth: true,
                 areaStyle: {},
                 data: xhr_data.gas
             }

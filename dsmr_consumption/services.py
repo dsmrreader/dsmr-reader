@@ -100,6 +100,9 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
                 phase_voltage_l1=dsmr_reading.phase_voltage_l1,
                 phase_voltage_l2=dsmr_reading.phase_voltage_l2,
                 phase_voltage_l3=dsmr_reading.phase_voltage_l3,
+                phase_power_current_l1=dsmr_reading.phase_power_current_l1,
+                phase_power_current_l2=dsmr_reading.phase_power_current_l2,
+                phase_power_current_l3=dsmr_reading.phase_power_current_l3,
             )
         except IntegrityError:
             # This might happen, even though rarely, when the same timestamp with different values comes by.
@@ -131,6 +134,9 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
         avg_phase_voltage_l1=Avg('phase_voltage_l1'),
         avg_phase_voltage_l2=Avg('phase_voltage_l2'),
         avg_phase_voltage_l3=Avg('phase_voltage_l3'),
+        avg_phase_power_current_l1=Avg('phase_power_current_l1'),
+        avg_phase_power_current_l2=Avg('phase_power_current_l2'),
+        avg_phase_power_current_l3=Avg('phase_power_current_l3'),
     )
 
     # This instance is the average/max and combined result.
@@ -151,6 +157,9 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
         phase_voltage_l1=grouped_reading['avg_phase_voltage_l1'],
         phase_voltage_l2=grouped_reading['avg_phase_voltage_l2'],
         phase_voltage_l3=grouped_reading['avg_phase_voltage_l3'],
+        phase_power_current_l1=grouped_reading['avg_phase_power_current_l1'],
+        phase_power_current_l2=grouped_reading['avg_phase_power_current_l2'],
+        phase_power_current_l3=grouped_reading['avg_phase_power_current_l3'],
     )
 
 

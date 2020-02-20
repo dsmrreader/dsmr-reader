@@ -7,8 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-19 20:14+0100\n"
-"PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -380,6 +378,15 @@ msgstr "Huidig voltage in fase L2 (in V)"
 
 msgid "Current voltage for phase L3 (in V)"
 msgstr "Huidig voltage in fase L3 (in V)"
+
+msgid "Power/current for phase L1 (in A)"
+msgstr "Huidige stroomsterkte in fase L1 (in A)"
+
+msgid "Power/current for phase L2 (in A)"
+msgstr "Huidige stroomsterkte in fase L2 (in A)"
+
+msgid "Power/current for phase L3 (in A)"
+msgstr "Huidige stroomsterkte in fase L3 (in A)"
 
 msgid "Electricity consumption"
 msgstr "Elektriciteitsverbruik"
@@ -1137,17 +1144,20 @@ msgstr "in m<sup>3</sup>"
 msgid "Watt"
 msgstr "Watt"
 
+msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
+msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
+
 msgid "Recent electricity"
 msgstr "Recente elektriciteit"
-
-msgid "Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph."
-msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Sleep de grafiek naar links of rechts, of gebruik de horizontale scrollbalk onder de grafiek."
 
 msgid "Recent distribution of electricity phases"
 msgstr "Recente distributie elektriciteitsfasen"
 
 msgid "Recent phase voltages"
 msgstr "Recente voltages fasen"
+
+msgid "Recent phase currents"
+msgstr "Recente stroomsterktes"
 
 msgid "Recent gas consumption"
 msgstr "Recent gasverbruik"

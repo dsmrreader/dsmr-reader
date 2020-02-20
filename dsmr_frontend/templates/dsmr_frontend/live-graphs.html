@@ -17,7 +17,7 @@
 
     {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktrans %}
+                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
     </div>
     {% endif %}
 
@@ -29,7 +29,7 @@
                     {% trans "Recent electricity" %}
                 </header>
                 <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
+                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
                     <div id="echarts-electricity-graph" style="width: 100%; height: 300px;"></div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     {% trans "Recent distribution of electricity phases" %}
                 </header>
                 <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
+                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
                     <div id="echarts-phases-graph" style="width: 100%; height: 300px;"></div>
                 </div>
             </div>
@@ -61,8 +61,24 @@
                     {% trans "Recent phase voltages" %}
                 </header>
                 <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
+                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
                     <div id="echarts-voltage-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if capabilities.power_current %}
+    <div class="row" id="power_current_holder">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent phase currents" %}
+                </header>
+                <div class="panel-body">
+                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
+                    <div id="echarts-power-current-graph" style="width: 100%; height: 300px;"></div>
                 </div>
             </div>
         </div>
@@ -160,6 +176,18 @@
         var echarts_voltage_graph_interval = 5;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/voltage.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
+{% if capabilities.power_current %}
+    <script type="text/javascript">
+        var echarts_power_current_graph_url = "{% url 'frontend:live-xhr-electricity' %}?power_current=True";
+        var power_current_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
+        var power_current_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
+        var power_current_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+
+        var echarts_power_current_graph_interval = 5;
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/power-current.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.gas %}
