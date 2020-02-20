@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='daystatistics',
             name='gas_cost',
-            field=models.DecimalField(decimal_places=2, verbose_name='Gas price', null=True, default=None, max_digits=8),
+            field=models.DecimalField(decimal_places=2, verbose_name='Gas cost', null=True, default=None, max_digits=8),
         ),
         migrations.AlterField(
             model_name='daystatistics',

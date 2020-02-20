@@ -29,7 +29,8 @@ class NoteAdmin(admin.ModelAdmin):
 @admin.register(DayStatistics)
 class DayStatisticsAdmin(admin.ModelAdmin):
     """ Read only model. """
-    ordering = ['-day']
+    actions = None
+    ordering = ['-day', 'total_cost']
     list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'total_cost')
     list_filter = (
         ('day', DateFieldListFilter),
@@ -39,6 +40,7 @@ class DayStatisticsAdmin(admin.ModelAdmin):
 @admin.register(HourStatistics)
 class HourStatisticsAdmin(admin.ModelAdmin):
     """ Read only model. """
+    actions = None
     ordering = ['-hour_start']
     list_display = ('hour_start', 'electricity_merged', 'electricity_returned_merged')
     list_filter = (
