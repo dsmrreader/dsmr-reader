@@ -11,5 +11,5 @@
 ./manage.py migrate dsmr_mqtt 0013_process_sleep
 ./manage.py migrate dsmr_notification 0007_support_for_telegram
 ./manage.py migrate dsmr_pvoutput 0002_pvoutput_latest_sync
-./manage.py migrate dsmr_stats 0013_all_time_low
+./manage.py migrate dsmr_stats 0014_day_total_cost_index
 ./manage.py migrate dsmr_weather 0006_schedule_weather_update
