@@ -913,13 +913,13 @@ msgstr "Jaren"
 msgid "Pick a day, month or year"
 msgstr "Kies een dag, maand of jaar"
 
-msgid "Electricity usage"
+msgid "Electricity consumed"
 msgstr "Elektriciteitsverbruik"
 
 msgid "(in kWh)"
 msgstr "(in kWh)"
 
-msgid "Gas usage"
+msgid "Gas consumed"
 msgstr "Gasverbruik"
 
 msgid "(in m³)"
@@ -1120,8 +1120,8 @@ msgstr "Verschil"
 msgid "W"
 msgstr "W"
 
-msgid "Recent electricity"
-msgstr "Recente elektriciteit"
+msgid "Recent electricity consumption"
+msgstr "Recent elektriciteitsverbruik"
 
 msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
 msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
@@ -1168,9 +1168,6 @@ msgstr "Nog geen gegevens gevonden. Deze pagina weergeeft gegevens zodra de eers
 msgid "Meter positions"
 msgstr "Meterstanden"
 
-msgid "Delivered"
-msgstr "Geleverd"
-
 msgid "Electricity (combined)"
 msgstr "Elektriciteit (gecombineerd)"
 
@@ -1192,25 +1189,25 @@ msgstr "Metingen met ongeldige CRC"
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
 
-msgid "Highest usage (L1+)"
+msgid "Highest consumption (L1+)"
 msgstr "Hoogste verbruik (L1+)"
 
 msgid "Watt"
 msgstr "Watt"
 
-msgid "Highest usage (L2+)"
+msgid "Highest consumption (L2+)"
 msgstr "Hoogste verbruik (L2+)"
 
-msgid "Highest usage (L3+)"
+msgid "Highest consumption (L3+)"
 msgstr "Hoogste verbruik (L3+)"
 
-msgid "Lowest usage (L1+)"
+msgid "Lowest consumption (L1+)"
 msgstr "Laagste verbruik (L1+)"
 
-msgid "Lowest usage (L2+)"
+msgid "Lowest consumption (L2+)"
 msgstr "Laagste verbruik (L2+)"
 
-msgid "Lowest usage (L3+)"
+msgid "Lowest consumption (L3+)"
 msgstr "Laagste verbruik (L3+)"
 
 msgid "Highest return (L1-)"
@@ -1390,11 +1387,11 @@ msgstr "Dit reflecteert de gegevensstromen van je slimme meter."
 msgid "The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages."
 msgstr "De status van elk van deze (drie) gegevensstromen staat hier weergegeven. Deze bepalen tevens welke grafieken allemaal beschikbaar zijn binnen de applicatie."
 
-msgid "Electricity usage recorded"
-msgstr "Elektriciteitsverbruik is gemeten"
+msgid "Electricity consumption recorded"
+msgstr "Elektriciteitsverbruik gemeten"
 
-msgid "No electricity usage recorded"
-msgstr "Geen elektriciteit gemeten"
+msgid "No electricity consumption recorded"
+msgstr "Geen elektriciteitsverbruik gemeten"
 
 msgid "Electricity return recorded"
 msgstr "Teruglevering elektriciteit is gemeten"
@@ -1402,10 +1399,10 @@ msgstr "Teruglevering elektriciteit is gemeten"
 msgid "No electricity return recorded (or manually disabled)"
 msgstr "Geen teruglevering elektriciteit gemeten (of handmatig uitgeschakeld)"
 
-msgid "Gas usage recorded"
-msgstr "Gasverbruik is gemeten"
+msgid "Gas consumption recorded"
+msgstr "Gasverbruik gemeten"
 
-msgid "No gas usage recorded (or manually disabled)"
+msgid "No gas consumption recorded (or manually disabled)"
 msgstr "Geen gasverbruik gemeten (of handmatig uitgeschakeld)"
 
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
@@ -2379,6 +2376,33 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Recent electricity"
+#~ msgstr "Recente elektriciteit"
+
+#~ msgid "Delivered"
+#~ msgstr "Geleverd"
+
+#~ msgid "Lowest usage (L1+)"
+#~ msgstr "Laagste verbruik (L1+)"
+
+#~ msgid "Lowest usage (L2+)"
+#~ msgstr "Laagste verbruik (L2+)"
+
+#~ msgid "Lowest usage (L3+)"
+#~ msgstr "Laagste verbruik (L3+)"
+
+#~ msgid "Electricity usage"
+#~ msgstr "Elektriciteitsverbruik"
+
+#~ msgid "Gas usage"
+#~ msgstr "Gasverbruik"
+
+#~ msgid "Electricity usage recorded"
+#~ msgstr "Elektriciteitsverbruik is gemeten"
+
+#~ msgid "Gas usage recorded"
+#~ msgstr "Gasverbruik is gemeten"
 
 #~ msgid "Number of unread notifications"
 #~ msgstr "Aantal ongelezen notificaties"

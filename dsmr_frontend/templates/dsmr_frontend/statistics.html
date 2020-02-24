@@ -26,7 +26,7 @@
                     <table class="table table-hover">
                         <tr>
                             <th class="col-sm-6">{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% endif %}</th>
-                            <th class="col-sm-3">{% trans "Delivered" %}</th>
+                            <th class="col-sm-3">{% trans "Consumed" %}</th>
                             
                             <th class="col-sm-3">{% if capabilities.electricity_returned %}{% trans "Returned" %}{% endif %}</th>
                         </tr>
@@ -150,7 +150,7 @@
                     <table class="table table-hover">
                         {% if electricity_statistics.highest_usage_l1_value %}
                         <tr>
-                            <td class="col-sm-6">{% trans "Highest usage (L1+)" %}</td>
+                            <td class="col-sm-6">{% trans "Highest consumption (L1+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l1_value }} {% trans "Watt" %}
@@ -162,7 +162,7 @@
                         {% endif %}
                         {% if electricity_statistics.highest_usage_l2_value %}
                         <tr>
-                            <td class="col-sm-6">{% trans "Highest usage (L2+)" %}</td>
+                            <td class="col-sm-6">{% trans "Highest consumption (L2+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l2_value }} {% trans "Watt" %}
@@ -174,7 +174,7 @@
                         {% endif %}
                         {% if electricity_statistics.highest_usage_l3_value %}
                         <tr>
-                            <td class="col-sm-6">{% trans "Highest usage (L3+)" %}</td>
+                            <td class="col-sm-6">{% trans "Highest consumption (L3+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l3_value }} {% trans "Watt" %}
@@ -187,7 +187,7 @@
 
                         {% if electricity_statistics.lowest_usage_l1_value %}
                         <tr>
-                            <td class="col-sm-6">{% trans "Lowest usage (L1+)" %}</td>
+                            <td class="col-sm-6">{% trans "Lowest consumption (L1+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l1_value }} {% trans "Watt" %}
@@ -200,7 +200,7 @@
                         {% endif %}
                         {% if electricity_statistics.lowest_usage_l2_value %}
                         <tr>
-                            <td class="col-sm-6">{% trans "Lowest usage (L2+)" %}</td>
+                            <td class="col-sm-6">{% trans "Lowest consumption (L2+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l2_value }} {% trans "Watt" %}
@@ -212,7 +212,7 @@
                         {% endif %}
                         {% if electricity_statistics.lowest_usage_l3_value %}
                         <tr>
-                            <td class="col-sm-6">{% trans "Lowest usage (L3+)" %}</td>
+                            <td class="col-sm-6">{% trans "Lowest consumption (L3+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l3_value }} {% trans "Watt" %}

@@ -344,7 +344,7 @@
                     <table class="table table-hover">
                         <tr>
                             <td class="col-sm-6">
-                                <strong>{% trans "Electricity usage" %}</strong>
+                                <strong>{% trans "Electricity consumed" %}</strong>
                                 <br><br>
                                 <div>
                                     <a class="help-trigger" href="#"><small>{% trans "Explain" %}</small></a>
@@ -357,11 +357,11 @@
                             <td class="col-sm-6">
                                 {% if capabilities.electricity %}
                                 <div class="alert alert-info" role="alert">
-                                    <span class="fas fa-check"></span> &nbsp; {% trans "Electricity usage recorded" %}
+                                    <span class="fas fa-check"></span> &nbsp; {% trans "Electricity consumption recorded" %}
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> &nbsp; {% trans "No electricity usage recorded" %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No electricity consumption recorded" %}
                                 </div>
                                 {% endif %}
                             </td>
@@ -394,7 +394,7 @@
 
                         <tr>
                             <td class="col-sm-6">
-                                <strong>{% trans "Gas usage" %}</strong>
+                                <strong>{% trans "Gas consumed" %}</strong>
                                 <br><br>
                                 <div>
                                     <a class="help-trigger" href="#"><small>{% trans "Explain" %}</small></a>
@@ -407,11 +407,11 @@
                             <td class="col-sm-6">
                                 {% if capabilities.gas %}
                                 <div class="alert alert-info" role="alert">
-                                    <span class="fas fa-check"></span> &nbsp; {% trans "Gas usage recorded" %}
+                                    <span class="fas fa-check"></span> &nbsp; {% trans "Gas consumption recorded" %}
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> &nbsp; {% trans "No gas usage recorded (or manually disabled)" %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No gas consumption recorded (or manually disabled)" %}
                                 </div>
                                 {% endif %}
                             </td>
