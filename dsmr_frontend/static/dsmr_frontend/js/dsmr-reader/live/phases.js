@@ -63,49 +63,49 @@ $(document).ready(function(){
         ],
         series : [
             {
-            	smooth: true,
                 name: 'Watt (L1+)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 stack: 'delivered',
                 data: null
             },
             {
-            	smooth: true,
                 name: 'Watt (L2+)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 stack: 'delivered',
                 data: null
             },
             {
-            	smooth: true,
                 name: 'Watt (L3+)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 stack: 'delivered',
                 data: null
             },
             {
-            	smooth: true,
                 name: 'Watt (L1-)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 stack: 'returned',
                 data: null
             },
             {
-            	smooth: true,
                 name: 'Watt (L2-)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 stack: 'returned',
                 data: null
             },
             {
-            	smooth: true,
                 name: 'Watt (L3-)',
                 type: 'line',
+                smooth: true,
                 areaStyle: {},
                 stack: 'returned',
                 data: null

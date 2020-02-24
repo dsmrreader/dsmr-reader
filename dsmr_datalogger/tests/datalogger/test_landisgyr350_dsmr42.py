@@ -38,9 +38,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "1-0:72.36.0(00000)\r\n",
             "0-0:96.13.1()\r\n",
             "0-0:96.13.0()\r\n",
-            "1-0:31.7.0(000*A)\r\n",
-            "1-0:51.7.0(000*A)\r\n",
-            "1-0:71.7.0(001*A)\r\n",
+            "1-0:31.7.0(111*A)\r\n",
+            "1-0:51.7.0(222*A)\r\n",
+            "1-0:71.7.0(333*A)\r\n",
             "1-0:21.7.0(00.123*kW)\r\n",
             "1-0:41.7.0(00.456*kW)\r\n",
             "1-0:61.7.0(00.789*kW)\r\n",
@@ -50,7 +50,7 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-1:24.1.0(003)\r\n",
             "0-1:96.1.0(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)\r\n",
             "0-1:24.2.1(160210200000W)(01197.484*m3)\r\n",
-            "!E1A4\n",
+            "!8774\n",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -95,6 +95,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertIsNone(reading.phase_voltage_l1)
         self.assertIsNone(reading.phase_voltage_l2)
         self.assertIsNone(reading.phase_voltage_l3)
+        self.assertEqual(reading.phase_power_current_l1, 111)
+        self.assertEqual(reading.phase_power_current_l2, 222)
+        self.assertEqual(reading.phase_power_current_l3, 333)
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()

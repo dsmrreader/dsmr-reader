@@ -117,9 +117,12 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         currently_returned_l2 = 0
         currently_returned_l3 = 0
         currently_returned = 0
-        phase_voltage_l1 = random.randint(225, 235)
-        phase_voltage_l2 = random.randint(225, 235)
-        phase_voltage_l3 = random.randint(225, 235)
+        phase_voltage_l1 = random.randint(228, 232)
+        phase_voltage_l2 = random.randint(228, 232)
+        phase_voltage_l3 = random.randint(228, 232)
+        phase_power_current_l1 = random.randint(5, 8)
+        phase_power_current_l2 = random.randint(2, 3)
+        phase_power_current_l3 = random.randint(0, 1)
 
         # Randomly switch between electricity delivered and returned each 5 seconds for a more 'realistic' graph.
         if with_electricity_returned and second_since % 10 < 5:
@@ -161,9 +164,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:32.7.0({}.0*V)\r\n".format(phase_voltage_l1),
             "1-0:52.7.0({}.1*V)\r\n".format(phase_voltage_l2),
             "1-0:72.7.0({}.2*V)\r\n".format(phase_voltage_l3),
-            "1-0:31.7.0(000*A)\r\n",
-            "1-0:51.7.0(000*A)\r\n",
-            "1-0:71.7.0(001*A)\r\n",
+            "1-0:31.7.0({}*A)\r\n".format(phase_power_current_l1),
+            "1-0:51.7.0({}*A)\r\n".format(phase_power_current_l2),
+            "1-0:71.7.0({}*A)\r\n".format(phase_power_current_l3),
             "1-0:21.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l1, 6)),
             "1-0:41.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l2, 6)),
             "1-0:61.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l3, 6)),

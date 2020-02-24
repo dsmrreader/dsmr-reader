@@ -97,6 +97,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertEqual(reading.phase_voltage_l1, Decimal('220.1'))
         self.assertEqual(reading.phase_voltage_l2, Decimal('220.2'))
         self.assertEqual(reading.phase_voltage_l3, Decimal('220.3'))
+        self.assertEqual(reading.phase_power_current_l1, 1)
+        self.assertEqual(reading.phase_power_current_l2, 2)
+        self.assertEqual(reading.phase_power_current_l3, 3)
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertEqual(meter_statistics.dsmr_version, '50')

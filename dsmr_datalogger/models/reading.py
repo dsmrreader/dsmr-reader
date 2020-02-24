@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.utils import timezone
@@ -132,6 +133,24 @@ class DsmrReading(ModelUpdateMixin, models.Model):
         max_digits=4,
         decimal_places=1,
         help_text=_("Current voltage for phase L3 (in V)")
+    )
+    phase_power_current_l1 = models.IntegerField(
+        null=True,
+        default=None,
+        validators=[MinValueValidator(0), MaxValueValidator(999)],
+        help_text=_("Power/current for phase L1 (in A)")
+    )
+    phase_power_current_l2 = models.IntegerField(
+        null=True,
+        default=None,
+        validators=[MinValueValidator(0), MaxValueValidator(999)],
+        help_text=_("Power/current for phase L2 (in A)")
+    )
+    phase_power_current_l3 = models.IntegerField(
+        null=True,
+        default=None,
+        validators=[MinValueValidator(0), MaxValueValidator(999)],
+        help_text=_("Power/current for phase L3 (in A)")
     )
 
     class Meta:

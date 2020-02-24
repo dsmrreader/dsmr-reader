@@ -86,6 +86,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertIsNone(reading.phase_voltage_l1)
         self.assertIsNone(reading.phase_voltage_l2)
         self.assertIsNone(reading.phase_voltage_l3)
+        self.assertEqual(reading.phase_power_current_l1, 1)
+        self.assertEqual(reading.phase_power_current_l2, None)
+        self.assertEqual(reading.phase_power_current_l3, None)
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()

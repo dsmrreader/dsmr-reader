@@ -32,7 +32,7 @@ def get_capabilities(capability=None):
 
     if capabilities is None:
         capabilities = {
-            # We rely on consumption because DSMR readings might be flushed in the future.
+            # We rely on consumption because source readings might be deleted after a while.
             'electricity': ElectricityConsumption.objects.exists(),
             'electricity_returned': ElectricityConsumption.objects.filter(
                 # We can not rely on meter positions, as the manufacturer sometimes initializes meters
@@ -45,6 +45,9 @@ def get_capabilities(capability=None):
             ).exists(),
             'voltage': ElectricityConsumption.objects.filter(
                 phase_voltage_l1__isnull=False,
+            ).exists(),
+            'power_current': ElectricityConsumption.objects.filter(
+                phase_power_current_l1__isnull=False,
             ).exists(),
             'gas': GasConsumption.objects.exists(),
             'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()

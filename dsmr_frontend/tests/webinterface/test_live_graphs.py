@@ -69,6 +69,9 @@ class TestViews(TestCase):
                 phase_currently_returned_l2=2.25,
                 phase_currently_returned_l3=2.75,
                 phase_voltage_l1=230,
+                phase_power_current_l1=1,
+                phase_power_current_l2=2,
+                phase_power_current_l3=3
             )
             ElectricityConsumption.objects.create(
                 read_at=timezone.now() - timezone.timedelta(hours=1),
@@ -85,11 +88,14 @@ class TestViews(TestCase):
                 phase_currently_returned_l2=3.25,
                 phase_currently_returned_l3=3.75,
                 phase_voltage_l1=230,
+                phase_power_current_l1=11,
+                phase_power_current_l2=22,
+                phase_power_current_l3=33
             )
 
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            data={'delivered': True, 'returned': True, 'phases': True}
+            dict(delivered=True, returned=True, phases=True, power_current=True)
         )
 
         if not self.support_data:
@@ -117,13 +123,14 @@ class TestViews(TestCase):
                     'l3': [3750.0, 2750.0],
                 },
                 'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
+                'phase_power_current': {'l1': [11, 1], 'l2': [22, 2], 'l3': [33, 3]},
             }
         )
 
         # Branch tests for each option.
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            data={'delivered': True, 'returned': True, 'phases': False}
+            dict(delivered=True, returned=True, phases=False, power_current=False)
         )
         self.assertEqual(response.status_code, 200, response.content)
 
@@ -140,7 +147,7 @@ class TestViews(TestCase):
 
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            data={'delivered': True, 'returned': False, 'phases': True}
+            dict(delivered=True, returned=False, phases=True, power_current=False)
         )
         self.assertEqual(response.status_code, 200, response.content)
 
@@ -157,7 +164,7 @@ class TestViews(TestCase):
 
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            data={'delivered': False, 'returned': False, 'phases': False}
+            dict(delivered=False, returned=False, phases=False, power_current=False)
         )
         json_content = json.loads(response.content.decode("utf8"))
         self.assertNotEqual(json_content['read_at'], [])
@@ -174,7 +181,13 @@ class TestViews(TestCase):
         old_latest_delta_id = json_content['latest_delta_id']
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            data={'delivered': True, 'returned': True, 'phases': True, 'latest_delta_id': old_latest_delta_id}
+            data=dict(
+                delivered=True,
+                returned=True,
+                phases=True,
+                power_current=True,
+                latest_delta_id=old_latest_delta_id
+            )
         )
         self.assertEqual(response.status_code, 200, response.content)
 
@@ -199,13 +212,14 @@ class TestViews(TestCase):
                     'l3': [3750.0],
                 },
                 'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
+                'phase_power_current': {'l1': [11], 'l2': [22], 'l3': [33]},
             }
         )
 
         # Voltages
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            data={'voltage': True, 'latest_delta_id': old_latest_delta_id}
+            dict(voltage=True, latest_delta_id=old_latest_delta_id)
         )
         self.assertEqual(response.status_code, 200, response.content)
         json_content = json.loads(response.content.decode("utf8"))
@@ -227,6 +241,36 @@ class TestViews(TestCase):
                     'l3': [],
                 },
                 'phase_voltage': {'l1': [230], 'l2': [0.0], 'l3': [0.0]},
+                'phase_power_current': {'l1': [], 'l2': [], 'l3': []},
+            }
+        )
+
+        # Power current
+        response = self.client.get(
+            reverse('{}:live-xhr-electricity'.format(self.namespace)),
+            dict(power_current=True, latest_delta_id=old_latest_delta_id)
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+        json_content = json.loads(response.content.decode("utf8"))
+        self.assertEqual(
+            json_content,
+            {
+                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
+                'read_at': ['Sat 23:00'],
+                'currently_delivered': [],
+                'currently_returned': [],
+                'phases_delivered': {
+                    'l1': [],
+                    'l2': [],
+                    'l3': [],
+                },
+                'phases_returned': {
+                    'l1': [],
+                    'l2': [],
+                    'l3': [],
+                },
+                'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
+                'phase_power_current': {'l1': [11], 'l2': [22], 'l3': [33]},
             }
         )
 
@@ -234,7 +278,7 @@ class TestViews(TestCase):
         ElectricityConsumption.objects.update(phase_currently_delivered_l1=None)
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            data={'delivered': True, 'returned': True, 'phases': True}
+            dict(delivered=True, returned=True, phases=True)
         )
         self.assertEqual(response.status_code, 200, response.content)
 

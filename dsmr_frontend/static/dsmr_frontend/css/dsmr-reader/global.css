@@ -48,3 +48,7 @@ div.date-selector {
 .logo-version {
     font-size: 11px;
 }
+
+.graph_controls_help {
+    color: gray;
+}
