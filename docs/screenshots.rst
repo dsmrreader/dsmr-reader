@@ -17,7 +17,17 @@ The dashboard displays the latest information regarding any consumption of today
     :target: _static/screenshots/frontend/dashboard.png
     :alt: Dashboard
     
-    
+
+Live graphs
+-----------
+
+The live graphs visualizes any recent data read.
+
+.. image:: _static/screenshots/frontend/live.png
+    :target: _static/screenshots/frontend/live.png
+    :alt: Live graphs
+
+
 Archive
 -------
 
