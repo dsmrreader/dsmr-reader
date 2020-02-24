@@ -11,7 +11,9 @@ $(document).ready(function(){
 	    var zoom_percent = 100 - (dashboard_graph_width / xhr_data.read_at.length * 100);
 	
 	    var option = {
-	        color: [temperature_color],
+	        color: [
+	        	temperature_color
+			],
 	        tooltip : {
 	            formatter: "{c} {a}",
 	            trigger: 'axis',

@@ -17,8 +17,8 @@ function render_electricity_graph(xhr_data)
 	        left: 'center'
 	    },
         color: [
-        	electricity_delivered_color,
         	electricity_delivered_alternate_color,
+            electricity_delivered_color
         ],
     	tooltip : {
             trigger: 'axis',

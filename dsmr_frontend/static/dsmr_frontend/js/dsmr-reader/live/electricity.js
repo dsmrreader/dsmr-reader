@@ -1,7 +1,10 @@
 $(document).ready(function(){
 	var echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
     var echarts_electricity_initial_options = {
-        color: [electricity_delivered_color, electricity_returned_color],
+        color: [
+            electricity_delivered_color,
+            electricity_returned_color
+        ],
     	tooltip : {
             trigger: 'axis',
             axisPointer: {

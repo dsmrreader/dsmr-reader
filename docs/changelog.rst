@@ -5,6 +5,7 @@ Changelog
 v3.5.0 - 2020-xx-xx
 
 - [`#622 <https://github.com/dennissiemensma/dsmr-reader/issues/622>`_] Hoogste/laagste dagtotalen inzien
+- [`#904 <https://github.com/dennissiemensma/dsmr-reader/issues/904>`_] Kleuren van grafieken omgewisseld
 - [`#902 <https://github.com/dennissiemensma/dsmr-reader/issues/902>`_] Requirements update (February 2020)
 
 

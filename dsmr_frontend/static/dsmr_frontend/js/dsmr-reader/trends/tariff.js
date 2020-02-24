@@ -4,7 +4,10 @@ $(document).ready(function(){
 	var echarts_electricity_by_tariff_month_graph = echarts.init(document.getElementById('echarts-electricity-by-tariff-month-graph'));
 
 	var echarts_options = {
-        color: [electricity_delivered_alternate_color, electricity_delivered_color],
+        color: [
+        	electricity_delivered_alternate_color,
+			electricity_delivered_color
+		],
 		calculable : true,
         tooltip : {
             trigger: 'item',
