@@ -4,10 +4,11 @@ Changelog
 
 v3.5.0 - 2020-xx-xx
 
-- [`#622 <https://github.com/dennissiemensma/dsmr-reader/issues/622>`_] Hoogste/laagste dagtotalen inzien
-- [`#904 <https://github.com/dennissiemensma/dsmr-reader/issues/904>`_] Kleuren van grafieken omgewisseld
-- [`#902 <https://github.com/dennissiemensma/dsmr-reader/issues/902>`_] Requirements update (February 2020)
 - [`#875 <https://github.com/dennissiemensma/dsmr-reader/issues/875>`_] Actuele Amperes weergeven
+- [`#901 <https://github.com/dennissiemensma/dsmr-reader/issues/901>`_] Layout voor mobiele/kleine schermen verbeteren
+- [`#904 <https://github.com/dennissiemensma/dsmr-reader/issues/904>`_] Kleuren van grafieken omgewisseld
+- [`#622 <https://github.com/dennissiemensma/dsmr-reader/issues/622>`_] Hoogste/laagste dagtotalen inzien
+- [`#902 <https://github.com/dennissiemensma/dsmr-reader/issues/902>`_] Requirements update (February 2020)
 
 
 ----

@@ -70,7 +70,7 @@ $(document).ready(function(){
 	    	echarts_avg_electricity_returned_graph.resize();
     	}
 
-	    if (echarts_avg_gas_graph0)
+	    if (echarts_avg_gas_graph)
     	{
 	    	echarts_avg_gas_graph.resize();
     	}

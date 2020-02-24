@@ -7,30 +7,28 @@
 {% block title %}{% trans "Live graphs" %}{% endblock %}
 {% block header %}{% trans "Live graphs" %} &nbsp; <i class="fas fa-chart-line"></i>{% endblock %}
 
-{% block header_right %}
-    {% include "dsmr_frontend/includes/xhr-consumption-header.html" %}
-{% endblock %}
-
 {% block content %}
 <!-- Main content -->
 <section class="content">
 
     {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
-                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktrans %}
     </div>
     {% endif %}
 
+    {% include "dsmr_frontend/includes/xhr-consumption-header.html" %}
+
     {% if capabilities.electricity %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Recent electricity" %}
                 </header>
                 <div class="panel-body">
-                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
                     <div id="echarts-electricity-graph" style="width: 100%; height: 300px;"></div>
+                    <div class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</div>
                 </div>
             </div>
         </div>
@@ -39,14 +37,14 @@
     
     {% if capabilities.multi_phases %}
     <div class="row" id="phases_holder">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Recent distribution of electricity phases" %}
                 </header>
                 <div class="panel-body">
-                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
                     <div id="echarts-phases-graph" style="width: 100%; height: 300px;"></div>
+                    <div class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</div>
                 </div>
             </div>
         </div>
@@ -55,14 +53,14 @@
 
     {% if capabilities.voltage %}
     <div class="row" id="voltage_holder">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Recent phase voltages" %}
                 </header>
                 <div class="panel-body">
-                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
                     <div id="echarts-voltage-graph" style="width: 100%; height: 300px;"></div>
+                    <div class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</div>
                 </div>
             </div>
         </div>
@@ -71,14 +69,14 @@
 
     {% if capabilities.power_current %}
     <div class="row" id="power_current_holder">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Recent phase currents" %}
                 </header>
                 <div class="panel-body">
-                    <small class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</small>
                     <div id="echarts-power-current-graph" style="width: 100%; height: 300px;"></div>
+                    <div class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</div>
                 </div>
             </div>
         </div>
@@ -87,7 +85,7 @@
 
     {% if capabilities.gas %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Recent gas consumption" %}
@@ -102,7 +100,7 @@
     
     {% if capabilities.weather %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% trans "Recent temperatures" %}
@@ -224,14 +222,14 @@
                 url: "{% url 'frontend:xhr-consumption-header' %}",
             }).done(function(response) {
                 $("#header-loader").hide();
-                $("#latest_timestamp").html(response.timestamp);
+                $("#latest_timestamp").html('(' + response.timestamp + ')');
                 $("#latest_electricity").html(response.currently_delivered);
                 $("#latest_electricity_returned").html(response.currently_returned);
                 $("#tariff_name").html(response.tariff_name);
 
                 if (response.cost_per_hour)
                 {
-                    $("#cost_per_hour").html("&euro; " + response.cost_per_hour + " {% trans 'per hour' %}").show();
+                    $("#cost_per_hour").html(response.cost_per_hour + " &euro;{% trans '/hour' %}").show();
                 }
             });
         }

@@ -1,31 +1,22 @@
 {% load i18n %}
 
-
-<li style="width: 200px; text-align: right">
-    <a href="" onclick="return false;" style="cursor: default;">
-        <small class="gray">
-            <small id="tariff_name"></small> <small id="latest_timestamp"></small>
-        </small>
-    </a>
-</li>
-
-{% if capabilities.electricity %}
-<li>
-    <a href="" onclick="return false;" style="cursor: default;">
-        <span class="badge bg-red"><i class="fas fa-bolt"></i>
-        &nbsp;   <span id="latest_electricity"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "Watt" %}
-        </span>
-
-        <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
-    </a>
-</li>
-{% endif %}
-
-{% if capabilities.electricity_returned  %}
-<li>
-    <a href="" onclick="return false;" style="cursor: default;">
-        <span class="badge bg-green"><i class="fas fa-bolt"></i>
-        &nbsp; <span id="latest_electricity_returned"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "Watt" %}</span>
-    </a>
-</li>
-{% endif %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel">
+            <header class="panel-heading">
+                <span id="tariff_name"></span> <small id="latest_timestamp"></small>
+            </header>
+            <div class="panel-body">
+            {% if capabilities.electricity %}
+                <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
+                <span class="badge bg-red"><i class="fas fa-bolt"></i>
+&nbsp;               <span id="latest_electricity"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "W" %}</span>
+            {% endif %}
+            {% if capabilities.electricity_returned %}
+                <span class="badge bg-green"><i class="fas fa-bolt"></i>
+&nbsp;                       <span id="latest_electricity_returned"><i class="fas fa-sync fa-spin fa-fw"></i></span> {% trans "W" %}</span>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

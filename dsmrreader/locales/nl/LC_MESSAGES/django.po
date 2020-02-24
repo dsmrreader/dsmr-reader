@@ -1003,35 +1003,23 @@ msgstr "Te vergelijken selectie"
 msgid "Unread notifications"
 msgstr "Ongelezen notificaties"
 
-msgid "Number of unread notifications"
-msgstr "Aantal ongelezen notificaties"
-
-msgid "View notifications"
-msgstr "Bekijk notificaties"
+msgid "View"
+msgstr "Bekijk"
 
 msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
 
-msgid "View live graphs"
-msgstr "Bekijk live grafieken"
-
-msgid "Add note for today"
-msgstr "Voeg notitie toe voor vandaag"
-
 msgid "Consumed"
 msgstr "Verbruikt"
+
+msgid "Returned"
+msgstr "Teruggeleverd"
 
 msgid "kWh"
 msgstr "kWh"
 
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
-
-msgid "Returned"
-msgstr "Teruggeleverd"
-
-msgid "Cost"
-msgstr "Kosten"
 
 msgid "Total"
 msgstr "Totaal"
@@ -1042,8 +1030,8 @@ msgstr "Huidige maand"
 msgid "until yesterday"
 msgstr "tot en met gisteren"
 
-msgid "per hour"
-msgstr "per uur"
+msgid "/hour"
+msgstr "/uur"
 
 msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
 msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
@@ -1054,17 +1042,11 @@ msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten. De t
 msgid "Show contract prices"
 msgstr "Toon contractprijzen"
 
-msgid "Electricity 1 price"
-msgstr "Prijs elektriciteit 1"
+msgid "tariff 1"
+msgstr "tarief 1"
 
-msgid "Electricity 2 price"
-msgstr "Prijs elektriciteit 2"
-
-msgid "Electricity 1 returned price (low tariff)"
-msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
-
-msgid "Electricity 2 returned price (high tariff)"
-msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
+msgid "tariff 2"
+msgstr "tarief 2"
 
 msgid "Select data type"
 msgstr "Selecteer gegevenstype"
@@ -1117,38 +1099,32 @@ msgstr "Download export"
 msgid "Add note for this date"
 msgstr "Voeg notitie toe voor deze datum"
 
-msgid "Energy price"
-msgstr "Energieprijs"
+msgid "/unit"
+msgstr "/eenheid"
 
-msgid "Weather"
-msgstr "Weergegevens"
+msgid "Temp."
+msgstr "Temp."
 
-msgid "Min."
-msgstr "Min."
+msgid "Min"
+msgstr "Min"
 
-msgid "Max."
-msgstr "Max."
+msgid "Max"
+msgstr "Max"
 
-msgid "Avg."
-msgstr "Gem."
+msgid "Avg"
+msgstr "Gem"
 
 msgid "Difference"
 msgstr "Verschil"
 
-msgid "in kWh"
-msgstr "in kWh"
-
-msgid "in m<sup>3</sup>"
-msgstr "in m<sup>3</sup>"
-
-msgid "Watt"
-msgstr "Watt"
-
-msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
-msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
+msgid "W"
+msgstr "W"
 
 msgid "Recent electricity"
 msgstr "Recente elektriciteit"
+
+msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
+msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
 
 msgid "Recent distribution of electricity phases"
 msgstr "Recente distributie elektriciteitsfasen"
@@ -1177,9 +1153,6 @@ msgstr "Markeer alle notificaties als gelezen"
 msgid "Mark all as read"
 msgstr "Markeer allemaal als gelezen"
 
-msgid "Mark notification as read"
-msgstr "Markeer notificatie als gelezen"
-
 msgid "Mark as read"
 msgstr "Markeer als gelezen"
 
@@ -1198,8 +1171,8 @@ msgstr "Meterstanden"
 msgid "Delivered"
 msgstr "Geleverd"
 
-msgid "Electricity (tariffs combined)"
-msgstr "Elektriciteit (tarieven gecombineerd)"
+msgid "Electricity (combined)"
+msgstr "Elektriciteit (gecombineerd)"
 
 msgid "Meter statistics"
 msgstr "Meterstatistieken"
@@ -1210,17 +1183,20 @@ msgstr "Telegram-metingen"
 msgid "Total reading count"
 msgstr "Totaal aantal metingen"
 
-msgid "The number of P1 DSMR telegrams read and stored in the application."
-msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
-
 msgid "Show count"
 msgstr "Toon aantal"
+
+msgid "Readings with invalid CRC"
+msgstr "Metingen met ongeldige CRC"
 
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
 
 msgid "Highest usage (L1+)"
 msgstr "Hoogste verbruik (L1+)"
+
+msgid "Watt"
+msgstr "Watt"
 
 msgid "Highest usage (L2+)"
 msgstr "Hoogste verbruik (L2+)"
@@ -2212,6 +2188,9 @@ msgstr "Buienradar"
 msgid "See <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> for a map of all locations."
 msgstr "Zie <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> voor een kaart van alle locaties."
 
+msgid "Weather"
+msgstr "Weergegevens"
+
 msgid "Temperature (in ℃)"
 msgstr "Temperatuur (in ℃)"
 
@@ -2401,8 +2380,47 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
-#~ msgid "View"
-#~ msgstr "Bekijk"
+#~ msgid "Number of unread notifications"
+#~ msgstr "Aantal ongelezen notificaties"
+
+#~ msgid "View notifications"
+#~ msgstr "Bekijk notificaties"
+
+#~ msgid "View live graphs"
+#~ msgstr "Bekijk live grafieken"
+
+#~ msgid "Add note for today"
+#~ msgstr "Voeg notitie toe voor vandaag"
+
+#~ msgid "Cost"
+#~ msgstr "Kosten"
+
+#~ msgid "Electricity 1 price"
+#~ msgstr "Prijs elektriciteit 1"
+
+#~ msgid "Electricity 2 price"
+#~ msgstr "Prijs elektriciteit 2"
+
+#~ msgid "Electricity 1 returned price (low tariff)"
+#~ msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
+
+#~ msgid "Electricity 2 returned price (high tariff)"
+#~ msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
+
+#~ msgid "Energy price"
+#~ msgstr "Energieprijs"
+
+#~ msgid "in kWh"
+#~ msgstr "in kWh"
+
+#~ msgid "in m<sup>3</sup>"
+#~ msgstr "in m<sup>3</sup>"
+
+#~ msgid "Mark notification as read"
+#~ msgstr "Markeer notificatie als gelezen"
+
+#~ msgid "The number of P1 DSMR telegrams read and stored in the application."
+#~ msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
 
 #~ msgid "Display current month"
 #~ msgstr "Toon huidige maand"

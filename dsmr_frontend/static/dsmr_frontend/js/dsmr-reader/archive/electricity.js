@@ -25,8 +25,18 @@ function render_electricity_graph(xhr_data)
             axisPointer: {
                 type: 'shadow',
                 label: {
-                    show: true
-                }
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        formatter: function(params) {
+                            let val=0;
+                            this.option.series.forEach(s => {
+                                val+=s.data[params.dataIndex];
+                            } );
+                            return val;
+                        }
+                    }
+                },
             }
         },
         calculable : true,

@@ -37,10 +37,6 @@ div.date-selector {
 	cursor: pointer;
 }
 
-.italic {
-    font-style: italic;
-}
-
 .gray {
     color: #999999;
 }
@@ -49,6 +45,15 @@ div.date-selector {
     font-size: 11px;
 }
 
-.graph_controls_help {
+div.graph_controls_help {
+    font-size: x-small;
+    text-align: center;
     color: gray;
+}
+
+.unit {
+    display: inline-block;
+    clear: left;
+    color: gray;
+    font-size: xx-small;
 }

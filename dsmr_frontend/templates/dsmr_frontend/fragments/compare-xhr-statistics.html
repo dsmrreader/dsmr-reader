@@ -4,17 +4,17 @@
 
 <div class="panel">
     <div class="panel-body">
-        <table class="table table-condensed">
+        <table class="table table-hover">
             <tr>
-                <th class="col-md-2"></th>
-                <th class="col-md-2">{{ base_title|unlocalize }}</th>
-                <th class="col-md-2">{{ comparison_title|unlocalize }}</th>
-                <th class="col-md-2">{% trans "Difference" %}</th>
+                <th class="col-sm-2"></th>
+                <th class="col-sm-2">{{ base_title|unlocalize }}</th>
+                <th class="col-sm-2">{{ comparison_title|unlocalize }}</th>
+                <th class="col-sm-2">{% trans "Difference" %}</th>
             </tr>
 
 {% if capabilities.electricity and frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{% trans "Electricity (single tariff)" %} {% trans "in kWh" %}</td>
+                <td>{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span></td>
                 <td>{{ base.electricity_merged|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity_merged|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -31,7 +31,7 @@
 
 {% if capabilities.electricity_returned and frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{% trans "Electricity returned (single tariff)" %} {% trans "in kWh" %}</td>
+                <td>{% trans "Electricity returned (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span></td>
                 <td>{{ base.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -48,7 +48,7 @@
 
 {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{{ frontend_settings.tariff_1_delivered_name }} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
                 <td>{{ base.electricity1|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity1|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -62,7 +62,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{{ frontend_settings.tariff_2_delivered_name }} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
                 <td>{{ base.electricity2|default:'-'|floatformat:2 }} </td>
                 <td>{{ comparison.electricity2|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -79,7 +79,7 @@
 
 {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{{ frontend_settings.tariff_1_returned_name }} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_1_returned_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
                 <td>{{ base.electricity1_returned|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity1_returned|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -93,7 +93,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{{ frontend_settings.tariff_2_returned_name }} {% trans "in kWh" %}</td>
+                <td>{{ frontend_settings.tariff_2_returned_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
                 <td>{{ base.electricity2_returned|default:'-'|floatformat:2 }} </td>
                 <td>{{ comparison.electricity2_returned|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -110,7 +110,7 @@
 
 {% if capabilities.gas %}
             <tr>
-                <td>{% trans "Gas" %} {% trans "in m<sup>3</sup>" %}</td>
+                <td>{% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
                 <td>{{ base.gas|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.gas|default:'-'|floatformat:2 }}</td>
                 <td>

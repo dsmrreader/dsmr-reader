@@ -20,28 +20,28 @@
     <form action="{% url 'frontend:export-as-csv' %}" method="post" id="download_form">
     {% csrf_token %}
 	    <div class="row">
-	        <div class="col-md-12">
+	        <div class="col-sm-12">
 	            <div class="panel">
 	                <header class="panel-heading">
 	                    <i class="fas fa-tasks"></i> &nbsp; {% trans "Select data type" %} <br />
 	                    <small>{% blocktrans %}Select the type of data you want to export.{% endblocktrans %}</small>
 	                </header>
 	                <div class="panel-body">
-	                    <table class="table table-condensed">
+	                    <table class="table table-hover">
 	                        <tr>
-	                            <td class="col-md-3"><input class="" type="radio" name="data_type" value="day" id="data_day_totals" checked="checked"> &nbsp; <label for="data_day_totals">{% trans "Day totals" %}</label></td>
-	                            <td class="col-md-9">{% blocktrans %}Summary of each day. Contains electricity, gas and costs (if applicable).{% endblocktrans %}</td>
+	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="day" id="data_day_totals" checked="checked"> &nbsp; <label for="data_day_totals">{% trans "Day totals" %}</label></td>
+	                            <td class="col-sm-9">{% blocktrans %}Summary of each day. Contains electricity, gas and costs (if applicable).{% endblocktrans %}</td>
 	                        </tr>
 	                        <tr>
-	                            <td class="col-md-3"><input class="" type="radio" name="data_type" value="hour" id="data_hour_totals"> &nbsp; <label for="data_hour_totals">{% trans "Hour totals" %}</label></td>
-	                            <td class="col-md-9">{% blocktrans %}Summary of each hour read. Contains electricity and gas (if applicable).{% endblocktrans %}</td>
+	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="hour" id="data_hour_totals"> &nbsp; <label for="data_hour_totals">{% trans "Hour totals" %}</label></td>
+	                            <td class="col-sm-9">{% blocktrans %}Summary of each hour read. Contains electricity and gas (if applicable).{% endblocktrans %}</td>
 	                        </tr>
 	                        <tr>
 	                           <td colspan="2">&nbsp;</td>
 	                        </tr>
                             <tr>
-                                <td class="col-md-3"><input class="" type="radio" name="data_type" value="temperature" id="data_temperature"> &nbsp; <label for="data_temperature">{% trans "Temperatures" %}</label></td>
-                                <td class="col-md-9">{% blocktrans %}Summary of all temperatures read (if enabled).{% endblocktrans %}</td>
+                                <td class="col-sm-3"><input class="" type="radio" name="data_type" value="temperature" id="data_temperature"> &nbsp; <label for="data_temperature">{% trans "Temperatures" %}</label></td>
+                                <td class="col-sm-9">{% blocktrans %}Summary of all temperatures read (if enabled).{% endblocktrans %}</td>
                             </tr>
 	                    </table>
 	                </div>
@@ -50,7 +50,7 @@
 	    </div><!-- /.row -->
 	
 	    <div class="row">
-	        <div class="col-md-6">
+	        <div class="col-sm-6">
 	            <div class="panel">
 	                <header class="panel-heading">
 	                    <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range start" %} <br />
@@ -63,7 +63,7 @@
 	            </div>
 	        </div>
 	
-	        <div class="col-md-6">
+	        <div class="col-sm-6">
 	            <div class="panel">
 	                <header class="panel-heading">
 	                    <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range end" %} <br />
@@ -78,17 +78,17 @@
 	    </div><!-- /.row -->
 	
 	    <div class="row">
-	        <div class="col-md-12">
+	        <div class="col-sm-12">
 	            <div class="panel">
 	                <header class="panel-heading">
 	                    <i class="fas fa-file"></i> &nbsp; {% trans "Select export format" %} <br />
 	                    <small>{% blocktrans %}Choose a format the data will be exported in.{% endblocktrans %}</small>
 	                </header>
 	                <div class="panel-body">
-	                    <table class="table table-condensed">
+	                    <table class="table table-hover">
 	                        <tr>
-	                            <td class="col-md-3"><input class="" type="radio" name="export_format" value="csv" id="export_format_csv" checked="checked"> &nbsp; <label for="export_format_csv"><i class="fas fa-file-excel"></i> &nbsp; {% trans "Excel (.CSV)" %}</label></td>
-	                            <td class="col-md-9">{% blocktrans %}Exports the data in Comma Separated Format, which can be read by Excel.{% endblocktrans %}</td>
+	                            <td class="col-sm-3"><input class="" type="radio" name="export_format" value="csv" id="export_format_csv" checked="checked"> &nbsp; <label for="export_format_csv"><i class="fas fa-file-excel"></i> &nbsp; {% trans "Excel (.CSV)" %}</label></td>
+	                            <td class="col-sm-9">{% blocktrans %}Exports the data in Comma Separated Format, which can be read by Excel.{% endblocktrans %}</td>
 	                        </tr>
 	                    </table>
 	                </div>
