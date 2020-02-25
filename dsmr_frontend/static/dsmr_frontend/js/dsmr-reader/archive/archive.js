@@ -41,6 +41,7 @@ $(document).ready(function(){
         minViewMode: g_datepicker_view_mode,
         maxViewMode: 'years',
         calendarWeeks: true,
+        weekStart: 1,
         todayHighlight: true,
         startDate: datepicker_start_date,
         endDate: datepicker_end_date,

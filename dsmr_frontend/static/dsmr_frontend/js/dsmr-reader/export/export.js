@@ -15,6 +15,7 @@ function initialize_datepicker(datepicker_id, initial_date, input_id)
         minViewMode: 'days',
         maxViewMode: 'years',
         calendarWeeks: true,
+        weekStart: 1,
         startDate: datepicker_start_date,
         endDate: datepicker_end_date,
         format: datepicker_locale_format,
