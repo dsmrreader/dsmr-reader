@@ -1,96 +1,106 @@
 {% extends "dsmr_frontend/base.html" %}
-{% load humanize %} 
-{% load static %} 
+{% load humanize %}
+{% load static %}
 {% load i18n %}
 
 {% block title %}{% trans "Compare" %}{% endblock %}
 {% block header %}{% trans "Compare" %} &nbsp; <i class="fas fa-balance-scale"></i>{% endblock %}
 
 {% block content %}
-<!-- Main content -->
-<section class="content">
-{% if not capabilities.any %}
-    <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
-    </div>
-{% endif %}
+    <!-- Main content -->
+    <section class="content">
+        {% if not capabilities.any %}
+            <div class="alert alert-warning" role="alert">
+                <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found
+                yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i
+                    class="fas fa-smile-wink"></i>
+            </div>
+        {% endif %}
 
-{% if capabilities.any and start_date and end_date %}
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="panel datepicker-panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Level of detail{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <div class="row center-block">
-                            {% trans "Days" %}
+        {% if capabilities.any and start_date and end_date %}
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="panel datepicker-panel">
+                        <header class="panel-heading">
+                            {% blocktrans %}Level of detail{% endblocktrans %}
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="row center-block">
+                                    {% trans "Days" %}
+                                </div>
+                                <div class="row center-block">
+                                    <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days"><i
+                                            class="fas fa-calendar-check"></i></span>
+                                </div>
+                                <div class="row center-block">
+                                    {% trans "Months" %}
+                                </div>
+                                <div class="row center-block">
+                                    <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i
+                                            class="fas fa-calendar-check"></i></span>
+                                </div>
+                                <div class="row center-block">
+                                    {% trans "Years" %}
+                                </div>
+                                <div class="row center-block">
+                                    <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years"><i
+                                            class="fas fa-calendar-check"></i></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row center-block">
-                            <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="panel datepicker-panel">
+                        <header class="panel-heading">
+                            {% blocktrans %}Base selection{% endblocktrans %}
+                        </header>
+                        <div class="panel-body">
+                            <div id="datepicker1"></div>
                         </div>
-                        <div class="row center-block">
-                            {% trans "Months" %}
-                        </div>
-                        <div class="row center-block">
-                            <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
-                        </div>
-                        <div class="row center-block">
-                            {% trans "Years" %}
-                        </div>
-                        <div class="row center-block">
-                            <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="panel datepicker-panel">
+                        <header class="panel-heading">
+                            {% blocktrans %}Compare with selection{% endblocktrans %}
+                        </header>
+                        <div class="panel-body">
+                            <div id="datepicker2"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-sm-5">
-            <div class="panel datepicker-panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Base selection{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <div id="datepicker1"></div>
-                </div>
+
+            <div class="row">
+                <div id="summary-loader" class="xhr-hidden text-center"><i
+                        class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <div class="col-sm-12" id="summary-holder"></div>
             </div>
-        </div>
-        
-        <div class="col-sm-5">
-            <div class="panel datepicker-panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Compare with selection{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <div id="datepicker2"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row">
-        <div id="summary-loader" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
-        <div class="col-sm-12" id="summary-holder"></div>
-    </div>   
-{% endif %}
-</section>
+        {% endif %}
+    </section>
 {% endblock %}
 
 {% block stylesheets %}
-{{ block.super }}
-        <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet" type="text/css" />
+    {{ block.super }}
+    <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}"
+          rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block javascript %}
     {{ block.super }}
     {% get_current_language as LANGUAGE_CODE %}
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.24.0.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
 
     <script type="text/javascript">
         /* Settings. */
@@ -102,6 +112,7 @@
         /* XHR. */
         var compare_xhr_summary_url = "{% url 'frontend:compare-xhr-summary' %}";
     </script>
-    
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/compare/compare.js' %}?r=v{{ dsmr_version }}"></script>
+
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/js/dsmr-reader/compare/compare.js' %}?r=v{{ dsmr_version }}"></script>
 {% endblock %}

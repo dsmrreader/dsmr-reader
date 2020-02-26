@@ -1,56 +1,62 @@
 {% extends "dsmr_frontend/base.html" %}
 {% load static %}
 {% load humanize %}
-{% load i18n %} 
+{% load i18n %}
 {% load l10n %}
 
 {% block title %}{% trans "Notifications" %}{% endblock %}
 {% block header %}{% trans "Notifications" %} &nbsp; <i class="far fa-bell"></i>{% endblock %}
 
 {% block content %}
-<!-- Main content -->
-<section class="content">
+    <!-- Main content -->
+    <section class="content">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Unread Notifications" %}
-                    &nbsp;
-                    {% if notifications %}
-                        <div class="pull-right">
-                            <button class="btn btn-sm btn-success mark-all-notifications-read" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Mark all notifications as read' %}">
-                                <i class="fas fa-check-double"></i> {% trans 'Mark all as read' %}
-                            </button>
-                        </div>
-                    {% endif %}
-                </header>
-                <div class="panel-body">
-                    {% if notifications %}
-                        {% for current_notification in notifications %}
-                        <div class="alert alert-info" role="alert">
-                            <button class="btn btn-sm btn-success mark-notification-read" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Mark as read' %}">
-                                <i class="fas fa-check"></i>
-                            </button>
-                            &nbsp;
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <header class="panel-heading">
+                        {% trans "Unread Notifications" %}
+                        &nbsp;
+                        {% if notifications %}
+                            <div class="pull-right">
+                                <button class="btn btn-sm btn-success mark-all-notifications-read"
+                                        data-notification-id="{{ current_notification.pk }}"
+                                        title="{% trans 'Mark all notifications as read' %}">
+                                    <i class="fas fa-check-double"></i> {% trans 'Mark all as read' %}
+                                </button>
+                            </div>
+                        {% endif %}
+                    </header>
+                    <div class="panel-body">
+                        {% if notifications %}
+                            {% for current_notification in notifications %}
+                                <div class="alert alert-info" role="alert">
+                                    <button class="btn btn-sm btn-success mark-notification-read"
+                                            data-notification-id="{{ current_notification.pk }}"
+                                            title="{% trans 'Mark as read' %}">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    &nbsp;
 
-                            {% if current_notification.redirect_to %}
-                            <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}" title="{% trans "View page" %}"><i class="fas fa-external-link-alt"></i></a>
-                            {% endif %}
+                                    {% if current_notification.redirect_to %}
+                                        <a class="btn btn-sm btn-primary"
+                                           href="{% url current_notification.redirect_to %}"
+                                           title="{% trans "View page" %}"><i class="fas fa-external-link-alt"></i></a>
+                                    {% endif %}
 
-                            {{ current_notification.message }}
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        {% trans 'There are no unread notifications.' %}
-                    {% endif %}
+                                    {{ current_notification.message }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% trans 'There are no unread notifications.' %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-</section>
+    </section>
 {% endblock %}
 
 
@@ -58,42 +64,40 @@
     {{ block.super }}
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $(".mark-notification-read").click(function(){
-            	var notification_id = $(this).attr("data-notification-id");
-            	$(this).html('<i class="fas fa-spinner fa-pulse fa-fw xhr-loader"></i>')
-            	mark_read(this, notification_id);
-            	return false
+        $(document).ready(function () {
+            $(".mark-notification-read").click(function () {
+                var notification_id = $(this).attr("data-notification-id");
+                $(this).html('<i class="fas fa-spinner fa-pulse fa-fw xhr-loader"></i>')
+                mark_read(this, notification_id);
+                return false
             });
 
-            $(".mark-all-notifications-read").click(function(){
-            	$(this).html('<i class="fas fa-spinner fa-pulse fa-fw xhr-loader"></i>')
-            	mark_all_read();
-            	return false
+            $(".mark-all-notifications-read").click(function () {
+                $(this).html('<i class="fas fa-spinner fa-pulse fa-fw xhr-loader"></i>')
+                mark_all_read();
+                return false
             });
         });
 
-        function mark_read(button_handle, notification_id)
-        {
+        function mark_read(button_handle, notification_id) {
             $.ajax({
                 dataType: "json",
                 url: "{% url 'frontend:notification-xhr-mark-read' %}",
                 type: "POST",
                 data: {"notification_id": notification_id}
-            }).done(function(response) {
-            	$(button_handle).parent().remove();
+            }).done(function (response) {
+                $(button_handle).parent().remove();
             });
         }
 
-        function mark_all_read()
-        {
+        function mark_all_read() {
             $.ajax({
                 dataType: "json",
                 url: "{% url 'frontend:notification-xhr-mark-all-read' %}",
                 type: "POST"
-            }).done(function(response) {
+            }).done(function (response) {
                 $('.mark-all-notifications-read').remove();
-            	$('.mark-notification-read').parent().remove();
+                $('.mark-notification-read').parent().remove();
             });
         }
 

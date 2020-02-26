@@ -1,122 +1,145 @@
 {% extends "dsmr_frontend/base.html" %}
-{% load humanize %} 
-{% load static %} 
+{% load humanize %}
+{% load static %}
 {% load i18n %}
 
 {% block title %}{% trans "Export data" %}{% endblock %}
 {% block header %}{% trans "Export data" %} &nbsp; <i class="fas fa-file-download"></i>{% endblock %}
 
 {% block content %}
-<!-- Main content -->
-<section class="content">
-{% if not capabilities.any %}
+    <!-- Main content -->
+    <section class="content">
+        {% if not capabilities.any %}
 
-    <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
-    </div>
+            <div class="alert alert-warning" role="alert">
+                <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found
+                yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i
+                    class="fas fa-smile-wink"></i>
+            </div>
 
-{% else %}
+        {% else %}
 
-    <form action="{% url 'frontend:export-as-csv' %}" method="post" id="download_form">
-    {% csrf_token %}
-	    <div class="row">
-	        <div class="col-sm-12">
-	            <div class="panel">
-	                <header class="panel-heading">
-	                    <i class="fas fa-tasks"></i> &nbsp; {% trans "Select data type" %} <br />
-	                    <small>{% blocktrans %}Select the type of data you want to export.{% endblocktrans %}</small>
-	                </header>
-	                <div class="panel-body">
-	                    <table class="table table-hover">
-	                        <tr>
-	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="day" id="data_day_totals" checked="checked"> &nbsp; <label for="data_day_totals">{% trans "Day totals" %}</label></td>
-	                            <td class="col-sm-9">{% blocktrans %}Summary of each day. Contains electricity, gas and costs (if applicable).{% endblocktrans %}</td>
-	                        </tr>
-	                        <tr>
-	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="hour" id="data_hour_totals"> &nbsp; <label for="data_hour_totals">{% trans "Hour totals" %}</label></td>
-	                            <td class="col-sm-9">{% blocktrans %}Summary of each hour read. Contains electricity and gas (if applicable).{% endblocktrans %}</td>
-	                        </tr>
-	                        <tr>
-	                           <td colspan="2">&nbsp;</td>
-	                        </tr>
-                            <tr>
-                                <td class="col-sm-3"><input class="" type="radio" name="data_type" value="temperature" id="data_temperature"> &nbsp; <label for="data_temperature">{% trans "Temperatures" %}</label></td>
-                                <td class="col-sm-9">{% blocktrans %}Summary of all temperatures read (if enabled).{% endblocktrans %}</td>
-                            </tr>
-	                    </table>
-	                </div>
-	            </div>
-	        </div>
-	    </div><!-- /.row -->
-	
-	    <div class="row">
-	        <div class="col-sm-6">
-	            <div class="panel">
-	                <header class="panel-heading">
-	                    <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range start" %} <br />
-	                    <small>{% blocktrans %}Select starting day for export.{% endblocktrans %}</small>
-	                </header>
-	                <div class="panel-body">
-	                    <div id="start_datepicker"></div>
-	                    <input type="hidden" name="start_date" id="start_date" />
-	                </div>
-	            </div>
-	        </div>
-	
-	        <div class="col-sm-6">
-	            <div class="panel">
-	                <header class="panel-heading">
-	                    <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range end" %} <br />
-	                    <small>{% blocktrans %}Select ending day for export.{% endblocktrans %}</small>
-	                </header>
-	                <div class="panel-body">
-	                    <div id="end_datepicker"></div>
-                        <input type="hidden" name="end_date" id="end_date" />
-	                </div>
-	            </div>
-	        </div>
-	    </div><!-- /.row -->
-	
-	    <div class="row">
-	        <div class="col-sm-12">
-	            <div class="panel">
-	                <header class="panel-heading">
-	                    <i class="fas fa-file"></i> &nbsp; {% trans "Select export format" %} <br />
-	                    <small>{% blocktrans %}Choose a format the data will be exported in.{% endblocktrans %}</small>
-	                </header>
-	                <div class="panel-body">
-	                    <table class="table table-hover">
-	                        <tr>
-	                            <td class="col-sm-3"><input class="" type="radio" name="export_format" value="csv" id="export_format_csv" checked="checked"> &nbsp; <label for="export_format_csv"><i class="fas fa-file-excel"></i> &nbsp; {% trans "Excel (.CSV)" %}</label></td>
-	                            <td class="col-sm-9">{% blocktrans %}Exports the data in Comma Separated Format, which can be read by Excel.{% endblocktrans %}</td>
-	                        </tr>
-	                    </table>
-	                </div>
-	            </div>
-	        </div>
-	    </div><!-- /.row -->
-	    
-	    <a href="#" id="download_button" class="btn btn-lg btn-primary"><i class="fas fa-download"></i> &nbsp; {% blocktrans %}Download export{% endblocktrans %}</a>
-    </form>
-{% endif %}
+            <form action="{% url 'frontend:export-as-csv' %}" method="post" id="download_form">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel">
+                            <header class="panel-heading">
+                                <i class="fas fa-tasks"></i> &nbsp; {% trans "Select data type" %} <br/>
+                                <small>{% blocktrans %}Select the type of data you want to
+                                    export.{% endblocktrans %}</small>
+                            </header>
+                            <div class="panel-body">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td class="col-sm-3"><input class="" type="radio" name="data_type" value="day"
+                                                                    id="data_day_totals" checked="checked"> &nbsp;
+                                            <label for="data_day_totals">{% trans "Day totals" %}</label></td>
+                                        <td class="col-sm-9">{% blocktrans %}Summary of each day. Contains electricity,
+                                            gas and costs (if applicable).{% endblocktrans %}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-3"><input class="" type="radio" name="data_type" value="hour"
+                                                                    id="data_hour_totals"> &nbsp; <label
+                                                for="data_hour_totals">{% trans "Hour totals" %}</label></td>
+                                        <td class="col-sm-9">{% blocktrans %}Summary of each hour read. Contains
+                                            electricity and gas (if applicable).{% endblocktrans %}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-3"><input class="" type="radio" name="data_type"
+                                                                    value="temperature" id="data_temperature"> &nbsp;
+                                            <label for="data_temperature">{% trans "Temperatures" %}</label></td>
+                                        <td class="col-sm-9">{% blocktrans %}Summary of all temperatures read (if
+                                            enabled).{% endblocktrans %}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
 
-</section>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel">
+                            <header class="panel-heading">
+                                <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range start" %} <br/>
+                                <small>{% blocktrans %}Select starting day for export.{% endblocktrans %}</small>
+                            </header>
+                            <div class="panel-body">
+                                <div id="start_datepicker"></div>
+                                <input type="hidden" name="start_date" id="start_date"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="panel">
+                            <header class="panel-heading">
+                                <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range end" %} <br/>
+                                <small>{% blocktrans %}Select ending day for export.{% endblocktrans %}</small>
+                            </header>
+                            <div class="panel-body">
+                                <div id="end_datepicker"></div>
+                                <input type="hidden" name="end_date" id="end_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel">
+                            <header class="panel-heading">
+                                <i class="fas fa-file"></i> &nbsp; {% trans "Select export format" %} <br/>
+                                <small>{% blocktrans %}Choose a format the data will be exported
+                                    in.{% endblocktrans %}</small>
+                            </header>
+                            <div class="panel-body">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td class="col-sm-3"><input class="" type="radio" name="export_format"
+                                                                    value="csv" id="export_format_csv"
+                                                                    checked="checked"> &nbsp; <label
+                                                for="export_format_csv"><i class="fas fa-file-excel"></i>
+                                            &nbsp; {% trans "Excel (.CSV)" %}</label></td>
+                                        <td class="col-sm-9">{% blocktrans %}Exports the data in Comma Separated Format,
+                                            which can be read by Excel.{% endblocktrans %}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+                <a href="#" id="download_button" class="btn btn-lg btn-primary"><i class="fas fa-download"></i> &nbsp;
+                    {% blocktrans %}Download export{% endblocktrans %}</a>
+            </form>
+        {% endif %}
+
+    </section>
 {% endblock %}
 
 {% block stylesheets %}
-{{ block.super }}
-        <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet" type="text/css" />
+    {{ block.super }}
+    <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}"
+          rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block javascript %}
-        {{ block.super }}
-        {% get_current_language as LANGUAGE_CODE %}
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.24.0.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
+    {{ block.super }}
+    {% get_current_language as LANGUAGE_CODE %}
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.24.0.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
         /* Settings. */
         var datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
         var datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
@@ -125,7 +148,7 @@
 
         /* XHR. */
         var compare_xhr_summary_url = "{% url 'frontend:compare-xhr-summary' %}";
-        </script>
+    </script>
 
-        <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/export/export.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/export/export.js' %}"></script>
 {% endblock %}

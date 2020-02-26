@@ -3,20 +3,22 @@
 <div class="col-sm-6">
     <div class="panel header-panel">
         <header class="panel-heading">
-            <span id="tariff_name"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> <small id="latest_timestamp"></small>
+            <span id="tariff_name"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> <small
+                id="latest_timestamp"></small>
         </header>
         <div class="panel-body">
-        {% if capabilities.electricity %}
-            <span class="badge bg-red"><i class="fas fa-bolt"></i>
+            {% if capabilities.electricity %}
+                <span class="badge bg-red"><i class="fas fa-bolt"></i>
 &nbsp;           <span id="latest_electricity"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> {% trans "W" %}</span>
-        {% endif %}
-        {% if capabilities.electricity_returned %}
-            <span class="badge bg-green"><i class="fas fa-bolt"></i>
-&nbsp;           <span id="latest_electricity_returned"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> {% trans "W" %}</span>
-        {% endif %}
-        {% if capabilities.electricity %}
-            <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
-        {% endif %}
+            {% endif %}
+            {% if capabilities.electricity_returned %}
+                <span class="badge bg-green"><i class="fas fa-bolt"></i>
+&nbsp;           <span id="latest_electricity_returned"><i
+                            class="fas fa-circle-notch fa-spin fa-fw"></i></span> {% trans "W" %}</span>
+            {% endif %}
+            {% if capabilities.electricity %}
+                <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
+            {% endif %}
         </div>
     </div>
 </div>
