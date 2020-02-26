@@ -9,7 +9,6 @@ from django.conf import settings
 import serial
 import pytz
 
-from dsmr_backend.mixins import StopInfiniteRun
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSettings
@@ -45,7 +44,7 @@ def get_dsmr_connection_parameters():
         stopbits=serial.STOPBITS_ONE,
         xonxoff=1,
         rtscts=0,
-        timeout=20,
+        timeout=None,  # Unused, but for backwards compatibility.
     )
 
     if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_2_3:
@@ -70,21 +69,15 @@ def read_and_process_telegram():
     del connection_parameters['log_telegrams']
     del connection_parameters['specifications']
 
-    telegram_generator = read_serial_port(**connection_parameters)
+    # This is a generator, but we don't care. We'll just stop whenever we got what we want here.
+    telegram = next(
+        read_serial_port(**connection_parameters)
+    )
 
-    while True:
-        try:
-            telegram = next(telegram_generator)
-        except Exception as error:
-            commands_logger.exception(error)
-            raise StopInfiniteRun()  # Do not ignore this situation, just tap out!
-
-        try:
-            dsmr_datalogger.services.telegram_to_reading(data=telegram)
-        except InvalidTelegramError:
-            pass
-
-        yield  # Give back control to mixin, but preserve the connection.
+    try:
+        dsmr_datalogger.services.telegram_to_reading(data=telegram)
+    except InvalidTelegramError:
+        pass
 
 
 def telegram_to_reading(data):

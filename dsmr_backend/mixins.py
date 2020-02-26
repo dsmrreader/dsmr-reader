@@ -29,7 +29,6 @@ class InfiniteManagementCommandMixin:
     _keep_alive = None
     _pid_file = None
     _next_reconnect = None
-    _generator_function = None
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -46,13 +45,8 @@ class InfiniteManagementCommandMixin:
         self._write_pid_file()
         self.data = self.initialize()
 
-        generator_function = self.get_generator_function()
-
-        if generator_function is not None:
-            self._generator_function = generator_function()
-
-        # This should only be used when executing manually and never in a Supervisor command.
         if options.get('run_once'):
+            # Only tests should use this. Or when developing a command.
             self.run_once(**options)
         else:
             self.run_loop(**options)
@@ -71,11 +65,7 @@ class InfiniteManagementCommandMixin:
         logger.debug('%s: Starting infinite command loop...', self.name)  # Just to make sure it gets printed.
         self._update_next_reconnect()
 
-        while True:
-            if not self._keep_alive:
-                break
-
-            # This will call the generator too, if any,
+        while self._keep_alive:
             self.run_once(**options)
 
             # Do not hammer.
@@ -97,10 +87,7 @@ class InfiniteManagementCommandMixin:
     def run_once(self, **options):
         """ Runs the management command exactly once. """
         try:
-            if self._generator_function is not None:
-                next(self._generator_function)  # Single tick
-            else:
-                self.run(data=self.data, **options)
+            self.run(data=self.data, **options)
         except CommandError:
             # Pass tru.
             raise
@@ -117,10 +104,6 @@ class InfiniteManagementCommandMixin:
     def initialize(self):
         """ Called once. Override and handle any initialization required. """
         return
-
-    def get_generator_function(self):
-        """ Provides the generator for the run_loop(). Override to use an own generator. """
-        return None
 
     def shutdown(self):
         """ Called once. Override and handle any cleanup required. """

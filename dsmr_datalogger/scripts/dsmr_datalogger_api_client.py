@@ -27,7 +27,6 @@ SERIAL_SETTINGS = dict(
     stopbits=serial.STOPBITS_ONE,
     xonxoff=1,
     rtscts=0,
-    timeout=20,
 )
 API_SERVERS = (
     # You can add multiple hosts here... just uncomment the line below.
@@ -36,7 +35,7 @@ API_SERVERS = (
 )
 
 
-def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts, timeout):
+def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts, **kwargs):  # noqa: C901
     """
     Opens the serial port, keeps reading until we have a full telegram and yields the result to preserve the connection.
     """
@@ -49,7 +48,7 @@ def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts
         stopbits=stopbits,
         xonxoff=xonxoff,
         rtscts=rtscts,
-        timeout=timeout
+        timeout=20,  # Max time to wait for data.
     )
 
     telegram_start_seen = False
@@ -57,7 +56,7 @@ def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts
 
     while True:
         try:
-            # Wwe use an infinite datalogger loop and signals to break out of it. Serial
+            # We use an infinite datalogger loop and signals to break out of it. Serial
             # operations however do not work well with interrupts, so we'll have to check for E-INTR error.
             data = serial_handle.readline()
         except serial.SerialException as error:

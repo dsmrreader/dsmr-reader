@@ -32,7 +32,6 @@ class TestScript(TestCase):
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
             rtscts=0,
-            timeout=20,
         ))
 
         # Check remote api call when we have a telegram
