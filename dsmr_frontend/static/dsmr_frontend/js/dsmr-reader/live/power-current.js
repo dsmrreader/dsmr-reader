@@ -1,12 +1,12 @@
-$(document).ready(function(){
-	var echarts_power_current_graph = echarts.init(document.getElementById('echarts-power-current-graph'));
+$(document).ready(function () {
+    var echarts_power_current_graph = echarts.init(document.getElementById('echarts-power-current-graph'));
     var echarts_power_current_initial_options = {
         color: [
-        	power_current_l1_color,
-        	power_current_l2_color,
-        	power_current_l3_color
+            power_current_l1_color,
+            power_current_l2_color,
+            power_current_l3_color
         ],
-    	tooltip : {
+        tooltip: {
             trigger: 'axis',
             axisPointer: {
                 type: 'shadow',
@@ -15,7 +15,7 @@ $(document).ready(function(){
                 }
             }
         },
-        calculable : true,
+        calculable: true,
         grid: {
             top: '12%',
             left: '1%',
@@ -24,14 +24,14 @@ $(document).ready(function(){
         },
         xAxis: [
             {
-                type : 'category',
+                type: 'category',
                 boundaryGap: false,
-                data : null
+                data: null
             }
         ],
         yAxis: [
             {
-                type : 'value',
+                type: 'value',
                 min: 'dataMin',
                 max: 'dataMax'
             }
@@ -54,21 +54,21 @@ $(document).ready(function(){
     var echarts_power_current_update_options = {
         xAxis: [
             {
-                type : 'category',
+                type: 'category',
                 boundaryGap: true,
-                data : null
+                data: null
             }
         ],
-        series : null
+        series: null
     };
-	
-	echarts_power_current_graph.showLoading('default', echarts_loading_options);
-	
-	/* Init graph. */
-	$.get(echarts_power_current_graph_url, function (xhr_data) {
-	    echarts_power_current_graph.hideLoading();
 
-	    /* Dynamic phases. */
+    echarts_power_current_graph.showLoading('default', echarts_loading_options);
+
+    /* Init graph. */
+    $.get(echarts_power_current_graph_url, function (xhr_data) {
+        echarts_power_current_graph.hideLoading();
+
+        /* Dynamic phases. */
         if (is_multi_phase) {
             echarts_power_current_update_options.series = [
                 {
@@ -100,53 +100,51 @@ $(document).ready(function(){
             ];
         }
 
-	    /* Adjust default zooming to the number of default items we want to display. */
-	    var zoom_percent = 100 - (dashboard_graph_width / xhr_data.read_at.length * 100);
-	    echarts_power_current_initial_options.dataZoom[0].start = zoom_percent;
-	    echarts_power_current_graph.setOption(echarts_power_current_initial_options);
+        /* Adjust default zooming to the number of default items we want to display. */
+        var zoom_percent = 100 - (dashboard_graph_width / xhr_data.read_at.length * 100);
+        echarts_power_current_initial_options.dataZoom[0].start = zoom_percent;
+        echarts_power_current_graph.setOption(echarts_power_current_initial_options);
 
-	    /* Different set of options, to prevent the dataZoom being reset on each update. */
-	    echarts_power_current_update_options.xAxis[0].data = xhr_data.read_at;
-	    echarts_power_current_update_options.series[0].data = xhr_data.phase_power_current.l1;
+        /* Different set of options, to prevent the dataZoom being reset on each update. */
+        echarts_power_current_update_options.xAxis[0].data = xhr_data.read_at;
+        echarts_power_current_update_options.series[0].data = xhr_data.phase_power_current.l1;
 
-	    if (is_multi_phase) {
+        if (is_multi_phase) {
             echarts_power_current_update_options.series[1].data = xhr_data.phase_power_current.l2;
-	        echarts_power_current_update_options.series[2].data = xhr_data.phase_power_current.l3;
+            echarts_power_current_update_options.series[2].data = xhr_data.phase_power_current.l3;
         }
 
-	    echarts_power_current_graph.setOption(echarts_power_current_update_options);
-	    
-	    var latest_delta_id = xhr_data.latest_delta_id;
+        echarts_power_current_graph.setOption(echarts_power_current_update_options);
 
-		/* Update graph data from now on. */
-	    setInterval(function () {
-			$.get(echarts_power_current_graph_url + "&latest_delta_id=" + latest_delta_id, function (xhr_data) {
-				/* Ignore empty sets. */
-				if (xhr_data.read_at.length == 0)
-				{
-					return;
-				}
+        var latest_delta_id = xhr_data.latest_delta_id;
 
-				/* Delta update. */
-				for (var i = 0 ; i < xhr_data.read_at.length ; i++)
-				{
-					echarts_power_current_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
-					echarts_power_current_update_options.series[0].data.push(xhr_data.phase_power_current.l1[i]);
+        /* Update graph data from now on. */
+        setInterval(function () {
+            $.get(echarts_power_current_graph_url + "&latest_delta_id=" + latest_delta_id, function (xhr_data) {
+                /* Ignore empty sets. */
+                if (xhr_data.read_at.length == 0) {
+                    return;
+                }
+
+                /* Delta update. */
+                for (var i = 0; i < xhr_data.read_at.length; i++) {
+                    echarts_power_current_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
+                    echarts_power_current_update_options.series[0].data.push(xhr_data.phase_power_current.l1[i]);
 
                     if (is_multi_phase) {
                         echarts_power_current_update_options.series[1].data.push(xhr_data.phase_power_current.l2[i]);
                         echarts_power_current_update_options.series[2].data.push(xhr_data.phase_power_current.l3[i]);
                     }
-				}
-				
-				latest_delta_id = xhr_data.latest_delta_id;
-	    		echarts_power_current_graph.setOption(echarts_power_current_update_options);
-	    	});
-	    }, echarts_power_current_graph_interval * 1000);
-	});
-	
-	/* Responsiveness. */
-	$(window).resize(function() {
-		echarts_power_current_graph.resize();
-	});
+                }
+
+                latest_delta_id = xhr_data.latest_delta_id;
+                echarts_power_current_graph.setOption(echarts_power_current_update_options);
+            });
+        }, echarts_power_current_graph_interval * 1000);
+    });
+
+    /* Responsiveness. */
+    $(window).resize(function () {
+        echarts_power_current_graph.resize();
+    });
 });

@@ -2,14 +2,14 @@ var GMAIL_HOST = "aspmx.l.google.com";
 var mode = null;
 
 
-$(document).ready(function(){
-    $('[data-action="test"]').click(function(){
+$(document).ready(function () {
+    $('[data-action="test"]').click(function () {
         send_test_email();
     });
-    $('[data-action="save"]').click(function(){
+    $('[data-action="save"]').click(function () {
         save();
     });
-    
+
     sync()
 
     if ($("#host").val() == GMAIL_HOST) {
@@ -19,7 +19,7 @@ $(document).ready(function(){
 });
 
 function sync() {
-    client.action(schema, ['settings', 'email', 'read']).then(function(result) {
+    client.action(schema, ['settings', 'email', 'read']).then(function (result) {
         $("#email_to").val(result.email_to)
         $("#host").val(result.host)
         $("#port").val(result.port)
@@ -44,37 +44,33 @@ function send_test_email() {
     client.action(schema, ['settings', 'email', 'test', 'create']
     ).then(function (result) {
         $("#messages").html(result.message)
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.error(error)
         $("#messages").html(error)
     })
 }
 
 function render_mode() {
-    if (! mode) {
+    if (!mode) {
 
-    }
-    else if (mode == "gmail") {
+    } else if (mode == "gmail") {
         $('[data-gui="email-address"]').removeClass("hidden")
         $('[data-gui="controls"]').removeClass("hidden")
-    }
-    else {
+    } else {
 
     }
 }
 
-function save()
-{
+function save() {
     if (mode == "gmail") {
         apply_gmail($("#email_to").val())
-    }
-    else {
+    } else {
 
     }
 }
 
 function apply_gmail(email) {
-    if (! email.endsWith("@gmail.com")) {
+    if (!email.endsWith("@gmail.com")) {
         return
     }
 
