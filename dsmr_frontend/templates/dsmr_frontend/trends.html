@@ -1,114 +1,105 @@
 {% extends "dsmr_frontend/base.html" %}
 {% load static %}
 {% load humanize %}
-{% load i18n %}
+{% load i18n %} 
 
 {% block title %}{% trans "Trends" %}{% endblock %}
 {% block header %}{% trans "Trends" %} &nbsp; <i class="fas fa-chart-bar"></i>{% endblock %}
 
 {% block content %}
-    <!-- Main content -->
-    <section class="content">
-        {% if not capabilities.any %}
-            <div class="alert alert-warning" role="alert">
-                <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found
-                yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i
-                    class="fas fa-smile-wink"></i>
-            </div>
-        {% elif not has_statistics %}
-            <div class="alert alert-info" role="alert">
-                {% blocktrans %}No day/hour statistics are generated yet. Please wait for the next
-                    day.{% endblocktrans %}
-            </div>
-        {% else %}
-            <div class="alert alert-info" role="alert">
-                {% blocktrans %}Untracked consumption in the past (and today), is not taken into
-                    account.{% endblocktrans %}
-            </div>
-        {% endif %}
+<!-- Main content -->
+<section class="content">
+{% if not capabilities.any %}
+    <div class="alert alert-warning" role="alert">
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
+    </div>
+{% elif not has_statistics %}
+    <div class="alert alert-info" role="alert">
+    {% blocktrans %}No day/hour statistics are generated yet. Please wait for the next day.{% endblocktrans %}
+    </div>  
+{% else %}
+    <div class="alert alert-info" role="alert">
+    {% blocktrans %}Untracked consumption in the past (and today), is not taken into account.{% endblocktrans %}
+    </div>
+{% endif %}
 
-        {% if capabilities.electricity and has_statistics %}
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel">
-                        <header class="panel-heading">
-                            {% blocktrans %}Average electricity consumed each hour (in %) within the past 4
-                                weeks{% endblocktrans %}
-                        </header>
-                        <div class="panel-body" style="height: 350px;">
-                            <div id="echarts-avg-electricity-graph" style="width: 100%; height: 300px;"></div>
-                        </div>
-                    </div>
+    {% if capabilities.electricity and has_statistics %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Average electricity consumed each hour (in %) within the past 4 weeks{% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <div id="echarts-avg-electricity-graph" style="width: 100%; height: 300px;"></div>
                 </div>
             </div>
-        {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if capabilities.electricity_returned and has_statistics %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Average electricity returned each hour (in %) within the past 4 weeks{% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <div id="echarts-avg-electricity-returned-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if capabilities.gas and has_statistics %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Average gas consumed each hour (in %) within the past 4 weeks{% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <div id="echarts-avg-gas-graph" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-        {% if capabilities.electricity_returned and has_statistics %}
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel">
-                        <header class="panel-heading">
-                            {% blocktrans %}Average electricity returned each hour (in %) within the past 4
-                                weeks{% endblocktrans %}
-                        </header>
-                        <div class="panel-body" style="height: 350px;">
-                            <div id="echarts-avg-electricity-returned-graph" style="width: 100%; height: 300px;"></div>
-                        </div>
-                    </div>
+    {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs and has_statistics %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel" style="padding-bottom: 24px;">
+                <header class="panel-heading">
+                    {% blocktrans %}Electricity tariff ratio (past week){% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <div id="echarts-electricity-by-tariff-week-graph" style="width: 100%; height: 300px;"></div>
                 </div>
             </div>
-        {% endif %}
-
-        {% if capabilities.gas and has_statistics %}
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel">
-                        <header class="panel-heading">
-                            {% blocktrans %}Average gas consumed each hour (in %) within the past 4
-                                weeks{% endblocktrans %}
-                        </header>
-                        <div class="panel-body" style="height: 350px;">
-                            <div id="echarts-avg-gas-graph" style="width: 100%; height: 300px;"></div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel" style="padding-bottom: 24px;">
+                <header class="panel-heading">
+                    {% blocktrans %}Electricity tariff ratio (past month){% endblocktrans %}
+                </header>
+                <div class="panel-body" style="height: 350px;">
+                    <div id="echarts-electricity-by-tariff-month-graph" style="width: 100%; height: 300px;"></div>
                 </div>
             </div>
-        {% endif %}
-
-        {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs and has_statistics %}
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel" style="padding-bottom: 24px;">
-                        <header class="panel-heading">
-                            {% blocktrans %}Electricity tariff ratio (past week){% endblocktrans %}
-                        </header>
-                        <div class="panel-body" style="height: 350px;">
-                            <div id="echarts-electricity-by-tariff-week-graph"
-                                 style="width: 100%; height: 300px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel" style="padding-bottom: 24px;">
-                        <header class="panel-heading">
-                            {% blocktrans %}Electricity tariff ratio (past month){% endblocktrans %}
-                        </header>
-                        <div class="panel-body" style="height: 350px;">
-                            <div id="echarts-electricity-by-tariff-month-graph"
-                                 style="width: 100%; height: 300px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-    </section>
+        </div>
+    </div>
+    {% endif %}
+</section>
 {% endblock %}
 
 
 {% block javascript %}
-
+    
     {{ block.super }}
 
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.6.0.min.js' %}"></script>
@@ -120,11 +111,9 @@
         var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
         var electricity_delivered_alternate_color = "{{ frontend_settings.electricity_delivered_alternate_color }}";
     </script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/trends/average.js' %}?r=v{{ dsmr_version }}"></script>
-
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/trends/average.js' %}?r=v{{ dsmr_version }}"></script>
+    
     {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/trends/tariff.js' %}?r=v{{ dsmr_version }}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/trends/tariff.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 {% endblock %}

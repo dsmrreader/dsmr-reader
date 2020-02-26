@@ -5,196 +5,176 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %} | DSMR Reader</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %} | DSMR Reader</title>
 
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    {% block stylesheets %}
-        <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet"
-              type="text/css"/>
-        <link href="{% static 'dsmr_frontend/fontawesome-free-5.12.0-web/css/all.min.css' %}?r=v{{ dsmr_version }}"
-              rel="stylesheet" type="text/css"/>
-        <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet"
-              type="text/css"/>
-        <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}" rel="stylesheet"
-              type="text/css">
-        <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css"/>
-        <link href="{% static 'dsmr_frontend/css/dsmr-reader/global.css' %}?r=v{{ dsmr_version }}" rel="stylesheet"
-              type="text/css"/>
-    {% endblock %}
+        {% block stylesheets %}
+        <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/fontawesome-free-5.12.0-web/css/all.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/css/ionicons.min.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css">
+        <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dsmr_frontend/css/dsmr-reader/global.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
 
-    <link rel="shortcut icon" sizes="192x192"
-          href="{% static 'dsmr_frontend/img/favicons/android-chrome-192x192.png' %}">
-    <link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'dsmr_frontend/img/favicons/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-32x32.png' %}" sizes="32x32">
-    <link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-16x16.png' %}" sizes="16x16">
-    <link rel="manifest" href="{% static 'dsmr_frontend/img/favicons/manifest.json' %}">
-    <link rel="mask-icon" href="{% static 'dsmr_frontend/img/favicons/safari-pinned-tab.svg' %}">
-    <meta name="theme-color" content="#2B3A45">
+        <link rel="shortcut icon" sizes="192x192" href="{% static 'dsmr_frontend/img/favicons/android-chrome-192x192.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon.png' %}">
+		<link rel="apple-touch-icon" sizes="180x180" href="{% static 'dsmr_frontend/img/favicons/apple-touch-icon.png' %}">
+		<link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-32x32.png' %}" sizes="32x32">
+		<link rel="icon" type="image/png" href="{% static 'dsmr_frontend/img/favicons/favicon-16x16.png' %}" sizes="16x16">
+		<link rel="manifest" href="{% static 'dsmr_frontend/img/favicons/manifest.json' %}">
+		<link rel="mask-icon" href="{% static 'dsmr_frontend/img/favicons/safari-pinned-tab.svg' %}">
+		<meta name="theme-color" content="#2B3A45">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
           <script src="{% static 'dsmr_frontend/js/Director/html5shiv.js' %}"></script>
           <script src="{% static 'dsmr_frontend/js/Director/respond.min.js' %}"></script>
         <![endif]-->
-</head>
-<body class="skin-black">
-<header class="header">
-    <a href="{% url 'frontend:dashboard' %}" class="logo">DSMR Reader <small
-            class="logo-version">v{{ dsmr_version }}</small></a>
-    <nav class="navbar navbar-static-top" role="navigation">
-        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button"
-           title="{% trans 'Toggle navigation' %}">
-            <span class="sr-only">{% trans "Toggle navigation" %}</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
-        <div class="navbar-left">
-            <ul class="nav navbar-nav">
-                <li class="dropdown user user-menu">
-                    <a href="" onclick="return false;">
-                        <span>{% block header %}{% endblock %}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-<div class="wrapper row-offcanvas row-offcanvas-left">
-    <aside class="left-side sidebar-offcanvas" style="z-index: 9999;">
-        <section class="sidebar">
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="{% url 'frontend:dashboard' %}">
-                        <i class="fas fa-tachometer-alt"></i> &nbsp; <span>{% trans "Dashboard" %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:live-graphs' %}">
-                        <i class="fas fa-chart-line"></i> &nbsp; <span>{% trans "Live graphs" %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:archive' %}">
-                        <i class="fas fa-clock"></i> &nbsp; <span>{% trans "Archive" %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:compare' %}">
-                        <i class="fas fa-balance-scale"></i> &nbsp; <span>{% trans "Compare" %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:trends' %}">
-                        <i class="fas fa-chart-bar"></i> &nbsp; <span>{% trans "Trends" %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:statistics' %}">
-                        <i class="fas fa-list"></i> &nbsp; <span>{% trans "Statistics" %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:energy-contracts' %}">
-                        <i class="fas fa-newspaper"></i> &nbsp; <span>{% trans "Energy contracts" %}</span>
-                    </a>
-                </li>
-                <li>
-                    &nbsp;&nbsp;
-                </li>
-                <li>
-                    <a href="{% url 'frontend:status' %}">
-                        <i class="fas fa-heartbeat"></i> &nbsp; <span>{% trans "Status" %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:notifications' %}">
-                        <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i
-                            class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:export' %}">
-                        <i class="fas fa-xs fa-file-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i
-                            class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'admin:index' %}">
-                        <i class="fas fa-xs fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i
-                            class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
-                    </a>
-                </li>
-                <li>
-                    &nbsp;
-                </li>
-                <li>
-                    <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">
-                        <i class="fas fa-xs fa-history"></i> &nbsp; <small>{% trans "Changelog" %}</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
-                        <i class="fas fa-xs fa-question-circle"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:api-docs' %}" target="_blank">
-                        <i class="fas fa-xs fa-file-code"></i> &nbsp; <small>{% trans "API docs" %}</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                        <i class="fas fa-xs fa-comments"></i> &nbsp; <small>{% trans "Feedback" %}</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
-                        <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
-                    </a>
-                </li>
-            </ul>
-        </section>
+    </head>
+    <body class="skin-black">
+        <header class="header">
+            <a href="{% url 'frontend:dashboard' %}" class="logo">DSMR Reader <small class="logo-version">v{{ dsmr_version }}</small></a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button" title="{% trans 'Toggle navigation' %}">
+                    <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+				<div class="navbar-left">
+                    <ul class="nav navbar-nav">
+                    	<li class="dropdown user user-menu">
+                        	<a href="" onclick="return false;">
+                        		<span>{% block header %}{% endblock %}</span>
+                         	</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <aside class="left-side sidebar-offcanvas" style="z-index: 9999;">
+                <section class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="{% url 'frontend:dashboard' %}">
+                                <i class="fas fa-tachometer-alt"></i> &nbsp; <span>{% trans "Dashboard" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:live-graphs' %}">
+                                <i class="fas fa-chart-line"></i> &nbsp; <span>{% trans "Live graphs" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:archive' %}">
+                                <i class="fas fa-clock"></i> &nbsp; <span>{% trans "Archive" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:compare' %}">
+                                <i class="fas fa-balance-scale"></i> &nbsp; <span>{% trans "Compare" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:trends' %}">
+                                <i class="fas fa-chart-bar"></i> &nbsp; <span>{% trans "Trends" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:statistics' %}">
+                                <i class="fas fa-list"></i> &nbsp; <span>{% trans "Statistics" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:energy-contracts' %}">
+                                <i class="fas fa-newspaper"></i> &nbsp; <span>{% trans "Energy contracts" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            &nbsp;&nbsp;
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:status' %}">
+                                <i class="fas fa-heartbeat"></i> &nbsp; <span>{% trans "Status" %}</span>
+                            </a>
+                        </li>
+                        <li>
+				            <a href="{% url 'frontend:notifications' %}">
+				                <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+				            </a>
+			            </li>
+                        <li>
+                            <a href="{% url 'frontend:export' %}">
+                                <i class="fas fa-xs fa-file-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+                            </a>
+                        </li>
+                        <li>
+				            <a href="{% url 'admin:index' %}">
+				                <i class="fas fa-xs fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+				            </a>
+			            </li>
+                        <li>
+                            &nbsp;
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">
+                                <i class="fas fa-xs fa-history"></i> &nbsp; <small>{% trans "Changelog" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
+                                <i class="fas fa-xs fa-question-circle"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:api-docs' %}" target="_blank">
+                                <i class="fas fa-xs fa-file-code"></i> &nbsp; <small>{% trans "API docs" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
+                                <i class="fas fa-xs fa-comments"></i> &nbsp; <small>{% trans "Feedback" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
+                                <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
 
-        <div class="row copyright">
-            <small>
-                &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015
-                - {% now "Y" %}
-            </small>
-            <br/>
-            <small>{% trans "Thanks to" %} <a
-                    href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html"
-                    target="_blank">{% trans "all the contributers" %}</a></small>
-            <br/>
-            <br/>
-            <small><a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank"
-                      title="{% trans 'View repository on Github' %}"><img
-                    src="{% static 'dsmr_frontend/img/GitHub-Mark-32px.png' %}"/> {% trans 'View on Github' %}
-            </a></small>
-            <small></small>
+                <div class="row copyright">
+                    <small>
+	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015 - {% now "Y" %}
+                    </small>
+                    <br />
+                    <small>{% trans "Thanks to" %} <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">{% trans "all the contributers" %}</a></small>
+                    <br />
+                    <br />
+                    <small><a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}"><img src="{% static 'dsmr_frontend/img/GitHub-Mark-32px.png' %}" /> {% trans 'View on Github' %}</a></small>
+                    <small></small>
+                </div>
+            </aside>
+            <aside class="right-side">
+	            <div class="clearfix"></div>
+				{% block content %}{% endblock %}
+            </aside>
         </div>
-    </aside>
-    <aside class="right-side">
-        <div class="clearfix"></div>
-        {% block content %}{% endblock %}
-    </aside>
-</div>
-
-{% block javascript %}
-    <script src="{% static 'dsmr_frontend/js/jquery-3.4.1.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'dsmr_frontend/js/bootstrap.min.js' %}?r=v{{ dsmr_version }}"
-            type="text/javascript"></script>
-    <script src="{% static 'dsmr_frontend/js/Director/app.min.js' %}?r=v{{ dsmr_version }}"
-            type="text/javascript"></script>
-    <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}"
-            type="text/javascript"></script>
-{% endblock %}
-</body>
+        
+        {% block javascript %}
+        <script src="{% static 'dsmr_frontend/js/jquery-3.4.1.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'dsmr_frontend/js/bootstrap.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
+        <script src="{% static 'dsmr_frontend/js/Director/app.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
+        {% endblock %}
+    </body>
 </html>

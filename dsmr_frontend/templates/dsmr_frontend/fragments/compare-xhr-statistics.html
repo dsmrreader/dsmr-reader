@@ -1,5 +1,5 @@
 {% load humanize %}
-{% load i18n %}
+{% load i18n %} 
 {% load l10n %}
 
 <div class="panel">
@@ -12,130 +12,124 @@
                 <th class="col-sm-3">{% trans "Difference" %}</th>
             </tr>
 
-            {% if capabilities.electricity and frontend_settings.merge_electricity_tariffs %}
-                <tr>
-                    <td>{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span></td>
-                    <td>{{ base.electricity_merged|default:'-'|floatformat:2 }}</td>
-                    <td>{{ comparison.electricity_merged|default:'-'|floatformat:2 }}</td>
-                    <td>
-                        {% if diff.electricity_merged > 0 %}
-                            <span class="badge bg-red">+{{ diff.electricity_merged|floatformat:2 }} %</span>
-                        {% elif diff.electricity_merged < 0 %}
-                            <span class="badge bg-green">{{ diff.electricity_merged|floatformat:2 }} %</span>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endif %}
+{% if capabilities.electricity and frontend_settings.merge_electricity_tariffs %}
+            <tr>
+                <td>{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ base.electricity_merged|default:'-'|floatformat:2 }}</td>
+                <td>{{ comparison.electricity_merged|default:'-'|floatformat:2 }}</td>
+                <td>
+                    {% if diff.electricity_merged > 0 %}
+                        <span class="badge bg-red">+{{ diff.electricity_merged|floatformat:2 }} %</span>
+                    {% elif diff.electricity_merged < 0 %}
+                        <span class="badge bg-green">{{ diff.electricity_merged|floatformat:2 }} %</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+{% endif %}
 
-            {% if capabilities.electricity_returned and frontend_settings.merge_electricity_tariffs %}
-                <tr>
-                    <td>{% trans "Electricity returned (single tariff)" %} <span
-                            class="unit">{% trans "kWh" noop %}</span></td>
-                    <td>{{ base.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
-                    <td>{{ comparison.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
-                    <td>
-                        {% if diff.electricity_returned_merged > 0 %}
-                            <span class="badge bg-green">+{{ diff.electricity_returned_merged|floatformat:2 }} %</span>
-                        {% elif diff.electricity_returned_merged < 0 %}
-                            <span class="badge bg-red">{{ diff.electricity_returned_merged|floatformat:2 }} %</span>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endif %}
+{% if capabilities.electricity_returned and frontend_settings.merge_electricity_tariffs %}
+            <tr>
+                <td>{% trans "Electricity returned (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ base.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
+                <td>{{ comparison.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
+                <td>
+                    {% if diff.electricity_returned_merged > 0 %}
+                        <span class="badge bg-green">+{{ diff.electricity_returned_merged|floatformat:2 }} %</span>
+                    {% elif diff.electricity_returned_merged < 0 %}
+                        <span class="badge bg-red">{{ diff.electricity_returned_merged|floatformat:2 }} %</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+{% endif %}
 
-            {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
-                <tr>
-                    <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>
-                    </td>
-                    <td>{{ base.electricity1|default:'-'|floatformat:2 }}</td>
-                    <td>{{ comparison.electricity1|default:'-'|floatformat:2 }}</td>
-                    <td>
-                        {% if diff.electricity1 > 0 %}
-                            <span class="badge bg-red">+{{ diff.electricity1|floatformat:2 }} %</span>
-                        {% elif diff.electricity1 < 0 %}
-                            <span class="badge bg-green">{{ diff.electricity1|floatformat:2 }} %</span>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>
-                    </td>
-                    <td>{{ base.electricity2|default:'-'|floatformat:2 }} </td>
-                    <td>{{ comparison.electricity2|default:'-'|floatformat:2 }}</td>
-                    <td>
-                        {% if diff.electricity2 > 0 %}
-                            <span class="badge bg-red">+{{ diff.electricity2|floatformat:2 }} %</span>
-                        {% elif diff.electricity2 < 0 %}
-                            <span class="badge bg-green">{{ diff.electricity2|floatformat:2 }} %</span>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endif %}
+{% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
+            <tr>
+                <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ base.electricity1|default:'-'|floatformat:2 }}</td>
+                <td>{{ comparison.electricity1|default:'-'|floatformat:2 }}</td>
+                <td>
+                    {% if diff.electricity1 > 0 %}
+                        <span class="badge bg-red">+{{ diff.electricity1|floatformat:2 }} %</span>
+                    {% elif diff.electricity1 < 0 %}
+                        <span class="badge bg-green">{{ diff.electricity1|floatformat:2 }} %</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ base.electricity2|default:'-'|floatformat:2 }} </td>
+                <td>{{ comparison.electricity2|default:'-'|floatformat:2 }}</td>
+                <td>
+                    {% if diff.electricity2 > 0 %}
+                        <span class="badge bg-red">+{{ diff.electricity2|floatformat:2 }} %</span>
+                    {% elif diff.electricity2 < 0 %}
+                        <span class="badge bg-green">{{ diff.electricity2|floatformat:2 }} %</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+{% endif %}
 
-            {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
-                <tr>
-                    <td>{{ frontend_settings.tariff_1_returned_name }} <span class="unit">{% trans "kWh" noop %}</span>
-                    </td>
-                    <td>{{ base.electricity1_returned|default:'-'|floatformat:2 }}</td>
-                    <td>{{ comparison.electricity1_returned|default:'-'|floatformat:2 }}</td>
-                    <td>
-                        {% if diff.electricity1_returned > 0 %}
-                            <span class="badge bg-green">+{{ diff.electricity1_returned|floatformat:2 }} %</span>
-                        {% elif diff.electricity1_returned < 0 %}
-                            <span class="badge bg-red">{{ diff.electricity1_returned|floatformat:2 }} %</span>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{ frontend_settings.tariff_2_returned_name }} <span class="unit">{% trans "kWh" noop %}</span>
-                    </td>
-                    <td>{{ base.electricity2_returned|default:'-'|floatformat:2 }} </td>
-                    <td>{{ comparison.electricity2_returned|default:'-'|floatformat:2 }}</td>
-                    <td>
-                        {% if diff.electricity2_returned > 0 %}
-                            <span class="badge bg-green">+{{ diff.electricity2_returned|floatformat:2 }} %</span>
-                        {% elif diff.electricity2_returned < 0 %}
-                            <span class="badge bg-red">{{ diff.electricity2_returned|floatformat:2 }} %</span>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endif %}
+{% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
+            <tr>
+                <td>{{ frontend_settings.tariff_1_returned_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ base.electricity1_returned|default:'-'|floatformat:2 }}</td>
+                <td>{{ comparison.electricity1_returned|default:'-'|floatformat:2 }}</td>
+                <td>
+                    {% if diff.electricity1_returned > 0 %}
+                        <span class="badge bg-green">+{{ diff.electricity1_returned|floatformat:2 }} %</span>
+                    {% elif diff.electricity1_returned < 0 %}
+                        <span class="badge bg-red">{{ diff.electricity1_returned|floatformat:2 }} %</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>{{ frontend_settings.tariff_2_returned_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ base.electricity2_returned|default:'-'|floatformat:2 }} </td>
+                <td>{{ comparison.electricity2_returned|default:'-'|floatformat:2 }}</td>
+                <td>
+                    {% if diff.electricity2_returned > 0 %}
+                        <span class="badge bg-green">+{{ diff.electricity2_returned|floatformat:2 }} %</span>
+                    {% elif diff.electricity2_returned < 0 %}
+                        <span class="badge bg-red">{{ diff.electricity2_returned|floatformat:2 }} %</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+{% endif %}
 
-            {% if capabilities.gas %}
-                <tr>
-                    <td>{% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
-                    <td>{{ base.gas|default:'-'|floatformat:2 }}</td>
-                    <td>{{ comparison.gas|default:'-'|floatformat:2 }}</td>
-                    <td>
-                        {% if diff.gas > 0 %}
-                            <span class="badge bg-red">+{{ diff.gas|floatformat:2 }} %</span>
-                        {% elif diff.gas < 0 %}
-                            <span class="badge bg-green">{{ diff.gas|floatformat:2 }} %</span>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endif %}
+{% if capabilities.gas %}
+            <tr>
+                <td>{% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
+                <td>{{ base.gas|default:'-'|floatformat:2 }}</td>
+                <td>{{ comparison.gas|default:'-'|floatformat:2 }}</td>
+                <td>
+                    {% if diff.gas > 0 %}
+                        <span class="badge bg-red">+{{ diff.gas|floatformat:2 }} %</span>
+                    {% elif diff.gas < 0 %}
+                        <span class="badge bg-green">{{ diff.gas|floatformat:2 }} %</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+{% endif %}
         </table>
-
-        {% if notes %}
-            {% for current_note in notes %}
-                <div class="alert alert-warning" role="alert"><i
-                        class="fas fa-comments"></i> {{ current_note.description }}</div>
-            {% endfor %}
-        {% endif %}
+        
+{% if notes %}
+	    {% for current_note in notes %}
+	    <div class="alert alert-warning" role="alert"><i class="fas fa-comments"></i> {{ current_note.description }}</div>
+	    {% endfor %}
+{% endif %}
     </div>
 </div>

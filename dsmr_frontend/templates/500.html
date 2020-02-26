@@ -1,45 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Server Error | DSMR Reader</title>
-    <style type="text/css">
-        body {
-            margin: 40px auto;
-            max-width: 1024px;
-            line-height: 1.6;
-            font-size: 18px;
-            color: #444;
-            padding: 0 10px
-        }
-
-        h1, h2, h3 {
-            line-height: 1.2
-        }
-
-        pre {
-            font-size: 75%;
-        }
-    </style>
-</head>
-<body>
-<header>
-    <h1>Server Error</h1>
-    <small>
-        Sorry, something unexpected happened.
-    </small>
-</header>
-
-{% if exception %}
-    <h2>Exception:</h2>
-    <pre>{{ exception_class }}: {{ exception }}</pre>
-
-    <h3>Traceback:</h3>
-    <pre>{% for current_line in error_trace %}{{ current_line }}
-    {% endfor %}</pre>
-{% else %}
-    <pre>No exception or traceback available.</pre>
-{% endif %}
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Server Error | DSMR Reader</title>
+        <style type="text/css">
+        body{margin:40px auto;max-width:1024px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}
+        h1,h2,h3{line-height:1.2}
+        pre{font-size: 75%;}
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Server Error</h1>
+            <small>
+                Sorry, something unexpected happened.
+            </small>
+        </header>
+        
+        {% if exception %}
+            <h2>Exception:</h2>
+            <pre>{{ exception_class }}: {{ exception }}</pre>
+        
+            <h3>Traceback:</h3>
+            <pre>{% for current_line in error_trace %}{{ current_line }}
+{% endfor %}</pre>
+        {% else %}
+            <pre>No exception or traceback available.</pre>
+        {% endif %}
+    </body>
 </html>
