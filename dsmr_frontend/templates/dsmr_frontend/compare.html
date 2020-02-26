@@ -17,34 +17,38 @@
 
 {% if capabilities.any and start_date and end_date %}
     <div class="row">
-        <div class="panel">
-            <header class="panel-heading">
-                {% blocktrans %}Select level of detail displayed{% endblocktrans %}
-            </header>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="date-selector col-sm-4">
-                        {% trans "Days" %} <br />
-                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
-                    </div>
-
-                    <div class="date-selector col-sm-4">
-                        {% trans "Months" %} <br />
-                        <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
-                    </div>
-
-                    <div class="date-selector col-sm-4">
-                        {% trans "Years" %} <br />
-                        <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
+        <div class="col-sm-2">
+            <div class="panel datepicker-panel">
+                <header class="panel-heading">
+                    {% blocktrans %}Level of detail{% endblocktrans %}
+                </header>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div class="row center-block">
+                            {% trans "Days" %}
+                        </div>
+                        <div class="row center-block">
+                            <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
+                        </div>
+                        <div class="row center-block">
+                            {% trans "Months" %}
+                        </div>
+                        <div class="row center-block">
+                            <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
+                        </div>
+                        <div class="row center-block">
+                            {% trans "Years" %}
+                        </div>
+                        <div class="row center-block">
+                            <span class="sm-st-icon st-grey datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel">
+        <div class="col-sm-5">
+            <div class="panel datepicker-panel">
                 <header class="panel-heading">
                     {% blocktrans %}Base selection{% endblocktrans %}
                 </header>
@@ -54,8 +58,8 @@
             </div>
         </div>
         
-        <div class="col-sm-6">
-            <div class="panel">
+        <div class="col-sm-5">
+            <div class="panel datepicker-panel">
                 <header class="panel-heading">
                     {% blocktrans %}Compare with selection{% endblocktrans %}
                 </header>

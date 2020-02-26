@@ -10,14 +10,16 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-
     {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
         <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktrans %}
     </div>
     {% endif %}
 
-    {% include "dsmr_frontend/includes/xhr-consumption-header.html" %}
+    <div class="row">
+        <div class="col-sm-6"></div>
+        {% include "dsmr_frontend/includes/xhr-consumption-header.html" %}
+    </div>
 
     {% if capabilities.electricity %}
     <div class="row">

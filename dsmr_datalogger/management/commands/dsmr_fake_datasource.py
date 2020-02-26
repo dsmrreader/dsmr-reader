@@ -20,7 +20,7 @@ logger = logging.getLogger('commands')
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = 'Generates a FAKE reading. DO NOT USE in production! Used for integration checks.'
     name = __name__  # Required for PID file.
-    sleep_time = 5
+    sleep_time = 1
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)

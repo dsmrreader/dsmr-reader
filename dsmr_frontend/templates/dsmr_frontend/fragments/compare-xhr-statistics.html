@@ -6,10 +6,10 @@
     <div class="panel-body">
         <table class="table table-hover">
             <tr>
-                <th class="col-sm-2"></th>
-                <th class="col-sm-2">{{ base_title|unlocalize }}</th>
-                <th class="col-sm-2">{{ comparison_title|unlocalize }}</th>
-                <th class="col-sm-2">{% trans "Difference" %}</th>
+                <th class="col-sm-3"></th>
+                <th class="col-sm-3">{{ base_title|unlocalize }}</th>
+                <th class="col-sm-3">{{ comparison_title|unlocalize }}</th>
+                <th class="col-sm-3">{% trans "Difference" %}</th>
             </tr>
 
 {% if capabilities.electricity and frontend_settings.merge_electricity_tariffs %}

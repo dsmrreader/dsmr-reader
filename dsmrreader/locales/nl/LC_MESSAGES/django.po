@@ -898,8 +898,8 @@ msgstr "Archief"
 msgid "No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader."
 msgstr "Nog geen dagstatistieken gevonden. Gegevens zijn hier doorgaans zichtbaar vanaf de tweede dag dat DSMR-reader draait."
 
-msgid "Select level of detail displayed"
-msgstr "Selecteer detailniveau"
+msgid "Level of detail"
+msgstr "Detailniveau"
 
 msgid "Days"
 msgstr "Dagen"
@@ -982,8 +982,8 @@ msgstr "Feedback"
 msgid "Donations / tips"
 msgstr "Donaties"
 
-msgid "Credits to"
-msgstr "Credits aan"
+msgid "Thanks to"
+msgstr "Dankzij"
 
 msgid "all the contributers"
 msgstr "iedereen die bijgedragen heeft"
@@ -1000,20 +1000,23 @@ msgstr "Basisselectie"
 msgid "Compare with selection"
 msgstr "Te vergelijken selectie"
 
+msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
+msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
+
 msgid "Unread notifications"
 msgstr "Ongelezen notificaties"
 
-msgid "View"
-msgstr "Bekijk"
-
-msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
-msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
+msgid "Go to notification overview"
+msgstr "Ga naar notificatieoverzicht"
 
 msgid "Consumed"
 msgstr "Verbruikt"
 
 msgid "Returned"
 msgstr "Teruggeleverd"
+
+msgid "Costs"
+msgstr "Kosten"
 
 msgid "kWh"
 msgstr "kWh"
@@ -1098,9 +1101,6 @@ msgstr "Download export"
 
 msgid "Add note for this date"
 msgstr "Voeg notitie toe voor deze datum"
-
-msgid "/unit"
-msgstr "/eenheid"
 
 msgid "Temp."
 msgstr "Temp."
@@ -2377,6 +2377,18 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Select level of detail displayed"
+#~ msgstr "Selecteer detailniveau"
+
+#~ msgid "Credits to"
+#~ msgstr "Credits aan"
+
+#~ msgid "View"
+#~ msgstr "Bekijk"
+
+#~ msgid "/unit"
+#~ msgstr "/eenheid"
+
 #~ msgid "Recent electricity"
 #~ msgstr "Recente elektriciteit"
 
@@ -2415,9 +2427,6 @@ msgstr "Engels"
 
 #~ msgid "Add note for today"
 #~ msgstr "Voeg notitie toe voor vandaag"
-
-#~ msgid "Cost"
-#~ msgstr "Kosten"
 
 #~ msgid "Electricity 1 price"
 #~ msgstr "Prijs elektriciteit 1"

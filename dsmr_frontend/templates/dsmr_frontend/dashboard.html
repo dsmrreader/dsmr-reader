@@ -10,30 +10,28 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-    {% if notification_count > 0 %}
-    <div class="row">
-        <div class="col-sm-offset-3 col-sm-6">
-            <div class="panel">
-                <header class="panel-heading">
-                    <span class="fas fa-exclamation-triangle"></span> &nbsp;
-                    {% trans "Unread notifications" %} ({{ notification_count }})
-
-                    <div class="pull-right">
-                        <a class="btn btn-sm btn-primary" href="{% url 'frontend:notifications' %}"><i class="fas fa-external-link-alt"></i> {% trans "View" %}</a>
-                    </div>
-                </header>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-
     {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
         <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktrans %}
     </div>
     {% endif %}
 
+    <div class="row">
+    {% if notification_count > 0 %}
+        <div class="col-sm-6">
+            <div class="panel header-panel">
+                <header class="panel-heading">
+                    {% trans "Unread notifications" %} &nbsp; <span class="badge bg-blue">{{ notification_count }}</span>
+                </header>
+                <div class="panel-body">
+                    <a class="btn btn-sm btn-primary" href="{% url 'frontend:notifications' %}"><i class="fas fa-external-link-alt"></i> {% trans "Go to notification overview" %}</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     {% include "dsmr_frontend/includes/xhr-consumption-header.html" %}
+    </div>
 
     {% if capabilities.electricity or capabilities.electricity_returned or capabilities.gas %}
     <div class="row consumption-block">
@@ -52,7 +50,7 @@
                             <th class="col-sm-6"></th>
                             <th class="col-sm-2">{% if capabilities.electricity %}{% trans "Consumed" %}{% endif %}</th>
                             <th class="col-sm-2">{% if capabilities.electricity_returned %}{% trans "Returned" %}{% endif %}</th>
-                            <th class="col-sm-2">&euro;</th>
+                            <th class="col-sm-2">{% trans "Costs" %} <span class="unit">&euro;</span></th>
                         </tr>
                         {% if frontend_settings.merge_electricity_tariffs %}<tr>
                             <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
@@ -111,7 +109,7 @@
                             <th class="col-sm-6"></th>
                             <th class="col-sm-2">{% if capabilities.electricity %}{% trans "Consumed" %}{% endif %}</th>
                             <th class="col-sm-2">{% if capabilities.electricity_returned %}{% trans "Returned" %}{% endif %}</th>
-                            <th class="col-sm-2">&euro;</th>
+                            <th class="col-sm-2">{% trans "Costs" %} <span class="unit">&euro;</span></th>
                         </tr>
                         {% if frontend_settings.merge_electricity_tariffs %}
 			            <tr>
@@ -169,11 +167,11 @@
             /* Reload entire page after 5 minutes. */
             setInterval(function(){ location.reload(); }, 5 * 60 * 1000)
         });
-        
+
         function update_header()
         {
             $("#header-loader").show();
-            
+
             $.ajax({
                 dataType: "json",
                 url: "{% url 'frontend:xhr-consumption-header' %}",

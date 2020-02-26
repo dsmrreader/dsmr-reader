@@ -28,13 +28,16 @@ div.copyright {
     transform: rotate(315deg);
 }
 
-div.date-selector {
-    min-height: 100px;
-    height: 100px;
-}
-
 .datepicker-trigger {
 	cursor: pointer;
+}
+
+.datepicker-panel {
+    min-height: 330px;
+}
+
+.header-panel {
+    min-height: 100px;
 }
 
 .gray {

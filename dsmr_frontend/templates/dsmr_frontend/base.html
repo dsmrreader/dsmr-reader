@@ -107,9 +107,6 @@
                             </a>
                         </li>
                         <li>
-                            &nbsp;&nbsp;
-                        </li>
-                        <li>
 				            <a href="{% url 'frontend:notifications' %}">
 				                <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
@@ -134,7 +131,7 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-question"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
+                                <i class="fas fa-xs fa-question-circle"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
                             </a>
                         </li>
                         <li>
@@ -144,7 +141,7 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-bullhorn"></i> &nbsp; <small>{% trans "Feedback" %}</small>
+                                <i class="fas fa-xs fa-comments"></i> &nbsp; <small>{% trans "Feedback" %}</small>
                             </a>
                         </li>
                         <li>
@@ -160,7 +157,7 @@
 	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015 - {% now "Y" %}
                     </small>
                     <br />
-                    <small>{% trans "Credits to" %}: <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">{% trans "all the contributers" %}</a></small>
+                    <small>{% trans "Thanks to" %} <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">{% trans "all the contributers" %}</a></small>
                     <br />
                     <br />
                     <small><a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}"><img src="{% static 'dsmr_frontend/img/GitHub-Mark-32px.png' %}" /> {% trans 'View on Github' %}</a></small>

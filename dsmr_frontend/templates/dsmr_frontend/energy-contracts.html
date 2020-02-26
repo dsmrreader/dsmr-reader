@@ -28,16 +28,14 @@
             <div class="panel">
                 <header class="panel-heading">
                     <strong>{{ current.description }}</strong>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="unit">{{ current.start }} &larr;&rarr; {{ current.end|default:'-' }}</span>
                 </header>
                 <div class="panel-body">
 			        <table class="table table-hover">
 			            <tr>
-			                <th class="col-sm-6"></th>
+			                <th class="col-sm-6"><span class="unit">{{ current.start }} &larr;&rarr; {{ current.end|default:'-' }}</span></th>
 			                <th class="col-sm-2">{% if capabilities.electricity %}{% trans "Consumed" %}{% endif %}</th>
 			                <th class="col-sm-2">{% if capabilities.electricity_returned %}{% trans "Returned" %}{% endif %}</th>
-			                <th class="col-sm-2">&euro;</th>
+			                <th class="col-sm-2">{% trans "Costs" %} <span class="unit">&euro;</span></th>
 			            </tr>
 			            {% if frontend_settings.merge_electricity_tariffs %}<tr>
 			                <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
@@ -88,14 +86,14 @@
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_delivered_2_price }}</small></span></td>
                         </tr>
                         {% endif %}
-                        
+
                         {% if current.prices.gas_price %}
                         <tr class="unit-prices xhr-hidden">
                             <td colspan="3"><small>{% trans "Gas" %}</small></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.gas_price }}</small></span></td>
                         </tr>
                         {% endif %}
-                        
+
                         {% if current.prices.electricity_returned_1_price %}
                         <tr class="unit-prices xhr-hidden">
                             <td colspan="3"><small>{{ frontend_settings.tariff_1_returned_name }}</small> <span class="unit">({% trans "tariff 1" %})</span></td>
