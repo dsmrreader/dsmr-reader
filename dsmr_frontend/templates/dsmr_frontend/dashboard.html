@@ -19,8 +19,8 @@
         {% endif %}
 
         <div class="row">
-            {% if notification_count > 0 %}
-                <div class="col-sm-6">
+            <div class="col-sm-6">
+                {% if notification_count > 0 %}
                     <div class="panel header-panel">
                         <header class="panel-heading">
                             {% trans "Unread notifications" %} &nbsp; <span
@@ -31,8 +31,8 @@
                                     class="fas fa-external-link-alt"></i> {% trans "Go to notification overview" %}</a>
                         </div>
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
 
             {% include "dsmr_frontend/includes/xhr-consumption-header.html" %}
         </div>
