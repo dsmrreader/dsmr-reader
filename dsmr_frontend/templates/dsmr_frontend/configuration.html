@@ -1,0 +1,170 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %} 
+{% load static %} 
+{% load i18n %}
+
+{% block title %}{% trans "Configuation" %}{% endblock %}
+{% block header %}{% trans "Configuation" %} &nbsp; <i class="fas fa-sliders-h"></i>{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content search-section">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Search for a topic or setting" %}
+                </header>
+                <div class="panel-body">
+                    <div class="search_help">
+                        {% trans "Some topics" %}:
+                        {% trans "API" %},
+                        {% trans "Backend" %},
+                        {% trans "Backup" %},
+                        {% trans "Consumption" %},
+                        {% trans "Datalogger" %},
+                        {% trans "Dropbox" %},
+                        {% trans "Email" %},
+                        {% trans "Energy supplier prices" %},
+                        {% trans "Frontend" %},
+                        {% trans "Meter statistics" %},
+                        {% trans "Mindergas.nl" %},
+                        {% trans "MQTT" %},
+                        {% trans "Notifications" %},
+                        {% trans "PVOutput.org" %},
+                        {% trans "Retention" %},
+                        {% trans "Weather" %}.
+                    </div>
+                    <div class="ui search">
+                        <div class="ui icon input">
+                            <input class="prompt" type="text" placeholder="{% trans "Type here to search..." %}">
+                        </div>
+
+                        &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% trans "Skip search and go directly to admin" %}</a>
+
+                        <div class="results"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link href="{% static 'dsmr_frontend/semantic-2.4/semantic.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dsmr_frontend/semantic-2.4/semantic.min.js' %}"></script>
+
+    <script>
+        var api_settings_url = '{% url "admin:dsmr_api_apisettings_change" api_settings.pk %}';
+        var backend_settings_url = '{% url "admin:dsmr_backend_backendsettings_change" backend_settings.pk %}';
+        var backup_settings_url = '{% url "admin:dsmr_backup_backupsettings_change" backup_settings.pk %}';
+        var consumption_settings_url = '{% url "admin:dsmr_consumption_consumptionsettings_change" consumption_settings.pk %}';
+        var datalogger_settings_url = '{% url "admin:dsmr_datalogger_dataloggersettings_change" datalogger_settings.pk %}';
+        var dropbox_settings_url = '{% url "admin:dsmr_backup_dropboxsettings_change" dropbox_settings.pk %}';
+        var email_settings_url = '{% url "admin:dsmr_backend_emailsettings_change" email_settings.pk %}';
+        var energy_supplier_price_url = '{% url "admin:dsmr_consumption_energysupplierprice_changelist" %}';
+        var frontend_settings_url = '{% url "admin:dsmr_frontend_frontendsettings_change" frontend_settings.pk %}';
+        var meter_statistics_url = '{% url "admin:dsmr_datalogger_meterstatistics_changelist" %}';
+        var mindergas_settings_url = '{% url "admin:dsmr_mindergas_mindergassettings_change" mindergas_settings.pk %}';
+        var mqtt_broker_settings_url = '{% url "admin:dsmr_mqtt_mqttbrokersettings_change" mqtt_broker_settings.pk %}';
+        var mqtt_jsondaytotals_settings_url = '{% url "admin:dsmr_mqtt_jsondaytotalsmqttsettings_change" mqtt_jsondaytotals_settings.pk %}';
+        var mqtt_splittopicdaytotals_settings_url = '{% url "admin:dsmr_mqtt_splittopicdaytotalsmqttsettings_change" mqtt_splittopicdaytotals_settings.pk %}';
+        var mqtt_jsongasconsumption_settings_url = '{% url "admin:dsmr_mqtt_jsongasconsumptionmqttsettings_change" mqtt_jsongasconsumption_settings.pk %}';
+        var mqtt_splittopicgasconsumption_settings_url = '{% url "admin:dsmr_mqtt_splittopicgasconsumptionmqttsettings_change" mqtt_splittopicgasconsumption_settings.pk %}';
+        var mqtt_jsontelegram_settings_url = '{% url "admin:dsmr_mqtt_jsontelegrammqttsettings_change" mqtt_jsontelegram_settings.pk %}';
+        var mqtt_rawtelegram_settings_url = '{% url "admin:dsmr_mqtt_rawtelegrammqttsettings_change" mqtt_rawtelegram_settings.pk %}';
+        var mqtt_splittopictelegram_settings_url = '{% url "admin:dsmr_mqtt_splittopictelegrammqttsettings_change" mqtt_splittopictelegram_settings.pk %}';
+        var mqtt_splittopicmeterstatistics_settings_url = '{% url "admin:dsmr_mqtt_splittopicmeterstatisticsmqttsettings_change" mqtt_splittopicmeterstatistics_settings.pk %}';
+        var notification_setting_url = '{% url "admin:dsmr_notification_notificationsetting_change" notification_settings.pk %}';
+        var pvoutput_apisettings_url = '{% url "admin:dsmr_pvoutput_pvoutputapisettings_change" pvoutput_api_settings.pk %}';
+        var pvoutput_addstatus_settings_url = '{% url "admin:dsmr_pvoutput_pvoutputaddstatussettings_change" pvoutput_addstatus_settings.pk %}';
+        var retention_settings_url = '{% url "admin:dsmr_datalogger_retentionsettings_change" retention_settings.pk %}';
+        var weather_settings_url = '{% url "admin:dsmr_weather_weathersettings_change" weather_settings.pk %}';
+
+        var categoryContent = [
+            { category: '{% trans "API" %}', title: '{% trans "DSMR-reader API (key)" %}', url: api_settings_url },
+
+            { category: '{% trans "Backend" %}', title: '{% trans "Language" %}', url: backend_settings_url },
+            { category: '{% trans "Backend" %}', title: '{% trans "Check for updates" %}', url: backend_settings_url },
+            { category: '{% trans "Backend" %}', title: '{% trans "Hide electricity return graphs" %}', url: backend_settings_url },
+            { category: '{% trans "Backend" %}', title: '{% trans "Hide gas graphs" %}', url: backend_settings_url },
+
+            { category: '{% trans "Backup" %}', title: '{% trans "Daily backup" %}', url: backup_settings_url },
+
+            { category: '{% trans "Consumption" %}', title: '{% trans "Group electricity by reading" %}', url: consumption_settings_url },
+            { category: '{% trans "Consumption" %}', title: '{% trans "Group electricity by minute" %}', url: consumption_settings_url },
+            { category: '{% trans "Consumption" %}', title: '{% trans "Group gas by hour" %}', url: consumption_settings_url },
+
+            { category: '{% trans "Datalogger" %}', title: '{% trans "Serial port" %}', url: datalogger_settings_url },
+            { category: '{% trans "Datalogger" %}', title: '{% trans "DSMR version" %}', url: datalogger_settings_url },
+            { category: '{% trans "Datalogger" %}', title: '{% trans "Smarty meter" %}', url: datalogger_settings_url },
+            { category: '{% trans "Datalogger" %}', title: '{% trans "Fluvius meter" %}', url: datalogger_settings_url },
+
+            { category: '{% trans "Dropbox" %}', title: '{% trans "Export backups to Dropbox" %}', url: dropbox_settings_url },
+
+            { category: '{% trans "Email" %}', title: '{% trans "Outgoing email" %}', url: email_settings_url },
+
+            { category: '{% trans "Energy supplier prices" %}', title: '{% trans "Energy supplier price contracts" %}', url: energy_supplier_price_url },
+            { category: '{% trans "Energy supplier prices" %}', title: '{% trans "Gas price/costs" %}', url: energy_supplier_price_url },
+            { category: '{% trans "Energy supplier prices" %}', title: '{% trans "Electricity price/costs" %}', url: energy_supplier_price_url },
+
+            { category: '{% trans "Frontend" %}', title: '{% trans "Merge tariffs" %}', url: frontend_settings_url },
+            { category: '{% trans "Frontend" %}', title: '{% trans "Tariff names" %}', url: frontend_settings_url },
+            { category: '{% trans "Frontend" %}', title: '{% trans "Graph line/bar colors" %}', url: frontend_settings_url },
+
+            { category: '{% trans "Meter statistics" %}', title: '{% trans "Latest telegram read" %}', url: meter_statistics_url },
+
+            { category: '{% trans "Mindergas.nl" %}', title: '{% trans "Link MinderGas account" %}', url: mindergas_settings_url },
+            { category: '{% trans "Mindergas.nl" %}', title: '{% trans "Export to MinderGas" %}', url: mindergas_settings_url },
+
+            { category: '{% trans "MQTT" %}', title: '{% trans "Quality of service / QoS" %}', url: mqtt_broker_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Broker port / SSL / TLS" %}', url: mqtt_broker_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "JSON day totals" %}', url: mqtt_jsondaytotals_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic day totals" %}', url: mqtt_splittopicdaytotals_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "JSON gas consumption" %}', url: mqtt_jsongasconsumption_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic gas consumption" %}', url: mqtt_splittopicgasconsumption_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "JSON telegram" %}', url: mqtt_jsontelegram_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Raw telegram" %}', url: mqtt_rawtelegram_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic telegram" %}', url: mqtt_splittopictelegram_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic meter statistics" %}', url: mqtt_splittopicmeterstatistics_settings_url },
+
+            { category: '{% trans "Notifications" %}', title: '{% trans "App notifications" %}', url: notification_setting_url },
+            { category: '{% trans "Notifications" %}', title: '{% trans "Pushover" %}', url: notification_setting_url },
+            { category: '{% trans "Notifications" %}', title: '{% trans "Prowl" %}', url: notification_setting_url },
+            { category: '{% trans "Notifications" %}', title: '{% trans "Telegram" %}', url: notification_setting_url },
+
+            { category: '{% trans "PVOutput.org" %}', title: '{% trans "Link PVOutput.org account" %}', url: pvoutput_apisettings_url },
+            { category: '{% trans "PVOutput.org" %}', title: '{% trans "PVOutput.org Add Status" %}', url: pvoutput_addstatus_settings_url },
+            { category: '{% trans "PVOutput.org" %}', title: '{% trans "PVOutput.org donator options" %}', url: pvoutput_addstatus_settings_url },
+
+            { category: '{% trans "Retention" %}', title: '{% trans "Clean up reading" %}', url: retention_settings_url },
+            { category: '{% trans "Retention" %}', title: '{% trans "Apply retention" %}', url: retention_settings_url },
+            { category: '{% trans "Retention" %}', title: '{% trans "Periodically delete data" %}', url: retention_settings_url },
+
+            { category: '{% trans "Weather" %}', title: '{% trans "Keep track of outside temperatures" %}', url: weather_settings_url },
+            { category: '{% trans "Weather" %}', title: '{% trans "Buienradar API" %}', url: weather_settings_url },
+        ];
+
+        $(document).ready(function () {
+            $('.ui.search')
+              .search({
+                  searchDelay: 0,
+                  maxResults: 25,
+                  source: categoryContent,
+                  type: 'category',
+                  searchFields: [
+                      'category',
+                      'title'
+                  ]
+              })
+            ;
+        });
+    </script>
+
+{% endblock %}

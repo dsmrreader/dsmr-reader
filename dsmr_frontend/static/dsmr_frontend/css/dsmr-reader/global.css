@@ -36,6 +36,10 @@ div.copyright {
     min-height: 330px;
 }
 
+.search-section {
+    min-height: 800px;
+}
+
 .header-panel {
     min-height: 100px;
 }
@@ -51,6 +55,11 @@ div.copyright {
 div.graph_controls_help {
     font-size: x-small;
     text-align: center;
+    color: gray;
+}
+
+div.search_help {
+    font-size: x-small;
     color: gray;
 }
 

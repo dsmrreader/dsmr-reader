@@ -49,3 +49,4 @@ Please note and respect their licences as well, if any. Credits to the following
 - `eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_
 - `CircleCI <https://circleci.com/>`_
 - `ReDoc <https://github.com/Redocly/redoc>`_
+- `Semantic UI <https://semantic-ui.com>`_

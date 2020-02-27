@@ -5,6 +5,7 @@ Changelog
 v3.5.0 - 2020-xx-xx
 
 - [`#894 <https://github.com/dennissiemensma/dsmr-reader/issues/894>`_] Wijzigingen in datalogger terugdraaien
+- [`#891 <https://github.com/dennissiemensma/dsmr-reader/issues/891>`_] Overzichtelijke tussenpagina admin-interface
 - [`#875 <https://github.com/dennissiemensma/dsmr-reader/issues/875>`_] Actuele Amperes weergeven
 - [`#901 <https://github.com/dennissiemensma/dsmr-reader/issues/901>`_] Layout voor mobiele/kleine schermen verbeteren
 - [`#904 <https://github.com/dennissiemensma/dsmr-reader/issues/904>`_] Kleuren van grafieken omgewisseld

@@ -1,5 +1,6 @@
 from django.urls.conf import path
 
+from dsmr_frontend.views.configuration import Configuration
 from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
 from dsmr_frontend.views.docs import ApiDocs
@@ -54,6 +55,7 @@ urlpatterns = [
     path('donations-redirect', DonationsRedirect.as_view(), name='donations-redirect'),
 
     # Views requiring authentication.
+    path('configuration', Configuration.as_view(), name='configuration'),
     path('export', Export.as_view(), name='export'),
     path('export/csv', ExportAsCsv.as_view(), name='export-as-csv'),
     path('notifications', Notifications.as_view(), name='notifications'),
