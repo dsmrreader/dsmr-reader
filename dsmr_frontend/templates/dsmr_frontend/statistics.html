@@ -156,7 +156,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l1_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.highest_usage_l1_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.highest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -168,7 +168,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l2_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.highest_usage_l2_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.highest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -180,7 +180,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l3_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.highest_usage_l3_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.highest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -193,7 +193,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l1_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.lowest_usage_l1_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.lowest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                                 <br>
                         </tr>
@@ -206,7 +206,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l2_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.lowest_usage_l2_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.lowest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -218,7 +218,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l3_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.lowest_usage_l3_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.lowest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -231,7 +231,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_return_l1_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.highest_return_l1_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.highest_return_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -243,7 +243,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_return_l2_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.highest_return_l2_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.highest_return_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -255,7 +255,7 @@
                                    <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_return_l3_value }} {% trans "Watt" %}
                                 </span>
                                 <br>
-                                <span class="unit">{{ electricity_statistics.highest_return_l3_timestamp }}</span>
+                                <span class="unit">{{ electricity_statistics.highest_return_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
                         </tr>
                         {% endif %}
