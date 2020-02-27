@@ -28,6 +28,10 @@ div.copyright {
     transform: rotate(315deg);
 }
 
+.datepicker-header {
+    text-align: center;
+}
+
 .datepicker-trigger {
 	cursor: pointer;
 }
@@ -35,6 +39,22 @@ div.copyright {
 .datepicker-panel {
     min-height: 330px;
 }
+
+.datepicker-level-name {
+    font-size: x-small;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.datepicker-level-icon {
+     /* Same as sm-st-icon, ensures center-block works. */
+     width: 60px;
+ }
+
+.datepicker-calendar-block {
+     /* Ensures center-block works. */
+     width: 220px;
+ }
 
 .search-section {
     min-height: 800px;
