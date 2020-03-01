@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.6.0 - 2020-xx-xx
+
+- [`#912 <https://github.com/dennissiemensma/dsmr-reader/issues/912>`_] Layout verbeteren
+
+
+----
+
+
 v3.5.0 - 2020-02-29
 
 - [`#894 <https://github.com/dennissiemensma/dsmr-reader/issues/894>`_] Wijzigingen in datalogger terugdraaien

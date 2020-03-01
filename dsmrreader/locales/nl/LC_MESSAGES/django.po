@@ -976,23 +976,14 @@ msgstr "Help / FAQ"
 msgid "API docs"
 msgstr "API docs"
 
-msgid "Feedback"
-msgstr "Feedback"
+msgid "Feedback / bugs / ideas"
+msgstr "Feedback / fouten / ideeën"
+
+msgid "Thanks to all the contributers"
+msgstr "Dank aan alle bijdragen"
 
 msgid "Donations / tips"
 msgstr "Donaties"
-
-msgid "Thanks to"
-msgstr "Dankzij"
-
-msgid "all the contributers"
-msgstr "iedereen die bijgedragen heeft"
-
-msgid "View repository on Github"
-msgstr "Bekijk repository op Github"
-
-msgid "View on Github"
-msgstr "Bekijk op Github"
 
 msgid "Base selection"
 msgstr "Basisselectie"
@@ -2520,6 +2511,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Feedback"
+#~ msgstr "Feedback"
+
+#~ msgid "Thanks to"
+#~ msgstr "Dankzij"
+
+#~ msgid "View repository on Github"
+#~ msgstr "Bekijk repository op Github"
+
+#~ msgid "View on Github"
+#~ msgstr "Bekijk op Github"
 
 #~ msgid "Skip to admin"
 #~ msgstr "Sla over naar admin"

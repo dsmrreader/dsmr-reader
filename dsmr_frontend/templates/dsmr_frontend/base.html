@@ -141,28 +141,29 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-comments"></i> &nbsp; <small>{% trans "Feedback" %}</small>
+                                <i class="fas fa-xs fa-comments"></i> &nbsp; <small>{% trans "Feedback / bugs / ideas" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">
+                                <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% trans "Thanks to all the contributers" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
+                                <i class="fas fa-xs fa-hand-holding-usd"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            &nbsp;
+                        </li>
+                        <li>
+                            <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">
+                                <i class="far fa-xs fa-copyright"></i> &nbsp; <small>Dennis Siemensma 2015 - {% now "Y" %}</small>
                             </a>
                         </li>
                     </ul>
                 </section>
-
-                <div class="row copyright">
-                    <small>
-	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015 - {% now "Y" %}
-                    </small>
-                    <br />
-                    <small>{% trans "Thanks to" %} <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">{% trans "all the contributers" %}</a></small>
-                    <br />
-                    <br />
-                    <small><a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}"><img src="{% static 'dsmr_frontend/img/GitHub-Mark-32px.png' %}" /> {% trans 'View on Github' %}</a></small>
-                    <small></small>
-                </div>
             </aside>
             <aside class="right-side">
 	            <div class="clearfix"></div>

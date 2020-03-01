@@ -2,16 +2,6 @@
 	display: none;
 }
 
-div.copyright {
-	position: absolute;  
-	bottom: 0;  
-	width: 100%; 
-	text-align: center; 
-	color: white; 
-	height: 96px;
-	padding-left: 24px;
-}
-
 .fa-rotate-45 {
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
