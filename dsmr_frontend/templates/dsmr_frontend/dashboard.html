@@ -116,22 +116,22 @@
                         {% if frontend_settings.merge_electricity_tariffs %}
 			            <tr>
 			                <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
-			                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
-			                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
-			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
+			                <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+			                <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+			                <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ month_statistics.electricity_cost_merged|default:'-' }}</span>{% endif %}</td>
 			            </tr>
 			            {% else %}
                         <tr>
                             <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity1_cost|default:'-' }}{% endif %}</span></td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity1|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity1_returned|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ month_statistics.electricity1_cost|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
                             <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity2_cost|default:'-' }}{% endif %}</span></td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity2|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity2_returned|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ month_statistics.electricity2_cost|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         {% endif %}
                         {% if capabilities.gas %}
@@ -144,8 +144,8 @@
                         {% endif %}
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
                             <td><span class="badge bg-black">{{ month_statistics.total_cost|default:'-' }}</span></td>
                         </tr>
                     </table>
