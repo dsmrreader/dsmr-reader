@@ -45,7 +45,14 @@ $(document).ready(function () {
             ],
             dataZoom: [
                 {
-                    show: false
+                    show: true,
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    start: 0,
+                    end: 100
                 }
             ],
             series: [
