@@ -79,3 +79,12 @@ div.search_help {
     color: gray;
     font-size: xx-small;
 }
+
+tr > th {
+    /* Remove weird duplicate border on top. */
+    border-top: none !important;
+}
+
+tr.live-header > th {
+    padding-bottom: 30px !important;
+}

@@ -1165,6 +1165,12 @@ msgstr "Ongelezen notificaties"
 msgid "Go to notification overview"
 msgstr "Ga naar notificatieoverzicht"
 
+msgid "W"
+msgstr "W"
+
+msgid "/hour"
+msgstr "/uur"
+
 msgid "Consumed"
 msgstr "Verbruikt"
 
@@ -1191,9 +1197,6 @@ msgstr "tot en met gisteren"
 
 msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
 msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
-
-msgid "/hour"
-msgstr "/uur"
 
 msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
 msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
@@ -1275,9 +1278,6 @@ msgstr "Gem"
 
 msgid "Difference"
 msgstr "Verschil"
-
-msgid "W"
-msgstr "W"
 
 msgid "Recent electricity consumption"
 msgstr "Recent elektriciteitsverbruik"
