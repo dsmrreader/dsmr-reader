@@ -94,18 +94,23 @@
     <br>
     {% endif %}
 
-    {% if month_statistics and capabilities.any %}
+    {% if capabilities.any %}
     <div class="row consumption-block">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
+                    {% if month_statistics.electricity_merged or month_statistics.gas %}
                     {% trans "Current month" %} <small>({% trans "until yesterday" %})</small>
+                    {% else %}
+                    {% trans "Current month" %}
+                    {% endif %}
 
                     <div class="pull-right">
                         <a class="btn btn-sm btn-primary" href="{% url 'frontend:archive' %}"><i class="fas fa-chart-line"></i></a>
                     </div>
                 </header>
                 <div class="panel-body">
+                    {% if month_statistics.electricity_merged or month_statistics.gas %}
                     <table class="table table-hover">
                         <tr>
                             <th class="col-sm-6"></th>
@@ -149,6 +154,9 @@
                             <td><span class="badge bg-black">{{ month_statistics.total_cost|default:'-' }}</span></td>
                         </tr>
                     </table>
+                    {% else %}
+                        <div class="graph_controls_help">{% blocktrans %}The totals for the current month are currently not (yet) available. Check again tomorrow.{% endblocktrans %}</div>
+                    {% endif %}
                 </div>
             </div>
         </div>

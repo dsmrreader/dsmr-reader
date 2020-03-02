@@ -1189,6 +1189,9 @@ msgstr "Huidige maand"
 msgid "until yesterday"
 msgstr "tot en met gisteren"
 
+msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
+msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
+
 msgid "/hour"
 msgstr "/uur"
 

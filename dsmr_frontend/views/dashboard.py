@@ -30,8 +30,8 @@ class Dashboard(TemplateView):
         context_data['consumption'] = dsmr_consumption.services.day_consumption(
             day=timezone.localtime(latest_electricity.read_at).date()
         )
-
-        today = timezone.localtime(timezone.now()).date()
-        context_data['month_statistics'] = dsmr_stats.services.month_statistics(target_date=today)
+        context_data['month_statistics'] = dsmr_stats.services.month_statistics(
+            target_date=timezone.localtime(timezone.now()).date()
+        )
 
         return context_data
