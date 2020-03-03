@@ -11,9 +11,10 @@ def migrate_forward(apps, schema_editor):
         return
 
     with connection.cursor() as cursor:
-        cursor.execute("SELECT 1 FROM mysql.time_zone_name LIMIT 1")
+        # This will result in NULL when the timezone is unknown or unsupported.
+        cursor.execute("SELECT CONVERT_TZ('2020-01-01 00:00:00', 'UTC', 'Europe/Amsterdam')")
 
-    if cursor.rowcount > 0:
+    if cursor.fetchone() is not None:
         return
 
     Notification = apps.get_model('dsmr_frontend', 'Notification')
@@ -38,3 +39,4 @@ class Migration(migrations.Migration):
     dependencies = [
         ('dsmr_frontend', '0033_django_colorfield_update'),
     ]
+
