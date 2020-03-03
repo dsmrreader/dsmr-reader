@@ -90,6 +90,7 @@
         var categoryContent = [
             { category: '{% trans "API" %}', title: '{% trans "DSMR-reader API (key)" %}', url: api_settings_url },
 
+            { category: '{% trans "Backend" %}', title: '{% trans "Backend process sleep" %}', url: backend_settings_url },
             { category: '{% trans "Backend" %}', title: '{% trans "Language" %}', url: backend_settings_url },
             { category: '{% trans "Backend" %}', title: '{% trans "Check for updates" %}', url: backend_settings_url },
             { category: '{% trans "Backend" %}', title: '{% trans "Hide electricity return graphs" %}', url: backend_settings_url },
@@ -101,6 +102,7 @@
             { category: '{% trans "Consumption" %}', title: '{% trans "Group electricity by minute" %}', url: consumption_settings_url },
             { category: '{% trans "Consumption" %}', title: '{% trans "Group gas by hour" %}', url: consumption_settings_url },
 
+            { category: '{% trans "Datalogger" %}', title: '{% trans "Datalogger process sleep" %}', url: datalogger_settings_url },
             { category: '{% trans "Datalogger" %}', title: '{% trans "Serial port" %}', url: datalogger_settings_url },
             { category: '{% trans "Datalogger" %}', title: '{% trans "DSMR version" %}', url: datalogger_settings_url },
             { category: '{% trans "Datalogger" %}', title: '{% trans "Smarty meter" %}', url: datalogger_settings_url },
@@ -123,6 +125,7 @@
             { category: '{% trans "Mindergas.nl" %}', title: '{% trans "Link MinderGas account" %}', url: mindergas_settings_url },
             { category: '{% trans "Mindergas.nl" %}', title: '{% trans "Export to MinderGas" %}', url: mindergas_settings_url },
 
+            { category: '{% trans "MQTT" %}', title: '{% trans "MQTT process sleep" %}', url: mqtt_broker_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "Quality of service / QoS" %}', url: mqtt_broker_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "Broker port / SSL / TLS" %}', url: mqtt_broker_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "JSON day totals" %}', url: mqtt_jsondaytotals_settings_url },
@@ -130,9 +133,13 @@
             { category: '{% trans "MQTT" %}', title: '{% trans "JSON gas consumption" %}', url: mqtt_jsongasconsumption_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "Split topic gas consumption" %}', url: mqtt_splittopicgasconsumption_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "JSON telegram" %}', url: mqtt_jsontelegram_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Voltage (JSON)" %}', url: mqtt_jsontelegram_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Ampere (JSON)" %}', url: mqtt_jsontelegram_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "Raw telegram" %}', url: mqtt_rawtelegram_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "Split topic telegram" %}', url: mqtt_splittopictelegram_settings_url },
             { category: '{% trans "MQTT" %}', title: '{% trans "Split topic meter statistics" %}', url: mqtt_splittopicmeterstatistics_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Voltage (split topic)" %}', url: mqtt_splittopictelegram_settings_url },
+            { category: '{% trans "MQTT" %}', title: '{% trans "Ampere (split topic)" %}', url: mqtt_splittopictelegram_settings_url },
 
             { category: '{% trans "Notifications" %}', title: '{% trans "App notifications" %}', url: notification_setting_url },
             { category: '{% trans "Notifications" %}', title: '{% trans "Pushover" %}', url: notification_setting_url },

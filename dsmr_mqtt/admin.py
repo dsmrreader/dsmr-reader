@@ -87,6 +87,9 @@ extra_device_delivered = extra_device_delivered
 phase_voltage_l1 = phase_voltage_l1
 phase_voltage_l2 = phase_voltage_l2
 phase_voltage_l3 = phase_voltage_l3
+phase_power_current_l1 = phase_power_current_l1
+phase_power_current_l2 = phase_power_current_l2
+phase_power_current_l3 = phase_power_current_l3
 </pre>
 '''
                 )
@@ -128,6 +131,9 @@ extra_device_delivered = dsmr/reading/extra_device_delivered
 phase_voltage_l1 = dsmr/reading/phase_voltage_l1
 phase_voltage_l2 = dsmr/reading/phase_voltage_l2
 phase_voltage_l3 = dsmr/reading/phase_voltage_l3
+phase_power_current_l1 = dsmr/reading/phase_power_current_l1
+phase_power_current_l2 = dsmr/reading/phase_power_current_l2
+phase_power_current_l3 = dsmr/reading/phase_power_current_l3
 </pre>
 '''
                 )

@@ -958,14 +958,11 @@ msgstr "Energiecontracten"
 msgid "Status"
 msgstr "Status"
 
-msgid "Notifications"
-msgstr "Notificaties"
+msgid "Export data"
+msgstr "Exporteer gegevens"
 
 msgid "Authentication required"
 msgstr "Authenticatie vereist"
-
-msgid "Export data"
-msgstr "Exporteer gegevens"
 
 msgid "Configuration"
 msgstr "Configuratie"
@@ -982,11 +979,11 @@ msgstr "API docs"
 msgid "Feedback / bugs / ideas"
 msgstr "Feedback / fouten / ideeën"
 
-msgid "Thanks to all the contributers"
-msgstr "Dank aan alle bijdragen"
-
 msgid "Donations / tips"
 msgstr "Donaties"
+
+msgid "Thanks to all the contributers"
+msgstr "Dank aan alle bijdragen"
 
 msgid "Base selection"
 msgstr "Basisselectie"
@@ -1014,6 +1011,9 @@ msgstr "Mindergas.nl"
 
 msgid "MQTT"
 msgstr "MQTT"
+
+msgid "Notifications"
+msgstr "Notificaties"
 
 msgid "PVOutput.org"
 msgstr "PVOutput.org"
@@ -1093,6 +1093,9 @@ msgstr "Koppel MinderGas-account"
 msgid "Export to MinderGas"
 msgstr "Exporteer naar MinderGas"
 
+msgid "MQTT process sleep"
+msgstr "MQTT proces sleep"
+
 msgid "Quality of service / QoS"
 msgstr "Quality of service / QoS"
 
@@ -1114,6 +1117,12 @@ msgstr "Gesplitst topic gasverbruik"
 msgid "JSON telegram"
 msgstr "JSON telegram"
 
+msgid "Voltage (JSON)"
+msgstr "Voltage (JSON)"
+
+msgid "Ampere (JSON)"
+msgstr "Ampere (JSON)"
+
 msgid "Raw telegram"
 msgstr "Ruw telegram"
 
@@ -1122,6 +1131,12 @@ msgstr "Gesplitst topic telegram"
 
 msgid "Split topic meter statistics"
 msgstr "Gesplitst topic meterstatistieken"
+
+msgid "Voltage (split topic)"
+msgstr "Voltage (gesplitst topic)"
+
+msgid "Ampere (split topic)"
+msgstr "Ampere (gesplitst topic)"
 
 msgid "App notifications"
 msgstr "App-notificaties"
@@ -1653,6 +1668,9 @@ msgid ""
 "phase_voltage_l1 = phase_voltage_l1\n"
 "phase_voltage_l2 = phase_voltage_l2\n"
 "phase_voltage_l3 = phase_voltage_l3\n"
+"phase_power_current_l1 = phase_power_current_l1\n"
+"phase_power_current_l2 = phase_power_current_l2\n"
+"phase_power_current_l3 = phase_power_current_l3\n"
 "</pre>\n"
 msgstr ""
 "Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, in JSON-formaat. Je kunt de veldnamen aanpassen die in het JSON-bericht gebruikt worden. Standaardwaarden:\n"
@@ -1677,7 +1695,9 @@ msgstr ""
 "phase_voltage_l1 = phase_voltage_l1\n"
 "phase_voltage_l2 = phase_voltage_l2\n"
 "phase_voltage_l3 = phase_voltage_l3\n"
-"\n"
+"phase_power_current_l1 = phase_power_current_l1\n"
+"phase_power_current_l2 = phase_power_current_l2\n"
+"phase_power_current_l3 = phase_power_current_l3\n"
 "</pre>\n"
 
 msgid ""
@@ -1703,10 +1723,12 @@ msgid ""
 "phase_voltage_l1 = dsmr/reading/phase_voltage_l1\n"
 "phase_voltage_l2 = dsmr/reading/phase_voltage_l2\n"
 "phase_voltage_l3 = dsmr/reading/phase_voltage_l3\n"
+"phase_power_current_l1 = dsmr/reading/phase_power_current_l1\n"
+"phase_power_current_l2 = dsmr/reading/phase_power_current_l2\n"
+"phase_power_current_l3 = dsmr/reading/phase_power_current_l3\n"
 "</pre>\n"
 msgstr ""
 "Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, gesplitst op een apart topic per veld. Je kunt daarmee elke veldnaam toewijzen op een aparte topic. Standaardwaarden:\n"
-"\n"
 "<pre>\n"
 "[mapping]\n"
 "id = dsmr/reading/id\n"
@@ -1728,7 +1750,9 @@ msgstr ""
 "phase_voltage_l1 = dsmr/reading/phase_voltage_l1\n"
 "phase_voltage_l2 = dsmr/reading/phase_voltage_l2\n"
 "phase_voltage_l3 = dsmr/reading/phase_voltage_l3\n"
-"\n"
+"phase_power_current_l1 = dsmr/reading/phase_power_current_l1\n"
+"phase_power_current_l2 = dsmr/reading/phase_power_current_l2\n"
+"phase_power_current_l3 = dsmr/reading/phase_power_current_l3\n"
 "</pre>\n"
 
 msgid ""
@@ -1971,9 +1995,6 @@ msgstr "Herstart vereist"
 
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
-
-msgid "MQTT process sleep"
-msgstr "MQTT proces sleep"
 
 msgid "The number of seconds the application will sleep after publishing the outgoing MQTT message queue."
 msgstr "Het aantal seconden dat de applicatie wacht na het versturen van alle MQTT-berichten."
