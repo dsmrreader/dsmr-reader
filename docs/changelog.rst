@@ -6,6 +6,7 @@ v3.6.0 - 2020-xx-xx
 
 - [`#911 <https://github.com/dennissiemensma/dsmr-reader/issues/911>`_] Weer inzoomen in gas/temperatuur-grafieken
 - [`#912 <https://github.com/dennissiemensma/dsmr-reader/issues/912>`_] Layout verbeteren
+- [`#916 <https://github.com/dennissiemensma/dsmr-reader/issues/916>`_] Gecombineerd verbruik teruggeven in API's "Retrieve today's consumption"
 
 
 ----

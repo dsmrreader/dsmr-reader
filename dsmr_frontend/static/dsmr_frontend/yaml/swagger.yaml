@@ -716,18 +716,20 @@ paths:
                 1:
                   value:
                     day: '2020-01-17'
-                    electricity1: 0.0
-                    electricity2: 0.0
-                    electricity1_returned: 0.0
-                    electricity2_returned: 0.0
+                    electricity1: 1.0
+                    electricity2: 2.0
+                    electricity1_returned: 4.0
+                    electricity2_returned: 8.0
+                    electricity_merged: 3.0
+                    electricity_returned_merged: 12.0
                     electricity1_cost: 0.0
                     electricity2_cost: 0.0
                     total_cost: 0.0
-                    energy_supplier_price_electricity_delivered_1: 0.20876
-                    energy_supplier_price_electricity_delivered_2: 0.22449
+                    energy_supplier_price_electricity_delivered_1: 0.0
+                    energy_supplier_price_electricity_delivered_2: 0.0
                     energy_supplier_price_electricity_returned_1: 0.0
                     energy_supplier_price_electricity_returned_2: 0.0
-                    energy_supplier_price_gas: 0.66977
+                    energy_supplier_price_gas: 0.0
                     gas: 0.0
                     gas_cost: 0.0
         403:
