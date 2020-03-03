@@ -11,6 +11,7 @@ class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
+        Notification.objects.all().delete()  # Make sure notifications created by migrations are ignored.
         Notification.objects.create(message='TEST2')
         Notification.objects.create(message='TEST3')
 
@@ -34,7 +35,7 @@ class TestViews(TestCase):
         view_url = reverse('{}:notification-xhr-mark-read'.format(self.namespace))
         notification = Notification.objects.all()[0]
         self.assertFalse(notification.read)
-        self.assertEqual(Notification.objects.unread().count(), 3)
+        self.assertEqual(Notification.objects.unread().count(), 2)
 
         # Check login required.
         response = self.client.post(view_url)
@@ -49,13 +50,13 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200, response.content)
 
         # Notification should be altered now.
-        self.assertEqual(Notification.objects.unread().count(), 2)
+        self.assertEqual(Notification.objects.unread().count(), 1)
         notification.refresh_from_db()
         self.assertTrue(notification.read)
 
     def test_xhr_all_notifications_read(self):
         view_url = reverse('{}:notification-xhr-mark-all-read'.format(self.namespace))
-        self.assertEqual(Notification.objects.unread().count(), 3)
+        self.assertEqual(Notification.objects.unread().count(), 2)
 
         # Check login required.
         response = self.client.post(view_url)
