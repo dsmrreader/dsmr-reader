@@ -8,6 +8,7 @@ v3.6.0 - 2020-02-06
 - [`#912 <https://github.com/dennissiemensma/dsmr-reader/issues/912>`_] Layout verbeteren
 - [`#916 <https://github.com/dennissiemensma/dsmr-reader/issues/916>`_] Gecombineerd verbruik teruggeven in API's "Retrieve today's consumption"
 - [`#875 <https://github.com/dennissiemensma/dsmr-reader/issues/875>`_] Actuele Amperes weergeven via MQTT
+- [`#918 <https://github.com/dennissiemensma/dsmr-reader/issues/918>`_] Django 3.0.4 update
 
 
 ----
