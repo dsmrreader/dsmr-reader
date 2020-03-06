@@ -135,6 +135,10 @@ def _map_telegram_to_model(parsed_telegram, data):
     model_fields['electricity_delivered_2'] = model_fields['electricity_delivered_2'] or 0
     model_fields['electricity_returned_2'] = model_fields['electricity_returned_2'] or 0
 
+    # Hack for invalid dates on device bus. Reset the delivered value as well.
+    if model_fields['extra_device_timestamp'] is None:
+        model_fields['extra_device_delivered'] = None
+
     # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
     discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
 

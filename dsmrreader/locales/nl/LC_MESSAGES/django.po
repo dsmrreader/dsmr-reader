@@ -556,11 +556,11 @@ msgstr "Nederlands - DSMR-versie 4/5 (standaard)"
 msgid "Netherlands - DSMR version 2/3"
 msgstr "Nederlands - DSMR-versie 2/3"
 
-msgid "Belgium - Fluvius"
-msgstr "België - Fluvius"
+msgid "Belgium - Fluvius (gas meter fix)"
+msgstr "België - Fluvius (fix voor gasmeter)"
 
-msgid "Luxembourg - Smarty"
-msgstr "Luxemburg - Smarty"
+msgid "Luxembourg - Smarty (single tariff fix)"
+msgstr "Luxemburg - Smarty (fix voor enkel tarief)"
 
 msgid "DSMR version"
 msgstr "DSMR-versie"

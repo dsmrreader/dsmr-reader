@@ -4,7 +4,11 @@ import pytz
 
 
 def timestamp(value):
-    naive_datetime = datetime.datetime.strptime(value[:-1], '%y%m%d%H%M%S')
+    try:
+        naive_datetime = datetime.datetime.strptime(value[:-1], '%y%m%d%H%M%S')
+    except ValueError:
+        # Caused by invalid dates, such as "632525252525W".
+        return None
 
     # TODO comment on this exception
     if len(value) == 13:
