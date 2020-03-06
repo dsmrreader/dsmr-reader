@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.7.0 - 2020-xx-xx
+
+- [`#xxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxx>`_] xxxxxxxxxx
+
+
+----
+
+
 v3.6.0 - 2020-03-06
 
 - [`#911 <https://github.com/dennissiemensma/dsmr-reader/issues/911>`_] Weer inzoomen in gas/temperatuur-grafieken
