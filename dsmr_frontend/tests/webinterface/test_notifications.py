@@ -18,15 +18,6 @@ class TestViews(TestCase):
     def test_notifications(self):
         view_url = reverse('{}:notifications'.format(self.namespace))
 
-        # Check login required.
-        response = self.client.get(view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['Location'], '/admin/login/?next={}'.format(view_url)
-        )
-
-        # Logged in.
-        self.client.login(username='testuser', password='passwd')
         response = self.client.get(view_url)
         self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('notifications', response.context)

@@ -45,6 +45,8 @@ urlpatterns = [
     path('status', Status.as_view(), name='status'),
     path('status/xhr/check-for-updates', XhrUpdateChecker.as_view(), name='status-xhr-check-for-updates'),
 
+    path('notifications', Notifications.as_view(), name='notifications'),
+
     # Docs.
     path('docs/api', ApiDocs.as_view(), name='api-docs'),
 
@@ -58,7 +60,6 @@ urlpatterns = [
     path('configuration', Configuration.as_view(), name='configuration'),
     path('export', Export.as_view(), name='export'),
     path('export/csv', ExportAsCsv.as_view(), name='export-as-csv'),
-    path('notifications', Notifications.as_view(), name='notifications'),
     path('notifications/xhr/mark-read', XhrMarkNotificationRead.as_view(), name='notification-xhr-mark-read'),
     path(
         'notifications/xhr/mark-all-read',

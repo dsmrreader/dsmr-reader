@@ -17,25 +17,30 @@
                 <header class="panel-heading">
                     {% trans "Unread Notifications" %}
                     &nbsp;
-                    {% if notifications %}
-                        <div class="pull-right">
+                    <div class="pull-right">
+                        {% if notifications and user.is_authenticated %}
                             <button class="btn btn-sm btn-success mark-all-notifications-read" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Mark all notifications as read' %}">
                                 <i class="fas fa-check-double"></i> {% trans 'Mark all as read' %}
                             </button>
-                        </div>
-                    {% endif %}
+                        {% else %}
+                            <a class="btn btn-sm btn-primary"  href="{% url 'admin:login' %}?next={% url 'frontend:notifications' %}">
+                                <i class="fas fa-lock"></i> &nbsp; {% trans 'Login to mark as read' %}
+                            </a>
+                        {% endif %}
+                    </div>
                 </header>
                 <div class="panel-body">
                     {% if notifications %}
                         {% for current_notification in notifications %}
                         <div class="alert alert-info" role="alert">
+                            {% if user.is_authenticated %}
                             <button class="btn btn-sm btn-success mark-notification-read" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Mark as read' %}">
                                 <i class="fas fa-check"></i>
                             </button>
-                            &nbsp;
+                            &nbsp{% endif %}
 
                             {% if current_notification.redirect_to %}
-                            <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}" title="{% trans "View page" %}"><i class="fas fa-external-link-alt"></i></a>
+                            <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}" title="{% trans "View page" %}"><i class="fas fa-external-link-alt"></i></a> &nbsp; 
                             {% endif %}
 
                             {{ current_notification.message }}

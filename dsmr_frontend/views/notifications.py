@@ -9,7 +9,7 @@ from dsmr_frontend.forms import NotificationReadForm
 from dsmr_frontend.models.message import Notification
 
 
-class Notifications(LoginRequiredMixin, TemplateView):
+class Notifications(TemplateView):
     template_name = 'dsmr_frontend/notifications.html'
 
     def get_context_data(self, **kwargs):

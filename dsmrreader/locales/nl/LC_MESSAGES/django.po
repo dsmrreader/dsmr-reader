@@ -1330,6 +1330,9 @@ msgstr "Markeer alle notificaties als gelezen"
 msgid "Mark all as read"
 msgstr "Markeer allemaal als gelezen"
 
+msgid "Login to mark as read"
+msgstr "Log in om te markeren als gelezen"
+
 msgid "Mark as read"
 msgstr "Markeer als gelezen"
 
