@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.conf import settings
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
-import dsmr_datalogger.services
+import dsmr_datalogger.services.datalogger
 
 
 logger = logging.getLogger('commands')
@@ -72,7 +72,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             self._write_to_port(serial_port=options['serial_port'], data=telegram)
         else:
             logger.debug('Writing data to: internal service')
-            dsmr_datalogger.services.telegram_to_reading(data=telegram)
+            dsmr_datalogger.services.datalogger.telegram_to_reading(data=telegram)
 
     def _write_to_port(self, serial_port, data):
         serial_handle = serial.Serial(

@@ -8,7 +8,7 @@ from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
-import dsmr_datalogger.services
+import dsmr_datalogger.services.datalogger
 
 
 class TestServices(TestCase):
@@ -101,7 +101,7 @@ class TestServices(TestCase):
         ])
 
         self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
-        dsmr_datalogger.services.telegram_to_reading(data=telegram)
+        dsmr_datalogger.services.datalogger.telegram_to_reading(data=telegram)
 
         # Should be populated now.
         meter_statistics = MeterStatistics.get_solo()
@@ -145,7 +145,7 @@ class TestServices(TestCase):
             "!6013\n",
         ]
         self.assertFalse(DsmrReading.objects.exists())
-        dsmr_datalogger.services.telegram_to_reading(data=''.join(fake_telegram))
+        dsmr_datalogger.services.datalogger.telegram_to_reading(data=''.join(fake_telegram))
         self.assertFalse(DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists())
 
         # Alter extra device m-bus to 2, 3 and 4.
@@ -153,7 +153,7 @@ class TestServices(TestCase):
             fake_telegram[-3] = "0-{}:24.2.1(151110190000W)(00845.206*m3)\r\n".format(current_mbus)
             self.assertNotIn("0-1:24.2.1(151110190000W)(00845.206*m3)\r\n", fake_telegram)
 
-            dsmr_datalogger.services.telegram_to_reading(data=''.join(fake_telegram))
+            dsmr_datalogger.services.datalogger.telegram_to_reading(data=''.join(fake_telegram))
             self.assertFalse(DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists())
 
     def test_validate_checksum(self):
@@ -201,17 +201,17 @@ class TestServices(TestCase):
         ]
 
         with self.assertRaises(InvalidTelegramError):
-            dsmr_datalogger.services.telegram_to_reading(data=''.join(telegram))
+            dsmr_datalogger.services.datalogger.telegram_to_reading(data=''.join(telegram))
 
         # Again, with the expected checksum.
         telegram[-1] = "!58C8\n"
-        dsmr_datalogger.services.telegram_to_reading(data=''.join(telegram))
+        dsmr_datalogger.services.datalogger.telegram_to_reading(data=''.join(telegram))
 
     def test_telegram_logging_setting_coverage(self):
         """ Purely a coverage test. """
         DataloggerSettings.get_solo()
         DataloggerSettings.objects.all().update(log_telegrams=True)
-        dsmr_datalogger.services.telegram_to_reading(data=self.fake_telegram)
+        dsmr_datalogger.services.datalogger.telegram_to_reading(data=self.fake_telegram)
 
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
@@ -223,7 +223,7 @@ class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
 
         self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_2_3)
 
-        connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 9600)
         self.assertEqual(connection_parameters['bytesize'], serial.SEVENBITS)
         self.assertEqual(connection_parameters['parity'], serial.PARITY_EVEN)
@@ -232,7 +232,7 @@ class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
         """ Test connection parameters for DSMR v4+. """
         self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_VERSION_4_PLUS)
 
-        connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters['baudrate'], 115200)
         self.assertEqual(connection_parameters['bytesize'], serial.EIGHTBITS)
         self.assertEqual(connection_parameters['parity'], serial.PARITY_NONE)

@@ -120,13 +120,13 @@ Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new file
     from django.dispatch import receiver
 
     from dsmr_datalogger.signals import raw_telegram
-    import dsmr_datalogger.services
+    import dsmr_datalogger.services.datalogger
 
 
     @receiver(raw_telegram)
     def handle_forward_raw_telegram_to_serial(**kwargs):
         DEST_PORT = '/dev/ttyUSBvA'
-        connection_parameters = dsmr_datalogger.services.get_dsmr_connection_parameters()
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
 
         serial_handle = serial.Serial()
         serial_handle.port = DEST_PORT

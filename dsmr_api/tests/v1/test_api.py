@@ -125,7 +125,7 @@ class TestAPIv1(TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.content, b'')
 
-    @mock.patch('dsmr_datalogger.services.telegram_to_reading')
+    @mock.patch('dsmr_datalogger.services.datalogger.telegram_to_reading')
     def test_null_data_validation(self, telegram_to_reading_mock):
         """ Shallow data verification. """
         response = self.client.post(

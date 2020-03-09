@@ -59,6 +59,9 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         service = getattr(imported_module, call_path)
         return service(self)
 
+    def disable(self):
+        self.update(active=False)
+
     def delay(self, delta):
         """ Delays the next call by the given delta. """
         self.reschedule(planned_at=timezone.now() + delta)
