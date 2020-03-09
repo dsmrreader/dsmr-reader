@@ -188,7 +188,7 @@ def status_info():
     capabilities = get_capabilities()
     status = {
         'now': timezone.now(),
-        'scheduled_processes': ScheduledProcess.objects.all().order_by('-active').values(),
+        'scheduled_processes': ScheduledProcess.objects.all().order_by('-active', 'name').values(),
         'capabilities': capabilities,
         'electricity': get_electricity_status(capabilities),
         'gas': get_gas_status(capabilities),
