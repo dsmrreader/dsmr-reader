@@ -476,7 +476,10 @@ def summarize_energy_contracts():
     data = []
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
-        summary = dsmr_stats.services.range_statistics(start=current.start, end=current.end or timezone.now().date())
+        summary, count = dsmr_stats.services.range_statistics(
+            start=current.start,
+            end=current.end or timezone.now().date()
+        )
 
         data.append({
             'description': current.description,

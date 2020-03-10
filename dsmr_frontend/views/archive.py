@@ -48,11 +48,14 @@ class ArchiveXhrSummary(TemplateView):
         ))
         selected_level = self.request.GET['level']
 
-        context_data['statistics'] = {
-            'days': dsmr_stats.services.day_statistics(selected_datetime.date()),
-            'months': dsmr_stats.services.month_statistics(selected_datetime.date()),
-            'years': dsmr_stats.services.year_statistics(selected_datetime.date()),
-        }[selected_level]
+        DATA_MAPPING = {
+            'days': dsmr_stats.services.day_statistics,
+            'months': dsmr_stats.services.month_statistics,
+            'years': dsmr_stats.services.year_statistics,
+        }
+
+        data, coun = DATA_MAPPING[selected_level](selected_datetime.date())
+        context_data['statistics'] = data
 
         context_data['title'] = {
             'days': formats.date_format(selected_datetime.date(), 'DSMR_GRAPH_LONG_DATE_FORMAT'),
@@ -115,7 +118,7 @@ class ArchiveXhrGraphs(View):
 
             for increment in range(0, 12):
                 current_month = start_of_year + relativedelta(months=increment)
-                current_month_stats = dsmr_stats.services.month_statistics(current_month.date())
+                current_month_stats, _ = dsmr_stats.services.month_statistics(current_month.date())
                 current_month_stats['month'] = current_month.date()
                 source_data.append(current_month_stats)
 

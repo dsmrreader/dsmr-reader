@@ -7,14 +7,42 @@
         <table class="table table-hover">
             <tr>
                 <th class="col-sm-3"></th>
-                <th class="col-sm-3">{{ base_title|unlocalize }}</th>
-                <th class="col-sm-3">{{ comparison_title|unlocalize }}</th>
+                <th class="col-sm-3">
+                    {{ base_title|unlocalize }}
+
+                {% if data_count.base != data_count.comparison %}
+                    <br>
+                    <span class="unit">
+                        {% blocktrans count data_count=data_count.base %}{{ data_count }} data point{% plural %}{{ data_count }} data points{% endblocktrans %}
+                    </span>
+                {% endif %}
+                </th>
+                <th class="col-sm-3">
+                    {{ comparison_title|unlocalize }}
+
+                {% if data_count.base != data_count.comparison %}
+                    <br>
+                    <span class="unit">
+                        {% blocktrans count data_count=data_count.comparison %}{{ data_count }} data point{% plural %}{{ data_count }} data points{% endblocktrans %}
+                    </span>
+                {% endif %}
+                </th>
                 <th class="col-sm-3">{% trans "Difference" %}</th>
             </tr>
 
-{% if capabilities.electricity and frontend_settings.merge_electricity_tariffs %}
+        {% if data_count.base != data_count.comparison %}
             <tr>
-                <td>{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td></td>
+                <td colspan="3" class="comparison-warning">
+                    <span class="fas fa-exclamation-triangle"></span> &nbsp;
+                    {% blocktrans %}There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate.{% endblocktrans %}
+                </td>
+            </tr>
+        {% endif %}
+
+        {% if capabilities.electricity and frontend_settings.merge_electricity_tariffs %}
+            <tr>
+                <td>{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" %}</span></td>
                 <td>{{ base.electricity_merged|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity_merged|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -27,11 +55,11 @@
                     {% endif %}
                 </td>
             </tr>
-{% endif %}
+        {% endif %}
 
-{% if capabilities.electricity_returned and frontend_settings.merge_electricity_tariffs %}
+        {% if capabilities.electricity_returned and frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{% trans "Electricity returned (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{% trans "Electricity returned (single tariff)" %} <span class="unit">{% trans "kWh" %}</span></td>
                 <td>{{ base.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity_returned_merged|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -44,11 +72,11 @@
                     {% endif %}
                 </td>
             </tr>
-{% endif %}
+        {% endif %}
 
-{% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
+        {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" %}</span></td>
                 <td>{{ base.electricity1|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity1|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -62,7 +90,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" %}</span></td>
                 <td>{{ base.electricity2|default:'-'|floatformat:2 }} </td>
                 <td>{{ comparison.electricity2|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -75,11 +103,11 @@
                     {% endif %}
                 </td>
             </tr>
-{% endif %}
+        {% endif %}
 
-{% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
+        {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{{ frontend_settings.tariff_1_returned_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ frontend_settings.tariff_1_returned_name }} <span class="unit">{% trans "kWh" %}</span></td>
                 <td>{{ base.electricity1_returned|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.electricity1_returned|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -93,7 +121,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{{ frontend_settings.tariff_2_returned_name }} <span class="unit">{% trans "kWh" noop %}</span></td>
+                <td>{{ frontend_settings.tariff_2_returned_name }} <span class="unit">{% trans "kWh" %}</span></td>
                 <td>{{ base.electricity2_returned|default:'-'|floatformat:2 }} </td>
                 <td>{{ comparison.electricity2_returned|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -106,11 +134,11 @@
                     {% endif %}
                 </td>
             </tr>
-{% endif %}
+        {% endif %}
 
-{% if capabilities.gas %}
+        {% if capabilities.gas %}
             <tr>
-                <td>{% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
+                <td>{% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" %}</span></td>
                 <td>{{ base.gas|default:'-'|floatformat:2 }}</td>
                 <td>{{ comparison.gas|default:'-'|floatformat:2 }}</td>
                 <td>
@@ -123,13 +151,13 @@
                     {% endif %}
                 </td>
             </tr>
-{% endif %}
+        {% endif %}
         </table>
         
-{% if notes %}
+    {% if notes %}
 	    {% for current_note in notes %}
 	    <div class="alert alert-warning" role="alert"><i class="fas fa-comments"></i> {{ current_note.description }}</div>
 	    {% endfor %}
-{% endif %}
+    {% endif %}
     </div>
 </div>

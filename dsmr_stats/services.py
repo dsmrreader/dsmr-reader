@@ -244,8 +244,9 @@ def average_consumption_by_hour(max_weeks_ago):
 
 
 def range_statistics(start, end):
-    """ Returns the statistics (totals) for a target date. Its month will be used. """
-    return DayStatistics.objects.filter(day__gte=start, day__lt=end).aggregate(
+    """ Returns the statistics (totals) and the number of data points for a target range. """
+    queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
+    aggregate = queryset.aggregate(
         total_cost=Sum('total_cost'),
         electricity1=Sum('electricity1'),
         electricity1_cost=Sum('electricity1_cost'),
@@ -262,6 +263,7 @@ def range_statistics(start, end):
         temperature_max=Max('highest_temperature'),
         temperature_avg=Avg('average_temperature'),
     )
+    return aggregate, queryset.count()
 
 
 def day_statistics(target_date):

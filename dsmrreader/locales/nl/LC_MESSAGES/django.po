@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "API"
 msgstr "API"
@@ -1294,8 +1295,17 @@ msgstr "Max"
 msgid "Avg"
 msgstr "Gem"
 
+#, python-format
+msgid "%(data_count)s data point"
+msgid_plural "%(data_count)s data points"
+msgstr[0] "%(data_count)s datapunt"
+msgstr[1] "%(data_count)s datapunten"
+
 msgid "Difference"
 msgstr "Verschil"
+
+msgid "There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate."
+msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
 
 msgid "Recent electricity consumption"
 msgstr "Recent elektriciteitsverbruik"

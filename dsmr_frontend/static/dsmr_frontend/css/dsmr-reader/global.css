@@ -68,7 +68,7 @@ div.graph_controls_help {
     color: gray;
 }
 
-div.search_help {
+td.comparison-warning, div.search_help {
     font-size: x-small;
     color: gray;
 }
