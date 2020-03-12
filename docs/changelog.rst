@@ -8,6 +8,7 @@ v3.7.0 - 2020-xx-xx
 - [`#921 <https://github.com/dennissiemensma/dsmr-reader/issues/921>`_] Notificaties bekijken zonder login
 - [`#774 <https://github.com/dennissiemensma/dsmr-reader/issues/774>`_] Retentie omzetten naar geplande taak
 - [`#565 <https://github.com/dennissiemensma/dsmr-reader/issues/565>`_] Melding bij onvolledige vergelijking
+- [`#923 <https://github.com/dennissiemensma/dsmr-reader/issues/923>`_] Backups compressie level configureerbaar maken
 
 
 ----

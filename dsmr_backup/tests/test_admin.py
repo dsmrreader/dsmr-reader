@@ -44,7 +44,8 @@ class TestAdmin(TestCase):
 
         data = dict(
             backup_time='06:00:00',
-            folder='backups/'
+            folder='backups/',
+            compression_level=1,
         )
 
         # Just posting should reset it. NOTE: To apply settings, form params must validate!

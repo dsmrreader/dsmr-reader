@@ -34,7 +34,7 @@ class BackupSettingsAdmin(SingletonModelAdmin):
         ),
         (
             _('Advanced'), {
-                'fields': ['folder'],
+                'fields': ['folder', 'compression_level'],
             }
         ),
         (

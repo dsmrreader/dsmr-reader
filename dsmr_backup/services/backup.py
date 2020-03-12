@@ -210,13 +210,15 @@ def on_backup_failed(process_handle):
     raise IOError(error_message)
 
 
-def compress(file_path, compresslevel=1):
+def compress(file_path):
     """ Compresses a file using (fast) gzip. Removes source file when compression succeeded. """
+    compression_level = BackupSettings.get_solo().compression_level
+
     file_path_gz = '{}.gz'.format(file_path)
 
     # Straight from the Python 3x docs.
     with open(file_path, 'rb') as f_in:
-        with gzip.open(file_path_gz, 'wb', compresslevel=compresslevel) as f_out:
+        with gzip.open(file_path_gz, 'wb', compresslevel=compression_level) as f_out:
             shutil.copyfileobj(f_in, f_out)
 
     os.unlink(file_path)

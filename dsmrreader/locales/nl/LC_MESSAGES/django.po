@@ -251,6 +251,12 @@ msgstr "Meest recente back-up"
 msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
 msgstr "Moment van de laatst gemaakte back-up. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de back-up wordt (eenmalig) de eerste keer genegeerd."
 
+msgid "Compression level"
+msgstr "Compressieniveau"
+
+msgid "The gzip compression level used. Level 9 = best, level 1 = fastest."
+msgstr "Het compressieniveau dat voor gzip gebruikt wordt. Niveau 9 = beste, niveau 1 = snelste."
+
 msgid "Backup configuration"
 msgstr "Back-upconfiguratie"
 
@@ -1045,6 +1051,9 @@ msgstr "Verberg gasgrafieken"
 
 msgid "Daily backup"
 msgstr "Dagelijkse back-up"
+
+msgid "Gzip compression level"
+msgstr "Gzip compressieniveau"
 
 msgid "Group electricity by reading"
 msgstr "Groepeer elektriciteit op meting"
