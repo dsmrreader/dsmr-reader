@@ -2264,6 +2264,9 @@ msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Word
 msgid "Recalculates day statistics prices"
 msgstr "Herberekent prijzen in dagtotalen"
 
+msgid "Reconstructs missing day statistics by using available hour statistics"
+msgstr "Reconstrueert missende dagstatistieken door beschikbare uurstatistieken te gebruiken"
+
 msgid "Note"
 msgstr "Notitie"
 

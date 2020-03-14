@@ -3,7 +3,7 @@
 # Dump for DSMR-reader v3.7
 ./manage.py migrate dsmr_api 0003_create_api_user
 ./manage.py migrate dsmr_backend 0014_verbose_field_translations
-./manage.py migrate dsmr_backup 0008_verbose_field_translations
+./manage.py migrate dsmr_backup 0009_compression_level
 ./manage.py migrate dsmr_consumption 0015_track_power_current
 ./manage.py migrate dsmr_datalogger 0021_schedule_retention_data_rotation
 ./manage.py migrate dsmr_frontend 0034_mysql_timezone_support
