@@ -126,4 +126,4 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
             return formats.date_format(data, 'DSMR_EXPORT_DATETIME_FORMAT')
 
         elif isinstance(data, datetime.date):  # pragma: no cover
-            return formats.date_format(data, 'DSMR_DATEPICKER_DATE_FORMAT')
+            return formats.date_format(data, 'DSMR_EXPORT_DATE_FORMAT')
