@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v3.7.0 - 2020-xx-xx
+v3.7.0 - 2020-03-19
 
 - [`#919 <https://github.com/dennissiemensma/dsmr-reader/issues/919>`_] Parsing telegram 3-fasige Fluvius meter faalt
 - [`#921 <https://github.com/dennissiemensma/dsmr-reader/issues/921>`_] Notificaties bekijken zonder login
