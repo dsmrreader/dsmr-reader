@@ -858,7 +858,7 @@ msgid "The number of items displayed on the X-axis of the dashboard graphs"
 msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
 
 msgid "Gas graph style"
-msgstr "Gafiekstijl voor gas"
+msgstr "Grafiekstijl voor gas"
 
 msgid "Using the bar style will help you distinguish empty values better"
 msgstr "Je kunt lege waardes beter onderscheiden wanneer je staafgrafieken gebruikt"
