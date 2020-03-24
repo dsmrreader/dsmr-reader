@@ -4,7 +4,7 @@ Changelog
 
 v3.8.0 - 2020-xx-xx
 
-- [`#xxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxx>`_] xxx
+- [`#934 <https://github.com/dennissiemensma/dsmr-reader/issues/934>`_] Spelling - by Phyxion
 
 
 ----
