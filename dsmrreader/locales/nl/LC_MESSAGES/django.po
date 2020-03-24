@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-24 19:57+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -16,6 +17,7 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -34,6 +36,12 @@ msgstr "De authenticatiesleutel om toegang te krijgen tot deze API."
 
 msgid "API configuration"
 msgstr "API-configuratie"
+
+msgid "DSMR-reader"
+msgstr "DSMR-reader"
+
+msgid "Configuration"
+msgstr "Configuratie"
 
 msgid "Updates"
 msgstr "Updates"
@@ -970,9 +978,6 @@ msgstr "Exporteer gegevens"
 
 msgid "Authentication required"
 msgstr "Authenticatie vereist"
-
-msgid "Configuration"
-msgstr "Configuratie"
 
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"

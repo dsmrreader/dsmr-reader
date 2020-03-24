@@ -22,6 +22,10 @@ import dsmr_backend.services.email
 admin.site.unregister(Group)
 admin.site.unregister(User)
 
+admin.site.site_header = _('DSMR-reader')
+admin.site.site_title = admin.site.site_header
+admin.site.index_title = _('Configuration')  # Should match the frontend menu item.
+
 
 @admin.register(BackendSettings)
 class BackendSettingsAdmin(SingletonModelAdmin):
