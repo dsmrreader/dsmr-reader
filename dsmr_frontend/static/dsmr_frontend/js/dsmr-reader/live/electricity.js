@@ -35,16 +35,10 @@ $(document).ready(function () {
         ],
         dataZoom: [
             {
-                show: true,
-                start: 0,
-                end: 100
-            },
-            {
-                type: 'inside',
                 start: 0,
                 end: 100
             }
-        ],
+        ]
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */
