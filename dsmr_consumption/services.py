@@ -325,14 +325,16 @@ def live_electricity_consumption():
     try:
         latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
     except IndexError:
-        # Don't even bother when no data available.
         return data
 
     latest_timestamp = timezone.localtime(latest_reading.timestamp)
 
-    # In case the smart meter is running a clock in the future.
-    if latest_timestamp > timezone.now():
-        latest_timestamp = timezone.now()
+    # In case the smart meter's clock is running in the future.
+    latest_timestamp = min(timezone.now(), latest_timestamp)
+
+    # To distinguish whether we're returning or not.
+    is_delivering = latest_reading.electricity_currently_delivered > latest_reading.electricity_currently_returned
+    abs_units = max(latest_reading.electricity_currently_delivered, latest_reading.electricity_currently_returned)
 
     data['timestamp'] = latest_timestamp
     data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
@@ -356,18 +358,22 @@ def live_electricity_consumption():
         return data
 
     tariff_price_map = {
-        1: prices.electricity_delivered_1_price,
-        2: prices.electricity_delivered_2_price,
+        # Price depends on whether we're currently delivering or returning
+        1: prices.electricity_delivered_1_price if is_delivering else prices.electricity_returned_1_price,
+        2: prices.electricity_delivered_2_price if is_delivering else prices.electricity_returned_2_price,
     }
 
     try:
-        cost_per_hour = latest_reading.electricity_currently_delivered * tariff_price_map[tariff]
+        cost_per_hour = abs_units * tariff_price_map[tariff]
     except KeyError:
         data['cost_per_hour'] = None
-    else:
-        data['cost_per_hour'] = formats.number_format(
-            round_decimal(cost_per_hour)
-        )
+        return data
+
+    # Returning? Negate.
+    if not is_delivering:
+        cost_per_hour *= -1
+
+    data['cost_per_hour'] = formats.number_format(round_decimal(cost_per_hour))
 
     return data
 

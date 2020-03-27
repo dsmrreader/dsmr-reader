@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 from unittest import mock
 
 from django.test.utils import override_settings
@@ -27,6 +28,7 @@ class TestViews(TestCase):
     namespace = 'frontend'
     support_data = True
     support_gas = True
+    support_prices = True
 
     def setUp(self):
         self.client = Client()
@@ -98,14 +100,48 @@ class TestViews(TestCase):
                     )
 
     def test_dashboard_xhr_header_future(self):
+        """ Test whether future timestamps are reset to now. """
         # Set timestamp to the future, so the view will reset the timestamp displayed to 'now'.
-        DsmrReading.objects.all().update(timestamp=timezone.now() + timezone.timedelta(weeks=1))
+        DsmrReading.objects.all().update(
+            timestamp=timezone.now() + timezone.timedelta(weeks=1),
+        )
 
         response = self.client.get(
             reverse('{}:xhr-consumption-header'.format(self.namespace))
         )
         self.assertEqual(response.status_code, 200, response.content)
         self.assertEqual(response['Content-Type'], 'application/json')
+
+        if not self.support_data:
+            return
+
+        json_response = json.loads(response.content)
+        self.assertEqual(json_response['timestamp'], 'now')
+
+    @mock.patch('django.utils.timezone.now')
+    def test_dashboard_xhr_header_electricity_return_negate_costs(self, now_mock):
+        """ Test whether electricity return negate the costs. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
+
+        if self.support_data:
+            latest = DsmrReading.objects.all().order_by('-timestamp')[0]
+            # Test data is unrealistic, but changing it hits other tests, so we'll just reset it here.
+            latest.update(
+                electricity_currently_delivered=Decimal(0),
+                electricity_currently_returned=Decimal(1.234),
+            )
+
+        response = self.client.get(
+            reverse('{}:xhr-consumption-header'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 200, response.content)
+        self.assertEqual(response['Content-Type'], 'application/json')
+
+        if not self.support_data or not self.support_prices:
+            return
+
+        json_response = json.loads(response.content)
+        self.assertEqual(json_response['cost_per_hour'], '-0.12')
 
 
 class TestViewsWithoutData(TestViews):
@@ -130,6 +166,7 @@ class TestViewsWithoutPrices(TestViews):
         super(TestViewsWithoutPrices, self).setUp()
         EnergySupplierPrice.objects.all().delete()
         self.assertFalse(EnergySupplierPrice.objects.exists())
+        self.support_prices = False
 
 
 class TestViewsWithoutGas(TestViews):
