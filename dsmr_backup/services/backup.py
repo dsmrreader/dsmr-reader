@@ -89,6 +89,7 @@ def create_full(folder):
         command = [
             settings.DSMRREADER_BACKUP_PG_DUMP,
             '--host={}'.format(settings.DATABASES['default']['HOST']),
+            '--port={}'.format(settings.DATABASES['default']['PORT']),
             '--user={}'.format(settings.DATABASES['default']['USER']),
             settings.DATABASES['default']['NAME'],
         ]
@@ -155,6 +156,7 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
             settings.DATABASES['default']['NAME'],
             '--data-only',
             '--host={}'.format(settings.DATABASES['default']['HOST']),
+            '--port={}'.format(settings.DATABASES['default']['PORT']),
             '--user={}'.format(settings.DATABASES['default']['USER']),
         ] + [
             '--table={}'.format(x._meta.db_table) for x in models_to_backup
