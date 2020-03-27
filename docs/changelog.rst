@@ -5,6 +5,7 @@ Changelog
 v3.8.0 - 2020-xx-xx
 
 - [`#934 <https://github.com/dennissiemensma/dsmr-reader/issues/934>`_] Spelling - by Phyxion
+- [`#940 <https://github.com/dennissiemensma/dsmr-reader/issues/940>`_] Postgresql backup is ignoring port setting - by FrankTimmers
 
 
 ----
