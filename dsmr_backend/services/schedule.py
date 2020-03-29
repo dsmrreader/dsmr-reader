@@ -13,9 +13,14 @@ def dispatch_signals():
     # send_robust() guarantees the every listener receives this signal.
     responses = backend_called.send_robust(None)
 
-    for __, current_response in responses:
+    for current_receiver, current_response in responses:
         if isinstance(current_response, Exception):
-            logger.exception(current_response)
+            logger.error(
+                '(%s) %s errored: %s',
+                current_response.__class__.__name__,
+                current_receiver,
+                current_response
+            )
 
 
 def execute_scheduled_processes():
@@ -29,7 +34,12 @@ def execute_scheduled_processes():
         try:
             current.execute()
         except Exception as error:
-            logger.exception(error)
+            logger.error(
+                '(%s) %s errored: %s',
+                error.__class__.__name__,
+                current.module,
+                error
+            )
 
             # Do not hammer.
             current.delay(timezone.timedelta(seconds=30))

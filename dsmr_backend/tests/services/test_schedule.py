@@ -44,7 +44,7 @@ class TestSchedule(InterceptStdoutMixin, TestCase):
         # We must disconnect to prevent other tests from failing, since this is no database action.
         dsmr_backend.signals.backend_called.disconnect(receiver=_fake_signal_troublemaker)
 
-    @mock.patch('logging.Logger.exception')
+    @mock.patch('logging.Logger.error')
     def test_signal_exception_handling(self, logging_mock):
         """ Tests signal exception handling. """
         def _fake_signal_troublemaker(*args, **kwargs):
@@ -57,7 +57,7 @@ class TestSchedule(InterceptStdoutMixin, TestCase):
         self.assertTrue(logging_mock.called)
 
     @mock.patch('dsmr_backend.signals.backend_called.send_robust')
-    @mock.patch('logging.Logger.exception')
+    @mock.patch('logging.Logger.error')
     @mock.patch('dsmr_backend.models.schedule.ScheduledProcess.execute')
     def test_execute_scheduled_processes_error(self, execute_mock, logging_mock, signal_mock):
         """ Test execute_scheduled_processes()'s exception handling. """
