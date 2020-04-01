@@ -86,22 +86,22 @@ class LiveXhrElectricityConsumption(View):
             data['read_at'].append(read_at)
 
             if form.cleaned_data.get('delivered'):
-                data['currently_delivered'].append(float(current.currently_delivered) * 1000)
+                data['currently_delivered'].append(self._convert_to_watt(current.currently_delivered))
 
             if form.cleaned_data.get('returned'):
-                data['currently_returned'].append(float(current.currently_returned) * 1000)
+                data['currently_returned'].append(self._convert_to_watt(current.currently_returned))
 
             if form.cleaned_data.get('phases'):
                 # 'or 0' is required due to empty data.
-                data['phases_delivered']['l1'].append(float(current.phase_currently_delivered_l1 or 0) * 1000)
-                data['phases_delivered']['l2'].append(float(current.phase_currently_delivered_l2 or 0) * 1000)
-                data['phases_delivered']['l3'].append(float(current.phase_currently_delivered_l3 or 0) * 1000)
+                data['phases_delivered']['l1'].append(self._convert_to_watt(current.phase_currently_delivered_l1))
+                data['phases_delivered']['l2'].append(self._convert_to_watt(current.phase_currently_delivered_l2))
+                data['phases_delivered']['l3'].append(self._convert_to_watt(current.phase_currently_delivered_l3))
 
                 if form.cleaned_data.get('returned'):
                     # 'or 0' is required due to backwards compatibility.
-                    data['phases_returned']['l1'].append(float(current.phase_currently_returned_l1 or 0) * 1000)
-                    data['phases_returned']['l2'].append(float(current.phase_currently_returned_l2 or 0) * 1000)
-                    data['phases_returned']['l3'].append(float(current.phase_currently_returned_l3 or 0) * 1000)
+                    data['phases_returned']['l1'].append(self._convert_to_watt(current.phase_currently_returned_l1))
+                    data['phases_returned']['l2'].append(self._convert_to_watt(current.phase_currently_returned_l2))
+                    data['phases_returned']['l3'].append(self._convert_to_watt(current.phase_currently_returned_l3))
 
             if form.cleaned_data.get('voltage'):
                 data['phase_voltage']['l1'].append(float(current.phase_voltage_l1 or 0))
@@ -116,6 +116,12 @@ class LiveXhrElectricityConsumption(View):
             data['latest_delta_id'] = current.id
 
         return JsonResponse(data)
+
+    def _convert_to_watt(self, kw_or_none):
+        if kw_or_none is None:
+            return 0
+
+        return int(kw_or_none * 1000)
 
 
 class LiveXhrGasConsumption(View):
