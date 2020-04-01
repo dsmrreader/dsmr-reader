@@ -18,7 +18,6 @@ from dsmr_backend.models.schedule import ScheduledProcess
 class BackupSettingsAdmin(SingletonModelAdmin):
     change_form_template = 'dsmr_backup/backup_settings/change_form.html'
     form = BackupSettingsAdminForm
-    readonly_fields = ('latest_backup', )
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
     }
@@ -37,16 +36,7 @@ class BackupSettingsAdmin(SingletonModelAdmin):
                 'fields': ['folder', 'compression_level'],
             }
         ),
-        (
-            _('Automatic fields'), {
-                'fields': ['latest_backup']
-            }
-        ),
     )
-
-    def response_change(self, request, obj):
-        BackupSettings.objects.all().update(latest_backup=None)
-        return super(BackupSettingsAdmin, self).response_change(request, obj)
 
 
 @admin.register(DropboxSettings)
@@ -117,3 +107,14 @@ def handle_email_backup_settings_update(sender, instance, **kwargs):
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
     ).update(active=instance.interval != EmailBackupSettings.INTERVAL_NONE)
+
+
+@receiver(django.db.models.signals.post_save, sender=BackupSettings)
+def handle_backup_settings_update(sender, instance, **kwargs):
+    """ Hook to toggle related scheduled process. """
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_DAILY_BACKUP
+    ).update(
+        planned=timezone.now(),
+        active=instance.daily_backup
+    )

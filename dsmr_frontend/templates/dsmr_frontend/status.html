@@ -269,19 +269,6 @@
                 </header>
                 <div class="panel-body">
                     <table class="table table-hover">
-                        {% if status.tools.backup.enabled %}
-                        <tr>
-                            <td class="col-sm-6">
-                                <strong>{% trans "Latest backup" %}</strong>
-                            </td>
-                            <td class="col-sm-6">
-                                <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-info"></i> &nbsp;
-                                    {% trans "Latest" %}: <strong>{{ status.tools.backup.latest_backup|default:'-' }}</strong>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endif %}
 
                         {% if status.tools.dropbox.enabled %}
                         <tr>

@@ -198,7 +198,9 @@ def status_info():
         {
             'backup': {
                 'enabled': False,
-                'latest_backup': None,
+                'latest_backup': ScheduledProcess.objects.get(
+                    module=settings.DSMRREADER_MODULE_DAILY_BACKUP
+                ).last_executed_at,
             },
             'dropbox': {
                 'enabled': False,
@@ -221,7 +223,6 @@ def status_info():
 
     if backup_settings.daily_backup:
         status['tools']['backup']['enabled'] = True
-        status['tools']['backup']['latest_backup'] = backup_settings.latest_backup
 
     dropbox_settings = DropboxSettings.get_solo()
 

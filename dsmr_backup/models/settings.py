@@ -32,16 +32,6 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
             'Please make sure that the "dsmr" user both has read and write access to the folder.'
         ),
     )
-    latest_backup = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Latest backup'),
-        help_text=_(
-            'Timestamp of latest backup created. Automatically updated by application. Please note '
-            'that the application will ignore the "backup_time" setting the first time used.'
-        )
-    )
     compression_level = models.IntegerField(
         default=1,
         validators=[MinValueValidator(1), MaxValueValidator(9)],

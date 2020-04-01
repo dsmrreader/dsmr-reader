@@ -218,11 +218,11 @@ msgstr "Stuur een test e-mail"
 msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
 
-msgid "Automatic fields"
-msgstr "Automatische velden"
-
 msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/backup_dropbox.html\">Documentation</a>"
 msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/backup_dropbox.html\">Documentatie</a>"
+
+msgid "Automatic fields"
+msgstr "Automatische velden"
 
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
@@ -250,12 +250,6 @@ msgstr "Back-up opslag map"
 
 msgid "The folder to store the backups in. The default location is \"backups/\". Please make sure that the \"dsmr\" user both has read and write access to the folder."
 msgstr "De map waarin back-ups opgeslagen worden. De standaardlocatie is \"backups/\". N.B.: Zorg ervoor dat de \"dsmr\" gebruiker toegang en schrijfrechten heeft tot de map."
-
-msgid "Latest backup"
-msgstr "Meest recente back-up"
-
-msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
-msgstr "Moment van de laatst gemaakte back-up. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de back-up wordt (eenmalig) de eerste keer genegeerd."
 
 msgid "Compression level"
 msgstr "Compressieniveau"
@@ -1559,11 +1553,11 @@ msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
 msgid "Tools"
 msgstr "Tools"
 
-msgid "Latest"
-msgstr "Meest recent"
-
 msgid "Latest Dropbox sync"
 msgstr "Meest recente synchronisatie met Dropbox"
+
+msgid "Latest"
+msgstr "Meest recent"
 
 msgid "Latest PVOutput sync"
 msgstr "Meest recente synchronisatie met PVOutput"
@@ -2566,6 +2560,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Latest backup"
+#~ msgstr "Meest recente back-up"
+
+#~ msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
+#~ msgstr "Moment van de laatst gemaakte back-up. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de back-up wordt (eenmalig) de eerste keer genegeerd."
 
 #~ msgid "Feedback"
 #~ msgstr "Feedback"
