@@ -8,6 +8,7 @@ v3.8.0 - 2020-xx-xx
 - [`#940 <https://github.com/dennissiemensma/dsmr-reader/issues/940>`_] Postgresql backup is ignoring port setting - by FrankTimmers
 - [`#937 <https://github.com/dennissiemensma/dsmr-reader/issues/937>`_] Dashboard €/uur houdt geen rekening met teruglevering
 - [`#943 <https://github.com/dennissiemensma/dsmr-reader/issues/943>`_] NonExistentTimeError for DST change in backup module
+- [`#953 <https://github.com/dennissiemensma/dsmr-reader/issues/953>`_] Update to Django 3.0.5
 
 
 ----
