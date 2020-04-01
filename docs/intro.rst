@@ -3,15 +3,14 @@ Introduction
 
 Project mission & goals
 -----------------------
-- Provide an easy to use setup for logging your own energy consumption.
-- Keeping your data for yourself (all data is stored locally and untracked as well).
-- Always free to use (it's open source on Github as well).
+- Provide an tool to easily read, store and export data transferred by the DSMR protocol.
+- Keep ownership of your own data.
 
 
 Languages
 ---------
 The entire application and its code is written and documented in English.
-The interface is translated into Dutch and will be enabled, depending on your browser's language preference.
+The interface is translated into Dutch and will be enabled automatically, depending on your browser's language preference.
 
 
 Screenshots
