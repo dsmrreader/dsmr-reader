@@ -605,6 +605,9 @@ msgstr "Verwijder de meeste metingen na een week"
 msgid "Discard most readings after one month"
 msgstr "Verwijder de meeste metingen na een maand"
 
+msgid "Discard most readings after three months"
+msgstr "Verwijder de meeste metingen na drie maanden"
+
 msgid "Discard most readings after six months"
 msgstr "Verwijder de meeste metingen na een halfjaar"
 
@@ -614,8 +617,8 @@ msgstr "Verwijder de meeste metingen na een jaar"
 msgid "Data retention"
 msgstr "Dataretentie"
 
-msgid "The lifetime of readings, before discarding them. Please note that retention is applied during night time currently, between midnight and six in the morning."
-msgstr "De levenduur van metingen, voordat ze opgeschoond worden. N.B.: Momenteel wordt retentie alleen doorgevoerd tijdens de nachturen, tussen middernacht en zes uur 's ochtends."
+msgid "The lifetime of readings and other data, before discarding them. Some readings will be preserved forever."
+msgstr "De levensduur van metingen, voordat ze opgeschoond worden. Sommige metingen worden voor altijd bewaard."
 
 msgid "Retention configuration"
 msgstr "Retentieconfiguratie"
@@ -2560,6 +2563,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "The lifetime of readings, before discarding them. Please note that retention is applied during night time currently, between midnight and six in the morning."
+#~ msgstr "De levenduur van metingen, voordat ze opgeschoond worden. N.B.: Momenteel wordt retentie alleen doorgevoerd tijdens de nachturen, tussen middernacht en zes uur 's ochtends."
 
 #~ msgid "Latest backup"
 #~ msgstr "Meest recente back-up"

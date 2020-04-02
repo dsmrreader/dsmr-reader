@@ -56,12 +56,14 @@ class RetentionSettings(ModelUpdateMixin, SingletonModel):
     RETENTION_NONE = None
     RETENTION_WEEK = 7 * 24
     RETENTION_MONTH = 4 * RETENTION_WEEK
+    RETENTION_THREE_MONTHS = 3 * RETENTION_MONTH
     RETENTION_HALF_YEAR = 6 * RETENTION_MONTH
     RETENTION_YEAR = 12 * RETENTION_MONTH
     RETENTION_CHOICES = (
         (RETENTION_NONE, _('None (keep all readings)')),
         (RETENTION_WEEK, _('Discard most readings after one week')),
         (RETENTION_MONTH, _('Discard most readings after one month')),
+        (RETENTION_THREE_MONTHS, _('Discard most readings after three months')),
         (RETENTION_HALF_YEAR, _('Discard most readings after six months')),
         (RETENTION_YEAR, _('Discard most readings after one year')),
     )
@@ -73,8 +75,8 @@ class RetentionSettings(ModelUpdateMixin, SingletonModel):
         choices=RETENTION_CHOICES,
         verbose_name=_('Data retention'),
         help_text=_(
-            'The lifetime of readings, before discarding them. Please note that retention is applied during night time '
-            'currently, between midnight and six in the morning.')
+            'The lifetime of readings and other data, before discarding them. Some readings will be preserved forever.'
+        )
     )
 
     def __str__(self):
