@@ -9,6 +9,8 @@ v3.8.0 - 2020-xx-xx
 - [`#937 <https://github.com/dennissiemensma/dsmr-reader/issues/937>`_] Dashboard €/uur houdt geen rekening met teruglevering
 - [`#943 <https://github.com/dennissiemensma/dsmr-reader/issues/943>`_] NonExistentTimeError for DST change in backup module
 - [`#930 <https://github.com/dennissiemensma/dsmr-reader/issues/930>`_] Soms afrondingsfout in grafieken-tooltip
+- [`#954 <https://github.com/dennissiemensma/dsmr-reader/issues/954>`_] Retention op 3 maanden kunnen zetten
+- [`#955 <https://github.com/dennissiemensma/dsmr-reader/issues/955>`_] Resetten van meter statistieken
 - [`#953 <https://github.com/dennissiemensma/dsmr-reader/issues/953>`_] Update to Django 3.0.5
 
 
