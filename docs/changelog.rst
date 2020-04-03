@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.9.0 - 2020-xx-xx
+
+- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_]xxxxxxx
+
+
+----
+
+
 v3.8.0 - 2020-04-03
 
 - [`#934 <https://github.com/dennissiemensma/dsmr-reader/issues/934>`_] Spelling - by Phyxion
