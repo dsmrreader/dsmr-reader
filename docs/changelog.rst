@@ -4,7 +4,7 @@ Changelog
 
 v3.9.0 - 2020-xx-xx
 
-- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_]xxxxxxx
+- [`#966 <https://github.com/dennissiemensma/dsmr-reader/issues/966>`_] Error in dsmr_backup_create --compact
 
 
 ----
