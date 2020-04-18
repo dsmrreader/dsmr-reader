@@ -6,7 +6,7 @@ django-debug-toolbar==2.2
 django-filter==2.2.0
 djangorestframework==3.11
 django-solo==1.1.3
-dropbox==9.5.0
+dropbox==10.1.0
 gunicorn==20.0.4
 paho-mqtt==1.5.0
 pyserial==3.4
@@ -14,4 +14,4 @@ pyserial-asyncio==0.4
 python-dateutil==2.8.1
 pytz==2019.3
 requests==2.23.0
-urllib3==1.25.8
+urllib3==1.25.9
