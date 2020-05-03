@@ -16,10 +16,10 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
         (
             _('Graphs'), {
                 'fields': [
+                    'live_graphs_hours_range',
                     'electricity_graph_style',
                     'stack_electricity_graphs',
                     'gas_graph_style',
-                    'dashboard_graph_width',
                 ],
             }
         ),

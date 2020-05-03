@@ -4,6 +4,7 @@ Changelog
 
 v3.9.0 - 2020-xx-xx
 
+- [`#947 <https://github.com/dennissiemensma/dsmr-reader/issues/947>`_] Tijdsrange live grafieken zelf kunnen instellen
 - [`#969 <https://github.com/dennissiemensma/dsmr-reader/issues/969>`_] In- en uitknijpen van de grafieken werkt niet meer
 - [`#966 <https://github.com/dennissiemensma/dsmr-reader/issues/966>`_] Error in dsmr_backup_create --compact
 

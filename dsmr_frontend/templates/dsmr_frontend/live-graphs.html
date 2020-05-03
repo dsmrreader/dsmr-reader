@@ -145,7 +145,6 @@
     <script type="text/javascript">
         {% localize off %}
         var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
-        var dashboard_graph_width = {{ frontend_settings.dashboard_graph_width }};
         var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
         {% endlocalize %}
     </script>

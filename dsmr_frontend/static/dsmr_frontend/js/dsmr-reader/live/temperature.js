@@ -7,9 +7,6 @@ $(document).ready(function () {
     $.get(echarts_temperature_graph_url, function (xhr_data) {
         echarts_temperature_graph.hideLoading();
 
-        /* Adjust default zooming to the number of default items we want to display. */
-        var zoom_percent = 100 - (dashboard_graph_width / xhr_data.read_at.length * 100);
-
         var option = {
             color: [
                 temperature_color

@@ -100,9 +100,6 @@ $(document).ready(function () {
             ];
         }
 
-        /* Adjust default zooming to the number of default items we want to display. */
-        var zoom_percent = 100 - (dashboard_graph_width / xhr_data.read_at.length * 100);
-        echarts_power_current_initial_options.dataZoom[0].start = zoom_percent;
         echarts_power_current_graph.setOption(echarts_power_current_initial_options);
 
         /* Different set of options, to prevent the dataZoom being reset on each update. */
