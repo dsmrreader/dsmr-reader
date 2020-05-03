@@ -9,7 +9,6 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
-from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.reading import TemperatureReading
 
 
@@ -44,10 +43,6 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('frontend_settings', response.context)
-        self.assertEqual(
-            response.context['frontend_settings'].dashboard_graph_width,
-            FrontendSettings.get_solo().dashboard_graph_width
-        )
 
     @mock.patch('django.utils.timezone.now')
     def test_live_xhr_electricity(self, now_mock):

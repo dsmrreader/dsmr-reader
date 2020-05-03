@@ -8,7 +8,6 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
-from dsmr_frontend.models.settings import FrontendSettings
 
 
 class TestViews(TestCase):
@@ -46,10 +45,6 @@ class TestViews(TestCase):
         self.assertIn('datalogger_settings', response.context)
         self.assertIn('frontend_settings', response.context)
         self.assertIn('notification_count', response.context)
-        self.assertEqual(
-            response.context['frontend_settings'].dashboard_graph_width,
-            FrontendSettings.get_solo().dashboard_graph_width
-        )
 
 
 class TestViewsWithoutData(TestViews):

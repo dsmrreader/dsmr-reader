@@ -82,11 +82,11 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Temperature color'),
         help_text=_("Graph color for temperatures read")
     )
-    dashboard_graph_width = models.IntegerField(
-        default=30,
-        validators=[MinValueValidator(30), MaxValueValidator(60 * 60 * 24)],
-        verbose_name=_('Dashboard graph width'),
-        help_text=_("The number of items displayed on the X-axis of the dashboard graphs")
+    live_graphs_hours_range = models.IntegerField(
+        default=24,
+        validators=[MinValueValidator(1), MaxValueValidator(7 * 24)],
+        verbose_name=_('Live graphs hours range'),
+        help_text=_("The range of the data displayed in live graphs (increasing it may degrade rendering performance!)")
     )
     gas_graph_style = models.CharField(
         max_length=4,

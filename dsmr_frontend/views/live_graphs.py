@@ -12,9 +12,6 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
-XHR_RECENT_CONSUMPTION_HOURS_AGO = 24
-
-
 class LiveGraphs(TemplateView):
     template_name = 'dsmr_frontend/live-graphs.html'
 
@@ -73,8 +70,10 @@ class LiveXhrElectricityConsumption(View):
         # Optional delta.
         latest_delta_id = form.cleaned_data.get('latest_delta_id')
 
-        # Optimize queries for large datasets by restricting the data to the last week in the first place.
-        base_timestamp = timezone.now() - timezone.timedelta(hours=XHR_RECENT_CONSUMPTION_HOURS_AGO)
+        # Optimize queries for large datasets by restricting the data (when using the installation default).
+        base_timestamp = timezone.now() - timezone.timedelta(
+            hours=FrontendSettings.get_solo().live_graphs_hours_range
+        )
         electricity = ElectricityConsumption.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
         if latest_delta_id:
@@ -133,7 +132,9 @@ class LiveXhrGasConsumption(View):
         }
 
         # Optimize queries for large datasets by restricting the data to the last week in the first place.
-        base_timestamp = timezone.now() - timezone.timedelta(hours=XHR_RECENT_CONSUMPTION_HOURS_AGO)
+        base_timestamp = timezone.now() - timezone.timedelta(
+            hours=FrontendSettings.get_solo().live_graphs_hours_range
+        )
         gas = GasConsumption.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
         for current in gas:
@@ -153,7 +154,9 @@ class LiveXhrTemperature(View):
         }
 
         # Optimize queries for large datasets by restricting the data to the last week in the first place.
-        base_timestamp = timezone.now() - timezone.timedelta(hours=XHR_RECENT_CONSUMPTION_HOURS_AGO)
+        base_timestamp = timezone.now() - timezone.timedelta(
+            hours=FrontendSettings.get_solo().live_graphs_hours_range
+        )
         temperature = TemperatureReading.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
         for current in temperature:

@@ -854,11 +854,11 @@ msgstr "Temperatuurkleur"
 msgid "Graph color for temperatures read"
 msgstr "Grafiekkleur voor temperatuurmetingen"
 
-msgid "Dashboard graph width"
-msgstr "Dashboard grafiek breedte"
+msgid "Live graphs hours range"
+msgstr "Live grafieken urenlimiet"
 
-msgid "The number of items displayed on the X-axis of the dashboard graphs"
-msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
+msgid "The range of the data displayed in live graphs (increasing it may degrade rendering performance!)"
+msgstr "Het bereik van de gegevens in de live grafieken (het verhogen van deze waarde kan resulteren in verslechterde performance van de grafieken!)"
 
 msgid "Gas graph style"
 msgstr "Grafiekstijl voor gas"
@@ -2563,6 +2563,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Dashboard graph width"
+#~ msgstr "Dashboard grafiek breedte"
+
+#~ msgid "The number of items displayed on the X-axis of the dashboard graphs"
+#~ msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
 
 #~ msgid "The lifetime of readings, before discarding them. Please note that retention is applied during night time currently, between midnight and six in the morning."
 #~ msgstr "De levenduur van metingen, voordat ze opgeschoond worden. N.B.: Momenteel wordt retentie alleen doorgevoerd tijdens de nachturen, tussen middernacht en zes uur 's ochtends."
