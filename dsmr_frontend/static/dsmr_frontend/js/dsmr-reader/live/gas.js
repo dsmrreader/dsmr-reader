@@ -43,7 +43,7 @@ $(document).ready(function () {
             dataZoom: [
                 {
                     show: true,
-                    start: live_graphs_initial_zoom,
+                    start: 0,
                     end: 100
                 },
                 {
