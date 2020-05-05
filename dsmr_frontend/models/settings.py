@@ -88,6 +88,12 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Live graphs hours range'),
         help_text=_("The range of the data displayed in live graphs (increasing it may degrade rendering performance!)")
     )
+    live_graphs_initial_zoom = models.IntegerField(
+        default=10,
+        validators=[MinValueValidator(1), MaxValueValidator(100)],
+        verbose_name=_('Live graphs initial zoom'),
+        help_text=_("The percentage of the graph range displayed initially")
+    )
     gas_graph_style = models.CharField(
         max_length=4,
         choices=GRAPH_STYLES,

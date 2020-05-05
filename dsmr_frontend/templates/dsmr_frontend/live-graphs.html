@@ -145,6 +145,7 @@
     <script type="text/javascript">
         {% localize off %}
         var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
+        var live_graphs_initial_zoom = 100 - {{ frontend_settings.live_graphs_initial_zoom }};
         var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
         {% endlocalize %}
     </script>
