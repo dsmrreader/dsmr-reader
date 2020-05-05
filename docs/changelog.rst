@@ -10,6 +10,12 @@ v3.10.0 - 2020-xx-xx
 ----
 
 
+v3.9.1 - 2020-05-05
+
+- [`#947 <https://github.com/dennissiemensma/dsmr-reader/issues/947>`_] Standaard zoom live grafieken zelf kunnen instellen
+
+
+----
 v3.9.0 - 2020-05-04
 
 - [`#947 <https://github.com/dennissiemensma/dsmr-reader/issues/947>`_] Tijdsrange live grafieken zelf kunnen instellen
