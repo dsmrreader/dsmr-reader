@@ -24,6 +24,11 @@ There are also Docker versions available for DSMR-reader. These are hosted and m
     * **Github**: https://github.com/trizz/dsmr-remote-datalogger
     * **Docker hub**: https://hub.docker.com/r/trizz/dsmr-remote-datalogger/
 
+.. seealso::
+
+    Datalogger in Home Assistant by ``sanderdw`` (Sander de Wildt):
+    
+    * **Github**: https://github.com/sanderdw/hassio-addons
 
 ----
 
