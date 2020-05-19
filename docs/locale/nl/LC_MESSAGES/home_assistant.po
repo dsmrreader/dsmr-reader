@@ -8,31 +8,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language: nl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: nl\n"
+"Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../home_assistant.rst:2
 msgid "Home Assistant"
 msgstr "Home Assistant"
 
-#: ../../home_assistant.rst:4
+#: ../../home_assistant.rst:5
+msgid "Plugins"
+msgstr "Plugins"
+
+#: ../../home_assistant.rst:6
 msgid ""
 "Since Home Assistant ``0.103`` there is `a DSMR-reader plugin available "
 "<https://www.home-assistant.io/integrations/dsmr_reader/>`_, created by "
 "Wim Haanstra. This plugin uses DSMR-reader's MQTT messages to read and "
 "update the state of your smart meter."
 msgstr ""
-"Sinds Home Assistant ``0.103`` is er `een DSMR-reader plugin "
-"beschikbaar <https://www.home-assistant.io/integrations/dsmr_reader/"
-">`_, gemaakt door by Wim Haanstra. Deze plugin gebruikt DSMR-reader's "
-"MQTT-berichten om de status van je slimme meter uit te lezen."
+"Sinds Home Assistant ``0.103`` is er `een DSMR-reader plugin beschikbaar "
+"<https://www.home-assistant.io/integrations/dsmr_reader/>`_, gemaakt "
+"door by Wim Haanstra. Deze plugin gebruikt DSMR-reader's MQTT-berichten "
+"om de status van je slimme meter uit te lezen."
 
-#: ../../home_assistant.rst:7
-msgid "More details can be found on the link above."
-msgstr "Meer informatie is te vinden in de bovenstaande link."
+#: ../../home_assistant.rst:11
+msgid "Add-ons"
+msgstr "Add-ons"
+
+#: ../../home_assistant.rst:12
+msgid ""
+"Also, there is `a DSMR-reader remote datalogger add-on for Home "
+"Assistant <https://github.com/sanderdw/hassio-addons>`_, created by "
+"Sander de Wildt."
+msgstr ""
+"Tevens is er `een DSMR-reader remote datalogger add-on voor Home "
+"Assistant <https://github.com/sanderdw/hassio-addons>`_, gemaakt door "
+"Sander de Wildt."
+
+#~ msgid "More details can be found on the link above."
+#~ msgstr "Meer informatie is te vinden in de bovenstaande link."
