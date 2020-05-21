@@ -102,26 +102,33 @@ msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 msgstr "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
 
 #: ../../credits.rst:33
+#, fuzzy
+msgid ""
+"`Django Admin Range Filter <https://github.com/silentsokolov/django-"
+"admin-rangefilter>`_"
+msgstr "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
+
+#: ../../credits.rst:34
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr "`Supervisor <http://supervisord.org/>`_"
 
-#: ../../credits.rst:34
+#: ../../credits.rst:35
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr "`MySQL <https://www.mysql.com/>`_"
 
-#: ../../credits.rst:35
+#: ../../credits.rst:36
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr "`MariaDB <https://mariadb.org/>`_"
 
-#: ../../credits.rst:36
+#: ../../credits.rst:37
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
-#: ../../credits.rst:37
+#: ../../credits.rst:38
 msgid "Director Responsive Admin template (website is offline)"
 msgstr "Director Responsive Admin template (website is offline)"
 
-#: ../../credits.rst:38
+#: ../../credits.rst:39
 msgid ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
@@ -129,35 +136,35 @@ msgstr ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
-#: ../../credits.rst:39
+#: ../../credits.rst:40
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 
-#: ../../credits.rst:40
+#: ../../credits.rst:41
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
-#: ../../credits.rst:41
+#: ../../credits.rst:42
 msgid "`Github <https://github.com/>`_"
 msgstr "`Github <https://github.com/>`_"
 
-#: ../../credits.rst:42
+#: ../../credits.rst:43
 msgid "`TravisCI <https://travis-ci.org>`_"
 msgstr "`TravisCI <https://travis-ci.org>`_"
 
-#: ../../credits.rst:43
+#: ../../credits.rst:44
 msgid "`Codecov <https://codecov.io>`_"
 msgstr "`Codecov <https://codecov.io>`_"
 
-#: ../../credits.rst:44
+#: ../../credits.rst:45
 msgid "`Read The Docs <https://readthedocs.org/>`_"
 msgstr "`Read The Docs <https://readthedocs.org/>`_"
 
-#: ../../credits.rst:45
+#: ../../credits.rst:46
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
-#: ../../credits.rst:46
+#: ../../credits.rst:47
 msgid ""
 "`Full Page Screen Capture <https://chrome.google.com/webstore/detail"
 "/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
@@ -165,15 +172,15 @@ msgstr ""
 "`Full Page Screen Capture <https://chrome.google.com/webstore/detail"
 "/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 
-#: ../../credits.rst:47
+#: ../../credits.rst:48
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr "`Buienradar <http://www.buienradar.nl>`_"
 
-#: ../../credits.rst:48
+#: ../../credits.rst:49
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr "`Django REST Framework <http://www.django-rest-framework.org>`_"
 
-#: ../../credits.rst:49
+#: ../../credits.rst:50
 msgid ""
 "`eCharts Graphing <https://ecomfe.github.io/echarts-"
 "doc/public/en/index.html>`_"
@@ -181,15 +188,15 @@ msgstr ""
 "`eCharts Graphing <https://ecomfe.github.io/echarts-"
 "doc/public/en/index.html>`_"
 
-#: ../../credits.rst:50
+#: ../../credits.rst:51
 msgid "`CircleCI <https://circleci.com/>`_"
 msgstr "`CircleCI <https://circleci.com/>`_"
 
-#: ../../credits.rst:51
+#: ../../credits.rst:52
 msgid "`ReDoc <https://github.com/Redocly/redoc>`_"
 msgstr "`ReDoc <https://github.com/Redocly/redoc>`_"
 
-#: ../../credits.rst:52
+#: ../../credits.rst:53
 #, fuzzy
 msgid "`Semantic UI <https://semantic-ui.com>`_"
 msgstr "`Github <https://github.com/>`_"
