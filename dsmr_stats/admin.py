@@ -1,8 +1,8 @@
-from django.contrib.admin.filters import DateFieldListFilter
 from django.contrib import admin
 from django.forms import widgets
 from django.db import models
 from solo.admin import SingletonModelAdmin
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 from .models.note import Note
 from .models.statistics import HourStatistics, DayStatistics, ElectricityStatistics
@@ -31,7 +31,7 @@ class DayStatisticsAdmin(admin.ModelAdmin):
     ordering = ['-day', 'total_cost']
     list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'total_cost')
     list_filter = (
-        ('day', DateFieldListFilter),
+        ('day', DateRangeFilter),
     )
 
 
@@ -41,7 +41,7 @@ class HourStatisticsAdmin(admin.ModelAdmin):
     ordering = ['-hour_start']
     list_display = ('hour_start', 'electricity_merged', 'electricity_returned_merged')
     list_filter = (
-        ('hour_start', DateFieldListFilter),
+        ('hour_start', DateTimeRangeFilter),
     )
 
 

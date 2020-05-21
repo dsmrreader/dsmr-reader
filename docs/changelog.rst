@@ -5,6 +5,7 @@ Changelog
 v3.10.0 - 2020-xx-xx
 
 - [`#996 <https://github.com/dennissiemensma/dsmr-reader/issues/996>`_] Refer HA add-on by Sander de Wildt
+- [`#997 <https://github.com/dennissiemensma/dsmr-reader/issues/997>`_] Zoeken naar specifieke dagen in admin
 
 
 ----

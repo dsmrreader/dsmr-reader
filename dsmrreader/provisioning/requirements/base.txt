@@ -1,6 +1,7 @@
 coreapi==2.3.3
 crcmod==1.7
 django==3.0.6
+django-admin-rangefilter==0.6.0
 django-colorfield==0.3.0
 django-debug-toolbar==2.2
 django-filter==2.2.0

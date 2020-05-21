@@ -1,10 +1,10 @@
 from django.conf import settings
-from django.contrib.admin.filters import DateFieldListFilter
 from django.contrib import admin
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from solo.admin import SingletonModelAdmin
+from rangefilter.filter import DateTimeRangeFilter
 import django.db.models.signals
 
 from dsmr_backend.mixins import ReadOnlyAdminModel
@@ -64,7 +64,7 @@ class DsmrReadingAdmin(ReadOnlyAdminModel):
     ordering = ['-timestamp']
     list_display = ('timestamp', 'electricity_currently_delivered', 'electricity_currently_returned')
     list_filter = (
-        ('timestamp', DateFieldListFilter),
+        ('timestamp', DateTimeRangeFilter),
     )
 
 
