@@ -87,7 +87,7 @@ msgid ""
 msgstr ""
 "Voor alle andere gebruikers, die graag willen weten wat ze exact uitvoeren. :"
 "doc:`Ga hier naar instructies voor de toegelichte installatie.<installation/"
-"quick>`"
+"explained>`"
 
 #: ../../installation.rst:30
 msgid "**Docker installation**"
