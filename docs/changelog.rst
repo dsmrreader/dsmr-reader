@@ -7,6 +7,8 @@ v3.10.0 - 2020-xx-xx
 - [`#996 <https://github.com/dennissiemensma/dsmr-reader/issues/996>`_] Refer HA add-on by Sander de Wildt
 - [`#997 <https://github.com/dennissiemensma/dsmr-reader/issues/997>`_] Zoeken naar specifieke dagen in admin
 - [`#994 <https://github.com/dennissiemensma/dsmr-reader/issues/994>`_] FAQ bijwerken voor meterwissel
+- [`#1001 <https://github.com/dennissiemensma/dsmr-reader/issues/1001>`_] Fixed link in docs - by denniswo
+- [`#1002 <https://github.com/dennissiemensma/dsmr-reader/issues/1002>`_] Improve datalogger installation docs
 
 
 ----

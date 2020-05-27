@@ -3,9 +3,13 @@ Installation: Datalogger only
 
 This will install a datalogger that will forward telegrams to another fully installed instance of DSMR-reader, using its API.
 
+To be clear, there should be two hosts:
 
-Prepare API
------------
+- The device hosting the datalogger
+- The device (or server) hosting the receiving DSMR-reader instance
+
+Receiving DSMR-reader instance: preparation
+-------------------------------------------
 
 Make sure to prepare the API at the DSMR-reader instance you'll forward the telegrams to.
 For more information configuring it, :doc:`see the API settings <../admin/api>`.
@@ -14,9 +18,16 @@ For more information configuring it, :doc:`see the API settings <../admin/api>`.
 
     If your smart meter only supports DSMR v2, make sure to change the DSMR version :doc:`in the datalogger settings <../admin/datalogger>`.
 
+Also, you should disable the datalogger process over there, since you won't be using it anyway::
 
-Installation
-------------
+    # On the DSMR-reader instance you'll forward the telegrams to.
+
+    sudo rm /etc/supervisor/conf.d/dsmr_datalogger.conf
+    sudo supervisorctl reread
+    sudo supervisorctl update
+
+Datalogger instance: installation
+---------------------------------
 
 Execute::
 
@@ -32,14 +43,13 @@ Execute::
     sudo sudo -u dsmr mkdir /home/dsmr/.virtualenvs
     sudo sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3
     sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
-    sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
-    
+
     # Requirements
     sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.4 pyserial-asyncio==0.4 requests==2.22.0
 
 
-Script
-------
+Datalogger instance: Script
+---------------------------
 
 Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this content: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dennissiemensma/dsmr-reader/blob/v3/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_
 
@@ -51,8 +61,8 @@ Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this content
 
     Don't forget to insert your own API URL and API key as defined in ``API_SERVERS`` in the script.
 
-Supervisor
-----------
+Datalogger instance: Supervisor
+-------------------------------
 
 Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` with contents::
 
