@@ -78,18 +78,3 @@ msgid ""
 msgstr ""
 "Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
 "reader"
-
-#~ msgid "Provide an easy to use setup for logging your own energy consumption."
-#~ msgstr ""
-#~ "Een gemakkelijk te gebruiken oplossing voor het bijhouden van je eigen "
-#~ "energieverbruik."
-
-#~ msgid ""
-#~ "Keeping your data for yourself (all data is stored locally and untracked "
-#~ "as well)."
-#~ msgstr ""
-#~ "Alle gegevens zijn eigendom van jezelf (alle data wordt lokaal opgeslagen "
-#~ "en wordt niet zomaar gedeeld met de buitenwereld)."
-
-#~ msgid "Always free to use (it's open source on Github as well)."
-#~ msgstr "Altijd gratis te gebruiken (en tevens open-source op Github)."

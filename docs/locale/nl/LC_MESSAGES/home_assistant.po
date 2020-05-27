@@ -51,6 +51,3 @@ msgstr ""
 "Tevens is er `een DSMR-reader remote datalogger add-on voor Home "
 "Assistant <https://github.com/sanderdw/hassio-addons>`_, gemaakt door "
 "Sander de Wildt."
-
-#~ msgid "More details can be found on the link above."
-#~ msgstr "Meer informatie is te vinden in de bovenstaande link."

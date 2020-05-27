@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../changelog.rst:9
 msgid ""
-"[`#507 <https://github.com/dennissiemensma/dsmr-reader/issues/507>`_] FAQ"
+"[`#994 <https://github.com/dennissiemensma/dsmr-reader/issues/994>`_] FAQ"
 " bijwerken voor meterwissel"
 msgstr ""
 
@@ -3039,89 +3039,3 @@ msgstr ""
 #: ../../changelog.rst:1181
 msgid "Upgraded Django to 1.8.9."
 msgstr ""
-
-#~ msgid ""
-#~ "[`#769 <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/769>`_]  Enhance DSMR for ORBIS"
-#~ " codes used by Smarty smartmeters in"
-#~ " Luxembourg"
-#~ msgstr ""
-
-#~ msgid "v2.10.0 - 2019-xx-xx"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "[`#765 <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/765>`_]  Requirements update (November"
-#~ " 2019)"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "[`#750 <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/750>`_]  Piek- en dalmetingen "
-#~ "omgedraaid (Belgische slimme meter)"
-#~ msgstr ""
-
-#~ msgid "v3.0.0 - 2020-xx-xx"
-#~ msgstr ""
-
-#~ msgid "v2.13.0 - 2019-01-05"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "This releases turns telegram logging "
-#~ "**off by default**. If you wish to"
-#~ " continue using this feature, add "
-#~ "``DSMRREADER_LOG_TELEGRAMS = True`` to your"
-#~ " ``settings.py`` and reload the "
-#~ "application."
-#~ msgstr ""
-
-#~ msgid "v3.0.0 - 2020-01-xx"
-#~ msgstr ""
-
-#~ msgid "v2.15.0 - 2020-01-xx"
-#~ msgstr ""
-
-#~ msgid "v3.1.0 - 2020-01-xx"
-#~ msgstr ""
-
-#~ msgid "v3.3.0 - 2020-xx-xx"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "*This is the last release of "
-#~ "DSMR-reader ``v2.x``. New features will "
-#~ "only be added to ``v3.x``. See "
-#~ "`the v3 upgrade guide <https://dsmr-"
-#~ "reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for "
-#~ "more information.*"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "*Some configuration options inside "
-#~ "``settings.py`` were relocated or removed "
-#~ "from the application. See `the docs "
-#~ "<https://dsmr-reader.readthedocs.io/en/latest/settings.html>`_"
-#~ " for the changes.*"
-#~ msgstr ""
-
-#~ msgid "v3.5.0 - 2020-xx-xx"
-#~ msgstr ""
-
-#~ msgid "v3.8.0 - 2020-xx-xx"
-#~ msgstr ""
-
-#~ msgid "v3.9.0 - 2020-xx-xx"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "[`#xxxxxxx <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/xxxxxxx>`_]xxxxxxx"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "[`#xxxxx <https://github.com/dennissiemensma/dsmr-"
-#~ "reader/issues/xxxxx>`_] xxxxx"
-#~ msgstr ""
-
