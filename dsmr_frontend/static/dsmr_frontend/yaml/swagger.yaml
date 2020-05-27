@@ -18,7 +18,7 @@ externalDocs:
 
 securityDefinitions:
   Token:
-    description: 'For each API request, include the ``Authorization`` header with value ``Token: YOUR_API_KEY``.'
+    description: 'For each API request, include the ``Authorization`` header with value ``Token YOUR_API_KEY``.'
     type: apiKey
     name: Token
     in: header
