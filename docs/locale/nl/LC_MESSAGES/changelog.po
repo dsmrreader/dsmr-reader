@@ -51,7 +51,7 @@ msgstr ""
 #: ../../changelog.rst:11
 msgid ""
 "[`#1002 <https://github.com/dennissiemensma/dsmr-reader/issues/1002>`_] "
-"Improved installation docs]"
+"Improve datalogger installation docs"
 msgstr ""
 
 #: ../../changelog.rst:17
@@ -3051,4 +3051,9 @@ msgstr ""
 #: ../../changelog.rst:1183
 msgid "Upgraded Django to 1.8.9."
 msgstr ""
+
+#~ msgid ""
+#~ "[`#1002 <https://github.com/dennissiemensma/dsmr-"
+#~ "reader/issues/1002>`_] Improved installation docs]"
+#~ msgstr ""
 

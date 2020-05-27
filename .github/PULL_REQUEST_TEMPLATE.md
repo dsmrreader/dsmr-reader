@@ -1,3 +1,3 @@
 ### Check
 
-- [ ] Make sure you are making a pull request against the `development` branch. Also you should start your branch off the `development` branch.
+- [ ] Please do not create pull requests against ``master``, ``v2`` or ``v3``. Just use the `development` branch as both PR base and merge target.

@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
+"Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../troubleshooting.rst:2
@@ -24,174 +24,288 @@ msgstr "Hulp bij problemen"
 
 #: ../../troubleshooting.rst:3
 msgid ""
-"If the application happens to stall unexpectedly, you can perform some "
-"debugging on your end."
+"If anything happens to fail or malfunction, please follow the steps below "
+"first to provide some background information when reporting an issue."
 msgstr ""
-"Mocht de applicatie onverwachts stoppen, dan kun je zelf het volgende doen om "
-"te kijken of je een oorzaak kan vinden."
+"Wanneer er iets lijkt mis te gaan, volg de onderstaande stappen eerst, voordat "
+"je een issue aanmaakt. Hiermee kun je wat meer achtergrondinformatie "
+"aanleveren."
 
 #: ../../troubleshooting.rst:6
-msgid "Status page"
-msgstr "Status-pagina"
+msgid "Supervisor"
+msgstr "Supervisor"
 
-#: ../../troubleshooting.rst:7
+#: ../../troubleshooting.rst:8
 msgid ""
-"The first place to look at is the Status page in the application. Does it "
-"display any errors or is it lagging data processing?"
+"DSMR-reader technically consists of these processes (some may or may not be "
+"used by you) and they are watched by Supervisor:"
 msgstr ""
-"Als eerste kun je het beste naar de Status-pagina gaan. Staat daar een "
-"foutmelding of loopt de dataverwerking achter?"
+"DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of niet "
+"in je eigen situatie gebruikt worden) en ze worden beheerd door Supervisor:"
 
-#: ../../troubleshooting.rst:12
+#: ../../troubleshooting.rst:11 ../../troubleshooting.rst:37
+msgid "Webinterface"
+msgstr "Webinterface"
+
+#: ../../troubleshooting.rst:11
+msgid "``dsmr_webinterface``"
+msgstr "``dsmr_webinterface``"
+
+#: ../../troubleshooting.rst:13 ../../troubleshooting.rst:39
+msgid "Datalogger"
+msgstr "Datalogger"
+
+#: ../../troubleshooting.rst:13
+msgid "``dsmr_datalogger``"
+msgstr "``dsmr_datalogger``"
+
+#: ../../troubleshooting.rst:15 ../../troubleshooting.rst:41
+msgid "Backend"
+msgstr "Backend"
+
+#: ../../troubleshooting.rst:15
+msgid "``dsmr_backend``"
+msgstr "``dsmr_backend``"
+
+#: ../../troubleshooting.rst:17 ../../troubleshooting.rst:43
+msgid "Export or MQTT"
+msgstr "Export of MQTT"
+
+#: ../../troubleshooting.rst:17
+msgid "``dsmr_export`` or ``dsmr_mqtt``"
+msgstr "``dsmr_export`` or ``dsmr_mqtt``"
+
+#: ../../troubleshooting.rst:20
+msgid "You can view the status of all processes by running::"
+msgstr ""
+"Je kunt de status van alle processen bekijken door het volgende uit te voeren::"
+
+#: ../../troubleshooting.rst:24
+msgid ""
+"Any processes listed, should have the status ``RUNNING``. Stale or crashed "
+"processes can be restarted with::"
+msgstr ""
+"Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. Hangende "
+"of gecrashde processen kunnen herstart worden met::"
+
+#: ../../troubleshooting.rst:30
+msgid "Or to restart them all simultaneously::"
+msgstr "Of herstart ze allemaal tegelijkertijd::"
+
+#: ../../troubleshooting.rst:34
+msgid ""
+"If this does not resolve your issue, check the logfiles for more information:"
+msgstr ""
+"Wanneer dit niet je probleem oplost, bekijk de logbestanden voor meer "
+"informatie:"
+
+#: ../../troubleshooting.rst:37
+msgid "``/var/log/supervisor/dsmr_webinterface.log``"
+msgstr "``/var/log/supervisor/dsmr_webinterface.log``"
+
+#: ../../troubleshooting.rst:39
+msgid "``/var/log/supervisor/dsmr_datalogger.log``"
+msgstr "``/var/log/supervisor/dsmr_datalogger.log``"
+
+#: ../../troubleshooting.rst:41
+msgid "``/var/log/supervisor/dsmr_backend.log``"
+msgstr "``/var/log/supervisor/dsmr_backend.log``"
+
+#: ../../troubleshooting.rst:43
+msgid ""
+"``/var/log/supervisor/dsmr_export.log`` or ``/var/log/supervisor/dsmr_mqtt."
+"log``"
+msgstr ""
+"``/var/log/supervisor/dsmr_export.log`` of ``/var/log/supervisor/dsmr_mqtt."
+"log``"
+
+#: ../../troubleshooting.rst:48
 msgid "Logging"
 msgstr "Logging"
 
-#: ../../troubleshooting.rst:13
+#: ../../troubleshooting.rst:49
 msgid ""
-"Starting from DSMR-reader ``v1.24`` all logging output has been reduced by "
-"default. You can, however, have the application log more verbose by increasing "
-"the logging level."
+"If the processes do run, but you cannot find an error, (e.g.: things seem to "
+"hang or tend to be slow), there might be another issue at hand."
 msgstr ""
-"Vanaf DSMR-reader ``v1.24`` is alle logging van de applicatie beperkt. Je kunt "
-"de applicatie echter veel meer informatie laten loggen, door het loglevel aan "
-"te passen."
+"Wanneer de processen lijken te draaien, maar je kunt geen fout vinden "
+"(bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is er "
+"waarschijnlijk iets anders aan de hand."
 
-#: ../../troubleshooting.rst:16
+#: ../../troubleshooting.rst:51
+msgid ""
+"DSMR-reader has DEBUG-logging, which makes the system log very verbose about "
+"what it's trying to do. This applies **specifically** to the ``dsmr_backend`` "
+"and ``dsmr_export`` (MQTT) processes."
+msgstr ""
+"DSMR-reader heeft DEBUG_logging, waarmee het systeem heel letterlijk logt wat "
+"het aan het doen is. Dit geldt **specifiek** voor de ``dsmr_backend`` en "
+"``dsmr_export`` (MQTT) processen."
+
+#: ../../troubleshooting.rst:54
+msgid ""
+"The DEBUG-logging is disabled by default, to reduce writes on the filesystem. "
+"You can enable the logging by following these steps:"
+msgstr ""
+"De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties op "
+"het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te "
+"volgen:"
+
+#: ../../troubleshooting.rst:56
 msgid "Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``."
 msgstr ""
 "Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te "
 "voeren."
 
-#: ../../troubleshooting.rst:17
+#: ../../troubleshooting.rst:57
 msgid "Open the ``dsmrreader/settings.py`` file and look for the code below::"
 msgstr "Open ``dsmrreader/settings.py`` en zoek de onderstaande code::"
 
-#: ../../troubleshooting.rst:31
-msgid ""
-"**If you cannot find the code above**, you've probably installed DSMR-reader "
-"before v1.24. You can add the following line to the end of the file::"
-msgstr ""
-"**Kun je de bovenstaande code niet kunt vinden?** Dan heb je DSMR-reader "
-"waarschijnlijk vóór v1.24 geïnstalleerd. In dat geval kun je de code zelf in "
-"het bestand plakken::"
-
-#: ../../troubleshooting.rst:36
+#: ../../troubleshooting.rst:69
 msgid "Now remove the ``#`` from this line::"
 msgstr "Verwijder nu de ``#`` uit de regel::"
 
-#: ../../troubleshooting.rst:40
-msgid "To::"
-msgstr "Naar::"
+#: ../../troubleshooting.rst:73
+msgid "It should now be::"
+msgstr "Het zou nu dit moeten zijn::"
 
-#: ../../troubleshooting.rst:44
+#: ../../troubleshooting.rst:77
 msgid ""
-"After editing the file, all processes need to be restarted. To do this, you can "
-"either execute::"
+"After editing the file, all processes need to be restarted. To do this, you "
+"can either execute::"
 msgstr ""
-"Na het bewerken van het bestand zul je alle processen moeten herstarten. Om dit "
-"te doen, voer het volgende uit::"
+"Na het bewerken van het bestand zul je alle processen moeten herstarten. Om "
+"dit te doen, voer het volgende uit::"
 
-#: ../../troubleshooting.rst:48
+#: ../../troubleshooting.rst:81
 msgid "Or go back to the **sudo user** and execute::"
 msgstr "Of ga terug naar de **sudo gebruiker** en voer dit uit::"
 
-#: ../../troubleshooting.rst:53
-msgid ""
-"All done! Read below for more information about where to find the log files."
-msgstr "Klaar! Lees hieronder meer over waar je welke informatie kunt vinden."
+#: ../../troubleshooting.rst:86
+msgid "All done!"
+msgstr "Klaar!"
 
-#: ../../troubleshooting.rst:57
-msgid "Supervisor"
-msgstr "Supervisor"
-
-#: ../../troubleshooting.rst:58
-msgid ""
-"You can view the Supervisor logfiles, depending on whether your datalogger, "
-"webinterface or the data processing is broken."
-msgstr ""
-"Je kunt de Supervisor-logfiles bekijken, afhankelijk of je datalogger, "
-"webinterface of backend-proces kapot is."
-
-#: ../../troubleshooting.rst:60 ../../troubleshooting.rst:72
-msgid "The logfiles are located by default in:"
-msgstr "De logbestanden zijn standaard te vinden in:"
-
-#: ../../troubleshooting.rst:62
-msgid ""
-"``/var/log/supervisor/dsmr_backend.log`` *(Logs regarding the backend process)*"
-msgstr "``/var/log/supervisor/dsmr_backend.log`` *(Logs over het backend proces)*"
-
-#: ../../troubleshooting.rst:63
-msgid ""
-"``/var/log/supervisor/dsmr_datalogger.log`` *(Logs regarding the datalogger)*"
-msgstr "``/var/log/supervisor/dsmr_datalogger.log`` *(Logs over de datalogger)*"
-
-#: ../../troubleshooting.rst:64
-msgid ""
-"``/var/log/supervisor/dsmr_webinterface.log`` *(Logs regarding the "
-"webinterface)*"
-msgstr ""
-"``/var/log/supervisor/dsmr_webinterface.log`` *(Logs over de webinterface)*"
-
-#: ../../troubleshooting.rst:68
+#: ../../troubleshooting.rst:90
 msgid "Appplication / Django"
 msgstr "Appplicatie / Django"
 
-#: ../../troubleshooting.rst:69
+#: ../../troubleshooting.rst:91
 msgid ""
-"The application has its own logfiles as well. You can find them in the ``logs`` "
-"directory inside the project folder."
+"The application has its own logfiles as well. You can find them in the "
+"``logs`` directory inside the project folder."
 msgstr ""
 "De applicatie heeft ook eigen logfiles. Je kunt deze vinden in de ``logs`` "
 "directory binnen de projectmap."
 
-#: ../../troubleshooting.rst:74
+#: ../../troubleshooting.rst:94
+msgid "The logfiles are by default located in:"
+msgstr " De logbestanden staan standaard in:"
+
+#: ../../troubleshooting.rst:97
+msgid "``/home/dsmr/dsmr-reader/logs/django.log``"
+msgstr "``/home/dsmr/dsmr-reader/logs/django.log``"
+
+#: ../../troubleshooting.rst:97
+msgid "Lists any internal errors regarding the Django framework it's using"
+msgstr "Bevat interne foutmeldingen over het gebruikte Django framework"
+
+#: ../../troubleshooting.rst:99
+msgid "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
+msgstr "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
+
+#: ../../troubleshooting.rst:99
+msgid "Contains application logging, if enabled"
+msgstr "Bevat applicatie-logging, wanneer ingeschakeld"
+
+#: ../../troubleshooting.rst:102
+#, python-format
 msgid ""
-"``/home/dsmr/dsmr-reader/logs/django.log`` *(lists any internal errors "
-"regarding the Django framework it's using)*"
+"Please note that any errors in there are most likely regarding rejected "
+"telegrams and are unlikely causing your issue::"
 msgstr ""
-"``/home/dsmr/dsmr-reader/logs/django.log`` *(bevat interne foutmeldingen over "
-"het gebruikte Django framework)*"
+"N.B.: Waarschijnlijk staan er in de meeste gevallen fouten in die verder niets "
+"te maken hebben met jouw probleem, maar met afgewezen telegrammen::"
 
-#: ../../troubleshooting.rst:75
-msgid ""
-"``/home/dsmr/dsmr-reader/logs/dsmrreader.log`` *(contains application logging, "
-"if enabled)*"
-msgstr ""
-"``/home/dsmr/dsmr-reader/logs/dsmrreader.log`` *(bevat applicatie-logging, "
-"wanneer ingeschakeld)*"
-
-#: ../../troubleshooting.rst:79
-msgid "Telegrams"
-msgstr "Telegrammen"
-
-#: ../../troubleshooting.rst:80
-msgid ""
-"You can log all telegrams received for debugging, in **base64** format, by "
-"adding ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings.py`` "
-"config."
-msgstr ""
-"Je kunt alle telegrammen (voor debugging) in **base64** formaat loggen. Voeg "
-"hiervoor ``DSMRREADER_LOG_TELEGRAMS = True`` toe aan het ``dsmrreader/settings."
-"py`` bestand."
-
-#: ../../troubleshooting.rst:82
-msgid ""
-"Make sure that you execute ``./post-deploy.sh`` after changing the settings. It "
-"should now log the telegrams (**base64** encoded) into ``dsmrreader.log``."
-msgstr ""
-"Zorg ervoor dat je ``./post-deploy.sh`` uitvoert na het doorvoeren van "
-"wijzigingen. Vervolgens zou je telegrammen (in **base64** formaat) in "
-"``dsmrreader.log`` moeten zien."
-
-#: ../../troubleshooting.rst:87
+#: ../../troubleshooting.rst:107
 msgid "Contact"
 msgstr "Contact"
 
-#: ../../troubleshooting.rst:88
+#: ../../troubleshooting.rst:108
 msgid ""
 "Are you unable to resolve your problem or do you need any help? :doc:`More "
 "information can be found here<contributing>`."
 msgstr ""
-"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun je hier "
-"vinden<contributing>`."
+"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun je "
+"hier vinden<contributing>`."
+
+#~ msgid ""
+#~ "If the application happens to stall unexpectedly, you can perform some "
+#~ "debugging on your end."
+#~ msgstr ""
+#~ "Mocht de applicatie onverwachts stoppen, dan kun je zelf het volgende doen "
+#~ "om te kijken of je een oorzaak kan vinden."
+
+#~ msgid "Status page"
+#~ msgstr "Status-pagina"
+
+#~ msgid ""
+#~ "The first place to look at is the Status page in the application. Does it "
+#~ "display any errors or is it lagging data processing?"
+#~ msgstr ""
+#~ "Als eerste kun je het beste naar de Status-pagina gaan. Staat daar een "
+#~ "foutmelding of loopt de dataverwerking achter?"
+
+#~ msgid ""
+#~ "Starting from DSMR-reader ``v1.24`` all logging output has been reduced by "
+#~ "default. You can, however, have the application log more verbose by "
+#~ "increasing the logging level."
+#~ msgstr ""
+#~ "Vanaf DSMR-reader ``v1.24`` is alle logging van de applicatie beperkt. Je "
+#~ "kunt de applicatie echter veel meer informatie laten loggen, door het "
+#~ "loglevel aan te passen."
+
+#~ msgid ""
+#~ "**If you cannot find the code above**, you've probably installed DSMR-"
+#~ "reader before v1.24. You can add the following line to the end of the file::"
+#~ msgstr ""
+#~ "**Kun je de bovenstaande code niet kunt vinden?** Dan heb je DSMR-reader "
+#~ "waarschijnlijk vóór v1.24 geïnstalleerd. In dat geval kun je de code zelf "
+#~ "in het bestand plakken::"
+
+#~ msgid ""
+#~ "You can view the Supervisor logfiles, depending on whether your datalogger, "
+#~ "webinterface or the data processing is broken."
+#~ msgstr ""
+#~ "Je kunt de Supervisor-logfiles bekijken, afhankelijk of je datalogger, "
+#~ "webinterface of backend-proces kapot is."
+
+#~ msgid "The logfiles are located by default in:"
+#~ msgstr "De logbestanden zijn standaard te vinden in:"
+
+#~ msgid "To::"
+#~ msgstr "Naar::"
+
+#~ msgid ""
+#~ "All done! Read below for more information about where to find the log files."
+#~ msgstr "Klaar! Lees hieronder meer over waar je welke informatie kunt vinden."
+
+#~ msgid "Telegrams"
+#~ msgstr "Telegrammen"
+
+#~ msgid ""
+#~ "You can log all telegrams received for debugging, in **base64** format, by "
+#~ "adding ``DSMRREADER_LOG_TELEGRAMS = True`` to your ``dsmrreader/settings."
+#~ "py`` config."
+#~ msgstr ""
+#~ "Je kunt alle telegrammen (voor debugging) in **base64** formaat loggen. "
+#~ "Voeg hiervoor ``DSMRREADER_LOG_TELEGRAMS = True`` toe aan het ``dsmrreader/"
+#~ "settings.py`` bestand."
+
+#~ msgid ""
+#~ "Make sure that you execute ``./post-deploy.sh`` after changing the "
+#~ "settings. It should now log the telegrams (**base64** encoded) into "
+#~ "``dsmrreader.log``."
+#~ msgstr ""
+#~ "Zorg ervoor dat je ``./post-deploy.sh`` uitvoert na het doorvoeren van "
+#~ "wijzigingen. Vervolgens zou je telegrammen (in **base64** formaat) in "
+#~ "``dsmrreader.log`` moeten zien."

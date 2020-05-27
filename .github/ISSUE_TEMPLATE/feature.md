@@ -7,4 +7,4 @@ assignees: ''
 
 ---
 
-*Beschrijf hier je verhaal...*
+VERVANG DEZE TEKST MET JE VERZOEK

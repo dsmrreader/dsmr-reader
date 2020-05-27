@@ -7,11 +7,14 @@ assignees: ''
 
 ---
 
-Gaat er iets fout, maar weet je niet wat? [Bekijk de logfiles](https://dsmr-reader.readthedocs.io/nl/v2/troubleshooting.html) als startpunt.
+*DSMR-reader is gemaakt om door jezelf te gebruiken en is daarom niet van buitenaf te debuggen. Daarom [is het belangrijk dat je eerst deels zelf onderzoek doet](https://dsmr-reader.readthedocs.io/nl/v3/troubleshooting.html) en dat hieronder deelt (voor zover nodig). Dit helpt met het oplossen van jouw probleem.*
 
 **Wat gebruik je?**
-* DSMR-reader versie *(links- of rechtsbovenin applicatie zichtbaar)*: v...
-* Hardware *(RaspberryPi 3, 4 of iets anders)*: RaspberryPi ...
-* Native of Docker *(Native is de installatie direct op je RaspberryPi)*: ...
-* DSMR-protocol slimme meter *(v4 of v5)*: v...
+* DSMR-reader versie:   VERVANG DEZE TEKST MET JE VERSIENUMMER
+* Type RaspberryPi or server:   VERVANG DEZE TEKST MET INFO
+* Standaardinstallatie of Docker:   VERVANG DEZE TEKST MET INFO
+* DSMR-protocol slimme meter v4/v5:   VERVANG DEZE TEKST MET METER VERSIE
 
+---
+
+VERVANG DEZE TEKST MET TOELICHTING WAARVOOR JE HULP NODIG HEBT.
