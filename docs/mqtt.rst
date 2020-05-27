@@ -5,6 +5,26 @@ MQTT
 
     Only follow these step if you have enabled MQTT.
 
+.. contents::
+    :depth: 2
+
+
+Recent versions (v3.0.0 or higher)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Execute ``sudo supervisorctl status`` and check whether it includes ``dsmr_mqtt`` with status ``RUNNING``. If not, continue with the steps below.
+
+* Copy the MQTT process config::
+
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_mqtt.conf /etc/supervisor/conf.d/
+
+* Apply changes::
+
+    sudo supervisorctl reread
+    sudo supervisorctl update
+
+* Executing ``sudo supervisorctl status`` should now include ``dsmr_mqtt`` with status ``RUNNING``.
+
 
 Older versions (< v3.0.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,22 +61,6 @@ Older versions (< v3.0.0)
 
 * Executing ``sudo supervisorctl status`` should now include ``dsmr_mqtt`` with status ``RUNNING``.
 
-
-Recent versions (v3.0.0 or higher)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Execute ``sudo supervisorctl status`` and check whether it includes ``dsmr_mqtt`` with status ``RUNNING``. If not, continue with the steps below.
-
-* Copy the MQTT process config::
-
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_mqtt.conf /etc/supervisor/conf.d/
-
-* Apply changes::
-
-    sudo supervisorctl reread
-    sudo supervisorctl update
-
-* Executing ``sudo supervisorctl status`` should now include ``dsmr_mqtt`` with status ``RUNNING``.
 
 
 MQTT caching
