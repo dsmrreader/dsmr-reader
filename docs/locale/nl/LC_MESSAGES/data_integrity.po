@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
+"Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../data_integrity.rst:2
@@ -126,7 +126,7 @@ msgstr ""
 #: ../../data_integrity.rst:40
 msgid ""
 "Backups are created daily, but rotated weekly! So it's possible that, at "
-"some point, the backups get corrupted as well since they get overwritten "
+"some point, the backups get corrupted as well since they're overwritten "
 "each week. And eventually they will get synchronized to Dropbox as well."
 msgstr ""
 "Back-ups worden dagelijks gemaakt, echter worden deze ook wekelijks "

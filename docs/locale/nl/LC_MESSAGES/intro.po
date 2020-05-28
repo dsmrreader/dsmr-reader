@@ -23,20 +23,24 @@ msgid "Introduction"
 msgstr "Introductie"
 
 #: ../../intro.rst:5
-msgid "Project mission & goals"
-msgstr "Projectmissie & doelen"
+msgid "Project goals"
+msgstr "Projectdoelen"
 
 #: ../../intro.rst:6
 msgid ""
-"Provide an tool to easily read, store and export data transferred by the DSMR "
-"protocol."
+"Provide a tool to easily extract and store data transferred by the DSMR "
+"protocol of your smart meter."
 msgstr ""
-"Een tool leveren waarmee eenvoudig gegevens van het DSMR-protocol uitgelezen, "
-"opgeslagen en geëxporteerd kunnen worden."
+"Een tool aanbieden waarmee je eenvoudig gegevens uit je slimme meter via het "
+"DSMR-protocol uitleest en opslaat."
 
 #: ../../intro.rst:7
-msgid "Keep ownership of your own data."
-msgstr "Behoud eigendom van je eigen gegevens."
+msgid ""
+"Allowing to export your data to other systems or third parties. It's your "
+"data, you decide."
+msgstr ""
+"Sta toe om jouw gegevens te exporteren naar andere systemen of derde "
+"partijen. Het zijn jouw gegevens, dus jij beslist."
 
 #: ../../intro.rst:11
 msgid "Languages"
@@ -52,29 +56,45 @@ msgstr ""
 "grafische interface is echter ook in het Nederlands beschikbaar. Deze wordt  "
 "automatisch getoond, afhankelijk van de taalinstelling in je webbrowser."
 
+#: ../../intro.rst:15
+msgid "Support for:"
+msgstr "Ondersteuning voor:"
+
 #: ../../intro.rst:17
+msgid "English"
+msgstr "Engels"
+
+#: ../../intro.rst:18
+msgid "Dutch"
+msgstr "Nederlands"
+
+#: ../../intro.rst:22
 msgid "Screenshots"
 msgstr "Screenshots"
 
-#: ../../intro.rst:18
+#: ../../intro.rst:23
 msgid ":doc:`For screenshots & features see this page<screenshots>`."
 msgstr ":doc:`Voor screenshots en mogelijkheden, zie deze pagina<screenshots>`."
 
-#: ../../intro.rst:22
+#: ../../intro.rst:27
 msgid "Storage issues"
 msgstr "Problemen met opslag"
 
-#: ../../intro.rst:23
-msgid ":doc:`Please read this page as well before you start<data_integrity>`."
-msgstr ":doc:`Lees deze pagina voordat je begint<data_integrity>`."
-
-#: ../../intro.rst:27
-msgid "Github"
-msgstr "Github"
-
-#: ../../intro.rst:28
+#: ../../intro.rst:30
 msgid ""
-"The project can be found here: https://github.com/dennissiemensma/dsmr-reader"
+":doc:`Please read this page as well before using DSMR-reader<data_integrity>`."
 msgstr ""
-"Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
-"reader"
+":doc:`Lees deze pagina voordat je DSMR-reader gebruikt<data_integrity>`."
+
+#~ msgid "Keep ownership of your own data."
+#~ msgstr "Behoud eigendom van je eigen gegevens."
+
+#~ msgid "Github"
+#~ msgstr "Github"
+
+#~ msgid ""
+#~ "The project can be found here: https://github.com/dennissiemensma/dsmr-"
+#~ "reader"
+#~ msgstr ""
+#~ "Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
+#~ "reader"

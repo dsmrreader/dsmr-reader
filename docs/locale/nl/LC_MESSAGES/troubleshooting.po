@@ -22,7 +22,11 @@ msgstr ""
 msgid "Troubleshooting"
 msgstr "Hulp bij problemen"
 
-#: ../../troubleshooting.rst:3
+#: ../../troubleshooting.rst:6
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
+#: ../../troubleshooting.rst:8
 msgid ""
 "If anything happens to fail or malfunction, please follow the steps below "
 "first to provide some background information when reporting an issue."
@@ -31,11 +35,11 @@ msgstr ""
 "je een issue aanmaakt. Hiermee kun je wat meer achtergrondinformatie "
 "aanleveren."
 
-#: ../../troubleshooting.rst:6
+#: ../../troubleshooting.rst:11
 msgid "Supervisor"
 msgstr "Supervisor"
 
-#: ../../troubleshooting.rst:8
+#: ../../troubleshooting.rst:13
 msgid ""
 "DSMR-reader technically consists of these processes (some may or may not be "
 "used by you) and they are watched by Supervisor:"
@@ -43,44 +47,44 @@ msgstr ""
 "DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of niet "
 "in je eigen situatie gebruikt worden) en ze worden beheerd door Supervisor:"
 
-#: ../../troubleshooting.rst:11 ../../troubleshooting.rst:37
+#: ../../troubleshooting.rst:16 ../../troubleshooting.rst:42
 msgid "Webinterface"
 msgstr "Webinterface"
 
-#: ../../troubleshooting.rst:11
+#: ../../troubleshooting.rst:16
 msgid "``dsmr_webinterface``"
 msgstr "``dsmr_webinterface``"
 
-#: ../../troubleshooting.rst:13 ../../troubleshooting.rst:39
+#: ../../troubleshooting.rst:18 ../../troubleshooting.rst:44
 msgid "Datalogger"
 msgstr "Datalogger"
 
-#: ../../troubleshooting.rst:13
+#: ../../troubleshooting.rst:18
 msgid "``dsmr_datalogger``"
 msgstr "``dsmr_datalogger``"
 
-#: ../../troubleshooting.rst:15 ../../troubleshooting.rst:41
+#: ../../troubleshooting.rst:20 ../../troubleshooting.rst:46
 msgid "Backend"
 msgstr "Backend"
 
-#: ../../troubleshooting.rst:15
+#: ../../troubleshooting.rst:20
 msgid "``dsmr_backend``"
 msgstr "``dsmr_backend``"
 
-#: ../../troubleshooting.rst:17 ../../troubleshooting.rst:43
+#: ../../troubleshooting.rst:22 ../../troubleshooting.rst:48
 msgid "Export or MQTT"
 msgstr "Export of MQTT"
 
-#: ../../troubleshooting.rst:17
+#: ../../troubleshooting.rst:22
 msgid "``dsmr_export`` or ``dsmr_mqtt``"
 msgstr "``dsmr_export`` or ``dsmr_mqtt``"
 
-#: ../../troubleshooting.rst:20
+#: ../../troubleshooting.rst:25
 msgid "You can view the status of all processes by running::"
 msgstr ""
 "Je kunt de status van alle processen bekijken door het volgende uit te voeren::"
 
-#: ../../troubleshooting.rst:24
+#: ../../troubleshooting.rst:29
 msgid ""
 "Any processes listed, should have the status ``RUNNING``. Stale or crashed "
 "processes can be restarted with::"
@@ -88,30 +92,30 @@ msgstr ""
 "Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. Hangende "
 "of gecrashde processen kunnen herstart worden met::"
 
-#: ../../troubleshooting.rst:30
+#: ../../troubleshooting.rst:35
 msgid "Or to restart them all simultaneously::"
 msgstr "Of herstart ze allemaal tegelijkertijd::"
 
-#: ../../troubleshooting.rst:34
+#: ../../troubleshooting.rst:39
 msgid ""
 "If this does not resolve your issue, check the logfiles for more information:"
 msgstr ""
 "Wanneer dit niet je probleem oplost, bekijk de logbestanden voor meer "
 "informatie:"
 
-#: ../../troubleshooting.rst:37
+#: ../../troubleshooting.rst:42
 msgid "``/var/log/supervisor/dsmr_webinterface.log``"
 msgstr "``/var/log/supervisor/dsmr_webinterface.log``"
 
-#: ../../troubleshooting.rst:39
+#: ../../troubleshooting.rst:44
 msgid "``/var/log/supervisor/dsmr_datalogger.log``"
 msgstr "``/var/log/supervisor/dsmr_datalogger.log``"
 
-#: ../../troubleshooting.rst:41
+#: ../../troubleshooting.rst:46
 msgid "``/var/log/supervisor/dsmr_backend.log``"
 msgstr "``/var/log/supervisor/dsmr_backend.log``"
 
-#: ../../troubleshooting.rst:43
+#: ../../troubleshooting.rst:48
 msgid ""
 "``/var/log/supervisor/dsmr_export.log`` or ``/var/log/supervisor/dsmr_mqtt."
 "log``"
@@ -119,11 +123,11 @@ msgstr ""
 "``/var/log/supervisor/dsmr_export.log`` of ``/var/log/supervisor/dsmr_mqtt."
 "log``"
 
-#: ../../troubleshooting.rst:48
+#: ../../troubleshooting.rst:53
 msgid "Logging"
 msgstr "Logging"
 
-#: ../../troubleshooting.rst:49
+#: ../../troubleshooting.rst:54
 msgid ""
 "If the processes do run, but you cannot find an error, (e.g.: things seem to "
 "hang or tend to be slow), there might be another issue at hand."
@@ -132,7 +136,7 @@ msgstr ""
 "(bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is er "
 "waarschijnlijk iets anders aan de hand."
 
-#: ../../troubleshooting.rst:51
+#: ../../troubleshooting.rst:56
 msgid ""
 "DSMR-reader has DEBUG-logging, which makes the system log very verbose about "
 "what it's trying to do. This applies **specifically** to the ``dsmr_backend`` "
@@ -142,7 +146,7 @@ msgstr ""
 "het aan het doen is. Dit geldt **specifiek** voor de ``dsmr_backend`` en "
 "``dsmr_export`` (MQTT) processen."
 
-#: ../../troubleshooting.rst:54
+#: ../../troubleshooting.rst:59
 msgid ""
 "The DEBUG-logging is disabled by default, to reduce writes on the filesystem. "
 "You can enable the logging by following these steps:"
@@ -151,25 +155,25 @@ msgstr ""
 "het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te "
 "volgen:"
 
-#: ../../troubleshooting.rst:56
+#: ../../troubleshooting.rst:61
 msgid "Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``."
 msgstr ""
 "Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te "
 "voeren."
 
-#: ../../troubleshooting.rst:57
+#: ../../troubleshooting.rst:62
 msgid "Open the ``dsmrreader/settings.py`` file and look for the code below::"
 msgstr "Open ``dsmrreader/settings.py`` en zoek de onderstaande code::"
 
-#: ../../troubleshooting.rst:69
+#: ../../troubleshooting.rst:74
 msgid "Now remove the ``#`` from this line::"
 msgstr "Verwijder nu de ``#`` uit de regel::"
 
-#: ../../troubleshooting.rst:73
+#: ../../troubleshooting.rst:78
 msgid "It should now be::"
 msgstr "Het zou nu dit moeten zijn::"
 
-#: ../../troubleshooting.rst:77
+#: ../../troubleshooting.rst:82
 msgid ""
 "After editing the file, all processes need to be restarted. To do this, you "
 "can either execute::"
@@ -177,19 +181,19 @@ msgstr ""
 "Na het bewerken van het bestand zul je alle processen moeten herstarten. Om "
 "dit te doen, voer het volgende uit::"
 
-#: ../../troubleshooting.rst:81
+#: ../../troubleshooting.rst:86
 msgid "Or go back to the **sudo user** and execute::"
 msgstr "Of ga terug naar de **sudo gebruiker** en voer dit uit::"
 
-#: ../../troubleshooting.rst:86
+#: ../../troubleshooting.rst:91
 msgid "All done!"
 msgstr "Klaar!"
 
-#: ../../troubleshooting.rst:90
+#: ../../troubleshooting.rst:95
 msgid "Appplication / Django"
 msgstr "Appplicatie / Django"
 
-#: ../../troubleshooting.rst:91
+#: ../../troubleshooting.rst:96
 msgid ""
 "The application has its own logfiles as well. You can find them in the "
 "``logs`` directory inside the project folder."
@@ -197,28 +201,27 @@ msgstr ""
 "De applicatie heeft ook eigen logfiles. Je kunt deze vinden in de ``logs`` "
 "directory binnen de projectmap."
 
-#: ../../troubleshooting.rst:94
+#: ../../troubleshooting.rst:99
 msgid "The logfiles are by default located in:"
 msgstr " De logbestanden staan standaard in:"
 
-#: ../../troubleshooting.rst:97
+#: ../../troubleshooting.rst:102
 msgid "``/home/dsmr/dsmr-reader/logs/django.log``"
 msgstr "``/home/dsmr/dsmr-reader/logs/django.log``"
 
-#: ../../troubleshooting.rst:97
+#: ../../troubleshooting.rst:102
 msgid "Lists any internal errors regarding the Django framework it's using"
 msgstr "Bevat interne foutmeldingen over het gebruikte Django framework"
 
-#: ../../troubleshooting.rst:99
+#: ../../troubleshooting.rst:104
 msgid "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
 msgstr "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
 
-#: ../../troubleshooting.rst:99
+#: ../../troubleshooting.rst:104
 msgid "Contains application logging, if enabled"
 msgstr "Bevat applicatie-logging, wanneer ingeschakeld"
 
-#: ../../troubleshooting.rst:102
-#, python-format
+#: ../../troubleshooting.rst:107
 msgid ""
 "Please note that any errors in there are most likely regarding rejected "
 "telegrams and are unlikely causing your issue::"
@@ -226,11 +229,11 @@ msgstr ""
 "N.B.: Waarschijnlijk staan er in de meeste gevallen fouten in die verder niets "
 "te maken hebben met jouw probleem, maar met afgewezen telegrammen::"
 
-#: ../../troubleshooting.rst:107
+#: ../../troubleshooting.rst:112
 msgid "Contact"
 msgstr "Contact"
 
-#: ../../troubleshooting.rst:108
+#: ../../troubleshooting.rst:113
 msgid ""
 "Are you unable to resolve your problem or do you need any help? :doc:`More "
 "information can be found here<contributing>`."

@@ -1,5 +1,10 @@
 Troubleshooting
 ===============
+
+.. contents::
+    :depth: 2
+
+
 If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue.
 
 Supervisor

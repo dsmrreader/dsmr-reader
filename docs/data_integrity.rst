@@ -37,5 +37,5 @@ For now, it's recommended to use the mechanism for sending a small backup to a G
 Pitfalls
 --------
 - SD cards' lifespan in this project vary from several weeks to some years, depending on the quality of the storage and the interval of telegrams sent by you smart meter.
-- Backups are created daily, but rotated weekly! So it's possible that, at some point, the backups get corrupted as well since they get overwritten each week. And eventually they will get synchronized to Dropbox as well.
+- Backups are created daily, but rotated weekly! So it's possible that, at some point, the backups get corrupted as well since they're overwritten each week. And eventually they will get synchronized to Dropbox as well.
 
