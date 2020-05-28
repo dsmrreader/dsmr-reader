@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v3.10.0 - 2020-xx-xx
+v3.10.0 - 2020-05-29
 
 - [`#996 <https://github.com/dennissiemensma/dsmr-reader/issues/996>`_] Refer HA add-on by Sander de Wildt
 - [`#997 <https://github.com/dennissiemensma/dsmr-reader/issues/997>`_] Zoeken naar specifieke dagen in admin
@@ -20,6 +20,8 @@ v3.9.1 - 2020-05-05
 
 
 ----
+
+
 v3.9.0 - 2020-05-04
 
 - [`#947 <https://github.com/dennissiemensma/dsmr-reader/issues/947>`_] Tijdsrange live grafieken zelf kunnen instellen
