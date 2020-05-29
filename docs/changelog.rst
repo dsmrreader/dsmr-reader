@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.11.0 - 2020-xx-xx
+
+- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_] xxxxxxx
+
+
+----
+
+
 v3.10.0 - 2020-05-29
 
 - [`#996 <https://github.com/dennissiemensma/dsmr-reader/issues/996>`_] Refer HA add-on by Sander de Wildt
