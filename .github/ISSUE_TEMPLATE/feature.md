@@ -7,4 +7,3 @@ assignees: ''
 
 ---
 
-VERVANG DEZE TEKST MET JE VERZOEK
