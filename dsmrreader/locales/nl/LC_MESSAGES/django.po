@@ -2109,7 +2109,7 @@ msgid "(Data source) Telegram: Split topic"
 msgstr "(Databron) Telegram: Gesplitst topic"
 
 msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/notifications.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/notifications.html\">Documentatie</a>"
+msgstr "Gedetailleerde instructies voor het configureren van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/notifications.html\">Documentatie</a>"
 
 msgid "Only applies when using Pushover"
 msgstr "Alleen van toepassing voor Pushover"
