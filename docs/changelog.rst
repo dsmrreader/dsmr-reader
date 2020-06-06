@@ -4,7 +4,7 @@ Changelog
 
 v3.11.0 - 2020-xx-xx
 
-- [`#xxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxx>`_] xxxxxxx
+- [`#1009 <https://github.com/dennissiemensma/dsmr-reader/issues/1009>`_] dsmr_stats_recalculate_prices neemt teruglevering niet mee
 
 
 ----

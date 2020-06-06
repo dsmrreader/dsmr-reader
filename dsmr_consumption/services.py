@@ -263,7 +263,7 @@ def day_consumption(day):
     consumption['electricity_returned_merged'] = \
         consumption['electricity1_returned'] + consumption['electricity2_returned']
 
-    # Cost per tariff + direction.
+    # Cost per tariff. Taking electricity return into account.
     consumption['electricity1_cost'] = round_decimal(
         (consumption['electricity1'] * daily_energy_price.electricity_delivered_1_price) -
         (consumption['electricity1_returned'] * daily_energy_price.electricity_returned_1_price)
