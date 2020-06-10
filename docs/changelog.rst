@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v4.0.0 - 2020-xx-xx
+
+.. warning::
+
+    This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See `the v4 upgrade guide <https://dsmr-reader.readthedocs.io/en/v4/faq/v4_upgrade.html>`_ for more information.
+
+
+- [`#xxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxx
+
+
+----
+
+
 v3.10.0 - 2020-05-29
 
 - [`#996 <https://github.com/dennissiemensma/dsmr-reader/issues/996>`_] Refer HA add-on by Sander de Wildt

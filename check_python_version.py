@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
-
+# EOL table @ https://www.python.org/downloads/
 MINIMUM_VERSION = (3, 6, 0)
 PREFERRED_VERSION = (3, 6, 0)
 
