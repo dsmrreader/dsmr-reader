@@ -71,13 +71,13 @@ commands:
                   name: "Virtualenv + requirements installation"
                   command: |
                       sudo apt-get update
-                      sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-virtualenv python3-psycopg2
+                      sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-virtualenv
                       mkdir -p ~/.virtualenvs/
                       virtualenv ~/.virtualenvs/dsmr-reader --system-site-packages --python python3
                       . ~/.virtualenvs/dsmr-reader/bin/activate
                       pip3 install --upgrade pip
                       pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
-                      pip3 freeze
+                      pip3 install psycopg2
 
             - save_cache:
                   name: "Cache: Save virtualenv"
@@ -100,20 +100,20 @@ commands:
                 command: *test-command
 
             - run:
-                name: "Test MySQL"
-                environment:
-                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.mysql
-                command: *test-command
-
-            - run:
                 name: "Test PostgreSQL"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.postgresql
                 command: *test-command
 
+            - run:
+                name: "Test MySQL"
+                environment:
+                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.mysql
+                command: *test-command
+
 # Dummy vars, used for anchors.
-x-mysql-image: &mysql-image circleci/mysql:5
 x-postgresql-image: &postgresql-image circleci/postgres:11-alpine
+x-mysql-image: &mysql-image circleci/mysql:5
 x-base-job: &base-job
     working_directory: ~/repo
     steps:
@@ -129,11 +129,11 @@ jobs:
              - image: circleci/python:3.6-buster
                environment: *django-config-env
 
-             - image: *mysql-image
-               environment: *mysql-db-env
-
              - image: *postgresql-image
                environment: *postgresql-db-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
 
     test-python37:
          <<: *base-job
@@ -141,11 +141,11 @@ jobs:
              - image: circleci/python:3.7-buster
                environment: *django-config-env
 
-             - image: *mysql-image
-               environment: *mysql-db-env
-
              - image: *postgresql-image
                environment: *postgresql-db-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
 
     test-python38:
          <<: *base-job
@@ -153,8 +153,8 @@ jobs:
              - image: circleci/python:3.8-buster
                environment: *django-config-env
 
-             - image: *mysql-image
-               environment: *mysql-db-env
-
              - image: *postgresql-image
                environment: *postgresql-db-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
