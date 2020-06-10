@@ -18,6 +18,7 @@ x-mysql-db-env: &mysql-db-env
 x-postgresql-db-env: &postgresql-db-env
     # https://circleci.com/docs/2.0/postgres-config/
     POSTGRES_USER: root
+    POSTGRES_PASSWORD: rootpw
     POSTGRES_DB: test_dsmrreader
 
 
