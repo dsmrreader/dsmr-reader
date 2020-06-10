@@ -35,8 +35,8 @@ workflows:
     test-dsmrreader:
         jobs:
             - test-python36
-#            - test-python37
-#            - test-python38
+            - test-python37
+            - test-python38
 
 
 # Dummy vars, used for anchors.
@@ -63,9 +63,9 @@ commands:
 
     virtualenv_setup:
         steps:
-#            - restore_cache:
-#                  name: "Cache: Restore virtualenv"
-#                  key: *virtualenv-cache-key
+            - restore_cache:
+                  name: "Cache: Restore virtualenv"
+                  key: *virtualenv-cache-key
 
             - run:
                   name: "Virtualenv + requirements installation"
