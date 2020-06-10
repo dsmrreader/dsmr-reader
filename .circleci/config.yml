@@ -40,7 +40,7 @@ workflows:
 
 # Dummy vars, used for anchors.
 x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ .Revision }}
-x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-v3-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/dev.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/mysql.txt" }}
+x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-v3-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/dev.txt" }}-python3-psycopg2-{{ checksum "dsmrreader/provisioning/requirements/mysql.txt" }}
 x-test-command: &test-command |
     . ~/.virtualenvs/dsmr-reader/bin/activate
     py.test --cov --cov-report=xml
