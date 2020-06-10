@@ -72,11 +72,10 @@ commands:
                   command: |
                       sudo apt-get update && sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-psycopg2
                       mkdir -p ~/.virtualenvs/
-                      python3 -m venv ~/.virtualenvs/dsmr-reader --system-site-packages
+                      python3 -m venv --system-site-packages ~/.virtualenvs/dsmr-reader
                       . ~/.virtualenvs/dsmr-reader/bin/activate
                       pip3 install --upgrade pip
                       pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
-                      pip3 freeze
 
             - save_cache:
                   name: "Cache: Save virtualenv"
