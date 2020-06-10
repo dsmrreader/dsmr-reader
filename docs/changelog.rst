@@ -184,7 +184,7 @@ v3.0.0 - 2020-01-15
 
 .. warning::
 
-    This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.
+    This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v4/faq/v3_upgrade.html>`_ for more information.
 
 
 v2.15.0 - 2020-01-15
@@ -557,7 +557,7 @@ v1.23.0 - 2018-08-02
 .. warning::
 
     Support for **MQTT** has been completely reworked in this release and now **requires** a new ``dsmr_mqtt`` process in Supervisor.
-    `Additional steps for upgrading can be found here <https://dsmr-reader.readthedocs.io/en/v3/faq.html#how-do-i-retain-mqtt-support-when-upgrading-to-v1-23-0-or-higher>`_.
+    `Additional steps for upgrading can be found here <https://dsmr-reader.readthedocs.io/en/v4/faq.html#how-do-i-retain-mqtt-support-when-upgrading-to-v1-23-0-or-higher>`_.
 
 - [`#509 <https://github.com/dennissiemensma/dsmr-reader/issues/509>`_] MQTT refactoring
 - [`#417 <https://github.com/dennissiemensma/dsmr-reader/issues/417>`_] --- MQTT does connect/publish/disconnect for EACH message - every second

@@ -11,7 +11,7 @@ DSMR-reader is gemaakt om door jezelf te gebruiken en is daarom niet van buitena
 Daarom is het belangrijk dat je eerst deels zelf onderzoek doet en dat hieronder deelt (voor zover nodig). 
 Dit helpt met het oplossen van jouw probleem. 
 
-https://dsmr-reader.readthedocs.io/nl/v3/troubleshooting.html
+https://dsmr-reader.readthedocs.io/nl/v4/troubleshooting.html
 
 Wat gebruik je?
 - DSMR-reader versie:   VERVANG DEZE TEKST MET JE VERSIENUMMER

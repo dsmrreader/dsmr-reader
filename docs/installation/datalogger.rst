@@ -51,7 +51,7 @@ Execute::
 Datalogger instance: Script
 ---------------------------
 
-Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this content: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dennissiemensma/dsmr-reader/blob/v3/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_
+Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with this content: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dennissiemensma/dsmr-reader/blob/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_
 
 .. note::
 

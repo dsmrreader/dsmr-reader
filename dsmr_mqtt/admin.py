@@ -15,7 +15,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
                 'fields': ['hostname', 'port', 'secure', 'client_id'],
                 'description': _(
                     'Detailed instructions for configuring MQTT can be found here: '
-                    '<a href="https://dsmr-reader.readthedocs.io/nl/v3/mqtt.html">Documentation</a>'
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html">Documentation</a>'
                 )
             }
         ),
@@ -32,7 +32,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
                 'fields': ['process_sleep'],
                 'description': _(
                     'Note: You will have to restart the "dsmr_mqtt" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v3/faq/restart_processes.html">FAQ</a>.'
+                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
                 )
             }
         ),

@@ -145,7 +145,7 @@ class InfiniteManagementCommandMixin:
         if logger.getEffectiveLevel() > logging.INFO:
             print(
                 'The current logging level only logs warnings and errors, to reduce I/O. More information can be '
-                'found here: https://dsmr-reader.readthedocs.io/en/v3/troubleshooting.html#logging'
+                'found here: https://dsmr-reader.readthedocs.io/en/v4/troubleshooting.html#logging'
             )
 
 

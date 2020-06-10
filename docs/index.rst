@@ -54,6 +54,7 @@ DSMR Reader's documentation
    faq/database
    faq/uninstall
    faq/v3_upgrade
+   faq/v4_upgrade
    contributing
    credits
    donations
