@@ -76,6 +76,7 @@ commands:
                       . ~/.virtualenvs/dsmr-reader/bin/activate
                       pip3 install --upgrade pip
                       pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
+                      pip3 freeze
 
             - save_cache:
                   name: "Cache: Save virtualenv"
@@ -110,8 +111,8 @@ commands:
                 command: *test-command
 
 # Dummy vars, used for anchors.
-x-mysql-image: &mysql-image circleci/mysql:latest
-x-postgresql-image: &postgresql-image circleci/postgres:latest
+x-mysql-image: &mysql-image circleci/mysql:5
+x-postgresql-image: &postgresql-image circleci/postgres:11-alpine
 x-base-job: &base-job
     working_directory: ~/repo
     steps:
