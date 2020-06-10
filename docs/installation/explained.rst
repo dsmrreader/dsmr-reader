@@ -14,14 +14,10 @@ Installation: Explained
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The application stores by default all readings taken from the serial cable.
-There is support for **PostgreSQL**, and there used to be support for **MySQL/MariaDB** as well.
-The latter is currently deprecated by this project and support will be removed in DSMR-reader v3.x.
-
-Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv installation later in this guide.
 
 - Install database::
 
-    sudo apt-get install -y postgresql postgresql-server-dev-all
+    sudo apt-get install -y postgresql
 
 .. note::
     
@@ -56,7 +52,7 @@ Install PostgreSQL, ``postgresql-server-dev-all`` is required for the virtualenv
 ^^^^^^^^^^^^^^^
 Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the Github repository::
 
-    sudo apt-get install -y nginx supervisor git python3 python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get install -y nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv virtualenvwrapper
 
 Install ``cu``. The CU program allows easy testing for your DSMR serial connection. 
 It's very basic but also very effective to simply test whether your serial cable setup works properly::
@@ -146,7 +142,7 @@ Although it's just a folder inside our user's homedir, it's very effective as it
 
 - Create a new virtualenv, we usually use the same name for it as the application or project::
 
-    virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3
+    virtualenv ~/.virtualenvs/dsmrreader --system-site-packages --python python3
 
 .. note::
 
@@ -188,11 +184,7 @@ Install dependencies::
 
     cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
 
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/postgresql.txt
-
-
-Did everything install without fatal errors? If the database client refuses to install due to missing files/configs, 
-make sure you've installed ``postgresql-server-dev-all`` earlier in the process, when you installed the database server itself.
+    pip3 install -r dsmrreader/provisioning/requirements/base.txt
 
 
 Optional: Restore a database backup

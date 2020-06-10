@@ -9,8 +9,7 @@ v4.0.0 - 2020-xx-xx
     This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See `the v4 upgrade guide <https://dsmr-reader.readthedocs.io/en/v4/faq/v4_upgrade.html>`_ for more information.
 
 
-- [`#xxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxx>`_] xxxxxx
-
+- [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_] Pip install psycopg2 vervangen door OS package #1013
 
 ----
 

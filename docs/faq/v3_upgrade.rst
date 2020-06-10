@@ -3,6 +3,10 @@ Upgrading to DSMR-reader v3.x
 
 DSMR-reader ``v3.x`` is backwards incompatible with ``2.x``. You will have to manually upgrade to make sure it will run properly.
 
+.. note::
+
+    If you're using Docker, you can probably just install the ``v3.x`` version of the Docker container without any of the steps below.
+
 
 1. Update to the latest ``v2.x`` version (``v2.15``)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -99,6 +103,7 @@ Execute the following::
 
     virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3.6
     source ~/.virtualenvs/dsmrreader/bin/activate
+    logout
 
 .. note::
 

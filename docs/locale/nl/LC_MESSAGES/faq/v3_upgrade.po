@@ -15,14 +15,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
+"Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:2
+#: ../../faq/v3_upgrade.rst:2
 msgid "Upgrading to DSMR-reader v3.x"
 msgstr "Upgraden naar DSMR-reader v3.x"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:4
+#: ../../faq/v3_upgrade.rst:4
 msgid ""
 "DSMR-reader ``v3.x`` is backwards incompatible with ``2.x``. You will have to "
 "manually upgrade to make sure it will run properly."
@@ -31,31 +31,38 @@ msgstr ""
 "hierdoor dus handmatig moeten upgraden om er zeker van te zijn dat alles "
 "blijft werken."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:8
+#: ../../faq/v3_upgrade.rst:8
+msgid ""
+"If you're using Docker, you can probably just install the ``v3.x`` version of "
+"the Docker container without any of the steps below."
+msgstr ""
+"Mocht je Docker gebruiken, dan kun je waarschijnlijk gewoon de ``v3.x`` versie "
+"van de betreffende Docker-container installeren, zonder onderstaande stappen "
+"te hoeven uitvoeren."
+
+#: ../../faq/v3_upgrade.rst:12
 msgid "1. Update to the latest ``v2.x`` version (``v2.15``)"
 msgstr "1. Update naar de laatste ``v2.x`` versie (``v2.15``)"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:10
+#: ../../faq/v3_upgrade.rst:14
 msgid ":doc:`See here for instructions<update>`."
 msgstr ":doc:`Zie hier voor instructies<update>`."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:14
+#: ../../faq/v3_upgrade.rst:18
 msgid "2. Python version check"
 msgstr "2. Python versie check"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:16
+#: ../../faq/v3_upgrade.rst:20
 msgid "DSMR-reader ``3.x`` requires ``Python 3.6`` or higher."
 msgstr "DSMR-reader ``3.x`` vereist ``Python 3.6`` of hoger."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:18
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:35
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:55
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:91
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:117
+#: ../../faq/v3_upgrade.rst:22 ../../faq/v3_upgrade.rst:39
+#: ../../faq/v3_upgrade.rst:59 ../../faq/v3_upgrade.rst:95
+#: ../../faq/v3_upgrade.rst:142
 msgid "Execute the following::"
 msgstr "Voer het volgende uit::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:23
+#: ../../faq/v3_upgrade.rst:27
 msgid ""
 "It should display the Python version. If you're already running ``Python 3.6`` "
 "(or higher), you can ignore the next section."
@@ -63,12 +70,11 @@ msgstr ""
 "Het zou de Python-versie moeten tonen. Wanneer je al de versie ``Python 3.6`` "
 "(of hoger) draait, kun je de volgende sectie negeren."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:27
+#: ../../faq/v3_upgrade.rst:31
 msgid "3. Python version upgrade (part 1/2)"
 msgstr "3. Python versie upgrade (deel 1/2)"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:31
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:87
+#: ../../faq/v3_upgrade.rst:35 ../../faq/v3_upgrade.rst:91
 msgid ""
 "Only execute this section if you're running DSMR-reader with ``Python 3.5`` or "
 "lower!"
@@ -76,14 +82,14 @@ msgstr ""
 "Voer deze sectie alleen uit wanneer je DSMR-reader draait met ``Python 3.5``  "
 "of lager!"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:33
+#: ../../faq/v3_upgrade.rst:37
 msgid ""
 "There are several guides, depending on your OS. We assume Raspbian OS here."
 msgstr ""
 "Er zijn diverse handleidingen, afhankelijk van je OS. We gaan hier uit van "
 "Raspbian OS."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:47
+#: ../../faq/v3_upgrade.rst:51
 msgid ""
 "Try running the command ``python3.6 --version`` to see if things worked out. "
 "If you're getting any errors, do not continue with the upgrade."
@@ -91,15 +97,15 @@ msgstr ""
 "Probeer om  ``python3.6 --version`` uit te voeren om te controleren of het "
 "gelukt is. Wanneer je foutmeldingen krijgt, ga dan niet verder met de upgrade."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:49
+#: ../../faq/v3_upgrade.rst:53
 msgid "The Python upgrade continues later, after creating a backup."
 msgstr "De Python-upgrade gaat later verder, na het maken van een back-up."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:52
+#: ../../faq/v3_upgrade.rst:56
 msgid "4. Backup"
 msgstr "4. Back-up"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:53
+#: ../../faq/v3_upgrade.rst:57
 msgid ""
 "The next thing you'll absolutely need to do, is create a fresh database backup "
 "and store it somewhere safe."
@@ -107,45 +113,44 @@ msgstr ""
 "Het volgende wat je absoluut moet doen, is het maken van een verse database "
 "back-up en deze op een veilige plek opslaan."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:60
+#: ../../faq/v3_upgrade.rst:64
 msgid "If things went well, you should see a message like::"
 msgstr "Wanneer alles OK is, zie je een melding in de trend van::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:64
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:72
+#: ../../faq/v3_upgrade.rst:68 ../../faq/v3_upgrade.rst:76
 msgid "Execute the following (your file name may differ!)::"
 msgstr "Voer het volgende uit (bestandsnaam kan afwijken in jouw situatie!)::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:68
+#: ../../faq/v3_upgrade.rst:72
 msgid "Make sure the file is of some (reasonable) size::"
 msgstr "Controleer of het bestand een (aannemelijke) grootte heeft::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:76
+#: ../../faq/v3_upgrade.rst:80
 msgid "Make sure the output ends with::"
 msgstr "Controleer dat het eindigt met deze output::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:83
+#: ../../faq/v3_upgrade.rst:87
 msgid "5. Python version upgrade (part 2/2)"
 msgstr "5. Python versie upgrade (deel 2/2)"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:89
+#: ../../faq/v3_upgrade.rst:93
 msgid "Now we're ready to remove the environment DSMR-reader uses."
 msgstr "Nu zijn we klaar om de omgeving te verwijderen waarin DSMR-reader werkt."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:103
+#: ../../faq/v3_upgrade.rst:110
 msgid ""
 "If you're getting any errors, you can revert to the old version by running::"
 msgstr "Mocht je fouten krijgen, hiermee kun je weer terug naar de oude versie::"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:110
+#: ../../faq/v3_upgrade.rst:135
 msgid "Everything okay? Time to upgrade DSMR-reader to v3.x."
 msgstr "Alles OK? Tijd om DSMR-reader te upgraden naar v3.x."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:113
+#: ../../faq/v3_upgrade.rst:138
 msgid "6. Switching DSMR-reader to ``v3.x``"
 msgstr "6. Wisselen naar DSMR-reader ``v3.x``"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:115
+#: ../../faq/v3_upgrade.rst:140
 msgid ""
 "DSMR-reader ``v3.x`` lives in a different branch, to prevent any users from "
 "unexpectedly updating to ``v3.x``."
@@ -153,6 +158,6 @@ msgstr ""
 "DSMR-reader ``v3.x`` leeft in een andere branch, om te voorkomen dat "
 "gebruikers onbedoeld upgraden naar ``v3.x``."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/v3_upgrade.rst:127
+#: ../../faq/v3_upgrade.rst:164
 msgid "Great. You should now be on ``v3.x``!"
 msgstr "Mooi! Je zou nu op ``v3.x`` moeten zitten!"

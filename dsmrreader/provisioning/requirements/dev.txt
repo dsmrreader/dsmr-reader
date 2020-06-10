@@ -7,5 +7,5 @@ sphinx==3.0.4
 sphinx-autobuild==0.7.1
 sphinx-intl==2.0.1
 sphinx-rtd-theme==0.4.3
--r postgresql.txt
+
 -r mysql.txt
