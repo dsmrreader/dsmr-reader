@@ -8,6 +8,10 @@ DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to ma
     If you're using Docker, you can probably just install the ``v4.x`` version of the Docker container without any of the steps below.
 
 
+.. contents::
+    :depth: 2
+
+
 1. Update to the latest ``v3.x`` version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -17,10 +21,27 @@ DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to ma
 2. Python version
 ^^^^^^^^^^^^^^^^^
 
-The minimum Python version required is unchanged in this release. It's still ``Python 3.6`` or higher.
+The minimum Python version required remains **unchanged** in this release. It's still ``Python 3.6`` or higher.
 
 
-3. Install python3-psycopg2
+3. Generate ``SECRET_KEY``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Previous versions had a hardcoded value for ``SECRET_KEY``.
+This was fine while running DSMR-reader in your home network, but it is not recommended for public facing instances.
+To prevent some users for setting a local secret, DSMR-reader now requires everyone to generate a unique ``SECRET_KEY`` locally during installation (or when upgrading).
+
+Execute the following::
+
+    sudo su - dsmr
+    ./tools/generate-secret-key.sh
+
+Check whether the script updated your ``settings.py`` file properly. It should display some output::
+
+    grep 'SECRET_KEY=' dsmrreader/settings.py
+
+
+4. Install python3-psycopg2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you're using PostgreSQL, the default for DSMR-reader, install the following system package::
@@ -70,7 +91,7 @@ Execute the following::
 Everything okay? Time to upgrade DSMR-reader to v4.x.
 
 
-4. Switching DSMR-reader to ``v4.x``
+5. Switching DSMR-reader to ``v4.x``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 DSMR-reader ``v4.x`` lives in a different branch, to prevent any users from unexpectedly updating to ``v4.x``.

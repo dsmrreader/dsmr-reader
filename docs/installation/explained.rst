@@ -183,6 +183,7 @@ The ``base.txt`` contains requirements which the application needs anyway, no ma
 Install dependencies::
 
     cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
+    ./tools/generate-secret-key.sh
 
     pip3 install -r dsmrreader/provisioning/requirements/base.txt
 

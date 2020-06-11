@@ -8,6 +8,10 @@ DSMR-reader ``v3.x`` is backwards incompatible with ``2.x``. You will have to ma
     If you're using Docker, you can probably just install the ``v3.x`` version of the Docker container without any of the steps below.
 
 
+.. contents::
+    :depth: 2
+
+
 1. Update to the latest ``v2.x`` version (``v2.15``)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

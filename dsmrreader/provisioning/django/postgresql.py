@@ -11,10 +11,6 @@ DSMRREADER_HOST = 'localhost'
 DSMRREADER_PORT = 5432
 DSMRREADER_CONN_MAX_AGE = 60
 
-# Change me when exposing your application to the outside world using the Internet!
-DSMRREADER_SECRET_KEY = 'Ww\=)|a:tKxz"u@p<<Cp~MaZ%dNIYX-#w2h-*Od{>1`c%l/MJ+'
-
-
 # Settings are read from environment or, when not found, default to the values above.
 DATABASES = {
     'default': {
@@ -28,7 +24,7 @@ DATABASES = {
     }
 }
 
-SECRET_KEY = os.environ.get('SECRET_KEY', DSMRREADER_SECRET_KEY)
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 if os.environ.get('DSMRREADER_LOGLEVEL') is not None:
     LOGGING['loggers']['commands']['level'] = os.environ.get('DSMRREADER_LOGLEVEL')

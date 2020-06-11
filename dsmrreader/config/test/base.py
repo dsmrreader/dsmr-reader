@@ -1,6 +1,11 @@
-""" Tests with SQLite backend. """
+""" Tests. """
+import secrets
+
 from dsmrreader.config.development import *
 
+
+# Never use this in production!
+SECRET_KEY = secrets.token_hex(64)
 
 # Mute query debugging log for nose tests. Prevent RSI from scrolling.. ;-)
 LOGGING = {
