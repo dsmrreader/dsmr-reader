@@ -29,9 +29,9 @@ Start::
 Continue::
     
     # Database
-    sudo sudo -u postgres createuser -DSR dsmrreader
-    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
-    sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+    sudo -u postgres createuser -DSR dsmrreader
+    sudo -u postgres createdb -O dsmrreader dsmrreader
+    sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
     
     # System user
     sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
@@ -46,18 +46,18 @@ Continue::
     sudo chown -R dsmr:dsmr /home/dsmr/
     
     # Virtual env
-    sudo sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-    sudo sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3
+    sudo -u dsmr mkdir /home/dsmr/.virtualenvs
+    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3
     sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
     sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
     
     # Config & requirements
-    sudo sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/postgresql.py /home/dsmr/dsmr-reader/dsmrreader/settings.py
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/postgresql.txt
+    sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/postgresql.py /home/dsmr/dsmr-reader/dsmrreader/settings.py
+    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/postgresql.txt
     
     # Setup
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
+    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
+    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
 
     # Nginx
     sudo rm /etc/nginx/sites-enabled/default
@@ -74,7 +74,7 @@ Continue::
     sudo supervisorctl update
     
     # Create application user
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --username admin --email root@localhost
+    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --username admin --email root@localhost
 
 
 ----
