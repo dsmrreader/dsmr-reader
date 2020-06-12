@@ -26,11 +26,18 @@ class TestToday(APIv2TestCase):
 
         FIELDS = (
             'day', 'electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned',
-            'electricity1_cost', 'electricity2_cost', 'gas', 'gas_cost', 'total_cost'
+            'electricity1_cost', 'electricity2_cost', 'gas', 'gas_cost', 'total_cost', 'electricity_merged',
+            'electricity_returned_merged'
         )
 
         for x in FIELDS:
             self.assertIn(x, result.keys())
+
+        # It's also tested in the service used for fetching the data, but w/e...
+        self.assertEqual(result['electricity_merged'], result['electricity1'] + result['electricity2'])
+        self.assertEqual(
+            result['electricity_returned_merged'], result['electricity1_returned'] + result['electricity2_returned']
+        )
 
 
 class TestTodayWithGas(TestToday):

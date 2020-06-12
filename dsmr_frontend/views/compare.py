@@ -37,8 +37,8 @@ class CompareXhrSummary(TemplateView):
             'years': dsmr_stats.services.year_statistics,
         }
 
-        base_data = DATA_MAPPING[selected_level](selected_base_datetime.date())
-        comparison_data = DATA_MAPPING[selected_level](selected_comparison_datetime.date())
+        base_data, base_count = DATA_MAPPING[selected_level](selected_base_datetime.date())
+        comparison_data, comparison_count = DATA_MAPPING[selected_level](selected_comparison_datetime.date())
         diff_data = {}
 
         context_data['base_title'] = {
@@ -76,4 +76,5 @@ class CompareXhrSummary(TemplateView):
         context_data['diff'] = diff_data
         context_data['base'] = base_data
         context_data['comparison'] = comparison_data
+        context_data['data_count'] = dict(base=base_count, comparison=comparison_count)
         return context_data

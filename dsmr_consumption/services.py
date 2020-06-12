@@ -4,7 +4,6 @@ import logging
 import pytz
 from django.conf import settings
 
-from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.db.models import Avg, Min, Max, Count
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
@@ -14,6 +13,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.statistics import MeterStatistics
@@ -100,6 +100,9 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
                 phase_voltage_l1=dsmr_reading.phase_voltage_l1,
                 phase_voltage_l2=dsmr_reading.phase_voltage_l2,
                 phase_voltage_l3=dsmr_reading.phase_voltage_l3,
+                phase_power_current_l1=dsmr_reading.phase_power_current_l1,
+                phase_power_current_l2=dsmr_reading.phase_power_current_l2,
+                phase_power_current_l3=dsmr_reading.phase_power_current_l3,
             )
         except IntegrityError:
             # This might happen, even though rarely, when the same timestamp with different values comes by.
@@ -131,6 +134,9 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
         avg_phase_voltage_l1=Avg('phase_voltage_l1'),
         avg_phase_voltage_l2=Avg('phase_voltage_l2'),
         avg_phase_voltage_l3=Avg('phase_voltage_l3'),
+        avg_phase_power_current_l1=Avg('phase_power_current_l1'),
+        avg_phase_power_current_l2=Avg('phase_power_current_l2'),
+        avg_phase_power_current_l3=Avg('phase_power_current_l3'),
     )
 
     # This instance is the average/max and combined result.
@@ -151,6 +157,9 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
         phase_voltage_l1=grouped_reading['avg_phase_voltage_l1'],
         phase_voltage_l2=grouped_reading['avg_phase_voltage_l2'],
         phase_voltage_l3=grouped_reading['avg_phase_voltage_l3'],
+        phase_power_current_l1=grouped_reading['avg_phase_power_current_l1'],
+        phase_power_current_l2=grouped_reading['avg_phase_power_current_l2'],
+        phase_power_current_l3=grouped_reading['avg_phase_power_current_l3'],
     )
 
 
@@ -309,28 +318,38 @@ def day_consumption(day):
     return consumption
 
 
-def live_electricity_consumption(use_naturaltime=True):
+def live_electricity_consumption():
     """ Returns the current latest/live electricity consumption. """
     data = {}
 
     try:
         latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
     except IndexError:
-        # Don't even bother when no data available.
         return data
 
     latest_timestamp = timezone.localtime(latest_reading.timestamp)
 
-    # In case the smart meter is running a clock in the future.
-    if latest_timestamp > timezone.now():
-        latest_timestamp = timezone.now()
+    # In case the smart meter's clock is running in the future.
+    latest_timestamp = min(timezone.now(), latest_timestamp)
+
+    # To distinguish whether we're returning or not.
+    is_delivering = latest_reading.electricity_currently_delivered > latest_reading.electricity_currently_returned
+    abs_units = max(latest_reading.electricity_currently_delivered, latest_reading.electricity_currently_returned)
 
     data['timestamp'] = latest_timestamp
     data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
     data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
 
-    if use_naturaltime:
-        data['timestamp'] = str(naturaltime(data['timestamp']))
+    tariff = MeterStatistics.get_solo().electricity_tariff
+    frontend_settings = FrontendSettings.get_solo()
+
+    try:
+        data['tariff_name'] = {
+            1: frontend_settings.tariff_1_delivered_name,
+            2: frontend_settings.tariff_2_delivered_name,
+        }[tariff]
+    except KeyError:
+        data['tariff_name'] = None
 
     try:
         # This WILL fail when we either have no prices at all or conflicting ranges.
@@ -338,23 +357,23 @@ def live_electricity_consumption(use_naturaltime=True):
     except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
         return data
 
-    # We need to current tariff to get the right price.
-    tariff = MeterStatistics.get_solo().electricity_tariff
-    cost_per_hour = None
-
-    tariff_map = {
-        1: prices.electricity_delivered_1_price,
-        2: prices.electricity_delivered_2_price,
+    tariff_price_map = {
+        # Price depends on whether we're currently delivering or returning
+        1: prices.electricity_delivered_1_price if is_delivering else prices.electricity_returned_1_price,
+        2: prices.electricity_delivered_2_price if is_delivering else prices.electricity_returned_2_price,
     }
 
     try:
-        cost_per_hour = latest_reading.electricity_currently_delivered * tariff_map[tariff]
+        cost_per_hour = abs_units * tariff_price_map[tariff]
     except KeyError:
-        pass
-    else:
-        data['cost_per_hour'] = formats.number_format(
-            round_decimal(cost_per_hour)
-        )
+        data['cost_per_hour'] = None
+        return data
+
+    # Returning? Negate.
+    if not is_delivering:
+        cost_per_hour *= -1
+
+    data['cost_per_hour'] = formats.number_format(round_decimal(cost_per_hour))
 
     return data
 
@@ -463,7 +482,10 @@ def summarize_energy_contracts():
     data = []
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
-        summary = dsmr_stats.services.range_statistics(start=current.start, end=current.end or timezone.now().date())
+        summary, count = dsmr_stats.services.range_statistics(
+            start=current.start,
+            end=current.end or timezone.now().date()
+        )
 
         data.append({
             'description': current.description,

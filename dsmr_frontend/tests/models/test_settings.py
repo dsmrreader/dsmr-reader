@@ -46,5 +46,5 @@ class TestSettings(TestCase):
     def test_temperature_color(self):
         self.assertEqual(self.instance.temperature_color, '#0073B7')
 
-    def test_dashboard_graph_width(self):
-        self.assertEqual(self.instance.dashboard_graph_width, 30)
+    def test_live_graphs_hours_range(self):
+        self.assertEqual(self.instance.live_graphs_hours_range, 24)

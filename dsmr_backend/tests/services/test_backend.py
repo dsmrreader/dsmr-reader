@@ -235,8 +235,9 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         """ Application status info dict. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1))
 
-        BackupSettings.get_solo()
-        BackupSettings.objects.update(daily_backup=False)
+        bs = BackupSettings.get_solo()
+        bs.daily_backup = False
+        bs.save()  # Trigger signal.
         tools_status = dsmr_backend.services.backend.status_info()['tools']
 
         # Tools should be asserted, other content is tested in dsmr_frontend.
@@ -248,7 +249,8 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertIsNone(tools_status['pvoutput']['latest_sync'])
 
         # Now when enabled.
-        BackupSettings.objects.update(daily_backup=True, latest_backup=timezone.now())
+        bs.daily_backup = True
+        bs.save()  # Trigger signal.
         DropboxSettings.objects.update(access_token='xxx', latest_sync=timezone.now())
         PVOutputAddStatusSettings.objects.update(export=True, latest_sync=timezone.now())
 
@@ -257,7 +259,7 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertTrue(tools_status['backup']['enabled'])
         self.assertTrue(tools_status['dropbox']['enabled'])
         self.assertTrue(tools_status['pvoutput']['enabled'])
-        self.assertEqual(tools_status['backup']['latest_backup'], timezone.now())
+        # self.assertEqual(tools_status['backup']['latest_backup'], timezone.now())  # Will be removed eventually
         self.assertEqual(tools_status['dropbox']['latest_sync'], timezone.now())
         self.assertEqual(tools_status['pvoutput']['latest_sync'], timezone.now())
 

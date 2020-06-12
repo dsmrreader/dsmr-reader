@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.conf import settings
 
 from dsmr_backend.mixins import InfiniteManagementCommandMixin
-import dsmr_datalogger.services
+import dsmr_datalogger.services.datalogger
 
 
 logger = logging.getLogger('commands')
@@ -20,7 +20,7 @@ logger = logging.getLogger('commands')
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = 'Generates a FAKE reading. DO NOT USE in production! Used for integration checks.'
     name = __name__  # Required for PID file.
-    sleep_time = 5
+    sleep_time = 1
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
@@ -72,7 +72,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             self._write_to_port(serial_port=options['serial_port'], data=telegram)
         else:
             logger.debug('Writing data to: internal service')
-            dsmr_datalogger.services.telegram_to_reading(data=telegram)
+            dsmr_datalogger.services.datalogger.telegram_to_reading(data=telegram)
 
     def _write_to_port(self, serial_port, data):
         serial_handle = serial.Serial(
@@ -117,9 +117,12 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         currently_returned_l2 = 0
         currently_returned_l3 = 0
         currently_returned = 0
-        phase_voltage_l1 = random.randint(225, 235)
-        phase_voltage_l2 = random.randint(225, 235)
-        phase_voltage_l3 = random.randint(225, 235)
+        phase_voltage_l1 = random.randint(228, 232)
+        phase_voltage_l2 = random.randint(228, 232)
+        phase_voltage_l3 = random.randint(228, 232)
+        phase_power_current_l1 = random.randint(5, 8)
+        phase_power_current_l2 = random.randint(2, 3)
+        phase_power_current_l3 = random.randint(0, 1)
 
         # Randomly switch between electricity delivered and returned each 5 seconds for a more 'realistic' graph.
         if with_electricity_returned and second_since % 10 < 5:
@@ -161,9 +164,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:32.7.0({}.0*V)\r\n".format(phase_voltage_l1),
             "1-0:52.7.0({}.1*V)\r\n".format(phase_voltage_l2),
             "1-0:72.7.0({}.2*V)\r\n".format(phase_voltage_l3),
-            "1-0:31.7.0(000*A)\r\n",
-            "1-0:51.7.0(000*A)\r\n",
-            "1-0:71.7.0(001*A)\r\n",
+            "1-0:31.7.0({}*A)\r\n".format(phase_power_current_l1),
+            "1-0:51.7.0({}*A)\r\n".format(phase_power_current_l2),
+            "1-0:71.7.0({}*A)\r\n".format(phase_power_current_l3),
             "1-0:21.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l1, 6)),
             "1-0:41.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l2, 6)),
             "1-0:61.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l3, 6)),

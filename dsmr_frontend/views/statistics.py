@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView, View
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import ElectricityStatistics
 import dsmr_backend.services.backend
 
@@ -16,6 +17,7 @@ class Statistics(TemplateView):
         context_data = super(Statistics, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['electricity_statistics'] = ElectricityStatistics.get_solo().export()
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         try:
             latest_reading = DsmrReading.objects.all().order_by('-pk')[0]

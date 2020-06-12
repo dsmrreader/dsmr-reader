@@ -19,21 +19,31 @@ class ScheduledProcessManager(models.Manager):
 class ScheduledProcess(ModelUpdateMixin, models.Model):
     """ A scheduled process, not to be executed before the planned moment. """
     objects = ScheduledProcessManager()
-    name = models.CharField(max_length=64)
-    module = models.CharField(max_length=128, unique=True)
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=64
+    )
+    module = models.CharField(
+        verbose_name=_('Module'),
+        max_length=128,
+        unique=True
+    )
     last_executed_at = models.DateTimeField(
         null=True,
         default=None,
+        verbose_name=_('Last executed at'),
         help_text=_('The last moment this process ran (disregarding whether it succeeded or failed).'),
     )
     planned = models.DateTimeField(
         default=timezone.now,
         db_index=True,
+        verbose_name=_('Planned'),
         help_text=_('The next moment this process will run again.'),
     )
     active = models.BooleanField(
         default=True,
         db_index=True,
+        verbose_name=_('Active'),
         help_text=_('Related configuration settings manage whether this process is active or disabled for you.'),
     )
 
@@ -48,6 +58,9 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         imported_module = importlib.import_module(name=import_path)
         service = getattr(imported_module, call_path)
         return service(self)
+
+    def disable(self):
+        self.update(active=False)
 
     def delay(self, delta):
         """ Delays the next call by the given delta. """

@@ -6,12 +6,10 @@ from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils import timezone, formats
 
-import dsmr_consumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
 import dsmr_backend.services.backend
-import dsmr_consumption.services
 import dsmr_stats.services
 
 
@@ -50,11 +48,14 @@ class ArchiveXhrSummary(TemplateView):
         ))
         selected_level = self.request.GET['level']
 
-        context_data['statistics'] = {
-            'days': dsmr_stats.services.day_statistics(selected_datetime.date()),
-            'months': dsmr_stats.services.month_statistics(selected_datetime.date()),
-            'years': dsmr_stats.services.year_statistics(selected_datetime.date()),
-        }[selected_level]
+        DATA_MAPPING = {
+            'days': dsmr_stats.services.day_statistics,
+            'months': dsmr_stats.services.month_statistics,
+            'years': dsmr_stats.services.year_statistics,
+        }
+
+        data, coun = DATA_MAPPING[selected_level](selected_datetime.date())
+        context_data['statistics'] = data
 
         context_data['title'] = {
             'days': formats.date_format(selected_datetime.date(), 'DSMR_GRAPH_LONG_DATE_FORMAT'),
@@ -64,7 +65,6 @@ class ArchiveXhrSummary(TemplateView):
 
         # Only day level allows some additional data.
         if selected_level == 'days':
-            context_data['energy_price'] = dsmr_consumption.services.get_day_prices(day=selected_datetime.date())
             context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
 
         context_data['selected_level'] = selected_level
@@ -118,7 +118,7 @@ class ArchiveXhrGraphs(View):
 
             for increment in range(0, 12):
                 current_month = start_of_year + relativedelta(months=increment)
-                current_month_stats = dsmr_stats.services.month_statistics(current_month.date())
+                current_month_stats, _ = dsmr_stats.services.month_statistics(current_month.date())
                 current_month_stats['month'] = current_month.date()
                 source_data.append(current_month_stats)
 

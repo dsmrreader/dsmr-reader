@@ -9,11 +9,11 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 class FrontendSettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
-    GAS_GRAPH_STYLE_BAR = 'bar'
-    GAS_GRAPH_STYLE_LINE = 'line'
-    GAS_GRAPH_STYLES = (
-        (GAS_GRAPH_STYLE_BAR, _('Bar')),
-        (GAS_GRAPH_STYLE_LINE, _('Line')),
+    GRAPH_STYLE_BAR = 'bar'
+    GRAPH_STYLE_LINE = 'line'
+    GRAPH_STYLES = (
+        (GRAPH_STYLE_BAR, _('Bar')),
+        (GRAPH_STYLE_LINE, _('Line')),
     )
 
     merge_electricity_tariffs = models.BooleanField(
@@ -82,18 +82,62 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Temperature color'),
         help_text=_("Graph color for temperatures read")
     )
-    dashboard_graph_width = models.IntegerField(
-        default=30,
-        validators=[MinValueValidator(30), MaxValueValidator(60 * 60 * 24)],
-        verbose_name=_('Dashboard graph width'),
-        help_text=_("The number of items displayed on the X-axis of the dashboard graphs")
+    live_graphs_hours_range = models.IntegerField(
+        default=24,
+        validators=[MinValueValidator(1), MaxValueValidator(7 * 24)],
+        verbose_name=_('Live graphs hours range'),
+        help_text=_("The range of the data displayed in live graphs (increasing it may degrade rendering performance!)")
+    )
+    live_graphs_initial_zoom = models.IntegerField(
+        default=10,
+        validators=[MinValueValidator(1), MaxValueValidator(100)],
+        verbose_name=_('Live graphs initial zoom'),
+        help_text=_("The percentage of the graph range displayed initially")
     )
     gas_graph_style = models.CharField(
         max_length=4,
-        choices=GAS_GRAPH_STYLES,
-        default=GAS_GRAPH_STYLE_BAR,
+        choices=GRAPH_STYLES,
+        default=GRAPH_STYLE_BAR,
         verbose_name=_('Gas graph style'),
         help_text=_("Using the bar style will help you distinguish empty values better")
+    )
+    electricity_graph_style = models.CharField(
+        max_length=4,
+        choices=GRAPH_STYLES,
+        default=GRAPH_STYLE_BAR,
+        verbose_name=_('Electricity graph style'),
+        help_text=_("Archive graphs only: Use the bar style to change visualisation")
+    )
+    stack_electricity_graphs = models.BooleanField(
+        default=True,
+        verbose_name=_('Stack electricity graphs'),
+        help_text=_(
+            "Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better"
+        )
+    )
+    tariff_1_delivered_name = models.CharField(
+        max_length=30,
+        default='Laagtarief',
+        verbose_name=_('Name of tariff 1 (delivered)'),
+        help_text=_("Defaults to 'low tariff' delivered")
+    )
+    tariff_2_delivered_name = models.CharField(
+        max_length=30,
+        default='Hoogtarief',
+        verbose_name=_('Name of tariff 2 (delivered)'),
+        help_text=_("Defaults to 'normal tariff' or 'high tariff' delivered")
+    )
+    tariff_1_returned_name = models.CharField(
+        max_length=30,
+        default='Laagtarief teruglevering',
+        verbose_name=_('Name of tariff 1 (returned)'),
+        help_text=_("Defaults to 'low tariff' returned")
+    )
+    tariff_2_returned_name = models.CharField(
+        max_length=30,
+        default='Hoogtarief teruglevering',
+        verbose_name=_('Name of tariff 2 (returned)'),
+        help_text=_("Defaults to 'normal tariff' or 'high tariff' returned")
     )
 
     def __str__(self):

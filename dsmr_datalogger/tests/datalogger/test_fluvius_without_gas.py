@@ -24,29 +24,29 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "\r\n",
             "0-0:96.1.4(50213)\r\n",
             "0-0:96.1.1(12345678901234567890123456789012)\r\n",
-            "0-0:1.0.0(190821210025S)\r\n",
-            "1-0:1.8.1(000260.129*kWh)\r\n",
-            "1-0:1.8.2(000338.681*kWh)\r\n",
-            "1-0:2.8.1(000000.010*kWh)\r\n",
-            "1-0:2.8.2(000000.425*kWh)\r\n",
+            "0-0:1.0.0(200305222945W)\r\n",
+            "1-0:1.8.1(000172.987*kWh)\r\n",
+            "1-0:1.8.2(000160.643*kWh)\r\n",
+            "1-0:2.8.1(000023.457*kWh)\r\n",
+            "1-0:2.8.2(000004.819*kWh)\r\n",
             "0-0:96.14.0(0002)\r\n",
-            "1-0:1.7.0(00.261*kW)\r\n",
+            "1-0:1.7.0(00.638*kW)\r\n",
             "1-0:2.7.0(00.000*kW)\r\n",
-            "1-0:32.7.0(231.0*V)\r\n",
-            "1-0:52.7.0(000.0*V)\r\n",
-            "1-0:72.7.0(230.9*V)\r\n",
+            "1-0:32.7.0(230.3*V)\r\n",
+            "1-0:52.7.0(230.5*V)\r\n",
+            "1-0:72.7.0(229.3*V)\r\n",
             "1-0:31.7.0(000*A)\r\n",
             "1-0:51.7.0(000*A)\r\n",
-            "1-0:71.7.0(000*A)\r\n",
+            "1-0:71.7.0(001*A)\r\n",
             "0-0:96.3.10(1)\r\n",
             "0-0:17.0.0(999.9*kW)\r\n",
             "1-0:31.4.0(999*A)\r\n",
             "0-0:96.13.0()\r\n",
             "0-1:24.1.0(003)\r\n",
             "0-1:96.1.1(12345678901234567890123456789012)\r\n",
-            "0-1:24.4.0(1)\r\n",
-            "0-1:24.2.3(190821210011S)(00029.553*m3)\r\n",
-            "!EF8E"
+            "0-1:24.4.0(0)\r\n",
+            "0-1:24.2.3(632525252525W)(00000.000)\r\n",
+            "!99B6",
         ]
 
     @mock.patch('serial.Serial.open')
@@ -69,22 +69,25 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_reading_values(self, now_mock):
         """ Test whether dsmr_datalogger reads the correct values. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 5))
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(reading.timestamp, datetime(2019, 8, 21, 19, 0, 25, tzinfo=pytz.UTC))
-        self.assertEqual(reading.electricity_delivered_1, Decimal('260.129'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('0.010'))
-        self.assertEqual(reading.electricity_delivered_2, Decimal('338.681'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('0.425'))
-        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.261'))
+        self.assertEqual(reading.timestamp, datetime(2020, 3, 5, 21, 29, 45, tzinfo=pytz.UTC))
+        self.assertEqual(reading.electricity_delivered_1, Decimal('172.987'))
+        self.assertEqual(reading.electricity_returned_1, Decimal('23.457'))
+        self.assertEqual(reading.electricity_delivered_2, Decimal('160.643'))
+        self.assertEqual(reading.electricity_returned_2, Decimal('4.819'))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.638'))
         self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(reading.extra_device_timestamp, datetime(2019, 8, 21, 19, 0, 11, tzinfo=pytz.UTC))
-        self.assertEqual(reading.extra_device_delivered, Decimal('29.553'))
-        self.assertEqual(reading.phase_voltage_l1, Decimal('231.0'))
-        self.assertEqual(reading.phase_voltage_l2, Decimal('0'))
-        self.assertEqual(reading.phase_voltage_l3, Decimal('230.9'))
+        self.assertEqual(reading.extra_device_timestamp, None)  # Error handled.
+        self.assertEqual(reading.extra_device_delivered, None)  # Should be NONE too due to timestamp.
+        self.assertEqual(reading.phase_voltage_l1, Decimal('230.3'))
+        self.assertEqual(reading.phase_voltage_l2, Decimal('230.5'))
+        self.assertEqual(reading.phase_voltage_l3, Decimal('229.3'))
+        self.assertEqual(reading.phase_power_current_l1, 0)
+        self.assertEqual(reading.phase_power_current_l2, 0)
+        self.assertEqual(reading.phase_power_current_l3, 1)
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertIsNone(meter_statistics.dsmr_version)

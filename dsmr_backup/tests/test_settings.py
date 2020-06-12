@@ -25,9 +25,6 @@ class TestBackupSettings(TestCase):
     def test_backup_time(self):
         self.assertTrue(self.instance.backup_time, time(hour=2))
 
-    def test_latest_backup(self):
-        self.assertIsNone(self.instance.latest_backup)
-
 
 class TestDropboxSettings(TestCase):
     def setUp(self):

@@ -1,26 +1,25 @@
 var echarts_electricity_returned_graph = echarts.init(document.getElementById('echarts-electricity-returned-graph'));
 
 
-$(document).ready(function(){
-	/* Responsiveness. */
-	$(window).resize(function() {
-		echarts_electricity_returned_graph.resize();
-	});
+$(document).ready(function () {
+    /* Responsiveness. */
+    $(window).resize(function () {
+        echarts_electricity_returned_graph.resize();
+    });
 });
-	
 
-function render_electricity_returned_graph(xhr_data)
-{
+
+function render_electricity_returned_graph(xhr_data) {
     var echarts_options = {
-	    title: {
-	        text: text_electricity_returned_header,
-	        left: 'center'
-	    },
+        title: {
+            text: text_electricity_returned_header,
+            left: 'center'
+        },
         color: [
-        	electricity_returned_color,
-        	electricity_returned_alternate_color,
+            electricity_returned_alternate_color,
+            electricity_returned_color
         ],
-    	tooltip : {
+        tooltip: {
             trigger: 'axis',
             axisPointer: {
                 type: 'shadow',
@@ -29,7 +28,7 @@ function render_electricity_returned_graph(xhr_data)
                 }
             }
         },
-        calculable : true,
+        calculable: true,
         grid: {
             top: '12%',
             left: '1%',
@@ -38,50 +37,49 @@ function render_electricity_returned_graph(xhr_data)
         },
         xAxis: [
             {
-                type : 'category',
-                boundaryGap: false,
-                data : xhr_data.x
+                type: 'category',
+                boundaryGap: electricity_graph_style == 'bar',
+                data: xhr_data.x
             }
         ],
         yAxis: [
             {
-                type : 'value'
+                type: 'value'
             }
         ],
         series: null
     };
-    
-    if (xhr_data.electricity1_returned && xhr_data.electricity2_returned)
-	{
-    	echarts_options.series = [
+
+    if (xhr_data.electricity1_returned && xhr_data.electricity2_returned) {
+        echarts_options.series = [
             {
-            	smooth: true,
                 name: text_electricity1_returned,
-                type: 'line',
+                type: electricity_graph_style,
+                stack: stack_electricity_graphs,
+                smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity1_returned
             },
             {
-            	smooth: true,
                 name: text_electricity2_returned,
-                type: 'line',
+                type: electricity_graph_style,
+                stack: stack_electricity_graphs,
+                smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity2_returned
             }
         ]
-	}
-    else if (xhr_data.electricity_returned_merged)
-	{
-    	echarts_options.series = [
+    } else if (xhr_data.electricity_returned_merged) {
+        echarts_options.series = [
             {
-            	smooth: true,
                 name: text_electricity_merged_returned,
-                type: 'line',
+                type: electricity_graph_style,
+                smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity_returned_merged
             }
         ]
-	}
-	
-	echarts_electricity_returned_graph.setOption(echarts_options);
+    }
+
+    echarts_electricity_returned_graph.setOption(echarts_options);
 }

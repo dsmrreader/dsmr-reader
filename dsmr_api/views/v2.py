@@ -50,7 +50,7 @@ class TodayConsumptionView(APIView):
     IGNORE_FIELDS = (
         'electricity1_start', 'electricity2_start', 'electricity1_end', 'electricity2_end', 'notes', 'gas_start',
         'gas_end', 'electricity1_returned_start', 'electricity2_returned_start', 'electricity1_returned_end',
-        'electricity2_returned_end', 'electricity_cost_merged', 'electricity_merged', 'electricity_returned_merged',
+        'electricity2_returned_end', 'electricity_cost_merged',
         'average_temperature', 'lowest_temperature', 'highest_temperature', 'latest_consumption'
     )
     DEFAULT_ZERO_FIELDS = ('gas', 'gas_cost')  # These might miss during the first hour of each day.
@@ -79,7 +79,7 @@ class TodayConsumptionView(APIView):
 class ElectricityLiveView(APIView):
     """ Returns the current electricity usage. """
     def get(self, request):
-        return Response(dsmr_consumption.services.live_electricity_consumption(use_naturaltime=False))
+        return Response(dsmr_consumption.services.live_electricity_consumption())
 
 
 class GasLiveView(APIView):

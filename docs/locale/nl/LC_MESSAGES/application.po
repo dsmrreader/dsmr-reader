@@ -333,15 +333,3 @@ msgstr ""
 "een pop-up te zien, waarin je gevraagd wordt om in te loggen. Voor meer "
 "informatie over dit onderwerp `zie de Nginx documentatie "
 "<https://www.nginx.com/resources/admin-guide/restricting-access/>`_."
-
-#~ msgid "DSMR 2.x (legacy)"
-#~ msgstr "DSMR 2.x (oude meters)"
-
-#~ msgid ""
-#~ "For **MySQL/MariaDB** you can use "
-#~ "``dsmrreader/provisioning/mysql/mysql-backup.sh``."
-#~ msgstr ""
-#~ "Voor **MySQL/MariaDB** kun je dit script"
-#~ " gebruiken: ``dsmrreader/provisioning/mysql/mysql-"
-#~ "backup.sh``."
-

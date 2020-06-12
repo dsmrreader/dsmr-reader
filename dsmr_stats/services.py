@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection, models
 from django.db.models.aggregates import Avg, Sum, Min, Max
 from django.core.cache import cache
+from django.db.models.functions import TruncDate
 from django.utils import timezone
 from django.conf import settings
 
@@ -244,8 +245,9 @@ def average_consumption_by_hour(max_weeks_ago):
 
 
 def range_statistics(start, end):
-    """ Returns the statistics (totals) for a target date. Its month will be used. """
-    return DayStatistics.objects.filter(day__gte=start, day__lt=end).aggregate(
+    """ Returns the statistics (totals) and the number of data points for a target range. """
+    queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
+    aggregate = queryset.aggregate(
         total_cost=Sum('total_cost'),
         electricity1=Sum('electricity1'),
         electricity1_cost=Sum('electricity1_cost'),
@@ -262,6 +264,7 @@ def range_statistics(start, end):
         temperature_max=Max('highest_temperature'),
         temperature_avg=Avg('average_temperature'),
     )
+    return aggregate, queryset.count()
 
 
 def day_statistics(target_date):
@@ -329,18 +332,64 @@ def update_electricity_statistics(reading):
 def recalculate_prices():
     """ Retroactively sets the prices for all statistics. E.g.: When the user has altered the prices. """
     for current_day in DayStatistics.objects.all():
-        prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
+        print(' - Recalculating:', current_day.day)
 
+        prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
         current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
             current_day.electricity1 * prices.electricity_delivered_1_price
         )
         current_day.electricity2_cost = dsmr_consumption.services.round_decimal(
             current_day.electricity2 * prices.electricity_delivered_2_price
         )
-        current_day.gas_cost = dsmr_consumption.services.round_decimal(
-            current_day.gas * prices.gas_price
-        )
+
+        if current_day.gas is not None:
+            current_day.gas_cost = dsmr_consumption.services.round_decimal(
+                current_day.gas * prices.gas_price
+            )
+
         current_day.total_cost = dsmr_consumption.services.round_decimal(
             current_day.electricity1_cost + current_day.electricity2_cost + current_day.gas_cost
         )
         current_day.save()
+
+
+def reconstruct_missing_day_statistics():
+    """ Reconstructs missing day statistics by using available hour statistics. """
+    dates_to_generate = HourStatistics.objects.all().annotate(
+        truncated_date=TruncDate('hour_start')
+    ).exclude(
+        # Skip existing days.
+        truncated_date__in=DayStatistics.objects.all().values_list('day', flat=True)
+    ).order_by('truncated_date').values_list(
+        'truncated_date', flat=True
+    )
+
+    # Budget distinct and sorting.
+    dates_to_generate = sorted(list(set(dates_to_generate)))
+
+    print('Found {} day(s) to reconstruct'.format(len(dates_to_generate)))
+
+    for current_day in dates_to_generate:
+        print(' - Reconstructing:', current_day)
+
+        day_totals = HourStatistics.objects.filter(
+            hour_start__date=current_day
+        ).aggregate(
+            electricity1_sum=Sum('electricity1'),
+            electricity2_sum=Sum('electricity2'),
+            electricity1_returned_sum=Sum('electricity1_returned'),
+            electricity2_returned_sum=Sum('electricity2_returned'),
+            gas_sum=Sum('gas'),
+        )
+
+        DayStatistics.objects.create(
+            day=current_day,
+            electricity1=day_totals['electricity1_sum'],
+            electricity2=day_totals['electricity2_sum'],
+            electricity1_returned=day_totals['electricity1_returned_sum'],
+            electricity2_returned=day_totals['electricity2_returned_sum'],
+            gas=day_totals['gas_sum'],
+            total_cost=0,
+            electricity1_cost=0,
+            electricity2_cost=0,
+        )

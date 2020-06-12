@@ -11,6 +11,7 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
         max_length=32,
         default='nl',
         choices=settings.LANGUAGES,
+        verbose_name=_('Language'),
         help_text=_('The language used in backend processes'),
     )
     automatic_update_checker = models.BooleanField(
@@ -29,12 +30,14 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
     )
     disable_gas_capability = models.BooleanField(
         default=False,
+        verbose_name=_('Disable gas capability'),
         help_text=_(
             'Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source.'
         ),
     )
     disable_electricity_returned_capability = models.BooleanField(
         default=False,
+        verbose_name=_('Disable electricity returned capability'),
         help_text=_(
             'Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports '
             'electricity returned data, but you do not own any solar panels.'
@@ -56,6 +59,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         default=None,
         null=True,
         blank=True,
+        verbose_name=_('Email from'),
         help_text=_('The email address you want to send any emails from')
     )
     email_to = models.EmailField(
@@ -63,6 +67,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         default=None,
         null=True,
         blank=True,
+        verbose_name=_('Email to'),
         help_text=_('The email address you want to send any emails to')
     )
     host = models.CharField(

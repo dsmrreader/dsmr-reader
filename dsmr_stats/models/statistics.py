@@ -8,7 +8,9 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class DayStatistics(ModelUpdateMixin, models.Model):
     """ Daily consumption usage summary. """
     day = models.DateField(unique=True, db_index=True, verbose_name=_('Date'))
-    total_cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('Total cost'))
+    total_cost = models.DecimalField(
+        db_index=True, max_digits=8, decimal_places=2, verbose_name=_('Total cost')
+    )
 
     electricity1 = models.DecimalField(
         max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 (low tariff)')
@@ -34,7 +36,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         max_digits=9, decimal_places=3, null=True, default=None, verbose_name=_('Gas')
     )
     gas_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, null=True, default=None, verbose_name=_('Gas price')
+        max_digits=8, decimal_places=2, null=True, default=None, verbose_name=_('Gas cost')
     )
 
     # Temperature readings depend on user settings.

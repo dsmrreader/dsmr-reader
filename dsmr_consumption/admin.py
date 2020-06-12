@@ -1,5 +1,6 @@
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
+from rangefilter.filter import DateTimeRangeFilter
 
 from dsmr_backend.mixins import ReadOnlyAdminModel
 from .models.consumption import ElectricityConsumption, GasConsumption
@@ -19,9 +20,15 @@ class EnergySupplierPriceAdmin(admin.ModelAdmin):
 
 @admin.register(ElectricityConsumption)
 class ElectricityConsumptionAdmin(ReadOnlyAdminModel):
+    list_filter = (
+        ('read_at', DateTimeRangeFilter),
+    )
     list_display = ('read_at', 'currently_delivered', 'currently_returned')
 
 
 @admin.register(GasConsumption)
 class GasConsumptionAdmin(ReadOnlyAdminModel):
+    list_filter = (
+        ('read_at', DateTimeRangeFilter),
+    )
     list_display = ('read_at', 'currently_delivered')

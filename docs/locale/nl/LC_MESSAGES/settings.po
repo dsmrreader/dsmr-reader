@@ -227,32 +227,3 @@ msgid ""
 msgstr ""
 "Voorbeeldgebruik ``DSMRREADER_DISABLED_CAPABILITIES = ['gas', "
 "'electricity_returned']``."
-
-#~ msgid "Defaults to ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
-#~ msgstr "Standaardwaarde: ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 100``."
-
-#~ msgid "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
-#~ msgstr "``DSMRREADER_RETENTION_UNTIL_THIS_HOUR``"
-
-#~ msgid ""
-#~ "Sets the maximum hour of the day that retention will run. Retention always "
-#~ "starts after midnight, when enabled. I.e.: changing it to ``8`` will "
-#~ "prevent new retention runs after 8 A.M."
-#~ msgstr ""
-#~ "Stelt de maximumtijd in waarop retentie op een dag mag draaien. Retentie "
-#~ "draait altijd vanaf middernacht, mits ingeschakeld. Bijvoorbeeld: een "
-#~ "waarde van ``8`` zorgt ervoor dat retentie niet meer wordt gestart ná 8 uur "
-#~ "in de ochtend."
-
-#~ msgid "Defaults to ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
-#~ msgstr "Standaardwaarde ``DSMRREADER_RETENTION_UNTIL_THIS_HOUR = 6``."
-
-#~ msgid "``DSMRREADER_PLUGINS``"
-#~ msgstr "``DSMRREADER_PLUGINS``"
-
-#~ msgid ":doc:`More information about this feature can be found here<plugins>`."
-#~ msgstr ""
-#~ ":doc:`Meer informatie over deze feature kun je hier terugvinden<plugins>`."
-
-#~ msgid "Defaults to ``DSMRREADER_PLUGINS = []``."
-#~ msgstr "Standaardwaarde ``DSMRREADER_PLUGINS = []``."

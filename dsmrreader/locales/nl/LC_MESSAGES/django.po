@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "API"
 msgstr "API"
@@ -33,6 +34,12 @@ msgstr "De authenticatiesleutel om toegang te krijgen tot deze API."
 
 msgid "API configuration"
 msgstr "API-configuratie"
+
+msgid "DSMR-reader"
+msgstr "DSMR-reader"
+
+msgid "Configuration"
+msgstr "Configuratie"
 
 msgid "Updates"
 msgstr "Updates"
@@ -85,17 +92,35 @@ msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert een enkele uitvoer"
 
+msgid "Name"
+msgstr "Naam"
+
+msgid "Module"
+msgstr "Module"
+
+msgid "Last executed at"
+msgstr "Laatst uitgevoerd op"
+
 msgid "The last moment this process ran (disregarding whether it succeeded or failed)."
 msgstr "Laatste moment dat dit proces draaide (ongeacht of het proces zelf lukte of faalde)."
 
+msgid "Planned"
+msgstr "Gepland"
+
 msgid "The next moment this process will run again."
 msgstr "Het eerstvolgende moment dat dit proces weer uitgevoerd wordt."
+
+msgid "Active"
+msgstr "Ingeschakeld"
 
 msgid "Related configuration settings manage whether this process is active or disabled for you."
 msgstr "Gerelateerde configuratie-instellingen bepalen of dit proces actief of uitgeschakeld is."
 
 msgid "Scheduled process"
 msgstr "Gepland proces"
+
+msgid "Language"
+msgstr "Taal"
 
 msgid "The language used in backend processes"
 msgstr "De gebruikte taal in achtergrondprocessen"
@@ -112,8 +137,14 @@ msgstr "Backend proces sleep"
 msgid "The number of seconds the application will sleep after completing a backend run."
 msgstr "Het aantal seconden dat de applicatie wacht na het voltooien van een backend run."
 
+msgid "Disable gas capability"
+msgstr "Schakel weergave gas uit"
+
 msgid "Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source."
 msgstr "Geeft aan of gas uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer je geen gas (meer) gebruikt en ben overgestapt naar een andere energiebron."
+
+msgid "Disable electricity returned capability"
+msgstr "Schakel weergave elektriciteitsteruglevering uit"
 
 msgid "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels."
 msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) teruglevering heeft geregistreerd."
@@ -121,8 +152,14 @@ msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de a
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
 
+msgid "Email from"
+msgstr "E-mailafzender"
+
 msgid "The email address you want to send any emails from"
 msgstr "Het e-mailadres waar e-mails van verzonden worden"
+
+msgid "Email to"
+msgstr "E-mailgeaddresseerde"
 
 msgid "The email address you want to send any emails to"
 msgstr "Het e-mailadres waar e-mails naar toegestuurd worden"
@@ -181,11 +218,11 @@ msgstr "Stuur een test e-mail"
 msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
 
-msgid "Automatic fields"
-msgstr "Automatische velden"
-
 msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/backup_dropbox.html\">Documentation</a>"
 msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v3/admin/backup_dropbox.html\">Documentatie</a>"
+
+msgid "Automatic fields"
+msgstr "Automatische velden"
 
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
@@ -214,11 +251,11 @@ msgstr "Back-up opslag map"
 msgid "The folder to store the backups in. The default location is \"backups/\". Please make sure that the \"dsmr\" user both has read and write access to the folder."
 msgstr "De map waarin back-ups opgeslagen worden. De standaardlocatie is \"backups/\". N.B.: Zorg ervoor dat de \"dsmr\" gebruiker toegang en schrijfrechten heeft tot de map."
 
-msgid "Latest backup"
-msgstr "Meest recente back-up"
+msgid "Compression level"
+msgstr "Compressieniveau"
 
-msgid "Timestamp of latest backup created. Automatically updated by application. Please note that the application will ignore the \"backup_time\" setting the first time used."
-msgstr "Moment van de laatst gemaakte back-up. Applicatie houdt dit automatisch bij. N.B.: Het voorkeurstijdstip van de back-up wordt (eenmalig) de eerste keer genegeerd."
+msgid "The gzip compression level used. Level 9 = best, level 1 = fastest."
+msgstr "Het compressieniveau dat voor gzip gebruikt wordt. Niveau 9 = beste, niveau 1 = snelste."
 
 msgid "Backup configuration"
 msgstr "Back-upconfiguratie"
@@ -255,6 +292,9 @@ msgstr "Elke twee weken"
 
 msgid "Every four weeks"
 msgstr "Elke vier weken"
+
+msgid "Interval"
+msgstr "Frequentie"
 
 msgid "The frequency of sending backups per email"
 msgstr "De frequentie waarin back-up's per e-mail verzonden worden"
@@ -345,6 +385,15 @@ msgstr "Huidig voltage in fase L2 (in V)"
 
 msgid "Current voltage for phase L3 (in V)"
 msgstr "Huidig voltage in fase L3 (in V)"
+
+msgid "Power/current for phase L1 (in A)"
+msgstr "Huidige stroomsterkte in fase L1 (in A)"
+
+msgid "Power/current for phase L2 (in A)"
+msgstr "Huidige stroomsterkte in fase L2 (in A)"
+
+msgid "Power/current for phase L3 (in A)"
+msgstr "Huidige stroomsterkte in fase L3 (in A)"
 
 msgid "Electricity consumption"
 msgstr "Elektriciteitsverbruik"
@@ -514,11 +563,11 @@ msgstr "Nederlands - DSMR-versie 4/5 (standaard)"
 msgid "Netherlands - DSMR version 2/3"
 msgstr "Nederlands - DSMR-versie 2/3"
 
-msgid "Belgium - Fluvius"
-msgstr "België - Fluvius"
+msgid "Belgium - Fluvius (gas meter fix)"
+msgstr "België - Fluvius (fix voor gasmeter)"
 
-msgid "Luxembourg - Smarty"
-msgstr "Luxemburg - Smarty"
+msgid "Luxembourg - Smarty (single tariff fix)"
+msgstr "Luxemburg - Smarty (fix voor enkel tarief)"
 
 msgid "DSMR version"
 msgstr "DSMR-versie"
@@ -538,6 +587,9 @@ msgstr "Datalogger proces sleep"
 msgid "The number of seconds the application will sleep after reading data from the datalogger (API excluded)."
 msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API uitgezonderd)."
 
+msgid "Log telegrams"
+msgstr "Log telegrammen"
+
 msgid "Whether telegrams are logged, in base64 format. Only required for debugging."
 msgstr "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor debugging."
 
@@ -553,6 +605,9 @@ msgstr "Verwijder de meeste metingen na een week"
 msgid "Discard most readings after one month"
 msgstr "Verwijder de meeste metingen na een maand"
 
+msgid "Discard most readings after three months"
+msgstr "Verwijder de meeste metingen na drie maanden"
+
 msgid "Discard most readings after six months"
 msgstr "Verwijder de meeste metingen na een halfjaar"
 
@@ -562,8 +617,8 @@ msgstr "Verwijder de meeste metingen na een jaar"
 msgid "Data retention"
 msgstr "Dataretentie"
 
-msgid "The lifetime of readings, before discarding them. Please note that retention is applied during night time currently, between midnight and six in the morning."
-msgstr "De levenduur van metingen, voordat ze opgeschoond worden. N.B.: Momenteel wordt retentie alleen doorgevoerd tijdens de nachturen, tussen middernacht en zes uur 's ochtends."
+msgid "The lifetime of readings and other data, before discarding them. Some readings will be preserved forever."
+msgstr "De levensduur van metingen, voordat ze opgeschoond worden. Sommige metingen worden voor altijd bewaard."
 
 msgid "Retention configuration"
 msgstr "Retentieconfiguratie"
@@ -621,6 +676,12 @@ msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de kome
 
 msgid "Interface"
 msgstr "Interface"
+
+msgid "Graphs"
+msgstr "Grafieken"
+
+msgid "Tariff names"
+msgstr "Tariefnaamgeving"
 
 msgid "Electricity delivered"
 msgstr "Elektriciteitsverbruik"
@@ -693,6 +754,18 @@ msgstr "DSMR-reader v2.10.0: Automatische update checker (wekelijks) toegevoegd,
 
 msgid "DSMR-reader v2.14.0: Some configuration options in setting.py were relocated or removed. This only affects you if you are using custom settings in setting.py. See the changelog for more information."
 msgstr "DSMR-reader v2.14.0: Sommige instellingen in settings.py zijn verplaatst of uitgefaseerd. Dit is alleen van belang wanneer je zelf handmatig instellingen hebt aangepast in settings.py. Zie de changelog voor meer informatie."
+
+msgid "DSMR-reader v3.4.0 (1/3): Archive graphs are now in bar style + stacked by default. You can change or revert this using the admin interface in the Frontend configuration."
+msgstr "DSMR-reader v3.4.0 (1/3): Grafieken in het Archief zijn nu standaard staafgrafieken + gestapeld. Je kunt dit aanpassen of terugdraaien in de admin-interface in de Interfaceconfiguratie."
+
+msgid "DSMR-reader v3.4.0 (2/3): Starting this release you can (re)name the electricity tariffs yourself. Visit the admin interface in the Frontend configuration to use your own names."
+msgstr "DSMR-reader v3.4.0 (2/3): Vanaf deze release kun je zelf de naamgeving van de elektriciteitstarieven bepalen. Bezoek de admin-interface en ga dan naar Interfaceconfiguratie om je eigen naamgeving in te stellen."
+
+msgid "DSMR-reader v3.4.0 (3/3): Graphs formerly displayed on the Dashboard are now available in \"Live graphs\"."
+msgstr "DSMR-reader v3.4.0 (3/3): Grafieken die voorheen op het Dashboard stonden, zijn nu beschikbaar onder \"Live grafieken\"."
+
+msgid "You are using a MySQL database without timezone support. This may cause bugs. Please enable timezone support in your database, see: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html"
+msgstr "Je gebruikt een MySQL-database zonder ondersteuning voor tijdzones. Dit kan fouten veroorzaken. Zet ondersteuning voor tijdzones aan in je database, zie: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html"
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
@@ -781,17 +854,59 @@ msgstr "Temperatuurkleur"
 msgid "Graph color for temperatures read"
 msgstr "Grafiekkleur voor temperatuurmetingen"
 
-msgid "Dashboard graph width"
-msgstr "Dashboard grafiek breedte"
+msgid "Live graphs hours range"
+msgstr "Live grafieken urenlimiet"
 
-msgid "The number of items displayed on the X-axis of the dashboard graphs"
-msgstr "Het aantal punten dat getoond wordt op de X-as van de Dashboardgrafieken"
+msgid "The range of the data displayed in live graphs (increasing it may degrade rendering performance!)"
+msgstr "Het bereik van de gegevens in de live grafieken (het verhogen van deze waarde kan resulteren in verslechterde performance van de grafieken!)"
+
+msgid "Live graphs initial zoom"
+msgstr "Live grafieken initiele zoom"
+
+msgid "The percentage of the graph range displayed initially"
+msgstr "Het percentage van de grafiekgegevens dat initieel getoond wordt"
 
 msgid "Gas graph style"
-msgstr "Gafiekstijl voor gas"
+msgstr "Grafiekstijl voor gas"
 
 msgid "Using the bar style will help you distinguish empty values better"
-msgstr "Je kunt lege waardes beter onderscheiden wanneer je de staaf-grafiekstijl gebruikt"
+msgstr "Je kunt lege waardes beter onderscheiden wanneer je staafgrafieken gebruikt"
+
+msgid "Electricity graph style"
+msgstr "Stijl van elektriciteitsgrafieken"
+
+msgid "Archive graphs only: Use the bar style to change visualisation"
+msgstr "Alleen Archief-grafieken: Gebruik staafgrafieken om de weergave te veranderen"
+
+msgid "Stack electricity graphs"
+msgstr "Stapel elektriciteitsgrafieken"
+
+msgid "Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better"
+msgstr "Alleen Archief-grafieken: Stapelen van grafieken, gecombineerd met staafgrafieken, onderscheiden de tarieven beter"
+
+msgid "Name of tariff 1 (delivered)"
+msgstr "Naam van tarief 1 (verbruik)"
+
+msgid "Defaults to 'low tariff' delivered"
+msgstr "Standaard: \"Laagtarief\" (verbruik)"
+
+msgid "Name of tariff 2 (delivered)"
+msgstr "Naam van tarief 2 (verbruik)"
+
+msgid "Defaults to 'normal tariff' or 'high tariff' delivered"
+msgstr "Standaard: \"Normaal tarief of hoogtarief\" (verbruik)"
+
+msgid "Name of tariff 1 (returned)"
+msgstr "Naam van tarief 1 (teruglevering)"
+
+msgid "Defaults to 'low tariff' returned"
+msgstr "Standaard: \"Laagtarief\" (teruglevering)"
+
+msgid "Name of tariff 2 (returned)"
+msgstr "Naam van tarief 2 (teruglevering)"
+
+msgid "Defaults to 'normal tariff' or 'high tariff' returned"
+msgstr "Standaard: \"Normaal tarief of hoogtarief\" (teruglevering)"
 
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
@@ -802,8 +917,8 @@ msgstr "Archief"
 msgid "No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader."
 msgstr "Nog geen dagstatistieken gevonden. Gegevens zijn hier doorgaans zichtbaar vanaf de tweede dag dat DSMR-reader draait."
 
-msgid "Select level of detail displayed"
-msgstr "Selecteer detailniveau"
+msgid "Level of detail"
+msgstr "Detailniveau"
 
 msgid "Days"
 msgstr "Dagen"
@@ -817,29 +932,17 @@ msgstr "Jaren"
 msgid "Pick a day, month or year"
 msgstr "Kies een dag, maand of jaar"
 
-msgid "Electricity usage"
+msgid "Electricity consumed"
 msgstr "Elektriciteitsverbruik"
 
 msgid "(in kWh)"
 msgstr "(in kWh)"
 
-msgid "Gas usage"
+msgid "Gas consumed"
 msgstr "Gasverbruik"
 
 msgid "(in m³)"
 msgstr "(in m³)"
-
-msgid "Electricity 1 (low tariff)"
-msgstr "Elektriciteit 1 (daltarief)"
-
-msgid "Electricity 2 (high tariff)"
-msgstr "Elektriciteit 2 (piektarief)"
-
-msgid "Electricity 1 returned (low tariff)"
-msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
-
-msgid "Electricity 2 returned (high tariff)"
-msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
 msgid "Electricity (single tariff)"
 msgstr "Elektriciteit (enkel tarief)"
@@ -850,11 +953,11 @@ msgstr "Elektriciteit teruggeleverd (enkel tarief)"
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
 
-msgid "View releases"
-msgstr "Bekijk releases"
-
 msgid "Dashboard"
 msgstr "Dashboard"
+
+msgid "Live graphs"
+msgstr "Live grafieken"
 
 msgid "Compare"
 msgstr "Vergelijk"
@@ -871,17 +974,11 @@ msgstr "Energiecontracten"
 msgid "Status"
 msgstr "Status"
 
-msgid "Notifications"
-msgstr "Notificaties"
-
-msgid "Authentication required"
-msgstr "Authenticatie vereist"
-
 msgid "Export data"
 msgstr "Exporteer gegevens"
 
-msgid "Configuration"
-msgstr "Configuratie"
+msgid "Authentication required"
+msgstr "Authenticatie vereist"
 
 msgid "Changelog"
 msgstr "Wijzigingenoverzicht"
@@ -892,23 +989,14 @@ msgstr "Help / FAQ"
 msgid "API docs"
 msgstr "API docs"
 
-msgid "Feedback"
-msgstr "Feedback"
+msgid "Feedback / bugs / ideas"
+msgstr "Feedback / fouten / ideeën"
 
 msgid "Donations / tips"
 msgstr "Donaties"
 
-msgid "Credits to"
-msgstr "Credits aan"
-
-msgid "Many contributers"
-msgstr "Veel hulp van derden"
-
-msgid "View repository on Github"
-msgstr "Bekijk repository op Github"
-
-msgid "View on Github"
-msgstr "Bekijk op Github"
+msgid "Thanks to all the contributers"
+msgstr "Dank aan alle bijdragen"
 
 msgid "Base selection"
 msgstr "Basisselectie"
@@ -916,32 +1004,215 @@ msgstr "Basisselectie"
 msgid "Compare with selection"
 msgstr "Te vergelijken selectie"
 
-msgid "Watt"
-msgstr "Watt"
+msgid "Configuation"
+msgstr "Configuratie"
 
-msgid "Unread notifications"
-msgstr "Ongelezen notificaties"
+msgid "Search for a topic or setting"
+msgstr "Zoek naar een onderwerp of instelling"
 
-msgid "Number of unread notifications"
-msgstr "Aantal ongelezen notificaties"
+msgid "Some topics"
+msgstr "Enkele onderwerpen"
 
-msgid "View"
-msgstr "Bekijk"
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Meter statistics"
+msgstr "Meterstatistieken"
+
+msgid "Mindergas.nl"
+msgstr "Mindergas.nl"
+
+msgid "MQTT"
+msgstr "MQTT"
+
+msgid "Notifications"
+msgstr "Notificaties"
+
+msgid "PVOutput.org"
+msgstr "PVOutput.org"
+
+msgid "Retention"
+msgstr "Retentie"
+
+msgid "Weather"
+msgstr "Weergegevens"
+
+msgid "Type here to search..."
+msgstr "Typ hier om te zoeken..."
+
+msgid "Skip search and go directly to admin"
+msgstr "Sla over en ga direct naar het beheer"
+
+msgid "DSMR-reader API (key)"
+msgstr "DSMR-reader API (sleutel)"
+
+msgid "Check for updates"
+msgstr "Controleer voor updates"
+
+msgid "Hide electricity return graphs"
+msgstr "Verberg grafieken teruglevering elektriciteit"
+
+msgid "Hide gas graphs"
+msgstr "Verberg gasgrafieken"
+
+msgid "Daily backup"
+msgstr "Dagelijkse back-up"
+
+msgid "Gzip compression level"
+msgstr "Gzip compressieniveau"
+
+msgid "Group electricity by reading"
+msgstr "Groepeer elektriciteit op meting"
+
+msgid "Group electricity by minute"
+msgstr "Groepeer elektriciteit per minuut"
+
+msgid "Group gas by hour"
+msgstr "Groepeer gas per uur"
+
+msgid "Serial port"
+msgstr "Seriële poort"
+
+msgid "Smarty meter"
+msgstr "Smarty meter"
+
+msgid "Fluvius meter"
+msgstr "Fluvius meter"
+
+msgid "Export backups to Dropbox"
+msgstr "Exporteer back-ups naar Dropbox"
+
+msgid "Outgoing email"
+msgstr "Uitgaande e-mail"
+
+msgid "Energy supplier price contracts"
+msgstr "Energieleverancier contracten"
+
+msgid "Gas price/costs"
+msgstr "Gasprijs/kosten"
+
+msgid "Electricity price/costs"
+msgstr "Elektriciteitsprijs/kosten"
+
+msgid "Merge tariffs"
+msgstr "Voeg tarieven samen"
+
+msgid "Graph line/bar colors"
+msgstr "Grafieklijn/staaf kleuren"
+
+msgid "Latest telegram read"
+msgstr "Laatst gelezen telegram"
+
+msgid "Link MinderGas account"
+msgstr "Koppel MinderGas-account"
+
+msgid "Export to MinderGas"
+msgstr "Exporteer naar MinderGas"
+
+msgid "MQTT process sleep"
+msgstr "MQTT proces sleep"
+
+msgid "Quality of service / QoS"
+msgstr "Quality of service / QoS"
+
+msgid "Broker port / SSL / TLS"
+msgstr "Broker / poort / SSL / TLS"
+
+msgid "JSON day totals"
+msgstr "JSON dagtotalen"
+
+msgid "Split topic day totals"
+msgstr "Gesplitst topic dagtotalen"
+
+msgid "JSON gas consumption"
+msgstr "JSON gasverbruik"
+
+msgid "Split topic gas consumption"
+msgstr "Gesplitst topic gasverbruik"
+
+msgid "JSON telegram"
+msgstr "JSON telegram"
+
+msgid "Voltage (JSON)"
+msgstr "Voltage (JSON)"
+
+msgid "Ampere (JSON)"
+msgstr "Ampere (JSON)"
+
+msgid "Raw telegram"
+msgstr "Ruw telegram"
+
+msgid "Split topic telegram"
+msgstr "Gesplitst topic telegram"
+
+msgid "Split topic meter statistics"
+msgstr "Gesplitst topic meterstatistieken"
+
+msgid "Voltage (split topic)"
+msgstr "Voltage (gesplitst topic)"
+
+msgid "Ampere (split topic)"
+msgstr "Ampere (gesplitst topic)"
+
+msgid "App notifications"
+msgstr "App-notificaties"
+
+msgid "Pushover"
+msgstr "Pushover"
+
+msgid "Prowl"
+msgstr "Prowl"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Link PVOutput.org account"
+msgstr "Koppel PVOutput.org-account"
+
+msgid "PVOutput.org Add Status"
+msgstr "PVOutput.org Add Status"
+
+msgid "PVOutput.org donator options"
+msgstr "PVOutput.org opties voor donateurs"
+
+msgid "Clean up reading"
+msgstr "Ruim metingen op"
+
+msgid "Apply retention"
+msgstr "Pas retentie toe"
+
+msgid "Periodically delete data"
+msgstr "Verwijder periodiek gegevens"
+
+msgid "Keep track of outside temperatures"
+msgstr "Houd buitentemperaturen bij"
+
+msgid "Buienradar API"
+msgstr "Buienradar API"
 
 msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
 
-msgid "Display current month"
-msgstr "Toon huidige maand"
+msgid "Unread notifications"
+msgstr "Ongelezen notificaties"
 
-msgid "Current month"
-msgstr "Huidige maand"
+msgid "Go to notification overview"
+msgstr "Ga naar notificatieoverzicht"
 
-msgid "until yesterday"
-msgstr "tot en met gisteren"
+msgid "W"
+msgstr "W"
+
+msgid "/hour"
+msgstr "/uur"
 
 msgid "Consumed"
 msgstr "Verbruikt"
+
+msgid "Returned"
+msgstr "Teruggeleverd"
+
+msgid "Costs"
+msgstr "Kosten"
 
 msgid "kWh"
 msgstr "kWh"
@@ -949,53 +1220,32 @@ msgstr "kWh"
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
-msgid "Returned"
-msgstr "Teruggeleverd"
-
-msgid "Cost"
-msgstr "Kosten"
-
 msgid "Total"
 msgstr "Totaal"
 
-msgid "Recent electricity consumed (Watt) in the past 24 hours"
-msgstr "Recent elektriciteitsverbruik (Watt) in de afgelopen 24 uur"
+msgid "Current month"
+msgstr "Huidige maand"
 
-msgid "Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph."
-msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Sleep de grafiek naar links of rechts, of gebruik de horizontale scrollbalk onder de grafiek."
+msgid "until yesterday"
+msgstr "tot en met gisteren"
 
-msgid "Recent distribution of electricity phases (Watt) in the past 24 hours"
-msgstr "Recente distributie elektriciteitsfasen (Watt) in de afgelopen 24 uur"
-
-msgid "Phase voltages in the past 24 hours"
-msgstr "Fase voltages in de afgelopen 24 uur"
-
-msgid "Recent gas consumed (m<sup>3</sup>) in the past 24 hours"
-msgstr "Recent gasverbruik (m<sup>3</sup>) in de afgelopen 24 uur"
-
-msgid "Recent temperatures (&deg;C) in the past 24 hours"
-msgstr "Recente temperatuurmetingen (&deg;C) in de afgelopen 24 uur"
-
-msgid "Loading..."
-msgstr "Bezig met laden..."
-
-msgid "per hour"
-msgstr "per uur"
+msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
+msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
 
 msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
 msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
 
-msgid "Also, any electricity returned is not taken into account for the cost, the kWh is only displayed for your convenience."
-msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten, alleen de kWh wordt hier getoond."
+msgid "Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience."
+msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten. De teruggeleverde kWh wordt hier alleen voor de volledigheid getoond."
 
 msgid "Show contract prices"
 msgstr "Toon contractprijzen"
 
-msgid "Electricity 1 returned price (low tariff)"
-msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
+msgid "tariff 1"
+msgstr "tarief 1"
 
-msgid "Electricity 2 returned price (high tariff)"
-msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
+msgid "tariff 2"
+msgstr "tarief 2"
 
 msgid "Select data type"
 msgstr "Selecteer gegevenstype"
@@ -1048,32 +1298,53 @@ msgstr "Download export"
 msgid "Add note for this date"
 msgstr "Voeg notitie toe voor deze datum"
 
-msgid "Energy price"
-msgstr "Energieprijs"
+msgid "Temp."
+msgstr "Temp."
 
-msgid "Weather"
-msgstr "Weergegevens"
+msgid "Min"
+msgstr "Min"
 
-msgid "Min."
-msgstr "Min."
+msgid "Max"
+msgstr "Max"
 
-msgid "Max."
-msgstr "Max."
+msgid "Avg"
+msgstr "Gem"
 
-msgid "Avg."
-msgstr "Gem."
+#, python-format
+msgid "%(data_count)s data point"
+msgid_plural "%(data_count)s data points"
+msgstr[0] "%(data_count)s datapunt"
+msgstr[1] "%(data_count)s datapunten"
 
 msgid "Difference"
 msgstr "Verschil"
 
-msgid "in kWh"
-msgstr "in kWh"
+msgid "There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate."
+msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
 
-msgid "in m<sup>3</sup>"
-msgstr "in m<sup>3</sup>"
+msgid "Recent electricity consumption"
+msgstr "Recent elektriciteitsverbruik"
 
-msgid "Add note for today"
-msgstr "Voeg notitie toe voor vandaag"
+msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
+msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
+
+msgid "Recent distribution of electricity phases"
+msgstr "Recente distributie elektriciteitsfasen"
+
+msgid "Recent phase voltages"
+msgstr "Recente voltages fasen"
+
+msgid "Recent phase currents"
+msgstr "Recente stroomsterktes"
+
+msgid "Recent gas consumption"
+msgstr "Recent gasverbruik"
+
+msgid "Recent temperatures"
+msgstr "Recente temperaturen"
+
+msgid "Loading..."
+msgstr "Bezig met laden..."
 
 msgid "Unread Notifications"
 msgstr "Ongelezen notificaties"
@@ -1084,8 +1355,8 @@ msgstr "Markeer alle notificaties als gelezen"
 msgid "Mark all as read"
 msgstr "Markeer allemaal als gelezen"
 
-msgid "Mark notification as read"
-msgstr "Markeer notificatie als gelezen"
+msgid "Login to mark as read"
+msgstr "Log in om te markeren als gelezen"
 
 msgid "Mark as read"
 msgstr "Markeer als gelezen"
@@ -1102,14 +1373,8 @@ msgstr "Nog geen gegevens gevonden. Deze pagina weergeeft gegevens zodra de eers
 msgid "Meter positions"
 msgstr "Meterstanden"
 
-msgid "Delivered"
-msgstr "Geleverd"
-
-msgid "Electricity (tariffs combined)"
-msgstr "Elektriciteit (tarieven gecombineerd)"
-
-msgid "Meter statistics"
-msgstr "Meterstatistieken"
+msgid "Electricity (combined)"
+msgstr "Elektriciteit (gecombineerd)"
 
 msgid "Telegram readings"
 msgstr "Telegram-metingen"
@@ -1117,31 +1382,34 @@ msgstr "Telegram-metingen"
 msgid "Total reading count"
 msgstr "Totaal aantal metingen"
 
-msgid "The number of P1 DSMR telegrams read and stored in the application."
-msgstr "Het aantal P1 DSMR telegram-metingen die opgeslagen zijn."
-
 msgid "Show count"
 msgstr "Toon aantal"
+
+msgid "Readings with invalid CRC"
+msgstr "Metingen met ongeldige CRC"
 
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
 
-msgid "Highest usage (L1+)"
+msgid "Highest consumption (L1+)"
 msgstr "Hoogste verbruik (L1+)"
 
-msgid "Highest usage (L2+)"
+msgid "Watt"
+msgstr "Watt"
+
+msgid "Highest consumption (L2+)"
 msgstr "Hoogste verbruik (L2+)"
 
-msgid "Highest usage (L3+)"
+msgid "Highest consumption (L3+)"
 msgstr "Hoogste verbruik (L3+)"
 
-msgid "Lowest usage (L1+)"
+msgid "Lowest consumption (L1+)"
 msgstr "Laagste verbruik (L1+)"
 
-msgid "Lowest usage (L2+)"
+msgid "Lowest consumption (L2+)"
 msgstr "Laagste verbruik (L2+)"
 
-msgid "Lowest usage (L3+)"
+msgid "Lowest consumption (L3+)"
 msgstr "Laagste verbruik (L3+)"
 
 msgid "Highest return (L1-)"
@@ -1162,8 +1430,8 @@ msgstr "Applicatie"
 msgid "Current version"
 msgstr "Huidige versie"
 
-msgid "Check for updates"
-msgstr "Controleer voor updates"
+msgid "View releases"
+msgstr "Bekijk releases"
 
 msgid "Explain"
 msgstr "Uitleg"
@@ -1294,11 +1562,11 @@ msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
 msgid "Tools"
 msgstr "Tools"
 
-msgid "Latest"
-msgstr "Meest recent"
-
 msgid "Latest Dropbox sync"
 msgstr "Meest recente synchronisatie met Dropbox"
+
+msgid "Latest"
+msgstr "Meest recent"
 
 msgid "Latest PVOutput sync"
 msgstr "Meest recente synchronisatie met PVOutput"
@@ -1318,11 +1586,11 @@ msgstr "Dit reflecteert de gegevensstromen van je slimme meter."
 msgid "The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages."
 msgstr "De status van elk van deze (drie) gegevensstromen staat hier weergegeven. Deze bepalen tevens welke grafieken allemaal beschikbaar zijn binnen de applicatie."
 
-msgid "Electricity usage recorded"
-msgstr "Elektriciteitsverbruik is gemeten"
+msgid "Electricity consumption recorded"
+msgstr "Elektriciteitsverbruik gemeten"
 
-msgid "No electricity usage recorded"
-msgstr "Geen elektriciteit gemeten"
+msgid "No electricity consumption recorded"
+msgstr "Geen elektriciteitsverbruik gemeten"
 
 msgid "Electricity return recorded"
 msgstr "Teruglevering elektriciteit is gemeten"
@@ -1330,10 +1598,10 @@ msgstr "Teruglevering elektriciteit is gemeten"
 msgid "No electricity return recorded (or manually disabled)"
 msgstr "Geen teruglevering elektriciteit gemeten (of handmatig uitgeschakeld)"
 
-msgid "Gas usage recorded"
-msgstr "Gasverbruik is gemeten"
+msgid "Gas consumption recorded"
+msgstr "Gasverbruik gemeten"
 
-msgid "No gas usage recorded (or manually disabled)"
+msgid "No gas consumption recorded (or manually disabled)"
 msgstr "Geen gasverbruik gemeten (of handmatig uitgeschakeld)"
 
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
@@ -1428,6 +1696,9 @@ msgid ""
 "phase_voltage_l1 = phase_voltage_l1\n"
 "phase_voltage_l2 = phase_voltage_l2\n"
 "phase_voltage_l3 = phase_voltage_l3\n"
+"phase_power_current_l1 = phase_power_current_l1\n"
+"phase_power_current_l2 = phase_power_current_l2\n"
+"phase_power_current_l3 = phase_power_current_l3\n"
 "</pre>\n"
 msgstr ""
 "Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, in JSON-formaat. Je kunt de veldnamen aanpassen die in het JSON-bericht gebruikt worden. Standaardwaarden:\n"
@@ -1452,7 +1723,9 @@ msgstr ""
 "phase_voltage_l1 = phase_voltage_l1\n"
 "phase_voltage_l2 = phase_voltage_l2\n"
 "phase_voltage_l3 = phase_voltage_l3\n"
-"\n"
+"phase_power_current_l1 = phase_power_current_l1\n"
+"phase_power_current_l2 = phase_power_current_l2\n"
+"phase_power_current_l3 = phase_power_current_l3\n"
 "</pre>\n"
 
 msgid ""
@@ -1478,10 +1751,12 @@ msgid ""
 "phase_voltage_l1 = dsmr/reading/phase_voltage_l1\n"
 "phase_voltage_l2 = dsmr/reading/phase_voltage_l2\n"
 "phase_voltage_l3 = dsmr/reading/phase_voltage_l3\n"
+"phase_power_current_l1 = dsmr/reading/phase_power_current_l1\n"
+"phase_power_current_l2 = dsmr/reading/phase_power_current_l2\n"
+"phase_power_current_l3 = dsmr/reading/phase_power_current_l3\n"
 "</pre>\n"
 msgstr ""
 "Wordt geactiveerd door elke manier van metingen aanmaken (datalogger of API). Staat je toe om nieuwe metingen door te sturen naar de MQTT broker, gesplitst op een apart topic per veld. Je kunt daarmee elke veldnaam toewijzen op een aparte topic. Standaardwaarden:\n"
-"\n"
 "<pre>\n"
 "[mapping]\n"
 "id = dsmr/reading/id\n"
@@ -1503,7 +1778,9 @@ msgstr ""
 "phase_voltage_l1 = dsmr/reading/phase_voltage_l1\n"
 "phase_voltage_l2 = dsmr/reading/phase_voltage_l2\n"
 "phase_voltage_l3 = dsmr/reading/phase_voltage_l3\n"
-"\n"
+"phase_power_current_l1 = dsmr/reading/phase_power_current_l1\n"
+"phase_power_current_l2 = dsmr/reading/phase_power_current_l2\n"
+"phase_power_current_l3 = dsmr/reading/phase_power_current_l3\n"
 "</pre>\n"
 
 msgid ""
@@ -1687,9 +1964,6 @@ msgstr ""
 "currently_delivered = dsmr/consumption/gas/currently_delivered\n"
 "</pre>\n"
 
-msgid "MQTT"
-msgstr "MQTT"
-
 msgid "Dedicated MQTT client for publishing messages to the broker."
 msgstr "Afzonderlijke MQTT client voor het publiceren van berichten naar de broker."
 
@@ -1749,9 +2023,6 @@ msgstr "Herstart vereist"
 
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
-
-msgid "MQTT process sleep"
-msgstr "MQTT proces sleep"
 
 msgid "The number of seconds the application will sleep after publishing the outgoing MQTT message queue."
 msgstr "Het aantal seconden dat de applicatie wacht na het versturen van alle MQTT-berichten."
@@ -1860,15 +2131,6 @@ msgstr "Stuurt een test notificatie naar je toestel (mits ingesteld)."
 
 msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
 msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
-
-msgid "Pushover"
-msgstr "Pushover"
-
-msgid "Prowl"
-msgstr "Prowl"
-
-msgid "Telegram"
-msgstr "Telegram"
 
 msgid "Notification service"
 msgstr "Notificatieservice"
@@ -2008,6 +2270,9 @@ msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Word
 msgid "Recalculates day statistics prices"
 msgstr "Herberekent prijzen in dagtotalen"
 
+msgid "Reconstructs missing day statistics by using available hour statistics"
+msgstr "Reconstrueert missende dagstatistieken door beschikbare uurstatistieken te gebruiken"
+
 msgid "Note"
 msgstr "Notitie"
 
@@ -2019,6 +2284,21 @@ msgstr "Datum"
 
 msgid "Total cost"
 msgstr "Totale kosten"
+
+msgid "Electricity 1 (low tariff)"
+msgstr "Elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
+
+msgid "Electricity 1 returned (low tariff)"
+msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+
+msgid "Electricity 2 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
+
+msgid "Gas cost"
+msgstr "Gaskosten"
 
 msgid "Lowest temperature"
 msgstr "Laagste temperatuur"
@@ -2289,21 +2569,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "Generates a FAKE reading. DO NOT USE in production! Used for integration checks."
-#~ msgstr "Genereert een NEP-meting. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
-
-#~ msgid "Include gas consumption"
-#~ msgstr "Neem gasverbruik mee"
-
-#~ msgid "Include electricity returned (solar panels)"
-#~ msgstr "Neem teruglevering elektriciteit mee (zonnepanelen)"
-
-#~ msgid "The offset in hours, can both be positive as negative (to go back in time)."
-#~ msgstr "De afwijking in uren, kan zowel positief als negatief zijn (om terug in de tijd te gaan)."
-
-#~ msgid "By reading (every X seconds)"
-#~ msgstr "Per meting (elke X seconden)"
-
-#~ msgid "Show"
-#~ msgstr "Toon"

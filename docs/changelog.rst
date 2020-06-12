@@ -2,6 +2,103 @@ Changelog
 =========
 
 
+v3.10.0 - 2020-05-29
+
+- [`#996 <https://github.com/dennissiemensma/dsmr-reader/issues/996>`_] Refer HA add-on by Sander de Wildt
+- [`#997 <https://github.com/dennissiemensma/dsmr-reader/issues/997>`_] Zoeken naar specifieke dagen in admin
+- [`#994 <https://github.com/dennissiemensma/dsmr-reader/issues/994>`_] FAQ bijwerken voor meterwissel
+- [`#1001 <https://github.com/dennissiemensma/dsmr-reader/issues/1001>`_] Fixed link in docs - by denniswo
+- [`#1002 <https://github.com/dennissiemensma/dsmr-reader/issues/1002>`_] Improve datalogger installation docs
+
+
+----
+
+
+v3.9.1 - 2020-05-05
+
+- [`#947 <https://github.com/dennissiemensma/dsmr-reader/issues/947>`_] Standaard zoom live grafieken zelf kunnen instellen
+
+
+----
+
+
+v3.9.0 - 2020-05-04
+
+- [`#947 <https://github.com/dennissiemensma/dsmr-reader/issues/947>`_] Tijdsrange live grafieken zelf kunnen instellen
+- [`#969 <https://github.com/dennissiemensma/dsmr-reader/issues/969>`_] In- en uitknijpen van de grafieken werkt niet meer
+- [`#966 <https://github.com/dennissiemensma/dsmr-reader/issues/966>`_] Error in dsmr_backup_create --compact
+
+
+----
+
+
+v3.8.0 - 2020-04-03
+
+- [`#934 <https://github.com/dennissiemensma/dsmr-reader/issues/934>`_] Spelling - by Phyxion
+- [`#940 <https://github.com/dennissiemensma/dsmr-reader/issues/940>`_] Postgresql backup is ignoring port setting - by FrankTimmers
+- [`#937 <https://github.com/dennissiemensma/dsmr-reader/issues/937>`_] Dashboard €/uur houdt geen rekening met teruglevering
+- [`#943 <https://github.com/dennissiemensma/dsmr-reader/issues/943>`_] NonExistentTimeError for DST change in backup module
+- [`#930 <https://github.com/dennissiemensma/dsmr-reader/issues/930>`_] Soms afrondingsfout in grafieken-tooltip
+- [`#954 <https://github.com/dennissiemensma/dsmr-reader/issues/954>`_] Retention op 3 maanden kunnen zetten
+- [`#955 <https://github.com/dennissiemensma/dsmr-reader/issues/955>`_] Resetten van meter statistieken
+- [`#953 <https://github.com/dennissiemensma/dsmr-reader/issues/953>`_] Update to Django 3.0.5
+
+
+----
+
+
+v3.7.0 - 2020-03-19
+
+- [`#919 <https://github.com/dennissiemensma/dsmr-reader/issues/919>`_] Parsing telegram 3-fasige Fluvius meter faalt
+- [`#921 <https://github.com/dennissiemensma/dsmr-reader/issues/921>`_] Notificaties bekijken zonder login
+- [`#774 <https://github.com/dennissiemensma/dsmr-reader/issues/774>`_] Retentie omzetten naar geplande taak
+- [`#565 <https://github.com/dennissiemensma/dsmr-reader/issues/565>`_] Melding bij onvolledige vergelijking
+- [`#923 <https://github.com/dennissiemensma/dsmr-reader/issues/923>`_] Backups compressie level configureerbaar maken
+- [`#924 <https://github.com/dennissiemensma/dsmr-reader/issues/924>`_] Dagtotalen herberekenen op basis van uurtotalen
+
+
+----
+
+
+v3.6.0 - 2020-03-06
+
+- [`#911 <https://github.com/dennissiemensma/dsmr-reader/issues/911>`_] Weer inzoomen in gas/temperatuur-grafieken
+- [`#912 <https://github.com/dennissiemensma/dsmr-reader/issues/912>`_] Layout verbeteren
+- [`#916 <https://github.com/dennissiemensma/dsmr-reader/issues/916>`_] Gecombineerd verbruik teruggeven in API's "Retrieve today's consumption"
+- [`#875 <https://github.com/dennissiemensma/dsmr-reader/issues/875>`_] Actuele Amperes weergeven via MQTT
+- [`#918 <https://github.com/dennissiemensma/dsmr-reader/issues/918>`_] Django 3.0.4 update
+
+
+----
+
+
+v3.5.0 - 2020-02-29
+
+- [`#894 <https://github.com/dennissiemensma/dsmr-reader/issues/894>`_] Wijzigingen in datalogger terugdraaien
+- [`#891 <https://github.com/dennissiemensma/dsmr-reader/issues/891>`_] Overzichtelijke tussenpagina admin-interface
+- [`#875 <https://github.com/dennissiemensma/dsmr-reader/issues/875>`_] Actuele Amperes weergeven
+- [`#901 <https://github.com/dennissiemensma/dsmr-reader/issues/901>`_] Layout voor mobiele/kleine schermen verbeteren
+- [`#904 <https://github.com/dennissiemensma/dsmr-reader/issues/904>`_] Kleuren van grafieken omgewisseld
+- [`#622 <https://github.com/dennissiemensma/dsmr-reader/issues/622>`_] Hoogste/laagste dagtotalen inzien
+- [`#902 <https://github.com/dennissiemensma/dsmr-reader/issues/902>`_] Requirements update (February 2020)
+
+
+----
+
+
+v3.4.0 - 2020-02-20
+
+- [`#879 <https://github.com/dennissiemensma/dsmr-reader/issues/879>`_] Soms 100% CPU load datalogger
+- [`#885 <https://github.com/dennissiemensma/dsmr-reader/issues/885>`_] Herindeling dashboard
+- [`#883 <https://github.com/dennissiemensma/dsmr-reader/issues/883>`_] Show electricity usage as stacked bar chart
+- [`#858 <https://github.com/dennissiemensma/dsmr-reader/issues/858>`_] Tarieven zelf naamgeven
+- [`#878 <https://github.com/dennissiemensma/dsmr-reader/issues/878>`_] Huidig tarief aangeven op het dashboard
+- [`#887 <https://github.com/dennissiemensma/dsmr-reader/issues/887>`_] Django-colorfield update
+
+
+----
+
+
 v3.3.0 - 2020-02-12
 
 
@@ -74,7 +171,7 @@ v3.0.0 - 2020-01-15
 
 .. warning::
 
-    *This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.*
+    This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v3/faq/v3_upgrade.html>`_ for more information.
 
 
 v2.15.0 - 2020-01-15
@@ -90,7 +187,7 @@ v2.14.0 - 2020-01-07
 
 .. note::
 
-    *Some configuration options inside ``settings.py`` were relocated or removed from the application. See `the docs <https://dsmr-reader.readthedocs.io/en/latest/settings.html>`_ for the changes.*
+    Some configuration options inside ``settings.py`` were relocated or removed from the application. See `the docs <https://dsmr-reader.readthedocs.io/en/latest/settings.html>`_ for the changes.
 
 - [`#822 <https://github.com/dennissiemensma/dsmr-reader/issues/822>`_] Move custom configuration in settings.py to database
 - [`#793 <https://github.com/dennissiemensma/dsmr-reader/issues/793>`_] Alle meldingen in 1x sluiten

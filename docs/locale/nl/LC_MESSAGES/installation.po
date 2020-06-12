@@ -87,7 +87,7 @@ msgid ""
 msgstr ""
 "Voor alle andere gebruikers, die graag willen weten wat ze exact uitvoeren. :"
 "doc:`Ga hier naar instructies voor de toegelichte installatie.<installation/"
-"quick>`"
+"explained>`"
 
 #: ../../installation.rst:30
 msgid "**Docker installation**"
@@ -100,19 +100,3 @@ msgid ""
 msgstr ""
 "Draai DSMR-reader in Docker. Containers worden door derden onderhouden. :doc:"
 "`Ga hier naar de instructies voor de Docker-installatie.<installation/docker>`"
-
-#~ msgid ":doc:`Go to quick installation instructions here.<installation/quick>`"
-#~ msgstr ""
-#~ ":doc:`Ga hier naar de instructies voor de snelle installatie.<installation/"
-#~ "quick>`"
-
-#~ msgid ""
-#~ ":doc:`Go to explained installation instructions here.<installation/"
-#~ "explained>`"
-#~ msgstr ""
-#~ ":doc:`Ga hier naar de instructies voor de toegelichte installatie."
-#~ "<installation/explained>`"
-
-#~ msgid "Use DSMR-reader in Docker. Containers are maintained by third parties."
-#~ msgstr ""
-#~ "Gebruik DSMR-reader in Docker. Containers worden bijgehouden door derden."

@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>ReDoc</title>
     <!-- needed for adaptive design -->
     <meta charset="utf-8"/>
@@ -12,14 +12,14 @@
     ReDoc doesn't change outer page styles
     -->
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
+        body {
+            margin: 0;
+            padding: 0;
+        }
     </style>
-  </head>
-  <body>
-    <redoc spec-url='{% static 'dsmr_frontend/yaml/swagger.yaml' %}?r=v{{ dsmr_version }}'></redoc>
-    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
-  </body>
+</head>
+<body>
+<redoc spec-url='{% static 'dsmr_frontend/yaml/swagger.yaml' %}?r=v{{ dsmr_version }}'></redoc>
+<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+</body>
 </html>

@@ -65,13 +65,3 @@ msgid ""
 msgstr ""
 "Voor meer informatie over hoe te ontwikkelen, :doc:`zie deze pagina "
 "daarvoor<development>`."
-
-#~ msgid "Pull requests"
-#~ msgstr "Pull requests"
-
-#~ msgid ""
-#~ "Also, please do not create pull requests for the ``master`` branch, but "
-#~ "always point it to ``development``."
-#~ msgstr ""
-#~ "Tot slot, zorg ervoor dat pull requests altijd naar de ``development`` "
-#~ "branch wijzen en niet de ``master``."

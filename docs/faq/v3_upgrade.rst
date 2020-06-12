@@ -90,6 +90,8 @@ Now we're ready to remove the environment DSMR-reader uses.
 
 Execute the following::
 
+    sudo supervisorctl stop all
+
     sudo su - dsmr
     deactivate
     cd ~
@@ -133,6 +135,8 @@ Everything okay? Time to upgrade DSMR-reader to v3.x.
 DSMR-reader ``v3.x`` lives in a different branch, to prevent any users from unexpectedly updating to ``v3.x``.
 
 Execute the following::
+
+    sudo supervisorctl stop all
 
     sudo su - dsmr
     git fetch

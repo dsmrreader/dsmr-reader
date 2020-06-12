@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dataloggersettings',
             name='dsmr_version',
-            field=models.IntegerField(choices=[(4, 'Netherlands - DSMR version 4/5 (default)'), (3, 'Netherlands - DSMR version 2/3'), (101, 'Belgium - Fluvius'), (102, 'Luxembourg - Smarty')], default=4, help_text='The DSMR version your meter supports. Version should be printed on meter.', verbose_name='DSMR version'),
+            field=models.IntegerField(choices=[(4, 'Netherlands - DSMR version 4/5 (default)'), (3, 'Netherlands - DSMR version 2/3'), (101, 'Belgium - Fluvius (gas meter fix)'), (102, 'Luxembourg - Smarty (single tariff fix)')], default=4, help_text='The DSMR version your meter supports. Version should be printed on meter.', verbose_name='DSMR version'),
         ),
     ]

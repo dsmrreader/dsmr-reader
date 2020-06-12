@@ -12,34 +12,14 @@ from django.utils import formats
 
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings
-import dsmr_dropbox.services
 import dsmr_frontend.services
 
 
 logger = logging.getLogger('commands')
 
 
-def check():
+def run(scheduled_process):
     """ Checks whether a new backup should be created. Creates one if needed as well. """
-    backup_settings = BackupSettings.get_solo()
-
-    # Skip when backups disabled.
-    if not backup_settings.daily_backup:
-        return
-
-    # Postpone when we already created a backup today.
-    if backup_settings.latest_backup and backup_settings.latest_backup.date() == timezone.now().date():
-        return
-
-    # Timezone magic to make sure we select and combine the CURRENT day, in the user's timezone.
-    next_backup_timestamp = timezone.make_aware(timezone.datetime.combine(
-        timezone.localtime(timezone.now()), backup_settings.backup_time
-    ))
-
-    if backup_settings.latest_backup and timezone.now() < next_backup_timestamp:
-        # Postpone when the user's backup time preference has not been passed yet.
-        return
-
     # Create a partial, minimal backup first.
     today = timezone.localtime(timezone.now()).date()
     create_partial(
@@ -55,9 +35,17 @@ def check():
     # Now create full.
     create_full(folder=get_backup_directory())
 
+    # Schedule tomorrow, for the time specified.
     backup_settings = BackupSettings.get_solo()
-    backup_settings.latest_backup = timezone.now()
-    backup_settings.save()
+    next_backup_timestamp = timezone.now() + timezone.timedelta(days=1)
+    next_backup_timestamp = next_backup_timestamp.replace(
+        hour=backup_settings.backup_time.hour,
+        minute=backup_settings.backup_time.minute,
+        second=0,
+        microsecond=0
+    )
+
+    scheduled_process.reschedule(next_backup_timestamp)
 
 
 def get_backup_directory(backup_directory=None):
@@ -83,17 +71,19 @@ def create_full(folder):
     ))
 
     logger.info(' - Creating new full backup: %s', backup_file)
+    db_settings = settings.DATABASES['default']
 
     # PostgreSQL backup.
     if connection.vendor == 'postgresql':  # pragma: no cover
         command = [
             settings.DSMRREADER_BACKUP_PG_DUMP,
-            '--host={}'.format(settings.DATABASES['default']['HOST']),
-            '--user={}'.format(settings.DATABASES['default']['USER']),
-            settings.DATABASES['default']['NAME'],
+            '--host={}'.format(db_settings['HOST']),
+            '--port={}'.format(db_settings['PORT']),
+            '--user={}'.format(db_settings['USER']),
+            db_settings['NAME'],
         ]
         backup_process = subprocess.Popen(command, env={
-                'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
+                'PGPASSWORD': db_settings['PASSWORD']
             },
             stdout=open(backup_file, 'w')  # pragma: no cover
         )
@@ -105,17 +95,17 @@ def create_full(folder):
             '--hex-blob',
             '--extended-insert',
             '--quick',
-            '--host', settings.DATABASES['default']['HOST'],
-            '--user', settings.DATABASES['default']['USER'],
-            '--password={}'.format(settings.DATABASES['default']['PASSWORD']),
-            settings.DATABASES['default']['NAME'],
+            '--host', db_settings['HOST'],
+            '--user', db_settings['USER'],
+            '--password={}'.format(db_settings['PASSWORD']),
+            db_settings['NAME'],
         ]
         backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover
     # SQLite backup.
     elif connection.vendor == 'sqlite':  # pragma: no cover
         command = [
             settings.DSMRREADER_BACKUP_SQLITE,
-            settings.DATABASES['default']['NAME'],
+            db_settings['NAME'],
             '.dump',
         ]
         backup_process = subprocess.Popen(
@@ -148,21 +138,23 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
     ))
 
     logger.info(' - Creating new partial backup: %s', backup_file)
+    db_settings = settings.DATABASES['default']
 
     if connection.vendor == 'postgresql':  # pragma: no cover
         command = [
             settings.DSMRREADER_BACKUP_PG_DUMP,
-            settings.DATABASES['default']['NAME'],
+            db_settings['NAME'],
             '--data-only',
-            '--host={}'.format(settings.DATABASES['default']['HOST']),
-            '--user={}'.format(settings.DATABASES['default']['USER']),
+            '--host={}'.format(db_settings['HOST']),
+            '--port={}'.format(db_settings['PORT']),
+            '--user={}'.format(db_settings['USER']),
         ] + [
             '--table={}'.format(x._meta.db_table) for x in models_to_backup
         ]
         backup_process = subprocess.Popen(
             command,
             env={
-                'PGPASSWORD': settings.DATABASES['default']['PASSWORD']
+                'PGPASSWORD': db_settings['PASSWORD']
             },
             stdout=open(backup_file, 'w'),
             stderr=subprocess.PIPE
@@ -176,10 +168,10 @@ def create_partial(folder, models_to_backup):  # pragma: no cover
             '--hex-blob',
             '--extended-insert',
             '--quick',
-            '--host', settings.DATABASES['default']['HOST'],
-            '--user', settings.DATABASES['default']['USER'],
-            '--password={}'.format(settings.DATABASES['default']['PASSWORD']),
-            settings.DATABASES['default']['NAME'],
+            '--host', db_settings['HOST'],
+            '--user', db_settings['USER'],
+            '--password={}'.format(db_settings['PASSWORD']),
+            db_settings['NAME'],
         ] + [
             x._meta.db_table for x in models_to_backup
         ]
@@ -210,19 +202,16 @@ def on_backup_failed(process_handle):
     raise IOError(error_message)
 
 
-def compress(file_path, compresslevel=1):
+def compress(file_path):
     """ Compresses a file using (fast) gzip. Removes source file when compression succeeded. """
+    compression_level = BackupSettings.get_solo().compression_level
+
     file_path_gz = '{}.gz'.format(file_path)
 
     # Straight from the Python 3x docs.
     with open(file_path, 'rb') as f_in:
-        with gzip.open(file_path_gz, 'wb', compresslevel=compresslevel) as f_out:
+        with gzip.open(file_path_gz, 'wb', compresslevel=compression_level) as f_out:
             shutil.copyfileobj(f_in, f_out)
 
     os.unlink(file_path)
     return file_path_gz
-
-
-def sync():
-    """ Syncs backup folder with remote storage. """
-    dsmr_dropbox.services.sync()

@@ -1,7 +1,7 @@
 from django.urls.conf import path
 
-from dsmr_frontend.views.dashboard import Dashboard, DashboardXhrHeader, DashboardXhrConsumption, \
-    DashboardXhrElectricityConsumption, DashboardXhrGasConsumption, DashboardXhrTemperature
+from dsmr_frontend.views.configuration import Configuration
+from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
 from dsmr_frontend.views.docs import ApiDocs
 from dsmr_frontend.views.notifications import Notifications, XhrMarkNotificationRead, XhrMarkAllNotificationsRead
@@ -10,8 +10,10 @@ from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXh
 from dsmr_frontend.views.compare import Compare, CompareXhrSummary
 from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.status import Status, XhrUpdateChecker
-from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect
+from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect, XhrHeader
 from dsmr_frontend.views.energy_contracts import EnergyContracts
+from dsmr_frontend.views.live_graphs import LiveGraphs, LiveXhrElectricityConsumption, LiveXhrGasConsumption, \
+    LiveXhrTemperature
 
 
 app_name = 'frontend'
@@ -19,11 +21,11 @@ app_name = 'frontend'
 # Public views.
 urlpatterns = [
     path('', Dashboard.as_view(), name='dashboard'),
-    path('xhr/header', DashboardXhrHeader.as_view(), name='dashboard-xhr-header'),
-    path('xhr/consumption', DashboardXhrConsumption.as_view(), name='dashboard-xhr-consumption'),
-    path('xhr/electricity', DashboardXhrElectricityConsumption.as_view(), name='dashboard-xhr-electricity'),
-    path('xhr/gas', DashboardXhrGasConsumption.as_view(), name='dashboard-xhr-gas'),
-    path('xhr/temperature', DashboardXhrTemperature.as_view(), name='dashboard-xhr-temperature'),
+    path('live', LiveGraphs.as_view(), name='live-graphs'),
+    path('xhr/header', XhrHeader.as_view(), name='xhr-consumption-header'),
+    path('xhr/electricity', LiveXhrElectricityConsumption.as_view(), name='live-xhr-electricity'),
+    path('xhr/gas', LiveXhrGasConsumption.as_view(), name='live-xhr-gas'),
+    path('xhr/temperature', LiveXhrTemperature.as_view(), name='live-xhr-temperature'),
     path('archive', Archive.as_view(), name='archive'),
     path('archive/xhr/summary', ArchiveXhrSummary.as_view(), name='archive-xhr-summary'),
     path('archive/xhr/graphs', ArchiveXhrGraphs.as_view(), name='archive-xhr-graphs'),
@@ -43,6 +45,8 @@ urlpatterns = [
     path('status', Status.as_view(), name='status'),
     path('status/xhr/check-for-updates', XhrUpdateChecker.as_view(), name='status-xhr-check-for-updates'),
 
+    path('notifications', Notifications.as_view(), name='notifications'),
+
     # Docs.
     path('docs/api', ApiDocs.as_view(), name='api-docs'),
 
@@ -53,9 +57,9 @@ urlpatterns = [
     path('donations-redirect', DonationsRedirect.as_view(), name='donations-redirect'),
 
     # Views requiring authentication.
+    path('configuration', Configuration.as_view(), name='configuration'),
     path('export', Export.as_view(), name='export'),
     path('export/csv', ExportAsCsv.as_view(), name='export-as-csv'),
-    path('notifications', Notifications.as_view(), name='notifications'),
     path('notifications/xhr/mark-read', XhrMarkNotificationRead.as_view(), name='notification-xhr-mark-read'),
     path(
         'notifications/xhr/mark-all-read',

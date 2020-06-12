@@ -83,6 +83,9 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
         self.assertIsNone(reading.phase_voltage_l1)
         self.assertIsNone(reading.phase_voltage_l2)
         self.assertIsNone(reading.phase_voltage_l3)
+        self.assertEqual(reading.phase_power_current_l1, 0)
+        self.assertEqual(reading.phase_power_current_l2, None)
+        self.assertEqual(reading.phase_power_current_l3, None)
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertEqual(meter_statistics.dsmr_version, '42')

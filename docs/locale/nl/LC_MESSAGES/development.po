@@ -310,6 +310,3 @@ msgstr ""
 "Zorg ervoor dat je pull requests altijd laat wijzen naar de ``development`` "
 "branch van DSMR-reader, gezien ``master`` alleen gebruikt wordt voor release-"
 "merges."
-
-#~ msgid "Tests"
-#~ msgstr "Tests"

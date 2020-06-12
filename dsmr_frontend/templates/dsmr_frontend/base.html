@@ -40,7 +40,7 @@
     </head>
     <body class="skin-black">
         <header class="header">
-            <a href="{% url 'frontend:dashboard' %}" class="logo">DSMR Reader</a>
+            <a href="{% url 'frontend:dashboard' %}" class="logo">DSMR Reader <small class="logo-version">v{{ dsmr_version }}</small></a>
             <nav class="navbar navbar-static-top" role="navigation">
                 <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button" title="{% trans 'Toggle navigation' %}">
                     <span class="sr-only">{% trans "Toggle navigation" %}</span>
@@ -57,17 +57,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar-right">
-                    <ul class="nav navbar-nav">
-                        {% block header_right %}{% endblock %}
-                        
-					    <li>
-					        <a href="{% url 'frontend:status' %}" title="{% trans 'View releases' %}">
-					            <small>v{{ dsmr_version }}</small>
-					        </a>
-					    </li>
-                    </ul>
-                </div>
             </nav>
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left">
@@ -80,18 +69,23 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{% url 'frontend:live-graphs' %}">
+                                <i class="fas fa-chart-bar"></i> &nbsp; <span>{% trans "Live graphs" %}</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{% url 'frontend:archive' %}">
-                                <i class="fas fa-clock"></i> &nbsp; <span>{% trans "Archive" %}</span>
+                                <i class="fas fa-history"></i> &nbsp; <span>{% trans "Archive" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:compare' %}">
-                                <i class="fas fa-balance-scale"></i> &nbsp; <span>{% trans "Compare" %}</span>
+                                <i class="fas fa-balance-scale-left"></i> &nbsp; <span>{% trans "Compare" %}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:trends' %}">
-                                <i class="fas fa-chart-bar"></i> &nbsp; <span>{% trans "Trends" %}</span>
+                                <i class="fas fa-chart-pie"></i> &nbsp; <span>{% trans "Trends" %}</span>
                             </a>
                         </li>
                         <li>
@@ -101,7 +95,7 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:energy-contracts' %}">
-                                <i class="fas fa-newspaper"></i> &nbsp; <span>{% trans "Energy contracts" %}</span>
+                                <i class="fas fa-euro-sign"></i> &nbsp; <span>{% trans "Energy contracts" %}</span>
                             </a>
                         </li>
                         <li>
@@ -113,21 +107,13 @@
                             </a>
                         </li>
                         <li>
-                            &nbsp;&nbsp;
-                        </li>
-                        <li>
-				            <a href="{% url 'frontend:notifications' %}">
-				                <i class="far fa-bell"></i> &nbsp; <small>{% trans "Notifications" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
-				            </a>
-			            </li>
-                        <li>
                             <a href="{% url 'frontend:export' %}">
-                                <i class="fas fa-xs fa-file-download"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+                                <i class="fas fa-xs fa-file-excel"></i> &nbsp; <small>{% trans "Export data" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
                             </a>
                         </li>
                         <li>
-				            <a href="{% url 'admin:index' %}">
-				                <i class="fas fa-xs fa-sliders-h"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
+				            <a href="{% url 'frontend:configuration' %}">
+				                <i class="fas fa-xs fa-wrench"></i> &nbsp; <small>{% trans "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% trans 'Authentication required' %}"></i></small>
 				            </a>
 			            </li>
                         <li>
@@ -135,43 +121,44 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-history"></i> &nbsp; <small>{% trans "Changelog" %}</small>
+                                <i class="fas fa-xs fa-info"></i> &nbsp; <small>{% trans "Changelog" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-question"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
+                                <i class="fas fa-xs fa-question-circle"></i> &nbsp; <small>{% trans "Help / FAQ" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:api-docs' %}" target="_blank">
-                                <i class="fas fa-xs fa-file-code"></i> &nbsp; <small>{% trans "API docs" %}</small>
+                                <i class="fas fa-xs fa-robot"></i> &nbsp; <small>{% trans "API docs" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-bullhorn"></i> &nbsp; <small>{% trans "Feedback" %}</small>
+                                <i class="fas fa-xs fa-comments"></i> &nbsp; <small>{% trans "Feedback / bugs / ideas" %}</small>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
+                                <i class="fas fa-xs fa-hand-holding-usd"></i> &nbsp; <small>{% trans "Donations / tips" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            &nbsp;
+                        </li>
+                        <li>
+                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">
+                                <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% trans "Thanks to all the contributers" %}</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/in/dennissiemensma" target="_blank">
+                                <i class="far fa-xs fa-copyright"></i> &nbsp; <small>Dennis Siemensma 2015 - {% now "Y" %}</small>
                             </a>
                         </li>
                     </ul>
                 </section>
-
-                <div class="row copyright">
-                    <small>
-	                    &copy; <a href="https://nl.linkedin.com/in/dennissiemensma" target="_blank">Dennis Siemensma</a> 2015 - {% now "Y" %}
-                    </small>
-                    <br />
-                    <small>{% trans "Credits to" %}: <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">{% trans "Many contributers" %}</a></small>
-                    <br />
-                    <br />
-                    <small><a href="https://github.com/dennissiemensma/dsmr-reader" target="_blank" title="{% trans 'View repository on Github' %}"><img src="{% static 'dsmr_frontend/img/GitHub-Mark-32px.png' %}" /> {% trans 'View on Github' %}</a></small>
-                    <small></small>
-                </div>
             </aside>
             <aside class="right-side">
 	            <div class="clearfix"></div>

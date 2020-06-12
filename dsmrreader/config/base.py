@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'solo.apps.SoloAppConfig',
     'colorfield',
     'django_filters',
+    'rangefilter',
     'rest_framework',
 
     # Local project apps.

@@ -43,6 +43,3 @@ msgid ""
 msgstr ""
 "Het invullen van de prijzen die je betaalt staat de applicatie toe om "
 "ze te tonen, wanneer mogelijk."
-
-#~ msgid "Admin: Consumption"
-#~ msgstr "Admin: Verbruik"

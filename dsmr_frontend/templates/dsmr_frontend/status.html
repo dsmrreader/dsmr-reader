@@ -10,28 +10,28 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     <i class="fas fa-cube"></i> &nbsp; {% trans "Application" %} <br />
                 </header>
                 <div class="panel-body">
-                    <table class="table table-condensed">
+                    <table class="table table-hover">
                         <tr>
-                            <td class="col-md-6">{% trans "Current version" %}</td>
-                            <td class="col-md-6"><a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/v3/changelog.html" target="_blank" title="{% trans 'View releases' %}"><i class="fas fa-external-link-alt"></i> v{{ dsmr_version }}</a></td>
+                            <td class="col-sm-6">{% trans "Current version" %}</td>
+                            <td class="col-sm-6"><a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/v3/changelog.html" target="_blank" title="{% trans 'View releases' %}"><i class="fas fa-external-link-alt"></i> v{{ dsmr_version }}</a></td>
                         </tr>
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% trans "Check for updates" %} 
                                 <br><br>
                                 
                                 <a class="help-trigger" href="#"><small>{% trans "Explain" %}</small></a>
                                 <small class="xhr-hidden">{% blocktrans %}The application will compare "VERSION = (x,x,x)" in your local dsmrreader/__init__.py file with the latest one available on Github.{% endblocktrans %}</small>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <a class="btn btn-success" href="#" id="check_for_updates"><i class="fas fa-sync"></i> &nbsp; {% trans 'Check now' %}</a>
-                                <div id="loader" class="xhr-hidden"><i class="fas fa-sync fa-spin fa-fw"></i> &nbsp; {% trans 'Currently checking for updates...' %}</div>
+                                <div id="loader" class="xhr-hidden"><i class="fas fa-circle-notch fa-spin fa-fw"></i> &nbsp; {% trans 'Currently checking for updates...' %}</div>
                                 <div id="update_available" class="alert alert-warning xhr-hidden" role="alert">
 	                                <i class="fas fa-exclamation"></i> &nbsp; {% blocktrans %}There is a newer version available!{% endblocktrans %} 
 	                                <a href="https://github.com/dennissiemensma/dsmr-reader/releases" target="_blank">{% trans 'View the latest release' %}</a> {% trans 'for the changelog and further upgrade instructions.' %}
@@ -46,15 +46,15 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     <i class="fas fa-plug"></i> &nbsp; {% trans "Telegrams" %} <br />
                 </header>
                 <div class="panel-body">
-                    <table class="table table-condensed">
+                    <table class="table table-hover">
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Incoming telegrams/readings" %}</strong>
                                 <br><br>
 
@@ -67,7 +67,7 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if status.readings.seconds_since == None or status.readings.seconds_since > 90 %}
                                 <div class="alert alert-danger" role="alert">
                                     <span class="fas fa-exclamation-triangle"></span> &nbsp;
@@ -89,15 +89,15 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     <i class="fas fa-cogs"></i> &nbsp; {% trans "Data processing" %} <br />
                 </header>
                 <div class="panel-body">
-                    <table class="table table-condensed">
+                    <table class="table table-hover">
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Telegrams to consumption" %}</strong>
                                 <br><br>
 
@@ -110,7 +110,7 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if status.readings.unprocessed.seconds_since > 300 %}
                                 <div class="alert alert-danger" role="alert">
                                     <span class="fas fa-exclamation-triangle"></span> &nbsp;
@@ -126,7 +126,7 @@
                         </tr>
 
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Calculating electricity consumption" %}</strong>
                                 <br><br>
 
@@ -138,7 +138,7 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if status.electricity.latest %}
                                     {% if status.electricity.minutes_since == None or status.electricity.minutes_since > 2 %}
                                     <div class="alert alert-danger" role="alert">
@@ -160,7 +160,7 @@
                         </tr>
 
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Calculating gas consumption" %}</strong>
                                 <br><br>
 
@@ -172,7 +172,7 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if capabilities.gas and status.gas.latest %}
                                     {% if status.gas.hours_since == None or status.gas.hours_since > 3 %}
                                     <div class="alert alert-danger" role="alert">
@@ -194,7 +194,7 @@
                         </tr>
 
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Day &amp; hour statistics" %}</strong>
                                 <br><br>
 
@@ -207,7 +207,7 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if status.statistics.days_since == None or status.statistics.days_since > 1 %}
                                 <div class="alert alert-gray" role="alert">
                                     <span class="fas fa-times"></span> &nbsp;
@@ -230,19 +230,19 @@
 
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     <i class="fas fa-cogs"></i> &nbsp; {% trans "Scheduled processes" %} <br />
                 </header>
                 <div class="panel-body">
-                    <table class="table table-condensed">
+                    <table class="table table-hover">
                     {%  for current in status.scheduled_processes %}
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{{ current.name }}</strong>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if current.active %}
                                 <div class="alert {% if current.planned >= status.now %}alert-success{% else %}alert-danger{% endif %}" role="alert">
                                     {% trans "Last run" %}: <strong>{{ current.last_executed_at|naturaltime|default:'-' }}</strong>
@@ -262,33 +262,20 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     <i class="fas fa-cogs"></i> &nbsp; {% trans "Tools" %} <br />
                 </header>
                 <div class="panel-body">
-                    <table class="table table-condensed">
-                        {% if status.tools.backup.enabled %}
-                        <tr>
-                            <td class="col-md-6">
-                                <strong>{% trans "Latest backup" %}</strong>
-                            </td>
-                            <td class="col-md-6">
-                                <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-info"></i> &nbsp;
-                                    {% trans "Latest" %}: <strong>{{ status.tools.backup.latest_backup|default:'-' }}</strong>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endif %}
+                    <table class="table table-hover">
 
                         {% if status.tools.dropbox.enabled %}
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Latest Dropbox sync" %}</strong>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <div class="alert alert-info" role="alert">
                                     <i class="fas fa-info"></i> &nbsp;
                                     {% trans "Latest" %}: <strong>{{ status.tools.dropbox.latest_sync|default:'-' }}</strong>
@@ -299,10 +286,10 @@
 
                         {% if status.tools.pvoutput.enabled %}
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Latest PVOutput sync" %}</strong>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <div class="alert alert-info" role="alert">
                                     <i class="fas fa-info"></i> &nbsp;
                                     {% trans "Latest" %}: <strong>{{ status.tools.pvoutput.latest_sync|default:'-' }}</strong>
@@ -312,10 +299,10 @@
                         {% endif %}
 
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "MQTT messages" %}</strong>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if status.tools.mqtt.ok %}
                                 <div class="alert alert-info" role="alert">
                                     <i class="fas fa-info"></i> &nbsp;
@@ -335,16 +322,16 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     <i class="fas fa-plug"></i> &nbsp; {% trans "Capabilities" %} <br />
                 </header>
                 <div class="panel-body">
-                    <table class="table table-condensed">
+                    <table class="table table-hover">
                         <tr>
-                            <td class="col-md-6">
-                                <strong>{% trans "Electricity usage" %}</strong>
+                            <td class="col-sm-6">
+                                <strong>{% trans "Electricity consumed" %}</strong>
                                 <br><br>
                                 <div>
                                     <a class="help-trigger" href="#"><small>{% trans "Explain" %}</small></a>
@@ -354,21 +341,21 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if capabilities.electricity %}
                                 <div class="alert alert-info" role="alert">
-                                    <span class="fas fa-check"></span> &nbsp; {% trans "Electricity usage recorded" %}
+                                    <span class="fas fa-check"></span> &nbsp; {% trans "Electricity consumption recorded" %}
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> &nbsp; {% trans "No electricity usage recorded" %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No electricity consumption recorded" %}
                                 </div>
                                 {% endif %}
                             </td>
                         </tr>
 
                         <tr>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 <strong>{% trans "Electricity returned" %}</strong>
                                 <br><br>
                                 <div>
@@ -379,7 +366,7 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if capabilities.electricity_returned %}
                                 <div class="alert alert-info" role="alert">
                                     <span class="fas fa-check"></span> &nbsp; {% trans "Electricity return recorded" %}
@@ -393,8 +380,8 @@
                         </tr>
 
                         <tr>
-                            <td class="col-md-6">
-                                <strong>{% trans "Gas usage" %}</strong>
+                            <td class="col-sm-6">
+                                <strong>{% trans "Gas consumed" %}</strong>
                                 <br><br>
                                 <div>
                                     <a class="help-trigger" href="#"><small>{% trans "Explain" %}</small></a>
@@ -404,14 +391,14 @@
                                     </small>
                                 </div>
                             </td>
-                            <td class="col-md-6">
+                            <td class="col-sm-6">
                                 {% if capabilities.gas %}
                                 <div class="alert alert-info" role="alert">
-                                    <span class="fas fa-check"></span> &nbsp; {% trans "Gas usage recorded" %}
+                                    <span class="fas fa-check"></span> &nbsp; {% trans "Gas consumption recorded" %}
                                 </div>
                                 {% else %}
                                 <div class="alert alert-gray" role="alert">
-                                    <span class="fas fa-times"></span> &nbsp; {% trans "No gas usage recorded (or manually disabled)" %}
+                                    <span class="fas fa-times"></span> &nbsp; {% trans "No gas consumption recorded (or manually disabled)" %}
                                 </div>
                                 {% endif %}
                             </td>

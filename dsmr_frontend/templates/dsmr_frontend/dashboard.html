@@ -1,126 +1,30 @@
 {% extends "dsmr_frontend/base.html" %}
 {% load static %}
 {% load humanize %}
-{% load i18n %} 
+{% load i18n %}
 {% load l10n %}
 
 {% block title %}{% trans "Dashboard" %}{% endblock %}
 {% block header %}{% trans "Dashboard" %} &nbsp; <i class="fas fa-tachometer-alt"></i>{% endblock %}
 
-{% block header_right %}
-    <li style="width: 150px; text-align: right">
-        <a href="" onclick="return false;" style="cursor: default;">
-            <small style="color: #999999;"><span id="latest_timestamp"></span></small>
-        </a>
-    </li>
-    
-	{% if capabilities.electricity %}
-	<li>
-	    <a href="" onclick="return false;" style="cursor: default;">
-	        <span class="badge bg-red"><i class="fas fa-bolt"></i> 
-		        &nbsp; <span id="latest_electricity"><i class="fas fa-sync fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}
-		        &nbsp; <small id="cost_per_hour"></small>
-	        </span>
-	    </a>
-	</li>
-	{% endif %}
-	
-	{% if capabilities.electricity_returned  %}
-	<li>
-	    <a href="" onclick="return false;" style="cursor: default;">
-	        <span class="badge bg-green"><i class="fas fa-bolt"></i> 
-	        &nbsp; <span id="latest_electricity_returned"><i class="fas fa-sync fa-spin fa-fw"></i></span> &nbsp; {% trans "Watt" %}</span>
-	    </a>
-	</li>
-	{% endif %}
-{% endblock %}
-
 {% block content %}
 <!-- Main content -->
 <section class="content">
-
-    {% if notification_count > 0 %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Unread notifications" %}
-                </header>
-                <div class="panel-body">
-                    <div class="alert alert-warning" role="alert">
-                        <i class="far fa-bell"></i> &nbsp; {% trans "Number of unread notifications" %}: &nbsp; <strong>{{ notification_count }}</strong>
-                         &nbsp;
-                        <a class="btn btn-sm btn-primary" href="{% url 'frontend:notifications' %}"><i class="fas fa-external-link-alt"></i> {% trans "View" %}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-
     {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
         <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktrans %}
     </div>
     {% endif %}
 
-    {% if month_statistics and capabilities.any %}
+    {% if notification_count > 0 %}
     <div class="row">
-        <div class="col-md-12 text-center">
-            <a id="month_statistics_button" class="btn btn-primary" href="#">{% trans "Display current month" %}</a>
-            <br /> <br />
-        </div>
-    </div>
-    <div class="row consumption-block xhr-hidden" id="month_statistics_holder">
-        <div class="col-md-12">
-            <div class="panel">
+        <div class="col-sm-12">
+            <div class="panel header-panel">
                 <header class="panel-heading">
-                    {% trans "Current month" %} <small>({% trans "until yesterday" %})</small>
+                    {% trans "Unread notifications" %} &nbsp; <span class="badge bg-blue">{{ notification_count }}</span>
                 </header>
                 <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr>
-                            <th class="col-md-6"></th>
-                            <th class="col-md-2">{% if capabilities.electricity %}{% trans "Consumed" %} ({% trans "kWh" noop %}{% if capabilities.gas %} / {% trans "m<sup>3</sup>" noop %}{% endif %}){% endif %}</th>
-                            <th class="col-md-2">{% if capabilities.electricity_returned %}{% trans "Returned" %} ({% trans "kWh" noop %}){% endif %}</th>
-                            <th class="col-md-2">{% trans "Cost" %} (&euro;)</th>
-                        </tr>
-                        {% if frontend_settings.merge_electricity_tariffs %}
-			            <tr>
-			                <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %}{% endif %}</td>
-			                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
-			                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
-			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
-			            </tr>
-			            {% else %}
-                        <tr>
-                            <td>{% if capabilities.electricity %}{% trans "Electricity 1 (low tariff)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity1_cost|default:'-' }}{% endif %}</span></td>
-                        </tr>
-                        <tr>
-                            <td>{% if capabilities.electricity %}{% trans "Electricity 2 (high tariff)" %}{% endif %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ month_statistics.electricity2_cost|default:'-' }}{% endif %}</span></td>
-                        </tr>
-                        {% endif %}
-                        {% if capabilities.gas %}
-                        <tr>
-                            <td>{% trans "Gas" %}</td>
-                            <td><span class="badge bg-orange">{{ month_statistics.gas|default:'-'|floatformat:2 }}</span></td>
-                            <td>&nbsp;</td>
-                            <td><span class="badge bg-black">{{ month_statistics.gas_cost|default:'-' }}</span></td>
-                        </tr>
-                        {% endif %}
-                        <tr>
-                            <td style="font-weight: bold;">{% trans "Total" %}</td>
-                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
-                            <td><span class="badge bg-black">{{ month_statistics.total_cost|default:'-' }}</span></td>
-                        </tr>
-                    </table>                
+                    <a class="btn btn-sm btn-primary" href="{% url 'frontend:notifications' %}"><i class="fas fa-external-link-alt"></i> {% trans "Go to notification overview" %}</a>
                 </div>
             </div>
         </div>
@@ -129,230 +33,168 @@
 
     {% if capabilities.electricity or capabilities.electricity_returned or capabilities.gas %}
     <div class="row consumption-block">
-        <div class="col-md-12">
-            <div id="consumption-loader" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
-            <div id="consumption-holder"></div>
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {{ consumption.day|date:django_date_format }}
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="pull-right">
+                        <a class="btn btn-sm btn-primary" href="{% url 'frontend:live-graphs' %}"><i class="fas fa-chart-bar"></i></a>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <tr class="live-header">
+                            <th class="col-sm-6">
+                                <span id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> <span class="unit" id="tariff_name"></span>
+                            </th>
+                            <th class="col-sm-2">
+                                {% if capabilities.electricity %}
+                                    <span class="badge bg-red" id="latest_electricity"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> <span class="unit">{% trans "W" %}</span>
+                                {% endif %}
+                            </th>
+                            <th class="col-sm-2">
+                                {% if capabilities.electricity_returned %}
+                                    <span class="badge bg-green" id="latest_electricity_returned"></span> <span class="unit">{% trans "W" %}</span>
+                                {% endif %}
+                            </th>
+                            <th class="col-sm-2">
+                                {% if capabilities.electricity %}
+                                    <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>  <span class="unit">&euro;{% trans '/hour' %}</span>
+                                {% endif %}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>{% if capabilities.electricity %}{% trans "Consumed" %}{% endif %}</td>
+                            <td>{% if capabilities.electricity_returned %}{% trans "Returned" %}{% endif %}</td>
+                            <td>{% trans "Costs" %} <span class="unit">&euro;</span></td>
+                        </tr>
+                        {% if frontend_settings.merge_electricity_tariffs %}<tr>
+                            <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+                            <td><span class="badge bg-red" id="consumption_electrity_merged">{% if capabilities.electricity %}{{ consumption.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                            <td><span class="badge bg-green" id="consumption_electrity_returned_merged">{% if capabilities.electricity_returned %}{{ consumption.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
+                        </tr>
+                        {% else %}<tr>
+                            <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity1_cost|default:'-' }}{% endif %}</span></td>
+                        </tr><tr>
+                            <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity %}{{ consumption.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ consumption.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{% if capabilities.electricity %}{{ consumption.electricity2_cost|default:'-' }}{% endif %}</span></td>
+                        </tr>
+                        {% endif %}
+
+                        {% if capabilities.gas %}<tr>
+                            <td> {% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
+                            <td><span class="badge bg-orange">{{ consumption.gas|default:'-'|floatformat:2 }}</span></td>
+                            <td>&nbsp;</td>
+                            <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td style="font-weight: bold;">{% trans "Total" %}</td>
+                            <td><span class="badge bg-red">{% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}{{ consumption.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs%}{{ consumption.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
+                            <td><span class="badge bg-black">{{ consumption.total_cost|default:'-' }}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endif %}
+
+    {% if capabilities.any %}
+    <div class="row consumption-block">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% if month_statistics.electricity_merged or month_statistics.gas %}
+                    {% trans "Current month" %} <small>({% trans "until yesterday" %})</small>
+                    {% else %}
+                    {% trans "Current month" %}
+                    {% endif %}
+
+                    <div class="pull-right">
+                        <a class="btn btn-sm btn-primary" href="{% url 'frontend:archive' %}"><i class="fas fa-history"></i></a>
+                    </div>
+                </header>
+                <div class="panel-body">
+                    {% if month_statistics.electricity_merged or month_statistics.gas %}
+                    <table class="table table-hover">
+                        <tr>
+                            <th class="col-sm-6"></th>
+                            <th class="col-sm-2">{% if capabilities.electricity %}{% trans "Consumed" %}{% endif %}</th>
+                            <th class="col-sm-2">{% if capabilities.electricity_returned %}{% trans "Returned" %}{% endif %}</th>
+                            <th class="col-sm-2">{% trans "Costs" %} <span class="unit">&euro;</span></th>
+                        </tr>
+                        {% if frontend_settings.merge_electricity_tariffs %}
+			            <tr>
+			                <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+			                <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+			                <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+			                <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ month_statistics.electricity_cost_merged|default:'-' }}</span>{% endif %}</td>
+			            </tr>
+			            {% else %}
+                        <tr>
+                            <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity1|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity1_returned|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ month_statistics.electricity1_cost|default:'-' }}</span>{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity2|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity2_returned|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ month_statistics.electricity2_cost|default:'-' }}</span>{% endif %}</td>
+                        </tr>
+                        {% endif %}
+                        {% if capabilities.gas %}
+                        <tr>
+                            <td>{% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
+                            <td><span class="badge bg-orange">{{ month_statistics.gas|default:'-'|floatformat:2 }}</span></td>
+                            <td>&nbsp;</td>
+                            <td><span class="badge bg-black">{{ month_statistics.gas_cost|default:'-' }}</span></td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td style="font-weight: bold;">{% trans "Total" %}</td>
+                            <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ month_statistics.electricity_returned_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                            <td><span class="badge bg-black">{{ month_statistics.total_cost|default:'-' }}</span></td>
+                        </tr>
+                    </table>
+                    {% else %}
+                        <div class="graph_controls_help">{% blocktrans %}The totals for the current month are currently not (yet) available. Check again tomorrow.{% endblocktrans %}</div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
     {% endif %}
 
-    {% if capabilities.electricity %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% blocktrans %}Recent electricity consumed (Watt) in the past 24 hours{% endblocktrans %}
-                </header>
-                <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
-                    <div id="echarts-electricity-graph" style="width: 100%; height: 300px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    
-    {% if capabilities.multi_phases %}
-    <div class="row" id="phases_holder">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Recent distribution of electricity phases (Watt) in the past 24 hours" %}
-                </header>
-                <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
-                    <div id="echarts-phases-graph" style="width: 100%; height: 300px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}   
-
-    {% if capabilities.voltage %}
-    <div class="row" id="voltage_holder">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Phase voltages in the past 24 hours" %}
-                </header>
-                <div class="panel-body">
-                    <small>{% blocktrans %}Scroll or pinch the graph to zoom in and out. Drag the graph left or right, or use the horizontal scrollbar below the graph.{% endblocktrans %}</small>
-                    <div id="echarts-voltage-graph" style="width: 100%; height: 300px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-
-    {% if capabilities.gas %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Recent gas consumed (m<sup>3</sup>) in the past 24 hours" %}
-                </header>
-                <div class="panel-body">
-                    <div id="echarts-gas-graph" style="width: 100%; height: 300px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    
-    {% if capabilities.weather %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% trans "Recent temperatures (&deg;C) in the past 24 hours" %}
-                </header>
-                <div class="panel-body">
-                    <div id="echarts-temperature-graph" style="width: 100%; height: 300px;"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    {% endif %}
 </section>
 {% endblock %}
 
 
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.5.0.min.js' %}"></script>
 
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
     <script type="text/javascript">
-        {% localize off %}
-        var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
-        var dashboard_graph_width = {{ frontend_settings.dashboard_graph_width }};
-        var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
-        {% endlocalize %}
-    </script>
+        var xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
 
-{% if capabilities.electricity %}
-    <script type="text/javascript">
-        var echarts_electricity_graph_url = "{% url 'frontend:dashboard-xhr-electricity' %}?delivered=True";
-        
-        {% if capabilities.electricity_returned %}
-        echarts_electricity_graph_url += "&returned=True";
-        {% endif %}
-        
-        var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
-        var electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
-        var echarts_electricity_graph_interval = 5;
-    </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/electricity.js' %}?r=v{{ dsmr_version }}"></script>
-{% endif %}
-
-{% if capabilities.multi_phases %}
-    <script type="text/javascript">
-        var echarts_phases_graph_url = "{% url 'frontend:dashboard-xhr-electricity' %}?phases=True";
-        
-        {% if capabilities.electricity_returned %}
-        echarts_phases_graph_url += "&returned=True";
-        {% endif %}
-        
-        var phase_delivered_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
-        var phase_delivered_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
-        var phase_delivered_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
-        var phase_returned_l1_color = "{{ frontend_settings.phase_returned_l1_color }}";
-        var phase_returned_l2_color = "{{ frontend_settings.phase_returned_l2_color }}";
-        var phase_returned_l3_color = "{{ frontend_settings.phase_returned_l3_color }}";
-        
-        var echarts_phases_graph_interval = 5;
-    </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/phases.js' %}?r=v{{ dsmr_version }}"></script>
-{% endif %}
-
-{% if capabilities.voltage %}
-    <script type="text/javascript">
-        var echarts_voltage_graph_url = "{% url 'frontend:dashboard-xhr-electricity' %}?voltage=True";
-        var voltage_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
-        var voltage_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
-        var voltage_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
-
-        var echarts_voltage_graph_interval = 5;
-    </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/voltage.js' %}?r=v{{ dsmr_version }}"></script>
-{% endif %}
-
-{% if capabilities.gas %}
-    <script type="text/javascript">
-        var echarts_gas_graph_url = "{% url 'frontend:dashboard-xhr-gas' %}";
-        var gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
-        var gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
-    </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/gas.js' %}?r=v{{ dsmr_version }}"></script>
-{% endif %}
-
-{% if capabilities.weather %}
-    <script type="text/javascript">
-        var echarts_temperature_graph_url = "{% url 'frontend:dashboard-xhr-temperature' %}";
-        var temperature_color = "{{ frontend_settings.temperature_color }}";
-    </script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/dashboard/temperature.js' %}?r=v{{ dsmr_version }}"></script>
-{% endif %}
- 
-    <script type="text/javascript">
         $(document).ready(function(){
+            setInterval(function(){ update_consumption_header(); }, 1000);
 
-            $("#month_statistics_button").click(function(){
-                $(this).parent().hide();
-                $("#month_statistics_holder").show();
-                return false
-            });                
-            
-            /* Auto refresh. */
-            update_header();
-            setInterval(function(){ update_header(); }, 2500);
-            setInterval(function(){ update_consumption(); }, 20000)
-            
-            /* Reload entire page after 15 minutes. */
-            setInterval(function(){ location.reload(); }, 15 * 60 * 1000)
-
-            initialize_consumption();
+            /* Reload entire page after 5 minutes. */
+            setInterval(function(){ location.reload(); }, 5 * 60 * 1000)
         });
-        
-        /* Updates the header containing the current electricity usage or return. */
-        function update_header()
-        {
-            $("#header-loader").show();
-            
-            $.ajax({
-                dataType: "json",
-                url: "{% url 'frontend:dashboard-xhr-header' %}",
-            }).done(function(response) {
-                $("#header-loader").hide();
-                $("#latest_timestamp").html(response.timestamp);
-                $("#latest_electricity").html(response.currently_delivered);
-                $("#latest_electricity_returned").html(response.currently_returned);
-                
-                if (response.cost_per_hour)
-                {
-                    $("#cost_per_hour").html("&euro; " + response.cost_per_hour + " {% trans 'per hour' %}");
-                }
-            });
-        }
-
-        function initialize_consumption() {
-            $("#consumption-loader").show();
-        	$("#consumption-holder").hide();
-
-        	update_consumption();
-        }
-
-        /* Update consumption header table. */
-        function update_consumption()
-        {
-            $.ajax({
-                url: "{% url 'frontend:dashboard-xhr-consumption' %}"
-            }).done(function(data) {
-            	$("#consumption-loader").hide();
-                $("#consumption-holder").html(data).show();
-            });
-        }
-
     </script>
 
 {% endblock %}

@@ -1,5 +1,21 @@
-from django.conf import settings
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.views.generic.base import RedirectView
+from django.views.generic.base import View
+from django.http import JsonResponse
+from django.conf import settings
+
+import dsmr_consumption.services
+
+
+class XhrHeader(View):
+    """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
+    def get(self, request):
+        data = dsmr_consumption.services.live_electricity_consumption()
+
+        if data and data['timestamp']:
+            data['timestamp'] = str(naturaltime(data['timestamp']))
+
+        return JsonResponse(data)
 
 
 class ReadTheDocsRedirectView(RedirectView):

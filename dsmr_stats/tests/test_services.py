@@ -480,7 +480,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         DayStatistics.objects.create(**statistics_dict)
 
         # Fetch inside our expected range.
-        statistics = dsmr_stats.services.range_statistics(
+        statistics, count = dsmr_stats.services.range_statistics(
             start=target_date, end=target_date + timezone.timedelta(days=1)
         )
         self.assertEqual(statistics['total_cost'], 39)
@@ -497,9 +497,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(statistics['gas_cost'], 3)
 
         # Now we fetch one outside our range.
-        no_statistics = dsmr_stats.services.range_statistics(
+        no_statistics, count = dsmr_stats.services.range_statistics(
             target_date - timezone.timedelta(days=1), target_date
         )
+        self.assertEqual(count, 0)
         self.assertIsNone(no_statistics['total_cost'])
 
     def test_day_statistics(self):
@@ -511,9 +512,10 @@ class TestServices(InterceptStdoutMixin, TestCase):
                 **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
             )
 
-        data = dsmr_stats.services.day_statistics(target_date=target_date)
+        data, count = dsmr_stats.services.day_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
 
+        self.assertEqual(count, 1)
         self.assertEqual(data['total_cost'], daily['total_cost'])
         self.assertEqual(data['electricity1'], daily['electricity1'])
         self.assertEqual(data['electricity1_cost'], daily['electricity1_cost'])
@@ -538,9 +540,11 @@ class TestServices(InterceptStdoutMixin, TestCase):
                 **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
             )
 
-        data = dsmr_stats.services.month_statistics(target_date=target_date)
+        data, count = dsmr_stats.services.month_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
         days_in_month = 31  # Hardcoded January.
+
+        self.assertEqual(count, 31)
 
         # Now we just verify whether the expected amount of days is fetched and summarized.
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.
@@ -573,9 +577,11 @@ class TestServices(InterceptStdoutMixin, TestCase):
                 **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
             )
 
-        data = dsmr_stats.services.year_statistics(target_date=target_date)
+        data, count = dsmr_stats.services.year_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
         days_in_year = 366  # Hardcoded leapyear 2016.
+
+        self.assertEqual(count, 366)
 
         # Now we just verify whether the expected amount of days is fetched and summarized.
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.
@@ -781,7 +787,18 @@ class TestServices(InterceptStdoutMixin, TestCase):
             electricity1_returned=0,
             electricity2_returned=0,
         )
-
+        DayStatistics.objects.create(
+            day=target_day.date() + timezone.timedelta(days=1),
+            total_cost=0,
+            electricity1=1,
+            electricity2=2,
+            electricity1_cost=0,
+            electricity2_cost=0,
+            gas=None,  # Omit gas
+            gas_cost=0,
+            electricity1_returned=0,
+            electricity2_returned=0,
+        )
         day_totals = DayStatistics.objects.all()[0]
         self.assertEqual(day_totals.electricity1_cost, 15)
         self.assertEqual(day_totals.electricity2_cost, 30)
@@ -795,6 +812,62 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(day_totals.electricity2_cost, 40)
         self.assertEqual(day_totals.gas_cost, 5)
         self.assertEqual(day_totals.total_cost, 55)
+
+    def test_reconstruct_missing_day_statistics(self):
+        # Existing day should be ignored.
+        DayStatistics.objects.create(
+            day=timezone.make_aware(timezone.datetime(2020, 1, 1)).date(),
+            total_cost=12345,
+            electricity1=1,
+            electricity2=2,
+            electricity1_returned=3,
+            electricity2_returned=4,
+            gas=5,
+            electricity1_cost=0,
+            electricity2_cost=0,
+            gas_cost=0,
+        )
+        HourStatistics.objects.create(
+            hour_start=timezone.make_aware(timezone.datetime(2020, 1, 1, 12)),
+            electricity1=0.1,
+            electricity2=0.2,
+            electricity1_returned=0.3,
+            electricity2_returned=0.4,
+            gas=0.5,
+        )
+
+        self.assertEqual(DayStatistics.objects.all().count(), 1)
+
+        dsmr_stats.services.reconstruct_missing_day_statistics()
+        self.assertEqual(DayStatistics.objects.all().count(), 1)
+
+        # Now add hours for missing day.
+        HourStatistics.objects.create(
+            hour_start=timezone.make_aware(timezone.datetime(2020, 1, 2, 12)),
+            electricity1=0.11,
+            electricity2=0.22,
+            electricity1_returned=0.33,
+            electricity2_returned=0.44,
+            gas=0.55,
+        )
+        HourStatistics.objects.create(
+            hour_start=timezone.make_aware(timezone.datetime(2020, 1, 2, 13)),
+            electricity1=1,
+            electricity2=2,
+            electricity1_returned=3,
+            electricity2_returned=4,
+            gas=5,
+        )
+
+        dsmr_stats.services.reconstruct_missing_day_statistics()
+        self.assertEqual(DayStatistics.objects.all().count(), 2)
+
+        latest = DayStatistics.objects.all().order_by('-pk')[0]
+        self.assertEqual(latest.electricity1, Decimal('1.11'))
+        self.assertEqual(latest.electricity2, Decimal('2.22'))
+        self.assertEqual(latest.electricity1_returned, Decimal('3.33'))
+        self.assertEqual(latest.electricity2_returned, Decimal('4.44'))
+        self.assertEqual(latest.gas, Decimal('5.55'))
 
 
 class TestServicesWithoutGas(TestServices):

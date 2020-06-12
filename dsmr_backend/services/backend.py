@@ -32,7 +32,7 @@ def get_capabilities(capability=None):
 
     if capabilities is None:
         capabilities = {
-            # We rely on consumption because DSMR readings might be flushed in the future.
+            # We rely on consumption because source readings might be deleted after a while.
             'electricity': ElectricityConsumption.objects.exists(),
             'electricity_returned': ElectricityConsumption.objects.filter(
                 # We can not rely on meter positions, as the manufacturer sometimes initializes meters
@@ -45,6 +45,9 @@ def get_capabilities(capability=None):
             ).exists(),
             'voltage': ElectricityConsumption.objects.filter(
                 phase_voltage_l1__isnull=False,
+            ).exists(),
+            'power_current': ElectricityConsumption.objects.filter(
+                phase_power_current_l1__isnull=False,
             ).exists(),
             'gas': GasConsumption.objects.exists(),
             'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
@@ -185,7 +188,7 @@ def status_info():
     capabilities = get_capabilities()
     status = {
         'now': timezone.now(),
-        'scheduled_processes': ScheduledProcess.objects.all().order_by('-active').values(),
+        'scheduled_processes': ScheduledProcess.objects.all().order_by('-active', 'name').values(),
         'capabilities': capabilities,
         'electricity': get_electricity_status(capabilities),
         'gas': get_gas_status(capabilities),
@@ -195,7 +198,9 @@ def status_info():
         {
             'backup': {
                 'enabled': False,
-                'latest_backup': None,
+                'latest_backup': ScheduledProcess.objects.get(
+                    module=settings.DSMRREADER_MODULE_DAILY_BACKUP
+                ).last_executed_at,
             },
             'dropbox': {
                 'enabled': False,
@@ -218,7 +223,6 @@ def status_info():
 
     if backup_settings.daily_backup:
         status['tools']['backup']['enabled'] = True
-        status['tools']['backup']['latest_backup'] = backup_settings.latest_backup
 
     dropbox_settings = DropboxSettings.get_solo()
 

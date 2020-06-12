@@ -1,5 +1,6 @@
 from datetime import time
 
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
@@ -31,15 +32,11 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
             'Please make sure that the "dsmr" user both has read and write access to the folder.'
         ),
     )
-    latest_backup = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Latest backup'),
-        help_text=_(
-            'Timestamp of latest backup created. Automatically updated by application. Please note '
-            'that the application will ignore the "backup_time" setting the first time used.'
-        )
+    compression_level = models.IntegerField(
+        default=1,
+        validators=[MinValueValidator(1), MaxValueValidator(9)],
+        verbose_name=_('Compression level'),
+        help_text=_("The gzip compression level used. Level 9 = best, level 1 = fastest.")
     )
 
     def __str__(self):
@@ -102,6 +99,7 @@ class EmailBackupSettings(ModelUpdateMixin, SingletonModel):
         blank=True,
         default=INTERVAL_NONE,
         choices=INTERVAL_CHOICES,
+        verbose_name=_('Interval'),
         help_text=_('The frequency of sending backups per email')
     )
 

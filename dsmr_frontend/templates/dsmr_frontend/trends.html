@@ -4,7 +4,7 @@
 {% load i18n %} 
 
 {% block title %}{% trans "Trends" %}{% endblock %}
-{% block header %}{% trans "Trends" %} &nbsp; <i class="fas fa-chart-bar"></i>{% endblock %}
+{% block header %}{% trans "Trends" %} &nbsp; <i class="fas fa-chart-pie"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -25,7 +25,7 @@
 
     {% if capabilities.electricity and has_statistics %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Average electricity consumed each hour (in %) within the past 4 weeks{% endblocktrans %}
@@ -40,7 +40,7 @@
     
     {% if capabilities.electricity_returned and has_statistics %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Average electricity returned each hour (in %) within the past 4 weeks{% endblocktrans %}
@@ -55,7 +55,7 @@
     
     {% if capabilities.gas and has_statistics %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
                     {% blocktrans %}Average gas consumed each hour (in %) within the past 4 weeks{% endblocktrans %}
@@ -70,7 +70,7 @@
 
     {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs and has_statistics %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel" style="padding-bottom: 24px;">
                 <header class="panel-heading">
                     {% blocktrans %}Electricity tariff ratio (past week){% endblocktrans %}
@@ -82,7 +82,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="panel" style="padding-bottom: 24px;">
                 <header class="panel-heading">
                     {% blocktrans %}Electricity tariff ratio (past month){% endblocktrans %}
@@ -102,12 +102,12 @@
     
     {{ block.super }}
 
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts/echarts.common-4.5.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-4.7.0.min.js' %}"></script>
     <script type="text/javascript">
         var echarts_avg_consumption_url = "{% url 'frontend:trends-xhr-avg-consumption' %}";
         var echarts_by_tariff_url = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
         var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
-        
+
         var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
         var electricity_delivered_alternate_color = "{{ frontend_settings.electricity_delivered_alternate_color }}";
     </script>

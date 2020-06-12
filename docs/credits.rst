@@ -3,14 +3,14 @@ Credits / Hall of Fame
 
 Special thanks for supplying code contributions
 -----------------------------------------------
-- `Jeroen Peters <https://www.linkedin.com/in/jeroenpeters1986>`_
+- `Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_
 - `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_
-- All the [other contributers for the past few years](https://github.com/dennissiemensma/dsmr-reader/graphs/contributors)!
+- All the `other contributers for the past few years <https://github.com/dennissiemensma/dsmr-reader/graphs/contributors>`_!
 
 Also many thanks to the contributions of
 ----------------------------------------
-- Many [pull requests](https://github.com/dennissiemensma/dsmr-reader/pulls).
-- All [the ideas, improvements and bugs reported](https://github.com/dennissiemensma/dsmr-reader/issues) for the past years.
+- Many `pull requests <https://github.com/dennissiemensma/dsmr-reader/pulls>`_.
+- All `the ideas, improvements and bugs reported <https://github.com/dennissiemensma/dsmr-reader/issues>`_ for the past years.
 
 
 Additional thanks to
@@ -30,6 +30,7 @@ Please note and respect their licences as well, if any. Credits to the following
 - `Django Project <https://www.djangoproject.com/>`_
 - `Django Solo <https://github.com/lazybird/django-solo>`_
 - `Django Colorfield <https://github.com/jaredly/django-colorfield>`_
+- `Django Admin Range Filter <https://github.com/silentsokolov/django-admin-rangefilter>`_
 - `Supervisor <http://supervisord.org/>`_
 - `MySQL <https://www.mysql.com/>`_
 - `MariaDB <https://mariadb.org/>`_
@@ -49,3 +50,4 @@ Please note and respect their licences as well, if any. Credits to the following
 - `eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_
 - `CircleCI <https://circleci.com/>`_
 - `ReDoc <https://github.com/Redocly/redoc>`_
+- `Semantic UI <https://semantic-ui.com>`_

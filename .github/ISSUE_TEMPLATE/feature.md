@@ -7,4 +7,3 @@ assignees: ''
 
 ---
 
-*Beschrijf hier je verhaal...*
