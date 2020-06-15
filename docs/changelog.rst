@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v3.10.1 - 2020-06-15
+
+- [`#1023 <https://github.com/dennissiemensma/dsmr-reader/issues/1023>`_] Django security update
+
+
+----
+
 
 v3.11.0 - 2020-xx-xx
 
