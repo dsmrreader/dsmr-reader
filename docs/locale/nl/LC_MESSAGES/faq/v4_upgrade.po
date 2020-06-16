@@ -18,140 +18,148 @@ msgstr "Upgraden naar DSMR-reader v4.x"
 
 #: ../../faq/v4_upgrade.rst:4
 msgid ""
-"DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will "
-"have to manually upgrade to make sure it will run properly."
+"DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to "
+"manually upgrade to make sure it will run properly."
 msgstr ""
-"DSMR-reader ``v4.x`` is backwards incompatible met ``3.x``. Je zult "
-"handmatig moeten upgraden om ervoor te zorgen dat het goed werkt."
+"DSMR-reader ``v4.x`` is backwards incompatible met ``3.x``. Je zult handmatig "
+"moeten upgraden om ervoor te zorgen dat het goed werkt."
 
 #: ../../faq/v4_upgrade.rst:8
 msgid ""
-"If you're using Docker, you can probably just install the ``v4.x`` "
-"version of the Docker container without any of the steps below."
+"If you're using Docker, you can probably just install the ``v4.x`` version of "
+"the Docker container without any of the steps below."
 msgstr ""
-"Indien je Docker gebruikt, kun je waarschijnlijk gewoon de ``v4.x`` "
-"versie van de Docker container gebruiken, zonder onderstaande stappen."
+"Indien je Docker gebruikt, kun je waarschijnlijk gewoon de ``v4.x`` versie van "
+"de Docker container gebruiken, zonder onderstaande stappen."
 
-#: ../../faq/v4_upgrade.rst:13
+#: ../../faq/v4_upgrade.rst:12
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../faq/v4_upgrade.rst:16
+#: ../../faq/v4_upgrade.rst:15
+msgid "List of changes"
+msgstr "Lijst van wijzigingen"
+
+#: ../../faq/v4_upgrade.rst:17
+msgid ""
+":doc:`See the changelog<../changelog>`, for ``v4.x releases`` and higher. Check "
+"them before updating!"
+msgstr ""
+":doc:`Zie de changelog<../changelog>`, voor ``v4.x releases`` en hoger. Bekijk "
+"ze voordat je update!"
+
+#: ../../faq/v4_upgrade.rst:21
 msgid "1. Update to the latest ``v3.x`` version"
 msgstr "1. Update naar de meeste recente ``v3.x`` versie"
 
-#: ../../faq/v4_upgrade.rst:18
+#: ../../faq/v4_upgrade.rst:23
 msgid ":doc:`See here for instructions<update>`."
 msgstr ":doc:`Zie hier voor de instructies<update>`."
 
-#: ../../faq/v4_upgrade.rst:22
+#: ../../faq/v4_upgrade.rst:27
 msgid "2. Install ``python3-psycopg2``"
 msgstr "2. Installeer ``python3-psycopg2``"
 
-#: ../../faq/v4_upgrade.rst:24
+#: ../../faq/v4_upgrade.rst:29
 msgid ""
-"If you're using PostgreSQL, the default for DSMR-reader, install the "
-"following system package::"
+"If you're using PostgreSQL, the default for DSMR-reader, install the following "
+"system package::"
 msgstr ""
-"Wanneer je PostgreSQL gebruikt, de standaard voor DSMR-reader, "
-"installeer dan de volgende systeem package::"
+"Wanneer je PostgreSQL gebruikt, de standaard voor DSMR-reader, installeer dan de "
+"volgende systeem package::"
 
-#: ../../faq/v4_upgrade.rst:28 ../../faq/v4_upgrade.rst:70
-#: ../../faq/v4_upgrade.rst:86 ../../faq/v4_upgrade.rst:103
-#: ../../faq/v4_upgrade.rst:115
+#: ../../faq/v4_upgrade.rst:33 ../../faq/v4_upgrade.rst:75
+#: ../../faq/v4_upgrade.rst:91 ../../faq/v4_upgrade.rst:108
+#: ../../faq/v4_upgrade.rst:120
 msgid "Execute the following::"
 msgstr "Voer het volgende uit::"
 
-#: ../../faq/v4_upgrade.rst:43
+#: ../../faq/v4_upgrade.rst:48
 msgid ""
-"If you're getting any errors, you can revert to the old version by "
-"running::"
-msgstr ""
-"Als je tegen fouten aanloopt, dan kun je terug naar de vorige versie "
-"met::"
+"If you're getting any errors, you can revert to the old version by running::"
+msgstr "Als je tegen fouten aanloopt, dan kun je terug naar de vorige versie met::"
 
-#: ../../faq/v4_upgrade.rst:63
+#: ../../faq/v4_upgrade.rst:68
 msgid "3. Generate your own ``SECRET_KEY``"
 msgstr "3. Genereer je eigen ``SECRET_KEY``"
 
-#: ../../faq/v4_upgrade.rst:65
+#: ../../faq/v4_upgrade.rst:70
 msgid ""
-"Previous versions had a hardcoded value for ``SECRET_KEY``. This was "
-"fine while running DSMR-reader in your home network, but it is not "
-"recommended for public facing instances."
+"Previous versions had a hardcoded value for ``SECRET_KEY``. This was fine while "
+"running DSMR-reader in your home network, but it is not recommended for public "
+"facing instances."
 msgstr ""
-"Vorige versies hadden een vaste waarde voor ``SECRET_KEY``. Dit was "
-"prima voor DSMR-reader binnen je eigen netwerk, maar niet wanneer het "
-"publiekelijk op Internet bereikbaar is."
+"Vorige versies hadden een vaste waarde voor ``SECRET_KEY``. Dit was prima voor "
+"DSMR-reader binnen je eigen netwerk, maar niet wanneer het publiekelijk op "
+"Internet bereikbaar is."
 
-#: ../../faq/v4_upgrade.rst:68
+#: ../../faq/v4_upgrade.rst:73
 msgid ""
-"To prevent some users from forgetting to set a custom secret key, DSMR-"
-"reader now simply requires everyone to generate a unique ``SECRET_KEY`` "
-"locally during installation (or when upgrading)."
+"To prevent some users from forgetting to set a custom secret key, DSMR-reader "
+"now simply requires everyone to generate a unique ``SECRET_KEY`` locally during "
+"installation (or when upgrading)."
 msgstr ""
-"Om te voorkomen dat sommige gebruikers in die situatie vergeten om "
-"handmatig een eigen key in te stellen, vereist DSMR-reader vanaf nu dat "
-"iedereen een eigen ``SECRET_KEY`` genereert. Ofwel tijdens de "
-"installatie ofwel tijdens het upgraden."
+"Om te voorkomen dat sommige gebruikers in die situatie vergeten om handmatig een "
+"eigen key in te stellen, vereist DSMR-reader vanaf nu dat iedereen een eigen "
+"``SECRET_KEY`` genereert. Ofwel tijdens de installatie ofwel tijdens het "
+"upgraden."
 
-#: ../../faq/v4_upgrade.rst:75
+#: ../../faq/v4_upgrade.rst:80
 msgid ""
-"Check whether the script updated your ``settings.py`` file properly. It "
-"should display some output when you execute this::"
+"Check whether the script updated your ``settings.py`` file properly. It should "
+"display some output when you execute this::"
 msgstr ""
-"Controleer of het script je ``settings.py`` goed heeft aangepast. Het "
-"zou enige output moeten geven wanneer je dit uitvoert::"
+"Controleer of het script je ``settings.py`` goed heeft aangepast. Het zou enige "
+"output moeten geven wanneer je dit uitvoert::"
 
-#: ../../faq/v4_upgrade.rst:81
+#: ../../faq/v4_upgrade.rst:86
 msgid "4. Replace ``dsmr_mqtt`` by ``dsmr_client``"
 msgstr "4. Vervang ``dsmr_mqtt`` door ``dsmr_client``"
 
-#: ../../faq/v4_upgrade.rst:83
+#: ../../faq/v4_upgrade.rst:88
 msgid ""
-"The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support "
-"more generic continuous data flows in the future (such as InfluxDB) and "
-"to offload some blocking mechanics in ``dsmr_backend`` as well."
+"The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support more "
+"generic continuous data flows in the future (such as InfluxDB) and to offload "
+"some blocking mechanics in ``dsmr_backend`` as well."
 msgstr ""
-"Het ``dsmr_mqtt`` proces is hernoemd naar ``dsmr_client`` om in de "
-"toekomst wat meer generieke dataflows te ondersteunen (zoals InfluxDB), "
-"maar ook om ``dsmr_backend`` wat meer te ontlasten."
+"Het ``dsmr_mqtt`` proces is hernoemd naar ``dsmr_client`` om in de toekomst wat "
+"meer generieke dataflows te ondersteunen (zoals InfluxDB), maar ook om "
+"``dsmr_backend`` wat meer te ontlasten."
 
-#: ../../faq/v4_upgrade.rst:90
+#: ../../faq/v4_upgrade.rst:95
 msgid ""
-"Is ``dsmr_mqtt`` listed? If **not listed**, skip the next command. "
-"Otherwise remove it::"
+"Is ``dsmr_mqtt`` listed? If **not listed**, skip the next command. Otherwise "
+"remove it::"
 msgstr ""
-"Is ``dsmr_mqtt`` getoond? Als dit **inderdaad niet het geval is**, sla "
-"het volgende commando over. Anders, verwijder het::"
+"Is ``dsmr_mqtt`` getoond? Als dit **inderdaad niet het geval is**, sla het "
+"volgende commando over. Anders, verwijder het::"
 
-#: ../../faq/v4_upgrade.rst:94
+#: ../../faq/v4_upgrade.rst:99
 msgid "Now add ``dsmr_client``::"
 msgstr "Voeg nu ``dsmr_client`` toe::"
 
-#: ../../faq/v4_upgrade.rst:98
+#: ../../faq/v4_upgrade.rst:103
 msgid "Apply changes::"
 msgstr "Pas wijzigingen toe::"
 
-#: ../../faq/v4_upgrade.rst:107
+#: ../../faq/v4_upgrade.rst:112
 msgid ""
-"There should be no (more) ``dsmr_mqtt``, but ``dsmr_client`` should be "
-"listed instead."
-msgstr ""
-"Er zou geen ``dsmr_mqtt`` meer moeten staan, maar wel ``dsmr_client``."
+"There should be no (more) ``dsmr_mqtt``, but ``dsmr_client`` should be listed "
+"instead."
+msgstr "Er zou geen ``dsmr_mqtt`` meer moeten staan, maar wel ``dsmr_client``."
 
-#: ../../faq/v4_upgrade.rst:111
+#: ../../faq/v4_upgrade.rst:116
 msgid "5. Switch DSMR-reader to ``v4.x``"
 msgstr "5. Wissel DSMR-reader naar ``v4.x``"
 
-#: ../../faq/v4_upgrade.rst:113
+#: ../../faq/v4_upgrade.rst:118
 msgid ""
-"DSMR-reader ``v4.x`` lives in a different branch, to prevent any users "
-"from unexpectedly updating to ``v4.x``."
+"DSMR-reader ``v4.x`` lives in a different branch, to prevent any users from "
+"unexpectedly updating to ``v4.x``."
 msgstr ""
-"DSMR-reader ``v4.x`` leeft in een aparte branch, om te voorkomen dat "
-"gebruikers per ongeluk upgraden naar ``v4.x``."
+"DSMR-reader ``v4.x`` leeft in een aparte branch, om te voorkomen dat gebruikers "
+"per ongeluk upgraden naar ``v4.x``."
 
-#: ../../faq/v4_upgrade.rst:136
+#: ../../faq/v4_upgrade.rst:141
 msgid "Great. You should now be on ``v4.x``!"
 msgstr "Mooi! Je zou nu op ``v4.x`` moeten zitten!"

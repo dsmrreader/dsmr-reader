@@ -678,33 +678,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Application status",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/x-www-form-urlencoded"
-									}
-								],
-								"url": {
-									"raw": "{{DSMR-reader-API-host}}/api/v2/application/status",
-									"host": [
-										"{{DSMR-reader-API-host}}"
-									],
-									"path": [
-										"api",
-										"v2",
-										"application",
-										"status"
-									]
-								}
-							},
-							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},

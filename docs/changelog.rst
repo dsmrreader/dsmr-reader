@@ -31,6 +31,7 @@ v4.0.0 - 2020-xx-xx
 - ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
 - ``Added``: Added ``dsmr_client`` command as a (by default running) replacement for ``dsmr_mqtt`` [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
 - ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
+- ``Removed``: Drop API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dennissiemensma/dsmr-reader/issues/1024>`_]
 - ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_]
 - ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
 
