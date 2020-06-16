@@ -1,0 +1,157 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../faq/v4_upgrade.rst:2
+msgid "Upgrading to DSMR-reader v4.x"
+msgstr "Upgraden naar DSMR-reader v4.x"
+
+#: ../../faq/v4_upgrade.rst:4
+msgid ""
+"DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will "
+"have to manually upgrade to make sure it will run properly."
+msgstr ""
+"DSMR-reader ``v4.x`` is backwards incompatible met ``3.x``. Je zult "
+"handmatig moeten upgraden om ervoor te zorgen dat het goed werkt."
+
+#: ../../faq/v4_upgrade.rst:8
+msgid ""
+"If you're using Docker, you can probably just install the ``v4.x`` "
+"version of the Docker container without any of the steps below."
+msgstr ""
+"Indien je Docker gebruikt, kun je waarschijnlijk gewoon de ``v4.x`` "
+"versie van de Docker container gebruiken, zonder onderstaande stappen."
+
+#: ../../faq/v4_upgrade.rst:13
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
+#: ../../faq/v4_upgrade.rst:16
+msgid "1. Update to the latest ``v3.x`` version"
+msgstr "1. Update naar de meeste recente ``v3.x`` versie"
+
+#: ../../faq/v4_upgrade.rst:18
+msgid ":doc:`See here for instructions<update>`."
+msgstr ":doc:`Zie hier voor de instructies<update>`."
+
+#: ../../faq/v4_upgrade.rst:22
+msgid "2. Install ``python3-psycopg2``"
+msgstr "2. Installeer ``python3-psycopg2``"
+
+#: ../../faq/v4_upgrade.rst:24
+msgid ""
+"If you're using PostgreSQL, the default for DSMR-reader, install the "
+"following system package::"
+msgstr ""
+"Wanneer je PostgreSQL gebruikt, de standaard voor DSMR-reader, "
+"installeer dan de volgende systeem package::"
+
+#: ../../faq/v4_upgrade.rst:28 ../../faq/v4_upgrade.rst:70
+#: ../../faq/v4_upgrade.rst:86 ../../faq/v4_upgrade.rst:103
+#: ../../faq/v4_upgrade.rst:115
+msgid "Execute the following::"
+msgstr "Voer het volgende uit::"
+
+#: ../../faq/v4_upgrade.rst:43
+msgid ""
+"If you're getting any errors, you can revert to the old version by "
+"running::"
+msgstr ""
+"Als je tegen fouten aanloopt, dan kun je terug naar de vorige versie "
+"met::"
+
+#: ../../faq/v4_upgrade.rst:63
+msgid "3. Generate your own ``SECRET_KEY``"
+msgstr "3. Genereer je eigen ``SECRET_KEY``"
+
+#: ../../faq/v4_upgrade.rst:65
+msgid ""
+"Previous versions had a hardcoded value for ``SECRET_KEY``. This was "
+"fine while running DSMR-reader in your home network, but it is not "
+"recommended for public facing instances."
+msgstr ""
+"Vorige versies hadden een vaste waarde voor ``SECRET_KEY``. Dit was "
+"prima voor DSMR-reader binnen je eigen netwerk, maar niet wanneer het "
+"publiekelijk op Internet bereikbaar is."
+
+#: ../../faq/v4_upgrade.rst:68
+msgid ""
+"To prevent some users from forgetting to set a custom secret key, DSMR-"
+"reader now simply requires everyone to generate a unique ``SECRET_KEY`` "
+"locally during installation (or when upgrading)."
+msgstr ""
+"Om te voorkomen dat sommige gebruikers in die situatie vergeten om "
+"handmatig een eigen key in te stellen, vereist DSMR-reader vanaf nu dat "
+"iedereen een eigen ``SECRET_KEY`` genereert. Ofwel tijdens de "
+"installatie ofwel tijdens het upgraden."
+
+#: ../../faq/v4_upgrade.rst:75
+msgid ""
+"Check whether the script updated your ``settings.py`` file properly. It "
+"should display some output when you execute this::"
+msgstr ""
+"Controleer of het script je ``settings.py`` goed heeft aangepast. Het "
+"zou enige output moeten geven wanneer je dit uitvoert::"
+
+#: ../../faq/v4_upgrade.rst:81
+msgid "4. Replace ``dsmr_mqtt`` by ``dsmr_client``"
+msgstr "4. Vervang ``dsmr_mqtt`` door ``dsmr_client``"
+
+#: ../../faq/v4_upgrade.rst:83
+msgid ""
+"The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support "
+"more generic continuous data flows in the future (such as InfluxDB) and "
+"to offload some blocking mechanics in ``dsmr_backend`` as well."
+msgstr ""
+"Het ``dsmr_mqtt`` proces is hernoemd naar ``dsmr_client`` om in de "
+"toekomst wat meer generieke dataflows te ondersteunen (zoals InfluxDB), "
+"maar ook om ``dsmr_backend`` wat meer te ontlasten."
+
+#: ../../faq/v4_upgrade.rst:90
+msgid ""
+"Is ``dsmr_mqtt`` listed? If **not listed**, skip the next command. "
+"Otherwise remove it::"
+msgstr ""
+"Is ``dsmr_mqtt`` getoond? Als dit **inderdaad niet het geval is**, sla "
+"het volgende commando over. Anders, verwijder het::"
+
+#: ../../faq/v4_upgrade.rst:94
+msgid "Now add ``dsmr_client``::"
+msgstr "Voeg nu ``dsmr_client`` toe::"
+
+#: ../../faq/v4_upgrade.rst:98
+msgid "Apply changes::"
+msgstr "Pas wijzigingen toe::"
+
+#: ../../faq/v4_upgrade.rst:107
+msgid ""
+"There should be no (more) ``dsmr_mqtt``, but ``dsmr_client`` should be "
+"listed instead."
+msgstr ""
+"Er zou geen ``dsmr_mqtt`` meer moeten staan, maar wel ``dsmr_client``."
+
+#: ../../faq/v4_upgrade.rst:111
+msgid "5. Switch DSMR-reader to ``v4.x``"
+msgstr "5. Wissel DSMR-reader naar ``v4.x``"
+
+#: ../../faq/v4_upgrade.rst:113
+msgid ""
+"DSMR-reader ``v4.x`` lives in a different branch, to prevent any users "
+"from unexpectedly updating to ``v4.x``."
+msgstr ""
+"DSMR-reader ``v4.x`` leeft in een aparte branch, om te voorkomen dat "
+"gebruikers per ongeluk upgraden naar ``v4.x``."
+
+#: ../../faq/v4_upgrade.rst:136
+msgid "Great. You should now be on ``v4.x``!"
+msgstr "Mooi! Je zou nu op ``v4.x`` moeten zitten!"

@@ -36,11 +36,11 @@ else
 fi
 
 
-printf "%-50s" " * Reloading process: dsmr_mqtt"
+printf "%-50s" " * Reloading process: dsmr_client"
 
-if [ -f /var/tmp/dsmrreader--dsmr_mqtt.pid ];
+if [ -f /var/tmp/dsmrreader--dsmr_client.pid ];
 then
-    cat /var/tmp/dsmrreader--dsmr_mqtt.pid | xargs kill -HUP
+    cat /var/tmp/dsmrreader--dsmr_client.pid | xargs kill -HUP
     echo "   [OK]"
 else
     echo "   [??] PID file does not exist"

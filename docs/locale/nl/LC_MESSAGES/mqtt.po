@@ -1,110 +1,119 @@
-
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"Last-Translator: \n"
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
-"Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../mqtt.rst:2
 msgid "MQTT"
 msgstr "MQTT"
 
 #: ../../mqtt.rst:6
-msgid "Only follow these step if you have enabled MQTT."
-msgstr "Voer deze stappen alleen uit wanneer je MQTT hebt ingeschakeld."
+msgid "The ``dsmr_client`` / ``dsmr_mqtt`` processes"
+msgstr "De ``dsmr_client`` / ``dsmr_mqtt`` processen"
+
+#: ../../mqtt.rst:8
+msgid ""
+"Since DSMR-reader ``v4.x``, you no longer need to manually configure "
+"``dsmr_client`` (formerly known as ``dsmr_mqtt``) for MQTT."
+msgstr ""
+"Sinds DSMR-reader ``v4.x`` hoef je niet meer handmatig ``dsmr_client`` te "
+"configureren (voorheen bekend als ``dsmr_mqtt``) voor MQTT."
 
 #: ../../mqtt.rst:10
-msgid "Contents"
-msgstr "Inhoudsopgave"
-
-#: ../../mqtt.rst:13
-msgid "Recent versions (v3.0.0 or higher)"
-msgstr "Recente versies (v3.0.0 of hoger)"
-
-#: ../../mqtt.rst:15 ../../mqtt.rst:32
 msgid ""
-"Execute ``sudo supervisorctl status`` and check whether it includes "
-"``dsmr_mqtt`` with status ``RUNNING``. If not, continue with the steps "
-"below."
+"It should be already configured while installing or upgrading DSMR-reader and "
+"listed running if you execute ``sudo supervisorctl status``."
 msgstr ""
-"Voer ``sudo supervisorctl status`` uit en controleer of je ``dsmr_mqtt`` "
-"ziet met status ``RUNNING``. Zo niet, volg de stappen hieronder."
+"Het zou al geconfigureerd moeten zijn bij installatie of upgrade van DSMR-"
+"reader. Zie ook of deze getoond wordt bij het uitvoeren van ``sudo supervisorctl "
+"status``."
 
-#: ../../mqtt.rst:17
-msgid "Copy the MQTT process config::"
-msgstr "Kopieer het MQTT-configuratiebestand::"
-
-#: ../../mqtt.rst:21 ../../mqtt.rst:57
-msgid "Apply changes::"
-msgstr "Pas de wijzigingen toe::"
-
-#: ../../mqtt.rst:26 ../../mqtt.rst:62
-msgid ""
-"Executing ``sudo supervisorctl status`` should now include ``dsmr_mqtt`` "
-"with status ``RUNNING``."
-msgstr ""
-"Wanneer je ``sudo supervisorctl status`` uitvoert, zou je ``dsmr_mqtt`` "
-"moeten zien met status ``RUNNING``."
-
-#: ../../mqtt.rst:30
-msgid "Older versions (< v3.0.0)"
-msgstr "Oudere versies (< v3.0.0)"
-
-#: ../../mqtt.rst:34
-msgid ""
-"Open ``/etc/supervisor/conf.d/dsmr-reader.conf`` (sudo required) and "
-"find::"
-msgstr "Open ``/etc/supervisor/conf.d/dsmr-reader.conf`` (sudo nodig) en zoek::"
-
-#: ../../mqtt.rst:47
-msgid "Change::"
-msgstr "Verander::"
-
-#: ../../mqtt.rst:51
-msgid "To::"
-msgstr "Naar::"
-
-#: ../../mqtt.rst:55
-msgid "Save the file."
-msgstr "Sla het bestand op."
-
-#: ../../mqtt.rst:67
+#: ../../mqtt.rst:14
 msgid "MQTT caching"
 msgstr "MQTT cache"
 
-#: ../../mqtt.rst:69
-msgid "Since DSMR-reader ``v2.6`` MQTT messages are:"
-msgstr "Sinds DSMR-reader ``v2.6`` MQTT-berichten worden:"
+#: ../../mqtt.rst:16
+msgid "MQTT messages are:"
+msgstr "MQTT-berichten worden:"
 
-#: ../../mqtt.rst:71
+#: ../../mqtt.rst:18
 msgid ""
-"Sent with the ``retain`` flag, asking the broker to cache the latest "
-"value sent to each topic."
+"Sent with the ``retain`` flag, asking the broker to cache the latest value sent "
+"to each topic."
 msgstr ""
-"Verstuurd met de ``retain`` vlag, waardoor de broker de laatste waarde "
-"van elk topic bewaart."
+"Verstuurd met de ``retain`` vlag, waardoor de broker de laatste waarde van elk "
+"topic bewaart."
 
-#: ../../mqtt.rst:72
+#: ../../mqtt.rst:19
 msgid "Cached for an hour, to reduce the number of duplicate messages sent."
 msgstr ""
-"Gecached gedurende een uur, om het aantal dubbele berichten te "
-"verminderen."
+"Gecached gedurende een uur, om het aantal dubbele berichten te verminderen."
 
-#: ../../mqtt.rst:73
+#: ../../mqtt.rst:20
 msgid ""
-"Discarded when there is already another unsent message queued with the "
-"exact same topic and contents."
+"Discarded when there is already another unsent message queued with the exact "
+"same topic and contents."
 msgstr ""
-"Genegeerd wanneer er al een soortgelijk onverstuurd bericht klaarstaat, "
-"met exact hetzelde topic en inhoud."
+"Genegeerd wanneer er al een soortgelijk onverstuurd bericht klaarstaat, met "
+"exact hetzelfde topic en inhoud."
 
-#: ../../mqtt.rst:75
+#: ../../mqtt.rst:22
 msgid "This prevents duplicate messages and removes a significant overhead."
 msgstr "Dit zorgt voor aanzienlijk minder overhead."
+
+#~ msgid "Only follow these step if you have enabled MQTT."
+#~ msgstr "Voer deze stappen alleen uit wanneer je MQTT hebt ingeschakeld."
+
+#~ msgid "Contents"
+#~ msgstr "Inhoudsopgave"
+
+#~ msgid "Recent versions (v3.0.0 or higher)"
+#~ msgstr "Recente versies (v3.0.0 of hoger)"
+
+#~ msgid ""
+#~ "Execute ``sudo supervisorctl status`` and check whether it includes "
+#~ "``dsmr_mqtt`` with status ``RUNNING``. If not, continue with the steps below."
+#~ msgstr ""
+#~ "Voer ``sudo supervisorctl status`` uit en controleer of je ``dsmr_mqtt`` ziet "
+#~ "met status ``RUNNING``. Zo niet, volg de stappen hieronder."
+
+#~ msgid "Copy the MQTT process config::"
+#~ msgstr "Kopieer het MQTT-configuratiebestand::"
+
+#~ msgid "Apply changes::"
+#~ msgstr "Pas de wijzigingen toe::"
+
+#~ msgid ""
+#~ "Executing ``sudo supervisorctl status`` should now include ``dsmr_mqtt`` with "
+#~ "status ``RUNNING``."
+#~ msgstr ""
+#~ "Wanneer je ``sudo supervisorctl status`` uitvoert, zou je ``dsmr_mqtt`` "
+#~ "moeten zien met status ``RUNNING``."
+
+#~ msgid "Older versions (< v3.0.0)"
+#~ msgstr "Oudere versies (< v3.0.0)"
+
+#~ msgid ""
+#~ "Open ``/etc/supervisor/conf.d/dsmr-reader.conf`` (sudo required) and find::"
+#~ msgstr "Open ``/etc/supervisor/conf.d/dsmr-reader.conf`` (sudo nodig) en zoek::"
+
+#~ msgid "Change::"
+#~ msgstr "Verander::"
+
+#~ msgid "To::"
+#~ msgstr "Naar::"
+
+#~ msgid "Save the file."
+#~ msgstr "Sla het bestand op."
+
+#~ msgid "Since DSMR-reader ``v2.6`` MQTT messages are:"
+#~ msgstr "Sinds DSMR-reader ``v2.6`` MQTT-berichten worden:"

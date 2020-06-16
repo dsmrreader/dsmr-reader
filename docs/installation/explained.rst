@@ -257,7 +257,6 @@ Remove the default Nginx vhost (**only when you do not use it yourself, see the 
     sudo service nginx reload
 
 
-
 10. Supervisor
 ^^^^^^^^^^^^^^
 Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. 
@@ -267,6 +266,7 @@ It's also configured to bring the entire application up again after a shutdown o
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_datalogger.conf /etc/supervisor/conf.d/
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_backend.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_client.conf /etc/supervisor/conf.d/
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
 
 - Login to ``supervisorctl`` management console::
@@ -290,14 +290,9 @@ Example of everything running well::
     dsmr_backend                     RUNNING    pid 123, uptime 0:00:06
     dsmr_datalogger                  RUNNING    pid 456, uptime 0:00:07
     dsmr_webinterface                RUNNING    pid 789, uptime 0:00:07
+    dsmr_client                      RUNNING    pid 982, uptime 0:00:08
 
-- Want to check whether the datalogger works? Just tail its log in supervisor with::
-
-    supervisor> tail -f dsmr_datalogger
-    
-You should see similar output as the ``cu``-command printed earlier in the installation process.
-
-Want to quit supervisor? ``CTRL + C`` to stop tailing and then ``CTRL + D`` once to exit supervisor command line.
+Want to quit supervisor? Press ``CTRL + D`` to exit supervisor command line.
 
 
 ----

@@ -53,8 +53,8 @@ DSMR Reader's documentation
    faq/restart_processes
    faq/database
    faq/uninstall
-   faq/v3_upgrade
    faq/v4_upgrade
+   faq/v3_upgrade
    contributing
    credits
    donations

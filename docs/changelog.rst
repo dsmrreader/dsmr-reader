@@ -12,15 +12,27 @@ v4.x releases
 ^^^^^^^^^^^^^
 
 
+Unreleased
+----------
+
+- Remove backup status info from `tools`, now available in `scheduled_processes`
+- Remove mindergas status info from `tools`, now available in `scheduled_processes`
+- Maybe also drop the entire API support for status_info()
+
+
+
 v4.0.0 - 2020-xx-xx
 -------------------
 
 .. warning::
 
-    This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See `the v4 upgrade guide <https://dsmr-reader.readthedocs.io/en/v4/faq/v4_upgrade.html>`_ for more information.
+    This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See :doc:`the v4 upgrade guide <faq/v4_upgrade>` for more information.
 
-- ``Added``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
+
+- ``Added``: Added ``dsmr_client`` command as (an always-running) replacement for ``dsmr_mqtt`` [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
+- ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
 - ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_]
+- ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
 
 
 ----
@@ -175,11 +187,11 @@ v2.x releases
 
 .. warning::
 
-    This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See `the v3 upgrade guide <https://dsmr-reader.readthedocs.io/en/v4/faq/v3_upgrade.html>`_ for more information.
+    This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See :doc:`the v3 upgrade guide <faq/v3_upgrade>` for more information.
 
 
 v2.15.0 - 2020-01-15
------------------
+--------------------
 
 - [`#825 <https://github.com/dennissiemensma/dsmr-reader/issues/825>`_] Last v2.x release
 
@@ -529,7 +541,7 @@ v1.21.0 - 2018-07-11
 
 
 v1.20.0 - 2018-07-04
--------------------
+--------------------
 
 - [`#484 <https://github.com/dennissiemensma/dsmr-reader/issues/484>`_] API call om huidige versie terug te geven
 - [`#291 <https://github.com/dennissiemensma/dsmr-reader/issues/291>`_] API option to get status info
@@ -947,7 +959,7 @@ v1.0.0 - 2016-04-07
 
 
 [β] v0.1 (2015-10-29) to 0.16 (2016-04-06)
--------------------
+------------------------------------------
 
 .. note::
 

@@ -18,31 +18,8 @@ DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to ma
 :doc:`See here for instructions<update>`.
 
 
-2. Python version
-^^^^^^^^^^^^^^^^^
-
-The minimum Python version required remains **unchanged** in this release. It's still ``Python 3.6`` or higher.
-
-
-3. Generate ``SECRET_KEY``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Previous versions had a hardcoded value for ``SECRET_KEY``.
-This was fine while running DSMR-reader in your home network, but it is not recommended for public facing instances.
-To prevent some users for setting a local secret, DSMR-reader now requires everyone to generate a unique ``SECRET_KEY`` locally during installation (or when upgrading).
-
-Execute the following::
-
-    sudo su - dsmr
-    ./tools/generate-secret-key.sh
-
-Check whether the script updated your ``settings.py`` file properly. It should display some output::
-
-    grep 'SECRET_KEY=' dsmrreader/settings.py
-
-
-4. Install python3-psycopg2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2. Install ``python3-psycopg2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you're using PostgreSQL, the default for DSMR-reader, install the following system package::
 
@@ -67,13 +44,6 @@ Execute the following::
 
         sudo su - dsmr
 
-        # One of these checkouts might fail, but it's okay:
-        git checkout -b v3 origin/v3
-        git checkout v3
-
-        # Just make sure you're at v3 now:
-        git branch
-
         deactivate
         cd ~
         mv .virtualenvs/dsmrreader .virtualenvs/v4-dsmrreader
@@ -88,11 +58,57 @@ Execute the following::
         logout
         sudo supervisorctl restart all
 
-Everything okay? Time to upgrade DSMR-reader to v4.x.
+
+3. Generate your own ``SECRET_KEY``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Previous versions had a hardcoded value for ``SECRET_KEY``.
+This was fine while running DSMR-reader in your home network, but it is not recommended for public facing instances.
+
+To prevent some users from forgetting to set a custom secret key, DSMR-reader now simply requires everyone to generate a unique ``SECRET_KEY`` locally during installation (or when upgrading).
+
+Execute the following::
+
+    sudo su - dsmr
+    ./tools/generate-secret-key.sh
+
+Check whether the script updated your ``settings.py`` file properly. It should display some output when you execute this::
+
+    grep 'SECRET_KEY=' dsmrreader/settings.py
 
 
-5. Switching DSMR-reader to ``v4.x``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+4. Replace ``dsmr_mqtt`` by ``dsmr_client``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support more generic continuous data flows in the future (such as InfluxDB) and to offload some blocking mechanics in ``dsmr_backend`` as well.
+
+
+Execute the following::
+
+    sudo supervisorctl status
+
+Is ``dsmr_mqtt`` listed? If **not listed**, skip the next command. Otherwise remove it::
+
+    sudo rm /etc/supervisor/conf.d/dsmr_mqtt.conf
+
+Now add ``dsmr_client``::
+
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_client.conf /etc/supervisor/conf.d/
+
+* Apply changes::
+
+    sudo supervisorctl reread
+    sudo supervisorctl update
+
+Execute the following::
+
+    sudo supervisorctl status
+
+There should be no (more) ``dsmr_mqtt``, but ``dsmr_client`` should be listed instead.
+
+
+5. Switch DSMR-reader to ``v4.x``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 DSMR-reader ``v4.x`` lives in a different branch, to prevent any users from unexpectedly updating to ``v4.x``.
 

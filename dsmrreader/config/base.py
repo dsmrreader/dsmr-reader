@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    # Django internals.
+    # Django.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,14 +41,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-    # Third party apps/plugins.
+    # Third party.
     'solo.apps.SoloAppConfig',
     'colorfield',
     'django_filters',
     'rangefilter',
     'rest_framework',
 
-    # Local project apps.
+    # DSMR-reader.
     'dsmr_api.apps.ApiAppConfig',
     'dsmr_backend.apps.BackendAppConfig',
     'dsmr_backup.apps.BackupAppConfig',
@@ -63,10 +63,10 @@ INSTALLED_APPS = (
     'dsmr_pvoutput.apps.PvoutputAppConfig',
     'dsmr_stats.apps.StatsAppConfig',
     'dsmr_weather.apps.WeatherAppConfig',
+    'dsmr_client.apps.DsmrClientConfig',
 )
 
 MIDDLEWARE = (
-    # Debug toolbar.
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',

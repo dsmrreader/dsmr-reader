@@ -19,7 +19,7 @@ DSMR-reader technically consists of these processes (some may or may not be used
 +----------------+----------------------------------+
 | Backend        | ``dsmr_backend``                 |
 +----------------+----------------------------------+
-| Export or MQTT | ``dsmr_export`` or ``dsmr_mqtt`` |
+| Client or MQTT | ``dsmr_client`` or ``dsmr_mqtt`` |
 +----------------+----------------------------------+
 
 You can view the status of all processes by running::
@@ -45,7 +45,7 @@ If this does not resolve your issue, check the logfiles for more information:
 +----------------+----------------------------------------------------------------------------------+
 | Backend        | ``/var/log/supervisor/dsmr_backend.log``                                         |
 +----------------+----------------------------------------------------------------------------------+
-| Export or MQTT | ``/var/log/supervisor/dsmr_export.log`` or ``/var/log/supervisor/dsmr_mqtt.log`` |
+| Export or MQTT | ``/var/log/supervisor/dsmr_client.log`` or ``/var/log/supervisor/dsmr_mqtt.log`` |
 +----------------+----------------------------------------------------------------------------------+
 
 
@@ -54,7 +54,7 @@ Logging
 If the processes do run, but you cannot find an error, (e.g.: things seem to hang or tend to be slow), there might be another issue at hand.
 
 DSMR-reader has DEBUG-logging, which makes the system log very verbose about what it's trying to do.
-This applies **specifically** to the ``dsmr_backend`` and ``dsmr_export`` (MQTT) processes.
+This applies **specifically** to the ``dsmr_backend`` and ``dsmr_client`` (MQTT) processes.
 
 The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:
 

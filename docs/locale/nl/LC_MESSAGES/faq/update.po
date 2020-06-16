@@ -9,41 +9,37 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
+"Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:2
+#: ../../faq/update.rst:2
 msgid "FAQ: Updating the application"
 msgstr "FAQ: De applicatie updaten"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:4
+#: ../../faq/update.rst:4
 msgid ""
-"The version you are running is always based on the 'latest' version of the "
-"application, called the `master` branch. Every once in a while there may be "
-"updates. You can also easily check for updates by using the application's "
-"Status page."
+"Every once in a while there may be updates. You can also easily check "
+"for updates by using the application's Status page."
 msgstr ""
-"De versie die je draait is altijd gebaseerd op de 'laatste' versie van de "
-"applicatie, ook wel de `master` branch genoemd. Met enige regelmaat zijn er "
-"updates beschikbaar. Je kunt dit ook eenvoudig controleren op de Status-pagina "
-"van de applicatie."
+"Met enige regelmaat zijn er updates beschikbaar. Je kunt dit ook "
+"eenvoudig controleren op de Status-pagina van de applicatie."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:9
+#: ../../faq/update.rst:8
 msgid ""
 "Before updating, **please make sure you have a recent backup of your "
 "database**! :doc:`More information about backups can be found here<../"
 "application>`."
 msgstr ""
-"Voordat je bijwerkt, **zorg ervoor dat je in ieder geval een recente back-up "
-"van je database hebt**! :doc:`Meer informatie over back-ups kun je hier "
-"vinden<../application>`."
+"Voordat je bijwerkt, **zorg ervoor dat je in ieder geval een recente "
+"back-up van je database hebt**! :doc:`Meer informatie over back-ups kun "
+"je hier vinden<../application>`."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/faq/update.rst:11
+#: ../../faq/update.rst:10
 msgid ""
-"You can update your application to the latest version by executing **deploy."
-"sh**, located in the root of the project. Make sure to execute it while logged "
-"in as the ``dsmr`` user::"
+"You can update your application to the latest version by executing "
+"``deploy.sh``, located in the root of the project. Make sure to execute "
+"it while logged in as the ``dsmr`` user::"
 msgstr ""
-"Je kun je applicatie bijwerken door het script **deploy.sh** uit te voeren, "
-"die in zich in de hoofdmap van het project bevindt. Zorg er wel voor dat je "
-"ingelogd bent als ``dsmr`` gebruiker op de terminal::"
+"Je kun je applicatie bijwerken door het script ``deploy.sh`` uit te "
+"voeren, die in zich in de hoofdmap van het project bevindt. Zorg er wel "
+"voor dat je ingelogd bent als ``dsmr`` gebruiker op de terminal::"
