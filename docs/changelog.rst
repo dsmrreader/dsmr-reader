@@ -41,6 +41,11 @@ v4.0.0 - 2020-xx-xx
 v3.x releases
 ^^^^^^^^^^^^^
 
+v3.10.1 - 2020-06-15
+--------------------
+
+- [`#1023 <https://github.com/dennissiemensma/dsmr-reader/issues/1023>`_] Django security update
+
 
 v3.10.0 - 2020-05-29
 --------------------
