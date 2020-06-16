@@ -17,7 +17,6 @@ Unreleased
 
 - Remove backup status info from ``tools``, now available in ``scheduled_processes``
 - Remove mindergas status info from ``tools``, now available in ``scheduled_processes``
-- Maybe also drop the entire API support for ``status_info()``
 
 
 

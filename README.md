@@ -25,4 +25,4 @@
 ## Screenshots
 Check out some previews [in the documentation](https://dsmr-reader.readthedocs.io/en/v4/screenshots.html).
 
-![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/frontend/dashboard.png)
+![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/frontend/dashboard.png?r=v4)
