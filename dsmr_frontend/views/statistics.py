@@ -5,12 +5,13 @@ from django.views.generic.base import TemplateView, View
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import ElectricityStatistics
 import dsmr_backend.services.backend
 
 
-class Statistics(TemplateView):
+class Statistics(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/statistics.html'
 
     def get_context_data(self, **kwargs):
@@ -36,7 +37,7 @@ class Statistics(TemplateView):
         return context_data
 
 
-class StatisticsXhrData(View):
+class StatisticsXhrData(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
         return JsonResponse({

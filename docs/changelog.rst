@@ -15,9 +15,9 @@ v4.x releases
 Unreleased
 ----------
 
-- Remove backup status info from `tools`, now available in `scheduled_processes`
-- Remove mindergas status info from `tools`, now available in `scheduled_processes`
-- Maybe also drop the entire API support for status_info()
+- Remove backup status info from ``tools``, now available in ``scheduled_processes``
+- Remove mindergas status info from ``tools``, now available in ``scheduled_processes``
+- Maybe also drop the entire API support for ``status_info()``
 
 
 
@@ -28,8 +28,8 @@ v4.0.0 - 2020-xx-xx
 
     This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See :doc:`the v4 upgrade guide <faq/v4_upgrade>` for more information.
 
-
-- ``Added``: Added ``dsmr_client`` command as (an always-running) replacement for ``dsmr_mqtt`` [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
+- ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
+- ``Added``: Added ``dsmr_client`` command as a (by default running) replacement for ``dsmr_mqtt`` [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
 - ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
 - ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_]
 - ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]

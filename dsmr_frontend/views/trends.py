@@ -3,6 +3,7 @@ from django.views.generic.base import TemplateView, View
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_consumption.services
@@ -10,7 +11,7 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
-class Trends(TemplateView):
+class Trends(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/trends.html'
 
     def get_context_data(self, **kwargs):
@@ -24,7 +25,7 @@ class Trends(TemplateView):
         return context_data
 
 
-class TrendsXhrAvgConsumption(View):
+class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching average consumption, in JSON. """
     def get(self, request):  # noqa: C901
         data = {
@@ -63,7 +64,7 @@ class TrendsXhrAvgConsumption(View):
         return JsonResponse(data)
 
 
-class TrendsXhrElectricityByTariff(View):
+class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching electricity consumption by tariff, in JSON. """
     def get(self, request):  # noqa: C901
         capabilities = dsmr_backend.services.backend.get_capabilities()

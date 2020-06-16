@@ -139,6 +139,14 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Name of tariff 2 (returned)'),
         help_text=_("Defaults to 'normal tariff' or 'high tariff' returned")
     )
+    always_require_login = models.BooleanField(
+        default=False,
+        verbose_name=_('Always require login'),
+        help_text=_(
+            'Enable this to enforce login on all pages. Useful to restrict unauthorized access when hosted or '
+            'reachable on the Internet.'
+        )
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils import timezone, formats
 
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.note import Note
@@ -13,7 +14,7 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
-class Archive(TemplateView):
+class Archive(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/archive.html'
 
     def get_context_data(self, **kwargs):
@@ -34,7 +35,7 @@ class Archive(TemplateView):
         return context_data
 
 
-class ArchiveXhrSummary(TemplateView):
+class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
     """ XHR view for fetching statistics, HTML response. """
     template_name = 'dsmr_frontend/fragments/archive-xhr-statistics.html'
 
@@ -43,10 +44,12 @@ class ArchiveXhrSummary(TemplateView):
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
 
+        now = timezone.now().strftime(formats.get_format('DSMR_STRFTIME_DATE_FORMAT'))
+        given_date = self.request.GET.get('date', now)
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
-            self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
+            given_date, formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
-        selected_level = self.request.GET['level']
+        selected_level = self.request.GET.get('level', 'days')
 
         DATA_MAPPING = {
             'days': dsmr_stats.services.day_statistics,
@@ -73,15 +76,19 @@ class ArchiveXhrSummary(TemplateView):
         return context_data
 
 
-class ArchiveXhrGraphs(View):
+class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the hour statistics of a day, JSON encoded. """
     def get(self, request):  # noqa: C901
         capabilities = dsmr_backend.services.backend.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()
+
+        now = timezone.now().strftime(formats.get_format('DSMR_STRFTIME_DATE_FORMAT'))
+        given_date = request.GET.get('date', now)
         selected_datetime = timezone.make_aware(timezone.datetime.strptime(
-            self.request.GET['date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
+            given_date, formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
-        selected_level = self.request.GET['level']
+        selected_level = request.GET.get('level', 'days')
+
         data = defaultdict(list)
         response = {
             'merge_electricity_tariffs': frontend_settings.merge_electricity_tariffs,

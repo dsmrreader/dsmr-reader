@@ -3,6 +3,7 @@ import decimal
 from django.views.generic.base import TemplateView
 from django.utils import timezone, formats
 
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.views.archive import Archive
 import dsmr_consumption.services
@@ -10,11 +11,11 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
-class Compare(Archive):
+class Compare(Archive):  # ConfigurableLoginRequiredMixin already in Archive
     template_name = 'dsmr_frontend/compare.html'
 
 
-class CompareXhrSummary(TemplateView):
+class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
     """ XHR view for comparing two statistics, HTML response. """
     template_name = 'dsmr_frontend/fragments/compare-xhr-statistics.html'
 
@@ -23,13 +24,14 @@ class CompareXhrSummary(TemplateView):
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
 
+        now = timezone.now().strftime(formats.get_format('DSMR_STRFTIME_DATE_FORMAT'))
         selected_base_datetime = timezone.make_aware(timezone.datetime.strptime(
-            self.request.GET['base_date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
+            self.request.GET.get('base_date', now), formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
         selected_comparison_datetime = timezone.make_aware(timezone.datetime.strptime(
-            self.request.GET['comparison_date'], formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
+            self.request.GET.get('comparison_date', now), formats.get_format('DSMR_STRFTIME_DATE_FORMAT')
         ))
-        selected_level = self.request.GET['level']
+        selected_level = self.request.GET.get('level', 'days')
 
         DATA_MAPPING = {
             'days': dsmr_stats.services.day_statistics,

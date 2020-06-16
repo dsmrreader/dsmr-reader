@@ -2,9 +2,10 @@ from django.http import JsonResponse
 from django.views.generic.base import View, TemplateView
 
 import dsmr_backend.services.backend
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 
 
-class Status(TemplateView):
+class Status(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/status.html'
 
     def get_context_data(self, **kwargs):
@@ -14,7 +15,7 @@ class Status(TemplateView):
         return context_data
 
 
-class XhrUpdateChecker(View):
+class XhrUpdateChecker(ConfigurableLoginRequiredMixin, View):
     """ XHR view performing a version check versus Github. """
     def get(self, request):
         return JsonResponse({

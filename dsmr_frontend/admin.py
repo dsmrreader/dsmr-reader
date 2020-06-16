@@ -9,6 +9,11 @@ from .models.settings import FrontendSettings
 class FrontendSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
+            _('Security'), {
+                'fields': ['always_require_login'],
+            }
+        ),
+        (
             _('Interface'), {
                 'fields': ['merge_electricity_tariffs'],
             }

@@ -5,9 +5,10 @@ from django.http import JsonResponse
 from django.conf import settings
 
 import dsmr_consumption.services
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 
 
-class XhrHeader(View):
+class XhrHeader(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
     def get(self, request):
         data = dsmr_consumption.services.live_electricity_consumption()

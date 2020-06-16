@@ -2,6 +2,7 @@ import json
 from decimal import Decimal
 from unittest import mock
 
+from django.contrib.auth.models import User
 from django.test.utils import override_settings
 from django.test import TestCase, Client
 from django.urls import reverse
@@ -11,6 +12,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics
 
 
@@ -184,3 +186,65 @@ class TestViewsWithoutGas(TestViews):
     def setUp(self):
         super(TestViewsWithoutGas, self).setUp()
         self.assertFalse(GasConsumption.objects.exists())
+
+
+class TestAlwaysRequireLoginDisabled(TestCase):
+    """ Tests whether all views are blocked when login is required. """
+    ALWAYS_REQUIRE_LOGIN = False
+    LOGGED_IN = False
+    # Some views are hard to get right or have a redirect as their base feature or are already password protected.
+    EXEMPTED_VIEWS = (
+        'changelog-redirect',
+        'docs-redirect',
+        'feedback-redirect',
+        'donations-redirect',
+        'configuration',
+        'export',
+        'export-as-csv',
+        'notification-xhr-mark-read',
+        'notification-xhr-mark-all-read',
+    )
+
+    def setUp(self):
+        frontend_settings = FrontendSettings.get_solo()
+        frontend_settings.always_require_login = self.ALWAYS_REQUIRE_LOGIN
+        frontend_settings.save()
+
+        self.client = Client()
+        user = User.objects.create_user('testuser', 'unknown@localhost', 'testpasswd')
+
+        if self.LOGGED_IN:
+            self.client.login(username=user.username, password='testpasswd')
+
+    def test_frontend_views(self):
+        import dsmr_frontend.urls
+
+        for current_view in dsmr_frontend.urls.urlpatterns:
+            if current_view.name in self.EXEMPTED_VIEWS:
+                continue
+
+            url = reverse('frontend:{}'.format(current_view.name))
+            response = self.client.get(url)
+
+            if self.ALWAYS_REQUIRE_LOGIN and not self.LOGGED_IN:
+                self.assertEqual(response.status_code, 302, 'Unexpected status code for: {}'.format(url))
+                self.assertEqual(
+                    response['Location'],
+                    '/admin/login/?next={}'.format(url),
+                    'Unexpected redirect for: {}'.format(url)
+                )
+            else:
+                # This only works for most views, which actually return an HTTP 200.
+                self.assertEqual(response.status_code, 200, 'Unexpected status code for: {}'.format(url))
+
+
+class TestAlwaysRequireLoginEnabledAndNotLoggedIn(TestAlwaysRequireLoginDisabled):
+    """ Restricted and not logged in. """
+    ALWAYS_REQUIRE_LOGIN = True
+    LOGGED_IN = False
+
+
+class TestAlwaysRequireLoginEnabledAndLoggedIn(TestAlwaysRequireLoginDisabled):
+    """ Restricted and but logged in. """
+    ALWAYS_REQUIRE_LOGIN = True
+    LOGGED_IN = True

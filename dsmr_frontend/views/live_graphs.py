@@ -4,6 +4,7 @@ from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_frontend.forms import DashboardElectricityConsumptionForm
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
@@ -12,7 +13,7 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
-class LiveGraphs(TemplateView):
+class LiveGraphs(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/live-graphs.html'
 
     def get_context_data(self, **kwargs):
@@ -27,7 +28,7 @@ class LiveGraphs(TemplateView):
         return context_data
 
 
-class LiveXhrElectricityConsumption(View):
+class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the electricity consumption graph data, in JSON. """
     def get(self, request):  # noqa: C901
         form = DashboardElectricityConsumptionForm(request.GET)
@@ -123,7 +124,7 @@ class LiveXhrElectricityConsumption(View):
         return int(kw_or_none * 1000)
 
 
-class LiveXhrGasConsumption(View):
+class LiveXhrGasConsumption(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the gas consumption graph data, in JSON. """
     def get(self, request):  # noqa: C901
         data = {
@@ -145,7 +146,7 @@ class LiveXhrGasConsumption(View):
         return JsonResponse(data)
 
 
-class LiveXhrTemperature(View):
+class LiveXhrTemperature(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the temperature graph data, in JSON. """
     def get(self, request):  # noqa: C901
         data = {

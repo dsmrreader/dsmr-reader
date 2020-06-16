@@ -1,11 +1,12 @@
 from django.views.generic.base import TemplateView
 
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
 import dsmr_backend.services.backend
 import dsmr_consumption.services
 
 
-class EnergyContracts(TemplateView):
+class EnergyContracts(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/energy-contracts.html'
 
     def get_context_data(self, **kwargs):

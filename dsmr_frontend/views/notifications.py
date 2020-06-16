@@ -6,10 +6,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.edit import FormView
 
 from dsmr_frontend.forms import NotificationReadForm
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.message import Notification
 
 
-class Notifications(TemplateView):
+class Notifications(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/notifications.html'
 
     def get_context_data(self, **kwargs):

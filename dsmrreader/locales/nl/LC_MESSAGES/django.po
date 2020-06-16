@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-16 21:09+0200\n"
+"PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -672,6 +674,9 @@ msgstr "Kan niet authenticeren met Dropbox, inloggegevens weggehaald. Fout: {}"
 msgid "Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
 msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
 
+msgid "Security"
+msgstr "Beveiliging"
+
 msgid "Interface"
 msgstr "Interface"
 
@@ -906,6 +911,12 @@ msgstr "Naam van tarief 2 (teruglevering)"
 msgid "Defaults to 'normal tariff' or 'high tariff' returned"
 msgstr "Standaard: \"Normaal tarief of hoogtarief\" (teruglevering)"
 
+msgid "Always require login"
+msgstr "Verplicht overal inloggen"
+
+msgid "Enable this to enforce login on all pages. Useful to restrict unauthorized access when hosted or reachable on the Internet."
+msgstr "Schakel dit in om te forceren dat er altijd ingelogd moet worden voor alle pagina's. Nuttig om bijvoorbeeld onbevoegde toegang te weigeren wanneer de applicatie wordt gehost op (of bereikbaar is via) het Internet."
+
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
 
@@ -1091,6 +1102,9 @@ msgstr "Gasprijs/kosten"
 
 msgid "Electricity price/costs"
 msgstr "Elektriciteitsprijs/kosten"
+
+msgid "Password protection"
+msgstr "Beveiliging met wachtwoord"
 
 msgid "Merge tariffs"
 msgstr "Voeg tarieven samen"

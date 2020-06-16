@@ -56,7 +56,7 @@ urlpatterns = [
     path('feedback-redirect', FeedbackRedirect.as_view(), name='feedback-redirect'),
     path('donations-redirect', DonationsRedirect.as_view(), name='donations-redirect'),
 
-    # Views requiring authentication.
+    # Views always requiring authentication.
     path('configuration', Configuration.as_view(), name='configuration'),
     path('export', Export.as_view(), name='export'),
     path('export/csv', ExportAsCsv.as_view(), name='export-as-csv'),

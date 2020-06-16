@@ -2,6 +2,7 @@ from django.views.generic.base import TemplateView
 from django.utils import timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.settings import DataloggerSettings
@@ -10,7 +11,7 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
-class Dashboard(TemplateView):
+class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = 'dsmr_frontend/dashboard.html'
 
     def get_context_data(self, **kwargs):
