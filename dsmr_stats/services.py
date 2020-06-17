@@ -336,10 +336,12 @@ def recalculate_prices():
 
         prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
         current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
-            current_day.electricity1 * prices.electricity_delivered_1_price
+            current_day.electricity1 * prices.electricity_delivered_1_price -
+            current_day.electricity1_returned * prices.electricity_returned_1_price
         )
         current_day.electricity2_cost = dsmr_consumption.services.round_decimal(
-            current_day.electricity2 * prices.electricity_delivered_2_price
+            current_day.electricity2 * prices.electricity_delivered_2_price -
+            current_day.electricity2_returned * prices.electricity_returned_2_price
         )
 
         if current_day.gas is not None:

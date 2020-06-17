@@ -813,6 +813,42 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(day_totals.gas_cost, 5)
         self.assertEqual(day_totals.total_cost, 55)
 
+    def test_recalculate_prices_return(self):
+        """ Electricity return should be taken into account. """
+        target_day = timezone.make_aware(timezone.datetime(2018, 1, 1))
+        EnergySupplierPrice.objects.create(
+            start=target_day.date(),
+            end=target_day.date(),
+            electricity_delivered_1_price=1,
+            electricity_delivered_2_price=2,
+            electricity_returned_1_price=0.5,
+            electricity_returned_2_price=1,
+            gas_price=0
+        )
+        DayStatistics.objects.create(
+            day=target_day.date(),
+            total_cost=000,
+            electricity1=10,
+            electricity2=20,
+            electricity1_cost=000,
+            electricity2_cost=000,
+            # Previously not taken into account
+            electricity1_returned=10,
+            electricity2_returned=5,
+            gas=0
+        )
+        day_totals = DayStatistics.objects.all()[0]
+        self.assertEqual(day_totals.electricity1_cost, 0)
+        self.assertEqual(day_totals.electricity2_cost, 0)
+        self.assertEqual(day_totals.total_cost, 0)
+
+        dsmr_stats.services.recalculate_prices()
+
+        day_totals = DayStatistics.objects.all()[0]
+        self.assertEqual(day_totals.electricity1_cost, 5)
+        self.assertEqual(day_totals.electricity2_cost, 35)
+        self.assertEqual(day_totals.total_cost, 40)
+
     def test_reconstruct_missing_day_statistics(self):
         # Existing day should be ignored.
         DayStatistics.objects.create(

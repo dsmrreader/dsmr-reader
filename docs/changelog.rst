@@ -41,6 +41,13 @@ v4.0.0 - 2020-xx-xx
 v3.x releases
 ^^^^^^^^^^^^^
 
+v3.11.0 - 2020-06-17
+--------------------
+
+- [`#1009 <https://github.com/dennissiemensma/dsmr-reader/issues/1009>`_] dsmr_stats_recalculate_prices neemt teruglevering niet mee
+- [`#1017 <https://github.com/dennissiemensma/dsmr-reader/issues/1017>`_] Updated eCharts to v4.8
+
+
 v3.10.1 - 2020-06-15
 --------------------
 

@@ -7,9 +7,7 @@ assignees: ''
 
 ---
 
-DSMR-reader is gemaakt om door jezelf te gebruiken en is daarom niet van buitenaf te debuggen. 
-Daarom is het belangrijk dat je eerst deels zelf onderzoek doet en dat hieronder deelt (voor zover nodig). 
-Dit helpt met het oplossen van jouw probleem. 
+DSMR-reader is gemaakt om door jezelf te gebruiken en is daarom niet van buitenaf te debuggen. Daarom is het belangrijk dat je eerst deels zelf onderzoek doet en dat hieronder deelt (voor zover nodig). Dit helpt met het oplossen van jouw probleem. 
 
 https://dsmr-reader.readthedocs.io/nl/v4/troubleshooting.html
 
