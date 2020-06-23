@@ -10,7 +10,7 @@ then
     cat /var/tmp/gunicorn--dsmr_webinterface.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [??] PID file does not exist"
+    echo "   [??] PID file does not exist (as sudo user try 'sudo supervisorctl start dsmr_webinterface')"
 fi
 
 
@@ -21,7 +21,7 @@ then
     cat /var/tmp/dsmrreader--dsmr_backend.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [??] PID file does not exist"
+    echo "   [??] PID file does not exist (as sudo user try 'sudo supervisorctl start dsmr_backend')"
 fi
 
 
@@ -32,7 +32,7 @@ then
     cat /var/tmp/dsmrreader--dsmr_datalogger.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [??] PID file does not exist"
+    echo "   [??] PID file does not exist (as sudo user try 'sudo supervisorctl start dsmr_datalogger')"
 fi
 
 
@@ -43,5 +43,5 @@ then
     cat /var/tmp/dsmrreader--dsmr_client.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [??] PID file does not exist"
+    echo "   [??] PID file does not exist (as sudo user try 'sudo supervisorctl start dsmr_client')"
 fi
