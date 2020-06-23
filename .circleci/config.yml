@@ -59,7 +59,7 @@ commands:
                   key: *virtualenv-cache-key
 
             - run:
-                  name: "Virtualenv, requirements and config"
+                  name: "Virtualenv and requirements"
                   command: |
                       sudo apt-get update
                       sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-virtualenv
@@ -71,9 +71,6 @@ commands:
                       pip3 install --upgrade pip
                       pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
                       pip3 install psycopg2
-
-                      cp .env.template .env
-                      ./tools/generate-secret-key.sh
 
             - save_cache:
                   name: "Cache: Save virtualenv"
@@ -93,6 +90,7 @@ commands:
                 name: "Test SQLite"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+                    SECRET_KEY: non-production-value
                     DB_ENGINE: django.db.backends.sqlite3
                 command: *test-command
 
@@ -100,6 +98,7 @@ commands:
                 name: "Test PostgreSQL"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+                    SECRET_KEY: non-production-value
                     DB_ENGINE: django.db.backends.postgresql
                     DB_HOST: 127.0.0.1
                     DB_USER: root
@@ -110,6 +109,7 @@ commands:
                 name: "Test MySQL"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+                    SECRET_KEY: non-production-value
                     DB_ENGINE: django.db.backends.mysql
                     DB_HOST: 127.0.0.1
                     DB_USER: user
