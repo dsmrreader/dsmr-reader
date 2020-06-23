@@ -59,16 +59,21 @@ commands:
                   key: *virtualenv-cache-key
 
             - run:
-                  name: "Virtualenv + requirements installation"
+                  name: "Virtualenv, requirements and config"
                   command: |
                       sudo apt-get update
                       sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-virtualenv
+
                       mkdir -p ~/.virtualenvs/
                       virtualenv ~/.virtualenvs/dsmr-reader --system-site-packages --python python3
                       . ~/.virtualenvs/dsmr-reader/bin/activate
+
                       pip3 install --upgrade pip
                       pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
                       pip3 install psycopg2
+
+                      cp .env.template .env
+                      ./tools/generate-secret-key.sh
 
             - save_cache:
                   name: "Cache: Save virtualenv"
