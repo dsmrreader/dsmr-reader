@@ -35,7 +35,20 @@ Create virtualenv and install all packages::
 
 Copy development config::
 
-    cp dsmrreader/provisioning/django/development.py dsmrreader/settings.py
+    cp dsmrreader/provisioning/django/settings.py.template dsmrreader/settings.py
+
+Open ``dsmrreader/settings.py`` and replace::
+
+    from dsmrreader.config.production import *
+
+With::
+
+    from dsmrreader.config.development import *
+
+Copy env vars template and generate a unique secret key::
+
+    cp .env.template .env
+    ./tools/generate-secret-key.sh
 
 Try a check, output should be something like ``System check identified no issues (0 silenced).``::
     
@@ -47,9 +60,9 @@ Run quick tests (with in-memory database)::
 
 Set up PostgreSQL test database::
 
-    sudo sudo -u postgres createuser -DSR dsmrreader
-    sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
-    sudo sudo -u postgres psql -c "alter user dsmrreader CREATEDB;"
+    sudo -u postgres createuser -DSR dsmrreader
+    sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+    sudo -u postgres psql -c "alter user dsmrreader CREATEDB;"
 
 Set up MySQL (or MariaDB) test database::
 
@@ -73,13 +86,13 @@ To be honest, the best initial/fixture data is simply a backup of your own syste
 Just import it as you should on your RaspberryPi. Copy a database backup to ``/var/lib/postgresql/`` on your PC and import it::
 
     # Create empty database if it does not exist yet.
-    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+    sudo -u postgres createdb -O dsmrreader dsmrreader
 
     # For .SQL
-    sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
+    sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
     
     # For .SQL.GZ
-    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
+    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo -u postgres psql dsmrreader
 
 .. warning::
     

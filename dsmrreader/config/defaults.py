@@ -1,5 +1,36 @@
+"""
+    Default settings as defined in the base.py config.
+    Some settings can be overridden by system env vars or the .env.
+"""
+from decouple import config, Csv
+
+from dsmrreader.config.base import *
 import dsmrreader
 
+
+"""
+Env vars.
+"""
+SECRET_KEY = config('SECRET_KEY')
+TIME_ZONE = config('TZ', default='Europe/Amsterdam')
+DATABASES = {
+    'default': {
+        'ENGINE': config('DB_ENGINE'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASS'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', cast=int),
+        'CONN_MAX_AGE': config('CONN_MAX_AGE', default=60, cast=int),
+    }
+}
+LOGGING['loggers']['commands']['level'] = config('DSMRREADER_LOGLEVEL', 'ERROR')
+
+DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', default='', cast=Csv(post_process=tuple))
+
+"""
+DSMR-reader project settings (non Django related).
+"""
 
 # Officially we only support PostgreSQL, but w/e.
 DSMRREADER_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')
@@ -11,7 +42,7 @@ DSMRREADER_REST_FRAMEWORK_API_USER = 'api-user'
 
 DSMRREADER_MANAGEMENT_COMMANDS_PID_FOLDER = '/var/tmp/'
 
-DSMRREADER_MAIN_BRANCH = 'v3'
+DSMRREADER_MAIN_BRANCH = 'v4'
 DSMRREADER_VERSION = dsmrreader.__version__
 DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_USER_AGENT = 'DSMR-reader v{}'.format(DSMRREADER_VERSION)
@@ -48,8 +79,5 @@ DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200
 
 # Number of hours to cleanup in one run of applying retention.
 DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
-
-# Plugins.
-DSMRREADER_PLUGINS = []
 
 DSMRREADER_BUIENRADAR_API_URL = 'https://data.buienradar.nl/2.0/feed/json'

@@ -43,7 +43,7 @@ DSMR Reader's documentation
    admin/consumption
    admin/weather
 
-   settings
+   env_settings
    api
    mqtt
    plugins

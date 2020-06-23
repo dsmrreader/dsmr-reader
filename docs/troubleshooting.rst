@@ -61,23 +61,16 @@ The DEBUG-logging is disabled by default, to reduce writes on the filesystem. Yo
 * Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``.
 * Open the ``dsmrreader/settings.py`` file and look for the code below::
 
-    """
-        Enable and change the logging level below to alter the verbosity of the (backend) command(s).
-        - DEBUG:             Log everything.
-        - INFO:              Log most things.
-        - WARNING (default): Log only warnings and errors.
-    
-        Restart the commands in Supervisor to apply any changes.
-    """
-    # LOGGING['loggers']['commands']['level'] = 'DEBUG'
+    DSMRREADER_LOGLEVEL = 'WARNING'
+    #DSMRREADER_LOGLEVEL = 'DEBUG'
 
 * Now remove the ``#`` from this line::
 
-    # LOGGING['loggers']['commands']['level'] = 'DEBUG'
+    #DSMRREADER_LOGLEVEL = 'DEBUG'
 
 * It should now be::
 
-    LOGGING['loggers']['commands']['level'] = 'DEBUG'
+    DSMRREADER_LOGLEVEL = 'DEBUG'
 
 * After editing the file, all processes need to be restarted. To do this, you can either execute::
 

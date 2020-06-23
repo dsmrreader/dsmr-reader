@@ -1,13 +1,4 @@
 # Dummy vars, used for anchors.
-x-django-db-env: &django-config-env
-    MYSQL_DJANGO_DB_HOST: 127.0.0.1
-    MYSQL_DJANGO_DB_NAME: dsmrreader   # NOT a typo, django prefixes "test_" automatically.
-    MYSQL_DJANGO_DB_USER: user
-    MYSQL_DJANGO_DB_PASSWORD: testpassword
-    PSQL_DJANGO_DB_HOST: 127.0.0.1
-    PSQL_DJANGO_DB_NAME: test_dsmrreader
-    PSQL_DJANGO_DB_USER: root
-
 x-mysql-db-env: &mysql-db-env
    # https://circleci.com/docs/2.0/postgres-config/#example-mysql-project
     MYSQL_ROOT_PASSWORD: rootpw
@@ -96,19 +87,29 @@ commands:
             - run:
                 name: "Test SQLite"
                 environment:
-                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.sqlite
+                    DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+                    DB_ENGINE: django.db.backends.sqlite3
                 command: *test-command
 
             - run:
                 name: "Test PostgreSQL"
                 environment:
-                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.postgresql
+                    DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+                    DB_ENGINE: django.db.backends.postgresql
+                    DB_HOST: 127.0.0.1
+                    DB_USER: root
+                    DB_NAME: test_dsmrreader
                 command: *test-command
 
             - run:
                 name: "Test MySQL"
                 environment:
-                    DJANGO_SETTINGS_MODULE: dsmrreader.config.circleci.mysql
+                    DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+                    DB_ENGINE: django.db.backends.mysql
+                    DB_HOST: 127.0.0.1
+                    DB_USER: user
+                    DB_PASS: testpassword
+                    DB_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
                 command: *test-command
 
 # Dummy vars, used for anchors.
@@ -127,7 +128,6 @@ jobs:
          <<: *base-job
          docker:
              - image: circleci/python:3.6-buster
-               environment: *django-config-env
 
              - image: *postgresql-image
                environment: *postgresql-db-env
@@ -139,7 +139,6 @@ jobs:
          <<: *base-job
          docker:
              - image: circleci/python:3.7-buster
-               environment: *django-config-env
 
              - image: *postgresql-image
                environment: *postgresql-db-env
@@ -151,7 +150,6 @@ jobs:
          <<: *base-job
          docker:
              - image: circleci/python:3.8-buster
-               environment: *django-config-env
 
              - image: *postgresql-image
                environment: *postgresql-db-env

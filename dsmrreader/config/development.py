@@ -1,4 +1,4 @@
-from dsmrreader.config.base import *
+from dsmrreader.config.defaults import *
 
 
 DEBUG = True
@@ -12,5 +12,3 @@ INSTALLED_APPS.append('debug_toolbar')
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 INTERNAL_IPS = '127.0.0.1'
-
-ALLOWED_HOSTS = ['*']

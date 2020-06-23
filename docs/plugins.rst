@@ -1,5 +1,6 @@
-Plugins/hooks (Do It Yourself)
-==============================
+Plugins
+=======
+
 The application allows you to create and add plugins, hooking on certain events triggered.
 
 
@@ -17,12 +18,7 @@ Please make sure the ``plugin_name``,
 * does not contains spaces or dashes, just use underscores and do not start the name with a digit.
 
 
-Add the **dotted** path to the end of your ``dsmrreader/settings.py`` file::
-
-    DSMRREADER_PLUGINS = [
-        'dsmr_plugins.modules.plugin_name1',
-        'dsmr_plugins.modules.plugin_name2',
-    ]
+Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information :doc:`see DSMRREADER_PLUGINS in Env Settings<env_settings>`.
 
 Your plugin file is imported once, so you should make sure to hook any events you want.
 
@@ -65,12 +61,9 @@ Example #1: Upload data to second PVOutput account
 This is an example of issue `#407 <https://github.com/dennissiemensma/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account.
 
 
-Settings file ``dsmrreader/settings.py`` (addition)::
+:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
 
-    DSMRREADER_PLUGINS = [
-        'dsmr_plugins.modules.secondary_pvoutput_upload',
-    ]
-
+    DSMRREADER_PLUGINS=dsmr_plugins.modules.secondary_pvoutput_upload
 
 Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file)::
 
@@ -106,11 +99,9 @@ Example #2: Forwarding raw telegram data to another serial port
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is an example of issue `#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another serial port.
 
-Settings file ``dsmrreader/settings.py`` (addition)::
+:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
 
-    DSMRREADER_PLUGINS = [
-        'dsmr_plugins.modules.forward_raw_telegram_to_serial',
-    ]
+    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_serial
 
 
 Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new file)::
@@ -157,11 +148,9 @@ Example #3: Forwarding raw telegram data to another instance by API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This can be quite handy if you run multiple instances of DSMR-reader (i.e.: RaspberryPI + somewhere in cloud).
 
-Settings file ``dsmrreader/settings.py`` (addition)::
+:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
 
-    DSMRREADER_PLUGINS = [
-        'dsmr_plugins.modules.forward_raw_telegram_to_api',
-    ]
+    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
 
 
 Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (new file)::
@@ -202,11 +191,9 @@ Example #4: Forwarding DSMR readings in JSON format to some API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Use this to send DSMR readings in JSON format to some (arbitrary) API.
 
-Settings file ``dsmrreader/settings.py`` (addition)::
+:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
 
-    DSMRREADER_PLUGINS = [
-        'dsmr_plugins.modules.forward_json_dsmrreading_to_api',
-    ]
+    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_json_dsmrreading_to_api
 
 
 Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new file)::

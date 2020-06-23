@@ -64,7 +64,36 @@ Execute the following::
         sudo supervisorctl restart all
 
 
-3. Generate your own ``SECRET_KEY``
+3. Migrate ``settings.py`` to ``.env``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+DSMR-reader initially works with a ``settings.py`` for your local settings.
+This has some disadvantages, especially regarding today's industry standards and how Docker works as well.
+
+Therefor the configuration has been migrated to a ``.env`` file and system env vars are now supported as well. Follow these steps to migrate::
+
+    sudo su - dsmr
+    cp dsmrreader/settings.py dsmrreader/settings.py.BACKUP
+    cp dsmrreader/provisioning/django/settings.py.template dsmrreader/settings.py
+
+    cp .env.template .env
+
+Now check the settings you were using in ``dsmrreader/settings.py.BACKUP``.
+Compare them with the defaults in ``.env``.
+
+Not all previously supported settings are also available in ``.env``.
+See :doc:`Env Settings for the latest list of env vars supported<../env_settings>`.
+
+If you find any differences (e.g. different database credentials or host), update the ``.env`` file accordingly.
+Unfortunately, you cannot test whether the ``.env`` file was migrated correctly until you've reached the final step of this guide and switched to v4.x.
+
+Backwards incompatible
+----------------------
+
+The format should be straight forward. Please note that ``DSMRREADER_PLUGINS`` is now a comma separated list. Chances are however very slim that you are using ``DSMRREADER_PLUGINS`` (advanced users only).
+
+
+4. Generate your own ``SECRET_KEY``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Previous versions had a hardcoded value for ``SECRET_KEY``.
@@ -77,12 +106,12 @@ Execute the following::
     sudo su - dsmr
     ./tools/generate-secret-key.sh
 
-Check whether the script updated your ``settings.py`` file properly. It should display some output when you execute this::
+Check whether the script updated your ``.env`` file properly. It should display some output when you execute this::
 
-    grep 'SECRET_KEY=' dsmrreader/settings.py
+    grep 'SECRET_KEY=' .env
 
 
-4. Replace ``dsmr_mqtt`` by ``dsmr_client``
+5. Replace ``dsmr_mqtt`` by ``dsmr_client``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support more generic continuous data flows in the future (such as InfluxDB) and to offload some blocking mechanics in ``dsmr_backend`` as well.
@@ -112,7 +141,7 @@ Execute the following::
 There should be no (more) ``dsmr_mqtt``, but ``dsmr_client`` should be listed instead.
 
 
-5. Switch DSMR-reader to ``v4.x``
+6. Switch DSMR-reader to ``v4.x``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 DSMR-reader ``v4.x`` lives in a different branch, to prevent any users from unexpectedly updating to ``v4.x``.

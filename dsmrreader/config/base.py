@@ -24,13 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
 INSTALLED_APPS = (
     # Django.
     'django.contrib.admin',
@@ -111,16 +109,13 @@ LOGOUT_URL = 'admin:logout'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {}  # Force in sub configs.
-
+## Moved to defaults config.
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 # Django creates migrations based on default language. Therefor we need to force English here.
 LANGUAGE_CODE = 'en'
-
-TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
 
@@ -231,7 +226,3 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 25,
 }
-
-
-""" DSMR Project settings. """
-from .dsmrreader import *

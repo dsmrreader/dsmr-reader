@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2020, Dennis Siemensma
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR-reader \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: ../../env_settings.rst:2
+msgid "Env Settings"
+msgstr ""
+
+#: ../../env_settings.rst:4
+msgid ""
+"You can either specify the following settings as system environments "
+"variables or define them in a ``.env`` file in the root of the DSMR-"
+"reader project folder."
+msgstr ""
+
+#: ../../env_settings.rst:7
+msgid "Contents"
+msgstr ""
+
+#: ../../env_settings.rst:10
+msgid "``SECRET_KEY``"
+msgstr ""
+
+#: ../../env_settings.rst:12
+msgid ""
+"The secret key Django should use. This should be unique for your "
+"installation. Generate or refresh it by running ``./tools/generate-"
+"secret-key.sh``."
+msgstr ""
+
+#: ../../env_settings.rst:17
+msgid "``DSMR_USER``"
+msgstr ""
+
+#: ../../env_settings.rst:19
+msgid ""
+"The username of the **webinterface** (super)user to create when running "
+"``./manage.py dsmr_superuser``."
+msgstr ""
+
+#: ../../env_settings.rst:23
+msgid "``DSMR_PASSWORD``"
+msgstr ""
+
+#: ../../env_settings.rst:25
+msgid ""
+"The password of the ``DSMR_USER`` user to create (or update if the user "
+"exists) when running ``./manage.py dsmr_superuser``."
+msgstr ""
+
+#: ../../env_settings.rst:29
+msgid "``DB_ENGINE``"
+msgstr ""
+
+#: ../../env_settings.rst:31
+msgid ""
+"The database engine to use. Officially DSMR-reader only supports "
+"``django.db.backends.postgresql``, but others supported by Django may "
+"work as well. Experiment at your own risk!"
+msgstr ""
+
+#: ../../env_settings.rst:36
+msgid "``DB_NAME``"
+msgstr ""
+
+#: ../../env_settings.rst:38
+msgid "The database name to use."
+msgstr ""
+
+#: ../../env_settings.rst:42
+msgid "``DB_USER``"
+msgstr ""
+
+#: ../../env_settings.rst:44
+msgid "The database user to use."
+msgstr ""
+
+#: ../../env_settings.rst:48
+msgid "``DB_PASS``"
+msgstr ""
+
+#: ../../env_settings.rst:50
+msgid "The database password for the ``DB_USER`` to use."
+msgstr ""
+
+#: ../../env_settings.rst:54
+msgid "``DB_HOST``"
+msgstr ""
+
+#: ../../env_settings.rst:56
+msgid "The database host to use."
+msgstr ""
+
+#: ../../env_settings.rst:60
+msgid "``DB_PORT``"
+msgstr ""
+
+#: ../../env_settings.rst:62
+msgid "The database port to use."
+msgstr ""
+
+#: ../../env_settings.rst:66
+msgid "``DSMRREADER_LOGLEVEL``"
+msgstr ""
+
+#: ../../env_settings.rst:68
+msgid ""
+"The log level DSMR-reader should use. Choose either ``ERROR`` (omit for "
+"this default) or ``DEBUG`` (should be temporary due to file I/O)."
+msgstr ""
+
+#: ../../env_settings.rst:70
+msgid "For more information, :doc:`see Troubleshooting<troubleshooting>`."
+msgstr ""
+
+#: ../../env_settings.rst:74
+msgid "``DSMRREADER_PLUGINS``"
+msgstr ""
+
+#: ../../env_settings.rst:76
+msgid ""
+"The plugins DSMR-reader should use. Omit to use the default of no "
+"plugins. Note that this should be a comma separated list when specifying "
+"multiple plugins. E.g.::"
+msgstr ""
+
+#: ../../env_settings.rst:82
+msgid "For more information, :doc:`see Plugins<plugins>`."
+msgstr ""
+
+#: ../../env_settings.rst:86
+msgid "``CONN_MAX_AGE``"
+msgstr ""
+
+#: ../../env_settings.rst:88
+msgid "The max lifetime for the database connections. Omit to use the default."
+msgstr ""
+
+#: ../../env_settings.rst:92
+msgid "``TZ``"
+msgstr ""
+
+#: ../../env_settings.rst:94
+msgid ""
+"The timezone Django should use. Alter at your own risk. Omit to use the "
+"default, using the CET/CEST timezone (applicable to the Netherlands)."
+msgstr ""
+

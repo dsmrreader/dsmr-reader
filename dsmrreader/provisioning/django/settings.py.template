@@ -1,0 +1,5 @@
+"""
+    This used to be the local settings file until DSMR-reader 4.x.
+    Please use .env instead. See: https://dsmr-reader.readthedocs.io/en/latest/faq/v4_upgrade.html
+"""
+from dsmrreader.config.production import *

@@ -40,12 +40,12 @@ Execute::
     sudo chown -R dsmr:dsmr /home/dsmr/
     
     # Virtual env
-    sudo sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-    sudo sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3
+    sudo -u dsmr mkdir /home/dsmr/.virtualenvs
+    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3
     sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
 
     # Requirements
-    sudo sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.4 pyserial-asyncio==0.4 requests==2.22.0
+    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.4 pyserial-asyncio==0.4 requests==2.22.0
 
 
 Datalogger instance: Script

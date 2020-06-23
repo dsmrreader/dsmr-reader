@@ -23,6 +23,7 @@ How can I move the database location?
 -------------------------------------
 :doc:`See for instructions here <faq/database>`.
 
+
 Recalculate prices retroactively
 --------------------------------
 *I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?*
@@ -85,16 +86,18 @@ How can I restart the application or processes?
 
 :doc:`See for instructions here <faq/restart_processes>`.
 
+
 How do I fix errors such as ``DETAIL: Key (id)=(123) already exists``?
 ----------------------------------------------------------------------
 
 This depends on the situation, but you can always try this yourself first::
 
-    # Note: dsmr_sqlsequencereset was added in DSMR-reader v3.3.0+
+    # Note: dsmr_sqlsequencereset is only available in DSMR-reader v3.3.0 and higher
     sudo su - dsmr
     ./manage.py dsmr_sqlsequencereset
 
 If it does not resolve your issue, `ask for support <#i-need-help>`_.
+
 
 I've changed to a different smart meter
 ---------------------------------------
@@ -102,3 +105,16 @@ Sometimes, when relocating or due to replacement of your meter, the meter positi
 Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day.
 
 The day after, you should be able to manually adjust any invalid Day or Hour Statistics in the admin interface for the invalid day.
+
+
+How can I create the (super)user or update its password?
+--------------------------------------------------------
+
+Configure ``DSMR_USER`` and ``DSMR_PASSWORD`` of the :doc:`Env Settings<env_settings>`.
+
+Now execute::
+
+    sudo su - dsmr
+    ./manage.py dsmr_superuser
+
+The user should either be created or the existing user should have its password updated.

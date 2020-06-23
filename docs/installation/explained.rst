@@ -37,15 +37,15 @@ The application stores by default all readings taken from the serial cable.
 
 - Create database user::
 
-    sudo sudo -u postgres createuser -DSR dsmrreader
+    sudo -u postgres createuser -DSR dsmrreader
 
 - Create database, owned by the database user we just created::
 
-    sudo sudo -u postgres createdb -O dsmrreader dsmrreader
+    sudo -u postgres createdb -O dsmrreader dsmrreader
 
 - Set password for database user::
 
-    sudo sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+    sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
 
 
 2. Dependencies
@@ -176,14 +176,19 @@ For this I created two ready-to-use requirements files, which will also install 
 
 The ``base.txt`` contains requirements which the application needs anyway, no matter which backend you've choosen.
 
+
+Setup local config::
+
+    cp dsmrreader/provisioning/django/settings.py.template dsmrreader/settings.py
+
+    cp .env.template .env
+    ./tools/generate-secret-key.sh
+
 .. note::
 
     **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
 Install dependencies::
-
-    cp dsmrreader/provisioning/django/postgresql.py dsmrreader/settings.py
-    ./tools/generate-secret-key.sh
 
     pip3 install -r dsmrreader/provisioning/requirements/base.txt
 
@@ -196,7 +201,6 @@ Optional: Restore a database backup
     If you need to restore a database backup with your existing data, this is the moment to do it.
 
 Restoring a database backup? :doc:`See for instructions here <restore>`.
-
 
 
 8. Bootstrapping
@@ -214,18 +218,12 @@ It allows us to have Nginx serve static files outside our project/code root.
 
     ./manage.py collectstatic --noinput
 
-Create an application superuser. Django will prompt you for a password. The credentials generated can be used to access the administration panel inside the application.  
-Alter username and email if you prefer other credentials, but email is not used in the application anyway.
+Create an application superuser with the following command.
+The ``DSMR_USER`` and ``DSMR_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials.
 
-- Create your user::
+Execute::
 
-    ./manage.py createsuperuser --username admin --email root@localhost
-
-.. note::
-
-    Because you have shell access you may reset your user's password at any time (in case you forget it). Just enter this for a password reset::
-
-    ./manage.py changepassword admin
+    ./manage.py dsmr_superuser
 
 You've almost completed the installation now.
 

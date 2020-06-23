@@ -1,3 +1,4 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -5,12 +6,11 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../installation/explained.rst:2
 msgid "Installation: Explained"
@@ -216,7 +216,7 @@ msgstr ""
 "backend, waar de applicatie in Gunicorn draait onder Supervisor. Deze "
 "stellen we later in.*"
 
-#: ../../installation/explained.rst:107 ../../installation/explained.rst:242
+#: ../../installation/explained.rst:107 ../../installation/explained.rst:241
 msgid ""
 "Make sure you are acting here as ``root`` or ``sudo`` user. If not, press"
 " CTRL + D to log out of the ``dsmr`` user."
@@ -397,7 +397,11 @@ msgstr ""
 "Het bestand ``base.txt`` bevat alle afhankelijkheden die de applicatie "
 "sowieso nodig heeft, ongeacht de databasekeuze die je gemaakt hebt."
 
-#: ../../installation/explained.rst:181
+#: ../../installation/explained.rst:180
+msgid "Setup local config::"
+msgstr ""
+
+#: ../../installation/explained.rst:189
 msgid ""
 "**Installation of the requirements below might take a while**, depending "
 "on your Internet connection, RaspberryPi speed and resources (generally "
@@ -408,15 +412,15 @@ msgstr ""
 "je Internet-verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te "
 "maken wanneer dit lang lijkt te duren. :]"
 
-#: ../../installation/explained.rst:183
+#: ../../installation/explained.rst:191
 msgid "Install dependencies::"
 msgstr "Installeer afhankelijkheden::"
 
-#: ../../installation/explained.rst:192
+#: ../../installation/explained.rst:197
 msgid "Optional: Restore a database backup"
 msgstr "Optioneel: Database back-up terugzetten"
 
-#: ../../installation/explained.rst:196
+#: ../../installation/explained.rst:201
 msgid ""
 "If you need to restore a database backup with your existing data, this is"
 " the moment to do it."
@@ -424,15 +428,15 @@ msgstr ""
 "Indien je een back-up van de database wilt terugzetten met je oude "
 "gegevens, dit is het moment om dat te doen."
 
-#: ../../installation/explained.rst:198
+#: ../../installation/explained.rst:203
 msgid "Restoring a database backup? :doc:`See for instructions here <restore>`."
 msgstr "Database back-up terugzetten? :doc:`Zie hier voor instructies <restore>`."
 
-#: ../../installation/explained.rst:203
+#: ../../installation/explained.rst:208
 msgid "8. Bootstrapping"
 msgstr "8. Initialisatie"
 
-#: ../../installation/explained.rst:204
+#: ../../installation/explained.rst:209
 msgid ""
 "Now it's time to bootstrap the application and check whether all settings"
 " are good and requirements are met."
@@ -440,11 +444,11 @@ msgstr ""
 "Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie "
 "proberen te initialiseren."
 
-#: ../../installation/explained.rst:206
+#: ../../installation/explained.rst:211
 msgid "Execute this to initialize the database we've created earlier::"
 msgstr "Voer dit uit om de database te initialiseren::"
 
-#: ../../installation/explained.rst:210
+#: ../../installation/explained.rst:215
 msgid ""
 "Prepare static files for webinterface. This will copy all static files to"
 " the directory we created for Nginx earlier in the process. It allows us "
@@ -455,44 +459,30 @@ msgstr ""
 " voor Nginx, hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden"
 " kan hosten buiten de code-bestanden."
 
-#: ../../installation/explained.rst:213
+#: ../../installation/explained.rst:218
 msgid "Sync static files::"
 msgstr "Synchroniseer statische bestanden::"
 
-#: ../../installation/explained.rst:217
+#: ../../installation/explained.rst:222
 msgid ""
-"Create an application superuser. Django will prompt you for a password. "
-"The credentials generated can be used to access the administration panel "
-"inside the application. Alter username and email if you prefer other "
-"credentials, but email is not used in the application anyway."
+"Create an application superuser with the following command. The "
+"``DSMR_USER`` and ``DSMR_PASSWORD`` :doc:`as defined in Env "
+"Settings<../env_settings>` will be used for the credentials."
 msgstr ""
-"Maak een gebruiker aan voor binnen de applicatie. Django vraagt je om een"
-" wachtwoord te kiezen. Met deze gegevens kun je het beheerderspaneel "
-"binnen de applicatie gebruiken. Indien gewenst kun je een andere "
-"gebruikersnaam kiezen. Het e-mailadres maakt niet uit, want de applicatie"
-" ondersteunt toch geen e-mail."
 
-#: ../../installation/explained.rst:220
-msgid "Create your user::"
-msgstr "Creëer je eigen gebruiker::"
-
-#: ../../installation/explained.rst:226
-msgid ""
-"Because you have shell access you may reset your user's password at any "
-"time (in case you forget it). Just enter this for a password reset::"
+#: ../../installation/explained.rst:225
+msgid "Execute::"
 msgstr ""
-"Wachtwoord ooit vergeten? Via de command line kun je je wachtwoord (bij "
-"verlies) hiermee aanpassen::"
 
-#: ../../installation/explained.rst:230
+#: ../../installation/explained.rst:229
 msgid "You've almost completed the installation now."
 msgstr "Je bent op dit punt bijna klaar met de installatie."
 
-#: ../../installation/explained.rst:234
+#: ../../installation/explained.rst:233
 msgid "9. Webserver/Nginx (part 2)"
 msgstr "9. Webserver/Nginx (deel 2)"
 
-#: ../../installation/explained.rst:238
+#: ../../installation/explained.rst:237
 msgid ""
 "This installation guide asumes you run the Nginx webserver for this "
 "application only."
@@ -500,7 +490,7 @@ msgstr ""
 "Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver "
 "alleen gebruikt voor deze applicatie."
 
-#: ../../installation/explained.rst:240
+#: ../../installation/explained.rst:239
 msgid ""
 "It's possible to have other applications use Nginx as well, but that "
 "requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, "
@@ -510,7 +500,7 @@ msgstr ""
 "maar daarvoor zul je de wildcard moet weghalen in de ``dsmr-"
 "webinterface`` vhost, die je hieronder kopieert."
 
-#: ../../installation/explained.rst:244
+#: ../../installation/explained.rst:243
 msgid ""
 "Remove the default Nginx vhost (**only when you do not use it yourself, "
 "see the note above**)::"
@@ -518,7 +508,7 @@ msgstr ""
 "Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf "
 "gebruikt** (zie de notitie hierboven)::"
 
-#: ../../installation/explained.rst:248
+#: ../../installation/explained.rst:247
 msgid ""
 "Copy application vhost, **it will listen to any hostname** (wildcard), "
 "but you may change that if you feel like you need to. It won't affect the"
@@ -528,7 +518,7 @@ msgstr ""
 "hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te "
 "passen::"
 
-#: ../../installation/explained.rst:253
+#: ../../installation/explained.rst:252
 msgid ""
 "Let Nginx verify vhost syntax and reload Nginx when ``configtest`` "
 "passes::"
@@ -536,11 +526,11 @@ msgstr ""
 "Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad "
 "Nginx vervolgens wanneer de ``configtest`` lukt::"
 
-#: ../../installation/explained.rst:261
+#: ../../installation/explained.rst:260
 msgid "10. Supervisor"
 msgstr "10. Supervisor"
 
-#: ../../installation/explained.rst:262
+#: ../../installation/explained.rst:261
 msgid ""
 "Now we configure `Supervisor <http://supervisord.org/>`_, which is used "
 "to run our application's web interface and background jobs used. It's "
@@ -552,15 +542,15 @@ msgstr ""
 "Tevens zorgt Supervisor ervoor dat deze processen bij het (opnieuw) "
 "opstarten automatisch draaien."
 
-#: ../../installation/explained.rst:265
+#: ../../installation/explained.rst:264
 msgid "Copy the configuration files for Supervisor::"
 msgstr "Kopieer de configuratie-bestanden voor Supervisor::"
 
-#: ../../installation/explained.rst:272
+#: ../../installation/explained.rst:271
 msgid "Login to ``supervisorctl`` management console::"
 msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
 
-#: ../../installation/explained.rst:276
+#: ../../installation/explained.rst:275
 msgid ""
 "Enter these commands (**listed after the** ``>``). It will ask Supervisor"
 " to recheck its config directory and use/reload the files::"
@@ -568,7 +558,7 @@ msgstr ""
 "Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor"
 " dat Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
 
-#: ../../installation/explained.rst:282
+#: ../../installation/explained.rst:281
 msgid ""
 "Three processes should be started or running. Make sure they don't end up"
 " in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` "
@@ -578,15 +568,15 @@ msgstr ""
 "uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn "
 "gekomen. Je kunt het overzicht verversen door ``status`` te typen."
 
-#: ../../installation/explained.rst:284
+#: ../../installation/explained.rst:283
 msgid "When still in ``supervisorctl``'s console, type::"
 msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"
 
-#: ../../installation/explained.rst:288
+#: ../../installation/explained.rst:287
 msgid "Example of everything running well::"
 msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
-#: ../../installation/explained.rst:295
+#: ../../installation/explained.rst:294
 #, fuzzy
 msgid ""
 "Want to quit supervisor? Press ``CTRL + D`` to exit supervisor command "
@@ -595,7 +585,7 @@ msgstr ""
 "Wil je uit supervisor? Druk dan op ``CTRL + C`` om het logbestand niet "
 "meer te bekijken en vervolgens op ``CTRL + D`` om uit supervisor te gaan."
 
-#: ../../installation/explained.rst:301
+#: ../../installation/explained.rst:300
 msgid ":doc:`Finished? Go to setting up the application<../application>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
 
@@ -663,4 +653,46 @@ msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
 #~ "lap tekst moeten zien als toen we"
 #~ " handmatig gemeten hebben met het "
 #~ "``cu``-programma."
+
+#~ msgid ""
+#~ "Create an application superuser. Django "
+#~ "will prompt you for a password. "
+#~ "The credentials generated can be used"
+#~ " to access the administration panel "
+#~ "inside the application. Alter username "
+#~ "and email if you prefer other "
+#~ "credentials, but email is not used "
+#~ "in the application anyway."
+#~ msgstr ""
+#~ "Maak een gebruiker aan voor binnen "
+#~ "de applicatie. Django vraagt je om "
+#~ "een wachtwoord te kiezen. Met deze "
+#~ "gegevens kun je het beheerderspaneel "
+#~ "binnen de applicatie gebruiken. Indien "
+#~ "gewenst kun je een andere gebruikersnaam"
+#~ " kiezen. Het e-mailadres maakt niet "
+#~ "uit, want de applicatie ondersteunt toch"
+#~ " geen e-mail."
+
+#~ msgid "Create your user::"
+#~ msgstr "Creëer je eigen gebruiker::"
+
+#~ msgid ""
+#~ "Because you have shell access you "
+#~ "may reset your user's password at "
+#~ "any time (in case you forget it)."
+#~ " Just enter this for a password "
+#~ "reset::"
+#~ msgstr ""
+#~ "Wachtwoord ooit vergeten? Via de command"
+#~ " line kun je je wachtwoord (bij "
+#~ "verlies) hiermee aanpassen::"
+
+#~ msgid ""
+#~ "Create an application superuser with the"
+#~ " following command. The ``DSMR_USER`` and"
+#~ " ``DSMR_PASSWORD`` :doc:`as defined in Env"
+#~ " Settings<env_settings>` will be used for"
+#~ " the credentials."
+#~ msgstr ""
 

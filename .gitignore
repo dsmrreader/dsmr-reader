@@ -4,6 +4,7 @@
 *.pyc
 */__pycache__
 /dsmrreader/settings.py
+/dsmrreader/settings.py.BACKUP
 /coverage_report/
 /backups/
 /logs/
@@ -11,3 +12,4 @@
 /dsmr_plugins/modules/
 /Pipfile
 /Pipfile.lock
+/.env

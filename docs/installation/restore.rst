@@ -15,10 +15,10 @@ Compressed (default)
 ^^^^^^^^^^^^^^^^^^^^
 To restore a compressed backup (``.gz``), run::
 
-    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo sudo -u postgres psql dsmrreader
+    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo -u postgres psql dsmrreader
 
 Uncompressed (legacy)
 ^^^^^^^^^^^^^^^^^^^^^
 To restore an uncompressed backup (``.sql``), run::
 
-    sudo sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
+    sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
