@@ -13,17 +13,36 @@ Env vars.
 """
 SECRET_KEY = config('SECRET_KEY')
 TIME_ZONE = config('TZ', default='Europe/Amsterdam')
+
+DB_HOST = config('DB_HOST', default=None)
+DB_PORT = config('DB_PORT', default=None, cast=int)
+DB_NAME = config('DB_NAME', default=None)
+DB_USER = config('DB_USER', default=None)
+DB_PASS = config('DB_PASS', default=None)
+
+# Not all database engines require the full config.
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASS'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT', cast=int),
         'CONN_MAX_AGE': config('CONN_MAX_AGE', default=60, cast=int),
     }
 }
+
+if DB_HOST:
+    DATABASES['default']['HOST'] = DB_HOST
+
+if DB_PORT:
+    DATABASES['default']['PORT'] = DB_PORT
+
+if DB_NAME:
+    DATABASES['default']['NAME'] = DB_NAME
+
+if DB_USER:
+    DATABASES['default']['USER'] = DB_USER
+
+if DB_PASS:
+    DATABASES['default']['PASSWORD'] = DB_PASS
+
 LOGGING['loggers']['commands']['level'] = config('DSMRREADER_LOGLEVEL', 'ERROR')
 
 DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', default='', cast=Csv(post_process=tuple))
