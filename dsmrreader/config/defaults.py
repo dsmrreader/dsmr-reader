@@ -15,7 +15,7 @@ SECRET_KEY = config('SECRET_KEY')
 TIME_ZONE = config('TZ', default='Europe/Amsterdam')
 
 DB_HOST = config('DB_HOST', default=None)
-DB_PORT = config('DB_PORT', default=None, cast=int)
+DB_PORT = config('DB_PORT', default=0, cast=int)
 DB_NAME = config('DB_NAME', default=None)
 DB_USER = config('DB_USER', default=None)
 DB_PASS = config('DB_PASS', default=None)
