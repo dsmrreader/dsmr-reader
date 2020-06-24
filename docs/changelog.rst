@@ -2,6 +2,18 @@ Changelog
 =========
 
 
+v3.12.0 - 2020-07-10
+
+.. warning::
+
+    This is the last release of DSMR-reader ``v3.x``. New features will only be added to ``v4.x``. See `the v4 upgrade guide <https://dsmr-reader.readthedocs.io/en/v4/faq/v4_upgrade.html>`_ for more information.
+
+- [`#1037 <https://github.com/dennissiemensma/dsmr-reader/issues/1037>`_] Laatste v3.x release
+
+
+----
+
+
 v3.11.0 - 2020-06-17
 
 - [`#1009 <https://github.com/dennissiemensma/dsmr-reader/issues/1009>`_] dsmr_stats_recalculate_prices neemt teruglevering niet mee
