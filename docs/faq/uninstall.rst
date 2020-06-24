@@ -24,4 +24,4 @@ To delete your data (the database) as well::
 
 Optionally, you can remove these packages::
 
-    sudo apt-get remove postgresql postgresql-server-dev-all nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get remove postgresql postgresql-server-dev-all python3-psycopg2 nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper

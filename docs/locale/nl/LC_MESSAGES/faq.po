@@ -1,4 +1,3 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -6,11 +5,12 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../faq.rst:2
 msgid "Frequently Asked Questions (FAQ)"
@@ -34,8 +34,8 @@ msgstr ""
 
 #: ../../faq.rst:13
 msgid ""
-"`Create an issue at Github <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/new>`_"
+"`Create an issue at Github <https://github.com/dennissiemensma/dsmr-reader/"
+"issues/new>`_"
 msgstr ""
 "`Maak een issue aan op Github <https://github.com/dennissiemensma/dsmr-"
 "reader/issues/new>`_"
@@ -65,8 +65,8 @@ msgid ""
 "*I've adjusted my energy prices but there are no changes! How can I "
 "regenerate them with my new prices?*"
 msgstr ""
-"*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil!"
-" Hoe kan ik de nieuwe prijzen doorvoeren?*"
+"*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! "
+"Hoe kan ik de nieuwe prijzen doorvoeren?*"
 
 #: ../../faq.rst:31
 msgid "Execute::"
@@ -78,15 +78,15 @@ msgstr "Ik zie geen gasverbruik"
 
 #: ../../faq.rst:40
 msgid ""
-"Please make sure that your meter supports reading gas consumption and "
-"that you've waited for a few hours for any graphs to render. The gas "
-"meter positions are only be updated once per hour (for DSMR v4). The "
-"Status page will give you insight in this as well."
+"Please make sure that your meter supports reading gas consumption and that "
+"you've waited for a few hours for any graphs to render. The gas meter "
+"positions are only be updated once per hour (for DSMR v4). The Status page "
+"will give you insight in this as well."
 msgstr ""
 "Wees er allereerst zeker van dat je slimme meter uberhaupt gasverbruik "
-"registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden "
-"worden sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De "
-"Status-pagina geeft je hier overigens ook inzicht in."
+"registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden worden "
+"sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-"
+"pagina geeft je hier overigens ook inzicht in."
 
 #: ../../faq.rst:46
 msgid "How do I restore a database backup?"
@@ -102,10 +102,10 @@ msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
 #: ../../faq.rst:54
 msgid ""
-"`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-"
-"to-sql.html>`_ for more information about how to enable timezone support "
-"on MySQL. On recent versions it should be as simple as executing the "
-"following command as root/sudo user::"
+"`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-"
+"sql.html>`_ for more information about how to enable timezone support on "
+"MySQL. On recent versions it should be as simple as executing the following "
+"command as root/sudo user::"
 msgstr ""
 "`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-"
 "tzinfo-to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op "
@@ -138,11 +138,11 @@ msgstr ""
 
 #: ../../faq.rst:75
 msgid ""
-"See :doc:`these datalogger instructions<installation/datalogger>` for "
-"more information."
+"See :doc:`these datalogger instructions<installation/datalogger>` for more "
+"information."
 msgstr ""
-"Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor "
-"meer informatie."
+"Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor meer "
+"informatie."
 
 #: ../../faq.rst:79
 msgid "How can I check the logfiles?"
@@ -166,11 +166,10 @@ msgstr "Hoe los ik fouten op zoals ``DETAIL: Key (id)=(123) already exists``?"
 
 #: ../../faq.rst:93
 msgid ""
-"This depends on the situation, but you can always try this yourself "
-"first::"
+"This depends on the situation, but you can always try this yourself first::"
 msgstr ""
-"Het hangt af van de situatie, maar je kunt het volgende sowieso zelf "
-"eerst proberen::"
+"Het hangt af van de situatie, maar je kunt het volgende sowieso zelf eerst "
+"proberen::"
 
 #: ../../faq.rst:99
 msgid "If it does not resolve your issue, `ask for support <#i-need-help>`_."
@@ -184,37 +183,38 @@ msgstr "Ik ben van slimme meter gewisseld"
 
 #: ../../faq.rst:104
 msgid ""
-"Sometimes, when relocating or due to replacement of your meter, the meter"
-" positions read by DSMR-reader will cause invalid data (e.g.: big gaps or"
-" inverted consumption). Any consecutive days should not be affected by "
-"this issue, so you will only have to adjust the data for one day."
+"Sometimes, when relocating or due to replacement of your meter, the meter "
+"positions read by DSMR-reader will cause invalid data (e.g.: big gaps or "
+"inverted consumption). Any consecutive days should not be affected by this "
+"issue, so you will only have to adjust the data for one day."
 msgstr ""
 "Het komt soms voor dat, door verhuizing of technische vervanging van je "
 "meter, deze meterstanden in DSMR-reader voor afwijkingen en onjuiste "
-"gegevens zorgen (bijv.: grote gaten of negatief verbruik). Dit komt "
-"alleen voor bij de dag zelf en niet bij de dagen erna. Daarom zul je de "
-"gegevens van de foutieve dag zelf moeten aanpassen."
+"gegevens zorgen (bijv.: grote gaten of negatief verbruik). Dit komt alleen "
+"voor bij de dag zelf en niet bij de dagen erna. Daarom zul je de gegevens "
+"van de foutieve dag zelf moeten aanpassen."
 
 #: ../../faq.rst:107
 msgid ""
 "The day after, you should be able to manually adjust any invalid Day or "
 "Hour Statistics in the admin interface for the invalid day."
 msgstr ""
-"De dag erna kun je dit zelf weer rechtzetten voor de foutieve dag, bij de"
-" Dag- of Uurtotalen in de admin omgeving."
+"De dag erna kun je dit zelf weer rechtzetten voor de foutieve dag, bij de "
+"Dag- of Uurtotalen in de admin omgeving."
 
 #: ../../faq.rst:111
 msgid "How can I create the (super)user or update its password?"
-msgstr ""
+msgstr "Hoe kan ik de (admin)user aanmaken of het wachtwoord wijzigen?"
 
 #: ../../faq.rst:113
 msgid ""
 "Configure ``DSMR_USER`` and ``DSMR_PASSWORD`` of the :doc:`Env "
 "Settings<env_settings>`."
 msgstr ""
+"Stel ``DSMR_USER`` en ``DSMR_PASSWORD`` in via de :doc:`Env-"
+"instellingen<env_settings>`."
 
 #: ../../faq.rst:115
-#, fuzzy
 msgid "Now execute::"
 msgstr "Voer uit::"
 
@@ -223,4 +223,5 @@ msgid ""
 "The user should either be created or the existing user should have its "
 "password updated."
 msgstr ""
-
+"De gebruiker moet nu ofwel aangemaakt zijn ofwel het wachtwoord is "
+"bijgewerkt."

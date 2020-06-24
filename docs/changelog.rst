@@ -20,21 +20,23 @@ Unreleased
 
 
 
-v4.0.0 - 2020-xx-xx
+v4.0.0 - 2020-07-10
 -------------------
 
 .. warning::
 
     This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See :doc:`the v4 upgrade guide <faq/v4_upgrade>` for more information.
 
-- ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
-- ``Added``: Added ``dsmr_client`` command as a (by default running) replacement for ``dsmr_mqtt`` [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
-- ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dennissiemensma/dsmr-reader/issues/1025>`_]
-- ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
-- ``Removed``: Drop API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dennissiemensma/dsmr-reader/issues/1024>`_]
 - ``Changed``: Replaced settings.py config by (system) env vars [`#1035 <https://github.com/dennissiemensma/dsmr-reader/issues/1035>`_]
 - ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_]
 - ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
+
+- ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
+- ``Added``: Added ``dsmr_client`` command as a (by default running) replacement for ``dsmr_mqtt`` [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
+- ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dennissiemensma/dsmr-reader/issues/1025>`_]
+
+- ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
+- ``Removed``: Drop API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dennissiemensma/dsmr-reader/issues/1024>`_]
 
 
 ----

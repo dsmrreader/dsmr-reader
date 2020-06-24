@@ -216,7 +216,7 @@ msgstr ""
 "backend, waar de applicatie in Gunicorn draait onder Supervisor. Deze "
 "stellen we later in.*"
 
-#: ../../installation/explained.rst:107 ../../installation/explained.rst:241
+#: ../../installation/explained.rst:107 ../../installation/explained.rst:238
 msgid ""
 "Make sure you are acting here as ``root`` or ``sudo`` user. If not, press"
 " CTRL + D to log out of the ``dsmr`` user."
@@ -311,7 +311,7 @@ msgid ""
 "application or project::"
 msgstr ""
 "Maak een nieuwe VirtualEnv aan. Het is gebruikelijk om hiervoor dezelfde "
-"naam te gebruiken als die van de applicatie of het project."
+"naam te gebruiken als die van de applicatie of het project::"
 
 #: ../../installation/explained.rst:149
 msgid ""
@@ -319,7 +319,7 @@ msgid ""
 "interpreter."
 msgstr ""
 "N.B.: het is belangrijk dat je voor deze VirtualEnv aangeeft dat **Python"
-" 3** de gewenste standaardversie is::"
+" 3** de gewenste standaardversie is."
 
 #: ../../installation/explained.rst:151
 msgid ""
@@ -389,19 +389,11 @@ msgstr ""
 " alles al in staat wat nodig is. Zoals bijvoorbeeld Django en de "
 "databaseverbinding."
 
-#: ../../installation/explained.rst:177
-msgid ""
-"The ``base.txt`` contains requirements which the application needs "
-"anyway, no matter which backend you've choosen."
-msgstr ""
-"Het bestand ``base.txt`` bevat alle afhankelijkheden die de applicatie "
-"sowieso nodig heeft, ongeacht de databasekeuze die je gemaakt hebt."
-
-#: ../../installation/explained.rst:180
+#: ../../installation/explained.rst:178
 msgid "Setup local config::"
-msgstr ""
+msgstr "Stel lokale config in::"
 
-#: ../../installation/explained.rst:189
+#: ../../installation/explained.rst:187
 msgid ""
 "**Installation of the requirements below might take a while**, depending "
 "on your Internet connection, RaspberryPi speed and resources (generally "
@@ -412,15 +404,15 @@ msgstr ""
 "je Internet-verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te "
 "maken wanneer dit lang lijkt te duren. :]"
 
-#: ../../installation/explained.rst:191
+#: ../../installation/explained.rst:189
 msgid "Install dependencies::"
 msgstr "Installeer afhankelijkheden::"
 
-#: ../../installation/explained.rst:197
+#: ../../installation/explained.rst:195
 msgid "Optional: Restore a database backup"
 msgstr "Optioneel: Database back-up terugzetten"
 
-#: ../../installation/explained.rst:201
+#: ../../installation/explained.rst:199
 msgid ""
 "If you need to restore a database backup with your existing data, this is"
 " the moment to do it."
@@ -428,15 +420,15 @@ msgstr ""
 "Indien je een back-up van de database wilt terugzetten met je oude "
 "gegevens, dit is het moment om dat te doen."
 
-#: ../../installation/explained.rst:203
+#: ../../installation/explained.rst:201
 msgid "Restoring a database backup? :doc:`See for instructions here <restore>`."
 msgstr "Database back-up terugzetten? :doc:`Zie hier voor instructies <restore>`."
 
-#: ../../installation/explained.rst:208
+#: ../../installation/explained.rst:205
 msgid "8. Bootstrapping"
 msgstr "8. Initialisatie"
 
-#: ../../installation/explained.rst:209
+#: ../../installation/explained.rst:206
 msgid ""
 "Now it's time to bootstrap the application and check whether all settings"
 " are good and requirements are met."
@@ -444,11 +436,11 @@ msgstr ""
 "Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie "
 "proberen te initialiseren."
 
-#: ../../installation/explained.rst:211
+#: ../../installation/explained.rst:208
 msgid "Execute this to initialize the database we've created earlier::"
 msgstr "Voer dit uit om de database te initialiseren::"
 
-#: ../../installation/explained.rst:215
+#: ../../installation/explained.rst:212
 msgid ""
 "Prepare static files for webinterface. This will copy all static files to"
 " the directory we created for Nginx earlier in the process. It allows us "
@@ -459,30 +451,34 @@ msgstr ""
 " voor Nginx, hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden"
 " kan hosten buiten de code-bestanden."
 
-#: ../../installation/explained.rst:218
+#: ../../installation/explained.rst:215
 msgid "Sync static files::"
 msgstr "Synchroniseer statische bestanden::"
 
-#: ../../installation/explained.rst:222
+#: ../../installation/explained.rst:219
 msgid ""
 "Create an application superuser with the following command. The "
 "``DSMR_USER`` and ``DSMR_PASSWORD`` :doc:`as defined in Env "
 "Settings<../env_settings>` will be used for the credentials."
 msgstr ""
+"Maak een applicatie superuser aan met het volgende commando. De "
+"``DSMR_USER`` en ``DSMR_PASSWORD`` :doc:`zoals ze in de Env-"
+"instellingen<../env_settings>` staan, worden daarbij gebruikt als "
+"inloggegevens."
 
-#: ../../installation/explained.rst:225
+#: ../../installation/explained.rst:222
 msgid "Execute::"
-msgstr ""
+msgstr "Voer uit::"
 
-#: ../../installation/explained.rst:229
+#: ../../installation/explained.rst:226
 msgid "You've almost completed the installation now."
 msgstr "Je bent op dit punt bijna klaar met de installatie."
 
-#: ../../installation/explained.rst:233
+#: ../../installation/explained.rst:230
 msgid "9. Webserver/Nginx (part 2)"
 msgstr "9. Webserver/Nginx (deel 2)"
 
-#: ../../installation/explained.rst:237
+#: ../../installation/explained.rst:234
 msgid ""
 "This installation guide asumes you run the Nginx webserver for this "
 "application only."
@@ -490,7 +486,7 @@ msgstr ""
 "Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver "
 "alleen gebruikt voor deze applicatie."
 
-#: ../../installation/explained.rst:239
+#: ../../installation/explained.rst:236
 msgid ""
 "It's possible to have other applications use Nginx as well, but that "
 "requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, "
@@ -500,7 +496,7 @@ msgstr ""
 "maar daarvoor zul je de wildcard moet weghalen in de ``dsmr-"
 "webinterface`` vhost, die je hieronder kopieert."
 
-#: ../../installation/explained.rst:243
+#: ../../installation/explained.rst:240
 msgid ""
 "Remove the default Nginx vhost (**only when you do not use it yourself, "
 "see the note above**)::"
@@ -508,7 +504,7 @@ msgstr ""
 "Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf "
 "gebruikt** (zie de notitie hierboven)::"
 
-#: ../../installation/explained.rst:247
+#: ../../installation/explained.rst:244
 msgid ""
 "Copy application vhost, **it will listen to any hostname** (wildcard), "
 "but you may change that if you feel like you need to. It won't affect the"
@@ -518,7 +514,7 @@ msgstr ""
 "hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te "
 "passen::"
 
-#: ../../installation/explained.rst:252
+#: ../../installation/explained.rst:249
 msgid ""
 "Let Nginx verify vhost syntax and reload Nginx when ``configtest`` "
 "passes::"
@@ -526,11 +522,11 @@ msgstr ""
 "Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad "
 "Nginx vervolgens wanneer de ``configtest`` lukt::"
 
-#: ../../installation/explained.rst:260
+#: ../../installation/explained.rst:257
 msgid "10. Supervisor"
 msgstr "10. Supervisor"
 
-#: ../../installation/explained.rst:261
+#: ../../installation/explained.rst:258
 msgid ""
 "Now we configure `Supervisor <http://supervisord.org/>`_, which is used "
 "to run our application's web interface and background jobs used. It's "
@@ -542,15 +538,15 @@ msgstr ""
 "Tevens zorgt Supervisor ervoor dat deze processen bij het (opnieuw) "
 "opstarten automatisch draaien."
 
-#: ../../installation/explained.rst:264
+#: ../../installation/explained.rst:261
 msgid "Copy the configuration files for Supervisor::"
 msgstr "Kopieer de configuratie-bestanden voor Supervisor::"
 
-#: ../../installation/explained.rst:271
+#: ../../installation/explained.rst:268
 msgid "Login to ``supervisorctl`` management console::"
 msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
 
-#: ../../installation/explained.rst:275
+#: ../../installation/explained.rst:272
 msgid ""
 "Enter these commands (**listed after the** ``>``). It will ask Supervisor"
 " to recheck its config directory and use/reload the files::"
@@ -558,7 +554,7 @@ msgstr ""
 "Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor"
 " dat Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
 
-#: ../../installation/explained.rst:281
+#: ../../installation/explained.rst:278
 msgid ""
 "Three processes should be started or running. Make sure they don't end up"
 " in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` "
@@ -568,24 +564,21 @@ msgstr ""
 "uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn "
 "gekomen. Je kunt het overzicht verversen door ``status`` te typen."
 
-#: ../../installation/explained.rst:283
+#: ../../installation/explained.rst:280
 msgid "When still in ``supervisorctl``'s console, type::"
 msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"
 
-#: ../../installation/explained.rst:287
+#: ../../installation/explained.rst:284
 msgid "Example of everything running well::"
 msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
-#: ../../installation/explained.rst:294
-#, fuzzy
+#: ../../installation/explained.rst:291
 msgid ""
 "Want to quit supervisor? Press ``CTRL + D`` to exit supervisor command "
 "line."
-msgstr ""
-"Wil je uit supervisor? Druk dan op ``CTRL + C`` om het logbestand niet "
-"meer te bekijken en vervolgens op ``CTRL + D`` om uit supervisor te gaan."
+msgstr "Wil je uit supervisor? Druk dan op ``CTRL + D`` om uit supervisor te gaan."
 
-#: ../../installation/explained.rst:300
+#: ../../installation/explained.rst:297
 msgid ":doc:`Finished? Go to setting up the application<../application>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
 
@@ -689,10 +682,12 @@ msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
 #~ "verlies) hiermee aanpassen::"
 
 #~ msgid ""
-#~ "Create an application superuser with the"
-#~ " following command. The ``DSMR_USER`` and"
-#~ " ``DSMR_PASSWORD`` :doc:`as defined in Env"
-#~ " Settings<env_settings>` will be used for"
-#~ " the credentials."
+#~ "The ``base.txt`` contains requirements which"
+#~ " the application needs anyway, no "
+#~ "matter which backend you've choosen."
 #~ msgstr ""
+#~ "Het bestand ``base.txt`` bevat alle "
+#~ "afhankelijkheden die de applicatie sowieso "
+#~ "nodig heeft, ongeacht de databasekeuze "
+#~ "die je gemaakt hebt."
 

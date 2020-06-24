@@ -1,4 +1,3 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -6,23 +5,24 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../plugins.rst:2
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 #: ../../plugins.rst:4
 msgid ""
 "The application allows you to create and add plugins, hooking on certain "
 "events triggered."
 msgstr ""
-"De applicatie staat je toe om plugins te maken en te koppelen, op "
-"bepaalde gebeurtenissen."
+"De applicatie staat je toe om plugins te maken en te koppelen, op bepaalde "
+"gebeurtenissen."
 
 #: ../../plugins.rst:7
 msgid "Contents"
@@ -34,13 +34,11 @@ msgstr "Configuratie"
 
 #: ../../plugins.rst:12
 msgid ""
-"You can create plugins in their own file in "
-"``dsmr_plugins/modules/plugin_name.py``, where ``plugin_name`` is the "
-"name of your plugin."
+"You can create plugins in their own file in ``dsmr_plugins/modules/"
+"plugin_name.py``, where ``plugin_name`` is the name of your plugin."
 msgstr ""
-"Je kan plugins maken in hun eigen bestand in "
-"``dsmr_plugins/modules/plugin_naam.py``, waar ``plugin_naam`` de naam van"
-" je plugin is."
+"Je kan plugins maken in hun eigen bestand in ``dsmr_plugins/modules/"
+"plugin_naam.py``, waar ``plugin_naam`` de naam van je plugin is."
 
 #: ../../plugins.rst:15
 msgid "Please make sure the ``plugin_name``,"
@@ -52,35 +50,37 @@ msgstr "zonder hoofdletters is (``plugin_naam`` en **niet** ``PLUGIN_NAAM``),"
 
 #: ../../plugins.rst:18
 msgid ""
-"does not contains spaces or dashes, just use underscores and do not start"
-" the name with a digit."
+"does not contains spaces or dashes, just use underscores and do not start the "
+"name with a digit."
 msgstr ""
-"geen spaties of koppeltekens bevat, gebruik daarvoor underscores en begin"
-" de naam niet met een cijfer."
+"geen spaties of koppeltekens bevat, gebruik daarvoor underscores en begin de "
+"naam niet met een cijfer."
 
 #: ../../plugins.rst:21
 msgid ""
 "Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more "
 "information :doc:`see DSMRREADER_PLUGINS in Env Settings<env_settings>`."
 msgstr ""
+"Voeg het **dotted** pad in als ``DSMRREADER_PLUGINS`` env var. Voor meer "
+"informatie, :doc:`zie DSMRREADER_PLUGINS in Env-instellingen<env_settings>`."
 
 #: ../../plugins.rst:23
 msgid ""
-"Your plugin file is imported once, so you should make sure to hook any "
-"events you want."
+"Your plugin file is imported once, so you should make sure to hook any events "
+"you want."
 msgstr ""
 "Je plugin-bestand wordt eenmalig geimporteerd, dus zorg ervoor dat je "
 "gebeurtenissen koppelt die je wilt volgen."
 
 #: ../../plugins.rst:25
 msgid ""
-"And finally, make sure to **reload the application** by deploying it "
-"again. You can do that by simply executing the ``post-deploy.sh`` script "
-"in the root of the project."
+"And finally, make sure to **reload the application** by deploying it again. "
+"You can do that by simply executing the ``post-deploy.sh`` script in the root "
+"of the project."
 msgstr ""
-"En tot slot, zorg ervoor dat je **de applicatie herlaadt** door opnieuw "
-"te deployen. Je kunt dat doen door simpelweg ``post-deploy.sh`` uit te "
-"voeren, het script in de root van het project."
+"En tot slot, zorg ervoor dat je **de applicatie herlaadt** door opnieuw te "
+"deployen. Je kunt dat doen door simpelweg ``post-deploy.sh`` uit te voeren, "
+"het script in de root van het project."
 
 #: ../../plugins.rst:29
 msgid "Events / Signals"
@@ -88,11 +88,11 @@ msgstr "Gebeurtenissen / Signalen"
 
 #: ../../plugins.rst:30
 msgid ""
-"These are either dispatched by the Django framework or the application at"
-" some point."
+"These are either dispatched by the Django framework or the application at "
+"some point."
 msgstr ""
-"Deze worden verstuurd door ofwel het Django framework ofwel de applicatie"
-" zelf."
+"Deze worden verstuurd door ofwel het Django framework ofwel de applicatie "
+"zelf."
 
 #: ../../plugins.rst:33
 msgid "``dsmr_backend.signals.backend_called``"
@@ -100,12 +100,12 @@ msgstr "``dsmr_backend.signals.backend_called``"
 
 #: ../../plugins.rst:35
 msgid ""
-"Called by each iteration of the backend. Please use with caution, as it "
-"may block all backend operations when used improperly."
+"Called by each iteration of the backend. Please use with caution, as it may "
+"block all backend operations when used improperly."
 msgstr ""
 "Aangeroepen bij elke iteratie van de backend. Gebruik dit terughoudend, "
-"gezien het alle backend-acties kan blokkeren wanneer het verkeerd "
-"gebruikt wordt."
+"gezien het alle backend-acties kan blokkeren wanneer het verkeerd gebruikt "
+"wordt."
 
 #: ../../plugins.rst:39
 msgid "``dsmr_pvoutput.signals.pvoutput_upload``"
@@ -113,8 +113,8 @@ msgstr "``dsmr_pvoutput.signals.pvoutput_upload``"
 
 #: ../../plugins.rst:40
 msgid ""
-"Called by dsmr_pvoutput just before uploading data to PVOutput. The "
-"``data`` kwarg contains the data to be sent."
+"Called by dsmr_pvoutput just before uploading data to PVOutput. The ``data`` "
+"kwarg contains the data to be sent."
 msgstr ""
 "Aangeroepen door dsmr_pvoutput vlak voor het uploaden van gegevens naar "
 "PVOutput. De ``data`` kwarg bevat de gegevens die verstuurd worden."
@@ -125,12 +125,11 @@ msgstr "``dsmr_datalogger.signals.raw_telegram``"
 
 #: ../../plugins.rst:45
 msgid ""
-"Called by dsmr_datalogger when receiving or reading a telegram string. "
-"The ``data`` kwarg contains the raw telegram string."
+"Called by dsmr_datalogger when receiving or reading a telegram string. The "
+"``data`` kwarg contains the raw telegram string."
 msgstr ""
 "Aangeroepen door dsmr_datalogger wanneer er een telegram ontvangen of "
-"uitgelezen wordt. De ``data`` kwarg bevat de ruwe string met het "
-"telegram."
+"uitgelezen wordt. De ``data`` kwarg bevat de ruwe string met het telegram."
 
 #: ../../plugins.rst:49
 msgid "``django.db.models.signals.post_save``"
@@ -138,13 +137,13 @@ msgstr "``django.db.models.signals.post_save``"
 
 #: ../../plugins.rst:50
 msgid ""
-"Called by Django after saving new records to the database. Can be bound "
-"to the ``DayStatistics`` model for example, to process daily statistics "
+"Called by Django after saving new records to the database. Can be bound to "
+"the ``DayStatistics`` model for example, to process daily statistics "
 "elsewhere."
 msgstr ""
 "Aangeroepen door Django bij het opslaan van nieuwe databaserecords. Kan "
-"gekoppeld worden aan bijvoorbeeld het ``DayStatistics`` model, om "
-"dagelijkse statistieken ergens anders te verwerken."
+"gekoppeld worden aan bijvoorbeeld het ``DayStatistics`` model, om dagelijkse "
+"statistieken ergens anders te verwerken."
 
 #: ../../plugins.rst:54
 msgid "Other"
@@ -152,14 +151,14 @@ msgstr "Overige"
 
 #: ../../plugins.rst:55
 msgid ""
-"More signals may be available for use, please be careful when binding "
-"Django save-signals as it may impact performance. :doc:`If you need any "
-"help or information, please seek contact via Github<contributing>`."
+"More signals may be available for use, please be careful when binding Django "
+"save-signals as it may impact performance. :doc:`If you need any help or "
+"information, please seek contact via Github<contributing>`."
 msgstr ""
 "Meer signalen/gebeurtenissen zijn beschikbaar voor gebruik, echter wees "
 "voorzichtig bij het gebruiken van Django save-signalen, aangezien het de "
-"performance kan beïnvloeden.  :doc:`Mocht je hulp of informatie nodig "
-"hebben, zoek dan contact via Github<contributing>`."
+"performance kan beïnvloeden.  :doc:`Mocht je hulp of informatie nodig hebben, "
+"zoek dan contact via Github<contributing>`."
 
 #: ../../plugins.rst:60
 msgid "Example #1: Upload data to second PVOutput account"
@@ -167,63 +166,62 @@ msgstr "Voorbeeld #1: Upload gegevens naar een tweede PVOutput-account"
 
 #: ../../plugins.rst:61
 msgid ""
-"This is an example of issue `#407 <https://github.com/dennissiemensma"
-"/dsmr-reader/issues/407>`_, requesting the feature to upload data to a "
-"second PVOuput account."
+"This is an example of issue `#407 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/407>`_, requesting the feature to upload data to a second "
+"PVOuput account."
 msgstr ""
-"Dit is een voorbeeld van issue `#407 <https://github.com/dennissiemensma"
-"/dsmr-reader/issues/407>`_, met het verzoek om gegevens te uploaden naar "
-"een tweede PVOutput-account."
+"Dit is een voorbeeld van issue `#407 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/407>`_, met het verzoek om gegevens te uploaden naar een tweede "
+"PVOutput-account."
 
 #: ../../plugins.rst:64 ../../plugins.rst:102 ../../plugins.rst:151
 #: ../../plugins.rst:194
 msgid ":doc:`DSMRREADER_PLUGINS configuration<env_settings>`::"
-msgstr ""
+msgstr ":doc:`DSMRREADER_PLUGINS configuratie<env_settings>`::"
 
 #: ../../plugins.rst:68
 msgid ""
-"Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new "
-"file)::"
+"Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file)::"
 msgstr ""
-"Plugin bestand ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` "
-"(nieuw bestand)::"
+"Plugin bestand ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (nieuw "
+"bestand)::"
 
 #: ../../plugins.rst:95
 msgid ""
-"Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your"
-" second set of PVOutput API credentials."
+"Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your "
+"second set of PVOutput API credentials."
 msgstr ""
-"N.B.: De variablen ``XXXXX`` en ``YYYYY`` vervang je door de API-"
-"credentials van je tweede PVOutput-account."
+"N.B.: De variablen ``XXXXX`` en ``YYYYY`` vervang je door de API-credentials "
+"van je tweede PVOutput-account."
 
 #: ../../plugins.rst:99
 msgid "Example #2: Forwarding raw telegram data to another serial port"
 msgstr ""
-"Voorbeeld #2: Doorsturen van ruwe telegram-gegevens naar een andere "
-"seriële poort"
+"Voorbeeld #2: Doorsturen van ruwe telegram-gegevens naar een andere seriële "
+"poort"
 
 #: ../../plugins.rst:100
 msgid ""
-"This is an example of issue `#557 <https://github.com/dennissiemensma"
-"/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded "
-"to another serial port."
+"This is an example of issue `#557 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another "
+"serial port."
 msgstr ""
-"Dit is een voorbeeld van issue `#557 <https://github.com/dennissiemensma"
-"/dsmr-reader/issues/557>`_, wat ervoor zorgt dat je DSMR-telegrammen kunt"
-" doorsturen naar een andere seriële poort."
+"Dit is een voorbeeld van issue `#557 <https://github.com/dennissiemensma/dsmr-"
+"reader/issues/557>`_, wat ervoor zorgt dat je DSMR-telegrammen kunt "
+"doorsturen naar een andere seriële poort."
 
 #: ../../plugins.rst:107
 msgid ""
-"Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` "
-"(new file)::"
+"Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new "
+"file)::"
 msgstr ""
-"Plugin bestand ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py``"
-" (nieuw bestand)::"
+"Plugin bestand ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` "
+"(nieuw bestand)::"
 
 #: ../../plugins.rst:144
 msgid ""
-"Note that the ``/dev/ttyUSBvA`` variable should be changed to the serial "
-"port used in your own situation."
+"Note that the ``/dev/ttyUSBvA`` variable should be changed to the serial port "
+"used in your own situation."
 msgstr ""
 "N.B.: Je moet de ``/dev/ttyUSBvA`` variabele nog wijzigen naar de juiste "
 "seriële poort in je eigen situatie."
@@ -231,29 +229,29 @@ msgstr ""
 #: ../../plugins.rst:148
 msgid "Example #3: Forwarding raw telegram data to another instance by API"
 msgstr ""
-"Voorbeeld #3: Doorsturen van ruwe telegram-gegevens naar een andere "
-"instantie van DSMR-reader, via de API"
+"Voorbeeld #3: Doorsturen van ruwe telegram-gegevens naar een andere instantie "
+"van DSMR-reader, via de API"
 
 #: ../../plugins.rst:149
 msgid ""
-"This can be quite handy if you run multiple instances of DSMR-reader "
-"(i.e.: RaspberryPI + somewhere in cloud)."
+"This can be quite handy if you run multiple instances of DSMR-reader (i.e.: "
+"RaspberryPI + somewhere in cloud)."
 msgstr ""
-"Dit kan behoorlijk handig zijn wanneer je meerdere instanties van DSMR-"
-"reader draait (bijvoorbeeld op een Raspberry en gespiegeld in de cloud)."
+"Dit kan behoorlijk handig zijn wanneer je meerdere instanties van DSMR-reader "
+"draait (bijvoorbeeld op een Raspberry en gespiegeld in de cloud)."
 
 #: ../../plugins.rst:156
 msgid ""
 "Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (new "
 "file)::"
 msgstr ""
-"Plugin bestand ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` "
-"(nieuw bestand)::"
+"Plugin bestand ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (nieuw "
+"bestand)::"
 
 #: ../../plugins.rst:187
 msgid ""
-"Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should "
-"be changed to your own preferences."
+"Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should be "
+"changed to your own preferences."
 msgstr ""
 "N.B.: De ``API_HOST``, ``API_KEY`` en ``TIMEOUT`` variabelen moet je nog "
 "wijzigen naar je eigen voorkeuren."
@@ -265,29 +263,26 @@ msgstr "Voorbeeld #4: Doorsturen van DSMR-metingen in JSON-formaat naar een API"
 #: ../../plugins.rst:192
 msgid "Use this to send DSMR readings in JSON format to some (arbitrary) API."
 msgstr ""
-"Gebruik dit om DSMR-metingen in JSON-formaat naar een (willekeurige) API "
-"door te sturen."
+"Gebruik dit om DSMR-metingen in JSON-formaat naar een (willekeurige) API door "
+"te sturen."
 
 #: ../../plugins.rst:199
 msgid ""
-"Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` "
-"(new file)::"
+"Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new "
+"file)::"
 msgstr ""
-"Plugin bestand "
-"``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (nieuw "
-"bestand)::"
+"Plugin bestand ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` "
+"(nieuw bestand)::"
 
 #~ msgid "Plugins/hooks (Do It Yourself)"
 #~ msgstr "Plugins/hooks (Doe-Het-Zelf)"
 
 #~ msgid ""
-#~ "Add the **dotted** path to the end"
-#~ " of your ``dsmrreader/settings.py`` file::"
+#~ "Add the **dotted** path to the end of your ``dsmrreader/settings.py`` "
+#~ "file::"
 #~ msgstr ""
-#~ "Voeg het **dotted** pad toe aan "
-#~ "het einde van je ``dsmrreader/settings.py``"
-#~ " bestand::"
+#~ "Voeg het **dotted** pad toe aan het einde van je ``dsmrreader/settings."
+#~ "py`` bestand::"
 
 #~ msgid "Settings file ``dsmrreader/settings.py`` (addition)::"
 #~ msgstr "Settings bestand ``dsmrreader/settings.py`` (toevoeging)::"
-

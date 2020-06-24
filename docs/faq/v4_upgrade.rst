@@ -5,7 +5,7 @@ DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to ma
 
 .. note::
 
-    If you're using Docker, you can probably just install the ``v4.x`` version of the Docker container without any of the steps below.
+    If you're using Docker, you can probably just install the ``v4.x`` version of the Docker container without having to perform any of the steps below.
 
 
 .. contents::
@@ -67,7 +67,7 @@ Execute the following::
 3. Migrate ``settings.py`` to ``.env``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-DSMR-reader initially works with a ``settings.py`` for your local settings.
+DSMR-reader started with a ``settings.py`` for your local settings.
 This has some disadvantages, especially regarding today's industry standards and how Docker works as well.
 
 Therefor the configuration has been migrated to a ``.env`` file and system env vars are now supported as well. Follow these steps to migrate::
@@ -81,16 +81,17 @@ Therefor the configuration has been migrated to a ``.env`` file and system env v
 Now check the settings you were using in ``dsmrreader/settings.py.BACKUP``.
 Compare them with the defaults in ``.env``.
 
+If you find any differences (e.g. different database credentials or host), update the ``.env`` file accordingly. The format should be straight forward.
+Unfortunately, you cannot test whether the ``.env`` file was migrated correctly until you've reached the final step of this guide and switched to v4.x.
+
 Not all previously supported settings are also available in ``.env``.
 See :doc:`Env Settings for the latest list of env vars supported<../env_settings>`.
-
-If you find any differences (e.g. different database credentials or host), update the ``.env`` file accordingly.
-Unfortunately, you cannot test whether the ``.env`` file was migrated correctly until you've reached the final step of this guide and switched to v4.x.
 
 Backwards incompatible
 ----------------------
 
-The format should be straight forward. Please note that ``DSMRREADER_PLUGINS`` is now a comma separated list. Chances are however very slim that you are using ``DSMRREADER_PLUGINS`` (advanced users only).
+Please note that ``DSMRREADER_PLUGINS`` is now a comma separated list.
+Chances are however very slim that you were using ``DSMRREADER_PLUGINS`` at all (advanced users only).
 
 
 4. Generate your own ``SECRET_KEY``
@@ -106,13 +107,15 @@ Execute the following::
     sudo su - dsmr
     ./tools/generate-secret-key.sh
 
-Check whether the script updated your ``.env`` file properly. It should display some output when you execute this::
+Check whether the script updated your ``.env`` file properly::
 
     grep 'SECRET_KEY=' .env
 
+ It should display the key generated when you execute it.
 
-5. Replace ``dsmr_mqtt`` by ``dsmr_client``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+5. Rename ``dsmr_mqtt`` to ``dsmr_client``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support more generic continuous data flows in the future (such as InfluxDB) and to offload some blocking mechanics in ``dsmr_backend`` as well.
 
@@ -121,7 +124,7 @@ Execute the following::
 
     sudo supervisorctl status
 
-Is ``dsmr_mqtt`` listed? If **not listed**, skip the next command. Otherwise remove it::
+Is ``dsmr_mqtt`` listed? If **not listed**, skip the following ``sudo rm`` command. Otherwise remove it::
 
     sudo rm /etc/supervisor/conf.d/dsmr_mqtt.conf
 

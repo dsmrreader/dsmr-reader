@@ -4,159 +4,205 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR-reader \n"
+"Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: \n"
+"Language: nl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../env_settings.rst:2
 msgid "Env Settings"
-msgstr ""
+msgstr "Env-instellingen"
 
 #: ../../env_settings.rst:4
 msgid ""
 "You can either specify the following settings as system environments "
-"variables or define them in a ``.env`` file in the root of the DSMR-"
-"reader project folder."
+"variables or define them in a ``.env`` file in the root of the DSMR-reader "
+"project folder."
 msgstr ""
+"Je kunt deze instellingen ofwel als systeem environment variabelen aanmaken "
+"of ze definieren in een ``.env`` bestand in de DSMR-reader project-map."
 
 #: ../../env_settings.rst:7
 msgid "Contents"
-msgstr ""
+msgstr "Inhoudsopgave"
 
 #: ../../env_settings.rst:10
 msgid "``SECRET_KEY``"
-msgstr ""
+msgstr "``SECRET_KEY``"
 
-#: ../../env_settings.rst:12
+#: ../../env_settings.rst:11 ../../env_settings.rst:19
+msgid "**Required**"
+msgstr "**Vereist**"
+
+#: ../../env_settings.rst:13
 msgid ""
-"The secret key Django should use. This should be unique for your "
-"installation. Generate or refresh it by running ``./tools/generate-"
-"secret-key.sh``."
+"The secret key Django should use. This should be randomly generated for your "
+"installation. Generate or refresh it by running ``./tools/generate-secret-"
+"key.sh``."
 msgstr ""
+"De secret key die Django gebruikt. Zou willekeurig moeten zijn voor je "
+"installatie. Genereer of roteer het door ``./tools/generate-secret-key.sh`` "
+"uit te voeren."
 
-#: ../../env_settings.rst:17
+#: ../../env_settings.rst:18
+msgid "``DB_ENGINE``"
+msgstr "``DB_ENGINE``"
+
+#: ../../env_settings.rst:21
+msgid ""
+"The database engine to use. Officially DSMR-reader only supports ``django.db."
+"backends.postgresql``, but others supported by Django may work as well. "
+"Experiment at your own risk!"
+msgstr ""
+"De database-engine om te gebruiken. Officieel ondersteunt DSMR-reader alleen "
+"``django.db.backends.postgresql``, maar anderen ondersteund door Django "
+"werken mogelijk ook. Experimenteer op eigen risico!"
+
+#: ../../env_settings.rst:26
+msgid "``DB_NAME``"
+msgstr "``DB_NAME``"
+
+#: ../../env_settings.rst:27
+msgid "The database name to use."
+msgstr "De database-naam."
+
+#: ../../env_settings.rst:29 ../../env_settings.rst:36
+#: ../../env_settings.rst:43 ../../env_settings.rst:50
+#: ../../env_settings.rst:57
+msgid ""
+"**Required** for the default ``DB_ENGINE``, but can be optional for some "
+"engines."
+msgstr ""
+"**Vereist** voor de standaard ``DB_ENGINE``, maar kan optioneel zijn voor "
+"andere engines."
+
+#: ../../env_settings.rst:33
+msgid "``DB_USER``"
+msgstr "``DB_USER``"
+
+#: ../../env_settings.rst:34
+msgid "The database user to use."
+msgstr "De database-gebruiker."
+
+#: ../../env_settings.rst:40
+msgid "``DB_PASS``"
+msgstr "``DB_PASS``"
+
+#: ../../env_settings.rst:41
+msgid "The database password for the ``DB_USER`` to use."
+msgstr "Het database-wachtwoord voor ``DB_USER`` om te gebruiken."
+
+#: ../../env_settings.rst:47
+msgid "``DB_HOST``"
+msgstr "``DB_HOST``"
+
+#: ../../env_settings.rst:48
+msgid "The database host to use."
+msgstr "De database-host."
+
+#: ../../env_settings.rst:54
+msgid "``DB_PORT``"
+msgstr "``DB_PORT``"
+
+#: ../../env_settings.rst:55
+msgid "The database port to use."
+msgstr "De database-poort."
+
+#: ../../env_settings.rst:61
 msgid "``DSMR_USER``"
-msgstr ""
+msgstr "``DSMR_USER``"
 
-#: ../../env_settings.rst:19
+#: ../../env_settings.rst:62 ../../env_settings.rst:69
+msgid "**Situational**"
+msgstr "**Situationeel**"
+
+#: ../../env_settings.rst:64
 msgid ""
-"The username of the **webinterface** (super)user to create when running "
-"``./manage.py dsmr_superuser``."
+"The username of the **webinterface** (super)user to create when running ``./"
+"manage.py dsmr_superuser``."
 msgstr ""
+"Gebruikersnaam van de **webinterface** (super)user om te gebruiken, wanneer "
+"je ``./manage.py dsmr_superuser`` uitvoert."
 
-#: ../../env_settings.rst:23
+#: ../../env_settings.rst:68
 msgid "``DSMR_PASSWORD``"
-msgstr ""
+msgstr "``DSMR_PASSWORD``"
 
-#: ../../env_settings.rst:25
+#: ../../env_settings.rst:71
 msgid ""
 "The password of the ``DSMR_USER`` user to create (or update if the user "
 "exists) when running ``./manage.py dsmr_superuser``."
 msgstr ""
+"Het gewenste wachtwoord voor de ``DSMR_USER`` gebruiker, bij aanmaken of "
+"updaten van de gebruiker. Voor wanneer je ``./manage.py dsmr_superuser`` "
+"uitvoert."
 
-#: ../../env_settings.rst:29
-msgid "``DB_ENGINE``"
-msgstr ""
-
-#: ../../env_settings.rst:31
-msgid ""
-"The database engine to use. Officially DSMR-reader only supports "
-"``django.db.backends.postgresql``, but others supported by Django may "
-"work as well. Experiment at your own risk!"
-msgstr ""
-
-#: ../../env_settings.rst:36
-msgid "``DB_NAME``"
-msgstr ""
-
-#: ../../env_settings.rst:38
-msgid "The database name to use."
-msgstr ""
-
-#: ../../env_settings.rst:42
-msgid "``DB_USER``"
-msgstr ""
-
-#: ../../env_settings.rst:44
-msgid "The database user to use."
-msgstr ""
-
-#: ../../env_settings.rst:48
-msgid "``DB_PASS``"
-msgstr ""
-
-#: ../../env_settings.rst:50
-msgid "The database password for the ``DB_USER`` to use."
-msgstr ""
-
-#: ../../env_settings.rst:54
-msgid "``DB_HOST``"
-msgstr ""
-
-#: ../../env_settings.rst:56
-msgid "The database host to use."
-msgstr ""
-
-#: ../../env_settings.rst:60
-msgid "``DB_PORT``"
-msgstr ""
-
-#: ../../env_settings.rst:62
-msgid "The database port to use."
-msgstr ""
-
-#: ../../env_settings.rst:66
+#: ../../env_settings.rst:75
 msgid "``DSMRREADER_LOGLEVEL``"
-msgstr ""
+msgstr "``DSMRREADER_LOGLEVEL``"
 
-#: ../../env_settings.rst:68
+#: ../../env_settings.rst:76 ../../env_settings.rst:85
+#: ../../env_settings.rst:98 ../../env_settings.rst:105
+msgid "**Optional**"
+msgstr "**Optioneel**"
+
+#: ../../env_settings.rst:78
 msgid ""
-"The log level DSMR-reader should use. Choose either ``ERROR`` (omit for "
-"this default) or ``DEBUG`` (should be temporary due to file I/O)."
+"The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this "
+"default) or ``DEBUG`` (should be temporary due to file I/O)."
 msgstr ""
+"Het log level dat DSMR-reader gebruikt. Kies ofwel ``ERROR`` (laat weg voor "
+"deze standaard) of ``DEBUG`` (alleen tijdelijk i.v.m. hogere I/O)."
 
-#: ../../env_settings.rst:70
+#: ../../env_settings.rst:80
 msgid "For more information, :doc:`see Troubleshooting<troubleshooting>`."
-msgstr ""
+msgstr "Voor meer informatie, :doc:`zie Hulp bij problemen<troubleshooting>`."
 
-#: ../../env_settings.rst:74
+#: ../../env_settings.rst:84
 msgid "``DSMRREADER_PLUGINS``"
-msgstr ""
+msgstr "``DSMRREADER_PLUGINS``"
 
-#: ../../env_settings.rst:76
+#: ../../env_settings.rst:87
 msgid ""
-"The plugins DSMR-reader should use. Omit to use the default of no "
-"plugins. Note that this should be a comma separated list when specifying "
-"multiple plugins. E.g.::"
+"The plugins DSMR-reader should use. Omit to use the default of no plugins. "
+"Note that this should be a comma separated list when specifying multiple "
+"plugins. E.g.::"
 msgstr ""
+"De plugins die DSMR-reader gebruikt. Laat weg als je dit niet gebruikt. N."
+"B.: Dit is een komma-gescheiden lijst wanneer je meerdere plugins "
+"specificeert. Bijvoorbeeld::"
 
-#: ../../env_settings.rst:82
+#: ../../env_settings.rst:93
 msgid "For more information, :doc:`see Plugins<plugins>`."
-msgstr ""
+msgstr "Voor meer informatie, :doc:`zie Plugins<plugins>`."
 
-#: ../../env_settings.rst:86
+#: ../../env_settings.rst:97
 msgid "``CONN_MAX_AGE``"
-msgstr ""
+msgstr "``CONN_MAX_AGE``"
 
-#: ../../env_settings.rst:88
+#: ../../env_settings.rst:100
 msgid "The max lifetime for the database connections. Omit to use the default."
 msgstr ""
+"De maximale levensduur voor databaseverbindingen. Laat weg om de "
+"standaardinstelling te gebruiken."
 
-#: ../../env_settings.rst:92
+#: ../../env_settings.rst:104
 msgid "``TZ``"
-msgstr ""
+msgstr "``TZ``"
 
-#: ../../env_settings.rst:94
+#: ../../env_settings.rst:107
 msgid ""
 "The timezone Django should use. Alter at your own risk. Omit to use the "
 "default, using the CET/CEST timezone (applicable to the Netherlands)."
 msgstr ""
-
+"De tijdzone die Django moet gebruiken. Wijzig op eigen risico. Laat weg om "
+"de standaard CET/CEST-tijdzone te gebruiken (zoals die voor Nederland geldt)."

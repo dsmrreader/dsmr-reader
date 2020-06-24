@@ -5,24 +5,16 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://dsmr-reader.readthedocs.io/en/v4/donations.html)
 [![Requirements](https://requires.io/github/dennissiemensma/dsmr-reader/requirements.svg?branch=v3)](https://requires.io/github/dennissiemensma/dsmr-reader/requirements/?branch=v4)
 
-# DSMR protocol reader
-*Stores data read and visualizes it.*
-
-## Project goal
-- **Own your own data**: data is stored on your own device.
-- **Free to use**: non-commercial use only.
-
+# DSMR-reader
 
 ## Quick start
-- **Requirements**: [English](https://dsmr-reader.readthedocs.io/en/v4/requirements.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/requirements.html)
+- **Documentation**: [English](https://dsmr-reader.readthedocs.io/en/v4/index.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/index.html)
 - **Installation**: [English](https://dsmr-reader.readthedocs.io/en/v4/installation.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/installation.html)
-- **API**: [English](https://dsmr-reader.readthedocs.io/en/v4/api.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/api.html)
 - **FAQ**: [English](https://dsmr-reader.readthedocs.io/en/v4/faq.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/faq.html)
 
-## Other
-- **View full documentation**: [English](https://dsmr-reader.readthedocs.io/en/v4/index.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/index.html)
-
 ## Screenshots
-Check out some previews [in the documentation](https://dsmr-reader.readthedocs.io/en/v4/screenshots.html).
+Check out some other previews [in the documentation](https://dsmr-reader.readthedocs.io/en/latest/screenshots.html).
 
 ![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/frontend/dashboard.png?r=v4)
+
+![Live graphs](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/frontend/live.png?r=v4)

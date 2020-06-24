@@ -9,6 +9,7 @@ DSMR Reader's documentation
    requirements
    data_integrity
    troubleshooting
+   env_settings
    faq
 
    installation
@@ -20,6 +21,10 @@ DSMR Reader's documentation
 
    application
    home_assistant
+   api
+   mqtt
+   plugins
+   development
 
    frontend/dashboard
    frontend/archive
@@ -43,18 +48,13 @@ DSMR Reader's documentation
    admin/consumption
    admin/weather
 
-   env_settings
-   api
-   mqtt
-   plugins
-   development
-
    faq/update
    faq/restart_processes
    faq/database
    faq/uninstall
    faq/v4_upgrade
    faq/v3_upgrade
+
    contributing
    credits
    donations

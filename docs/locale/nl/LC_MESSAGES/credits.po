@@ -17,11 +17,10 @@ msgid "Credits / Hall of Fame"
 msgstr "Credits / Hall of Fame"
 
 #: ../../credits.rst:5
-msgid "Special thanks for supplying code contributions"
-msgstr "Bijzondere dank voor de code-bijdragen van"
+msgid "Thanks to"
+msgstr "Dank aan"
 
 #: ../../credits.rst:6
-#, fuzzy
 msgid "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_"
 msgstr "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_"
 
@@ -31,97 +30,103 @@ msgstr "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_"
 
 #: ../../credits.rst:8
 msgid ""
-"All the `other contributers for the past few years <https://github.com/"
-"dennissiemensma/dsmr-reader/graphs/contributors>`_!"
+"All the `other contributers <https://github.com/dennissiemensma/dsmr-reader/"
+"graphs/contributors>`_!"
 msgstr ""
-"Alle `overige bijdrages de afgelopen jaren <https://github.com/"
-"dennissiemensma/dsmr-reader/graphs/contributors>`_!"
-
-#: ../../credits.rst:11
-msgid "Also many thanks to the contributions of"
-msgstr "Dank voor de bijdrages van"
+"Alle `overige bijdrages <https://github.com/dennissiemensma/dsmr-reader/"
+"graphs/contributors>`_!"
 
 #: ../../credits.rst:12
-msgid ""
-"Many `pull requests <https://github.com/dennissiemensma/dsmr-reader/pulls>`_."
-msgstr ""
-"Vele `pull requests <https://github.com/dennissiemensma/dsmr-reader/pulls>`_."
+msgid "Special thanks"
+msgstr "Speciale dank aan"
 
 #: ../../credits.rst:13
 msgid ""
-"All `the ideas, improvements and bugs reported <https://github.com/"
-"dennissiemensma/dsmr-reader/issues>`_ for the past years."
+"JetBrains for providing a free open-source IDE licence to work on DSMR-"
+"reader."
 msgstr ""
-"Alle `ideeën, verbeteringenm suggesties en foutmeldingen <https://github.com/"
-"dennissiemensma/dsmr-reader/issues>`_ de afgelopen jaren."
+"JetBrains voor het afgeven van een gratis IDE open-source licentie om te "
+"werken aan DSMR-reader."
 
-#: ../../credits.rst:17
-msgid "Additional thanks to"
-msgstr "Eveneens dank aan"
-
-#: ../../credits.rst:18
-msgid "JetBrains for providing me a free open-source licence to their products."
+#: ../../credits.rst:19
+msgid ""
+"Also `Read The Docs <https://readthedocs.org/>`_ for freely hosting the "
+"documentation of DSMR-reader."
 msgstr ""
-"JetBrains voor het afgeven van een gratis open-source licentie voor haar "
-"producten."
+"En `Read The Docs <https://readthedocs.org/>`_ voor het gratis hosten van de "
+"documentatie van DSMR-reader."
+
+#: ../../credits.rst:21
+msgid ""
+"And `CircleCI <https://circleci.com/>`_ for freely hosting the automated "
+"tests for DSMR-reader, plus `Codecov <https://codecov.io>`_ for "
+"particitating in it as well."
+msgstr ""
+"En `CircleCI <https://circleci.com/>`_ voor het gratis hosting van "
+"automatische tests voor DSMR-reader, samen met `Codecov <https://codecov."
+"io>`_ voor de samenwerking daarin."
+
+#: ../../credits.rst:25
+msgid "Also many thanks to..."
+msgstr "En veel dank aan..."
 
 #: ../../credits.rst:26
-msgid "Software used"
-msgstr "Gebruikte software"
+msgid ""
+"... the `pull requests <https://github.com/dennissiemensma/dsmr-reader/"
+"pulls>`_."
+msgstr ""
+"... de `pull requests <https://github.com/dennissiemensma/dsmr-reader/"
+"pulls>`_."
 
 #: ../../credits.rst:27
 msgid ""
-"Please note and respect their licences as well, if any. Credits to the "
-"following software and projects:"
+"... all `the ideas, improvements and bugs reported <https://github.com/"
+"dennissiemensma/dsmr-reader/issues>`_ for the past years."
 msgstr ""
-"Houd rekening met eventuele licenties/restricties van deze software, wanneer "
-"van toepassing. Met dank aan de volgende software en projecten:"
+"... alle `ideeën, verbeteringen, suggesties en foutmeldingen <https://github."
+"com/dennissiemensma/dsmr-reader/issues>`_ de afgelopen jaren."
 
-#: ../../credits.rst:29
+#: ../../credits.rst:31
+msgid "And don't forget"
+msgstr "En vergeet niet"
+
+#: ../../credits.rst:32
+msgid "Credits to the following software and projects:"
+msgstr "Met dank aan de volgende software en projecten:"
+
+#: ../../credits.rst:34
+msgid "The many external PIP packages used in DSMR-reader!"
+msgstr "De vele externe PIP-packages die door DSMR-reader gebruikt worden!"
+
+#: ../../credits.rst:35
 msgid "`Raspbian <https://www.raspbian.org/>`_"
 msgstr "`Raspbian <https://www.raspbian.org/>`_"
 
-#: ../../credits.rst:30
+#: ../../credits.rst:36
 msgid "`Django Project <https://www.djangoproject.com/>`_"
 msgstr "`Django Project <https://www.djangoproject.com/>`_"
 
-#: ../../credits.rst:31
-msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
-msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
-
-#: ../../credits.rst:32
-msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
-msgstr "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
-
-#: ../../credits.rst:33
-msgid ""
-"`Django Admin Range Filter <https://github.com/silentsokolov/django-admin-"
-"rangefilter>`_"
-msgstr ""
-"`Django Admin Range Filter <https://github.com/silentsokolov/django-admin-"
-"rangefilter>`_"
-
-#: ../../credits.rst:34
+#: ../../credits.rst:37
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr "`Supervisor <http://supervisord.org/>`_"
 
-#: ../../credits.rst:35
+#: ../../credits.rst:38
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr "`MySQL <https://www.mysql.com/>`_"
 
-#: ../../credits.rst:36
+#: ../../credits.rst:39
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr "`MariaDB <https://mariadb.org/>`_"
 
-#: ../../credits.rst:37
+#: ../../credits.rst:40
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
-#: ../../credits.rst:38
-msgid "Director Responsive Admin template (website is offline)"
-msgstr "Director Responsive Admin template (website is offline)"
+#: ../../credits.rst:41
+msgid "Director Responsive Admin template (former website is offline)"
+msgstr "Director Responsive Admin template (voormalige website is offline)"
 
-#: ../../credits.rst:39
+#: ../../credits.rst:42
 msgid ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
@@ -129,35 +134,29 @@ msgstr ""
 "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com "
 "<http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
-#: ../../credits.rst:40
+#: ../../credits.rst:43
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 
-#: ../../credits.rst:41
+#: ../../credits.rst:44
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
-#: ../../credits.rst:42
+#: ../../credits.rst:45
 msgid "`Github <https://github.com/>`_"
 msgstr "`Github <https://github.com/>`_"
 
-#: ../../credits.rst:43
-msgid "`TravisCI <https://travis-ci.org>`_"
-msgstr "`TravisCI <https://travis-ci.org>`_"
-
-#: ../../credits.rst:44
-msgid "`Codecov <https://codecov.io>`_"
-msgstr "`Codecov <https://codecov.io>`_"
-
-#: ../../credits.rst:45
-msgid "`Read The Docs <https://readthedocs.org/>`_"
-msgstr "`Read The Docs <https://readthedocs.org/>`_"
-
 #: ../../credits.rst:46
+msgid "`TravisCI <https://travis-ci.org>`_ (thanks for before using CircleCI)"
+msgstr ""
+"`TravisCI <https://travis-ci.org>`_ (bedankt voor de tijd vooraf aan "
+"CircleCI)"
+
+#: ../../credits.rst:47
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
-#: ../../credits.rst:47
+#: ../../credits.rst:48
 msgid ""
 "`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-"
 "page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
@@ -165,25 +164,21 @@ msgstr ""
 "`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-"
 "page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 
-#: ../../credits.rst:48
+#: ../../credits.rst:49
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr "`Buienradar <http://www.buienradar.nl>`_"
 
-#: ../../credits.rst:49
+#: ../../credits.rst:50
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr "`Django REST Framework <http://www.django-rest-framework.org>`_"
 
-#: ../../credits.rst:50
+#: ../../credits.rst:51
 msgid ""
 "`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index."
 "html>`_"
 msgstr ""
 "`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index."
 "html>`_"
-
-#: ../../credits.rst:51
-msgid "`CircleCI <https://circleci.com/>`_"
-msgstr "`CircleCI <https://circleci.com/>`_"
 
 #: ../../credits.rst:52
 msgid "`ReDoc <https://github.com/Redocly/redoc>`_"
@@ -192,3 +187,34 @@ msgstr "`ReDoc <https://github.com/Redocly/redoc>`_"
 #: ../../credits.rst:53
 msgid "`Semantic UI <https://semantic-ui.com>`_"
 msgstr "`Semantic UI <https://semantic-ui.com>`_"
+
+#~ msgid "Special thanks for supplying code contributions"
+#~ msgstr "Bijzondere dank voor de code-bijdragen van"
+
+#~ msgid "Also many thanks to the contributions of"
+#~ msgstr "Dank voor de bijdrages van"
+
+#~ msgid "Software used"
+#~ msgstr "Gebruikte software"
+
+#~ msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
+#~ msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
+
+#~ msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
+#~ msgstr "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
+
+#~ msgid ""
+#~ "`Django Admin Range Filter <https://github.com/silentsokolov/django-admin-"
+#~ "rangefilter>`_"
+#~ msgstr ""
+#~ "`Django Admin Range Filter <https://github.com/silentsokolov/django-admin-"
+#~ "rangefilter>`_"
+
+#~ msgid "`Codecov <https://codecov.io>`_"
+#~ msgstr "`Codecov <https://codecov.io>`_"
+
+#~ msgid "`Read The Docs <https://readthedocs.org/>`_"
+#~ msgstr "`Read The Docs <https://readthedocs.org/>`_"
+
+#~ msgid "`CircleCI <https://circleci.com/>`_"
+#~ msgstr "`CircleCI <https://circleci.com/>`_"

@@ -174,8 +174,6 @@ Make sure you've read and executed the note above, because you'll need it for th
 The application will also need the appropriate database client, which is not installed by default. 
 For this I created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework. 
 
-The ``base.txt`` contains requirements which the application needs anyway, no matter which backend you've choosen.
-
 
 Setup local config::
 
