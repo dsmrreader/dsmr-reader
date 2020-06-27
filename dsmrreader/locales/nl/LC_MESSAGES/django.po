@@ -258,7 +258,7 @@ msgid "The gzip compression level used. Level 9 = best, level 1 = fastest."
 msgstr "Het compressieniveau dat voor gzip gebruikt wordt. Niveau 9 = beste, niveau 1 = snelste."
 
 msgid "Backup configuration"
-msgstr "Back-upconfiguratie"
+msgstr "Back-up configuratie"
 
 msgid "Dropbox access token"
 msgstr "Dropbox access token"
