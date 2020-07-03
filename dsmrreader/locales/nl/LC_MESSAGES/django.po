@@ -1199,6 +1199,9 @@ msgstr "Ongelezen notificaties"
 msgid "Go to notification overview"
 msgstr "Ga naar notificatieoverzicht"
 
+msgid "Based on the latest telegram received, no matter if it's still unprocessed."
+msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
+
 msgid "W"
 msgstr "W"
 
@@ -1324,6 +1327,9 @@ msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze select
 
 msgid "Recent electricity consumption"
 msgstr "Recent elektriciteitsverbruik"
+
+msgid "Based on the latest electricity consumption processed."
+msgstr "Gebaseerd op het meest recent verwerkte elektriciteitsverbruik."
 
 msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
 msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
