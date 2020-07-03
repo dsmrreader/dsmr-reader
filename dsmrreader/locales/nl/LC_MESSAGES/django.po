@@ -253,7 +253,7 @@ msgid "The gzip compression level used. Level 9 = best, level 1 = fastest."
 msgstr "Het compressieniveau dat voor gzip gebruikt wordt. Niveau 9 = beste, niveau 1 = snelste."
 
 msgid "Backup configuration"
-msgstr "Back-upconfiguratie"
+msgstr "Back-up configuratie"
 
 msgid "Dropbox access token"
 msgstr "Dropbox access token"
@@ -768,6 +768,9 @@ msgstr "DSMR-reader v3.4.0 (3/3): Grafieken die voorheen op het Dashboard stonde
 msgid "You are using a MySQL database without timezone support. This may cause bugs. Please enable timezone support in your database, see: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html"
 msgstr "Je gebruikt een MySQL-database zonder ondersteuning voor tijdzones. Dit kan fouten veroorzaken. Zet ondersteuning voor tijdzones aan in je database, zie: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html"
 
+msgid "This is the final release on v3. Switching to v4 requires you to manually upgrade. Click the link button for more information."
+msgstr "Dit is de laatste release van DSMR-reader versie 3. Om te wisselen naar DSMR-reader versie 4 zul je handmatig moeten upgraden. Klik op de linkknop voor meer informatie."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
@@ -1209,6 +1212,9 @@ msgstr "Ongelezen notificaties"
 msgid "Go to notification overview"
 msgstr "Ga naar notificatieoverzicht"
 
+msgid "Based on the latest telegram received, no matter if it's still unprocessed."
+msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
+
 msgid "W"
 msgstr "W"
 
@@ -1334,6 +1340,9 @@ msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze select
 
 msgid "Recent electricity consumption"
 msgstr "Recent elektriciteitsverbruik"
+
+msgid "Based on the latest electricity consumption processed."
+msgstr "Gebaseerd op het meest recent verwerkte elektriciteitsverbruik."
 
 msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
 msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."

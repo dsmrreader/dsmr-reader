@@ -45,6 +45,25 @@ v4.0.0 - 2020-07-10
 v3.x releases
 ^^^^^^^^^^^^^
 
+v3.12.0 - 2020-07-10
+--------------------
+
+.. warning::
+
+    This is the last release of DSMR-reader ``v3.x``. New features will only be added to ``v4.x``. See `the v4 upgrade guide <https://dsmr-reader.readthedocs.io/en/v4/faq/v4_upgrade.html>`_ for more information.
+
+.. warning:: **API endpoint deprecation**
+
+    The ``/api/v2/application/status`` endpoint has been deprecated and will be removed in DSMR-reader ``v4.x``,
+
+- [`#1036 <https://github.com/dennissiemensma/dsmr-reader/issues/1036>`_] Deprecate API support for Status
+- [`#1037 <https://github.com/dennissiemensma/dsmr-reader/issues/1037>`_] Laatste v3.x release
+- [`#1034 <https://github.com/dennissiemensma/dsmr-reader/issues/1034>`_] Live weergave en live teller wijken af
+
+
+----
+
+
 v3.11.0 - 2020-06-17
 --------------------
 

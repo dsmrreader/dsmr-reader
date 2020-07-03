@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy
 
 
 def migrate_forward(apps, schema_editor):
-    # If someone if using the v3-branch, we no longer require this migration. Code was removed in v3.
+    # If someone was using the v3-branch, we no longer require this migration. Code was removed in v3.
     pass
 
 

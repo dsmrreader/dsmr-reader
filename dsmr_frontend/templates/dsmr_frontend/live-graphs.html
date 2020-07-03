@@ -28,6 +28,13 @@
                         <tr class="live-header">
                             <th class="col-sm-6">
                                 <span id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> <span class="unit" id="tariff_name"></span>
+
+                                <span>
+                                    <a class="help-trigger" href="#"><small><i class="fas fa-question-circle"></i></small></a>
+                                    <small class="xhr-hidden">
+                                        {% blocktrans %}Based on the latest electricity consumption processed.{% endblocktrans %}
+                                    </small>
+                                </span>
                             </th>
                             <th class="col-sm-2">
                                 {% if capabilities.electricity %}
@@ -235,6 +242,12 @@
 
             /* Reload entire page after 15 minutes. */
             setInterval(function(){ location.reload(); }, 15 * 60 * 1000)
+        });
+
+        $(".help-trigger").click(function () {
+            $(this).next().show();
+            $(this).remove();
+            return false;
         });
     </script>
 
