@@ -46,6 +46,13 @@
                         <tr class="live-header">
                             <th class="col-sm-6">
                                 <span id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> <span class="unit" id="tariff_name"></span>
+
+                                <span>
+                                    <a class="help-trigger" href="#"><small><i class="fas fa-question-circle"></i></small></a>
+                                    <small class="xhr-hidden">
+                                        {% blocktrans %}Based on the latest telegram received, no matter if it's still unprocessed.{% endblocktrans %}
+                                    </small>
+                                </span>
                             </th>
                             <th class="col-sm-2">
                                 {% if capabilities.electricity %}
@@ -187,6 +194,12 @@
 
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
     <script type="text/javascript">
+        $(".help-trigger").click(function () {
+            $(this).next().show();
+            $(this).remove();
+            return false;
+        });
+
         var xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
 
         $(document).ready(function(){

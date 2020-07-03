@@ -14,6 +14,7 @@ v3.12.0 - 2020-07-10
 
 - [`#1036 <https://github.com/dennissiemensma/dsmr-reader/issues/1036>`_] Deprecate API support for Status
 - [`#1037 <https://github.com/dennissiemensma/dsmr-reader/issues/1037>`_] Laatste v3.x release
+- [`#1034 <https://github.com/dennissiemensma/dsmr-reader/issues/1034>`_] Live weergave en live teller wijken af
 
 
 ----
