@@ -767,6 +767,9 @@ msgstr "DSMR-reader v3.4.0 (3/3): Grafieken die voorheen op het Dashboard stonde
 msgid "You are using a MySQL database without timezone support. This may cause bugs. Please enable timezone support in your database, see: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html"
 msgstr "Je gebruikt een MySQL-database zonder ondersteuning voor tijdzones. Dit kan fouten veroorzaken. Zet ondersteuning voor tijdzones aan in je database, zie: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html"
 
+msgid "This is the final release on v3. Switching to v4 requires you to manually upgrade. Click the link button for more information."
+msgstr "Dit is de laatste release van DSMR-reader versie 3. Om te wisselen naar DSMR-reader versie 4 zul je handmatig moeten upgraden. Klik op de linkknop voor meer informatie."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 

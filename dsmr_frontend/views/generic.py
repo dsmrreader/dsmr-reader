@@ -21,11 +21,12 @@ class XhrHeader(View):
 class ReadTheDocsRedirectView(RedirectView):
     permanent = False
     subpage = None
+    branch = settings.DSMRREADER_MAIN_BRANCH
     url = None
 
     def get(self, request, *args, **kwargs):
         self.url = 'https://dsmr-reader.readthedocs.io/{}/{}/{}'.format(
-            request.LANGUAGE_CODE, settings.DSMRREADER_MAIN_BRANCH, self.subpage
+            request.LANGUAGE_CODE, self.branch, self.subpage
         )
         return super(ReadTheDocsRedirectView, self).get(request, *args, **kwargs)
 
@@ -44,3 +45,8 @@ class FeedbackRedirect(ReadTheDocsRedirectView):
 
 class DonationsRedirect(ReadTheDocsRedirectView):
     subpage = 'donations.html'
+
+
+class V4UpgradeRedirect(ReadTheDocsRedirectView):
+    subpage = 'faq/v4_upgrade.html'
+    branch = 'v4'
