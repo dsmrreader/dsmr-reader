@@ -12,3 +12,4 @@
 /dsmr_plugins/modules/
 /Pipfile
 /Pipfile.lock
+/.env
