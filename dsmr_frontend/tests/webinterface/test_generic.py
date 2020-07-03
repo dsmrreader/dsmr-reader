@@ -198,6 +198,7 @@ class TestAlwaysRequireLoginDisabled(TestCase):
         'docs-redirect',
         'feedback-redirect',
         'donations-redirect',
+        'v4-upgrade-redirect',
         'configuration',
         'export',
         'export-as-csv',

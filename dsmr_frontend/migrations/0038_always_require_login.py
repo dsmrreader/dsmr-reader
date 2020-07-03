@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0036_graphs_zoom'),
+        ('dsmr_frontend', '0037_v3_12_0_release'),
     ]
 
     operations = [
