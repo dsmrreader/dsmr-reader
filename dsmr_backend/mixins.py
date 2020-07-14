@@ -168,6 +168,11 @@ class ReadOnlyAdminModel(admin.ModelAdmin):
         return False
 
 
+class DeletionOnlyAdminModel(ReadOnlyAdminModel):
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+
 class ModelUpdateMixin():
     """ Add update() on Django model instance, similar to queryset.update(). """
     def update(self, **updated_fields):

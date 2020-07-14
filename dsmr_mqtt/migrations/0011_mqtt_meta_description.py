@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='message',
-            options={'default_permissions': ('delete',), 'verbose_name': 'Outgoing MQTT message', 'verbose_name_plural': 'Outgoing MQTT messages'},
+            options={'default_permissions': (), 'verbose_name': 'Outgoing MQTT message', 'verbose_name_plural': 'Outgoing MQTT messages'},
         ),
         migrations.AlterModelOptions(
             name='mqttbrokersettings',

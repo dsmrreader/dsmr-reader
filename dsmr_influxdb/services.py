@@ -1,6 +1,10 @@
+import configparser
 import json
 
+import yaml
 from django.conf import settings
+from django.core import serializers
+from django.core.serializers import serialize
 from django.db.transaction import atomic
 from influxdb import InfluxDBClient
 
@@ -30,27 +34,48 @@ def initialize_client():
     return influxdb_client
 
 
-@atomic
+@atomic  # ACID!
 def run(influxdb_client):
-    """
-    Processes queued measurements. Submits them in bulk, but does not garantuee the prevention of any leftovers.
+    """ Processes queued measurements. """
+    # Keep batches small, only send the latest X items stored. The rest will be purged (in case of delay).
+    selection = InfluxdbMeasurement.objects.all().order_by('-pk')[0:settings.DSMRREADER_INFLUXDB_MAX_MESSAGES_IN_QUEUE]
 
-    WARNING: This block is atomic.
-    Submitting the measurements should either fail or succeed, including its deletion.
-    """
-    remaining = InfluxdbMeasurement.objects.all()[0:50]
-
-    if not remaining.count():
+    if not selection.count():
         return
 
     points = []
 
-    for current in remaining:
+    for current in selection:
         points.append({
             "measurement": current.measurement_name,
             "time": current.time,
-            "fields": json.loads(current.fields)
+            "fields": yaml.load(current.fields)
         })
 
     influxdb_client.write_points(points)
-    remaining.delete()
+    InfluxdbMeasurement.objects.all().delete()  # This purges the remainder as well.
+
+
+def publish_dsmr_reading(instance):
+    influxdb_settings = InfluxdbIntegrationSettings.get_solo()
+
+    # Integration disabled.
+    if not influxdb_settings.enabled:
+        return
+
+    config_parser = configparser.ConfigParser()
+    config_parser.read_string(influxdb_settings.formatting)
+    data_source = instance.__dict__
+
+    for current_measurement in config_parser.sections():
+        measurement_fields = {}
+
+        for instance_field_name in config_parser[current_measurement]:
+            influxdb_field_name = config_parser[current_measurement][instance_field_name]
+            measurement_fields[influxdb_field_name] = data_source[instance_field_name]
+
+        InfluxdbMeasurement.objects.create(
+            measurement_name=current_measurement,
+            time=data_source['timestamp'],
+            fields=yaml.dump(measurement_fields)  # We need to preserve native types, this seems to work
+        )

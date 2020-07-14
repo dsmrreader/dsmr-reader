@@ -33,6 +33,7 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
     )
     database = models.CharField(
         max_length=64,
+        default='dsmrreader_dsmr_reading',
         verbose_name=_('InfluxDB database'),
         help_text=_('The name of the database used in InfluxDB.')
     )
@@ -117,6 +118,5 @@ class InfluxdbMeasurement(ModelUpdateMixin, models.Model):
         return self.measurement_name
 
     class Meta:
-        default_permissions = ('delete', )  # Do allow deletion.
         verbose_name = _('Influxdb measurement')
         verbose_name_plural = _('Influxdb measurements')

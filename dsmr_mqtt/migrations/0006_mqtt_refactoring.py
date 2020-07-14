@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name_plural': 'MQTT: Outgoing messages',
                 'verbose_name': 'MQTT: Outgoing message',
-                'default_permissions': ('delete',),
+                'default_permissions': (),
             },
         ),
         migrations.AddField(

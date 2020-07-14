@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
 from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption
-from dsmr_backend.mixins import ReadOnlyAdminModel
+from dsmr_backend.mixins import DeletionOnlyAdminModel
 from dsmr_mqtt.models import queue
 
 
@@ -305,5 +305,5 @@ currently_delivered = dsmr/consumption/gas/currently_delivered
 
 
 @admin.register(queue.Message)
-class MessageAdmin(ReadOnlyAdminModel):
+class MessageAdmin(DeletionOnlyAdminModel):
     list_display = ('topic', 'payload')
