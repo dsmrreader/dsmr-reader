@@ -17,7 +17,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Continuous client for publishing data to external services, when enabled.')
     name = __name__  # Required for PID file.
 
-    # Global during this process' lifetime.
+    # Persistent during this process' lifetime.
     mqtt_client = None
     influxdb_client = None
 
@@ -29,8 +29,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         if MQTTBrokerSettings.get_solo().enabled:
             try:
                 self.mqtt_client = dsmr_mqtt.services.broker.initialize_client()
-            except RuntimeError:
-                logger.error('CLIENT | Failed to initialize MQTT client')
+            except RuntimeError as error:
+                logger.error('CLIENT | Failed to initialize MQTT client: %s', error)
         else:
             logger.info('CLIENT | MQTT integration not enabled')
 
@@ -38,8 +38,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         if InfluxdbIntegrationSettings.get_solo().enabled:
             try:
                 self.influxdb_client = dsmr_influxdb.services.initialize_client()
-            except RuntimeError:
-                logger.error('CLIENT | Failed to initialize InfluxDB client')
+            except Exception as error:
+                logger.error('CLIENT | Failed to initialize InfluxDB client: %s', error)
         else:
             logger.info('CLIENT | InfluxDB integration not enabled')
 

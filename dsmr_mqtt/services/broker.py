@@ -1,5 +1,4 @@
 import logging
-import time
 import ssl
 
 from django.conf import settings
@@ -7,7 +6,6 @@ import paho.mqtt.client as paho
 
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_mqtt.models import queue
-from dsmr_backend.mixins import StopInfiniteRun
 
 
 logger = logging.getLogger('commands')
@@ -20,7 +18,7 @@ def initialize_client():
     if not broker_settings.hostname:
         logger.error('MQTT: No hostname found in settings, disabling MQTT')
         broker_settings.update(enabled=False)
-        raise RuntimeError()
+        raise RuntimeError('No hostname found in settings')
 
     mqtt_client = paho.Client(client_id=broker_settings.client_id)
     mqtt_client.on_connect = on_connect
@@ -51,7 +49,7 @@ def initialize_client():
             error
         )
         broker_settings.update(enabled=False)
-        raise RuntimeError()
+        raise RuntimeError('Failed to connect to broker')
 
     return mqtt_client
 
@@ -80,7 +78,7 @@ def run(mqtt_client):
 
     # We cannot raise any exception in callbacks, this is our check point. This MUST be called AFTER the first loop().
     if not mqtt_client.is_connected():
-        raise StopInfiniteRun()
+        raise RuntimeError('Client no longer connected')
 
 
 def on_connect(client, userdata, flags, rc):

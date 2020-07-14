@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from dsmr_influxdb.models import InfluxdbIntegrationSettings
+from dsmr_backend.mixins import ReadOnlyAdminModel
+from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
 
 
 @admin.register(InfluxdbIntegrationSettings)
@@ -59,3 +60,8 @@ extra_device_delivered = delivered
             }
         ),
     )
+
+
+@admin.register(InfluxdbMeasurement)
+class InfluxdbMeasurementAdmin(ReadOnlyAdminModel):
+    list_display = ('time', 'measurement_name')

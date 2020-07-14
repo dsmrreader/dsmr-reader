@@ -105,3 +105,18 @@ extra_device_delivered = delivered
     class Meta:
         default_permissions = tuple()
         verbose_name = _('InfluxDB integration')
+
+
+class InfluxdbMeasurement(ModelUpdateMixin, models.Model):
+    """ Queued measurement for InfluxDB. """
+    time = models.DateTimeField()
+    measurement_name = models.CharField(max_length=255)
+    fields = models.TextField()
+
+    def __str__(self):
+        return self.measurement_name
+
+    class Meta:
+        default_permissions = ('delete', )  # Do allow deletion.
+        verbose_name = _('Influxdb measurement')
+        verbose_name_plural = _('Influxdb measurements')

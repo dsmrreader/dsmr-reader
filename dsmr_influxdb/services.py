@@ -1,9 +1,10 @@
-from decimal import Decimal
+import json
 
-from django.utils import timezone
+from django.conf import settings
+from django.db.transaction import atomic
 from influxdb import InfluxDBClient
 
-from dsmr_influxdb.models import InfluxdbIntegrationSettings
+from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
 
 
 def initialize_client():
@@ -20,7 +21,7 @@ def initialize_client():
             InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
         ),
         verify_ssl=influxdb_settings.secure == InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
-        timeout=60,
+        timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
     )
 
     # Always make sure the database exists.
@@ -29,18 +30,27 @@ def initialize_client():
     return influxdb_client
 
 
+@atomic
 def run(influxdb_client):
-    influx_body = [
-        {
-            "measurement": "electricity_live",
-            "time": timezone.now() - timezone.timedelta(hours=4),
-            "fields": {
-                "currently_delivered": Decimal('1.234'),
-                "currently_returned": Decimal('0'),
-            },
-        }
-    ]
+    """
+    Processes queued measurements. Submits them in bulk, but does not garantuee the prevention of any leftovers.
 
-    influxdb_client.write_points(influx_body)
+    WARNING: This block is atomic.
+    Submitting the measurements should either fail or succeed, including its deletion.
+    """
+    remaining = InfluxdbMeasurement.objects.all()[0:50]
 
-    x = influxdb_client.query('select * from electricity_live')
+    if not remaining.count():
+        return
+
+    points = []
+
+    for current in remaining:
+        points.append({
+            "measurement": current.measurement_name,
+            "time": current.time,
+            "fields": json.loads(current.fields)
+        })
+
+    influxdb_client.write_points(points)
+    remaining.delete()
