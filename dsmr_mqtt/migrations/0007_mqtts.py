@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mqttbrokersettings',
             name='secure',
-            field=models.IntegerField(choices=[(0, 'INSECURE - No SSL/TLS'), (1, 'SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certficates)'), (2, 'SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate')], default=0, help_text='Whether the client should use a secure connection. Select SECURE (CERT_NONE) for self-signed certificates. Make sure to use the appropriate MQTT(S) port as well.', verbose_name='Secure (SSL/TLS)'),
+            field=models.IntegerField(choices=[(0, 'INSECURE - No SSL/TLS'), (1, 'SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certificates)'), (2, 'SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate')], default=0, help_text='Whether the client should use a secure connection. Select SECURE (CERT_NONE) for self-signed certificates. Make sure to use the appropriate MQTT(S) port as well.', verbose_name='Secure (SSL/TLS)'),
         ),
         migrations.AlterField(
             model_name='mqttbrokersettings',

@@ -1995,7 +1995,7 @@ msgstr "Uitgaande MQTT-berichten"
 msgid "INSECURE - No SSL/TLS"
 msgstr "ONVEILIG - Geen SSL/TLS"
 
-msgid "SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certficates)"
+msgid "SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certificates)"
 msgstr "VEILIG (CERT_NONE) - Validatiefouten worden genegeerd (bij onvertrouwde of verlopen certificaten)"
 
 msgid "SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate"

@@ -12,7 +12,7 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
     SECURE_CERT_REQUIRED = 2
     SECURE_CHOICES = (
         (INSECURE, _('INSECURE - No SSL/TLS')),
-        (SECURE_CERT_NONE, _('SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certficates)')),
+        (SECURE_CERT_NONE, _('SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certificates)')),
         (SECURE_CERT_REQUIRED, _('SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate')),
     )
 
