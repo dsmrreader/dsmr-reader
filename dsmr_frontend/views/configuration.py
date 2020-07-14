@@ -7,6 +7,7 @@ from dsmr_backup.models.settings import BackupSettings, DropboxSettings
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSettings
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_influxdb.models import InfluxdbIntegrationSettings
 from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_mqtt.models.settings.consumption import JSONGasConsumptionMQTTSettings, SplitTopicGasConsumptionMQTTSettings
@@ -49,5 +50,6 @@ class Configuration(LoginRequiredMixin, TemplateView):
             pvoutput_addstatus_settings=PVOutputAddStatusSettings.get_solo(),
             retention_settings=RetentionSettings.get_solo(),
             weather_settings=WeatherSettings.get_solo(),
+            influxdb_settings=InfluxdbIntegrationSettings.get_solo(),
         ))
         return context_data

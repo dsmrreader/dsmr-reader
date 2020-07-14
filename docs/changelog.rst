@@ -12,15 +12,14 @@ v4.x releases
 ^^^^^^^^^^^^^
 
 
-Unreleased
-----------
+v4.1.0 - 2020-xx-xx
+-------------------
 
-- Remove backup status info from ``tools``, now available in ``scheduled_processes``
-- Remove mindergas status info from ``tools``, now available in ``scheduled_processes``
-
+- ``Added``: InfluxDB integration [`#857 <https://github.com/dennissiemensma/dsmr-reader/issues/857>`_]
 
 
-v4.0.0 - 2020-07-10
+
+v4.0.0 - 2020-07-31
 -------------------
 
 .. warning::
@@ -45,7 +44,7 @@ v4.0.0 - 2020-07-10
 v3.x releases
 ^^^^^^^^^^^^^
 
-v3.12.0 - 2020-07-10
+v3.12.0 - 2020-07-31
 --------------------
 
 .. warning::

@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'dsmr_stats.apps.StatsAppConfig',
     'dsmr_weather.apps.WeatherAppConfig',
     'dsmr_client.apps.DsmrClientConfig',
+    'dsmr_influxdb.apps.DsmrInfluxdbConfig',
 )
 
 MIDDLEWARE = (
