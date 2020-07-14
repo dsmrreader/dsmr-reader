@@ -13,14 +13,14 @@ from dsmr_backend.mixins import StopInfiniteRun
 logger = logging.getLogger('commands')
 
 
-def initialize():
+def initialize_client():
     """ Initializes the MQTT client and returns client instance. """
     broker_settings = MQTTBrokerSettings.get_solo()
 
     if not broker_settings.hostname:
-        logger.warning('MQTT: No hostname found in settings, restarting in a minute...')
-        time.sleep(60)
-        raise StopInfiniteRun()
+        logger.error('MQTT: No hostname found in settings, disabling MQTT')
+        broker_settings.update(enabled=False)
+        raise RuntimeError()
 
     mqtt_client = paho.Client(client_id=broker_settings.client_id)
     mqtt_client.on_connect = on_connect
@@ -45,13 +45,13 @@ def initialize():
         mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port)
     except Exception as error:
         logger.error(
-            'MQTT: Failed to connect to broker (%s : %s), restarting in a minute: %s',
+            'MQTT: Failed to connect to broker (%s : %s), disabling MQTT: %s',
             broker_settings.hostname,
             broker_settings.port,
             error
         )
-        time.sleep(60)
-        raise StopInfiniteRun()
+        broker_settings.update(enabled=False)
+        raise RuntimeError()
 
     return mqtt_client
 

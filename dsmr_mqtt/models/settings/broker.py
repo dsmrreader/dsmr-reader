@@ -25,6 +25,11 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         (QOS_2, 'QoS 2 - Exactly once'),
     )
 
+    enabled = models.BooleanField(
+        default=False,
+        verbose_name=_('Enabled'),
+        help_text=_('Whether the MQTT integration is enabled.')
+    )
     hostname = models.CharField(
         max_length=256,
         null=True,
@@ -85,15 +90,6 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         default=False,
         verbose_name=_('Restart required'),
         help_text=_('Whether the process requires a restart, forcing the client-broker connection to be reset.')
-    )
-    process_sleep = models.DecimalField(
-        default=1,
-        max_digits=3,
-        decimal_places=1,
-        verbose_name=_('MQTT process sleep'),
-        help_text=_(
-            'The number of seconds the application will sleep after publishing the outgoing MQTT message queue.'
-        )
     )
 
     def __str__(self):

@@ -3,6 +3,7 @@ from unittest import mock
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
+from dsmr_client.models import ContinuousClientSettings
 from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption
 
 
@@ -18,12 +19,12 @@ class TestBrokerSettings(TestCase):
 
     @mock.patch('dsmr_mqtt.apps.MqttAppConfig._on_broker_settings_updated_signal')
     def test_signal(self, signal_mock):
-        self.assertFalse(broker.MQTTBrokerSettings.objects.filter(restart_required=True).exists())
+        self.assertFalse(ContinuousClientSettings.objects.filter(restart_required=True).exists())
 
         self.instance.hostname = 'test'
         self.instance.save()
 
-        self.assertTrue(broker.MQTTBrokerSettings.objects.filter(restart_required=True).exists())
+        self.assertTrue(ContinuousClientSettings.objects.filter(restart_required=True).exists())
 
 
 class TestRawTelegramSettings(TestCase):

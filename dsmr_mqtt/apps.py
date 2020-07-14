@@ -47,14 +47,14 @@ class MqttAppConfig(AppConfig):
         dsmr_mqtt.services.callbacks.publish_raw_dsmr_telegram(data=data)
 
     def _on_broker_settings_updated_signal(self, instance, created, raw, update_fields, **kwargs):
-        # Skip new or imported (fixture) instances. And do not update if this hook has just updated it.
-        if created or raw or (update_fields and 'restart_required' in update_fields):
+        # Skip new or imported (fixture) instances.
+        if created or raw:
             return
 
-        from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
-        broker_settings = MQTTBrokerSettings.get_solo()
-        broker_settings.restart_required = True
-        broker_settings.save(update_fields=['restart_required'])  # DO NOT CHANGE: Keep this save() + update_fields.
+        from dsmr_client.models import ContinuousClientSettings  # Do not remove local import
+        continuous_client_settings = ContinuousClientSettings.get_solo()
+        continuous_client_settings.restart_required = True
+        continuous_client_settings.save(update_fields=['restart_required'])  # DO NOT CHANGE: Keep this save()!
 
     def _on_dsmrreading_created_signal(self, instance, created, raw, **kwargs):
         from dsmr_datalogger.models.reading import DsmrReading

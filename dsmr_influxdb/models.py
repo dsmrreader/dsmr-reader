@@ -31,20 +31,22 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('InfluxDB port'),
         help_text=_('Default: 8086')
     )
-    username = models.CharField(
-        max_length=64,
-        verbose_name=_('InfluxDB username'),
-        help_text=_('The username used for authentication with InfluxDB.')
-    )
-    password = models.CharField(
-        max_length=64,
-        verbose_name=_('InfluxDB password'),
-        help_text=_('The password used for authentication with InfluxDB.')
-    )
     database = models.CharField(
         max_length=64,
         verbose_name=_('InfluxDB database'),
         help_text=_('The name of the database used in InfluxDB.')
+    )
+    username = models.CharField(
+        blank=True,
+        max_length=64,
+        verbose_name=_('InfluxDB username'),
+        help_text=_('Optional: The username used for authentication with InfluxDB.')
+    )
+    password = models.CharField(
+        blank=True,
+        max_length=64,
+        verbose_name=_('InfluxDB password'),
+        help_text=_('Optional: The password used for authentication with InfluxDB.')
     )
     secure = models.CharField(
         max_length=24,
@@ -95,12 +97,6 @@ extra_device_delivered = delivered
 ''',
         verbose_name=_('Formatting'),
         help_text=_('Mapping used for the measurements used in your InfluxDB database.')
-    )
-
-    restart_required = models.BooleanField(
-        default=False,
-        verbose_name=_('Restart required'),
-        help_text=_('Whether the process requires a restart, forcing the connection to be reset.')
     )
 
     def __str__(self):

@@ -3,6 +3,7 @@ from unittest import mock
 from django.test import TestCase
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_client.models import ContinuousClientSettings
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_backend.mixins import StopInfiniteRun
 
@@ -13,8 +14,8 @@ class TestCommands(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_client.management.commands.dsmr_client.Command.shutdown')
     @mock.patch('dsmr_backend.mixins.InfiniteManagementCommandMixin._stop')
     def test_dsmr_client_restart_required(self, stop_mock, shutdown_mock, *mocks):
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(restart_required=True)
+        ContinuousClientSettings.get_solo()
+        ContinuousClientSettings.objects.update(restart_required=True)
         self.assertFalse(shutdown_mock.called)
         self.assertFalse(stop_mock.called)
 

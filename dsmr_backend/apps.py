@@ -9,7 +9,7 @@ from django.conf import settings
 class BackendAppConfig(AppConfig):
     """ The backend app solely exists for triggering a backend signal. """
     name = 'dsmr_backend'
-    verbose_name = _('Backend')
+    verbose_name = _('Backend (dsmr_backend)')
 
     def ready(self):
         """ Performs an DB engine check, as we maintain some engine specific queries. """

@@ -20,7 +20,7 @@ class TestBroker(TestCase):
         self.assertFalse(sleep_mock.called)
 
         with self.assertRaises(StopInfiniteRun):
-            dsmr_mqtt.services.broker.initialize()
+            dsmr_mqtt.services.broker.initialize_client()
 
         self.assertFalse(connect_mock.called)
         self.assertTrue(sleep_mock.called)
@@ -33,7 +33,7 @@ class TestBroker(TestCase):
 
         self.assertFalse(connect_mock.called)
 
-        mqtt_client = dsmr_mqtt.services.broker.initialize()
+        mqtt_client = dsmr_mqtt.services.broker.initialize_client()
 
         self.assertIsNotNone(mqtt_client)
         self.assertTrue(connect_mock.called)
@@ -45,7 +45,7 @@ class TestBroker(TestCase):
         MQTTBrokerSettings.objects.update(hostname='localhost', secure=MQTTBrokerSettings.INSECURE)
 
         self.assertFalse(tls_set_mock.called)
-        dsmr_mqtt.services.broker.initialize()
+        dsmr_mqtt.services.broker.initialize_client()
         self.assertFalse(tls_set_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.connect')
@@ -55,7 +55,7 @@ class TestBroker(TestCase):
         MQTTBrokerSettings.objects.update(hostname='localhost', secure=MQTTBrokerSettings.SECURE_CERT_NONE)
 
         self.assertFalse(tls_set_mock.called)
-        dsmr_mqtt.services.broker.initialize()
+        dsmr_mqtt.services.broker.initialize_client()
         tls_set_mock.assert_called_with(cert_reqs=ssl.CERT_NONE)
 
     @mock.patch('paho.mqtt.client.Client.connect')
@@ -65,7 +65,7 @@ class TestBroker(TestCase):
         MQTTBrokerSettings.objects.update(hostname='localhost', secure=MQTTBrokerSettings.SECURE_CERT_REQUIRED)
 
         self.assertFalse(tls_set_mock.called)
-        dsmr_mqtt.services.broker.initialize()
+        dsmr_mqtt.services.broker.initialize_client()
         tls_set_mock.assert_called_with(cert_reqs=ssl.CERT_REQUIRED)
 
     @mock.patch('time.sleep')
@@ -81,7 +81,7 @@ class TestBroker(TestCase):
         self.assertFalse(connect_mock.called)
 
         with self.assertRaises(StopInfiniteRun):
-            dsmr_mqtt.services.broker.initialize()
+            dsmr_mqtt.services.broker.initialize_client()
 
         self.assertTrue(connect_mock.called)
         self.assertTrue(sleep_mock.called)
@@ -94,13 +94,13 @@ class TestBroker(TestCase):
         MQTTBrokerSettings.get_solo()
         MQTTBrokerSettings.objects.update(hostname='localhost')
 
-        mqtt_client = dsmr_mqtt.services.broker.initialize()
+        mqtt_client = dsmr_mqtt.services.broker.initialize_client()
 
         self.assertIsNone(mqtt_client._username)
         self.assertIsNone(mqtt_client._password)
 
         MQTTBrokerSettings.objects.update(username=USER, password=PASS)
-        mqtt_client = dsmr_mqtt.services.broker.initialize()
+        mqtt_client = dsmr_mqtt.services.broker.initialize_client()
 
         # Check credentials set.
         self.assertEqual(mqtt_client._username, USER.encode('utf-8'))
