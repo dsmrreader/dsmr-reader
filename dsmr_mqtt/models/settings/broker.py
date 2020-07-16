@@ -1,8 +1,11 @@
 from django.db import models
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
+import django.db.models.signals
 
 from dsmr_backend.mixins import ModelUpdateMixin
+from dsmr_backend.signals import backend_restart_required
 
 
 class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
@@ -97,3 +100,8 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
     class Meta:
         default_permissions = tuple()
         verbose_name = _('MQTT Broker/connection')
+
+
+@receiver(django.db.models.signals.post_save, sender=MQTTBrokerSettings)
+def _on_mqttbroker_settings_updated_signal(instance, created, raw, **kwargs):
+    backend_restart_required.send_robust(None)

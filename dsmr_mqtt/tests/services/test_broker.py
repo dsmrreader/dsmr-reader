@@ -38,6 +38,17 @@ class TestBroker(TestCase):
         self.assertTrue(connect_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.connect')
+    def test_initialize_no_hostname(self, connect_mock):
+        MQTTBrokerSettings.objects.update(hostname='')
+        self.assertFalse(connect_mock.called)
+
+        with self.assertRaises(RuntimeError):
+            dsmr_mqtt.services.broker.initialize_client()
+
+        self.assertFalse(connect_mock.called)
+        self.assertFalse(MQTTBrokerSettings.get_solo().enabled)
+
+    @mock.patch('paho.mqtt.client.Client.connect')
     @mock.patch('paho.mqtt.client.Client.tls_set')
     def test_initialize_insecure(self, tls_set_mock, *mocks):
         MQTTBrokerSettings.objects.update(secure=MQTTBrokerSettings.INSECURE)
@@ -77,6 +88,7 @@ class TestBroker(TestCase):
             dsmr_mqtt.services.broker.initialize_client()
 
         self.assertTrue(connect_mock.called)
+        self.assertFalse(MQTTBrokerSettings.get_solo().enabled)
 
     @mock.patch('paho.mqtt.client.Client.connect')
     def test_initialize_credentials(self, *mocks):

@@ -1,8 +1,11 @@
 from django.db import models
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
+import django.db.models.signals
 
 from dsmr_backend.mixins import ModelUpdateMixin
+from dsmr_backend.signals import backend_restart_required
 
 
 class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
@@ -106,6 +109,14 @@ extra_device_delivered = delivered
     class Meta:
         default_permissions = tuple()
         verbose_name = _('InfluxDB integration')
+
+
+@receiver(django.db.models.signals.post_save, sender=InfluxdbIntegrationSettings)
+def _on_influxdb_settings_updated_signal(instance, created, raw, **kwargs):
+    if created or raw:
+        return
+
+    backend_restart_required.send_robust(None)
 
 
 class InfluxdbMeasurement(ModelUpdateMixin, models.Model):

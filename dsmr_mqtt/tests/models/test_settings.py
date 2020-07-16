@@ -1,9 +1,6 @@
-from unittest import mock
-
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
-from dsmr_backend.models.settings import BackendSettings
 from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption
 
 
@@ -16,15 +13,6 @@ class TestBrokerSettings(TestCase):
 
     def test_to_string(self):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-    @mock.patch('dsmr_mqtt.apps.MqttAppConfig._on_broker_settings_updated_signal')
-    def test_signal(self, signal_mock):
-        self.assertFalse(BackendSettings.objects.filter(restart_required=True).exists())
-
-        self.instance.hostname = 'test'
-        self.instance.save()
-
-        self.assertTrue(BackendSettings.objects.filter(restart_required=True).exists())
 
 
 class TestRawTelegramSettings(TestCase):

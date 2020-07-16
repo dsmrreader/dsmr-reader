@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from dsmr_backend.models.schedule import ScheduledProcess
+from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 import dsmr_backend.services.schedule
 import dsmr_backend.signals
@@ -24,6 +25,21 @@ class TestCases(InterceptStdoutMixin, TestCase):
 
         for current in mocks:
             self.assertTrue(current.called)
+
+    @mock.patch('dsmr_backend.signals.backend_called.send_robust')
+    @mock.patch('dsmr_backend.services.schedule.execute_scheduled_processes')
+    @mock.patch('dsmr_backend.services.persistent_clients.initialize')
+    @mock.patch('dsmr_backend.services.persistent_clients.run')
+    @mock.patch('dsmr_backend.services.persistent_clients.terminate')
+    def test_backend_restart_required(self, *mocks):
+        """ Test restart flag check. """
+        BackendSettings.get_solo().update(restart_required=True)
+        self.assertTrue(BackendSettings.get_solo().restart_required)
+
+        # When not implemented correctly this should loop forever, without run_once=True, timing out the tests...
+        self._intercept_command_stdout('dsmr_backend')
+
+        self.assertFalse(BackendSettings.get_solo().restart_required)
 
     @mock.patch('dsmr_dropbox.services.sync')
     @mock.patch('dsmr_notification.services.notify')

@@ -1,9 +1,11 @@
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.db import models
 from solo.models import SingletonModel
 
 from dsmr_backend.mixins import ModelUpdateMixin
+from dsmr_backend.signals import backend_restart_required
 
 
 class BackendSettings(ModelUpdateMixin, SingletonModel):
@@ -55,6 +57,14 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Backend configuration')
+
+
+@receiver(backend_restart_required)
+def _on_backend_restart_required_signal(**kwargs):
+    backend_settings = BackendSettings.get_solo()
+    backend_settings.restart_required = True
+    # DO NOT CHANGE: Keep this save() due signal firing!
+    backend_settings.save(update_fields=['restart_required'])
 
 
 class EmailSettings(ModelUpdateMixin, SingletonModel):

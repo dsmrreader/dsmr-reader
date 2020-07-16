@@ -20,7 +20,6 @@ class MqttAppConfig(AppConfig):
     verbose_name = _('MQTT')
 
     def ready(self):
-        from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
         from dsmr_datalogger.models.reading import DsmrReading
         from dsmr_consumption.models.consumption import GasConsumption
 
@@ -34,11 +33,6 @@ class MqttAppConfig(AppConfig):
             sender=DsmrReading
         )
         django.db.models.signals.post_save.connect(
-            receiver=self._on_broker_settings_updated_signal,
-            dispatch_uid=self.__class__,
-            sender=MQTTBrokerSettings
-        )
-        django.db.models.signals.post_save.connect(
             receiver=self._on_gas_consumption_created_signal,
             dispatch_uid=self.__class__,
             sender=GasConsumption
@@ -49,16 +43,6 @@ class MqttAppConfig(AppConfig):
     def _on_raw_telegram_signal(self, data, **kwargs):
         import dsmr_mqtt.services.callbacks
         dsmr_mqtt.services.callbacks.publish_raw_dsmr_telegram(data=data)
-
-    def _on_broker_settings_updated_signal(self, instance, created, raw, update_fields, **kwargs):
-        # Skip new or imported (fixture) instances.
-        if created or raw:
-            return
-
-        from dsmr_backend.models.settings import BackendSettings  # Do not remove local import
-        continuous_client_settings = BackendSettings.get_solo()
-        continuous_client_settings.restart_required = True
-        continuous_client_settings.save(update_fields=['restart_required'])  # DO NOT CHANGE: Keep this save()!
 
     def _on_dsmrreading_created_signal(self, instance, created, raw, **kwargs):
         from dsmr_datalogger.models.reading import DsmrReading
