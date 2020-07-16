@@ -1,11 +1,15 @@
 import logging
 
 from django.apps import AppConfig
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from paho.mqtt.client import Client
 import django.db.models.signals
 
-import dsmr_datalogger.signals
+from dsmr_datalogger.signals import raw_telegram
+from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
+
 
 logger = logging.getLogger('dsmrreader')
 
@@ -20,7 +24,7 @@ class MqttAppConfig(AppConfig):
         from dsmr_datalogger.models.reading import DsmrReading
         from dsmr_consumption.models.consumption import GasConsumption
 
-        dsmr_datalogger.signals.raw_telegram.connect(
+        raw_telegram.connect(
             receiver=self._on_raw_telegram_signal,
             dispatch_uid=self.__class__
         )
@@ -51,8 +55,8 @@ class MqttAppConfig(AppConfig):
         if created or raw:
             return
 
-        from dsmr_client.models import ContinuousClientSettings  # Do not remove local import
-        continuous_client_settings = ContinuousClientSettings.get_solo()
+        from dsmr_backend.models.settings import BackendSettings  # Do not remove local import
+        continuous_client_settings = BackendSettings.get_solo()
         continuous_client_settings.restart_required = True
         continuous_client_settings.save(update_fields=['restart_required'])  # DO NOT CHANGE: Keep this save()!
 
@@ -107,3 +111,26 @@ class MqttAppConfig(AppConfig):
             dsmr_mqtt.services.callbacks.publish_split_topic_gas_consumption(instance=instance)
         except Exception as error:
             logger.error('publish_split_topic_gas_consumption() failed: %s', error)
+
+
+@receiver(initialize_persistent_client)
+def on_initialize_persistent_client(**kwargs):
+    import dsmr_mqtt.services.broker
+    return dsmr_mqtt.services.broker.initialize_client()
+
+
+@receiver(run_persistent_client)
+def on_run_persistent_client(client, **kwargs):
+    if not isinstance(client, Client):
+        return
+
+    import dsmr_mqtt.services.broker
+    dsmr_mqtt.services.broker.run(client)
+
+
+@receiver(terminate_persistent_client)
+def on_terminate_persistent_client(client, **kwargs):
+    if not isinstance(client, Client):
+        return
+
+    client.disconnect()

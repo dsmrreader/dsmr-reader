@@ -137,15 +137,3 @@ msgid ""
 msgstr ""
 "Mocht je later zelf wijzigingen doorvoeren in het script, vergeet deze dan "
 "niet te herladen met: ``sudo supervisorctl update``"
-
-#~ msgid "Prepare API"
-#~ msgstr "Voorbereiding van de API"
-
-#~ msgid "Installation"
-#~ msgstr "Installatie"
-
-#~ msgid "Script"
-#~ msgstr "Script"
-
-#~ msgid "Supervisor"
-#~ msgstr "Supervisor"

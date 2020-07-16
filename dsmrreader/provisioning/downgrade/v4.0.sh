@@ -4,7 +4,6 @@
 ./manage.py migrate dsmr_api 0003_create_api_user
 ./manage.py migrate dsmr_backend 0014_verbose_field_translations
 ./manage.py migrate dsmr_backup 0011_remove_backupsettings_latest_backup
-./manage.py migrate dsmr_client dsmr_client
 ./manage.py migrate dsmr_consumption 0015_track_power_current
 ./manage.py migrate dsmr_datalogger 0022_three_month_retention
 ./manage.py migrate dsmr_frontend 0038_always_require_login

@@ -14,6 +14,7 @@ Now visit http://127.0.0.1:10000
 
 ```
 cd docs
+../tools/clear-po-headers.sh
 make gettext && sphinx-intl update -p _build/locale -l nl
 ```
 

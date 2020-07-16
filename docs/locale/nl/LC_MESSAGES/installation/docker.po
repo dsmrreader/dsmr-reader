@@ -75,15 +75,3 @@ msgstr "https://hub.docker.com/r/trizz/dsmr-remote-datalogger/"
 #: ../../installation/docker.rst:35
 msgid ":doc:`Finished? Go to setting up the application<../application>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
-
-#~ msgid "DSMR-reader in Docker by ``ualex73`` (Alexander):"
-#~ msgstr "DSMR-reader in Docker door `ualex73` (Alexander):"
-
-#~ msgid "**Github**: https://github.com/ualex73/dsmr-reader-docker"
-#~ msgstr "**Github**: https://github.com/ualex73/dsmr-reader-docker"
-
-#~ msgid "**Docker hub**: https://hub.docker.com/r/ualex73/dsmr-reader-docker/"
-#~ msgstr "**Docker hub**: https://hub.docker.com/r/ualex73/dsmr-reader-docker/"
-
-#~ msgid "Datalogger in Docker by ``trizz`` (Tristan):"
-#~ msgstr "Datalogger in Docker door `trizz` (Tristan):"

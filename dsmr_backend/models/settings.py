@@ -43,6 +43,11 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
             'electricity returned data, but you do not own any solar panels.'
         ),
     )
+    restart_required = models.BooleanField(
+        default=False,
+        verbose_name=_('Restart required'),
+        help_text=_('Whether the process requires a restart.')
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

@@ -262,7 +262,6 @@ It's also configured to bring the entire application up again after a shutdown o
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_datalogger.conf /etc/supervisor/conf.d/
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_backend.conf /etc/supervisor/conf.d/
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_client.conf /etc/supervisor/conf.d/
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
 
 - Login to ``supervisorctl`` management console::
@@ -286,7 +285,6 @@ Example of everything running well::
     dsmr_backend                     RUNNING    pid 123, uptime 0:00:06
     dsmr_datalogger                  RUNNING    pid 456, uptime 0:00:07
     dsmr_webinterface                RUNNING    pid 789, uptime 0:00:07
-    dsmr_client                      RUNNING    pid 982, uptime 0:00:08
 
 Want to quit supervisor? Press ``CTRL + D`` to exit supervisor command line.
 

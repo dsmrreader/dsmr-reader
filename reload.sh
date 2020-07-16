@@ -32,16 +32,5 @@ then
     cat /var/tmp/dsmrreader--dsmr_datalogger.pid | xargs kill -HUP
     echo "   [OK]"
 else
-    echo "   [!!] PID file does not exist (as sudo user, try 'sudo supervisorctl start dsmr_datalogger')"
-fi
-
-
-printf "%-50s" " * Reloading process: dsmr_client"
-
-if [ -f /var/tmp/dsmrreader--dsmr_client.pid ];
-then
-    cat /var/tmp/dsmrreader--dsmr_client.pid | xargs kill -HUP
-    echo "   [OK]"
-else
-    echo "   [!!] PID file does not exist (as sudo user, try 'sudo supervisorctl start dsmr_client')"
+    echo "   [!!] PID file does not exist or the datalogger is disabled (Should it run? As sudo user, try 'sudo supervisorctl start dsmr_datalogger')"
 fi

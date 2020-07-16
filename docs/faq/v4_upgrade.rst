@@ -174,23 +174,19 @@ Execute the following::
 
     logout
 
-6. Rename ``dsmr_mqtt`` to ``dsmr_client``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+6. Drop ``dsmr_mqtt``
+^^^^^^^^^^^^^^^^^^^^^
 
-The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support more generic continuous data flows in the future (such as InfluxDB) and to offload some blocking mechanics in ``dsmr_backend`` as well.
+The ``dsmr_mqtt`` process has been merged with to ``dsmr_backend``.
 
 
 Execute the following::
 
     sudo supervisorctl status
 
-Is ``dsmr_mqtt`` listed? If **not listed**, skip the following ``sudo rm`` command. Otherwise remove it::
+Is ``dsmr_mqtt`` listed? If **not listed**, skip this chapter. Otherwise remove it::
 
     sudo rm /etc/supervisor/conf.d/dsmr_mqtt.conf
-
-Now add ``dsmr_client``::
-
-    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_client.conf /etc/supervisor/conf.d/
 
 * Apply changes::
 
@@ -203,7 +199,7 @@ Execute the following::
 
     sudo supervisorctl status
 
-There should be no (more) ``dsmr_mqtt``, but ``dsmr_client`` should be listed instead.
+You should not see ``dsmr_mqtt`` anymore.
 
 Also, the other processes should be running as well again.
 

@@ -70,7 +70,7 @@ msgstr ""
 
 #: ../../faq/v4_upgrade.rst:33 ../../faq/v4_upgrade.rst:84
 #: ../../faq/v4_upgrade.rst:162 ../../faq/v4_upgrade.rst:173
-#: ../../faq/v4_upgrade.rst:183 ../../faq/v4_upgrade.rst:202
+#: ../../faq/v4_upgrade.rst:183 ../../faq/v4_upgrade.rst:198
 msgid "Execute the following::"
 msgstr "Voer het volgende uit::"
 
@@ -212,53 +212,41 @@ msgid "It should display the key generated when you execute it."
 msgstr "Het zou de gegenereerde key moeten tonen wanneer je het uitvoert."
 
 #: ../../faq/v4_upgrade.rst:178
-msgid "6. Rename ``dsmr_mqtt`` to ``dsmr_client``"
-msgstr "6. Vervang ``dsmr_mqtt`` door ``dsmr_client``"
+msgid "6. Drop ``dsmr_mqtt``"
+msgstr "6. Verwijder ``dsmr_mqtt``"
 
 #: ../../faq/v4_upgrade.rst:180
-msgid ""
-"The ``dsmr_mqtt`` process has been renamed to ``dsmr_client`` to support more "
-"generic continuous data flows in the future (such as InfluxDB) and to offload "
-"some blocking mechanics in ``dsmr_backend`` as well."
-msgstr ""
-"Het ``dsmr_mqtt`` proces is hernoemd naar ``dsmr_client`` om in de toekomst wat "
-"meer generieke dataflows te ondersteunen (zoals InfluxDB), maar ook om "
-"``dsmr_backend`` wat meer te ontlasten."
+msgid "The ``dsmr_mqtt`` process has been merged with to ``dsmr_backend``."
+msgstr "Het ``dsmr_mqtt`` proces is samengevoegd met ``dsmr_backend``."
 
 #: ../../faq/v4_upgrade.rst:187
 msgid ""
-"Is ``dsmr_mqtt`` listed? If **not listed**, skip the following ``sudo rm`` "
-"command. Otherwise remove it::"
+"Is ``dsmr_mqtt`` listed? If **not listed**, skip this chapter. Otherwise remove "
+"it::"
 msgstr ""
-"Wordt ``dsmr_mqtt`` getoond? Zo ja, sla dan het volgende ``sudo rm`` commando "
-"over. Zo niet, verwijder het met::"
+"Wordt ``dsmr_mqtt`` getoond? Zo niet, sla de rest van dit hoofdstuk over. Zo ja, "
+"verwijder het::"
 
 #: ../../faq/v4_upgrade.rst:191
-msgid "Now add ``dsmr_client``::"
-msgstr "Voeg nu ``dsmr_client`` toe::"
-
-#: ../../faq/v4_upgrade.rst:195
 msgid "Apply changes::"
 msgstr "Pas wijzigingen toe::"
 
-#: ../../faq/v4_upgrade.rst:206
-msgid ""
-"There should be no (more) ``dsmr_mqtt``, but ``dsmr_client`` should be listed "
-"instead."
-msgstr "Er zou geen ``dsmr_mqtt`` meer moeten staan, maar wel ``dsmr_client``."
+#: ../../faq/v4_upgrade.rst:202
+msgid "You should not see ``dsmr_mqtt`` anymore."
+msgstr "Je zou ``dsmr_mqtt`` niet meer moeten zien."
 
-#: ../../faq/v4_upgrade.rst:208
+#: ../../faq/v4_upgrade.rst:204
 msgid "Also, the other processes should be running as well again."
 msgstr "Daarnaast zouden de andere processing nu weer goed moeten draaien."
 
-#: ../../faq/v4_upgrade.rst:211
+#: ../../faq/v4_upgrade.rst:207
 msgid "7. Deploy"
 msgstr "7. Deploy"
 
-#: ../../faq/v4_upgrade.rst:212
+#: ../../faq/v4_upgrade.rst:208
 msgid "Finally, execute the deploy script::"
 msgstr "Tot slot, voer het deploy-script uit::"
 
-#: ../../faq/v4_upgrade.rst:217
+#: ../../faq/v4_upgrade.rst:213
 msgid "Great. You should now be on ``v4.x``!"
 msgstr "Mooi! Je zou nu op ``v4.x`` moeten zitten!"

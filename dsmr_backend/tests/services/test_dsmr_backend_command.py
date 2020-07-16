@@ -3,22 +3,27 @@ from unittest import mock
 from django.test import TestCase
 from django.utils import timezone
 
-import dsmr_backend.services.schedule
-import dsmr_backend.signals
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
+import dsmr_backend.services.schedule
+import dsmr_backend.signals
 
 
-class TestSchedule(InterceptStdoutMixin, TestCase):
+class TestCases(InterceptStdoutMixin, TestCase):
     @mock.patch('dsmr_backend.signals.backend_called.send_robust')
     @mock.patch('dsmr_backend.services.schedule.execute_scheduled_processes')
-    def test_backend_creation_signal(self, exec_mock, signal_mock):
+    @mock.patch('dsmr_backend.services.persistent_clients.initialize')
+    @mock.patch('dsmr_backend.services.persistent_clients.run')
+    @mock.patch('dsmr_backend.services.persistent_clients.terminate')
+    def test_backend_creation_signal(self, *mocks):
         """ Test outgoing signal and execute_scheduled_processes() being called. """
-        self.assertFalse(signal_mock.called)
-        self.assertFalse(exec_mock.called)
+        for current in mocks:
+            self.assertFalse(current.called)
+
         self._intercept_command_stdout('dsmr_backend', run_once=True)
-        self.assertTrue(signal_mock.called)
-        self.assertTrue(exec_mock.called)
+
+        for current in mocks:
+            self.assertTrue(current.called)
 
     @mock.patch('dsmr_dropbox.services.sync')
     @mock.patch('dsmr_notification.services.notify')

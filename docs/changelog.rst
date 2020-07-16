@@ -11,14 +11,6 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
-
-v4.1.0 - 2020-xx-xx
--------------------
-
-- ``Added``: InfluxDB integration [`#857 <https://github.com/dennissiemensma/dsmr-reader/issues/857>`_]
-
-
-
 v4.0.0 - 2020-07-31
 -------------------
 
@@ -31,11 +23,11 @@ v4.0.0 - 2020-07-31
 - ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
 
 - ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
-- ``Added``: Added ``dsmr_client`` command as a (by default running) replacement for ``dsmr_mqtt`` [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
+- ``Added``: InfluxDB integration [`#857 <https://github.com/dennissiemensma/dsmr-reader/issues/857>`_]
 - ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dennissiemensma/dsmr-reader/issues/1025>`_]
 
-- ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_]
-- ``Removed``: Drop API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dennissiemensma/dsmr-reader/issues/1024>`_]
+- ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_] / [`#1049 <https://github.com/dennissiemensma/dsmr-reader/issues/1049>`_]
+- ``Removed``: Dropped API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dennissiemensma/dsmr-reader/issues/1024>`_]
 
 
 ----

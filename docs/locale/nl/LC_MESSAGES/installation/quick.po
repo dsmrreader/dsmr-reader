@@ -56,11 +56,3 @@ msgstr "Ga verder::"
 #: ../../installation/quick.rst:83
 msgid ":doc:`Finished? Go to setting up the application<../application>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
-
-#~ msgid ""
-#~ "# Packages sudo apt-get install -y"
-#~ " postgresql nginx supervisor git python3"
-#~ " python3-psycopg2 python3-pip python3-virtualenv "
-#~ "virtualenvwrapper"
-#~ msgstr ""
-

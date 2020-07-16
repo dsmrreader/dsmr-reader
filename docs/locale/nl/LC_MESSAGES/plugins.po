@@ -273,16 +273,3 @@ msgid ""
 msgstr ""
 "Plugin bestand ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` "
 "(nieuw bestand)::"
-
-#~ msgid "Plugins/hooks (Do It Yourself)"
-#~ msgstr "Plugins/hooks (Doe-Het-Zelf)"
-
-#~ msgid ""
-#~ "Add the **dotted** path to the end of your ``dsmrreader/settings.py`` "
-#~ "file::"
-#~ msgstr ""
-#~ "Voeg het **dotted** pad toe aan het einde van je ``dsmrreader/settings."
-#~ "py`` bestand::"
-
-#~ msgid "Settings file ``dsmrreader/settings.py`` (addition)::"
-#~ msgstr "Settings bestand ``dsmrreader/settings.py`` (toevoeging)::"

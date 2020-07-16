@@ -187,34 +187,3 @@ msgstr "`ReDoc <https://github.com/Redocly/redoc>`_"
 #: ../../credits.rst:53
 msgid "`Semantic UI <https://semantic-ui.com>`_"
 msgstr "`Semantic UI <https://semantic-ui.com>`_"
-
-#~ msgid "Special thanks for supplying code contributions"
-#~ msgstr "Bijzondere dank voor de code-bijdragen van"
-
-#~ msgid "Also many thanks to the contributions of"
-#~ msgstr "Dank voor de bijdrages van"
-
-#~ msgid "Software used"
-#~ msgstr "Gebruikte software"
-
-#~ msgid "`Django Solo <https://github.com/lazybird/django-solo>`_"
-#~ msgstr "`Django Solo <https://github.com/lazybird/django-solo>`_"
-
-#~ msgid "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
-#~ msgstr "`Django Colorfield <https://github.com/jaredly/django-colorfield>`_"
-
-#~ msgid ""
-#~ "`Django Admin Range Filter <https://github.com/silentsokolov/django-admin-"
-#~ "rangefilter>`_"
-#~ msgstr ""
-#~ "`Django Admin Range Filter <https://github.com/silentsokolov/django-admin-"
-#~ "rangefilter>`_"
-
-#~ msgid "`Codecov <https://codecov.io>`_"
-#~ msgstr "`Codecov <https://codecov.io>`_"
-
-#~ msgid "`Read The Docs <https://readthedocs.org/>`_"
-#~ msgstr "`Read The Docs <https://readthedocs.org/>`_"
-
-#~ msgid "`CircleCI <https://circleci.com/>`_"
-#~ msgstr "`CircleCI <https://circleci.com/>`_"

@@ -32,9 +32,8 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
     )
     hostname = models.CharField(
         max_length=256,
-        null=True,
         blank=True,
-        default=None,
+        default='localhost',
         verbose_name=_('Hostname'),
         help_text=_('The hostname of the broker to send MQTT messages to.')
     )

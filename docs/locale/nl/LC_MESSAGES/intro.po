@@ -79,16 +79,3 @@ msgid ""
 ":doc:`Please read this page as well before using DSMR-reader<data_integrity>`."
 msgstr ""
 ":doc:`Lees deze pagina voordat je DSMR-reader gebruikt<data_integrity>`."
-
-#~ msgid "Keep ownership of your own data."
-#~ msgstr "Behoud eigendom van je eigen gegevens."
-
-#~ msgid "Github"
-#~ msgstr "Github"
-
-#~ msgid ""
-#~ "The project can be found here: https://github.com/dennissiemensma/dsmr-"
-#~ "reader"
-#~ msgstr ""
-#~ "Je kunt het project hier vinden: https://github.com/dennissiemensma/dsmr-"
-#~ "reader"

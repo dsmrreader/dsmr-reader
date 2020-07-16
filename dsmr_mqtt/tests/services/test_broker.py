@@ -6,31 +6,30 @@ from django.conf import settings
 import paho.mqtt.client as paho
 
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
-from dsmr_backend.mixins import StopInfiniteRun
 from dsmr_mqtt.models import queue
 import dsmr_mqtt.services.broker
 
 
 class TestBroker(TestCase):
-    @mock.patch('time.sleep')
+    def setUp(self):
+        MQTTBrokerSettings.get_solo()
+        MQTTBrokerSettings.objects.update(
+            enabled=True,
+            hostname='localhost'
+        )
+
     @mock.patch('paho.mqtt.client.Client.connect')
-    def test_initialize_disabled(self, connect_mock, sleep_mock):
+    def test_initialize_disabled(self, connect_mock):
         """ Default, disabled settings. """
-        self.assertFalse(connect_mock.called)
-        self.assertFalse(sleep_mock.called)
-
-        with self.assertRaises(StopInfiniteRun):
-            dsmr_mqtt.services.broker.initialize_client()
+        MQTTBrokerSettings.objects.update(enabled=False)
 
         self.assertFalse(connect_mock.called)
-        self.assertTrue(sleep_mock.called)
+        self.assertIsNone(dsmr_mqtt.services.broker.initialize_client())
+        self.assertFalse(connect_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.connect')
     def test_initialize_enabled(self, connect_mock):
         """ MQTT support enabled. """
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(hostname='localhost')
-
         self.assertFalse(connect_mock.called)
 
         mqtt_client = dsmr_mqtt.services.broker.initialize_client()
@@ -41,8 +40,7 @@ class TestBroker(TestCase):
     @mock.patch('paho.mqtt.client.Client.connect')
     @mock.patch('paho.mqtt.client.Client.tls_set')
     def test_initialize_insecure(self, tls_set_mock, *mocks):
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(hostname='localhost', secure=MQTTBrokerSettings.INSECURE)
+        MQTTBrokerSettings.objects.update(secure=MQTTBrokerSettings.INSECURE)
 
         self.assertFalse(tls_set_mock.called)
         dsmr_mqtt.services.broker.initialize_client()
@@ -51,8 +49,7 @@ class TestBroker(TestCase):
     @mock.patch('paho.mqtt.client.Client.connect')
     @mock.patch('paho.mqtt.client.Client.tls_set')
     def test_initialize_secure_cert_none(self, tls_set_mock, *mocks):
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(hostname='localhost', secure=MQTTBrokerSettings.SECURE_CERT_NONE)
+        MQTTBrokerSettings.objects.update(secure=MQTTBrokerSettings.SECURE_CERT_NONE)
 
         self.assertFalse(tls_set_mock.called)
         dsmr_mqtt.services.broker.initialize_client()
@@ -61,38 +58,32 @@ class TestBroker(TestCase):
     @mock.patch('paho.mqtt.client.Client.connect')
     @mock.patch('paho.mqtt.client.Client.tls_set')
     def test_initialize_secure_cert_required(self, tls_set_mock, *mocks):
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(hostname='localhost', secure=MQTTBrokerSettings.SECURE_CERT_REQUIRED)
+        MQTTBrokerSettings.objects.update(secure=MQTTBrokerSettings.SECURE_CERT_REQUIRED)
 
         self.assertFalse(tls_set_mock.called)
         dsmr_mqtt.services.broker.initialize_client()
         tls_set_mock.assert_called_with(cert_reqs=ssl.CERT_REQUIRED)
 
-    @mock.patch('time.sleep')
     @mock.patch('paho.mqtt.client.Client.connect')
-    def test_initialize_connection_refused(self, connect_mock, sleep_mock):
+    def test_initialize_connection_refused(self, connect_mock):
         """ Whenever the broker is unavailable. """
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(hostname='localhost')
+        MQTTBrokerSettings.objects.update(hostname='invalid')
 
         connect_mock.side_effect = ConnectionRefusedError()  # Fail.
-        self.assertFalse(sleep_mock.called)
 
         self.assertFalse(connect_mock.called)
 
-        with self.assertRaises(StopInfiniteRun):
+        with self.assertRaises(RuntimeError):
             dsmr_mqtt.services.broker.initialize_client()
 
         self.assertTrue(connect_mock.called)
-        self.assertTrue(sleep_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.connect')
     def test_initialize_credentials(self, *mocks):
         """ User/password set. """
         USER = 'x'
         PASS = 'y'
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(hostname='localhost')
+        MQTTBrokerSettings.objects.update()
 
         mqtt_client = dsmr_mqtt.services.broker.initialize_client()
 
@@ -150,7 +141,7 @@ class TestBroker(TestCase):
         is_connected_mock.return_value = False  # Connection failure.
         client = paho.Client('xxx')
 
-        with self.assertRaises(StopInfiniteRun):
+        with self.assertRaises(RuntimeError):
             dsmr_mqtt.services.broker.run(mqtt_client=client)
 
     @mock.patch('paho.mqtt.client.Client.loop')

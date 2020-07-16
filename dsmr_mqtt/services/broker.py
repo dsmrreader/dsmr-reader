@@ -15,6 +15,9 @@ def initialize_client():
     """ Initializes the MQTT client and returns client instance. """
     broker_settings = MQTTBrokerSettings.get_solo()
 
+    if not broker_settings.enabled:
+        return logger.debug('MQTT: Integration disabled in settings')
+
     if not broker_settings.hostname:
         logger.error('MQTT: No hostname found in settings, disabling MQTT')
         broker_settings.update(enabled=False)

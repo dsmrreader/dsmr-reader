@@ -66,8 +66,8 @@ msgstr "Herplan een proces alleen wanneer het noodzakelijk is, gezien het de tim
 msgid "Time until next call"
 msgstr "Tijd tot volgende aanroep"
 
-msgid "Backend"
-msgstr "Backend"
+msgid "Backend (dsmr_backend)"
+msgstr "Backend (dsmr_backend)"
 
 msgid "Unsupported database engine \"{}\" active, some features might not work properly"
 msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
@@ -80,9 +80,6 @@ msgstr "Geeft aan of de API uitgeschakeld is."
 
 msgid "Intended usage is NOT production! Only allowed when DEBUG = True"
 msgstr "Bedoeld voor gebruik buiten productie. Alleen mogelijk wanneer instelling DEBUG = True"
-
-msgid "Generates a generic event triggering apps for backend operations, cron-like."
-msgstr "Genereert een generiek signaal dat gebruikt kan worden door plugins voor achtergrondoperaties, zoals cron."
 
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert een enkele uitvoer"
@@ -143,6 +140,12 @@ msgstr "Schakel weergave elektriciteitsteruglevering uit"
 
 msgid "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels."
 msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) teruglevering heeft geregistreerd."
+
+msgid "Restart required"
+msgstr "Herstart vereist"
+
+msgid "Whether the process requires a restart."
+msgstr "Geeft aan of het proces een herstart vereist."
 
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
@@ -332,9 +335,6 @@ msgstr "bewerk hier het e-mailadres"
 
 msgid "Saving the configuration will reset the delay until the next email backup."
 msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende back-up per e-mail."
-
-msgid "Persistent client for publishing data to external services, when enabled."
-msgstr "Persistente client voor het publiceren van gegevens naar externe diensten, wanneer ingeschakeld."
 
 msgid "Consumption"
 msgstr "Verbruik"
@@ -702,8 +702,8 @@ msgstr "Fasen P-"
 msgid "Temperature"
 msgstr "Temperatuur"
 
-msgid "Frontend"
-msgstr "Interface"
+msgid "Frontend (dsmr_webinterface)"
+msgstr "Interface (dsmr_webinterface)"
 
 msgid "Day"
 msgstr "Dag"
@@ -1023,8 +1023,14 @@ msgstr "Zoek naar een onderwerp of instelling"
 msgid "Some topics"
 msgstr "Enkele onderwerpen"
 
+msgid "Backend"
+msgstr "Backend"
+
 msgid "Email"
 msgstr "E-mail"
+
+msgid "Frontend"
+msgstr "Interface"
 
 msgid "Meter statistics"
 msgstr "Meterstatistieken"
@@ -1046,6 +1052,9 @@ msgstr "Retentie"
 
 msgid "Weather"
 msgstr "Weergegevens"
+
+msgid "InfluxDB"
+msgstr "InfluxDB"
 
 msgid "Type here to search..."
 msgstr "Typ hier om te zoeken..."
@@ -1112,6 +1121,9 @@ msgstr "Voeg tarieven samen"
 
 msgid "Graph line/bar colors"
 msgstr "Grafieklijn/staaf kleuren"
+
+msgid "InfluxDB integration"
+msgstr "InfluxDB-integratie"
 
 msgid "Latest telegram read"
 msgstr "Laatst gelezen telegram"
@@ -1647,6 +1659,149 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
+msgid "Mapping"
+msgstr "Mapping"
+
+msgid ""
+"Example:\n"
+"<pre>\n"
+"### [measurement_name]\n"
+"### DSMR-reader field 1 = InfluxDB field 1\n"
+"### DSMR-reader field 2 = InfluxDB field 2\n"
+"\n"
+"[electricity_live]\n"
+"electricity_currently_delivered = currently_delivered\n"
+"electricity_currently_returned = currently_returned\n"
+"\n"
+"[electricity_positions]\n"
+"electricity_delivered_1 = delivered_1\n"
+"electricity_returned_1 = returned_1\n"
+"electricity_delivered_2 = delivered_2\n"
+"electricity_returned_2 = returned_2\n"
+"\n"
+"[electricity_voltage]\n"
+"phase_voltage_l1 = phase_l1\n"
+"phase_voltage_l2 = phase_l2\n"
+"phase_voltage_l3 = phase_l3\n"
+"\n"
+"[electricity_phases]\n"
+"phase_currently_delivered_l1 = currently_delivered_l1\n"
+"phase_currently_delivered_l2 = currently_delivered_l2\n"
+"phase_currently_delivered_l3 = currently_delivered_l3\n"
+"phase_currently_returned_l1 = currently_returned_l1\n"
+"phase_currently_returned_l2 = currently_returned_l2\n"
+"phase_currently_returned_l3 = currently_returned_l3\n"
+"\n"
+"[electricity_power]\n"
+"phase_power_current_l1 = current_l1\n"
+"phase_power_current_l2 = current_l2\n"
+"phase_power_current_l3 = current_l3\n"
+"\n"
+"[gas_positions]\n"
+"extra_device_delivered = delivered\n"
+"</pre>\n"
+msgstr ""
+"Voorbeeld:\n"
+"<pre>\n"
+"### [measurement_name]\n"
+"### DSMR-reader field 1 = InfluxDB field 1\n"
+"### DSMR-reader field 2 = InfluxDB field 2\n"
+"\n"
+"[electricity_live]\n"
+"electricity_currently_delivered = currently_delivered\n"
+"electricity_currently_returned = currently_returned\n"
+"\n"
+"[electricity_positions]\n"
+"electricity_delivered_1 = delivered_1\n"
+"electricity_returned_1 = returned_1\n"
+"electricity_delivered_2 = delivered_2\n"
+"electricity_returned_2 = returned_2\n"
+"\n"
+"[electricity_voltage]\n"
+"phase_voltage_l1 = phase_l1\n"
+"phase_voltage_l2 = phase_l2\n"
+"phase_voltage_l3 = phase_l3\n"
+"\n"
+"[electricity_phases]\n"
+"phase_currently_delivered_l1 = currently_delivered_l1\n"
+"phase_currently_delivered_l2 = currently_delivered_l2\n"
+"phase_currently_delivered_l3 = currently_delivered_l3\n"
+"phase_currently_returned_l1 = currently_returned_l1\n"
+"phase_currently_returned_l2 = currently_returned_l2\n"
+"phase_currently_returned_l3 = currently_returned_l3\n"
+"\n"
+"[electricity_power]\n"
+"phase_power_current_l1 = current_l1\n"
+"phase_power_current_l2 = current_l2\n"
+"phase_power_current_l3 = current_l3\n"
+"\n"
+"[gas_positions]\n"
+"extra_device_delivered = delivered\n"
+"</pre>\n"
+
+msgid "INSECURE - No HTTPS (default)"
+msgstr "ONVEILIG - Geen HTTP (standaard)"
+
+msgid "SECURE (CERT_NONE) - HTTPS, but errors are ignored (untrusted or expired certificates)"
+msgstr "VEILIG (CERT_NONE) - HTTPS, maar certificaatfouten worden genegeerd (bij onvertrouwde of verlopen certificaten)"
+
+msgid "SECURE (CERT_REQUIRED) - HTTPS and requires a valid/trusted certificate"
+msgstr "VEILIG (CERT_REQUIRED) - HTTPS en vereist een geldig/vertrouwd certificaat"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "Whether the InfluxDB integration is enabled."
+msgstr "Geeft aan of de InfluxDB-integratie ingeschakeld is."
+
+msgid "InfluxDB hostname"
+msgstr "InfluxDB hostnaam"
+
+msgid "The hostname of the InfluxDB."
+msgstr "De hostnaam van de InfluxDB."
+
+msgid "InfluxDB port"
+msgstr "InfluxDB poort"
+
+msgid "Default: 8086"
+msgstr "Standaard: 8086"
+
+msgid "InfluxDB database"
+msgstr "InfluxDB database"
+
+msgid "The name of the database used in InfluxDB."
+msgstr "De naam van de database binnen InfluxDB."
+
+msgid "InfluxDB username"
+msgstr "InfluxDB gebruikersnaam"
+
+msgid "Optional: The username used for authentication with InfluxDB."
+msgstr "Optioneel: De gebruikersnaam voor de authenticatie met InfluxDB."
+
+msgid "InfluxDB password"
+msgstr "InfluxDB wachtwoord"
+
+msgid "Optional: The password used for authentication with InfluxDB."
+msgstr "Optioneel: Het wachtwoord voor de authenticatie met InfluxDB."
+
+msgid "Use secure connection (HTTPS)"
+msgstr "Gebruik een veilige verbinding (HTTPS)"
+
+msgid "Whether the client should use a secure connection. Select SECURE (CERT_NONE) for self-signed certificates."
+msgstr "Geeft aan of er gebruikt gemaakt moet worden van een beveiligde verbinding. Kies voor VEILIG (CERT_NONE) wanneer je een self-signed certificaat gebruikt."
+
+msgid "Formatting"
+msgstr "Formaat"
+
+msgid "Mapping used for the measurements used in your InfluxDB database."
+msgstr "Mapping die gebruikt wordt om de measurements in je InfluxDB-database aan te maken."
+
+msgid "Influxdb measurement"
+msgstr "Influxdb measurement"
+
+msgid "Influxdb measurements"
+msgstr "Influxdb measurements"
+
 msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/mindergas.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/mindergas.html\">Documentatie</a>"
 
@@ -1685,9 +1840,6 @@ msgstr "Overig"
 
 msgid "These broker settings apply to all enabled MQTT configurations."
 msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
-
-msgid "Note: You will have to restart the \"dsmr_mqtt\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult het \"dsmr_mqtt\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
 
 msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
 msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
@@ -2001,6 +2153,9 @@ msgstr "VEILIG (CERT_NONE) - Validatiefouten worden genegeerd (bij onvertrouwde 
 msgid "SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate"
 msgstr "VEILIG (CERT_REQUIRED) - Vereist een geldig/vertrouwd certificaat"
 
+msgid "Whether the MQTT integration is enabled."
+msgstr "Geeft aan of de MQTT-integratie ingeschakeld is."
+
 msgid "Hostname"
 msgstr "Hostnaam"
 
@@ -2034,20 +2189,11 @@ msgstr "Quality Of Service"
 msgid "QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages."
 msgstr "QoS 0: Beste performance, maar onbetoruwbaar (ontworpen voor betrouwbare verbindingen, zoals bekabelde netwerken). QoS 1: Gemiddelde performance, maar betrouwbaar. LET OP: Kan ervoor zorgen dat berichten dubbel verzonden worden! QoS 2: Traagste performance, maar betrouwbaar en voorkomt het versturen van dubbele berichten."
 
-msgid "Restart required"
-msgstr "Herstart vereist"
-
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
 
-msgid "The number of seconds the application will sleep after publishing the outgoing MQTT message queue."
-msgstr "Het aantal seconden dat de applicatie wacht na het versturen van alle MQTT-berichten."
-
 msgid "MQTT Broker/connection"
 msgstr "MQTT broker/verbinding"
-
-msgid "Enabled"
-msgstr "Ingeschakeld"
 
 msgid "Whether gas consumption is sent to the broker, in JSON format."
 msgstr "Geeft aan of het gasverbruik wordt doorgestuurd naar de broker, in JSON formaat."
@@ -2057,9 +2203,6 @@ msgstr "Topic pad"
 
 msgid "The topic to send the parsed JSON telegrams to."
 msgstr "Het topic om de JSON telegrammen naar te versturen."
-
-msgid "Formatting"
-msgstr "Formaat"
 
 msgid "Maps the field names used in the JSON message sent to the broker."
 msgstr "Mapt de veldnamen die gebruikt worden in het JSON-bericht naar de broker toe."

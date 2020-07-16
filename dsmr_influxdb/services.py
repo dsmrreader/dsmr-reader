@@ -1,18 +1,22 @@
 import configparser
-import json
+import logging
 
-import yaml
 from django.conf import settings
-from django.core import serializers
-from django.core.serializers import serialize
 from django.db.transaction import atomic
 from influxdb import InfluxDBClient
+import yaml
 
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
 
 
+logger = logging.getLogger('commands')
+
+
 def initialize_client():
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
+
+    if not influxdb_settings.enabled:
+        return logger.debug('INFLUXDB: Integration disabled in settings')
 
     influxdb_client = InfluxDBClient(
         host=influxdb_settings.hostname,
@@ -27,8 +31,10 @@ def initialize_client():
         verify_ssl=influxdb_settings.secure == InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
         timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
     )
+    logger.debug('INFLUXDB: Initialized client')
 
     # Always make sure the database exists.
+    logger.debug('INFLUXDB: Creating InfluxDB database "%s"', influxdb_settings.database)
     influxdb_client.create_database(influxdb_settings.database)
 
     return influxdb_client
@@ -40,9 +46,10 @@ def run(influxdb_client):
     # Keep batches small, only send the latest X items stored. The rest will be purged (in case of delay).
     selection = InfluxdbMeasurement.objects.all().order_by('-pk')[0:settings.DSMRREADER_INFLUXDB_MAX_MESSAGES_IN_QUEUE]
 
-    if not selection.count():
+    if not selection:
         return
 
+    logger.debug('INFLUXDB: Processing %d measurement(s)', len(selection))
     points = []
 
     for current in selection:

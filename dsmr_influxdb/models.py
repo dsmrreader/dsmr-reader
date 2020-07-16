@@ -56,7 +56,7 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Use secure connection (HTTPS)'),
         help_text=_(
             'Whether the client should use a secure connection. '
-            'Select SECURE (CERT_NONE) for self-signed certificates. '
+            'Select SECURE (CERT_NONE) for self-signed certificates.'
         )
     )
     formatting = models.TextField(

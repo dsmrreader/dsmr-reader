@@ -2,12 +2,13 @@ MQTT
 ====
 
 
-The ``dsmr_client`` / ``dsmr_mqtt`` processes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The ``dsmr_mqtt`` process
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Since DSMR-reader ``v4.x``, you no longer need to manually configure ``dsmr_client`` (formerly known as ``dsmr_mqtt``) for MQTT.
+Since DSMR-reader ``v4.x``, you no longer need to manually configure ``dsmr_mqtt``. It has been merged with ``dsmr_backend``.
 
 It should be already configured while installing or upgrading DSMR-reader and listed running if you execute ``sudo supervisorctl status``.
+Make sure that ``dsmr_backend`` is running.
 
 
 MQTT caching
