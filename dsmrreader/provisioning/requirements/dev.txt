@@ -2,8 +2,8 @@ polib==1.1.0
 pylama==7.7.1
 pytest-cov==2.10.0
 pytest-django==3.9.0
-pytest-xdist==1.32.0
-sphinx==3.1.1
+pytest-xdist==1.33.0
+sphinx==3.1.2
 sphinx-autobuild==0.7.1
 sphinx-intl==2.0.1
 sphinx-rtd-theme==0.5.0
