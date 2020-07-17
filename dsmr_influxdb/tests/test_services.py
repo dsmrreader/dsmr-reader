@@ -73,6 +73,15 @@ class TestCases(InterceptStdoutMixin, TestCase):
         self.assertFalse(write_points_mock.called)  # Not reached.
 
     @mock.patch('influxdb.InfluxDBClient.write_points')
+    def test_run_exception(self, write_points_mock):
+        write_points_mock.side_effect = RuntimeError('Explosion')
+
+        dsmr_influxdb.services.run(InfluxDBClient())
+
+        # No crash and should still clear data.
+        self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
+
+    @mock.patch('influxdb.InfluxDBClient.write_points')
     def test_run(self, write_points_mock):
         self.assertFalse(write_points_mock.called)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 3)

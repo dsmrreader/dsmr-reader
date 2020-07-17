@@ -59,7 +59,11 @@ def run(influxdb_client):
             "fields": json.loads(current.fields),
         })
 
-    influxdb_client.write_points(points)
+    try:
+        influxdb_client.write_points(points)
+    except Exception as error:
+        logger.error('INFLUXDB: Writing measurement(s) failed: %s', error)
+
     InfluxdbMeasurement.objects.all().delete()  # This purges the remainder as well.
 
 
