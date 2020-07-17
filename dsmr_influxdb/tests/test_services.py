@@ -65,43 +65,43 @@ class TestCases(InterceptStdoutMixin, TestCase):
         self.assertEqual(client._scheme, 'https')
         self.assertTrue(client._verify_ssl)
 
-    @mock.patch('influxdb.InfluxDBClient.write')
-    def test_run_empty(self, write_mock):
+    @mock.patch('influxdb.InfluxDBClient.write_points')
+    def test_run_empty(self, write_points_mock):
         InfluxdbMeasurement.objects.all().delete()
 
         dsmr_influxdb.services.run(InfluxDBClient())
-        self.assertFalse(write_mock.called)  # Not reached.
+        self.assertFalse(write_points_mock.called)  # Not reached.
 
-    @mock.patch('influxdb.InfluxDBClient.write')
-    def test_run_exception(self, write_mock):
-        write_mock.side_effect = RuntimeError('Explosion')
+    @mock.patch('influxdb.InfluxDBClient.write_points')
+    def test_run_exception(self, write_points_mock):
+        write_points_mock.side_effect = RuntimeError('Explosion')
 
         dsmr_influxdb.services.run(InfluxDBClient())
 
         # No crash and should still clear data.
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
 
-    @mock.patch('influxdb.InfluxDBClient.write')
-    def test_run(self, write_mock):
-        self.assertFalse(write_mock.called)
+    @mock.patch('influxdb.InfluxDBClient.write_points')
+    def test_run(self, write_points_mock):
+        self.assertFalse(write_points_mock.called)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 3)
 
         dsmr_influxdb.services.run(InfluxDBClient())
-        self.assertTrue(write_mock.called)
-        self.assertEqual(write_mock.call_count, 3)
+        self.assertTrue(write_points_mock.called)
+        self.assertEqual(write_points_mock.call_count, 3)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
 
     @override_settings(DSMRREADER_INFLUXDB_MAX_MESSAGES_IN_QUEUE=1)
-    @mock.patch('influxdb.InfluxDBClient.write')
-    def test_run_overrun(self, write_mock):
+    @mock.patch('influxdb.InfluxDBClient.write_points')
+    def test_run_overrun(self, write_points_mock):
         """ More measurements stored than we're allowed to process. """
-        self.assertFalse(write_mock.called)
+        self.assertFalse(write_points_mock.called)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 3)
 
         dsmr_influxdb.services.run(InfluxDBClient())
 
-        self.assertTrue(write_mock.called)
-        self.assertEqual(write_mock.call_count, 1)  # Only once
+        self.assertTrue(write_points_mock.called)
+        self.assertEqual(write_points_mock.call_count, 1)  # Only once
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
 
     def test_publish_dsmr_reading_disabled(self):

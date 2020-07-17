@@ -4,7 +4,6 @@ import logging
 import json
 
 from django.conf import settings
-from django.db.transaction import atomic
 from influxdb import InfluxDBClient
 
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
@@ -40,7 +39,6 @@ def initialize_client():
     return influxdb_client
 
 
-@atomic  # ACID!
 def run(influxdb_client):
     """ Processes queued measurements. """
     # Keep batches small, only send the latest X items stored. The rest will be purged (in case of delay).
@@ -50,21 +48,22 @@ def run(influxdb_client):
         return
 
     logger.info('INFLUXDB: Processing %d measurement(s)', len(selection))
-    points = []
 
     for current in selection:
         try:
-            influxdb_client.write({
-                "measurement": current.measurement_name,
-                "time": current.time,
-                "fields": json.loads(current.fields),
-            })
+            influxdb_client.write_points([
+                {
+                    "measurement": current.measurement_name,
+                    "time": current.time,
+                    "fields": json.loads(current.fields),
+                }
+            ])
         except Exception as error:
-            logger.error('INFLUXDB: Writing measurement failed: %s', error)
+            logger.error('INFLUXDB: Writing measurement(s) failed: %s', error)
 
         current.delete()
 
-    InfluxdbMeasurement.objects.all().delete()  # This purges the remainder as well.
+    InfluxdbMeasurement.objects.all().delete()  # This purges the remainder.
 
 
 def publish_dsmr_reading(instance):
