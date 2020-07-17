@@ -265,7 +265,7 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fas fa-cogs"></i> &nbsp; {% trans "Tools" %} <br />
+                    <i class="fas fa-cogs"></i> &nbsp; {% trans "Integrations" %} <br />
                 </header>
                 <div class="panel-body">
                     <table class="table table-hover">
@@ -298,23 +298,43 @@
                         </tr>
                         {% endif %}
 
+                        {% if status.tools.mqtt %}
                         <tr>
                             <td class="col-sm-6">
-                                <strong>{% trans "MQTT messages" %}</strong>
+                                <strong>{% trans "MQTT messages sync" %}</strong>
                             </td>
                             <td class="col-sm-6">
                                 {% if status.tools.mqtt.ok %}
-                                <div class="alert alert-info" role="alert">
-                                    <i class="fas fa-info"></i> &nbsp;
+                                <div class="alert alert-success" role="alert">
+                                    <i class="fas fa-check"></i> &nbsp;
                                 {% else %}
                                 <div class="alert alert-danger" role="alert">
                                     <i class="fas fa-exclamation-triangle"></i>
                                 {% endif %}
-                                    {% trans "Queued messages" %}: <strong>{{ status.tools.mqtt.pending_messages }}</strong>
+                                    {% trans "Pending messages" %}: <strong>{{ status.tools.mqtt.pending_messages }}</strong>
                                 </div>
                             </td>
                         </tr>
+                        {% endif %}
 
+                        {% if status.tools.influxdb %}
+                        <tr>
+                            <td class="col-sm-6">
+                                <strong>{% trans "InfluxDB measurements sync" %}</strong>
+                            </td>
+                            <td class="col-sm-6">
+                                {% if status.tools.influxdb.ok %}
+                                <div class="alert alert-success" role="alert">
+                                    <i class="fas fa-check"></i> &nbsp;
+                                {% else %}
+                                <div class="alert alert-danger" role="alert">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% endif %}
+                                    {% trans "Pending measurements" %}: <strong>{{ status.tools.influxdb.pending_measurements }}</strong>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
                     </table>
                 </div>
             </div>

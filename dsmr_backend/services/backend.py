@@ -11,7 +11,9 @@ from django.core.cache import cache
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_influxdb.models import InfluxdbMeasurement, InfluxdbIntegrationSettings
 from dsmr_mqtt.models.queue import Message
+from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_datalogger.models.reading import DsmrReading
@@ -176,10 +178,24 @@ def get_statistics_status():
 
 
 def get_mqtt_status():
+    if not MQTTBrokerSettings.get_solo().enabled:
+        return
+
     message_count = Message.objects.all().count()
     return {
         'ok': message_count < settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE,
         'pending_messages': message_count,
+    }
+
+
+def get_influxdb_status():
+    if not InfluxdbIntegrationSettings.get_solo().enabled:
+        return
+
+    measurement_count = InfluxdbMeasurement.objects.all().count()
+    return {
+        'ok': measurement_count < settings.DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE,
+        'pending_measurements': measurement_count,
     }
 
 
@@ -215,6 +231,7 @@ def status_info():
                 'latest_sync': None,
             },
             'mqtt': get_mqtt_status(),
+            'influxdb': get_influxdb_status(),
         }
     }
 

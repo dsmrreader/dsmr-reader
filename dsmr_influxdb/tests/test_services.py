@@ -91,7 +91,7 @@ class TestCases(InterceptStdoutMixin, TestCase):
         self.assertEqual(write_points_mock.call_count, 3)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
 
-    @override_settings(DSMRREADER_INFLUXDB_MAX_MESSAGES_IN_QUEUE=1)
+    @override_settings(DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE=1)
     @mock.patch('influxdb.InfluxDBClient.write_points')
     def test_run_overrun(self, write_points_mock):
         """ More measurements stored than we're allowed to process. """

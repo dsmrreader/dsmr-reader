@@ -1590,8 +1590,8 @@ msgstr "Volgende uitvoer"
 msgid "Currently disabled or not configured."
 msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
 
-msgid "Tools"
-msgstr "Tools"
+msgid "Integrations"
+msgstr "Integraties"
 
 msgid "Latest Dropbox sync"
 msgstr "Meest recente synchronisatie met Dropbox"
@@ -1602,11 +1602,17 @@ msgstr "Meest recent"
 msgid "Latest PVOutput sync"
 msgstr "Meest recente synchronisatie met PVOutput"
 
-msgid "MQTT messages"
-msgstr "MQTT-berichten"
+msgid "MQTT messages sync"
+msgstr "MQTT-berichten sync"
 
-msgid "Queued messages"
+msgid "Pending messages"
 msgstr "Wachtende berichten"
+
+msgid "InfluxDB measurements sync"
+msgstr "Influxdb measurements sync"
+
+msgid "Pending measurements"
+msgstr "Wachtende measurements"
 
 msgid "Capabilities"
 msgstr "Mogelijkheden"
@@ -2728,3 +2734,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Tools"
+#~ msgstr "Tools"

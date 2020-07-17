@@ -6,6 +6,8 @@ from django.utils import timezone
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_influxdb.models import InfluxdbIntegrationSettings
+from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
@@ -259,9 +261,24 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertTrue(tools_status['backup']['enabled'])
         self.assertTrue(tools_status['dropbox']['enabled'])
         self.assertTrue(tools_status['pvoutput']['enabled'])
-        # self.assertEqual(tools_status['backup']['latest_backup'], timezone.now())  # Will be removed eventually
         self.assertEqual(tools_status['dropbox']['latest_sync'], timezone.now())
         self.assertEqual(tools_status['pvoutput']['latest_sync'], timezone.now())
+
+    def test_get_mqtt_status(self):
+        MQTTBrokerSettings.get_solo()
+        MQTTBrokerSettings.objects.update(enabled=True)
+        dsmr_backend.services.backend.get_mqtt_status()
+
+        MQTTBrokerSettings.objects.update(enabled=False)
+        self.assertIsNone(dsmr_backend.services.backend.get_mqtt_status())
+
+    def test_get_influxdb_status(self):
+        InfluxdbIntegrationSettings.get_solo()
+        InfluxdbIntegrationSettings.objects.update(enabled=True)
+        dsmr_backend.services.backend.get_influxdb_status()
+
+        InfluxdbIntegrationSettings.objects.update(enabled=False)
+        self.assertIsNone(dsmr_backend.services.backend.get_influxdb_status())
 
     @mock.patch('django.utils.timezone.now')
     def test_hours_in_day(self, now_mock):

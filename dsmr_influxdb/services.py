@@ -42,7 +42,9 @@ def initialize_client():
 def run(influxdb_client):
     """ Processes queued measurements. """
     # Keep batches small, only send the latest X items stored. The rest will be purged (in case of delay).
-    selection = InfluxdbMeasurement.objects.all().order_by('-pk')[0:settings.DSMRREADER_INFLUXDB_MAX_MESSAGES_IN_QUEUE]
+    selection = InfluxdbMeasurement.objects.all().order_by('-pk')[
+        0:settings.DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE
+    ]
 
     if not selection:
         return

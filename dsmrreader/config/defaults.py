@@ -97,7 +97,7 @@ DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
 
 # Number of queued messages the application will retain. Any excess will be purged.
 DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200
-DSMRREADER_INFLUXDB_MAX_MESSAGES_IN_QUEUE = 200
+DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE = 200
 
 # Number of hours to cleanup in one run of applying retention.
 DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
