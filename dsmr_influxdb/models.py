@@ -36,7 +36,7 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
     )
     database = models.CharField(
         max_length=64,
-        default='dsmrreader_dsmr_reading',
+        default='dsmrreader_measurements',
         verbose_name=_('InfluxDB database'),
         help_text=_('The name of the database used in InfluxDB.')
     )
