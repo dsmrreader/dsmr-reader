@@ -1,3 +1,4 @@
+from decimal import Decimal
 from unittest import mock
 
 from django.test import TestCase, override_settings
@@ -23,8 +24,8 @@ class TestCases(InterceptStdoutMixin, TestCase):
             electricity_returned_1=2,
             electricity_delivered_2=3,
             electricity_returned_2=4,
-            electricity_currently_delivered=5,
-            electricity_currently_returned=6,
+            electricity_currently_delivered=Decimal('1.234'),
+            electricity_currently_returned=Decimal('5.6789'),
         )
 
     def test_initialize_client_disabled(self):
@@ -119,3 +120,7 @@ class TestCases(InterceptStdoutMixin, TestCase):
         self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name='electricity_phases').exists())
         self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name='electricity_power').exists())
         self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name='gas_positions').exists())
+
+    def test_serialize_decimal_to_float(self):
+        with self.assertRaises(TypeError):
+            dsmr_influxdb.services.serialize_decimal_to_float(1)  # Coverage run

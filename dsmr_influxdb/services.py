@@ -1,13 +1,13 @@
+from decimal import Decimal
 import configparser
 import logging
+import json
 
 from django.conf import settings
 from django.db.transaction import atomic
 from influxdb import InfluxDBClient
-import yaml
 
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
-
 
 logger = logging.getLogger('commands')
 
@@ -56,7 +56,7 @@ def run(influxdb_client):
         points.append({
             "measurement": current.measurement_name,
             "time": current.time,
-            "fields": yaml.load(current.fields)
+            "fields": json.loads(current.fields),
         })
 
     influxdb_client.write_points(points)
@@ -73,7 +73,6 @@ def publish_dsmr_reading(instance):
     config_parser = configparser.ConfigParser()
     config_parser.read_string(influxdb_settings.formatting)
     data_source = instance.__dict__
-
     for current_measurement in config_parser.sections():
         measurement_fields = {}
 
@@ -84,5 +83,16 @@ def publish_dsmr_reading(instance):
         InfluxdbMeasurement.objects.create(
             measurement_name=current_measurement,
             time=data_source['timestamp'],
-            fields=yaml.dump(measurement_fields)  # We need to preserve native types, this seems to work
+            fields=json.dumps(
+                measurement_fields,
+                default=serialize_decimal_to_float
+            )
         )
+
+
+def serialize_decimal_to_float(obj):
+    """ Workaround to make sure Decimals are not converted to strings here. """
+    if isinstance(obj, Decimal):
+        return float(obj)
+
+    raise TypeError(type(obj).__name__)
