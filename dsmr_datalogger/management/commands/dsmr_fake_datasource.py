@@ -64,7 +64,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             options['with_electricity_returned'],
             options['hour_offset']
         )
-        logger.info("\n%s", telegram)  # For convenience
 
         # Either write to port or just handle internally
         if options['serial_port']:
