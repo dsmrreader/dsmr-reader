@@ -16,5 +16,6 @@ pyserial-asyncio==0.4
 python-dateutil==2.8.1
 python-decouple==3.3
 pytz==2020.1
+PyYAML==5.3.1
 requests==2.24.0
 urllib3==1.25.9
