@@ -120,6 +120,35 @@ If you find any differences (e.g. different database credentials or host), updat
 Not all previously supported settings are also available in ``.env``.
 See :doc:`Env Settings for the latest list of env vars supported<../env_settings>`.
 
+Backwards incompatible
+----------------------
+
+Please note that ``DSMRREADER_PLUGINS`` is now a comma separated list.
+Chances are however very slim that you were using ``DSMRREADER_PLUGINS`` at all (advanced users only).
+
+Execute the following::
+
+    logout
+
+
+5. Generate your own ``SECRET_KEY``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Previous versions had a hardcoded value for ``SECRET_KEY``.
+This was fine while running DSMR-reader in your home network, but it is not recommended for public facing instances.
+
+To prevent some users from forgetting to set a custom secret key, DSMR-reader now simply requires everyone to generate a unique ``SECRET_KEY`` locally during installation (or when upgrading).
+
+Execute the following::
+
+    sudo su - dsmr
+    ./tools/generate-secret-key.sh
+
+Check whether the script updated your ``.env`` file properly::
+
+    grep 'SECRET_KEY=' .env
+
+It should display the key generated when you execute it.
 
 Check the configuration with::
 
@@ -143,32 +172,6 @@ Check the configuration with::
         # Try again:
         ./manage.py check
 
-
-Backwards incompatible
-----------------------
-
-Please note that ``DSMRREADER_PLUGINS`` is now a comma separated list.
-Chances are however very slim that you were using ``DSMRREADER_PLUGINS`` at all (advanced users only).
-
-
-5. Generate your own ``SECRET_KEY``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Previous versions had a hardcoded value for ``SECRET_KEY``.
-This was fine while running DSMR-reader in your home network, but it is not recommended for public facing instances.
-
-To prevent some users from forgetting to set a custom secret key, DSMR-reader now simply requires everyone to generate a unique ``SECRET_KEY`` locally during installation (or when upgrading).
-
-Execute the following::
-
-    sudo su - dsmr
-    ./tools/generate-secret-key.sh
-
-Check whether the script updated your ``.env`` file properly::
-
-    grep 'SECRET_KEY=' .env
-
-It should display the key generated when you execute it.
 
 Execute the following::
 
