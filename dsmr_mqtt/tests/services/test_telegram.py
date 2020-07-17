@@ -12,7 +12,7 @@ import dsmr_datalogger.signals
 
 class TestServices(TestCase):
     def _create_dsmrreading(self):
-        return DsmrReading.objects.create(
+        dsmr_reading = DsmrReading.objects.create(
             timestamp=timezone.now(),
             electricity_delivered_1=1,
             electricity_returned_1=2,
@@ -28,6 +28,8 @@ class TestServices(TestCase):
             phase_currently_returned_l3=1.25,
             extra_device_timestamp=timezone.now() + timezone.timedelta(hours=12)
         )
+        dsmr_datalogger.signals.dsmr_reading_created.send_robust(None, instance=dsmr_reading)
+        return dsmr_reading
 
 
 class TestTelegramAndReading(TestServices):

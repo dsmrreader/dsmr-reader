@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from paho.mqtt.client import Client
 import django.db.models.signals
 
-from dsmr_datalogger.signals import raw_telegram
+from dsmr_datalogger.signals import raw_telegram, dsmr_reading_created
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
 
 
@@ -20,17 +20,11 @@ class MqttAppConfig(AppConfig):
     verbose_name = _('MQTT')
 
     def ready(self):
-        from dsmr_datalogger.models.reading import DsmrReading
         from dsmr_consumption.models.consumption import GasConsumption
 
         raw_telegram.connect(
             receiver=self._on_raw_telegram_signal,
             dispatch_uid=self.__class__
-        )
-        django.db.models.signals.post_save.connect(
-            receiver=self._on_dsmrreading_created_signal,
-            dispatch_uid=self.__class__,
-            sender=DsmrReading
         )
         django.db.models.signals.post_save.connect(
             receiver=self._on_gas_consumption_created_signal,
@@ -43,38 +37,6 @@ class MqttAppConfig(AppConfig):
     def _on_raw_telegram_signal(self, data, **kwargs):
         import dsmr_mqtt.services.callbacks
         dsmr_mqtt.services.callbacks.publish_raw_dsmr_telegram(data=data)
-
-    def _on_dsmrreading_created_signal(self, instance, created, raw, **kwargs):
-        from dsmr_datalogger.models.reading import DsmrReading
-
-        # Skip existing or imported (fixture) instances.
-        if not created or raw:
-            return
-
-        # Refresh from database, as some decimal fields are strings (?) and mess up formatting. (#733)
-        instance = DsmrReading.objects.get(pk=instance.pk)
-
-        import dsmr_mqtt.services.callbacks
-
-        try:
-            dsmr_mqtt.services.callbacks.publish_json_dsmr_reading(reading=instance)
-        except Exception as error:
-            logger.error('publish_json_dsmr_reading() failed: %s', error)
-
-        try:
-            dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading(reading=instance)
-        except Exception as error:
-            logger.error('publish_split_topic_dsmr_reading() failed: %s', error)
-
-        try:
-            dsmr_mqtt.services.callbacks.publish_day_consumption()
-        except Exception as error:
-            logger.error('publish_day_consumption() failed: %s', error)
-
-        try:
-            dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics()
-        except Exception as error:
-            logger.error('publish_split_topic_meter_statistics() failed: %s', error)
 
     def _on_gas_consumption_created_signal(self, instance, created, raw, **kwargs):
         # Skip existing or imported (fixture) instances.
@@ -95,6 +57,36 @@ class MqttAppConfig(AppConfig):
             dsmr_mqtt.services.callbacks.publish_split_topic_gas_consumption(instance=instance)
         except Exception as error:
             logger.error('publish_split_topic_gas_consumption() failed: %s', error)
+
+
+@receiver(dsmr_reading_created)
+def _on_dsmrreading_created_signal(instance, **kwargs):
+    from dsmr_datalogger.models.reading import DsmrReading
+
+    # Refresh from database, as some decimal fields are strings (?) and mess up formatting. (#733)
+    instance = DsmrReading.objects.get(pk=instance.pk)
+
+    import dsmr_mqtt.services.callbacks
+
+    try:
+        dsmr_mqtt.services.callbacks.publish_json_dsmr_reading(reading=instance)
+    except Exception as error:
+        logger.error('publish_json_dsmr_reading() failed: %s', error)
+
+    try:
+        dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading(reading=instance)
+    except Exception as error:
+        logger.error('publish_split_topic_dsmr_reading() failed: %s', error)
+
+    try:
+        dsmr_mqtt.services.callbacks.publish_day_consumption()
+    except Exception as error:
+        logger.error('publish_day_consumption() failed: %s', error)
+
+    try:
+        dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics()
+    except Exception as error:
+        logger.error('publish_split_topic_meter_statistics() failed: %s', error)
 
 
 @receiver(initialize_persistent_client)

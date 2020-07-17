@@ -1,3 +1,5 @@
+from unittest import mock
+
 from dsmr_api.tests.v2 import APIv2TestCase
 from dsmr_datalogger.models.reading import DsmrReading
 
@@ -35,7 +37,8 @@ class TestDsmrreading(APIv2TestCase):
         self.assertEqual(resultset['results'][0]['id'], 1)
         self.assertEqual(resultset['results'][1]['id'], 2)
 
-    def test_post(self):
+    @mock.patch('dsmr_datalogger.signals.dsmr_reading_created.send_robust')
+    def test_post(self, send_robust_mock):
         TELEGRAM = {
             'electricity_currently_delivered': 1.500,
             'electricity_currently_returned': 0.025,
@@ -47,7 +50,10 @@ class TestDsmrreading(APIv2TestCase):
         }
         self.assertEqual(DsmrReading.objects.all().count(), 3)
 
+        self.assertFalse(send_robust_mock.called)
         resultset = self._request('dsmrreading', expected_code=201, method='post', data=TELEGRAM)
+        self.assertTrue(send_robust_mock.called)
+
         self.assertEqual(float(resultset['electricity_currently_delivered']), 1.5)
         self.assertEqual(float(resultset['electricity_currently_returned']), 0.025)
         self.assertEqual(float(resultset['electricity_delivered_1']), 2000)

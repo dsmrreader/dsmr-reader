@@ -213,6 +213,12 @@ class TestServices(TestCase):
         DataloggerSettings.objects.all().update(log_telegrams=True)
         dsmr_datalogger.services.datalogger.telegram_to_reading(data=self.fake_telegram)
 
+    @mock.patch('dsmr_datalogger.signals.dsmr_reading_created.send_robust')
+    def test_dsmr_reading_created_signal(self, send_robust_mock):
+        self.assertFalse(send_robust_mock.called)
+        dsmr_datalogger.services.datalogger.telegram_to_reading(data=self.fake_telegram)
+        self.assertTrue(send_robust_mock.called)
+
 
 class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
     def test_dsmr_version_2_and_3(self):

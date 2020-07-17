@@ -1,0 +1,27 @@
+[{
+    "model": "dsmr_influxdb.influxdbmeasurement",
+    "pk": 1,
+    "fields": {
+        "time": "2020-07-16T21:38:39Z",
+        "measurement_name": "electricity_live",
+        "fields": "currently_delivered: !!python/object/apply:decimal.Decimal ['2.693']\ncurrently_returned: !!python/object/apply:decimal.Decimal ['0.000']\n"
+    }
+},
+{
+    "model": "dsmr_influxdb.influxdbmeasurement",
+    "pk": 2,
+    "fields": {
+        "time": "2020-07-16T21:38:39Z",
+        "measurement_name": "electricity_positions",
+        "fields": "delivered_1: !!python/object/apply:decimal.Decimal ['17486.512']\ndelivered_2: !!python/object/apply:decimal.Decimal ['10491.908']\nreturned_1: !!python/object/apply:decimal.Decimal ['0.000']\nreturned_2: 0\n"
+    }
+},
+{
+    "model": "dsmr_influxdb.influxdbmeasurement",
+    "pk": 3,
+    "fields": {
+        "time": "2020-07-16T21:38:39Z",
+        "measurement_name": "electricity_voltage",
+        "fields": "phase_l1: !!python/object/apply:decimal.Decimal ['229.0']\nphase_l2: !!python/object/apply:decimal.Decimal ['229.1']\nphase_l3: !!python/object/apply:decimal.Decimal ['229.2']\n"
+    }
+}]

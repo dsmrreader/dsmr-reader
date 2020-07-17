@@ -157,8 +157,9 @@ def _map_telegram_to_model(parsed_telegram, data):
     statistics_kwargs['latest_telegram'] = data
     MeterStatistics.objects.all().update(**statistics_kwargs)
 
-    # Broadcast this telegram as signal.
-    dsmr_datalogger.signals.raw_telegram.send_robust(sender=None, data=data)
+    # Creation should be completed, can now be broadcasted for post processing.
+    dsmr_datalogger.signals.raw_telegram.send_robust(None, data=data)
+    dsmr_datalogger.signals.dsmr_reading_created.send_robust(None, instance=new_instance)
 
     return new_instance
 

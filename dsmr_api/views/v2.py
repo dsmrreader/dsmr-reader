@@ -17,6 +17,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_api.filters import DsmrReadingFilter, DayStatisticsFilter, ElectricityConsumptionFilter,\
     GasConsumptionFilter, HourStatisticsFilter
 import dsmr_consumption.services
+import dsmr_datalogger.signals
 
 
 class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -33,6 +34,11 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
     filterset_class = DsmrReadingFilter
     ordering_fields = (FIELD, )
     ordering = FIELD
+
+    def perform_create(self, serializer):
+        """ Overrided to support custom model creation signal."""
+        new_instance = serializer.save()
+        dsmr_datalogger.signals.dsmr_reading_created.send_robust(None, instance=new_instance)
 
 
 class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):

@@ -4,9 +4,9 @@ from django.apps import AppConfig
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from influxdb import InfluxDBClient
-import django.db.models.signals
 
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
+from dsmr_datalogger.signals import dsmr_reading_created
 
 
 logger = logging.getLogger('dsmrreader')
@@ -16,26 +16,15 @@ class DsmrInfluxdbConfig(AppConfig):
     name = 'dsmr_influxdb'
     verbose_name = _('InfluxDB')
 
-    def ready(self):
-        from dsmr_datalogger.models.reading import DsmrReading
 
-        django.db.models.signals.post_save.connect(
-            receiver=self._on_dsmrreading_created_signal,
-            dispatch_uid=self.__class__,
-            sender=DsmrReading
-        )
+@receiver(dsmr_reading_created)
+def _on_dsmrreading_created_signal(instance, **kwargs):
+    import dsmr_influxdb.services
 
-    def _on_dsmrreading_created_signal(self, instance, created, raw, **kwargs):
-        # Skip existing or imported (fixture) instances.
-        if not created or raw:
-            return
-
-        import dsmr_influxdb.services
-
-        try:
-            dsmr_influxdb.services.publish_dsmr_reading(instance=instance)
-        except Exception as error:
-            logger.error('publish_dsmr_reading() failed: %s', error)
+    try:
+        dsmr_influxdb.services.publish_dsmr_reading(instance=instance)
+    except Exception as error:
+        logger.error('publish_dsmr_reading() failed: %s', error)
 
 
 @receiver(initialize_persistent_client)

@@ -7,6 +7,7 @@ from influxdb import InfluxDBClient
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.signals import dsmr_reading_created
 from dsmr_influxdb.models import InfluxdbIntegrationSettings
 
 
@@ -60,7 +61,7 @@ class TestCases(InterceptStdoutMixin, TestCase):
 
     @mock.patch('dsmr_influxdb.services.publish_dsmr_reading')
     def test_publish_dsmr_reading_handler(self, publish_dsmr_reading_mock):
-        reading_kwargs = dict(
+        dsmr_reading = DsmrReading.objects.create(
             timestamp=timezone.now(),
             electricity_delivered_1=1,
             electricity_returned_1=2,
@@ -71,15 +72,11 @@ class TestCases(InterceptStdoutMixin, TestCase):
             processed=False,
         )
 
-        # Trigger creation, should publish it.
         self.assertFalse(publish_dsmr_reading_mock.called)
-        instance = DsmrReading.objects.create(**reading_kwargs)
+        dsmr_reading_created.send_robust(None, instance=dsmr_reading)
         self.assertTrue(publish_dsmr_reading_mock.called)
-
-        # Trigger update.
-        instance.save()
 
         # Trigger error.
         publish_dsmr_reading_mock.side_effect = RuntimeError()
-        DsmrReading.objects.create(**reading_kwargs)
+        dsmr_reading_created.send_robust(None, instance=dsmr_reading)
         # Should not crash the test.
