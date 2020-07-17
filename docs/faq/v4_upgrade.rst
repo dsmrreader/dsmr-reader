@@ -153,7 +153,6 @@ It should display the key generated when you execute it.
 Check the configuration with::
 
     ./manage.py check
-    logout
 
 .. note::
 
