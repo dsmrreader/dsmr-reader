@@ -53,14 +53,12 @@ def run(influxdb_client):
     points = []
 
     for current in selection:
-        points.append({
+        try:
+            influxdb_client.write({
             "measurement": current.measurement_name,
             "time": current.time,
             "fields": json.loads(current.fields),
         })
-
-        try:
-            influxdb_client.write(points)
         except Exception as error:
             logger.error('INFLUXDB: Writing measurement failed: %s', error)
 
