@@ -59,10 +59,15 @@ def initialize_client():
 
 def run(mqtt_client):
     """ Reads any messages from the queue and publishing them to the MQTT broker. """
+    broker_settings = MQTTBrokerSettings.get_solo()
 
     # Keep batches small, only send the latest X messages. The rest will be purged (in case of delay).
     message_queue = queue.Message.objects.all().order_by('-pk')[0:settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE]
-    broker_settings = MQTTBrokerSettings.get_solo()
+
+    if not message_queue:
+        return
+
+    logger.info('MQTT: Processing %d message(s)', len(message_queue))
 
     for current in message_queue:
         mqtt_client.publish(

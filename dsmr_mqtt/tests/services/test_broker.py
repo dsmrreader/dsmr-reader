@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.conf import settings
 import paho.mqtt.client as paho
 
+from dsmr_mqtt.models.queue import Message
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_mqtt.models import queue
 import dsmr_mqtt.services.broker
@@ -121,18 +122,20 @@ class TestBroker(TestCase):
     @mock.patch('paho.mqtt.client.Client.loop')
     @mock.patch('paho.mqtt.client.Client.is_connected')
     @mock.patch('paho.mqtt.client.Client.publish')
-    def test_run(self, publish_mock, is_connected_mock, loop_mock):
+    def test_run_no_data(self, publish_mock, is_connected_mock, loop_mock):
         is_connected_mock.return_value = True
         client = paho.Client('xxx')
 
-        # Empty.
         self.assertFalse(loop_mock.called)
-        self.assertFalse(publish_mock.called)
-
         dsmr_mqtt.services.broker.run(mqtt_client=client)
+        self.assertFalse(loop_mock.called)
 
-        self.assertTrue(loop_mock.called)
-        self.assertFalse(publish_mock.called)
+    @mock.patch('paho.mqtt.client.Client.loop')
+    @mock.patch('paho.mqtt.client.Client.is_connected')
+    @mock.patch('paho.mqtt.client.Client.publish')
+    def test_run(self, publish_mock, is_connected_mock, loop_mock):
+        is_connected_mock.return_value = True
+        client = paho.Client('xxx')
 
         # With queue.
         loop_mock.reset_mock()
@@ -144,17 +147,6 @@ class TestBroker(TestCase):
 
         self.assertTrue(loop_mock.called)
         self.assertTrue(publish_mock.called)
-
-    @mock.patch('paho.mqtt.client.Client.loop')
-    @mock.patch('paho.mqtt.client.Client.is_connected')
-    @mock.patch('paho.mqtt.client.Client.publish')
-    def test_run_disconnected(self, publish_mock, is_connected_mock, loop_mock):
-        """ Check whether we exit the command when we're disconnected at some point. """
-        is_connected_mock.return_value = False  # Connection failure.
-        client = paho.Client('xxx')
-
-        with self.assertRaises(RuntimeError):
-            dsmr_mqtt.services.broker.run(mqtt_client=client)
 
     @mock.patch('paho.mqtt.client.Client.loop')
     @mock.patch('paho.mqtt.client.Client.is_connected')
@@ -179,6 +171,18 @@ class TestBroker(TestCase):
             publish_mock.assert_any_call(topic='z', payload=str(x), qos=0, retain=True)
 
         self.assertFalse(queue.Message.objects.exists())
+
+    @mock.patch('paho.mqtt.client.Client.loop')
+    @mock.patch('paho.mqtt.client.Client.publish')
+    @mock.patch('paho.mqtt.client.Client.is_connected')
+    def test_run_disconnected(self, is_connected_mock, *mocks):
+        """ Check whether we exit the command when we're disconnected at some point. """
+        is_connected_mock.return_value = False  # Connection failure.
+        client = paho.Client('xxx')
+        Message.objects.create(topic='x', payload='y')
+
+        with self.assertRaises(RuntimeError):
+            dsmr_mqtt.services.broker.run(mqtt_client=client)
 
     @mock.patch('paho.mqtt.client.Client.reconnect')
     def test_on_disconnect(self, reconnect_mock):

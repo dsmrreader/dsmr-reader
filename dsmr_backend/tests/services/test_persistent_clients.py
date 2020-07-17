@@ -37,6 +37,13 @@ class TestBackend(InterceptStdoutMixin, TestCase):
             self.fake_client
         )
 
+        # Test exception handling.
+        send_robust_mock.return_value = [
+            [None, RuntimeError('Chaos monkey happened')],
+            [None, None]
+        ]
+        dsmr_backend.services.persistent_clients.run([self.fake_client])
+
     @mock.patch('dsmr_backend.signals.terminate_persistent_client.send_robust')
     def test_terminate(self, send_robust_mock):
         self.assertFalse(send_robust_mock.called)
@@ -47,3 +54,10 @@ class TestBackend(InterceptStdoutMixin, TestCase):
             send_robust_mock.call_args_list[0][1]['client'],
             self.fake_client
         )
+
+        # Test exception handling.
+        send_robust_mock.return_value = [
+            [None, RuntimeError('Chaos monkey happened')],
+            [None, None]
+        ]
+        dsmr_backend.services.persistent_clients.terminate([self.fake_client])

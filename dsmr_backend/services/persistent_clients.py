@@ -13,12 +13,7 @@ def initialize():
 
     for current_receiver, current_response in responses:
         if isinstance(current_response, Exception):
-            logger.error(
-                '(%s) %s errored: %s',
-                current_response.__class__.__name__,
-                current_receiver,
-                current_response
-            )
+            logger.exception(current_response)
             continue
 
         if not current_response:
@@ -35,7 +30,11 @@ def run(clients):
     logger.debug('CLIENTS: Running %d client(s)', len(clients))
 
     for current in clients:
-        run_persistent_client.send_robust(None, client=current)
+        responses = run_persistent_client.send_robust(None, client=current)
+
+        for current_receiver, current_response in responses:
+            if isinstance(current_response, Exception):
+                logger.exception(current_response)
 
 
 def terminate(clients):
@@ -43,4 +42,8 @@ def terminate(clients):
     logger.debug('CLIENTS: Terminating %d client(s)', len(clients))
 
     for current in clients:
-        terminate_persistent_client.send_robust(None, client=current)
+        responses = terminate_persistent_client.send_robust(None, client=current)
+
+        for current_receiver, current_response in responses:
+            if isinstance(current_response, Exception):
+                logger.exception(current_response)

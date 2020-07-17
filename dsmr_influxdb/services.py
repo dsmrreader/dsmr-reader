@@ -49,7 +49,7 @@ def run(influxdb_client):
     if not selection:
         return
 
-    logger.debug('INFLUXDB: Processing %d measurement(s)', len(selection))
+    logger.info('INFLUXDB: Processing %d measurement(s)', len(selection))
     points = []
 
     for current in selection:
