@@ -172,14 +172,10 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
-        'log_to_db': {
-            'level': 'WARNING',
-            'class': 'dsmr_backend.services.logging.LoggingRecordHandler'
-        }
     },
     'loggers': {
         'dsmrreader': {
-            'handlers': ['console', 'log_to_db'],
+            'handlers': ['console'],
             'level': 'WARNING',
             'propagate': True,
         },

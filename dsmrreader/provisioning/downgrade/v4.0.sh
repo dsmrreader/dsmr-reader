@@ -2,7 +2,7 @@
 
 # Dump for DSMR-reader v4.0
 ./manage.py migrate dsmr_api 0003_create_api_user
-./manage.py migrate dsmr_backend 0016_logging_record
+./manage.py migrate dsmr_backend 0015_backend_restart_required
 ./manage.py migrate dsmr_backup 0011_remove_backupsettings_latest_backup
 ./manage.py migrate dsmr_consumption 0015_track_power_current
 ./manage.py migrate dsmr_datalogger 0022_three_month_retention
