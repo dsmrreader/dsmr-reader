@@ -86,12 +86,28 @@ def publish_dsmr_reading(instance):
     config_parser = configparser.ConfigParser()
     config_parser.read_string(influxdb_settings.formatting)
     data_source = instance.__dict__
+
     for current_measurement in config_parser.sections():
         measurement_fields = {}
 
         for instance_field_name in config_parser[current_measurement]:
             influxdb_field_name = config_parser[current_measurement][instance_field_name]
+
+            if instance_field_name not in data_source.keys():
+                logger.warning(
+                    'INFLUXDB: Unknown DSMR-reader field "%s" mapped to measurement "%s"',
+                    instance_field_name,
+                    current_measurement
+                )
+                continue
+
             measurement_fields[influxdb_field_name] = data_source[instance_field_name]
+
+        if not measurement_fields:
+            logger.warning(
+                'INFLUXDB: No data mapped for entire measurement section "%s". Check your mapping!', current_measurement
+            )
+            continue
 
         InfluxdbMeasurement.objects.create(
             measurement_name=current_measurement,

@@ -137,6 +137,23 @@ class TestCases(InterceptStdoutMixin, TestCase):
         self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name='electricity_power').exists())
         self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name='gas_positions').exists())
 
+    @mock.patch('logging.Logger.warning')
+    def test_publish_dsmr_reading_invalid_mapping(self, warning_logger_mock):
+        InfluxdbIntegrationSettings.objects.update(formatting="""
+[fake]
+non_existing_field = whatever
+""")
+
+        InfluxdbMeasurement.objects.all().delete()
+        self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
+
+        dsmr_influxdb.services.publish_dsmr_reading(self.reading)
+
+        # Invalid mapping.
+        self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
+        self.assertFalse(InfluxdbMeasurement.objects.filter(measurement_name='fake').exists())
+        self.assertTrue(warning_logger_mock.callled)
+
     def test_serialize_decimal_to_float(self):
         with self.assertRaises(TypeError):
             dsmr_influxdb.services.serialize_decimal_to_float(1)  # Coverage run
