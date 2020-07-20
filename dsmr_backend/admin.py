@@ -13,6 +13,8 @@ from django.db import models
 from solo.admin import SingletonModelAdmin
 import django.db.models.signals
 
+from dsmr_backend.mixins import DeletionOnlyAdminModel
+from dsmr_backend.models.logging import LoggingRecord
 from dsmr_backend.models.settings import BackendSettings, EmailSettings
 from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backend.services.email
@@ -147,3 +149,8 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(LoggingRecord)
+class LoggingRecordAdmin(DeletionOnlyAdminModel):
+    list_display = ('created_at', 'level', 'message')
