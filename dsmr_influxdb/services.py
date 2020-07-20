@@ -15,8 +15,11 @@ def initialize_client():
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
     if not influxdb_settings.enabled:
-        return logger.debug('INFLUXDB: Integration disabled in settings')
+        return logger.debug('INFLUXDB: Integration disabled in settings (or due to an error previously)')
 
+    logger.debug(
+        'INFLUXDB: Initializing InfluxDB client for "%s:%d"', influxdb_settings.hostname, influxdb_settings.port
+    )
     influxdb_client = InfluxDBClient(
         host=influxdb_settings.hostname,
         port=influxdb_settings.port,
@@ -30,11 +33,16 @@ def initialize_client():
         verify_ssl=influxdb_settings.secure == InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
         timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
     )
-    logger.debug('INFLUXDB: Initialized client')
 
     # Always make sure the database exists.
     logger.debug('INFLUXDB: Creating InfluxDB database "%s"', influxdb_settings.database)
-    influxdb_client.create_database(influxdb_settings.database)
+
+    try:
+        influxdb_client.create_database(influxdb_settings.database)
+    except Exception as e:
+        InfluxdbIntegrationSettings.objects.update(enabled=False)
+        logger.error('Failed to instantiate InfluxDB connection, disabling InfluxDB integration')
+        raise e
 
     return influxdb_client
 

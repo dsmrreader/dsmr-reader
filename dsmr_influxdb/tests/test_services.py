@@ -35,6 +35,13 @@ class TestCases(InterceptStdoutMixin, TestCase):
         self.assertIsNone(client)
 
     @mock.patch('influxdb.InfluxDBClient.create_database')
+    def test_initialize_client_connection_error(self, create_database_mock):
+        create_database_mock.side_effect = RuntimeError('Connection failed')
+
+        with self.assertRaises(RuntimeError):
+            dsmr_influxdb.services.initialize_client()
+
+    @mock.patch('influxdb.InfluxDBClient.create_database')
     def test_initialize_client_default(self, create_database_mock):
         self.assertFalse(create_database_mock.called)
         client = dsmr_influxdb.services.initialize_client()

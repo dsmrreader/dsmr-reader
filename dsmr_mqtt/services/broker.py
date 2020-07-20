@@ -16,13 +16,14 @@ def initialize_client():
     broker_settings = MQTTBrokerSettings.get_solo()
 
     if not broker_settings.enabled:
-        return logger.debug('MQTT: Integration disabled in settings')
+        return logger.debug('MQTT: Integration disabled in settings (or due to an error previously)')
 
     if not broker_settings.hostname:
         logger.error('MQTT: No hostname found in settings, disabling MQTT')
         broker_settings.update(enabled=False)
         raise RuntimeError('No hostname found in settings')
 
+    logger.debug('MQTT: Initializing MQTT client for "%s:%d"', broker_settings.hostname, broker_settings.port)
     mqtt_client = paho.Client(client_id=broker_settings.client_id)
     mqtt_client.on_connect = on_connect
     mqtt_client.on_disconnect = on_disconnect
@@ -34,19 +35,19 @@ def initialize_client():
 
     # SSL/TLS.
     if broker_settings.secure == MQTTBrokerSettings.SECURE_CERT_NONE:
-        logger.debug('MQTT: Initializing secure connection (ssl.CERT_NONE)')
+        logger.debug('MQTT: Using secure connection (ssl.CERT_NONE)')
         mqtt_client.tls_set(cert_reqs=ssl.CERT_NONE)
     elif broker_settings.secure == MQTTBrokerSettings.SECURE_CERT_REQUIRED:
-        logger.debug('MQTT: Initializing secure connection (ssl.CERT_REQUIRED)')
+        logger.debug('MQTT: Using secure connection (ssl.CERT_REQUIRED)')
         mqtt_client.tls_set(cert_reqs=ssl.CERT_REQUIRED)
     else:
-        logger.debug('MQTT: Initializing insecure connection (no TLS)')
+        logger.debug('MQTT: Using insecure connection (no TLS)')
 
     try:
         mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port)
     except Exception as error:
         logger.error(
-            'MQTT: Failed to connect to broker (%s : %s), disabling MQTT: %s',
+            'MQTT: Failed to connect to broker (%s:%d), disabling MQTT: %s',
             broker_settings.hostname,
             broker_settings.port,
             error
