@@ -12,7 +12,8 @@ from dsmr_dropbox.dropboxinc.dropbox_content_hasher import DropboxContentHasher
 import dsmr_backup.services.backup
 import dsmr_frontend.services
 
-logger = logging.getLogger('commands')
+
+logger = logging.getLogger('dsmrreader')
 
 
 def sync():

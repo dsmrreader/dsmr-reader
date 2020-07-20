@@ -172,35 +172,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
-        'django_file': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, '..', 'logs', 'django.log'),
-            'formatter': 'verbose',
-            'maxBytes': 5 * 1024 * 1024,  # 5 MB max.
-            'backupCount': 7,
-        },
-        'dsmrreader_file': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, '..', 'logs', 'dsmrreader.log'),
-            'formatter': 'verbose',
-            'maxBytes': 5 * 1024 * 1024,  # 5 MB max.
-            'backupCount': 7,
-        },
     },
     'loggers': {
-        'commands': {
+        'dsmrreader': {
             'handlers': ['console'],
             'level': 'WARNING',
-            'propagate': True,
-        },
-        'django': {
-            'handlers': ['django_file'],
-            'level': 'WARNING',
-            'propagate': True,
-        },
-        'dsmrreader': {
-            'handlers': ['dsmrreader_file'],
-            'level': 'INFO',
             'propagate': True,
         },
     },

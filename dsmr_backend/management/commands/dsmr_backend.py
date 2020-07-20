@@ -8,7 +8,7 @@ import dsmr_backend.services.persistent_clients
 import dsmr_backend.services.schedule
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):

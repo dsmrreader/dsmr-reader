@@ -3,7 +3,7 @@ import logging
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def initialize():

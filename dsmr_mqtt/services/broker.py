@@ -8,7 +8,7 @@ from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_mqtt.models import queue
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def initialize_client():

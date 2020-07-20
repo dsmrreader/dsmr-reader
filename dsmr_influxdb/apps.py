@@ -9,7 +9,7 @@ from dsmr_backend.signals import initialize_persistent_client, run_persistent_cl
 from dsmr_datalogger.signals import dsmr_reading_created
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 class DsmrInfluxdbConfig(AppConfig):

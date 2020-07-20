@@ -6,7 +6,7 @@ from django.core.cache import caches
 from dsmr_mqtt.models import queue
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def queue_message(topic, payload):

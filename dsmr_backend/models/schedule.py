@@ -8,7 +8,7 @@ from django.db import models
 from dsmr_backend.mixins import ModelUpdateMixin
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 class ScheduledProcessManager(models.Manager):

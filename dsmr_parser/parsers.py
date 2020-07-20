@@ -1,11 +1,8 @@
-import logging
 import re
 from ctypes import c_ushort
 
 from dsmr_parser.objects import MBusObject, CosemObject
 from dsmr_parser.exceptions import ParseError, InvalidChecksumError
-
-logger = logging.getLogger(__name__)
 
 
 class TelegramParser(object):

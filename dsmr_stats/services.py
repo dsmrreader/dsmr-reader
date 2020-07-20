@@ -19,7 +19,7 @@ import dsmr_backend.services.backend
 import dsmr_consumption.services
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def is_data_available():

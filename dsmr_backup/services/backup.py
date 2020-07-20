@@ -15,7 +15,7 @@ from dsmr_backup.models.settings import BackupSettings
 import dsmr_frontend.services
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def run(scheduled_process):

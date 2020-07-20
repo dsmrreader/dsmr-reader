@@ -10,7 +10,7 @@ from dsmr_pvoutput.signals import pvoutput_upload
 import dsmr_backend.services.backend
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def should_export():

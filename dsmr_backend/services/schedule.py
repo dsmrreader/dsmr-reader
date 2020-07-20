@@ -5,7 +5,8 @@ from django.utils import timezone
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.signals import backend_called
 
-logger = logging.getLogger('commands')
+
+logger = logging.getLogger('dsmrreader')
 
 
 def dispatch_signals():

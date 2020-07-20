@@ -45,28 +45,28 @@ If this does not resolve your issue, check the logfiles for more information:
 +----------------+----------------------------------------------------------------------------------+
 
 
-Logging
--------
+Logging levels
+--------------
 If the processes do run, but you cannot find an error, (e.g.: things seem to hang or tend to be slow), there might be another issue at hand.
 
-DSMR-reader has DEBUG-logging, which makes the system log very verbose about what it's trying to do.
+DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do.
 This applies **specifically** to the ``dsmr_backend`` process.
 
 The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:
 
 * Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``.
-* Open the ``dsmrreader/settings.py`` file and look for the code below::
+* Open the ``.env`` file and look for the code below::
 
-    DSMRREADER_LOGLEVEL = 'WARNING'
-    #DSMRREADER_LOGLEVEL = 'DEBUG'
+    ### Logging level.
+    ###DSMRREADER_LOGLEVEL=DEBUG
 
-* Now remove the ``#`` from this line::
+* Now remove the ``###`` from this line::
 
-    #DSMRREADER_LOGLEVEL = 'DEBUG'
+    ###DSMRREADER_LOGLEVEL=DEBUG
 
 * It should now be::
 
-    DSMRREADER_LOGLEVEL = 'DEBUG'
+    DSMRREADER_LOGLEVEL=DEBUG
 
 * After editing the file, all processes need to be restarted. To do this, you can either execute::
 
@@ -79,23 +79,6 @@ The DEBUG-logging is disabled by default, to reduce writes on the filesystem. Yo
 
 * All done!
 
-
-Appplication / Django
----------------------
-The application has its own logfiles as well.
-You can find them in the ``logs`` directory inside the project folder.
-
-The logfiles are by default located in:
-
-+------------------------------------------------+---------------------------------------------------------------------+
-| ``/home/dsmr/dsmr-reader/logs/django.log``     | Lists any internal errors regarding the Django framework it's using |
-+------------------------------------------------+---------------------------------------------------------------------+
-| ``/home/dsmr/dsmr-reader/logs/dsmrreader.log`` | Contains application logging, if enabled                            |
-+------------------------------------------------+---------------------------------------------------------------------+
-
-Please note that any errors in there are most likely regarding rejected telegrams and are unlikely causing your issue::
-
-    WARNING @ datalogger | Rejected telegram (Invalid telegram CRC. The calculated checksum '40275' (9D53) does not match the telegram checksum '32756' (7FF4)) ...
 
 Contact
 -------

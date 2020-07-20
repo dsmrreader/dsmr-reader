@@ -11,7 +11,7 @@ from dsmr_datalogger.models.settings import RetentionSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 
 
-commands_logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def run(scheduled_process):
@@ -71,7 +71,7 @@ def run(scheduled_process):
             ]
 
             # Now drop all others.
-            commands_logger.debug('Retention: Cleaning up: %s (%s)', current_hour, data_set[0].__class__.__name__)
+            logger.debug('Retention: Cleaning up: %s (%s)', current_hour, data_set[0].__class__.__name__)
             data_set.exclude(pk__in=keeper_pks).delete()
 
     timezone.deactivate()

@@ -16,8 +16,7 @@ from dsmr_datalogger.scripts.dsmr_datalogger_api_client import read_serial_port
 import dsmr_datalogger.signals
 
 
-dsmrreader_logger = logging.getLogger('dsmrreader')
-commands_logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def get_dsmr_connection_parameters():
@@ -84,17 +83,17 @@ def telegram_to_reading(data):
     base64_data = base64.b64encode(data.encode())
 
     if params['log_telegrams']:
-        dsmrreader_logger.info('Received telegram (base64 encoded): %s', base64_data)
+        logger.info('Received telegram (base64 encoded): %s', base64_data)
 
-    commands_logger.debug("Received telegram:\n%s", data)
+    logger.debug("Received telegram:\n%s", data)
 
     try:
         parsed_telegram = parser.parse(data)
     except (InvalidChecksumError, ParseError) as error:
         # Hook to keep track of failed readings count.
         MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
-        dsmrreader_logger.warning('Rejected telegram (%s) (base64 encoded): %s', error, base64_data)
-        dsmrreader_logger.exception(error)
+        logger.warning('Rejected telegram (%s) (base64 encoded): %s', error, base64_data)
+        logger.exception(error)
         raise InvalidTelegramError(error)
 
     return _map_telegram_to_model(parsed_telegram=parsed_telegram, data=data)
@@ -143,7 +142,7 @@ def _map_telegram_to_model(parsed_telegram, data):
         error_message = 'Discarded telegram with future timestamp(s): {} / {}'.format(
             model_fields['timestamp'], model_fields['extra_device_timestamp']
         )
-        commands_logger.error(error_message)
+        logger.error(error_message)
         raise InvalidTelegramError(error_message)
 
     # Now we need to split reading & statistics. So we split the dict here.

@@ -8,7 +8,8 @@ from influxdb import InfluxDBClient
 
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
 
-logger = logging.getLogger('commands')
+
+logger = logging.getLogger('dsmrreader')
 
 
 def initialize_client():

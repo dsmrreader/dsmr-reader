@@ -14,7 +14,7 @@ import dsmr_backend.services.backend
 import dsmr_frontend.services
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def run(scheduled_process):

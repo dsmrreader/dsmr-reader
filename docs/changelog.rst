@@ -21,6 +21,7 @@ v4.0.0 - 2020-07-31
 - ``Changed``: Replaced settings.py config by (system) env vars [`#1035 <https://github.com/dennissiemensma/dsmr-reader/issues/1035>`_]
 - ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_]
 - ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
+- ``Changed``: Refactor logging [`#1050 <https://github.com/dennissiemensma/dsmr-reader/issues/1050>`_]
 
 - ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
 - ``Added``: InfluxDB integration [`#857 <https://github.com/dennissiemensma/dsmr-reader/issues/857>`_]

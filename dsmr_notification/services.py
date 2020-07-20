@@ -14,7 +14,7 @@ import dsmr_consumption.services
 import dsmr_backend.services.backend
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def notify_pre_check():

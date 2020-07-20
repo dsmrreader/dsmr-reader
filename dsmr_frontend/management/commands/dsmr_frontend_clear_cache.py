@@ -6,7 +6,7 @@ from django.core.cache import caches
 from django.conf import settings
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 class Command(BaseCommand):

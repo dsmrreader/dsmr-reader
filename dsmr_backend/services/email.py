@@ -6,7 +6,7 @@ from django.core import mail
 from dsmr_backend.models.settings import EmailSettings
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 def send(email_from, email_to, subject, body, attachment=None):

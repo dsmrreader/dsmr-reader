@@ -7,7 +7,8 @@ from dsmr_backend.mixins import InfiniteManagementCommandMixin
 import dsmr_datalogger.services.datalogger
 from dsmr_datalogger.models.settings import DataloggerSettings
 
-logger = logging.getLogger('commands')
+
+logger = logging.getLogger('dsmrreader')
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):

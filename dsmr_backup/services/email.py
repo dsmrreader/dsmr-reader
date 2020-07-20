@@ -10,7 +10,8 @@ from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 import dsmr_backend.services.email
 import dsmr_backup.services.backup
 
-logger = logging.getLogger('commands')
+
+logger = logging.getLogger('dsmrreader')
 
 
 def run(scheduled_process):

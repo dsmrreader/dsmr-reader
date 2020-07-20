@@ -1,4 +1,3 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
@@ -6,11 +5,12 @@ msgstr ""
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../troubleshooting.rst:2
 msgid "Troubleshooting"
@@ -22,8 +22,8 @@ msgstr "Inhoudsopgave"
 
 #: ../../troubleshooting.rst:8
 msgid ""
-"If anything happens to fail or malfunction, please follow the steps below"
-" first to provide some background information when reporting an issue."
+"If anything happens to fail or malfunction, please follow the steps below "
+"first to provide some background information when reporting an issue."
 msgstr ""
 "Wanneer er iets lijkt mis te gaan, volg de onderstaande stappen eerst, "
 "voordat je een issue aanmaakt. Hiermee kun je wat meer "
@@ -35,8 +35,8 @@ msgstr "Supervisor"
 
 #: ../../troubleshooting.rst:13
 msgid ""
-"DSMR-reader technically consists of these processes (some may or may not "
-"be used by you) and they are watched by Supervisor:"
+"DSMR-reader technically consists of these processes (some may or may not be "
+"used by you) and they are watched by Supervisor:"
 msgstr ""
 "DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of "
 "niet in je eigen situatie gebruikt worden) en ze worden beheerd door "
@@ -74,8 +74,8 @@ msgstr ""
 
 #: ../../troubleshooting.rst:27
 msgid ""
-"Any processes listed, should have the status ``RUNNING``. Stale or "
-"crashed processes can be restarted with::"
+"Any processes listed, should have the status ``RUNNING``. Stale or crashed "
+"processes can be restarted with::"
 msgstr ""
 "Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. "
 "Hangende of gecrashde processen kunnen herstart worden met::"
@@ -105,51 +105,50 @@ msgid "``/var/log/supervisor/dsmr_backend.log``"
 msgstr "``/var/log/supervisor/dsmr_backend.log``"
 
 #: ../../troubleshooting.rst:49
-msgid "Logging"
-msgstr "Logging"
+msgid "Logging levels"
+msgstr "Logging levels"
 
 #: ../../troubleshooting.rst:50
 msgid ""
-"If the processes do run, but you cannot find an error, (e.g.: things seem"
-" to hang or tend to be slow), there might be another issue at hand."
+"If the processes do run, but you cannot find an error, (e.g.: things seem "
+"to hang or tend to be slow), there might be another issue at hand."
 msgstr ""
 "Wanneer de processen lijken te draaien, maar je kunt geen fout vinden "
-"(bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan "
-"is er waarschijnlijk iets anders aan de hand."
+"(bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is "
+"er waarschijnlijk iets anders aan de hand."
 
 #: ../../troubleshooting.rst:52
-#, fuzzy
 msgid ""
-"DSMR-reader has DEBUG-logging, which makes the system log very verbose "
+"DSMR-reader has DEBUG-logging, which makes the system log very verbosely "
 "about what it's trying to do. This applies **specifically** to the "
 "``dsmr_backend`` process."
 msgstr ""
-"DSMR-reader heeft DEBUG_logging, waarmee het systeem heel letterlijk logt"
-" wat het aan het doen is. Dit geldt **specifiek** voor de "
-"``dsmr_backend`` en ``dsmr_export`` (MQTT) processen."
+"DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt "
+"wat het aan het doen is. Dit geldt **specifiek** voor het ``dsmr_backend`` "
+"proces."
 
 #: ../../troubleshooting.rst:55
 msgid ""
 "The DEBUG-logging is disabled by default, to reduce writes on the "
 "filesystem. You can enable the logging by following these steps:"
 msgstr ""
-"De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties "
-"op het bestandssysteem te beperken. Je kunt het inschakelen door deze "
-"stappen te volgen:"
+"De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties op "
+"het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen "
+"te volgen:"
 
 #: ../../troubleshooting.rst:57
 msgid "Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``."
 msgstr ""
-"Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te"
-" voeren."
+"Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te "
+"voeren."
 
 #: ../../troubleshooting.rst:58
-msgid "Open the ``dsmrreader/settings.py`` file and look for the code below::"
-msgstr "Open ``dsmrreader/settings.py`` en zoek de onderstaande code::"
+msgid "Open the ``.env`` file and look for the code below::"
+msgstr "Open ``.env`` en zoek de onderstaande code::"
 
 #: ../../troubleshooting.rst:63
-msgid "Now remove the ``#`` from this line::"
-msgstr "Verwijder nu de ``#`` uit de regel::"
+msgid "Now remove the ``###`` from this line::"
+msgstr "Verwijder nu de ``###`` uit de regel::"
 
 #: ../../troubleshooting.rst:67
 msgid "It should now be::"
@@ -157,11 +156,11 @@ msgstr "Het zou nu dit moeten zijn::"
 
 #: ../../troubleshooting.rst:71
 msgid ""
-"After editing the file, all processes need to be restarted. To do this, "
-"you can either execute::"
+"After editing the file, all processes need to be restarted. To do this, you "
+"can either execute::"
 msgstr ""
-"Na het bewerken van het bestand zul je alle processen moeten herstarten. "
-"Om dit te doen, voer het volgende uit::"
+"Na het bewerken van het bestand zul je alle processen moeten herstarten. Om "
+"dit te doen, voer het volgende uit::"
 
 #: ../../troubleshooting.rst:75
 msgid "Or go back to the **sudo user** and execute::"
@@ -172,53 +171,48 @@ msgid "All done!"
 msgstr "Klaar!"
 
 #: ../../troubleshooting.rst:84
-msgid "Appplication / Django"
-msgstr "Appplicatie / Django"
-
-#: ../../troubleshooting.rst:85
-msgid ""
-"The application has its own logfiles as well. You can find them in the "
-"``logs`` directory inside the project folder."
-msgstr ""
-"De applicatie heeft ook eigen logfiles. Je kunt deze vinden in de "
-"``logs`` directory binnen de projectmap."
-
-#: ../../troubleshooting.rst:88
-msgid "The logfiles are by default located in:"
-msgstr " De logbestanden staan standaard in:"
-
-#: ../../troubleshooting.rst:91
-msgid "``/home/dsmr/dsmr-reader/logs/django.log``"
-msgstr "``/home/dsmr/dsmr-reader/logs/django.log``"
-
-#: ../../troubleshooting.rst:91
-msgid "Lists any internal errors regarding the Django framework it's using"
-msgstr "Bevat interne foutmeldingen over het gebruikte Django framework"
-
-#: ../../troubleshooting.rst:93
-msgid "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
-msgstr "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
-
-#: ../../troubleshooting.rst:93
-msgid "Contains application logging, if enabled"
-msgstr "Bevat applicatie-logging, wanneer ingeschakeld"
-
-#: ../../troubleshooting.rst:96
-msgid ""
-"Please note that any errors in there are most likely regarding rejected "
-"telegrams and are unlikely causing your issue::"
-msgstr ""
-"N.B.: Waarschijnlijk staan er in de meeste gevallen fouten in die verder "
-"niets te maken hebben met jouw probleem, maar met afgewezen telegrammen::"
-
-#: ../../troubleshooting.rst:101
 msgid "Contact"
 msgstr "Contact"
 
-#: ../../troubleshooting.rst:102
+#: ../../troubleshooting.rst:85
 msgid ""
-"Are you unable to resolve your problem or do you need any help? "
-":doc:`More information can be found here<contributing>`."
+"Are you unable to resolve your problem or do you need any help? :doc:`More "
+"information can be found here<contributing>`."
 msgstr ""
-"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun "
-"je hier vinden<contributing>`."
+"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun je "
+"hier vinden<contributing>`."
+
+#~ msgid "Logging"
+#~ msgstr "Logging"
+
+#~ msgid "Appplication / Django"
+#~ msgstr "Appplicatie / Django"
+
+#~ msgid ""
+#~ "The application has its own logfiles as well. You can find them in the "
+#~ "``logs`` directory inside the project folder."
+#~ msgstr ""
+#~ "De applicatie heeft ook eigen logfiles. Je kunt deze vinden in de "
+#~ "``logs`` directory binnen de projectmap."
+
+#~ msgid "The logfiles are by default located in:"
+#~ msgstr " De logbestanden staan standaard in:"
+
+#~ msgid "``/home/dsmr/dsmr-reader/logs/django.log``"
+#~ msgstr "``/home/dsmr/dsmr-reader/logs/django.log``"
+
+#~ msgid "Lists any internal errors regarding the Django framework it's using"
+#~ msgstr "Bevat interne foutmeldingen over het gebruikte Django framework"
+
+#~ msgid "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
+#~ msgstr "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
+
+#~ msgid "Contains application logging, if enabled"
+#~ msgstr "Bevat applicatie-logging, wanneer ingeschakeld"
+
+#~ msgid ""
+#~ "Please note that any errors in there are most likely regarding rejected "
+#~ "telegrams and are unlikely causing your issue::"
+#~ msgstr ""
+#~ "N.B.: Waarschijnlijk staan er in de meeste gevallen fouten in die verder "
+#~ "niets te maken hebben met jouw probleem, maar met afgewezen telegrammen::"

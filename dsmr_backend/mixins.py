@@ -14,7 +14,7 @@ from django.contrib import admin
 from django.db import connection
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 class StopInfiniteRun(EnvironmentError):
@@ -142,10 +142,14 @@ class InfiniteManagementCommandMixin:
             pass
 
     def _check_logger_level(self):
-        if logger.getEffectiveLevel() > logging.INFO:
+        logging_level = logger.getEffectiveLevel()
+
+        if logging_level > logging.INFO:
             print(
-                'The current logging level only logs warnings and errors, to reduce I/O. More information can be '
-                'found here: https://dsmr-reader.readthedocs.io/en/v4/troubleshooting.html#logging'
+                'Current logging level set to "{}". More information can be found here: '
+                'https://dsmr-reader.readthedocs.io/en/v4/troubleshooting.html#logging'. format(
+                    logging.getLevelName(logging_level)
+                )
             )
 
 

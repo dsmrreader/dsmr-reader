@@ -14,7 +14,7 @@ from dsmr_backend.mixins import InfiniteManagementCommandMixin
 import dsmr_datalogger.services.datalogger
 
 
-logger = logging.getLogger('commands')
+logger = logging.getLogger('dsmrreader')
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
