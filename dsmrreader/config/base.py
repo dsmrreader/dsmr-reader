@@ -179,6 +179,11 @@ LOGGING = {
             'level': 'WARNING',
             'propagate': True,
         },
+        'console_commands': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
 }
 

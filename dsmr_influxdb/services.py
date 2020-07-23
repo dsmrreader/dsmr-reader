@@ -1,3 +1,4 @@
+from collections import defaultdict
 from decimal import Decimal
 import configparser
 import logging
@@ -6,6 +7,7 @@ import json
 from django.conf import settings
 from influxdb import InfluxDBClient
 
+from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
 
 
@@ -84,31 +86,14 @@ def publish_dsmr_reading(instance):
     if not influxdb_settings.enabled:
         return
 
-    config_parser = configparser.ConfigParser()
-    config_parser.read_string(influxdb_settings.formatting)
+    mapping = get_reading_to_measurement_mapping()
     data_source = instance.__dict__
 
-    for current_measurement in config_parser.sections():
+    for current_measurement, measurement_mapping in mapping.items():
         measurement_fields = {}
 
-        for instance_field_name in config_parser[current_measurement]:
-            influxdb_field_name = config_parser[current_measurement][instance_field_name]
-
-            if instance_field_name not in data_source.keys():
-                logger.warning(
-                    'INFLUXDB: Unknown DSMR-reader field "%s" mapped to measurement "%s"',
-                    instance_field_name,
-                    current_measurement
-                )
-                continue
-
-            measurement_fields[influxdb_field_name] = data_source[instance_field_name]
-
-        if not measurement_fields:
-            logger.warning(
-                'INFLUXDB: No data mapped for entire measurement section "%s". Check your mapping!', current_measurement
-            )
-            continue
+        for reading_field, influxdb_field in measurement_mapping.items():
+            measurement_fields[influxdb_field] = data_source[reading_field]
 
         InfluxdbMeasurement.objects.create(
             measurement_name=current_measurement,
@@ -118,6 +103,31 @@ def publish_dsmr_reading(instance):
                 default=serialize_decimal_to_float
             )
         )
+
+
+def get_reading_to_measurement_mapping():
+    """ Parses and returns the formatting mapping as defined by the user. """
+    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ('id', 'processed')]
+    mapping = defaultdict(dict)
+
+    config_parser = configparser.ConfigParser()
+    config_parser.read_string(InfluxdbIntegrationSettings.get_solo().formatting)
+
+    for current_measurement in config_parser.sections():
+        for instance_field_name in config_parser[current_measurement]:
+            influxdb_field_name = config_parser[current_measurement][instance_field_name]
+
+            if instance_field_name not in READING_FIELDS:
+                logger.warning(
+                    'INFLUXDB: Unknown DSMR-reading field "%s" mapped to measurement "%s"',
+                    instance_field_name,
+                    current_measurement
+                )
+                continue
+
+            mapping[current_measurement][instance_field_name] = influxdb_field_name
+
+    return mapping
 
 
 def serialize_decimal_to_float(obj):
