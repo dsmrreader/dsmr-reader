@@ -995,7 +995,7 @@ msgstr "Feedback / fouten / ideeën"
 msgid "Donations / tips"
 msgstr "Donaties"
 
-msgid "Thanks to all the contributers"
+msgid "Thanks to all the contributors"
 msgstr "Dank aan alle bijdragen"
 
 msgid "Base selection"

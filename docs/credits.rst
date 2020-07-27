@@ -5,7 +5,7 @@ Special thanks for supplying code contributions
 -----------------------------------------------
 - `Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_
 - `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_
-- All the `other contributers for the past few years <https://github.com/dennissiemensma/dsmr-reader/graphs/contributors>`_!
+- All the `other contributors for the past few years <https://github.com/dennissiemensma/dsmr-reader/graphs/contributors>`_!
 
 Also many thanks to the contributions of
 ----------------------------------------
@@ -21,7 +21,7 @@ JetBrains for providing me a free open-source licence to their products.
     :target: https://www.jetbrains.com/?from=DSMR-reader
     :alt: Jetbrains
 
- 
+
 Software used
 -------------
 Please note and respect their licences as well, if any. Credits to the following software and projects:
@@ -35,7 +35,7 @@ Please note and respect their licences as well, if any. Credits to the following
 - `MySQL <https://www.mysql.com/>`_
 - `MariaDB <https://mariadb.org/>`_
 - `PostgreSQL <http://www.postgresql.org/>`_
-- Director Responsive Admin template (website is offline) 
+- Director Responsive Admin template (website is offline)
 - Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_
 - `Real Favicon Generator <http://realfavicongenerator.net>`_
 - `Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_

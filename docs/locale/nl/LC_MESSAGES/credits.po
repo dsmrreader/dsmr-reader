@@ -37,7 +37,7 @@ msgstr "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_"
 
 #: ../../credits.rst:8
 msgid ""
-"All the `other contributers for the past few years <https://github.com/"
+"All the `other contributors for the past few years <https://github.com/"
 "dennissiemensma/dsmr-reader/graphs/contributors>`_!"
 msgstr ""
 "Alle `overige bijdrages de afgelopen jaren <https://github.com/"
