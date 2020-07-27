@@ -22,6 +22,7 @@ v4.0.0 - 2020-07-27
 - ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_]
 - ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
 - ``Changed``: Refactor logging [`#1050 <https://github.com/dennissiemensma/dsmr-reader/issues/1050>`_]
+- ``Changed``: Typo fixes - by ``olipayne`` [`#1059 <https://github.com/dennissiemensma/dsmr-reader/issues/1059>`_]
 
 - ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
 - ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dennissiemensma/dsmr-reader/issues/1025>`_]

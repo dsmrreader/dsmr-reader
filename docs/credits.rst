@@ -5,7 +5,7 @@ Thanks to
 ---------
 - `Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_
 - `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_
-- All the `other contributers <https://github.com/dennissiemensma/dsmr-reader/graphs/contributors>`_!
+- All the `other contributors <https://github.com/dennissiemensma/dsmr-reader/graphs/contributors>`_!
 
 
 Special thanks
