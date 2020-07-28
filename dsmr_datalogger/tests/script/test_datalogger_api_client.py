@@ -3,6 +3,7 @@ This only tests the __main__ route and methods not covered by other tests.
 """
 from unittest import mock
 import logging
+import socket
 
 from django.test import TestCase
 import requests
@@ -192,3 +193,61 @@ class TestScriptErrors(TestCase):
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         self.assertEqual(str(e.exception), 'Unsupported DATALOGGER_INPUT_METHOD')
+
+
+@mock.patch('socket.socket.connect')
+@mock.patch('socket.socket.recv')
+@mock.patch('select.select')
+class TestScriptNetworkSocket(TestCase):
+    """ Network socket method test. Serial port was already tested elsewhere. """
+    def _call_datalogger(self):
+        return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket('localhost', 23)
+
+    def test_read_network_socket_connect_error(self, _, __, connect_mock):
+        """ Connection error. """
+        connect_mock.side_effect = socket.gaierror(-2, 'Name or service not known')
+
+        with self.assertRaises(RuntimeError):
+            next(self._call_datalogger())
+
+    def test_read_network_socket(self, select_mock, recv_mock, *mocks):
+        recv_mock.side_effect = [
+            # Splitted over multiple recv's.
+            bytes('garbage!@*!/fake-tele', 'utf8'),
+            bytes('gram!1234-f3j292jrq', 'utf8'),
+        ]
+        select_mock.side_effect = [(
+                # First poll: no network activity.
+                [],
+                [],
+                [],
+            ), (
+                # Second poll: data ready
+                ['fake'],  # The script does not check the buffer, just if there anything was returned at all.
+                [],
+                [],
+            ), (
+                # Third poll: same
+                ['fake'],
+                [],
+                [],
+            ),
+        ]
+
+        telegram = next(self._call_datalogger())
+        self.assertEqual(telegram, '/fake-telegram!1234')
+
+    def test_read_network_socket_buffer_overflow(self, select_mock, recv_mock, *mocks):
+        # Max Bytes in script is currently 10240 chars. Just ignore recv()'s bufsize parameter and fast forward:
+        recv_mock.side_effect = [
+            bytes('A' * (10240 + 1), 'utf8'),  # This should reset the buffer
+            bytes('$/fake-telegram!1234', 'utf8'),  # This breaks endless loop
+        ]
+        select_mock.return_value = [
+            ['fake'],
+            [],
+            [],
+        ]
+
+        # We cannot assert. It's just a coverage check.
+        next(self._call_datalogger())

@@ -29,40 +29,32 @@ def get_dsmr_connection_parameters():
     }
 
     datalogger_settings = DataloggerSettings.get_solo()
+    is_default_dsmr_protocol = datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_4_PLUS
     connection_parameters = dict(
         specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version],
         log_telegrams=datalogger_settings.log_telegrams,
     )
 
-    # Serial port.
-    if datalogger_settings.input_method == DataloggerSettings.INPUT_METHOD_SERIAL:
-        connection_parameters.update(dict(
+    extra_connection_parameters = {
+        DataloggerSettings.INPUT_METHOD_SERIAL: dict(
             function=dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_serial_port,
             port=datalogger_settings.serial_port,
-            baudrate=115200,
-            bytesize=serial.EIGHTBITS,
-            parity=serial.PARITY_NONE,
+            baudrate=115200 if is_default_dsmr_protocol else 9600,
+            bytesize=serial.EIGHTBITS if is_default_dsmr_protocol else serial.SEVENBITS,
+            parity=serial.PARITY_NONE if is_default_dsmr_protocol else serial.PARITY_EVEN,
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
             rtscts=0,
             timeout=20,
-        ))
-
-        if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_2_3:
-            connection_parameters.update(dict(
-                baudrate=9600,
-                bytesize=serial.SEVENBITS,
-                parity=serial.PARITY_EVEN,
-            ))
-
-    # Network socket.
-    elif datalogger_settings.input_method == DataloggerSettings.INPUT_METHOD_IPV4:
-        connection_parameters.update(dict(
+        ),
+        DataloggerSettings.INPUT_METHOD_IPV4: dict(
             function=dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket,
             host=datalogger_settings.network_socket_address,
             port=datalogger_settings.network_socket_port,
-        ))
+        )
+    }[datalogger_settings.input_method]
 
+    connection_parameters.update(extra_connection_parameters)
     return connection_parameters
 
 

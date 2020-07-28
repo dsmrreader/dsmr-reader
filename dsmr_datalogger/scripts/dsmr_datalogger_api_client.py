@@ -110,8 +110,10 @@ def read_network_socket(host, port):
         if not match:
             continue
 
+        telegram = match.group(1)
         buffer = ''
-        yield match.group(1)
+
+        yield telegram
 
 
 def _send_telegram_to_remote_dsmrreader(telegram, api_url, api_key, timeout):

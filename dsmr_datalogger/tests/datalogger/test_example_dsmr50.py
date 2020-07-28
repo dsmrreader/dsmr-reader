@@ -11,7 +11,7 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 
 
-class TestDatalogger(InterceptStdoutMixin, TestCase):
+class TestSerial(InterceptStdoutMixin, TestCase):
     """ Test example from Netbeheer docs. """
 
     def _dsmr_dummy_data(self):
