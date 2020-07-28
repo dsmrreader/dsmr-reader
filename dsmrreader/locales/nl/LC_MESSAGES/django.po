@@ -480,17 +480,17 @@ msgstr "DSMR 4 (gas)meters groeperen metingen altijd per uur. DSMR 5 (gas)meters
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
-msgid "Protocol"
-msgstr "Protocol"
+msgid "Input method and DSMR protocol"
+msgstr "Uitleesmethode en DSMR-protocol"
 
 msgid "Note: You might have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
 msgstr "N.B.: Je zult mogelijk het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
 
-msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+msgid "When using serial socket input method"
+msgstr "Voor uitlezen via een seriële poort"
 
-msgid "Debugging"
-msgstr "Debuggen"
+msgid "When using network socket input method"
+msgstr "Voor uitlezen via een netwerk socket"
 
 msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/datalogger.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/datalogger.html\">Documentatie</a>"
@@ -555,6 +555,12 @@ msgstr "DSMR-uitlezing (alleen lezen)"
 msgid "DSMR readings (read only)"
 msgstr "DSMR-uitlezing (alleen lezen)"
 
+msgid "Serial port"
+msgstr "Seriële poort"
+
+msgid "Network socket (IPv4)"
+msgstr "Netwerk socket (IPv4)"
+
 msgid "Netherlands - DSMR version 4/5 (default)"
 msgstr "Nederlands - DSMR-versie 4/5 (standaard)"
 
@@ -567,17 +573,32 @@ msgstr "België - Fluvius (fix voor gasmeter)"
 msgid "Luxembourg - Smarty (single tariff fix)"
 msgstr "Luxemburg - Smarty (fix voor enkel tarief)"
 
+msgid "Input method"
+msgstr "Uitleesmethode"
+
+msgid "Whether to read telegrams from a serial port or network socket."
+msgstr "Geeft aan of telegrammen uitgelezen worden via een seriële poort of netwerk socket."
+
 msgid "DSMR version"
 msgstr "DSMR-versie"
 
 msgid "The DSMR version your meter supports. Version should be printed on meter."
 msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
 
-msgid "COM-port"
-msgstr "COM-poort"
+msgid "For serial input: Serial port connected to smartmeter."
+msgstr "Voor uitlezen via een seriële poort: De seriële poort verbonden met de slimme meter."
 
-msgid "COM-port connected to Smartmeter."
-msgstr "COM-poort die verbonden is met je slimme meter."
+msgid "Network socket address"
+msgstr "Netwerk socket adres"
+
+msgid "For network input: IP address or hostname of the network device connected to smartmeter."
+msgstr "Voor uitlezen via netwerk: IP-adres of hostnaam van het netwerkapparaat verbonden met de slimme meter."
+
+msgid "Network socket port"
+msgstr "Netwerk socket poort"
+
+msgid "For network input: Port of the network device connected to smartmeter."
+msgstr "Voor uitlezen via een netwerk socket: Poort van het netwerkapparaat verbonden met de slimme meter."
 
 msgid "Datalogger process sleep"
 msgstr "Datalogger proces sleep"
@@ -1085,9 +1106,6 @@ msgstr "Groepeer elektriciteit per minuut"
 
 msgid "Group gas by hour"
 msgstr "Groepeer gas per uur"
-
-msgid "Serial port"
-msgstr "Seriële poort"
 
 msgid "Smarty meter"
 msgstr "Smarty meter"
@@ -2731,6 +2749,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Protocol"
+#~ msgstr "Protocol"
+
+#~ msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+#~ msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+
+#~ msgid "Debugging"
+#~ msgstr "Debuggen"
+
+#~ msgid "COM-port"
+#~ msgstr "COM-poort"
 
 #~ msgid "This is the final release on v3. Switching to v4 requires you to manually upgrade. Click the link button for more information."
 #~ msgstr "Dit is de laatste release van DSMR-reader versie 3. Om te wisselen naar DSMR-reader versie 4 zul je handmatig moeten upgraden. Klik op de linkknop voor meer informatie."

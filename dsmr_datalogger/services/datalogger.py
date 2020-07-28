@@ -12,7 +12,7 @@ from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_parser import telegram_specifications, obis_references
 from dsmr_parser.exceptions import InvalidChecksumError, ParseError
 from dsmr_parser.parsers import TelegramParser
-from dsmr_datalogger.scripts.dsmr_datalogger_api_client import read_serial_port
+import dsmr_datalogger.scripts.dsmr_datalogger_api_client
 import dsmr_datalogger.signals
 
 
@@ -30,48 +30,54 @@ def get_dsmr_connection_parameters():
 
     datalogger_settings = DataloggerSettings.get_solo()
     connection_parameters = dict(
-        port=datalogger_settings.com_port,
-        baudrate=115200,
-        bytesize=serial.EIGHTBITS,
-        parity=serial.PARITY_NONE,
+        specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version],
         log_telegrams=datalogger_settings.log_telegrams,
-        stopbits=serial.STOPBITS_ONE,
-        xonxoff=1,
-        rtscts=0,
-        timeout=None,  # Unused, but for backwards compatibility.
     )
 
-    if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_2_3:
-        connection_parameters.update({
-            'baudrate': 9600,
-            'bytesize': serial.SEVENBITS,
-            'parity': serial.PARITY_EVEN,
-        })
+    # Serial port.
+    if datalogger_settings.input_method == DataloggerSettings.INPUT_METHOD_SERIAL:
+        connection_parameters.update(dict(
+            function=dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_serial_port,
+            port=datalogger_settings.serial_port,
+            baudrate=115200,
+            bytesize=serial.EIGHTBITS,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+            xonxoff=1,
+            rtscts=0,
+            timeout=20,
+        ))
 
-    connection_parameters.update(dict(
-        specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version]
-    ))
+        if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_2_3:
+            connection_parameters.update(dict(
+                baudrate=9600,
+                bytesize=serial.SEVENBITS,
+                parity=serial.PARITY_EVEN,
+            ))
+
+    # Network socket.
+    elif datalogger_settings.input_method == DataloggerSettings.INPUT_METHOD_IPV4:
+        connection_parameters.update(dict(
+            function=dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket,
+            host=datalogger_settings.network_socket_address,
+            port=datalogger_settings.network_socket_port,
+        ))
 
     return connection_parameters
 
 
-def read_and_process_telegram():
-    """ Reads the serial port until we have a full telegram to parse and processes it. """
+def get_telegram_generator():
+    """ Returns a generator for reading telegrams. """
 
     # Partially reuse the remote datalogger.
     connection_parameters = get_dsmr_connection_parameters()
+    function = connection_parameters['function']
+    del connection_parameters['function']
     del connection_parameters['log_telegrams']
     del connection_parameters['specifications']
 
     # This is a generator, but we don't care. We'll just stop whenever we got what we want here.
-    telegram = next(
-        read_serial_port(**connection_parameters)
-    )
-
-    try:
-        dsmr_datalogger.services.datalogger.telegram_to_reading(data=telegram)
-    except InvalidTelegramError:
-        pass
+    return function(**connection_parameters)
 
 
 def telegram_to_reading(data):

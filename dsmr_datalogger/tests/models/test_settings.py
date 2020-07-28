@@ -20,7 +20,7 @@ class TestDataloggerSettings(TestCase):
         self.assertEqual(self.instance.dsmr_version, DataloggerSettings.DSMR_VERSION_4_PLUS)
 
     def test_com_port(self):
-        self.assertEqual(self.instance.com_port, '/dev/ttyUSB0')
+        self.assertEqual(self.instance.serial_port, '/dev/ttyUSB0')
 
 
 class TestRetentionSettings(TestCase):

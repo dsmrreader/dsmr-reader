@@ -14,7 +14,10 @@ v4.x releases
 v4.1.0 - 2020-xx-xx
 -------------------
 
+- ``Changed``: Remote datalogger: Changed config to env vars [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
 
+- ``Added``: Builtin datalogger: Read telegrams from network socket [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
+- ``Added``: Remote datalogger: Read telegrams from network socket [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
 
 
 v4.0.0 - 2020-07-27

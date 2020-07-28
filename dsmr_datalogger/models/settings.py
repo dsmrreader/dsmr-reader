@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
@@ -6,6 +7,13 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class DataloggerSettings(ModelUpdateMixin, SingletonModel):
+    INPUT_METHOD_SERIAL = 'serial'
+    INPUT_METHOD_IPV4 = 'ipv4'
+    INPUT_METHODS = (
+        (INPUT_METHOD_SERIAL, _('Serial port')),
+        (INPUT_METHOD_IPV4, _('Network socket (IPv4)')),
+    )
+
     DSMR_VERSION_4_PLUS = 4
     DSMR_VERSION_2_3 = 3
     DSMR_BELGIUM_FLUVIUS = 101
@@ -17,17 +25,40 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         (DSMR_LUXEMBOURG_SMARTY, _('Luxembourg - Smarty (single tariff fix)')),
     )
 
+    input_method = models.CharField(
+        max_length=16,
+        default=INPUT_METHOD_SERIAL,
+        choices=INPUT_METHODS,
+        verbose_name=_('Input method'),
+        help_text=_('Whether to read telegrams from a serial port or network socket.')
+    )
     dsmr_version = models.IntegerField(
         default=DSMR_VERSION_4_PLUS,
         choices=DSMR_VERSION_CHOICES,
         verbose_name=_('DSMR version'),
         help_text=_('The DSMR version your meter supports. Version should be printed on meter.')
     )
-    com_port = models.CharField(
+    serial_port = models.CharField(
         max_length=196,
         default='/dev/ttyUSB0',
-        verbose_name=_('COM-port'),
-        help_text=_('COM-port connected to Smartmeter.')
+        blank=True,
+        null=True,
+        verbose_name=_('Serial port'),
+        help_text=_('For serial input: Serial port connected to smartmeter.')
+    )
+    network_socket_address = models.CharField(
+        max_length=196,
+        default=None,
+        blank=True,
+        null=True,
+        verbose_name=_('Network socket address'),
+        help_text=_('For network input: IP address or hostname of the network device connected to smartmeter.')
+    )
+    network_socket_port = models.IntegerField(
+        default=23,
+        validators=[MinValueValidator(1), MaxValueValidator(65535)],
+        verbose_name=_('Network socket port'),
+        help_text=_('For network input: Port of the network device connected to smartmeter.')
     )
     process_sleep = models.DecimalField(
         default=0.5,
