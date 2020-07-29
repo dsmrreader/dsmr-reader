@@ -80,6 +80,12 @@ The DEBUG-logging is disabled by default, to reduce writes on the filesystem. Yo
 * All done!
 
 
+Unprocessed telegrams
+---------------------
+Are you experiencing lots of unprocessed telegrams? You may have excessive data stored, causing a drag in performance.
+:doc:`More information can be found here<faq/data_throughput>`.
+
+
 Contact
 -------
 Are you unable to resolve your problem or do you need any help?

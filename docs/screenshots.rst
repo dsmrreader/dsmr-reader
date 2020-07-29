@@ -88,6 +88,15 @@ If there are any problems regarding data handling, they should be highlighted he
     :alt: Status
 
 
+Configuration
+-------------
+:doc:`More information can be found here<frontend/configuration>`.
+
+.. image:: _static/screenshots/frontend/configuration.png
+    :target: _static/screenshots/frontend/configuration.png
+    :alt: Configuration
+
+
 Export
 ------
 Want to export day totals or hourly data to Excel? This page allows you to export the data in .CSV format.

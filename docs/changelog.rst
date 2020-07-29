@@ -16,6 +16,7 @@ v4.1.0 - 2020-xx-xx
 
 - ``Added``: Builtin datalogger: Read telegrams from network socket [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
 - ``Added``: Remote datalogger: Read telegrams from network socket [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
+- ``Added``: Docs for data throughput troubleshooting [`#1039 <https://github.com/dennissiemensma/dsmr-reader/issues/1039>`_]
 
 - ``Changed``: Remote datalogger: Changed config to env vars [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
 - ``Changed``: Enabled retention by default for new installations [`#1000 <https://github.com/dennissiemensma/dsmr-reader/issues/1000>`_]

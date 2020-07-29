@@ -5,6 +5,8 @@
 */__pycache__
 /dsmrreader/settings.py
 /dsmrreader/settings.py.BACKUP
+/docs/locale/nl/LC_MESSAGES/changelog.po
+/docs/locale/nl/LC_MESSAGES/changelog.mo
 /coverage_report/
 /backups/
 /logs/

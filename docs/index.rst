@@ -34,6 +34,7 @@ DSMR Reader's documentation
    frontend/energy_contracts
    frontend/status
    frontend/export
+   frontend/configuration
 
    admin/api
    admin/email
@@ -49,6 +50,7 @@ DSMR Reader's documentation
    admin/weather
 
    faq/update
+   faq/data_throughput
    faq/restart_processes
    faq/database
    faq/uninstall

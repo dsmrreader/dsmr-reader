@@ -171,10 +171,24 @@ msgid "All done!"
 msgstr "Klaar!"
 
 #: ../../troubleshooting.rst:84
+msgid "Unprocessed telegrams"
+msgstr "Onverwerkte telegrammen"
+
+#: ../../troubleshooting.rst:85
+msgid ""
+"Are you experiencing lots of unprocessed telegrams? You may have excessive "
+"data stored, causing a drag in performance. :doc:`More information can be "
+"found here<faq/data_throughput>`."
+msgstr ""
+"Heb je regelamtig last van onverwerkte telegrammen? Het kan zijn dat je een "
+"overvloed aan gegevens hebt opgeslagen, die inhakken op de performance. :"
+"doc:`Meer informatie daarover kun je hier vinden<faq/data_throughput>`."
+
+#: ../../troubleshooting.rst:90
 msgid "Contact"
 msgstr "Contact"
 
-#: ../../troubleshooting.rst:85
+#: ../../troubleshooting.rst:91
 msgid ""
 "Are you unable to resolve your problem or do you need any help? :doc:`More "
 "information can be found here<contributing>`."

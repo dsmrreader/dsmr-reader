@@ -121,8 +121,9 @@ msgid ""
 "The ``.env`` file below is not mandatory to use. Alternatively you can specify "
 "all settings mentioned below as system environment variables."
 msgstr ""
-"Je bent niet verplicht om het ``.env`-bestand te gebruiken. Als alternatief kun "
-"je alle instellingen hieronder ook als systeem-omgevingsvariabelen instellen."
+"Je bent niet verplicht om het ``.env``-bestand te gebruiken. Als alternatief "
+"kun je alle instellingen hieronder ook als systeem-omgevingsvariabelen "
+"instellen."
 
 #: ../../installation/datalogger.rst:74
 msgid "Create another file ``/home/dsmr/.env`` and add as contents::"

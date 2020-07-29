@@ -64,6 +64,7 @@ Or execute the following to download it directly to the path above::
 
     sudo wget -O /home/dsmr/dsmr_datalogger_api_client.py https://raw.githubusercontent.com/dennissiemensma/dsmr-reader/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py
 
+
 API config (``.env``)
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -100,9 +101,11 @@ Add the schema (``http://``/``https://``) and hostname/port to ``DATALOGGER_API_
         ### API host "http://12.34.56.78"      uses API key "1234567890ABCDEFGH"
         ### API host "http://87.65.43.21:7777" uses API key "0987654321HGFEDCBA"
 
+
 Serial port or network socket config?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Choose either ``A.`` or ``B.`` below.
+
 
 A. Serial port (``.env``)
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -115,6 +118,7 @@ Then add the following contents to ``/home/dsmr/.env``::
     DATALOGGER_SERIAL_BAUDRATE=115200
 
 When using a different port or baud rate, change the ``DATALOGGER_SERIAL_PORT`` / ``DATALOGGER_SERIAL_BAUDRATE`` values accordingly.
+
 
 B. Network socket (``.env``)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

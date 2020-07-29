@@ -110,10 +110,19 @@ msgstr ""
 "dan zou dat hier zichtbaar moeten zijn."
 
 #: ../../screenshots.rst:92
+msgid "Configuration"
+msgstr "Configuratie"
+
+#: ../../screenshots.rst:93
+msgid ":doc:`More information can be found here<frontend/configuration>`."
+msgstr ""
+":doc:`Meer informatie hierover kun je hier vinden<frontend/configuration>`."
+
+#: ../../screenshots.rst:101
 msgid "Export"
 msgstr "Exporteren"
 
-#: ../../screenshots.rst:93
+#: ../../screenshots.rst:102
 msgid ""
 "Want to export day totals or hourly data to Excel? This page allows you to "
 "export the data in .CSV format."
@@ -121,21 +130,21 @@ msgstr ""
 "Wil je alle dag- of uurtotalen exporteren om in Excel te bekijken? Dat kan via "
 "deze pagina door ze te exporteren in .CSV-formaat."
 
-#: ../../screenshots.rst:101
+#: ../../screenshots.rst:110
 msgid "Settings: Overview"
 msgstr "Instellingen: Overzicht"
 
-#: ../../screenshots.rst:102
+#: ../../screenshots.rst:111
 msgid "The application has quite some features and most of them can be configured."
 msgstr ""
 "De applicatie heeft behoorlijk wat mogelijkheden en de meesten daarvan stel je "
 "zelf in."
 
-#: ../../screenshots.rst:110
+#: ../../screenshots.rst:119
 msgid "Settings: API"
 msgstr "Instellingen: API"
 
-#: ../../screenshots.rst:111
+#: ../../screenshots.rst:120
 msgid ""
 "Configure the API if you need it to supply telegrams or simply read data from "
 "DSMR-reader."
@@ -143,15 +152,15 @@ msgstr ""
 "Configureer de API wanneer je deze nodig hebt om telegrammen aan te leveren of "
 "om simpelweg gegevens uit DSMR-reader te lezen."
 
-#: ../../screenshots.rst:119
+#: ../../screenshots.rst:128
 msgid "Settings: Backup & Dropbox"
 msgstr "Instellingen: Back-up & Dropbox"
 
-#: ../../screenshots.rst:120
+#: ../../screenshots.rst:129
 msgid "By default the application backs up your data locally."
 msgstr "Standaard maakt de applicatie lokaal een back-up van de gegevens."
 
-#: ../../screenshots.rst:126
+#: ../../screenshots.rst:135
 msgid ""
 "You can use your Dropbox-account to make sure your backups are safely stored in "
 "your account."
@@ -159,15 +168,15 @@ msgstr ""
 "Je kunt je Dropbox-account koppelen om ervoor te zorgen dat je back-ups veilig "
 "in je account staan."
 
-#: ../../screenshots.rst:134
+#: ../../screenshots.rst:143
 msgid "Settings: Datalogger & retention"
 msgstr "Instellingen: Datalogger & retentie"
 
-#: ../../screenshots.rst:135
+#: ../../screenshots.rst:144
 msgid "Configure the builtin datalogger."
 msgstr "Stel de ingebouwde datalogger in."
 
-#: ../../screenshots.rst:141
+#: ../../screenshots.rst:150
 msgid ""
 "All source data read is stored indefinitely, but you can apply retention, only "
 "keeping the source data for a certain amount of time. Day statistics will never "
@@ -177,19 +186,19 @@ msgstr ""
 "toepassen, waarbij de brondata slechts voor een bepaalde periode bewaard blijft. "
 "Dagstatistieken worden nooit opgeschoond."
 
-#: ../../screenshots.rst:150
+#: ../../screenshots.rst:159
 msgid "Settings: Interface"
 msgstr "Instellingen: Interface"
 
-#: ../../screenshots.rst:151
+#: ../../screenshots.rst:160
 msgid "You can change most colors used in graphs to your personal flavor."
 msgstr "De meeste kleuren in de grafieken kun je naar eigen wens aanpassen."
 
-#: ../../screenshots.rst:159
+#: ../../screenshots.rst:168
 msgid "Settings: MinderGas.nl"
 msgstr "Instellingen: MinderGas.nl"
 
-#: ../../screenshots.rst:160
+#: ../../screenshots.rst:169
 msgid ""
 "Link your MinderGas.nl-account to have DSMR-reader upload your gas meter "
 "position daily."
@@ -197,58 +206,58 @@ msgstr ""
 "Koppel je MinderGas.nl-account om automatisch je gasmeterstanden elke dag te "
 "uploaden."
 
-#: ../../screenshots.rst:168
+#: ../../screenshots.rst:177
 msgid "Settings: MQTT"
 msgstr "Instellingen: MQTT"
 
-#: ../../screenshots.rst:169
+#: ../../screenshots.rst:178
 msgid "There is support for MQTT messaging with a lot of options."
 msgstr "Er is ondersteuning voor MQTT met een hoop verschillende opties."
 
-#: ../../screenshots.rst:175
+#: ../../screenshots.rst:184
 msgid "Get the day totals as JSON."
 msgstr "Haal de dagtotalen op in JSON-formaat."
 
-#: ../../screenshots.rst:181 ../../screenshots.rst:205
+#: ../../screenshots.rst:190 ../../screenshots.rst:214
 msgid "Or splitted per topic."
 msgstr "Of gesplitst per topic."
 
-#: ../../screenshots.rst:187
+#: ../../screenshots.rst:196
 msgid "Statistics of your meter."
 msgstr "Statistieken van je slimme meter."
 
-#: ../../screenshots.rst:193
+#: ../../screenshots.rst:202
 msgid "Telegram as JSON."
 msgstr "Telegram in JSON-formaat."
 
-#: ../../screenshots.rst:199
+#: ../../screenshots.rst:208
 msgid "Or in raw format."
 msgstr "Of in ruw formaat."
 
-#: ../../screenshots.rst:213
+#: ../../screenshots.rst:222
 msgid "Settings: Notifications"
 msgstr "Instellingen: Notificaties"
 
-#: ../../screenshots.rst:215
+#: ../../screenshots.rst:224
 msgid "Notifications on your phone using Prowl or Pushover."
 msgstr "Notificaties op je telefoon via Prowl of Pushover."
 
-#: ../../screenshots.rst:223
+#: ../../screenshots.rst:232
 msgid "Settings: PVOutput"
 msgstr "Instellingen: PVOutput"
 
-#: ../../screenshots.rst:225
+#: ../../screenshots.rst:234
 msgid "Link your PVOutput account to upload your electricity returned."
 msgstr "Koppel je PVOutput-account om je teruggeleverde electriciteit te uploaden."
 
-#: ../../screenshots.rst:238
+#: ../../screenshots.rst:247
 msgid "Settings: Consumption"
 msgstr "Instellingen: Verbruik"
 
-#: ../../screenshots.rst:246
+#: ../../screenshots.rst:255
 msgid "Settings: Temperatures"
 msgstr "Instellingen: Temperaturen"
 
-#: ../../screenshots.rst:248
+#: ../../screenshots.rst:257
 msgid "Keep track of the temperatures outside using the Buienradar API."
 msgstr "Houd de temperatuur buiten in de gaten via de Buienradar API."

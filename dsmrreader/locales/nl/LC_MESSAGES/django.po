@@ -2749,24 +2749,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "Failed to read Buienradar API: {}"
-#~ msgstr "Uitlezen van Buienradar API mislukt: {}"
-
-#~ msgid "Protocol"
-#~ msgstr "Protocol"
-
-#~ msgid "Note: You will have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
-#~ msgstr "N.B.: Je zult het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
-
-#~ msgid "Debugging"
-#~ msgstr "Debuggen"
-
-#~ msgid "COM-port"
-#~ msgstr "COM-poort"
-
-#~ msgid "This is the final release on v3. Switching to v4 requires you to manually upgrade. Click the link button for more information."
-#~ msgstr "Dit is de laatste release van DSMR-reader versie 3. Om te wisselen naar DSMR-reader versie 4 zul je handmatig moeten upgraden. Klik op de linkknop voor meer informatie."
-
-#~ msgid "Tools"
-#~ msgstr "Tools"

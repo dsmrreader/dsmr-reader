@@ -1,0 +1,93 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../faq/data_throughput.rst:2
+msgid "FAQ: Data throughput"
+msgstr "FAQ: Gegevensdoorvoer"
+
+#: ../../faq/data_throughput.rst:4
+msgid "By default DSMR-reader reads and preserves all telegram data read."
+msgstr "Standaard bewaart DSMR-reader alle ingelezen telegrammen."
+
+#: ../../faq/data_throughput.rst:6
+msgid ""
+"When using a Raspberry Pi (or similar) combined with a DSMR version 5 "
+"smart meter (the default nowadays), you may experience issues after a "
+"while."
+msgstr ""
+"Wanneer je een Raspberry Pi (of soortgelijk appartaat) gebruikt, samen "
+"met een DSMR versie 5 slimme meter (wordt vandaag de dag standaard "
+"geleverd), dan kun je na verloop van tijd problemen ervaren."
+
+#: ../../faq/data_throughput.rst:8
+msgid ""
+"This is caused by the high data throughput of DSMR version 5, which "
+"produces a new telegram every second. Both DSMR-reader and most of its "
+"users do not need this high frequency of telegrams to store, calculate "
+"and plot consumption data."
+msgstr ""
+"Dit wordt veroorzaak door de hoge gegevensdoorvoer van DSMR versie 5, "
+"wat elke seconde voor een nieuw telegram zorgt. Zowel DSMR-reader als "
+"het meerendeel van de gebruikers hebben deze hoge frequentie echter niet "
+"nodig voor de opslag, analyze en tonen van verbruiksgegevens."
+
+#: ../../faq/data_throughput.rst:11
+msgid "Therefor two measures can be taken."
+msgstr "Hiervoor kun je twee maatregelen treffen."
+
+#: ../../faq/data_throughput.rst:15
+msgid "1. Increase the datalogger sleep time"
+msgstr "1. Verhoog de slaaptijd van de datalogger"
+
+#: ../../faq/data_throughput.rst:17
+msgid ""
+"Increase the datalogger sleep time :doc:`in the configuration<../"
+"frontend/configuration>` to 5 seconds or higher. This will save a lot of "
+"disk storage, especially when using a Raspberry Pi SD card, usually "
+"having a size of 16 GB max."
+msgstr ""
+"Verhoog de slaaptijd van de datalogger :doc:`binnen de configuratie<../"
+"frontend/configuration>` naar minimaal 5 seconden. Dit bespaart een hoop "
+"schijfruimte, met name wanneer je een standaard Raspberry Pi SD-kaart "
+"gebruikt, die meestal maximaal 16 GB groot zijn."
+
+#: ../../faq/data_throughput.rst:22
+msgid "2. Configure a data retention policy"
+msgstr "2. Stel een gegevensretentiebeleid in"
+
+#: ../../faq/data_throughput.rst:23
+#, python-format
+msgid ""
+"Configure a data retention policy :doc:`in the configuration<../frontend/"
+"configuration>`. This will eventually delete up to 99 percent of the "
+"telegrams, always preserving a few historically. Also, day and hour "
+"totals are **never** deleted by retention policies."
+msgstr ""
+" Stel een gegevensretentiebeleid in :doc:`binnen de configuratie<../"
+"frontend/configuration>`. Dit schoont uiteindelijk tot 99 procent van de "
+"telegrammen op, waarbij een aantal altijd achterblijven i.v.m. historie. "
+"Daarnaast worden uur- en dagtotalen **nooit** opgeschoond door het "
+"retentiebeleid."
+
+#: ../../faq/data_throughput.rst:30
+msgid ""
+"New installations of DSMR-reader ``v4.1`` or higher will start with a "
+"default retention policy of one year. However, this may not be "
+"sufficient in your situation and you can consider using a shorter "
+"retention period."
+msgstr ""
+"Nieuwe installaties met DSMR-reader ``v4.1`` of hoger starten standaard "
+"met een retentiebeleid van een jaar. Dit kan echter niet afdoende zijn "
+"voor jouw situatie, dus overweeg om een retentiebeleid met een kortere "
+"periode in te stellen."
