@@ -61,9 +61,10 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         help_text=_('For network input: Port of the network device connected to smartmeter.')
     )
     process_sleep = models.DecimalField(
-        default=0.5,
+        default=5.0,
         max_digits=3,
         decimal_places=1,
+        validators=[MinValueValidator(0.5), MaxValueValidator(99)],
         verbose_name=_('Datalogger process sleep'),
         help_text=_(
             'The number of seconds the application will sleep after reading data from the datalogger (API excluded).'

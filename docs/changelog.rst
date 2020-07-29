@@ -22,6 +22,7 @@ v4.1.0 - 2020-xx-xx
 - ``Changed``: Enabled retention by default for new installations [`#1000 <https://github.com/dennissiemensma/dsmr-reader/issues/1000>`_]
 - ``Changed``: Disabled display of Buienradar API errors on dashboard [`#1056 <https://github.com/dennissiemensma/dsmr-reader/issues/1056>`_]
 - ``Changed``: Improved handling of ``DSMRREADER_LOGLEVEL`` [`#1050 <https://github.com/dennissiemensma/dsmr-reader/issues/1050>`_]
+- ``Changed``: Mandatory one-time update of datalogger sleep [`#1061 <https://github.com/dennissiemensma/dsmr-reader/issues/1061>`_]
 
 - ``Fixed``: Polyphase detection for Fluvius meters [`#1052 <https://github.com/dennissiemensma/dsmr-reader/issues/1052>`_]
 

@@ -501,6 +501,9 @@ msgstr "Datalogger"
 msgid "Performs an DSMR P1 telegram reading on the serial port."
 msgstr "Leest een DSMR P1 telegram uit van de seriële poort (meti."
 
+msgid "The system just applied a one-time update to the datalogger sleep setting, increasing it to 5 seconds. This probably prevents a lot of potential future data storage and performance issues for many users. If you disagree with this new value, feel free to revert it manually in the configuration."
+msgstr "Het systeem heeft zojuist een eenmalige update gedaan van de datalogger sleep-waarde naar 5 seconden. Dit voorkomt waarschijnlijk voor vele gebruikers een hoop toekomstige problemen qua performance en dataopslag. Mocht je de nieuwe waarde niet willen gebruiken, voel je dan vrij om deze weer handmatig terug te zetten in de configuratie."
+
 msgid "Timestamp indicating when the reading was taken, according to the smart meter"
 msgstr "Moment waarop de meting is gedaan, volgens de meter"
 
