@@ -8,7 +8,6 @@ import requests
 
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_weather.models.reading import TemperatureReading
-import dsmr_frontend.services
 
 
 logger = logging.getLogger('dsmrreader')
@@ -22,9 +21,7 @@ def run(scheduled_process):
         logger.exception(error)
 
         scheduled_process.delay(timezone.timedelta(hours=1))
-        return dsmr_frontend.services.display_dashboard_message(message=_(
-            'Failed to read Buienradar API: {}'.format(error)
-        ))
+        return
 
     scheduled_process.reschedule(temperature_reading.read_at + timezone.timedelta(hours=1))
 

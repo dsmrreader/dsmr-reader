@@ -11,8 +11,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -2740,9 +2738,6 @@ msgstr "Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op 
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
-msgid "Failed to read Buienradar API: {}"
-msgstr "Uitlezen van Buienradar API mislukt: {}"
-
 msgid "Failed to connect to or read from Buienradar API"
 msgstr "Kan niet verbinden naar of lezen van de Buienradar API"
 
@@ -2754,6 +2749,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Failed to read Buienradar API: {}"
+#~ msgstr "Uitlezen van Buienradar API mislukt: {}"
 
 #~ msgid "Protocol"
 #~ msgstr "Protocol"
