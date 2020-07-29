@@ -102,7 +102,7 @@ class RetentionSettings(ModelUpdateMixin, SingletonModel):
     data_retention_in_hours = models.IntegerField(
         blank=True,
         null=True,
-        default=RETENTION_NONE,
+        default=RETENTION_YEAR,
         choices=RETENTION_CHOICES,
         verbose_name=_('Data retention'),
         help_text=_(

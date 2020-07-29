@@ -24,6 +24,7 @@ class TestRetention(TestCase):
         self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
 
         RetentionSettings.get_solo()
+        RetentionSettings.objects.update(data_retention_in_hours=None)  # Legacy tests: This used to be the default.
         self.assertEqual(DsmrReading.objects.count(), 52)
         self.assertEqual(ElectricityConsumption.objects.count(), 67)
         self.assertEqual(GasConsumption.objects.count(), 33)
