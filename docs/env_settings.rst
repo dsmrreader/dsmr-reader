@@ -75,7 +75,7 @@ The password of the ``DSMR_USER`` user to create (or update if the user exists) 
 ~~~~~~~~~~~~~~~~~~~~~~~
 **Optional**
 
-The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this default) or ``DEBUG`` (should be temporary due to file I/O).
+The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this default), ``WARNING`` or ``DEBUG`` (should be temporary due to file I/O).
 
 For more information, :doc:`see Troubleshooting<troubleshooting>`.
 

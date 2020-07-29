@@ -158,10 +158,11 @@ msgstr "**Optioneel**"
 #: ../../env_settings.rst:78
 msgid ""
 "The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this "
-"default) or ``DEBUG`` (should be temporary due to file I/O)."
+"default), ``WARNING`` or ``DEBUG`` (should be temporary due to file I/O)."
 msgstr ""
 "Het log level dat DSMR-reader gebruikt. Kies ofwel ``ERROR`` (laat weg voor "
-"deze standaard) of ``DEBUG`` (alleen tijdelijk i.v.m. hogere I/O)."
+"deze standaardwaarde), ``WARNING`` of ``DEBUG`` (alleen tijdelijk i.v.m. "
+"hogere I/O)."
 
 #: ../../env_settings.rst:80
 msgid "For more information, :doc:`see Troubleshooting<troubleshooting>`."

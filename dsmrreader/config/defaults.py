@@ -43,7 +43,11 @@ if DB_USER:
 if DB_PASS:
     DATABASES['default']['PASSWORD'] = DB_PASS
 
-LOGGING['loggers']['dsmrreader']['level'] = config('DSMRREADER_LOGLEVEL', 'ERROR')
+DSMRREADER_LOGLEVEL = config('DSMRREADER_LOGLEVEL', default=None, cast=str)
+
+if DSMRREADER_LOGLEVEL in ('DEBUG', 'WARNING'):
+    LOGGING['loggers']['dsmrreader']['level'] = DSMRREADER_LOGLEVEL
+
 DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', default='', cast=Csv(post_process=tuple))
 
 """

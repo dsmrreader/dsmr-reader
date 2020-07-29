@@ -176,7 +176,7 @@ LOGGING = {
     'loggers': {
         'dsmrreader': {
             'handlers': ['console'],
-            'level': 'WARNING',
+            'level': 'ERROR',
             'propagate': True,
         },
         'console_commands': {
