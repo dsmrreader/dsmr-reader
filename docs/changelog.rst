@@ -14,10 +14,12 @@ v4.x releases
 v4.1.0 - 2020-xx-xx
 -------------------
 
-- ``Changed``: Remote datalogger: Changed config to env vars [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
-
 - ``Added``: Builtin datalogger: Read telegrams from network socket [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
 - ``Added``: Remote datalogger: Read telegrams from network socket [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
+
+- ``Changed``: Remote datalogger: Changed config to env vars [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
+
+- ``Fixed``: Polyphase detection for Fluvius meters [`#1052 <https://github.com/dennissiemensma/dsmr-reader/issues/1052>`_]
 
 
 v4.0.0 - 2020-07-27
@@ -27,16 +29,16 @@ v4.0.0 - 2020-07-27
 
     This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See :doc:`the v4 upgrade guide <faq/v4_upgrade>` for more information.
 
+- ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
+- ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dennissiemensma/dsmr-reader/issues/1025>`_]
+- ``Added``: InfluxDB integration [`#857 <https://github.com/dennissiemensma/dsmr-reader/issues/857>`_]
+- ``Added``: InfluxDB met terugwerkende kracht exporteren [`#1055 <https://github.com/dennissiemensma/dsmr-reader/issues/1055>`_]
+
 - ``Changed``: Replaced settings.py config by (system) env vars [`#1035 <https://github.com/dennissiemensma/dsmr-reader/issues/1035>`_]
 - ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dennissiemensma/dsmr-reader/issues/1013>`_]
 - ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dennissiemensma/dsmr-reader/issues/1015>`_]
 - ``Changed``: Refactor logging [`#1050 <https://github.com/dennissiemensma/dsmr-reader/issues/1050>`_]
 - ``Changed``: Typo fixes - by ``olipayne`` [`#1059 <https://github.com/dennissiemensma/dsmr-reader/issues/1059>`_]
-
-- ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dennissiemensma/dsmr-reader/issues/1016>`_]
-- ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dennissiemensma/dsmr-reader/issues/1025>`_]
-- ``Added``: InfluxDB integration [`#857 <https://github.com/dennissiemensma/dsmr-reader/issues/857>`_]
-- ``Added``: InfluxDB met terugwerkende kracht exporteren [`#1055 <https://github.com/dennissiemensma/dsmr-reader/issues/1055>`_]
 
 - ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dennissiemensma/dsmr-reader/issues/871>`_] / [`#1049 <https://github.com/dennissiemensma/dsmr-reader/issues/1049>`_]
 - ``Removed``: Dropped API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dennissiemensma/dsmr-reader/issues/1024>`_]

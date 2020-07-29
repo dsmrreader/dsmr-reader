@@ -5,6 +5,7 @@ import re
 import requests
 from django.db.migrations.recorder import MigrationRecorder
 from django.conf import settings
+from django.db.models import Q
 from django.utils import timezone
 from django.core.cache import cache
 
@@ -42,8 +43,15 @@ def get_capabilities(capability=None):
                 currently_returned__gt=0
             ).exists(),
             'multi_phases': ElectricityConsumption.objects.filter(
-                phase_currently_delivered_l2__isnull=False,
-                phase_currently_delivered_l3__isnull=False
+                Q(
+                    phase_currently_delivered_l2__isnull=False,
+                ) | Q(
+                    phase_currently_delivered_l3__isnull=False,
+                ) | Q(
+                    phase_voltage_l2__isnull=False,
+                ) | Q(
+                    phase_voltage_l3__isnull=False,
+                )
             ).exists(),
             'voltage': ElectricityConsumption.objects.filter(
                 phase_voltage_l1__isnull=False,

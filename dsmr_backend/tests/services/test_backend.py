@@ -104,6 +104,44 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertTrue(capabilities['multi_phases'])
         self.assertTrue(capabilities['any'])
 
+    def test_multi_phases_capabilities_belgium(self):
+        """ Capability check for multiple phases, Belgium version which lack some fields. """
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        self.assertFalse(capabilities['multi_phases'])
+        self.assertFalse(capabilities['any'])
+
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+            phase_voltage_l2=None,
+            phase_voltage_l3=None,
+        )
+
+        # Should fail.
+        self.assertFalse(dsmr_backend.services.backend.get_capabilities('multi_phases'))
+
+        ElectricityConsumption.objects.create(
+            read_at=timezone.now() + timezone.timedelta(minutes=1),
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+            phase_voltage_l2=1,
+            phase_voltage_l3=2,
+        )
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        self.assertTrue(dsmr_backend.services.backend.get_capabilities('multi_phases'))
+
+        self.assertTrue(capabilities['multi_phases'])
+        self.assertTrue(capabilities['any'])
+
     def test_electricity_returned_capabilities(self):
         """ Capability check for electricity returned. """
         capabilities = dsmr_backend.services.backend.get_capabilities()
