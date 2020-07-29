@@ -21,6 +21,12 @@ make gettext && sphinx-intl update -p _build/locale -l nl
 Check the generated or updated PO-files and translate them.
 
 
+### Checking translation status
+```
+cd docs
+sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated"
+```
+
 
 ### Checking (Dutch) translations results by building locally
 ```

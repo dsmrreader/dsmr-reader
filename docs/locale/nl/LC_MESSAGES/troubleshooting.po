@@ -196,37 +196,3 @@ msgstr ""
 "Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun je "
 "hier vinden<contributing>`."
 
-#~ msgid "Logging"
-#~ msgstr "Logging"
-
-#~ msgid "Appplication / Django"
-#~ msgstr "Appplicatie / Django"
-
-#~ msgid ""
-#~ "The application has its own logfiles as well. You can find them in the "
-#~ "``logs`` directory inside the project folder."
-#~ msgstr ""
-#~ "De applicatie heeft ook eigen logfiles. Je kunt deze vinden in de "
-#~ "``logs`` directory binnen de projectmap."
-
-#~ msgid "The logfiles are by default located in:"
-#~ msgstr " De logbestanden staan standaard in:"
-
-#~ msgid "``/home/dsmr/dsmr-reader/logs/django.log``"
-#~ msgstr "``/home/dsmr/dsmr-reader/logs/django.log``"
-
-#~ msgid "Lists any internal errors regarding the Django framework it's using"
-#~ msgstr "Bevat interne foutmeldingen over het gebruikte Django framework"
-
-#~ msgid "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
-#~ msgstr "``/home/dsmr/dsmr-reader/logs/dsmrreader.log``"
-
-#~ msgid "Contains application logging, if enabled"
-#~ msgstr "Bevat applicatie-logging, wanneer ingeschakeld"
-
-#~ msgid ""
-#~ "Please note that any errors in there are most likely regarding rejected "
-#~ "telegrams and are unlikely causing your issue::"
-#~ msgstr ""
-#~ "N.B.: Waarschijnlijk staan er in de meeste gevallen fouten in die verder "
-#~ "niets te maken hebben met jouw probleem, maar met afgewezen telegrammen::"

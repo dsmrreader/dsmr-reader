@@ -7,6 +7,16 @@ Project goals
 - Allowing to export your data to other systems or third parties. It's your data, you decide.
 
 
+Features
+--------
+:doc:`See this page<features>`.
+
+
+Screenshots / tour
+------------------
+:doc:`For more screenshots see this page<tour>`.
+
+
 Languages
 ---------
 The entire application and its code is written and documented in English.
@@ -16,11 +26,6 @@ Support for:
 
 - English
 - Dutch
-
-
-Screenshots
------------
-:doc:`For screenshots & features see this page<screenshots>`.
 
 
 Storage issues

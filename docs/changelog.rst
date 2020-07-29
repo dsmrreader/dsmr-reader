@@ -26,6 +26,8 @@ v4.1.0 - 2020-xx-xx
 
 - ``Fixed``: Polyphase detection for Fluvius meters [`#1052 <https://github.com/dennissiemensma/dsmr-reader/issues/1052>`_]
 
+- ``Removed``: Outdated or obsolete documentation [`#1062 <https://github.com/dennissiemensma/dsmr-reader/issues/1062>`_]
+
 
 v4.0.0 - 2020-07-27
 -------------------

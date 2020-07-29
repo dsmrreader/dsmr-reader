@@ -6,6 +6,7 @@ Hardware
 --------
 - For datalogger only: **Any** RaspberryPi or similar
 - For full DSMR-reader: **RaspberryPi 3+** or similar
+- P1 telegram cable (or a network socket when using ``ser2net``)
 
 
 Software
@@ -13,8 +14,7 @@ Software
 - OS: ``Raspbian OS`` or similar
 - Disk space: `1+ GB` (depends on whether you archive all readings)
 - Python: `3.6` or higher
-- P1 telegram cable
-- Smart Meter DSMR versions: `v2`, `v4` or `v5`
+- Smart Meter DSMR versions: `v2` / `v4` / `v5`
 
 .. warning::
 

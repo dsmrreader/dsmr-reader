@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2020-07-29 23:35+0200\n"
+"PO-Revision-Date: 2020-07-29 23:40+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -33,14 +35,30 @@ msgid ""
 "Allowing to export your data to other systems or third parties. It's your "
 "data, you decide."
 msgstr ""
-"Sta toe om jouw gegevens te exporteren naar andere systemen of derde "
-"partijen. Het zijn jouw gegevens, dus jij beslist."
+"Sta toe om jouw gegevens te exporteren naar andere systemen of derde partijen. "
+"Het zijn jouw gegevens, dus jij beslist."
 
 #: ../../intro.rst:11
+msgid "Features"
+msgstr "Mogelijkheden"
+
+#: ../../intro.rst:12
+msgid ":doc:`See this page<features>`."
+msgstr ":doc:`Zie deze pagina<features>`."
+
+#: ../../intro.rst:16
+msgid "Screenshots / tour"
+msgstr "Screenshots / tour"
+
+#: ../../intro.rst:17
+msgid ":doc:`For more screenshots see this page<tour>`."
+msgstr ":doc:`Voor meer screenshots zie deze pagina<tour>`."
+
+#: ../../intro.rst:21
 msgid "Languages"
 msgstr "Talen"
 
-#: ../../intro.rst:12
+#: ../../intro.rst:22
 msgid ""
 "The entire application and its code is written and documented in English. The "
 "interface is translated into Dutch and will be enabled automatically, "
@@ -50,32 +68,23 @@ msgstr ""
 "grafische interface is echter ook in het Nederlands beschikbaar. Deze wordt  "
 "automatisch getoond, afhankelijk van de taalinstelling in je webbrowser."
 
-#: ../../intro.rst:15
+#: ../../intro.rst:25
 msgid "Support for:"
 msgstr "Ondersteuning voor:"
 
-#: ../../intro.rst:17
+#: ../../intro.rst:27
 msgid "English"
 msgstr "Engels"
 
-#: ../../intro.rst:18
+#: ../../intro.rst:28
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../../intro.rst:22
-msgid "Screenshots"
-msgstr "Screenshots"
-
-#: ../../intro.rst:23
-msgid ":doc:`For screenshots & features see this page<screenshots>`."
-msgstr ":doc:`Voor screenshots en mogelijkheden, zie deze pagina<screenshots>`."
-
-#: ../../intro.rst:27
+#: ../../intro.rst:32
 msgid "Storage issues"
 msgstr "Problemen met opslag"
 
-#: ../../intro.rst:30
+#: ../../intro.rst:35
 msgid ""
 ":doc:`Please read this page as well before using DSMR-reader<data_integrity>`."
-msgstr ""
-":doc:`Lees deze pagina voordat je DSMR-reader gebruikt<data_integrity>`."
+msgstr ":doc:`Lees deze pagina voordat je DSMR-reader gebruikt<data_integrity>`."

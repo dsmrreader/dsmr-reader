@@ -11,6 +11,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -492,8 +494,8 @@ msgstr "Voor uitlezen via een seriële poort"
 msgid "When using network socket input method"
 msgstr "Voor uitlezen via een netwerk socket"
 
-msgid "Detailed instructions for configuring data retention can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/datalogger.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van dataretentie kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/datalogger.html\">Documentatie</a>"
+msgid "Retention policy applies to telegrams and related data that is no longer needed after processing."
+msgstr "Gegevensretentiebeleid is alleen van toepassing op telegrammen en overige data die na verwerking niet meer nodig is."
 
 msgid "Datalogger"
 msgstr "Datalogger"
@@ -2752,3 +2754,4 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+

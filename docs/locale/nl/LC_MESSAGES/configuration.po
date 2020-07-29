@@ -12,15 +12,15 @@ msgstr ""
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../frontend/configuration.rst:2
-msgid "Application: Configuration"
-msgstr "Applicatie: Configuratie"
+#: ../../configuration.rst:2
+msgid "Configuration (admin panel)"
+msgstr "Configuratie (adminpaneel)"
 
-#: ../../frontend/configuration.rst:4
+#: ../../configuration.rst:4
 msgid "The configuration page is the entrypoint for the admin interface."
 msgstr "De configuratiepagina is de toegangspoort tot het adminportaal."
 
-#: ../../frontend/configuration.rst:6
+#: ../../configuration.rst:6
 msgid ""
 "You can type any topic or setting you're searching for, as it should pop "
 "up with clickable deeplink to the admin panel. Or you can just skip it "
@@ -29,3 +29,4 @@ msgstr ""
 "Je kunt hier elk onderwerp of instelling waarnaar je op zoek bent "
 "intypen, om vervolgens een popup te krijgen met een klikbare link direct "
 "naar het juiste onderdeel binnen het adminportaal."
+

@@ -12,12 +12,16 @@ Configuration
 Enable API
 ^^^^^^^^^^
 
-The API is disabled by default in the application. You may enable it in your configuration or admin settings.
+The API is disabled by default in the application. You may enable it :doc:`in the configuration<configuration>`.
 
 .. image:: _static/screenshots/admin/apisettings.png
     :target: _static/screenshots/admin/apisettings.png
     :alt: API admin settings
 
+API key
+^^^^^^^
+
+A random API key is generated for you by default. You can always view or update it :doc:`in the configuration<configuration>`.
 
 
 Documentation
@@ -27,4 +31,4 @@ Documentation
 
     The API-documentation has been moved to your local DSMR-reader installation since DSMR-reader ``v3.1``.
 
-    You can access it by selecting the ``API docs`` menu item in DSMR-reader ``v3.1+``.
+    You can access it by selecting the ``API docs`` menu item in DSMR-reader.

@@ -12,8 +12,8 @@
 - **Installation**: [English](https://dsmr-reader.readthedocs.io/en/v4/installation.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/installation.html)
 - **FAQ**: [English](https://dsmr-reader.readthedocs.io/en/v4/faq.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/faq.html)
 
-## Screenshots
-Check out some other previews [in the documentation](https://dsmr-reader.readthedocs.io/en/latest/screenshots.html).
+## Screenshots / tour
+[Check out the tour](https://dsmr-reader.readthedocs.io/en/v4/tour.html) in the documentation.
 
 ![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/frontend/dashboard.png?r=v4)
 

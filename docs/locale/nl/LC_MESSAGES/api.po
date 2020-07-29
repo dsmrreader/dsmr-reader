@@ -12,54 +12,64 @@ msgstr ""
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:2
+#: ../../api.rst:2
 msgid "DSMR-reader API"
 msgstr "DSMR-reader API"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:3
+#: ../../api.rst:3
 msgid ""
-"The application has an API allowing you to insert/create readings and "
-"retrieve statistics."
+"The application has an API allowing you to insert/create readings and retrieve "
+"statistics."
 msgstr ""
-"De applicatie heeft een API waarmee metingen kunt aanmaken/opvragen en "
-"diverse statistieken uitlezen."
+"De applicatie heeft een API waarmee metingen kunt aanmaken/opvragen en diverse "
+"statistieken uitlezen."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:7
+#: ../../api.rst:7
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:10
+#: ../../api.rst:10
 msgid "Configuration"
 msgstr "Configuratie"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:13
+#: ../../api.rst:13
 msgid "Enable API"
 msgstr "API inschakelen"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:15
+#: ../../api.rst:15
 msgid ""
-"The API is disabled by default in the application. You may enable it in "
-"your configuration or admin settings."
+"The API is disabled by default in the application. You may enable it :doc:`in "
+"the configuration<configuration>`."
 msgstr ""
-"Standaard is de API in de applicatie uitgeschakeld. Je kunt deze "
-"inschakelen in het configuratiescherm of beheerderpaneel."
+"De API is standaard uitgeschakeld. Je kunt deze :doc:`in de "
+"configuratie<configuration>` inschakelen."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:24
+#: ../../api.rst:22
+msgid "API key"
+msgstr "API-sleutel"
+
+#: ../../api.rst:24
+msgid ""
+"A random API key is generated for you by default. You can always view or "
+"update it :doc:`in the configuration<configuration>`."
+msgstr ""
+"Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kunt deze "
+"altijd bekijken of bijwerken :doc:`in de configuratie<configuration>`."
+
+#: ../../api.rst:28
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:28
+#: ../../api.rst:32
 msgid ""
-"The API-documentation has been moved to your local DSMR-reader "
-"installation since DSMR-reader ``v3.1``."
+"The API-documentation has been moved to your local DSMR-reader installation "
+"since DSMR-reader ``v3.1``."
 msgstr ""
-"De API-documentatie is verplaatst naar je lokale DSMR-reader "
-"installatie, sinds DSMR-reader ``v3.1``."
+"De API-documentatie is verplaatst naar je lokale DSMR-reader installatie, "
+"sinds DSMR-reader ``v3.1``."
 
-#: /home/dennis/PycharmProjects/dsmr-reader/docs/api.rst:30
-msgid ""
-"You can access it by selecting the ``API docs`` menu item in DSMR-reader "
-"``v3.1+``."
+#: ../../api.rst:34
+msgid "You can access it by selecting the ``API docs`` menu item in DSMR-reader."
 msgstr ""
-"Je kunt deze bekijken door het menu-item ``API docs`` te selecteren in "
-"DSMR-reader ``v3.1+``."
+"Je kunt deze bekijken door het menu-item ``API docs`` te selecteren in DSMR-"
+"reader."

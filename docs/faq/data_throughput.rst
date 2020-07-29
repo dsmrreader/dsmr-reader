@@ -14,13 +14,13 @@ Therefor two measures can be taken.
 1. Increase the datalogger sleep time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Increase the datalogger sleep time :doc:`in the configuration<../frontend/configuration>` to 5 seconds or higher.
+Increase the datalogger sleep time :doc:`in the configuration<../configuration>` to 5 seconds or higher.
 This will save a lot of disk storage, especially when using a Raspberry Pi SD card, usually having a size of 16 GB max.
 
 
 2. Configure a data retention policy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Configure a data retention policy :doc:`in the configuration<../frontend/configuration>`.
+Configure a data retention policy :doc:`in the configuration<../configuration>`.
 This will eventually delete up to 99 percent of the telegrams, always preserving a few historically.
 Also, day and hour totals are **never** deleted by retention policies.
 

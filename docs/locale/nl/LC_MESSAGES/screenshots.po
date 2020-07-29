@@ -30,11 +30,11 @@ msgstr "Dashboard"
 
 #: ../../screenshots.rst:14
 msgid ""
-"The dashboard displays the latest information regarding any consumption of today "
-"and the current month so far."
+"The dashboard displays the latest information regarding any consumption of "
+"today and the current month so far."
 msgstr ""
-"Het dashboard geeft de meest recente informatie weer over je energieverbruik van "
-"vandaag en de lopende maand tot nu toe."
+"Het dashboard geeft de meest recente informatie weer over je energieverbruik "
+"van vandaag en de lopende maand tot nu toe."
 
 #: ../../screenshots.rst:22
 msgid "Live graphs"
@@ -50,8 +50,8 @@ msgstr "Archief"
 
 #: ../../screenshots.rst:34
 msgid ""
-"The archive allows you to go back to any moment tracked. The data can be plotted "
-"either on day, month or year level."
+"The archive allows you to go back to any moment tracked. The data can be "
+"plotted either on day, month or year level."
 msgstr ""
 "Het archief stelt je in staat om terug in de tijd te gaan naar elk moment dat "
 "gemeten is met de applicatie. Gegevens kunnen getoond worden op verschillende "
@@ -61,24 +61,24 @@ msgstr ""
 msgid "Compare"
 msgstr "Vergelijk"
 
-#: ../../screenshots.rst:43
+#: ../../screenshots.rst:44
 msgid "This page allows you to compare two days, months or years tracked before."
 msgstr ""
 "Met deze pagina vergelijk je eenvoudig twee dagen, maanden of jaren met elkaar."
 
-#: ../../screenshots.rst:51
+#: ../../screenshots.rst:52
 msgid "Trends"
 msgstr "Trends"
 
-#: ../../screenshots.rst:53
+#: ../../screenshots.rst:54
 msgid "Trends are an average summary of your daily consumption and habits."
 msgstr "Trends geven je gemiddelde energieverbruik en gewoontes weer."
 
-#: ../../screenshots.rst:61
+#: ../../screenshots.rst:62
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../../screenshots.rst:63
+#: ../../screenshots.rst:64
 msgid ""
 "The statistics page will display the current state of your meter and the energy "
 "prices currently apply (if any)."
@@ -86,21 +86,21 @@ msgstr ""
 "De statistiekenpagina geeft de huidige staat van je slimme meter en de huidige "
 "energietarieven weer (wanneer van toepassing)."
 
-#: ../../screenshots.rst:71
+#: ../../screenshots.rst:72
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
-#: ../../screenshots.rst:73
+#: ../../screenshots.rst:74
 msgid "Summary of all your contracts and the amount of energy consumed/generated."
 msgstr ""
 "Overzicht van alle energiecontracten en de hoeveelheid verbruikte/geleverde "
 "energie."
 
-#: ../../screenshots.rst:81
+#: ../../screenshots.rst:82
 msgid "Status"
 msgstr "Status"
 
-#: ../../screenshots.rst:83
+#: ../../screenshots.rst:84
 msgid ""
 "The status page shows the 'health' of the application and any data tracked. If "
 "there are any problems regarding data handling, they should be highlighted here."
@@ -109,20 +109,11 @@ msgstr ""
 "dataverwerking weer. Mochten er problemen zijn met het verzamelen van gegevens "
 "dan zou dat hier zichtbaar moeten zijn."
 
-#: ../../screenshots.rst:92
-msgid "Configuration"
-msgstr "Configuratie"
-
 #: ../../screenshots.rst:93
-msgid ":doc:`More information can be found here<frontend/configuration>`."
-msgstr ""
-":doc:`Meer informatie hierover kun je hier vinden<frontend/configuration>`."
-
-#: ../../screenshots.rst:101
 msgid "Export"
 msgstr "Exporteren"
 
-#: ../../screenshots.rst:102
+#: ../../screenshots.rst:95
 msgid ""
 "Want to export day totals or hourly data to Excel? This page allows you to "
 "export the data in .CSV format."
@@ -130,134 +121,11 @@ msgstr ""
 "Wil je alle dag- of uurtotalen exporteren om in Excel te bekijken? Dat kan via "
 "deze pagina door ze te exporteren in .CSV-formaat."
 
-#: ../../screenshots.rst:110
-msgid "Settings: Overview"
-msgstr "Instellingen: Overzicht"
+#: ../../screenshots.rst:103
+msgid "Configuration"
+msgstr "Configuratie"
 
-#: ../../screenshots.rst:111
-msgid "The application has quite some features and most of them can be configured."
-msgstr ""
-"De applicatie heeft behoorlijk wat mogelijkheden en de meesten daarvan stel je "
-"zelf in."
+#: ../../screenshots.rst:105
+msgid ":doc:`More information can be found here<configuration>`."
+msgstr ":doc:`Meer informatie hierover kun je hier vinden<configuration>`."
 
-#: ../../screenshots.rst:119
-msgid "Settings: API"
-msgstr "Instellingen: API"
-
-#: ../../screenshots.rst:120
-msgid ""
-"Configure the API if you need it to supply telegrams or simply read data from "
-"DSMR-reader."
-msgstr ""
-"Configureer de API wanneer je deze nodig hebt om telegrammen aan te leveren of "
-"om simpelweg gegevens uit DSMR-reader te lezen."
-
-#: ../../screenshots.rst:128
-msgid "Settings: Backup & Dropbox"
-msgstr "Instellingen: Back-up & Dropbox"
-
-#: ../../screenshots.rst:129
-msgid "By default the application backs up your data locally."
-msgstr "Standaard maakt de applicatie lokaal een back-up van de gegevens."
-
-#: ../../screenshots.rst:135
-msgid ""
-"You can use your Dropbox-account to make sure your backups are safely stored in "
-"your account."
-msgstr ""
-"Je kunt je Dropbox-account koppelen om ervoor te zorgen dat je back-ups veilig "
-"in je account staan."
-
-#: ../../screenshots.rst:143
-msgid "Settings: Datalogger & retention"
-msgstr "Instellingen: Datalogger & retentie"
-
-#: ../../screenshots.rst:144
-msgid "Configure the builtin datalogger."
-msgstr "Stel de ingebouwde datalogger in."
-
-#: ../../screenshots.rst:150
-msgid ""
-"All source data read is stored indefinitely, but you can apply retention, only "
-"keeping the source data for a certain amount of time. Day statistics will never "
-"be deleted."
-msgstr ""
-"Alle brondata wordt voor onbepaalde tijd bewaard. Je kunt echter retentie "
-"toepassen, waarbij de brondata slechts voor een bepaalde periode bewaard blijft. "
-"Dagstatistieken worden nooit opgeschoond."
-
-#: ../../screenshots.rst:159
-msgid "Settings: Interface"
-msgstr "Instellingen: Interface"
-
-#: ../../screenshots.rst:160
-msgid "You can change most colors used in graphs to your personal flavor."
-msgstr "De meeste kleuren in de grafieken kun je naar eigen wens aanpassen."
-
-#: ../../screenshots.rst:168
-msgid "Settings: MinderGas.nl"
-msgstr "Instellingen: MinderGas.nl"
-
-#: ../../screenshots.rst:169
-msgid ""
-"Link your MinderGas.nl-account to have DSMR-reader upload your gas meter "
-"position daily."
-msgstr ""
-"Koppel je MinderGas.nl-account om automatisch je gasmeterstanden elke dag te "
-"uploaden."
-
-#: ../../screenshots.rst:177
-msgid "Settings: MQTT"
-msgstr "Instellingen: MQTT"
-
-#: ../../screenshots.rst:178
-msgid "There is support for MQTT messaging with a lot of options."
-msgstr "Er is ondersteuning voor MQTT met een hoop verschillende opties."
-
-#: ../../screenshots.rst:184
-msgid "Get the day totals as JSON."
-msgstr "Haal de dagtotalen op in JSON-formaat."
-
-#: ../../screenshots.rst:190 ../../screenshots.rst:214
-msgid "Or splitted per topic."
-msgstr "Of gesplitst per topic."
-
-#: ../../screenshots.rst:196
-msgid "Statistics of your meter."
-msgstr "Statistieken van je slimme meter."
-
-#: ../../screenshots.rst:202
-msgid "Telegram as JSON."
-msgstr "Telegram in JSON-formaat."
-
-#: ../../screenshots.rst:208
-msgid "Or in raw format."
-msgstr "Of in ruw formaat."
-
-#: ../../screenshots.rst:222
-msgid "Settings: Notifications"
-msgstr "Instellingen: Notificaties"
-
-#: ../../screenshots.rst:224
-msgid "Notifications on your phone using Prowl or Pushover."
-msgstr "Notificaties op je telefoon via Prowl of Pushover."
-
-#: ../../screenshots.rst:232
-msgid "Settings: PVOutput"
-msgstr "Instellingen: PVOutput"
-
-#: ../../screenshots.rst:234
-msgid "Link your PVOutput account to upload your electricity returned."
-msgstr "Koppel je PVOutput-account om je teruggeleverde electriciteit te uploaden."
-
-#: ../../screenshots.rst:247
-msgid "Settings: Consumption"
-msgstr "Instellingen: Verbruik"
-
-#: ../../screenshots.rst:255
-msgid "Settings: Temperatures"
-msgstr "Instellingen: Temperaturen"
-
-#: ../../screenshots.rst:257
-msgid "Keep track of the temperatures outside using the Buienradar API."
-msgstr "Houd de temperatuur buiten in de gaten via de Buienradar API."

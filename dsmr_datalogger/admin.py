@@ -59,8 +59,7 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
             None, {
                 'fields': ['data_retention_in_hours'],
                 'description': _(
-                    'Detailed instructions for configuring data retention can be found here: '
-                    '<a href="https://dsmr-reader.readthedocs.io/nl/v4/admin/datalogger.html">Documentation</a>'
+                    'Retention policy applies to telegrams and related data that is no longer needed after processing.'
                 )
             }
         ),

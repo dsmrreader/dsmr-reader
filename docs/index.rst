@@ -5,6 +5,8 @@ DSMR Reader's documentation
    :maxdepth: 1
 
    intro
+   tour
+   features
    changelog
    requirements
    data_integrity
@@ -20,34 +22,20 @@ DSMR Reader's documentation
    installation/docker
 
    application
+   configuration
    home_assistant
    api
    mqtt
    plugins
    development
 
-   frontend/dashboard
-   frontend/archive
-   frontend/compare
-   frontend/trends
-   frontend/statistics
-   frontend/energy_contracts
-   frontend/status
-   frontend/export
-   frontend/configuration
-
-   admin/api
    admin/email
    admin/backup_dropbox
    admin/email_backup
-   admin/datalogger
-   admin/interface
    admin/mindergas
    admin/mqtt
    admin/notifications
    admin/pvoutput
-   admin/consumption
-   admin/weather
 
    faq/update
    faq/data_throughput
@@ -60,5 +48,4 @@ DSMR Reader's documentation
    contributing
    credits
    donations
-   screenshots
    licence
