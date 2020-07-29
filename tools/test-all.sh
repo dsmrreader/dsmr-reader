@@ -27,23 +27,23 @@ export DB_NAME
 
 
 echo ""
-echo "--- Testing with SQLite (4 processes)..."
 DB_ENGINE=django.db.backends.sqlite3
 export DB_ENGINE
+echo "--- Testing: $DB_ENGINE"
 pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test -n 2
 
 
 echo ""
-echo "--- Testing with PostgreSQL (4 processes)..."
 DB_ENGINE=django.db.backends.postgresql
 export DB_ENGINE
+echo "--- Testing: $DB_ENGINE"
 pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test -n 4
 
 
 echo ""
-echo "--- Testing with MySQL (1 process due to concurrency limitations)..."
 DB_ENGINE=django.db.backends.mysql
 export DB_ENGINE
+echo "--- Testing: $DB_ENGINE"
 pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test
 
 
