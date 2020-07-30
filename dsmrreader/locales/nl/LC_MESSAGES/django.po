@@ -11,8 +11,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -2338,8 +2336,8 @@ msgstr "De \"User Key\" zoals terug te vinden in je Pushover dashboard"
 msgid "Your Telegram bot token. The token looks something like 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
 msgstr "Je telegram bot-token. Het token ziet er uit als: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
 
-msgid "Unique identifier for the target chat (ID) or handle of the target channel (in the format @channelhandle)"
-msgstr "Unieke identifier van de doelchat of de handle van de doelchat (in het formaat @chathandle)"
+msgid "Identifier for the target chat ID, or @handle of a channel (without the \"@\")"
+msgstr "Referentie naar het chat ID of de @handle van een kanaal (zonder de \"@\")"
 
 msgid "Next notification"
 msgstr "Volgende notificatie"
@@ -2754,4 +2752,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-

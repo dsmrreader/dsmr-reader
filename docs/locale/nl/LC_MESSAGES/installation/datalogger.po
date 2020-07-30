@@ -69,7 +69,7 @@ msgid ""
 msgstr ""
 "Wanneer je slimme meter alleen DSMR v2 ondersteunt (of je gebruikt een niet-"
 "Nederlandse slimme meter), zorg er dan voor dat je de DSMR-versie aanpast :doc:"
-"`in de datalogger-configuratie <../datalogger>`, zodat DSMR-reader de "
+"`in de datalogger-configuratie <../configuration>`, zodat DSMR-reader de "
 "telegrammen goed kan verwerken."
 
 #: ../../installation/datalogger.rst:28
@@ -274,4 +274,3 @@ msgid "The script should now forward telegrams to the API host(s) you specified.
 msgstr ""
 "Het script zou nu telegrammen moeten doorsturen naar de API host(s) die je "
 "eerder hebt ingevoerd."
-

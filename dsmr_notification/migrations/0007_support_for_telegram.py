@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='notificationsetting',
             name='telegram_chat_id',
-            field=models.CharField(blank=True, default=None, help_text='Unique identifier for the target chat (ID) or handle of the target channel (in the format @channelhandle)', max_length=64, null=True),
+            field=models.CharField(blank=True, default=None, help_text='Identifier for the target chat ID, or @handle of a channel (without the "@")', max_length=64, null=True),
         ),
         migrations.AlterField(
             model_name='notificationsetting',

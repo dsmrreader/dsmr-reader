@@ -68,7 +68,7 @@ class NotificationSetting(SingletonModel):
         blank=True,
         default=None,
         help_text=_(
-            'Unique identifier for the target chat (ID) or handle of the target channel (in the format @channelhandle)'
+            'Identifier for the target chat ID, or @handle of a channel (without the "@")'
         ),
     )
     next_notification = models.DateTimeField(

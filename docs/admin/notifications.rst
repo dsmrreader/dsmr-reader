@@ -1,7 +1,10 @@
 Admin: Notifications
 ====================
 
-Notifications on your phone using Prowl or Pushover. 
+.. contents::
+    :depth: 2
+
+Notifications on your phone using Prowl or Pushover.
 
 .. image:: ../_static/screenshots/admin/notificationsetting.png
     :target: ../_static/screenshots/admin/notificationsetting.png
@@ -23,8 +26,8 @@ When you save these settings, your first notification should be sent after midni
 Don't worry about nightly alerts, the notifications will be sent with low priority and should not wake you up.
 
 
-How do I obtain my API key for Pushover?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Pushover: How do I obtain my API key?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After you have downloaded Pushover and signed up for an account you should be able to `login into your Pushover account <https://pushover.net>`_. 
 
@@ -41,8 +44,8 @@ Pushover requires you to enter two keys in DSMR-reader.
     :alt: Pushover Get Your API Key
 
 
-How do I obtain my API key for Prowl?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prowl: How do I obtain my API key?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After you have downloaded Prowl and signed up for an account you should be able to `login into your Prowl account <https://www.prowlapp.com/login.php>`_. 
 
@@ -60,9 +63,46 @@ When a new key is generated, you will see it immediatly. Your key is listed like
     :alt: Prowl Get Your API Key
 
 
-How do I obtain my API key for Telegram?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Telegram: How do I obtain my API key?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Please note that you can only use these notifications if you have your own (chat)bot with Telegram.
+Please note that you can only use these notifications if you have your own (chat) bot with Telegram.
 
-More information about bots `can be found here <https://core.telegram.org/bots>`_.
+More information about bots `can be found here <https://core.telegram.org/bots>`_. You will need the API key provided to you by the ``BotFather`` bot.
+
+Telegram: How do I obtain the Chat ID?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You will also need the Chat ID to have the bot send messages to the right chat.
+**By default bots are not allowed to contact anyone by themselves or see messages in a group.**
+
+So first make sure to send a message directly to the bot as human.
+Or, if you added the bot in a group, make sure it has permissions to read messages in the group and then send a message in the group accordingly.
+
+Any message the bot receives (or is allowed to see) is sent as update to the bot.
+You can use the Telegram API in your browser to see the updates for your bot.
+It will contain the Chat ID you're looking for.
+
+Construct the following URL::
+
+    https://api.telegram.org/bot<APIkey>/getUpdates?offset=-1
+
+For example when using the fake API key ``1268827887:ABCDEFGqdtsgtts-JDASIJDqewqkqewaq``::
+
+    https://api.telegram.org/bot1268827887:ABCDEFGqdtsgtts-JDASIJDqewqkqewaq/getUpdates?offset=-1
+
+You should see something similar to:
+
+.. image:: ../_static/faq/notifications-telegram-chat-id.png
+    :target: ../_static/faq/notifications-telegram-chat-id.png
+    :alt: Telegram Chat ID
+
+Extract the Chat ID from the response. In the example above it's ``123456789``.
+You can use that ID in the Telegram notifications config of DSMR-reader.
+
+To test notifications, you can execute the following command::
+
+    sudo su - dsmr
+    ./manage.py dsmr_notification_test
+
+Please note that DSMR-reader will reset and wipe notification settings on any error. This can be experienced as a bit annoying.
