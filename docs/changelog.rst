@@ -11,7 +11,7 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
-v4.1.0 - 2020-xx-xx
+v4.1.0 - 2020-08-03
 -------------------
 
 - ``Added``: Builtin datalogger: Read telegrams from network socket [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
