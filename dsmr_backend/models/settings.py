@@ -47,8 +47,8 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
     )
     restart_required = models.BooleanField(
         default=False,
-        verbose_name=_('Restart required'),
-        help_text=_('Whether the process requires a restart.')
+        verbose_name=_('Process restart required'),
+        help_text=_('Whether the backend process requires a restart. It should occur automatically.')
     )
 
     def __str__(self):

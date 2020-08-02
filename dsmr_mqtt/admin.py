@@ -14,17 +14,14 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
             None, {
                 'fields': ['enabled', 'hostname', 'port', 'secure', 'client_id'],
                 'description': _(
-                    'Detailed instructions for configuring MQTT can be found here: '
-                    '<a href="https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html">Documentation</a>'
+                    'The backend process should automatically restart to apply changes. To manually restart, '
+                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
                 )
             }
         ),
         (
             _('Misc'), {
                 'fields': ['username', 'password', 'qos'],
-                'description': _(
-                    'These broker settings apply to all enabled MQTT configurations.'
-                )
             }
         )
     )

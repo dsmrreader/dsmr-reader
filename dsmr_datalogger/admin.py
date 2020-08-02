@@ -16,37 +16,41 @@ from .models.statistics import MeterStatistics
 
 @admin.register(DataloggerSettings)
 class DataloggerSettingsAdmin(SingletonModelAdmin):
+    readonly_fields = ('restart_required',)
     fieldsets = (
         (
             _('Input method and DSMR protocol'), {
                 'fields': ['input_method', 'dsmr_version'],
                 'description': _(
-                    'Note: You might have to restart the "dsmr_datalogger" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
+                    'The datalogger process should automatically restart to apply changes. To manually restart, '
+                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
                 )
             }
         ),
         (
             _('When using serial socket input method'), {
                 'fields': ['serial_port'],
-                'description': _(
-                    'Note: You might have to restart the "dsmr_datalogger" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
-                )
             }
         ),
         (
             _('When using network socket input method'), {
                 'fields': ['network_socket_address', 'network_socket_port'],
-                'description': _(
-                    'Note: You might have to restart the "dsmr_datalogger" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
-                )
             }
         ),
         (
             _('Advanced'), {
                 'fields': ['process_sleep', 'log_telegrams'],
+            }
+        ),
+        (
+            _('System'), {
+                'fields': [
+                    'restart_required'
+                ],
+                'description': _(
+                    'The datalogger process should automatically restart to apply changes. To manually restart, '
+                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
+                )
             }
         ),
     )

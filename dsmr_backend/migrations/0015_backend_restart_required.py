@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='backendsettings',
             name='restart_required',
-            field=models.BooleanField(default=False, help_text='Whether the process requires a restart.', verbose_name='Restart required'),
+            field=models.BooleanField(default=False, help_text='Whether the backend process requires a restart. It should occur automatically.', verbose_name='Process restart required'),
         ),
     ]

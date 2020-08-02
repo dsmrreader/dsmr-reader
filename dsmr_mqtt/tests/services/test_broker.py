@@ -224,3 +224,18 @@ class TestBroker(TestCase):
     def test_on_publish(self):
         """ Coverage test. """
         dsmr_mqtt.services.broker.on_publish(None, userdata='x', mid='y')
+
+    @mock.patch('dsmr_backend.signals.backend_restart_required.send_robust')
+    def test_on_settings_update(self, send_robust_mock):
+        """ Test whether restart required signal is triggered. """
+        self.assertFalse(send_robust_mock.called)
+        broker_settings = MQTTBrokerSettings.get_solo()
+        broker_settings.hostname = 'xxx'
+        broker_settings.save()
+        self.assertTrue(send_robust_mock.called)
+
+        # Should do nothing when created.
+        send_robust_mock.reset_mock()
+        MQTTBrokerSettings.objects.all().delete()
+        MQTTBrokerSettings.get_solo()
+        self.assertFalse(send_robust_mock.called)

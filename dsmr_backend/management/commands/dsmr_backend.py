@@ -19,7 +19,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
     persistent_clients = None
 
     def initialize(self):
-        self.sleep_time = BackendSettings.get_solo().process_sleep
+        self._update_sleep()
 
         self.persistent_clients = dsmr_backend.services.persistent_clients.initialize()
         logger.debug('Persistent clients initialized: %s', [x.__class__ for x in self.persistent_clients])
@@ -36,7 +36,16 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         if self.persistent_clients:
             dsmr_backend.services.persistent_clients.run(self.persistent_clients)
 
-        if BackendSettings.get_solo().restart_required:
-            BackendSettings.objects.update(restart_required=False)
-            logger.warning('Detected restart required, stopping process...')
-            raise StopInfiniteRun()
+        self._check_restart_required()
+        self._update_sleep()
+
+    def _update_sleep(self):
+        self.sleep_time = BackendSettings.get_solo().process_sleep
+
+    def _check_restart_required(self):
+        if not BackendSettings.get_solo().restart_required:
+            return
+
+        BackendSettings.objects.update(restart_required=False)
+        logger.warning('Detected backend restart required, stopping process...')
+        raise StopInfiniteRun()

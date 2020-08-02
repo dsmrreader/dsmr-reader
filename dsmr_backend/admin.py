@@ -29,6 +29,7 @@ admin.site.index_title = _('Configuration')  # Should match the frontend menu it
 
 @admin.register(BackendSettings)
 class BackendSettingsAdmin(SingletonModelAdmin):
+    readonly_fields = ('restart_required',)
     fieldsets = (
         (
             _('Updates'), {
@@ -40,10 +41,13 @@ class BackendSettingsAdmin(SingletonModelAdmin):
                 'fields': [
                     'language', 'process_sleep', 'disable_electricity_returned_capability', 'disable_gas_capability'
                 ],
-                'description': _(
-                    'Note: You will have to restart the "dsmr_backend" process for any changes to apply. '
-                    'See the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
-                )
+            }
+        ),
+        (
+            _('System'), {
+                'fields': [
+                    'restart_required'
+                ],
             }
         ),
     )

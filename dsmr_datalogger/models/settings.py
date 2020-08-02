@@ -1,9 +1,12 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
+import django.db.models.signals
 
 from dsmr_backend.mixins import ModelUpdateMixin
+from dsmr_datalogger.signals import datalogger_restart_required
 
 
 class DataloggerSettings(ModelUpdateMixin, SingletonModel):
@@ -75,6 +78,11 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Log telegrams'),
         help_text=_("Whether telegrams are logged, in base64 format. Only required for debugging.")
     )
+    restart_required = models.BooleanField(
+        default=False,
+        verbose_name=_('Process restart required'),
+        help_text=_('Whether the datalogger process requires a restart. It should occur automatically.')
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()
@@ -82,6 +90,23 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Datalogger configuration')
+
+
+@receiver(django.db.models.signals.post_save, sender=DataloggerSettings)
+def _on_influxdb_settings_updated_signal(instance, created, raw, **kwargs):
+    """ On settings change, require datalogger restart. """
+    if created or raw:
+        return
+
+    datalogger_restart_required.send_robust(None)
+
+
+@receiver(datalogger_restart_required)
+def _on_backend_restart_required_signal(**kwargs):
+    datalogger_settings = DataloggerSettings.get_solo()
+    datalogger_settings.restart_required = True
+    # DO NOT CHANGE: Keep this save() due signal firing!
+    datalogger_settings.save(update_fields=['restart_required'])
 
 
 class RetentionSettings(ModelUpdateMixin, SingletonModel):

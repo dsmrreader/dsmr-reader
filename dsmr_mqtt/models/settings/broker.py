@@ -104,4 +104,8 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
 
 @receiver(django.db.models.signals.post_save, sender=MQTTBrokerSettings)
 def _on_mqttbroker_settings_updated_signal(instance, created, raw, **kwargs):
+    """ On settings change, require backend restart. """
+    if created or raw:
+        return
+
     backend_restart_required.send_robust(None)

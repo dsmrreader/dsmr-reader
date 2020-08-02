@@ -42,8 +42,8 @@ msgstr "Updates"
 msgid "Advanced"
 msgstr "Geavanceerd"
 
-msgid "Note: You will have to restart the \"dsmr_backend\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult het \"dsmr_backend\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+msgid "System"
+msgstr "Systeem"
 
 msgid "Enter your outgoing email settings here, which DSMR-reader will use to send emails. <br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, port <strong>25</strong> and use <strong>TLS</strong>. Do NOT fill in any username of password, but just enter your GMail address as \"Email to\" above."
 msgstr "Voer hier je uitgaande e-mailinstellingen in, welke gebruikt worden door DSMR-reader om je e-mails te sturen. <br><br>Heb je GMail? Voer dan als host <strong>aspmx.l.google.com</strong> in, als poort <strong>25</strong> en gebruik <strong>TLS</strong>. Voer vervolgens NIET je gebruikersnaam of wachtwoord in. Vul je GMail-adres hierboven in als ontvanger."
@@ -141,11 +141,11 @@ msgstr "Schakel weergave elektriciteitsteruglevering uit"
 msgid "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels."
 msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) teruglevering heeft geregistreerd."
 
-msgid "Restart required"
-msgstr "Herstart vereist"
+msgid "Process restart required"
+msgstr "Proces vereist herstart"
 
-msgid "Whether the process requires a restart."
-msgstr "Geeft aan of het proces een herstart vereist."
+msgid "Whether the backend process requires a restart. It should occur automatically."
+msgstr "Geeft aan of het backend-proces een herstart vereist. Dit zou automatisch moeten gaan."
 
 msgid "Backend configuration"
 msgstr "Backend-configuratie"
@@ -483,8 +483,8 @@ msgstr "Verbruiksconfiguratie"
 msgid "Input method and DSMR protocol"
 msgstr "Uitleesmethode en DSMR-protocol"
 
-msgid "Note: You might have to restart the \"dsmr_datalogger\" process for any changes to apply. See the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
-msgstr "N.B.: Je zult mogelijk het \"dsmr_datalogger\" proces moeten herstarten om wijzigingen door te voeren. Zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+msgid "The datalogger process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+msgstr "Het datalogger-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
 
 msgid "When using serial socket input method"
 msgstr "Voor uitlezen via een seriële poort"
@@ -614,6 +614,9 @@ msgstr "Log telegrammen"
 
 msgid "Whether telegrams are logged, in base64 format. Only required for debugging."
 msgstr "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor debugging."
+
+msgid "Whether the datalogger process requires a restart. It should occur automatically."
+msgstr "Geeft aan of het datalogger-proces een herstart vereist. Dit zou automatisch moeten gaan."
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
@@ -1686,6 +1689,9 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
+msgid "The backend process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+msgstr "Het backend-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html\">FAQ</a>."
+
 msgid "Mapping"
 msgstr "Mapping"
 
@@ -1859,14 +1865,8 @@ msgstr "Geen recente gasmeting gevonden"
 msgid "Unexpected status code received"
 msgstr "Onverwachte statuscode ontvangen"
 
-msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html\">Documentatie</a>"
-
 msgid "Misc"
 msgstr "Overig"
-
-msgid "These broker settings apply to all enabled MQTT configurations."
-msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."
 
 msgid "Triggered by the datalogger or any API calls using the v1 API. Allows you to pass on any incoming raw telegrams to the MQTT broker."
 msgstr "Wordt geactiveerd door de datalogger of API calls via de v1 API. Staat je toe om onbewerkte telegrammen door te sturen naar de MQTT broker."
@@ -2215,6 +2215,9 @@ msgstr "Quality Of Service"
 
 msgid "QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages."
 msgstr "QoS 0: Beste performance, maar onbetoruwbaar (ontworpen voor betrouwbare verbindingen, zoals bekabelde netwerken). QoS 1: Gemiddelde performance, maar betrouwbaar. LET OP: Kan ervoor zorgen dat berichten dubbel verzonden worden! QoS 2: Traagste performance, maar betrouwbaar en voorkomt het versturen van dubbele berichten."
+
+msgid "Restart required"
+msgstr "Herstart vereist"
 
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
@@ -2752,3 +2755,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html\">Documentation</a>"
+#~ msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html\">Documentatie</a>"
+
+#~ msgid "These broker settings apply to all enabled MQTT configurations."
+#~ msgstr "Deze broker-instellingen zijn van toepassing op alle ingeschakelde MQTT configuraties."

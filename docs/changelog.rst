@@ -24,6 +24,7 @@ v4.1.0 - 2020-08-03
 - ``Changed``: Improved handling of ``DSMRREADER_LOGLEVEL`` [`#1050 <https://github.com/dennissiemensma/dsmr-reader/issues/1050>`_]
 - ``Changed``: Mandatory one-time update of datalogger sleep [`#1061 <https://github.com/dennissiemensma/dsmr-reader/issues/1061>`_]
 - ``Changed``: Improved docs for Telegram app integration [`#1063 <https://github.com/dennissiemensma/dsmr-reader/issues/1063>`_]
+- ``Changed``: Automatically restart datalogger on settings change [`#1066 <https://github.com/dennissiemensma/dsmr-reader/issues/1066>`_]
 
 - ``Fixed``: Polyphase detection for Fluvius meters [`#1052 <https://github.com/dennissiemensma/dsmr-reader/issues/1052>`_]
 
