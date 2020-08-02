@@ -798,6 +798,9 @@ msgstr "Je gebruikt een MySQL-database zonder ondersteuning voor tijdzones. Dit 
 msgid "Data retention policy is currently disabled. Please note that this may eventually cause severe performance and / or storage issues, depending on your hardware and type of disk used. Consider choosing a retention policy in the datalogger retention configuration."
 msgstr "Gegevens worden momenteel niet automatisch opgeschoond. Dit veroorzaakt mogelijk op termijn problemen qua opslag en/of performance, afhankelijk van de gebruikte hardware en fysieke opslag. Overweeg om een dataretentiebeleid in te stellen binnen de retentieconfiguratie."
 
+msgid "DSMR-reader v4.1: Added support for reading network sockets with the datalogger (e.g. when using ser2net). Both the builtin and remote datalogger now support this feature. The latter requires a reinstallation of the (remote) datalogger script."
+msgstr "DSMR-reader v4.1: Ondersteuning toegevoegd voor het uitlezen van netwerk-sockets met de datalogger (bijv. wanneer je ser2net gebruikt). Dit wordt door zowel de ingebouwde als remote datalogger ondersteund, al vereist de laatstgenoemde in dat geval wel een herinstallatie van het dataloggerscript."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
