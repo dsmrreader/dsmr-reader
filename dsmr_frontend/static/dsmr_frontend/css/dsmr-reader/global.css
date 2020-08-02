@@ -88,3 +88,8 @@ tr > th {
 tr.live-header > th {
     padding-bottom: 30px !important;
 }
+
+ul#category-suggestions > li {
+    list-style-type: none;
+    padding-top: 10px;
+}

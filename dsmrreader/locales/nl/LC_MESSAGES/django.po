@@ -1047,42 +1047,6 @@ msgstr "Configuratie"
 msgid "Search for a topic or setting"
 msgstr "Zoek naar een onderwerp of instelling"
 
-msgid "Some topics"
-msgstr "Enkele onderwerpen"
-
-msgid "Backend"
-msgstr "Backend"
-
-msgid "Email"
-msgstr "E-mail"
-
-msgid "Frontend"
-msgstr "Interface"
-
-msgid "Meter statistics"
-msgstr "Meterstatistieken"
-
-msgid "Mindergas.nl"
-msgstr "Mindergas.nl"
-
-msgid "MQTT"
-msgstr "MQTT"
-
-msgid "Notifications"
-msgstr "Notificaties"
-
-msgid "PVOutput.org"
-msgstr "PVOutput.org"
-
-msgid "Retention"
-msgstr "Retentie"
-
-msgid "Weather"
-msgstr "Weergegevens"
-
-msgid "InfluxDB"
-msgstr "InfluxDB"
-
 msgid "Type here to search..."
 msgstr "Typ hier om te zoeken..."
 
@@ -1091,6 +1055,9 @@ msgstr "Sla over en ga direct naar het beheer"
 
 msgid "DSMR-reader API (key)"
 msgstr "DSMR-reader API (sleutel)"
+
+msgid "Backend"
+msgstr "Backend"
 
 msgid "Check for updates"
 msgstr "Controleer voor updates"
@@ -1125,6 +1092,9 @@ msgstr "Fluvius meter"
 msgid "Export backups to Dropbox"
 msgstr "Exporteer back-ups naar Dropbox"
 
+msgid "Email"
+msgstr "E-mail"
+
 msgid "Outgoing email"
 msgstr "Uitgaande e-mail"
 
@@ -1137,6 +1107,9 @@ msgstr "Gasprijs/kosten"
 msgid "Electricity price/costs"
 msgstr "Elektriciteitsprijs/kosten"
 
+msgid "Frontend"
+msgstr "Interface"
+
 msgid "Password protection"
 msgstr "Beveiliging met wachtwoord"
 
@@ -1146,17 +1119,29 @@ msgstr "Voeg tarieven samen"
 msgid "Graph line/bar colors"
 msgstr "Grafieklijn/staaf kleuren"
 
+msgid "InfluxDB"
+msgstr "InfluxDB"
+
 msgid "InfluxDB integration"
 msgstr "InfluxDB-integratie"
 
+msgid "Meter statistics"
+msgstr "Meterstatistieken"
+
 msgid "Latest telegram read"
 msgstr "Laatst gelezen telegram"
+
+msgid "Mindergas.nl"
+msgstr "Mindergas.nl"
 
 msgid "Link MinderGas account"
 msgstr "Koppel MinderGas-account"
 
 msgid "Export to MinderGas"
 msgstr "Exporteer naar MinderGas"
+
+msgid "MQTT"
+msgstr "MQTT"
 
 msgid "MQTT process sleep"
 msgstr "MQTT proces sleep"
@@ -1203,6 +1188,9 @@ msgstr "Voltage (gesplitst topic)"
 msgid "Ampere (split topic)"
 msgstr "Ampere (gesplitst topic)"
 
+msgid "Notifications"
+msgstr "Notificaties"
+
 msgid "App notifications"
 msgstr "App-notificaties"
 
@@ -1215,6 +1203,9 @@ msgstr "Prowl"
 msgid "Telegram"
 msgstr "Telegram"
 
+msgid "PVOutput.org"
+msgstr "PVOutput.org"
+
 msgid "Link PVOutput.org account"
 msgstr "Koppel PVOutput.org-account"
 
@@ -1224,6 +1215,9 @@ msgstr "PVOutput.org Add Status"
 msgid "PVOutput.org donator options"
 msgstr "PVOutput.org opties voor donateurs"
 
+msgid "Retention"
+msgstr "Retentie"
+
 msgid "Clean up reading"
 msgstr "Ruim metingen op"
 
@@ -1232,6 +1226,9 @@ msgstr "Pas retentie toe"
 
 msgid "Periodically delete data"
 msgstr "Verwijder periodiek gegevens"
+
+msgid "Weather"
+msgstr "Weergegevens"
 
 msgid "Keep track of outside temperatures"
 msgstr "Houd buitentemperaturen bij"
@@ -2755,6 +2752,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Some topics"
+#~ msgstr "Enkele onderwerpen"
 
 #~ msgid "Detailed instructions for configuring MQTT can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html\">Documentation</a>"
 #~ msgstr "Gedetailleerde instructies voor configureren van MQTT kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/mqtt.html\">Documentatie</a>"

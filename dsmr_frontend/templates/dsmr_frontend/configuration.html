@@ -16,35 +16,17 @@
                     {% trans "Search for a topic or setting" %}
                 </header>
                 <div class="panel-body">
-                    <div class="search_help">
-                        {% trans "Some topics" %}:
-                        {% trans "API" %},
-                        {% trans "Backend" %},
-                        {% trans "Backup" %},
-                        {% trans "Consumption" %},
-                        {% trans "Datalogger" %},
-                        {% trans "Dropbox" %},
-                        {% trans "Email" %},
-                        {% trans "Energy supplier prices" %},
-                        {% trans "Frontend" %},
-                        {% trans "Meter statistics" %},
-                        {% trans "Mindergas.nl" %},
-                        {% trans "MQTT" %},
-                        {% trans "Notifications" %},
-                        {% trans "PVOutput.org" %},
-                        {% trans "Retention" %},
-                        {% trans "Weather" %},
-                        {% trans "InfluxDB" %}.
-                    </div>
                     <div class="ui search">
                         <div class="ui icon input">
-                            <input class="prompt" type="text" placeholder="{% trans "Type here to search..." %}">
+                            <input id="search" class="prompt" type="text" placeholder="{% trans "Type here to search..." %}">
                         </div>
 
                         &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% trans "Skip search and go directly to admin" %}</a>
 
                         <div class="results"></div>
                     </div>
+
+                    <ul id="category-suggestions"></ul>
                 </div>
             </div>
         </div>
@@ -165,6 +147,24 @@
         ];
 
         $(document).ready(function () {
+            let categoryList = [];
+
+            $.each(categoryContent, function(k, v){
+                categoryList.push(v.category);
+            });
+
+            let suggestionHandle = $('#category-suggestions');
+            $.unique(categoryList)
+            $.each(categoryList, function(k ,v){
+                suggestionHandle.append('<li><a href="#" data-text="' + v + '" class="suggestion">' + v + '</a></li>')
+            })
+            $('a.suggestion').click(function(e){
+                $("#search").val(
+                    $(this).attr('data-text')
+                ).focus();
+                return false;
+            });
+
             $('.ui.search')
               .search({
                   searchDelay: 0,
