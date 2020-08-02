@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='frontendsettings',
             name='always_require_login',
-            field=models.BooleanField(default=False, help_text='Enable this to enforce login on all pages. Useful to restrict unauthorized access when hosted or reachable on the Internet.', verbose_name='Always require login'),
+            field=models.BooleanField(default=False, help_text='Enable this to enforce login on all pages. Useful to restrict unauthorized access when hosted or reachable on the Internet.', verbose_name='Force password login everywhere'),
         ),
     ]

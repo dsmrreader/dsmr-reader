@@ -798,6 +798,9 @@ msgstr "Je gebruikt een MySQL-database zonder ondersteuning voor tijdzones. Dit 
 msgid "Data retention policy is currently disabled. Please note that this may eventually cause severe performance and / or storage issues, depending on your hardware and type of disk used. Consider choosing a retention policy in the datalogger retention configuration."
 msgstr "Gegevens worden momenteel niet automatisch opgeschoond. Dit veroorzaakt mogelijk op termijn problemen qua opslag en/of performance, afhankelijk van de gebruikte hardware en fysieke opslag. Overweeg om een dataretentiebeleid in te stellen binnen de retentieconfiguratie."
 
+msgid "DSMR-reader v4.0: Added support for InfluxDB."
+msgstr "DSMR-reader v4.0: Ondersteuning voor InfluxDB toegevoegd."
+
 msgid "DSMR-reader v4.1: Added support for reading network sockets with the datalogger (e.g. when using ser2net). Both the builtin and remote datalogger now support this feature. The latter requires a reinstallation of the (remote) datalogger script."
 msgstr "DSMR-reader v4.1: Ondersteuning toegevoegd voor het uitlezen van netwerk-sockets met de datalogger (bijv. wanneer je ser2net gebruikt). Dit wordt door zowel de ingebouwde als remote datalogger ondersteund, al vereist de laatstgenoemde in dat geval wel een herinstallatie van het dataloggerscript."
 
@@ -942,8 +945,8 @@ msgstr "Naam van tarief 2 (teruglevering)"
 msgid "Defaults to 'normal tariff' or 'high tariff' returned"
 msgstr "Standaard: \"Normaal tarief of hoogtarief\" (teruglevering)"
 
-msgid "Always require login"
-msgstr "Verplicht overal inloggen"
+msgid "Force password login everywhere"
+msgstr "Forceer overal inloggen met wachtwoord"
 
 msgid "Enable this to enforce login on all pages. Useful to restrict unauthorized access when hosted or reachable on the Internet."
 msgstr "Schakel dit in om te forceren dat er altijd ingelogd moet worden voor alle pagina's. Nuttig om bijvoorbeeld onbevoegde toegang te weigeren wanneer de applicatie wordt gehost op (of bereikbaar is via) het Internet."
@@ -1056,6 +1059,9 @@ msgstr "Typ hier om te zoeken..."
 msgid "Skip search and go directly to admin"
 msgstr "Sla over en ga direct naar het beheer"
 
+msgid "Click a suggestion below for more suggestions to choose from."
+msgstr "Klik op een suggestie hieronder om meer inhoudelijke suggesties te zien."
+
 msgid "DSMR-reader API (key)"
 msgstr "DSMR-reader API (sleutel)"
 
@@ -1071,10 +1077,13 @@ msgstr "Verberg grafieken teruglevering elektriciteit"
 msgid "Hide gas graphs"
 msgstr "Verberg gasgrafieken"
 
-msgid "Daily backup"
-msgstr "Dagelijkse back-up"
+msgid "Daily backup settings"
+msgstr "Instellingen voor dagelijkse back-up's"
 
-msgid "Gzip compression level"
+msgid "Folder to backup to"
+msgstr "Bestandsmap om back-up's naar weg te schrijven"
+
+msgid "Gzip compression level used"
 msgstr "Gzip compressieniveau"
 
 msgid "Group electricity by reading"
@@ -1086,14 +1095,20 @@ msgstr "Groepeer elektriciteit per minuut"
 msgid "Group gas by hour"
 msgstr "Groepeer gas per uur"
 
+msgid "Network socket / port"
+msgstr "Netwerk socket / poort"
+
+msgid "DSMR version (telegram parser)"
+msgstr "DSMR-versie (van telegrammen)"
+
 msgid "Smarty meter"
 msgstr "Smarty meter"
 
 msgid "Fluvius meter"
 msgstr "Fluvius meter"
 
-msgid "Export backups to Dropbox"
-msgstr "Exporteer back-ups naar Dropbox"
+msgid "Dropbox integration for backups"
+msgstr "Dropbox-integratie voor back-up's"
 
 msgid "Email"
 msgstr "E-mail"
@@ -1113,9 +1128,6 @@ msgstr "Elektriciteitsprijs/kosten"
 msgid "Frontend"
 msgstr "Interface"
 
-msgid "Password protection"
-msgstr "Beveiliging met wachtwoord"
-
 msgid "Merge tariffs"
 msgstr "Voeg tarieven samen"
 
@@ -1128,8 +1140,20 @@ msgstr "InfluxDB"
 msgid "InfluxDB integration"
 msgstr "InfluxDB-integratie"
 
+msgid "InfluxDB HTTP / HTTPS"
+msgstr "InfluxDB HTTP / HTTPS"
+
+msgid "InfluxDB username / password"
+msgstr "InfluxDB gebruikersnaam / wachtwoord"
+
+msgid "InfluxDB measurement mapping"
+msgstr "InfluxDB measurement mapping"
+
 msgid "Meter statistics"
 msgstr "Meterstatistieken"
+
+msgid "Meter statistics overview"
+msgstr "Overzicht meterstatistieken"
 
 msgid "Latest telegram read"
 msgstr "Laatst gelezen telegram"
@@ -1137,17 +1161,14 @@ msgstr "Laatst gelezen telegram"
 msgid "Mindergas.nl"
 msgstr "Mindergas.nl"
 
-msgid "Link MinderGas account"
-msgstr "Koppel MinderGas-account"
+msgid "Link your MinderGas account"
+msgstr "Koppel je MinderGas-account"
 
 msgid "Export to MinderGas"
 msgstr "Exporteer naar MinderGas"
 
 msgid "MQTT"
 msgstr "MQTT"
-
-msgid "MQTT process sleep"
-msgstr "MQTT proces sleep"
 
 msgid "Quality of service / QoS"
 msgstr "Quality of service / QoS"
@@ -1197,20 +1218,20 @@ msgstr "Notificaties"
 msgid "App notifications"
 msgstr "App-notificaties"
 
-msgid "Pushover"
-msgstr "Pushover"
+msgid "Pushover app"
+msgstr "Pushover app"
 
-msgid "Prowl"
-msgstr "Prowl"
+msgid "Prowl app"
+msgstr "Prowl app"
 
-msgid "Telegram"
-msgstr "Telegram"
+msgid "Telegram (your bot)"
+msgstr "Telegram (jouw bot)"
 
 msgid "PVOutput.org"
 msgstr "PVOutput.org"
 
-msgid "Link PVOutput.org account"
-msgstr "Koppel PVOutput.org-account"
+msgid "Link your PVOutput.org account"
+msgstr "Koppel je PVOutput.org-account"
 
 msgid "PVOutput.org Add Status"
 msgstr "PVOutput.org Add Status"
@@ -2321,6 +2342,15 @@ msgstr "Stuurt een test notificatie naar je toestel (mits ingesteld)."
 msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
 msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
 
+msgid "Pushover"
+msgstr "Pushover"
+
+msgid "Prowl"
+msgstr "Prowl"
+
+msgid "Telegram"
+msgstr "Telegram"
+
 msgid "Notification service"
 msgstr "Notificatieservice"
 
@@ -2755,6 +2785,21 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Always require login"
+#~ msgstr "Verplicht overal inloggen"
+
+#~ msgid "Daily backup"
+#~ msgstr "Dagelijkse back-up"
+
+#~ msgid "Export backups to Dropbox"
+#~ msgstr "Exporteer back-ups naar Dropbox"
+
+#~ msgid "Password protection"
+#~ msgstr "Beveiliging met wachtwoord"
+
+#~ msgid "MQTT process sleep"
+#~ msgstr "MQTT proces sleep"
 
 #~ msgid "Some topics"
 #~ msgstr "Enkele onderwerpen"

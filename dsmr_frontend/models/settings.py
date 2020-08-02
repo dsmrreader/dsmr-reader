@@ -141,7 +141,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
     )
     always_require_login = models.BooleanField(
         default=False,
-        verbose_name=_('Always require login'),
+        verbose_name=_('Force password login everywhere'),
         help_text=_(
             'Enable this to enforce login on all pages. Useful to restrict unauthorized access when hosted or '
             'reachable on the Internet.'
