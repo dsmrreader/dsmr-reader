@@ -14,7 +14,7 @@ v4.x releases
 v4.2.0 - 2020-xx-xx
 -------------------
 
-- ``xxxxxxxxxxx``: xxxxxxxxxxx [`#xxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxx>`_]
+- ``Fixed``: Prevent overlapping dates in energy contracts [`#1012 <https://github.com/dennissiemensma/dsmr-reader/issues/1012>`_]
 
 
 v4.1.0 - 2020-08-03

@@ -3,6 +3,7 @@ from solo.admin import SingletonModelAdmin
 from rangefilter.filter import DateTimeRangeFilter
 
 from dsmr_backend.mixins import ReadOnlyAdminModel
+from .forms import EnergySupplierPriceForm
 from .models.consumption import ElectricityConsumption, GasConsumption
 from .models.energysupplier import EnergySupplierPrice
 from .models.settings import ConsumptionSettings
@@ -16,6 +17,7 @@ class ConsumptionSettingsAdmin(SingletonModelAdmin):
 @admin.register(EnergySupplierPrice)
 class EnergySupplierPriceAdmin(admin.ModelAdmin):
     list_display = ('description', 'start', 'end')
+    form = EnergySupplierPriceForm
 
 
 @admin.register(ElectricityConsumption)

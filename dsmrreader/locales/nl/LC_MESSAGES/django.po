@@ -339,6 +339,9 @@ msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende back-
 msgid "Consumption"
 msgstr "Verbruik"
 
+msgid "At least one other contract collides with this date range: {} ({} - {})"
+msgstr "Tenminste één ander contract conflicteert vanwege een overlappende datum: {} ({} - {})"
+
 msgid "Meter Reading electricity delivered to client (low tariff) in 0,001 kWh"
 msgstr "Meterstand van verbruikte elektriciteit (laagtarief) in stappen van 1 Watt uur"
 
