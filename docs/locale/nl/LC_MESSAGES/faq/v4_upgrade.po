@@ -69,8 +69,9 @@ msgstr ""
 "volgende systeem package::"
 
 #: ../../faq/v4_upgrade.rst:33 ../../faq/v4_upgrade.rst:84
-#: ../../faq/v4_upgrade.rst:162 ../../faq/v4_upgrade.rst:173
-#: ../../faq/v4_upgrade.rst:183 ../../faq/v4_upgrade.rst:198
+#: ../../faq/v4_upgrade.rst:129 ../../faq/v4_upgrade.rst:142
+#: ../../faq/v4_upgrade.rst:175 ../../faq/v4_upgrade.rst:185
+#: ../../faq/v4_upgrade.rst:200
 msgid "Execute the following::"
 msgstr "Voer het volgende uit::"
 
@@ -153,22 +154,10 @@ msgstr ""
 "ondersteunde env vars<../env_settings>`."
 
 #: ../../faq/v4_upgrade.rst:124
-msgid "Check the configuration with::"
-msgstr "Bekijk de configuratie net::"
-
-#: ../../faq/v4_upgrade.rst:131
-msgid "If you run into the following error::"
-msgstr "Als je de volgende fout ziett::"
-
-#: ../../faq/v4_upgrade.rst:135
-msgid "Revert the ``psycopg2`` installation above with::"
-msgstr "Zet de vorige ``psycopg2`` installatie terug met::"
-
-#: ../../faq/v4_upgrade.rst:148
 msgid "Backwards incompatible"
 msgstr "Backwards incompatible"
 
-#: ../../faq/v4_upgrade.rst:150
+#: ../../faq/v4_upgrade.rst:126
 msgid ""
 "Please note that ``DSMRREADER_PLUGINS`` is now a comma separated list. Chances "
 "are however very slim that you were using ``DSMRREADER_PLUGINS`` at all "
@@ -178,11 +167,11 @@ msgstr ""
 "overigens zeer klein dat je uberhaupt ``DSMRREADER_PLUGINS`` tot nu toe hebt "
 "gebruikt (alleen voor geavanceerde gebruikers)."
 
-#: ../../faq/v4_upgrade.rst:155
+#: ../../faq/v4_upgrade.rst:135
 msgid "5. Generate your own ``SECRET_KEY``"
 msgstr "5. Genereer je eigen ``SECRET_KEY``"
 
-#: ../../faq/v4_upgrade.rst:157
+#: ../../faq/v4_upgrade.rst:137
 msgid ""
 "Previous versions had a hardcoded value for ``SECRET_KEY``. This was fine while "
 "running DSMR-reader in your home network, but it is not recommended for public "
@@ -192,7 +181,7 @@ msgstr ""
 "DSMR-reader binnen je eigen netwerk, maar niet wanneer het publiekelijk op "
 "Internet bereikbaar is."
 
-#: ../../faq/v4_upgrade.rst:160
+#: ../../faq/v4_upgrade.rst:140
 msgid ""
 "To prevent some users from forgetting to set a custom secret key, DSMR-reader "
 "now simply requires everyone to generate a unique ``SECRET_KEY`` locally during "
@@ -203,23 +192,35 @@ msgstr ""
 "``SECRET_KEY`` genereert. Ofwel tijdens de installatie ofwel tijdens het "
 "upgraden."
 
-#: ../../faq/v4_upgrade.rst:167
+#: ../../faq/v4_upgrade.rst:147
 msgid "Check whether the script updated your ``.env`` file properly::"
 msgstr "Controleer of het script je ``.env`` goed heeft aangepast::"
 
-#: ../../faq/v4_upgrade.rst:171
+#: ../../faq/v4_upgrade.rst:151
 msgid "It should display the key generated when you execute it."
 msgstr "Het zou de gegenereerde key moeten tonen wanneer je het uitvoert."
 
-#: ../../faq/v4_upgrade.rst:178
+#: ../../faq/v4_upgrade.rst:153
+msgid "Check the configuration with::"
+msgstr "Bekijk de configuratie net::"
+
+#: ../../faq/v4_upgrade.rst:159
+msgid "If you run into the following error::"
+msgstr "Als je de volgende fout ziett::"
+
+#: ../../faq/v4_upgrade.rst:163
+msgid "Revert the ``psycopg2`` installation above with::"
+msgstr "Zet de vorige ``psycopg2`` installatie terug met::"
+
+#: ../../faq/v4_upgrade.rst:180
 msgid "6. Drop ``dsmr_mqtt``"
 msgstr "6. Verwijder ``dsmr_mqtt``"
 
-#: ../../faq/v4_upgrade.rst:180
+#: ../../faq/v4_upgrade.rst:182
 msgid "The ``dsmr_mqtt`` process has been merged with to ``dsmr_backend``."
 msgstr "Het ``dsmr_mqtt`` proces is samengevoegd met ``dsmr_backend``."
 
-#: ../../faq/v4_upgrade.rst:187
+#: ../../faq/v4_upgrade.rst:189
 msgid ""
 "Is ``dsmr_mqtt`` listed? If **not listed**, skip this chapter. Otherwise remove "
 "it::"
@@ -227,26 +228,43 @@ msgstr ""
 "Wordt ``dsmr_mqtt`` getoond? Zo niet, sla de rest van dit hoofdstuk over. Zo ja, "
 "verwijder het::"
 
-#: ../../faq/v4_upgrade.rst:191
+#: ../../faq/v4_upgrade.rst:193
 msgid "Apply changes::"
 msgstr "Pas wijzigingen toe::"
 
-#: ../../faq/v4_upgrade.rst:202
+#: ../../faq/v4_upgrade.rst:204 ../../faq/v4_upgrade.rst:221
 msgid "You should not see ``dsmr_mqtt`` anymore."
 msgstr "Je zou ``dsmr_mqtt`` niet meer moeten zien."
 
-#: ../../faq/v4_upgrade.rst:204
-msgid "Also, the other processes should be running as well again."
-msgstr "Daarnaast zouden de andere processing nu weer goed moeten draaien."
+#: ../../faq/v4_upgrade.rst:206
+msgid ""
+"Is it still listed? You might be using a legacy configuration with all processes "
+"in a single file (e.g.: ``dsmr-reader.conf``)."
+msgstr ""
+"Zie je het proces nog steeds? Dit kan gebeuren wanneer je een eerdere "
+"configuratie gebruikt waarbij alle processen in een enkel bestand staan "
+"(bijvoorbeeld: ``dsmr-reader.conf``)."
 
-#: ../../faq/v4_upgrade.rst:207
+#: ../../faq/v4_upgrade.rst:209
+msgid ""
+"Be sure to remove it and copy the other processes separately from the "
+"repository::"
+msgstr ""
+"Zorg ervoor dat je deze dan verwijdert en vervolgens alle andere processen apart "
+"kopieert van de repository::"
+
+#: ../../faq/v4_upgrade.rst:223
+msgid "Also, the other processes should be running as well again."
+msgstr "Daarnaast zouden de andere processen nu weer goed moeten draaien."
+
+#: ../../faq/v4_upgrade.rst:226
 msgid "7. Deploy"
 msgstr "7. Deploy"
 
-#: ../../faq/v4_upgrade.rst:208
+#: ../../faq/v4_upgrade.rst:227
 msgid "Finally, execute the deploy script::"
 msgstr "Tot slot, voer het deploy-script uit::"
 
-#: ../../faq/v4_upgrade.rst:213
+#: ../../faq/v4_upgrade.rst:232
 msgid "Great. You should now be on ``v4.x``!"
 msgstr "Mooi! Je zou nu op ``v4.x`` moeten zitten!"

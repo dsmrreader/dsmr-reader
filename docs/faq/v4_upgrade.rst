@@ -203,6 +203,23 @@ Execute the following::
 
 You should not see ``dsmr_mqtt`` anymore.
 
+Is it still listed?
+You might be using a legacy configuration with all processes in a single file (e.g.: ``dsmr-reader.conf``).
+
+Be sure to remove it and copy the other processes separately from the repository::
+
+    sudo rm /etc/supervisor/conf.d/dsmr-reader.conf
+
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_datalogger.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_backend.conf /etc/supervisor/conf.d/
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
+
+    sudo supervisorctl reread
+    sudo supervisorctl update
+    sudo supervisorctl restart all
+
+You should not see ``dsmr_mqtt`` anymore.
+
 Also, the other processes should be running as well again.
 
 7. Deploy
