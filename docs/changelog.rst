@@ -11,6 +11,12 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
+v4.2.0 - 2020-xx-xx
+-------------------
+
+- ``xxxxxxxxxxx``: xxxxxxxxxxx [`#xxxxxxxxxxx <https://github.com/dennissiemensma/dsmr-reader/issues/xxxxxxxxxxx>`_]
+
+
 v4.1.0 - 2020-08-03
 -------------------
 
