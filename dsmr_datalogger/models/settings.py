@@ -93,7 +93,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
 
 
 @receiver(django.db.models.signals.post_save, sender=DataloggerSettings)
-def _on_influxdb_settings_updated_signal(instance, created, raw, **kwargs):
+def _on_datalogger_settings_updated_signal(instance, created, raw, **kwargs):
     """ On settings change, require datalogger restart. """
     if created or raw:
         return
@@ -102,11 +102,9 @@ def _on_influxdb_settings_updated_signal(instance, created, raw, **kwargs):
 
 
 @receiver(datalogger_restart_required)
-def _on_backend_restart_required_signal(**kwargs):
-    datalogger_settings = DataloggerSettings.get_solo()
-    datalogger_settings.restart_required = True
-    # DO NOT CHANGE: Keep this save() due signal firing!
-    datalogger_settings.save(update_fields=['restart_required'])
+def _on_datalogger_restart_required_signal(**kwargs):
+    # Do not use save() here due to infinite looping.
+    DataloggerSettings.objects.update(restart_required=True)
 
 
 class RetentionSettings(ModelUpdateMixin, SingletonModel):
