@@ -68,8 +68,12 @@ def get_telegram_generator():
     del connection_parameters['log_telegrams']
     del connection_parameters['specifications']
 
-    # This is a generator, but we don't care. We'll just stop whenever we got what we want here.
-    return function(**connection_parameters)
+    if DataloggerSettings.get_solo().input_method == DataloggerSettings.INPUT_METHOD_IPV4:
+        return function(**connection_parameters)
+
+    # Do not use generators for serial. Fake it.
+    while True:
+        yield next(function(**connection_parameters))
 
 
 def telegram_to_reading(data):
