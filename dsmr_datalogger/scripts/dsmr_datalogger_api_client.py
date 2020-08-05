@@ -16,12 +16,14 @@ import requests
 import decouple
 
 
+logger = logging.getLogger('dsmrreader')
+
+
 def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts, timeout, **kwargs):  # noqa: C901
     """
     Opens the serial port, keeps reading until we have a full telegram and yields the result to preserve the connection.
     """
-    logging.info('[%s] Opening serial port -> %s', datetime.datetime.now(), port)
-    serial_handle = serial.Serial(
+    serial_kwargs = dict(
         port=port,
         baudrate=baudrate,
         bytesize=bytesize,
@@ -29,8 +31,10 @@ def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts
         stopbits=stopbits,
         xonxoff=xonxoff,
         rtscts=rtscts,
-        timeout=timeout,
+        timeout=timeout
     )
+    logger.info('[%s] Opening serial port %s using options: %s', datetime.datetime.now(), port, serial_kwargs)
+    serial_handle = serial.Serial(**serial_kwargs)
 
     telegram_start_seen = False
     buffer = ''
@@ -62,7 +66,6 @@ def read_serial_port(port, baudrate, bytesize, parity, stopbits, xonxoff, rtscts
             buffer += data
 
         if data.startswith('!') and telegram_start_seen:
-            # Keep connection open.
             yield buffer
 
 
@@ -72,7 +75,7 @@ def read_network_socket(host, port):
     MAX_BYTES_RECV = 1024
     MAX_BUFFER = 10 * MAX_BYTES_RECV
 
-    logging.info('[%s] Opening network socket -> %s:%d', datetime.datetime.now(), host, port)
+    logger.info('[%s] Opening network socket (%s:%d)', datetime.datetime.now(), host, port)
     socket_handle = socket.socket(
         socket.AF_INET,  # Hardcoded ipv4, for now
         socket.SOCK_STREAM
@@ -93,7 +96,7 @@ def read_network_socket(host, port):
 
         # Usually a bad sign.
         if len(buffer) > MAX_BUFFER:
-            logging.error(
+            logger.error(
                 '[%s] Cleared buffer after reaching max size of %d Bytes!',
                 datetime.datetime.now(),
                 MAX_BUFFER
@@ -118,7 +121,7 @@ def read_network_socket(host, port):
 
 def _send_telegram_to_remote_dsmrreader(telegram, api_url, api_key, timeout):
     """ Registers a telegram by simply sending it to the application with a POST request. """
-    logging.debug('[%s] Sending telegram to API: %s', datetime.datetime.now(), api_url)
+    logger.debug('[%s] Sending telegram to API: %s', datetime.datetime.now(), api_url)
     response = requests.post(
         api_url,
         headers={'Authorization': 'Token {}'.format(api_key)},
@@ -127,10 +130,10 @@ def _send_telegram_to_remote_dsmrreader(telegram, api_url, api_key, timeout):
     )
 
     if response.status_code != 201:
-        logging.error('[%s] API error: HTTP %d - %s', datetime.datetime.now(), response.status_code, response.text)
+        logger.error('[%s] API error: HTTP %d - %s', datetime.datetime.now(), response.status_code, response.text)
         return
 
-    logging.debug('[%s] API response OK: Telegram received successfully', datetime.datetime.now())
+    logger.debug('[%s] API response OK: Telegram received successfully', datetime.datetime.now())
 
 
 def _initialize_logging():
@@ -139,13 +142,14 @@ def _initialize_logging():
     if decouple.config('DATALOGGER_DEBUG_LOGGING', default=False, cast=bool):
         logging_level = logging.DEBUG
 
-    logging.getLogger().setLevel(logging_level)
+    logger.setLevel(logging_level)
+    logger.addHandler(logging.StreamHandler())
 
 
 def main():  # noqa: C901
     """ Entrypoint for command line execution only. """
     _initialize_logging()
-    logging.info('[%s] Starting...', datetime.datetime.now())
+    logger.info('[%s] Starting...', datetime.datetime.now())
 
     # Settings.
     DATALOGGER_SETTINGS = {}
@@ -187,7 +191,7 @@ def main():  # noqa: C901
         raise RuntimeError('Unsupported DATALOGGER_INPUT_METHOD')
 
     for telegram in input_function(**DATALOGGER_SETTINGS):
-        logging.debug('[%s] Telegram read: %s', datetime.datetime.now(), telegram)
+        logger.debug('[%s] Telegram read: %s', datetime.datetime.now(), telegram)
 
         for current_server_index in range(len(DATALOGGER_API_HOSTS)):
             current_api_host = DATALOGGER_API_HOSTS[current_server_index]
@@ -202,7 +206,7 @@ def main():  # noqa: C901
                     timeout=DATALOGGER_TIMEOUT,
                 )
             except Exception as error:
-                logging.exception(error)
+                logger.exception(error)
 
         time.sleep(DATALOGGER_SLEEP)
 
