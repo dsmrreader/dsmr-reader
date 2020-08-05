@@ -1,16 +1,16 @@
 from decimal import Decimal
 from unittest import mock
 
-from serial.serialutil import SerialException
 from django.utils import timezone
 from django.test import TestCase
 import pytz
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
-class TestDataloggerError(InterceptStdoutMixin, TestCase):
+class TestDataloggerError(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         """ Returns INCOMPLETE telegram. """
         return [
@@ -51,14 +51,6 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
             "!4BC6\n",
         ]
 
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock):
-        """ Fake & process an DSMR vX telegram reading. """
-        serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-
     def test_telegram_buffer_reset(self):
         """ Test whether an incomplete telegram gets dicarded. """
         self.assertFalse(DsmrReading.objects.exists())
@@ -68,33 +60,8 @@ class TestDataloggerError(InterceptStdoutMixin, TestCase):
         self._fake_dsmr_reading()
         self.assertEqual(DsmrReading.objects.count(), 1)
 
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def test_interrupt(self, serial_readline_mock, serial_open_mock):
-        """ Test whether interrupts are handled. """
-        serial_open_mock.return_value = None
 
-        # First call raises expected exception.
-        eintr_error = SerialException('read failed: [Errno 4] Interrupted system call')
-        serial_readline_mock.side_effect = [eintr_error] + self._dsmr_dummy_data()
-        self.assertFalse(DsmrReading.objects.exists())
-
-        # Second call should just return data.
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-        self.assertTrue(DsmrReading.objects.exists())
-
-        # Everything else should be reraised.
-        serial_readline_mock.side_effect = SerialException('Unexpected error from Serial')
-
-        DsmrReading.objects.all().delete()
-        self.assertFalse(DsmrReading.objects.exists())
-
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-
-        self.assertFalse(DsmrReading.objects.exists())
-
-
-class TestDataloggerCrcError(InterceptStdoutMixin, TestCase):
+class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         """ Returns invalid telegram. """
         return [
@@ -123,19 +90,14 @@ class TestDataloggerCrcError(InterceptStdoutMixin, TestCase):
             "!ABCD\n",  # <<< Invalid CRC.
         ]
 
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def test_fail(self, serial_readline_mock, serial_open_mock):
+    def test_fail(self):
         """ Fake & process an DSMR vX telegram reading. """
-        serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
-
         self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
+        self._fake_dsmr_reading()
         self.assertFalse(DsmrReading.objects.exists())
 
 
-class TestDataloggerDuplicateData(InterceptStdoutMixin, TestCase):
+class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     """ Test Iskra meter, DSMR v5.0, with somewhat duplicate data. """
     def _dsmr_dummy_data(self):
         return [
@@ -190,17 +152,6 @@ class TestDataloggerDuplicateData(InterceptStdoutMixin, TestCase):
             "!469F\r\n"
         ]
 
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock):
-        """ Fake & process an DSMR vX telegram reading. """
-        serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
-
-        self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-        self.assertTrue(DsmrReading.objects.exists())
-
     def test_reading_creation(self):
         """ Test whether dsmr_datalogger can insert a reading. """
         self.assertFalse(DsmrReading.objects.exists())
@@ -232,7 +183,7 @@ class TestDataloggerDuplicateData(InterceptStdoutMixin, TestCase):
         self.assertEqual(reading.extra_device_delivered, Decimal('123.456'))
 
 
-class TestFutureTelegrams(InterceptStdoutMixin, TestCase):
+class TestFutureTelegrams(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         return [
             "/XMX5LGBBFFB123456789\r\n",
@@ -277,16 +228,12 @@ class TestFutureTelegrams(InterceptStdoutMixin, TestCase):
         ]
 
     @mock.patch('django.utils.timezone.now')
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def test_discard_telegram_with_future_timestamp(self, serial_readline_mock, serial_open_mock, now_mock):
+    def test_discard_telegram_with_future_timestamp(self, now_mock):
         """ Telegrams with timestamps in the (far) future should be rejected. """
-        serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1, hour=9, minute=0, second=0))
 
         self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
+        self._fake_dsmr_reading()
 
         # It should be discarded.
         self.assertFalse(DsmrReading.objects.exists())

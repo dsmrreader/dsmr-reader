@@ -11,8 +11,11 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
-v4.1.1 - 2020-08-05
+v4.1.1 - 2020-08-06
 -------------------
+
+- ``Changed``: Improved datalogger debug logging [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
+- ``Changed``: Reworked datalogger connection [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
 
 - ``Fixed``: Infinite signal/process loop bug [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
 

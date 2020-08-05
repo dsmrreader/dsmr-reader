@@ -1,4 +1,3 @@
-from unittest import mock
 from datetime import datetime
 from decimal import Decimal
 
@@ -9,9 +8,10 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
-class TestDatalogger(InterceptStdoutMixin, TestCase):
+class TestDatalogger(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     """ Landis+Gyr 350 DSMR v4.0. """
     def _dsmr_dummy_data(self):
         return [
@@ -55,16 +55,6 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-1:24.4.0(1)\r\n",
             "!3F13\n",
         ]
-
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock):
-        """ Fake & process an DSMR vX telegram reading. """
-        serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
-
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-        self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
         """ Test whether dsmr_datalogger can insert a reading for Landis+Gyr 350 DSMR v4.0. """

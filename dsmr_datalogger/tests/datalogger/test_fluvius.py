@@ -10,9 +10,10 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
+from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
-class TestDatalogger(InterceptStdoutMixin, TestCase):
+class TestDatalogger(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     """ Belgium Fluvius meter. """
     def setUp(self):
         DataloggerSettings.get_solo()
@@ -48,17 +49,6 @@ class TestDatalogger(InterceptStdoutMixin, TestCase):
             "0-1:24.2.3(190821210011S)(00029.553*m3)\r\n",
             "!EF8E"
         ]
-
-    @mock.patch('serial.Serial.open')
-    @mock.patch('serial.Serial.readline')
-    def _fake_dsmr_reading(self, serial_readline_mock, serial_open_mock):
-        """ Fake & process an DSMR vX telegram reading. """
-        serial_open_mock.return_value = None
-        serial_readline_mock.side_effect = self._dsmr_dummy_data()
-
-        self.assertFalse(DsmrReading.objects.exists())
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-        self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_creation(self):
         """ Test whether dsmr_datalogger can insert a reading. """

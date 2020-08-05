@@ -138,7 +138,7 @@ Other settings (``.env``)
 
 These settings are **optional** but can be tweaked when required:
 
-- ``DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value.
+- ``DATALOGGER_TIMEOUT``: The timeout in seconds that applies for writing to the DSMR-reader API. Omit to use the default value.
 
 - ``DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value.
 

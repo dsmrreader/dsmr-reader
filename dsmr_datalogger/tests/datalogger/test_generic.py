@@ -254,8 +254,8 @@ class TestNetwork(InterceptStdoutMixin, TestCase):
             network_socket_port=23
         )
 
-    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket')
-    def test_call_read_network_socket(self, read_network_socket_mock):
-        self.assertFalse(read_network_socket_mock.called)
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
+    def test_call_read_network_socket(self, read_telegram_mock):
+        self.assertFalse(read_telegram_mock.called)
         self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-        self.assertTrue(read_network_socket_mock.called)
+        self.assertTrue(read_telegram_mock.called)
