@@ -12,6 +12,11 @@ import dsmr_datalogger.services.datalogger
 
 
 class TestServices(TestCase):
+    """
+    Pycharm find-replace for samples:
+    FIND:   \n
+    REPL:   \\r\\n",\n"
+    """
     fake_telegram = None
 
     def setUp(self):
