@@ -37,20 +37,19 @@ def get_dsmr_connection_parameters():
 
     extra_connection_parameters = {
         DataloggerSettings.INPUT_METHOD_SERIAL: dict(
-            function=dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_serial_port,
-            port=datalogger_settings.serial_port,
+            url_or_port=datalogger_settings.serial_port,
             baudrate=115200 if is_default_dsmr_protocol else 9600,
             bytesize=serial.EIGHTBITS if is_default_dsmr_protocol else serial.SEVENBITS,
             parity=serial.PARITY_NONE if is_default_dsmr_protocol else serial.PARITY_EVEN,
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
             rtscts=0,
-            timeout=20,
         ),
         DataloggerSettings.INPUT_METHOD_IPV4: dict(
-            function=dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket,
-            host=datalogger_settings.network_socket_address,
-            port=datalogger_settings.network_socket_port,
+            url_or_port='socket://{}:{}'.format(
+                datalogger_settings.network_socket_address,
+                datalogger_settings.network_socket_port
+            )
         )
     }[datalogger_settings.input_method]
 
@@ -63,13 +62,10 @@ def get_telegram_generator():
 
     # Partially reuse the remote datalogger.
     connection_parameters = get_dsmr_connection_parameters()
-    function = connection_parameters['function']
-    del connection_parameters['function']
     del connection_parameters['log_telegrams']
     del connection_parameters['specifications']
 
-    # This is a generator, but we don't care. We'll just stop whenever we got what we want here.
-    return function(**connection_parameters)
+    return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(**connection_parameters)
 
 
 def telegram_to_reading(data):

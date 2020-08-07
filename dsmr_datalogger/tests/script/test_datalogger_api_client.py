@@ -3,11 +3,12 @@ This only tests the __main__ route and methods not covered by other tests.
 """
 from unittest import mock
 import logging
-import socket
 
 from django.test import TestCase
 import requests
 import serial
+from serial import SerialException, Serial
+from serial.urlhandler.protocol_socket import Serial as ProtocolSerial
 
 import dsmr_datalogger.scripts.dsmr_datalogger_api_client
 
@@ -23,10 +24,10 @@ import dsmr_datalogger.scripts.dsmr_datalogger_api_client
 ))
 class TestScript(TestCase):
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
-    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_serial_port')
-    def test_main_serial(self, read_serial_port_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
+    def test_main_serial(self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
         """ Serial port input. """
-        read_serial_port_mock.side_effect = [
+        read_telegram_mock_mock.side_effect = [
             iter(['fake-serial-telegram']),
             StopIteration(),  # Stop loop after 1 round
         ]
@@ -34,16 +35,15 @@ class TestScript(TestCase):
         dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         # Check serial settings from file (defaults).
-        self.assertTrue(read_serial_port_mock.called)
-        self.assertEqual(read_serial_port_mock.call_args[1], dict(
-            port='/dev/X',
+        self.assertTrue(read_telegram_mock_mock.called)
+        self.assertEqual(read_telegram_mock_mock.call_args[1], dict(
+            url_or_port='/dev/X',
             baudrate=12345,
             bytesize=serial.EIGHTBITS,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
             rtscts=0,
-            timeout=0.123,
         ))
 
         # Check remote api call whether we have a telegram
@@ -61,10 +61,10 @@ class TestScript(TestCase):
         DATALOGGER_NETWORK_PORT='23',
     ))
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
-    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket')
-    def test_main_ipv4(self, read_network_socket_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
+    def test_main_ipv4(self, read_telegram_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
         """ Network socket input. """
-        read_network_socket_mock.side_effect = [
+        read_telegram_mock.side_effect = [
             iter(['fake-network-telegram']),
             StopIteration(),  # Stop loop after 1 round
         ]
@@ -72,10 +72,9 @@ class TestScript(TestCase):
         dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         # Check serial settings from file (defaults).
-        self.assertTrue(read_network_socket_mock.called)
-        self.assertEqual(read_network_socket_mock.call_args[1], dict(
-            host='127.1.1.0',
-            port=23,
+        self.assertTrue(read_telegram_mock.called)
+        self.assertEqual(read_telegram_mock.call_args[1], dict(
+            url_or_port='socket://127.1.1.0:23',
         ))
 
         # Check remote api call whether we have a telegram
@@ -88,11 +87,11 @@ class TestScript(TestCase):
         ))
 
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
-    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_serial_port')
-    def test_main_exception(self, read_serial_port_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
+    def test_main_exception(self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
         """ Exception triggered by send_telegram_to_remote_dsmrreader(). """
         send_telegram_to_remote_dsmrreader_mock.side_effect = requests.exceptions.Timeout('Fake timeout')
-        read_serial_port_mock.side_effect = [
+        read_telegram_mock_mock.side_effect = [
             iter(['fake-telegram']),
             StopIteration(),
         ]
@@ -106,13 +105,13 @@ class TestScript(TestCase):
     ))
     @mock.patch('logging.Logger.setLevel')
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
-    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_serial_port')
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
     def test_main_exception_with_debug_logging(
-            self, read_serial_port_mock, send_telegram_to_remote_dsmrreader_mock, set_level_mock, *mocks
+            self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, set_level_mock, *mocks
     ):
         """ Similar to test_main_exception(), but check DATALOGGER_DEBUG_LOGGING enabled. """
         send_telegram_to_remote_dsmrreader_mock.side_effect = requests.exceptions.Timeout('Fake timeout')
-        read_serial_port_mock.side_effect = [
+        read_telegram_mock_mock.side_effect = [
             iter(['fake-telegram']),
             StopIteration(),
         ]
@@ -125,7 +124,21 @@ class TestScript(TestCase):
         self.assertEqual(set_level_mock.call_args[0][0], logging.DEBUG)
         self.assertTrue(send_telegram_to_remote_dsmrreader_mock.called)
 
-    @mock.patch('logging.error')
+    @mock.patch.dict('os.environ', dict(
+        DATALOGGER_DEBUG_LOGGING='false',  # << Debugging disabled.
+    ))
+    @mock.patch('logging.Logger.setLevel')
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
+    def test_main_without_debug_logging(self, read_telegram_mock_mock, set_level_mock, *mocks):
+        """ Similar to test_main_exception_with_debug_logging(), but check DATALOGGER_DEBUG_LOGGING disabled. """
+        read_telegram_mock_mock.return_value = []
+
+        dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+
+        self.assertTrue(set_level_mock.called)
+        self.assertEqual(set_level_mock.call_args[0][0], logging.INFO)
+
+    @mock.patch('logging.Logger.error')
     @mock.patch('requests.post')
     def test_send_telegram_to_remote_dsmrreader(self, post_mock, error_logging_mock, *mocks):
         kwargs = dict(
@@ -195,59 +208,51 @@ class TestScriptErrors(TestCase):
         self.assertEqual(str(e.exception), 'Unsupported DATALOGGER_INPUT_METHOD')
 
 
-@mock.patch('socket.socket.connect')
-@mock.patch('socket.socket.recv')
-@mock.patch('select.select')
-class TestScriptNetworkSocket(TestCase):
-    """ Network socket method test. Serial port was already tested elsewhere. """
+@mock.patch('serial.serial_for_url')
+class TestScriptSerialSocket(TestCase):
+    """ Serial port test. """
     def _call_datalogger(self):
-        return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket('localhost', 23)
+        return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
+            url_or_port='/dev/X'
+        )
 
-    def test_read_network_socket_connect_error(self, _, __, connect_mock):
+    def test_connection_error(self, serial_for_url_mock):
         """ Connection error. """
-        connect_mock.side_effect = socket.gaierror(-2, 'Name or service not known')
+        serial_for_url_mock.side_effect = SerialException('Something happened')
 
         with self.assertRaises(RuntimeError):
             next(self._call_datalogger())
 
-    def test_read_network_socket(self, select_mock, recv_mock, *mocks):
-        recv_mock.side_effect = [
-            # Splitted over multiple recv's.
+    def test_read(self, serial_for_url_mock):
+        cli_serial = Serial()
+        cli_serial.read = mock.MagicMock(side_effect=[
+            # Splitted over multiple reads.
+            bytes('', 'utf8'),
             bytes('garbage!@*!/fake-tele', 'utf8'),
             bytes('gram!1234-f3j292jrq', 'utf8'),
-        ]
-        select_mock.side_effect = [(
-                # First poll: no network activity.
-                [],
-                [],
-                [],
-            ), (
-                # Second poll: data ready
-                ['fake'],  # The script does not check the buffer, just if there anything was returned at all.
-                [],
-                [],
-            ), (
-                # Third poll: same
-                ['fake'],
-                [],
-                [],
-            ),
-        ]
+        ])
+        serial_for_url_mock.return_value = cli_serial
 
         telegram = next(self._call_datalogger())
         self.assertEqual(telegram, '/fake-telegram!1234')
 
-    def test_read_network_socket_buffer_overflow(self, select_mock, recv_mock, *mocks):
-        # Max Bytes in script is currently 10240 chars. Just ignore recv()'s bufsize parameter and fast forward:
-        recv_mock.side_effect = [
-            bytes('A' * (10240 + 1), 'utf8'),  # This should reset the buffer
-            bytes('$/fake-telegram!1234', 'utf8'),  # This breaks endless loop
-        ]
-        select_mock.return_value = [
-            ['fake'],
-            [],
-            [],
-        ]
 
-        # We cannot assert. It's just a coverage check.
-        next(self._call_datalogger())
+@mock.patch('serial.serial_for_url')
+class TestScriptNetworkSocket(TestCase):
+    """ Network socket test. """
+    def _call_datalogger(self):
+        return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
+            url_or_port='socket://localhost:23'
+        )
+
+    def test_read(self, serial_for_url_mock):
+        protocol_serial = ProtocolSerial()
+        protocol_serial.read = mock.MagicMock(side_effect=[
+            bytes('', 'utf8'),
+            bytes('garbage!@*!/fake-tele', 'utf8'),
+            bytes('gram!1234-f3j292jrq', 'utf8'),
+        ])
+        serial_for_url_mock.return_value = protocol_serial
+
+        telegram = next(self._call_datalogger())
+        self.assertEqual(telegram, '/fake-telegram!1234')

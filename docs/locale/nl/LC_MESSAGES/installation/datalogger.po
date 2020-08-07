@@ -215,13 +215,11 @@ msgstr ""
 
 #: ../../installation/datalogger.rst:141
 msgid ""
-"``DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the "
-"serial port and/or writing to the DSMR-reader API. Omit to use the default "
-"value."
+"``DATALOGGER_TIMEOUT``: The timeout in seconds that applies for writing to the "
+"DSMR-reader API. Omit to use the default value."
 msgstr ""
 "``DATALOGGER_TIMEOUT``: De tijd in seconden dat maximaal gewacht wordt op de "
-"seriële poort en/of de DSMR-reader API. Laat weg om de standaardwaarde te "
-"gebruiken."
+"DSMR-reader API. Laat weg om de standaardwaarde te gebruiken."
 
 #: ../../installation/datalogger.rst:143
 msgid ""
