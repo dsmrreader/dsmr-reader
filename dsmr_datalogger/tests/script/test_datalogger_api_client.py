@@ -125,7 +125,24 @@ class TestScript(TestCase):
         self.assertEqual(set_level_mock.call_args[0][0], logging.DEBUG)
         self.assertTrue(send_telegram_to_remote_dsmrreader_mock.called)
 
-    @mock.patch('logging.error')
+    @mock.patch.dict('os.environ', dict(
+        DATALOGGER_DEBUG_LOGGING='false',  # << Debugging disabled.
+    ))
+    @mock.patch('logging.Logger.setLevel')
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_serial_port')
+    def test_main_without_debug_logging(
+            self, read_serial_port_mock, send_telegram_to_remote_dsmrreader_mock, set_level_mock, *mocks
+    ):
+        """ Similar to test_main_exception_with_debug_logging(), but check DATALOGGER_DEBUG_LOGGING disabled. """
+        send_telegram_to_remote_dsmrreader_mock.return_value = []
+
+        dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+
+        self.assertTrue(set_level_mock.called)
+        self.assertEqual(set_level_mock.call_args[0][0], logging.INFO)
+
+    @mock.patch('logging.Logger.error')
     @mock.patch('requests.post')
     def test_send_telegram_to_remote_dsmrreader(self, post_mock, error_logging_mock, *mocks):
         kwargs = dict(
