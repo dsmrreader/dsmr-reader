@@ -234,7 +234,7 @@ class TestScriptSerialSocket(TestCase):
             url_or_port='/dev/X',
             telegram_timeout=0.001  # This should simulate it for real.
         )
-        with self.assertRaises(StopIteration):
+        with self.assertRaises(RuntimeError):
             next(generator)
 
     def test_read(self, serial_for_url_mock):

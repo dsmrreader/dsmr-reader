@@ -40,8 +40,8 @@ def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
     while True:
         # Abort the infinite loop at some point.
         if time.time() - start_timestamp > telegram_timeout:
-            raise StopIteration(
-                'It took too long to detect a telegram (timeout: {} s). Bytes currently in buffer: {}'.format(
+            raise RuntimeError(
+                'It took too long to detect a telegram (timeout: {}s). Bytes currently in buffer: {}'.format(
                     telegram_timeout,
                     len(buffer)
                 )
