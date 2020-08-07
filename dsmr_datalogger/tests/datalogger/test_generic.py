@@ -248,6 +248,24 @@ class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
         self.assertEqual(connection_parameters['bytesize'], serial.EIGHTBITS)
         self.assertEqual(connection_parameters['parity'], serial.PARITY_NONE)
 
+    def test_dsmr_fluvius(self):
+        DataloggerSettings.get_solo().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
+
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
+        self.assertEqual(connection_parameters['baudrate'], 115200)
+        self.assertEqual(connection_parameters['bytesize'], serial.EIGHTBITS)
+        self.assertEqual(connection_parameters['parity'], serial.PARITY_NONE)
+
+    def test_dsmr_smarty(self):
+        DataloggerSettings.get_solo().update(dsmr_version=DataloggerSettings.DSMR_LUXEMBOURG_SMARTY)
+        self.assertEqual(DataloggerSettings.get_solo().dsmr_version, DataloggerSettings.DSMR_LUXEMBOURG_SMARTY)
+
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
+        self.assertEqual(connection_parameters['baudrate'], 115200)
+        self.assertEqual(connection_parameters['bytesize'], serial.EIGHTBITS)
+        self.assertEqual(connection_parameters['parity'], serial.PARITY_NONE)
+
 
 class TestNetwork(InterceptStdoutMixin, TestCase):
     """ Check whether datalogger script is called. """
