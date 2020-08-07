@@ -11,6 +11,12 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
+v4.1.1 - 2020-08-07
+-------------------
+
+- ``Fixed``:  Invalid baud rate for Fluvius [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
+
+
 v4.1.0 - 2020-08-03
 -------------------
 
