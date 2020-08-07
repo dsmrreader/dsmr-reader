@@ -31,6 +31,7 @@ def get_dsmr_connection_parameters():
     datalogger_settings = DataloggerSettings.get_solo()
     is_default_dsmr_protocol = datalogger_settings.dsmr_version == DataloggerSettings.DSMR_VERSION_4_PLUS
     connection_parameters = dict(
+        telegram_timeout=20,  # After this threshold, the datalogger will throw an exception to break the infinite loop.
         specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version],
         log_telegrams=datalogger_settings.log_telegrams,
     )

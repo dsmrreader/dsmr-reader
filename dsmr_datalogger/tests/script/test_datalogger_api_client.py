@@ -38,6 +38,7 @@ class TestScript(TestCase):
         self.assertTrue(read_telegram_mock_mock.called)
         self.assertEqual(read_telegram_mock_mock.call_args[1], dict(
             url_or_port='/dev/X',
+            telegram_timeout=0.123,
             baudrate=12345,
             bytesize=serial.EIGHTBITS,
             parity=serial.PARITY_NONE,
@@ -52,7 +53,7 @@ class TestScript(TestCase):
             api_key='test-api-key',
             api_url='https://127.0.0.1:1234/api/v1/datalogger/dsmrreading',
             telegram='fake-serial-telegram',
-            timeout=0.123
+            timeout=0.123,
         ))
 
     @mock.patch.dict('os.environ', dict(
@@ -75,6 +76,7 @@ class TestScript(TestCase):
         self.assertTrue(read_telegram_mock.called)
         self.assertEqual(read_telegram_mock.call_args[1], dict(
             url_or_port='socket://127.1.1.0:23',
+            telegram_timeout=0.123,
         ))
 
         # Check remote api call whether we have a telegram
@@ -211,17 +213,29 @@ class TestScriptErrors(TestCase):
 @mock.patch('serial.serial_for_url')
 class TestScriptSerialSocket(TestCase):
     """ Serial port test. """
-    def _call_datalogger(self):
-        return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
-            url_or_port='/dev/X'
-        )
-
     def test_connection_error(self, serial_for_url_mock):
         """ Connection error. """
         serial_for_url_mock.side_effect = SerialException('Something happened')
 
+        generator = dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
+            url_or_port='/dev/X',
+            telegram_timeout=999
+        )
         with self.assertRaises(RuntimeError):
-            next(self._call_datalogger())
+            next(generator)
+
+    def test_telegram_timeout(self, serial_for_url_mock):
+        """ It took too long to detect a telegram. """
+        cli_serial = Serial()
+        cli_serial.read = mock.MagicMock(return_value=bytes('!@#$%', 'utf8'))  # Garbage data will never match telegram
+        serial_for_url_mock.return_value = cli_serial
+
+        generator = dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
+            url_or_port='/dev/X',
+            telegram_timeout=0.001  # This should simulate it for real.
+        )
+        with self.assertRaises(StopIteration):
+            next(generator)
 
     def test_read(self, serial_for_url_mock):
         cli_serial = Serial()
@@ -233,7 +247,11 @@ class TestScriptSerialSocket(TestCase):
         ])
         serial_for_url_mock.return_value = cli_serial
 
-        telegram = next(self._call_datalogger())
+        generator = dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
+            url_or_port='/dev/X',
+            telegram_timeout=5
+        )
+        telegram = next(generator)
         self.assertEqual(telegram, '/fake-telegram!1234')
 
 
@@ -241,9 +259,7 @@ class TestScriptSerialSocket(TestCase):
 class TestScriptNetworkSocket(TestCase):
     """ Network socket test. """
     def _call_datalogger(self):
-        return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
-            url_or_port='socket://localhost:23'
-        )
+        return
 
     def test_read(self, serial_for_url_mock):
         protocol_serial = ProtocolSerial()
@@ -254,5 +270,9 @@ class TestScriptNetworkSocket(TestCase):
         ])
         serial_for_url_mock.return_value = protocol_serial
 
-        telegram = next(self._call_datalogger())
+        generator = dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
+            url_or_port='socket://localhost:23',
+            telegram_timeout=5
+        )
+        telegram = next(generator)
         self.assertEqual(telegram, '/fake-telegram!1234')

@@ -17,10 +17,10 @@ import decouple
 logger = logging.getLogger('dsmrreader')
 
 
-def read_telegram(url_or_port, **serial_kwargs):  # noqa: C901
+def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
     """ Opens a serial/network connection and reads it until we have a full telegram. Yields the result """
     MAX_BYTES_PER_READ = 512
-    MAX_READ_TIMEOUT = 0.25
+    MAX_READ_TIMEOUT = 0.25  # Will cancel read() if it does not receive MAX_BYTES_PER_READ Bytes in time.
 
     logger.info(
         '[%s] Opening serial connection "%s" using options: %s',
@@ -35,8 +35,18 @@ def read_telegram(url_or_port, **serial_kwargs):  # noqa: C901
         raise RuntimeError('Failed to connect: {}', error)
 
     buffer = ''
+    start_timestamp = time.time()
 
     while True:
+        # Abort the infinite loop at some point.
+        if time.time() - start_timestamp > telegram_timeout:
+            raise StopIteration(
+                'It took too long to detect a telegram (timeout: {} s). Bytes currently in buffer: {}'.format(
+                    telegram_timeout,
+                    len(buffer)
+                )
+            )
+
         incoming_bytes = serial_handle.read(MAX_BYTES_PER_READ)
         logger.debug('[%s] Read %d Byte(s)', datetime.datetime.now(), len(incoming_bytes))
 
@@ -104,7 +114,9 @@ def main():  # noqa: C901
     if len(DATALOGGER_API_HOSTS) != len(DATALOGGER_API_KEYS):
         raise RuntimeError('The number of API_HOSTS and API_KEYS given do not match each other')
 
-    serial_kwargs = {}
+    serial_kwargs = dict(
+        telegram_timeout=DATALOGGER_TIMEOUT,
+    )
 
     if DATALOGGER_INPUT_METHOD == 'serial':
         serial_kwargs.update(dict(
