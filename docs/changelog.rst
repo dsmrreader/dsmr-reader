@@ -16,7 +16,6 @@ v4.2.0 - 2020-xx-xx
 - ``Changed``: Improved datalogger debug logging [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
 - ``Changed``: Reworked datalogger connection [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
 
-- ``Fixed``: Infinite signal/process loop bug [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
 - ``Fixed``: Prevent overlapping dates in energy contracts [`#1012 <https://github.com/dennissiemensma/dsmr-reader/issues/1012>`_]
 
 
