@@ -14,7 +14,8 @@ v4.x releases
 v4.1.1 - 2020-08-07
 -------------------
 
-- ``Fixed``:  Invalid baud rate for Fluvius [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
+- ``Fixed``:  Fixed infite signal looping [`#1066 <https://github.com/dennissiemensma/dsmr-reader/issues/1066>`_]
+- ``Fixed``:  Invalid baud rate for Fluvius (and Smarty) [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
 
 
 v4.1.0 - 2020-08-03
