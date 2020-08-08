@@ -237,31 +237,13 @@ class TestScriptSerialSocket(TestCase):
         with self.assertRaises(RuntimeError):
             next(generator)
 
-    def test_telegram_extract_fail(self, serial_for_url_mock):
-        protocol_serial = ProtocolSerial()
-        protocol_serial.read = mock.MagicMock(side_effect=[
-            bytes('', 'utf8'),
-            bytes('garbage/missing-linefeed', 'utf8'),
-            bytes('!1234', 'utf8'),
-        ])
-        serial_for_url_mock.return_value = protocol_serial
-
-        generator = dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
-            url_or_port='socket://localhost:23',
-            telegram_timeout=5
-        )
-        with self.assertRaises(RuntimeError) as e:
-            next(generator)
-
-        self.assertEqual(str(e.exception), 'Unable to extract telegram after matching it')
-
     def test_read(self, serial_for_url_mock):
         cli_serial = Serial()
         cli_serial.read = mock.MagicMock(side_effect=[
             # Splitted over multiple reads.
             bytes('', 'utf8'),
-            bytes("garbage!@*!/fake-telegram\n", 'utf8'),
-            bytes('!1234', 'utf8'),
+            bytes("garbage!@*!/fake-", 'utf8'),
+            bytes('telegram!1234', 'utf8'),
         ])
         serial_for_url_mock.return_value = cli_serial
 
@@ -270,7 +252,7 @@ class TestScriptSerialSocket(TestCase):
             telegram_timeout=5
         )
         telegram = next(generator)
-        self.assertEqual(telegram, "/fake-telegram\n!1234")
+        self.assertEqual(telegram, "/fake-telegram!1234")
 
 
 @mock.patch('serial.serial_for_url')
@@ -283,8 +265,8 @@ class TestScriptNetworkSocket(TestCase):
         protocol_serial = ProtocolSerial()
         protocol_serial.read = mock.MagicMock(side_effect=[
             bytes('', 'utf8'),
-            bytes("garbage!@*!/fake-telegram\n", 'utf8'),
-            bytes('!1234', 'utf8'),
+            bytes("garbage!@*!/fake-", 'utf8'),
+            bytes('telegram!1234', 'utf8'),
         ])
         serial_for_url_mock.return_value = protocol_serial
 
@@ -293,4 +275,4 @@ class TestScriptNetworkSocket(TestCase):
             telegram_timeout=5
         )
         telegram = next(generator)
-        self.assertEqual(telegram, "/fake-telegram\n!1234")
+        self.assertEqual(telegram, "/fake-telegram!1234")

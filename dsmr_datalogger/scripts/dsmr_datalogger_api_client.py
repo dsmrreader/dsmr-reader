@@ -41,8 +41,7 @@ def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
         # Abort the infinite loop at some point.
         if time.time() - start_timestamp > telegram_timeout:
             raise RuntimeError(
-                'It took too long to detect a telegram (timeout: {}s). Bytes currently in buffer: {}'.format(
-                    telegram_timeout,
+                'It took too long to detect a telegram. Check connection params. Bytes currently in buffer: {}'.format(
                     len(buffer)
                 )
             )
@@ -59,34 +58,13 @@ def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
         buffer += incoming_data
 
         # Should work for 99% of the telegrams read. The checksum bits are optional due to legacy meters omitting them.
-        match = re.search(r'(/.+![A-Z0-9]{0,4})', buffer, re.DOTALL)
+        match = re.search(r'(/[^/]+![A-Z0-9]{0,4})', buffer, re.DOTALL)
 
         if not match:
             continue
 
-        telegram = _extract_telegram(matched_data=match.group(1))
         buffer = ''
-        yield telegram
-
-
-def _extract_telegram(matched_data):
-    """
-    Extracts the telegram from the (matched) data. Removes any duplicate or incomplete telegrams. Does NOT verify CRC!
-    """
-    LF = "\n"
-    telegram_lines = []
-
-    for current_line in matched_data.split(LF):
-        if current_line.startswith('/'):
-            # This will reset. E.g. two telegrams in one dataset or partially read telegram duplicates.
-            telegram_lines = []
-
-        telegram_lines.append(current_line)
-
-        if current_line.startswith('!'):
-            return LF.join(telegram_lines)
-
-    raise RuntimeError('Unable to extract telegram after matching it')
+        yield match.group(1)
 
 
 def _send_telegram_to_remote_dsmrreader(telegram, api_url, api_key, timeout):
