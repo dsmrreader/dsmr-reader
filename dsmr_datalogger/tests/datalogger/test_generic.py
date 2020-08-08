@@ -260,20 +260,3 @@ class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
         self.assertEqual(connection_parameters['baudrate'], 115200)
         self.assertEqual(connection_parameters['bytesize'], serial.EIGHTBITS)
         self.assertEqual(connection_parameters['parity'], serial.PARITY_NONE)
-
-
-class TestNetwork(InterceptStdoutMixin, TestCase):
-    """ Check whether datalogger script is called. """
-    def setUp(self):
-        DataloggerSettings.get_solo()
-        DataloggerSettings.objects.update(
-            input_method=DataloggerSettings.INPUT_METHOD_IPV4,
-            network_socket_address='localhost',
-            network_socket_port=23
-        )
-
-    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_network_socket')
-    def test_call_read_network_socket(self, read_network_socket_mock):
-        self.assertFalse(read_network_socket_mock.called)
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
-        self.assertTrue(read_network_socket_mock.called)
