@@ -20,6 +20,13 @@ v4.2.0 - 2020-xx-xx
 - ``Fixed``: Prevent overlapping dates in energy contracts [`#1012 <https://github.com/dennissiemensma/dsmr-reader/issues/1012>`_]
 
 
+v4.1.1 - 2020-08-07
+-------------------
+
+- ``Fixed``:  Fixed infite signal looping [`#1066 <https://github.com/dennissiemensma/dsmr-reader/issues/1066>`_]
+- ``Fixed``:  Invalid baud rate for Fluvius (and Smarty) [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
+
+
 v4.1.0 - 2020-08-03
 -------------------
 
@@ -68,7 +75,7 @@ v4.0.0 - 2020-07-27
 v3.x releases
 ^^^^^^^^^^^^^
 
-v3.12.0 - 2020-07-31
+v3.12.0 - 2020-08-08
 --------------------
 
 .. warning::
