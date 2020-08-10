@@ -23,7 +23,9 @@ In this example the ip address is ``192.168.178.150``. If possible, you should a
 Data preservation & backups
 ---------------------------
 
-:doc:`More information can be found here<data_integrity>`.
+.. seealso::
+
+    :doc:`More information can be found here<data_integrity>`.
 
 
 Reboot test

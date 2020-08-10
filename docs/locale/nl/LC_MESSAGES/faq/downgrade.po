@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../faq/downgrade.rst:2
+msgid "FAQ: Downgrading the application"
+msgstr "FAQ: Applicatie downgraden"
+
+#: ../../faq/downgrade.rst:4
+msgid ""
+"If for some reason you need to downgrade the application, you will need "
+"to:"
+msgstr ""
+"Wanneer je om wat voor reden dan ook de applicatie moet downgraden, dan "
+"zul je:"
+
+#: ../../faq/downgrade.rst:6
+msgid "unapply database migrations."
+msgstr "de databasemigraties moeten terugdraaien."
+
+#: ../../faq/downgrade.rst:7
+msgid "switch the application code version to a previous release."
+msgstr "de applicatiecode moeten wisselen naar een vorige versie."
+
+#: ../../faq/downgrade.rst:12
+msgid ""
+"First, **please make sure you have a recent backup of your database**! :"
+"doc:`More information about backups can be found here<../"
+"data_integrity>`."
+msgstr ""
+"Allereerst, **zorg ervoor dat je een recente backup hebt van je "
+"database**! :doc:`Meer informatie over back-ups vind je hier<../"
+"data_integrity>`."
+
+#: ../../faq/downgrade.rst:15
+msgid ""
+"Each release `has it's database migrations locked<https://github.com/"
+"dennissiemensma/dsmr-reader/tree/v4/dsmrreader/provisioning/"
+"downgrade>`. You should execute the script of the version you wish to "
+"downgrade to. And the switch the code to the release."
+msgstr ""
+"Elke release `heeft z'n eigen databasemigraties vastgelegd<https://"
+"github.com/dennissiemensma/dsmr-reader/tree/v4/dsmrreader/provisioning/"
+"downgrade>`. Je zult het script moeten uitvoer voor de release waar je "
+"naar toe wilt. En vervolgens de codebase wisselen naar dezelfde release."
+
+#: ../../faq/downgrade.rst:18
+msgid "For example ``v4.0``::"
+msgstr "Bijvoorbeeld ``v4.0``::"
+
+#: ../../faq/downgrade.rst:27
+msgid "Unapplying the database migrations may take a while."
+msgstr ""
+"Het terugdraaien van databasemigraties kan wat tijd in beslag nemen."
+
+#: ../../faq/downgrade.rst:29
+msgid "You should now be on the targeted release."
+msgstr "Je zou nu op de gewenste release moeten zitten."

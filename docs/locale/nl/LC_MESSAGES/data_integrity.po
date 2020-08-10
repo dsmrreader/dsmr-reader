@@ -74,11 +74,15 @@ msgstr ""
 "DSMR-reader heeft ondersteuning voor automatische back-ups. Echter, "
 "gezien deze op dezelfde opslag staan, kunnen deze ook corrupt raken."
 
-#: ../../data_integrity.rst:26
+#: ../../data_integrity.rst:24
+msgid "By default backups are created and written to::"
+msgstr "Standaard worden back-ups hier naar toe geschreven::"
+
+#: ../../data_integrity.rst:30
 msgid "Prevention"
 msgstr "Preventie"
 
-#: ../../data_integrity.rst:27
+#: ../../data_integrity.rst:31
 msgid ""
 "The only thing you can do, is make sure to have your backups stored "
 "somewhere else, once in a while. Using Dropbox to sync your backups does "
@@ -88,7 +92,7 @@ msgstr ""
 "up's ergens anders heen kopieert. Het gebruik van Dropbox garandeert ook "
 "geen bescherming!"
 
-#: ../../data_integrity.rst:32
+#: ../../data_integrity.rst:36
 msgid ""
 "If you are more technical savy, you could opt to either install the "
 "database or the entire application on a server with storage that tends "
@@ -100,7 +104,7 @@ msgstr ""
 "waarbij de opslag minder last heeft van slijtage. Daarmee gebruik je de "
 "RaspberryPi als remote datalogger, wat een hoop problemen kan voorkomen."
 
-#: ../../data_integrity.rst:35
+#: ../../data_integrity.rst:39
 msgid ""
 ":doc:`More information about using a remote datalogger here<installation/"
 "datalogger>`."
@@ -108,11 +112,11 @@ msgstr ""
 ":doc:`Meer informatie over het gebruik van een remote datalogger is hier "
 "te vinden<installation/datalogger>`."
 
-#: ../../data_integrity.rst:39
+#: ../../data_integrity.rst:43
 msgid "Pitfalls"
 msgstr "Valkuilen"
 
-#: ../../data_integrity.rst:40
+#: ../../data_integrity.rst:44
 msgid ""
 "SD cards' lifespan in this project vary from several weeks to some "
 "years, depending on the quality of the storage and the interval of "
@@ -122,7 +126,7 @@ msgstr ""
 "afhankelijk van de kwaliteit van deze en ook van de hoeveelheid "
 "telegrammen die je slimme meter stuurt."
 
-#: ../../data_integrity.rst:41
+#: ../../data_integrity.rst:45
 msgid ""
 "Backups are created daily, but rotated weekly! So it's possible that, at "
 "some point, the backups get corrupted as well since they're overwritten "

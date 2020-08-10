@@ -21,6 +21,10 @@ Backups
 -------
 DSMR-reader does support automated backups, but since they are still stored on the same volatile storage, they can be corrupted as well.
 
+By default backups are created and written to::
+
+    /home/dsmr/dsmr-reader/backups/
+
 
 Prevention
 ----------

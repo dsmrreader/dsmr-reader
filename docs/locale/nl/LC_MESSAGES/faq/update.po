@@ -26,13 +26,13 @@ msgstr ""
 
 #: ../../faq/update.rst:8
 msgid ""
-"Before updating, **please make sure you have a recent backup of your "
-"database**! :doc:`More information about backups can be found here<../"
-"application>`."
+"First, **please make sure you have a recent backup of your database**! :"
+"doc:`More information about backups can be found here<../"
+"data_integrity>`."
 msgstr ""
-"Voordat je bijwerkt, **zorg ervoor dat je in ieder geval een recente "
-"back-up van je database hebt**! :doc:`Meer informatie over back-ups kun "
-"je hier vinden<../application>`."
+"Allereerst, **zorg ervoor dat je een recente backup hebt van je "
+"database**! :doc:`Meer informatie over back-ups vind je hier<../"
+"data_integrity>`."
 
 #: ../../faq/update.rst:10
 msgid ""

@@ -11,8 +11,8 @@ DSMR Reader's documentation
    requirements
    data_integrity
    troubleshooting
-   env_settings
    faq
+   env_settings
 
    installation
    installation/restore
@@ -38,6 +38,7 @@ DSMR Reader's documentation
    admin/pvoutput
 
    faq/update
+   faq/downgrade
    faq/data_throughput
    faq/restart_processes
    faq/database

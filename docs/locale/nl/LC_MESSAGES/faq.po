@@ -32,35 +32,43 @@ msgstr ""
 "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan "
 "vooral niet om om hulp te vragen."
 
-#: ../../faq.rst:13
+#: ../../faq.rst:15
 msgid ""
 "`Create an issue at Github <https://github.com/dennissiemensma/dsmr-reader/"
-"issues/new>`_"
+"issues/new>`_."
 msgstr ""
 "`Maak een issue aan op Github <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/new>`_"
+"reader/issues/new>`_."
 
-#: ../../faq.rst:17
+#: ../../faq.rst:19
 msgid "How can I update my application?"
 msgstr "Hoe kan ik mijn applicatie bijwerken?"
 
-#: ../../faq.rst:19
-msgid ":doc:`See for instructions here <faq/update>`."
-msgstr ":doc:`Zie hier voor instructies<faq/update>`."
-
 #: ../../faq.rst:23
+msgid ":doc:`More information can be found here <faq/update>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/update>`."
+
+#: ../../faq.rst:27
+msgid "How can I downgrade my application?"
+msgstr "Hoe kan ik mijn applicatie downgraden?"
+
+#: ../../faq.rst:31
+msgid ":doc:`More information can be found here <faq/downgrade>`."
+msgstr ":doc:`Meer informatie kun je hier terugvindens<faq/update>`."
+
+#: ../../faq.rst:35
 msgid "How can I move the database location?"
 msgstr "Hoe kan ik de locatie van de gegevensopslag veranderen?"
 
-#: ../../faq.rst:24
-msgid ":doc:`See for instructions here <faq/database>`."
-msgstr ":doc:`Zie hier voor instructies<faq/database>`."
+#: ../../faq.rst:39
+msgid ":doc:`More information can be found here <faq/database>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/database>`."
 
-#: ../../faq.rst:28
+#: ../../faq.rst:43
 msgid "Recalculate prices retroactively"
 msgstr "Prijzen opnieuw berekenen met terugwerkende kracht"
 
-#: ../../faq.rst:29
+#: ../../faq.rst:44
 msgid ""
 "*I've adjusted my energy prices but there are no changes! How can I "
 "regenerate them with my new prices?*"
@@ -68,15 +76,15 @@ msgstr ""
 "*Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! "
 "Hoe kan ik de nieuwe prijzen doorvoeren?*"
 
-#: ../../faq.rst:31
+#: ../../faq.rst:46
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../faq.rst:38
+#: ../../faq.rst:53
 msgid "I'm not seeing any gas readings"
 msgstr "Ik zie geen gasverbruik"
 
-#: ../../faq.rst:40
+#: ../../faq.rst:55
 msgid ""
 "Please make sure that your meter supports reading gas consumption and that "
 "you've waited for a few hours for any graphs to render. The gas meter "
@@ -88,100 +96,103 @@ msgstr ""
 "sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-"
 "pagina geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:46
+#: ../../faq.rst:61
 msgid "How do I restore a database backup?"
 msgstr "Hoe zet ik een databaseback-up terug?"
 
-#: ../../faq.rst:48
-msgid ":doc:`See for instructions here <installation/restore>`."
-msgstr ":doc:`Zie hier voor instructies<installation/restore>`."
+#: ../../faq.rst:65
+msgid ":doc:`More information can be found here <installation/restore>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<installation/restore>`."
 
-#: ../../faq.rst:52
+#: ../../faq.rst:69
 msgid "How do I enable timezone support for MySQL?"
 msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
-#: ../../faq.rst:54
+#: ../../faq.rst:73
 msgid ""
 "`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-"
 "sql.html>`_ for more information about how to enable timezone support on "
-"MySQL. On recent versions it should be as simple as executing the following "
-"command as root/sudo user::"
+"MySQL."
 msgstr ""
 "`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-"
 "tzinfo-to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op "
-"MySQL. Op recente versies is het een kwestie van onderstaand commando "
-"uitvoeren als root/sudo-gebruiker::"
+"MySQL."
 
-#: ../../faq.rst:61
+#: ../../faq.rst:75
+msgid ""
+"On recent versions it should be as simple as executing the following "
+"command as root/sudo user::"
+msgstr ""
+"Op recente versies kun je simpelweg het volgende commando als root/sudo-"
+"gebruiker uitvoeren::"
+
+#: ../../faq.rst:81
 msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
 msgstr ""
 "Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of "
 "hoger?"
 
-#: ../../faq.rst:63
-msgid ":doc:`See for instructions here <mqtt>`."
-msgstr ":doc:`Zie hier voor instructies<mqtt>`."
+#: ../../faq.rst:85
+msgid ":doc:`More information can be found here <mqtt>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<mqtt>`."
 
-#: ../../faq.rst:67
+#: ../../faq.rst:89
 msgid "How do I uninstall DSMR-reader?"
 msgstr "Hoe deinstalleer ik DSMR-reader?"
 
-#: ../../faq.rst:69
-msgid ":doc:`See for instructions here <faq/uninstall>`."
-msgstr ":doc:`Zie hier voor instructies<faq/uninstall>`."
+#: ../../faq.rst:93
+msgid ":doc:`More information can be found here <faq/uninstall>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/uninstall>`."
 
-#: ../../faq.rst:73
+#: ../../faq.rst:97
 msgid "How can I use the datalogger only and forward the telegrams?"
 msgstr ""
 "Hoe kan ik alleen de datalogger gebruiken voor het doorsturen van "
 "telegrammen?"
 
-#: ../../faq.rst:75
-msgid ""
-"See :doc:`these datalogger instructions<installation/datalogger>` for more "
-"information."
-msgstr ""
-"Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor meer "
-"informatie."
+#: ../../faq.rst:101
+msgid ":doc:`More information can be found here <installation/datalogger>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<installation/restore>`."
 
-#: ../../faq.rst:79
+#: ../../faq.rst:105
 msgid "How can I check the logfiles?"
 msgstr "How kan ik de logfiles bekijken?"
 
-#: ../../faq.rst:81
-msgid ":doc:`See for instructions here <troubleshooting>`."
-msgstr ":doc:`Zie hier voor instructies<troubleshooting>`."
+#: ../../faq.rst:109
+msgid ":doc:`More information can be found here <troubleshooting>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<troubleshooting>`."
 
-#: ../../faq.rst:85
+#: ../../faq.rst:113
 msgid "How can I restart the application or processes?"
 msgstr "Hoe de applicatie of processen herstarten?"
 
-#: ../../faq.rst:87
-msgid ":doc:`See for instructions here <faq/restart_processes>`."
-msgstr ":doc:`Zie hier voor instructies<faq/restart_processes>`."
+#: ../../faq.rst:117
+msgid ":doc:`More information can be found here <faq/restart_processes>`."
+msgstr ""
+":doc:`Meer informatie kun je hier terugvinden<faq/restart_processes>`."
 
-#: ../../faq.rst:91
+#: ../../faq.rst:121
 msgid "How do I fix errors such as ``DETAIL: Key (id)=(123) already exists``?"
 msgstr "Hoe los ik fouten op zoals ``DETAIL: Key (id)=(123) already exists``?"
 
-#: ../../faq.rst:93
+#: ../../faq.rst:123
 msgid ""
 "This depends on the situation, but you can always try this yourself first::"
 msgstr ""
 "Het hangt af van de situatie, maar je kunt het volgende sowieso zelf eerst "
 "proberen::"
 
-#: ../../faq.rst:99
+#: ../../faq.rst:129
 msgid "If it does not resolve your issue, `ask for support <#i-need-help>`_."
 msgstr ""
 "Wanneer dat het probleem niet oplost,  `vraag om ondersteuning <#i-need-"
 "help>`_."
 
-#: ../../faq.rst:103
+#: ../../faq.rst:133
 msgid "I've changed to a different smart meter"
 msgstr "Ik ben van slimme meter gewisseld"
 
-#: ../../faq.rst:104
+#: ../../faq.rst:134
 msgid ""
 "Sometimes, when relocating or due to replacement of your meter, the meter "
 "positions read by DSMR-reader will cause invalid data (e.g.: big gaps or "
@@ -194,19 +205,24 @@ msgstr ""
 "voor bij de dag zelf en niet bij de dagen erna. Daarom zul je de gegevens "
 "van de foutieve dag zelf moeten aanpassen."
 
-#: ../../faq.rst:107
+#: ../../faq.rst:137
 msgid ""
 "The day after, you should be able to manually adjust any invalid Day or "
-"Hour Statistics in the admin interface for the invalid day."
+"Hour Statistics :doc:`in the admin interface<configuration>` for the "
+"invalid day."
 msgstr ""
-"De dag erna kun je dit zelf weer rechtzetten voor de foutieve dag, bij de "
-"Dag- of Uurtotalen in de admin omgeving."
+"De dag erna kun je dit zelf weer rechtzetten via de Dag- of Uurtotalen, :"
+"doc:`in de admin-configuratie<configuration>`, voor de betreffende dag."
 
-#: ../../faq.rst:111
+#: ../../faq.rst:141
 msgid "How can I create the (super)user or update its password?"
 msgstr "Hoe kan ik de (admin)user aanmaken of het wachtwoord wijzigen?"
 
-#: ../../faq.rst:113
+#: ../../faq.rst:145
+msgid ":doc:`Env Settings<env_settings>`."
+msgstr ":doc:`Env-instellingen<env_settings>`."
+
+#: ../../faq.rst:147
 msgid ""
 "Configure ``DSMR_USER`` and ``DSMR_PASSWORD`` of the :doc:`Env "
 "Settings<env_settings>`."
@@ -214,14 +230,21 @@ msgstr ""
 "Stel ``DSMR_USER`` en ``DSMR_PASSWORD`` in via de :doc:`Env-"
 "instellingen<env_settings>`."
 
-#: ../../faq.rst:115
+#: ../../faq.rst:149
 msgid "Now execute::"
 msgstr "Voer uit::"
 
-#: ../../faq.rst:120
+#: ../../faq.rst:154
 msgid ""
 "The user should either be created or the existing user should have its "
 "password updated."
 msgstr ""
 "De gebruiker moet nu ofwel aangemaakt zijn ofwel het wachtwoord is "
 "bijgewerkt."
+
+#~ msgid ""
+#~ "See :doc:`these datalogger instructions<installation/datalogger>` for "
+#~ "more information."
+#~ msgstr ""
+#~ "Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor "
+#~ "meer informatie."
