@@ -35,6 +35,9 @@ Or to restart them all simultaneously::
 
     sudo supervisorctl restart all
 
+Log files
+---------
+
 If this does not resolve your issue, check the logfiles for more information:
 
 +----------------+----------------------------------------------------------------------------------+
