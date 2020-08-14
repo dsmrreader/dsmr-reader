@@ -48,7 +48,7 @@ Execute::
     
     # Virtual env
     sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --system-site-packages --python python3
+    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --python python3
     sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
 
     # Requirements

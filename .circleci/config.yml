@@ -65,7 +65,7 @@ commands:
                       sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-virtualenv
 
                       mkdir -p ~/.virtualenvs/
-                      virtualenv ~/.virtualenvs/dsmr-reader --system-site-packages --python python3
+                      virtualenv ~/.virtualenvs/dsmr-reader --python python3
                       . ~/.virtualenvs/dsmr-reader/bin/activate
 
                       pip3 install --upgrade pip

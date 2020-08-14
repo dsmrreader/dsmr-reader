@@ -39,7 +39,7 @@ Execute the following::
     cd ~
     mv .virtualenvs/dsmrreader .virtualenvs/v3-dsmrreader
 
-    virtualenv /home/dsmr/.virtualenvs/dsmrreader --system-site-packages --python python3
+    virtualenv /home/dsmr/.virtualenvs/dsmrreader --python python3
 
     # Check Python version. Should be v3.6.x or higher:
     source ~/.virtualenvs/dsmrreader/bin/activate
@@ -53,7 +53,7 @@ Execute the following::
 
     For example::
 
-        virtualenv /home/dsmr/.virtualenvs/dsmrreader --system-site-packages --python python3.6
+        virtualenv /home/dsmr/.virtualenvs/dsmrreader --python python3.6
 
 .. note::
 
