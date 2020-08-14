@@ -142,7 +142,7 @@ Although it's just a folder inside our user's homedir, it's very effective as it
 
 - Create a new virtualenv, we usually use the same name for it as the application or project::
 
-    virtualenv ~/.virtualenvs/dsmrreader --python python3
+    virtualenv ~/.virtualenvs/dsmrreader --system-site-packages --python python3
 
 .. note::
 
