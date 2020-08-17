@@ -63,8 +63,11 @@ def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
         if not match:
             continue
 
-        buffer = ''
         yield match.group(1)
+
+        # Reset for next iteration.
+        buffer = ''
+        start_timestamp = time.time()
 
 
 def _send_telegram_to_remote_dsmrreader(telegram, api_url, api_key, timeout):
