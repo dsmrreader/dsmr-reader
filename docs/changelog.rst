@@ -19,6 +19,7 @@ v4.2.0 - 2020-xx-xx
 
 - ``Changed``: Improved datalogger debug logging [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
 - ``Changed``: Reworked datalogger connection [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]
+- ``Changed``: Upgrade to Django 3.1 (includes new sidebar in admin) [`#1082 <https://github.com/dennissiemensma/dsmr-reader/issues/1082>`_]
 
 - ``Fixed``: Prevent overlapping dates in energy contracts [`#1012 <https://github.com/dennissiemensma/dsmr-reader/issues/1012>`_]
 
