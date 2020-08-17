@@ -267,6 +267,7 @@ class TestScriptNetworkSocket(TestCase):
             bytes('', 'utf8'),
             bytes("garbage!@*!/fake-", 'utf8'),
             bytes('telegram!1234', 'utf8'),
+            bytes("/other-telegram!5678", 'utf8')
         ])
         serial_for_url_mock.return_value = protocol_serial
 
@@ -276,3 +277,7 @@ class TestScriptNetworkSocket(TestCase):
         )
         telegram = next(generator)
         self.assertEqual(telegram, "/fake-telegram!1234")
+
+        # Read again for second telegram.
+        telegram = next(generator)
+        self.assertEqual(telegram, "/other-telegram!5678")
