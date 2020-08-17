@@ -690,6 +690,30 @@ msgstr "Het meest recente uitgelezen telegram. N.B.: Alleen het laatste telegram
 msgid "DSMR Meter statistics (read only)"
 msgstr "Meterstatistieken (alleen lezen)"
 
+msgid "Created at"
+msgstr "Aangemaakt op"
+
+msgid "Timestamp indicating when the change was logged"
+msgstr "Tijdstip wanneer de wijziging was gelogd"
+
+msgid "Field"
+msgstr "Veldnaam"
+
+msgid "The name of the statistics field that changed"
+msgstr "De naam van het gewijzigde veld"
+
+msgid "Old value"
+msgstr "Oude waarde"
+
+msgid "New value"
+msgstr "Nieuwe waard"
+
+msgid "DSMR Meter statistics change"
+msgstr "Meterstatistieken wijziging"
+
+msgid "DSMR Meter statistics changes"
+msgstr "Meterstatistieken wijzigingen"
+
 msgid "Dropbox"
 msgstr "Dropbox"
 

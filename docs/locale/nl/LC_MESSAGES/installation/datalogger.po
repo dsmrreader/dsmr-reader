@@ -11,8 +11,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 #: ../../installation/datalogger.rst:2
 msgid "Installation: Remote datalogger"

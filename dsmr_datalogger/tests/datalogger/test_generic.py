@@ -2,20 +2,21 @@ from unittest import mock
 
 from django.test import TestCase
 import serial
+from django.utils import timezone
 
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_datalogger.models.statistics import MeterStatistics
+from dsmr_datalogger.models.statistics import MeterStatistics, MeterStatisticsChange
 import dsmr_datalogger.services.datalogger
 
 
 class TestServices(TestCase):
     """
     Pycharm find-replace for samples:
-    FIND:   \n
-    REPL:   \\r\\n",\n"
+    FIND=  \n
+    REPL=  \\r\\n",\n"
     """
     fake_telegram = None
 
@@ -265,3 +266,41 @@ class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
         self.assertEqual(connection_parameters['baudrate'], 115200)
         self.assertEqual(connection_parameters['bytesize'], serial.EIGHTBITS)
         self.assertEqual(connection_parameters['parity'], serial.PARITY_NONE)
+
+
+class TestMeterStatistics(TestCase):
+    fixtures = ['dsmr_datalogger/meterstatistics.json']
+
+    def test_meter_statistics_change(self):
+        self.assertEqual(MeterStatistics.objects.count(), 1)
+        self.assertEqual(MeterStatisticsChange.objects.count(), 0)
+
+        # Fixture update.
+        MeterStatistics.get_solo().update(
+            timestamp=timezone.now(),  # Changed (ignored)
+            dsmr_version=50,  # Changed (ignored)
+            electricity_tariff=1,  # Changed (ignored)
+            power_failure_count=8,  # Changed
+            long_power_failure_count=2,
+            voltage_sag_count_l1=2,
+            voltage_sag_count_l2=3,  # Changed
+            voltage_sag_count_l3=1,  # Changed
+            voltage_swell_count_l1=0,
+            voltage_swell_count_l2=1,  # Changed
+            voltage_swell_count_l3=2,  # Changed
+            rejected_telegrams=155,  # Changed (ignored)
+            latest_telegram='/OTHER-TEST\r\n!1234'  # Changed (ignored)
+        )
+        # Some changes should not be logged and some should.
+        self.assertEqual(MeterStatisticsChange.objects.count(), 5)
+        self.assertTrue(MeterStatisticsChange.objects.filter(field='power_failure_count').exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field='voltage_sag_count_l2').exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field='voltage_sag_count_l3').exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field='power_failure_count').exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field='voltage_swell_count_l3').exists())
+
+        self.assertTrue(MeterStatisticsChange.objects.filter(
+            field='power_failure_count',
+            old_value='7',
+            new_value='8',
+        ).exists())

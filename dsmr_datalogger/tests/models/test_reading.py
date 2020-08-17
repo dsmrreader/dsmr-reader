@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.utils import timezone
 
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_datalogger.models.statistics import MeterStatistics
 
 
 class TestDsmrReading(TestCase):
@@ -55,17 +54,3 @@ class TestDsmrReading(TestCase):
         self.instance.convert_to_local_timezone()
         self.assertEqual(str(self.instance.timestamp), '2018-01-01 01:00:00+01:00')
         self.assertEqual(str(self.instance.extra_device_timestamp), '2018-01-01 13:00:00+01:00')
-
-
-class TestMeterStatistics(TestCase):
-    def setUp(self):
-        self.instance = MeterStatistics.get_solo()
-
-    def test_ordering(self):
-        """ Test whether defaults allow the creation of any empty model. """
-        MeterStatistics.get_solo()
-        self.assertTrue(MeterStatistics.objects.exists())
-
-    def test_str(self):
-        """ Model should override string formatting. """
-        self.assertNotEqual(str(self.instance), 'MeterStatistics')

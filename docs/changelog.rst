@@ -15,6 +15,7 @@ v4.2.0 - 2020-xx-xx
 -------------------
 
 - ``Added``: Add database downgrade steps to FAQ [`#1070 <https://github.com/dennissiemensma/dsmr-reader/issues/1070>`_]
+- ``Added``: Bijhouden van veranderingen meterstatistieken [`#920 <https://github.com/dennissiemensma/dsmr-reader/issues/920>`_]
 
 - ``Changed``: Improved datalogger debug logging [`#1067 <https://github.com/dennissiemensma/dsmr-reader/issues/1067>`_]
 - ``Changed``: Reworked datalogger connection [`#1057 <https://github.com/dennissiemensma/dsmr-reader/issues/1057>`_]

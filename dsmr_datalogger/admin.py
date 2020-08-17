@@ -11,7 +11,7 @@ from dsmr_backend.mixins import ReadOnlyAdminModel
 from dsmr_backend.models.schedule import ScheduledProcess
 from .models.settings import DataloggerSettings, RetentionSettings
 from .models.reading import DsmrReading
-from .models.statistics import MeterStatistics
+from .models.statistics import MeterStatistics, MeterStatisticsChange
 
 
 @admin.register(DataloggerSettings)
@@ -72,7 +72,6 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(DsmrReading)
 class DsmrReadingAdmin(ReadOnlyAdminModel):
-    """ Read only model. """
     ordering = ['-timestamp']
     list_display = ('timestamp', 'electricity_currently_delivered', 'electricity_currently_returned')
     list_filter = (
@@ -82,8 +81,12 @@ class DsmrReadingAdmin(ReadOnlyAdminModel):
 
 @admin.register(MeterStatistics)
 class MeterStatisticsAdmin(ReadOnlyAdminModel):
-    """ Read only model. """
     list_display = ('timestamp', 'electricity_tariff', 'power_failure_count')
+
+
+@admin.register(MeterStatisticsChange)
+class MeterStatisticsChangeAdmin(ReadOnlyAdminModel):
+    list_display = ('created_at', 'field', 'old_value', 'new_value')
 
 
 @receiver(django.db.models.signals.post_save, sender=RetentionSettings)

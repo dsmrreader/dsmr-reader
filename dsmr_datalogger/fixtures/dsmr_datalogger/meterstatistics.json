@@ -1,0 +1,21 @@
+[
+{
+    "model": "dsmr_datalogger.meterstatistics",
+    "pk": 1,
+    "fields": {
+        "timestamp": "2020-08-17T19:35:06Z",
+        "dsmr_version": "42",
+        "electricity_tariff": 2,
+        "power_failure_count": 7,
+        "long_power_failure_count": 2,
+        "voltage_sag_count_l1": 2,
+        "voltage_sag_count_l2": 2,
+        "voltage_sag_count_l3": 0,
+        "voltage_swell_count_l1": 0,
+        "voltage_swell_count_l2": 0,
+        "voltage_swell_count_l3": 0,
+        "rejected_telegrams": 154,
+        "latest_telegram": "/FAKE-TEST\r\n!1234"
+    }
+}
+]
