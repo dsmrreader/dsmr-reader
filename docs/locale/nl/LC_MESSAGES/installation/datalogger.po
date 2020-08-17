@@ -11,6 +11,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: ../../installation/datalogger.rst:2
 msgid "Installation: Remote datalogger"
@@ -32,7 +34,7 @@ msgid ""
 "of DSMR-reader, using its API."
 msgstr ""
 "Dit installeert een datalogger, die telegrammen doorstuurt naar een installatie "
-"van DSMR-reader op afstand, via z API."
+"van DSMR-reader op afstand, via de API."
 
 #: ../../installation/datalogger.rst:13
 msgid "To be clear, there should be two hosts:"
