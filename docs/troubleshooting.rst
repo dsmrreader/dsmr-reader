@@ -4,12 +4,15 @@ Troubleshooting
 .. contents::
     :depth: 2
 
+.. note::
 
-If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue.
+    If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue.
 
 
-Supervisor
-----------
+Log files
+---------
+
+Always start by checking the log files for errors.
 
 DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:
 
@@ -20,6 +23,28 @@ DSMR-reader technically consists of these processes (some may or may not be used
 +----------------+----------------------------------+
 | Backend        | ``dsmr_backend``                 |
 +----------------+----------------------------------+
+
+Each has its own log file(s):
+
++----------------+----------------------------------------------------------------------------------+
+| Webinterface   | ``/var/log/supervisor/dsmr_webinterface.log``                                    |
++----------------+----------------------------------------------------------------------------------+
+| Datalogger     | ``/var/log/supervisor/dsmr_datalogger.log``                                      |
++----------------+----------------------------------------------------------------------------------+
+| Backend        | ``/var/log/supervisor/dsmr_backend.log``                                         |
++----------------+----------------------------------------------------------------------------------+
+
+.. attention::
+
+    The logfiles may be stale due to rotation. To see all logs for a process, try tailing a wildcard pattern, e.g.::
+
+        sudo tail -f /var/log/supervisor/dsmr_webinterface*
+        sudo tail -f /var/log/supervisor/dsmr_datalogger*
+        sudo tail -f /var/log/supervisor/dsmr_backend*
+
+
+Supervisor
+----------
 
 You can view the status of all processes by running::
 
@@ -35,19 +60,6 @@ Or to restart them all simultaneously::
 
     sudo supervisorctl restart all
 
-Log files
----------
-
-If this does not resolve your issue, check the logfiles for more information:
-
-+----------------+----------------------------------------------------------------------------------+
-| Webinterface   | ``/var/log/supervisor/dsmr_webinterface.log``                                    |
-+----------------+----------------------------------------------------------------------------------+
-| Datalogger     | ``/var/log/supervisor/dsmr_datalogger.log``                                      |
-+----------------+----------------------------------------------------------------------------------+
-| Backend        | ``/var/log/supervisor/dsmr_backend.log``                                         |
-+----------------+----------------------------------------------------------------------------------+
-
 
 Logging levels
 --------------
@@ -55,6 +67,10 @@ If the processes do run, but you cannot find an error, (e.g.: things seem to han
 
 DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do.
 This applies **specifically** to the ``dsmr_backend`` process.
+
+.. note::
+
+    Errors are likely to be logged at all times, no matter the DEBUG-logging level used. Debugging is only helpful to watch DSMR-reader's detailed behaviour.
 
 The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:
 

@@ -19,39 +19,78 @@ msgstr "Installatie: Database back-up terugzetten"
 #: ../../installation/restore.rst:6
 msgid "Only follow these step if you want to restore a backup in PostgreSQL."
 msgstr ""
-"Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL "
-"wilt terugzetten."
+"Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt "
+"terugzetten."
 
-#: ../../installation/restore.rst:10
+#: ../../installation/restore.rst:8
 msgid ""
-"Restoring a backup will replace any existing data stored in the database "
-"and is irreversible!"
+"Restoring a backup will replace any existing data stored in the database and is "
+"irreversible!"
 msgstr ""
 "Het terugzetten van een back-up overschrijft alle bestaande data en is "
 "onomkeerbaar!"
 
-#: ../../installation/restore.rst:12
+#: ../../installation/restore.rst:10
 msgid ""
-"This assumes you've already reinstalled DSMR-reader and created an "
-"**empty** database."
+"This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** "
+"database."
 msgstr ""
-"Dit gaat er van uit dat je DSMR-reader al opnieuw geinstalleerd hebt en "
-"een **lege** database hebt aangemaakt."
+"Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/"
+"draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt."
 
-#: ../../installation/restore.rst:15
+#: ../../installation/restore.rst:14
+msgid ""
+"To be clear: Do **not** restore your database if you've either **started the "
+"application** and/or ran ``manage.py migrate`` in some way."
+msgstr ""
+"Voor de goede order: Zet **niet** je database terug wanneer je ofwel **de "
+"applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt "
+"uitgevoerd."
+
+#: ../../installation/restore.rst:16
+msgid ""
+"Doing so WILL cause trouble with duplicate data/ID's and break your installation "
+"at some point."
+msgstr ""
+"Doorgaan zorgt er gegarandeerd voor dat er problemen komen met dubbele gegevens/"
+"ID's op een bepaald moment."
+
+#: ../../installation/restore.rst:20
 msgid "Compressed (default)"
 msgstr "Gecomprimeerd (standaard)"
 
-#: ../../installation/restore.rst:16
-msgid "To restore a compressed backup (``.gz``), run::"
-msgstr ""
-"Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
-
 #: ../../installation/restore.rst:21
+msgid "To restore a compressed backup (``.gz``), run::"
+msgstr "Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
+
+#: ../../installation/restore.rst:27
 msgid "Uncompressed (legacy)"
 msgstr "Ongecomprimeerd (legacy)"
 
-#: ../../installation/restore.rst:22
+#: ../../installation/restore.rst:28
 msgid "To restore an uncompressed backup (``.sql``), run::"
+msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
+
+#: ../../installation/restore.rst:34
+msgid "Restore failure"
+msgstr "Terugzetten mislukt"
+
+#: ../../installation/restore.rst:36
+msgid ""
+"You should **not** see any errors regarding duplicate data or existing ID's or "
+"whatever."
 msgstr ""
-"Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
+"Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's "
+"of iets soortgelijks."
+
+#: ../../installation/restore.rst:40
+msgid ""
+"If you do encounter errors while restoring the backup in an **empty** database, "
+"create an issue at Github and **do not continue**."
+msgstr ""
+"Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten "
+"tegenkomen, maak dan een issue aan op Github en **ga niet verder**."
+
+#: ../../installation/restore.rst:42
+msgid ":doc:`More information can be found here<../contributing>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<../contributing>`."

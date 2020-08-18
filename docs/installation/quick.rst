@@ -1,10 +1,11 @@
 Installation: Quick
 ===================
 
-.. note::
+The installation guide may take about *15 to 30 minutes* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
-    The installation guide may take about *15 to 30 minutes* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
+Quick installation, part 1
+--------------------------
 
 Start::
 
@@ -32,7 +33,22 @@ Continue::
     sudo -u postgres createuser -DSR dsmrreader
     sudo -u postgres createdb -O dsmrreader dsmrreader
     sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
-    
+
+Optional: Restore a database backup
+-----------------------------------
+
+.. attention::
+
+    If you need to restore a database backup with your existing data, this is the moment to do so.
+
+    Restoring a database backup? :doc:`See for instructions here <restore>`.
+
+
+Quick installation, part 2
+--------------------------
+
+Continue::
+
     # System user
     sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
     sudo usermod -a -G dialout dsmr

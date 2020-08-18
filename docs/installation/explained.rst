@@ -1,9 +1,7 @@
 Installation: Explained
 =======================
 
-.. note::
-
-    The installation guide may take about *15 to 30 minutes* (for RaspberryPi 3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
+The installation guide may take about *15 to 30 minutes* (for RaspberryPi 3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide.
 
 
 .. contents::
@@ -46,6 +44,16 @@ The application stores by default all readings taken from the serial cable.
 - Set password for database user::
 
     sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+
+
+Optional: Restore a database backup
+-----------------------------------
+
+.. attention::
+
+    If you need to restore a database backup with your existing data, this is the moment to do so.
+
+    Restoring a database backup? :doc:`See for instructions here <restore>`.
 
 
 2. Dependencies
@@ -189,16 +197,6 @@ Setup local config::
 Install dependencies::
 
     pip3 install -r dsmrreader/provisioning/requirements/base.txt
-
-
-Optional: Restore a database backup
------------------------------------
-
-.. warning::
-
-    If you need to restore a database backup with your existing data, this is the moment to do it.
-
-Restoring a database backup? :doc:`See for instructions here <restore>`.
 
 
 8. Bootstrapping
