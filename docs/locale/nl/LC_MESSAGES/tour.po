@@ -13,10 +13,14 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../tour.rst:2
+msgid "Tour"
+msgstr "Rondleiding"
+
+#: ../../tour.rst:5
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ../../tour.rst:4
+#: ../../tour.rst:7
 msgid ""
 "The dashboard displays the latest information regarding the consumption of "
 "today. You can view the total consumption for current month as well. The graphs "
@@ -26,7 +30,7 @@ msgstr ""
 "Je kunt hier ook het totale verbruik van de huidige maand zien. Alle grafieken "
 "kunnen uitgezoomd worden en weergegeven gegevens tot 24 uur geleden."
 
-#: ../../tour.rst:8
+#: ../../tour.rst:11
 msgid ""
 "If your meter supports it, you can also see your gas consumption and "
 "electricity returned."
@@ -34,11 +38,11 @@ msgstr ""
 "Je ziet hier ook je gasverbruik en teruglevering elektriciteit, mits je meter "
 "dat ondersteunt."
 
-#: ../../tour.rst:17
+#: ../../tour.rst:20
 msgid "Live graphs"
 msgstr "Live grafieken"
 
-#: ../../tour.rst:19
+#: ../../tour.rst:22
 msgid ""
 "The live graphs plots the most recent data available, depending on the "
 "capabilities of your smart meter."
@@ -46,11 +50,11 @@ msgstr ""
 "De Live Grafieken pagina toont de meest recente beschikbare gegevens, "
 "afhankelijk van de mogelijkheden van je slimme meter."
 
-#: ../../tour.rst:28
+#: ../../tour.rst:31
 msgid "Archive"
 msgstr "Archief"
 
-#: ../../tour.rst:30
+#: ../../tour.rst:33
 msgid ""
 "The archive allows you to scroll through all historisch data captured by the "
 "application. All data can be viewed on different levels: by day, by month and "
@@ -59,11 +63,11 @@ msgstr ""
 "In het archief kun je door alle historische data heen bladeren. Je kunt de "
 "gegevens bekijken op dag-, maand- of jaarbasis."
 
-#: ../../tour.rst:40
+#: ../../tour.rst:43
 msgid "Compare"
 msgstr "Vergelijken"
 
-#: ../../tour.rst:42
+#: ../../tour.rst:45
 msgid ""
 "This page allows you to simply compare two days, months or years with each "
 "other. It will also display the difference between each other as a percentage."
@@ -72,20 +76,20 @@ msgstr ""
 "elkaar te vergelijken. Daarnaast worden de verschillen tussen de twee "
 "weergegeven als percentage."
 
-#: ../../tour.rst:51
+#: ../../tour.rst:54
 msgid "Trends"
 msgstr "Trends"
 
-#: ../../tour.rst:53
+#: ../../tour.rst:56
 msgid "This page displays a summary of your average daily consumption and habits."
 msgstr ""
 "Deze pagina weergeeft een samenvatting van je dagelijkse verbruik en gewoontes."
 
-#: ../../tour.rst:61
+#: ../../tour.rst:64
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../../tour.rst:63
+#: ../../tour.rst:66
 msgid ""
 "This page displays your meter positions and statistics provided by the DSMR "
 "protocol. You can also find the number of readings stored and any excesses "
@@ -95,19 +99,19 @@ msgstr ""
 "protocol. Je kunt hier ook het totaal aantal opgeslagen metingen vinden, "
 "evenals excessief verbruik."
 
-#: ../../tour.rst:72
+#: ../../tour.rst:75
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
-#: ../../tour.rst:74
+#: ../../tour.rst:77
 msgid "Summary of all your contracts and the amount of energy consumed/generated."
 msgstr "Overzicht van al je energiecontracten en het bijbehorende verbruik."
 
-#: ../../tour.rst:82
+#: ../../tour.rst:85
 msgid "Status"
 msgstr "Status"
 
-#: ../../tour.rst:84
+#: ../../tour.rst:87
 msgid ""
 "The status page shows the 'health' of the application and any data tracked. If "
 "there are any problems regarding data handling, they should be highlighted here."
@@ -116,28 +120,28 @@ msgstr ""
 "voortgang van alle gegevens. Mochten er problemen zijn binnen de applicatie, "
 "dan wordt dat hier weergegeven."
 
-#: ../../tour.rst:87
+#: ../../tour.rst:90
 msgid "You can also easily check for DSMR-reader updates here."
 msgstr "Je kunt hier eveneens eenvoudig controleren op updates van DSMR-reader."
 
-#: ../../tour.rst:95
+#: ../../tour.rst:98
 msgid "Export"
 msgstr "Export"
 
-#: ../../tour.rst:97
+#: ../../tour.rst:100
 msgid "This pages allows you to export all day or hour statistics to CSV."
 msgstr ""
 "Deze pagina staat je toe om alle uur- en dagstatistieken te exporteren naar CSV."
 
-#: ../../tour.rst:105
+#: ../../tour.rst:108
 msgid "Configuration"
 msgstr "Configuratie"
 
-#: ../../tour.rst:107
+#: ../../tour.rst:110
 msgid "The configuration page is the entrypoint for the admin interface."
 msgstr "De configuratiepagina is de toegangspoort tot het adminportaal."
 
-#: ../../tour.rst:109
+#: ../../tour.rst:112
 msgid ""
 "You can type any topic or setting you're searching for, as it should pop up "
 "with clickable deeplink to the admin panel. Or you can just skip it this page "
@@ -146,4 +150,3 @@ msgstr ""
 "Je kunt hier elk onderwerp of instelling waarnaar je op zoek bent intypen, om "
 "vervolgens een popup te krijgen met een klikbare link direct naar het juiste "
 "onderdeel binnen het adminportaal."
-

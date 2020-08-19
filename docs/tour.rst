@@ -1,3 +1,6 @@
+Tour
+====
+
 Dashboard
 ---------
 
