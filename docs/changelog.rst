@@ -11,7 +11,7 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
-v4.2.0 - 2020-xx-xx
+v4.2.0 - 2020-08-19
 -------------------
 
 - ``Added``: Add database downgrade steps to FAQ [`#1070 <https://github.com/dennissiemensma/dsmr-reader/issues/1070>`_]

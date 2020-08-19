@@ -117,8 +117,11 @@ Compare them with the defaults in ``.env``.
 
 If you find any differences (e.g. different database credentials or host), update the ``.env`` file accordingly. The format should be straight forward.
 
-Not all previously supported settings are also available in ``.env``.
-See :doc:`Env Settings for the latest list of env vars supported<../env_settings>`.
+
+Execute the following::
+
+    logout
+
 
 Backwards incompatible
 ----------------------
@@ -126,9 +129,22 @@ Backwards incompatible
 Please note that ``DSMRREADER_PLUGINS`` is now a comma separated list.
 Chances are however very slim that you were using ``DSMRREADER_PLUGINS`` at all (advanced users only).
 
-Execute the following::
 
-    logout
+Unsupported settings
+--------------------
+
+Not all previously available settings are also supported in ``.env``.
+See :doc:`Env Settings for the latest list of env vars supported<../env_settings>`.
+
+However, you can still `use any custom Django settings <https://docs.djangoproject.com/en/3.0/ref/settings/>`_ in the ``dsmrreader/settings.py``.
+For example: ``X_FRAME_OPTIONS`` or ``USE_X_FORWARDED_HOST``.
+
+.. warning::
+
+    - These are only for advanced users and should be used with care.
+    - ``dsmrreader/settings.py`` is a Python file/module and not a key-value list of variables.
+    - You should always add them below the ``from dsmrreader.config.production import *`` line.
+    - Finally, do not forget to reload or restart all processes after any modifications in ``.env`` or ``settings.py``.
 
 
 5. Generate your own ``SECRET_KEY``
