@@ -6,7 +6,6 @@ DSMR Reader's documentation
 
    intro
    tour
-   features
    changelog
    requirements
    data_integrity
