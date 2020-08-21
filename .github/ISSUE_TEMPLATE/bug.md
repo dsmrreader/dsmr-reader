@@ -13,7 +13,7 @@ https://dsmr-reader.readthedocs.io/nl/latest/troubleshooting.html#log-files
 
 Wat gebruik je?
 - DSMR-reader versie:   VERVANG DEZE TEKST MET JE VERSIENUMMER
-- Type RaspberryPi or server:   VERVANG DEZE TEKST MET INFO
+- Type RaspberryPi of server:   VERVANG DEZE TEKST MET INFO
 - Standaardinstallatie of Docker:   VERVANG DEZE TEKST MET INFO
 - DSMR-protocol slimme meter v4/v5:   VERVANG DEZE TEKST MET METER VERSIE
 
