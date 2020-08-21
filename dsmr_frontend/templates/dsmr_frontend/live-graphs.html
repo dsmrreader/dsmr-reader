@@ -17,7 +17,7 @@
     {% endif %}
 
     {% if capabilities.electricity %}
-    <div class="row">
+    <div class="row" data-graph-type="electricity">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -41,7 +41,7 @@
                                     <span class="badge bg-red" id="latest_electricity"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span> <span class="unit">{% trans "W" %}</span>
                                 {% endif %}
                             </th>
-                            <th class="col-sm-2">
+                            <th class="col-sm-2">x
                                 {% if capabilities.electricity_returned %}
                                     <span class="badge bg-green" id="latest_electricity_returned"></span> <span class="unit">{% trans "W" %}</span>
                                 {% endif %}
@@ -63,7 +63,7 @@
     {% endif %}
     
     {% if capabilities.multi_phases %}
-    <div class="row" id="phases_holder">
+    <div class="row" id="phases_holder" data-graph-type="phases">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -79,7 +79,7 @@
     {% endif %}   
 
     {% if capabilities.voltage %}
-    <div class="row" id="voltage_holder">
+    <div class="row" id="voltage_holder" data-graph-type="voltage">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -95,7 +95,7 @@
     {% endif %}
 
     {% if capabilities.power_current %}
-    <div class="row" id="power_current_holder">
+    <div class="row" id="power_current_holder" data-graph-type="power">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -111,7 +111,7 @@
     {% endif %}
 
     {% if capabilities.gas %}
-    <div class="row">
+    <div class="row" data-graph-type="gas">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -127,7 +127,7 @@
     {% endif %}
     
     {% if capabilities.weather %}
-    <div class="row">
+    <div class="row" id="weather_holder" data-graph-type="weather">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
@@ -156,11 +156,12 @@
         var echarts_loading_options = {text: '{% blocktrans %}Loading...{% endblocktrans %}'};
         {% endlocalize %}
     </script>
+    {{ sorted_graphs_json|json_script:'sorted_graphs_json' }}
 
 {% if capabilities.electricity %}
     <script type="text/javascript">
         var echarts_electricity_graph_url = "{% url 'frontend:live-xhr-electricity' %}?delivered=True";
-        
+
         {% if capabilities.electricity_returned %}
         echarts_electricity_graph_url += "&returned=True";
         {% endif %}
@@ -175,7 +176,7 @@
 {% if capabilities.multi_phases %}
     <script type="text/javascript">
         var echarts_phases_graph_url = "{% url 'frontend:live-xhr-electricity' %}?phases=True";
-        
+
         {% if capabilities.electricity_returned %}
         echarts_phases_graph_url += "&returned=True";
         {% endif %}
@@ -236,12 +237,16 @@
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
     <script type="text/javascript">
         var xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
+        var sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())
 
         $(document).ready(function(){
             setInterval(function(){ update_consumption_header(); }, 1000);
 
             /* Reload entire page after 15 minutes. */
             setInterval(function(){ location.reload(); }, 15 * 60 * 1000)
+
+            // Sort graphs by preference.
+            $('section.content > div').sort(graph_sort_callback).appendTo('section.content');
         });
 
         $(".help-trigger").click(function () {
@@ -249,6 +254,13 @@
             $(this).remove();
             return false;
         });
+
+        function graph_sort_callback(a, b) {
+            let aPos = sorted_graphs.indexOf($(a).data('graph-type'))
+            let bPos = sorted_graphs.indexOf($(b).data('graph-type'))
+            return (aPos) < (bPos) ? -1 : 1;
+        }
+
     </script>
 
 {% endblock %}

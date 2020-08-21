@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
-from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_frontend.models.settings import FrontendSettings, SortedGraph
 
 
 class TestSettings(TestCase):
@@ -48,3 +48,16 @@ class TestSettings(TestCase):
 
     def test_live_graphs_hours_range(self):
         self.assertEqual(self.instance.live_graphs_hours_range, 24)
+
+
+class TestSortedGraph(TestCase):
+    """ Tests for settings defaults. """
+    def setUp(self):
+        self.instance = SortedGraph()
+
+    def test_admin(self):
+        """ Model should be registered in Django Admin. """
+        self.assertTrue(site.is_registered(SortedGraph))
+
+    def test_to_string(self):
+        self.assertNotEqual(str(self.instance), '{}'.format(self.instance.__class__.__name__))

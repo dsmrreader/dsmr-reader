@@ -1,3 +1,5 @@
+import json
+
 from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils import formats, timezone
@@ -6,7 +8,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_frontend.forms import DashboardElectricityConsumptionForm
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_weather.models.reading import TemperatureReading
-from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_frontend.models.settings import FrontendSettings, SortedGraph
 from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.settings import DataloggerSettings
 import dsmr_backend.services.backend
@@ -22,6 +24,9 @@ class LiveGraphs(ConfigurableLoginRequiredMixin, TemplateView):
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
         context_data['notification_count'] = Notification.objects.unread().count()
+        context_data['sorted_graphs_json'] = json.dumps(list(
+            SortedGraph.objects.all().values_list('graph_type', flat=True)
+        ))
 
         today = timezone.localtime(timezone.now()).date()
         context_data['month_statistics'] = dsmr_stats.services.month_statistics(target_date=today)
@@ -34,7 +39,6 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
         form = DashboardElectricityConsumptionForm(request.GET)
 
         if not form.is_valid():
-            JsonResponse
             return JsonResponse({
                     'errors': form.errors
                 },

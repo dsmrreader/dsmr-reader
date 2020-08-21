@@ -54,6 +54,7 @@
         var email_settings_url = '{% url "admin:dsmr_backend_emailsettings_change" email_settings.pk %}';
         var energy_supplier_price_url = '{% url "admin:dsmr_consumption_energysupplierprice_changelist" %}';
         var frontend_settings_url = '{% url "admin:dsmr_frontend_frontendsettings_change" frontend_settings.pk %}';
+        var frontend_sortedgraphs_sort_url = '{% url "admin:dsmr_frontend_sortedgraph_sort" %}';
         var influxdb_settings_url = '{% url "admin:dsmr_influxdb_influxdbintegrationsettings_change" influxdb_settings.pk %}';
         var meter_statistics_url = '{% url "admin:dsmr_datalogger_meterstatistics_changelist" %}';
         var mindergas_settings_url = '{% url "admin:dsmr_mindergas_mindergassettings_change" mindergas_settings.pk %}';
@@ -108,6 +109,7 @@
             { category: '{% trans "Frontend" %}', title: '{% trans "Merge tariffs" %}', url: frontend_settings_url },
             { category: '{% trans "Frontend" %}', title: '{% trans "Tariff names" %}', url: frontend_settings_url },
             { category: '{% trans "Frontend" %}', title: '{% trans "Graph line/bar colors" %}', url: frontend_settings_url },
+            { category: '{% trans "Frontend" %}', title: '{% trans "Graph sorting/order" %}', url: frontend_sortedgraphs_sort_url },
 
             { category: '{% trans "InfluxDB" %}', title: '{% trans "InfluxDB integration" %}', url: influxdb_settings_url },
             { category: '{% trans "InfluxDB" %}', title: '{% trans "InfluxDB HTTP / HTTPS" %}', url: influxdb_settings_url },

@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django_filters',
     'rangefilter',
     'rest_framework',
+    'adminsortable',
 
     # DSMR-reader.
     'dsmr_api.apps.ApiAppConfig',

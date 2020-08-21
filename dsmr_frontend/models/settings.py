@@ -1,3 +1,4 @@
+from adminsortable.models import SortableMixin
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
@@ -154,3 +155,18 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Frontend configuration')
+
+
+class SortedGraph(SortableMixin, models.Model):
+    name = models.CharField(max_length=64)
+    graph_type = models.CharField(max_length=32)
+    sorting_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        default_permissions = tuple()
+        verbose_name = _('Sorted graph')
+        verbose_name_plural = _('Sorted graphs')
+        ordering = ['sorting_order']

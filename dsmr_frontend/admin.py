@@ -1,8 +1,10 @@
+from adminsortable.admin import SortableAdmin
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 
-from .models.settings import FrontendSettings
+from dsmr_backend.mixins import ChangeOnlyAdminModel
+from .models.settings import FrontendSettings, SortedGraph
 
 
 @admin.register(FrontendSettings)
@@ -87,6 +89,18 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
                 'fields': [
                     'temperature_color',
                 ],
+            }
+        ),
+    )
+
+
+@admin.register(SortedGraph)
+class SortedGraphAdmin(ChangeOnlyAdminModel, SortableAdmin):
+    list_display = ('sorting_order', 'name')
+    fieldsets = (
+        (
+            None, {
+                'fields': ['sorting_order', 'name'],
             }
         ),
     )

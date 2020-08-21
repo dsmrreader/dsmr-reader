@@ -981,6 +981,12 @@ msgstr "Schakel dit in om te forceren dat er altijd ingelogd moet worden voor al
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
 
+msgid "Sorted graph"
+msgstr "Gesorteerde grafiek"
+
+msgid "Sorted graphs"
+msgstr "Gesorteerde grafieken"
+
 msgid "Archive"
 msgstr "Archief"
 
@@ -1160,6 +1166,9 @@ msgstr "Voeg tarieven samen"
 
 msgid "Graph line/bar colors"
 msgstr "Grafieklijn/staaf kleuren"
+
+msgid "Graph sorting/order"
+msgstr "Volgorde grafieken"
 
 msgid "InfluxDB"
 msgstr "InfluxDB"
