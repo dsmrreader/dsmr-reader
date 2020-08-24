@@ -756,6 +756,9 @@ msgstr "Fasen P-"
 msgid "Temperature"
 msgstr "Temperatuur"
 
+msgid "To alter the order in which the graphs are displayed, <a href=\"/admin/dsmr_frontend/sortedgraph/sort/\">go to this page</a> and drag the graph names."
+msgstr "Om de volgorde waarin de grafieken getoond worden te veranderen, <a href=\"/admin/dsmr_frontend/sortedgraph/sort/\">ga naar deze pagina</a> en sleep de grafieknamen."
+
 msgid "Frontend (dsmr_webinterface)"
 msgstr "Interface (dsmr_webinterface)"
 

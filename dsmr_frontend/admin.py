@@ -1,6 +1,6 @@
-from adminsortable.admin import SortableAdmin
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
+from adminsortable.admin import SortableAdmin
 from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import ChangeOnlyAdminModel
@@ -101,6 +101,10 @@ class SortedGraphAdmin(ChangeOnlyAdminModel, SortableAdmin):
         (
             None, {
                 'fields': ['sorting_order', 'name'],
+                'description': _(
+                    'To alter the order in which the graphs are displayed, '
+                    '<a href="/admin/dsmr_frontend/sortedgraph/sort/">go to this page</a> and drag the graph names.'
+                )
             }
         ),
     )
