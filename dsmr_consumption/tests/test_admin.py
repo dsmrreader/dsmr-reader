@@ -28,6 +28,7 @@ class TestAdmin(TestCase):
             gas_price=0,
             electricity_returned_1_price=0,
             electricity_returned_2_price=0,
+            fixed_daily_cost=0,
         )
 
         self.client = Client()

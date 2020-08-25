@@ -102,6 +102,16 @@
                             <td><span class="badge bg-black">{{ consumption.gas_cost|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
+
+                        {% if consumption.fixed_cost %}
+                        <tr>
+			                <td>{% trans "Fixed costs" %} <span class="unit">&euro;</span></td>
+                            <td><span class="unit">{% trans "today" %}</span></td>
+			                <td>&nbsp;</td>
+			                <td><span class="badge bg-black">{{ consumption.fixed_cost|default:'-'|floatformat:2 }}</span></td>
+			            </tr>
+                        {% endif %}
+
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
                             <td><span class="badge bg-red">{% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}{{ consumption.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
@@ -169,6 +179,20 @@
                             <td><span class="badge bg-black">{{ month_statistics.gas_cost|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
+                        {% if month_statistics.fixed_cost %}
+                        <tr>
+			                <td> {% trans "Fixed costs" %} <span class="unit">&euro;</span></td>
+                            <td>
+                                <span class="unit">
+                                    {{ month_statistics.number_of_days|default:'-' }}
+                                    {% blocktranslate count counter=month_statistics.number_of_days %}day{% plural %}days{% endblocktranslate %}
+                                </span>
+                            </td>
+                            <td>&nbsp;</td>
+			                <td><span class="badge bg-black">{{ month_statistics.fixed_cost|default:'-'|floatformat:2 }}</span></td>
+			            </tr>
+                        {% endif %}
+
                         <tr>
                             <td style="font-weight: bold;">{% trans "Total" %}</td>
                             <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ month_statistics.electricity_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>

@@ -29,7 +29,7 @@ class NoteAdmin(admin.ModelAdmin):
 class DayStatisticsAdmin(admin.ModelAdmin):
     actions = None
     ordering = ['-day', 'total_cost']
-    list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'total_cost')
+    list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'fixed_cost', 'total_cost')
     list_filter = (
         ('day', DateRangeFilter),
     )

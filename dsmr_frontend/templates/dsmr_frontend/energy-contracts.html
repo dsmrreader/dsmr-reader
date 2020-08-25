@@ -55,13 +55,28 @@
 			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ current.summary.electricity2_cost|default:'-' }}{% endif %}</span></td>
 			            </tr>
 			            {% endif %}
-			            {% if capabilities.gas %}<tr>
+			            {% if capabilities.gas %}
+                        <tr>
 			                <td> {% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
 			                <td><span class="badge bg-orange">{{ current.summary.gas|default:'-'|floatformat:2 }}</span></td>
 			                <td>&nbsp;</td>
 			                <td><span class="badge bg-black">{{ current.summary.gas_cost|default:'-' }}</span></td>
 			            </tr>
 			            {% endif %}
+                        {% if current.summary.fixed_cost %}
+                        <tr>
+			                <td> {% trans "Fixed costs" %} <span class="unit">&euro;</span></td>
+			                <td>
+                                <span class="unit">
+                                    {{ current.summary.number_of_days|default:'-' }}
+                                    {% blocktranslate count counter=current.summary.number_of_days %}day{% plural %}days{% endblocktranslate %}
+                                </span>
+                            </td>
+			                <td>&nbsp;</td>
+			                <td><span class="badge bg-black">{{ current.summary.fixed_cost|default:'-' }}</span></td>
+			            </tr>
+                        {% endif %}
+
 			            <tr>
 			                <td style="font-weight: bold;">{% trans "Total" %}</td>
 			                <td><span class="badge bg-red">{% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}{{ current.summary.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
@@ -100,11 +115,18 @@
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_returned_1_price }}</small></span></td>
                         </tr>
                         {% endif %}
-                        
+
                         {% if current.prices.electricity_returned_2_price %}
                         <tr class="unit-prices xhr-hidden">
                             <td colspan="3"><small>{{ frontend_settings.tariff_2_returned_name }}</small> <span class="unit">({% trans "tariff 2" %})</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_returned_2_price }}</small></span></td>
+                        </tr>
+                        {% endif %}
+
+                        {% if current.prices.fixed_daily_cost %}
+                        <tr class="unit-prices xhr-hidden">
+                            <td colspan="3"><small>{% trans "Fixed daily costs" %}</small></td>
+                            <td><span class="badge bg-blue"><small>{{ current.prices.fixed_daily_cost }}</small></span></td>
                         </tr>
                         {% endif %}
 			        </table>

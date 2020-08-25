@@ -50,6 +50,10 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Average temperature')
     )
 
+    fixed_cost = models.DecimalField(
+        max_digits=8, decimal_places=2, default=0, verbose_name=_('Fixed costs')
+    )
+
     @property
     def electricity_merged(self):
         return self.electricity1 + self.electricity2

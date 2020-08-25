@@ -69,6 +69,13 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         verbose_name=_('Electricity returned 2 price (high tariff)'),
         help_text=_('Set to zero when unused')
     )
+    fixed_daily_cost = models.DecimalField(
+        max_digits=11,
+        decimal_places=5,
+        default=0,
+        verbose_name=_('Fixed daily costs'),
+        help_text=_('A fixed price added to the totals of each day')
+    )
 
     def __str__(self):
         return self.description or gettext('Energy Supplier')

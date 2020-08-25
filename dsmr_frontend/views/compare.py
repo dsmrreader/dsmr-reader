@@ -59,7 +59,7 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         unused_keys = []
 
         for k in base_data.keys():
-            if k in ('temperature_avg', 'temperature_max', 'temperature_min') or 'cost' in k:
+            if k in ('temperature_avg', 'temperature_max', 'temperature_min', 'number_of_days') or 'cost' in k:
                 unused_keys.append(k)
 
         base_data = {k: v for k, v in base_data.items() if k not in unused_keys}

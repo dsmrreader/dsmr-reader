@@ -447,6 +447,12 @@ msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
 msgid "Electricity returned 2 price (high tariff)"
 msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
 
+msgid "Fixed daily costs"
+msgstr "Vaste kosten per dag"
+
+msgid "A fixed price added to the totals of each day"
+msgstr "Een vast dagtarief dat wordt opgeteld bij elk dagtotaal"
+
 msgid "Energy Supplier"
 msgstr "Energieleverancier"
 
@@ -1332,6 +1338,12 @@ msgstr "kWh"
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
+msgid "Fixed costs"
+msgstr "Vaste kosten"
+
+msgid "today"
+msgstr "vandaag"
+
 msgid "Total"
 msgstr "Totaal"
 
@@ -1340,6 +1352,11 @@ msgstr "Huidige maand"
 
 msgid "until yesterday"
 msgstr "tot en met gisteren"
+
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dag"
+msgstr[1] "dagen"
 
 msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
 msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
@@ -2824,6 +2841,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Daily costs"
+#~ msgstr "Dagelijkse kosten"
 
 #~ msgid "Always require login"
 #~ msgstr "Verplicht overal inloggen"

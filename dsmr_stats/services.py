@@ -247,8 +247,10 @@ def average_consumption_by_hour(max_weeks_ago):
 def range_statistics(start, end):
     """ Returns the statistics (totals) and the number of data points for a target range. """
     queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
+    number_of_days = queryset.count()
     aggregate = queryset.aggregate(
         total_cost=Sum('total_cost'),
+        fixed_cost=Sum('fixed_cost'),
         electricity1=Sum('electricity1'),
         electricity1_cost=Sum('electricity1_cost'),
         electricity1_returned=Sum('electricity1_returned'),
@@ -264,7 +266,9 @@ def range_statistics(start, end):
         temperature_max=Max('highest_temperature'),
         temperature_avg=Avg('average_temperature'),
     )
-    return aggregate, queryset.count()
+    aggregate.update(dict(number_of_days=number_of_days))
+
+    return aggregate, number_of_days
 
 
 def day_statistics(target_date):
@@ -349,8 +353,12 @@ def recalculate_prices():
                 current_day.gas * prices.gas_price
             )
 
+        current_day.fixed_cost = prices.fixed_daily_cost
         current_day.total_cost = dsmr_consumption.services.round_decimal(
-            current_day.electricity1_cost + current_day.electricity2_cost + current_day.gas_cost
+            current_day.electricity1_cost +
+            current_day.electricity2_cost +
+            current_day.gas_cost +
+            current_day.fixed_cost
         )
         current_day.save()
 

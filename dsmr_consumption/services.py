@@ -275,7 +275,7 @@ def day_consumption(day):
 
     # Totals.
     consumption['electricity_cost_merged'] = consumption['electricity1_cost'] + consumption['electricity2_cost']
-    consumption['total_cost'] = round_decimal(consumption['electricity_cost_merged'])
+    consumption['total_cost'] = consumption['electricity_cost_merged']
 
     # Gas readings are optional, as not all meters support this.
     if gas_readings.exists():
@@ -290,12 +290,18 @@ def day_consumption(day):
         )
         consumption['total_cost'] += consumption['gas_cost']
 
+    # Fixed costs.
+    consumption['fixed_cost'] = daily_energy_price.fixed_daily_cost
+    consumption['total_cost'] += consumption['fixed_cost']
+    consumption['total_cost'] = round_decimal(consumption['total_cost'])
+
     # Current prices as well.
     consumption['energy_supplier_price_electricity_delivered_1'] = daily_energy_price.electricity_delivered_1_price
     consumption['energy_supplier_price_electricity_delivered_2'] = daily_energy_price.electricity_delivered_2_price
     consumption['energy_supplier_price_electricity_returned_1'] = daily_energy_price.electricity_returned_1_price
     consumption['energy_supplier_price_electricity_returned_2'] = daily_energy_price.electricity_returned_2_price
     consumption['energy_supplier_price_gas'] = daily_energy_price.gas_price
+    consumption['energy_supplier_price_fixed_daily_cost'] = daily_energy_price.fixed_daily_cost
 
     # Any notes of that day.
     consumption['notes'] = Note.objects.filter(day=day).values_list('description', flat=True)
@@ -482,7 +488,7 @@ def summarize_energy_contracts():
     data = []
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
-        summary, count = dsmr_stats.services.range_statistics(
+        summary, number_of_days = dsmr_stats.services.range_statistics(
             start=current.start,
             end=current.end or timezone.now().date()
         )
@@ -492,12 +498,14 @@ def summarize_energy_contracts():
             'start': current.start,
             'end': current.end,
             'summary': summary,
+            'number_of_days': number_of_days,
             'prices': {
                 'electricity_delivered_1_price': current.electricity_delivered_1_price,
                 'electricity_delivered_2_price': current.electricity_delivered_2_price,
                 'gas_price': current.gas_price,
                 'electricity_returned_1_price': current.electricity_returned_1_price,
                 'electricity_returned_2_price': current.electricity_returned_2_price,
+                'fixed_daily_cost': current.fixed_daily_cost,
             }
         })
 

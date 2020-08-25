@@ -57,7 +57,7 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
             'years': dsmr_stats.services.year_statistics,
         }
 
-        data, coun = DATA_MAPPING[selected_level](selected_datetime.date())
+        data, _ = DATA_MAPPING[selected_level](selected_datetime.date())
         context_data['statistics'] = data
 
         context_data['title'] = {
