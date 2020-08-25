@@ -3,8 +3,8 @@
 {% load static %} 
 {% load i18n %}
 
-{% block title %}{% trans "Export data" %}{% endblock %}
-{% block header %}{% trans "Export data" %} &nbsp; <i class="fas fa-file-excel"></i>{% endblock %}
+{% block title %}{% translate "Export data" %}{% endblock %}
+{% block header %}{% translate "Export data" %} &nbsp; <i class="fas fa-file-excel"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -12,7 +12,7 @@
 {% if not capabilities.any %}
 
     <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktranslate %} <i class="fas fa-smile-wink"></i>
     </div>
 
 {% else %}
@@ -23,25 +23,25 @@
 	        <div class="col-sm-12">
 	            <div class="panel">
 	                <header class="panel-heading">
-	                    <i class="fas fa-tasks"></i> &nbsp; {% trans "Select data type" %} <br />
-	                    <small>{% blocktrans %}Select the type of data you want to export.{% endblocktrans %}</small>
+	                    <i class="fas fa-tasks"></i> &nbsp; {% translate "Select data type" %} <br />
+	                    <small>{% blocktranslate %}Select the type of data you want to export.{% endblocktranslate %}</small>
 	                </header>
 	                <div class="panel-body">
 	                    <table class="table table-hover">
 	                        <tr>
-	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="day" id="data_day_totals" checked="checked"> &nbsp; <label for="data_day_totals">{% trans "Day totals" %}</label></td>
-	                            <td class="col-sm-9">{% blocktrans %}Summary of each day. Contains electricity, gas and costs (if applicable).{% endblocktrans %}</td>
+	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="day" id="data_day_totals" checked="checked"> &nbsp; <label for="data_day_totals">{% translate "Day totals" %}</label></td>
+	                            <td class="col-sm-9">{% blocktranslate %}Summary of each day. Contains electricity, gas and costs (if applicable).{% endblocktranslate %}</td>
 	                        </tr>
 	                        <tr>
-	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="hour" id="data_hour_totals"> &nbsp; <label for="data_hour_totals">{% trans "Hour totals" %}</label></td>
-	                            <td class="col-sm-9">{% blocktrans %}Summary of each hour read. Contains electricity and gas (if applicable).{% endblocktrans %}</td>
+	                            <td class="col-sm-3"><input class="" type="radio" name="data_type" value="hour" id="data_hour_totals"> &nbsp; <label for="data_hour_totals">{% translate "Hour totals" %}</label></td>
+	                            <td class="col-sm-9">{% blocktranslate %}Summary of each hour read. Contains electricity and gas (if applicable).{% endblocktranslate %}</td>
 	                        </tr>
 	                        <tr>
 	                           <td colspan="2">&nbsp;</td>
 	                        </tr>
                             <tr>
-                                <td class="col-sm-3"><input class="" type="radio" name="data_type" value="temperature" id="data_temperature"> &nbsp; <label for="data_temperature">{% trans "Temperatures" %}</label></td>
-                                <td class="col-sm-9">{% blocktrans %}Summary of all temperatures read (if enabled).{% endblocktrans %}</td>
+                                <td class="col-sm-3"><input class="" type="radio" name="data_type" value="temperature" id="data_temperature"> &nbsp; <label for="data_temperature">{% translate "Temperatures" %}</label></td>
+                                <td class="col-sm-9">{% blocktranslate %}Summary of all temperatures read (if enabled).{% endblocktranslate %}</td>
                             </tr>
 	                    </table>
 	                </div>
@@ -53,8 +53,8 @@
 	        <div class="col-sm-6">
 	            <div class="panel">
 	                <header class="panel-heading">
-	                    <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range start" %} <br />
-	                    <small>{% blocktrans %}Select starting day for export.{% endblocktrans %}</small>
+	                    <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range start" %} <br />
+	                    <small>{% blocktranslate %}Select starting day for export.{% endblocktranslate %}</small>
 	                </header>
 	                <div class="panel-body">
 	                    <div id="start_datepicker"></div>
@@ -66,8 +66,8 @@
 	        <div class="col-sm-6">
 	            <div class="panel">
 	                <header class="panel-heading">
-	                    <i class="fas fa-calendar"></i> &nbsp; {% trans "Select date range end" %} <br />
-	                    <small>{% blocktrans %}Select ending day for export.{% endblocktrans %}</small>
+	                    <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range end" %} <br />
+	                    <small>{% blocktranslate %}Select ending day for export.{% endblocktranslate %}</small>
 	                </header>
 	                <div class="panel-body">
 	                    <div id="end_datepicker"></div>
@@ -81,14 +81,14 @@
 	        <div class="col-sm-12">
 	            <div class="panel">
 	                <header class="panel-heading">
-	                    <i class="fas fa-file"></i> &nbsp; {% trans "Select export format" %} <br />
-	                    <small>{% blocktrans %}Choose a format the data will be exported in.{% endblocktrans %}</small>
+	                    <i class="fas fa-file"></i> &nbsp; {% translate "Select export format" %} <br />
+	                    <small>{% blocktranslate %}Choose a format the data will be exported in.{% endblocktranslate %}</small>
 	                </header>
 	                <div class="panel-body">
 	                    <table class="table table-hover">
 	                        <tr>
-	                            <td class="col-sm-3"><input class="" type="radio" name="export_format" value="csv" id="export_format_csv" checked="checked"> &nbsp; <label for="export_format_csv"><i class="fas fa-file-excel"></i> &nbsp; {% trans "Excel (.CSV)" %}</label></td>
-	                            <td class="col-sm-9">{% blocktrans %}Exports the data in Comma Separated Format, which can be read by Excel.{% endblocktrans %}</td>
+	                            <td class="col-sm-3"><input class="" type="radio" name="export_format" value="csv" id="export_format_csv" checked="checked"> &nbsp; <label for="export_format_csv"><i class="fas fa-file-excel"></i> &nbsp; {% translate "Excel (.CSV)" %}</label></td>
+	                            <td class="col-sm-9">{% blocktranslate %}Exports the data in Comma Separated Format, which can be read by Excel.{% endblocktranslate %}</td>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -96,7 +96,7 @@
 	        </div>
 	    </div><!-- /.row -->
 	    
-	    <a href="#" id="download_button" class="btn btn-lg btn-primary"><i class="fas fa-download"></i> &nbsp; {% blocktrans %}Download export{% endblocktrans %}</a>
+	    <a href="#" id="download_button" class="btn btn-lg btn-primary"><i class="fas fa-download"></i> &nbsp; {% blocktranslate %}Download export{% endblocktranslate %}</a>
     </form>
 {% endif %}
 

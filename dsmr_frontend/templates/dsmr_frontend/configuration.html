@@ -3,8 +3,8 @@
 {% load static %} 
 {% load i18n %}
 
-{% block title %}{% trans "Configuation" %}{% endblock %}
-{% block header %}{% trans "Configuation" %} &nbsp; <i class="fas fa-wrench"></i>{% endblock %}
+{% block title %}{% translate "Configuation" %}{% endblock %}
+{% block header %}{% translate "Configuation" %} &nbsp; <i class="fas fa-wrench"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -13,20 +13,20 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Search for a topic or setting" %}
+                    {% translate "Search for a topic or setting" %}
                 </header>
                 <div class="panel-body">
                     <div class="ui search">
                         <div class="ui icon input">
-                            <input id="search" class="prompt" type="text" placeholder="{% trans "Type here to search..." %}">
+                            <input id="search" class="prompt" type="text" placeholder="{% translate "Type here to search..." %}">
                         </div>
 
-                        &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% trans "Skip search and go directly to admin" %}</a>
+                        &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% translate "Skip search and go directly to admin" %}</a>
 
                         <div class="results"></div>
                     </div>
 
-                    <small>{% trans "Click a suggestion below for more suggestions to choose from." %}</small>
+                    <small>{% translate "Click a suggestion below for more suggestions to choose from." %}</small>
                     <ul id="category-suggestions"></ul>
                 </div>
             </div>
@@ -74,84 +74,84 @@
         var weather_settings_url = '{% url "admin:dsmr_weather_weathersettings_change" weather_settings.pk %}';
 
         var categoryContent = [
-            { category: '{% trans "API" %}', title: '{% trans "DSMR-reader API (key)" %}', url: api_settings_url },
+            { category: '{% translate "API" %}', title: '{% translate "DSMR-reader API (key)" %}', url: api_settings_url },
 
-            { category: '{% trans "Backend" %}', title: '{% trans "Backend process sleep" %}', url: backend_settings_url },
-            { category: '{% trans "Backend" %}', title: '{% trans "Language" %}', url: backend_settings_url },
-            { category: '{% trans "Backend" %}', title: '{% trans "Check for updates" %}', url: backend_settings_url },
-            { category: '{% trans "Backend" %}', title: '{% trans "Hide electricity return graphs" %}', url: backend_settings_url },
-            { category: '{% trans "Backend" %}', title: '{% trans "Hide gas graphs" %}', url: backend_settings_url },
+            { category: '{% translate "Backend" %}', title: '{% translate "Backend process sleep" %}', url: backend_settings_url },
+            { category: '{% translate "Backend" %}', title: '{% translate "Language" %}', url: backend_settings_url },
+            { category: '{% translate "Backend" %}', title: '{% translate "Check for updates" %}', url: backend_settings_url },
+            { category: '{% translate "Backend" %}', title: '{% translate "Hide electricity return graphs" %}', url: backend_settings_url },
+            { category: '{% translate "Backend" %}', title: '{% translate "Hide gas graphs" %}', url: backend_settings_url },
 
-            { category: '{% trans "Backup" %}', title: '{% trans "Daily backup settings" %}', url: backup_settings_url },
-            { category: '{% trans "Backup" %}', title: '{% trans "Folder to backup to" %}', url: backup_settings_url },
-            { category: '{% trans "Backup" %}', title: '{% trans "Gzip compression level used" %}', url: backup_settings_url },
+            { category: '{% translate "Backup" %}', title: '{% translate "Daily backup settings" %}', url: backup_settings_url },
+            { category: '{% translate "Backup" %}', title: '{% translate "Folder to backup to" %}', url: backup_settings_url },
+            { category: '{% translate "Backup" %}', title: '{% translate "Gzip compression level used" %}', url: backup_settings_url },
 
-            { category: '{% trans "Consumption" %}', title: '{% trans "Group electricity by reading" %}', url: consumption_settings_url },
-            { category: '{% trans "Consumption" %}', title: '{% trans "Group electricity by minute" %}', url: consumption_settings_url },
-            { category: '{% trans "Consumption" %}', title: '{% trans "Group gas by hour" %}', url: consumption_settings_url },
+            { category: '{% translate "Consumption" %}', title: '{% translate "Group electricity by reading" %}', url: consumption_settings_url },
+            { category: '{% translate "Consumption" %}', title: '{% translate "Group electricity by minute" %}', url: consumption_settings_url },
+            { category: '{% translate "Consumption" %}', title: '{% translate "Group gas by hour" %}', url: consumption_settings_url },
 
-            { category: '{% trans "Datalogger" %}', title: '{% trans "Datalogger process sleep" %}', url: datalogger_settings_url },
-            { category: '{% trans "Datalogger" %}', title: '{% trans "Serial port" %}', url: datalogger_settings_url },
-            { category: '{% trans "Datalogger" %}', title: '{% trans "Network socket / port" %}', url: datalogger_settings_url },
-            { category: '{% trans "Datalogger" %}', title: '{% trans "DSMR version (telegram parser)" %}', url: datalogger_settings_url },
-            { category: '{% trans "Datalogger" %}', title: '{% trans "Smarty meter" %}', url: datalogger_settings_url },
-            { category: '{% trans "Datalogger" %}', title: '{% trans "Fluvius meter" %}', url: datalogger_settings_url },
+            { category: '{% translate "Datalogger" %}', title: '{% translate "Datalogger process sleep" %}', url: datalogger_settings_url },
+            { category: '{% translate "Datalogger" %}', title: '{% translate "Serial port" %}', url: datalogger_settings_url },
+            { category: '{% translate "Datalogger" %}', title: '{% translate "Network socket / port" %}', url: datalogger_settings_url },
+            { category: '{% translate "Datalogger" %}', title: '{% translate "DSMR version (telegram parser)" %}', url: datalogger_settings_url },
+            { category: '{% translate "Datalogger" %}', title: '{% translate "Smarty meter" %}', url: datalogger_settings_url },
+            { category: '{% translate "Datalogger" %}', title: '{% translate "Fluvius meter" %}', url: datalogger_settings_url },
 
-            { category: '{% trans "Dropbox" %}', title: '{% trans "Dropbox integration for backups" %}', url: dropbox_settings_url },
+            { category: '{% translate "Dropbox" %}', title: '{% translate "Dropbox integration for backups" %}', url: dropbox_settings_url },
 
-            { category: '{% trans "Email" %}', title: '{% trans "Outgoing email" %}', url: email_settings_url },
+            { category: '{% translate "Email" %}', title: '{% translate "Outgoing email" %}', url: email_settings_url },
 
-            { category: '{% trans "Energy supplier prices" %}', title: '{% trans "Energy supplier price contracts" %}', url: energy_supplier_price_url },
-            { category: '{% trans "Energy supplier prices" %}', title: '{% trans "Gas price/costs" %}', url: energy_supplier_price_url },
-            { category: '{% trans "Energy supplier prices" %}', title: '{% trans "Electricity price/costs" %}', url: energy_supplier_price_url },
+            { category: '{% translate "Energy supplier prices" %}', title: '{% translate "Energy supplier price contracts" %}', url: energy_supplier_price_url },
+            { category: '{% translate "Energy supplier prices" %}', title: '{% translate "Gas price/costs" %}', url: energy_supplier_price_url },
+            { category: '{% translate "Energy supplier prices" %}', title: '{% translate "Electricity price/costs" %}', url: energy_supplier_price_url },
 
-            { category: '{% trans "Frontend" %}', title: '{% trans "Force password login everywhere" %}', url: frontend_settings_url },
-            { category: '{% trans "Frontend" %}', title: '{% trans "Merge tariffs" %}', url: frontend_settings_url },
-            { category: '{% trans "Frontend" %}', title: '{% trans "Tariff names" %}', url: frontend_settings_url },
-            { category: '{% trans "Frontend" %}', title: '{% trans "Graph line/bar colors" %}', url: frontend_settings_url },
-            { category: '{% trans "Frontend" %}', title: '{% trans "Graph sorting/order" %}', url: frontend_sortedgraphs_sort_url },
+            { category: '{% translate "Frontend" %}', title: '{% translate "Force password login everywhere" %}', url: frontend_settings_url },
+            { category: '{% translate "Frontend" %}', title: '{% translate "Merge tariffs" %}', url: frontend_settings_url },
+            { category: '{% translate "Frontend" %}', title: '{% translate "Tariff names" %}', url: frontend_settings_url },
+            { category: '{% translate "Frontend" %}', title: '{% translate "Graph line/bar colors" %}', url: frontend_settings_url },
+            { category: '{% translate "Frontend" %}', title: '{% translate "Graph sorting/order" %}', url: frontend_sortedgraphs_sort_url },
 
-            { category: '{% trans "InfluxDB" %}', title: '{% trans "InfluxDB integration" %}', url: influxdb_settings_url },
-            { category: '{% trans "InfluxDB" %}', title: '{% trans "InfluxDB HTTP / HTTPS" %}', url: influxdb_settings_url },
-            { category: '{% trans "InfluxDB" %}', title: '{% trans "InfluxDB username / password" %}', url: influxdb_settings_url },
-            { category: '{% trans "InfluxDB" %}', title: '{% trans "InfluxDB measurement mapping" %}', url: influxdb_settings_url },
+            { category: '{% translate "InfluxDB" %}', title: '{% translate "InfluxDB integration" %}', url: influxdb_settings_url },
+            { category: '{% translate "InfluxDB" %}', title: '{% translate "InfluxDB HTTP / HTTPS" %}', url: influxdb_settings_url },
+            { category: '{% translate "InfluxDB" %}', title: '{% translate "InfluxDB username / password" %}', url: influxdb_settings_url },
+            { category: '{% translate "InfluxDB" %}', title: '{% translate "InfluxDB measurement mapping" %}', url: influxdb_settings_url },
 
-            { category: '{% trans "Meter statistics" %}', title: '{% trans "Meter statistics overview" %}', url: meter_statistics_url },
-            { category: '{% trans "Meter statistics" %}', title: '{% trans "Latest telegram read" %}', url: meter_statistics_url },
+            { category: '{% translate "Meter statistics" %}', title: '{% translate "Meter statistics overview" %}', url: meter_statistics_url },
+            { category: '{% translate "Meter statistics" %}', title: '{% translate "Latest telegram read" %}', url: meter_statistics_url },
 
-            { category: '{% trans "Mindergas.nl" %}', title: '{% trans "Link your MinderGas account" %}', url: mindergas_settings_url },
-            { category: '{% trans "Mindergas.nl" %}', title: '{% trans "Export to MinderGas" %}', url: mindergas_settings_url },
+            { category: '{% translate "Mindergas.nl" %}', title: '{% translate "Link your MinderGas account" %}', url: mindergas_settings_url },
+            { category: '{% translate "Mindergas.nl" %}', title: '{% translate "Export to MinderGas" %}', url: mindergas_settings_url },
 
-            { category: '{% trans "MQTT" %}', title: '{% trans "Quality of service / QoS" %}', url: mqtt_broker_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Broker port / SSL / TLS" %}', url: mqtt_broker_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "JSON day totals" %}', url: mqtt_jsondaytotals_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic day totals" %}', url: mqtt_splittopicdaytotals_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "JSON gas consumption" %}', url: mqtt_jsongasconsumption_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic gas consumption" %}', url: mqtt_splittopicgasconsumption_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "JSON telegram" %}', url: mqtt_jsontelegram_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Voltage (JSON)" %}', url: mqtt_jsontelegram_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Ampere (JSON)" %}', url: mqtt_jsontelegram_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Raw telegram" %}', url: mqtt_rawtelegram_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic telegram" %}', url: mqtt_splittopictelegram_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Split topic meter statistics" %}', url: mqtt_splittopicmeterstatistics_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Voltage (split topic)" %}', url: mqtt_splittopictelegram_settings_url },
-            { category: '{% trans "MQTT" %}', title: '{% trans "Ampere (split topic)" %}', url: mqtt_splittopictelegram_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Quality of service / QoS" %}', url: mqtt_broker_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Broker port / SSL / TLS" %}', url: mqtt_broker_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "JSON day totals" %}', url: mqtt_jsondaytotals_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Split topic day totals" %}', url: mqtt_splittopicdaytotals_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "JSON gas consumption" %}', url: mqtt_jsongasconsumption_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Split topic gas consumption" %}', url: mqtt_splittopicgasconsumption_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "JSON telegram" %}', url: mqtt_jsontelegram_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Voltage (JSON)" %}', url: mqtt_jsontelegram_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Ampere (JSON)" %}', url: mqtt_jsontelegram_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Raw telegram" %}', url: mqtt_rawtelegram_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Split topic telegram" %}', url: mqtt_splittopictelegram_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Split topic meter statistics" %}', url: mqtt_splittopicmeterstatistics_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Voltage (split topic)" %}', url: mqtt_splittopictelegram_settings_url },
+            { category: '{% translate "MQTT" %}', title: '{% translate "Ampere (split topic)" %}', url: mqtt_splittopictelegram_settings_url },
 
-            { category: '{% trans "Notifications" %}', title: '{% trans "App notifications" %}', url: notification_setting_url },
-            { category: '{% trans "Notifications" %}', title: '{% trans "Pushover app" %}', url: notification_setting_url },
-            { category: '{% trans "Notifications" %}', title: '{% trans "Prowl app" %}', url: notification_setting_url },
-            { category: '{% trans "Notifications" %}', title: '{% trans "Telegram (your bot)" %}', url: notification_setting_url },
+            { category: '{% translate "Notifications" %}', title: '{% translate "App notifications" %}', url: notification_setting_url },
+            { category: '{% translate "Notifications" %}', title: '{% translate "Pushover app" %}', url: notification_setting_url },
+            { category: '{% translate "Notifications" %}', title: '{% translate "Prowl app" %}', url: notification_setting_url },
+            { category: '{% translate "Notifications" %}', title: '{% translate "Telegram (your bot)" %}', url: notification_setting_url },
 
-            { category: '{% trans "PVOutput.org" %}', title: '{% trans "Link your PVOutput.org account" %}', url: pvoutput_apisettings_url },
-            { category: '{% trans "PVOutput.org" %}', title: '{% trans "PVOutput.org Add Status" %}', url: pvoutput_addstatus_settings_url },
-            { category: '{% trans "PVOutput.org" %}', title: '{% trans "PVOutput.org donator options" %}', url: pvoutput_addstatus_settings_url },
+            { category: '{% translate "PVOutput.org" %}', title: '{% translate "Link your PVOutput.org account" %}', url: pvoutput_apisettings_url },
+            { category: '{% translate "PVOutput.org" %}', title: '{% translate "PVOutput.org Add Status" %}', url: pvoutput_addstatus_settings_url },
+            { category: '{% translate "PVOutput.org" %}', title: '{% translate "PVOutput.org donator options" %}', url: pvoutput_addstatus_settings_url },
 
-            { category: '{% trans "Retention" %}', title: '{% trans "Clean up reading" %}', url: retention_settings_url },
-            { category: '{% trans "Retention" %}', title: '{% trans "Apply retention" %}', url: retention_settings_url },
-            { category: '{% trans "Retention" %}', title: '{% trans "Periodically delete data" %}', url: retention_settings_url },
+            { category: '{% translate "Retention" %}', title: '{% translate "Clean up reading" %}', url: retention_settings_url },
+            { category: '{% translate "Retention" %}', title: '{% translate "Apply retention" %}', url: retention_settings_url },
+            { category: '{% translate "Retention" %}', title: '{% translate "Periodically delete data" %}', url: retention_settings_url },
 
-            { category: '{% trans "Weather" %}', title: '{% trans "Keep track of outside temperatures" %}', url: weather_settings_url },
-            { category: '{% trans "Weather" %}', title: '{% trans "Buienradar API" %}', url: weather_settings_url },
+            { category: '{% translate "Weather" %}', title: '{% translate "Keep track of outside temperatures" %}', url: weather_settings_url },
+            { category: '{% translate "Weather" %}', title: '{% translate "Buienradar API" %}', url: weather_settings_url },
         ];
 
         $(document).ready(function () {

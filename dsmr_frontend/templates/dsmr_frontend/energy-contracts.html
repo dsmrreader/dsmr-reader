@@ -3,23 +3,23 @@
 {% load static %} 
 {% load i18n %}
 
-{% block title %}{% trans "Energy contracts" %}{% endblock %}
-{% block header %}{% trans "Energy contracts" %} &nbsp; <i class="fas fa-euro-sign"></i>{% endblock %}
+{% block title %}{% translate "Energy contracts" %}{% endblock %}
+{% block header %}{% translate "Energy contracts" %} &nbsp; <i class="fas fa-euro-sign"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktranslate %} <i class="fas fa-smile-wink"></i>
     </div>
 {% endif %}
 
 {% if energy_contracts %}
 	<div class="alert alert-info" role="alert">
 	    <span class="fas fa-info-circle fa-2x"></span> &nbsp;
-	    {% blocktrans %}Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier.{% endblocktrans %}
-	    {% blocktrans %}Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience.{% endblocktrans %}
+	    {% blocktranslate %}Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier.{% endblocktranslate %}
+	    {% blocktranslate %}Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience.{% endblocktranslate %}
 	</div>
 
     {% for current in energy_contracts %}
@@ -33,23 +33,23 @@
 			        <table class="table table-hover">
 			            <tr>
 			                <th class="col-sm-6"><span class="unit">{{ current.start }} &larr;&rarr; {{ current.end|default:'-' }}</span></th>
-			                <th class="col-sm-2">{% if capabilities.electricity %}{% trans "Consumed" %}{% endif %}</th>
-			                <th class="col-sm-2">{% if capabilities.electricity_returned %}{% trans "Returned" %}{% endif %}</th>
-			                <th class="col-sm-2">{% trans "Costs" %} <span class="unit">&euro;</span></th>
+			                <th class="col-sm-2">{% if capabilities.electricity %}{% translate "Consumed" %}{% endif %}</th>
+			                <th class="col-sm-2">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
+			                <th class="col-sm-2">{% translate "Costs" %} <span class="unit">&euro;</span></th>
 			            </tr>
 			            {% if frontend_settings.merge_electricity_tariffs %}<tr>
-			                <td>{% if capabilities.electricity %}{% trans "Electricity (single tariff)" %} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+			                <td>{% if capabilities.electricity %}{% translate "Electricity (single tariff)" %} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
 			                <td><span class="badge bg-red" id="consumption_electrity_merged">{% if capabilities.electricity %}{{ current.summary.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
 			                <td><span class="badge bg-green" id="consumption_electrity_returned_merged">{% if capabilities.electricity_returned %}{{ current.summary.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
 			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ current.summary.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
 			            </tr>
 			            {% else %}<tr>
-			                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+			                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
 			                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ current.summary.electricity1|default:'-'|floatformat:2 }} </span>{% endif %}</td>
 			                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ current.summary.electricity1_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
 			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ current.summary.electricity1_cost|default:'-' }}{% endif %}</span></td>
 			            </tr><tr>
-			                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% trans "kWh" noop %}</span>{% endif %}</td>
+			                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
 			                <td><span class="badge bg-red">{% if capabilities.electricity %}{{ current.summary.electricity2|default:'-'|floatformat:2 }}{% endif %}</span></td>
 			                <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ current.summary.electricity2_returned|default:'-'|floatformat:2 }}{% endif %}</span></td>
 			                <td><span class="badge bg-black">{% if capabilities.electricity %}{{ current.summary.electricity2_cost|default:'-' }}{% endif %}</span></td>
@@ -57,7 +57,7 @@
 			            {% endif %}
 			            {% if capabilities.gas %}
                         <tr>
-			                <td> {% trans "Gas" %} <span class="unit">{% trans "m<sup>3</sup>" noop %}</span></td>
+			                <td> {% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" noop %}</span></td>
 			                <td><span class="badge bg-orange">{{ current.summary.gas|default:'-'|floatformat:2 }}</span></td>
 			                <td>&nbsp;</td>
 			                <td><span class="badge bg-black">{{ current.summary.gas_cost|default:'-' }}</span></td>
@@ -65,7 +65,7 @@
 			            {% endif %}
                         {% if current.summary.fixed_cost %}
                         <tr>
-			                <td> {% trans "Fixed costs" %} <span class="unit">&euro;</span></td>
+			                <td> {% translate "Fixed costs" %} <span class="unit">&euro;</span></td>
 			                <td>
                                 <span class="unit">
                                     {{ current.summary.number_of_days|default:'-' }}
@@ -78,7 +78,7 @@
                         {% endif %}
 
 			            <tr>
-			                <td style="font-weight: bold;">{% trans "Total" %}</td>
+			                <td style="font-weight: bold;">{% translate "Total" %}</td>
 			                <td><span class="badge bg-red">{% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}{{ current.summary.electricity_merged|default:'-'|floatformat:2 }}  </span>{% endif %}</td>
 			                <td><span class="badge bg-green">{% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs%}{{ current.summary.electricity_returned_merged|default:'-'|floatformat:2 }}{% endif %}</span></td>
 			                <td><span class="badge bg-black">{{ current.summary.total_cost|default:'-' }}</span></td>
@@ -86,46 +86,46 @@
 			            
 
                         <tr class="">
-                            <td colspan="4"><a class="show-unit-prices" href="#">{% trans 'Show contract prices' %}</a></td>
+                            <td colspan="4"><a class="show-unit-prices" href="#">{% translate 'Show contract prices' %}</a></td>
                         </tr>
                         {% if current.prices.electricity_delivered_1_price %}
                         <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_1_delivered_name }}</small> <span class="unit">({% trans "tariff 1" %})</span></td>
+                            <td colspan="3"><small>{{ frontend_settings.tariff_1_delivered_name }}</small> <span class="unit">({% translate "tariff 1" %})</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_delivered_1_price }}</small></span></td>
                         </tr>
                         {% endif %}
                         
                         {% if current.prices.electricity_delivered_2_price %}
                         <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_2_delivered_name }}</small> <span class="unit">({% trans "tariff 2" %})</span></td>
+                            <td colspan="3"><small>{{ frontend_settings.tariff_2_delivered_name }}</small> <span class="unit">({% translate "tariff 2" %})</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_delivered_2_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.gas_price %}
                         <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{% trans "Gas" %}</small></td>
+                            <td colspan="3"><small>{% translate "Gas" %}</small></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.gas_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.electricity_returned_1_price %}
                         <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_1_returned_name }}</small> <span class="unit">({% trans "tariff 1" %})</span></td>
+                            <td colspan="3"><small>{{ frontend_settings.tariff_1_returned_name }}</small> <span class="unit">({% translate "tariff 1" %})</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_returned_1_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.electricity_returned_2_price %}
                         <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_2_returned_name }}</small> <span class="unit">({% trans "tariff 2" %})</span></td>
+                            <td colspan="3"><small>{{ frontend_settings.tariff_2_returned_name }}</small> <span class="unit">({% translate "tariff 2" %})</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_returned_2_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.fixed_daily_cost %}
                         <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{% trans "Fixed daily costs" %}</small></td>
+                            <td colspan="3"><small>{% translate "Fixed daily costs" %}</small></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.fixed_daily_cost }}</small></span></td>
                         </tr>
                         {% endif %}

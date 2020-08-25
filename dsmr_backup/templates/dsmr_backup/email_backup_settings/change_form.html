@@ -4,8 +4,8 @@
 
 {% block object-tools %}
     <div class="submit-row" style="text-align: center;">
-        {% blocktrans %}Emails are currently sent to{% endblocktrans %}: <strong>{{ email_address|default:'No email address configured!' }}</strong>
-        <small>(<a href="{% url 'admin:dsmr_backend_emailsettings_change' 1 %}">{% blocktrans %}edit email address here{% endblocktrans %}</a>)</small>
+        {% blocktranslate %}Emails are currently sent to{% endblocktranslate %}: <strong>{{ email_address|default:'No email address configured!' }}</strong>
+        <small>(<a href="{% url 'admin:dsmr_backend_emailsettings_change' 1 %}">{% blocktranslate %}edit email address here{% endblocktranslate %}</a>)</small>
     </div>
 
     {{ block.super }}
@@ -18,7 +18,7 @@
     {{ block.super }}
 
     <div class="submit-row" style="text-align: center;">
-        {% blocktrans %}Saving the configuration will reset the delay until the next email backup.{% endblocktrans %}
+        {% blocktranslate %}Saving the configuration will reset the delay until the next email backup.{% endblocktranslate %}
     </div>
 
 {% endblock %}

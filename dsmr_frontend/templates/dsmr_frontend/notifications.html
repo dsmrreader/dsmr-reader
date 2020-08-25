@@ -4,8 +4,8 @@
 {% load i18n %} 
 {% load l10n %}
 
-{% block title %}{% trans "Notifications" %}{% endblock %}
-{% block header %}{% trans "Notifications" %} &nbsp; <i class="far fa-bell"></i>{% endblock %}
+{% block title %}{% translate "Notifications" %}{% endblock %}
+{% block header %}{% translate "Notifications" %} &nbsp; <i class="far fa-bell"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -15,16 +15,16 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% trans "Unread Notifications" %}
+                    {% translate "Unread Notifications" %}
                     &nbsp;
                     <div class="pull-right">
                         {% if notifications and user.is_authenticated %}
-                            <button class="btn btn-sm btn-success mark-all-notifications-read" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Mark all notifications as read' %}">
-                                <i class="fas fa-check-double"></i> {% trans 'Mark all as read' %}
+                            <button class="btn btn-sm btn-success mark-all-notifications-read" data-notification-id="{{ current_notification.pk }}" title="{% translate 'Mark all notifications as read' %}">
+                                <i class="fas fa-check-double"></i> {% translate 'Mark all as read' %}
                             </button>
                         {% else %}
                             <a class="btn btn-sm btn-primary"  href="{% url 'admin:login' %}?next={% url 'frontend:notifications' %}">
-                                <i class="fas fa-lock"></i> &nbsp; {% trans 'Login to mark as read' %}
+                                <i class="fas fa-lock"></i> &nbsp; {% translate 'Login to mark as read' %}
                             </a>
                         {% endif %}
                     </div>
@@ -34,20 +34,20 @@
                         {% for current_notification in notifications %}
                         <div class="alert alert-info" role="alert">
                             {% if user.is_authenticated %}
-                            <button class="btn btn-sm btn-success mark-notification-read" data-notification-id="{{ current_notification.pk }}" title="{% trans 'Mark as read' %}">
+                            <button class="btn btn-sm btn-success mark-notification-read" data-notification-id="{{ current_notification.pk }}" title="{% translate 'Mark as read' %}">
                                 <i class="fas fa-check"></i>
                             </button>
                             &nbsp{% endif %}
 
                             {% if current_notification.redirect_to %}
-                            <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}" title="{% trans "View page" %}"><i class="fas fa-external-link-alt"></i></a> &nbsp; 
+                            <a class="btn btn-sm btn-primary" href="{% url current_notification.redirect_to %}" title="{% translate "View page" %}"><i class="fas fa-external-link-alt"></i></a> &nbsp;
                             {% endif %}
 
                             {{ current_notification.message }}
                         </div>
                         {% endfor %}
                     {% else %}
-                        {% trans 'There are no unread notifications.' %}
+                        {% translate 'There are no unread notifications.' %}
                     {% endif %}
                 </div>
             </div>

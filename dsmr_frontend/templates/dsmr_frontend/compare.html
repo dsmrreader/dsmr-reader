@@ -3,15 +3,15 @@
 {% load static %} 
 {% load i18n %}
 
-{% block title %}{% trans "Compare" %}{% endblock %}
-{% block header %}{% trans "Compare" %} &nbsp; <i class="fas fa-balance-scale-left"></i>{% endblock %}
+{% block title %}{% translate "Compare" %}{% endblock %}
+{% block header %}{% translate "Compare" %} &nbsp; <i class="fas fa-balance-scale-left"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktranslate %} <i class="fas fa-smile-wink"></i>
     </div>
 {% endif %}
 
@@ -20,21 +20,21 @@
         <div class="col-sm-2">
             <div class="panel datepicker-panel">
                 <header class="panel-heading datepicker-header">
-                    {% blocktrans %}Level of detail{% endblocktrans %}
+                    {% blocktranslate %}Level of detail{% endblocktranslate %}
                 </header>
                 <div class="panel-body">
                     <div class="col-sm-12">
-                        <div class="row center-block datepicker-level-name">{% trans "Days" %}</div>
+                        <div class="row center-block datepicker-level-name">{% translate "Days" %}</div>
                         <div class="row center-block datepicker-level-icon">
                             <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
                         </div>
 
-                        <div class="row center-block datepicker-level-name">{% trans "Months" %}</div>
+                        <div class="row center-block datepicker-level-name">{% translate "Months" %}</div>
                         <div class="row center-block datepicker-level-icon">
                             <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
                         </div>
 
-                        <div class="row center-block datepicker-level-name">{% trans "Years" %}</div>
+                        <div class="row center-block datepicker-level-name">{% translate "Years" %}</div>
                         <div class="row center-block datepicker-level-icon">
                             <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
                         </div>
@@ -46,7 +46,7 @@
         <div class="col-sm-5">
             <div class="panel datepicker-panel">
                 <header class="panel-heading datepicker-header">
-                    {% blocktrans %}Base selection{% endblocktrans %}
+                    {% blocktranslate %}Base selection{% endblocktranslate %}
                 </header>
                 <div class="panel-body">
                     <div class="row center-block datepicker-calendar-block">
@@ -59,7 +59,7 @@
         <div class="col-sm-5">
             <div class="panel datepicker-panel">
                 <header class="panel-heading datepicker-header">
-                    {% blocktrans %}Compare with selection{% endblocktrans %}
+                    {% blocktranslate %}Compare with selection{% endblocktranslate %}
                 </header>
                 <div class="panel-body">
                     <div class="row center-block datepicker-calendar-block">

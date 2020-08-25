@@ -2,15 +2,15 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% trans "Archive" %}{% endblock %}
-{% block header %}{% trans "Archive" %} &nbsp; <i class="fas fa-history"></i>{% endblock %}
+{% block title %}{% translate "Archive" %}{% endblock %}
+{% block header %}{% translate "Archive" %} &nbsp; <i class="fas fa-history"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if not capabilities.any or not start_date or not end_date %}
     <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktrans %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktrans %} <i class="fas fa-smile-wink"></i>
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktranslate %} <i class="fas fa-smile-wink"></i>
     </div>
 {% endif %}
 
@@ -19,21 +19,21 @@
         <div class="col-sm-2">
             <div class="panel datepicker-panel">
                 <header class="panel-heading datepicker-header">
-                    {% blocktrans %}Level of detail{% endblocktrans %}
+                    {% blocktranslate %}Level of detail{% endblocktranslate %}
                 </header>
                 <div class="panel-body">
                     <div class="col-sm-12">
-                        <div class="row center-block datepicker-level-name">{% trans "Days" %}</div>
+                        <div class="row center-block datepicker-level-name">{% translate "Days" %}</div>
                         <div class="row center-block datepicker-level-icon">
                             <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
                         </div>
 
-                        <div class="row center-block datepicker-level-name">{% trans "Months" %}</div>
+                        <div class="row center-block datepicker-level-name">{% translate "Months" %}</div>
                         <div class="row center-block datepicker-level-icon">
                             <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
                         </div>
 
-                        <div class="row center-block datepicker-level-name">{% trans "Years" %}</div>
+                        <div class="row center-block datepicker-level-name">{% translate "Years" %}</div>
                         <div class="row center-block datepicker-level-icon">
                             <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
                         </div>
@@ -44,7 +44,7 @@
         <div class="col-sm-4">
             <div class="panel datepicker-panel">
                 <header class="panel-heading datepicker-header">
-                    {% blocktrans %}Pick a day, month or year{% endblocktrans %}
+                    {% blocktranslate %}Pick a day, month or year{% endblocktranslate %}
                 </header>
                 <div class="panel-body">
                     <div class="row center-block datepicker-calendar-block">
@@ -102,17 +102,17 @@
 
     <script type="text/javascript">
         /* Translations. */
-        var text_electricity_header = '{% blocktrans %}Electricity consumed{% endblocktrans %} {% trans "(in kWh)" %}';
-        var text_electricity_returned_header = '{% blocktrans %}Electricity returned{% endblocktrans %} {% trans "(in kWh)" %}';
-        var text_gas_header = '{% blocktrans %}Gas consumed{% endblocktrans %} {% trans "(in m³)" %}';
+        var text_electricity_header = '{% blocktranslate %}Electricity consumed{% endblocktranslate %} {% translate "(in kWh)" %}';
+        var text_electricity_returned_header = '{% blocktranslate %}Electricity returned{% endblocktranslate %} {% translate "(in kWh)" %}';
+        var text_gas_header = '{% blocktranslate %}Gas consumed{% endblocktranslate %} {% translate "(in m³)" %}';
 
         var text_electricity1_delivered = '{{ frontend_settings.tariff_1_delivered_name }}';
         var text_electricity2_delivered = '{{ frontend_settings.tariff_2_delivered_name }}';
         var text_electricity1_returned = '{{ frontend_settings.tariff_1_returned_name }}';
         var text_electricity2_returned = '{{ frontend_settings.tariff_2_returned_name }}';
-        var text_electricity_merged_delivered = '{% blocktrans %}Electricity (single tariff){% endblocktrans %}';
-        var text_electricity_merged_returned = '{% blocktrans %}Electricity returned (single tariff){% endblocktrans %}';
-        var text_gas = '{% blocktrans %}Gas{% endblocktrans %}';
+        var text_electricity_merged_delivered = '{% blocktranslate %}Electricity (single tariff){% endblocktranslate %}';
+        var text_electricity_merged_returned = '{% blocktranslate %}Electricity returned (single tariff){% endblocktranslate %}';
+        var text_gas = '{% blocktranslate %}Gas{% endblocktranslate %}';
         
         /* Colors. */
         var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
