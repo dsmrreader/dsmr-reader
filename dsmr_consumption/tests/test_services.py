@@ -331,16 +331,19 @@ class TestServices(InterceptStdoutMixin, TestCase):
         if self.support_prices:
             self.assertEqual(data['electricity1_cost'], Decimal('0.25'))
             self.assertEqual(data['electricity2_cost'], Decimal('0.75'))
-            self.assertEqual(data['total_cost'], 1)
+            self.assertEqual(data['fixed_cost'], Decimal('1.23456'))
+            self.assertEqual(data['total_cost'], Decimal('2.23'))
 
             self.assertEqual(data['energy_supplier_price_electricity_delivered_1'], 1)
             self.assertEqual(data['energy_supplier_price_electricity_delivered_2'], 2)
-            self.assertEqual(data['energy_supplier_price_electricity_returned_1'], 0.5)
-            self.assertEqual(data['energy_supplier_price_electricity_returned_2'], 1.5)
+            self.assertEqual(data['energy_supplier_price_electricity_returned_1'], Decimal('0.5'))
+            self.assertEqual(data['energy_supplier_price_electricity_returned_2'], Decimal('1.5'))
             self.assertEqual(data['energy_supplier_price_gas'], 5)
+            self.assertEqual(data['energy_supplier_price_fixed_daily_cost'], Decimal('1.23456'))
         else:
             self.assertEqual(data['electricity1_cost'], 0)
             self.assertEqual(data['electricity2_cost'], 0)
+            self.assertEqual(data['fixed_cost'], 0)
             self.assertEqual(data['total_cost'], 0)
 
             self.assertEqual(data['energy_supplier_price_electricity_delivered_1'], 0)
@@ -348,6 +351,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
             self.assertEqual(data['energy_supplier_price_electricity_returned_1'], 0)
             self.assertEqual(data['energy_supplier_price_electricity_returned_2'], 0)
             self.assertEqual(data['energy_supplier_price_gas'], 0)
+            self.assertEqual(data['energy_supplier_price_fixed_daily_cost'], 0)
 
         GasConsumption.objects.create(
             read_at=now,  # Now.
@@ -506,6 +510,8 @@ class TestServices(InterceptStdoutMixin, TestCase):
         if not EnergySupplierPrice.objects.exists():
             return self.assertEqual(len(energy_contracts), 0)
 
+        self.assertEqual(energy_contracts[0]['number_of_days'], 2)
+
         summary = energy_contracts[0]['summary']
 
         self.assertEqual(summary['electricity1'], Decimal('2.732'))
@@ -519,7 +525,8 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(summary['electricity_returned_merged'], Decimal('0.000'))
         self.assertEqual(summary['gas'], Decimal('6.116'))
         self.assertEqual(summary['gas_cost'], Decimal('3.60'))
-        self.assertEqual(summary['total_cost'], Decimal('4.29'))
+        self.assertEqual(summary['fixed_cost'], Decimal('1.23'))
+        self.assertEqual(summary['total_cost'], Decimal('5.52'))
 
 
 class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):

@@ -1,0 +1,11 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+{% block field_sets %}
+    <div class="submit-row" style="text-align: center; background: #FFFFCC;">
+        {% blocktrans %}Updating prices for (past) days already stored in the Archive does <strong>not affect</strong> them.{% endblocktrans %}
+        {% blocktrans %}In order to reapply price changes retroactively{% endblocktrans %} <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/v4/faq.html" target="_blank">{% blocktrans %}see the FAQ{% endblocktrans %}</a> {% blocktrans %}for a how-to.{% endblocktrans %}
+    </div>
+
+    {{ block.super }}
+{% endblock %}

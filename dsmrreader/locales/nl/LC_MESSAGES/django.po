@@ -489,6 +489,18 @@ msgstr "DSMR 4 (gas)meters groeperen metingen altijd per uur. DSMR 5 (gas)meters
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
 
+msgid "Updating prices for (past) days already stored in the Archive does <strong>not affect</strong> them."
+msgstr "Prijswijzigingen voor historische dagen die (in het verleden)  in het Archief zijn opgeslagen, hebben daar <strong>geen effect</strong> op."
+
+msgid "In order to reapply price changes retroactively"
+msgstr "Om prijswijzigingen met terugwerkende kracht toe te passen"
+
+msgid "see the FAQ"
+msgstr "zie de FAQ"
+
+msgid "for a how-to."
+msgstr "voor hoe je dit kan doen."
+
 msgid "Input method and DSMR protocol"
 msgstr "Uitleesmethode en DSMR-protocol"
 

@@ -823,7 +823,8 @@ class TestServices(InterceptStdoutMixin, TestCase):
             electricity_delivered_2_price=2,
             electricity_returned_1_price=0.5,
             electricity_returned_2_price=1,
-            gas_price=0
+            gas_price=0,
+            fixed_daily_cost=5
         )
         DayStatistics.objects.create(
             day=target_day.date(),
@@ -835,19 +836,22 @@ class TestServices(InterceptStdoutMixin, TestCase):
             # Previously not taken into account
             electricity1_returned=10,
             electricity2_returned=5,
-            gas=0
+            gas=0,
+            fixed_cost=0,
         )
         day_totals = DayStatistics.objects.all()[0]
         self.assertEqual(day_totals.electricity1_cost, 0)
         self.assertEqual(day_totals.electricity2_cost, 0)
         self.assertEqual(day_totals.total_cost, 0)
+        self.assertEqual(day_totals.fixed_cost, 0)
 
         dsmr_stats.services.recalculate_prices()
 
         day_totals = DayStatistics.objects.all()[0]
         self.assertEqual(day_totals.electricity1_cost, 5)
         self.assertEqual(day_totals.electricity2_cost, 35)
-        self.assertEqual(day_totals.total_cost, 40)
+        self.assertEqual(day_totals.fixed_cost, 5)
+        self.assertEqual(day_totals.total_cost, 45)
 
     def test_reconstruct_missing_day_statistics(self):
         # Existing day should be ignored.

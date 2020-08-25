@@ -7,12 +7,13 @@
         "gas": "0.009",
         "electricity2": "0.549",
         "electricity2_returned": "0.000",
-        "total_cost": "0.26",
+        "total_cost": "1.49",
         "electricity1_returned": "0.000",
         "electricity1": "0.625",
         "average_temperature": "0.0",
         "gas_cost": "0.01",
-        "electricity1_cost": "0.13"
+        "electricity1_cost": "0.13",
+        "fixed_cost": "1.23"
     },
     "model": "dsmr_stats.daystatistics"
 },

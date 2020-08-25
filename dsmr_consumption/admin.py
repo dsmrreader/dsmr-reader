@@ -1,6 +1,6 @@
 from django.contrib import admin
-from solo.admin import SingletonModelAdmin
 from rangefilter.filter import DateTimeRangeFilter
+from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import ReadOnlyAdminModel
 from .forms import EnergySupplierPriceForm
@@ -16,6 +16,7 @@ class ConsumptionSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(EnergySupplierPrice)
 class EnergySupplierPriceAdmin(admin.ModelAdmin):
+    change_form_template = 'dsmr_consumption/energy_supplier_prices/change_form.html'
     list_display = ('description', 'start', 'end')
     form = EnergySupplierPriceForm
 
