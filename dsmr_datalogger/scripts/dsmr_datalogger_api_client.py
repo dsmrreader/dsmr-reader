@@ -19,7 +19,7 @@ logger = logging.getLogger('dsmrreader')
 
 def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
     """ Opens a serial/network connection and reads it until we have a full telegram. Yields the result """
-    MAX_BYTES_PER_READ = 512
+    MAX_BYTES_PER_READ = 2048
     MAX_READ_TIMEOUT = 0.25  # Will cancel read() if it does not receive MAX_BYTES_PER_READ Bytes in time.
 
     logger.info(

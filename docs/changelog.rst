@@ -17,6 +17,8 @@ v4.3.0 - 2020-09-xx
 - ``Added``: Volgorde grafieken zelf instellen [`#903 <https://github.com/dennissiemensma/dsmr-reader/issues/903>`_]
 - ``Added``: Ondersteuning voor vaste leveringskosten per dag [`#1048 <https://github.com/dennissiemensma/dsmr-reader/issues/1048>`_]
 
+- ``Fixed``: Edge-case telegram parse error door berichtlengte [`#1090 <https://github.com/dennissiemensma/dsmr-reader/issues/1090>`_]
+
 
 v4.2.0 - 2020-08-19
 -------------------
