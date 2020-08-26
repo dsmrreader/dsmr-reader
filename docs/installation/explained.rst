@@ -244,11 +244,11 @@ Remove the default Nginx vhost (**only when you do not use it yourself, see the 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
     sudo ln -s /etc/nginx/sites-available/dsmr-webinterface /etc/nginx/sites-enabled/
 
-- Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::
+- Let Nginx verify vhost syntax and restart Nginx when the ``-t`` configtest passes::
 
-    sudo service nginx configtest
+    sudo nginx -t
 
-    sudo service nginx reload
+    sudo systemctl restart nginx.service
 
 
 10. Supervisor

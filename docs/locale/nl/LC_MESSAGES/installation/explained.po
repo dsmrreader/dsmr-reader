@@ -496,10 +496,12 @@ msgstr ""
 "hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te passen::"
 
 #: ../../installation/explained.rst:247
-msgid "Let Nginx verify vhost syntax and reload Nginx when ``configtest`` passes::"
+msgid ""
+"Let Nginx verify vhost syntax and restart Nginx when the ``-t`` configtest "
+"passes::"
 msgstr ""
-"Laat Nginx controleren of je geen typefouten hebt gemaakt en herlaad Nginx "
-"vervolgens wanneer de ``configtest`` lukt::"
+"Laat Nginx controleren of je geen typefouten hebt gemaakt en herstart Nginx "
+"vervolgens wanneer de ``-t`` configtest lukt::"
 
 #: ../../installation/explained.rst:255
 msgid "10. Supervisor"

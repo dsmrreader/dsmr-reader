@@ -88,8 +88,8 @@ Continue::
     sudo rm /etc/nginx/sites-enabled/default
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
     sudo ln -s /etc/nginx/sites-available/dsmr-webinterface /etc/nginx/sites-enabled/
-    sudo service nginx configtest
-    sudo service nginx reload
+    sudo nginx -t
+    sudo systemctl restart nginx.service
     
     # Supervisor
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_datalogger.conf /etc/supervisor/conf.d/
