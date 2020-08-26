@@ -12,7 +12,7 @@ class Command(BaseCommand):  # noqa
         password = config('DSMR_PASSWORD')
 
         if not username or not password:
-            raise CommandError('DSMR_USER or DSMR_PASSWORD (or both) are empty')
+            raise CommandError('Either DSMR_USER or DSMR_PASSWORD (or both) are omitted or defined as empty in (.)env')
 
         try:
             user = User.objects.get(
