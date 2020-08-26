@@ -208,7 +208,7 @@ class TestServices(TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_notifications(self, now_mock, requests_post_mock):
         """ Notifications: Test notify() (actual notification sender)"""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 18, hour=0, minute=5))
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text='OK')
 
         notification_settings = NotificationSetting.get_solo()
@@ -229,9 +229,9 @@ class TestServices(TestCase):
 
         # Make sure the expected message is created.
         yesterday = (timezone.localtime(timezone.now()) - timezone.timedelta(hours=24)).date()
-        stats = DayStatistics.objects.get(day=yesterday)
-        api_msg = dsmr_notification.services.create_consumption_message(yesterday, stats)
-        self.assertTrue(yesterday.strftime("%d-%m-%Y") in api_msg)
+        day_statistics = DayStatistics.objects.get(day=yesterday)
+        api_msg = dsmr_notification.services.create_consumption_message(day_statistics)
+        self.assertTrue(day_statistics.day.strftime("%d-%m-%Y") in api_msg)
 
         # Next notification should be pushed.
         self.assertGreater(NotificationSetting.get_solo().next_notification, timezone.now())

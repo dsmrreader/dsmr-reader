@@ -2458,20 +2458,11 @@ msgstr "Tijdstip van de volgende controle. Applicatie werkt dit automatisch bij.
 msgid "Status notification configuration"
 msgstr "Statusnotificatie-configuratie"
 
-msgid "Your daily usage statistics for {}\n"
-msgstr "Dagelijkse verbruiksstatistieken voor {}\n"
+msgid "Your daily usage statistics for"
+msgstr "Dagelijkse verbruiksstatistieken voor"
 
-msgid "Electricity consumed: {} kWh\n"
-msgstr "Elektriciteit verbruikt: {} kWh\n"
-
-msgid "Electricity returned: {} kWh\n"
-msgstr "Elektriciteit teruggeleverd: {} kWh\n"
-
-msgid "Gas consumed: {} m3\n"
-msgstr "Gas verbruikt: {} m3\n"
-
-msgid "Total cost: € {}"
-msgstr "Totale kosten: € {}"
+msgid "Total cost"
+msgstr "Totale kosten"
 
 msgid "Daily usage notification"
 msgstr "Dagelijkse verbruiksnotificatie"
@@ -2568,9 +2559,6 @@ msgstr "Notities"
 
 msgid "Date"
 msgstr "Datum"
-
-msgid "Total cost"
-msgstr "Totale kosten"
 
 msgid "Electricity 1 (low tariff)"
 msgstr "Elektriciteit 1 (daltarief)"
@@ -2853,6 +2841,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Electricity consumed: {} kWh\n"
+#~ msgstr "Elektriciteit verbruikt: {} kWh\n"
+
+#~ msgid "Electricity returned: {} kWh\n"
+#~ msgstr "Elektriciteit teruggeleverd: {} kWh\n"
+
+#~ msgid "Gas consumed: {} m3\n"
+#~ msgstr "Gas verbruikt: {} m3\n"
+
+#~ msgid "Total cost: € {}"
+#~ msgstr "Totale kosten: € {}"
 
 #~ msgid "Daily costs"
 #~ msgstr "Dagelijkse kosten"

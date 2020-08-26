@@ -40,25 +40,32 @@ def notify_pre_check():
     return True
 
 
-def create_consumption_message(day, stats):
+def create_consumption_message(day_statistics):
     """ Create the action notification message """
     capabilities = dsmr_backend.services.backend.get_capabilities()
-    day_date = (day - timezone.timedelta(hours=1)).strftime("%d-%m-%Y")
-    message = _('Your daily usage statistics for {}\n').format(day_date)
+    day_date = day_statistics.day.strftime("%d-%m-%Y")
+    message = _('Your daily usage statistics for') + ' {}\n'.format(day_date)
 
     if capabilities['electricity']:
-        electricity_merged = dsmr_consumption.services.round_decimal(stats.electricity_merged)
-        message += _('Electricity consumed: {} kWh\n').format(electricity_merged)
+        electricity_merged = dsmr_consumption.services.round_decimal(day_statistics.electricity_merged)
+        message += _('Electricity consumed') + ': {} kWh\n'.format(electricity_merged)
 
     if capabilities['electricity_returned']:
-        electricity_returned_merged = dsmr_consumption.services.round_decimal(stats.electricity_returned_merged)
-        message += _('Electricity returned: {} kWh\n').format(electricity_returned_merged)
+        electricity_returned_merged = dsmr_consumption.services.round_decimal(
+            day_statistics.electricity_returned_merged
+        )
+        message += _('Electricity returned') + ': {} kWh\n'.format(electricity_returned_merged)
 
     if capabilities['gas']:
-        gas = dsmr_consumption.services.round_decimal(stats.gas)
-        message += _('Gas consumed: {} m3\n').format(gas)
+        gas = dsmr_consumption.services.round_decimal(day_statistics.gas)
+        message += _('Gas consumed') + ': {} m3\n'.format(gas)
 
-    message += _('Total cost: € {}').format(dsmr_consumption.services.round_decimal(stats.total_cost))
+    if day_statistics.fixed_cost > 0:
+        fixed_cost = dsmr_consumption.services.round_decimal(day_statistics.fixed_cost)
+        message += _('Fixed costs') + ': € {}\n'.format(fixed_cost)
+
+    total_cost = dsmr_consumption.services.round_decimal(day_statistics.total_cost)
+    message += _('Total cost') + ': € {}'.format(total_cost)
     return message
 
 
@@ -165,7 +172,7 @@ def notify():
     ))
 
     try:
-        stats = DayStatistics.objects.get(
+        day_statistics = DayStatistics.objects.get(
             day=(midnight - timezone.timedelta(hours=1))
         )
     except DayStatistics.DoesNotExist:
@@ -175,7 +182,7 @@ def notify():
     logger.debug('Notification:  Creating new notification containing daily usage.')
 
     with translation.override(language=BackendSettings.get_solo().language):
-        message = create_consumption_message(midnight, stats)
+        message = create_consumption_message(day_statistics)
         send_notification(message, str(_('Daily usage notification')))
 
     set_next_notification()
