@@ -11,7 +11,7 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
-v4.3.0 - 2020-09-xx
+v4.3.0 - 2020-08-31
 -------------------
 
 - ``Added``: Volgorde grafieken zelf instellen [`#903 <https://github.com/dennissiemensma/dsmr-reader/issues/903>`_]
