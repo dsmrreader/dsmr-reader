@@ -142,6 +142,8 @@ def create_daily_statistics(day):
         lowest_temperature=consumption.get('lowest_temperature'),
         highest_temperature=consumption.get('highest_temperature'),
         average_temperature=consumption.get('average_temperature'),
+
+        fixed_cost=consumption['fixed_cost'],
     )
 
 
