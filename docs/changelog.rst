@@ -17,6 +17,7 @@ v4.4.0 - 2020-09-xx
 - ``Changed``: Improved scheduled task indication on Status page [`#1093 <https://github.com/dennissiemensma/dsmr-reader/issues/1093>`_]
 - ``Changed``: Simplify version check using Github tags API [`#1097 <https://github.com/dennissiemensma/dsmr-reader/issues/1097>`_]
 
+- ``Fixed``: Fout bij toevoegen/wijzigen energiecontract zonder einddatum [`#1094 <https://github.com/dennissiemensma/dsmr-reader/issues/1094>`_]
 - ``Fixed``: Typefoutje [`#1095 <https://github.com/dennissiemensma/dsmr-reader/issues/1095>`_]
 
 

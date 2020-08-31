@@ -51,6 +51,8 @@
         var consumption_settings_url = '{% url "admin:dsmr_consumption_consumptionsettings_change" consumption_settings.pk %}';
         var datalogger_settings_url = '{% url "admin:dsmr_datalogger_dataloggersettings_change" datalogger_settings.pk %}';
         var dropbox_settings_url = '{% url "admin:dsmr_backup_dropboxsettings_change" dropbox_settings.pk %}';
+        var day_statistics_url = '{% url "admin:dsmr_stats_daystatistics_changelist" %}';
+        var hour_statistics_url = '{% url "admin:dsmr_stats_hourstatistics_changelist" %}';
         var email_settings_url = '{% url "admin:dsmr_backend_emailsettings_change" email_settings.pk %}';
         var energy_supplier_price_url = '{% url "admin:dsmr_consumption_energysupplierprice_changelist" %}';
         var frontend_settings_url = '{% url "admin:dsmr_frontend_frontendsettings_change" frontend_settings.pk %}';
@@ -149,6 +151,9 @@
             { category: '{% translate "Retention" %}', title: '{% translate "Clean up reading" %}', url: retention_settings_url },
             { category: '{% translate "Retention" %}', title: '{% translate "Apply retention" %}', url: retention_settings_url },
             { category: '{% translate "Retention" %}', title: '{% translate "Periodically delete data" %}', url: retention_settings_url },
+
+            { category: '{% translate "Statistics" %}', title: '{% translate "Day statistics" %}', url: day_statistics_url },
+            { category: '{% translate "Statistics" %}', title: '{% translate "Hour statistics" %}', url: hour_statistics_url },
 
             { category: '{% translate "Weather" %}', title: '{% translate "Keep track of outside temperatures" %}', url: weather_settings_url },
             { category: '{% translate "Weather" %}', title: '{% translate "Buienradar API" %}', url: weather_settings_url },

@@ -40,6 +40,14 @@ class TestAdmin(TestCase):
         self.client.post(self.url, data=self.data)
         self.assertTrue(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
 
+    def test_add_esp_without_end_okay(self):
+        """ Add ESP without end date. """
+        del self.data['end']
+
+        self.assertFalse(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
+        self.client.post(self.url, data=self.data)
+        self.assertTrue(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
+
     def test_add_esp_conflict(self):
         """ Add ESP in conflicting range. """
         self.assertFalse(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())

@@ -1305,6 +1305,12 @@ msgstr "Pas retentie toe"
 msgid "Periodically delete data"
 msgstr "Verwijder periodiek gegevens"
 
+msgid "Day statistics"
+msgstr "Dagstatistieken"
+
+msgid "Hour statistics"
+msgstr "Uurstatistieken"
+
 msgid "Weather"
 msgstr "Weergegevens"
 
