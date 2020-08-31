@@ -1,6 +1,5 @@
 from distutils.version import StrictVersion
 import datetime
-import re
 
 import requests
 from django.db.migrations.recorder import MigrationRecorder
@@ -83,12 +82,12 @@ def get_capabilities(capability=None):
 
 
 def is_latest_version():
-    """ Checks whether the current version is the latest one available on Github. """
-    response = requests.get(settings.DSMRREADER_LATEST_VERSION_FILE)
+    """ Checks whether the current version is the latest tagged available on Github. """
+    response = requests.get(settings.DSMRREADER_LATEST_TAGS_LIST)
+    latest_tag = response.json()[0]
 
     local_version = '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3])
-    remote_version = re.search(r'^VERSION = \((\d+), (\d+), (\d+),', str(response.content, 'utf-8'), flags=re.MULTILINE)
-    remote_version = '.'.join(remote_version.groups())
+    remote_version = latest_tag['name'].replace('v', '')
 
     return StrictVersion(local_version) >= StrictVersion(remote_version)
 

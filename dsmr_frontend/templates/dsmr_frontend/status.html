@@ -27,7 +27,11 @@
                                 <br><br>
                                 
                                 <a class="help-trigger" href="#"><small>{% translate "Explain" %}</small></a>
-                                <small class="xhr-hidden">{% blocktranslate %}The application will compare "VERSION = (x,x,x)" in your local dsmrreader/__init__.py file with the latest one available on Github.{% endblocktranslate %}</small>
+                                <small class="xhr-hidden">
+                                    {% blocktranslate trimmed with url=DSMRREADER_LATEST_TAGS_LIST %}
+                                        The application will compare your local version with the <a href="{{ url }}">latest repository tag</a> available on Github.
+                                    {% endblocktranslate %}
+                                </small>
                             </td>
                             <td class="col-sm-6">
                                 <a class="btn btn-success" href="#" id="check_for_updates"><i class="fas fa-sync"></i> &nbsp; {% translate 'Check now' %}</a>

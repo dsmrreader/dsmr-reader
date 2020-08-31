@@ -332,23 +332,35 @@ class TestBackend(InterceptStdoutMixin, TestCase):
 
 @mock.patch('requests.get')
 class TestIslatestVersion(TestCase):
-    response_older = b"from django.utils.version import get_version\n" \
-        b"VERSION = (1, 2, 0, 'final', 0)\n" \
-        b"__version__ = get_version(VERSION)\n"
+    response_older = [
+        {
+            "name": "v1.2.0"
+        },
+        {
+            "name": "v1.1.0"
+        }
+    ]
 
-    response_newer = b"from django.utils.version import get_version\n" \
-        b"VERSION = (10, 99, 0, 'final', 0)\n" \
-        b"__version__ = get_version(VERSION)\n"
+    response_newer = [
+        {
+            "name": "v10.99.0"
+        },
+        {
+            "name": "v1.1.0"
+        }
+    ]
 
-    def test_true(self, request_mock):
-        response_mock = mock.MagicMock(content=self.response_older)
-        request_mock.return_value = response_mock
+    def test_true(self, get_mock):
+        request_mock = mock.MagicMock()
+        request_mock.json.return_value = self.response_older
+        get_mock.return_value = request_mock
 
         self.assertTrue(dsmr_backend.services.backend.is_latest_version())
 
-    def test_false(self, request_mock):
-        response_mock = mock.MagicMock(content=self.response_newer)
-        request_mock.return_value = response_mock
+    def test_false(self, get_mock):
+        request_mock = mock.MagicMock()
+        request_mock.json.return_value = self.response_newer
+        get_mock.return_value = request_mock
 
         self.assertFalse(dsmr_backend.services.backend.is_latest_version())
 

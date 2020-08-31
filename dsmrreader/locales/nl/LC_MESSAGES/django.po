@@ -1577,8 +1577,9 @@ msgstr "Bekijk releases"
 msgid "Explain"
 msgstr "Uitleg"
 
-msgid "The application will compare \"VERSION = (x,x,x)\" in your local dsmrreader/__init__.py file with the latest one available on Github."
-msgstr "De applicatie vergelijkt \"VERSION = (x,x,x)\" in het lokale dsmrreader/__init__.py bestand met de meest recente versie op Github."
+#, python-format
+msgid "The application will compare your local version with the <a href=\"%(url)s\">latest repository tag</a> available on Github."
+msgstr "De applicatie vergelijkt je lokale versie met de <a href=\"%(url)s\">meest recente tag</a> beschikbaar op Github."
 
 msgid "Check now"
 msgstr "Controleer nu"

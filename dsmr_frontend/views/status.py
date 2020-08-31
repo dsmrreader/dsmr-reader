@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import JsonResponse
 from django.views.generic.base import View, TemplateView
 
@@ -12,6 +13,7 @@ class Status(ConfigurableLoginRequiredMixin, TemplateView):
         context_data = super(Status, self).get_context_data(**kwargs)
         context_data['status'] = dsmr_backend.services.backend.status_info()
         context_data['capabilities'] = context_data['status']['capabilities']
+        context_data['DSMRREADER_LATEST_TAGS_LIST'] = settings.DSMRREADER_LATEST_TAGS_LIST
         return context_data
 
 
