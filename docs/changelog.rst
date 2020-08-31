@@ -14,6 +14,8 @@ v4.x releases
 v4.4.0 - 2020-09-xx
 -------------------
 
+- ``Changed``: Improved scheduled task indication on Status page [`#1093 <https://github.com/dennissiemensma/dsmr-reader/issues/1093>`_]
+
 - ``Fixed``: Typefoutje [`#1095 <https://github.com/dennissiemensma/dsmr-reader/issues/1095>`_]
 
 

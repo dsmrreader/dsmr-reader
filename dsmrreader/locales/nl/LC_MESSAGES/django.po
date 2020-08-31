@@ -1694,8 +1694,8 @@ msgstr "Gepland proces"
 msgid "Last run"
 msgstr "Meest recente uitvoer"
 
-msgid "Next run"
-msgstr "Volgende uitvoer"
+msgid "Next run planned"
+msgstr "Volgende geplande uitvoer"
 
 msgid "Currently disabled or not configured."
 msgstr "Momenteel uitgeschakeld of niet geconfigureerd."

@@ -244,10 +244,10 @@
                             </td>
                             <td class="col-sm-6">
                                 {% if current.active %}
-                                <div class="alert {% if current.planned >= status.now %}alert-success{% else %}alert-danger{% endif %}" role="alert">
+                                <div class="alert {% if current.planned >= status.now %}alert-success{% else %}alert-info{% endif %}" role="alert">
                                     {% translate "Last run" %}: <strong>{{ current.last_executed_at|naturaltime|default:'-' }}</strong>
                                     <br>
-                                    <small>{% translate "Next run" %}: <strong>{{ current.planned|naturaltime|default:'-' }}</strong></small>
+                                    <small>{% translate "Next run planned" %}: <strong>{{ current.planned|naturaltime|default:'-' }}</strong></small>
                                 </div>
                                 {% else %}
                                     <small>{% translate "Currently disabled or not configured." %}</small>
