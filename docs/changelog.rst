@@ -14,6 +14,7 @@ v4.x releases
 v4.4.0 - 2020-09-xx
 -------------------
 
+- ``Fixed``: Typefoutje [`#1095 <https://github.com/dennissiemensma/dsmr-reader/issues/1095>`_]
 
 
 v4.3.0 - 2020-08-28

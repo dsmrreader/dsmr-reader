@@ -1101,9 +1101,6 @@ msgstr "Basisselectie"
 msgid "Compare with selection"
 msgstr "Te vergelijken selectie"
 
-msgid "Configuation"
-msgstr "Configuratie"
-
 msgid "Search for a topic or setting"
 msgstr "Zoek naar een onderwerp of instelling"
 
@@ -2841,6 +2838,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Configuation"
+#~ msgstr "Configuratie"
 
 #~ msgid "Electricity consumed: {} kWh\n"
 #~ msgstr "Elektriciteit verbruikt: {} kWh\n"
