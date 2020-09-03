@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader 1.x\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-03 22:34+0200\n"
+"PO-Revision-Date: 2020-09-03 22:37+0200\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -116,10 +118,39 @@ msgid "Or to restart them all simultaneously::"
 msgstr "Of herstart ze allemaal tegelijkertijd::"
 
 #: ../../troubleshooting.rst:65
+msgid "Debug info dump for Github issues"
+msgstr "Debug-informatiedump voor Github-issues"
+
+#: ../../troubleshooting.rst:66
+msgid ""
+"You can supply additional debug info by executing the \"**dsmr_debuginfo**\" "
+"command and copying its output into your issue on Github."
+msgstr ""
+"Je kunt extra debug-informatie aanleveren door het \"**dsmr_debuginfo**\"-"
+"commando uit te voeren en vervolgens de output daarvan te kopieren naar je "
+"issue op Github."
+
+#: ../../troubleshooting.rst:70
+msgid ""
+"The \"**dsmr_debuginfo**\" command is available since DSMR-reader v4.4 and "
+"higher."
+msgstr ""
+"HEt \"**dsmr_debuginfo**\"-commando is beschikbaar sinds DSMR-reader v4.4 en "
+"hoger."
+
+#: ../../troubleshooting.rst:72
+msgid "Execute the following command::"
+msgstr "Voer het volgende commando uit::"
+
+#: ../../troubleshooting.rst:77
+msgid "Copy its output to your Github issue."
+msgstr "Kopieer de output naar je Github-issue."
+
+#: ../../troubleshooting.rst:81
 msgid "Logging levels"
 msgstr "Logging levels"
 
-#: ../../troubleshooting.rst:66
+#: ../../troubleshooting.rst:82
 msgid ""
 "If the processes do run, but you cannot find an error, (e.g.: things seem to "
 "hang or tend to be slow), there might be another issue at hand."
@@ -128,7 +159,7 @@ msgstr ""
 "(bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is er "
 "waarschijnlijk iets anders aan de hand."
 
-#: ../../troubleshooting.rst:68
+#: ../../troubleshooting.rst:84
 msgid ""
 "DSMR-reader has DEBUG-logging, which makes the system log very verbosely "
 "about what it's trying to do. This applies **specifically** to the "
@@ -137,7 +168,7 @@ msgstr ""
 "DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt wat "
 "het aan het doen is. Dit geldt **specifiek** voor het ``dsmr_backend`` proces."
 
-#: ../../troubleshooting.rst:73
+#: ../../troubleshooting.rst:89
 msgid ""
 "Errors are likely to be logged at all times, no matter the DEBUG-logging "
 "level used. Debugging is only helpful to watch DSMR-reader's detailed "
@@ -147,7 +178,7 @@ msgstr ""
 "level of niet. Debugging is alleen nuttig om het gedrag van DSMR-reader in "
 "meer detail te observeren."
 
-#: ../../troubleshooting.rst:75
+#: ../../troubleshooting.rst:91
 msgid ""
 "The DEBUG-logging is disabled by default, to reduce writes on the filesystem. "
 "You can enable the logging by following these steps:"
@@ -156,25 +187,25 @@ msgstr ""
 "het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te "
 "volgen:"
 
-#: ../../troubleshooting.rst:77
+#: ../../troubleshooting.rst:93
 msgid "Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``."
 msgstr ""
 "Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te "
 "voeren."
 
-#: ../../troubleshooting.rst:78
+#: ../../troubleshooting.rst:94
 msgid "Open the ``.env`` file and look for the code below::"
 msgstr "Open ``.env`` en zoek de onderstaande code::"
 
-#: ../../troubleshooting.rst:83
+#: ../../troubleshooting.rst:99
 msgid "Now remove the ``###`` from this line::"
 msgstr "Verwijder nu de ``###`` uit de regel::"
 
-#: ../../troubleshooting.rst:87
+#: ../../troubleshooting.rst:103
 msgid "It should now be::"
 msgstr "Het zou nu dit moeten zijn::"
 
-#: ../../troubleshooting.rst:91
+#: ../../troubleshooting.rst:107
 msgid ""
 "After editing the file, all processes need to be restarted. To do this, you "
 "can either execute::"
@@ -182,19 +213,19 @@ msgstr ""
 "Na het bewerken van het bestand zul je alle processen moeten herstarten. Om "
 "dit te doen, voer het volgende uit::"
 
-#: ../../troubleshooting.rst:95
+#: ../../troubleshooting.rst:111
 msgid "Or go back to the **sudo user** and execute::"
 msgstr "Of ga terug naar de **sudo gebruiker** en voer dit uit::"
 
-#: ../../troubleshooting.rst:100
+#: ../../troubleshooting.rst:116
 msgid "All done!"
 msgstr "Klaar!"
 
-#: ../../troubleshooting.rst:104
+#: ../../troubleshooting.rst:120
 msgid "Unprocessed telegrams"
 msgstr "Onverwerkte telegrammen"
 
-#: ../../troubleshooting.rst:105
+#: ../../troubleshooting.rst:121
 msgid ""
 "Are you experiencing lots of unprocessed telegrams? You may have excessive "
 "data stored, causing a drag in performance. :doc:`More information can be "
@@ -204,11 +235,11 @@ msgstr ""
 "overvloed aan gegevens hebt opgeslagen, die inhakken op de performance. :doc:"
 "`Meer informatie daarover kun je hier vinden<faq/data_throughput>`."
 
-#: ../../troubleshooting.rst:110
+#: ../../troubleshooting.rst:126
 msgid "Contact"
 msgstr "Contact"
 
-#: ../../troubleshooting.rst:111
+#: ../../troubleshooting.rst:127
 msgid ""
 "Are you unable to resolve your problem or do you need any help? :doc:`More "
 "information can be found here<contributing>`."

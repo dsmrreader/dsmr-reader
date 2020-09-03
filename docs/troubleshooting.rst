@@ -61,6 +61,22 @@ Or to restart them all simultaneously::
     sudo supervisorctl restart all
 
 
+Debug info dump for Github issues
+---------------------------------
+You can supply additional debug info by executing the "**dsmr_debuginfo**" command and copying its output into your issue on Github.
+
+.. note::
+
+    The "**dsmr_debuginfo**" command is available since DSMR-reader v4.4 and higher.
+
+Execute the following command::
+
+    sudo su - dsmr
+    ./manage.py dsmr_debuginfo
+
+Copy its output to your Github issue.
+
+
 Logging levels
 --------------
 If the processes do run, but you cannot find an error, (e.g.: things seem to hang or tend to be slow), there might be another issue at hand.
