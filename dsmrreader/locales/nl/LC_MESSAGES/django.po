@@ -2,7 +2,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-03 22:37+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -852,6 +851,9 @@ msgstr "DSMR-reader v4.0: Ondersteuning voor InfluxDB toegevoegd."
 
 msgid "DSMR-reader v4.1: Added support for reading network sockets with the datalogger (e.g. when using ser2net). Both the builtin and remote datalogger now support this feature. The latter requires a reinstallation of the (remote) datalogger script."
 msgstr "DSMR-reader v4.1: Ondersteuning toegevoegd voor het uitlezen van netwerk-sockets met de datalogger (bijv. wanneer je ser2net gebruikt). Dit wordt door zowel de ingebouwde als remote datalogger ondersteund, al vereist de laatstgenoemde in dat geval wel een herinstallatie van het dataloggerscript."
+
+msgid "DSMR-reader will eventually be moved to its own organisation on Github in the near future. It should be redirected automatically, but if not, the new location will be: https://github.com/dsmrreader/dsmr-reader"
+msgstr "DSMR-reader wordt binnenkort uiteindelijk onder een eigen 'organisatie' ondergebracht op Github. Het doorverwijzen zou t.z.t automatisch moeten gaan, maar zo niet, dan wordt de nieuwe locatie: https://github.com/dsmrreader/dsmr-reader"
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
