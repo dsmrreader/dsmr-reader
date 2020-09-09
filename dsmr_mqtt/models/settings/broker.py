@@ -93,6 +93,14 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Restart required'),
         help_text=_('Whether the process requires a restart, forcing the client-broker connection to be reset.')
     )
+    keep_reconnecting = models.BooleanField(
+        default=False,
+        verbose_name=_('Keep reconnecting'),
+        help_text=_(
+            'By default this integration will be disabled on connection errors, to prevent network flooding. You can '
+            'override this behaviour by enabling this option. It will then no longer disable itself in this situation.'
+        )
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

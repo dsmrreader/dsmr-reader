@@ -92,6 +92,23 @@ class TestBroker(TestCase):
         self.assertFalse(MQTTBrokerSettings.get_solo().enabled)
 
     @mock.patch('paho.mqtt.client.Client.connect')
+    def test_initialize_connection_refused_with_keep_reconnecting(self, connect_mock):
+        """ Shopuld override the behaviour disabling the integration. """
+        MQTTBrokerSettings.objects.update(
+            hostname='invalid',
+            keep_reconnecting=True
+        )
+
+        connect_mock.side_effect = ConnectionRefusedError()  # Fail.
+        self.assertFalse(connect_mock.called)
+
+        with self.assertRaises(RuntimeError):
+            dsmr_mqtt.services.broker.initialize_client()
+
+        self.assertTrue(connect_mock.called)
+        self.assertTrue(MQTTBrokerSettings.get_solo().enabled)  # Different from above.
+
+    @mock.patch('paho.mqtt.client.Client.connect')
     def test_initialize_credentials(self, *mocks):
         """ User/password set. """
         USER = 'x'

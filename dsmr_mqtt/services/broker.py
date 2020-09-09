@@ -46,6 +46,9 @@ def initialize_client():
     try:
         mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port)
     except Exception as error:
+        if broker_settings.keep_reconnecting:
+            raise RuntimeError('Failed to connect to broker, retrying next run...')
+
         logger.error(
             'MQTT: Failed to connect to broker (%s:%d), disabling MQTT: %s',
             broker_settings.hostname,

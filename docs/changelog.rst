@@ -15,6 +15,7 @@ v4.4.0 - 2020-09-xx
 -------------------
 
 - ``Added``: Info-dump command voor debugging [`#1104 <https://github.com/dennissiemensma/dsmr-reader/issues/1104>`_]
+- ``Added``: Optie om MQTT-integratie niet telkens uit te schakelen bij falende verbinding [`#1091 <https://github.com/dennissiemensma/dsmr-reader/issues/1091>`_]
 
 - ``Changed``: Overlappende energiecontracten mogelijk maken [`#1101 <https://github.com/dennissiemensma/dsmr-reader/issues/1101>`_]
 - ``Changed``: Improved scheduled task indication on Status page [`#1093 <https://github.com/dennissiemensma/dsmr-reader/issues/1093>`_]
