@@ -12,6 +12,7 @@ from django.db.models.functions import TruncDate
 from django.utils import timezone
 from django.conf import settings
 
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.reading import DsmrReading
@@ -340,7 +341,12 @@ def recalculate_prices():
     for current_day in DayStatistics.objects.all():
         print(' - Recalculating:', current_day.day)
 
-        prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
+        try:
+            prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
+        except EnergySupplierPrice.DoesNotExist:
+            print(' !!! No prices found, using zero fallback')
+            prices = dsmr_consumption.services.get_fallback_prices()
+
         current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
             current_day.electricity1 * prices.electricity_delivered_1_price -
             current_day.electricity1_returned * prices.electricity_returned_1_price

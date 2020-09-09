@@ -336,11 +336,20 @@ msgstr "bewerk hier het e-mailadres"
 msgid "Saving the configuration will reset the delay until the next email backup."
 msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende back-up per e-mail."
 
+msgid "Electricity"
+msgstr "Elektriciteit"
+
+msgid "Gas"
+msgstr "Gas"
+
+msgid "Fixed costs"
+msgstr "Vaste kosten"
+
 msgid "Consumption"
 msgstr "Verbruik"
 
-msgid "At least one other contract collides with this date range: {} ({} - {})"
-msgstr "Tenminste één ander contract conflicteert vanwege een overlappende datum: {} ({} - {})"
+msgid "This price is already set by another contract within a colliding date range ({} / {}): {}"
+msgstr "Deze prijs is al ingesteld bij een ander contract met een overlappende contractdatum: {} ({} - {})"
 
 msgid "Meter Reading electricity delivered to client (low tariff) in 0,001 kWh"
 msgstr "Meterstand van verbruikte elektriciteit (laagtarief) in stappen van 1 Watt uur"
@@ -408,59 +417,50 @@ msgstr "Aantal geleverd, gebaseerd op de voorgaande meting"
 msgid "Gas consumption"
 msgstr "Gasverbruik"
 
-msgid "Start"
-msgstr "Start"
-
 msgid "Contract start"
 msgstr "Contract start"
-
-msgid "End"
-msgstr "Einde"
 
 msgid "Contract end"
 msgstr "Contract einde"
 
-msgid "Description"
-msgstr "Omschrijving"
+msgid "Set to a far future date when there is not contract end."
+msgstr "Zet deze datum in de verre toekomst als er geen contracteinde is."
+
+msgid "Contract name"
+msgstr "Contracteinde"
 
 msgid "For your own reference, i.e. the name of your supplier"
 msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
 
-msgid "Electricity 1 price (low tariff)"
-msgstr "Prijs elektriciteit 1 (daltarief)"
+msgid "Tariff 1 delivered price (€)"
+msgstr "Tarief 1 verbruiksprijs (€)"
 
-msgid "Are you using a single tariff? Please enter the same price twice and enable \"Merge electricity tariffs\" in the frontend configuration"
-msgstr "Betaal je elektriciteit voor een enkel tarief? Vul dan hier tweemaal dezelfde prijs in en vink \"Voeg tarieven samen\" aan in de interfaceconfiguratie"
+msgid "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
+msgstr "Stel in op nul wanneer: Ongebruikt / Al ingesteld in ander contract / Niet van toepassing in jouw situatie"
 
-msgid "Electricity 2 price (high tariff)"
-msgstr "Prijs elektriciteit 2 (piektarief)"
+msgid "Tariff 2 delivered price (€)"
+msgstr "Tarief 2 verbruiksprijs (€)"
 
-msgid "Gas price"
-msgstr "Gasprijs"
+msgid "Gas price (€)"
+msgstr "Gasprijs (€)"
 
-msgid "Set to zero when unused"
-msgstr "Stel in op nul wanneer ongebruikt"
+msgid "Tariff 1 returned price (€)"
+msgstr "Tarief 1 terugleveringssprijs (€)"
 
-msgid "Electricity returned 1 price (low tariff)"
-msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
+msgid "Tariff 2 returned price (€)"
+msgstr "Tarief 2 terugleveringssprijs (€)"
 
-msgid "Electricity returned 2 price (high tariff)"
-msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
+msgid "Fixed daily costs (€)"
+msgstr "Vaste dagelijkse kosten (€)"
 
-msgid "Fixed daily costs"
-msgstr "Vaste kosten per dag"
+msgid "Energy supplier price contract"
+msgstr "Energieleverancier contract"
 
-msgid "A fixed price added to the totals of each day"
-msgstr "Een vast dagtarief dat wordt opgeteld bij elk dagtotaal"
+msgid "Energy supplier (price) contract"
+msgstr "Energieleverancier contract"
 
-msgid "Energy Supplier"
-msgstr "Energieleverancier"
-
-msgid "Energy supplier price"
-msgstr "Tarief energieleverancier"
-
-msgid "Energy supplier prices"
-msgstr "Tarieven energieleverancier"
+msgid "Energy supplier (price) contracts"
+msgstr "Energieleverancier contracten"
 
 msgid "By reading (default)"
 msgstr "Per meting (standaard)"
@@ -488,6 +488,9 @@ msgstr "DSMR 4 (gas)meters groeperen metingen altijd per uur. DSMR 5 (gas)meters
 
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
+
+msgid "In order to use separate contract dates for electricity/gas overlapping each other, make sure to <strong>set the prices to zero</strong> not required for a contract."
+msgstr "Om aparte en overlappende contracten toe te staan, voor bijvoorbeeld gas en elektra, zorg ervoor dat je <strong>ongebruikte prijzen op nul zet</strong>."
 
 msgid "Updating prices for (past) days already stored in the Archive does <strong>not affect</strong> them."
 msgstr "Prijswijzigingen voor historische dagen die (in het verleden)  in het Archief zijn opgeslagen, hebben daar <strong>geen effect</strong> op."
@@ -761,9 +764,6 @@ msgstr "Elektriciteitsverbruik"
 
 msgid "Electricity returned"
 msgstr "Elektriciteit teruggeleverd"
-
-msgid "Gas"
-msgstr "Gas"
 
 msgid "Phases P+"
 msgstr "Fasen P+"
@@ -1170,6 +1170,9 @@ msgstr "E-mail"
 msgid "Outgoing email"
 msgstr "Uitgaande e-mail"
 
+msgid "Energy supplier prices"
+msgstr "Tarieven energieleverancier"
+
 msgid "Energy supplier price contracts"
 msgstr "Energieleverancier contracten"
 
@@ -1356,9 +1359,6 @@ msgstr "kWh"
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
 
-msgid "Fixed costs"
-msgstr "Vaste kosten"
-
 msgid "today"
 msgstr "vandaag"
 
@@ -1379,6 +1379,9 @@ msgstr[1] "dagen"
 msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
 msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
 
+msgid "All data is based on whether you have set prices for the types. E.g.: omitting gas prices will hide gas consumption for the contract."
+msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen. Bijvoorbeeld: het weglaten van gasprijzen laat gasconsumptie hier niet zien bij het contract."
+
 msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
 msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
 
@@ -1393,6 +1396,9 @@ msgstr "tarief 1"
 
 msgid "tariff 2"
 msgstr "tarief 2"
+
+msgid "Fixed daily costs"
+msgstr "Vaste kosten per dag"
 
 msgid "Select data type"
 msgstr "Selecteer gegevenstype"
@@ -2558,6 +2564,9 @@ msgstr "Herberekent prijzen in dagtotalen"
 msgid "Reconstructs missing day statistics by using available hour statistics"
 msgstr "Reconstrueert missende dagstatistieken door beschikbare uurstatistieken te gebruiken"
 
+msgid "Description"
+msgstr "Omschrijving"
+
 msgid "Note"
 msgstr "Notitie"
 
@@ -2578,6 +2587,12 @@ msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
 
 msgid "Electricity 2 returned (high tariff)"
 msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
+
+msgid "Electricity 1 price (low tariff)"
+msgstr "Prijs elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 price (high tariff)"
+msgstr "Prijs elektriciteit 2 (piektarief)"
 
 msgid "Gas cost"
 msgstr "Gaskosten"
@@ -2848,6 +2863,33 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Electricity returned 1 price (low tariff)"
+#~ msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"
+
+#~ msgid "Electricity returned 2 price (high tariff)"
+#~ msgstr "Prijs teruglevering elektriciteit 2 (piektarief)"
+
+#~ msgid "Energy supplier price"
+#~ msgstr "Tarief energieleverancier"
+
+#~ msgid "Start"
+#~ msgstr "Start"
+
+#~ msgid "End"
+#~ msgstr "Einde"
+
+#~ msgid "Are you using a single tariff? Please enter the same price twice and enable \"Merge electricity tariffs\" in the frontend configuration"
+#~ msgstr "Betaal je elektriciteit voor een enkel tarief? Vul dan hier tweemaal dezelfde prijs in en vink \"Voeg tarieven samen\" aan in de interfaceconfiguratie"
+
+#~ msgid "Set to zero when unused"
+#~ msgstr "Stel in op nul wanneer ongebruikt"
+
+#~ msgid "A fixed price added to the totals of each day"
+#~ msgstr "Een vast dagtarief dat wordt opgeteld bij elk dagtotaal"
+
+#~ msgid "Energy Supplier"
+#~ msgstr "Energieleverancier"
 
 #~ msgid "Configuation"
 #~ msgstr "Configuratie"

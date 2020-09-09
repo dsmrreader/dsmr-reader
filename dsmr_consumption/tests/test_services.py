@@ -528,6 +528,91 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(summary['fixed_cost'], Decimal('1.23'))
         self.assertEqual(summary['total_cost'], Decimal('5.52'))
 
+    def test_get_day_prices_none(self):
+        """ No contract set. """
+        EnergySupplierPrice.objects.all().delete()
+
+        with self.assertRaises(EnergySupplierPrice.DoesNotExist):
+            dsmr_consumption.services.get_day_prices(day=timezone.datetime(2020, 1, 1))
+
+    def test_get_day_prices_single(self):
+        """ One contract set. """
+        if not self.support_prices:
+            return self.skipTest('No data')
+
+        contract = dsmr_consumption.services.get_day_prices(day=timezone.datetime(2017, 1, 1))
+
+        self.assertEqual(contract.electricity_delivered_1_price, Decimal(1))
+        self.assertEqual(contract.electricity_delivered_2_price, Decimal(2))
+        self.assertEqual(contract.electricity_returned_1_price, Decimal('0.5'))
+        self.assertEqual(contract.electricity_returned_2_price, Decimal('1.5'))
+        self.assertEqual(contract.gas_price, Decimal(5))
+        self.assertEqual(contract.fixed_daily_cost, Decimal('1.23456'))
+
+    def test_get_day_prices_collision(self):
+        """ Create a second colliding contract with colliding prices set. """
+        if not self.support_prices:
+            return self.skipTest('No data')
+
+        EnergySupplierPrice.objects.create(
+            start=timezone.datetime(2016, 1, 1),
+            end=timezone.datetime(2020, 1, 1),
+            description='Second contract',
+            gas_price=3,
+            fixed_daily_cost=10,
+        )
+
+        combined_contract = dsmr_consumption.services.get_day_prices(day=timezone.datetime(2017, 1, 1))
+
+        # These do not collide
+        self.assertEqual(combined_contract.electricity_delivered_1_price, Decimal(1))
+        self.assertEqual(combined_contract.electricity_delivered_2_price, Decimal(2))
+        self.assertEqual(combined_contract.electricity_returned_1_price, Decimal('0.5'))
+        self.assertEqual(combined_contract.electricity_returned_2_price, Decimal('1.5'))
+
+        # These do and are reset to zero.
+        self.assertEqual(combined_contract.gas_price, Decimal(0))
+        self.assertEqual(combined_contract.fixed_daily_cost, Decimal(0))
+
+    def test_get_day_prices_merged_contracts(self):
+        """ Create a second mergable contract, filling in prices omitted by the existing one. """
+        if not self.support_prices:
+            return self.skipTest('No data')
+
+        # Existing one should have some fields cleared.
+        EnergySupplierPrice.objects.all().update(
+            gas_price=0,
+            electricity_returned_1_price=0,
+            electricity_returned_2_price=0,
+        )
+
+        EnergySupplierPrice.objects.create(
+            start=timezone.datetime(2016, 1, 1),
+            end=timezone.datetime(2020, 1, 1),
+            description='Second contract',
+            gas_price=3,
+            electricity_returned_1_price=Decimal(2.5),
+        )
+
+        combined_contract = dsmr_consumption.services.get_day_prices(day=timezone.datetime(2017, 1, 1))
+
+        self.assertEqual(combined_contract.electricity_delivered_1_price, Decimal(1))  # First contract
+        self.assertEqual(combined_contract.electricity_delivered_2_price, Decimal(2))  # First contract
+        self.assertEqual(combined_contract.electricity_returned_1_price, Decimal('2.5'))  # Second contract
+        self.assertEqual(combined_contract.electricity_returned_2_price, Decimal(0))  # Not specified in both
+        self.assertEqual(combined_contract.gas_price, Decimal(3))  # Second contract
+        self.assertEqual(combined_contract.fixed_daily_cost, Decimal('1.23456'))  # First contract
+
+    def test_get_fallback_prices(self):
+        contract = dsmr_consumption.services.get_fallback_prices()
+
+        self.assertEqual(contract.electricity_delivered_1_price, Decimal(0))
+        self.assertEqual(contract.electricity_delivered_2_price, Decimal(0))
+        self.assertEqual(contract.electricity_returned_1_price, Decimal(0))
+        self.assertEqual(contract.electricity_returned_2_price, Decimal(0))
+        self.assertEqual(contract.gas_price, Decimal(0))
+        self.assertEqual(contract.fixed_daily_cost, Decimal(0))
+
 
 class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
     """ Biggest difference is the interval of gas readings. """

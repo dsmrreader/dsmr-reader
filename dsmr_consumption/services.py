@@ -234,7 +234,11 @@ def day_consumption(day):
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
     day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
     day_end = day_start + timezone.timedelta(hours=hours_in_day)
-    daily_energy_price = get_day_prices(day=day)
+
+    try:
+        daily_energy_price = get_day_prices(day=day)
+    except EnergySupplierPrice.DoesNotExist:
+        daily_energy_price = get_fallback_prices()
 
     electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)
 
@@ -358,9 +362,8 @@ def live_electricity_consumption():
         data['tariff_name'] = None
 
     try:
-        # This WILL fail when we either have no prices at all or conflicting ranges.
-        prices = EnergySupplierPrice.objects.by_date(target_date=timezone.now().date())
-    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
+        prices = get_day_prices(day=timezone.now().date())
+    except EnergySupplierPrice.DoesNotExist:
         return data
 
     tariff_price_map = {
@@ -398,9 +401,8 @@ def live_gas_consumption():
     data['currently_delivered'] = latest_data.currently_delivered
 
     try:
-        # This WILL fail when we either have no prices at all or conflicting ranges.
-        prices = EnergySupplierPrice.objects.by_date(target_date=timezone.now().date())
-    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
+        prices = get_day_prices(day=timezone.now().date())
+    except EnergySupplierPrice.DoesNotExist:
         return data
 
     # Note that we use generic 'interval' here, as it may differ, depending on the smart meter's protocol version.
@@ -486,12 +488,27 @@ def summarize_energy_contracts():
     import dsmr_stats.services  # Prevents circular import.
 
     data = []
+    MAPPED_PRICE_FIELDS = {
+        'electricity_delivered_1_price': 'electricity1_cost',
+        'electricity_delivered_2_price': 'electricity2_cost',
+        'gas_price': 'gas_cost',
+        'fixed_daily_cost': 'fixed_cost',
+    }
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
         summary, number_of_days = dsmr_stats.services.range_statistics(
             start=current.start,
             end=current.end or timezone.now().date()
         )
+
+        # Override this one, since it's only good when ALL price fields are set.
+        summary['total_cost'] = Decimal(0)
+
+        for price_field, summary_field in MAPPED_PRICE_FIELDS.items():
+            if getattr(current, price_field) == 0:
+                continue
+
+            summary['total_cost'] += summary[summary_field]
 
         data.append({
             'description': current.description,
@@ -513,10 +530,53 @@ def summarize_energy_contracts():
 
 
 def get_day_prices(day):
-    """ Returns the prices set for a day. """
-    try:
-        # This WILL fail when we either have no prices at all or conflicting ranges.
-        return EnergySupplierPrice.objects.by_date(target_date=day)
-    except (EnergySupplierPrice.DoesNotExist, EnergySupplierPrice.MultipleObjectsReturned):
-        # Default to zero prices.
-        return EnergySupplierPrice()
+    """ Returns the prices set for a day. Combines prices when multiple contracts are found. """
+    contracts_found = EnergySupplierPrice.objects.filter(start__lte=day, end__gte=day)
+
+    if len(contracts_found) == 1:
+        return contracts_found[0]
+
+    combined_contract = get_fallback_prices()
+
+    if not contracts_found:
+        raise EnergySupplierPrice.DoesNotExist()
+
+    # Multiple found, this is allowed, as long are there is no collision.
+    PRICE_FIELDS = (
+        'electricity_delivered_1_price',
+        'electricity_delivered_2_price',
+        'gas_price',
+        'electricity_returned_1_price',
+        'electricity_returned_2_price',
+        'fixed_daily_cost',
+    )
+
+    for current_field in PRICE_FIELDS:
+        prices = [
+            getattr(x, current_field) for x in contracts_found if getattr(x, current_field) > 0
+        ]
+
+        # None set.
+        if not prices:
+            continue
+
+        # Collision, use none since we cannot tell which one superseeds the other.
+        if len(prices) > 1:
+            continue
+
+        setattr(combined_contract, current_field, prices[0])
+
+    return combined_contract
+
+
+def get_fallback_prices():
+    # Default to zero prices.
+    return EnergySupplierPrice(
+        description='Zero priced contract',
+        electricity_delivered_1_price=0,
+        electricity_delivered_2_price=0,
+        gas_price=0,
+        electricity_returned_1_price=0,
+        electricity_returned_2_price=0,
+        fixed_daily_cost=0,
+    )

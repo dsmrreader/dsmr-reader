@@ -16,6 +16,7 @@ v4.4.0 - 2020-09-xx
 
 - ``Added``: Info-dump command voor debugging [`#1104 <https://github.com/dennissiemensma/dsmr-reader/issues/1104>`_]
 
+- ``Changed``: Overlappende energiecontracten mogelijk maken [`#1101 <https://github.com/dennissiemensma/dsmr-reader/issues/1101>`_]
 - ``Changed``: Improved scheduled task indication on Status page [`#1093 <https://github.com/dennissiemensma/dsmr-reader/issues/1093>`_]
 - ``Changed``: Simplify version check using Github tags API [`#1097 <https://github.com/dennissiemensma/dsmr-reader/issues/1097>`_]
 

@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from dsmr_backend.models.settings import EmailSettings
+from dsmr_backend.models.settings import EmailSettings, BackendSettings
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings, EmailBackupSettings
 from dsmr_notification.models.settings import NotificationSetting
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -34,6 +34,7 @@ class Command(BaseCommand):
 
         # Just wipe all settings which can affect the environment.
         APISettings.objects.update(allow=not options['no_api'], auth_key='test')
+        BackendSettings.objects.update(disable_electricity_returned_capability=False)
         BackupSettings.objects.update(daily_backup=False)
         EmailBackupSettings.objects.update(interval=EmailBackupSettings.INTERVAL_NONE)
         EmailSettings.objects.update(
