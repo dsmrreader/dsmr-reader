@@ -277,7 +277,6 @@ v3.0.0 - 2020-01-15
 v2.x releases
 ^^^^^^^^^^^^^
 
-
 .. warning::
 
     This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See :doc:`the v3 upgrade guide <faq/v3_upgrade>` for more information.
