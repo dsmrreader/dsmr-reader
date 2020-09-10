@@ -8,6 +8,8 @@ from django.db.models import Q
 from django.utils import timezone
 from django.core.cache import cache
 
+from dsmr_backend import signals
+from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -261,6 +263,23 @@ def status_info():
         status['tools']['pvoutput']['latest_sync'] = pvoutput_settings.latest_sync
 
     return status
+
+
+def request_monitoring_status():
+    """ Requests all apps to report any issues for monitoring. """
+    responses = signals.request_status.send_robust(None)
+    issues = []
+
+    for current_receiver, current_response in responses:
+        if not current_response or not isinstance(current_response, (list, tuple)):
+            continue
+
+        issues += [
+            x.serialize() for x in current_response
+            if isinstance(x, MonitoringStatusIssue)
+        ]
+
+    return issues
 
 
 def is_recent_installation():

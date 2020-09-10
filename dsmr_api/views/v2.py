@@ -17,6 +17,7 @@ from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_api.filters import DsmrReadingFilter, DayStatisticsFilter, ElectricityConsumptionFilter,\
     GasConsumptionFilter, HourStatisticsFilter
 import dsmr_consumption.services
+import dsmr_backend.services.backend
 import dsmr_datalogger.signals
 
 
@@ -138,4 +139,14 @@ class VersionView(APIView):
     def get(self, request):
         return Response({
             'version': '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3]),
+        })
+
+
+class MonitoringView(APIView):
+    def get(self, request):
+        issues = dsmr_backend.services.backend.request_monitoring_status()
+
+        return Response({
+            'problems': len(issues),
+            'details': issues
         })

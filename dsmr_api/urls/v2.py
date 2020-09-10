@@ -32,6 +32,7 @@ statistics_url_patterns = [
 
 application_url_patterns = [
     path('version', views.VersionView.as_view(), name='application-version'),
+    path('monitoring', views.MonitoringView.as_view(), name='application-monitoring'),
 ]
 
 urlpatterns = [

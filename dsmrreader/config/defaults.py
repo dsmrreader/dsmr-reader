@@ -93,10 +93,15 @@ DSMRREADER_COMPACT_MAX = 1024
 DSMRREADER_MAX_DATABASE_CONNECTION_SESSION_IN_SECONDS = 30 * 60
 
 # Maximum interval allowed since the latest reading, before ringing any alarms.
-DSMRREADER_STATUS_READING_OFFSET_MINUTES = 60
+DSMRREADER_STATUS_READING_OFFSET_MINUTES = 30
+
+DSMRREADER_STATUS_MAX_UNPROCESSED_READINGS = 100
 
 # The cooldown period until the next status notification will be sent.
 DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
+
+# The time scheduled processes are allowed to lagg behind before failing the monitoring.
+DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES = 15
 
 # Number of queued messages the application will retain. Any excess will be purged.
 DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200
