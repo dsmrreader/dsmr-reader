@@ -1,3 +1,6 @@
+from django.utils import timezone
+
+
 class MonitoringStatusIssue(object):
     def __init__(self, source, description, since):
         self.source = source
@@ -8,5 +11,5 @@ class MonitoringStatusIssue(object):
         return {
             'source': self.source,
             'description': self.description,
-            'since': self.since,
+            'since': timezone.localtime(self.since),
         }
