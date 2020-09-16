@@ -1585,8 +1585,8 @@ msgstr "Hoogste teruglevering (L3-)"
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
 msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
 
-msgid "Telegram readings"
-msgstr "Telegram-metingen"
+msgid "Readings stored"
+msgstr "Opgeslagen metingen"
 
 msgid "Total reading count"
 msgstr "Totaal aantal metingen"
@@ -2705,6 +2705,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Telegram readings"
+#~ msgstr "Telegram-metingen"
 
 #~ msgid "Readings with invalid CRC"
 #~ msgstr "Metingen met ongeldige CRC"

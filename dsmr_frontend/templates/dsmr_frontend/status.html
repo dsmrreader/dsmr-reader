@@ -13,7 +13,7 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fas fa-calculator"></i> &nbsp; {% translate "Telegram readings" %}
+                    {% translate "Readings stored" %}
                 </header>
                 <div class="panel-body">
                     <div class="row">
@@ -33,12 +33,11 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fas fa-cogs"></i> &nbsp; {% translate "Monitoring issues" %} <br />
+                    {% translate "Monitoring issues" %} <br />
                 </header>
                 <div class="panel-body">
                     {% for current in monitoring_issues %}
