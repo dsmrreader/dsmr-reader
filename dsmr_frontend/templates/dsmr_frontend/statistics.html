@@ -43,8 +43,8 @@
                         {% if latest_reading and delivered_sum %}
                         <tr>
                             <td>{% translate "Electricity (combined)" %} <span class="unit">{% translate "kWh" noop %}</span></td>
-                            <td><span class="badge bg-red">{{ delivered_sum|default:'-' }}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ returned_sum|default:'-' }}{% endif %}</span></td>
+                            <td><span class="unit">{{ delivered_sum|default:'-' }}</span></td>
+                            <td><span class="unit">{% if capabilities.electricity_returned %}{{ returned_sum|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% endif %}
 
@@ -64,80 +64,48 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% translate "Meter statistics" %}
+                    {% translate "Meter flags/statistics" %}
                 </header>
                 <div class="panel-body">
                     <table class="table table-hover">
                         <tr>
                             <td class="col-sm-6">{% translate "Number of power failures in any phase" %}</td>
-                            <td class="col-sm-6"><span class="badge bg-black">{{ meter_statistics.power_failure_count|default:'-' }}</span></td>
+                            <td class="col-sm-6">{% if meter_statistics.power_failure_count %}<span class="badge bg-black">{{ meter_statistics.power_failure_count|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
                             <td>{% translate "Number of long power failures in any phase" %}</td>
-                            <td><span class="badge bg-black">{{ meter_statistics.long_power_failure_count|default:'-' }}</span></td>
+                            <td>{% if meter_statistics.long_power_failure_count %}<span class="badge bg-black">{{ meter_statistics.long_power_failure_count|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
                             <td>{% translate "Number of voltage sags/dips in phase L1" %}</td>
-                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l1|default:'-' }}</span></td>
+                            <td>{% if meter_statistics.voltage_sag_count_l1 %}<span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l1|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage sags/dips in phase L2 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l2|default:'-' }}</span></td>
+                            <td>{% translate "Number of voltage sags/dips in phase L2" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>{% if meter_statistics.voltage_sag_count_l2 %}<span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l2|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage sags/dips in phase L3 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l3|default:'-' }}</span></td>
+                            <td>{% translate "Number of voltage sags/dips in phase L3" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>{% if meter_statistics.voltage_sag_count_l3 %}<span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l3|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
                             <td>{% translate "Number of voltage swells in phase L1" %}</td>
-                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l1|default:'-' }}</span></td>
+                            <td>{% if meter_statistics.voltage_swell_count_l1 %}<span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l1|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage swells in phase L2 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l2|default:'-' }}</span></td>
+                            <td>{% translate "Number of voltage swells in phase L2" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>{% if meter_statistics.voltage_swell_count_l2 %}<span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l2|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage swells in phase L3 (polyphase meters only)" %}</td>
-                            <td><span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l3|default:'-' }}</span></td>
+                            <td>{% translate "Number of voltage swells in phase L3" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>{% if meter_statistics.voltage_swell_count_l3 %}<span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l3|default:'-' }}</span>{% endif %}</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
     </div>
- 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% translate "Telegram readings" %}
-                </header>
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="col-sm-6">
-                                {% translate "Total reading count" %}
-                            </td>
-                            <td class="col-sm-6 ">
-                                <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fas fa-info-circle"></i> &nbsp; {% translate 'Show count' %}</a>
-                                <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
-                                <span class="badge bg-black xhr-hidden">
-                                   <span id="total_reading_count"></span>
-                                </span>
-                            </td>
-                        </tr>
-                        {% if meter_statistics.rejected_telegrams %}
-                        <tr>
-                            <td>{% translate "Readings with invalid CRC" %}</td>
-                            <td><span class="badge bg-black">{{ meter_statistics.rejected_telegrams|default:'-' }}</span></td>
-                        </tr>
-                        {% endif %}
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-   
+
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
@@ -153,7 +121,7 @@
                             <td class="col-sm-6">{% translate "Highest consumption (L1+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l1_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.highest_usage_l1_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -165,7 +133,7 @@
                             <td class="col-sm-6">{% translate "Highest consumption (L2+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l2_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.highest_usage_l2_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -177,7 +145,7 @@
                             <td class="col-sm-6">{% translate "Highest consumption (L3+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_usage_l3_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.highest_usage_l3_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -190,7 +158,7 @@
                             <td class="col-sm-6">{% translate "Lowest consumption (L1+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l1_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.lowest_usage_l1_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.lowest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -203,7 +171,7 @@
                             <td class="col-sm-6">{% translate "Lowest consumption (L2+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l2_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.lowest_usage_l2_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.lowest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -215,7 +183,7 @@
                             <td class="col-sm-6">{% translate "Lowest consumption (L3+)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-red">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.lowest_usage_l3_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.lowest_usage_l3_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.lowest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -228,7 +196,7 @@
                             <td class="col-sm-6">{% translate "Highest return (L1-)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-green">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_return_l1_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.highest_return_l1_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_return_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -240,7 +208,7 @@
                             <td class="col-sm-6">{% translate "Highest return (L2-)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-green">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_return_l2_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.highest_return_l2_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_return_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -252,7 +220,7 @@
                             <td class="col-sm-6">{% translate "Highest return (L3-)" %}</td>
                             <td class="col-sm-6">
                                 <span class="badge bg-green">
-                                   <i class="fas fa-bolt"></i> {{ electricity_statistics.highest_return_l3_value }} {% translate "Watt" %}
+                                   {{ electricity_statistics.highest_return_l3_value }} {% translate "W" noop %}
                                 </span>
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_return_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
@@ -272,34 +240,3 @@
 
 </section>
 {% endblock %}
-
-
-{% block javascript %}
-{{ block.super }}
-<script type="text/javascript">
-
-    $(document).ready(function(){
-    	$('.trigger-extra-statistics').click(function(){
-    	    $('.trigger-extra-statistics').hide();
-   		    fetch_xhr_data();
-   		    return false;
-    	})
-    });
-    
-    function fetch_xhr_data()
-    {
-        $(".xhr-loader").removeClass("hidden").show();
-
-        $.ajax({
-            dataType: "json",
-            url: "{% url 'frontend:statistics-xhr-data' %}",
-        }).done(function(response) {
-            $(".xhr-loader").hide();
-            $("#total_reading_count").html(response.total_reading_count);
-	        $(".xhr-hidden").show();
-        });
-    }
-
-</script>
-{% endblock %}
-

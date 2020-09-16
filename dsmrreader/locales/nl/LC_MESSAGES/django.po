@@ -11,6 +11,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -679,10 +681,10 @@ msgid "Tariff indicator electricity. The tariff indicator can be used to switch 
 msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort. N.B.: Tariefcode 1 is gebruikt voor daltarief en tariefcode 2 voor piektarief."
 
 msgid "Number of power failures in any phase"
-msgstr "Aantal stroomstoringen in alle fases"
+msgstr "Aantal stroomstoringen in alle fasen"
 
 msgid "Number of long power failures in any phase"
-msgstr "Aantal langdurige stroomstoringen in alle fases"
+msgstr "Aantal langdurige stroomstoringen in alle fasen"
 
 msgid "Number of voltage sags/dips in phase L1"
 msgstr "Aantal spanningsdippen in fase L1"
@@ -1532,26 +1534,29 @@ msgstr "Meterstanden"
 msgid "Electricity (combined)"
 msgstr "Elektriciteit (gecombineerd)"
 
-msgid "Telegram readings"
-msgstr "Telegram-metingen"
+msgid "Meter flags/statistics"
+msgstr "Meter vlaggetjes/statistieken"
 
-msgid "Total reading count"
-msgstr "Totaal aantal metingen"
+msgid "Number of voltage sags/dips in phase L2"
+msgstr "Aantal spanningsdippen in fase L2"
 
-msgid "Show count"
-msgstr "Toon aantal"
+msgid "polyphase meters only"
+msgstr "alleen voor meters met meerdere fasen"
 
-msgid "Readings with invalid CRC"
-msgstr "Metingen met ongeldige CRC"
+msgid "Number of voltage sags/dips in phase L3"
+msgstr "Aantal spanningsdippen in fase L3"
+
+msgid "Number of voltage swells in phase L2"
+msgstr "Aantal spanningspieken in fase L2"
+
+msgid "Number of voltage swells in phase L3"
+msgstr "Aantal spanningspieken in fase L3"
 
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
 
 msgid "Highest consumption (L1+)"
 msgstr "Hoogste verbruik (L1+)"
-
-msgid "Watt"
-msgstr "Watt"
 
 msgid "Highest consumption (L2+)"
 msgstr "Hoogste verbruik (L2+)"
@@ -1579,6 +1584,15 @@ msgstr "Hoogste teruglevering (L3-)"
 
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
 msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
+
+msgid "Telegram readings"
+msgstr "Telegram-metingen"
+
+msgid "Total reading count"
+msgstr "Totaal aantal metingen"
+
+msgid "Show count"
+msgstr "Toon aantal"
 
 msgid "Monitoring issues"
 msgstr "Monitoring problemen"
@@ -2691,6 +2705,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Readings with invalid CRC"
+#~ msgstr "Metingen met ongeldige CRC"
+
+#~ msgid "Watt"
+#~ msgstr "Watt"
 
 #~ msgid "Application"
 #~ msgstr "Applicatie"

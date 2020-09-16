@@ -13,6 +13,31 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
+                    <i class="fas fa-calculator"></i> &nbsp; {% translate "Telegram readings" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Total reading count" %}
+                        </div>
+                        <div class="col-sm-6">
+                            <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fas fa-info-circle"></i> &nbsp; {% translate 'Show count' %}</a>
+                            <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
+                            <span class="badge bg-black xhr-hidden">
+                               <span id="total_reading_count"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
                     <i class="fas fa-cogs"></i> &nbsp; {% translate "Monitoring issues" %} <br />
                 </header>
                 <div class="panel-body">
@@ -42,4 +67,33 @@
     </div>
 
 </section>
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+    	$('.trigger-extra-statistics').click(function(){
+    	    $('.trigger-extra-statistics').hide();
+   		    fetch_xhr_data();
+   		    return false;
+    	})
+    });
+
+    function fetch_xhr_data()
+    {
+        $(".xhr-loader").removeClass("hidden").show();
+
+        $.ajax({
+            dataType: "json",
+            url: "{% url 'frontend:statistics-xhr-data' %}",
+        }).done(function(response) {
+            $(".xhr-loader").hide();
+            $("#total_reading_count").html(response.total_reading_count);
+	        $(".xhr-hidden").show();
+        });
+    }
+
+</script>
 {% endblock %}
