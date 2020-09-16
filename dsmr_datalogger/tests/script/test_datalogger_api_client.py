@@ -269,6 +269,7 @@ class TestScriptNetworkSocket(TestCase):
             bytes('telegram!1234', 'utf8'),
             bytes("/other-telegram!5678", 'utf8')
         ])
+        protocol_serial.reset_input_buffer = mock.MagicMock()
         serial_for_url_mock.return_value = protocol_serial
 
         generator = dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(

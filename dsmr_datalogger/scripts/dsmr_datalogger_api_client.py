@@ -67,6 +67,7 @@ def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
 
         # Reset for next iteration.
         buffer = ''
+        serial_handle.reset_input_buffer()
         start_timestamp = time.time()
 
 
