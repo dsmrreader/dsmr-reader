@@ -25,6 +25,14 @@ v4.4.0 - 2020-09-xx
 - ``Fixed``: Typefoutje [`#1095 <https://github.com/dennissiemensma/dsmr-reader/issues/1095>`_]
 
 
+v4.3.1 - 2020-09-16
+-------------------
+
+- ``Changed``: Django security update
+
+- ``Fixed``: Datalogger buffer-issues bij hoge sleep [`#1107 <https://github.com/dennissiemensma/dsmr-reader/issues/1107>`_]
+
+
 v4.3.0 - 2020-08-28
 -------------------
 
