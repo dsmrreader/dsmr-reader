@@ -148,5 +148,5 @@ class MonitoringView(APIView):
 
         return Response({
             'problems': len(issues),
-            'details': issues
+            'details': [x.serialize() for x in issues]
         })

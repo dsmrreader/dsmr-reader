@@ -34,7 +34,7 @@ class Command(BaseCommand):
 
         # Just wipe all settings which can affect the environment.
         APISettings.objects.update(allow=not options['no_api'], auth_key='test')
-        BackendSettings.objects.update(disable_electricity_returned_capability=False)
+        BackendSettings.objects.update(disable_electricity_returned_capability=False, process_sleep=0.1)
         BackupSettings.objects.update(daily_backup=False)
         EmailBackupSettings.objects.update(interval=EmailBackupSettings.INTERVAL_NONE)
         EmailSettings.objects.update(

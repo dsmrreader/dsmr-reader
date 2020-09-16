@@ -9,7 +9,6 @@ from django.utils import timezone
 from django.core.cache import cache
 
 from dsmr_backend import signals
-from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -274,10 +273,9 @@ def request_monitoring_status():
         if not current_response or not isinstance(current_response, (list, tuple)):
             continue
 
-        issues += [
-            x.serialize() for x in current_response
-            if isinstance(x, MonitoringStatusIssue)
-        ]
+        issues += current_response
+
+    issues = sorted(issues, key=lambda x: x.since, reverse=True)
 
     return issues
 

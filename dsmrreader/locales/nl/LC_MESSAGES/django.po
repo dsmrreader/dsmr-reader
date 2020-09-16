@@ -1580,192 +1580,14 @@ msgstr "Hoogste teruglevering (L3-)"
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
 msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
 
-msgid "Application"
-msgstr "Applicatie"
+msgid "Monitoring issues"
+msgstr "Monitoring problemen"
 
-msgid "Current version"
-msgstr "Huidige versie"
+msgid "Since"
+msgstr "Sinds"
 
-msgid "View releases"
-msgstr "Bekijk releases"
-
-msgid "Explain"
-msgstr "Uitleg"
-
-#, python-format
-msgid "The application will compare your local version with the <a href=\"%(url)s\">latest repository tag</a> available on Github."
-msgstr "De applicatie vergelijkt je lokale versie met de <a href=\"%(url)s\">meest recente tag</a> beschikbaar op Github."
-
-msgid "Check now"
-msgstr "Controleer nu"
-
-msgid "Currently checking for updates..."
-msgstr "Bezig met controleren op updates..."
-
-msgid "There is a newer version available!"
-msgstr "Er is een nieuwere versie beschikbaar!"
-
-msgid "View the latest release"
-msgstr "Bekijk de laatste release"
-
-msgid "for the changelog and further upgrade instructions."
-msgstr "voor alle wijzigingen en upgrade-instructies."
-
-msgid "You are already running the latest version released."
-msgstr "Je draait al de meest recente versie."
-
-msgid "Telegrams"
-msgstr "Telegrammen"
-
-msgid "Incoming telegrams/readings"
-msgstr "Inkomende telegrammen"
-
-msgid "The telegrams are either read from the DSMR_DATALOGGER process or received by the API."
-msgstr "De telegrammen worden ofwel door het DSMR_DATALOGGER process gelezen of komen binnen via de API."
-
-msgid "Each telegram read from your smart meter is stored and queued for processing first."
-msgstr "Elke telegram uit je slimme meter wordt eerst alleen opgeslagen voor verwerking."
-
-msgid "Each new telegram is (only) used to display the latest reading, in the top right corner of the Dashboard page."
-msgstr "Elk nieuw telegram wordt (alleen) initieel gebruikt om de laatste meting te tonen in het Dashboard, rechts bovenin de pagina."
-
-msgid "It has been a while since the latest telegram was read."
-msgstr "Het is een tijdje geleden sinds het laatste telegram uitgelezen is."
-
-msgid "Most recent reading"
-msgstr "Meest recente meting"
-
-msgid "No data."
-msgstr "Geen gegevens."
-
-msgid "Data processing"
-msgstr "Dataverwerking"
-
-msgid "Telegrams to consumption"
-msgstr "Telegrammen voor berekenen verbruik"
-
-msgid "This indicates how many stored telegrams are waiting to be processed."
-msgstr "Dit geeft aan hoeveel opgeslagen telegrammen er wachten op verwerking."
-
-msgid "This should reset around each minute mark, depending on whether you've enabled grouping readings in the configuration."
-msgstr "Deze teller zou ongeveer elke minuut moeten resetten, afhankelijk van of je het groeperen van metingen in de configuratie hebt ingeschakeld."
-
-msgid "The stored telegrams are processed by the DSMR_BACKEND process and thus can be processed retroactively as well (by design)."
-msgstr "De opgeslagen telegrammen worden verwerkt door het DSMR_BACKEND proces. Daardoor kunnen ze tevens met terugwerkende kracht verwerkt worden."
-
-msgid "There are too many unprocessed telegrams."
-msgstr "Er zijn te veel onverwerkte telegrammen."
-
-msgid "Unprocessed telegrams"
-msgstr "Onverwerkte telegrammen"
-
-msgid "Calculating electricity consumption"
-msgstr "Berekenen van elektriciteitsverbruik"
-
-msgid "When telegrams are processed, they are split into electricity and gas (when available) consumption nodes."
-msgstr "Wanneer telegrammen verwerkt worden, splitst de applicatie ze in consumptie nodes voor elektriciteit en gas (wanneer beschikbaar)."
-
-msgid "These consumption nodes are plotted in the graphs displayed on the Dashboard page."
-msgstr "Deze consumptie nodes worden gebruikt in de grafieken van het Dashboard."
-
-msgid "Recorded electricity consumption is lagging behind"
-msgstr "Het is even geleden dat elektriciteitsverbruik is gemeten"
-
-msgid "Recorded electricity consumption is on schedule"
-msgstr "Elektriciteitsverbruik recent gemeten"
-
-msgid "Calculating gas consumption"
-msgstr "Berekenen gasverbruik"
-
-msgid "Recorded gas consumption is lagging behind"
-msgstr "Het is even geleden dat gasverbruik is gemeten"
-
-msgid "Recorded gas consumption is on schedule"
-msgstr "Gasverbruik recent gemeten"
-
-msgid "No data (or manually disabled)"
-msgstr "Geen gegevens (of handmatig uitgeschakeld)"
-
-msgid "Day &amp; hour statistics"
-msgstr "Dag- &amp; uurstatistieken"
-
-msgid "At the end of each day (around 1 a.m.) all consumption nodes will be aggregated to statistics nodes."
-msgstr "Aan het einde van elke dag (rond 1 uur 's nachts) worden alle consumptie nodes geaggregeerd naar statistieken nodes."
-
-msgid "These statistics nodes consist of daily and hourly consumption totals (due to performance)."
-msgstr "Deze statistieken nodes bevatten dagtotalen en uurtotalen van je verbruik (wegens performance)."
-
-msgid "They are used in many pages displaying long term data, such as the Archive, Trends and Compare pages."
-msgstr "Deze worden gebruikt in pagina's die lange termijn gegevens tonen, zoals het Archief, Trends en de Vergelijk pagina's."
-
-msgid "Data processing is lagging behind"
-msgstr "Dataverwerking loopt achter"
-
-msgid "Data processing is on schedule"
-msgstr "Dataverwerking is op schema"
-
-msgid "Scheduled processes"
-msgstr "Gepland proces"
-
-msgid "Last run"
-msgstr "Meest recente uitvoer"
-
-msgid "Next run planned"
-msgstr "Volgende geplande uitvoer"
-
-msgid "Currently disabled or not configured."
-msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
-
-msgid "Integrations"
-msgstr "Integraties"
-
-msgid "Latest Dropbox sync"
-msgstr "Meest recente synchronisatie met Dropbox"
-
-msgid "Latest"
-msgstr "Meest recent"
-
-msgid "Latest PVOutput sync"
-msgstr "Meest recente synchronisatie met PVOutput"
-
-msgid "MQTT messages sync"
-msgstr "MQTT-berichten sync"
-
-msgid "Pending messages"
-msgstr "Wachtende berichten"
-
-msgid "InfluxDB measurements sync"
-msgstr "Influxdb measurements sync"
-
-msgid "Pending measurements"
-msgstr "Wachtende measurements"
-
-msgid "Capabilities"
-msgstr "Mogelijkheden"
-
-msgid "The capability nodes reflect the capabilities of your smart meter."
-msgstr "Dit reflecteert de gegevensstromen van je slimme meter."
-
-msgid "The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages."
-msgstr "De status van elk van deze (drie) gegevensstromen staat hier weergegeven. Deze bepalen tevens welke grafieken allemaal beschikbaar zijn binnen de applicatie."
-
-msgid "Electricity consumption recorded"
-msgstr "Elektriciteitsverbruik gemeten"
-
-msgid "No electricity consumption recorded"
-msgstr "Geen elektriciteitsverbruik gemeten"
-
-msgid "Electricity return recorded"
-msgstr "Teruglevering elektriciteit is gemeten"
-
-msgid "No electricity return recorded (or manually disabled)"
-msgstr "Geen teruglevering elektriciteit gemeten (of handmatig uitgeschakeld)"
-
-msgid "Gas consumption recorded"
-msgstr "Gasverbruik gemeten"
-
-msgid "No gas consumption recorded (or manually disabled)"
-msgstr "Geen gasverbruik gemeten (of handmatig uitgeschakeld)"
+msgid "No issues found"
+msgstr "Geen problemen gevonden"
 
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
 msgstr "Er zijn momenteel nog geen dag-/uurstatistieken gegenereerd. Wacht op de volgende dag."
@@ -2869,6 +2691,192 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Application"
+#~ msgstr "Applicatie"
+
+#~ msgid "Current version"
+#~ msgstr "Huidige versie"
+
+#~ msgid "View releases"
+#~ msgstr "Bekijk releases"
+
+#~ msgid "Explain"
+#~ msgstr "Uitleg"
+
+#~ msgid "The application will compare your local version with the <a href=\"%(url)s\">latest repository tag</a> available on Github."
+#~ msgstr "De applicatie vergelijkt je lokale versie met de <a href=\"%(url)s\">meest recente tag</a> beschikbaar op Github."
+
+#~ msgid "Check now"
+#~ msgstr "Controleer nu"
+
+#~ msgid "Currently checking for updates..."
+#~ msgstr "Bezig met controleren op updates..."
+
+#~ msgid "There is a newer version available!"
+#~ msgstr "Er is een nieuwere versie beschikbaar!"
+
+#~ msgid "View the latest release"
+#~ msgstr "Bekijk de laatste release"
+
+#~ msgid "for the changelog and further upgrade instructions."
+#~ msgstr "voor alle wijzigingen en upgrade-instructies."
+
+#~ msgid "You are already running the latest version released."
+#~ msgstr "Je draait al de meest recente versie."
+
+#~ msgid "Telegrams"
+#~ msgstr "Telegrammen"
+
+#~ msgid "Incoming telegrams/readings"
+#~ msgstr "Inkomende telegrammen"
+
+#~ msgid "The telegrams are either read from the DSMR_DATALOGGER process or received by the API."
+#~ msgstr "De telegrammen worden ofwel door het DSMR_DATALOGGER process gelezen of komen binnen via de API."
+
+#~ msgid "Each telegram read from your smart meter is stored and queued for processing first."
+#~ msgstr "Elke telegram uit je slimme meter wordt eerst alleen opgeslagen voor verwerking."
+
+#~ msgid "Each new telegram is (only) used to display the latest reading, in the top right corner of the Dashboard page."
+#~ msgstr "Elk nieuw telegram wordt (alleen) initieel gebruikt om de laatste meting te tonen in het Dashboard, rechts bovenin de pagina."
+
+#~ msgid "It has been a while since the latest telegram was read."
+#~ msgstr "Het is een tijdje geleden sinds het laatste telegram uitgelezen is."
+
+#~ msgid "Most recent reading"
+#~ msgstr "Meest recente meting"
+
+#~ msgid "No data."
+#~ msgstr "Geen gegevens."
+
+#~ msgid "Data processing"
+#~ msgstr "Dataverwerking"
+
+#~ msgid "Telegrams to consumption"
+#~ msgstr "Telegrammen voor berekenen verbruik"
+
+#~ msgid "This indicates how many stored telegrams are waiting to be processed."
+#~ msgstr "Dit geeft aan hoeveel opgeslagen telegrammen er wachten op verwerking."
+
+#~ msgid "This should reset around each minute mark, depending on whether you've enabled grouping readings in the configuration."
+#~ msgstr "Deze teller zou ongeveer elke minuut moeten resetten, afhankelijk van of je het groeperen van metingen in de configuratie hebt ingeschakeld."
+
+#~ msgid "The stored telegrams are processed by the DSMR_BACKEND process and thus can be processed retroactively as well (by design)."
+#~ msgstr "De opgeslagen telegrammen worden verwerkt door het DSMR_BACKEND proces. Daardoor kunnen ze tevens met terugwerkende kracht verwerkt worden."
+
+#~ msgid "There are too many unprocessed telegrams."
+#~ msgstr "Er zijn te veel onverwerkte telegrammen."
+
+#~ msgid "Unprocessed telegrams"
+#~ msgstr "Onverwerkte telegrammen"
+
+#~ msgid "Calculating electricity consumption"
+#~ msgstr "Berekenen van elektriciteitsverbruik"
+
+#~ msgid "When telegrams are processed, they are split into electricity and gas (when available) consumption nodes."
+#~ msgstr "Wanneer telegrammen verwerkt worden, splitst de applicatie ze in consumptie nodes voor elektriciteit en gas (wanneer beschikbaar)."
+
+#~ msgid "These consumption nodes are plotted in the graphs displayed on the Dashboard page."
+#~ msgstr "Deze consumptie nodes worden gebruikt in de grafieken van het Dashboard."
+
+#~ msgid "Recorded electricity consumption is lagging behind"
+#~ msgstr "Het is even geleden dat elektriciteitsverbruik is gemeten"
+
+#~ msgid "Recorded electricity consumption is on schedule"
+#~ msgstr "Elektriciteitsverbruik recent gemeten"
+
+#~ msgid "Calculating gas consumption"
+#~ msgstr "Berekenen gasverbruik"
+
+#~ msgid "Recorded gas consumption is lagging behind"
+#~ msgstr "Het is even geleden dat gasverbruik is gemeten"
+
+#~ msgid "Recorded gas consumption is on schedule"
+#~ msgstr "Gasverbruik recent gemeten"
+
+#~ msgid "No data (or manually disabled)"
+#~ msgstr "Geen gegevens (of handmatig uitgeschakeld)"
+
+#~ msgid "Day &amp; hour statistics"
+#~ msgstr "Dag- &amp; uurstatistieken"
+
+#~ msgid "At the end of each day (around 1 a.m.) all consumption nodes will be aggregated to statistics nodes."
+#~ msgstr "Aan het einde van elke dag (rond 1 uur 's nachts) worden alle consumptie nodes geaggregeerd naar statistieken nodes."
+
+#~ msgid "These statistics nodes consist of daily and hourly consumption totals (due to performance)."
+#~ msgstr "Deze statistieken nodes bevatten dagtotalen en uurtotalen van je verbruik (wegens performance)."
+
+#~ msgid "They are used in many pages displaying long term data, such as the Archive, Trends and Compare pages."
+#~ msgstr "Deze worden gebruikt in pagina's die lange termijn gegevens tonen, zoals het Archief, Trends en de Vergelijk pagina's."
+
+#~ msgid "Data processing is lagging behind"
+#~ msgstr "Dataverwerking loopt achter"
+
+#~ msgid "Data processing is on schedule"
+#~ msgstr "Dataverwerking is op schema"
+
+#~ msgid "Scheduled processes"
+#~ msgstr "Gepland proces"
+
+#~ msgid "Last run"
+#~ msgstr "Meest recente uitvoer"
+
+#~ msgid "Next run planned"
+#~ msgstr "Volgende geplande uitvoer"
+
+#~ msgid "Currently disabled or not configured."
+#~ msgstr "Momenteel uitgeschakeld of niet geconfigureerd."
+
+#~ msgid "Integrations"
+#~ msgstr "Integraties"
+
+#~ msgid "Latest Dropbox sync"
+#~ msgstr "Meest recente synchronisatie met Dropbox"
+
+#~ msgid "Latest"
+#~ msgstr "Meest recent"
+
+#~ msgid "Latest PVOutput sync"
+#~ msgstr "Meest recente synchronisatie met PVOutput"
+
+#~ msgid "MQTT messages sync"
+#~ msgstr "MQTT-berichten sync"
+
+#~ msgid "Pending messages"
+#~ msgstr "Wachtende berichten"
+
+#~ msgid "InfluxDB measurements sync"
+#~ msgstr "Influxdb measurements sync"
+
+#~ msgid "Pending measurements"
+#~ msgstr "Wachtende measurements"
+
+#~ msgid "Capabilities"
+#~ msgstr "Mogelijkheden"
+
+#~ msgid "The capability nodes reflect the capabilities of your smart meter."
+#~ msgstr "Dit reflecteert de gegevensstromen van je slimme meter."
+
+#~ msgid "The status of each of these (three) capabilities are displayed here and they determine which graphs are rendered in the application pages."
+#~ msgstr "De status van elk van deze (drie) gegevensstromen staat hier weergegeven. Deze bepalen tevens welke grafieken allemaal beschikbaar zijn binnen de applicatie."
+
+#~ msgid "Electricity consumption recorded"
+#~ msgstr "Elektriciteitsverbruik gemeten"
+
+#~ msgid "No electricity consumption recorded"
+#~ msgstr "Geen elektriciteitsverbruik gemeten"
+
+#~ msgid "Electricity return recorded"
+#~ msgstr "Teruglevering elektriciteit is gemeten"
+
+#~ msgid "No electricity return recorded (or manually disabled)"
+#~ msgstr "Geen teruglevering elektriciteit gemeten (of handmatig uitgeschakeld)"
+
+#~ msgid "Gas consumption recorded"
+#~ msgstr "Gasverbruik gemeten"
+
+#~ msgid "No gas consumption recorded (or manually disabled)"
+#~ msgstr "Geen gasverbruik gemeten (of handmatig uitgeschakeld)"
 
 #~ msgid "Electricity returned 1 price (low tariff)"
 #~ msgstr "Prijs teruglevering elektriciteit 1 (daltarief)"

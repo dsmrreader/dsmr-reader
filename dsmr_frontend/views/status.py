@@ -1,6 +1,4 @@
-from django.conf import settings
-from django.http import JsonResponse
-from django.views.generic.base import View, TemplateView
+from django.views.generic.base import TemplateView
 
 import dsmr_backend.services.backend
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
@@ -11,15 +9,5 @@ class Status(ConfigurableLoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Status, self).get_context_data(**kwargs)
-        context_data['status'] = dsmr_backend.services.backend.status_info()
-        context_data['capabilities'] = context_data['status']['capabilities']
-        context_data['DSMRREADER_LATEST_TAGS_LIST'] = settings.DSMRREADER_LATEST_TAGS_LIST
+        context_data['monitoring_issues'] = dsmr_backend.services.backend.request_monitoring_status()
         return context_data
-
-
-class XhrUpdateChecker(ConfigurableLoginRequiredMixin, View):
-    """ XHR view performing a version check versus Github. """
-    def get(self, request):
-        return JsonResponse({
-            'update_available': not dsmr_backend.services.backend.is_latest_version()
-        })
