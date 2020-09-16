@@ -271,54 +271,6 @@ class TestBackend(InterceptStdoutMixin, TestCase):
         self.assertEqual(first_capabilities, second_capabilities)
 
     @mock.patch('django.utils.timezone.now')
-    def test_status_info(self, now_mock):
-        """ Application status info dict. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1))
-
-        bs = BackupSettings.get_solo()
-        bs.daily_backup = False
-        bs.save()  # Trigger signal.
-        tools_status = dsmr_backend.services.backend.status_info()['tools']
-
-        # Tools should be asserted, other content is tested in dsmr_frontend.
-        self.assertFalse(tools_status['backup']['enabled'])
-        self.assertFalse(tools_status['dropbox']['enabled'])
-        self.assertFalse(tools_status['pvoutput']['enabled'])
-        self.assertIsNone(tools_status['backup']['latest_backup'])
-        self.assertIsNone(tools_status['dropbox']['latest_sync'])
-        self.assertIsNone(tools_status['pvoutput']['latest_sync'])
-
-        # Now when enabled.
-        bs.daily_backup = True
-        bs.save()  # Trigger signal.
-        DropboxSettings.objects.update(access_token='xxx', latest_sync=timezone.now())
-        PVOutputAddStatusSettings.objects.update(export=True, latest_sync=timezone.now())
-
-        tools_status = dsmr_backend.services.backend.status_info()['tools']
-
-        self.assertTrue(tools_status['backup']['enabled'])
-        self.assertTrue(tools_status['dropbox']['enabled'])
-        self.assertTrue(tools_status['pvoutput']['enabled'])
-        self.assertEqual(tools_status['dropbox']['latest_sync'], timezone.now())
-        self.assertEqual(tools_status['pvoutput']['latest_sync'], timezone.now())
-
-    def test_get_mqtt_status(self):
-        MQTTBrokerSettings.get_solo()
-        MQTTBrokerSettings.objects.update(enabled=True)
-        dsmr_backend.services.backend.get_mqtt_status()
-
-        MQTTBrokerSettings.objects.update(enabled=False)
-        self.assertIsNone(dsmr_backend.services.backend.get_mqtt_status())
-
-    def test_get_influxdb_status(self):
-        InfluxdbIntegrationSettings.get_solo()
-        InfluxdbIntegrationSettings.objects.update(enabled=True)
-        dsmr_backend.services.backend.get_influxdb_status()
-
-        InfluxdbIntegrationSettings.objects.update(enabled=False)
-        self.assertIsNone(dsmr_backend.services.backend.get_influxdb_status())
-
-    @mock.patch('django.utils.timezone.now')
     def test_hours_in_day(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 29))
         self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 23)
