@@ -262,7 +262,7 @@ class TestServices(TestCase):
         # Recent data.
         StatusNotificationSetting.objects.update(next_check=timezone.now())
         DsmrReading.objects.create(
-            timestamp=timezone.now() - timezone.timedelta(minutes=45),
+            timestamp=timezone.now() - timezone.timedelta(minutes=15),
             electricity_delivered_1=1,
             electricity_returned_1=2,
             electricity_delivered_2=3,
