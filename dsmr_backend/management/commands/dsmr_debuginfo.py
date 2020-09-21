@@ -15,9 +15,9 @@ class Command(BaseCommand):  # pragma: nocover
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
         parser.add_argument(
-            '--with-indexes',
+            '--with-indices',
             action='store_true',
-            dest='with_indexes',
+            dest='with_indices',
             default=False,
             help='Optional: Also includes important (PostgreSQL) indexes'
         )
@@ -29,38 +29,39 @@ class Command(BaseCommand):  # pragma: nocover
         self._dump_data_info()
         self._dump_pg_size()
 
-        if options['with_indexes']:
-            self._dump_pg_indexes()
+        if options['with_indices']:
+            self._dump_pg_indices()
 
         self._print_end()
 
     def _dump_meter_info(self):
         self._print_header('Smart meter')
-        self._pretty_print('Latest telegram version', 'v{}'.format(MeterStatistics.get_solo().dsmr_version))
-        self._pretty_print('Telegram parser version', DataloggerSettings.get_solo().dsmr_version)
+        self._pretty_print('Telegram version (latest reading)', 'v{}'.format(MeterStatistics.get_solo().dsmr_version))
+        self._pretty_print('Setting: Telegram parser', DataloggerSettings.get_solo().dsmr_version)
 
     def _dump_application_info(self):
         self._print_header('DSMR-reader')
-        self._pretty_print('Application version', 'v{}'.format(settings.DSMRREADER_VERSION))
-        self._pretty_print('Application database', connection.vendor)
-        self._pretty_print('Backend process sleep', '{} s'.format(BackendSettings.get_solo().process_sleep))
-        self._pretty_print('Datalogger process sleep', '{} s'.format(DataloggerSettings.get_solo().process_sleep))
-        self._pretty_print('Retention cleans up after', '{} h'.format(
+        self._pretty_print('Version', 'v{}'.format(settings.DSMRREADER_VERSION))
+        self._pretty_print('Database engine/vendor', connection.vendor)
+        self._pretty_print('Setting: Backend process sleep', '{} s'.format(BackendSettings.get_solo().process_sleep))
+        self._pretty_print('Setting: Datalogger process sleep', '{} s'.format(DataloggerSettings.get_solo().process_sleep))
+        self._pretty_print('Setting: Retention cleans up after', '{} h'.format(
             RetentionSettings.get_solo().data_retention_in_hours
         ))
 
     def _dump_data_info(self):
         self._print_header('Data')
-        self._pretty_print('Telegram records total', DsmrReading.objects.count())
-        self._pretty_print('              \\_ unprocessed', DsmrReading.objects.unprocessed().count())
-        self._pretty_print('Electricity consumption records stored', ElectricityConsumption.objects.count())
-        self._pretty_print('Gas consumption records stored', GasConsumption.objects.count())
+        self._pretty_print('Stored: Telegram records total', DsmrReading.objects.count())
+        self._pretty_print('                      \\_ unprocessed', DsmrReading.objects.unprocessed().count())
+        self._pretty_print('Stored: Electricity consumption records', ElectricityConsumption.objects.count())
+        self._pretty_print('Stored: Gas consumption records', GasConsumption.objects.count())
 
     def _dump_pg_size(self):
         if connection.vendor != 'postgresql':
             return
 
         # @see https://wiki.postgresql.org/wiki/Disk_Usage
+        MIN_SIZE_B = 1 * 1024 * 1024
         size_sql = """
         SELECT nspname || '.' || relname AS "relation",
         pg_size_pretty(pg_total_relation_size(C.oid)) AS "total_size"
@@ -69,18 +70,18 @@ class Command(BaseCommand):  # pragma: nocover
         WHERE nspname NOT IN ('pg_catalog', 'information_schema')
             AND C.relkind <> 'i'
             AND nspname !~ '^pg_toast'
-        ORDER BY pg_total_relation_size(C.oid) DESC
-        LIMIT 5;
+            AND pg_total_relation_size(C.oid) > %s
+        ORDER BY pg_total_relation_size(C.oid) DESC;
         """
 
         with connection.cursor() as cursor:
-            cursor.execute(size_sql)
-            self._print_header('PostgreSQL size of largest tables')
+            cursor.execute(size_sql, [MIN_SIZE_B])
+            self._print_header('PostgreSQL size of largest tables (> 1MB)')
 
             for table, size in cursor.fetchall():
                 self._pretty_print(table, size)
 
-    def _dump_pg_indexes(self):
+    def _dump_pg_indices(self):
         if connection.vendor != 'postgresql':
             return
 
@@ -98,7 +99,7 @@ class Command(BaseCommand):  # pragma: nocover
 
         with connection.cursor() as cursor:
             cursor.execute(indexes_sql)
-            self._print_header('PostgreSQL indexes of largest tables')
+            self._print_header('PostgreSQL indices of largest tables')
 
             for tablename, indexname in cursor.fetchall():
                 self._pretty_print(tablename, indexname)
