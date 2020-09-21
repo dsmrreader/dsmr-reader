@@ -1,10 +1,10 @@
 from django.apps import AppConfig
+from django.conf import settings
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.signals import request_status
-from dsmrreader import settings
 
 
 class ConsumptionAppConfig(AppConfig):
