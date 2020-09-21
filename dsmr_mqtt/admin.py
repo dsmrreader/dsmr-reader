@@ -54,32 +54,15 @@ class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
                     'the field names used in the JSON message. Removing lines will remove fields from the message as '
                     'well. '
                     '''Default value:
-<pre>
-[mapping]
-id = id
-timestamp = timestamp
-electricity_delivered_1 = electricity_delivered_1
-electricity_returned_1 = electricity_returned_1
-electricity_delivered_2 = electricity_delivered_2
-electricity_returned_2 = electricity_returned_2
-electricity_currently_delivered = electricity_currently_delivered
-electricity_currently_returned = electricity_currently_returned
-phase_currently_delivered_l1 = phase_currently_delivered_l1
-phase_currently_delivered_l2 = phase_currently_delivered_l2
-phase_currently_delivered_l3 = phase_currently_delivered_l3
-phase_currently_returned_l1 = phase_currently_returned_l1
-phase_currently_returned_l2 = phase_currently_returned_l2
-phase_currently_returned_l3 = phase_currently_returned_l3
-extra_device_timestamp = extra_device_timestamp
-extra_device_delivered = extra_device_delivered
-phase_voltage_l1 = phase_voltage_l1
-phase_voltage_l2 = phase_voltage_l2
-phase_voltage_l3 = phase_voltage_l3
-phase_power_current_l1 = phase_power_current_l1
-phase_power_current_l2 = phase_power_current_l2
-phase_power_current_l3 = phase_power_current_l3
-</pre>
-'''
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in telegram.JSONTelegramMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
                 )
             }
         ),
@@ -98,32 +81,15 @@ class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
                     'designate each field name to a different topic. Removing lines will prevent those fields from '
                     'being broadcast as well. '
                     '''Default value:
-<pre>
-[mapping]
-id = dsmr/reading/id
-timestamp = dsmr/reading/timestamp
-electricity_delivered_1 = dsmr/reading/electricity_delivered_1
-electricity_returned_1 = dsmr/reading/electricity_returned_1
-electricity_delivered_2 = dsmr/reading/electricity_delivered_2
-electricity_returned_2 = dsmr/reading/electricity_returned_2
-electricity_currently_delivered = dsmr/reading/electricity_currently_delivered
-electricity_currently_returned = dsmr/reading/electricity_currently_returned
-phase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1
-phase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2
-phase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3
-phase_currently_returned_l1 = dsmr/reading/phase_currently_returned_l1
-phase_currently_returned_l2 = dsmr/reading/phase_currently_returned_l2
-phase_currently_returned_l3 = dsmr/reading/phase_currently_returned_l3
-extra_device_timestamp = dsmr/reading/extra_device_timestamp
-extra_device_delivered = dsmr/reading/extra_device_delivered
-phase_voltage_l1 = dsmr/reading/phase_voltage_l1
-phase_voltage_l2 = dsmr/reading/phase_voltage_l2
-phase_voltage_l3 = dsmr/reading/phase_voltage_l3
-phase_power_current_l1 = dsmr/reading/phase_power_current_l1
-phase_power_current_l2 = dsmr/reading/phase_power_current_l2
-phase_power_current_l3 = dsmr/reading/phase_power_current_l3
-</pre>
-'''
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in telegram.SplitTopicTelegramMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
                 )
             }
         ),
@@ -141,32 +107,15 @@ class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
                     'Send the current day totals to the broker. You can alter the the field names used in the JSON '
                     'message. Removing lines will remove fields from the message as well. '
                     '''Default value:
-<pre>
-[mapping]
-# DATA = JSON FIELD
-electricity1 = electricity1
-electricity2 = electricity2
-electricity1_returned = electricity1_returned
-electricity2_returned = electricity2_returned
-electricity_merged = electricity_merged
-electricity_returned_merged = electricity_returned_merged
-electricity1_cost = electricity1_cost
-electricity2_cost = electricity2_cost
-electricity_cost_merged = electricity_cost_merged
-
-# Gas (if any)
-gas = gas
-gas_cost = gas_cost
-total_cost = total_cost
-
-# Your energy supplier prices (if set)
-energy_supplier_price_electricity_delivered_1 = energy_supplier_price_electricity_delivered_1
-energy_supplier_price_electricity_delivered_2 = energy_supplier_price_electricity_delivered_2
-energy_supplier_price_electricity_returned_1 = energy_supplier_price_electricity_returned_1
-energy_supplier_price_electricity_returned_2 = energy_supplier_price_electricity_returned_2
-energy_supplier_price_gas = energy_supplier_price_gas
-</pre>
-'''
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in day_totals.JSONDayTotalsMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
                 )
             }
         ),
@@ -185,32 +134,15 @@ class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
                     'designate each field name to a different topic. Removing lines will prevent those fields from '
                     'being broadcast as well. '
                     '''Default value:
-<pre>
-[mapping]
-# DATA = JSON FIELD
-electricity1 = dsmr/day-consumption/electricity1
-electricity2 = dsmr/day-consumption/electricity2
-electricity1_returned = dsmr/day-consumption/electricity1_returned
-electricity2_returned = dsmr/day-consumption/electricity2_returned
-electricity_merged = dsmr/day-consumption/electricity_merged
-electricity_returned_merged = dsmr/day-consumption/electricity_returned_merged
-electricity1_cost = dsmr/day-consumption/electricity1_cost
-electricity2_cost = dsmr/day-consumption/electricity2_cost
-electricity_cost_merged = dsmr/day-consumption/electricity_cost_merged
-
-# Gas (if any)
-gas = dsmr/day-consumption/gas
-gas_cost = dsmr/day-consumption/gas_cost
-total_cost = dsmr/day-consumption/total_cost
-
-# Your energy supplier prices (if set)
-energy_supplier_price_electricity_delivered_1 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_1
-energy_supplier_price_electricity_delivered_2 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_2
-energy_supplier_price_electricity_returned_1 = dsmr/day-consumption/energy_supplier_price_electricity_returned_1
-energy_supplier_price_electricity_returned_2 = dsmr/day-consumption/energy_supplier_price_electricity_returned_2
-energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas
-</pre>
-'''
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in day_totals.SplitTopicDayTotalsMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
                 )
             }
         ),
@@ -229,22 +161,15 @@ class SplitTopicMeterStatisticsMQTTSettingsAdmin(SingletonModelAdmin):
                     'designate each field name to a different topic. Removing lines will prevent those fields from '
                     'being broadcast as well. '
                     '''Default value:
-<pre>
-[mapping]
-# DATA = TOPIC PATH
-dsmr_version = dsmr/meter-stats/dsmr_version
-electricity_tariff = dsmr/meter-stats/electricity_tariff
-power_failure_count = dsmr/meter-stats/power_failure_count
-long_power_failure_count = dsmr/meter-stats/long_power_failure_count
-voltage_sag_count_l1 = dsmr/meter-stats/voltage_sag_count_l1
-voltage_sag_count_l2 = dsmr/meter-stats/voltage_sag_count_l2
-voltage_sag_count_l3 = dsmr/meter-stats/voltage_sag_count_l3
-voltage_swell_count_l1 = dsmr/meter-stats/voltage_swell_count_l1
-voltage_swell_count_l2 = dsmr/meter-stats/voltage_swell_count_l2
-voltage_swell_count_l3 = dsmr/meter-stats/voltage_swell_count_l3
-rejected_telegrams = dsmr/meter-stats/rejected_telegrams
-</pre>
-'''
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in meter_statistics.SplitTopicMeterStatisticsMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
                 )
             }
         ),
@@ -263,13 +188,15 @@ class JSONGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
                     'the field names used in the JSON message. Removing lines will remove fields from the message as '
                     'well. '
                     '''Default value:
-<pre>
-[mapping]
-read_at = read_at
-delivered = delivered
-currently_delivered = currently_delivered
-</pre>
-'''
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in consumption.JSONGasConsumptionMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
                 )
             }
         ),
@@ -288,13 +215,15 @@ class SplitTopicGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
                     'designate each field name to a different topic. Removing lines will prevent those fields from '
                     'being broadcast as well. '
                     '''Default value:
-<pre>
-[mapping]
-read_at = dsmr/consumption/gas/read_at
-delivered = dsmr/consumption/gas/delivered
-currently_delivered = dsmr/consumption/gas/currently_delivered
-</pre>
-'''
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in consumption.SplitTopicGasConsumptionMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
                 )
             }
         ),

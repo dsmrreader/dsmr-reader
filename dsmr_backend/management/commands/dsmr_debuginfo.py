@@ -44,7 +44,9 @@ class Command(BaseCommand):  # pragma: nocover
         self._pretty_print('Version', 'v{}'.format(settings.DSMRREADER_VERSION))
         self._pretty_print('Database engine/vendor', connection.vendor)
         self._pretty_print('Setting: Backend process sleep', '{} s'.format(BackendSettings.get_solo().process_sleep))
-        self._pretty_print('Setting: Datalogger process sleep', '{} s'.format(DataloggerSettings.get_solo().process_sleep))
+        self._pretty_print('Setting: Datalogger process sleep', '{} s'.format(
+            DataloggerSettings.get_solo().process_sleep)
+        )
         self._pretty_print('Setting: Retention cleans up after', '{} h'.format(
             RetentionSettings.get_solo().data_retention_in_hours
         ))
