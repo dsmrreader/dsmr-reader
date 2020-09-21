@@ -14,7 +14,7 @@ class DataloggerAppConfig(AppConfig):
 
 
 @receiver(request_status)
-def on_request_status(**kwargs):
+def check_recent_readings(**kwargs):
     from dsmr_datalogger.models.reading import DsmrReading
 
     try:

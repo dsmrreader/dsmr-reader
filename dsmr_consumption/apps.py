@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 from django.dispatch import receiver
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from dsmr_backend.dto import MonitoringStatusIssue
@@ -14,7 +13,7 @@ class ConsumptionAppConfig(AppConfig):
 
 
 @receiver(request_status)
-def on_request_status(**kwargs):
+def check_unprocessed_readings(**kwargs):
     from dsmr_datalogger.models.reading import DsmrReading
 
     unprocessed_count = DsmrReading.objects.unprocessed().count()
@@ -26,6 +25,6 @@ def on_request_status(**kwargs):
         MonitoringStatusIssue(
             __name__,
             'Too many unprocessed readings: {}'.format(unprocessed_count),
-            timezone.now()
+            DsmrReading.objects.unprocessed().order_by('timestamp')[0].timestamp
         )
     ]
