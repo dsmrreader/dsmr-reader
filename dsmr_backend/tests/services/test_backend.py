@@ -6,12 +6,8 @@ from django.utils import timezone
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_influxdb.models import InfluxdbIntegrationSettings
-from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
-from dsmr_backup.models.settings import BackupSettings, DropboxSettings
-from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 import dsmr_backend.services.backend
 
 

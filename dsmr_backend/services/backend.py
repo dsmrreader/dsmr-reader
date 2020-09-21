@@ -9,18 +9,10 @@ from django.utils import timezone
 from django.core.cache import cache
 
 from dsmr_backend import signals
-from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
-from dsmr_influxdb.models import InfluxdbMeasurement, InfluxdbIntegrationSettings
-from dsmr_mqtt.models.queue import Message
-from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
-from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_stats.models.statistics import DayStatistics
-from dsmr_backup.models.settings import BackupSettings, DropboxSettings
-from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 
 
 def get_capabilities(capability=None):
