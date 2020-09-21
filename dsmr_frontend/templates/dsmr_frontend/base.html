@@ -102,11 +102,6 @@
                             &nbsp;&nbsp;
                         </li>
                         <li>
-                            <a href="{% url 'frontend:status' %}">
-                                <i class="fas fa-heartbeat"></i> &nbsp; <span>{% translate "Status" %}</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="{% url 'frontend:export' %}">
                                 <i class="fas fa-xs fa-file-excel"></i> &nbsp; <small>{% translate "Export data" %} &nbsp; <i class="fas fa-lock" title="{% translate 'Authentication required' %}"></i></small>
                             </a>
@@ -120,41 +115,13 @@
                             &nbsp;
                         </li>
                         <li>
-                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-info"></i> &nbsp; <small>{% translate "Changelog" %}</small>
+                            <a href="{% url 'frontend:status' %}">
+                                <i class="fas fa-heartbeat"></i> &nbsp; <small>{% translate "Status" %}</small>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:docs-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-question-circle"></i> &nbsp; <small>{% translate "Help / FAQ" %}</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'frontend:api-docs' %}" target="_blank">
-                                <i class="fas fa-xs fa-robot"></i> &nbsp; <small>{% translate "API docs" %}</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'frontend:feedback-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-comments"></i> &nbsp; <small>{% translate "Feedback / bugs / ideas" %}</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
-                                <i class="fas fa-xs fa-hand-holding-usd"></i> &nbsp; <small>{% translate "Donations / tips" %}</small>
-                            </a>
-                        </li>
-                        <li>
-                            &nbsp;
-                        </li>
-                        <li>
-                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">
-                                <i class="fas fa-xs fa-heart"></i> &nbsp; <small>{% translate "Thanks to all the contributors" %}</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://linkedin.com/in/dennissiemensma" target="_blank">
-                                <i class="far fa-xs fa-copyright"></i> &nbsp; <small>Dennis Siemensma 2015 - {% now "Y" %}</small>
+                            <a href="{% url 'frontend:about' %}">
+                                <i class="fas fa-robot"></i> &nbsp; <small>{% translate "About" %}</small>
                             </a>
                         </li>
                     </ul>

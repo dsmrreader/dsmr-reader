@@ -1,5 +1,6 @@
 from django.urls.conf import path
 
+from dsmr_frontend.views.about import About
 from dsmr_frontend.views.configuration import Configuration
 from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
@@ -44,6 +45,7 @@ urlpatterns = [
     path('compare/xhr/summary', CompareXhrSummary.as_view(), name='compare-xhr-summary'),
 
     path('status', Status.as_view(), name='status'),
+    path('about', About.as_view(), name='about'),
 
     path('notifications', Notifications.as_view(), name='notifications'),
 

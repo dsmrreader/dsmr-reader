@@ -13,31 +13,9 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    {% translate "Readings stored" %}
-                </header>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {% translate "Total reading stored" %}
-                        </div>
-                        <div class="col-sm-6">
-                            <a class="btn btn-primary trigger-extra-statistics" href="#"><i class="fas fa-info-circle"></i> &nbsp; {% translate 'Calculate reading count' %}</a>
-                            <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
-                            <span class="badge bg-black xhr-hidden">
-                               <span id="total_reading_count"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% translate "Monitoring issues" %} <br />
+                    {% translate "Issues" %} &nbsp;
+                    {% if monitoring_issues %}<span class="badge bg-yellow-gradient">{{ monitoring_issues|length }}</span>{% endif %}
+                    <br />
                 </header>
                 <div class="panel-body">
                     {% for current in monitoring_issues %}
@@ -55,7 +33,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-success" role="alert">
-                                    <i class="fas fa-check"></i> &nbsp; <small>{% translate "No issues found" %}.</small>
+                                    <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
                                 </div>
                             </div>
                         </div>
@@ -65,6 +43,29 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% translate "Data" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Total reading stored" %}
+                        </div>
+                        <div class="col-sm-6">
+                            <a class="btn btn-primary trigger-extra-statistics" href="#">{% translate 'Calculate reading count' %}</a>
+                            <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden"></i>
+                            <span class="badge bg-black xhr-hidden">
+                               <span id="total_reading_count"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
 

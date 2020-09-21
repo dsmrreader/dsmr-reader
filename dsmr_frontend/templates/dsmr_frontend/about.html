@@ -1,0 +1,115 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate "About" %}{% endblock %}
+{% block header %}{% translate "About" %} &nbsp; <i class="fas fa-robot"></i>{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fas fa-question"></i> &nbsp; {% translate "Help" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Did something change after updating? Check out the latest changes" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">{% translate "View changelog" %} </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Looking for something? A good place to start is the FAQ" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{% url 'frontend:docs-redirect' %}" target="_blank">{% translate "View frequently asked questions (FAQ)" %} </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Still need help? View or create an issue on Github" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="https://github.com/dennissiemensma/dsmr-reader/issues" target="_blank">{% translate "View DSMR-reader issues on Github" %} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fas fa-rocket"></i> &nbsp; {% translate "API" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Do you want to access DSMR-reader its data automatically? Check out the API:" %}
+                        </div>
+
+                        <div class="col-sm-6">
+                            <a href="{% url 'frontend:api-docs' %}" target="_blank">{% translate "View API docs" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fas fa-code"></i> &nbsp; {% translate "Credits" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Originally created and authored by" %}
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="https://linkedin.com/in/dennissiemensma" target="_blank">
+                                Dennis Siemensma&nbsp; <i class="far fa-xs fa-copyright"></i> 2015 - {% now "Y" %}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Improved by" %}
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">
+                                {% translate "Many contributors" %} <i class="fas fa-heart"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <small>{% translate "Do you want to show a small token of appreciation or gesture?" %}</small>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{% url 'frontend:donations-redirect' %}" target="_blank">
+                                <small>{% translate "View how to donate or tip" %}</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

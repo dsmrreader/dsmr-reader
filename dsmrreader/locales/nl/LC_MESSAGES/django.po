@@ -11,8 +11,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -1013,6 +1011,54 @@ msgstr "Gesorteerde grafiek"
 msgid "Sorted graphs"
 msgstr "Gesorteerde grafieken"
 
+msgid "About"
+msgstr "Over"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Did something change after updating? Check out the latest changes"
+msgstr "IS er iets veranderd na updaten? Bekijk de laatste wijzigingen"
+
+msgid "View changelog"
+msgstr "Changelog"
+
+msgid "Looking for something? A good place to start is the FAQ"
+msgstr "Zoek je iets? Een goede plek om te beginnen is de FAQ"
+
+msgid "View frequently asked questions (FAQ)"
+msgstr "Bekijk veegelstelde vragen (FAQ)"
+
+msgid "Still need help? View or create an issue on Github"
+msgstr "Nog steeds hulp nodig? Bekijk of maak een issue aan op Github"
+
+msgid "View DSMR-reader issues on Github"
+msgstr "Bekijk DSMR-reader issues op Github"
+
+msgid "Do you want to access DSMR-reader its data automatically? Check out the API:"
+msgstr "Wil je DSMR-reader's gegevens automatisch benaderen? Probeer de API:"
+
+msgid "View API docs"
+msgstr "Bekijk API-documentatie"
+
+msgid "Credits"
+msgstr "Credits"
+
+msgid "Originally created and authored by"
+msgstr "Oorspronkelijk gemaakt en onderhouden door"
+
+msgid "Improved by"
+msgstr "Verbeterd door"
+
+msgid "Many contributors"
+msgstr "Vele bijdrages"
+
+msgid "Do you want to show a small token of appreciation or gesture?"
+msgstr "Wil je een klein gebaar maken om je waardering te delen?"
+
+msgid "View how to donate or tip"
+msgstr "Bekijk hoe iets te geven"
+
 msgid "Archive"
 msgstr "Archief"
 
@@ -1073,32 +1119,14 @@ msgstr "Statistieken"
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
-msgid "Status"
-msgstr "Status"
-
 msgid "Export data"
 msgstr "Exporteer gegevens"
 
 msgid "Authentication required"
 msgstr "Authenticatie vereist"
 
-msgid "Changelog"
-msgstr "Wijzigingenoverzicht"
-
-msgid "Help / FAQ"
-msgstr "Help / FAQ"
-
-msgid "API docs"
-msgstr "API docs"
-
-msgid "Feedback / bugs / ideas"
-msgstr "Feedback / fouten / ideeën"
-
-msgid "Donations / tips"
-msgstr "Donaties"
-
-msgid "Thanks to all the contributors"
-msgstr "Dank aan alle bijdragen"
+msgid "Status"
+msgstr "Status"
 
 msgid "Base selection"
 msgstr "Basisselectie"
@@ -1585,23 +1613,23 @@ msgstr "Hoogste teruglevering (L3-)"
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
 msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
 
-msgid "Readings stored"
-msgstr "Opgeslagen metingen"
+msgid "Issues"
+msgstr "Problemen"
+
+msgid "Since"
+msgstr "Sinds"
+
+msgid "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here."
+msgstr "Alles lijkt soepel te draaien. Als er problemen zijn, zoals missende gegevens of hangende processen, dan worden die hier getoond."
+
+msgid "Data"
+msgstr "Gegevens"
 
 msgid "Total reading stored"
 msgstr "Totaal aantal opgeslagen metingen"
 
 msgid "Calculate reading count"
 msgstr "Bereken aantal metingen"
-
-msgid "Monitoring issues"
-msgstr "Monitoring problemen"
-
-msgid "Since"
-msgstr "Sinds"
-
-msgid "No issues found"
-msgstr "Geen problemen gevonden"
 
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
 msgstr "Er zijn momenteel nog geen dag-/uurstatistieken gegenereerd. Wacht op de volgende dag."
@@ -2505,6 +2533,24 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Help / FAQ"
+#~ msgstr "Help / FAQ"
+
+#~ msgid "Feedback / bugs / ideas"
+#~ msgstr "Feedback / fouten / ideeën"
+
+#~ msgid "Donations / tips"
+#~ msgstr "Donaties"
+
+#~ msgid "Readings stored"
+#~ msgstr "Opgeslagen metingen"
+
+#~ msgid "Monitoring issues"
+#~ msgstr "Monitoring problemen"
+
+#~ msgid "No issues found"
+#~ msgstr "Geen problemen gevonden"
 
 #~ msgid "Show count"
 #~ msgstr "Toon aantal"
