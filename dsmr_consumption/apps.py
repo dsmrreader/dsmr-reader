@@ -18,11 +18,11 @@ def check_unprocessed_readings(**kwargs):
 
     unprocessed_count = DsmrReading.objects.unprocessed().count()
 
-    if unprocessed_count < settings.DSMRREADER_STATUS_MAX_UNPROCESSED_READINGS:
+    if unprocessed_count <= settings.DSMRREADER_STATUS_MAX_UNPROCESSED_READINGS:
         return
 
     return MonitoringStatusIssue(
         __name__,
-        'Too many unprocessed readings: {}'.format(unprocessed_count),
+        _('Too many unprocessed readings: {}').format(unprocessed_count),
         DsmrReading.objects.unprocessed().order_by('timestamp')[0].timestamp
     )

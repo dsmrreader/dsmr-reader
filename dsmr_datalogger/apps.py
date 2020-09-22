@@ -20,7 +20,11 @@ def check_recent_readings(**kwargs):
     try:
         latest_reading = DsmrReading.objects.all().order_by('-timestamp')[0]
     except (DsmrReading.DoesNotExist, IndexError):
-        return
+        return MonitoringStatusIssue(
+            __name__,
+            _('Waiting for the first reading ever'),
+            timezone.now()
+        )
 
     max_slack = timezone.now() - timezone.timedelta(
         minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES
@@ -31,6 +35,6 @@ def check_recent_readings(**kwargs):
 
     return MonitoringStatusIssue(
         __name__,
-        'No recent readings received',
+        _('No recent readings received'),
         latest_reading.timestamp
     )

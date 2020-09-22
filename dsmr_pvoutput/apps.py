@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.conf import settings
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -32,13 +33,15 @@ def check_pvoutput_sync(**kwargs):
     if not pvoutput_settings.export:
         return
 
-    offset = timezone.now() - timezone.timedelta(hours=1)
+    offset = timezone.now() - timezone.timedelta(
+        minutes=settings.DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES
+    )
 
     if pvoutput_settings.next_export > offset:
         return
 
     return MonitoringStatusIssue(
         __name__,
-        'PVOutput sync took too long',
+        _('Waiting for the next PVOutput export to be executed'),
         pvoutput_settings.next_export
     )

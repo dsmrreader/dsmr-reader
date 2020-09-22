@@ -30,7 +30,7 @@ class BackendAppConfig(AppConfig):
 
 
 @receiver(request_status)
-def on_request_status(**kwargs):
+def check_scheduled_processes(**kwargs):
     from dsmr_backend.models.schedule import ScheduledProcess
 
     issues = []
@@ -46,7 +46,7 @@ def on_request_status(**kwargs):
         issues.append(
             MonitoringStatusIssue(
                 __name__,
-                'Process behind schedule: {}'.format(current.name),
+                _('Process behind schedule: {}').format(current.name),
                 current.planned
             )
         )

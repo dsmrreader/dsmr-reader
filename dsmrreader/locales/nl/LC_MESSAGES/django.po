@@ -11,6 +11,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -71,6 +73,9 @@ msgstr "Backend (dsmr_backend)"
 
 msgid "Unsupported database engine \"{}\" active, some features might not work properly"
 msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
+
+msgid "Process behind schedule: {}"
+msgstr "Proces loopt achter op schema: {}"
 
 msgid "Resets the environment for development purposes. Not intended for production."
 msgstr "Reset de omgeving voor ontwikkelingsdoeleinden. Niet bedoeld voor gebruik in productie."
@@ -348,6 +353,9 @@ msgstr "Vaste kosten"
 msgid "Consumption"
 msgstr "Verbruik"
 
+msgid "Too many unprocessed readings: {}"
+msgstr "Te veel onverwerkte telegrammen: {}"
+
 msgid "This price is already set by another contract within a colliding date range ({} / {}): {}"
 msgstr "Deze prijs is al ingesteld bij een ander contract met een overlappende contractdatum: {} ({} - {})"
 
@@ -521,6 +529,12 @@ msgstr "Gegevensretentiebeleid is alleen van toepassing op telegrammen en overig
 
 msgid "Datalogger"
 msgstr "Datalogger"
+
+msgid "Waiting for the first reading ever"
+msgstr "Nog nooit een meting ontvangen"
+
+msgid "No recent readings received"
+msgstr "Geen recente metingen ontvangen"
 
 msgid "Performs an DSMR P1 telegram reading on the serial port."
 msgstr "Leest een DSMR P1 telegram uit van de seriële poort (meti."
@@ -737,6 +751,9 @@ msgstr "Meterstatistieken wijzigingen"
 
 msgid "Dropbox"
 msgstr "Dropbox"
+
+msgid "Waiting for the next Dropbox sync to be executed"
+msgstr "Wachten op de volgende Dropbox-sync die uitgevoerd moet worden"
 
 msgid "Forces Dropbox sync."
 msgstr "Forceert Dropbox synchronisatie."
@@ -2168,6 +2185,9 @@ msgstr "Deze feature is alleen beschikbaar wanneer je koppelt aan een PVOutput D
 msgid "PVOutput"
 msgstr "PVOutput"
 
+msgid "Waiting for the next PVOutput export to be executed"
+msgstr "Wachten op de volgende PVOutput-export die uitgevoerd moet worden"
+
 msgid "The API key for your PVOutput account. Listed in PVOutput at Settings -> \"API Settings\"."
 msgstr "De API-key voor je PVOutput-account. Terug te vinden in PVOutput onder Instellingen -> \"API Settings\"."
 
@@ -2893,9 +2913,6 @@ msgstr "Engels"
 #~ msgid "The stored telegrams are processed by the DSMR_BACKEND process and thus can be processed retroactively as well (by design)."
 #~ msgstr "De opgeslagen telegrammen worden verwerkt door het DSMR_BACKEND proces. Daardoor kunnen ze tevens met terugwerkende kracht verwerkt worden."
 
-#~ msgid "There are too many unprocessed telegrams."
-#~ msgstr "Er zijn te veel onverwerkte telegrammen."
-
 #~ msgid "Unprocessed telegrams"
 #~ msgstr "Onverwerkte telegrammen"
 
@@ -2940,9 +2957,6 @@ msgstr "Engels"
 
 #~ msgid "Data processing is lagging behind"
 #~ msgstr "Dataverwerking loopt achter"
-
-#~ msgid "Data processing is on schedule"
-#~ msgstr "Dataverwerking is op schema"
 
 #~ msgid "Scheduled processes"
 #~ msgstr "Gepland proces"

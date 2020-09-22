@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.conf import settings
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -21,13 +22,15 @@ def check_dropbox_sync(**kwargs):
     if not dropbox_settings.access_token:
         return
 
-    offset = timezone.now() - timezone.timedelta(hours=1)
+    offset = timezone.now() - timezone.timedelta(
+        minutes=settings.DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES
+    )
 
     if dropbox_settings.next_sync > offset:
         return
 
     return MonitoringStatusIssue(
         __name__,
-        'Dropbox sync took too long',
+        _('Waiting for the next Dropbox sync to be executed'),
         dropbox_settings.next_sync
     )
