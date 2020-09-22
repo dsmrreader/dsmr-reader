@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "5929f0d6-56f0-4a36-a4a6-088636f5c83a",
-		"name": "DSMR-reader [v3.x+]",
+		"name": "DSMR-reader [v4.x+]",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -72,7 +72,7 @@
 									"urlencoded": [
 										{
 											"key": "timestamp",
-											"value": "2017-04-15T00:00:00+02",
+											"value": "2020-01-15T12:34:56+01",
 											"description": "Required",
 											"type": "text"
 										},
@@ -354,7 +354,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/electricity?read_at__gte=2020-01-14 12:00:00&read_at__lte=2020-01-20 12:00:00&ordering=-read_at&offset=10&limit=5",
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/electricity?read_at__gte=2020-04-01",
 									"host": [
 										"{{DSMR-reader-API-host}}"
 									],
@@ -367,28 +367,32 @@
 									"query": [
 										{
 											"key": "read_at__gte",
-											"value": "2020-01-14 12:00:00",
+											"value": "2020-04-01",
 											"description": "Optional"
 										},
 										{
 											"key": "read_at__lte",
-											"value": "2020-01-20 12:00:00",
-											"description": "Optional"
+											"value": "2020-04-01 12:00:00",
+											"description": "Optional",
+											"disabled": true
 										},
 										{
 											"key": "ordering",
 											"value": "-read_at",
-											"description": "Optional"
+											"description": "Optional",
+											"disabled": true
 										},
 										{
 											"key": "offset",
 											"value": "10",
-											"description": "Optional"
+											"description": "Optional",
+											"disabled": true
 										},
 										{
 											"key": "limit",
-											"value": "5",
-											"description": "Optional"
+											"value": "1",
+											"description": "Optional",
+											"disabled": true
 										}
 									]
 								}
@@ -678,6 +682,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Application monitoring",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/application/monitoring",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"application",
+										"monitoring"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -691,13 +722,13 @@
 		"type": "apikey",
 		"apikey": [
 			{
-				"key": "key",
-				"value": "Authorization",
+				"key": "value",
+				"value": "Token {{DSMR-reader-API-key}}",
 				"type": "string"
 			},
 			{
-				"key": "value",
-				"value": "Token {{DSMR-reader-API-key}}",
+				"key": "key",
+				"value": "Authorization",
 				"type": "string"
 			}
 		]

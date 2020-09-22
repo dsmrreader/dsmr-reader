@@ -25,14 +25,12 @@ def check_recent_readings(**kwargs):
     max_slack = timezone.now() - timezone.timedelta(
         minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES
     )
-    print('latest_reading', latest_reading)
+
     if latest_reading.timestamp > max_slack:
         return
 
-    return [
-        MonitoringStatusIssue(
-            __name__,
-            'No recent readings received',
-            latest_reading.timestamp
-        )
-    ]
+    return MonitoringStatusIssue(
+        __name__,
+        'No recent readings received',
+        latest_reading.timestamp
+    )

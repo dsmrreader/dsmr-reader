@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core.cache import cache
 
 from dsmr_backend import signals
+from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
@@ -98,11 +99,16 @@ def request_monitoring_status():
     responses = signals.request_status.send_robust(None)
     issues = []
 
-    for current_receiver, current_response in responses:
-        if not current_response or not isinstance(current_response, (list, tuple)):
+    for _, current_response in responses:
+        if not current_response:
             continue
 
-        issues += current_response
+        if not isinstance(current_response, (list, tuple)):
+            current_response = [current_response]
+
+        for x in current_response:
+            if isinstance(x, MonitoringStatusIssue):
+                issues.append(x)
 
     issues = sorted(issues, key=lambda x: x.since, reverse=True)
 
