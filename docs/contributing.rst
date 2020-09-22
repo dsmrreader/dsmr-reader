@@ -10,7 +10,7 @@ It doesn't matter whether you run into problems or just want to get in touch, ju
 
 .. seealso::
     
-    `Please create an issue on Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_ to get in contact.
+    `Please create an issue on Github <https://github.com/dennissiemensma/dsmr-reader/issues>`_ to get in contact.
 
 
 Developing and creating pull requests
