@@ -2,6 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2020-09-22 22:41+0200\n"
+"PO-Revision-Date: 2020-09-22 22:41+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -93,8 +95,8 @@ msgid ""
 msgstr ""
 "Wees er allereerst zeker van dat je slimme meter uberhaupt gasverbruik "
 "registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden worden "
-"sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-"
-"pagina geeft je hier overigens ook inzicht in."
+"sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina "
+"geeft je hier overigens ook inzicht in."
 
 #: ../../faq.rst:61
 msgid "How do I restore a database backup?"
@@ -114,14 +116,13 @@ msgid ""
 "sql.html>`_ for more information about how to enable timezone support on "
 "MySQL."
 msgstr ""
-"`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-"
-"tzinfo-to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op "
-"MySQL."
+"`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-"
+"to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op MySQL."
 
 #: ../../faq.rst:75
 msgid ""
-"On recent versions it should be as simple as executing the following "
-"command as root/sudo user::"
+"On recent versions it should be as simple as executing the following command "
+"as root/sudo user::"
 msgstr ""
 "Op recente versies kun je simpelweg het volgende commando als root/sudo-"
 "gebruiker uitvoeren::"
@@ -168,8 +169,7 @@ msgstr "Hoe de applicatie of processen herstarten?"
 
 #: ../../faq.rst:117
 msgid ":doc:`More information can be found here <faq/restart_processes>`."
-msgstr ""
-":doc:`Meer informatie kun je hier terugvinden<faq/restart_processes>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/restart_processes>`."
 
 #: ../../faq.rst:121
 msgid "How do I fix errors such as ``DETAIL: Key (id)=(123) already exists``?"
@@ -207,12 +207,11 @@ msgstr ""
 
 #: ../../faq.rst:137
 msgid ""
-"The day after, you should be able to manually adjust any invalid Day or "
-"Hour Statistics :doc:`in the admin interface<configuration>` for the "
-"invalid day."
+"The day after, you should be able to manually adjust any invalid Day or Hour "
+"Statistics :doc:`in the admin interface<configuration>` for the invalid day."
 msgstr ""
-"De dag erna kun je dit zelf weer rechtzetten via de Dag- of Uurtotalen, :"
-"doc:`in de admin-configuratie<configuration>`, voor de betreffende dag."
+"De dag erna kun je dit zelf weer rechtzetten via de Dag- of Uurtotalen, :doc:"
+"`in de admin-configuratie<configuration>`, voor de betreffende dag."
 
 #: ../../faq.rst:141
 msgid "How can I create the (super)user or update its password?"
@@ -241,6 +240,18 @@ msgid ""
 msgstr ""
 "De gebruiker moet nu ofwel aangemaakt zijn ofwel het wachtwoord is "
 "bijgewerkt."
+
+#: ../../faq.rst:158
+msgid ""
+"How do I fix: ``Error: Already running on PID 1234 (or pid file '/var/tmp/"
+"gunicorn--dsmr_webinterface.pid' is stale)``?"
+msgstr ""
+"Hoe los ik deze fout op: ``Error: Already running on PID 1234 (or pid file '/"
+"var/tmp/gunicorn--dsmr_webinterface.pid' is stale)``?"
+
+#: ../../faq.rst:159
+msgid "Just delete the PID file and restart the webinterface::"
+msgstr "Verwijder het genoemde PID-bestand en herstart de webinterface::"
 
 #~ msgid ""
 #~ "See :doc:`these datalogger instructions<installation/datalogger>` for "

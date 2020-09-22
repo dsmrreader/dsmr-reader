@@ -153,3 +153,9 @@ Now execute::
 
 The user should either be created or the existing user should have its password updated.
 
+
+How do I fix: ``Error: Already running on PID 1234 (or pid file '/var/tmp/gunicorn--dsmr_webinterface.pid' is stale)``?
+-----------------------------------------------------------------------------------------------------------------------
+Just delete the PID file and restart the webinterface::
+
+    sudo supervisorctl restart dsmr_webinterface
