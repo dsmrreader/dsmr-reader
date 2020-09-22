@@ -1,15 +1,17 @@
 import logging
 
 from django.apps import AppConfig
+from django.conf import settings
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from paho.mqtt.client import Client
 import django.db.models.signals
 
+from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_datalogger.signals import raw_telegram, dsmr_reading_created
-from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
-
+from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client, \
+    request_status
 
 logger = logging.getLogger('dsmrreader')
 
@@ -110,3 +112,17 @@ def on_terminate_persistent_client(client, **kwargs):
         return
 
     client.disconnect()
+
+
+@receiver(request_status)
+def check_mqtt_messages_queue(**kwargs):
+    from dsmr_mqtt.models.queue import Message
+
+    if Message.objects.count() < settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:
+        return
+
+    return MonitoringStatusIssue(
+        __name__,
+        _('Too many outgoing MQTT messages queued for transit'),
+        timezone.now()
+    )

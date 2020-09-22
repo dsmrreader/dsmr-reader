@@ -1756,6 +1756,9 @@ msgstr ""
 "extra_device_delivered = delivered\n"
 "</pre>\n"
 
+msgid "Too many outgoing InfluxDB measurements queued for transit"
+msgstr "Er zijn te veel uitgaande InfluxDB measurements die wachten op verzending"
+
 msgid "INSECURE - No HTTPS (default)"
 msgstr "ONVEILIG - Geen HTTP (standaard)"
 
@@ -1945,6 +1948,9 @@ msgstr ""
 "                    {}\n"
 "                    </pre>\n"
 "                    "
+
+msgid "Too many outgoing MQTT messages queued for transit"
+msgstr "Er zijn te veel uitgaande MQTT-berichten die wachten op verzending"
 
 msgid "MQTT now requires a separate process in Supervisor. Please read the changelog for more instructions."
 msgstr "MQTT vereist voortaan een apart proces in Supervisor. Zie het wijzigingenoverzicht voor verdere instructies."

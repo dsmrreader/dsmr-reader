@@ -1,11 +1,14 @@
 import logging
 
 from django.apps import AppConfig
+from django.conf import settings
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from influxdb import InfluxDBClient
 
-from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
+from dsmr_backend.dto import MonitoringStatusIssue
+from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client, \
+    request_status
 from dsmr_datalogger.signals import dsmr_reading_created
 
 
@@ -48,3 +51,17 @@ def on_terminate_persistent_client(client, **kwargs):
         return
 
     client.close()
+
+
+@receiver(request_status)
+def check_influxdb_measurements_queue(**kwargs):
+    from dsmr_influxdb.models import InfluxdbMeasurement
+
+    if InfluxdbMeasurement.objects.count() < settings.DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE:
+        return
+
+    return MonitoringStatusIssue(
+        __name__,
+        _('Too many outgoing InfluxDB measurements queued for transit'),
+        InfluxdbMeasurement.objects.all().order_by('time')[0].time
+    )
