@@ -3,6 +3,7 @@ from unittest import mock
 from django.test import TestCase
 from django.utils import timezone
 
+from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -276,6 +277,17 @@ class TestBackend(InterceptStdoutMixin, TestCase):
 
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 10, 25))
         self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 25)
+
+    @mock.patch('dsmr_backend.signals.request_status.send_robust')
+    def test_request_monitoring_status_coverage(self, signal_mock):
+        # All types of edge cases.
+        signal_mock.return_value = (
+            ['x', None],
+            ['y', list('~')],
+            ['z', Exception()],
+            ['!', MonitoringStatusIssue('', '', timezone.now())]
+        )
+        dsmr_backend.services.backend.request_monitoring_status()
 
 
 @mock.patch('requests.get')
