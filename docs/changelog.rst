@@ -11,7 +11,7 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
-v4.4.0 - 2020-09-xx
+v4.4.0 - 2020-09-25
 -------------------
 
 - ``Added``: Info-dump command voor debugging [`#1104 <https://github.com/dennissiemensma/dsmr-reader/issues/1104>`_]
