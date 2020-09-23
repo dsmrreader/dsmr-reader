@@ -87,6 +87,12 @@ commands:
                     pylama
 
             - run:
+                name: "Check Autopep8"
+                command: |
+                    . ~/.virtualenvs/dsmr-reader/bin/activate
+                    autopep8 -r . --diff --exit-code
+
+            - run:
                 name: "Test SQLite"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
