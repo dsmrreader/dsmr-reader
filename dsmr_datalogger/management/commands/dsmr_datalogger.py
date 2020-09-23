@@ -1,5 +1,6 @@
 import logging
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils.translation import gettext as _
 
@@ -16,15 +17,20 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = _('Performs an DSMR P1 telegram reading on the serial port.')
     name = __name__  # Required for PID file.
 
-    # Persistent 'connection' to either the serial port or network socket, wrapped as generator.
     telegram_generator = None
 
     def initialize(self):
-        self._update_sleep()
-        self.telegram_generator = dsmr_datalogger.services.datalogger.get_telegram_generator()
+        self.sleep_time = DataloggerSettings.get_solo().process_sleep
 
     def run(self, **options):
+        if not self.telegram_generator:  # pragma: nocover
+            self.telegram_generator = self._datasource()
+
         telegram = next(self.telegram_generator)
+
+        # Do not persist connections when the sleep is too high.
+        if self.sleep_time >= settings.DSMRREADER_DATALOGGER_MIN_SLEEP_FOR_RECONNECT:
+            self.telegram_generator = None
 
         try:
             dsmr_datalogger.services.datalogger.telegram_to_reading(data=telegram)
@@ -32,10 +38,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             pass
 
         self._check_restart_required()
-        self._update_sleep()
-
-    def _update_sleep(self):
-        self.sleep_time = DataloggerSettings.get_solo().process_sleep
 
     def _check_restart_required(self):
         if not DataloggerSettings.get_solo().restart_required:
@@ -44,3 +46,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         DataloggerSettings.objects.update(restart_required=False)
         logger.warning('Detected datalogger restart required, stopping process...')
         raise StopInfiniteRun()
+
+    def _datasource(self):
+        return dsmr_datalogger.services.datalogger.get_telegram_generator()

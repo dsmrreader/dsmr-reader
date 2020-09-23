@@ -39,7 +39,7 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
         ),
         (
             _('Advanced'), {
-                'fields': ['process_sleep', 'log_telegrams'],
+                'fields': ['process_sleep'],
             }
         ),
         (

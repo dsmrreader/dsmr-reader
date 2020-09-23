@@ -645,12 +645,6 @@ msgstr "Datalogger proces sleep"
 msgid "The number of seconds the application will sleep after reading data from the datalogger (API excluded)."
 msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API uitgezonderd)."
 
-msgid "Log telegrams"
-msgstr "Log telegrammen"
-
-msgid "Whether telegrams are logged, in base64 format. Only required for debugging."
-msgstr "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor debugging."
-
 msgid "Whether the datalogger process requires a restart. It should occur automatically."
 msgstr "Geeft aan of het datalogger-proces een herstart vereist. Dit zou automatisch moeten gaan."
 
@@ -2557,6 +2551,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Log telegrams"
+#~ msgstr "Log telegrammen"
+
+#~ msgid "Whether telegrams are logged, in base64 format. Only required for debugging."
+#~ msgstr "Geeft aan of telegrammen gelogd worden, in base64-formaat. Alleen nodig voor debugging."
 
 #~ msgid "Help / FAQ"
 #~ msgstr "Help / FAQ"

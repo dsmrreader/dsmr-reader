@@ -73,11 +73,6 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
             'The number of seconds the application will sleep after reading data from the datalogger (API excluded).'
         )
     )
-    log_telegrams = models.BooleanField(
-        default=False,
-        verbose_name=_('Log telegrams'),
-        help_text=_("Whether telegrams are logged, in base64 format. Only required for debugging.")
-    )
     restart_required = models.BooleanField(
         default=False,
         verbose_name=_('Process restart required'),

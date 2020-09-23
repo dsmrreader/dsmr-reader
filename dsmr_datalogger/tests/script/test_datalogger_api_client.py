@@ -20,9 +20,27 @@ import dsmr_datalogger.scripts.dsmr_datalogger_api_client
     DATALOGGER_SERIAL_BAUDRATE='12345',
     DATALOGGER_API_HOSTS='https://127.0.0.1:1234',
     DATALOGGER_API_KEYS='test-api-key',
-    DATALOGGER_TIMEOUT='0.123'
+    DATALOGGER_TIMEOUT='0.123',
+    DATALOGGER_SLEEP='0.1',
+    DATALOGGER_MIN_SLEEP_FOR_RECONNECT='999',
 ))
 class TestScript(TestCase):
+    @mock.patch.dict('os.environ', dict(
+        DATALOGGER_SLEEP='0.1',
+        DATALOGGER_MIN_SLEEP_FOR_RECONNECT='0',
+    ))
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
+    @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
+    def test_main_no_reconnect(self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
+        """ Persistent connection. """
+        read_telegram_mock_mock.side_effect = [
+            iter(['fake-serial-telegram']),
+            StopIteration(),  # Stop loop after 1 round
+        ]
+
+        with self.assertRaises(StopIteration):
+            dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
     def test_main_serial(self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
@@ -32,7 +50,8 @@ class TestScript(TestCase):
             StopIteration(),  # Stop loop after 1 round
         ]
 
-        dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+        with self.assertRaises(StopIteration):
+            dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         # Check serial settings from file (defaults).
         self.assertTrue(read_telegram_mock_mock.called)
@@ -70,7 +89,8 @@ class TestScript(TestCase):
             StopIteration(),  # Stop loop after 1 round
         ]
 
-        dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+        with self.assertRaises(StopIteration):
+            dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         # Check serial settings from file (defaults).
         self.assertTrue(read_telegram_mock.called)
@@ -98,7 +118,8 @@ class TestScript(TestCase):
             StopIteration(),
         ]
 
-        dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+        with self.assertRaises(StopIteration):
+            dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         self.assertTrue(send_telegram_to_remote_dsmrreader_mock.called)
 
@@ -120,7 +141,8 @@ class TestScript(TestCase):
 
         self.assertFalse(set_level_mock.called)
 
-        dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+        with self.assertRaises(StopIteration):
+            dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         self.assertTrue(set_level_mock.called)
         self.assertEqual(set_level_mock.call_args[0][0], logging.DEBUG)
@@ -133,9 +155,10 @@ class TestScript(TestCase):
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
     def test_main_without_debug_logging(self, read_telegram_mock_mock, set_level_mock, *mocks):
         """ Similar to test_main_exception_with_debug_logging(), but check DATALOGGER_DEBUG_LOGGING disabled. """
-        read_telegram_mock_mock.return_value = []
+        read_telegram_mock_mock.return_value = iter([])
 
-        dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
+        with self.assertRaises(StopIteration):
+            dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         self.assertTrue(set_level_mock.called)
         self.assertEqual(set_level_mock.call_args[0][0], logging.INFO)

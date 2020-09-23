@@ -20,10 +20,10 @@ logger = logging.getLogger('dsmrreader')
 def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
     """ Opens a serial/network connection and reads it until we have a full telegram. Yields the result """
     MAX_BYTES_PER_READ = 2048
-    MAX_READ_TIMEOUT = 0.25  # Will cancel read() if it does not receive MAX_BYTES_PER_READ Bytes in time.
+    MAX_READ_TIMEOUT = 1.0 / 3  # Will cancel read() if it does not receive MAX_BYTES_PER_READ Bytes in time.
 
     logger.info(
-        '[%s] Opening serial connection "%s" using options: %s',
+        '[%s] Opening connection "%s" using options: %s',
         datetime.datetime.now(),
         url_or_port,
         serial_kwargs
@@ -109,6 +109,7 @@ def main():  # noqa: C901
     DATALOGGER_INPUT_METHOD = decouple.config('DATALOGGER_INPUT_METHOD')
     DATALOGGER_API_HOSTS = decouple.config('DATALOGGER_API_HOSTS', cast=decouple.Csv(post_process=tuple))
     DATALOGGER_API_KEYS = decouple.config('DATALOGGER_API_KEYS', cast=decouple.Csv(post_process=tuple))
+    DATALOGGER_MIN_SLEEP_FOR_RECONNECT = decouple.config('DATALOGGER_MIN_SLEEP_FOR_RECONNECT', default=1.0, cast=float)
 
     if not DATALOGGER_API_HOSTS or not DATALOGGER_API_KEYS:
         raise RuntimeError('API_HOSTS or API_KEYS not set')
@@ -140,8 +141,19 @@ def main():  # noqa: C901
     else:
         raise RuntimeError('Unsupported DATALOGGER_INPUT_METHOD')
 
-    for telegram in read_telegram(**serial_kwargs):
-        logger.debug("[%s] Telegram read: \n%s", datetime.datetime.now(), telegram)
+    datasource = None
+
+    while True:
+        if not datasource:
+            datasource = read_telegram(**serial_kwargs)
+
+        telegram = next(datasource)
+
+        # Do not persist connections when the sleep is too high.
+        if DATALOGGER_SLEEP >= DATALOGGER_MIN_SLEEP_FOR_RECONNECT:
+            datasource = None
+
+        logger.debug("[%s] Telegram read:\n%s", datetime.datetime.now(), telegram)
 
         for current_server_index in range(len(DATALOGGER_API_HOSTS)):
             current_api_host = DATALOGGER_API_HOSTS[current_server_index]
@@ -158,6 +170,7 @@ def main():  # noqa: C901
             except Exception as error:
                 logger.exception(error)
 
+        logger.debug("[%s] Sleeping for %s second(s)", datetime.datetime.now(), DATALOGGER_SLEEP)
         time.sleep(DATALOGGER_SLEEP)
 
 

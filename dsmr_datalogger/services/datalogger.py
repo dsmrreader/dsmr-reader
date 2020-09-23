@@ -1,5 +1,4 @@
 import logging
-import base64
 
 from django.db.models.expressions import F
 from django.utils import timezone
@@ -33,7 +32,6 @@ def get_dsmr_connection_parameters():
     connection_parameters = dict(
         telegram_timeout=20,  # After this threshold, the datalogger will throw an exception to break the infinite loop.
         specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version],
-        log_telegrams=datalogger_settings.log_telegrams,
     )
 
     extra_connection_parameters = {
@@ -63,7 +61,6 @@ def get_telegram_generator():
 
     # Partially reuse the remote datalogger.
     connection_parameters = get_dsmr_connection_parameters()
-    del connection_parameters['log_telegrams']
     del connection_parameters['specifications']
 
     return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(**connection_parameters)
@@ -73,13 +70,6 @@ def telegram_to_reading(data):
     """ Converts a P1 telegram to a DSMR reading, which will be stored in database. """
     params = get_dsmr_connection_parameters()
     parser = TelegramParser(params['specifications'])
-
-    # We will log the telegrams in base64 for convenience and debugging.
-    base64_data = base64.b64encode(data.encode())
-
-    if params['log_telegrams']:
-        logger.info('Received telegram (base64 encoded): %s', base64_data)
-
     logger.debug("Received telegram:\n%s", data)
 
     try:
@@ -87,8 +77,7 @@ def telegram_to_reading(data):
     except (InvalidChecksumError, ParseError) as error:
         # Hook to keep track of failed readings count.
         MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
-        logger.warning('Rejected telegram (%s) (base64 encoded): %s', error, base64_data)
-        logger.exception(error)
+        logger.warning('Rejected telegram: %s', error)
         raise InvalidTelegramError(error)
 
     return _map_telegram_to_model(parsed_telegram=parsed_telegram, data=data)

@@ -213,12 +213,6 @@ class TestServices(TestCase):
         telegram[-1] = "!58C8\n"
         dsmr_datalogger.services.datalogger.telegram_to_reading(data=''.join(telegram))
 
-    def test_telegram_logging_setting_coverage(self):
-        """ Purely a coverage test. """
-        DataloggerSettings.get_solo()
-        DataloggerSettings.objects.all().update(log_telegrams=True)
-        dsmr_datalogger.services.datalogger.telegram_to_reading(data=self.fake_telegram)
-
     @mock.patch('dsmr_datalogger.signals.dsmr_reading_created.send_robust')
     def test_dsmr_reading_created_signal(self, send_robust_mock):
         self.assertFalse(send_robust_mock.called)

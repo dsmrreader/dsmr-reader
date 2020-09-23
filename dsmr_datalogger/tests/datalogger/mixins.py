@@ -12,7 +12,7 @@ class FakeDsmrReadingMixin(InterceptStdoutMixin, TestCase):
         raise NotImplementedError('Override this in parent class')
 
     @mock.patch('serial.serial_for_url')
-    def _fake_dsmr_reading(self, serial_for_url_mock):
+    def _fake_dsmr_reading(self, serial_for_url_mock, run_once=True):
         """ Fake & process an DSMR vX telegram reading. """
         cli_serial = Serial()
         cli_serial.read = mock.MagicMock(
@@ -21,4 +21,4 @@ class FakeDsmrReadingMixin(InterceptStdoutMixin, TestCase):
         )
         serial_for_url_mock.return_value = cli_serial
 
-        self._intercept_command_stdout('dsmr_datalogger', run_once=True)
+        self._intercept_command_stdout('dsmr_datalogger', run_once=run_once)
