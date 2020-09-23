@@ -15,6 +15,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 class TestDatalogger(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     """ Iskra meter, DSMRv5, gas on bus 2. """
+
     def setUp(self):
         datalogger_settings = DataloggerSettings.get_solo()
         datalogger_settings.dsmr_version = DataloggerSettings.DSMR_VERSION_4_PLUS

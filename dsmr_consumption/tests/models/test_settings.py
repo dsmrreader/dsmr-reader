@@ -6,6 +6,7 @@ from dsmr_consumption.models.settings import ConsumptionSettings
 
 class TestSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = ConsumptionSettings().get_solo()
 

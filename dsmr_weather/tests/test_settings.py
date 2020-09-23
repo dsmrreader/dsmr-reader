@@ -8,6 +8,7 @@ from dsmr_weather.models.settings import WeatherSettings
 
 class TestSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = WeatherSettings().get_solo()
 

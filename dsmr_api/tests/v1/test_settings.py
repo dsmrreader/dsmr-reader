@@ -6,6 +6,7 @@ from dsmr_api.models import APISettings
 
 class TestSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = APISettings().get_solo()
 

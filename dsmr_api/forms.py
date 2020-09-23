@@ -4,6 +4,7 @@ from django.core import validators
 
 class NullCharField(forms.CharField):
     """ Disables the ProhibitNullCharactersValidator, so we can clean it later on. """
+
     def __init__(self, *args, **kwargs):
         super(NullCharField, self).__init__(*args, **kwargs)
         self.validators.remove(validators.ProhibitNullCharactersValidator())

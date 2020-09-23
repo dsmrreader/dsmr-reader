@@ -6,6 +6,7 @@ from dsmr_datalogger.models.settings import DataloggerSettings, RetentionSetting
 
 class TestDataloggerSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = DataloggerSettings().get_solo()
 
@@ -25,6 +26,7 @@ class TestDataloggerSettings(TestCase):
 
 class TestRetentionSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = RetentionSettings().get_solo()
 

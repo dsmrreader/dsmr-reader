@@ -8,6 +8,7 @@ from dsmr_mindergas.models.settings import MinderGasSettings
 
 class TestSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = MinderGasSettings().get_solo()
 

@@ -99,6 +99,7 @@ class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCas
 
 class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     """ Test Iskra meter, DSMR v5.0, with somewhat duplicate data. """
+
     def _dsmr_dummy_data(self):
         return [
             "/ISK5\\2M550T-1011\r\n",

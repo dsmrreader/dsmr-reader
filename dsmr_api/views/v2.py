@@ -84,12 +84,14 @@ class TodayConsumptionView(APIView):
 
 class ElectricityLiveView(APIView):
     """ Returns the current electricity usage. """
+
     def get(self, request):
         return Response(dsmr_consumption.services.live_electricity_consumption())
 
 
 class GasLiveView(APIView):
     """ Returns the current gas usage. """
+
     def get(self, request):
         return Response(dsmr_consumption.services.live_gas_consumption())
 
@@ -136,6 +138,7 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 
 class VersionView(APIView):
     """ Returns the current version of DSMR-reader. """
+
     def get(self, request):
         return Response({
             'version': '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3]),

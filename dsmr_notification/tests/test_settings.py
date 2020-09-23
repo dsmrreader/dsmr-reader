@@ -6,6 +6,7 @@ from dsmr_notification.models.settings import NotificationSetting, StatusNotific
 
 class TestSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = NotificationSetting().get_solo()
 
@@ -34,6 +35,7 @@ class TestSettings(TestCase):
 
 class TestStatusNotificationSetting(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = StatusNotificationSetting().get_solo()
 

@@ -27,6 +27,7 @@ class Trends(ConfigurableLoginRequiredMixin, TemplateView):
 
 class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching average consumption, in JSON. """
+
     def get(self, request):  # noqa: C901
         data = {
             'electricity': [],
@@ -66,6 +67,7 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
 
 class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching electricity consumption by tariff, in JSON. """
+
     def get(self, request):  # noqa: C901
         capabilities = dsmr_backend.services.backend.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()

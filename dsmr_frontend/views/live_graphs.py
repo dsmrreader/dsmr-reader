@@ -35,13 +35,14 @@ class LiveGraphs(ConfigurableLoginRequiredMixin, TemplateView):
 
 class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the electricity consumption graph data, in JSON. """
+
     def get(self, request):  # noqa: C901
         form = DashboardElectricityConsumptionForm(request.GET)
 
         if not form.is_valid():
             return JsonResponse({
-                    'errors': form.errors
-                },
+                'errors': form.errors
+            },
                 status=400
             )
 
@@ -130,6 +131,7 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
 
 class LiveXhrGasConsumption(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the gas consumption graph data, in JSON. """
+
     def get(self, request):  # noqa: C901
         data = {
             'read_at': [],
@@ -152,6 +154,7 @@ class LiveXhrGasConsumption(ConfigurableLoginRequiredMixin, View):
 
 class LiveXhrTemperature(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the temperature graph data, in JSON. """
+
     def get(self, request):  # noqa: C901
         data = {
             'read_at': [],

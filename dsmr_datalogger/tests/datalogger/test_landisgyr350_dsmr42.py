@@ -13,6 +13,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 class TestDatalogger(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     """ Landis+Gyr 350 DSMR v4.2. """
+
     def _dsmr_dummy_data(self):
         return [
             "/XMX5LGBBFFB123456789\r\n",

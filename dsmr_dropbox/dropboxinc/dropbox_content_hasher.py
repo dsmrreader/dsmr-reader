@@ -69,7 +69,7 @@ class DropboxContentHasher:
                 self._block_pos = 0
 
             space_in_block = self.BLOCK_SIZE - self._block_pos
-            part = new_data[new_data_pos:(new_data_pos+space_in_block)]
+            part = new_data[new_data_pos:(new_data_pos + space_in_block)]
             self._block_hasher.update(part)
 
             self._block_pos += len(part)

@@ -8,6 +8,7 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 
 class FakeDsmrReadingMixin(InterceptStdoutMixin, TestCase):
     """ Mixin to ease faking reading serial input. """
+
     def _dsmr_dummy_data(self):
         raise NotImplementedError('Override this in parent class')
 

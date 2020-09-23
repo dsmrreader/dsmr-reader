@@ -15,6 +15,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 class TestDatalogger(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
     """ Belgium Fluvius meter (polyphase). """
+
     def setUp(self):
         DataloggerSettings.get_solo()
         DataloggerSettings.objects.all().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)

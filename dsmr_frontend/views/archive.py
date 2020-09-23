@@ -78,6 +78,7 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
 
 class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the hour statistics of a day, JSON encoded. """
+
     def get(self, request):  # noqa: C901
         capabilities = dsmr_backend.services.backend.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()

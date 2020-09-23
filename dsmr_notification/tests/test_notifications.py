@@ -309,6 +309,7 @@ class TestServicesWithoutGas(TestServices):
 
 class TestServicesWithoutElectricityReturned(TestServices):
     """ Same tests, but without having any electricity returned. """
+
     def setUp(self):
         super(TestServicesWithoutElectricityReturned, self).setUp()
         DayStatistics.objects.all().update(electricity1_returned=0, electricity2_returned=0)

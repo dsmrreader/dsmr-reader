@@ -39,6 +39,7 @@ class Statistics(ConfigurableLoginRequiredMixin, TemplateView):
 
 class StatisticsXhrData(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
+
     def get(self, request):
         return JsonResponse({
             'total_reading_count': intcomma(DsmrReading.objects.all().count()),

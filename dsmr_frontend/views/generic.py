@@ -10,6 +10,7 @@ from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 
 class XhrHeader(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching the dashboard header, displaying latest readings and price estimate, JSON response. """
+
     def get(self, request):
         data = dsmr_consumption.services.live_electricity_consumption()
 

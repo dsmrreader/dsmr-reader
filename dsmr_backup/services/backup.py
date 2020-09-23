@@ -83,8 +83,8 @@ def create_full(folder):
             db_settings['NAME'],
         ]
         backup_process = subprocess.Popen(command, env={
-                'PGPASSWORD': db_settings['PASSWORD']
-            },
+            'PGPASSWORD': db_settings['PASSWORD']
+        },
             stdout=open(backup_file, 'w')  # pragma: no cover
         )
     # MySQL backup.

@@ -9,6 +9,7 @@ from dsmr_backend.tests.mixins import InterceptStdoutMixin
 
 class TestTranslations(InterceptStdoutMixin, TestCase):
     """ NOTE: This also regenerates translations! """
+
     def setUp(self):
         # A bit of a hack to detect all languages set, excluding the default one (should be base).
         self.locales = [pair[0] for pair in settings.LANGUAGES]

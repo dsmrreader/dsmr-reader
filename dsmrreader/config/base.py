@@ -110,7 +110,7 @@ LOGOUT_URL = 'admin:logout'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-## Moved to defaults config.
+# Moved to defaults config.
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

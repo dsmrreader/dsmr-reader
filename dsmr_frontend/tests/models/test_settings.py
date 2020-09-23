@@ -6,6 +6,7 @@ from dsmr_frontend.models.settings import FrontendSettings, SortedGraph
 
 class TestSettings(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = FrontendSettings().get_solo()
 
@@ -52,6 +53,7 @@ class TestSettings(TestCase):
 
 class TestSortedGraph(TestCase):
     """ Tests for settings defaults. """
+
     def setUp(self):
         self.instance = SortedGraph()
 

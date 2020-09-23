@@ -6,6 +6,7 @@ from dsmr_mqtt.models.queue import Message
 
 class TestMessage(TestCase):
     """ Tests for defaults. """
+
     def setUp(self):
         self.instance = Message.objects.create(topic='x', payload='y')
 

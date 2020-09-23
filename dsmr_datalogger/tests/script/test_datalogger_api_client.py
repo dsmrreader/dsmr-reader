@@ -236,6 +236,7 @@ class TestScriptErrors(TestCase):
 @mock.patch('serial.serial_for_url')
 class TestScriptSerialSocket(TestCase):
     """ Serial port test. """
+
     def test_connection_error(self, serial_for_url_mock):
         """ Connection error. """
         serial_for_url_mock.side_effect = SerialException('Something happened')
@@ -281,6 +282,7 @@ class TestScriptSerialSocket(TestCase):
 @mock.patch('serial.serial_for_url')
 class TestScriptNetworkSocket(TestCase):
     """ Network socket test. """
+
     def _call_datalogger(self):
         return
 

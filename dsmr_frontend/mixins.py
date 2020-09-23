@@ -5,6 +5,7 @@ from dsmr_frontend.models.settings import FrontendSettings
 
 class ConfigurableLoginRequiredMixin(AccessMixin):
     """ Applies logic similar to the LoginRequiredMixin but depending on a configurable setting. """
+
     def dispatch(self, request, *args, **kwargs):
         if not FrontendSettings.get_solo().always_require_login:
             return super().dispatch(request, *args, **kwargs)

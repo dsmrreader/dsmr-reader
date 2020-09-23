@@ -14,6 +14,7 @@ class HeaderAuthentication(authentication.BaseAuthentication):
 
     The API key can be managed inside the admin interface of the application.
     """
+
     def authenticate(self, request):
         api_settings = APISettings.get_solo()
 

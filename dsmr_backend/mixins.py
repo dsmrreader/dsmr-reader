@@ -155,6 +155,7 @@ class InfiniteManagementCommandMixin:
 
 class ReadOnlyAdminModel(admin.ModelAdmin):
     """ Read only model for Django admin. """
+
     def __init__(self, *args, **kwargs):
         super(ReadOnlyAdminModel, self).__init__(*args, **kwargs)
         self.readonly_fields = [x.name for x in self.model._meta.get_fields()]
@@ -184,6 +185,7 @@ class ChangeOnlyAdminModel(ReadOnlyAdminModel):
 
 class ModelUpdateMixin():
     """ Add update() on Django model instance, similar to queryset.update(). """
+
     def update(self, **updated_fields):
         if not updated_fields:
             return

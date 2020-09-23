@@ -32,6 +32,7 @@ class XhrMarkNotificationRead(LoginRequiredMixin, FormView):
 @method_decorator(csrf_exempt, name='dispatch')
 class XhrMarkAllNotificationsRead(LoginRequiredMixin, View):
     """ XHR view for marking all notifications as read. """
+
     def post(self, request):
         Notification.objects.all().update(read=True)
         return JsonResponse({})

@@ -55,6 +55,7 @@ class TestViewsWithoutData(TestViews):
 
 class TestViewsWithoutPrices(TestViews):
     """ Same tests as above, but without any price data as it's flushed in setUp().  """
+
     def setUp(self):
         super(TestViewsWithoutPrices, self).setUp()
         EnergySupplierPrice.objects.all().delete()
