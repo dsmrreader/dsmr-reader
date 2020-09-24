@@ -195,6 +195,7 @@ class TestAlwaysRequireLoginDisabled(TestCase):
     LOGGED_IN = False
     # Some views are hard to get right or have a redirect as their base feature or are already password protected.
     EXEMPTED_VIEWS = (
+        'redoc-api-docs',
         'changelog-redirect',
         'docs-redirect',
         'feedback-redirect',

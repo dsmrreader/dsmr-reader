@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from django.utils import timezone
 from django.conf import settings
 
+from dsmr_api.schemas import DsmrReaderSchema
 from dsmr_consumption.serializers.consumption import ElectricityConsumptionSerializer, GasConsumptionSerializer
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
@@ -24,11 +25,47 @@ import dsmr_datalogger.signals
 class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     list:
-    Returns a list of DSMR-readings.
+    Retrieves any readings stored. The readings are either constructed from incoming telegrams or were created using
+    this API.
+
+    *For example, fetching the latest reading created:*
+
+    ```
+        limit: 1
+        ordering: -timestamp
+    ```
+
+    **All parameters are optional**
 
     create:
-    Creates a new DSMR-reading.
+    Creates a reading from separate values, omitting the need for the original telegram.
+
+    **Note**
+
+    Readings are processed simultaneously by the background process. Therefor inserting readings retroactively might
+    result in undesired results.
+
+    Therefor inserting historic data might require you to delete all aggregated data using:
+
+    ```
+        sudo su - postgres
+        psql dsmrreader
+        truncate dsmr_consumption_electricityconsumption;
+        truncate dsmr_consumption_gasconsumption;
+        truncate dsmr_stats_daystatistics;
+        truncate dsmr_stats_hourstatistics;
+
+        # This query can take a long time!
+        update dsmr_datalogger_dsmrreading set processed = False;
+    ```
+
+    This will process all readings again, from the very first start, and aggregate them (and will take a long time,
+    depending on your reading count).
+
+    *The datalogger may interfere. If your stats are not correctly after regenerating, try it again while having your
+    datalogger disabled.*
     """
+    schema = DsmrReaderSchema(get='Retrieve DSMR readings', post='Create DSMR reading')
     FIELD = 'timestamp'
     queryset = DsmrReading.objects.all()
     serializer_class = DsmrReadingSerializer
@@ -43,7 +80,15 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
 
 
 class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
-    """ Retrieves en updates meter statistics. """
+    """
+    retrieve:
+    Retrieve meter statistics extracted by the datalogger.
+
+    partial_update:
+    Manually update any meter statistics fields. Only use this when you're not using the built-in datalogger (of v1
+    telegram API).
+    """
+    schema = DsmrReaderSchema(get='Retrieve meter statistics', patch='Update meter statistics')
     serializer_class = MeterStatisticsSerializer
 
     def get_object(self):
@@ -52,7 +97,8 @@ class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
 
 
 class TodayConsumptionView(APIView):
-    """ Returns the consumption of the current day (so far). """
+    """ Returns the consumption of the current day so far. """
+    schema = DsmrReaderSchema(get='Retrieve today\'s consumption')
     IGNORE_FIELDS = (
         'electricity1_start', 'electricity2_start', 'electricity1_end', 'electricity2_end', 'notes', 'gas_start',
         'gas_end', 'electricity1_returned_start', 'electricity2_returned_start', 'electricity1_returned_end',
@@ -83,21 +129,24 @@ class TodayConsumptionView(APIView):
 
 
 class ElectricityLiveView(APIView):
-    """ Returns the current electricity usage. """
+    """ Returns the live electricity consumption, containing the same data as the Dashboard header. """
+    schema = DsmrReaderSchema(get='Retrieve live electricity consumption')
 
     def get(self, request):
         return Response(dsmr_consumption.services.live_electricity_consumption())
 
 
 class GasLiveView(APIView):
-    """ Returns the current gas usage. """
+    """ Returns the latest gas consumption. """
+    schema = DsmrReaderSchema(get='Retrieve live gas consumption')
 
     def get(self, request):
         return Response(dsmr_consumption.services.live_gas_consumption())
 
 
 class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
-    """ Lists electricity consumption. """
+    """ Retrieves any data regarding electricity consumption. This is based on the readings processed. """
+    schema = DsmrReaderSchema(get='Retrieve electricity consumption')
     FIELD = 'read_at'
     queryset = ElectricityConsumption.objects.all()
     serializer_class = ElectricityConsumptionSerializer
@@ -107,7 +156,8 @@ class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
-    """ Lists gas consumption. """
+    """ Retrieves any data regarding gas consumption. This is based on the readings processed. """
+    schema = DsmrReaderSchema(get='Retrieve gas consumption')
     FIELD = 'read_at'
     queryset = GasConsumption.objects.all()
     serializer_class = GasConsumptionSerializer
@@ -117,7 +167,14 @@ class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class DayStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
-    """ Lists day statistics. """
+    """
+    Retrieves any aggregated day statistics.
+
+    **Note**
+
+    *These are generated a few hours after midnight.*
+    """
+    schema = DsmrReaderSchema(get='Retrieve day statistics')
     FIELD = 'day'
     queryset = DayStatistics.objects.all()
     serializer_class = DayStatisticsSerializer
@@ -127,7 +184,14 @@ class DayStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
-    """ Lists hour statistics. """
+    """
+    Retrieves any aggregated hour statistics.
+
+    **Note**
+
+    *These are generated a few hours after midnight.*
+    """
+    schema = DsmrReaderSchema(get='Retrieve hour statistics')
     FIELD = 'hour_start'
     queryset = HourStatistics.objects.all()
     serializer_class = HourStatisticsSerializer
@@ -137,7 +201,8 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class VersionView(APIView):
-    """ Returns the current version of DSMR-reader. """
+    """ Returns the version of DSMR-reader you are running. """
+    schema = DsmrReaderSchema(get='Application version')
 
     def get(self, request):
         return Response({
@@ -145,7 +210,10 @@ class VersionView(APIView):
         })
 
 
-class MonitoringView(APIView):
+class MonitoringIssuesView(APIView):
+    """ Returns any monitoring issues found. Reflects the same (issue) data as displayed on the Status page. """
+    schema = DsmrReaderSchema(get='Application monitoring')
+
     def get(self, request):
         issues = dsmr_backend.services.backend.request_monitoring_status()
 

@@ -4,7 +4,7 @@ from dsmr_frontend.views.about import About
 from dsmr_frontend.views.configuration import Configuration
 from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
-from dsmr_frontend.views.docs import ApiDocs
+from dsmr_frontend.views.docs import RedocApiDocs
 from dsmr_frontend.views.notifications import Notifications, XhrMarkNotificationRead, XhrMarkAllNotificationsRead
 from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
 from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXhrElectricityByTariff
@@ -50,7 +50,7 @@ urlpatterns = [
     path('notifications', Notifications.as_view(), name='notifications'),
 
     # Docs.
-    path('docs/api', ApiDocs.as_view(), name='api-docs'),
+    path('docs/api/redoc', RedocApiDocs.as_view(), name='redoc-api-docs'),
 
     # Generic redirects to external (help) pages.
     path('changelog-redirect', ChangelogRedirect.as_view(), name='changelog-redirect'),
