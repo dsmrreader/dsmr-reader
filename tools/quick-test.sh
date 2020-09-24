@@ -15,6 +15,11 @@ time pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.tes
 
 
 echo ""
+echo "--- Applying autopep8..."
+./tools/apply-autopep8.sh
+
+
+echo ""
 echo "--- Running Pylama for code audit..."
 pylama
 
