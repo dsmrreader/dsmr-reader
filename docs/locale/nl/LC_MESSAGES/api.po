@@ -18,11 +18,11 @@ msgstr "DSMR-reader API"
 
 #: ../../api.rst:3
 msgid ""
-"The application has an API allowing you to insert/create readings and retrieve "
-"statistics."
+"The application has an API allowing you to insert/create readings and "
+"retrieve statistics."
 msgstr ""
-"De applicatie heeft een API waarmee metingen kunt aanmaken/opvragen en diverse "
-"statistieken uitlezen."
+"De applicatie heeft een API waarmee metingen kunt aanmaken/opvragen en "
+"diverse statistieken uitlezen."
 
 #: ../../api.rst:7
 msgid "Contents"
@@ -38,8 +38,8 @@ msgstr "API inschakelen"
 
 #: ../../api.rst:15
 msgid ""
-"The API is disabled by default in the application. You may enable it :doc:`in "
-"the configuration<configuration>`."
+"The API is disabled by default in the application. You may enable it :"
+"doc:`in the configuration<configuration>`."
 msgstr ""
 "De API is standaard uitgeschakeld. Je kunt deze :doc:`in de "
 "configuratie<configuration>` inschakelen."
@@ -53,8 +53,9 @@ msgid ""
 "A random API key is generated for you by default. You can always view or "
 "update it :doc:`in the configuration<configuration>`."
 msgstr ""
-"Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kunt deze "
-"altijd bekijken of bijwerken :doc:`in de configuratie<configuration>`."
+"Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je "
+"kunt deze altijd bekijken of bijwerken :doc:`in de "
+"configuratie<configuration>`."
 
 #: ../../api.rst:28
 msgid "Documentation"
@@ -62,14 +63,16 @@ msgstr "Documentatie"
 
 #: ../../api.rst:32
 msgid ""
-"The API-documentation has been moved to your local DSMR-reader installation "
-"since DSMR-reader ``v3.1``."
+"The API-documentation has been moved to your local DSMR-reader "
+"installation since DSMR-reader ``v3.1``."
 msgstr ""
-"De API-documentatie is verplaatst naar je lokale DSMR-reader installatie, "
-"sinds DSMR-reader ``v3.1``."
+"De API-documentatie is verplaatst naar je lokale DSMR-reader "
+"installatie, sinds DSMR-reader ``v3.1``."
 
 #: ../../api.rst:34
-msgid "You can access it by selecting the ``API docs`` menu item in DSMR-reader."
+msgid ""
+"You can access it by selecting the ``About DSMR-reader`` menu item in "
+"DSMR-reader."
 msgstr ""
-"Je kunt deze bekijken door het menu-item ``API docs`` te selecteren in DSMR-"
-"reader."
+"Je kunt deze bekijken door het menu-item ``Over DSMR-reader`` te "
+"selecteren in DSMR-reader."

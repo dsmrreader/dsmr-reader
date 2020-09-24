@@ -1137,6 +1137,9 @@ msgstr "Authenticatie vereist"
 msgid "Status"
 msgstr "Status"
 
+msgid "About DSMR-reader"
+msgstr "Over DSMR-reader"
+
 msgid "Base selection"
 msgstr "Basisselectie"
 
