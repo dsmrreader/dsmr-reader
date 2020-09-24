@@ -1,7 +1,7 @@
 from rest_framework.schemas.openapi import AutoSchema
 
 
-class DsmrReaderSchema(AutoSchema):
+class DsmrReaderSchema(AutoSchema):  # pragma: nocover
     operation_mapping = None
 
     def __init__(self, **operation_mapping):
