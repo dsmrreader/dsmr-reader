@@ -11,6 +11,10 @@ Changelog
 v4.x releases
 ^^^^^^^^^^^^^
 
+
+v4.4.1 - 2020-09-25
+-------------------
+
 - ``Fixed``: API docs broken [`#1121 <https://github.com/dennissiemensma/dsmr-reader/issues/1121>`_]
 
 
