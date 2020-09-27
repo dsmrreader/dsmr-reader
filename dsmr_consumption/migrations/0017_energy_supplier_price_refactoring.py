@@ -18,6 +18,13 @@ def migrate_forward(apps, schema_editor):
         current.end = current.start + relativedelta.relativedelta(years=10)
         current.save()
 
+    # Fix NULL's
+    EnergySupplierPrice.objects.filter(
+        description__isnull=True
+    ).update(
+        description=''
+    )
+
 
 def migrate_backward(apps, schema_editor):
     # Unable to revert.
