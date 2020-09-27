@@ -12,6 +12,12 @@ v4.x releases
 ^^^^^^^^^^^^^
 
 
+v4.4.2 - 2020-09-28
+-------------------
+
+- ``Fixed``: ``0017_energy_supplier_price_refactoring: psycopg2.IntegrityError: column "description" contains null values `` [`#1126 <https://github.com/dennissiemensma/dsmr-reader/issues/1126>`_]
+
+
 v4.4.1 - 2020-09-25
 -------------------
 
