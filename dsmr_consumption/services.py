@@ -508,6 +508,10 @@ def summarize_energy_contracts():
             if getattr(current, price_field) == 0:
                 continue
 
+            # Gas may be None/null.
+            if summary[summary_field] is None:
+                continue
+
             summary['total_cost'] += summary[summary_field]
 
         data.append({
