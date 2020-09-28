@@ -13,6 +13,7 @@ from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_stats.models.statistics import DayStatistics
 
 
 class TestServices(InterceptStdoutMixin, TestCase):
@@ -527,6 +528,42 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(summary['gas_cost'], Decimal('3.60'))
         self.assertEqual(summary['fixed_cost'], Decimal('1.23'))
         self.assertEqual(summary['total_cost'], Decimal('5.52'))
+
+    @mock.patch('django.utils.timezone.now')
+    def test_summarize_energy_contracts_coverage(self, now_mock):
+        """ Tests edge cases. """
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2017, 1, 2)
+        )
+
+        # Clear one of the gas costs for coverage.
+        DayStatistics.objects.all().update(gas_cost=None)
+
+        # Clear one of the prices.
+        EnergySupplierPrice.objects.all().update(electricity_delivered_1_price=0)
+
+        # Fetch inside our expected range.
+        energy_contracts = dsmr_consumption.services.summarize_energy_contracts()
+
+        if not EnergySupplierPrice.objects.exists():
+            return self.assertEqual(len(energy_contracts), 0)
+
+        self.assertEqual(energy_contracts[0]['number_of_days'], 2)
+
+        summary = energy_contracts[0]['summary']
+        self.assertEqual(summary['electricity1'], Decimal('2.732'))
+        self.assertEqual(summary['electricity1_cost'], Decimal('0.57'))
+        self.assertEqual(summary['electricity1_returned'], Decimal('0.000'))
+        self.assertEqual(summary['electricity2'], Decimal('0.549'))
+        self.assertEqual(summary['electricity2_cost'], Decimal('0.12'))
+        self.assertEqual(summary['electricity2_returned'], Decimal('0.000'))
+        self.assertEqual(summary['electricity_merged'], Decimal('3.281'))
+        self.assertEqual(summary['electricity_cost_merged'], Decimal('0.69'))
+        self.assertEqual(summary['electricity_returned_merged'], Decimal('0.000'))
+        self.assertEqual(summary['gas'], Decimal('6.116'))
+        self.assertEqual(summary['gas_cost'], None)
+        self.assertEqual(summary['fixed_cost'], Decimal('1.23'))
+        self.assertEqual(summary['total_cost'], Decimal('1.35'))
 
     def test_get_day_prices_none(self):
         """ No contract set. """
