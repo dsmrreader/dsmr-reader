@@ -505,7 +505,11 @@ def summarize_energy_contracts():
         summary['total_cost'] = Decimal(0)
 
         for price_field, summary_field in MAPPED_PRICE_FIELDS.items():
-            if getattr(current, price_field) == 0 or not summary[summary_field]:
+            if getattr(current, price_field) == 0:
+                continue
+
+            # Gas may be None/null.
+            if summary[summary_field] is None:
                 continue
 
             summary['total_cost'] += summary[summary_field]
