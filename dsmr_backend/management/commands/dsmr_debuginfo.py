@@ -1,3 +1,5 @@
+import platform
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import connection
@@ -25,6 +27,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
     def handle(self, **options):
         self._print_start()
+        self._dump_os_info()
         self._dump_application_info()
         self._dump_data_info()
         self._dump_pg_size()
@@ -33,6 +36,12 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             self._dump_pg_indices()
 
         self._print_end()
+
+    def _dump_os_info(self):
+        self._print_header('OS')
+        self._pretty_print_short('Python version', 'v{}'.format(platform.python_version()))
+        self._pretty_print_short('Platform', '{} ({})'.format(platform.system(), platform.processor()))
+        self._pretty_print_short('System', '{}'.format(platform.platform()))
 
     def _dump_application_info(self):
         pending_migrations = []
@@ -122,7 +131,10 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         print('```')
 
     def _pretty_print(self, what, value):
-        print('    {:55}{:>15}'.format(what, value))
+        print('    {:70}{:>20}'.format(what, value))
+
+    def _pretty_print_short(self, what, value):
+        print('    {:20}{:>70}'.format(what, value))
 
     def _print_header(self, what):
         print()
