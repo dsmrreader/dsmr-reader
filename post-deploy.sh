@@ -35,8 +35,26 @@ pip3 install -r dsmrreader/provisioning/requirements/base.txt --upgrade
 
 echo ""
 echo ""
-echo " --- Checking & synchronizing database changes/migrations."
+echo " --- Applying database migrations."
 ./manage.py migrate --noinput
+
+if [ $? -ne 0 ]; then
+    echo " >>>>> [!] Executing database migrations failed! <<<<<"
+    echo "       [i] Trying to automatically resolve with 'dsmr_sqlsequencereset'."
+
+    # Try auto fix.
+    ./manage.py dsmr_sqlsequencereset
+
+    # Run migrations again.
+    ./manage.py migrate --noinput
+
+    if [ $? -ne 0 ]; then
+        echo ">>>>> [!] Executing database migrations failed again! <<<<<"
+        echo "        - Running dsmr_sqlsequencereset did not resolve the problem."
+        echo "        - Create an issue on Github and attach the exeception trace listed above."
+        exit 1;
+    fi
+fi
 
 
 echo ""
