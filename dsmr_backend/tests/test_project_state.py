@@ -1,10 +1,10 @@
 from django.test import TestCase
 from django.conf import settings
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 
-class TestBackendInfra(InterceptStdoutMixin, TestCase):
+class TestBackendInfra(InterceptCommandStdoutMixin, TestCase):
     def test_supported_vendors(self):
         """ Check whether supported vendors is as expected. """
         self.assertEqual(

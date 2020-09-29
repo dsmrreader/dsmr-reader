@@ -2,11 +2,11 @@ from unittest import mock
 
 from django.test import TestCase
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 import dsmr_backend.services.persistent_clients
 
 
-class TestBackend(InterceptStdoutMixin, TestCase):
+class TestBackend(InterceptCommandStdoutMixin, TestCase):
     def setUp(self):
         self.fake_client = object()
 

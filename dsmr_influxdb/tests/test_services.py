@@ -5,13 +5,13 @@ from django.test import TestCase, override_settings
 from django.utils import timezone
 from influxdb import InfluxDBClient
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
 import dsmr_influxdb.services
 
 
-class TestCases(InterceptStdoutMixin, TestCase):
+class TestCases(InterceptCommandStdoutMixin, TestCase):
     fixtures = ['dsmr_influxdb/measurements.json']
 
     def setUp(self):

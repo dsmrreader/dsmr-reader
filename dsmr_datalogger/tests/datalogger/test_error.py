@@ -5,12 +5,12 @@ from django.utils import timezone
 from django.test import TestCase
 import pytz
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
-class TestDataloggerError(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
+class TestDataloggerError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         """ Returns INCOMPLETE telegram. """
         return [
@@ -61,7 +61,7 @@ class TestDataloggerError(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
         self.assertEqual(DsmrReading.objects.count(), 1)
 
 
-class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
+class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         """ Returns invalid telegram. """
         return [
@@ -97,7 +97,7 @@ class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCas
         self.assertFalse(DsmrReading.objects.exists())
 
 
-class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
+class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     """ Test Iskra meter, DSMR v5.0, with somewhat duplicate data. """
 
     def _dsmr_dummy_data(self):
@@ -184,7 +184,7 @@ class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptStdoutMixin, Te
         self.assertEqual(reading.extra_device_delivered, Decimal('123.456'))
 
 
-class TestFutureTelegrams(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
+class TestFutureTelegrams(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         return [
             "/XMX5LGBBFFB123456789\r\n",

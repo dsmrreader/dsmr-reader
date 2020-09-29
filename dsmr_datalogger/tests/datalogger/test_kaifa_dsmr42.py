@@ -4,14 +4,14 @@ from decimal import Decimal
 from django.test import TestCase
 import pytz
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
-class TestDatalogger(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
+class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     """ Kaifa DSMR v4.2, without gas support. """
 
     def _dsmr_dummy_data(self):

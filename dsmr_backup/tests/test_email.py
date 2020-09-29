@@ -2,13 +2,13 @@ from unittest import mock
 
 from django.test import TestCase
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backup.services.email
 from dsmr_backup.models.settings import EmailBackupSettings
 
 
-class TestEmailServices(InterceptStdoutMixin, TestCase):
+class TestEmailServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_backup.services.backup.create_partial')
     @mock.patch('dsmr_backend.services.email.send')
     def test_run(self, send_mock, create_backup_mock):

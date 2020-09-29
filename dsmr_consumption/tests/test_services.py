@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -16,7 +16,7 @@ from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics
 
 
-class TestServices(InterceptStdoutMixin, TestCase):
+class TestServices(InterceptCommandStdoutMixin, TestCase):
     fixtures = [
         'dsmr_consumption/test_dsmrreading.json',
         'dsmr_consumption/test_energysupplierprice.json',
@@ -651,7 +651,7 @@ class TestServices(InterceptStdoutMixin, TestCase):
         self.assertEqual(contract.fixed_daily_cost, Decimal(0))
 
 
-class TestServicesDSMRv5(InterceptStdoutMixin, TestCase):
+class TestServicesDSMRv5(InterceptCommandStdoutMixin, TestCase):
     """ Biggest difference is the interval of gas readings. """
     fixtures = ['dsmr_consumption/test_dsmrreading_v5.json', 'dsmr_consumption/test_energysupplierprice.json']
     schedule_process = None

@@ -4,10 +4,10 @@ from django.core.management import CommandError
 from django.test import override_settings
 from django.test.testcases import TestCase
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 
-class TestCommands(InterceptStdoutMixin, TestCase):
+class TestCommands(InterceptCommandStdoutMixin, TestCase):
     @override_settings(DEBUG=True)
     def test_clear_consumption(self):
         self._intercept_command_stdout('development_reset')

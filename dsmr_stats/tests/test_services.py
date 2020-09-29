@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
@@ -18,7 +18,7 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
-class TestServices(InterceptStdoutMixin, TestCase):
+class TestServices(InterceptCommandStdoutMixin, TestCase):
     fixtures = ['dsmr_stats/electricity-consumption.json', 'dsmr_stats/gas-consumption.json']
 
     schedule_process = None

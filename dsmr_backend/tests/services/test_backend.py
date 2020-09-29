@@ -5,14 +5,14 @@ from django.utils import timezone
 
 from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.models.settings import BackendSettings
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 import dsmr_backend.services.backend
 
 
-class TestBackend(InterceptStdoutMixin, TestCase):
+class TestBackend(InterceptCommandStdoutMixin, TestCase):
     def test_data_capabilities(self):
         capabilities = dsmr_backend.services.backend.get_capabilities()
         self.assertIn('electricity', capabilities.keys())

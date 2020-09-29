@@ -4,14 +4,14 @@ from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_backend.models.schedule import ScheduledProcess
 import dsmr_backend.services.update_checker
 import dsmr_backend.services.schedule
 import dsmr_backend.signals
 
 
-class TestUpdateChecker(InterceptStdoutMixin, TestCase):
+class TestUpdateChecker(InterceptCommandStdoutMixin, TestCase):
     schedule_process = None
 
     def setUp(self):

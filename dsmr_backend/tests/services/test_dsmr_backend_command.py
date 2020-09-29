@@ -5,12 +5,12 @@ from django.utils import timezone
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.models.settings import BackendSettings
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 import dsmr_backend.services.schedule
 import dsmr_backend.signals
 
 
-class TestCases(InterceptStdoutMixin, TestCase):
+class TestCases(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_backend.signals.backend_called.send_robust')
     @mock.patch('dsmr_backend.services.schedule.execute_scheduled_processes')
     @mock.patch('dsmr_backend.services.persistent_clients.initialize')

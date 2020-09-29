@@ -3,13 +3,14 @@ from django.core.management.base import BaseCommand
 from django.db import connection
 
 from dsmr_backend.models.settings import BackendSettings
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.settings import RetentionSettings, DataloggerSettings
 from dsmr_datalogger.models.statistics import MeterStatistics
 
 
-class Command(BaseCommand):  # pragma: nocover
+class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
     help = 'Dumps debug info to share with the developer(s) when having issues'
 
     def add_arguments(self, parser):
@@ -25,7 +26,6 @@ class Command(BaseCommand):  # pragma: nocover
     def handle(self, **options):
         self._print_start()
         self._dump_application_info()
-        self._dump_meter_info()
         self._dump_data_info()
         self._dump_pg_size()
 
@@ -34,36 +34,44 @@ class Command(BaseCommand):  # pragma: nocover
 
         self._print_end()
 
-    def _dump_meter_info(self):
-        self._print_header('Smart meter')
-        self._pretty_print('Telegram version (latest reading)', 'v{}'.format(MeterStatistics.get_solo().dsmr_version))
-        self._pretty_print('Setting: Telegram parser', DataloggerSettings.get_solo().dsmr_version)
-
     def _dump_application_info(self):
+        pending_migrations = []
+
+        for line in self._intercept_command_stdout('showmigrations', no_color=True).split("\n"):
+            if line.startswith(' [ ]'):
+                pending_migrations.append(line)
+
+        pending_migrations_count = len(pending_migrations)
+
         self._print_header('DSMR-reader')
         self._pretty_print('Version', 'v{}'.format(settings.DSMRREADER_VERSION))
-        self._pretty_print('Database engine/vendor', connection.vendor)
-        self._pretty_print('Setting: Backend process sleep', '{} s'.format(BackendSettings.get_solo().process_sleep))
-        self._pretty_print('Setting: Datalogger process sleep', '{} s'.format(
-            DataloggerSettings.get_solo().process_sleep)
-        )
-        self._pretty_print('Setting: Retention cleans up after', '{} h'.format(
-            RetentionSettings.get_solo().data_retention_in_hours
+        self._pretty_print('Backend sleep', '{} s'.format(BackendSettings.get_solo().process_sleep))
+        self._pretty_print('Datalogger sleep', '{} s'.format(DataloggerSettings.get_solo().process_sleep))
+        self._pretty_print('Retention cleans up after', '{} h'.format(
+            RetentionSettings.get_solo().data_retention_in_hours or '-'
         ))
+        self._pretty_print('Telegram parser', DataloggerSettings.get_solo().dsmr_version)
+        self._pretty_print('Database engine/vendor', connection.vendor)
+
+        if pending_migrations_count > 0:
+            self._pretty_print('(!) Database migrations pending', '{} (!)'.format(pending_migrations_count))
 
     def _dump_data_info(self):
         self._print_header('Data')
-        self._pretty_print('Stored: Telegram records total', DsmrReading.objects.count())
-        self._pretty_print('                      \\_ unprocessed', DsmrReading.objects.unprocessed().count())
-        self._pretty_print('Stored: Electricity consumption records', ElectricityConsumption.objects.count())
-        self._pretty_print('Stored: Gas consumption records', GasConsumption.objects.count())
+        self._pretty_print('Telegrams', '')
+        self._pretty_print('  - total', DsmrReading.objects.count() or '-')
+        self._pretty_print('  - unprocessed', DsmrReading.objects.unprocessed().count() or '-')
+        self._pretty_print('  - version (latest reading)', '"{}"'.format(MeterStatistics.get_solo().dsmr_version))
+        self._pretty_print('Consumption records', '')
+        self._pretty_print('  - electricity', ElectricityConsumption.objects.count() or '-')
+        self._pretty_print('  - gas', GasConsumption.objects.count() or '-')
 
     def _dump_pg_size(self):
         if connection.vendor != 'postgresql':
             return
 
         # @see https://wiki.postgresql.org/wiki/Disk_Usage
-        MIN_SIZE_B = 1 * 1024 * 1024
+        MIN_SIZE_MB = 5
         size_sql = """
         SELECT nspname || '.' || relname AS "relation",
         pg_size_pretty(pg_total_relation_size(C.oid)) AS "total_size"
@@ -77,8 +85,8 @@ class Command(BaseCommand):  # pragma: nocover
         """
 
         with connection.cursor() as cursor:
-            cursor.execute(size_sql, [MIN_SIZE_B])
-            self._print_header('PostgreSQL size of largest tables (> 1MB)')
+            cursor.execute(size_sql, [MIN_SIZE_MB * 1024 * 1024])
+            self._print_header('PostgreSQL size of largest tables (> {} MB)'.format(MIN_SIZE_MB))
 
             for table, size in cursor.fetchall():
                 self._pretty_print(table, size)
@@ -101,7 +109,7 @@ class Command(BaseCommand):  # pragma: nocover
 
         with connection.cursor() as cursor:
             cursor.execute(indexes_sql)
-            self._print_header('PostgreSQL indices of largest tables')
+            self._print_header('PostgreSQL indices of large tables')
 
             for tablename, indexname in cursor.fetchall():
                 self._pretty_print(tablename, indexname)
@@ -114,7 +122,7 @@ class Command(BaseCommand):  # pragma: nocover
         print('```')
 
     def _pretty_print(self, what, value):
-        print('  {:55}{:>10}'.format(what, value))
+        print('    {:55}{:>15}'.format(what, value))
 
     def _print_header(self, what):
         print()

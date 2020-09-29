@@ -2,10 +2,10 @@ from django.core.management.base import BaseCommand
 from django.db import connection
 from django.apps import apps
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 
-class Command(InterceptStdoutMixin, BaseCommand):  # pragma: nocover
+class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
     """ This should prevent future issues similar to #866 and #867. """
     help = 'Resets the sequences (incremental IDs) for PostgreSQL engines'
 

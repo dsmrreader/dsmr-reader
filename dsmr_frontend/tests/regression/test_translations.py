@@ -4,10 +4,10 @@ import polib
 from django.test import TestCase
 from django.conf import settings
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 
-class TestTranslations(InterceptStdoutMixin, TestCase):
+class TestTranslations(InterceptCommandStdoutMixin, TestCase):
     """ NOTE: This also regenerates translations! """
 
     def setUp(self):

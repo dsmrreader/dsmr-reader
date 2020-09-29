@@ -7,13 +7,13 @@ from django.utils import timezone
 from django.conf import settings
 import dropbox
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_backup.models.settings import DropboxSettings
 from dsmr_frontend.models.message import Notification
 import dsmr_dropbox.services
 
 
-class TestServices(InterceptStdoutMixin, TestCase):
+class TestServices(InterceptCommandStdoutMixin, TestCase):
     def setUp(self):
         DropboxSettings.get_solo()
         DropboxSettings.objects.all().update(access_token='FAKE')

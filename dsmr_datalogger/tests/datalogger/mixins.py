@@ -3,10 +3,10 @@ from unittest.case import TestCase
 
 from serial import Serial
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 
-class FakeDsmrReadingMixin(InterceptStdoutMixin, TestCase):
+class FakeDsmrReadingMixin(InterceptCommandStdoutMixin, TestCase):
     """ Mixin to ease faking reading serial input. """
 
     def _dsmr_dummy_data(self):

@@ -5,13 +5,13 @@ from django.utils import timezone
 from influxdb import InfluxDBClient
 
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.signals import dsmr_reading_created
 from dsmr_influxdb.models import InfluxdbIntegrationSettings
 
 
-class TestCases(InterceptStdoutMixin, TestCase):
+class TestCases(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_influxdb.services.initialize_client')
     def test_initialize_persistent_client_signal(self, initialize_mock):
         initialize_mock.return_value = None

@@ -12,14 +12,14 @@ from django.utils import timezone
 from django.conf import settings
 
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_backup.models.settings import BackupSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_stats.models.statistics import DayStatistics
 import dsmr_backup.services.backup
 
 
-class TestBackupServices(InterceptStdoutMixin, TestCase):
+class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     def setUp(self):
         BackupSettings.get_solo()
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_DAILY_BACKUP)

@@ -4,7 +4,7 @@ from django.test import TestCase
 import serial
 from django.utils import timezone
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.models.reading import DsmrReading
@@ -220,7 +220,7 @@ class TestServices(TestCase):
         self.assertTrue(send_robust_mock.called)
 
 
-class TestDsmrVersionMapping(InterceptStdoutMixin, TestCase):
+class TestDsmrVersionMapping(InterceptCommandStdoutMixin, TestCase):
     def test_dsmr_version_2_and_3(self):
         """ Test connection parameters for DSMR v2. """
         datalogger_settings = DataloggerSettings.get_solo()

@@ -2,12 +2,12 @@ from unittest import mock
 
 from django.test import TestCase, override_settings
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
-class TestDataloggerCoverage(FakeDsmrReadingMixin, InterceptStdoutMixin, TestCase):
+class TestDataloggerCoverage(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         return ''.join([
             '/-!',

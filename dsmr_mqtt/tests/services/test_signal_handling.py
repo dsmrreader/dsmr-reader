@@ -3,12 +3,12 @@ from unittest import mock
 from django.test import TestCase
 from paho.mqtt.client import Client
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 
 
-class TestCases(InterceptStdoutMixin, TestCase):
+class TestCases(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_mqtt.services.broker.initialize_client')
     def test_initialize_persistent_client_signal(self, initialize_mock):
         initialize_mock.return_value = None

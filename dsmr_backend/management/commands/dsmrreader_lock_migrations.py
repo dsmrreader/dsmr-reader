@@ -3,10 +3,10 @@ import os
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 
-class Command(InterceptStdoutMixin, BaseCommand):
+class Command(InterceptCommandStdoutMixin, BaseCommand):
     help = 'DEV ONLY: Dumps the latest migration of each app for locking in a shell script.'
 
     def handle(self, **options):

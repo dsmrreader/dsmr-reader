@@ -2,10 +2,10 @@ from unittest import mock
 
 from django.test.testcases import TestCase
 
-from dsmr_backend.tests.mixins import InterceptStdoutMixin
+from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 
-class TestManagementCommand(InterceptStdoutMixin, TestCase):
+class TestManagementCommand(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_notification.services.send_notification')
     def test_clear_consumption(self, service_mock):
         self.assertFalse(service_mock.called)
