@@ -40,7 +40,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
     def _dump_os_info(self):
         self._print_header('OS')
         self._pretty_print_short('Python version', 'v{}'.format(platform.python_version()))
-        self._pretty_print_short('Platform', '{} ({})'.format(platform.system(), platform.processor()))
+        self._pretty_print_short('Platform', '{} ({})'.format(platform.system(), platform.machine()))
         self._pretty_print_short('System', '{}'.format(platform.platform()))
 
     def _dump_application_info(self):
