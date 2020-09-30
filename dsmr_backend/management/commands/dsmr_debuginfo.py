@@ -66,14 +66,17 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             self._pretty_print('(!) Database migrations pending', '{} (!)'.format(pending_migrations_count))
 
     def _dump_data_info(self):
+        reading_count = self._table_record_count(DsmrReading._meta.db_table)
+        electricity_count = self._table_record_count(ElectricityConsumption._meta.db_table)
+        gas_count = self._table_record_count(GasConsumption._meta.db_table)
+
         self._print_header('Data')
         self._pretty_print('Telegrams', '')
-        self._pretty_print('  - total', DsmrReading.objects.count() or '-')
-        self._pretty_print('  - unprocessed', DsmrReading.objects.unprocessed().count() or '-')
+        self._pretty_print('  - total (est.)', reading_count or '-')
         self._pretty_print('  - version (latest reading)', '"{}"'.format(MeterStatistics.get_solo().dsmr_version))
         self._pretty_print('Consumption records', '')
-        self._pretty_print('  - electricity', ElectricityConsumption.objects.count() or '-')
-        self._pretty_print('  - gas', GasConsumption.objects.count() or '-')
+        self._pretty_print('  - electricity (est.)', electricity_count or '-')
+        self._pretty_print('  - gas (est.)', gas_count or '-')
 
     def _dump_pg_size(self):
         if connection.vendor != 'postgresql':
@@ -122,6 +125,16 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
             for tablename, indexname in cursor.fetchall():
                 self._pretty_print(tablename, indexname)
+
+    def _table_record_count(self, table_name):
+        # A live count is too slow on huge datasets, this is accurate enough:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                'SELECT reltuples as approximate_row_count FROM pg_class WHERE relname = %s;',
+                [table_name]
+            )
+            reading_count = cursor.fetchone()[0]
+            return int(reading_count)
 
     def _print_start(self):
         print()
