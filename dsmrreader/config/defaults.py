@@ -2,85 +2,23 @@
     Default settings as defined in the base.py config.
     Some settings can be overridden by system env vars or the .env.
 """
-from decouple import config, Csv, UndefinedValueError
+from decouple import Csv
 
 from dsmrreader.config.base import *
+from dsmrreader.config.django_overrides import *
 import dsmrreader
-
-
-"""
-Env vars.
-"""
-SECRET_KEY = config('SECRET_KEY')
-TIME_ZONE = config('TZ', default='Europe/Amsterdam')
-
-DB_HOST = config('DB_HOST', default=None)
-DB_PORT = config('DB_PORT', default=0, cast=int)
-DB_NAME = config('DB_NAME', default=None)
-DB_USER = config('DB_USER', default=None)
-DB_PASS = config('DB_PASS', default=None)
-
-# Not all database engines require the full config.
-DATABASES = {
-    'default': {
-        'ENGINE': config('DB_ENGINE'),
-        'CONN_MAX_AGE': config('CONN_MAX_AGE', default=60, cast=int),
-    }
-}
-
-if DB_HOST:
-    DATABASES['default']['HOST'] = DB_HOST
-
-if DB_PORT:
-    DATABASES['default']['PORT'] = DB_PORT
-
-if DB_NAME:
-    DATABASES['default']['NAME'] = DB_NAME
-
-if DB_USER:
-    DATABASES['default']['USER'] = DB_USER
-
-if DB_PASS:
-    DATABASES['default']['PASSWORD'] = DB_PASS
-
-
-# Django overrided from env. Try-except because we don't want to pin any defaults to fallback to, let Django set it.
-try:
-    STATIC_URL = config('DJANGO_STATIC_URL', cast=str)
-except UndefinedValueError:
-    pass
-
-try:
-    FORCE_SCRIPT_NAME = config('DJANGO_FORCE_SCRIPT_NAME', cast=str)
-except UndefinedValueError:
-    pass
-
-try:
-    USE_X_FORWARDED_HOST = config('DJANGO_USE_X_FORWARDED_HOST', cast=bool)
-except UndefinedValueError:
-    pass
-
-try:
-    USE_X_FORWARDED_PORT = config('DJANGO_USE_X_FORWARDED_PORT', cast=bool)
-except UndefinedValueError:
-    pass
-
-try:
-    X_FRAME_OPTIONS = config('DJANGO_X_FRAME_OPTIONS', cast=str)
-except UndefinedValueError:
-    pass
 
 
 """
 DSMR-reader project settings (non Django related).
 """
 
-DSMRREADER_LOGLEVEL = config('DSMRREADER_LOGLEVEL', default=None, cast=str)
+DSMRREADER_LOGLEVEL = config('DSMRREADER_LOGLEVEL', cast=str, default=None)
 
 if DSMRREADER_LOGLEVEL in ('DEBUG', 'WARNING'):
     LOGGING['loggers']['dsmrreader']['level'] = DSMRREADER_LOGLEVEL
 
-DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', default='', cast=Csv(post_process=tuple))
+DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', cast=Csv(post_process=tuple), default='')
 
 # Officially we only support PostgreSQL, but w/e.
 DSMRREADER_SUPPORTED_DB_VENDORS = ('postgresql', 'mysql')

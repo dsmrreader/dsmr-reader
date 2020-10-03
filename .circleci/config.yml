@@ -96,31 +96,31 @@ commands:
                 name: "Test SQLite"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-                    SECRET_KEY: non-production-value
-                    DB_ENGINE: django.db.backends.sqlite3
+                    DJANGO_SECRET_KEY: non-production-value
+                    DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
                 command: *test-command
 
             - run:
                 name: "Test PostgreSQL"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-                    SECRET_KEY: non-production-value
-                    DB_ENGINE: django.db.backends.postgresql
-                    DB_HOST: 127.0.0.1
-                    DB_USER: root
-                    DB_NAME: test_dsmrreader
+                    DJANGO_SECRET_KEY: non-production-value
+                    DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
+                    DJANGO_DATABASE_HOST: 127.0.0.1
+                    DJANGO_DATABASE_NAME: test_dsmrreader
+                    DJANGO_DATABASE_USER: root
                 command: *test-command
 
             - run:
                 name: "Test MySQL"
                 environment:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-                    SECRET_KEY: non-production-value
-                    DB_ENGINE: django.db.backends.mysql
-                    DB_HOST: 127.0.0.1
-                    DB_USER: user
-                    DB_PASS: testpassword
-                    DB_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+                    DJANGO_SECRET_KEY: non-production-value
+                    DJANGO_DATABASE_ENGINE: django.db.backends.mysql
+                    DJANGO_DATABASE_HOST: 127.0.0.1
+                    DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+                    DJANGO_DATABASE_USER: user
+                    DJANGO_DATABASE_PASSWORD: testpassword
                 command: *test-command
 
 # Dummy vars, used for anchors.

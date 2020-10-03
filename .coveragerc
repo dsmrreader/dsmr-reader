@@ -9,7 +9,7 @@ omit = ./*/__init__.py
   ./dsmr_plugins/modules/*
   ./dsmr_dropbox/dropboxinc/*
   ./dsmr_parser/*
-  ./dsmrreader/config/defaults.py
+  ./dsmrreader/config/*
 
 [html]
 directory = coverage_report/html
