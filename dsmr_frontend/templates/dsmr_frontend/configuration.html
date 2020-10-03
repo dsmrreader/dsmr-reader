@@ -26,7 +26,7 @@
                         <div class="results"></div>
                     </div>
 
-                    <small>{% translate "Click a suggestion below for more suggestions to choose from." %}</small>
+                    <small>{% translate "Click a topic below to display a pop-up with more details to choose from." %}</small>
                     <ul id="category-suggestions"></ul>
                 </div>
             </div>
@@ -55,6 +55,7 @@
         var hour_statistics_url = '{% url "admin:dsmr_stats_hourstatistics_changelist" %}';
         var email_settings_url = '{% url "admin:dsmr_backend_emailsettings_change" email_settings.pk %}';
         var energy_supplier_price_url = '{% url "admin:dsmr_consumption_energysupplierprice_changelist" %}';
+        var export_url = '{% url "frontend:export" %}';
         var frontend_settings_url = '{% url "admin:dsmr_frontend_frontendsettings_change" frontend_settings.pk %}';
         var frontend_sortedgraphs_sort_url = '{% url "admin:dsmr_frontend_sortedgraph_sort" %}';
         var influxdb_settings_url = '{% url "admin:dsmr_influxdb_influxdbintegrationsettings_change" influxdb_settings.pk %}';
@@ -106,6 +107,10 @@
             { category: "{% translate 'Energy supplier prices' %}", title: "{% translate 'Energy supplier price contracts' %}", url: energy_supplier_price_url },
             { category: "{% translate 'Energy supplier prices' %}", title: "{% translate 'Gas price/costs' %}", url: energy_supplier_price_url },
             { category: "{% translate 'Energy supplier prices' %}", title: "{% translate 'Electricity price/costs' %}", url: energy_supplier_price_url },
+
+            { category: "{% translate 'Export' %}", title: "{% translate 'Export day totals to CSV' %}", url: export_url },
+            { category: "{% translate 'Export' %}", title: "{% translate 'Export hour totals to CSV' %}", url: export_url },
+            { category: "{% translate 'Export' %}", title: "{% translate 'Export temperatures to CSV' %}", url: export_url },
 
             { category: "{% translate 'Frontend' %}", title: "{% translate 'Force password login everywhere' %}", url: frontend_settings_url },
             { category: "{% translate 'Frontend' %}", title: "{% translate 'Merge tariffs' %}", url: frontend_settings_url },

@@ -102,19 +102,6 @@
                             &nbsp;&nbsp;
                         </li>
                         <li>
-                            <a href="{% url 'frontend:export' %}">
-                                <i class="fas fa-xs fa-file-excel"></i> &nbsp; <small>{% translate "Export data" %} &nbsp; <i class="fas fa-lock" title="{% translate 'Authentication required' %}"></i></small>
-                            </a>
-                        </li>
-                        <li>
-				            <a href="{% url 'frontend:configuration' %}">
-				                <i class="fas fa-xs fa-wrench"></i> &nbsp; <small>{% translate "Configuration" %} &nbsp; <i class="fas fa-lock" title="{% translate 'Authentication required' %}"></i></small>
-				            </a>
-			            </li>
-                        <li>
-                            &nbsp;
-                        </li>
-                        <li>
                             <a href="{% url 'frontend:status' %}">
                                 <i class="fas fa-heartbeat"></i> &nbsp; <small>{% translate "Status" %}</small>
                             </a>
@@ -124,6 +111,11 @@
                                 <i class="fas fa-robot"></i> &nbsp; <small>{% translate "About DSMR-reader" %}</small>
                             </a>
                         </li>
+                        <li>
+				            <a href="{% url 'frontend:configuration' %}">
+				                <i class="fas fa-xs fa-wrench"></i> &nbsp; <small>{% translate "Configuration" %}</small>
+				            </a>
+			            </li>
                     </ul>
                 </section>
             </aside>

@@ -1128,12 +1128,6 @@ msgstr "Statistieken"
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
-msgid "Export data"
-msgstr "Exporteer gegevens"
-
-msgid "Authentication required"
-msgstr "Authenticatie vereist"
-
 msgid "Status"
 msgstr "Status"
 
@@ -1155,8 +1149,8 @@ msgstr "Typ hier om te zoeken..."
 msgid "Skip search and go directly to admin"
 msgstr "Sla over en ga direct naar het beheer"
 
-msgid "Click a suggestion below for more suggestions to choose from."
-msgstr "Klik op een suggestie hieronder om meer inhoudelijke suggesties te zien."
+msgid "Click a topic below to display a pop-up with more details to choose from."
+msgstr "Klik hieronder op een onderwerp om meer inhoudelijke suggesties te zien."
 
 msgid "DSMR-reader API (key)"
 msgstr "DSMR-reader API (sleutel)"
@@ -1223,6 +1217,18 @@ msgstr "Gasprijs/kosten"
 
 msgid "Electricity price/costs"
 msgstr "Elektriciteitsprijs/kosten"
+
+msgid "Export"
+msgstr "Exporteer"
+
+msgid "Export day totals to CSV"
+msgstr "Exporteer dagtotalen naar CSV"
+
+msgid "Export hour totals to CSV"
+msgstr "Exporteer uurtotalen naar CSV"
+
+msgid "Export temperatures to CSV"
+msgstr "Exporteer temperaturen naar CSV"
 
 msgid "Frontend"
 msgstr "Interface"
@@ -1444,6 +1450,9 @@ msgstr "tarief 2"
 
 msgid "Fixed daily costs"
 msgstr "Vaste kosten per dag"
+
+msgid "Export data"
+msgstr "Exporteer gegevens"
 
 msgid "Select data type"
 msgstr "Selecteer gegevenstype"
@@ -2554,6 +2563,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Authentication required"
+#~ msgstr "Authenticatie vereist"
 
 #~ msgid "Log telegrams"
 #~ msgstr "Log telegrammen"
