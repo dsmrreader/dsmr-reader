@@ -14,36 +14,36 @@ fi
 echo "OK"
 
 
-DB_HOST=127.0.0.1
-DB_USER=dsmrreader
-DB_PASS=dsmrreader
+DJANGO_DATABASE_HOST=127.0.0.1
+DJANGO_DATABASE_PORT=dsmrreader
+DJANGO_DATABASE_PASSWORD=dsmrreader
 # Will be adjusted to 'test_*' by Django.
-DB_NAME=dsmrreader
+DJANGO_DATABASE_NAME=dsmrreader
 
-export DB_HOST
-export DB_USER
-export DB_PASS
-export DB_NAME
+export DJANGO_DATABASE_HOST
+export DJANGO_DATABASE_PORT
+export DJANGO_DATABASE_PASSWORD
+export DJANGO_DATABASE_NAME
 
 
 echo ""
-DB_ENGINE=django.db.backends.sqlite3
-export DB_ENGINE
-echo "--- Testing: $DB_ENGINE"
+DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
+export DJANGO_DATABASE_ENGINE
+echo "--- Testing: DJANGO_DATABASE_ENGINE"
 pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test -n 2
 
 
 echo ""
-DB_ENGINE=django.db.backends.postgresql
-export DB_ENGINE
-echo "--- Testing: $DB_ENGINE"
+DJANGO_DATABASE_ENGINE=django.db.backends.postgresql
+export DJANGO_DATABASE_ENGINE
+echo "--- Testing: $DJANGO_DATABASE_ENGINE"
 pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test -n 4
 
 
 echo ""
-DB_ENGINE=django.db.backends.mysql
-export DB_ENGINE
-echo "--- Testing: $DB_ENGINE"
+DJANGO_DATABASE_ENGINE=django.db.backends.mysql
+export DJANGO_DATABASE_ENGINE
+echo "--- Testing: $DJANGO_DATABASE_ENGINE"
 pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test
 
 

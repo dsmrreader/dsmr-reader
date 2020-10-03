@@ -1,3 +1,4 @@
+import importlib
 from unittest import mock
 
 from django.test import TestCase
@@ -9,6 +10,8 @@ from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
+from dsmrreader.config import django_overrides
+from dsmrreader.config import defaults as settings_used
 import dsmr_backend.services.backend
 
 
@@ -344,3 +347,74 @@ class TestIsLocalTimestampPassed(TestCase):
 
     def test_none(self):
         self.assertTrue(dsmr_backend.services.backend.is_timestamp_passed(None))
+
+
+@mock.patch.dict('os.environ', dict(
+    DJANGO_DATABASE_ENGINE='my-engine',
+    DJANGO_DATABASE_HOST='my-host',
+    DJANGO_DATABASE_PORT='11111',
+    DJANGO_DATABASE_NAME='my-db',
+    DJANGO_DATABASE_USER='my-user',
+    DJANGO_DATABASE_PASSWORD='my-pass',
+    DJANGO_DATABASE_CONN_MAX_AGE='111',
+    DJANGO_TIME_ZONE='my-timezone',
+    DJANGO_SECRET_KEY='my-secret-key',
+    DJANGO_STATIC_URL='static-url',
+    DJANGO_FORCE_SCRIPT_NAME='script',
+    DJANGO_USE_X_FORWARDED_HOST='True',
+    DJANGO_USE_X_FORWARDED_PORT='True',
+    DJANGO_X_FRAME_OPTIONS='x-frame',
+    DSMRREADER_LOGLEVEL='WARNING',  # Note: restricted choices
+    DSMRREADER_PLUGINS='module1-path,module2-path'
+))
+class TestEnvSettings(InterceptCommandStdoutMixin, TestCase):
+    def test_env(self):
+        """
+        WARNING: If these tests fail, first check whether you locally override (and break it) with LEGACY env vars!
+        """
+        importlib.reload(django_overrides)
+        importlib.reload(settings_used)
+
+        self.assertEqual(settings_used.DATABASES['default']['ENGINE'], 'my-engine')
+        self.assertEqual(settings_used.DATABASES['default']['HOST'], 'my-host')
+        self.assertEqual(settings_used.DATABASES['default']['PORT'], 11111)
+        self.assertEqual(settings_used.DATABASES['default']['NAME'], 'my-db')
+        self.assertEqual(settings_used.DATABASES['default']['USER'], 'my-user')
+        self.assertEqual(settings_used.DATABASES['default']['PASSWORD'], 'my-pass')
+        self.assertEqual(settings_used.DATABASES['default']['CONN_MAX_AGE'], 111)
+        self.assertEqual(settings_used.SECRET_KEY, 'my-secret-key')
+        self.assertEqual(settings_used.TIME_ZONE, 'my-timezone')
+        self.assertEqual(settings_used.LOGGING['loggers']['dsmrreader']['level'], 'WARNING')
+        self.assertEqual(settings_used.DSMRREADER_PLUGINS, ('module1-path', 'module2-path'))
+        self.assertEqual(settings_used.STATIC_URL, 'static-url')
+        self.assertEqual(settings_used.FORCE_SCRIPT_NAME, 'script')
+        self.assertEqual(settings_used.USE_X_FORWARDED_HOST, True)
+        self.assertEqual(settings_used.USE_X_FORWARDED_PORT, True)
+        self.assertEqual(settings_used.X_FRAME_OPTIONS, 'x-frame')
+
+    @mock.patch.dict('os.environ', dict(
+        DB_ENGINE='other-engine',
+        DB_HOST='other-host',
+        DB_PORT='55555',
+        DB_NAME='other-db',
+        DB_USER='other-user',
+        DB_PASS='other-pass',
+        CONN_MAX_AGE='555',
+        SECRET_KEY='other-secret-key',
+        DJANGO_TIME_ZONE='',  # This allows TZ to override.
+        TZ='other-timezone',
+    ))
+    def test_legacy(self):
+        """ Until v5.0, these will superseed the (new) default ones. """
+        importlib.reload(django_overrides)
+        importlib.reload(settings_used)
+
+        self.assertEqual(settings_used.DATABASES['default']['ENGINE'], 'other-engine')
+        self.assertEqual(settings_used.DATABASES['default']['HOST'], 'other-host')
+        self.assertEqual(settings_used.DATABASES['default']['PORT'], 55555)
+        self.assertEqual(settings_used.DATABASES['default']['NAME'], 'other-db')
+        self.assertEqual(settings_used.DATABASES['default']['USER'], 'other-user')
+        self.assertEqual(settings_used.DATABASES['default']['PASSWORD'], 'other-pass')
+        self.assertEqual(settings_used.DATABASES['default']['CONN_MAX_AGE'], 555)
+        self.assertEqual(settings_used.SECRET_KEY, 'other-secret-key')
+        self.assertEqual(settings_used.TIME_ZONE, 'other-timezone')

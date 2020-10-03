@@ -9,8 +9,8 @@ done
 
 echo ""
 echo "--- Testing with SQLite (4 processes)..."
-DB_ENGINE=django.db.backends.sqlite3
-export DB_ENGINE
+DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
+export DJANGO_DATABASE_ENGINE
 time pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test -n 2 $ARGS
 
 
