@@ -21,6 +21,8 @@ v4.5.0 - 2020-xx-xx
 - ``Added``: Migratiestatus toevoegen aan dsmr-debuginfo [`#1130 <https://github.com/dennissiemensma/dsmr-reader/issues/1130>`_]
 - ``Added``: Check op exit code migrate command bij deploy/update [`#1127 <https://github.com/dennissiemensma/dsmr-reader/issues/1127>`_]
 
+- ``Changed``: Default color update for high tariff [`#1142 <https://github.com/dennissiemensma/dsmr-reader/issues/1142>`_]
+
 
 v4.4.3 - 2020-09-28
 -------------------

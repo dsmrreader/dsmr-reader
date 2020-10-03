@@ -24,13 +24,13 @@ class TestSettings(TestCase):
         self.assertEqual(self.instance.electricity_delivered_color, '#F05050')
 
     def test_electricity_delivered_alternate_color(self):
-        self.assertEqual(self.instance.electricity_delivered_alternate_color, '#7D311A')
+        self.assertEqual(self.instance.electricity_delivered_alternate_color, '#A43737')
 
     def test_electricity_returned_color(self):
         self.assertEqual(self.instance.electricity_returned_color, '#27C24C')
 
     def test_electricity_returned_alternate_color(self):
-        self.assertEqual(self.instance.electricity_returned_alternate_color, '#C8C864')
+        self.assertEqual(self.instance.electricity_returned_alternate_color, '#166C2A')
 
     def test_gas_delivered_color(self):
         self.assertEqual(self.instance.gas_delivered_color, '#FF851B')

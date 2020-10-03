@@ -26,22 +26,22 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
     electricity_delivered_color = ColorField(
         default='#F05050',
         verbose_name=_('Electricity delivered color'),
-        help_text=_("Graph color for electricity delivered (default + high tariff)")
+        help_text=_("Graph color for electricity delivered (default, tariff 2)")
     )
     electricity_delivered_alternate_color = ColorField(
-        default='#7D311A',
+        default='#A43737',
         verbose_name=_('Electricity delivered color (alternative)'),
-        help_text=_("Graph color for electricity delivered (low tariff)")
+        help_text=_("Graph color for electricity delivered (tariff 1)")
     )
     electricity_returned_color = ColorField(
         default='#27C24C',
         verbose_name=_('Electricity returned color'),
-        help_text=_("Graph color for electricity returned (default + high tariff)")
+        help_text=_("Graph color for electricity returned (default, tariff 2)")
     )
     electricity_returned_alternate_color = ColorField(
-        default='#C8C864',
+        default='#166C2A',
         verbose_name=_('Electricity returned color (alternative)'),
-        help_text=_("Graph color for electricity returned (low tariff)")
+        help_text=_("Graph color for electricity returned (tariff 1)")
     )
     gas_delivered_color = ColorField(
         default='#FF851B',

@@ -882,26 +882,26 @@ msgstr "Bepaalt of de elektriciteitstarieven samengevoegd moeten worden (wanneer
 msgid "Electricity delivered color"
 msgstr "Kleur elektriciteitsverbruik"
 
-msgid "Graph color for electricity delivered (default + high tariff)"
-msgstr "Grafiekkleur voor elektriciteitsverbruik (standaard + hoogtarief)"
+msgid "Graph color for electricity delivered (default, tariff 2)"
+msgstr "Grafiekkleur voor elektriciteitsverbruik (standaard, tarief 2)"
 
 msgid "Electricity delivered color (alternative)"
 msgstr "Kleur elektriciteitsverbruik (alternatief)"
 
-msgid "Graph color for electricity delivered (low tariff)"
-msgstr "Grafiekkleur voor elektriciteitsverbruik (laagtarief)"
+msgid "Graph color for electricity delivered (tariff 1)"
+msgstr "Grafiekkleur voor elektriciteitsverbruik (tarief 1)"
 
 msgid "Electricity returned color"
 msgstr "Kleur teruglevering elektriciteit"
 
-msgid "Graph color for electricity returned (default + high tariff)"
-msgstr "Grafiekkleur voor elektriciteit teruglevering (standaard + hoogtarief)"
+msgid "Graph color for electricity returned (default, tariff 2)"
+msgstr "Grafiekkleur voor elektriciteit teruglevering (standaard, tarief 2)"
 
 msgid "Electricity returned color (alternative)"
 msgstr "Kleur teruglevering elektriciteit (alternatief)"
 
-msgid "Graph color for electricity returned (low tariff)"
-msgstr "Grafiekkleur voor elektriciteit teruglevering (laagtarief)"
+msgid "Graph color for electricity returned (tariff 1)"
+msgstr "Grafiekkleur voor elektriciteit teruglevering (tarief 1)"
 
 msgid "Gas delivered color"
 msgstr "Kleur gasverbruik"
