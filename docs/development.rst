@@ -175,7 +175,7 @@ The documentation is part of the repository and can be generated (automatically)
 
     source ~/.virtualenvs/dsmrreader/bin/activate
     cd docs/
-    sphinx-autobuild . _build/html -p 10000
+    sphinx-autobuild . _build/html --port 10000
     
 You can now view the documentation in your browser by accessing: ``http://127.0.0.1:10000``.
 Any changes you make will be reflected instantly in the browser, as Sphinx continuously checks for changed files.

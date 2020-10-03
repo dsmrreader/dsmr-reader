@@ -4,7 +4,7 @@
 
 ```
 cd docs
-sphinx-autobuild . _build/html -p 10000
+sphinx-autobuild . _build/html --port 10000
 ```
 Now visit http://127.0.0.1:10000
 
