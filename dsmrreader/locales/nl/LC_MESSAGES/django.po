@@ -433,7 +433,7 @@ msgid "Set to a far future date when there is not contract end."
 msgstr "Zet deze datum in de verre toekomst als er geen contracteinde is."
 
 msgid "Contract name"
-msgstr "Contracteinde"
+msgstr "Contractnaam"
 
 msgid "For your own reference, i.e. the name of your supplier"
 msgstr "Voor je eigen referentie, bijvoorbeeld de naam van je energieleverancier"
