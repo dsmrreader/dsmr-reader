@@ -12,10 +12,10 @@ Notifications on your phone using Prowl or Pushover.
 
 Currently, two mobile platforms are supported: Android and iOS.
 
-* The supported app for Android is `Pushover <https://pushover.net>`_. 
-* The supported apps for iOS are `Pushover <https://pushover.net>`_ and `Prowl <https://www.prowlapp.com>`_. 
+* The supported apps for Android are `Pushover <https://pushover.net>`_ and `Telegram <https://www.telegram.org>`_. 
+* The supported apps for iOS are `Pushover <https://pushover.net>`_, `Prowl <https://www.prowlapp.com>`_ and `Telegram <https://www.telegram.org>`_. 
 
-Make sure you either have Pushover or Prowl installed on your smartphone. 
+Make sure you either have Pushover, Prowl or Telegram installed on your smartphone. 
 If you don't, visit your platforms app store to download the app and sign up for an account. 
 Then, make sure to get your API key from the notification service that you prefer. 
 For instruction on obtaining the API key, please read below.
