@@ -24,7 +24,8 @@ v4.5.0 - 2020-xx-xx
 - ``Changed``: Default color update for high tariff [`#1142 <https://github.com/dennissiemensma/dsmr-reader/issues/1142>`_]
 - ``Changed``: Move export menu item to configuration page [`#1143 <https://github.com/dennissiemensma/dsmr-reader/issues/1143>`_]
 
-- ``Fixed``: Change incorrect msgstr [`#1144 <https://github.com/dennissiemensma/dsmr-reader/issues/1144>`_]
+- ``Fixed``: Change incorrect msgstr - by @gerard33 [`#1144 <https://github.com/dennissiemensma/dsmr-reader/issues/1144>`_]
+- ``Fixed``: Add missing Telegram text parts to Admin: Notifications - by @gerard33 [`#1146 <https://github.com/dennissiemensma/dsmr-reader/issues/1146>`_]
 
 
 v4.4.3 - 2020-09-28

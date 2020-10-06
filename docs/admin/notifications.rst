@@ -4,7 +4,7 @@ Admin: Notifications
 .. contents::
     :depth: 2
 
-Notifications on your phone using Prowl or Pushover.
+Notifications on your phone using Prowl, Pushover or Telegram.
 
 .. image:: ../_static/screenshots/admin/notificationsetting.png
     :target: ../_static/screenshots/admin/notificationsetting.png

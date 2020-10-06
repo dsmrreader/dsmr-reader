@@ -21,224 +21,126 @@ msgid "Contents"
 msgstr "Inhoudsopgave"
 
 #: ../../admin/notifications.rst:7
-msgid "Notifications on your phone using Prowl or Pushover."
-msgstr "Notificaties op je telefoon via Prowl of Pushover."
+msgid "Notifications on your phone using Prowl, Pushover or Telegram."
+msgstr "Notificaties op je telefoon via Prowl, Pushover of Telegram."
 
 #: ../../admin/notifications.rst:13
 msgid "Currently, two mobile platforms are supported: Android and iOS."
 msgstr "Momenteel worden de volgende platformen ondersteund: Android en iOS."
 
 #: ../../admin/notifications.rst:15
-msgid "The supported app for Android is `Pushover <https://pushover.net>`_."
-msgstr "De ondersteunde app voor Android is `Pushover <https://pushover.net>`_."
+msgid "The supported apps for Android are `Pushover <https://pushover.net>`_ and `Telegram <https://www.telegram.org>`_."
+msgstr "De ondersteunde apps voor Android zijn `Pushover <https://pushover.net>`_ en `Telegram <https://www.telegram.org>`_."
 
 #: ../../admin/notifications.rst:16
-msgid ""
-"The supported apps for iOS are `Pushover <https://pushover.net>`_ and `Prowl "
-"<https://www.prowlapp.com>`_."
-msgstr ""
-"De ondersteunde apps voor iOS zijn `Pushover <https://pushover.net>`_ en "
-"`Prowl <https://www.prowlapp.com>`_."
+msgid "The supported apps for iOS are `Pushover <https://pushover.net>`_, `Prowl <https://www.prowlapp.com>`_ and `Telegram <https://www.telegram.org>`_."
+msgstr "De ondersteunde apps voor iOS zijn `Pushover <https://pushover.net>`_, `Prowl <https://www.prowlapp.com>`_ en `Telegram <https://www.telegram.org>`_."
 
 #: ../../admin/notifications.rst:18
-msgid ""
-"Make sure you either have Pushover or Prowl installed on your smartphone. If "
-"you don't, visit your platforms app store to download the app and sign up for "
-"an account. Then, make sure to get your API key from the notification service "
-"that you prefer. For instruction on obtaining the API key, please read below."
-msgstr ""
-"Zorg ervoor dat je Pushover of Prowl hebt geïnstalleerd op je smartphone. Als "
-"dat niet het geval is, bezoek dan de app store van je platform, download de "
-"gewenste app en maak daarvoor een account. Daarna haal je de API key op voor "
-"de notificatieservice die je wilt gebruiken. Om te lezen hoe dat werkt, lees "
-"dan de instructies bij de volgende hoofdstukken hieronder."
+msgid "Make sure you either have Pushover, Prowl or Telegram installed on your smartphone. If you don't, visit your platforms app store to download the app and sign up for an account. Then, make sure to get your API key from the notification service that you prefer. For instruction on obtaining the API key, please read below."
+msgstr "Zorg ervoor dat je Pushover, Prowl of Telegram hebt geïnstalleerd op je smartphone. Als dat niet het geval is, bezoek dan de app store van je platform, download de gewenste app en maak daarvoor een account. Daarna haal je de API key op voor de notificatieservice die je wilt gebruiken. Om te lezen hoe dat werkt, lees dan de instructies bij de volgende hoofdstukken hieronder."
 
 #: ../../admin/notifications.rst:23
-msgid ""
-"In the DSMR-reader **Notifications Apps** settings, select the notification "
-"service you want to use. Copy the API key from the notification service and "
-"paste in into the the textbox for the API key. When you save these settings, "
-"your first notification should be sent after midnight. Don't worry about "
-"nightly alerts, the notifications will be sent with low priority and should "
-"not wake you up."
-msgstr ""
-"Selecteer in de **Notificatie Apps** instellingen binnen DSMR-reader welke "
-"notificatieservice je gebruikt. Kopieer de API key van de notificatieservice "
-"naar DSMR-reader. Wanneer dit goed ingesteld is, zou je de eerste notificatie "
-"na middernacht moeten ontvangen."
+msgid "In the DSMR-reader **Notifications Apps** settings, select the notification service you want to use. Copy the API key from the notification service and paste in into the the textbox for the API key. When you save these settings, your first notification should be sent after midnight. Don't worry about nightly alerts, the notifications will be sent with low priority and should not wake you up."
+msgstr "Selecteer in de **Notificatie Apps** instellingen binnen DSMR-reader welke notificatieservice je gebruikt. Kopieer de API key van de notificatieservice naar DSMR-reader. Wanneer dit goed ingesteld is, zou je de eerste notificatie na middernacht moeten ontvangen."
 
 #: ../../admin/notifications.rst:30
 msgid "Pushover: How do I obtain my API key?"
 msgstr "Pushover: Hoe krijg ik mijn API key?"
 
 #: ../../admin/notifications.rst:32
-msgid ""
-"After you have downloaded Pushover and signed up for an account you should be "
-"able to `login into your Pushover account <https://pushover.net>`_."
-msgstr ""
-"Nadat je Pushover gedownload hebt en je registreert voor een account, zou je "
-"`moeten kunnen inloggen in je Pushover account <https://pushover.net>`_."
+msgid "After you have downloaded Pushover and signed up for an account you should be able to `login into your Pushover account <https://pushover.net>`_."
+msgstr "Nadat je Pushover gedownload hebt en je registreert voor een account, zou je `moeten kunnen inloggen in je Pushover account <https://pushover.net>`_."
 
 #: ../../admin/notifications.rst:34
-msgid ""
-"You should see an overview of containing **Your User Key** (top right) and "
-"Applications, if you have any. To create an application in Pushover, for "
-"sending notifications to your phone, please click **Create an Application/API "
-"Token**."
-msgstr ""
-"Je zou een overzicht moeten zien, waaronder rechtsbovenin **Your User Key**, "
-"en eventueel Applications (indien je die al aangemaakt hebt). Om een "
-"applicatie te maken voor het versturen van notificaties naar je telefoon, "
-"klik op  **Create an Application/API Token**."
+msgid "You should see an overview of containing **Your User Key** (top right) and Applications, if you have any. To create an application in Pushover, for sending notifications to your phone, please click **Create an Application/API Token**."
+msgstr "Je zou een overzicht moeten zien, waaronder rechtsbovenin **Your User Key**, en eventueel Applications (indien je die al aangemaakt hebt). Om een applicatie te maken voor het versturen van notificaties naar je telefoon, klik op  **Create an Application/API Token**."
 
 #: ../../admin/notifications.rst:37
 msgid "Pushover requires you to enter two keys in DSMR-reader."
 msgstr "Pushover vereist dat je twee keys in DSMR-reader instelt."
 
 #: ../../admin/notifications.rst:39
-msgid ""
-"You will need the **User Key** displayed on the top right in the screenshot "
-"below."
-msgstr ""
-"Je hebt de  **User Key** nodig, te vinden op de locatie rechtsbovenin de "
-"onderstaande screenshot."
+msgid "You will need the **User Key** displayed on the top right in the screenshot below."
+msgstr "Je hebt de  **User Key** nodig, te vinden op de locatie rechtsbovenin de onderstaande screenshot."
 
 #: ../../admin/notifications.rst:40
-msgid ""
-"And you will need the **API key** for the application you've created in "
-"Pushover."
-msgstr ""
-"En je hebt de  **API key** nodig voor de applicatie die je in Pushover hebt "
-"aangemaakt."
+msgid "And you will need the **API key** for the application you've created in Pushover."
+msgstr "En je hebt de  **API key** nodig voor de applicatie die je in Pushover hebt aangemaakt."
 
 #: ../../admin/notifications.rst:48
 msgid "Prowl: How do I obtain my API key?"
 msgstr "Prowl: Hoe krijg ik mijn API key?"
 
 #: ../../admin/notifications.rst:50
-msgid ""
-"After you have downloaded Prowl and signed up for an account you should be "
-"able to `login into your Prowl account <https://www.prowlapp.com/login.php>`_."
-msgstr ""
-"Nadat je Prowl gedownload hebt en je registreert voor een account, zou je "
-"`moeten kunnen inloggen in je Prowl account <https://www.prowlapp.com/login."
-"php>`_."
+msgid "After you have downloaded Prowl and signed up for an account you should be able to `login into your Prowl account <https://www.prowlapp.com/login.php>`_."
+msgstr "Nadat je Prowl gedownload hebt en je registreert voor een account, zou je `moeten kunnen inloggen in je Prowl account <https://www.prowlapp.com/login.php>`_."
 
 #: ../../admin/notifications.rst:52
-msgid ""
-"Now go to \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\", you "
-"should see an overview of your current API keys if you have any. To create an "
-"API key for the DSMR-reader, input a name and click **\"Generate Key\"**."
-msgstr ""
-"Ga nu naar \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\", je "
-"zou nu een overzicht moeten zien van je API keys, mits je die al hebt. Om een "
-"API key aan te maken voor DSMR-reader, voer een naam in en klik op **"
-"\"Generate Key\"**."
+msgid "Now go to \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, input a name and click **\"Generate Key\"**."
+msgstr "Ga nu naar \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\", je zou nu een overzicht moeten zien van je API keys, mits je die al hebt. Om een API key aan te maken voor DSMR-reader, voer een naam in en klik op **\"Generate Key\"**."
 
 #: ../../admin/notifications.rst:59
-msgid ""
-"When a new key is generated, you will see it immediatly. Your key is listed "
-"like in the screenshot below (the red box marks your API key)."
-msgstr ""
-"Als er een nieuwe key is gegenereerd, zie je deze direct. De key is te vinden "
-"zoals in onderstaande screenshot (er staat een rood kader om de key)."
+msgid "When a new key is generated, you will see it immediatly. Your key is listed like in the screenshot below (the red box marks your API key)."
+msgstr "Als er een nieuwe key is gegenereerd, zie je deze direct. De key is te vinden zoals in onderstaande screenshot (er staat een rood kader om de key)."
 
 #: ../../admin/notifications.rst:67
 msgid "Telegram: How do I obtain my API key?"
 msgstr "Telegram: Hoe krijg ik mijn API key?"
 
 #: ../../admin/notifications.rst:69
-msgid ""
-"Please note that you can only use these notifications if you have your own "
-"(chat) bot with Telegram."
-msgstr ""
-"N.B.: Je kunt deze notificaties alleen gebruiken wanneer je je eigen "
-"(chat)bot hebt bij Telegram."
+msgid "Please note that you can only use these notifications if you have your own (chat) bot with Telegram."
+msgstr "N.B.: Je kunt deze notificaties alleen gebruiken wanneer je je eigen (chat)bot hebt bij Telegram."
 
 #: ../../admin/notifications.rst:71
-msgid ""
-"More information about bots `can be found here <https://core.telegram.org/"
-"bots>`_. You will need the API key provided to you by the ``BotFather`` bot."
-msgstr ""
-"Meer informatie over bots  `kun je hier vinden <https://core.telegram.org/"
-"bots>`_. Je hebt uiteindelijk de API-sleutel nodig die je ontvangt van de "
-"``BotFather`` bot."
+msgid "More information about bots `can be found here <https://core.telegram.org/bots>`_. You will need the API key provided to you by the ``BotFather`` bot."
+msgstr "Meer informatie over bots  `kun je hier vinden <https://core.telegram.org/bots>`_. Je hebt uiteindelijk de API-sleutel nodig die je ontvangt van de ``BotFather`` bot."
 
 #: ../../admin/notifications.rst:74
 msgid "Telegram: How do I obtain the Chat ID?"
 msgstr "Telegram: Hoe krijg ik het Chat ID?"
 
 #: ../../admin/notifications.rst:76
-msgid ""
-"You will also need the Chat ID to have the bot send messages to the right "
-"chat. **By default bots are not allowed to contact anyone by themselves or "
-"see messages in a group.**"
-msgstr ""
-"Je hebt daarnaast het Chat ID nodig zodat de bot weet waar berichten naartoe "
-"gestuurd moeten worden. **Standaard mogen bots uit zichzelf geen contact "
-"maken met anderen en zien ze ook geen berichten in groepschats.**"
+msgid "You will also need the Chat ID to have the bot send messages to the right chat. **By default bots are not allowed to contact anyone by themselves or see messages in a group.**"
+msgstr "Je hebt daarnaast het Chat ID nodig zodat de bot weet waar berichten naartoe gestuurd moeten worden. **Standaard mogen bots uit zichzelf geen contact maken met anderen en zien ze ook geen berichten in groepschats.**"
 
 #: ../../admin/notifications.rst:79
-msgid ""
-"So first make sure to send a message directly to the bot as human. Or, if you "
-"added the bot in a group, make sure it has permissions to read messages in "
-"the group and then send a message in the group accordingly."
-msgstr ""
-"Dus zorg er eerst voor dat je zelf een direct bericht stuurt naar je bot. Of, "
-"indien je de bot hebt toegevoegd aan een chatgroep, geef de bot dan voldoende "
-"permissies om berichten in die groepschat te lezen. Stuur daarna een bericht "
-"in de groepschat zodat de bots iets ontvangt."
+msgid "So first make sure to send a message directly to the bot as human. Or, if you added the bot in a group, make sure it has permissions to read messages in the group and then send a message in the group accordingly."
+msgstr "Dus zorg er eerst voor dat je zelf een direct bericht stuurt naar je bot. Of, indien je de bot hebt toegevoegd aan een chatgroep, geef de bot dan voldoende permissies om berichten in die groepschat te lezen. Stuur daarna een bericht in de groepschat zodat de bots iets ontvangt."
 
 #: ../../admin/notifications.rst:82
-msgid ""
-"Any message the bot receives (or is allowed to see) is sent as update to the "
-"bot. You can use the Telegram API in your browser to see the updates for your "
-"bot. It will contain the Chat ID you're looking for."
-msgstr ""
-"Elk bericht dat de bot ontvangt (of mag zien) wordt verstuurd als update naar "
-"de bot. Je kunt via je browser de Telegram API gebruiken om alle updates naar "
-"je bot in te zien. Die bevatten het Chat ID waarnaar je op zoek bent."
+msgid "Any message the bot receives (or is allowed to see) is sent as update to the bot. You can use the Telegram API in your browser to see the updates for your bot. It will contain the Chat ID you're looking for."
+msgstr "Elk bericht dat de bot ontvangt (of mag zien) wordt verstuurd als update naar de bot. Je kunt via je browser de Telegram API gebruiken om alle updates naar je bot in te zien. Die bevatten het Chat ID waarnaar je op zoek bent."
 
 #: ../../admin/notifications.rst:86
 msgid "Construct the following URL::"
 msgstr "Stel de volgende URL op::"
 
 #: ../../admin/notifications.rst:90
-msgid ""
-"For example when using the fake API key ``1268827887:ABCDEFGqdtsgtts-"
-"JDASIJDqewqkqewaq``::"
-msgstr ""
-"Bijvoorbeeld voor de nep-API-sleutel ``1268827887:ABCDEFGqdtsgtts-"
-"JDASIJDqewqkqewaq``::"
+msgid "For example when using the fake API key ``1268827887:ABCDEFGqdtsgtts-JDASIJDqewqkqewaq``::"
+msgstr "Bijvoorbeeld voor de nep-API-sleutel ``1268827887:ABCDEFGqdtsgtts-JDASIJDqewqkqewaq``::"
 
 #: ../../admin/notifications.rst:94
 msgid "You should see something similar to:"
 msgstr "Je zou nu iets soortgelijks als dit moeten zien:"
 
 #: ../../admin/notifications.rst:100
-msgid ""
-"Extract the Chat ID from the response. In the example above it's "
-"``123456789``. You can use that ID in the Telegram notifications config of "
-"DSMR-reader."
-msgstr ""
-"Haal het Chat ID uit het resultaat. In het voorbeeld hierboven is dat "
-"``123456789``. Je kunt dat ID in de Telegram-configuratie binnen DSMR-reader "
-"gebruiken."
+msgid "Extract the Chat ID from the response. In the example above it's ``123456789``. You can use that ID in the Telegram notifications config of DSMR-reader."
+msgstr "Haal het Chat ID uit het resultaat. In het voorbeeld hierboven is dat ``123456789``. Je kunt dat ID in de Telegram-configuratie binnen DSMR-reader gebruiken."
 
 #: ../../admin/notifications.rst:103
 msgid "To test notifications, you can execute the following command::"
 msgstr "Voor het testen van notificaties kun je het volgende uitvoeren::"
 
 #: ../../admin/notifications.rst:108
-msgid ""
-"Please note that DSMR-reader will reset and wipe notification settings on any "
-"error. This can be experienced as a bit annoying."
-msgstr ""
-"N.B.: DSMR-reader reset en wist alle notificatieinstellingen wanneer er "
-"fouten optreden. Dit kan als wat vervelend ervaren worden."
+msgid "Please note that DSMR-reader will reset and wipe notification settings on any error. This can be experienced as a bit annoying."
+msgstr "N.B.: DSMR-reader reset en wist alle notificatieinstellingen wanneer er fouten optreden. Dit kan als wat vervelend ervaren worden."
 
 #~ msgid "How do I obtain my API key for Pushover?"
 #~ msgstr "Hoe krijg ik mijn API key voor Pushover?"
 
 #~ msgid "How do I obtain my API key for Telegram?"
 #~ msgstr "Hoe krijg ik mijn API key voor Telegram?"
+
+#~ msgid "The supported app for Android is `Pushover <https://pushover.net>`_."
+#~ msgstr "De ondersteunde app voor Android is `Pushover <https://pushover.net>`_."
