@@ -459,6 +459,9 @@ msgstr "Tarief 2 terugleveringssprijs (€)"
 msgid "Fixed daily costs (€)"
 msgstr "Vaste dagelijkse kosten (€)"
 
+msgid "Both positive and negative prices allowed. Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
+msgstr "Zowel positieve als negatieve bedragen toegestaan. Stel in op nul wanneer: Ongebruikt / Al ingesteld in ander contract / Niet van toepassing in jouw situatie"
+
 msgid "Energy supplier price contract"
 msgstr "Energieleverancier contract"
 

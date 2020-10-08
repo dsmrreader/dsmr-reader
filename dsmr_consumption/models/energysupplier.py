@@ -67,9 +67,11 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         max_digits=11,
         decimal_places=5,
         default=0,
-        validators=[MinValueValidator(0)],
         verbose_name=_('Fixed daily costs (€)'),
-        help_text=_('Set to zero when: Unused / Defined in other contract / Not applicable to your situation')
+        help_text=_(
+            'Both positive and negative prices allowed. Set to zero when: Unused / Defined in other contract / '
+            'Not applicable to your situation'
+        )
     )
 
     def __str__(self):
