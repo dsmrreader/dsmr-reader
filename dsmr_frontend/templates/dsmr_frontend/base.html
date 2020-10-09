@@ -40,7 +40,7 @@
     </head>
     <body class="skin-black">
         <header class="header">
-            <a href="{% url 'frontend:dashboard' %}" class="logo">DSMR Reader <small class="logo-version">v{{ dsmr_version }}</small></a>
+            <a href="{% url 'frontend:dashboard' %}" class="logo">DSMR Reader</a>
             <nav class="navbar navbar-static-top" role="navigation">
                 <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button" title="{% translate 'Toggle navigation' %}">
                     <span class="sr-only">{% translate "Toggle navigation" %}</span>
@@ -102,13 +102,8 @@
                             &nbsp;&nbsp;
                         </li>
                         <li>
-                            <a href="{% url 'frontend:status' %}">
-                                <i class="fas fa-heartbeat"></i> &nbsp; <small>{% translate "Status" %}</small>
-                            </a>
-                        </li>
-                        <li>
                             <a href="{% url 'frontend:about' %}">
-                                <i class="fas fa-robot"></i> &nbsp; <small>{% translate "About DSMR-reader" %}</small>
+                                <i class="fas fa-robot"></i> &nbsp; <small>{% translate "About your DSMR-reader" %}</small>
                             </a>
                         </li>
                         <li>

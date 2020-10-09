@@ -3,8 +3,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% translate "About" %}{% endblock %}
-{% block header %}{% translate "About" %} &nbsp; <i class="fas fa-robot"></i>{% endblock %}
+{% block title %}{% translate "About your DSMR-reader" %}{% endblock %}
+{% block header %}{% translate "About your DSMR-reader" %} &nbsp; <i class="fas fa-robot"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -13,9 +13,64 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fas fa-question"></i> &nbsp; {% translate "Help" %}
+                    <i class="fas fa-heartbeat"></i> &nbsp; {% translate "Monitoring" %} &nbsp;
+                    {% if monitoring_issues %}<span class="badge bg-red-gradient">{{ monitoring_issues|length }}</span>{% endif %}
+                    <br />
                 </header>
                 <div class="panel-body">
+                    {% for current in monitoring_issues %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <i class="fas fa-exclamation-triangle"></i> &nbsp; <strong>{{ current.description }}</strong>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="alert alert-without-padding alert-danger" role="alert">
+                                    <small>{% translate "Since" %}: <strong>{{ current.since|naturaltime|default:'-' }}</strong></small>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="alert alert-without-padding alert-success" role="alert">
+                                    <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fas fa-question-circle"></i> &nbsp; DSMR-reader v{{ dsmr_version }}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Check for updates" %}
+                        </div>
+                        <div class="col-sm-6">
+                            <a class="btn btn-info trigger-update-check" href="#"><i class="fas fa-check"></i> &nbsp; {% translate "Check for updates" %}</a>
+                            <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden update-check"></i>
+
+                            <div id="update_check_no_update_available" class="xhr-hidden">
+                                <div class="alert alert-without-padding alert-success" role="alert">
+                                    <i class="fas fa-check-circle"></i> &nbsp; {% translate "You are running the latest version" %} (v{{ dsmr_version }})
+                                </div>
+                            </div>
+                            <div id="update_check_update_available" class="xhr-hidden">
+                                <div class="alert alert-without-padding alert-warning" role="alert">
+                                    <i class="fas fa-exclamation-circle"></i> &nbsp; {% translate "Update available" %} &nbsp; <a href="{% url 'frontend:changelog-redirect' %}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-sm-6">
                             {% translate "Did something change after updating? Check out the latest changes" %}:
@@ -24,6 +79,17 @@
                             <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">{% translate "View changelog" %} </a>
                         </div>
                     </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Do you want to access your data using scripts or other software? Check out the API:" %}
+                        </div>
+
+                        <div class="col-sm-6">
+                            <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank">{% translate "View your API docs" %}</a>
+                        </div>
+                    </div>
+
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -36,31 +102,29 @@
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-sm-6">
-                            {% translate "Still need help? View or create an issue on Github" %}:
+                            <small>{% translate "Still need help? View or create an issue on Github" %}:</small>
                         </div>
                         <div class="col-sm-6">
-                            <a href="https://github.com/dennissiemensma/dsmr-reader/issues" target="_blank">{% translate "View DSMR-reader issues on Github" %} </a>
+                            <a href="https://github.com/dennissiemensma/dsmr-reader/issues" target="_blank">{% translate "View DSMR-reader issues on Github (or create one)" %} </a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    <i class="fas fa-rocket"></i> &nbsp; {% translate "API" %}
-                </header>
-                <div class="panel-body">
+                    <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-sm-6">
-                            {% translate "Do you want to access DSMR-reader its data automatically? Check out the API:" %}
+                            <small>{% translate "For new Github issues, please supply a debug info dump as well:" %}</small>
                         </div>
-
                         <div class="col-sm-6">
-                            <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank">{% translate "View API docs" %}</a>
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-info trigger-debug-info" href="#"><i class="fas fa-eye"></i> &nbsp; {% translate "View 'dsmr_debuginfo' dump" %}</a>
+                            {% else %}
+                            <a class="btn btn-danger" href="{% url 'admin:login' %}?next={% url 'frontend:about' %}"><i class="fas fa-lock"></i> &nbsp; {% translate "View 'dsmr_debuginfo' dump" %}</a> &nbsp; <small>{% translate "Login required" %}</small>
+                            {% endif %}
+                            <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden debug-info"></i>
+                        </div>
+                    </div>
+                    <div class="row debug-info xhr-hidden">
+                        <div class="col-sm-12">
+                            <pre id="debug_info_result"></pre>
                         </div>
                     </div>
                 </div>
@@ -112,4 +176,58 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.trigger-update-check').click(function(){
+    	    $('.trigger-update-check').hide();
+   		    fetch_xhr_update_check();
+   		    return false;
+    	})
+
+    	$('.trigger-debug-info').click(function(){
+    	    $('.trigger-debug-info').hide();
+   		    fetch_xhr_debug_info();
+   		    return false;
+    	})
+    });
+
+    function fetch_xhr_update_check()
+    {
+        $(".xhr-loader").filter('.update-check').removeClass("hidden").show();
+
+        $.ajax({
+            dataType: "json",
+            url: "{% url 'frontend:about-xhr-update-check' %}",
+        }).done(function(response) {
+            $(".xhr-loader").filter('.update-check').hide();
+
+            if (response.is_latest_version) {
+                $("#update_check_no_update_available").show();
+            } else {
+                $("#update_check_update_available").show();
+            }
+        });
+    }
+
+    function fetch_xhr_debug_info()
+    {
+        $(".xhr-loader").filter(".debug-info").removeClass("hidden").show();
+
+        $.ajax({
+            dataType: "json",
+            url: "{% url 'frontend:about-xhr-debug-info' %}",
+        }).done(function(response) {
+            $(".xhr-loader").filter(".debug-info").hide();
+            $("#debug_info_result").html(response.dump);
+            $(".xhr-hidden").filter(".debug-info").show();
+        });
+    }
+
+</script>
 {% endblock %}

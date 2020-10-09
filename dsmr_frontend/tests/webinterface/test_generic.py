@@ -202,10 +202,12 @@ class TestAlwaysRequireLoginDisabled(TestCase):
         'donations-redirect',
         'v4-upgrade-redirect',
         'configuration',
+        'status',
         'export',
         'export-as-csv',
         'notification-xhr-mark-read',
         'notification-xhr-mark-all-read',
+        'about-xhr-debug-info',
     )
 
     def setUp(self):

@@ -81,19 +81,6 @@ Summary of all your contracts and the amount of energy consumed/generated.
     :alt: Energy contracts
 
 
-Status
-------
-
-The status page shows the 'health' of the application and any data tracked.
-If there are any problems regarding data handling, they should be highlighted here.
-
-You can also easily check for DSMR-reader updates here.
-
-.. image:: _static/screenshots/frontend/status.png
-    :target: _static/screenshots/frontend/status.png
-    :alt: Status
-
-
 Export
 ------
 
@@ -116,3 +103,15 @@ Or you can just skip it this page and continue directly to the admin panel.
 .. image:: _static/screenshots/frontend/configuration.png
     :target: _static/screenshots/frontend/configuration.png
     :alt: Configuration
+
+
+About
+------
+
+Shows the 'health' of the application and provides a lot of background information.
+
+You can also easily check for DSMR-reader updates here.
+
+.. image:: _static/screenshots/frontend/about.png
+    :target: _static/screenshots/frontend/about.png
+    :alt: Status

@@ -59,7 +59,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self._pretty_print('Retention cleans up after', '{} h'.format(
             RetentionSettings.get_solo().data_retention_in_hours or '-'
         ))
-        self._pretty_print('Telegram parser', DataloggerSettings.get_solo().dsmr_version)
+        self._pretty_print('Telegram parser', '"{}"'.format(DataloggerSettings.get_solo().dsmr_version))
         self._pretty_print('Database engine/vendor', connection.vendor)
 
         if pending_migrations_count > 0:
@@ -127,6 +127,9 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
                 self._pretty_print(tablename, indexname)
 
     def _table_record_count(self, table_name):
+        if connection.vendor != 'postgresql':
+            return '??? ({})'.format(connection.vendor)
+
         # A live count is too slow on huge datasets, this is accurate enough:
         with connection.cursor() as cursor:
             cursor.execute(
@@ -137,25 +140,25 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             return int(reading_count)
 
     def _print_start(self):
-        print()
-        print('<--- COPY OUTPUT AFTER THIS LINE --->')
-        print()
-        print()
-        print('```')
+        self.stdout.write()
+        self.stdout.write('<--- COPY OUTPUT AFTER THIS LINE AND PASTE IN YOUR GITHUB ISSUE --->')
+        self.stdout.write()
+        self.stdout.write()
+        self.stdout.write('```')
 
     def _pretty_print(self, what, value):
-        print('    {:70}{:>20}'.format(what, value))
+        self.stdout.write('    {:70}{:>20}'.format(what, value))
 
     def _pretty_print_short(self, what, value):
-        print('    {:20}{:>70}'.format(what, value))
+        self.stdout.write('    {:20}{:>70}'.format(what, value))
 
     def _print_header(self, what):
-        print()
-        print(what.upper())
+        self.stdout.write()
+        self.stdout.write(what.upper())
 
     def _print_end(self):
-        print()
-        print('```')
-        print()
-        print('<--- COPY OUTPUT UNTIL THIS LINE --->')
-        print()
+        self.stdout.write()
+        self.stdout.write('```')
+        self.stdout.write()
+        self.stdout.write('<--- COPY OUTPUT UNTIL THIS LINE AND PASTE IN YOUR GITHUB ISSUE --->')
+        self.stdout.write()

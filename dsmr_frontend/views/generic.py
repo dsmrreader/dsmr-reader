@@ -20,6 +20,11 @@ class XhrHeader(ConfigurableLoginRequiredMixin, View):
         return JsonResponse(data)
 
 
+class StatusRedirectView(RedirectView):
+    permanent = False
+    pattern_name = 'frontend:about'
+
+
 class ReadTheDocsRedirectView(RedirectView):
     permanent = False
     subpage = None

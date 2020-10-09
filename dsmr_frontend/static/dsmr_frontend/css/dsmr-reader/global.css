@@ -93,3 +93,7 @@ ul#category-suggestions > li {
     list-style-type: none;
     padding-top: 10px;
 }
+
+div.alert-without-padding {
+    margin-bottom: 0 !important;
+}

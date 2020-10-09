@@ -1,6 +1,6 @@
 from django.urls.conf import path
 
-from dsmr_frontend.views.about import About
+from dsmr_frontend.views.about import About, AboutXhrUpdateCheck, AboutXhrDebugInfo
 from dsmr_frontend.views.configuration import Configuration
 from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
@@ -10,9 +10,8 @@ from dsmr_frontend.views.statistics import Statistics, StatisticsXhrData
 from dsmr_frontend.views.trends import Trends, TrendsXhrAvgConsumption, TrendsXhrElectricityByTariff
 from dsmr_frontend.views.compare import Compare, CompareXhrSummary
 from dsmr_frontend.views.export import Export, ExportAsCsv
-from dsmr_frontend.views.status import Status
 from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, FeedbackRedirect, DonationsRedirect, \
-    XhrHeader, V4UpgradeRedirect
+    XhrHeader, V4UpgradeRedirect, StatusRedirectView
 from dsmr_frontend.views.energy_contracts import EnergyContracts
 from dsmr_frontend.views.live_graphs import LiveGraphs, LiveXhrElectricityConsumption, LiveXhrGasConsumption, \
     LiveXhrTemperature
@@ -44,8 +43,10 @@ urlpatterns = [
     path('compare', Compare.as_view(), name='compare'),
     path('compare/xhr/summary', CompareXhrSummary.as_view(), name='compare-xhr-summary'),
 
-    path('status', Status.as_view(), name='status'),
+    path('status', StatusRedirectView.as_view(), name='status'),
     path('about', About.as_view(), name='about'),
+    path('about/xhr/update-check', AboutXhrUpdateCheck.as_view(), name='about-xhr-update-check'),
+    path('about/xhr/debug-info', AboutXhrDebugInfo.as_view(), name='about-xhr-debug-info'),
 
     path('notifications', Notifications.as_view(), name='notifications'),
 
