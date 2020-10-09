@@ -11,8 +11,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -1025,17 +1023,14 @@ msgstr "Gesorteerde grafiek"
 msgid "Sorted graphs"
 msgstr "Gesorteerde grafieken"
 
-msgid "About your DSMR-reader"
-msgstr "Over jouw DSMR-reader"
+msgid "About &amp; support"
+msgstr "Over &amp; ondersteuning"
 
-msgid "Monitoring"
-msgstr "Monitoring"
+msgid "About"
+msgstr "Over"
 
-msgid "Since"
-msgstr "Sinds"
-
-msgid "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here."
-msgstr "Alles lijkt soepel te draaien. Als er problemen zijn, zoals missende gegevens of hangende processen, dan worden die hier getoond."
+msgid "Currently installed"
+msgstr "Momenteel geïnstalleerd"
 
 msgid "Check for updates"
 msgstr "Controleer op updates"
@@ -1046,26 +1041,29 @@ msgstr "Je draait de meest recente versie"
 msgid "Update available"
 msgstr "Update beschikbaar"
 
+msgid "Since"
+msgstr "Sinds"
+
+msgid "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here."
+msgstr "Alles lijkt soepel te draaien. Als er problemen zijn, zoals missende gegevens of hangende processen, dan worden die hier getoond."
+
+msgid "Support"
+msgstr "Ondersteuning"
+
+msgid "Looking for something specific? A good place to start might be the FAQ"
+msgstr "Zoek je iets specifieks? Een goede plek om te beginnen is de FAQ"
+
+msgid "View frequently asked questions (FAQ)"
+msgstr "Bekijk veegelstelde vragen (FAQ)"
+
 msgid "Did something change after updating? Check out the latest changes"
 msgstr "IS er iets veranderd na updaten? Bekijk de laatste wijzigingen"
 
 msgid "View changelog"
 msgstr "Changelog"
 
-msgid "Do you want to access your data using scripts or other software? Check out the API:"
-msgstr "Wil je je gegevens geautomatiseerd benaderen via scripts of andere software? Bekijk de API:"
-
-msgid "View your API docs"
-msgstr "Bekijk jouw API-documentatie"
-
-msgid "Looking for something? A good place to start is the FAQ"
-msgstr "Zoek je iets? Een goede plek om te beginnen is de FAQ"
-
-msgid "View frequently asked questions (FAQ)"
-msgstr "Bekijk veegelstelde vragen (FAQ)"
-
-msgid "Still need help? View or create an issue on Github"
-msgstr "Nog steeds hulp nodig? Bekijk of maak een issue aan op Github"
+msgid "Still need troubleshooting? Check out current issues on Github"
+msgstr "Nog steeds hulp nodig? Bekijk huidige issues op Github"
 
 msgid "View DSMR-reader issues on Github (or create one)"
 msgstr "Bekijk DSMR-reader issues op Github (of maak een nieuwe aan)"
@@ -1078,6 +1076,12 @@ msgstr "Bekijk 'dsmr_debuginfo' dump"
 
 msgid "Login required"
 msgstr "Inloggen vereist"
+
+msgid "Do you want to access your data using scripts or other software? Check out the API:"
+msgstr "Wil je je gegevens geautomatiseerd benaderen via scripts of andere software? Bekijk de API:"
+
+msgid "View API docs"
+msgstr "Bekijk API-documentatie"
 
 msgid "Credits"
 msgstr "Credits"
@@ -2566,8 +2570,11 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
-#~ msgid "About"
-#~ msgstr "Over"
+#~ msgid "About your DSMR-reader"
+#~ msgstr "Over jouw DSMR-reader"
+
+#~ msgid "Monitoring"
+#~ msgstr "Monitoring"
 
 #~ msgid "Help"
 #~ msgstr "Help"
@@ -2882,9 +2889,6 @@ msgstr "Engels"
 
 #~ msgid "Application"
 #~ msgstr "Applicatie"
-
-#~ msgid "Current version"
-#~ msgstr "Huidige versie"
 
 #~ msgid "View releases"
 #~ msgstr "Bekijk releases"
