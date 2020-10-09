@@ -8,5 +8,5 @@ class DsmrReaderSchema(AutoSchema):  # pragma: nocover
         super().__init__()
         self.operation_mapping = operation_mapping
 
-    def _get_operation_id(self, path, method):
+    def get_operation_id(self, path, method):
         return self.operation_mapping[method.lower()]
