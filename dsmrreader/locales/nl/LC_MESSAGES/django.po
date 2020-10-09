@@ -11,6 +11,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -1036,7 +1038,7 @@ msgid "Everything seems to run smoothly. Any issues, such as missing data or sta
 msgstr "Alles lijkt soepel te draaien. Als er problemen zijn, zoals missende gegevens of hangende processen, dan worden die hier getoond."
 
 msgid "Check for updates"
-msgstr "Controleer voor updates"
+msgstr "Controleer op updates"
 
 msgid "You are running the latest version"
 msgstr "Je draait de meest recente versie"
