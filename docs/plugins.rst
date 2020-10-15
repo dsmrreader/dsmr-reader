@@ -45,6 +45,11 @@ Called by dsmr_pvoutput just before uploading data to PVOutput. The ``data`` kwa
 Called by dsmr_datalogger when receiving or reading a telegram string. The ``data`` kwarg contains the raw telegram string.
 
 
+``dsmr_notification.signals.notification_sent``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Called by dsmr_notification just after dispatching a notification. The ``title`` kwarg contains the notification title, ``message`` contains the message body.
+
+
 ``django.db.models.signals.post_save``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Called by Django after saving new records to the database. Can be bound to the ``DayStatistics`` model for example, to process daily statistics elsewhere.

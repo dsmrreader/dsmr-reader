@@ -20,6 +20,7 @@ v4.5.0 - 2020-xx-xx
 - ``Added``: Django settings instellen via envvars (``DJANGO_STATIC_URL``, ``DJANGO_FORCE_SCRIPT_NAME``, ``DJANGO_USE_X_FORWARDED_HOST``, ``DJANGO_USE_X_FORWARDED_PORT``, ``DJANGO_X_FRAME_OPTIONS``) [`#1140 <https://github.com/dennissiemensma/dsmr-reader/issues/1140>`_]
 - ``Added``: Migratiestatus toevoegen aan dsmr-debuginfo [`#1130 <https://github.com/dennissiemensma/dsmr-reader/issues/1130>`_]
 - ``Added``: Check op exit code migrate command bij deploy/update [`#1127 <https://github.com/dennissiemensma/dsmr-reader/issues/1127>`_]
+- ``Added``: Allow other notification platforms using plugins [`#1151 <https://github.com/dennissiemensma/dsmr-reader/issues/1151>`_]
 
 - ``Changed``: Versie-check toevoegen aan About [`#1125 <https://github.com/dennissiemensma/dsmr-reader/issues/1125>`_]
 - ``Changed``: Status-pagina samenvoegen met About [`#1125 <https://github.com/dennissiemensma/dsmr-reader/issues/1125>`_]

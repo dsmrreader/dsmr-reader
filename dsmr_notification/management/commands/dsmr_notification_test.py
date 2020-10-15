@@ -9,5 +9,6 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         dsmr_notification.services.send_notification(
-            message='Test message from DSMR-reader', title='Test title'
+            title='Test title',
+            message='Test message from DSMR-reader'
         )

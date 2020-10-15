@@ -7,6 +7,7 @@ import requests
 
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
 from dsmr_backend.models.settings import BackendSettings
+from dsmr_notification.signals import notification_sent
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_frontend.models.message import Notification
@@ -108,6 +109,13 @@ def send_notification(message, title):
 
     response = requests.post(
         **DATA_FORMAT[notification_settings.notification_service]
+    )
+
+    # Allow hooks (e.g. plugins)
+    notification_sent.send_robust(
+        None,
+        title=title,
+        message=message
     )
 
     if response.status_code == 200:
