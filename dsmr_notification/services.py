@@ -74,6 +74,17 @@ def send_notification(message, title):
     """ Sends notification using the preferred service """
     notification_settings = NotificationSetting.get_solo()
 
+    # Allow hooks (e.g. plugins)
+    notification_sent.send_robust(
+        None,
+        title=title,
+        message=message
+    )
+
+    # Plugins only require the hook above.
+    if notification_settings.notification_service == NotificationSetting.NOTIFICATION_DUMMY:
+        return
+
     DATA_FORMAT = {
         NotificationSetting.NOTIFICATION_PUSHOVER: {
             'url': NotificationSetting.PUSHOVER_API_URL,
@@ -109,13 +120,6 @@ def send_notification(message, title):
 
     response = requests.post(
         **DATA_FORMAT[notification_settings.notification_service]
-    )
-
-    # Allow hooks (e.g. plugins)
-    notification_sent.send_robust(
-        None,
-        title=title,
-        message=message
     )
 
     if response.status_code == 200:
@@ -178,10 +182,11 @@ def notify():
         day=today.day,
         hour=0,
     ))
+    target_day = midnight - timezone.timedelta(hours=12)
 
     try:
         day_statistics = DayStatistics.objects.get(
-            day=(midnight - timezone.timedelta(hours=1))
+            day=target_day
         )
     except DayStatistics.DoesNotExist:
         return  # Try again in a next run

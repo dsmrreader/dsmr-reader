@@ -2126,6 +2126,9 @@ msgstr "Stuurt een test notificatie naar je toestel (mits ingesteld)."
 msgid "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
 msgstr "Notify My Android heeft hun dienstverlening beëindigd. Hierdoor zijn de notificatie-instellingen in DSMR-reader aangepast."
 
+msgid "Dummy (e.g. custom plugin)"
+msgstr "Dummy (bijvoorbeeld voor eigen plugin)"
+
 msgid "Pushover"
 msgstr "Pushover"
 

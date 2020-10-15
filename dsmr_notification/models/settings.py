@@ -9,12 +9,14 @@ class NotificationSetting(SingletonModel):
     TELEGRAM_API_URL = 'https://api.telegram.org/bot'
 
     NOTIFICATION_NONE = None
+    NOTIFICATION_DUMMY = 'dummy'
     NOTIFICATION_PROWL = 'prowl'
     NOTIFICATION_PUSHOVER = 'pushover'
     NOTIFICATION_TELEGRAM = 'telegram'
 
     NOTIFICATION_CHOICES = (
         (NOTIFICATION_NONE, _('--- Disabled ---')),
+        (NOTIFICATION_DUMMY, _('Dummy (e.g. custom plugin)')),
         (NOTIFICATION_PUSHOVER, _('Pushover')),
         (NOTIFICATION_PROWL, _('Prowl')),
         (NOTIFICATION_TELEGRAM, _('Telegram')),

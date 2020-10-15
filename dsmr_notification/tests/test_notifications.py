@@ -204,6 +204,23 @@ class TestServices(TestCase):
         with self.assertRaises(AssertionError):
             dsmr_notification.services.notify()
 
+    @mock.patch('dsmr_notification.signals.notification_sent.send_robust')
+    @mock.patch('django.utils.timezone.now')
+    def test_notification_dummy_provider_signal(self, now_mock, send_robust_mock):
+        if not self.fixtures:
+            return
+
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
+
+        notification_settings = NotificationSetting.get_solo()
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_DUMMY
+        notification_settings.next_notification = timezone.now()
+        notification_settings.save()
+
+        self.assertFalse(send_robust_mock.called)
+        dsmr_notification.services.notify()
+        self.assertTrue(send_robust_mock.called)
+
     @mock.patch('requests.post')
     @mock.patch('django.utils.timezone.now')
     def test_notifications(self, now_mock, requests_post_mock):
