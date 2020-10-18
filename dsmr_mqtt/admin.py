@@ -21,7 +21,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
         ),
         (
             _('Misc'), {
-                'fields': ['username', 'password', 'qos', 'keep_reconnecting'],
+                'fields': ['username', 'password', 'qos'],
             }
         )
     )

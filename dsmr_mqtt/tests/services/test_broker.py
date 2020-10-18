@@ -79,26 +79,6 @@ class TestBroker(TestCase):
     @mock.patch('paho.mqtt.client.Client.connect')
     def test_initialize_connection_refused(self, connect_mock):
         """ Whenever the broker is unavailable. """
-        MQTTBrokerSettings.objects.update(hostname='invalid')
-
-        connect_mock.side_effect = ConnectionRefusedError()  # Fail.
-
-        self.assertFalse(connect_mock.called)
-
-        with self.assertRaises(RuntimeError):
-            dsmr_mqtt.services.broker.initialize_client()
-
-        self.assertTrue(connect_mock.called)
-        self.assertFalse(MQTTBrokerSettings.get_solo().enabled)
-
-    @mock.patch('paho.mqtt.client.Client.connect')
-    def test_initialize_connection_refused_with_keep_reconnecting(self, connect_mock):
-        """ Shopuld override the behaviour disabling the integration. """
-        MQTTBrokerSettings.objects.update(
-            hostname='invalid',
-            keep_reconnecting=True
-        )
-
         connect_mock.side_effect = ConnectionRefusedError()  # Fail.
         self.assertFalse(connect_mock.called)
 
@@ -237,10 +217,6 @@ class TestBroker(TestCase):
     def test_on_log(self):
         """ Coverage test. """
         dsmr_mqtt.services.broker.on_log(None, userdata='x', level='y', buf='z')
-
-    def test_on_publish(self):
-        """ Coverage test. """
-        dsmr_mqtt.services.broker.on_publish(None, userdata='x', mid='y')
 
     @mock.patch('dsmr_backend.signals.backend_restart_required.send_robust')
     def test_on_settings_update(self, send_robust_mock):

@@ -2024,9 +2024,6 @@ msgstr "Herstart vereist"
 msgid "Whether the process requires a restart, forcing the client-broker connection to be reset."
 msgstr "Geeft aan of het proces een herstart vereist, wat forceert om de verbinding tussen client en broker te resetten."
 
-msgid "By default this integration will be disabled on connection errors, to prevent network flooding. You can override this behaviour by enabling this option. It will then no longer disable itself in this situation."
-msgstr "Standaard schakelt deze integratie zichzelf uit bij verbindingsfouten, om (onnodige) netwerkload te voorkomen. Je kunt dit gedrag laten negeren door deze optie in te schakelen. Dit voorkomt uitschakelen van de integratie bij netwerkfouten."
-
 msgid "MQTT Broker/connection"
 msgstr "MQTT broker/verbinding"
 
@@ -2572,6 +2569,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "By default this integration will be disabled on connection errors, to prevent network flooding. You can override this behaviour by enabling this option. It will then no longer disable itself in this situation."
+#~ msgstr "Standaard schakelt deze integratie zichzelf uit bij verbindingsfouten, om (onnodige) netwerkload te voorkomen. Je kunt dit gedrag laten negeren door deze optie in te schakelen. Dit voorkomt uitschakelen van de integratie bij netwerkfouten."
 
 #~ msgid "About your DSMR-reader"
 #~ msgstr "Over jouw DSMR-reader"

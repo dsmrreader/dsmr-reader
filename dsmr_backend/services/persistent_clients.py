@@ -13,7 +13,7 @@ def initialize():
 
     for current_receiver, current_response in responses:
         if isinstance(current_response, Exception):
-            logger.exception(current_response)
+            logger.error('CLIENTS: Init error: %s', current_response)
             continue
 
         if not current_response:
@@ -27,14 +27,14 @@ def initialize():
 
 def run(clients):
     """ Asks listeners to run tasks with their client. """
-    logger.debug('CLIENTS: Running %d client(s)', len(clients))
+    logger.debug('CLIENTS: Running %d active client(s)', len(clients))
 
     for current in clients:
         responses = run_persistent_client.send_robust(None, client=current)
 
         for current_receiver, current_response in responses:
             if isinstance(current_response, Exception):
-                logger.exception(current_response)
+                logger.error('CLIENTS: Run error: %s', current_response)
 
 
 def terminate(clients):

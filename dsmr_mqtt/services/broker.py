@@ -4,6 +4,7 @@ import ssl
 from django.conf import settings
 import paho.mqtt.client as paho
 
+from dsmr_backend.signals import backend_restart_required
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_mqtt.models import queue
 
@@ -16,7 +17,7 @@ def initialize_client():
     broker_settings = MQTTBrokerSettings.get_solo()
 
     if not broker_settings.enabled:
-        return logger.debug('MQTT: Integration disabled in settings (or due to an error previously)')
+        return logger.debug('MQTT: Integration disabled in settings (or it was disabled due to a configuration error)')
 
     if not broker_settings.hostname:
         logger.error('MQTT: No hostname found in settings, disabling MQTT')
@@ -28,7 +29,6 @@ def initialize_client():
     mqtt_client.on_connect = on_connect
     mqtt_client.on_disconnect = on_disconnect
     mqtt_client.on_log = on_log
-    mqtt_client.on_publish = on_publish
 
     if broker_settings.username:
         mqtt_client.username_pw_set(broker_settings.username, broker_settings.password)
@@ -46,17 +46,14 @@ def initialize_client():
     try:
         mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port)
     except Exception as error:
-        if broker_settings.keep_reconnecting:
-            raise RuntimeError('Failed to connect to broker, retrying next run...')
-
         logger.error(
-            'MQTT: Failed to connect to broker (%s:%d), disabling MQTT: %s',
+            'MQTT: Failed to connect to broker (%s:%d): %s',
             broker_settings.hostname,
             broker_settings.port,
             error
         )
-        broker_settings.update(enabled=False)
-        raise RuntimeError('Failed to connect to broker')
+        signal_reconnect()
+        raise RuntimeError('MQTT: Failed to connect to broker')
 
     return mqtt_client
 
@@ -90,7 +87,13 @@ def run(mqtt_client):
 
     # We cannot raise any exception in callbacks, this is our check point. This MUST be called AFTER the first loop().
     if not mqtt_client.is_connected():
-        raise RuntimeError('Client no longer connected')
+        signal_reconnect()
+        raise RuntimeError('MQTT: Client no longer connected')
+
+
+def signal_reconnect():
+    backend_restart_required.send_robust(None)
+    logger.warning('MQTT: Client no longer connected. Signalling restart to reconnect...')
 
 
 def on_connect(client, userdata, flags, rc):
@@ -135,8 +138,3 @@ def on_disconnect(client, userdata, rc):
 def on_log(client, userdata, level, buf):
     """ MQTT client callback for logging. Outputs some debug logging. """
     logger.debug('MQTT: Paho client: on_log(userdata, level, buf) %s %s %s', userdata, level, buf)
-
-
-def on_publish(client, userdata, mid):
-    """ MQTT client callback for publishing. Outputs some debug logging. """
-    logger.debug('MQTT: Paho client: on_publish(userdata, mid) %s %s', userdata, mid)

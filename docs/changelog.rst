@@ -28,6 +28,7 @@ v4.5.0 - 2020-xx-xx
 - ``Changed``: Move export menu item to configuration page [`#1143 <https://github.com/dennissiemensma/dsmr-reader/issues/1143>`_]
 - ``Changed``: Mogelijkheid voor negatieve waarde in Fixed daily cost [`#1148 <https://github.com/dennissiemensma/dsmr-reader/issues/1148>`_]
 
+- ``Fixed``: Automatisch opnieuw verbinden bij MQTT-connectiefouten [`#1091 <https://github.com/dennissiemensma/dsmr-reader/issues/1091>`_]
 - ``Fixed``: Change incorrect msgstr - by @gerard33 [`#1144 <https://github.com/dennissiemensma/dsmr-reader/issues/1144>`_]
 - ``Fixed``: Add missing Telegram text parts to Admin: Notifications - by @gerard33 [`#1146 <https://github.com/dennissiemensma/dsmr-reader/issues/1146>`_]
 

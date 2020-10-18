@@ -66,6 +66,5 @@ class Command(BaseCommand):
             headers={'X-AUTHKEY': self.API_KEY},
             data=data,
         )
-        print(response)
 
         pprint.pprint(json.loads(response.text), indent=4)
