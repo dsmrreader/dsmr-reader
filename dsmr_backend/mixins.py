@@ -71,7 +71,7 @@ class InfiniteManagementCommandMixin:
             # Do not hammer.
             if self.sleep_time is not None:
                 logger.debug('%s: Sleeping %ss', self.name, self.sleep_time)
-                time.sleep(self.sleep_time)
+                time.sleep(float(self.sleep_time))  # For some reasons Decimals bug out!
 
             # Reconnect to database connection after a while. Ensures the database is still there. See #427
             if timezone.now() >= self._next_reconnect:
