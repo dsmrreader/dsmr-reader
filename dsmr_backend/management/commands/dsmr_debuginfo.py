@@ -3,6 +3,7 @@ import platform
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import connection
+from django.utils import timezone
 
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
@@ -10,6 +11,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.settings import RetentionSettings, DataloggerSettings
 from dsmr_datalogger.models.statistics import MeterStatistics
+import dsmr_backend.services.backend
 
 
 class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
@@ -30,6 +32,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self._dump_os_info()
         self._dump_application_info()
         self._dump_data_info()
+        self._dump_issues()
         self._dump_pg_size()
 
         if options['with_indices']:
@@ -77,6 +80,17 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self._pretty_print('Consumption records', '')
         self._pretty_print('  - electricity (est.)', electricity_count or '-')
         self._pretty_print('  - gas (est.)', gas_count or '-')
+
+    def _dump_issues(self):
+        issues = dsmr_backend.services.backend.request_monitoring_status()
+
+        if not issues:
+            return
+
+        self._print_header('Issues')
+
+        for current in issues:
+            self._pretty_print(current.description, 'Since {}'.format(timezone.localtime(current.since)))
 
     def _dump_pg_size(self):
         if connection.vendor != 'postgresql':
@@ -147,10 +161,10 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self.stdout.write('```')
 
     def _pretty_print(self, what, value):
-        self.stdout.write('    {:70}{:>20}'.format(what, value))
+        self.stdout.write('    {:80}{:>40}'.format(what, value))
 
     def _pretty_print_short(self, what, value):
-        self.stdout.write('    {:20}{:>70}'.format(what, value))
+        self.stdout.write('    {:40}{:>80}'.format(what, value))
 
     def _print_header(self, what):
         self.stdout.write()

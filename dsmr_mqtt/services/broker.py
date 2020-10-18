@@ -93,7 +93,7 @@ def run(mqtt_client):
 
 def signal_reconnect():
     backend_restart_required.send_robust(None)
-    logger.warning('MQTT: Client no longer connected. Signalling restart to reconnect...')
+    logger.warning('MQTT: Client no longer connected. Signaling restart to reconnect...')
 
 
 def on_connect(client, userdata, flags, rc):
