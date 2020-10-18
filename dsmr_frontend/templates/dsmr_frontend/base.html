@@ -103,7 +103,14 @@
                         </li>
                         <li>
                             <a href="{% url 'frontend:about' %}">
-                                <i class="fas fa-robot"></i> &nbsp; <small>{% translate "About &amp; support" %}</small>
+                                <i class="fas fa-robot"></i> &nbsp;
+                                <small>
+                                    {% translate "About &amp; support" %}
+
+                                    {% if request_cached_monitoring_status %}
+                                    &nbsp; <span class="badge bg-red">{{ request_cached_monitoring_status|length }}</span>
+                                    {% endif %}
+                                </small>
                             </a>
                         </li>
                         <li>

@@ -2,6 +2,7 @@ import logging
 
 from django.db.models.expressions import F
 from django.utils import timezone
+from django.db import connection
 import serial
 
 from dsmr_datalogger.models.reading import DsmrReading
@@ -206,3 +207,17 @@ def _get_dsmrreader_mapping(version):
         })
 
     return mapping
+
+
+def postgresql_approximate_reading_count():  # pragma: nocover
+    if connection.vendor != 'postgresql':
+        return
+
+    # A live count is too slow on huge datasets, this is accurate enough:
+    with connection.cursor() as cursor:
+        cursor.execute(
+            'SELECT reltuples as approximate_row_count FROM pg_class WHERE relname = %s;',
+            [DsmrReading._meta.db_table]
+        )
+        reading_count = cursor.fetchone()[0]
+        return int(reading_count)

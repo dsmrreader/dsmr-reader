@@ -75,6 +75,9 @@ msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functie
 msgid "Process behind schedule: {}"
 msgstr "Proces loopt achter op schema: {}"
 
+msgid "Database growing large: {}, consider data cleanup (if not already enabled)"
+msgstr "Database groeit gestaag: {}, overweeg dataopschoning (indien nog niet ingeschakeld)"
+
 msgid "Resets the environment for development purposes. Not intended for production."
 msgstr "Reset de omgeving voor ontwikkelingsdoeleinden. Niet bedoeld voor gebruik in productie."
 
@@ -533,6 +536,9 @@ msgstr "Nog nooit een meting ontvangen"
 
 msgid "No recent readings received"
 msgstr "Geen recente metingen ontvangen"
+
+msgid "Approximately {} readings stored, consider data cleanup (if not already enabled)"
+msgstr "Ongeveer {} metingen opgeslagen, overweeg dataopschoning (indien nog niet ingeschakeld)"
 
 msgid "Performs an DSMR P1 telegram reading on the serial port."
 msgstr "Leest een DSMR P1 telegram uit van de seriële poort (meti."

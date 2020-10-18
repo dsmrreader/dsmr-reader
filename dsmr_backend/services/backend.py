@@ -1,3 +1,4 @@
+import logging
 from distutils.version import StrictVersion
 import datetime
 
@@ -7,6 +8,7 @@ from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
 from django.core.cache import cache
+from django.db import connection
 
 from dsmr_backend import signals
 from dsmr_backend.dto import MonitoringStatusIssue
@@ -14,6 +16,9 @@ from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
+
+
+logger = logging.getLogger('dsmrreader')
 
 
 def get_capabilities(capability=None):
@@ -24,7 +29,7 @@ def get_capabilities(capability=None):
     Optionally returns a single capability when requested.
     """
     # Caching time should be limited, but enough to make it matter, as this call is used A LOT.
-    capabilities = cache.get('capabilities')
+    capabilities = cache.get(settings.DSMRREADER_CAPABILITIES_CACHE)
 
     if capabilities is None:
         capabilities = {
@@ -66,7 +71,7 @@ def get_capabilities(capability=None):
             capabilities['electricity_returned'] = False
 
         capabilities['any'] = any(capabilities.values())
-        cache.set('capabilities', capabilities)
+        cache.set(settings.DSMRREADER_CAPABILITIES_CACHE, capabilities)
 
     # Single selection.
     if capability is not None:
@@ -94,6 +99,16 @@ def is_timestamp_passed(timestamp):
     return timezone.now() >= timestamp
 
 
+def request_cached_monitoring_status():
+    cached_monitoring_status = cache.get(settings.DSMRREADER_MONITORING_CACHE)
+
+    if cached_monitoring_status is None:
+        # This will also update the cache.
+        return request_monitoring_status()
+
+    return cached_monitoring_status  # pragma: nocover
+
+
 def request_monitoring_status():
     """ Requests all apps to report any issues for monitoring. """
     responses = signals.request_status.send_robust(None)
@@ -101,6 +116,10 @@ def request_monitoring_status():
 
     for _, current_response in responses:
         if not current_response:
+            continue
+
+        if isinstance(current_response, Exception):
+            logger.warning(current_response)
             continue
 
         if not isinstance(current_response, (list, tuple)):
@@ -111,6 +130,9 @@ def request_monitoring_status():
                 issues.append(x)
 
     issues = sorted(issues, key=lambda x: x.since, reverse=True)
+
+    # Always invalidate and update cache
+    cache.set(settings.DSMRREADER_MONITORING_CACHE, issues)
 
     return issues
 
@@ -139,3 +161,19 @@ def hours_in_day(day):
     # Unchanged
     else:
         return 24
+
+
+def postgresql_total_database_size():  # pragma: nocover
+    if connection.vendor != 'postgresql':
+        return
+
+    with connection.cursor() as cursor:
+        database_name = settings.DATABASES['default']['NAME']
+        size_sql = """
+        SELECT pg_catalog.pg_size_pretty(pg_catalog.pg_database_size(d.datname)) as pretty_size,
+               pg_catalog.pg_database_size(d.datname) as bytes_size
+        FROM pg_catalog.pg_database d
+        WHERE d.datname = %s;
+        """
+        cursor.execute(size_sql, [database_name])
+        return cursor.fetchone()

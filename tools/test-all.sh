@@ -15,13 +15,13 @@ echo "OK"
 
 
 DJANGO_DATABASE_HOST=127.0.0.1
-DJANGO_DATABASE_PORT=dsmrreader
+DJANGO_DATABASE_USER=dsmrreader
 DJANGO_DATABASE_PASSWORD=dsmrreader
 # Will be adjusted to 'test_*' by Django.
 DJANGO_DATABASE_NAME=dsmrreader
 
 export DJANGO_DATABASE_HOST
-export DJANGO_DATABASE_PORT
+export DJANGO_DATABASE_USER
 export DJANGO_DATABASE_PASSWORD
 export DJANGO_DATABASE_NAME
 
@@ -29,7 +29,7 @@ export DJANGO_DATABASE_NAME
 echo ""
 DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
 export DJANGO_DATABASE_ENGINE
-echo "--- Testing: DJANGO_DATABASE_ENGINE"
+echo "--- Testing: $DJANGO_DATABASE_ENGINE"
 pytest --cov --cov-report=html --cov-report=term --ds=dsmrreader.config.test -n 2
 
 

@@ -4,6 +4,10 @@ import secrets
 from dsmrreader.config.development import *
 
 
+# Cache may cause weird stuff during automated testing.
+for k in CACHES.keys():
+    CACHES[k]['TIMEOUT'] = 0
+
 # Never use this in production!
 SECRET_KEY = secrets.token_hex(64)
 

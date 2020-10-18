@@ -52,3 +52,19 @@ def check_scheduled_processes(**kwargs):
         )
 
     return issues
+
+
+@receiver(request_status)
+def postgresql_check_database_size(**kwargs):  # pragma: nocover
+    import dsmr_backend.services.backend
+
+    pretty_size, bytes_size = dsmr_backend.services.backend.postgresql_total_database_size()
+
+    if bytes_size < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_DATABASE_SIZE:
+        return
+
+    return MonitoringStatusIssue(
+        __name__,
+        _('Database growing large: {}, consider data cleanup (if not already enabled)').format(pretty_size),
+        timezone.now()
+    )
