@@ -3,8 +3,8 @@ from django.utils import timezone
 
 class MonitoringStatusIssue(object):
     def __init__(self, source, description, since):
-        self.source = source
-        self.description = description
+        self.source = str(source)
+        self.description = str(description)
         self.since = since
 
     def serialize(self):
