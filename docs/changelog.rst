@@ -12,7 +12,7 @@ v4.x releases
 ^^^^^^^^^^^^^
 
 
-v4.5.0 - 2020-xx-xx
+v4.5.0 - 2020-10-18
 -------------------
 
 - ``Deprecation``: Legacy envvars should be renamed [`#1141 <https://github.com/dennissiemensma/dsmr-reader/issues/1141>`_]
