@@ -525,9 +525,6 @@ msgstr "Voor uitlezen via een seriële poort"
 msgid "When using network socket input method"
 msgstr "Voor uitlezen via een netwerk socket"
 
-msgid "Retention policy applies to telegrams and related data that is no longer needed after processing."
-msgstr "Gegevensretentiebeleid is alleen van toepassing op telegrammen en overige data die na verwerking niet meer nodig is."
-
 msgid "Datalogger"
 msgstr "Datalogger"
 
@@ -654,29 +651,29 @@ msgstr "Geeft aan of het datalogger-proces een herstart vereist. Dit zou automat
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
 
-msgid "None (keep all readings)"
-msgstr "Geen (behoud alle metingen)"
+msgid "Disabled (WARNING: Will eventually lead to performance issues!)"
+msgstr "Uitgeschakeld: (WAARSCHUWING: Dit leidt uiteindelijk tot performance problemen!)"
 
-msgid "Discard most readings after one week"
-msgstr "Verwijder de meeste metingen na een week"
+msgid "Clean up most source data after one week (RECOMMENDED)"
+msgstr "Schoont de meeste brondata op na een week (AANBEVOLEN)"
 
-msgid "Discard most readings after one month"
-msgstr "Verwijder de meeste metingen na een maand"
+msgid "Clean up most source data after one month (RECOMMENDED)"
+msgstr "Schoont de meeste brondata op na een maand (AANBEVOLEN)"
 
-msgid "Discard most readings after three months"
-msgstr "Verwijder de meeste metingen na drie maanden"
+msgid "Clean up most source data after three months"
+msgstr "Schoont de meeste brondata op na drie maanden"
 
-msgid "Discard most readings after six months"
-msgstr "Verwijder de meeste metingen na een halfjaar"
+msgid "Clean up most source data after six months"
+msgstr "Schoont de meeste brondata op na een halfjaar"
 
-msgid "Discard most readings after one year"
-msgstr "Verwijder de meeste metingen na een jaar"
+msgid "Clean up most source data after one year"
+msgstr "Schoont de meeste brondata op na een jaar"
 
-msgid "Data retention"
-msgstr "Dataretentie"
+msgid "Data retention policy"
+msgstr "Dataretentiebeleid"
 
-msgid "The lifetime of readings and other data, before discarding them. Some readings will be preserved forever."
-msgstr "De levensduur van metingen, voordat ze opgeschoond worden. Sommige metingen worden voor altijd bewaard."
+msgid "The lifetime of source readings and consumption records. Day and hour statistics will always be preserved indefinitely."
+msgstr "De levensduur van bronmetingen en verbruik. Dat- en uurstatistieken worden nooit verwijderd."
 
 msgid "Retention configuration"
 msgstr "Retentieconfiguratie"
@@ -743,6 +740,27 @@ msgstr "Meterstatistieken wijziging"
 
 msgid "DSMR Meter statistics changes"
 msgstr "Meterstatistieken wijzigingen"
+
+msgid "Data retention policies cleans up source data after a while."
+msgstr "Dataretentiebeleid schoont na verloop van tijd brondata op."
+
+msgid "The following data is never discarded:"
+msgstr "De volgende gegevens worden nooit opgeschoond:"
+
+msgid "Day totals/statistics (as displayed in Archive)."
+msgstr "Dagtotalen/statistieken (zoals weergegeven in het Archief)."
+
+msgid "Hour totals/statistics (as displayed in Archive)."
+msgstr "Uurtotalen/statistieken (zoals weergegeven in het Archief)."
+
+msgid "The first source reading of each hour."
+msgstr "De eerste meting van elk uur."
+
+msgid "The last source reading of each hour."
+msgstr "De laatste meting van elk uur."
+
+msgid "Disabling retention will eventually lead to performance issues."
+msgstr "Uitschakelen van retentiebeleid zorgt op de termijn voor performance problemen."
 
 msgid "Dropbox"
 msgstr "Dropbox"
@@ -2569,6 +2587,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Retention policy applies to telegrams and related data that is no longer needed after processing."
+#~ msgstr "Gegevensretentiebeleid is alleen van toepassing op telegrammen en overige data die na verwerking niet meer nodig is."
+
+#~ msgid "None (keep all readings)"
+#~ msgstr "Geen (behoud alle metingen)"
+
+#~ msgid "Discard most readings after one week"
+#~ msgstr "Verwijder de meeste metingen na een week"
+
+#~ msgid "Discard most readings after one month"
+#~ msgstr "Verwijder de meeste metingen na een maand"
 
 #~ msgid "By default this integration will be disabled on connection errors, to prevent network flooding. You can override this behaviour by enabling this option. It will then no longer disable itself in this situation."
 #~ msgstr "Standaard schakelt deze integratie zichzelf uit bij verbindingsfouten, om (onnodige) netwerkload te voorkomen. Je kunt dit gedrag laten negeren door deze optie in te schakelen. Dit voorkomt uitschakelen van de integratie bij netwerkfouten."

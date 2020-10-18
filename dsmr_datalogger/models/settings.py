@@ -110,22 +110,23 @@ class RetentionSettings(ModelUpdateMixin, SingletonModel):
     RETENTION_HALF_YEAR = 6 * RETENTION_MONTH
     RETENTION_YEAR = 12 * RETENTION_MONTH
     RETENTION_CHOICES = (
-        (RETENTION_NONE, _('None (keep all readings)')),
-        (RETENTION_WEEK, _('Discard most readings after one week')),
-        (RETENTION_MONTH, _('Discard most readings after one month')),
-        (RETENTION_THREE_MONTHS, _('Discard most readings after three months')),
-        (RETENTION_HALF_YEAR, _('Discard most readings after six months')),
-        (RETENTION_YEAR, _('Discard most readings after one year')),
+        (RETENTION_NONE, _('Disabled (WARNING: Will eventually lead to performance issues!)')),
+        (RETENTION_WEEK, _('Clean up most source data after one week (RECOMMENDED)')),
+        (RETENTION_MONTH, _('Clean up most source data after one month (RECOMMENDED)')),
+        (RETENTION_THREE_MONTHS, _('Clean up most source data after three months')),
+        (RETENTION_HALF_YEAR, _('Clean up most source data after six months')),
+        (RETENTION_YEAR, _('Clean up most source data after one year')),
     )
 
     data_retention_in_hours = models.IntegerField(
         blank=True,
         null=True,
-        default=RETENTION_YEAR,
+        default=RETENTION_MONTH,
         choices=RETENTION_CHOICES,
-        verbose_name=_('Data retention'),
+        verbose_name=_('Data retention policy'),
         help_text=_(
-            'The lifetime of readings and other data, before discarding them. Some readings will be preserved forever.'
+            'The lifetime of source readings and consumption records. Day and hour statistics will always be preserved '
+            'indefinitely.'
         )
     )
 

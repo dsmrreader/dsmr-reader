@@ -1,0 +1,20 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+
+{% block field_sets %}
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+        {% blocktranslate %}Data retention policies cleans up source data after a while.{% endblocktranslate %}
+        {% blocktranslate %}The following data is never discarded:{% endblocktranslate %}
+        <ul class="">
+            <li>{% blocktranslate %}Day totals/statistics (as displayed in Archive).{% endblocktranslate %}</li>
+            <li>{% blocktranslate %}Hour totals/statistics (as displayed in Archive).{% endblocktranslate %}</li>
+            <li>{% blocktranslate %}The first source reading of each hour.{% endblocktranslate %}</li>
+            <li>{% blocktranslate %}The last source reading of each hour.{% endblocktranslate %}</li>
+        </ul>
+        {% blocktranslate %}Disabling retention will eventually lead to performance issues.{% endblocktranslate %}
+    </div>
+
+    {{ block.super }}
+
+{% endblock %}

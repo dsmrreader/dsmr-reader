@@ -58,16 +58,8 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(RetentionSettings)
 class RetentionSettingsAdmin(SingletonModelAdmin):
-    fieldsets = (
-        (
-            None, {
-                'fields': ['data_retention_in_hours'],
-                'description': _(
-                    'Retention policy applies to telegrams and related data that is no longer needed after processing.'
-                )
-            }
-        ),
-    )
+    change_form_template = 'dsmr_datalogger/retention_settings/change_form.html'
+    list_display = ('data_retention_in_hours', )
 
 
 @admin.register(DsmrReading)

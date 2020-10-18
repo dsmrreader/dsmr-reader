@@ -38,4 +38,4 @@ class TestRetentionSettings(TestCase):
         self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
 
     def test_data_retention_in_hours(self):
-        self.assertEqual(self.instance.data_retention_in_hours, RetentionSettings.RETENTION_YEAR)
+        self.assertEqual(self.instance.data_retention_in_hours, RetentionSettings.RETENTION_MONTH)
