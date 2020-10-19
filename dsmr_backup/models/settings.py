@@ -50,7 +50,7 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
 class DropboxSettings(ModelUpdateMixin, SingletonModel):
     """ Dropbox backup upload settings. """
     access_token = models.CharField(
-        max_length=128,
+        max_length=255,
         default=None,
         null=True,
         blank=True,

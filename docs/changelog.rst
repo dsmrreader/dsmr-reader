@@ -32,6 +32,7 @@ v4.5.0 - 2020-10-19
 - ``Fixed``: Automatisch opnieuw verbinden bij MQTT-connectiefouten [`#1091 <https://github.com/dennissiemensma/dsmr-reader/issues/1091>`_]
 - ``Fixed``: Change incorrect msgstr - by @gerard33 [`#1144 <https://github.com/dennissiemensma/dsmr-reader/issues/1144>`_]
 - ``Fixed``: Add missing Telegram text parts to Admin: Notifications - by @gerard33 [`#1146 <https://github.com/dennissiemensma/dsmr-reader/issues/1146>`_]
+- ``Fixed``: Dropbox access token max lengte vergroten [`#1157 <https://github.com/dennissiemensma/dsmr-reader/issues/1157>`_]
 
 
 v4.4.3 - 2020-09-28

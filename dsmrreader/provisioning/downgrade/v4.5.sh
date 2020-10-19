@@ -3,7 +3,7 @@
 # Dump for DSMR-reader v4.5
 ./manage.py migrate dsmr_api 0003_create_api_user
 ./manage.py migrate dsmr_backend 0015_backend_restart_required
-./manage.py migrate dsmr_backup 0011_remove_backupsettings_latest_backup
+./manage.py migrate dsmr_backup 0012_increase_dropbox_token_length
 ./manage.py migrate dsmr_consumption 0018_allow_inversed_fixed_costs
 ./manage.py migrate dsmr_datalogger 0029_default_retention_to_month
 ./manage.py migrate dsmr_frontend 0043_default_color_update_tariff_2
