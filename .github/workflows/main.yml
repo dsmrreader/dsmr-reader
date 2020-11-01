@@ -14,12 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Pyenv Build
-        uses: gabrielfalcao/pyenv-action@97ed31ab6710c4f813e671d20687adf6aa8f6c5d
+      - name: Setup Python
+        uses: actions/setup-python@v2.1.4
         with:
-          command:
-
-          default: "3.6,3.7,3.8"
+          # Version range or exact version of a Python version to use, using SemVer's version range syntax.
+          python-version: # optional, default is 3.x
+          # The target architecture (x86, x64) of the Python interpreter.
+          architecture: # optional
+          # Used to pull python distributions from actions/python-versions. Since there's a default, this is typically not supplied by the user.
+          token: # optional, default is ${{ github.token }}
 
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
