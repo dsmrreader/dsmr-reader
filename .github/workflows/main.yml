@@ -30,7 +30,6 @@ jobs:
       - name: Setup PostgreSQL
         uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
         with:
-          postgresql version: # optional, default is latest
           postgresql db: test_dsmrreader
           postgresql user: root
           postgresql password: rootpw
@@ -40,7 +39,7 @@ jobs:
         with:
           path: |
             ~/.cache/pip
-            /opt/hostedtoolcache/Python/3.6.12/x64
+            $pythonLocation
           key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
 
       - name: Install dependencies
