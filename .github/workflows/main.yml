@@ -45,6 +45,13 @@ jobs:
       - name: Check autopep8
         run: autopep8 -r . --diff --exit-code
 
+      - name: Run tests
+        run: py.test --cov --cov-report=xml
+        env:
+            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+            DJANGO_SECRET_KEY: non-production-value
+            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
+
 #      - name: Run a multi-line script
 #        run: |
 #          easy install pip
