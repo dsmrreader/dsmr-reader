@@ -36,10 +36,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
 
-      - name: Check code style
-        run: |
-          pylama
-          autopep8 -r . --diff --exit-code
+      - name: Check pylama
+        run: pylama
+
+      - name: Check autopep8
+        run: autopep8 -r . --diff --exit-code
 
 #      - name: Run a multi-line script
 #        run: |
