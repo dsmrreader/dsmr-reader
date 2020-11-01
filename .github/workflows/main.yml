@@ -25,6 +25,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: $pythonLocation
+        run: echo $pythonLocation
+
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
         with:
