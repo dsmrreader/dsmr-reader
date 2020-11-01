@@ -9,6 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - 3.6
+#          - 3.7
+#          - 3.8
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -17,24 +23,29 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2.1.4
         with:
-          python-version: 3.6
+          python-version: ${{ matrix.python-version }}
 
-      - name: Cache
-        uses: actions/cache@v2.1.2
-        with:
-          path: /var/tmp/pip-cache/
-          key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          ls -l /opt/hostedtoolcache/Python/
+
+#      - name: Cache
+#        uses: actions/cache@v2.1.2
+#        with:
+#          path: /var/tmp/pip-cache/
+#          key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
 
 #      - name: Run a multi-line script
 #        run: |
 #          easy install pip
 #          echo test, and deploy your project.
 
-      - name: Pip Installer
-        uses: BSFishy/pip-action@8f2d471d809dc20b6ada98c91910b6ae6243f318
-        with:
-          requirements: /home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt
-          extra: --cache-dir /var/tmp/pip-cache/
+#      - name: Pip Installer
+#        uses: BSFishy/pip-action@8f2d471d809dc20b6ada98c91910b6ae6243f318
+#        with:
+#          requirements: /home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt
+#          extra: --cache-dir /var/tmp/pip-cache/
 
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
