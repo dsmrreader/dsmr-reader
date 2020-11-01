@@ -27,11 +27,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python --version
           python -m pip install --upgrade pip
-          ls -l /opt/hostedtoolcache/Python/3.6.12/
           pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
-          ls -l /opt/hostedtoolcache/Python/3.6.12/
+
+      - name: Check code style
+        run: |
+          pylama
+          autopep8 -r . --diff --exit-code
 
 #      - name: Cache
 #        uses: actions/cache@v2.1.2
