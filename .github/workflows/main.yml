@@ -19,20 +19,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: System dependencies
-        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
-
       - name: Setup Python
         uses: actions/setup-python@v2.1.4
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Setup PostgreSQL
-        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
-        with:
-          postgresql db: test_dsmrreader
-          postgresql user: root
-          postgresql password: rootpw
+      - name: System dependencies
+        run: |
+          sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+
+      - name: PostgreSQL setup
+        run: |
+          sudo apt install -y postgresql python3-psycopg2
+          sudo -u postgres createuser -DSR testuser
+          sudo -u postgres createdb -O testuser test_dsmrreader
+          sudo -u postgres psql -c "alter user testuser with password 'testpassword';"
 
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
@@ -68,7 +69,8 @@ jobs:
             DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
             DJANGO_DATABASE_HOST: 127.0.0.1
             DJANGO_DATABASE_NAME: test_dsmrreader
-            DJANGO_DATABASE_USER: root
+            DJANGO_DATABASE_USER: testuser
+            DJANGO_DATABASE_PASSWORD: testpassword
 
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
