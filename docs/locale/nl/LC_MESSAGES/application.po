@@ -1,3 +1,4 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -5,12 +6,11 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../application.rst:2
 msgid "Setting up the application"
@@ -26,109 +26,112 @@ msgstr "De applicatie benaderen"
 
 #: ../../application.rst:11
 msgid ""
-"Now it's time to view the application in your browser to check whether the GUI "
-"works as well. Just enter the ip address or hostname of your RaspberryPi in "
-"your browser."
+"Now it's time to view the application in your browser to check whether "
+"the GUI works as well. Just enter the ip address or hostname of your "
+"RaspberryPi in your browser."
 msgstr ""
-"Dit is het moment om de applicatie te bekijken in je browser om te zien of "
-"alles naar behoren werkt. Vul het IP-adres van je RaspberryPi in je browser."
+"Dit is het moment om de applicatie te bekijken in je browser om te zien "
+"of alles naar behoren werkt. Vul het IP-adres van je RaspberryPi in je "
+"browser."
 
 #: ../../application.rst:13
 msgid ""
-"Did you install using a monitor attached to the RaspberryPi and you don't know "
-"what address your device has? Just type ``ifconfig | grep addr`` and it should "
-"display an ip address, for example::"
+"Did you install using a monitor attached to the RaspberryPi and you don't"
+" know what address your device has? Just type ``ifconfig | grep addr`` "
+"and it should display an ip address, for example::"
 msgstr ""
-"Heb je de applicatie geinstalleerd met een monitor aan je RaspberryPi en weet "
-"je het IP-adres niet? Typ in dat geval het volgende in en je krijgt het IP-"
-"adres te zien: ``ifconfig | grep addr`` , Bijvoorbeeld:"
+"Heb je de applicatie geinstalleerd met een monitor aan je RaspberryPi en "
+"weet je het IP-adres niet? Typ in dat geval het volgende in en je krijgt "
+"het IP-adres te zien: ``ifconfig | grep addr`` , Bijvoorbeeld:"
 
 #: ../../application.rst:19
 msgid ""
-"In this example the ip address is ``192.168.178.150``. If possible, you should "
-"assign a static ip address to your device in your router. This will make sure "
-"you will always be able to find the application at the same location."
+"In this example the ip address is ``192.168.178.150``. If possible, you "
+"should assign a static ip address to your device in your router. This "
+"will make sure you will always be able to find the application at the "
+"same location."
 msgstr ""
-"In dit voorbeeld is het IP-adres ``192.168.178.150``. Het is aan te raden om je "
-"apparaat een vast IP-adres te geven in je router. Dit zorgt ervoor dat je de "
-"applicatie altijd op dezelfde locatie kan terugvinden."
+"In dit voorbeeld is het IP-adres ``192.168.178.150``. Het is aan te raden"
+" om je apparaat een vast IP-adres te geven in je router. Dit zorgt ervoor"
+" dat je de applicatie altijd op dezelfde locatie kan terugvinden."
 
 #: ../../application.rst:24
 msgid "Data preservation & backups"
 msgstr "Databehoud & backups"
 
-#: ../../application.rst:26
+#: ../../application.rst:28
 msgid ":doc:`More information can be found here<data_integrity>`."
 msgstr ":doc:`Meer informatie kun je hier vinden<data_integrity>`."
 
-#: ../../application.rst:30
+#: ../../application.rst:32
 msgid "Reboot test"
 msgstr "Herstart-test"
 
-#: ../../application.rst:31
+#: ../../application.rst:33
 msgid ""
-"You surely want to ``reboot`` your device and check whether everything comes up "
-"automatically again with ``sudo supervisorctl status``. This will make sure "
-"your data logger 'survives' any power surges."
+"You surely want to ``reboot`` your device and check whether everything "
+"comes up automatically again with ``sudo supervisorctl status``. This "
+"will make sure your data logger 'survives' any power surges."
 msgstr ""
-"Herstart het apparaat met ``reboot`` om te testen of alles automatisch opstart. "
-"Je zou na de herstart alles moeten zien draaien via ``sudo supervisorctl "
-"status``. Dit zorgt ervoor dat je datalogger eventuele stroomstoringen "
-"overleeft (of wanneer je zelf de stroom eraf haalt)."
+"Herstart het apparaat met ``reboot`` om te testen of alles automatisch "
+"opstart. Je zou na de herstart alles moeten zien draaien via ``sudo "
+"supervisorctl status``. Dit zorgt ervoor dat je datalogger eventuele "
+"stroomstoringen overleeft (of wanneer je zelf de stroom eraf haalt)."
 
-#: ../../application.rst:35
+#: ../../application.rst:37
 msgid "Optional: Setting up an USB drive for backups"
 msgstr "Optioneel: Een USB-drive gebruiken voor backup's"
 
-#: ../../application.rst:39
+#: ../../application.rst:41
+#, fuzzy
 msgid ""
-"For more information about (optionally) setting up an USB drive for backups, "
-"see `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/268>`_."
+"For more information about (optionally) setting up an USB drive for "
+"backups, see `Data preservation/backups #268 "
+"<https://github.com/dsmrreader/dsmr-reader/issues/268>`_."
 msgstr ""
-"Voor meer informatie om (optioneel) een USB-drive te gebruiken voor backup's, "
-"zie `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-"
-"reader/issues/268>`_."
+"Voor meer informatie om (optioneel) een USB-drive te gebruiken voor "
+"backup's, zie `Data preservation/backups #268 "
+"<https://github.com/dennissiemensma/dsmr-reader/issues/268>`_."
 
-#: ../../application.rst:43
+#: ../../application.rst:45
 msgid "Application updates (bug fixes & new features)"
 msgstr "Applicatie updates (bugfixes & nieuwe mogelijkheden)"
 
-#: ../../application.rst:47
+#: ../../application.rst:49
 msgid ":doc:`This information can be found here<faq>`."
 msgstr ":doc:`Deze informatie kun je hier terugvinden<faq>`."
 
-#: ../../application.rst:51
+#: ../../application.rst:53
 msgid "Public webinterface warning"
 msgstr "Waarschuwing voor publiekelijke toegang"
 
-#: ../../application.rst:55
+#: ../../application.rst:57
 msgid ""
-"If you expose your application to the outside world or a public network, you "
-"might want to take additional steps:"
+"If you expose your application to the outside world or a public network, "
+"you might want to take additional steps:"
 msgstr ""
 "Wanneer je de applicatie koppelt aan het Internet wil je sowieso extra "
 "maatregelen nemen:"
 
-#: ../../application.rst:57
+#: ../../application.rst:59
 msgid ""
-"Enable password protection :doc:`in the configuration<configuration>` for the "
-"entire application, available since DSMR-reader ``v4.0``."
+"Enable password protection :doc:`in the configuration<configuration>` for"
+" the entire application, available since DSMR-reader ``v4.0``."
 msgstr ""
 "Schakel applicatie-brede wachtwoordbescherming in :doc:`in de "
 "configuratie<configuration>`, beschikbaar sinds DSMR-reader ``v4.0``."
 
-#: ../../application.rst:59
-msgid ""
-"Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu."
-"com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for "
-"yourself) and port ``80``."
-msgstr ""
-"Installeer een firewall, zoals ``ufw`` (`UncomplicatedFirewall <https://wiki."
-"ubuntu.com/UncomplicatedFirewall>`_) and beperk al het toegestane verkeer tot "
-"poort ``22`` (puur voor jezelf) en poort ``80``."
-
 #: ../../application.rst:61
+msgid ""
+"Install a firewall, such as ``ufw`` `UncomplicatedFirewall "
+"<https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to"
+" port ``22`` (only for yourself) and port ``80``."
+msgstr ""
+"Installeer een firewall, zoals ``ufw`` (`UncomplicatedFirewall "
+"<https://wiki.ubuntu.com/UncomplicatedFirewall>`_) and beperk al het "
+"toegestane verkeer tot poort ``22`` (puur voor jezelf) en poort ``80``."
+
+#: ../../application.rst:63
 msgid "Use TLS (HTTPS) when possible."
 msgstr "Gebruik TLS (HTTPS) wanneer mogelijk."
 

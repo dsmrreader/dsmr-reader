@@ -9,12 +9,11 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../contributing.rst:2
 msgid "Contributing"
@@ -30,19 +29,20 @@ msgstr "Feedback / Bugs / Contact"
 
 #: ../../contributing.rst:8
 msgid ""
-"Any feedback or input is appreciated. It doesn't matter whether you run into "
-"problems or just want to get in touch, just fire away!"
+"Any feedback or input is appreciated. It doesn't matter whether you run "
+"into problems or just want to get in touch, just fire away!"
 msgstr ""
-"Het maakt niet uit of je ergens tegenaan loopt of gewoon in contact wil komen, "
-"vraag maar raak!"
+"Het maakt niet uit of je ergens tegenaan loopt of gewoon in contact wil "
+"komen, vraag maar raak!"
 
 #: ../../contributing.rst:13
+#, fuzzy
 msgid ""
-"`Please create an issue on Github <https://github.com/dennissiemensma/dsmr-"
+"`Please create an issue on Github <https://github.com/dsmrreader/dsmr-"
 "reader/issues>`_ to get in contact."
 msgstr ""
-"`Maak op Github een ticket aan met je vraag of opmerking <https://github.com/"
-"dsmrreader/dsmr-reader/issues>`_."
+"`Maak op Github een ticket aan met je vraag of opmerking "
+"<https://github.com/dsmrreader/dsmr-reader/issues>`_."
 
 #: ../../contributing.rst:17
 msgid "Developing and creating pull requests"
@@ -50,18 +50,20 @@ msgstr "Ontwikkelen en pull requests aanmaken"
 
 #: ../../contributing.rst:18
 msgid ""
-"Pull requests are appreciated, but please note that you should discuss any "
-"changes with a Github ticket first. It would be a shame if you'd put any "
-"effort in something that won't get merged after all."
+"Pull requests are appreciated, but please note that you should discuss "
+"any changes with a Github ticket first. It would be a shame if you'd put "
+"any effort in something that won't get merged after all."
 msgstr ""
-"Pull requests worden gewaardeerd, maar wees ervan bewust dat je wijzigingen "
-"het beste eerst kunt bespreken op Github via een ticket. Het zou zonde zijn "
-"wanneer je namelijk tijd steekt in iets wat achteraf niet gemerged wordt."
+"Pull requests worden gewaardeerd, maar wees ervan bewust dat je "
+"wijzigingen het beste eerst kunt bespreken op Github via een ticket. Het "
+"zou zonde zijn wanneer je namelijk tijd steekt in iets wat achteraf niet "
+"gemerged wordt."
 
 #: ../../contributing.rst:21
 msgid ""
-"For more information about how to develop, :doc:`see the page dedicated to "
-"this topic<development>`."
+"For more information about how to develop, :doc:`see the page dedicated "
+"to this topic<development>`."
 msgstr ""
 "Voor meer informatie over hoe te ontwikkelen, :doc:`zie deze pagina "
 "daarvoor<development>`."
+

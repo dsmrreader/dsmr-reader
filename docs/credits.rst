@@ -3,8 +3,9 @@ Credits / Hall of Fame
 
 Thanks to
 ---------
-- `Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_
-- `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_
+- `Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)
+- `Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)
+- `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)
 - All the `other contributors <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!
 
 
@@ -21,17 +22,12 @@ Also `Read The Docs <https://readthedocs.org/>`_ for freely hosting the document
 And `CircleCI <https://circleci.com/>`_ for freely hosting the automated tests for DSMR-reader, plus `Codecov <https://codecov.io>`_ for particitating in it as well.
 
 
-Also many thanks to...
-----------------------
-- ... the `pull requests <https://github.com/dsmrreader/dsmr-reader/pulls>`_.
-- ... all `the ideas, improvements and bugs reported <https://github.com/dsmrreader/dsmr-reader/issues>`_ for the past years.
-
-
 And don't forget
 ----------------
 Credits to the following software and projects:
 
 - The many external PIP packages used in DSMR-reader!
+- Github
 - `Raspbian <https://www.raspbian.org/>`_
 - `Django Project <https://www.djangoproject.com/>`_
 - `Supervisor <http://supervisord.org/>`_
