@@ -1,3 +1,8 @@
+workflows:
+    version: 2
+    test-dsmrreader:
+        jobs: ~
+
 ## Dummy vars, used for anchors.
 #x-mysql-db-env: &mysql-db-env
 #   # https://circleci.com/docs/2.0/postgres-config/#example-mysql-project

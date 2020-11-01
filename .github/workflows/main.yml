@@ -17,8 +17,10 @@ jobs:
 #          - 3.8
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: System dependencies
+        run: install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Setup Python
         uses: actions/setup-python@v2.1.4
@@ -31,7 +33,9 @@ jobs:
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
         with:
-          path: ~/.cache/pip
+          path: |
+            ~/.cache/pip
+            /opt/hostedtoolcache/Python/3.6.12/x64
           key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
 
       - name: Install dependencies
@@ -45,7 +49,7 @@ jobs:
       - name: Check autopep8
         run: autopep8 -r . --diff --exit-code
 
-      - name: Run tests
+      - name: Run SQLite tests
         run: py.test --cov --cov-report=xml
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
