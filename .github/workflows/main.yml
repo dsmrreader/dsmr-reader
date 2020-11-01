@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: System dependencies
-        run: install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+        run: apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Setup Python
         uses: actions/setup-python@v2.1.4
