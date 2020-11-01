@@ -1,41 +1,75 @@
+# This is a basic workflow to help you get started with Actions
+
 name: CI
 
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the v4 branch
 on:
   push:
     branches: [ v4 ]
   pull_request:
     branches: [ v4 ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Pyenv Build
-        uses: gabrielfalcao/pyenv-action@97ed31ab6710c4f813e671d20687adf6aa8f6c5d
-        with:
-          command:
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
 
-          default: "3.6,3.7,3.8"
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
 
-#      - name: Setup MySQL
-#        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
+#name: CI
+#
+#on:
+#  push:
+#    branches: [ v4 ]
+#  pull_request:
+#    branches: [ v4 ]
+#
+#jobs:
+#  # This workflow contains a single job called "build"
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Pyenv Build
+#        uses: gabrielfalcao/pyenv-action@97ed31ab6710c4f813e671d20687adf6aa8f6c5d
 #        with:
-#          mysql version:
-#          mysql root password: # optional, default is
-#          # MYSQL_DATABASE - name for the default database that is created
-#          mysql database: test_dsmrreader
-#          mysql user: # optional, default is
-#          # MYSQL_PASSWORD - specified superuser password which user is power for created database
-#          mysql password: # optional, default is
-
-      - name: Setup PostgreSQL
-        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
-        with:
-          postgresql version: # optional, default is latest
-          postgresql db: test_dsmrreader
-          postgresql user: root
-          postgresql password: rootpw
+#          command:
+#
+#          default: "3.6,3.7,3.8"
+#
+##      - name: Setup MySQL
+##        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
+##        with:
+##          mysql version:
+##          mysql root password: # optional, default is
+##          # MYSQL_DATABASE - name for the default database that is created
+##          mysql database: test_dsmrreader
+##          mysql user: # optional, default is
+##          # MYSQL_PASSWORD - specified superuser password which user is power for created database
+##          mysql password: # optional, default is
+#
+#      - name: Setup PostgreSQL
+#        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
+#        with:
+#          postgresql version: # optional, default is latest
+#          postgresql db: test_dsmrreader
+#          postgresql user: root
+#          postgresql password: rootpw
