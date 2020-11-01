@@ -77,7 +77,6 @@ jobs:
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
             DJANGO_DATABASE_HOST: process.env.POSTGRES_HOST
-            DJANGO_DATABASE_PORT: process.env.POSTGRES_PORT
             DJANGO_DATABASE_NAME: process.env.POSTGRES_DB
             DJANGO_DATABASE_USER: process.env.POSTGRES_USER
             DJANGO_DATABASE_PASSWORD: process.env.POSTGRES_PASSWORD
