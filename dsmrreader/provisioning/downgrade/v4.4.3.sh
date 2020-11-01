@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Dump for DSMR-reader v4.4.3
 ./manage.py migrate dsmr_api 0003_create_api_user

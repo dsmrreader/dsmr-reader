@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
 # Sending a HANGUP signal to Gunicorn's master process will gracefully reload its children.

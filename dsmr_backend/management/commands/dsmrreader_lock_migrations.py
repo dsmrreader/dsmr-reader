@@ -15,7 +15,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):
 
         current_app = None
         latest_line = None
-        lock_content = "#!/bin/bash\n\n"
+        lock_content = "#!/usr/bin/env bash\n\n"
         lock_content += "# Dump for DSMR-reader v{}\n".format(settings.DSMRREADER_VERSION)
 
         for line in self._intercept_command_stdout('showmigrations', no_color=True).split("\n"):
