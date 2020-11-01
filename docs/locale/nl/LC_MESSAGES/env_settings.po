@@ -150,6 +150,7 @@ msgstr "Hernoemd naar ``DJANGO_DATABASE_CONN_MAX_AGE`` sinds DSMR-reader ``v4.5`
 
 #: ../../env_settings.rst:135 ../../env_settings.rst:148
 #: ../../env_settings.rst:225 ../../env_settings.rst:235
+#: ../../env_settings.rst:249
 msgid "**Optional**"
 msgstr "**Optioneel**"
 
@@ -267,6 +268,14 @@ msgstr "De plugins die DSMR-reader gebruikt. Laat weg als je dit niet gebruikt. 
 #: ../../env_settings.rst:243
 msgid "For more information, :doc:`see Plugins<plugins>`."
 msgstr "Voor meer informatie, :doc:`zie Plugins<plugins>`."
+
+#: ../../env_settings.rst:248
+msgid "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
+msgstr "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
+
+#: ../../env_settings.rst:251
+msgid "Whether to suppress any warnings regarding too many readings stored or the database size. Set it to ``True`` to disable the warnings or omit it to use the default (``False``). Suppress at your own risk. Added in DSMR-reader ``v4.6``."
+msgstr "Gebruik dit om waarschuwingen over \"te veel opgeslagen metingen\" of een \"te grote database\" te onderdrukken. Stel in op ``True`` om deze waarschuwingen uit te schakelen of laat het weg om de standaardwaarde (``False``) te gebruiken. Gebruik op eigen risico. Toegevoegd sinds DSMR-reader ``v4.6``."
 
 #~ msgid "The max lifetime for the database connections. Omit to use the default."
 #~ msgstr "De maximale levensduur voor databaseverbindingen. Laat weg om de standaardinstelling te gebruiken."

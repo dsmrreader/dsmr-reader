@@ -15,8 +15,21 @@ v4.x releases
 v4.6.0 - 2020-11-01
 -------------------
 
+.. note::
+
+    In order to point your local installation to the new location on Github, execute the following commands::
+
+        sudo su - dsmr
+        git remote -v
+        git remote set-url origin https://github.com/dsmrreader/dsmr-reader.git
+        git remote -v
+
+    The last command should reflect the new URL's.
+
+
 - ``Changed``: DSMR-reader verplaatst op Github [`#1174 <https://github.com/dsmrreader/dsmr-reader/issues/1174>`_]
 
+- ``Added``: Instelling om waarschuwingen over data-grootte te negeren [`#1173 <https://github.com/dsmrreader/dsmr-reader/issues/1173>`_]
 
 
 v4.5.0 - 2020-10-19

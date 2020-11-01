@@ -241,3 +241,13 @@ Note that this should be a comma separated list when specifying multiple plugins
     DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1,dsmr_plugins.modules.plugin_name2
 
 For more information, :doc:`see Plugins<plugins>`.
+
+----
+
+``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Optional**
+
+Whether to suppress any warnings regarding too many readings stored or the database size.
+Set it to ``True`` to disable the warnings or omit it to use the default (``False``).
+Suppress at your own risk. Added in DSMR-reader ``v4.6``.
