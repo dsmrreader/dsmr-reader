@@ -25,6 +25,12 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Cached dependencies
+        uses: actions/cache@v2.1.2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -34,12 +40,6 @@ jobs:
         run: |
           pylama
           autopep8 -r . --diff --exit-code
-
-#      - name: Cache
-#        uses: actions/cache@v2.1.2
-#        with:
-#          path: /var/tmp/pip-cache/
-#          key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
 
 #      - name: Run a multi-line script
 #        run: |
