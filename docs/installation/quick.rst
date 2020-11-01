@@ -58,7 +58,7 @@ Continue::
     sudo chown -R dsmr:dsmr /var/www/dsmrreader/
     
     # Code checkout
-    sudo git clone https://github.com/dennissiemensma/dsmr-reader.git /home/dsmr/dsmr-reader
+    sudo git clone https://github.com/dsmrreader/dsmr-reader.git /home/dsmr/dsmr-reader
     sudo chown -R dsmr:dsmr /home/dsmr/
     
     # Virtual env

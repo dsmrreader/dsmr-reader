@@ -30,10 +30,10 @@ msgstr "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_"
 
 #: ../../credits.rst:8
 msgid ""
-"All the `other contributors <https://github.com/dennissiemensma/dsmr-reader/"
+"All the `other contributors <https://github.com/dsmrreader/dsmr-reader/"
 "graphs/contributors>`_!"
 msgstr ""
-"Alle `overige bijdrages <https://github.com/dennissiemensma/dsmr-reader/"
+"Alle `overige bijdrages <https://github.com/dsmrreader/dsmr-reader/"
 "graphs/contributors>`_!"
 
 #: ../../credits.rst:12
@@ -72,19 +72,19 @@ msgstr "En veel dank aan..."
 
 #: ../../credits.rst:26
 msgid ""
-"... the `pull requests <https://github.com/dennissiemensma/dsmr-reader/"
+"... the `pull requests <https://github.com/dsmrreader/dsmr-reader/"
 "pulls>`_."
 msgstr ""
-"... de `pull requests <https://github.com/dennissiemensma/dsmr-reader/"
+"... de `pull requests <https://github.com/dsmrreader/dsmr-reader/"
 "pulls>`_."
 
 #: ../../credits.rst:27
 msgid ""
 "... all `the ideas, improvements and bugs reported <https://github.com/"
-"dennissiemensma/dsmr-reader/issues>`_ for the past years."
+"dsmrreader/dsmr-reader/issues>`_ for the past years."
 msgstr ""
 "... alle `ideeën, verbeteringen, suggesties en foutmeldingen <https://github."
-"com/dennissiemensma/dsmr-reader/issues>`_ de afgelopen jaren."
+"com/dsmrreader/dsmr-reader/issues>`_ de afgelopen jaren."
 
 #: ../../credits.rst:31
 msgid "And don't forget"

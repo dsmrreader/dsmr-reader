@@ -63,7 +63,7 @@ More signals may be available for use, please be careful when binding Django sav
 
 Example #1: Upload data to second PVOutput account
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This is an example of issue `#407 <https://github.com/dennissiemensma/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account.
+This is an example of issue `#407 <https://github.com/dsmrreader/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account.
 
 
 :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
@@ -102,7 +102,7 @@ Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your second
 
 Example #2: Forwarding raw telegram data to another serial port
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This is an example of issue `#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another serial port.
+This is an example of issue `#557 <https://github.com/dsmrreader/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another serial port.
 
 :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
 

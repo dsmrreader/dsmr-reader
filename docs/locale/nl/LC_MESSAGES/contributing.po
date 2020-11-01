@@ -42,7 +42,7 @@ msgid ""
 "reader/issues>`_ to get in contact."
 msgstr ""
 "`Maak op Github een ticket aan met je vraag of opmerking <https://github.com/"
-"dennissiemensma/dsmr-reader/issues>`_."
+"dsmrreader/dsmr-reader/issues>`_."
 
 #: ../../contributing.rst:17
 msgid "Developing and creating pull requests"

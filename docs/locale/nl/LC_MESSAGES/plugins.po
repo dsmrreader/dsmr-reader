@@ -117,8 +117,8 @@ msgid "Example #1: Upload data to second PVOutput account"
 msgstr "Voorbeeld #1: Upload gegevens naar een tweede PVOutput-account"
 
 #: ../../plugins.rst:66
-msgid "This is an example of issue `#407 <https://github.com/dennissiemensma/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account."
-msgstr "Dit is een voorbeeld van issue `#407 <https://github.com/dennissiemensma/dsmr-reader/issues/407>`_, met het verzoek om gegevens te uploaden naar een tweede PVOutput-account."
+msgid "This is an example of issue `#407 <https://github.com/dsmrreader/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account."
+msgstr "Dit is een voorbeeld van issue `#407 <https://github.com/dsmrreader/dsmr-reader/issues/407>`_, met het verzoek om gegevens te uploaden naar een tweede PVOutput-account."
 
 #: ../../plugins.rst:69 ../../plugins.rst:107 ../../plugins.rst:156
 #: ../../plugins.rst:199
@@ -138,8 +138,8 @@ msgid "Example #2: Forwarding raw telegram data to another serial port"
 msgstr "Voorbeeld #2: Doorsturen van ruwe telegram-gegevens naar een andere seriële poort"
 
 #: ../../plugins.rst:105
-msgid "This is an example of issue `#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another serial port."
-msgstr "Dit is een voorbeeld van issue `#557 <https://github.com/dennissiemensma/dsmr-reader/issues/557>`_, wat ervoor zorgt dat je DSMR-telegrammen kunt doorsturen naar een andere seriële poort."
+msgid "This is an example of issue `#557 <https://github.com/dsmrreader/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another serial port."
+msgstr "Dit is een voorbeeld van issue `#557 <https://github.com/dsmrreader/dsmr-reader/issues/557>`_, wat ervoor zorgt dat je DSMR-telegrammen kunt doorsturen naar een andere seriële poort."
 
 #: ../../plugins.rst:112
 msgid "Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new file)::"

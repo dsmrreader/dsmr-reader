@@ -38,7 +38,7 @@ Optional: Setting up an USB drive for backups
 
 .. seealso::
     
-    For more information about (optionally) setting up an USB drive for backups, see `Data preservation/backups #268 <https://github.com/dennissiemensma/dsmr-reader/issues/268>`_.
+    For more information about (optionally) setting up an USB drive for backups, see `Data preservation/backups #268 <https://github.com/dsmrreader/dsmr-reader/issues/268>`_.
 
 
 Application updates (bug fixes & new features)

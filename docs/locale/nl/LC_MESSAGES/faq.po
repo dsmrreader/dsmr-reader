@@ -34,7 +34,7 @@ msgstr ""
 
 #: ../../faq.rst:15
 msgid ""
-"`Create an issue at Github <https://github.com/dennissiemensma/dsmr-reader/"
+"`Create an issue at Github <https://github.com/dsmrreader/dsmr-reader/"
 "issues/new>`_."
 msgstr ""
 "`Maak een issue aan op Github <https://github.com/dennissiemensma/dsmr-"

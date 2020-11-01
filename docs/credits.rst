@@ -5,7 +5,7 @@ Thanks to
 ---------
 - `Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_
 - `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_
-- All the `other contributors <https://github.com/dennissiemensma/dsmr-reader/graphs/contributors>`_!
+- All the `other contributors <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!
 
 
 Special thanks
@@ -23,8 +23,8 @@ And `CircleCI <https://circleci.com/>`_ for freely hosting the automated tests f
 
 Also many thanks to...
 ----------------------
-- ... the `pull requests <https://github.com/dennissiemensma/dsmr-reader/pulls>`_.
-- ... all `the ideas, improvements and bugs reported <https://github.com/dennissiemensma/dsmr-reader/issues>`_ for the past years.
+- ... the `pull requests <https://github.com/dsmrreader/dsmr-reader/pulls>`_.
+- ... all `the ideas, improvements and bugs reported <https://github.com/dsmrreader/dsmr-reader/issues>`_ for the past years.
 
 
 And don't forget

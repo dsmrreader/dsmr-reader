@@ -12,7 +12,7 @@ If you can't find the answer in the documentation, do not hesitate in looking fo
 
 .. seealso::
 
-    `Create an issue at Github <https://github.com/dennissiemensma/dsmr-reader/issues/new>`_.
+    `Create an issue at Github <https://github.com/dsmrreader/dsmr-reader/issues/new>`_.
 
 
 How can I update my application?
