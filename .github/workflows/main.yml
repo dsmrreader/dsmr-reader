@@ -27,7 +27,6 @@ jobs:
 
       - name: Pip Installer
         uses: BSFishy/pip-action@8f2d471d809dc20b6ada98c91910b6ae6243f318
-        if: steps.cache.outputs.cache-hit != 'true'
         with:
           requirements: /home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt
 
