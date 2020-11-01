@@ -25,6 +25,18 @@ jobs:
         with:
           requirements: /home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt
 
+      - name: Run a one-line script
+        run: pip show django
+
+      - name: Cache
+        uses: actions/cache@v2.1.2
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
+
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
 #        with:
