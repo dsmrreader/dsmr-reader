@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ v4 ]
+  pull_request:
+    branches: [ v4 ]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Pyenv Build
+        uses: gabrielfalcao/pyenv-action@97ed31ab6710c4f813e671d20687adf6aa8f6c5d
+        with:
+          command:
+
+          default: "3.6,3.7,3.8"
+
+#      - name: Setup MySQL
+#        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
+#        with:
+#          mysql version:
+#          mysql root password: # optional, default is
+#          # MYSQL_DATABASE - name for the default database that is created
+#          mysql database: test_dsmrreader
+#          mysql user: # optional, default is
+#          # MYSQL_PASSWORD - specified superuser password which user is power for created database
+#          mysql password: # optional, default is
+
+      - name: Setup PostgreSQL
+        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
+        with:
+          postgresql version: # optional, default is latest
+          postgresql db: test_dsmrreader
+          postgresql user: root
+          postgresql password: rootpw
