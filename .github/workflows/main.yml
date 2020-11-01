@@ -9,12 +9,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         python-version:
           - 3.6
 #          - 3.7
 #          - 3.8
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: testpassword
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v2
@@ -25,15 +37,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: System dependencies
-        run: |
-          sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
-
-      - name: PostgreSQL setup
-        run: |
-          sudo apt install -y postgresql python3-psycopg2
-          sudo -u postgres createuser -DSR testuser
-          sudo -u postgres createdb -O testuser test_dsmrreader
-          sudo -u postgres psql -c "alter user testuser with password 'testpassword';"
+        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-psycopg2
 
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
