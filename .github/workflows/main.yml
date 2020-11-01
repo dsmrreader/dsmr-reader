@@ -22,7 +22,7 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.2
         with:
-          path: /opt/hostedtoolcache/Python/3.6.12/x64/lib/python3.6/site-packages
+          path: '**/site-packages'
           key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
 
       - name: Pip Installer
