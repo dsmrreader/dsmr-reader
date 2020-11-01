@@ -23,7 +23,7 @@ jobs:
       - name: Pip Installer
         uses: BSFishy/pip-action@8f2d471d809dc20b6ada98c91910b6ae6243f318
         with:
-          requirements: $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
+          requirements: /home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt
 
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
