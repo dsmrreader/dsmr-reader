@@ -18,11 +18,7 @@ jobs:
         uses: actions/setup-python@v2.1.4
         with:
           # Version range or exact version of a Python version to use, using SemVer's version range syntax.
-          python-version: # optional, default is 3.x
-          # The target architecture (x86, x64) of the Python interpreter.
-          architecture: # optional
-          # Used to pull python distributions from actions/python-versions. Since there's a default, this is typically not supplied by the user.
-          token: # optional, default is ${{ github.token }}
+          python-version: 3.6
 
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
@@ -35,10 +31,10 @@ jobs:
 #          # MYSQL_PASSWORD - specified superuser password which user is power for created database
 #          mysql password: # optional, default is
 
-      - name: Setup PostgreSQL
-        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
-        with:
-          postgresql version: # optional, default is latest
-          postgresql db: test_dsmrreader
-          postgresql user: root
-          postgresql password: rootpw
+#      - name: Setup PostgreSQL
+#        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
+#        with:
+#          postgresql version: # optional, default is latest
+#          postgresql db: test_dsmrreader
+#          postgresql user: root
+#          postgresql password: rootpw
