@@ -191,6 +191,14 @@ See ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/r
 
 ----
 
+``DJANGO_STATIC_ROOT``
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Situational**
+
+See ``STATIC_ROOT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-root>`__. Omit to use the default.
+
+----
+
 DSMR-reader settings
 --------------------
 

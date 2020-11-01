@@ -30,6 +30,8 @@ v4.6.0 - 2020-11-01
 - ``Changed``: DSMR-reader verplaatst op Github [`#1174 <https://github.com/dsmrreader/dsmr-reader/issues/1174>`_]
 
 - ``Added``: Instelling om waarschuwingen over data-grootte te negeren [`#1173 <https://github.com/dsmrreader/dsmr-reader/issues/1173>`_]
+- ``Added``: FreeBSD compatibility [`#1175 <https://github.com/dsmrreader/dsmr-reader/issues/1175>`_]
+- ``Added``: Envvar for ``DJANGO_STATIC_ROOT`` [`#1175 <https://github.com/dsmrreader/dsmr-reader/issues/1175>`_]
 
 
 v4.5.0 - 2020-10-19

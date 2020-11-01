@@ -97,3 +97,8 @@ try:
     X_FRAME_OPTIONS = config('DJANGO_X_FRAME_OPTIONS', cast=str)
 except UndefinedValueError:
     pass
+
+try:
+    STATIC_ROOT = config('DJANGO_STATIC_ROOT', cast=str)
+except UndefinedValueError:
+    pass

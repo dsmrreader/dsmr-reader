@@ -149,8 +149,8 @@ msgid "Renamed to ``DJANGO_DATABASE_CONN_MAX_AGE`` since DSMR-reader ``v4.5`` an
 msgstr "Hernoemd naar ``DJANGO_DATABASE_CONN_MAX_AGE`` sinds DSMR-reader ``v4.5`` en de oude naam ``CONN_MAX_AGE`` wordt verwijderd in DSMR-reader ``v5.0``."
 
 #: ../../env_settings.rst:135 ../../env_settings.rst:148
-#: ../../env_settings.rst:225 ../../env_settings.rst:235
-#: ../../env_settings.rst:249
+#: ../../env_settings.rst:233 ../../env_settings.rst:243
+#: ../../env_settings.rst:257
 msgid "**Optional**"
 msgstr "**Optioneel**"
 
@@ -176,14 +176,14 @@ msgstr "``DJANGO_STATIC_URL``"
 
 #: ../../env_settings.rst:156 ../../env_settings.rst:164
 #: ../../env_settings.rst:172 ../../env_settings.rst:180
-#: ../../env_settings.rst:188 ../../env_settings.rst:204
-#: ../../env_settings.rst:217
+#: ../../env_settings.rst:188 ../../env_settings.rst:196
+#: ../../env_settings.rst:212 ../../env_settings.rst:225
 msgid "**Situational**"
 msgstr "**Situationeel**"
 
 #: ../../env_settings.rst:158
 msgid "See ``STATIC_URL`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-url>`__. Omit to use the default."
-msgstr "Zie ``STATIC_URL`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-url>`__. Laat weg om de standaard waarde te gebruiken."
+msgstr "Zie ``STATIC_URL`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-url>`__. Laat weg om de standaardwaarde te gebruiken."
 
 #: ../../env_settings.rst:163
 msgid "``DJANGO_FORCE_SCRIPT_NAME``"
@@ -191,7 +191,7 @@ msgstr "``DJANGO_FORCE_SCRIPT_NAME``"
 
 #: ../../env_settings.rst:166
 msgid "See ``FORCE_SCRIPT_NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#force-script-name>`__. Omit to use the default."
-msgstr "Zie ``FORCE_SCRIPT_NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#force-script-name>`__. Laat weg om de standaard waarde te gebruiken."
+msgstr "Zie ``FORCE_SCRIPT_NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#force-script-name>`__. Laat weg om de standaardwaarde te gebruiken."
 
 #: ../../env_settings.rst:171
 msgid "``DJANGO_USE_X_FORWARDED_HOST``"
@@ -199,7 +199,7 @@ msgstr "``DJANGO_USE_X_FORWARDED_HOST``"
 
 #: ../../env_settings.rst:174
 msgid "See ``USE_X_FORWARDED_HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-host>`__. Omit to use the default."
-msgstr "Zie ``USE_X_FORWARDED_HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-host>`__. Laat weg om de standaard waarde te gebruiken."
+msgstr "Zie ``USE_X_FORWARDED_HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-host>`__. Laat weg om de standaardwaarde te gebruiken."
 
 #: ../../env_settings.rst:179
 msgid "``DJANGO_USE_X_FORWARDED_PORT``"
@@ -207,7 +207,7 @@ msgstr "``DJANGO_USE_X_FORWARDED_PORT``"
 
 #: ../../env_settings.rst:182
 msgid "See ``USE_X_FORWARDED_PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-port>`__. Omit to use the default."
-msgstr "Zie ``USE_X_FORWARDED_PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-port>`__. Laat weg om de standaard waarde te gebruiken."
+msgstr "Zie ``USE_X_FORWARDED_PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-port>`__. Laat weg om de standaardwaarde te gebruiken."
 
 #: ../../env_settings.rst:187
 msgid "``DJANGO_X_FRAME_OPTIONS``"
@@ -215,65 +215,73 @@ msgstr "``DJANGO_X_FRAME_OPTIONS``"
 
 #: ../../env_settings.rst:190
 msgid "See ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#x-frame-options>`__. Omit to use the default."
-msgstr "Zie ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#x-frame-options>`__. Laat weg om de standaard waarde te gebruiken."
+msgstr "Zie ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#x-frame-options>`__. Laat weg om de standaardwaarde te gebruiken."
 
 #: ../../env_settings.rst:195
+msgid "``DJANGO_STATIC_ROOT``"
+msgstr "``DJANGO_STATIC_ROOT``"
+
+#: ../../env_settings.rst:198
+msgid "See ``STATIC_ROOT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-root>`__. Omit to use the default."
+msgstr "Zie ``STATIC_ROOT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-root>`__. Laat weg om de standaardwaarde te gebruiken."
+
+#: ../../env_settings.rst:203
 msgid "DSMR-reader settings"
 msgstr "DSMR-reader instellingen"
 
-#: ../../env_settings.rst:198
+#: ../../env_settings.rst:206
 msgid "``DSMR_USER`` / ``DSMRREADER_ADMIN_USER``"
 msgstr "``DSMR_USER`` / ``DSMRREADER_ADMIN_USER``"
 
-#: ../../env_settings.rst:202
+#: ../../env_settings.rst:210
 msgid "Renamed to ``DSMRREADER_ADMIN_USER`` since DSMR-reader ``v4.5`` and the old name ``DSMR_USER`` will be removed in DSMR-reader ``v5.0``."
 msgstr "Hernoemd naar ``DSMRREADER_ADMIN_USER`` sinds DSMR-reader ``v4.5`` en de oude naam ``DSMR_USER`` wordt verwijderd in DSMR-reader ``v5.0``."
 
-#: ../../env_settings.rst:206
+#: ../../env_settings.rst:214
 msgid "The username of the **webinterface** (super)user to create when running ``./manage.py dsmr_superuser``."
 msgstr "Gebruikersnaam van de **webinterface** (super)user om te gebruiken, wanneer je ``./manage.py dsmr_superuser`` uitvoert."
 
-#: ../../env_settings.rst:211
+#: ../../env_settings.rst:219
 msgid "``DSMR_PASSWORD`` / ``DSMRREADER_ADMIN_PASSWORD``"
 msgstr "``DSMR_PASSWORD`` / ``DSMRREADER_ADMIN_PASSWORD``"
 
-#: ../../env_settings.rst:215
+#: ../../env_settings.rst:223
 msgid "Renamed to ``DSMRREADER_ADMIN_PASSWORD`` since DSMR-reader ``v4.5`` and the old name ``DSMR_PASSWORD`` will be removed in DSMR-reader ``v5.0``."
 msgstr "Hernoemd naar ``DSMRREADER_ADMIN_PASSWORD`` sinds DSMR-reader ``v4.5`` en de oude naam ``DSMR_PASSWORD`` wordt verwijderd in DSMR-reader ``v5.0``."
 
-#: ../../env_settings.rst:219
+#: ../../env_settings.rst:227
 msgid "The password of the ``DSMR_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``."
 msgstr "Het gewenste wachtwoord voor de ``DSMR_USER`` gebruiker, bij aanmaken of updaten van de gebruiker. Voor wanneer je ``./manage.py dsmr_superuser`` uitvoert."
 
-#: ../../env_settings.rst:224
+#: ../../env_settings.rst:232
 msgid "``DSMRREADER_LOGLEVEL``"
 msgstr "``DSMRREADER_LOGLEVEL``"
 
-#: ../../env_settings.rst:227
+#: ../../env_settings.rst:235
 msgid "The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this default), ``WARNING`` or ``DEBUG`` (should be temporary due to file I/O)."
 msgstr "Het log level dat DSMR-reader gebruikt. Kies ofwel ``ERROR`` (laat weg voor deze standaardwaarde), ``WARNING`` of ``DEBUG`` (alleen tijdelijk i.v.m. hogere I/O)."
 
-#: ../../env_settings.rst:229
+#: ../../env_settings.rst:237
 msgid "For more information, :doc:`see Troubleshooting<troubleshooting>`."
 msgstr "Voor meer informatie, :doc:`zie Hulp bij problemen<troubleshooting>`."
 
-#: ../../env_settings.rst:234
+#: ../../env_settings.rst:242
 msgid "``DSMRREADER_PLUGINS``"
 msgstr "``DSMRREADER_PLUGINS``"
 
-#: ../../env_settings.rst:237
+#: ../../env_settings.rst:245
 msgid "The plugins DSMR-reader should use. Omit to use the default of no plugins. Note that this should be a comma separated list when specifying multiple plugins. E.g.::"
 msgstr "De plugins die DSMR-reader gebruikt. Laat weg als je dit niet gebruikt. N.B.: Dit is een komma-gescheiden lijst wanneer je meerdere plugins specificeert. Bijvoorbeeld::"
 
-#: ../../env_settings.rst:243
+#: ../../env_settings.rst:251
 msgid "For more information, :doc:`see Plugins<plugins>`."
 msgstr "Voor meer informatie, :doc:`zie Plugins<plugins>`."
 
-#: ../../env_settings.rst:248
+#: ../../env_settings.rst:256
 msgid "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
 msgstr "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
 
-#: ../../env_settings.rst:251
+#: ../../env_settings.rst:259
 msgid "Whether to suppress any warnings regarding too many readings stored or the database size. Set it to ``True`` to disable the warnings or omit it to use the default (``False``). Suppress at your own risk. Added in DSMR-reader ``v4.6``."
 msgstr "Gebruik dit om waarschuwingen over \"te veel opgeslagen metingen\" of een \"te grote database\" te onderdrukken. Stel in op ``True`` om deze waarschuwingen uit te schakelen of laat het weg om de standaardwaarde (``False``) te gebruiken. Gebruik op eigen risico. Toegevoegd sinds DSMR-reader ``v4.6``."
 
