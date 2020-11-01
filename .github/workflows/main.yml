@@ -27,8 +27,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: $pythonLocation
-        run: echo $pythonLocation
+      - name: Setup PostgreSQL
+        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
+        with:
+          postgresql version: # optional, default is latest
+          postgresql db: test_dsmrreader
+          postgresql user: root
+          postgresql password: rootpw
 
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
@@ -43,30 +48,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
 
-      - name: Check pylama
-        run: pylama
+#      - name: Check pylama
+#        run: pylama
+#
+#      - name: Check autopep8
+#        run: autopep8 -r . --diff --exit-code
+#
+#      - name: Run SQLite tests
+#        run: py.test --cov --cov-report=xml
+#        env:
+#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+#            DJANGO_SECRET_KEY: non-production-value
+#            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-      - name: Check autopep8
-        run: autopep8 -r . --diff --exit-code
-
-      - name: Run SQLite tests
+      - name: Run PostgreSQL tests
         run: py.test --cov --cov-report=xml
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
-
-
-#      - name: Run a multi-line script
-#        run: |
-#          easy install pip
-#          echo test, and deploy your project.
-
-#      - name: Pip Installer
-#        uses: BSFishy/pip-action@8f2d471d809dc20b6ada98c91910b6ae6243f318
-#        with:
-#          requirements: /home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt
-#          extra: --cache-dir /var/tmp/pip-cache/
+            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
+            DJANGO_DATABASE_HOST: 127.0.0.1
+            DJANGO_DATABASE_NAME: test_dsmrreader
+            DJANGO_DATABASE_USER: root
 
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
@@ -79,10 +82,3 @@ jobs:
 #          # MYSQL_PASSWORD - specified superuser password which user is power for created database
 #          mysql password: # optional, default is
 
-#      - name: Setup PostgreSQL
-#        uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
-#        with:
-#          postgresql version: # optional, default is latest
-#          postgresql db: test_dsmrreader
-#          postgresql user: root
-#          postgresql password: rootpw
