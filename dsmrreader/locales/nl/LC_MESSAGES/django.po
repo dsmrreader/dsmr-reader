@@ -1065,9 +1065,6 @@ msgstr "Je draait de meest recente versie"
 msgid "Update available"
 msgstr "Update beschikbaar"
 
-msgid "Since"
-msgstr "Sinds"
-
 msgid "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here."
 msgstr "Alles lijkt soepel te draaien. Als er problemen zijn, zoals missende gegevens of hangende processen, dan worden die hier getoond."
 
@@ -2593,6 +2590,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Since"
+#~ msgstr "Sinds"
 
 #~ msgid "Retention policy applies to telegrams and related data that is no longer needed after processing."
 #~ msgstr "Gegevensretentiebeleid is alleen van toepassing op telegrammen en overige data die na verwerking niet meer nodig is."

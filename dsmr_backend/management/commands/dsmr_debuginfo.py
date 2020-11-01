@@ -1,6 +1,7 @@
 import platform
 
 from django.conf import settings
+from django.contrib.humanize.templatetags import humanize
 from django.core.management.base import BaseCommand
 from django.db import connection
 from django.utils import timezone
@@ -29,7 +30,6 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
     def handle(self, **options):
         self._print_start()
-        self._dump_os_info()
         self._dump_application_info()
         self._dump_data_info()
         self._dump_issues()
@@ -39,12 +39,6 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             self._dump_pg_indices()
 
         self._print_end()
-
-    def _dump_os_info(self):
-        self._print_header('OS')
-        self._pretty_print_short('Python version', 'v{}'.format(platform.python_version()))
-        self._pretty_print_short('Platform', '{} ({})'.format(platform.system(), platform.machine()))
-        self._pretty_print_short('System', '{}'.format(platform.platform()))
 
     def _dump_application_info(self):
         pending_migrations = []
@@ -56,14 +50,21 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         pending_migrations_count = len(pending_migrations)
 
         self._print_header('DSMR-reader')
-        self._pretty_print('Version', 'v{}'.format(settings.DSMRREADER_VERSION))
-        self._pretty_print('Backend sleep', '{} s'.format(BackendSettings.get_solo().process_sleep))
-        self._pretty_print('Datalogger sleep', '{} s'.format(DataloggerSettings.get_solo().process_sleep))
-        self._pretty_print('Retention cleans up after', '{} h'.format(
+        self._pretty_print('App / Python / Database', 'v{} / v{} / {}'.format(
+            settings.DSMRREADER_VERSION,
+            platform.python_version(),
+            connection.vendor
+        ))
+
+        self._pretty_print('Backend sleep / Datalogger sleep / Retention cleanup', '{}s / {}s / {}h'.format(
+            BackendSettings.get_solo().process_sleep,
+            DataloggerSettings.get_solo().process_sleep,
             RetentionSettings.get_solo().data_retention_in_hours or '-'
         ))
-        self._pretty_print('Telegram parser', '"{}"'.format(DataloggerSettings.get_solo().dsmr_version))
-        self._pretty_print('Database engine/vendor', connection.vendor)
+        self._pretty_print('Telegram latest version read / Parser settings', '"{}" / "{}"'.format(
+            MeterStatistics.get_solo().dsmr_version,
+            DataloggerSettings.get_solo().dsmr_version
+        ))
 
         if pending_migrations_count > 0:
             self._pretty_print('(!) Database migrations pending', '{} (!)'.format(pending_migrations_count))
@@ -74,12 +75,11 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         gas_count = self._table_record_count(GasConsumption._meta.db_table)
 
         self._print_header('Data')
-        self._pretty_print('Telegrams', '')
-        self._pretty_print('  - total (est.)', reading_count or '-')
-        self._pretty_print('  - version (latest reading)', '"{}"'.format(MeterStatistics.get_solo().dsmr_version))
-        self._pretty_print('Consumption records', '')
-        self._pretty_print('  - electricity (est.)', electricity_count or '-')
-        self._pretty_print('  - gas (est.)', gas_count or '-')
+        self._pretty_print('Telegrams total (est.)', reading_count or '-')
+        self._pretty_print('Consumption records electricity / gas (est.)', '{} / {}'.format(
+            electricity_count or '-',
+            gas_count or '-'
+        ))
 
     def _dump_issues(self):
         issues = dsmr_backend.services.backend.request_monitoring_status()
@@ -87,17 +87,22 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         if not issues:
             return
 
-        self._print_header('Issues')
+        self._print_header('Unresolved issues')
 
         for current in issues:
-            self._pretty_print(current.description, 'Since {}'.format(timezone.localtime(current.since)))
+            self._pretty_print(
+                current.description,
+                humanize.naturaltime(
+                    timezone.localtime(current.since)
+                )
+            )
 
     def _dump_pg_size(self):
         if connection.vendor != 'postgresql':
             return
 
         # @see https://wiki.postgresql.org/wiki/Disk_Usage
-        MIN_SIZE_MB = 5
+        MIN_SIZE_MB = 500
         size_sql = """
         SELECT nspname || '.' || relname AS "relation",
         pg_size_pretty(pg_total_relation_size(C.oid)) AS "total_size"
@@ -112,9 +117,14 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
         with connection.cursor() as cursor:
             cursor.execute(size_sql, [MIN_SIZE_MB * 1024 * 1024])
+            results = cursor.fetchall()
+
+            if not results:
+                return
+
             self._print_header('PostgreSQL size of largest tables (> {} MB)'.format(MIN_SIZE_MB))
 
-            for table, size in cursor.fetchall():
+            for table, size in results:
                 self._pretty_print(table, size)
 
     def _dump_pg_indices(self):
@@ -155,16 +165,16 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
     def _print_start(self):
         self.stdout.write()
-        self.stdout.write('<--- COPY OUTPUT AFTER THIS LINE AND PASTE IN YOUR GITHUB ISSUE --->')
+        self.stdout.write('<--- COPY OUTPUT AFTER THIS LINE (DO NOT INCLUDE IT) AND PASTE IN YOUR GITHUB ISSUE --->')
         self.stdout.write()
         self.stdout.write()
         self.stdout.write('```')
 
     def _pretty_print(self, what, value):
-        self.stdout.write('    {:80}{:>40}'.format(what, value))
+        self.stdout.write('    {:65}{:>40}'.format(str(what), str(value)))
 
     def _pretty_print_short(self, what, value):
-        self.stdout.write('    {:40}{:>80}'.format(what, value))
+        self.stdout.write('    {:40}{:>65}'.format(str(what), str(value)))
 
     def _print_header(self, what):
         self.stdout.write()
@@ -174,5 +184,5 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self.stdout.write()
         self.stdout.write('```')
         self.stdout.write()
-        self.stdout.write('<--- COPY OUTPUT UNTIL THIS LINE AND PASTE IN YOUR GITHUB ISSUE --->')
+        self.stdout.write('<--- COPY OUTPUT UNTIL (BUT DO NOT INCLUDE) THIS LINE AND PASTE IN YOUR GITHUB ISSUE --->')
         self.stdout.write()
