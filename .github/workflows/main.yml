@@ -18,19 +18,19 @@ jobs:
 #          - 3.8
 
     services:
-#      postgres:
-#        image: 'postgres:12'
-#        ports:
-#          - 5432:5432
-#        env:
-#            POSTGRES_USER: root
-#            POSTGRES_DB: test_dsmrreader
-#            POSTGRES_PASSWORD: testpasswd
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
+      postgres:
+        image: 'postgres:12'
+        ports:
+          - 5432:5432
+        env:
+            POSTGRES_USER: root
+            POSTGRES_DB: test_dsmrreader
+            POSTGRES_PASSWORD: testpasswd
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
       mysql:
         image: 'mysql:5.7'
@@ -81,17 +81,17 @@ jobs:
 #            DJANGO_SECRET_KEY: non-production-value
 #            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-#      - name: Run PostgreSQL tests
-#        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
-#        env:
-#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-#            DJANGO_SECRET_KEY: non-production-value
-#            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-#            DJANGO_DATABASE_HOST: localhost
-#            DJANGO_DATABASE_PORT: 5432
-#            DJANGO_DATABASE_NAME: test_dsmrreader
-#            DJANGO_DATABASE_USER: root
-#            DJANGO_DATABASE_PASSWORD: testpasswd
+      - name: Run PostgreSQL tests
+        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+        env:
+            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+            DJANGO_SECRET_KEY: non-production-value
+            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
+            DJANGO_DATABASE_HOST: localhost
+            DJANGO_DATABASE_PORT: 5432
+            DJANGO_DATABASE_NAME: test_dsmrreader
+            DJANGO_DATABASE_USER: root
+            DJANGO_DATABASE_PASSWORD: testpasswd
 
       - name: Run MySQL tests
         run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
