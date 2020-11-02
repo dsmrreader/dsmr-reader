@@ -14,8 +14,8 @@ jobs:
       matrix:
         python-version:
           - 3.6
-#          - 3.7
-#          - 3.8
+          - 3.7
+          - 3.8
 
     services:
       postgres:
@@ -84,10 +84,9 @@ jobs:
         run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
+            DJANGO_SECRET_KEY: unsafe-test-value
             DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-            DJANGO_DATABASE_HOST: localhost
-            DJANGO_DATABASE_PORT: 5432
+            DJANGO_DATABASE_HOST: 127.0.0.1
             DJANGO_DATABASE_NAME: test_dsmrreader
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
@@ -96,7 +95,7 @@ jobs:
         run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
+            DJANGO_SECRET_KEY: unsafe-test-value
             DJANGO_DATABASE_ENGINE: django.db.backends.mysql
             DJANGO_DATABASE_HOST: 127.0.0.1
             DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
