@@ -42,9 +42,6 @@ jobs:
         run: sudo apt install -y gettext libgettextpo-dev
           #libmariadb-dev-compat libmariadb-dev
 
-      - name: Python location var
-        run: echo $pythonLocation
-
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
         with:
@@ -60,6 +57,8 @@ jobs:
           pip install psycopg2-binary
           pip freeze | grep psycopg2-binary
 
+      - name: dependencies location
+        run: pip show django
 
 #      - name: Check pylama
 #        run: pylama
