@@ -50,7 +50,7 @@ jobs:
         id: cache
         with:
           path: /var/cache/apt/
-          key: ${{ runner.os }}
+          key: apt-${{ runner.os }}
 
       - name: Setup Python
         uses: actions/setup-python@v2.1.4
@@ -65,7 +65,7 @@ jobs:
         with:
           path: |
             ~/.cache/pip
-          key: ${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt') }}
+          key: pip-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt') }}
 
       - name: Install PIP dependencies
         run: |
@@ -74,14 +74,14 @@ jobs:
           pip install psycopg2-binary
 
       - name: Run SQLite tests
-        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+        run: py.test --cov --cov-report=xml
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
       - name: Run PostgreSQL tests
-        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+        run: py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
@@ -92,7 +92,7 @@ jobs:
             DJANGO_DATABASE_PASSWORD: testpasswd
 
       - name: Run MySQL tests
-        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+        run: py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
