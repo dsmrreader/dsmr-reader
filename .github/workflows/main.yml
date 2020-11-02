@@ -79,7 +79,8 @@ jobs:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-#            DJANGO_DATABASE_HOST: 127.0.0.1
+            DJANGO_DATABASE_HOST: 127.0.0.1
+            DJANGO_DATABASE_PORT: 5432
             DJANGO_DATABASE_NAME: test_dsmrreader
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
