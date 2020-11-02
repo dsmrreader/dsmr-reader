@@ -54,7 +54,7 @@ jobs:
         run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Mysql test
-        run: mysql
+        run: mysql -h 127.0.0.1
 
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
