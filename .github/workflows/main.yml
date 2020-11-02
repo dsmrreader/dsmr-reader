@@ -60,6 +60,7 @@ jobs:
           pip install psycopg2-binary
           pip freeze | grep psycopg2-binary
 
+
 #      - name: Check pylama
 #        run: pylama
 #
