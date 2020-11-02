@@ -18,16 +18,25 @@ jobs:
 #          - 3.8
 
     services:
-      postgres:
-        image: 'postgres:12'
+#      postgres:
+#        image: 'postgres:12'
+#        env:
+#            POSTGRES_USER: root
+#            POSTGRES_DB: test_dsmrreader
+#            POSTGRES_PASSWORD: testpasswd
+#        options: >-
+#          --health-cmd pg_isready
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
+
+      mysql:
+        image: 'mysql:5.7'
         env:
-            POSTGRES_DB: test_dsmrreader
-            POSTGRES_PASSWORD: testpasswd
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+            MYSQL_ROOT_PASSWORD: rootpw
+            MYSQL_DATABASE: test_dsmrreader
+            MYSQL_USER: user
+            MYSQL_PASSWORD: testpassword
 
     steps:
       - uses: actions/checkout@v2
@@ -38,8 +47,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: System dependencies
-        run: sudo apt install -y gettext libgettextpo-dev
-          #libmariadb-dev-compat libmariadb-dev
+        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
@@ -61,34 +69,34 @@ jobs:
 #
 #      - name: Check autopep8
 #        run: autopep8 -r . --diff --exit-code
+#
+#      - name: Run SQLite tests
+#        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+#        env:
+#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+#            DJANGO_SECRET_KEY: non-production-value
+#            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-      - name: Run SQLite tests
+#      - name: Run PostgreSQL tests
+#        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+#        env:
+#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+#            DJANGO_SECRET_KEY: non-production-value
+#            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
+#            DJANGO_DATABASE_HOST: localhost
+#            DJANGO_DATABASE_PORT: 5432
+#            DJANGO_DATABASE_NAME: test_dsmrreader
+#            DJANGO_DATABASE_USER: root
+#            DJANGO_DATABASE_PASSWORD: testpasswd
+
+      - name: Run MySQL tests
         run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
-
-      - name: Run PostgreSQL tests
-        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-            DJANGO_DATABASE_HOST: localhost
-            DJANGO_DATABASE_PORT: 5432
-            DJANGO_DATABASE_NAME: test_dsmrreader
-            DJANGO_DATABASE_USER: postgres
-            DJANGO_DATABASE_PASSWORD: testpasswd
-
-#      - name: Setup MySQL
-#        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
-#        with:
-#          mysql version:
-#          mysql root password: # optional, default is
-#          # MYSQL_DATABASE - name for the default database that is created
-#          mysql database: test_dsmrreader
-#          mysql user: # optional, default is
-#          # MYSQL_PASSWORD - specified superuser password which user is power for created database
-#          mysql password: # optional, default is
+            DJANGO_DATABASE_ENGINE: django.db.backends.mysql
+            DJANGO_DATABASE_HOST: 127.0.0.1
+            DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+            DJANGO_DATABASE_USER: user
+            DJANGO_DATABASE_PASSWORD: testpassword
 
