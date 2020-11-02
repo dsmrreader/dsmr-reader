@@ -51,7 +51,7 @@ jobs:
           path: |
             ~/.cache/pip
             $pythonLocation/lib/python3.6/site-packages
-          key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
+          key: ${{ runner.os }}-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt') }}-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt') }}
 
       - name: Install dependencies
         run: |
@@ -73,16 +73,16 @@ jobs:
 #            DJANGO_SECRET_KEY: non-production-value
 #            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-      - name: Run PostgreSQL tests
-        run: py.test --cov --cov-report=xml
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-            DJANGO_DATABASE_HOST: 127.0.0.1
-            DJANGO_DATABASE_NAME: test_dsmrreader
-            DJANGO_DATABASE_USER: root
-            DJANGO_DATABASE_PASSWORD: testpasswd
+#      - name: Run PostgreSQL tests
+#        run: py.test --cov --cov-report=xml
+#        env:
+#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+#            DJANGO_SECRET_KEY: non-production-value
+#            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
+#            DJANGO_DATABASE_HOST: 127.0.0.1
+#            DJANGO_DATABASE_NAME: test_dsmrreader
+#            DJANGO_DATABASE_USER: root
+#            DJANGO_DATABASE_PASSWORD: testpasswd
 
 #      - name: Setup MySQL
 #        uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
