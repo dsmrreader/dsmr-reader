@@ -20,6 +20,8 @@ jobs:
     services:
 #      postgres:
 #        image: 'postgres:12'
+#        ports:
+#          - 5432:5432
 #        env:
 #            POSTGRES_USER: root
 #            POSTGRES_DB: test_dsmrreader
@@ -32,6 +34,8 @@ jobs:
 
       mysql:
         image: 'mysql:5.7'
+        ports:
+          - 3306:3306
         env:
             MYSQL_ROOT_PASSWORD: rootpw
             MYSQL_DATABASE: test_dsmrreader
@@ -48,6 +52,9 @@ jobs:
 
       - name: System dependencies
         run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+
+      - name: Mysql test
+        run: mysql
 
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
