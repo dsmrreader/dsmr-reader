@@ -33,15 +33,15 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-      mysql:
-        image: 'mysql:5'
-        ports:
-          - 3306:3306
-        env:
-            MYSQL_ROOT_PASSWORD: rootpw
-            MYSQL_DATABASE: test_dsmrreader
-            MYSQL_USER: user
-            MYSQL_PASSWORD: testpassword
+#      mysql:
+#        image: 'mysql:5'
+#        ports:
+#          - 3306:3306
+#        env:
+#            MYSQL_ROOT_PASSWORD: rootpw
+#            MYSQL_DATABASE: test_dsmrreader
+#            MYSQL_USER: user
+#            MYSQL_PASSWORD: testpassword
 
     steps:
       - uses: actions/checkout@v2
@@ -93,13 +93,16 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
 
-      - name: Run MySQL tests
-        run: py.test
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: unsafe-test-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.mysql
-            DJANGO_DATABASE_HOST: 127.0.0.1
-            DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
-            DJANGO_DATABASE_USER: user
-            DJANGO_DATABASE_PASSWORD: testpassword
+#      - name: Run MySQL tests
+#        run: py.test
+#        env:
+#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+#            DJANGO_SECRET_KEY: unsafe-test-value
+#            DJANGO_DATABASE_ENGINE: django.db.backends.mysql
+#            DJANGO_DATABASE_HOST: 127.0.0.1
+#            DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+#            DJANGO_DATABASE_USER: user
+#            DJANGO_DATABASE_PASSWORD: testpassword
+
+      - name: Code coverage upload
+        uses: codecov/codecov-action@v1
