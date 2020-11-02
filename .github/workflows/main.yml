@@ -69,6 +69,12 @@ jobs:
           pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/ci.txt
           pip install psycopg2-binary
 
+      - name: Check pylama
+        run: pylama
+
+      - name: Check autopep8
+        run: autopep8 -r . --diff --exit-code
+
       - name: Run SQLite tests
         run: py.test -n 2 --cov --cov-report=xml
         env:
@@ -97,9 +103,3 @@ jobs:
             DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
             DJANGO_DATABASE_USER: user
             DJANGO_DATABASE_PASSWORD: testpassword
-
-      - name: Check pylama
-        run: pylama
-
-      - name: Check autopep8
-        run: autopep8 -r . --diff --exit-code

@@ -33,7 +33,7 @@ workflows:
 
 # Dummy vars, used for anchors.
 x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ .Revision }}
-x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-v3-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/dev.txt" }}
+x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-{{ .Branch }}-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}
 x-test-command: &test-command |
     . ~/.virtualenvs/dsmr-reader/bin/activate
     py.test --cov --cov-report=xml
@@ -70,7 +70,7 @@ commands:
                       . ~/.virtualenvs/dsmr-reader/bin/activate
 
                       pip3 install --upgrade pip
-                      pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
+                      pip3 install -r dsmrreader/provisioning/requirements/ci.txt
                       pip3 install psycopg2
 
             - save_cache:
@@ -125,7 +125,7 @@ commands:
                 command: *test-command
 
 # Dummy vars, used for anchors.
-x-postgresql-image: &postgresql-image circleci/postgres:11-alpine
+x-postgresql-image: &postgresql-image circleci/postgres:12-alpine
 x-mysql-image: &mysql-image circleci/mysql:5
 x-base-job: &base-job
     working_directory: ~/repo
