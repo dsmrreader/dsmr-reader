@@ -28,6 +28,7 @@ workflows:
             - test-python36
             - test-python37
             - test-python38
+            - test-python39
 
 
 # Dummy vars, used for anchors.
@@ -161,6 +162,17 @@ jobs:
          <<: *base-job
          docker:
              - image: circleci/python:3.8-buster
+
+             - image: *postgresql-image
+               environment: *postgresql-db-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
+
+    test-python39:
+         <<: *base-job
+         docker:
+             - image: circleci/python:3.9-buster
 
              - image: *postgresql-image
                environment: *postgresql-db-env
