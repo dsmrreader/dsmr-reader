@@ -83,7 +83,7 @@ jobs:
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
       - name: Run PostgreSQL tests
-        run: py.test --cov --cov-report=xml
+        run: py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
@@ -94,7 +94,7 @@ jobs:
             DJANGO_DATABASE_PASSWORD: testpasswd
 
       - name: Run MySQL tests
-        run: py.test --cov --cov-report=xml
+        run: py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
