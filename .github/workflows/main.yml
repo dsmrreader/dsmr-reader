@@ -14,33 +14,33 @@ jobs:
       matrix:
         python-version:
           - 3.6
-          - 3.7
+#          - 3.7
 #          - 3.8
 
-#    services:
-#      postgres:
-#        image: 'postgres:12'
-#        ports:
-#          - 5432:5432
-#        env:
-#            POSTGRES_USER: root
-#            POSTGRES_DB: test_dsmrreader
-#            POSTGRES_PASSWORD: testpasswd
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
-#
-#      mysql:
-#        image: 'mysql:5.7'
-#        ports:
-#          - 3306:3306
-#        env:
-#            MYSQL_ROOT_PASSWORD: rootpw
-#            MYSQL_DATABASE: test_dsmrreader
-#            MYSQL_USER: user
-#            MYSQL_PASSWORD: testpassword
+    services:
+      postgres:
+        image: 'postgres:12'
+        ports:
+          - 5432:5432
+        env:
+            POSTGRES_USER: root
+            POSTGRES_DB: test_dsmrreader
+            POSTGRES_PASSWORD: testpasswd
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      mysql:
+        image: 'mysql:5.7'
+        ports:
+          - 3306:3306
+        env:
+            MYSQL_ROOT_PASSWORD: rootpw
+            MYSQL_DATABASE: test_dsmrreader
+            MYSQL_USER: user
+            MYSQL_PASSWORD: testpassword
 
     steps:
       - uses: actions/checkout@v2
@@ -53,26 +53,18 @@ jobs:
       - name: System dependencies
         run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
-      - name: Virtual env
-        run: |
-          sudo apt install -y python3-virtualenv
-          mkdir -p $GITHUB_WORKSPACE/.virtualenvs/
-          virtualenv $GITHUB_WORKSPACE/.virtualenvs/dsmrreader --python python3
-          . $GITHUB_WORKSPACE/.virtualenvs/dsmrreader/bin/activate
-
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
         with:
           path: |
             ~/.cache/pip
-            $GITHUB_WORKSPACE/.virtualenvs/dsmrreader/
           key: ${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt') }}
 
       - name: Install dependencies
         run: |
-          $GITHUB_WORKSPACE/.virtualenvs/dsmrreader/bin/pip install --upgrade pip
-          $GITHUB_WORKSPACE/.virtualenvs/dsmrreader/bin/pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/ci.txt
-          $GITHUB_WORKSPACE/.virtualenvs/dsmrreader/bin/pip install psycopg2-binary
+          pip install --upgrade pip
+          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/ci.txt
+          pip install psycopg2-binary
 
 #      - name: Check pylama
 #        run: pylama
@@ -87,26 +79,25 @@ jobs:
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-#      - name: Run PostgreSQL tests
-#        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
-#        env:
-#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-#            DJANGO_SECRET_KEY: non-production-value
-#            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-#            DJANGO_DATABASE_HOST: localhost
-#            DJANGO_DATABASE_PORT: 5432
-#            DJANGO_DATABASE_NAME: test_dsmrreader
-#            DJANGO_DATABASE_USER: root
-#            DJANGO_DATABASE_PASSWORD: testpasswd
-#
-#      - name: Run MySQL tests
-#        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
-#        env:
-#            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-#            DJANGO_SECRET_KEY: non-production-value
-#            DJANGO_DATABASE_ENGINE: django.db.backends.mysql
-#            DJANGO_DATABASE_HOST: 127.0.0.1
-#            DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
-#            DJANGO_DATABASE_USER: user
-#            DJANGO_DATABASE_PASSWORD: testpassword
+      - name: Run PostgreSQL tests
+        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+        env:
+            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+            DJANGO_SECRET_KEY: non-production-value
+            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
+            DJANGO_DATABASE_HOST: localhost
+            DJANGO_DATABASE_PORT: 5432
+            DJANGO_DATABASE_NAME: test_dsmrreader
+            DJANGO_DATABASE_USER: root
+            DJANGO_DATABASE_PASSWORD: testpasswd
 
+      - name: Run MySQL tests
+        run: py.test --cov --cov-report=xml dsmr_api/tests/v1/test_api.py
+        env:
+            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+            DJANGO_SECRET_KEY: non-production-value
+            DJANGO_DATABASE_ENGINE: django.db.backends.mysql
+            DJANGO_DATABASE_HOST: 127.0.0.1
+            DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+            DJANGO_DATABASE_USER: user
+            DJANGO_DATABASE_PASSWORD: testpassword
