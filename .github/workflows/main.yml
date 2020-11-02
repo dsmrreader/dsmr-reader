@@ -42,12 +42,15 @@ jobs:
         run: sudo apt install -y gettext libgettextpo-dev
           #libmariadb-dev-compat libmariadb-dev
 
+      - name: Python location var
+        run: echo $pythonLocation
+
       - name: Cached dependencies
         uses: actions/cache@v2.1.2
         with:
           path: |
             ~/.cache/pip
-            $pythonLocation
+            $pythonLocation/lib/python3.6/site-packages
           key: ${{ runner.os }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/base.txt') }}-${{ hashFiles('/home/runner/work/dsmr-reader/dsmr-reader/dsmrreader/provisioning/requirements/dev.txt') }}
 
       - name: Install dependencies
