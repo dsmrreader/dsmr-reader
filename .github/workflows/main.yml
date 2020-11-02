@@ -7,7 +7,7 @@ on:
     branches: [ v4 ]
 
 jobs:
-  build:
+  automated-tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -76,14 +76,14 @@ jobs:
         run: autopep8 -r . --diff --exit-code
 
       - name: Run SQLite tests
-        run: py.test -n 2 --cov --cov-report=xml
+        run: py.test --cov --cov-report=xml
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
       - name: Run PostgreSQL tests
-        run: py.test -n 4
+        run: py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
@@ -94,7 +94,7 @@ jobs:
             DJANGO_DATABASE_PASSWORD: testpasswd
 
       - name: Run MySQL tests
-        run: py.test -n 1
+        run: py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value

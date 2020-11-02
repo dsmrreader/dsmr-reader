@@ -2,7 +2,7 @@
 x-mysql-db-env: &mysql-db-env
    # https://circleci.com/docs/2.0/postgres-config/#example-mysql-project
     MYSQL_ROOT_PASSWORD: rootpw
-    MYSQL_DATABASE: test_dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+    MYSQL_DATABASE: test_dsmrreader
     MYSQL_USER: user
     MYSQL_PASSWORD: testpassword
 
