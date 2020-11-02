@@ -2,7 +2,7 @@
 x-mysql-db-env: &mysql-db-env
    # https://circleci.com/docs/2.0/postgres-config/#example-mysql-project
     MYSQL_ROOT_PASSWORD: rootpw
-    MYSQL_DATABASE: test_dsmrreader  # NOT a typo, django prefixes "test_" automatically.
+    MYSQL_DATABASE: test_dsmrreader
     MYSQL_USER: user
     MYSQL_PASSWORD: testpassword
 
@@ -28,11 +28,12 @@ workflows:
             - test-python36
             - test-python37
             - test-python38
+            - test-python39
 
 
 # Dummy vars, used for anchors.
 x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ .Revision }}
-x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-v3-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/dev.txt" }}-{{ checksum "dsmrreader/provisioning/requirements/mysql.txt" }}
+x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-{{ .Branch }}-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}
 x-test-command: &test-command |
     . ~/.virtualenvs/dsmr-reader/bin/activate
     py.test --cov --cov-report=xml
@@ -69,7 +70,7 @@ commands:
                       . ~/.virtualenvs/dsmr-reader/bin/activate
 
                       pip3 install --upgrade pip
-                      pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
+                      pip3 install -r dsmrreader/provisioning/requirements/ci.txt
                       pip3 install psycopg2
 
             - save_cache:
@@ -124,7 +125,7 @@ commands:
                 command: *test-command
 
 # Dummy vars, used for anchors.
-x-postgresql-image: &postgresql-image circleci/postgres:11-alpine
+x-postgresql-image: &postgresql-image circleci/postgres:12-alpine
 x-mysql-image: &mysql-image circleci/mysql:5
 x-base-job: &base-job
     working_directory: ~/repo
@@ -161,6 +162,17 @@ jobs:
          <<: *base-job
          docker:
              - image: circleci/python:3.8-buster
+
+             - image: *postgresql-image
+               environment: *postgresql-db-env
+
+             - image: *mysql-image
+               environment: *mysql-db-env
+
+    test-python39:
+         <<: *base-job
+         docker:
+             - image: circleci/python:3.9-buster
 
              - image: *postgresql-image
                environment: *postgresql-db-env
