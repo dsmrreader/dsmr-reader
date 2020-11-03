@@ -4,23 +4,36 @@ Env Settings
 You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
 
 
-.. warning::
+.. attention::
 
-    The following settings have been **renamed** since DSMR-reader ``v4.5``. Their old name will be **removed** in DSMR-reader ``v5.0``::
+    The following settings have been **renamed** since DSMR-reader ``v4.5``. Their old name will be **removed** in DSMR-reader ``v5.0``
 
-        Name before v4.5    ->      New name since v4.5
-        -----------------------------------------------
-        SECRET_KEY          ->      DJANGO_SECRET_KEY
-        DB_ENGINE           ->      DJANGO_DATABASE_ENGINE
-        DB_HOST             ->      DJANGO_DATABASE_HOST
-        DB_PORT             ->      DJANGO_DATABASE_PORT
-        DB_NAME             ->      DJANGO_DATABASE_NAME
-        DB_USER             ->      DJANGO_DATABASE_USER
-        DB_PASS             ->      DJANGO_DATABASE_PASSWORD
-        CONN_MAX_AGE        ->      DJANGO_DATABASE_CONN_MAX_AGE
-        TZ                  ->      DJANGO_TIME_ZONE
-        DSMR_USER           ->      DSMRREADER_ADMIN_USER
-        DSMR_PASSWORD       ->      DSMRREADER_ADMIN_PASSWORD
+    +-----------------------+--------------------------------------+
+    | Old name < v4.5       | New name >= v4.5                     |
+    +=======================+======================================+
+    | ``SECRET_KEY``        | ``DJANGO_SECRET_KEY``                |
+    +-----------------------+--------------------------------------+
+    | ``DB_ENGINE``         | ``DJANGO_DATABASE_ENGINE``           |
+    +-----------------------+--------------------------------------+
+    | ``DB_HOST``           | ``DJANGO_DATABASE_HOST``             |
+    +-----------------------+--------------------------------------+
+    | ``DB_PORT``           | ``DJANGO_DATABASE_PORT``             |
+    +-----------------------+--------------------------------------+
+    | ``DB_NAME``           | ``DJANGO_DATABASE_NAME``             |
+    +-----------------------+--------------------------------------+
+    | ``DB_USER``           | ``DJANGO_DATABASE_USER``             |
+    +-----------------------+--------------------------------------+
+    | ``DB_PASS``           | ``DJANGO_DATABASE_PASSWORD``         |
+    +-----------------------+--------------------------------------+
+    | ``CONN_MAX_AGE``      | ``DJANGO_DATABASE_CONN_MAX_AGE``     |
+    +-----------------------+--------------------------------------+
+    | ``TZ``                | ``DJANGO_TIME_ZONE``                 |
+    +-----------------------+--------------------------------------+
+    | ``DSMR_USER``         | ``DSMRREADER_ADMIN_USER``            |
+    +-----------------------+--------------------------------------+
+    | ``DSMR_PASSWORD``     | ``DSMRREADER_ADMIN_PASSWORD``        |
+    +-----------------------+--------------------------------------+
+
 
 .. contents::
 
@@ -28,219 +41,344 @@ You can either specify the following settings as system environments variables o
 Django settings/overrides
 -------------------------
 
-``SECRET_KEY`` / ``DJANGO_SECRET_KEY``
+DSMR-reader utilizes the Python Django framework.
+All settings below directly affect or override Django, and therefor your DSMR-reader installation as well.
+
+``DJANGO_SECRET_KEY`` (``SECRET_KEY``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. attention::
 
-    Renamed to ``DJANGO_SECRET_KEY`` since DSMR-reader ``v4.5`` and the old name ``SECRET_KEY`` will be removed in DSMR-reader ``v5.0``.
-
-**Required**
+    **Required setting**
 
 The secret key Django should use. This should be randomly generated for your installation.
 Generate or refresh it by running ``./tools/generate-secret-key.sh``.
 
-See ``SECRET_KEY`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#secret-key>`__.
+.. seealso::
+
+    See ``SECRET_KEY`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#secret-key>`__.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``DB_ENGINE`` / ``DJANGO_DATABASE_ENGINE``
+
+``DJANGO_DATABASE_ENGINE`` (``DB_ENGINE``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. attention::
 
-    Renamed to ``DJANGO_DATABASE_ENGINE`` since DSMR-reader ``v4.5`` and the old name ``DB_ENGINE`` will be removed in DSMR-reader ``v5.0``.
-
-**Required**
+    **Required setting**
 
 The database engine to use. Officially DSMR-reader only supports ``django.db.backends.postgresql``, but others supported by Django may work as well.
 Experiment at your own risk!
 
-See ``DATABASES.ENGINE`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#engine>`__.
+
+.. seealso::
+
+    See ``DATABASES.ENGINE`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#engine>`__.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``DB_HOST`` / ``DJANGO_DATABASE_HOST``
+
+``DJANGO_DATABASE_HOST`` (``DB_HOST``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. attention::
 
-    Renamed to ``DJANGO_DATABASE_HOST`` since DSMR-reader ``v4.5`` and the old name ``DB_HOST`` will be removed in DSMR-reader ``v5.0``.
+    **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-**Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-See ``DATABASES.HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#host>`__.
+.. seealso::
+
+    See ``DATABASES.HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#host>`__.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``DB_PORT`` / ``DJANGO_DATABASE_PORT``
+
+``DJANGO_DATABASE_PORT`` (``DB_PORT``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. attention::
 
-    Renamed to ``DJANGO_DATABASE_PORT`` since DSMR-reader ``v4.5`` and the old name ``DB_PORT`` will be removed in DSMR-reader ``v5.0``.
+    **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-**Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-See ``DATABASES.PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#port>`__.
+.. seealso::
+
+    See ``DATABASES.PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#port>`__.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``DB_NAME`` / ``DJANGO_DATABASE_NAME``
+
+``DJANGO_DATABASE_NAME`` (``DB_NAME``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. attention::
 
-    Renamed to ``DJANGO_DATABASE_NAME`` since DSMR-reader ``v4.5`` and the old name ``DB_NAME`` will be removed in DSMR-reader ``v5.0``.
+    **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-**Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-See ``DATABASES.NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#name>`__.
+.. seealso::
+
+    See ``DATABASES.NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#name>`__.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``DB_USER`` / ``DJANGO_DATABASE_USER``
+
+``DJANGO_DATABASE_USER`` (``DB_USER``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. attention::
 
-    Renamed to ``DJANGO_DATABASE_USER`` since DSMR-reader ``v4.5`` and the old name ``DB_USER`` will be removed in DSMR-reader ``v5.0``.
+    **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-**Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-See ``DATABASES.USER`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#user>`__.
+.. seealso::
+
+    See ``DATABASES.USER`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#user>`__.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``DB_PASS`` / ``DJANGO_DATABASE_PASSWORD``
+
+``DJANGO_DATABASE_PASSWORD`` (``DB_PASS``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. attention::
 
-    Renamed to ``DJANGO_DATABASE_PASSWORD`` since DSMR-reader ``v4.5`` and the old name ``DB_PASS`` will be removed in DSMR-reader ``v5.0``.
+    **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-**Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
-See ``DATABASES.PASSWORD`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#password>`__.
+.. seealso::
+
+    See ``DATABASES.PASSWORD`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#password>`__.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``CONN_MAX_AGE`` / ``DJANGO_DATABASE_CONN_MAX_AGE``
+
+``DJANGO_DATABASE_CONN_MAX_AGE`` (``CONN_MAX_AGE``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. note::
 
-    Renamed to ``DJANGO_DATABASE_CONN_MAX_AGE`` since DSMR-reader ``v4.5`` and the old name ``CONN_MAX_AGE`` will be removed in DSMR-reader ``v5.0``.
+    **Optional setting**
 
-**Optional**
 
-See ``DATABASES.CONN_MAX_AGE`` in `Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#conn-max-age>`__. Omit to use the default.
+.. seealso::
+
+    See ``DATABASES.CONN_MAX_AGE`` in `Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#conn-max-age>`__. Omit to use the default.
+
+.. versionadded:: v4.5
+
 
 ----
 
-``TZ`` / ``DJANGO_TIME_ZONE``
+
+``DJANGO_TIME_ZONE`` (``TZ``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. note::
 
-    Renamed to ``DJANGO_TIME_ZONE`` since DSMR-reader ``v4.5`` and the old name ``TZ`` will be removed in DSMR-reader ``v5.0``.
+    **Optional setting**
 
-**Optional**
 
-The timezone `Django should use <https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-TIME_ZONE>`__. Alter at your own risk. Omit to use the default, using the CET/CEST timezone (applicable to the Netherlands).
+.. seealso::
+
+    The timezone `Django should use <https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-TIME_ZONE>`__. Alter at your own risk. Omit to use the default, using the CET/CEST timezone (applicable to the Netherlands).
+
+.. versionadded:: v4.5
+
 
 ----
+
 
 ``DJANGO_STATIC_URL``
 ~~~~~~~~~~~~~~~~~~~~~
-**Situational**
 
-See ``STATIC_URL`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-url>`__. Omit to use the default.
+.. note::
+
+    **Situational setting**
+
+
+
+.. seealso::
+
+    See ``STATIC_URL`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-url>`__. Omit to use the default.
+
+.. versionadded:: v4.5
+
 
 ----
+
 
 ``DJANGO_FORCE_SCRIPT_NAME``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**Situational**
 
-See ``FORCE_SCRIPT_NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#force-script-name>`__. Omit to use the default.
+.. note::
+
+    **Situational setting**
+
+
+.. seealso::
+
+    See ``FORCE_SCRIPT_NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#force-script-name>`__. Omit to use the default.
+
+.. versionadded:: v4.5
+
 
 ----
+
 
 ``DJANGO_USE_X_FORWARDED_HOST``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**Situational**
 
-See ``USE_X_FORWARDED_HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-host>`__. Omit to use the default.
+.. note::
+
+    **Situational setting**
+
+
+.. seealso::
+
+    See ``USE_X_FORWARDED_HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-host>`__. Omit to use the default.
+
+.. versionadded:: v4.5
+
 
 ----
+
 
 ``DJANGO_USE_X_FORWARDED_PORT``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**Situational**
 
-See ``USE_X_FORWARDED_PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-port>`__. Omit to use the default.
+.. note::
+
+    **Situational setting**
+
+
+.. seealso::
+
+    See ``USE_X_FORWARDED_PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-port>`__. Omit to use the default.
+
+.. versionadded:: v4.5
+
 
 ----
+
 
 ``DJANGO_X_FRAME_OPTIONS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-**Situational**
 
-See ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#x-frame-options>`__. Omit to use the default.
+.. note::
+
+    **Situational setting**
+
+
+.. seealso::
+
+    See ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#x-frame-options>`__. Omit to use the default.
+
+.. versionadded:: v4.5
+
 
 ----
+
 
 ``DJANGO_STATIC_ROOT``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-**Situational**
 
-See ``STATIC_ROOT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-root>`__. Omit to use the default.
+.. note::
+
+    **Situational setting**
+
+
+.. seealso::
+
+    See ``STATIC_ROOT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-root>`__. Omit to use the default.
+
+.. versionadded:: v4.6
+
 
 ----
+
 
 DSMR-reader settings
 --------------------
 
-``DSMR_USER`` / ``DSMRREADER_ADMIN_USER``
+``DSMRREADER_ADMIN_USER`` (``DSMR_USER``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. note::
 
-    Renamed to ``DSMRREADER_ADMIN_USER`` since DSMR-reader ``v4.5`` and the old name ``DSMR_USER`` will be removed in DSMR-reader ``v5.0``.
-
-**Situational**
+    **Situational setting**
 
 The username of the **webinterface** (super)user to create when running ``./manage.py dsmr_superuser``.
 
+.. versionadded:: v4.5
+
+
 ----
 
-``DSMR_PASSWORD`` / ``DSMRREADER_ADMIN_PASSWORD``
+
+``DSMRREADER_ADMIN_PASSWORD`` (``DSMR_PASSWORD``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. warning::
+.. note::
 
-    Renamed to ``DSMRREADER_ADMIN_PASSWORD`` since DSMR-reader ``v4.5`` and the old name ``DSMR_PASSWORD`` will be removed in DSMR-reader ``v5.0``.
-
-**Situational**
+    **Situational setting**
 
 The password of the ``DSMR_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``.
 
+.. versionadded:: v4.5
+
+
 ----
+
 
 ``DSMRREADER_LOGLEVEL``
 ~~~~~~~~~~~~~~~~~~~~~~~
-**Optional**
+
+.. note::
+
+    **Optional setting**
 
 The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this default), ``WARNING`` or ``DEBUG`` (should be temporary due to file I/O).
 
-For more information, :doc:`see Troubleshooting<troubleshooting>`.
+
+.. seealso::
+
+    For more information, :doc:`see Troubleshooting<troubleshooting>`.
+
+.. versionadded:: v4.5
+
 
 ----
 
+
 ``DSMRREADER_PLUGINS``
 ~~~~~~~~~~~~~~~~~~~~~~~
-**Optional**
+
+.. note::
+
+    **Optional setting**
 
 The plugins DSMR-reader should use. Omit to use the default of no plugins.
 Note that this should be a comma separated list when specifying multiple plugins. E.g.::
@@ -248,14 +386,26 @@ Note that this should be a comma separated list when specifying multiple plugins
     DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1
     DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1,dsmr_plugins.modules.plugin_name2
 
-For more information, :doc:`see Plugins<plugins>`.
+
+.. seealso::
+
+    For more information, :doc:`see Plugins<plugins>`.
+
+.. versionadded:: v4.5
+
 
 ----
 
+
 ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**Optional**
+
+.. note::
+
+    **Optional setting**
 
 Whether to suppress any warnings regarding too many readings stored or the database size.
 Set it to ``True`` to disable the warnings or omit it to use the default (``False``).
-Suppress at your own risk. Added in DSMR-reader ``v4.6``.
+Suppress at your own risk.
+
+.. versionadded:: v4.6

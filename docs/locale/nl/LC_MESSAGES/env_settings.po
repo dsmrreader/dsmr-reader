@@ -27,314 +27,316 @@ msgid "You can either specify the following settings as system environments vari
 msgstr "Je kunt deze instellingen ofwel als systeem environment variabelen aanmaken of ze definieren in een ``.env`` bestand in de DSMR-reader project-map."
 
 #: ../../env_settings.rst:9
-msgid "The following settings have been **renamed** since DSMR-reader ``v4.5``. Their old name will be **removed** in DSMR-reader ``v5.0``::"
-msgstr "De volgende instellingen zijn **hernoemd** sinds DSMR-reader ``v4.5``. De oude naam wordt **verwijderd** in DSMR-reader ``v5.0``::"
+msgid "The following settings have been **renamed** since DSMR-reader ``v4.5``. Their old name will be **removed** in DSMR-reader ``v5.0``"
+msgstr "De volgende instellingen zijn **hernoemd** sinds DSMR-reader ``v4.5``. De oude naam wordt **verwijderd** in DSMR-reader ``v5.0``"
+
+#: ../../env_settings.rst:12
+msgid "Old name < v4.5"
+msgstr "Oude naam < v4.5"
+
+#: ../../env_settings.rst:12
+msgid "New name >= v4.5"
+msgstr "Nieuwe naam >= v4.5"
+
+#: ../../env_settings.rst:14
+msgid "``SECRET_KEY``"
+msgstr "``SECRET_KEY``"
+
+#: ../../env_settings.rst:14
+msgid "``DJANGO_SECRET_KEY``"
+msgstr "``DJANGO_SECRET_KEY``"
+
+#: ../../env_settings.rst:16
+msgid "``DB_ENGINE``"
+msgstr "``DB_ENGINE``"
+
+#: ../../env_settings.rst:16
+msgid "``DJANGO_DATABASE_ENGINE``"
+msgstr "``DJANGO_DATABASE_ENGINE``"
+
+#: ../../env_settings.rst:18
+msgid "``DB_HOST``"
+msgstr "``DB_HOST``"
+
+#: ../../env_settings.rst:18
+msgid "``DJANGO_DATABASE_HOST``"
+msgstr "``DJANGO_DATABASE_HOST``"
+
+#: ../../env_settings.rst:20
+msgid "``DB_PORT``"
+msgstr "``DB_PORT``"
+
+#: ../../env_settings.rst:20
+msgid "``DJANGO_DATABASE_PORT``"
+msgstr "``DJANGO_DATABASE_PORT``"
+
+#: ../../env_settings.rst:22
+msgid "``DB_NAME``"
+msgstr "``DB_NAME``"
+
+#: ../../env_settings.rst:22
+msgid "``DJANGO_DATABASE_NAME``"
+msgstr "``DJANGO_DATABASE_NAME``"
+
+#: ../../env_settings.rst:24
+msgid "``DB_USER``"
+msgstr "``DB_USER``"
+
+#: ../../env_settings.rst:24
+msgid "``DJANGO_DATABASE_USER``"
+msgstr "``DJANGO_DATABASE_USER``"
 
 #: ../../env_settings.rst:26
+msgid "``DB_PASS``"
+msgstr "``DB_PASS``"
+
+#: ../../env_settings.rst:26
+msgid "``DJANGO_DATABASE_PASSWORD``"
+msgstr "``DJANGO_DATABASE_PASSWORD``"
+
+#: ../../env_settings.rst:28
+msgid "``CONN_MAX_AGE``"
+msgstr "``CONN_MAX_AGE``"
+
+#: ../../env_settings.rst:28
+msgid "``DJANGO_DATABASE_CONN_MAX_AGE``"
+msgstr "``DJANGO_DATABASE_CONN_MAX_AGE``"
+
+#: ../../env_settings.rst:30
+msgid "``TZ``"
+msgstr "``TZ``"
+
+#: ../../env_settings.rst:30
+msgid "``DJANGO_TIME_ZONE``"
+msgstr "``DJANGO_TIME_ZONE``"
+
+#: ../../env_settings.rst:32
+msgid "``DSMR_USER``"
+msgstr "``DSMR_USER``"
+
+#: ../../env_settings.rst:32
+msgid "``DSMRREADER_ADMIN_USER``"
+msgstr "``DSMRREADER_ADMIN_USER``"
+
+#: ../../env_settings.rst:34
+msgid "``DSMR_PASSWORD``"
+msgstr "``DSMR_PASSWORD``"
+
+#: ../../env_settings.rst:34
+msgid "``DSMRREADER_ADMIN_PASSWORD``"
+msgstr "``DSMRREADER_ADMIN_PASSWORD``"
+
+#: ../../env_settings.rst:39
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../env_settings.rst:29
+#: ../../env_settings.rst:42
 msgid "Django settings/overrides"
 msgstr "Django instellingen"
 
-#: ../../env_settings.rst:32
-msgid "``SECRET_KEY`` / ``DJANGO_SECRET_KEY``"
-msgstr "``SECRET_KEY`` / ``DJANGO_SECRET_KEY``"
+#: ../../env_settings.rst:44
+msgid "DSMR-reader utilizes the Python Django framework. All settings below directly affect or override Django, and therefor your DSMR-reader installation as well."
+msgstr "DSMR-reader gebruikt onderwater het Python Django framework. Alle instellingen hieronder hebben direct betrekking op Django en daarmee op je DSMR-reader-installatie."
 
-#: ../../env_settings.rst:36
-msgid "Renamed to ``DJANGO_SECRET_KEY`` since DSMR-reader ``v4.5`` and the old name ``SECRET_KEY`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_SECRET_KEY`` sinds DSMR-reader ``v4.5`` en de oude naam ``SECRET_KEY`` wordt verwijderd in DSMR-reader ``v5.0``."
+#: ../../env_settings.rst:48
+msgid "``DJANGO_SECRET_KEY`` (``SECRET_KEY``)"
+msgstr "``DJANGO_SECRET_KEY`` (``SECRET_KEY``)"
 
-#: ../../env_settings.rst:38 ../../env_settings.rst:54
-msgid "**Required**"
-msgstr "**Vereist**"
+#: ../../env_settings.rst:52 ../../env_settings.rst:75
+msgid "**Required setting**"
+msgstr "**Vereiste instelling**"
 
-#: ../../env_settings.rst:40
+#: ../../env_settings.rst:54
 msgid "The secret key Django should use. This should be randomly generated for your installation. Generate or refresh it by running ``./tools/generate-secret-key.sh``."
 msgstr "De secret key die Django gebruikt. Zou willekeurig moeten zijn voor je installatie. Genereer of roteer het door ``./tools/generate-secret-key.sh`` uit te voeren."
 
-#: ../../env_settings.rst:43
+#: ../../env_settings.rst:59
 msgid "See ``SECRET_KEY`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#secret-key>`__."
 msgstr "Zie ``SECRET_KEY`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#secret-key>`__."
 
-#: ../../env_settings.rst:48
-msgid "``DB_ENGINE`` / ``DJANGO_DATABASE_ENGINE``"
-msgstr "``DB_ENGINE`` / ``DJANGO_DATABASE_ENGINE``"
+#: ../../env_settings.rst:71
+msgid "``DJANGO_DATABASE_ENGINE`` (``DB_ENGINE``)"
+msgstr "``DJANGO_DATABASE_ENGINE`` (``DB_ENGINE``)"
 
-#: ../../env_settings.rst:52
-msgid "Renamed to ``DJANGO_DATABASE_ENGINE`` since DSMR-reader ``v4.5`` and the old name ``DB_ENGINE`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_DATABASE_ENGINE`` sinds DSMR-reader ``v4.5`` en de oude naam ``DB_ENGINE`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:56
+#: ../../env_settings.rst:77
 msgid "The database engine to use. Officially DSMR-reader only supports ``django.db.backends.postgresql``, but others supported by Django may work as well. Experiment at your own risk!"
 msgstr "De database-engine om te gebruiken. Officieel ondersteunt DSMR-reader alleen ``django.db.backends.postgresql``, maar anderen ondersteund door Django werken mogelijk ook. Experimenteer op eigen risico!"
 
-#: ../../env_settings.rst:59
+#: ../../env_settings.rst:83
 msgid "See ``DATABASES.ENGINE`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#engine>`__."
 msgstr "Zie ``DATABASES.ENGINE`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#engine>`__."
 
-#: ../../env_settings.rst:64
-msgid "``DB_HOST`` / ``DJANGO_DATABASE_HOST``"
-msgstr "``DB_HOST`` / ``DJANGO_DATABASE_HOST``"
+#: ../../env_settings.rst:95
+msgid "``DJANGO_DATABASE_HOST`` (``DB_HOST``)"
+msgstr "``DJANGO_DATABASE_HOST`` (``DB_HOST``)"
 
-#: ../../env_settings.rst:68
-msgid "Renamed to ``DJANGO_DATABASE_HOST`` since DSMR-reader ``v4.5`` and the old name ``DB_HOST`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_DATABASE_HOST`` sinds DSMR-reader ``v4.5`` en de oude naam ``DB_HOST`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:70 ../../env_settings.rst:83
-#: ../../env_settings.rst:96 ../../env_settings.rst:109
-#: ../../env_settings.rst:122
+#: ../../env_settings.rst:99 ../../env_settings.rst:121
+#: ../../env_settings.rst:143 ../../env_settings.rst:165
+#: ../../env_settings.rst:187
 msgid "**Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines."
 msgstr "**Vereist** voor de standaard ``DB_DJANGO``, maar kan optioneel zijn voor andere engines."
 
-#: ../../env_settings.rst:72
+#: ../../env_settings.rst:104
 msgid "See ``DATABASES.HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#host>`__."
 msgstr "Zie ``DATABASES.HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#host>`__."
 
-#: ../../env_settings.rst:77
-msgid "``DB_PORT`` / ``DJANGO_DATABASE_PORT``"
-msgstr "``DB_PORT`` / ``DJANGO_DATABASE_PORT``"
+#: ../../env_settings.rst:117
+msgid "``DJANGO_DATABASE_PORT`` (``DB_PORT``)"
+msgstr "``DJANGO_DATABASE_PORT`` (``DB_PORT``)"
 
-#: ../../env_settings.rst:81
-msgid "Renamed to ``DJANGO_DATABASE_PORT`` since DSMR-reader ``v4.5`` and the old name ``DB_PORT`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_DATABASE_PORT`` sinds DSMR-reader ``v4.5`` en de oude naam ``DB_PORT`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:85
+#: ../../env_settings.rst:126
 msgid "See ``DATABASES.PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#port>`__."
 msgstr "Zie ``DATABASES.PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#port>`__."
 
-#: ../../env_settings.rst:90
-msgid "``DB_NAME`` / ``DJANGO_DATABASE_NAME``"
-msgstr "``DB_NAME`` / ``DJANGO_DATABASE_NAME``"
+#: ../../env_settings.rst:139
+msgid "``DJANGO_DATABASE_NAME`` (``DB_NAME``)"
+msgstr "``DJANGO_DATABASE_NAME`` (``DB_NAME``)"
 
-#: ../../env_settings.rst:94
-msgid "Renamed to ``DJANGO_DATABASE_NAME`` since DSMR-reader ``v4.5`` and the old name ``DB_NAME`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_DATABASE_NAME`` sinds DSMR-reader ``v4.5`` en de oude naam ``DB_NAME`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:98
+#: ../../env_settings.rst:148
 msgid "See ``DATABASES.NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#name>`__."
 msgstr "Zie ``DATABASES.NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#name>`__."
 
-#: ../../env_settings.rst:103
-msgid "``DB_USER`` / ``DJANGO_DATABASE_USER``"
-msgstr "``DB_USER`` / ``DJANGO_DATABASE_USER``"
+#: ../../env_settings.rst:161
+msgid "``DJANGO_DATABASE_USER`` (``DB_USER``)"
+msgstr "``DJANGO_DATABASE_USER`` (``DB_USER``)"
 
-#: ../../env_settings.rst:107
-msgid "Renamed to ``DJANGO_DATABASE_USER`` since DSMR-reader ``v4.5`` and the old name ``DB_USER`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_DATABASE_USER`` sinds DSMR-reader ``v4.5`` en de oude naam ``DB_USER`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:111
+#: ../../env_settings.rst:170
 msgid "See ``DATABASES.USER`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#user>`__."
 msgstr "Zie ``DATABASES.USER`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#user>`__."
 
-#: ../../env_settings.rst:116
-msgid "``DB_PASS`` / ``DJANGO_DATABASE_PASSWORD``"
-msgstr "``DB_PASS`` / ``DJANGO_DATABASE_PASSWORD``"
+#: ../../env_settings.rst:183
+msgid "``DJANGO_DATABASE_PASSWORD`` (``DB_PASS``)"
+msgstr "``DJANGO_DATABASE_PASSWORD`` (``DB_PASS``)"
 
-#: ../../env_settings.rst:120
-msgid "Renamed to ``DJANGO_DATABASE_PASSWORD`` since DSMR-reader ``v4.5`` and the old name ``DB_PASS`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_DATABASE_PASSWORD`` sinds DSMR-reader ``v4.5`` en de oude naam ``DB_PASSWORD`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:124
+#: ../../env_settings.rst:192
 msgid "See ``DATABASES.PASSWORD`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#password>`__."
 msgstr "Zie ``DATABASES.PASSWORD`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#password>`__."
 
-#: ../../env_settings.rst:129
-msgid "``CONN_MAX_AGE`` / ``DJANGO_DATABASE_CONN_MAX_AGE``"
-msgstr "``CONN_MAX_AGE`` / ``DJANGO_DATABASE_CONN_MAX_AGE``"
+#: ../../env_settings.rst:205
+msgid "``DJANGO_DATABASE_CONN_MAX_AGE`` (``CONN_MAX_AGE``)"
+msgstr "``DJANGO_DATABASE_CONN_MAX_AGE`` (``CONN_MAX_AGE``)"
 
-#: ../../env_settings.rst:133
-msgid "Renamed to ``DJANGO_DATABASE_CONN_MAX_AGE`` since DSMR-reader ``v4.5`` and the old name ``CONN_MAX_AGE`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_DATABASE_CONN_MAX_AGE`` sinds DSMR-reader ``v4.5`` en de oude naam ``CONN_MAX_AGE`` wordt verwijderd in DSMR-reader ``v5.0``."
+#: ../../env_settings.rst:209 ../../env_settings.rst:231
+#: ../../env_settings.rst:427 ../../env_settings.rst:451
+#: ../../env_settings.rst:479
+msgid "**Optional setting**"
+msgstr "**Optionele instelling**"
 
-#: ../../env_settings.rst:135 ../../env_settings.rst:148
-#: ../../env_settings.rst:233 ../../env_settings.rst:243
-#: ../../env_settings.rst:257
-msgid "**Optional**"
-msgstr "**Optioneel**"
-
-#: ../../env_settings.rst:137
+#: ../../env_settings.rst:214
 msgid "See ``DATABASES.CONN_MAX_AGE`` in `Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#conn-max-age>`__. Omit to use the default."
 msgstr "Zie ``DATABASES.CONN_MAX_AGE`` in `Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#conn-max-age>`__. Laat weg om de standaard waarde te gebruiken."
 
-#: ../../env_settings.rst:142
-msgid "``TZ`` / ``DJANGO_TIME_ZONE``"
-msgstr "``TZ`` / ``DJANGO_TIME_ZONE``"
+#: ../../env_settings.rst:227
+msgid "``DJANGO_TIME_ZONE`` (``TZ``)"
+msgstr "``DJANGO_TIME_ZONE`` (``TZ``)"
 
-#: ../../env_settings.rst:146
-msgid "Renamed to ``DJANGO_TIME_ZONE`` since DSMR-reader ``v4.5`` and the old name ``TZ`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DJANGO_TIME_ZONE`` sinds DSMR-reader ``v4.5`` en de oude naam ``TZ`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:150
+#: ../../env_settings.rst:236
 msgid "The timezone `Django should use <https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-TIME_ZONE>`__. Alter at your own risk. Omit to use the default, using the CET/CEST timezone (applicable to the Netherlands)."
 msgstr "De tijdzone `die Django moet gebruiken <https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-TIME_ZONE>`__. Wijzig op eigen risico. Laat weg om de standaard CET/CEST-tijdzone te gebruiken (zoals die voor Nederland geldt)."
 
-#: ../../env_settings.rst:155
+#: ../../env_settings.rst:249
 msgid "``DJANGO_STATIC_URL``"
 msgstr "``DJANGO_STATIC_URL``"
 
-#: ../../env_settings.rst:156 ../../env_settings.rst:164
-#: ../../env_settings.rst:172 ../../env_settings.rst:180
-#: ../../env_settings.rst:188 ../../env_settings.rst:196
-#: ../../env_settings.rst:212 ../../env_settings.rst:225
-msgid "**Situational**"
-msgstr "**Situationeel**"
+#: ../../env_settings.rst:253 ../../env_settings.rst:276
+#: ../../env_settings.rst:298 ../../env_settings.rst:320
+#: ../../env_settings.rst:342 ../../env_settings.rst:364
+#: ../../env_settings.rst:389 ../../env_settings.rst:408
+msgid "**Situational setting**"
+msgstr "**Situationele instelling**"
 
-#: ../../env_settings.rst:158
+#: ../../env_settings.rst:259
 msgid "See ``STATIC_URL`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-url>`__. Omit to use the default."
 msgstr "Zie ``STATIC_URL`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-url>`__. Laat weg om de standaardwaarde te gebruiken."
 
-#: ../../env_settings.rst:163
+#: ../../env_settings.rst:272
 msgid "``DJANGO_FORCE_SCRIPT_NAME``"
 msgstr "``DJANGO_FORCE_SCRIPT_NAME``"
 
-#: ../../env_settings.rst:166
+#: ../../env_settings.rst:281
 msgid "See ``FORCE_SCRIPT_NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#force-script-name>`__. Omit to use the default."
 msgstr "Zie ``FORCE_SCRIPT_NAME`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#force-script-name>`__. Laat weg om de standaardwaarde te gebruiken."
 
-#: ../../env_settings.rst:171
+#: ../../env_settings.rst:294
 msgid "``DJANGO_USE_X_FORWARDED_HOST``"
 msgstr "``DJANGO_USE_X_FORWARDED_HOST``"
 
-#: ../../env_settings.rst:174
+#: ../../env_settings.rst:303
 msgid "See ``USE_X_FORWARDED_HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-host>`__. Omit to use the default."
 msgstr "Zie ``USE_X_FORWARDED_HOST`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-host>`__. Laat weg om de standaardwaarde te gebruiken."
 
-#: ../../env_settings.rst:179
+#: ../../env_settings.rst:316
 msgid "``DJANGO_USE_X_FORWARDED_PORT``"
 msgstr "``DJANGO_USE_X_FORWARDED_PORT``"
 
-#: ../../env_settings.rst:182
+#: ../../env_settings.rst:325
 msgid "See ``USE_X_FORWARDED_PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-port>`__. Omit to use the default."
 msgstr "Zie ``USE_X_FORWARDED_PORT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#use-x-forwarded-port>`__. Laat weg om de standaardwaarde te gebruiken."
 
-#: ../../env_settings.rst:187
+#: ../../env_settings.rst:338
 msgid "``DJANGO_X_FRAME_OPTIONS``"
 msgstr "``DJANGO_X_FRAME_OPTIONS``"
 
-#: ../../env_settings.rst:190
+#: ../../env_settings.rst:347
 msgid "See ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#x-frame-options>`__. Omit to use the default."
 msgstr "Zie ``X_FRAME_OPTIONS`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#x-frame-options>`__. Laat weg om de standaardwaarde te gebruiken."
 
-#: ../../env_settings.rst:195
+#: ../../env_settings.rst:360
 msgid "``DJANGO_STATIC_ROOT``"
 msgstr "``DJANGO_STATIC_ROOT``"
 
-#: ../../env_settings.rst:198
+#: ../../env_settings.rst:369
 msgid "See ``STATIC_ROOT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-root>`__. Omit to use the default."
 msgstr "Zie ``STATIC_ROOT`` `in Django docs <https://docs.djangoproject.com/en/3.1/ref/settings/#static-root>`__. Laat weg om de standaardwaarde te gebruiken."
 
-#: ../../env_settings.rst:203
+#: ../../env_settings.rst:382
 msgid "DSMR-reader settings"
 msgstr "DSMR-reader instellingen"
 
-#: ../../env_settings.rst:206
-msgid "``DSMR_USER`` / ``DSMRREADER_ADMIN_USER``"
-msgstr "``DSMR_USER`` / ``DSMRREADER_ADMIN_USER``"
+#: ../../env_settings.rst:385
+msgid "``DSMRREADER_ADMIN_USER`` (``DSMR_USER``)"
+msgstr "``DSMRREADER_ADMIN_USER`` (``DSMR_USER``)"
 
-#: ../../env_settings.rst:210
-msgid "Renamed to ``DSMRREADER_ADMIN_USER`` since DSMR-reader ``v4.5`` and the old name ``DSMR_USER`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DSMRREADER_ADMIN_USER`` sinds DSMR-reader ``v4.5`` en de oude naam ``DSMR_USER`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:214
+#: ../../env_settings.rst:391
 msgid "The username of the **webinterface** (super)user to create when running ``./manage.py dsmr_superuser``."
 msgstr "Gebruikersnaam van de **webinterface** (super)user om te gebruiken, wanneer je ``./manage.py dsmr_superuser`` uitvoert."
 
-#: ../../env_settings.rst:219
-msgid "``DSMR_PASSWORD`` / ``DSMRREADER_ADMIN_PASSWORD``"
-msgstr "``DSMR_PASSWORD`` / ``DSMRREADER_ADMIN_PASSWORD``"
+#: ../../env_settings.rst:404
+msgid "``DSMRREADER_ADMIN_PASSWORD`` (``DSMR_PASSWORD``)"
+msgstr "``DSMRREADER_ADMIN_PASSWORD`` (``DSMR_PASSWORD``)"
 
-#: ../../env_settings.rst:223
-msgid "Renamed to ``DSMRREADER_ADMIN_PASSWORD`` since DSMR-reader ``v4.5`` and the old name ``DSMR_PASSWORD`` will be removed in DSMR-reader ``v5.0``."
-msgstr "Hernoemd naar ``DSMRREADER_ADMIN_PASSWORD`` sinds DSMR-reader ``v4.5`` en de oude naam ``DSMR_PASSWORD`` wordt verwijderd in DSMR-reader ``v5.0``."
-
-#: ../../env_settings.rst:227
+#: ../../env_settings.rst:410
 msgid "The password of the ``DSMR_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``."
 msgstr "Het gewenste wachtwoord voor de ``DSMR_USER`` gebruiker, bij aanmaken of updaten van de gebruiker. Voor wanneer je ``./manage.py dsmr_superuser`` uitvoert."
 
-#: ../../env_settings.rst:232
+#: ../../env_settings.rst:423
 msgid "``DSMRREADER_LOGLEVEL``"
 msgstr "``DSMRREADER_LOGLEVEL``"
 
-#: ../../env_settings.rst:235
+#: ../../env_settings.rst:429
 msgid "The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this default), ``WARNING`` or ``DEBUG`` (should be temporary due to file I/O)."
 msgstr "Het log level dat DSMR-reader gebruikt. Kies ofwel ``ERROR`` (laat weg voor deze standaardwaarde), ``WARNING`` of ``DEBUG`` (alleen tijdelijk i.v.m. hogere I/O)."
 
-#: ../../env_settings.rst:237
+#: ../../env_settings.rst:434
 msgid "For more information, :doc:`see Troubleshooting<troubleshooting>`."
 msgstr "Voor meer informatie, :doc:`zie Hulp bij problemen<troubleshooting>`."
 
-#: ../../env_settings.rst:242
+#: ../../env_settings.rst:447
 msgid "``DSMRREADER_PLUGINS``"
 msgstr "``DSMRREADER_PLUGINS``"
 
-#: ../../env_settings.rst:245
+#: ../../env_settings.rst:453
 msgid "The plugins DSMR-reader should use. Omit to use the default of no plugins. Note that this should be a comma separated list when specifying multiple plugins. E.g.::"
 msgstr "De plugins die DSMR-reader gebruikt. Laat weg als je dit niet gebruikt. N.B.: Dit is een komma-gescheiden lijst wanneer je meerdere plugins specificeert. Bijvoorbeeld::"
 
-#: ../../env_settings.rst:251
+#: ../../env_settings.rst:462
 msgid "For more information, :doc:`see Plugins<plugins>`."
 msgstr "Voor meer informatie, :doc:`zie Plugins<plugins>`."
 
-#: ../../env_settings.rst:256
+#: ../../env_settings.rst:475
 msgid "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
 msgstr "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
 
-#: ../../env_settings.rst:259
-msgid "Whether to suppress any warnings regarding too many readings stored or the database size. Set it to ``True`` to disable the warnings or omit it to use the default (``False``). Suppress at your own risk. Added in DSMR-reader ``v4.6``."
-msgstr "Gebruik dit om waarschuwingen over \"te veel opgeslagen metingen\" of een \"te grote database\" te onderdrukken. Stel in op ``True`` om deze waarschuwingen uit te schakelen of laat het weg om de standaardwaarde (``False``) te gebruiken. Gebruik op eigen risico. Toegevoegd sinds DSMR-reader ``v4.6``."
-
-#~ msgid "The max lifetime for the database connections. Omit to use the default."
-#~ msgstr "De maximale levensduur voor databaseverbindingen. Laat weg om de standaardinstelling te gebruiken."
-
-#~ msgid "``SECRET_KEY``"
-#~ msgstr "``SECRET_KEY``"
-
-#~ msgid "``DB_ENGINE``"
-#~ msgstr "``DB_ENGINE``"
-
-#~ msgid "``DB_NAME``"
-#~ msgstr "``DB_NAME``"
-
-#~ msgid "The database name to use."
-#~ msgstr "De database-naam."
-
-#~ msgid "``DB_USER``"
-#~ msgstr "``DB_USER``"
-
-#~ msgid "The database user to use."
-#~ msgstr "De database-gebruiker."
-
-#~ msgid "``DB_PASS``"
-#~ msgstr "``DB_PASS``"
-
-#~ msgid "The database password for the ``DB_USER`` to use."
-#~ msgstr "Het database-wachtwoord voor ``DB_USER`` om te gebruiken."
-
-#~ msgid "``DB_HOST``"
-#~ msgstr "``DB_HOST``"
-
-#~ msgid "The database host to use."
-#~ msgstr "De database-host."
-
-#~ msgid "``DB_PORT``"
-#~ msgstr "``DB_PORT``"
-
-#~ msgid "The database port to use."
-#~ msgstr "De database-poort."
-
-#~ msgid "``DSMR_USER``"
-#~ msgstr "``DSMR_USER``"
-
-#~ msgid "``DSMR_PASSWORD``"
-#~ msgstr "``DSMR_PASSWORD``"
-
-#~ msgid "``CONN_MAX_AGE``"
-#~ msgstr "``CONN_MAX_AGE``"
-
-#~ msgid "``TZ``"
-#~ msgstr "``TZ``"
-
-#~ msgid "**Required** for the default ``DB_ENGINE``, but can be optional for some engines."
-#~ msgstr "**Vereist** voor de standaard ``DB_ENGINE``, maar kan optioneel zijn voor andere engines."
+#: ../../env_settings.rst:481
+msgid "Whether to suppress any warnings regarding too many readings stored or the database size. Set it to ``True`` to disable the warnings or omit it to use the default (``False``). Suppress at your own risk."
+msgstr "Gebruik dit om waarschuwingen over \"te veel opgeslagen metingen\" of een \"te grote database\" te onderdrukken. Stel in op ``True`` om deze waarschuwingen uit te schakelen of laat het weg om de standaardwaarde (``False``) te gebruiken. Gebruik op eigen risico."
