@@ -26,7 +26,7 @@
                             <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden update-check"></i>
 
                             <div id="update_check_no_update_available" class="xhr-hidden">
-                                <div class="alert alert-without-padding alert-success" role="alert">
+                                <div class="alert alert-without-padding alert-info" role="alert">
                                     <i class="fas fa-check-circle"></i> &nbsp; {% translate "You are running the latest version" %}
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                     {% empty %}
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="alert alert-without-padding alert-info" role="alert">
+                                <div class="alert alert-without-padding alert-sucess" role="alert">
                                     <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
                                 </div>
                             </div>
