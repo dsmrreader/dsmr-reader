@@ -197,9 +197,3 @@ After editing the .PO files, you can check the result by building the Dutch tran
     make -e SPHINXOPTS="-D language='nl'" html
 
 Now view the generated HTML in your browser by opening: ``docs/_build/html/index.html``
-
-
-Pull requests
--------------
-
-Please make sure to always point any pull requests to the ``development`` branch of DSMR-reader, as the ``master`` branch will only be affected by release merges.
