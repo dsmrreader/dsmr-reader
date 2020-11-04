@@ -15,10 +15,11 @@ where ``plugin_name`` is the name of your plugin.
 Please make sure the ``plugin_name``,
 
 * is lowercase (``plugin_name`` and **not** ``PLUGIN_NAME``),
-* does not contains spaces or dashes, just use underscores and do not start the name with a digit.
+* does not contains spaces or dashes, only use underscores and do not start the name with a digit.
 
+.. seealso::
 
-Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information :doc:`see DSMRREADER_PLUGINS in Env Settings<env_settings>`.
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information :doc:`see DSMRREADER_PLUGINS in Env Settings<env_settings>`.
 
 Your plugin file is imported once, so you should make sure to hook any events you want.
 
@@ -60,15 +61,19 @@ Other
 More signals may be available for use, please be careful when binding Django save-signals as it may impact performance.
 :doc:`If you need any help or information, please seek contact via Github<contributing>`.
 
+Examples:
+~~~~~~~~~
 
 Example #1: Upload data to second PVOutput account
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------
 This is an example of issue `#407 <https://github.com/dsmrreader/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account.
 
+.. seealso::
 
-:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
 
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.secondary_pvoutput_upload
+        DSMRREADER_PLUGINS=dsmr_plugins.modules.secondary_pvoutput_upload
+
 
 Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file)::
 
@@ -96,17 +101,20 @@ Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file)::
         if response.status_code != 200:
             print(' [!] PVOutput upload failed (HTTP {}): {}'.format(response.status_code, response.text))
 
+.. attention::
 
-Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your second set of PVOutput API credentials.
+    Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your second set of PVOutput API credentials.
 
 
 Example #2: Forwarding raw telegram data to another serial port
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------------------
 This is an example of issue `#557 <https://github.com/dsmrreader/dsmr-reader/issues/557>`_, allowing raw DSMR telegrams to be forwarded to another serial port.
 
-:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+.. seealso::
 
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_serial
+    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+
+        DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_serial
 
 
 Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new file)::
@@ -146,16 +154,20 @@ Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new file
         serial_handle.close()
 
 
-Note that the ``/dev/ttyUSBvA`` variable should be changed to the serial port used in your own situation.
+.. attention::
+
+    Note that the ``/dev/ttyUSBvA`` variable should be changed to the serial port used in your own situation.
 
 
 Example #3: Forwarding raw telegram data to another instance by API
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------------
 This can be quite handy if you run multiple instances of DSMR-reader (i.e.: RaspberryPI + somewhere in cloud).
 
-:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+.. seealso::
 
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
+    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+
+        DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
 
 
 Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (new file)::
@@ -189,16 +201,20 @@ Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (new file)::
             logging.error('Server Error forwarding telegram: {}'.format(response.text))
 
 
-Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should be changed to your own preferences. 
+.. attention::
+
+    Note that the ``API_HOST``, ``API_KEY`` and ``TIMEOUT`` variables should be changed to your own preferences.
 
 
 Example #4: Forwarding DSMR readings in JSON format to some API
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------------------
 Use this to send DSMR readings in JSON format to some (arbitrary) API.
 
-:doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+.. seealso::
 
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_json_dsmrreading_to_api
+    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+
+        DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_json_dsmrreading_to_api
 
 
 Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new file)::
@@ -235,3 +251,47 @@ Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new fil
             )
         except Exception as error:
             print('forward_json_dsmrreading_to_api:', error)
+
+
+Example #5: Read telegrams using DSMRloggerWS API
+-------------------------------------------------
+
+.. seealso::
+
+    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+
+        DSMRREADER_PLUGINS=dsmr_plugins.modules.poll_dsmrloggerws_api
+
+
+Plugin file ``dsmr_plugins/modules/poll_dsmrloggerws_api.py`` (new file)::
+
+    import requests
+
+    from django.dispatch import receiver
+
+    from dsmr_backend.signals import backend_called
+    import dsmr_datalogger.services.datalogger
+
+
+    # Preverve a low timeout to prevent the entire backend process from hanging too long.
+    DSMRLOGGERWS_ENDPOINT = 'http://localhost/api/v1/sm/telegram'
+    DSMRLOGGERWS_TIMEOUT = 5
+
+
+    @receiver(backend_called)
+    def handle_backend_called(**kwargs):
+        response = requests.get(DSMRLOGGERWS_ENDPOINT,
+                                timeout=DSMRLOGGERWS_TIMEOUT)
+
+        if response.status_code != 200:
+            print(' [!] DSMRloggerWS plugin: Telegram endpoint failed (HTTP {}): {}'.format(
+                response.status_code,
+                response.text
+            ))
+            return
+
+        dsmr_datalogger.services.datalogger.telegram_to_reading(data=response.text)
+
+.. attention::
+
+    Note that you might need to update the ``http://localhost`` value to your own situation.
