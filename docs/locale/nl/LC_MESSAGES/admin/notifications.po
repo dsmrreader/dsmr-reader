@@ -135,12 +135,3 @@ msgstr "Voor het testen van notificaties kun je het volgende uitvoeren::"
 #: ../../admin/notifications.rst:108
 msgid "Please note that DSMR-reader will reset and wipe notification settings on any error. This can be experienced as a bit annoying."
 msgstr "N.B.: DSMR-reader reset en wist alle notificatieinstellingen wanneer er fouten optreden. Dit kan als wat vervelend ervaren worden."
-
-#~ msgid "How do I obtain my API key for Pushover?"
-#~ msgstr "Hoe krijg ik mijn API key voor Pushover?"
-
-#~ msgid "How do I obtain my API key for Telegram?"
-#~ msgstr "Hoe krijg ik mijn API key voor Telegram?"
-
-#~ msgid "The supported app for Android is `Pushover <https://pushover.net>`_."
-#~ msgstr "De ondersteunde app voor Android is `Pushover <https://pushover.net>`_."

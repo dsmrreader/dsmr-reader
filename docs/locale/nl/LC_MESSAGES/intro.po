@@ -140,7 +140,3 @@ msgid ""
 ":doc:`Please read this page as well before using DSMR-"
 "reader<data_integrity>`."
 msgstr ":doc:`Lees deze pagina voordat je DSMR-reader gebruikt<data_integrity>`."
-
-#~ msgid ":doc:`See this page<features>`."
-#~ msgstr ":doc:`Zie deze pagina<features>`."
-

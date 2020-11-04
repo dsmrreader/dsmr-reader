@@ -107,9 +107,3 @@ msgstr "Toont de status van de applicatie en verwijst naar een hoop achtergrondi
 #: ../../tour.rst:113
 msgid "You can also easily check for DSMR-reader updates here."
 msgstr "Je kunt hier eveneens eenvoudig controleren op updates van DSMR-reader."
-
-#~ msgid "Status"
-#~ msgstr "Status"
-
-#~ msgid "The status page shows the 'health' of the application and any data tracked. If there are any problems regarding data handling, they should be highlighted here."
-#~ msgstr "De Status-pagina weergeeft de 'gezondheid' van de applicatie weer, evenals de voortgang van alle gegevens. Mochten er problemen zijn binnen de applicatie, dan wordt dat hier weergegeven."

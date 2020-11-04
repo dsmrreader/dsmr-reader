@@ -143,12 +143,3 @@ msgstr "`ReDoc <https://github.com/Redocly/redoc>`_"
 #: ../../credits.rst:49
 msgid "`Semantic UI <https://semantic-ui.com>`_"
 msgstr "`Semantic UI <https://semantic-ui.com>`_"
-
-#~ msgid "Also many thanks to..."
-#~ msgstr "En veel dank aan..."
-
-#~ msgid "... the `pull requests <https://github.com/dsmrreader/dsmr-reader/pulls>`_."
-#~ msgstr "... de `pull requests <https://github.com/dsmrreader/dsmr-reader/pulls>`_."
-
-#~ msgid "... all `the ideas, improvements and bugs reported <https://github.com/dsmrreader/dsmr-reader/issues>`_ for the past years."
-#~ msgstr "... alle `ideeën, verbeteringen, suggesties en foutmeldingen <https://github.com/dsmrreader/dsmr-reader/issues>`_ de afgelopen jaren."

@@ -91,6 +91,18 @@ This pages allows you to export all day or hour statistics to CSV.
     :alt: Export
 
 
+About
+------
+
+Shows the 'health' of the application and provides a lot of background information.
+
+You can also easily check for DSMR-reader updates here.
+
+.. image:: _static/screenshots/frontend/about.png
+    :target: _static/screenshots/frontend/about.png
+    :alt: Status
+
+
 Configuration
 -------------
 
@@ -103,15 +115,3 @@ Or you can just skip it this page and continue directly to the admin panel.
 .. image:: _static/screenshots/frontend/configuration.png
     :target: _static/screenshots/frontend/configuration.png
     :alt: Configuration
-
-
-About
-------
-
-Shows the 'health' of the application and provides a lot of background information.
-
-You can also easily check for DSMR-reader updates here.
-
-.. image:: _static/screenshots/frontend/about.png
-    :target: _static/screenshots/frontend/about.png
-    :alt: Status

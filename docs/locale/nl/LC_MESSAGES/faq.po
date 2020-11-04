@@ -250,10 +250,3 @@ msgstr ""
 #: ../../faq.rst:159
 msgid "Just delete the PID file and restart the webinterface::"
 msgstr "Verwijder het genoemde PID-bestand en herstart de webinterface::"
-
-#~ msgid ""
-#~ "See :doc:`these datalogger instructions<installation/datalogger>` for "
-#~ "more information."
-#~ msgstr ""
-#~ "Zie  :doc:`deze datalogger instructies<installation/datalogger>` voor "
-#~ "meer informatie."
