@@ -1,6 +1,6 @@
-# Dutch translations for PROJECT.
+# Dutch translations for DSMR.
 # Copyright (C) 2017 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
+# This file is distributed under the same license as the DSMR project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 msgid ""
@@ -10,93 +10,96 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../installation.rst:2
 msgid "Installation"
 msgstr "Installatie"
 
-#: ../../installation.rst:6
-msgid ""
-"**Possible storage issues**: :doc:`Please read this page as well before you "
-"start<data_integrity>`."
-msgstr ""
-"**Mogelijke problemen met gegevensopslag**: :doc:`Lees deze pagina voordat je "
-"begint<data_integrity>`."
-
-#: ../../installation.rst:10
+#: ../../installation.rst:5
 msgid "Install datalogger only"
 msgstr "Installeer alleen de datalogger"
 
-#: ../../installation.rst:11
+#: ../../installation.rst:6
 msgid ""
-"Use this to only install the datalogger. You can then forward the telegrams to "
-"an installation of DSMR-reader hosted somewhere else."
+"Use this to only install the datalogger. You can then forward the "
+"telegrams to an installation of DSMR-reader hosted somewhere else."
 msgstr ""
-"Gebruik dit om alleen de datalogger te installeren. Je kunt vervolgens de "
-"telegrammen doorsturen naar een andere installatie van DSMR-reader, die ergens "
-"anders draait."
+"Gebruik dit om alleen de datalogger te installeren. Je kunt vervolgens de"
+" telegrammen doorsturen naar een andere installatie van DSMR-reader, die "
+"ergens anders draait."
 
-#: ../../installation.rst:13
+#: ../../installation.rst:8
 msgid ""
-":doc:`Go to datalogger only installation instructions here.<installation/"
-"datalogger>`"
+":doc:`Go to datalogger only installation instructions "
+"here.<installation/datalogger>`"
 msgstr ""
-":doc:`Ga hier naar de instructies voor de installatie van de datalogger."
-"<installation/datalogger>`"
+":doc:`Ga hier naar de instructies voor de installatie van de "
+"datalogger.<installation/datalogger>`"
 
-#: ../../installation.rst:17
+#: ../../installation.rst:12
 msgid "Install full DSMR-reader"
 msgstr "Installeer volledige versie van DSMR-reader"
 
-#: ../../installation.rst:18
+#: ../../installation.rst:13
 msgid ""
-"Use this to host both the datalogger and application on the same machine. You "
-"have several options:"
+"Use this to host both the datalogger and application on the same machine."
+" You have several options:"
 msgstr ""
-"Gebruik dit om zowel de datalogger als de applicatie op hetzelfde apparaat te "
-"installeren. Je hebt diverse opties:"
+"Gebruik dit om zowel de datalogger als de applicatie op hetzelfde "
+"apparaat te installeren. Je hebt diverse opties:"
 
-#: ../../installation.rst:20
+#: ../../installation.rst:15
 msgid "**Quick installation**"
 msgstr "**Snelle installatie**"
 
-#: ../../installation.rst:22
+#: ../../installation.rst:17
 msgid ""
-"Contains just a list of commands needed for the installation of DSMR-reader. :"
-"doc:`Go to quick installation instructions here.<installation/quick>`"
+"Contains just a list of commands needed for the installation of DSMR-"
+"reader. :doc:`Go to quick installation instructions "
+"here.<installation/quick>`"
 msgstr ""
 "Bevat alleen een lijst met commando's nodig voor de installatie van DSMR-"
-"reader. :doc:`Ga hier naar instructies voor de snelle installatie."
-"<installation/quick>`"
+"reader. :doc:`Ga hier naar instructies voor de snelle "
+"installatie.<installation/quick>`"
 
-#: ../../installation.rst:25
+#: ../../installation.rst:20
 msgid "**Explained installation**"
 msgstr "**Toegelichte installatie**"
 
-#: ../../installation.rst:27
+#: ../../installation.rst:22
 msgid ""
 "For others users who want some addition explanation about what they are "
-"exactly doing/installing. :doc:`Go to explained installation instructions here."
-"<installation/explained>`"
+"exactly doing/installing. :doc:`Go to explained installation instructions"
+" here.<installation/explained>`"
 msgstr ""
-"Voor alle andere gebruikers, die graag willen weten wat ze exact uitvoeren. :"
-"doc:`Ga hier naar instructies voor de toegelichte installatie.<installation/"
-"explained>`"
+"Voor alle andere gebruikers, die graag willen weten wat ze exact "
+"uitvoeren. :doc:`Ga hier naar instructies voor de toegelichte "
+"installatie.<installation/explained>`"
 
-#: ../../installation.rst:30
+#: ../../installation.rst:25
 msgid "**Docker installation**"
 msgstr "**Docker-installatie**"
 
-#: ../../installation.rst:32
+#: ../../installation.rst:27
 msgid ""
-"Use DSMR-reader in Docker. Containers are maintained by third parties. :doc:"
-"`Go to Docker installation instructions here.<installation/docker>`"
+"Use DSMR-reader in Docker. Containers are maintained by third parties. "
+":doc:`Go to Docker installation instructions here.<installation/docker>`"
 msgstr ""
-"Draai DSMR-reader in Docker. Containers worden door derden onderhouden. :doc:"
-"`Ga hier naar de instructies voor de Docker-installatie.<installation/docker>`"
+"Draai DSMR-reader in Docker. Containers worden door derden onderhouden. "
+":doc:`Ga hier naar de instructies voor de Docker-"
+"installatie.<installation/docker>`"
+
+#~ msgid ""
+#~ "**Possible storage issues**: :doc:`Please read"
+#~ " this page as well before you "
+#~ "start<data_integrity>`."
+#~ msgstr ""
+#~ "**Mogelijke problemen met gegevensopslag**: "
+#~ ":doc:`Lees deze pagina voordat je "
+#~ "begint<data_integrity>`."
+

@@ -21,13 +21,8 @@ msgid "Contents"
 msgstr "Inhoudsopgave"
 
 #: ../../troubleshooting.rst:9
-msgid ""
-"If anything happens to fail or malfunction, please follow the steps below "
-"first to provide some background information when reporting an issue."
-msgstr ""
-"Wanneer er iets lijkt mis te gaan, volg de onderstaande stappen eerst, "
-"voordat je een issue aanmaakt. Hiermee kun je wat meer achtergrondinformatie "
-"aanleveren."
+msgid "If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue."
+msgstr "Wanneer er iets lijkt mis te gaan, volg de onderstaande stappen eerst, voordat je een issue aanmaakt. Hiermee kun je wat meer achtergrondinformatie aanleveren."
 
 #: ../../troubleshooting.rst:13
 msgid "Log files"
@@ -38,12 +33,8 @@ msgid "Always start by checking the log files for errors."
 msgstr "Je startpunt is altijd het bekijken van de logfiles voor foutmeldingen."
 
 #: ../../troubleshooting.rst:17
-msgid ""
-"DSMR-reader technically consists of these processes (some may or may not be "
-"used by you) and they are watched by Supervisor:"
-msgstr ""
-"DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of niet "
-"in je eigen situatie gebruikt worden) en ze worden beheerd door Supervisor:"
+msgid "DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:"
+msgstr "DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of niet in je eigen situatie gebruikt worden) en ze worden beheerd door Supervisor:"
 
 #: ../../troubleshooting.rst:20 ../../troubleshooting.rst:30
 msgid "Webinterface"
@@ -86,12 +77,8 @@ msgid "``/var/log/supervisor/dsmr_backend.log``"
 msgstr "``/var/log/supervisor/dsmr_backend.log``"
 
 #: ../../troubleshooting.rst:39
-msgid ""
-"The logfiles may be stale due to rotation. To see all logs for a process, try "
-"tailing a wildcard pattern, e.g.::"
-msgstr ""
-"De logbestanden kunnen blijven hangen wegens rotatie. Probeer te tailen op "
-"een wildcard-patroon om alles logs van een proces te zien. Bijvoorbeeld::"
+msgid "The logfiles may be stale due to rotation. To see all logs for a process, try tailing a wildcard pattern, e.g.::"
+msgstr "De logbestanden kunnen blijven hangen wegens rotatie. Probeer te tailen op een wildcard-patroon om alles logs van een proces te zien. Bijvoorbeeld::"
 
 #: ../../troubleshooting.rst:47
 msgid "Supervisor"
@@ -99,17 +86,11 @@ msgstr "Supervisor"
 
 #: ../../troubleshooting.rst:49
 msgid "You can view the status of all processes by running::"
-msgstr ""
-"Je kunt de status van alle processen bekijken door het volgende uit te "
-"voeren::"
+msgstr "Je kunt de status van alle processen bekijken door het volgende uit te voeren::"
 
 #: ../../troubleshooting.rst:53
-msgid ""
-"Any processes listed, should have the status ``RUNNING``. Stale or crashed "
-"processes can be restarted with::"
-msgstr ""
-"Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. "
-"Hangende of gecrashde processen kunnen herstart worden met::"
+msgid "Any processes listed, should have the status ``RUNNING``. Stale or crashed processes can be restarted with::"
+msgstr "Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. Hangende of gecrashde processen kunnen herstart worden met::"
 
 #: ../../troubleshooting.rst:59
 msgid "Or to restart them all simultaneously::"
@@ -120,21 +101,12 @@ msgid "Debug info dump for Github issues"
 msgstr "Debug-informatiedump voor Github-issues"
 
 #: ../../troubleshooting.rst:66
-msgid ""
-"You can supply additional debug info by executing the \"**dsmr_debuginfo**\" "
-"command and copying its output into your issue on Github."
-msgstr ""
-"Je kunt extra debug-informatie aanleveren door het \"**dsmr_debuginfo**\"-"
-"commando uit te voeren en vervolgens de output daarvan te kopieren naar je "
-"issue op Github."
+msgid "You can supply additional debug info by executing the \"**dsmr_debuginfo**\" command and copying its output into your issue on Github."
+msgstr "Je kunt extra debug-informatie aanleveren door het \"**dsmr_debuginfo**\"-commando uit te voeren en vervolgens de output daarvan te kopieren naar je issue op Github."
 
 #: ../../troubleshooting.rst:70
-msgid ""
-"The \"**dsmr_debuginfo**\" command is available since DSMR-reader v4.4 and "
-"higher."
-msgstr ""
-"HEt \"**dsmr_debuginfo**\"-commando is beschikbaar sinds DSMR-reader v4.4 en "
-"hoger."
+msgid "The \"**dsmr_debuginfo**\" command is available since DSMR-reader v4.4 and higher."
+msgstr "HEt \"**dsmr_debuginfo**\"-commando is beschikbaar sinds DSMR-reader v4.4 en hoger."
 
 #: ../../troubleshooting.rst:72
 msgid "Execute the following command::"
@@ -149,47 +121,24 @@ msgid "Logging levels"
 msgstr "Logging levels"
 
 #: ../../troubleshooting.rst:82
-msgid ""
-"If the processes do run, but you cannot find an error, (e.g.: things seem to "
-"hang or tend to be slow), there might be another issue at hand."
-msgstr ""
-"Wanneer de processen lijken te draaien, maar je kunt geen fout vinden "
-"(bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is er "
-"waarschijnlijk iets anders aan de hand."
+msgid "If the processes do run, but you cannot find an error, (e.g.: things seem to hang or tend to be slow), there might be another issue at hand."
+msgstr "Wanneer de processen lijken te draaien, maar je kunt geen fout vinden (bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is er waarschijnlijk iets anders aan de hand."
 
 #: ../../troubleshooting.rst:84
-msgid ""
-"DSMR-reader has DEBUG-logging, which makes the system log very verbosely "
-"about what it's trying to do. This applies **specifically** to the "
-"``dsmr_backend`` process."
-msgstr ""
-"DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt wat "
-"het aan het doen is. Dit geldt **specifiek** voor het ``dsmr_backend`` proces."
+msgid "DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do. This applies **specifically** to the ``dsmr_backend`` process."
+msgstr "DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt wat het aan het doen is. Dit geldt **specifiek** voor het ``dsmr_backend`` proces."
 
 #: ../../troubleshooting.rst:89
-msgid ""
-"Errors are likely to be logged at all times, no matter the DEBUG-logging "
-"level used. Debugging is only helpful to watch DSMR-reader's detailed "
-"behaviour."
-msgstr ""
-"Fouten worden doorgaans altijd gelogd, ongeacht het logging niveau van DEBUG-"
-"level of niet. Debugging is alleen nuttig om het gedrag van DSMR-reader in "
-"meer detail te observeren."
+msgid "Errors are likely to be logged at all times, no matter the DEBUG-logging level used. Debugging is only helpful to watch DSMR-reader's detailed behaviour."
+msgstr "Fouten worden doorgaans altijd gelogd, ongeacht het logging niveau van DEBUG-level of niet. Debugging is alleen nuttig om het gedrag van DSMR-reader in meer detail te observeren."
 
 #: ../../troubleshooting.rst:91
-msgid ""
-"The DEBUG-logging is disabled by default, to reduce writes on the filesystem. "
-"You can enable the logging by following these steps:"
-msgstr ""
-"De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties op "
-"het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te "
-"volgen:"
+msgid "The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:"
+msgstr "De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties op het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te volgen:"
 
 #: ../../troubleshooting.rst:93
 msgid "Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``."
-msgstr ""
-"Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te "
-"voeren."
+msgstr "Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te voeren."
 
 #: ../../troubleshooting.rst:94
 msgid "Open the ``.env`` file and look for the code below::"
@@ -204,12 +153,8 @@ msgid "It should now be::"
 msgstr "Het zou nu dit moeten zijn::"
 
 #: ../../troubleshooting.rst:107
-msgid ""
-"After editing the file, all processes need to be restarted. To do this, you "
-"can either execute::"
-msgstr ""
-"Na het bewerken van het bestand zul je alle processen moeten herstarten. Om "
-"dit te doen, voer het volgende uit::"
+msgid "After editing the file, all processes need to be restarted. To do this, you can either execute::"
+msgstr "Na het bewerken van het bestand zul je alle processen moeten herstarten. Om dit te doen, voer het volgende uit::"
 
 #: ../../troubleshooting.rst:111
 msgid "Or go back to the **sudo user** and execute::"
@@ -220,27 +165,18 @@ msgid "All done!"
 msgstr "Klaar!"
 
 #: ../../troubleshooting.rst:120
-msgid "Unprocessed telegrams"
-msgstr "Onverwerkte telegrammen"
+msgid "FAQ"
+msgstr "FAQ"
 
 #: ../../troubleshooting.rst:121
-msgid ""
-"Are you experiencing lots of unprocessed telegrams? You may have excessive "
-"data stored, causing a drag in performance. :doc:`More information can be "
-"found here<faq/data_throughput>`."
-msgstr ""
-"Heb je regelamtig last van onverwerkte telegrammen? Het kan zijn dat je een "
-"overvloed aan gegevens hebt opgeslagen, die inhakken op de performance. :doc:"
-"`Meer informatie daarover kun je hier vinden<faq/data_throughput>`."
+msgid "Are you unable to resolve your problem or do you need any help? :doc:`Check out the FAQ as well<faq>`."
+msgstr "Kom je er toch niet uit of heb je hulp nodig? :doc:`Bekijk ook de FAQ<faq>`."
 
-#: ../../troubleshooting.rst:126
-msgid "Contact"
-msgstr "Contact"
+#~ msgid "Unprocessed telegrams"
+#~ msgstr "Onverwerkte telegrammen"
 
-#: ../../troubleshooting.rst:127
-msgid ""
-"Are you unable to resolve your problem or do you need any help? :doc:`More "
-"information can be found here<contributing>`."
-msgstr ""
-"Kom je er toch niet uit of heb je hulp nodig? :doc:`Meer informatie kun je "
-"hier vinden<contributing>`."
+#~ msgid "Are you experiencing lots of unprocessed telegrams? You may have excessive data stored, causing a drag in performance. :doc:`More information can be found here<faq/data_throughput>`."
+#~ msgstr "Heb je regelamtig last van onverwerkte telegrammen? Het kan zijn dat je een overvloed aan gegevens hebt opgeslagen, die inhakken op de performance. :doc:`Meer informatie daarover kun je hier vinden<faq/data_throughput>`."
+
+#~ msgid "Contact"
+#~ msgstr "Contact"

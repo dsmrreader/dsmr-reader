@@ -109,8 +109,8 @@ msgid "Other"
 msgstr "Overige"
 
 #: ../../plugins.rst:61
-msgid "More signals may be available for use, please be careful when binding Django save-signals as it may impact performance. :doc:`If you need any help or information, please seek contact via Github<contributing>`."
-msgstr "Meer signalen/gebeurtenissen zijn beschikbaar voor gebruik, echter wees voorzichtig bij het gebruiken van Django save-signalen, aangezien het de performance kan beïnvloeden.  :doc:`Mocht je hulp of informatie nodig hebben, zoek dan contact via Github<contributing>`."
+msgid "More signals may be available for use, please be careful when binding Django save-signals as it may impact performance."
+msgstr "Meer signalen/gebeurtenissen zijn beschikbaar voor gebruik, echter wees voorzichtig bij het gebruiken van Django save-signalen, aangezien het de performance kan beïnvloeden."
 
 #: ../../plugins.rst:65
 msgid "Examples:"

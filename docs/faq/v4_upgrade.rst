@@ -20,7 +20,10 @@ List of changes
 1. Update to the latest ``v3.x`` version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:doc:`See here for instructions<update>`.
+Execute the following::
+
+    sudo su - dsmr
+    ./deploy.sh
 
 
 2. Install ``python3-psycopg2``

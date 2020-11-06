@@ -59,7 +59,7 @@ Called by Django after saving new records to the database. Can be bound to the `
 Other
 ^^^^^
 More signals may be available for use, please be careful when binding Django save-signals as it may impact performance.
-:doc:`If you need any help or information, please seek contact via Github<contributing>`.
+
 
 Examples:
 ~~~~~~~~~

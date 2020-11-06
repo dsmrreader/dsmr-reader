@@ -1,14 +1,11 @@
 DSMR Reader's documentation
-===========================
+###########################
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    intro
-   tour
    changelog
-   requirements
-   data_integrity
    troubleshooting
    faq
    env_settings
@@ -36,16 +33,10 @@ DSMR Reader's documentation
    admin/notifications
    admin/pvoutput
 
-   faq/update
-   faq/downgrade
-   faq/data_throughput
-   faq/restart_processes
-   faq/database
-   faq/uninstall
    faq/v4_upgrade
    faq/v3_upgrade
 
-   contributing
    credits
-   donations
    licence
+
+   settings

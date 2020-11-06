@@ -1,144 +1,119 @@
-Frequently Asked Questions (FAQ)
-================================
+FAQ (Frequently Asked Questions)
+################################
 
 
 .. contents::
-    :depth: 2
+    :depth: 3
 
 
-I need help!
-------------
-If you can't find the answer in the documentation, do not hesitate in looking for help.
+Application management
+----------------------
 
-.. seealso::
+How to upgrade?
+^^^^^^^^^^^^^^^
 
-    `Create an issue at Github <https://github.com/dsmrreader/dsmr-reader/issues/new>`_.
+Every once in a while there may be updates. You can also easily check for updates by using the application's Status page.
 
+.. warning::
 
-How can I update my application?
---------------------------------
+    First, **please make sure you have a recent backup of your database**!
 
-.. seealso::
+You can update your application to the latest version by executing ``deploy.sh``, located in the root of the project.
+Make sure to execute it while logged in as the ``dsmr`` user::
 
-    :doc:`More information can be found here <faq/update>`.
-
-
-How can I downgrade my application?
------------------------------------
-
-.. seealso::
-
-    :doc:`More information can be found here <faq/downgrade>`.
+   sudo su - dsmr
+   ./deploy.sh
 
 
-How can I move the database location?
--------------------------------------
+How to downgrade?
+^^^^^^^^^^^^^^^^^
 
-.. seealso::
+If for some reason you need to downgrade the application, you will need to:
 
-    :doc:`More information can be found here <faq/database>`.
+- unapply database migrations.
+- switch the application code version to a previous release.
 
 
-Recalculate prices retroactively
---------------------------------
-*I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?*
+.. warning::
 
-Execute::
+    First, **please make sure you have a recent backup of your database**!
 
+
+Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v4/dsmrreader/provisioning/downgrade/>`_.
+You should execute the script of the version you wish to downgrade to. And the switch the code to the release.
+
+For example ``v4.0``::
+
+   sudo su - dsmr
+   sh dsmrreader/provisioning/downgrade/v4.0.sh
+   git checkout tags/v4.0.0
+   ./deploy.sh
+
+.. note::
+
+    Unapplying the database migrations may take a while.
+
+You should now be on the targeted release.
+
+
+How to restart?
+^^^^^^^^^^^^^^^
+
+You might want or need to restart DSMR-reader manually at some time.
+E.g.: Due to altered settings that need to be reapplied to the processes.
+
+For a soft restart::
+
+    # This only works if the processes already run.
     sudo su - dsmr
-    ./manage.py dsmr_stats_recalculate_prices
+    ./reload.sh
+
+For a hard restart::
+
+    # Make sure you are root or sudo user.
+    sudo supervisorctl restart all
 
 
-I'm not seeing any gas readings
--------------------------------
+How to uninstall?
+^^^^^^^^^^^^^^^^^
 
-Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render. 
-The gas meter positions are only be updated once per hour (for DSMR v4).
-The Status page will give you insight in this as well.
+To remove DSMR-reader from your system, execute the following commands::
 
+    # Nginx.
+    sudo rm /etc/nginx/sites-enabled/dsmr-webinterface
+    sudo service nginx reload
+    sudo rm -rf /var/www/dsmrreader
 
-How do I restore a database backup?
------------------------------------
+    # Supervisor.
+    sudo supervisorctl stop all
+    sudo rm /etc/supervisor/conf.d/dsmr*.conf
+    sudo supervisorctl reread
+    sudo supervisorctl update
 
-.. seealso::
+    # Homedir & user.
+    sudo rm -rf /home/dsmr/
+    sudo userdel dsmr
 
-    :doc:`More information can be found here <installation/restore>`.
+To delete your data (the database) as well::
 
+    sudo su - postgres dropdb dsmrreader
 
-How do I enable timezone support for MySQL?
--------------------------------------------
+Optionally, you can remove these packages::
 
-.. seealso::
-
-    `Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql.html>`_ for more information about how to enable timezone support on MySQL.
-
-On recent versions it should be as simple as executing the following command as root/sudo user::
-
-    mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
-
-
-How do I retain MQTT support when upgrading to v1.23.0 or higher?
------------------------------------------------------------------
-
-.. seealso::
-
-    :doc:`More information can be found here <mqtt>`.
+    sudo apt-get remove postgresql postgresql-server-dev-all python3-psycopg2 nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
 
 
-How do I uninstall DSMR-reader?
--------------------------------
-
-.. seealso::
-
-    :doc:`More information can be found here <faq/uninstall>`.
-
-
-How can I use the datalogger only and forward the telegrams?
-------------------------------------------------------------
-
-.. seealso::
-
-    :doc:`More information can be found here <installation/datalogger>`.
-
-
-How can I check the logfiles?
------------------------------
+How to view logfiles?
+^^^^^^^^^^^^^^^^^^^^^
 
 .. seealso::
 
     :doc:`More information can be found here <troubleshooting>`.
 
 
-How can I restart the application or processes?
------------------------------------------------
 
-.. seealso::
-
-    :doc:`More information can be found here <faq/restart_processes>`.
-
-
-How do I fix errors such as ``DETAIL: Key (id)=(123) already exists``?
-----------------------------------------------------------------------
-
-This depends on the situation, but you can always try this yourself first::
-
-    # Note: dsmr_sqlsequencereset is only available in DSMR-reader v3.3.0 and higher
-    sudo su - dsmr
-    ./manage.py dsmr_sqlsequencereset
-
-If it does not resolve your issue, `ask for support <#i-need-help>`_.
-
-
-I've changed to a different smart meter
----------------------------------------
-Sometimes, when relocating or due to replacement of your meter, the meter positions read by DSMR-reader will cause invalid data (e.g.: big gaps or inverted consumption).
-Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day.
-
-The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<configuration>` for the invalid day.
-
-
-How can I create the (super)user or update its password?
---------------------------------------------------------
+How do I set admin credentials?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. seealso::
 
@@ -154,8 +129,198 @@ Now execute::
 The user should either be created or the existing user should have its password updated.
 
 
-How do I fix: ``Error: Already running on PID 1234 (or pid file '/var/tmp/gunicorn--dsmr_webinterface.pid' is stale)``?
------------------------------------------------------------------------------------------------------------------------
+Database
+--------
+
+How do I reclaim database disk space?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. note::
+
+    This will only make a difference if you've enabled data cleanup retroactively, resulting in more than a 25 percent data deletion of your entire database.
+
+Assuming you are using the default database, PostgreSQL, you may want to try a one-time vacuum by executing::
+
+    sudo su - postgres
+    vacuumdb -f -v -d dsmrreader
+
+If there was any disk space to reclaim, the effect should be visible on the filesystem now.
+
+
+How do I change the database location?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. attention::
+
+    Changing the database data location may cause data corruption. Only execute the step below if you understand exactly what you are doing!
+
+Since the SD-card is quite vulnerable to wearing and corruption, you can run the database on a different disk or USB-stick.
+To do this, you will have to stop the application and database, change the database configuration, move the data and restart all processes again.
+
+Make sure the OS has direct access the new location and **create a back-up first**!
+
+In the example below we will move the data from ``/var/lib/postgresql/`` to ``/data/postgresql/`` (which could be an external mount).
+
+.. note::
+
+    *Please note that "9.5" in the example below is just the version number of the database, and it may differ from your installation. The same steps however apply.*
+
+Execute the commands below:
+
+* Stop DSMR-reader: ``sudo supervisorctl stop all``
+
+* Stop database: ``sudo systemctl stop postgresql``
+
+* Confirm that the database has stopped, you should see no more ``postgresql`` processes running: ``sudo ps faux | grep postgres``
+
+* Ensure the new location exists: ``sudo mkdir /data/postgresql/``
+
+* Move the database data folder: ``sudo mv /var/lib/postgresql/9.5/ /data/postgresql/9.5/``
+
+* Make sure the ``postgres`` user has access to the new location (and any parent folders in it's path): ``sudo chown -R postgres:postgres /data/``
+
+* Edit database configuration ``sudo vi /etc/postgresql/9.5/main/postgresql.conf`` and find the line::
+
+    data_directory = '/var/lib/postgresql/9.5/main'
+
+* Change it to your new location::
+
+    data_directory = '/data/postgresql/9.5/main'
+
+* Save the file and start the database: ``sudo systemctl start postgresql``
+
+* Check whether the database is running again, you should see multiple processes: ``sudo ps faux | grep postgres``
+
+* Does the database not start? Check its logs in ``/var/log/postgresql/`` for hints.
+
+* Start DSMR-reader again: ``sudo supervisorctl start all``
+
+* Everything should work as usual now, storing the data on the new location.
+
+
+How do I enable MySQL timezone support?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. seealso::
+
+    `Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql.html>`_ for more information about how to enable timezone support on MySQL.
+
+On recent versions it should be as simple as executing the following command as root/sudo user::
+
+    mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
+
+
+How do I restore a backup?
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. seealso::
+
+    :doc:`More information can be found here <installation/restore>`.
+
+
+Errors
+------
+
+How do I fix ``DETAIL: Key (id)=(123) already exists``?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This depends on the situation, but you can always try the following yourself first::
+
+    # Note: dsmr_sqlsequencereset is only available in DSMR-reader v3.3.0 and higher
+    sudo su - dsmr
+    ./manage.py dsmr_sqlsequencereset
+
+If it does not resolve your issue, ask for support on Github (see end of page).
+
+
+How do I fix: ``Error: Already running on PID 1234``?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you're seeing this error::
+
+    Error: Already running on PID 1234 (or pid file '/var/tmp/gunicorn--dsmr_webinterface.pid' is stale)
+
 Just delete the PID file and restart the webinterface::
 
     sudo supervisorctl restart dsmr_webinterface
+
+
+How do I fix stats after smart meter replacement?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sometimes, when relocating or due to replacement of your meter, the meter positions read by DSMR-reader will cause invalid data (e.g.: big gaps or inverted consumption).
+Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day.
+
+The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<configuration>` for the invalid day.
+
+
+Data
+----
+
+By default DSMR-reader reads and preserves all telegram data read.
+
+When using a Raspberry Pi (or similar) combined with a DSMR version 5 smart meter (the default nowadays), you may experience issues after a while.
+
+This is caused by the high data throughput of DSMR version 5, which produces a new telegram every second.
+Both DSMR-reader and most of its users do not need this high frequency of telegrams to store, calculate and plot consumption data.
+
+Therefor two measures can be taken.
+
+
+How can I increase the datalogger sleep time?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Increase the datalogger sleep time :doc:`in the configuration<../configuration>` to 5 seconds or higher.
+This will save a lot of disk storage, especially when using a Raspberry Pi SD card, usually having a size of 16 GB max.
+
+
+How can I configure a data retention policy?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Configure a data retention policy :doc:`in the configuration<../configuration>`.
+This will eventually delete up to 99 percent of the telegrams, always preserving a few historically.
+Also, day and hour totals are **never** deleted by retention policies.
+
+
+.. attention::::
+
+    New installations of DSMR-reader ``v4.1`` or higher will start with a default retention policy of one month.
+
+
+I'm missing gas readings?
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render.
+The gas meter positions are only be updated once per hour (for DSMR v4).
+The Status page will give you insight in this as well.
+
+
+How do I only use the datalogger?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. seealso::
+
+    :doc:`More information can be found here <installation/datalogger>`.
+
+
+Prices
+------
+
+How do I recalculate prices retroactively?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?
+
+Execute::
+
+    sudo su - dsmr
+    ./manage.py dsmr_stats_recalculate_prices
+
+
+Support
+-------
+
+I still need help!
+^^^^^^^^^^^^^^^^^^
+If you can't find the answer in the documentation, do not hesitate in looking for help.
+
+.. seealso::
+
+    `View existing Github issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_

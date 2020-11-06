@@ -11,7 +11,7 @@
 - **FAQ**: [English](https://dsmr-reader.readthedocs.io/en/v4/faq.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/faq.html)
 
 ## Screenshots / tour
-[Check out the tour](https://dsmr-reader.readthedocs.io/en/v4/tour.html) in the documentation.
+[Check out the tour](https://dsmr-reader.readthedocs.io/en/v4/intro.html) in the documentation.
 
 ![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/v4.7/frontend/dashboard.png)
 

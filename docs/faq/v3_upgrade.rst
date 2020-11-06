@@ -15,7 +15,10 @@ DSMR-reader ``v3.x`` is backwards incompatible with ``2.x``. You will have to ma
 1. Update to the latest ``v2.x`` version (``v2.15``)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:doc:`See here for instructions<update>`.
+Execute the following::
+
+    sudo su - dsmr
+    ./deploy.sh
 
 
 2. Python version check

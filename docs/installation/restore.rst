@@ -7,11 +7,23 @@ Installation: Restore database backup
 
 Restoring a backup will replace any existing data stored in the database and is irreversible!
 
-This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database.
+This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::
+
+    sudo -u postgres createdb -O dsmrreader dsmrreader
+
 
 .. attention::
 
-    To be clear: Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way.
+    Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way.
+
+    Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point.
+
+
+.. warning::
+
+    To be clear, we'll repeat it once again:
+
+    Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way.
 
     Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point.
 
@@ -30,13 +42,12 @@ To restore an uncompressed backup (``.sql``), run::
     sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
 
 
-Restore failure
-^^^^^^^^^^^^^^^
+Result
+^^^^^^
 
 You should **not** see any errors regarding duplicate data or existing ID's or whatever.
 
-.. note::
+.. attention::
 
     If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**.
 
-    :doc:`More information can be found here<../contributing>`.

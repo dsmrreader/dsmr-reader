@@ -1,5 +1,5 @@
 Changelog
-=========
+#########
 
 .. contents::
     :depth: 2
@@ -9,11 +9,13 @@ Changelog
 
 
 v4.x releases
-^^^^^^^^^^^^^
+=============
 
 
 v4.7.0 - 2020-xx-xx
 -------------------
+
+- ``Changed``: Rework of documentation [`#1190 <https://github.com/dsmrreader/dsmr-reader/issues/1190>`_]
 
 
 v4.6.0 - 2020-11-01

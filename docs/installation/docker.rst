@@ -20,17 +20,5 @@ DSMR-reader in Docker
 +------------+------------------------------------------------------+
 
 
-Datalogger in Docker
---------------------
-
-+------------+--------------------------------------------------------+
-| Author     | ``trizz`` (Tristan)                                    |
-+------------+--------------------------------------------------------+
-| Github     | https://github.com/trizz/dsmr-remote-datalogger        |
-+------------+--------------------------------------------------------+
-| Docker Hub | https://hub.docker.com/r/trizz/dsmr-remote-datalogger/ |
-+------------+--------------------------------------------------------+
-
-
 :doc:`Finished? Go to setting up the application<../application>`.
 
