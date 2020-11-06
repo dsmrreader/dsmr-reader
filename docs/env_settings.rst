@@ -1,8 +1,11 @@
 Env Settings
 ============
 
-You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
+.. contents::
+    :depth: 2
 
+
+You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
 
 .. attention::
 
@@ -35,8 +38,6 @@ You can either specify the following settings as system environments variables o
     +-----------------------+--------------------------------------+
 
 
-.. contents::
-
 
 Django settings/overrides
 -------------------------
@@ -44,10 +45,19 @@ Django settings/overrides
 DSMR-reader utilizes the Python Django framework.
 All settings below directly affect or override Django, and therefor your DSMR-reader installation as well.
 
-``DJANGO_SECRET_KEY`` (``SECRET_KEY``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. contents:: :local:
+    :depth: 1
 
-.. attention::
+
+
+``DJANGO_SECRET_KEY``
+~~~~~~~~~~~~~~~~~~~~~
+
+.. deprecated:: 4.5
+
+    ``SECRET_KEY``
+
+.. hint::
 
     **Required setting**
 
@@ -64,10 +74,14 @@ Generate or refresh it by running ``./tools/generate-secret-key.sh``.
 ----
 
 
-``DJANGO_DATABASE_ENGINE`` (``DB_ENGINE``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_DATABASE_ENGINE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attention::
+.. deprecated:: 4.5
+
+    ``DB_ENGINE``
+
+.. hint::
 
     **Required setting**
 
@@ -85,10 +99,14 @@ Experiment at your own risk!
 ----
 
 
-``DJANGO_DATABASE_HOST`` (``DB_HOST``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_DATABASE_HOST``
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attention::
+.. deprecated:: 4.5
+
+    ``DB_HOST``
+
+.. hint::
 
     **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
@@ -103,10 +121,14 @@ Experiment at your own risk!
 ----
 
 
-``DJANGO_DATABASE_PORT`` (``DB_PORT``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_DATABASE_PORT``
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attention::
+.. deprecated:: 4.5
+
+    ``DB_PORT``
+
+.. hint::
 
     **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
@@ -121,10 +143,14 @@ Experiment at your own risk!
 ----
 
 
-``DJANGO_DATABASE_NAME`` (``DB_NAME``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_DATABASE_NAME``
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attention::
+.. deprecated:: 4.5
+
+    ``DB_NAME``
+
+.. hint::
 
     **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
@@ -139,10 +165,14 @@ Experiment at your own risk!
 ----
 
 
-``DJANGO_DATABASE_USER`` (``DB_USER``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_DATABASE_USER``
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attention::
+.. deprecated:: 4.5
+
+    ``DB_USER``
+
+.. hint::
 
     **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
@@ -157,10 +187,14 @@ Experiment at your own risk!
 ----
 
 
-``DJANGO_DATABASE_PASSWORD`` (``DB_PASS``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_DATABASE_PASSWORD``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attention::
+.. deprecated:: 4.5
+
+    ``DB_PASS``
+
+.. hint::
 
     **Required** for the default ``DJANGO_DATABASE_ENGINE``, but can be optional for some engines.
 
@@ -175,10 +209,14 @@ Experiment at your own risk!
 ----
 
 
-``DJANGO_DATABASE_CONN_MAX_AGE`` (``CONN_MAX_AGE``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_DATABASE_CONN_MAX_AGE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. deprecated:: 4.5
+
+    ``CONN_MAX_AGE``
+
+.. hint::
 
     **Optional setting**
 
@@ -193,10 +231,14 @@ Experiment at your own risk!
 ----
 
 
-``DJANGO_TIME_ZONE`` (``TZ``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DJANGO_TIME_ZONE``
+~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. deprecated:: 4.5
+
+    ``TZ``
+
+.. hint::
 
     **Optional setting**
 
@@ -214,7 +256,7 @@ Experiment at your own risk!
 ``DJANGO_STATIC_URL``
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Situational setting**
 
@@ -233,7 +275,7 @@ Experiment at your own risk!
 ``DJANGO_FORCE_SCRIPT_NAME``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Situational setting**
 
@@ -251,7 +293,7 @@ Experiment at your own risk!
 ``DJANGO_USE_X_FORWARDED_HOST``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Situational setting**
 
@@ -269,7 +311,7 @@ Experiment at your own risk!
 ``DJANGO_USE_X_FORWARDED_PORT``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Situational setting**
 
@@ -287,7 +329,7 @@ Experiment at your own risk!
 ``DJANGO_X_FRAME_OPTIONS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Situational setting**
 
@@ -305,7 +347,7 @@ Experiment at your own risk!
 ``DJANGO_STATIC_ROOT``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Situational setting**
 
@@ -323,10 +365,20 @@ Experiment at your own risk!
 DSMR-reader settings
 --------------------
 
-``DSMRREADER_ADMIN_USER`` (``DSMR_USER``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+These settings are for DSMR-reader only.
 
-.. note::
+.. contents:: :local:
+    :depth: 1
+
+
+``DSMRREADER_ADMIN_USER``
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. deprecated:: 4.5
+
+    ``DSMR_USER``
+
+.. hint::
 
     **Situational setting**
 
@@ -338,10 +390,14 @@ The username of the **webinterface** (super)user to create when running ``./mana
 ----
 
 
-``DSMRREADER_ADMIN_PASSWORD`` (``DSMR_PASSWORD``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``DSMRREADER_ADMIN_PASSWORD``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. deprecated:: 4.5
+
+    ``DSMR_PASSWORD``
+
+.. hint::
 
     **Situational setting**
 
@@ -356,7 +412,7 @@ The password of the ``DSMR_USER`` user to create (or update if the user exists) 
 ``DSMRREADER_LOGLEVEL``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Optional setting**
 
@@ -376,7 +432,7 @@ The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this def
 ``DSMRREADER_PLUGINS``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Optional setting**
 
@@ -400,7 +456,7 @@ Note that this should be a comma separated list when specifying multiple plugins
 ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. hint::
 
     **Optional setting**
 
