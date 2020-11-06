@@ -14,6 +14,6 @@ Before enabling this, make sure you've configured email settings as well, as the
 :doc:`Go to email settings here.<email>`
 
 
-.. image:: ../_static/screenshots/admin/emailbackupsettings.png
-    :target: ../_static/screenshots/admin/emailbackupsettings.png
+.. image:: ../_static/screenshots/v4.7/admin/emailbackupsettings.png
+    :target: ../_static/screenshots/v4.7/admin/emailbackupsettings.png
     :alt: Email backup settings

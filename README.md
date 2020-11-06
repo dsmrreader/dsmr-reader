@@ -12,6 +12,6 @@
 ## Screenshots / tour
 [Check out the tour](https://dsmr-reader.readthedocs.io/en/v4/tour.html) in the documentation.
 
-![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/frontend/dashboard.png?r=v4)
+![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/v4.7/frontend/dashboard.png)
 
-![Live graphs](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/frontend/live.png?r=v4)
+![Live graphs](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/v4.7/frontend/live.png)

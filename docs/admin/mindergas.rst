@@ -3,8 +3,8 @@ Admin: MinderGas.nl
 
 Link your MinderGas.nl-account to have DSMR-reader upload your gas meter position daily.
 
-.. image:: ../_static/screenshots/admin/mindergassettings.png
-    :target: ../_static/screenshots/admin/mindergassettings.png
+.. image:: ../_static/screenshots/v4.7/admin/mindergassettings.png
+    :target: ../_static/screenshots/v4.7/admin/mindergassettings.png
     :alt: MinderGas
 
 

@@ -31,8 +31,8 @@ Now navigate to another settings page in DSMR-reader: "PVOutput: "Add Status" co
     * Optionally, you can choose to enter a **processing delay in minutes** for PVOutput. Please note that PVOutput will only allow this when you have a **"Donation" account** on their website. If you do not have one, they will reject each API call you make, until you disable (clear) this option in DSMR-reader. 
 
 
-.. image:: ../_static/screenshots/admin/pvoutputaddstatussettings.png
-    :target: ../_static/screenshots/admin/pvoutputaddstatussettings.png
+.. image:: ../_static/screenshots/v4.7/admin/pvoutputaddstatussettings.png
+    :target: ../_static/screenshots/v4.7/admin/pvoutputaddstatussettings.png
     :alt: PVOutput Add Status
 
 If you configured everything correctly, you should see some addional data in PVOutput listed under "Your Outputs" momentarily.
