@@ -16,239 +16,243 @@ msgstr ""
 msgid "Introduction"
 msgstr "Introductie"
 
-#: ../../intro.rst:5
+#: ../../intro.rst:6
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
+#: ../../intro.rst:9
 msgid "Project goals"
 msgstr "Projectdoelen"
 
-#: ../../intro.rst:6
+#: ../../intro.rst:10
 msgid "Provide a tool to easily extract and store data transferred by the DSMR protocol of your smart meter."
 msgstr "Een tool aanbieden waarmee je eenvoudig gegevens uit je slimme meter via het DSMR-protocol uitleest en opslaat."
 
-#: ../../intro.rst:7
+#: ../../intro.rst:11
 msgid "Allowing to export your data to other systems or third parties. It's your data, you decide."
 msgstr "Sta toe om jouw gegevens te exporteren naar andere systemen of derde partijen. Het zijn jouw gegevens, dus jij beslist."
 
-#: ../../intro.rst:11
+#: ../../intro.rst:15
 msgid "Features"
 msgstr "Mogelijkheden"
 
-#: ../../intro.rst:12
+#: ../../intro.rst:16
 msgid "DSMR-reader has the following features:"
 msgstr "DSMR-reader heeft de volgende mogelijkheden:"
 
-#: ../../intro.rst:14
+#: ../../intro.rst:18
 msgid "Read telegram data from serial port"
 msgstr "Telegrammen uitlezen van een seriële poort"
 
-#: ../../intro.rst:15
+#: ../../intro.rst:19
 msgid "Read telegram data from network socket"
 msgstr "Telegrammen uitlezen van een netwerksocket"
 
-#: ../../intro.rst:16
+#: ../../intro.rst:20
 msgid "Receive telegram data through its (REST) API"
 msgstr "Telegrammen ontvangen via de eigen (REST) API"
 
-#: ../../intro.rst:17
+#: ../../intro.rst:21
 msgid "Process, store and plot telegram data extensively"
 msgstr "Verwerken, opslaan en uitgebreid weergeven van gegevens uit telegrammen"
 
-#: ../../intro.rst:18
+#: ../../intro.rst:22
 msgid "Daily cost indication using your energy prices"
 msgstr "Indicatie van dagelijkse kosten op basis van je energietarieven"
 
-#: ../../intro.rst:19
+#: ../../intro.rst:23
 msgid "Push notifications through Pushover / Prowl"
 msgstr "Pushnotificaties via Pushover / Prowl"
 
-#: ../../intro.rst:20
+#: ../../intro.rst:24
 msgid "Automated export to your MinderGas.nl account"
 msgstr "Automatische export naar je MinderGas.nl-account"
 
-#: ../../intro.rst:21
+#: ../../intro.rst:25
 msgid "Automated export to your PVOutput.org account"
 msgstr "Automatische export naar je PVOutput.org-account"
 
-#: ../../intro.rst:22
+#: ../../intro.rst:26
 msgid "Automated export to an MQTT broker"
 msgstr "Automatische export naar een MQTT broker"
 
-#: ../../intro.rst:23
+#: ../../intro.rst:27
 msgid "Automated export to an InfluxDB"
 msgstr "Automatische export naar een InfluxDB"
 
-#: ../../intro.rst:24
+#: ../../intro.rst:28
 msgid "Automated backup to Dropbox"
 msgstr "Automatische back-up naar Dropbox"
 
-#: ../../intro.rst:25
+#: ../../intro.rst:29
 msgid "Automated backup through email"
 msgstr "Automatische back-up per e-mail"
 
-#: ../../intro.rst:26
+#: ../../intro.rst:30
 msgid "And many others..."
 msgstr "En nog vele andere...."
 
-#: ../../intro.rst:30
+#: ../../intro.rst:34
 msgid "Languages"
 msgstr "Talen"
 
-#: ../../intro.rst:32
+#: ../../intro.rst:36
 msgid "The entire application and its code is written and documented in English. The interface is translated into Dutch and will be enabled automatically, depending on your browser's language preference."
 msgstr "De gehele applicatie, en bijbehorende code, is in het Engels geschreven. De grafische interface is echter ook in het Nederlands beschikbaar. Deze wordt  automatisch getoond, afhankelijk van de taalinstelling in je webbrowser."
 
-#: ../../intro.rst:35
+#: ../../intro.rst:39
 msgid "Support for:"
 msgstr "Ondersteuning voor:"
 
-#: ../../intro.rst:37
+#: ../../intro.rst:41
 msgid "English"
 msgstr "Engels"
 
-#: ../../intro.rst:38
+#: ../../intro.rst:42
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../../intro.rst:42
+#: ../../intro.rst:46
 msgid "Hardware requirements"
 msgstr "Hardwarevereisten"
 
-#: ../../intro.rst:44
+#: ../../intro.rst:48
 msgid "For datalogger only: **Any** RaspberryPi or similar"
 msgstr "Voor alleen-datalogger: **Elke** RaspberryPi of vergelijkbaar"
 
-#: ../../intro.rst:45
+#: ../../intro.rst:49
 msgid "For full DSMR-reader: **RaspberryPi 3+** or similar"
 msgstr "Voor volledige DSMR-reader: **RaspberryPi 3+** of vergelijkbaar"
 
-#: ../../intro.rst:46
+#: ../../intro.rst:50
 msgid "P1 telegram cable (or a network socket when using ``ser2net``)"
 msgstr "Kabel voor uitlezen P1-poort (of een netwerksocket via bijvoorbeeld ``ser2net``)"
 
-#: ../../intro.rst:50
+#: ../../intro.rst:54
 msgid "Software requirements"
 msgstr "Softwarevereisten"
 
-#: ../../intro.rst:52
+#: ../../intro.rst:56
 msgid "OS: ``Raspbian OS`` or similar"
 msgstr "OS: ``Raspbian OS`` of vergelijkbaar"
 
-#: ../../intro.rst:53
+#: ../../intro.rst:57
 msgid "Disk space: `1+ GB` (depends on whether you archive all readings)"
 msgstr "Schijfruimte: `1+ GB` (afhankelijk van gearchiveerde metingen)"
 
-#: ../../intro.rst:54
+#: ../../intro.rst:58
 msgid "Python: `3.6` or higher"
 msgstr "Python: ``3.6`` of hoger"
 
-#: ../../intro.rst:55
+#: ../../intro.rst:59
 msgid "Smart Meter DSMR versions: `v2` / `v4` / `v5`"
 msgstr "Slimme meter DSMR versies: `v2` / `v4` / `v5`"
 
-#: ../../intro.rst:59
+#: ../../intro.rst:63
 msgid "Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5``"
 msgstr "Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader v1.5``"
 
-#: ../../intro.rst:60
+#: ../../intro.rst:64
 msgid "Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader v2.0``"
 msgstr "Ondersteuning voor ``Python 3.4`` is **vervallen** sinds ``DSMR-reader v2.0``"
 
-#: ../../intro.rst:61
+#: ../../intro.rst:65
 msgid "Support for ``Python 3.5`` has been **discontinued** since ``DSMR-reader v3.0``"
 msgstr "Ondersteuning voor ``Python 3.5`` is **vervallen** sinds ``DSMR-reader v3.0``"
 
-#: ../../intro.rst:65
+#: ../../intro.rst:69
 msgid "Screenshots / tour"
 msgstr "Screenshots / tour"
 
-#: ../../intro.rst:68
+#: ../../intro.rst:72
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ../../intro.rst:70
+#: ../../intro.rst:74
 msgid "The dashboard displays the latest information regarding the consumption of today. You can view the total consumption for current month as well. The graphs can be zoomed and display data up to the last 24 hours."
 msgstr "Het dashboard weergeeft de meeste actuele informatie over je verbruik vandaag. Je kunt hier ook het totale verbruik van de huidige maand zien. Alle grafieken kunnen uitgezoomd worden en weergegeven gegevens tot 24 uur geleden."
 
-#: ../../intro.rst:74
+#: ../../intro.rst:78
 msgid "If your meter supports it, you can also see your gas consumption and electricity returned."
 msgstr "Je ziet hier ook je gasverbruik en teruglevering elektriciteit, mits je meter dat ondersteunt."
 
-#: ../../intro.rst:83
+#: ../../intro.rst:87
 msgid "Live graphs"
 msgstr "Live grafieken"
 
-#: ../../intro.rst:85
+#: ../../intro.rst:89
 msgid "The live graphs plots the most recent data available, depending on the capabilities of your smart meter."
 msgstr "De Live Grafieken pagina toont de meest recente beschikbare gegevens, afhankelijk van de mogelijkheden van je slimme meter."
 
-#: ../../intro.rst:94
+#: ../../intro.rst:98
 msgid "Archive"
 msgstr "Archief"
 
-#: ../../intro.rst:96
+#: ../../intro.rst:100
 msgid "The archive allows you to scroll through all historisch data captured by the application. All data can be viewed on different levels: by day, by month and by year."
 msgstr "In het archief kun je door alle historische data heen bladeren. Je kunt de gegevens bekijken op dag-, maand- of jaarbasis."
 
-#: ../../intro.rst:106
+#: ../../intro.rst:110
 msgid "Compare"
 msgstr "Vergelijken"
 
-#: ../../intro.rst:108
+#: ../../intro.rst:112
 msgid "This page allows you to simply compare two days, months or years with each other. It will also display the difference between each other as a percentage."
 msgstr "Deze pagina stelt je in staat om simpleweg twee dagen, maanden of jaren met elkaar te vergelijken. Daarnaast worden de verschillen tussen de twee weergegeven als percentage."
 
-#: ../../intro.rst:117
+#: ../../intro.rst:121
 msgid "Trends"
 msgstr "Trends"
 
-#: ../../intro.rst:119
+#: ../../intro.rst:123
 msgid "This page displays a summary of your average daily consumption and habits."
 msgstr "Deze pagina weergeeft een samenvatting van je dagelijkse verbruik en gewoontes."
 
-#: ../../intro.rst:127
+#: ../../intro.rst:131
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../../intro.rst:129
+#: ../../intro.rst:133
 msgid "This page displays your meter positions and statistics provided by the DSMR protocol. You can also find the number of readings stored and any excesses regarding consumption."
 msgstr "Deze pagina weergeeft je huidige meterstanden en statistieken volgens het DSMR-protocol. Je kunt hier ook het totaal aantal opgeslagen metingen vinden, evenals excessief verbruik."
 
-#: ../../intro.rst:138
+#: ../../intro.rst:142
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
-#: ../../intro.rst:140
+#: ../../intro.rst:144
 msgid "Summary of all your contracts and the amount of energy consumed/generated."
 msgstr "Overzicht van al je energiecontracten en het bijbehorende verbruik."
 
-#: ../../intro.rst:148
+#: ../../intro.rst:152
 msgid "Export"
 msgstr "Export"
 
-#: ../../intro.rst:150
+#: ../../intro.rst:154
 msgid "This pages allows you to export all day or hour statistics to CSV."
 msgstr "Deze pagina staat je toe om alle uur- en dagstatistieken te exporteren naar CSV."
 
-#: ../../intro.rst:158
+#: ../../intro.rst:162
 msgid "About"
 msgstr "Over"
 
-#: ../../intro.rst:160
+#: ../../intro.rst:164
 msgid "Shows the 'health' of the application and provides a lot of background information."
 msgstr "Toont de status van de applicatie en verwijst naar een hoop achtergrondinformatie."
 
-#: ../../intro.rst:162
+#: ../../intro.rst:166
 msgid "You can also easily check for DSMR-reader updates here."
 msgstr "Je kunt hier eveneens eenvoudig controleren op updates van DSMR-reader."
 
-#: ../../intro.rst:170
+#: ../../intro.rst:174
 msgid "Configuration"
 msgstr "Configuratie"
 
-#: ../../intro.rst:172
+#: ../../intro.rst:176
 msgid "The configuration page is the entrypoint for the admin interface."
 msgstr "De configuratiepagina is de toegangspoort tot het adminportaal."
 
-#: ../../intro.rst:174
+#: ../../intro.rst:178
 msgid "You can type any topic or setting you're searching for, as it should pop up with clickable deeplink to the admin panel. Or you can just skip it this page and continue directly to the admin panel."
 msgstr "Je kunt hier elk onderwerp of instelling waarnaar je op zoek bent intypen, om vervolgens een popup te krijgen met een klikbare link direct naar het juiste onderdeel binnen het adminportaal."
 

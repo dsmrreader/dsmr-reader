@@ -11,12 +11,6 @@ DSMR Reader's documentation
    env_settings
 
    installation
-   installation/restore
-   installation/datalogger
-   installation/quick
-   installation/explained
-   installation/docker
-
    application
    configuration
    home_assistant

@@ -76,7 +76,7 @@ Using Dropbox to sync your backups does not protect them of all harm!
     If you are more technical savy, you could opt to either install the database or the entire application on a server with storage that tends to wear less.
     You can use the RaspberryPi are a remote datalogger, preventing a lot of issues.
 
-    :doc:`More information about using a remote datalogger here<installation/datalogger>`.
+    :doc:`More information about using a remote datalogger here<installation>`.
 
 
 Pitfalls

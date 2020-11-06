@@ -20,86 +20,669 @@ msgstr ""
 msgid "Installation"
 msgstr "Installatie"
 
-#: ../../installation.rst:5
-msgid "Install datalogger only"
-msgstr "Installeer alleen de datalogger"
-
 #: ../../installation.rst:6
-msgid ""
-"Use this to only install the datalogger. You can then forward the "
-"telegrams to an installation of DSMR-reader hosted somewhere else."
-msgstr ""
-"Gebruik dit om alleen de datalogger te installeren. Je kunt vervolgens de"
-" telegrammen doorsturen naar een andere installatie van DSMR-reader, die "
-"ergens anders draait."
+msgid "Choose either option A, B, C or D below."
+msgstr "Kies hieronder voor optie A, B, C of D."
 
-#: ../../installation.rst:8
-msgid ""
-":doc:`Go to datalogger only installation instructions "
-"here.<installation/datalogger>`"
-msgstr ""
-":doc:`Ga hier naar de instructies voor de installatie van de "
-"datalogger.<installation/datalogger>`"
-
-#: ../../installation.rst:12
-msgid "Install full DSMR-reader"
-msgstr "Installeer volledige versie van DSMR-reader"
+#: ../../installation.rst:10
+msgid "Contents"
+msgstr "Inhoudsopgave"
 
 #: ../../installation.rst:13
-msgid ""
-"Use this to host both the datalogger and application on the same machine."
-" You have several options:"
-msgstr ""
-"Gebruik dit om zowel de datalogger als de applicatie op hetzelfde "
-"apparaat te installeren. Je hebt diverse opties:"
+msgid "Option A: Install DSMR-reader manually (quick)"
+msgstr "Optie A: Installeer DSMR-reader handmatig (snel)"
 
-#: ../../installation.rst:15
-msgid "**Quick installation**"
-msgstr "**Snelle installatie**"
+#: ../../installation.rst:17 ../../installation.rst:140
+msgid "Use this to host both the datalogger and application on the same machine by installing it manually."
+msgstr "Gebruik dit om zowel de datalogger als de applicatie op hetzelfde apparaat te installeren."
 
-#: ../../installation.rst:17
-msgid ""
-"Contains just a list of commands needed for the installation of DSMR-"
-"reader. :doc:`Go to quick installation instructions "
-"here.<installation/quick>`"
-msgstr ""
-"Bevat alleen een lijst met commando's nodig voor de installatie van DSMR-"
-"reader. :doc:`Ga hier naar instructies voor de snelle "
-"installatie.<installation/quick>`"
-
-#: ../../installation.rst:20
-msgid "**Explained installation**"
-msgstr "**Toegelichte installatie**"
-
-#: ../../installation.rst:22
-msgid ""
-"For others users who want some addition explanation about what they are "
-"exactly doing/installing. :doc:`Go to explained installation instructions"
-" here.<installation/explained>`"
-msgstr ""
-"Voor alle andere gebruikers, die graag willen weten wat ze exact "
-"uitvoeren. :doc:`Ga hier naar instructies voor de toegelichte "
-"installatie.<installation/explained>`"
-
-#: ../../installation.rst:25
-msgid "**Docker installation**"
-msgstr "**Docker-installatie**"
+#: ../../installation.rst:19
+msgid "Contains just a list of commands needed for the installation of DSMR-reader."
+msgstr "Bevat alleen een lijst met commando's nodig voor de installatie van DSMR-reader."
 
 #: ../../installation.rst:27
-msgid ""
-"Use DSMR-reader in Docker. Containers are maintained by third parties. "
-":doc:`Go to Docker installation instructions here.<installation/docker>`"
-msgstr ""
-"Draai DSMR-reader in Docker. Containers worden door derden onderhouden. "
-":doc:`Ga hier naar de instructies voor de Docker-"
-"installatie.<installation/docker>`"
+msgid "Part 1"
+msgstr "Deel 1"
 
-#~ msgid ""
-#~ "**Possible storage issues**: :doc:`Please read"
-#~ " this page as well before you "
-#~ "start<data_integrity>`."
-#~ msgstr ""
-#~ "**Mogelijke problemen met gegevensopslag**: "
-#~ ":doc:`Lees deze pagina voordat je "
-#~ "begint<data_integrity>`."
+#: ../../installation.rst:29 ../../installation.rst:356
+#: ../../installation.rst:495
+msgid "Execute::"
+msgstr "Voer uit::"
+
+#: ../../installation.rst:36 ../../installation.rst:158
+msgid "Does PostgreSQL not start/create the cluster due to locales? E.g.::"
+msgstr "Start PostgreSQL niet wegens een fout in 'locales'? Bijvoorbeeld::"
+
+#: ../../installation.rst:44 ../../installation.rst:165
+msgid "Try: ``dpkg-reconfigure locales``."
+msgstr "Probeer: ``dpkg-reconfigure locales``."
+
+#: ../../installation.rst:46 ../../installation.rst:167
+msgid "Still no luck? Try editing ``/etc/environment``, add ``LC_ALL=\"en_US.utf-8\"`` and reboot. Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using)."
+msgstr "Werkt het nog steeds niet? Open dan dit bestand ``/etc/environment``, voeg onderaan de regel ``LC_ALL=\"en_US.utf-8\"`` toe en herstart het systeem. Probeer daarna ``pg_createcluster 9.4 main --start`` (of welke versie je ook gebruikt)."
+
+#: ../../installation.rst:49 ../../installation.rst:69
+msgid "Continue::"
+msgstr "Ga verder::"
+
+#: ../../installation.rst:57 ../../installation.rst:186
+msgid "Optional: Restore a database backup"
+msgstr "Optioneel: Database back-up terugzetten"
+
+#: ../../installation.rst:61 ../../installation.rst:190
+msgid "If you need to restore a database backup with your existing data, this is the moment to do so."
+msgstr "Indien je een back-up van de database wilt terugzetten met je oude gegevens, nu is het moment om dat te doen."
+
+#: ../../installation.rst:63 ../../installation.rst:192
+msgid "Restoring a database backup? :doc:`See the FAQ for instructions <faq>`."
+msgstr "Database back-up terugzetten? :doc:`Zie de FAQ voor instructies <faq>`."
+
+#: ../../installation.rst:67
+msgid "Part 2"
+msgstr "Deel 2"
+
+#: ../../installation.rst:127 ../../installation.rst:428
+#: ../../installation.rst:448
+msgid ":doc:`Finished? Go to setting up the application<../application>`."
+msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../application>`."
+
+#: ../../installation.rst:134
+msgid "Option B: Install DSMR-reader manually (explained)"
+msgstr "Optie B: Installeer DSMR-reader handmatig (toegelicht)"
+
+#: ../../installation.rst:138
+msgid "For others users who want some addition explanation about what they are exactly doing/installing."
+msgstr "Voor alle andere gebruikers, die graag willen weten wat ze exact uitvoeren."
+
+#: ../../installation.rst:148
+msgid "1. Database backend (PostgreSQL)"
+msgstr "1. Databaseopslag (PostgreSQL)"
+
+#: ../../installation.rst:150
+msgid "The application stores by default all readings taken from the serial cable."
+msgstr "De applicatie slaat de P1-metingen standaard op."
+
+#: ../../installation.rst:152
+msgid "Install database::"
+msgstr "Installeer database::"
+
+#: ../../installation.rst:170
+msgid "(!) Ignore any '*could not change directory to \"/root\": Permission denied*' errors for the following three commands."
+msgstr "(!) Negeer voor de volgende drie commando's de foutmelding: '*could not change directory to \"/root\": Permission denied*'."
+
+#: ../../installation.rst:172
+msgid "Create database user::"
+msgstr "Creëer databasegebruiker::"
+
+#: ../../installation.rst:176
+msgid "Create database, owned by the database user we just created::"
+msgstr "Creëer database, met als eigenaar de databasegebruiker die we net hebben aangemaakt::"
+
+#: ../../installation.rst:180
+msgid "Set password for database user::"
+msgstr "Stel wachtwoord in voor databasegebruiker::"
+
+#: ../../installation.rst:196
+msgid "2. Dependencies"
+msgstr "2. Afhankelijkheden"
+
+#: ../../installation.rst:197
+msgid "Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the Github repository::"
+msgstr "Tijd om diverse tools te installeren. Deze zijn nodig voor de Nginx webserver, de Gunicorn applicatieserver en voor het binnenhalen van de code van de applicatie vanaf Github::"
+
+#: ../../installation.rst:201
+msgid "Install ``cu``. The CU program allows easy testing for your DSMR serial connection. It's very basic but also very effective to simply test whether your serial cable setup works properly::"
+msgstr "Installeer ``cu``. Met dit programmaatje kunnen kun je vrij gemakkelijk de DSMR-verbinding testen naar je slimme meter toe. Erg handig om te kijken of dat überhaupt al lekker werkt::"
+
+#: ../../installation.rst:208
+msgid "3. Application user"
+msgstr "3. Applicatiegebruiker"
+
+#: ../../installation.rst:209
+msgid "The application runs as ``dsmr`` user by default. This way we do not have to run the application as ``root``, which is a bad practice anyway."
+msgstr "De applicatie draait standaard onder de gebruiker ``dsmr``. Hierdoor heeft het geen ``root``-rechten (nodig), wat over het algemeen zeer afgeraden wordt."
+
+#: ../../installation.rst:211
+msgid "Create user with homedir. The application code and virtualenv will reside in this directory as well::"
+msgstr "Maak een aparte gebruiker aan met eigen homedir. De code voor de applicatie en VirtualEnv zetten we later hier in::"
+
+#: ../../installation.rst:215
+msgid "Our user also requires dialout permissions. So allow the user to perform a dialout by adding it to the ``dialout`` group::"
+msgstr "De gebruiker heeft ook toegang nodig om de kabel te kunnen uitlezen. Hiervoor voegen de we gebruiker toe aan de groep ``dialout``::"
+
+#: ../../installation.rst:219
+msgid "Either proceed to the next heading **for a test reading** or continue at chapter 4."
+msgstr "Ga ofwel door naar het volgende hoofdstuk **voor een testmeting** of ga direct door naar stap 4."
+
+#: ../../installation.rst:223
+msgid "Optional: Your first reading"
+msgstr "Optioneel: Je eerste meting"
+
+#: ../../installation.rst:227
+msgid "**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected."
+msgstr "**OPTIONEEL**: Je kunt deze stap overslaan wanneer je al eerder een (test)meting hebt gedaan met je slimme meter. Ik raad het dus vooral aan als je nog nooit eerder je P1-poort hebt uitgelezen. Hiermee verzeker je jezelf ook dat de applicatie straks dezelfde (werkende) toegang heeft voor de metingen."
+
+#: ../../installation.rst:229
+msgid "Now login as the user we have just created, to perform our very first reading! ::"
+msgstr "Log nu in als de gebruiker die we zojuist hebben aangemaakt voor de eerste testmeting! ::"
+
+#: ../../installation.rst:233
+msgid "Test with ``cu`` for **DSMR 4+**::"
+msgstr "Test met ``cu`` voor **DSMR 4+**::"
+
+#: ../../installation.rst:237
+msgid "Or test with ``cu`` for **DSMR 2.2** (untested)::"
+msgstr "Of test met ``cu`` voor **DSMR 2.2** (ongetest)::"
+
+#: ../../installation.rst:241
+msgid "You now should see something similar to ``Connected.`` and a wall of text and numbers *within 10 seconds*. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, `such as this one (Dutch) <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
+msgstr "Je zou nu iets moeten zien als ``Connected.``. Vervolgens krijg je, als het goed is, binnen tien seconden een hele lap tekst te zijn met een hoop cijfers. Werkt het niet? Probeer dan een andere BAUD-waarde, zoals hierboven beschreven. Of `kijk op een nuttig weblog <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
+
+#: ../../installation.rst:243
+msgid "To exit cu, type \"``q.``\", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``."
+msgstr "Om cu af te sluiten, typ \"``q.``\", druk op Enter en wacht voor een paar seconden. Het programma sluit af met de melding ``Disconnected.``."
+
+#: ../../installation.rst:247
+msgid "4. Webserver/Nginx (part 1)"
+msgstr "4. Webserver/Nginx (deel 1)"
+
+#: ../../installation.rst:249
+msgid "*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*"
+msgstr "*We configureren vervolgens de webserver (Nginx). Deze serveert alle statische bestanden en geeft de applicatie-verzoeken door naar de backend, waar de applicatie in Gunicorn draait onder Supervisor. Deze stellen we later in.*"
+
+#: ../../installation.rst:251 ../../installation.rst:372
+msgid "Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user."
+msgstr "Zorg ervoor dat je hier ``root``- of ``sudo``-gebruiker bent. Zo niet, druk op CTRL + D om uit te loggen als ``dsmr`` gebruiker."
+
+#: ../../installation.rst:253
+msgid "Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefor it requires (write) access to it::"
+msgstr "Django kopieert alle statische bestanden naar een aparte map, die weer door Nginx gebruikt wordt. Daarom is er tevens (schrijf)toegang voor nodig::"
+
+#: ../../installation.rst:261
+msgid "5. Clone project code from Github"
+msgstr "5. Kloon project code vanaf Github"
+
+#: ../../installation.rst:262
+msgid "Now is the time to clone the code from the repository into the homedir we created."
+msgstr "Nu kunnen we de code van de applicatie van Github downloaden en in de homedir zetten die we net aangemaakt hebben."
+
+#: ../../installation.rst:264
+msgid "Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"
+msgstr "Zorg ervoor dat je ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: ``sudo su - dsmr``)"
+
+#: ../../installation.rst:266
+msgid "Clone the repository::"
+msgstr "Kloon de repository::"
+
+#: ../../installation.rst:270
+msgid "This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the Github repository."
+msgstr "Dit kan enkele seconden in beslag nemen. Als het goed is zie je hierna een map genaamd ``dsmr-reader``, met daarin een kopie van de repository zoals die op Github staat."
+
+#: ../../installation.rst:274
+msgid "6. Virtualenv"
+msgstr "6. VirtualEnv"
+
+#: ../../installation.rst:276
+msgid "The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**."
+msgstr "Alle (externe) afhankelijkheden worden opgeslagen in een aparte omgeving, ook wel **VirtualEnv** genoemd."
+
+#: ../../installation.rst:278
+msgid "Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine. `More information about this subject can be found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
+msgstr "Dit is allemaal erg handig, ondanks dat het feitelijk niets meer voorstelt dan een aparte map binnen de homedir van onze gebruiker. Hierdoor kunnen we namelijk meerdere versie van software op hetzelfde systeem installeren, zonder dat dat elkaar bijt. Meer informatie hierover `kan hier gevonden worden <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
+
+#: ../../installation.rst:281
+msgid "Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"
+msgstr "Zorg ervoor dat je nog steeds ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: ``sudo su - dsmr``)"
+
+#: ../../installation.rst:283
+msgid "Create folder for the virtualenv(s) of this user::"
+msgstr "Maak map aan voor de VirtualEnv van deze gebruiker::"
+
+#: ../../installation.rst:287
+msgid "Create a new virtualenv, we usually use the same name for it as the application or project::"
+msgstr "Maak een nieuwe VirtualEnv aan. Het is gebruikelijk om hiervoor dezelfde naam te gebruiken als die van de applicatie of het project::"
+
+#: ../../installation.rst:293
+msgid "Note that it's important to specify **Python 3** as the default interpreter."
+msgstr "N.B.: het is belangrijk dat je voor deze VirtualEnv aangeeft dat **Python 3** de gewenste standaardversie is."
+
+#: ../../installation.rst:295
+msgid "Each time you work as ``dsmr`` user, you will have to switch to the virtualenv with these commands::"
+msgstr "Elke keer dat je als ``dsmr`` gebruiker werkt, zul je moeten wisselen naar de virtualenv met deze commando's::"
+
+#: ../../installation.rst:300
+msgid "Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::"
+msgstr "Laten we ervoor zorgen dat deze commando's **automatisch** uitgevoerd worden, zodra we inloggen als ``dsmr`` gebruiker. Dit doen we door ze toe te voegen aan het ``~/.bashrc`` bestand::"
+
+#: ../../installation.rst:305
+msgid "This will both activate the virtual environment and cd you into the right directory on your **next login** as ``dsmr`` user."
+msgstr "Hiermee wordt zowel de VirtualEnv geactiveerd en ga je direct naar de juiste map. Dit werkt de **eerstvolgende keer** dat je inlogt als ``dsmr`` gebruiker."
+
+#: ../../installation.rst:309
+msgid "You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``."
+msgstr "Je kunt dit vrij gemakkelijk testen door uit te loggen als ``dsmr`` gebruiker (met CTRL + D) en vervolgens weer in te loggen met ``sudo su - dsmr``."
+
+#: ../../installation.rst:311
+msgid "You should see the terminal have a ``(dsmrreader)`` prefix now, for example: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
+msgstr "Als het goed is heeft je terminal nu een ``(dsmrreader)`` prefix, bijvoorbeeld: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``"
+
+#: ../../installation.rst:313
+msgid "Make sure you've read and executed the note above, because you'll need it for the next chapter."
+msgstr "Zorg ervoor dat je de bovenstaande notitie hebt gelezen en uitgevoerd, aangezien ze nodig zijn voor het volgende hoofdstuk."
+
+#: ../../installation.rst:317
+msgid "7. Application configuration & setup"
+msgstr "7. Applicatieconfiguratie"
+
+#: ../../installation.rst:318
+msgid "The application will also need the appropriate database client, which is not installed by default. For this I created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework."
+msgstr "De applicatie heeft een databaseconnector nodig om de gegevens te kunnen opslaan. Daarvoor heb ik een tweetal requirements-bestanden gemaakt, waar alles al in staat wat nodig is. Zoals bijvoorbeeld Django en de databaseverbinding."
+
+#: ../../installation.rst:322
+msgid "Setup local config::"
+msgstr "Stel lokale config in::"
+
+#: ../../installation.rst:331
+msgid "**Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]"
+msgstr "**De installatie van de volgende afhankelijkheden kan enige tijd in beslag nemen**. Dit varieert en is sterk afhankelijk van de snelheid van je Internet-verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te maken wanneer dit lang lijkt te duren. :]"
+
+#: ../../installation.rst:333
+msgid "Install dependencies::"
+msgstr "Installeer afhankelijkheden::"
+
+#: ../../installation.rst:339
+msgid "8. Bootstrapping"
+msgstr "8. Initialisatie"
+
+#: ../../installation.rst:340
+msgid "Now it's time to bootstrap the application and check whether all settings are good and requirements are met."
+msgstr "Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie proberen te initialiseren."
+
+#: ../../installation.rst:342
+msgid "Execute this to initialize the database we've created earlier::"
+msgstr "Voer dit uit om de database te initialiseren::"
+
+#: ../../installation.rst:346
+msgid "Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process. It allows us to have Nginx serve static files outside our project/code root."
+msgstr "Ga nu bezig met de statische bestanden voor de webinterface. Dit kopieert alle statische bestanden in de map die we eerder, vlak na de installatie voor Nginx, hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden kan hosten buiten de code-bestanden."
+
+#: ../../installation.rst:349
+msgid "Sync static files::"
+msgstr "Synchroniseer statische bestanden::"
+
+#: ../../installation.rst:353
+msgid "Create an application superuser with the following command. The ``DSMR_USER`` and ``DSMR_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials."
+msgstr "Maak een applicatie superuser aan met het volgende commando. De ``DSMR_USER`` en ``DSMR_PASSWORD`` :doc:`zoals ze in de Env-instellingen<../env_settings>` staan, worden daarbij gebruikt als inloggegevens."
+
+#: ../../installation.rst:360
+msgid "You've almost completed the installation now."
+msgstr "Je bent op dit punt bijna klaar met de installatie."
+
+#: ../../installation.rst:364
+msgid "9. Webserver/Nginx (part 2)"
+msgstr "9. Webserver/Nginx (deel 2)"
+
+#: ../../installation.rst:368
+msgid "This installation guide asumes you run the Nginx webserver for this application only."
+msgstr "Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver alleen gebruikt voor deze applicatie."
+
+#: ../../installation.rst:370
+msgid "It's possible to have other applications use Nginx as well, but that requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will copy below."
+msgstr "Het is uiteraard mogelijk dat andere applicaties ook Nginx gebruiken, maar daarvoor zul je de wildcard moet weghalen in de ``dsmr-webinterface`` vhost, die je hieronder kopieert."
+
+#: ../../installation.rst:374
+msgid "Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::"
+msgstr "Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf gebruikt** (zie de notitie hierboven)::"
+
+#: ../../installation.rst:378
+msgid "Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::"
+msgstr "Kopieer de vhost voor de applicatie. Deze luistert standaard naar **elke hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te passen::"
+
+#: ../../installation.rst:383
+msgid "Let Nginx verify vhost syntax and restart Nginx when the ``-t`` configtest passes::"
+msgstr "Laat Nginx controleren of je geen typefouten hebt gemaakt en herstart Nginx vervolgens wanneer de ``-t`` configtest lukt::"
+
+#: ../../installation.rst:391
+msgid "10. Supervisor"
+msgstr "10. Supervisor"
+
+#: ../../installation.rst:392
+msgid "Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. It's also configured to bring the entire application up again after a shutdown or reboot."
+msgstr "We gaan nu `Supervisor <http://supervisord.org/>`_ configureren, die gebruikt wordt om de applicatie en achtergrondprocessen te draaien. Tevens zorgt Supervisor ervoor dat deze processen bij het (opnieuw) opstarten automatisch draaien."
+
+#: ../../installation.rst:395
+msgid "Copy the configuration files for Supervisor::"
+msgstr "Kopieer de configuratie-bestanden voor Supervisor::"
+
+#: ../../installation.rst:401
+msgid "Login to ``supervisorctl`` management console::"
+msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
+
+#: ../../installation.rst:405
+msgid "Enter these commands (**listed after the** ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::"
+msgstr "Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor dat Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
+
+#: ../../installation.rst:411
+msgid "Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times."
+msgstr "Er draaien als het goed is altijd **drie** processen. Kijk goed of ze uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn gekomen. Je kunt het overzicht verversen door ``status`` te typen."
+
+#: ../../installation.rst:413
+msgid "When still in ``supervisorctl``'s console, type::"
+msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"
+
+#: ../../installation.rst:417
+msgid "Example of everything running well::"
+msgstr "Voorbeeld van wanneer alles naar behoren draait::"
+
+#: ../../installation.rst:423
+msgid "Want to quit supervisor? Press ``CTRL + D`` to exit supervisor command line."
+msgstr "Wil je uit supervisor? Druk dan op ``CTRL + D`` om uit supervisor te gaan."
+
+#: ../../installation.rst:435
+msgid "Option C: Install DSMR-reader using Docker"
+msgstr "Optie C: Installeer DSMR-reader met Docker"
+
+#: ../../installation.rst:438
+msgid "Author"
+msgstr "Auteur"
+
+#: ../../installation.rst:438
+msgid "``xirixiz`` (Bram van Dartel)"
+msgstr "``xirixiz`` (Bram van Dartel)"
+
+#: ../../installation.rst:440
+msgid "Github"
+msgstr "Github"
+
+#: ../../installation.rst:440
+msgid "https://github.com/xirixiz/dsmr-reader-docker"
+msgstr "https://github.com/xirixiz/dsmr-reader-docker"
+
+#: ../../installation.rst:442
+msgid "Docker Hub"
+msgstr "Docker Hub"
+
+#: ../../installation.rst:442
+msgid "https://hub.docker.com/r/xirixiz/dsmr-reader-docker/"
+msgstr "https://hub.docker.com/r/xirixiz/dsmr-reader-docker/"
+
+#: ../../installation.rst:455
+msgid "Option D: Install datalogger only"
+msgstr "Optie D: Installeer alleen de datalogger"
+
+#: ../../installation.rst:459
+msgid "This will install a datalogger that will forward telegrams to a remote instance of DSMR-reader, using its API."
+msgstr "Dit installeert een datalogger, die telegrammen doorstuurt naar een installatie van DSMR-reader op afstand, via de API."
+
+#: ../../installation.rst:464
+msgid "The remote datalogger script has been overhauled in DSMR-reader ``v4.1``. If you installed a former version, reconsider reinstalling it completely with the new version below."
+msgstr "Het script voor de remote datalogger is op de schop gegaan in DSMR-reader ``v4.1``. Mocht je een eerdere versie gebruiken, overweeg dan om deze opnieuw te installeren met de nieuwere versie hieronder."
+
+#: ../../installation.rst:469
+msgid "To be clear, there should be two hosts:"
+msgstr "Voor de duidelijkheid, er zouden twee omgevingen moeten zijn:"
+
+#: ../../installation.rst:471
+msgid "The device hosting the remote datalogger"
+msgstr "Het apparaat waar de remote datalogger op draait"
+
+#: ../../installation.rst:472
+msgid "The device (or server) hosting the receiving DSMR-reader instance"
+msgstr "Het apparaat (of server) waarop de ontvangende DSMR-reader-instantie draait"
+
+#: ../../installation.rst:475
+msgid "Receiving DSMR-reader instance"
+msgstr "Ontvangende DSMR-reader-instantie"
+
+#: ../../installation.rst:477
+msgid "Make sure to first prepare the API at the DSMR-reader instance you'll forward the telegrams to. You can enable the API and view/edit the API key used :doc:`in the configuration<../configuration>`."
+msgstr "Zorg ervoor dat je eerste de API van de ontvangende DSMR-reader-instantie klaar hebt staan. Je kunt daar de API inschakelen en bijbehorende API-sleutel inzien/bewerken :doc:`in de configuratie<../configuration>`."
+
+#: ../../installation.rst:482
+msgid "If your smart meter only supports DSMR v2 (or you are using a non Dutch smart meter), make sure to change the DSMR version :doc:`in the configuration<../configuration>` as well, to have DSMR-reader parse them correctly."
+msgstr "Wanneer je slimme meter alleen DSMR v2 ondersteunt (of je gebruikt een niet-Nederlandse slimme meter), zorg er dan voor dat je de DSMR-versie aanpast :doc:`in de datalogger-configuratie <../configuration>`, zodat DSMR-reader de telegrammen goed kan verwerken."
+
+#: ../../installation.rst:484
+msgid "Also, you should disable the datalogger process over there, since you won't be using it anyway::"
+msgstr "Verder kun je hier het datalogger proces uitschakelen, gezien die toch niet nodig is::"
+
+#: ../../installation.rst:491
+msgid "Remote datalogger device"
+msgstr "Apparaat met remote datalogger"
+
+#: ../../installation.rst:493
+msgid "Switch to the device you want to install the remote datalogger on."
+msgstr "Wissel naar het apparaat waarop je de remote datalogger wilt installeren."
+
+#: ../../installation.rst:515
+msgid "Datalogger script"
+msgstr "Datalogger script"
+
+#: ../../installation.rst:517
+msgid "Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with the following contents: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_"
+msgstr "Maak een nieuw bestand ``/home/dsmr/dsmr_datalogger_api_client.py`` met deze inhoud: `dsmr_datalogger_api_client.py op GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_"
+
+#: ../../installation.rst:519
+msgid "Or execute the following to download it directly to the path above::"
+msgstr "Of voer het volgende uit om het direct op bovenstaand pad te downloaden::"
+
+#: ../../installation.rst:525
+msgid "API config (``.env``)"
+msgstr "API-configuratie (``.env``)"
+
+#: ../../installation.rst:529
+msgid "The ``.env`` file below is not mandatory to use. Alternatively you can specify all settings mentioned below as system environment variables."
+msgstr "Je bent niet verplicht om het ``.env``-bestand te gebruiken. Als alternatief kun je alle instellingen hieronder ook als systeem-omgevingsvariabelen instellen."
+
+#: ../../installation.rst:531
+msgid "Create another file ``/home/dsmr/.env`` and add as contents::"
+msgstr "Maak een ander bestand genaamd ``/home/dsmr/.env`` aan en zet daar de volgende inhoud in::"
+
+#: ../../installation.rst:537
+msgid "Keep the file open for multiple edits / additions below."
+msgstr "Houd het bestand open voor meerdere wijziginge / toevoegingen hieronder."
+
+#: ../../installation.rst:539
+msgid "Add the schema (``http://``/``https://``) and hostname/port to ``DATALOGGER_API_HOSTS``. Add the API key to ``DATALOGGER_API_KEYS``. For example::"
+msgstr "Voeg het schema (``http://``/``https://``) en hostnaam/poort toe aan ``DATALOGGER_API_HOSTS``. Voeg de API key toe aan ``DATALOGGER_API_KEYS``. Bijvoorbeeld::"
+
+#: ../../installation.rst:551
+msgid "Are you using the remote datalogger for multiple instances of DSMR-reader? Then use ``DATALOGGER_API_HOSTS`` and ``DATALOGGER_API_KEYS`` as comma separated lists::"
+msgstr "Gebruik je dezelfde remote datalogger voor meerdere instanties van DSMR-reader? Gebruik dan ``DATALOGGER_API_HOSTS`` en ``DATALOGGER_API_KEYS`` als komma-gescheiden lijsten::"
+
+#: ../../installation.rst:562
+msgid "Serial port or network socket config?"
+msgstr "Seriële poort of netwerk socket instellen?"
+
+#: ../../installation.rst:563
+msgid "Choose either ``A.`` or ``B.`` below."
+msgstr "Kies hieronder voor ofwel ``A.`` of ``B.``."
+
+#: ../../installation.rst:567
+msgid "A. Serial port (``.env``)"
+msgstr "A. Seriële poort (``.env``)"
+
+#: ../../installation.rst:568
+msgid "Are you using a cable to read telegrams directly from a serial port?"
+msgstr "Gebruik je een kabel om telegrammen direct vanaf de seriële poort uit te lezen?"
+
+#: ../../installation.rst:570 ../../installation.rst:583
+msgid "Then add the following contents to ``/home/dsmr/.env``::"
+msgstr "Voeg dan de volgende inhoud toe aan ``/home/dsmr/.env``::"
+
+#: ../../installation.rst:576
+msgid "When using a different port or baud rate, change the ``DATALOGGER_SERIAL_PORT`` / ``DATALOGGER_SERIAL_BAUDRATE`` values accordingly."
+msgstr "Als je een andere poort of baud waarde gebruikt, wijzig dit dan in  ``DATALOGGER_SERIAL_PORT`` / ``DATALOGGER_SERIAL_BAUDRATE``."
+
+#: ../../installation.rst:580
+msgid "B. Network socket (``.env``)"
+msgstr "B. Netwerk socket (``.env``)"
+
+#: ../../installation.rst:581
+msgid "Are you using a network socket for reading the telegrams? E.g.: ``ser2net``."
+msgstr "Gebruik je een netwerk socket voor het uitlezen van de telegrammen? Bijvoorbeeld: ``ser2net``."
+
+#: ../../installation.rst:589
+msgid "Set the hostname or IP address in ``DATALOGGER_NETWORK_HOST`` and the port in ``DATALOGGER_NETWORK_PORT``."
+msgstr "Stel de hostnaam of IP-adres in als ``DATALOGGER_NETWORK_HOST``en de poort als ``DATALOGGER_NETWORK_PORT``."
+
+#: ../../installation.rst:593
+msgid "Other settings (``.env``)"
+msgstr "Overige instellingen (``.env``)"
+
+#: ../../installation.rst:595
+msgid "These settings are **optional** but can be tweaked when required:"
+msgstr "De volgende instellingen zijn **optioneel** en kunnen naar wens aangepast worden, wanneer nodig:"
+
+#: ../../installation.rst:597
+msgid "``DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value."
+msgstr "``DATALOGGER_TIMEOUT``: De tijd in seconden dat maximaal gewacht wordt op de datalogger en de ontvangende DSMR-reader API. Laat weg om de standaardwaarde te gebruiken."
+
+#: ../../installation.rst:599
+msgid "``DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value."
+msgstr "``DATALOGGER_SLEEP``: De tijd in seconden dat de remote datalogger pauseert, nadat deze een telegram naar de DSMR-reader API heeft verstuurt. Laat weg om de standaardwaarde te gebruiken."
+
+#: ../../installation.rst:601
+msgid "``DATALOGGER_DEBUG_LOGGING``: Set to ``true`` or ``1`` to enable verbose debug logging. Omit to disable. Warning: Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!"
+msgstr "``DATALOGGER_DEBUG_LOGGING``: Stel in op ``true`` of ``1`` om uitgebreide debug-logging in te schakelen. Laat weg om uit te schakelen. Waarschuwing: Indien voor langere tijd ingeschakeld kan dit bijdragen aan de slijtage van je SD-kaartje op een Raspberry Pi!"
+
+#: ../../installation.rst:604
+msgid "Supervisor"
+msgstr "Supervisor"
+
+#: ../../installation.rst:608
+msgid "The following steps are also meant for the device you've just installed the remote datalogger on."
+msgstr "De stappen hieronder zijn eveneens bedoeld voor het apparaat waar je net de remote datalogger op geinstalleerd hebt."
+
+#: ../../installation.rst:610
+msgid "Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` with contents::"
+msgstr "Maak een nieuwe Supervisor-config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` met inhoud::"
+
+#: ../../installation.rst:628
+msgid "Have Supervisor reread and update its configs to initialize the process::"
+msgstr "Laat Supervisor zijn eigen instellingen uitlezen en doorvoeren, om het proces te starten::"
+
+#: ../../installation.rst:634
+msgid "The script should now forward telegrams to the API host(s) you specified."
+msgstr "Het script zou nu telegrammen moeten doorsturen naar de API host(s) die je eerder hebt ingevoerd."
+
+#~ msgid "**Possible storage issues**: :doc:`Please read this page as well before you start<data_integrity>`."
+#~ msgstr "**Mogelijke problemen met gegevensopslag**: :doc:`Lees deze pagina voordat je begint<data_integrity>`."
+
+#~ msgid "Datalogger in Docker"
+#~ msgstr "Datalogger in Docker"
+
+#~ msgid "``trizz`` (Tristan)"
+#~ msgstr "``trizz`` (Tristan)"
+
+#~ msgid "https://github.com/trizz/dsmr-remote-datalogger"
+#~ msgstr "https://github.com/trizz/dsmr-remote-datalogger"
+
+#~ msgid "https://hub.docker.com/r/trizz/dsmr-remote-datalogger/"
+#~ msgstr "https://hub.docker.com/r/trizz/dsmr-remote-datalogger/"
+
+#~ msgid "Restore failure"
+#~ msgstr "Terugzetten mislukt"
+
+#~ msgid ":doc:`More information can be found here<../contributing>`."
+#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<../contributing>`."
+
+#~ msgid ":doc:`Go to datalogger only installation instructions here.<installation/datalogger>`"
+#~ msgstr ":doc:`Ga hier naar de instructies voor de installatie van de datalogger.<installation/datalogger>`"
+
+#~ msgid "Install full DSMR-reader"
+#~ msgstr "Installeer volledige versie van DSMR-reader"
+
+#~ msgid "**Quick installation**"
+#~ msgstr "**Snelle installatie**"
+
+#~ msgid "**Explained installation**"
+#~ msgstr "**Toegelichte installatie**"
+
+#~ msgid "**Docker installation**"
+#~ msgstr "**Docker-installatie**"
+
+#~ msgid "Use DSMR-reader in Docker. Containers are maintained by third parties. :doc:`Go to Docker installation instructions here.<installation/docker>`"
+#~ msgstr "Draai DSMR-reader in Docker. Containers worden door derden onderhouden. :doc:`Ga hier naar de instructies voor de Docker-installatie.<installation/docker>`"
+
+#~ msgid "Installation: Remote datalogger"
+#~ msgstr "Installatie: Remote datalogger"
+
+#~ msgid "Installation: Docker"
+#~ msgstr "Installatie: Docker"
+
+#~ msgid "There are also Docker contains available. **These are hosted and maintained by third parties**. More information can be found here:"
+#~ msgstr "Er zijn tevens Docker-versies beschikbaar voor DSMR-reader. **Deze worden onderhouden door derde partijen.** Meer informatie hierover is hier te vinden:"
+
+#~ msgid "DSMR-reader in Docker"
+#~ msgstr "DSMR-reader in Docker"
+
+#~ msgid "Installation: Explained"
+#~ msgstr "Installatie: Toegelicht"
+
+#~ msgid "The installation guide may take about *15 to 30 minutes* (for RaspberryPi 3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide."
+#~ msgstr "Het installeren duurt naar verwachting zo'n *15 a 30 minuten* (op een RaspberryPi 3), maar hangt vooral af van je eigen vaardigheid op de command line."
+
+#~ msgid "Your first reading (optional)"
+#~ msgstr "Je allereerste (optionele) meting"
+
+#~ msgid "Installation: Quick"
+#~ msgstr "Installatie: Snel"
+
+#~ msgid "The installation guide may take about *15 to 30 minutes* (for raspberryPi 2/3), but it greatly depends on your Linux skills and whether you need to understand every step described in this guide."
+#~ msgstr "Het installeren duurt naar verwachting zo'n *15 a 30 minuten* (op een RaspberryPi 2/3), maar hangt natuurlijk ook af van je eigen vaardigheid op de command line."
+
+#~ msgid "Quick installation, part 1"
+#~ msgstr "Snelle installatie, deel 1"
+
+#~ msgid "Start::"
+#~ msgstr "Begin::"
+
+#~ msgid "Quick installation, part 2"
+#~ msgstr "Snelle installatie, deel 2"
+
+#~ msgid "Installation: Restore database backup"
+#~ msgstr "Installatie: Database back-up terugzetten"
+
+#~ msgid "Only follow these step if you want to restore a backup in PostgreSQL."
+#~ msgstr "Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt terugzetten."
+
+#~ msgid "Restoring a backup will replace any existing data stored in the database and is irreversible!"
+#~ msgstr "Het terugzetten van een back-up overschrijft alle bestaande data en is onomkeerbaar!"
+
+#~ msgid "This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::"
+#~ msgstr "Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt::"
+
+#~ msgid "Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way."
+#~ msgstr "Zet **niet** je database terug wanneer je ofwel **de applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt uitgevoerd."
+
+#~ msgid "Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point."
+#~ msgstr "Doorgaan zorgt er gegarandeerd voor dat er problemen komen met dubbele gegevens/ID's op een bepaald moment."
+
+#~ msgid "To be clear, we'll repeat it once again:"
+#~ msgstr "On glashelder te zijn, herhalen we:"
+
+#~ msgid "Compressed (default)"
+#~ msgstr "Gecomprimeerd (standaard)"
+
+#~ msgid "To restore a compressed backup (``.gz``), run::"
+#~ msgstr "Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
+
+#~ msgid "Uncompressed (legacy)"
+#~ msgstr "Ongecomprimeerd (legacy)"
+
+#~ msgid "To restore an uncompressed backup (``.sql``), run::"
+#~ msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
+
+#~ msgid "Result"
+#~ msgstr "Resultaat"
+
+#~ msgid "You should **not** see any errors regarding duplicate data or existing ID's or whatever."
+#~ msgstr "Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's of iets soortgelijks."
+
+#~ msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**."
+#~ msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op Github en **ga niet verder**."
+
+#~ msgid "Use this to only install the datalogger. You can then forward the telegrams to an installation of DSMR-reader hosted somewhere else."
+#~ msgstr "Gebruik dit om alleen de datalogger te installeren. Je kunt vervolgens de telegrammen doorsturen naar een andere installatie van DSMR-reader, die ergens anders draait."
 

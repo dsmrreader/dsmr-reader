@@ -113,8 +113,8 @@ msgid "If you are more technical savy, you could opt to either install the datab
 msgstr "Mocht je meer technisch aangelegd zijn. Je kunt overwegen om ofwel de database ofwel de hele applicatie op een andere server te installeren, waarbij de opslag minder last heeft van slijtage. Daarmee gebruik je de RaspberryPi als remote datalogger, wat een hoop problemen kan voorkomen."
 
 #: ../../application.rst:79
-msgid ":doc:`More information about using a remote datalogger here<installation/datalogger>`."
-msgstr ":doc:`Meer informatie over het gebruik van een remote datalogger is hier te vinden<installation/datalogger>`."
+msgid ":doc:`More information about using a remote datalogger here<installation>`."
+msgstr ":doc:`Meer informatie over het gebruik van een remote datalogger is hier te vinden<installation>`."
 
 #: ../../application.rst:83
 msgid "Pitfalls"

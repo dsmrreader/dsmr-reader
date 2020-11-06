@@ -1,6 +1,10 @@
 Introduction
 ============
 
+.. contents::
+    :depth: 3
+
+
 Project goals
 -------------
 - Provide a tool to easily extract and store data transferred by the DSMR protocol of your smart meter.

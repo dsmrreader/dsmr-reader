@@ -14,7 +14,7 @@ How to upgrade?
 
 Every once in a while there may be updates. You can also easily check for updates by using the application's Status page.
 
-.. warning::
+.. tip::
 
     First, **please make sure you have a recent backup of your database**!
 
@@ -34,7 +34,7 @@ If for some reason you need to downgrade the application, you will need to:
 - switch the application code version to a previous release.
 
 
-.. warning::
+.. tip::
 
     First, **please make sure you have a recent backup of your database**!
 
@@ -149,7 +149,7 @@ If there was any disk space to reclaim, the effect should be visible on the file
 How do I change the database location?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. attention::
+.. danger::
 
     Changing the database data location may cause data corruption. Only execute the step below if you understand exactly what you are doing!
 
@@ -212,9 +212,56 @@ On recent versions it should be as simple as executing the following command as 
 How do I restore a backup?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. seealso::
+.. note::
 
-    :doc:`More information can be found here <installation/restore>`.
+    Only follow these step if you want to restore a backup in PostgreSQL.
+
+Restoring a backup will replace any existing data stored in the database and is irreversible!
+
+This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::
+
+    sudo -u postgres createdb -O dsmrreader dsmrreader
+
+
+.. warning::
+
+    Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way.
+
+    Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point.
+
+
+.. danger::
+
+    To be clear, we'll repeat it once again:
+
+    Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way.
+
+    Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point.
+
+
+Compressed (default)
+^^^^^^^^^^^^^^^^^^^^
+To restore a compressed backup (``.gz``), run::
+
+    zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo -u postgres psql dsmrreader
+
+
+Uncompressed (legacy)
+^^^^^^^^^^^^^^^^^^^^^
+To restore an uncompressed backup (``.sql``), run::
+
+    sudo -u postgres psql dsmrreader -f <PATH-TO-POSTGRESQL-BACKUP.sql>
+
+
+Result
+^^^^^^
+
+You should **not** see any errors regarding duplicate data or existing ID's or whatever.
+
+.. attention::
+
+    If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**.
+
 
 
 Errors
@@ -229,7 +276,9 @@ This depends on the situation, but you can always try the following yourself fir
     sudo su - dsmr
     ./manage.py dsmr_sqlsequencereset
 
-If it does not resolve your issue, ask for support on Github (see end of page).
+.. seealso::
+
+    If it does not resolve your issue, ask for support on Github (see end of page).
 
 
 How do I fix: ``Error: Already running on PID 1234``?
@@ -262,7 +311,7 @@ When using a Raspberry Pi (or similar) combined with a DSMR version 5 smart mete
 This is caused by the high data throughput of DSMR version 5, which produces a new telegram every second.
 Both DSMR-reader and most of its users do not need this high frequency of telegrams to store, calculate and plot consumption data.
 
-Therefor two measures can be taken.
+Therefor two measures can be taken: Increasing datalogger sleep and data retention policy.
 
 
 How can I increase the datalogger sleep time?
@@ -298,7 +347,7 @@ How do I only use the datalogger?
 
 .. seealso::
 
-    :doc:`More information can be found here <installation/datalogger>`.
+    :doc:`More information can be found here <installation>`.
 
 
 Prices
@@ -319,8 +368,9 @@ Support
 
 I still need help!
 ^^^^^^^^^^^^^^^^^^
-If you can't find the answer in the documentation, do not hesitate in looking for help.
 
-.. seealso::
+.. tip::
+
+    If you can't find the answer in the documentation, do not hesitate in looking for help.
 
     `View existing Github issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_

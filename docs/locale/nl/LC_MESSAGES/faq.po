@@ -249,130 +249,178 @@ msgid "How do I restore a backup?"
 msgstr "Hoe zet ik een back-up terug?"
 
 #: ../../faq.rst:217
-msgid ":doc:`More information can be found here <installation/restore>`."
-msgstr ":doc:`Meer informatie kun je hier terugvinden<installation/restore>`."
+msgid "Only follow these step if you want to restore a backup in PostgreSQL."
+msgstr "Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt terugzetten."
+
+#: ../../faq.rst:219
+msgid "Restoring a backup will replace any existing data stored in the database and is irreversible!"
+msgstr "Het terugzetten van een back-up overschrijft alle bestaande data en is onomkeerbaar!"
 
 #: ../../faq.rst:221
+msgid "This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::"
+msgstr "Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt::"
+
+#: ../../faq.rst:228 ../../faq.rst:237
+msgid "Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way."
+msgstr "Zet **niet** je database terug wanneer je ofwel **de applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt uitgevoerd."
+
+#: ../../faq.rst:230 ../../faq.rst:239
+msgid "Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point."
+msgstr "Doorgaan zorgt er gegarandeerd voor dat er problemen komen met dubbele gegevens/ID's op een bepaald moment."
+
+#: ../../faq.rst:235
+msgid "To be clear, we'll repeat it once again:"
+msgstr "On glashelder te zijn, herhalen we:"
+
+#: ../../faq.rst:243
+msgid "Compressed (default)"
+msgstr "Gecomprimeerd (standaard)"
+
+#: ../../faq.rst:244
+msgid "To restore a compressed backup (``.gz``), run::"
+msgstr "Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
+
+#: ../../faq.rst:250
+msgid "Uncompressed (legacy)"
+msgstr "Ongecomprimeerd (legacy)"
+
+#: ../../faq.rst:251
+msgid "To restore an uncompressed backup (``.sql``), run::"
+msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
+
+#: ../../faq.rst:257
+msgid "Result"
+msgstr "Resultaat"
+
+#: ../../faq.rst:259
+msgid "You should **not** see any errors regarding duplicate data or existing ID's or whatever."
+msgstr "Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's of iets soortgelijks."
+
+#: ../../faq.rst:263
+msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**."
+msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op Github en **ga niet verder**."
+
+#: ../../faq.rst:268
 msgid "Errors"
 msgstr "Fouten"
 
-#: ../../faq.rst:224
+#: ../../faq.rst:271
 msgid "How do I fix ``DETAIL: Key (id)=(123) already exists``?"
 msgstr "Hoe los ik ``DETAIL: Key (id)=(123) already exists`` op?"
 
-#: ../../faq.rst:226
+#: ../../faq.rst:273
 msgid "This depends on the situation, but you can always try the following yourself first::"
 msgstr "Het hangt af van de situatie, maar je kunt het volgende sowieso zelf eerst proberen::"
 
-#: ../../faq.rst:232
+#: ../../faq.rst:281
 msgid "If it does not resolve your issue, ask for support on Github (see end of page)."
 msgstr "Wanneer dat het probleem niet oplost, vraag dan om ondersteuning via Guthub (zie onderaan deze pagina)."
 
-#: ../../faq.rst:236
+#: ../../faq.rst:285
 msgid "How do I fix: ``Error: Already running on PID 1234``?"
 msgstr "Hoe los ik ``Error: Already running on PID 1234`` op?"
 
-#: ../../faq.rst:237
+#: ../../faq.rst:286
 msgid "If you're seeing this error::"
 msgstr "Als je deze fout ziet::"
 
-#: ../../faq.rst:241
+#: ../../faq.rst:290
 msgid "Just delete the PID file and restart the webinterface::"
 msgstr "Verwijder het genoemde PID-bestand en herstart de webinterface::"
 
-#: ../../faq.rst:247
+#: ../../faq.rst:296
 msgid "How do I fix stats after smart meter replacement?"
 msgstr "Hoe herstel ik gegevens na een meterwissel?"
 
-#: ../../faq.rst:249
+#: ../../faq.rst:298
 msgid "Sometimes, when relocating or due to replacement of your meter, the meter positions read by DSMR-reader will cause invalid data (e.g.: big gaps or inverted consumption). Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day."
 msgstr "Het komt soms voor dat, door verhuizing of technische vervanging van je meter, deze meterstanden in DSMR-reader voor afwijkingen en onjuiste gegevens zorgen (bijv.: grote gaten of negatief verbruik). Dit komt alleen voor bij de dag zelf en niet bij de dagen erna. Daarom zul je de gegevens van de foutieve dag zelf moeten aanpassen."
 
-#: ../../faq.rst:252
+#: ../../faq.rst:301
 msgid "The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<configuration>` for the invalid day."
 msgstr "De dag erna kun je dit zelf weer rechtzetten via de Dag- of Uurtotalen, :doc:`in de admin-configuratie<configuration>`, voor de betreffende dag."
 
-#: ../../faq.rst:256
+#: ../../faq.rst:305
 msgid "Data"
 msgstr "Data"
 
-#: ../../faq.rst:258
+#: ../../faq.rst:307
 msgid "By default DSMR-reader reads and preserves all telegram data read."
 msgstr "Standaard bewaart DSMR-reader alle ingelezen telegrammen."
 
-#: ../../faq.rst:260
+#: ../../faq.rst:309
 msgid "When using a Raspberry Pi (or similar) combined with a DSMR version 5 smart meter (the default nowadays), you may experience issues after a while."
 msgstr "Wanneer je een Raspberry Pi (of soortgelijk appartaat) gebruikt, samen met een DSMR versie 5 slimme meter (wordt vandaag de dag standaard geleverd), dan kun je na verloop van tijd problemen ervaren."
 
-#: ../../faq.rst:262
+#: ../../faq.rst:311
 msgid "This is caused by the high data throughput of DSMR version 5, which produces a new telegram every second. Both DSMR-reader and most of its users do not need this high frequency of telegrams to store, calculate and plot consumption data."
 msgstr "Dit wordt veroorzaak door de hoge gegevensdoorvoer van DSMR versie 5, wat elke seconde voor een nieuw telegram zorgt. Zowel DSMR-reader als het meerendeel van de gebruikers hebben deze hoge frequentie echter niet nodig voor de opslag, analyze en tonen van verbruiksgegevens."
 
-#: ../../faq.rst:265
-msgid "Therefor two measures can be taken."
-msgstr "Hiervoor kun je twee maatregelen treffen."
+#: ../../faq.rst:314
+msgid "Therefor two measures can be taken: Increasing datalogger sleep and data retention policy."
+msgstr "HIervoor kunnen twee maatregelen genomen worden: Verhogen van de datalogger-sleep en het instellen van een retentiebeleid."
 
-#: ../../faq.rst:269
+#: ../../faq.rst:318
 msgid "How can I increase the datalogger sleep time?"
 msgstr "Hoe verhoog ik de slaaptijd van de datalogger?"
 
-#: ../../faq.rst:271
+#: ../../faq.rst:320
 msgid "Increase the datalogger sleep time :doc:`in the configuration<../configuration>` to 5 seconds or higher. This will save a lot of disk storage, especially when using a Raspberry Pi SD card, usually having a size of 16 GB max."
 msgstr "Verhoog de slaaptijd van de datalogger :doc:`binnen de configuratie<../configuration>` naar minimaal 5 seconden. Dit bespaart een hoop schijfruimte, met name wanneer je een standaard Raspberry Pi SD-kaart gebruikt, die meestal maximaal 16 GB groot zijn."
 
-#: ../../faq.rst:276
+#: ../../faq.rst:325
 msgid "How can I configure a data retention policy?"
 msgstr "Hoe stel ik een gegevensretentiebeleid in?"
 
-#: ../../faq.rst:278
+#: ../../faq.rst:327
 msgid "Configure a data retention policy :doc:`in the configuration<../configuration>`. This will eventually delete up to 99 percent of the telegrams, always preserving a few historically. Also, day and hour totals are **never** deleted by retention policies."
 msgstr " Stel een gegevensretentiebeleid in :doc:`binnen de configuratie<../configuration>`. Dit schoont uiteindelijk tot 99 procent van de telegrammen op, waarbij een aantal altijd achterblijven i.v.m. historie. Daarnaast worden uur- en dagtotalen **nooit** opgeschoond door het retentiebeleid."
 
-#: ../../faq.rst:289
+#: ../../faq.rst:338
 msgid "I'm missing gas readings?"
 msgstr "Ik mis gasverbruik?"
 
-#: ../../faq.rst:291
+#: ../../faq.rst:340
 msgid "Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render. The gas meter positions are only be updated once per hour (for DSMR v4). The Status page will give you insight in this as well."
 msgstr "Wees er allereerst zeker van dat je slimme meter uberhaupt gasverbruik registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden worden sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:297
+#: ../../faq.rst:346
 msgid "How do I only use the datalogger?"
 msgstr "Hoe gebruik ik alleen de datalogger?"
 
-#: ../../faq.rst:301
-msgid ":doc:`More information can be found here <installation/datalogger>`."
-msgstr ":doc:`Meer informatie kun je hier terugvinden<installation/restore>`."
+#: ../../faq.rst:350
+msgid ":doc:`More information can be found here <installation>`."
+msgstr ":doc:`Meer informatie kun je hier terugvinden<installation>`."
 
-#: ../../faq.rst:305
+#: ../../faq.rst:354
 msgid "Prices"
 msgstr "Prijzen"
 
-#: ../../faq.rst:308
+#: ../../faq.rst:357
 msgid "How do I recalculate prices retroactively?"
 msgstr "Hoe kan ik prijzen met terugwerkende kracht herberekenen?"
 
-#: ../../faq.rst:309
+#: ../../faq.rst:358
 msgid "I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?"
 msgstr "Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe kan ik de nieuwe prijzen doorvoeren?"
 
-#: ../../faq.rst:311
+#: ../../faq.rst:360
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../faq.rst:318
+#: ../../faq.rst:367
 msgid "Support"
 msgstr "Ondersteuning"
 
-#: ../../faq.rst:321
+#: ../../faq.rst:370
 msgid "I still need help!"
 msgstr "Ik heb nog steeds hulp nodig!"
 
-#: ../../faq.rst:322
+#: ../../faq.rst:374
 msgid "If you can't find the answer in the documentation, do not hesitate in looking for help."
 msgstr "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan vooral niet om om hulp te vragen."
 
-#: ../../faq.rst:326
+#: ../../faq.rst:376
 msgid "`View existing Github issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_"
 msgstr "`Bekijk bestaande issues op Github of maak een nieuwe aan <https://github.com/dennissiemensma/dsmr-reader/issues>`_."
 
@@ -438,3 +486,12 @@ msgstr "`Bekijk bestaande issues op Github of maak een nieuwe aan <https://githu
 
 #~ msgid "I've changed to a different smart meter"
 #~ msgstr "Ik ben van slimme meter gewisseld"
+
+#~ msgid ":doc:`More information can be found here <installation/restore>`."
+#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<installation/restore>`."
+
+#~ msgid "Installation: Restore database backup"
+#~ msgstr "Installatie: Database back-up terugzetten"
+
+#~ msgid "Therefor two measures can be taken."
+#~ msgstr "Hiervoor kun je twee maatregelen treffen."
