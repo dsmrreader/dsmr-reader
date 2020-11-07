@@ -6,8 +6,8 @@ Setting up the application
     :depth: 2
 
 
-Accessing the application
--------------------------
+Accessing
+---------
 Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser. 
 
 Did you install using a monitor attached to the RaspberryPi and you don't know what address your device has? Just type ``ifconfig | grep addr`` and it should display an ip address, for example::

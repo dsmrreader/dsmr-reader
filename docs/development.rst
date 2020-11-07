@@ -5,7 +5,7 @@ Developing with DSMR-reader
 .. contents::
     :depth: 2
 
-.. note::
+.. tip::
 
     In this document there are many references to::
     
@@ -94,7 +94,7 @@ Just import it as you should on your RaspberryPi. Copy a database backup to ``/v
     # For .SQL.GZ
     zcat <PATH-TO-POSTGRESQL-BACKUP.sql.gz> | sudo -u postgres psql dsmrreader
 
-.. warning::
+.. danger::
     
     Please note that you should not run any (backend) processes in your DSMR-reader development environment, until you've unlinked all external services.
 

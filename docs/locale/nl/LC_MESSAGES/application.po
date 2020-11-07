@@ -21,8 +21,8 @@ msgid "Contents"
 msgstr "Inhoudsopgave"
 
 #: ../../application.rst:10
-msgid "Accessing the application"
-msgstr "De applicatie benaderen"
+msgid "Accessing"
+msgstr "Toegang"
 
 #: ../../application.rst:11
 msgid "Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser."
@@ -127,3 +127,6 @@ msgstr "De levensduur van SD-kaartjes varieert van enkele weken tot soms jaren, 
 #: ../../application.rst:85
 msgid "Backups are created daily, but rotated weekly! So it's possible that, at some point, the backups get corrupted as well since they're overwritten each week. And eventually they will get synchronized to Dropbox as well."
 msgstr "Back-ups worden dagelijks gemaakt, echter worden deze ook wekelijks geroteerd! Dus op een gegeven moment kunnen ze na een week overschreven worden met een corrupte variant. En gezien ze ook naar Dropbox synchroniseerd kunnen worden, biedt dat ook geen garantie."
+
+#~ msgid "Accessing the application"
+#~ msgstr "De applicatie benaderen"

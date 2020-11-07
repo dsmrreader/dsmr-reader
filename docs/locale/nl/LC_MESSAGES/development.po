@@ -1,4 +1,3 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -6,11 +5,12 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../development.rst:2
 msgid "Developing with DSMR-reader"
@@ -25,13 +25,8 @@ msgid "In this document there are many references to::"
 msgstr "In dit document zijn er vele referenties naar::"
 
 #: ../../development.rst:14
-msgid ""
-"You will only have to execute it once per terminal session, to make sure "
-"you are working in the designated virtual env for DSMR-reader."
-msgstr ""
-"Je hoeft dit slechts eenmaal per terminal sessie uit te voeren, om er "
-"zeker van te zijn dat je in de betreffende virtual env werkt voor DSMR-"
-"reader."
+msgid "You will only have to execute it once per terminal session, to make sure you are working in the designated virtual env for DSMR-reader."
+msgstr "Je hoeft dit slechts eenmaal per terminal sessie uit te voeren, om er zeker van te zijn dat je in de betreffende virtual env werkt voor DSMR-reader."
 
 #: ../../development.rst:18
 msgid "Setting up a development environment in Ubuntu 18.04"
@@ -66,12 +61,8 @@ msgid "Copy env vars template and generate a unique secret key::"
 msgstr "Kopieer env vars template en genereer een unieke secret key::"
 
 #: ../../development.rst:53
-msgid ""
-"Try a check, output should be something like ``System check identified no"
-" issues (0 silenced).``::"
-msgstr ""
-"Probeer het volgende, de output moet iets zijn in de trend van ``System "
-"check identified no issues (0 silenced).``::"
+msgid "Try a check, output should be something like ``System check identified no issues (0 silenced).``::"
+msgstr "Probeer het volgende, de output moet iets zijn in de trend van ``System check identified no issues (0 silenced).``::"
 
 #: ../../development.rst:57
 msgid "Run quick tests (with in-memory database)::"
@@ -86,59 +77,32 @@ msgid "Set up MySQL (or MariaDB) test database::"
 msgstr "Stel MySQL (of MariaDB) testdatabase in::"
 
 #: ../../development.rst:76
-msgid ""
-"Now check whether tests run well with all three database backends (this "
-"may take a while)::"
-msgstr ""
-"Controleer nu of de tests goed draaien met alle drie de database-backends"
-" (dit kan even duren)::"
+msgid "Now check whether tests run well with all three database backends (this may take a while)::"
+msgstr "Controleer nu of de tests goed draaien met alle drie de database-backends (dit kan even duren)::"
 
 #: ../../development.rst:82
 msgid "Initial data to develop with"
 msgstr "Initiele gegevens om mee te ontwikkelen"
 
 #: ../../development.rst:84
-msgid ""
-"To be honest, the best initial/fixture data is simply a backup of your "
-"own system in production."
-msgstr ""
-"De beste gegevens om mee te ontwikkelen zijn eerlijk gezegd simpelweg "
-"gegevens uit je eigen productieomgeving."
+msgid "To be honest, the best initial/fixture data is simply a backup of your own system in production."
+msgstr "De beste gegevens om mee te ontwikkelen zijn eerlijk gezegd simpelweg gegevens uit je eigen productieomgeving."
 
 #: ../../development.rst:86
-msgid ""
-"Just import it as you should on your RaspberryPi. Copy a database backup "
-"to ``/var/lib/postgresql/`` on your PC and import it::"
-msgstr ""
-"Importeer deze zoals je dat ook zou doen op je RaspberryPi. Kopieer een "
-"database-backup naar ``/var/lib/postgresql`` op je PC en importeer deze "
-"met::"
+msgid "Just import it as you should on your RaspberryPi. Copy a database backup to ``/var/lib/postgresql/`` on your PC and import it::"
+msgstr "Importeer deze zoals je dat ook zou doen op je RaspberryPi. Kopieer een database-backup naar ``/var/lib/postgresql`` op je PC en importeer deze met::"
 
 #: ../../development.rst:99
-msgid ""
-"Please note that you should not run any (backend) processes in your DSMR-"
-"reader development environment, until you've unlinked all external "
-"services."
-msgstr ""
-"N.B.: Voorkom dat je (achtergrond)processen draait in je lokale DSMR-"
-"reader ontwikkelomgeving, totdat je alle externe diensten hebt "
-"ontkoppeld."
+msgid "Please note that you should not run any (backend) processes in your DSMR-reader development environment, until you've unlinked all external services."
+msgstr "Voorkom dat je (achtergrond)processen draait in je lokale DSMR-reader ontwikkelomgeving, totdat je alle externe diensten hebt ontkoppeld."
 
 #: ../../development.rst:101
 msgid "After importing the backup of your production system, simply run::"
-msgstr ""
-"Voer simpelweg het volgende uit, na het importeren van een backup uit je "
-"eigen productieomgeving::"
+msgstr "Voer simpelweg het volgende uit, na het importeren van een backup uit je eigen productieomgeving::"
 
 #: ../../development.rst:106
-msgid ""
-"This will remove all API keys and other links to externals systems, as "
-"well as reset the admin user credentials to ``admin / admin`` (user / "
-"password)."
-msgstr ""
-"Dit verwijdert alle API-keys en andere koppelingen naar externe systemen."
-" Tevens wordt de admin-gebruiker gereset naar ``admin / admin`` "
-"(gebruiker / wachtwoord)."
+msgid "This will remove all API keys and other links to externals systems, as well as reset the admin user credentials to ``admin / admin`` (user / password)."
+msgstr "Dit verwijdert alle API-keys en andere koppelingen naar externe systemen. Tevens wordt de admin-gebruiker gereset naar ``admin / admin`` (gebruiker / wachtwoord)."
 
 #: ../../development.rst:110
 msgid "Fake datalogger"
@@ -146,27 +110,15 @@ msgstr "Nep datalogger"
 
 #: ../../development.rst:112
 msgid "There is a builtin command that can somewhat fake a datalogger::"
-msgstr ""
-"Er is een ingebouwd command voor een soort van datalogger die nepdata "
-"genereert::"
+msgstr "Er is een ingebouwd command voor een soort van datalogger die nepdata genereert::"
 
 #: ../../development.rst:117
-msgid ""
-"It will generate random data every second in a certain pattern and should"
-" be fine for basic testing."
-msgstr ""
-"Deze genereert elke seconde willekeurige gegevens in een bepaald patroon "
-"en is vaak meer dan afdoende voor simpele testdoeleinden."
+msgid "It will generate random data every second in a certain pattern and should be fine for basic testing."
+msgstr "Deze genereert elke seconde willekeurige gegevens in een bepaald patroon en is vaak meer dan afdoende voor simpele testdoeleinden."
 
 #: ../../development.rst:119
-msgid ""
-"Please note that it only inserts unprocessed readings, so you'll still "
-"have to run the ``./manage.py dsmr_backend --run-once`` command to have "
-"the readings processed."
-msgstr ""
-"N.B.: Hiermee worden alleen onverwerkte metingen aangemaakt. Je zult ze "
-"nog steeds moeten verwerken door ``./manage.py dsmr_backend --run-once`` "
-"uit te voeren."
+msgid "Please note that it only inserts unprocessed readings, so you'll still have to run the ``./manage.py dsmr_backend --run-once`` command to have the readings processed."
+msgstr "Hiermee worden alleen onverwerkte metingen aangemaakt. Je zult ze nog steeds moeten verwerken door ``./manage.py dsmr_backend --run-once`` uit te voeren."
 
 #: ../../development.rst:123
 msgid "Running DSMR-reader locally"
@@ -177,26 +129,16 @@ msgid "You can run the Django development server with::"
 msgstr "Je kunt de Django-ontwikkelserver draaien met::"
 
 #: ../../development.rst:130
-msgid ""
-"The application will be accessible on: ``http://localhost:8000/``. Any "
-"code changes you make will let the application reload automatically."
-msgstr ""
-"De applicatie is nu bereikbaar op: ``http://localhost:8000/``. Elke "
-"codewijziging die je doet, wordt automatisch doorgevoerd en herlaadt de "
-"applicatie."
+msgid "The application will be accessible on: ``http://localhost:8000/``. Any code changes you make will let the application reload automatically."
+msgstr "De applicatie is nu bereikbaar op: ``http://localhost:8000/``. Elke codewijziging die je doet, wordt automatisch doorgevoerd en herlaadt de applicatie."
 
 #: ../../development.rst:135
 msgid "Tests and coverage"
 msgstr "Tests en dekking"
 
 #: ../../development.rst:137
-msgid ""
-"DSMR-reader's test coverage should remain as high as possible. Running "
-"tests will also analyze the test coverage in detail."
-msgstr ""
-"DSMR-reader's test dekking zou zo hoog mogelijk moeten blijven. Het "
-"draaien van tests zorgt er ook voor dat de test dekking in detail "
-"geanalyseerd wordt."
+msgid "DSMR-reader's test coverage should remain as high as possible. Running tests will also analyze the test coverage in detail."
+msgstr "DSMR-reader's test dekking zou zo hoog mogelijk moeten blijven. Het draaien van tests zorgt er ook voor dat de test dekking in detail geanalyseerd wordt."
 
 #: ../../development.rst:139
 msgid "The easiest way to run tests is to use the in-memory tests::"
@@ -204,110 +146,56 @@ msgstr "De makkelijkste manier om tests te draaien is via de in-memory tests::"
 
 #: ../../development.rst:144
 msgid "To test a single app within DSMR-reader, just append it::"
-msgstr ""
-"Om een enkele app binnen DSMR-reader te testen, geef je deze simpelweg "
-"als extra argument op::"
+msgstr "Om een enkele app binnen DSMR-reader te testen, geef je deze simpelweg als extra argument op::"
 
 #: ../../development.rst:149
 msgid "To test all database backends, run::"
 msgstr "Om alle database-backends te testen voer je het volgende uit::"
 
 #: ../../development.rst:154
-msgid ""
-"The test coverage should be visible in the terminal after running tests. "
-"There are detailed HTML pages available as well, after each test run, in "
-"``coverage_report/html/index.html``. Just open it with your browser to "
-"view the test coverage of each file and line."
-msgstr ""
-"De test dekking zou na het draaien van tests zichtbaar moeten zijn in de "
-"terminal. Er zijn tevens gedetaileerde HTML-pagina's beschikbaar in "
-"``coverage_report/html/index.html``, na het draaien van tests. Je kunt "
-"deze openen met je browser om de test dekking in detail te zien per "
-"bestand en per regel code."
+msgid "The test coverage should be visible in the terminal after running tests. There are detailed HTML pages available as well, after each test run, in ``coverage_report/html/index.html``. Just open it with your browser to view the test coverage of each file and line."
+msgstr "De test dekking zou na het draaien van tests zichtbaar moeten zijn in de terminal. Er zijn tevens gedetaileerde HTML-pagina's beschikbaar in ``coverage_report/html/index.html``, na het draaien van tests. Je kunt deze openen met je browser om de test dekking in detail te zien per bestand en per regel code."
 
 #: ../../development.rst:160
-msgid ""
-"A side effect of running tests is that it may also regenerate .PO files "
-"from the ``docs/`` folder. If you did not make any changes there, your "
-"should just ignore those changed files and revert them."
-msgstr ""
-"Een mogelijk bijeffect van het draaien van tests is dat hiermee ook .PO-"
-"bestanden in de ``docs/`` map bijgewerkt worden. Als je daar geen "
-"wijzigingen in hebt gedaan, kun je die door de tests gewijzigde bestanden"
-" negeren."
+msgid "A side effect of running tests is that it may also regenerate .PO files from the ``docs/`` folder. If you did not make any changes there, your should just ignore those changed files and revert them."
+msgstr "Een mogelijk bijeffect van het draaien van tests is dat hiermee ook .PO-bestanden in de ``docs/`` map bijgewerkt worden. Als je daar geen wijzigingen in hebt gedaan, kun je die door de tests gewijzigde bestanden negeren."
 
 #: ../../development.rst:165
 msgid "Translations"
 msgstr "Vertalingen"
 
 #: ../../development.rst:167
-msgid ""
-"You can find the translations (.PO files) for the main application in "
-"``dsmrreader/locales/``. To regenerate them, just execute the ``./tools"
-"/quick-test.sh`` script, as one of the tests checks translations."
-msgstr ""
-"Je kunt de vertalingen (.PO-bestanden) voor de hoofdapplicatie vinden in "
-"``dsmrreader/locales/``. Om ze te hergenereren voer het ``./tools/quick-"
-"test.sh`` script uit, zodat een van de tests de vertalingen opnieuw "
-"checkt."
+msgid "You can find the translations (.PO files) for the main application in ``dsmrreader/locales/``. To regenerate them, just execute the ``./tools/quick-test.sh`` script, as one of the tests checks translations."
+msgstr "Je kunt de vertalingen (.PO-bestanden) voor de hoofdapplicatie vinden in ``dsmrreader/locales/``. Om ze te hergenereren voer het ``./tools/quick-test.sh`` script uit, zodat een van de tests de vertalingen opnieuw checkt."
 
 #: ../../development.rst:172
 msgid "Editing documentation"
 msgstr "Documentatie bijwerken"
 
 #: ../../development.rst:174
-msgid ""
-"The documentation is part of the repository and can be generated "
-"(automatically) with Sphinx::"
-msgstr ""
-"De documentatie is onderdeel van de repository en kan (automatisch) "
-"gegenereerd worden via Sphinx::"
+msgid "The documentation is part of the repository and can be generated (automatically) with Sphinx::"
+msgstr "De documentatie is onderdeel van de repository en kan (automatisch) gegenereerd worden via Sphinx::"
 
 #: ../../development.rst:180
-msgid ""
-"You can now view the documentation in your browser by accessing: "
-"``http://127.0.0.1:10000``. Any changes you make will be reflected "
-"instantly in the browser, as Sphinx continuously checks for changed "
-"files."
-msgstr ""
-"Je kunt nu de documentatie bekijken in je browser op de volgende link: "
-"``http://127.0.0.1:10000``. Wijzigingen die je doorvoert worden direct "
-"automatisch bijgewerkt en getoond in je browser, waar Sphinx voor zorgt."
+msgid "You can now view the documentation in your browser by accessing: ``http://127.0.0.1:10000``. Any changes you make will be reflected instantly in the browser, as Sphinx continuously checks for changed files."
+msgstr "Je kunt nu de documentatie bekijken in je browser op de volgende link: ``http://127.0.0.1:10000``. Wijzigingen die je doorvoert worden direct automatisch bijgewerkt en getoond in je browser, waar Sphinx voor zorgt."
 
 #: ../../development.rst:185
 msgid "Translating documentation"
 msgstr "Documentatie vertalen"
 
 #: ../../development.rst:187
-msgid ""
-"Translations are done using gettext and .PO files. Regenerate the .PO "
-"files with::"
-msgstr ""
-"Vertalingen verlopen via .PO-bestanden met gettext. Hergenereer de .PO-"
-"bestanden met::"
+msgid "Translations are done using gettext and .PO files. Regenerate the .PO files with::"
+msgstr "Vertalingen verlopen via .PO-bestanden met gettext. Hergenereer de .PO-bestanden met::"
 
 #: ../../development.rst:193
-msgid ""
-"The .PO files in ``docs/locale`` should be regenerated now. You can use "
-"``poedit`` to view and translate the files."
-msgstr ""
-"De .PO-bestanden in ``docs/locale`` zouden nu opnieuw gegenereerd moeten "
-"worden. Je kunt het programma ``poedit`` gebruiken om de bestanden te "
-"bekijken en te vertalen."
+msgid "The .PO files in ``docs/locale`` should be regenerated now. You can use ``poedit`` to view and translate the files."
+msgstr "De .PO-bestanden in ``docs/locale`` zouden nu opnieuw gegenereerd moeten worden. Je kunt het programma ``poedit`` gebruiken om de bestanden te bekijken en te vertalen."
 
 #: ../../development.rst:195
-msgid ""
-"After editing the .PO files, you can check the result by building the "
-"Dutch translations locally::"
-msgstr ""
-"Nadat je de .PO-bestanden hebt bijgewerkt, kun je de resultaten bekijken "
-"door de Nederlandse variant van de documentatie lokaal te genereren::"
+msgid "After editing the .PO files, you can check the result by building the Dutch translations locally::"
+msgstr "Nadat je de .PO-bestanden hebt bijgewerkt, kun je de resultaten bekijken door de Nederlandse variant van de documentatie lokaal te genereren::"
 
 #: ../../development.rst:199
-msgid ""
-"Now view the generated HTML in your browser by opening: "
-"``docs/_build/html/index.html``"
-msgstr ""
-"Bekijk nu de gegenereerde HTML in je browser door het volgende bestand te"
-" openen: ``docs/_build/html/index.html``"
-
+msgid "Now view the generated HTML in your browser by opening: ``docs/_build/html/index.html``"
+msgstr "Bekijk nu de gegenereerde HTML in je browser door het volgende bestand te openen: ``docs/_build/html/index.html``"

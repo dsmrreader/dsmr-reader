@@ -29,6 +29,6 @@ Documentation
 
 .. warning::
 
-    The API-documentation has been moved to your local DSMR-reader installation since DSMR-reader ``v3.1``.
+    The API-documentation has been moved to your local installation since DSMR-reader ``v3.1``.
 
-    You can access it by selecting the ``About DSMR-reader`` menu item in DSMR-reader.
+    You can access it by selecting the ``About & Support`` menu item in DSMR-reader.
