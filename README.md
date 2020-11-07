@@ -4,15 +4,16 @@
 
 
 # DSMR-reader
+*DSMR-protocol reader, telegram data storage and energy consumption visualizer. 
+Can be used for reading the smart meter DSMR (Dutch Smart Meter Requirements) P1 port yourself at your home. 
+You will need a cable and hardware that can run Linux software. 
+**Free for non-commercial use**.*
+
+A Docker implementation [can be found here](https://github.com/xirixiz/dsmr-reader-docker).
 
 ## Quick start
 - **Documentation**: [English](https://dsmr-reader.readthedocs.io/en/v4/index.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/index.html)
 - **Installation**: [English](https://dsmr-reader.readthedocs.io/en/v4/installation.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/installation.html)
 - **FAQ**: [English](https://dsmr-reader.readthedocs.io/en/v4/faq.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/faq.html)
 
-## Screenshots / tour
-[Check out the tour](https://dsmr-reader.readthedocs.io/en/v4/intro.html) in the documentation.
-
-![Dashboard](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/v4.7/frontend/dashboard.png)
-
-![Live graphs](https://dsmr-reader.readthedocs.io/en/v4/_static/screenshots/v4.7/frontend/live.png)
+[Check out the documentation](https://dsmr-reader.readthedocs.io/en/v4/intro.html) for a tour and screenshots.
