@@ -1,5 +1,3 @@
--r base.txt
-
 polib==1.1.0
 pylama==7.7.1
 pytest-cov==2.10.1

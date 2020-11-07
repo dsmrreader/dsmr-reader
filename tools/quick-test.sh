@@ -7,14 +7,12 @@ do
     ARGS="$ARGS $CURRENT"
 done
 
-DJANGO_SETTINGS_MODULE=dsmrreader.config.test
-export DJANGO_SETTINGS_MODULE
+export DJANGO_SETTINGS_MODULE=dsmrreader.config.test
 
 echo ""
 echo "--- Testing with SQLite..."
-DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
-export DJANGO_DATABASE_ENGINE
-time pytest --cov --cov-report=html --cov-report=term -n 2 $ARGS
+export DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
+pytest --cov --cov-report=html --cov-report=term -n 2 $ARGS
 
 
 echo ""
