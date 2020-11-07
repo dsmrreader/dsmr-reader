@@ -8,6 +8,7 @@ Installation
 .. contents::
     :depth: 2
 
+----
 
 Option A: Install DSMR-reader manually (quick)
 ==============================================

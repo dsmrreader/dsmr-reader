@@ -5,6 +5,7 @@ FAQ (Frequently Asked Questions)
 .. contents::
     :depth: 3
 
+----
 
 Troubleshooting
 ===============
@@ -123,6 +124,7 @@ The DEBUG-logging is disabled by default, to reduce writes on the filesystem. Yo
 
 * All done!
 
+----
 
 Application management
 ======================
@@ -240,6 +242,7 @@ Now execute::
 
 The user should either be created or the existing user should have its password updated.
 
+----
 
 Database
 ========
@@ -377,7 +380,7 @@ You should **not** see any errors regarding duplicate data or existing ID's or w
 
     If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**.
 
-
+----
 
 Common error resolution
 =======================
@@ -418,6 +421,7 @@ Any consecutive days should not be affected by this issue, so you will only have
 
 The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<configuration>` for the invalid day.
 
+----
 
 Data
 ====
@@ -471,6 +475,8 @@ How do I only use the datalogger?
     :doc:`More information can be found here <installation>`.
 
 
+----
+
 Prices
 ======
 
@@ -483,6 +489,7 @@ Execute::
     sudo su - dsmr
     ./manage.py dsmr_stats_recalculate_prices
 
+----
 
 Support
 =======
