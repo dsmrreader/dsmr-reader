@@ -16,6 +16,7 @@ v4.6.1 - 2020-11-07
 -------------------
 
 - ``Changed``: Rework of documentation [`#1190 <https://github.com/dsmrreader/dsmr-reader/issues/1190>`_]
+- ``Changed``: Dependencies update
 
 
 v4.6.0 - 2020-11-01
