@@ -12,19 +12,19 @@ export DJANGO_DATABASE_NAME=dsmrreader
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
-pytest --cov --cov-report=html --cov-report=term -n 2
+pytest --cov --cov-report=term
 
 
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.postgresql
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
-pytest --cov --cov-report=html --cov-report=term -n 4
+pytest --cov --cov-report=term
 
 
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.mysql
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
-pytest --cov --cov-report=html --cov-report=term dsmr_api/tests/v1/test_api.py
+pytest --cov --cov-report=term
 
 
 DIR=$(cd `dirname $0` && pwd)
