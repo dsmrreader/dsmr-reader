@@ -326,8 +326,8 @@ msgid "The log level DSMR-reader should use. Choose either ``ERROR`` (omit for t
 msgstr "Het log level dat DSMR-reader gebruikt. Kies ofwel ``ERROR`` (laat weg voor deze standaardwaarde), ``WARNING`` of ``DEBUG`` (alleen tijdelijk i.v.m. hogere I/O)."
 
 #: ../../env_settings.rst:407
-msgid "For more information, :doc:`see Troubleshooting<troubleshooting>`."
-msgstr "Voor meer informatie, :doc:`zie Hulp bij problemen<troubleshooting>`."
+msgid "For more information, :doc:`see Troubleshooting in FAQ<faq>`."
+msgstr "Voor meer informatie, :doc:`zie Hulp bij problemen in de FAQ<faq>`."
 
 #: ../../env_settings.rst:420
 msgid "``DSMRREADER_PLUGINS``"

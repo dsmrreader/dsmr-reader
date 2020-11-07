@@ -1,5 +1,5 @@
-Settings (moved)
-================
+(moved)
+=======
 
 .. seealso::
 

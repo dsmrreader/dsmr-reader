@@ -21,477 +21,560 @@ msgid "Contents"
 msgstr "Inhoudsopgave"
 
 #: ../../faq.rst:10
+msgid "Troubleshooting"
+msgstr "Hulp bij problemen"
+
+#: ../../faq.rst:17
+msgid "If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue."
+msgstr "Wanneer er iets lijkt mis te gaan, volg de onderstaande stappen eerst, voordat je een issue aanmaakt. Hiermee kun je wat meer achtergrondinformatie aanleveren."
+
+#: ../../faq.rst:21
+msgid "Log files"
+msgstr "Logbestanden"
+
+#: ../../faq.rst:23
+msgid "Always start by checking the log files for errors."
+msgstr "Je startpunt is altijd het bekijken van de logfiles voor foutmeldingen."
+
+#: ../../faq.rst:25
+msgid "DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:"
+msgstr "DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of niet in je eigen situatie gebruikt worden) en ze worden beheerd door Supervisor:"
+
+#: ../../faq.rst:28 ../../faq.rst:38
+msgid "Webinterface"
+msgstr "Webinterface"
+
+#: ../../faq.rst:28
+msgid "``dsmr_webinterface``"
+msgstr "``dsmr_webinterface``"
+
+#: ../../faq.rst:30 ../../faq.rst:40
+msgid "Datalogger"
+msgstr "Datalogger"
+
+#: ../../faq.rst:30
+msgid "``dsmr_datalogger``"
+msgstr "``dsmr_datalogger``"
+
+#: ../../faq.rst:32 ../../faq.rst:42
+msgid "Backend"
+msgstr "Backend"
+
+#: ../../faq.rst:32
+msgid "``dsmr_backend``"
+msgstr "``dsmr_backend``"
+
+#: ../../faq.rst:35
+msgid "Each has its own log file(s):"
+msgstr "Elk heeft eigen logbestand(en):"
+
+#: ../../faq.rst:38
+msgid "``/var/log/supervisor/dsmr_webinterface.log``"
+msgstr "``/var/log/supervisor/dsmr_webinterface.log``"
+
+#: ../../faq.rst:40
+msgid "``/var/log/supervisor/dsmr_datalogger.log``"
+msgstr "``/var/log/supervisor/dsmr_datalogger.log``"
+
+#: ../../faq.rst:42
+msgid "``/var/log/supervisor/dsmr_backend.log``"
+msgstr "``/var/log/supervisor/dsmr_backend.log``"
+
+#: ../../faq.rst:47
+msgid "The logfiles may be stale due to rotation. To see all logs for a process, try tailing a wildcard pattern, e.g.::"
+msgstr "De logbestanden kunnen blijven hangen wegens rotatie. Probeer te tailen op een wildcard-patroon om alles logs van een proces te zien. Bijvoorbeeld::"
+
+#: ../../faq.rst:55
+msgid "Supervisor"
+msgstr "Supervisor"
+
+#: ../../faq.rst:57
+msgid "You can view the status of all processes by running::"
+msgstr "Je kunt de status van alle processen bekijken door het volgende uit te voeren::"
+
+#: ../../faq.rst:61
+msgid "Any processes listed, should have the status ``RUNNING``. Stale or crashed processes can be restarted with::"
+msgstr "Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. Hangende of gecrashde processen kunnen herstart worden met::"
+
+#: ../../faq.rst:67
+msgid "Or to restart them all simultaneously::"
+msgstr "Of herstart ze allemaal tegelijkertijd::"
+
+#: ../../faq.rst:73
+msgid "Debug info dump for Github issues"
+msgstr "Debug-informatiedump voor Github-issues"
+
+#: ../../faq.rst:74
+msgid "You can supply additional debug info by executing the \"**dsmr_debuginfo**\" command and copying its output into your issue on Github."
+msgstr "Je kunt extra debug-informatie aanleveren door het \"**dsmr_debuginfo**\"-commando uit te voeren en vervolgens de output daarvan te kopieren naar je issue op Github."
+
+#: ../../faq.rst:78
+msgid "The \"**dsmr_debuginfo**\" command is available since DSMR-reader v4.4 and higher."
+msgstr "HEt \"**dsmr_debuginfo**\"-commando is beschikbaar sinds DSMR-reader v4.4 en hoger."
+
+#: ../../faq.rst:80
+msgid "Execute the following command::"
+msgstr "Voer het volgende commando uit::"
+
+#: ../../faq.rst:85
+msgid "Copy its output to your Github issue."
+msgstr "Kopieer de output naar je Github-issue."
+
+#: ../../faq.rst:89
+msgid "Logging levels"
+msgstr "Logging levels"
+
+#: ../../faq.rst:90
+msgid "If the processes do run, but you cannot find an error, (e.g.: things seem to hang or tend to be slow), there might be another issue at hand."
+msgstr "Wanneer de processen lijken te draaien, maar je kunt geen fout vinden (bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is er waarschijnlijk iets anders aan de hand."
+
+#: ../../faq.rst:92
+msgid "DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do. This applies **specifically** to the ``dsmr_backend`` process."
+msgstr "DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt wat het aan het doen is. Dit geldt **specifiek** voor het ``dsmr_backend`` proces."
+
+#: ../../faq.rst:97
+msgid "Errors are likely to be logged at all times, no matter the DEBUG-logging level used. Debugging is only helpful to watch DSMR-reader's detailed behaviour."
+msgstr "Fouten worden doorgaans altijd gelogd, ongeacht het logging niveau van DEBUG-level of niet. Debugging is alleen nuttig om het gedrag van DSMR-reader in meer detail te observeren."
+
+#: ../../faq.rst:99
+msgid "The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:"
+msgstr "De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties op het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te volgen:"
+
+#: ../../faq.rst:101
+msgid "Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``."
+msgstr "Zorg ervoor dat je ``dsmr`` gebruiker bent door ``sudo su - dsmr`` uit te voeren."
+
+#: ../../faq.rst:102
+msgid "Open the ``.env`` file and look for the code below::"
+msgstr "Open ``.env`` en zoek de onderstaande code::"
+
+#: ../../faq.rst:107
+msgid "Now remove the ``###`` from this line::"
+msgstr "Verwijder nu de ``###`` uit de regel::"
+
+#: ../../faq.rst:111
+msgid "It should now be::"
+msgstr "Het zou nu dit moeten zijn::"
+
+#: ../../faq.rst:115
+msgid "After editing the file, all processes need to be restarted. To do this, you can either execute::"
+msgstr "Na het bewerken van het bestand zul je alle processen moeten herstarten. Om dit te doen, voer het volgende uit::"
+
+#: ../../faq.rst:119
+msgid "Or go back to the **sudo user** and execute::"
+msgstr "Of ga terug naar de **sudo gebruiker** en voer dit uit::"
+
+#: ../../faq.rst:124
+msgid "All done!"
+msgstr "Klaar!"
+
+#: ../../faq.rst:128
 msgid "Application management"
 msgstr "Applicatiebeheer"
 
-#: ../../faq.rst:13
+#: ../../faq.rst:134
 msgid "How to upgrade?"
 msgstr "Hoe upgrade ik?"
 
-#: ../../faq.rst:15
+#: ../../faq.rst:136
 msgid "Every once in a while there may be updates. You can also easily check for updates by using the application's Status page."
 msgstr "Met enige regelmaat zijn er updates beschikbaar. Je kunt dit ook eenvoudig controleren op de Status-pagina van de applicatie."
 
-#: ../../faq.rst:19 ../../faq.rst:39
+#: ../../faq.rst:140 ../../faq.rst:160
 msgid "First, **please make sure you have a recent backup of your database**!"
 msgstr "Allereerst, **zorg ervoor dat je een recente backup hebt van je database**!"
 
-#: ../../faq.rst:21
+#: ../../faq.rst:142
 msgid "You can update your application to the latest version by executing ``deploy.sh``, located in the root of the project. Make sure to execute it while logged in as the ``dsmr`` user::"
 msgstr "Je kun je applicatie bijwerken door het script ``deploy.sh`` uit te voeren, die in zich in de hoofdmap van het project bevindt. Zorg er wel voor dat je ingelogd bent als ``dsmr`` gebruiker op de terminal::"
 
-#: ../../faq.rst:29
+#: ../../faq.rst:150
 msgid "How to downgrade?"
 msgstr "Hoe downgrade ik?"
 
-#: ../../faq.rst:31
+#: ../../faq.rst:152
 msgid "If for some reason you need to downgrade the application, you will need to:"
 msgstr "Wanneer je om wat voor reden dan ook de applicatie moet downgraden, dan zul je:"
 
-#: ../../faq.rst:33
+#: ../../faq.rst:154
 msgid "unapply database migrations."
 msgstr "de databasemigraties moeten terugdraaien."
 
-#: ../../faq.rst:34
+#: ../../faq.rst:155
 msgid "switch the application code version to a previous release."
 msgstr "de applicatiecode moeten wisselen naar een vorige versie."
 
-#: ../../faq.rst:42
+#: ../../faq.rst:163
 msgid "Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v4/dsmrreader/provisioning/downgrade/>`_. You should execute the script of the version you wish to downgrade to. And the switch the code to the release."
 msgstr "Elke release `heeft z'n eigen databasemigraties vastgelegd <https://github.com/dsmrreader/dsmr-reader/tree/v4/dsmrreader/provisioning/downgrade>`_. Je zult het script moeten uitvoer voor de release waar je naar toe wilt. En vervolgens de codebase wisselen naar dezelfde release."
 
-#: ../../faq.rst:45
+#: ../../faq.rst:166
 msgid "For example ``v4.0``::"
 msgstr "Bijvoorbeeld ``v4.0``::"
 
-#: ../../faq.rst:54
+#: ../../faq.rst:175
 msgid "Unapplying the database migrations may take a while."
 msgstr "Het terugdraaien van databasemigraties kan wat tijd in beslag nemen."
 
-#: ../../faq.rst:56
+#: ../../faq.rst:177
 msgid "You should now be on the targeted release."
 msgstr "Je zou nu op de gewenste release moeten zitten."
 
-#: ../../faq.rst:60
+#: ../../faq.rst:181
 msgid "How to restart?"
 msgstr "Hoe herstart ik?"
 
-#: ../../faq.rst:62
+#: ../../faq.rst:183
 msgid "You might want or need to restart DSMR-reader manually at some time. E.g.: Due to altered settings that need to be reapplied to the processes."
 msgstr "Kan het voorkomen dat je DSMR-reader wilt of moet herstarten. Bijvoorbeeld vanwege instellingen die een herstart vereisen."
 
-#: ../../faq.rst:65
+#: ../../faq.rst:186
 msgid "For a soft restart::"
 msgstr "Voor een zachte herstart::"
 
-#: ../../faq.rst:71
+#: ../../faq.rst:192
 msgid "For a hard restart::"
 msgstr "Voor een harde/geforceerde herstart::"
 
-#: ../../faq.rst:78
+#: ../../faq.rst:199
 msgid "How to uninstall?"
 msgstr "Hoe deïnstalleer ik?"
 
-#: ../../faq.rst:80
+#: ../../faq.rst:201
 msgid "To remove DSMR-reader from your system, execute the following commands::"
 msgstr "Om DSMR-reader van je systeem te verwijderen, voer het volgende uit::"
 
-#: ../../faq.rst:97
+#: ../../faq.rst:218
 msgid "To delete your data (the database) as well::"
 msgstr "Om ook je data (de database) te verwijderen::"
 
-#: ../../faq.rst:101
+#: ../../faq.rst:222
 msgid "Optionally, you can remove these packages::"
 msgstr "Eventueel kun je deze packages ook verwijderen::"
 
-#: ../../faq.rst:107
-msgid "How to view logfiles?"
-msgstr "Hoe bekijk ik de logfiles?"
-
-#: ../../faq.rst:111
-msgid ":doc:`More information can be found here <troubleshooting>`."
-msgstr ":doc:`Meer informatie kun je hier terugvinden<troubleshooting>`."
-
-#: ../../faq.rst:116
+#: ../../faq.rst:228
 msgid "How do I set admin credentials?"
 msgstr "Hoe stel ik de inloggegevens van de admin in?"
 
-#: ../../faq.rst:120
+#: ../../faq.rst:232
 msgid ":doc:`Env Settings<env_settings>`."
 msgstr ":doc:`Env-instellingen<env_settings>`."
 
-#: ../../faq.rst:122
+#: ../../faq.rst:234
 msgid "Configure ``DSMR_USER`` and ``DSMR_PASSWORD`` of the :doc:`Env Settings<env_settings>`."
 msgstr "Stel ``DSMR_USER`` en ``DSMR_PASSWORD`` in via de :doc:`Env-instellingen<env_settings>`."
 
-#: ../../faq.rst:124
+#: ../../faq.rst:236
 msgid "Now execute::"
 msgstr "Voer uit::"
 
-#: ../../faq.rst:129
+#: ../../faq.rst:241
 msgid "The user should either be created or the existing user should have its password updated."
 msgstr "De gebruiker moet nu ofwel aangemaakt zijn ofwel het wachtwoord is bijgewerkt."
 
-#: ../../faq.rst:133
+#: ../../faq.rst:245
 msgid "Database"
 msgstr "Database"
 
-#: ../../faq.rst:136
+#: ../../faq.rst:251
 msgid "How do I reclaim database disk space?"
 msgstr "Hoe krijg ik schijfruimte terug?"
 
-#: ../../faq.rst:139
+#: ../../faq.rst:254
 msgid "This will only make a difference if you've enabled data cleanup retroactively, resulting in more than a 25 percent data deletion of your entire database."
 msgstr "Dit gaat alleen een verschil maken wanneer je dataopschoning met terugwerkende kracht hebt ingeschakeld, waardoor meer dan 25 procent van de gegevens in je database zijn verwijderd."
 
-#: ../../faq.rst:141
+#: ../../faq.rst:256
 msgid "Assuming you are using the default database, PostgreSQL, you may want to try a one-time vacuum by executing::"
 msgstr "Er vanuitgaande dat je de standaarddatabase gebruikt, PostgreSQL, kun je het volgende eenmalig uitvoeren::"
 
-#: ../../faq.rst:146
+#: ../../faq.rst:261
 msgid "If there was any disk space to reclaim, the effect should be visible on the filesystem now."
 msgstr "Mocht er schijfruimte vrij te maken zijn, dan zou je dat nu moeten zien op het bestandssysteem."
 
-#: ../../faq.rst:150
+#: ../../faq.rst:265
 msgid "How do I change the database location?"
 msgstr "Hoe verplaats ik de databaseopslag?"
 
-#: ../../faq.rst:154
+#: ../../faq.rst:269
 msgid "Changing the database data location may cause data corruption. Only execute the step below if you understand exactly what you are doing!"
 msgstr "Het wijzigen van de dataopslag breng het gevaar van datacorruptie met zich mee. Voer onderstaande stappen alleen uit als je begrijpt wat je doet!"
 
-#: ../../faq.rst:156
+#: ../../faq.rst:271
 msgid "Since the SD-card is quite vulnerable to wearing and corruption, you can run the database on a different disk or USB-stick. To do this, you will have to stop the application and database, change the database configuration, move the data and restart all processes again."
 msgstr "Gezien de SD-kaart gevoelig is voor slijtage en corruptie, kun je ervoor kiezen om de database op een andere disk of USB-stick te draaien. Om dit te realiseren zul je de applicatie en database moeten stoppen, de databaseconfiguratie aanpassen, dataopslag verplaatsen en alles weer opstarten."
 
-#: ../../faq.rst:159
+#: ../../faq.rst:274
 msgid "Make sure the OS has direct access the new location and **create a back-up first**!"
 msgstr "Zorg ervoor dat het OS toegang heeft tot de nieuwe locatie en **maak eerst een back-up**!"
 
-#: ../../faq.rst:161
+#: ../../faq.rst:276
 msgid "In the example below we will move the data from ``/var/lib/postgresql/`` to ``/data/postgresql/`` (which could be an external mount)."
 msgstr "In onderstaand voorbeeld verplaatsen we de dataopslag van  ``/var/lib/postgresql/`` naar ``/data/postgresql/`` (wat bijvoorbeeld op een externe disk zou kunnen zijn)."
 
-#: ../../faq.rst:165
+#: ../../faq.rst:280
 msgid "*Please note that \"9.5\" in the example below is just the version number of the database, and it may differ from your installation. The same steps however apply.*"
 msgstr "*N.B.: \"9.5\" in onderstaand voorbeeld is slechts het versienummer van de database en kan afwijken van je eigen situatie. Je kunt echter gewoon dezelfde stappen uitvoeren.*"
 
-#: ../../faq.rst:167
+#: ../../faq.rst:282
 msgid "Execute the commands below:"
 msgstr "Voer de onderstaande commando's uit:"
 
-#: ../../faq.rst:169
+#: ../../faq.rst:284
 msgid "Stop DSMR-reader: ``sudo supervisorctl stop all``"
 msgstr "Stop DSMR-reader: ``sudo supervisorctl stop all``"
 
-#: ../../faq.rst:171
+#: ../../faq.rst:286
 msgid "Stop database: ``sudo systemctl stop postgresql``"
 msgstr "Stop database: ``sudo systemctl stop postgresql``"
 
-#: ../../faq.rst:173
+#: ../../faq.rst:288
 msgid "Confirm that the database has stopped, you should see no more ``postgresql`` processes running: ``sudo ps faux | grep postgres``"
 msgstr "Controleer dat de database gestopt is, je zou geen processen meer moeten zien van ``postgresql`` met:  ``sudo ps faux | grep postgres``"
 
-#: ../../faq.rst:175
+#: ../../faq.rst:290
 msgid "Ensure the new location exists: ``sudo mkdir /data/postgresql/``"
 msgstr "Zorg ervoor dat de nieuwe locatie bestaat: ``sudo mkdir /data/postgresql/``"
 
-#: ../../faq.rst:177
+#: ../../faq.rst:292
 msgid "Move the database data folder: ``sudo mv /var/lib/postgresql/9.5/ /data/postgresql/9.5/``"
 msgstr "Verplaats nu de gehele data-map van de database: ``sudo mv /var/lib/postgresql/9.5/ /data/postgresql/9.5/``"
 
-#: ../../faq.rst:179
+#: ../../faq.rst:294
 msgid "Make sure the ``postgres`` user has access to the new location (and any parent folders in it's path): ``sudo chown -R postgres:postgres /data/``"
 msgstr "Zorg ervoor dat de ``postgres`` gebruiker toegang heeft tot de nieuwe locatie (en eventuele bovenliggende mappen in het pad): ``sudo chown -R postgres:postgres /data/``"
 
-#: ../../faq.rst:181
+#: ../../faq.rst:296
 msgid "Edit database configuration ``sudo vi /etc/postgresql/9.5/main/postgresql.conf`` and find the line::"
 msgstr "Open de databaseconfiguratie met ``sudo vi /etc/postgresql/9.5/main/postgresql.conf`` en vind de volgende regel::"
 
-#: ../../faq.rst:185
+#: ../../faq.rst:300
 msgid "Change it to your new location::"
 msgstr "Wijzig het naar de nieuwe locatie::"
 
-#: ../../faq.rst:189
+#: ../../faq.rst:304
 msgid "Save the file and start the database: ``sudo systemctl start postgresql``"
 msgstr "Sla het bestand op en start de database weer: ``sudo systemctl start postgresql``"
 
-#: ../../faq.rst:191
+#: ../../faq.rst:306
 msgid "Check whether the database is running again, you should see multiple processes: ``sudo ps faux | grep postgres``"
 msgstr "Controleer of de database weer draait, je zou nu meerdere processen moeten zien:  ``sudo ps faux | grep postgres``"
 
-#: ../../faq.rst:193
+#: ../../faq.rst:308
 msgid "Does the database not start? Check its logs in ``/var/log/postgresql/`` for hints."
 msgstr "Wil de database niet starten? Bekijk dan de logs in  ``/var/log/postgresql/`` voor hints."
 
-#: ../../faq.rst:195
+#: ../../faq.rst:310
 msgid "Start DSMR-reader again: ``sudo supervisorctl start all``"
 msgstr "Start DSMR-reader weer met: ``sudo supervisorctl start all``"
 
-#: ../../faq.rst:197
+#: ../../faq.rst:312
 msgid "Everything should work as usual now, storing the data on the new location."
 msgstr "Alles zou weer moeten werken zoals voorheen, met de data voortaan op een andere locatie."
 
-#: ../../faq.rst:201
+#: ../../faq.rst:316
 msgid "How do I enable MySQL timezone support?"
 msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
-#: ../../faq.rst:205
+#: ../../faq.rst:320
 msgid "`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql.html>`_ for more information about how to enable timezone support on MySQL."
 msgstr "`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op MySQL."
 
-#: ../../faq.rst:207
+#: ../../faq.rst:322
 msgid "On recent versions it should be as simple as executing the following command as root/sudo user::"
 msgstr "Op recente versies kun je simpelweg het volgende commando als root/sudo-gebruiker uitvoeren::"
 
-#: ../../faq.rst:213
+#: ../../faq.rst:328
 msgid "How do I restore a backup?"
 msgstr "Hoe zet ik een back-up terug?"
 
-#: ../../faq.rst:217
+#: ../../faq.rst:332
 msgid "Only follow these step if you want to restore a backup in PostgreSQL."
 msgstr "Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt terugzetten."
 
-#: ../../faq.rst:219
+#: ../../faq.rst:334
 msgid "Restoring a backup will replace any existing data stored in the database and is irreversible!"
 msgstr "Het terugzetten van een back-up overschrijft alle bestaande data en is onomkeerbaar!"
 
-#: ../../faq.rst:221
+#: ../../faq.rst:336
 msgid "This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::"
 msgstr "Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt::"
 
-#: ../../faq.rst:228 ../../faq.rst:237
+#: ../../faq.rst:343 ../../faq.rst:352
 msgid "Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way."
 msgstr "Zet **niet** je database terug wanneer je ofwel **de applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt uitgevoerd."
 
-#: ../../faq.rst:230 ../../faq.rst:239
+#: ../../faq.rst:345 ../../faq.rst:354
 msgid "Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point."
 msgstr "Doorgaan zorgt er gegarandeerd voor dat er problemen komen met dubbele gegevens/ID's op een bepaald moment."
 
-#: ../../faq.rst:235
+#: ../../faq.rst:350
 msgid "To be clear, we'll repeat it once again:"
 msgstr "On glashelder te zijn, herhalen we:"
 
-#: ../../faq.rst:243
+#: ../../faq.rst:358
 msgid "Compressed (default)"
 msgstr "Gecomprimeerd (standaard)"
 
-#: ../../faq.rst:244
+#: ../../faq.rst:359
 msgid "To restore a compressed backup (``.gz``), run::"
 msgstr "Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
 
-#: ../../faq.rst:250
+#: ../../faq.rst:365
 msgid "Uncompressed (legacy)"
 msgstr "Ongecomprimeerd (legacy)"
 
-#: ../../faq.rst:251
+#: ../../faq.rst:366
 msgid "To restore an uncompressed backup (``.sql``), run::"
 msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
 
-#: ../../faq.rst:257
+#: ../../faq.rst:372
 msgid "Result"
 msgstr "Resultaat"
 
-#: ../../faq.rst:259
+#: ../../faq.rst:374
 msgid "You should **not** see any errors regarding duplicate data or existing ID's or whatever."
 msgstr "Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's of iets soortgelijks."
 
-#: ../../faq.rst:263
+#: ../../faq.rst:378
 msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**."
 msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op Github en **ga niet verder**."
 
-#: ../../faq.rst:268
-msgid "Errors"
-msgstr "Fouten"
+#: ../../faq.rst:383
+msgid "Common error resolution"
+msgstr "Oplossingen voor veelvoorkomende fouten"
 
-#: ../../faq.rst:271
+#: ../../faq.rst:389
 msgid "How do I fix ``DETAIL: Key (id)=(123) already exists``?"
 msgstr "Hoe los ik ``DETAIL: Key (id)=(123) already exists`` op?"
 
-#: ../../faq.rst:273
+#: ../../faq.rst:391
 msgid "This depends on the situation, but you can always try the following yourself first::"
 msgstr "Het hangt af van de situatie, maar je kunt het volgende sowieso zelf eerst proberen::"
 
-#: ../../faq.rst:281
+#: ../../faq.rst:399
 msgid "If it does not resolve your issue, ask for support on Github (see end of page)."
 msgstr "Wanneer dat het probleem niet oplost, vraag dan om ondersteuning via Guthub (zie onderaan deze pagina)."
 
-#: ../../faq.rst:285
+#: ../../faq.rst:403
 msgid "How do I fix: ``Error: Already running on PID 1234``?"
 msgstr "Hoe los ik ``Error: Already running on PID 1234`` op?"
 
-#: ../../faq.rst:286
+#: ../../faq.rst:404
 msgid "If you're seeing this error::"
 msgstr "Als je deze fout ziet::"
 
-#: ../../faq.rst:290
+#: ../../faq.rst:408
 msgid "Just delete the PID file and restart the webinterface::"
 msgstr "Verwijder het genoemde PID-bestand en herstart de webinterface::"
 
-#: ../../faq.rst:296
+#: ../../faq.rst:414
 msgid "How do I fix stats after smart meter replacement?"
 msgstr "Hoe herstel ik gegevens na een meterwissel?"
 
-#: ../../faq.rst:298
+#: ../../faq.rst:416
 msgid "Sometimes, when relocating or due to replacement of your meter, the meter positions read by DSMR-reader will cause invalid data (e.g.: big gaps or inverted consumption). Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day."
 msgstr "Het komt soms voor dat, door verhuizing of technische vervanging van je meter, deze meterstanden in DSMR-reader voor afwijkingen en onjuiste gegevens zorgen (bijv.: grote gaten of negatief verbruik). Dit komt alleen voor bij de dag zelf en niet bij de dagen erna. Daarom zul je de gegevens van de foutieve dag zelf moeten aanpassen."
 
-#: ../../faq.rst:301
+#: ../../faq.rst:419
 msgid "The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<configuration>` for the invalid day."
 msgstr "De dag erna kun je dit zelf weer rechtzetten via de Dag- of Uurtotalen, :doc:`in de admin-configuratie<configuration>`, voor de betreffende dag."
 
-#: ../../faq.rst:305
+#: ../../faq.rst:423
 msgid "Data"
 msgstr "Data"
 
-#: ../../faq.rst:307
+#: ../../faq.rst:428
 msgid "By default DSMR-reader reads and preserves all telegram data read."
 msgstr "Standaard bewaart DSMR-reader alle ingelezen telegrammen."
 
-#: ../../faq.rst:309
+#: ../../faq.rst:430
 msgid "When using a Raspberry Pi (or similar) combined with a DSMR version 5 smart meter (the default nowadays), you may experience issues after a while."
 msgstr "Wanneer je een Raspberry Pi (of soortgelijk appartaat) gebruikt, samen met een DSMR versie 5 slimme meter (wordt vandaag de dag standaard geleverd), dan kun je na verloop van tijd problemen ervaren."
 
-#: ../../faq.rst:311
+#: ../../faq.rst:432
 msgid "This is caused by the high data throughput of DSMR version 5, which produces a new telegram every second. Both DSMR-reader and most of its users do not need this high frequency of telegrams to store, calculate and plot consumption data."
 msgstr "Dit wordt veroorzaak door de hoge gegevensdoorvoer van DSMR versie 5, wat elke seconde voor een nieuw telegram zorgt. Zowel DSMR-reader als het meerendeel van de gebruikers hebben deze hoge frequentie echter niet nodig voor de opslag, analyze en tonen van verbruiksgegevens."
 
-#: ../../faq.rst:314
+#: ../../faq.rst:435
 msgid "Therefor two measures can be taken: Increasing datalogger sleep and data retention policy."
 msgstr "HIervoor kunnen twee maatregelen genomen worden: Verhogen van de datalogger-sleep en het instellen van een retentiebeleid."
 
-#: ../../faq.rst:318
+#: ../../faq.rst:439
 msgid "How can I increase the datalogger sleep time?"
 msgstr "Hoe verhoog ik de slaaptijd van de datalogger?"
 
-#: ../../faq.rst:320
+#: ../../faq.rst:441
 msgid "Increase the datalogger sleep time :doc:`in the configuration<../configuration>` to 5 seconds or higher. This will save a lot of disk storage, especially when using a Raspberry Pi SD card, usually having a size of 16 GB max."
 msgstr "Verhoog de slaaptijd van de datalogger :doc:`binnen de configuratie<../configuration>` naar minimaal 5 seconden. Dit bespaart een hoop schijfruimte, met name wanneer je een standaard Raspberry Pi SD-kaart gebruikt, die meestal maximaal 16 GB groot zijn."
 
-#: ../../faq.rst:325
+#: ../../faq.rst:446
 msgid "How can I configure a data retention policy?"
 msgstr "Hoe stel ik een gegevensretentiebeleid in?"
 
-#: ../../faq.rst:327
+#: ../../faq.rst:448
 msgid "Configure a data retention policy :doc:`in the configuration<../configuration>`. This will eventually delete up to 99 percent of the telegrams, always preserving a few historically. Also, day and hour totals are **never** deleted by retention policies."
 msgstr " Stel een gegevensretentiebeleid in :doc:`binnen de configuratie<../configuration>`. Dit schoont uiteindelijk tot 99 procent van de telegrammen op, waarbij een aantal altijd achterblijven i.v.m. historie. Daarnaast worden uur- en dagtotalen **nooit** opgeschoond door het retentiebeleid."
 
-#: ../../faq.rst:338
+#: ../../faq.rst:459
 msgid "I'm missing gas readings?"
 msgstr "Ik mis gasverbruik?"
 
-#: ../../faq.rst:340
+#: ../../faq.rst:461
 msgid "Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render. The gas meter positions are only be updated once per hour (for DSMR v4). The Status page will give you insight in this as well."
 msgstr "Wees er allereerst zeker van dat je slimme meter uberhaupt gasverbruik registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden worden sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina geeft je hier overigens ook inzicht in."
 
-#: ../../faq.rst:346
+#: ../../faq.rst:467
 msgid "How do I only use the datalogger?"
 msgstr "Hoe gebruik ik alleen de datalogger?"
 
-#: ../../faq.rst:350
+#: ../../faq.rst:471
 msgid ":doc:`More information can be found here <installation>`."
 msgstr ":doc:`Meer informatie kun je hier terugvinden<installation>`."
 
-#: ../../faq.rst:354
+#: ../../faq.rst:475
 msgid "Prices"
 msgstr "Prijzen"
 
-#: ../../faq.rst:357
+#: ../../faq.rst:478
 msgid "How do I recalculate prices retroactively?"
 msgstr "Hoe kan ik prijzen met terugwerkende kracht herberekenen?"
 
-#: ../../faq.rst:358
+#: ../../faq.rst:479
 msgid "I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?"
 msgstr "Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe kan ik de nieuwe prijzen doorvoeren?"
 
-#: ../../faq.rst:360
+#: ../../faq.rst:481
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../faq.rst:367
+#: ../../faq.rst:488
 msgid "Support"
 msgstr "Ondersteuning"
 
-#: ../../faq.rst:370
+#: ../../faq.rst:491
 msgid "I still need help!"
 msgstr "Ik heb nog steeds hulp nodig!"
 
-#: ../../faq.rst:374
+#: ../../faq.rst:495
 msgid "If you can't find the answer in the documentation, do not hesitate in looking for help."
 msgstr "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan vooral niet om om hulp te vragen."
 
-#: ../../faq.rst:376
+#: ../../faq.rst:497
 msgid "`View existing Github issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_"
 msgstr "`Bekijk bestaande issues op Github of maak een nieuwe aan <https://github.com/dennissiemensma/dsmr-reader/issues>`_."
 
-#~ msgid "How can I update my application?"
-#~ msgstr "Hoe kan ik mijn applicatie bijwerken?"
+#~ msgid "How to view logfiles?"
+#~ msgstr "Hoe bekijk ik de logfiles?"
 
-#~ msgid "How can I downgrade my application?"
-#~ msgstr "Hoe kan ik mijn applicatie downgraden?"
+#~ msgid ":doc:`More information can be found here <troubleshooting>`."
+#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<troubleshooting>`."
 
-#~ msgid ":doc:`More information can be found here <faq/downgrade>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvindens<faq/update>`."
+#~ msgid "Errors"
+#~ msgstr "Fouten"
 
-#~ msgid "How can I move the database location?"
-#~ msgstr "Hoe kan ik de locatie van de gegevensopslag veranderen?"
+#~ msgid "FAQ"
+#~ msgstr "FAQ"
 
-#~ msgid "FAQ: Data throughput"
-#~ msgstr "FAQ: Gegevensdoorvoer"
-
-#~ msgid "New installations of DSMR-reader ``v4.1`` or higher will start with a default retention policy of one year. However, this may not be sufficient in your situation and you can consider using a shorter retention period."
-#~ msgstr "Nieuwe installaties met DSMR-reader ``v4.1`` of hoger starten standaard met een retentiebeleid van een jaar. Dit kan echter niet afdoende zijn voor jouw situatie, dus overweeg om een retentiebeleid met een kortere periode in te stellen."
-
-#~ msgid "FAQ: Downgrading the application"
-#~ msgstr "FAQ: Applicatie downgraden"
-
-#~ msgid "FAQ: Restarting application processes"
-#~ msgstr "FAQ: Applicatie of processen herstarten"
-
-#~ msgid "FAQ: Uninstalling the application"
-#~ msgstr "FAQ: Applicatie verwijderen"
-
-#~ msgid "FAQ: Updating the application"
-#~ msgstr "FAQ: De applicatie updaten"
-
-#~ msgid ":doc:`More information can be found here <faq/update>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/update>`."
-
-#~ msgid ":doc:`More information can be found here <faq/database>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/database>`."
-
-#~ msgid "How do I retain MQTT support when upgrading to v1.23.0 or higher?"
-#~ msgstr "Hoe behoud ik ondersteuning voor MQTT wanneer ik upgrade naar v1.23.0 of hoger?"
-
-#~ msgid ":doc:`More information can be found here <mqtt>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<mqtt>`."
-
-#~ msgid ":doc:`More information can be found here <faq/uninstall>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/uninstall>`."
-
-#~ msgid "How can I use the datalogger only and forward the telegrams?"
-#~ msgstr "Hoe kan ik alleen de datalogger gebruiken voor het doorsturen van telegrammen?"
-
-#~ msgid "How can I restart the application or processes?"
-#~ msgstr "Hoe de applicatie of processen herstarten?"
-
-#~ msgid ":doc:`More information can be found here <faq/restart_processes>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<faq/restart_processes>`."
-
-#~ msgid "How can I create the (super)user or update its password?"
-#~ msgstr "Hoe kan ik de (admin)user aanmaken of het wachtwoord wijzigen?"
-
-#~ msgid "How do I fix: ``Error: Already running on PID 1234 (or pid file '/var/tmp/gunicorn--dsmr_webinterface.pid' is stale)``?"
-#~ msgstr "Hoe los ik deze fout op: ``Error: Already running on PID 1234 (or pid file '/var/tmp/gunicorn--dsmr_webinterface.pid' is stale)``?"
-
-#~ msgid "I've changed to a different smart meter"
-#~ msgstr "Ik ben van slimme meter gewisseld"
-
-#~ msgid ":doc:`More information can be found here <installation/restore>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<installation/restore>`."
-
-#~ msgid "Installation: Restore database backup"
-#~ msgstr "Installatie: Database back-up terugzetten"
-
-#~ msgid "Therefor two measures can be taken."
-#~ msgstr "Hiervoor kun je twee maatregelen treffen."
+#~ msgid "Are you unable to resolve your problem or do you need any help? :doc:`Check out the FAQ as well<faq>`."
+#~ msgstr "Kom je er toch niet uit of heb je hulp nodig? :doc:`Bekijk ook de FAQ<faq>`."

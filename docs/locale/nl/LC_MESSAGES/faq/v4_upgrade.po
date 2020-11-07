@@ -321,6 +321,3 @@ msgstr "Tot slot, voer het deploy-script uit::"
 msgid "Great. You should now be on ``v4.x``!"
 msgstr "Mooi! Je zou nu op ``v4.x`` moeten zitten!"
 
-#~ msgid ":doc:`See here for instructions<update>`."
-#~ msgstr ":doc:`Zie hier voor de instructies<update>`."
-

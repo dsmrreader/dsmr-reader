@@ -635,7 +635,7 @@ v1.24.0 - 2018-09-29
 .. warning::
 
     The default logging level of the backend has been lowered to reduce I/O.
-    See ``Logging`` on `this documentation page <https://dsmr-reader.readthedocs.io/nl/v2/troubleshooting.html>`_ for more information.
+    See `the FAQ <https://dsmr-reader.readthedocs.io/nl/latest/faq.html>`_ for more information.
 
 - [`#494 <https://github.com/dsmrreader/dsmr-reader/issues/494>`_] Extend Usage statistics to include return
 - [`#467 <https://github.com/dsmrreader/dsmr-reader/issues/467>`_] PVO uploadtijden in sync houden

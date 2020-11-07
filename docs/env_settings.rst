@@ -404,7 +404,7 @@ The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this def
 
 .. seealso::
 
-    For more information, :doc:`see Troubleshooting<troubleshooting>`.
+    For more information, :doc:`see Troubleshooting in FAQ<faq>`.
 
 .. hint::
 

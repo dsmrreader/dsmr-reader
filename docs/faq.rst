@@ -6,11 +6,132 @@ FAQ (Frequently Asked Questions)
     :depth: 3
 
 
+Troubleshooting
+===============
+
+.. contents:: :local:
+    :depth: 1
+
+.. note::
+
+    If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue.
+
+
+Log files
+---------
+
+Always start by checking the log files for errors.
+
+DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:
+
++----------------+----------------------------------+
+| Webinterface   | ``dsmr_webinterface``            |
++----------------+----------------------------------+
+| Datalogger     | ``dsmr_datalogger``              |
++----------------+----------------------------------+
+| Backend        | ``dsmr_backend``                 |
++----------------+----------------------------------+
+
+Each has its own log file(s):
+
++----------------+----------------------------------------------------------------------------------+
+| Webinterface   | ``/var/log/supervisor/dsmr_webinterface.log``                                    |
++----------------+----------------------------------------------------------------------------------+
+| Datalogger     | ``/var/log/supervisor/dsmr_datalogger.log``                                      |
++----------------+----------------------------------------------------------------------------------+
+| Backend        | ``/var/log/supervisor/dsmr_backend.log``                                         |
++----------------+----------------------------------------------------------------------------------+
+
+.. attention::
+
+    The logfiles may be stale due to rotation. To see all logs for a process, try tailing a wildcard pattern, e.g.::
+
+        sudo tail -f /var/log/supervisor/dsmr_webinterface*
+        sudo tail -f /var/log/supervisor/dsmr_datalogger*
+        sudo tail -f /var/log/supervisor/dsmr_backend*
+
+
+Supervisor
+----------
+
+You can view the status of all processes by running::
+
+    sudo supervisorctl status
+
+Any processes listed, should have the status ``RUNNING``. Stale or crashed processes can be restarted with::
+
+    sudo supervisorctl restart <name>
+    sudo supervisorctl restart dsmr_backend
+    sudo supervisorctl restart ...
+
+Or to restart them all simultaneously::
+
+    sudo supervisorctl restart all
+
+
+Debug info dump for Github issues
+---------------------------------
+You can supply additional debug info by executing the "**dsmr_debuginfo**" command and copying its output into your issue on Github.
+
+.. note::
+
+    The "**dsmr_debuginfo**" command is available since DSMR-reader v4.4 and higher.
+
+Execute the following command::
+
+    sudo su - dsmr
+    ./manage.py dsmr_debuginfo
+
+Copy its output to your Github issue.
+
+
+Logging levels
+--------------
+If the processes do run, but you cannot find an error, (e.g.: things seem to hang or tend to be slow), there might be another issue at hand.
+
+DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do.
+This applies **specifically** to the ``dsmr_backend`` process.
+
+.. note::
+
+    Errors are likely to be logged at all times, no matter the DEBUG-logging level used. Debugging is only helpful to watch DSMR-reader's detailed behaviour.
+
+The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:
+
+* Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``.
+* Open the ``.env`` file and look for the code below::
+
+    ### Logging level.
+    ###DSMRREADER_LOGLEVEL=DEBUG
+
+* Now remove the ``###`` from this line::
+
+    ###DSMRREADER_LOGLEVEL=DEBUG
+
+* It should now be::
+
+    DSMRREADER_LOGLEVEL=DEBUG
+
+* After editing the file, all processes need to be restarted. To do this, you can either execute::
+
+    ./post-deploy.sh
+
+* Or go back to the **sudo user** and execute::
+
+    CTRL+D
+    sudo supervisorctl restart all
+
+* All done!
+
+
 Application management
-----------------------
+======================
+
+.. contents:: :local:
+    :depth: 1
 
 How to upgrade?
-^^^^^^^^^^^^^^^
+---------------
 
 Every once in a while there may be updates. You can also easily check for updates by using the application's Status page.
 
@@ -26,7 +147,7 @@ Make sure to execute it while logged in as the ``dsmr`` user::
 
 
 How to downgrade?
-^^^^^^^^^^^^^^^^^
+-----------------
 
 If for some reason you need to downgrade the application, you will need to:
 
@@ -57,7 +178,7 @@ You should now be on the targeted release.
 
 
 How to restart?
-^^^^^^^^^^^^^^^
+---------------
 
 You might want or need to restart DSMR-reader manually at some time.
 E.g.: Due to altered settings that need to be reapplied to the processes.
@@ -75,7 +196,7 @@ For a hard restart::
 
 
 How to uninstall?
-^^^^^^^^^^^^^^^^^
+-----------------
 
 To remove DSMR-reader from your system, execute the following commands::
 
@@ -103,17 +224,8 @@ Optionally, you can remove these packages::
     sudo apt-get remove postgresql postgresql-server-dev-all python3-psycopg2 nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
 
 
-How to view logfiles?
-^^^^^^^^^^^^^^^^^^^^^
-
-.. seealso::
-
-    :doc:`More information can be found here <troubleshooting>`.
-
-
-
 How do I set admin credentials?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 .. seealso::
 
@@ -130,10 +242,13 @@ The user should either be created or the existing user should have its password 
 
 
 Database
---------
+========
+
+.. contents:: :local:
+    :depth: 1
 
 How do I reclaim database disk space?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------
 .. note::
 
     This will only make a difference if you've enabled data cleanup retroactively, resulting in more than a 25 percent data deletion of your entire database.
@@ -147,7 +262,7 @@ If there was any disk space to reclaim, the effect should be visible on the file
 
 
 How do I change the database location?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 .. danger::
 
@@ -198,7 +313,7 @@ Execute the commands below:
 
 
 How do I enable MySQL timezone support?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 
 .. seealso::
 
@@ -210,7 +325,7 @@ On recent versions it should be as simple as executing the following command as 
 
 
 How do I restore a backup?
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 .. note::
 
@@ -264,11 +379,14 @@ You should **not** see any errors regarding duplicate data or existing ID's or w
 
 
 
-Errors
-------
+Common error resolution
+=======================
+
+.. contents:: :local:
+    :depth: 1
 
 How do I fix ``DETAIL: Key (id)=(123) already exists``?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------------
 
 This depends on the situation, but you can always try the following yourself first::
 
@@ -282,7 +400,7 @@ This depends on the situation, but you can always try the following yourself fir
 
 
 How do I fix: ``Error: Already running on PID 1234``?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------------------
 If you're seeing this error::
 
     Error: Already running on PID 1234 (or pid file '/var/tmp/gunicorn--dsmr_webinterface.pid' is stale)
@@ -293,7 +411,7 @@ Just delete the PID file and restart the webinterface::
 
 
 How do I fix stats after smart meter replacement?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------
 
 Sometimes, when relocating or due to replacement of your meter, the meter positions read by DSMR-reader will cause invalid data (e.g.: big gaps or inverted consumption).
 Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day.
@@ -302,7 +420,10 @@ The day after, you should be able to manually adjust any invalid Day or Hour Sta
 
 
 Data
-----
+====
+
+.. contents:: :local:
+    :depth: 1
 
 By default DSMR-reader reads and preserves all telegram data read.
 
@@ -315,14 +436,14 @@ Therefor two measures can be taken: Increasing datalogger sleep and data retenti
 
 
 How can I increase the datalogger sleep time?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------------
 
 Increase the datalogger sleep time :doc:`in the configuration<../configuration>` to 5 seconds or higher.
 This will save a lot of disk storage, especially when using a Raspberry Pi SD card, usually having a size of 16 GB max.
 
 
 How can I configure a data retention policy?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------
 
 Configure a data retention policy :doc:`in the configuration<../configuration>`.
 This will eventually delete up to 99 percent of the telegrams, always preserving a few historically.
@@ -343,7 +464,7 @@ The Status page will give you insight in this as well.
 
 
 How do I only use the datalogger?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 .. seealso::
 
@@ -351,10 +472,10 @@ How do I only use the datalogger?
 
 
 Prices
-------
+======
 
 How do I recalculate prices retroactively?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------
 I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?
 
 Execute::
@@ -364,10 +485,10 @@ Execute::
 
 
 Support
--------
+=======
 
 I still need help!
-^^^^^^^^^^^^^^^^^^
+------------------
 
 .. tip::
 

@@ -6,7 +6,6 @@ DSMR Reader's documentation
 
    intro
    changelog
-   troubleshooting
    faq
    env_settings
 
@@ -33,4 +32,5 @@ DSMR Reader's documentation
    credits
    licence
 
+   troubleshooting
    settings

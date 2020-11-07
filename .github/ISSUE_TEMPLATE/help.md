@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-Troubleshooting: https://dsmr-reader.readthedocs.io/nl/latest/troubleshooting.html#log-files
+Bekijk eerst de FAQ: https://dsmr-reader.readthedocs.io/nl/latest/faq.html
 
 (Heb je DSMR-reader v4.4 of hoger? Zet dan hieronder ook de output van "dsmr_debuginfo") 
 
