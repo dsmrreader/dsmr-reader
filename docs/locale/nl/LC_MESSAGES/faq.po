@@ -11,6 +11,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: ../../faq.rst:2
 msgid "FAQ (Frequently Asked Questions)"
@@ -110,7 +112,7 @@ msgstr "Je kunt extra debug-informatie aanleveren door het \"**dsmr_debuginfo**\
 
 #: ../../faq.rst:78
 msgid "The \"**dsmr_debuginfo**\" command is available since DSMR-reader v4.4 and higher."
-msgstr "HEt \"**dsmr_debuginfo**\"-commando is beschikbaar sinds DSMR-reader v4.4 en hoger."
+msgstr "Het \"**dsmr_debuginfo**\"-commando is beschikbaar sinds DSMR-reader v4.4 en hoger."
 
 #: ../../faq.rst:80
 msgid "Execute the following command::"
