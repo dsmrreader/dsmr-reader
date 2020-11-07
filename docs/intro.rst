@@ -78,8 +78,8 @@ The graphs can be zoomed and display data up to the last 24 hours.
 If your meter supports it, you can also see your gas consumption and electricity returned.
 
 
-.. image:: _static/screenshots/v4.7/frontend/dashboard.png
-    :target: _static/screenshots/v4.7/frontend/dashboard.png
+.. image:: _static/screenshots/v4/frontend/dashboard.png
+    :target: _static/screenshots/v4/frontend/dashboard.png
     :alt: Dashboard
 
 
@@ -89,8 +89,8 @@ Live graphs
 The live graphs plots the most recent data available, depending on the capabilities of your smart meter.
 
 
-.. image:: _static/screenshots/v4.7/frontend/live.png
-    :target: _static/screenshots/v4.7/frontend/live.png
+.. image:: _static/screenshots/v4/frontend/live.png
+    :target: _static/screenshots/v4/frontend/live.png
     :alt: Live graphs
 
 
@@ -101,8 +101,8 @@ The archive allows you to scroll through all historisch data captured by the app
 All data can be viewed on different levels: by day, by month and by year.
 
 
-.. image:: _static/screenshots/v4.7/frontend/archive.png
-    :target: _static/screenshots/v4.7/frontend/archive.png
+.. image:: _static/screenshots/v4/frontend/archive.png
+    :target: _static/screenshots/v4/frontend/archive.png
     :alt: Archive
 
 
@@ -112,8 +112,8 @@ Compare
 This page allows you to simply compare two days, months or years with each other.
 It will also display the difference between each other as a percentage.
 
-.. image:: _static/screenshots/v4.7/frontend/compare.png
-    :target: _static/screenshots/v4.7/frontend/compare.png
+.. image:: _static/screenshots/v4/frontend/compare.png
+    :target: _static/screenshots/v4/frontend/compare.png
     :alt: Compare
 
 
@@ -122,8 +122,8 @@ Trends
 
 This page displays a summary of your average daily consumption and habits.
 
-.. image:: _static/screenshots/v4.7/frontend/trends.png
-    :target: _static/screenshots/v4.7/frontend/trends.png
+.. image:: _static/screenshots/v4/frontend/trends.png
+    :target: _static/screenshots/v4/frontend/trends.png
     :alt: Trends
 
 
@@ -133,8 +133,8 @@ Statistics
 This page displays your meter positions and statistics provided by the DSMR protocol.
 You can also find the number of readings stored and any excesses regarding consumption.
 
-.. image:: _static/screenshots/v4.7/frontend/statistics.png
-    :target: _static/screenshots/v4.7/frontend/statistics.png
+.. image:: _static/screenshots/v4/frontend/statistics.png
+    :target: _static/screenshots/v4/frontend/statistics.png
     :alt: Statistics
 
 
@@ -143,8 +143,8 @@ Energy contracts
 
 Summary of all your contracts and the amount of energy consumed/generated.
 
-.. image:: _static/screenshots/v4.7/frontend/energy-contracts.png
-    :target: _static/screenshots/v4.7/frontend/energy-contracts.png
+.. image:: _static/screenshots/v4/frontend/energy-contracts.png
+    :target: _static/screenshots/v4/frontend/energy-contracts.png
     :alt: Energy contracts
 
 
@@ -153,8 +153,8 @@ Export
 
 This pages allows you to export all day or hour statistics to CSV.
 
-.. image:: _static/screenshots/v4.7/frontend/export.png
-    :target: _static/screenshots/v4.7/frontend/export.png
+.. image:: _static/screenshots/v4/frontend/export.png
+    :target: _static/screenshots/v4/frontend/export.png
     :alt: Export
 
 
@@ -165,8 +165,8 @@ Shows the 'health' of the application and provides a lot of background informati
 
 You can also easily check for DSMR-reader updates here.
 
-.. image:: _static/screenshots/v4.7/frontend/about.png
-    :target: _static/screenshots/v4.7/frontend/about.png
+.. image:: _static/screenshots/v4/frontend/about.png
+    :target: _static/screenshots/v4/frontend/about.png
     :alt: Status
 
 
@@ -179,6 +179,6 @@ You can type any topic or setting you're searching for, as it should pop up with
 Or you can just skip it this page and continue directly to the admin panel.
 
 
-.. image:: _static/screenshots/v4.7/frontend/configuration.png
-    :target: _static/screenshots/v4.7/frontend/configuration.png
+.. image:: _static/screenshots/v4/frontend/configuration.png
+    :target: _static/screenshots/v4/frontend/configuration.png
     :alt: Configuration

@@ -6,8 +6,8 @@ Admin: Notifications
 
 Notifications on your phone using Prowl, Pushover or Telegram.
 
-.. image:: ../_static/screenshots/v4.7/admin/notificationsetting.png
-    :target: ../_static/screenshots/v4.7/admin/notificationsetting.png
+.. image:: ../_static/screenshots/v4/admin/notificationsetting.png
+    :target: ../_static/screenshots/v4/admin/notificationsetting.png
     :alt: Notifications
 
 Currently, two mobile platforms are supported: Android and iOS.

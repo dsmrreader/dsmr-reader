@@ -3,14 +3,14 @@ Admin: Backup & Dropbox
 
 The application backs up your data daily. You can change the time the backup will be created every day.
 
-.. image:: ../_static/screenshots/v4.7/admin/backupsettings.png
-    :target: ../_static/screenshots/v4.7/admin/backupsettings.png
+.. image:: ../_static/screenshots/v4/admin/backupsettings.png
+    :target: ../_static/screenshots/v4/admin/backupsettings.png
     :alt: Backup
 
 You can use your Dropbox-account to make sure your backups are safely stored in your account.
 
-.. image:: ../_static/screenshots/v4.7/admin/dropboxsettings.png
-    :target: ../_static/screenshots/v4.7/admin/dropboxsettings.png
+.. image:: ../_static/screenshots/v4/admin/dropboxsettings.png
+    :target: ../_static/screenshots/v4/admin/dropboxsettings.png
     :alt: Dropbox
 
 Make sure you have a Dropbox-account or sign up for one. 

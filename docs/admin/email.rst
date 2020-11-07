@@ -10,6 +10,6 @@ Alternatively you can use GMail, but then both the sender and receiver will be t
 
 To do so, use host ``aspmx.l.google.com``, port ``25``, ``Use TLS`` and leave the username and password **blank**.
 
-.. image:: ../_static/screenshots/v4.7/admin/emailsettings.png
-    :target: ../_static/screenshots/v4.7/admin/emailsettings.png
+.. image:: ../_static/screenshots/v4/admin/emailsettings.png
+    :target: ../_static/screenshots/v4/admin/emailsettings.png
     :alt: Email settings
