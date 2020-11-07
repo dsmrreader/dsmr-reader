@@ -2,9 +2,13 @@ name: Automated tests
 
 on:
   push:
-    branches: [ v4 ]
+    branches:
+      - v4
+      - development
   pull_request:
-    branches: [ v4 ]
+    branches:
+      - v4
+      - development
 
 jobs:
   build:
