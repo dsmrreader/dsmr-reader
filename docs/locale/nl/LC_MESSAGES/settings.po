@@ -23,4 +23,4 @@ msgstr "Instellingen (verplaatst)"
 
 #: ../../settings.rst:6
 msgid ":doc:`This page was moved to Env Settings <env_settings>`."
-msgstr ":doc:`Deze pagina is verplaatst naar Env Settings <env_settings>`."
+msgstr ":doc:`Deze pagina is verplaatst naar Env-Instellingen <env_settings>`."
