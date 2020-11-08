@@ -1,4 +1,5 @@
 from dsmr_api.tests.v2 import APIv2TestCase
+from dsmr_stats.models.statistics import DayStatistics
 
 
 class TestDay(APIv2TestCase):
@@ -37,6 +38,40 @@ class TestDay(APIv2TestCase):
         self.assertEqual(resultset['count'], 4)
         self.assertEqual(resultset['results'][0]['id'], 756)
         self.assertEqual(resultset['results'][1]['id'], 757)
+
+    def test_post(self):
+        DATA = {
+            'day': '2020-12-16',
+            'total_cost': 18.50,
+            'electricity1': 5,
+            'electricity2': 3,
+            'electricity1_returned': 1,
+            'electricity2_returned': 2,
+            'electricity1_cost': 4,
+            'electricity2_cost': 3.5,
+            'gas': 6,
+            'gas_cost': 10,
+            'fixed_cost': 1,
+        }
+        self.assertEqual(DayStatistics.objects.all().count(), 7)
+
+        resultset = self._request('day-statistics', expected_code=201, method='post', data=DATA)
+
+        self.assertEqual(resultset['day'], '2020-12-16')
+        self.assertEqual(float(resultset['total_cost']), 18.5)
+        self.assertEqual(float(resultset['electricity1']), 5)
+        self.assertEqual(float(resultset['electricity2']), 3)
+        self.assertEqual(float(resultset['electricity1_returned']), 1)
+        self.assertEqual(float(resultset['electricity2_returned']), 2)
+        self.assertEqual(float(resultset['electricity1_cost']), 4)
+        self.assertEqual(float(resultset['electricity2_cost']), 3.5)
+        self.assertEqual(float(resultset['gas']), 6)
+        self.assertEqual(float(resultset['gas_cost']), 10)
+        self.assertEqual(float(resultset['fixed_cost']), 1)
+        self.assertIsNone(resultset['lowest_temperature'])
+        self.assertIsNone(resultset['highest_temperature'])
+        self.assertIsNone(resultset['average_temperature'])
+        self.assertEqual(DayStatistics.objects.all().count(), 8)
 
 
 class TestHour(APIv2TestCase):

@@ -11,10 +11,13 @@ Changelog
 v4.x releases
 =============
 
+.. contents:: :local:
+    :depth: 1
 
 v4.7.0 - 2020-xx-xx
 -------------------
 
+- ``Added``: Dagtotalen via API aanmaken (t.b.v. importeren) [`#1194 <https://github.com/dsmrreader/dsmr-reader/issues/1194>`_]
 
 
 v4.6.1 - 2020-11-07
@@ -188,7 +191,10 @@ v4.0.0 - 2020-07-27
 
 
 v3.x releases
-^^^^^^^^^^^^^
+=============
+
+.. contents:: :local:
+    :depth: 1
 
 v3.12.0 - 2020-08-08
 --------------------
@@ -362,7 +368,10 @@ v3.0.0 - 2020-01-15
 
 
 v2.x releases
-^^^^^^^^^^^^^
+=============
+
+.. contents:: :local:
+    :depth: 1
 
 .. warning::
 
@@ -576,8 +585,10 @@ v2.0.0 - 2019-04-16
 
 
 v1.x releases
-^^^^^^^^^^^^^
+=============
 
+.. contents:: :local:
+    :depth: 1
 
 v1.28.0 - 2019-01-04
 --------------------

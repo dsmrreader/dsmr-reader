@@ -4,6 +4,38 @@ The application has an API allowing you to insert/create readings and retrieve s
 
 
 .. contents::
+    :depth: 2
+
+
+
+Changelog
+---------
+
+.. versionadded:: 4.7.0
+
+    - Added new endpoint to create day statistics
+
+.. versionadded:: 4.4.0
+
+    - Added new endpoint for application monitoring
+
+.. versionchanged:: 4.0.0
+
+    - Removed ``/api/v2/application/status``
+
+.. deprecated:: 3.12
+
+    - Deprecated ``/api/v2/application/status``
+
+
+Documentation
+-------------
+
+.. hint::
+
+    The API-documentation has been moved to your local installation since DSMR-reader ``v3.1``.
+
+    You can access it by selecting the ``About & Support`` menu item in DSMR-reader.
 
 
 Configuration
@@ -22,13 +54,3 @@ API key
 ^^^^^^^
 
 A random API key is generated for you by default. You can always view or update it :doc:`in the configuration<configuration>`.
-
-
-Documentation
--------------
-
-.. warning::
-
-    The API-documentation has been moved to your local installation since DSMR-reader ``v3.1``.
-
-    You can access it by selecting the ``About & Support`` menu item in DSMR-reader.

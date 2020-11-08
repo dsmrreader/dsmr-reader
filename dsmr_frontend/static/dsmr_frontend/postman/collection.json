@@ -542,6 +542,128 @@
 					"name": "Statistics",
 					"item": [
 						{
+							"name": "Create day statistics",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "day",
+											"value": "2020-12-16",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "total_cost",
+											"value": "7.50",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity1",
+											"value": "5",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity2",
+											"value": "3",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity1_returned",
+											"value": "1",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity2_returned",
+											"value": "2",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity1_cost",
+											"value": "4",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "electricity2_cost",
+											"value": "3.5",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "gas",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "gas_cost",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "lowest_temperature",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "highest_temperature",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "average_temperature",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "fixed_cost",
+											"value": "",
+											"description": "Optional",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/statistics/day",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"statistics",
+										"day"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Retrieve day statistics",
 							"request": {
 								"method": "GET",

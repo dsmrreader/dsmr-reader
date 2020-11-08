@@ -26,7 +26,10 @@ consumption_url_patterns = [
 ]
 
 statistics_url_patterns = [
-    path('day', views.DayStatisticsViewSet.as_view({'get': 'list'}), name='day-statistics'),
+    path('day', views.DayStatisticsViewSet.as_view({
+        'get': 'list',
+        'post': 'create',
+    }), name='day-statistics'),
     path('hour', views.HourStatisticsViewSet.as_view({'get': 'list'}), name='hour-statistics'),
 ]
 

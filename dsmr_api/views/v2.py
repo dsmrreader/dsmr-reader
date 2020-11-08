@@ -40,7 +40,7 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
     create:
     Creates a reading from separate values, omitting the need for the original telegram.
 
-    **Note**
+    # Note
 
     Readings are processed simultaneously by the background process. Therefor inserting readings retroactively might
     result in undesired results.
@@ -50,6 +50,7 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
     ```
         sudo su - postgres
         psql dsmrreader
+
         truncate dsmr_consumption_electricityconsumption;
         truncate dsmr_consumption_gasconsumption;
         truncate dsmr_stats_daystatistics;
@@ -166,15 +167,22 @@ class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     ordering = FIELD
 
 
-class DayStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
+class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSet):
     """
-    Retrieves any aggregated day statistics.
+    list:
+    Retrieves any aggregated day statistics, as displayed in the Archive.
 
-    **Note**
+    ## Note
 
-    *These are generated a few hours after midnight.*
+    *These are automatically generated a few hours after midnight.*
+
+    create:
+    Creates statistics for a day, overriding any DSMR-reader internals.
+
+    ## Note
+    *Should only be used to import historic data.*
     """
-    schema = DsmrReaderSchema(get='Retrieve day statistics')
+    schema = DsmrReaderSchema(get='Retrieve day statistics', post='Create day statistics')
     FIELD = 'day'
     queryset = DayStatistics.objects.all()
     serializer_class = DayStatisticsSerializer
