@@ -31,6 +31,3 @@ DSMR Reader's documentation
 
    credits
    licence
-
-   troubleshooting
-   settings

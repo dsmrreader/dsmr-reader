@@ -47,3 +47,4 @@ Credits to the following software and projects:
 - `eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_
 - `ReDoc <https://github.com/Redocly/redoc>`_
 - `Semantic UI <https://semantic-ui.com>`_
+- `sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_
