@@ -1116,12 +1116,6 @@ msgstr "Verbeterd door"
 msgid "Many contributors"
 msgstr "Vele bijdrages"
 
-msgid "Do you want to show a small token of appreciation or gesture?"
-msgstr "Wil je een klein gebaar maken om je waardering te delen?"
-
-msgid "View how to donate or tip"
-msgstr "Bekijk hoe iets te geven"
-
 msgid "Archive"
 msgstr "Archief"
 
@@ -1586,6 +1580,9 @@ msgstr "Gebaseerd op het meest recent verwerkte elektriciteitsverbruik."
 msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
 msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
 
+msgid "You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration."
+msgstr "Het is mogelijk om het totaal aantal weergegeven uren (tot max. een week terug), inclusief de bijbehorende initiële zoom bij openen, aan te passen in de Frontend-configuratie."
+
 msgid "Recent distribution of electricity phases"
 msgstr "Recente distributie elektriciteitsfasen"
 
@@ -1597,6 +1594,9 @@ msgstr "Recente stroomsterktes"
 
 msgid "Recent gas consumption"
 msgstr "Recent gasverbruik"
+
+msgid "Additionally, when using a DSMR v5 smart meter"
+msgstr "Daarnaast, indien je een DSMR-v5-meter gebruikt"
 
 msgid "Recent temperatures"
 msgstr "Recente temperaturen"
@@ -2605,6 +2605,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Do you want to show a small token of appreciation or gesture?"
+#~ msgstr "Wil je een klein gebaar maken om je waardering te delen?"
+
+#~ msgid "View how to donate or tip"
+#~ msgstr "Bekijk hoe iets te geven"
 
 #~ msgid "Backend"
 #~ msgstr "Backend"

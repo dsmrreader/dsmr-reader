@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView, View
 from django.utils import formats, timezone
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_frontend.forms import DashboardElectricityConsumptionForm
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_weather.models.reading import TemperatureReading
@@ -21,6 +22,7 @@ class LiveGraphs(ConfigurableLoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(LiveGraphs, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
+        context_data['meter_statistics'] = MeterStatistics.get_solo()
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
         context_data['notification_count'] = Notification.objects.unread().count()

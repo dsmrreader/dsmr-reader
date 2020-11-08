@@ -43,7 +43,9 @@ $(document).ready(function () {
             dataZoom: [
                 {
                     show: true,
-                    start: 0,
+                    // Do not change initial zoom when using a non DSMR v5 meter.
+                    // Because it will cause DSMR v4 meter users to only display 2 of 24 hours by default.
+                    start: telegram_dsmr_version == '50' ? live_graphs_initial_zoom : 0,
                     end: 100
                 },
                 {

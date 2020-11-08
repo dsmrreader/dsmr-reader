@@ -14,10 +14,13 @@ v4.x releases
 .. contents:: :local:
     :depth: 1
 
+
 v4.7.0 - 2020-xx-xx
 -------------------
 
 - ``Added``: Dagtotalen via API aanmaken (t.b.v. importeren) [`#1194 <https://github.com/dsmrreader/dsmr-reader/issues/1194>`_]
+
+- ``Changed``: "Live graphs initial zoom" gebruiken bij gasgrafiek (DSMR-v5 meters) [`#1181 <https://github.com/dsmrreader/dsmr-reader/issues/1181>`_]
 
 
 v4.6.1 - 2020-11-07

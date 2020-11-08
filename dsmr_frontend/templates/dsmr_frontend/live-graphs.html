@@ -55,7 +55,10 @@
                     </table>
 
                     <div id="echarts-electricity-graph" style="width: 100%; height: 300px;"></div>
-                    <div class="graph_controls_help">{% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}</div>
+                    <div class="graph_controls_help">
+                        {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,7 +74,10 @@
                 </header>
                 <div class="panel-body">
                     <div id="echarts-phases-graph" style="width: 100%; height: 300px;"></div>
-                    <div class="graph_controls_help">{% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}</div>
+                    <div class="graph_controls_help">
+                        {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,7 +93,10 @@
                 </header>
                 <div class="panel-body">
                     <div id="echarts-voltage-graph" style="width: 100%; height: 300px;"></div>
-                    <div class="graph_controls_help">{% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}</div>
+                    <div class="graph_controls_help">
+                        {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,7 +112,10 @@
                 </header>
                 <div class="panel-body">
                     <div id="echarts-power-current-graph" style="width: 100%; height: 300px;"></div>
-                    <div class="graph_controls_help">{% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}</div>
+                    <div class="graph_controls_help">
+                        {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,7 +131,10 @@
                 </header>
                 <div class="panel-body">
                     <div id="echarts-gas-graph" style="width: 100%; height: 300px;"></div>
-                    <div class="graph_controls_help">{% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}</div>
+                    <div class="graph_controls_help">
+                        {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}
+                        <strong>{% blocktranslate %}Additionally, when using a DSMR v5 smart meter{% endblocktranslate %}</strong>: {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,7 +150,9 @@
                 </header>
                 <div class="panel-body">
                     <div id="echarts-temperature-graph" style="width: 100%; height: 300px;"></div>
-                    <div class="graph_controls_help">{% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}</div>
+                    <div class="graph_controls_help">
+                        {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,6 +168,7 @@
 
     <script type="text/javascript">
         {% localize off %}
+        var telegram_dsmr_version = '{{ meter_statistics.dsmr_version|default:'' }}';
         var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
         var live_graphs_initial_zoom = 100 - {{ frontend_settings.live_graphs_initial_zoom }};
         var echarts_loading_options = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};

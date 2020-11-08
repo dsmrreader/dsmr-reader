@@ -32,14 +32,14 @@ if [ $? -ne 0 ]; then
     exit;
 fi
 
-echo "OK"
 
-
-# Remove annoying header with datetime diffs.
+echo ""
+echo "--- Clearing PO headers..."
 sh $CURRENT_DIR/clear-po-headers.sh
 
 
-# Check missing doc translations.
+echo ""
+echo "--- Checking missing doc translations..."
 cd $CURRENT_DIR/../docs/
 sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
 
