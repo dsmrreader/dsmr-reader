@@ -1075,7 +1075,7 @@ msgid "Looking for something specific? A good place to start might be the FAQ"
 msgstr "Zoek je iets specifieks? Een goede plek om te beginnen is de FAQ"
 
 msgid "View frequently asked questions (FAQ)"
-msgstr "Bekijk veegelstelde vragen (FAQ)"
+msgstr "Bekijk veelgestelde vragen (FAQ)"
 
 msgid "Did something change after updating? Check out the latest changes"
 msgstr "IS er iets veranderd na updaten? Bekijk de laatste wijzigingen"
