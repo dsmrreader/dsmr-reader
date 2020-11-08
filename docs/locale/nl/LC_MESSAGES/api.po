@@ -20,38 +20,58 @@ msgstr "DSMR-reader API"
 msgid "The application has an API allowing you to insert/create readings and retrieve statistics."
 msgstr "De applicatie heeft een API waarmee metingen kunt aanmaken/opvragen en diverse statistieken uitlezen."
 
-#: ../../api.rst:7
+#: ../../api.rst:9
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../api.rst:10
-msgid "Configuration"
-msgstr "Configuratie"
+#: ../../api.rst:12
+msgid "Changelog"
+msgstr "Wijzigingenoverzicht"
 
-#: ../../api.rst:13
-msgid "Enable API"
-msgstr "API inschakelen"
+#: ../../api.rst:16
+msgid "Added new endpoint to create day statistics"
+msgstr "Nieuw endpoint toegevoegd voor handmatig aanmaken dagstatistieken"
 
-#: ../../api.rst:15
-msgid "The API is disabled by default in the application. You may enable it :doc:`in the configuration<configuration>`."
-msgstr "De API is standaard uitgeschakeld. Je kunt deze :doc:`in de configuratie<configuration>` inschakelen."
-
-#: ../../api.rst:22
-msgid "API key"
-msgstr "API-sleutel"
+#: ../../api.rst:20
+msgid "Added new endpoint for application monitoring"
+msgstr "Nieuw endpoint toegevoegd voor applicatie-monitoring"
 
 #: ../../api.rst:24
-msgid "A random API key is generated for you by default. You can always view or update it :doc:`in the configuration<configuration>`."
-msgstr "Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kunt deze altijd bekijken of bijwerken :doc:`in de configuratie<configuration>`."
+msgid "Removed ``/api/v2/application/status``"
+msgstr "Verwijderd: ``/api/v2/application/status``"
 
 #: ../../api.rst:28
+msgid "Deprecated ``/api/v2/application/status``"
+msgstr "Deprecated: ``/api/v2/application/status``"
+
+#: ../../api.rst:32
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: ../../api.rst:32
+#: ../../api.rst:36
 msgid "The API-documentation has been moved to your local installation since DSMR-reader ``v3.1``."
 msgstr "De API-documentatie is sinds DSMR-reader ``v3.1`` verplaatst naar je lokale installatie."
 
-#: ../../api.rst:34
+#: ../../api.rst:38
 msgid "You can access it by selecting the ``About & Support`` menu item in DSMR-reader."
 msgstr "Je kunt deze bekijken door het menu-item ``Over & ondersteuning`` te selecteren in DSMR-reader."
+
+#: ../../api.rst:42
+msgid "Configuration"
+msgstr "Configuratie"
+
+#: ../../api.rst:45
+msgid "Enable API"
+msgstr "API inschakelen"
+
+#: ../../api.rst:47
+msgid "The API is disabled by default in the application. You may enable it :doc:`in the configuration<configuration>`."
+msgstr "De API is standaard uitgeschakeld. Je kunt deze :doc:`in de configuratie<configuration>` inschakelen."
+
+#: ../../api.rst:54
+msgid "API key"
+msgstr "API-sleutel"
+
+#: ../../api.rst:56
+msgid "A random API key is generated for you by default. You can always view or update it :doc:`in the configuration<configuration>`."
+msgstr "Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kunt deze altijd bekijken of bijwerken :doc:`in de configuratie<configuration>`."

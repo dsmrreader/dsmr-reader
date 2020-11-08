@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+CURRENT_DIR=$(cd `dirname $0` && pwd)
 ARGS=""
 
 for CURRENT in "$@"
 do
     ARGS="$ARGS $CURRENT"
 done
+
 
 export DJANGO_SETTINGS_MODULE=dsmrreader.config.test
 
@@ -33,5 +35,17 @@ fi
 echo "OK"
 
 
-DIR=$(cd `dirname $0` && pwd)
-sh $DIR/clear-po-headers.sh
+# Remove annoying header with datetime diffs.
+sh $CURRENT_DIR/clear-po-headers.sh
+
+
+# Check missing doc translations.
+cd $CURRENT_DIR/../docs/
+sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
+
+if [ $? -ne 1 ]; then
+    echo "[!] Pending documentation translations [!]"
+    exit;
+fi
+
+cd $CURRENT_DIR

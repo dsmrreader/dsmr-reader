@@ -1200,11 +1200,14 @@ msgstr "Sla over en ga direct naar het beheer"
 msgid "Click a topic below to display a pop-up with more details to choose from."
 msgstr "Klik hieronder op een onderwerp om meer inhoudelijke suggesties te zien."
 
+msgid "API settings"
+msgstr "API-instellingen"
+
 msgid "DSMR-reader API (key)"
 msgstr "DSMR-reader API (sleutel)"
 
-msgid "Backend"
-msgstr "Backend"
+msgid "Backend / Background processing"
+msgstr "Backend / Achtergrondverwerking"
 
 msgid "Hide electricity return graphs"
 msgstr "Verberg grafieken teruglevering elektriciteit"
@@ -1220,6 +1223,9 @@ msgstr "Bestandsmap om back-up's naar weg te schrijven"
 
 msgid "Gzip compression level used"
 msgstr "Gzip compressieniveau"
+
+msgid "Data grouping"
+msgstr "Data groeperen"
 
 msgid "Group electricity by reading"
 msgstr "Groepeer elektriciteit op meting"
@@ -1242,17 +1248,14 @@ msgstr "Smarty meter"
 msgid "Fluvius meter"
 msgstr "Fluvius meter"
 
+msgid "Dropbox integration"
+msgstr "Dropbox-integratie"
+
 msgid "Dropbox integration for backups"
 msgstr "Dropbox-integratie voor back-up's"
 
-msgid "Email"
-msgstr "E-mail"
-
-msgid "Outgoing email"
-msgstr "Uitgaande e-mail"
-
-msgid "Energy supplier prices"
-msgstr "Tarieven energieleverancier"
+msgid "Tariffs / Energy supplier prices"
+msgstr "Tarieven / Energieleverancierprijzen"
 
 msgid "Energy supplier price contracts"
 msgstr "Energieleverancier contracten"
@@ -1263,8 +1266,8 @@ msgstr "Gasprijs/kosten"
 msgid "Electricity price/costs"
 msgstr "Elektriciteitsprijs/kosten"
 
-msgid "Export"
-msgstr "Exporteer"
+msgid "CSV export"
+msgstr "CSV export"
 
 msgid "Export day totals to CSV"
 msgstr "Exporteer dagtotalen naar CSV"
@@ -1275,8 +1278,8 @@ msgstr "Exporteer uurtotalen naar CSV"
 msgid "Export temperatures to CSV"
 msgstr "Exporteer temperaturen naar CSV"
 
-msgid "Frontend"
-msgstr "Interface"
+msgid "Frontend / Display / Graphics"
+msgstr "Frontend / Weergave / Grafisch"
 
 msgid "Merge tariffs"
 msgstr "Voeg tarieven samen"
@@ -1286,9 +1289,6 @@ msgstr "Grafieklijn/staaf kleuren"
 
 msgid "Graph sorting/order"
 msgstr "Volgorde grafieken"
-
-msgid "InfluxDB"
-msgstr "InfluxDB"
 
 msgid "InfluxDB integration"
 msgstr "InfluxDB-integratie"
@@ -1302,8 +1302,8 @@ msgstr "InfluxDB gebruikersnaam / wachtwoord"
 msgid "InfluxDB measurement mapping"
 msgstr "InfluxDB measurement mapping"
 
-msgid "Meter statistics"
-msgstr "Meterstatistieken"
+msgid "Smart meter statistics"
+msgstr "Slimme-meterstatistieken"
 
 msgid "Meter statistics overview"
 msgstr "Overzicht meterstatistieken"
@@ -1311,17 +1311,17 @@ msgstr "Overzicht meterstatistieken"
 msgid "Latest telegram read"
 msgstr "Laatst gelezen telegram"
 
-msgid "Mindergas.nl"
-msgstr "Mindergas.nl"
+msgid "Mindergas.nl integration"
+msgstr "MinderGas.nl-integratie"
 
-msgid "Link your MinderGas account"
-msgstr "Koppel je MinderGas-account"
+msgid "Link your MinderGas API account"
+msgstr "Koppel je MinderGas API-account"
 
-msgid "Export to MinderGas"
-msgstr "Exporteer naar MinderGas"
+msgid "Export to MinderGas API"
+msgstr "Exporteer naar MinderGas API"
 
-msgid "MQTT"
-msgstr "MQTT"
+msgid "MQTT integration"
+msgstr "MQTT-integratie"
 
 msgid "Quality of service / QoS"
 msgstr "Quality of service / QoS"
@@ -1368,8 +1368,8 @@ msgstr "Voltage (gesplitst topic)"
 msgid "Ampere (split topic)"
 msgstr "Ampere (gesplitst topic)"
 
-msgid "Notifications"
-msgstr "Notificaties"
+msgid "Notification apps integration"
+msgstr "Notificatie-apps integratie"
 
 msgid "App notifications"
 msgstr "App-notificaties"
@@ -1383,20 +1383,20 @@ msgstr "Prowl app"
 msgid "Telegram (your bot)"
 msgstr "Telegram (jouw bot)"
 
-msgid "PVOutput.org"
-msgstr "PVOutput.org"
+msgid "PVOutput.org integration"
+msgstr "PVOutput.org-integratie"
 
-msgid "Link your PVOutput.org account"
-msgstr "Koppel je PVOutput.org-account"
+msgid "Link your PVOutput.org API account"
+msgstr "Koppel je PVOutput.org API-account"
 
-msgid "PVOutput.org Add Status"
-msgstr "PVOutput.org Add Status"
+msgid "PVOutput.org Add Status API"
+msgstr "PVOutput.org Add Status API"
 
-msgid "PVOutput.org donator options"
-msgstr "PVOutput.org opties voor donateurs"
+msgid "PVOutput.org donator API options"
+msgstr "PVOutput.org API-opties voor donateurs"
 
-msgid "Retention"
-msgstr "Retentie"
+msgid "Automatic data cleanup / Retention policy"
+msgstr "Automatisch dataopschoning / Dataretentiebeleid"
 
 msgid "Clean up reading"
 msgstr "Ruim metingen op"
@@ -1407,14 +1407,17 @@ msgstr "Pas retentie toe"
 msgid "Periodically delete data"
 msgstr "Verwijder periodiek gegevens"
 
+msgid "Day and hour totals"
+msgstr "Dag- en uurtotalen"
+
 msgid "Day statistics"
 msgstr "Dagstatistieken"
 
 msgid "Hour statistics"
 msgstr "Uurstatistieken"
 
-msgid "Weather"
-msgstr "Weergegevens"
+msgid "Weather integration"
+msgstr "Weergegevens-integratie"
 
 msgid "Keep track of outside temperatures"
 msgstr "Houd buitentemperaturen bij"
@@ -1600,6 +1603,9 @@ msgstr "Recente temperaturen"
 
 msgid "Loading..."
 msgstr "Bezig met laden..."
+
+msgid "Notifications"
+msgstr "Notificaties"
 
 msgid "Unread Notifications"
 msgstr "Ongelezen notificaties"
@@ -1788,6 +1794,9 @@ msgstr ""
 "[gas_positions]\n"
 "extra_device_delivered = delivered\n"
 "</pre>\n"
+
+msgid "InfluxDB"
+msgstr "InfluxDB"
 
 msgid "Too many outgoing InfluxDB measurements queued for transit"
 msgstr "Er zijn te veel uitgaande InfluxDB measurements die wachten op verzending"
@@ -1981,6 +1990,9 @@ msgstr ""
 "                    {}\n"
 "                    </pre>\n"
 "                    "
+
+msgid "MQTT"
+msgstr "MQTT"
 
 msgid "Too many outgoing MQTT messages queued for transit"
 msgstr "Er zijn te veel uitgaande MQTT-berichten die wachten op verzending"
@@ -2405,6 +2417,9 @@ msgstr "Buienradar"
 msgid "See <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> for a map of all locations."
 msgstr "Zie <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> voor een kaart van alle locaties."
 
+msgid "Weather"
+msgstr "Weergegevens"
+
 msgid "Temperature (in ℃)"
 msgstr "Temperatuur (in ℃)"
 
@@ -2590,3 +2605,27 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Backend"
+#~ msgstr "Backend"
+
+#~ msgid "Email"
+#~ msgstr "E-mail"
+
+#~ msgid "Outgoing email"
+#~ msgstr "Uitgaande e-mail"
+
+#~ msgid "Export"
+#~ msgstr "Exporteer"
+
+#~ msgid "Frontend"
+#~ msgstr "Interface"
+
+#~ msgid "Mindergas.nl"
+#~ msgstr "Mindergas.nl"
+
+#~ msgid "PVOutput.org"
+#~ msgstr "PVOutput.org"
+
+#~ msgid "Retention"
+#~ msgstr "Retentie"
