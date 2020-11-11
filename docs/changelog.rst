@@ -15,9 +15,10 @@ v4.x releases
     :depth: 1
 
 
-v4.8.0 - 2020-xx-xx
+v4.7.1 - 2020-xx-xx
 -------------------
 
+- ``Fixed``: Dagstatistieken worden niet gegenereerd na uitschakelen gas [`#1197 <https://github.com/dsmrreader/dsmr-reader/issues/1197>`_]
 
 
 v4.7.0 - 2020-11-09

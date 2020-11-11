@@ -90,7 +90,10 @@ def run(scheduled_process):
         read_at__date__gte=target_day - timezone.timedelta(days=1)
     ).exists()
 
-    if recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
+    # Unless it was disabled.
+    gas_capability = dsmr_backend.services.backend.get_capabilities('gas')
+
+    if gas_capability and recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
         logger.debug('Stats: Waiting for first gas reading on the next day...')
         return scheduled_process.delay(timezone.timedelta(minutes=5))
 
