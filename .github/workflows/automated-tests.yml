@@ -64,9 +64,7 @@ jobs:
         with:
           path: |
             ~/.cache/pypoetry/virtualenvs
-          key: poetry-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/poetry.lock') }}
-#          restore-keys: |
-#              poetry-${{ matrix.python-version }}-
+          key: dependencies-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/poetry.lock') }}
 
       - name: Install dependencies
         run: |
