@@ -33,7 +33,7 @@ workflows:
 
 # Dummy vars, used for anchors.
 x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ .Revision }}
-x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-{{ .Branch }}-{{ arch }}---{{ checksum "poetry.lock" }}
+x-dependencies-cache-key: &dependencies-cache-key dependencies-{{ .Branch }}-{{ arch }}---{{ checksum "poetry.lock" }}
 
 
 commands:
@@ -54,11 +54,11 @@ commands:
     virtualenv_setup:
         steps:
             - restore_cache:
-                  name: "Cache: Restore virtualenv"
-                  key: *virtualenv-cache-key
+                  name: "Cache: Restore dependencies"
+                  key: *dependencies-cache-key
 
             - run:
-                  name: "Virtualenv and requirements"
+                  name: "Install dependencies"
                   command: |
                       sudo apt-get update
                       sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-virtualenv
@@ -68,10 +68,10 @@ commands:
                       poetry install
 
             - save_cache:
-                  name: "Cache: Save virtualenv"
+                  name: "Cache: Save dependencies"
                   paths:
                       - ~/.cache/pypoetry/virtualenvs
-                  key: *virtualenv-cache-key
+                  key: *dependencies-cache-key
 
     run_tests:
         steps:
