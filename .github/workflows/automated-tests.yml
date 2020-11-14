@@ -1,4 +1,4 @@
-name: Automated tests
+name: DSMR-reader tests
 
 on:
   push:
