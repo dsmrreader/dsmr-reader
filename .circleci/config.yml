@@ -121,7 +121,7 @@ x-base-job: &base-job
     working_directory: ~/repo
     steps:
         - code_checkout
-        - virtualenv_setup
+        - dependencies_setup
         - run_tests
         - codecov/upload
 
