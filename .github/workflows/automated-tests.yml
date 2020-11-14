@@ -97,6 +97,7 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
 
+## BROKEN
 #      - name: Run MySQL tests
 #        run: poetry run py.test
 #        env:
