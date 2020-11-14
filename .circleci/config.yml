@@ -51,7 +51,7 @@ commands:
                      - ".git"
                  key: *source-cache-key
 
-    virtualenv_setup:
+    dependencies_setup:
         steps:
             - restore_cache:
                   name: "Cache: Restore dependencies"
