@@ -5,21 +5,13 @@ Developing with DSMR-reader
 .. contents::
     :depth: 2
 
-.. tip::
-
-    In this document there are many references to::
-    
-        source ~/.virtualenvs/dsmrreader/bin/activate
-        
-    You will only have to execute it once per terminal session, to make sure you are working in the designated virtual env for DSMR-reader.
-
 
 Setting up a development environment in Ubuntu 18.04
 ----------------------------------------------------
 
 System packages::
     
-    sudo apt-get install -y postgresql postgresql-server-dev-all git python3 python3-pip python3-virtualenv virtualenvwrapper libmysqlclient-dev mariadb-server poedit
+    sudo apt-get install -y postgresql postgresql-server-dev-all git python3 python3-pip python3-virtualenv libmysqlclient-dev mariadb-server poedit
 
 Clone DSMR-reader repository from Github::
 
@@ -28,10 +20,9 @@ Clone DSMR-reader repository from Github::
 
 Create virtualenv and install all packages::
 
-    mkdir ~/.virtualenvs
-    virtualenv ~/.virtualenvs/dsmrreader --no-site-packages --python python3
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
+    pip3 install poetry
+    poetry config virtualenvs.in-project true
+    poetry install
 
 Copy development config::
 
@@ -52,10 +43,11 @@ Copy env vars template and generate a unique secret key::
 
 Try a check, output should be something like ``System check identified no issues (0 silenced).``::
     
-    ./manage.py check
+    poetry run ./manage.py check
 
 Run quick tests (with in-memory database)::
 
+    poetry shell
     ./tools/quick-test.sh
 
 Set up PostgreSQL test database::
@@ -75,6 +67,7 @@ Set up MySQL (or MariaDB) test database::
 
 Now check whether tests run well with all three database backends (this may take a while)::
 
+    poetry shell
     ./tools/test-all.sh
 
 
@@ -124,7 +117,7 @@ Running DSMR-reader locally
 
 You can run the Django development server with::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
+    poetry shell
     ./manage.py runserver
 
 The application will be accessible on: ``http://localhost:8000/``.
@@ -138,17 +131,17 @@ DSMR-reader's test coverage should remain as high as possible. Running tests wil
 
 The easiest way to run tests is to use the in-memory tests::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
+    poetry shell
     ./tools/quick-test.sh
     
 To test a single app within DSMR-reader, just append it::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
+    poetry shell
     ./tools/quick-test.sh dsmr_frontend
 
 To test all database backends, run::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
+    poetry shell
     ./tools/test-all.sh
 
 The test coverage should be visible in the terminal after running tests.
@@ -173,7 +166,7 @@ Editing documentation
 
 The documentation is part of the repository and can be generated (automatically) with Sphinx::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
+    poetry shell
     cd docs/
     sphinx-autobuild . _build/html --port 10000
     
@@ -186,7 +179,7 @@ Translating documentation
 
 Translations are done using gettext and .PO files. Regenerate the .PO files with::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
+    poetry shell
     cd docs/
     make gettext && sphinx-intl update -p _build/locale -l nl
 
@@ -194,6 +187,7 @@ The .PO files in ``docs/locale`` should be regenerated now. You can use ``poedit
 
 After editing the .PO files, you can check the result by building the Dutch translations locally::
 
+    poetry shell
     make -e SPHINXOPTS="-D language='nl'" html
 
 Now view the generated HTML in your browser by opening: ``docs/_build/html/index.html``

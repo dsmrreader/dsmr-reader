@@ -88,8 +88,8 @@ Continue::
 
     # Open /home/dsmr/dsmr-reader/.env and enter the superuser credentials
     # you wish to use, when running 'manage.py dsmr_superuser' later.
-    DSMR_USER=???
-    DSMR_PASSWORD=???
+    DSMRREADER_ADMIN_USER=???
+    DSMRREADER_ADMIN_PASSWORD=???
 
     # Shortcuts
     sudo -u dsmr sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
@@ -101,8 +101,8 @@ Continue::
     poetry install --no-dev
 
     # Setup
-    poetry run /home/dsmr/dsmr-reader/manage.py migrate
-    poetry run /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
+    poetry run ./manage.py migrate
+    poetry run ./manage.py collectstatic --noinput
     logout
 
     # Nginx
@@ -119,10 +119,10 @@ Continue::
     sudo supervisorctl reread
     sudo supervisorctl update
 
-    # Create (super)user with the values in DSMR_USER and
-    # DSMR_PASSWORD as defined in one of the previous steps.
+    # Create (super)user with the values in DSMRREADER_ADMIN_USER and
+    # DSMRREADER_ADMIN_PASSWORD as defined in one of the previous steps.
     sudo su - dsmr
-    poetry run /home/dsmr/dsmr-reader/manage.py dsmr_superuser
+    poetry run ./manage.py dsmr_superuser
 
 
 .. seealso::
@@ -327,7 +327,7 @@ It allows us to have Nginx serve static files outside our project/code root.
     poetry run ./manage.py collectstatic --noinput
 
 Create an application superuser with the following command.
-The ``DSMR_USER`` and ``DSMR_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials.
+The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials.
 
 Execute::
 
