@@ -2294,6 +2294,12 @@ msgstr "PVOutput: \"Add Status\" configuratie"
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
+msgid "No day statistics found"
+msgstr "Geen dagstatistieken gevonden"
+
+msgid "Day statistics are lagging behind"
+msgstr "Dagstatistieken lopen achter"
+
 msgid "Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks."
 msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Wordt gebruikt voor integratietests."
 

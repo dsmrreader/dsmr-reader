@@ -71,6 +71,9 @@ DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 12
 # The time scheduled processes are allowed to lagg behind before failing the monitoring.
 DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES = 15
 
+# Days statistics should be generated daily.
+DSMRREADER_STATUS_ALLOWED_DAY_STATISTICS_LAGG_IN_DAYS = 2
+
 # Number of queued messages the application will retain. Any excess will be purged.
 DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = 200
 DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE = 200
