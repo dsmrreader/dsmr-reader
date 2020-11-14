@@ -96,13 +96,14 @@ Continue::
 
     # Dependencies
     sudo su - dsmr
-    pip3 install poetry
+    pip3 install poetry --user
     poetry config virtualenvs.in-project true
     poetry install --no-dev
 
     # Setup
     poetry run /home/dsmr/dsmr-reader/manage.py migrate
     poetry run /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
+    logout
 
     # Nginx
     sudo rm /etc/nginx/sites-enabled/default
@@ -305,7 +306,7 @@ Setup local config::
 
 Install dependencies::
 
-    pip3 install poetry
+    pip3 install poetry --user
     poetry config virtualenvs.in-project true
     poetry install --no-dev
 
@@ -479,7 +480,7 @@ Execute::
 
     # Dependencies
     sudo su - dsmr
-    pip3 install poetry
+    pip3 install poetry --user
     poetry config virtualenvs.in-project true
     poetry init --dependency pyserial=3.4 --dependency requests=2.24.0 --dependency python-decouple=3.3 -n
     poetry install
