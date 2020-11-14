@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "DSMR-reader"
+version = "4.8.0"
+description = "DSMR-protocol reader, telegram data storage and energy consumption visualizer"
+license = "Creative Commons Attribution-NonCommercial 4.0 International Public License"
+
+authors = [
+    "Dennis Siemensma"
+]
+
+readme = 'README.md'
+repository = "https://github.com/dsmrreader/dsmr-reader"
+homepage = "https://dsmr-reader.readthedocs.io/"
+
+
+[tool.poetry.dependencies]
+python = "^3.6 || ^3.7 || ^3.8 || ^3.9"
+
+autopep8 = "^1.5"
+coreapi = "^2.3"
+crcmod = "^1.7"
+django = "^3.1"
+django-admin-rangefilter = "^0.6"
+django-admin-sortable = "^2.2"
+django-colorfield = "^0.3"
+django-debug-toolbar = "^3.1"
+django-filter = "^2.4"
+djangorestframework = "^3.12"
+django-solo = "^1.1"
+dropbox = "^10.8"
+gunicorn = "^20.0"
+influxdb = "^5.3.0"
+paho-mqtt = "^1.5"
+psycopg2-binary = "^2.8"
+pyserial = "^3.4"
+pyserial-asyncio = "^0.4"
+python-dateutil = "^2.8"
+python-decouple = "^3.3"
+pytz = "^2020.4"
+pyyaml = "^5.3"
+requests = "^2.24"
+urllib3 = "^1.25"
+
+[tool.poetry.dev-dependencies]
+polib = "^1.1"
+pylama = "^7.7"
+pytest-cov = "^2.10"
+pytest-django = "^4.1"
+pytest-xdist = "^2.1"
+mysqlclient = "^2.0"
+sphinx = "^3.3"
+sphinx-autobuild = "^2020.9"
+sphinx-intl = "^2.0"
+sphinx-rtd-theme = "^0.5"

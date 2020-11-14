@@ -58,36 +58,36 @@ jobs:
       - name: Install APT dependencies
         run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
-      - name: Cached PIP dependencies
+      - name: Cached dependencies
         uses: actions/cache@v2.1.2
         with:
           path: |
-            ~/.cache/pip
-          key: pip-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt') }}
-          restore-keys: |
-              pip-${{ matrix.python-version }}-
+            ~/.cache/pypoetry/virtualenvs
+          key: poetry-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/poetry.lock') }}
+#          restore-keys: |
+#              poetry-${{ matrix.python-version }}-
 
-      - name: Install PIP dependencies
+      - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/ci.txt
-          pip install psycopg2-binary
+          pip3 install poetry
+          poetry install
 
       - name: Check pylama
-        run: pylama
+        run: poetry run pylama
 
       - name: Check autopep8
-        run: autopep8 -r . --diff --exit-code
+        run: poetry run autopep8 -r . --diff --exit-code
 
       - name: Run SQLite tests
-        run: py.test --cov --cov-report=xml
+        run: poetry run py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
       - name: Run PostgreSQL tests
-        run: py.test
+        run: poetry run py.test --cov --cov-report=xml
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
@@ -98,7 +98,7 @@ jobs:
             DJANGO_DATABASE_PASSWORD: testpasswd
 
 #      - name: Run MySQL tests
-#        run: py.test
+#        run: poetry run py.test
 #        env:
 #            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
 #            DJANGO_SECRET_KEY: unsafe-test-value

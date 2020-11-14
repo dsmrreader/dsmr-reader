@@ -33,10 +33,8 @@ workflows:
 
 # Dummy vars, used for anchors.
 x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ .Revision }}
-x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-{{ .Branch }}-{{ arch }}---{{ checksum "dsmrreader/provisioning/requirements/base.txt" }}
-x-test-command: &test-command |
-    . ~/.virtualenvs/dsmr-reader/bin/activate
-    py.test --cov --cov-report=xml
+x-virtualenv-cache-key: &virtualenv-cache-key virtualenv-{{ .Branch }}-{{ arch }}---{{ checksum "poetry.lock" }}
+
 
 commands:
     code_checkout:
@@ -65,33 +63,25 @@ commands:
                       sudo apt-get update
                       sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev python3-virtualenv
 
-                      mkdir -p ~/.virtualenvs/
-                      virtualenv ~/.virtualenvs/dsmr-reader --system-site-packages --python python3
-                      . ~/.virtualenvs/dsmr-reader/bin/activate
-
                       pip3 install --upgrade pip
-                      pip3 install -r dsmrreader/provisioning/requirements/ci.txt
-                      pip3 install psycopg2
+                      pip3 install poetry
+                      poetry install
 
             - save_cache:
                   name: "Cache: Save virtualenv"
                   paths:
-                      - ~/.virtualenvs/dsmr-reader/
+                      - ~/.cache/pypoetry/virtualenvs
                   key: *virtualenv-cache-key
 
     run_tests:
         steps:
             - run:
                 name: "Check PyLama"
-                command: |
-                    . ~/.virtualenvs/dsmr-reader/bin/activate
-                    pylama
+                command: poetry run pylama
 
             - run:
                 name: "Check Autopep8"
-                command: |
-                    . ~/.virtualenvs/dsmr-reader/bin/activate
-                    autopep8 -r . --diff --exit-code
+                command: poetry run autopep8 -r . --diff --exit-code
 
             - run:
                 name: "Test SQLite"
@@ -99,7 +89,7 @@ commands:
                     DJANGO_SETTINGS_MODULE: dsmrreader.config.test
                     DJANGO_SECRET_KEY: non-production-value
                     DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
-                command: *test-command
+                command: poetry run py.test
 
             - run:
                 name: "Test PostgreSQL"
@@ -110,7 +100,7 @@ commands:
                     DJANGO_DATABASE_HOST: 127.0.0.1
                     DJANGO_DATABASE_NAME: test_dsmrreader
                     DJANGO_DATABASE_USER: root
-                command: *test-command
+                command: poetry run py.test --cov --cov-report=xml
 
             - run:
                 name: "Test MySQL"
@@ -122,7 +112,7 @@ commands:
                     DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
                     DJANGO_DATABASE_USER: user
                     DJANGO_DATABASE_PASSWORD: testpassword
-                command: *test-command
+                command: poetry run py.test
 
 # Dummy vars, used for anchors.
 x-postgresql-image: &postgresql-image circleci/postgres:12-alpine
