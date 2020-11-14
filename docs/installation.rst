@@ -30,7 +30,7 @@ Part 1
 Execute::
 
     # Packages
-    sudo apt-get install -y postgresql nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get install -y postgresql nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv
 
 .. attention::
 
@@ -81,12 +81,6 @@ Continue::
     sudo git clone https://github.com/dsmrreader/dsmr-reader.git /home/dsmr/dsmr-reader
     sudo chown -R dsmr:dsmr /home/dsmr/
 
-    # Virtual env
-    sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --system-site-packages --python python3
-    sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
-    sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
-
     # Config
     sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/settings.py.template /home/dsmr/dsmr-reader/dsmrreader/settings.py
     sudo -u dsmr cp /home/dsmr/dsmr-reader/.env.template /home/dsmr/dsmr-reader/.env
@@ -97,12 +91,18 @@ Continue::
     DSMR_USER=???
     DSMR_PASSWORD=???
 
-    # Requirements
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
+    # Shortcuts
+    sudo -u dsmr sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
+
+    # Dependencies
+    sudo su - dsmr
+    pip3 install poetry
+    poetry config virtualenvs.in-project true
+    poetry install --no-dev
 
     # Setup
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
+    poetry run /home/dsmr/dsmr-reader/manage.py migrate
+    poetry run /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
 
     # Nginx
     sudo rm /etc/nginx/sites-enabled/default
@@ -120,7 +120,8 @@ Continue::
 
     # Create (super)user with the values in DSMR_USER and
     # DSMR_PASSWORD as defined in one of the previous steps.
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py dsmr_superuser
+    sudo su - dsmr
+    poetry run /home/dsmr/dsmr-reader/manage.py dsmr_superuser
 
 
 .. seealso::
@@ -197,7 +198,7 @@ Optional: Restore a database backup
 ---------------
 Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the Github repository::
 
-    sudo apt-get install -y nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get install -y nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv
 
 Install ``cu``. The CU program allows easy testing for your DSMR serial connection.
 It's very basic but also very effective to simply test whether your serial cable setup works properly::
@@ -223,7 +224,7 @@ Either proceed to the next heading **for a test reading** or continue at chapter
 Optional: Your first reading
 ----------------------------
 
-.. note::
+.. tip::
 
     **OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected.
 
@@ -271,47 +272,18 @@ Now is the time to clone the code from the repository into the homedir we create
 This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the Github repository.
 
 
-6. Virtualenv
--------------
+6. Dependencies
+---------------
 
-The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**.
+- Each time you work as ``dsmr`` user, you will have to execute the command::
 
-Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine.
-`More information about this subject can be found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_.
-
-- Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
-
-- Create folder for the virtualenv(s) of this user::
-
-    mkdir ~/.virtualenvs
-
-- Create a new virtualenv, we usually use the same name for it as the application or project::
-
-    virtualenv ~/.virtualenvs/dsmrreader --system-site-packages --python python3
-
-.. note::
-
-    Note that it's important to specify **Python 3** as the default interpreter.
-
-- Each time you work as ``dsmr`` user, you will have to switch to the virtualenv with these commands::
-
-    source ~/.virtualenvs/dsmrreader/bin/activate
     cd ~/dsmr-reader
 
-- Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::
+- Let's have it executed **automatically** every time we login as ``dsmr`` user, by adding it to the ``~/.bashrc`` file::
 
-    sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> ~/.bashrc'
     sh -c 'echo "cd ~/dsmr-reader" >> ~/.bashrc'
 
-This will both activate the virtual environment and cd you into the right directory on your **next login** as ``dsmr`` user.
-
-.. note::
-
-    You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``.
-
-    You should see the terminal have a ``(dsmrreader)`` prefix now, for example: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``
-
-Make sure you've read and executed the note above, because you'll need it for the next chapter.
+This will both activate the environment and cd you into the right directory on your **next login** as ``dsmr`` user.
 
 
 7. Application configuration & setup
@@ -327,13 +299,15 @@ Setup local config::
     cp .env.template .env
     ./tools/generate-secret-key.sh
 
-.. note::
+.. hint::
 
     **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
 
 Install dependencies::
 
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt
+    pip3 install poetry
+    poetry config virtualenvs.in-project true
+    poetry install --no-dev
 
 
 8. Bootstrapping
@@ -342,21 +316,21 @@ Now it's time to bootstrap the application and check whether all settings are go
 
 - Execute this to initialize the database we've created earlier::
 
-    ./manage.py migrate
+    poetry run ./manage.py migrate
 
 Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process.
 It allows us to have Nginx serve static files outside our project/code root.
 
 - Sync static files::
 
-    ./manage.py collectstatic --noinput
+    poetry run ./manage.py collectstatic --noinput
 
 Create an application superuser with the following command.
 The ``DSMR_USER`` and ``DSMR_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials.
 
 Execute::
 
-    ./manage.py dsmr_superuser
+    poetry run ./manage.py dsmr_superuser
 
 You've almost completed the installation now.
 
@@ -374,7 +348,7 @@ You've almost completed the installation now.
 
 Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::
 
-        sudo rm /etc/nginx/sites-enabled/default
+    sudo rm /etc/nginx/sites-enabled/default
 
 - Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 
@@ -496,20 +470,20 @@ Switch to the device you want to install the remote datalogger on.
 Execute::
 
     # Packages
-    sudo apt-get install -y supervisor python3 python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get install -y supervisor python3 python3-pip python3-virtualenv
 
     # System user
     sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
     sudo usermod -a -G dialout dsmr
     sudo chown -R dsmr:dsmr /home/dsmr/
 
-    # Virtual env
-    sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --system-site-packages --python python3
-    sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
-
-    # Requirements
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.4 requests==2.24.0 python-decouple==3.3
+    # Dependencies
+    sudo su - dsmr
+    pip3 install poetry
+    poetry config virtualenvs.in-project true
+    poetry init --dependency pyserial=3.4 --dependency requests=2.24.0 --dependency python-decouple=3.3 -n
+    poetry install
+    logout
 
 
 Datalogger script
@@ -611,8 +585,9 @@ Supervisor
 Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` with contents::
 
     [program:dsmr_remote_datalogger]
-    command=/home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
+    command=poetry run python3 -u /home/dsmr/dsmr_datalogger_api_client.py
     pidfile=/var/tmp/dsmrreader--%(program_name)s.pid
+    directory=/home/dsmr/
     user=dsmr
     group=dsmr
     autostart=true
@@ -633,4 +608,3 @@ Have Supervisor reread and update its configs to initialize the process::
 
 
 The script should now forward telegrams to the API host(s) you specified.
-

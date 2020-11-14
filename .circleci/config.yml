@@ -19,7 +19,7 @@ x-mysql-db-env: &mysql-db-env
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2.1
-## Replaced by Github Actions. Save CircleCI some resources provided to us.
+## Replaced by Github Actions. Save CircleCI some resources freely provided to us.
 #orbs:
 #  codecov: codecov/codecov@1.1.1
 
@@ -35,7 +35,7 @@ workflows:
 
 # Dummy vars, used for anchors.
 x-source-cache-key: &source-cache-key source-v1-{{ arch }}---{{ .Branch }}---{{ .Revision }}
-x-dependencies-cache-key: &dependencies-cache-key dependencies-{{ .Branch }}-{{ arch }}---{{ checksum "poetry.lock" }}
+x-venv-dependencies-cache-key: &venv-dependencies-cache-key venv-dependencies-{{ .Branch }}-{{ arch }}---{{ checksum "poetry.lock" }}
 
 
 commands:
@@ -56,8 +56,8 @@ commands:
     dependencies_setup:
         steps:
             - restore_cache:
-                  name: "Cache: Restore dependencies"
-                  key: *dependencies-cache-key
+                  name: "Cache: Restore (venv) dependencies"
+                  key: *venv-dependencies-cache-key
 
             - run:
                   name: "Install dependencies"
@@ -67,13 +67,14 @@ commands:
 
                       pip3 install --upgrade pip
                       pip3 install poetry
+
                       poetry install
 
             - save_cache:
-                  name: "Cache: Save dependencies"
+                  name: "Cache: Save (venv) dependencies"
                   paths:
-                      - ~/.cache/pypoetry/virtualenvs
-                  key: *dependencies-cache-key
+                      - .venv/
+                  key: *venv-dependencies-cache-key
 
     run_tests:
         steps:

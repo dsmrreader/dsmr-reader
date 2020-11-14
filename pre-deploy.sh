@@ -3,11 +3,11 @@
 echo ""
 echo ""
 echo " --- You are currently running version: "
-python -c 'import dsmrreader ; print(dsmrreader.__version__)'
+poetry run python -c 'import dsmrreader ; print(dsmrreader.__version__)'
 
 if [ $? -ne 0 ]; then
     echo ""
-    echo "     [!] FAILED to call Django (did you activate the 'dsmrreader' VirtualEnv before running?)"
+    echo "     [!] FAILED to call Django (are Poetry and Django installed correctly?)"
     echo ""
     exit 1;
 fi

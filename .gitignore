@@ -1,8 +1,10 @@
 /.pydevproject
 /.project
 /.idea
+/.venv
 *.pyc
 **/__pycache__
+**/.pytest_cache
 **/.coverage
 **/.env
 /dsmrreader/settings.py

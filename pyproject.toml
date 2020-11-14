@@ -41,6 +41,7 @@ pyyaml = "^5.3"
 requests = "^2.24"
 urllib3 = "^1.25"
 
+
 [tool.poetry.dev-dependencies]
 polib = "^1.1"
 pylama = "^7.7"

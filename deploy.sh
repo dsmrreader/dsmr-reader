@@ -16,7 +16,7 @@ fi
 echo ""
 echo ""
 echo " --- Checking Python version."
-./check_python_version.py
+poetry run ./check_python_version.py
 
 if [ $? -ne 0 ]; then
     echo "[!] Aborting deployment"
@@ -51,7 +51,7 @@ fi
 echo ""
 echo ""
 echo " --- Deployed version: "
-python -c 'import dsmrreader ; print(dsmrreader.__version__)'
+poetry run python -c 'import dsmrreader ; print(dsmrreader.__version__)'
 
 
 echo ""

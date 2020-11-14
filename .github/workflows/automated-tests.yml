@@ -59,19 +59,18 @@ jobs:
       - name: Install APT dependencies
         run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
-      - name: Cached dependencies
+      - name: Cached (venv) dependencies
         uses: actions/cache@v2.1.2
         with:
           path: |
-            ~/.cache/pypoetry/virtualenvs
-          key: dependencies-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/poetry.lock') }}
+            $GITHUB_WORKSPACE/.venv/
+          key: dependencies-venv-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/poetry.lock') }}
 
-      - name: Install dependencies
+      - name: Install (venv) dependencies
         run: |
           pip install --upgrade pip
           pip3 install poetry
           poetry install
-          poetry env info --path
 
       - name: Check pylama
         run: poetry run pylama
