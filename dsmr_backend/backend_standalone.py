@@ -12,12 +12,13 @@ sys.path.append(projectdir)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dsmrreader.settings")
 
-import django
-from django.conf import settings
+import django  # noqa: E402
+# from django.conf import settings
 django.setup()
 
-from dsmr_backend.backend_runner import *
-from django.utils.translation import gettext as _
+from dsmr_backend.backend_runner import run_mule  # noqa: E402
+from django.utils.translation import gettext as _  # noqa: E402
+
 
 def add_arguments(parser):
     parser.add_argument(
@@ -27,6 +28,7 @@ def add_arguments(parser):
         default=False,
         help=_('Forces single run, overriding Infinite Command mixin')
     )
+
 
 if __name__ == "__main__":
     add_arguments(parser)
