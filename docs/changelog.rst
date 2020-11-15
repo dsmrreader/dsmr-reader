@@ -15,12 +15,14 @@ v4.x releases
     :depth: 1
 
 
-v4.7.1 - 2020-11-15
+v4.8.0 - 2020-11-15
 -------------------
 
 - ``Added``: Monitoring toevoegen voor dagstatistieken [`#1199 <https://github.com/dsmrreader/dsmr-reader/issues/1199>`_]
 
 - ``Fixed``: Dagstatistieken worden niet gegenereerd na uitschakelen gas [`#1197 <https://github.com/dsmrreader/dsmr-reader/issues/1197>`_]
+
+- ``Changed``: Dependencies update
 
 
 v4.7.0 - 2020-11-09

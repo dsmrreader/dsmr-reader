@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Dump for DSMR-reader v4.7.1
+# Dump for DSMR-reader v4.8.0
 ./manage.py migrate dsmr_api 0003_create_api_user
 ./manage.py migrate dsmr_backend 0015_backend_restart_required
 ./manage.py migrate dsmr_backup 0012_increase_dropbox_token_length
