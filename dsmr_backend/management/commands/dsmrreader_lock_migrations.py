@@ -13,10 +13,14 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):
         if not settings.DEBUG:
             raise CommandError('DEVELOPMENT ONLY')
 
+        # In this situation we'd like the version string to be 'v1.2.0' instead of 'v1.2'
+        version_string = settings.DSMRREADER_VERSION \
+            if settings.DSMRREADER_VERSION.count('.') == 2 else '{}.0'.format(settings.DSMRREADER_VERSION)
+
         current_app = None
         latest_line = None
         lock_content = "#!/usr/bin/env bash\n\n"
-        lock_content += "# Dump for DSMR-reader v{}\n".format(settings.DSMRREADER_VERSION)
+        lock_content += "# Dump for DSMR-reader v{}\n".format(version_string)
 
         for line in self._intercept_command_stdout('showmigrations', no_color=True).split("\n"):
             if line.startswith(' [ ]'):
@@ -36,7 +40,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):
             latest_line = line
 
         file_path = os.path.abspath(os.path.join(
-            settings.BASE_DIR, 'provisioning/downgrade', 'v{}.sh'.format(settings.DSMRREADER_VERSION)
+            settings.BASE_DIR, 'provisioning/downgrade', 'v{}.sh'.format(version_string)
         ))
         with open(file_path, 'w') as handle:
             handle.write(lock_content)
