@@ -59,10 +59,8 @@ class backend_runner(InfiniteManagementCommandMixin):
 
 def run_mule(**options):
     # 'with' statement ensures graceful cleanup by utilizing __exit__
-    print("running mule")
     with backend_runner() as backend_runner_obj:
         backend_runner_obj.handle(**options)
-    print("done")
 
 
 if __name__ == "__main__":

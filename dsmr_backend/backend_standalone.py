@@ -13,7 +13,6 @@ sys.path.append(projectdir)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dsmrreader.settings")
 
 import django  # noqa: E402
-# from django.conf import settings
 django.setup()
 
 from dsmr_backend.backend_runner import run_mule  # noqa: E402
