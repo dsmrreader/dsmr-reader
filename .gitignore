@@ -17,3 +17,4 @@
 /dsmr_plugins/modules/
 /Pipfile
 /Pipfile.lock
+/manage_mule.py
