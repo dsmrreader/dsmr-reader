@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import os
 import logging
-
-from django.conf import settings
-from django.core.management.base import BaseCommand
 
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.mixins import InfiniteManagementCommandMixin, StopInfiniteRun
@@ -13,6 +9,7 @@ import dsmr_backend.services.schedule
 
 
 logger = logging.getLogger('dsmrreader')
+
 
 class backend_runner(InfiniteManagementCommandMixin):
     def __init__(self):
@@ -36,7 +33,6 @@ class backend_runner(InfiniteManagementCommandMixin):
 
         self.persistent_clients = dsmr_backend.services.persistent_clients.initialize()
         logger.debug('Persistent clients initialized: %s', [x.__class__ for x in self.persistent_clients])
-
 
     def shutdown(self):
         """ Disconnects the client(s) gracefully. """

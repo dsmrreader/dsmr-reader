@@ -2,15 +2,15 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from dsmr_backend.mixins import InfiniteManagementCommandMixin, StopInfiniteRun
+from dsmr_backend.mixins import InfiniteManagementCommandMixin
 
-from dsmr_backend.backend_runner import *
+from dsmr_backend.backend_runner import run_mule
 
 
 logger = logging.getLogger('dsmrreader')
 
 
-class Command(InfiniteManagementCommandMixin,BaseCommand):
+class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = 'Backend operations in a persistent process'
 
     def handle(self, *args, **kwargs):
