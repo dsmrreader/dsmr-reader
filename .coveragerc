@@ -3,6 +3,7 @@ branch = True
 include = ./*
 
 omit = ./*/__init__.py
+  ./.venv/*
   ./*/tests/*
   ./*/migrations/*
   ./dsmr_backend/mixins.py
