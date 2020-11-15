@@ -165,7 +165,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
     def _print_start(self):
         self.stdout.write()
-        self.stdout.write('<--- COPY OUTPUT BELOW (DO NOT INCLUDE THIS LINE) --->')
+        self.stdout.write('<!-- COPY OUTPUT BELOW -->')
         self.stdout.write()
         self.stdout.write()
         self.stdout.write('```')
@@ -184,5 +184,5 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self.stdout.write()
         self.stdout.write('```')
         self.stdout.write()
-        self.stdout.write('<--- COPY OUTPUT ABOVE (DO NOT INCLUDE THIS LINE) --->')
+        self.stdout.write('<!-- COPY OUTPUT ABOVE -->')
         self.stdout.write()

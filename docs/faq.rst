@@ -13,15 +13,35 @@ Troubleshooting
 .. contents:: :local:
     :depth: 1
 
-.. note::
+.. tip::
 
     If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue.
+
+
+Debug info dump for Github issues
+---------------------------------
+
+.. note::
+
+    .. versionadded:: 4.4.0
+
+        Added the ``dsmr_debuginfo`` command for command line.
+
+    .. versionadded:: 4.6.0
+
+        Added the ``dsmr_debuginfo`` feature to About & Support page.
+
+You can supply additional debug info by executing the ``dsmr_debuginfo`` command and copying its output into your issue on Github.
+
+To do so you can either execute ``./manage.py dsmr_debuginfo`` on the command line or (since v4.6) click the button on the About & Support page.
 
 
 Log files
 ---------
 
-Always start by checking the log files for errors.
+.. tip::
+
+    Always start by checking the log files for errors.
 
 DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:
 
@@ -68,22 +88,6 @@ Any processes listed, should have the status ``RUNNING``. Stale or crashed proce
 Or to restart them all simultaneously::
 
     sudo supervisorctl restart all
-
-
-Debug info dump for Github issues
----------------------------------
-You can supply additional debug info by executing the "**dsmr_debuginfo**" command and copying its output into your issue on Github.
-
-.. note::
-
-    The "**dsmr_debuginfo**" command is available since DSMR-reader v4.4 and higher.
-
-Execute the following command::
-
-    sudo su - dsmr
-    ./manage.py dsmr_debuginfo
-
-Copy its output to your Github issue.
 
 
 Logging levels
