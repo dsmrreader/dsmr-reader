@@ -61,7 +61,3 @@ def run_mule(**options):
     # 'with' statement ensures graceful cleanup by utilizing __exit__
     with backend_runner() as backend_runner_obj:
         backend_runner_obj.handle(**options)
-
-
-if __name__ == "__main__":
-    run_mule()
