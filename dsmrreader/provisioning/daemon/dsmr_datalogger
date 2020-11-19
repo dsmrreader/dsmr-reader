@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# PROVIDE: dsmr_datalogger
+# REQUIRE: NETWORKING SERVERS
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=dsmr_datalogger
+rcvar=dsmr_datalogger_enable
+pidfile="/var/run/dsmr_datalogger.pid"
+
+command=/usr/sbin/daemon
+command_args="-R 10 -u dsmr -P ${pidfile} -f /usr/local/www/dsmr/.venv/bin/python /usr/local/www/dsmr/dsmr_datalogger_api_client.py"
+
+#stop_cmd="dsmr_backend_stop"
+
+load_rc_config $name
+: ${dsmr_backend_enable:=no}
+
+#dsmr_backend_stop()
+#{
+#  pkill -f dsmr_backend
+#}
+
+run_rc_command "$1"
+
