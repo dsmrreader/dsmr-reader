@@ -573,6 +573,7 @@ Then add the following contents to ``/home/dsmr/.env``::
     DATALOGGER_INPUT_METHOD=serial
     DATALOGGER_SERIAL_PORT=/dev/ttyUSB0
     DATALOGGER_SERIAL_BAUDRATE=115200
+    DATALOGGER_DSMR_VERSION=4 # Or 2, depending on your meter model. 
 
 When using a different port or baud rate, change the ``DATALOGGER_SERIAL_PORT`` / ``DATALOGGER_SERIAL_BAUDRATE`` values accordingly.
 
