@@ -122,11 +122,11 @@ def main():  # noqa: C901
     )
 
     if DATALOGGER_INPUT_METHOD == 'serial':
-        bytesize=serial.EIGHTBITS
-        parity=serial.PARITY_NONE
+        bytesize = serial.EIGHTBITS
+        parity = serial.PARITY_NONE
         if decouple.config('DATALOGGER_DSMR_VERSION') == 2:
-            bytesize=serial.SEVENBITS
-            parity=serial.PARITY_EVEN
+            bytesize = serial.SEVENBITS
+            parity = serial.PARITY_EVEN
         serial_kwargs.update(dict(
             url_or_port=decouple.config('DATALOGGER_SERIAL_PORT'),
             baudrate=decouple.config('DATALOGGER_SERIAL_BAUDRATE', cast=int),
