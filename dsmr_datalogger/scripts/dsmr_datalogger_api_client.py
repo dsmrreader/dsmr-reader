@@ -124,7 +124,7 @@ def main():  # noqa: C901
     if DATALOGGER_INPUT_METHOD == 'serial':
         bytesize = serial.EIGHTBITS
         parity = serial.PARITY_NONE
-        if decouple.config('DATALOGGER_DSMR_VERSION') == 2:
+        if decouple.config('DATALOGGER_DSMR_VERSION', cast=int) == 2:
             bytesize = serial.SEVENBITS
             parity = serial.PARITY_EVEN
         serial_kwargs.update(dict(
