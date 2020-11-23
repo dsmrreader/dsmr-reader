@@ -23,6 +23,7 @@ import dsmr_datalogger.scripts.dsmr_datalogger_api_client
     DATALOGGER_TIMEOUT='0.123',
     DATALOGGER_SLEEP='0.1',
     DATALOGGER_MIN_SLEEP_FOR_RECONNECT='999',
+    DATALOGGER_DSMR_VERSION='4',
 
 ))
 class TestScript(TestCase):
