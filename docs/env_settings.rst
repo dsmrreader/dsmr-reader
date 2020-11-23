@@ -5,8 +5,6 @@ Env Settings
     :depth: 2
 
 
-You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
-
 .. attention::
 
     The following settings have been **renamed** since DSMR-reader ``v4.5``, but are still available.
@@ -38,10 +36,16 @@ You can either specify the following settings as system environments variables o
     | ``DSMR_PASSWORD``     | ``DSMRREADER_ADMIN_PASSWORD``        |
     +-----------------------+--------------------------------------+
 
+.. contents::
+    :depth: 2
 
 
 Django settings/overrides
 -------------------------
+
+.. hint::
+
+    You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
 
 DSMR-reader utilizes the Python Django framework.
 All settings below directly affect or override Django, and therefor your DSMR-reader installation as well.
@@ -354,6 +358,10 @@ The timezone Django should use. Alter at your own risk. Omit to use the default,
 DSMR-reader settings
 --------------------
 
+.. hint::
+
+    You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
+
 These settings are for DSMR-reader only.
 
 .. contents:: :local:
@@ -382,7 +390,7 @@ The username of the **webinterface** (super)user to create when running ``./mana
 ``DSMRREADER_ADMIN_PASSWORD``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The password of the ``DSMR_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``.
+The password of the ``DSMRREADER_ADMIN_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``.
 
 .. hint::
 

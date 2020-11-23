@@ -311,8 +311,8 @@ msgid "Sync static files::"
 msgstr "Synchroniseer statische bestanden::"
 
 #: ../../installation.rst:353
-msgid "Create an application superuser with the following command. The ``DSMR_USER`` and ``DSMR_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials."
-msgstr "Maak een applicatie superuser aan met het volgende commando. De ``DSMR_USER`` en ``DSMR_PASSWORD`` :doc:`zoals ze in de Env-instellingen<../env_settings>` staan, worden daarbij gebruikt als inloggegevens."
+msgid "Create an application superuser with the following command. The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials."
+msgstr "Maak een applicatie superuser aan met het volgende commando. De ``DSMRREADER_ADMIN_USER`` en ``DSMRREADER_ADMIN_PASSWORD`` :doc:`zoals ze in de Env-instellingen<../env_settings>` staan, worden daarbij gebruikt als inloggegevens."
 
 #: ../../installation.rst:360
 msgid "You've almost completed the installation now."

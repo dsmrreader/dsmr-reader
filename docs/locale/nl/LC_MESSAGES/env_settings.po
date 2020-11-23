@@ -310,8 +310,8 @@ msgid "Former ``DSMR_USER`` env var."
 msgstr "Voormalige ``DSMR_USER`` env var."
 
 #: ../../env_settings.rst:385
-msgid "The password of the ``DSMR_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``."
-msgstr "Het gewenste wachtwoord voor de ``DSMR_USER`` gebruiker, bij aanmaken of updaten van de gebruiker. Voor wanneer je ``./manage.py dsmr_superuser`` uitvoert."
+msgid "The password of the ``DSMRREADER_ADMIN_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``."
+msgstr "Het gewenste wachtwoord voor de ``DSMRREADER_ADMIN_USER`` gebruiker, bij aanmaken of updaten van de gebruiker. Voor wanneer je ``./manage.py dsmr_superuser`` uitvoert."
 
 #: ../../env_settings.rst:395
 msgid "Former ``DSMR_PASSWORD`` env var."
@@ -348,45 +348,3 @@ msgstr "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
 #: ../../env_settings.rst:446
 msgid "Whether to suppress any warnings regarding too many readings stored or the database size. Set it to ``True`` to disable the warnings or omit it to use the default (``False``). Suppress at your own risk."
 msgstr "Gebruik dit om waarschuwingen over \"te veel opgeslagen metingen\" of een \"te grote database\" te onderdrukken. Stel in op ``True`` om deze waarschuwingen uit te schakelen of laat het weg om de standaardwaarde (``False``) te gebruiken. Gebruik op eigen risico."
-
-#~ msgid "``DJANGO_SECRET_KEY`` (``SECRET_KEY``)"
-#~ msgstr "``DJANGO_SECRET_KEY`` (``SECRET_KEY``)"
-
-#~ msgid "``DJANGO_DATABASE_ENGINE`` (``DB_ENGINE``)"
-#~ msgstr "``DJANGO_DATABASE_ENGINE`` (``DB_ENGINE``)"
-
-#~ msgid "``DJANGO_DATABASE_HOST`` (``DB_HOST``)"
-#~ msgstr "``DJANGO_DATABASE_HOST`` (``DB_HOST``)"
-
-#~ msgid "``DJANGO_DATABASE_PORT`` (``DB_PORT``)"
-#~ msgstr "``DJANGO_DATABASE_PORT`` (``DB_PORT``)"
-
-#~ msgid "``DJANGO_DATABASE_NAME`` (``DB_NAME``)"
-#~ msgstr "``DJANGO_DATABASE_NAME`` (``DB_NAME``)"
-
-#~ msgid "``DJANGO_DATABASE_USER`` (``DB_USER``)"
-#~ msgstr "``DJANGO_DATABASE_USER`` (``DB_USER``)"
-
-#~ msgid "``DJANGO_DATABASE_PASSWORD`` (``DB_PASS``)"
-#~ msgstr "``DJANGO_DATABASE_PASSWORD`` (``DB_PASS``)"
-
-#~ msgid "``DJANGO_DATABASE_CONN_MAX_AGE`` (``CONN_MAX_AGE``)"
-#~ msgstr "``DJANGO_DATABASE_CONN_MAX_AGE`` (``CONN_MAX_AGE``)"
-
-#~ msgid "``DJANGO_TIME_ZONE`` (``TZ``)"
-#~ msgstr "``DJANGO_TIME_ZONE`` (``TZ``)"
-
-#~ msgid "``DSMRREADER_ADMIN_USER`` (``DSMR_USER``)"
-#~ msgstr "``DSMRREADER_ADMIN_USER`` (``DSMR_USER``)"
-
-#~ msgid "``DSMRREADER_ADMIN_PASSWORD`` (``DSMR_PASSWORD``)"
-#~ msgstr "``DSMRREADER_ADMIN_PASSWORD`` (``DSMR_PASSWORD``)"
-
-#~ msgid "**Required setting**"
-#~ msgstr "**Vereiste instelling**"
-
-#~ msgid "**Optional setting**"
-#~ msgstr "**Optionele instelling**"
-
-#~ msgid "**Situational setting**"
-#~ msgstr "**Situationele instelling**"

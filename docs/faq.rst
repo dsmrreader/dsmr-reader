@@ -233,18 +233,21 @@ Optionally, you can remove these packages::
 How do I set admin credentials?
 -------------------------------
 
-.. seealso::
+.. hint::
 
-    :doc:`Env Settings<env_settings>`.
+    There is no default user or password. You will need to set it yourself in your ``.env`` file or system environment variables.
 
-Configure ``DSMR_USER`` and ``DSMR_PASSWORD`` of the :doc:`Env Settings<env_settings>`.
+Creating or updating credentials:
 
-Now execute::
+- Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings<env_settings>`.
+
+
+- Now execute::
 
     sudo su - dsmr
     ./manage.py dsmr_superuser
 
-The user should either be created or the existing user should have its password updated.
+- The user should now either be created or the existing user should have its password updated.
 
 ----
 
