@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
     https://dsmr-reader.readthedocs.io/en/latest/installation/datalogger.html
 
