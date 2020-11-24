@@ -417,6 +417,7 @@ If you're seeing this error::
 
 Just delete the PID file and restart the webinterface::
 
+    sudo rm /var/tmp/gunicorn--dsmr_webinterface.pid
     sudo supervisorctl restart dsmr_webinterface
 
 
