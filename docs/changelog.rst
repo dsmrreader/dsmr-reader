@@ -18,6 +18,7 @@ v4.x releases
 v4.9.0 - 2020-xx-xx
 -------------------
 
+- ``Changed``: Remote datalogger serial settings - by @JoooostB [`#1215 <https://github.com/dsmrreader/dsmr-reader/issues/1215>`_]
 
 
 v4.8.0 - 2020-11-15
