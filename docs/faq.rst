@@ -257,16 +257,30 @@ Database
 .. contents:: :local:
     :depth: 1
 
+
+How do I resolve the warning regarding database size?
+-----------------------------------------------------
+
+You will need to reduce the amount of incoming data and also enable a data retention policy.
+
+- First increase the datalogger sleep in the configuration panel. Make sure it's at least 5 or 10 seconds.
+- Secondly, enable data retention policy in the configuration as well. A recommended setting is having DSMR-reader clean up data after a week or month.
+
+After a few hours or days (depending on your hardware) the data should been reduced.
+Depending on the amount of data deleted, you might want to execute a one-time ``vacuumdb`` afterwards. See below for more information.
+
+
 How do I reclaim database disk space?
 -------------------------------------
+
 .. note::
 
-    This will only make a difference if you've enabled data cleanup retroactively, resulting in more than a 25 percent data deletion of your entire database.
+    This will only make a difference if you've enabled data cleanup retroactively, resulting in roughly more than a 25 percent data deletion of your entire database.
 
 Assuming you are using the default database, PostgreSQL, you may want to try a one-time vacuum by executing::
 
     sudo su - postgres
-    vacuumdb -f -v -d dsmrreader
+    vacuumdb -f -v -z -d dsmrreader
 
 If there was any disk space to reclaim, the effect should be visible on the filesystem now.
 
