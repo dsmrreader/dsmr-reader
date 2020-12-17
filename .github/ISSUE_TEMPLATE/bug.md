@@ -1,5 +1,5 @@
 ---
-name: Ik wil een fout melden 🚨
+name: 🚨 Ik wil een fout melden
 about: Je loopt tegen een fout aan die je zelf niet opgelost krijgt of je wilt iets anders melden wat niet helemaal lijkt te kloppen.
 title: ''
 labels: bug
