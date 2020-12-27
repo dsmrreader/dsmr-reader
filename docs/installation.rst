@@ -92,11 +92,6 @@ Continue::
     sudo -u dsmr cp /home/dsmr/dsmr-reader/.env.template /home/dsmr/dsmr-reader/.env
     sudo -u dsmr /home/dsmr/dsmr-reader/tools/generate-secret-key.sh
 
-    # Open /home/dsmr/dsmr-reader/.env and enter the superuser credentials
-    # you wish to use, when running 'manage.py dsmr_superuser' later.
-    DSMRREADER_ADMIN_USER=???
-    DSMRREADER_ADMIN_PASSWORD=???
-
     # Requirements
     sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
 
@@ -118,10 +113,10 @@ Continue::
     sudo supervisorctl reread
     sudo supervisorctl update
 
-    # Create (super)user with the values in DSMRREADER_ADMIN_USER and
-    # DSMRREADER_ADMIN_PASSWORD as defined in one of the previous steps.
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py dsmr_superuser
+    # Create (super)user for the DSMR-reader configuration webinterface
+    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --email dsmr@localhost --username admin
 
+    # You will be asked to choose and enter a password twice. The email address is not used.
 
 .. seealso::
 
@@ -352,17 +347,18 @@ It allows us to have Nginx serve static files outside our project/code root.
     ./manage.py collectstatic --noinput
 
 Create an application superuser with the following command.
-The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials.
 
 Execute::
 
-    ./manage.py dsmr_superuser
+    ./manage.py createsuperuser --email dsmr@localhost --username admin
 
-You've almost completed the installation now.
+    # You will be asked to choose and enter a password twice. The email address is not used.
 
 
 9. Webserver/Nginx (part 2)
 ---------------------------
+
+You've almost completed the installation now.
 
 .. note::
 
@@ -374,7 +370,7 @@ You've almost completed the installation now.
 
 Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::
 
-        sudo rm /etc/nginx/sites-enabled/default
+    sudo rm /etc/nginx/sites-enabled/default
 
 - Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::
 
