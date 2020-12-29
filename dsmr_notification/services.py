@@ -230,8 +230,8 @@ def check_status():
 
     with translation.override(language=BackendSettings.get_solo().language):
         send_notification(
-            str(_('It has been over {} hour(s) since the last reading received. Please check your datalogger.'.format(
-                settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
+            str(_('It has been over {} minutes since the last reading received. Please check your datalogger.'.format(
+                settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES
             ))),
             str(_('Datalogger check'))
         )
