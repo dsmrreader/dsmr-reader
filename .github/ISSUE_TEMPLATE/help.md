@@ -2,7 +2,7 @@
 name: 😩 Ik heb hulp nodig
 about: Je hebt hulp nodig voor een probleem waar je tegenaan loopt en zelf niet uit komt. Bijvoorbeeld bij de installatie of het instellen van de applicatie.
 title: ''
-labels: ''
+labels: question
 assignees: ''
 
 ---

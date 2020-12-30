@@ -1,5 +1,7 @@
 """
-    This used to be the local settings file until DSMR-reader 4.x.
-    Please use .env instead. See: https://dsmr-reader.readthedocs.io/en/latest/faq/v4_upgrade.html
+    For advanced users only, override any other settings (unavailable as env var) by defining them at the end of this file.
 """
 from dsmrreader.config.production import *
+
+
+# Add any overrides below this line and restart/reload the application with: ./reload.sh

@@ -9,8 +9,9 @@ assignees: ''
 
 <!--
 Om je goed te helpen:
-- Zoek eerst in bestaande (of gesloten) issues of je suggestie al aan bod is geweest. 
-  De kans is groot dat iemand het al eerder heeft gevraagd: https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed
+- Zoek eerst in bestaande (of gesloten) issues of je suggestie al aan bod is geweest.
+  Een hoop goede ideeën zijn vaak namelijk al voorgelegd maar wachten op implementatie of vallen buiten de scope van het project. 
+  https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed
 
 Alle suggesties zijn welkom maar houd er rekening mee dat:
 - De kern van DSMR-reader is puur het uitlezen van je slimme meter en het weergeven van die gegevens.

@@ -264,7 +264,7 @@ msgstr "Er zijn geen standaard inloggegevens. Je zult deze zelf moeten instellen
 msgid "Manual installation"
 msgstr "Handmatige installatie"
 
-#: ../../faq.rst:244 ../../faq.rst:267
+#: ../../faq.rst:244 ../../faq.rst:26
 msgid "Now execute::"
 msgstr "Voer uit::"
 
