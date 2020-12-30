@@ -43,16 +43,20 @@ Env Settings
 Django settings/overrides
 -------------------------
 
-.. hint::
-
-    You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
-
 DSMR-reader utilizes the Python Django framework.
 All settings below directly affect or override Django, and therefor your DSMR-reader installation as well.
 
+
+.. tip::
+
+    You can either specify the following settings:
+
+    - in a ``.env`` file in the root of the DSMR-reader project folder (manual installations)
+    - or as system environments variables (Docker installations)
+
+
 .. contents:: :local:
     :depth: 1
-
 
 
 ``DJANGO_SECRET_KEY``
@@ -358,11 +362,16 @@ The timezone Django should use. Alter at your own risk. Omit to use the default,
 DSMR-reader settings
 --------------------
 
-.. hint::
-
-    You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder.
-
 These settings are for DSMR-reader only.
+
+
+.. tip::
+
+    You can either specify the following settings:
+
+    - in a ``.env`` file in the root of the DSMR-reader project folder (manual installations)
+    - or as system environments variables (Docker installations)
+
 
 .. contents:: :local:
     :depth: 1
