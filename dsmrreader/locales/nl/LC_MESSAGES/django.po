@@ -679,7 +679,7 @@ msgid "Data retention policy"
 msgstr "Dataretentiebeleid"
 
 msgid "The lifetime of source readings and consumption records. Day and hour statistics will always be preserved indefinitely."
-msgstr "De levensduur van bronmetingen en verbruik. Dat- en uurstatistieken worden nooit verwijderd."
+msgstr "De levensduur van bronmetingen en verbruik. Dag- en uurstatistieken worden nooit verwijderd."
 
 msgid "Retention configuration"
 msgstr "Retentieconfiguratie"
