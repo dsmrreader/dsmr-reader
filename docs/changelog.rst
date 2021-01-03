@@ -19,6 +19,7 @@ v4.10.0 - 2021-xx-xx
 --------------------
 
 - ``Fixed``: Melding over ontbreken recente "readings" lijkt niet juist [`#1240 <https://github.com/dsmrreader/dsmr-reader/issues/1240>`_]
+- ``Fixed``: Small typo in retention policy explanation - by @matgeroe [`#1244 <https://github.com/dsmrreader/dsmr-reader/issues/1244>`_]
 
 
 v4.9.0 - 2020-12-06
