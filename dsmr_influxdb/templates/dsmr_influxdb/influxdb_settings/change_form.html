@@ -1,0 +1,32 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+
+{% block field_sets %}
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+        <p>
+            {% blocktranslate %}This integration is meant to synchronize the (parsed) source DSMR readings to your InfluxDB, in order to aggregate the data yourself. Other data or non DSMR reading fields are not supported.{% endblocktranslate %}
+        </p>
+    </div>
+
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+        <p>
+            {% blocktranslate %}Enabling this integration will only sync new readings. In order to export your existing readings retroactively, use the following utility{% endblocktranslate %}:
+        </p>
+        <pre>
+sudo su - dsmr
+./manage.py dsmr_influxdb_export_all_readings --to-influx-database dsmrreader-export
+./manage.py dsmr_influxdb_export_all_readings --to-influx-database dsmrreader-export --max-batches 100
+        </pre>
+        <p>
+            {% blocktranslate %}Always export to a separate InfluxDB database first and verify the result. There is no detection for existing duplicate data (except for the data being exported), so you may want to consider switching between InfluxDB databases after export.{% endblocktranslate %}
+        </p>
+        <p>
+            {% blocktranslate %}Also, due to (memory) limitations the data will need to be synced in batches. Each batch consists of 100 readings and the number of batches per run defaults to 50. You may define the number of batches to sync for each run. You may try using a higher number of batches per run (see above), but increasing it may eventually decrease performance.{% endblocktranslate %}
+            {% blocktranslate %}You will need to keep executing the command untill there is no more data to sync. The progress will be stored in InfluxDB in an "export_progress_meta" measurement. See <a href="https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073" target="_blank">Issue #1055</a> for more details and tips on how to easily automate this.{% endblocktranslate %}
+        </p>
+    </div>
+
+    {{ block.super }}
+
+{% endblock %}

@@ -8,25 +8,27 @@ from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasuremen
 
 @admin.register(InfluxdbIntegrationSettings)
 class InfluxdbIntegrationSettingsAdmin(SingletonModelAdmin):
+    change_form_template = 'dsmr_influxdb/influxdb_settings/change_form.html'
     fieldsets = (
         (
             None, {
                 'fields': ['enabled', 'hostname', 'port', 'secure', 'username', 'password', 'database'],
                 'description': _(
                     'The backend process should automatically restart to apply changes. To manually restart, '
-                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
+                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq.html">FAQ</a>.'
                 )
             }
         ),
         (
             _('Mapping'), {
                 'fields': ['formatting'],
-                'description': _(
+                'description':
                     '''Example:
 <pre>
 ### [measurement_name]
-### DSMR-reader field 1 = InfluxDB field 1
-### DSMR-reader field 2 = InfluxDB field 2
+### DSMR reading field 1 = InfluxDB field 1
+### DSMR reading field 2 = InfluxDB field 2
+### Only DSMR reading fields are supported
 
 [electricity_live]
 electricity_currently_delivered = currently_delivered
@@ -60,7 +62,7 @@ phase_power_current_l3 = current_l3
 extra_device_delivered = delivered
 </pre>
 '''
-                )
+
             }
         ),
     )

@@ -15,7 +15,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
                 'fields': ['enabled', 'hostname', 'port', 'secure', 'client_id'],
                 'description': _(
                     'The backend process should automatically restart to apply changes. To manually restart, '
-                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
+                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq.html">FAQ</a>.'
                 )
             }
         ),

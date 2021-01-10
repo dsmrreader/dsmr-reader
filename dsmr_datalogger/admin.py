@@ -24,7 +24,7 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
                 'fields': ['input_method', 'dsmr_version'],
                 'description': _(
                     'The datalogger process should automatically restart to apply changes. To manually restart, '
-                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
+                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq.html">FAQ</a>.'
                 )
             }
         ),
@@ -50,7 +50,7 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
                 ],
                 'description': _(
                     'The datalogger process should automatically restart to apply changes. To manually restart, '
-                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq/restart_processes.html">FAQ</a>.'
+                    'see the <a href="https://dsmr-reader.readthedocs.io/nl/v4/faq.html">FAQ</a>.'
                 )
             }
         ),

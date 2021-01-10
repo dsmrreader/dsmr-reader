@@ -29,7 +29,7 @@ class Command(BaseCommand):
             action='store',
             dest='to_influx_database',
             metavar='some_influxdb_database',
-            help='The InfluxDB database to export to. Always try this export to a separate database first!',
+            help='The InfluxDB database to export to. Always try to export to a separate test database first!',
             required=True
         )
         parser.add_argument(
@@ -59,7 +59,9 @@ class Command(BaseCommand):
         logger.info('INFLUXDB EXPORT: Connecting to InfluxDB (ignore database name logged)')
         self.influxdb_client = dsmr_influxdb.services.initialize_client()
 
-        logger.info('INFLUXDB EXPORT: Using "%s" as export database, creating it', target_influx_database)
+        logger.info(
+            'INFLUXDB EXPORT: Using "%s" as export InfluxDB database (creating it if needed)', target_influx_database
+        )
         self.influxdb_client.create_database(target_influx_database)
         self.influxdb_client.switch_database(target_influx_database)
 
@@ -69,7 +71,7 @@ class Command(BaseCommand):
         logger.info('INFLUXDB EXPORT: Listing mapped reading fields')
         reading_fields = self.list_reading_fields()
 
-        logger.info('INFLUXDB EXPORT: Fetching last PK synced')
+        logger.info('INFLUXDB EXPORT: Fetching last PK synced from export_progress_meta in InfluxDB')
         last_pk = self.fetch_last_pk_synced()
 
         logger.info(
@@ -112,7 +114,7 @@ class Command(BaseCommand):
             return 0
 
         timestamp, last_pk = result.raw['series'][0]['values'][0]
-        logger.info('INFLUXDB EXPORT: Last PK %d @ %s', last_pk, timestamp)
+        logger.info('INFLUXDB EXPORT: Last PK %d @ %s (export_progress_meta in InfluxDB)', last_pk, timestamp)
 
         return last_pk
 
