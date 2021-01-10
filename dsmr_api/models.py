@@ -9,8 +9,8 @@ class APISettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
     allow = models.BooleanField(
         default=False,
-        verbose_name=_('Allow API calls'),
-        help_text=_('Whether the API is available for use.')
+        verbose_name=_('Enable DSMR-reader API'),
+        help_text=_('When disabled it will reject incoming requests and return an HTTP 403 error')
     )
     auth_key = models.CharField(
         max_length=256,

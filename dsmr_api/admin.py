@@ -6,4 +6,4 @@ from .models import APISettings
 
 @admin.register(APISettings)
 class APISettingsAdmin(SingletonModelAdmin):
-    pass
+    change_form_template = 'dsmr_api/api_settings/change_form.html'

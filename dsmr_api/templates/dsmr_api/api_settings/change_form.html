@@ -1,0 +1,12 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+
+{% block field_sets %}
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+        {% blocktranslate %}You will only need to enable the DSMR-reader API when using the remote datalogger (see installation guide) of when manually sending data from/to DSMR-reader (usually for advanced users).{% endblocktranslate %}
+    </div>
+
+    {{ block.super }}
+
+{% endblock %}

@@ -15,11 +15,11 @@ msgstr ""
 msgid "API"
 msgstr "API"
 
-msgid "Allow API calls"
-msgstr "Sta API-calls toe"
+msgid "Enable DSMR-reader API"
+msgstr "Schakel DSMR-reader API in"
 
-msgid "Whether the API is available for use."
-msgstr "Geeft aan of de API beschikbaar is voor gebruik."
+msgid "When disabled it will reject incoming requests and return an HTTP 403 error"
+msgstr "Indien uitgeschakeld krijgen inkomende requests een HTTP 403 foutmelding terug van de DSMR-reader API."
 
 msgid "Auth Key"
 msgstr "Authenticatiesleutel"
@@ -29,6 +29,9 @@ msgstr "De authenticatiesleutel om toegang te krijgen tot deze API."
 
 msgid "API configuration"
 msgstr "API-configuratie"
+
+msgid "You will only need to enable the DSMR-reader API when using the remote datalogger (see installation guide) of when manually sending data from/to DSMR-reader (usually for advanced users)."
+msgstr "De API van DSMR-reader is alleen nodig wanneer je de remote datalogger gebruikt (zie installatiehandleiding) of wanneer je handmatig gegevens van/naar DSMR-reader stuurt (doorgaans voor geavanceerde gebruikers)."
 
 msgid "DSMR-reader"
 msgstr "DSMR-reader"
@@ -2638,6 +2641,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Allow API calls"
+#~ msgstr "Sta API-calls toe"
+
+#~ msgid "Whether the API is available for use."
+#~ msgstr "Geeft aan of de API beschikbaar is voor gebruik."
 
 #~ msgid "By minute"
 #~ msgstr "Per minuut"
