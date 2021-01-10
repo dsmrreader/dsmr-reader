@@ -93,8 +93,9 @@ def _map_telegram_to_model(parsed_telegram, data):
         )
     ]
 
+    datalogger_settings = DataloggerSettings.get_solo()
     model_fields = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
-    mapping = _get_dsmrreader_mapping(DataloggerSettings.get_solo().dsmr_version)
+    mapping = _get_dsmrreader_mapping(datalogger_settings.dsmr_version)
 
     for obis_ref, obis_data in parsed_telegram.items():
         try:
@@ -114,11 +115,24 @@ def _map_telegram_to_model(parsed_telegram, data):
     model_fields['electricity_delivered_2'] = model_fields['electricity_delivered_2'] or 0
     model_fields['electricity_returned_2'] = model_fields['electricity_returned_2'] or 0
 
-    # Hack for invalid dates on device bus. Reset the delivered value as well.
+    # Ignore invalid dates on device bus. Reset the delivered value as well. This MUST be checked before override below.
     if model_fields['extra_device_timestamp'] is None:
         model_fields['extra_device_delivered'] = None
 
-    # For some reason, there are telegrams generated with a timestamp in the far future. We should disallow that.
+    # This optional setting fixes some rare situations where the smart meter's internal clock is incorrect.
+    if datalogger_settings.override_telegram_timestamp:
+        now = timezone.now()
+
+        logger.debug("WARNING: Overriding telegram timestamps due to configuration")
+        model_fields['timestamp'] = now
+
+        if model_fields['extra_device_timestamp'] is not None:
+            # WARNING: So None (v2, v3, Fluvius) default to v4 behaviour.
+            is_v5 = model_fields['dsmr_version'] is not None and model_fields['dsmr_version'].startswith('5')
+
+            model_fields['extra_device_timestamp'] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
+
+    # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
     discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
 
     if model_fields['timestamp'] > discard_timestamp or (
@@ -210,10 +224,10 @@ def _get_dsmrreader_mapping(version):
 
 
 def postgresql_approximate_reading_count():  # pragma: nocover
+    """ A live count is too slow on huge datasets. Using reltuples is accurate enough for an approximate. """
     if connection.vendor != 'postgresql':
         return
 
-    # A live count is too slow on huge datasets, this is accurate enough:
     with connection.cursor() as cursor:
         cursor.execute(
             'SELECT reltuples as approximate_row_count FROM pg_class WHERE relname = %s;',
@@ -221,3 +235,17 @@ def postgresql_approximate_reading_count():  # pragma: nocover
         )
         reading_count = cursor.fetchone()[0]
         return int(reading_count)
+
+
+def calculate_fake_gas_reading_timestamp(now, is_dsmr_v5):
+    """ When overriding time, we cannot fake each gas reading to have its own timestamp. Simulate meters instead. """
+    now = now.replace(second=0, microsecond=0)
+
+    if not is_dsmr_v5:
+        # DSMR v4 should group by hour.
+        return now.replace(minute=0)
+
+    # Group by 5 minutes.
+    return now.replace(
+        minute=now.minute - now.minute % 5,
+    )

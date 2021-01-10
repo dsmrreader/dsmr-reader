@@ -72,7 +72,6 @@ def compact(dsmr_reading):
     dsmr_reading.processed = True
     dsmr_reading.save(update_fields=['processed'])
 
-    # For backend logging in Supervisor.
     logger.debug('Compact: Processed reading: %s', dsmr_reading)
 
 
@@ -83,6 +82,7 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
 
     if electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING:
         try:
+            # NO grouping, so the data will be stored as is.
             ElectricityConsumption.objects.get_or_create(
                 read_at=dsmr_reading.timestamp,
                 delivered_1=dsmr_reading.electricity_delivered_1,
@@ -119,12 +119,15 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
     grouped_reading = DsmrReading.objects.filter(
         timestamp__gte=reading_start, timestamp__lt=minute_end
     ).aggregate(
+        # Average Watt
         avg_delivered=Avg('electricity_currently_delivered'),
         avg_returned=Avg('electricity_currently_returned'),
+        # Take the most recent (highest) meter positions
         max_delivered_1=Max('electricity_delivered_1'),
         max_delivered_2=Max('electricity_delivered_2'),
         max_returned_1=Max('electricity_returned_1'),
         max_returned_2=Max('electricity_returned_2'),
+        # Average all other data.
         avg_phase_delivered_l1=Avg('phase_currently_delivered_l1'),
         avg_phase_delivered_l2=Avg('phase_currently_delivered_l2'),
         avg_phase_delivered_l3=Avg('phase_currently_delivered_l3'),
@@ -139,7 +142,6 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
         avg_phase_power_current_l3=Avg('phase_power_current_l3'),
     )
 
-    # This instance is the average/max and combined result.
     ElectricityConsumption.objects.create(
         read_at=minute_end,
         delivered_1=grouped_reading['max_delivered_1'],

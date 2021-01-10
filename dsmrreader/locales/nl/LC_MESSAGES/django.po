@@ -630,8 +630,8 @@ msgstr "DSMR-versie"
 msgid "The DSMR version your meter supports. Version should be printed on meter."
 msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
 
-msgid "For serial input: Serial port connected to smartmeter."
-msgstr "Voor uitlezen via een seriële poort: De seriële poort verbonden met de slimme meter."
+msgid "For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0"
+msgstr "Voor uitlezen via een seriële poort: De seriële poort verbonden met de slimme meter. Bijvoorbeeld: /dev/ttyUSB0"
 
 msgid "Network socket address"
 msgstr "Netwerk socket adres"
@@ -653,6 +653,12 @@ msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens 
 
 msgid "Whether the datalogger process requires a restart. It should occur automatically."
 msgstr "Geeft aan of het datalogger-proces een herstart vereist. Dit zou automatisch moeten gaan."
+
+msgid "Override telegram timestamp"
+msgstr "Overschrijf tijdstip van telegrammen"
+
+msgid "Whether DSMR-reader should IGNORE any timestamps of incoming telegrams and use the current timestamp instead. Use with care and only when your situation actually requires this!"
+msgstr "Geeft aan of DSMR-reader het tijdstip van inkomende telegrammen moet NEGEREN. In plaats daarvan wordt dan altijd het huidige tijdstip gebruikt. Wees voorzichtig! Alleen gebruiken wanneer jouw specifieke situatie dit vereist."
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"

@@ -18,6 +18,8 @@ v4.x releases
 v4.10.0 - 2020-xx-xx
 --------------------
 
+- ``Added``: Optie om datumtijd uit telegram te negeren [`#1233 <https://github.com/dsmrreader/dsmr-reader/issues/1233>`_]
+
 
 v4.9.0 - 2020-12-06
 -------------------

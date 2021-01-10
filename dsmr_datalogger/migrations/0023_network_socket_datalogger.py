@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dataloggersettings',
             name='serial_port',
-            field=models.CharField(blank=True, default='/dev/ttyUSB0', help_text='For serial input: Serial port connected to smartmeter.', max_length=196, null=True, verbose_name='Serial port'),
+            field=models.CharField(blank=True, default='/dev/ttyUSB0', help_text='For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0', max_length=196, null=True, verbose_name='Serial port'),
         ),
         migrations.AddField(
             model_name='dataloggersettings',

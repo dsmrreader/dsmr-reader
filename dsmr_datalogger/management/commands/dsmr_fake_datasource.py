@@ -65,7 +65,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             options['hour_offset']
         )
 
-        # Either write to port or just handle internally
+        # Either write to port or just handle internally (default behaviour)
         if options['serial_port']:
             logger.debug('Writing data to: %s', options['serial_port'])
             self._write_to_port(serial_port=options['serial_port'], data=telegram)
@@ -90,13 +90,6 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         """ Generates 'random' data, but in a way that it keeps incrementing. """
         now = timezone.now() + timezone.timedelta(hours=int(hour_offset))
         now = timezone.localtime(now)  # Must be local.
-
-        logger.debug('-' * 32)
-        logger.debug(str(now))
-        logger.debug('with gas: %s', with_gas)
-        logger.debug('with electricity returned: %s', with_electricity_returned)
-        logger.debug('-' * 32)
-        logger.debug('')
 
         current_unix_time = time.mktime(now.timetuple())
         second_since = int(current_unix_time - 1420070400)  # 1420070400: 01 Jan 2015 00:00:00 GMT
@@ -175,11 +168,16 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         ]
 
         if with_gas:
+            # Evens out the grouping per interval a bit.
+            gas_timestamp = dsmr_datalogger.services.datalogger.calculate_fake_gas_reading_timestamp(
+                now,
+                True
+            )
             data += [
                 "0-1:24.1.0(003)\r\n",
                 "0-1:96.1.0(12345678901234567890123456789001)\r\n",
                 "0-1:24.2.1({}W)({}*m3)\r\n".format(
-                    now.strftime('%y%m%d%H%M00'), self._round_precision(gas, 9)
+                    gas_timestamp.strftime('%y%m%d%H%M00'), self._round_precision(gas, 9)
                 ),
             ]
 
