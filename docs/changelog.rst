@@ -15,10 +15,12 @@ v4.x releases
     :depth: 1
 
 
-v4.10.0 - 2021-xx-xx
+v4.10.0 - 2021-01-xx
 --------------------
 
 - ``Added``: Optie om datumtijd uit telegram te negeren [`#1233 <https://github.com/dsmrreader/dsmr-reader/issues/1233>`_]
+
+- ``Changed``: Clarify grouping options in configuration [`#1249 <https://github.com/dsmrreader/dsmr-reader/issues/1249>`_]
 
 - ``Fixed``: Melding over ontbreken recente "readings" lijkt niet juist [`#1240 <https://github.com/dsmrreader/dsmr-reader/issues/1240>`_]
 - ``Fixed``: Small typo in retention policy explanation - by @matgeroe [`#1244 <https://github.com/dsmrreader/dsmr-reader/issues/1244>`_]

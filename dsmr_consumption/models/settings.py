@@ -11,12 +11,12 @@ class ConsumptionSettings(ModelUpdateMixin, SingletonModel):
     ELECTRICITY_GROUPING_BY_MINUTE = 2
     ELECTRICITY_GROUPING_CHOICES = (
         (ELECTRICITY_GROUPING_BY_READING, _('By reading (default)')),
-        (ELECTRICITY_GROUPING_BY_MINUTE, _('By minute')),
+        (ELECTRICITY_GROUPING_BY_MINUTE, _('By minute (recommended)')),
     )
     GAS_GROUPING_BY_CHANGE = 1
     GAS_GROUPING_BY_HOUR = 2
     GAS_GROUPING_CHOICES = (
-        (GAS_GROUPING_BY_CHANGE, _('On every change (default)')),
+        (GAS_GROUPING_BY_CHANGE, _('On every change (default & recommended)')),
         (GAS_GROUPING_BY_HOUR, _('Force grouping by hour')),
     )
 

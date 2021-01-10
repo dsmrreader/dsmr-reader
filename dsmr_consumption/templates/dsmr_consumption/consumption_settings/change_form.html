@@ -1,0 +1,19 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+
+{% block field_sets %}
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+        <p>
+            {% blocktranslate %}By default DSMR v4 smart meters emit around 6 telegrams per minute and update gas usage hourly.{% endblocktranslate %}
+            {% blocktranslate %}DSMR v5 smart meters emit around 60 telegrams per minute and update gas usage every 5 minutes.{% endblocktranslate %}
+            {% blocktranslate %}It also depend on the "Datalogger process sleep" set in the datalogger configuration.{% endblocktranslate %}
+        </p>
+        <p>
+            {% blocktranslate %}The grouping options below only affect the "Live graphs". You may consider using grouping by minute for electricity, to reduce the number of data points stored initially and displayed in the "Live graphs". Grouping has no effect on your daily stats.{% endblocktranslate %}
+        </p>
+    </div>
+
+    {{ block.super }}
+
+{% endblock %}

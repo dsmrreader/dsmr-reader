@@ -477,11 +477,11 @@ msgstr "Energieleverancier contracten"
 msgid "By reading (default)"
 msgstr "Per meting (standaard)"
 
-msgid "By minute"
-msgstr "Per minuut"
+msgid "By minute (recommended)"
+msgstr "Per minuut (aanbevolen)"
 
-msgid "On every change (default)"
-msgstr "Op elke verandering (standaard)"
+msgid "On every change (default & recommended)"
+msgstr "Op elke verandering (standaard & aanbevolen)"
 
 msgid "Force grouping by hour"
 msgstr "Forceer groepering per uur"
@@ -500,6 +500,18 @@ msgstr "DSMR 4 (gas)meters groeperen metingen altijd per uur. DSMR 5 (gas)meters
 
 msgid "Consumption configuration"
 msgstr "Verbruiksconfiguratie"
+
+msgid "By default DSMR v4 smart meters emit around 6 telegrams per minute and update gas usage hourly."
+msgstr "Standaard sturen DSMR v4 slimme meters zo'n 6 telegrammen per minuut en werken het gasverbruik elk uur bij."
+
+msgid "DSMR v5 smart meters emit around 60 telegrams per minute and update gas usage every 5 minutes."
+msgstr "DSMR v5 slimme meters sturen zo'n 60 telegrammen per minuut en werken het gasverbruik elke 5 minuten bij."
+
+msgid "It also depend on the \"Datalogger process sleep\" set in the datalogger configuration."
+msgstr "Het hangt ook deels af van je instellingen voor \"Datalogger proces sleep\" in de dataloggerconfiguratie."
+
+msgid "The grouping options below only affect the \"Live graphs\". You may consider using grouping by minute for electricity, to reduce the number of data points stored initially and displayed in the \"Live graphs\". Grouping has no effect on your daily stats."
+msgstr "Het groeperen van gegevens hieronder heeft alleen invloed op de \"Live grafieken\". Je kunt overwegen om elektriciteitsmetingen te groeperen per minuut, om het aantal datapunten te verminderen die opgeslagen en getoond worden in de \"Live grafieken\". Groeperen heeft geen invloed op je dagstatistieken."
 
 msgid "In order to use separate contract dates for electricity/gas overlapping each other, make sure to <strong>set the prices to zero</strong> not required for a contract."
 msgstr "Om aparte en overlappende contracten toe te staan, voor bijvoorbeeld gas en elektra, zorg ervoor dat je <strong>ongebruikte prijzen op nul zet</strong>."
@@ -2623,6 +2635,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "By minute"
+#~ msgstr "Per minuut"
 
 #~ msgid "Do you want to show a small token of appreciation or gesture?"
 #~ msgstr "Wil je een klein gebaar maken om je waardering te delen?"

@@ -18,11 +18,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='consumptionsettings',
             name='electricity_grouping_type',
-            field=models.IntegerField(choices=[(1, 'By reading (default)'), (2, 'By minute')], default=2, help_text='Electricity readings are read every X seconds, depending on your meter. We can group these for you.', verbose_name='Electricity grouping type'),
+            field=models.IntegerField(choices=[(1, 'By reading (default)'), (2, 'By minute (recommended)')], default=2, help_text='Electricity readings are read every X seconds, depending on your meter. We can group these for you.', verbose_name='Electricity grouping type'),
         ),
         migrations.AddField(
             model_name='consumptionsettings',
             name='gas_grouping_type',
-            field=models.IntegerField(choices=[(1, 'On every change (default)'), (2, 'Force grouping by hour')], default=1, help_text='DSMR 4 (gas) meters always group readings by hour. DSMR 5 (gas) meters can be optionally grouped by hour.', verbose_name='Gas grouping type'),
+            field=models.IntegerField(choices=[(1, 'On every change (default & recommended)'), (2, 'Force grouping by hour')], default=1, help_text='DSMR 4 (gas) meters always group readings by hour. DSMR 5 (gas) meters can be optionally grouped by hour.', verbose_name='Gas grouping type'),
         ),
     ]

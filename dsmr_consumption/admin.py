@@ -12,7 +12,7 @@ from .models.settings import ConsumptionSettings
 
 @admin.register(ConsumptionSettings)
 class ConsumptionSettingsAdmin(SingletonModelAdmin):
-    pass
+    change_form_template = 'dsmr_consumption/consumption_settings/change_form.html'
 
 
 @admin.register(EnergySupplierPrice)
