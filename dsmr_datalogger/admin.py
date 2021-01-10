@@ -16,6 +16,7 @@ from .models.statistics import MeterStatistics, MeterStatisticsChange
 
 @admin.register(DataloggerSettings)
 class DataloggerSettingsAdmin(SingletonModelAdmin):
+    change_form_template = 'dsmr_datalogger/datalogger_settings/change_form.html'
     readonly_fields = ('restart_required',)
     fieldsets = (
         (

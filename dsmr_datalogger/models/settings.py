@@ -70,7 +70,8 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         validators=[MinValueValidator(0.5), MaxValueValidator(99)],
         verbose_name=_('Datalogger process sleep'),
         help_text=_(
-            'The number of seconds the application will sleep after reading data from the datalogger (API excluded).'
+            'The number of seconds the application will sleep after reading data from the datalogger (API and remote '
+            'datalogger excluded). The recommended value is 5 seconds or higher and does not affect daily totals!'
         )
     )
     restart_required = models.BooleanField(
