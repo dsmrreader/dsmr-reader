@@ -47,7 +47,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         blank=True,
         null=True,
         verbose_name=_('Serial port'),
-        help_text=_('For serial input: Serial port connected to smartmeter.')
+        help_text=_('For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0')
     )
     network_socket_address = models.CharField(
         max_length=196,
@@ -70,13 +70,22 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         validators=[MinValueValidator(0.5), MaxValueValidator(99)],
         verbose_name=_('Datalogger process sleep'),
         help_text=_(
-            'The number of seconds the application will sleep after reading data from the datalogger (API excluded).'
+            'The number of seconds the application will sleep after reading data from the datalogger (API and remote '
+            'datalogger excluded). The recommended value is 5 seconds or higher and does not affect daily totals!'
         )
     )
     restart_required = models.BooleanField(
         default=False,
         verbose_name=_('Process restart required'),
         help_text=_('Whether the datalogger process requires a restart. It should occur automatically.')
+    )
+    override_telegram_timestamp = models.BooleanField(
+        default=False,
+        verbose_name=_('Override telegram timestamp'),
+        help_text=_(
+            'Whether DSMR-reader should IGNORE any timestamps of incoming telegrams and use the current timestamp '
+            'instead. Use with care and only when your situation actually requires this!'
+        )
     )
 
     def __str__(self):

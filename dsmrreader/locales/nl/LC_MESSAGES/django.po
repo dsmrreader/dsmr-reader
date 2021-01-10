@@ -630,8 +630,8 @@ msgstr "DSMR-versie"
 msgid "The DSMR version your meter supports. Version should be printed on meter."
 msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
 
-msgid "For serial input: Serial port connected to smartmeter."
-msgstr "Voor uitlezen via een seriële poort: De seriële poort verbonden met de slimme meter."
+msgid "For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0"
+msgstr "Voor uitlezen via een seriële poort: De seriële poort verbonden met de slimme meter. Bijvoorbeeld: /dev/ttyUSB0"
 
 msgid "Network socket address"
 msgstr "Netwerk socket adres"
@@ -648,11 +648,17 @@ msgstr "Voor uitlezen via een netwerk socket: Poort van het netwerkapparaat verb
 msgid "Datalogger process sleep"
 msgstr "Datalogger proces sleep"
 
-msgid "The number of seconds the application will sleep after reading data from the datalogger (API excluded)."
-msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API uitgezonderd)."
+msgid "The number of seconds the application will sleep after reading data from the datalogger (API and remote datalogger excluded). The recommended value is 5 seconds or higher and does not affect daily totals!"
+msgstr "Het aantal seconden dat de applicatie wacht na het inlezen van gegevens via de datalogger (API en remote datalogger uitgezonderd). De aanbevolen waarde is 5 seconden of hoger en heeft geen invloed op de dagtotalen!"
 
 msgid "Whether the datalogger process requires a restart. It should occur automatically."
 msgstr "Geeft aan of het datalogger-proces een herstart vereist. Dit zou automatisch moeten gaan."
+
+msgid "Override telegram timestamp"
+msgstr "Overschrijf tijdstip van telegrammen"
+
+msgid "Whether DSMR-reader should IGNORE any timestamps of incoming telegrams and use the current timestamp instead. Use with care and only when your situation actually requires this!"
+msgstr "Geeft aan of DSMR-reader het tijdstip van inkomende telegrammen moet NEGEREN. In plaats daarvan wordt dan altijd het huidige tijdstip gebruikt. Wees voorzichtig! Alleen gebruiken wanneer jouw specifieke situatie dit vereist."
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
@@ -746,6 +752,12 @@ msgstr "Meterstatistieken wijziging"
 
 msgid "DSMR Meter statistics changes"
 msgstr "Meterstatistieken wijzigingen"
+
+msgid "Please note that lowering the \"Datalogger process sleep\" setting will result in more disk activity and more data being stored, possibly degrading performance."
+msgstr "N.B.: Het verlagen van \"Datalogger proces sleep\" zorgt voor meer schijfactiviteit en schrijft meer gegevens weg, met een mogelijk negatieve impact op de performance."
+
+msgid "Do not enable \"Override telegram timestamp\" unless your smart meter wrongly emits telegrams with an offset of multiple minutes or more."
+msgstr "Schakel \"Overschrijf tijdstip van telegrammen\" niet in, tenzij je slimme meter verkeerde telegrammen stuurt die meer dan enkele minuten afwijken."
 
 msgid "Data retention policies cleans up source data after a while."
 msgstr "Dataretentiebeleid schoont na verloop van tijd brondata op."

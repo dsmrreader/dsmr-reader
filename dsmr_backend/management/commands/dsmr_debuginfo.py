@@ -56,12 +56,13 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             connection.vendor
         ))
 
-        self._pretty_print('Backend sleep / Datalogger sleep / Retention cleanup', '{}s / {}s / {}h'.format(
+        self._pretty_print('BE sleep / DL sleep / Retention / Override', '{}s / {}s / {}h / {}'.format(
             BackendSettings.get_solo().process_sleep,
             DataloggerSettings.get_solo().process_sleep,
-            RetentionSettings.get_solo().data_retention_in_hours or '-'
+            RetentionSettings.get_solo().data_retention_in_hours or '-',
+            DataloggerSettings.get_solo().override_telegram_timestamp,
         ))
-        self._pretty_print('Telegram latest version read / Parser settings', '"{}" / "{}"'.format(
+        self._pretty_print('Latest telegram version read / Parser settings', '"{}" / "{}"'.format(
             MeterStatistics.get_solo().dsmr_version,
             DataloggerSettings.get_solo().dsmr_version
         ))

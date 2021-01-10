@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dataloggersettings',
             name='process_sleep',
-            field=models.DecimalField(decimal_places=1, default=5.0, help_text='The number of seconds the application will sleep after reading data from the datalogger (API excluded).', max_digits=3, validators=[django.core.validators.MinValueValidator(0.5), django.core.validators.MaxValueValidator(99)], verbose_name='Datalogger process sleep'),
+            field=models.DecimalField(decimal_places=1, default=5.0, help_text='The number of seconds the application will sleep after reading data from the datalogger (API and remote datalogger excluded). The recommended value is 5 seconds or higher and does not affect daily totals!', max_digits=3, validators=[django.core.validators.MinValueValidator(0.5), django.core.validators.MaxValueValidator(99)], verbose_name='Datalogger process sleep'),
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]

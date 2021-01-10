@@ -91,3 +91,10 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(meter_statistics.voltage_swell_count_l1, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
+
+    @mock.patch('django.utils.timezone.now')
+    def test_telegram_override_timestamp(self, now_mock):
+        """ Tests whether this user setting overrides as expectedly. """
+        reading = self._reading_with_override_telegram_timestamp_active(now_mock)
+
+        self.assertEqual(reading.extra_device_delivered, None)  # Should be NONE too due to timestamp.
