@@ -558,6 +558,9 @@ msgstr "Leest een DSMR P1 telegram uit van de seriële poort (meti."
 msgid "The system just applied a one-time update to the datalogger sleep setting, increasing it to 5 seconds. This probably prevents a lot of potential future data storage and performance issues for many users. If you disagree with this new value, feel free to revert it manually in the configuration."
 msgstr "Het systeem heeft zojuist een eenmalige update gedaan van de datalogger sleep-waarde naar 5 seconden. Dit voorkomt waarschijnlijk voor vele gebruikers een hoop toekomstige problemen qua performance en dataopslag. Mocht je de nieuwe waarde niet willen gebruiken, voel je dan vrij om deze weer handmatig terug te zetten in de configuratie."
 
+msgid "Whether this reading has been processed for merging into statistics"
+msgstr "Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
+
 msgid "Timestamp indicating when the reading was taken, according to the smart meter"
 msgstr "Moment waarop de meting is gedaan, volgens de meter"
 
@@ -593,9 +596,6 @@ msgstr "Tijdstip van meting door de externe (gas)meter"
 
 msgid "Last value read from the extra device connected (gas meter)"
 msgstr "Meterstand van de externe (gas)meter"
-
-msgid "Whether this reading has been processed for merging into statistics"
-msgstr "Geeft aan of deze meting al verwerkt is in het samenvoegen van statistieken"
 
 msgid "Current electricity returned by phase L1 (in kW)"
 msgstr "Huidige elektriciteitteruglevering in fase L1 (in kW)"
@@ -735,8 +735,8 @@ msgstr "Aantal spanningspieken in fase L3 (alleen voor meters met meerdere fasen
 msgid "Number of rejected telegrams due to invalid CRC checksum"
 msgstr "Aantal genegeerde DSMR telegrammen wegens een foutieve CRC checksum"
 
-msgid "The latest telegram succesfully read. Please note that only the last telegram is saved"
-msgstr "Het meest recente uitgelezen telegram. N.B.: Alleen het laatste telegram wordt opgeslagen"
+msgid "The latest telegram succesfully read. Please note that only the latest telegram is saved here and will be overwritten each time."
+msgstr "Het meest recente uitgelezen telegram. N.B.: Alleen het laatste telegram wordt opgeslagen en telkens overschreven."
 
 msgid "DSMR Meter statistics (read only)"
 msgstr "Meterstatistieken (alleen lezen)"
@@ -770,6 +770,9 @@ msgstr "N.B.: Het verlagen van \"Datalogger proces sleep\" zorgt voor meer schij
 
 msgid "Do not enable \"Override telegram timestamp\" unless your smart meter wrongly emits telegrams with an offset of multiple minutes or more."
 msgstr "Schakel \"Overschrijf tijdstip van telegrammen\" niet in, tenzij je slimme meter verkeerde telegrammen stuurt die meer dan enkele minuten afwijken."
+
+msgid "All data here is based on the latest telegram received and should also deployed on the Statistics page (except for the telegram). You can find the latest raw telegram below, which can be used for debugging purposes."
+msgstr "Alle gegevens hier is gebaseerd op het meeste recent ontvangen telegram en wordt ook getoond op de Statistieken-pagina (behalve het telegram). Je kunt het meest recente telegram hieronder vinden voor situaties waarbij dit nodig, doorgaans bij debuggen."
 
 msgid "Data retention policies cleans up source data after a while."
 msgstr "Dataretentiebeleid schoont na verloop van tijd brondata op."

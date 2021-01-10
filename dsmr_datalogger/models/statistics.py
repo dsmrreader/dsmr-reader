@@ -10,6 +10,7 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 class MeterStatistics(ModelUpdateMixin, SingletonModel):
     """ Meter statistics, but only exists as a single record, containing the latest data. """
+
     timestamp = models.DateTimeField(
         help_text=_("Timestamp indicating when the reading was taken"),
         default=timezone.now
@@ -74,7 +75,10 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
         default=0
     )
     latest_telegram = models.TextField(
-        help_text=_("The latest telegram succesfully read. Please note that only the last telegram is saved"),
+        help_text=_(
+            "The latest telegram succesfully read. Please note that only the latest telegram is saved here and will be "
+            "overwritten each time."
+        ),
         null=True,
         default=None
     )

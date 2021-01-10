@@ -20,6 +20,11 @@ class DsmrReading(ModelUpdateMixin, models.Model):
     """
     objects = DsmrReadingManager()
 
+    processed = models.BooleanField(
+        default=False,
+        db_index=True,
+        help_text=_("Whether this reading has been processed for merging into statistics")
+    )
     timestamp = models.DateTimeField(
         db_index=True,
         help_text=_("Timestamp indicating when the reading was taken, according to the smart meter")
@@ -86,11 +91,6 @@ class DsmrReading(ModelUpdateMixin, models.Model):
         max_digits=9,
         decimal_places=3,
         help_text=_("Last value read from the extra device connected (gas meter)")
-    )
-    processed = models.BooleanField(
-        default=False,
-        db_index=True,
-        help_text=_("Whether this reading has been processed for merging into statistics")
     )
     phase_currently_returned_l1 = models.DecimalField(
         null=True,

@@ -66,15 +66,15 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
 @admin.register(DsmrReading)
 class DsmrReadingAdmin(ReadOnlyAdminModel):
     ordering = ['-timestamp']
-    list_display = ('timestamp', 'electricity_currently_delivered', 'electricity_currently_returned')
+    list_display = ('timestamp', 'processed', 'electricity_currently_delivered', 'electricity_currently_returned')
     list_filter = (
         ('timestamp', DateTimeRangeFilter),
     )
 
 
 @admin.register(MeterStatistics)
-class MeterStatisticsAdmin(ReadOnlyAdminModel):
-    list_display = ('timestamp', 'electricity_tariff', 'power_failure_count')
+class MeterStatisticsAdmin(ReadOnlyAdminModel, SingletonModelAdmin):
+    change_form_template = 'dsmr_datalogger/meter_statistics/change_form.html'
 
 
 @admin.register(MeterStatisticsChange)
