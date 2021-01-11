@@ -275,24 +275,6 @@ msgstr "Kwam er een foutmelding met ``Error: That username is already taken.``? 
 #: ../../faq.rst:255
 msgid "The user should be created (or its password should be reset)."
 msgstr "De gebruiker is nu aangemaakt (of het wachtwoord is bijgewerkt)."
-msgid "There is no default user or password. You will need to set it yourself with the steps below, depending on whether you've installed manually or using Docker."
-msgstr "Er zijn geen standaard inloggegevens. Je zult deze zelf moeten instellen met de stappen hieronder, afhankelijk van of je een handmatige installatie gedaan hebt of via Docker."
-
-#: ../../faq.rst:242
-msgid "Manual installation"
-msgstr "Handmatige installatie"
-
-#: ../../faq.rst:244 ../../faq.rst:267
-msgid "Now execute::"
-msgstr "Voer uit::"
-
-#: ../../faq.rst:251
-msgid "Did it error with ``Error: That username is already taken.``? Then try::"
-msgstr "Kwam er een foutmelding met ``Error: That username is already taken.``? Probeer dan::"
-
-#: ../../faq.rst:255
-msgid "The user should be created (or its password should be reset)."
-msgstr "De gebruiker is nu aangemaakt (of het wachtwoord is bijgewerkt)."
 
 #: ../../faq.rst:259
 msgid "Docker installation"
@@ -670,30 +652,3 @@ msgstr "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan v
 #: ../../faq.rst:590
 msgid "`View existing Github issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_"
 msgstr "`Bekijk bestaande issues op Github of maak een nieuwe aan <https://github.com/dennissiemensma/dsmr-reader/issues>`_."
-
-#~ msgid "How to view logfiles?"
-#~ msgstr "Hoe bekijk ik de logfiles?"
-
-#~ msgid ":doc:`More information can be found here <troubleshooting>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<troubleshooting>`."
-
-#~ msgid "Errors"
-#~ msgstr "Fouten"
-
-#~ msgid "FAQ"
-#~ msgstr "FAQ"
-
-#~ msgid "Are you unable to resolve your problem or do you need any help? :doc:`Check out the FAQ as well<faq>`."
-#~ msgstr "Kom je er toch niet uit of heb je hulp nodig? :doc:`Bekijk ook de FAQ<faq>`."
-
-#~ msgid "The \"**dsmr_debuginfo**\" command is available since DSMR-reader v4.4 and higher."
-#~ msgstr "Het \"**dsmr_debuginfo**\"-commando is beschikbaar sinds DSMR-reader v4.4 en hoger."
-
-#~ msgid "Execute the following command::"
-#~ msgstr "Voer het volgende commando uit::"
-
-#~ msgid "Copy its output to your Github issue."
-#~ msgstr "Kopieer de output naar je Github-issue."
-
-#~ msgid ":doc:`Env Settings<env_settings>`."
-#~ msgstr ":doc:`Env-instellingen<env_settings>`."
