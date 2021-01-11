@@ -33,6 +33,7 @@ v4.9.0 - 2020-12-06
 
 - ``Changed``: Remote datalogger serial settings - by @JoooostB [`#1215 <https://github.com/dsmrreader/dsmr-reader/issues/1215>`_]
 - ``Changed``: Various documentation updates
+- ``Changed``: Dependency updates
 
 
 v4.8.0 - 2020-11-15
