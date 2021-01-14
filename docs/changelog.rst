@@ -19,6 +19,7 @@ v4.x releases
 v4.11.0 - 2021-xx-xx
 --------------------
 
+- ``Changed``: Nieuw URL voor de mindergas API [`#1253 <https://github.com/dsmrreader/dsmr-reader/issues/1253>`_]
 
 
 v4.10.0 - 2021-01-11

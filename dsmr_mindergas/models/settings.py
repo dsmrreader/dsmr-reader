@@ -7,7 +7,7 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 class MinderGasSettings(ModelUpdateMixin, SingletonModel):
     """ Singleton model restricted by django-solo plugin. Settings for this application only. """
-    API_URL = 'https://www.mindergas.nl/api/gas_meter_readings'
+    API_URL = 'https://www.mindergas.nl/api/meter_readings'
 
     export = models.BooleanField(
         default=False,
