@@ -1,12 +1,12 @@
 name: Dependency update checker
 
-# @TODO: Remove 'on PR'
 on:
-  pull_request:
+  # @TODO: Remove 'on push'
+  push:
     branches:
       - '*'
   schedule:
-    - cron:  '0 6 * * *'
+    - cron:  '*/5 * * * *'
 
 jobs:
   build:
@@ -46,5 +46,4 @@ jobs:
         run: comm -1 -2 outdated.txt reqs.txt > outdated-reqs.txt
 
       - name: List outdated requirements
-        run: pip list --outdated --local | tr '[:upper:]' '[:lower:]' | grep -f outdated-reqs.txt \
-          && echo "One or more packages outdated" && exit 1
+        run: pip list --outdated --local | tr '[:upper:]' '[:lower:]' | grep -f outdated-reqs.txt && echo "One or more packages outdated" && exit 1
