@@ -2,9 +2,7 @@ name: Dependency update checker
 
 on:
   # @TODO: Remove 'on PR'
-  pull_request:
-    branches:
-      - poc/github-actions-pip-update-checker
+  pull_request: ~
   schedule:
     - cron:  '0 6 * * *'
 
