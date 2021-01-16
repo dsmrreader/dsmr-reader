@@ -1,0 +1,50 @@
+name: Dependency update checker
+
+on:
+  # @TODO: Remove 'on PR'
+  pull_request:
+    branches:
+      - poc/github-actions-pip-update-checker
+  schedule:
+    - cron:  '0 6 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python
+
+      - name: Install APT dependencies
+        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+
+      - name: Cached PIP dependencies
+        uses: actions/cache
+        with:
+          path: |
+            ~/.cache/pip
+          key: pip-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt', '$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt') }}
+          restore-keys: |
+              pip-
+
+      - name: Install PIP dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/ci.txt
+          pip install psycopg2-binary
+
+      - name: List outdated packages
+        run: pip list --outdated --local --format freeze | tr '[:upper:]' '[:lower:]' | cut -d'=' -f1 | sort > outdated.txt
+
+      - name: List packages from requirements
+        run: cat dsmrreader/provisioning/requirements/*.txt | tr '[:upper:]' '[:lower:]' | grep -v '#' | grep -v '.txt' | cut -d'=' -f1 | sort > reqs.txt
+
+      - name: Find outdated packages from requirements
+        run: comm -1 -2 outdated.txt reqs.txt > outdated-reqs.txt
+
+      - name: List outdated requirements
+        run: pip list --outdated --local | tr '[:upper:]' '[:lower:]' | grep -f outdated-reqs.txt \
+          && echo "One or more packages outdated" && exit 1
