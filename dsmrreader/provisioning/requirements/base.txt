@@ -1,7 +1,7 @@
 autopep8==1.5.4
 coreapi==2.3.3
 crcmod==1.7
-django==3.1.4
+django==3.1.5
 django-admin-rangefilter==0.6.3
 django-admin-sortable==2.2.3
 django-colorfield==0.4.0
@@ -17,7 +17,7 @@ pyserial==3.5
 pyserial-asyncio==0.5
 python-dateutil==2.8.1
 python-decouple==3.4
-pytz==2020.4
+pytz==2020.5
 pyyaml==5.3.1
 requests==2.25.1
 urllib3==1.26.2

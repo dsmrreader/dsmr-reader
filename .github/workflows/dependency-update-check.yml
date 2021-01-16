@@ -49,8 +49,8 @@ jobs:
 
           pip list --outdated --local
           echo ""
-          echo "One or more packages are outdated:"
-          echo "----------------------------------"
+          echo "The following project requirements are outdated:"
+          echo "------------------------------------------------"
           cat outdated-reqs.txt
 
           exit 1
