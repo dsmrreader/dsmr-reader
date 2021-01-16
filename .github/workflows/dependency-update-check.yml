@@ -1,0 +1,53 @@
+name: Dependency update checker
+
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Install APT dependencies
+        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+
+      - name: Cached PIP dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('dsmrreader/provisioning/requirements/base.txt', 'dsmrreader/provisioning/requirements/dev.txt') }}
+          restore-keys: pip-
+
+      - name: Install PIP dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
+          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
+          pip install psycopg2-binary
+
+      - name: List outdated packages
+        run: pip list --outdated --local --format freeze | tr '[:upper:]' '[:lower:]' | cut -d'=' -f1 | sort > outdated.txt
+
+      - name: List packages from requirements
+        run: cat dsmrreader/provisioning/requirements/*.txt | tr '[:upper:]' '[:lower:]' | grep -v '#' | grep -v '.txt' | cut -d'=' -f1 | sort > reqs.txt
+
+      - name: Find outdated packages from requirements
+        run: comm -1 -2 outdated.txt reqs.txt > outdated-reqs.txt
+
+      - name: Check outdated requirements
+        run: |
+          [ -s outdated-reqs.txt ] || exit 0
+
+          pip list --outdated --local
+          echo ""
+          echo "The following project requirements are outdated:"
+          echo "------------------------------------------------"
+          cat outdated-reqs.txt
+
+          exit 1
