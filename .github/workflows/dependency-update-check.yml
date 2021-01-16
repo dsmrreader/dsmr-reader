@@ -2,7 +2,7 @@ name: Dependency update checker
 
 on:
   # @TODO: Remove 'on push'
-  push:
+  pull_request:
     branches:
       - '*'
   schedule:
