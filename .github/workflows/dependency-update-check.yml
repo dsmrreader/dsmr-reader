@@ -1,10 +1,6 @@
 name: Dependency update checker
 
 on:
-  # @TODO: Remove 'on push'
-  pull_request:
-    branches:
-      - '*'
   schedule:
     - cron:  '*/5 * * * *'
 
@@ -31,7 +27,8 @@ jobs:
       - name: Install PIP dependencies
         run: |
           pip install --upgrade pip
-          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/ci.txt
+          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
+          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
           pip install psycopg2-binary
 
       - name: List outdated packages
