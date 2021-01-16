@@ -20,6 +20,7 @@ v4.11.0 - 2021-01-17
 --------------------
 
 - ``Changed``: MinderGas API-wijziging [`#1253 <https://github.com/dsmrreader/dsmr-reader/issues/1253>`_]
+- ``Changed``: Dependency updates
 
 
 v4.10.0 - 2021-01-11

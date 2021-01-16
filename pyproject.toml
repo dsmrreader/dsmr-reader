@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "DSMR-reader"
-version = "4.8.0"
+version = "4"
 description = "DSMR-protocol reader, telegram data storage and energy consumption visualizer"
 license = "Creative Commons Attribution-NonCommercial 4.0 International Public License"
 
