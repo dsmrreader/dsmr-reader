@@ -47,8 +47,10 @@ jobs:
         run: |
           [ -s outdated-reqs.txt ] || exit 0
 
-          echo "One or more packages are outdated:"
-          cat outdated-reqs.txt
           pip list --outdated --local
+          echo ""
+          echo "One or more packages are outdated:"
+          echo "----------------------------------"
+          cat outdated-reqs.txt
 
           exit 1
