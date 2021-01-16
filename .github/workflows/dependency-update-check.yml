@@ -45,5 +45,5 @@ jobs:
       - name: Find outdated packages from requirements
         run: comm -1 -2 outdated.txt reqs.txt > outdated-reqs.txt
 
-      - name: List outdated requirements
-        run: pip list --outdated --local | tr '[:upper:]' '[:lower:]' | grep -f outdated-reqs.txt && echo "One or more packages outdated" && exit 1
+      - name: Check outdated requirements
+        run: pip list --outdated --local | tr '[:upper:]' '[:lower:]' | grep -f outdated-reqs.txt && echo "One or more packages are outdated (see above)" && exit 1
