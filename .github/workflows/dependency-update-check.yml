@@ -2,7 +2,7 @@ name: Dependency update checker
 
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron:  '0 12 * * *'
 
 jobs:
   build:
