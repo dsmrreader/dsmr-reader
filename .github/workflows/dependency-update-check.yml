@@ -22,7 +22,7 @@ jobs:
         run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Cached PIP dependencies
-        uses: actions/cache
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cache/pip
