@@ -48,4 +48,7 @@ jobs:
           # Skip check when no outdated reqs found
           [ -s outdated-reqs.txt ] || exit 0
 
-          pip list --outdated --local | grep -f outdated-reqs.txt && echo "One or more packages are outdated (see above)" && exit 100
+          pip list --outdated --local | grep -f outdated-reqs.txt  || exit 0
+
+          echo "One or more packages are outdated (see above)"
+          exit 1
