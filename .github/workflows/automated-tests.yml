@@ -51,7 +51,7 @@
 #      - uses: actions/checkout@v2
 #
 #      - name: Setup Python ${{ matrix.python-version }}
-#        uses: actions/setup-python@v2.1.4
+#        uses: actions/setup-python@v2
 #        with:
 #          python-version: ${{ matrix.python-version }}
 #
@@ -59,13 +59,11 @@
 #        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 #
 #      - name: Cached PIP dependencies
-#        uses: actions/cache@v2.1.2
+#        uses: actions/cache@v2
 #        with:
-#          path: |
-#            ~/.cache/pip
-#          key: pip-${{ matrix.python-version }}-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt') }}
-#          restore-keys: |
-#              pip-${{ matrix.python-version }}-
+#          path: ~/.cache/pip
+#          key: pip-${{ matrix.python-version }}-${{ hashFiles(dsmrreader/provisioning/requirements/base.txt') }}
+#          restore-keys: pip-${{ matrix.python-version }}-
 #
 #      - name: Install PIP dependencies
 #        run: |

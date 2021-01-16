@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Python
-        uses: actions/setup-python@v2.1.4
+        uses: actions/setup-python@v2
 
       - name: Install APT dependencies
         run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
@@ -24,11 +24,9 @@ jobs:
       - name: Cached PIP dependencies
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.cache/pip
-          key: pip-${{ hashFiles('$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt', '$GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt') }}
-          restore-keys: |
-              pip-
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('dsmrreader/provisioning/requirements/base.txt', 'dsmrreader/provisioning/requirements/dev.txt') }}
+          restore-keys: pip-
 
       - name: Install PIP dependencies
         run: |
@@ -46,4 +44,4 @@ jobs:
         run: comm -1 -2 outdated.txt reqs.txt > outdated-reqs.txt
 
       - name: Check outdated requirements
-        run: pip list --outdated --local | tr '[:upper:]' '[:lower:]' | grep -f outdated-reqs.txt && echo "One or more packages are outdated (see above)" && exit 1
+        run: pip list --outdated --local && tr '[:upper:]' '[:lower:]' | grep -f outdated-reqs.txt && echo "One or more packages are outdated (see above)" && exit 1
