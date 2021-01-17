@@ -19,6 +19,8 @@ v4.x releases
 v4.12.0 - 2021-xx-xx
 --------------------
 
+- ``Changed``: Samenvatting energiecontracten verbeteren [`#1257 <https://github.com/dsmrreader/dsmr-reader/issues/1257>`_]
+
 - ``Fixed``: Translations - by @denvers [`#1260 <https://github.com/dsmrreader/dsmr-reader/issues/1260>`_]
 - ``Fixed``: Bij update controleren op lokale openstaande wijzigingen [`#1259 <https://github.com/dsmrreader/dsmr-reader/issues/1259>`_]
 

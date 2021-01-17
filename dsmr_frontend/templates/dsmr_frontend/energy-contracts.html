@@ -17,10 +17,13 @@
 
 {% if energy_contracts %}
 	<div class="alert alert-info" role="alert">
-	    <span class="fas fa-info-circle fa-2x"></span> &nbsp;
-        {% blocktranslate %}All data is based on whether you have set prices for the types. E.g.: omitting gas prices will hide gas consumption for the contract.{% endblocktranslate %}
-        {% blocktranslate %}Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier.{% endblocktranslate %}
-        {% blocktranslate %}Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience.{% endblocktranslate %}
+	    <span class="fas fa-info-circle"></span> &nbsp;
+        {% blocktranslate %}All data is based on whether you have set prices for each type of consumption. E.g.: omitting gas prices will hide gas consumption for the contract.{% endblocktranslate %}
+        {% blocktranslate %}The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice.{% endblocktranslate %}
+
+        {% if capabilities.electricity_returned %}
+            {% blocktranslate %}When applicable, any electricity returned costs calculated is an approximate and is displayed for your convenience. It may or may not match your personal situation.{% endblocktranslate %}
+        {% endif %}
 	</div>
 
     {% for current in energy_contracts %}

@@ -1502,14 +1502,14 @@ msgstr[1] "dagen"
 msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
 msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
 
-msgid "All data is based on whether you have set prices for the types. E.g.: omitting gas prices will hide gas consumption for the contract."
-msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen. Bijvoorbeeld: het weglaten van gasprijzen laat gasconsumptie hier niet zien bij het contract."
+msgid "All data is based on whether you have set prices for each type of consumption. E.g.: omitting gas prices will hide gas consumption for the contract."
+msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. N.B.: Het weglaten van gasprijzen laat bijvoorbeeld gasconsumptie hieronder niet zien."
 
-msgid "Please note that the data displayed here only includes the energy price and is likely to differ from the bill of your energy supplier."
-msgstr "N.B.: De gegevens die hier getoond worden zijn alleen gebaseerd op de energieprijzen en verschillen zeer waarschijnlijk van je energierekening."
+msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
+msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
 
-msgid "Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience."
-msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten. De teruggeleverde kWh wordt hier alleen voor de volledigheid getoond."
+msgid "When applicable, any electricity returned costs calculated is an approximate and is displayed for your convenience. It may or may not match your personal situation."
+msgstr "Indien van toepassing: Kosten m.b.t. teruglevering is een schatting en worden berekend voor een volledig overzicht. Deze kunnen afwijken van je daadwerkelijke situatie."
 
 msgid "Show contract prices"
 msgstr "Toon contractprijzen"
@@ -2579,3 +2579,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience."
+#~ msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten. De teruggeleverde kWh wordt hier alleen voor de volledigheid getoond."
