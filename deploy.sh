@@ -26,6 +26,23 @@ fi
 
 echo ""
 echo ""
+echo " --- Checking for local file changes: "
+git diff --quiet
+
+if [ $? -ne 0 ]; then
+    git status --porcelain
+    echo ""
+    echo "[!] Local file changes detected, aborting deployment"
+    echo "    To revert all files to their default, WITHOUT backup, execute:"
+    echo ""
+    echo "    git reset --hard HEAD"
+    echo ""
+    exit 1;
+fi
+
+
+echo ""
+echo ""
 echo " --- Pulling remote repository for new commits..."
 git fetch
 

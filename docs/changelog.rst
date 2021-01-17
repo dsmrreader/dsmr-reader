@@ -20,7 +20,7 @@ v4.12.0 - 2021-xx-xx
 --------------------
 
 - ``Fixed``: Translations - by @denvers [`#1260 <https://github.com/dsmrreader/dsmr-reader/issues/1260>`_]
-
+- ``Fixed``: Bij update controleren op lokale openstaande wijzigingen [`#1259 <https://github.com/dsmrreader/dsmr-reader/issues/1259>`_]
 
 
 v4.11.0 - 2021-01-17
