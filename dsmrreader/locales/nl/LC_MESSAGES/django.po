@@ -129,8 +129,8 @@ msgstr "De gebruikte taal in achtergrondprocessen"
 msgid "Automatically check for updates"
 msgstr "Controleer automatisch op updates"
 
-msgid "Whether the application checks once in a while for new DSMR-reader release in Github"
-msgstr "Geeft aan of de applicatie af en toe op Github controleert of er updates beschikbaar zijn"
+msgid "Whether the application checks once in a while for new DSMR-reader release in GitHub"
+msgstr "Geeft aan of de applicatie af en toe op GitHub controleert of er updates beschikbaar zijn"
 
 msgid "Backend process sleep"
 msgstr "Backend proces sleep"
@@ -918,8 +918,8 @@ msgstr "DSMR-reader v4.0: Ondersteuning voor InfluxDB toegevoegd."
 msgid "DSMR-reader v4.1: Added support for reading network sockets with the datalogger (e.g. when using ser2net). Both the builtin and remote datalogger now support this feature. The latter requires a reinstallation of the (remote) datalogger script."
 msgstr "DSMR-reader v4.1: Ondersteuning toegevoegd voor het uitlezen van netwerk-sockets met de datalogger (bijv. wanneer je ser2net gebruikt). Dit wordt door zowel de ingebouwde als remote datalogger ondersteund, al vereist de laatstgenoemde in dat geval wel een herinstallatie van het dataloggerscript."
 
-msgid "DSMR-reader will eventually be moved to its own organisation on Github in the near future. It should be redirected automatically, but if not, the new location will be: https://github.com/dsmrreader/dsmr-reader"
-msgstr "DSMR-reader wordt binnenkort uiteindelijk onder een eigen 'organisatie' ondergebracht op Github. Het doorverwijzen zou t.z.t automatisch moeten gaan, maar zo niet, dan wordt de nieuwe locatie: https://github.com/dsmrreader/dsmr-reader"
+msgid "DSMR-reader will eventually be moved to its own organisation on GitHub in the near future. It should be redirected automatically, but if not, the new location will be: https://github.com/dsmrreader/dsmr-reader"
+msgstr "DSMR-reader wordt binnenkort uiteindelijk onder een eigen 'organisatie' ondergebracht op GitHub. Het doorverwijzen zou t.z.t automatisch moeten gaan, maar zo niet, dan wordt de nieuwe locatie: https://github.com/dsmrreader/dsmr-reader"
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"
@@ -1108,19 +1108,19 @@ msgid "View frequently asked questions (FAQ)"
 msgstr "Bekijk veelgestelde vragen (FAQ)"
 
 msgid "Did something change after updating? Check out the latest changes"
-msgstr "IS er iets veranderd na updaten? Bekijk de laatste wijzigingen"
+msgstr "Is er iets veranderd na updaten? Bekijk de laatste wijzigingen"
 
 msgid "View changelog"
 msgstr "Changelog"
 
-msgid "Still need troubleshooting? Check out current issues on Github"
-msgstr "Nog steeds hulp nodig? Bekijk huidige issues op Github"
+msgid "Still need troubleshooting? Check out current issues on GitHub"
+msgstr "Nog steeds hulp nodig? Bekijk huidige issues op GitHub"
 
-msgid "View DSMR-reader issues on Github (or create one)"
-msgstr "Bekijk DSMR-reader issues op Github (of maak een nieuwe aan)"
+msgid "View DSMR-reader issues on GitHub (or create one)"
+msgstr "Bekijk DSMR-reader issues op GitHub (of maak een nieuwe aan)"
 
-msgid "For new Github issues, please supply a debug info dump as well:"
-msgstr "Voor nieuwe Github-issues, lever ook een debug info dump aan:"
+msgid "For new GitHub issues, please supply a debug info dump as well:"
+msgstr "Voor nieuwe GitHub-issues, lever ook een debug info dump aan:"
 
 msgid "View 'dsmr_debuginfo' dump"
 msgstr "Bekijk 'dsmr_debuginfo' dump"
