@@ -37,6 +37,15 @@ if [ $? -ne 0 ]; then
     echo ""
     echo "    git reset --hard HEAD"
     echo ""
+    echo "    To backup all changed files, execute:"
+    echo ""
+    echo "    git stash"
+    echo ""
+    echo "    and restore the backup after upgrading with:"
+    echo ""
+    echo "    git stash pop"
+    echo ""
+    echo "    (note that this may result in conflicts, which you need to resolve yourself)"
     exit 1;
 fi
 
