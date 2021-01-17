@@ -51,7 +51,7 @@ if [ $? -ne 0 ]; then
     if [ $? -ne 0 ]; then
         echo ">>>>> [!] Executing database migrations failed again! <<<<<"
         echo "        - Running dsmr_sqlsequencereset did not resolve the problem."
-        echo "        - Create an issue on Github and attach the exeception trace listed above."
+        echo "        - Create an issue on GitHub and attach the exeception trace listed above."
         exit 1;
     fi
 fi

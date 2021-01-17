@@ -190,7 +190,7 @@ Optional: Restore a database backup
 
 2. Dependencies
 ---------------
-Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the Github repository::
+Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::
 
     sudo apt-get install -y nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv virtualenvwrapper
 
@@ -253,7 +253,7 @@ Django will later copy all static files to the directory below, used by Nginx to
     sudo chown -R dsmr:dsmr /var/www/dsmrreader/
 
 
-5. Clone project code from Github
+5. Clone project code from GitHub
 ---------------------------------
 Now is the time to clone the code from the repository into the homedir we created.
 
@@ -263,7 +263,7 @@ Now is the time to clone the code from the repository into the homedir we create
 
     git clone https://github.com/dsmrreader/dsmr-reader.git
 
-This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the Github repository.
+This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the GitHub repository.
 
 
 6. Virtualenv
@@ -434,7 +434,7 @@ Option C: Install DSMR-reader using Docker
 +------------+------------------------------------------------------+
 | Author     | ``xirixiz`` (Bram van Dartel)                        |
 +------------+------------------------------------------------------+
-| Github     | https://github.com/xirixiz/dsmr-reader-docker        |
+| GitHub     | https://github.com/xirixiz/dsmr-reader-docker        |
 +------------+------------------------------------------------------+
 | Docker Hub | https://hub.docker.com/r/xirixiz/dsmr-reader-docker/ |
 +------------+------------------------------------------------------+

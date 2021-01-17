@@ -81,7 +81,7 @@ def get_capabilities(capability=None):
 
 
 def is_latest_version():
-    """ Checks whether the current version is the latest tagged available on Github. """
+    """ Checks whether the current version is the latest tagged available on GitHub. """
     response = requests.get(settings.DSMRREADER_LATEST_TAGS_LIST)
     latest_tag = response.json()[0]
 

@@ -16,6 +16,13 @@ v4.x releases
 
 
 
+v4.12.0 - 2021-xx-xx
+--------------------
+
+- ``Fixed``: Translations - by @denvers [`#1260 <https://github.com/dsmrreader/dsmr-reader/issues/1260>`_]
+
+
+
 v4.11.0 - 2021-01-17
 --------------------
 
@@ -75,7 +82,7 @@ v4.6.0 - 2020-11-01
 
 .. note::
 
-    In order to point your local installation to the new location on Github, execute the following commands::
+    In order to point your local installation to the new location on GitHub, execute the following commands::
 
         sudo su - dsmr
         git remote -v
@@ -85,7 +92,7 @@ v4.6.0 - 2020-11-01
     The last command should reflect the new URL's.
 
 
-- ``Changed``: DSMR-reader verplaatst op Github [`#1174 <https://github.com/dsmrreader/dsmr-reader/issues/1174>`_]
+- ``Changed``: DSMR-reader verplaatst op GitHub [`#1174 <https://github.com/dsmrreader/dsmr-reader/issues/1174>`_]
 
 - ``Added``: Instelling om waarschuwingen over data-grootte te negeren [`#1173 <https://github.com/dsmrreader/dsmr-reader/issues/1173>`_]
 - ``Added``: FreeBSD compatibility [`#1175 <https://github.com/dsmrreader/dsmr-reader/issues/1175>`_]
@@ -142,7 +149,7 @@ v4.4.0 - 2020-09-25
 
 - ``Changed``: Overlappende energiecontracten mogelijk maken [`#1101 <https://github.com/dsmrreader/dsmr-reader/issues/1101>`_]
 - ``Changed``: Improved scheduled task indication on Status page [`#1093 <https://github.com/dsmrreader/dsmr-reader/issues/1093>`_]
-- ``Changed``: Simplify version check using Github tags API [`#1097 <https://github.com/dsmrreader/dsmr-reader/issues/1097>`_]
+- ``Changed``: Simplify version check using GitHub tags API [`#1097 <https://github.com/dsmrreader/dsmr-reader/issues/1097>`_]
 
 - ``Fixed``: Datalogger altijd opnieuw laten verbinden [`#1114 <https://github.com/dsmrreader/dsmr-reader/issues/1114>`_]
 - ``Fixed``: Fout bij toevoegen/wijzigen energiecontract zonder einddatum [`#1094 <https://github.com/dsmrreader/dsmr-reader/issues/1094>`_]

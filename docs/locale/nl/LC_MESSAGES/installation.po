@@ -128,8 +128,8 @@ msgid "2. Dependencies"
 msgstr "2. Afhankelijkheden"
 
 #: ../../installation.rst:193
-msgid "Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the Github repository::"
-msgstr "Tijd om diverse tools te installeren. Deze zijn nodig voor de Nginx webserver, de Gunicorn applicatieserver en voor het binnenhalen van de code van de applicatie vanaf Github::"
+msgid "Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::"
+msgstr "Tijd om diverse tools te installeren. Deze zijn nodig voor de Nginx webserver, de Gunicorn applicatieserver en voor het binnenhalen van de code van de applicatie vanaf GitHub::"
 
 #: ../../installation.rst:197
 msgid "Install ``cu``. The CU program allows easy testing for your DSMR serial connection. It's very basic but also very effective to simply test whether your serial cable setup works properly::"
@@ -200,12 +200,12 @@ msgid "Django will later copy all static files to the directory below, used by N
 msgstr "Django kopieert alle statische bestanden naar een aparte map, die weer door Nginx gebruikt wordt. Daarom is er tevens (schrijf)toegang voor nodig::"
 
 #: ../../installation.rst:257
-msgid "5. Clone project code from Github"
-msgstr "5. Kloon project code vanaf Github"
+msgid "5. Clone project code from GitHub"
+msgstr "5. Kloon project code vanaf GitHub"
 
 #: ../../installation.rst:258
 msgid "Now is the time to clone the code from the repository into the homedir we created."
-msgstr "Nu kunnen we de code van de applicatie van Github downloaden en in de homedir zetten die we net aangemaakt hebben."
+msgstr "Nu kunnen we de code van de applicatie van GitHub downloaden en in de homedir zetten die we net aangemaakt hebben."
 
 #: ../../installation.rst:260
 msgid "Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"
@@ -216,8 +216,8 @@ msgid "Clone the repository::"
 msgstr "Kloon de repository::"
 
 #: ../../installation.rst:266
-msgid "This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the Github repository."
-msgstr "Dit kan enkele seconden in beslag nemen. Als het goed is zie je hierna een map genaamd ``dsmr-reader``, met daarin een kopie van de repository zoals die op Github staat."
+msgid "This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the GitHub repository."
+msgstr "Dit kan enkele seconden in beslag nemen. Als het goed is zie je hierna een map genaamd ``dsmr-reader``, met daarin een kopie van de repository zoals die op GitHub staat."
 
 #: ../../installation.rst:270
 msgid "6. Virtualenv"
@@ -392,8 +392,8 @@ msgid "``xirixiz`` (Bram van Dartel)"
 msgstr "``xirixiz`` (Bram van Dartel)"
 
 #: ../../installation.rst:437
-msgid "Github"
-msgstr "Github"
+msgid "GitHub"
+msgstr "GitHub"
 
 #: ../../installation.rst:437
 msgid "https://github.com/xirixiz/dsmr-reader-docker"

@@ -19,7 +19,7 @@ msgid "Enable DSMR-reader API"
 msgstr "Schakel DSMR-reader API in"
 
 msgid "When disabled it will reject incoming requests and return an HTTP 403 error"
-msgstr "Indien uitgeschakeld krijgen inkomende requests een HTTP 403 foutmelding terug van de DSMR-reader API."
+msgstr "Indien uitgeschakeld krijgen inkomende requests een HTTP 403 foutmelding terug van de DSMR-reader API"
 
 msgid "Auth Key"
 msgstr "Authenticatiesleutel"
@@ -673,7 +673,7 @@ msgid "Override telegram timestamp"
 msgstr "Overschrijf tijdstip van telegrammen"
 
 msgid "Whether DSMR-reader should IGNORE any timestamps of incoming telegrams and use the current timestamp instead. Use with care and only when your situation actually requires this!"
-msgstr "Geeft aan of DSMR-reader het tijdstip van inkomende telegrammen moet NEGEREN. In plaats daarvan wordt dan altijd het huidige tijdstip gebruikt. Wees voorzichtig! Alleen gebruiken wanneer jouw specifieke situatie dit vereist."
+msgstr "Geeft aan of DSMR-reader het tijdstip van inkomende telegrammen moet NEGEREN. In plaats daarvan wordt dan altijd het huidige tijdstip gebruikt. Wees voorzichtig, alleen gebruiken wanneer jouw specifieke situatie dit vereist!"
 
 msgid "Datalogger configuration"
 msgstr "Dataloggerconfiguratie"
@@ -919,7 +919,7 @@ msgid "DSMR-reader v4.1: Added support for reading network sockets with the data
 msgstr "DSMR-reader v4.1: Ondersteuning toegevoegd voor het uitlezen van netwerk-sockets met de datalogger (bijv. wanneer je ser2net gebruikt). Dit wordt door zowel de ingebouwde als remote datalogger ondersteund, al vereist de laatstgenoemde in dat geval wel een herinstallatie van het dataloggerscript."
 
 msgid "DSMR-reader will eventually be moved to its own organisation on GitHub in the near future. It should be redirected automatically, but if not, the new location will be: https://github.com/dsmrreader/dsmr-reader"
-msgstr "DSMR-reader wordt binnenkort uiteindelijk onder een eigen 'organisatie' ondergebracht op GitHub. Het doorverwijzen zou t.z.t automatisch moeten gaan, maar zo niet, dan wordt de nieuwe locatie: https://github.com/dsmrreader/dsmr-reader"
+msgstr "DSMR-reader wordt uiteindelijk onder een eigen 'organisatie' ondergebracht op GitHub. Het doorverwijzen zou t.z.t automatisch moeten gaan, maar zo niet, dan wordt de nieuwe locatie: https://github.com/dsmrreader/dsmr-reader"
 
 msgid "Application notification"
 msgstr "Applicatienotificatie"

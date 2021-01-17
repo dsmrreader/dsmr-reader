@@ -37,8 +37,8 @@ msgid "System packages::"
 msgstr "Systeempackages::"
 
 #: ../../development.rst:24
-msgid "Clone DSMR-reader repository from Github::"
-msgstr "Kloon DSMR-reader repository van Github::"
+msgid "Clone DSMR-reader repository from GitHub::"
+msgstr "Kloon DSMR-reader repository van GitHub::"
 
 #: ../../development.rst:29
 msgid "Create virtualenv and install all packages::"

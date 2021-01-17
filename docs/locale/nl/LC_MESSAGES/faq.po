@@ -29,8 +29,8 @@ msgid "If anything happens to fail or malfunction, please follow the steps below
 msgstr "Wanneer er iets lijkt mis te gaan, volg de onderstaande stappen eerst, voordat je een issue aanmaakt. Hiermee kun je wat meer achtergrondinformatie aanleveren."
 
 #: ../../faq.rst:22
-msgid "Debug info dump for Github issues"
-msgstr "Debug-informatiedump voor Github-issues"
+msgid "Debug info dump for GitHub issues"
+msgstr "Debug-informatiedump voor GitHub-issues"
 
 #: ../../faq.rst:28
 msgid "Added the ``dsmr_debuginfo`` command for command line."
@@ -41,8 +41,8 @@ msgid "Added the ``dsmr_debuginfo`` feature to About & Support page."
 msgstr "De ``dsmr_debuginfo`` feature toegevoegd aan de Over & Ondersteuning-pagina."
 
 #: ../../faq.rst:34
-msgid "You can supply additional debug info by executing the ``dsmr_debuginfo`` command and copying its output into your issue on Github."
-msgstr "Je kunt extra debug-informatie aanleveren door het ``dsmr_debuginfo``-commando uit te voeren en vervolgens de output daarvan te kopieren naar je issue op Github."
+msgid "You can supply additional debug info by executing the ``dsmr_debuginfo`` command and copying its output into your issue on GitHub."
+msgstr "Je kunt extra debug-informatie aanleveren door het ``dsmr_debuginfo``-commando uit te voeren en vervolgens de output daarvan te kopieren naar je issue op GitHub."
 
 #: ../../faq.rst:36
 msgid "To do so you can either execute ``./manage.py dsmr_debuginfo`` on the command line or (since v4.6) click the button on the About & Support page."
@@ -481,8 +481,8 @@ msgid "You should **not** see any errors regarding duplicate data or existing ID
 msgstr "Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's of iets soortgelijks."
 
 #: ../../faq.rst:425
-msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**."
-msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op Github en **ga niet verder**."
+msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at GitHub and **do not continue**."
+msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op GitHub en **ga niet verder**."
 
 #: ../../faq.rst:429
 msgid "How do I transfer day and hour statistics from a previous installation?"
@@ -521,7 +521,7 @@ msgid "This depends on the situation, but you can always try the following yours
 msgstr "Het hangt af van de situatie, maar je kunt het volgende sowieso zelf eerst proberen::"
 
 #: ../../faq.rst:487
-msgid "If it does not resolve your issue, ask for support on Github (see end of page)."
+msgid "If it does not resolve your issue, ask for support on GitHub (see end of page)."
 msgstr "Wanneer dat het probleem niet oplost, vraag dan om ondersteuning via Guthub (zie onderaan deze pagina)."
 
 #: ../../faq.rst:491
@@ -650,5 +650,5 @@ msgid "If you can't find the answer in the documentation, do not hesitate in loo
 msgstr "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan vooral niet om om hulp te vragen."
 
 #: ../../faq.rst:590
-msgid "`View existing Github issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_"
-msgstr "`Bekijk bestaande issues op Github of maak een nieuwe aan <https://github.com/dennissiemensma/dsmr-reader/issues>`_."
+msgid "`View existing GitHub issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_"
+msgstr "`Bekijk bestaande issues op GitHub of maak een nieuwe aan <https://github.com/dennissiemensma/dsmr-reader/issues>`_."

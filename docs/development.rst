@@ -21,7 +21,7 @@ System packages::
     
     sudo apt-get install -y postgresql postgresql-server-dev-all git python3 python3-pip python3-virtualenv virtualenvwrapper libmysqlclient-dev mariadb-server poedit
 
-Clone DSMR-reader repository from Github::
+Clone DSMR-reader repository from GitHub::
 
     git clone ... (your fork)
     cd dsmr-reader/

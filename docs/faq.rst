@@ -18,7 +18,7 @@ Troubleshooting
     If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue.
 
 
-Debug info dump for Github issues
+Debug info dump for GitHub issues
 ---------------------------------
 
 .. note::
@@ -31,7 +31,7 @@ Debug info dump for Github issues
 
         Added the ``dsmr_debuginfo`` feature to About & Support page.
 
-You can supply additional debug info by executing the ``dsmr_debuginfo`` command and copying its output into your issue on Github.
+You can supply additional debug info by executing the ``dsmr_debuginfo`` command and copying its output into your issue on GitHub.
 
 To do so you can either execute ``./manage.py dsmr_debuginfo`` on the command line or (since v4.6) click the button on the About & Support page.
 
@@ -422,7 +422,7 @@ You should **not** see any errors regarding duplicate data or existing ID's or w
 
 .. attention::
 
-    If you do encounter errors while restoring the backup in an **empty** database, create an issue at Github and **do not continue**.
+    If you do encounter errors while restoring the backup in an **empty** database, create an issue at GitHub and **do not continue**.
 
 
 How do I transfer day and hour statistics from a previous installation?
@@ -484,7 +484,7 @@ This depends on the situation, but you can always try the following yourself fir
 
 .. seealso::
 
-    If it does not resolve your issue, ask for support on Github (see end of page).
+    If it does not resolve your issue, ask for support on GitHub (see end of page).
 
 
 How do I fix: ``Error: Already running on PID 1234``?
@@ -605,4 +605,4 @@ I still need help!
 
     If you can't find the answer in the documentation, do not hesitate in looking for help.
 
-    `View existing Github issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_
+    `View existing GitHub issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_

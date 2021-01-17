@@ -19,7 +19,7 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
     automatic_update_checker = models.BooleanField(
         default=True,
         verbose_name=_('Automatically check for updates'),
-        help_text=_('Whether the application checks once in a while for new DSMR-reader release in Github'),
+        help_text=_('Whether the application checks once in a while for new DSMR-reader release in GitHub'),
     )
     process_sleep = models.DecimalField(
         default=1,

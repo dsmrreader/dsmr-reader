@@ -27,7 +27,7 @@ And don't forget
 Credits to the following software and projects:
 
 - The many external PIP packages used in DSMR-reader!
-- Github
+- GitHub
 - `Raspbian <https://www.raspbian.org/>`_
 - `Django Project <https://www.djangoproject.com/>`_
 - `Supervisor <http://supervisord.org/>`_
@@ -38,7 +38,7 @@ Credits to the following software and projects:
 - Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_
 - `Real Favicon Generator <http://realfavicongenerator.net>`_
 - `Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_
-- `Github <https://github.com/>`_
+- `GitHub <https://github.com/>`_
 - `TravisCI <https://travis-ci.org>`_ (thanks for before using CircleCI)
 - `MW <http://bettermotherfuckingwebsite.com/>`_
 - `Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_

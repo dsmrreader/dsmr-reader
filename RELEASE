@@ -4,4 +4,4 @@
 - Update CHANGELOG latest version + release date
 - Dump migration lock with: ./manage.py dsmrreader_lock_migrations
 - Commit/merge to release branch
-- Tag the version in Github and add changelog info
+- Tag the version in GitHub and add changelog info

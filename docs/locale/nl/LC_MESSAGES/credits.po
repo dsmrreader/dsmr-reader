@@ -65,8 +65,8 @@ msgid "The many external PIP packages used in DSMR-reader!"
 msgstr "De vele externe PIP-packages die door DSMR-reader gebruikt worden!"
 
 #: ../../credits.rst:30
-msgid "Github"
-msgstr "Github"
+msgid "GitHub"
+msgstr "GitHub"
 
 #: ../../credits.rst:31
 msgid "`Raspbian <https://www.raspbian.org/>`_"
@@ -109,8 +109,8 @@ msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
 #: ../../credits.rst:41
-msgid "`Github <https://github.com/>`_"
-msgstr "`Github <https://github.com/>`_"
+msgid "`GitHub <https://github.com/>`_"
+msgstr "`GitHub <https://github.com/>`_"
 
 #: ../../credits.rst:42
 msgid "`TravisCI <https://travis-ci.org>`_ (thanks for before using CircleCI)"
