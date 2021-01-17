@@ -26,7 +26,7 @@ fi
 
 echo ""
 echo ""
-echo " --- Checking for local file changes: "
+echo " --- Checking for local file changes."
 git diff --quiet
 
 if [ $? -ne 0 ]; then
