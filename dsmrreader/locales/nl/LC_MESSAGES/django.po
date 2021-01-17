@@ -1508,8 +1508,8 @@ msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. N
 msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
 msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
 
-msgid "When applicable, any electricity returned costs calculated is an approximate and is displayed for your convenience. It may or may not match your personal situation."
-msgstr "Indien van toepassing: Kosten m.b.t. teruglevering is een schatting en worden berekend voor een volledig overzicht. Deze kunnen afwijken van je daadwerkelijke situatie."
+msgid "When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation."
+msgstr "Indien van toepassing: Kosten m.b.t. teruglevering kunnen afwijken van je daadwerkelijke situatie en worden getoond voor een volledig overzicht."
 
 msgid "(combined)"
 msgstr "(gecombineerd)"
