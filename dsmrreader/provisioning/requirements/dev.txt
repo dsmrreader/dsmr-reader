@@ -3,7 +3,7 @@ poetry
 polib==1.1.0
 psycopg2-binary
 pylama==7.7.1
-pytest-cov==2.10.1
+pytest-cov==2.11.0
 pytest-django==4.1.0
 pytest-xdist==2.2.0
 mysqlclient==2.0.3
