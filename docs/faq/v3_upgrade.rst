@@ -108,7 +108,7 @@ Execute the following::
     cd ~
     mv .virtualenvs/dsmrreader .virtualenvs/v2-dsmrreader
 
-    virtualenv /home/dsmr/.virtualenvs/dsmrreader --no-site-packages --python python3.6
+    virtualenv /home/dsmr/.virtualenvs/dsmrreader --python python3.6
     source ~/.virtualenvs/dsmrreader/bin/activate
     logout
 
