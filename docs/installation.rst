@@ -447,8 +447,21 @@ Option C: Install DSMR-reader using Docker
 
 ----
 
+Option D: Install DSMR Reader as add-on in Home Assistant
+=========================================================
 
-Option D: Install datalogger only
++------------+------------------------------------------------------------------------------------+
+| Author     | ``sanderdw`` (Sander de Wildt) based on the work of ``xirixiz`` (Bram van Dartel)  |
++------------+------------------------------------------------------------------------------------+
+| Github     | https://github.com/sanderdw/hassio-addons                                          |
++------------+------------------------------------------------------------------------------------+
+| More info  | https://community.home-assistant.io/t/dsmr-reader-add-on-for-home-assistant/279087 |
++------------+------------------------------------------------------------------------------------+
+
+
+----
+
+Option E: Install datalogger only
 =================================
 
 .. note::
