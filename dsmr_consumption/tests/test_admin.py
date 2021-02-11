@@ -82,3 +82,16 @@ class TestAdmin(TestCase):
         ))
         self.client.post(self.url, data=self.data)
         self.assertTrue(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
+
+    def test_add_esp_invalid_date(self):
+        """ This used to crash first. """
+        self.assertEqual(EnergySupplierPrice.objects.all().count(), 1)
+        self.data.update(dict(
+            start='invalid',
+            end='2020-01-01',
+            gas_price=1,
+        ))
+        self.client.post(self.url, data=self.data)
+
+        # Unchanged
+        self.assertEqual(EnergySupplierPrice.objects.all().count(), 1)

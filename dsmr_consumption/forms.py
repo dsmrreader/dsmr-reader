@@ -42,6 +42,9 @@ class EnergySupplierPriceForm(forms.ModelForm):
         current_start = self.cleaned_data.get('start')
         current_end = self.cleaned_data.get('end')
 
+        if current_start is None or current_end is None:
+            raise forms.ValidationError(_('Please fix contract start/end first'))
+
         existing_contracts = EnergySupplierPrice.objects.exclude(
             # Not do block ourselves.
             pk=self.instance.pk

@@ -360,6 +360,9 @@ msgstr "Verbruik"
 msgid "Too many unprocessed readings: {}"
 msgstr "Te veel onverwerkte telegrammen: {}"
 
+msgid "Please fix contract start/end first"
+msgstr "Vul eerst een correcte start-/einddatum in voor het contract"
+
 msgid "This price is already set by another contract within a colliding date range ({} / {}): {}"
 msgstr "Deze prijs is al ingesteld bij een ander contract met een overlappende contractdatum: {} ({} - {})"
 
