@@ -52,6 +52,7 @@ energy_supplier_price_electricity_delivered_2 = nnn
 energy_supplier_price_electricity_returned_1 = ooo
 energy_supplier_price_electricity_returned_2 = ppp
 energy_supplier_price_gas = qqq
+fixed_cost = rrr
 '''
         self.json_settings.save()
 
@@ -79,6 +80,9 @@ energy_supplier_price_electricity_delivered_2 = dsmr/nnn
 energy_supplier_price_electricity_returned_1 = dsmr/ooo
 energy_supplier_price_electricity_returned_2 = dsmr/ppp
 energy_supplier_price_gas = dsmr/qqq
+
+# Fixed
+fixed_cost = dsmr/rrr
 '''
         self.split_topic_settings.save()
 
@@ -176,6 +180,7 @@ energy_supplier_price_gas = dsmr/qqq
             electricity_returned_1_price=1,
             electricity_returned_2_price=2,
             gas_price=8,
+            fixed_daily_cost=7,
         )
         queue_message_mock.reset_mock()
         dsmr_mqtt.services.callbacks.publish_day_consumption()
@@ -186,13 +191,14 @@ energy_supplier_price_gas = dsmr/qqq
         self.assertEqual(result['ggg'], '33.00')
         self.assertEqual(result['hhh'], '60.00')
         self.assertEqual(result['iii'], '93.00')
-        self.assertEqual(result['lll'], '129.00')
+        self.assertEqual(result['lll'], '136.00')
 
         self.assertEqual(result['mmm'], '3.00000')
         self.assertEqual(result['nnn'], '5.00000')
         self.assertEqual(result['ooo'], '1.00000')
         self.assertEqual(result['ppp'], '2.00000')
         self.assertEqual(result['qqq'], '8.00000')
+        self.assertEqual(result['rrr'], '7.00000')
 
     @mock.patch('dsmr_mqtt.services.messages.queue_message')
     def test_split_topic(self, queue_message_mock):
@@ -236,6 +242,7 @@ energy_supplier_price_gas = dsmr/qqq
             electricity_returned_1_price=1,
             electricity_returned_2_price=2,
             gas_price=8,
+            fixed_daily_cost=7,
         )
 
         # Should be okay now.
@@ -260,10 +267,12 @@ energy_supplier_price_gas = dsmr/qqq
         self.assertIn({'payload': Decimal('33.00'), 'topic': 'dsmr/ggg'}, called_kwargs)
         self.assertIn({'payload': Decimal('60.00'), 'topic': 'dsmr/hhh'}, called_kwargs)
         self.assertIn({'payload': Decimal('93.00'), 'topic': 'dsmr/iii'}, called_kwargs)
-        self.assertIn({'payload': Decimal('129.00'), 'topic': 'dsmr/lll'}, called_kwargs)
+        self.assertIn({'payload': Decimal('136.00'), 'topic': 'dsmr/lll'}, called_kwargs)
 
         self.assertIn({'payload': Decimal('3.00000'), 'topic': 'dsmr/mmm'}, called_kwargs)
         self.assertIn({'payload': Decimal('5.00000'), 'topic': 'dsmr/nnn'}, called_kwargs)
         self.assertIn({'payload': Decimal('1.00000'), 'topic': 'dsmr/ooo'}, called_kwargs)
         self.assertIn({'payload': Decimal('2.00000'), 'topic': 'dsmr/ppp'}, called_kwargs)
         self.assertIn({'payload': Decimal('8.00000'), 'topic': 'dsmr/qqq'}, called_kwargs)
+
+        self.assertIn({'payload': Decimal('7.00000'), 'topic': 'dsmr/rrr'}, called_kwargs)

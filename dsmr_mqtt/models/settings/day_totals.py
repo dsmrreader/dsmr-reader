@@ -37,6 +37,9 @@ gas = gas
 gas_cost = gas_cost
 total_cost = total_cost
 
+# Flat/fixed costs (if any)
+fixed_cost = fixed_cost
+
 # Your energy supplier prices (if set)
 energy_supplier_price_electricity_delivered_1 = energy_supplier_price_electricity_delivered_1
 energy_supplier_price_electricity_delivered_2 = energy_supplier_price_electricity_delivered_2
@@ -81,6 +84,9 @@ electricity_cost_merged = dsmr/day-consumption/electricity_cost_merged
 gas = dsmr/day-consumption/gas
 gas_cost = dsmr/day-consumption/gas_cost
 total_cost = dsmr/day-consumption/total_cost
+
+# Flat/fixed costs (if any)
+fixed_cost = dsmr/day-consumption/fixed_cost
 
 # Your energy supplier prices (if set)
 energy_supplier_price_electricity_delivered_1 = dsmr/day-consumption/energy_supplier_price_electricity_delivered_1

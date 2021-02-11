@@ -19,11 +19,13 @@ v4.x releases
 v4.12.0 - 2021-xx-xx
 --------------------
 
+- ``Added``: Vaste dagkosten via MQTT naar HA [`#1289 <https://github.com/dsmrreader/dsmr-reader/issues/1289>`_]
+
 - ``Changed``: Samenvatting energiecontracten verbeteren [`#1257 <https://github.com/dsmrreader/dsmr-reader/issues/1257>`_]
 
 - ``Fixed``: Translations - by @denvers [`#1260 <https://github.com/dsmrreader/dsmr-reader/issues/1260>`_]
 - ``Fixed``: Bij update controleren op lokale openstaande wijzigingen [`#1259 <https://github.com/dsmrreader/dsmr-reader/issues/1259>`_]
-- ``Fixed``:  Foutmelding na invullen foutieve datum in energiecontract [`#1283 <https://github.com/dsmrreader/dsmr-reader/issues/1283>`_]
+- ``Fixed``: Foutmelding na invullen foutieve datum in energiecontract [`#1283 <https://github.com/dsmrreader/dsmr-reader/issues/1283>`_]
 
 
 v4.11.0 - 2021-01-17
