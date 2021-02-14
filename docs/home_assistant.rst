@@ -1,12 +1,13 @@
 Home Assistant
 ==============
 
-Plugins
--------
-Since Home Assistant ``0.103`` there is `a DSMR-reader plugin available <https://www.home-assistant.io/integrations/dsmr_reader/>`_, created by Wim Haanstra.
-This plugin uses DSMR-reader's MQTT messages to read and update the state of your smart meter.
+There is some third party support for Home Assistant. This may ease any integrations between DSMR-reader and Home Assistant.
+
+Integrations
+------------
+- `DSMR-reader sensor via MQTT <https://www.home-assistant.io/integrations/dsmr_reader/>`__ (third party, by Wim Haanstra)
 
 
 Add-ons
 -------
-Also, there is `a DSMR-reader remote datalogger add-on for Home Assistant <https://github.com/sanderdw/hassio-addons>`_, created by Sander de Wildt.
+- `DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (third party, by Sander de Wildt)
