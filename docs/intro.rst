@@ -7,27 +7,8 @@ Introduction
 
 Project goals
 -------------
-- Provide a tool to easily extract and store data transferred by the DSMR protocol of your smart meter.
-- Allowing to export your data to other systems or third parties. It's your data, you decide.
-
-
-Features
---------
-DSMR-reader has the following features:
-
-- Read telegram data from serial port
-- Read telegram data from network socket
-- Receive telegram data through its (REST) API
-- Process, store and plot telegram data extensively
-- Daily cost indication using your energy prices
-- Push notifications through Pushover / Prowl
-- Automated export to your MinderGas.nl account
-- Automated export to your PVOutput.org account
-- Automated export to an MQTT broker
-- Automated export to an InfluxDB
-- Automated backup to Dropbox
-- Automated backup through email
-- And many others...
+- Provide a tool to easily extract, store and visualize data transferred by the DSMR protocol of your smart meter.
+- Allow you to export your data to other systems or third parties. Currently supports MQTT for pushing data and an REST API for pulling data.
 
 
 Languages
@@ -48,25 +29,22 @@ Hardware requirements
 - For datalogger only: **Any** RaspberryPi or similar
 - For full DSMR-reader: **RaspberryPi 3+** or similar
 - P1 telegram cable (or a network socket when using ``ser2net``)
+- A smart meter supporting DSMR versions: `v2` / `v4` / `v5`
 
 
 Software requirements
 ---------------------
 
-- OS: ``Raspbian OS`` or similar
-- Disk space: `1+ GB` (depends on whether you archive all readings)
-- Python: `3.6` or higher
-- Smart Meter DSMR versions: `v2` / `v4` / `v5`
+- **OS**: ``Raspbian OS`` or similar (or using Docker).
+- **Disk space**: 1+ GB - Depending on your smart meter and whether how many readings you want to preserve.
+- **Code**: A `supported <https://devguide.python.org/#status-of-python-branches>`__ Python version.
+- **Database**: A `supported <https://www.postgresql.org/support/versioning/>`__ PostgreSQL version.
 
-.. warning::
-
-    - Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5``
-    - Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader v2.0``
-    - Support for ``Python 3.5`` has been **discontinued** since ``DSMR-reader v3.0``
+Note that this project is built with `Django <https://www.djangoproject.com/>`__, which decides which Python/DB versions are actually supported.
 
 
-Screenshots / tour
-------------------
+Screenshots
+-----------
 
 Dashboard
 ^^^^^^^^^
