@@ -1,8 +1,6 @@
 Application: Trends
 ===================
 
-This page displays a summary of your average daily consumption and habits.
+.. hint::
 
-.. image:: ../_static/screenshots/frontend/trends.png
-    :target: ../_static/screenshots/frontend/trends.png
-    :alt: Trends
+    This version of the documentation is outdated. See `the latest version </>`__ instead.

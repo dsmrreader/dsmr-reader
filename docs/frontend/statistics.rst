@@ -1,9 +1,6 @@
 Application: Statistics
 =======================
 
-This page displays your meter positions and statistics provided by the DSMR protocol.
-You can also find the number of readings stored and any excesses regarding consumption.
+.. hint::
 
-.. image:: ../_static/screenshots/frontend/statistics.png
-    :target: ../_static/screenshots/frontend/statistics.png
-    :alt: Statistics
+    This version of the documentation is outdated. See `the latest version </>`__ instead.
