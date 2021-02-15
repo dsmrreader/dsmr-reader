@@ -13,12 +13,12 @@ cat dsmrreader/provisioning/requirements/*.txt | tr '[:upper:]' '[:lower:]' | gr
 comm -1 -2 /tmp/outdated.txt /tmp/reqs.txt > /tmp/outdated-reqs.txt
 
 # Check outdated requirements
-[ -s /tmp/outdated-reqs.txt ] || exit 0
+[ -s /tmp/outdated-reqs.txt ] ; exit
+
+pip list --outdated --local
 
 echo ""
 echo "The following project requirements are outdated:"
 echo "------------------------------------------------"
 cat /tmp/outdated-reqs.txt
 echo ""
-
-exit 1
