@@ -1,11 +1,6 @@
 Admin: Interface
 ================
 
-Your smart meter always keeps tracks of high and low tariff.
-If you are paying your energy supplier for a single tariff, you can have the application display all electricity combined as a single merged tariff.
+.. hint::
 
-You can change most colors used in graphs to your personal flavor as well.
-
-.. image:: ../_static/screenshots/admin/frontendsettings.png
-    :target: ../_static/screenshots/admin/frontendsettings.png
-    :alt: Interface
+    This version of the documentation is outdated. See `the latest version </>`__ instead.

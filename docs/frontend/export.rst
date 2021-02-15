@@ -1,8 +1,6 @@
 Application: Export
 ===================
 
-This pages allows you to export all day or hour statistics to CSV.
+.. hint::
 
-.. image:: ../_static/screenshots/frontend/export.png
-    :target: ../_static/screenshots/frontend/export.png
-    :alt: Export
+    This version of the documentation is outdated. See `the latest version </>`__ instead.

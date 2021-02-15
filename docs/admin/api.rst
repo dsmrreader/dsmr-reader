@@ -1,12 +1,6 @@
 Admin: API
 ==========
 
-Configure the API if you need it to supply telegrams or simply read data from DSMR-reader.
+.. hint::
 
-By default a random API key will be generated. You can enter your own if you want to.
-:doc:`You can find the API documentation here.<../api>`
-
-
-.. image:: ../_static/screenshots/admin/apisettings.png
-    :target: ../_static/screenshots/admin/apisettings.png
-    :alt: API
+    This version of the documentation is outdated. See `the latest version </>`__ instead.
