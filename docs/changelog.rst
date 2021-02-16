@@ -16,7 +16,7 @@ v4.x releases
 
 
 
-v4.12.0 - 2021-xx-xx
+v4.12.0 - 2021-02-17
 --------------------
 
 - ``Added``: Vaste dagkosten via MQTT naar HA [`#1289 <https://github.com/dsmrreader/dsmr-reader/issues/1289>`_]
