@@ -260,8 +260,8 @@
         $(document).ready(function(){
             setInterval(function(){ update_consumption_header(); }, 1000);
 
-            /* Reload entire page after 15 minutes. */
-            setInterval(function(){ location.reload(); }, 15 * 60 * 1000)
+            /* Reload entire page after X minutes. */
+            setInterval(function(){ location.reload(); }, 5 * 60 * 1000)
 
             // Sort graphs by preference.
             $('section.content > div').sort(graph_sort_callback).appendTo('section.content');
