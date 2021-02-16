@@ -22,6 +22,7 @@ v4.12.0 - 2021-xx-xx
 - ``Added``: Vaste dagkosten via MQTT naar HA [`#1289 <https://github.com/dsmrreader/dsmr-reader/issues/1289>`_]
 
 - ``Changed``: Samenvatting energiecontracten verbeteren [`#1257 <https://github.com/dsmrreader/dsmr-reader/issues/1257>`_]
+- ``Changed``: Auto-refresh Live-pagina elke 5 minuten [`#1298 <https://github.com/dsmrreader/dsmr-reader/issues/1298>`_]
 
 - ``Fixed``: Translations - by @denvers [`#1260 <https://github.com/dsmrreader/dsmr-reader/issues/1260>`_]
 - ``Fixed``: Bij update controleren op lokale openstaande wijzigingen [`#1259 <https://github.com/dsmrreader/dsmr-reader/issues/1259>`_]
