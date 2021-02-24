@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Clean start.
+rm -f /tmp/outdated.txt /tmp/outdated-reqs.txt /tmp/reqs.txt
+
 # Keep pip in sync with reqs
 pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
 
@@ -12,13 +15,16 @@ cat dsmrreader/provisioning/requirements/*.txt | tr '[:upper:]' '[:lower:]' | gr
 # Find outdated packages from requirements
 comm -1 -2 /tmp/outdated.txt /tmp/reqs.txt > /tmp/outdated-reqs.txt
 
-# Check outdated requirements
-[ -s /tmp/outdated-reqs.txt ] ; exit
 
 pip list --outdated --local
 
 echo ""
 echo "The following project requirements are outdated:"
 echo "------------------------------------------------"
+echo ""
+
+# Check outdated requirements
+[ -s /tmp/outdated-reqs.txt ] ; exit
+
 cat /tmp/outdated-reqs.txt
 echo ""
