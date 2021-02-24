@@ -43,8 +43,8 @@
                         {% if latest_reading and delivered_sum %}
                         <tr>
                             <td>{% translate "Electricity (combined)" %} <span class="unit">{% translate "kWh" noop %}</span></td>
-                            <td><span class="unit">{{ delivered_sum|default:'-' }}</span></td>
-                            <td><span class="unit">{% if capabilities.electricity_returned %}{{ returned_sum|default:'-' }}{% endif %}</span></td>
+                            <td><span class="badge bg-red">{{ delivered_sum|default:'-' }}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ returned_sum|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% endif %}
 
