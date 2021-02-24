@@ -140,14 +140,21 @@ def create_daily_statistics(day):
         electricity1_cost=consumption['electricity1_cost'],
         electricity2_cost=consumption['electricity2_cost'],
 
-        gas=consumption.get('gas', 0),
-        gas_cost=consumption.get('gas_cost', 0),
+        gas=consumption.get('gas', 0),  # Optional
+        gas_cost=consumption.get('gas_cost', 0),  # Optional
 
         lowest_temperature=consumption.get('lowest_temperature'),
         highest_temperature=consumption.get('highest_temperature'),
         average_temperature=consumption.get('average_temperature'),
 
         fixed_cost=consumption['fixed_cost'],
+
+        # Historic reading. Use FIRST reading of the day as reference.
+        electricity1_reading=consumption['electricity1_start'],
+        electricity2_reading=consumption['electricity2_start'],
+        electricity1_returned_reading=consumption['electricity1_returned_start'],
+        electricity2_returned_reading=consumption['electricity2_returned_start'],
+        gas_reading=consumption.get('gas_start'),  # Optional
     )
 
 

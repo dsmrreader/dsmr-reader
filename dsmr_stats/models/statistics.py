@@ -12,33 +12,37 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         db_index=True, max_digits=8, decimal_places=2, verbose_name=_('Total cost')
     )
 
+    """ Diffs calculated (field names may be renamed in the future to clarify) """
     electricity1 = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 (low tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity tariff 1 diff'),
+        help_text=_('The difference between the first and last reading of the day')
     )
     electricity2 = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 2 (high tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity tariff 2 diff'),
+        help_text=_('The difference between the first and last reading of the day')
     )
     electricity1_returned = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 returned (low tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity tariff 1 returned diff'),
+        help_text=_('The difference between the first and last reading of the day')
     )
     electricity2_returned = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 2 returned (high tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity tariff 2 returned diff'),
+        help_text=_('The difference between the first and last reading of the day')
     )
     electricity1_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, verbose_name=_('Electricity 1 price (low tariff)')
+        max_digits=8, decimal_places=2, verbose_name=_('Electricity tariff 1 cost')
     )
     electricity2_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, verbose_name=_('Electricity 2 price (high tariff)')
+        max_digits=8, decimal_places=2, verbose_name=_('Electricity tariff 2 cost')
     )
-
     # Gas readings are optional/not guaranteed.
     gas = models.DecimalField(
-        max_digits=9, decimal_places=3, null=True, default=None, verbose_name=_('Gas')
+        max_digits=9, decimal_places=3, null=True, default=None, verbose_name=_('Gas diff'),
+        help_text=_('The difference between the first and last reading of the day')
     )
     gas_cost = models.DecimalField(
         max_digits=8, decimal_places=2, null=True, default=None, verbose_name=_('Gas cost')
     )
-
     # Temperature readings depend on user settings.
     lowest_temperature = models.DecimalField(
         max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Lowest temperature')
@@ -49,9 +53,36 @@ class DayStatistics(ModelUpdateMixin, models.Model):
     average_temperature = models.DecimalField(
         max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Average temperature')
     )
-
     fixed_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, default=0, verbose_name=_('Fixed costs')
+        max_digits=8, decimal_places=2, default=0, verbose_name=_('Fixed cost'),
+        help_text=_('The first absolute value read at the start of the day')
+    )
+
+    """ Historic meter positions """
+    electricity1_reading = models.DecimalField(
+        max_digits=9, decimal_places=3, blank=True, null=True, default=None,
+        verbose_name=_('Electricity tariff 1'),
+        help_text=_('The first absolute value read at the start of the day')
+    )
+    electricity2_reading = models.DecimalField(
+        max_digits=9, decimal_places=3, blank=True, null=True, default=None,
+        verbose_name=_('Electricity tariff 2 reading'),
+        help_text=_('The first absolute value read at the start of the day')
+    )
+    electricity1_returned_reading = models.DecimalField(
+        max_digits=9, decimal_places=3, blank=True, null=True, default=None,
+        verbose_name=_('Electricity tariff 1 reading'),
+        help_text=_('The first absolute value read at the start of the day')
+    )
+    electricity2_returned_reading = models.DecimalField(
+        max_digits=9, decimal_places=3, blank=True, null=True, default=None,
+        verbose_name=_('Electricity tariff 2 reading'),
+        help_text=_('The first absolute value read at the start of the day')
+    )
+    gas_reading = models.DecimalField(
+        max_digits=9, decimal_places=3, blank=True, null=True, default=None,
+        verbose_name=_('Gas reading'),
+        help_text=_('The first absolute value read at the start of the day')
     )
 
     @property

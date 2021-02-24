@@ -2304,23 +2304,29 @@ msgstr "Notities"
 msgid "Date"
 msgstr "Datum"
 
-msgid "Electricity 1 (low tariff)"
-msgstr "Elektriciteit 1 (daltarief)"
+msgid "Electricity tariff 1 diff"
+msgstr "Elektriciteit tarief 1 verbruikt"
 
-msgid "Electricity 2 (high tariff)"
-msgstr "Elektriciteit 2 (piektarief)"
+msgid "The difference between the first and last reading of the day"
+msgstr "Het verschil tussen de eerste en laatste meting van de dag"
 
-msgid "Electricity 1 returned (low tariff)"
-msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+msgid "Electricity tariff 2 diff"
+msgstr "Elektriciteit tarief 2 verbruikt"
 
-msgid "Electricity 2 returned (high tariff)"
-msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
+msgid "Electricity tariff 1 returned diff"
+msgstr "Elektriciteit tarief 1 teruggeleverd"
 
-msgid "Electricity 1 price (low tariff)"
-msgstr "Prijs elektriciteit 1 (daltarief)"
+msgid "Electricity tariff 2 returned diff"
+msgstr "Elektriciteit tarief 2 teruggeleverd"
 
-msgid "Electricity 2 price (high tariff)"
-msgstr "Prijs elektriciteit 2 (piektarief)"
+msgid "Electricity tariff 1 cost"
+msgstr "Elektriciteit tarief 1 kosten"
+
+msgid "Electricity tariff 2 cost"
+msgstr "Elektriciteit tarief 2 kosten"
+
+msgid "Gas diff"
+msgstr "Gas verbruikt"
 
 msgid "Gas cost"
 msgstr "Gaskosten"
@@ -2334,11 +2340,41 @@ msgstr "Hoogste temperatuur"
 msgid "Average temperature"
 msgstr "Gemiddelde temperatuur"
 
+msgid "Fixed cost"
+msgstr "Vaste kosten"
+
+msgid "The first absolute value read at the start of the day"
+msgstr "De absoluut gemeten waarde aan het begin van de dag"
+
+msgid "Electricity tariff 1"
+msgstr "Elektriciteit tarief 1"
+
+msgid "Electricity tariff 2 reading"
+msgstr "Elektriciteit tarief 2 gemeten"
+
+msgid "Electricity tariff 1 reading"
+msgstr "Elektriciteit tarief 1 gemeten"
+
+msgid "Gas reading"
+msgstr "Gasmeting"
+
 msgid "Day statistics (automatically generated data)"
 msgstr "Dagstatistieken (automatisch gegenereerd)"
 
 msgid "Hour start"
 msgstr "Begintijd uur"
+
+msgid "Electricity 1 (low tariff)"
+msgstr "Elektriciteit 1 (daltarief)"
+
+msgid "Electricity 2 (high tariff)"
+msgstr "Elektriciteit 2 (piektarief)"
+
+msgid "Electricity 1 returned (low tariff)"
+msgstr "Elektriciteit 1 teruggeleverd (daltarief)"
+
+msgid "Electricity 2 returned (high tariff)"
+msgstr "Elektriciteit 2 teruggeleverd (piektarief)"
 
 msgid "Hour statistics (automatically generated data)"
 msgstr "Uurstatistieken (automatisch gegenereerd)"
@@ -2594,6 +2630,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Electricity 1 price (low tariff)"
+#~ msgstr "Prijs elektriciteit 1 (daltarief)"
+
+#~ msgid "Electricity 2 price (high tariff)"
+#~ msgstr "Prijs elektriciteit 2 (piektarief)"
 
 #~ msgid "(total)"
 #~ msgstr "(totaal)"

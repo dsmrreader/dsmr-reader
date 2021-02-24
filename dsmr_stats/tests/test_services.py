@@ -20,6 +20,7 @@ import dsmr_stats.services
 
 class TestServices(InterceptCommandStdoutMixin, TestCase):
     fixtures = ['dsmr_stats/electricity-consumption.json', 'dsmr_stats/gas-consumption.json']
+    support_gas = True
 
     schedule_process = None
 
@@ -454,6 +455,34 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertTrue(clear_cache_mock.called)
 
     @mock.patch('django.utils.timezone.now')
+    def test_create_day_statistics_reading_history(self, now_mock):
+        """ Check whether the first reading is stored as well in the day statistics. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12))
+
+        # Fixtures lack these values. Have some sample data for assertions.
+        ElectricityConsumption.objects.get(pk=95).update(
+            returned_1=Decimal('0.001'),
+            returned_2=Decimal('0.002')
+        )
+        ElectricityConsumption.objects.get(pk=96).update(
+            returned_1=Decimal('0.003'),
+            returned_2=Decimal('0.004')
+        )
+
+        dsmr_stats.services.create_statistics(target_day=timezone.now().date())
+        day_statistics = DayStatistics.objects.get(day=timezone.now().date())
+
+        self.assertEqual(day_statistics.electricity1_reading, Decimal('595.187'))
+        self.assertEqual(day_statistics.electricity2_reading, Decimal('593.558'))
+        self.assertEqual(day_statistics.electricity1_returned_reading, Decimal('0.001'))
+        self.assertEqual(day_statistics.electricity2_returned_reading, Decimal('0.002'))
+
+        if self.support_gas:
+            self.assertEqual(day_statistics.gas_reading, Decimal('956.739'))
+        else:
+            self.assertEqual(day_statistics.gas_reading, None)
+
+    @mock.patch('django.utils.timezone.now')
     def test_average_consumption_by_hour(self, now_mock):
         """ Test whether timezones are converted properly when grouping hours. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 25, 12))
@@ -579,7 +608,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         data, count = dsmr_stats.services.year_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
-        days_in_year = 366  # Hardcoded leapyear 2016.
+        days_in_year = 366  # Hardcoded leap year 2016.
 
         self.assertEqual(count, 366)
 
@@ -912,3 +941,4 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
 class TestServicesWithoutGas(TestServices):
     fixtures = ['dsmr_stats/electricity-consumption.json']
+    support_gas = False
