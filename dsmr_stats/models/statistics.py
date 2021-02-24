@@ -8,9 +8,6 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class DayStatistics(ModelUpdateMixin, models.Model):
     """ Daily consumption usage summary. """
     day = models.DateField(unique=True, db_index=True, verbose_name=_('Date'))
-    total_cost = models.DecimalField(
-        db_index=True, max_digits=8, decimal_places=2, verbose_name=_('Total cost')
-    )
 
     """ Diffs calculated (field names may be renamed in the future to clarify) """
     electricity1 = models.DecimalField(
@@ -54,14 +51,16 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         max_digits=4, decimal_places=1, null=True, default=None, verbose_name=_('Average temperature')
     )
     fixed_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, default=0, verbose_name=_('Fixed cost'),
-        help_text=_('The first absolute value read at the start of the day')
+        max_digits=8, decimal_places=2, default=0, verbose_name=_('Fixed cost')
+    )
+    total_cost = models.DecimalField(
+        db_index=True, max_digits=8, decimal_places=2, verbose_name=_('Total cost')
     )
 
     """ Historic meter positions """
     electricity1_reading = models.DecimalField(
         max_digits=9, decimal_places=3, blank=True, null=True, default=None,
-        verbose_name=_('Electricity tariff 1'),
+        verbose_name=_('Electricity tariff 1 reading'),
         help_text=_('The first absolute value read at the start of the day')
     )
     electricity2_reading = models.DecimalField(

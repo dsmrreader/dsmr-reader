@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from django.forms import widgets
 from django.db import models
@@ -32,6 +33,34 @@ class DayStatisticsAdmin(admin.ModelAdmin):
     list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'fixed_cost', 'total_cost')
     list_filter = (
         ('day', DateRangeFilter),
+    )
+    fieldsets = (
+        (
+            None, {
+                'fields': ['day'],
+            }
+        ),
+        (
+            _('Diff'), {
+                'fields': ['electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas'],
+            }
+        ),
+        (
+            _('Readings'), {
+                'fields': ['electricity1_reading', 'electricity2_reading', 'electricity1_returned_reading',
+                           'electricity2_returned_reading', 'gas_reading'],
+            }
+        ),
+        (
+            _('Costs'), {
+                'fields': ['electricity1_cost', 'electricity2_cost', 'gas_cost', 'fixed_cost', 'total_cost'],
+            }
+        ),
+        (
+            _('Weather'), {
+                'fields': ['lowest_temperature', 'highest_temperature', 'average_temperature'],
+            }
+        ),
     )
 
 

@@ -2274,6 +2274,15 @@ msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt di
 msgid "PVOutput: Add Status configuration"
 msgstr "PVOutput: \"Add Status\" configuratie"
 
+msgid "Diff"
+msgstr "Verschil"
+
+msgid "Readings"
+msgstr "Metingen"
+
+msgid "Weather"
+msgstr "Weergegevens"
+
 msgid "Trend & statistics"
 msgstr "Trends & statistieken"
 
@@ -2343,17 +2352,14 @@ msgstr "Gemiddelde temperatuur"
 msgid "Fixed cost"
 msgstr "Vaste kosten"
 
+msgid "Electricity tariff 1 reading"
+msgstr "Elektriciteit tarief 1 gemeten"
+
 msgid "The first absolute value read at the start of the day"
 msgstr "De absoluut gemeten waarde aan het begin van de dag"
 
-msgid "Electricity tariff 1"
-msgstr "Elektriciteit tarief 1"
-
 msgid "Electricity tariff 2 reading"
 msgstr "Elektriciteit tarief 2 gemeten"
-
-msgid "Electricity tariff 1 reading"
-msgstr "Elektriciteit tarief 1 gemeten"
 
 msgid "Gas reading"
 msgstr "Gasmeting"
@@ -2441,9 +2447,6 @@ msgstr "Buienradar"
 
 msgid "See <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> for a map of all locations."
 msgstr "Zie <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> voor een kaart van alle locaties."
-
-msgid "Weather"
-msgstr "Weergegevens"
 
 msgid "Temperature (in ℃)"
 msgstr "Temperatuur (in ℃)"
@@ -2630,6 +2633,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Electricity tariff 1"
+#~ msgstr "Elektriciteit tarief 1"
 
 #~ msgid "Electricity 1 price (low tariff)"
 #~ msgstr "Prijs elektriciteit 1 (daltarief)"
