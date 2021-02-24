@@ -193,12 +193,12 @@ fixed_cost = dsmr/rrr
         self.assertEqual(result['iii'], '93.00')
         self.assertEqual(result['lll'], '136.00')
 
-        self.assertEqual(result['mmm'], '3.00000')
-        self.assertEqual(result['nnn'], '5.00000')
-        self.assertEqual(result['ooo'], '1.00000')
-        self.assertEqual(result['ppp'], '2.00000')
-        self.assertEqual(result['qqq'], '8.00000')
-        self.assertEqual(result['rrr'], '7.00000')
+        self.assertEqual(result['mmm'], '3.000000')
+        self.assertEqual(result['nnn'], '5.000000')
+        self.assertEqual(result['ooo'], '1.000000')
+        self.assertEqual(result['ppp'], '2.000000')
+        self.assertEqual(result['qqq'], '8.000000')
+        self.assertEqual(result['rrr'], '7.000000')
 
     @mock.patch('dsmr_mqtt.services.messages.queue_message')
     def test_split_topic(self, queue_message_mock):
@@ -269,10 +269,10 @@ fixed_cost = dsmr/rrr
         self.assertIn({'payload': Decimal('93.00'), 'topic': 'dsmr/iii'}, called_kwargs)
         self.assertIn({'payload': Decimal('136.00'), 'topic': 'dsmr/lll'}, called_kwargs)
 
-        self.assertIn({'payload': Decimal('3.00000'), 'topic': 'dsmr/mmm'}, called_kwargs)
-        self.assertIn({'payload': Decimal('5.00000'), 'topic': 'dsmr/nnn'}, called_kwargs)
-        self.assertIn({'payload': Decimal('1.00000'), 'topic': 'dsmr/ooo'}, called_kwargs)
-        self.assertIn({'payload': Decimal('2.00000'), 'topic': 'dsmr/ppp'}, called_kwargs)
-        self.assertIn({'payload': Decimal('8.00000'), 'topic': 'dsmr/qqq'}, called_kwargs)
+        self.assertIn({'payload': Decimal('3.000000'), 'topic': 'dsmr/mmm'}, called_kwargs)
+        self.assertIn({'payload': Decimal('5.000000'), 'topic': 'dsmr/nnn'}, called_kwargs)
+        self.assertIn({'payload': Decimal('1.000000'), 'topic': 'dsmr/ooo'}, called_kwargs)
+        self.assertIn({'payload': Decimal('2.000000'), 'topic': 'dsmr/ppp'}, called_kwargs)
+        self.assertIn({'payload': Decimal('8.000000'), 'topic': 'dsmr/qqq'}, called_kwargs)
 
-        self.assertIn({'payload': Decimal('7.00000'), 'topic': 'dsmr/rrr'}, called_kwargs)
+        self.assertIn({'payload': Decimal('7.000000'), 'topic': 'dsmr/rrr'}, called_kwargs)

@@ -25,7 +25,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     )
     electricity_delivered_1_price = models.DecimalField(
         max_digits=11,
-        decimal_places=5,
+        decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_('Tariff 1 delivered price (€)'),
@@ -33,7 +33,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     )
     electricity_delivered_2_price = models.DecimalField(
         max_digits=11,
-        decimal_places=5,
+        decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_('Tariff 2 delivered price (€)'),
@@ -41,7 +41,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     )
     gas_price = models.DecimalField(
         max_digits=11,
-        decimal_places=5,
+        decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_('Gas price (€)'),
@@ -49,7 +49,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     )
     electricity_returned_1_price = models.DecimalField(
         max_digits=11,
-        decimal_places=5,
+        decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_('Tariff 1 returned price (€)'),
@@ -57,7 +57,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     )
     electricity_returned_2_price = models.DecimalField(
         max_digits=11,
-        decimal_places=5,
+        decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_('Tariff 2 returned price (€)'),
@@ -65,7 +65,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     )
     fixed_daily_cost = models.DecimalField(
         max_digits=11,
-        decimal_places=5,
+        decimal_places=6,
         default=0,
         verbose_name=_('Fixed daily costs (€)'),
         help_text=_(
