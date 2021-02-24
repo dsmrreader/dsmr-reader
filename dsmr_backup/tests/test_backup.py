@@ -40,11 +40,20 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_check_initial(self, now_mock, create_full_mock, create_partial_mock):
         """ Test whether a initial backup is created immediately. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=18))
         self.assertFalse(create_partial_mock.called)
         self.assertFalse(create_full_mock.called)
 
-        # Should create initial backup.
+        # Partials only run on mondays (Sunday now)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 3, hour=18))
+        dsmr_backup.services.backup.run(self.schedule_process)
+        self.assertFalse(create_partial_mock.called)
+        self.assertTrue(create_full_mock.called)
+
+        create_partial_mock.reset_mock()
+        create_full_mock.reset_mock()
+
+        # Partials only run on mondays (Monday now)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 4, hour=18))
         dsmr_backup.services.backup.run(self.schedule_process)
         self.assertTrue(create_partial_mock.called)
         self.assertTrue(create_full_mock.called)
@@ -54,7 +63,8 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_check_backup_folders(self, now_mock, create_full_mock, create_partial_mock):
         """ Test whether the backups use the expected folders. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, hour=18))
+        # Partials only run on mondays (Monday now)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 4, hour=18))
         base_dir = dsmr_backup.services.backup.get_backup_directory()
 
         # Should create initial backup.

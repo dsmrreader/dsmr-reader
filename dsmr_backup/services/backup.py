@@ -20,17 +20,20 @@ logger = logging.getLogger('dsmrreader')
 
 def run(scheduled_process):
     """ Checks whether a new backup should be created. Creates one if needed as well. """
-    # Create a partial, minimal backup first.
+
+    # Create a partial, minimal backup first. Since it will grow and take disk space, only create one weekly.
     today = timezone.localtime(timezone.now()).date()
-    create_partial(
-        folder=os.path.join(
-            get_backup_directory(),
-            'archive',
-            formats.date_format(today, 'Y'),
-            formats.date_format(today, 'm')
-        ),
-        models_to_backup=(DayStatistics, )
-    )
+
+    if today.isoweekday() == 1:
+        create_partial(
+            folder=os.path.join(
+                get_backup_directory(),
+                'archive',
+                formats.date_format(today, 'Y'),
+                formats.date_format(today, 'm')
+            ),
+            models_to_backup=(DayStatistics, )
+        )
 
     # Now create full.
     create_full(folder=get_backup_directory())
