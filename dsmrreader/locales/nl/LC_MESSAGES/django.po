@@ -348,6 +348,9 @@ msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende back-
 msgid "Electricity"
 msgstr "Elektriciteit"
 
+msgid "Note that the meaning of each tariff may differ among countries. For Dutch users: Tariff 1 is known as the <strong>low tariff</strong> and tariff 2 as the <strong>high tariff</strong>."
+msgstr "N.B.: De betekening van elk tarief kan internationaal verschillen. Voor Nederlandse gebruikers: Tarief 1 is bekend als <strong>laagtarief</strong> en tarief 2 als <strong>hoogtarief</strong>."
+
 msgid "Gas"
 msgstr "Gas"
 

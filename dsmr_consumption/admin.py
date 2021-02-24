@@ -28,6 +28,10 @@ class EnergySupplierPriceAdmin(admin.ModelAdmin):
         ),
         (
             _('Electricity'), {
+                'description': _(
+                    'Note that the meaning of each tariff may differ among countries. For Dutch users: Tariff 1 is '
+                    'known as the <strong>low tariff</strong> and tariff 2 as the <strong>high tariff</strong>.'
+                ),
                 'fields': ['electricity_delivered_1_price', 'electricity_delivered_2_price',
                            'electricity_returned_1_price', 'electricity_returned_2_price'],
             }
