@@ -25,7 +25,7 @@ v4.13.0 - 2021-xx-xx
 - ``Changed``: 6e getal achter de komma nodig bij energiecontracten [`#1304 <https://github.com/dsmrreader/dsmr-reader/issues/1304>`_]
 
 - ``Fixed``: Schoonheidsfoutje op de statistieken pagina [`#1305 <https://github.com/dsmrreader/dsmr-reader/issues/1305>`_]
-
+- ``Fixed``: Bestaande superusers uitschakelen bij uitvoeren "dsmr_superuser" command [`#1309 <https://github.com/dsmrreader/dsmr-reader/issues/1309>`_]
 
 
 v4.12.0 - 2021-02-17

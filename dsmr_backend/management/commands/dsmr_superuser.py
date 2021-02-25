@@ -4,7 +4,7 @@ from decouple import config
 
 
 class Command(BaseCommand):  # noqa
-    help = 'Persists or updates a superuser, as defined by the environment vars.'
+    help = 'Persists or updates a superuser, as defined by the environment vars. Deactivates any other users as well.'
 
     def handle(self, **options):
         """ WARNING: Only safe for command line execution. Do NOT use for web requests! """
@@ -29,8 +29,19 @@ class Command(BaseCommand):  # noqa
             )
         except User.DoesNotExist:
             print('Creating new superuser "{}"'.format(username))
-            User.objects.create_superuser(username, '{}@localhost'.format(username), password)
+            user = User.objects.create_superuser(username, '{}@localhost'.format(username), password)
         else:
             print('Updating password of superuser "{}"'.format(username))
             user.set_password(password)
+            user.is_active = True
             user.save()
+
+        # Do not allow any other users to be active at the same time.
+        print('Deactivating any other existing superusers')
+        User.objects.filter(
+            is_superuser=True
+        ).exclude(
+            pk=user.pk
+        ).update(
+            is_active=False
+        )
