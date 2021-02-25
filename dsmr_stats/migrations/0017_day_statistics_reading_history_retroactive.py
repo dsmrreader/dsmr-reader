@@ -16,11 +16,16 @@ def regenerate_data(apps, schema_editor):
 
     for current in days:
         x += 1
-        day_consumption = dsmr_consumption.services.day_consumption(day=current.day)
-
         print('Data migration: Adding reading values to day statistics retroactively: {} ({}/{})'.format(
             current.day, x, day_count
         ))
+
+        try:
+            day_consumption = dsmr_consumption.services.day_consumption(day=current.day)
+        except LookupError:
+            print(' - No data found for {}, skipping...'.format(current.day))
+            continue
+
         current.electricity1_reading = day_consumption['electricity1_start']
         current.electricity2_reading = day_consumption['electricity2_start']
         current.electricity1_returned_reading = day_consumption['electricity1_returned_start']
