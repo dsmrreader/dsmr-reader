@@ -3,7 +3,7 @@ import sys
 
 # EOL table @ https://www.python.org/downloads/
 MINIMUM_VERSION = (3, 6, 0)
-PREFERRED_VERSION = (3, 6, 0)
+PREFERRED_MINIMUM_VERSION = (3, 7, 0)
 
 
 def check():
@@ -16,9 +16,9 @@ def check():
         sys.exit(1)
 
     # Deprecation.
-    if sys.version_info < PREFERRED_VERSION:
+    if sys.version_info < PREFERRED_MINIMUM_VERSION:
         print('[WARNING] Python version is deprecated. Preferred version for DSMR-reader is {} or higher.'.format(
-            '.'.join([str(x) for x in PREFERRED_VERSION])
+            '.'.join([str(x) for x in PREFERRED_MINIMUM_VERSION])
         ))
 
 

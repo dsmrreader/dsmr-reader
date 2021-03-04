@@ -23,6 +23,7 @@ v4.13.0 - 2021-xx-xx
 
 - ``Changed``: Partial backups no longer run daily, but weekly instead [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
 - ``Changed``: 6e getal achter de komma nodig bij energiecontracten [`#1304 <https://github.com/dsmrreader/dsmr-reader/issues/1304>`_]
+- ``Changed``: Deprecate Python 3.6 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 
 - ``Fixed``: Schoonheidsfoutje op de statistieken pagina [`#1305 <https://github.com/dsmrreader/dsmr-reader/issues/1305>`_]
 - ``Fixed``: Bestaande superusers uitschakelen bij uitvoeren "dsmr_superuser" command [`#1309 <https://github.com/dsmrreader/dsmr-reader/issues/1309>`_]
