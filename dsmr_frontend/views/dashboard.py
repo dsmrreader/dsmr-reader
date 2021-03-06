@@ -31,10 +31,10 @@ class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
         context_data['consumption'] = dsmr_consumption.services.day_consumption(
             day=timezone.localtime(latest_electricity.read_at).date()
         )
-        month_statistics, days_in_month = dsmr_stats.services.month_statistics(
+        month_statistics = dsmr_stats.services.month_statistics(
             target_date=timezone.localtime(timezone.now()).date()
         )
         context_data['month_statistics'] = month_statistics
-        context_data['days_in_month'] = days_in_month
+        context_data['days_in_month'] = month_statistics['number_of_days']  # @deprecated
 
         return context_data

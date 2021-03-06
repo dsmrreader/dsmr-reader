@@ -39,8 +39,8 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
             'years': dsmr_stats.services.year_statistics,
         }
 
-        base_data, base_count = DATA_MAPPING[selected_level](selected_base_datetime.date())
-        comparison_data, comparison_count = DATA_MAPPING[selected_level](selected_comparison_datetime.date())
+        base_data = DATA_MAPPING[selected_level](selected_base_datetime.date())
+        comparison_data = DATA_MAPPING[selected_level](selected_comparison_datetime.date())
         diff_data = {}
 
         context_data['base_title'] = {
@@ -59,7 +59,7 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         unused_keys = []
 
         for k in base_data.keys():
-            if k in ('temperature_avg', 'temperature_max', 'temperature_min', 'number_of_days') or 'cost' in k:
+            if k in ('temperature_avg', 'temperature_max', 'temperature_min') or 'cost' in k:
                 unused_keys.append(k)
 
         base_data = {k: v for k, v in base_data.items() if k not in unused_keys}
@@ -69,7 +69,7 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         for k in base_data.keys():
             try:
                 diff_data[k] = 100 - (comparison_data[k] / base_data[k] * 100)
-            except (TypeError, decimal.InvalidOperation, decimal.DivisionByZero):
+            except (TypeError, ZeroDivisionError, decimal.InvalidOperation, decimal.DivisionByZero):
                 diff_data[k] = 0
 
             diff_data[k] = diff_data[k] * -1  # If the result above is 10%, then we'd like to display it as -10% usage.
@@ -78,5 +78,8 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         context_data['diff'] = diff_data
         context_data['base'] = base_data
         context_data['comparison'] = comparison_data
-        context_data['data_count'] = dict(base=base_count, comparison=comparison_count)
+        context_data['data_count'] = dict(
+            base=base_data['number_of_days'],
+            comparison=comparison_data['number_of_days']
+        )
         return context_data

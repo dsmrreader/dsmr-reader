@@ -14,17 +14,32 @@ export DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
 pytest --cov --cov-report=term
 
+if [ $? -ne 0 ]; then
+    echo "[!] Tests failed: sqlite3"
+    exit;
+fi
+
 
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.postgresql
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
 pytest --cov --cov-report=term
 
+if [ $? -ne 0 ]; then
+    echo "[!] Tests failed: postgresql"
+    exit;
+fi
+
 
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.mysql
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
 pytest --cov --cov-report=term
+
+if [ $? -ne 0 ]; then
+    echo "[!] Tests failed: mysql"
+    exit;
+fi
 
 
 DIR=$(cd `dirname $0` && pwd)

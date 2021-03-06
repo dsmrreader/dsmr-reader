@@ -57,7 +57,7 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
             'years': dsmr_stats.services.year_statistics,
         }
 
-        data, _ = DATA_MAPPING[selected_level](selected_datetime.date())
+        data = DATA_MAPPING[selected_level](selected_datetime.date())
         context_data['statistics'] = data
 
         context_data['title'] = {
@@ -126,7 +126,7 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
 
             for increment in range(0, 12):
                 current_month = start_of_year + relativedelta(months=increment)
-                current_month_stats, _ = dsmr_stats.services.month_statistics(current_month.date())
+                current_month_stats = dsmr_stats.services.month_statistics(current_month.date())
                 current_month_stats['month'] = current_month.date()
                 source_data.append(current_month_stats)
 

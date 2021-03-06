@@ -1230,29 +1230,14 @@ msgstr "Sla over en ga direct naar het beheer"
 msgid "Click a topic below to display a pop-up with more details to choose from."
 msgstr "Klik hieronder op een onderwerp om meer inhoudelijke suggesties te zien."
 
-msgid "API settings"
-msgstr "API-instellingen"
-
-msgid "DSMR-reader API (key)"
-msgstr "DSMR-reader API (sleutel)"
-
-msgid "Backend / Background processing"
-msgstr "Backend / Achtergrondverwerking"
+msgid "Background processing"
+msgstr "Achtergrondverwerking"
 
 msgid "Hide electricity return graphs"
 msgstr "Verberg grafieken teruglevering elektriciteit"
 
 msgid "Hide gas graphs"
 msgstr "Verberg gasgrafieken"
-
-msgid "Daily backup settings"
-msgstr "Instellingen voor dagelijkse back-up's"
-
-msgid "Folder to backup to"
-msgstr "Bestandsmap om back-up's naar weg te schrijven"
-
-msgid "Gzip compression level used"
-msgstr "Gzip compressieniveau"
 
 msgid "Data grouping"
 msgstr "Data groeperen"
@@ -1266,6 +1251,15 @@ msgstr "Groepeer elektriciteit per minuut"
 msgid "Group gas by hour"
 msgstr "Groepeer gas per uur"
 
+msgid "Automatic data cleanup / Retention policy"
+msgstr "Automatisch dataopschoning / Dataretentiebeleid"
+
+msgid "Periodically trim data"
+msgstr "Schoon periodiek gegevens op"
+
+msgid "Datalogger / P1 connection"
+msgstr "Datalogger / P1-verbinding"
+
 msgid "Network socket / port"
 msgstr "Netwerk socket / poort"
 
@@ -1278,14 +1272,35 @@ msgstr "Smarty meter"
 msgid "Fluvius meter"
 msgstr "Fluvius meter"
 
+msgid "Datalogger meter statistics"
+msgstr "Datalogger meterstatistieken"
+
+msgid "Meter statistics overview"
+msgstr "Overzicht meterstatistieken"
+
+msgid "Latest telegram read"
+msgstr "Laatst gelezen telegram"
+
+msgid "Day and hour totals"
+msgstr "Dag- en uurtotalen"
+
+msgid "Day statistics"
+msgstr "Dagstatistieken"
+
+msgid "Hour statistics"
+msgstr "Uurstatistieken"
+
+msgid "Daily meter values read"
+msgstr "Dagelijks uitgelezen meterstand"
+
 msgid "Dropbox integration"
 msgstr "Dropbox-integratie"
 
 msgid "Dropbox integration for backups"
 msgstr "Dropbox-integratie voor back-up's"
 
-msgid "Tariffs / Energy supplier prices"
-msgstr "Tarieven / Energieleverancierprijzen"
+msgid "Energy supplier price indication"
+msgstr "Energieleverancier prijsindicatie"
 
 msgid "Energy supplier price contracts"
 msgstr "Energieleverancier contracten"
@@ -1296,20 +1311,8 @@ msgstr "Gasprijs/kosten"
 msgid "Electricity price/costs"
 msgstr "Elektriciteitsprijs/kosten"
 
-msgid "CSV export"
-msgstr "CSV export"
-
-msgid "Export day totals to CSV"
-msgstr "Exporteer dagtotalen naar CSV"
-
-msgid "Export hour totals to CSV"
-msgstr "Exporteer uurtotalen naar CSV"
-
-msgid "Export temperatures to CSV"
-msgstr "Exporteer temperaturen naar CSV"
-
-msgid "Frontend / Display / Graphics"
-msgstr "Frontend / Weergave / Grafisch"
+msgid "Graphics / Visuals / Display"
+msgstr "Graphics / Visualisaties / Weergave"
 
 msgid "Merge tariffs"
 msgstr "Voeg tarieven samen"
@@ -1319,6 +1322,9 @@ msgstr "Grafieklijn/staaf kleuren"
 
 msgid "Graph sorting/order"
 msgstr "Volgorde grafieken"
+
+msgid "InfluxDB export"
+msgstr "InfluxDB export"
 
 msgid "InfluxDB integration"
 msgstr "InfluxDB-integratie"
@@ -1332,15 +1338,6 @@ msgstr "InfluxDB gebruikersnaam / wachtwoord"
 msgid "InfluxDB measurement mapping"
 msgstr "InfluxDB measurement mapping"
 
-msgid "Smart meter statistics"
-msgstr "Slimme-meterstatistieken"
-
-msgid "Meter statistics overview"
-msgstr "Overzicht meterstatistieken"
-
-msgid "Latest telegram read"
-msgstr "Laatst gelezen telegram"
-
 msgid "Mindergas.nl integration"
 msgstr "MinderGas.nl-integratie"
 
@@ -1350,53 +1347,14 @@ msgstr "Koppel je MinderGas API-account"
 msgid "Export to MinderGas API"
 msgstr "Exporteer naar MinderGas API"
 
-msgid "MQTT integration"
-msgstr "MQTT-integratie"
+msgid "MQTT (Message Queuing Telemetry Transport)"
+msgstr "MQTT (Message Queuing Telemetry Transport)"
 
-msgid "Quality of service / QoS"
-msgstr "Quality of service / QoS"
+msgid "Data sources"
+msgstr "Databronnen"
 
-msgid "Broker port / SSL / TLS"
-msgstr "Broker / poort / SSL / TLS"
-
-msgid "Keep reconnecting"
-msgstr "Telkens opnieuw verbinden"
-
-msgid "JSON day totals"
-msgstr "JSON dagtotalen"
-
-msgid "Split topic day totals"
-msgstr "Gesplitst topic dagtotalen"
-
-msgid "JSON gas consumption"
-msgstr "JSON gasverbruik"
-
-msgid "Split topic gas consumption"
-msgstr "Gesplitst topic gasverbruik"
-
-msgid "JSON telegram"
-msgstr "JSON telegram"
-
-msgid "Voltage (JSON)"
-msgstr "Voltage (JSON)"
-
-msgid "Ampere (JSON)"
-msgstr "Ampere (JSON)"
-
-msgid "Raw telegram"
-msgstr "Ruw telegram"
-
-msgid "Split topic telegram"
-msgstr "Gesplitst topic telegram"
-
-msgid "Split topic meter statistics"
-msgstr "Gesplitst topic meterstatistieken"
-
-msgid "Voltage (split topic)"
-msgstr "Voltage (gesplitst topic)"
-
-msgid "Ampere (split topic)"
-msgstr "Ampere (gesplitst topic)"
+msgid "Broker: host / port / SSL / TLS"
+msgstr "Broker: host / poort / SSL / TLS"
 
 msgid "Notification apps integration"
 msgstr "Notificatie-apps integratie"
@@ -1425,35 +1383,41 @@ msgstr "PVOutput.org Add Status API"
 msgid "PVOutput.org donator API options"
 msgstr "PVOutput.org API-opties voor donateurs"
 
-msgid "Automatic data cleanup / Retention policy"
-msgstr "Automatisch dataopschoning / Dataretentiebeleid"
+msgid "API settings"
+msgstr "API-instellingen"
 
-msgid "Clean up reading"
-msgstr "Ruim metingen op"
+msgid "Enable/disable API"
+msgstr "Schakel API in/uit"
 
-msgid "Apply retention"
-msgstr "Pas retentie toe"
+msgid "DSMR-reader API (key)"
+msgstr "DSMR-reader API (sleutel)"
 
-msgid "Periodically delete data"
-msgstr "Verwijder periodiek gegevens"
-
-msgid "Day and hour totals"
-msgstr "Dag- en uurtotalen"
-
-msgid "Day statistics"
-msgstr "Dagstatistieken"
-
-msgid "Hour statistics"
-msgstr "Uurstatistieken"
-
-msgid "Weather integration"
-msgstr "Weergegevens-integratie"
-
-msgid "Keep track of outside temperatures"
-msgstr "Houd buitentemperaturen bij"
+msgid "Buienradar temperature"
+msgstr "Buienradar temperatuur"
 
 msgid "Buienradar API"
 msgstr "Buienradar API"
+
+msgid "Daily backup settings"
+msgstr "Instellingen voor dagelijkse back-up's"
+
+msgid "Folder to backup to"
+msgstr "Bestandsmap om back-up's naar weg te schrijven"
+
+msgid "Gzip compression level used"
+msgstr "Gzip compressieniveau"
+
+msgid "CSV export"
+msgstr "CSV export"
+
+msgid "Export day totals to CSV"
+msgstr "Exporteer dagtotalen naar CSV"
+
+msgid "Export hour totals to CSV"
+msgstr "Exporteer uurtotalen naar CSV"
+
+msgid "Export temperatures to CSV"
+msgstr "Exporteer temperaturen naar CSV"
 
 msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
@@ -1936,6 +1900,32 @@ msgstr ""
 "                    "
 
 msgid ""
+"Contains the totals for the current month and current year. Payload is a customizable JSON structure. Default value:\n"
+"                    <pre>\n"
+"                    {}\n"
+"                    </pre>\n"
+"                    "
+msgstr ""
+"Bevat de totalen van de huidige maand en het huidige jaar, in JSON-formaat. Je kunt de veldnamen aanpassen die in het JSON-bericht gebruikt worden. Standaardwaarde:\n"
+"                    <pre>\n"
+"                    {}\n"
+"                    </pre>\n"
+"                    "
+
+msgid ""
+"Contains the totals for the current month and current year. Payload is sent on a per field per topic basis. Default value:\n"
+"                    <pre>\n"
+"                    {}\n"
+"                    </pre>\n"
+"                    "
+msgstr ""
+"Bevat de totalen van de huidige maand en het huidige jaar, verstuurd per veld naar een apart topic. Standaardwaarde:\n"
+"                    <pre>\n"
+"                    {}\n"
+"                    </pre>\n"
+"                    "
+
+msgid ""
 "Triggered by any method of reading insertion (datalogger or API). Allows you to send meter statistics to the MQTT broker, splitted per field. You can designate each field name to a different topic. Removing lines will prevent those fields from being broadcast as well. Default value:\n"
 "                    <pre>\n"
 "                    {}\n"
@@ -2087,6 +2077,18 @@ msgstr "Geeft aan of meterstatistieken worden doorgestuurd naar de broker, gespl
 
 msgid "(Data source) Meter Statistics: Split topic"
 msgstr "(Databron) Meterstatistieken: Gesplitst topic"
+
+msgid "Whether the period totals are sent to the broker, in JSON format."
+msgstr "Geeft aan of periodetotalen worden doorgestuurd naar de broker, in JSON formaat."
+
+msgid "(Data source) Current month/year totals: JSON"
+msgstr "(Databron) Huidige maand-/jaartotalen: JSON"
+
+msgid "Whether period totals are sent to the broker, having each field sent to a different topic."
+msgstr "Geeft aan of periodetotalen worden doorgestuurd naar de broker, gesplitst op een apart veld per topic."
+
+msgid "(Data source) Current month/year totals: Split topic"
+msgstr "(Databron) Huidige maand-/jaartotalen: Gesplitst topic"
 
 msgid "Whether any raw telegrams received are sent to the broker."
 msgstr "Geeft aan of onbewerkte telegrammen verstuurd worden naar de broker."
@@ -2633,6 +2635,69 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Tariffs / Energy supplier prices"
+#~ msgstr "Tarieven / Energieleverancierprijzen"
+
+#~ msgid "Frontend / Display / Graphics"
+#~ msgstr "Frontend / Weergave / Grafisch"
+
+#~ msgid "MQTT integration"
+#~ msgstr "MQTT-integratie"
+
+#~ msgid "Quality of service / QoS"
+#~ msgstr "Quality of service / QoS"
+
+#~ msgid "Keep reconnecting"
+#~ msgstr "Telkens opnieuw verbinden"
+
+#~ msgid "JSON day totals"
+#~ msgstr "JSON dagtotalen"
+
+#~ msgid "Split topic day totals"
+#~ msgstr "Gesplitst topic dagtotalen"
+
+#~ msgid "JSON gas consumption"
+#~ msgstr "JSON gasverbruik"
+
+#~ msgid "Split topic gas consumption"
+#~ msgstr "Gesplitst topic gasverbruik"
+
+#~ msgid "JSON telegram"
+#~ msgstr "JSON telegram"
+
+#~ msgid "Voltage (JSON)"
+#~ msgstr "Voltage (JSON)"
+
+#~ msgid "Ampere (JSON)"
+#~ msgstr "Ampere (JSON)"
+
+#~ msgid "Raw telegram"
+#~ msgstr "Ruw telegram"
+
+#~ msgid "Split topic telegram"
+#~ msgstr "Gesplitst topic telegram"
+
+#~ msgid "Split topic meter statistics"
+#~ msgstr "Gesplitst topic meterstatistieken"
+
+#~ msgid "Voltage (split topic)"
+#~ msgstr "Voltage (gesplitst topic)"
+
+#~ msgid "Ampere (split topic)"
+#~ msgstr "Ampere (gesplitst topic)"
+
+#~ msgid "Clean up reading"
+#~ msgstr "Ruim metingen op"
+
+#~ msgid "Apply retention"
+#~ msgstr "Pas retentie toe"
+
+#~ msgid "Weather integration"
+#~ msgstr "Weergegevens-integratie"
+
+#~ msgid "Keep track of outside temperatures"
+#~ msgstr "Houd buitentemperaturen bij"
 
 #~ msgid "Electricity tariff 1"
 #~ msgstr "Elektriciteit tarief 1"

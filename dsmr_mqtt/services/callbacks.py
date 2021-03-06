@@ -4,11 +4,12 @@ import json
 from django.core import serializers
 from django.utils import timezone
 
-from dsmr_mqtt.models.settings import day_totals, telegram, meter_statistics, consumption
+from dsmr_mqtt.models.settings import day_totals, telegram, meter_statistics, consumption, period_totals
 from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
 import dsmr_mqtt.services.messages
+import dsmr_stats.services
 
 
 def publish_raw_dsmr_telegram(data):
@@ -81,6 +82,28 @@ def publish_day_consumption():
         )
 
 
+def publish_json_period_totals():
+    """ Publishes JSON formatted period totals to a broker, if set and enabled. """
+    json_settings = period_totals.JSONCurrentPeriodTotalsMQTTSettings.get_solo()
+
+    if not json_settings.enabled:
+        return
+
+    statistics = get_period_totals()
+    publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=statistics)
+
+
+def publish_split_topic_period_totals():
+    """ Publishes period totals to a broker, formatted in a separate topic per field name, if set and enabled. """
+    split_topic_settings = period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo()
+
+    if not split_topic_settings.enabled:
+        return
+
+    statistics = get_period_totals()
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=statistics)
+
+
 def publish_split_topic_meter_statistics():
     """ Publishes meter statistics to a broker, formatted in a separate topic per field name, if set and enabled. """
     split_topic_settings = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
@@ -131,6 +154,39 @@ def publish_json_data(topic, mapping_format, data_source):
 
     json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
     dsmr_mqtt.services.messages.queue_message(topic=topic, payload=json_data)
+
+
+def get_period_totals():
+    """ Retrieves year/month period totals and merges them with today's consumption. """
+    today = timezone.localtime(timezone.now())
+
+    try:
+        todays_consumption = dsmr_consumption.services.day_consumption(day=today)
+    except LookupError:
+        # No data for today
+        todays_consumption = {}
+
+    month_statistics = dsmr_stats.services.month_statistics(target_date=today)
+    year_statistics = dsmr_stats.services.year_statistics(target_date=today)
+    statistics = {}
+
+    excluded_keys = ('number_of_days', 'temperature_avg', 'temperature_min', 'temperature_max')
+
+    for k in month_statistics.keys():
+        if k in excluded_keys:
+            continue
+
+        month_statistics[k] += todays_consumption.get(k, 0)  # Assumes same keys, zero value fallback.
+        statistics['current_month_' + k] = month_statistics[k]
+
+    for k in year_statistics.keys():
+        if k in excluded_keys:
+            continue
+
+        year_statistics[k] += todays_consumption.get(k, 0)  # Assumes same keys, zero value fallback.
+        statistics['current_year_' + k] = year_statistics[k]
+
+    return statistics
 
 
 def publish_split_topic_data(mapping_format, data_source):

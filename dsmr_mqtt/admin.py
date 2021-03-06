@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption
+from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption, period_totals
 from dsmr_backend.mixins import DeletionOnlyAdminModel
 from dsmr_mqtt.models import queue
 
@@ -143,6 +143,54 @@ class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
                             if x.name == 'formatting'
                         ][0]
                     )
+                )
+            }
+        ),
+    )
+
+
+@admin.register(period_totals.JSONCurrentPeriodTotalsMQTTSettings)
+class JSONPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'topic', 'formatting'],
+                'description': _(
+                    'Contains the totals for the current month and current year. '
+                    'Payload is a customizable JSON structure. '
+                    '''Default value:
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format(
+                        [
+                            x.default for x in period_totals.JSONCurrentPeriodTotalsMQTTSettings._meta.get_fields()
+                            if x.name == 'formatting'
+                        ][0]
+                    )
+                )
+            }
+        ),
+    )
+
+
+@admin.register(period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings)
+class SplitTopicPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
+    fieldsets = (
+        (
+            None, {
+                'fields': ['enabled', 'formatting'],
+                'description': _(
+                    'Contains the totals for the current month and current year. '
+                    'Payload is sent on a per field per topic basis. '
+                    '''Default value:
+                    <pre>
+                    {}
+                    </pre>
+                    '''.format([
+                        x.default for x in period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings._meta.get_fields()
+                        if x.name == 'formatting'
+                    ][0])
                 )
             }
         ),

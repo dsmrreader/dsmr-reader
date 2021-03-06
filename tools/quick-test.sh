@@ -16,6 +16,11 @@ echo "--- Testing with SQLite..."
 export DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
 pytest --cov --cov-report=html --cov-report=term $ARGS
 
+if [ $? -ne 0 ]; then
+    echo "[!] Tests failed [!]"
+    exit;
+fi
+
 
 echo ""
 echo "--- Applying autopep8..."
@@ -26,7 +31,6 @@ echo ""
 echo "--- Running Pylama for code audit..."
 pylama
 
-# Abort when audit fails.
 if [ $? -ne 0 ]; then
     echo "[!] Code audit failed [!]"
     exit;

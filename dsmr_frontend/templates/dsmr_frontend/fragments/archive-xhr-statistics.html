@@ -54,8 +54,8 @@
                 <td> {% translate "Fixed costs" %} <span class="unit">&euro;</span></td>
                 <td>
                     <span class="unit">
-                        {{ statistics.number_of_days|default:'-' }}
-                        {% blocktranslate count counter=statistics.number_of_days %}day{% plural %}days{% endblocktranslate %}
+                        {{ statistics.datapoint_count|default:'-' }}
+                        {% blocktranslate count counter=statistics.datapoint_count %}day{% plural %}days{% endblocktranslate %}
                     </span>
                 </td>
                 <td>&nbsp;</td>

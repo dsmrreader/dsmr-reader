@@ -509,7 +509,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         DayStatistics.objects.create(**statistics_dict)
 
         # Fetch inside our expected range.
-        statistics, count = dsmr_stats.services.range_statistics(
+        statistics = dsmr_stats.services.range_statistics(
             start=target_date, end=target_date + timezone.timedelta(days=1)
         )
         self.assertEqual(statistics['total_cost'], 39)
@@ -526,10 +526,10 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(statistics['gas_cost'], 3)
 
         # Now we fetch one outside our range.
-        no_statistics, count = dsmr_stats.services.range_statistics(
+        no_statistics = dsmr_stats.services.range_statistics(
             target_date - timezone.timedelta(days=1), target_date
         )
-        self.assertEqual(count, 0)
+        self.assertEqual(no_statistics['number_of_days'], 0)
         self.assertIsNone(no_statistics['total_cost'])
 
     def test_day_statistics(self):
@@ -541,10 +541,10 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
                 **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
             )
 
-        data, count = dsmr_stats.services.day_statistics(target_date=target_date)
+        data = dsmr_stats.services.day_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
 
-        self.assertEqual(count, 1)
+        self.assertEqual(data['number_of_days'], 1)
         self.assertEqual(data['total_cost'], daily['total_cost'])
         self.assertEqual(data['electricity1'], daily['electricity1'])
         self.assertEqual(data['electricity1_cost'], daily['electricity1_cost'])
@@ -569,11 +569,11 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
                 **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
             )
 
-        data, count = dsmr_stats.services.month_statistics(target_date=target_date)
+        data = dsmr_stats.services.month_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
         days_in_month = 31  # Hardcoded January.
 
-        self.assertEqual(count, 31)
+        self.assertEqual(data['number_of_days'], 31)
 
         # Now we just verify whether the expected amount of days is fetched and summarized.
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.
@@ -606,11 +606,11 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
                 **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
             )
 
-        data, count = dsmr_stats.services.year_statistics(target_date=target_date)
+        data = dsmr_stats.services.year_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
         days_in_year = 366  # Hardcoded leap year 2016.
 
-        self.assertEqual(count, 366)
+        self.assertEqual(data['number_of_days'], 366)
 
         # Now we just verify whether the expected amount of days is fetched and summarized.
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.

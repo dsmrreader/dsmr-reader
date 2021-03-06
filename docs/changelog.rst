@@ -19,6 +19,7 @@ v4.x releases
 v4.13.0 - 2021-xx-xx
 --------------------
 
+- ``Added``: MQTT: Tussenstand huidige maand/jaar [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
 - ``Added``: Meterstanden opnemen in dagstatistieken [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
 
 - ``Changed``: Partial backups no longer run daily, but weekly instead [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]

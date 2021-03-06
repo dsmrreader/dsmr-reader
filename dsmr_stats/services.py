@@ -6,7 +6,7 @@ import math
 
 from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection, models
-from django.db.models.aggregates import Avg, Sum, Min, Max
+from django.db.models.aggregates import Avg, Sum, Min, Max, Count
 from django.core.cache import cache
 from django.db.models.functions import TruncDate
 from django.utils import timezone
@@ -260,7 +260,6 @@ def average_consumption_by_hour(max_weeks_ago):
 def range_statistics(start, end):
     """ Returns the statistics (totals) and the number of data points for a target range. """
     queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
-    number_of_days = queryset.count()
     aggregate = queryset.aggregate(
         total_cost=Sum('total_cost'),
         fixed_cost=Sum('fixed_cost'),
@@ -278,10 +277,10 @@ def range_statistics(start, end):
         temperature_min=Min('lowest_temperature'),
         temperature_max=Max('highest_temperature'),
         temperature_avg=Avg('average_temperature'),
+        number_of_days=Count('day'),
     )
-    aggregate.update(dict(number_of_days=number_of_days))
 
-    return aggregate, number_of_days
+    return aggregate
 
 
 def day_statistics(target_date):

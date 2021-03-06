@@ -15,6 +15,8 @@ from dsmr_mqtt.models.settings.day_totals import JSONDayTotalsMQTTSettings, Spli
 from dsmr_mqtt.models.settings.meter_statistics import SplitTopicMeterStatisticsMQTTSettings
 from dsmr_mqtt.models.settings.telegram import JSONTelegramMQTTSettings, RawTelegramMQTTSettings, \
     SplitTopicTelegramMQTTSettings
+from dsmr_mqtt.models.settings.period_totals import JSONCurrentPeriodTotalsMQTTSettings, \
+    SplitTopicCurrentPeriodTotalsMQTTSettings
 from dsmr_notification.models.settings import NotificationSetting
 from dsmr_pvoutput.models.settings import PVOutputAPISettings, PVOutputAddStatusSettings
 from dsmr_weather.models.settings import WeatherSettings
@@ -39,6 +41,8 @@ class Configuration(LoginRequiredMixin, TemplateView):
             mqtt_broker_settings=MQTTBrokerSettings.get_solo(),
             mqtt_jsondaytotals_settings=JSONDayTotalsMQTTSettings.get_solo(),
             mqtt_splittopicdaytotals_settings=SplitTopicDayTotalsMQTTSettings.get_solo(),
+            mqtt_jsoncurrentperiodtotals_settings=JSONCurrentPeriodTotalsMQTTSettings.get_solo(),
+            mqtt_splittopiccurrentperiodtotals_settings=SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo(),
             mqtt_jsongasconsumption_settings=JSONGasConsumptionMQTTSettings.get_solo(),
             mqtt_splittopicgasconsumption_settings=SplitTopicGasConsumptionMQTTSettings.get_solo(),
             mqtt_splittopicmeterstatistics_settings=SplitTopicMeterStatisticsMQTTSettings.get_solo(),
