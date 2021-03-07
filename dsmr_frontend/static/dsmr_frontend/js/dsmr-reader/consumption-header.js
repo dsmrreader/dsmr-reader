@@ -14,7 +14,14 @@ function update_consumption_header()
 
         if (response.cost_per_hour)
         {
-            $("#cost_per_hour").html(response.cost_per_hour).show();
+            let cost_per_hour = response.cost_per_hour;
+
+            // Weird edge case.
+            if (cost_per_hour == '-0.00' || cost_per_hour == '-0,00') {
+                cost_per_hour = '0.00';
+            }
+
+            $("#cost_per_hour").html(cost_per_hour).show();
         }
     });
 }
