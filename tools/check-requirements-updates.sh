@@ -23,8 +23,5 @@ echo "The following project requirements are outdated:"
 echo "------------------------------------------------"
 echo ""
 
-# Check outdated requirements
-[ -s /tmp/outdated-reqs.txt ] ; exit
-
 cat /tmp/outdated-reqs.txt
 echo ""
