@@ -16,20 +16,8 @@
     </div>
     {% endif %}
 
-    {% if capabilities.electricity or capabilities.electricity_returned or capabilities.gas %}
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <div class="panel-body" style="padding: 0;">
-                    <table class="table table-hover">
-                        <tr class="live-header" style="padding-bottom: 0;">
-                            {% include "dsmr_frontend/fragments/live-header-include.html" with capabilities=capabilities %}
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% if capabilities.electricity %}
+    {% include "dsmr_frontend/fragments/live-header-include.html" with capabilities=capabilities %}
     {% endif %}
 
     {% if notification_count > 0 %}
@@ -49,7 +37,7 @@
 
     {% if capabilities.any %}
         {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.today date_formatter=today_date_format capabilities=capabilities day=period_totals.day %}
-        {% include "dsmr_frontend/fragments/dashboard-period-include.html" with archive_link=True data=period_totals.month date_formatter=month_date_format capabilities=capabilities day=period_totals.day %}
+        {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.month date_formatter=month_date_format capabilities=capabilities day=period_totals.day %}
         {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.year date_formatter=year_date_format capabilities=capabilities day=period_totals.day %}
     {% endif %}
 

@@ -17,6 +17,8 @@
     {% endif %}
 
     {% if capabilities.electricity %}
+    {% include "dsmr_frontend/fragments/live-header-include.html" with capabilities=capabilities %}
+
     <div class="row" data-graph-type="electricity">
         <div class="col-sm-12">
             <div class="panel">
@@ -24,12 +26,6 @@
                     {% translate "Recent electricity consumption" %}
                 </header>
                 <div class="panel-body">
-                    <table class="table table-hover">
-                        <tr class="live-header">
-                            {% include "dsmr_frontend/fragments/live-header-include.html" with capabilities=capabilities %}
-                        </tr>
-                    </table>
-
                     <div id="echarts-electricity-graph" style="width: 100%; height: 300px;"></div>
                     <div class="graph_controls_help">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktranslate %}
