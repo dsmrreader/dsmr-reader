@@ -21,6 +21,7 @@ v4.13.0 - 2021-03-09
 
 - ``Added``: MQTT: Tussenstand huidige maand/jaar [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
 - ``Added``: Meterstanden opnemen in dagstatistieken [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
+- ``Added``: Na import historische gegevens de dagtotalen berekenen [`#1302 <https://github.com/dsmrreader/dsmr-reader/issues/1302>`_]
 
 - ``Changed``: Partial backups no longer run daily, but weekly instead [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
 - ``Changed``: 6e getal achter de komma nodig bij energiecontracten [`#1304 <https://github.com/dsmrreader/dsmr-reader/issues/1304>`_]

@@ -435,6 +435,30 @@ def recalculate_prices():
 
 
 def reconstruct_missing_day_statistics():
+    """ Reconstructs missing day statistics. """
+    dates_to_generate = ElectricityConsumption.objects.exclude(
+        # Skip today.
+        read_at__date=timezone.localtime(timezone.now()).date()
+    ).annotate(
+        truncated_date=TruncDate('read_at')
+    ).exclude(
+        # Skip existing days.
+        truncated_date__in=DayStatistics.objects.all().values_list('day', flat=True)
+    ).distinct().order_by('truncated_date').values_list(
+        'truncated_date', flat=True
+    )
+
+    # Budget distinct and sorting.
+    dates_to_generate = sorted(list(set(dates_to_generate)))
+
+    print('Found {} day(s) to reconstruct'.format(len(dates_to_generate)))
+
+    for current_day in dates_to_generate:
+        print(' - Reconstructing:', current_day)
+        create_statistics(target_day=current_day)
+
+
+def reconstruct_missing_day_statistics_by_hours():
     """ Reconstructs missing day statistics by using available hour statistics. """
     dates_to_generate = HourStatistics.objects.all().annotate(
         truncated_date=TruncDate('hour_start')

@@ -883,6 +883,18 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(day_totals.total_cost, 45)
 
     def test_reconstruct_missing_day_statistics(self):
+        DayStatistics.objects.all().delete()
+        HourStatistics.objects.all().delete()
+        self.assertEqual(DayStatistics.objects.all().count(), 0)
+        self.assertEqual(HourStatistics.objects.all().count(), 0)
+
+        dsmr_stats.services.reconstruct_missing_day_statistics()
+
+        # It should just trigger.
+        self.assertEqual(DayStatistics.objects.all().count(), 2)
+        self.assertEqual(HourStatistics.objects.all().count(), 5)
+
+    def test_reconstruct_missing_day_statistics_by_hours(self):
         # Existing day should be ignored.
         DayStatistics.objects.create(
             day=timezone.make_aware(timezone.datetime(2020, 1, 1)).date(),
@@ -907,7 +919,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         self.assertEqual(DayStatistics.objects.all().count(), 1)
 
-        dsmr_stats.services.reconstruct_missing_day_statistics()
+        dsmr_stats.services.reconstruct_missing_day_statistics_by_hours()
         self.assertEqual(DayStatistics.objects.all().count(), 1)
 
         # Now add hours for missing day.
@@ -928,7 +940,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             gas=5,
         )
 
-        dsmr_stats.services.reconstruct_missing_day_statistics()
+        dsmr_stats.services.reconstruct_missing_day_statistics_by_hours()
         self.assertEqual(DayStatistics.objects.all().count(), 2)
 
         latest = DayStatistics.objects.all().order_by('-pk')[0]

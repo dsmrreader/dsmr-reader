@@ -2291,9 +2291,6 @@ msgstr "Verandert alle bestaande statistieken. NIET GEBRUIKEN IN PRODUCTIE! Word
 msgid "Recalculates day statistics prices"
 msgstr "Herberekent prijzen in dagtotalen"
 
-msgid "Reconstructs missing day statistics by using available hour statistics"
-msgstr "Reconstrueert missende dagstatistieken door beschikbare uurstatistieken te gebruiken"
-
 msgid "Description"
 msgstr "Omschrijving"
 
@@ -2620,6 +2617,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Reconstructs missing day statistics by using available hour statistics"
+#~ msgstr "Reconstrueert missende dagstatistieken door beschikbare uurstatistieken te gebruiken"
 
 #~ msgid "Based on the latest electricity consumption processed."
 #~ msgstr "Gebaseerd op het meest recent verwerkte elektriciteitsverbruik."
