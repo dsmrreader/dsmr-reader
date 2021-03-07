@@ -1,103 +1,29 @@
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption
+from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption, period_totals
 
 
-class TestBrokerSettings(TestCase):
-    def setUp(self):
-        self.instance = broker.MQTTBrokerSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(broker.MQTTBrokerSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestRawTelegramSettings(TestCase):
-    def setUp(self):
-        self.instance = telegram.RawTelegramMQTTSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(telegram.RawTelegramMQTTSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestJSONTelegramSettings(TestCase):
-    def setUp(self):
-        self.instance = telegram.JSONTelegramMQTTSettings.get_solo()
+class TestSettings(TestCase):
+    CLASSES = (
+        broker.MQTTBrokerSettings,
+        telegram.RawTelegramMQTTSettings,
+        telegram.JSONTelegramMQTTSettings,
+        telegram.SplitTopicTelegramMQTTSettings,
+        day_totals.JSONDayTotalsMQTTSettings,
+        day_totals.SplitTopicDayTotalsMQTTSettings,
+        meter_statistics.SplitTopicMeterStatisticsMQTTSettings,
+        consumption.JSONGasConsumptionMQTTSettings,
+        consumption.SplitTopicGasConsumptionMQTTSettings,
+        period_totals.JSONCurrentPeriodTotalsMQTTSettings,
+        period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings,
+    )
 
     def test_admin(self):
-        self.assertTrue(site.is_registered(telegram.JSONTelegramMQTTSettings))
+        for current in self.CLASSES:
+            self.assertTrue(site.is_registered(current))
 
     def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestSplitTopicTelegramMQTTSettings(TestCase):
-    def setUp(self):
-        self.instance = telegram.SplitTopicTelegramMQTTSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(telegram.SplitTopicTelegramMQTTSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestJSONDayTotalsMQTTSettings(TestCase):
-    def setUp(self):
-        self.instance = day_totals.JSONDayTotalsMQTTSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(day_totals.JSONDayTotalsMQTTSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestSplitTopicDayTotalsMQTTSettings(TestCase):
-    def setUp(self):
-        self.instance = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(day_totals.SplitTopicDayTotalsMQTTSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestSplitTopicMeterStatisticsMQTTSettings(TestCase):
-    def setUp(self):
-        self.instance = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(meter_statistics.SplitTopicMeterStatisticsMQTTSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestJSONGasConsumptionMQTTSettings(TestCase):
-    def setUp(self):
-        self.instance = consumption.JSONGasConsumptionMQTTSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(consumption.JSONGasConsumptionMQTTSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
-
-
-class TestSplitTopicGasConsumptionMQTTSettings(TestCase):
-    def setUp(self):
-        self.instance = consumption.SplitTopicGasConsumptionMQTTSettings.get_solo()
-
-    def test_admin(self):
-        self.assertTrue(site.is_registered(consumption.SplitTopicGasConsumptionMQTTSettings))
-
-    def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+        for current in self.CLASSES:
+            instance = current.get_solo()
+            self.assertNotEqual(str(instance), '{} object'.format(instance.__class__.__name__))

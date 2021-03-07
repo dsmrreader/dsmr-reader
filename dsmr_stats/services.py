@@ -261,8 +261,6 @@ def range_statistics(start, end):
     """ Returns the statistics (totals) and the number of data points for a target range. """
     queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
     aggregate = queryset.aggregate(
-        total_cost=Sum('total_cost'),
-        fixed_cost=Sum('fixed_cost'),
         electricity1=Sum('electricity1'),
         electricity1_cost=Sum('electricity1_cost'),
         electricity1_returned=Sum('electricity1_returned'),
@@ -274,11 +272,32 @@ def range_statistics(start, end):
         electricity_returned_merged=Sum(models.F('electricity1_returned') + models.F('electricity2_returned')),
         gas=Sum('gas'),
         gas_cost=Sum('gas_cost'),
+        fixed_cost=Sum('fixed_cost'),
+        total_cost=Sum('total_cost'),
         temperature_min=Min('lowest_temperature'),
         temperature_max=Max('highest_temperature'),
         temperature_avg=Avg('average_temperature'),
         number_of_days=Count('day'),
     )
+
+    rounding = {
+        # Decimals: [fields]
+        2: ('electricity1_cost', 'electricity2_cost', 'electricity_cost_merged', 'gas_cost', 'fixed_cost',
+            'total_cost'),
+        3: ('electricity1', 'electricity1_returned', 'electricity2', 'electricity2_returned', 'electricity_merged',
+            'electricity_returned_merged', 'gas')
+    }
+
+    # For some reason the values are not rounded and format like "0.0300000000000000". So we force rounding them.
+    for decimal_count, fields in rounding.items():
+        for current_field in fields:
+            if aggregate[current_field] is None:
+                continue
+
+            aggregate[current_field] = dsmr_consumption.services.round_decimal(
+                aggregate[current_field],
+                decimal_count
+            )
 
     return aggregate
 

@@ -1,0 +1,95 @@
+[
+{
+    "pk": 1,
+    "fields": {
+        "read_at": "2021-02-15T12:00:00Z",
+        "delivered_1": "0",
+        "delivered_2": "0",
+        "returned_2": "0",
+        "returned_1": "0",
+        "currently_delivered": "0",
+        "currently_returned": "0"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 2,
+    "fields": {
+        "read_at": "2021-02-15T12:01:00Z",
+        "delivered_1": "10.000",
+        "delivered_2": "20.000",
+        "returned_1": "5.000",
+        "returned_2": "10.000",
+        "currently_delivered": "0",
+        "currently_returned": "0"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 1,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2021-02-15T12:00:00Z",
+        "delivered": "0",
+        "currently_delivered": "0"
+    }
+},
+{
+    "pk": 2,
+    "model": "dsmr_consumption.gasconsumption",
+    "fields": {
+        "read_at": "2021-02-15T13:00:00Z",
+        "delivered": "1.000",
+        "currently_delivered": "0"
+    }
+},
+{
+    "pk": 1,
+    "fields": {
+        "day": "2021-01-01",
+        "electricity1": "100",
+        "electricity1_returned": "50",
+        "electricity1_cost": "10",
+        "electricity2": "200",
+        "electricity2_returned": "100",
+        "electricity2_cost": "20",
+        "gas": "300",
+        "gas_cost": "30",
+        "fixed_cost": "1",
+        "total_cost": "61"
+    },
+    "model": "dsmr_stats.daystatistics"
+},
+{
+    "pk": 2,
+    "fields": {
+        "day": "2021-02-01",
+        "electricity1": "100",
+        "electricity1_returned": "50",
+        "electricity1_cost": "10",
+        "electricity2": "200",
+        "electricity2_returned": "100",
+        "electricity2_cost": "20",
+        "gas": "300",
+        "gas_cost": "30",
+        "fixed_cost": "1",
+        "total_cost": "61"
+    },
+    "model": "dsmr_stats.daystatistics"
+},
+{
+    "model": "dsmr_consumption.energysupplierprice",
+    "pk": 1,
+    "fields": {
+        "start": "2015-01-01",
+        "end": "2050-01-01",
+        "description": "Test",
+        "electricity_delivered_1_price": "1",
+        "electricity_delivered_2_price": "2",
+        "electricity_returned_1_price": "1",
+        "electricity_returned_2_price": "2",
+        "gas_price": "0.5",
+        "fixed_daily_cost": "1"
+    }
+}
+]

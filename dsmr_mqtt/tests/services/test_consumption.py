@@ -4,7 +4,7 @@ import json
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_consumption.models.consumption import GasConsumption
+from dsmr_consumption.models.consumption import GasConsumption, ElectricityConsumption
 from dsmr_mqtt.models.settings import consumption
 import dsmr_mqtt.services.callbacks
 
@@ -17,11 +17,22 @@ class TestServices(TestCase):
             currently_delivered=0.75,
         )
 
+    def _create_electricity_consumption(self):
+        return ElectricityConsumption.objects.create(
+            read_at=timezone.now(),
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=0,
+            currently_returned=0,
+        )
 
-class TestTelegramAndReading(TestServices):
+
+class TestConsumption(TestServices):
     @mock.patch('dsmr_mqtt.services.callbacks.publish_json_gas_consumption')
     @mock.patch('dsmr_mqtt.services.callbacks.publish_split_topic_gas_consumption')
-    def test_create_signal(self, *service_mocks):
+    def test_create_gas_signal(self, *service_mocks):
         self.assertFalse(all([x.called for x in service_mocks]))
         self._create_gas_consumption()
         self.assertTrue(all([x.called for x in service_mocks]))
@@ -43,6 +54,22 @@ class TestTelegramAndReading(TestServices):
         gas_consumption.currently_delivered = 1
         gas_consumption.save()
         self.assertFalse(all([x.called for x in service_mocks]))
+
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_json_period_totals')
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_split_topic_period_totals')
+    def test_create_electricity_signal(self, *service_mocks):
+        self.assertFalse(all([x.called for x in service_mocks]))
+        self._create_electricity_consumption()
+        self.assertTrue(all([x.called for x in service_mocks]))
+
+        # Check exception handling.
+        for x in service_mocks:
+            x.reset_mock()
+            x.side_effect = EnvironmentError('Random error')
+
+        self.assertFalse(all([x.called for x in service_mocks]))
+        self._create_electricity_consumption()
+        self.assertTrue(all([x.called for x in service_mocks]))
 
     @mock.patch('dsmr_mqtt.services.messages.queue_message')
     @mock.patch('django.utils.timezone.now')

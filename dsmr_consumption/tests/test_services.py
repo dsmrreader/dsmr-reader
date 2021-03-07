@@ -332,7 +332,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         if self.support_prices:
             self.assertEqual(data['electricity1_cost'], Decimal('0.25'))
             self.assertEqual(data['electricity2_cost'], Decimal('0.75'))
-            self.assertEqual(data['fixed_cost'], Decimal('1.23456'))
+            self.assertEqual(data['fixed_cost'], Decimal('1.23'))
             self.assertEqual(data['total_cost'], Decimal('2.23'))
 
             self.assertEqual(data['energy_supplier_price_electricity_delivered_1'], 1)
@@ -374,11 +374,11 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(data['gas'], 20)
 
     def test_round_decimal(self):
-        rounded = dsmr_consumption.services.round_decimal(decimal_price=1.555)
+        rounded = dsmr_consumption.services.round_decimal(value=1.555)
         self.assertIsInstance(rounded, Decimal)  # Should auto convert to decimal.
         self.assertEqual(rounded, Decimal('1.56'))
 
-        rounded = dsmr_consumption.services.round_decimal(decimal_price=Decimal('1.555'))
+        rounded = dsmr_consumption.services.round_decimal(value=Decimal('1.555'))
         self.assertEqual(rounded, Decimal('1.56'))
 
     def test_calculate_slumber_consumption_watt(self):

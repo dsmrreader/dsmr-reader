@@ -22,7 +22,7 @@ class MqttAppConfig(AppConfig):
     verbose_name = _('MQTT')
 
     def ready(self):
-        from dsmr_consumption.models.consumption import GasConsumption
+        from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 
         raw_telegram.connect(
             receiver=self._on_raw_telegram_signal,
@@ -32,6 +32,11 @@ class MqttAppConfig(AppConfig):
             receiver=self._on_gas_consumption_created_signal,
             dispatch_uid=self.__class__,
             sender=GasConsumption
+        )
+        django.db.models.signals.post_save.connect(
+            receiver=self._on_electricity_consumption_created_signal,
+            dispatch_uid=self.__class__,
+            sender=ElectricityConsumption
         )
         # Required for model detection.
         import dsmr_mqtt.models.queue  # noqa
@@ -60,6 +65,23 @@ class MqttAppConfig(AppConfig):
         except Exception as error:
             logger.error('publish_split_topic_gas_consumption() failed: %s', error)
 
+    def _on_electricity_consumption_created_signal(self, instance, created, raw, **kwargs):
+        # Skip existing or imported (fixture) instances.
+        if not created or raw:
+            return
+
+        import dsmr_mqtt.services.callbacks
+
+        try:
+            dsmr_mqtt.services.callbacks.publish_json_period_totals()
+        except Exception as error:
+            logger.error('publish_json_period_totals() failed: %s', error)
+
+        try:
+            dsmr_mqtt.services.callbacks.publish_split_topic_period_totals()
+        except Exception as error:
+            logger.error('publish_split_topic_period_totals() failed: %s', error)
+
 
 @receiver(dsmr_reading_created)
 def _on_dsmrreading_created_signal(instance, **kwargs):
@@ -81,6 +103,7 @@ def _on_dsmrreading_created_signal(instance, **kwargs):
         logger.error('publish_split_topic_dsmr_reading() failed: %s', error)
 
     try:
+        # @TODO: Move to _on_electricity_consumption_created_signal() above instead.
         dsmr_mqtt.services.callbacks.publish_day_consumption()
     except Exception as error:
         logger.error('publish_day_consumption() failed: %s', error)

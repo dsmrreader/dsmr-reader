@@ -297,8 +297,8 @@ def day_consumption(day):
         consumption['total_cost'] += consumption['gas_cost']
 
     # Fixed costs.
-    consumption['fixed_cost'] = daily_energy_price.fixed_daily_cost
-    consumption['total_cost'] += consumption['fixed_cost']
+    consumption['fixed_cost'] = round_decimal(daily_energy_price.fixed_daily_cost)
+    consumption['total_cost'] += daily_energy_price.fixed_daily_cost  # Raw, not rounded
     consumption['total_cost'] = round_decimal(consumption['total_cost'])
 
     # Current prices as well.
@@ -415,12 +415,18 @@ def live_gas_consumption():
     return data
 
 
-def round_decimal(decimal_price):
-    """ Round the price to two decimals. """
-    if not isinstance(decimal_price, Decimal):
-        decimal_price = Decimal(str(decimal_price))
+def round_decimal(value, decimal_count=2):
+    """ Rounds a value to X decimals. """
+    assert value is not None
+    assert decimal_count > 0
 
-    return decimal_price.quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+    if not isinstance(value, Decimal):
+        value = Decimal(str(value))
+
+    return value.quantize(
+        Decimal('.{}'.format('1'.zfill(decimal_count))),
+        rounding=ROUND_HALF_UP
+    )
 
 
 def calculate_slumber_consumption_watt():

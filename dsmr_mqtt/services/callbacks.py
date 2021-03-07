@@ -90,6 +90,10 @@ def publish_json_period_totals():
         return
 
     statistics = get_period_totals()
+
+    if not statistics:
+        return
+
     publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=statistics)
 
 
@@ -101,6 +105,10 @@ def publish_split_topic_period_totals():
         return
 
     statistics = get_period_totals()
+
+    if not statistics:
+        return
+
     publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=statistics)
 
 
@@ -173,18 +181,18 @@ def get_period_totals():
     excluded_keys = ('number_of_days', 'temperature_avg', 'temperature_min', 'temperature_max')
 
     for k in month_statistics.keys():
-        if k in excluded_keys:
+        if k in excluded_keys or month_statistics[k] is None:
             continue
 
-        month_statistics[k] += todays_consumption.get(k, 0)  # Assumes same keys, zero value fallback.
-        statistics['current_month_' + k] = month_statistics[k]
+        # Assumes same keys, zero value fallback.
+        statistics['current_month_' + k] = month_statistics[k] + todays_consumption.get(k, 0)
 
     for k in year_statistics.keys():
-        if k in excluded_keys:
+        if k in excluded_keys or year_statistics[k] is None:
             continue
 
-        year_statistics[k] += todays_consumption.get(k, 0)  # Assumes same keys, zero value fallback.
-        statistics['current_year_' + k] = year_statistics[k]
+        # Assumes same keys, zero value fallback.
+        statistics['current_year_' + k] = year_statistics[k] + todays_consumption.get(k, 0)
 
     return statistics
 

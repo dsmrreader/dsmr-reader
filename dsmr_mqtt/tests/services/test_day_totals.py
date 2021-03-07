@@ -198,7 +198,7 @@ fixed_cost = dsmr/rrr
         self.assertEqual(result['ooo'], '1.000000')
         self.assertEqual(result['ppp'], '2.000000')
         self.assertEqual(result['qqq'], '8.000000')
-        self.assertEqual(result['rrr'], '7.000000')
+        self.assertEqual(result['rrr'], '7.00')
 
     @mock.patch('dsmr_mqtt.services.messages.queue_message')
     def test_split_topic(self, queue_message_mock):

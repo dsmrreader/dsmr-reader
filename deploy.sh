@@ -19,7 +19,7 @@ echo " --- Checking Python version."
 ./check_python_version.py
 
 if [ $? -ne 0 ]; then
-    echo "[!] Aborting deployment"
+    echo "[!] Aborting deployment due to Python version"
     exit 1;
 fi
 

@@ -183,7 +183,7 @@ class ChangeOnlyAdminModel(ReadOnlyAdminModel):
         return True
 
 
-class ModelUpdateMixin():
+class ModelUpdateMixin:
     """ Add update() on Django model instance, similar to queryset.update(). """
 
     def update(self, **updated_fields):
