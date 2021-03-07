@@ -23,7 +23,8 @@ class TestEmail(TestCase):
             email_from='root@localhost',
             email_to='root@localhost',
             subject='Test',
-            body='Body')
+            body='Body'
+        )
 
         self.assertTrue(send_mock.called)
         self.assertFalse(attach_file_mock.called)
@@ -36,7 +37,8 @@ class TestEmail(TestCase):
             email_to='root@localhost',
             subject='Test',
             body='Body',
-            attachment='/tmp/test')
+            attachment='/tmp/test'
+        )
 
         self.assertTrue(send_mock.called)
         self.assertTrue(attach_file_mock.called)

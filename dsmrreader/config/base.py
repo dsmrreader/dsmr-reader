@@ -156,6 +156,7 @@ LANGUAGES = (
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
 
+EMAIL_TIMEOUT = 30
 
 """ Python Logging. """
 LOGGING = {

@@ -27,7 +27,9 @@ def send(email_from, email_to, subject, body, attachment=None):
         use_ssl=email_settings.use_ssl
     )
 
-    # Force translations.
+    # Prevent hanging processes, ensure there is always a timeout set.
+    assert email_backend.timeout is not None
+
     message = mail.EmailMessage(
         subject=subject,
         body=body,
