@@ -511,10 +511,9 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         if not EnergySupplierPrice.objects.exists():
             return self.assertEqual(len(energy_contracts), 0)
 
-        self.assertEqual(energy_contracts[0]['number_of_days'], 2)
-
         summary = energy_contracts[0]['summary']
 
+        self.assertEqual(summary['number_of_days'], 2)
         self.assertEqual(summary['electricity1'], Decimal('2.732'))
         self.assertEqual(summary['electricity1_cost'], Decimal('0.57'))
         self.assertEqual(summary['electricity1_returned'], Decimal('0.000'))
@@ -548,9 +547,8 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         if not EnergySupplierPrice.objects.exists():
             return self.assertEqual(len(energy_contracts), 0)
 
-        self.assertEqual(energy_contracts[0]['number_of_days'], 2)
-
         summary = energy_contracts[0]['summary']
+        self.assertEqual(summary['number_of_days'], 2)
         self.assertEqual(summary['electricity1'], Decimal('2.732'))
         self.assertEqual(summary['electricity1_cost'], Decimal('0.57'))
         self.assertEqual(summary['electricity1_returned'], Decimal('0.000'))

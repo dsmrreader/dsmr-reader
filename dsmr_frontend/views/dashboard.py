@@ -35,6 +35,5 @@ class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
             target_date=timezone.localtime(timezone.now()).date()
         )
         context_data['month_statistics'] = month_statistics
-        context_data['days_in_month'] = month_statistics['number_of_days']  # @deprecated
 
         return context_data

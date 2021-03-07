@@ -527,7 +527,6 @@ def summarize_energy_contracts():
             'start': current.start,
             'end': current.end,
             'summary': summary,
-            'number_of_days': summary['number_of_days'],  # @deprecated, adjust templates in the future
             'prices': {
                 'electricity_delivered_1_price': current.electricity_delivered_1_price,
                 'electricity_delivered_2_price': current.electricity_delivered_2_price,
