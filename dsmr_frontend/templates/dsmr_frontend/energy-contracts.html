@@ -31,7 +31,7 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <strong>{{ current.description }}</strong>
+                    <strong>{{ current.description }}</strong> <span class="unit">{{ current.summary.number_of_days }} {% blocktranslate count counter=current.summary.number_of_days %}day{% plural %}days{% endblocktranslate %} {% translate "stored" %}</span>
                 </header>
                 <div class="panel-body">
 			        <table class="table table-hover">
@@ -98,14 +98,7 @@
                         {# Fixed cost #}
                         {% if current.summary.fixed_cost %}
                         <tr>
-			                <td>{% translate "Fixed costs" %} <span class="unit">&euro;</span></td>
-			                <td>
-                                <span class="unit">
-                                    {{ current.summary.number_of_days|default:'-' }}
-                                    {% blocktranslate count counter=current.summary.number_of_days %}day{% plural %}days{% endblocktranslate %}
-                                </span>
-                            </td>
-			                <td>&nbsp;</td>
+			                <td colspan="3">{% translate "Fixed costs" %} <span class="unit">&euro;</span></td>
 			                <td><span class="badge bg-black">{{ current.summary.fixed_cost|default:'-' }}</span></td>
 			            </tr>
                         {% endif %}

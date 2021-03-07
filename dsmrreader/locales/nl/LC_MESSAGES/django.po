@@ -1481,6 +1481,9 @@ msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen 
 msgid "When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation."
 msgstr "Indien van toepassing: Kosten m.b.t. teruglevering kunnen afwijken van je daadwerkelijke situatie en worden getoond voor een volledig overzicht."
 
+msgid "stored"
+msgstr "opgeslagen"
+
 msgid "(combined)"
 msgstr "(gecombineerd)"
 
