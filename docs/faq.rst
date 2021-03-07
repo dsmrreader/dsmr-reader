@@ -103,7 +103,10 @@ This applies **specifically** to the ``dsmr_backend`` process.
 
 The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:
 
-* Make sure you are ``dsmr`` user by executing ``sudo su - dsmr``.
+* Make sure you are ``dsmr`` user by executing::
+
+    sudo su - dsmr
+
 * Open the ``.env`` file and look for the code below::
 
     ### Logging level.
@@ -117,13 +120,12 @@ The DEBUG-logging is disabled by default, to reduce writes on the filesystem. Yo
 
     DSMRREADER_LOGLEVEL=DEBUG
 
-* After editing the file, all processes need to be restarted. To do this, you can either execute::
+* After editing the file, all processes need to be restarted to reflect the change. Go back to the **root user or sudoer** with::
 
-    ./post-deploy.sh
+    logout
 
-* Or go back to the **sudo user** and execute::
+* And restart::
 
-    CTRL+D
     sudo supervisorctl restart all
 
 * All done!

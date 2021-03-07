@@ -23,7 +23,10 @@ Please make sure the ``plugin_name``,
 
 Your plugin file is imported once, so you should make sure to hook any events you want.
 
-And finally, make sure to **reload the application** by deploying it again. You can do that by simply executing the ``post-deploy.sh`` script in the root of the project.
+And finally, make sure to **restart the application** to reflect the changes.
+Do so by executing the following as **root user or sudoer**::
+
+    sudo supervisorctl restart all
 
 
 Events / Signals

@@ -29,6 +29,7 @@ v4.13.0 - 2021-xx-xx
 - ``Fixed``: Schoonheidsfoutje op de statistieken pagina [`#1305 <https://github.com/dsmrreader/dsmr-reader/issues/1305>`_]
 - ``Fixed``: Bestaande superusers uitschakelen bij uitvoeren "dsmr_superuser" command [`#1309 <https://github.com/dsmrreader/dsmr-reader/issues/1309>`_]
 - ``Fixed``: E-mailverzending timeout [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
+- ``Fixed``: Herstarten processen verduidelijken in docs [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
 
 
 v4.12.0 - 2021-02-17
