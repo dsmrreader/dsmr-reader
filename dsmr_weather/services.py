@@ -1,7 +1,6 @@
 from decimal import Decimal
 import logging
 
-from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
 import requests
@@ -18,7 +17,7 @@ def run(scheduled_process):
     try:
         temperature_reading = get_temperature_from_api()
     except Exception as error:
-        logger.exception(error)
+        logger.error('Buienradar: {}'.format(error))
 
         scheduled_process.delay(timezone.timedelta(hours=1))
         return
@@ -33,22 +32,20 @@ def get_temperature_from_api():
     try:
         response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL)
     except Exception as error:
-        logger.exception(error)
-        raise AssertionError(_('Failed to connect to or read from Buienradar API'))
+        raise RuntimeError('Failed to read API: {}'.format(error))
 
     if response.status_code != 200:
-        logger.error('Buienradar: Failed reading temperature: HTTP %s', response.status_code)
-        raise AssertionError(_('Unexpected status code received'))
+        raise RuntimeError('Unexpected status code received: HTTP {}'.format(response.status_code))
 
     # Find our selected station.
     station_id = WeatherSettings.get_solo().buienradar_station
     station_data = [x for x in response.json()['actual']['stationmeasurements'] if x['stationid'] == station_id]
 
     if not station_data:
-        raise AssertionError(_('Selected station info not found'))
+        raise RuntimeError('Selected station info not found: {}'.format(station_id))
 
     temperature = station_data[0]['groundtemperature']
-    logger.debug('Buienradar: Read temperature: %s', temperature)
+    logger.debug('Buienradar: Storing temperature read: %s', temperature)
 
     hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)
     return TemperatureReading.objects.create(read_at=hour_mark, degrees_celcius=Decimal(temperature))

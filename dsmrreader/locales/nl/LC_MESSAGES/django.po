@@ -2627,17 +2627,17 @@ msgstr "Het weerstation dat gebruikt wordt om buitentemperaturen te meten en op 
 msgid "Weather configuration"
 msgstr "Weergegevensconfiguratie"
 
-msgid "Failed to connect to or read from Buienradar API"
-msgstr "Kan niet verbinden naar of lezen van de Buienradar API"
-
-msgid "Selected station info not found"
-msgstr "Geselecteerd weerstation niet gevonden"
-
 msgid "Dutch"
 msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Failed to connect to or read from Buienradar API"
+#~ msgstr "Kan niet verbinden naar of lezen van de Buienradar API"
+
+#~ msgid "Selected station info not found"
+#~ msgstr "Geselecteerd weerstation niet gevonden"
 
 #~ msgid "Tariffs / Energy supplier prices"
 #~ msgstr "Tarieven / Energieleverancierprijzen"

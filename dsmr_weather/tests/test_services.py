@@ -62,7 +62,7 @@ class TestDsmrWeatherServices(TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
         requests_mock.side_effect = IOError('Failed to connect')  # Any error is fine.
 
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(RuntimeError):
             dsmr_weather.services.get_temperature_from_api()
 
     @mock.patch('requests.get')
@@ -73,7 +73,7 @@ class TestDsmrWeatherServices(TestCase):
         type(response_mock).status_code = mock.PropertyMock(return_value=500)
         requests_mock.return_value = response_mock
 
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(RuntimeError):
             dsmr_weather.services.get_temperature_from_api()
 
     @mock.patch('requests.get')
@@ -92,5 +92,5 @@ class TestDsmrWeatherServices(TestCase):
         type(response_mock).status_code = mock.PropertyMock(return_value=200)
         requests_mock.return_value = response_mock
 
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(RuntimeError):
             dsmr_weather.services.get_temperature_from_api()
