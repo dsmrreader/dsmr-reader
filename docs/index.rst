@@ -30,4 +30,3 @@ DSMR Reader's documentation
    faq/v3_upgrade
 
    credits
-   licence
