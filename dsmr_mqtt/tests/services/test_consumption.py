@@ -55,6 +55,7 @@ class TestConsumption(TestServices):
         gas_consumption.save()
         self.assertFalse(all([x.called for x in service_mocks]))
 
+    @mock.patch('dsmr_mqtt.services.callbacks.publish_day_consumption')
     @mock.patch('dsmr_mqtt.services.callbacks.publish_json_period_totals')
     @mock.patch('dsmr_mqtt.services.callbacks.publish_split_topic_period_totals')
     def test_create_electricity_signal(self, *service_mocks):

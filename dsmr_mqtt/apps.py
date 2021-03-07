@@ -73,6 +73,11 @@ class MqttAppConfig(AppConfig):
         import dsmr_mqtt.services.callbacks
 
         try:
+            dsmr_mqtt.services.callbacks.publish_day_consumption()
+        except Exception as error:
+            logger.error('publish_day_consumption() failed: %s', error)
+
+        try:
             dsmr_mqtt.services.callbacks.publish_json_period_totals()
         except Exception as error:
             logger.error('publish_json_period_totals() failed: %s', error)
@@ -101,12 +106,6 @@ def _on_dsmrreading_created_signal(instance, **kwargs):
         dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading(reading=instance)
     except Exception as error:
         logger.error('publish_split_topic_dsmr_reading() failed: %s', error)
-
-    try:
-        # @TODO: Move to _on_electricity_consumption_created_signal() above instead.
-        dsmr_mqtt.services.callbacks.publish_day_consumption()
-    except Exception as error:
-        logger.error('publish_day_consumption() failed: %s', error)
 
     try:
         dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics()

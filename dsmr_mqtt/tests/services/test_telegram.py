@@ -41,7 +41,6 @@ class TestTelegramAndReading(TestServices):
 
     @mock.patch('dsmr_mqtt.services.callbacks.publish_json_dsmr_reading')
     @mock.patch('dsmr_mqtt.services.callbacks.publish_split_topic_dsmr_reading')
-    @mock.patch('dsmr_mqtt.services.callbacks.publish_day_consumption')
     @mock.patch('dsmr_mqtt.services.callbacks.publish_split_topic_meter_statistics')
     def test_create_reading_signal(self, *service_mocks):
         self.assertFalse(all([x.called for x in service_mocks]))

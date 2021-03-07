@@ -6,30 +6,16 @@ from django.test import TestCase
 from django.utils import timezone
 
 from dsmr_mqtt.models.settings import day_totals
-from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 import dsmr_mqtt.services.callbacks
 
 
-class TestServices(TestCase):
-    def _create_dsmrreading(self):
-        return DsmrReading.objects.create(
-            timestamp=timezone.now(),
-            electricity_delivered_1=1,
-            electricity_returned_1=2,
-            electricity_delivered_2=3,
-            electricity_returned_2=4,
-            electricity_currently_delivered=5,
-            electricity_currently_returned=6,
-        )
-
-
-class TestDaytotals(TestServices):
+class TestDaytotals(TestCase):
     def setUp(self):
         self.json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
         self.split_topic_settings = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
-        self.reading = self._create_dsmrreading()
+        self.timestamp = timezone.now()
 
         # Mapping.
         self.json_settings.formatting = '''
@@ -109,7 +95,7 @@ fixed_cost = dsmr/rrr
         # Required for consumption to return any data.
         ElectricityConsumption.objects.bulk_create([
             ElectricityConsumption(
-                read_at=self.reading.timestamp,
+                read_at=self.timestamp,
                 delivered_1=0,
                 delivered_2=0,
                 returned_1=0,
@@ -118,7 +104,7 @@ fixed_cost = dsmr/rrr
                 currently_returned=0,
             ),
             ElectricityConsumption(
-                read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
+                read_at=self.timestamp + timezone.timedelta(seconds=1),
                 delivered_1=12,
                 delivered_2=14,
                 returned_1=3,
@@ -151,12 +137,12 @@ fixed_cost = dsmr/rrr
 
         # With gas.
         GasConsumption.objects.create(
-            read_at=self.reading.timestamp,
+            read_at=self.timestamp,
             delivered=1,
             currently_delivered=0,
         )
         GasConsumption.objects.create(
-            read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
+            read_at=self.timestamp + timezone.timedelta(seconds=1),
             delivered=5.5,
             currently_delivered=0,
         )
@@ -172,8 +158,8 @@ fixed_cost = dsmr/rrr
 
         # With costs.
         EnergySupplierPrice.objects.create(
-            start=self.reading.timestamp,
-            end=self.reading.timestamp,
+            start=self.timestamp,
+            end=self.timestamp,
             description='Test',
             electricity_delivered_1_price=3,
             electricity_delivered_2_price=5,
@@ -205,7 +191,7 @@ fixed_cost = dsmr/rrr
         # Required for consumption to return any data.
         ElectricityConsumption.objects.bulk_create([
             ElectricityConsumption(
-                read_at=self.reading.timestamp,
+                read_at=self.timestamp,
                 delivered_1=0,
                 delivered_2=0,
                 returned_1=0,
@@ -214,7 +200,7 @@ fixed_cost = dsmr/rrr
                 currently_returned=0,
             ),
             ElectricityConsumption(
-                read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
+                read_at=self.timestamp + timezone.timedelta(seconds=1),
                 delivered_1=12,
                 delivered_2=14,
                 returned_1=3,
@@ -224,18 +210,18 @@ fixed_cost = dsmr/rrr
             ),
         ])
         GasConsumption.objects.create(
-            read_at=self.reading.timestamp,
+            read_at=self.timestamp,
             delivered=1,
             currently_delivered=0,
         )
         GasConsumption.objects.create(
-            read_at=self.reading.timestamp + timezone.timedelta(seconds=1),
+            read_at=self.timestamp + timezone.timedelta(seconds=1),
             delivered=5.5,
             currently_delivered=0,
         )
         EnergySupplierPrice.objects.create(
-            start=self.reading.timestamp,
-            end=self.reading.timestamp,
+            start=self.timestamp,
+            end=self.timestamp,
             description='Test',
             electricity_delivered_1_price=3,
             electricity_delivered_2_price=5,
