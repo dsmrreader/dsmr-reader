@@ -16,7 +16,7 @@ v4.x releases
 
 
 
-v4.13.0 - 2021-xx-xx
+v4.13.0 - 2021-03-09
 --------------------
 
 - ``Added``: MQTT: Tussenstand huidige maand/jaar [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
