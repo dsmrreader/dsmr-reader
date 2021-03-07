@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load l10n %}
+
+<th class="col-sm-6">
+    <span id="tariff_name"></span>
+    <br>
+
+    <span>
+        <a class="help-trigger" href="#"><small><i class="fas fa-question-circle"></i></small></a>
+        <small class="xhr-hidden">
+            {% blocktranslate %}Based on the latest telegram received, no matter if it's still unprocessed.{% endblocktranslate %}
+        </small>
+    </span>
+    <span class="unit" id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
+</th>
+<th class="col-sm-4">
+    {% if capabilities.electricity %}
+        <span class="badge bg-red" id="latest_electricity"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
+        <span class="badge bg-green" id="latest_electricity_returned"></span>
+        <span class="unit">{% translate "W" %}</span>
+    {% endif %}
+</th>
+<th class="col-sm-2">
+    {% if capabilities.electricity %}
+        <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>  <span class="unit">&euro;{% translate '/hour' %}</span>
+    {% endif %}
+</th>

@@ -86,7 +86,7 @@ tr > th {
 }
 
 tr.live-header > th {
-    padding-bottom: 30px !important;
+    padding-bottom: 30px;
 }
 
 ul#category-suggestions > li {

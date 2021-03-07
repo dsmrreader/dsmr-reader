@@ -89,12 +89,12 @@ def publish_json_period_totals():
     if not json_settings.enabled:
         return
 
-    statistics = get_period_totals()
+    totals = convert_period_totals()
 
-    if not statistics:
+    if not totals:
         return
 
-    publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=statistics)
+    publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=totals)
 
 
 def publish_split_topic_period_totals():
@@ -104,12 +104,34 @@ def publish_split_topic_period_totals():
     if not split_topic_settings.enabled:
         return
 
-    statistics = get_period_totals()
+    totals = convert_period_totals()
 
-    if not statistics:
+    if not totals:
         return
 
-    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=statistics)
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=totals)
+
+
+def convert_period_totals():
+    """ Uses a generic datasource, but should be converted to flat format. Also, not all data is required at all. """
+    totals = dsmr_stats.services.period_totals()
+
+    excluded_keys = ('number_of_days', 'temperature_avg', 'temperature_min', 'temperature_max')
+    result = {}
+
+    for k in totals['month'].keys():
+        if k in excluded_keys or totals['month'][k] is None:
+            continue
+
+        result['current_month_' + k] = totals['month'][k]
+
+    for k in totals['year'].keys():
+        if k in excluded_keys or totals['year'][k] is None:
+            continue
+
+        result['current_year_' + k] = totals['year'][k]
+
+    return result
 
 
 def publish_split_topic_meter_statistics():
@@ -162,39 +184,6 @@ def publish_json_data(topic, mapping_format, data_source):
 
     json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
     dsmr_mqtt.services.messages.queue_message(topic=topic, payload=json_data)
-
-
-def get_period_totals():
-    """ Retrieves year/month period totals and merges them with today's consumption. """
-    today = timezone.localtime(timezone.now())
-
-    try:
-        todays_consumption = dsmr_consumption.services.day_consumption(day=today)
-    except LookupError:
-        # No data for today
-        todays_consumption = {}
-
-    month_statistics = dsmr_stats.services.month_statistics(target_date=today)
-    year_statistics = dsmr_stats.services.year_statistics(target_date=today)
-    statistics = {}
-
-    excluded_keys = ('number_of_days', 'temperature_avg', 'temperature_min', 'temperature_max')
-
-    for k in month_statistics.keys():
-        if k in excluded_keys or month_statistics[k] is None:
-            continue
-
-        # Assumes same keys, zero value fallback.
-        statistics['current_month_' + k] = month_statistics[k] + todays_consumption.get(k, 0)
-
-    for k in year_statistics.keys():
-        if k in excluded_keys or year_statistics[k] is None:
-            continue
-
-        # Assumes same keys, zero value fallback.
-        statistics['current_year_' + k] = year_statistics[k] + todays_consumption.get(k, 0)
-
-    return statistics
 
 
 def publish_split_topic_data(mapping_format, data_source):

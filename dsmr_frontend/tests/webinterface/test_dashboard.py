@@ -41,10 +41,13 @@ class TestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200, response.content)
         self.assertIn('capabilities', response.context)
-        self.assertIn('django_date_format', response.context)
+        self.assertIn('today_date_format', response.context)
+        self.assertIn('month_date_format', response.context)
+        self.assertIn('year_date_format', response.context)
         self.assertIn('datalogger_settings', response.context)
         self.assertIn('frontend_settings', response.context)
         self.assertIn('notification_count', response.context)
+        self.assertIn('period_totals', response.context)
 
 
 class TestViewsWithoutData(TestViews):

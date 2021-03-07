@@ -1,12 +1,9 @@
 from django.views.generic.base import TemplateView
-from django.utils import timezone
 
-from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.settings import DataloggerSettings
-import dsmr_consumption.services
 import dsmr_backend.services.backend
 import dsmr_stats.services
 
@@ -20,20 +17,9 @@ class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
         context_data['notification_count'] = Notification.objects.unread().count()
-        context_data['django_date_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
-
-        try:
-            latest_electricity = ElectricityConsumption.objects.all().order_by('-read_at')[0]
-        except IndexError:
-            # Don't even bother when no data available.
-            return context_data
-
-        context_data['consumption'] = dsmr_consumption.services.day_consumption(
-            day=timezone.localtime(latest_electricity.read_at).date()
-        )
-        month_statistics = dsmr_stats.services.month_statistics(
-            target_date=timezone.localtime(timezone.now()).date()
-        )
-        context_data['month_statistics'] = month_statistics
+        context_data['today_date_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
+        context_data['month_date_format'] = 'DSMR_DATEPICKER_MONTH'
+        context_data['year_date_format'] = 'DSMR_DATEPICKER_YEAR'
+        context_data['period_totals'] = dsmr_stats.services.period_totals()
 
         return context_data

@@ -1428,14 +1428,22 @@ msgstr "Ongelezen notificaties"
 msgid "Go to notification overview"
 msgstr "Ga naar notificatieoverzicht"
 
-msgid "Based on the latest telegram received, no matter if it's still unprocessed."
-msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
+msgid "All data is based on whether you have set prices for each type of consumption. E.g.: Omitting gas prices will hide gas consumption for the contract."
+msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. N.B.: Het weglaten van gasprijzen laat bijvoorbeeld gasconsumptie hieronder niet zien."
 
-msgid "W"
-msgstr "W"
+msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
+msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
 
-msgid "/hour"
-msgstr "/uur"
+msgid "When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation."
+msgstr "Indien van toepassing: Kosten m.b.t. teruglevering kunnen afwijken van je daadwerkelijke situatie en worden getoond voor een volledig overzicht."
+
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dag"
+msgstr[1] "dagen"
+
+msgid "stored"
+msgstr "opgeslagen"
 
 msgid "Consumed"
 msgstr "Verbruikt"
@@ -1449,46 +1457,14 @@ msgstr "Kosten"
 msgid "kWh"
 msgstr "kWh"
 
-msgid "m<sup>3</sup>"
-msgstr "m<sup>3</sup>"
-
-msgid "today"
-msgstr "vandaag"
-
-msgid "Total"
-msgstr "Totaal"
-
-msgid "Current month"
-msgstr "Huidige maand"
-
-msgid "until yesterday"
-msgstr "tot en met gisteren"
-
-msgid "day"
-msgid_plural "days"
-msgstr[0] "dag"
-msgstr[1] "dagen"
-
-msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
-msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
-
-msgid "All data is based on whether you have set prices for each type of consumption. E.g.: Omitting gas prices will hide gas consumption for the contract."
-msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. N.B.: Het weglaten van gasprijzen laat bijvoorbeeld gasconsumptie hieronder niet zien."
-
-msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
-msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
-
-msgid "When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation."
-msgstr "Indien van toepassing: Kosten m.b.t. teruglevering kunnen afwijken van je daadwerkelijke situatie en worden getoond voor een volledig overzicht."
-
-msgid "stored"
-msgstr "opgeslagen"
-
 msgid "(combined)"
 msgstr "(gecombineerd)"
 
 msgid "(single tariff)"
 msgstr "(enkel tarief)"
+
+msgid "m<sup>3</sup>"
+msgstr "m<sup>3</sup>"
 
 msgid "Total costs"
 msgstr "Totale kosten"
@@ -1559,6 +1535,9 @@ msgstr "Download export"
 msgid "Add note for this date"
 msgstr "Voeg notitie toe voor deze datum"
 
+msgid "Total"
+msgstr "Totaal"
+
 msgid "Temp."
 msgstr "Temp."
 
@@ -1583,11 +1562,20 @@ msgstr "Verschil"
 msgid "There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate."
 msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
 
+msgid "No data available (yet)."
+msgstr "Nog geen gegevens beschikbaar."
+
+msgid "Based on the latest telegram received, no matter if it's still unprocessed."
+msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
+
+msgid "W"
+msgstr "W"
+
+msgid "/hour"
+msgstr "/uur"
+
 msgid "Recent electricity consumption"
 msgstr "Recent elektriciteitsverbruik"
-
-msgid "Based on the latest electricity consumption processed."
-msgstr "Gebaseerd op het meest recent verwerkte elektriciteitsverbruik."
 
 msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
 msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
@@ -2632,6 +2620,21 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Based on the latest electricity consumption processed."
+#~ msgstr "Gebaseerd op het meest recent verwerkte elektriciteitsverbruik."
+
+#~ msgid "today"
+#~ msgstr "vandaag"
+
+#~ msgid "Current month"
+#~ msgstr "Huidige maand"
+
+#~ msgid "until yesterday"
+#~ msgstr "tot en met gisteren"
+
+#~ msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
+#~ msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
 
 #~ msgid "Failed to connect to or read from Buienradar API"
 #~ msgstr "Kan niet verbinden naar of lezen van de Buienradar API"

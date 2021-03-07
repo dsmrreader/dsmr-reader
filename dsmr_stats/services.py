@@ -322,6 +322,41 @@ def year_statistics(target_date):
     return range_statistics(start=start_of_year, end=end_of_year)
 
 
+def period_totals():
+    """ Retrieves year/month period totals and merges them with today's consumption. """
+    today = timezone.localtime(timezone.now())
+
+    try:
+        today_stats = dsmr_consumption.services.day_consumption(day=today)
+    except LookupError:
+        today_stats = {}
+
+    month_stats = month_statistics(target_date=today)
+    year_stats = year_statistics(target_date=today)
+    excluded_keys = ('number_of_days', 'temperature_avg', 'temperature_min', 'temperature_max')
+
+    for k in month_stats.keys():
+        if k in excluded_keys or month_stats[k] is None:
+            continue
+
+        # Assumes same keys, zero value fallback.
+        month_stats[k] += today_stats.get(k, 0)
+
+    for k in year_stats.keys():
+        if k in excluded_keys or year_stats[k] is None:
+            continue
+
+        # Assumes same keys, zero value fallback.
+        year_stats[k] += today_stats.get(k, 0)
+
+    return dict(
+        day=today,
+        today=today_stats,
+        month=month_stats,
+        year=year_stats,
+    )
+
+
 def update_electricity_statistics(reading):
     """ Updates the ElectricityStatistics records. """
     MAPPING = {

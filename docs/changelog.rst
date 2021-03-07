@@ -25,11 +25,13 @@ v4.13.0 - 2021-03-09
 - ``Changed``: Partial backups no longer run daily, but weekly instead [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
 - ``Changed``: 6e getal achter de komma nodig bij energiecontracten [`#1304 <https://github.com/dsmrreader/dsmr-reader/issues/1304>`_]
 - ``Changed``: Deprecate Python 3.6 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+- ``Changed``: Dashboard-total uitbreiden/verbeteren [`#1160 <https://github.com/dsmrreader/dsmr-reader/issues/1160>`_] / [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
 
 - ``Fixed``: Schoonheidsfoutje op de statistieken pagina [`#1305 <https://github.com/dsmrreader/dsmr-reader/issues/1305>`_]
 - ``Fixed``: Bestaande superusers uitschakelen bij uitvoeren "dsmr_superuser" command [`#1309 <https://github.com/dsmrreader/dsmr-reader/issues/1309>`_]
 - ``Fixed``: E-mailverzending timeout [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
 - ``Fixed``: Herstarten processen verduidelijken in docs [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
+- ``Fixed``: Live header optimaliseren voor mobiele weergave [`#1160 <https://github.com/dsmrreader/dsmr-reader/issues/1160>`_]
 
 
 v4.12.0 - 2021-02-17

@@ -1,0 +1,76 @@
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+
+<div class="row consumption-block">
+    <div class="col-sm-12">
+        <div class="panel">
+            <header class="panel-heading">
+                {{ day|date:date_formatter }}
+
+                {% if archive_link %}
+                <div class="pull-right">
+                    <a class="btn btn-sm btn-primary" href="{% url 'frontend:archive' %}"><i class="fas fa-history"></i></a>
+                </div>
+                {% endif %}
+            </header>
+            <div class="panel-body">
+                {% if data %}
+                <table class="table table-hover">
+                    <tr>
+                        <th class="col-sm-6"></th>
+                        <th class="col-sm-2">{% if capabilities.electricity %}{% translate "Consumed" %}{% endif %}</th>
+                        <th class="col-sm-2">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
+                        <th class="col-sm-2">{% translate "Costs" %} <span class="unit">&euro;</span></th>
+                    </tr>
+                    {% if frontend_settings.merge_electricity_tariffs %}
+                    <tr>
+                        <td>{% if capabilities.electricity %}{% translate "Electricity (single tariff)" %} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ data.electricity_merged|default:'-'|floatformat:2 }} </span>{% endif %}</td>
+                        <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ data.electricity_returned_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ data.electricity_cost_merged|default:'-' }}</span>{% endif %}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ data.electricity1|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ data.electricity1_returned|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ data.electricity1_cost|default:'-' }}</span>{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ data.electricity2|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ data.electricity2_returned|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}<span class="badge bg-black">{{ data.electricity2_cost|default:'-' }}</span>{% endif %}</td>
+                    </tr>
+                    {% endif %}
+                    {% if capabilities.gas %}
+                    <tr>
+                        <td>{% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" noop %}</span></td>
+                        <td><span class="badge bg-orange">{{ data.gas|default:'-'|floatformat:2 }}</span></td>
+                        <td>&nbsp;</td>
+                        <td><span class="badge bg-black">{{ data.gas_cost|default:'-' }}</span></td>
+                    </tr>
+                    {% endif %}
+                    {% if data.fixed_cost %}
+                    <tr>
+                        <td colspan="3"> {% translate "Fixed costs" %} <span class="unit">&euro;</span></td>
+                        <td><span class="badge bg-black">{{ data.fixed_cost|default:'-'|floatformat:2 }}</span></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <td style="font-weight: bold;">{% translate "Total" %}</td>
+                        <td>{% if capabilities.electricity %}<span class="badge bg-red">{{ data.electricity_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ data.electricity_returned_merged|default:'-'|floatformat:2 }}</span>{% endif %}</td>
+                        <td><span class="badge bg-black">{{ data.total_cost|default:'-' }}</span></td>
+                    </tr>
+                </table>
+                {% else %}
+                    <div class="graph_controls_help">{% blocktranslate %}No data available (yet).{% endblocktranslate %}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
