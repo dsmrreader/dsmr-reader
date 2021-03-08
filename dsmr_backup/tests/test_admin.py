@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.conf import settings
 
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_backup.models.settings import DropboxSettings, BackupSettings
+from dsmr_backup.models.settings import BackupSettings
 
 
 class TestAdmin(TestCase):
@@ -39,8 +39,6 @@ class TestAdmin(TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2019, 1, 1))  # Lock time
 
         BackupSettings.get_solo()
-        # BackupSettings.objects.all().update(latest_backup=timezone.now())
-        # self.assertFalse(BackupSettings.objects.filter(latest_backup__isnull=True).exists())
 
         data = dict(
             backup_time='06:00:00',
@@ -51,7 +49,6 @@ class TestAdmin(TestCase):
         # Just posting should reset it. NOTE: To apply settings, form params must validate!
         response = self.client.post(URL, data=data)
         self.assertEqual(response.status_code, 302)
-        # self.assertTrue(BackupSettings.objects.filter(latest_backup__isnull=True).exists())
 
         # Test non existing folder and cause permission denied.
         data.update(dict(folder='/non/existing/'))
@@ -66,20 +63,6 @@ class TestAdmin(TestCase):
         mkdirs_mock.side_effect = None
         self.client.post(URL, data=data)
         self.assertTrue(BackupSettings.objects.filter(folder=data['folder']).exists())
-
-    @mock.patch('django.utils.timezone.now')
-    def test_reschedule_dropbox_sync(self, now_mock):
-        URL = reverse('admin:dsmr_backup_dropboxsettings_changelist')
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2019, 1, 1))  # Lock time
-
-        DropboxSettings.get_solo()
-        DropboxSettings.objects.all().update(next_sync=timezone.now() + timezone.timedelta(hours=1))
-        self.assertFalse(DropboxSettings.objects.filter(next_sync__lte=timezone.now()).exists())
-
-        # Just posting should reset it.
-        response = self.client.post(URL)
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(DropboxSettings.objects.filter(next_sync__lte=timezone.now()).exists())
 
     def test_reschedule_email_backup(self):
         URL = reverse('admin:dsmr_backup_emailbackupsettings_changelist')
@@ -97,3 +80,20 @@ class TestAdmin(TestCase):
             module=settings.DSMRREADER_MODULE_EMAIL_BACKUP,
             planned__lt=timezone.now()).exists()
         )
+
+    def test_dropbox_settings_hook(self):
+        URL = reverse('admin:dsmr_backup_dropboxsettings_changelist')
+
+        self.assertFalse(ScheduledProcess.objects.filter(
+            module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT,
+            active=True
+        ).exists())
+
+        # Setting any Dropbox token should enable SP
+        response = self.client.post(URL, dict(access_token='test'))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(ScheduledProcess.objects.filter(
+            module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT,
+            active=True
+        ).exists())

@@ -56,20 +56,6 @@ class DropboxSettings(ModelUpdateMixin, SingletonModel):
         blank=True,
         verbose_name=_('Dropbox access token'),
     )
-    latest_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Latest sync'),
-        help_text=_('Timestamp of latest sync with Dropbox. Automatically updated by application.')
-    )
-    next_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Next sync'),
-        help_text=_('Timestamp of next sync with Dropbox. Automatically updated by application.')
-    )
 
     def __str__(self):
         return self._meta.verbose_name.title()

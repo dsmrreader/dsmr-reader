@@ -2,7 +2,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-08 20:36+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -229,9 +228,6 @@ msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hi
 msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/backup_dropbox.html\">Documentation</a>"
 msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/backup_dropbox.html\">Documentatie</a>"
 
-msgid "Automatic fields"
-msgstr "Automatische velden"
-
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
 
@@ -270,18 +266,6 @@ msgstr "Back-up configuratie"
 
 msgid "Dropbox access token"
 msgstr "Dropbox access token"
-
-msgid "Latest sync"
-msgstr "Meest recente synchronisatie"
-
-msgid "Timestamp of latest sync with Dropbox. Automatically updated by application."
-msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
-
-msgid "Next sync"
-msgstr "Volgende synchronisatie"
-
-msgid "Timestamp of next sync with Dropbox. Automatically updated by application."
-msgstr "Tijdstip van de volgende synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
 
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
@@ -333,9 +317,6 @@ msgstr "Of gebruik GMail/e-mail om kleinere back-up's te bewaren"
 
 msgid "view email backup settings here"
 msgstr "bekijk hier instellingen voor back-up per e-mail"
-
-msgid "Saving the configuration will reset the delay until the next sync."
-msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende synchronisatie."
 
 msgid "Emails are currently sent to"
 msgstr "E-mails worden momenteel verstuurd naar"
@@ -807,12 +788,6 @@ msgstr "Uitschakelen van retentiebeleid zorgt op de termijn voor performance pro
 
 msgid "Dropbox"
 msgstr "Dropbox"
-
-msgid "Waiting for the next Dropbox sync to be executed"
-msgstr "Wachten op de volgende Dropbox-sync die uitgevoerd moet worden"
-
-msgid "Forces Dropbox sync."
-msgstr "Forceert Dropbox synchronisatie."
 
 msgid "Unable to authenticate with Dropbox, removing credentials. Error: {}"
 msgstr "Kan niet authenticeren met Dropbox, inloggegevens weggehaald. Fout: {}"
@@ -2121,6 +2096,9 @@ msgstr "Alleen van toepassing voor Prowl"
 msgid "Only applies when using your own Telegram bot"
 msgstr "Alleen van toepassing wanneer je je eigen Telegram-bot gebruikt"
 
+msgid "Automatic fields"
+msgstr "Automatische velden"
+
 msgid "System checks for sending status notifications when the datalogger is lagging behind."
 msgstr "Systeemcontroles voor het versturen van notificaties wanneer de datalogger achterloopt."
 
@@ -2261,6 +2239,9 @@ msgstr "Volgende synchronisatie"
 
 msgid "Timestamp of the next export. Automatically updated by application."
 msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
+
+msgid "Latest sync"
+msgstr "Meest recente synchronisatie"
 
 msgid "Timestamp of latest sync with PVOutput. Automatically updated by application."
 msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt dit automatisch bij."
@@ -2618,6 +2599,24 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Waiting for the next Dropbox sync to be executed"
+#~ msgstr "Wachten op de volgende Dropbox-sync die uitgevoerd moet worden"
+
+#~ msgid "Timestamp of latest sync with Dropbox. Automatically updated by application."
+#~ msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
+
+#~ msgid "Next sync"
+#~ msgstr "Volgende synchronisatie"
+
+#~ msgid "Timestamp of next sync with Dropbox. Automatically updated by application."
+#~ msgstr "Tijdstip van de volgende synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
+
+#~ msgid "Saving the configuration will reset the delay until the next sync."
+#~ msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende synchronisatie."
+
+#~ msgid "Forces Dropbox sync."
+#~ msgstr "Forceert Dropbox synchronisatie."
 
 #~ msgid "Reconstructs missing day statistics by using available hour statistics"
 #~ msgstr "Reconstrueert missende dagstatistieken door beschikbare uurstatistieken te gebruiken"

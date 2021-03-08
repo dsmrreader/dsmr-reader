@@ -1,12 +1,13 @@
 import logging
 import time
 import os
+from typing import Iterable
 
 from django.utils.translation import gettext as _
-from django.utils import timezone
 from django.conf import settings
 import dropbox
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backup.models.settings import DropboxSettings
 from dsmr_dropbox.dropboxinc.dropbox_content_hasher import DropboxContentHasher
 import dsmr_backup.services.backup
@@ -16,17 +17,15 @@ import dsmr_frontend.services
 logger = logging.getLogger('dsmrreader')
 
 
-def sync():
+def run(scheduled_process: ScheduledProcess) -> None:
     dropbox_settings = DropboxSettings.get_solo()
 
-    # Skip when either no token was entered.
     if not dropbox_settings.access_token:
+        # Should not happen, safe fallback
+        scheduled_process.disable()
         return
 
-    if dropbox_settings.next_sync and dropbox_settings.next_sync > timezone.now():
-        return
-
-    check_access_token(dropbox_settings.access_token)
+    check_access_token(scheduled_process, dropbox_settings.access_token)
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
 
     # Sync each file, recursively.
@@ -35,21 +34,16 @@ def sync():
             continue
 
         sync_file(
+            scheduled_process=scheduled_process,
             dropbox_access_token=dropbox_settings.access_token,
             local_root_dir=backup_directory,
             abs_file_path=current_file
         )
 
-    # Try again in a while.
-    DropboxSettings.objects.update(
-        latest_sync=timezone.now(),
-        next_sync=timezone.now() + timezone.timedelta(
-            hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL
-        )
-    )
+    scheduled_process.delay(hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL)
 
 
-def check_access_token(dropbox_access_token):
+def check_access_token(scheduled_process: ScheduledProcess, dropbox_access_token: str) -> None:
     """ Verify auth token validity. """
     dbx = dropbox.Dropbox(dropbox_access_token)
 
@@ -63,15 +57,12 @@ def check_access_token(dropbox_access_token):
             )
         )
         dsmr_frontend.services.display_dashboard_message(message=message)
-        DropboxSettings.objects.update(
-            latest_sync=timezone.now(),
-            next_sync=None,
-            access_token=None
-        )
+        DropboxSettings.objects.update(access_token=None)  # Does not trigger auto disable
+        scheduled_process.disable()
         raise
 
 
-def list_files_in_dir(directory):
+def list_files_in_dir(directory: str) -> Iterable:
     """ Lists all files recursively in the specified (backup) directory. """
     files = []
 
@@ -82,7 +73,7 @@ def list_files_in_dir(directory):
     return files
 
 
-def should_sync_file(abs_file_path):
+def should_sync_file(abs_file_path: str) -> bool:
     """ Checks whether we should include this file for sync. """
     file_stat = os.stat(abs_file_path)
 
@@ -105,7 +96,10 @@ def should_sync_file(abs_file_path):
     return True
 
 
-def sync_file(dropbox_access_token, local_root_dir, abs_file_path):
+def sync_file(scheduled_process: ScheduledProcess,
+              dropbox_access_token: str,
+              local_root_dir: str,
+              abs_file_path: str) -> None:
     dbx = dropbox.Dropbox(dropbox_access_token)
 
     # The path we use in our Dropbox app folder.
@@ -124,7 +118,8 @@ def sync_file(dropbox_access_token, local_root_dir, abs_file_path):
 
     # Calculate local hash and compare with remote. Ignore if the remote file is exactly the same.
     if dropbox_meta and calculate_content_hash(abs_file_path) == dropbox_meta.content_hash:
-        return logger.debug('Dropbox: Content hash is the same, skipping: %s', relative_file_path)
+        logger.debug('Dropbox: Content hash is the same, skipping: %s', relative_file_path)
+        return
 
     try:
         upload_chunked(
@@ -143,15 +138,12 @@ def sync_file(dropbox_access_token, local_root_dir, abs_file_path):
                 )
             )
             dsmr_frontend.services.display_dashboard_message(message=message)
-            DropboxSettings.objects.update(
-                latest_sync=timezone.now(),
-                next_sync=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
-            )
+            scheduled_process.delay(hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL)
 
         raise  # pragma: no cover
 
 
-def upload_chunked(dropbox_access_token, local_file_path, remote_file_path):
+def upload_chunked(dropbox_access_token: str, local_file_path: str, remote_file_path: str) -> None:
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     logger.info('Dropbox: Syncing file %s', remote_file_path)
 
@@ -191,7 +183,7 @@ def upload_chunked(dropbox_access_token, local_file_path, remote_file_path):
     file_handle.close()
 
 
-def calculate_content_hash(file_path):
+def calculate_content_hash(file_path: str) -> str:
     """ Calculates the Dropbox hash of a file: https://www.dropbox.com/developers/reference/content-hash """
     hasher = DropboxContentHasher()
     with open(file_path, 'rb') as f:

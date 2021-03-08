@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.conf import settings
 import dropbox
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_backup.models.settings import DropboxSettings
 from dsmr_frontend.models.message import Notification
@@ -18,6 +19,9 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         DropboxSettings.get_solo()
         DropboxSettings.objects.all().update(access_token='FAKE')
 
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+
     @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('dropbox.Dropbox.files_get_metadata')
     def test_sync_disabled(self, _, upload_chunked_mock):
@@ -25,7 +29,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         self.assertFalse(upload_chunked_mock.called)
 
-        dsmr_dropbox.services.sync()
+        dsmr_dropbox.services.run(self.schedule_process)
         self.assertFalse(upload_chunked_mock.called)
 
     @mock.patch('dropbox.Dropbox.users_get_space_usage')
@@ -34,37 +38,34 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
 
         for current_class in (dropbox.exceptions.BadInputError, dropbox.exceptions.AuthError):
-            DropboxSettings.objects.all().update(
-                next_sync=timezone.now(),
-                access_token='invalid-token'
-            )
+            DropboxSettings.objects.all().update(access_token='invalid-token')
             users_get_space_usage_mock.side_effect = current_class(12345, "Some error")
 
             Notification.objects.all().delete()
             self.assertEqual(Notification.objects.count(), 0)
 
             with self.assertRaises(current_class):
-                dsmr_dropbox.services.check_access_token('dummy')
+                dsmr_dropbox.services.check_access_token(self.schedule_process, dropbox_access_token='dummy')
 
-            # Warning message should be created and next sync should be skipped ahead.
+            # Warning message should be created and SP disabled.
             self.assertEqual(Notification.objects.count(), 1)
-
-            self.assertIsNone(DropboxSettings.get_solo().next_sync)
-
-    @mock.patch('dsmr_dropbox.services.check_access_token')
-    @mock.patch('dsmr_dropbox.services.sync_file')
-    @mock.patch('dsmr_dropbox.services.should_sync_file')
-    @mock.patch('dropbox.Dropbox.files_get_metadata')
-    @mock.patch('django.utils.timezone.now')
-    def test_sync_initial(self, now_mock, _, should_mock, sync_file_mock, *mocks):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-        should_mock.return_value = True
-
-        # Initial project state.
-        DropboxSettings.objects.all().update(next_sync=None)
-
-        dsmr_dropbox.services.sync()
-        self.assertTrue(sync_file_mock.called)
+            self.schedule_process.refresh_from_db()
+            self.assertFalse(self.schedule_process.active)
+    #
+    # @mock.patch('dsmr_dropbox.services.check_access_token')
+    # @mock.patch('dsmr_dropbox.services.sync_file')
+    # @mock.patch('dsmr_dropbox.services.should_sync_file')
+    # @mock.patch('dropbox.Dropbox.files_get_metadata')
+    # @mock.patch('django.utils.timezone.now')
+    # def test_sync_initial(self, now_mock, _, should_mock, sync_file_mock, *mocks):
+    #     now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+    #     should_mock.return_value = True
+    #
+    #     # Initial project state.
+    #     DropboxSettings.objects.all().update(next_sync=None)
+    #
+    #     dsmr_dropbox.services.run(self.schedule_process)
+    #     self.assertTrue(sync_file_mock.called)
 
     @mock.patch('dsmr_dropbox.services.check_access_token')
     @mock.patch('dsmr_dropbox.services.list_files_in_dir')
@@ -77,28 +78,17 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         should_mock.side_effect = [False, True]  # Both branches.
         list_files_in_dir_mock.return_value = ['/tmp/fake1', '/tmp/fake2']
 
-        old_next_sync = timezone.now() - timezone.timedelta(weeks=1)
-        DropboxSettings.objects.all().update(next_sync=old_next_sync)
-
         self.assertFalse(sync_file_mock.called)
         self.assertIsNotNone(DropboxSettings.get_solo().access_token)
 
-        dsmr_dropbox.services.sync()
+        dsmr_dropbox.services.run(self.schedule_process)
         self.assertTrue(sync_file_mock.called)
-        self.assertNotEqual(DropboxSettings.get_solo().next_sync, old_next_sync)
 
-    @mock.patch('dsmr_dropbox.services.check_access_token')
-    @mock.patch('dsmr_backup.services.backup.get_backup_directory')
-    @mock.patch('django.utils.timezone.now')
-    def test_sync_latest_sync(self, now_mock, get_backup_directory_mock, *mocks):
-        """ Test whether syncs are limited to intervals. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-        DropboxSettings.objects.all().update(next_sync=timezone.now() + timezone.timedelta(minutes=1))
-
-        self.assertFalse(get_backup_directory_mock.called)
-
-        dsmr_dropbox.services.sync()
-        self.assertFalse(get_backup_directory_mock.called)
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(
+            self.schedule_process.planned,
+            timezone.make_aware(timezone.datetime(2016, 1, 1, hour=1))
+        )
 
     @mock.patch('dsmr_dropbox.services.check_access_token')
     @mock.patch('dsmr_backup.services.backup.get_backup_directory')
@@ -114,7 +104,6 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         files_get_metadata_mock.return_value = fake_metadata
         calculate_hash_mock.return_value = HASH
 
-        DropboxSettings.objects.all().update(next_sync=timezone.now() - timezone.timedelta(weeks=1))
         with tempfile.TemporaryDirectory() as temp_dir:
             get_backup_directory_mock.return_value = temp_dir
             temp_file = tempfile.NamedTemporaryFile(dir=temp_dir, delete=False)
@@ -122,15 +111,16 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             temp_file.flush()
 
             # File should be ignored.
-            dsmr_dropbox.services.sync()
+            dsmr_dropbox.services.run(self.schedule_process)
             self.assertFalse(upload_chunked_mock.called)
             upload_chunked_mock.reset_mock()
 
-            DropboxSettings.objects.all().update(next_sync=timezone.now() - timezone.timedelta(weeks=1))
+            # Again.
+            self.schedule_process.delay(seconds=-1)
 
             # File should be synced when the content differs.
             calculate_hash_mock.return_value = reversed(HASH)
-            dsmr_dropbox.services.sync()
+            dsmr_dropbox.services.run(self.schedule_process)
             self.assertTrue(upload_chunked_mock.called)
 
     @mock.patch('dsmr_dropbox.services.upload_chunked')
@@ -153,6 +143,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         with self.assertRaises(dropbox.exceptions.ApiError):
             dsmr_dropbox.services.sync_file(
+                scheduled_process=self.schedule_process,
                 dropbox_access_token='dummy-token',
                 local_root_dir='/var/tmp/',
                 abs_file_path='/var/tmp/fake'
@@ -160,10 +151,10 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # Warning message should be created and next sync should be skipped ahead.
         self.assertEqual(Notification.objects.count(), 1)
+        self.schedule_process.refresh_from_db()
         self.assertGreater(
-            DropboxSettings.get_solo().next_sync, timezone.now() + timezone.timedelta(
-                hours=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL - 1
-            )
+            self.schedule_process.planned,
+            timezone.make_aware(timezone.datetime(2000, 1, 1, hour=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL - 1))
         )
 
     @mock.patch('dsmr_dropbox.services.check_access_token')
@@ -184,14 +175,14 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         )
 
         # This should continue sync, as the file is new on remote.
-        dsmr_dropbox.services.sync()
+        dsmr_dropbox.services.run(self.schedule_process)
         self.assertTrue(files_get_metadata_mock.called)
         self.assertTrue(upload_chunked_mock.called)
 
         # Try again, different error, unexpected, but must be handled.
         files_get_metadata_mock.reset_mock()
         upload_chunked_mock.reset_mock()
-        DropboxSettings.objects.all().update(next_sync=timezone.now() - timezone.timedelta(weeks=1))
+        self.schedule_process.delay(seconds=-1)
         files_get_metadata_mock.side_effect = dropbox.exceptions.ApiError(
             67890,
             "ApiError('xxx', ApiError('other_error', None))",
@@ -200,7 +191,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         )
 
         # This should continue sync, as the error is unexpected.
-        dsmr_dropbox.services.sync()
+        dsmr_dropbox.services.run(self.schedule_process)
         self.assertTrue(files_get_metadata_mock.called)
         self.assertFalse(upload_chunked_mock.called)
 

@@ -45,6 +45,7 @@ DSMRREADER_MODULE_MINDERGAS_EXPORT = 'dsmr_mindergas.services.run'
 DSMRREADER_MODULE_GENERATE_CONSUMPTION = 'dsmr_consumption.services.run'
 DSMRREADER_MODULE_RETENTION_DATA_ROTATION = 'dsmr_datalogger.services.retention.run'
 DSMRREADER_MODULE_DAILY_BACKUP = 'dsmr_backup.services.backup.run'
+DSMRREADER_MODULE_DROPBOX_EXPORT = 'dsmr_dropbox.services.run'
 
 DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.

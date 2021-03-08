@@ -89,7 +89,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
 
         # Just run and check new planned timestamp.
         dsmr_backup.services.backup.run(self.schedule_process)
-        print(self.schedule_process.planned)
+
         self.schedule_process.refresh_from_db()
         self.assertEqual(
             self.schedule_process.planned,

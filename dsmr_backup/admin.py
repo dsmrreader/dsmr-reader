@@ -41,8 +41,6 @@ class BackupSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(DropboxSettings)
 class DropboxSettingsAdmin(SingletonModelAdmin):
-    change_form_template = 'dsmr_backup/dropbox_settings/change_form.html'
-    readonly_fields = ('latest_sync', 'next_sync')
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
     }
@@ -57,16 +55,7 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
                 )
             }
         ),
-        (
-            _('Automatic fields'), {
-                'fields': ['latest_sync', 'next_sync']
-            }
-        ),
     )
-
-    def response_change(self, request, obj):
-        DropboxSettings.objects.all().update(next_sync=timezone.now())
-        return super(DropboxSettingsAdmin, self).response_change(request, obj)
 
 
 @admin.register(EmailBackupSettings)
@@ -101,9 +90,11 @@ class EmailBackupSettingsAdmin(SingletonModelAdmin):
         return super(EmailBackupSettingsAdmin, self).response_change(request, obj)
 
 
+""" Hooks to toggle related scheduled process. """
+
+
 @receiver(django.db.models.signals.post_save, sender=EmailBackupSettings)
 def handle_email_backup_settings_update(sender, instance, **kwargs):
-    """ Hook to toggle related scheduled process. """
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
     ).update(active=instance.interval != EmailBackupSettings.INTERVAL_NONE)
@@ -111,10 +102,19 @@ def handle_email_backup_settings_update(sender, instance, **kwargs):
 
 @receiver(django.db.models.signals.post_save, sender=BackupSettings)
 def handle_backup_settings_update(sender, instance, **kwargs):
-    """ Hook to toggle related scheduled process. """
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_DAILY_BACKUP
     ).update(
         planned=timezone.now(),
         active=instance.daily_backup
+    )
+
+
+@receiver(django.db.models.signals.post_save, sender=DropboxSettings)
+def handle_dropbox_settings_update(sender, instance, **kwargs):
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT
+    ).update(
+        planned=timezone.now(),
+        active=bool(instance.access_token)
     )

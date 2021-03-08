@@ -40,9 +40,6 @@ class TestDropboxSettings(TestCase):
     def test_access_token(self):
         self.assertIsNone(self.instance.access_token)
 
-    def test_latest_sync(self):
-        self.assertIsNone(self.instance.latest_sync)
-
 
 class TestEmailBackupSettings(TestCase):
     def setUp(self):
