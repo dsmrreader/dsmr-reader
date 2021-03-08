@@ -3,6 +3,7 @@ import logging
 import shutil
 import gzip
 import os
+from typing import Iterable
 
 from django.utils.translation import gettext as _
 from django.db import connection
@@ -10,6 +11,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.utils import formats
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings
 import dsmr_frontend.services
@@ -18,7 +20,7 @@ import dsmr_frontend.services
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process):
+def run(scheduled_process: ScheduledProcess) -> None:
     """ Checks whether a new backup should be created. Creates one if needed as well. """
 
     # Create a partial, minimal backup first. Since it will grow and take disk space, only create one weekly.
@@ -51,7 +53,7 @@ def run(scheduled_process):
     scheduled_process.reschedule(next_backup_timestamp)
 
 
-def get_backup_directory(backup_directory=None):
+def get_backup_directory(backup_directory=None) -> str:
     """ Returns the path to the directory where all backups are stored locally. """
     if not backup_directory:
         backup_directory = BackupSettings.get_solo().folder
@@ -62,7 +64,7 @@ def get_backup_directory(backup_directory=None):
     return os.path.abspath(os.path.join(settings.BASE_DIR, '..', backup_directory))
 
 
-def create_full(folder):
+def create_full(folder: str) -> str:
     """ Creates a backup of the database. Optionally gzipped. """
     if not os.path.exists(folder):
         logger.info(' - Creating non-existing backup folder: %s', folder)
@@ -130,7 +132,7 @@ def create_full(folder):
     return backup_file
 
 
-def create_partial(folder, models_to_backup):  # pragma: no cover
+def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: no cover
     """ Creates a backup of the database, but only containing a subset specified by models."""
     if not os.path.exists(folder):
         logger.info(' - Creating non-existing backup folder: %s', folder)
@@ -205,7 +207,7 @@ def on_backup_failed(process_handle):
     raise IOError(error_message)
 
 
-def compress(file_path):
+def compress(file_path: str) -> str:
     """ Compresses a file using (fast) gzip. Removes source file when compression succeeded. """
     compression_level = BackupSettings.get_solo().compression_level
 

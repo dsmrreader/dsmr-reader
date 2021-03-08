@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 import requests
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_consumption.models.consumption import GasConsumption
 import dsmr_backend.services.backend
@@ -17,7 +18,7 @@ import dsmr_frontend.services
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process):
+def run(scheduled_process: ScheduledProcess):
     mindergas_settings = MinderGasSettings.get_solo()
 
     # Only when enabled and token set.

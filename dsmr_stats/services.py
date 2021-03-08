@@ -12,6 +12,7 @@ from django.db.models.functions import TruncDate
 from django.utils import timezone
 from django.conf import settings
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -54,7 +55,7 @@ def get_next_day_to_generate():
     return timezone.localtime(next_consumption.read_at).date()
 
 
-def run(scheduled_process):
+def run(scheduled_process: ScheduledProcess):
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
     if not is_data_available():
         logger.debug('Stats: No data available')

@@ -4,6 +4,7 @@ import logging
 from django.utils.translation import gettext_lazy as _
 from django.utils import translation, timezone
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backup.models.settings import EmailBackupSettings
 from dsmr_backend.models.settings import BackendSettings, EmailSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
@@ -14,7 +15,7 @@ import dsmr_backup.services.backup
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process):
+def run(scheduled_process: ScheduledProcess):
     """ Creates a new statistics backup and sends it per email. """
     email_backup_settings = EmailBackupSettings.get_solo()
 

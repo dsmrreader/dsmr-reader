@@ -8,6 +8,7 @@ from django.db.models import Avg, Min, Max, Count
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_consumption.exceptions import CompactorNotReadyError
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
@@ -23,7 +24,7 @@ import dsmr_backend.services.backend
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process):
+def run(scheduled_process: ScheduledProcess):
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
     for current_reading in DsmrReading.objects.unprocessed()[0:settings.DSMRREADER_COMPACT_MAX]:
         try:

@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.conf import settings
 import pytz
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_datalogger.models.settings import RetentionSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -14,7 +15,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process):
+def run(scheduled_process: ScheduledProcess):
     retention_settings = RetentionSettings.get_solo()
 
     if retention_settings.data_retention_in_hours == RetentionSettings.RETENTION_NONE:

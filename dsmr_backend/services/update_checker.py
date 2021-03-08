@@ -5,12 +5,13 @@ from django.utils import timezone
 
 import dsmr_frontend.services
 import dsmr_backend.services.backend
+from dsmr_backend.models.schedule import ScheduledProcess
 
 
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process):
+def run(scheduled_process: ScheduledProcess):
     """ Checks for new updates. If one is available, it's displayed on the Dashboard. """
     try:
         is_latest_version = dsmr_backend.services.backend.is_latest_version()
