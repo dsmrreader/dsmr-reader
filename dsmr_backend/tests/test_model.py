@@ -49,7 +49,7 @@ class TestScheduledProcess(TestCase):
 
     def test_delay(self):
         self.assertTrue(ScheduledProcess.objects.ready().exists())
-        self.instance.delay(timezone.timedelta(minutes=1))
+        self.instance.delay(minutes=1)
         self.assertFalse(ScheduledProcess.objects.ready().exists())
 
     @mock.patch('django.utils.timezone.now')

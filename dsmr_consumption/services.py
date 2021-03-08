@@ -31,9 +31,9 @@ def run(scheduled_process: ScheduledProcess):
             compact(dsmr_reading=current_reading)
         except CompactorNotReadyError:
             # Try again in a while, since we can't do anything now anyway.
-            return scheduled_process.delay(timezone.timedelta(seconds=15))
+            return scheduled_process.delay(seconds=15)
 
-    scheduled_process.delay(timezone.timedelta(seconds=1))
+    scheduled_process.delay(seconds=1)
 
 
 def compact(dsmr_reading):

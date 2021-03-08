@@ -1,7 +1,5 @@
 import logging
 
-from django.utils import timezone
-
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.signals import backend_called
 
@@ -43,4 +41,4 @@ def execute_scheduled_processes():
             )
 
             # Do not hammer.
-            current.delay(timezone.timedelta(seconds=30))
+            current.delay(seconds=30)

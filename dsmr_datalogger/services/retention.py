@@ -79,4 +79,4 @@ def run(scheduled_process: ScheduledProcess):
 
     # Delay for a bit, as there is nothing to do.
     if not data_to_clean_up:
-        scheduled_process.delay(timezone.timedelta(hours=12))
+        scheduled_process.delay(hours=12)

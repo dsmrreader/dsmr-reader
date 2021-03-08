@@ -59,7 +59,7 @@ def run(scheduled_process: ScheduledProcess):
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
     if not is_data_available():
         logger.debug('Stats: No data available')
-        return scheduled_process.delay(timezone.timedelta(hours=1))
+        return scheduled_process.delay(hours=1)
 
     now = timezone.localtime(timezone.now())
     target_day = get_next_day_to_generate()
@@ -77,14 +77,14 @@ def run(scheduled_process: ScheduledProcess):
 
     if unprocessed_readings:
         logger.debug('Stats: Found unprocessed readings for: %s', target_day)
-        return scheduled_process.delay(timezone.timedelta(minutes=5))
+        return scheduled_process.delay(minutes=5)
 
     # Ensure we have any consumption.
     consumption_found = ElectricityConsumption.objects.filter(read_at__date=target_day).exists()
 
     if not consumption_found:
         logger.debug('Stats: Missing consumption data for: %s', target_day)
-        return scheduled_process.delay(timezone.timedelta(hours=1))
+        return scheduled_process.delay(hours=1)
 
     # If we recently supported gas, make sure we've received a gas reading on the next day (or later).
     recently_gas_read = GasConsumption.objects.filter(
@@ -96,12 +96,12 @@ def run(scheduled_process: ScheduledProcess):
 
     if gas_capability and recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
         logger.debug('Stats: Waiting for first gas reading on the next day...')
-        return scheduled_process.delay(timezone.timedelta(minutes=5))
+        return scheduled_process.delay(minutes=5)
 
     create_statistics(target_day=target_day)
 
     # We keep trying until we've catched on to the current day (which will then delay it for a day above).
-    return scheduled_process.delay(timezone.timedelta(seconds=1))
+    return scheduled_process.delay(seconds=1)
 
 
 def create_statistics(target_day):

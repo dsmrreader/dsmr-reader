@@ -62,9 +62,9 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
     def disable(self):
         self.update(active=False)
 
-    def delay(self, delta):
+    def delay(self, **delta):
         """ Delays the next call by the given delta. """
-        self.reschedule(planned_at=timezone.now() + delta)
+        self.reschedule(planned_at=timezone.now() + timezone.timedelta(**delta))
 
     def reschedule(self, planned_at):
         """ Schedules the next call at a predetermined moment. """

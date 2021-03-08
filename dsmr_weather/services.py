@@ -20,7 +20,7 @@ def run(scheduled_process: ScheduledProcess):
     except Exception as error:
         logger.error('Buienradar: {}'.format(error))
 
-        scheduled_process.delay(timezone.timedelta(hours=1))
+        scheduled_process.delay(hours=1)
         return
 
     scheduled_process.reschedule(temperature_reading.read_at + timezone.timedelta(hours=1))

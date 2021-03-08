@@ -27,14 +27,14 @@ def run(scheduled_process: ScheduledProcess):
 
     # Nonsense when having no data.
     if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
-        return scheduled_process.delay(timezone.timedelta(hours=1))
+        return scheduled_process.delay(hours=1)
 
     try:
         export()
     except Exception as error:
         logger.exception(error)
 
-        scheduled_process.delay(timezone.timedelta(hours=1))
+        scheduled_process.delay(hours=1)
         return dsmr_frontend.services.display_dashboard_message(message=_(
             'Failed to export to MinderGas: {}'.format(error)
         ))

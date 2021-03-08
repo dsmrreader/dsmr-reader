@@ -2,7 +2,7 @@ import tempfile
 import logging
 
 from django.utils.translation import gettext_lazy as _
-from django.utils import translation, timezone
+from django.utils import translation
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backup.models.settings import EmailBackupSettings
@@ -21,7 +21,7 @@ def run(scheduled_process: ScheduledProcess):
 
     if not email_backup_settings.interval:
         logger.debug('Email backup: Interval not set, skipping backup for a day')
-        return scheduled_process.delay(timezone.timedelta(days=1))
+        return scheduled_process.delay(days=1)
 
     temp_dir = tempfile.TemporaryDirectory()
     backup_file = dsmr_backup.services.backup.create_partial(
@@ -42,4 +42,4 @@ def run(scheduled_process: ScheduledProcess):
         attachment=backup_file
     )
 
-    scheduled_process.delay(timezone.timedelta(days=email_backup_settings.interval))
+    scheduled_process.delay(days=email_backup_settings.interval)
