@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -33,8 +34,7 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
 
 
 class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
-    """ API Docs: https://pvoutput.org/help.html#api-addstatus """
-    API_URL = 'https://pvoutput.org/service/r2/addstatus.jsp'
+    API_URL = settings.DSMRREADER_PVOUTPUT_ADD_STATUS_URL  # @deprecated
 
     INTERVAL_5_MINUTES = 5
     INTERVAL_10_MINUTES = 10
@@ -76,22 +76,6 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
             'Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, '
             'by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)'
         )
-    )
-    next_export = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Next export'),
-        help_text=_(
-            'Timestamp of the next export. Automatically updated by application.'
-        )
-    )
-    latest_sync = models.DateTimeField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name=_('Latest sync'),
-        help_text=_('Timestamp of latest sync with PVOutput. Automatically updated by application.')
     )
 
     def __str__(self):

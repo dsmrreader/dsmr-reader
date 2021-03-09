@@ -12,7 +12,6 @@ class PVOutputAPISettingsAdmin(SingletonModelAdmin):
 
 @admin.register(PVOutputAddStatusSettings)
 class PVOutputAddStatusSettingsAdmin(SingletonModelAdmin):
-    readonly_fields = ['next_export']
     fieldsets = (
         (
             None, {
@@ -32,11 +31,6 @@ class PVOutputAddStatusSettingsAdmin(SingletonModelAdmin):
                     '<a href="https://pvoutput.org/donate.jsp" target="_blank">Donating to PVOutput</a> '
                     ' and <a href="https://pvoutput.org/help.html#donations" target="_blank">Bonus Features</a>.'
                 )
-            }
-        ),
-        (
-            _('Automatic fields'), {
-                'fields': ['next_export']
             }
         ),
     )

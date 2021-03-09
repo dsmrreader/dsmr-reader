@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-09 23:57+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -2189,9 +2190,6 @@ msgstr "Deze feature is alleen beschikbaar wanneer je koppelt aan een PVOutput D
 msgid "PVOutput"
 msgstr "PVOutput"
 
-msgid "Waiting for the next PVOutput export to be executed"
-msgstr "Wachten op de volgende PVOutput-export die uitgevoerd moet worden"
-
 msgid "The API key for your PVOutput account. Listed in PVOutput at Settings -> \"API Settings\"."
 msgstr "De API-key voor je PVOutput-account. Terug te vinden in PVOutput onder Instellingen -> \"API Settings\"."
 
@@ -2233,18 +2231,6 @@ msgstr "PVOutput: Verwerkingsvertraging (in minuten)"
 
 msgid "Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)"
 msgstr "Laat dit veld leeg om uit te schakelen. Deze parameter staat het vertraagd verwerken van gegevens toe. Je kunt de vertraging instellen op een aantal minuten. Toegestaan: leeg veld of 0 tot 120 (minuten)"
-
-msgid "Next export"
-msgstr "Volgende synchronisatie"
-
-msgid "Timestamp of the next export. Automatically updated by application."
-msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
-
-msgid "Latest sync"
-msgstr "Meest recente synchronisatie"
-
-msgid "Timestamp of latest sync with PVOutput. Automatically updated by application."
-msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt dit automatisch bij."
 
 msgid "PVOutput: Add Status configuration"
 msgstr "PVOutput: \"Add Status\" configuratie"
@@ -2599,6 +2585,21 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Waiting for the next PVOutput export to be executed"
+#~ msgstr "Wachten op de volgende PVOutput-export die uitgevoerd moet worden"
+
+#~ msgid "Next export"
+#~ msgstr "Volgende synchronisatie"
+
+#~ msgid "Timestamp of the next export. Automatically updated by application."
+#~ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
+
+#~ msgid "Latest sync"
+#~ msgstr "Meest recente synchronisatie"
+
+#~ msgid "Timestamp of latest sync with PVOutput. Automatically updated by application."
+#~ msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt dit automatisch bij."
 
 #~ msgid "Waiting for the next Dropbox sync to be executed"
 #~ msgstr "Wachten op de volgende Dropbox-sync die uitgevoerd moet worden"

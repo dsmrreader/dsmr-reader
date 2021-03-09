@@ -12,7 +12,7 @@ class TestStatus(TestCase):
             active=True,
             planned=timezone.now() - timezone.timedelta(minutes=1)
         )
-        self.assertEqual(ScheduledProcess.objects.all().count(), 9)
+        self.assertEqual(ScheduledProcess.objects.all().count(), 10)
 
     @override_settings(DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES=2)
     def test_check_scheduled_processes_okay(self):
@@ -21,7 +21,7 @@ class TestStatus(TestCase):
     @override_settings(DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES=0)
     def test_check_scheduled_processes_fail(self):
         result = check_scheduled_processes()
-        self.assertEqual(len(result), 9)
+        self.assertEqual(len(result), 10)
         [self.assertIsInstance(x, MonitoringStatusIssue) for x in result]
 
     @override_settings(DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES=0)

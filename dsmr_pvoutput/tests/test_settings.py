@@ -44,6 +44,3 @@ class TestPVOutputAddStatusSettings(TestCase):
 
     def test_processing_delay(self):
         self.assertIsNone(self.instance.processing_delay)
-
-    def test_next_export(self):
-        self.assertIsNone(self.instance.next_export)

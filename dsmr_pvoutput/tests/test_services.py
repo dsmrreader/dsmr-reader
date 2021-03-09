@@ -4,6 +4,7 @@ from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
+from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_pvoutput.models.settings import PVOutputAPISettings, PVOutputAddStatusSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption
 import dsmr_pvoutput.services
@@ -12,40 +13,19 @@ import dsmr_pvoutput.services
 class TestServices(TestCase):
     fixtures = ['dsmr_pvoutput/electricity-consumption.json']
 
+    def setUp(self) -> None:
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+
     def _apply_fake_settings(self):
-        api_settings = PVOutputAPISettings.get_solo()
-        api_settings.auth_token = 'XXXXX'
-        api_settings.system_identifier = 12345
-        api_settings.save()
-
-        status_settings = PVOutputAddStatusSettings.get_solo()
-        status_settings.export = True
-        status_settings.upload_delay = 1
-        status_settings.save()
-
-    @mock.patch('django.utils.timezone.now')
-    def test_should_export_default(self, now_mock):
-        """ Test should_export() default behaviour. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
-
-        api_settings = PVOutputAPISettings.get_solo()
-        status_settings = PVOutputAddStatusSettings.get_solo()
-
-        self.assertIsNone(api_settings.auth_token)
-        self.assertFalse(api_settings.system_identifier)
-        self.assertFalse(status_settings.export)
-        self.assertIsNone(status_settings.next_export)
-
-        self.assertFalse(dsmr_pvoutput.services.should_export())
-
-    @mock.patch('django.utils.timezone.now')
-    def test_should_export_no_need(self, now_mock):
-        """ Test should_export() when not needed, yet. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
-        self._apply_fake_settings()
-
-        PVOutputAddStatusSettings.objects.update(next_export=timezone.now() + timezone.timedelta(hours=1))
-        self.assertFalse(dsmr_pvoutput.services.should_export())
+        PVOutputAPISettings.get_solo().update(
+            auth_token='XXXXX',
+            system_identifier=12345,
+        )
+        PVOutputAddStatusSettings.get_solo().update(
+            export=True,
+            upload_delay=1
+        )
 
     @mock.patch('django.utils.timezone.now')
     def test_get_next_export(self, now_mock):
@@ -100,7 +80,7 @@ class TestServices(TestCase):
 
         # Again with delay, but we move forward in time.
         now_mock.return_value = now_mock.return_value + timezone.timedelta(minutes=1)
-        result = dsmr_pvoutput.services.get_export_data(
+        dsmr_pvoutput.services.get_export_data(
             next_export=timezone.now(), upload_delay=1
         )
 
@@ -108,77 +88,64 @@ class TestServices(TestCase):
         with self.assertRaises(LookupError):
             dsmr_pvoutput.services.get_export_data(next_export=timezone.now(), upload_delay=2)
 
-    @mock.patch('django.utils.timezone.now')
-    def test_should_export_okay(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
-        self._apply_fake_settings()
-
-        self.assertTrue(dsmr_pvoutput.services.should_export())
-
-    @mock.patch('dsmr_pvoutput.services.should_export')
-    @mock.patch('django.utils.timezone.now')
-    def test_export_not_allowed(self, now_mock, should_export_mock):
+    @mock.patch('requests.post')
+    def test_export_not_allowed(self, post_mock):
         """ Test export() blocking behaviour. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
-        should_export_mock.return_value = False
         self._apply_fake_settings()
+        PVOutputAddStatusSettings.get_solo().update(export=False)
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
+        self.assertFalse(post_mock.called)
 
-        # Nothing should happen.
-        dsmr_pvoutput.services.export()
+        self._apply_fake_settings()
+        PVOutputAPISettings.get_solo().update(auth_token='')
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
+        self.assertFalse(post_mock.called)
 
-        self.assertTrue(should_export_mock.called)
-
-        self.assertIsNone(PVOutputAddStatusSettings.get_solo().next_export)
+        self._apply_fake_settings()
+        PVOutputAPISettings.get_solo().update(system_identifier='')
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
+        self.assertFalse(post_mock.called)
 
     @mock.patch('requests.post')
-    @mock.patch('dsmr_pvoutput.services.should_export')
     @mock.patch('django.utils.timezone.now')
-    def test_export_no_electricity(self, now_mock, should_export_mock, requests_mock):
+    def test_export_no_electricity(self, now_mock, requests_mock):
         """ Test export() without electricity. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
-        should_export_mock.return_value = True
         self._apply_fake_settings()
 
-        # Drop all gas data.
+        # Drop all electricity data.
         ElectricityConsumption.objects.all().delete()
         self.assertFalse(ElectricityConsumption.objects.exists())
         self.assertFalse(requests_mock.called)
 
         # Nothing should happen, as there is no data.
-        dsmr_pvoutput.services.export()
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
         self.assertFalse(requests_mock.called)
 
     @mock.patch('requests.post')
-    @mock.patch('dsmr_pvoutput.services.should_export')
     @mock.patch('dsmr_pvoutput.services.get_export_data')
     @mock.patch('django.utils.timezone.now')
-    def test_export_fail(self, now_mock, export_data_mock, should_export_mock, requests_post_mock):
+    def test_export_fail(self, now_mock, export_data_mock, requests_post_mock):
         """ Test export() failing by denied API call. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
         export_data_mock.return_value = {'x': 'y'}  # Unimportant for this test.
-        should_export_mock.return_value = True
         self._apply_fake_settings()
 
         requests_post_mock.return_value = mock.MagicMock(status_code=400, text='Error message')
-        dsmr_pvoutput.services.export()
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
 
-        status_settings = PVOutputAddStatusSettings.get_solo()
-        self.assertEqual(status_settings.next_export, timezone.now() + timezone.timedelta(minutes=5))
+        # Failure should retry after 5 minutes.
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(minutes=5))
         self.assertTrue(requests_post_mock.called)
-        self.assertIsNone(status_settings.latest_sync)
 
     @mock.patch('requests.post')
-    @mock.patch('dsmr_pvoutput.services.should_export')
     @mock.patch('dsmr_pvoutput.services.get_export_data')
     @mock.patch('django.utils.timezone.now')
     @mock.patch('dsmr_pvoutput.signals.pvoutput_upload.send_robust')
-    def test_export_postponed(
-        self, send_robust_mock, now_mock, export_data_mock, should_export_mock, requests_post_mock
-    ):
+    def test_export_postponed(self, send_robust_mock, now_mock, export_data_mock, requests_post_mock):
         """ Test export() but failing due to lack of data ready. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=1))
 
-        should_export_mock.return_value = True
         export_data_mock.side_effect = LookupError()  # Emulate.
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text='Fake accept')
         self._apply_fake_settings()
@@ -186,32 +153,29 @@ class TestServices(TestCase):
         self.assertFalse(requests_post_mock.called)
         self.assertFalse(send_robust_mock.called)
 
-        dsmr_pvoutput.services.export()
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
 
         # Nothing should happen.
         self.assertFalse(requests_post_mock.called)
         self.assertFalse(send_robust_mock.called)
 
     @mock.patch('requests.post')
-    @mock.patch('dsmr_pvoutput.services.should_export')
     @mock.patch('dsmr_pvoutput.services.get_export_data')
     @mock.patch('django.utils.timezone.now')
     @mock.patch('dsmr_pvoutput.signals.pvoutput_upload.send_robust')
-    def test_export_okay(self, send_robust_mock, now_mock, export_data_mock, should_export_mock, requests_post_mock):
+    def test_export_okay(self, send_robust_mock, now_mock, export_data_mock, requests_post_mock):
         """ Test export() as designed. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
         export_data_mock.return_value = {'x': 'y'}  # Unimportant for this test.
 
-        should_export_mock.return_value = True
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text='Fake accept')
         self._apply_fake_settings()
 
         self.assertFalse(requests_post_mock.called)
         self.assertFalse(send_robust_mock.called)
 
-        dsmr_pvoutput.services.export()
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
 
-        self.assertIsNotNone(PVOutputAddStatusSettings.get_solo().next_export)
         self.assertTrue(requests_post_mock.called)
         self.assertTrue(send_robust_mock.called)
 
@@ -230,13 +194,11 @@ class TestServices(TestCase):
         # With processing delay as well.
         requests_post_mock.reset_mock()
         send_robust_mock.reset_mock()
-        PVOutputAddStatusSettings.objects.update(processing_delay=5, next_export=None)
+        self.schedule_process.reschedule_asap()
+        PVOutputAddStatusSettings.objects.update(processing_delay=5)
 
-        dsmr_pvoutput.services.export()
+        dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
 
-        status_settings = PVOutputAddStatusSettings.get_solo()
-        self.assertIsNotNone(status_settings.next_export)
-        self.assertEqual(status_settings.latest_sync, timezone.now())
         self.assertTrue(requests_post_mock.called)
         self.assertTrue(send_robust_mock.called)
 

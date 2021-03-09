@@ -46,6 +46,7 @@ DSMRREADER_MODULE_GENERATE_CONSUMPTION = 'dsmr_consumption.services.run'
 DSMRREADER_MODULE_RETENTION_DATA_ROTATION = 'dsmr_datalogger.services.retention.run'
 DSMRREADER_MODULE_DAILY_BACKUP = 'dsmr_backup.services.backup.run'
 DSMRREADER_MODULE_DROPBOX_EXPORT = 'dsmr_dropbox.services.run'
+DSMRREADER_MODULE_PVOUTPUT_EXPORT = 'dsmr_pvoutput.services.run'
 
 DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
@@ -83,6 +84,9 @@ DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE = 200
 DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
 
 DSMRREADER_BUIENRADAR_API_URL = 'https://data.buienradar.nl/2.0/feed/json'
+
+# https://pvoutput.org/help.html#api-addstatus
+DSMRREADER_PVOUTPUT_ADD_STATUS_URL = 'https://pvoutput.org/service/r2/addstatus.jsp'
 
 DSMRREADER_DATALOGGER_MIN_SLEEP_FOR_RECONNECT = 1.0
 

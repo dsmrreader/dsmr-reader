@@ -110,10 +110,11 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_datalogger.services.retention.run')
     @mock.patch('dsmr_backup.services.backup.run')
     @mock.patch('dsmr_dropbox.services.run')
+    @mock.patch('dsmr_pvoutput.services.run')
     def test_scheduled_processes_modules(self, *mocks):
         """ Verify the number of processes and that their module is called. """
         ScheduledProcess.objects.all().update(active=True, planned=timezone.now())
-        self.assertEqual(ScheduledProcess.objects.all().count(), 9)
+        self.assertEqual(ScheduledProcess.objects.all().count(), 10)
         self.assertFalse(any([x.called for x in mocks]))
 
         dsmr_backend.services.schedule.execute_scheduled_processes()

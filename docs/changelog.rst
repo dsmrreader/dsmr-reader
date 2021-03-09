@@ -15,10 +15,11 @@ v4.x releases
     :depth: 1
 
 
-
 v4.14.0 - 2021-xx-xx
 --------------------
 
+- ``Changed``: Move PVOutput to scheduled process mechanism [`#950 <https://github.com/dsmrreader/dsmr-reader/issues/950>`_]
+- ``Changed``: Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]
 
 
 v4.13.0 - 2021-03-09

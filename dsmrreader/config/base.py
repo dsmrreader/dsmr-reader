@@ -164,16 +164,18 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'simple': {
-            'format': '[%(asctime)s] %(levelname)-8s %(message)s'
+            'format': '{asctime} | {levelname:8} | {message}',
+            'style': '{',
         },
         'verbose': {
-            'format': '[%(asctime)s] %(levelname)-8s @ %(module)s | %(message)s'
+            'format': '{asctime} | {levelname:8} {module}.{funcName}:{lineno} | {message}',
+            'style': '{',
         },
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'simple',
+            'formatter': 'verbose',
         },
     },
     'loggers': {

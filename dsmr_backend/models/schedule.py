@@ -76,6 +76,10 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
             self.planned - timezone.now()
         )
 
+    def reschedule_asap(self):
+        """ Schedules the next call to ASAP. """
+        self.reschedule(planned_at=timezone.now())
+
     def __str__(self):
         return self.name
 
