@@ -97,7 +97,8 @@ jobs:
 
       - name: Run MySQL tests
         run: |
-          mysql -h $DJANGO_DATABASE_HOST -P $DJANGO_DATABASE_PORT -u root -D test_dsmrreader -e 'show tables;'
+          mysqladmin ping
+          mysql -h 127.0.0.1 -P 3306 -u root -D test_dsmrreader -e 'show tables;'
           py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
