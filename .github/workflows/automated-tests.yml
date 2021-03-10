@@ -98,6 +98,8 @@ jobs:
       - name: Run MySQL tests
         run: |
           echo 'DJANGO_DATABASE_PORT: ' + $DJANGO_DATABASE_PORT
+          mysql -h 127.0.0.1 -P $DJANGO_DATABASE_PORT -u root -D test_dsmrreader -e 'show databases;'
+          ./manage.py migrate
           mysql -h 127.0.0.1 -P $DJANGO_DATABASE_PORT -u root -D test_dsmrreader -e 'show tables;'
           py.test
         env:
