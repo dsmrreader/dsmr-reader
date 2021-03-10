@@ -97,15 +97,15 @@ jobs:
 
       - name: Run MySQL tests
         run: |
-          mysqladmin ping
-          mysql -h 127.0.0.1 -P 3306 -u root -D test_dsmrreader -e 'show tables;'
+          echo 'DJANGO_DATABASE_PORT: ' + $DJANGO_DATABASE_PORT
+          mysql -h 127.0.0.1 -P $DJANGO_DATABASE_PORT -u root -D test_dsmrreader -e 'show tables;'
           py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
             DJANGO_DATABASE_ENGINE: django.db.backends.mysql
             DJANGO_DATABASE_HOST: 127.0.0.1
-            DJANGO_DATABASE_PORT: 3306
+            DJANGO_DATABASE_PORT: '${{ job.services.mysql.ports[3306] }}'
             DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
             DJANGO_DATABASE_USER: dsmrreader
             DJANGO_DATABASE_PASSWORD: testpassword
