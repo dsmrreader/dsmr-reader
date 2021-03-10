@@ -14,10 +14,10 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - 3.6
+#          - 3.6
           - 3.7
-          - 3.8
-          - 3.9
+#          - 3.8
+#          - 3.9
 
     services:
 #      postgres:
@@ -30,20 +30,21 @@ jobs:
 #            POSTGRES_PASSWORD: testpasswd
 #        options: >-
 #          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
+#          --health-interval 5s
+#          --health-timeout 1s
+#          --health-retries 10
 
       mysql:
         image: 'mysql:5.7'
         ports:
           - 3306
         env:
-            MYSQL_ROOT_PASSWORD: rootpw
+#            MYSQL_ROOT_PASSWORD: rootpw
             MYSQL_DATABASE: test_dsmrreader
-            MYSQL_USER: user
-            MYSQL_PASSWORD: testpassword
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+            MYSQL_USER: dsmrreader
+            MYSQL_ALLOW_EMPTY_PASSWORD: yes
+#            MYSQL_PASSWORD: testpassword
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
 
     steps:
       - uses: actions/checkout@v2
@@ -95,14 +96,17 @@ jobs:
 #            DJANGO_DATABASE_PASSWORD: testpasswd
 
       - name: Run MySQL tests
-        run: py.test
+        run: |
+          mysql -h $DJANGO_DATABASE_HOST -P $DJANGO_DATABASE_PORT -u $DJANGO_DATABASE_NAME -D test_dsmrreader -e 'show tables;'
+          py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
             DJANGO_SECRET_KEY: unsafe-test-value
             DJANGO_DATABASE_ENGINE: django.db.backends.mysql
             DJANGO_DATABASE_HOST: 127.0.0.1
+            DJANGO_DATABASE_PORT: 3306
             DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
-            DJANGO_DATABASE_USER: user
+            DJANGO_DATABASE_USER: dsmrreader
             DJANGO_DATABASE_PASSWORD: testpassword
 
       - name: Code coverage upload
