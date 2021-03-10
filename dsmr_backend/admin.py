@@ -114,9 +114,10 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(ScheduledProcess)
 class ScheduledProcessAdmin(admin.ModelAdmin):
-    list_display = ('active', 'name', 'planned', 'next_call_naturaltime')
+    list_display = ('active', 'name', 'next_call_naturaltime', 'planned')
     readonly_fields = ('name', 'active')
     list_display_links = ('name', 'planned')
+    ordering = ('-active', 'name')  # Disabled processes on bottom.
     actions = None
 
     fieldsets = (
@@ -137,6 +138,9 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
 
     def next_call_naturaltime(self, obj):
         """ Fancy column to display time until next call, in relative time. """
+        if not obj.active:
+            return None
+
         planned = obj.planned
 
         if planned < timezone.now():
