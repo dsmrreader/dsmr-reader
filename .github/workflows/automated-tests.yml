@@ -95,7 +95,6 @@ jobs:
       - name: Run MySQL tests
         run: |
           mysql -h $DJANGO_DATABASE_HOST -P $DJANGO_DATABASE_PORT -u $DJANGO_DATABASE_USER -e 'show databases;'
-          ./manage.py migrate
           py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -105,6 +104,7 @@ jobs:
             DJANGO_DATABASE_PORT: '${{ job.services.mysql.ports[3306] }}'
             DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
             DJANGO_DATABASE_USER: root
+            DJANGO_DATABASE_PASSWORD: ''
 
       - name: Code coverage upload
         uses: codecov/codecov-action@v1
