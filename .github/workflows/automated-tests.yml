@@ -41,7 +41,7 @@ jobs:
         env:
 #            MYSQL_ROOT_PASSWORD: rootpw
             MYSQL_DATABASE: test_dsmrreader
-            MYSQL_USER: dsmrreader
+#            MYSQL_USER: dsmrreader
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
 #            MYSQL_PASSWORD: testpassword
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
@@ -97,7 +97,7 @@ jobs:
 
       - name: Run MySQL tests
         run: |
-          mysql -h $DJANGO_DATABASE_HOST -P $DJANGO_DATABASE_PORT -u $DJANGO_DATABASE_NAME -D test_dsmrreader -e 'show tables;'
+          mysql -h $DJANGO_DATABASE_HOST -P $DJANGO_DATABASE_PORT -u root -D test_dsmrreader -e 'show tables;'
           py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
