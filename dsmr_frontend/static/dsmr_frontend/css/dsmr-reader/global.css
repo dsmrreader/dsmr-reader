@@ -97,3 +97,12 @@ ul#category-suggestions > li {
 div.alert-without-padding {
     margin-bottom: 0 !important;
 }
+
+@media screen and (max-width: 560px) {
+  table.table {
+    font-size: 10px !important;
+  }
+  table span.badge {
+    font-size: 10px !important;
+  }
+}
