@@ -39,11 +39,8 @@ jobs:
         ports:
           - 3306
         env:
-#            MYSQL_ROOT_PASSWORD: rootpw
             MYSQL_DATABASE: test_dsmrreader
-#            MYSQL_USER: dsmrreader
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
-#            MYSQL_PASSWORD: testpassword
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
 
     steps:
@@ -97,10 +94,8 @@ jobs:
 
       - name: Run MySQL tests
         run: |
-          echo 'DJANGO_DATABASE_PORT: ' + $DJANGO_DATABASE_PORT
-          mysql -h 127.0.0.1 -P $DJANGO_DATABASE_PORT -u root -D test_dsmrreader -e 'show databases;'
+          mysql -h $DJANGO_DATABASE_HOST -P $DJANGO_DATABASE_PORT -u $DJANGO_DATABASE_USER -e 'show databases;'
           ./manage.py migrate
-          mysql -h 127.0.0.1 -P $DJANGO_DATABASE_PORT -u root -D test_dsmrreader -e 'show tables;'
           py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -109,8 +104,7 @@ jobs:
             DJANGO_DATABASE_HOST: 127.0.0.1
             DJANGO_DATABASE_PORT: '${{ job.services.mysql.ports[3306] }}'
             DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
-            DJANGO_DATABASE_USER: dsmrreader
-#            DJANGO_DATABASE_PASSWORD: testpassword
+            DJANGO_DATABASE_USER: root
 
       - name: Code coverage upload
         uses: codecov/codecov-action@v1
