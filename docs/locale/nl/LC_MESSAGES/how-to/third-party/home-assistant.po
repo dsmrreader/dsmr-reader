@@ -1,0 +1,49 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2021-03-11 22:37+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../how-to/third-party/home-assistant.rst:2
+msgid "Third party integration: Home Assistant"
+msgstr ""
+
+#: ../../how-to/third-party/home-assistant.rst:4
+msgid "There is some third party support for Home Assistant. This may ease any integrations between DSMR-reader and Home Assistant."
+msgstr "Er is ondersteuning voor Home Assistant via derde partijen. Dit versimpelt de integratie tussen DSMR-reader en Home Assistant."
+
+#: ../../how-to/third-party/home-assistant.rst:7
+msgid "Integrations"
+msgstr "Integraties"
+
+#: ../../how-to/third-party/home-assistant.rst:8
+msgid "`DSMR-reader sensor via MQTT <https://www.home-assistant.io/integrations/dsmr_reader/>`__ (third party, by Wim Haanstra)"
+msgstr "`DSMR-reader sensor via MQTT <https://www.home-assistant.io/integrations/dsmr_reader/>`__ (derde partij, door Wim Haanstra)"
+
+#: ../../how-to/third-party/home-assistant.rst:12
+msgid "Add-ons"
+msgstr "Add-ons"
+
+#: ../../how-to/third-party/home-assistant.rst:13
+msgid "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (third party, by Sander de Wildt)"
+msgstr "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (derde partij, door Sander de Wildt)"
+
+#~ msgid "Plugins"
+#~ msgstr "Plugins"
+
+#~ msgid "Since Home Assistant ``0.103`` there is `a DSMR-reader plugin available <https://www.home-assistant.io/integrations/dsmr_reader/>`_, created by Wim Haanstra. This plugin uses DSMR-reader's MQTT messages to read and update the state of your smart meter."
+#~ msgstr "Sinds Home Assistant ``0.103`` is er `een DSMR-reader plugin beschikbaar <https://www.home-assistant.io/integrations/dsmr_reader/>`_, gemaakt door by Wim Haanstra. Deze plugin gebruikt DSMR-reader's MQTT-berichten om de status van je slimme meter uit te lezen."
+
+#~ msgid "Home Assistant"
+#~ msgstr "Home Assistant"
+

@@ -1,0 +1,130 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2021-03-11 22:37+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../how-to/upgrading/to-v3.rst:2
+#, fuzzy
+msgid "Guide: Upgrading DSMR-reader v2.x to v3.x"
+msgstr "Upgraden naar DSMR-reader v3.x"
+
+#: ../../how-to/upgrading/to-v3.rst:5
+msgid "DSMR-reader ``v3.x`` is backwards incompatible with ``2.x``. You will have to manually upgrade to make sure it will run properly."
+msgstr "DSMR-reader ``v3.x`` is niet backwards-compatible met ``v2.x``. Je zult hierdoor dus handmatig moeten upgraden om er zeker van te zijn dat alles blijft werken."
+
+#: ../../how-to/upgrading/to-v3.rst:9
+msgid "If you're using Docker, you can probably just install the ``v3.x`` version of the Docker container without any of the steps below."
+msgstr "Mocht je Docker gebruiken, dan kun je waarschijnlijk gewoon de ``v3.x`` versie van de betreffende Docker-container installeren, zonder onderstaande stappen te hoeven uitvoeren."
+
+#: ../../how-to/upgrading/to-v3.rst:14
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
+#: ../../how-to/upgrading/to-v3.rst:17
+msgid "1. Update to the latest ``v2.x`` version (``v2.15``)"
+msgstr "1. Update naar de laatste ``v2.x`` versie (``v2.15``)"
+
+#: ../../how-to/upgrading/to-v3.rst:19 ../../how-to/upgrading/to-v3.rst:30
+#: ../../how-to/upgrading/to-v3.rst:47 ../../how-to/upgrading/to-v3.rst:67
+#: ../../how-to/upgrading/to-v3.rst:103 ../../how-to/upgrading/to-v3.rst:150
+msgid "Execute the following::"
+msgstr "Voer het volgende uit::"
+
+#: ../../how-to/upgrading/to-v3.rst:26
+msgid "2. Python version check"
+msgstr "2. Python versie check"
+
+#: ../../how-to/upgrading/to-v3.rst:28
+msgid "DSMR-reader ``3.x`` requires ``Python 3.6`` or higher."
+msgstr "DSMR-reader ``3.x`` vereist ``Python 3.6`` of hoger."
+
+#: ../../how-to/upgrading/to-v3.rst:35
+msgid "It should display the Python version. If you're already running ``Python 3.6`` (or higher), you can ignore the next section."
+msgstr "Het zou de Python-versie moeten tonen. Wanneer je al de versie ``Python 3.6`` (of hoger) draait, kun je de volgende sectie negeren."
+
+#: ../../how-to/upgrading/to-v3.rst:39
+msgid "3. Python version upgrade (part 1/2)"
+msgstr "3. Python versie upgrade (deel 1/2)"
+
+#: ../../how-to/upgrading/to-v3.rst:43 ../../how-to/upgrading/to-v3.rst:99
+msgid "Only execute this section if you're running DSMR-reader with ``Python 3.5`` or lower!"
+msgstr "Voer deze sectie alleen uit wanneer je DSMR-reader draait met ``Python 3.5``  of lager!"
+
+#: ../../how-to/upgrading/to-v3.rst:45
+msgid "There are several guides, depending on your OS. We assume Raspbian OS here."
+msgstr "Er zijn diverse handleidingen, afhankelijk van je OS. We gaan hier uit van Raspbian OS."
+
+#: ../../how-to/upgrading/to-v3.rst:59
+msgid "Try running the command ``python3.6 --version`` to see if things worked out. If you're getting any errors, do not continue with the upgrade."
+msgstr "Probeer om  ``python3.6 --version`` uit te voeren om te controleren of het gelukt is. Wanneer je foutmeldingen krijgt, ga dan niet verder met de upgrade."
+
+#: ../../how-to/upgrading/to-v3.rst:61
+msgid "The Python upgrade continues later, after creating a backup."
+msgstr "De Python-upgrade gaat later verder, na het maken van een back-up."
+
+#: ../../how-to/upgrading/to-v3.rst:64
+msgid "4. Backup"
+msgstr "4. Back-up"
+
+#: ../../how-to/upgrading/to-v3.rst:65
+msgid "The next thing you'll absolutely need to do, is create a fresh database backup and store it somewhere safe."
+msgstr "Het volgende wat je absoluut moet doen, is het maken van een verse database back-up en deze op een veilige plek opslaan."
+
+#: ../../how-to/upgrading/to-v3.rst:72
+msgid "If things went well, you should see a message like::"
+msgstr "Wanneer alles OK is, zie je een melding in de trend van::"
+
+#: ../../how-to/upgrading/to-v3.rst:76 ../../how-to/upgrading/to-v3.rst:84
+msgid "Execute the following (your file name may differ!)::"
+msgstr "Voer het volgende uit (bestandsnaam kan afwijken in jouw situatie!)::"
+
+#: ../../how-to/upgrading/to-v3.rst:80
+msgid "Make sure the file is of some (reasonable) size::"
+msgstr "Controleer of het bestand een (aannemelijke) grootte heeft::"
+
+#: ../../how-to/upgrading/to-v3.rst:88
+msgid "Make sure the output ends with::"
+msgstr "Controleer dat het eindigt met deze output::"
+
+#: ../../how-to/upgrading/to-v3.rst:95
+msgid "5. Python version upgrade (part 2/2)"
+msgstr "5. Python versie upgrade (deel 2/2)"
+
+#: ../../how-to/upgrading/to-v3.rst:101
+msgid "Now we're ready to remove the environment DSMR-reader uses."
+msgstr "Nu zijn we klaar om de omgeving te verwijderen waarin DSMR-reader werkt."
+
+#: ../../how-to/upgrading/to-v3.rst:118
+msgid "If you're getting any errors, you can revert to the old version by running::"
+msgstr "Mocht je fouten krijgen, hiermee kun je weer terug naar de oude versie::"
+
+#: ../../how-to/upgrading/to-v3.rst:143
+msgid "Everything okay? Time to upgrade DSMR-reader to v3.x."
+msgstr "Alles OK? Tijd om DSMR-reader te upgraden naar v3.x."
+
+#: ../../how-to/upgrading/to-v3.rst:146
+msgid "6. Switching DSMR-reader to ``v3.x``"
+msgstr "6. Wisselen naar DSMR-reader ``v3.x``"
+
+#: ../../how-to/upgrading/to-v3.rst:148
+msgid "DSMR-reader ``v3.x`` lives in a different branch, to prevent any users from unexpectedly updating to ``v3.x``."
+msgstr "DSMR-reader ``v3.x`` leeft in een andere branch, om te voorkomen dat gebruikers onbedoeld upgraden naar ``v3.x``."
+
+#: ../../how-to/upgrading/to-v3.rst:172
+msgid "Great. You should now be on ``v3.x``!"
+msgstr "Mooi! Je zou nu op ``v3.x`` moeten zitten!"
+
+#~ msgid ":doc:`See here for instructions<update>`."
+#~ msgstr ":doc:`Zie hier voor instructies<update>`."
+
