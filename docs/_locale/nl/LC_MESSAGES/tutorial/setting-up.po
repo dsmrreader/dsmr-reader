@@ -1,132 +1,137 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2021-03-11 22:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"Generated-By: Babel 2.9.0\n"
 
-#: ../../application.rst:2
+#: ../../tutorial/setting-up.rst:2
 msgid "Setting up the application"
 msgstr "De applicatie instellen"
 
-#: ../../application.rst:7
+#: ../../tutorial/setting-up.rst:7
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../application.rst:10
+#: ../../tutorial/setting-up.rst:10
 msgid "Accessing"
 msgstr "Toegang"
 
-#: ../../application.rst:11
+#: ../../tutorial/setting-up.rst:11
 msgid "Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser."
 msgstr "Dit is het moment om de applicatie te bekijken in je browser om te zien of alles naar behoren werkt. Vul het IP-adres van je RaspberryPi in je browser."
 
-#: ../../application.rst:13
+#: ../../tutorial/setting-up.rst:13
 msgid "Did you install using a monitor attached to the RaspberryPi and you don't know what address your device has? Just type ``ifconfig | grep addr`` and it should display an ip address, for example::"
 msgstr "Heb je de applicatie geinstalleerd met een monitor aan je RaspberryPi en weet je het IP-adres niet? Typ in dat geval het volgende in en je krijgt het IP-adres te zien: ``ifconfig | grep addr`` , Bijvoorbeeld:"
 
-#: ../../application.rst:19
+#: ../../tutorial/setting-up.rst:19
 msgid "In this example the ip address is ``192.168.178.150``. If possible, you should assign a static ip address to your device in your router. This will make sure you will always be able to find the application at the same location."
 msgstr "In dit voorbeeld is het IP-adres ``192.168.178.150``. Het is aan te raden om je apparaat een vast IP-adres te geven in je router. Dit zorgt ervoor dat je de applicatie altijd op dezelfde locatie kan terugvinden."
 
-#: ../../application.rst:23
+#: ../../tutorial/setting-up.rst:23
 msgid "Reboot test"
 msgstr "Herstart-test"
 
-#: ../../application.rst:24
+#: ../../tutorial/setting-up.rst:24
 msgid "You surely want to ``reboot`` your device and check whether everything comes up automatically again with ``sudo supervisorctl status``. This will make sure your data logger 'survives' any power surges."
 msgstr "Herstart het apparaat met ``reboot`` om te testen of alles automatisch opstart. Je zou na de herstart alles moeten zien draaien via ``sudo supervisorctl status``. Dit zorgt ervoor dat je datalogger eventuele stroomstoringen overleeft (of wanneer je zelf de stroom eraf haalt)."
 
-#: ../../application.rst:28
+#: ../../tutorial/setting-up.rst:28
 msgid "Public webinterface warning"
 msgstr "Waarschuwing voor publiekelijke toegang"
 
-#: ../../application.rst:32
+#: ../../tutorial/setting-up.rst:32
 msgid "If you expose your application to the outside world or a public network, you might want to take additional steps:"
 msgstr "Wanneer je de applicatie koppelt aan het Internet wil je sowieso extra maatregelen nemen:"
 
-#: ../../application.rst:34
+#: ../../tutorial/setting-up.rst:34
 msgid "Enable password protection :doc:`in the configuration<configuration>` for the entire application, available since DSMR-reader ``v4.0``."
 msgstr "Schakel applicatie-brede wachtwoordbescherming in :doc:`in de configuratie<configuration>`, beschikbaar sinds DSMR-reader ``v4.0``."
 
-#: ../../application.rst:36
+#: ../../tutorial/setting-up.rst:36
 msgid "Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for yourself) and port ``80``."
 msgstr "Installeer een firewall, zoals ``ufw`` (`UncomplicatedFirewall <https://wiki.ubuntu.com/UncomplicatedFirewall>`_) and beperk al het toegestane verkeer tot poort ``22`` (puur voor jezelf) en poort ``80``."
 
-#: ../../application.rst:38
+#: ../../tutorial/setting-up.rst:38
 msgid "Use TLS (HTTPS) when possible."
 msgstr "Gebruik TLS (HTTPS) wanneer mogelijk."
 
-#: ../../application.rst:42
+#: ../../tutorial/setting-up.rst:42
 msgid "Data integrity"
 msgstr "Dataintegriteit"
 
-#: ../../application.rst:46
+#: ../../tutorial/setting-up.rst:46
 msgid "Read this section carefully if you are using any volatile storage, such as an SD card."
 msgstr "Lees deze sectie aandachtig als je gebruikt maakt van onvoorspelbare opslag, zoals een SD-kaart."
 
-#: ../../application.rst:50
+#: ../../tutorial/setting-up.rst:50
 msgid "Storage"
 msgstr "Gegevensopslag"
 
-#: ../../application.rst:51
+#: ../../tutorial/setting-up.rst:51
 msgid "This project was designed to run on a RaspberryPi, but it affects the lifetime of the storage severely. The introduction of DSMR v5 smart meters strains the storage even more, due to the high amount of telegrams sent each second."
 msgstr "Dit project is ontworpen om op een RaspberryPi te draaien. Echter, dit heeft grote negatieve invloed op de levensduur van de opslagkaart. Daarnaast heeft de introductie van DSMR v5 slimme meters ervoor gezorgd dat de gegevensopslag nog meer onder druk staat. Dit komt doordat er elke seconde telegrammen worden gestuurd."
 
-#: ../../application.rst:54
+#: ../../tutorial/setting-up.rst:54
 msgid "The default storage on RaspberryPi's suffers greatly from this and can not be trusted to keep your data safe. Eventually the storage will get corrupted and either make your data inaccessible, or it pretends to write data, while not storing anything at all."
 msgstr "De standaardopslag van RaspberryPi's heeft hier erg veel last van en je kunt er niet op vertrouwen dat je gegevens daar veilig opgeslagen blijven. Vroeger of later geeft de opslag de geest en zorgt ervoor dat je ofwel niet meer bij je gegevens kunt, ofwel het lijkt dat de opslag goed functioneert, terwijl er in werkelijkheid niets opgeslagen wordt."
 
-#: ../../application.rst:57
-msgid "Reducing the data throughput may help as well. :doc:`More information can be found in the FAQ (data section)<faq>`."
+#: ../../tutorial/setting-up.rst:57
+#, fuzzy
+msgid "Reducing the data throughput may help as well. :doc:`More information can be found in the FAQ (data section)<../reference/faq>`."
 msgstr "Het inperken van de gegevensdoorvoer kan hierbij ook helpen. :doc:`Meer informatie daarover vind je in de FAQ (data-sectie) <faq>`."
 
-#: ../../application.rst:61
+#: ../../tutorial/setting-up.rst:61
 msgid "Backups"
 msgstr "Back-ups"
 
-#: ../../application.rst:62
+#: ../../tutorial/setting-up.rst:62
 msgid "DSMR-reader does support automated backups, but since they are still stored on the same volatile storage, they can be corrupted as well."
 msgstr "DSMR-reader heeft ondersteuning voor automatische back-ups. Echter, gezien deze op dezelfde opslag staan, kunnen deze ook corrupt raken."
 
-#: ../../application.rst:64
+#: ../../tutorial/setting-up.rst:64
 msgid "By default backups are created and written to::"
 msgstr "Standaard worden back-ups hier naar toe geschreven::"
 
-#: ../../application.rst:70
+#: ../../tutorial/setting-up.rst:70
 msgid "Prevention"
 msgstr "Preventie"
 
-#: ../../application.rst:71
+#: ../../tutorial/setting-up.rst:71
 msgid "The only thing you can do, is make sure to have your backups stored somewhere else, once in a while. Using Dropbox to sync your backups does not protect them of all harm!"
 msgstr "Het enige wat hiertegen helpt is regelmatig ervoor zorgen dat je de back-up's ergens anders heen kopieert. Het gebruik van Dropbox garandeert ook geen bescherming!"
 
-#: ../../application.rst:76
+#: ../../tutorial/setting-up.rst:76
 msgid "If you are more technical savy, you could opt to either install the database or the entire application on a server with storage that tends to wear less. You can use the RaspberryPi are a remote datalogger, preventing a lot of issues."
 msgstr "Mocht je meer technisch aangelegd zijn. Je kunt overwegen om ofwel de database ofwel de hele applicatie op een andere server te installeren, waarbij de opslag minder last heeft van slijtage. Daarmee gebruik je de RaspberryPi als remote datalogger, wat een hoop problemen kan voorkomen."
 
-#: ../../application.rst:79
-msgid ":doc:`More information about using a remote datalogger here<installation>`."
+#: ../../tutorial/setting-up.rst:79
+#, fuzzy
+msgid ":doc:`More information about using a remote datalogger here<../how-to/installation/remote-datalogger>`."
 msgstr ":doc:`Meer informatie over het gebruik van een remote datalogger is hier te vinden<installation>`."
 
-#: ../../application.rst:83
+#: ../../tutorial/setting-up.rst:83
 msgid "Pitfalls"
 msgstr "Valkuilen"
 
-#: ../../application.rst:84
+#: ../../tutorial/setting-up.rst:84
 msgid "SD cards' lifespan in this project vary from several weeks to some years, depending on the quality of the storage and the interval of telegrams sent by you smart meter."
 msgstr "De levensduur van SD-kaartjes varieert van enkele weken tot soms jaren, afhankelijk van de kwaliteit van deze en ook van de hoeveelheid telegrammen die je slimme meter stuurt."
 
-#: ../../application.rst:85
+#: ../../tutorial/setting-up.rst:85
 msgid "Backups are created daily, but rotated weekly! So it's possible that, at some point, the backups get corrupted as well since they're overwritten each week. And eventually they will get synchronized to Dropbox as well."
 msgstr "Back-ups worden dagelijks gemaakt, echter worden deze ook wekelijks geroteerd! Dus op een gegeven moment kunnen ze na een week overschreven worden met een corrupte variant. En gezien ze ook naar Dropbox synchroniseerd kunnen worden, biedt dat ook geen garantie."
 
 #~ msgid "Accessing the application"
 #~ msgstr "De applicatie benaderen"
+

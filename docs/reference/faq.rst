@@ -260,11 +260,11 @@ Manual installation
 Docker installation
 ^^^^^^^^^^^^^^^^^^^
 
-The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings<../env_settings>` will be used for the credentials.
+The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings<./env-settings>` will be used for the credentials.
 
 Creating or updating credentials:
 
-- Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings<env_settings>`.
+- Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings<./env-settings>`.
 
 - Now execute::
 
@@ -507,7 +507,7 @@ How do I fix stats after smart meter replacement?
 Sometimes, when relocating or due to replacement of your meter, the meter positions read by DSMR-reader will cause invalid data (e.g.: big gaps or inverted consumption).
 Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day.
 
-The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<configuration>` for the invalid day.
+The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<../tutorial/configuration>` for the invalid day.
 
 
 How do I fix my smart meter reporting invalid dates?
@@ -548,14 +548,14 @@ Therefor two measures can be taken: Increasing datalogger sleep and data retenti
 How can I increase the datalogger sleep time?
 ---------------------------------------------
 
-Increase the datalogger sleep time :doc:`in the configuration<../configuration>` to 5 seconds or higher.
+Increase the datalogger sleep time :doc:`in the configuration<../tutorial/configuration>` to 5 seconds or higher.
 This will save a lot of disk storage, especially when using a Raspberry Pi SD card, usually having a size of 16 GB max.
 
 
 How can I configure a data retention policy?
 --------------------------------------------
 
-Configure a data retention policy :doc:`in the configuration<../configuration>`.
+Configure a data retention policy :doc:`in the configuration<../tutorial/configuration>`.
 This will eventually delete up to 99 percent of the telegrams, always preserving a few historically.
 Also, day and hour totals are **never** deleted by retention policies.
 
@@ -578,7 +578,7 @@ How do I only use the datalogger?
 
 .. seealso::
 
-    :doc:`More information can be found here <installation>`.
+    :doc:`More information can be found here <../how-to/installation/remote-datalogger>`.
 
 
 ----

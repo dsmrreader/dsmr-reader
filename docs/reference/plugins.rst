@@ -19,7 +19,7 @@ Please make sure the ``plugin_name``,
 
 .. seealso::
 
-    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information :doc:`see DSMRREADER_PLUGINS in Env Settings<env_settings>`.
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information :doc:`see DSMRREADER_PLUGINS in Env Settings<./env-settings>`.
 
 Your plugin file is imported once, so you should make sure to hook any events you want.
 
@@ -73,7 +73,7 @@ This is an example of issue `#407 <https://github.com/dsmrreader/dsmr-reader/iss
 
 .. seealso::
 
-    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+    :doc:`DSMRREADER_PLUGINS configuration<./env-settings>`::
 
         DSMRREADER_PLUGINS=dsmr_plugins.modules.secondary_pvoutput_upload
 
@@ -115,7 +115,7 @@ This is an example of issue `#557 <https://github.com/dsmrreader/dsmr-reader/iss
 
 .. seealso::
 
-    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+    :doc:`DSMRREADER_PLUGINS configuration<./env-settings>`::
 
         DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_serial
 
@@ -168,7 +168,7 @@ This can be quite handy if you run multiple instances of DSMR-reader (i.e.: Rasp
 
 .. seealso::
 
-    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+    :doc:`DSMRREADER_PLUGINS configuration<./env-settings>`::
 
         DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
 
@@ -215,7 +215,7 @@ Use this to send DSMR readings in JSON format to some (arbitrary) API.
 
 .. seealso::
 
-    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+    :doc:`DSMRREADER_PLUGINS configuration<./env-settings>`::
 
         DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_json_dsmrreading_to_api
 
@@ -261,7 +261,7 @@ Example #5: Read telegrams using DSMRloggerWS API
 
 .. seealso::
 
-    :doc:`DSMRREADER_PLUGINS configuration<env_settings>`::
+    :doc:`DSMRREADER_PLUGINS configuration<./env-settings>`::
 
         DSMRREADER_PLUGINS=dsmr_plugins.modules.poll_dsmrloggerws_api
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-11 22:37+0100\n"
+"POT-Creation-Date: 2021-03-11 22:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -79,7 +79,8 @@ msgid "If you need to restore a database backup with your existing data, this is
 msgstr "Indien je een back-up van de database wilt terugzetten met je oude gegevens, nu is het moment om dat te doen."
 
 #: ../../tutorial/installation/step-by-step.rst:61
-msgid "Restoring a database backup? :doc:`See the FAQ for instructions <faq>`."
+#, fuzzy
+msgid "Restoring a database backup? :doc:`See the FAQ for instructions <../../reference/faq>`."
 msgstr "Database back-up terugzetten? :doc:`Zie de FAQ voor instructies <faq>`."
 
 #: ../../tutorial/installation/step-by-step.rst:65
@@ -345,7 +346,7 @@ msgstr "Wil je uit supervisor? Druk dan op ``CTRL + D`` om uit supervisor te gaa
 
 #: ../../tutorial/installation/step-by-step.rst:298
 #, fuzzy
-msgid ":doc:`Finished? Go to setting up the application<..//setting-up>`."
+msgid ":doc:`Finished? Go to setting up the application<../setting-up>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../../tutorial/setting-up>`."
 
 #~ msgid "When using a different port or baud rate, change the ``DATALOGGER_SERIAL_PORT`` / ``DATALOGGER_SERIAL_BAUDRATE`` values accordingly."

@@ -58,7 +58,7 @@ Optional: Restore a database backup
 
     If you need to restore a database backup with your existing data, this is the moment to do so.
 
-    Restoring a database backup? :doc:`See the FAQ for instructions <faq>`.
+    Restoring a database backup? :doc:`See the FAQ for instructions <../../reference/faq>`.
 
 
 2. Dependencies
@@ -295,4 +295,4 @@ Want to quit supervisor? Press ``CTRL + D`` to exit supervisor command line.
 
 .. seealso::
 
-    :doc:`Finished? Go to setting up the application<..//setting-up>`.
+    :doc:`Finished? Go to setting up the application<../setting-up>`.

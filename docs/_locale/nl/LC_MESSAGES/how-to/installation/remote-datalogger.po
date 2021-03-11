@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-11 22:37+0100\n"
+"POT-Creation-Date: 2021-03-11 22:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -48,11 +48,13 @@ msgid "Receiving DSMR-reader instance"
 msgstr "Ontvangende DSMR-reader-instantie"
 
 #: ../../how-to/installation/remote-datalogger.rst:24
-msgid "Make sure to first prepare the API at the DSMR-reader instance you'll forward the telegrams to. You can enable the API and view/edit the API key used :doc:`in the configuration<../configuration>`."
+#, fuzzy
+msgid "Make sure to first prepare the API at the DSMR-reader instance you'll forward the telegrams to. You can enable the API and view/edit the API key used :doc:`in the configuration<../../tutorial/configuration>`."
 msgstr "Zorg ervoor dat je eerste de API van de ontvangende DSMR-reader-instantie klaar hebt staan. Je kunt daar de API inschakelen en bijbehorende API-sleutel inzien/bewerken :doc:`in de configuratie<../configuration>`."
 
 #: ../../how-to/installation/remote-datalogger.rst:29
-msgid "If your smart meter only supports DSMR v2 (or you are using a non Dutch smart meter), make sure to change the DSMR version :doc:`in the configuration<../configuration>` as well, to have DSMR-reader parse them correctly."
+#, fuzzy
+msgid "If your smart meter only supports DSMR v2 (or you are using a non Dutch smart meter), make sure to change the DSMR version :doc:`in the configuration<../../tutorial/configuration>` as well, to have DSMR-reader parse them correctly."
 msgstr "Wanneer je slimme meter alleen DSMR v2 ondersteunt (of je gebruikt een niet-Nederlandse slimme meter), zorg er dan voor dat je de DSMR-versie aanpast :doc:`in de datalogger-configuratie <../configuration>`, zodat DSMR-reader de telegrammen goed kan verwerken."
 
 #: ../../how-to/installation/remote-datalogger.rst:31

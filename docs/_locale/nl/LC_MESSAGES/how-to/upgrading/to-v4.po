@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-11 22:37+0100\n"
+"POT-Creation-Date: 2021-03-11 22:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -36,7 +36,8 @@ msgid "List of changes"
 msgstr "Lijst van wijzigingen"
 
 #: ../../how-to/upgrading/to-v4.rst:17
-msgid ":doc:`See the changelog<../changelog>`, for ``v4.x releases`` and higher. Check them before updating!"
+#, fuzzy
+msgid ":doc:`See the changelog<../../reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!"
 msgstr ":doc:`Zie de changelog<../changelog>`, voor ``v4.x releases`` en hoger. Bekijk ze voordat je update!"
 
 #: ../../how-to/upgrading/to-v4.rst:21
@@ -111,7 +112,8 @@ msgid "Unsupported settings"
 msgstr "Niet-ondersteunde instellingen"
 
 #: ../../how-to/upgrading/to-v4.rst:139
-msgid "Not all previously available settings are also supported in ``.env``. See :doc:`Env Settings for the latest list of env vars supported<../env_settings>`."
+#, fuzzy
+msgid "Not all previously available settings are also supported in ``.env``. See :doc:`Env Settings for the latest list of env vars supported<../../reference/env-settings>`."
 msgstr "Niet alle instellingen zijn nog steeds, of onder dezelfde naam, beschikbaar in de nieuwe ``.env``. Zie :doc:`Env-instellingen voor de meest recente lijst van ondersteunde env vars<../env_settings>`."
 
 #: ../../how-to/upgrading/to-v4.rst:142

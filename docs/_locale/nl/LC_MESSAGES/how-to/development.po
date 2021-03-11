@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-11 22:37+0100\n"
+"POT-Creation-Date: 2021-03-11 22:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -191,7 +191,8 @@ msgid "Translations are done using gettext and .PO files. Regenerate the .PO fil
 msgstr "Vertalingen verlopen via .PO-bestanden met gettext. Hergenereer de .PO-bestanden met::"
 
 #: ../../how-to/development.rst:193
-msgid "The .PO files in ``docs/_locale`` should be regenerated now. You can use ``poedit`` to view and translate the files."
+#, fuzzy
+msgid "The .PO files in ``docs/locale`` should be regenerated now. You can use ``poedit`` to view and translate the files."
 msgstr "De .PO-bestanden in ``docs/_locale`` zouden nu opnieuw gegenereerd moeten worden. Je kunt het programma ``poedit`` gebruiken om de bestanden te bekijken en te vertalen."
 
 #: ../../how-to/development.rst:195

@@ -22,11 +22,11 @@ Receiving DSMR-reader instance
 ------------------------------
 
 Make sure to first prepare the API at the DSMR-reader instance you'll forward the telegrams to.
-You can enable the API and view/edit the API key used :doc:`in the configuration<../configuration>`.
+You can enable the API and view/edit the API key used :doc:`in the configuration<../../tutorial/configuration>`.
 
 .. hint::
 
-    If your smart meter only supports DSMR v2 (or you are using a non Dutch smart meter), make sure to change the DSMR version :doc:`in the configuration<../configuration>` as well, to have DSMR-reader parse them correctly.
+    If your smart meter only supports DSMR v2 (or you are using a non Dutch smart meter), make sure to change the DSMR version :doc:`in the configuration<../../tutorial/configuration>` as well, to have DSMR-reader parse them correctly.
 
 Also, you should disable the datalogger process over there, since you won't be using it anyway::
 
