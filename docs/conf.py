@@ -107,6 +107,5 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_sidebars = {'**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'], }
 
-# @TODO move dir
-locale_dirs = ['locale/']   # path is example but recommended.
+locale_dirs = ['_locale/']
 gettext_compact = False
