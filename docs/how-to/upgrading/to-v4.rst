@@ -1,5 +1,5 @@
-Guide: Upgrading From DSMR-reader v3.x to v4.x
-==============================================
+Guide: Upgrading DSMR-reader v3.x to v4.x
+=========================================
 
 DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to manually upgrade to make sure it will run properly.
 

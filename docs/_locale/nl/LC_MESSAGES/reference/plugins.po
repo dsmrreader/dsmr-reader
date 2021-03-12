@@ -1,18 +1,18 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "POT-Creation-Date: 2021-03-11 22:50+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-03-12 23:28+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../reference/plugins.rst:2
 msgid "Plugins"
@@ -47,9 +47,8 @@ msgid "does not contains spaces or dashes, only use underscores and do not start
 msgstr "geen spaties of koppeltekens bevat, gebruik daarvoor underscores en begin de naam niet met een cijfer."
 
 #: ../../reference/plugins.rst:22
-#, fuzzy
 msgid "Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information :doc:`see DSMRREADER_PLUGINS in Env Settings<./env-settings>`."
-msgstr "Voeg het **dotted** pad in als ``DSMRREADER_PLUGINS`` env var. Voor meer informatie, :doc:`zie DSMRREADER_PLUGINS in Env-instellingen<env_settings>`."
+msgstr "Voeg het **dotted** pad in als ``DSMRREADER_PLUGINS`` env var. Voor meer informatie, :doc:`zie DSMRREADER_PLUGINS in Env-instellingen<./env-settings>`."
 
 #: ../../reference/plugins.rst:24
 msgid "Your plugin file is imported once, so you should make sure to hook any events you want."
@@ -130,9 +129,8 @@ msgstr "Dit is een voorbeeld van issue `#407 <https://github.com/dsmrreader/dsmr
 #: ../../reference/plugins.rst:76 ../../reference/plugins.rst:118
 #: ../../reference/plugins.rst:171 ../../reference/plugins.rst:218
 #: ../../reference/plugins.rst:264
-#, fuzzy
 msgid ":doc:`DSMRREADER_PLUGINS configuration<./env-settings>`::"
-msgstr ":doc:`DSMRREADER_PLUGINS configuratie<env_settings>`::"
+msgstr ":doc:`DSMRREADER_PLUGINS configuratie<./env-settings>`::"
 
 #: ../../reference/plugins.rst:81
 msgid "Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file)::"
@@ -200,4 +198,3 @@ msgstr "Let op dat je mogelijk de waarde van ``http://localhost`` moet bijwerken
 
 #~ msgid "And finally, make sure to **reload the application** by deploying it again. You can do that by simply executing the ``post-deploy.sh`` script in the root of the project."
 #~ msgstr "En tot slot, zorg ervoor dat je **de applicatie herlaadt** door opnieuw te deployen. Je kunt dat doen door simpelweg ``post-deploy.sh`` uit te voeren, het script in de root van het project."
-

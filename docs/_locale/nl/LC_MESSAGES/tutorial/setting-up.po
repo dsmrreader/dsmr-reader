@@ -1,18 +1,18 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "POT-Creation-Date: 2021-03-11 22:51+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-03-12 22:22+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../tutorial/setting-up.rst:2
 msgid "Setting up the application"
@@ -87,9 +87,8 @@ msgid "The default storage on RaspberryPi's suffers greatly from this and can no
 msgstr "De standaardopslag van RaspberryPi's heeft hier erg veel last van en je kunt er niet op vertrouwen dat je gegevens daar veilig opgeslagen blijven. Vroeger of later geeft de opslag de geest en zorgt ervoor dat je ofwel niet meer bij je gegevens kunt, ofwel het lijkt dat de opslag goed functioneert, terwijl er in werkelijkheid niets opgeslagen wordt."
 
 #: ../../tutorial/setting-up.rst:57
-#, fuzzy
 msgid "Reducing the data throughput may help as well. :doc:`More information can be found in the FAQ (data section)<../reference/faq>`."
-msgstr "Het inperken van de gegevensdoorvoer kan hierbij ook helpen. :doc:`Meer informatie daarover vind je in de FAQ (data-sectie) <faq>`."
+msgstr "Het inperken van de gegevensdoorvoer kan hierbij ook helpen. :doc:`Meer informatie daarover vind je in de FAQ (data-sectie) <../reference/faq>`."
 
 #: ../../tutorial/setting-up.rst:61
 msgid "Backups"
@@ -116,9 +115,8 @@ msgid "If you are more technical savy, you could opt to either install the datab
 msgstr "Mocht je meer technisch aangelegd zijn. Je kunt overwegen om ofwel de database ofwel de hele applicatie op een andere server te installeren, waarbij de opslag minder last heeft van slijtage. Daarmee gebruik je de RaspberryPi als remote datalogger, wat een hoop problemen kan voorkomen."
 
 #: ../../tutorial/setting-up.rst:79
-#, fuzzy
 msgid ":doc:`More information about using a remote datalogger here<../how-to/installation/remote-datalogger>`."
-msgstr ":doc:`Meer informatie over het gebruik van een remote datalogger is hier te vinden<installation>`."
+msgstr ":doc:`Meer informatie over het gebruik van een remote datalogger is hier te vinden<../how-to/installation/remote-datalogger>`."
 
 #: ../../tutorial/setting-up.rst:83
 msgid "Pitfalls"
@@ -134,4 +132,3 @@ msgstr "Back-ups worden dagelijks gemaakt, echter worden deze ook wekelijks gero
 
 #~ msgid "Accessing the application"
 #~ msgstr "De applicatie benaderen"
-

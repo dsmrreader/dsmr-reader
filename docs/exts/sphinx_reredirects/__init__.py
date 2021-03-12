@@ -47,7 +47,7 @@ def init(app: Sphinx, exception):
 
     # For each entry
     for source, target in redirects.items():
-###        logger.info(f"Processing reredirect '{source}' to '{target}'")
+        ###        logger.info(f"Processing reredirect '{source}' to '{target}'")
         # # examine if it matches to some doc
         # for doc in app.env.found_docs:
         #     logger.info(f"Comparing '{source}' with '{doc}'")

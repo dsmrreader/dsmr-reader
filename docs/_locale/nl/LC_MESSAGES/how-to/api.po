@@ -1,22 +1,22 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-11 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2021-03-11 22:44+0100\n"
+"PO-Revision-Date: 2021-03-12 23:30+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/api.rst:2
 msgid "Third party integration: Using DSMR-reader's API"
-msgstr ""
+msgstr "Third party integratie"
 
 #: ../../how-to/api.rst:4
 msgid "The application has an API allowing you to insert/create readings and retrieve statistics."
@@ -67,19 +67,16 @@ msgid "Enable API"
 msgstr "API inschakelen"
 
 #: ../../how-to/api.rst:47
-#, fuzzy
 msgid "The API is disabled by default in the application. You may enable it :doc:`in the configuration<../tutorial/configuration>`."
-msgstr "De API is standaard uitgeschakeld. Je kunt deze :doc:`in de configuratie<configuration>` inschakelen."
+msgstr "De API is standaard uitgeschakeld. Je kunt deze :doc:`in de configuratie<../tutorial/configuration>` inschakelen."
 
 #: ../../how-to/api.rst:54
 msgid "API key"
 msgstr "API-sleutel"
 
 #: ../../how-to/api.rst:56
-#, fuzzy
 msgid "A random API key is generated for you by default. You can always view or update it :doc:`in the configuration<../tutorial/configuration>`."
-msgstr "Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kunt deze altijd bekijken of bijwerken :doc:`in de configuratie<configuration>`."
+msgstr "Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kunt deze altijd bekijken of bijwerken :doc:`in de configuratie<../tutorial/configuration>`."
 
 #~ msgid "DSMR-reader API"
 #~ msgstr "DSMR-reader API"
-

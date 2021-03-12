@@ -1,23 +1,22 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-11 22:46+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2021-03-12 23:29+0100\n"
+"PO-Revision-Date: 2021-03-12 23:30+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/upgrading/to-v4.rst:2
-#, fuzzy
-msgid "Guide: Upgrading From DSMR-reader v3.x to v4.x"
-msgstr "Upgraden naar DSMR-reader v4.x"
+msgid "Guide: Upgrading DSMR-reader v3.x to v4.x"
+msgstr "Stappenplan: DSMR-reader upgraden van v3.x naar v4.x"
 
 #: ../../how-to/upgrading/to-v4.rst:4
 msgid "DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to manually upgrade to make sure it will run properly."
@@ -36,9 +35,8 @@ msgid "List of changes"
 msgstr "Lijst van wijzigingen"
 
 #: ../../how-to/upgrading/to-v4.rst:17
-#, fuzzy
 msgid ":doc:`See the changelog<../../reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!"
-msgstr ":doc:`Zie de changelog<../changelog>`, voor ``v4.x releases`` en hoger. Bekijk ze voordat je update!"
+msgstr ":doc:`Zie de changelog<../../reference/changelog>`, voor ``v4.x releases`` en hoger. Bekijk ze voordat je update!"
 
 #: ../../how-to/upgrading/to-v4.rst:21
 msgid "1. Update to the latest ``v3.x`` version"
@@ -112,9 +110,8 @@ msgid "Unsupported settings"
 msgstr "Niet-ondersteunde instellingen"
 
 #: ../../how-to/upgrading/to-v4.rst:139
-#, fuzzy
 msgid "Not all previously available settings are also supported in ``.env``. See :doc:`Env Settings for the latest list of env vars supported<../../reference/env-settings>`."
-msgstr "Niet alle instellingen zijn nog steeds, of onder dezelfde naam, beschikbaar in de nieuwe ``.env``. Zie :doc:`Env-instellingen voor de meest recente lijst van ondersteunde env vars<../env_settings>`."
+msgstr "Niet alle instellingen zijn nog steeds, of onder dezelfde naam, beschikbaar in de nieuwe ``.env``. Zie :doc:`Env-instellingen voor de meest recente lijst van ondersteunde env vars<../../reference/env-settings>`."
 
 #: ../../how-to/upgrading/to-v4.rst:142
 msgid "However, you can still `use any custom Django settings <https://docs.djangoproject.com/en/3.0/ref/settings/>`_ in the ``dsmrreader/settings.py``. For example: ``X_FRAME_OPTIONS`` or ``USE_X_FORWARDED_HOST``."
@@ -211,4 +208,3 @@ msgstr "Tot slot, voer het deploy-script uit::"
 #: ../../how-to/upgrading/to-v4.rst:251
 msgid "Great. You should now be on ``v4.x``!"
 msgstr "Mooi! Je zou nu op ``v4.x`` moeten zitten!"
-

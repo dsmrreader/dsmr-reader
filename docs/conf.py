@@ -80,7 +80,7 @@ redirects = {  # sphinx_reredirects
     'env_settings': 'reference/env-settings.html',
     'plugins': 'reference/plugins.html',
     'api': 'reference/api.html',
-    'faq': 'reference.html',
+    'faq': 'reference/faq.html',
 }
 
 master_doc = 'index'

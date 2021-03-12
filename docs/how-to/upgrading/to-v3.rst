@@ -1,7 +1,6 @@
 Guide: Upgrading DSMR-reader v2.x to v3.x
 =========================================
 
-
 DSMR-reader ``v3.x`` is backwards incompatible with ``2.x``. You will have to manually upgrade to make sure it will run properly.
 
 .. note::

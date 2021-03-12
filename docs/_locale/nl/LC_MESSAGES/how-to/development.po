@@ -1,22 +1,22 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "POT-Creation-Date: 2021-03-11 22:44+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-03-12 22:11+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/development.rst:2
 msgid "Developing: Localhost"
-msgstr ""
+msgstr "Ontwikkelen: Lokaal"
 
 #: ../../how-to/development.rst:6
 msgid "Contents"
@@ -191,7 +191,6 @@ msgid "Translations are done using gettext and .PO files. Regenerate the .PO fil
 msgstr "Vertalingen verlopen via .PO-bestanden met gettext. Hergenereer de .PO-bestanden met::"
 
 #: ../../how-to/development.rst:193
-#, fuzzy
 msgid "The .PO files in ``docs/locale`` should be regenerated now. You can use ``poedit`` to view and translate the files."
 msgstr "De .PO-bestanden in ``docs/_locale`` zouden nu opnieuw gegenereerd moeten worden. Je kunt het programma ``poedit`` gebruiken om de bestanden te bekijken en te vertalen."
 
@@ -205,4 +204,3 @@ msgstr "Bekijk nu de gegenereerde HTML in je browser door het volgende bestand t
 
 #~ msgid "Developing with DSMR-reader"
 #~ msgstr "Ontwikkelen met DSMR-reader"
-
