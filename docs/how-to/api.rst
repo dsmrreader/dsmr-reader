@@ -1,5 +1,5 @@
-Third party integration: Using DSMR-reader's API
-================================================
+Using DSMR-reader's API
+=======================
 
 The application has an API allowing you to insert/create readings and retrieve statistics.
 

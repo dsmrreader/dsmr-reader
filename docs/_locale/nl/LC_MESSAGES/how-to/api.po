@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2021-03-13 15:26+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -13,8 +14,8 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/api.rst:2
-msgid "Third party integration: Using DSMR-reader's API"
-msgstr "Third party integratie: DSMR-reader's API"
+msgid "Using DSMR-reader's API"
+msgstr "DSMR-reader's API"
 
 #: ../../how-to/api.rst:4
 msgid "The application has an API allowing you to insert/create readings and retrieve statistics."
@@ -78,3 +79,6 @@ msgstr "Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kun
 
 #~ msgid "DSMR-reader API"
 #~ msgstr "DSMR-reader API"
+
+#~ msgid "Third party integration: Using DSMR-reader's API"
+#~ msgstr "Third party integratie: DSMR-reader's API"
