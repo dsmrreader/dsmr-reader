@@ -7,8 +7,8 @@ CURRENT_DIR=$(cd `dirname $0` && pwd)
 sed -i '/"PO-Revision-Date:/d' $CURRENT_DIR/../dsmrreader/locales/nl/LC_MESSAGES/django.po
 sed -i '/"POT-Creation-Date:/d' $CURRENT_DIR/../dsmrreader/locales/nl/LC_MESSAGES/django.po
 
-sed -i '/"PO-Revision-Date:/d' $CURRENT_DIR/../docs/locale/nl/LC_MESSAGES/*.po
-sed -i '/"POT-Creation-Date:/d' $CURRENT_DIR/../docs/locale/nl/LC_MESSAGES/*.po
+sed -i '/"PO-Revision-Date:/d' $CURRENT_DIR/../docs/_locale/nl/LC_MESSAGES/*.po
+sed -i '/"POT-Creation-Date:/d' $CURRENT_DIR/../docs/_locale/nl/LC_MESSAGES/*.po
 
-sed -i '/"PO-Revision-Date:/d' $CURRENT_DIR/../docs/locale/nl/LC_MESSAGES/*/*.po
-sed -i '/"POT-Creation-Date:/d' $CURRENT_DIR/../docs/locale/nl/LC_MESSAGES/*/*.po
+sed -i '/"PO-Revision-Date:/d' $CURRENT_DIR/../docs/_locale/nl/LC_MESSAGES/*/*.po
+sed -i '/"POT-Creation-Date:/d' $CURRENT_DIR/../docs/_locale/nl/LC_MESSAGES/*/*.po
