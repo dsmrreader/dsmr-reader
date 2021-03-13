@@ -62,7 +62,7 @@ redirects = {  # sphinx_reredirects
     'configuration': 'tutorial/configuration.html',
     'application': 'tutorial/setting-up.html',
 
-    'installation': 'how-to/index.html',
+    'installation': 'how-to/installation/quick.html',
     'faq/v3_upgrade': 'how-to/upgrading/to-v3.html',
     'faq/v4_upgrade': 'how-to/upgrading/to-v4.html',
     'development': 'how-to/development.html',
