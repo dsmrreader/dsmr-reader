@@ -17,7 +17,6 @@ How to's
    admin/notifications
    admin/pvoutput
 
-   api
    development
    upgrading/to-v3
    upgrading/to-v4

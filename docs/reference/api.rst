@@ -1,5 +1,5 @@
-Using DSMR-reader's API
-=======================
+API
+===
 
 The application has an API allowing you to insert/create readings and retrieve statistics.
 

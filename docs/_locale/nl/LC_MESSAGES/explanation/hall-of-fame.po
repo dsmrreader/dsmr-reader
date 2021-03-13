@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2021-03-13 15:52+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -12,138 +13,154 @@ msgstr ""
 "Generated-By: Babel 2.9.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../credits.rst:2
-msgid "Credits / Hall of Fame"
-msgstr "Credits / Hall of Fame"
+#: ../../explanation/hall-of-fame.rst:2
+msgid "Hall of Fame"
+msgstr "Credits"
 
-#: ../../credits.rst:5
+#: ../../explanation/hall-of-fame.rst:4
+msgid "Originally created and authored by Dennis Siemensma."
+msgstr "Oorspronkelijk gemaakt en onderhouden door Dennis Siemensma."
+
+#: ../../explanation/hall-of-fame.rst:8
 msgid "Thanks to"
 msgstr "Dank aan"
 
-#: ../../credits.rst:6
-msgid "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)"
-msgstr "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)"
+#: ../../explanation/hall-of-fame.rst:9
+msgid "`GitHub <https://github.com/>`_ for hosting the project code and issues."
+msgstr "`GitHub <https://github.com/>`_ voor het hosten van de projectcode en tickets."
 
-#: ../../credits.rst:7
-msgid "`Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)"
-msgstr "`Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)"
+#: ../../explanation/hall-of-fame.rst:10
+msgid "`Read The Docs <https://readthedocs.org/>`_ for hosting all documentation of DSMR-reader."
+msgstr "`Read The Docs <https://readthedocs.org/>`_ voor het hosten van alle documentatie van DSMR-reader."
 
-#: ../../credits.rst:8
-msgid "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)"
-msgstr "`Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)"
+#: ../../explanation/hall-of-fame.rst:11
+msgid "JetBrains for providing an open-source IDE licence to work on DSMR-reader."
+msgstr "JetBrains voor het afgeven van een IDE open-source licentie om te werken aan DSMR-reader."
 
-#: ../../credits.rst:9
-msgid "All the `other contributors <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!"
-msgstr "Alle `overige bijdrages <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!"
-
-#: ../../credits.rst:13
+#: ../../explanation/hall-of-fame.rst:19
 msgid "Special thanks"
 msgstr "Speciale dank aan"
 
-#: ../../credits.rst:14
-msgid "JetBrains for providing a free open-source IDE licence to work on DSMR-reader."
-msgstr "JetBrains voor het afgeven van een gratis IDE open-source licentie om te werken aan DSMR-reader."
+#: ../../explanation/hall-of-fame.rst:20
+msgid "For providing their time and support."
+msgstr "Voor hun tijd en ondersteuning."
 
-#: ../../credits.rst:20
-msgid "Also `Read The Docs <https://readthedocs.org/>`_ for freely hosting the documentation of DSMR-reader."
-msgstr "En `Read The Docs <https://readthedocs.org/>`_ voor het gratis hosten van de documentatie van DSMR-reader."
+#: ../../explanation/hall-of-fame.rst:22
+msgid "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)"
+msgstr "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)"
 
-#: ../../credits.rst:22
-msgid "And `CircleCI <https://circleci.com/>`_ for freely hosting the automated tests for DSMR-reader, plus `Codecov <https://codecov.io>`_ for particitating in it as well."
-msgstr "En `CircleCI <https://circleci.com/>`_ voor het gratis hosting van automatische tests voor DSMR-reader, samen met `Codecov <https://codecov.io>`_ voor de samenwerking daarin."
+#: ../../explanation/hall-of-fame.rst:23
+msgid "`Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)"
+msgstr "`Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)"
 
-#: ../../credits.rst:26
+#: ../../explanation/hall-of-fame.rst:24
+msgid "All the `other contributors <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!"
+msgstr "Alle `overige bijdrages <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!"
+
+#: ../../explanation/hall-of-fame.rst:28
 msgid "And don't forget"
 msgstr "En vergeet niet"
 
-#: ../../credits.rst:27
+#: ../../explanation/hall-of-fame.rst:29
 msgid "Credits to the following software and projects:"
 msgstr "Met dank aan de volgende software en projecten:"
 
-#: ../../credits.rst:29
-msgid "The many external PIP packages used in DSMR-reader!"
-msgstr "De vele externe PIP-packages die door DSMR-reader gebruikt worden!"
-
-#: ../../credits.rst:30
-msgid "GitHub"
-msgstr "GitHub"
-
-#: ../../credits.rst:31
-msgid "`Raspbian <https://www.raspbian.org/>`_"
-msgstr "`Raspbian <https://www.raspbian.org/>`_"
-
-#: ../../credits.rst:32
+#: ../../explanation/hall-of-fame.rst:31
 msgid "`Django Project <https://www.djangoproject.com/>`_"
 msgstr "`Django Project <https://www.djangoproject.com/>`_"
 
-#: ../../credits.rst:33
-msgid "`Supervisor <http://supervisord.org/>`_"
-msgstr "`Supervisor <http://supervisord.org/>`_"
+#: ../../explanation/hall-of-fame.rst:32
+msgid "Director Responsive Admin template *(former website is offline)*"
+msgstr "Director Responsive Admin template *(voormalige website is offline)*"
 
-#: ../../credits.rst:34
-msgid "`MySQL <https://www.mysql.com/>`_"
-msgstr "`MySQL <https://www.mysql.com/>`_"
-
-#: ../../credits.rst:35
-msgid "`MariaDB <https://mariadb.org/>`_"
-msgstr "`MariaDB <https://mariadb.org/>`_"
-
-#: ../../credits.rst:36
-msgid "`PostgreSQL <http://www.postgresql.org/>`_"
-msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
-
-#: ../../credits.rst:37
-msgid "Director Responsive Admin template (former website is offline)"
-msgstr "Director Responsive Admin template (voormalige website is offline)"
-
-#: ../../credits.rst:38
+#: ../../explanation/hall-of-fame.rst:33
 msgid "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 msgstr "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
-#: ../../credits.rst:39
+#: ../../explanation/hall-of-fame.rst:34
+msgid "`CircleCI <https://circleci.com/>`_ *(used before switching this project to Github Actions)*"
+msgstr "`CircleCI <https://circleci.com/>`_ *(gebruikt voordat dit project wisselde naar Github Actions)*"
+
+#: ../../explanation/hall-of-fame.rst:35
+msgid "`TravisCI <https://travis-ci.org>`_ *(used before switching this project to Github Actions)*"
+msgstr "`TravisCI <https://travis-ci.org>`_ *(gebruikt voordat dit project wisselde naar Github Actions)*"
+
+#: ../../explanation/hall-of-fame.rst:36
+msgid "`DSMR-parser <https://github.com/ndokter/dsmr_parser>`_ by `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)"
+msgstr "`DSMR-parser <https://github.com/ndokter/dsmr_parser>`_ door `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)"
+
+#: ../../explanation/hall-of-fame.rst:37
+msgid "`Raspbian <https://www.raspbian.org/>`_"
+msgstr "`Raspbian <https://www.raspbian.org/>`_"
+
+#: ../../explanation/hall-of-fame.rst:38
+msgid "`Supervisor <http://supervisord.org/>`_"
+msgstr "`Supervisor <http://supervisord.org/>`_"
+
+#: ../../explanation/hall-of-fame.rst:39
+msgid "`MySQL <https://www.mysql.com/>`_"
+msgstr "`MySQL <https://www.mysql.com/>`_"
+
+#: ../../explanation/hall-of-fame.rst:40
+msgid "`MariaDB <https://mariadb.org/>`_"
+msgstr "`MariaDB <https://mariadb.org/>`_"
+
+#: ../../explanation/hall-of-fame.rst:41
+msgid "`PostgreSQL <http://www.postgresql.org/>`_"
+msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
+
+#: ../../explanation/hall-of-fame.rst:42
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 
-#: ../../credits.rst:40
+#: ../../explanation/hall-of-fame.rst:43
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
-#: ../../credits.rst:41
-msgid "`GitHub <https://github.com/>`_"
-msgstr "`GitHub <https://github.com/>`_"
-
-#: ../../credits.rst:42
-msgid "`TravisCI <https://travis-ci.org>`_ (thanks for before using CircleCI)"
-msgstr "`TravisCI <https://travis-ci.org>`_ (bedankt voor de tijd vooraf aan CircleCI)"
-
-#: ../../credits.rst:43
+#: ../../explanation/hall-of-fame.rst:44
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
-#: ../../credits.rst:44
+#: ../../explanation/hall-of-fame.rst:45
 msgid "`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr "`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 
-#: ../../credits.rst:45
+#: ../../explanation/hall-of-fame.rst:46
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr "`Buienradar <http://www.buienradar.nl>`_"
 
-#: ../../credits.rst:46
+#: ../../explanation/hall-of-fame.rst:47
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr "`Django REST Framework <http://www.django-rest-framework.org>`_"
 
-#: ../../credits.rst:47
+#: ../../explanation/hall-of-fame.rst:48
 msgid "`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_"
 msgstr "`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_"
 
-#: ../../credits.rst:48
+#: ../../explanation/hall-of-fame.rst:49
 msgid "`ReDoc <https://github.com/Redocly/redoc>`_"
 msgstr "`ReDoc <https://github.com/Redocly/redoc>`_"
 
-#: ../../credits.rst:49
+#: ../../explanation/hall-of-fame.rst:50
 msgid "`Semantic UI <https://semantic-ui.com>`_"
 msgstr "`Semantic UI <https://semantic-ui.com>`_"
 
-#: ../../credits.rst:50
+#: ../../explanation/hall-of-fame.rst:51
 msgid "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
 msgstr "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
+
+#: ../../explanation/hall-of-fame.rst:52
+msgid "The many other external packages used in DSMR-reader!"
+msgstr "De vele externe packages die door DSMR-reader gebruikt worden!"
+
+#~ msgid "Credits / Hall of Fame"
+#~ msgstr "Credits / Hall of Fame"
+
+#~ msgid "And `CircleCI <https://circleci.com/>`_ for freely hosting the automated tests for DSMR-reader, plus `Codecov <https://codecov.io>`_ for particitating in it as well."
+#~ msgstr "En `CircleCI <https://circleci.com/>`_ voor het gratis hosting van automatische tests voor DSMR-reader, samen met `Codecov <https://codecov.io>`_ voor de samenwerking daarin."
+
+#~ msgid "GitHub"
+#~ msgstr "GitHub"
+
+#~ msgid "`GitHub <https://github.com/>`_"
+#~ msgstr "`GitHub <https://github.com/>`_"

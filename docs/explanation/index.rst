@@ -1,5 +1,5 @@
-Explanation
-###########
+Explained
+=========
 
 .. toctree::
    :maxdepth: 1

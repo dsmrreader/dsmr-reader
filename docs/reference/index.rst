@@ -5,6 +5,7 @@ Reference
    :maxdepth: 1
 
    changelog
-   env-settings
    faq
+   env-settings
+   api
    plugins

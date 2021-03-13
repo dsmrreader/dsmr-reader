@@ -1,5 +1,5 @@
-Env Settings
-============
+Environment settings
+====================
 
 .. contents::
     :depth: 2
