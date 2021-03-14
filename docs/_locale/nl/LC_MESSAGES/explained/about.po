@@ -31,7 +31,7 @@ msgstr "Een tool aanbieden waarmee je eenvoudig gegevens uit je slimme meter via
 
 #: ../../explained/about.rst:11
 msgid "Allow you to export your data to other systems or third parties. Currently supports MQTT for pushing data and an REST API for pulling data."
-msgstr "Heb je controle over je eigen gegevens, om ze bijvoorbeeld te exporteren naar andere systemen of derde partijen. Momenteel ondersteuning voor MQTT voor het pushen van gegevens en een REST API voor het ophalen van gegevens."
+msgstr "Houd controle over je eigen gegevens, om ze bijvoorbeeld te exporteren naar andere systemen of derde partijen. Momenteel ondersteuning voor MQTT voor het pushen van gegevens en een REST API voor het ophalen van gegevens."
 
 #: ../../explained/about.rst:15
 msgid "Languages"
