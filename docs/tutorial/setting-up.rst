@@ -54,7 +54,7 @@ The introduction of DSMR v5 smart meters strains the storage even more, due to t
 The default storage on RaspberryPi's suffers greatly from this and can not be trusted to keep your data safe.
 Eventually the storage will get corrupted and either make your data inaccessible, or it pretends to write data, while not storing anything at all.
 
-Reducing the data throughput may help as well. :doc:`More information can be found in the FAQ (data section)<../reference/faq>`.
+Reducing the data throughput may help as well. :doc:`More information can be found in the FAQ (data section)</how-to/database/data-limits>`.
 
 
 Backups
@@ -76,7 +76,7 @@ Using Dropbox to sync your backups does not protect them of all harm!
     If you are more technical savy, you could opt to either install the database or the entire application on a server with storage that tends to wear less.
     You can use the RaspberryPi are a remote datalogger, preventing a lot of issues.
 
-    :doc:`More information about using a remote datalogger here<../how-to/installation/remote-datalogger>`.
+    :doc:`More information about using a remote datalogger here</how-to/installation/remote-datalogger>`.
 
 
 Pitfalls

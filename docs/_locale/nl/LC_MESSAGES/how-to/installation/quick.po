@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-11 22:44+0100\n"
+"POT-Creation-Date: 2021-03-14 13:36+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/installation/quick.rst:2
 msgid "Installation: Quick"
@@ -64,7 +64,8 @@ msgid "If you need to restore a database backup with your existing data, this is
 msgstr "Indien je een back-up van de database wilt terugzetten met je oude gegevens, nu is het moment om dat te doen."
 
 #: ../../how-to/installation/quick.rst:52
-msgid "Restoring a database backup? :doc:`See the FAQ for instructions <../../reference/faq>`."
+#, fuzzy
+msgid "Restoring a database backup? :doc:`See here for instructions </how-to/database/postgresql-restore-backup>`."
 msgstr "Database back-up terugzetten? :doc:`Zie de FAQ voor instructies <../../reference/faq>`."
 
 #: ../../how-to/installation/quick.rst:56
@@ -455,3 +456,4 @@ msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../../tutorial/setting-up>
 
 #~ msgid "The script should now forward telegrams to the API host(s) you specified."
 #~ msgstr "Het script zou nu telegrammen moeten doorsturen naar de API host(s) die je eerder hebt ingevoerd."
+

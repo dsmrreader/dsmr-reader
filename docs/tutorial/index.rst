@@ -7,3 +7,6 @@ Tutorials
    installation/step-by-step
    setting-up
    configuration
+
+   upgrading/to-v3
+   upgrading/to-v4

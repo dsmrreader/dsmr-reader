@@ -18,7 +18,7 @@ import datetime
 # -- Project information -----------------------------------------------------
 
 project = 'DSMR-reader'
-copyright = '2015 - {}, Dennis Siemensma'.format(datetime.datetime.now().year)
+copyright = '2015 - {} DSMR-reader'.format(datetime.datetime.now().year)
 author = 'Dennis Siemensma'
 
 # The full version, including alpha/beta/rc tags
@@ -38,18 +38,18 @@ extensions = [
 redirects = {  # sphinx_reredirects
     # Legacy redirects.
     'settings': 'reference/env-settings.html',
-    'troubleshooting': 'reference/index.html',
-    'contributing': 'reference/index.html',
-    'donations': 'reference/index.html',
-    'faq/uninstall': '../reference/index.html',
-    'faq/database': '../reference/index.html',
-    'faq/restart_processes': '../reference/index.html',
-    'faq/update': '../reference/index.html',
-    'data_integrity': 'reference/index.html',
+    'troubleshooting': 'how-to/index.html',
+    'contributing': 'index.html',
+    'donations': 'index.html',
+    'faq/uninstall': '../how-to/index.html',
+    'faq/database': '../how-to/index.html',
+    'faq/restart_processes': '../how-to/index.html',
+    'faq/update': '../how-to/index.html',
+    'data_integrity': 'how-to/index.html',
     'requirements': 'explanation/about.html',
     'tour': 'explanation/about.html',
     'screenshots': 'explanation/about.html',
-    'installation/restore': '../reference/index.html',
+    'installation/restore': '../how-to/index.html',
     'installation/datalogger': '../how-to/installation/remote-datalogger.html',
     'installation/quick': '../how-to/installation/quick.html',
     'installation/explained': '../tutorials/installation/step-by-step.html',
@@ -63,8 +63,8 @@ redirects = {  # sphinx_reredirects
     'application': 'tutorial/setting-up.html',
 
     'installation': 'how-to/installation/quick.html',
-    'faq/v3_upgrade': '../how-to/upgrading/to-v3.html',
-    'faq/v4_upgrade': '../how-to/upgrading/to-v4.html',
+    'faq/v3_upgrade': '../tutorials/upgrading/to-v3.html',
+    'faq/v4_upgrade': '../tutorials/upgrading/to-v4.html',
     'development': 'how-to/development.html',
     'home_assistant': 'how-to/third-party/home-assistant.html',
     'admin/email': '../how-to/admin/email.html',
@@ -80,7 +80,7 @@ redirects = {  # sphinx_reredirects
     'env_settings': 'reference/env-settings.html',
     'plugins': 'reference/plugins.html',
     'api': 'reference/api.html',
-    'faq': 'reference/faq.html',
+    'faq': 'how-to/index.html',
 }
 
 master_doc = 'index'

@@ -2,9 +2,9 @@ DSMR Reader's documentation
 ###########################
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
-   reference/index
    explanation/index
+   reference/index
    tutorial/index
    how-to/index

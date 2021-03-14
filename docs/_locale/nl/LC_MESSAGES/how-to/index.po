@@ -18,5 +18,5 @@ msgstr ""
 
 #: ../../how-to/index.rst:2
 msgid "How to's"
-msgstr "How-to"
+msgstr "Stappenplannen"
 

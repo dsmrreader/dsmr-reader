@@ -421,7 +421,7 @@ The log level DSMR-reader should use. Choose either ``ERROR`` (omit for this def
 
 .. seealso::
 
-    For more information, :doc:`see Troubleshooting in FAQ<faq>`.
+    For more information, :doc:`see Troubleshooting</how-to/troubleshooting/enabling-debug-logging>`.
 
 .. hint::
 
@@ -445,7 +445,7 @@ Note that this should be a comma separated list when specifying multiple plugins
 
 .. seealso::
 
-    For more information, :doc:`see Plugins<plugins>`.
+    For more information, :doc:`see Plugins</reference/plugins>`.
 
 .. hint::
 

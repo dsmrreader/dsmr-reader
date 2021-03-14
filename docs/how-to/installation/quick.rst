@@ -49,7 +49,7 @@ Optional: Restore a database backup
 
     If you need to restore a database backup with your existing data, this is the moment to do so.
 
-    Restoring a database backup? :doc:`See the FAQ for instructions <../../reference/faq>`.
+    Restoring a database backup? :doc:`See here for instructions </how-to/database/postgresql-restore-backup>`.
 
 
 DSMR-reader

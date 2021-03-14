@@ -5,10 +5,32 @@ How to's
    :maxdepth: 1
 
    installation/quick
-   installation/remote-datalogger
    third-party/docker
+   installation/uninstalling
    third-party/home-assistant
+   installation/remote-datalogger
+   upgrading/upgrade
+   upgrading/downgrade
 
+   troubleshooting/debug-info-dump
+   troubleshooting/logfiles
+   troubleshooting/enabling-debug-logging
+   troubleshooting/restarting
+   troubleshooting/error-key-already-exists
+   troubleshooting/error-already-running-on-pid
+   troubleshooting/smart-meter-replacement
+   troubleshooting/smart-meter-invalid-date-or-times
+   troubleshooting/recalculate-prices
+
+   database/data-limits
+   database/postgresql-migrate-day-hour-statistics
+   database/postgresql-restore-backup
+   database/postgresql-resolve-size-warnings
+   database/postgresql-reclaim-disk-space
+   database/postgresql-change-storage-location
+   database/mysql-enable-timezone-support
+
+   admin/set-username-password
    admin/email
    admin/backup_dropbox
    admin/email_backup
@@ -18,5 +40,5 @@ How to's
    admin/pvoutput
 
    development
-   upgrading/to-v3
-   upgrading/to-v4
+
+   troubleshooting/support
