@@ -14,4 +14,4 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 #: ../../explanation/index.rst:2
 msgid "Explained"
-msgstr "Toegelicht"
+msgstr "Uitleg"
