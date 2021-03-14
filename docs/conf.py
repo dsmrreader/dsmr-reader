@@ -52,7 +52,7 @@ redirects = {  # sphinx_reredirects
     'installation/restore': '../how-to/index.html',
     'installation/datalogger': '../how-to/installation/remote-datalogger.html',
     'installation/quick': '../how-to/installation/quick.html',
-    'installation/explained': '../tutorials/installation/step-by-step.html',
+    'installation/explained': '../tutorial/installation/step-by-step.html',
     'installation/docker': '../how-to/third-party/docker-installation.html',
 
     # Reworked structure redirects.
@@ -63,8 +63,8 @@ redirects = {  # sphinx_reredirects
     'application': 'tutorial/setting-up.html',
 
     'installation': 'how-to/installation/quick.html',
-    'faq/v3_upgrade': '../tutorials/upgrading/to-v3.html',
-    'faq/v4_upgrade': '../tutorials/upgrading/to-v4.html',
+    'faq/v3_upgrade': '../tutorial/upgrading/to-v3.html',
+    'faq/v4_upgrade': '../tutorial/upgrading/to-v4.html',
     'development': 'how-to/development.html',
     'home_assistant': 'how-to/third-party/home-assistant.html',
     'admin/email': '../how-to/admin/email.html',
