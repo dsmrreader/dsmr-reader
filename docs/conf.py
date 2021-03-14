@@ -37,18 +37,18 @@ extensions = [
 
 redirects = {  # sphinx_reredirects
     # Legacy redirects.
-    'settings': 'reference/env-settings.html',
-    'troubleshooting': 'how-to/index.html',
+    'settings': '/reference/env-settings.html',
+    'troubleshooting': '/how-to/index.html',
     'contributing': 'index.html',
     'donations': 'index.html',
     'faq/uninstall': '/how-to/index.html',
     'faq/database': '/how-to/index.html',
     'faq/restart_processes': '/how-to/index.html',
     'faq/update': '/how-to/index.html',
-    'data_integrity': 'how-to/index.html',
-    'requirements': 'explanation/about.html',
-    'tour': 'explanation/about.html',
-    'screenshots': 'explanation/about.html',
+    'data_integrity': '/how-to/index.html',
+    'requirements': '/explanation/about.html',
+    'tour': '/explanation/about.html',
+    'screenshots': '/explanation/about.html',
     'installation/restore': '/how-to/index.html',
     'installation/datalogger': '/how-to/installation/remote-datalogger.html',
     'installation/quick': '/how-to/installation/quick.html',
@@ -56,17 +56,17 @@ redirects = {  # sphinx_reredirects
     'installation/docker': '/how-to/third-party/docker-installation.html',
 
     # Reworked structure redirects.
-    'intro': 'explanation/about.html',
-    'credits': 'explanation/hall-of-fame.html',
+    'intro': '/explanation/about.html',
+    'credits': '/explanation/hall-of-fame.html',
 
-    'configuration': 'tutorial/configuration.html',
-    'application': 'tutorial/setting-up.html',
+    'configuration': '/tutorial/configuration.html',
+    'application': '/tutorial/setting-up.html',
 
-    'installation': 'how-to/installation/quick.html',
+    'installation': '/how-to/installation/quick.html',
     'faq/v3_upgrade': '/tutorials/upgrading/to-v3.html',
     'faq/v4_upgrade': '/tutorials/upgrading/to-v4.html',
-    'development': 'how-to/development.html',
-    'home_assistant': 'how-to/third-party/home-assistant.html',
+    'development': '/how-to/development.html',
+    'home_assistant': '/how-to/third-party/home-assistant.html',
     'admin/email': '/how-to/admin/email.html',
     'admin/backup_dropbox': '/how-to/admin/backup_dropbox.html',
     'admin/email_backup': '/how-to/admin/email_backup.html',
@@ -74,13 +74,13 @@ redirects = {  # sphinx_reredirects
     'admin/mqtt': '/how-to/admin/mqtt.html',
     'admin/notifications': '/how-to/admin/notifications.html',
     'admin/pvoutput': '/how-to/admin/pvoutput.html',
-    'mqtt': 'how-to/index.html',
+    'mqtt': '/how-to/index.html',
 
-    'changelog': 'reference/changelog.html',
-    'env_settings': 'reference/env-settings.html',
-    'plugins': 'reference/plugins.html',
-    'api': 'reference/api.html',
-    'faq': 'how-to/index.html',
+    'changelog': '/reference/changelog.html',
+    'env_settings': '/reference/env-settings.html',
+    'plugins': '/reference/plugins.html',
+    'api': '/reference/api.html',
+    'faq': '/how-to/index.html',
 }
 
 master_doc = 'index'
