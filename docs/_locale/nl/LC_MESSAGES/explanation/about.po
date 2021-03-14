@@ -5,12 +5,11 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../explanation/about.rst:2
 msgid "About DSMR-reader"
@@ -105,89 +104,90 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: ../../explanation/about.rst:52
-msgid "The dashboard displays the latest information regarding the consumption of today. You can view the total consumption for current month as well. The graphs can be zoomed and display data up to the last 24 hours."
-msgstr "Het dashboard weergeeft de meeste actuele informatie over je verbruik vandaag. Je kunt hier ook het totale verbruik van de huidige maand zien. Alle grafieken kunnen uitgezoomd worden en weergegeven gegevens tot 24 uur geleden."
+msgid "The dashboard displays the latest information regarding the consumption of today. You can view the total consumption for the current month and year as well."
+msgstr "Het dashboard weergeeft de meeste actuele informatie over je verbruik vandaag. Je kunt hier ook het totale verbruik van de huidige maand en jaar zien."
 
-#: ../../explanation/about.rst:56
+#: ../../explanation/about.rst:55
 msgid "If your meter supports it, you can also see your gas consumption and electricity returned."
 msgstr "Je ziet hier ook je gasverbruik en teruglevering elektriciteit, mits je meter dat ondersteunt."
 
-#: ../../explanation/about.rst:65
+#: ../../explanation/about.rst:64
 msgid "Live graphs"
 msgstr "Live grafieken"
 
-#: ../../explanation/about.rst:67
+#: ../../explanation/about.rst:66
 msgid "The live graphs plots the most recent data available, depending on the capabilities of your smart meter."
 msgstr "De Live Grafieken pagina toont de meest recente beschikbare gegevens, afhankelijk van de mogelijkheden van je slimme meter."
 
-#: ../../explanation/about.rst:76
+#: ../../explanation/about.rst:75
 msgid "Archive"
 msgstr "Archief"
 
-#: ../../explanation/about.rst:78
+#: ../../explanation/about.rst:77
 msgid "The archive allows you to scroll through all historisch data captured by the application. All data can be viewed on different levels: by day, by month and by year."
 msgstr "In het archief kun je door alle historische data heen bladeren. Je kunt de gegevens bekijken op dag-, maand- of jaarbasis."
 
-#: ../../explanation/about.rst:88
+#: ../../explanation/about.rst:87
 msgid "Compare"
 msgstr "Vergelijken"
 
-#: ../../explanation/about.rst:90
+#: ../../explanation/about.rst:89
 msgid "This page allows you to simply compare two days, months or years with each other. It will also display the difference between each other as a percentage."
 msgstr "Deze pagina stelt je in staat om simpleweg twee dagen, maanden of jaren met elkaar te vergelijken. Daarnaast worden de verschillen tussen de twee weergegeven als percentage."
 
-#: ../../explanation/about.rst:99
+#: ../../explanation/about.rst:98
 msgid "Trends"
 msgstr "Trends"
 
-#: ../../explanation/about.rst:101
+#: ../../explanation/about.rst:100
 msgid "This page displays a summary of your average daily consumption and habits."
 msgstr "Deze pagina weergeeft een samenvatting van je dagelijkse verbruik en gewoontes."
 
-#: ../../explanation/about.rst:109
+#: ../../explanation/about.rst:108
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../../explanation/about.rst:111
+#: ../../explanation/about.rst:110
 msgid "This page displays your meter positions and statistics provided by the DSMR protocol. You can also find the number of readings stored and any excesses regarding consumption."
 msgstr "Deze pagina weergeeft je huidige meterstanden en statistieken volgens het DSMR-protocol. Je kunt hier ook het totaal aantal opgeslagen metingen vinden, evenals excessief verbruik."
 
-#: ../../explanation/about.rst:120
+#: ../../explanation/about.rst:119
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
-#: ../../explanation/about.rst:122
+#: ../../explanation/about.rst:121
 msgid "Summary of all your contracts and the amount of energy consumed/generated."
 msgstr "Overzicht van al je energiecontracten en het bijbehorende verbruik."
 
-#: ../../explanation/about.rst:130
+#: ../../explanation/about.rst:129
 msgid "Export"
 msgstr "Export"
 
-#: ../../explanation/about.rst:132
+#: ../../explanation/about.rst:131
 msgid "This pages allows you to export all day or hour statistics to CSV."
 msgstr "Deze pagina staat je toe om alle uur- en dagstatistieken te exporteren naar CSV."
 
-#: ../../explanation/about.rst:140
+#: ../../explanation/about.rst:139
 msgid "About"
 msgstr "Over"
 
-#: ../../explanation/about.rst:142
+#: ../../explanation/about.rst:141
 msgid "Shows the 'health' of the application and provides a lot of background information."
 msgstr "Toont de status van de applicatie en verwijst naar een hoop achtergrondinformatie."
 
-#: ../../explanation/about.rst:144
+#: ../../explanation/about.rst:143
 msgid "You can also easily check for DSMR-reader updates here."
 msgstr "Je kunt hier eveneens eenvoudig controleren op updates van DSMR-reader."
 
-#: ../../explanation/about.rst:152
+#: ../../explanation/about.rst:151
 msgid "Configuration"
 msgstr "Configuratie"
 
-#: ../../explanation/about.rst:154
+#: ../../explanation/about.rst:153
 msgid "The configuration page is the entrypoint for the admin interface."
 msgstr "De configuratiepagina is de toegangspoort tot het adminportaal."
 
-#: ../../explanation/about.rst:156
+#: ../../explanation/about.rst:155
 msgid "You can type any topic or setting you're searching for, as it should pop up with clickable deeplink to the admin panel. Or you can just skip it this page and continue directly to the admin panel."
 msgstr "Je kunt hier elk onderwerp of instelling waarnaar je op zoek bent intypen, om vervolgens een popup te krijgen met een klikbare link direct naar het juiste onderdeel binnen het adminportaal."
+
