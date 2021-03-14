@@ -36,6 +36,3 @@ msgstr "Add-ons"
 #: ../../how-to/third-party/home-assistant.rst:13
 msgid "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (third party, by Sander de Wildt)"
 msgstr "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (derde partij, door Sander de Wildt)"
-
-
-

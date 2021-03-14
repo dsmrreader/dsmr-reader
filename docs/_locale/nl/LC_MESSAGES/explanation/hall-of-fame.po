@@ -152,7 +152,3 @@ msgstr "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
 #: ../../explanation/hall-of-fame.rst:52
 msgid "The many other external packages used in DSMR-reader!"
 msgstr "De vele externe packages die door DSMR-reader gebruikt worden!"
-
-
-
-

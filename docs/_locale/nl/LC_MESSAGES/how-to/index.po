@@ -14,8 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
-
-
 #: ../../how-to/index.rst:2
 msgid "How to's"
 msgstr "Stappenplannen"
