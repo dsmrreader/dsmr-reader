@@ -76,4 +76,3 @@ msgstr "API-sleutel"
 #: ../../reference/api.rst:56
 msgid "A random API key is generated for you by default. You can always view or update it :doc:`in the configuration</tutorial/configuration>`."
 msgstr "Standaard wordt een willekeurige API-sleutel voor je gegenereerd. Je kunt deze altijd bekijken of bijwerken :doc:`in de configuratie</tutorial/configuration>`."
-
