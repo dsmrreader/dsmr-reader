@@ -11,6 +11,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: ../../tutorial/setting-up.rst:2
 msgid "Setting up the application"
@@ -50,7 +52,7 @@ msgstr "Waarschuwing voor publiekelijke toegang"
 
 #: ../../tutorial/setting-up.rst:33
 msgid "If you expose your application to the outside world or a public network, you might want to take additional steps:"
-msgstr "Wanneer je de applicatie koppelt aan het Internet wil je sowieso extra maatregelen nemen:"
+msgstr "Wanneer je de applicatie aan het Internet koppelt wil je sowieso extra maatregelen nemen:"
 
 #: ../../tutorial/setting-up.rst:35
 msgid "Enable password protection :doc:`in the configuration<configuration>` for the entire application, available since DSMR-reader ``v4.0``."

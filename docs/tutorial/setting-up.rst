@@ -28,7 +28,7 @@ You surely want to ``reboot`` your device and check whether everything comes up 
 Public webinterface warning
 ---------------------------
 
-.. warning::
+.. danger::
 
     If you expose your application to the outside world or a public network, you might want to take additional steps:
 
