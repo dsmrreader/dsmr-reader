@@ -193,4 +193,3 @@ msgstr "Plugin bestand ``dsmr_plugins/modules/poll_dsmrloggerws_api.py`` (nieuw 
 #: ../../reference/plugins.rst:300
 msgid "Note that you might need to update the ``http://localhost`` value to your own situation."
 msgstr "Let op dat je mogelijk de waarde van ``http://localhost`` moet bijwerken naar je eigen situatie."
-

@@ -17,23 +17,13 @@ msgid "Admin: Consumption & energy supplier prices"
 msgstr "Admin: Verbruik en energietarieven"
 
 #: ../../admin/consumption.rst:4
-msgid ""
-"You can choose whether to have all readings grouped by minute (default) "
-"or by reading. This only affects the display of data in the Dashboard "
-"page."
-msgstr ""
-"Je kunt ervoor kiezen om alle metingen te groeperen per minuut "
-"(standaard) of per meting. Dit heeft alleen invloed op hoe de gegevens "
-"getoond worden in de Dashboard-pagina."
+msgid "You can choose whether to have all readings grouped by minute (default) or by reading. This only affects the display of data in the Dashboard page."
+msgstr "Je kunt ervoor kiezen om alle metingen te groeperen per minuut (standaard) of per meting. Dit heeft alleen invloed op hoe de gegevens getoond worden in de Dashboard-pagina."
 
 #: ../../admin/consumption.rst:12
 msgid "There is a separate page for entering your energy supplier prices."
 msgstr "Er is een aparte pagina waar je je energietarieven kunt invullen."
 
 #: ../../admin/consumption.rst:18
-msgid ""
-"Entering your prices will allow the application to display them, when "
-"possible."
-msgstr ""
-"Het invullen van de prijzen die je betaalt staat de applicatie toe om "
-"ze te tonen, wanneer mogelijk."
+msgid "Entering your prices will allow the application to display them, when possible."
+msgstr "Het invullen van de prijzen die je betaalt staat de applicatie toe om ze te tonen, wanneer mogelijk."

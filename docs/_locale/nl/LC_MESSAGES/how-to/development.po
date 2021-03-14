@@ -199,4 +199,3 @@ msgstr "Nadat je de .PO-bestanden hebt bijgewerkt, kun je de resultaten bekijken
 #: ../../how-to/development.rst:199
 msgid "Now view the generated HTML in your browser by opening: ``docs/_build/html/index.html``"
 msgstr "Bekijk nu de gegenereerde HTML in je browser door het volgende bestand te openen: ``docs/_build/html/index.html``"
-
