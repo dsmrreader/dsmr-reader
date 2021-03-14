@@ -71,5 +71,5 @@ msgid "DSMR-reader"
 msgstr "DSMR-reader"
 
 #: ../../how-to/installation/quick.rst:111
-msgid ":doc:`Finished? Go to setting up the application<../../tutorial/setting-up>`."
-msgstr ":doc:`Klaar? Ga dan naar applicatie instellen<../../tutorial/setting-up>`."
+msgid ":doc:`Finished? Go to setting up the application</tutorial/setting-up>`."
+msgstr ":doc:`Klaar? Ga dan naar applicatie instellen</tutorial/setting-up>`."

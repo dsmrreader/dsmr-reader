@@ -44,7 +44,7 @@ Configuration
 Enable API
 ^^^^^^^^^^
 
-The API is disabled by default in the application. You may enable it :doc:`in the configuration<../tutorial/configuration>`.
+The API is disabled by default in the application. You may enable it :doc:`in the configuration</tutorial/configuration>`.
 
 .. image:: ../_static/screenshots/v4/admin/apisettings.png
     :target: ../_static/screenshots/v4/admin/apisettings.png
@@ -53,4 +53,4 @@ The API is disabled by default in the application. You may enable it :doc:`in th
 API key
 ^^^^^^^
 
-A random API key is generated for you by default. You can always view or update it :doc:`in the configuration<../tutorial/configuration>`.
+A random API key is generated for you by default. You can always view or update it :doc:`in the configuration</tutorial/configuration>`.

@@ -14,7 +14,7 @@ DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to ma
 List of changes
 ^^^^^^^^^^^^^^^
 
-:doc:`See the changelog<../../reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!
+:doc:`See the changelog</reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!
 
 
 1. Update to the latest ``v3.x`` version
@@ -137,7 +137,7 @@ Unsupported settings
 --------------------
 
 Not all previously available settings are also supported in ``.env``.
-See :doc:`Env Settings for the latest list of env vars supported<../../reference/env-settings>`.
+See :doc:`Env Settings for the latest list of env vars supported</reference/env-settings>`.
 
 However, you can still `use any custom Django settings <https://docs.djangoproject.com/en/3.0/ref/settings/>`_ in the ``dsmrreader/settings.py``.
 For example: ``X_FRAME_OPTIONS`` or ``USE_X_FORWARDED_HOST``.

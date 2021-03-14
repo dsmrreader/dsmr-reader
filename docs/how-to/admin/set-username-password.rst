@@ -27,11 +27,11 @@ Manual installation
 Docker installation
 ^^^^^^^^^^^^^^^^^^^
 
-The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings<../../reference/env-settings>` will be used for the credentials.
+The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings</reference/env-settings>` will be used for the credentials.
 
 Creating or updating credentials:
 
-- Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings<../../reference/env-settings>`.
+- Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings</reference/env-settings>`.
 
 - Now execute::
 

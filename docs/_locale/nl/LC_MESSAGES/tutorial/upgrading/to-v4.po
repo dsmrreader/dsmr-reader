@@ -34,8 +34,8 @@ msgid "List of changes"
 msgstr "Lijst van wijzigingen"
 
 #: ../../how-to/upgrading/to-v4.rst:17
-msgid ":doc:`See the changelog<../../reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!"
-msgstr ":doc:`Zie de changelog<../../reference/changelog>`, voor ``v4.x releases`` en hoger. Bekijk ze voordat je update!"
+msgid ":doc:`See the changelog</reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!"
+msgstr ":doc:`Zie de changelog</reference/changelog>`, voor ``v4.x releases`` en hoger. Bekijk ze voordat je update!"
 
 #: ../../how-to/upgrading/to-v4.rst:21
 msgid "1. Update to the latest ``v3.x`` version"
@@ -109,8 +109,8 @@ msgid "Unsupported settings"
 msgstr "Niet-ondersteunde instellingen"
 
 #: ../../how-to/upgrading/to-v4.rst:139
-msgid "Not all previously available settings are also supported in ``.env``. See :doc:`Env Settings for the latest list of env vars supported<../../reference/env-settings>`."
-msgstr "Niet alle instellingen zijn nog steeds, of onder dezelfde naam, beschikbaar in de nieuwe ``.env``. Zie :doc:`Env-instellingen voor de meest recente lijst van ondersteunde env vars<../../reference/env-settings>`."
+msgid "Not all previously available settings are also supported in ``.env``. See :doc:`Env Settings for the latest list of env vars supported</reference/env-settings>`."
+msgstr "Niet alle instellingen zijn nog steeds, of onder dezelfde naam, beschikbaar in de nieuwe ``.env``. Zie :doc:`Env-instellingen voor de meest recente lijst van ondersteunde env vars</reference/env-settings>`."
 
 #: ../../how-to/upgrading/to-v4.rst:142
 msgid "However, you can still `use any custom Django settings <https://docs.djangoproject.com/en/3.0/ref/settings/>`_ in the ``dsmrreader/settings.py``. For example: ``X_FRAME_OPTIONS`` or ``USE_X_FORWARDED_HOST``."

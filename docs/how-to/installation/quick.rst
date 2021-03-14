@@ -108,4 +108,4 @@ Continue::
 
 .. seealso::
 
-    :doc:`Finished? Go to setting up the application<../../tutorial/setting-up>`.
+    :doc:`Finished? Go to setting up the application</tutorial/setting-up>`.

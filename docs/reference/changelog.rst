@@ -18,10 +18,12 @@ Current version
 v4.14.0 - 2021-xx-xx
 --------------------
 
+- ``Changed``: Rework documentation structure [`#1315 <https://github.com/dsmrreader/dsmr-reader/issues/1315>`_]
 - ``Changed``: Move PVOutput to scheduled process mechanism [`#950 <https://github.com/dsmrreader/dsmr-reader/issues/950>`_]
 - ``Changed``: Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]
 
 - ``Fixed``: Dashboard responsiveness verbeteren op kleine schermen [`#1320 <https://github.com/dsmrreader/dsmr-reader/issues/1320>`_]
+
 
 
 v4.13.0 - 2021-03-09
