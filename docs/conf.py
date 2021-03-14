@@ -46,9 +46,9 @@ redirects = {  # sphinx_reredirects
     'faq/restart_processes': '../how-to/index.html',
     'faq/update': '../how-to/index.html',
     'data_integrity': 'how-to/index.html',
-    'requirements': 'explanation/about.html',
-    'tour': 'explanation/about.html',
-    'screenshots': 'explanation/about.html',
+    'requirements': 'explained/about.html',
+    'tour': 'explained/about.html',
+    'screenshots': 'explained/about.html',
     'installation/restore': '../how-to/index.html',
     'installation/datalogger': '../how-to/installation/remote-datalogger.html',
     'installation/quick': '../how-to/installation/quick.html',
@@ -56,8 +56,8 @@ redirects = {  # sphinx_reredirects
     'installation/docker': '../how-to/third-party/docker-installation.html',
 
     # Reworked structure redirects.
-    'intro': 'explanation/about.html',
-    'credits': 'explanation/hall-of-fame.html',
+    'intro': 'explained/about.html',
+    'credits': 'explained/hall-of-fame.html',
 
     'configuration': 'tutorial/configuration.html',
     'application': 'tutorial/setting-up.html',

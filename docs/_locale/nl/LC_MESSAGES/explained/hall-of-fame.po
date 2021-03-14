@@ -13,142 +13,142 @@ msgstr ""
 "Generated-By: Babel 2.9.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../explanation/hall-of-fame.rst:2
+#: ../../explained/hall-of-fame.rst:2
 msgid "Hall of Fame"
 msgstr "Credits"
 
-#: ../../explanation/hall-of-fame.rst:4
+#: ../../explained/hall-of-fame.rst:4
 msgid "Originally created and authored by Dennis Siemensma."
 msgstr "Oorspronkelijk gemaakt en onderhouden door Dennis Siemensma."
 
-#: ../../explanation/hall-of-fame.rst:8
+#: ../../explained/hall-of-fame.rst:8
 msgid "Thanks to"
 msgstr "Dank aan"
 
-#: ../../explanation/hall-of-fame.rst:9
+#: ../../explained/hall-of-fame.rst:9
 msgid "`GitHub <https://github.com/>`_ for hosting the project code and issues."
 msgstr "`GitHub <https://github.com/>`_ voor het hosten van de projectcode en tickets."
 
-#: ../../explanation/hall-of-fame.rst:10
+#: ../../explained/hall-of-fame.rst:10
 msgid "`Read The Docs <https://readthedocs.org/>`_ for hosting all documentation of DSMR-reader."
 msgstr "`Read The Docs <https://readthedocs.org/>`_ voor het hosten van alle documentatie van DSMR-reader."
 
-#: ../../explanation/hall-of-fame.rst:11
+#: ../../explained/hall-of-fame.rst:11
 msgid "JetBrains for providing an open-source IDE licence to work on DSMR-reader."
 msgstr "JetBrains voor het afgeven van een IDE open-source licentie om te werken aan DSMR-reader."
 
-#: ../../explanation/hall-of-fame.rst:19
+#: ../../explained/hall-of-fame.rst:19
 msgid "Special thanks"
 msgstr "Speciale dank aan"
 
-#: ../../explanation/hall-of-fame.rst:20
+#: ../../explained/hall-of-fame.rst:20
 msgid "For providing their time and support."
 msgstr "Voor hun tijd en ondersteuning."
 
-#: ../../explanation/hall-of-fame.rst:22
+#: ../../explained/hall-of-fame.rst:22
 msgid "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)"
 msgstr "`Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)"
 
-#: ../../explanation/hall-of-fame.rst:23
+#: ../../explained/hall-of-fame.rst:23
 msgid "`Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)"
 msgstr "`Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)"
 
-#: ../../explanation/hall-of-fame.rst:24
+#: ../../explained/hall-of-fame.rst:24
 msgid "All the `other contributors <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!"
 msgstr "Alle `overige bijdrages <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!"
 
-#: ../../explanation/hall-of-fame.rst:28
+#: ../../explained/hall-of-fame.rst:28
 msgid "And don't forget"
 msgstr "En vergeet niet"
 
-#: ../../explanation/hall-of-fame.rst:29
+#: ../../explained/hall-of-fame.rst:29
 msgid "Credits to the following software and projects:"
 msgstr "Met dank aan de volgende software en projecten:"
 
-#: ../../explanation/hall-of-fame.rst:31
+#: ../../explained/hall-of-fame.rst:31
 msgid "`Django Project <https://www.djangoproject.com/>`_"
 msgstr "`Django Project <https://www.djangoproject.com/>`_"
 
-#: ../../explanation/hall-of-fame.rst:32
+#: ../../explained/hall-of-fame.rst:32
 msgid "Director Responsive Admin template *(former website is offline)*"
 msgstr "Director Responsive Admin template *(voormalige website is offline)*"
 
-#: ../../explanation/hall-of-fame.rst:33
+#: ../../explained/hall-of-fame.rst:33
 msgid "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 msgstr "Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_"
 
-#: ../../explanation/hall-of-fame.rst:34
+#: ../../explained/hall-of-fame.rst:34
 msgid "`CircleCI <https://circleci.com/>`_ *(used before switching this project to Github Actions)*"
 msgstr "`CircleCI <https://circleci.com/>`_ *(gebruikt voordat dit project wisselde naar Github Actions)*"
 
-#: ../../explanation/hall-of-fame.rst:35
+#: ../../explained/hall-of-fame.rst:35
 msgid "`TravisCI <https://travis-ci.org>`_ *(used before switching this project to Github Actions)*"
 msgstr "`TravisCI <https://travis-ci.org>`_ *(gebruikt voordat dit project wisselde naar Github Actions)*"
 
-#: ../../explanation/hall-of-fame.rst:36
+#: ../../explained/hall-of-fame.rst:36
 msgid "`DSMR-parser <https://github.com/ndokter/dsmr_parser>`_ by `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)"
 msgstr "`DSMR-parser <https://github.com/ndokter/dsmr_parser>`_ door `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)"
 
-#: ../../explanation/hall-of-fame.rst:37
+#: ../../explained/hall-of-fame.rst:37
 msgid "`Raspbian <https://www.raspbian.org/>`_"
 msgstr "`Raspbian <https://www.raspbian.org/>`_"
 
-#: ../../explanation/hall-of-fame.rst:38
+#: ../../explained/hall-of-fame.rst:38
 msgid "`Supervisor <http://supervisord.org/>`_"
 msgstr "`Supervisor <http://supervisord.org/>`_"
 
-#: ../../explanation/hall-of-fame.rst:39
+#: ../../explained/hall-of-fame.rst:39
 msgid "`MySQL <https://www.mysql.com/>`_"
 msgstr "`MySQL <https://www.mysql.com/>`_"
 
-#: ../../explanation/hall-of-fame.rst:40
+#: ../../explained/hall-of-fame.rst:40
 msgid "`MariaDB <https://mariadb.org/>`_"
 msgstr "`MariaDB <https://mariadb.org/>`_"
 
-#: ../../explanation/hall-of-fame.rst:41
+#: ../../explained/hall-of-fame.rst:41
 msgid "`PostgreSQL <http://www.postgresql.org/>`_"
 msgstr "`PostgreSQL <http://www.postgresql.org/>`_"
 
-#: ../../explanation/hall-of-fame.rst:42
+#: ../../explained/hall-of-fame.rst:42
 msgid "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 msgstr "`Real Favicon Generator <http://realfavicongenerator.net>`_"
 
-#: ../../explanation/hall-of-fame.rst:43
+#: ../../explained/hall-of-fame.rst:43
 msgid "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 msgstr "`Bootstrap-datepicker <http://bootstrap-datepicker.readthedocs.org/>`_"
 
-#: ../../explanation/hall-of-fame.rst:44
+#: ../../explained/hall-of-fame.rst:44
 msgid "`MW <http://bettermotherfuckingwebsite.com/>`_"
 msgstr "`MW <http://bettermotherfuckingwebsite.com/>`_"
 
-#: ../../explanation/hall-of-fame.rst:45
+#: ../../explained/hall-of-fame.rst:45
 msgid "`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 msgstr "`Full Page Screen Capture <https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl?>`_"
 
-#: ../../explanation/hall-of-fame.rst:46
+#: ../../explained/hall-of-fame.rst:46
 msgid "`Buienradar <http://www.buienradar.nl>`_"
 msgstr "`Buienradar <http://www.buienradar.nl>`_"
 
-#: ../../explanation/hall-of-fame.rst:47
+#: ../../explained/hall-of-fame.rst:47
 msgid "`Django REST Framework <http://www.django-rest-framework.org>`_"
 msgstr "`Django REST Framework <http://www.django-rest-framework.org>`_"
 
-#: ../../explanation/hall-of-fame.rst:48
+#: ../../explained/hall-of-fame.rst:48
 msgid "`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_"
 msgstr "`eCharts Graphing <https://ecomfe.github.io/echarts-doc/public/en/index.html>`_"
 
-#: ../../explanation/hall-of-fame.rst:49
+#: ../../explained/hall-of-fame.rst:49
 msgid "`ReDoc <https://github.com/Redocly/redoc>`_"
 msgstr "`ReDoc <https://github.com/Redocly/redoc>`_"
 
-#: ../../explanation/hall-of-fame.rst:50
+#: ../../explained/hall-of-fame.rst:50
 msgid "`Semantic UI <https://semantic-ui.com>`_"
 msgstr "`Semantic UI <https://semantic-ui.com>`_"
 
-#: ../../explanation/hall-of-fame.rst:51
+#: ../../explained/hall-of-fame.rst:51
 msgid "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
 msgstr "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
 
-#: ../../explanation/hall-of-fame.rst:52
+#: ../../explained/hall-of-fame.rst:52
 msgid "The many other external packages used in DSMR-reader!"
 msgstr "De vele externe packages die door DSMR-reader gebruikt worden!"

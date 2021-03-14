@@ -11,183 +11,183 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: ../../explanation/about.rst:2
+#: ../../explained/about.rst:2
 msgid "About DSMR-reader"
 msgstr "Over DSMR-reader"
 
-#: ../../explanation/about.rst:6
+#: ../../explained/about.rst:6
 msgid "Contents"
 msgstr "Inhoudsopgave"
 
-#: ../../explanation/about.rst:9
+#: ../../explained/about.rst:9
 msgid "Project goals"
 msgstr "Projectdoelen"
 
-#: ../../explanation/about.rst:10
+#: ../../explained/about.rst:10
 msgid "Provide a tool to easily extract, store and visualize data transferred by the DSMR protocol of your smart meter."
 msgstr "Een tool aanbieden waarmee je eenvoudig gegevens uit je slimme meter via het DSMR-protocol uitleest, opslaat en visualiseert."
 
-#: ../../explanation/about.rst:11
+#: ../../explained/about.rst:11
 msgid "Allow you to export your data to other systems or third parties. Currently supports MQTT for pushing data and an REST API for pulling data."
 msgstr "Sta toe om jouw gegevens te exporteren naar andere systemen of derde partijen. Momenteel ondersteuning voor MQTT voor het pushen van gegevens en een REST API voor het ophalen van gegevens."
 
-#: ../../explanation/about.rst:15
+#: ../../explained/about.rst:15
 msgid "Languages"
 msgstr "Talen"
 
-#: ../../explanation/about.rst:17
+#: ../../explained/about.rst:17
 msgid "The entire application and its code is written and documented in English. The interface is translated into Dutch and will be enabled automatically, depending on your browser's language preference."
 msgstr "De gehele applicatie, en bijbehorende code, is in het Engels geschreven. De grafische interface is echter ook in het Nederlands beschikbaar. Deze wordt  automatisch getoond, afhankelijk van de taalinstelling in je webbrowser."
 
-#: ../../explanation/about.rst:20
+#: ../../explained/about.rst:20
 msgid "Support for:"
 msgstr "Ondersteuning voor:"
 
-#: ../../explanation/about.rst:22
+#: ../../explained/about.rst:22
 msgid "English"
 msgstr "Engels"
 
-#: ../../explanation/about.rst:23
+#: ../../explained/about.rst:23
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../../explanation/about.rst:27
+#: ../../explained/about.rst:27
 msgid "Hardware requirements"
 msgstr "Hardwarevereisten"
 
-#: ../../explanation/about.rst:29
+#: ../../explained/about.rst:29
 msgid "For datalogger only: **Any** RaspberryPi or similar"
 msgstr "Voor alleen-datalogger: **Elke** RaspberryPi of vergelijkbaar"
 
-#: ../../explanation/about.rst:30
+#: ../../explained/about.rst:30
 msgid "For full DSMR-reader: **RaspberryPi 3+** or similar"
 msgstr "Voor volledige DSMR-reader: **RaspberryPi 3+** of vergelijkbaar"
 
-#: ../../explanation/about.rst:31
+#: ../../explained/about.rst:31
 msgid "P1 telegram cable (or a network socket when using ``ser2net``)"
 msgstr "Kabel voor uitlezen P1-poort (of een netwerksocket via bijvoorbeeld ``ser2net``)"
 
-#: ../../explanation/about.rst:32
+#: ../../explained/about.rst:32
 msgid "A smart meter supporting DSMR versions: `v2` / `v4` / `v5`"
 msgstr "Een slimme meter met ondersteuning voor DSMR-versies: `v2` / `v4` / `v5`"
 
-#: ../../explanation/about.rst:36
+#: ../../explained/about.rst:36
 msgid "Software requirements"
 msgstr "Softwarevereisten"
 
-#: ../../explanation/about.rst:38
+#: ../../explained/about.rst:38
 msgid "**OS**: ``Raspbian OS`` or similar (or using Docker)."
 msgstr "**OS**: ``Raspbian OS`` of vergelijkbaar (of via Docker)"
 
-#: ../../explanation/about.rst:39
+#: ../../explained/about.rst:39
 msgid "**Disk space**: 1+ GB - Depending on your smart meter and whether how many readings you want to preserve."
 msgstr "**Schijfruimte**: 1+ GB - Afhankelijk van je slimme meter en de hoeveelheid metingen je wilt bewaren."
 
-#: ../../explanation/about.rst:40
+#: ../../explained/about.rst:40
 msgid "**Code**: A `supported <https://devguide.python.org/#status-of-python-branches>`__ Python version."
 msgstr "**Code**: Een `ondersteunde <https://devguide.python.org/#status-of-python-branches>`__ Python-versie."
 
-#: ../../explanation/about.rst:41
+#: ../../explained/about.rst:41
 msgid "**Database**: A `supported <https://www.postgresql.org/support/versioning/>`__ PostgreSQL version."
 msgstr "**Database**: Een `ondersteunde <https://www.postgresql.org/support/versioning/>`__ PostgreSQL-versie."
 
-#: ../../explanation/about.rst:43
+#: ../../explained/about.rst:43
 msgid "Note that this project is built with `Django <https://www.djangoproject.com/>`__, which decides which Python/DB versions are actually supported."
 msgstr "N.B.: Dit project is gebouwd met `Django <https://www.djangoproject.com/>`__, wat de uiteindelijk ondersteunde Python/DB-versies bepaalt."
 
-#: ../../explanation/about.rst:47
+#: ../../explained/about.rst:47
 msgid "Screenshots"
 msgstr "Screenshots"
 
-#: ../../explanation/about.rst:50
+#: ../../explained/about.rst:50
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ../../explanation/about.rst:52
+#: ../../explained/about.rst:52
 msgid "The dashboard displays the latest information regarding the consumption of today. You can view the total consumption for the current month and year as well."
 msgstr "Het dashboard weergeeft de meeste actuele informatie over je verbruik vandaag. Je kunt hier ook het totale verbruik van de huidige maand en jaar zien."
 
-#: ../../explanation/about.rst:55
+#: ../../explained/about.rst:55
 msgid "If your meter supports it, you can also see your gas consumption and electricity returned."
 msgstr "Je ziet hier ook je gasverbruik en teruglevering elektriciteit, mits je meter dat ondersteunt."
 
-#: ../../explanation/about.rst:64
+#: ../../explained/about.rst:64
 msgid "Live graphs"
 msgstr "Live grafieken"
 
-#: ../../explanation/about.rst:66
+#: ../../explained/about.rst:66
 msgid "The live graphs plots the most recent data available, depending on the capabilities of your smart meter."
 msgstr "De Live Grafieken pagina toont de meest recente beschikbare gegevens, afhankelijk van de mogelijkheden van je slimme meter."
 
-#: ../../explanation/about.rst:75
+#: ../../explained/about.rst:75
 msgid "Archive"
 msgstr "Archief"
 
-#: ../../explanation/about.rst:77
+#: ../../explained/about.rst:77
 msgid "The archive allows you to scroll through all historisch data captured by the application. All data can be viewed on different levels: by day, by month and by year."
 msgstr "In het archief kun je door alle historische data heen bladeren. Je kunt de gegevens bekijken op dag-, maand- of jaarbasis."
 
-#: ../../explanation/about.rst:87
+#: ../../explained/about.rst:87
 msgid "Compare"
 msgstr "Vergelijken"
 
-#: ../../explanation/about.rst:89
+#: ../../explained/about.rst:89
 msgid "This page allows you to simply compare two days, months or years with each other. It will also display the difference between each other as a percentage."
 msgstr "Deze pagina stelt je in staat om simpleweg twee dagen, maanden of jaren met elkaar te vergelijken. Daarnaast worden de verschillen tussen de twee weergegeven als percentage."
 
-#: ../../explanation/about.rst:98
+#: ../../explained/about.rst:98
 msgid "Trends"
 msgstr "Trends"
 
-#: ../../explanation/about.rst:100
+#: ../../explained/about.rst:100
 msgid "This page displays a summary of your average daily consumption and habits."
 msgstr "Deze pagina weergeeft een samenvatting van je dagelijkse verbruik en gewoontes."
 
-#: ../../explanation/about.rst:108
+#: ../../explained/about.rst:108
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../../explanation/about.rst:110
+#: ../../explained/about.rst:110
 msgid "This page displays your meter positions and statistics provided by the DSMR protocol. You can also find the number of readings stored and any excesses regarding consumption."
 msgstr "Deze pagina weergeeft je huidige meterstanden en statistieken volgens het DSMR-protocol. Je kunt hier ook het totaal aantal opgeslagen metingen vinden, evenals excessief verbruik."
 
-#: ../../explanation/about.rst:119
+#: ../../explained/about.rst:119
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
-#: ../../explanation/about.rst:121
+#: ../../explained/about.rst:121
 msgid "Summary of all your contracts and the amount of energy consumed/generated."
 msgstr "Overzicht van al je energiecontracten en het bijbehorende verbruik."
 
-#: ../../explanation/about.rst:129
+#: ../../explained/about.rst:129
 msgid "Export"
 msgstr "Export"
 
-#: ../../explanation/about.rst:131
+#: ../../explained/about.rst:131
 msgid "This pages allows you to export all day or hour statistics to CSV."
 msgstr "Deze pagina staat je toe om alle uur- en dagstatistieken te exporteren naar CSV."
 
-#: ../../explanation/about.rst:139
+#: ../../explained/about.rst:139
 msgid "About"
 msgstr "Over"
 
-#: ../../explanation/about.rst:141
+#: ../../explained/about.rst:141
 msgid "Shows the 'health' of the application and provides a lot of background information."
 msgstr "Toont de status van de applicatie en verwijst naar een hoop achtergrondinformatie."
 
-#: ../../explanation/about.rst:143
+#: ../../explained/about.rst:143
 msgid "You can also easily check for DSMR-reader updates here."
 msgstr "Je kunt hier eveneens eenvoudig controleren op updates van DSMR-reader."
 
-#: ../../explanation/about.rst:151
+#: ../../explained/about.rst:151
 msgid "Configuration"
 msgstr "Configuratie"
 
-#: ../../explanation/about.rst:153
+#: ../../explained/about.rst:153
 msgid "The configuration page is the entrypoint for the admin interface."
 msgstr "De configuratiepagina is de toegangspoort tot het adminportaal."
 
-#: ../../explanation/about.rst:155
+#: ../../explained/about.rst:155
 msgid "You can type any topic or setting you're searching for, as it should pop up with clickable deeplink to the admin panel. Or you can just skip it this page and continue directly to the admin panel."
 msgstr "Je kunt hier elk onderwerp of instelling waarnaar je op zoek bent intypen, om vervolgens een popup te krijgen met een klikbare link direct naar het juiste onderdeel binnen het adminportaal."
 
