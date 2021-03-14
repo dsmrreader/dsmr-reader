@@ -253,7 +253,7 @@ v4.0.0 - 2020-07-27
 
 .. warning::
 
-    This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See :doc:`the v4 upgrade guide </tutorials/upgrading/to-v4>` for more information.
+    This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See :doc:`the v4 upgrade guide </tutorial/upgrading/to-v4>` for more information.
 
 - ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dsmrreader/dsmr-reader/issues/1016>`_]
 - ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dsmrreader/dsmr-reader/issues/1025>`_]
@@ -452,7 +452,7 @@ v3.0.0 - 2020-01-15
 
 .. warning::
 
-    This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See :doc:`the v3 upgrade guide </tutorials/upgrading/to-v3>` for more information.
+    This is the last release of DSMR-reader ``v2.x``. New features will only be added to ``v3.x``. See :doc:`the v3 upgrade guide </tutorial/upgrading/to-v3>` for more information.
 
 
 v2.15.0 - 2020-01-15

@@ -652,8 +652,4 @@ msgstr "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan v
 msgid "`View existing GitHub issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_"
 msgstr "`Bekijk bestaande issues op GitHub of maak een nieuwe aan <https://github.com/dennissiemensma/dsmr-reader/issues>`_."
 
-#~ msgid "Or go back to the **sudo user** and execute::"
-#~ msgstr "Of ga terug naar de **sudo gebruiker** en voer dit uit::"
 
-#~ msgid "Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings<env_settings>`."
-#~ msgstr "Stel ``DSMRREADER_ADMIN_USER`` en ``DSMRREADER_ADMIN_PASSWORD`` in via de :doc:`Env-instellingen<env_settings>`."

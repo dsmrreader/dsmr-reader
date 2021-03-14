@@ -194,5 +194,3 @@ msgstr "Plugin bestand ``dsmr_plugins/modules/poll_dsmrloggerws_api.py`` (nieuw 
 msgid "Note that you might need to update the ``http://localhost`` value to your own situation."
 msgstr "Let op dat je mogelijk de waarde van ``http://localhost`` moet bijwerken naar je eigen situatie."
 
-#~ msgid "And finally, make sure to **reload the application** by deploying it again. You can do that by simply executing the ``post-deploy.sh`` script in the root of the project."
-#~ msgstr "En tot slot, zorg ervoor dat je **de applicatie herlaadt** door opnieuw te deployen. Je kunt dat doen door simpelweg ``post-deploy.sh`` uit te voeren, het script in de root van het project."

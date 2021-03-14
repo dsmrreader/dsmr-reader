@@ -192,83 +192,29 @@ msgstr "De configuratiepagina is de toegangspoort tot het adminportaal."
 msgid "You can type any topic or setting you're searching for, as it should pop up with clickable deeplink to the admin panel. Or you can just skip it this page and continue directly to the admin panel."
 msgstr "Je kunt hier elk onderwerp of instelling waarnaar je op zoek bent intypen, om vervolgens een popup te krijgen met een klikbare link direct naar het juiste onderdeel binnen het adminportaal."
 
-#~ msgid "Storage issues"
-#~ msgstr "Problemen met opslag"
 
-#~ msgid ":doc:`Please read this page as well before using DSMR-reader<data_integrity>`."
-#~ msgstr ":doc:`Lees deze pagina voordat je DSMR-reader gebruikt<data_integrity>`."
 
-#~ msgid "Hardware"
-#~ msgstr "Hardware"
 
-#~ msgid "Software"
-#~ msgstr "Software"
 
-#~ msgid ":doc:`For more screenshots see this page<tour>`."
-#~ msgstr ":doc:`Voor meer screenshots zie deze pagina<tour>`."
 
-#~ msgid "Tour"
-#~ msgstr "Rondleiding"
 
-#~ msgid "Features"
-#~ msgstr "Mogelijkheden"
 
-#~ msgid "DSMR-reader has the following features:"
-#~ msgstr "DSMR-reader heeft de volgende mogelijkheden:"
 
-#~ msgid "Read telegram data from serial port"
-#~ msgstr "Telegrammen uitlezen van een seriële poort"
 
-#~ msgid "Read telegram data from network socket"
-#~ msgstr "Telegrammen uitlezen van een netwerksocket"
 
-#~ msgid "Receive telegram data through its (REST) API"
-#~ msgstr "Telegrammen ontvangen via de eigen (REST) API"
 
-#~ msgid "Process, store and plot telegram data extensively"
-#~ msgstr "Verwerken, opslaan en uitgebreid weergeven van gegevens uit telegrammen"
 
-#~ msgid "Daily cost indication using your energy prices"
-#~ msgstr "Indicatie van dagelijkse kosten op basis van je energietarieven"
 
-#~ msgid "Push notifications through Pushover / Prowl"
-#~ msgstr "Pushnotificaties via Pushover / Prowl"
 
-#~ msgid "Automated export to your MinderGas.nl account"
-#~ msgstr "Automatische export naar je MinderGas.nl-account"
 
-#~ msgid "Automated export to your PVOutput.org account"
-#~ msgstr "Automatische export naar je PVOutput.org-account"
 
-#~ msgid "Automated export to an MQTT broker"
-#~ msgstr "Automatische export naar een MQTT broker"
 
-#~ msgid "Automated export to an InfluxDB"
-#~ msgstr "Automatische export naar een InfluxDB"
 
-#~ msgid "Automated backup to Dropbox"
-#~ msgstr "Automatische back-up naar Dropbox"
 
-#~ msgid "Automated backup through email"
-#~ msgstr "Automatische back-up per e-mail"
 
-#~ msgid "And many others..."
-#~ msgstr "En nog vele andere...."
 
-#~ msgid "Disk space: `1+ GB` (depends on whether you archive all readings)"
-#~ msgstr "Schijfruimte: `1+ GB` (afhankelijk van gearchiveerde metingen)"
 
-#~ msgid "Python: `3.6` or higher"
-#~ msgstr "Python: ``3.6`` of hoger"
 
-#~ msgid "Support for ``Python 3.3`` has been **discontinued** since ``DSMR-reader v1.5``"
-#~ msgstr "Ondersteuning voor ``Python 3.3`` is **vervallen** sinds ``DSMR-reader v1.5``"
 
-#~ msgid "Support for ``Python 3.4`` has been **discontinued** since ``DSMR-reader v2.0``"
-#~ msgstr "Ondersteuning voor ``Python 3.4`` is **vervallen** sinds ``DSMR-reader v2.0``"
 
-#~ msgid "Support for ``Python 3.5`` has been **discontinued** since ``DSMR-reader v3.0``"
-#~ msgstr "Ondersteuning voor ``Python 3.5`` is **vervallen** sinds ``DSMR-reader v3.0``"
 
-#~ msgid "Introduction"
-#~ msgstr "Introductie"

@@ -9,7 +9,6 @@ msgstr ""
 "Project-Id-Version:  DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-14 13:35+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
@@ -335,7 +334,6 @@ msgid "The log level DSMR-reader should use. Choose either ``ERROR`` (omit for t
 msgstr "Het log level dat DSMR-reader gebruikt. Kies ofwel ``ERROR`` (laat weg voor deze standaardwaarde), ``WARNING`` of ``DEBUG`` (alleen tijdelijk i.v.m. hogere I/O)."
 
 #: ../../reference/env-settings.rst:424
-#, fuzzy
 msgid "For more information, :doc:`see Troubleshooting</how-to/troubleshooting/enabling-debug-logging>`."
 msgstr "Voor meer informatie, :doc:`zie Hulp bij problemen</how-to/troubleshooting/enabling-debug-logging>`."
 
@@ -348,9 +346,8 @@ msgid "The plugins DSMR-reader should use. Omit to use the default of no plugins
 msgstr "De plugins die DSMR-reader gebruikt. Laat weg als je dit niet gebruikt. N.B.: Dit is een komma-gescheiden lijst wanneer je meerdere plugins specificeert. Bijvoorbeeld::"
 
 #: ../../reference/env-settings.rst:448
-#, fuzzy
 msgid "For more information, :doc:`see Plugins</reference/plugins>`."
-msgstr "Voor meer informatie, :doc:`zie Plugins<plugins>`."
+msgstr "Voor meer informatie, :doc:`zie Plugins</reference/plugins>`."
 
 #: ../../reference/env-settings.rst:461
 msgid "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
@@ -360,6 +357,4 @@ msgstr "``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``"
 msgid "Whether to suppress any warnings regarding too many readings stored or the database size. Set it to ``True`` to disable the warnings or omit it to use the default (``False``). Suppress at your own risk."
 msgstr "Gebruik dit om waarschuwingen over \"te veel opgeslagen metingen\" of een \"te grote database\" te onderdrukken. Stel in op ``True`` om deze waarschuwingen uit te schakelen of laat het weg om de standaardwaarde (``False``) te gebruiken. Gebruik op eigen risico."
 
-#~ msgid "You can either specify the following settings as system environments variables or define them in a ``.env`` file in the root of the DSMR-reader project folder."
-#~ msgstr "Je kunt deze instellingen ofwel als systeem environment variabelen aanmaken of ze definieren in een ``.env`` bestand in de DSMR-reader project-map."
 

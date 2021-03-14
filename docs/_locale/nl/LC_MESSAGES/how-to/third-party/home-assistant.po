@@ -37,11 +37,5 @@ msgstr "Add-ons"
 msgid "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (third party, by Sander de Wildt)"
 msgstr "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (derde partij, door Sander de Wildt)"
 
-#~ msgid "Plugins"
-#~ msgstr "Plugins"
 
-#~ msgid "Since Home Assistant ``0.103`` there is `a DSMR-reader plugin available <https://www.home-assistant.io/integrations/dsmr_reader/>`_, created by Wim Haanstra. This plugin uses DSMR-reader's MQTT messages to read and update the state of your smart meter."
-#~ msgstr "Sinds Home Assistant ``0.103`` is er `een DSMR-reader plugin beschikbaar <https://www.home-assistant.io/integrations/dsmr_reader/>`_, gemaakt door by Wim Haanstra. Deze plugin gebruikt DSMR-reader's MQTT-berichten om de status van je slimme meter uit te lezen."
 
-#~ msgid "Home Assistant"
-#~ msgstr "Home Assistant"

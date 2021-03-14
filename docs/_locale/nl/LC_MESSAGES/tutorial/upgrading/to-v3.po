@@ -123,5 +123,3 @@ msgstr "DSMR-reader ``v3.x`` leeft in een andere branch, om te voorkomen dat geb
 msgid "Great. You should now be on ``v3.x``!"
 msgstr "Mooi! Je zou nu op ``v3.x`` moeten zitten!"
 
-#~ msgid ":doc:`See here for instructions<update>`."
-#~ msgstr ":doc:`Zie hier voor instructies<update>`."

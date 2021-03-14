@@ -153,14 +153,6 @@ msgstr "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
 msgid "The many other external packages used in DSMR-reader!"
 msgstr "De vele externe packages die door DSMR-reader gebruikt worden!"
 
-#~ msgid "Credits / Hall of Fame"
-#~ msgstr "Credits / Hall of Fame"
 
-#~ msgid "And `CircleCI <https://circleci.com/>`_ for freely hosting the automated tests for DSMR-reader, plus `Codecov <https://codecov.io>`_ for particitating in it as well."
-#~ msgstr "En `CircleCI <https://circleci.com/>`_ voor het gratis hosting van automatische tests voor DSMR-reader, samen met `Codecov <https://codecov.io>`_ voor de samenwerking daarin."
 
-#~ msgid "GitHub"
-#~ msgstr "GitHub"
 
-#~ msgid "`GitHub <https://github.com/>`_"
-#~ msgstr "`GitHub <https://github.com/>`_"

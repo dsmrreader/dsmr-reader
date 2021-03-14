@@ -3,7 +3,6 @@ msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "POT-Creation-Date: 2021-03-14 13:15+0100\n"
-"PO-Revision-Date: 2021-03-14 13:23+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -26,479 +25,161 @@ msgstr "Het hangt af van de situatie, maar je kunt het volgende sowieso zelf eer
 msgid "If it does not resolve your issue, ask for support on GitHub (see end of page)."
 msgstr "Wanneer dat het probleem niet oplost, vraag dan om ondersteuning via Guthub (zie onderaan deze pagina)."
 
-#~ msgid "Or go back to the **sudo user** and execute::"
-#~ msgstr "Of ga terug naar de **sudo gebruiker** en voer dit uit::"
 
-#~ msgid "Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings<env_settings>`."
-#~ msgstr "Stel ``DSMRREADER_ADMIN_USER`` en ``DSMRREADER_ADMIN_PASSWORD`` in via de :doc:`Env-instellingen<env_settings>`."
 
-#~ msgid "FAQ (Frequently Asked Questions)"
-#~ msgstr "FAQ (veelgestelde vragen)"
 
-#~ msgid "Contents"
-#~ msgstr "Inhoudsopgave"
 
-#~ msgid "Troubleshooting"
-#~ msgstr "Hulp bij problemen"
 
-#~ msgid "If anything happens to fail or malfunction, please follow the steps below first to provide some background information when reporting an issue."
-#~ msgstr "Wanneer er iets lijkt mis te gaan, volg de onderstaande stappen eerst, voordat je een issue aanmaakt. Hiermee kun je wat meer achtergrondinformatie aanleveren."
 
-#~ msgid "Debug info dump for GitHub issues"
-#~ msgstr "Debug-informatiedump voor GitHub-issues"
 
-#~ msgid "Added the ``dsmr_debuginfo`` command for command line."
-#~ msgstr "Het ``dsmr_debuginfo`` commando toegevoegd voor de command line."
 
-#~ msgid "Added the ``dsmr_debuginfo`` feature to About & Support page."
-#~ msgstr "De ``dsmr_debuginfo`` feature toegevoegd aan de Over & Ondersteuning-pagina."
 
-#~ msgid "You can supply additional debug info by executing the ``dsmr_debuginfo`` command and copying its output into your issue on GitHub."
-#~ msgstr "Je kunt extra debug-informatie aanleveren door het ``dsmr_debuginfo``-commando uit te voeren en vervolgens de output daarvan te kopieren naar je issue op GitHub."
 
-#~ msgid "To do so you can either execute ``./manage.py dsmr_debuginfo`` on the command line or (since v4.6) click the button on the About & Support page."
-#~ msgstr "Om dit te doen kun je ofwel ``./manage.py dsmr_debuginfo`` op de command line uitvoeren, of (sinds v4.6) op de knop klikken in de Over & Ondersteuning-pagina."
 
-#~ msgid "Log files"
-#~ msgstr "Logbestanden"
 
-#~ msgid "Always start by checking the log files for errors."
-#~ msgstr "Je startpunt is altijd het bekijken van de logfiles voor foutmeldingen."
 
-#~ msgid "DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:"
-#~ msgstr "DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of niet in je eigen situatie gebruikt worden) en ze worden beheerd door Supervisor:"
 
-#~ msgid "Webinterface"
-#~ msgstr "Webinterface"
 
-#~ msgid "``dsmr_webinterface``"
-#~ msgstr "``dsmr_webinterface``"
 
-#~ msgid "Datalogger"
-#~ msgstr "Datalogger"
 
-#~ msgid "``dsmr_datalogger``"
-#~ msgstr "``dsmr_datalogger``"
 
-#~ msgid "Backend"
-#~ msgstr "Backend"
 
-#~ msgid "``dsmr_backend``"
-#~ msgstr "``dsmr_backend``"
 
-#~ msgid "Each has its own log file(s):"
-#~ msgstr "Elk heeft eigen logbestand(en):"
 
-#~ msgid "``/var/log/supervisor/dsmr_webinterface.log``"
-#~ msgstr "``/var/log/supervisor/dsmr_webinterface.log``"
 
-#~ msgid "``/var/log/supervisor/dsmr_datalogger.log``"
-#~ msgstr "``/var/log/supervisor/dsmr_datalogger.log``"
 
-#~ msgid "``/var/log/supervisor/dsmr_backend.log``"
-#~ msgstr "``/var/log/supervisor/dsmr_backend.log``"
 
-#~ msgid "The logfiles may be stale due to rotation. To see all logs for a process, try tailing a wildcard pattern, e.g.::"
-#~ msgstr "De logbestanden kunnen blijven hangen wegens rotatie. Probeer te tailen op een wildcard-patroon om alles logs van een proces te zien. Bijvoorbeeld::"
 
-#~ msgid "Supervisor"
-#~ msgstr "Supervisor"
 
-#~ msgid "You can view the status of all processes by running::"
-#~ msgstr "Je kunt de status van alle processen bekijken door het volgende uit te voeren::"
 
-#~ msgid "Any processes listed, should have the status ``RUNNING``. Stale or crashed processes can be restarted with::"
-#~ msgstr "Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. Hangende of gecrashde processen kunnen herstart worden met::"
 
-#~ msgid "Or to restart them all simultaneously::"
-#~ msgstr "Of herstart ze allemaal tegelijkertijd::"
 
-#~ msgid "Logging levels"
-#~ msgstr "Logging levels"
 
-#~ msgid "If the processes do run, but you cannot find an error, (e.g.: things seem to hang or tend to be slow), there might be another issue at hand."
-#~ msgstr "Wanneer de processen lijken te draaien, maar je kunt geen fout vinden (bijvoorbeeld als telegrammen hangen of de verwerking traag lijkt), dan is er waarschijnlijk iets anders aan de hand."
 
-#~ msgid "DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do. This applies **specifically** to the ``dsmr_backend`` process."
-#~ msgstr "DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt wat het aan het doen is. Dit geldt **specifiek** voor het ``dsmr_backend`` proces."
 
-#~ msgid "Errors are likely to be logged at all times, no matter the DEBUG-logging level used. Debugging is only helpful to watch DSMR-reader's detailed behaviour."
-#~ msgstr "Fouten worden doorgaans altijd gelogd, ongeacht het logging niveau van DEBUG-level of niet. Debugging is alleen nuttig om het gedrag van DSMR-reader in meer detail te observeren."
 
-#~ msgid "The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:"
-#~ msgstr "De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties op het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te volgen:"
 
-#~ msgid "Make sure you are ``dsmr`` user by executing::"
-#~ msgstr "Zorg ervoor dat je ``dsmr`` gebruiker bent door dit uit te voeren::"
 
-#~ msgid "Open the ``.env`` file and look for the code below::"
-#~ msgstr "Open ``.env`` en zoek de onderstaande code::"
 
-#~ msgid "Now remove the ``###`` from this line::"
-#~ msgstr "Verwijder nu de ``###`` uit de regel::"
 
-#~ msgid "It should now be::"
-#~ msgstr "Het zou nu dit moeten zijn::"
 
-#~ msgid "After editing the file, all processes need to be restarted to reflect the change. Go back to the **root user or sudoer** with::"
-#~ msgstr "Na het bewerken van het bestand zul je alle processen moeten herstarten om de wijziging door te voeren. Ga terug naar de **root of sudo-gebruiker** met::"
 
-#~ msgid "And restart::"
-#~ msgstr "En herstart::"
 
-#~ msgid "All done!"
-#~ msgstr "Klaar!"
 
-#~ msgid "Application management"
-#~ msgstr "Applicatiebeheer"
 
-#~ msgid "How to upgrade?"
-#~ msgstr "Hoe upgrade ik?"
 
-#~ msgid "Every once in a while there may be updates. You can also easily check for updates by using the application's Status page."
-#~ msgstr "Met enige regelmaat zijn er updates beschikbaar. Je kunt dit ook eenvoudig controleren op de Status-pagina van de applicatie."
 
-#~ msgid "First, **please make sure you have a recent backup of your database**!"
-#~ msgstr "Allereerst, **zorg ervoor dat je een recente backup hebt van je database**!"
 
-#~ msgid "You can update your application to the latest version by executing ``deploy.sh``, located in the root of the project. Make sure to execute it while logged in as the ``dsmr`` user::"
-#~ msgstr "Je kun je applicatie bijwerken door het script ``deploy.sh`` uit te voeren, die in zich in de hoofdmap van het project bevindt. Zorg er wel voor dat je ingelogd bent als ``dsmr`` gebruiker op de terminal::"
 
-#~ msgid "How to downgrade?"
-#~ msgstr "Hoe downgrade ik?"
 
-#~ msgid "If for some reason you need to downgrade the application, you will need to:"
-#~ msgstr "Wanneer je om wat voor reden dan ook de applicatie moet downgraden, dan zul je:"
 
-#~ msgid "unapply database migrations."
-#~ msgstr "de databasemigraties moeten terugdraaien."
 
-#~ msgid "switch the application code version to a previous release."
-#~ msgstr "de applicatiecode moeten wisselen naar een vorige versie."
 
-#~ msgid "Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v4/dsmrreader/provisioning/downgrade/>`_. You should execute the script of the version you wish to downgrade to. And the switch the code to the release."
-#~ msgstr "Elke release `heeft z'n eigen databasemigraties vastgelegd <https://github.com/dsmrreader/dsmr-reader/tree/v4/dsmrreader/provisioning/downgrade>`_. Je zult het script moeten uitvoer voor de release waar je naar toe wilt. En vervolgens de codebase wisselen naar dezelfde release."
 
-#~ msgid "For example ``v4.0``::"
-#~ msgstr "Bijvoorbeeld ``v4.0``::"
 
-#~ msgid "Unapplying the database migrations may take a while."
-#~ msgstr "Het terugdraaien van databasemigraties kan wat tijd in beslag nemen."
 
-#~ msgid "You should now be on the targeted release."
-#~ msgstr "Je zou nu op de gewenste release moeten zitten."
 
-#~ msgid "How to restart?"
-#~ msgstr "Hoe herstart ik?"
 
-#~ msgid "You might want or need to restart DSMR-reader manually at some time. E.g.: Due to altered settings that need to be reapplied to the processes."
-#~ msgstr "Kan het voorkomen dat je DSMR-reader wilt of moet herstarten. Bijvoorbeeld vanwege instellingen die een herstart vereisen."
 
-#~ msgid "For a soft restart::"
-#~ msgstr "Voor een zachte herstart::"
 
-#~ msgid "For a hard restart::"
-#~ msgstr "Voor een harde/geforceerde herstart::"
 
-#~ msgid "How to uninstall?"
-#~ msgstr "Hoe deïnstalleer ik?"
 
-#~ msgid "To remove DSMR-reader from your system, execute the following commands::"
-#~ msgstr "Om DSMR-reader van je systeem te verwijderen, voer het volgende uit::"
 
-#~ msgid "To delete your data (the database) as well::"
-#~ msgstr "Om ook je data (de database) te verwijderen::"
 
-#~ msgid "Optionally, you can remove these packages::"
-#~ msgstr "Eventueel kun je deze packages ook verwijderen::"
 
-#~ msgid "How do I set admin credentials?"
-#~ msgstr "Hoe stel ik de inloggegevens van de admin in?"
 
-#~ msgid "There is no default user or password. You will need to set it yourself with the steps below, depending on whether you've installed manually or using Docker."
-#~ msgstr "Er zijn geen standaard inloggegevens. Je zult deze zelf moeten instellen met de stappen hieronder, afhankelijk van of je een handmatige installatie gedaan hebt of via Docker."
 
-#~ msgid "Manual installation"
-#~ msgstr "Handmatige installatie"
 
-#~ msgid "Now execute::"
-#~ msgstr "Voer uit::"
 
-#~ msgid "Did it error with ``Error: That username is already taken.``? Then try::"
-#~ msgstr "Kwam er een foutmelding met ``Error: That username is already taken.``? Probeer dan::"
 
-#~ msgid "The user should be created (or its password should be reset)."
-#~ msgstr "De gebruiker is nu aangemaakt (of het wachtwoord is bijgewerkt)."
 
-#~ msgid "Docker installation"
-#~ msgstr "Docker-installatie"
 
-#~ msgid "The ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` :doc:`as defined in Env Settings<./env-settings>` will be used for the credentials."
-#~ msgstr "De ``DSMRREADER_ADMIN_USER`` en ``DSMRREADER_ADMIN_PASSWORD`` :doc:`zoals gespecificeerd in Env-instellingen<./env-settings>` worden gebruikt als inloggegevens."
 
-#~ msgid "Creating or updating credentials:"
-#~ msgstr "Inloggegevens aanmaken of bijwerken:"
 
-#~ msgid "Configure ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` of the :doc:`Env Settings<./env-settings>`."
-#~ msgstr "Configureer ``DSMRREADER_ADMIN_USER`` en ``DSMRREADER_ADMIN_PASSWORD`` van de :doc:`Env-instellingen<./env-settings>`."
 
-#~ msgid "The user should now either be created or the existing user should have its password updated."
-#~ msgstr "De gebruiker is nu ofwel aangemaakt ofwel het wachtwoord is bijgewerkt."
 
-#~ msgid "Database"
-#~ msgstr "Database"
 
-#~ msgid "How do I resolve the warning regarding database size?"
-#~ msgstr "Hoe los ik de waarschuwing op m.b.t. de databasegrootte?"
 
-#~ msgid "You will need to reduce the amount of incoming data and also enable a data retention policy."
-#~ msgstr "Je zult de hoeveelheid inkomende gegevens moeten beperken en tevens een dataretentiebeleid moeten instellen."
 
-#~ msgid "First increase the datalogger sleep in the configuration panel. Make sure it's at least 5 or 10 seconds."
-#~ msgstr "Verhoog allereest de datalogger-sleep in het configuratiepaneel. Zet deze op tenminste 5 a 10 seconden."
 
-#~ msgid "Secondly, enable data retention policy in the configuration as well. A recommended setting is having DSMR-reader clean up data after a week or month."
-#~ msgstr "Daarnaast zul je een dataretentiebeleid moeten instellen in het configuratiepaneel. Een aanbevolen instelling is om DSMR-reader na een week of maand de gegevens te laten opschonen."
 
-#~ msgid "After a few hours or days (depending on your hardware) the data should been reduced. Depending on the amount of data deleted, you might want to execute a one-time ``vacuumdb`` afterwards. See below for more information."
-#~ msgstr "Na verloop van tijd (enkele uren tot dagen, afhankelijk van je hardware) zou de data opgeschoond moeten zijn. Afhankelijk van de hoeveelheid verwijderde metingen, kun je overwegen om daarna eenmalig een ``vacuumdb`` uit te voeren. Zie hieronder voor meer informatie."
 
-#~ msgid "How do I reclaim database disk space?"
-#~ msgstr "Hoe krijg ik schijfruimte terug?"
 
-#~ msgid "This will only make a difference if you've enabled data cleanup retroactively, resulting in roughly more than a 25 percent data deletion of your entire database."
-#~ msgstr "Dit gaat alleen een verschil maken wanneer je dataopschoning met terugwerkende kracht hebt ingeschakeld, waardoor grofweg meer dan 25 procent van de gegevens in je database zijn verwijderd."
 
-#~ msgid "Assuming you are using the default database, PostgreSQL, you may want to try a one-time vacuum by executing::"
-#~ msgstr "Er vanuitgaande dat je de standaarddatabase gebruikt, PostgreSQL, kun je het volgende eenmalig uitvoeren::"
 
-#~ msgid "If there was any disk space to reclaim, the effect should be visible on the filesystem now."
-#~ msgstr "Mocht er schijfruimte vrij te maken zijn, dan zou je dat nu moeten zien op het bestandssysteem."
 
-#~ msgid "How do I change the database location?"
-#~ msgstr "Hoe verplaats ik de databaseopslag?"
 
-#~ msgid "Changing the database data location may cause data corruption. Only execute the step below if you understand exactly what you are doing!"
-#~ msgstr "Het wijzigen van de dataopslag breng het gevaar van datacorruptie met zich mee. Voer onderstaande stappen alleen uit als je begrijpt wat je doet!"
 
-#~ msgid "Since the SD-card is quite vulnerable to wearing and corruption, you can run the database on a different disk or USB-stick. To do this, you will have to stop the application and database, change the database configuration, move the data and restart all processes again."
-#~ msgstr "Gezien de SD-kaart gevoelig is voor slijtage en corruptie, kun je ervoor kiezen om de database op een andere disk of USB-stick te draaien. Om dit te realiseren zul je de applicatie en database moeten stoppen, de databaseconfiguratie aanpassen, dataopslag verplaatsen en alles weer opstarten."
 
-#~ msgid "Make sure the OS has direct access the new location and **create a back-up first**!"
-#~ msgstr "Zorg ervoor dat het OS toegang heeft tot de nieuwe locatie en **maak eerst een back-up**!"
 
-#~ msgid "In the example below we will move the data from ``/var/lib/postgresql/`` to ``/data/postgresql/`` (which could be an external mount)."
-#~ msgstr "In onderstaand voorbeeld verplaatsen we de dataopslag van  ``/var/lib/postgresql/`` naar ``/data/postgresql/`` (wat bijvoorbeeld op een externe disk zou kunnen zijn)."
 
-#~ msgid "*Please note that \"9.5\" in the example below is just the version number of the database, and it may differ from your installation. The same steps however apply.*"
-#~ msgstr "*N.B.: \"9.5\" in onderstaand voorbeeld is slechts het versienummer van de database en kan afwijken van je eigen situatie. Je kunt echter gewoon dezelfde stappen uitvoeren.*"
 
-#~ msgid "Execute the commands below:"
-#~ msgstr "Voer de onderstaande commando's uit:"
 
-#~ msgid "Stop DSMR-reader: ``sudo supervisorctl stop all``"
-#~ msgstr "Stop DSMR-reader: ``sudo supervisorctl stop all``"
 
-#~ msgid "Stop database: ``sudo systemctl stop postgresql``"
-#~ msgstr "Stop database: ``sudo systemctl stop postgresql``"
 
-#~ msgid "Confirm that the database has stopped, you should see no more ``postgresql`` processes running: ``sudo ps faux | grep postgres``"
-#~ msgstr "Controleer dat de database gestopt is, je zou geen processen meer moeten zien van ``postgresql`` met:  ``sudo ps faux | grep postgres``"
 
-#~ msgid "Ensure the new location exists: ``sudo mkdir /data/postgresql/``"
-#~ msgstr "Zorg ervoor dat de nieuwe locatie bestaat: ``sudo mkdir /data/postgresql/``"
 
-#~ msgid "Move the database data folder: ``sudo mv /var/lib/postgresql/9.5/ /data/postgresql/9.5/``"
-#~ msgstr "Verplaats nu de gehele data-map van de database: ``sudo mv /var/lib/postgresql/9.5/ /data/postgresql/9.5/``"
 
-#~ msgid "Make sure the ``postgres`` user has access to the new location (and any parent folders in it's path): ``sudo chown -R postgres:postgres /data/``"
-#~ msgstr "Zorg ervoor dat de ``postgres`` gebruiker toegang heeft tot de nieuwe locatie (en eventuele bovenliggende mappen in het pad): ``sudo chown -R postgres:postgres /data/``"
 
-#~ msgid "Edit database configuration ``sudo vi /etc/postgresql/9.5/main/postgresql.conf`` and find the line::"
-#~ msgstr "Open de databaseconfiguratie met ``sudo vi /etc/postgresql/9.5/main/postgresql.conf`` en vind de volgende regel::"
 
-#~ msgid "Change it to your new location::"
-#~ msgstr "Wijzig het naar de nieuwe locatie::"
 
-#~ msgid "Save the file and start the database: ``sudo systemctl start postgresql``"
-#~ msgstr "Sla het bestand op en start de database weer: ``sudo systemctl start postgresql``"
 
-#~ msgid "Check whether the database is running again, you should see multiple processes: ``sudo ps faux | grep postgres``"
-#~ msgstr "Controleer of de database weer draait, je zou nu meerdere processen moeten zien:  ``sudo ps faux | grep postgres``"
 
-#~ msgid "Does the database not start? Check its logs in ``/var/log/postgresql/`` for hints."
-#~ msgstr "Wil de database niet starten? Bekijk dan de logs in  ``/var/log/postgresql/`` voor hints."
 
-#~ msgid "Start DSMR-reader again: ``sudo supervisorctl start all``"
-#~ msgstr "Start DSMR-reader weer met: ``sudo supervisorctl start all``"
 
-#~ msgid "Everything should work as usual now, storing the data on the new location."
-#~ msgstr "Alles zou weer moeten werken zoals voorheen, met de data voortaan op een andere locatie."
 
-#~ msgid "How do I enable MySQL timezone support?"
-#~ msgstr "Hoe zet ik tijdzone-ondersteuning aan voor MySQL?"
 
-#~ msgid "`Check these docs <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql.html>`_ for more information about how to enable timezone support on MySQL."
-#~ msgstr "`Zie deze documentatie <https://dev.mysql.com/doc/refman/5.7/en/mysql-tzinfo-to-sql.html>`_ over hoe je tijdzone-ondersteuning inschakelt op MySQL."
 
-#~ msgid "On recent versions it should be as simple as executing the following command as root/sudo user::"
-#~ msgstr "Op recente versies kun je simpelweg het volgende commando als root/sudo-gebruiker uitvoeren::"
 
-#~ msgid "How do I restore a backup?"
-#~ msgstr "Hoe zet ik een back-up terug?"
 
-#~ msgid "Only follow these step if you want to restore a backup in PostgreSQL."
-#~ msgstr "Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt terugzetten."
 
-#~ msgid "Restoring a backup will replace any existing data stored in the database and is irreversible!"
-#~ msgstr "Het terugzetten van een back-up overschrijft alle bestaande data en is onomkeerbaar!"
 
-#~ msgid "This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::"
-#~ msgstr "Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt::"
 
-#~ msgid "Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way."
-#~ msgstr "Zet **niet** je database terug wanneer je ofwel **de applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt uitgevoerd."
 
-#~ msgid "Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point."
-#~ msgstr "Doorgaan zorgt er gegarandeerd voor dat er problemen komen met dubbele gegevens/ID's op een bepaald moment."
 
-#~ msgid "To be clear, we'll repeat it once again:"
-#~ msgstr "On glashelder te zijn, herhalen we:"
 
-#~ msgid "Compressed (default)"
-#~ msgstr "Gecomprimeerd (standaard)"
 
-#~ msgid "To restore a compressed backup (``.gz``), run::"
-#~ msgstr "Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
 
-#~ msgid "Uncompressed (legacy)"
-#~ msgstr "Ongecomprimeerd (legacy)"
 
-#~ msgid "To restore an uncompressed backup (``.sql``), run::"
-#~ msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
 
-#~ msgid "Result"
-#~ msgstr "Resultaat"
 
-#~ msgid "You should **not** see any errors regarding duplicate data or existing ID's or whatever."
-#~ msgstr "Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's of iets soortgelijks."
 
-#~ msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at GitHub and **do not continue**."
-#~ msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op GitHub en **ga niet verder**."
 
-#~ msgid "How do I transfer day and hour statistics from a previous installation?"
-#~ msgstr "Hoe zet ik dag- en uurstatistieken over van een vorige installatie?"
 
-#~ msgid "This will only work if you have access to both the previous database and the one you're using now."
-#~ msgstr "Dit werkt alleen wanneer je toegang hebt tot zowel de oude als nieuwe database (die je nu gebruikt)."
 
-#~ msgid "Execute on your old system/database::"
-#~ msgstr "Voer uit op je oude systeem/database::"
 
-#~ msgid "Transfer the files created above to your new system/database::"
-#~ msgstr "Zet de bestanden, die je hierboven hebt gemaakt, over naar je nieuwe systeem/database::"
 
-#~ msgid "Execute on your new system/database::"
-#~ msgstr "Voer uit op je nieuwe systeem/database::"
 
-#~ msgid "If there is any collision with dates or hours in your new database, you will see an error."
-#~ msgstr "Mochten er in je nieuwe database datums of uren botsen, dan krijg je daar een fout van."
 
-#~ msgid "Common error resolution"
-#~ msgstr "Oplossingen voor veelvoorkomende fouten"
 
-#~ msgid "How do I fix: ``Error: Already running on PID 1234``?"
-#~ msgstr "Hoe los ik ``Error: Already running on PID 1234`` op?"
 
-#~ msgid "If you're seeing this error::"
-#~ msgstr "Als je deze fout ziet::"
 
-#~ msgid "Just delete the PID file and restart the webinterface::"
-#~ msgstr "Verwijder het genoemde PID-bestand en herstart de webinterface::"
 
-#~ msgid "How do I fix stats after smart meter replacement?"
-#~ msgstr "Hoe herstel ik gegevens na een meterwissel?"
 
-#~ msgid "Sometimes, when relocating or due to replacement of your meter, the meter positions read by DSMR-reader will cause invalid data (e.g.: big gaps or inverted consumption). Any consecutive days should not be affected by this issue, so you will only have to adjust the data for one day."
-#~ msgstr "Het komt soms voor dat, door verhuizing of technische vervanging van je meter, deze meterstanden in DSMR-reader voor afwijkingen en onjuiste gegevens zorgen (bijv.: grote gaten of negatief verbruik). Dit komt alleen voor bij de dag zelf en niet bij de dagen erna. Daarom zul je de gegevens van de foutieve dag zelf moeten aanpassen."
 
-#~ msgid "The day after, you should be able to manually adjust any invalid Day or Hour Statistics :doc:`in the admin interface<../tutorial/configuration>` for the invalid day."
-#~ msgstr "De dag erna kun je dit zelf weer rechtzetten via de Dag- of Uurtotalen, :doc:`in de admin-configuratie<../tutorial/configuration>`, voor de betreffende dag."
 
-#~ msgid "How do I fix my smart meter reporting invalid dates?"
-#~ msgstr "Wat moet ik doen als mijn slimme meter verkeerde datums rapporteert?"
 
-#~ msgid "There are some rare cases of smart meters sending telegrams with a timestamp in the past or future. This varies from several days to even months."
-#~ msgstr "Er zijn zeldzame gevallen bekend waarbij slimme meters telegrammen versturen met een tijdstip ver in de toekomst of het verleden. Dit varieert van elkele dagen tot zelfs maanden."
 
-#~ msgid "First, you will need to report this to the supplier responsible for (placing) your smart meter. They might be able to fix it remotely or on site. Or even replace you meter completely (up to them to decide)."
-#~ msgstr "Allereerst kun je dit melden bij de partij die verantwoordelijk is voor je slimme meter (doorgaans de netbeheerder). Deze kan je probleem mogelijk op afstand op lossen of moet ter plekke komen. In het ergste geval vervangen ze de meter, maar dat is helemaal aan hen om te beslissen wat te doen."
 
-#~ msgid "Until then, you can enable the \"Override telegram timestamp\" option in the datalogger configuration."
-#~ msgstr "Tot die tijd kun je het probleem omzeilen met de \"Overschrijf tijdstip van telegrammen\" optie in de dataloggerconfiguratie."
 
-#~ msgid "**Be advised**: Do **not** enable this option to fix any **small timestamp offset** your smart meter has (let's say, up to a few minutes). As it's only meant as a last resort for the situation described above and may cause side effects."
-#~ msgstr "**Let op**: Schakel deze optie **niet in** om een klein verschil in tijd te repareren (als in tot enkele minuten). Deze optie is alleen bedoeld als laatste mogelijkheid voor bovenstaande situatie en kan zorgen voor (ongewenste) bijwerkingen."
 
-#~ msgid "Data"
-#~ msgstr "Data"
 
-#~ msgid "By default DSMR-reader reads and preserves all telegram data read."
-#~ msgstr "Standaard bewaart DSMR-reader alle ingelezen telegrammen."
 
-#~ msgid "When using a Raspberry Pi (or similar) combined with a DSMR version 5 smart meter (the default nowadays), you may experience issues after a while."
-#~ msgstr "Wanneer je een Raspberry Pi (of soortgelijk appartaat) gebruikt, samen met een DSMR versie 5 slimme meter (wordt vandaag de dag standaard geleverd), dan kun je na verloop van tijd problemen ervaren."
 
-#~ msgid "This is caused by the high data throughput of DSMR version 5, which produces a new telegram every second. Both DSMR-reader and most of its users do not need this high frequency of telegrams to store, calculate and plot consumption data."
-#~ msgstr "Dit wordt veroorzaak door de hoge gegevensdoorvoer van DSMR versie 5, wat elke seconde voor een nieuw telegram zorgt. Zowel DSMR-reader als het meerendeel van de gebruikers hebben deze hoge frequentie echter niet nodig voor de opslag, analyze en tonen van verbruiksgegevens."
 
-#~ msgid "Therefor two measures can be taken: Increasing datalogger sleep and data retention policy."
-#~ msgstr "HIervoor kunnen twee maatregelen genomen worden: Verhogen van de datalogger-sleep en het instellen van een retentiebeleid."
 
-#~ msgid "How can I increase the datalogger sleep time?"
-#~ msgstr "Hoe verhoog ik de slaaptijd van de datalogger?"
 
-#~ msgid "Increase the datalogger sleep time :doc:`in the configuration<../tutorial/configuration>` to 5 seconds or higher. This will save a lot of disk storage, especially when using a Raspberry Pi SD card, usually having a size of 16 GB max."
-#~ msgstr "Verhoog de slaaptijd van de datalogger :doc:`binnen de configuratie<../tutorial/configuration>` naar minimaal 5 seconden. Dit bespaart een hoop schijfruimte, met name wanneer je een standaard Raspberry Pi SD-kaart gebruikt, die meestal maximaal 16 GB groot zijn."
 
-#~ msgid "How can I configure a data retention policy?"
-#~ msgstr "Hoe stel ik een gegevensretentiebeleid in?"
 
-#~ msgid "Configure a data retention policy :doc:`in the configuration<../tutorial/configuration>`. This will eventually delete up to 99 percent of the telegrams, always preserving a few historically. Also, day and hour totals are **never** deleted by retention policies."
-#~ msgstr " Stel een gegevensretentiebeleid in :doc:`binnen de configuratie<../tutorial/configuration>`. Dit schoont uiteindelijk tot 99 procent van de telegrammen op, waarbij een aantal altijd achterblijven i.v.m. historie. Daarnaast worden uur- en dagtotalen **nooit** opgeschoond door het retentiebeleid."
 
-#~ msgid "I'm missing gas readings?"
-#~ msgstr "Ik mis gasverbruik?"
 
-#~ msgid "Please make sure that your meter supports reading gas consumption and that you've waited for a few hours for any graphs to render. The gas meter positions are only be updated once per hour (for DSMR v4). The Status page will give you insight in this as well."
-#~ msgstr "Wees er allereerst zeker van dat je slimme meter uberhaupt gasverbruik registreert, en dat je een paar uur hebt gewacht. De gasmeterstanden worden sowieso slechts een keer per uur bijgewerkt (voor DSMR v4). De Status-pagina geeft je hier overigens ook inzicht in."
 
-#~ msgid "How do I only use the datalogger?"
-#~ msgstr "Hoe gebruik ik alleen de datalogger?"
 
-#~ msgid ":doc:`More information can be found here <../how-to/installation/remote-datalogger>`."
-#~ msgstr ":doc:`Meer informatie kun je hier terugvinden<../how-to/installation/remote-datalogger>`."
 
-#~ msgid "Prices"
-#~ msgstr "Prijzen"
 
-#~ msgid "How do I recalculate prices retroactively?"
-#~ msgstr "Hoe kan ik prijzen met terugwerkende kracht herberekenen?"
 
-#~ msgid "I've adjusted my energy prices but there are no changes! How can I regenerate them with my new prices?"
-#~ msgstr "Ik heb zojuist mijn energieprijzen aangepast, maar ik zie geen verschil! Hoe kan ik de nieuwe prijzen doorvoeren?"
 
-#~ msgid "Execute::"
-#~ msgstr "Voer uit::"
 
-#~ msgid "Support"
-#~ msgstr "Ondersteuning"
 
-#~ msgid "I still need help!"
-#~ msgstr "Ik heb nog steeds hulp nodig!"
 
-#~ msgid "If you can't find the answer in the documentation, do not hesitate in looking for help."
-#~ msgstr "Wanneer je de oplossing niet kan vinden in de documentatie, aarzel dan vooral niet om om hulp te vragen."
 
-#~ msgid "`View existing GitHub issues or create a new one <https://github.com/dsmrreader/dsmr-reader/issues>`_"
-#~ msgstr "`Bekijk bestaande issues op GitHub of maak een nieuwe aan <https://github.com/dennissiemensma/dsmr-reader/issues>`_."
