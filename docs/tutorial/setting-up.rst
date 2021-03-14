@@ -10,13 +10,14 @@ Accessing
 ---------
 Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser. 
 
-Did you install using a monitor attached to the RaspberryPi and you don't know what address your device has? Just type ``ifconfig | grep addr`` and it should display an ip address, for example::
+Did you install using a monitor attached to the RaspberryPi and you don't know what address your device has? Just type ``ip a | grep inet`` and it should display an ip address, for example::
 
-    eth0      Link encap:Ethernet  HWaddr b8:27:eb:f4:24:de  
-              inet addr:192.168.178.150  Bcast:192.168.178.255  Mask:255.255.255.0
-              inet addr:127.0.0.1  Mask:255.0.0.0
+    inet 127.0.0.1/8 scope host lo
+    inet6 ::1/128 scope host
+    inet 192.168.1.40/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
+    inet6 fe80::7a20:a7c3:66d4:a7b8/64 scope link
 
-In this example the ip address is ``192.168.178.150``. If possible, you should assign a static ip address to your device in your router. This will make sure you will always be able to find the application at the same location.
+In this example the ip address is ``192.168.178.40``. If possible, you should assign a static ip address to your device in your router. This will make sure you will always be able to find the application at the same location.
 
 
 Reboot test

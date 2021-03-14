@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2021-03-14 13:52+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -189,7 +188,7 @@ msgstr "Alle (externe) afhankelijkheden worden opgeslagen in een aparte omgeving
 
 #: ../../tutorial/installation/step-by-step.rst:147
 msgid "Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine. `More information about this subject can be found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
-msgstr "Dit is allemaal erg handig, ondanks dat het feitelijk niets meer voorstelt dan een aparte map binnen de homedir van onze gebruiker. Hierdoor kunnen we namelijk meerdere versie van software op hetzelfde systeem installeren, zonder dat dat elkaar bijt. Meer informatie hierover `kan hier gevonden worden <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
+msgstr "Dit is allemaal erg handig, ondanks dat het feitelijk niets meer voorstelt dan een aparte map binnen de homedir van onze gebruiker. Hierdoor kunnen we namelijk meerdere versies software tegelijkertijd op hetzelfde systeem installeren, zonder dat dat elkaar bijt. Meer informatie hierover `kan hier gevonden worden <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_."
 
 #: ../../tutorial/installation/step-by-step.rst:150
 msgid "Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"

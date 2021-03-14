@@ -10,7 +10,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
-"POT-Creation-Date: \n"
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../explained/about.rst:2
