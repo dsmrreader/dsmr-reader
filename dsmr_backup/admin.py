@@ -26,8 +26,8 @@ class BackupSettingsAdmin(SingletonModelAdmin):
             None, {
                 'fields': ['daily_backup', 'backup_time'],
                 'description': _(
-                    'Detailed instructions for restoring a backup can be found here: <a href="https://dsmr-reader.readt'
-                    'hedocs.io/nl/v4/faq.html#how-do-i-restore-a-database-backup">FAQ in documentation</a>.'
+                    'Detailed instructions for restoring a backup can be found here <a href="https://dsmr-reader.readt'
+                    'hedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html">in documentation</a>.'
                 )
             }
         ),
@@ -50,7 +50,7 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
                 'fields': ['access_token'],
                 'description': _(
                     'This will synchronize backups to your Dropbox account. Detailed instructions for configuring '
-                    'Dropbox can be found here: <a href="https://dsmr-reader.readthedocs.io/nl/v4/admin/'
+                    'Dropbox can be found here: <a href="https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/'
                     'backup_dropbox.html">Documentation</a>'
                 )
             }

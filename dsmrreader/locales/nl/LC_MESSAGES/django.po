@@ -222,11 +222,11 @@ msgstr "Optioneel: Bekijk hier je instellingen voor het versturen van back-ups p
 msgid "Send test email"
 msgstr "Stuur een test e-mail"
 
-msgid "Detailed instructions for restoring a backup can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentation</a>."
-msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html#how-do-i-restore-a-database-backup\">FAQ in documentatie</a>."
+msgid "Detailed instructions for restoring a backup can be found here <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html\">in documentation</a>."
+msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html\">FAQ in documentatie</a>."
 
-msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/backup_dropbox.html\">Documentation</a>"
-msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/backup_dropbox.html\">Documentatie</a>"
+msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/backup_dropbox.html\">Documentation</a>"
+msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/backup_dropbox.html\">Documentatie</a>"
 
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
@@ -522,8 +522,8 @@ msgstr "voor hoe je dit kan doen."
 msgid "Input method and DSMR protocol"
 msgstr "Uitleesmethode en DSMR-protocol"
 
-msgid "The datalogger process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
-msgstr "Het datalogger-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
+msgid "The datalogger process should automatically restart to apply changes."
+msgstr "Het datalogger-proces zou automatisch moeten herstarten om de wijzigingen door te voeren."
 
 msgid "When using serial socket input method"
 msgstr "Voor uitlezen via een seriële poort"
@@ -1688,8 +1688,8 @@ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
 msgid "Electricity tariff ratio (past month)"
 msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
 
-msgid "The backend process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
-msgstr "Het backend-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
+msgid "The backend process should automatically restart to apply changes."
+msgstr "Het backend-proces zou automatisch moeten herstarten om de wijzigingen door te voeren."
 
 msgid "Mapping"
 msgstr "Mapping"
@@ -1778,8 +1778,8 @@ msgstr "Daarnaast, wegens (geheugen) limieten moeten de gegevens in batches gesy
 msgid "You will need to keep executing the command untill there is no more data to sync. The progress will be stored in InfluxDB in an \"export_progress_meta\" measurement. See <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\">Issue #1055</a> for more details and tips on how to easily automate this."
 msgstr "Exporteer altijd eerst naar een aparte InfluxDB -database en bekijk het resultaat. Er is geen detectie voor dubbele bestaande data (behalve de export zelf), dus overweeg om na afloop te wisselen van actieve InfluxDB-database. Zie <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\">Issue #1055</a> voor meer informatie en ook tips hoe de export deels te automatiseren is."
 
-msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/mindergas.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/mindergas.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/mindergas.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/mindergas.html\">Documentatie</a>"
 
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
@@ -2084,8 +2084,8 @@ msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broke
 msgid "(Data source) Telegram: Split topic"
 msgstr "(Databron) Telegram: Gesplitst topic"
 
-msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/notifications.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/admin/notifications.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/notifications.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/notifications.html\">Documentatie</a>"
 
 msgid "Only applies when using Pushover"
 msgstr "Alleen van toepassing voor Pushover"
@@ -2584,6 +2584,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "The datalogger process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
+#~ msgstr "Het datalogger-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
+
+#~ msgid "The backend process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
+#~ msgstr "Het backend-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
 
 #~ msgid "Waiting for the next PVOutput export to be executed"
 #~ msgstr "Wachten op de volgende PVOutput-export die uitgevoerd moet worden"
