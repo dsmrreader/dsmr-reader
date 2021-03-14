@@ -1,5 +1,5 @@
-Third party integration: Home Assistant
-#######################################
+Installation: Using Home Assistant
+==================================
 
 There is some third party support for Home Assistant. This may ease any integrations between DSMR-reader and Home Assistant.
 

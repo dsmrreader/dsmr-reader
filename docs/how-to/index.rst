@@ -5,10 +5,10 @@ How to's
    :maxdepth: 1
 
    installation/quick
-   third-party/docker
-   installation/uninstalling
-   third-party/home-assistant
+   installation/using-docker
    installation/remote-datalogger
+   installation/using-home-assistant
+   installation/uninstalling
    upgrading/upgrade
    upgrading/downgrade
 

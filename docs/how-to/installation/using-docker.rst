@@ -1,5 +1,7 @@
-Third party integration: Docker installation
-############################################
+Installation: Using Docker
+==========================
+
+You can install and run DSMR-reader using Docker. See this third party project for more information.
 
 +------------+------------------------------------------------------+
 | Author     | ``xirixiz`` (Bram van Dartel)                        |

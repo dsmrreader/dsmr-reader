@@ -12,26 +12,26 @@ msgstr ""
 "Generated-By: Babel 2.9.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../how-to/third-party/home-assistant.rst:2
-msgid "Third party integration: Home Assistant"
-msgstr "Third party integratie: Home Assistant"
+#: ../../how-to/installation/using-home-assistant.rst:2
+msgid "Installation: Using Home Assistant"
+msgstr "Installatie: Via Home Assistant"
 
-#: ../../how-to/third-party/home-assistant.rst:4
+#: ../../how-to/installation/using-home-assistant.rst:4
 msgid "There is some third party support for Home Assistant. This may ease any integrations between DSMR-reader and Home Assistant."
 msgstr "Er is ondersteuning voor Home Assistant via derde partijen. Dit versimpelt de integratie tussen DSMR-reader en Home Assistant."
 
-#: ../../how-to/third-party/home-assistant.rst:7
+#: ../../how-to/installation/using-home-assistant.rst:7
 msgid "Integrations"
 msgstr "Integraties"
 
-#: ../../how-to/third-party/home-assistant.rst:8
+#: ../../how-to/installation/using-home-assistant.rst:8
 msgid "`DSMR-reader sensor via MQTT <https://www.home-assistant.io/integrations/dsmr_reader/>`__ (third party, by Wim Haanstra)"
 msgstr "`DSMR-reader sensor via MQTT <https://www.home-assistant.io/integrations/dsmr_reader/>`__ (derde partij, door Wim Haanstra)"
 
-#: ../../how-to/third-party/home-assistant.rst:12
+#: ../../how-to/installation/using-home-assistant.rst:12
 msgid "Add-ons"
 msgstr "Add-ons"
 
-#: ../../how-to/third-party/home-assistant.rst:13
+#: ../../how-to/installation/using-home-assistant.rst:13
 msgid "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (third party, by Sander de Wildt)"
 msgstr "`DSMR-reader & remote datalogger <https://github.com/sanderdw/hassio-addons>`__ (derde partij, door Sander de Wildt)"

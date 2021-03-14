@@ -17,34 +17,41 @@ msgstr ""
 "Generated-By: Babel 2.9.0\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: ../../how-to/third-party/docker.rst:2
-msgid "Third party integration: Docker installation"
-msgstr "Third party integratie: Installatie via Docker"
+#: ../../how-to/installation/using-docker.rst:2
+msgid "Installation: Using Docker"
+msgstr "Installatie: Via Docker"
 
-#: ../../how-to/third-party/docker.rst:5
+#: ../../how-to/installation/using-docker.rst:4
+msgid "You can install and run DSMR-reader using Docker. See this third party project for more information."
+msgstr ""
+
+#: ../../how-to/installation/using-docker.rst:7
 msgid "Author"
 msgstr "Auteur"
 
-#: ../../how-to/third-party/docker.rst:5
+#: ../../how-to/installation/using-docker.rst:7
 msgid "``xirixiz`` (Bram van Dartel)"
 msgstr "``xirixiz`` (Bram van Dartel)"
 
-#: ../../how-to/third-party/docker.rst:7
+#: ../../how-to/installation/using-docker.rst:9
 msgid "GitHub"
 msgstr "GitHub"
 
-#: ../../how-to/third-party/docker.rst:7
+#: ../../how-to/installation/using-docker.rst:9
 msgid "https://github.com/xirixiz/dsmr-reader-docker"
 msgstr "https://github.com/xirixiz/dsmr-reader-docker"
 
-#: ../../how-to/third-party/docker.rst:9
+#: ../../how-to/installation/using-docker.rst:11
 msgid "Docker Hub"
 msgstr "Docker Hub"
 
-#: ../../how-to/third-party/docker.rst:9
+#: ../../how-to/installation/using-docker.rst:11
 msgid "https://hub.docker.com/r/xirixiz/dsmr-reader-docker/"
 msgstr "https://hub.docker.com/r/xirixiz/dsmr-reader-docker/"
 
-#: ../../how-to/third-party/docker.rst:15
+#: ../../how-to/installation/using-docker.rst:17
 msgid ":doc:`Finished? Go to setting up the application</tutorial/setting-up>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen</tutorial/setting-up>`."
+
+#~ msgid "Third party integration: Docker installation"
+#~ msgstr "Third party integratie: Installatie via Docker"
