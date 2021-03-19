@@ -23,7 +23,7 @@ v4.14.0 - 2021-xx-xx
 - ``Changed``: Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]
 
 - ``Fixed``: Dashboard responsiveness verbeteren op kleine schermen [`#1320 <https://github.com/dsmrreader/dsmr-reader/issues/1320>`_]
-
+- ``Fixed``: Verbruik en teruglevering tegelijkertijd tonen [`#1324 <https://github.com/dsmrreader/dsmr-reader/issues/1324>`_]
 
 
 v4.13.0 - 2021-03-09

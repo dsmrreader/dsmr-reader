@@ -10,13 +10,8 @@ function update_consumption_header()
         $("#latest_timestamp").html(response.timestamp);
         $("#tariff_name").html(response.tariff_name);
 
-        if (response.currently_returned > 0) {
-            $("#latest_electricity").html('').hide();
-            $("#latest_electricity_returned").html('-' + response.currently_returned).show();
-        } else {
-            $("#latest_electricity").html(response.currently_delivered).show();
-            $("#latest_electricity_returned").html('').hide();
-        }
+        $("#latest_electricity_returned").html('-' + response.currently_returned);
+        $("#latest_electricity_delivered").html(response.currently_delivered);
 
         if (response.cost_per_hour)
         {

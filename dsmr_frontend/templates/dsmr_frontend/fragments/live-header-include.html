@@ -1,7 +1,6 @@
 {% load i18n %}
 {% load l10n %}
 
-
 <div class="row">
     <div class="col-sm-12">
         <div class="panel">
@@ -20,10 +19,15 @@
                             </span>
                             <span class="unit" id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
                         </th>
-                        <th class="col-sm-4">
+                        <th class="col-sm-2">
                             {% if capabilities.electricity %}
-                                <span class="badge bg-red" id="latest_electricity"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
-                                <span class="badge bg-green" id="latest_electricity_returned"></span>
+                                <span class="badge bg-red" id="latest_electricity_delivered"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
+                                <span class="unit">{% translate "W" %}</span>
+                            {% endif %}
+                        </th>
+                        <th class="col-sm-2">
+                            {% if capabilities.electricity_returned %}
+                                <span class="badge bg-green" id="latest_electricity_returned"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
                                 <span class="unit">{% translate "W" %}</span>
                             {% endif %}
                         </th>

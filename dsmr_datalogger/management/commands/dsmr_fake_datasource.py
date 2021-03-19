@@ -101,31 +101,21 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         electricity_2_returned = 0
         gas = electricity_base * 0.3  # Random as well.
 
-        currently_delivered_l1 = random.randint(0, 1500) * 0.001  # kW
+        # Delivered and returned MAY be used simultaneously
+        currently_delivered_l1 = random.randint(0, 500) * 0.001  # kW
         currently_delivered_l2 = random.randint(0, 1500) * 0.001  # kW
-        currently_delivered_l3 = random.randint(0, 1500) * 0.001  # kW
+        currently_delivered_l3 = random.randint(0, 750) * 0.001  # kW
         currently_delivered = currently_delivered_l1 + currently_delivered_l2 + currently_delivered_l3
-        currently_returned_l1 = 0
-        currently_returned_l2 = 0
-        currently_returned_l3 = 0
-        currently_returned = 0
+        currently_returned_l1 = random.randint(0, 500) * 0.001  # kW
+        currently_returned_l2 = random.randint(0, 1500) * 0.001  # kW
+        currently_returned_l3 = random.randint(0, 750) * 0.001  # kW
+        currently_returned = currently_returned_l1 + currently_returned_l2 + currently_returned_l3
         phase_voltage_l1 = random.randint(228, 232)
         phase_voltage_l2 = random.randint(228, 232)
         phase_voltage_l3 = random.randint(228, 232)
         phase_power_current_l1 = random.randint(5, 8)
         phase_power_current_l2 = random.randint(2, 3)
         phase_power_current_l3 = random.randint(0, 1)
-
-        # Randomly switch between electricity delivered and returned each 5 seconds for a more 'realistic' graph.
-        if with_electricity_returned and second_since % 10 < 5:
-            currently_returned = currently_delivered
-            currently_returned_l1 = currently_delivered_l1
-            currently_returned_l2 = currently_delivered_l2
-            currently_returned_l3 = currently_delivered_l3
-            currently_delivered_l1 = 0
-            currently_delivered_l2 = 0
-            currently_delivered_l3 = 0
-            currently_delivered = 0
 
         data = [
             "/XMX5LGBBFFB123456789\r\n",
