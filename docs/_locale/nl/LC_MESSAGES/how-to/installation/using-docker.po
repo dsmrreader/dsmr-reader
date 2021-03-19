@@ -23,7 +23,7 @@ msgstr "Installatie: Via Docker"
 
 #: ../../how-to/installation/using-docker.rst:4
 msgid "You can install and run DSMR-reader using Docker. See this third party project for more information."
-msgstr ""
+msgstr "Je kunt DSMR-reader installeren en draaien met Docker. Zie hiervoor dit project wat gemaakt en onderhouden wordt door een derde partij."
 
 #: ../../how-to/installation/using-docker.rst:7
 msgid "Author"

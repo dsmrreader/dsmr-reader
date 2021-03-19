@@ -17,7 +17,7 @@ class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
         context_data['datalogger_settings'] = DataloggerSettings.get_solo()
         context_data['frontend_settings'] = FrontendSettings.get_solo()
         context_data['notification_count'] = Notification.objects.unread().count()
-        context_data['today_date_format'] = 'DSMR_GRAPH_LONG_DATE_FORMAT'
+        context_data['today_date_format'] = 'DSMR_DATEPICKER_DAY'
         context_data['month_date_format'] = 'DSMR_DATEPICKER_MONTH'
         context_data['year_date_format'] = 'DSMR_DATEPICKER_YEAR'
         context_data['period_totals'] = dsmr_stats.services.period_totals()

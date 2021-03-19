@@ -1538,17 +1538,20 @@ msgstr "Verschil"
 msgid "There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate."
 msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
 
+msgid "(total)"
+msgstr "(totaal)"
+
 msgid "No data available (yet)."
 msgstr "Nog geen gegevens beschikbaar."
 
-msgid "Based on the latest telegram received, no matter if it's still unprocessed."
-msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
+msgid "/hour"
+msgstr "/uur"
+
+msgid "Latest telegram received"
+msgstr "Laatst ontvangen telegram"
 
 msgid "W"
 msgstr "W"
-
-msgid "/hour"
-msgstr "/uur"
 
 msgid "Recent electricity consumption"
 msgstr "Recent elektriciteitsverbruik"
@@ -2585,6 +2588,9 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Based on the latest telegram received, no matter if it's still unprocessed."
+#~ msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
+
 #~ msgid "The datalogger process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
 #~ msgstr "Het datalogger-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
 
@@ -2719,9 +2725,6 @@ msgstr "Engels"
 
 #~ msgid "Electricity 2 price (high tariff)"
 #~ msgstr "Prijs elektriciteit 2 (piektarief)"
-
-#~ msgid "(total)"
-#~ msgstr "(totaal)"
 
 #~ msgid "Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience."
 #~ msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten. De teruggeleverde kWh wordt hier alleen voor de volledigheid getoond."
