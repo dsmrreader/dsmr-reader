@@ -85,10 +85,6 @@ tr > th {
     border-top: none !important;
 }
 
-tr.live-header > th {
-    padding-bottom: 30px;
-}
-
 ul#category-suggestions > li {
     list-style-type: none;
     padding-top: 10px;
@@ -98,7 +94,10 @@ div.alert-without-padding {
     margin-bottom: 0 !important;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 768px) {
+  tr.dashboard-header > th.col-sm-6 {
+    width: 50%;
+  }
   table.table {
     font-size: 10px !important;
   }
