@@ -7,13 +7,7 @@
             <div class="panel-body">
                 <table class="table table-hover">
                     <tr class="dashboard-header">
-                        <th class="col-sm-6"><span id="tariff_name"></span></th>
-                        <th class="col-sm-2">{% if capabilities.electricity %}{% translate "Consumed" %}{% endif %}</th>
-                        <th class="col-sm-2">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
-                        <th class="col-sm-2">&euro;{% translate '/hour' %}</th>
-                    </tr>
-                    <tr>
-                        <td>
+                        <th class="col-sm-6">
                             <span>
                                 <a class="help-trigger" href="#"><small><i class="fas fa-question-circle"></i></small></a>
                                 <small class="xhr-hidden">
@@ -21,17 +15,23 @@
                                 </small>
                             </span>
                             <span class="unit" id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
+                        </th>
+                        <th class="col-sm-2">{% if capabilities.electricity %}{% translate "Consumed" %}{% endif %}</th>
+                        <th class="col-sm-2">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
+                        <th class="col-sm-2">&euro;<span class="unit">{% translate '/hour' %}</span></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span id="tariff_name"></span> <span class="unit">{% translate "Watt" %}</span>
                         </td>
                         <td>
                             {% if capabilities.electricity %}
                                 <span class="badge bg-red" id="latest_electricity_delivered"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
-                                <span class="unit">{% translate "W" %}</span>
                             {% endif %}
                         </td>
                         <td>
                             {% if capabilities.electricity_returned %}
                                 <span class="badge bg-green" id="latest_electricity_returned"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
-                                <span class="unit">{% translate "W" %}</span>
                             {% endif %}
                         </td>
                         <td>

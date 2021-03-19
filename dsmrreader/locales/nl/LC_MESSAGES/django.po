@@ -1538,20 +1538,20 @@ msgstr "Verschil"
 msgid "There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate."
 msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
 
-msgid "(total)"
-msgstr "(totaal)"
+msgid "Total electricity"
+msgstr "Totaal elektriciteit"
 
 msgid "No data available (yet)."
 msgstr "Nog geen gegevens beschikbaar."
 
-msgid "/hour"
-msgstr "/uur"
-
 msgid "Latest telegram received"
 msgstr "Laatst ontvangen telegram"
 
-msgid "W"
-msgstr "W"
+msgid "/hour"
+msgstr "/uur"
+
+msgid "Watt"
+msgstr "Watt"
 
 msgid "Recent electricity consumption"
 msgstr "Recent elektriciteitsverbruik"
@@ -1639,6 +1639,9 @@ msgstr "Hoogte- en laagte records"
 
 msgid "Highest consumption (L1+)"
 msgstr "Hoogste verbruik (L1+)"
+
+msgid "W"
+msgstr "W"
 
 msgid "Highest consumption (L2+)"
 msgstr "Hoogste verbruik (L2+)"
@@ -2587,6 +2590,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "(total)"
+#~ msgstr "(totaal)"
 
 #~ msgid "Based on the latest telegram received, no matter if it's still unprocessed."
 #~ msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
