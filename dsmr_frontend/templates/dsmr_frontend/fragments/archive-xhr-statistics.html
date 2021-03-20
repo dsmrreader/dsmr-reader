@@ -24,27 +24,27 @@
             </tr>
             {% if frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{% if capabilities.electricity %}{% translate "Electricity (single tariff)" %} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                <td>{% if capabilities.electricity %}{% translate "Electricity (single tariff)" %} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
                 <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity_merged|default:'-' }} </span>{% endif %}</td>
                 <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity_returned_merged|default:'-' }}{% endif %}</span></td>
                 <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics.electricity_cost_merged|default:'-' }}{% endif %}</span></td>
             </tr>
             {% else %}
             <tr>
-                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
                 <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity1|default:'-' }} </span>{% endif %}</td>
                 <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity1_returned|default:'-' }}{% endif %}</span></td>
                 <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics.electricity1_cost|default:'-' }}{% endif %}</span></td>
             </tr>
             <tr>
-                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
                 <td><span class="badge bg-red">{% if capabilities.electricity %}{{ statistics.electricity2|default:'-' }}{% endif %}</span></td>
                 <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ statistics.electricity2_returned|default:'-' }}{% endif %}</span></td>
                 <td><span class="badge bg-black">{% if capabilities.electricity %}{{ statistics.electricity2_cost|default:'-' }}{% endif %}</span></td>
             </tr>
             {% endif %}
             <tr>
-                <td> {% if capabilities.gas %}{% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" noop %}</span>{% endif %}</td>
+                <td> {% if capabilities.gas %}{% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" %}</span>{% endif %}</td>
                 <td><span class="badge bg-orange">{% if capabilities.gas %}{{ statistics.gas|default:'-' }}{% endif %}</span></td>
                 <td>&nbsp;</td>
                 <td><span class="badge bg-black">{% if capabilities.gas %}{{ statistics.gas_cost|default:'-' }}{% endif %}</span></td>

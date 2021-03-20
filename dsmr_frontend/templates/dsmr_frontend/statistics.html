@@ -31,18 +31,18 @@
                             <th class="col-sm-3">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
                         </tr>
                         <tr>
-                            <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span></td>
+                            <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_1|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
-                            <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span></td>
+                            <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_2|default:'-' }}{% endif %}</span></td>
                         </tr>
                         {% if latest_reading and delivered_sum %}
                         <tr>
-                            <td>{% translate "Electricity (combined)" %} <span class="unit">{% translate "kWh" noop %}</span></td>
+                            <td>{% translate "Electricity (combined)" %} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ delivered_sum|default:'-' }}</span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ returned_sum|default:'-' }}{% endif %}</span></td>
                         </tr>
@@ -50,7 +50,7 @@
 
                         {% if capabilities.gas %}
                         <tr>
-                            <td>{% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" noop %}</span></td>
+                            <td>{% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" %}</span></td>
                             <td colspan="2"><span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
@@ -81,11 +81,19 @@
                             <td>{% if meter_statistics.voltage_sag_count_l1 %}<span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l1|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage sags/dips in phase L2" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>
+                                {% translate "Number of voltage sags/dips in phase L2" %}
+                                <br>
+                                <span class="unit">{% translate "polyphase meters only" %}</span>
+                            </td>
                             <td>{% if meter_statistics.voltage_sag_count_l2 %}<span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l2|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage sags/dips in phase L3" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>
+                                {% translate "Number of voltage sags/dips in phase L3" %}
+                                <br>
+                                <span class="unit">{% translate "polyphase meters only" %}</span>
+                            </td>
                             <td>{% if meter_statistics.voltage_sag_count_l3 %}<span class="badge bg-olive">{{ meter_statistics.voltage_sag_count_l3|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
@@ -93,11 +101,19 @@
                             <td>{% if meter_statistics.voltage_swell_count_l1 %}<span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l1|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage swells in phase L2" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>
+                                {% translate "Number of voltage swells in phase L2" %}
+                                <br>
+                                <span class="unit">{% translate "polyphase meters only" %}</span>
+                            </td>
                             <td>{% if meter_statistics.voltage_swell_count_l2 %}<span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l2|default:'-' }}</span>{% endif %}</td>
                         </tr>
                         <tr>
-                            <td>{% translate "Number of voltage swells in phase L3" %} <span class="unit">{% translate "polyphase meters only" %}</span></td>
+                            <td>
+                                {% translate "Number of voltage swells in phase L3" %}
+                                <br>
+                                <span class="unit">{% translate "polyphase meters only" %}</span>
+                            </td>
                             <td>{% if meter_statistics.voltage_swell_count_l3 %}<span class="badge bg-olive">{{ meter_statistics.voltage_swell_count_l3|default:'-' }}</span>{% endif %}</td>
                         </tr>
                     </table>
@@ -118,112 +134,138 @@
                     <table class="table table-hover">
                         {% if electricity_statistics.highest_usage_l1_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Highest consumption (L1+)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-red">
-                                   {{ electricity_statistics.highest_usage_l1_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Highest usage (L1)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-red">
+                                   {{ electricity_statistics.highest_usage_l1_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
                         {% if electricity_statistics.highest_usage_l2_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Highest consumption (L2+)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-red">
-                                   {{ electricity_statistics.highest_usage_l2_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Highest usage (L2)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-red">
+                                   {{ electricity_statistics.highest_usage_l2_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
                         {% if electricity_statistics.highest_usage_l3_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Highest consumption (L3+)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-red">
-                                   {{ electricity_statistics.highest_usage_l3_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Highest usage (L3)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-red">
+                                   {{ electricity_statistics.highest_usage_l3_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
 
                         {% if electricity_statistics.lowest_usage_l1_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Lowest consumption (L1+)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-red">
-                                   {{ electricity_statistics.lowest_usage_l1_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Lowest usage (L1)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.lowest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                             </td>
-                                <br>
+                            <td class="col-sm-6">
+                                <span class="badge bg-red">
+                                   {{ electricity_statistics.lowest_usage_l1_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
+                            </td>
                         </tr>
                         {% endif %}
                         {% if electricity_statistics.lowest_usage_l2_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Lowest consumption (L2+)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-red">
-                                   {{ electricity_statistics.lowest_usage_l2_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Lowest usage (L2)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.lowest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-red">
+                                   {{ electricity_statistics.lowest_usage_l2_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
                         {% if electricity_statistics.lowest_usage_l3_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Lowest consumption (L3+)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-red">
-                                   {{ electricity_statistics.lowest_usage_l3_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Lowest usage (L3)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.lowest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-red">
+                                   {{ electricity_statistics.lowest_usage_l3_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
                         
                         {% if electricity_statistics.highest_return_l1_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Highest return (L1-)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-green">
-                                   {{ electricity_statistics.highest_return_l1_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Highest return (L1)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_return_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-green">
+                                   {{ electricity_statistics.highest_return_l1_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
                         {% if electricity_statistics.highest_return_l2_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Highest return (L2-)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-green">
-                                   {{ electricity_statistics.highest_return_l2_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Highest return (L2)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_return_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-green">
+                                   {{ electricity_statistics.highest_return_l2_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
                         {% if electricity_statistics.highest_return_l3_value %}
                         <tr>
-                            <td class="col-sm-6">{% translate "Highest return (L3-)" %}</td>
                             <td class="col-sm-6">
-                                <span class="badge bg-green">
-                                   {{ electricity_statistics.highest_return_l3_value }} {% translate "W" noop %}
-                                </span>
+                                {% translate "Highest return (L3)" %}
                                 <br>
                                 <span class="unit">{{ electricity_statistics.highest_return_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="badge bg-green">
+                                   {{ electricity_statistics.highest_return_l3_value }}
+                                </span>
+                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}

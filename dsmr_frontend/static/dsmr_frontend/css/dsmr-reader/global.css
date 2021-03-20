@@ -103,7 +103,8 @@ span.degraded {
 }
 
 @media screen and (max-width: 768px) {
-  tr.dashboard-header > th.col-sm-6 {
+  table.table th.col-sm-6, table.table td.col-sm-6 {
+    /* Fixes various tables having their left half using a dynamic width. */
     width: 50%;
   }
 

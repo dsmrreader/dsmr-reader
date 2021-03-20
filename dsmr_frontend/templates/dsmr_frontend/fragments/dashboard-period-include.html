@@ -9,7 +9,7 @@
             <div class="panel-body">
                 {% if data and capabilities.electricity %}
                 <table class="table table-hover">
-                    <tr class="dashboard-header">
+                    <tr>
                         <th class="col-sm-6">
                             {{ day|date:date_formatter }}
                         </th>
@@ -19,13 +19,13 @@
                     </tr>
                     {% if not frontend_settings.merge_electricity_tariffs %}
                     <tr>
-                        <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
                         <td>{% if capabilities.electricity and data.electricity1 %}<span class="badge bg-red">{{ data.electricity1|default:'-' }}</span>{% endif %}</td>
                         <td>{% if capabilities.electricity_returned and data.electricity1_returned %}<span class="badge bg-green">{{ data.electricity1_returned|default:'-' }}</span>{% endif %}</td>
                         <td>{% if capabilities.electricity and data.electricity1_cost %}<span class="badge bg-black">{{ data.electricity1_cost|default:'-' }}</span>{% endif %}</td>
                     </tr>
                     <tr>
-                        <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" noop %}</span>{% endif %}</td>
+                        <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
                         <td>{% if capabilities.electricity and data.electricity2 %}<span class="badge bg-red">{{ data.electricity2|default:'-' }}</span>{% endif %}</td>
                         <td>{% if capabilities.electricity_returned and data.electricity2_returned %}<span class="badge bg-green">{{ data.electricity2_returned|default:'-' }}</span>{% endif %}</td>
                         <td>{% if capabilities.electricity and data.electricity2_cost %}<span class="badge bg-black">{{ data.electricity2_cost|default:'-' }}</span>{% endif %}</td>
@@ -40,7 +40,7 @@
                                 {% else %}
                                     {% translate "Electricity (single tariff)" %}
                                 {% endif %}
-                                <span class="unit">{% translate "kWh" noop %}</span>
+                                <span class="unit">{% translate "kWh" %}</span>
                             {% endif %}
                         </td>
                         <td>{% if capabilities.electricity and data.electricity_merged %}<span class="badge bg-red">{{ data.electricity_merged|default:'-' }} </span>{% endif %}</td>
@@ -50,7 +50,7 @@
 
                     {% if capabilities.gas %}
                     <tr>
-                        <td>{% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" noop %}</span></td>
+                        <td>{% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" %}</span></td>
                         <td><span class="badge bg-orange">{{ data.gas|default:'-' }}</span></td>
                         <td>&nbsp;</td>
                         <td>{% if data.gas_cost %}<span class="badge bg-black">{{ data.gas_cost|default:'-' }}</span>{% endif %}</td>
@@ -59,7 +59,7 @@
 
                     {% if data.fixed_cost %}
                     <tr>
-                        <td colspan="3"> {% translate "Fixed costs" %} <span class="unit">&euro;</span></td>
+                        <td colspan="3"> {% translate "Fixed costs" %}</td>
                         <td>{% if data.fixed_cost %}<span class="badge bg-black">{{ data.fixed_cost|default:'-' }}</span>{% endif %}</td>
                     </tr>
                     {% endif %}

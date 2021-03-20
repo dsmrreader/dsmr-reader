@@ -63,7 +63,7 @@ $(document).ready(function () {
         ],
         series: [
             {
-                name: 'Watt (L1+)',
+                name: 'Watt (L1)',
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -71,7 +71,7 @@ $(document).ready(function () {
                 data: null
             },
             {
-                name: 'Watt (L2+)',
+                name: 'Watt (L2)',
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -79,7 +79,7 @@ $(document).ready(function () {
                 data: null
             },
             {
-                name: 'Watt (L3+)',
+                name: 'Watt (L3)',
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -87,7 +87,7 @@ $(document).ready(function () {
                 data: null
             },
             {
-                name: 'Watt (L1-)',
+                name: 'Watt (L1)',
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -95,7 +95,7 @@ $(document).ready(function () {
                 data: null
             },
             {
-                name: 'Watt (L2-)',
+                name: 'Watt (L2)',
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -103,7 +103,7 @@ $(document).ready(function () {
                 data: null
             },
             {
-                name: 'Watt (L3-)',
+                name: 'Watt (L3)',
                 type: 'line',
                 smooth: true,
                 areaStyle: {},

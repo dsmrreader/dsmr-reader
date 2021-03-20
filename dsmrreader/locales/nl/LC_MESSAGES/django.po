@@ -1643,35 +1643,32 @@ msgstr "Aantal spanningspieken in fase L3"
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
 
-msgid "Highest consumption (L1+)"
-msgstr "Hoogste verbruik (L1+)"
+msgid "Highest usage (L1)"
+msgstr "Hoogste teruglevering (L1)"
 
-msgid "W"
-msgstr "W"
+msgid "Highest usage (L2)"
+msgstr "Hoogste teruglevering (L2)"
 
-msgid "Highest consumption (L2+)"
-msgstr "Hoogste verbruik (L2+)"
+msgid "Highest usage (L3)"
+msgstr "Hoogste teruglevering (L3)"
 
-msgid "Highest consumption (L3+)"
-msgstr "Hoogste verbruik (L3+)"
+msgid "Lowest usage (L1)"
+msgstr "Laagste verbruik (L1)"
 
-msgid "Lowest consumption (L1+)"
-msgstr "Laagste verbruik (L1+)"
+msgid "Lowest usage (L2)"
+msgstr "Laagste verbruik (L2)"
 
-msgid "Lowest consumption (L2+)"
-msgstr "Laagste verbruik (L2+)"
+msgid "Lowest usage (L3)"
+msgstr "Laagste verbruik (L3)"
 
-msgid "Lowest consumption (L3+)"
-msgstr "Laagste verbruik (L3+)"
+msgid "Highest return (L1)"
+msgstr "Hoogste teruglevering (L1)"
 
-msgid "Highest return (L1-)"
-msgstr "Hoogste teruglevering (L1-)"
+msgid "Highest return (L2)"
+msgstr "Hoogste teruglevering (L2)"
 
-msgid "Highest return (L2-)"
-msgstr "Hoogste teruglevering (L2-)"
-
-msgid "Highest return (L3-)"
-msgstr "Hoogste teruglevering (L3-)"
+msgid "Highest return (L3)"
+msgstr "Hoogste teruglevering (L3)"
 
 msgid "Enable \"Track electricity phases\" in the Datalogger Configuration to track this data."
 msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie, om deze gegevens bij te houden."
@@ -2596,6 +2593,27 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Highest consumption (L1)"
+#~ msgstr "Hoogste verbruik (L1)"
+
+#~ msgid "W"
+#~ msgstr "W"
+
+#~ msgid "Highest consumption (L2)"
+#~ msgstr "Hoogste verbruik (L2)"
+
+#~ msgid "Highest consumption (L3)"
+#~ msgstr "Hoogste verbruik (L3)"
+
+#~ msgid "Lowest consumption (L1)"
+#~ msgstr "Laagste verbruik (L1)"
+
+#~ msgid "Lowest consumption (L2)"
+#~ msgstr "Laagste verbruik (L2)"
+
+#~ msgid "Lowest consumption (L3)"
+#~ msgstr "Laagste verbruik (L3)"
 
 #~ msgid "/hour"
 #~ msgstr "/uur"
