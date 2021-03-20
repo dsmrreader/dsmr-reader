@@ -22,7 +22,7 @@ echo " --- Checking Python version."
 ./check_python_version.py
 
 if [ $? -ne 0 ]; then
-    echo "[!] Aborting post-deployment"
+    echo "[!] Aborting post-deployment due to Python version"
     exit 1;
 fi
 
@@ -31,6 +31,11 @@ echo ""
 echo ""
 echo " --- Checking & synchronizing base requirements for changes."
 pip3 install -r dsmrreader/provisioning/requirements/base.txt --upgrade
+
+if [ $? -ne 0 ]; then
+    echo "[!] Aborting post-deployment due to PIP"
+    exit 1;
+fi
 
 
 echo ""
