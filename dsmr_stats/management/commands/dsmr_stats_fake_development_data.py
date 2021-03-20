@@ -1,5 +1,4 @@
 from decimal import Decimal
-from time import sleep
 import random
 
 from django.core.management.base import BaseCommand, CommandError
@@ -26,8 +25,6 @@ class Command(BaseCommand):
         """ Generates 'random' stats data by altering existing ones. """
         factor = Decimal(random.random())  # Between 0.0 and 1.0, change every day.
         print('Using existing consumption as base, multiplied by {}'.format(factor))
-
-        sleep(1)  # Allow to abort when random number sucks.
 
         print('Altering readings... (might take quite some time)')
         DsmrReading.objects.all().order_by('-pk').update(

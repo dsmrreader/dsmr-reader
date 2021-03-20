@@ -11,13 +11,13 @@
                             <span>
                                 <a class="help-trigger" href="#"><small><i class="fas fa-question-circle"></i></small></a>
                                 <small class="xhr-hidden">
-                                    {% blocktranslate %}Latest telegram received{% endblocktranslate %}
+                                    {% blocktranslate %}Latest update received{% endblocktranslate %}
                                 </small>
                             </span>
                             <span class="unit" id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
                         </th>
-                        <th class="col-sm-2">{% if capabilities.electricity %}{% translate "Consumed" %}{% endif %}</th>
-                        <th class="col-sm-2">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
+                        <th class="col-sm-2">{% if capabilities.electricity %}{% translate "Consuming" %}{% endif %}</th>
+                        <th class="col-sm-2">{% if capabilities.electricity_returned %}{% translate "Returning" %}{% endif %}</th>
                         <th class="col-sm-2">&euro;<span class="unit">{% translate '/hour' %}</span></th>
                     </tr>
                     <tr>

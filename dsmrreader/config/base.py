@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'rangefilter',
     'rest_framework',
     'adminsortable',
+    'mathfilters',
 
     # DSMR-reader.
     'dsmr_api.apps.ApiAppConfig',

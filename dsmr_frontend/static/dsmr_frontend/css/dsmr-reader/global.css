@@ -94,13 +94,23 @@ div.alert-without-padding {
     margin-bottom: 0 !important;
 }
 
+span.improved {
+    color: #27C24C;
+}
+
+span.degraded {
+    color: #F05050;
+}
+
 @media screen and (max-width: 768px) {
   tr.dashboard-header > th.col-sm-6 {
     width: 50%;
   }
+
   table.table {
     font-size: 10px !important;
   }
+
   table span.badge {
     font-size: 10px !important;
   }
