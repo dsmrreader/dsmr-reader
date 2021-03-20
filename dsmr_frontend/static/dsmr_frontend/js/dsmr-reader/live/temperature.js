@@ -1,13 +1,13 @@
 $(document).ready(function () {
 
-    var echarts_temperature_graph = echarts.init(document.getElementById('echarts-temperature-graph'));
+    let echarts_temperature_graph = echarts.init(document.getElementById('echarts-temperature-graph'));
     echarts_temperature_graph.showLoading('default', echarts_loading_options);
 
     /* Init graph. */
     $.get(echarts_temperature_graph_url, function (xhr_data) {
         echarts_temperature_graph.hideLoading();
 
-        var option = {
+        let option = {
             color: [
                 temperature_color
             ],

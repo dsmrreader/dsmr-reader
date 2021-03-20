@@ -1,4 +1,4 @@
-var echarts_electricity_returned_graph = echarts.init(document.getElementById('echarts-electricity-returned-graph'));
+let echarts_electricity_returned_graph = echarts.init(document.getElementById('echarts-electricity-returned-graph'));
 
 
 $(document).ready(function () {
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 
 function render_electricity_returned_graph(xhr_data) {
-    var echarts_options = {
+    let echarts_options = {
         title: {
             text: text_electricity_returned_header,
             left: 'center'
@@ -38,7 +38,7 @@ function render_electricity_returned_graph(xhr_data) {
         xAxis: [
             {
                 type: 'category',
-                boundaryGap: electricity_graph_style == 'bar',
+                boundaryGap: electricity_graph_style === 'bar',
                 data: xhr_data.x
             }
         ],

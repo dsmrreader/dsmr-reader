@@ -1,5 +1,5 @@
-var g_datepicker_view_mode = 'months';
-var g_datepicker_selections = [];
+let g_datepicker_view_mode = 'months';
+let g_datepicker_selections = [];
 
 
 $(document).ready(function () {
@@ -52,21 +52,21 @@ function initialize_datepicker(id_postfix) {
         format: datepicker_locale_format,
         language: datepicker_language_code
     }).on('changeDate', function (e) {
-        if (g_datepicker_view_mode != 'days') {
+        if (g_datepicker_view_mode !== 'days') {
             return;
         }
         g_datepicker_selections[id_postfix] = e.date;
         update_summary();
 
     }).on('changeMonth', function (e) {
-        if (g_datepicker_view_mode != 'months') {
+        if (g_datepicker_view_mode !== 'months') {
             return;
         }
         g_datepicker_selections[id_postfix] = e.date;
         update_summary();
 
     }).on('changeYear', function (e) {
-        if (g_datepicker_view_mode != 'years') {
+        if (g_datepicker_view_mode !== 'years') {
             return;
         }
         g_datepicker_selections[id_postfix] = e.date;
@@ -83,8 +83,8 @@ function update_summary() {
         return;
     }
 
-    var base_selection = moment(g_datepicker_selections[1]).format(datepicker_locale_format.toUpperCase());
-    var comparison_selection = moment(g_datepicker_selections[2]).format(datepicker_locale_format.toUpperCase());
+    let base_selection = moment(g_datepicker_selections[1]).format(datepicker_locale_format.toUpperCase());
+    let comparison_selection = moment(g_datepicker_selections[2]).format(datepicker_locale_format.toUpperCase());
 
     $("#summary-holder").hide();
     $("#summary-loader").show();

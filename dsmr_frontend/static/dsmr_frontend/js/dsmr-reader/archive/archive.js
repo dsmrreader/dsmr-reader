@@ -1,6 +1,6 @@
-var g_datepicker_view_mode = 'months';
-var summary_xhr_request = null;
-var g_graph_xhr_request = null;
+let g_datepicker_view_mode = 'months';
+let summary_xhr_request = null;
+let g_graph_xhr_request = null;
 
 
 $(document).ready(function () {

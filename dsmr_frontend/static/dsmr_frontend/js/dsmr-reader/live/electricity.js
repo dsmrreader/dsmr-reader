@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
-    var echarts_electricity_initial_options = {
+    let echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+    let echarts_electricity_initial_options = {
         color: [
             electricity_delivered_color,
             electricity_returned_color
@@ -48,7 +48,7 @@ $(document).ready(function () {
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */
-    var echarts_electricity_update_options = {
+    let echarts_electricity_update_options = {
         xAxis: [
             {
                 type: 'category',
@@ -74,7 +74,6 @@ $(document).ready(function () {
         ]
     };
 
-
     echarts_electricity_graph.showLoading('default', echarts_loading_options);
 
     /* Init graph. */
@@ -88,19 +87,27 @@ $(document).ready(function () {
         echarts_electricity_update_options.series[1].data = xhr_data.currently_returned;
         echarts_electricity_graph.setOption(echarts_electricity_update_options);
 
-        var latest_delta_id = xhr_data.latest_delta_id;
+        // Schedule updates
+        let latest_delta_id = xhr_data.latest_delta_id;
+        let pending_xhr_request = null;
 
-        /* Update graph data from now on. */
-        setInterval(function () {
+        setInterval(function(){
+            // Do not send new XHR request update if the previous one is still pending.
+            if (pending_xhr_request !== null) {
+                return;
+            }
 
-            $.get(echarts_electricity_graph_url + "&latest_delta_id=" + latest_delta_id, function (xhr_data) {
+            pending_xhr_request = $.ajax({
+                dataType: "json",
+                url: echarts_electricity_graph_url + "&latest_delta_id=" + latest_delta_id,
+            }).done(function(xhr_data) {
                 /* Ignore empty sets. */
-                if (xhr_data.read_at.length == 0) {
+                if (xhr_data.read_at.length === 0) {
                     return;
                 }
 
                 /* Delta update. */
-                for (var i = 0; i < xhr_data.read_at.length; i++) {
+                for (let i = 0; i < xhr_data.read_at.length; i++) {
                     echarts_electricity_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
                     echarts_electricity_update_options.series[0].data.push(xhr_data.currently_delivered[i]);
                     echarts_electricity_update_options.series[1].data.push(xhr_data.currently_returned[i]);
@@ -108,6 +115,9 @@ $(document).ready(function () {
 
                 latest_delta_id = xhr_data.latest_delta_id;
                 echarts_electricity_graph.setOption(echarts_electricity_update_options);
+            }).always(function(){
+                // Allow new updates
+                pending_xhr_request = null;
             });
         }, echarts_electricity_graph_interval * 1000);
     });

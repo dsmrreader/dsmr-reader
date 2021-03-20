@@ -8,7 +8,7 @@ import dsmr_stats.services
 class TestHourStatistics(TestCase):
     def setUp(self):
         self.instance = HourStatistics.objects.create(
-            hour_start=timezone.now(),
+            hour_start=timezone.localtime(timezone.now()),
             electricity1=1,
             electricity2=1,
             electricity1_returned=2,
@@ -26,9 +26,10 @@ class TestHourStatistics(TestCase):
 
     def test_hour_statistics_average(self):
         """ #100: Empty gas readings mess up average. """
+        now = timezone.localtime(timezone.now())
         average_consumption = dsmr_stats.services.average_consumption_by_hour(
-            start=(timezone.now() - timezone.timedelta(weeks=4)).date(),
-            end=timezone.now().date(),
+            start=(now - timezone.timedelta(weeks=4)).date(),
+            end=now.date(),
         )
         self.assertEqual(average_consumption[0]['avg_gas'], 0)  # Would have been 'None' before.
 
@@ -36,7 +37,7 @@ class TestHourStatistics(TestCase):
 class TestDayStatistics(TestCase):
     def setUp(self):
         self.instance = DayStatistics.objects.create(
-            day=timezone.now().date(),
+            day=timezone.localtime(timezone.now()).date(),
             total_cost=100,
             electricity1=1,
             electricity2=1,

@@ -1,5 +1,5 @@
-var GMAIL_HOST = "aspmx.l.google.com";
-var mode = null;
+let GMAIL_HOST = "aspmx.l.google.com";
+let mode = null;
 
 
 $(document).ready(function () {
@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     sync()
 
-    if ($("#host").val() == GMAIL_HOST) {
+    if ($("#host").val() === GMAIL_HOST) {
         mode = "gmail"
         render_mode()
     }
@@ -53,7 +53,7 @@ function send_test_email() {
 function render_mode() {
     if (!mode) {
 
-    } else if (mode == "gmail") {
+    } else if (mode === "gmail") {
         $('[data-gui="email-address"]').removeClass("hidden")
         $('[data-gui="controls"]').removeClass("hidden")
     } else {
@@ -62,7 +62,7 @@ function render_mode() {
 }
 
 function save() {
-    if (mode == "gmail") {
+    if (mode === "gmail") {
         apply_gmail($("#email_to").val())
     } else {
 

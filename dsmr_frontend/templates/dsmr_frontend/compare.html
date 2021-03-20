@@ -94,13 +94,13 @@
 
     <script type="text/javascript">
         /* Settings. */
-        var datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
-        var datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
-        var datepicker_locale_format = "{{ datepicker_locale_format }}";
-        var datepicker_language_code = "{{ LANGUAGE_CODE }}";
+        const datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
+        const datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
+        const datepicker_locale_format = "{{ datepicker_locale_format }}";
+        const datepicker_language_code = "{{ LANGUAGE_CODE }}";
 
         /* XHR. */
-        var compare_xhr_summary_url = "{% url 'frontend:compare-xhr-summary' %}";
+        const compare_xhr_summary_url = "{% url 'frontend:compare-xhr-summary' %}";
     </script>
     
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/compare/compare.js' %}?r=v{{ dsmr_version }}"></script>

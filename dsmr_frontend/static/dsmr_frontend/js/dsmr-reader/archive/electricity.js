@@ -1,4 +1,4 @@
-var echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+let echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
 
 
 $(document).ready(function () {
@@ -48,7 +48,7 @@ function render_electricity_graph(xhr_data) {
         xAxis: [
             {
                 type: 'category',
-                boundaryGap: electricity_graph_style == 'bar',
+                boundaryGap: electricity_graph_style === 'bar',
                 data: xhr_data.x
             }
         ],

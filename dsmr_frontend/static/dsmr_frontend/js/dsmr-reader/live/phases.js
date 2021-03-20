@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-    var echarts_phases_graph = echarts.init(document.getElementById('echarts-phases-graph'));
-    var echarts_phases_initial_options = {
+    let echarts_phases_graph = echarts.init(document.getElementById('echarts-phases-graph'));
+    let echarts_phases_initial_options = {
         color: [
             phase_delivered_l1_color,
             phase_delivered_l2_color,
@@ -53,7 +53,7 @@ $(document).ready(function () {
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */
-    var echarts_phases_update_options = {
+    let echarts_phases_update_options = {
         xAxis: [
             {
                 type: 'category',
@@ -130,18 +130,28 @@ $(document).ready(function () {
         echarts_phases_update_options.series[5].data = xhr_data.phases_returned.l3;
         echarts_phases_graph.setOption(echarts_phases_update_options);
 
-        var latest_delta_id = xhr_data.latest_delta_id;
 
-        /* Update graph data from now on. */
-        setInterval(function () {
-            $.get(echarts_phases_graph_url + "&latest_delta_id=" + latest_delta_id, function (xhr_data) {
+        // Schedule updates
+        let latest_delta_id = xhr_data.latest_delta_id;
+        let pending_xhr_request = null;
+
+        setInterval(function(){
+            // Do not send new XHR request update if the previous one is still pending.
+            if (pending_xhr_request !== null) {
+                return;
+            }
+
+            pending_xhr_request = $.ajax({
+                dataType: "json",
+                url: echarts_phases_graph_url + "&latest_delta_id=" + latest_delta_id,
+            }).done(function(xhr_data) {
                 /* Ignore empty sets. */
-                if (xhr_data.read_at.length == 0) {
+                if (xhr_data.read_at.length === 0) {
                     return;
                 }
 
                 /* Delta update. */
-                for (var i = 0; i < xhr_data.read_at.length; i++) {
+                for (let i = 0; i < xhr_data.read_at.length; i++) {
                     echarts_phases_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
                     echarts_phases_update_options.series[0].data.push(xhr_data.phases_delivered.l1[i]);
                     echarts_phases_update_options.series[1].data.push(xhr_data.phases_delivered.l2[i]);
@@ -153,6 +163,9 @@ $(document).ready(function () {
 
                 latest_delta_id = xhr_data.latest_delta_id;
                 echarts_phases_graph.setOption(echarts_phases_update_options);
+            }).always(function(){
+                // Allow new updates
+                pending_xhr_request = null;
             });
         }, echarts_phases_graph_interval * 1000);
     });

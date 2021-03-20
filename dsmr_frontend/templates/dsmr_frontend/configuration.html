@@ -45,31 +45,31 @@
     <script type="text/javascript" src="{% static 'dsmr_frontend/semantic-2.4/semantic.min.js' %}"></script>
 
     <script>
-        var api_settings_url = '{% url "admin:dsmr_api_apisettings_change" api_settings.pk %}';
-        var backend_settings_url = '{% url "admin:dsmr_backend_backendsettings_change" backend_settings.pk %}';
-        var backup_settings_url = '{% url "admin:dsmr_backup_backupsettings_change" backup_settings.pk %}';
-        var consumption_settings_url = '{% url "admin:dsmr_consumption_consumptionsettings_change" consumption_settings.pk %}';
-        var datalogger_settings_url = '{% url "admin:dsmr_datalogger_dataloggersettings_change" datalogger_settings.pk %}';
-        var dropbox_settings_url = '{% url "admin:dsmr_backup_dropboxsettings_change" dropbox_settings.pk %}';
-        var day_statistics_url = '{% url "admin:dsmr_stats_daystatistics_changelist" %}';
-        var hour_statistics_url = '{% url "admin:dsmr_stats_hourstatistics_changelist" %}';
-        var email_settings_url = '{% url "admin:dsmr_backend_emailsettings_change" email_settings.pk %}';
-        var energy_supplier_price_url = '{% url "admin:dsmr_consumption_energysupplierprice_changelist" %}';
-        var export_url = '{% url "frontend:export" %}';
-        var frontend_settings_url = '{% url "admin:dsmr_frontend_frontendsettings_change" frontend_settings.pk %}';
-        var frontend_sortedgraphs_sort_url = '{% url "admin:dsmr_frontend_sortedgraph_sort" %}';
-        var influxdb_settings_url = '{% url "admin:dsmr_influxdb_influxdbintegrationsettings_change" influxdb_settings.pk %}';
-        var meter_statistics_url = '{% url "admin:dsmr_datalogger_meterstatistics_changelist" %}';
-        var mindergas_settings_url = '{% url "admin:dsmr_mindergas_mindergassettings_change" mindergas_settings.pk %}';
-        var mqtt_broker_settings_url = '{% url "admin:dsmr_mqtt_mqttbrokersettings_change" mqtt_broker_settings.pk %}';
-        var mqtt_app_url = '{% url "admin:app_list" "dsmr_mqtt" %}';
-        var notification_setting_url = '{% url "admin:dsmr_notification_notificationsetting_change" notification_settings.pk %}';
-        var pvoutput_apisettings_url = '{% url "admin:dsmr_pvoutput_pvoutputapisettings_change" pvoutput_api_settings.pk %}';
-        var pvoutput_addstatus_settings_url = '{% url "admin:dsmr_pvoutput_pvoutputaddstatussettings_change" pvoutput_addstatus_settings.pk %}';
-        var retention_settings_url = '{% url "admin:dsmr_datalogger_retentionsettings_change" retention_settings.pk %}';
-        var weather_settings_url = '{% url "admin:dsmr_weather_weathersettings_change" weather_settings.pk %}';
+        const api_settings_url = '{% url "admin:dsmr_api_apisettings_change" api_settings.pk %}';
+        const backend_settings_url = '{% url "admin:dsmr_backend_backendsettings_change" backend_settings.pk %}';
+        const backup_settings_url = '{% url "admin:dsmr_backup_backupsettings_change" backup_settings.pk %}';
+        const consumption_settings_url = '{% url "admin:dsmr_consumption_consumptionsettings_change" consumption_settings.pk %}';
+        const datalogger_settings_url = '{% url "admin:dsmr_datalogger_dataloggersettings_change" datalogger_settings.pk %}';
+        const dropbox_settings_url = '{% url "admin:dsmr_backup_dropboxsettings_change" dropbox_settings.pk %}';
+        const day_statistics_url = '{% url "admin:dsmr_stats_daystatistics_changelist" %}';
+        const hour_statistics_url = '{% url "admin:dsmr_stats_hourstatistics_changelist" %}';
+        const email_settings_url = '{% url "admin:dsmr_backend_emailsettings_change" email_settings.pk %}';
+        const energy_supplier_price_url = '{% url "admin:dsmr_consumption_energysupplierprice_changelist" %}';
+        const export_url = '{% url "frontend:export" %}';
+        const frontend_settings_url = '{% url "admin:dsmr_frontend_frontendsettings_change" frontend_settings.pk %}';
+        const frontend_sortedgraphs_sort_url = '{% url "admin:dsmr_frontend_sortedgraph_sort" %}';
+        const influxdb_settings_url = '{% url "admin:dsmr_influxdb_influxdbintegrationsettings_change" influxdb_settings.pk %}';
+        const meter_statistics_url = '{% url "admin:dsmr_datalogger_meterstatistics_changelist" %}';
+        const mindergas_settings_url = '{% url "admin:dsmr_mindergas_mindergassettings_change" mindergas_settings.pk %}';
+        const mqtt_broker_settings_url = '{% url "admin:dsmr_mqtt_mqttbrokersettings_change" mqtt_broker_settings.pk %}';
+        const mqtt_app_url = '{% url "admin:app_list" "dsmr_mqtt" %}';
+        const notification_setting_url = '{% url "admin:dsmr_notification_notificationsetting_change" notification_settings.pk %}';
+        const pvoutput_apisettings_url = '{% url "admin:dsmr_pvoutput_pvoutputapisettings_change" pvoutput_api_settings.pk %}';
+        const pvoutput_addstatus_settings_url = '{% url "admin:dsmr_pvoutput_pvoutputaddstatussettings_change" pvoutput_addstatus_settings.pk %}';
+        const retention_settings_url = '{% url "admin:dsmr_datalogger_retentionsettings_change" retention_settings.pk %}';
+        const weather_settings_url = '{% url "admin:dsmr_weather_weathersettings_change" weather_settings.pk %}';
 
-        var categoryContent = [
+        const categoryContent = [
             { category: "{% translate 'Background processing' %}", title: "{% translate 'Backend process sleep' %}", url: backend_settings_url },
             { category: "{% translate 'Background processing' %}", title: "{% translate 'Language' %}", url: backend_settings_url },
             { category: "{% translate 'Background processing' %}", title: "{% translate 'Check for updates' %}", url: backend_settings_url },

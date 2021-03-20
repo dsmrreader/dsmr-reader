@@ -1,4 +1,4 @@
-var echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
+let echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
 
 
 $(document).ready(function () {
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 
 function render_gas_graph(xhr_data) {
-    var echarts_options = {
+    let echarts_options = {
         title: {
             text: text_gas_header,
             left: 'center'
@@ -37,7 +37,7 @@ function render_gas_graph(xhr_data) {
         xAxis: [
             {
                 type: 'category',
-                boundaryGap: gas_graph_style == 'bar',
+                boundaryGap: gas_graph_style === 'bar',
                 data: xhr_data.x
             }
         ],

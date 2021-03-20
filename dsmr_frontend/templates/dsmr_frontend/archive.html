@@ -102,37 +102,37 @@
 
     <script type="text/javascript">
         /* Translations. */
-        var text_electricity_header = '{% blocktranslate %}Electricity consumed{% endblocktranslate %} {% translate "(in kWh)" %}';
-        var text_electricity_returned_header = '{% blocktranslate %}Electricity returned{% endblocktranslate %} {% translate "(in kWh)" %}';
-        var text_gas_header = '{% blocktranslate %}Gas consumed{% endblocktranslate %} {% translate "(in m³)" %}';
+        const text_electricity_header = '{% blocktranslate %}Electricity consumed{% endblocktranslate %} {% translate "(in kWh)" %}';
+        const text_electricity_returned_header = '{% blocktranslate %}Electricity returned{% endblocktranslate %} {% translate "(in kWh)" %}';
+        const text_gas_header = '{% blocktranslate %}Gas consumed{% endblocktranslate %} {% translate "(in m³)" %}';
 
-        var text_electricity1_delivered = '{{ frontend_settings.tariff_1_delivered_name|capfirst }}';
-        var text_electricity2_delivered = '{{ frontend_settings.tariff_2_delivered_name|capfirst }}';
-        var text_electricity1_returned = '{{ frontend_settings.tariff_1_returned_name|capfirst }}';
-        var text_electricity2_returned = '{{ frontend_settings.tariff_2_returned_name|capfirst }}';
-        var text_electricity_merged_delivered = '{% blocktranslate %}Electricity (single tariff){% endblocktranslate %}';
-        var text_electricity_merged_returned = '{% blocktranslate %}Electricity returned (single tariff){% endblocktranslate %}';
-        var text_gas = '{% blocktranslate %}Gas{% endblocktranslate %}';
+        const text_electricity1_delivered = '{{ frontend_settings.tariff_1_delivered_name|capfirst }}';
+        const text_electricity2_delivered = '{{ frontend_settings.tariff_2_delivered_name|capfirst }}';
+        const text_electricity1_returned = '{{ frontend_settings.tariff_1_returned_name|capfirst }}';
+        const text_electricity2_returned = '{{ frontend_settings.tariff_2_returned_name|capfirst }}';
+        const text_electricity_merged_delivered = '{% blocktranslate %}Electricity (single tariff){% endblocktranslate %}';
+        const text_electricity_merged_returned = '{% blocktranslate %}Electricity returned (single tariff){% endblocktranslate %}';
+        const text_gas = '{% blocktranslate %}Gas{% endblocktranslate %}';
         
         /* Colors. */
-        var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
-        var electricity_delivered_alternate_color = "{{ frontend_settings.electricity_delivered_alternate_color }}";
-        var electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
-        var electricity_returned_alternate_color = "{{ frontend_settings.electricity_returned_alternate_color }}";
-        var gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
+        const electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
+        const electricity_delivered_alternate_color = "{{ frontend_settings.electricity_delivered_alternate_color }}";
+        const electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
+        const electricity_returned_alternate_color = "{{ frontend_settings.electricity_returned_alternate_color }}";
+        const gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
         
         /* Settings. */
-        var datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
-        var datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
-        var datepicker_locale_format = "{{ datepicker_locale_format }}";
-        var datepicker_language_code = "{{ LANGUAGE_CODE }}";
-        var gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
-        var electricity_graph_style = "{{ frontend_settings.electricity_graph_style }}";
-        var stack_electricity_graphs = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
+        const datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
+        const datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
+        const datepicker_locale_format = "{{ datepicker_locale_format }}";
+        const datepicker_language_code = "{{ LANGUAGE_CODE }}";
+        const gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
+        const electricity_graph_style = "{{ frontend_settings.electricity_graph_style }}";
+        const stack_electricity_graphs = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
 
         /* XHR. */
-        var archive_xhr_summary_url = "{% url 'frontend:archive-xhr-summary' %}";
-        var archive_xhr_graphs_url = "{% url 'frontend:archive-xhr-graphs' %}";
+        const archive_xhr_summary_url = "{% url 'frontend:archive-xhr-summary' %}";
+        const archive_xhr_graphs_url = "{% url 'frontend:archive-xhr-graphs' %}";
     </script>
 
     {% if capabilities.electricity %}

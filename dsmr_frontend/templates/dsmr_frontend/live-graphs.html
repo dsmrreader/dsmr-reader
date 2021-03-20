@@ -140,101 +140,101 @@
 
     <script type="text/javascript">
         {% localize off %}
-        var telegram_dsmr_version = '{{ meter_statistics.dsmr_version|default:'' }}';
-        var is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
-        var live_graphs_initial_zoom = 100 - {{ frontend_settings.live_graphs_initial_zoom }};
-        var echarts_loading_options = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+        const telegram_dsmr_version = '{{ meter_statistics.dsmr_version|default:'' }}';
+        const is_multi_phase = {{ capabilities.multi_phases|yesno:'true,false' }};
+        const live_graphs_initial_zoom = 100 - {{ frontend_settings.live_graphs_initial_zoom }};
+        const echarts_loading_options = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
         {% endlocalize %}
     </script>
     {{ sorted_graphs_json|json_script:'sorted_graphs_json' }}
 
 {% if capabilities.electricity %}
     <script type="text/javascript">
-        var echarts_electricity_graph_url = "{% url 'frontend:live-xhr-electricity' %}?delivered=True";
-
         {% if capabilities.electricity_returned %}
-        echarts_electricity_graph_url += "&returned=True";
+        const echarts_electricity_graph_url = "{% url 'frontend:live-xhr-electricity' %}?delivered=True&returned=True";
+        {% else %}
+        const echarts_electricity_graph_url = "{% url 'frontend:live-xhr-electricity' %}?delivered=True";
         {% endif %}
         
-        var electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
-        var electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
-        var echarts_electricity_graph_interval = 5;
+        const electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
+        const electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
+        const echarts_electricity_graph_interval = 3;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.multi_phases %}
     <script type="text/javascript">
-        var echarts_phases_graph_url = "{% url 'frontend:live-xhr-electricity' %}?phases=True";
-
         {% if capabilities.electricity_returned %}
-        echarts_phases_graph_url += "&returned=True";
+        const echarts_phases_graph_url = "{% url 'frontend:live-xhr-electricity' %}?phases=True&returned=True";
+        {% else %}
+        const echarts_phases_graph_url = "{% url 'frontend:live-xhr-electricity' %}?phases=True";
         {% endif %}
         
-        var phase_delivered_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
-        var phase_delivered_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
-        var phase_delivered_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
-        var phase_returned_l1_color = "{{ frontend_settings.phase_returned_l1_color }}";
-        var phase_returned_l2_color = "{{ frontend_settings.phase_returned_l2_color }}";
-        var phase_returned_l3_color = "{{ frontend_settings.phase_returned_l3_color }}";
+        const phase_delivered_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
+        const phase_delivered_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
+        const phase_delivered_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+        const phase_returned_l1_color = "{{ frontend_settings.phase_returned_l1_color }}";
+        const phase_returned_l2_color = "{{ frontend_settings.phase_returned_l2_color }}";
+        const phase_returned_l3_color = "{{ frontend_settings.phase_returned_l3_color }}";
         
-        var echarts_phases_graph_interval = 5;
+        const echarts_phases_graph_interval = 3;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/phases.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.voltage %}
     <script type="text/javascript">
-        var echarts_voltage_graph_url = "{% url 'frontend:live-xhr-electricity' %}?voltage=True";
-        var voltage_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
-        var voltage_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
-        var voltage_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+        const echarts_voltage_graph_url = "{% url 'frontend:live-xhr-electricity' %}?voltage=True";
+        const voltage_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
+        const voltage_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
+        const voltage_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
 
-        var echarts_voltage_graph_interval = 5;
+        const echarts_voltage_graph_interval = 3;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/voltage.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.power_current %}
     <script type="text/javascript">
-        var echarts_power_current_graph_url = "{% url 'frontend:live-xhr-electricity' %}?power_current=True";
-        var power_current_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
-        var power_current_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
-        var power_current_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
+        const echarts_power_current_graph_url = "{% url 'frontend:live-xhr-electricity' %}?power_current=True";
+        const power_current_l1_color = "{{ frontend_settings.phase_delivered_l1_color }}";
+        const power_current_l2_color = "{{ frontend_settings.phase_delivered_l2_color }}";
+        const power_current_l3_color = "{{ frontend_settings.phase_delivered_l3_color }}";
 
-        var echarts_power_current_graph_interval = 5;
+        const echarts_power_current_graph_interval = 3;
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/power-current.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.gas %}
     <script type="text/javascript">
-        var echarts_gas_graph_url = "{% url 'frontend:live-xhr-gas' %}";
-        var gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
-        var gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
+        const echarts_gas_graph_url = "{% url 'frontend:live-xhr-gas' %}";
+        const gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
+        const gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/gas.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
 
 {% if capabilities.weather %}
     <script type="text/javascript">
-        var echarts_temperature_graph_url = "{% url 'frontend:live-xhr-temperature' %}";
-        var temperature_color = "{{ frontend_settings.temperature_color }}";
+        const echarts_temperature_graph_url = "{% url 'frontend:live-xhr-temperature' %}";
+        const temperature_color = "{{ frontend_settings.temperature_color }}";
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
  
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
     <script type="text/javascript">
-        var xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
-        var sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())
+        const xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
+        const sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())
 
         $(document).ready(function(){
             /* This will reschedule itself again after completion. */
             update_consumption_header(1000);
 
             /* Reload entire page after X minutes. */
-            setInterval(function(){ location.reload(); }, 5 * 60 * 1000)
+            setTimeout(function(){ location.reload(); }, 5 * 60 * 1000)
 
             // Sort graphs by preference.
             $('section.content > div').sort(graph_sort_callback).appendTo('section.content');

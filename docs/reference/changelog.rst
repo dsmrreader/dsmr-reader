@@ -15,7 +15,7 @@ Current version
     :depth: 1
 
 
-v4.14.0 - 2021-xx-xx
+v4.14.0 - 2021-03-22
 --------------------
 
 - ``Added`` Trends analyse over selecteerbare periodes [`#1296 <https://github.com/dsmrreader/dsmr-reader/issues/1296>`_]
@@ -24,9 +24,9 @@ v4.14.0 - 2021-xx-xx
 - ``Changed`` Move PVOutput to scheduled process mechanism [`#950 <https://github.com/dsmrreader/dsmr-reader/issues/950>`_]
 - ``Changed`` Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]
 - ``Changed`` GUI: Reworked table alignment for smaller device screens
-- ``Changed`` GUI: Now displays 3 decimals where applicable
-- ``Changed`` GUI: Restyled "Compare" page colors and difference column
-- ``Changed`` GUI: Misc changes or fixes to layout regarding unit or dynamic values
+- ``Changed`` GUI: Display 2 -> 3 decimals where applicable
+- ``Changed`` GUI: Restyled "Compare" page colors and its difference column
+- ``Changed`` GUI: Many minor changes to layout and client side code
 
 - ``Fixed`` Dashboard responsiveness verbeteren op kleine schermen [`#1320 <https://github.com/dsmrreader/dsmr-reader/issues/1320>`_]
 - ``Fixed`` Verbruik en teruglevering tegelijkertijd tonen [`#1324 <https://github.com/dsmrreader/dsmr-reader/issues/1324>`_]

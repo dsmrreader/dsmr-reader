@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var echarts_power_current_graph = echarts.init(document.getElementById('echarts-power-current-graph'));
-    var echarts_power_current_initial_options = {
+    let echarts_power_current_graph = echarts.init(document.getElementById('echarts-power-current-graph'));
+    let echarts_power_current_initial_options = {
         color: [
             power_current_l1_color,
             power_current_l2_color,
@@ -51,7 +51,7 @@ $(document).ready(function () {
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */
-    var echarts_power_current_update_options = {
+    let echarts_power_current_update_options = {
         xAxis: [
             {
                 type: 'category',
@@ -113,18 +113,28 @@ $(document).ready(function () {
 
         echarts_power_current_graph.setOption(echarts_power_current_update_options);
 
-        var latest_delta_id = xhr_data.latest_delta_id;
 
-        /* Update graph data from now on. */
-        setInterval(function () {
-            $.get(echarts_power_current_graph_url + "&latest_delta_id=" + latest_delta_id, function (xhr_data) {
+        // Schedule updates
+        let latest_delta_id = xhr_data.latest_delta_id;
+        let pending_xhr_request = null;
+
+        setInterval(function(){
+            // Do not send new XHR request update if the previous one is still pending.
+            if (pending_xhr_request !== null) {
+                return;
+            }
+
+            pending_xhr_request = $.ajax({
+                dataType: "json",
+                url: echarts_power_current_graph_url + "&latest_delta_id=" + latest_delta_id,
+            }).done(function(xhr_data) {
                 /* Ignore empty sets. */
-                if (xhr_data.read_at.length == 0) {
+                if (xhr_data.read_at.length === 0) {
                     return;
                 }
 
                 /* Delta update. */
-                for (var i = 0; i < xhr_data.read_at.length; i++) {
+                for (let i = 0; i < xhr_data.read_at.length; i++) {
                     echarts_power_current_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
                     echarts_power_current_update_options.series[0].data.push(xhr_data.phase_power_current.l1[i]);
 
@@ -136,6 +146,9 @@ $(document).ready(function () {
 
                 latest_delta_id = xhr_data.latest_delta_id;
                 echarts_power_current_graph.setOption(echarts_power_current_update_options);
+            }).always(function(){
+                // Allow new updates
+                pending_xhr_request = null;
             });
         }, echarts_power_current_graph_interval * 1000);
     });
