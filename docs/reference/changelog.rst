@@ -18,98 +18,99 @@ Current version
 v4.14.0 - 2021-xx-xx
 --------------------
 
-- ``Changed``: Rework documentation structure [`#1315 <https://github.com/dsmrreader/dsmr-reader/issues/1315>`_]
-- ``Changed``: Move PVOutput to scheduled process mechanism [`#950 <https://github.com/dsmrreader/dsmr-reader/issues/950>`_]
-- ``Changed``: Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]
+- ``Changed`` Rework documentation structure [`#1315 <https://github.com/dsmrreader/dsmr-reader/issues/1315>`_]
+- ``Changed`` Move PVOutput to scheduled process mechanism [`#950 <https://github.com/dsmrreader/dsmr-reader/issues/950>`_]
+- ``Changed`` Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]
+- ``Changed`` Small GUI changes: Reworked consumption header - Displaying 3 decimals where applicable - Restyled "Compare" page a bit
 
-- ``Fixed``: Dashboard responsiveness verbeteren op kleine schermen [`#1320 <https://github.com/dsmrreader/dsmr-reader/issues/1320>`_]
-- ``Fixed``: Verbruik en teruglevering tegelijkertijd tonen [`#1324 <https://github.com/dsmrreader/dsmr-reader/issues/1324>`_]
+- ``Fixed`` Dashboard responsiveness verbeteren op kleine schermen [`#1320 <https://github.com/dsmrreader/dsmr-reader/issues/1320>`_]
+- ``Fixed`` Verbruik en teruglevering tegelijkertijd tonen [`#1324 <https://github.com/dsmrreader/dsmr-reader/issues/1324>`_]
 
 
 v4.13.0 - 2021-03-09
 --------------------
 
-- ``Added``: MQTT: Tussenstand huidige maand/jaar [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
-- ``Added``: Meterstanden opnemen in dagstatistieken [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
-- ``Added``: Na import historische gegevens de dagtotalen berekenen [`#1302 <https://github.com/dsmrreader/dsmr-reader/issues/1302>`_]
+- ``Added`` MQTT: Tussenstand huidige maand/jaar [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
+- ``Added`` Meterstanden opnemen in dagstatistieken [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
+- ``Added`` Na import historische gegevens de dagtotalen berekenen [`#1302 <https://github.com/dsmrreader/dsmr-reader/issues/1302>`_]
 
-- ``Changed``: Partial backups no longer run daily, but weekly instead [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
-- ``Changed``: 6e getal achter de komma nodig bij energiecontracten [`#1304 <https://github.com/dsmrreader/dsmr-reader/issues/1304>`_]
-- ``Changed``: Deprecate Python 3.6 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
-- ``Changed``: Dashboard-total uitbreiden/verbeteren [`#1160 <https://github.com/dsmrreader/dsmr-reader/issues/1160>`_] / [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
+- ``Changed`` Partial backups no longer run daily, but weekly instead [`#1301 <https://github.com/dsmrreader/dsmr-reader/issues/1301>`_]
+- ``Changed`` 6e getal achter de komma nodig bij energiecontracten [`#1304 <https://github.com/dsmrreader/dsmr-reader/issues/1304>`_]
+- ``Changed`` Deprecate Python 3.6 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+- ``Changed`` Dashboard-total uitbreiden/verbeteren [`#1160 <https://github.com/dsmrreader/dsmr-reader/issues/1160>`_] / [`#1291 <https://github.com/dsmrreader/dsmr-reader/issues/1291>`_]
 
-- ``Fixed``: Schoonheidsfoutje op de statistieken pagina [`#1305 <https://github.com/dsmrreader/dsmr-reader/issues/1305>`_]
-- ``Fixed``: Bestaande superusers uitschakelen bij uitvoeren "dsmr_superuser" command [`#1309 <https://github.com/dsmrreader/dsmr-reader/issues/1309>`_]
-- ``Fixed``: E-mailverzending timeout [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
-- ``Fixed``: Herstarten processen verduidelijken in docs [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
-- ``Fixed``: Live header optimaliseren voor mobiele weergave [`#1160 <https://github.com/dsmrreader/dsmr-reader/issues/1160>`_]
+- ``Fixed`` Schoonheidsfoutje op de statistieken pagina [`#1305 <https://github.com/dsmrreader/dsmr-reader/issues/1305>`_]
+- ``Fixed`` Bestaande superusers uitschakelen bij uitvoeren "dsmr_superuser" command [`#1309 <https://github.com/dsmrreader/dsmr-reader/issues/1309>`_]
+- ``Fixed`` E-mailverzending timeout [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
+- ``Fixed`` Herstarten processen verduidelijken in docs [`#1310 <https://github.com/dsmrreader/dsmr-reader/issues/1310>`_]
+- ``Fixed`` Live header optimaliseren voor mobiele weergave [`#1160 <https://github.com/dsmrreader/dsmr-reader/issues/1160>`_]
 
 
 v4.12.0 - 2021-02-17
 --------------------
 
-- ``Added``: Vaste dagkosten via MQTT naar HA [`#1289 <https://github.com/dsmrreader/dsmr-reader/issues/1289>`_]
+- ``Added`` Vaste dagkosten via MQTT naar HA [`#1289 <https://github.com/dsmrreader/dsmr-reader/issues/1289>`_]
 
-- ``Changed``: Samenvatting energiecontracten verbeteren [`#1257 <https://github.com/dsmrreader/dsmr-reader/issues/1257>`_]
-- ``Changed``: Auto-refresh Live-pagina elke 5 minuten [`#1298 <https://github.com/dsmrreader/dsmr-reader/issues/1298>`_]
+- ``Changed`` Samenvatting energiecontracten verbeteren [`#1257 <https://github.com/dsmrreader/dsmr-reader/issues/1257>`_]
+- ``Changed`` Auto-refresh Live-pagina elke 5 minuten [`#1298 <https://github.com/dsmrreader/dsmr-reader/issues/1298>`_]
 
-- ``Fixed``: Translations - by @denvers [`#1260 <https://github.com/dsmrreader/dsmr-reader/issues/1260>`_]
-- ``Fixed``: Bij update controleren op lokale openstaande wijzigingen [`#1259 <https://github.com/dsmrreader/dsmr-reader/issues/1259>`_]
-- ``Fixed``: Foutmelding na invullen foutieve datum in energiecontract [`#1283 <https://github.com/dsmrreader/dsmr-reader/issues/1283>`_]
+- ``Fixed`` Translations - by @denvers [`#1260 <https://github.com/dsmrreader/dsmr-reader/issues/1260>`_]
+- ``Fixed`` Bij update controleren op lokale openstaande wijzigingen [`#1259 <https://github.com/dsmrreader/dsmr-reader/issues/1259>`_]
+- ``Fixed`` Foutmelding na invullen foutieve datum in energiecontract [`#1283 <https://github.com/dsmrreader/dsmr-reader/issues/1283>`_]
 
 
 v4.11.0 - 2021-01-17
 --------------------
 
-- ``Changed``: MinderGas API-wijziging [`#1253 <https://github.com/dsmrreader/dsmr-reader/issues/1253>`_]
-- ``Changed``: Dependency updates
+- ``Changed`` MinderGas API-wijziging [`#1253 <https://github.com/dsmrreader/dsmr-reader/issues/1253>`_]
+- ``Changed`` Dependency updates
 
 
 v4.10.0 - 2021-01-11
 --------------------
 
-- ``Added``: Optie om datumtijd uit telegram te negeren [`#1233 <https://github.com/dsmrreader/dsmr-reader/issues/1233>`_]
+- ``Added`` Optie om datumtijd uit telegram te negeren [`#1233 <https://github.com/dsmrreader/dsmr-reader/issues/1233>`_]
 
-- ``Changed``: Clarify grouping options in configuration [`#1249 <https://github.com/dsmrreader/dsmr-reader/issues/1249>`_]
-- ``Changed``: Improve background information on configuration pages [`#1250 <https://github.com/dsmrreader/dsmr-reader/issues/1250>`_]
-- ``Changed``: Verduidelijken InfluxDB export voor terugwerkende kracht [`#1055 <https://github.com/dsmrreader/dsmr-reader/issues/1055>`_]
+- ``Changed`` Clarify grouping options in configuration [`#1249 <https://github.com/dsmrreader/dsmr-reader/issues/1249>`_]
+- ``Changed`` Improve background information on configuration pages [`#1250 <https://github.com/dsmrreader/dsmr-reader/issues/1250>`_]
+- ``Changed`` Verduidelijken InfluxDB export voor terugwerkende kracht [`#1055 <https://github.com/dsmrreader/dsmr-reader/issues/1055>`_]
 
-- ``Fixed``: Melding over ontbreken recente "readings" lijkt niet juist [`#1240 <https://github.com/dsmrreader/dsmr-reader/issues/1240>`_]
-- ``Fixed``: Small typo in retention policy explanation - by @matgeroe [`#1244 <https://github.com/dsmrreader/dsmr-reader/issues/1244>`_]
+- ``Fixed`` Melding over ontbreken recente "readings" lijkt niet juist [`#1240 <https://github.com/dsmrreader/dsmr-reader/issues/1240>`_]
+- ``Fixed`` Small typo in retention policy explanation - by @matgeroe [`#1244 <https://github.com/dsmrreader/dsmr-reader/issues/1244>`_]
 
 
 v4.9.0 - 2020-12-06
 -------------------
 
-- ``Changed``: Remote datalogger serial settings - by @JoooostB [`#1215 <https://github.com/dsmrreader/dsmr-reader/issues/1215>`_]
-- ``Changed``: Various documentation updates
-- ``Changed``: Dependency updates
+- ``Changed`` Remote datalogger serial settings - by @JoooostB [`#1215 <https://github.com/dsmrreader/dsmr-reader/issues/1215>`_]
+- ``Changed`` Various documentation updates
+- ``Changed`` Dependency updates
 
 
 v4.8.0 - 2020-11-15
 -------------------
 
-- ``Added``: Monitoring toevoegen voor dagstatistieken [`#1199 <https://github.com/dsmrreader/dsmr-reader/issues/1199>`_]
+- ``Added`` Monitoring toevoegen voor dagstatistieken [`#1199 <https://github.com/dsmrreader/dsmr-reader/issues/1199>`_]
 
-- ``Fixed``: Dagstatistieken worden niet gegenereerd na uitschakelen gas [`#1197 <https://github.com/dsmrreader/dsmr-reader/issues/1197>`_]
+- ``Fixed`` Dagstatistieken worden niet gegenereerd na uitschakelen gas [`#1197 <https://github.com/dsmrreader/dsmr-reader/issues/1197>`_]
 
-- ``Changed``: Dependencies update
+- ``Changed`` Dependencies update
 
 
 v4.7.0 - 2020-11-09
 -------------------
 
-- ``Added``: Dagtotalen via API aanmaken (t.b.v. importeren) [`#1194 <https://github.com/dsmrreader/dsmr-reader/issues/1194>`_]
+- ``Added`` Dagtotalen via API aanmaken (t.b.v. importeren) [`#1194 <https://github.com/dsmrreader/dsmr-reader/issues/1194>`_]
 
-- ``Changed``: "Live graphs initial zoom" gebruiken bij gasgrafiek (DSMR-v5 meters) [`#1181 <https://github.com/dsmrreader/dsmr-reader/issues/1181>`_]
-- ``Changed``: More rework of documentation [`#1190 <https://github.com/dsmrreader/dsmr-reader/issues/1190>`_]
+- ``Changed`` "Live graphs initial zoom" gebruiken bij gasgrafiek (DSMR-v5 meters) [`#1181 <https://github.com/dsmrreader/dsmr-reader/issues/1181>`_]
+- ``Changed`` More rework of documentation [`#1190 <https://github.com/dsmrreader/dsmr-reader/issues/1190>`_]
 
 
 v4.6.1 - 2020-11-07
 -------------------
 
-- ``Changed``: Rework of documentation [`#1190 <https://github.com/dsmrreader/dsmr-reader/issues/1190>`_]
-- ``Changed``: Dependencies update
+- ``Changed`` Rework of documentation [`#1190 <https://github.com/dsmrreader/dsmr-reader/issues/1190>`_]
+- ``Changed`` Dependencies update
 
 
 v4.6.0 - 2020-11-01
@@ -127,127 +128,127 @@ v4.6.0 - 2020-11-01
     The last command should reflect the new URL's.
 
 
-- ``Changed``: DSMR-reader verplaatst op GitHub [`#1174 <https://github.com/dsmrreader/dsmr-reader/issues/1174>`_]
+- ``Changed`` DSMR-reader verplaatst op GitHub [`#1174 <https://github.com/dsmrreader/dsmr-reader/issues/1174>`_]
 
-- ``Added``: Instelling om waarschuwingen over data-grootte te negeren [`#1173 <https://github.com/dsmrreader/dsmr-reader/issues/1173>`_]
-- ``Added``: FreeBSD compatibility [`#1175 <https://github.com/dsmrreader/dsmr-reader/issues/1175>`_]
-- ``Added``: Envvar for ``DJANGO_STATIC_ROOT`` [`#1175 <https://github.com/dsmrreader/dsmr-reader/issues/1175>`_]
+- ``Added`` Instelling om waarschuwingen over data-grootte te negeren [`#1173 <https://github.com/dsmrreader/dsmr-reader/issues/1173>`_]
+- ``Added`` FreeBSD compatibility [`#1175 <https://github.com/dsmrreader/dsmr-reader/issues/1175>`_]
+- ``Added`` Envvar for ``DJANGO_STATIC_ROOT`` [`#1175 <https://github.com/dsmrreader/dsmr-reader/issues/1175>`_]
 
 
 v4.5.0 - 2020-10-19
 -------------------
 
-- ``Deprecation``: Legacy envvars should be renamed [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Deprecation`` Legacy envvars should be renamed [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
 
-- ``Added``: Django settings instellen via envvars (``DJANGO_STATIC_URL``, ``DJANGO_FORCE_SCRIPT_NAME``, ``DJANGO_USE_X_FORWARDED_HOST``, ``DJANGO_USE_X_FORWARDED_PORT``, ``DJANGO_X_FRAME_OPTIONS``) [`#1140 <https://github.com/dsmrreader/dsmr-reader/issues/1140>`_]
-- ``Added``: Migratiestatus toevoegen aan dsmr-debuginfo [`#1130 <https://github.com/dsmrreader/dsmr-reader/issues/1130>`_]
-- ``Added``: Check op exit code migrate command bij deploy/update [`#1127 <https://github.com/dsmrreader/dsmr-reader/issues/1127>`_]
-- ``Added``: Allow other notification platforms using plugins [`#1151 <https://github.com/dsmrreader/dsmr-reader/issues/1151>`_]
+- ``Added`` Django settings instellen via envvars (``DJANGO_STATIC_URL``, ``DJANGO_FORCE_SCRIPT_NAME``, ``DJANGO_USE_X_FORWARDED_HOST``, ``DJANGO_USE_X_FORWARDED_PORT``, ``DJANGO_X_FRAME_OPTIONS``) [`#1140 <https://github.com/dsmrreader/dsmr-reader/issues/1140>`_]
+- ``Added`` Migratiestatus toevoegen aan dsmr-debuginfo [`#1130 <https://github.com/dsmrreader/dsmr-reader/issues/1130>`_]
+- ``Added`` Check op exit code migrate command bij deploy/update [`#1127 <https://github.com/dsmrreader/dsmr-reader/issues/1127>`_]
+- ``Added`` Allow other notification platforms using plugins [`#1151 <https://github.com/dsmrreader/dsmr-reader/issues/1151>`_]
 
-- ``Changed``: Versie-check toevoegen aan About [`#1125 <https://github.com/dsmrreader/dsmr-reader/issues/1125>`_]
-- ``Changed``: Status-pagina samenvoegen met About [`#1125 <https://github.com/dsmrreader/dsmr-reader/issues/1125>`_]
-- ``Changed``: Default color update for high tariff [`#1142 <https://github.com/dsmrreader/dsmr-reader/issues/1142>`_]
-- ``Changed``: Move export menu item to configuration page [`#1143 <https://github.com/dsmrreader/dsmr-reader/issues/1143>`_]
-- ``Changed``: Mogelijkheid voor negatieve waarde in Fixed daily cost [`#1148 <https://github.com/dsmrreader/dsmr-reader/issues/1148>`_]
-- ``Changed``: Standaardretentie (nieuwe installaties) verlaagd naar een maand [`#1156 <https://github.com/dsmrreader/dsmr-reader/issues/1156>`_]
+- ``Changed`` Versie-check toevoegen aan About [`#1125 <https://github.com/dsmrreader/dsmr-reader/issues/1125>`_]
+- ``Changed`` Status-pagina samenvoegen met About [`#1125 <https://github.com/dsmrreader/dsmr-reader/issues/1125>`_]
+- ``Changed`` Default color update for high tariff [`#1142 <https://github.com/dsmrreader/dsmr-reader/issues/1142>`_]
+- ``Changed`` Move export menu item to configuration page [`#1143 <https://github.com/dsmrreader/dsmr-reader/issues/1143>`_]
+- ``Changed`` Mogelijkheid voor negatieve waarde in Fixed daily cost [`#1148 <https://github.com/dsmrreader/dsmr-reader/issues/1148>`_]
+- ``Changed`` Standaardretentie (nieuwe installaties) verlaagd naar een maand [`#1156 <https://github.com/dsmrreader/dsmr-reader/issues/1156>`_]
 
-- ``Fixed``: Automatisch opnieuw verbinden bij MQTT-connectiefouten [`#1091 <https://github.com/dsmrreader/dsmr-reader/issues/1091>`_]
-- ``Fixed``: Change incorrect msgstr - by @gerard33 [`#1144 <https://github.com/dsmrreader/dsmr-reader/issues/1144>`_]
-- ``Fixed``: Add missing Telegram text parts to Admin: Notifications - by @gerard33 [`#1146 <https://github.com/dsmrreader/dsmr-reader/issues/1146>`_]
-- ``Fixed``: Dropbox access token max lengte vergroten [`#1157 <https://github.com/dsmrreader/dsmr-reader/issues/1157>`_]
+- ``Fixed`` Automatisch opnieuw verbinden bij MQTT-connectiefouten [`#1091 <https://github.com/dsmrreader/dsmr-reader/issues/1091>`_]
+- ``Fixed`` Change incorrect msgstr - by @gerard33 [`#1144 <https://github.com/dsmrreader/dsmr-reader/issues/1144>`_]
+- ``Fixed`` Add missing Telegram text parts to Admin: Notifications - by @gerard33 [`#1146 <https://github.com/dsmrreader/dsmr-reader/issues/1146>`_]
+- ``Fixed`` Dropbox access token max lengte vergroten [`#1157 <https://github.com/dsmrreader/dsmr-reader/issues/1157>`_]
 
 
 v4.4.3 - 2020-09-28
 -------------------
 
-- ``Fixed``: Server error Energy Contracts [`#1128 <https://github.com/dsmrreader/dsmr-reader/issues/1128>`_]
+- ``Fixed`` Server error Energy Contracts [`#1128 <https://github.com/dsmrreader/dsmr-reader/issues/1128>`_]
 
 
 v4.4.2 - 2020-09-27
 -------------------
 
-- ``Fixed``: ``0017_energy_supplier_price_refactoring: psycopg2.IntegrityError: column "description" contains null values`` [`#1126 <https://github.com/dsmrreader/dsmr-reader/issues/1126>`_]
+- ``Fixed`` ``0017_energy_supplier_price_refactoring: psycopg2.IntegrityError: column "description" contains null values`` [`#1126 <https://github.com/dsmrreader/dsmr-reader/issues/1126>`_]
 
 
 v4.4.1 - 2020-09-25
 -------------------
 
-- ``Fixed``: API docs broken [`#1121 <https://github.com/dsmrreader/dsmr-reader/issues/1121>`_]
+- ``Fixed`` API docs broken [`#1121 <https://github.com/dsmrreader/dsmr-reader/issues/1121>`_]
 
 
 v4.4.0 - 2020-09-25
 -------------------
 
-- ``Added``: Info-dump command voor debugging [`#1104 <https://github.com/dsmrreader/dsmr-reader/issues/1104>`_]
-- ``Added``: Optie om MQTT-integratie niet telkens uit te schakelen bij falende verbinding [`#1091 <https://github.com/dsmrreader/dsmr-reader/issues/1091>`_]
-- ``Added``: Vervanger voor Status endpoint (`/api/v2/application/monitoring`) [`#1086 <https://github.com/dsmrreader/dsmr-reader/issues/1086>`_]
+- ``Added`` Info-dump command voor debugging [`#1104 <https://github.com/dsmrreader/dsmr-reader/issues/1104>`_]
+- ``Added`` Optie om MQTT-integratie niet telkens uit te schakelen bij falende verbinding [`#1091 <https://github.com/dsmrreader/dsmr-reader/issues/1091>`_]
+- ``Added`` Vervanger voor Status endpoint (`/api/v2/application/monitoring`) [`#1086 <https://github.com/dsmrreader/dsmr-reader/issues/1086>`_]
 
-- ``Changed``: Overlappende energiecontracten mogelijk maken [`#1101 <https://github.com/dsmrreader/dsmr-reader/issues/1101>`_]
-- ``Changed``: Improved scheduled task indication on Status page [`#1093 <https://github.com/dsmrreader/dsmr-reader/issues/1093>`_]
-- ``Changed``: Simplify version check using GitHub tags API [`#1097 <https://github.com/dsmrreader/dsmr-reader/issues/1097>`_]
+- ``Changed`` Overlappende energiecontracten mogelijk maken [`#1101 <https://github.com/dsmrreader/dsmr-reader/issues/1101>`_]
+- ``Changed`` Improved scheduled task indication on Status page [`#1093 <https://github.com/dsmrreader/dsmr-reader/issues/1093>`_]
+- ``Changed`` Simplify version check using GitHub tags API [`#1097 <https://github.com/dsmrreader/dsmr-reader/issues/1097>`_]
 
-- ``Fixed``: Datalogger altijd opnieuw laten verbinden [`#1114 <https://github.com/dsmrreader/dsmr-reader/issues/1114>`_]
-- ``Fixed``: Fout bij toevoegen/wijzigen energiecontract zonder einddatum [`#1094 <https://github.com/dsmrreader/dsmr-reader/issues/1094>`_]
-- ``Fixed``: Typefoutje [`#1095 <https://github.com/dsmrreader/dsmr-reader/issues/1095>`_]
+- ``Fixed`` Datalogger altijd opnieuw laten verbinden [`#1114 <https://github.com/dsmrreader/dsmr-reader/issues/1114>`_]
+- ``Fixed`` Fout bij toevoegen/wijzigen energiecontract zonder einddatum [`#1094 <https://github.com/dsmrreader/dsmr-reader/issues/1094>`_]
+- ``Fixed`` Typefoutje [`#1095 <https://github.com/dsmrreader/dsmr-reader/issues/1095>`_]
 
 
 v4.3.1 - 2020-09-16
 -------------------
 
-- ``Changed``: Django security update
+- ``Changed`` Django security update
 
-- ``Fixed``: Datalogger buffer-issues bij hoge sleep [`#1107 <https://github.com/dsmrreader/dsmr-reader/issues/1107>`_]
+- ``Fixed`` Datalogger buffer-issues bij hoge sleep [`#1107 <https://github.com/dsmrreader/dsmr-reader/issues/1107>`_]
 
 
 v4.3.0 - 2020-08-28
 -------------------
 
-- ``Added``: Volgorde grafieken zelf instellen [`#903 <https://github.com/dsmrreader/dsmr-reader/issues/903>`_]
-- ``Added``: Ondersteuning voor vaste leveringskosten per dag [`#1048 <https://github.com/dsmrreader/dsmr-reader/issues/1048>`_]
+- ``Added`` Volgorde grafieken zelf instellen [`#903 <https://github.com/dsmrreader/dsmr-reader/issues/903>`_]
+- ``Added`` Ondersteuning voor vaste leveringskosten per dag [`#1048 <https://github.com/dsmrreader/dsmr-reader/issues/1048>`_]
 
-- ``Changed``: Improved docs/errors [`#1089 <https://github.com/dsmrreader/dsmr-reader/issues/1089>`_]
+- ``Changed`` Improved docs/errors [`#1089 <https://github.com/dsmrreader/dsmr-reader/issues/1089>`_]
 
-- ``Fixed``: Edge-case telegram parse error door berichtlengte [`#1090 <https://github.com/dsmrreader/dsmr-reader/issues/1090>`_]
+- ``Fixed`` Edge-case telegram parse error door berichtlengte [`#1090 <https://github.com/dsmrreader/dsmr-reader/issues/1090>`_]
 
 
 v4.2.0 - 2020-08-19
 -------------------
 
-- ``Added``: Add database downgrade steps to FAQ [`#1070 <https://github.com/dsmrreader/dsmr-reader/issues/1070>`_]
-- ``Added``: Bijhouden van veranderingen meterstatistieken [`#920 <https://github.com/dsmrreader/dsmr-reader/issues/920>`_]
+- ``Added`` Add database downgrade steps to FAQ [`#1070 <https://github.com/dsmrreader/dsmr-reader/issues/1070>`_]
+- ``Added`` Bijhouden van veranderingen meterstatistieken [`#920 <https://github.com/dsmrreader/dsmr-reader/issues/920>`_]
 
-- ``Changed``: Improved datalogger debug logging [`#1067 <https://github.com/dsmrreader/dsmr-reader/issues/1067>`_]
-- ``Changed``: Reworked datalogger connection [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
-- ``Changed``: Upgrade to Django 3.1 (includes new sidebar in admin) [`#1082 <https://github.com/dsmrreader/dsmr-reader/issues/1082>`_]
+- ``Changed`` Improved datalogger debug logging [`#1067 <https://github.com/dsmrreader/dsmr-reader/issues/1067>`_]
+- ``Changed`` Reworked datalogger connection [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
+- ``Changed`` Upgrade to Django 3.1 (includes new sidebar in admin) [`#1082 <https://github.com/dsmrreader/dsmr-reader/issues/1082>`_]
 
-- ``Fixed``: Prevent overlapping dates in energy contracts [`#1012 <https://github.com/dsmrreader/dsmr-reader/issues/1012>`_]
+- ``Fixed`` Prevent overlapping dates in energy contracts [`#1012 <https://github.com/dsmrreader/dsmr-reader/issues/1012>`_]
 
 
 v4.1.1 - 2020-08-07
 -------------------
 
-- ``Fixed``:  Fixed infite signal looping [`#1066 <https://github.com/dsmrreader/dsmr-reader/issues/1066>`_]
-- ``Fixed``:  Invalid baud rate for Fluvius (and Smarty) [`#1067 <https://github.com/dsmrreader/dsmr-reader/issues/1067>`_]
+- ``Fixed``  Fixed infite signal looping [`#1066 <https://github.com/dsmrreader/dsmr-reader/issues/1066>`_]
+- ``Fixed``  Invalid baud rate for Fluvius (and Smarty) [`#1067 <https://github.com/dsmrreader/dsmr-reader/issues/1067>`_]
 
 
 v4.1.0 - 2020-08-03
 -------------------
 
-- ``Added``: Builtin datalogger: Read telegrams from network socket [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
-- ``Added``: Remote datalogger: Read telegrams from network socket [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
-- ``Added``: Docs for data throughput troubleshooting [`#1039 <https://github.com/dsmrreader/dsmr-reader/issues/1039>`_]
+- ``Added`` Builtin datalogger: Read telegrams from network socket [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
+- ``Added`` Remote datalogger: Read telegrams from network socket [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
+- ``Added`` Docs for data throughput troubleshooting [`#1039 <https://github.com/dsmrreader/dsmr-reader/issues/1039>`_]
 
-- ``Changed``: Remote datalogger: Changed config to env vars [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
-- ``Changed``: Enabled retention by default for new installations [`#1000 <https://github.com/dsmrreader/dsmr-reader/issues/1000>`_]
-- ``Changed``: Disabled display of Buienradar API errors on dashboard [`#1056 <https://github.com/dsmrreader/dsmr-reader/issues/1056>`_]
-- ``Changed``: Improved handling of ``DSMRREADER_LOGLEVEL`` [`#1050 <https://github.com/dsmrreader/dsmr-reader/issues/1050>`_]
-- ``Changed``: Mandatory one-time update of datalogger sleep [`#1061 <https://github.com/dsmrreader/dsmr-reader/issues/1061>`_]
-- ``Changed``: Improved docs for Telegram app integration [`#1063 <https://github.com/dsmrreader/dsmr-reader/issues/1063>`_]
-- ``Changed``: Automatically restart datalogger on settings change [`#1066 <https://github.com/dsmrreader/dsmr-reader/issues/1066>`_]
+- ``Changed`` Remote datalogger: Changed config to env vars [`#1057 <https://github.com/dsmrreader/dsmr-reader/issues/1057>`_]
+- ``Changed`` Enabled retention by default for new installations [`#1000 <https://github.com/dsmrreader/dsmr-reader/issues/1000>`_]
+- ``Changed`` Disabled display of Buienradar API errors on dashboard [`#1056 <https://github.com/dsmrreader/dsmr-reader/issues/1056>`_]
+- ``Changed`` Improved handling of ``DSMRREADER_LOGLEVEL`` [`#1050 <https://github.com/dsmrreader/dsmr-reader/issues/1050>`_]
+- ``Changed`` Mandatory one-time update of datalogger sleep [`#1061 <https://github.com/dsmrreader/dsmr-reader/issues/1061>`_]
+- ``Changed`` Improved docs for Telegram app integration [`#1063 <https://github.com/dsmrreader/dsmr-reader/issues/1063>`_]
+- ``Changed`` Automatically restart datalogger on settings change [`#1066 <https://github.com/dsmrreader/dsmr-reader/issues/1066>`_]
 
-- ``Fixed``: Polyphase detection for Fluvius meters [`#1052 <https://github.com/dsmrreader/dsmr-reader/issues/1052>`_]
+- ``Fixed`` Polyphase detection for Fluvius meters [`#1052 <https://github.com/dsmrreader/dsmr-reader/issues/1052>`_]
 
-- ``Removed``: Outdated or obsolete documentation [`#1062 <https://github.com/dsmrreader/dsmr-reader/issues/1062>`_]
+- ``Removed`` Outdated or obsolete documentation [`#1062 <https://github.com/dsmrreader/dsmr-reader/issues/1062>`_]
 
 
 v4.0.0 - 2020-07-27
@@ -257,19 +258,19 @@ v4.0.0 - 2020-07-27
 
     This release of DSMR-reader requires you to manually upgrade from ``v3.x`` to ``v4.x``. See :doc:`the v4 upgrade guide </tutorial/upgrading/to-v4>` for more information.
 
-- ``Added``: Support builtin password protection for all webviews [`#1016 <https://github.com/dsmrreader/dsmr-reader/issues/1016>`_]
-- ``Added``: Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dsmrreader/dsmr-reader/issues/1025>`_]
-- ``Added``: InfluxDB integration [`#857 <https://github.com/dsmrreader/dsmr-reader/issues/857>`_]
-- ``Added``: InfluxDB met terugwerkende kracht exporteren [`#1055 <https://github.com/dsmrreader/dsmr-reader/issues/1055>`_]
+- ``Added`` Support builtin password protection for all webviews [`#1016 <https://github.com/dsmrreader/dsmr-reader/issues/1016>`_]
+- ``Added`` Superuser provisioning for Docker (``dsmr_superuser``) [`#1025 <https://github.com/dsmrreader/dsmr-reader/issues/1025>`_]
+- ``Added`` InfluxDB integration [`#857 <https://github.com/dsmrreader/dsmr-reader/issues/857>`_]
+- ``Added`` InfluxDB met terugwerkende kracht exporteren [`#1055 <https://github.com/dsmrreader/dsmr-reader/issues/1055>`_]
 
-- ``Changed``: Replaced settings.py config by (system) env vars [`#1035 <https://github.com/dsmrreader/dsmr-reader/issues/1035>`_]
-- ``Changed``: Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dsmrreader/dsmr-reader/issues/1013>`_]
-- ``Changed``: Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dsmrreader/dsmr-reader/issues/1015>`_]
-- ``Changed``: Refactor logging [`#1050 <https://github.com/dsmrreader/dsmr-reader/issues/1050>`_]
-- ``Changed``: Typo fixes - by ``olipayne`` [`#1059 <https://github.com/dsmrreader/dsmr-reader/issues/1059>`_]
+- ``Changed`` Replaced settings.py config by (system) env vars [`#1035 <https://github.com/dsmrreader/dsmr-reader/issues/1035>`_]
+- ``Changed`` Pip install psycopg2 vervangen door OS package [`#1013 <https://github.com/dsmrreader/dsmr-reader/issues/1013>`_]
+- ``Changed`` Force ``SECRET_KEY`` generation [`#1015 <https://github.com/dsmrreader/dsmr-reader/issues/1015>`_]
+- ``Changed`` Refactor logging [`#1050 <https://github.com/dsmrreader/dsmr-reader/issues/1050>`_]
+- ``Changed`` Typo fixes - by ``olipayne`` [`#1059 <https://github.com/dsmrreader/dsmr-reader/issues/1059>`_]
 
-- ``Removed``: Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dsmrreader/dsmr-reader/issues/871>`_] / [`#1049 <https://github.com/dsmrreader/dsmr-reader/issues/1049>`_]
-- ``Removed``: Dropped API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dsmrreader/dsmr-reader/issues/1024>`_]
+- ``Removed`` Dropped ``dsmr_mqtt`` command [`#871 <https://github.com/dsmrreader/dsmr-reader/issues/871>`_] / [`#1049 <https://github.com/dsmrreader/dsmr-reader/issues/1049>`_]
+- ``Removed`` Dropped API support for Status (``/api/v2/application/status``) [`#1024 <https://github.com/dsmrreader/dsmr-reader/issues/1024>`_]
 
 
 ----
