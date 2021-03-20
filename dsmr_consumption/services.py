@@ -345,47 +345,48 @@ def live_electricity_consumption():
     # In case the smart meter's clock is running in the future.
     latest_timestamp = min(timezone.now(), latest_timestamp)
 
-    # To distinguish whether we're returning or not.
-    is_delivering = latest_reading.electricity_currently_delivered > latest_reading.electricity_currently_returned
-    abs_units = max(latest_reading.electricity_currently_delivered, latest_reading.electricity_currently_returned)
-
     data['timestamp'] = latest_timestamp
     data['currently_delivered'] = int(latest_reading.electricity_currently_delivered * 1000)
     data['currently_returned'] = int(latest_reading.electricity_currently_returned * 1000)
+    data['cost_per_hour'] = None
+    data['tariff_name'] = None
 
     tariff = MeterStatistics.get_solo().electricity_tariff
     frontend_settings = FrontendSettings.get_solo()
+    tariff_names = {
+        1: frontend_settings.tariff_1_delivered_name,
+        2: frontend_settings.tariff_2_delivered_name,
+    }
 
     try:
-        data['tariff_name'] = {
-            1: frontend_settings.tariff_1_delivered_name,
-            2: frontend_settings.tariff_2_delivered_name,
-        }[tariff]
+        data['tariff_name'] = tariff_names[tariff]
     except KeyError:
-        data['tariff_name'] = None
+        pass
 
     try:
         prices = get_day_prices(day=timezone.now().date())
     except EnergySupplierPrice.DoesNotExist:
         return data
 
-    tariff_price_map = {
-        # Price depends on whether we're currently delivering or returning
-        1: prices.electricity_delivered_1_price if is_delivering else prices.electricity_returned_1_price,
-        2: prices.electricity_delivered_2_price if is_delivering else prices.electricity_returned_2_price,
+    delivered_prices_per_tariff = {
+        1: prices.electricity_delivered_1_price,
+        2: prices.electricity_delivered_2_price,
+    }
+    returned_prices_per_tariff = {
+        1: prices.electricity_returned_1_price,
+        2: prices.electricity_returned_2_price,
     }
 
     try:
-        cost_per_hour = abs_units * tariff_price_map[tariff]
+        delivered_cost_per_hour = latest_reading.electricity_currently_delivered * delivered_prices_per_tariff[tariff]
+        returned_cost_per_hour = latest_reading.electricity_currently_returned * returned_prices_per_tariff[tariff]
     except KeyError:
-        data['cost_per_hour'] = None
         return data
 
-    # Returning? Negate.
-    if not is_delivering:
-        cost_per_hour *= -1
-
-    data['cost_per_hour'] = formats.number_format(round_decimal(cost_per_hour))
+    # Some users have a setup that delivers and returns simultaneously. So we need to take both into account.
+    data['cost_per_hour'] = formats.number_format(round_decimal(
+        delivered_cost_per_hour - returned_cost_per_hour
+    ))
 
     return data
 

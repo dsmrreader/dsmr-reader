@@ -98,7 +98,7 @@ class TestViews(TestCase):
                         and current_tariff is not None:
                     self.assertIn('cost_per_hour', json_response)
                     self.assertEqual(
-                        json_response['cost_per_hour'], '0.23' if current_tariff == 1 else '0.45'
+                        json_response['cost_per_hour'], '0.21' if current_tariff == 1 else '0.43'
                     )
 
     def test_dashboard_xhr_header_future(self):
