@@ -77,7 +77,7 @@
 
         {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" %}</span></td>
+                <td>{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                 <td><span class="badge bg-red">{{ base.electricity1|default:'-' }}</span></td>
                 <td><span class="badge bg-red">{{ comparison.electricity1|default:'-' }}</span></td>
                 <td>
@@ -91,7 +91,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" %}</span></td>
+                <td>{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                 <td><span class="badge bg-red">{{ base.electricity2|default:'-' }}</span></td>
                 <td><span class="badge bg-red">{{ comparison.electricity2|default:'-' }}</span></td>
                 <td>
@@ -108,7 +108,7 @@
 
         {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{{ frontend_settings.tariff_1_returned_name }} <span class="unit">{% translate "kWh" %}</span></td>
+                <td>{{ frontend_settings.tariff_1_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                 <td><span class="badge bg-green">{{ base.electricity1_returned|default:'-' }}</span></td>
                 <td><span class="badge bg-green">{{ comparison.electricity1_returned|default:'-' }}</span></td>
                 <td>
@@ -122,7 +122,7 @@
                 </td>
             </tr>
             <tr>
-                <td>{{ frontend_settings.tariff_2_returned_name }} <span class="unit">{% translate "kWh" %}</span></td>
+                <td>{{ frontend_settings.tariff_2_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                 <td><span class="badge bg-green">{{ base.electricity2_returned|default:'-' }}</span></td>
                 <td><span class="badge bg-green">{{ comparison.electricity2_returned|default:'-' }}</span></td>
                 <td>

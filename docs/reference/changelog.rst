@@ -21,7 +21,10 @@ v4.14.0 - 2021-xx-xx
 - ``Changed`` Rework documentation structure [`#1315 <https://github.com/dsmrreader/dsmr-reader/issues/1315>`_]
 - ``Changed`` Move PVOutput to scheduled process mechanism [`#950 <https://github.com/dsmrreader/dsmr-reader/issues/950>`_]
 - ``Changed`` Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]
-- ``Changed`` Small GUI changes: Reworked consumption header - Displaying 3 decimals where applicable - Restyled "Compare" page a bit
+- ``Changed`` GUI: Reworked table alignment for smaller device screens
+- ``Changed`` GUI: Now displays 3 decimals where applicable
+- ``Changed`` GUI: Restyled "Compare" page colors and difference column
+- ``Changed`` GUI: Misc changes or fixes to layout regarding unit or dynamic values
 
 - ``Fixed`` Dashboard responsiveness verbeteren op kleine schermen [`#1320 <https://github.com/dsmrreader/dsmr-reader/issues/1320>`_]
 - ``Fixed`` Verbruik en teruglevering tegelijkertijd tonen [`#1324 <https://github.com/dsmrreader/dsmr-reader/issues/1324>`_]

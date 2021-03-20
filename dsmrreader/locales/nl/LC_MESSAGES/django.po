@@ -1433,11 +1433,8 @@ msgstr "Kosten"
 msgid "kWh"
 msgstr "kWh"
 
-msgid "(combined)"
-msgstr "(gecombineerd)"
-
-msgid "(single tariff)"
-msgstr "(enkel tarief)"
+msgid "Total electricity"
+msgstr "Totaal elektriciteit"
 
 msgid "m<sup>3</sup>"
 msgstr "m<sup>3</sup>"
@@ -1537,9 +1534,6 @@ msgstr "Verschil"
 
 msgid "There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate."
 msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
-
-msgid "Total electricity"
-msgstr "Totaal elektriciteit"
 
 msgid "No data available (yet)."
 msgstr "Nog geen gegevens beschikbaar."
@@ -2593,6 +2587,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "(combined)"
+#~ msgstr "(gecombineerd)"
+
+#~ msgid "(single tariff)"
+#~ msgstr "(enkel tarief)"
 
 #~ msgid "Highest consumption (L1)"
 #~ msgstr "Hoogste verbruik (L1)"

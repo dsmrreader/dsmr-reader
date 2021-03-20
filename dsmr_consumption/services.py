@@ -354,8 +354,8 @@ def live_electricity_consumption():
     tariff = MeterStatistics.get_solo().electricity_tariff
     frontend_settings = FrontendSettings.get_solo()
     tariff_names = {
-        1: frontend_settings.tariff_1_delivered_name,
-        2: frontend_settings.tariff_2_delivered_name,
+        1: frontend_settings.tariff_1_delivered_name.capitalize(),
+        2: frontend_settings.tariff_2_delivered_name.capitalize(),
     }
 
     try:

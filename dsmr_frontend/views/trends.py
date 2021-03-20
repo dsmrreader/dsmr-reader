@@ -73,8 +73,8 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
         frontend_settings = FrontendSettings.get_solo()
         data = {}
         translation_mapping = {
-            'electricity1': frontend_settings.tariff_1_delivered_name,
-            'electricity2': frontend_settings.tariff_2_delivered_name,
+            'electricity1': frontend_settings.tariff_1_delivered_name.capitalize(),
+            'electricity2': frontend_settings.tariff_2_delivered_name.capitalize(),
         }
 
         if not capabilities['any'] or not DayStatistics.objects.exists():

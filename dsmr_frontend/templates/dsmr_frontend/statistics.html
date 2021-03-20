@@ -31,12 +31,12 @@
                             <th class="col-sm-3">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
                         </tr>
                         <tr>
-                            <td>{{ frontend_settings.tariff_1_delivered_name }} <span class="unit">{% translate "kWh" %}</span></td>
+                            <td>{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_1|default:'-' }}{% endif %}</span></td>
                         </tr>
                         <tr>
-                            <td>{{ frontend_settings.tariff_2_delivered_name }} <span class="unit">{% translate "kWh" %}</span></td>
+                            <td>{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span></td>
                             <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ latest_reading.electricity_returned_2|default:'-' }}{% endif %}</span></td>
                         </tr>
