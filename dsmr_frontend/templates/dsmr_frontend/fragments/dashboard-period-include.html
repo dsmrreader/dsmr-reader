@@ -11,7 +11,7 @@
                 <table class="table table-hover">
                     <tr>
                         <th class="col-sm-6">
-                            {{ day|date:date_formatter }}
+                            {{ day|date:date_formatter|title }}
                         </th>
                         <th class="col-sm-2">{% if capabilities.electricity %}{% translate "Consumed" %}{% endif %}</th>
                         <th class="col-sm-2">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
