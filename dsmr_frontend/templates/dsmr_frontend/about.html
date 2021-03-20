@@ -192,13 +192,13 @@
             dataType: "json",
             url: "{% url 'frontend:about-xhr-update-check' %}",
         }).done(function(response) {
-            $(".xhr-loader").filter('.update-check').hide();
-
             if (response.is_latest_version) {
                 $("#update_check_no_update_available").show();
             } else {
                 $("#update_check_update_available").show();
             }
+        }).always(function(){
+            $(".xhr-loader").filter('.update-check').hide();
         });
     }
 

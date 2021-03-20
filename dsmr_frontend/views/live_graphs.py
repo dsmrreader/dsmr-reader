@@ -42,11 +42,7 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
         form = DashboardElectricityConsumptionForm(request.GET)
 
         if not form.is_valid():
-            return JsonResponse({
-                'errors': form.errors
-            },
-                status=400
-            )
+            return JsonResponse(dict(errors=form.errors), status=400)
 
         data = {
             'latest_delta_id': 0,

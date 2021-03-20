@@ -95,9 +95,10 @@ function update_summary(selected_date) {
             'level': g_datepicker_view_mode
         },
     }).done(function (data) {
-        summary_xhr_request = null;
-        $("#summary-loader").hide();
         $("#summary-holder").html(data).show();
+    }).always(function(){
+        $("#summary-loader").hide();
+        summary_xhr_request = null;
     });
 }
 
@@ -118,9 +119,6 @@ function update_graphs(selected_date) {
             'level': g_datepicker_view_mode
         },
     }).done(function (response) {
-        g_graph_xhr_request = null;
-        $("#chart-loader").hide();
-
         if (response.electricity) {
             render_electricity_graph(response.electricity);
         }
@@ -132,5 +130,8 @@ function update_graphs(selected_date) {
         if (response.gas) {
             render_gas_graph(response.gas);
         }
+    }).always(function(){
+        g_graph_xhr_request = null;
+        $("#chart-loader").hide();
     });
 }

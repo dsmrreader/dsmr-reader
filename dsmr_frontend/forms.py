@@ -62,3 +62,16 @@ class DashboardElectricityConsumptionForm(forms.Form):
 
 class NotificationReadForm(forms.Form):
     notification_id = forms.IntegerField()
+
+
+class TrendsPeriodForm(forms.Form):
+    start_date = forms.DateField()
+    end_date = forms.DateField()
+
+    def clean(self):
+        if self.cleaned_data.get('start_date') \
+                and self.cleaned_data.get('end_date') \
+                and self.cleaned_data.get('start_date') > self.cleaned_data.get('end_date'):
+            raise forms.ValidationError('Start date must be before end date')
+
+        return super().clean()

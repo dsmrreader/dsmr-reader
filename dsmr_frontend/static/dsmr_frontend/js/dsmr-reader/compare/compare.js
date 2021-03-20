@@ -97,7 +97,8 @@ function update_summary() {
             'level': g_datepicker_view_mode
         },
     }).done(function (data) {
-        $("#summary-loader").hide();
         $("#summary-holder").html(data).show();
+    }).always(function(){
+        $("#summary-loader").hide();
     });
 }

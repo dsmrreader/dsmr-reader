@@ -24,9 +24,14 @@ class TestViews(TestCase):
     namespace = 'frontend'
     support_data = True
     support_gas = True
+    request_params = None
 
     def setUp(self):
         self.client = Client()
+        self.request_params = dict(
+            start_date='2016-01-01',
+            end_date='2021-01-01',
+        )
 
     def test_trends(self):
         response = self.client.get(
@@ -36,11 +41,33 @@ class TestViews(TestCase):
         self.assertIn('capabilities', response.context)
         self.assertIn('frontend_settings', response.context)
 
+    def test_trends_xhr_bad_request(self):
+        response = self.client.get(
+            reverse('{}:trends-xhr-avg-consumption'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace))
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace)),
+            dict(
+                # Start cannot be before end
+                start_date='2021-01-01',
+                end_date='2016-01-01',
+            )
+        )
+        self.assertEqual(response.status_code, 400)
+
     @mock.patch('django.utils.timezone.now')
     def test_trends_xhr_avg_consumption(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         response = self.client.get(
-            reverse('{}:trends-xhr-avg-consumption'.format(self.namespace))
+            reverse('{}:trends-xhr-avg-consumption'.format(self.namespace)),
+            self.request_params
         )
         self.assertEqual(response.status_code, 200, response.content)
         json_response = json.loads(response.content.decode("utf-8"))
@@ -60,7 +87,8 @@ class TestViews(TestCase):
         ElectricityConsumption.objects.all().update(currently_returned=0)
 
         response = self.client.get(
-            reverse('{}:trends-xhr-avg-consumption'.format(self.namespace))
+            reverse('{}:trends-xhr-avg-consumption'.format(self.namespace)),
+            self.request_params
         )
         json_response = json.loads(response.content.decode("utf-8"))
 
@@ -71,7 +99,8 @@ class TestViews(TestCase):
     def test_trends_xhr_by_tariff(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         response = self.client.get(
-            reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace))
+            reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace)),
+            self.request_params
         )
         self.assertEqual(response.status_code, 200, response.content)
         json_response = json.loads(response.content.decode("utf-8"))
@@ -79,17 +108,15 @@ class TestViews(TestCase):
         if not self.support_data:
             return self.assertEqual(json_response, {})
 
-        self.assertIn('week', json_response)
-        self.assertIn('month', json_response)
-        self.assertIn({'value': 84, 'name': 'Laagtarief'}, json_response['week'])
-        self.assertIn({'value': 16, 'name': 'Hoogtarief'}, json_response['week'])
-        self.assertIn({'value': 84, 'name': 'Laagtarief'}, json_response['month'])
-        self.assertIn({'value': 16, 'name': 'Hoogtarief'}, json_response['month'])
+        self.assertIn('data', json_response)
+        self.assertIn({'value': 84, 'name': 'Laagtarief'}, json_response['data'])
+        self.assertIn({'value': 16, 'name': 'Hoogtarief'}, json_response['data'])
 
         # Test with no stats available (yet).
         DayStatistics.objects.all().delete()
         response = self.client.get(
-            reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace))
+            reverse('{}:trends-xhr-consumption-by-tariff'.format(self.namespace)),
+            self.request_params
         )
         self.assertEqual(response.status_code, 200, response.content)
 

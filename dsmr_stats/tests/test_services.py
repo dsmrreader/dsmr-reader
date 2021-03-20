@@ -494,7 +494,10 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             electricity1_returned=0,
             electricity2_returned=0,
         )
-        hour_stat = dsmr_stats.services.average_consumption_by_hour(max_weeks_ago=4)[0]
+        hour_stat = dsmr_stats.services.average_consumption_by_hour(
+            start=(timezone.now() - timezone.timedelta(weeks=4)).date(),
+            end=timezone.now().date(),
+        )[0]
 
         # @see "Trends are always shown in UTC #76", only PostgreSQL can fix this.
         if connection.vendor == 'postgresql':
@@ -641,13 +644,19 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         statistics_dict['electricity2'] = 15
         DayStatistics.objects.create(**statistics_dict)
 
-        percentages = dsmr_stats.services.electricity_tariff_percentage(start_date=target_date.date())
+        percentages = dsmr_stats.services.electricity_tariff_percentage(
+            start=target_date.date(),
+            end=timezone.now().date(),
+        )
         self.assertEqual(percentages['electricity1'], 25)
         self.assertEqual(percentages['electricity2'], 75)
 
         # Now try again without data.
         DayStatistics.objects.all().delete()
-        percentages = dsmr_stats.services.electricity_tariff_percentage(start_date=target_date.date())
+        dsmr_stats.services.electricity_tariff_percentage(
+            start=target_date.date(),
+            end=timezone.now().date(),
+        )
 
     @mock.patch('dsmr_stats.services.update_electricity_statistics')
     def test_dsmr_update_electricity_statistics_signal(self, service_mock):

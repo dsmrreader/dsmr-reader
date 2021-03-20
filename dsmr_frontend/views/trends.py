@@ -1,8 +1,8 @@
 from django.http import JsonResponse
+from django.utils import formats
 from django.views.generic.base import TemplateView, View
-from django.utils import timezone
-from dateutil.relativedelta import relativedelta
 
+from dsmr_frontend.forms import TrendsPeriodForm
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
@@ -21,6 +21,16 @@ class Trends(ConfigurableLoginRequiredMixin, TemplateView):
         context_data['capabilities'] = capabilities
         context_data['frontend_settings'] = FrontendSettings.get_solo()
         context_data['has_statistics'] = DayStatistics.objects.exists() and HourStatistics.objects.exists()
+        context_data['datepicker_locale_format'] = formats.get_format('DSMR_DATEPICKER_LOCALE_FORMAT')
+        context_data['datepicker_date_format'] = 'DSMR_DATEPICKER_DATE_FORMAT'
+
+        day_statistics = DayStatistics.objects.all().order_by('day')
+
+        try:
+            context_data['start_date'] = day_statistics[0].day
+            context_data['end_date'] = day_statistics.order_by('-day')[0].day
+        except IndexError:
+            pass
 
         return context_data
 
@@ -28,15 +38,22 @@ class Trends(ConfigurableLoginRequiredMixin, TemplateView):
 class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching average consumption, in JSON. """
 
-    def get(self, request):  # noqa: C901
+    def get(self, request):
+        form = TrendsPeriodForm(request.GET)
+
+        if not form.is_valid():
+            return JsonResponse(dict(errors=form.errors), status=400)
+
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour(
+            start=form.cleaned_data['start_date'],
+            end=form.cleaned_data['end_date'],
+        )
         data = {
             'electricity': [],
             'electricity_returned': [],
             'gas': [],
         }
-
-        capabilities = dsmr_backend.services.backend.get_capabilities()
-        average_consumption_by_hour = dsmr_stats.services.average_consumption_by_hour(max_weeks_ago=4)
 
         for current in average_consumption_by_hour:
             hour_start = '{}:00 - {}:00'.format(int(current['hour_start']), int(current['hour_start']) + 1)
@@ -68,31 +85,30 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
 class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
     """ XHR view for fetching electricity consumption by tariff, in JSON. """
 
-    def get(self, request):  # noqa: C901
+    def get(self, request):
+        form = TrendsPeriodForm(request.GET)
+
+        if not form.is_valid():
+            return JsonResponse(dict(errors=form.errors), status=400)
+
         capabilities = dsmr_backend.services.backend.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()
-        data = {}
         translation_mapping = {
             'electricity1': frontend_settings.tariff_1_delivered_name.capitalize(),
             'electricity2': frontend_settings.tariff_2_delivered_name.capitalize(),
         }
+        result = {}
 
         if not capabilities['any'] or not DayStatistics.objects.exists():
-            return JsonResponse(data)
+            return JsonResponse(result)
 
-        now = timezone.localtime(timezone.now())
-        week_date = now.date() - timezone.timedelta(days=7)
-        month_date = now.date() - relativedelta(months=1)
-
-        data['week'] = [
+        result['data'] = [
             {'name': translation_mapping[k], 'value': v}
             for k, v in
-            dsmr_stats.services.electricity_tariff_percentage(start_date=week_date).items()
-        ]
-        data['month'] = [
-            {'name': translation_mapping[k], 'value': v}
-            for k, v in
-            dsmr_stats.services.electricity_tariff_percentage(start_date=month_date).items()
+            dsmr_stats.services.electricity_tariff_percentage(
+                start=form.cleaned_data['start_date'],
+                end=form.cleaned_data['end_date'],
+            ).items()
         ]
 
-        return JsonResponse(data)
+        return JsonResponse(result)

@@ -26,7 +26,10 @@ class TestHourStatistics(TestCase):
 
     def test_hour_statistics_average(self):
         """ #100: Empty gas readings mess up average. """
-        average_consumption = dsmr_stats.services.average_consumption_by_hour(max_weeks_ago=4)
+        average_consumption = dsmr_stats.services.average_consumption_by_hour(
+            start=(timezone.now() - timezone.timedelta(weeks=4)).date(),
+            end=timezone.now().date(),
+        )
         self.assertEqual(average_consumption[0]['avg_gas'], 0)  # Would have been 'None' before.
 
 

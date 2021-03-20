@@ -1670,26 +1670,34 @@ msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie,
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
 msgstr "Er zijn momenteel nog geen dag-/uurstatistieken gegenereerd. Wacht op de volgende dag."
 
-msgid "Untracked consumption in the past (and today), is not taken into account."
-msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
+msgid "The data displayed here applies only to daily totals of the past, which are generated after each day passes."
+msgstr "De getoonde gegevens zijn alleen van toepassing op de dagelijkse totalen in het verleden, die dagelijks worden gegenereerd na afloop van de dag."
+
+msgid "Select starting day for calculating trends"
+msgstr "Selecteer startdatum voor berekenen van trends"
+
+msgid "Select ending day for calculating trends"
+msgstr "Selecteer einddatum voor berekenen van trends"
+
+msgid "Average electricity consumption"
+msgstr "Gemiddeld elektriciteitsverbruik"
 
 #, python-format
-msgid "Average electricity consumed each hour (in %%) within the past 4 weeks"
-msgstr "Gemiddelde elektriciteitsverbruik uur (in %%) van de afgelopen 4 weken"
+msgid "per hour, in %%"
+msgstr "per uur, in %%"
+
+msgid "Average electricity returned"
+msgstr "Gemiddelde teruglevering elektriciteit"
+
+msgid "Average gas consumption"
+msgstr "Gemiddeld gasverbruik"
+
+msgid "Electricity tariff ratio"
+msgstr "Verhouding tarieven elektriciteitsverbruik"
 
 #, python-format
-msgid "Average electricity returned each hour (in %%) within the past 4 weeks"
-msgstr "Gemiddelde elektriciteitsteruglevering per uur (in %%) van de afgelopen 4 weken"
-
-#, python-format
-msgid "Average gas consumed each hour (in %%) within the past 4 weeks"
-msgstr "Gemiddeld gasverbruik per uur (in %%) van de afgelopen 4 weken"
-
-msgid "Electricity tariff ratio (past week)"
-msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
-
-msgid "Electricity tariff ratio (past month)"
-msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
+msgid "in %%"
+msgstr "in %%"
 
 msgid "The backend process should automatically restart to apply changes."
 msgstr "Het backend-proces zou automatisch moeten herstarten om de wijzigingen door te voeren."
@@ -2588,6 +2596,24 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Untracked consumption in the past (and today), is not taken into account."
+#~ msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
+
+#~ msgid "Average electricity consumed each hour (in %%) within the past 4 weeks"
+#~ msgstr "Gemiddelde elektriciteitsverbruik uur (in %%) van de afgelopen 4 weken"
+
+#~ msgid "Average electricity returned each hour (in %%) within the past 4 weeks"
+#~ msgstr "Gemiddelde elektriciteitsteruglevering per uur (in %%) van de afgelopen 4 weken"
+
+#~ msgid "Average gas consumed each hour (in %%) within the past 4 weeks"
+#~ msgstr "Gemiddeld gasverbruik per uur (in %%) van de afgelopen 4 weken"
+
+#~ msgid "Electricity tariff ratio (past week)"
+#~ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
+
+#~ msgid "Electricity tariff ratio (past month)"
+#~ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
+
 #~ msgid "(combined)"
 #~ msgstr "(gecombineerd)"
 
@@ -2749,9 +2775,6 @@ msgstr "Engels"
 
 #~ msgid "Keep track of outside temperatures"
 #~ msgstr "Houd buitentemperaturen bij"
-
-#~ msgid "Electricity tariff 1"
-#~ msgstr "Elektriciteit tarief 1"
 
 #~ msgid "Electricity 1 price (low tariff)"
 #~ msgstr "Prijs elektriciteit 1 (daltarief)"

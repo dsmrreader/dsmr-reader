@@ -208,6 +208,8 @@ class TestAlwaysRequireLoginDisabled(TestCase):
         'notification-xhr-mark-read',
         'notification-xhr-mark-all-read',
         'about-xhr-debug-info',
+        'trends-xhr-avg-consumption',
+        'trends-xhr-consumption-by-tariff',
     )
 
     def setUp(self):

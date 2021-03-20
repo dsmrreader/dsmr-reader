@@ -18,6 +18,8 @@ Current version
 v4.14.0 - 2021-xx-xx
 --------------------
 
+- ``Added`` Trends analyse over selecteerbare periodes [`#1296 <https://github.com/dsmrreader/dsmr-reader/issues/1296>`_]
+
 - ``Changed`` Rework documentation structure [`#1315 <https://github.com/dsmrreader/dsmr-reader/issues/1315>`_]
 - ``Changed`` Move PVOutput to scheduled process mechanism [`#950 <https://github.com/dsmrreader/dsmr-reader/issues/950>`_]
 - ``Changed`` Move Dropbox to scheduled process mechanism [`#949 <https://github.com/dsmrreader/dsmr-reader/issues/949>`_]

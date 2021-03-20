@@ -1,7 +1,7 @@
 import logging
 
 from decimal import Decimal
-from datetime import time
+from datetime import time, date
 import math
 
 from dateutil.relativedelta import relativedelta
@@ -202,9 +202,12 @@ def clear_statistics():
     HourStatistics.objects.all().delete()
 
 
-def electricity_tariff_percentage(start_date):
+def electricity_tariff_percentage(start: date, end: date):
     """ Returns the total electricity consumption percentage by tariff (high/low tariff). """
-    totals = DayStatistics.objects.filter(day__gte=start_date).aggregate(
+    totals = DayStatistics.objects.filter(
+        day__gte=start,
+        day__lte=end,
+    ).aggregate(
         electricity1=Sum('electricity1'),
         electricity2=Sum('electricity2'),
     )
@@ -219,7 +222,7 @@ def electricity_tariff_percentage(start_date):
     return totals
 
 
-def average_consumption_by_hour(max_weeks_ago):
+def average_consumption_by_hour(start: date, end: date):
     """ Calculates the average consumption by hour. Measured over all consumption data of the past X months. """
     sql_extra = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
@@ -235,8 +238,8 @@ def average_consumption_by_hour(max_weeks_ago):
         connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])  # pragma: no cover
 
     hour_statistics = HourStatistics.objects.filter(
-        # This greatly helps reducing the queryset size, but also makes it more relevant.
-        hour_start__gt=timezone.now() - timezone.timedelta(weeks=max_weeks_ago)
+        hour_start__date__gte=start,
+        hour_start__date__lte=end,
     ).extra({
         'hour_start': sql_extra
     }).values('hour_start').order_by('hour_start').annotate(

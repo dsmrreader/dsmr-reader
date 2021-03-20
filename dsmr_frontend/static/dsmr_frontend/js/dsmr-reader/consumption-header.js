@@ -28,7 +28,7 @@ function update_consumption_header(update_interval)
             $("#cost_per_hour").html(cost_per_hour).show();
         }
     }).always(function(){
-        // Done (either way) reschedule next update.
+        // Done (either way), reschedule next update.
         setTimeout(
             function(){ update_consumption_header(update_interval); },
             update_interval
