@@ -230,7 +230,8 @@
         var sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())
 
         $(document).ready(function(){
-            setInterval(function(){ update_consumption_header(); }, 1000);
+            /* This will reschedule itself again after completion. */
+            update_consumption_header(1000);
 
             /* Reload entire page after X minutes. */
             setInterval(function(){ location.reload(); }, 5 * 60 * 1000)

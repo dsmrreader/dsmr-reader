@@ -56,10 +56,11 @@
             return false;
         });
 
-        var xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
+        let xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
 
         $(document).ready(function(){
-            setInterval(function(){ update_consumption_header(); }, 1000);
+            /* This will reschedule itself again after completion. */
+            update_consumption_header(1000);
 
             /* Reload entire page after 5 minutes. */
             setInterval(function(){ location.reload(); }, 5 * 60 * 1000)

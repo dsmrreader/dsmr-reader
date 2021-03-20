@@ -1,4 +1,4 @@
-function update_consumption_header()
+function update_consumption_header(update_interval)
 {
     $("#header-loader").show();
 
@@ -6,7 +6,6 @@ function update_consumption_header()
         dataType: "json",
         url: xhr_consumption_header_url,
     }).done(function(response) {
-        $("#header-loader").hide();
         $("#latest_timestamp").html(response.timestamp);
         $("#tariff_name").html(response.tariff_name);
 
@@ -28,5 +27,13 @@ function update_consumption_header()
 
             $("#cost_per_hour").html(cost_per_hour).show();
         }
+    }).always(function(){
+        // Done (either way) reschedule next update.
+        setTimeout(
+            function(){ update_consumption_header(update_interval); },
+            update_interval
+        );
+
+        $("#header-loader").hide();
     });
 }
