@@ -13,13 +13,11 @@ function update_trends_averages(start_date, end_date) {
             {
                 name: '%',
                 type: 'pie',
-                radius: ['1%', '75%'],
-                center: ['50%', '50%'],
+                radius: ['10%', '60%'],
                 width: '100%',
                 roseType: 'radius',
                 label: {
-                    // alignTo: 'labelLine',
-                    formatter: '{d}%\n{S|{b}}',
+                    formatter: '{d}% {S|{b}}',
                     rich: {
                         S: {
                             fontSize: 8,

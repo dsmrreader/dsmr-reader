@@ -15,7 +15,7 @@ Current version
     :depth: 1
 
 
-v4.14.0 - 2021-03-22
+v4.14.0 - 2021-03-23
 --------------------
 
 - ``Added`` Trends analyse over selecteerbare periodes [`#1296 <https://github.com/dsmrreader/dsmr-reader/issues/1296>`_]

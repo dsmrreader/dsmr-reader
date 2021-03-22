@@ -15,11 +15,9 @@ function update_trends_tariffs(start_date, end_date) {
             {
                 name: '%',
                 type: 'pie',
-                radius: ['50%', '75%'],
-                center: ['50%', '50%'],
+                radius: ['10%', '60%'],
                 label: {
-                    formatter: '{b}\n{d}%',
-                    alignTo: 'labelLine'
+                    formatter: '{b}\n{d}%'
                 },
                 data: null
             }
