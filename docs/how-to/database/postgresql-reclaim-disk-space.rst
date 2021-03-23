@@ -1,7 +1,7 @@
 Database: Reclaiming disk space (PostgreSQL)
 ============================================
 
-.. note::
+.. tip::
 
     This will only make a difference if you've enabled data cleanup retroactively, resulting in roughly more than a 25 percent data deletion of your entire database.
 

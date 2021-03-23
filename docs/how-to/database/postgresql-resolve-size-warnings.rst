@@ -8,3 +8,8 @@ You will need to reduce the amount of incoming data and also enable a data reten
 
 After a few hours or days (depending on your hardware) the data should been reduced.
 Depending on the amount of data deleted, you might want to execute a one-time ``vacuumdb`` afterwards. See below for more information.
+
+Execute::
+
+    sudo su - postgres
+    vacuumdb -f -v -z -d dsmrreader

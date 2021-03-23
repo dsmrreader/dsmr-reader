@@ -22,4 +22,4 @@ msgstr "Het hangt af van de situatie, maar je kunt het volgende sowieso zelf eer
 
 #: ../../how-to/troubleshooting/error-key-already-exists.rst:12
 msgid "If it does not resolve your issue, ask for support on GitHub (see end of page)."
-msgstr "Wanneer dat het probleem niet oplost, vraag dan om ondersteuning via Guthub (zie onderaan deze pagina)."
+msgstr "Wanneer dat het probleem niet oplost, vraag dan om ondersteuning via Github (zie onderaan deze pagina)."

@@ -30,7 +30,7 @@ msgstr "Dit wordt veroorzaak door de hoge gegevensdoorvoer van DSMR versie 5, wa
 
 #: ../../how-to/database/data-limits.rst:11
 msgid "Therefor two measures can be taken: Increasing datalogger sleep and data retention policy."
-msgstr "HIervoor kunnen twee maatregelen genomen worden: Verhogen van de datalogger-sleep en het instellen van een retentiebeleid."
+msgstr "Hiervoor kunnen twee maatregelen genomen worden: Verhogen van de datalogger-sleep en het instellen van een retentiebeleid."
 
 #: ../../how-to/database/data-limits.rst:15
 msgid "How can I increase the datalogger sleep time?"
@@ -46,4 +46,4 @@ msgstr "Hoe stel ik een gegevensretentiebeleid in?"
 
 #: ../../how-to/database/data-limits.rst:24
 msgid "Configure a data retention policy :doc:`in the configuration</tutorial/configuration>`. This will eventually delete up to 99 percent of the telegrams, always preserving a few historically. Also, day and hour totals are **never** deleted by retention policies."
-msgstr " Stel een gegevensretentiebeleid in :doc:`binnen de configuratie</tutorial/configuration>`. Dit schoont uiteindelijk tot 99 procent van de telegrammen op, waarbij een aantal altijd achterblijven i.v.m. historie. Daarnaast worden uur- en dagtotalen **nooit** opgeschoond door het retentiebeleid."
+msgstr "Stel een gegevensretentiebeleid in :doc:`binnen de configuratie</tutorial/configuration>`. Dit schoont uiteindelijk tot 99 procent van de telegrammen op, waarbij een aantal altijd achterblijven i.v.m. historie. Daarnaast worden uur- en dagtotalen **nooit** opgeschoond door het retentiebeleid."

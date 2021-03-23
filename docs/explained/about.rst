@@ -17,19 +17,14 @@ Languages
 The entire application and its code is written and documented in English.
 The interface is translated into Dutch and will be enabled automatically, depending on your browser's language preference.
 
-Support for:
-
-- English
-- Dutch
-
 
 Hardware requirements
 ---------------------
 
-- For datalogger only: **Any** RaspberryPi or similar
-- For full DSMR-reader: **RaspberryPi 3+** or similar
-- P1 telegram cable (or a network socket when using ``ser2net``)
-- A smart meter supporting DSMR versions: `v2` / `v4` / `v5`
+- **For datalogger only**: *Any* RaspberryPi or similar.
+- **For full DSMR-reader**: *RaspberryPi 3+* or similar.
+- P1 telegram cable (or a network socket when using ``ser2net``).
+- A smart meter supporting DSMR versions: ``v2`` / ``v4`` / ``v5``.
 
 
 Software requirements

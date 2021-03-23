@@ -22,7 +22,7 @@ In this example the ip address is ``192.168.178.40``. If possible, you should as
 
 Reboot test
 -----------
-You surely want to ``reboot`` your device and check whether everything comes up automatically again with ``sudo supervisorctl status``. This will make sure your data logger 'survives' any power surges.
+You surely want to ``sudo reboot`` your device and check whether everything comes up automatically again with ``sudo supervisorctl status``. This will make sure your data logger 'survives' any power surges.
 
 
 Public webinterface warning

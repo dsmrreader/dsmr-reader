@@ -41,8 +41,8 @@ msgid "Reboot test"
 msgstr "Herstart-test"
 
 #: ../../tutorial/setting-up.rst:25
-msgid "You surely want to ``reboot`` your device and check whether everything comes up automatically again with ``sudo supervisorctl status``. This will make sure your data logger 'survives' any power surges."
-msgstr "Herstart het apparaat met ``reboot`` om te testen of alles automatisch opstart. Je zou na de herstart alles moeten zien draaien via ``sudo supervisorctl status``. Dit zorgt ervoor dat je datalogger eventuele stroomstoringen overleeft (of wanneer je zelf de stroom eraf haalt)."
+msgid "You surely want to ``sudo reboot`` your device and check whether everything comes up automatically again with ``sudo supervisorctl status``. This will make sure your data logger 'survives' any power surges."
+msgstr "Herstart het apparaat met ``sudo reboot`` om te testen of alles automatisch opstart. Je zou na de herstart alles moeten zien draaien via ``sudo supervisorctl status``. Dit zorgt ervoor dat je datalogger eventuele stroomstoringen overleeft (of wanneer je zelf de stroom eraf haalt)."
 
 #: ../../tutorial/setting-up.rst:29
 msgid "Public webinterface warning"
@@ -126,4 +126,4 @@ msgstr "De levensduur van SD-kaartjes varieert van enkele weken tot soms jaren, 
 
 #: ../../tutorial/setting-up.rst:86
 msgid "Backups are created daily, but rotated weekly! So it's possible that, at some point, the backups get corrupted as well since they're overwritten each week. And eventually they will get synchronized to Dropbox as well."
-msgstr "Back-ups worden dagelijks gemaakt, echter worden deze ook wekelijks geroteerd! Dus op een gegeven moment kunnen ze na een week overschreven worden met een corrupte variant. En gezien ze ook naar Dropbox synchroniseerd kunnen worden, biedt dat ook geen garantie."
+msgstr "Back-ups worden dagelijks gemaakt, echter worden deze ook wekelijks geroteerd! Dus op een gegeven moment kunnen ze na een week overschreven worden met een corrupte variant. En gezien ze ook naar Dropbox gesynchroniseerd kunnen worden, biedt dat ook geen garantie."

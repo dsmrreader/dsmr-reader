@@ -1,7 +1,7 @@
 Troubleshooting: Log files
 ==========================
 
-DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:
+DSMR-reader technically consists of these processes and they are watched by Supervisor:
 
 +----------------+----------------------------------+
 | Webinterface   | ``dsmr_webinterface``            |

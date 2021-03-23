@@ -17,8 +17,8 @@ msgid "Troubleshooting: Log files"
 msgstr "Hulp bij problemen: Logbestanden"
 
 #: ../../how-to/troubleshooting/logfiles.rst:4
-msgid "DSMR-reader technically consists of these processes (some may or may not be used by you) and they are watched by Supervisor:"
-msgstr "DSMR-reader bestaat technisch uit deze processen (sommigen zullen wel of niet in je eigen situatie gebruikt worden) en ze worden beheerd door Supervisor:"
+msgid "DSMR-reader technically consists of these processes and they are watched by Supervisor:"
+msgstr "DSMR-reader bestaat technisch uit deze processen en ze worden beheerd door Supervisor:"
 
 #: ../../how-to/troubleshooting/logfiles.rst:7
 #: ../../how-to/troubleshooting/logfiles.rst:32

@@ -24,10 +24,8 @@ msgstr "Je kunt extra debug-informatie aanleveren door het ``dsmr_debuginfo``-co
 msgid "To do so you can either execute ``./manage.py dsmr_debuginfo`` on the command line or (since v4.6) click the button on the About & Support page."
 msgstr "Om dit te doen kun je ofwel ``./manage.py dsmr_debuginfo`` op de command line uitvoeren, of (sinds v4.6) op de knop klikken in de Over & Ondersteuning-pagina."
 
-#: ../../how-to/troubleshooting/debug-info-dump.rst:12
-msgid "Added the ``dsmr_debuginfo`` command for command line."
-msgstr "Het ``dsmr_debuginfo`` commando toegevoegd voor de command line."
+#~ msgid "Added the ``dsmr_debuginfo`` command for command line."
+#~ msgstr "Het ``dsmr_debuginfo`` commando toegevoegd voor de command line."
 
-#: ../../how-to/troubleshooting/debug-info-dump.rst:16
-msgid "Added the ``dsmr_debuginfo`` feature to About & Support page."
-msgstr "De ``dsmr_debuginfo`` feature toegevoegd aan de Over & Ondersteuning-pagina."
+#~ msgid "Added the ``dsmr_debuginfo`` feature to About & Support page."
+#~ msgstr "De ``dsmr_debuginfo`` feature toegevoegd aan de Over & Ondersteuning-pagina."
