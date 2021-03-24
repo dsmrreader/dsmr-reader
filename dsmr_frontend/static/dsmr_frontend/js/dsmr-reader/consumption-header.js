@@ -4,7 +4,7 @@ function update_consumption_header(update_interval)
 
     $.ajax({
         dataType: "json",
-        url: xhr_consumption_header_url,
+        url: XHR_CONSUMPTION_HEADER_URL,
     }).done(function(response) {
         $("#latest_timestamp").html(response.timestamp);
         $("#tariff_name").html(response.tariff_name);

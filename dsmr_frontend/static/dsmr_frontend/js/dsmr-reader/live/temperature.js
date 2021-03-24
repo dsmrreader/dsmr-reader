@@ -1,16 +1,22 @@
 $(document).ready(function () {
 
     let echarts_temperature_graph = echarts.init(document.getElementById('echarts-temperature-graph'));
-    echarts_temperature_graph.showLoading('default', echarts_loading_options);
+    echarts_temperature_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(echarts_temperature_graph_url, function (xhr_data) {
+    $.get(ECHARTS_TEMPERATURE_GRAPH_URL, function (xhr_data) {
         echarts_temperature_graph.hideLoading();
 
         let option = {
+            toolbox: TOOLBOX_OPTIONS,
             color: [
-                temperature_color
+                TEMPERATURE_COLOR
             ],
+            title: {
+                text: TEXT_TEMPERATURE_HEADER,
+                textStyle: TITLE_TEXTSTYLE,
+                left: 'center',
+            },
             tooltip: {
                 formatter: "{c} {a}",
                 trigger: 'axis',

@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="panel datepicker-panel">
+            <div class="panel datepicker-panel" style="height: 100%;">
                 <header class="panel-heading datepicker-header">
                     {% blocktranslate %}Pick a day, month or year{% endblocktranslate %}
                 </header>
@@ -66,15 +66,15 @@
                 </header>
                 <div class="panel-body">
                     {% if capabilities.electricity %}
-                    <div id="echarts-electricity-graph" style="width: 100%; height: 200px;"></div>
+                    <div id="echarts-electricity-graph" class="graph-canvas"></div>
                     {% endif %}
 
                     {% if capabilities.electricity_returned %}
-                    <div id="echarts-electricity-returned-graph" style="width: 100%; height: 200px;"></div>
+                    <div id="echarts-electricity-returned-graph" class="graph-canvas"></div>
                     {% endif %}
 
                     {% if capabilities.gas %}
-                    <div id="echarts-gas-graph" style="width: 100%; height: 200px;"></div>
+                    <div id="echarts-gas-graph" class="graph-canvas"></div>
                     {% endif %}
                 </div>
             </div>
@@ -92,7 +92,7 @@
 {% block javascript %}
 	{{ block.super }}
 	 
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-4.9.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-5.0.2.min.js' %}"></script>
 
 	{% get_current_language as LANGUAGE_CODE %}
 	<script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.27.0.min.js' %}"></script>
@@ -102,37 +102,46 @@
 
     <script type="text/javascript">
         /* Translations. */
-        const text_electricity_header = '{% blocktranslate %}Electricity consumed{% endblocktranslate %} {% translate "(in kWh)" %}';
-        const text_electricity_returned_header = '{% blocktranslate %}Electricity returned{% endblocktranslate %} {% translate "(in kWh)" %}';
-        const text_gas_header = '{% blocktranslate %}Gas consumed{% endblocktranslate %} {% translate "(in m³)" %}';
+        const TEXT_ELECTRICITY_HEADER = '{% blocktranslate %}Electricity consumed{% endblocktranslate %} {S|kWh}';
+        const TEXT_ELECTRICITY_RETURNED_HEADER = '{% blocktranslate %}Electricity returned{% endblocktranslate %} {S|kWh}';
+        const TEXT_GAS_HEADER = '{% blocktranslate %}Gas consumed{% endblocktranslate %} {S|m³}';
 
-        const text_electricity1_delivered = '{{ frontend_settings.tariff_1_delivered_name|capfirst }}';
-        const text_electricity2_delivered = '{{ frontend_settings.tariff_2_delivered_name|capfirst }}';
-        const text_electricity1_returned = '{{ frontend_settings.tariff_1_returned_name|capfirst }}';
-        const text_electricity2_returned = '{{ frontend_settings.tariff_2_returned_name|capfirst }}';
-        const text_electricity_merged_delivered = '{% blocktranslate %}Electricity (single tariff){% endblocktranslate %}';
-        const text_electricity_merged_returned = '{% blocktranslate %}Electricity returned (single tariff){% endblocktranslate %}';
-        const text_gas = '{% blocktranslate %}Gas{% endblocktranslate %}';
+        const TEXT_ELECTRICITY1_DELIVERED = '{{ frontend_settings.tariff_1_delivered_name|capfirst }}';
+        const TEXT_ELECTRICITY2_DELIVERED = '{{ frontend_settings.tariff_2_delivered_name|capfirst }}';
+        const TEXT_ELECTRICITY1_RETURNED = '{{ frontend_settings.tariff_1_returned_name|capfirst }}';
+        const TEXT_ELECTRICITY2_RETURNED = '{{ frontend_settings.tariff_2_returned_name|capfirst }}';
+        const TEXT_ELECTRICITY_MERGED_DELIVERED = '{% blocktranslate %}Electricity (single tariff){% endblocktranslate %}';
+        const TEXT_ELECTRICITY_MERGED_RETURNED = '{% blocktranslate %}Electricity returned (single tariff){% endblocktranslate %}';
+        const TEXT_GAS = '{% blocktranslate %}Gas{% endblocktranslate %}';
         
         /* Colors. */
-        const electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
-        const electricity_delivered_alternate_color = "{{ frontend_settings.electricity_delivered_alternate_color }}";
-        const electricity_returned_color = "{{ frontend_settings.electricity_returned_color }}";
-        const electricity_returned_alternate_color = "{{ frontend_settings.electricity_returned_alternate_color }}";
-        const gas_delivered_color = "{{ frontend_settings.gas_delivered_color }}";
+        const ELECTRICITY_DELIVERED_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
+        const ELECTRICITY_DELIVERED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_delivered_alternate_color }}";
+        const ELECTRICITY_RETURNED_COLOR = "{{ frontend_settings.electricity_returned_color }}";
+        const ELECTRICITY_RETURNED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_returned_alternate_color }}";
+        const GAS_DELIVERED_COLOR = "{{ frontend_settings.gas_delivered_color }}";
         
         /* Settings. */
-        const datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
-        const datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
-        const datepicker_locale_format = "{{ datepicker_locale_format }}";
-        const datepicker_language_code = "{{ LANGUAGE_CODE }}";
-        const gas_graph_style = "{{ frontend_settings.gas_graph_style }}";
-        const electricity_graph_style = "{{ frontend_settings.electricity_graph_style }}";
-        const stack_electricity_graphs = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
+        const DATEPICKER_START_DATE = "{{ start_date|date:datepicker_date_format }}";
+        const DATEPICKER_END_DATE = "{{ end_date|date:datepicker_date_format }}";
+        const DATEPICKER_LOCALE_FORMAT = "{{ datepicker_locale_format }}";
+        const DATEPICKER_LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
+        const GAS_GRAPH_STYLE = "{{ frontend_settings.gas_graph_style }}";
+        const ELECTRICITY_GRAPH_STYLE = "{{ frontend_settings.electricity_graph_style }}";
+        const STACK_ELECTRICITY_GRAPHS = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
+
+        const TITLE_TEXTSTYLE = {
+            rich: {
+                S: {
+                    fontSize: 10,
+                    color: 'grey'
+                },
+            }
+        };
 
         /* XHR. */
-        const archive_xhr_summary_url = "{% url 'frontend:archive-xhr-summary' %}";
-        const archive_xhr_graphs_url = "{% url 'frontend:archive-xhr-graphs' %}";
+        const ARCHIVE_XHR_SUMMARY_URL = "{% url 'frontend:archive-xhr-summary' %}";
+        const ARCHIVE_XHR_GRAPHS_URL = "{% url 'frontend:archive-xhr-graphs' %}";
     </script>
 
     {% if capabilities.electricity %}

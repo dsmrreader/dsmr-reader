@@ -12,12 +12,13 @@ $(document).ready(function () {
 function render_electricity_graph(xhr_data) {
     var echarts_options = {
         title: {
-            text: text_electricity_header,
-            left: 'center'
+            text: TEXT_ELECTRICITY_HEADER,
+            textStyle: TITLE_TEXTSTYLE,
+            left: 'center',
         },
         color: [
-            electricity_delivered_alternate_color,
-            electricity_delivered_color
+            ELECTRICITY_DELIVERED_ALTERNATE_COLOR,
+            ELECTRICITY_DELIVERED_COLOR
         ],
         tooltip: {
             trigger: 'axis',
@@ -48,7 +49,7 @@ function render_electricity_graph(xhr_data) {
         xAxis: [
             {
                 type: 'category',
-                boundaryGap: electricity_graph_style === 'bar',
+                boundaryGap: ELECTRICITY_GRAPH_STYLE === 'bar',
                 data: xhr_data.x
             }
         ],
@@ -63,17 +64,17 @@ function render_electricity_graph(xhr_data) {
     if (xhr_data.electricity1 && xhr_data.electricity2) {
         echarts_options.series = [
             {
-                name: text_electricity1_delivered,
-                type: electricity_graph_style,
-                stack: stack_electricity_graphs,
+                name: TEXT_ELECTRICITY1_DELIVERED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                stack: STACK_ELECTRICITY_GRAPHS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity1
             },
             {
-                name: text_electricity2_delivered,
-                type: electricity_graph_style,
-                stack: stack_electricity_graphs,
+                name: TEXT_ELECTRICITY2_DELIVERED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                stack: STACK_ELECTRICITY_GRAPHS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity2
@@ -82,8 +83,8 @@ function render_electricity_graph(xhr_data) {
     } else if (xhr_data.electricity_merged) {
         echarts_options.series = [
             {
-                name: text_electricity_merged_delivered,
-                type: electricity_graph_style,
+                name: TEXT_ELECTRICITY_MERGED_DELIVERED,
+                type: ELECTRICITY_GRAPH_STYLE,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity_merged

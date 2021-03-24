@@ -18,6 +18,7 @@ Current version
 v4.15.0 - 2021-xx-xx
 --------------------
 
+- ``Changed`` Upgrade to eCharts 5 and add media support [`#1331 <https://github.com/dsmrreader/dsmr-reader/issues/1331>`_]
 
 
 v4.14.0 - 2021-03-23

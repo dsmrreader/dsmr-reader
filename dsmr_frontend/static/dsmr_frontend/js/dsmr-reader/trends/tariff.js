@@ -2,38 +2,70 @@ let echarts_electricity_by_tariff_graph = echarts.init(document.getElementById('
 
 function update_trends_tariffs(start_date, end_date) {
     let echarts_options = {
-        color: [
-            electricity_delivered_alternate_color,
-            electricity_delivered_color
-        ],
-        calculable: true,
-        tooltip: {
-            trigger: 'item',
-            formatter: "{b} ({d}%)"
+        baseOption: {
+            color: [
+                ELECTRICITY_DELIVERED_ALTERNATE_COLOR,
+                ELECTRICITY_DELIVERED_COLOR
+            ],
+            calculable: true,
+            tooltip: {
+                trigger: 'item',
+                formatter: "{b} ({d}%)"
+            },
+            series: [
+                {
+                    name: '%',
+                    type: 'pie',
+                    label: {
+                        formatter: '{b}\n{d}%'
+                    },
+                    data: null
+                }
+            ]
         },
-        series: [
+        media: [
             {
-                name: '%',
-                type: 'pie',
-                radius: ['10%', '60%'],
-                label: {
-                    formatter: '{b}\n{d}%'
+              option: {
+                    series: [
+                        {
+                            radius: ['10%', '90%'],
+                            width: '100%',
+                            label: {
+                                alignTo: 'labelLine',
+                                edgeDistance: '5%'
+                            }
+                        }
+                    ],
                 },
-                data: null
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    series: [
+                        {
+                            radius: ['10%', '25%'],
+                            label: {
+                                alignTo: 'edge',
+                                position: 'outside',
+                                edgeDistance: 0
+                            }
+                        }
+                    ]
+                }
             }
         ]
     };
 
-    echarts_electricity_by_tariff_graph.showLoading('default', echarts_loading_options);
+    echarts_electricity_by_tariff_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
 
     $.ajax({
-        url: echarts_by_tariff_url,
+        url: ECHARTS_BY_TARIFF_URL,
         data: {
             'start_date': start_date,
             'end_date': end_date
         },
     }).done(function (xhr_result) {
-        echarts_options.series[0].data = xhr_result.data;
+        echarts_options.baseOption.series[0].data = xhr_result.data;
         echarts_electricity_by_tariff_graph.setOption(echarts_options);
     }).always(function(){
         echarts_electricity_by_tariff_graph.hideLoading();

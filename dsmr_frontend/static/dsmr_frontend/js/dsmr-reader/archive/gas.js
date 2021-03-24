@@ -12,11 +12,12 @@ $(document).ready(function () {
 function render_gas_graph(xhr_data) {
     let echarts_options = {
         title: {
-            text: text_gas_header,
+            text: TEXT_GAS_HEADER,
+            textStyle: TITLE_TEXTSTYLE,
             left: 'center'
         },
         color: [
-            gas_delivered_color
+            GAS_DELIVERED_COLOR
         ],
         tooltip: {
             trigger: 'axis',
@@ -37,7 +38,7 @@ function render_gas_graph(xhr_data) {
         xAxis: [
             {
                 type: 'category',
-                boundaryGap: gas_graph_style === 'bar',
+                boundaryGap: GAS_GRAPH_STYLE === 'bar',
                 data: xhr_data.x
             }
         ],
@@ -48,8 +49,8 @@ function render_gas_graph(xhr_data) {
         ],
         series: [
             {
-                name: text_gas,
-                type: gas_graph_style,
+                name: TEXT_GAS,
+                type: GAS_GRAPH_STYLE,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.gas

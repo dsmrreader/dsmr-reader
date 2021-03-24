@@ -41,10 +41,10 @@ function initialize_datepicker() {
         calendarWeeks: true,
         weekStart: 1,
         todayHighlight: true,
-        startDate: datepicker_start_date,
-        endDate: datepicker_end_date,
-        format: datepicker_locale_format,
-        language: datepicker_language_code
+        startDate: DATEPICKER_START_DATE,
+        endDate: DATEPICKER_END_DATE,
+        format: DATEPICKER_LOCALE_FORMAT,
+        language: DATEPICKER_LANGUAGE_CODE
     }).on('changeDate', function (e) {
         if (g_datepicker_view_mode != 'days') {
             return;
@@ -63,7 +63,7 @@ function initialize_datepicker() {
         }
         update_view(e.date);
 
-    }).datepicker('update', datepicker_end_date);
+    }).datepicker('update', DATEPICKER_END_DATE);
 
     update_view($('#datepicker').datepicker('getDate'));
 }
@@ -84,14 +84,14 @@ function update_summary(selected_date) {
     $("#summary-holder").hide();
 
     /* Prevent queueing multiple updates when a user clicks multiple selections too quickly. */
-    if (summary_xhr_request) {
+    if (summary_xhr_request !== null) {
         summary_xhr_request.abort();
     }
 
     summary_xhr_request = $.ajax({
-        url: archive_xhr_summary_url,
+        url: ARCHIVE_XHR_SUMMARY_URL,
         data: {
-            'date': moment(selected_date).format(datepicker_locale_format.toUpperCase()),
+            'date': moment(selected_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase()),
             'level': g_datepicker_view_mode
         },
     }).done(function (data) {
@@ -107,17 +107,17 @@ function update_summary(selected_date) {
  */
 function update_graphs(selected_date) {
     /* Prevent queueing multiple updates when a user clicks multiple selections too quickly. */
-    if (g_graph_xhr_request) {
+    if (g_graph_xhr_request !== null) {
         g_graph_xhr_request.abort();
     }
 
     g_graph_xhr_request = $.ajax({
-        url: archive_xhr_graphs_url,
+        url: ARCHIVE_XHR_GRAPHS_URL,
         dataType: "json",
         data: {
-            'date': moment(selected_date).format(datepicker_locale_format.toUpperCase()),
+            'date': moment(selected_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase()),
             'level': g_datepicker_view_mode
-        },
+        }
     }).done(function (response) {
         if (response.electricity) {
             render_electricity_graph(response.electricity);

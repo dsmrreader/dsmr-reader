@@ -4,53 +4,83 @@ let echarts_avg_gas_graph = null;
 
 function update_trends_averages(start_date, end_date) {
     let echarts_options = {
-        calculable: true,
-        tooltip: {
-            trigger: 'item',
-            formatter: '{b}\n({d}%)'
+        baseOption: {
+            calculable: true,
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}\n({d}%)'
+            },
+            series: [
+                {
+                    name: '%',
+                    type: 'pie',
+                    roseType: 'radius',
+                    label: {
+                        formatter: '{d}% {S|{b}}',
+                        rich: {
+                            S: {
+                                fontSize: 8,
+                                color: 'grey'
+                            },
+                        }
+                    },
+                    labelLine: {
+                        length2: 0
+                    },
+                    data: null
+                }
+            ],
         },
-        series: [
+        media: [
             {
-                name: '%',
-                type: 'pie',
-                radius: ['10%', '60%'],
-                width: '100%',
-                roseType: 'radius',
-                label: {
-                    formatter: '{d}% {S|{b}}',
-                    rich: {
-                        S: {
-                            fontSize: 8,
-                            color: 'grey'
-                        },
-                    }
+              option: {
+                    series: [
+                        {
+                            radius: ['10%', '90%'],
+                            width: '100%',
+                            label: {
+                                alignTo: 'labelLine',
+                                edgeDistance: '5%'
+                            }
+                        }
+                    ],
                 },
-                labelLine: {
-                    length: 5,
-                    length2: 5
-                },
-                data: null
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    series: [
+                        {
+                            radius: ['10%', '25%'],
+                            label: {
+                                alignTo: 'edge',
+                                position: 'outside',
+                                edgeDistance: 0
+                            }
+                        }
+                    ]
+                }
             }
         ]
     };
 
     $.ajax({
-        url: echarts_avg_consumption_url,
+        url: ECHARTS_AVG_CONSUMPTION_URL,
         data: {
             'start_date': start_date,
             'end_date': end_date
         },
     }).done(function (xhr_data) {
-        echarts_options.series[0].data = xhr_data.electricity;
+        echarts_options.baseOption.series[0].data = xhr_data.electricity;
         echarts_avg_electricity_graph?.setOption(echarts_options);
 
         if (xhr_data.electricity_returned.length > 0) {
-            echarts_options.series[0].data = xhr_data.electricity_returned;
+            echarts_options.baseOption.series[0].data = xhr_data.electricity_returned;
             echarts_avg_electricity_returned_graph?.setOption(echarts_options);
         }
 
         if (xhr_data.gas.length > 0) {
-            echarts_options.series[0].data = xhr_data.gas;
+            echarts_options.baseOption.series[0].data = xhr_data.gas;
              echarts_avg_gas_graph?.setOption(echarts_options);
         }
     });
@@ -73,6 +103,6 @@ $(document).ready(function () {
     $(window).resize(function () {
         echarts_avg_electricity_graph?.resize();
         echarts_avg_electricity_returned_graph?.resize();
-       echarts_avg_gas_graph?.resize();
+        echarts_avg_gas_graph?.resize();
     });
 });

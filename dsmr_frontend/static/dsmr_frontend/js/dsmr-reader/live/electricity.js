@@ -1,10 +1,29 @@
 $(document).ready(function () {
     let echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+    let x_axis = [
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: null
+        },
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: null,
+            inverse: true
+        }
+    ];
     let echarts_electricity_initial_options = {
+        toolbox: TOOLBOX_OPTIONS,
         color: [
-            electricity_delivered_color,
-            electricity_returned_color
+            ELECTRICITY_DELIVERED_COLOR,
+            ELECTRICITY_RETURNED_COLOR
         ],
+        title: {
+            text: TEXT_ELECTRICITY_HEADER,
+            textStyle: TITLE_TEXTSTYLE,
+            left: 'center',
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -21,22 +40,20 @@ $(document).ready(function () {
             right: '2%',
             containLabel: true
         },
-        xAxis: [
-            {
-                type: 'category',
-                boundaryGap: false,
-                data: null
-            }
-        ],
+        xAxis: x_axis,
         yAxis: [
             {
                 type: 'value'
+            },
+            {
+                type: 'value',
+                inverse: true
             }
         ],
         dataZoom: [
             {
                 show: true,
-                start: live_graphs_initial_zoom,
+                start: LIVE_GRAPHS_INITIAL_ZOOM,
                 end: 100
             },
             {
@@ -49,23 +66,22 @@ $(document).ready(function () {
 
     /* These settings should not affect the updates and reset the zoom on each update. */
     let echarts_electricity_update_options = {
-        xAxis: [
-            {
-                type: 'category',
-                boundaryGap: false,
-                data: null
-            }
-        ],
+        xAxis: x_axis,
         series: [
             {
-                name: 'Watt (+)',
+                yAxisIndex: 0,
+                label: {
+                    formatter: '{b}: {c}'
+                },
+                name: DELIVERED_TEXT,
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
                 data: null
             },
             {
-                name: 'Watt (-)',
+                yAxisIndex: 1,
+                name: RETURNED_TEXT,
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -74,15 +90,16 @@ $(document).ready(function () {
         ]
     };
 
-    echarts_electricity_graph.showLoading('default', echarts_loading_options);
+    echarts_electricity_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(echarts_electricity_graph_url, function (xhr_data) {
+    $.get(ECHARTS_ELECTRICITY_GRAPH_URL, function (xhr_data) {
         echarts_electricity_graph.hideLoading();
         echarts_electricity_graph.setOption(echarts_electricity_initial_options);
 
         /* Different set of options, to prevent the dataZoom being reset on each update. */
         echarts_electricity_update_options.xAxis[0].data = xhr_data.read_at;
+        echarts_electricity_update_options.xAxis[1].data = xhr_data.read_at;
         echarts_electricity_update_options.series[0].data = xhr_data.currently_delivered;
         echarts_electricity_update_options.series[1].data = xhr_data.currently_returned;
         echarts_electricity_graph.setOption(echarts_electricity_update_options);
@@ -99,7 +116,7 @@ $(document).ready(function () {
 
             pending_xhr_request = $.ajax({
                 dataType: "json",
-                url: echarts_electricity_graph_url + "&latest_delta_id=" + latest_delta_id,
+                url: ECHARTS_ELECTRICITY_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
             }).done(function(xhr_data) {
                 /* Ignore empty sets. */
                 if (xhr_data.read_at.length === 0) {
@@ -109,6 +126,7 @@ $(document).ready(function () {
                 /* Delta update. */
                 for (let i = 0; i < xhr_data.read_at.length; i++) {
                     echarts_electricity_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
+                    echarts_electricity_update_options.xAxis[1].data.push(xhr_data.read_at[i]);
                     echarts_electricity_update_options.series[0].data.push(xhr_data.currently_delivered[i]);
                     echarts_electricity_update_options.series[1].data.push(xhr_data.currently_returned[i]);
                 }
@@ -119,7 +137,7 @@ $(document).ready(function () {
                 // Allow new updates
                 pending_xhr_request = null;
             });
-        }, echarts_electricity_graph_interval * 1000);
+        }, ECHARTS_ELECTRICITY_GRAPH_INTERVAL * 1000);
     });
 
     /* Responsiveness. */

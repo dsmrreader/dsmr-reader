@@ -102,13 +102,13 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         gas = electricity_base * 0.3  # Random as well.
 
         # Delivered and returned MAY be used simultaneously
-        currently_delivered_l1 = random.randint(0, 500) * 0.001  # kW
+        currently_delivered_l1 = random.randint(0, 0) * 0.001  # kW
         currently_delivered_l2 = random.randint(0, 1500) * 0.001  # kW
-        currently_delivered_l3 = random.randint(0, 750) * 0.001  # kW
+        currently_delivered_l3 = random.randint(0, 200) * 0.001  # kW
         currently_delivered = currently_delivered_l1 + currently_delivered_l2 + currently_delivered_l3
-        currently_returned_l1 = random.randint(0, 500) * 0.001  # kW
+        currently_returned_l1 = random.randint(0, 200) * 0.001  # kW
         currently_returned_l2 = random.randint(0, 1500) * 0.001  # kW
-        currently_returned_l3 = random.randint(0, 750) * 0.001  # kW
+        currently_returned_l3 = random.randint(0, 0) * 0.001  # kW
         currently_returned = currently_returned_l1 + currently_returned_l2 + currently_returned_l3
         phase_voltage_l1 = random.randint(228, 232)
         phase_voltage_l2 = random.randint(228, 232)

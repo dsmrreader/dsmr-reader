@@ -1,16 +1,22 @@
 $(document).ready(function () {
 
     let echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
-    echarts_gas_graph.showLoading('default', echarts_loading_options);
+    echarts_gas_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(echarts_gas_graph_url, function (xhr_data) {
+    $.get(ECHARTS_GAS_GRAPH_URL, function (xhr_data) {
         echarts_gas_graph.hideLoading();
 
         let option = {
+            toolbox: TOOLBOX_OPTIONS,
             color: [
-                gas_delivered_color
+                GAS_DELIVERED_COLOR
             ],
+            title: {
+                text: TEXT_GAS_HEADER,
+                textStyle: TITLE_TEXTSTYLE,
+                left: 'center',
+            },
             tooltip: {
                 trigger: 'axis',
                 formatter: "{c} {a}",
@@ -31,7 +37,7 @@ $(document).ready(function () {
             xAxis: [
                 {
                     type: 'category',
-                    boundaryGap: gas_graph_style === 'bar',
+                    boundaryGap: GAS_GRAPH_STYLE === 'bar',
                     data: xhr_data.read_at
                 }
             ],
@@ -45,7 +51,7 @@ $(document).ready(function () {
                     show: true,
                     // Do not change initial zoom when using a non DSMR v5 meter.
                     // Because it will cause DSMR v4 meter users to only display 2 of 24 hours by default.
-                    start: telegram_dsmr_version === '50' ? live_graphs_initial_zoom : 0,
+                    start: TELEGRAM_DSMR_VERSION === '50' ? LIVE_GRAPHS_INITIAL_ZOOM : 0,
                     end: 100
                 },
                 {
@@ -57,7 +63,7 @@ $(document).ready(function () {
             series: [
                 {
                     name: 'm³',
-                    type: gas_graph_style,
+                    type: GAS_GRAPH_STYLE,
                     areaStyle: {},
                     data: xhr_data.currently_delivered,
                     smooth: true

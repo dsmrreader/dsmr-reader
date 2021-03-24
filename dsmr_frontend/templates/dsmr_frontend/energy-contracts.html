@@ -95,7 +95,7 @@
                         {# Gas #}
 			            {% if capabilities.gas and current.prices.gas_price %}
                         <tr>
-			                <td> {% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" %}</span></td>
+			                <td> {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
 			                <td><span class="badge bg-orange">{{ current.summary.gas|default:'-' }}</span></td>
 			                <td>&nbsp;</td>
 			                <td><span class="badge bg-black">{{ current.summary.gas_cost|default:'-' }}</span></td>
