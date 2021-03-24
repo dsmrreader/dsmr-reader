@@ -1,10 +1,9 @@
 $(document).ready(function () {
-
-    let echarts_temperature_graph = echarts.init(document.getElementById('echarts-temperature-graph'));
-    echarts_temperature_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_temperature_graph = echarts.init(document.getElementById('echarts-temperature-graph'));
+    echarts_temperature_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(ECHARTS_TEMPERATURE_GRAPH_URL, function (xhr_data) {
+    $.get(TEMPERATURE_GRAPH_URL, function (xhr_data) {
         echarts_temperature_graph.hideLoading();
 
         let option = {

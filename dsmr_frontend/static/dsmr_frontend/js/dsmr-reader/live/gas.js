@@ -1,10 +1,9 @@
 $(document).ready(function () {
-
-    let echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
-    echarts_gas_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
+    echarts_gas_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(ECHARTS_GAS_GRAPH_URL, function (xhr_data) {
+    $.get(GAS_GRAPH_URL, function (xhr_data) {
         echarts_gas_graph.hideLoading();
 
         let option = {

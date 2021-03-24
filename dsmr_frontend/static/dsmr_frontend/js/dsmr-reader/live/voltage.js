@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    let echarts_voltage_graph = echarts.init(document.getElementById('echarts-voltage-graph'));
+    echarts_voltage_graph = echarts.init(document.getElementById('echarts-voltage-graph'));
+
     let echarts_voltage_initial_options = {
         toolbox: TOOLBOX_OPTIONS,
         color: [
@@ -68,14 +69,14 @@ $(document).ready(function () {
         series: null
     };
 
-    echarts_voltage_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_voltage_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(ECHARTS_VOLTAGE_GRAPH_URL, function (xhr_data) {
+    $.get(VOLTAGE_GRAPH_URL, function (xhr_data) {
         echarts_voltage_graph.hideLoading();
 
         /* Dynamic phases. */
-        if (IS_MULTI_PHASE) {
+        if (CAPABILITY_MULTI_PHASE) {
             echarts_voltage_update_options.series = [
                 {
                     name: 'L1',
@@ -109,7 +110,7 @@ $(document).ready(function () {
         echarts_voltage_update_options.xAxis[0].data = xhr_data.read_at;
         echarts_voltage_update_options.series[0].data = xhr_data.phase_voltage.l1;
 
-        if (IS_MULTI_PHASE) {
+        if (CAPABILITY_MULTI_PHASE) {
             echarts_voltage_update_options.series[1].data = xhr_data.phase_voltage.l2;
             echarts_voltage_update_options.series[2].data = xhr_data.phase_voltage.l3;
         }
@@ -129,7 +130,7 @@ $(document).ready(function () {
 
             pending_xhr_request = $.ajax({
                 dataType: "json",
-                url: ECHARTS_VOLTAGE_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
+                url: VOLTAGE_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
             }).done(function(xhr_data) {
                 /* Ignore empty sets. */
                 if (xhr_data.read_at.length === 0) {
@@ -141,7 +142,7 @@ $(document).ready(function () {
                     echarts_voltage_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
                     echarts_voltage_update_options.series[0].data.push(xhr_data.phase_voltage.l1[i]);
 
-                    if (IS_MULTI_PHASE) {
+                    if (CAPABILITY_MULTI_PHASE) {
                         echarts_voltage_update_options.series[1].data.push(xhr_data.phase_voltage.l2[i]);
                         echarts_voltage_update_options.series[2].data.push(xhr_data.phase_voltage.l3[i]);
                     }
@@ -153,7 +154,7 @@ $(document).ready(function () {
                 // Allow new updates
                 pending_xhr_request = null;
             });
-        }, ECHARTS_VOLTAGE_GRAPH_INTERVAL * 1000);
+        }, VOLTAGE_GRAPH_INTERVAL * 1000);
     });
 });
 

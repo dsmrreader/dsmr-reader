@@ -60,11 +60,11 @@ function update_trends_tariffs(start_date, end_date) {
         ]
     };
 
-    echarts_electricity_by_tariff_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_electricity_by_tariff_graph.showLoading('default', LOADING_OPTIONS);
     echarts_electricity_by_tariff_graph?.clear();
 
     $.ajax({
-        url: ECHARTS_BY_TARIFF_URL,
+        url: BY_TARIFF_URL,
         data: {
             'start_date': start_date,
             'end_date': end_date

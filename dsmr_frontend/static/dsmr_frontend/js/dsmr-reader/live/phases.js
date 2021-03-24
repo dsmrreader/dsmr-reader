@@ -1,6 +1,6 @@
 $(document).ready(function () {
+    echarts_phases_graph = echarts.init(document.getElementById('echarts-phases-graph'));
 
-    let echarts_phases_graph = echarts.init(document.getElementById('echarts-phases-graph'));
     let x_axis = [
         {
             type: 'category',
@@ -11,7 +11,9 @@ $(document).ready(function () {
             type: 'category',
             boundaryGap: false,
             data: null,
-            inverse: true
+            inverse: true,
+            // Hide when not needed.
+            show: CAPABILITY_ELECTRICITY_RETURNED
         }
     ];
     let echarts_phases_initial_options = {
@@ -130,10 +132,10 @@ $(document).ready(function () {
         ]
     };
 
-    echarts_phases_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_phases_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(ECHARTS_PHASES_GRAPH_URL, function (xhr_data) {
+    $.get(PHASES_GRAPH_URL, function (xhr_data) {
         echarts_phases_graph.hideLoading();
         echarts_phases_graph.setOption(echarts_phases_initial_options);
 
@@ -161,7 +163,7 @@ $(document).ready(function () {
 
             pending_xhr_request = $.ajax({
                 dataType: "json",
-                url: ECHARTS_PHASES_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
+                url: PHASES_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
             }).done(function(xhr_data) {
                 /* Ignore empty sets. */
                 if (xhr_data.read_at.length === 0) {
@@ -186,7 +188,7 @@ $(document).ready(function () {
                 // Allow new updates
                 pending_xhr_request = null;
             });
-        }, ECHARTS_PHASES_GRAPH_INTERVAL * 1000);
+        }, PHASES_GRAPH_INTERVAL * 1000);
     });
 });
 

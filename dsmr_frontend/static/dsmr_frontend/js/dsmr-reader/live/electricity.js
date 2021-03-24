@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    let echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+    echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+
     let x_axis = [
         {
             type: 'category',
@@ -10,7 +11,9 @@ $(document).ready(function () {
             type: 'category',
             boundaryGap: false,
             data: null,
-            inverse: true
+            inverse: true,
+            // Hide when not needed.
+            show: CAPABILITY_ELECTRICITY_RETURNED
         }
     ];
     let echarts_electricity_initial_options = {
@@ -73,7 +76,7 @@ $(document).ready(function () {
                 label: {
                     formatter: '{b}: {c}'
                 },
-                name: DELIVERED_TEXT,
+                name: TEXT_DELIVERED,
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -81,7 +84,7 @@ $(document).ready(function () {
             },
             {
                 yAxisIndex: 1,
-                name: RETURNED_TEXT,
+                name: TEXT_RETURNED,
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
@@ -90,10 +93,10 @@ $(document).ready(function () {
         ]
     };
 
-    echarts_electricity_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_electricity_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(ECHARTS_ELECTRICITY_GRAPH_URL, function (xhr_data) {
+    $.get(ELECTRICITY_GRAPH_URL, function (xhr_data) {
         echarts_electricity_graph.hideLoading();
         echarts_electricity_graph.setOption(echarts_electricity_initial_options);
 
@@ -116,7 +119,7 @@ $(document).ready(function () {
 
             pending_xhr_request = $.ajax({
                 dataType: "json",
-                url: ECHARTS_ELECTRICITY_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
+                url: ELECTRICITY_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
             }).done(function(xhr_data) {
                 /* Ignore empty sets. */
                 if (xhr_data.read_at.length === 0) {
@@ -137,7 +140,7 @@ $(document).ready(function () {
                 // Allow new updates
                 pending_xhr_request = null;
             });
-        }, ECHARTS_ELECTRICITY_GRAPH_INTERVAL * 1000);
+        }, ELECTRICITY_GRAPH_INTERVAL * 1000);
     });
 });
 

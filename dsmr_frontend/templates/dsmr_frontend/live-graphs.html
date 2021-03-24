@@ -127,16 +127,22 @@
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-5.0.2.min.js' %}"></script>
 
     <script type="text/javascript">
+        let echarts_electricity_graph = null;
+        let echarts_gas_graph = null;
+        let echarts_phases_graph = null;
+        let echarts_power_current_graph = null;
+        let echarts_temperature_graph = null;
+        let echarts_voltage_graph = null;
+
         {% localize off %}
-        const TELEGRAM_DSMR_VERSION = '{{ meter_statistics.dsmr_version|default:'' }}';
-        const IS_MULTI_PHASE = {{ capabilities.multi_phases|yesno:'true,false' }};
         const LIVE_GRAPHS_INITIAL_ZOOM = 100 - {{ frontend_settings.live_graphs_initial_zoom }};
+        const TELEGRAM_DSMR_VERSION = '{{ meter_statistics.dsmr_version|default:'' }}';
+        const CAPABILITY_MULTI_PHASE = {{ capabilities.multi_phases|yesno:'true,false' }};
+        const CAPABILITY_ELECTRICITY_RETURNED = {{ capabilities.electricity_returned|yesno:'true,false' }};
         {% endlocalize %}
 
-        const DELIVERED_TEXT = '{% translate "Delivered" %}';
-        const RETURNED_TEXT = '{% translate "Returned" %}';
-        const ECHARTS_LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
-
+        const TEXT_DELIVERED = '{% translate "Delivered" %}';
+        const TEXT_RETURNED = '{% translate "Returned" %}';
         const TEXT_ELECTRICITY_HEADER = '{% translate "Recent electricity usage" %} {S|{% translate "in Watt" %}}';
         const TEXT_PHASES_HEADER = '{% translate "Recent phases usage" %} {S|{% translate "in Watt" %}}';
         const TEXT_VOLTAGE_HEADER = '{% translate "Recent phase voltages" %} {S|{% translate "in Volt" %}}';
@@ -144,6 +150,7 @@
         const TEXT_GAS_HEADER = '{% translate "Recent gas consumption" %} {S|{% translate "in m³" %}}';
         const TEXT_TEMPERATURE_HEADER = '{% translate "Recent temperatures" %} {S|{% translate "in °C" %}}';
 
+        const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
         const TITLE_TEXTSTYLE_OPTIONS = {
             rich: {
                 S: {
@@ -165,12 +172,12 @@
 
 {% if capabilities.electricity %}
     <script type="text/javascript">
-        const ECHARTS_ELECTRICITY_GRAPH_INTERVAL = 5;
+        const ELECTRICITY_GRAPH_INTERVAL = 5;
 
         {% if capabilities.electricity_returned %}
-        const ECHARTS_ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True&returned=True";
+        const ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True&returned=True";
         {% else %}
-        const ECHARTS_ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True";
+        const ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True";
         {% endif %}
         
         const ELECTRICITY_DELIVERED_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
@@ -181,12 +188,12 @@
 
 {% if capabilities.multi_phases %}
     <script type="text/javascript">
-        const ECHARTS_PHASES_GRAPH_INTERVAL = 5;
+        const PHASES_GRAPH_INTERVAL = 5;
 
         {% if capabilities.electricity_returned %}
-        const ECHARTS_PHASES_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?phases=True&returned=True";
+        const PHASES_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?phases=True&returned=True";
         {% else %}
-        const ECHARTS_PHASES_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?phases=True";
+        const PHASES_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?phases=True";
         {% endif %}
 
         const PHASE_DELIVERED_L1_COLOR = "{{ frontend_settings.phase_delivered_l1_color }}";
@@ -201,8 +208,8 @@
 
 {% if capabilities.voltage %}
     <script type="text/javascript">
-        const ECHARTS_VOLTAGE_GRAPH_INTERVAL = 5;
-        const ECHARTS_VOLTAGE_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?voltage=True";
+        const VOLTAGE_GRAPH_INTERVAL = 5;
+        const VOLTAGE_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?voltage=True";
         const VOLTAGE_L1_COLOR = "{{ frontend_settings.phase_delivered_l1_color }}";
         const VOLTAGE_L2_COLOR = "{{ frontend_settings.phase_delivered_l2_color }}";
         const VOLTAGE_L3_COLOR = "{{ frontend_settings.phase_delivered_l3_color }}";
@@ -212,8 +219,8 @@
 
 {% if capabilities.power_current %}
     <script type="text/javascript">
-        const ECHARTS_POWER_CURRENT_GRAPH_INTERVAL = 5;
-        const ECHARTS_POWER_CURRENT_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?power_current=True";
+        const POWER_CURRENT_GRAPH_INTERVAL = 5;
+        const POWER_CURRENT_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?power_current=True";
         const POWER_CURRENT_L1_COLOR = "{{ frontend_settings.phase_delivered_l1_color }}";
         const POWER_CURRENT_L2_COLOR = "{{ frontend_settings.phase_delivered_l2_color }}";
         const POWER_CURRENT_L3_COLOR = "{{ frontend_settings.phase_delivered_l3_color }}";
@@ -225,7 +232,7 @@
 
 {% if capabilities.gas %}
     <script type="text/javascript">
-        const ECHARTS_GAS_GRAPH_URL = "{% url 'frontend:live-xhr-gas' %}";
+        const GAS_GRAPH_URL = "{% url 'frontend:live-xhr-gas' %}";
         const GAS_DELIVERED_COLOR = "{{ frontend_settings.gas_delivered_color }}";
         const GAS_GRAPH_STYLE = "{{ frontend_settings.gas_graph_style }}";
     </script>
@@ -234,7 +241,7 @@
 
 {% if capabilities.weather %}
     <script type="text/javascript">
-        const ECHARTS_TEMPERATURE_GRAPH_URL = "{% url 'frontend:live-xhr-temperature' %}";
+        const TEMPERATURE_GRAPH_URL = "{% url 'frontend:live-xhr-temperature' %}";
         const TEMPERATURE_COLOR = "{{ frontend_settings.temperature_color }}";
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>

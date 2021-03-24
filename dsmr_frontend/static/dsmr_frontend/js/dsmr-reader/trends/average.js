@@ -68,15 +68,15 @@ function update_trends_averages(start_date, end_date) {
         ]
     };
 
-    echarts_avg_electricity_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_avg_electricity_graph?.showLoading('default', LOADING_OPTIONS);
     echarts_avg_electricity_graph?.clear();
-    echarts_avg_electricity_returned_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_avg_electricity_returned_graph?.showLoading('default', LOADING_OPTIONS);
     echarts_avg_electricity_returned_graph?.clear();
-    echarts_avg_gas_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_avg_gas_graph?.showLoading('default', LOADING_OPTIONS);
     echarts_avg_gas_graph?.clear();
 
     $.ajax({
-        url: ECHARTS_AVG_CONSUMPTION_URL,
+        url: AVG_CONSUMPTION_URL,
         data: {
             'start_date': start_date,
             'end_date': end_date

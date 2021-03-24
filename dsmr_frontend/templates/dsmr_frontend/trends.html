@@ -134,10 +134,10 @@
         const TEXT_TITLE_GAS = '{% blocktranslate %}Average gas consumption{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
         const TEXT_TITLE_TARIFF_RATIO = '{% blocktranslate %}Electricity tariff ratio{% endblocktranslate %} {S|{% translate "in %" %}}';
 
-        const ECHARTS_AVG_CONSUMPTION_URL = "{% url 'frontend:trends-xhr-avg-consumption' %}";
-        const ECHARTS_BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
+        const AVG_CONSUMPTION_URL = "{% url 'frontend:trends-xhr-avg-consumption' %}";
+        const BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
 
-        const ECHARTS_LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+        const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
         const TITLE_TEXTSTYLE_OPTIONS = {
             rich: {
                 S: {

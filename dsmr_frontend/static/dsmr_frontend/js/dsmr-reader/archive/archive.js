@@ -112,17 +112,17 @@ function update_graphs(selected_date) {
     }
 
     if (echarts_electricity_graph !== undefined) {
-        echarts_electricity_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS)
+        echarts_electricity_graph?.showLoading('default', LOADING_OPTIONS)
         echarts_electricity_graph?.clear();
     }
 
     if (echarts_electricity_returned_graph !== undefined) {
-        echarts_electricity_returned_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS)
+        echarts_electricity_returned_graph?.showLoading('default', LOADING_OPTIONS)
         echarts_electricity_returned_graph?.clear();
     }
 
     if (echarts_gas_graph !== undefined) {
-        echarts_gas_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS)
+        echarts_gas_graph?.showLoading('default', LOADING_OPTIONS)
         echarts_gas_graph?.clear();
     }
 
