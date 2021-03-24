@@ -1134,8 +1134,8 @@ msgstr "Archief"
 msgid "No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader."
 msgstr "Nog geen dagstatistieken gevonden. Gegevens zijn hier doorgaans zichtbaar vanaf de tweede dag dat DSMR-reader draait."
 
-msgid "Level of detail"
-msgstr "Detailniveau"
+msgid "Level"
+msgstr "Niveau"
 
 msgid "Days"
 msgstr "Dagen"
@@ -1148,6 +1148,9 @@ msgstr "Jaren"
 
 msgid "Pick a day, month or year"
 msgstr "Kies een dag, maand of jaar"
+
+msgid "Loading..."
+msgstr "Bezig met laden..."
 
 msgid "Electricity consumed"
 msgstr "Elektriciteitsverbruik"
@@ -1181,6 +1184,9 @@ msgstr "Statistieken"
 
 msgid "Energy contracts"
 msgstr "Energiecontracten"
+
+msgid "Level of detail"
+msgstr "Detailniveau"
 
 msgid "Base selection"
 msgstr "Basisselectie"
@@ -1562,9 +1568,6 @@ msgstr "Daarnaast, indien je een DSMR-v5-meter gebruikt"
 msgid "Delivered"
 msgstr "Verbruikt"
 
-msgid "Loading..."
-msgstr "Bezig met laden..."
-
 msgid "Recent electricity usage"
 msgstr "Recent gebruik elektriciteit"
 
@@ -1584,7 +1587,7 @@ msgid "Recent phase currents"
 msgstr "Recente stroomsterktes"
 
 msgid "in Ampère"
-msgstr "in Ampere"
+msgstr "in Amps"
 
 msgid "Recent gas consumption"
 msgstr "Recent gasverbruik"
