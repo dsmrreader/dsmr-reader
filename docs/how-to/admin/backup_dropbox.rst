@@ -20,17 +20,13 @@ Now go to `Dropbox Apps <https://www.dropbox.com/developers/apps>`_ and click **
     :target: ../../_static/faq/dropbox_apps_overview.png
     :alt: Dropbox Apps
 
-Choose the following options: (1) **Dropbox API** and (2) **App folder**. 
-Then enter a name for your app (3), this will also be used as directory name within the Apps-folder of your Dropbox. 
+Choose the option: (1) **Scoped access** and (2) **App folder**. 
+Then enter a name for your app (3), this will also be used as the directory name within the Apps-folder of your Dropbox. 
 
-.. image:: ../../_static/faq/dropbox_create_app.png
-    :target: ../../_static/faq/dropbox_create_app.png
-    :alt: Dropbox Apps
+Set the permissions on the **Permissions** tab. Check the boxes for **files.metadata.write**, **files.metadata.read**, **files.content.write** and **files.content.read**. Then click **Submit**.
 
-The app should be created in developer-mode. You can generate an access token for yourself by clicking the **"Generate"** button somewhere below.
-    
-.. image:: ../../_static/faq/dropbox_app_token.png
-    :target: ../../_static/faq/dropbox_app_token.png
-    :alt: Dropbox Apps
-    
+On the **Settings** tab set **Access token expiration** to **No expiration** and click the **Generate** button below **Generated access token**.
+
 Copy the generated access token to the DSMR-reader settings for the Dropbox-configuration. The DSMR-reader application should sync any backups created shortly.
+
+Check the `backend logs <https://dsmr-reader.readthedocs.io/en/latest/how-to/troubleshooting/logfiles.html>`_ if the backup files do not appear in the dropbox folder.
