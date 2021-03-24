@@ -11,6 +11,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
 "X-Generator: Poedit 2.0.6\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 msgid "API"
 msgstr "API"
@@ -1559,8 +1561,8 @@ msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdsp
 msgid "You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration."
 msgstr "Het is mogelijk om het totaal aantal weergegeven uren (tot max. een week terug), inclusief de bijbehorende initiële zoom bij openen, aan te passen in de Frontend-configuratie."
 
-msgid "Graph controls"
-msgstr "Grafiekgebruik"
+msgid "Graph controls help"
+msgstr "Uitleg grafiekgebruik"
 
 msgid "Additionally, when using a DSMR v5 smart meter"
 msgstr "Daarnaast, indien je een DSMR-v5-meter gebruikt"

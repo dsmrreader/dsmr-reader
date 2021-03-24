@@ -23,12 +23,12 @@
         <div class="col-sm-12">
             <div class="panel">
                 <div class="panel-body">
-                    <div id="echarts-electricity-graph" class="large-graph-canvas"></div>
+                    <div id="echarts-electricity-graph" class="{% if capabilities.electricity_returned %}large-graph-canvas{% else %}graph-canvas{% endif %}"></div>
                     <div class="graph_controls_help xhr-hidden">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
-                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls" %}</a>
+                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                 </div>
             </div>
         </div>
@@ -40,12 +40,12 @@
         <div class="col-sm-12">
             <div class="panel">
                 <div class="panel-body">
-                    <div id="echarts-phases-graph" class="large-graph-canvas"></div>
+                    <div id="echarts-phases-graph" class="{% if capabilities.electricity_returned %}large-graph-canvas{% else %}graph-canvas{% endif %}"></div>
                     <div class="graph_controls_help xhr-hidden">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
-                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls" %}</a>
+                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
-                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls" %}</a>
+                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
-                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls" %}</a>
+                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                         <strong>{% blocktranslate %}Additionally, when using a DSMR v5 smart meter{% endblocktranslate %}</strong>: {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
-                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls" %}</a>
+                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                     <div class="graph_controls_help xhr-hidden">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                     </div>
-                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls" %}</a>
+                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                 </div>
             </div>
         </div>
@@ -269,9 +269,10 @@
             return false;
         });
 
+        // When clicked, show all help tooltips.
         $("a.graph_controls_help_trigger").click(function(){
-            $(this).siblings().filter(".graph_controls_help").show();
-            $(this).hide();
+            $(".graph_controls_help").show();
+            $("a.graph_controls_help_trigger").hide();
 
             return false;
         });
