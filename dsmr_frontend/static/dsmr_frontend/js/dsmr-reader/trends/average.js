@@ -44,7 +44,8 @@ function update_trends_averages(start_date, end_date) {
                             radius: ['10%', '70%'],
                             width: '100%',
                             label: {
-                                alignTo: 'labelLine',
+                                alignTo: 'edge',
+                                position: 'outside',
                                 edgeDistance: '5%'
                             }
                         }
@@ -58,8 +59,6 @@ function update_trends_averages(start_date, end_date) {
                         {
                             radius: ['10%', '25%'],
                             label: {
-                                alignTo: 'edge',
-                                position: 'outside',
                                 edgeDistance: 0
                             }
                         }

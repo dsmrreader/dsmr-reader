@@ -53,7 +53,6 @@ a.graph_controls_help_trigger {
 
 div.archive-header-panel-body {
     min-height: 350px;
-    max-height: 350px;
 }
 
 .search-section {
@@ -155,6 +154,5 @@ div.large-graph-canvas {
 
     div.archive-header-panel-body {
         min-height: 0;
-        max-height: 0;
     }
 }
