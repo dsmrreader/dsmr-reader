@@ -18,7 +18,7 @@
     transform: rotate(315deg);
 }
 
-.datepicker-header {
+.centered-header {
     text-align: center;
 }
 
@@ -50,6 +50,11 @@ a.graph_controls_help_trigger {
      /* Ensures center-block works. */
      width: 220px;
  }
+
+div.archive-header-panel-body {
+    min-height: 350px;
+    max-height: 350px;
+}
 
 .search-section {
     min-height: 868px;
@@ -146,5 +151,10 @@ div.large-graph-canvas {
 
     table span.badge {
         font-size: 10px !important;
+    }
+
+    div.archive-header-panel-body {
+        min-height: 0;
+        max-height: 0;
     }
 }
