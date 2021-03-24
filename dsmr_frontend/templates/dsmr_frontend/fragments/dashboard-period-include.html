@@ -51,7 +51,7 @@
                     {% if capabilities.gas %}
                     <tr>
                         <td>{% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
-                        <td><span class="badge bg-orange">{{ data.gas|default:'-' }}</span></td>
+                        <td>{% if data.gas %}<span class="badge bg-orange">{{ data.gas|default:'-' }}</span>{% endif %}</td>
                         <td>&nbsp;</td>
                         <td>{% if data.gas_cost %}<span class="badge bg-black">{{ data.gas_cost|default:'-' }}</span>{% endif %}</td>
                     </tr>
