@@ -8,7 +8,6 @@ $(window).resize(function () {
 
 function render_gas_graph(xhr_data) {
     let echarts_options = {
-        toolbox: TOOLBOX_OPTIONS,
         title: {
             text: TEXT_GAS_HEADER,
             textStyle: TITLE_TEXTSTYLE_OPTIONS,
@@ -52,6 +51,19 @@ function render_gas_graph(xhr_data) {
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.gas
+            }
+        ],
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
             }
         ]
     };

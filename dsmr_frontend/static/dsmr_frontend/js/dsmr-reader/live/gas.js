@@ -7,7 +7,6 @@ $(document).ready(function () {
         echarts_gas_graph.hideLoading();
 
         let option = {
-            toolbox: TOOLBOX_OPTIONS,
             color: [
                 GAS_DELIVERED_COLOR
             ],
@@ -66,6 +65,19 @@ $(document).ready(function () {
                     areaStyle: {},
                     data: xhr_data.currently_delivered,
                     smooth: true
+                }
+            ],
+            media: [
+                {
+                  option: {
+                        toolbox: TOOLBOX_OPTIONS
+                    },
+                },
+                {
+                    query: { maxWidth: 500},
+                    option: {
+                        toolbox: {show: false}
+                    }
                 }
             ]
         };

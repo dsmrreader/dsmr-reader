@@ -2,7 +2,6 @@ $(document).ready(function () {
     echarts_power_current_graph = echarts.init(document.getElementById('echarts-power-current-graph'));
 
     let echarts_power_current_initial_options = {
-        toolbox: TOOLBOX_OPTIONS,
         color: [
             POWER_CURRENT_L1_COLOR,
             POWER_CURRENT_L2_COLOR,
@@ -55,6 +54,19 @@ $(document).ready(function () {
                 end: 100
             }
         ],
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
+            }
+        ]
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */

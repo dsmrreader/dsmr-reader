@@ -8,7 +8,6 @@ $(window).resize(function () {
 
 function render_electricity_returned_graph(xhr_data) {
     let echarts_options = {
-        toolbox: TOOLBOX_OPTIONS,
         title: {
             text: TEXT_ELECTRICITY_RETURNED_HEADER,
             textStyle: TITLE_TEXTSTYLE_OPTIONS,
@@ -46,7 +45,20 @@ function render_electricity_returned_graph(xhr_data) {
                 type: 'value'
             }
         ],
-        series: null
+        series: null,
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
+            }
+        ]
     };
 
     if (xhr_data.electricity1_returned && xhr_data.electricity2_returned) {

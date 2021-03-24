@@ -7,7 +7,6 @@ $(document).ready(function () {
         echarts_temperature_graph.hideLoading();
 
         let option = {
-            toolbox: TOOLBOX_OPTIONS,
             color: [
                 TEMPERATURE_COLOR
             ],
@@ -64,6 +63,19 @@ $(document).ready(function () {
                     areaStyle: {},
                     data: xhr_data.degrees_celcius,
                     smooth: true
+                }
+            ],
+            media: [
+                {
+                  option: {
+                        toolbox: TOOLBOX_OPTIONS
+                    },
+                },
+                {
+                    query: { maxWidth: 500},
+                    option: {
+                        toolbox: {show: false}
+                    }
                 }
             ]
         };

@@ -17,7 +17,6 @@ $(document).ready(function () {
         }
     ];
     let echarts_electricity_initial_options = {
-        toolbox: TOOLBOX_OPTIONS,
         color: [
             ELECTRICITY_DELIVERED_COLOR,
             ELECTRICITY_RETURNED_COLOR
@@ -63,6 +62,19 @@ $(document).ready(function () {
                 type: 'inside',
                 start: 0,
                 end: 100
+            }
+        ],
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
             }
         ]
     };

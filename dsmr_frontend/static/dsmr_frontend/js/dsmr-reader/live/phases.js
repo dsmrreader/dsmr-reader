@@ -17,7 +17,6 @@ $(document).ready(function () {
         }
     ];
     let echarts_phases_initial_options = {
-        toolbox: TOOLBOX_OPTIONS,
         color: [
             PHASE_DELIVERED_L1_COLOR,
             PHASE_DELIVERED_L2_COLOR,
@@ -69,6 +68,19 @@ $(document).ready(function () {
                 end: 100
             }
         ],
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
+            }
+        ]
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */
