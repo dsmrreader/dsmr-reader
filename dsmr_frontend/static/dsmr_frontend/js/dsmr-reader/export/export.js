@@ -21,7 +21,7 @@ function initialize_datepicker(datepicker_id, initial_date, input_id) {
         language: datepicker_language_code
 
     }).on('changeDate', function (e) {
-        var selected_date = moment(e.date).format(datepicker_locale_format.toUpperCase());
+        let selected_date = moment(e.date).format(datepicker_locale_format.toUpperCase());
         $("#" + input_id).val(selected_date)
 
     }).datepicker('update', initial_date).datepicker('setDate', initial_date);

@@ -80,6 +80,6 @@ function render_electricity_returned_graph(xhr_data) {
         ]
     }
 
-    echarts_electricity_returned_graph.hideLoading()
-    echarts_electricity_returned_graph.setOption(echarts_options);
+    echarts_electricity_returned_graph?.hideLoading()
+    echarts_electricity_returned_graph?.setOption(echarts_options);
 }

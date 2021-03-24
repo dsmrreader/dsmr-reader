@@ -7,7 +7,7 @@ $(window).resize(function () {
 
 
 function render_electricity_graph(xhr_data) {
-    var echarts_options = {
+    let echarts_options = {
         toolbox: TOOLBOX_OPTIONS,
         title: {
             text: TEXT_ELECTRICITY_HEADER,
