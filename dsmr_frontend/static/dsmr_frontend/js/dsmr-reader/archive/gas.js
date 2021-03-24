@@ -1,4 +1,4 @@
-let echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
+echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
 
 
 $(window).resize(function () {

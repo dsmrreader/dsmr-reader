@@ -1,4 +1,4 @@
-let echarts_electricity_returned_graph = echarts.init(document.getElementById('echarts-electricity-returned-graph'));
+echarts_electricity_returned_graph = echarts.init(document.getElementById('echarts-electricity-returned-graph'));
 
 
 $(window).resize(function () {
