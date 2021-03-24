@@ -11,7 +11,7 @@ function render_electricity_graph(xhr_data) {
         toolbox: TOOLBOX_OPTIONS,
         title: {
             text: TEXT_ELECTRICITY_HEADER,
-            textStyle: TITLE_TEXTSTYLE,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
             left: 'center',
         },
         color: [

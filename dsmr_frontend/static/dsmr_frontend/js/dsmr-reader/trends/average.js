@@ -5,6 +5,11 @@ let echarts_avg_gas_graph = null;
 function update_trends_averages(start_date, end_date) {
     let echarts_options = {
         baseOption: {
+            title: {
+                text: null,  // Set below
+                textStyle: TITLE_TEXTSTYLE_OPTIONS,
+                left: 'center'
+            },
             calculable: true,
             tooltip: {
                 trigger: 'item',
@@ -36,7 +41,7 @@ function update_trends_averages(start_date, end_date) {
               option: {
                     series: [
                         {
-                            radius: ['10%', '90%'],
+                            radius: ['10%', '70%'],
                             width: '100%',
                             label: {
                                 alignTo: 'labelLine',
@@ -79,17 +84,20 @@ function update_trends_averages(start_date, end_date) {
         },
     }).done(function (xhr_data) {
         echarts_options.baseOption.series[0].data = xhr_data.electricity;
+        echarts_options.baseOption.title.text = TEXT_TITLE_ELECTRICITY;
         echarts_avg_electricity_graph?.setOption(echarts_options);
         echarts_avg_electricity_graph?.hideLoading();
 
         if (xhr_data.electricity_returned.length > 0) {
             echarts_options.baseOption.series[0].data = xhr_data.electricity_returned;
+            echarts_options.baseOption.title.text = TEXT_TITLE_ELECTRICITY_RETURNED;
             echarts_avg_electricity_returned_graph?.setOption(echarts_options);
             echarts_avg_electricity_returned_graph?.hideLoading();
         }
 
         if (xhr_data.gas.length > 0) {
             echarts_options.baseOption.series[0].data = xhr_data.gas;
+            echarts_options.baseOption.title.text = TEXT_TITLE_GAS;
             echarts_avg_gas_graph?.setOption(echarts_options);
             echarts_avg_gas_graph?.hideLoading();
         }

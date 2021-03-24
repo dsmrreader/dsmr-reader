@@ -9,7 +9,7 @@ $(document).ready(function () {
         ],
         title: {
             text: TEXT_POWER_CURRENT_HEADER,
-            textStyle: TITLE_TEXTSTYLE,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
             left: 'center',
         },
         tooltip: {

@@ -3,6 +3,11 @@ let echarts_electricity_by_tariff_graph = echarts.init(document.getElementById('
 function update_trends_tariffs(start_date, end_date) {
     let echarts_options = {
         baseOption: {
+            title: {
+                text: TEXT_TITLE_TARIFF_RATIO,
+                textStyle: TITLE_TEXTSTYLE_OPTIONS,
+                left: 'center',
+            },
             color: [
                 ELECTRICITY_DELIVERED_ALTERNATE_COLOR,
                 ELECTRICITY_DELIVERED_COLOR
@@ -28,7 +33,7 @@ function update_trends_tariffs(start_date, end_date) {
               option: {
                     series: [
                         {
-                            radius: ['10%', '90%'],
+                            radius: ['10%', '70%'],
                             width: '100%',
                             label: {
                                 alignTo: 'labelLine',

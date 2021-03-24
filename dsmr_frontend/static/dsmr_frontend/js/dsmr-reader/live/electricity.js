@@ -21,7 +21,7 @@ $(document).ready(function () {
         ],
         title: {
             text: TEXT_ELECTRICITY_HEADER,
-            textStyle: TITLE_TEXTSTYLE,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
             left: 'center',
         },
         tooltip: {

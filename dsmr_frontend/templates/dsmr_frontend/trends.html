@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="panel">
-                <header class="panel-heading">
+                <header class="panel-heading datepicker-header">
                     <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range start" %} <br />
                     <span class="unit">{% blocktranslate %}Select starting day for calculating trends{% endblocktranslate %}</span>
                 </header>
@@ -42,7 +42,7 @@
 
         <div class="col-sm-6">
             <div class="panel">
-                <header class="panel-heading">
+                <header class="panel-heading datepicker-header">
                     <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range end" %} <br />
                     <span class="unit">{% blocktranslate %}Select ending day for calculating trends{% endblocktranslate %}</span>
                 </header>
@@ -61,10 +61,6 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <header class="panel-heading">
-                    {% blocktranslate %}Average electricity consumption{% endblocktranslate %}
-                    <span class="unit">{% translate "per hour, in %" %}</span>
-                </header>
                 <div class="panel-body">
                     <div id="echarts-avg-electricity-graph" class="pie-canvas"></div>
                 </div>
@@ -77,10 +73,6 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <header class="panel-heading">
-                    {% blocktranslate %}Average electricity returned{% endblocktranslate %}
-                    <span class="unit">{% translate "per hour, in %" %}</span>
-                </header>
                 <div class="panel-body">
                     <div id="echarts-avg-electricity-returned-graph" class="pie-canvas"></div>
                 </div>
@@ -93,10 +85,6 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <header class="panel-heading">
-                    {% blocktranslate %}Average gas consumption{% endblocktranslate %}
-                    <span class="unit">{% translate "per hour, in %" %}</span>
-                </header>
                 <div class="panel-body">
                     <div id="echarts-avg-gas-graph" class="pie-canvas"></div>
                 </div>
@@ -109,10 +97,6 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel" style="padding-bottom: 24px;">
-                <header class="panel-heading">
-                    {% blocktranslate %}Electricity tariff ratio{% endblocktranslate %}
-                    <span class="unit">{% translate "in %" %}</span>
-                </header>
                 <div class="panel-body">
                     <div id="echarts-electricity-by-tariff-graph" class="pie-canvas"></div>
                 </div>
@@ -145,9 +129,23 @@
         const DATEPICKER_LOCALE_FORMAT = "{{ datepicker_locale_format }}";
         const DATEPICKER_LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
 
+        const TEXT_TITLE_ELECTRICITY = '{% blocktranslate %}Average electricity consumption{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
+        const TEXT_TITLE_ELECTRICITY_RETURNED = '{% blocktranslate %}Average electricity returned{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
+        const TEXT_TITLE_GAS = '{% blocktranslate %}Average gas consumption{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
+        const TEXT_TITLE_TARIFF_RATIO = '{% blocktranslate %}Electricity tariff ratio{% endblocktranslate %} {S|{% translate "in %" %}}';
+
         const ECHARTS_AVG_CONSUMPTION_URL = "{% url 'frontend:trends-xhr-avg-consumption' %}";
         const ECHARTS_BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
+
         const ECHARTS_LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+        const TITLE_TEXTSTYLE_OPTIONS = {
+            rich: {
+                S: {
+                    fontSize: 10,
+                    color: 'grey'
+                },
+            }
+        };
 
         const ELECTRICITY_DELIVERED_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
         const ELECTRICITY_DELIVERED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_delivered_alternate_color }}";

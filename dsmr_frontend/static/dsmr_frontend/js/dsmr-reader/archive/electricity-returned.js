@@ -11,7 +11,7 @@ function render_electricity_returned_graph(xhr_data) {
         toolbox: TOOLBOX_OPTIONS,
         title: {
             text: TEXT_ELECTRICITY_RETURNED_HEADER,
-            textStyle: TITLE_TEXTSTYLE,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
             left: 'center'
         },
         color: [
