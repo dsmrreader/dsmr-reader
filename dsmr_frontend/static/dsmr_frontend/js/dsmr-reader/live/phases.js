@@ -188,9 +188,8 @@ $(document).ready(function () {
             });
         }, ECHARTS_PHASES_GRAPH_INTERVAL * 1000);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_phases_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_phases_graph?.resize();
 });

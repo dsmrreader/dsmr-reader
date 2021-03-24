@@ -102,10 +102,10 @@
 
     <script type="text/javascript">
         /* Translations. */
+        const ECHARTS_LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
         const TEXT_ELECTRICITY_HEADER = '{% blocktranslate %}Electricity consumed{% endblocktranslate %} {S|kWh}';
         const TEXT_ELECTRICITY_RETURNED_HEADER = '{% blocktranslate %}Electricity returned{% endblocktranslate %} {S|kWh}';
         const TEXT_GAS_HEADER = '{% blocktranslate %}Gas consumed{% endblocktranslate %} {S|m³}';
-
         const TEXT_ELECTRICITY1_DELIVERED = '{{ frontend_settings.tariff_1_delivered_name|capfirst }}';
         const TEXT_ELECTRICITY2_DELIVERED = '{{ frontend_settings.tariff_2_delivered_name|capfirst }}';
         const TEXT_ELECTRICITY1_RETURNED = '{{ frontend_settings.tariff_1_returned_name|capfirst }}';
@@ -136,6 +136,14 @@
                     fontSize: 10,
                     color: 'grey'
                 },
+            }
+        };
+        const TOOLBOX_OPTIONS = {
+            show: true,
+            feature: {
+                magicType: {
+                    type: ['line', 'bar']
+                }
             }
         };
 

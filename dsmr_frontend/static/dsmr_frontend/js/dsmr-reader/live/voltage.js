@@ -155,9 +155,8 @@ $(document).ready(function () {
             });
         }, ECHARTS_VOLTAGE_GRAPH_INTERVAL * 1000);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_voltage_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_voltage_graph?.resize();
 });

@@ -158,9 +158,8 @@ $(document).ready(function () {
             });
         }, ECHARTS_POWER_CURRENT_GRAPH_INTERVAL * 1000);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_power_current_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_power_current_graph?.resize();
 });

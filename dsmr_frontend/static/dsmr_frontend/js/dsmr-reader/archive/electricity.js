@@ -1,16 +1,14 @@
 let echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
 
 
-$(document).ready(function () {
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_electricity_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_electricity_graph?.resize();
 });
 
 
 function render_electricity_graph(xhr_data) {
     var echarts_options = {
+        toolbox: TOOLBOX_OPTIONS,
         title: {
             text: TEXT_ELECTRICITY_HEADER,
             textStyle: TITLE_TEXTSTYLE,
@@ -92,5 +90,6 @@ function render_electricity_graph(xhr_data) {
         ]
     }
 
+    echarts_electricity_graph.hideLoading();
     echarts_electricity_graph.setOption(echarts_options);
 }

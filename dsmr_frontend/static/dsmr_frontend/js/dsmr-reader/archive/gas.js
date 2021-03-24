@@ -1,16 +1,14 @@
 let echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
 
 
-$(document).ready(function () {
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_gas_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_gas_graph?.resize();
 });
 
 
 function render_gas_graph(xhr_data) {
     let echarts_options = {
+        toolbox: TOOLBOX_OPTIONS,
         title: {
             text: TEXT_GAS_HEADER,
             textStyle: TITLE_TEXTSTYLE,
@@ -58,5 +56,6 @@ function render_gas_graph(xhr_data) {
         ]
     };
 
+    echarts_gas_graph.hideLoading()
     echarts_gas_graph.setOption(echarts_options);
 }

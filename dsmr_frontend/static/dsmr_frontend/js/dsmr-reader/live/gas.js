@@ -72,9 +72,8 @@ $(document).ready(function () {
         };
         echarts_gas_graph.setOption(option);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_gas_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_gas_graph?.resize();
 });

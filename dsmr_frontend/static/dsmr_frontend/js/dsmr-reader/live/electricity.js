@@ -139,9 +139,8 @@ $(document).ready(function () {
             });
         }, ECHARTS_ELECTRICITY_GRAPH_INTERVAL * 1000);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_electricity_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_electricity_graph?.resize();
 });

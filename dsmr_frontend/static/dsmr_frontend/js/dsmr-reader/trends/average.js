@@ -64,6 +64,13 @@ function update_trends_averages(start_date, end_date) {
         ]
     };
 
+    echarts_avg_electricity_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_avg_electricity_graph?.clear();
+    echarts_avg_electricity_returned_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_avg_electricity_returned_graph?.clear();
+    echarts_avg_gas_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_avg_gas_graph?.clear();
+
     $.ajax({
         url: ECHARTS_AVG_CONSUMPTION_URL,
         data: {
@@ -73,19 +80,27 @@ function update_trends_averages(start_date, end_date) {
     }).done(function (xhr_data) {
         echarts_options.baseOption.series[0].data = xhr_data.electricity;
         echarts_avg_electricity_graph?.setOption(echarts_options);
+        echarts_avg_electricity_graph?.hideLoading();
 
         if (xhr_data.electricity_returned.length > 0) {
             echarts_options.baseOption.series[0].data = xhr_data.electricity_returned;
             echarts_avg_electricity_returned_graph?.setOption(echarts_options);
+            echarts_avg_electricity_returned_graph?.hideLoading();
         }
 
         if (xhr_data.gas.length > 0) {
             echarts_options.baseOption.series[0].data = xhr_data.gas;
-             echarts_avg_gas_graph?.setOption(echarts_options);
+            echarts_avg_gas_graph?.setOption(echarts_options);
+            echarts_avg_gas_graph?.hideLoading();
         }
     });
 }
 
+$(window).resize(function () {
+    echarts_avg_electricity_graph?.resize();
+    echarts_avg_electricity_returned_graph?.resize();
+    echarts_avg_gas_graph?.resize();
+});
 
 $(document).ready(function () {
     if ($('#echarts-avg-electricity-graph').length > 0) {
@@ -100,9 +115,5 @@ $(document).ready(function () {
         echarts_avg_gas_graph = echarts.init(document.getElementById('echarts-avg-gas-graph'));
     }
 
-    $(window).resize(function () {
-        echarts_avg_electricity_graph?.resize();
-        echarts_avg_electricity_returned_graph?.resize();
-        echarts_avg_gas_graph?.resize();
-    });
+    update_trends();
 });

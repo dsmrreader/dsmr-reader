@@ -70,10 +70,8 @@ $(document).ready(function () {
         };
         echarts_temperature_graph.setOption(option);
     });
+});
 
-
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_temperature_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_temperature_graph?.resize();
 });

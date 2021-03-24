@@ -57,6 +57,7 @@ function update_trends_tariffs(start_date, end_date) {
     };
 
     echarts_electricity_by_tariff_graph.showLoading('default', ECHARTS_LOADING_OPTIONS);
+    echarts_electricity_by_tariff_graph?.clear();
 
     $.ajax({
         url: ECHARTS_BY_TARIFF_URL,
@@ -72,8 +73,6 @@ function update_trends_tariffs(start_date, end_date) {
     });
 }
 
-$(document).ready(function () {
-    $(window).resize(function () {
-        echarts_electricity_by_tariff_graph?.resize();
-    });
+$(window).resize(function () {
+    echarts_electricity_by_tariff_graph?.resize();
 });

@@ -111,6 +111,13 @@ function update_graphs(selected_date) {
         g_graph_xhr_request.abort();
     }
 
+    echarts_electricity_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS)
+    echarts_electricity_graph?.clear();
+    echarts_electricity_returned_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS)
+    echarts_electricity_returned_graph?.clear();
+    echarts_gas_graph?.showLoading('default', ECHARTS_LOADING_OPTIONS)
+    echarts_gas_graph?.clear();
+
     g_graph_xhr_request = $.ajax({
         url: ARCHIVE_XHR_GRAPHS_URL,
         dataType: "json",
