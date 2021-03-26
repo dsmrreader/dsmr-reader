@@ -10,7 +10,7 @@ function update_consumption_header(update_interval)
         $("#tariff_name").html(response.tariff_name);
 
         if (response.currently_returned > 0) {
-            response.currently_returned = '-' + response.currently_returned;
+            response.currently_returned = response.currently_returned;
         }
 
         $("#latest_electricity_delivered").html(response.currently_delivered);

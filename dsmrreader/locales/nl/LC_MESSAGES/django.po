@@ -1547,8 +1547,8 @@ msgstr "Verbruik"
 msgid "Returning"
 msgstr "Teruglevering"
 
-msgid "Hourly"
-msgstr "Per uur"
+msgid "hour"
+msgstr "uur"
 
 msgid "Watt"
 msgstr "Watt"
@@ -2614,6 +2614,9 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Hourly"
+#~ msgstr "Per uur"
+
 #~ msgid "(in kWh)"
 #~ msgstr "(in kWh)"
 
@@ -2673,9 +2676,6 @@ msgstr "Engels"
 
 #~ msgid "Lowest consumption (L3)"
 #~ msgstr "Laagste verbruik (L3)"
-
-#~ msgid "/hour"
-#~ msgstr "/uur"
 
 #~ msgid "(total)"
 #~ msgstr "(totaal)"
