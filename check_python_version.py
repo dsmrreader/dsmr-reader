@@ -17,9 +17,11 @@ def check():
 
     # Deprecation.
     if sys.version_info < PREFERRED_MINIMUM_VERSION:
-        print('[WARNING] Python version is deprecated. Preferred version for DSMR-reader is Python {} or higher.'.format(
-            '.'.join([str(x) for x in PREFERRED_MINIMUM_VERSION])
-        ))
+        print(
+            '[WARNING] Python version is deprecated. Preferred version for DSMR-reader is Python {} or higher.'.format(
+                '.'.join([str(x) for x in PREFERRED_MINIMUM_VERSION])
+            )
+        )
 
 
 if __name__ == '__main__':
