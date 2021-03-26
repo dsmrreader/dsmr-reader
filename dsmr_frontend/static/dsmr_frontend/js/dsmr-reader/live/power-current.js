@@ -152,15 +152,12 @@ $(document).ready(function () {
                     return;
                 }
 
-                /* Delta update. */
-                for (let i = 0; i < xhr_data.read_at.length; i++) {
-                    echarts_power_current_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
-                    echarts_power_current_update_options.series[0].data.push(xhr_data.phase_power_current.l1[i]);
+                echarts_power_current_update_options.xAxis[0].data = echarts_power_current_update_options.xAxis[0].data.concat(xhr_data.read_at);
+                echarts_power_current_update_options.series[0].data = echarts_power_current_update_options.series[0].data.concat(xhr_data.phase_power_current.l1);
 
-                    if (CAPABILITY_MULTI_PHASE) {
-                        echarts_power_current_update_options.series[1].data.push(xhr_data.phase_power_current.l2[i]);
-                        echarts_power_current_update_options.series[2].data.push(xhr_data.phase_power_current.l3[i]);
-                    }
+                if (CAPABILITY_MULTI_PHASE) {
+                    echarts_power_current_update_options.series[1].data = echarts_power_current_update_options.series[1].data.concat(xhr_data.phase_power_current.l2);
+                    echarts_power_current_update_options.series[2].data = echarts_power_current_update_options.series[2].data.concat(xhr_data.phase_power_current.l3);
                 }
 
                 latest_delta_id = xhr_data.latest_delta_id;
