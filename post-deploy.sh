@@ -8,9 +8,11 @@ python -c 'import sys; exit_code = 0 if hasattr(sys, "real_prefix") else 1; sys.
 if [ $? -ne 0 ]; then
     echo "     [i] ----- Activating 'dsmrreader' VirtualEnv..."
     source ~/.virtualenvs/dsmrreader/bin/activate
-    
+
     if [ $? -ne 0 ]; then
-        echo "     [!] FAILED to switch to 'dsmrreader' VirtualEnv (is it installed?)"
+        echo ""
+        echo "     [!] [!] Aborting, failure switching to 'dsmrreader' VirtualEnv (is it installed properly?)"
+        echo ""
         exit 1;
     fi
 fi
@@ -22,7 +24,9 @@ echo " --- Checking Python version."
 ./check_python_version.py
 
 if [ $? -ne 0 ]; then
-    echo "[!] Aborting post-deployment due to Python version"
+    echo ""
+    echo "[!] Aborting, failure CHECKING PYTHON VERSION"
+    echo ""
     exit 1;
 fi
 
@@ -33,7 +37,9 @@ echo " --- Checking & synchronizing base requirements for changes."
 pip3 install -r dsmrreader/provisioning/requirements/base.txt --upgrade
 
 if [ $? -ne 0 ]; then
-    echo "[!] Aborting post-deployment due to PIP"
+    echo ""
+    echo "[!] Aborting, failure RUNNING PIP INSTALL"
+    echo ""
     exit 1;
 fi
 
@@ -44,6 +50,7 @@ echo " --- Applying database migrations."
 ./manage.py migrate --noinput
 
 if [ $? -ne 0 ]; then
+    echo ""
     echo " >>>>> [!] Executing database migrations failed! <<<<<"
     echo "       [i] Trying to automatically resolve with 'dsmr_sqlsequencereset'."
 
@@ -66,6 +73,13 @@ echo ""
 echo ""
 echo " --- Checking & synchronizing static file changes."
 ./manage.py collectstatic --noinput
+
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "[!] Aborting, failure COPYING STATIC FILES"
+    echo ""
+    exit 1;
+fi
 
 
 echo ""

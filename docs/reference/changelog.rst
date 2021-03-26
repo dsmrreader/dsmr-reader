@@ -18,6 +18,7 @@ Current version
 v4.15.0 - 2021-xx-xx
 --------------------
 
+- ``Changed`` Added check in post deploy script for collectstatic failure [`#1336 <https://github.com/dsmrreader/dsmr-reader/issues/1336>`_]
 
 
 v4.14.0 - 2021-03-23
