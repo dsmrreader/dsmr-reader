@@ -1454,6 +1454,9 @@ msgstr "tarief 2"
 msgid "Fixed daily costs"
 msgstr "Vaste kosten per dag"
 
+msgid "No data or energy contracts found."
+msgstr "Geen gegevens of energiecontracten gevonden."
+
 msgid "Export data"
 msgstr "Exporteer gegevens"
 

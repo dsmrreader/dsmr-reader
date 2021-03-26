@@ -8,6 +8,7 @@ from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 from dsmrreader.config import django_overrides
@@ -21,7 +22,9 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         self.assertIn('electricity', capabilities.keys())
         self.assertIn('electricity_returned', capabilities.keys())
         self.assertIn('gas', capabilities.keys())
+        self.assertIn('multi_phases', capabilities.keys())
         self.assertIn('weather', capabilities.keys())
+        self.assertIn('costs', capabilities.keys())
         self.assertIn('any', capabilities.keys())
 
     def test_empty_capabilities(self):
@@ -35,6 +38,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(capabilities['gas'])
         self.assertFalse(capabilities['multi_phases'])
         self.assertFalse(capabilities['weather'])
+        self.assertFalse(capabilities['costs'])
         self.assertFalse(capabilities['any'])
 
         self.assertFalse(dsmr_backend.services.backend.get_capabilities('electricity'))
@@ -42,6 +46,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(dsmr_backend.services.backend.get_capabilities('gas'))
         self.assertFalse(dsmr_backend.services.backend.get_capabilities('multi_phases'))
         self.assertFalse(dsmr_backend.services.backend.get_capabilities('weather'))
+        self.assertFalse(dsmr_backend.services.backend.get_capabilities('costs'))
         self.assertFalse(dsmr_backend.services.backend.get_capabilities('any'))
 
     def test_electricity_capabilities(self):
@@ -206,6 +211,23 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         capabilities = dsmr_backend.services.backend.get_capabilities()
         self.assertTrue(dsmr_backend.services.backend.get_capabilities('weather'))
         self.assertTrue(capabilities['weather'])
+        self.assertTrue(capabilities['any'])
+
+    def test_costs_capabilities(self):
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        self.assertFalse(capabilities['costs'])
+        self.assertFalse(capabilities['any'])
+
+        EnergySupplierPrice.objects.create(
+            start=timezone.now().date(),
+            end=(timezone.now() + timezone.timedelta(hours=24)).date(),
+            electricity_delivered_1_price=0.010,
+            electricity_delivered_2_price=0.020,
+        )
+
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        self.assertTrue(dsmr_backend.services.backend.get_capabilities('costs'))
+        self.assertTrue(capabilities['costs'])
         self.assertTrue(capabilities['any'])
 
     def test_disabled_capabilities(self):

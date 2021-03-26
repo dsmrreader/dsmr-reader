@@ -66,7 +66,7 @@ class TestViews(TestCase):
         # Invalid XHR.
         data.update({'level': 'INVALID DATA'})
         response = self.client.get(
-            reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+            reverse('{}:compare-xhr-summary'.format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 500)
 
