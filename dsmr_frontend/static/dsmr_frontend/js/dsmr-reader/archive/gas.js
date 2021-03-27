@@ -19,22 +19,9 @@ function render_gas_graph(xhr_data) {
         color: [
             GAS_DELIVERED_COLOR
         ],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    show: true
-                }
-            }
-        },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
-        },
+        grid: GRID_OPTIONS,
         xAxis: [
             {
                 type: 'category',

@@ -17,22 +17,10 @@ function render_electricity_returned_graph(xhr_data) {
             ELECTRICITY_RETURNED_ALTERNATE_COLOR,
             ELECTRICITY_RETURNED_COLOR
         ],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    show: true
-                }
-            }
-        },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
-        },
+        grid: GRID_OPTIONS,
+
         xAxis: [
             {
                 type: 'category',

@@ -17,32 +17,9 @@ function render_electricity_graph(xhr_data) {
             ELECTRICITY_DELIVERED_ALTERNATE_COLOR,
             ELECTRICITY_DELIVERED_COLOR
         ],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        formatter: function (params) {
-                            let val = 0;
-                            this.option.series.forEach(s => {
-                                val += s.data[params.dataIndex];
-                            });
-                            return val;
-                        }
-                    }
-                },
-            }
-        },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
-        },
+        grid: GRID_OPTIONS,
         xAxis: [
             {
                 type: 'category',
