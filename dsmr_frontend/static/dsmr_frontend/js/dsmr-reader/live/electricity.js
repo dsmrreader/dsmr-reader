@@ -25,15 +25,7 @@ $(document).ready(function () {
             textStyle: TITLE_TEXTSTYLE_OPTIONS,
             left: 'center',
         },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    show: true
-                }
-            }
-        },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
         grid: [{
             left: 50,

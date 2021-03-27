@@ -12,22 +12,9 @@ $(document).ready(function () {
             textStyle: TITLE_TEXTSTYLE_OPTIONS,
             left: 'center',
         },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    show: true
-                }
-            }
-        },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
-        },
+        grid: GRID_OPTIONS,
         xAxis: [
             {
                 type: 'category',
@@ -38,8 +25,6 @@ $(document).ready(function () {
         yAxis: [
             {
                 type: 'value',
-                min: 'dataMin',
-                max: 'dataMax'
             }
         ],
         dataZoom: [
