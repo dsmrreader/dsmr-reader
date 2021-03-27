@@ -13,7 +13,6 @@ $(document).ready(function () {
             left: 'center',
         },
         tooltip: TOOLTIP_OPTIONS,
-        aria: ARIA_OPTIONS,
         calculable: true,
         grid: GRID_OPTIONS,
         xAxis: [
