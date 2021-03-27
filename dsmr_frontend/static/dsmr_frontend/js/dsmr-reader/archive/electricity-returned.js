@@ -46,6 +46,7 @@ function render_electricity_returned_graph(xhr_data) {
             }
         ],
         series: null,
+        animationEasing: 'elasticOut',
         media: [
             {
               option: {
@@ -67,6 +68,7 @@ function render_electricity_returned_graph(xhr_data) {
                 name: TEXT_ELECTRICITY1_RETURNED,
                 type: ELECTRICITY_GRAPH_STYLE,
                 stack: STACK_ELECTRICITY_GRAPHS,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity1_returned
@@ -75,6 +77,7 @@ function render_electricity_returned_graph(xhr_data) {
                 name: TEXT_ELECTRICITY2_RETURNED,
                 type: ELECTRICITY_GRAPH_STYLE,
                 stack: STACK_ELECTRICITY_GRAPHS,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity2_returned
@@ -85,6 +88,7 @@ function render_electricity_returned_graph(xhr_data) {
             {
                 name: TEXT_ELECTRICITY_MERGED_RETURNED,
                 type: ELECTRICITY_GRAPH_STYLE,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity_returned_merged

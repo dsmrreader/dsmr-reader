@@ -151,6 +151,9 @@
                 dataView: {}
             }
         };
+        const ANIMATION_DELAY_OPTIONS = function (idx) {
+            return idx * 10;
+        };
 
         const ARCHIVE_XHR_SUMMARY_URL = "{% url 'frontend:archive-xhr-summary' %}";
         const ARCHIVE_XHR_GRAPHS_URL = "{% url 'frontend:archive-xhr-graphs' %}";

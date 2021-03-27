@@ -7,6 +7,9 @@ $(window).resize(function () {
 
 
 function render_gas_graph(xhr_data) {
+    let animationDelay = function (idx) {
+        return idx * 10;
+    };
     let echarts_options = {
         title: {
             text: TEXT_GAS_HEADER,
@@ -50,9 +53,11 @@ function render_gas_graph(xhr_data) {
                 type: GAS_GRAPH_STYLE,
                 smooth: true,
                 areaStyle: {},
+                animationDelay: animationDelay,
                 data: xhr_data.gas
             }
         ],
+        animationEasing: 'elasticOut',
         media: [
             {
               option: {
