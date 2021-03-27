@@ -36,16 +36,14 @@ $(document).ready(function () {
         },
         calculable: true,
         grid: [{
-            containLabel: true,
             left: 50,
             right: 50,
-            height: '34%',
-            top: '50%'
+            height: '35%'
         }, {
-            containLabel: true,
             left: 50,
             right: 50,
-            height: '34%'
+            height: '35%',
+            top: '50%'
         }],
         axisPointer: {
             link: {xAxisIndex: 'all'}
@@ -78,13 +76,19 @@ $(document).ready(function () {
         media: [
             {
               option: {
-                    toolbox: TOOLBOX_OPTIONS
+                    toolbox: TOOLBOX_OPTIONS,
+                    grid: [{}, {
+                        top: '50%'
+                    }],
                 },
             },
             {
-                query: { maxWidth: 500},
+                query: { maxWidth: 768},
                 option: {
-                    toolbox: {show: false}
+                    toolbox: {show: false},
+                    grid: [{}, {
+                        top: '55%'
+                    }],
                 }
             }
         ],
