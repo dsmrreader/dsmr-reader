@@ -38,6 +38,11 @@ $(document).ready(function () {
                 }
             }
         },
+        aria: {
+            decal: {
+                show: true
+            }
+        },
         calculable: true,
         grid: [{
             left: 50,
