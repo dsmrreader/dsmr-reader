@@ -1659,13 +1659,13 @@ msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
 
 msgid "Highest usage (L1)"
-msgstr "Hoogste teruglevering (L1)"
+msgstr "Hoogste verbruik (L1)"
 
 msgid "Highest usage (L2)"
-msgstr "Hoogste teruglevering (L2)"
+msgstr "Hoogste verbruik (L2)"
 
 msgid "Highest usage (L3)"
-msgstr "Hoogste teruglevering (L3)"
+msgstr "Hoogste verbruik (L3)"
 
 msgid "Lowest usage (L1)"
 msgstr "Laagste verbruik (L1)"
