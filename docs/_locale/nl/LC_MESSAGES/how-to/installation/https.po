@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 - 2021 DSMR-reader
+# This file is distributed under the same license as the DSMR-reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: ../../how-to/installation/https.rst:2
+msgid "Installation: HTTPS"
+msgstr "Installatie: HTTPS"
+
+#: ../../how-to/installation/https.rst:4
+msgid "You should definitely use HTTPS when you're exposing DSMR-reader to the Internet."
+msgstr "Als je DSMR-reader bereikbaar maakt voor het Internet, zou je zeker HTTPS moeten gebruiken."
+
+#: ../../how-to/installation/https.rst:6
+msgid "DSMR-reader can **not** create HTTPS for you, since it involves granting SSL certificates. However you can use `CertBot <https://certbot.eff.org/>`__ and `by Let's Encrypt <https://letsencrypt.org/>`__, to easily set it up."
+msgstr "DSMR-reader kan **geen** HTTPS voor je inschakelen, gezien er SSL-vertificaten voor nodig zijn. Je kunt echter wel `CertBot <https://certbot.eff.org/>`__ en `Let's Encrypt <https://letsencrypt.org/>`__ gebruiken om het relatief eenvoudig te regelen."
+
+#: ../../how-to/installation/https.rst:9
+msgid "It's free to use and they're providing some guidance, which can be found here: `CertBot Debian / Nginx <https://certbot.eff.org/lets-encrypt/debianbuster-nginx>`__. Follow the guides over there and things should be taken care of."
+msgstr "Het is gratis om te gebruiken en er is goede ondersteuning, die je hier kunt terugvinden: `CertBot Debian / Nginx <https://certbot.eff.org/lets-encrypt/debianbuster-nginx>`__. Volg de instructies daar en uiteindelijk zou alles geregeld moeten worden."
+
+#: ../../how-to/installation/https.rst:15
+msgid "Below there are some vhost samples to distinguish the difference."
+msgstr "Hieronder staan van vhost-voorbeelden om het verschil te weergeven."
+
+#: ../../how-to/installation/https.rst:19
+msgid "These are just Nginx vhost samples for your reference. Do **not** blindly use them!"
+msgstr "Dit zijn slechts wat Nginx-vhost voorbeelden voor je eigen referentie. Gebruik deze **niet** blindelings!"
+
+#: ../../how-to/installation/https.rst:21
+msgid "Default installation without HTTPS::"
+msgstr "Standaardinstallatie zonder HTTPS::"
+
+#: ../../how-to/installation/https.rst:44
+msgid "Installation after using Let's Encrypt::"
+msgstr "Installatie na gebruik Let's Encrypt::"

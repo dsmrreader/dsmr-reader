@@ -8,6 +8,7 @@ How to's
    installation/using-docker
    installation/remote-datalogger
    installation/using-home-assistant
+   installation/https
    installation/uninstalling
    upgrading/upgrade
    upgrading/downgrade

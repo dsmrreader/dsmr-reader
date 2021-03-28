@@ -6,8 +6,8 @@ Setting up the application
     :depth: 2
 
 
-Accessing
----------
+Viewing DSMR-reader
+-------------------
 Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser. 
 
 Did you install using a monitor attached to the RaspberryPi and you don't know what address your device has? Just type ``ip a | grep inet`` and it should display an ip address, for example::
@@ -34,9 +34,9 @@ Public webinterface warning
 
 - Enable password protection :doc:`in the configuration<configuration>` for the entire application, available since DSMR-reader ``v4.0``.
 
-- Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for yourself) and port ``80``.
+- Use :doc:`HTTPS when possible </how-to/installation/https>`.
 
-- Use TLS (HTTPS) when possible.
+- Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for yourself) and port ``80``.
 
 
 Data integrity

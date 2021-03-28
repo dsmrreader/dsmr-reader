@@ -4,7 +4,7 @@ upstream dsmr-webinterface {
 
 server {
     listen      80;
-    server_name _;  # No hostname available? Just use the underscore for wildcard matching. :]
+    server_name _;  # No hostname available? Just use the default underscore here for wildcard matching.
 
 	# Uncomment these lines below to force additional authentication on application access.
 	# NOTE: Alter the IP-range '192.168.1.0/24' if you are using a different one (i.e.: 10.0.x.x)!
