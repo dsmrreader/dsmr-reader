@@ -24,8 +24,8 @@ How to's
    troubleshooting/recalculate-prices
 
    database/data-limits
-   database/postgresql-migrate-day-hour-statistics
    database/postgresql-restore-backup
+   database/postgresql-migrate-day-hour-statistics
    database/postgresql-resolve-size-warnings
    database/postgresql-reclaim-disk-space
    database/postgresql-change-storage-location

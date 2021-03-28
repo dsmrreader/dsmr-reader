@@ -8,3 +8,4 @@ If you need any help, try one of these topics first:
 
    how-to/troubleshooting/enabling-debug-logging
    how-to/troubleshooting/logfiles
+   how-to/database/postgresql-restore-backup

@@ -16,56 +16,81 @@ msgstr ""
 msgid "Database: Restore a backup (PostgreSQL)"
 msgstr "Database: Back-up terugzetten (PostgreSQL)"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:6
-msgid "Only follow these step if you want to restore a backup in PostgreSQL."
-msgstr "Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt terugzetten."
+#: ../../how-to/database/postgresql-restore-backup.rst:4
+msgid "First check whether situation A or B applies to you below."
+msgstr "Kijk eerst of A ofwel B hieronder van toepassing is op je situatie."
 
-#: ../../how-to/database/postgresql-restore-backup.rst:8
-msgid "Restoring a backup will replace any existing data stored in the database and is irreversible!"
-msgstr "Het terugzetten van een back-up overschrijft alle bestaande data en is onomkeerbaar!"
+#: ../../how-to/database/postgresql-restore-backup.rst:7
+msgid "Situation A: Already finished DSMR-reader reinstallation"
+msgstr "Situatie A: DSMR-reader al helemaal opnieuw geinstalleerd"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:10
-msgid "This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::"
-msgstr "Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt::"
+#: ../../how-to/database/postgresql-restore-backup.rst:11
+msgid "The steps below replace any existing data stored in the database and is irreversible!"
+msgstr "De stappen hieronder overschrijven alle bestaande gegevens in de database en is onomkeerbaar!"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:13
+msgid "You cannot merge a database backup with an existing installation containing data you want to preserve!"
+msgstr "Je kunt helaas niet een databasebackup samenvoegen met een bestaande installatie, waar gegevens in staan die je wilt bewaren."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:15
+msgid "Doing so **will** cause trouble with duplicate data/ID's and **break** your installation at some point."
+msgstr "Doorgaan zorgt er **gegarandeerd** voor dat er **problemen** komen met dubbele gegevens/ID's op een bepaald moment."
 
 #: ../../how-to/database/postgresql-restore-backup.rst:17
-#: ../../how-to/database/postgresql-restore-backup.rst:26
-msgid "Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way."
-msgstr "Zet je database **niet terug** wanneer je ofwel **de applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt uitgevoerd."
+msgid "If you just finished reinstalling DSMR-reader but **did not** restore the backup and you want to **overwrite** the data in it::"
+msgstr "Als je DSMR-reader opnieuw hebt geinstalleerd en **niet** de backup hebt teruggezet, maar wel alle gegevens in de nieuwe database wilt **overschrijven**::"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:19
-#: ../../how-to/database/postgresql-restore-backup.rst:28
-msgid "Doing so WILL cause trouble with duplicate data/ID's and break your installation at some point."
-msgstr "Doorgaan zorgt er gegarandeerd voor dat er problemen komen met dubbele gegevens/ID's op een bepaald moment."
+#: ../../how-to/database/postgresql-restore-backup.rst:36
+msgid "Situation B: Currently reinstalling DSMR-reader"
+msgstr "Situatie B: Nog bezig met de herinstallatie van DSMR-reader"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:24
-msgid "To be clear, we'll repeat it once again:"
-msgstr "On glashelder te zijn, herhalen we:"
+#: ../../how-to/database/postgresql-restore-backup.rst:38
+msgid "If you are still in the process of reinstalling DSMR-reader and just executed these commands::"
+msgstr "Als je nog steeds bezig bent met de herinstallatie van DSMR-reader en je net deze commando's hebt uitgevoerd::"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:33
-msgid "Compressed (default)"
-msgstr "Gecomprimeerd (standaard)"
+#: ../../how-to/database/postgresql-restore-backup.rst:46
+msgid "Your database **should** still be empty and this will import any backup made::"
+msgstr "Je database **zou** nog leeg moeten zijn en dit importeert een backup::"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:34
-msgid "To restore a compressed backup (``.gz``), run::"
-msgstr "Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
+#: ../../how-to/database/postgresql-restore-backup.rst:52
+msgid "Now continue the installation guide."
+msgstr "Ga nu verder met de installatiestappen."
 
-#: ../../how-to/database/postgresql-restore-backup.rst:40
-msgid "Uncompressed (legacy)"
-msgstr "Ongecomprimeerd (legacy)"
+#: ../../how-to/database/postgresql-restore-backup.rst:56
+msgid "Attention"
+msgstr "Attentie"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:41
-msgid "To restore an uncompressed backup (``.sql``), run::"
-msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
-
-#: ../../how-to/database/postgresql-restore-backup.rst:47
-msgid "Result"
-msgstr "Resultaat"
-
-#: ../../how-to/database/postgresql-restore-backup.rst:49
+#: ../../how-to/database/postgresql-restore-backup.rst:58
 msgid "You should **not** see any errors regarding duplicate data or existing ID's or whatever."
 msgstr "Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's of iets soortgelijks."
 
-#: ../../how-to/database/postgresql-restore-backup.rst:53
+#: ../../how-to/database/postgresql-restore-backup.rst:62
 msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at GitHub and **do not continue**."
 msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op GitHub en **ga niet verder**."
+
+#~ msgid "Only follow these step if you want to restore a backup in PostgreSQL."
+#~ msgstr "Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt terugzetten."
+
+#~ msgid "This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::"
+#~ msgstr "Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt::"
+
+#~ msgid "Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way."
+#~ msgstr "Zet je database **niet terug** wanneer je ofwel **de applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt uitgevoerd."
+
+#~ msgid "To be clear, we'll repeat it once again:"
+#~ msgstr "On glashelder te zijn, herhalen we:"
+
+#~ msgid "Compressed (default)"
+#~ msgstr "Gecomprimeerd (standaard)"
+
+#~ msgid "To restore a compressed backup (``.gz``), run::"
+#~ msgstr "Om een gecomprimeerde back-up (``.gz``) terug te zetten, voer dit uit::"
+
+#~ msgid "Uncompressed (legacy)"
+#~ msgstr "Ongecomprimeerd (legacy)"
+
+#~ msgid "To restore an uncompressed backup (``.sql``), run::"
+#~ msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
+
+#~ msgid "Result"
+#~ msgstr "Resultaat"
