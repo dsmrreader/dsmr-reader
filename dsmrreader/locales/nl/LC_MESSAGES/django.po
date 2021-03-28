@@ -1134,8 +1134,8 @@ msgstr "Archief"
 msgid "No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader."
 msgstr "Nog geen dagstatistieken gevonden. Gegevens zijn hier doorgaans zichtbaar vanaf de tweede dag dat DSMR-reader draait."
 
-msgid "Level of detail"
-msgstr "Detailniveau"
+msgid "Level"
+msgstr "Niveau"
 
 msgid "Days"
 msgstr "Dagen"
@@ -1149,17 +1149,14 @@ msgstr "Jaren"
 msgid "Pick a day, month or year"
 msgstr "Kies een dag, maand of jaar"
 
+msgid "Loading..."
+msgstr "Bezig met laden..."
+
 msgid "Electricity consumed"
 msgstr "Elektriciteitsverbruik"
 
-msgid "(in kWh)"
-msgstr "(in kWh)"
-
 msgid "Gas consumed"
 msgstr "Gasverbruik"
-
-msgid "(in m³)"
-msgstr "(in m³)"
 
 msgid "Electricity (single tariff)"
 msgstr "Elektriciteit (enkel tarief)"
@@ -1187,6 +1184,9 @@ msgstr "Statistieken"
 
 msgid "Energy contracts"
 msgstr "Energiecontracten"
+
+msgid "Level of detail"
+msgstr "Detailniveau"
 
 msgid "Base selection"
 msgstr "Basisselectie"
@@ -1436,8 +1436,8 @@ msgstr "kWh"
 msgid "Total electricity"
 msgstr "Totaal elektriciteit"
 
-msgid "m<sup>3</sup>"
-msgstr "m<sup>3</sup>"
+msgid "m³"
+msgstr "m³"
 
 msgid "Total costs"
 msgstr "Totale kosten"
@@ -1453,6 +1453,9 @@ msgstr "tarief 2"
 
 msgid "Fixed daily costs"
 msgstr "Vaste kosten per dag"
+
+msgid "No data or energy contracts found."
+msgstr "Geen gegevens of energiecontracten gevonden."
 
 msgid "Export data"
 msgstr "Exporteer gegevens"
@@ -1547,41 +1550,59 @@ msgstr "Verbruik"
 msgid "Returning"
 msgstr "Teruglevering"
 
-msgid "Hourly"
-msgstr "Per uur"
+msgid "hour"
+msgstr "uur"
 
 msgid "Watt"
 msgstr "Watt"
 
-msgid "Recent electricity consumption"
-msgstr "Recent elektriciteitsverbruik"
-
-msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph."
-msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik de scrollbalk/controller onder de grafiek."
+msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph."
+msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik (de bovenkant van) de scrollbalk onder de grafiek."
 
 msgid "You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration."
 msgstr "Het is mogelijk om het totaal aantal weergegeven uren (tot max. een week terug), inclusief de bijbehorende initiële zoom bij openen, aan te passen in de Frontend-configuratie."
 
-msgid "Recent distribution of electricity phases"
-msgstr "Recente distributie elektriciteitsfasen"
-
-msgid "Recent phase voltages"
-msgstr "Recente voltages fasen"
-
-msgid "Recent phase currents"
-msgstr "Recente stroomsterktes"
-
-msgid "Recent gas consumption"
-msgstr "Recent gasverbruik"
+msgid "Graph controls help"
+msgstr "Uitleg grafiekgebruik"
 
 msgid "Additionally, when using a DSMR v5 smart meter"
 msgstr "Daarnaast, indien je een DSMR-v5-meter gebruikt"
 
+msgid "Delivered"
+msgstr "Verbruikt"
+
+msgid "Recent electricity usage"
+msgstr "Recent gebruik elektriciteit"
+
+msgid "in Watt"
+msgstr "in Watt"
+
+msgid "Recent phases usage"
+msgstr "Recente gebruik fasen"
+
+msgid "Recent phase voltages"
+msgstr "Recente voltages fasen"
+
+msgid "in Volt"
+msgstr "in Volt"
+
+msgid "Recent phase currents"
+msgstr "Recente stroomsterktes"
+
+msgid "in Ampere"
+msgstr "in Ampère"
+
+msgid "Recent gas consumption"
+msgstr "Recent gasverbruik"
+
+msgid "in m³"
+msgstr "in m³"
+
 msgid "Recent temperatures"
 msgstr "Recente temperaturen"
 
-msgid "Loading..."
-msgstr "Bezig met laden..."
+msgid "in °C"
+msgstr "in °C"
 
 msgid "Notifications"
 msgstr "Notificaties"
@@ -2596,6 +2617,24 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+#~ msgid "Hourly"
+#~ msgstr "Per uur"
+
+#~ msgid "(in kWh)"
+#~ msgstr "(in kWh)"
+
+#~ msgid "(in m³)"
+#~ msgstr "(in m³)"
+
+#~ msgid "in"
+#~ msgstr "in"
+
+#~ msgid "m<sup>3</sup>"
+#~ msgstr "m<sup>3</sup>"
+
+#~ msgid "Recent distribution of electricity phases"
+#~ msgstr "Recente distributie elektriciteitsfasen"
+
 #~ msgid "Untracked consumption in the past (and today), is not taken into account."
 #~ msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
 
@@ -2640,9 +2679,6 @@ msgstr "Engels"
 
 #~ msgid "Lowest consumption (L3)"
 #~ msgstr "Laagste verbruik (L3)"
-
-#~ msgid "/hour"
-#~ msgstr "/uur"
 
 #~ msgid "(total)"
 #~ msgstr "(totaal)"

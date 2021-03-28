@@ -1,33 +1,23 @@
 $(document).ready(function () {
-
-    let echarts_temperature_graph = echarts.init(document.getElementById('echarts-temperature-graph'));
-    echarts_temperature_graph.showLoading('default', echarts_loading_options);
+    echarts_temperature_graph = echarts.init(document.getElementById('echarts-temperature-graph'));
+    echarts_temperature_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(echarts_temperature_graph_url, function (xhr_data) {
+    $.get(TEMPERATURE_GRAPH_URL, function (xhr_data) {
         echarts_temperature_graph.hideLoading();
 
         let option = {
             color: [
-                temperature_color
+                TEMPERATURE_COLOR
             ],
-            tooltip: {
-                formatter: "{c} {a}",
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow',
-                    label: {
-                        show: true
-                    }
-                }
+            title: {
+                text: TEXT_TEMPERATURE_HEADER,
+                textStyle: TITLE_TEXTSTYLE_OPTIONS,
+                left: 'center',
             },
+            tooltip: TOOLTIP_OPTIONS,
             calculable: true,
-            grid: {
-                top: '12%',
-                left: '1%',
-                right: '2%',
-                containLabel: true
-            },
+            grid: GRID_OPTIONS,
             xAxis: [
                 {
                     type: 'category',
@@ -60,14 +50,25 @@ $(document).ready(function () {
                     data: xhr_data.degrees_celcius,
                     smooth: true
                 }
+            ],
+            media: [
+                {
+                  option: {
+                        toolbox: TOOLBOX_OPTIONS
+                    },
+                },
+                {
+                    query: { maxWidth: 500},
+                    option: {
+                        toolbox: {show: false}
+                    }
+                }
             ]
         };
         echarts_temperature_graph.setOption(option);
     });
+});
 
-
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_temperature_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_temperature_graph?.resize();
 });

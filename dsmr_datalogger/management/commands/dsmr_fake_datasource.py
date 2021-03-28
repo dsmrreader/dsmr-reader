@@ -2,6 +2,7 @@ from decimal import Decimal, ROUND_UP
 import logging
 import random
 import time
+import math
 
 import crcmod
 import serial
@@ -91,6 +92,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         now = timezone.now() + timezone.timedelta(hours=int(hour_offset))
         now = timezone.localtime(now)  # Must be local.
 
+        # COS or SIN graph for some purposes
+        graph_base = math.cos(now.timestamp() / 20)
+
         current_unix_time = time.mktime(now.timetuple())
         second_since = int(current_unix_time - 1420070400)  # 1420070400: 01 Jan 2015 00:00:00 GMT
         electricity_base = second_since * 0.0001  # Averages around 3000 kWh for a year.
@@ -101,18 +105,28 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         electricity_2_returned = 0
         gas = electricity_base * 0.3  # Random as well.
 
-        # Delivered and returned MAY be used simultaneously
-        currently_delivered_l1 = random.randint(0, 500) * 0.001  # kW
-        currently_delivered_l2 = random.randint(0, 1500) * 0.001  # kW
-        currently_delivered_l3 = random.randint(0, 750) * 0.001  # kW
+        current_base = abs(graph_base)
+        currently_delivered_l1 = current_base + random.randint(0, 250) * 0.001  # kW
+        currently_delivered_l2 = current_base + random.randint(0, 250) * 0.001  # kW
+        currently_delivered_l3 = current_base + random.randint(0, 250) * 0.001  # kW
         currently_delivered = currently_delivered_l1 + currently_delivered_l2 + currently_delivered_l3
-        currently_returned_l1 = random.randint(0, 500) * 0.001  # kW
-        currently_returned_l2 = random.randint(0, 1500) * 0.001  # kW
-        currently_returned_l3 = random.randint(0, 750) * 0.001  # kW
+        currently_returned_l1 = current_base + random.randint(0, 250) * 0.001  # kW
+        currently_returned_l2 = current_base + random.randint(0, 250) * 0.001  # kW
+        currently_returned_l3 = current_base + random.randint(0, 250) * 0.001  # kW
         currently_returned = currently_returned_l1 + currently_returned_l2 + currently_returned_l3
-        phase_voltage_l1 = random.randint(228, 232)
-        phase_voltage_l2 = random.randint(228, 232)
-        phase_voltage_l3 = random.randint(228, 232)
+
+        # Delivered and returned MAY be used simultaneously. But this asumes most setups, having it either direction.
+        if graph_base > 0:
+            currently_delivered = currently_delivered_l1 = currently_delivered_l2 = currently_delivered_l3 = 0
+        else:
+            currently_returned = currently_returned_l1 = currently_returned_l2 = currently_returned_l3 = 0
+
+        # Voltage around 235 with 210 and 260 as bound (+ few random Volt)
+        voltage_base = 235 + ((graph_base * 100) / 5)
+        phase_voltage_l1 = Decimal(random.randint(1, 2) + voltage_base)
+        phase_voltage_l2 = Decimal(random.randint(3, 4) + voltage_base)
+        phase_voltage_l3 = Decimal(random.randint(6, 8) + voltage_base)
+
         phase_power_current_l1 = random.randint(5, 8)
         phase_power_current_l2 = random.randint(2, 3)
         phase_power_current_l3 = random.randint(0, 1)
@@ -143,9 +157,9 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:72.36.0(00000)\r\n",
             "0-0:96.13.1()\r\n",
             "0-0:96.13.0()\r\n",
-            "1-0:32.7.0({}.0*V)\r\n".format(phase_voltage_l1),
-            "1-0:52.7.0({}.1*V)\r\n".format(phase_voltage_l2),
-            "1-0:72.7.0({}.2*V)\r\n".format(phase_voltage_l3),
+            "1-0:32.7.0({}*V)\r\n".format(self._round_precision(phase_voltage_l1, 1)),
+            "1-0:52.7.0({}*V)\r\n".format(self._round_precision(phase_voltage_l2, 1)),
+            "1-0:72.7.0({}*V)\r\n".format(self._round_precision(phase_voltage_l3, 1)),
             "1-0:31.7.0({}*A)\r\n".format(phase_power_current_l1),
             "1-0:51.7.0({}*A)\r\n".format(phase_power_current_l2),
             "1-0:71.7.0({}*A)\r\n".format(phase_power_current_l3),

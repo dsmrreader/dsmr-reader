@@ -1,44 +1,30 @@
-let echarts_electricity_returned_graph = echarts.init(document.getElementById('echarts-electricity-returned-graph'));
+echarts_electricity_returned_graph = echarts.init(document.getElementById('echarts-electricity-returned-graph'));
 
 
-$(document).ready(function () {
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_electricity_returned_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_electricity_returned_graph?.resize();
 });
 
 
 function render_electricity_returned_graph(xhr_data) {
     let echarts_options = {
         title: {
-            text: text_electricity_returned_header,
+            text: TEXT_ELECTRICITY_RETURNED_HEADER,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
             left: 'center'
         },
         color: [
-            electricity_returned_alternate_color,
-            electricity_returned_color
+            ELECTRICITY_RETURNED_ALTERNATE_COLOR,
+            ELECTRICITY_RETURNED_COLOR
         ],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    show: true
-                }
-            }
-        },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
-        },
+        grid: GRID_OPTIONS,
+
         xAxis: [
             {
                 type: 'category',
-                boundaryGap: electricity_graph_style === 'bar',
+                boundaryGap: ELECTRICITY_GRAPH_STYLE === 'bar',
                 data: xhr_data.x
             }
         ],
@@ -47,23 +33,39 @@ function render_electricity_returned_graph(xhr_data) {
                 type: 'value'
             }
         ],
-        series: null
+        series: null,
+        animationEasing: 'elasticOut',
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
+            }
+        ]
     };
 
     if (xhr_data.electricity1_returned && xhr_data.electricity2_returned) {
         echarts_options.series = [
             {
-                name: text_electricity1_returned,
-                type: electricity_graph_style,
-                stack: stack_electricity_graphs,
+                name: TEXT_ELECTRICITY1_RETURNED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                stack: STACK_ELECTRICITY_GRAPHS,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity1_returned
             },
             {
-                name: text_electricity2_returned,
-                type: electricity_graph_style,
-                stack: stack_electricity_graphs,
+                name: TEXT_ELECTRICITY2_RETURNED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                stack: STACK_ELECTRICITY_GRAPHS,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity2_returned
@@ -72,8 +74,9 @@ function render_electricity_returned_graph(xhr_data) {
     } else if (xhr_data.electricity_returned_merged) {
         echarts_options.series = [
             {
-                name: text_electricity_merged_returned,
-                type: electricity_graph_style,
+                name: TEXT_ELECTRICITY_MERGED_RETURNED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity_returned_merged
@@ -81,5 +84,6 @@ function render_electricity_returned_graph(xhr_data) {
         ]
     }
 
-    echarts_electricity_returned_graph.setOption(echarts_options);
+    echarts_electricity_returned_graph?.hideLoading()
+    echarts_electricity_returned_graph?.setOption(echarts_options);
 }

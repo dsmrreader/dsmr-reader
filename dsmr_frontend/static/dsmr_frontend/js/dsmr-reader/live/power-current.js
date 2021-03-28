@@ -1,27 +1,20 @@
 $(document).ready(function () {
-    let echarts_power_current_graph = echarts.init(document.getElementById('echarts-power-current-graph'));
+    echarts_power_current_graph = echarts.init(document.getElementById('echarts-power-current-graph'));
+
     let echarts_power_current_initial_options = {
         color: [
-            power_current_l1_color,
-            power_current_l2_color,
-            power_current_l3_color
+            POWER_CURRENT_L1_COLOR,
+            POWER_CURRENT_L2_COLOR,
+            POWER_CURRENT_L3_COLOR
         ],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    show: true
-                }
-            }
+        title: {
+            text: TEXT_POWER_CURRENT_HEADER,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
+            left: 'center',
         },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
-        },
+        grid: GRID_OPTIONS,
         xAxis: [
             {
                 type: 'category',
@@ -32,14 +25,12 @@ $(document).ready(function () {
         yAxis: [
             {
                 type: 'value',
-                min: 'dataMin',
-                max: 'dataMax'
             }
         ],
         dataZoom: [
             {
                 show: true,
-                start: live_graphs_initial_zoom,
+                start: LIVE_GRAPHS_INITIAL_ZOOM,
                 end: 100
             },
             {
@@ -48,6 +39,19 @@ $(document).ready(function () {
                 end: 100
             }
         ],
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
+            }
+        ]
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */
@@ -62,29 +66,29 @@ $(document).ready(function () {
         series: null
     };
 
-    echarts_power_current_graph.showLoading('default', echarts_loading_options);
+    echarts_power_current_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(echarts_power_current_graph_url, function (xhr_data) {
+    $.get(POWER_CURRENT_GRAPH_URL, function (xhr_data) {
         echarts_power_current_graph.hideLoading();
 
         /* Dynamic phases. */
-        if (is_multi_phase) {
+        if (CAPABILITY_MULTI_PHASE) {
             echarts_power_current_update_options.series = [
                 {
-                    name: 'Ampere (L1)',
+                    name: 'L1',
                     type: 'bar',
                     stack: true,
                     data: null
                 },
                 {
-                    name: 'Ampere (L2)',
+                    name: 'L2',
                     type: 'bar',
                     stack: true,
                     data: null
                 },
                 {
-                    name: 'Ampere (L3)',
+                    name: 'L3',
                     type: 'bar',
                     stack: true,
                     data: null
@@ -106,7 +110,7 @@ $(document).ready(function () {
         echarts_power_current_update_options.xAxis[0].data = xhr_data.read_at;
         echarts_power_current_update_options.series[0].data = xhr_data.phase_power_current.l1;
 
-        if (is_multi_phase) {
+        if (CAPABILITY_MULTI_PHASE) {
             echarts_power_current_update_options.series[1].data = xhr_data.phase_power_current.l2;
             echarts_power_current_update_options.series[2].data = xhr_data.phase_power_current.l3;
         }
@@ -126,22 +130,19 @@ $(document).ready(function () {
 
             pending_xhr_request = $.ajax({
                 dataType: "json",
-                url: echarts_power_current_graph_url + "&latest_delta_id=" + latest_delta_id,
+                url: POWER_CURRENT_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
             }).done(function(xhr_data) {
                 /* Ignore empty sets. */
                 if (xhr_data.read_at.length === 0) {
                     return;
                 }
 
-                /* Delta update. */
-                for (let i = 0; i < xhr_data.read_at.length; i++) {
-                    echarts_power_current_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
-                    echarts_power_current_update_options.series[0].data.push(xhr_data.phase_power_current.l1[i]);
+                echarts_power_current_update_options.xAxis[0].data = echarts_power_current_update_options.xAxis[0].data.concat(xhr_data.read_at);
+                echarts_power_current_update_options.series[0].data = echarts_power_current_update_options.series[0].data.concat(xhr_data.phase_power_current.l1);
 
-                    if (is_multi_phase) {
-                        echarts_power_current_update_options.series[1].data.push(xhr_data.phase_power_current.l2[i]);
-                        echarts_power_current_update_options.series[2].data.push(xhr_data.phase_power_current.l3[i]);
-                    }
+                if (CAPABILITY_MULTI_PHASE) {
+                    echarts_power_current_update_options.series[1].data = echarts_power_current_update_options.series[1].data.concat(xhr_data.phase_power_current.l2);
+                    echarts_power_current_update_options.series[2].data = echarts_power_current_update_options.series[2].data.concat(xhr_data.phase_power_current.l3);
                 }
 
                 latest_delta_id = xhr_data.latest_delta_id;
@@ -150,11 +151,10 @@ $(document).ready(function () {
                 // Allow new updates
                 pending_xhr_request = null;
             });
-        }, echarts_power_current_graph_interval * 1000);
+        }, POWER_CURRENT_GRAPH_INTERVAL * 1000);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_power_current_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_power_current_graph?.resize();
 });

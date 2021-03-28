@@ -14,6 +14,7 @@ from dsmr_backend import signals
 from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
 
@@ -58,7 +59,8 @@ def get_capabilities(capability=None):
                 phase_power_current_l1__isnull=False,
             ).exists(),
             'gas': GasConsumption.objects.exists(),
-            'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
+            'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists(),
+            'costs': EnergySupplierPrice.objects.exists(),
         }
 
         # Override capabilities when requested.

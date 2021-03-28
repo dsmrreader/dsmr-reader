@@ -18,8 +18,13 @@
     transform: rotate(315deg);
 }
 
-.datepicker-header {
+.centered-header {
     text-align: center;
+}
+
+a.graph_controls_help_trigger {
+    font-size: x-small;
+    color: gray;
 }
 
 .datepicker-trigger {
@@ -45,6 +50,10 @@
      /* Ensures center-block works. */
      width: 220px;
  }
+
+div.archive-header-panel-body {
+    min-height: 350px;
+}
 
 .search-section {
     min-height: 868px;
@@ -102,17 +111,48 @@ span.degraded {
     color: #F05050;
 }
 
+div.pie-canvas {
+    width: 100%;
+    height: 350px;
+}
+
+div.graph-canvas {
+    width: 100%;
+    height: 450px;
+}
+
+div.large-graph-canvas {
+    width: 100%;
+    height: 600px;
+}
+
 @media screen and (max-width: 768px) {
-  table.table th.col-sm-6, table.table td.col-sm-6 {
-    /* Fixes various tables having their left half using a dynamic width. */
-    width: 50%;
-  }
+    div.pie-canvas {
+        height: 250px;
+    }
 
-  table.table {
-    font-size: 10px !important;
-  }
+    div.graph-canvas {
+        height: 250px;
+    }
 
-  table span.badge {
-    font-size: 10px !important;
-  }
+    div.large-graph-canvas {
+        height: 400px;
+    }
+
+    table.table th.col-sm-6, table.table td.col-sm-6 {
+        /* Fixes various tables having their left half using a dynamic width. */
+        width: 50%;
+    }
+
+    table.table {
+        font-size: 10px !important;
+    }
+
+    table span.badge {
+        font-size: 10px !important;
+    }
+
+    div.archive-header-panel-body {
+        min-height: 0;
+    }
 }

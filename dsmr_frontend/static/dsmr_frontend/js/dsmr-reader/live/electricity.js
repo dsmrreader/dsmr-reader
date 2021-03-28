@@ -1,90 +1,144 @@
 $(document).ready(function () {
-    let echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+    echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+
+    let x_axis = [
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: []
+        },
+        {
+            // We need this axis for rendering the return graph but hide it, since it's redunant.
+            show: false,
+            gridIndex: 1,
+            boundaryGap: false,
+            data: []
+        }
+    ];
     let echarts_electricity_initial_options = {
         color: [
-            electricity_delivered_color,
-            electricity_returned_color
+            ELECTRICITY_DELIVERED_COLOR,
+            ELECTRICITY_RETURNED_COLOR
         ],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    show: true
-                }
-            }
+        title: {
+            text: TEXT_ELECTRICITY_HEADER,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
+            left: 'center',
         },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
+        grid: [{
+            left: 50,
+            right: 50,
+            height: '35%'
+        }, {
+            left: 50,
+            right: 50,
+            height: '35%',
+            top: '50%'
+        }],
+        axisPointer: {
+            link: {xAxisIndex: 'all'}
         },
-        xAxis: [
-            {
-                type: 'category',
-                boundaryGap: false,
-                data: null
-            }
-        ],
+        xAxis: x_axis,
         yAxis: [
             {
                 type: 'value'
+            },
+            {
+                gridIndex: 1,
+                type: 'value',
+                inverse: true
             }
         ],
         dataZoom: [
             {
+                xAxisIndex: [0, 1],
                 show: true,
-                start: live_graphs_initial_zoom,
+                start: LIVE_GRAPHS_INITIAL_ZOOM,
                 end: 100
             },
             {
+                xAxisIndex: [0, 1],
                 type: 'inside',
                 start: 0,
                 end: 100
             }
-        ]
+        ],
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS,
+                    grid: [{}, {
+                        top: '50%'
+                    }],
+                },
+            },
+            {
+                query: { maxWidth: 768},
+                option: {
+                    toolbox: {show: false},
+                    grid: [{}, {
+                        top: '55%'
+                    }],
+                }
+            }
+        ],
     };
 
     /* These settings should not affect the updates and reset the zoom on each update. */
     let echarts_electricity_update_options = {
-        xAxis: [
-            {
-                type: 'category',
-                boundaryGap: false,
-                data: null
-            }
-        ],
+        xAxis: x_axis,
         series: [
             {
-                name: 'Watt (+)',
+                label: {
+                    formatter: '{b}: {c}'
+                },
+                name: TEXT_DELIVERED,
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                data: null
+                data: []
             },
             {
-                name: 'Watt (-)',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                name: TEXT_RETURNED,
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                data: null
+                data: []
             }
-        ]
+        ],
     };
 
-    echarts_electricity_graph.showLoading('default', echarts_loading_options);
+    echarts_electricity_graph.showLoading('default', LOADING_OPTIONS);
 
-    /* Init graph. */
-    $.get(echarts_electricity_graph_url, function (xhr_data) {
+    $.get(ELECTRICITY_GRAPH_URL, function (xhr_data) {
+        if (! CAPABILITY_ELECTRICITY_RETURNED) {
+            delete echarts_electricity_initial_options.xAxis[1];
+            delete echarts_electricity_initial_options.yAxis[1];
+            delete echarts_electricity_initial_options.dataZoom[0].xAxisIndex;
+            delete echarts_electricity_initial_options.dataZoom[1].xAxisIndex;
+            delete echarts_electricity_initial_options.grid[0].height;
+            delete echarts_electricity_initial_options.grid[1];
+            echarts_electricity_initial_options.grid[0].top = '12%';
+
+            delete echarts_electricity_update_options.xAxis[1];
+            delete echarts_electricity_update_options.series[1];
+        }
+
         echarts_electricity_graph.hideLoading();
         echarts_electricity_graph.setOption(echarts_electricity_initial_options);
 
-        /* Different set of options, to prevent the dataZoom being reset on each update. */
         echarts_electricity_update_options.xAxis[0].data = xhr_data.read_at;
         echarts_electricity_update_options.series[0].data = xhr_data.currently_delivered;
-        echarts_electricity_update_options.series[1].data = xhr_data.currently_returned;
+
+        if (CAPABILITY_ELECTRICITY_RETURNED) {
+            echarts_electricity_update_options.xAxis[1].data = xhr_data.read_at;
+            echarts_electricity_update_options.series[1].data = xhr_data.currently_returned;
+        }
+
         echarts_electricity_graph.setOption(echarts_electricity_update_options);
 
         // Schedule updates
@@ -99,18 +153,18 @@ $(document).ready(function () {
 
             pending_xhr_request = $.ajax({
                 dataType: "json",
-                url: echarts_electricity_graph_url + "&latest_delta_id=" + latest_delta_id,
+                url: ELECTRICITY_GRAPH_URL + "&latest_delta_id=" + latest_delta_id,
             }).done(function(xhr_data) {
-                /* Ignore empty sets. */
                 if (xhr_data.read_at.length === 0) {
                     return;
                 }
 
-                /* Delta update. */
-                for (let i = 0; i < xhr_data.read_at.length; i++) {
-                    echarts_electricity_update_options.xAxis[0].data.push(xhr_data.read_at[i]);
-                    echarts_electricity_update_options.series[0].data.push(xhr_data.currently_delivered[i]);
-                    echarts_electricity_update_options.series[1].data.push(xhr_data.currently_returned[i]);
+                echarts_electricity_update_options.xAxis[0].data = echarts_electricity_update_options.xAxis[0].data.concat(xhr_data.read_at)
+                echarts_electricity_update_options.series[0].data = echarts_electricity_update_options.series[0].data.concat(xhr_data.currently_delivered);
+
+                if (CAPABILITY_ELECTRICITY_RETURNED) {
+                    echarts_electricity_update_options.xAxis[1].data = echarts_electricity_update_options.xAxis[1].data.concat(xhr_data.read_at)
+                    echarts_electricity_update_options.series[1].data = echarts_electricity_update_options.series[1].data.concat(xhr_data.currently_returned);
                 }
 
                 latest_delta_id = xhr_data.latest_delta_id;
@@ -119,11 +173,10 @@ $(document).ready(function () {
                 // Allow new updates
                 pending_xhr_request = null;
             });
-        }, echarts_electricity_graph_interval * 1000);
+        }, ELECTRICITY_GRAPH_INTERVAL * 1000);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_electricity_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_electricity_graph?.resize();
 });

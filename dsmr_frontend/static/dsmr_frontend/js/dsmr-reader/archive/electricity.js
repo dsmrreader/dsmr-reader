@@ -1,54 +1,29 @@
-let echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
+echarts_electricity_graph = echarts.init(document.getElementById('echarts-electricity-graph'));
 
 
-$(document).ready(function () {
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_electricity_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_electricity_graph?.resize();
 });
 
 
 function render_electricity_graph(xhr_data) {
-    var echarts_options = {
+    let echarts_options = {
         title: {
-            text: text_electricity_header,
-            left: 'center'
+            text: TEXT_ELECTRICITY_HEADER,
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
+            left: 'center',
         },
         color: [
-            electricity_delivered_alternate_color,
-            electricity_delivered_color
+            ELECTRICITY_DELIVERED_ALTERNATE_COLOR,
+            ELECTRICITY_DELIVERED_COLOR
         ],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow',
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        formatter: function (params) {
-                            let val = 0;
-                            this.option.series.forEach(s => {
-                                val += s.data[params.dataIndex];
-                            });
-                            return val;
-                        }
-                    }
-                },
-            }
-        },
+        tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: {
-            top: '12%',
-            left: '1%',
-            right: '2%',
-            containLabel: true
-        },
+        grid: GRID_OPTIONS,
         xAxis: [
             {
                 type: 'category',
-                boundaryGap: electricity_graph_style === 'bar',
+                boundaryGap: ELECTRICITY_GRAPH_STYLE === 'bar',
                 data: xhr_data.x
             }
         ],
@@ -57,23 +32,39 @@ function render_electricity_graph(xhr_data) {
                 type: 'value'
             }
         ],
-        series: null
+        series: null,
+        animationEasing: 'elasticOut',
+        media: [
+            {
+              option: {
+                    toolbox: TOOLBOX_OPTIONS
+                },
+            },
+            {
+                query: { maxWidth: 500},
+                option: {
+                    toolbox: {show: false}
+                }
+            }
+        ]
     };
 
     if (xhr_data.electricity1 && xhr_data.electricity2) {
         echarts_options.series = [
             {
-                name: text_electricity1_delivered,
-                type: electricity_graph_style,
-                stack: stack_electricity_graphs,
+                name: TEXT_ELECTRICITY1_DELIVERED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                stack: STACK_ELECTRICITY_GRAPHS,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity1
             },
             {
-                name: text_electricity2_delivered,
-                type: electricity_graph_style,
-                stack: stack_electricity_graphs,
+                name: TEXT_ELECTRICITY2_DELIVERED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                stack: STACK_ELECTRICITY_GRAPHS,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity2
@@ -82,8 +73,9 @@ function render_electricity_graph(xhr_data) {
     } else if (xhr_data.electricity_merged) {
         echarts_options.series = [
             {
-                name: text_electricity_merged_delivered,
-                type: electricity_graph_style,
+                name: TEXT_ELECTRICITY_MERGED_DELIVERED,
+                type: ELECTRICITY_GRAPH_STYLE,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity_merged
@@ -91,5 +83,6 @@ function render_electricity_graph(xhr_data) {
         ]
     }
 
+    echarts_electricity_graph.hideLoading();
     echarts_electricity_graph.setOption(echarts_options);
 }

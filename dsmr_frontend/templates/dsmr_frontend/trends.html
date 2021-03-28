@@ -27,26 +27,30 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="panel">
-                <header class="panel-heading">
+                <header class="panel-heading centered-header">
                     <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range start" %} <br />
                     <span class="unit">{% blocktranslate %}Select starting day for calculating trends{% endblocktranslate %}</span>
                 </header>
                 <div class="panel-body">
-                    <div id="start_datepicker"></div>
-                    <input type="hidden" name="start_date" id="start_date" />
+                    <div class="row center-block datepicker-calendar-block">
+                        <div id="start_datepicker"></div>
+                        <input type="hidden" name="start_date" id="start_date" />
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="panel">
-                <header class="panel-heading">
+                <header class="panel-heading centered-header">
                     <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range end" %} <br />
                     <span class="unit">{% blocktranslate %}Select ending day for calculating trends{% endblocktranslate %}</span>
                 </header>
                 <div class="panel-body">
-                    <div id="end_datepicker"></div>
-                    <input type="hidden" name="end_date" id="end_date" />
+                    <div class="row center-block datepicker-calendar-block">
+                        <div id="end_datepicker"></div>
+                        <input type="hidden" name="end_date" id="end_date" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,12 +61,8 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <header class="panel-heading">
-                    {% blocktranslate %}Average electricity consumption{% endblocktranslate %}
-                    <span class="unit">{% translate "per hour, in %" %}</span>
-                </header>
-                <div class="panel-body" style="height: 400px;">
-                    <div id="echarts-avg-electricity-graph" style="width: 100%; height: 400px;"></div>
+                <div class="panel-body">
+                    <div id="echarts-avg-electricity-graph" class="pie-canvas"></div>
                 </div>
             </div>
         </div>
@@ -73,12 +73,8 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <header class="panel-heading">
-                    {% blocktranslate %}Average electricity returned{% endblocktranslate %}
-                    <span class="unit">{% translate "per hour, in %" %}</span>
-                </header>
-                <div class="panel-body" style="height: 400px;">
-                    <div id="echarts-avg-electricity-returned-graph" style="width: 100%; height: 400px;"></div>
+                <div class="panel-body">
+                    <div id="echarts-avg-electricity-returned-graph" class="pie-canvas"></div>
                 </div>
             </div>
         </div>
@@ -89,12 +85,8 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <header class="panel-heading">
-                    {% blocktranslate %}Average gas consumption{% endblocktranslate %}
-                    <span class="unit">{% translate "per hour, in %" %}</span>
-                </header>
-                <div class="panel-body" style="height: 400px;">
-                    <div id="echarts-avg-gas-graph" style="width: 100%; height: 400px;"></div>
+                <div class="panel-body">
+                    <div id="echarts-avg-gas-graph" class="pie-canvas"></div>
                 </div>
             </div>
         </div>
@@ -105,12 +97,8 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel" style="padding-bottom: 24px;">
-                <header class="panel-heading">
-                    {% blocktranslate %}Electricity tariff ratio{% endblocktranslate %}
-                    <span class="unit">{% translate "in %" %}</span>
-                </header>
-                <div class="panel-body" style="height: 350px;">
-                    <div id="echarts-electricity-by-tariff-graph" style="width: 100%; height: 400px;"></div>
+                <div class="panel-body">
+                    <div id="echarts-electricity-by-tariff-graph" class="pie-canvas"></div>
                 </div>
             </div>
         </div>
@@ -134,27 +122,39 @@
     <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-4.9.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-5.0.2.min.js' %}"></script>
     <script type="text/javascript">
-        const datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
-        const datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
-        const datepicker_locale_format = "{{ datepicker_locale_format }}";
-        const datepicker_language_code = "{{ LANGUAGE_CODE }}";
+        const DATEPICKER_START_DATE = "{{ start_date|date:datepicker_date_format }}";
+        const DATEPICKER_END_DATE = "{{ end_date|date:datepicker_date_format }}";
+        const DATEPICKER_LOCALE_FORMAT = "{{ datepicker_locale_format }}";
+        const DATEPICKER_LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
 
-        const echarts_avg_consumption_url = "{% url 'frontend:trends-xhr-avg-consumption' %}";
-        const echarts_by_tariff_url = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
-        const echarts_loading_options = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+        const TEXT_TITLE_ELECTRICITY = '{% blocktranslate %}Average electricity consumption{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
+        const TEXT_TITLE_ELECTRICITY_RETURNED = '{% blocktranslate %}Average electricity returned{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
+        const TEXT_TITLE_GAS = '{% blocktranslate %}Average gas consumption{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
+        const TEXT_TITLE_TARIFF_RATIO = '{% blocktranslate %}Electricity tariff ratio{% endblocktranslate %} {S|{% translate "in %" %}}';
 
-        const electricity_delivered_color = "{{ frontend_settings.electricity_delivered_color }}";
-        const electricity_delivered_alternate_color = "{{ frontend_settings.electricity_delivered_alternate_color }}";
+        const AVG_CONSUMPTION_URL = "{% url 'frontend:trends-xhr-avg-consumption' %}";
+        const BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
+
+        const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+        const TITLE_TEXTSTYLE_OPTIONS = {
+            rich: {
+                S: {
+                    fontSize: 10,
+                    color: 'grey'
+                },
+            }
+        };
+
+        const ELECTRICITY_DELIVERED_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
+        const ELECTRICITY_DELIVERED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_delivered_alternate_color }}";
     </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            initialize_trends_datepicker('start_datepicker', datepicker_start_date, update_trends);
-            initialize_trends_datepicker('end_datepicker', datepicker_end_date, update_trends);
-
-            update_trends();
+            initialize_trends_datepicker('start_datepicker', DATEPICKER_START_DATE, update_trends);
+            initialize_trends_datepicker('end_datepicker', DATEPICKER_END_DATE, update_trends);
         });
     </script>
 
@@ -167,8 +167,8 @@
                 return;
             }
 
-            let start_date = moment(raw_start_date).format(datepicker_locale_format.toUpperCase());
-            let end_date = moment(raw_end_date).format(datepicker_locale_format.toUpperCase());
+            let start_date = moment(raw_start_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
+            let end_date = moment(raw_end_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
 
             // Top area chart(s)
             update_trends_averages(start_date, end_date);

@@ -1,37 +1,27 @@
 $(document).ready(function () {
-
-    let echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
-    echarts_gas_graph.showLoading('default', echarts_loading_options);
+    echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
+    echarts_gas_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(echarts_gas_graph_url, function (xhr_data) {
+    $.get(GAS_GRAPH_URL, function (xhr_data) {
         echarts_gas_graph.hideLoading();
 
         let option = {
             color: [
-                gas_delivered_color
+                GAS_DELIVERED_COLOR
             ],
-            tooltip: {
-                trigger: 'axis',
-                formatter: "{c} {a}",
-                axisPointer: {
-                    type: 'shadow',
-                    label: {
-                        show: true
-                    }
-                }
+            title: {
+                text: TEXT_GAS_HEADER,
+                textStyle: TITLE_TEXTSTYLE_OPTIONS,
+                left: 'center',
             },
+            tooltip: TOOLTIP_OPTIONS,
             calculable: true,
-            grid: {
-                top: '12%',
-                left: '1%',
-                right: '2%',
-                containLabel: true
-            },
+            grid: GRID_OPTIONS,
             xAxis: [
                 {
                     type: 'category',
-                    boundaryGap: gas_graph_style === 'bar',
+                    boundaryGap: GAS_GRAPH_STYLE === 'bar',
                     data: xhr_data.read_at
                 }
             ],
@@ -45,7 +35,7 @@ $(document).ready(function () {
                     show: true,
                     // Do not change initial zoom when using a non DSMR v5 meter.
                     // Because it will cause DSMR v4 meter users to only display 2 of 24 hours by default.
-                    start: telegram_dsmr_version === '50' ? live_graphs_initial_zoom : 0,
+                    start: TELEGRAM_DSMR_VERSION === '50' ? LIVE_GRAPHS_INITIAL_ZOOM : 0,
                     end: 100
                 },
                 {
@@ -57,18 +47,30 @@ $(document).ready(function () {
             series: [
                 {
                     name: 'm³',
-                    type: gas_graph_style,
+                    type: GAS_GRAPH_STYLE,
                     areaStyle: {},
                     data: xhr_data.currently_delivered,
                     smooth: true
+                }
+            ],
+            media: [
+                {
+                  option: {
+                        toolbox: TOOLBOX_OPTIONS
+                    },
+                },
+                {
+                    query: { maxWidth: 500},
+                    option: {
+                        toolbox: {show: false}
+                    }
                 }
             ]
         };
         echarts_gas_graph.setOption(option);
     });
+});
 
-    /* Responsiveness. */
-    $(window).resize(function () {
-        echarts_gas_graph.resize();
-    });
+$(window).resize(function () {
+    echarts_gas_graph?.resize();
 });

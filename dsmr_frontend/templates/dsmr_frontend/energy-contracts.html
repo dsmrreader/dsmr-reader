@@ -9,13 +9,7 @@
 {% block content %}
 <!-- Main content -->
 <section class="content">
-{% if not capabilities.any %}
-    <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktranslate %} <i class="fas fa-smile-wink"></i>
-    </div>
-{% endif %}
-
-{% if energy_contracts %}
+{% if capabilities.costs and energy_contracts %}
 	<div class="alert alert-info" role="alert">
 	    <span class="fas fa-info-circle"></span> &nbsp;
         {% blocktranslate %}All data is based on whether you have set prices for each type of consumption. E.g.: Omitting gas prices will hide gas consumption for the contract.{% endblocktranslate %}
@@ -95,7 +89,7 @@
                         {# Gas #}
 			            {% if capabilities.gas and current.prices.gas_price %}
                         <tr>
-			                <td> {% translate "Gas" %} <span class="unit">{% translate "m<sup>3</sup>" %}</span></td>
+			                <td> {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
 			                <td><span class="badge bg-orange">{{ current.summary.gas|default:'-' }}</span></td>
 			                <td>&nbsp;</td>
 			                <td><span class="badge bg-black">{{ current.summary.gas_cost|default:'-' }}</span></td>
@@ -166,6 +160,10 @@
         </div>
     </div>
     {% endfor %}
+{% else %}
+    <div class="alert alert-info" role="alert">
+        <span class="fas fa-info-circle"></span> &nbsp; {% blocktranslate %}No data or energy contracts found.{% endblocktranslate %}
+    </div>
 {% endif %}
 
 </section>
