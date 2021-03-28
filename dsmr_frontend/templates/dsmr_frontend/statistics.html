@@ -223,7 +223,8 @@
                             </td>
                         </tr>
                         {% endif %}
-                        
+
+                    {% if capabilities.electricity_returned %}
                         {% if electricity_statistics.highest_return_l1_value %}
                         <tr>
                             <td class="col-sm-6">
@@ -269,6 +270,7 @@
                             </td>
                         </tr>
                         {% endif %}
+                    {% endif %}
                     </table>
                     {% else %}
                         <small>{% blocktranslate %}Enable "Track electricity phases" in the Datalogger Configuration to track this data.{% endblocktranslate %}</small>

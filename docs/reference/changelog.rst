@@ -21,6 +21,9 @@ v4.15.0 - 2021-xx-xx
 - ``Changed`` Upgrade to eCharts 5 and add media support [`#1331 <https://github.com/dsmrreader/dsmr-reader/issues/1331>`_]
 - ``Changed`` Added check in post deploy script for collectstatic failure [`#1336 <https://github.com/dsmrreader/dsmr-reader/issues/1336>`_]
 
+- ``Fixed`` Foutieve vertaling op Statistieken-pagina [`#1337 <https://github.com/dsmrreader/dsmr-reader/issues/1337>`_]
+- ``Fixed`` Teruglevering verbergen op Statistieken-pagina [`#1337 <https://github.com/dsmrreader/dsmr-reader/issues/1337>`_]
+
 
 v4.14.0 - 2021-03-23
 --------------------
