@@ -8,3 +8,8 @@ DSMR Reader's documentation
    reference/index
    tutorial/index
    how-to/index
+
+.. toctree::
+   :maxdepth: 0
+
+   help

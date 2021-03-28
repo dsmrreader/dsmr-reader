@@ -1,14 +1,22 @@
 Troubleshooting: Enable DEBUG logging
 =====================================
 
-DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do.
-This applies **specifically** to the ``dsmr_backend`` process.
+DSMR-reader has DEBUG logging, which makes the system log very verbosely about what it's trying to do and **why** it executes or skips certain actions.
 
-.. note::
+This applies **specifically** to the ``dsmr_backend`` process and its log.
 
-    Errors are likely to be logged at all times, no matter the DEBUG-logging level used. Debugging is only helpful to watch DSMR-reader's detailed behaviour.
+.. tip::
 
-The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:
+    Errors are likely to be logged at all times, no matter the logging level used.
+    DEBUG logging is only helpful to watch DSMR-reader's detailed behaviour, when debugging issues.
+
+    The DEBUG logging is **disabled by default**, to reduce the number writes on the filesystem.
+
+.. caution::
+
+    Don't forget to disable DEBUG logging whenever you are done debugging.
+
+You can enable the DEBUG logging by setting the ``DSMRREADER_LOGLEVEL`` env var to ``DEBUG``. Follow these steps:
 
 * Make sure you are ``dsmr`` user by executing::
 
@@ -36,3 +44,7 @@ The DEBUG-logging is disabled by default, to reduce writes on the filesystem. Yo
     sudo supervisorctl restart all
 
 * All done!
+
+.. seealso::
+
+    :doc:`See here for where to find the log files </how-to/troubleshooting/logfiles>`.

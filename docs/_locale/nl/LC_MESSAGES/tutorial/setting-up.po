@@ -21,8 +21,8 @@ msgid "Contents"
 msgstr "Inhoudsopgave"
 
 #: ../../tutorial/setting-up.rst:10
-msgid "Accessing"
-msgstr "Toegang"
+msgid "Viewing DSMR-reader"
+msgstr "DSMR-reader bekijken"
 
 #: ../../tutorial/setting-up.rst:11
 msgid "Now it's time to view the application in your browser to check whether the GUI works as well. Just enter the ip address or hostname of your RaspberryPi in your browser."
@@ -130,3 +130,6 @@ msgstr "Back-ups worden dagelijks gemaakt, echter worden deze ook wekelijks gero
 
 #~ msgid "Use TLS (HTTPS) when possible."
 #~ msgstr "Gebruik TLS (HTTPS) wanneer mogelijk."
+
+#~ msgid "Accessing"
+#~ msgstr "Toegang"

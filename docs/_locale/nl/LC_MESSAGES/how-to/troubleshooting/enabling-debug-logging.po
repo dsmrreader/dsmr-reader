@@ -17,41 +17,57 @@ msgid "Troubleshooting: Enable DEBUG logging"
 msgstr "Hulp bij problemen: DEBUG-logging inschakelen"
 
 #: ../../how-to/troubleshooting/enabling-debug-logging.rst:4
-msgid "DSMR-reader has DEBUG-logging, which makes the system log very verbosely about what it's trying to do. This applies **specifically** to the ``dsmr_backend`` process."
-msgstr "DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt wat het aan het doen is. Dit geldt **specifiek** voor het ``dsmr_backend`` proces."
+msgid "DSMR-reader has DEBUG logging, which makes the system log very verbosely about what it's trying to do and **why** it executes or skips certain actions."
+msgstr "DSMR-reader heeft DEBUG-logging, waarmee het systeem heel letterlijk logt wat het aan het doen is en **waarom** het sommige acties wel of niet uitvoert."
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:9
-msgid "Errors are likely to be logged at all times, no matter the DEBUG-logging level used. Debugging is only helpful to watch DSMR-reader's detailed behaviour."
-msgstr "Fouten worden doorgaans altijd gelogd, ongeacht het logging niveau van DEBUG-level of niet. Debugging is alleen nuttig om het gedrag van DSMR-reader in meer detail te observeren."
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:6
+msgid "This applies **specifically** to the ``dsmr_backend`` process and its log."
+msgstr "Dit geldt **specifiek** voor het ``dsmr_backend`` proces en bijbehorende log."
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:11
-msgid "The DEBUG-logging is disabled by default, to reduce writes on the filesystem. You can enable the logging by following these steps:"
-msgstr "De DEBUG-logging is standaard uitgeschakeld, om het aantal schrijfacties op het bestandssysteem te beperken. Je kunt het inschakelen door deze stappen te volgen:"
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:10
+msgid "Errors are likely to be logged at all times, no matter the logging level used. DEBUG logging is only helpful to watch DSMR-reader's detailed behaviour, when debugging issues."
+msgstr "Fouten worden doorgaans altijd gelogd, ongeacht het logging niveau. DEBUG-logging is alleen nuttig om het gedrag van DSMR-reader in meer detail te observeren, om issues te debuggen."
 
 #: ../../how-to/troubleshooting/enabling-debug-logging.rst:13
+msgid "The DEBUG logging is **disabled by default**, to reduce the number writes on the filesystem."
+msgstr "De DEBUG-logging is **standaard uitgeschakeld** om het aantal schrijfacties op het bestandssysteem te beperken."
+
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:17
+msgid "Don't forget to disable DEBUG logging whenever you are done debugging."
+msgstr "Vergeet niet om DEBUG-logging weer uit te schakelen wanneer je klaar bent met debuggen."
+
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:19
+msgid "You can enable the DEBUG logging by setting the ``DSMRREADER_LOGLEVEL`` env var to ``DEBUG``. Follow these steps:"
+msgstr "Je kunt DEBUG-logging inschakelen door de ``DSMRREADER_LOGLEVEL`` env var op ``DEBUG`` te zetten. Volg deze stappen:"
+
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:21
 msgid "Make sure you are ``dsmr`` user by executing::"
 msgstr "Zorg ervoor dat je ``dsmr`` gebruiker bent door dit uit te voeren::"
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:17
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:25
 msgid "Open the ``.env`` file and look for the code below::"
 msgstr "Open ``.env`` en zoek de onderstaande code::"
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:22
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:30
 msgid "Now remove the ``###`` from this line::"
 msgstr "Verwijder nu de ``###`` uit de regel::"
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:26
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:34
 msgid "It should now be::"
 msgstr "Het zou nu dit moeten zijn::"
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:30
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:38
 msgid "After editing the file, all processes need to be restarted to reflect the change. Go back to the **root user or sudoer** with::"
 msgstr "Na het bewerken van het bestand zul je alle processen moeten herstarten om de wijziging door te voeren. Ga terug naar de **root of sudo-gebruiker** met::"
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:34
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:42
 msgid "And restart::"
 msgstr "En herstart::"
 
-#: ../../how-to/troubleshooting/enabling-debug-logging.rst:38
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:46
 msgid "All done!"
 msgstr "Klaar!"
+
+#: ../../how-to/troubleshooting/enabling-debug-logging.rst:50
+msgid ":doc:`See here for where to find the log files </how-to/troubleshooting/logfiles>`."
+msgstr ":doc:`Bekijk hier waar je de logfiles kan vinden </how-to/troubleshooting/logfiles>`."

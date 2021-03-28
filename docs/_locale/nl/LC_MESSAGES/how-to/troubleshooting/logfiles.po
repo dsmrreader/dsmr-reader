@@ -21,16 +21,19 @@ msgid "DSMR-reader technically consists of these processes and they are watched 
 msgstr "DSMR-reader bestaat technisch uit deze processen en ze worden beheerd door Supervisor:"
 
 #: ../../how-to/troubleshooting/logfiles.rst:7
-#: ../../how-to/troubleshooting/logfiles.rst:32
-msgid "Webinterface"
-msgstr "Webinterface"
+msgid "**Backend**"
+msgstr "**Backend**"
 
 #: ../../how-to/troubleshooting/logfiles.rst:7
-msgid "``dsmr_webinterface``"
-msgstr "``dsmr_webinterface``"
+msgid "``dsmr_backend``"
+msgstr "``dsmr_backend``"
+
+#: ../../how-to/troubleshooting/logfiles.rst:7
+msgid "Most important process, handles all background processing."
+msgstr "Meest belangrijke process, verantwoordelijk voor alle achtergrondverwerking."
 
 #: ../../how-to/troubleshooting/logfiles.rst:9
-#: ../../how-to/troubleshooting/logfiles.rst:34
+#: ../../how-to/troubleshooting/logfiles.rst:36
 msgid "Datalogger"
 msgstr "Datalogger"
 
@@ -38,43 +41,63 @@ msgstr "Datalogger"
 msgid "``dsmr_datalogger``"
 msgstr "``dsmr_datalogger``"
 
-#: ../../how-to/troubleshooting/logfiles.rst:11
-#: ../../how-to/troubleshooting/logfiles.rst:36
-msgid "Backend"
-msgstr "Backend"
+#: ../../how-to/troubleshooting/logfiles.rst:9
+msgid "Local datalogger reading telegrams (if used)."
+msgstr "Lokale datalogger voor uitlezen telegrammen (indien gebruikt)."
 
 #: ../../how-to/troubleshooting/logfiles.rst:11
-msgid "``dsmr_backend``"
-msgstr "``dsmr_backend``"
+#: ../../how-to/troubleshooting/logfiles.rst:38
+msgid "Webinterface"
+msgstr "Webinterface"
+
+#: ../../how-to/troubleshooting/logfiles.rst:11
+msgid "``dsmr_webinterface``"
+msgstr "``dsmr_webinterface``"
+
+#: ../../how-to/troubleshooting/logfiles.rst:11
+msgid "Hosts the GUI of DSMR-reader"
+msgstr "Draait de interface van DSMR-reader"
 
 #: ../../how-to/troubleshooting/logfiles.rst:14
 msgid "You can view the status of all processes by running::"
 msgstr "Je kunt de status van alle processen bekijken door het volgende uit te voeren::"
 
-#: ../../how-to/troubleshooting/logfiles.rst:18
+#: ../../how-to/troubleshooting/logfiles.rst:19
 msgid "Any processes listed, should have the status ``RUNNING``. Stale or crashed processes can be restarted with::"
 msgstr "Elk proces dat getoond wordt zou de status ``RUNNING`` moeten hebben. Hangende of gecrashde processen kunnen herstart worden met::"
 
-#: ../../how-to/troubleshooting/logfiles.rst:24
+#: ../../how-to/troubleshooting/logfiles.rst:26
 msgid "Or to restart them all simultaneously::"
 msgstr "Of herstart ze allemaal tegelijkertijd::"
 
-#: ../../how-to/troubleshooting/logfiles.rst:29
+#: ../../how-to/troubleshooting/logfiles.rst:31
 msgid "Each has its own log file(s):"
 msgstr "Elk heeft eigen logbestand(en):"
 
-#: ../../how-to/troubleshooting/logfiles.rst:32
-msgid "``/var/log/supervisor/dsmr_webinterface.log``"
-msgstr "``/var/log/supervisor/dsmr_webinterface.log``"
+#: ../../how-to/troubleshooting/logfiles.rst:34
+msgid "Backend"
+msgstr "Backend"
 
 #: ../../how-to/troubleshooting/logfiles.rst:34
-msgid "``/var/log/supervisor/dsmr_datalogger.log``"
-msgstr "``/var/log/supervisor/dsmr_datalogger.log``"
-
-#: ../../how-to/troubleshooting/logfiles.rst:36
 msgid "``/var/log/supervisor/dsmr_backend.log``"
 msgstr "``/var/log/supervisor/dsmr_backend.log``"
 
+#: ../../how-to/troubleshooting/logfiles.rst:36
+msgid "``/var/log/supervisor/dsmr_datalogger.log``"
+msgstr "``/var/log/supervisor/dsmr_datalogger.log``"
+
+#: ../../how-to/troubleshooting/logfiles.rst:38
+msgid "``/var/log/supervisor/dsmr_webinterface.log``"
+msgstr "``/var/log/supervisor/dsmr_webinterface.log``"
+
 #: ../../how-to/troubleshooting/logfiles.rst:41
+msgid "By default, only errors are logged. You can enable DEBUG logging which will make the backend log greatly more verbose."
+msgstr "Standaard worden alleen fouten gelogd. Je kunt DEBUG-logging inschakelen waardoor de \"backend\" aanzienlijk meer achtergrondinformatie logt."
+
+#: ../../how-to/troubleshooting/logfiles.rst:45
+msgid ":doc:`See here for how to enable DEBUG logging </how-to/troubleshooting/enabling-debug-logging>`."
+msgstr ":doc:`Bekijk hier hoe je DEBUG-logging inschakelt </how-to/troubleshooting/enabling-debug-logging>`."
+
+#: ../../how-to/troubleshooting/logfiles.rst:50
 msgid "The logfiles may be stale due to rotation. To see all logs for a process, try tailing a wildcard pattern, e.g.::"
 msgstr "De logbestanden kunnen blijven hangen wegens rotatie. Probeer te tailen op een wildcard-patroon om alles logs van een proces te zien. Bijvoorbeeld::"

@@ -13,9 +13,9 @@ How to's
    upgrading/upgrade
    upgrading/downgrade
 
-   troubleshooting/debug-info-dump
-   troubleshooting/logfiles
    troubleshooting/enabling-debug-logging
+   troubleshooting/logfiles
+   troubleshooting/debug-info-dump
    troubleshooting/restarting
    troubleshooting/error-key-already-exists
    troubleshooting/error-already-running-on-pid
