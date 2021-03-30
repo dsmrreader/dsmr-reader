@@ -13,12 +13,12 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/upgrading/upgrade.rst:2
-msgid "Upgrading DSMR-reader"
-msgstr "DSMR-reader upgraden"
+msgid "Updating DSMR-reader"
+msgstr "DSMR-reader updaten"
 
 #: ../../how-to/upgrading/upgrade.rst:4
-msgid "Every once in a while there may be updates. You can also easily check for updates by using the application's Status page."
-msgstr "Met enige regelmaat zijn er updates beschikbaar. Je kunt dit ook eenvoudig controleren op de Status-pagina van de applicatie."
+msgid "Every once in a while there may be updates. You can also easily check for updates by using the About page in DSMR-reader."
+msgstr "Met enige regelmaat zijn er updates beschikbaar. Je kunt dit ook eenvoudig controleren op de Over-pagina in DSMR-reader."
 
 #: ../../how-to/upgrading/upgrade.rst:8
 msgid "First, **please make sure you have a recent backup of your database**!"
@@ -27,3 +27,11 @@ msgstr "Allereerst, **zorg ervoor dat je een recente backup hebt van je database
 #: ../../how-to/upgrading/upgrade.rst:10
 msgid "You can update your application to the latest version by executing ``deploy.sh``, located in the root of the project. Make sure to execute it while logged in as the ``dsmr`` user::"
 msgstr "Je kun je applicatie bijwerken door het script ``deploy.sh`` uit te voeren, die in zich in de hoofdmap van het project bevindt. Zorg er wel voor dat je ingelogd bent als ``dsmr`` gebruiker op de terminal::"
+
+#: ../../how-to/upgrading/upgrade.rst:16
+msgid "This will update you to the latest minor version of the branch you're using. It should always be backwards compatible and therefor safe to use at all times."
+msgstr "Dit update je naar de laatste minor versie van de branch waar je op draait. Het zou backwardscompatible moeten zijn en daarmee altijd veilig om te gebruiken."
+
+#: ../../how-to/upgrading/upgrade.rst:21
+msgid "For example, if you are running ``v4.x`` this will update you to the latest ``v4.y`` version. But not automatically to ``v5.x``."
+msgstr "Als je bijvoorbeeld ``v4.x`` draait dan update dit je naar de laatste ``v4.x`` versie, maar niet naar een ``v5.x``."
