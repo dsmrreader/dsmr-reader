@@ -32,6 +32,7 @@ v4.15.0 - 2021-xx-xx
 - ``Changed`` Upgrade to eCharts 5, reworked graphs and improved responsiveness support [`#1331 <https://github.com/dsmrreader/dsmr-reader/issues/1331>`_]
 - ``Changed`` Added check in post deploy script for collectstatic failure [`#1336 <https://github.com/dsmrreader/dsmr-reader/issues/1336>`_]
 - ``Changed`` Updated docs regarding HTTPS support [`#1338 <https://github.com/dsmrreader/dsmr-reader/issues/1338>`_]
+- ``Changed`` Updated docs regarding Dropbox - by ``F-erry`` [`#1333 <https://github.com/dsmrreader/dsmr-reader/issues/1333>`_]
 
 - ``Fixed`` Foutieve vertaling op Statistieken-pagina [`#1337 <https://github.com/dsmrreader/dsmr-reader/issues/1337>`_]
 - ``Fixed`` Teruglevering verbergen op Statistieken-pagina [`#1337 <https://github.com/dsmrreader/dsmr-reader/issues/1337>`_]
