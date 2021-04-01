@@ -8,7 +8,18 @@ About DSMR-reader
 Project goals
 -------------
 - Provide a tool to easily extract, store and visualize data transferred by the DSMR protocol of your smart meter.
-- Allow you to export your data to other systems or third parties. Currently supports MQTT for pushing data and an REST API for pulling data.
+- Allow you to export your data to other systems or third parties.
+
+.. hint::
+
+    **Data transfer protocol support**
+
+    - **MQTT**: Push data from DSMR-reader to a generic message broker.
+    - **REST API**: Push (telegram) data from a generic HTTP client to DSMR-reader.
+    - **REST API**: Pull data from DSMR-reader from a generic HTTP client.
+
+    Any integration should be possible this way, either using generic scripts or even :doc:`plugins</reference/plugins>`.
+    DSMR-reader only supports the generic protocols above and cannot support every individual integration possible.
 
 
 Languages
