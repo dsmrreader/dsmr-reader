@@ -24,6 +24,7 @@ Current version
 
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
+
 v4.15.0 - 2021-xx-xx
 --------------------
 
@@ -32,6 +33,7 @@ v4.15.0 - 2021-xx-xx
 - ``Changed`` Updated docs regarding HTTPS support [`#1338 <https://github.com/dsmrreader/dsmr-reader/issues/1338>`_]
 - ``Changed`` Updated docs regarding Dropbox - by ``F-erry`` [`#1333 <https://github.com/dsmrreader/dsmr-reader/issues/1333>`_]
 - ``Changed`` Updated docs regarding data import/export [`#1316 <https://github.com/dsmrreader/dsmr-reader/issues/1316>`_]
+- ``Changed`` Updated docs regarding partial backup import [`#1347 <https://github.com/dsmrreader/dsmr-reader/issues/1347>`_]
 
 - ``Fixed`` Foutieve vertaling op Statistieken-pagina [`#1337 <https://github.com/dsmrreader/dsmr-reader/issues/1337>`_]
 - ``Fixed`` Teruglevering verbergen op Statistieken-pagina [`#1337 <https://github.com/dsmrreader/dsmr-reader/issues/1337>`_]

@@ -1,4 +1,3 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -6,122 +5,146 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/database/postgresql-restore-backup.rst:2
 msgid "Database: Restore a backup (PostgreSQL)"
 msgstr "Database: Back-up terugzetten (PostgreSQL)"
 
 #: ../../how-to/database/postgresql-restore-backup.rst:4
-msgid "First check whether situation A or B applies to you below."
-msgstr "Kijk eerst of A ofwel B hieronder van toepassing is op je situatie."
+msgid "Whether you can restore a backup, depends on the current state of the database. See the pre checks below to verify some states before restore."
+msgstr "Of je daadwerkelijk een backup kan importeren hangt af van de huidige staat van de database. Zie de pre-checks hieronder hoe je de staat kan achterhalen, voordat je probeert te importeren."
 
-#: ../../how-to/database/postgresql-restore-backup.rst:7
-msgid "Situation A: Already finished DSMR-reader reinstallation"
-msgstr "Situatie A: DSMR-reader al helemaal opnieuw geinstalleerd"
+#: ../../how-to/database/postgresql-restore-backup.rst:12
+msgid "Pre checks"
+msgstr "Pre-checks"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:11
-msgid ""
-"The steps below replace any existing data stored in the database and is "
-"irreversible!"
-msgstr ""
-"De stappen hieronder overschrijven alle bestaande gegevens in de database"
-" en is onomkeerbaar!"
+#: ../../how-to/database/postgresql-restore-backup.rst:16
+msgid "**How to check whether the database exists?**"
+msgstr "**Hoe controleer ik of de database bestaat?**"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:13
-msgid ""
-"You cannot merge a database backup with an existing installation "
-"containing data you want to preserve!"
-msgstr ""
-"Je kunt helaas niet een databasebackup samenvoegen met een bestaande "
-"installatie, waar gegevens in staan die je wilt bewaren."
+#: ../../how-to/database/postgresql-restore-backup.rst:18
+#: ../../how-to/database/postgresql-restore-backup.rst:32
+#: ../../how-to/database/postgresql-restore-backup.rst:46
+#: ../../how-to/database/postgresql-restore-backup.rst:83
+#: ../../how-to/database/postgresql-restore-backup.rst:92
+#: ../../how-to/database/postgresql-restore-backup.rst:124
+#: ../../how-to/database/postgresql-restore-backup.rst:134
+#: ../../how-to/database/postgresql-restore-backup.rst:146
+msgid "Execute::"
+msgstr "Voer uit::"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:15
-msgid ""
-"Doing so **will** cause trouble with duplicate data/ID's and **break** "
-"your installation at some point."
-msgstr ""
-"Doorgaan zorgt er **gegarandeerd** voor dat er **problemen** komen met "
-"dubbele gegevens/ID's op een bepaald moment."
+#: ../../how-to/database/postgresql-restore-backup.rst:22
+msgid "If the database exists, you see output similar to this::"
+msgstr "Indien de database bestaat, dan zou je ongeveer deze output moeten zien::"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:17
-msgid ""
-"If you just finished reinstalling DSMR-reader but **did not** restore the"
-" backup and you want to **overwrite** the data in it::"
-msgstr ""
-"Als je DSMR-reader opnieuw hebt geinstalleerd en **niet** de backup hebt "
-"teruggezet, maar wel alle gegevens in de nieuwe database wilt "
-"**overschrijven**::"
+#: ../../how-to/database/postgresql-restore-backup.rst:30
+msgid "**How to check whether the database has a table structure?**"
+msgstr "**Hoe controleer ik of de database al een tabelstructuur heeft?**"
 
 #: ../../how-to/database/postgresql-restore-backup.rst:36
-msgid "Situation B: Currently reinstalling DSMR-reader"
-msgstr "Situatie B: Nog bezig met de herinstallatie van DSMR-reader"
+msgid "If the table structure exists, you should see a long list of tables in the output."
+msgstr "Indien de tabelstructuur bestaat, zou je een lange lijst van tabelnamen in de output moeten zien."
 
-#: ../../how-to/database/postgresql-restore-backup.rst:38
-msgid ""
-"If you are still in the process of reinstalling DSMR-reader and just "
-"executed these commands::"
-msgstr ""
-"Als je nog steeds bezig bent met de herinstallatie van DSMR-reader en je "
-"net deze commando's hebt uitgevoerd::"
+#: ../../how-to/database/postgresql-restore-backup.rst:42
+msgid "**How to check whether the database has existing day/hour statistics data?**"
+msgstr "**Hoe controleer ik of de database al bestaande uur-/dagstatistieken heeft?**"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:46
-msgid ""
-"Your database **should** still be empty and this will import any backup "
-"made::"
-msgstr "Je database **zou** nog leeg moeten zijn en dit importeert een backup::"
+#: ../../how-to/database/postgresql-restore-backup.rst:44
+msgid "*This only makes sense to check if the database exists and has a table structure.*"
+msgstr "*Dit is alleen zinnig om te doen als de database bestaat en al een tabelstructuur heeft.*"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:52
-msgid "Now continue the installation guide."
-msgstr "Ga nu verder met de installatiestappen."
+#: ../../how-to/database/postgresql-restore-backup.rst:51
+msgid "If the ``hour_count`` or ``day_count`` (or both) are **above zero**, then there are day and/or hour statistics stored::"
+msgstr "Indien ``hour_count`` of ``day_count`` (of beiden) **hoger dan nul zijn**, dan zijn er uur- en/of dagstatistieken opgeslagen::"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:56
-msgid ""
-"You should **not** see any errors regarding duplicate data or existing "
-"ID's or whatever."
-msgstr ""
-"Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande"
-" ID's of iets soortgelijks."
+#: ../../how-to/database/postgresql-restore-backup.rst:64
+msgid "Importing a full backup"
+msgstr "Volledige backup importeren"
 
-#: ../../how-to/database/postgresql-restore-backup.rst:58
-msgid ""
-"If you do encounter errors while restoring the backup in an **empty** "
-"database, create an issue at GitHub and **do not continue**."
-msgstr ""
-"Mocht je bij het terugzetten van de back-up in een **lege** database toch"
-" fouten tegenkomen, maak dan een issue aan op GitHub en **ga niet "
-"verder**."
+#: ../../how-to/database/postgresql-restore-backup.rst:66
+msgid "A full backup contains all data with its table structure and is usually named: ``dsmrreader-postgresql-backup-Friday.sql.gz``"
+msgstr "Een volledige backup bevat alle gegevens met bijbehorende tabelstructuur en heet meestal iets als: ``dsmrreader-postgresql-backup-Friday.sql.gz``"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:68
+msgid "You can only import a full backup when:"
+msgstr "Je kunt een volledige backup alleen importeren wanneer::"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:70
+#: ../../how-to/database/postgresql-restore-backup.rst:116
+msgid "The database **does** exist."
+msgstr "De database **wel** bestaat."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:71
+msgid "The database **does not** contain a table structure (and thus no data)."
+msgstr "De database **geen** tabelstructuur heeft (en dus ook geen gegevens)."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:75
+msgid "If the database does not exist, create it::"
+msgstr "Als de database nog niet bestaat, maak deze dan aan::"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:81
+msgid "If it has a table structure, usually just after reinstallation, then wipe it. **This will permanently delete all data in it!**"
+msgstr "Als het al een tabelstructuur heeft, doorgaans als je net een herinstallatie hebt gedaan, verwijder deze dan. **Dit verwijdert ook alle gegevens in de database!**"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:90
+msgid "You can now import the full backup."
+msgstr "Je kunt nu de volledige backup importeren."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:105
+#: ../../how-to/database/postgresql-restore-backup.rst:151
+msgid "Keep an eye out for any errors during the steps above."
+msgstr "Houd een oogje in het zeil of je bij bovenstaande stappen fouten ziet."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:110
+msgid "Importing a partial backup"
+msgstr "Gedeeltelijke backup importeren"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:112
+msgid "A partial backup only contains a small subset of data and is usually named: ``dsmrreader-postgresql-partial-backup-2021-03-22.sql.gz``"
+msgstr "Een gedeeltelijke backup bevat een subset aan gegevens en heet meestal iets als: ``dsmrreader-postgresql-partial-backup-2021-03-22.sql.gz``"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:114
+msgid "You can only import a partial backup when:"
+msgstr "Je kunt een gedeeltelijke backup alleen importeren wanneer::"
+
+#: ../../how-to/database/postgresql-restore-backup.rst:117
+msgid "The database **does** contain a table structure."
+msgstr "De tabelstructuur **wel** bestaat."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:118
+msgid "The database **does not** contain existing day/hour statistics."
+msgstr "De database  **geen** bestaande uur-/dagstatistieken bevat."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:122
+msgid "If the database does not exist, create it."
+msgstr "Als de database nog niet bestaat, maak deze dan aan."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:130
+msgid "If the database does not have a table structure, then try creating it. This assumes you already reinstalled DSMR-reader. In the case you are still reinstalling, please finish that guide first and return after."
+msgstr "Als de database nog geen tabelstructuur heeft, probeer deze dan aan te maken. Dit doet de aanname dat je DSMR-reader al weer geherinstalleerd hebt. Zo niet, voltooi eerst de herinstallatie en kom direct daarna hier weer terug."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:142
+msgid "If the database already contains day/hour statistics, you probably want to abort the restore and create an issue on Github for support instead."
+msgstr "Indien de database al bestaande uur-/dagstatistieken heeft wil je waarschijnlijk geen import doen, maar in plaats daarvan een issue aanmaken op Github voor ondersteuning."
+
+#: ../../how-to/database/postgresql-restore-backup.rst:144
+msgid "You can now import the partial backup."
+msgstr "Je kunt nu de gedeeltelijke backup importeren."
 
 #~ msgid "Only follow these step if you want to restore a backup in PostgreSQL."
-#~ msgstr ""
-#~ "Voer deze stappen alleen uit wanneer "
-#~ "je een database back-up in "
-#~ "PostgreSQL wilt terugzetten."
+#~ msgstr "Voer deze stappen alleen uit wanneer je een database back-up in PostgreSQL wilt terugzetten."
 
-#~ msgid ""
-#~ "This assumes you've **not yet** "
-#~ "reinstalled DSMR-reader and created an"
-#~ " **empty** database::"
-#~ msgstr ""
-#~ "Dit gaat er van uit dat je "
-#~ "DSMR-reader **nog niet** helemaal "
-#~ "geinstalleerd/draaiend hebt en daarbij alleen"
-#~ " een **lege** database hebt aangemaakt::"
+#~ msgid "This assumes you've **not yet** reinstalled DSMR-reader and created an **empty** database::"
+#~ msgstr "Dit gaat er van uit dat je DSMR-reader **nog niet** helemaal geinstalleerd/draaiend hebt en daarbij alleen een **lege** database hebt aangemaakt::"
 
-#~ msgid ""
-#~ "Do **not** restore your database if "
-#~ "you've either **started the application** "
-#~ "and/or ran ``manage.py migrate`` in some"
-#~ " way."
-#~ msgstr ""
-#~ "Zet je database **niet terug** wanneer"
-#~ " je ofwel **de applicatie (weer) "
-#~ "gestart hebt** ofwel wanneer je al "
-#~ "``manage.py migrate`` hebt uitgevoerd."
+#~ msgid "Do **not** restore your database if you've either **started the application** and/or ran ``manage.py migrate`` in some way."
+#~ msgstr "Zet je database **niet terug** wanneer je ofwel **de applicatie (weer) gestart hebt** ofwel wanneer je al ``manage.py migrate`` hebt uitgevoerd."
 
 #~ msgid "To be clear, we'll repeat it once again:"
 #~ msgstr "On glashelder te zijn, herhalen we:"
@@ -136,10 +159,7 @@ msgstr ""
 #~ msgstr "Ongecomprimeerd (legacy)"
 
 #~ msgid "To restore an uncompressed backup (``.sql``), run::"
-#~ msgstr ""
-#~ "Om een ongecomprimeerde back-up "
-#~ "(``.sql``) terug te zetten, voer dit "
-#~ "uit::"
+#~ msgstr "Om een ongecomprimeerde back-up (``.sql``) terug te zetten, voer dit uit::"
 
 #~ msgid "Result"
 #~ msgstr "Resultaat"
@@ -147,3 +167,38 @@ msgstr ""
 #~ msgid "Attention"
 #~ msgstr "Attentie"
 
+#~ msgid "First check whether situation A or B applies to you below."
+#~ msgstr "Kijk eerst of A ofwel B hieronder van toepassing is op je situatie."
+
+#~ msgid "Situation A: Already finished DSMR-reader reinstallation"
+#~ msgstr "Situatie A: DSMR-reader al helemaal opnieuw geinstalleerd"
+
+#~ msgid "The steps below replace any existing data stored in the database and is irreversible!"
+#~ msgstr "De stappen hieronder overschrijven alle bestaande gegevens in de database en is onomkeerbaar!"
+
+#~ msgid "You cannot merge a database backup with an existing installation containing data you want to preserve!"
+#~ msgstr "Je kunt helaas niet een databasebackup samenvoegen met een bestaande installatie, waar gegevens in staan die je wilt bewaren."
+
+#~ msgid "Doing so **will** cause trouble with duplicate data/ID's and **break** your installation at some point."
+#~ msgstr "Doorgaan zorgt er **gegarandeerd** voor dat er **problemen** komen met dubbele gegevens/ID's op een bepaald moment."
+
+#~ msgid "If you just finished reinstalling DSMR-reader but **did not** restore the backup and you want to **overwrite** the data in it::"
+#~ msgstr "Als je DSMR-reader opnieuw hebt geinstalleerd en **niet** de backup hebt teruggezet, maar wel alle gegevens in de nieuwe database wilt **overschrijven**::"
+
+#~ msgid "Situation B: Currently reinstalling DSMR-reader"
+#~ msgstr "Situatie B: Nog bezig met de herinstallatie van DSMR-reader"
+
+#~ msgid "If you are still in the process of reinstalling DSMR-reader and just executed these commands::"
+#~ msgstr "Als je nog steeds bezig bent met de herinstallatie van DSMR-reader en je net deze commando's hebt uitgevoerd::"
+
+#~ msgid "Your database **should** still be empty and this will import any backup made::"
+#~ msgstr "Je database **zou** nog leeg moeten zijn en dit importeert een backup::"
+
+#~ msgid "Now continue the installation guide."
+#~ msgstr "Ga nu verder met de installatiestappen."
+
+#~ msgid "You should **not** see any errors regarding duplicate data or existing ID's or whatever."
+#~ msgstr "Je zou **geen** fouten moeten zien m.b.t dubbele gegevens en/of bestaande ID's of iets soortgelijks."
+
+#~ msgid "If you do encounter errors while restoring the backup in an **empty** database, create an issue at GitHub and **do not continue**."
+#~ msgstr "Mocht je bij het terugzetten van de back-up in een **lege** database toch fouten tegenkomen, maak dan een issue aan op GitHub en **ga niet verder**."
