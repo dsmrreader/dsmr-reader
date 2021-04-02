@@ -286,8 +286,8 @@
 
         // When clicked, show all help tooltips.
         $("a.graph_controls_help_trigger").click(function(){
-            $(".graph_controls_help").show();
-            $("a.graph_controls_help_trigger").hide();
+            $("a.graph_controls_help_trigger").fadeOut(500);
+            $(".graph_controls_help").fadeIn(1500);
 
             return false;
         });
