@@ -74,7 +74,7 @@
                 <td colspan="4">&nbsp;</td>
             </tr>
             <tr>
-                <td> {% translate "Temp." %} <span class="unit">°C</span></td>
+                <td> {% translate "°C" %}</td>
                 <td>{% if statistics.temperature_min %}<span class="badge bg-blue">{{ statistics.temperature_min|floatformat|default:'-' }}</span> <span class="unit">{% translate "Min" %}</span>{% endif %}</td>
                 <td>{% if statistics.temperature_max %}<span class="badge bg-blue">{{ statistics.temperature_max|floatformat|default:'-' }}</span> <span class="unit">{% translate "Max" %}</span>{% endif %}</td>
                 <td>{% if statistics.temperature_avg %}<span class="badge bg-blue">{{ statistics.temperature_avg|floatformat|default:'-' }}</span> <span class="unit">{% translate "Avg" %}</span>{% endif %}</td>

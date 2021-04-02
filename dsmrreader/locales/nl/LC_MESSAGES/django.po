@@ -808,7 +808,7 @@ msgid "Tariff names"
 msgstr "Tariefnaamgeving"
 
 msgid "Electricity delivered"
-msgstr "Elektriciteitsverbruik"
+msgstr "Elektriciteit verbruikt"
 
 msgid "Electricity returned"
 msgstr "Elektriciteit teruggeleverd"
@@ -919,13 +919,13 @@ msgid "Whether you are using a single electricity tariff and both (high/low) sho
 msgstr "Bepaalt of de elektriciteitstarieven samengevoegd moeten worden (wanneer je voor een enkel tarief betaalt)"
 
 msgid "Electricity delivered color"
-msgstr "Kleur elektriciteitsverbruik"
+msgstr "Kleur elektriciteit verbruikt"
 
 msgid "Graph color for electricity delivered (default, tariff 2)"
 msgstr "Grafiekkleur voor elektriciteitsverbruik (standaard, tarief 2)"
 
 msgid "Electricity delivered color (alternative)"
-msgstr "Kleur elektriciteitsverbruik (alternatief)"
+msgstr "Kleur elektriciteit verbruikt (alternatief)"
 
 msgid "Graph color for electricity delivered (tariff 1)"
 msgstr "Grafiekkleur voor elektriciteitsverbruik (tarief 1)"
@@ -1153,10 +1153,10 @@ msgid "Loading..."
 msgstr "Bezig met laden..."
 
 msgid "Electricity consumed"
-msgstr "Elektriciteitsverbruik"
+msgstr "Elektriciteit verbruikt"
 
 msgid "Gas consumed"
-msgstr "Gasverbruik"
+msgstr "Gas verbruikt"
 
 msgid "Electricity (single tariff)"
 msgstr "Elektriciteit (enkel tarief)"
@@ -1514,8 +1514,8 @@ msgstr "Voeg notitie toe voor deze datum"
 msgid "Total"
 msgstr "Totaal"
 
-msgid "Temp."
-msgstr "Temp."
+msgid "°C"
+msgstr "°C"
 
 msgid "Min"
 msgstr "Min"
@@ -1572,22 +1572,22 @@ msgid "Delivered"
 msgstr "Verbruikt"
 
 msgid "Recent electricity usage"
-msgstr "Recent gebruik elektriciteit"
+msgstr "Recent elektriciteitsvermogen"
 
 msgid "in Watt"
 msgstr "in Watt"
 
 msgid "Recent phases usage"
-msgstr "Recente gebruik fasen"
+msgstr "Recent (fase)vermogen"
 
 msgid "Recent phase voltages"
-msgstr "Recente voltages fasen"
+msgstr "Recente (fase)spanning"
 
 msgid "in Volt"
 msgstr "in Volt"
 
 msgid "Recent phase currents"
-msgstr "Recente stroomsterktes"
+msgstr "Recente (fase)stroomsterktes"
 
 msgid "in Ampere"
 msgstr "in Ampère"
@@ -2616,6 +2616,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Temp."
+#~ msgstr "Temp."
 
 #~ msgid "Hourly"
 #~ msgstr "Per uur"

@@ -9,7 +9,7 @@
             <tr>
                 <th class="col-sm-3"></th>
                 <th class="col-sm-3">
-                    {{ base_title|unlocalize }}
+                    {{ base_title|unlocalize|capfirst }}
 
                 {% if data_count.base != data_count.comparison %}
                     <br>
@@ -19,7 +19,7 @@
                 {% endif %}
                 </th>
                 <th class="col-sm-3">
-                    {{ comparison_title|unlocalize }}
+                    {{ comparison_title|unlocalize|capfirst }}
 
                 {% if data_count.base != data_count.comparison %}
                     <br>
@@ -44,8 +44,8 @@
         {% if capabilities.electricity and frontend_settings.merge_electricity_tariffs %}
             <tr>
                 <td>{% translate "Electricity (single tariff)" %} <span class="unit">{% translate "kWh" %}</span></td>
-                <td>{{ base.electricity_merged|default:'-' }}</td>
-                <td>{{ comparison.electricity_merged|default:'-' }}</td>
+                <td>{% if base.electricity_merged %}<span class="badge bg-red">{{ base.electricity_merged|default:'-' }}</span>{% endif %}</td>
+                <td>{% if comparison.electricity_merged %}<span class="badge bg-red">{{ comparison.electricity_merged|default:'-' }}</span>{% endif %}</td>
                 <td>
                     {% if not diff.electricity_merged|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
@@ -61,8 +61,8 @@
         {% if capabilities.electricity_returned and frontend_settings.merge_electricity_tariffs %}
             <tr>
                 <td>{% translate "Electricity returned (single tariff)" %} <span class="unit">{% translate "kWh" %}</span></td>
-                <td>{{ base.electricity_returned_merged|default:'-' }}</td>
-                <td>{{ comparison.electricity_returned_merged|default:'-' }}</td>
+                <td>{% if base.electricity_returned_merged %}<span class="badge bg-green">{{ base.electricity_returned_merged|default:'-' }}</span>{% endif %}</td>
+                <td>{% if comparison.electricity_returned_merged %}<span class="badge bg-green">{{ comparison.electricity_returned_merged|default:'-' }}</span>{% endif %}</td>
                 <td>
                     {% if not diff.electricity_returned_merged|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
@@ -78,8 +78,8 @@
         {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
             <tr>
                 <td>{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
-                <td><span class="badge bg-red">{{ base.electricity1|default:'-' }}</span></td>
-                <td><span class="badge bg-red">{{ comparison.electricity1|default:'-' }}</span></td>
+                <td>{% if base.electricity1 %}<span class="badge bg-red">{{ base.electricity1|default:'-' }}</span{% endif %}></td>
+                <td>{% if comparison.electricity1 %}<span class="badge bg-red">{{ comparison.electricity1|default:'-' }}</span>{% endif %}</td>
                 <td>
                     {% if not diff.electricity1|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
@@ -92,8 +92,8 @@
             </tr>
             <tr>
                 <td>{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
-                <td><span class="badge bg-red">{{ base.electricity2|default:'-' }}</span></td>
-                <td><span class="badge bg-red">{{ comparison.electricity2|default:'-' }}</span></td>
+                <td>{% if base.electricity2 %}<span class="badge bg-red">{{ base.electricity2|default:'-' }}</span>{% endif %}</td>
+                <td>{% if comparison.electricity2 %}<span class="badge bg-red">{{ comparison.electricity2|default:'-' }}</span>{% endif %}</td>
                 <td>
                     {% if not diff.electricity2|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
@@ -109,8 +109,8 @@
         {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
             <tr>
                 <td>{{ frontend_settings.tariff_1_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
-                <td><span class="badge bg-green">{{ base.electricity1_returned|default:'-' }}</span></td>
-                <td><span class="badge bg-green">{{ comparison.electricity1_returned|default:'-' }}</span></td>
+                <td>{% if base.electricity1_returned %}<span class="badge bg-green">{{ base.electricity1_returned|default:'-' }}</span>{% endif %}</td>
+                <td>{% if comparison.electricity1_returned %}<span class="badge bg-green">{{ comparison.electricity1_returned|default:'-' }}</span>{% endif %}</td>
                 <td>
                     {% if not diff.electricity1_returned|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
@@ -123,8 +123,8 @@
             </tr>
             <tr>
                 <td>{{ frontend_settings.tariff_2_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
-                <td><span class="badge bg-green">{{ base.electricity2_returned|default:'-' }}</span></td>
-                <td><span class="badge bg-green">{{ comparison.electricity2_returned|default:'-' }}</span></td>
+                <td>{% if base.electricity2_returned %}<span class="badge bg-green">{{ base.electricity2_returned|default:'-' }}</span>{% endif %}</td>
+                <td>{% if comparison.electricity2_returned %}<span class="badge bg-green">{{ comparison.electricity2_returned|default:'-' }}</span>{% endif %}</td>
                 <td>
                     {% if not diff.electricity2_returned|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
@@ -140,8 +140,8 @@
         {% if capabilities.gas %}
             <tr>
                 <td>{% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
-                <td><span class="badge bg-orange">{{ base.gas|default:'-' }}</span></td>
-                <td><span class="badge bg-orange">{{ comparison.gas|default:'-' }}</span></td>
+                <td>{% if base.gas %}<span class="badge bg-orange">{{ base.gas|default:'-' }}</span>{% endif %}</td>
+                <td>{% if comparison.gas %}<span class="badge bg-orange">{{ comparison.gas|default:'-' }}</span>{% endif %}</td>
                 <td>
                     {% if not diff.gas|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
