@@ -36,7 +36,9 @@ class Command(BaseCommand):
         APISettings.objects.update(allow=not options['no_api'], auth_key='test')
         BackendSettings.objects.update(disable_electricity_returned_capability=False, process_sleep=0.5)
         BackupSettings.objects.update(daily_backup=False)
+        BackupSettings.get_solo().save()  # Trigger signal
         EmailBackupSettings.objects.update(interval=EmailBackupSettings.INTERVAL_NONE)
+        EmailBackupSettings.get_solo().save()  # Trigger signal
         EmailSettings.objects.update(
             email_from=None, email_to=None, host=None, port=None, username=None, password=None
         )
