@@ -28,6 +28,7 @@ Current version
 v4.16.0 - 2021-xx-xx
 --------------------
 
+- ``Fixed`` Voltage grafiek autoscaling in live grafieken [`#1349 <https://github.com/dsmrreader/dsmr-reader/issues/1349>`_]
 
 
 v4.15.0 - 2021-04-03

@@ -25,6 +25,8 @@ $(document).ready(function () {
         yAxis: [
             {
                 type: 'value',
+                min: 'dataMin',
+                max: 'dataMax'
             }
         ],
         dataZoom: [
