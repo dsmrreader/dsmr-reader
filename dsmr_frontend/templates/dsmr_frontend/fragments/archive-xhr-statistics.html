@@ -62,7 +62,7 @@
                 <td><span class="badge bg-black">{{ statistics.fixed_cost|default:'-' }}</span></td>
             </tr>
             {% endif %}
-            <tr>
+            <tr class="highlight">
                 <td style="font-weight: bold;">{% translate "Total" %}</td>
                 <td>{% if capabilities.electricity and statistics.electricity_merged %}<span class="badge bg-red">{{ statistics.electricity_merged|default:'-' }}  </span>{% endif %}</td>
                 <td>{% if capabilities.electricity_returned and statistics.electricity_returned_merged %}<span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-' }}</span>{% endif %}</td>

@@ -6,6 +6,10 @@
     border-top: 1px solid #eee;
 }
 
+.table tr.highlight {
+    background-color: #F8F8F8;
+}
+
 .fa-rotate-45 {
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);

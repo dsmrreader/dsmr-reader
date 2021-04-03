@@ -64,7 +64,7 @@
                         {% endif %}
 
                         {# Electricity sub totals #}
-                        <tr>
+                        <tr {% if not frontend_settings.merge_electricity_tariffs %}class="highlight"{% endif %}>
                             <td>
                                 {% if not frontend_settings.merge_electricity_tariffs %}
                                     <strong>{% translate "Total electricity" %}</strong>
@@ -105,7 +105,7 @@
                         {% endif %}
 
                         {# Grand totals #}
-			            <tr>
+			            <tr class="highlight">
 			                <td style="font-weight: bold;" colspan="3">{% translate "Total costs" %}</td>
 			                <td><span class="badge bg-black">{{ current.summary.total_cost|default:'-' }}</span></td>
 			            </tr>

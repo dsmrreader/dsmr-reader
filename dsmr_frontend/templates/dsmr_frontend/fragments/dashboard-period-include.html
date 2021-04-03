@@ -38,7 +38,7 @@
                     </tr>
                     {% endif %}
 
-                    <tr>
+                    <tr {% if not frontend_settings.merge_electricity_tariffs %}class="highlight"{% endif %}>
                         <td>
                             {% if capabilities.electricity %}
                                 {% if not frontend_settings.merge_electricity_tariffs %}
@@ -75,7 +75,7 @@
                     {% endif %}
 
                     {% if capabilities.costs and data.total_cost %}
-                    <tr>
+                    <tr class="highlight">
                         <td colspan="3" style="font-weight: bold;">{% translate "Total costs" %}</td>
                         <td><span class="badge bg-black">{{ data.total_cost|default:'-' }}</span></td>
                     </tr>
