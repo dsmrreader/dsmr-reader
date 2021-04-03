@@ -25,7 +25,7 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.15.0 - 2021-04-04
+v4.15.0 - 2021-04-03
 --------------------
 
 - ``Changed`` Upgrade to eCharts 5, reworked graphs and improved responsiveness support [`#1331 <https://github.com/dsmrreader/dsmr-reader/issues/1331>`_]
