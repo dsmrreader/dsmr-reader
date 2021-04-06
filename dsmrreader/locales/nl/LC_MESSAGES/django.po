@@ -133,19 +133,19 @@ msgid "Whether the application checks once in a while for new DSMR-reader releas
 msgstr "Geeft aan of de applicatie af en toe op GitHub controleert of er updates beschikbaar zijn"
 
 msgid "Backend process sleep"
-msgstr "Backend proces sleep"
+msgstr "Backend-proces sleep"
 
 msgid "The number of seconds the application will sleep after completing a backend run."
 msgstr "Het aantal seconden dat de applicatie wacht na het voltooien van een backend run."
 
 msgid "Disable gas capability"
-msgstr "Schakel weergave gas uit"
+msgstr "Verberg weergave gas"
 
 msgid "Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source."
 msgstr "Geeft aan of gas uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer je geen gas (meer) gebruikt en ben overgestapt naar een andere energiebron."
 
 msgid "Disable electricity returned capability"
-msgstr "Schakel weergave elektriciteitsteruglevering uit"
+msgstr "Verberg weergave elektriciteitsteruglevering"
 
 msgid "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels."
 msgstr "Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) teruglevering heeft geregistreerd."
@@ -157,7 +157,7 @@ msgid "Whether the backend process requires a restart. It should occur automatic
 msgstr "Geeft aan of het backend-proces een herstart vereist. Dit zou automatisch moeten gaan."
 
 msgid "Backend configuration"
-msgstr "Backend-configuratie"
+msgstr "Backendconfiguratie"
 
 msgid "Email from"
 msgstr "E-mailafzender"
@@ -247,10 +247,10 @@ msgid "Backup timestamp"
 msgstr "Tijdstip van back-up"
 
 msgid "Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation."
-msgstr "Voorkeurstijdstip van dagelijkse back-up. Ons advies is om een moment in de nacht te pakken, gezien het maken van een back-up de werking van de applicatie kort kan onderbreken."
+msgstr "Voorkeurstijdstip van dagelijkse back-up. Het advies is om een moment in de nacht te pakken, gezien het maken van een back-up de werking van de applicatie kort kan onderbreken."
 
 msgid "Backup storage folder"
-msgstr "Back-up opslag map"
+msgstr "Back-up opslagmap"
 
 msgid "The folder to store the backups in. The default location is \"backups/\". Please make sure that the \"dsmr\" user both has read and write access to the folder."
 msgstr "De map waarin back-ups opgeslagen worden. De standaardlocatie is \"backups/\". N.B.: Zorg ervoor dat de \"dsmr\" gebruiker toegang en schrijfrechten heeft tot de map."
@@ -262,7 +262,7 @@ msgid "The gzip compression level used. Level 9 = best, level 1 = fastest."
 msgstr "Het compressieniveau dat voor gzip gebruikt wordt. Niveau 9 = beste, niveau 1 = snelste."
 
 msgid "Backup configuration"
-msgstr "Back-up configuratie"
+msgstr "Back-upconfiguratie"
 
 msgid "Dropbox access token"
 msgstr "Dropbox access token"
@@ -421,7 +421,7 @@ msgid "Contract start"
 msgstr "Contract start"
 
 msgid "Contract end"
-msgstr "Contract einde"
+msgstr "Contracteinde"
 
 msgid "Set to a far future date when there is not contract end."
 msgstr "Zet deze datum in de verre toekomst als er geen contracteinde is."
@@ -571,7 +571,7 @@ msgid "Current electricity delivered in kW"
 msgstr "Huidig elektriciteitsverbruik in kW"
 
 msgid "Current electricity returned in kW"
-msgstr "Huidige teruglevering elektriciteit in kW"
+msgstr "Huidige elektriciteitsteruglevering in kW"
 
 msgid "Current electricity used by phase L1 (in kW)"
 msgstr "Huidig elektriciteitsverbruik in fase L1 (in kW)"
@@ -589,13 +589,13 @@ msgid "Last value read from the extra device connected (gas meter)"
 msgstr "Meterstand van de externe (gas)meter"
 
 msgid "Current electricity returned by phase L1 (in kW)"
-msgstr "Huidige elektriciteitteruglevering in fase L1 (in kW)"
+msgstr "Huidige elektriciteitsteruglevering in fase L1 (in kW)"
 
 msgid "Current electricity returned by phase L2 (in kW)"
-msgstr "Huidige elektriciteitteruglevering in fase L2 (in kW)"
+msgstr "Huidige elektriciteitsteruglevering in fase L2 (in kW)"
 
 msgid "Current electricity returned by phase L3 (in kW)"
-msgstr "Huidige elektriciteitteruglevering in fase L3 (in kW)"
+msgstr "Huidige elektriciteitsteruglevering in fase L3 (in kW)"
 
 msgid "DSMR reading (read only)"
 msgstr "DSMR-uitlezing (alleen lezen)"
@@ -670,19 +670,19 @@ msgid "Disabled (WARNING: Will eventually lead to performance issues!)"
 msgstr "Uitgeschakeld: (WAARSCHUWING: Dit leidt uiteindelijk tot performance problemen!)"
 
 msgid "Clean up most source data after one week (RECOMMENDED)"
-msgstr "Schoont de meeste brondata op na een week (AANBEVOLEN)"
+msgstr "Schoon de meeste brondata op na een week (AANBEVOLEN)"
 
 msgid "Clean up most source data after one month (RECOMMENDED)"
-msgstr "Schoont de meeste brondata op na een maand (AANBEVOLEN)"
+msgstr "Schoon de meeste brondata op na een maand (AANBEVOLEN)"
 
 msgid "Clean up most source data after three months"
-msgstr "Schoont de meeste brondata op na drie maanden"
+msgstr "Schoon de meeste brondata op na drie maanden"
 
 msgid "Clean up most source data after six months"
-msgstr "Schoont de meeste brondata op na een halfjaar"
+msgstr "Schoon de meeste brondata op na een halfjaar"
 
 msgid "Clean up most source data after one year"
-msgstr "Schoont de meeste brondata op na een jaar"
+msgstr "Schoon de meeste brondata op na een jaar"
 
 msgid "Data retention policy"
 msgstr "Dataretentiebeleid"
@@ -763,10 +763,10 @@ msgid "Do not enable \"Override telegram timestamp\" unless your smart meter wro
 msgstr "Schakel \"Overschrijf tijdstip van telegrammen\" niet in, tenzij je slimme meter verkeerde telegrammen stuurt die meer dan enkele minuten afwijken."
 
 msgid "All data here is based on the latest telegram received and should also deployed on the Statistics page (except for the telegram). You can find the latest raw telegram below, which can be used for debugging purposes."
-msgstr "Alle gegevens hier is gebaseerd op het meeste recent ontvangen telegram en wordt ook getoond op de Statistieken-pagina (behalve het telegram). Je kunt het meest recente telegram hieronder vinden voor situaties waarbij dit nodig, doorgaans bij debuggen."
+msgstr "Alle gegevens hier zijn gebaseerd op het meeste recent ontvangen telegram en worden ook getoond op de Statistieken-pagina (behalve het telegram). Je kunt het meest recente telegram hieronder vinden voor situaties waarbij dit nodig, doorgaans bij debuggen."
 
 msgid "Data retention policies cleans up source data after a while."
-msgstr "Dataretentiebeleid schoont na verloop van tijd brondata op."
+msgstr "Dataretentiebeleid schoont na verloop van tijd (deels) brongegevens op."
 
 msgid "The following data is never discarded:"
 msgstr "De volgende gegevens worden nooit opgeschoond:"
@@ -1384,7 +1384,7 @@ msgid "Gzip compression level used"
 msgstr "Gzip compressieniveau"
 
 msgid "CSV export"
-msgstr "CSV export"
+msgstr "CSV-export"
 
 msgid "Export day totals to CSV"
 msgstr "Exporteer dagtotalen naar CSV"
@@ -1396,7 +1396,7 @@ msgid "Export temperatures to CSV"
 msgstr "Exporteer temperaturen naar CSV"
 
 msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
-msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via die API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
+msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via de API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
 
 msgid "Unread notifications"
 msgstr "Ongelezen notificaties"
@@ -1405,7 +1405,7 @@ msgid "Go to notification overview"
 msgstr "Ga naar notificatieoverzicht"
 
 msgid "All data is based on whether you have set prices for each type of consumption. E.g.: Omitting gas prices will hide gas consumption for the contract."
-msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. N.B.: Het weglaten van gasprijzen laat bijvoorbeeld gasconsumptie hieronder niet zien."
+msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. N.B.: Het weglaten van bijvoorbeeld gasprijzen verbergt gasconsumptie."
 
 msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
 msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
@@ -1566,7 +1566,7 @@ msgid "Graph controls help"
 msgstr "Uitleg grafiekgebruik"
 
 msgid "Additionally, when using a DSMR v5 smart meter"
-msgstr "Daarnaast, indien je een DSMR-v5-meter gebruikt"
+msgstr "Daarnaast, indien je een DSMR v5 slimme meter gebruikt"
 
 msgid "Delivered"
 msgstr "Verbruikt"
@@ -2162,7 +2162,7 @@ msgid "Which notification service to use for sending daily usage notifications"
 msgstr "Welke notificatieservice mag gebruikt worden om de notificaties mee te versturen"
 
 msgid "API key"
-msgstr "API key"
+msgstr "API-sleutel"
 
 msgid "The API key of your Pushover Application"
 msgstr "De API key van je Pushover Applicatie"
@@ -2254,8 +2254,8 @@ msgstr "De interval tussen elke upload (in minuten). Zorg ervoor dat dit overeen
 msgid "Upload offset (minutes)"
 msgstr "Uploadvertraging (in minuten)"
 
-msgid "An artificial delay in uploading data to PVOutput. E.g.: When you set this to \"5\" and the application uploads the data at 10:45, then only data between until 10:40 will be taken into account. It effectively limits its upload data search by \"ignore the last X minutes\", where X is this setting."
-msgstr "Een kunstmatige vertraging in het uploaden van gegevens naar PVOutput. Voorbeeld: Wanneer je dit instelt op \"5\" en de applicatie probeert om 10:45 gegevens te uploaden, dan worden alleen gegevens tussen 0:00 en 10:40 gebruikt. Effectief zorgt deze instelling er dus voor dat de te uploaden data beperkt wordt met \"negeer data van de afgelopen X minuten\", waarbij X de waarde van deze instelling is."
+msgid "An artificial delay in uploading data to PVOutput. E.g.: When you set this to \"5\" and the application uploads the data at 10:45, then only data until 10:40 will be taken into account. It effectively limits its upload data search by \"ignore the last X minutes\", where X is this setting."
+msgstr "Een kunstmatige vertraging in het uploaden van gegevens naar PVOutput. Voorbeeld: Wanneer je dit instelt op \"5\" en de applicatie probeert om 10:45 gegevens te uploaden, dan worden alleen gegevens tot 10:40 gebruikt. Effectief zorgt deze instelling er dus voor dat de te uploaden data beperkt wordt met \"negeer data van de afgelopen X minuten\", waarbij X de waarde van deze instelling is."
 
 msgid "PVOutput: Processing delay (minutes)"
 msgstr "PVOutput: Verwerkingsvertraging (in minuten)"
