@@ -106,13 +106,13 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         gas = electricity_base * 0.3  # Random as well.
 
         current_base = abs(graph_base)
-        currently_delivered_l1 = current_base + random.randint(0, 250) * 0.001  # kW
+        currently_delivered_l1 = current_base + random.randint(0, 100) * 0.001  # kW
         currently_delivered_l2 = current_base + random.randint(0, 250) * 0.001  # kW
-        currently_delivered_l3 = current_base + random.randint(0, 250) * 0.001  # kW
+        currently_delivered_l3 = current_base + random.randint(0, 800) * 0.001  # kW
         currently_delivered = currently_delivered_l1 + currently_delivered_l2 + currently_delivered_l3
-        currently_returned_l1 = current_base + random.randint(0, 250) * 0.001  # kW
-        currently_returned_l2 = current_base + random.randint(0, 250) * 0.001  # kW
-        currently_returned_l3 = current_base + random.randint(0, 250) * 0.001  # kW
+        currently_returned_l1 = current_base + random.randint(0, 100) * 0.001  # kW
+        currently_returned_l2 = current_base + random.randint(0, 200) * 0.001  # kW
+        currently_returned_l3 = current_base + random.randint(0, 400) * 0.001  # kW
         currently_returned = currently_returned_l1 + currently_returned_l2 + currently_returned_l3
 
         # Delivered and returned MAY be used simultaneously. But this asumes most setups, having it either direction.
