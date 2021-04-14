@@ -29,6 +29,7 @@ v4.16.0 - 2021-xx-xx
 --------------------
 
 - ``Fixed`` Security fix: Bump django from ``3.1.7``` to ``3.1.8`` - by ``dependabot`` [`#1359 <https://github.com/dsmrreader/dsmr-reader/issues/1359>`_]
+- ``Fixed`` Kolom voor vaste kosten toevoegen aan CSV-export dagtotalen [`#1364 <https://github.com/dsmrreader/dsmr-reader/issues/1364>`_]
 
 
 v4.15.1 - 2021-04-05

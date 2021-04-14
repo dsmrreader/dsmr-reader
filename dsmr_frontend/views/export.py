@@ -62,7 +62,7 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
             export_fields = [
                 'day', 'electricity1', 'electricity2', 'electricity1_returned',
                 'electricity2_returned', 'gas', 'electricity1_cost', 'electricity2_cost',
-                'gas_cost', 'total_cost'
+                'gas_cost', 'fixed_cost', 'total_cost'
             ]
 
         elif data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
