@@ -25,10 +25,11 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.16.0 - 2021-xx-xx
+v4.15.2 - 2021-04-18
 --------------------
 
 - ``Fixed`` Security fix: Bump django from ``3.1.7``` to ``3.1.8`` - by ``dependabot`` [`#1359 <https://github.com/dsmrreader/dsmr-reader/issues/1359>`_]
+- ``Fixed`` Security fix: Bump django-debug-toolbar from ``3.2`` ``to 3.2.1`` - by ``dependabot`` [`#1367 <https://github.com/dsmrreader/dsmr-reader/issues/1367>`_]
 - ``Fixed`` Kolom voor vaste kosten toevoegen aan CSV-export dagtotalen [`#1364 <https://github.com/dsmrreader/dsmr-reader/issues/1364>`_]
 
 
