@@ -22,3 +22,23 @@ You will need a cable and hardware that can run Linux software.
 ## Docker
 A third party Docker implementation [can be found here](https://github.com/xirixiz/dsmr-reader-docker).
 Courtesy of [@Xirixiz](https://github.com/xirixiz).
+
+## Preview
+
+![Dashboard](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v4/frontend/dashboard.png)
+
+----
+
+![Live](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v4/frontend/live.png)
+
+----
+
+![Archive](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v4/frontend/archive.png)
+
+----
+
+![Compare](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v4/frontend/compare.png)
+
+----
+
+[Check out the documentation for more screenshots](https://dsmr-reader.readthedocs.io/en/v4/explained/about.html#screenshots).
