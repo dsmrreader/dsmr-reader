@@ -14,9 +14,9 @@ You will need a cable and hardware that can run Linux software.
 ## Quick start
 - **Documentation**: [English](https://dsmr-reader.readthedocs.io/en/v4/index.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/index.html)
 - **Installation**: [English](https://dsmr-reader.readthedocs.io/en/v4/tutorial/installation/step-by-step.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/tutorial/installation/step-by-step.html)
-- **FAQ**: [English](https://dsmr-reader.readthedocs.io/en/v4/reference/faq.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/reference/faq.html)
+- **How-to's**: [English](https://dsmr-reader.readthedocs.io/en/v4/how-to/index.html) / [Nederlands](https://dsmr-reader.readthedocs.io/nl/v4/how-to/index.html)
 
-[Check out the documentation](https://dsmr-reader.readthedocs.io/en/v4/explanation/about.html) for a tour and screenshots.
+[Check out the documentation](https://dsmr-reader.readthedocs.io/en/v4/explained/about.html) for a tour and screenshots.
 
 
 ## Docker
