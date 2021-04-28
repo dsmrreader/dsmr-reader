@@ -35,4 +35,4 @@ def queue_message(topic, payload):
     if not created:
         return logger.debug('MQTT: Ignoring %s due to queue', topic)
 
-    logger.debug('MQTT: Queued message for %s', topic)
+    logger.debug('MQTT: Queued message for %s: %s', topic, payload)
