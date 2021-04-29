@@ -25,6 +25,13 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
+
+v4.16.0 - 2021-05-xx
+--------------------
+
+- ``Fixed`` Laatste meting op basis van timestamp i.p.v. ID [`#1376 <https://github.com/dsmrreader/dsmr-reader/issues/1376>`_]
+
+
 v4.15.2 - 2021-04-18
 --------------------
 

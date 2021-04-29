@@ -336,7 +336,7 @@ def live_electricity_consumption():
     data = {}
 
     try:
-        latest_reading = DsmrReading.objects.all().order_by('-pk')[0]
+        latest_reading = DsmrReading.objects.all().order_by('-timestamp')[0]
     except IndexError:
         return data
 
