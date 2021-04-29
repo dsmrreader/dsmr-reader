@@ -62,7 +62,7 @@ def run(mqtt_client):
     """ Reads any messages from the queue and publishing them to the MQTT broker. """
     broker_settings = MQTTBrokerSettings.get_solo()
 
-    # Keep batches small, only send the latest X messages. The rest will be purged (in case of delay).
+    # Keep batches small, only send the latest X messages. The rest will be trimmed (in case of delay).
     message_queue = queue.Message.objects.all().order_by('-pk')[0:settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE]
 
     if not message_queue:
@@ -71,12 +71,15 @@ def run(mqtt_client):
     logger.info('MQTT: Processing %d message(s)', len(message_queue))
 
     for current in message_queue:
+        logger.debug('MQTT: Publishing message (#%s) for %s: %s', current.pk, current.topic, current.payload)
         mqtt_client.publish(
             topic=current.topic,
             payload=current.payload,
             qos=broker_settings.qos,
             retain=True
         )
+
+        logger.debug('MQTT: Deleting published message (#%s)', current.pk)
         current.delete()
 
     # Delete any overflow in messages.
