@@ -35,7 +35,7 @@ v4.16.0 - 2021-05-xx
 - ``Changed`` MQTT now uses ``Quality of Service: Level 2`` for new installations [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
 
 - ``Fixed`` Laatste meting op basis van timestamp i.p.v. ID [`#1376 <https://github.com/dsmrreader/dsmr-reader/issues/1376>`_]
-- ``Fixed`` Actually implement ``Quality of Service: Level 2`` for MQTT [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
+- ``Fixed`` Properly implemented ``Quality of Service: Level 2`` for MQTT messaging [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
 
 
 v4.15.2 - 2021-04-18

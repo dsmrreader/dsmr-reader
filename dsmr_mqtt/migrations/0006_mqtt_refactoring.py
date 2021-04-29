@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mqttbrokersettings',
             name='qos',
-            field=models.IntegerField(choices=[(0, 'QoS 0 - At most once (default)'), (1, 'QoS 1 - At least once'), (2, 'QoS 2 - Exactly once')], default=0, help_text='QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages.', verbose_name='Quality Of Service'),
+            field=models.IntegerField(choices=[(0, 'QoS 0 - At most once (default)'), (1, 'QoS 1 - At least once'), (2, 'QoS 2 - Exactly once')], default=2, help_text='QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages.', verbose_name='Quality Of Service'),
         ),
         migrations.AddField(
             model_name='mqttbrokersettings',

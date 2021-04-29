@@ -79,7 +79,7 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         help_text=_('The client ID used to identify DSMR-reader sending the MQTT messages.')
     )
     qos = models.IntegerField(
-        default=QOS_0,
+        default=QOS_2,
         choices=QOS_CHOICES,
         verbose_name=_('Quality Of Service'),
         help_text=_(
