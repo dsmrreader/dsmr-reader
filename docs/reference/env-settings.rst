@@ -469,3 +469,21 @@ Suppress at your own risk.
     **This setting is optional**
 
     .. versionadded:: v4.6
+
+
+----
+
+
+``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The maximum amount of MQTT messages queued in DSMR-reader until new ones will be rejected.
+This prevents creating an infinite backlog of messages queued.
+However, situationally you may increase the maximum for whatever reason along your local setup.
+Omit to use the default.
+
+.. hint::
+
+    **This setting is optional**
+
+    .. versionadded:: v4.16
