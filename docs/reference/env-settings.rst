@@ -479,8 +479,28 @@ Suppress at your own risk.
 
 The maximum amount of MQTT messages queued in DSMR-reader until new ones will be rejected.
 This prevents creating an infinite backlog of messages queued.
+
 However, situationally you may increase the maximum for whatever reason along your local setup.
 Omit to use the default.
+
+.. hint::
+
+    **This setting is optional**
+
+    .. versionadded:: v4.16
+
+
+----
+
+
+``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MQTT messages sent by DSMR-reader to your broker with a ``retain`` flag, meaning that the broker will remember the last value received for those topics.
+Updating retained MQTT topics consecutively with the same value has no effect. Therefor DSMR-reader caches the last value sent for each topic.
+DSMR-reader will not queue nor send MQTT messages that exactly match the previous one, greatly reducing the number of MQTT messages sent.
+
+However, situationally you may want to decrease cache duration or disable it entirely. Set to ``0`` to disable. Omit to use the default.
 
 .. hint::
 

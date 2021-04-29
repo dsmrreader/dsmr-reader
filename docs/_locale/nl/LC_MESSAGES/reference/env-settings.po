@@ -226,7 +226,8 @@ msgstr "Zie ``DATABASES.CONN_MAX_AGE`` in `Django docs <https://docs.djangoproje
 
 #: ../../reference/env-settings.rst:223 ../../reference/env-settings.rst:246
 #: ../../reference/env-settings.rst:428 ../../reference/env-settings.rst:452
-#: ../../reference/env-settings.rst:469 ../../reference/env-settings.rst:487
+#: ../../reference/env-settings.rst:469 ../../reference/env-settings.rst:488
+#: ../../reference/env-settings.rst:507
 msgid "**This setting is optional**"
 msgstr "**Deze instelling is optioneel**"
 
@@ -362,5 +363,21 @@ msgid "``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``"
 msgstr "``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``"
 
 #: ../../reference/env-settings.rst:480
-msgid "The maximum amount of MQTT messages queued in DSMR-reader until new ones will be rejected. This prevents creating an infinite backlog of messages queued. However, situationally you may increase the maximum for whatever reason along your local setup. Omit to use the default."
-msgstr "Het maximum aantal MQTT-berichten dat achtergehouden wordt totdat ze verzonden kunnen worden. Als dit maximum bereikt wordt, weigert DSMR-reader nieuwe MQTT-berichten. Dit voorkomt dat oneindig veel berichten zich opstapelen. Desondanks kan het zijn dat je specifiek in je eigen situatie een ander maximum wilt. Laat weg om de standaardwaarde te gebruiken."
+msgid "The maximum amount of MQTT messages queued in DSMR-reader until new ones will be rejected. This prevents creating an infinite backlog of messages queued."
+msgstr "Het maximum aantal MQTT-berichten dat achtergehouden wordt totdat ze verzonden kunnen worden. Als dit maximum bereikt wordt, weigert DSMR-reader nieuwe MQTT-berichten. Dit voorkomt dat oneindig veel berichten zich opstapelen."
+
+#: ../../reference/env-settings.rst:483
+msgid "However, situationally you may increase the maximum for whatever reason along your local setup. Omit to use the default."
+msgstr "Desondanks kan het zijn dat je specifiek in je eigen situatie een ander maximum wilt. Laat weg om de standaardwaarde te gebruiken."
+
+#: ../../reference/env-settings.rst:497
+msgid "``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``"
+msgstr "``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``"
+
+#: ../../reference/env-settings.rst:499
+msgid "MQTT messages sent by DSMR-reader to your broker with a ``retain`` flag, meaning that the broker will remember the last value received for those topics. Updating retained MQTT topics consecutively with the same value has no effect. Therefor DSMR-reader caches the last value sent for each topic. DSMR-reader will not queue nor send MQTT messages that exactly match the previous one, greatly reducing the number of MQTT messages sent."
+msgstr "DSMR-reader stuurt MQTT-berichten naar je broker met een zogenaamde ``retain`` vlag. Daarmee onthoudt de broker telkens de laatste waarde voor die topics. Het bijwerken van zulke topics, met telkens dezelfde waarde, heeft dan ook geen effect. Daarom gebruikt DSMR-reader een cache om ook zelf de laatste verstuurde waarde voor elke topic bij te houden. Achtereenvolgende berichten voor hetzelfde topic met exact dezelfde waarde worden daardoor niet dubbel verstuurd. Dit verkleint het aantal nodige MQTT-berichten aanzienlijk."
+
+#: ../../reference/env-settings.rst:503
+msgid "However, situationally you may want to decrease cache duration or disable it entirely. Set to ``0`` to disable. Omit to use the default."
+msgstr "Desondanks kan het zijn dat je de caching-duur wilt verlagen of zelfs helemaal uitschakelen. Stel in op ``0`` om uit te schakelen. Laat weg om de standaardwaarde te gebruiken."

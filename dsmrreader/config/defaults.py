@@ -18,6 +18,8 @@ DSMRREADER_LOGLEVEL = config('DSMRREADER_LOGLEVEL', cast=str, default=None)
 if DSMRREADER_LOGLEVEL in ('DEBUG', 'WARNING'):
     LOGGING['loggers']['dsmrreader']['level'] = DSMRREADER_LOGLEVEL
 
+CACHES['mqtt']['TIMEOUT'] = config('DSMRREADER_MQTT_MAX_CACHE_TIMEOUT', cast=int, default=3600)
+
 DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', cast=Csv(post_process=tuple), default='')
 
 # Officially we only support PostgreSQL, but w/e.
