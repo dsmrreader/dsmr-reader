@@ -19,7 +19,7 @@ def queue_message(topic, payload):
     """
 
     if queue.Message.objects.all().count() >= settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:
-        return logger.warning('MQTT: Ignoring %s to max messages in queue reached', topic)
+        return logger.warning('MQTT: Rejecting message for topic due to maximum queue size: %s', topic)
 
     cache_storage = caches['mqtt']
     cache_key = topic
@@ -27,12 +27,15 @@ def queue_message(topic, payload):
 
     # We could have cached the topic, but with different data. Only ignore exactly the same topic + data.
     if cached_data is not None and cached_data == payload:
-        return logger.debug('MQTT: Ignoring %s due to cache', topic)
+        # This is by design, since we publish all messages with the "retain" flag for the broker.
+        return logger.debug(
+            'MQTT: Rejecting message as it exactly matches the previous message sent for this topic: %s', topic
+        )
 
     _, created = queue.Message.objects.get_or_create(topic=topic, payload=payload)
     cache_storage.set(cache_key, payload)
 
     if not created:
-        return logger.debug('MQTT: Ignoring %s due to queue', topic)
+        return logger.debug('MQTT: Rejecting message due to similar message already queued for this topic: %s', topic)
 
     logger.debug('MQTT: Queued message for %s: %s', topic, payload)

@@ -134,6 +134,10 @@ class TestBroker(TestCase):
         is_connected_mock.return_value = True
         client = paho.Client('xxx')
 
+        msginfo_mock = mock.MagicMock()
+        msginfo_mock.is_published.side_effect = [False, True]  # fail is_published() first, then OK
+        publish_mock.return_value = msginfo_mock
+
         # With queue.
         loop_mock.reset_mock()
         queue.Message.objects.create(topic='x', payload='y')

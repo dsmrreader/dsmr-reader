@@ -71,22 +71,25 @@ def run(mqtt_client):
     logger.info('MQTT: Processing %d message(s)', len(message_queue))
 
     for current in message_queue:
-        logger.debug('MQTT: Publishing message (#%s) for %s: %s', current.pk, current.topic, current.payload)
-        mqtt_client.publish(
+        logger.debug('MQTT: Publishing queued message (#%s) for %s: %s', current.pk, current.topic, current.payload)
+        result = mqtt_client.publish(
             topic=current.topic,
             payload=current.payload,
             qos=broker_settings.qos,
             retain=True
         )
 
-        logger.debug('MQTT: Deleting published message (#%s)', current.pk)
+        # Does nothing when using QoS 0 (as designed). For QoS 1 and 2 however, this blocks further processing and
+        # message deletion below, until the broker acknowledges the message received.
+        logger.debug('MQTT: Waiting for message (#%s) to be marked published', current.pk)
+        while not result.is_published():
+            mqtt_client.loop(0.5)
+
+        logger.debug('MQTT: Deleting published message (#%s) from queue', current.pk)
         current.delete()
 
     # Delete any overflow in messages.
     queue.Message.objects.all().delete()
-
-    # Networking.
-    mqtt_client.loop(0.1)
 
     # We cannot raise any exception in callbacks, this is our check point. This MUST be called AFTER the first loop().
     if not mqtt_client.is_connected():
@@ -110,7 +113,7 @@ def on_connect(client, userdata, flags, rc):
         4: 'Connection refused - bad username or password',
         5: 'Connection refused - not authorised',
     }
-    logger.debug('MQTT: Paho client: on_connect(userdata, flags, rc) %s %s %s', userdata, flags, rc)
+    logger.debug('MQTT: (Paho on_connect) %s | %s', flags, rc)
 
     try:
         logger.debug('MQTT: --- %s : %s -> %s', client._host, client._port, RC_MAPPING[rc])
@@ -126,7 +129,7 @@ def on_disconnect(client, userdata, rc):
         If MQTT_ERR_SUCCESS (0), the callback was called in response to a disconnect() call.
         If any other value the disconnection was unexpected, such as might be caused by a network error.
     """
-    logger.debug('MQTT: Paho client: on_disconnect(userdata, rc) %s %s', userdata, rc)
+    logger.debug('MQTT: (Paho on_disconnect) %s', rc)
 
     if rc != paho.MQTT_ERR_SUCCESS:
         logger.warning('MQTT: --- Unexpected disconnect, re-connecting...')
@@ -140,4 +143,4 @@ def on_disconnect(client, userdata, rc):
 
 def on_log(client, userdata, level, buf):
     """ MQTT client callback for logging. Outputs some debug logging. """
-    logger.debug('MQTT: Paho client: on_log(userdata, level, buf) %s %s %s', userdata, level, buf)
+    logger.debug('MQTT: (Paho on_log) %s', buf)

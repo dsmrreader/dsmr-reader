@@ -32,7 +32,10 @@ v4.16.0 - 2021-05-xx
 - ``Added`` New ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE`` env var for MQTT max queue size [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
 - ``Added`` New ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT`` env var for MQTT cache duration [`#1096 <https://github.com/dsmrreader/dsmr-reader/issues/1096>`_]
 
+- ``Changed`` MQTT now uses ``Quality of Service: Level 2`` for new installations [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
+
 - ``Fixed`` Laatste meting op basis van timestamp i.p.v. ID [`#1376 <https://github.com/dsmrreader/dsmr-reader/issues/1376>`_]
+- ``Fixed`` Actually implement ``Quality of Service: Level 2`` for MQTT [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
 
 
 v4.15.2 - 2021-04-18
