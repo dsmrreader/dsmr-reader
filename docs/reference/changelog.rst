@@ -26,7 +26,7 @@ Current version
 
 
 
-v4.16.0 - 2021-05-xx
+v4.16.0 - 2021-05-10
 --------------------
 
 - ``Added`` New ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE`` env var for MQTT max queue size [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
