@@ -47,7 +47,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install APT dependencies
-        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Cached PIP dependencies
         uses: actions/cache@v2
