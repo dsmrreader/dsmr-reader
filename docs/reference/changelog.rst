@@ -2,11 +2,6 @@ Changelog
 #########
 
 
-.. tip::
-
-    :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
-
-
 .. contents::
     :depth: 2
 
@@ -17,17 +12,21 @@ Changelog
 Current version
 ===============
 
-.. contents:: :local:
-    :depth: 1
-
 .. tip::
 
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-
 v4.16.0 - 2021-05-10
 --------------------
+
+.. note::
+
+    The MQTT implementation has been reworked. If the connection between your MQTT broker and DSMR-reader is unstable, consider using MQTT **Quality of Service (QoS) level 1 or 2** (in the broker settings).
+    It will then instruct DSMR-reader to not discard outgoing queued MQTT messages anymore until the broker confirms to DSMR-reader receiving them.
+
+    Previous DSMR-reader versions (or when using QoS level 0) do **not** guarantee this and defaulted to (QoS) level 0, causing you to *possibly* lose MQTT updates when the connection is unstable.
+
 
 - ``Added`` New ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE`` env var for MQTT max queue size [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
 - ``Added`` New ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT`` env var for MQTT cache duration [`#1096 <https://github.com/dsmrreader/dsmr-reader/issues/1096>`_]
