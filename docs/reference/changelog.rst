@@ -22,7 +22,7 @@ v4.16.1 - 2021-05-11
 
 .. note::
 
-    There was a bug in the previous ``v4.16.0`` release when using MQTT with QoS level 0 (the former default). This should be fixed in the this new release.
+    There was a bug in the previous ``v4.16.0`` release when using MQTT with QoS level 0 (the former default). This should be fixed in this new release.
 
 - ``Fixed`` MQTT client keeps reconnecting when using QoS level 0 [`#1383 <https://github.com/dsmrreader/dsmr-reader/issues/1383>`_]
 - ``Fixed`` Automatically reconnect MQTT broker [`#1384 <https://github.com/dsmrreader/dsmr-reader/issues/1384>`_]
