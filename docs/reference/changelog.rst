@@ -17,9 +17,10 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.17.0 - 2021-xx-xx
+v4.16.1 - 2021-05-11
 --------------------
 
+- ``Fixed`` MQTT client keeps reconnecting when using QoS level 0 [`#1383 <https://github.com/dsmrreader/dsmr-reader/issues/1383>`_]
 
 
 v4.16.0 - 2021-05-10

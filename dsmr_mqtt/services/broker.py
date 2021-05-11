@@ -79,11 +79,15 @@ def run(mqtt_client):
             retain=True
         )
 
+        # Do NOT remove this. It is both required for networking when having QoS > 1 and mqtt_client.is_connected()
+        # below. Omitting this loop will have the client think it's disconnected.
+        mqtt_client.loop(0.5)
+
         # Does nothing when using QoS 0 (as designed). For QoS 1 and 2 however, this blocks further processing and
         # message deletion below, until the broker acknowledges the message received.
         logger.debug('MQTT: Waiting for message (#%s) to be marked published', current.pk)
         while not result.is_published():
-            mqtt_client.loop(0.5)
+            mqtt_client.loop(0.1)
 
         logger.debug('MQTT: Deleting published message (#%s) from queue', current.pk)
         current.delete()
