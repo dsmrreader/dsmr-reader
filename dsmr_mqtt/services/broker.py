@@ -68,37 +68,42 @@ def run(mqtt_client):
     if not message_queue:
         return
 
-    logger.info('MQTT: Processing %d message(s)', len(message_queue))
+    logger.info('MQTT: Processing %d message(s) using QoS level %d', len(message_queue), broker_settings.qos)
 
     for current in message_queue:
         logger.debug('MQTT: Publishing queued message (#%s) for %s: %s', current.pk, current.topic, current.payload)
-        result = mqtt_client.publish(
+        message_info = mqtt_client.publish(
             topic=current.topic,
             payload=current.payload,
             qos=broker_settings.qos,
             retain=True
         )
+        # Make sure to call this, since message_info.is_published() will ALWAYS be True when using QoS level 0!
+        loop_result = mqtt_client.loop(settings.DSMRREADER_CLIENT_TIMEOUT)
 
-        # Do NOT remove this. It is both required for networking when having QoS > 1 and mqtt_client.is_connected()
-        # below. Omitting this loop will have the client think it's disconnected.
-        mqtt_client.loop(0.5)
+        # Detect any networking errors early.
+        if loop_result != paho.MQTT_ERR_SUCCESS:
+            signal_reconnect()
+            raise RuntimeError('MQTT: Client loop() failed, requesting restart...')
+        print('message_info.is_published()', message_info.is_published())
 
-        # Does nothing when using QoS 0 (as designed). For QoS 1 and 2 however, this blocks further processing and
-        # message deletion below, until the broker acknowledges the message received.
-        logger.debug('MQTT: Waiting for message (#%s) to be marked published', current.pk)
-        while not result.is_published():
-            mqtt_client.loop(0.1)
+        # Always True when using QoS 0 (as designed). For QoS 1 and 2 however, this BLOCKS further processing and
+        # message deletion below, until the broker acknowledges the message was received.
+        # Networking errors should terminate this loop as well, along with a request for restart.
+        while not message_info.is_published():
+            logger.debug('MQTT: Waiting for message (#%s) to be marked published by broker', current.pk)
+            loop_result = mqtt_client.loop(settings.DSMRREADER_CLIENT_TIMEOUT)
+
+            # Prevents infinite loop on connection errors.
+            if loop_result != paho.MQTT_ERR_SUCCESS:
+                signal_reconnect()
+                raise RuntimeError('MQTT: Client loop() failed, requesting restart to prevent waiting forever...')
 
         logger.debug('MQTT: Deleting published message (#%s) from queue', current.pk)
         current.delete()
 
     # Delete any overflow in messages.
     queue.Message.objects.all().delete()
-
-    # We cannot raise any exception in callbacks, this is our check point. This MUST be called AFTER the first loop().
-    if not mqtt_client.is_connected():
-        signal_reconnect()
-        raise RuntimeError('MQTT: Client no longer connected')
 
 
 def signal_reconnect():

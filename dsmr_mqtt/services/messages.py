@@ -19,7 +19,11 @@ def queue_message(topic, payload):
     """
 
     if queue.Message.objects.all().count() >= settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:
-        return logger.warning('MQTT: Rejecting message for topic due to maximum queue size: %s', topic)
+        return logger.warning(
+            'MQTT: Rejecting message for topic due to maximum queue size (%d): %s',
+            settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE,
+            topic
+        )
 
     cache_storage = caches['mqtt']
     cache_key = topic

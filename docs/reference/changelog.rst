@@ -20,7 +20,12 @@ Current version
 v4.16.1 - 2021-05-11
 --------------------
 
+.. note::
+
+    There was a bug in the previous ``v4.16.0`` release when using MQTT with QoS level 0 (the former default). This should be fixed in the this new release.
+
 - ``Fixed`` MQTT client keeps reconnecting when using QoS level 0 [`#1383 <https://github.com/dsmrreader/dsmr-reader/issues/1383>`_]
+- ``Fixed`` Automatically reconnect MQTT broker [`#1384 <https://github.com/dsmrreader/dsmr-reader/issues/1384>`_]
 
 
 v4.16.0 - 2021-05-10
@@ -32,7 +37,6 @@ v4.16.0 - 2021-05-10
     It will then instruct DSMR-reader to not discard outgoing queued MQTT messages anymore until the broker confirms to DSMR-reader receiving them.
 
     Previous DSMR-reader versions (or when using QoS level 0) do **not** guarantee this and defaulted to (QoS) level 0, causing you to *possibly* lose MQTT updates when the connection is unstable.
-
 
 - ``Added`` New ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE`` env var for MQTT max queue size [`#1375 <https://github.com/dsmrreader/dsmr-reader/issues/1375>`_]
 - ``Added`` New ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT`` env var for MQTT cache duration [`#1096 <https://github.com/dsmrreader/dsmr-reader/issues/1096>`_]

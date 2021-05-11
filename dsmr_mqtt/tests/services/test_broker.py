@@ -117,10 +117,9 @@ class TestBroker(TestCase):
         dsmr_mqtt.services.broker.on_connect(client, None, None, rc=-1)
 
     @mock.patch('paho.mqtt.client.Client.loop')
-    @mock.patch('paho.mqtt.client.Client.is_connected')
     @mock.patch('paho.mqtt.client.Client.publish')
-    def test_run_no_data(self, publish_mock, is_connected_mock, loop_mock):
-        is_connected_mock.return_value = True
+    def test_run_no_data(self, publish_mock, loop_mock):
+        loop_mock.return_value = paho.MQTT_ERR_SUCCESS
         client = paho.Client('xxx')
 
         self.assertFalse(loop_mock.called)
@@ -128,10 +127,9 @@ class TestBroker(TestCase):
         self.assertFalse(loop_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.loop')
-    @mock.patch('paho.mqtt.client.Client.is_connected')
     @mock.patch('paho.mqtt.client.Client.publish')
-    def test_run(self, publish_mock, is_connected_mock, loop_mock):
-        is_connected_mock.return_value = True
+    def test_run(self, publish_mock, loop_mock):
+        loop_mock.return_value = paho.MQTT_ERR_SUCCESS
         client = paho.Client('xxx')
 
         msginfo_mock = mock.MagicMock()
@@ -150,11 +148,11 @@ class TestBroker(TestCase):
         self.assertTrue(publish_mock.called)
 
     @mock.patch('paho.mqtt.client.Client.loop')
-    @mock.patch('paho.mqtt.client.Client.is_connected')
     @mock.patch('paho.mqtt.client.Client.publish')
-    def test_run_cleanup(self, publish_mock, is_connected_mock, *mocks):
+    def test_run_cleanup(self, publish_mock, loop_mock):
         """ Test whether any excess of messages is cleared. """
-        is_connected_mock.return_value = True
+        loop_mock.return_value = paho.MQTT_ERR_SUCCESS
+
         client = paho.Client('xxx')
         MAX = settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
 
@@ -173,12 +171,29 @@ class TestBroker(TestCase):
 
         self.assertFalse(queue.Message.objects.exists())
 
-    @mock.patch('paho.mqtt.client.Client.loop')
     @mock.patch('paho.mqtt.client.Client.publish')
-    @mock.patch('paho.mqtt.client.Client.is_connected')
-    def test_run_disconnected(self, is_connected_mock, *mocks):
-        """ Check whether we exit the command when we're disconnected at some point. """
-        is_connected_mock.return_value = False  # Connection failure.
+    @mock.patch('paho.mqtt.client.Client.loop')
+    def test_run_disconnected(self, loop_mock, *mocks):
+        """ Check whether we exit the command when we're disconnected at some point. For all QoS levels. """
+        loop_mock.return_value = paho.MQTT_ERR_CONN_LOST  # Connection failure.
+
+        client = paho.Client('xxx')
+        Message.objects.create(topic='x', payload='y')
+
+        with self.assertRaises(RuntimeError):
+            dsmr_mqtt.services.broker.run(mqtt_client=client)
+
+    @mock.patch('paho.mqtt.client.Client.publish')
+    @mock.patch('paho.mqtt.client.Client.loop')
+    def test_run_disconnected_qos1_or_qos2(self, loop_mock, publish_mock):
+        """ Similar to test_run_disconnected(), but testing the internal loop() check for QoS 1/2. """
+        # Ok first, then fail. Additional OK, for coverage.
+        loop_mock.side_effect = [paho.MQTT_ERR_SUCCESS, paho.MQTT_ERR_SUCCESS, paho.MQTT_ERR_CONN_LOST]
+
+        message_info_mock = mock.MagicMock()
+        message_info_mock.is_published.return_value = False
+        publish_mock.return_value = message_info_mock
+
         client = paho.Client('xxx')
         Message.objects.create(topic='x', payload='y')
 
