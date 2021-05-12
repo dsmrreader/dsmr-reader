@@ -85,7 +85,6 @@ def run(mqtt_client):
         if loop_result != paho.MQTT_ERR_SUCCESS:
             signal_reconnect()
             raise RuntimeError('MQTT: Client loop() failed, requesting restart...')
-        print('message_info.is_published()', message_info.is_published())
 
         # Always True when using QoS 0 (as designed). For QoS 1 and 2 however, this BLOCKS further processing and
         # message deletion below, until the broker acknowledges the message was received.

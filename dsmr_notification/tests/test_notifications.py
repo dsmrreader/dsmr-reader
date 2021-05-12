@@ -99,7 +99,7 @@ class TestServices(TestCase):
         next_notification = timezone.localtime(notification_settings.next_notification)
         expected = timezone.datetime(2018, 10, 28, 6, 0, 0)
         expected = timezone.localtime(timezone.make_aware(expected, pytz.timezone(settings.TIME_ZONE), is_dst=True))
-        print(next_notification, expected)
+
         self.assertEqual(next_notification, expected)
 
         # Check other way around as well, in March.
