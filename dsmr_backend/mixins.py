@@ -144,13 +144,15 @@ class InfiniteManagementCommandMixin:
     def _check_logger_level(self):
         logging_level = logger.getEffectiveLevel()
 
-        if logging_level > logging.INFO:
-            print(
-                'Current logging level set to "{}". More information can be found here: '
-                'https://dsmr-reader.readthedocs.io/en/v4/troubleshooting.html#logging'. format(
-                    logging.getLevelName(logging_level)
-                )
+        if logging_level <= logging.INFO:
+            return
+
+        print(
+            'Current logging level set to "{}". More information can be found here: '
+            'https://dsmr-reader.readthedocs.io/en/latest/how-to/troubleshooting/enabling-debug-logging.html'.format(
+                logging.getLevelName(logging_level)
             )
+        )
 
 
 class ReadOnlyAdminModel(admin.ModelAdmin):
