@@ -17,8 +17,10 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.17.0 - 2021-xx-xx
+v4.16.2 - 2021-05-12
 --------------------
+
+- ``Fixed`` Removed print() statement that still lingered around after debugging and testing the previous release
 
 
 v4.16.1 - 2021-05-11
