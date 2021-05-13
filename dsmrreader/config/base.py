@@ -169,7 +169,7 @@ LOGGING = {
             'style': '{',
         },
         'verbose': {
-            'format': '{asctime} | {levelname:8} {module}.{funcName}:{lineno} | {message}',
+            'format': '{asctime} | {levelname:8} {module:12} {funcName:30} {lineno:4} | {message}',
             'style': '{',
         },
     },
