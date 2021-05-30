@@ -23,11 +23,11 @@ class Export(LoginRequiredMixin, TemplateView):
         context_data = super(Export, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
 
-        day_statistics = DayStatistics.objects.all().order_by('pk')
+        day_statistics = DayStatistics.objects.all().order_by('day')
 
         try:
             context_data['start_date'] = day_statistics[0].day
-            context_data['end_date'] = day_statistics.order_by('-pk')[0].day
+            context_data['end_date'] = day_statistics.order_by('-day')[0].day
         except IndexError:
             context_data['start_date'] = None
             context_data['end_date'] = None

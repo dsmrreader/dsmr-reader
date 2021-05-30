@@ -17,6 +17,13 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
+
+v4.17.0 - 2021-06-xx
+--------------------
+
+- ``Fixed`` CSV export kapot na importeren historische data [`#1395 <https://github.com/dsmrreader/dsmr-reader/issues/1395>`_]
+
+
 v4.16.3 - 2021-05-30
 --------------------
 
