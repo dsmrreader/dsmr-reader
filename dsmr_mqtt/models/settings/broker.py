@@ -78,6 +78,7 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Client ID'),
         help_text=_('The client ID used to identify DSMR-reader sending the MQTT messages.')
     )
+    # @todo @deprecated No longer in use. Drop in later release safely.
     qos = models.IntegerField(
         default=QOS_2,
         choices=QOS_CHOICES,

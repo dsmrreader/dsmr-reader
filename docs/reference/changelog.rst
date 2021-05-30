@@ -17,8 +17,14 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.17.0 - 2021-xx-xx
+v4.16.3 - 2021-05-30
 --------------------
+
+.. note::
+
+    The MQTT QoS level is no longer configurable. Level 2 is now always used, since this seems to work fine for any users that had issues recently.
+
+- ``Changed`` Hardcoded to MQTT QoS level 2 [`#1393 <https://github.com/dsmrreader/dsmr-reader/issues/1393>`_]
 
 
 v4.16.2 - 2021-05-12

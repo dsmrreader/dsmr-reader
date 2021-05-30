@@ -24,7 +24,12 @@ def initialize_client():
         broker_settings.update(enabled=False)
         raise RuntimeError('No hostname found in settings')
 
-    logger.debug('MQTT: Initializing MQTT client for "%s:%d"', broker_settings.hostname, broker_settings.port)
+    logger.debug(
+        'MQTT: Initializing MQTT client for "%s:%d" (QoS level %d)',
+        broker_settings.hostname,
+        broker_settings.port,
+        settings.DSMRREADER_MQTT_QOS_LEVEL
+    )
     mqtt_client = paho.Client(client_id=broker_settings.client_id)
     mqtt_client.on_connect = on_connect
     mqtt_client.on_disconnect = on_disconnect
@@ -60,7 +65,6 @@ def initialize_client():
 
 def run(mqtt_client):
     """ Reads any messages from the queue and publishing them to the MQTT broker. """
-    broker_settings = MQTTBrokerSettings.get_solo()
 
     # Keep batches small, only send the latest X messages. The rest will be trimmed (in case of delay).
     message_queue = queue.Message.objects.all().order_by('-pk')[0:settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE]
@@ -68,18 +72,18 @@ def run(mqtt_client):
     if not message_queue:
         return
 
-    logger.info('MQTT: Processing %d message(s) using QoS level %d', len(message_queue), broker_settings.qos)
+    logger.debug('MQTT: Processing %d message(s)', len(message_queue))
 
     for current in message_queue:
         logger.debug('MQTT: Publishing queued message (#%s) for %s: %s', current.pk, current.topic, current.payload)
         message_info = mqtt_client.publish(
             topic=current.topic,
             payload=current.payload,
-            qos=broker_settings.qos,
+            qos=settings.DSMRREADER_MQTT_QOS_LEVEL,
             retain=True
         )
-        # Make sure to call this, since message_info.is_published() will ALWAYS be True when using QoS level 0!
-        loop_result = mqtt_client.loop(settings.DSMRREADER_CLIENT_TIMEOUT)
+
+        loop_result = mqtt_client.loop(0.1)
 
         # Detect any networking errors early.
         if loop_result != paho.MQTT_ERR_SUCCESS:
@@ -91,7 +95,7 @@ def run(mqtt_client):
         # Networking errors should terminate this loop as well, along with a request for restart.
         while not message_info.is_published():
             logger.debug('MQTT: Waiting for message (#%s) to be marked published by broker', current.pk)
-            loop_result = mqtt_client.loop(settings.DSMRREADER_CLIENT_TIMEOUT)
+            loop_result = mqtt_client.loop(0.5)
 
             # Prevents infinite loop on connection errors.
             if loop_result != paho.MQTT_ERR_SUCCESS:

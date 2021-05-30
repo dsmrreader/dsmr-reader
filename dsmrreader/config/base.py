@@ -165,11 +165,11 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'simple': {
-            'format': '{asctime} | {levelname:8} | {message}',
+            'format': '{asctime} {levelname:8} | {message}',
             'style': '{',
         },
         'verbose': {
-            'format': '{asctime} | {levelname:8} {module:12} {funcName:30} {lineno:4} | {message}',
+            'format': '{asctime} {levelname:8} {module:12} {funcName:30} {lineno:4} | {message}',
             'style': '{',
         },
     },
