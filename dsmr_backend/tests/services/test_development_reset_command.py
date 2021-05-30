@@ -9,7 +9,7 @@ from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 
 class TestCommands(InterceptCommandStdoutMixin, TestCase):
     @override_settings(DEBUG=True)
-    def test_clear_consumption(self):
+    def test_development_reset(self):
         self._intercept_command_stdout('development_reset')
 
     @override_settings(DEBUG=False)
