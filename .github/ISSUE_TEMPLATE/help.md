@@ -1,19 +1,13 @@
 ---
-name: 🤔 Ik heb hulp nodig
-about: Je hebt hulp nodig voor een probleem waar je tegenaan loopt en zelf niet uit komt. Bijvoorbeeld bij de installatie of het instellen van de applicatie.
+name: 🤔 I need help
+about: You require support or have generic questions regarding DSMR-reader. 
 title: ''
 labels: question
 assignees: ''
 ---
 
-<!--
-- 🇳🇱 Lees eerst de "CONTRIBUTING" info: https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md
-- 🇺🇸 Read the "CONTRIBUTING" info first: https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md
+> 🇳🇱 Lees eerst [deze info](https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md) om jezelf te helpen.
+> 
+> 🇬🇧 First read [this info](https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md) for self-service.
 
-Tip: Want to format a large code block? Use triple backtics (`) above and below the code, e.g.:
-```
-Multiline
-Code
-Block
-```
--->
+

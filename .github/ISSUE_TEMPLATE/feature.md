@@ -1,19 +1,13 @@
 ---
-name: 💡 Ik heb een suggestie
-about: Je wilt een suggestie doen voor nieuwe functionaliteit of andere verbeteringen.
+name: 💡 Idea / suggestion
+about: Request for improvement or a new feature.
 title: ''
 labels: review
 assignees: ''
 ---
 
-<!--
-- 🇳🇱 Lees eerst de "CONTRIBUTING" info: https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md
-- 🇺🇸 Read the "CONTRIBUTING" info first: https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md
+> 🇳🇱 Lees eerst [deze info](https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md) om jezelf te helpen.
+> 
+> 🇬🇧 First read [this info](https://github.com/dsmrreader/dsmr-reader/blob/v4/CONTRIBUTING.md) for self-service.
 
-Tip: Want to format a large code block? Use triple backtics (`) above and below the code, e.g.:
-```
-Multiline
-Code
-Block
-```
--->
+
