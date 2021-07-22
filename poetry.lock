@@ -150,19 +150,19 @@ python-versions = "*"
 
 [[package]]
 name = "django"
-version = "3.2.5"
+version = "3.1.13"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-asgiref = ">=3.3.2,<4"
+asgiref = ">=3.2.10,<4"
 pytz = "*"
 sqlparse = ">=0.2.2"
 
 [package.extras]
-argon2 = ["argon2-cffi (>=19.1.0)"]
+argon2 = ["argon2-cffi (>=16.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
@@ -252,7 +252,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
 name = "dropbox"
-version = "11.13.3"
+version = "11.14.0"
 description = "Official Dropbox API Client"
 category = "main"
 optional = false
@@ -944,7 +944,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6 || ^3.7 || ^3.8 || ^3.9"
-content-hash = "43c02b713e0668796df56344a684662dc4adb6801a051bbe3f90f4002c4a2943"
+content-hash = "07778438231e73ea45e0247ede75b0435864fe3e853d626f1d6538525c1e79b9"
 
 [metadata.files]
 alabaster = [
@@ -1056,8 +1056,8 @@ crcmod = [
     {file = "crcmod-1.7.win32-py3.1.msi", hash = "sha256:50586ab48981f11e5b117523d97bb70864a2a1af246cf6e4f5c4a21ef4611cd1"},
 ]
 django = [
-    {file = "Django-3.2.5-py3-none-any.whl", hash = "sha256:c58b5f19c5ae0afe6d75cbdd7df561e6eb929339985dbbda2565e1cabb19a62e"},
-    {file = "Django-3.2.5.tar.gz", hash = "sha256:3da05fea54fdec2315b54a563d5b59f3b4e2b1e69c3a5841dda35019c01855cd"},
+    {file = "Django-3.1.13-py3-none-any.whl", hash = "sha256:a6e0d1ff11095b7394c079ade7094c73b2dc3df4a7a373c9b58ed73b77a97feb"},
+    {file = "Django-3.1.13.tar.gz", hash = "sha256:9f8be75646f62204320b195062b1d696ba28aa3d45ee72fb7c888ffaebc5bdb2"},
 ]
 django-admin-rangefilter = [
     {file = "django-admin-rangefilter-0.8.1.tar.gz", hash = "sha256:fa838d955a95e60cc3d0ebc3cbdfa4527b1a0a78664c0bb180403ff4d722c835"},
@@ -1095,9 +1095,9 @@ docutils = [
     {file = "docutils-0.16.tar.gz", hash = "sha256:c2de3a60e9e7d07be26b7f2b00ca0309c207e06c100f9cc2a94931fc75a478fc"},
 ]
 dropbox = [
-    {file = "dropbox-11.13.3-py2-none-any.whl", hash = "sha256:c3e3c5af1669db1c565b22f6eed2c3bdeb3ef57134e5e614d9334ea2fa37624a"},
-    {file = "dropbox-11.13.3-py3-none-any.whl", hash = "sha256:3b85320eb0d1cd2da1c8a34870a6c24dc2f74890de21865a1bb15e8c501e0573"},
-    {file = "dropbox-11.13.3.tar.gz", hash = "sha256:a31b1e01855f9d42e2b92d28ec99c2c1d46b8f973702e5b9d0b6855bb27408ad"},
+    {file = "dropbox-11.14.0-py2-none-any.whl", hash = "sha256:ea5cb9aae19fe01fa0f8553ed096e81e5bcd7279337208d84cee166d09eb2a04"},
+    {file = "dropbox-11.14.0-py3-none-any.whl", hash = "sha256:e7de5f0a99e3a0e1952624fb55379b32bd9693b7560f41dd7e3e1ceea1331f8f"},
+    {file = "dropbox-11.14.0.tar.gz", hash = "sha256:333f7221ae62df5e4a7fb3f62400e6ff3395e18806762c081ba3e11e3210e4dd"},
 ]
 execnet = [
     {file = "execnet-1.9.0-py2.py3-none-any.whl", hash = "sha256:a295f7cc774947aac58dde7fdc85f4aa00c42adf5d8f5468fc630c1acf30a142"},
