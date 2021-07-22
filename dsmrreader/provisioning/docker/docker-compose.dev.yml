@@ -1,0 +1,91 @@
+######################################################################
+# Compose for DSMR-reader development only, NEVER use in production! #
+######################################################################
+
+version: "3.7"
+
+services:
+  ### Commands
+  ## docker exec -it dsmr-app poetry run /app/tools/quick-test.sh
+  ## docker exec -it dsmr-app poetry run /app/tools/test-all.sh
+  ## docker exec -it dsmr-app poetry run /app/manage.py migrate
+  dsmr-app:
+    container_name: dsmr-app
+    build: .
+    command: poetry run /app/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - dsmr-db
+      - test-db-postgres
+      - test-db-mysql
+    environment:
+      # Development
+      - DSMRREADER_LOGLEVEL=DEBUG
+      - DJANGO_DATABASE_ENGINE=django.db.backends.postgresql
+      - DJANGO_DATABASE_HOST=dsmr-db
+      - DJANGO_DATABASE_PORT=5432
+      - DJANGO_DATABASE_NAME=dsmrreader
+      - DJANGO_DATABASE_USER=dsmrreader
+      - DJANGO_DATABASE_PASSWORD=dsmrreader
+      - DJANGO_SECRET_KEY=development
+      # Tests
+      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_HOST=test-db-postgres
+      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_PORT=5432
+      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_USER=testuser
+      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_PASSWORD=testpasswd
+      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_NAME=test_dsmrreader
+
+      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_HOST=test-db-mysql
+      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PORT=3306
+      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_USER=testuser
+      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PASSWORD=testpasswd
+      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_NAME=dsmrreader  # Django prefixes "test_" automatically.
+
+  dsmr-db:
+    container_name: dsmr-db
+    image: postgres:13
+    restart: always
+    volumes:
+      - ~/docker/dsmr-db/postgresql:/var/lib/postgresql/data
+    ports:
+      - 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    environment:
+      - POSTGRES_DB=dsmrreader
+      - POSTGRES_USER=dsmrreader
+      - POSTGRES_PASSWORD=dsmrreader
+
+  test-db-postgres:
+    container_name: test-db-postgres
+    image: postgres:13
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    environment:
+      - POSTGRES_DB=test_dsmrreader
+      - POSTGRES_USER=testuser
+      - POSTGRES_PASSWORD=testpasswd
+
+  test-db-mysql:
+    container_name: test-db-mysql
+    image: mysql:5.7
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    environment:
+     - MYSQL_DATABASE=test_dsmrreader
+     - MYSQL_USER=testuser
+     - MYSQL_PASSWORD=testpasswd
