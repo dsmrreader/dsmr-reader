@@ -78,6 +78,7 @@ services:
       - POSTGRES_USER=testuser
       - POSTGRES_PASSWORD=testpasswd
 
+  # @TODO: MySQL tests/connections is still broken.
   test-db-mysql:
     container_name: test-db-mysql
     image: mysql:5.7
