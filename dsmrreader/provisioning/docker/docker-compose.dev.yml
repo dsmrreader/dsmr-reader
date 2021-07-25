@@ -9,6 +9,8 @@ services:
   ## docker exec -it dsmr-app poetry run /app/tools/quick-test.sh
   ## docker exec -it dsmr-app poetry run /app/tools/test-all.sh
   ## docker exec -it dsmr-app poetry run /app/manage.py migrate
+  ## docker exec -it dsmr-app poetry run /app/manage.py development_reset
+
   dsmr-app:
     container_name: dsmr-app
     build: .
@@ -16,9 +18,11 @@ services:
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - 8000:8000
     depends_on:
+      # Development
       - dsmr-db
+      # Tests
       - test-db-postgres
       - test-db-mysql
     environment:
@@ -29,7 +33,7 @@ services:
       - DJANGO_DATABASE_PORT=5432
       - DJANGO_DATABASE_NAME=dsmrreader
       - DJANGO_DATABASE_USER=dsmrreader
-      - DJANGO_DATABASE_PASSWORD=dsmrreader
+      - DJANGO_DATABASE_PASSWORD=postgres-password
       - DJANGO_SECRET_KEY=development
       # Tests
       - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_HOST=test-db-postgres
@@ -48,10 +52,8 @@ services:
     container_name: dsmr-db
     image: postgres:13
     restart: always
-    volumes:
-      - ~/docker/dsmr-db/postgresql:/var/lib/postgresql/data
     ports:
-      - 5432
+      - 5432:5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
       interval: 10s
@@ -60,7 +62,7 @@ services:
     environment:
       - POSTGRES_DB=dsmrreader
       - POSTGRES_USER=dsmrreader
-      - POSTGRES_PASSWORD=dsmrreader
+      - POSTGRES_PASSWORD=postgres-password
 
   test-db-postgres:
     container_name: test-db-postgres
@@ -89,3 +91,4 @@ services:
      - MYSQL_DATABASE=test_dsmrreader
      - MYSQL_USER=testuser
      - MYSQL_PASSWORD=testpasswd
+     - MYSQL_ROOT_PASSWORD=testpasswd
