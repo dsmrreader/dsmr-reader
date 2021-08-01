@@ -70,6 +70,11 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         if selected_level == 'days':
             context_data['notes'] = Note.objects.filter(day=selected_datetime.date())
 
+            try:
+                context_data['day_statistics'] = DayStatistics.objects.get(day=selected_datetime.date())
+            except DayStatistics.DoesNotExist:
+                pass
+
         context_data['selected_level'] = selected_level
         context_data['selected_datetime'] = selected_datetime
         context_data['django_date_format'] = 'DJANGO_DATE_FORMAT'

@@ -1134,8 +1134,11 @@ msgstr "Archief"
 msgid "No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader."
 msgstr "Nog geen dagstatistieken gevonden. Gegevens zijn hier doorgaans zichtbaar vanaf de tweede dag dat DSMR-reader draait."
 
-msgid "Level"
-msgstr "Niveau"
+msgid "Data selection"
+msgstr "Dataselectie"
+
+msgid "Select level of detail."
+msgstr "Selecteer detailniveau."
 
 msgid "Days"
 msgstr "Dagen"
@@ -1146,8 +1149,8 @@ msgstr "Maanden"
 msgid "Years"
 msgstr "Jaren"
 
-msgid "Pick a day, month or year"
-msgstr "Kies een dag, maand of jaar"
+msgid "Pick a day, month or year."
+msgstr "Kies een dag, maand of jaar."
 
 msgid "Loading..."
 msgstr "Bezig met laden..."
@@ -1526,6 +1529,15 @@ msgstr "Max"
 msgid "Avg"
 msgstr "Gem"
 
+msgid "Meter positions"
+msgstr "Meterstanden"
+
+msgid "Meter positions of first reading of the day"
+msgstr "Meterstanden bij eerste meting van de dag"
+
+msgid "Delivered"
+msgstr "Verbruikt"
+
 #, python-format
 msgid "%(data_count)s data point"
 msgid_plural "%(data_count)s data points"
@@ -1567,9 +1579,6 @@ msgstr "Uitleg grafiekgebruik"
 
 msgid "Additionally, when using a DSMR v5 smart meter"
 msgstr "Daarnaast, indien je een DSMR v5 slimme meter gebruikt"
-
-msgid "Delivered"
-msgstr "Verbruikt"
 
 msgid "Recent electricity usage"
 msgstr "Recent elektriciteitsvermogen"
@@ -1631,9 +1640,6 @@ msgstr "Er zijn geen ongelezen notificaties."
 msgid "No data found yet. This page should display data as soon as the first reading is processed by DSMR-reader."
 msgstr "Nog geen gegevens gevonden. Deze pagina weergeeft gegevens zodra de eerste meting door DSMR-reader is verwerkt."
 
-msgid "Meter positions"
-msgstr "Meterstanden"
-
 msgid "Electricity (combined)"
 msgstr "Elektriciteit (gecombineerd)"
 
@@ -1657,6 +1663,12 @@ msgstr "Aantal spanningspieken in fase L3"
 
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
+
+msgid "Statistic"
+msgstr "Statistiek"
+
+msgid "Logged date and time"
+msgstr "Vastgelegde datum/tijd"
 
 msgid "Highest usage (L1)"
 msgstr "Hoogste verbruik (L1)"
@@ -2616,3 +2628,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Level"
+#~ msgstr "Niveau"

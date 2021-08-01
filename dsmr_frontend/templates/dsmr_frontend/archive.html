@@ -16,49 +16,59 @@
 
 {% if capabilities.any and start_date and end_date %}
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-12">
             <div class="panel datepicker-panel">
                 <header class="panel-heading centered-header">
-                    {% blocktranslate %}Level{% endblocktranslate %}
+                    {% blocktranslate %}Data selection{% endblocktranslate %}
                 </header>
                 <div class="panel-body archive-header-panel-body">
-                    <div class="col-sm-12">
-                        <div class="row center-block datepicker-level-name">{% translate "Days" %}</div>
-                        <div class="row center-block datepicker-level-icon">
-                            <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
-                        </div>
+                    <div class="row">
+                        <div class="col-lg-push-4 col-lg-4">
+                            <div class="center-block centered-header">
+                                <div class="italic">{% blocktranslate %}Select level of detail.{% endblocktranslate %}</div>
 
-                        <div class="row center-block datepicker-level-name">{% translate "Months" %}</div>
-                        <div class="row center-block datepicker-level-icon">
-                            <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
-                        </div>
+                                <span class="datepicker-level-icon">
+                                    <span class="center-block datepicker-level-name">{% translate "Days" %}</span>
+                                    <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
+                                </span>
 
-                        <div class="row center-block datepicker-level-name">{% translate "Years" %}</div>
-                        <div class="row center-block datepicker-level-icon">
-                            <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
+                                &nbsp;&nbsp;&nbsp;
+
+                                <span class="datepicker-level-icon">
+                                    <span class="center-block datepicker-level-name">{% translate "Months" %}</span>
+                                    <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
+                                </span>
+
+                                &nbsp;&nbsp;&nbsp;
+
+                                <span class="datepicker-level-icon">
+                                    <span class="center-block datepicker-level-name">{% translate "Years" %}</span>
+                                    <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-push-4 col-lg-4">
+                            <div class="center-block centered-header">
+                                <div class="italic">{% blocktranslate %}Pick a day, month or year.{% endblocktranslate %}</div>
+                                <div id="datepicker"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="panel datepicker-panel">
-                <header class="panel-heading centered-header">
-                    {% blocktranslate %}Pick a day, month or year{% endblocktranslate %}
-                </header>
-                <div class="panel-body archive-header-panel-body">
-                    <div class="row center-block datepicker-calendar-block">
-                        <div id="datepicker"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 datepicker-panel">
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 datepicker-panel">
             <div id="summary-loader" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
             <div id="summary-holder"></div>
         </div>
     </div>
-    
+
     <div class="row chart-holder">
         <div class="col-sm-12">
             <div class="panel">

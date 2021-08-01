@@ -5,11 +5,11 @@
 version: "3.7"
 
 services:
-  ### Commands
-  ## docker exec -it dsmr-app poetry run /app/tools/quick-test.sh
-  ## docker exec -it dsmr-app poetry run /app/tools/test-all.sh
-  ## docker exec -it dsmr-app poetry run /app/manage.py migrate
-  ## docker exec -it dsmr-app poetry run /app/manage.py development_reset
+  ### Common development commands:
+  ###   docker exec -it dsmr-app poetry run /app/tools/quick-test.sh
+  ###   docker exec -it dsmr-app poetry run /app/tools/test-all.sh
+  ###   docker exec -it dsmr-app poetry run /app/manage.py migrate
+  ###   docker exec -it dsmr-app poetry run /app/manage.py development_reset
 
   dsmr-app:
     container_name: dsmr-app
