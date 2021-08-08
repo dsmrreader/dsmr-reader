@@ -10,6 +10,8 @@ services:
   ###   docker exec -it dsmr-app poetry run /app/manage.py migrate
   ###   docker exec -it dsmr-app poetry run /app/manage.py development_reset
   ###   docker exec -it dsmr-app poetry run /app/tools/check-translations.sh
+  ###   docker exec -it dsmr-app poetry run /app/tools/check-requirements-updates.sh
+  ###   docker exec -it dsmr-app poetry update
   dsmr-app:
     container_name: dsmr-app
     build:
