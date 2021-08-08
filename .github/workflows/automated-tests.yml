@@ -5,6 +5,7 @@ on:
     branches:
       - v*
       - development
+      - wip/*
   pull_request: ~
 
 jobs:
