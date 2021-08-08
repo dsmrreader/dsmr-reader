@@ -4,13 +4,15 @@
 
 ```
 cd docs
-sphinx-autobuild . _build/html --port 10000
+sphinx-autobuild . _build/html --host 0.0.0.0 --port 10000
 ```
 Now visit http://127.0.0.1:10000
 
 
 
 ### Updating translations after editing RST files 
+
+Note: All the ``make`` commands below need to be ran in the virtualenv as well!
 
 ```
 cd docs

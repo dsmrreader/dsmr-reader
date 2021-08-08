@@ -5,23 +5,25 @@
 version: "3.7"
 
 services:
-  ### Common development commands:
   ###   docker exec -it dsmr-app poetry run /app/tools/quick-test.sh
   ###   docker exec -it dsmr-app poetry run /app/tools/test-all.sh
   ###   docker exec -it dsmr-app poetry run /app/manage.py migrate
   ###   docker exec -it dsmr-app poetry run /app/manage.py development_reset
-
+  ###   docker exec -it dsmr-app poetry run /app/tools/check-translations.sh
   dsmr-app:
     container_name: dsmr-app
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: poetry run /app/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
-      - 8000:8000
+      - '8000:8000'
     depends_on:
       # Development
       - dsmr-db
+      - dsmr-docs
       # Tests
       - test-db-postgres
       - test-db-mysql
@@ -53,7 +55,7 @@ services:
     image: postgres:13
     restart: always
     ports:
-      - 5432:5432
+      - '5432:5432'
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
       interval: 10s
@@ -63,6 +65,23 @@ services:
       - POSTGRES_DB=dsmrreader
       - POSTGRES_USER=dsmrreader
       - POSTGRES_PASSWORD=postgres-password
+
+  ###   docker exec -it dsmr-docs poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated"
+  ###   docker exec -it dsmr-docs bash -c 'poetry run make gettext && poetry run sphinx-intl update --line-width=-1 -p _build/locale -l nl'
+  ###   docker exec -it dsmr-docs poetry run make html
+  dsmr-docs:
+    container_name: dsmr-docs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app/docs/
+    command: poetry run sphinx-autobuild . _build/html --host 0.0.0.0 --port 10000
+    volumes:
+      - .:/app
+    ports:
+      - '10000:10000'
+    environment:
+      - SPHINXOPTS="-D language='nl'"
 
   test-db-postgres:
     container_name: test-db-postgres
