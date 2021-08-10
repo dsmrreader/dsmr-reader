@@ -9,6 +9,7 @@ services:
   ###   docker exec -it dsmr-app poetry run /app/tools/test-all.sh
   ###   docker exec -it dsmr-app poetry run /app/manage.py migrate
   ###   docker exec -it dsmr-app poetry run /app/manage.py development_reset
+  ###   docker exec -it dsmr-app poetry run /app/manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
   ###   docker exec -it dsmr-app poetry run /app/tools/check-translations.sh
   ###   docker exec -it dsmr-app poetry run /app/tools/check-requirements-updates.sh
   ###   docker exec -it dsmr-app poetry update
@@ -29,6 +30,8 @@ services:
       # Tests
       - test-db-postgres
       - test-db-mysql
+      # Misc
+      - dsmr-mqtt
     environment:
       # Development
       - DSMRREADER_LOGLEVEL=DEBUG
@@ -52,22 +55,6 @@ services:
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PASSWORD=testpasswd
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_NAME=dsmrreader  # Django prefixes "test_" automatically.
 
-  dsmr-db:
-    container_name: dsmr-db
-    image: postgres:13
-    restart: always
-    ports:
-      - '5432:5432'
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-    environment:
-      - POSTGRES_DB=dsmrreader
-      - POSTGRES_USER=dsmrreader
-      - POSTGRES_PASSWORD=postgres-password
-
   ###   docker exec -it dsmr-docs poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated"
   ###   docker exec -it dsmr-docs bash -c 'poetry run make gettext && poetry run sphinx-intl update --line-width=-1 -p _build/locale -l nl'
   ###   docker exec -it dsmr-docs poetry run make html
@@ -84,6 +71,30 @@ services:
       - '10000:10000'
     environment:
       - SPHINXOPTS="-D language='nl'"
+
+  dsmr-db:
+    container_name: dsmr-db
+    image: postgres:13
+    restart: always
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    environment:
+      - POSTGRES_DB=dsmrreader
+      - POSTGRES_USER=dsmrreader
+      - POSTGRES_PASSWORD=postgres-password
+
+  # After boot, edit "/mosquitto/config/mosquitto.conf", add the lines "listener 1883 0.0.0.0" & "allow_anonymous true" and restart the container.
+  dsmr-mqtt:
+    container_name: dsmr-mqtt
+    image: eclipse-mosquitto:2
+    restart: always
+    ports:
+      - '1883:1883'
 
   test-db-postgres:
     container_name: test-db-postgres
