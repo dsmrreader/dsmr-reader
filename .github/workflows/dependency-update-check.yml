@@ -5,8 +5,11 @@ on:
     - cron:  '0 12 * * 1'
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
+    env:
+      # https://python-poetry.org/docs/configuration/#available-settings
+      POETRY_VIRTUALENVS_IN_PROJECT: true
 
     steps:
       - uses: actions/checkout@v2
@@ -14,40 +17,41 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
 
-      - name: Install APT dependencies
-        run: sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+      - name: Install OS packages
+        run: |
+          sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+          pip install --upgrade pip poetry
 
-      - name: Cached PIP dependencies
+      - name: Cached dependencies & virtualenv
         uses: actions/cache@v2
         with:
-          path: ~/.cache/pip
-          key: pip-${{ hashFiles('dsmrreader/provisioning/requirements/base.txt', 'dsmrreader/provisioning/requirements/dev.txt') }}
-          restore-keys: pip-
+          path: |
+            ~/.cache/pypoetry/
+            /home/runner/work/dsmr-reader/dsmr-reader/.venv
+          key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
 
-      - name: Install PIP dependencies
+      - name: Install Poetry dependencies
+        run: poetry install
+
+      - name: Check for Poetry dependency updates
         run: |
-          pip install --upgrade pip
-          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
-          pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
-          pip install psycopg2-binary
+          poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
 
-      - name: List outdated packages
-        run: pip list --outdated --local --format freeze | tr '[:upper:]' '[:lower:]' | cut -d'=' -f1 | sort > outdated.txt
+          poetry update --dry-run | grep -v "Skipped"
+          exit 1
 
-      - name: List packages from requirements
-        run: cat dsmrreader/provisioning/requirements/*.txt | tr '[:upper:]' '[:lower:]' | grep -v '#' | grep -v '.txt' | cut -d'=' -f1 | sort > reqs.txt
 
-      - name: Find outdated packages from requirements
-        run: comm -1 -2 outdated.txt reqs.txt > outdated-reqs.txt
-
-      - name: Check outdated requirements
+      # @deprecated PIP (requirements.txt) check - Ensures it's in sync with Poetry - Required until DSMR-reader v5.x
+      - name: (@deprecated) Install Pip dependencies
         run: |
-          [ -s outdated-reqs.txt ] || exit 0
+          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
+          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
 
-          pip list --outdated --local
-          echo ""
-          echo "The following project requirements are outdated:"
-          echo "------------------------------------------------"
-          cat outdated-reqs.txt
+      - name: (@deprecated) Check for Pip dependency updates, using Poetry venv
+        # The pip and packaging updates are to prevent false positives
+        run: |
+          poetry run pip install --upgrade pip packaging
+          poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
 
+          poetry update --dry-run | grep -v "Skipped"
           exit 1
