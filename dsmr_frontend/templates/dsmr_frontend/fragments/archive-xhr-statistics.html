@@ -89,3 +89,46 @@
 {% endif %}
     </div>
 </div>
+
+
+{# Conditionally available, depending on the level selected. #}
+{% if day_statistics %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% translate "Meter positions" %}
+                </header>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th class="col-sm-4"><small class="italic">{% translate "Meter positions of first reading of the day" %}</small></th>
+                            <th class="col-sm-3">{% translate "Delivered" %}</th>
+                            <th class="col-sm-3">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
+                            <th class="col-sm-2">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <td>{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
+                            <td><span class="badge bg-red">{{ day_statistics.electricity1_reading }} </span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ day_statistics.electricity1_returned_reading}}{% endif %}</span></td>
+                            <td class="col-sm-2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
+                            <td><span class="badge bg-red">{{ day_statistics.electricity2_reading }}</span></td>
+                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ day_statistics.electricity2_returned_reading}}{% endif %}</span></td>
+                            <td class="col-sm-2">&nbsp;</td>
+                        </tr>
+
+                        {% if capabilities.gas %}
+                        <tr>
+                            <td>{% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
+                            <td colspan="3"><span class="badge bg-orange">{{ day_statistics.gas_reading }}</span></td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

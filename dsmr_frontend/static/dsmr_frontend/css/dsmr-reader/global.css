@@ -30,6 +30,13 @@
     text-align: center;
 }
 
+/* Ensure the datepicker is centered. */
+.datepicker-inline {
+    display:block;
+    margin-right:auto;
+    margin-left:auto
+}
+
 a.graph_controls_help_trigger {
     font-size: x-small;
     color: gray;
@@ -50,6 +57,9 @@ a.graph_controls_help_trigger {
 }
 
 .datepicker-level-icon {
+    display: inline-block;
+    min-height: 60px;
+
      /* Same as sm-st-icon, ensures center-block works. */
      width: 60px;
  }
@@ -73,6 +83,10 @@ div.archive-header-panel-body {
 
 .gray {
     color: #999999;
+}
+
+.italic {
+    font-style: italic;
 }
 
 .logo-version {

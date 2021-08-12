@@ -26,7 +26,7 @@
                     <table class="table table-hover">
                         <tr>
                             <th class="col-sm-6">{% if latest_reading %}{{ latest_reading.timestamp|naturaltime }}{% endif %}</th>
-                            <th class="col-sm-3">{% translate "Consumed" %}</th>
+                            <th class="col-sm-3">{% translate "Delivered" %}</th>
                             
                             <th class="col-sm-3">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
                         </tr>
@@ -132,6 +132,16 @@
                 
                 {% if electricity_statistics %}
                     <table class="table table-hover">
+                        <tr>
+                            <td class="col-sm-6">
+                                {% translate "Statistic" %}
+                                <br>
+                                <span class="unit">{% translate "Logged date and time" %}</span>
+                            </td>
+                            <td class="col-sm-6">
+                                <span class="unit">{% translate "Watt" %}</span>
+                            </td>
+                        </tr>
                         {% if electricity_statistics.highest_usage_l1_value %}
                         <tr>
                             <td class="col-sm-6">
@@ -143,7 +153,6 @@
                                 <span class="badge bg-red">
                                    {{ electricity_statistics.highest_usage_l1_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -158,7 +167,6 @@
                                 <span class="badge bg-red">
                                    {{ electricity_statistics.highest_usage_l2_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -173,7 +181,6 @@
                                 <span class="badge bg-red">
                                    {{ electricity_statistics.highest_usage_l3_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -189,7 +196,6 @@
                                 <span class="badge bg-red">
                                    {{ electricity_statistics.lowest_usage_l1_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -204,7 +210,6 @@
                                 <span class="badge bg-red">
                                    {{ electricity_statistics.lowest_usage_l2_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -219,7 +224,6 @@
                                 <span class="badge bg-red">
                                    {{ electricity_statistics.lowest_usage_l3_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -236,7 +240,6 @@
                                 <span class="badge bg-green">
                                    {{ electricity_statistics.highest_return_l1_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -251,7 +254,6 @@
                                 <span class="badge bg-green">
                                    {{ electricity_statistics.highest_return_l2_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -266,7 +268,6 @@
                                 <span class="badge bg-green">
                                    {{ electricity_statistics.highest_return_l3_value }}
                                 </span>
-                                <span class="unit">{% translate "Watt" %}</span>
                             </td>
                         </tr>
                         {% endif %}

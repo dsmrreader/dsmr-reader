@@ -10,7 +10,9 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 
 #: ../../how-to/database/postgresql-resolve-size-warnings.rst:2
 msgid "Database: Resolving size warnings (PostgreSQL)"
@@ -22,7 +24,7 @@ msgstr "Je zult de hoeveelheid inkomende gegevens moeten beperken en tevens een 
 
 #: ../../how-to/database/postgresql-resolve-size-warnings.rst:6
 msgid "First increase the datalogger sleep in the configuration panel. Make sure it's at least 5 or 10 seconds."
-msgstr "Verhoog allereest de datalogger-sleep in het configuratiepaneel. Zet deze op tenminste 5 a 10 seconden."
+msgstr "Verhoog allereerst de datalogger-sleep in het configuratiepaneel. Zet deze op tenminste 5 a 10 seconden."
 
 #: ../../how-to/database/postgresql-resolve-size-warnings.rst:7
 msgid "Secondly, enable data retention policy in the configuration as well. A recommended setting is having DSMR-reader clean up data after a week or month."

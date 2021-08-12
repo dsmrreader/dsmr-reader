@@ -19,3 +19,5 @@
 /Pipfile
 /Pipfile.lock
 /manage_mule.py
+/docker-compose.yml
+/Dockerfile

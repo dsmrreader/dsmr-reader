@@ -10,7 +10,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid "API"
 msgstr "API"
@@ -1134,8 +1134,11 @@ msgstr "Archief"
 msgid "No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader."
 msgstr "Nog geen dagstatistieken gevonden. Gegevens zijn hier doorgaans zichtbaar vanaf de tweede dag dat DSMR-reader draait."
 
-msgid "Level"
-msgstr "Niveau"
+msgid "Data selection"
+msgstr "Dataselectie"
+
+msgid "Select level of detail."
+msgstr "Selecteer detailniveau."
 
 msgid "Days"
 msgstr "Dagen"
@@ -1146,8 +1149,8 @@ msgstr "Maanden"
 msgid "Years"
 msgstr "Jaren"
 
-msgid "Pick a day, month or year"
-msgstr "Kies een dag, maand of jaar"
+msgid "Pick a day, month or year."
+msgstr "Kies een dag, maand of jaar."
 
 msgid "Loading..."
 msgstr "Bezig met laden..."
@@ -1469,14 +1472,14 @@ msgstr "Selecteer het soort gegevens dat je wil exporteren."
 msgid "Day totals"
 msgstr "Dagtotalen"
 
-msgid "Summary of each day. Contains electricity, gas and costs (if applicable)."
-msgstr "Samenvatting van elke dag. Bevat elektriciteit, gas en gemaakte kosten (wanneer van toepassing)."
+msgid "Summary of each day. Contains (when available) electricity, gas, costs and the first meter positions of the day."
+msgstr "Samenvatting van elke dag. Bevat (waar beschikbaar) elektriciteit, gas, kosten en de eerste meterstanden van de dag."
 
 msgid "Hour totals"
 msgstr "Uurtotalen"
 
-msgid "Summary of each hour read. Contains electricity and gas (if applicable)."
-msgstr "Samenvatting van elk uur. Bevat elektriciteit en gas (wanneer van toepassing)."
+msgid "Summary of each hour read. Contains (when available) electricity and gas."
+msgstr "Samenvatting van elk uur. Bevat (waar beschikbaar) elektriciteit en gas."
 
 msgid "Summary of all temperatures read (if enabled)."
 msgstr "Overzicht van alle temperatuurmetingen (wanneer ingeschakeld)."
@@ -1526,6 +1529,15 @@ msgstr "Max"
 msgid "Avg"
 msgstr "Gem"
 
+msgid "Meter positions"
+msgstr "Meterstanden"
+
+msgid "Meter positions of first reading of the day"
+msgstr "Meterstanden bij eerste meting van de dag"
+
+msgid "Delivered"
+msgstr "Verbruikt"
+
 #, python-format
 msgid "%(data_count)s data point"
 msgid_plural "%(data_count)s data points"
@@ -1567,9 +1579,6 @@ msgstr "Uitleg grafiekgebruik"
 
 msgid "Additionally, when using a DSMR v5 smart meter"
 msgstr "Daarnaast, indien je een DSMR v5 slimme meter gebruikt"
-
-msgid "Delivered"
-msgstr "Verbruikt"
 
 msgid "Recent electricity usage"
 msgstr "Recent elektriciteitsvermogen"
@@ -1631,9 +1640,6 @@ msgstr "Er zijn geen ongelezen notificaties."
 msgid "No data found yet. This page should display data as soon as the first reading is processed by DSMR-reader."
 msgstr "Nog geen gegevens gevonden. Deze pagina weergeeft gegevens zodra de eerste meting door DSMR-reader is verwerkt."
 
-msgid "Meter positions"
-msgstr "Meterstanden"
-
 msgid "Electricity (combined)"
 msgstr "Elektriciteit (gecombineerd)"
 
@@ -1657,6 +1663,12 @@ msgstr "Aantal spanningspieken in fase L3"
 
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
+
+msgid "Statistic"
+msgstr "Statistiek"
+
+msgid "Logged date and time"
+msgstr "Vastgelegde datum/tijd"
 
 msgid "Highest usage (L1)"
 msgstr "Hoogste verbruik (L1)"
@@ -2617,209 +2629,5 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
-#~ msgid "Temp."
-#~ msgstr "Temp."
-
-#~ msgid "Hourly"
-#~ msgstr "Per uur"
-
-#~ msgid "(in kWh)"
-#~ msgstr "(in kWh)"
-
-#~ msgid "(in m³)"
-#~ msgstr "(in m³)"
-
-#~ msgid "in"
-#~ msgstr "in"
-
-#~ msgid "m<sup>3</sup>"
-#~ msgstr "m<sup>3</sup>"
-
-#~ msgid "Recent distribution of electricity phases"
-#~ msgstr "Recente distributie elektriciteitsfasen"
-
-#~ msgid "Untracked consumption in the past (and today), is not taken into account."
-#~ msgstr "Ongemeten verbruik in het verleden (inclusief vandaag) wordt buiten beschouwing gelaten."
-
-#~ msgid "Average electricity consumed each hour (in %%) within the past 4 weeks"
-#~ msgstr "Gemiddelde elektriciteitsverbruik uur (in %%) van de afgelopen 4 weken"
-
-#~ msgid "Average electricity returned each hour (in %%) within the past 4 weeks"
-#~ msgstr "Gemiddelde elektriciteitsteruglevering per uur (in %%) van de afgelopen 4 weken"
-
-#~ msgid "Average gas consumed each hour (in %%) within the past 4 weeks"
-#~ msgstr "Gemiddeld gasverbruik per uur (in %%) van de afgelopen 4 weken"
-
-#~ msgid "Electricity tariff ratio (past week)"
-#~ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen week)"
-
-#~ msgid "Electricity tariff ratio (past month)"
-#~ msgstr "Elektriciteitsverbruik piek- en daltarief (afgelopen maand)"
-
-#~ msgid "(combined)"
-#~ msgstr "(gecombineerd)"
-
-#~ msgid "(single tariff)"
-#~ msgstr "(enkel tarief)"
-
-#~ msgid "Highest consumption (L1)"
-#~ msgstr "Hoogste verbruik (L1)"
-
-#~ msgid "W"
-#~ msgstr "W"
-
-#~ msgid "Highest consumption (L2)"
-#~ msgstr "Hoogste verbruik (L2)"
-
-#~ msgid "Highest consumption (L3)"
-#~ msgstr "Hoogste verbruik (L3)"
-
-#~ msgid "Lowest consumption (L1)"
-#~ msgstr "Laagste verbruik (L1)"
-
-#~ msgid "Lowest consumption (L2)"
-#~ msgstr "Laagste verbruik (L2)"
-
-#~ msgid "Lowest consumption (L3)"
-#~ msgstr "Laagste verbruik (L3)"
-
-#~ msgid "(total)"
-#~ msgstr "(totaal)"
-
-#~ msgid "Based on the latest telegram received, no matter if it's still unprocessed."
-#~ msgstr "Gebaseerd op het meest recente telegram, ook als deze nog niet verwerkt is."
-
-#~ msgid "The datalogger process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
-#~ msgstr "Het datalogger-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
-
-#~ msgid "The backend process should automatically restart to apply changes. To manually restart, see the <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
-#~ msgstr "Het backend-proces zou automatisch moeten herstarten om de wijzigingen toe te passen. Om handmatig te herstarten, zie de <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/faq.html\">FAQ</a>."
-
-#~ msgid "Waiting for the next PVOutput export to be executed"
-#~ msgstr "Wachten op de volgende PVOutput-export die uitgevoerd moet worden"
-
-#~ msgid "Next export"
-#~ msgstr "Volgende synchronisatie"
-
-#~ msgid "Timestamp of the next export. Automatically updated by application."
-#~ msgstr "Tijdstip van de volgende gegevensexport. Applicatie werkt dit automatisch bij."
-
-#~ msgid "Latest sync"
-#~ msgstr "Meest recente synchronisatie"
-
-#~ msgid "Timestamp of latest sync with PVOutput. Automatically updated by application."
-#~ msgstr "Tijdstip van de laatste synchronisatie met PVOutput. Applicatie werkt dit automatisch bij."
-
-#~ msgid "Waiting for the next Dropbox sync to be executed"
-#~ msgstr "Wachten op de volgende Dropbox-sync die uitgevoerd moet worden"
-
-#~ msgid "Timestamp of latest sync with Dropbox. Automatically updated by application."
-#~ msgstr "Tijdstip van de laatste synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
-
-#~ msgid "Next sync"
-#~ msgstr "Volgende synchronisatie"
-
-#~ msgid "Timestamp of next sync with Dropbox. Automatically updated by application."
-#~ msgstr "Tijdstip van de volgende synchronisatie met Dropbox. Applicatie werkt dit automatisch bij."
-
-#~ msgid "Saving the configuration will reset the delay until the next sync."
-#~ msgstr "Het opslaan van de configuratie reset het tijdstip van de volgende synchronisatie."
-
-#~ msgid "Forces Dropbox sync."
-#~ msgstr "Forceert Dropbox synchronisatie."
-
-#~ msgid "Reconstructs missing day statistics by using available hour statistics"
-#~ msgstr "Reconstrueert missende dagstatistieken door beschikbare uurstatistieken te gebruiken"
-
-#~ msgid "Based on the latest electricity consumption processed."
-#~ msgstr "Gebaseerd op het meest recent verwerkte elektriciteitsverbruik."
-
-#~ msgid "today"
-#~ msgstr "vandaag"
-
-#~ msgid "Current month"
-#~ msgstr "Huidige maand"
-
-#~ msgid "until yesterday"
-#~ msgstr "tot en met gisteren"
-
-#~ msgid "The totals for the current month are currently not (yet) available. Check again tomorrow."
-#~ msgstr "De totalen voor de huidige maand zijn momenteel (nog) niet beschikbaar. Probeer het morgen nogmaals."
-
-#~ msgid "Failed to connect to or read from Buienradar API"
-#~ msgstr "Kan niet verbinden naar of lezen van de Buienradar API"
-
-#~ msgid "Selected station info not found"
-#~ msgstr "Geselecteerd weerstation niet gevonden"
-
-#~ msgid "Tariffs / Energy supplier prices"
-#~ msgstr "Tarieven / Energieleverancierprijzen"
-
-#~ msgid "Frontend / Display / Graphics"
-#~ msgstr "Frontend / Weergave / Grafisch"
-
-#~ msgid "MQTT integration"
-#~ msgstr "MQTT-integratie"
-
-#~ msgid "Quality of service / QoS"
-#~ msgstr "Quality of service / QoS"
-
-#~ msgid "Keep reconnecting"
-#~ msgstr "Telkens opnieuw verbinden"
-
-#~ msgid "JSON day totals"
-#~ msgstr "JSON dagtotalen"
-
-#~ msgid "Split topic day totals"
-#~ msgstr "Gesplitst topic dagtotalen"
-
-#~ msgid "JSON gas consumption"
-#~ msgstr "JSON gasverbruik"
-
-#~ msgid "Split topic gas consumption"
-#~ msgstr "Gesplitst topic gasverbruik"
-
-#~ msgid "JSON telegram"
-#~ msgstr "JSON telegram"
-
-#~ msgid "Voltage (JSON)"
-#~ msgstr "Voltage (JSON)"
-
-#~ msgid "Ampere (JSON)"
-#~ msgstr "Ampere (JSON)"
-
-#~ msgid "Raw telegram"
-#~ msgstr "Ruw telegram"
-
-#~ msgid "Split topic telegram"
-#~ msgstr "Gesplitst topic telegram"
-
-#~ msgid "Split topic meter statistics"
-#~ msgstr "Gesplitst topic meterstatistieken"
-
-#~ msgid "Voltage (split topic)"
-#~ msgstr "Voltage (gesplitst topic)"
-
-#~ msgid "Ampere (split topic)"
-#~ msgstr "Ampere (gesplitst topic)"
-
-#~ msgid "Clean up reading"
-#~ msgstr "Ruim metingen op"
-
-#~ msgid "Apply retention"
-#~ msgstr "Pas retentie toe"
-
-#~ msgid "Weather integration"
-#~ msgstr "Weergegevens-integratie"
-
-#~ msgid "Keep track of outside temperatures"
-#~ msgstr "Houd buitentemperaturen bij"
-
-#~ msgid "Electricity 1 price (low tariff)"
-#~ msgstr "Prijs elektriciteit 1 (daltarief)"
-
-#~ msgid "Electricity 2 price (high tariff)"
-#~ msgstr "Prijs elektriciteit 2 (piektarief)"
-
-#~ msgid "Also, any electricity returned is not taken into account for the cost. The kWh returned is only displayed for your convenience."
-#~ msgstr "Daarnaast wordt teruggeleverde energie niet verrekend in de kosten. De teruggeleverde kWh wordt hier alleen voor de volledigheid getoond."
+#~ msgid "Level"
+#~ msgstr "Niveau"

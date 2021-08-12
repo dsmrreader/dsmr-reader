@@ -1,8 +1,8 @@
 ---
-name: 🤔 I need help
-about: You require help or you'd like some questions answered
+name: 🚨 Report
+about: You've found a bug or want to report something else
 title: ''
-labels: question
+labels: bug
 assignees: ''
 ---
 
@@ -13,10 +13,10 @@ assignees: ''
 <br />
 
 *Voel je vooral vrij om ook in het Nederlands te communiceren, gezien dat een stuk vlotter gaat.*
-- Controleer en zoek (filter) of er al niet [een soortgelijk verzoek is](https://github.com/dsmrreader/dsmr-reader/issues) of [eerder is geweest](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed).
+- Controleer en zoek (filter) of er al niet [een soortgelijke melding is](https://github.com/dsmrreader/dsmr-reader/issues) of [eerder is geweest](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed).
 - Voeg een ``dsmr_debuginfo`` dump toe aan je melding: [informatie](https://dsmr-reader.readthedocs.io/nl/v4/how-to/troubleshooting/debug-info-dump.html)
 - Als je niet weet wat er gebeurt, bekijk de logfiles: [informatie](https://dsmr-reader.readthedocs.io/nl/v4/how-to/troubleshooting/logfiles.html)
-- Probeer zo duidelijk mogelijk te zijn in wat je nodig hebt of verwacht.
+- Is het makkelijk te reproduceren? Omschrijf het dan zo duidelijk mogelijk.
 </details>
 
 <details>

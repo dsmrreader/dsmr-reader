@@ -17,6 +17,16 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
+
+v4.17.0 - 2021-08-xx
+--------------------
+
+- ``Fixed`` CSV export kapot na importeren historische data [`#1395 <https://github.com/dsmrreader/dsmr-reader/issues/1395>`_]
+
+- ``Changed`` Add meter positions to CSV export [`#1424 <https://github.com/dsmrreader/dsmr-reader/issues/1424>`_]
+- ``Changed`` Add meter positions to Archive day view [`#1424 <https://github.com/dsmrreader/dsmr-reader/issues/1424>`_]
+
+
 v4.16.3 - 2021-05-30
 --------------------
 

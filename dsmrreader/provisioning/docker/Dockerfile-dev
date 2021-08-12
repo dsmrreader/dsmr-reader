@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:1
+
+#########################################################################
+# Dockerfile for DSMR-reader development only, NEVER use in production! #
+#########################################################################
+
+FROM python:3
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+
+RUN apt-get update
+RUN apt-get install -y gettext
+
+# Eases network debugging a lot
+RUN apt-get install -y telnet
+
+COPY ./pyproject.toml /app/
+COPY ./poetry.lock /app/
+
+RUN pip3 install --upgrade pip poetry
+RUN poetry install

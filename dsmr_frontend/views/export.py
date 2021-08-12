@@ -23,11 +23,11 @@ class Export(LoginRequiredMixin, TemplateView):
         context_data = super(Export, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
 
-        day_statistics = DayStatistics.objects.all().order_by('pk')
+        day_statistics = DayStatistics.objects.all().order_by('day')
 
         try:
             context_data['start_date'] = day_statistics[0].day
-            context_data['end_date'] = day_statistics.order_by('-pk')[0].day
+            context_data['end_date'] = day_statistics.order_by('-day')[0].day
         except IndexError:
             context_data['start_date'] = None
             context_data['end_date'] = None
@@ -62,7 +62,8 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
             export_fields = [
                 'day', 'electricity1', 'electricity2', 'electricity1_returned',
                 'electricity2_returned', 'gas', 'electricity1_cost', 'electricity2_cost',
-                'gas_cost', 'fixed_cost', 'total_cost'
+                'gas_cost', 'fixed_cost', 'total_cost', 'electricity1_reading', 'electricity2_reading',
+                'electricity1_returned_reading', 'electricity2_returned_reading', 'gas_reading'
             ]
 
         elif data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
