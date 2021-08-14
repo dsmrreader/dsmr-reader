@@ -9,8 +9,9 @@ on:
   pull_request: ~
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 10  # Don't run forever when stale
     strategy:
       matrix:
         python-version:
