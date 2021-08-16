@@ -88,11 +88,12 @@ services:
       - POSTGRES_USER=dsmrreader
       - POSTGRES_PASSWORD=postgres-password
 
-  # After boot, edit "/mosquitto/config/mosquitto.conf", add the lines "listener 1883 0.0.0.0" & "allow_anonymous true" and restart the container.
   dsmr-mqtt:
     container_name: dsmr-mqtt
     image: eclipse-mosquitto:2
     restart: always
+    volumes:
+      - ./dsmrreader/provisioning/docker/mosquitto-dev/:/mosquitto/config/
     ports:
       - '1883:1883'
 
