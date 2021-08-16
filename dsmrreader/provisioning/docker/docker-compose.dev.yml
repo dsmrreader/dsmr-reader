@@ -3,16 +3,8 @@
 ######################################################################
 
 version: "3.7"
-
 services:
-  ###   docker exec -it dsmr-app poetry run /app/tools/quick-test.sh
-  ###   docker exec -it dsmr-app poetry run /app/tools/test-all.sh
-  ###   docker exec -it dsmr-app poetry run /app/manage.py migrate
-  ###   docker exec -it dsmr-app poetry run /app/manage.py development_reset
-  ###   docker exec -it dsmr-app poetry run /app/manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
-  ###   docker exec -it dsmr-app poetry run /app/tools/check-translations.sh
-  ###   docker exec -it dsmr-app poetry run /app/tools/check-requirements-updates.sh
-  ###   docker exec -it dsmr-app poetry update
+  # Manage command:   docker exec -it dsmr-app poetry run /app/manage.py
   dsmr-app:
     container_name: dsmr-app
     build:
@@ -55,9 +47,7 @@ services:
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PASSWORD=testpasswd
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_NAME=dsmrreader  # Django prefixes "test_" automatically.
 
-  ###   docker exec -it dsmr-docs poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated"
-  ###   docker exec -it dsmr-docs bash -c 'poetry run make gettext && poetry run sphinx-intl update --line-width=-1 -p _build/locale -l nl'
-  ###   docker exec -it dsmr-docs poetry run make html
+  # Docs commands:   docker exec -it dsmr-docs poetry run
   dsmr-docs:
     container_name: dsmr-docs
     build:
@@ -111,7 +101,7 @@ services:
       - POSTGRES_USER=testuser
       - POSTGRES_PASSWORD=testpasswd
 
-  # @TODO: MySQL tests/connections is still broken.
+  # WARNING: MySQL tests/connections are broken, but do seem to work in the CI anyway.
   test-db-mysql:
     container_name: test-db-mysql
     image: mysql:5.7
