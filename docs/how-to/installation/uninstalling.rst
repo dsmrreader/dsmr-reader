@@ -20,7 +20,7 @@ To remove DSMR-reader from your system, execute the following commands::
 
 To delete your data (the database) as well::
 
-    sudo su - postgres dropdb dsmrreader
+    sudo -u postgres dropdb dsmrreader
 
 Optionally, you can remove these packages::
 
