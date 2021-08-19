@@ -39,7 +39,9 @@ jobs:
             MYSQL_DATABASE: test_dsmrreader
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
-
+    env:
+        # Do not log verbosely
+        DSMRREADER_LOGLEVEL: ERROR
     steps:
       - uses: actions/checkout@v2
 

@@ -11,19 +11,6 @@ for k in CACHES.keys():
 # Never use this in production!
 SECRET_KEY = secrets.token_hex(64)
 
-# Mute query debugging log for nose tests. Prevent RSI from scrolling.. ;-)
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'loggers': {
-        'django.db.backends': {
-            'handlers': [],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-    },
-}
-
 # Disable caching.
 for k in CACHES.keys():
     CACHES[k]['BACKEND'] = 'django.core.cache.backends.dummy.DummyCache'
