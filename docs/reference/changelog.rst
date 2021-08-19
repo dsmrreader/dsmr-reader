@@ -23,6 +23,7 @@ v4.17.0 - 2021-08-xx
 
 - ``Fixed`` CSV export kapot na importeren historische data [`#1395 <https://github.com/dsmrreader/dsmr-reader/issues/1395>`_]
 - ``Fixed`` Typo in uninstallation guide - by @nomnomnomhb [`#1438 <https://github.com/dsmrreader/dsmr-reader/issues/1438>`_]
+- ``Fixed`` CSV hour export should use local timezone instead of UTC [`#1440 <https://github.com/dsmrreader/dsmr-reader/issues/1440>`_]
 
 - ``Changed`` Add meter positions to CSV export [`#1424 <https://github.com/dsmrreader/dsmr-reader/issues/1424>`_]
 - ``Changed`` Add meter positions to Archive day view [`#1424 <https://github.com/dsmrreader/dsmr-reader/issues/1424>`_]

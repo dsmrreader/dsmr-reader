@@ -125,6 +125,8 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
             return float(data)
 
         elif isinstance(data, datetime.datetime):
+            # Ensure local time to ease usage.
+            data = timezone.localtime(data)
             return formats.date_format(data, 'DSMR_EXPORT_DATETIME_FORMAT')
 
         elif isinstance(data, datetime.date):  # pragma: no cover
