@@ -14,7 +14,7 @@ export DJANGO_SETTINGS_MODULE=dsmrreader.config.test
 echo ""
 echo "--- Testing with SQLite..."
 export DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
-pytest --cov --cov-report=html --cov-report=term $ARGS
+pytest --cov --cov-report=html $ARGS
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed [!]"

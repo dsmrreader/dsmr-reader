@@ -45,10 +45,12 @@ class InfiniteManagementCommandMixin:
         self._write_pid_file()
         self.data = self.initialize()
 
+        # Only tests should use this. Or when developing a command.
         if options.get('run_once'):
-            # Only tests should use this. Or when developing a command.
+            logger.debug('%s: Starting (once)', self.name)
             self.run_once(**options)
         else:
+            logger.debug('%s: Starting', self.name)
             self.run_loop(**options)
 
         self.shutdown()
