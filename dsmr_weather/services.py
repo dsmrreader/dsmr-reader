@@ -31,7 +31,7 @@ def get_temperature_from_api():
     logger.debug('Buienradar: Reading temperature: %s', settings.DSMRREADER_BUIENRADAR_API_URL)
 
     try:
-        response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL)
+        response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL, timeout=5.0)
     except Exception as error:
         raise RuntimeError('Failed to read API: {}'.format(error))
 
