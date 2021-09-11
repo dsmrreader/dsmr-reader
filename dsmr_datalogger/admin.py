@@ -107,6 +107,7 @@ class DsmrReadingAdmin(ReadOnlyAdminModel):
         return obj.extra_device_delivered
     formatted_extra_device_delivered.short_description = 'gas'
 
+
 @admin.register(MeterStatistics)
 class MeterStatisticsAdmin(ReadOnlyAdminModel, SingletonModelAdmin):
     change_form_template = 'dsmr_datalogger/meter_statistics/change_form.html'
