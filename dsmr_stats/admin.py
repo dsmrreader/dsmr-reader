@@ -68,10 +68,33 @@ class DayStatisticsAdmin(admin.ModelAdmin):
 class HourStatisticsAdmin(admin.ModelAdmin):
     actions = None
     ordering = ['-hour_start']
-    list_display = ('hour_start', 'electricity_merged', 'electricity_returned_merged')
+    list_display = (
+        'hour_start', 'formatted_electricity_merged', 'formatted_electricity_returned_merged', 'formatted_gas'
+    )
     list_filter = (
         ('hour_start', DateTimeRangeFilter),
     )
+
+    def formatted_electricity_merged(self, obj: HourStatistics) -> str:
+        if not obj.electricity_merged:
+            return '-'
+
+        return obj.electricity_merged
+    formatted_electricity_merged.short_description = 'electricity delivered'
+
+    def formatted_electricity_returned_merged(self, obj: HourStatistics) -> str:
+        if not obj.electricity_returned_merged:
+            return '-'
+
+        return obj.electricity_returned_merged
+    formatted_electricity_returned_merged.short_description = 'electricity returned'
+
+    def formatted_gas(self, obj: HourStatistics) -> str:
+        if not obj.gas:
+            return '-'
+
+        return obj.gas
+    formatted_gas.short_description = 'gas'
 
 
 @admin.register(ElectricityStatistics)
