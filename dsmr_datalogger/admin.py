@@ -64,11 +64,48 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
 @admin.register(DsmrReading)
 class DsmrReadingAdmin(ReadOnlyAdminModel):
     ordering = ['-timestamp']
-    list_display = ('timestamp', 'processed', 'electricity_currently_delivered', 'electricity_currently_returned')
+    list_display = (
+        'timestamp', 'processed', 'formatted_electricity_delivered_1', 'formatted_electricity_delivered_2',
+        'formatted_electricity_returned_1', 'formatted_electricity_returned_2', 'formatted_extra_device_delivered'
+    )
     list_filter = (
         ('timestamp', DateTimeRangeFilter),
     )
 
+    def formatted_electricity_delivered_1(self, obj: DsmrReading) -> str:
+        if not obj.electricity_delivered_1:
+            return '-'
+
+        return obj.electricity_delivered_1
+    formatted_electricity_delivered_1.short_description = 'electricity 1'
+
+    def formatted_electricity_delivered_2(self, obj: DsmrReading) -> str:
+        if not obj.electricity_delivered_2:
+            return '-'
+
+        return obj.electricity_delivered_2
+    formatted_electricity_delivered_2.short_description = 'electricity 2'
+
+    def formatted_electricity_returned_1(self, obj: DsmrReading) -> str:
+        if not obj.electricity_returned_1:
+            return '-'
+
+        return obj.electricity_returned_1
+    formatted_electricity_returned_1.short_description = 'electricity returned 1'
+
+    def formatted_electricity_returned_2(self, obj: DsmrReading) -> str:
+        if not obj.electricity_returned_2:
+            return '-'
+
+        return obj.electricity_returned_2
+    formatted_electricity_returned_2.short_description = 'electricity returned 2'
+
+    def formatted_extra_device_delivered(self, obj: DsmrReading) -> str:
+        if not obj.extra_device_delivered:
+            return '-'
+
+        return obj.extra_device_delivered
+    formatted_extra_device_delivered.short_description = 'gas'
 
 @admin.register(MeterStatistics)
 class MeterStatisticsAdmin(ReadOnlyAdminModel, SingletonModelAdmin):
