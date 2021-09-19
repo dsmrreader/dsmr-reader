@@ -43,6 +43,8 @@ def run(scheduled_process: ScheduledProcess) -> None:
     # Schedule tomorrow, for the time specified.
     backup_settings = BackupSettings.get_solo()
     next_backup_timestamp = timezone.now() + timezone.timedelta(days=1)
+    next_backup_timestamp = timezone.localtime(next_backup_timestamp)
+
     next_backup_timestamp = next_backup_timestamp.replace(
         hour=backup_settings.backup_time.hour,
         minute=backup_settings.backup_time.minute,

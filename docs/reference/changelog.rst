@@ -21,6 +21,7 @@ Current version
 v4.18.0 - 2021-xx-xx
 --------------------
 
+- ``Fixed`` Backup wordt op verkeerde tijd weggeschreven [`#1416 <https://github.com/dsmrreader/dsmr-reader/issues/1416>`_]
 
 
 v4.17.0 - 2021-09-19
