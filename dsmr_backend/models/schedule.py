@@ -69,7 +69,7 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
     def reschedule(self, planned_at):
         """ Schedules the next call at a predetermined moment. """
         self.planned = timezone.localtime(self.planned)
-        self.planned.replace(microsecond=0)
+        self.planned = self.planned.replace(microsecond=0)
 
         self.update(planned=planned_at)
         logger.debug(
