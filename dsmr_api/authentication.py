@@ -30,4 +30,4 @@ class HeaderAuthentication(authentication.BaseAuthentication):
         except User.DoesNotExist:
             raise exceptions.APIException('API user not found')
 
-        return (user, None)
+        return user, None
