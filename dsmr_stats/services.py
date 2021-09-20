@@ -12,6 +12,7 @@ from django.db.models.functions import TruncDate
 from django.utils import timezone
 from django.conf import settings
 
+from dsmr_backend.dto import Capability
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics, ElectricityStatistics
@@ -92,7 +93,7 @@ def run(scheduled_process: ScheduledProcess):
     ).exists()
 
     # Unless it was disabled.
-    gas_capability = dsmr_backend.services.backend.get_capabilities('gas')
+    gas_capability = dsmr_backend.services.backend.get_capability(Capability.GAS)
 
     if gas_capability and recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
         logger.debug('Stats: Waiting for first gas reading on the next day...')

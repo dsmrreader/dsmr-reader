@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 import requests
 
+from dsmr_backend.dto import Capability
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_mindergas.models.settings import MinderGasSettings
 from dsmr_consumption.models.consumption import GasConsumption
@@ -26,7 +27,7 @@ def run(scheduled_process: ScheduledProcess):
         return mindergas_settings.update(export=False)  # Should also disable SP.
 
     # Nonsense when having no data.
-    if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
+    if not dsmr_backend.services.backend.get_capability(Capability.GAS):
         return scheduled_process.delay(hours=1)
 
     try:

@@ -34,7 +34,7 @@ class TestServices(TestCase):
         self.assertFalse(self.mindergas_settings.export)
         self.assertFalse(self.schedule_process.active)
 
-    @mock.patch('dsmr_backend.services.backend.get_capabilities')
+    @mock.patch('dsmr_backend.services.backend.get_capability')
     @mock.patch('django.utils.timezone.now')
     def test_no_gas(self, now_mock, capa_mock):
         """ Having no gas should postpone. """
@@ -47,7 +47,7 @@ class TestServices(TestCase):
         self.assertTrue(self.schedule_process.active)
         self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
-    @mock.patch('dsmr_backend.services.backend.get_capabilities')
+    @mock.patch('dsmr_backend.services.backend.get_capability')
     @mock.patch('dsmr_mindergas.services.export')
     @mock.patch('django.utils.timezone.now')
     def test_call_export_okay(self, now_mock, export_mock, capa_mock):
@@ -63,7 +63,7 @@ class TestServices(TestCase):
         self.assertLess(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=24 + 6))
 
     @mock.patch('dsmr_frontend.services.display_dashboard_message')
-    @mock.patch('dsmr_backend.services.backend.get_capabilities')
+    @mock.patch('dsmr_backend.services.backend.get_capability')
     @mock.patch('dsmr_mindergas.services.export')
     @mock.patch('django.utils.timezone.now')
     def test_call_export_error(self, now_mock, export_mock, capa_mock, message_mock):

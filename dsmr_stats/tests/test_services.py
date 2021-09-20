@@ -7,6 +7,7 @@ from django.db import connection
 from django.test import TestCase
 from django.utils import timezone
 
+from dsmr_backend.dto import Capability
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -58,7 +59,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             datetime.date(2015, 12, 12)
         )
 
-    @mock.patch('dsmr_backend.services.backend.get_capabilities')
+    @mock.patch('dsmr_backend.services.backend.get_capability')
     @mock.patch('django.utils.timezone.now')
     def test_get_next_day_with_gap(self, now_mock, capabilities_mock):
         """ Data gaps should be skipped, as they won't be restored anyway. """
@@ -185,7 +186,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     def test_analyze_waiting_for_gas(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock,
                                      create_statistics_mock):
         """ Fail analyze due to missing gas reading. """
-        if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
+        if not dsmr_backend.services.backend.get_capability(Capability.GAS):
             return self.skipTest('No gas')
 
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
@@ -226,7 +227,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('django.utils.timezone.now')
     def test_analyze_okay_with_gas(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock,
                                    create_statistics_mock):
-        if not dsmr_backend.services.backend.get_capabilities(capability='gas'):
+        if not dsmr_backend.services.backend.get_capability(Capability.GAS):
             return self.skipTest('No gas')
 
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))

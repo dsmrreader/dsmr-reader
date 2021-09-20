@@ -11,7 +11,7 @@ from django.core.cache import cache
 from django.db import connection
 
 from dsmr_backend import signals
-from dsmr_backend.dto import MonitoringStatusIssue
+from dsmr_backend.dto import MonitoringStatusIssue, Capability, CapabilityReport
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
@@ -22,67 +22,74 @@ from dsmr_weather.models.settings import WeatherSettings
 logger = logging.getLogger('dsmrreader')
 
 
-def get_capabilities(capability=None):
+def get_capabilities() -> CapabilityReport:  # noqa: C901
     """
     Returns the capabilities of the data tracked, such as whether the meter supports gas readings or
     if there have been any readings regarding electricity being returned.
-
-    Optionally returns a single capability when requested.
     """
     # Caching time should be limited, but enough to make it matter, as this call is used A LOT.
-    capabilities = cache.get(settings.DSMRREADER_CAPABILITIES_CACHE)
+    capability_report = cache.get(settings.DSMRREADER_CAPABILITIES_CACHE)
 
-    if capabilities is None:
-        capabilities = {
-            # We rely on consumption because source readings might be deleted after a while.
-            'electricity': ElectricityConsumption.objects.exists(),
-            'electricity_returned': ElectricityConsumption.objects.filter(
-                # We can not rely on meter positions, as the manufacturer sometimes initializes meters
-                # with testing data. So we just have to wait for the first power returned.
-                currently_returned__gt=0
-            ).exists(),
-            'multi_phases': ElectricityConsumption.objects.filter(
-                Q(
-                    phase_currently_delivered_l2__isnull=False,
-                ) | Q(
-                    phase_currently_delivered_l3__isnull=False,
-                ) | Q(
-                    phase_voltage_l2__isnull=False,
-                ) | Q(
-                    phase_voltage_l3__isnull=False,
-                )
-            ).exists(),
-            'voltage': ElectricityConsumption.objects.filter(
-                phase_voltage_l1__isnull=False,
-            ).exists(),
-            'power_current': ElectricityConsumption.objects.filter(
-                phase_power_current_l1__isnull=False,
-            ).exists(),
-            'gas': GasConsumption.objects.exists(),
-            'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists(),
-            'costs': EnergySupplierPrice.objects.exists(),
-        }
+    if capability_report is not None:
+        return capability_report
 
-        # Override capabilities when requested.
-        backend_settings = BackendSettings.get_solo()
+    # Override capabilities when requested.
+    backend_settings = BackendSettings.get_solo()
 
-        if backend_settings.disable_gas_capability:
-            capabilities['gas'] = False
+    capability_report = CapabilityReport()
 
-        if backend_settings.disable_electricity_returned_capability:
-            capabilities['electricity_returned'] = False
+    # We rely on consumption because source readings might be deleted after a while.
+    if ElectricityConsumption.objects.exists():
+        capability_report.add(Capability.ELECTRICITY)
 
-        capabilities['any'] = any(capabilities.values())
-        cache.set(settings.DSMRREADER_CAPABILITIES_CACHE, capabilities)
+    # We can not rely on meter positions, as the manufacturer sometimes initializes meters
+    # with testing data. So we just have to wait for the first power returned.
+    if not backend_settings.disable_electricity_returned_capability and \
+            ElectricityConsumption.objects.filter(currently_returned__gt=0).exists():
+        capability_report.add(Capability.ELECTRICITY_RETURNED)
 
-    # Single selection.
-    if capability is not None:
-        return capabilities[capability]
+    if ElectricityConsumption.objects.filter(
+        Q(
+            phase_currently_delivered_l2__isnull=False,
+        ) | Q(
+            phase_currently_delivered_l3__isnull=False,
+        ) | Q(
+            phase_voltage_l2__isnull=False,
+        ) | Q(
+            phase_voltage_l3__isnull=False,
+        )
+    ).exists():
+        capability_report.add(Capability.MULTI_PHASES)
 
-    return capabilities
+    if ElectricityConsumption.objects.filter(phase_voltage_l1__isnull=False).exists():
+        capability_report.add(Capability.VOLTAGE)
+
+    if ElectricityConsumption.objects.filter(phase_power_current_l1__isnull=False).exists():
+        capability_report.add(Capability.POWER_CURRENT)
+
+    if not backend_settings.disable_gas_capability and GasConsumption.objects.exists():
+        capability_report.add(Capability.GAS)
+
+    if WeatherSettings.get_solo().track and TemperatureReading.objects.exists():
+        capability_report.add(Capability.WEATHER)
+
+    if EnergySupplierPrice.objects.exists():
+        capability_report.add(Capability.COSTS)
+
+    if len(capability_report) > 0:
+        capability_report.add(Capability.ANY)
+
+    cache.set(settings.DSMRREADER_CAPABILITIES_CACHE, capability_report)
+
+    return capability_report
 
 
-def is_latest_version():
+def get_capability(capability: Capability) -> bool:
+    """ Returns the status for a specific capability. """
+    return capability in get_capabilities()
+
+
+def is_latest_version() -> bool:
     """ Checks whether the current version is the latest tagged available on GitHub. """
     response = requests.get(settings.DSMRREADER_LATEST_TAGS_LIST)
     latest_tag = response.json()[0]
@@ -93,7 +100,7 @@ def is_latest_version():
     return StrictVersion(local_version) >= StrictVersion(remote_version)
 
 
-def is_timestamp_passed(timestamp):
+def is_timestamp_passed(timestamp) -> bool:
     """ Generic service to check whether a timestamp has passed/is happening or is empty (None). """
     if timestamp is None:
         return True
@@ -139,7 +146,7 @@ def request_monitoring_status():
     return issues
 
 
-def is_recent_installation():
+def is_recent_installation() -> bool:
     """ Checks whether this is a new installation, by checking the interval to the first migration. """
     has_old_migration = MigrationRecorder.Migration.objects.filter(
         applied__lt=timezone.now() - timezone.timedelta(hours=1)
@@ -147,7 +154,7 @@ def is_recent_installation():
     return not has_old_migration
 
 
-def hours_in_day(day):
+def hours_in_day(day) -> int:
     """ Returns the number of hours in a day. Should always be 24, except in DST transitions. """
     start = timezone.make_aware(timezone.datetime.combine(day, datetime.time.min))
     end = start + timezone.timedelta(days=1)

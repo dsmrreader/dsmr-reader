@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.utils import formats
 from django.views.generic.base import TemplateView, View
 
+from dsmr_backend.dto import Capability
 from dsmr_frontend.forms import TrendsPeriodForm
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.settings import FrontendSettings
@@ -64,7 +65,7 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
                 'value': float(dsmr_consumption.services.round_decimal(avg_electricity))
             })
 
-            if capabilities['electricity_returned']:
+            if capabilities[Capability.ELECTRICITY_RETURNED]:
                 avg_electricity_returned = (
                     current['avg_electricity1_returned'] + current['avg_electricity2_returned']
                 ) / 2
@@ -73,7 +74,7 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
                     'value': float(dsmr_consumption.services.round_decimal(avg_electricity_returned))
                 })
 
-            if capabilities['gas']:
+            if capabilities[Capability.GAS]:
                 data['gas'].append({
                     'name': hour_start,
                     'value': float(dsmr_consumption.services.round_decimal(current['avg_gas']))
@@ -99,7 +100,7 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
         }
         result = {}
 
-        if not capabilities['any'] or not DayStatistics.objects.exists():
+        if not capabilities[Capability.ANY] or not DayStatistics.objects.exists():
             return JsonResponse(result)
 
         result['data'] = [

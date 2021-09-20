@@ -4,7 +4,7 @@ from unittest import mock
 from django.test import TestCase
 from django.utils import timezone
 
-from dsmr_backend.dto import MonitoringStatusIssue
+from dsmr_backend.dto import MonitoringStatusIssue, Capability
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
@@ -17,15 +17,20 @@ import dsmr_backend.services.backend
 
 
 class TestBackend(InterceptCommandStdoutMixin, TestCase):
+    def test_undefined_capability(self):
+        capabilities = dsmr_backend.services.backend.get_capabilities()
+        with self.assertRaises(KeyError):
+            _ = capabilities['dummy']
+
     def test_data_capabilities(self):
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertIn('electricity', capabilities.keys())
-        self.assertIn('electricity_returned', capabilities.keys())
-        self.assertIn('gas', capabilities.keys())
-        self.assertIn('multi_phases', capabilities.keys())
-        self.assertIn('weather', capabilities.keys())
-        self.assertIn('costs', capabilities.keys())
-        self.assertIn('any', capabilities.keys())
+        self.assertFalse(Capability.ELECTRICITY in capabilities)
+        self.assertFalse(Capability.ELECTRICITY_RETURNED in capabilities)
+        self.assertFalse(Capability.GAS in capabilities)
+        self.assertFalse(Capability.MULTI_PHASES in capabilities)
+        self.assertFalse(Capability.WEATHER in capabilities)
+        self.assertFalse(Capability.COSTS in capabilities)
+        self.assertFalse(Capability.ANY in capabilities)
 
     def test_empty_capabilities(self):
         """ Capability check for empty database. """
@@ -33,27 +38,29 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
 
         self.assertFalse(WeatherSettings.get_solo().track)
 
-        self.assertFalse(capabilities['electricity'])
-        self.assertFalse(capabilities['electricity_returned'])
-        self.assertFalse(capabilities['gas'])
-        self.assertFalse(capabilities['multi_phases'])
-        self.assertFalse(capabilities['weather'])
-        self.assertFalse(capabilities['costs'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.ELECTRICITY])
+        self.assertFalse(capabilities[Capability.ELECTRICITY_RETURNED])
+        self.assertFalse(capabilities[Capability.GAS])
+        self.assertFalse(capabilities[Capability.MULTI_PHASES])
+        self.assertFalse(capabilities[Capability.WEATHER])
+        self.assertFalse(capabilities[Capability.POWER_CURRENT])
+        self.assertFalse(capabilities[Capability.COSTS])
+        self.assertFalse(capabilities[Capability.ANY])
 
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('electricity'))
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('electricity_returned'))
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('gas'))
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('multi_phases'))
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('weather'))
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('costs'))
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('any'))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.GAS))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.WEATHER))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.POWER_CURRENT))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.COSTS))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ANY))
 
     def test_electricity_capabilities(self):
         """ Capability check for electricity consumption. """
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['electricity'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.ELECTRICITY])
+        self.assertFalse(capabilities[Capability.ANY])
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now(),
@@ -65,15 +72,15 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             currently_returned=0,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('electricity'))
-        self.assertTrue(capabilities['electricity'])
-        self.assertTrue(capabilities['any'])
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY))
+        self.assertTrue(capabilities[Capability.ELECTRICITY])
+        self.assertTrue(capabilities[Capability.ANY])
 
     def test_multi_phases_capabilities(self):
         """ Capability check for multiple phases. """
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['multi_phases'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.MULTI_PHASES])
+        self.assertFalse(capabilities[Capability.ANY])
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now(),
@@ -88,7 +95,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Should fail.
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('multi_phases'))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now() + timezone.timedelta(minutes=1),
@@ -104,16 +111,16 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             phase_currently_returned_l3=2,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('multi_phases'))
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
-        self.assertTrue(capabilities['multi_phases'])
-        self.assertTrue(capabilities['any'])
+        self.assertTrue(capabilities[Capability.MULTI_PHASES])
+        self.assertTrue(capabilities[Capability.ANY])
 
     def test_multi_phases_capabilities_belgium(self):
         """ Capability check for multiple phases, Belgium version which lack some fields. """
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['multi_phases'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.MULTI_PHASES])
+        self.assertFalse(capabilities[Capability.ANY])
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now(),
@@ -128,7 +135,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Should fail.
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('multi_phases'))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now() + timezone.timedelta(minutes=1),
@@ -142,16 +149,16 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             phase_voltage_l3=2,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('multi_phases'))
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
-        self.assertTrue(capabilities['multi_phases'])
-        self.assertTrue(capabilities['any'])
+        self.assertTrue(capabilities[Capability.MULTI_PHASES])
+        self.assertTrue(capabilities[Capability.ANY])
 
     def test_electricity_returned_capabilities(self):
         """ Capability check for electricity returned. """
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['electricity_returned'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.ELECTRICITY_RETURNED])
+        self.assertFalse(capabilities[Capability.ANY])
 
         # Should not have any affect.
         consumption = ElectricityConsumption.objects.create(
@@ -164,20 +171,20 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             currently_returned=0,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['electricity_returned'])
+        self.assertFalse(capabilities[Capability.ELECTRICITY_RETURNED])
 
         consumption.currently_returned = 0.001
         consumption.save(update_fields=['currently_returned'])
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('electricity_returned'))
-        self.assertTrue(capabilities['electricity_returned'])
-        self.assertTrue(capabilities['any'])
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
+        self.assertTrue(capabilities[Capability.ELECTRICITY_RETURNED])
+        self.assertTrue(capabilities[Capability.ANY])
 
     def test_gas_capabilities(self):
         """ Capability check for gas consumption. """
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['gas'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.GAS])
+        self.assertFalse(capabilities[Capability.ANY])
 
         GasConsumption.objects.create(
             read_at=timezone.now(),
@@ -185,9 +192,9 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             currently_delivered=0,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('gas'))
-        self.assertTrue(capabilities['gas'])
-        self.assertTrue(capabilities['any'])
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.GAS))
+        self.assertTrue(capabilities[Capability.GAS])
+        self.assertTrue(capabilities[Capability.ANY])
 
     def test_weather_capabilities(self):
         """ Capability check for gas consumption. """
@@ -196,8 +203,8 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(TemperatureReading.objects.exists())
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['weather'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.WEATHER])
+        self.assertFalse(capabilities[Capability.ANY])
 
         # Should not have any affect.
         weather_settings.track = True
@@ -205,18 +212,18 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         self.assertTrue(WeatherSettings.get_solo().track)
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['weather'])
+        self.assertFalse(capabilities[Capability.WEATHER])
 
         TemperatureReading.objects.create(read_at=timezone.now(), degrees_celcius=0.0)
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('weather'))
-        self.assertTrue(capabilities['weather'])
-        self.assertTrue(capabilities['any'])
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.WEATHER))
+        self.assertTrue(capabilities[Capability.WEATHER])
+        self.assertTrue(capabilities[Capability.ANY])
 
     def test_costs_capabilities(self):
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(capabilities['costs'])
-        self.assertFalse(capabilities['any'])
+        self.assertFalse(capabilities[Capability.COSTS])
+        self.assertFalse(capabilities[Capability.ANY])
 
         EnergySupplierPrice.objects.create(
             start=timezone.now().date(),
@@ -226,9 +233,9 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         )
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('costs'))
-        self.assertTrue(capabilities['costs'])
-        self.assertTrue(capabilities['any'])
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.COSTS))
+        self.assertTrue(capabilities[Capability.COSTS])
+        self.assertTrue(capabilities[Capability.ANY])
 
     def test_disabled_capabilities(self):
         """ Whether disable capabilities affects the outcome. """
@@ -249,24 +256,24 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         )
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('gas'))
-        self.assertTrue(capabilities['gas'])
-        self.assertTrue(dsmr_backend.services.backend.get_capabilities('electricity_returned'))
-        self.assertTrue(capabilities['electricity_returned'])
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.GAS))
+        self.assertTrue(capabilities[Capability.GAS])
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
+        self.assertTrue(capabilities[Capability.ELECTRICITY_RETURNED])
 
         # Disable gas.
         BackendSettings.objects.all().update(disable_gas_capability=True)
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('gas'))
-        self.assertFalse(capabilities['gas'])
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.GAS))
+        self.assertFalse(capabilities[Capability.GAS])
 
         # Disable return.
         BackendSettings.objects.all().update(disable_electricity_returned_capability=True)
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(dsmr_backend.services.backend.get_capabilities('electricity_returned'))
-        self.assertFalse(capabilities['electricity_returned'])
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
+        self.assertFalse(capabilities[Capability.ELECTRICITY_RETURNED])
 
     @mock.patch('django.core.cache.cache.set')
     @mock.patch('django.core.cache.cache.get')

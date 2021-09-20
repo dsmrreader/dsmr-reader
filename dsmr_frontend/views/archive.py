@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.views.generic.base import TemplateView, View
 from django.utils import timezone, formats
 
+from dsmr_backend.dto import Capability
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_frontend.models.settings import FrontendSettings
@@ -169,7 +170,7 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
                 'electricity2': data['electricity2'],
             }
 
-        if capabilities['electricity_returned']:
+        if capabilities[Capability.ELECTRICITY_RETURNED]:
             if frontend_settings.merge_electricity_tariffs:
                 response['electricity_returned'] = {
                     'x': data['x'],
@@ -182,7 +183,7 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
                     'electricity2_returned': data['electricity2_returned'],
                 }
 
-        if capabilities['gas']:
+        if capabilities[Capability.GAS]:
             response['gas'] = {
                 'x': data['x'],
                 'gas': data['gas'],

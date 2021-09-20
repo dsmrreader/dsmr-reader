@@ -5,6 +5,7 @@ from django.utils import timezone, translation
 from django.conf import settings
 import requests
 
+from dsmr_backend.dto import Capability
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_notification.signals import notification_sent
@@ -47,17 +48,17 @@ def create_consumption_message(day_statistics):
     day_date = day_statistics.day.strftime("%d-%m-%Y")
     message = _('Your daily usage statistics for') + ' {}\n'.format(day_date)
 
-    if capabilities['electricity']:
+    if capabilities[Capability.ELECTRICITY]:
         electricity_merged = dsmr_consumption.services.round_decimal(day_statistics.electricity_merged)
         message += _('Electricity consumed') + ': {} kWh\n'.format(electricity_merged)
 
-    if capabilities['electricity_returned']:
+    if capabilities[Capability.ELECTRICITY_RETURNED]:
         electricity_returned_merged = dsmr_consumption.services.round_decimal(
             day_statistics.electricity_returned_merged
         )
         message += _('Electricity returned') + ': {} kWh\n'.format(electricity_returned_merged)
 
-    if capabilities['gas']:
+    if capabilities[Capability.GAS]:
         gas = dsmr_consumption.services.round_decimal(day_statistics.gas)
         message += _('Gas consumed') + ': {} m3\n'.format(gas)
 
