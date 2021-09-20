@@ -12,8 +12,8 @@ v2_api_schema = get_schema_view(
                 "# Postman collection\n"
                 "- Download current collection [here]({static_url}dsmr_frontend/postman/collection.json).\n"
                 "- Download current variables [here]({static_url}dsmr_frontend/postman/variables.json).".format(
-        static_url=settings.STATIC_URL
-    ),
+                    static_url=settings.STATIC_URL
+                ),
     version='v{}'.format(settings.DSMRREADER_VERSION),
     # Ignore default auth
     public=True,
