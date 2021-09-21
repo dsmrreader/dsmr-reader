@@ -2,6 +2,7 @@ from datetime import time
 import logging
 import random
 import json
+from typing import NoReturn
 
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -19,7 +20,7 @@ import dsmr_frontend.services
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess):
+def run(scheduled_process: ScheduledProcess) -> NoReturn:
     mindergas_settings = MinderGasSettings.get_solo()
 
     # Only when enabled and token set.
@@ -57,7 +58,7 @@ def run(scheduled_process: ScheduledProcess):
     )
 
 
-def export():
+def export() -> NoReturn:
     """ Exports gas readings to the MinderGas website. """
     mindergas_settings = MinderGasSettings.get_solo()
     midnight = timezone.localtime(timezone.make_aware(

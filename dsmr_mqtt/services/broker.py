@@ -1,5 +1,6 @@
 import logging
 import ssl
+from typing import NoReturn, Optional
 
 from django.conf import settings
 import paho.mqtt.client as paho
@@ -12,7 +13,7 @@ from dsmr_mqtt.models import queue
 logger = logging.getLogger('dsmrreader')
 
 
-def initialize_client():
+def initialize_client() -> Optional[paho.Client]:
     """ Initializes the MQTT client and returns client instance. """
     broker_settings = MQTTBrokerSettings.get_solo()
 
@@ -63,7 +64,7 @@ def initialize_client():
     return mqtt_client
 
 
-def run(mqtt_client):
+def run(mqtt_client: paho.Client) -> NoReturn:
     """ Reads any messages from the queue and publishing them to the MQTT broker. """
 
     # Keep batches small, only send the latest X messages. The rest will be trimmed (in case of delay).
@@ -109,12 +110,12 @@ def run(mqtt_client):
     queue.Message.objects.all().delete()
 
 
-def signal_reconnect():
+def signal_reconnect() -> NoReturn:
     backend_restart_required.send_robust(None)
     logger.warning('MQTT: Client no longer connected. Signaling restart to reconnect...')
 
 
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, rc) -> NoReturn:
     """ MQTT client callback for connecting. Outputs some debug logging. """
     # From the docs, rc values:
     RC_MAPPING = {
@@ -133,7 +134,7 @@ def on_connect(client, userdata, flags, rc):
         pass
 
 
-def on_disconnect(client, userdata, rc):
+def on_disconnect(client, userdata, rc) -> NoReturn:
     """ MQTT client callback for disconnecting. Outputs some debug logging. """
 
     """
@@ -153,6 +154,6 @@ def on_disconnect(client, userdata, rc):
             client.disconnect()  # We cannot throw an exception here, so abort gracefully.
 
 
-def on_log(client, userdata, level, buf):
+def on_log(client, userdata, level, buf) -> NoReturn:
     """ MQTT client callback for logging. Outputs some debug logging. """
     logger.debug('MQTT: (Paho on_log) %s', buf)

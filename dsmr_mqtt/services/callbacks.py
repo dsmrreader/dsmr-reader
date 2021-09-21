@@ -1,18 +1,20 @@
 import configparser
 import json
+from typing import NoReturn, Dict
 
 from django.core import serializers
 from django.utils import timezone
 
+from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_mqtt.models.settings import day_totals, telegram, meter_statistics, consumption, period_totals
-from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
 import dsmr_mqtt.services.messages
 import dsmr_stats.services
 
 
-def publish_raw_dsmr_telegram(data):
+def publish_raw_dsmr_telegram(data: str) -> NoReturn:
     """ Publishes a raw DSMR telegram string to a broker, if set and enabled. """
     raw_settings = telegram.RawTelegramMQTTSettings.get_solo()
 
@@ -22,7 +24,7 @@ def publish_raw_dsmr_telegram(data):
     dsmr_mqtt.services.messages.queue_message(topic=raw_settings.topic, payload=data)
 
 
-def publish_json_dsmr_reading(reading):
+def publish_json_dsmr_reading(reading: DsmrReading) -> NoReturn:
     """ Publishes a JSON formatted DSMR reading to a broker, if set and enabled. """
     json_settings = telegram.JSONTelegramMQTTSettings.get_solo()
 
@@ -36,7 +38,7 @@ def publish_json_dsmr_reading(reading):
     publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=reading)
 
 
-def publish_split_topic_dsmr_reading(reading):
+def publish_split_topic_dsmr_reading(reading: DsmrReading) -> NoReturn:
     """ Publishes a DSMR reading to a broker, formatted in a separate topic per field name, if set and enabled. """
     split_topic_settings = telegram.SplitTopicTelegramMQTTSettings.get_solo()
 
@@ -50,7 +52,7 @@ def publish_split_topic_dsmr_reading(reading):
     publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=reading)
 
 
-def publish_day_consumption():
+def publish_day_consumption() -> NoReturn:
     """ Publishes day consumption to a broker, if set and enabled. """
     json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
     split_topic_settings = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
@@ -82,7 +84,7 @@ def publish_day_consumption():
         )
 
 
-def publish_json_period_totals():
+def publish_json_period_totals() -> NoReturn:
     """ Publishes JSON formatted period totals to a broker, if set and enabled. """
     json_settings = period_totals.JSONCurrentPeriodTotalsMQTTSettings.get_solo()
 
@@ -97,7 +99,7 @@ def publish_json_period_totals():
     publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=totals)
 
 
-def publish_split_topic_period_totals():
+def publish_split_topic_period_totals() -> NoReturn:
     """ Publishes period totals to a broker, formatted in a separate topic per field name, if set and enabled. """
     split_topic_settings = period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo()
 
@@ -112,7 +114,7 @@ def publish_split_topic_period_totals():
     publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=totals)
 
 
-def convert_period_totals():
+def convert_period_totals() -> Dict:
     """ Uses a generic datasource, but should be converted to flat format. Also, not all data is required at all. """
     totals = dsmr_stats.services.period_totals()
 
@@ -134,7 +136,7 @@ def convert_period_totals():
     return result
 
 
-def publish_split_topic_meter_statistics():
+def publish_split_topic_meter_statistics() -> NoReturn:
     """ Publishes meter statistics to a broker, formatted in a separate topic per field name, if set and enabled. """
     split_topic_settings = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
 
@@ -144,7 +146,7 @@ def publish_split_topic_meter_statistics():
     publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=MeterStatistics.get_solo())
 
 
-def publish_json_gas_consumption(instance):
+def publish_json_gas_consumption(instance: GasConsumption) -> NoReturn:
     """ Publishes JSON formatted gas consumption to a broker, if set and enabled. """
     json_settings = consumption.JSONGasConsumptionMQTTSettings.get_solo()
 
@@ -154,7 +156,7 @@ def publish_json_gas_consumption(instance):
     publish_json_data(topic=json_settings.topic, mapping_format=json_settings.formatting, data_source=instance)
 
 
-def publish_split_topic_gas_consumption(instance):
+def publish_split_topic_gas_consumption(instance: GasConsumption) -> NoReturn:
     """ Publishes gas consumption to a broker, formatted in a separate topic per field name, if set and enabled. """
     split_topic_settings = consumption.SplitTopicGasConsumptionMQTTSettings.get_solo()
 
@@ -164,7 +166,7 @@ def publish_split_topic_gas_consumption(instance):
     publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=instance)
 
 
-def publish_json_data(topic, mapping_format, data_source):
+def publish_json_data(topic: str, mapping_format: str, data_source) -> NoReturn:
     """ Generic JSON data dispatcher. """
     config_parser = configparser.ConfigParser()
     config_parser.read_string(mapping_format)
@@ -186,7 +188,7 @@ def publish_json_data(topic, mapping_format, data_source):
     dsmr_mqtt.services.messages.queue_message(topic=topic, payload=json_data)
 
 
-def publish_split_topic_data(mapping_format, data_source):
+def publish_split_topic_data(mapping_format: str, data_source) -> NoReturn:
     """ Generic split topic data dispatcher. """
     config_parser = configparser.ConfigParser()
     config_parser.read_string(mapping_format)

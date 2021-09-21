@@ -1,4 +1,5 @@
 import logging
+from typing import NoReturn
 
 from django.conf import settings
 from django.core.cache import caches
@@ -9,7 +10,7 @@ from dsmr_mqtt.models import queue
 logger = logging.getLogger('dsmrreader')
 
 
-def queue_message(topic, payload):
+def queue_message(topic: str, payload: str) -> NoReturn:
     """
     Queues a new message, but only if it doesn't exist yet and is no cached.
 

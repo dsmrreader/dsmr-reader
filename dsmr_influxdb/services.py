@@ -3,6 +3,7 @@ from decimal import Decimal
 import configparser
 import logging
 import json
+from typing import NoReturn, Dict
 
 from django.conf import settings
 from influxdb import InfluxDBClient
@@ -50,7 +51,7 @@ def initialize_client():
     return influxdb_client
 
 
-def run(influxdb_client):
+def run(influxdb_client: InfluxDBClient) -> NoReturn:
     """ Processes queued measurements. """
     # Keep batches small, only send the latest X items stored. The rest will be purged (in case of delay).
     selection = InfluxdbMeasurement.objects.all().order_by('-pk')[
@@ -79,7 +80,7 @@ def run(influxdb_client):
     InfluxdbMeasurement.objects.all().delete()  # This purges the remainder.
 
 
-def publish_dsmr_reading(instance):
+def publish_dsmr_reading(instance: DsmrReading) -> NoReturn:
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
     # Integration disabled.
@@ -105,7 +106,7 @@ def publish_dsmr_reading(instance):
         )
 
 
-def get_reading_to_measurement_mapping():
+def get_reading_to_measurement_mapping() -> Dict:
     """ Parses and returns the formatting mapping as defined by the user. """
     READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ('id', 'processed')]
     mapping = defaultdict(dict)
@@ -130,9 +131,9 @@ def get_reading_to_measurement_mapping():
     return mapping
 
 
-def serialize_decimal_to_float(obj):
+def serialize_decimal_to_float(obj: Decimal) -> float:
     """ Workaround to make sure Decimals are not converted to strings here. """
-    if isinstance(obj, Decimal):
-        return float(obj)
+    if not isinstance(obj, Decimal):
+        raise TypeError(type(obj).__name__)
 
-    raise TypeError(type(obj).__name__)
+    return float(obj)

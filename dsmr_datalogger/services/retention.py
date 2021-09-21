@@ -1,4 +1,5 @@
 import logging
+from typing import NoReturn
 
 from django.db.models.functions.datetime import TruncHour
 from django.db.models.aggregates import Count
@@ -15,7 +16,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess):
+def run(scheduled_process: ScheduledProcess) -> NoReturn:
     retention_settings = RetentionSettings.get_solo()
 
     if retention_settings.data_retention_in_hours == RetentionSettings.RETENTION_NONE:

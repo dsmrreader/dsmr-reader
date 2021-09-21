@@ -1,4 +1,5 @@
 import logging
+from typing import NoReturn
 
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone, translation
@@ -19,7 +20,7 @@ import dsmr_backend.services.backend
 logger = logging.getLogger('dsmrreader')
 
 
-def notify_pre_check():
+def notify_pre_check() -> bool:
     """ Checks whether we should notify """
     notification_settings = NotificationSetting.get_solo()
 
@@ -42,7 +43,7 @@ def notify_pre_check():
     return True
 
 
-def create_consumption_message(day_statistics):
+def create_consumption_message(day_statistics: DayStatistics) -> str:
     """ Create the action notification message """
     capabilities = dsmr_backend.services.backend.get_capabilities()
     day_date = day_statistics.day.strftime("%d-%m-%Y")
@@ -71,7 +72,7 @@ def create_consumption_message(day_statistics):
     return message
 
 
-def send_notification(message, title):
+def send_notification(message: str, title: str) -> NoReturn:
     """ Sends notification using the preferred service """
     notification_settings = NotificationSetting.get_solo()
 
@@ -153,7 +154,7 @@ def send_notification(message, title):
     raise AssertionError('Notify API call failed: {0} (HTTP {1})'.format(response.text, response.status_code))
 
 
-def set_next_notification():
+def set_next_notification() -> NoReturn:
     """ Set the next moment for notifications to be allowed again """
     DAILY_NOTIFICATION_HOUR = 6
 
@@ -170,7 +171,7 @@ def set_next_notification():
     NotificationSetting.objects.update(next_notification=next_notification)
 
 
-def notify():
+def notify() -> NoReturn:
     """ Sends notifications about daily energy usage """
     if not notify_pre_check():
         return
@@ -202,7 +203,7 @@ def notify():
     set_next_notification()
 
 
-def check_status():
+def check_status() -> NoReturn:
     """ Checks the status of the application. """
     status_settings = StatusNotificationSetting.get_solo()
     notification_settings = NotificationSetting.get_solo()
