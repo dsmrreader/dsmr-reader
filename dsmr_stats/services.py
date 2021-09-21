@@ -1,8 +1,10 @@
+import datetime
 import logging
 
 from decimal import Decimal
 from datetime import time, date
 import math
+from typing import NoReturn, Dict, Optional, List
 
 from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection, models
@@ -25,12 +27,12 @@ import dsmr_consumption.services
 logger = logging.getLogger('dsmrreader')
 
 
-def is_data_available():
+def is_data_available() -> bool:
     """ Checks whether data is available for stats. """
     return ElectricityConsumption.objects.all().exists()
 
 
-def get_next_day_to_generate():
+def get_next_day_to_generate() -> datetime.date:
     """ Returns the next day to generate statistics for. """
     try:
         # By default just take the previous day we have statistics for.
@@ -56,7 +58,7 @@ def get_next_day_to_generate():
     return timezone.localtime(next_consumption.read_at).date()
 
 
-def run(scheduled_process: ScheduledProcess):
+def run(scheduled_process: ScheduledProcess) -> NoReturn:
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
     if not is_data_available():
         logger.debug('Stats: No data available')
@@ -105,7 +107,7 @@ def run(scheduled_process: ScheduledProcess):
     return scheduled_process.delay(seconds=1)
 
 
-def create_statistics(target_day):
+def create_statistics(target_day: datetime.date) -> NoReturn:
     start_of_day = timezone.make_aware(timezone.datetime(
         year=target_day.year,
         month=target_day.month,
@@ -126,7 +128,7 @@ def create_statistics(target_day):
     cache.clear()
 
 
-def create_daily_statistics(day):
+def create_daily_statistics(day: datetime.date) -> NoReturn:
     """ Calculates and persists both electricity and gas statistics for a day. Daily. """
     logger.debug('Stats: Creating day statistics for: %s', day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
@@ -160,7 +162,7 @@ def create_daily_statistics(day):
     )
 
 
-def create_hourly_statistics(hour_start):
+def create_hourly_statistics(hour_start: timezone.datetime) -> NoReturn:
     """ Calculates and persists both electricity and gas statistics for a day. Hourly. """
     logger.debug('Stats: Creating hour statistics for: %s', hour_start)
     hour_end = hour_start + timezone.timedelta(hours=1)
@@ -197,13 +199,13 @@ def create_hourly_statistics(hour_start):
     HourStatistics.objects.create(**creation_kwargs)
 
 
-def clear_statistics():
+def clear_statistics() -> NoReturn:
     """ Clears ALL statistics ever generated. """
     DayStatistics.objects.all().delete()
     HourStatistics.objects.all().delete()
 
 
-def electricity_tariff_percentage(start: date, end: date):
+def electricity_tariff_percentage(start: date, end: date) -> Optional[Dict]:
     """ Returns the total electricity consumption percentage by tariff (high/low tariff). """
     totals = DayStatistics.objects.filter(
         day__gte=start,
@@ -220,10 +222,11 @@ def electricity_tariff_percentage(start: date, end: date):
     global_total = totals['electricity1'] + totals['electricity2']
     totals['electricity1'] = math.ceil(totals['electricity1'] / global_total * 100)
     totals['electricity2'] = 100 - totals['electricity1']
+
     return totals
 
 
-def average_consumption_by_hour(start: date, end: date):
+def average_consumption_by_hour(start: date, end: date) -> List:
     """ Calculates the average consumption by hour. Measured over all consumption data of the past X months. """
     sql_extra = {
         # Ugly engine check, but still beter than iterating over a hundred thousand items in code.
@@ -262,7 +265,7 @@ def average_consumption_by_hour(start: date, end: date):
     return hour_statistics
 
 
-def range_statistics(start, end):
+def range_statistics(start: datetime.date, end: datetime.date):
     """ Returns the statistics (totals) and the number of data points for a target range. """
     queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
     aggregate = queryset.aggregate(
@@ -293,7 +296,7 @@ def range_statistics(start, end):
             'electricity_returned_merged', 'gas')
     }
 
-    # For some reason the values are not rounded and format like "0.0300000000000000". So we force rounding them.
+    # For some reason the values are not rounded and formatted like "0.0300000000000000". So we force rounding them.
     for decimal_count, fields in rounding.items():
         for current_field in fields:
             if aggregate[current_field] is None:
@@ -307,27 +310,27 @@ def range_statistics(start, end):
     return aggregate
 
 
-def day_statistics(target_date):
-    """ Alias of daterange_statistics() for a day targeted. """
+def day_statistics(target_date: datetime.date):
+    """ Alias of range_statistics() for a day targeted. """
     next_day = timezone.datetime.combine(target_date + relativedelta(days=1), time.min)
     return range_statistics(start=target_date, end=next_day)
 
 
-def month_statistics(target_date):
-    """ Alias of daterange_statistics() for a month targeted. """
+def month_statistics(target_date: datetime.date):
+    """ Alias of range_statistics() for a month targeted. """
     start_of_month = timezone.datetime(year=target_date.year, month=target_date.month, day=1)
     end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
     return range_statistics(start=start_of_month, end=end_of_month)
 
 
-def year_statistics(target_date):
-    """ Alias of daterange_statistics() for a year targeted. """
+def year_statistics(target_date: datetime.date):
+    """ Alias of range_statistics() for a year targeted. """
     start_of_year = timezone.datetime(year=target_date.year, month=1, day=1)
     end_of_year = timezone.datetime.combine(start_of_year + relativedelta(years=1), time.min)
     return range_statistics(start=start_of_year, end=end_of_year)
 
 
-def period_totals():
+def period_totals() -> Dict:
     """ Retrieves year/month period totals and merges them with today's consumption. """
     today = timezone.localtime(timezone.now())
 
@@ -362,7 +365,7 @@ def period_totals():
     )
 
 
-def update_electricity_statistics(reading):
+def update_electricity_statistics(reading: DsmrReading) -> NoReturn:
     """ Updates the ElectricityStatistics records. """
     MAPPING = {
         # Stats record field: Reading field.
@@ -404,7 +407,7 @@ def update_electricity_statistics(reading):
         stats.save()
 
 
-def recalculate_prices():
+def recalculate_prices() -> NoReturn:
     """ Retroactively sets the prices for all statistics. E.g.: When the user has altered the prices. """
     for current_day in DayStatistics.objects.all():
         print(' - Recalculating:', current_day.day)
@@ -439,7 +442,7 @@ def recalculate_prices():
         current_day.save()
 
 
-def reconstruct_missing_day_statistics():
+def reconstruct_missing_day_statistics() -> NoReturn:
     """ Reconstructs missing day statistics. """
     dates_to_generate = ElectricityConsumption.objects.exclude(
         # Skip today.
@@ -463,7 +466,7 @@ def reconstruct_missing_day_statistics():
         create_statistics(target_day=current_day)
 
 
-def reconstruct_missing_day_statistics_by_hours():
+def reconstruct_missing_day_statistics_by_hours() -> NoReturn:
     """ Reconstructs missing day statistics by using available hour statistics. """
     dates_to_generate = HourStatistics.objects.all().annotate(
         truncated_date=TruncDate('hour_start')

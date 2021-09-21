@@ -23,6 +23,8 @@ v4.18.0 - 2021-xx-xx
 - ``Fixed`` Backup wordt op verkeerde tijd weggeschreven [`#1416 <https://github.com/dsmrreader/dsmr-reader/issues/1416>`_]
 - ``Fixed`` Download links in APi docs now respect ``STATIC_URL`` (or ``DJANGO_STATIC_URL``) [`#1401 <https://github.com/dsmrreader/dsmr-reader/issues/1401>`_]
 
+- ``Misc`` Added Python type hinting to ease development and help preventing type mix ups
+
 
 v4.17.0 - 2021-09-19
 --------------------

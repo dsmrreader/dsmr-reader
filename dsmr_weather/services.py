@@ -1,5 +1,6 @@
 from decimal import Decimal
 import logging
+from typing import NoReturn
 
 from django.utils import timezone
 from django.conf import settings
@@ -13,7 +14,7 @@ from dsmr_weather.models.reading import TemperatureReading
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess):
+def run(scheduled_process: ScheduledProcess) -> NoReturn:
     """ Reads the current weather state and stores it. """
     try:
         temperature_reading = get_temperature_from_api()
@@ -26,7 +27,7 @@ def run(scheduled_process: ScheduledProcess):
     scheduled_process.reschedule(temperature_reading.read_at + timezone.timedelta(hours=1))
 
 
-def get_temperature_from_api():
+def get_temperature_from_api() -> TemperatureReading:
     # For backend logging in Supervisor.
     logger.debug('Buienradar: Reading temperature: %s', settings.DSMRREADER_BUIENRADAR_API_URL)
 
