@@ -74,6 +74,7 @@ DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_DATABASE_SIZE = 1 * 1000 * 1000 * 1000  # 
 
 # The cooldown period until the next status notification will be sent.
 DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 3
+DSMRREADER_DAILY_NOTIFICATION_TIME_HOURS = 6  # E.g. 6 = 6 AM
 
 # The time scheduled processes are allowed to lagg behind before failing the monitoring.
 DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES = 15
