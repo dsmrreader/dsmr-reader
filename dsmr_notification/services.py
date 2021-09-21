@@ -158,13 +158,15 @@ def set_next_notification() -> NoReturn:
     """ Set the next moment for notifications to be allowed again """
     # DST can cause some trouble. We need to go forward and set the requested hour.
     next_notification = timezone.now() + timezone.timedelta(hours=24)
-    next_notification = next_notification.replace(hour=settings.DSMRREADER_DAILY_NOTIFICATION_TIME_HOURS, minute=0, second=0, microsecond=0)
+    next_notification = next_notification.replace(
+        hour=settings.DSMRREADER_DAILY_NOTIFICATION_TIME_HOURS, minute=0, second=0, microsecond=0)
 
     # Now we recalculate our new timezone. This only changes twice a year due to DST.
     next_notification = timezone.localtime(next_notification)
 
     # And we have to replace the hour, again. Prevents sending notifications an hour early or late on the next day.
-    next_notification = next_notification.replace(hour=settings.DSMRREADER_DAILY_NOTIFICATION_TIME_HOURS, minute=0, second=0, microsecond=0)
+    next_notification = next_notification.replace(
+        hour=settings.DSMRREADER_DAILY_NOTIFICATION_TIME_HOURS, minute=0, second=0, microsecond=0)
 
     NotificationSetting.objects.update(next_notification=next_notification)
 

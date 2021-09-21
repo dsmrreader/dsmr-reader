@@ -19,7 +19,7 @@ def hex_color_to_rgb(hex_color: str) -> Any:
     return struct.unpack('BBB', bytes.fromhex(hex_color))
 
 
-def get_translated_string(text: str, language: str='nl') -> str:
+def get_translated_string(text: str, language: str = 'nl') -> str:
     """ Forces translation of a string in a language. """
     # Credits to: http://www.technomancy.org/python/django-i18n-manually-turn-on-a-language/
     old_lang = translation.get_language()
@@ -31,7 +31,7 @@ def get_translated_string(text: str, language: str='nl') -> str:
     return translated_text
 
 
-def display_dashboard_message(message: str, redirect_to: Optional[str]=None) -> NoReturn:
+def display_dashboard_message(message: str, redirect_to: Optional[str] = None) -> NoReturn:
     """ Displays a message with today's date on the dashboard, but prevents any UNREAD duplicates. """
     today = formats.date_format(
         timezone.localtime(timezone.now()).date()
