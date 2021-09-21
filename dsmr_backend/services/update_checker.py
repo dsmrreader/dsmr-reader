@@ -1,4 +1,5 @@
 import logging
+from typing import NoReturn
 
 from django.utils.translation import gettext_lazy as _
 
@@ -10,7 +11,7 @@ from dsmr_backend.models.schedule import ScheduledProcess
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess):
+def run(scheduled_process: ScheduledProcess) -> NoReturn:
     """ Checks for new updates. If one is available, it's displayed on the Dashboard. """
     try:
         is_latest_version = dsmr_backend.services.backend.is_latest_version()

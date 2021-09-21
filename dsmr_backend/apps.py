@@ -1,4 +1,5 @@
 import warnings
+from typing import Optional, List
 
 from django.dispatch import receiver
 from django.utils import timezone
@@ -30,7 +31,7 @@ class BackendAppConfig(AppConfig):
 
 
 @receiver(request_status)
-def check_scheduled_processes(**kwargs):
+def check_scheduled_processes(**kwargs) -> List[MonitoringStatusIssue]:
     from dsmr_backend.models.schedule import ScheduledProcess
 
     issues = []
@@ -55,7 +56,7 @@ def check_scheduled_processes(**kwargs):
 
 
 @receiver(request_status)
-def postgresql_check_database_size(**kwargs):  # pragma: nocover
+def postgresql_check_database_size(**kwargs) -> Optional[MonitoringStatusIssue]:  # pragma: nocover
     import dsmr_backend.services.backend
 
     pretty_size, bytes_size = dsmr_backend.services.backend.postgresql_total_database_size()

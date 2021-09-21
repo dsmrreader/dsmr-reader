@@ -1,4 +1,5 @@
 import logging
+from typing import NoReturn
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.signals import backend_called
@@ -7,7 +8,7 @@ from dsmr_backend.signals import backend_called
 logger = logging.getLogger('dsmrreader')
 
 
-def dispatch_signals():
+def dispatch_signals() -> NoReturn:
     """ Legacy execution, using signals. """
     # send_robust() guarantees the every listener receives this signal.
     responses = backend_called.send_robust(None)
@@ -22,7 +23,7 @@ def dispatch_signals():
             )
 
 
-def execute_scheduled_processes():
+def execute_scheduled_processes() -> NoReturn:
     """ Calls the backend and all services required. """
     calls = ScheduledProcess.objects.ready()
     logger.debug('SP: %s backend service(s) ready to run', len(calls))

@@ -1,6 +1,7 @@
 import logging
 from distutils.version import StrictVersion
 import datetime
+from typing import List, Optional
 
 import requests
 from django.db.migrations.recorder import MigrationRecorder
@@ -100,7 +101,7 @@ def is_latest_version() -> bool:
     return StrictVersion(local_version) >= StrictVersion(remote_version)
 
 
-def is_timestamp_passed(timestamp) -> bool:
+def is_timestamp_passed(timestamp: Optional[timezone.datetime]) -> bool:
     """ Generic service to check whether a timestamp has passed/is happening or is empty (None). """
     if timestamp is None:
         return True
@@ -118,7 +119,7 @@ def request_cached_monitoring_status():
     return cached_monitoring_status  # pragma: nocover
 
 
-def request_monitoring_status():
+def request_monitoring_status() -> List[MonitoringStatusIssue]:
     """ Requests all apps to report any issues for monitoring. """
     responses = signals.request_status.send_robust(None)
     issues = []
@@ -154,7 +155,7 @@ def is_recent_installation() -> bool:
     return not has_old_migration
 
 
-def hours_in_day(day) -> int:
+def hours_in_day(day: datetime.date) -> int:
     """ Returns the number of hours in a day. Should always be 24, except in DST transitions. """
     start = timezone.make_aware(timezone.datetime.combine(day, datetime.time.min))
     end = start + timezone.timedelta(days=1)
@@ -172,9 +173,9 @@ def hours_in_day(day) -> int:
         return 24
 
 
-def postgresql_total_database_size():  # pragma: nocover
+def postgresql_total_database_size() -> Optional[int]:  # pragma: nocover
     if connection.vendor != 'postgresql':
-        return
+        return None
 
     with connection.cursor() as cursor:
         database_name = settings.DATABASES['default']['NAME']
@@ -185,4 +186,5 @@ def postgresql_total_database_size():  # pragma: nocover
         WHERE d.datname = %s;
         """
         cursor.execute(size_sql, [database_name])
+
         return cursor.fetchone()

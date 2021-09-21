@@ -1,4 +1,5 @@
 import logging
+from typing import NoReturn, List
 
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
 
@@ -6,7 +7,7 @@ from dsmr_backend.signals import initialize_persistent_client, run_persistent_cl
 logger = logging.getLogger('dsmrreader')
 
 
-def initialize():
+def initialize() -> List[object]:
     """ Asks listeners to create their clients and return them for persistent during process lifetime. """
     responses = initialize_persistent_client.send_robust(None)
     clients = []
@@ -25,7 +26,7 @@ def initialize():
     return clients
 
 
-def run(clients):
+def run(clients) -> NoReturn:
     """ Asks listeners to run tasks with their client. """
     logger.debug('CLIENTS: Running %d active client(s)', len(clients))
 
@@ -37,7 +38,7 @@ def run(clients):
                 logger.error('CLIENTS: Run error: %s', current_response)
 
 
-def terminate(clients):
+def terminate(clients) -> NoReturn:
     """ Asks listeners to terminate their client. """
     logger.debug('CLIENTS: Terminating %d client(s)', len(clients))
 

@@ -6,12 +6,16 @@ from django.utils import timezone
 
 
 class MonitoringStatusIssue(object):
-    def __init__(self, source, description, since):
+    source: str
+    description: str
+    since: timezone.datetime
+
+    def __init__(self, source: str, description: str, since: timezone.datetime):
         self.source = str(source)
         self.description = str(description)
         self.since = since
 
-    def serialize(self):
+    def serialize(self) -> Dict:
         return {
             'source': self.source,
             'description': self.description,
