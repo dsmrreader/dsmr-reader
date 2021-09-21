@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.apps import AppConfig
 from django.conf import settings
 from django.dispatch import receiver
@@ -13,7 +15,7 @@ class ConsumptionAppConfig(AppConfig):
 
 
 @receiver(request_status)
-def check_unprocessed_readings(**kwargs):
+def check_unprocessed_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_datalogger.models.reading import DsmrReading
 
     unprocessed_count = DsmrReading.objects.unprocessed().count()

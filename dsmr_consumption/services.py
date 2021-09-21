@@ -1,6 +1,9 @@
+import datetime
 from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
 import logging
+from typing import NoReturn, Dict, Optional, List, Tuple
+
 import pytz
 from django.conf import settings
 
@@ -24,7 +27,7 @@ import dsmr_backend.services.backend
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess):
+def run(scheduled_process: ScheduledProcess) -> NoReturn:
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
     for current_reading in DsmrReading.objects.unprocessed()[0:settings.DSMRREADER_COMPACT_MAX]:
         try:
@@ -36,10 +39,8 @@ def run(scheduled_process: ScheduledProcess):
     scheduled_process.delay(seconds=1)
 
 
-def compact(dsmr_reading):
-    """
-    Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute.
-    """
+def compact(dsmr_reading: DsmrReading) -> NoReturn:
+    """ Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute. """
     consumption_settings = ConsumptionSettings.get_solo()
 
     # Grouping by minute requires some distinction and history checking.
@@ -76,7 +77,9 @@ def compact(dsmr_reading):
     logger.debug('Compact: Processed reading: %s', dsmr_reading)
 
 
-def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start):
+def _compact_electricity(
+    dsmr_reading: DsmrReading, electricity_grouping_type: int, reading_start: timezone.datetime
+) -> NoReturn:
     """
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
     """
@@ -166,7 +169,7 @@ def _compact_electricity(dsmr_reading, electricity_grouping_type, reading_start)
     )
 
 
-def _compact_gas(dsmr_reading, gas_grouping_type):
+def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> NoReturn:
     """
     Compacts any DSMR readings to gas consumption records, optionally grouped. Only when there is support for gas.
 
@@ -216,7 +219,7 @@ def _compact_gas(dsmr_reading, gas_grouping_type):
     )
 
 
-def consumption_by_range(start, end):
+def consumption_by_range(start, end) -> Tuple[Tuple[ElectricityConsumption], Tuple[GasConsumption]]:
     """ Calculates the consumption of a range specified. """
     electricity_readings = ElectricityConsumption.objects.filter(
         read_at__gte=start, read_at__lte=end,
@@ -229,7 +232,7 @@ def consumption_by_range(start, end):
     return electricity_readings, gas_readings
 
 
-def day_consumption(day):
+def day_consumption(day: datetime.date) -> Dict:
     """ Calculates the consumption of an entire day. """
     consumption = {
         'day': day
@@ -331,7 +334,7 @@ def day_consumption(day):
     return consumption
 
 
-def live_electricity_consumption():
+def live_electricity_consumption() -> Dict:
     """ Returns the current latest/live electricity consumption. """
     data = {}
 
@@ -391,7 +394,7 @@ def live_electricity_consumption():
     return data
 
 
-def live_gas_consumption():
+def live_gas_consumption() -> Dict:
     """ Returns the current latest/live gas consumption. """
     data = {}
 
@@ -417,7 +420,7 @@ def live_gas_consumption():
     return data
 
 
-def round_decimal(value, decimal_count=2):
+def round_decimal(value, decimal_count: int = 2) -> Decimal:
     """ Rounds a value to X decimals. """
     assert value is not None
     assert decimal_count > 0
@@ -431,7 +434,7 @@ def round_decimal(value, decimal_count=2):
     )
 
 
-def calculate_slumber_consumption_watt():
+def calculate_slumber_consumption_watt() -> Optional[int]:
     """ Groups all electricity readings to find the most constant consumption. """
     most_common = ElectricityConsumption.objects.filter(
         currently_delivered__gt=0
@@ -453,7 +456,7 @@ def calculate_slumber_consumption_watt():
     return round(usage / count * 1000)
 
 
-def calculate_min_max_consumption_watt():
+def calculate_min_max_consumption_watt() -> int:
     """ Returns the lowest and highest Wattage consumed for each phase. """
     FIELDS = {
         'total_min': ('currently_delivered', ''),
@@ -487,13 +490,13 @@ def calculate_min_max_consumption_watt():
     return data
 
 
-def clear_consumption():
+def clear_consumption() -> NoReturn:
     """ Clears ALL consumption data ever generated. """
     ElectricityConsumption.objects.all().delete()
     GasConsumption.objects.all().delete()
 
 
-def summarize_energy_contracts():
+def summarize_energy_contracts() -> List[Dict]:
     """ Returns a summery of all energy contracts and some statistics along them. """
     import dsmr_stats.services  # Prevents circular import.
 
@@ -542,7 +545,7 @@ def summarize_energy_contracts():
     return data
 
 
-def get_day_prices(day):
+def get_day_prices(day: datetime.date) -> EnergySupplierPrice:
     """ Returns the prices set for a day. Combines prices when multiple contracts are found. """
     contracts_found = EnergySupplierPrice.objects.filter(start__lte=day, end__gte=day)
 
@@ -582,7 +585,7 @@ def get_day_prices(day):
     return combined_contract
 
 
-def get_fallback_prices():
+def get_fallback_prices() -> EnergySupplierPrice:
     # Default to zero prices.
     return EnergySupplierPrice(
         description='Zero priced contract',

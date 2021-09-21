@@ -1,4 +1,5 @@
 import logging
+from typing import Dict, Iterator, Optional
 
 from django.db.models.expressions import F
 from django.utils import timezone
@@ -19,7 +20,7 @@ import dsmr_datalogger.signals
 logger = logging.getLogger('dsmrreader')
 
 
-def get_dsmr_connection_parameters():
+def get_dsmr_connection_parameters() -> Dict:
     """ Returns the communication settings required for the DSMR version set. """
     DSMR_VERSION_MAPPING = {
         DataloggerSettings.DSMR_VERSION_2_3: telegram_specifications.V2_2,
@@ -57,7 +58,7 @@ def get_dsmr_connection_parameters():
     return connection_parameters
 
 
-def get_telegram_generator():
+def get_telegram_generator() -> Iterator:
     """ Returns a generator for reading telegrams. """
 
     # Partially reuse the remote datalogger.
@@ -67,7 +68,7 @@ def get_telegram_generator():
     return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(**connection_parameters)
 
 
-def telegram_to_reading(data):
+def telegram_to_reading(data: str) -> DsmrReading:
     """ Converts a P1 telegram to a DSMR reading, which will be stored in database. """
     params = get_dsmr_connection_parameters()
     parser = TelegramParser(params['specifications'])
@@ -84,7 +85,7 @@ def telegram_to_reading(data):
     return _map_telegram_to_model(parsed_telegram=parsed_telegram, data=data)
 
 
-def _map_telegram_to_model(parsed_telegram, data):
+def _map_telegram_to_model(parsed_telegram: Dict, data: str):
     """ Maps parsed telegram to the fields. """
     READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ('id', 'processed')]
     STATISTICS_FIELDS = [
@@ -162,7 +163,7 @@ def _map_telegram_to_model(parsed_telegram, data):
     return new_instance
 
 
-def _get_dsmrreader_mapping(version):
+def _get_dsmrreader_mapping(version: int) -> Dict:
     """ Returns the mapping for OBIS to DSMR-reader (model fields). """
     SPLIT_GAS_FIELD = {
         'value': 'extra_device_delivered',
@@ -223,7 +224,7 @@ def _get_dsmrreader_mapping(version):
     return mapping
 
 
-def postgresql_approximate_reading_count():  # pragma: nocover
+def postgresql_approximate_reading_count() -> Optional[int]:  # pragma: nocover
     """ A live count is too slow on huge datasets. Using reltuples is accurate enough for an approximate. """
     if connection.vendor != 'postgresql':
         return
@@ -237,7 +238,7 @@ def postgresql_approximate_reading_count():  # pragma: nocover
         return int(reading_count)
 
 
-def calculate_fake_gas_reading_timestamp(now, is_dsmr_v5):
+def calculate_fake_gas_reading_timestamp(now: timezone.datetime, is_dsmr_v5: bool) -> timezone.datetime:
     """ When overriding time, we cannot fake each gas reading to have its own timestamp. Simulate meters instead. """
     now = now.replace(second=0, microsecond=0)
 

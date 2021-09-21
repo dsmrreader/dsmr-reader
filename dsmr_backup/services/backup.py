@@ -3,7 +3,7 @@ import logging
 import shutil
 import gzip
 import os
-from typing import Iterable
+from typing import Iterable, NoReturn
 
 from django.utils.translation import gettext as _
 from django.db import connection
@@ -197,7 +197,7 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
     return backup_file
 
 
-def on_backup_failed(process_handle):
+def on_backup_failed(process_handle) -> NoReturn:
     """ Triggered when backup creation fails. """
     error_message = process_handle.stderr.read()
     logger.critical(' - Unexpected exit code (%s) for backup: %s', process_handle.returncode, error_message)

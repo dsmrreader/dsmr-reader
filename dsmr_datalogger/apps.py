@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.apps import AppConfig
 from django.conf import settings
 from django.dispatch import receiver
@@ -14,7 +16,7 @@ class DataloggerAppConfig(AppConfig):
 
 
 @receiver(request_status)
-def check_recent_readings(**kwargs):
+def check_recent_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_datalogger.models.reading import DsmrReading
 
     try:
@@ -41,7 +43,7 @@ def check_recent_readings(**kwargs):
 
 
 @receiver(request_status)
-def check_reading_count(**kwargs):  # pragma: nocover
+def check_reading_count(**kwargs) -> Optional[MonitoringStatusIssue]:  # pragma: nocover
     import dsmr_datalogger.services.datalogger
 
     reading_count = dsmr_datalogger.services.datalogger.postgresql_approximate_reading_count()

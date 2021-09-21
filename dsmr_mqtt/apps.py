@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 
 from django.apps import AppConfig
 from django.conf import settings
@@ -137,7 +138,7 @@ def on_terminate_persistent_client(client, **kwargs):
 
 
 @receiver(request_status)
-def check_mqtt_messages_queue(**kwargs):
+def check_mqtt_messages_queue(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_mqtt.models.queue import Message
 
     if Message.objects.count() < settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:

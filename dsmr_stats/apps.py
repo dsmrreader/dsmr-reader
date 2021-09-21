@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.apps import AppConfig
 from django.conf import settings
 from django.dispatch import receiver
@@ -31,7 +33,7 @@ class StatsAppConfig(AppConfig):
 
 
 @receiver(request_status)
-def check_day_statistics_generation(**kwargs):
+def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_stats.models.statistics import DayStatistics
 
     try:

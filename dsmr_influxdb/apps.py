@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 
 from django.apps import AppConfig
 from django.conf import settings
@@ -54,7 +55,7 @@ def on_terminate_persistent_client(client, **kwargs):
 
 
 @receiver(request_status)
-def check_influxdb_measurements_queue(**kwargs):
+def check_influxdb_measurements_queue(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_influxdb.models import InfluxdbMeasurement
 
     if InfluxdbMeasurement.objects.count() < settings.DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE:
