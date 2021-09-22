@@ -153,7 +153,3 @@ non_existing_field = whatever
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
         self.assertFalse(InfluxdbMeasurement.objects.filter(measurement_name='fake').exists())
         self.assertTrue(warning_logger_mock.callled)
-
-    def test_serialize_decimal_to_float(self):
-        with self.assertRaises(TypeError):
-            dsmr_influxdb.services.serialize_decimal_to_float(1)  # Coverage run

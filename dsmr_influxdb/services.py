@@ -1,9 +1,9 @@
+import pickle
 from collections import defaultdict
-from decimal import Decimal
 import configparser
 import logging
-import json
 from typing import NoReturn, Dict
+import codecs
 
 from django.conf import settings
 from influxdb import InfluxDBClient
@@ -65,19 +65,23 @@ def run(influxdb_client: InfluxDBClient) -> NoReturn:
 
     for current in selection:
         try:
+            decoded_fields = codecs.decode(current.fields.encode(), 'base64')
+            unpickled_fields = pickle.loads(decoded_fields)
+
             influxdb_client.write_points([
                 {
                     "measurement": current.measurement_name,
                     "time": current.time,
-                    "fields": json.loads(current.fields),
+                    "fields": unpickled_fields
                 }
             ])
         except Exception as error:
-            logger.error('INFLUXDB: Writing measurement(s) failed: %s', error)
+            logger.error('INFLUXDB: Writing measurement(s) failed: %s, data: %s', error, current.fields)
 
         current.delete()
 
-    InfluxdbMeasurement.objects.all().delete()  # This purges the remainder.
+    # This purges the remainder.
+    InfluxdbMeasurement.objects.all().delete()
 
 
 def publish_dsmr_reading(instance: DsmrReading) -> NoReturn:
@@ -96,13 +100,13 @@ def publish_dsmr_reading(instance: DsmrReading) -> NoReturn:
         for reading_field, influxdb_field in measurement_mapping.items():
             measurement_fields[influxdb_field] = data_source[reading_field]
 
+        pickled_fields = pickle.dumps(measurement_fields)
+        encoded_fields = codecs.encode(pickled_fields, 'base64').decode()
+
         InfluxdbMeasurement.objects.create(
             measurement_name=current_measurement,
             time=data_source['timestamp'],
-            fields=json.dumps(
-                measurement_fields,
-                default=serialize_decimal_to_float
-            )
+            fields=encoded_fields
         )
 
 
@@ -129,11 +133,3 @@ def get_reading_to_measurement_mapping() -> Dict:
             mapping[current_measurement][instance_field_name] = influxdb_field_name
 
     return mapping
-
-
-def serialize_decimal_to_float(obj: Decimal) -> float:
-    """ Workaround to make sure Decimals are not converted to strings here. """
-    if not isinstance(obj, Decimal):
-        raise TypeError(type(obj).__name__)
-
-    return float(obj)

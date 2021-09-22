@@ -4,7 +4,7 @@
     "fields": {
         "time": "2020-07-16T21:38:39Z",
         "measurement_name": "electricity_phases",
-        "fields": "{\"currently_delivered_l1\": 1.114, \"currently_delivered_l2\": 1.359, \"currently_delivered_l3\": 0.254, \"currently_returned_l1\": 0.0, \"currently_returned_l2\": 0.0, \"currently_returned_l3\": 0.0}"
+        "fields": "gASVAAEAAAAAAAB9lCiMFmN1cnJlbnRseV9kZWxpdmVyZWRfbDGUjAdkZWNpbWFslIwHRGVjaW1hbJSTlIwFMC41NTWUhZRSlIwWY3VycmVudGx5X2RlbGl2ZXJlZF9sMpRoBIwFMC41MTOUhZRSlIwWY3VycmVudGx5X2RlbGl2ZXJlZF9sM5RoBIwFMC43NjWUhZRSlIwVY3VycmVudGx5X3JldHVybmVkX2wxlGgEjAUwLjAwMJSFlFKUjBVjdXJyZW50bHlfcmV0dXJuZWRfbDKUaASMBTAuMDAwlIWUUpSMFWN1cnJlbnRseV9yZXR1cm5lZF9sM5RoBIwFMC4wMDCUhZRSlHUu"
     }
 },
 {
@@ -13,7 +13,7 @@
     "fields": {
         "time": "2020-07-16T21:38:39Z",
         "measurement_name": "electricity_power",
-        "fields": "{\"current_l1\": 5.0, \"current_l2\": 2.0, \"current_l3\": 0.0}"
+        "fields": "gASVXgAAAAAAAAB9lCiMCmN1cnJlbnRfbDGUjAdkZWNpbWFslIwHRGVjaW1hbJSTlIwBN5SFlFKUjApjdXJyZW50X2wylGgEjAEzlIWUUpSMCmN1cnJlbnRfbDOUaASMATGUhZRSlHUu"
     }
 },
 {
@@ -22,6 +22,6 @@
     "fields": {
         "time": "2020-07-16T21:38:39Z",
         "measurement_name": "electricity_positions",
-        "fields": "{\"delivered_1\": 17493.933, \"returned_1\": 0.0, \"delivered_2\": 10496.36, \"returned_2\": 0}"
+        "fields": "gASVgwAAAAAAAAB9lCiMC2RlbGl2ZXJlZF8xlIwHZGVjaW1hbJSMB0RlY2ltYWyUk5SMCTIxMjI2LjQwNJSFlFKUjApyZXR1cm5lZF8xlGgEjAUwLjAwMJSFlFKUjAtkZWxpdmVyZWRfMpRoBIwJMTI3MzUuODQylIWUUpSMCnJldHVybmVkXzKUSwB1Lg=="
     }
 }]

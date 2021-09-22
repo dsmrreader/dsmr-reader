@@ -124,7 +124,7 @@ class InfluxdbMeasurement(ModelUpdateMixin, models.Model):
     """ Queued measurement for InfluxDB. """
     time = models.DateTimeField()
     measurement_name = models.CharField(max_length=255)
-    fields = models.TextField()
+    fields = models.TextField()  # Base64 encoded
 
     def __str__(self):
         return self.measurement_name

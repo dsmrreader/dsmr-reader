@@ -19,6 +19,7 @@ class Command(BaseCommand):
     PK_MEASUREMENT = 'export_progress_meta'
     PK_FIELD = 'last_pk_synced'
 
+    max_batches: int = 1
     influxdb_client = None
     field_mapping = None
 
@@ -114,7 +115,7 @@ class Command(BaseCommand):
             return 0
 
         timestamp, last_pk = result.raw['series'][0]['values'][0]
-        logger.info('INFLUXDB EXPORT: Last PK %d @ %s (export_progress_meta in InfluxDB)', last_pk, timestamp)
+        logger.info('INFLUXDB EXPORT: Last PK synced %d @ %s (export_progress_meta in InfluxDB)', last_pk, timestamp)
 
         return last_pk
 
