@@ -8,7 +8,7 @@ $(document).ready(function () {
             data: []
         },
         {
-            // We need this axis for rendering the return graph but hide it, since it's redunant.
+            // We need this axis for rendering the return graph but hide it, since it's redundant.
             show: false,
             gridIndex: 1,
             boundaryGap: false,
