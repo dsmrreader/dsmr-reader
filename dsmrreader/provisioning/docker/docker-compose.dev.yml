@@ -16,14 +16,15 @@ services:
     ports:
       - '8000:8000'
     depends_on:
-      # Development
+      # DSMR-reader development
       - dsmr-db
       - dsmr-docs
-      # Tests
+      # Testing DB engines
       - test-db-postgres
       - test-db-mysql
-      # Misc
-      - dsmr-mqtt
+      # Misc tools for development/testing
+      - mqtt-dev
+      - influxdb-dev
     environment:
       # Development
       - DSMRREADER_LOGLEVEL=DEBUG
@@ -78,15 +79,6 @@ services:
       - POSTGRES_USER=dsmrreader
       - POSTGRES_PASSWORD=postgres-password
 
-  dsmr-mqtt:
-    container_name: dsmr-mqtt
-    image: eclipse-mosquitto:2
-    restart: always
-    volumes:
-      - ./dsmrreader/provisioning/docker/mosquitto-dev/:/mosquitto/config/
-    ports:
-      - '1883:1883'
-
   test-db-postgres:
     container_name: test-db-postgres
     image: postgres:13
@@ -116,3 +108,19 @@ services:
      - MYSQL_USER=testuser
      - MYSQL_PASSWORD=testpasswd
      - MYSQL_ROOT_PASSWORD=testpasswd
+
+  mqtt-dev:
+    container_name: mqtt-dev
+    image: eclipse-mosquitto:2
+    restart: always
+    volumes:
+      - ./dsmrreader/provisioning/docker/mosquitto-dev/:/mosquitto/config/
+    ports:
+      - '1883:1883'
+
+  influxdb-dev:
+    container_name: influxdb-dev
+    image: influxdb:1.8-alpine
+    restart: always
+    ports:
+      - '8086:8086'
