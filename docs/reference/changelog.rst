@@ -24,7 +24,15 @@ v4.18.0 - 2021-xx-xx
 - ``Fixed`` Download links in APi docs now respect ``STATIC_URL`` (or ``DJANGO_STATIC_URL``) [`#1401 <https://github.com/dsmrreader/dsmr-reader/issues/1401>`_]
 - ``Fixed`` Database restore naar Influx: "partial write: field type conflict..." [`#1400 <https://github.com/dsmrreader/dsmr-reader/issues/1400>`_]
 
-- ``Misc`` Added Python type hinting to ease development and help preventing type mix ups
+- ``Misc`` *Added Python type hinting internally to ease development and help preventing type mix ups.*
+
+.. warning::
+
+    The InfluxDB fix above (``#1400``) is **not backwards compatible** with measurement data already queued for export in DSMR-reader during deploy/upgrade.
+    You can view any measurement data queued in DSMR-reader by visiting the following URL in your installation: ``/admin/dsmr_influxdb/influxdbmeasurement/``
+
+    *The measurement data is usually only queued for a few seconds, until DSMR-reader exports it and then removes it from the export queue again.*
+    *You'll likely only suffer a few seconds of data loss in InfluxDB, which should not affect any aggregations or dashboards at all.*
 
 
 v4.17.0 - 2021-09-19
