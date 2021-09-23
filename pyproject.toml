@@ -5,7 +5,8 @@ description = "DSMR-protocol reader, telegram data storage and energy consumptio
 license = "Creative Commons Attribution-NonCommercial 4.0 International Public License"
 
 authors = [
-    "Dennis Siemensma"
+    "Dennis Siemensma",
+    "https://github.com/dsmrreader/dsmr-reader/graphs/contributors"
 ]
 
 readme = 'README.md'
