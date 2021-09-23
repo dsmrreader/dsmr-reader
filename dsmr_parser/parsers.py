@@ -1,11 +1,16 @@
+import logging
 import re
+
 from ctypes import c_ushort
 
-from dsmr_parser.objects import MBusObject, CosemObject
+from dsmr_parser.objects import MBusObject, CosemObject, ProfileGenericObject
 from dsmr_parser.exceptions import ParseError, InvalidChecksumError
+
+logger = logging.getLogger(__name__)
 
 
 class TelegramParser(object):
+    crc16_tab = []
 
     def __init__(self, telegram_specification, apply_checksum_validation=True):
         """
@@ -29,6 +34,7 @@ class TelegramParser(object):
         :returns: Shortened example:
             {
                 ..
+                ..
             }
         :raises ParseError:
         :raises InvalidChecksumError:
@@ -45,7 +51,13 @@ class TelegramParser(object):
             matches = re.findall(signature, telegram_data, re.DOTALL)
 
             for current_match in matches:
-                telegram[signature] = parser.parse(current_match)
+                # Some signatures are optional and may not be present,
+                # so only parse lines that match
+                try:
+                    telegram[signature] = parser.parse(current_match)
+                except Exception:
+                    logger.error("ignore line with signature {}, because parsing failed.".format(signature),
+                                 exc_info=True)
 
         return telegram
 
@@ -88,24 +100,28 @@ class TelegramParser(object):
 
     @staticmethod
     def crc16(telegram):
-        crc16_tab = []
+        """
+        Calculate the CRC16 value for the given telegram
 
-        for i in range(0, 256):
-            crc = c_ushort(i).value
-            for j in range(0, 8):
-                if (crc & 0x0001):
-                    crc = c_ushort(crc >> 1).value ^ 0xA001
-                else:
-                    crc = c_ushort(crc >> 1).value
-            crc16_tab.append(hex(crc))
-
+        :param str telegram:
+        """
         crcValue = 0x0000
+
+        if len(TelegramParser.crc16_tab) == 0:
+            for i in range(0, 256):
+                crc = c_ushort(i).value
+                for j in range(0, 8):
+                    if (crc & 0x0001):
+                        crc = c_ushort(crc >> 1).value ^ 0xA001
+                    else:
+                        crc = c_ushort(crc >> 1).value
+                TelegramParser.crc16_tab.append(hex(crc))
 
         for c in telegram:
             d = ord(c)
             tmp = crcValue ^ d
             rotated = c_ushort(crcValue >> 8).value
-            crcValue = rotated ^ int(crc16_tab[(tmp & 0x00ff)], 0)
+            crcValue = rotated ^ int(TelegramParser.crc16_tab[(tmp & 0x00ff)], 0)
 
         return crcValue
 
@@ -118,19 +134,28 @@ class DSMRObjectParser(object):
     def __init__(self, *value_formats):
         self.value_formats = value_formats
 
+    def _is_line_wellformed(self, line, values):
+        # allows overriding by child class
+        return (values and (len(values) == len(self.value_formats)))
+
+    def _parse_values(self, values):
+        # allows overriding by child class
+        return [self.value_formats[i].parse(value)
+                for i, value in enumerate(values)]
+
     def _parse(self, line):
         # Match value groups, but exclude the parentheses
-        pattern = re.compile(r'((?<=\()[0-9a-zA-Z\.\*]{0,}(?=\)))+')
+        pattern = re.compile(r'((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))')
+
         values = re.findall(pattern, line)
+
+        if not self._is_line_wellformed(line, values):
+            raise ParseError("Invalid '%s' line for '%s'", line, self)
 
         # Convert empty value groups to None for clarity.
         values = [None if value == '' else value for value in values]
 
-        if not values or len(values) != len(self.value_formats):
-            raise ParseError("Invalid '%s' line for '%s'", line, self)
-
-        return [self.value_formats[i].parse(value)
-                for i, value in enumerate(values)]
+        return self._parse_values(values)
 
 
 class MBusParser(DSMRObjectParser):
@@ -200,8 +225,41 @@ class ProfileGenericParser(DSMRObjectParser):
     9) Unit of buffer values (Unit of capture objects attribute)
     """
 
+    def __init__(self, buffer_types, head_parsers, parsers_for_unidentified):
+        self.value_formats = head_parsers
+        self.buffer_types = buffer_types
+        self.parsers_for_unidentified = parsers_for_unidentified
+
+    def _is_line_wellformed(self, line, values):
+        if values and (len(values) == 1) and (values[0] == ''):
+            # special case: single empty parentheses (indicated by empty string)
+            return True
+
+        if values and (len(values) >= 2) and (values[0].isdigit()):
+            buffer_length = int(values[0])
+            return (buffer_length <= 10) and (len(values) == (buffer_length * 2 + 2))
+        else:
+            return False
+
+    def _parse_values(self, values):
+        if values and (len(values) == 1) and (values[0] is None):
+            # special case: single empty parentheses; make sure empty ProfileGenericObject is created
+            values = [0, None]  # buffer_length=0, buffer_value_obis_ID=None
+        buffer_length = int(values[0])
+        buffer_value_obis_ID = values[1]
+        if (buffer_length > 0):
+            if buffer_value_obis_ID in self.buffer_types:
+                bufferValueParsers = self.buffer_types[buffer_value_obis_ID]
+            else:
+                bufferValueParsers = self.parsers_for_unidentified
+        # add the parsers for the encountered value type z times
+        for _ in range(buffer_length):
+            self.value_formats.extend(bufferValueParsers)
+
+        return [self.value_formats[i].parse(value) for i, value in enumerate(values)]
+
     def parse(self, line):
-        raise NotImplementedError()
+        return ProfileGenericObject(self._parse(line))
 
 
 class ValueParser(object):
@@ -219,7 +277,6 @@ class ValueParser(object):
         self.coerce_type = coerce_type
 
     def parse(self, value):
-
         unit_of_measurement = None
 
         if value and '*' in value:

@@ -193,7 +193,7 @@ def _get_dsmrreader_mapping(version: int) -> Dict:
         obis_references.INSTANTANEOUS_CURRENT_L2: 'phase_power_current_l2',
         obis_references.INSTANTANEOUS_CURRENT_L3: 'phase_power_current_l3',
 
-        # For some reason this identifier contains two fields, therefor we split them.
+        # For some reason this identifier contains two fields, therefore we split them.
         obis_references.HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,
         obis_references.GAS_METER_READING: SPLIT_GAS_FIELD,  # Legacy
 
