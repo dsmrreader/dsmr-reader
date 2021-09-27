@@ -62,7 +62,7 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
             avg_electricity = (current['avg_electricity1'] + current['avg_electricity2']) / 2
             data['electricity'].append({
                 'name': hour_start,
-                'value': float(dsmr_consumption.services.round_decimal(avg_electricity))
+                'value': float(dsmr_consumption.services.round_decimal(avg_electricity, decimal_count=5))
             })
 
             if capabilities[Capability.ELECTRICITY_RETURNED]:
@@ -71,13 +71,13 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
                 ) / 2
                 data['electricity_returned'].append({
                     'name': hour_start,
-                    'value': float(dsmr_consumption.services.round_decimal(avg_electricity_returned))
+                    'value': float(dsmr_consumption.services.round_decimal(avg_electricity_returned, decimal_count=5))
                 })
 
             if capabilities[Capability.GAS]:
                 data['gas'].append({
                     'name': hour_start,
-                    'value': float(dsmr_consumption.services.round_decimal(current['avg_gas']))
+                    'value': float(dsmr_consumption.services.round_decimal(current['avg_gas'], decimal_count=5))
                 })
 
         return JsonResponse(data)

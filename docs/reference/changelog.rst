@@ -23,6 +23,7 @@ v4.18.0 - 2021-xx-xx
 - ``Fixed`` Backup wordt op verkeerde tijd weggeschreven [`#1416 <https://github.com/dsmrreader/dsmr-reader/issues/1416>`_]
 - ``Fixed`` Download links in APi docs now respect ``STATIC_URL`` (or ``DJANGO_STATIC_URL``) [`#1401 <https://github.com/dsmrreader/dsmr-reader/issues/1401>`_]
 - ``Fixed`` Database restore naar Influx: "partial write: field type conflict..." [`#1400 <https://github.com/dsmrreader/dsmr-reader/issues/1400>`_]
+- ``Fixed`` Gemiddelden gas in trends verdwijnen door kleine waarden [`#1453 <https://github.com/dsmrreader/dsmr-reader/issues/1453>`_]
 
 - ``Misc`` Updated internal copy of `dsmr_parser <https://github.com/ndokter/dsmr_parser>`_ to ``v0.30`` and reapplied DSMR-reader specific improvements/fixes.
 - ``Misc`` *Added Python type hinting internally to ease development and help preventing type mix ups.*
