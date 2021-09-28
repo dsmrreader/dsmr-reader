@@ -434,10 +434,10 @@ def recalculate_prices() -> NoReturn:
 
         current_day.fixed_cost = prices.fixed_daily_cost
         current_day.total_cost = dsmr_consumption.services.round_decimal(
-            current_day.electricity1_cost +
-            current_day.electricity2_cost +
-            current_day.gas_cost +
-            current_day.fixed_cost
+            current_day.electricity1_cost or 0 +
+            current_day.electricity2_cost or 0 +
+            current_day.gas_cost or 0 +
+            current_day.fixed_cost or 0
         )
         current_day.save()
 
