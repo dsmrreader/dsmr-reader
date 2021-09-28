@@ -418,6 +418,7 @@ def recalculate_prices() -> NoReturn:
             print(' !!! No prices found, using zero fallback')
             prices = dsmr_consumption.services.get_fallback_prices()
 
+        current_day.fixed_cost = prices.fixed_daily_cost
         current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
             current_day.electricity1 * prices.electricity_delivered_1_price -
             current_day.electricity1_returned * prices.electricity_returned_1_price
@@ -427,18 +428,15 @@ def recalculate_prices() -> NoReturn:
             current_day.electricity2_returned * prices.electricity_returned_2_price
         )
 
+        total_cost = current_day.electricity1_cost + current_day.electricity2_cost + current_day.fixed_cost
+
         if current_day.gas is not None:
             current_day.gas_cost = dsmr_consumption.services.round_decimal(
                 current_day.gas * prices.gas_price
             )
+            total_cost += current_day.gas_cost
 
-        current_day.fixed_cost = prices.fixed_daily_cost
-        current_day.total_cost = dsmr_consumption.services.round_decimal(
-            current_day.electricity1_cost or 0 +
-            current_day.electricity2_cost or 0 +
-            current_day.gas_cost or 0 +
-            current_day.fixed_cost or 0
-        )
+        current_day.total_cost = dsmr_consumption.services.round_decimal(total_cost)
         current_day.save()
 
 
