@@ -21,7 +21,7 @@ v4.18.0 - 2021-09-29
 --------------------
 
 - ``Fixed`` Backup wordt op verkeerde tijd weggeschreven [`#1416 <https://github.com/dsmrreader/dsmr-reader/issues/1416>`_]
-- ``Fixed`` Download links in APi docs now respect ``STATIC_URL`` (or ``DJANGO_STATIC_URL``) [`#1401 <https://github.com/dsmrreader/dsmr-reader/issues/1401>`_]
+- ``Fixed`` Download links in API docs now respect ``STATIC_URL`` (or ``DJANGO_STATIC_URL``) [`#1401 <https://github.com/dsmrreader/dsmr-reader/issues/1401>`_]
 - ``Fixed`` Database restore naar Influx: "partial write: field type conflict..." [`#1400 <https://github.com/dsmrreader/dsmr-reader/issues/1400>`_]
 - ``Fixed`` Gemiddelden gas in trends verdwijnen door kleine waarden [`#1453 <https://github.com/dsmrreader/dsmr-reader/issues/1453>`_]
 - ``Fixed`` Error: ``dsmr_stats_recalculate_prices``: ``unsupported operand type(s) for +: 'decimal.Decimal' and 'NoneType'`` [`#1449 <https://github.com/dsmrreader/dsmr-reader/issues/1449>`_]
