@@ -17,6 +17,12 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
+v4.19.0 - 2021-10-xx
+--------------------
+
+- ``Fixed`` xxxxxxxxxx [`#xxxxxxxxxx <https://github.com/dsmrreader/dsmr-reader/issues/xxxxxxxxxx>`_]
+
+
 v4.18.0 - 2021-09-29
 --------------------
 
