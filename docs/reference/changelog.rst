@@ -17,7 +17,7 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.18.0 - 2021-xx-xx
+v4.18.0 - 2021-09-29
 --------------------
 
 - ``Fixed`` Backup wordt op verkeerde tijd weggeschreven [`#1416 <https://github.com/dsmrreader/dsmr-reader/issues/1416>`_]
