@@ -5,9 +5,9 @@ psycopg2-binary
 pylama==7.7.1
 pytest-cov==2.12.1
 pytest-django==4.4.0
-pytest-xdist==2.3.0
+pytest-xdist==2.4.0
 mysqlclient==2.0.3
-sphinx==3.5.4
+sphinx==4.2.0
 sphinx-autobuild==2021.3.14
 sphinx-intl==2.0.1
-sphinx-rtd-theme==0.5.2
+sphinx-rtd-theme==1.0.0
