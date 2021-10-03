@@ -72,9 +72,6 @@ msgstr "Tijd tot volgende aanroep"
 msgid "Backend (dsmr_backend)"
 msgstr "Backend (dsmr_backend)"
 
-msgid "Unsupported database engine \"{}\" active, some features might not work properly"
-msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
-
 msgid "Process behind schedule: {}"
 msgstr "Proces loopt achter op schema: {}"
 
@@ -2628,6 +2625,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Unsupported database engine \"{}\" active, some features might not work properly"
+#~ msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
 
 #~ msgid "Level"
 #~ msgstr "Niveau"

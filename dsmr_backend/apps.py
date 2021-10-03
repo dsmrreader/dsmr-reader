@@ -1,12 +1,15 @@
-import warnings
-from typing import Optional, List
+from io import StringIO
+from typing import Optional, List, NoReturn
+from unittest import mock
 
+from django.core.management import call_command
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.apps import AppConfig
 from django.db import connection
 from django.conf import settings
+from django.core.checks import Warning, Critical, register, Tags
 
 from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.signals import request_status
@@ -17,17 +20,45 @@ class BackendAppConfig(AppConfig):
     name = 'dsmr_backend'
     verbose_name = _('Backend (dsmr_backend)')
 
-    def ready(self):
-        """ Performs an DB engine check, as we maintain some engine specific queries. """
-        if (connection.vendor not in settings.DSMRREADER_SUPPORTED_DB_VENDORS):  # pragma: no cover
-            # Temporary for backwards compatibility
-            warnings.showwarning(
-                _(
-                    'Unsupported database engine "{}" active, '
-                    'some features might not work properly'.format(connection.vendor)
-                ),
-                RuntimeWarning, __file__, 0
-            )
+    def ready(self) -> NoReturn:
+        @register(Tags.compatibility, deploy=True)
+        def system_checks(app_configs, **kwargs) -> List:
+            """ @see https://docs.djangoproject.com/en/3.1/topics/checks/"""
+            errors = []
+
+            # DB Engine check.
+            if connection.vendor not in settings.DSMRREADER_SUPPORTED_DB_VENDORS:  # pragma: no cover
+                errors.append(
+                    Warning(
+                        'Unsupported database engine "{}" active, some features might not work properly'.format(
+                            connection.vendor
+                        ),
+                        obj=None,
+                        id=settings.DSMRREADER_SYSTEM_CHECK_001,
+                    )
+                )
+
+            # Check unapplied migrations.
+            with mock.patch('sys.exit') as exit_mock:  # Prevent hard exit
+                exit_mock.side_effect = InterruptedError()
+                stdout = StringIO()
+
+                try:
+                    call_command('migrate', stdout=stdout, plan=True, check_unapplied=True, no_color=True)
+                except InterruptedError:
+                    stdout.seek(0)
+                    migrate_output = stdout.read()
+
+                    if migrate_output:  # e.g. " Alter field phase_voltage_l2 on dsmrreading"
+                        errors.append(
+                            Critical(
+                                'There are unapplied migrations, please run "migrate"\n\n{}'.format(migrate_output),
+                                obj=None,
+                                id=settings.DSMRREADER_SYSTEM_CHECK_002,
+                            )
+                        )
+
+            return errors
 
 
 @receiver(request_status)

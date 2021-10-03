@@ -163,7 +163,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         Notification.objects.all().delete()
         self.assertFalse(Notification.objects.exists())
 
-        # Exception should be rainsed and message created.
+        # Exception should be raised and message created.
         with self.assertRaises(IOError):
             dsmr_backup.services.backup.on_backup_failed(process_handle=subprocess_mock)
 
