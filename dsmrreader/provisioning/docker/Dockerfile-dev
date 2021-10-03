@@ -9,11 +9,8 @@ ENV PYTHONUNBUFFERED=1
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install -y gettext
-
-# Eases network debugging a lot
-RUN apt-get install -y telnet
+# "telnet" eases network debugging a lot...
+RUN apt-get update && apt-get install -y gettext telnet
 
 COPY ./pyproject.toml /app/
 COPY ./poetry.lock /app/
