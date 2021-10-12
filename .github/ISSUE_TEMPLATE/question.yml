@@ -1,0 +1,24 @@
+name: 🤔 I have a question
+description: You'd like to ask something generic.
+title: '🤔'
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        *🇳🇱 Voel je vooral vrij om ook in het Nederlands te communiceren, ondanks dat het project in de kern Engelstalig is, gezien dat een stuk vlotter gaat. If you're unable to communicate in Dutch, welcome anyway! Feel free to use English and indicate that you do not understand Dutch.*
+
+        ### Help yourself
+        Sometimes you can find the answer here:
+        - Check [the how to guides](https://dsmr-reader.readthedocs.io/nl/v4/how-to/index.html).
+        - See previous [questions](https://github.com/dsmrreader/dsmr-reader/discussions).
+        - See (recent) previous [issues](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc).
+        - See [env settings](https://dsmr-reader.readthedocs.io/nl/v4/reference/env-settings.html) available.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Your question
+      description: What's the question you have?
+    validations:
+      required: true

@@ -1,0 +1,57 @@
+name: 🚨 Report
+description: You've found a bug or want to report something else.
+title: '🚨'
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        *🇳🇱 Voel je vooral vrij om ook in het Nederlands te communiceren, ondanks dat het project in de kern Engelstalig is, gezien dat een stuk vlotter gaat. If you're unable to communicate in Dutch, welcome anyway! Feel free to use English and indicate that you do not understand Dutch.*
+
+        ### Note
+        Sometimes bad stuff is already reported:
+        - See (recent) previous [issues](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc).
+        - See previous [questions](https://github.com/dsmrreader/dsmr-reader/discussions).
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What'd you like to report?
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: DSMR-reader version
+      description: What DSMR-reader version are you running?
+      placeholder: e.g. 4.18
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ----
+
+        *If you are able to provide (some of the) additional information below, it may assist in debugging.*
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: DSMR-reader platform
+      description: How do you run DSMR-reader?
+      options:
+        - Native (e.g. manual installation)
+        - Docker (e.g. Xirixiz)
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: debug-info-dump
+    attributes:
+      label: Debug info dump
+      description: When applicable, add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v4/how-to/troubleshooting/debug-info-dump.html) below. This will be automatically formatted into code, so no need for backticks.
+      render: shell
