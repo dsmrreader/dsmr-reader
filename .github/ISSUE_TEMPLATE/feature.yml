@@ -1,0 +1,21 @@
+name: 💡 Feature / improvement request
+description: Request for an improvement or a new feature.
+title: '💡'
+labels: ["review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        *🇳🇱 Voel je vooral vrij om ook in het Nederlands te communiceren, ondanks dat het project in de kern Engelstalig is, gezien dat een stuk vlotter gaat. If you're unable to communicate in Dutch, welcome anyway! Feel free to use English and indicate that you do not understand Dutch.*
+
+        ### Notes
+        - Check whether the feature [is already on the backlog](https://github.com/dsmrreader/dsmr-reader/issues) or has [already been requested before](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed).
+        - DSMR-reader only supports generic features related to your smart meter. Specific requests for your own situation (or outside the project scope) are unlikely to be added.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature
+      description: Describe the feature you'd like and your reasoning for it.
+    validations:
+      required: true
