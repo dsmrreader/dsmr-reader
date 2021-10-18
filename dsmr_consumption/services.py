@@ -456,7 +456,7 @@ def calculate_slumber_consumption_watt() -> Optional[int]:
     return round(usage / count * 1000)
 
 
-def calculate_min_max_consumption_watt() -> int:
+def calculate_min_max_consumption_watt() -> Dict:
     """ Returns the lowest and highest Wattage consumed for each phase. """
     FIELDS = {
         'total_min': ('currently_delivered', ''),
