@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
 
@@ -140,7 +141,7 @@ class HourStatistics(ModelUpdateMixin, models.Model):
 
     def __str__(self):
         return '{}: {}'.format(
-            self.__class__.__name__, self.hour_start
+            self.__class__.__name__, timezone.localtime(self.hour_start)
         )
 
 

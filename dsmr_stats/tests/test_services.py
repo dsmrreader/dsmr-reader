@@ -416,20 +416,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             **default_kwargs
         )
         dsmr_stats.services.create_statistics(target_day=timezone.now().date())
-        self.assertEqual(HourStatistics.objects.all().count(), 3)  # First hour is empty.
-
-        # Fix for #766, hours should include the last second/minute as well.
-        self.assertEqual(HourStatistics.objects.get(
-            hour_start=timezone.now() - timezone.timedelta(hours=1)  # 11:00 CET
-        ).electricity1, Decimal('0.0'))
-
-        self.assertEqual(HourStatistics.objects.get(
-            hour_start=timezone.now() - timezone.timedelta(hours=0)  # 12:00 CET
-        ).electricity1, Decimal('0.60'))
-
-        self.assertEqual(HourStatistics.objects.get(
-            hour_start=timezone.now() + timezone.timedelta(hours=1)  # 13:00 CET
-        ).electricity1, Decimal('0.01'))
+        self.assertEqual(HourStatistics.objects.all().count(), 2)  # First hour is empty.
 
     @mock.patch('django.core.cache.cache.clear')
     @mock.patch('dsmr_stats.services.create_daily_statistics')
@@ -902,7 +889,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # It should just trigger.
         self.assertEqual(DayStatistics.objects.all().count(), 2)
-        self.assertEqual(HourStatistics.objects.all().count(), 5)
+        self.assertEqual(HourStatistics.objects.all().count(), 4)
 
     def test_reconstruct_missing_day_statistics_by_hours(self):
         # Existing day should be ignored.

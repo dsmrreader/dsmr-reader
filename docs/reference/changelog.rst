@@ -20,7 +20,13 @@ Current version
 v4.19.0 - 2021-10-xx
 --------------------
 
-- ``Fixed`` xxxxxxxxxx [`#xxxxxxxxxx <https://github.com/dsmrreader/dsmr-reader/issues/xxxxxxxxxx>`_]
+.. note::
+
+    There has been a bug in the hour statistics since ``v2.10``, offsetting the values by one hour.
+    The bug will no longer occur for upcoming data when you've upgraded, but existing data is still affected.
+    The latter may or may not be fixed in a future release with a one-time migration, depending on whether it can be done reliably, since the bug did not affect the day totals.
+
+- ``Fixed`` Tijdverschil tussen Live en Archief voor gas [`#1385 <https://github.com/dsmrreader/dsmr-reader/issues/1385>`_]
 
 
 v4.18.0 - 2021-09-29

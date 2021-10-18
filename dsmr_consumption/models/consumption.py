@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from dsmr_backend.mixins import ModelUpdateMixin
@@ -140,7 +141,7 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
 
     def __str__(self):
         return '{} | {}: {} Watt'.format(
-            self.__class__.__name__, self.read_at, self.currently_delivered * 1000
+            self.__class__.__name__, timezone.localtime(self.read_at), self.currently_delivered * 1000
         )
 
     class Meta:
@@ -166,7 +167,7 @@ class GasConsumption(ModelUpdateMixin, models.Model):
 
     def __str__(self):
         return '{} | {}: {} m3'.format(
-            self.__class__.__name__, self.read_at, self.currently_delivered
+            self.__class__.__name__, timezone.localtime(self.read_at), self.currently_delivered
         )
 
     class Meta:
