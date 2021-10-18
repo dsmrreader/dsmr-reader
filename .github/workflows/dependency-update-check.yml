@@ -31,8 +31,10 @@ jobs:
             /home/runner/work/dsmr-reader/dsmr-reader/.venv
           key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
 
-      - name: Install Poetry dependencies
-        run: poetry install
+      - name: Check & install Poetry dependencies
+        run: |
+          poetry check
+          poetry install
 
       - name: Check for Poetry dependency updates
         run: |
