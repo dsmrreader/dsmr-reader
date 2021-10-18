@@ -78,17 +78,6 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_('Client ID'),
         help_text=_('The client ID used to identify DSMR-reader sending the MQTT messages.')
     )
-    # @todo @deprecated No longer in use. Drop in later release safely.
-    qos = models.IntegerField(
-        default=QOS_2,
-        choices=QOS_CHOICES,
-        verbose_name=_('Quality Of Service'),
-        help_text=_(
-            'QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). '
-            'QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! '
-            'QoS 2: Slowest performance, but reliable and prevents sending duplicate messages.'
-        )
-    )
     restart_required = models.BooleanField(
         default=False,
         verbose_name=_('Restart required'),

@@ -2026,12 +2026,6 @@ msgstr "Client ID"
 msgid "The client ID used to identify DSMR-reader sending the MQTT messages."
 msgstr "Het Client ID dat gebruikt wordt om DSMR-reader te identificeren bij het versturen van de MQTT berichten."
 
-msgid "Quality Of Service"
-msgstr "Quality Of Service"
-
-msgid "QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages."
-msgstr "QoS 0: Beste performance, maar onbetoruwbaar (ontworpen voor betrouwbare verbindingen, zoals bekabelde netwerken). QoS 1: Gemiddelde performance, maar betrouwbaar. LET OP: Kan ervoor zorgen dat berichten dubbel verzonden worden! QoS 2: Traagste performance, maar betrouwbaar en voorkomt het versturen van dubbele berichten."
-
 msgid "Restart required"
 msgstr "Herstart vereist"
 
@@ -2625,6 +2619,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Quality Of Service"
+#~ msgstr "Quality Of Service"
+
+#~ msgid "QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages."
+#~ msgstr "QoS 0: Beste performance, maar onbetoruwbaar (ontworpen voor betrouwbare verbindingen, zoals bekabelde netwerken). QoS 1: Gemiddelde performance, maar betrouwbaar. LET OP: Kan ervoor zorgen dat berichten dubbel verzonden worden! QoS 2: Traagste performance, maar betrouwbaar en voorkomt het versturen van dubbele berichten."
 
 #~ msgid "Unsupported database engine \"{}\" active, some features might not work properly"
 #~ msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
