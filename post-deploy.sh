@@ -2,25 +2,21 @@
 
 echo ""
 echo ""
-echo " --- Checking whether VirtualEnv is activated."
-python -c 'import sys; exit_code = 0 if hasattr(sys, "real_prefix") else 1; sys.exit(exit_code);'
+echo " --- Checking whether Poetry env exists."
+poetry env info
 
 if [ $? -ne 0 ]; then
-    echo "     [i] ----- Activating 'dsmrreader' VirtualEnv..."
-    source ~/.virtualenvs/dsmrreader/bin/activate
-
-    if [ $? -ne 0 ]; then
-        echo ""
-        echo "     [!] [!] Aborting, failure switching to 'dsmrreader' VirtualEnv (is it installed properly?)"
-        echo ""
-        exit 1;
-    fi
+    echo ""
+    echo "     [!] Aborting, failure RUNNING POETRY ENV INFO"
+    echo "     [i] Does the command 'poetry about' error as well? If not, there may be an issue regarding your current working dir used while executing this deploy script."
+    echo ""
+    exit 1;
 fi
 
 
 echo ""
 echo ""
-echo " --- Checking Python version."
+echo " --- Checking (minimum) Python version."
 ./check_python_version.py
 
 if [ $? -ne 0 ]; then
@@ -33,12 +29,12 @@ fi
 
 echo ""
 echo ""
-echo " --- Checking & synchronizing base requirements for changes."
-pip3 install -r dsmrreader/provisioning/requirements/base.txt --upgrade
+echo " --- Checking & synchronizing dependencies for changes."
+poetry install --no-dev
 
 if [ $? -ne 0 ]; then
     echo ""
-    echo "[!] Aborting, failure RUNNING PIP INSTALL"
+    echo "[!] Aborting, failure RUNNING POETRY INSTALL"
     echo ""
     exit 1;
 fi
@@ -47,7 +43,7 @@ fi
 echo ""
 echo ""
 echo " --- Applying database migrations."
-./manage.py migrate --noinput
+poetry ./manage.py migrate --noinput
 
 if [ $? -ne 0 ]; then
     echo ""
@@ -55,10 +51,10 @@ if [ $? -ne 0 ]; then
     echo "       [i] Trying to automatically resolve with 'dsmr_sqlsequencereset'."
 
     # Try auto fix.
-    ./manage.py dsmr_sqlsequencereset
+    poetry ./manage.py dsmr_sqlsequencereset
 
     # Run migrations again.
-    ./manage.py migrate --noinput
+    poetry ./manage.py migrate --noinput
 
     if [ $? -ne 0 ]; then
         echo ">>>>> [!] Executing database migrations failed again! <<<<<"
@@ -72,7 +68,7 @@ fi
 echo ""
 echo ""
 echo " --- Checking & synchronizing static file changes."
-./manage.py collectstatic --noinput
+poetry ./manage.py collectstatic --noinput
 
 if [ $? -ne 0 ]; then
     echo ""
@@ -91,4 +87,4 @@ echo " --- Reloading running apps..."
 echo ""
 echo ""
 echo " --- Clearing cache..."
-./manage.py dsmr_frontend_clear_cache
+poetry ./manage.py dsmr_frontend_clear_cache
