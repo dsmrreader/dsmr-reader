@@ -2,7 +2,7 @@
 import sys
 
 # EOL table @ https://www.python.org/downloads/
-MINIMUM_VERSION = (3, 6, 0)
+MINIMUM_VERSION = (3, 7, 0)
 PREFERRED_MINIMUM_VERSION = (3, 7, 0)
 
 
