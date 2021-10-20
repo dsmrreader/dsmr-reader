@@ -17,16 +17,23 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.19.0 - 2021-10-xx
+v4.19.0 - 2021-10-21
 --------------------
+
+- ``Fixed`` Tijdverschil tussen Live en Archief voor gas [`#1385 <https://github.com/dsmrreader/dsmr-reader/issues/1385>`_]
 
 .. note::
 
-    There has been a bug in the hour statistics since ``v2.10``, offsetting the values by one hour.
-    The bug will no longer occur for upcoming data when you've upgraded, but existing data is still affected.
-    The latter may or may not be fixed in a future release with a one-time migration, depending on whether it can be done reliably, since the bug did not affect the day totals.
+    This is the last **feature** release of DSMR-reader ``v4.x``. Upcoming new features will probably only be added to ``v5.x``.
 
-- ``Fixed`` Tijdverschil tussen Live en Archief voor gas [`#1385 <https://github.com/dsmrreader/dsmr-reader/issues/1385>`_]
+    *The v4.20 release following this one, will be used to mark the end of this major version and contain an how-to for upgrading to v5 later.*
+
+.. warning::
+
+    There has been a bug in the hour statistics since ``v2.10``, offsetting the values by one hour.
+    The bug will no longer occur for upcoming data when you've upgraded to ``v4.19``, but existing data is still affected.
+
+    *The latter may or may not be fixed in a future release with a one-time migration, depending on whether it can be done reliably, since the bug did not affect the day totals.*
 
 
 v4.18.0 - 2021-09-29
