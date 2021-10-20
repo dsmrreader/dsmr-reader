@@ -3,15 +3,13 @@ name = "DSMR-reader"
 version = "5"
 description = "DSMR-protocol reader, telegram data storage and energy consumption visualizer"
 license = "Creative Commons Attribution-NonCommercial 4.0 International Public License"
-
+readme = 'README.md'
+repository = "https://github.com/dsmrreader/dsmr-reader"
+homepage = "https://dsmr-reader.readthedocs.io/"
 authors = [
     "Dennis Siemensma",
     "https://github.com/dsmrreader/dsmr-reader/graphs/contributors"
 ]
-
-readme = 'README.md'
-repository = "https://github.com/dsmrreader/dsmr-reader"
-homepage = "https://dsmr-reader.readthedocs.io/"
 
 
 [tool.poetry.dependencies]
