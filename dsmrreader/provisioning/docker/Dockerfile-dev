@@ -6,7 +6,6 @@
 
 FROM python:3
 ENV PYTHONUNBUFFERED=1
-ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 WORKDIR /app
 
 # "telnet" eases network debugging a lot...
@@ -16,4 +15,6 @@ COPY ./pyproject.toml /app/
 COPY ./poetry.lock /app/
 
 RUN pip3 install --upgrade pip poetry
+
+RUN poetry config virtualenvs.in-project true
 RUN poetry install
