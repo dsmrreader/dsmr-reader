@@ -7,7 +7,7 @@ export DJANGO_SETTINGS_MODULE=dsmrreader.config.test
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
-pytest --cov --cov-report=term
+poetry run pytest --cov --cov-report=term
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed: sqlite3"
@@ -25,7 +25,7 @@ export DJANGO_DATABASE_NAME="${DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_NAME:-dsmr
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.postgresql
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
-pytest --cov --cov-report=term
+poetry run pytest --cov --cov-report=term
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed: $DJANGO_DATABASE_ENGINE"
@@ -43,7 +43,7 @@ export DJANGO_DATABASE_NAME="${DOCKER_TEST_MYSQL_DJANGO_DATABASE_NAME:-dsmrreade
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.mysql
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
-pytest --cov --cov-report=term
+poetry run pytest --cov --cov-report=term
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed: $DJANGO_DATABASE_ENGINE"

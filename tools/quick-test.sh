@@ -14,7 +14,7 @@ export DJANGO_SETTINGS_MODULE=dsmrreader.config.test
 echo ""
 echo "--- Testing with SQLite..."
 export DJANGO_DATABASE_ENGINE=django.db.backends.sqlite3
-pytest --cov --cov-report=html $ARGS
+poetry run pytest --cov --cov-report=html $ARGS
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed [!]"
@@ -29,7 +29,7 @@ echo "--- Applying autopep8..."
 
 echo ""
 echo "--- Running Pylama for code audit..."
-pylama
+poetry run pylama
 
 if [ $? -ne 0 ]; then
     echo "[!] Code audit failed [!]"
@@ -45,7 +45,7 @@ sh $CURRENT_DIR/clear-po-headers.sh
 echo ""
 echo "--- Checking missing doc translations..."
 cd $CURRENT_DIR/../docs/
-sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
+poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
 
 if [ $? -ne 1 ]; then
     echo "[!] Pending documentation translations [!]"

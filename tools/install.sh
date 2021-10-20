@@ -3,7 +3,7 @@
 ### Please note that this script is a happy flow only and is NOT idempotent.
 
 echo "Installing packages"
-sudo apt-get install -y postgresql nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv virtualenvwrapper
+sudo apt-get install -y postgresql nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv
 
 echo "Setting up database"
 sudo -u postgres createuser -DSR dsmrreader
@@ -22,23 +22,19 @@ echo "Cloning DSMR-reader from GitHub"
 sudo git clone https://github.com/dsmrreader/dsmr-reader.git /home/dsmr/dsmr-reader
 sudo chown -R dsmr:dsmr /home/dsmr/
 
-echo "Setting up virtualenv"
-sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --system-site-packages --python python3
-sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
-sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
-
 echo "Configuring DSMR-reader"
 sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/settings.py.template /home/dsmr/dsmr-reader/dsmrreader/settings.py
 sudo -u dsmr cp /home/dsmr/dsmr-reader/.env.template /home/dsmr/dsmr-reader/.env
 sudo -u dsmr /home/dsmr/dsmr-reader/tools/generate-secret-key.sh
 
 echo "Installing dependencies"
-sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
+sudo -u dsmr pip3 install --upgrade pip poetry
+sudo -u dsmr poetry config virtualenvs.in-project true
+sudo -u dsmr poetry install --no-dev
 
 echo "Applying database migrations & static files"
-sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
-sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
+sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
+sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
 
 echo "Configuring webserver"
 sudo rm /etc/nginx/sites-enabled/default
@@ -57,4 +53,4 @@ sudo supervisorctl update
 # Create (super)user for the DSMR-reader configuration webinterface
 echo "Creating DSMR-reader superuser for webinterface"
 echo "(you will be asked to choose and enter a password twice)"
-sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --email dsmr@localhost --username admin
+sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --email dsmr@localhost --username admin
