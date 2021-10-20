@@ -3,14 +3,14 @@ name: Dependency update checker
 on:
   schedule:
     - cron:  '0 12 * * 1'
+  push:
+    branches:
+      - wip/v*
 
 jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 10  # Don't run forever when stale
-    env:
-      # https://python-poetry.org/docs/configuration/#available-settings
-      POETRY_VIRTUALENVS_IN_PROJECT: true
 
     steps:
       - uses: actions/checkout@v2
@@ -28,32 +28,17 @@ jobs:
         with:
           path: |
             ~/.cache/pypoetry/
-            /home/runner/work/dsmr-reader/dsmr-reader/.venv
+            ~/dsmr-reader/dsmr-reader/.venv
           key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
 
       - name: Check & install Poetry dependencies
         run: |
+          poetry config virtualenvs.in-project true
           poetry check
           poetry install
 
       - name: Check for Poetry dependency updates
         run: |
-          poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
-
-          poetry update --dry-run | grep -v "Skipped"
-          exit 1
-
-
-      # @deprecated PIP (requirements.txt) check - Ensures it's in sync with Poetry - Required until DSMR-reader v5.x
-      - name: (@deprecated) Install Pip dependencies
-        run: |
-          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
-          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
-
-      - name: (@deprecated) Check for Pip dependency updates, using Poetry venv
-        # The pip and packaging updates are to prevent false positives
-        run: |
-          poetry run pip install --upgrade pip packaging
           poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
 
           poetry update --dry-run | grep -v "Skipped"
