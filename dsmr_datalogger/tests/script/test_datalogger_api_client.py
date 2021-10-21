@@ -15,19 +15,19 @@ import dsmr_datalogger.scripts.dsmr_datalogger_api_client
 
 @mock.patch('time.sleep')
 @mock.patch.dict('os.environ', dict(
-    DATALOGGER_INPUT_METHOD='serial',
-    DATALOGGER_SERIAL_PORT='/dev/X',
-    DATALOGGER_SERIAL_BAUDRATE='12345',
-    DATALOGGER_API_HOSTS='https://127.0.0.1:1234',
-    DATALOGGER_API_KEYS='test-api-key',
-    DATALOGGER_TIMEOUT='0.123',
-    DATALOGGER_SLEEP='0.1',
-    DATALOGGER_MIN_SLEEP_FOR_RECONNECT='999',
+    REMOTE_DATALOGGER_INPUT_METHOD='serial',
+    REMOTE_DATALOGGER_SERIAL_PORT='/dev/X',
+    REMOTE_DATALOGGER_SERIAL_BAUDRATE='12345',
+    REMOTE_DATALOGGER_API_HOSTS='https://127.0.0.1:1234',
+    REMOTE_DATALOGGER_API_KEYS='test-api-key',
+    REMOTE_DATALOGGER_TIMEOUT='0.123',
+    REMOTE_DATALOGGER_SLEEP='0.1',
+    REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT='999',
 ))
 class TestScript(TestCase):
     @mock.patch.dict('os.environ', dict(
-        DATALOGGER_SLEEP='0.1',
-        DATALOGGER_MIN_SLEEP_FOR_RECONNECT='0',
+        REMOTE_DATALOGGER_SLEEP='0.1',
+        REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT='0',
     ))
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
@@ -76,9 +76,9 @@ class TestScript(TestCase):
         ))
 
     @mock.patch.dict('os.environ', dict(
-        DATALOGGER_INPUT_METHOD='ipv4',
-        DATALOGGER_NETWORK_HOST='127.1.1.0',
-        DATALOGGER_NETWORK_PORT='23',
+        REMOTE_DATALOGGER_INPUT_METHOD='ipv4',
+        REMOTE_DATALOGGER_NETWORK_HOST='127.1.1.0',
+        REMOTE_DATALOGGER_NETWORK_PORT='23',
     ))
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
@@ -124,7 +124,7 @@ class TestScript(TestCase):
         self.assertTrue(send_telegram_to_remote_dsmrreader_mock.called)
 
     @mock.patch.dict('os.environ', dict(
-        DATALOGGER_DEBUG_LOGGING='true',  # << Debugging enabled.
+        REMOTE_DATALOGGER_DEBUG_LOGGING='true',  # << Debugging enabled.
     ))
     @mock.patch('logging.Logger.setLevel')
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader')
@@ -132,7 +132,7 @@ class TestScript(TestCase):
     def test_main_exception_with_debug_logging(
             self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, set_level_mock, *mocks
     ):
-        """ Similar to test_main_exception(), but check DATALOGGER_DEBUG_LOGGING enabled. """
+        """ Similar to test_main_exception(), but check REMOTE_DATALOGGER_DEBUG_LOGGING enabled. """
         send_telegram_to_remote_dsmrreader_mock.side_effect = requests.exceptions.Timeout('Fake timeout')
         read_telegram_mock_mock.side_effect = [
             iter(['fake-telegram']),
@@ -149,7 +149,7 @@ class TestScript(TestCase):
         self.assertTrue(send_telegram_to_remote_dsmrreader_mock.called)
 
     @mock.patch.dict('os.environ', dict(
-        DATALOGGER_DEBUG_LOGGING='false',  # << Debugging disabled.
+        REMOTE_DATALOGGER_DEBUG_LOGGING='false',  # << Debugging disabled.
     ))
     @mock.patch('logging.Logger.setLevel')
     @mock.patch('dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram')
@@ -193,44 +193,47 @@ class TestScript(TestCase):
 
 
 @mock.patch.dict('os.environ', dict(
-    DATALOGGER_API_HOSTS='http://127.0.0.1',
-    DATALOGGER_API_KEYS='test',
-    DATALOGGER_INPUT_METHOD='serial',
-    DATALOGGER_SERIAL_PORT='/dev/X',
-    DATALOGGER_SERIAL_BAUDRATE='12345',
+    REMOTE_DATALOGGER_API_HOSTS='http://127.0.0.1',
+    REMOTE_DATALOGGER_API_KEYS='test',
+    REMOTE_DATALOGGER_INPUT_METHOD='serial',
+    REMOTE_DATALOGGER_SERIAL_PORT='/dev/X',
+    REMOTE_DATALOGGER_SERIAL_BAUDRATE='12345',
 ))
 class TestScriptErrors(TestCase):
     @mock.patch.dict('os.environ', dict(
-        DATALOGGER_API_HOSTS='',
-        DATALOGGER_API_KEYS='',
+        REMOTE_DATALOGGER_API_HOSTS='',
+        REMOTE_DATALOGGER_API_KEYS='',
     ))
     def test_main_without_api_config(self):
-        """ DATALOGGER_API_HOSTS / DATALOGGER_API_KEYS empty or omitted. """
+        """ REMOTE_DATALOGGER_API_HOSTS / REMOTE_DATALOGGER_API_KEYS empty or omitted. """
         with self.assertRaises(RuntimeError) as e:
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
-        self.assertEqual(str(e.exception), 'API_HOSTS or API_KEYS not set')
+        self.assertEqual(str(e.exception), 'REMOTE_DATALOGGER_API_HOSTS or REMOTE_DATALOGGER_API_KEYS not set')
 
     @mock.patch.dict('os.environ', dict(
-        DATALOGGER_API_HOSTS='http://127.0.0.1,https://localhost',
-        DATALOGGER_API_KEYS='test',
+        REMOTE_DATALOGGER_API_HOSTS='http://127.0.0.1,https://localhost',
+        REMOTE_DATALOGGER_API_KEYS='test',
     ))
     def test_main_with_inconsistent_api_config(self):
-        """ DATALOGGER_API_HOSTS / DATALOGGER_API_KEYS count mismatch. """
+        """ REMOTE_DATALOGGER_API_HOSTS / REMOTE_DATALOGGER_API_KEYS count mismatch. """
         with self.assertRaises(RuntimeError) as e:
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
-        self.assertEqual(str(e.exception), 'The number of API_HOSTS and API_KEYS given do not match each other')
+        self.assertEqual(
+            str(e.exception),
+            'The number of REMOTE_DATALOGGER_API_HOSTS and REMOTE_DATALOGGER_API_KEYS given do not match each other'
+        )
 
     @mock.patch.dict('os.environ', dict(
-        DATALOGGER_INPUT_METHOD='non-existing',
+        REMOTE_DATALOGGER_INPUT_METHOD='non-existing',
     ))
     def test_main_with_unsupported_input_method(self):
-        """ Unsupported DATALOGGER_INPUT_METHOD. """
+        """ Unsupported REMOTE_DATALOGGER_INPUT_METHOD. """
         with self.assertRaises(RuntimeError) as e:
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
-        self.assertEqual(str(e.exception), 'Unsupported DATALOGGER_INPUT_METHOD')
+        self.assertEqual(str(e.exception), 'Unsupported REMOTE_DATALOGGER_INPUT_METHOD')
 
 
 @mock.patch('serial.serial_for_url')

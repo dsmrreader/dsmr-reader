@@ -3,7 +3,10 @@
     https://dsmr-reader.readthedocs.io/en/latest/installation/datalogger.html
 
     Installation:
-        pip3 install pyserial==3.4 requests==2.24.0 python-decouple==3.3
+        pip3 install pyserial==3.5 requests==2.26.0 python-decouple==3.5
+
+    NOTE: Since DSMR-reader v5.x, all env vars for this script were prefixed with "REMOTE_".
+          E.g.: "DATALOGGER_INPUT_METHOD" is now "REMOTE_DATALOGGER_INPUT_METHOD"
 """
 import datetime
 import logging
@@ -92,7 +95,7 @@ def _send_telegram_to_remote_dsmrreader(telegram, api_url, api_key, timeout):
 def _initialize_logging():
     logging_level = logging.INFO
 
-    if decouple.config('DATALOGGER_DEBUG_LOGGING', default=False, cast=bool):
+    if decouple.config('REMOTE_DATALOGGER_DEBUG_LOGGING', default=False, cast=bool):
         logging_level = logging.DEBUG
 
     logger.setLevel(logging_level)
@@ -105,18 +108,22 @@ def main():  # noqa: C901
     logger.info('[%s] Starting...', datetime.datetime.now())
 
     # Settings.
-    DATALOGGER_TIMEOUT = decouple.config('DATALOGGER_TIMEOUT', default=20, cast=float)
-    DATALOGGER_SLEEP = decouple.config('DATALOGGER_SLEEP', default=0.5, cast=float)
-    DATALOGGER_INPUT_METHOD = decouple.config('DATALOGGER_INPUT_METHOD')
-    DATALOGGER_API_HOSTS = decouple.config('DATALOGGER_API_HOSTS', cast=decouple.Csv(post_process=tuple))
-    DATALOGGER_API_KEYS = decouple.config('DATALOGGER_API_KEYS', cast=decouple.Csv(post_process=tuple))
-    DATALOGGER_MIN_SLEEP_FOR_RECONNECT = decouple.config('DATALOGGER_MIN_SLEEP_FOR_RECONNECT', default=1.0, cast=float)
+    DATALOGGER_TIMEOUT = decouple.config('REMOTE_DATALOGGER_TIMEOUT', default=20, cast=float)
+    DATALOGGER_SLEEP = decouple.config('REMOTE_DATALOGGER_SLEEP', default=0.5, cast=float)
+    DATALOGGER_INPUT_METHOD = decouple.config('REMOTE_DATALOGGER_INPUT_METHOD')
+    DATALOGGER_API_HOSTS = decouple.config('REMOTE_DATALOGGER_API_HOSTS', cast=decouple.Csv(post_process=tuple))
+    DATALOGGER_API_KEYS = decouple.config('REMOTE_DATALOGGER_API_KEYS', cast=decouple.Csv(post_process=tuple))
+    DATALOGGER_MIN_SLEEP_FOR_RECONNECT = decouple.config(
+        'REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT', default=1.0, cast=float
+    )
 
     if not DATALOGGER_API_HOSTS or not DATALOGGER_API_KEYS:
-        raise RuntimeError('API_HOSTS or API_KEYS not set')
+        raise RuntimeError('REMOTE_DATALOGGER_API_HOSTS or REMOTE_DATALOGGER_API_KEYS not set')
 
     if len(DATALOGGER_API_HOSTS) != len(DATALOGGER_API_KEYS):
-        raise RuntimeError('The number of API_HOSTS and API_KEYS given do not match each other')
+        raise RuntimeError(
+            'The number of REMOTE_DATALOGGER_API_HOSTS and REMOTE_DATALOGGER_API_KEYS given do not match each other'
+        )
 
     serial_kwargs = dict(
         telegram_timeout=DATALOGGER_TIMEOUT,
@@ -124,10 +131,10 @@ def main():  # noqa: C901
 
     if DATALOGGER_INPUT_METHOD == 'serial':
         serial_kwargs.update(dict(
-            url_or_port=decouple.config('DATALOGGER_SERIAL_PORT'),
-            baudrate=decouple.config('DATALOGGER_SERIAL_BAUDRATE', cast=int, default=115200),
-            bytesize=decouple.config('DATALOGGER_SERIAL_BYTESIZE', cast=int, default=serial.EIGHTBITS),
-            parity=decouple.config('DATALOGGER_SERIAL_PARITY', cast=str, default=serial.PARITY_NONE),
+            url_or_port=decouple.config('REMOTE_DATALOGGER_SERIAL_PORT'),
+            baudrate=decouple.config('REMOTE_DATALOGGER_SERIAL_BAUDRATE', cast=int, default=115200),
+            bytesize=decouple.config('REMOTE_DATALOGGER_SERIAL_BYTESIZE', cast=int, default=serial.EIGHTBITS),
+            parity=decouple.config('REMOTE_DATALOGGER_SERIAL_PARITY', cast=str, default=serial.PARITY_NONE),
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
             rtscts=0,
@@ -135,12 +142,12 @@ def main():  # noqa: C901
     elif DATALOGGER_INPUT_METHOD == 'ipv4':
         serial_kwargs.update(dict(
             url_or_port='socket://{}:{}'.format(
-                decouple.config('DATALOGGER_NETWORK_HOST'),
-                decouple.config('DATALOGGER_NETWORK_PORT', cast=int),
+                decouple.config('REMOTE_DATALOGGER_NETWORK_HOST'),
+                decouple.config('REMOTE_DATALOGGER_NETWORK_PORT', cast=int),
             )
         ))
     else:
-        raise RuntimeError('Unsupported DATALOGGER_INPUT_METHOD')
+        raise RuntimeError('Unsupported REMOTE_DATALOGGER_INPUT_METHOD')
 
     datasource = None
 

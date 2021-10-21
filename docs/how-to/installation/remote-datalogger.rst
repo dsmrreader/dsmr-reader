@@ -8,7 +8,7 @@ Installation: Remote datalogger
 .. contents:: :local:
     :depth: 1
 
-The remote datalogger script has been overhauled in DSMR-reader ``v4.1``.
+The remote datalogger script has been overhauled in DSMR-reader ``v5.0``.
 If you installed a former version, reconsider reinstalling it completely with the new version below.
 
 .. attention::
@@ -55,21 +55,28 @@ Execute::
     sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
 
     # Requirements
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.4 requests==2.24.0 python-decouple==3.3
+    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.5 requests==2.26.0 python-decouple==3.5
 
 
 Datalogger script
 ^^^^^^^^^^^^^^^^^
 
-Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with the following contents: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_
+Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with the following contents: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_
 
 Or execute the following to download it directly to the path above::
 
-    sudo wget -O /home/dsmr/dsmr_datalogger_api_client.py https://raw.githubusercontent.com/dsmrreader/dsmr-reader/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py
+    sudo wget -O /home/dsmr/dsmr_datalogger_api_client.py https://raw.githubusercontent.com/dsmrreader/dsmr-reader/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py
 
 
 API config (``.env``)
 ^^^^^^^^^^^^^^^^^^^^^
+
+.. attention::
+
+    Since DSMR-reader ``v5.x``, all env vars for this script were prefixed with ``REMOTE_``.
+    E.g.: ``DATALOGGER_INPUT_METHOD`` is now ``REMOTE_DATALOGGER_INPUT_METHOD``.
+
+    This only affects **new installations** of the script.
 
 .. hint::
 
@@ -78,28 +85,28 @@ API config (``.env``)
 Create another file ``/home/dsmr/.env`` and add as contents::
 
     ### The DSMR-reader API('s) to forward telegrams to:
-    DATALOGGER_API_HOSTS=
-    DATALOGGER_API_KEYS=
+    REMOTE_DATALOGGER_API_HOSTS=
+    REMOTE_DATALOGGER_API_KEYS=
 
 Keep the file open for multiple edits / additions below.
 
-Add the schema (``http://``/``https://``) and hostname/port to ``DATALOGGER_API_HOSTS``. Add the API key to ``DATALOGGER_API_KEYS``. For example::
+Add the schema (``http://``/``https://``) and hostname/port to ``REMOTE_DATALOGGER_API_HOSTS``. Add the API key to ``REMOTE_DATALOGGER_API_KEYS``. For example::
 
     # Example with default port:
-    DATALOGGER_API_HOSTS=http://12.34.56.78
-    DATALOGGER_API_KEYS=1234567890ABCDEFGH
+    REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78
+    REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH
 
     # Example with non standard port, e.g. Docker:
-    DATALOGGER_API_HOSTS=http://12.34.56.78:7777
-    DATALOGGER_API_KEYS=0987654321HGFEDCBA
+    REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78:7777
+    REMOTE_DATALOGGER_API_KEYS=0987654321HGFEDCBA
 
 .. tip::
 
-    Are you using the remote datalogger for multiple instances of DSMR-reader? Then use ``DATALOGGER_API_HOSTS`` and ``DATALOGGER_API_KEYS`` as comma separated lists::
+    Are you using the remote datalogger for multiple instances of DSMR-reader? Then use ``REMOTE_DATALOGGER_API_HOSTS`` and ``REMOTE_DATALOGGER_API_KEYS`` as comma separated lists::
 
         # Example with multiple DSMR-reader installations:
-        DATALOGGER_API_HOSTS=http://12.34.56.78,http://87.65.43.21:7777
-        DATALOGGER_API_KEYS=1234567890ABCDEFGH,0987654321HGFEDCBA
+        REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78,http://87.65.43.21:7777
+        REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH,0987654321HGFEDCBA
 
         ### API host "http://12.34.56.78"      uses API key "1234567890ABCDEFGH"
         ### API host "http://87.65.43.21:7777" uses API key "0987654321HGFEDCBA"
@@ -116,20 +123,20 @@ Are you using a cable to read telegrams directly from a serial port?
 
 Then add the following contents to ``/home/dsmr/.env``::
 
-    DATALOGGER_INPUT_METHOD=serial
-    DATALOGGER_SERIAL_PORT=/dev/ttyUSB0
+    REMOTE_DATALOGGER_INPUT_METHOD=serial
+    REMOTE_DATALOGGER_SERIAL_PORT=/dev/ttyUSB0
 
     # DSMR meter version 4/5
-    DATALOGGER_SERIAL_BAUDRATE=115200
-    DATALOGGER_SERIAL_BYTESIZE=8
-    DATALOGGER_SERIAL_PARITY=N
+    REMOTE_DATALOGGER_SERIAL_BAUDRATE=115200
+    REMOTE_DATALOGGER_SERIAL_BYTESIZE=8
+    REMOTE_DATALOGGER_SERIAL_PARITY=N
 
 When needing a different port or serial settings, change the values accordingly. E.g.: For an older smart meter::
 
     # DSMR meter version 2/3
-    DATALOGGER_SERIAL_BAUDRATE=9600
-    DATALOGGER_SERIAL_BYTESIZE=7
-    DATALOGGER_SERIAL_PARITY=E
+    REMOTE_DATALOGGER_SERIAL_BAUDRATE=9600
+    REMOTE_DATALOGGER_SERIAL_BYTESIZE=7
+    REMOTE_DATALOGGER_SERIAL_PARITY=E
 
 
 B. Network socket (``.env``)
@@ -138,11 +145,11 @@ Are you using a network socket for reading the telegrams? E.g.: ``ser2net``.
 
 Then add the following contents to ``/home/dsmr/.env``::
 
-    DATALOGGER_INPUT_METHOD=ipv4
-    DATALOGGER_NETWORK_HOST=
-    DATALOGGER_NETWORK_PORT=
+    REMOTE_DATALOGGER_INPUT_METHOD=ipv4
+    REMOTE_DATALOGGER_NETWORK_HOST=
+    REMOTE_DATALOGGER_NETWORK_PORT=
 
-Set the hostname or IP address in ``DATALOGGER_NETWORK_HOST`` and the port in ``DATALOGGER_NETWORK_PORT``.
+Set the hostname or IP address in ``REMOTE_DATALOGGER_NETWORK_HOST`` and the port in ``REMOTE_DATALOGGER_NETWORK_PORT``.
 
 
 Other settings (``.env``)
@@ -150,11 +157,11 @@ Other settings (``.env``)
 
 These settings are **optional** but can be tweaked when required:
 
-- ``DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value.
+- ``REMOTE_DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value.
 
-- ``DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value.
+- ``REMOTE_DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value.
 
-- ``DATALOGGER_DEBUG_LOGGING``: Set to ``true`` or ``1`` to enable verbose debug logging. Omit to disable. Warning: Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!
+- ``REMOTE_DATALOGGER_DEBUG_LOGGING``: Set to ``true`` or ``1`` to enable verbose debug logging. Omit to disable. Warning: Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!
 
 Supervisor
 ^^^^^^^^^^
@@ -186,6 +193,4 @@ Have Supervisor reread and update its configs to initialize the process::
     sudo supervisorctl reread
     sudo supervisorctl update
 
-
 The script should now forward telegrams to the API host(s) you specified.
-

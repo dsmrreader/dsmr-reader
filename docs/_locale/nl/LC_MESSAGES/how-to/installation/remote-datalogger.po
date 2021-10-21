@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../../how-to/installation/remote-datalogger.rst:2
 msgid "Installation: Remote datalogger"
@@ -26,8 +26,8 @@ msgid "This will install a datalogger that will forward telegrams to a remote in
 msgstr "Dit installeert een datalogger, die telegrammen doorstuurt naar een installatie van DSMR-reader op afstand, via de API."
 
 #: ../../how-to/installation/remote-datalogger.rst:11
-msgid "The remote datalogger script has been overhauled in DSMR-reader ``v4.1``. If you installed a former version, reconsider reinstalling it completely with the new version below."
-msgstr "Het script voor de remote datalogger is op de schop gegaan in DSMR-reader ``v4.1``. Mocht je een eerdere versie gebruiken, overweeg dan om deze opnieuw te installeren met de nieuwere versie hieronder."
+msgid "The remote datalogger script has been overhauled in DSMR-reader ``v5.0``. If you installed a former version, reconsider reinstalling it completely with the new version below."
+msgstr "Het script voor de remote datalogger is op de schop gegaan in DSMR-reader ``v5.x``. Mocht je een eerdere versie gebruiken, overweeg dan om deze opnieuw te installeren met de nieuwere versie hieronder."
 
 #: ../../how-to/installation/remote-datalogger.rst:16
 msgid "To be clear, there should be two hosts:"
@@ -74,8 +74,8 @@ msgid "Datalogger script"
 msgstr "Datalogger script"
 
 #: ../../how-to/installation/remote-datalogger.rst:64
-msgid "Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with the following contents: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_"
-msgstr "Maak een nieuw bestand ``/home/dsmr/dsmr_datalogger_api_client.py`` met deze inhoud: `dsmr_datalogger_api_client.py op GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v4/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_"
+msgid "Create a new file ``/home/dsmr/dsmr_datalogger_api_client.py`` with the following contents: `dsmr_datalogger_api_client.py on GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_"
+msgstr "Maak een nieuw bestand ``/home/dsmr/dsmr_datalogger_api_client.py`` met deze inhoud: `dsmr_datalogger_api_client.py op GitHub <https://github.com/dsmrreader/dsmr-reader/blob/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_"
 
 #: ../../how-to/installation/remote-datalogger.rst:66
 msgid "Or execute the following to download it directly to the path above::"
@@ -86,98 +86,109 @@ msgid "API config (``.env``)"
 msgstr "API-configuratie (``.env``)"
 
 #: ../../how-to/installation/remote-datalogger.rst:76
+msgid "Since DSMR-reader ``v5.x``, all env vars for this script were prefixed with ``REMOTE_``. E.g.: ``DATALOGGER_INPUT_METHOD`` is now ``REMOTE_DATALOGGER_INPUT_METHOD``."
+msgstr "Sinds  DSMR-reader ``v5.x`` zijn alle env vars voor dit script uitgebreid met ``REMOTE_`` vooraan. Bijvoorbeeld ``DATALOGGER_INPUT_METHOD`` is nu ``REMOTE_DATALOGGER_INPUT_METHOD``."
+
+#: ../../how-to/installation/remote-datalogger.rst:79
+msgid "This only affects **new installations** of the script."
+msgstr "Dit heeft alleen invloed op **nieuwe installaties** van het script."
+
+#: ../../how-to/installation/remote-datalogger.rst:83
 msgid "The ``.env`` file below is not mandatory to use. Alternatively you can specify all settings mentioned below as system environment variables."
 msgstr "Je bent niet verplicht om het ``.env``-bestand te gebruiken. Als alternatief kun je alle instellingen hieronder ook als systeem-omgevingsvariabelen instellen."
 
-#: ../../how-to/installation/remote-datalogger.rst:78
+#: ../../how-to/installation/remote-datalogger.rst:85
 msgid "Create another file ``/home/dsmr/.env`` and add as contents::"
 msgstr "Maak een ander bestand genaamd ``/home/dsmr/.env`` aan en zet daar de volgende inhoud in::"
 
-#: ../../how-to/installation/remote-datalogger.rst:84
+#: ../../how-to/installation/remote-datalogger.rst:91
 msgid "Keep the file open for multiple edits / additions below."
 msgstr "Houd het bestand open voor meerdere wijziginge / toevoegingen hieronder."
 
-#: ../../how-to/installation/remote-datalogger.rst:86
-msgid "Add the schema (``http://``/``https://``) and hostname/port to ``DATALOGGER_API_HOSTS``. Add the API key to ``DATALOGGER_API_KEYS``. For example::"
-msgstr "Voeg het schema (``http://``/``https://``) en hostnaam/poort toe aan ``DATALOGGER_API_HOSTS``. Voeg de API key toe aan ``DATALOGGER_API_KEYS``. Bijvoorbeeld::"
+#: ../../how-to/installation/remote-datalogger.rst:93
+msgid "Add the schema (``http://``/``https://``) and hostname/port to ``REMOTE_DATALOGGER_API_HOSTS``. Add the API key to ``REMOTE_DATALOGGER_API_KEYS``. For example::"
+msgstr "Voeg het schema (``http://``/``https://``) en hostnaam/poort toe aan ``REMOTE_DATALOGGER_API_HOSTS``. Voeg de API key toe aan ``REMOTE_DATALOGGER_API_KEYS``. Bijvoorbeeld::"
 
-#: ../../how-to/installation/remote-datalogger.rst:98
-msgid "Are you using the remote datalogger for multiple instances of DSMR-reader? Then use ``DATALOGGER_API_HOSTS`` and ``DATALOGGER_API_KEYS`` as comma separated lists::"
-msgstr "Gebruik je dezelfde remote datalogger voor meerdere instanties van DSMR-reader? Gebruik dan ``DATALOGGER_API_HOSTS`` en ``DATALOGGER_API_KEYS`` als komma-gescheiden lijsten::"
+#: ../../how-to/installation/remote-datalogger.rst:105
+msgid "Are you using the remote datalogger for multiple instances of DSMR-reader? Then use ``REMOTE_DATALOGGER_API_HOSTS`` and ``REMOTE_DATALOGGER_API_KEYS`` as comma separated lists::"
+msgstr "Gebruik je dezelfde remote datalogger voor meerdere instanties van DSMR-reader? Gebruik dan ``REMOTE_DATALOGGER_API_HOSTS`` en ``REMOTE_DATALOGGER_API_KEYS`` als komma-gescheiden lijsten::"
 
-#: ../../how-to/installation/remote-datalogger.rst:109
+#: ../../how-to/installation/remote-datalogger.rst:116
 msgid "Serial port or network socket config?"
 msgstr "Seriële poort of netwerk socket instellen?"
 
-#: ../../how-to/installation/remote-datalogger.rst:110
+#: ../../how-to/installation/remote-datalogger.rst:117
 msgid "Choose either ``A.`` or ``B.`` below."
 msgstr "Kies hieronder voor ofwel ``A.`` of ``B.``."
 
-#: ../../how-to/installation/remote-datalogger.rst:114
+#: ../../how-to/installation/remote-datalogger.rst:121
 msgid "A. Serial port (``.env``)"
 msgstr "A. Seriële poort (``.env``)"
 
-#: ../../how-to/installation/remote-datalogger.rst:115
+#: ../../how-to/installation/remote-datalogger.rst:122
 msgid "Are you using a cable to read telegrams directly from a serial port?"
 msgstr "Gebruik je een kabel om telegrammen direct vanaf de seriële poort uit te lezen?"
 
-#: ../../how-to/installation/remote-datalogger.rst:117
-#: ../../how-to/installation/remote-datalogger.rst:139
+#: ../../how-to/installation/remote-datalogger.rst:124
+#: ../../how-to/installation/remote-datalogger.rst:146
 msgid "Then add the following contents to ``/home/dsmr/.env``::"
 msgstr "Voeg dan de volgende inhoud toe aan ``/home/dsmr/.env``::"
 
-#: ../../how-to/installation/remote-datalogger.rst:127
+#: ../../how-to/installation/remote-datalogger.rst:134
 msgid "When needing a different port or serial settings, change the values accordingly. E.g.: For an older smart meter::"
 msgstr "Mocht je een andere poort of seriële instelling nodig hebben, verander dan de waarden naar wens. Bijvoorbeeld voor een oudere slimme meter::"
 
-#: ../../how-to/installation/remote-datalogger.rst:136
+#: ../../how-to/installation/remote-datalogger.rst:143
 msgid "B. Network socket (``.env``)"
 msgstr "B. Netwerk socket (``.env``)"
 
-#: ../../how-to/installation/remote-datalogger.rst:137
+#: ../../how-to/installation/remote-datalogger.rst:144
 msgid "Are you using a network socket for reading the telegrams? E.g.: ``ser2net``."
 msgstr "Gebruik je een netwerk socket voor het uitlezen van de telegrammen? Bijvoorbeeld: ``ser2net``."
 
-#: ../../how-to/installation/remote-datalogger.rst:145
-msgid "Set the hostname or IP address in ``DATALOGGER_NETWORK_HOST`` and the port in ``DATALOGGER_NETWORK_PORT``."
-msgstr "Stel de hostnaam of IP-adres in als ``DATALOGGER_NETWORK_HOST``en de poort als ``DATALOGGER_NETWORK_PORT``."
+#: ../../how-to/installation/remote-datalogger.rst:152
+msgid "Set the hostname or IP address in ``REMOTE_DATALOGGER_NETWORK_HOST`` and the port in ``REMOTE_DATALOGGER_NETWORK_PORT``."
+msgstr "Stel de hostname of het IP-adres in ``REMOTE_DATALOGGER_NETWORK_HOST`` en de poort in ``REMOTE_DATALOGGER_NETWORK_PORT``."
 
-#: ../../how-to/installation/remote-datalogger.rst:149
+#: ../../how-to/installation/remote-datalogger.rst:156
 msgid "Other settings (``.env``)"
 msgstr "Overige instellingen (``.env``)"
 
-#: ../../how-to/installation/remote-datalogger.rst:151
+#: ../../how-to/installation/remote-datalogger.rst:158
 msgid "These settings are **optional** but can be tweaked when required:"
 msgstr "De volgende instellingen zijn **optioneel** en kunnen naar wens aangepast worden, wanneer nodig:"
 
-#: ../../how-to/installation/remote-datalogger.rst:153
-msgid "``DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value."
-msgstr "``DATALOGGER_TIMEOUT``: De tijd in seconden dat maximaal gewacht wordt op de datalogger en de ontvangende DSMR-reader API. Laat weg om de standaardwaarde te gebruiken."
-
-#: ../../how-to/installation/remote-datalogger.rst:155
-msgid "``DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value."
-msgstr "``DATALOGGER_SLEEP``: De tijd in seconden dat de remote datalogger pauseert, nadat deze een telegram naar de DSMR-reader API heeft verstuurt. Laat weg om de standaardwaarde te gebruiken."
-
-#: ../../how-to/installation/remote-datalogger.rst:157
-msgid "``DATALOGGER_DEBUG_LOGGING``: Set to ``true`` or ``1`` to enable verbose debug logging. Omit to disable. Warning: Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!"
-msgstr "``DATALOGGER_DEBUG_LOGGING``: Stel in op ``true`` of ``1`` om uitgebreide debug-logging in te schakelen. Laat weg om uit te schakelen. Waarschuwing: Indien voor langere tijd ingeschakeld kan dit bijdragen aan de slijtage van je SD-kaartje op een Raspberry Pi!"
-
 #: ../../how-to/installation/remote-datalogger.rst:160
+msgid "``REMOTE_DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value."
+msgstr "``REMOTE_DATALOGGER_TIMEOUT``: De tijd in seconden dat maximaal gewacht wordt op de datalogger en de ontvangende DSMR-reader API. Laat weg om de standaardwaarde te gebruiken."
+
+#: ../../how-to/installation/remote-datalogger.rst:162
+msgid "``REMOTE_DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value."
+msgstr "``REMOTE_DATALOGGER_SLEEP``: De tijd in seconden dat de remote datalogger pauzeert, nadat deze een telegram naar de DSMR-reader API heeft verstuurt. Laat weg om de standaardwaarde te gebruiken."
+
+#: ../../how-to/installation/remote-datalogger.rst:164
+msgid "``REMOTE_DATALOGGER_DEBUG_LOGGING``: Set to ``true`` or ``1`` to enable verbose debug logging. Omit to disable. Warning: Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!"
+msgstr "``REMOTE_DATALOGGER_DEBUG_LOGGING``: Stel in op ``true`` of ``1`` om uitgebreide debug-logging in te schakelen. Laat weg om uit te schakelen. Waarschuwing: Indien voor langere tijd ingeschakeld kan dit bijdragen aan de slijtage van je SD-kaartje op een Raspberry Pi!"
+
+#: ../../how-to/installation/remote-datalogger.rst:167
 msgid "Supervisor"
 msgstr "Supervisor"
 
-#: ../../how-to/installation/remote-datalogger.rst:164
+#: ../../how-to/installation/remote-datalogger.rst:171
 msgid "The following steps are also meant for the device you've just installed the remote datalogger on."
 msgstr "De stappen hieronder zijn eveneens bedoeld voor het apparaat waar je net de remote datalogger op geinstalleerd hebt."
 
-#: ../../how-to/installation/remote-datalogger.rst:166
+#: ../../how-to/installation/remote-datalogger.rst:173
 msgid "Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` with contents::"
 msgstr "Maak een nieuwe Supervisor-config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` met inhoud::"
 
-#: ../../how-to/installation/remote-datalogger.rst:184
+#: ../../how-to/installation/remote-datalogger.rst:191
 msgid "Have Supervisor reread and update its configs to initialize the process::"
 msgstr "Laat Supervisor zijn eigen instellingen uitlezen en doorvoeren, om het proces te starten::"
 
-#: ../../how-to/installation/remote-datalogger.rst:190
+#: ../../how-to/installation/remote-datalogger.rst:196
 msgid "The script should now forward telegrams to the API host(s) you specified."
 msgstr "Het script zou nu telegrammen moeten doorsturen naar de API host(s) die je eerder hebt ingevoerd."
+
+#~ msgid "Set the hostname or IP address in ``DATALOGGER_NETWORK_HOST`` and the port in ``DATALOGGER_NETWORK_PORT``."
+#~ msgstr "Stel de hostnaam of IP-adres in als ``DATALOGGER_NETWORK_HOST``en de poort als ``DATALOGGER_NETWORK_PORT``."

@@ -27,8 +27,13 @@ v5.0.0 - 2021-xx-xx
 
 - ``Added`` Added support for Python 3.10 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 
+----
+
 - ``Changed`` Updated to Django 3.2 [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
 - ``Changed`` Preferred Python version is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+- ``Changed`` `dsmr_datalogger_api_client.py <https://github.com/dsmrreader/dsmr-reader/blob/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_ env vars are now prefixed with ``REMOTE_`` (*affects new installations only*) [`#1216 <https://github.com/dsmrreader/dsmr-reader/issues/1216>`_]
+
+----
 
 - ``Removed`` Dropped support for **Python 3.6** (*EOL December 2021*) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 - ``Removed`` Dropped support for **PostgreSQL 9.5** (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
@@ -64,7 +69,7 @@ Older releases
     :depth: 1
 
 
-v4.19.0 - 2021-10-21
+v4.19.0 - 2021-10-23
 --------------------
 
 - ``Fixed`` Tijdverschil tussen Live en Archief voor gas [`#1385 <https://github.com/dsmrreader/dsmr-reader/issues/1385>`_]
