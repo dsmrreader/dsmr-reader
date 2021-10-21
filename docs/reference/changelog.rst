@@ -17,6 +17,21 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
+
+v5.0.0 - 2021-xx-xx
+--------------------
+
+- ``Removed`` Dropped support for Python 3.6 (EOL December 2021) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+
+
+
+Older releases
+==============
+
+.. contents:: :local:
+    :depth: 1
+
+
 v4.19.0 - 2021-10-21
 --------------------
 
@@ -406,12 +421,6 @@ v4.0.0 - 2020-07-27
 
 ----
 
-
-Older releases
-==============
-
-.. contents:: :local:
-    :depth: 1
 
 v3.12.0 - 2020-08-08
 --------------------
