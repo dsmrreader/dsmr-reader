@@ -21,7 +21,26 @@ Current version
 v5.0.0 - 2021-xx-xx
 -------------------
 
-- ``Removed`` Dropped support for Python 3.6 (EOL December 2021) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+.. note::
+
+    This release contains backwards incompatible changes that require you to manually update or reinstall DSMR-reader.
+
+- ``Added`` Added support for Python 3.10 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+
+- ``Changed`` Updated to Django 3.2 [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+- ``Changed`` Preferred Python version is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+
+- ``Removed`` Dropped support for **Python 3.6** (*EOL December 2021*) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+- ``Removed`` Dropped support for **PostgreSQL 9.5** (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+- ``Removed`` Dropped support for **MySQL 5.6** (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+
+
+.. attention::
+
+    The following notes are from Django 3.2:
+
+    - *"Upstream support for PostgreSQL 9.5 ends in February 2021. Django 3.2 supports PostgreSQL 9.6 and higher."*
+    - *"The end of upstream support for MySQL 5.6 is April 2021. Django 3.2 supports MySQL 5.7 and higher."*
 
 
 

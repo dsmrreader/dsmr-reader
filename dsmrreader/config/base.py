@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 ALLOWED_HOSTS = ['*']
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Application definition
 INSTALLED_APPS = (
@@ -116,13 +116,11 @@ LOGOUT_URL = 'admin:logout'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-# Django creates migrations based on default language. Therefor we need to force English here.
+# Django creates migrations based on default language. Therefore we need to force English here.
 LANGUAGE_CODE = 'en'
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Localization.
