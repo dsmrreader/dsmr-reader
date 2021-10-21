@@ -77,8 +77,8 @@ jobs:
       - name: Check autopep8
         run: poetry run autopep8 -r . --diff --exit-code
 
-      - name: Check translation status
-        run: poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
+#      - name: Check translation status
+#        run: poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
 
       - name: Run SQLite tests
         run: poetry run py.test --cov --cov-report=xml
