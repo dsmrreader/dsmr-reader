@@ -75,7 +75,7 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
     ordering = FIELD
 
     def perform_create(self, serializer):
-        """ Overrided to support custom model creation signal."""
+        """ Overwritten to support custom model creation signal."""
         new_instance = serializer.save()
         dsmr_datalogger.signals.dsmr_reading_created.send_robust(None, instance=new_instance)
 
@@ -92,8 +92,13 @@ class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
     schema = DsmrReaderSchema(get='Retrieve meter statistics', patch='Update meter statistics')
     serializer_class = MeterStatisticsSerializer
 
+    def get_queryset(self):
+        """ @see https://github.com/carltongibson/django-filter/issues/966#issuecomment-734971862 """
+        if getattr(self, "swagger_fake_view", False):
+            return MeterStatistics.objects.none()
+
     def get_object(self):
-        # This is a REALLY good combo with django-solo, as it fits perfectly for a singleton retreiver and updater!
+        # This is a REALLY good combo with django-solo, as it fits perfectly for a singleton retriever and updater!
         return MeterStatistics.get_solo()
 
 
