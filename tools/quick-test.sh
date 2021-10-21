@@ -24,7 +24,7 @@ fi
 
 echo ""
 echo "--- Applying autopep8..."
-./tools/apply-autopep8.sh
+poetry run autopep8 -r . --in-place
 
 
 echo ""

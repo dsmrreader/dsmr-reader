@@ -19,7 +19,7 @@ Current version
 
 
 v5.0.0 - 2021-xx-xx
---------------------
+-------------------
 
 - ``Removed`` Dropped support for Python 3.6 (EOL December 2021) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 
