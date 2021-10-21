@@ -33,6 +33,17 @@ v5.0.0 - 2021-xx-xx
 - ``Removed`` Dropped support for **Python 3.6** (*EOL December 2021*) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 - ``Removed`` Dropped support for **PostgreSQL 9.5** (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
 - ``Removed`` Dropped support for **MySQL 5.6** (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+- ``Removed`` Dropped deprecated ``SECRET_KEY`` env var (use ``DJANGO_SECRET_KEY`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DB_ENGINE`` env var (use ``DJANGO_DATABASE_ENGINE`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DB_NAME`` env var (use ``DJANGO_DATABASE_NAME`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DB_USER`` env var (use ``DJANGO_DATABASE_USER`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DB_PASS`` env var (use ``DJANGO_DATABASE_PASSWORD`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DB_HOST`` env var (use ``DJANGO_DATABASE_HOST`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DB_PORT`` env var (use ``DJANGO_DATABASE_PORT`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``CONN_MAX_AGE`` env var (use ``DJANGO_DATABASE_CONN_MAX_AGE`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``TZ`` env var (use ``DJANGO_TIME_ZONE`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DSMR_USER`` env var (use ``DSMRREADER_ADMIN_USER`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped deprecated ``DSMR_PASSWORD`` env var (use ``DSMRREADER_ADMIN_PASSWORD`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
 
 
 .. attention::
@@ -42,6 +53,8 @@ v5.0.0 - 2021-xx-xx
     - *"Upstream support for PostgreSQL 9.5 ends in February 2021. Django 3.2 supports PostgreSQL 9.6 and higher."*
     - *"The end of upstream support for MySQL 5.6 is April 2021. Django 3.2 supports MySQL 5.7 and higher."*
 
+
+----
 
 
 Older releases

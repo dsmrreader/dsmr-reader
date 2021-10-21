@@ -5,37 +5,6 @@ Environment settings
     :depth: 2
 
 
-.. attention::
-
-    The following settings have been **renamed** since DSMR-reader ``v4.5``, but are still available.
-    Their old name will be **removed** in DSMR-reader ``v5.0`` and can then be no longer used.
-
-    +-----------------------+--------------------------------------+
-    | Former name < v5.0    | New name >= v4.5                     |
-    +=======================+======================================+
-    | ``SECRET_KEY``        | ``DJANGO_SECRET_KEY``                |
-    +-----------------------+--------------------------------------+
-    | ``DB_ENGINE``         | ``DJANGO_DATABASE_ENGINE``           |
-    +-----------------------+--------------------------------------+
-    | ``DB_HOST``           | ``DJANGO_DATABASE_HOST``             |
-    +-----------------------+--------------------------------------+
-    | ``DB_PORT``           | ``DJANGO_DATABASE_PORT``             |
-    +-----------------------+--------------------------------------+
-    | ``DB_NAME``           | ``DJANGO_DATABASE_NAME``             |
-    +-----------------------+--------------------------------------+
-    | ``DB_USER``           | ``DJANGO_DATABASE_USER``             |
-    +-----------------------+--------------------------------------+
-    | ``DB_PASS``           | ``DJANGO_DATABASE_PASSWORD``         |
-    +-----------------------+--------------------------------------+
-    | ``CONN_MAX_AGE``      | ``DJANGO_DATABASE_CONN_MAX_AGE``     |
-    +-----------------------+--------------------------------------+
-    | ``TZ``                | ``DJANGO_TIME_ZONE``                 |
-    +-----------------------+--------------------------------------+
-    | ``DSMR_USER``         | ``DSMRREADER_ADMIN_USER``            |
-    +-----------------------+--------------------------------------+
-    | ``DSMR_PASSWORD``     | ``DSMRREADER_ADMIN_PASSWORD``        |
-    +-----------------------+--------------------------------------+
-
 .. contents::
     :depth: 2
 

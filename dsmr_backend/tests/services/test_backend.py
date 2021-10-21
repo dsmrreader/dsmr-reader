@@ -420,30 +420,3 @@ class TestEnvSettings(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(settings_used.USE_X_FORWARDED_HOST, True)
         self.assertEqual(settings_used.USE_X_FORWARDED_PORT, True)
         self.assertEqual(settings_used.X_FRAME_OPTIONS, 'x-frame')
-
-    @mock.patch.dict('os.environ', dict(
-        DB_ENGINE='other-engine',
-        DB_HOST='other-host',
-        DB_PORT='55555',
-        DB_NAME='other-db',
-        DB_USER='other-user',
-        DB_PASS='other-pass',
-        CONN_MAX_AGE='555',
-        SECRET_KEY='other-secret-key',
-        DJANGO_TIME_ZONE='',  # This allows TZ to override.
-        TZ='other-timezone',
-    ))
-    def test_legacy(self):
-        """ Until v5.0, these will superseed the (new) default ones. """
-        importlib.reload(django_overrides)
-        importlib.reload(settings_used)
-
-        self.assertEqual(settings_used.DATABASES['default']['ENGINE'], 'other-engine')
-        self.assertEqual(settings_used.DATABASES['default']['HOST'], 'other-host')
-        self.assertEqual(settings_used.DATABASES['default']['PORT'], 55555)
-        self.assertEqual(settings_used.DATABASES['default']['NAME'], 'other-db')
-        self.assertEqual(settings_used.DATABASES['default']['USER'], 'other-user')
-        self.assertEqual(settings_used.DATABASES['default']['PASSWORD'], 'other-pass')
-        self.assertEqual(settings_used.DATABASES['default']['CONN_MAX_AGE'], 555)
-        self.assertEqual(settings_used.SECRET_KEY, 'other-secret-key')
-        self.assertEqual(settings_used.TIME_ZONE, 'other-timezone')
