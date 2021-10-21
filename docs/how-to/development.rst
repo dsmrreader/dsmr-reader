@@ -5,33 +5,21 @@ Developing: Localhost
 .. contents::
     :depth: 2
 
-.. tip::
 
-    In this document there are many references to::
-    
-        source ~/.virtualenvs/dsmrreader/bin/activate
-        
-    You will only have to execute it once per terminal session, to make sure you are working in the designated virtual env for DSMR-reader.
+Setting up a development environment using Docker
+-------------------------------------------------
 
-
-Setting up a development environment in Ubuntu 18.04
-----------------------------------------------------
-
-System packages::
-    
-    sudo apt-get install -y postgresql postgresql-server-dev-all git python3 python3-pip python3-virtualenv virtualenvwrapper libmysqlclient-dev mariadb-server poedit
+Install Docker on your system.
 
 Clone DSMR-reader repository from GitHub::
 
     git clone ... (your fork)
     cd dsmr-reader/
 
-Create virtualenv and install all packages::
+Symlink files required::
 
-    mkdir ~/.virtualenvs
-    virtualenv ~/.virtualenvs/dsmrreader --python python3
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
+    ln -s dsmrreader/provisioning/docker/Dockerfile-dev Dockerfile
+    ln -s dsmrreader/provisioning/docker/docker-compose.dev.yml docker-compose.yml
 
 Copy development config::
 
@@ -45,33 +33,15 @@ With::
 
     from dsmrreader.config.development import *
 
-Copy env vars template and generate a unique secret key::
-
-    cp .env.template .env
-    ./tools/generate-secret-key.sh
-
-Try a check, output should be something like ``System check identified no issues (0 silenced).``::
+Try running Docker and see if this command works, output should be something like ``System check identified no issues (0 silenced).``::
     
-    ./manage.py check
-
-Run quick tests (with in-memory database)::
-
-    ./tools/quick-test.sh
-
-Set up PostgreSQL test database::
-
-    sudo -u postgres createuser -DSR dsmrreader
-    sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
-    sudo -u postgres psql -c "alter user dsmrreader CREATEDB;"
+    docker exec -it dsmr-app poetry run /app/manage.py check
 
 Set up MySQL (or MariaDB) test database::
 
+    # NOTE: Some what broken when using Docker. But this was the legacy method:
     mysql_tzinfo_to_sql /usr/share/zoneinfo | sudo mysql --defaults-file=/etc/mysql/debian.cnf mysql
     sudo mysql --defaults-file=/etc/mysql/debian.cnf
-
-    # Execute these queries:
-    GRANT ALL PRIVILEGES ON *.* TO 'dsmrreader'@'localhost' IDENTIFIED BY 'dsmrreader';
-    FLUSH PRIVILEGES;
 
 Now check whether tests run well with all three database backends (this may take a while)::
 
@@ -85,6 +55,7 @@ To be honest, the best initial/fixture data is simply a backup of your own syste
 
 Just import it as you should on your RaspberryPi. Copy a database backup to ``/var/lib/postgresql/`` on your PC and import it::
 
+    # NOTE: Some what broken when using Docker. But this was the legacy method:
     # Create empty database if it does not exist yet.
     sudo -u postgres createdb -O dsmrreader dsmrreader
 
@@ -100,8 +71,7 @@ Just import it as you should on your RaspberryPi. Copy a database backup to ``/v
 
     After importing the backup of your production system, simply run::
     
-        source ~/.virtualenvs/dsmrreader/bin/activate
-        ./manage.py development_reset
+        docker exec -it dsmr-app poetry run /app/manage.py development_reset
 
     This will remove all API keys and other links to externals systems, as well as reset the admin user credentials to ``admin / admin`` (user / password). 
 
@@ -111,12 +81,13 @@ Fake datalogger
 
 There is a builtin command that can somewhat fake a datalogger::
     
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    ./manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
+    docker exec -it dsmr-app poetry run /app/manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
 
 It will generate random data every second in a certain pattern and should be fine for basic testing. 
 
-Please note that it only inserts unprocessed readings, so you'll still have to run the ``./manage.py dsmr_backend --run-once`` command to have the readings processed.
+Please note that it only inserts unprocessed readings, so you'll still have to run the following command to have the readings processed::
+
+    docker exec -it dsmr-app poetry run /app/manage.py dsmr_backend --run-once
 
 
 Running DSMR-reader locally
@@ -124,8 +95,7 @@ Running DSMR-reader locally
 
 You can run the Django development server with::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    ./manage.py runserver
+    docker exec -it dsmr-app poetry run /app/manage.py runserver
 
 The application will be accessible on: ``http://localhost:8000/``.
 Any code changes you make will let the application reload automatically.
@@ -138,18 +108,15 @@ DSMR-reader's test coverage should remain as high as possible. Running tests wil
 
 The easiest way to run tests is to use the in-memory tests::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    ./tools/quick-test.sh
+    docker exec -it dsmr-app poetry run ./tools/quick-test.sh
     
 To test a single app within DSMR-reader, just append it::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    ./tools/quick-test.sh dsmr_frontend
+    docker exec -it dsmr-app poetry run ./tools/quick-test.sh dsmr_frontend
 
 To test all database backends, run::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    ./tools/test-all.sh
+    docker exec -it dsmr-app poetry run ./tools/test-all.sh
 
 The test coverage should be visible in the terminal after running tests.
 There are detailed HTML pages available as well, after each test run, in ``coverage_report/html/index.html``. 
@@ -165,7 +132,7 @@ Translations
 ------------
 
 You can find the translations (.PO files) for the main application in ``dsmrreader/locales/``.
-To regenerate them, just execute the ``./tools/quick-test.sh`` script, as one of the tests checks translations.
+To regenerate them, just execute the ``docker exec -it dsmr-app poetry run ./tools/check-translations.sh`` script.
 
 
 Editing documentation
@@ -173,9 +140,7 @@ Editing documentation
 
 The documentation is part of the repository and can be generated (automatically) with Sphinx::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    cd docs/
-    sphinx-autobuild . _build/html --port 10000
+    docker exec -it dsmr-docs poetry run sphinx-autobuild . _build/html --host 0.0.0.0 --port 10000
     
 You can now view the documentation in your browser by accessing: ``http://127.0.0.1:10000``.
 Any changes you make will be reflected instantly in the browser, as Sphinx continuously checks for changed files.
@@ -186,14 +151,12 @@ Translating documentation
 
 Translations are done using gettext and .PO files. Regenerate the .PO files with::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
-    cd docs/
-    make gettext && sphinx-intl update -p _build/locale -l nl
+    docker exec -it dsmr-docs bash -c 'poetry run make gettext && poetry run sphinx-intl update --line-width=-1 -p _build/locale -l nl'
 
 The .PO files in ``docs/locale`` should be regenerated now. You can use ``poedit`` to view and translate the files.
 
 After editing the .PO files, you can check the result by building the Dutch translations locally::
 
-    make -e SPHINXOPTS="-D language='nl'" html
+    docker exec -it dsmr-docs poetry run make html
 
 Now view the generated HTML in your browser by opening: ``docs/_build/html/index.html``
