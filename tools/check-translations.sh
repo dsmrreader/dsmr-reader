@@ -22,5 +22,5 @@ poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v change
 
 if [ $? -ne 1 ]; then
     echo "[!] Pending documentation translations [!]"
-    exit;
+    exit 1;
 fi

@@ -18,7 +18,7 @@ poetry run pytest --cov --cov-report=html $ARGS
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed [!]"
-    exit;
+    exit 1;
 fi
 
 
@@ -33,7 +33,7 @@ poetry run pylama
 
 if [ $? -ne 0 ]; then
     echo "[!] Code audit failed [!]"
-    exit;
+    exit 1;
 fi
 
 
@@ -49,5 +49,5 @@ poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v change
 
 if [ $? -ne 1 ]; then
     echo "[!] Pending documentation translations [!]"
-    exit;
+    exit 1;
 fi

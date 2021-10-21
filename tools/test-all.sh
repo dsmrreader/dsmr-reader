@@ -11,7 +11,7 @@ poetry run pytest --cov --cov-report=term
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed: sqlite3"
-    exit;
+    exit 1;
 fi
 
 
@@ -29,7 +29,7 @@ poetry run pytest --cov --cov-report=term
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed: $DJANGO_DATABASE_ENGINE"
-    exit;
+    exit 1;
 fi
 
 
@@ -47,7 +47,7 @@ poetry run pytest --cov --cov-report=term
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed: $DJANGO_DATABASE_ENGINE"
-    exit;
+    exit 1;
 fi
 
 
