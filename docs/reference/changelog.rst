@@ -69,6 +69,14 @@ Older releases
     :depth: 1
 
 
+v4.20.0 - 2021-xx-xx
+--------------------
+
+.. note::
+
+    This is the last release of DSMR-reader ``v4.x``. You can upgrade to ``v5.x`` for future support/features/rework.
+
+
 v4.19.0 - 2021-10-23
 --------------------
 
@@ -77,8 +85,6 @@ v4.19.0 - 2021-10-23
 .. note::
 
     This is the last **feature** release of DSMR-reader ``v4.x``. Upcoming new features will probably only be added to ``v5.x``.
-
-    *The v4.20 release following this one, will be used to mark the end of this major version and contain an how-to for upgrading to v5 later.*
 
 .. warning::
 

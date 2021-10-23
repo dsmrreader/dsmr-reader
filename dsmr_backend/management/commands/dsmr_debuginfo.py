@@ -168,8 +168,6 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self.stdout.write()
         self.stdout.write('<!-- COPY OUTPUT BELOW -->')
         self.stdout.write()
-        self.stdout.write()
-        self.stdout.write('```')
 
     def _pretty_print(self, what, value):
         self.stdout.write('    {:65}{:>40}'.format(str(what), str(value)))
@@ -183,7 +181,6 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
     def _print_end(self):
         self.stdout.write()
-        self.stdout.write('```')
         self.stdout.write()
         self.stdout.write('<!-- COPY OUTPUT ABOVE -->')
         self.stdout.write()
