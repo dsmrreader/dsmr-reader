@@ -20,8 +20,31 @@ List of changes
 1. Update to the latest ``v4.x`` version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Update to ``v4.20.0`` to ensure you have the latest ``v4.x`` version.
+
+
+
+2. Relocate to https://github.com/dsmrreader
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Over a year ago the DSMR-reader project was moved to `https://github.com/dsmrreader`.
+
+
 Execute the following::
 
     sudo su - dsmr
-    ./deploy.sh
+    git remote -v
+
+
+It should point to::
+
+
+    origin	https://github.com/dsmrreader/dsmr-reader.git (fetch)
+    origin	https://github.com/dsmrreader/dsmr-reader.git (push)
+
+
+If not, update it and check again::
+
+    git remote set-url origin https://github.com/dsmrreader/dsmr-reader.git
+    git remote -v
 
