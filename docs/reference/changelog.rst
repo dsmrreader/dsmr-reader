@@ -21,9 +21,9 @@ Current version
 v5.0.0 - 2021-xx-xx
 -------------------
 
-.. note::
+.. warning::
 
-    This release contains backwards incompatible changes that require you to manually update or reinstall DSMR-reader.
+    This release of DSMR-reader requires you to manually upgrade from ``v4.x`` to ``v5.x``. See :doc:`the v5 upgrade guide </tutorial/upgrading/to-v5>` for more information.
 
 - ``Added`` Added support for Python 3.10 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 
