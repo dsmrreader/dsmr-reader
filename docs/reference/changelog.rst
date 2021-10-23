@@ -17,7 +17,7 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.19.0 - 2021-10-21
+v4.19.0 - 2021-10-23
 --------------------
 
 - ``Fixed`` Tijdverschil tussen Live en Archief voor gas [`#1385 <https://github.com/dsmrreader/dsmr-reader/issues/1385>`_]
