@@ -1,3 +1,4 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -5,12 +6,11 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
-"X-Generator: Poedit 2.3\n"
 
 #: ../../how-to/admin/notifications.rst:2
 msgid "Admin: Notifications"
@@ -23,9 +23,6 @@ msgstr "Inhoudsopgave"
 #: ../../how-to/admin/notifications.rst:7
 msgid "Notifications on your phone using Prowl, Pushover or Telegram."
 msgstr "Notificaties op je telefoon via Prowl, Pushover of Telegram."
-
-msgid "Notifications"
-msgstr "Notificaties"
 
 #: ../../how-to/admin/notifications.rst:13
 msgid "Currently, two mobile platforms are supported: Android and iOS."
@@ -71,9 +68,6 @@ msgstr "Je hebt de  **User Key** nodig, te vinden op de locatie rechtsbovenin de
 msgid "And you will need the **API key** for the application you've created in Pushover."
 msgstr "En je hebt de  **API key** nodig voor de applicatie die je in Pushover hebt aangemaakt."
 
-msgid "Pushover Get Your API Key"
-msgstr "Pushover verkrijg API key"
-
 #: ../../how-to/admin/notifications.rst:48
 msgid "Prowl: How do I obtain my API key?"
 msgstr "Prowl: Hoe krijg ik mijn API key?"
@@ -86,15 +80,9 @@ msgstr "Nadat je Prowl gedownload hebt en je registreert voor een account, zou j
 msgid "Now go to \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\", you should see an overview of your current API keys if you have any. To create an API key for the DSMR-reader, input a name and click **\"Generate Key\"**."
 msgstr "Ga nu naar \"`API Keys <https://www.prowlapp.com/api_settings.php>`_\", je zou nu een overzicht moeten zien van je API keys, mits je die al hebt. Om een API key aan te maken voor DSMR-reader, voer een naam in en klik op **\"Generate Key\"**."
 
-msgid "Prowl My Account overview"
-msgstr "Prowl My Account overzicht"
-
 #: ../../how-to/admin/notifications.rst:59
 msgid "When a new key is generated, you will see it immediatly. Your key is listed like in the screenshot below (the red box marks your API key)."
 msgstr "Als er een nieuwe key is gegenereerd, zie je deze direct. De key is te vinden zoals in onderstaande screenshot (er staat een rood kader om de key)."
-
-msgid "Prowl Get Your API Key"
-msgstr "Prowl verkrijg API key"
 
 #: ../../how-to/admin/notifications.rst:67
 msgid "Telegram: How do I obtain my API key?"
@@ -136,9 +124,6 @@ msgstr "Bijvoorbeeld voor de nep-API-sleutel ``1268827887:ABCDEFGqdtsgtts-JDASIJ
 msgid "You should see something similar to:"
 msgstr "Je zou nu iets soortgelijks als dit moeten zien:"
 
-msgid "Telegram Chat ID"
-msgstr "Telegram Chat ID"
-
 #: ../../how-to/admin/notifications.rst:100
 msgid "Extract the Chat ID from the response. In the example above it's ``123456789``. You can use that ID in the Telegram notifications config of DSMR-reader."
 msgstr "Haal het Chat ID uit het resultaat. In het voorbeeld hierboven is dat ``123456789``. Je kunt dat ID in de Telegram-configuratie binnen DSMR-reader gebruiken."
@@ -150,3 +135,19 @@ msgstr "Voor het testen van notificaties kun je het volgende uitvoeren::"
 #: ../../how-to/admin/notifications.rst:108
 msgid "Please note that DSMR-reader will reset and wipe notification settings on any error. This can be experienced as a bit annoying."
 msgstr "N.B.: DSMR-reader reset en wist alle notificatieinstellingen wanneer er fouten optreden. Dit kan als wat vervelend ervaren worden."
+
+#~ msgid "Notifications"
+#~ msgstr "Notificaties"
+
+#~ msgid "Pushover Get Your API Key"
+#~ msgstr "Pushover verkrijg API key"
+
+#~ msgid "Prowl My Account overview"
+#~ msgstr "Prowl My Account overzicht"
+
+#~ msgid "Prowl Get Your API Key"
+#~ msgstr "Prowl verkrijg API key"
+
+#~ msgid "Telegram Chat ID"
+#~ msgstr "Telegram Chat ID"
+

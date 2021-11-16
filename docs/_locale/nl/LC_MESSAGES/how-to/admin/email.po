@@ -1,3 +1,4 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -5,12 +6,11 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
-"X-Generator: Poedit 2.3\n"
 
 #: ../../how-to/admin/email.rst:2
 msgid "Admin: Email"
@@ -32,5 +32,6 @@ msgstr "Als alternatief kun je GMail gebruiken om e-mail te versturen. Daarmee i
 msgid "To do so, use host ``aspmx.l.google.com``, port ``25``, ``Use TLS`` and leave the username and password **blank**."
 msgstr "Om dat te doen, gebruik host ``aspmx.l.google.com``, port ``25``, ``Gebruik TLS`` en laat zowel de gebruikersnaam als wachtwoord **leeg**."
 
-msgid "Email settings"
-msgstr "E-mailinstellingen"
+#~ msgid "Email settings"
+#~ msgstr "E-mailinstellingen"
+

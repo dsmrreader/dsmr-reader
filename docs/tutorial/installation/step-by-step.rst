@@ -29,12 +29,12 @@ The application stores by default all readings taken from the serial cable.
       Error: The locale requested by the environment is invalid.
       Error: could not create default cluster. Please create it manually with
 
-      pg_createcluster 9.4 main --start
+      pg_createcluster 11 main --start
 
     Try: ``dpkg-reconfigure locales``.
 
     Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
-    Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using).
+    Then try ``pg_createcluster 11 main --start`` again (or whatever version you are using).
 
 (!) Ignore any '*could not change directory to "/root": Permission denied*' errors for the following three commands.
 
@@ -65,13 +65,10 @@ Optional: Restore a database backup
 ---------------
 Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::
 
-    sudo apt-get install -y nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get install -y cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv
 
-Install ``cu``. The CU program allows easy testing for your DSMR serial connection.
-It's very basic but also very effective to simply test whether your serial cable setup works properly::
-
-    sudo apt-get install -y cu
-
+The CU program allows easily testing for your DSMR serial connection.
+It's very basic but also very effective to simply test whether your serial cable setup works properly.
 
 3. Application user
 -------------------
@@ -119,7 +116,7 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 
 - Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user.
 
-Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefor it requires (write) access to it::
+Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefore it requires (write) access to it::
 
     sudo mkdir -p /var/www/dsmrreader/static
 
@@ -144,50 +141,40 @@ This may take a few seconds. When finished, you should see a new folder called `
 
 The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**.
 
-Although it's just a folder inside our user's homedir, it's very effective as it allows us to keep dependencies isolated or to run different versions of the same package on the same machine.
-`More information about this subject can be found here <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_.
-
 - Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
-
-- Create folder for the virtualenv(s) of this user::
-
-    mkdir ~/.virtualenvs
-
-- Create a new virtualenv, we usually use the same name for it as the application or project::
-
-    virtualenv ~/.virtualenvs/dsmrreader --system-site-packages --python python3
 
 .. note::
 
-    Note that it's important to specify **Python 3** as the default interpreter.
+    **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
+
+- Install dependencies::
+
+    pip3 install --user --upgrade pip poetry
+
+    poetry config virtualenvs.in-project true
+    poetry install
 
 - Each time you work as ``dsmr`` user, you will have to switch to the virtualenv with these commands::
 
-    source ~/.virtualenvs/dsmrreader/bin/activate
     cd ~/dsmr-reader
+    poetry shell
 
 - Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::
 
-    sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> ~/.bashrc'
     sh -c 'echo "cd ~/dsmr-reader" >> ~/.bashrc'
-
-This will both activate the virtual environment and cd you into the right directory on your **next login** as ``dsmr`` user.
+    sh -c 'echo "poetry shell" >> ~/.bashrc'
 
 .. note::
 
-    You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D) and login again using ``sudo su - dsmr``.
+    You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D or type ``logout``) and login again using ``sudo su - dsmr``.
 
-    You should see the terminal have a ``(dsmrreader)`` prefix now, for example: ``(dsmrreader)dsmr@rasp:~/dsmr-reader $``
+    You should see the terminal have a ``(.venv)`` prefix now, for example: ``(.venv)dsmr@rasp:~/dsmr-reader $``
 
 Make sure you've read and executed the note above, because you'll need it for the next chapter.
 
 
 7. Application configuration & setup
 ------------------------------------
-The application will also need the appropriate database client, which is not installed by default.
-For this I created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework.
-
-
 Setup local config::
 
     cp dsmrreader/provisioning/django/settings.py.template dsmrreader/settings.py
@@ -195,18 +182,12 @@ Setup local config::
     cp .env.template .env
     ./tools/generate-secret-key.sh
 
-.. note::
-
-    **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
-
-Install dependencies::
-
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt
-
 
 8. Bootstrapping
 ----------------
 Now it's time to bootstrap the application and check whether all settings are good and requirements are met.
+
+- Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
 
 - Execute this to initialize the database we've created earlier::
 
@@ -235,7 +216,7 @@ You've almost completed the installation now.
 
 .. note::
 
-    This installation guide asumes you run the Nginx webserver for this application only.
+    This installation guide assumes you run the Nginx webserver for this application only.
 
     It's possible to have other applications use Nginx as well, but that requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will copy below.
 
@@ -275,7 +256,6 @@ It's also configured to bring the entire application up again after a shutdown o
 - Enter these commands (**listed after the** ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::
 
     supervisor> reread
-
     supervisor> update
 
 Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times.

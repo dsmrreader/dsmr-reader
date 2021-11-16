@@ -234,7 +234,6 @@ Be sure to remove it and copy the other processes separately from the repository
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
 
     sudo supervisorctl reread
-    sudo supervisorctl update
     sudo supervisorctl restart all
 
 You should not see ``dsmr_mqtt`` anymore.

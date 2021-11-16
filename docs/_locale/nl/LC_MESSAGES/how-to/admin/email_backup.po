@@ -1,3 +1,4 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
@@ -5,12 +6,11 @@ msgstr ""
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
-"X-Generator: Poedit 2.3\n"
 
 #: ../../how-to/admin/email_backup.rst:2
 msgid "Admin: Email backup"
@@ -32,5 +32,6 @@ msgstr "Het zou alleen gebruikt moeten worden in noodgevallen, wanneer je om wat
 msgid "Before enabling this, make sure you've configured email settings as well, as the application needs an email server to do so. :doc:`Go to email settings here.<email>`"
 msgstr "Voordat je dit inschakelt, zorg ervoor dat je eerst de e-mailinstellingen goed hebt staan. De applicatie heeft namelijk een e-mailserver nodig om de e-mails te versturen. :doc:`Ga hier naar e-mailinstellingen.<email>`"
 
-msgid "Email backup settings"
-msgstr "Email backup instellingen"
+#~ msgid "Email backup settings"
+#~ msgstr "Email backup instellingen"
+
