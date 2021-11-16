@@ -10,3 +10,4 @@ Tutorials
 
    upgrading/to-v3
    upgrading/to-v4
+   upgrading/to-v5

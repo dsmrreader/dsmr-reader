@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 2.3\n"
+
+#: ../../tutorial/upgrading/to-v5.rst:2
+msgid "Guide: Upgrading DSMR-reader v4.x to v5.x"
+msgstr "Stappenplan: DSMR-reader upgraden van v4.x naar v5.x"
+
+#: ../../tutorial/upgrading/to-v5.rst:4
+msgid "DSMR-reader ``v5.x`` is backwards incompatible with ``4.x``. You will have to manually upgrade to make sure it will run properly."
+msgstr "DSMR-reader ``v5.x`` is backwards incompatible met ``4.x``. Je zult handmatig moeten upgraden om ervoor te zorgen dat het goed werkt."
+
+#: ../../tutorial/upgrading/to-v5.rst:8
+msgid "If you're using Docker, you can probably just install the ``v5.x`` version of the Docker container without having to perform any of the steps below."
+msgstr "Indien je Docker gebruikt, kun je vermoedelijk gewoon de ``v5.x`` versie van de Docker container gebruiken, zonder onderstaande stappen te hoeven uitvoeren."
+
+#: ../../tutorial/upgrading/to-v5.rst:12
+msgid "Contents"
+msgstr "Inhoudsopgave"
+
+#: ../../tutorial/upgrading/to-v5.rst:15
+msgid "List of changes"
+msgstr "Lijst van wijzigingen"
+
+#: ../../tutorial/upgrading/to-v5.rst:17
+msgid ":doc:`See the changelog</reference/changelog>`, for ``v5.x releases`` and higher. Check them before updating!"
+msgstr ":doc:`Zie de changelog</reference/changelog>`, voor ``v5.x releases`` en hoger. Bekijk ze voordat je update!"
+
+#: ../../tutorial/upgrading/to-v5.rst:21
+msgid "1. Update to the latest ``v4.x`` version"
+msgstr "1. Update naar de meeste recente ``v4.x`` versie"
+
+#: ../../tutorial/upgrading/to-v5.rst:23
+msgid "Update to ``v4.20`` to ensure you have the latest ``v4.x`` version."
+msgstr "Update naar ``v4.20`` zodat je de meeste recente ``v4.x`` versie draait."
+
+#: ../../tutorial/upgrading/to-v5.rst:27
+msgid "2. Relocate to github.com/dsmrreader/"
+msgstr "2. Migreer naar github.com/dsmrreader/"
+
+#: ../../tutorial/upgrading/to-v5.rst:29
+msgid "Over a year ago the DSMR-reader project was moved to ``https://github.com/dsmrreader``."
+msgstr "Meer dan een jaar geleden is het DSMR-reader project verplaatst naar ``https://github.com/dsmrreader``."
+
+#: ../../tutorial/upgrading/to-v5.rst:32 ../../tutorial/upgrading/to-v5.rst:50
+#: ../../tutorial/upgrading/to-v5.rst:60 ../../tutorial/upgrading/to-v5.rst:67
+#: ../../tutorial/upgrading/to-v5.rst:85 ../../tutorial/upgrading/to-v5.rst:105
+#: ../../tutorial/upgrading/to-v5.rst:132
+msgid "Execute the following::"
+msgstr "Voer het volgende uit::"
+
+#: ../../tutorial/upgrading/to-v5.rst:38
+msgid "It should point to::"
+msgstr "Het zou moeten wijzen naar::"
+
+#: ../../tutorial/upgrading/to-v5.rst:45
+msgid "**If not**, update it and check again::"
+msgstr "**zo niet**, update deze en probeer opnieuw::"
+
+#: ../../tutorial/upgrading/to-v5.rst:56
+msgid "3. Python version check"
+msgstr "3. Python versie check"
+
+#: ../../tutorial/upgrading/to-v5.rst:58
+msgid "DSMR-reader ``5.x`` requires ``Python 3.7`` or higher."
+msgstr "DSMR-reader ``5.x`` vereist ``Python 3.7`` of hoger."
+
+#: ../../tutorial/upgrading/to-v5.rst:65
+msgid "It should display the Python version. **If you're already running** ``Python 3.7`` **(or higher), you can ignore the next section.**"
+msgstr "Het zou de Python-versie moeten tonen. **Wanneer je al de versie** ``Python 3.7`` **(of hoger) draait, kun je de volgende sectie negeren.**"
+
+#: ../../tutorial/upgrading/to-v5.rst:72
+msgid "4. Python version upgrade (when running ``Python 3.6`` or lower)"
+msgstr "4. Python-versie upgrade (wanneer je ``Python 3.6`` of lager draait)"
+
+#: ../../tutorial/upgrading/to-v5.rst:76
+msgid "Only execute this section if you're running DSMR-reader with ``Python 3.6`` or lower!"
+msgstr "Voer deze sectie alleen uit wanneer je DSMR-reader draait met ``Python 3.6`` of lager!"
+
+#: ../../tutorial/upgrading/to-v5.rst:78
+msgid "There are several guides, depending on your OS. We assume Raspbian OS here."
+msgstr "Er zijn diverse handleidingen, afhankelijk van je OS. We gaan hier uit van Raspbian OS."
+
+#: ../../tutorial/upgrading/to-v5.rst:82
+msgid "You may consider upgrading to a higher Python version, e.g. ``Python 3.9``, if possible for your OS."
+msgstr "Je kunt overwegen om direct naar een hogere Python-versie te upgrade, bijvoorbeeld ``Python 3.9``, indien mogelijk voor het OS dat je gebruikt."
+
+#: ../../tutorial/upgrading/to-v5.rst:99
+msgid "Try running the command ``python3.9 --version`` to see if things worked out. If you're getting any errors, do not continue with the upgrade."
+msgstr "Probeer om ``python3.9 --version`` uit te voeren om te controleren of het gelukt is. Wanneer je foutmeldingen krijgt, ga dan niet verder met de upgrade."
+
+#: ../../tutorial/upgrading/to-v5.rst:103
+msgid "The next thing you'll absolutely need to do, is create a fresh database backup and store it somewhere safe."
+msgstr "Het volgende wat je absoluut moet doen, is het maken van een verse database back-up en deze op een veilige plek opslaan."
+
+#: ../../tutorial/upgrading/to-v5.rst:110
+msgid "If things went well, you should see a message like::"
+msgstr "Wanneer alles OK is, zie je een melding in de trend van::"
+
+#: ../../tutorial/upgrading/to-v5.rst:114
+#: ../../tutorial/upgrading/to-v5.rst:122
+msgid "Execute the following (your file name may differ!)::"
+msgstr "Voer het volgende uit (bestandsnaam kan afwijken in jouw situatie!)::"
+
+#: ../../tutorial/upgrading/to-v5.rst:118
+msgid "Make sure the file is of some (reasonable) size::"
+msgstr "Controleer of het bestand een (aannemelijke) grootte heeft::"
+
+#: ../../tutorial/upgrading/to-v5.rst:126
+msgid "Make sure the output ends with::"
+msgstr "Controleer dat het eindigt met deze output::"
+
+#: ../../tutorial/upgrading/to-v5.rst:138
+msgid "5. Upgrade to DSMR-reader v5"
+msgstr "5. Upgrade naar DSMR-reader v5"
+
+#: ../../tutorial/upgrading/to-v5.rst:140
+msgid "Remove the following line from ``/home/dsmr/.bashrc``::"
+msgstr "Verwijder de volgende regel uit ``/home/dsmr/.bashrc``::"
+
+#: ../../tutorial/upgrading/to-v5.rst:144
+msgid "Install Poetry::"
+msgstr "Installeer Poetry::"
+
+#: ../../tutorial/upgrading/to-v5.rst:148
+msgid "Add the following line to ``/home/dsmr/.bashrc``::"
+msgstr "Voeg de volgende regel toe aan ``/home/dsmr/.bashrc``::"
+
+#: ../../tutorial/upgrading/to-v5.rst:152
+msgid "Stop DSMR-reader::"
+msgstr "Stop DSMR-reader::"
+
+#: ../../tutorial/upgrading/to-v5.rst:156
+msgid "Disable ``v4.x`` virtualenv::"
+msgstr "Schakel ``v4.x`` virtualenv uit::"
+
+#: ../../tutorial/upgrading/to-v5.rst:162
+msgid "Update DSMR-reader codebase::"
+msgstr "Update DSMR-reader codebase::"
+
+#: ../../tutorial/upgrading/to-v5.rst:172
+msgid "Install dependencies::"
+msgstr "Installeer dependencies::"
+
+#: ../../tutorial/upgrading/to-v5.rst:177
+msgid "Update Supervisor configs::"
+msgstr "Update Supervisor configs::"
+
+#: ../../tutorial/upgrading/to-v5.rst:185
+msgid "Reload Supervisor configs::"
+msgstr "Herlaad Supervisor configs::"
+
+#: ../../tutorial/upgrading/to-v5.rst:189
+msgid "Start DSMR-reader::"
+msgstr "Start DSMR-reader::"
+
+#: ../../tutorial/upgrading/to-v5.rst:194
+msgid "6. Deploy"
+msgstr "6. Deploy"
+
+#: ../../tutorial/upgrading/to-v5.rst:195
+msgid "Finally, execute the deploy script::"
+msgstr "Tot slot, voer het deploy-script uit::"
+
+#: ../../tutorial/upgrading/to-v5.rst:200
+msgid "Great. You should now be on ``v5.x``!"
+msgstr "Top! Je zou nu ``v5.x`` moeten draaien!"
