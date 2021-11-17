@@ -13,7 +13,7 @@ authors = [
 
 
 [tool.poetry.dependencies]
-python = "^3.7 || ^3.8 || ^3.9"
+python = "^3.7 || ^3.8 || ^3.9 || ^3.10"
 
 autopep8 = "^1.5"
 coreapi = "^2.3"
