@@ -9,6 +9,8 @@ from dsmr_backend.signals import backend_restart_required
 
 
 class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
+    RETENTION_POLICY = 'autogen'
+
     INSECURE = 'insecure'
     SECURE_CERT_NONE = 'secure_no_verify'
     SECURE_CERT_REQUIRED = 'secure_and_verify'
@@ -31,26 +33,31 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
     )
     port = models.IntegerField(
         default=8086,
-        verbose_name=_('InfluxDB port'),
+        verbose_name=_('InfluxDB port.'),
         help_text=_('Default: 8086')
     )
-    database = models.CharField(
+    # @see https://docs.influxdata.com/influxdb/v2.1/organizations
+    organization = models.CharField(
+        default='',
+        max_length=64,
+        verbose_name=_('InfluxDB organization'),
+        help_text=_(
+            'The organization to use.'
+        )
+    )
+    # @see https://docs.influxdata.com/influxdb/v2.1/security/tokens/
+    api_token = models.CharField(
+        default='',
+        max_length=64,
+        verbose_name=_('InfluxDB API token'),
+        help_text=_('The API token to use.')
+    )
+    # @see https://docs.influxdata.com/influxdb/v2.1/organizations/buckets
+    bucket = models.CharField(
         max_length=64,
         default='dsmrreader_measurements',
-        verbose_name=_('InfluxDB database'),
-        help_text=_('The name of the database used in InfluxDB.')
-    )
-    username = models.CharField(
-        blank=True,
-        max_length=64,
-        verbose_name=_('InfluxDB username'),
-        help_text=_('Optional: The username used for authentication with InfluxDB.')
-    )
-    password = models.CharField(
-        blank=True,
-        max_length=64,
-        verbose_name=_('InfluxDB password'),
-        help_text=_('Optional: The password used for authentication with InfluxDB.')
+        verbose_name=_('InfluxDB bucket'),
+        help_text=_('The name of the bucket used in InfluxDB.')
     )
     secure = models.CharField(
         max_length=24,

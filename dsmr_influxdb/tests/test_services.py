@@ -3,7 +3,7 @@ from unittest import mock
 
 from django.test import TestCase, override_settings
 from django.utils import timezone
-from influxdb import InfluxDBClient
+from influxdb_client import InfluxDBClient
 
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
@@ -34,78 +34,84 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
         client = dsmr_influxdb.services.initialize_client()
         self.assertIsNone(client)
 
-    @mock.patch('influxdb.InfluxDBClient.create_database')
-    def test_initialize_client_connection_error(self, create_database_mock):
-        create_database_mock.side_effect = RuntimeError('Connection failed')
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name')
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.create_bucket')
+    def test_initialize_client_connection_error(self, create_bucket_mock, find_bucket_mock):
+        find_bucket_mock.return_value = None
+        create_bucket_mock.side_effect = RuntimeError('Connection failed')
 
         with self.assertRaises(RuntimeError):
             dsmr_influxdb.services.initialize_client()
 
-    @mock.patch('influxdb.InfluxDBClient.create_database')
-    def test_initialize_client_default(self, create_database_mock):
-        self.assertFalse(create_database_mock.called)
-        client = dsmr_influxdb.services.initialize_client()
-        self.assertTrue(create_database_mock.called)
-        self.assertIsNotNone(client)
-        self.assertEqual(client._scheme, 'http')
-        self.assertFalse(client._verify_ssl)
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name')
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.create_bucket')
+    def test_initialize_client_default(self, create_bucket_mock, find_bucket_mock):
+        find_bucket_mock.return_value = None
+        self.assertFalse(create_bucket_mock.called)
 
-    @mock.patch('influxdb.InfluxDBClient.create_database')
-    def test_initialize_client_secure_unverified(self, create_database_mock):
+        client = dsmr_influxdb.services.initialize_client()
+        self.assertIsNotNone(client)
+        self.assertTrue(create_bucket_mock.called)
+        self.assertTrue(client.url.startswith('http://'))
+
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name')
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.create_bucket')
+    def test_initialize_client_secure_unverified(self, create_bucket_mock, find_bucket_mock):
+        find_bucket_mock.return_value = None
         InfluxdbIntegrationSettings.objects.update(secure=InfluxdbIntegrationSettings.SECURE_CERT_NONE)
+        self.assertFalse(create_bucket_mock.called)
 
-        self.assertFalse(create_database_mock.called)
         client = dsmr_influxdb.services.initialize_client()
         self.assertIsNotNone(client)
+        self.assertTrue(create_bucket_mock.called)
+        self.assertTrue(client.url.startswith('https://'))
 
-        self.assertEqual(client._scheme, 'https')
-        self.assertFalse(client._verify_ssl)
-
-    @mock.patch('influxdb.InfluxDBClient.create_database')
-    def test_initialize_client_secure_verify_ssl(self, create_database_mock):
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name')
+    @mock.patch('influxdb_client.client.bucket_api.BucketsApi.create_bucket')
+    def test_initialize_client_secure_verify_ssl(self, create_bucket_mock, find_bucket_mock):
+        find_bucket_mock.return_value = None
         InfluxdbIntegrationSettings.objects.update(secure=InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED)
+        self.assertFalse(create_bucket_mock.called)
 
-        self.assertFalse(create_database_mock.called)
         client = dsmr_influxdb.services.initialize_client()
         self.assertIsNotNone(client)
+        self.assertTrue(create_bucket_mock.called)
+        self.assertTrue(client.url.startswith('https://'))
 
-        self.assertEqual(client._scheme, 'https')
-        self.assertTrue(client._verify_ssl)
-
-    @mock.patch('influxdb.InfluxDBClient.write_points')
+    @mock.patch('influxdb_client.client.write_api.WriteApi.write')
     def test_run_empty(self, write_points_mock):
         InfluxdbMeasurement.objects.all().delete()
 
-        dsmr_influxdb.services.run(InfluxDBClient())
+        dsmr_influxdb.services.run(InfluxDBClient('http://localhost:8086', ''))
         self.assertFalse(write_points_mock.called)  # Not reached.
 
-    @mock.patch('influxdb.InfluxDBClient.write_points')
+    @mock.patch('influxdb_client.client.write_api.WriteApi.write')
     def test_run_exception(self, write_points_mock):
         write_points_mock.side_effect = RuntimeError('Explosion')
 
-        dsmr_influxdb.services.run(InfluxDBClient())
+        dsmr_influxdb.services.run(InfluxDBClient('http://localhost:8086', ''))
 
         # No crash and should still clear data.
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
 
-    @mock.patch('influxdb.InfluxDBClient.write_points')
+    @mock.patch('influxdb_client.client.write_api.WriteApi.write')
     def test_run(self, write_points_mock):
         self.assertFalse(write_points_mock.called)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 3)
 
-        dsmr_influxdb.services.run(InfluxDBClient())
+        dsmr_influxdb.services.run(InfluxDBClient('http://localhost:8086', ''))
         self.assertTrue(write_points_mock.called)
         self.assertEqual(write_points_mock.call_count, 3)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
 
     @override_settings(DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE=1)
-    @mock.patch('influxdb.InfluxDBClient.write_points')
+    @mock.patch('influxdb_client.client.write_api.WriteApi.write')
     def test_run_overrun(self, write_points_mock):
         """ More measurements stored than we're allowed to process. """
         self.assertFalse(write_points_mock.called)
         self.assertEqual(InfluxdbMeasurement.objects.count(), 3)
 
-        dsmr_influxdb.services.run(InfluxDBClient())
+        dsmr_influxdb.services.run(InfluxDBClient('http://localhost:8086', ''))
 
         self.assertTrue(write_points_mock.called)
         self.assertEqual(write_points_mock.call_count, 1)  # Only once

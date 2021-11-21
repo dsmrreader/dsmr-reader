@@ -36,6 +36,9 @@ msgstr "`Read The Docs <https://readthedocs.org/>`_ voor het hosten van alle doc
 msgid "JetBrains for providing an open-source IDE licence to work on DSMR-reader."
 msgstr "JetBrains voor het afgeven van een IDE open-source licentie om te werken aan DSMR-reader."
 
+msgid "Jetbrains"
+msgstr "Jetbrains"
+
 #: ../../explained/hall-of-fame.rst:19
 msgid "Special thanks"
 msgstr "Speciale dank aan"
@@ -151,7 +154,4 @@ msgstr "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
 #: ../../explained/hall-of-fame.rst:52
 msgid "The many other external packages used in DSMR-reader!"
 msgstr "De vele externe packages die door DSMR-reader gebruikt worden!"
-
-#~ msgid "Jetbrains"
-#~ msgstr "Jetbrains"
 

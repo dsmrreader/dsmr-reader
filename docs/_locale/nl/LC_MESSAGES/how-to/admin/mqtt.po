@@ -24,6 +24,9 @@ msgstr "De applicatie heeft ingebouwde ondersteuning voor MQTT. In het onderstaa
 msgid "There are options for using different ports, SSL, authentication and even the Quality of Service (QoS) used. More information about MQTT QoS `can be found here <https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels>`_."
 msgstr "Er zijn opties beschikbaar voor het definiëren van verschillende poorten, SSL, authenticatie en zelfs de \"Quality of Service\" (QoS). Meer informatie  over MQTT QoS `vind je hier <https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels>`_."
 
+msgid "MQTT Broker"
+msgstr "MQTT Broker"
+
 #: ../../how-to/admin/mqtt.rst:15
 msgid "There are multiple configurations available for sending MQTT messages to your broker. You can enable them seperately, depending on your needs. Many of these also allow you to define which fields are sent and how they should be identified in messages sent to the broker."
 msgstr "Er zijn meerdere configuraties beschikbaar voor het versturen van MQTT-berichten naar je broker toe. Je kunt deze los van elkaar inschakelen, afhankelijk van je eigen behoeftes. Daarnaast staan veel van deze opties je toe te bepalen welke velden verstuurd worden. Evenals de naamgeving van deze velden."
@@ -48,6 +51,9 @@ msgstr "Meterstatistieken"
 msgid "Statistics of your meter, splitted among topics:"
 msgstr "Statistieken van je slimme meter, gesplitst over meerdere topics:"
 
+msgid "MQTT Split Topic Meter Statistics"
+msgstr "MQTT Split Topic Meter Statistieken"
+
 #: ../../how-to/admin/mqtt.rst:44
 msgid "Telegram"
 msgstr "Telegram"
@@ -64,24 +70,24 @@ msgstr "Of gesplitst over meerdere topics:"
 msgid "Or in raw DSMR protocol format (when available):"
 msgstr "Of in ruw DSMR-protocol formaat (wanneer beschikbaar):"
 
-#~ msgid "MQTT Broker"
-#~ msgstr "MQTT Broker"
+msgid "MQTT Broker"
+msgstr "MQTT Broker"
 
-#~ msgid "MQTT JSON day Totals"
-#~ msgstr "MQTT JSON dagtotalen"
+msgid "MQTT JSON day Totals"
+msgstr "MQTT JSON dagtotalen"
 
-#~ msgid "MQTT Split Topic Day Totals"
-#~ msgstr "MQTT Split Topic dagtotalen"
+msgid "MQTT Split Topic Day Totals"
+msgstr "MQTT Split Topic dagtotalen"
 
-#~ msgid "MQTT Split Topic Meter Statistics"
-#~ msgstr "MQTT Split Topic meterstatistieken"
+msgid "MQTT Split Topic Meter Statistics"
+msgstr "MQTT Split Topic meterstatistieken"
 
-#~ msgid "MQTT JSON Telegram"
-#~ msgstr "MQTT JSON Telegram"
+msgid "MQTT JSON Telegram"
+msgstr "MQTT JSON Telegram"
 
-#~ msgid "MQTT Split Topic Telegram"
-#~ msgstr "MQTT Split Topic Telegram"
+msgid "MQTT Split Topic Telegram"
+msgstr "MQTT Split Topic Telegram"
 
-#~ msgid "MQTT Raw Telegram"
-#~ msgstr "MQTT ruw telegram"
+msgid "MQTT Raw Telegram"
+msgstr "MQTT ruw telegram"
 

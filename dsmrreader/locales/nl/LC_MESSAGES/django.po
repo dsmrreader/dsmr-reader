@@ -1762,29 +1762,29 @@ msgstr "InfluxDB hostnaam"
 msgid "The hostname of the InfluxDB."
 msgstr "De hostnaam van de InfluxDB."
 
-msgid "InfluxDB port"
-msgstr "InfluxDB poort"
+msgid "InfluxDB port."
+msgstr "InfluxDB poort."
 
 msgid "Default: 8086"
 msgstr "Standaard: 8086"
 
-msgid "InfluxDB database"
-msgstr "InfluxDB database"
+msgid "InfluxDB organization"
+msgstr "InfluxDB-organization"
 
-msgid "The name of the database used in InfluxDB."
-msgstr "De naam van de database binnen InfluxDB."
+msgid "The organization to use."
+msgstr "De \"organization\" om te gebruiken."
 
-msgid "InfluxDB username"
-msgstr "InfluxDB gebruikersnaam"
+msgid "InfluxDB API token"
+msgstr "InfluxDB API-token"
 
-msgid "Optional: The username used for authentication with InfluxDB."
-msgstr "Optioneel: De gebruikersnaam voor de authenticatie met InfluxDB."
+msgid "The API token to use."
+msgstr "Het \"API token\" om te gebruiken."
 
-msgid "InfluxDB password"
-msgstr "InfluxDB wachtwoord"
+msgid "InfluxDB bucket"
+msgstr "InfluxDB bucket"
 
-msgid "Optional: The password used for authentication with InfluxDB."
-msgstr "Optioneel: Het wachtwoord voor de authenticatie met InfluxDB."
+msgid "The name of the bucket used in InfluxDB."
+msgstr "De naam van de bucket binnen InfluxDB."
 
 msgid "Use secure connection (HTTPS)"
 msgstr "Gebruik een veilige verbinding (HTTPS)"
@@ -1810,8 +1810,8 @@ msgstr "Deze integratie is bedoeld om de (verwerkte) bronmetingen te synchronise
 msgid "Enabling this integration will only sync new readings. In order to export your existing readings retroactively, use the following utility"
 msgstr "Het inschakelen van deze integratie heeft invloed op nieuwe metingen. Voor het exporteren van bestaande metingen met terugwerkende kracht, gebruik de volgende tool"
 
-msgid "Always export to a separate InfluxDB database first and verify the result. There is no detection for existing duplicate data (except for the data being exported), so you may want to consider switching between InfluxDB databases after export."
-msgstr "Exporteer altijd eerst naar een aparte InfluxDB -database en bekijk het resultaat. Er is geen detectie voor dubbele bestaande data (behalve de export zelf), dus overweeg om na afloop te wisselen van actieve InfluxDB-database."
+msgid "Always export to a separate InfluxDB bucket first and verify the result. There is no detection for existing duplicate data (except for the data being exported), so you may want to consider switching between InfluxDB buckets after export."
+msgstr "Exporteer altijd eerst naar een aparte InfluxDB -bucket en bekijk het resultaat. Er is geen detectie voor dubbele bestaande data (behalve de export zelf), dus overweeg om na afloop te wisselen van actieve InfluxDB-bucket."
 
 msgid "Also, due to (memory) limitations the data will need to be synced in batches. Each batch consists of 100 readings and the number of batches per run defaults to 50. You may define the number of batches to sync for each run. You may try using a higher number of batches per run (see above), but increasing it may eventually decrease performance."
 msgstr "Daarnaast, wegens (geheugen) limieten moeten de gegevens in batches gesynchroniseerd worden. Elke batch bestaat uit 100 metingen en elke keer worden er standaard 50 batches overgezet. Je kunt het aantal batches per keer wijzigen. Je kunt proberen om deze te verhogen (zie hierboven), al resulteert dat niet perse in een betere performance."
@@ -2619,15 +2619,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "Quality Of Service"
-#~ msgstr "Quality Of Service"
-
-#~ msgid "QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages."
-#~ msgstr "QoS 0: Beste performance, maar onbetoruwbaar (ontworpen voor betrouwbare verbindingen, zoals bekabelde netwerken). QoS 1: Gemiddelde performance, maar betrouwbaar. LET OP: Kan ervoor zorgen dat berichten dubbel verzonden worden! QoS 2: Traagste performance, maar betrouwbaar en voorkomt het versturen van dubbele berichten."
-
-#~ msgid "Unsupported database engine \"{}\" active, some features might not work properly"
-#~ msgstr "De database engine \"{}\" wordt niet actief ondersteund, sommige functies werken hierdoor mogelijk minder goed"
-
-#~ msgid "Level"
-#~ msgstr "Niveau"

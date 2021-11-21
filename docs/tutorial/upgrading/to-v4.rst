@@ -14,7 +14,9 @@ DSMR-reader ``v4.x`` is backwards incompatible with ``3.x``. You will have to ma
 List of changes
 ^^^^^^^^^^^^^^^
 
-:doc:`See the changelog</reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!
+.. danger::
+
+    :doc:`See the changelog</reference/changelog>`, for ``v4.x releases`` and higher. Check them before updating!
 
 
 1. Update to the latest ``v3.x`` version

@@ -121,6 +121,7 @@ def send_notification(message: str, title: str) -> NoReturn:
     }
 
     response = requests.post(
+        timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         **DATA_FORMAT[notification_settings.notification_service]
     )
 

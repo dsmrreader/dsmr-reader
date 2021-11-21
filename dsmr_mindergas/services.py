@@ -86,6 +86,7 @@ def export() -> NoReturn:
             'date': reading_date,
             'reading': str(last_gas_reading.delivered)
         }),
+        timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
     )
 
     if response.status_code != 201:

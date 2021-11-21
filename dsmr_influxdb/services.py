@@ -2,11 +2,12 @@ import pickle
 from collections import defaultdict
 import configparser
 import logging
-from typing import NoReturn, Dict
+from typing import NoReturn, Dict, Optional
 import codecs
 
 from django.conf import settings
-from influxdb import InfluxDBClient
+from influxdb_client import InfluxDBClient
+from influxdb_client.client.write_api import SYNCHRONOUS
 
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
@@ -15,38 +16,44 @@ from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasuremen
 logger = logging.getLogger('dsmrreader')
 
 
-def initialize_client():
+def initialize_client() -> Optional[InfluxDBClient]:
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
     if not influxdb_settings.enabled:
         return logger.debug('INFLUXDB: Integration disabled in settings (or due to an error previously)')
 
-    logger.debug(
-        'INFLUXDB: Initializing InfluxDB client for "%s:%d"', influxdb_settings.hostname, influxdb_settings.port
+    use_secure_connection = influxdb_settings.secure in (
+        InfluxdbIntegrationSettings.SECURE_CERT_NONE,
+        InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
     )
+
+    if use_secure_connection:
+        server_base_url = 'https://{}:{}'.format(influxdb_settings.hostname, influxdb_settings.port)
+    else:
+        server_base_url = 'http://{}:{}'.format(influxdb_settings.hostname, influxdb_settings.port)
+
+    logger.debug('INFLUXDB: Initializing InfluxDB client for "%s"', server_base_url)
+
     influxdb_client = InfluxDBClient(
-        host=influxdb_settings.hostname,
-        port=influxdb_settings.port,
-        username=influxdb_settings.username,
-        password=influxdb_settings.password,
-        database=influxdb_settings.database,
-        ssl=influxdb_settings.secure in (
-            InfluxdbIntegrationSettings.SECURE_CERT_NONE,
-            InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
-        ),
+        url=server_base_url,
+        token=influxdb_settings.api_token,
         verify_ssl=influxdb_settings.secure == InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
-        timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
+        timeout=settings.DSMRREADER_CLIENT_TIMEOUT * 1000,  # Ms!
     )
+    # logger.debug('INFLUXDB: InfluxDB client/server status: "%s"', influxdb_client.ready().status)
 
-    # Always make sure the database exists.
-    logger.debug('INFLUXDB: Creating InfluxDB database "%s"', influxdb_settings.database)
+    if influxdb_client.buckets_api().find_bucket_by_name(influxdb_settings.bucket) is None:
+        logger.debug('INFLUXDB: Creating InfluxDB bucket "%s"', influxdb_settings.bucket)
 
-    try:
-        influxdb_client.create_database(influxdb_settings.database)
-    except Exception as e:
-        InfluxdbIntegrationSettings.objects.update(enabled=False)
-        logger.error('Failed to instantiate InfluxDB connection, disabling InfluxDB integration')
-        raise e
+        try:
+            influxdb_client.buckets_api().create_bucket(
+                bucket_name=influxdb_settings.bucket,
+                org=influxdb_settings.organization
+            )
+        except Exception as e:
+            InfluxdbIntegrationSettings.objects.update(enabled=False)
+            logger.error('Failed to instantiate InfluxDB connection, disabling InfluxDB integration')
+            raise e
 
     return influxdb_client
 
@@ -62,19 +69,23 @@ def run(influxdb_client: InfluxDBClient) -> NoReturn:
         return
 
     logger.info('INFLUXDB: Processing %d measurement(s)', len(selection))
+    influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
     for current in selection:
         try:
             decoded_fields = codecs.decode(current.fields.encode(), 'base64')
             unpickled_fields = pickle.loads(decoded_fields)
 
-            influxdb_client.write_points([
-                {
-                    "measurement": current.measurement_name,
-                    "time": current.time,
-                    "fields": unpickled_fields
-                }
-            ])
+            with influxdb_client.write_api(write_options=SYNCHRONOUS) as write_api:
+                write_api.write(
+                    bucket=influxdb_settings.bucket,
+                    org=influxdb_settings.organization,
+                    record={
+                        "measurement": current.measurement_name,
+                        "time": current.time,
+                        "fields": unpickled_fields
+                    }
+                )
         except Exception as error:
             logger.error('INFLUXDB: Writing measurement(s) failed: %s, data: %s', error, current.fields)
 

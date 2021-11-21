@@ -5,7 +5,7 @@ from django.apps import AppConfig
 from django.conf import settings
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from influxdb import InfluxDBClient
+from influxdb_client import InfluxDBClient
 
 from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client, \

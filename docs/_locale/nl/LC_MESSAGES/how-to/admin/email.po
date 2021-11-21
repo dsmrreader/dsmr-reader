@@ -32,6 +32,5 @@ msgstr "Als alternatief kun je GMail gebruiken om e-mail te versturen. Daarmee i
 msgid "To do so, use host ``aspmx.l.google.com``, port ``25``, ``Use TLS`` and leave the username and password **blank**."
 msgstr "Om dat te doen, gebruik host ``aspmx.l.google.com``, port ``25``, ``Gebruik TLS`` en laat zowel de gebruikersnaam als wachtwoord **leeg**."
 
-#~ msgid "Email settings"
-#~ msgstr "E-mailinstellingen"
-
+msgid "Email settings"
+msgstr "E-mailinstellingen"

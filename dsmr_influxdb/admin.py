@@ -12,7 +12,9 @@ class InfluxdbIntegrationSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ['enabled', 'hostname', 'port', 'secure', 'username', 'password', 'database'],
+                'fields': [
+                    'enabled', 'hostname', 'port', 'secure', 'organization', 'api_token', 'bucket',
+                ],
                 'description': _(
                     'The backend process should automatically restart to apply changes.'
                 )

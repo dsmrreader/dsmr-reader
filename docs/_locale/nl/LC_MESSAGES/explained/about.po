@@ -188,6 +188,9 @@ msgstr "Toont de status van de applicatie en verwijst naar een hoop achtergrondi
 msgid "You can also easily check for DSMR-reader updates here."
 msgstr "Je kunt hier eveneens eenvoudig controleren op updates van DSMR-reader."
 
+msgid "Status"
+msgstr "Status"
+
 #: ../../explained/about.rst:157
 msgid "Configuration"
 msgstr "Configuratie"
@@ -199,10 +202,3 @@ msgstr "De configuratiepagina is de toegangspoort tot het adminportaal."
 #: ../../explained/about.rst:161
 msgid "You can type any topic or setting you're searching for, as it should pop up with clickable deeplink to the admin panel. Or you can just skip it this page and continue directly to the admin panel."
 msgstr "Je kunt hier elk onderwerp of instelling waarnaar je op zoek bent intypen, om vervolgens een popup te krijgen met een klikbare link, direct naar het juiste onderdeel binnen het adminportaal."
-
-#~ msgid "Currently supports MQTT for pushing data and an REST API for pulling data."
-#~ msgstr "Ondersteunt momenteel MQTT voor het \"pushen\" van gegevens en een REST API voor het \"pullen\" van gegevens."
-
-#~ msgid "Status"
-#~ msgstr "Status"
-

@@ -14,49 +14,48 @@ Current version
 
 .. tip::
 
-    :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
+    ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
 
 v5.0.0 - 2021-xx-xx
 -------------------
 
-.. warning::
+.. seealso::
 
-    This release of DSMR-reader requires you to manually upgrade from ``v4.x`` to ``v5.x``. See :doc:`the v5 upgrade guide </tutorial/upgrading/to-v5>` for more information.
+    ℹ️ This release of DSMR-reader requires you to **manually upgrade** from ``v4.x`` to ``v5.x``. See :doc:`the v5 upgrade guide </tutorial/upgrading/to-v5>` for more information.
 
-- ``Added`` Added support for Python 3.10 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+- ``Added`` Added support for **Python 3.10** [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+- ``Added`` Added support for **InfluxDB 2.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
 
 ----
 
 - ``Changed`` Updated to Django 3.2 [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
 - ``Changed`` Preferred Python version is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 - ``Changed`` `dsmr_datalogger_api_client.py <https://github.com/dsmrreader/dsmr-reader/blob/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_ env vars are now prefixed with ``REMOTE_`` (*affects new installations only*) [`#1216 <https://github.com/dsmrreader/dsmr-reader/issues/1216>`_]
+- ``Changed`` The ``dsmr_influxdb_export_all_readings`` its console arguments were renamed due to **InfluxDB 2.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
 
 ----
 
+.. danger::
+
+    ⚠️ The following features/support has been **dropped** or changed in an **incompatible** way!
+
 - ``Removed`` Dropped support for **Python 3.6** (*EOL December 2021*) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
-- ``Removed`` Dropped support for **PostgreSQL 9.5** (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
-- ``Removed`` Dropped support for **MySQL 5.6** (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
-- ``Removed`` Dropped deprecated ``SECRET_KEY`` env var (use ``DJANGO_SECRET_KEY`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DB_ENGINE`` env var (use ``DJANGO_DATABASE_ENGINE`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DB_NAME`` env var (use ``DJANGO_DATABASE_NAME`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DB_USER`` env var (use ``DJANGO_DATABASE_USER`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DB_PASS`` env var (use ``DJANGO_DATABASE_PASSWORD`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DB_HOST`` env var (use ``DJANGO_DATABASE_HOST`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DB_PORT`` env var (use ``DJANGO_DATABASE_PORT`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``CONN_MAX_AGE`` env var (use ``DJANGO_DATABASE_CONN_MAX_AGE`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``TZ`` env var (use ``DJANGO_TIME_ZONE`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DSMR_USER`` env var (use ``DSMRREADER_ADMIN_USER`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped deprecated ``DSMR_PASSWORD`` env var (use ``DSMRREADER_ADMIN_PASSWORD`` instead) [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-
-
-.. attention::
-
-    The following notes are from Django 3.2:
-
-    - *"Upstream support for PostgreSQL 9.5 ends in February 2021. Django 3.2 supports PostgreSQL 9.6 and higher."*
-    - *"The end of upstream support for MySQL 5.6 is April 2021. Django 3.2 supports MySQL 5.7 and higher."*
+- ``Removed`` Dropped support for **InfluxDB 1.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
+- ``Removed`` Dropped support for **PostgreSQL 9.5** and below (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+- ``Removed`` Dropped support for **MySQL 5.6** and below (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+- ``Removed`` Dropped ``SECRET_KEY`` env var, use ``DJANGO_SECRET_KEY`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DB_ENGINE`` env var, use ``DJANGO_DATABASE_ENGINE`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DB_NAME`` env var, use ``DJANGO_DATABASE_NAME`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DB_USER`` env var, use ``DJANGO_DATABASE_USER`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DB_PASS`` env var, use ``DJANGO_DATABASE_PASSWORD`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DB_HOST`` env var, use ``DJANGO_DATABASE_HOST`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DB_PORT`` env var, use ``DJANGO_DATABASE_PORT`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``CONN_MAX_AGE`` env var, use ``DJANGO_DATABASE_CONN_MAX_AGE`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``TZ`` env var, use ``DJANGO_TIME_ZONE`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DSMR_USER`` env var, use ``DSMRREADER_ADMIN_USER`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Removed`` Dropped ``DSMR_PASSWORD`` env var, use ``DSMRREADER_ADMIN_PASSWORD`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
 
 
 ----

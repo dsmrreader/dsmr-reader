@@ -53,7 +53,8 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
             'X-Pvoutput-Apikey': api_settings.auth_token,
             'X-Pvoutput-SystemId': api_settings.system_identifier,
         },
-        data=data
+        data=data,
+        timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
     )
 
     if response.status_code != 200:

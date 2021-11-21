@@ -23,8 +23,8 @@ services:
       - test-db-postgres
       - test-db-mysql
       # Misc tools for development/testing
-      - mqtt-dev
-      - influxdb-dev
+      - mqtt-v2
+      - influxdb-v2
     environment:
       # Development
       - DSMRREADER_LOGLEVEL=DEBUG
@@ -93,7 +93,7 @@ services:
       - POSTGRES_USER=testuser
       - POSTGRES_PASSWORD=testpasswd
 
-  # WARNING: MySQL tests/connections are broken, but do seem to work in the CI anyway.
+  # WARNING: MySQL tests/connections are broken here, but do seem to work in the CI anyway.
   test-db-mysql:
     container_name: test-db-mysql
     image: mysql:5.7
@@ -109,8 +109,8 @@ services:
      - MYSQL_PASSWORD=testpasswd
      - MYSQL_ROOT_PASSWORD=testpasswd
 
-  mqtt-dev:
-    container_name: mqtt-dev
+  mqtt-v2:
+    container_name: mqtt-v2
     image: eclipse-mosquitto:2
     restart: always
     volumes:
@@ -118,9 +118,16 @@ services:
     ports:
       - '1883:1883'
 
-  influxdb-dev:
-    container_name: influxdb-dev
-    image: influxdb:1.8-alpine
+  influxdb-v2:
+    container_name: influxdb-v2
+    image: influxdb:2.0-alpine
     restart: always
     ports:
       - '8086:8086'
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=dsmrreader
+      - DOCKER_INFLUXDB_INIT_PASSWORD=dsmrreader
+      - DOCKER_INFLUXDB_INIT_ORG=dsmrreader
+      - DOCKER_INFLUXDB_INIT_BUCKET=dsmrreader_measurements
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=dsmrreader_influxdb_token

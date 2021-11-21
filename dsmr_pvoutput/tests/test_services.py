@@ -189,6 +189,7 @@ class TestServices(TestCase):
                 'X-Pvoutput-SystemId': api_settings.system_identifier,
             },
             data={'x': 'y'},
+            timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         )
 
         # With processing delay as well.
@@ -214,4 +215,5 @@ class TestServices(TestCase):
                 'x': 'y',
                 'delay': 5,
             },
+            timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         )

@@ -120,4 +120,5 @@ class TestServices(TestCase):
                 'User-Agent': settings.DSMRREADER_USER_AGENT
             },
             data=json.dumps({'date': '2015-12-11', 'reading': '956.739'}),
+            timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         )

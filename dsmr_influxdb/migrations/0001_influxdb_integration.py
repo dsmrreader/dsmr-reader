@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('enabled', models.BooleanField(default=False, help_text='Whether the InfluxDB integration is enabled.', verbose_name='Enabled')),
                 ('hostname', models.CharField(default='localhost', help_text='The hostname of the InfluxDB.', max_length=128, verbose_name='InfluxDB hostname')),
-                ('port', models.IntegerField(default=8086, help_text='Default: 8086', verbose_name='InfluxDB port')),
+                ('port', models.IntegerField(default=8086, help_text='Default: 8086', verbose_name='InfluxDB port.')),
                 ('username', models.CharField(help_text='The username used for authentication with InfluxDB.', max_length=64, verbose_name='InfluxDB username')),
                 ('password', models.CharField(help_text='The password used for authentication with InfluxDB.', max_length=64, verbose_name='InfluxDB password')),
                 ('database', models.CharField(default='dsmrreader_measurements', help_text='The name of the database used in InfluxDB.', max_length=64, verbose_name='InfluxDB database')),

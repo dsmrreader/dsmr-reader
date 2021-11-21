@@ -3,6 +3,8 @@ import logging
 from django.core.management.base import BaseCommand, CommandError
 from django.core.paginator import Paginator
 from django.utils import timezone
+from influxdb_client import InfluxDBClient
+from influxdb_client.client.write_api import SYNCHRONOUS
 
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_influxdb.models import InfluxdbIntegrationSettings
@@ -13,24 +15,25 @@ logger = logging.getLogger('console_commands')
 
 
 class Command(BaseCommand):
-    help = 'Exports historic readings to the InfluxDB-database specified as argument'
+    help = 'Exports historic readings to the InfluxDB bucket specified as argument'
 
     READINGS_PER_BATCH = 100
     PK_MEASUREMENT = 'export_progress_meta'
     PK_FIELD = 'last_pk_synced'
 
+    target_influx_bucket: str
     max_batches: int = 1
-    influxdb_client = None
+    influxdb_client: InfluxDBClient = None
     field_mapping = None
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
         parser.add_argument(
-            '--to-influx-database',
+            '--to-influx-bucket',
             action='store',
-            dest='to_influx_database',
-            metavar='some_influxdb_database',
-            help='The InfluxDB database to export to. Always try to export to a separate test database first!',
+            dest='to_influx_bucket',
+            metavar='some_influxdb_bucket',
+            help='The InfluxDB bucket to export to. Always try to export to a separate test bucket first!',
             required=True
         )
         parser.add_argument(
@@ -45,7 +48,7 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
-        target_influx_database = options['to_influx_database']
+        self.target_influx_bucket = options['to_influx_bucket']
         influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
         # Integration disabled.
@@ -57,14 +60,18 @@ class Command(BaseCommand):
         if self.max_batches < 0:
             self.max_batches = 1
 
-        logger.info('INFLUXDB EXPORT: Connecting to InfluxDB (ignore database name logged)')
+        logger.info('INFLUXDB EXPORT: Connecting to InfluxDB (ignore bucket name logged)')
         self.influxdb_client = dsmr_influxdb.services.initialize_client()
 
         logger.info(
-            'INFLUXDB EXPORT: Using "%s" as export InfluxDB database (creating it if needed)', target_influx_database
+            'INFLUXDB EXPORT: Using "%s" as export InfluxDB bucket (creating it if needed)', self.target_influx_bucket
         )
-        self.influxdb_client.create_database(target_influx_database)
-        self.influxdb_client.switch_database(target_influx_database)
+
+        if not self.influxdb_client.buckets_api().find_bucket_by_name(self.target_influx_bucket):
+            self.influxdb_client.buckets_api().create_bucket(
+                bucket_name=self.target_influx_bucket,
+                org=influxdb_settings.organization
+            )
 
         logger.info('INFLUXDB EXPORT: Fetching mapping')
         self.field_mapping = dsmr_influxdb.services.get_reading_to_measurement_mapping()
@@ -105,31 +112,30 @@ class Command(BaseCommand):
 
     def fetch_last_pk_synced(self):
         """ Continue progress where left off. """
-        result = self.influxdb_client.query(
-            'SELECT MAX({}) FROM {} LIMIT 1'.format(
-                self.PK_FIELD, self.PK_MEASUREMENT
-            )
+        influxdb_settings = InfluxdbIntegrationSettings.get_solo()
+        results = self.influxdb_client.query_api().query(
+            'from(bucket:"{bucket}")'
+            '  |> range(start: -1h)'
+            '  |> sort(columns: ["{field}", "_value"], desc: true)'
+            '  |> limit(n: 1)'.format(
+                bucket=self.target_influx_bucket,
+                field=self.PK_FIELD,
+            ),
+            org=influxdb_settings.organization
         )
 
-        if not result:
+        if not results or not results[0] or not results[0].records[0]:
             return 0
 
-        timestamp, last_pk = result.raw['series'][0]['values'][0]
-        logger.info('INFLUXDB EXPORT: Last PK synced %d @ %s (export_progress_meta in InfluxDB)', last_pk, timestamp)
+        result = results[0].records[0]
+        last_pk = result.get_value()
+        logger.info(
+            'INFLUXDB EXPORT: Last PK synced %d @ %s (export_progress_meta in InfluxDB)',
+            last_pk,
+            result.get_time()
+        )
 
         return last_pk
-
-    def sync_last_pk(self, last_pk):
-        """ Store current progress. """
-        self.influxdb_client.write_points([
-            {
-                "measurement": self.PK_MEASUREMENT,
-                "time": timezone.now(),
-                "fields": {
-                    self.PK_FIELD: last_pk
-                },
-            }
-        ])
 
     def fetch_readings(self, reading_fields):
         return
@@ -146,8 +152,7 @@ class Command(BaseCommand):
             self._export_batch(batch)
 
     def _export_batch(self, batch):
-        points = []
-        last_pk = None
+        influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
         for current_reading in batch:
             last_pk = current_reading.pk
@@ -166,16 +171,29 @@ class Command(BaseCommand):
                 if not measurement_fields:
                     continue
 
-                points.append({
-                    "measurement": current_measurement,
-                    "time": current_reading.timestamp,
-                    "fields": measurement_fields,
-                })
+                with self.influxdb_client.write_api(write_options=SYNCHRONOUS) as write_api:
+                    try:
+                        write_api.write(
+                            bucket=self.target_influx_bucket,
+                            org=influxdb_settings.organization,
+                            record={
+                                "measurement": current_measurement,
+                                "time": current_reading.timestamp,
+                                "fields": measurement_fields,
+                            }
+                        )
+                    except Exception as error:
+                        logger.error('INFLUXDB EXPORT: Writing measurement(s) failed: %s', error)
+                        raise
 
-        try:
-            self.influxdb_client.write_points(points)
-        except Exception as error:
-            logger.error('INFLUXDB EXPORT: Writing measurement(s) failed: %s', error)
-            raise
-
-        self.sync_last_pk(last_pk)
+                    write_api.write(
+                        bucket=self.target_influx_bucket,
+                        org=influxdb_settings.organization,
+                        record={
+                            "measurement": self.PK_MEASUREMENT,
+                            "time": timezone.now(),
+                            "fields": {
+                                self.PK_FIELD: last_pk
+                            },
+                        }
+                    )

@@ -32,6 +32,5 @@ msgstr "Het zou alleen gebruikt moeten worden in noodgevallen, wanneer je om wat
 msgid "Before enabling this, make sure you've configured email settings as well, as the application needs an email server to do so. :doc:`Go to email settings here.<email>`"
 msgstr "Voordat je dit inschakelt, zorg ervoor dat je eerst de e-mailinstellingen goed hebt staan. De applicatie heeft namelijk een e-mailserver nodig om de e-mails te versturen. :doc:`Ga hier naar e-mailinstellingen.<email>`"
 
-#~ msgid "Email backup settings"
-#~ msgstr "Email backup instellingen"
-
+msgid "Email backup settings"
+msgstr "Email backup instellingen"

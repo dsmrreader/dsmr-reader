@@ -92,7 +92,7 @@ def get_capability(capability: Capability) -> bool:
 
 def is_latest_version() -> bool:
     """ Checks whether the current version is the latest tagged available on GitHub. """
-    response = requests.get(settings.DSMRREADER_LATEST_TAGS_LIST)
+    response = requests.get(settings.DSMRREADER_LATEST_TAGS_LIST, timeout=settings.DSMRREADER_CLIENT_TIMEOUT)
     latest_tag = response.json()[0]
 
     local_version = '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3])

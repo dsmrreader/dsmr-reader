@@ -15,11 +15,11 @@
         </p>
         <pre>
 sudo su - dsmr
-./manage.py dsmr_influxdb_export_all_readings --to-influx-database dsmrreader-export
-./manage.py dsmr_influxdb_export_all_readings --to-influx-database dsmrreader-export --max-batches 100
+./manage.py dsmr_influxdb_export_all_readings --to-influx-bucket dsmrreader-export
+./manage.py dsmr_influxdb_export_all_readings --to-influx-bucket dsmrreader-export --max-batches 100
         </pre>
         <p>
-            {% blocktranslate %}Always export to a separate InfluxDB database first and verify the result. There is no detection for existing duplicate data (except for the data being exported), so you may want to consider switching between InfluxDB databases after export.{% endblocktranslate %}
+            {% blocktranslate %}Always export to a separate InfluxDB bucket first and verify the result. There is no detection for existing duplicate data (except for the data being exported), so you may want to consider switching between InfluxDB buckets after export.{% endblocktranslate %}
         </p>
         <p>
             {% blocktranslate %}Also, due to (memory) limitations the data will need to be synced in batches. Each batch consists of 100 readings and the number of batches per run defaults to 50. You may define the number of batches to sync for each run. You may try using a higher number of batches per run (see above), but increasing it may eventually decrease performance.{% endblocktranslate %}

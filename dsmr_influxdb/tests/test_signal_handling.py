@@ -2,7 +2,7 @@ from unittest import mock
 
 from django.test import TestCase
 from django.utils import timezone
-from influxdb import InfluxDBClient
+from influxdb_client import InfluxDBClient
 
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
@@ -27,19 +27,19 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
         run_persistent_client.send_robust(None, client=None)
         self.assertFalse(run_mock.called)
 
-        influxdb_client = InfluxDBClient()
+        influxdb_client = InfluxDBClient('http://localhost:8086', '')
         self.assertFalse(run_mock.called)
         run_persistent_client.send_robust(None, client=influxdb_client)
         self.assertTrue(run_mock.called)
 
-    @mock.patch('influxdb.InfluxDBClient.close')
+    @mock.patch('influxdb_client.InfluxDBClient.close')
     def test_terminate_persistent_client(self, close_mock):
         # Invalid client.
         self.assertFalse(close_mock.called)
         terminate_persistent_client.send_robust(None, client=None)
         self.assertFalse(close_mock.called)
 
-        influxdb_client = InfluxDBClient()
+        influxdb_client = InfluxDBClient('http://localhost:8086', '')
         self.assertFalse(close_mock.called)
         terminate_persistent_client.send_robust(None, client=influxdb_client)
         self.assertTrue(close_mock.called)
