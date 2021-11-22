@@ -145,8 +145,8 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             dsmr_dropbox.services.sync_file(
                 scheduled_process=self.schedule_process,
                 dropbox_access_token='dummy-token',
-                local_root_dir='/var/tmp/',
-                abs_file_path='/var/tmp/fake'
+                local_root_dir='/tmp/',
+                abs_file_path='/tmp/fake'
             )
 
         # Warning message should be created and next sync should be skipped ahead.
@@ -200,7 +200,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('os.stat')
     def test_should_sync_file(self, stat_mock, time_mock):
         time_mock.return_value = 1500000100
-        FILE = '/var/tmp/fake'
+        FILE = '/tmp/fake'
 
         # Skip empty file.
         stat_result = mock.MagicMock()

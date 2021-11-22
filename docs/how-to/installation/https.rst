@@ -20,7 +20,7 @@ Below there are some vhost samples to distinguish the difference.
 Default installation without HTTPS::
 
     upstream dsmr-webinterface {
-        server unix:///var/tmp/gunicorn--dsmr_webinterface.socket fail_timeout=0;
+        server unix:///tmp/gunicorn--dsmr_webinterface.socket fail_timeout=0;
     }
 
     server {
@@ -43,7 +43,7 @@ Default installation without HTTPS::
 Installation after using Let's Encrypt::
 
     upstream dsmr-webinterface {
-        server unix:///var/tmp/gunicorn--dsmr_webinterface.socket fail_timeout=0;
+        server unix:///tmp/gunicorn--dsmr_webinterface.socket fail_timeout=0;
     }
 
     server {

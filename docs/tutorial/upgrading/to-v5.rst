@@ -245,8 +245,12 @@ Check DSMR-reader::
 
     logout
 
-Update Supervisor configs::
+Update Nginx config::
 
+    # Note: This *may* revert any customizations you've done yourself, such as HTTP Basic Auth configuration.
+    sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
+
+Update Supervisor configs::
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_datalogger.conf /etc/supervisor/conf.d/
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_backend.conf /etc/supervisor/conf.d/

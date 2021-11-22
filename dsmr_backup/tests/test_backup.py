@@ -104,7 +104,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Custom.
-        FOLDER = '/var/tmp/test-dsmr'
+        FOLDER = '/tmp/test-dsmr'
         BackupSettings.objects.all().update(folder=FOLDER)
 
         self.assertEqual(
@@ -116,7 +116,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dsmr_backup.services.backup.compress')
     @mock.patch('dsmr_backup.services.backup.on_backup_failed')
     def test_create_full(self, on_backup_failed_mock, compress_mock, subprocess_mock):
-        FOLDER = '/var/tmp/test-dsmr/'
+        FOLDER = '/tmp/test-dsmr/'
         BackupSettings.objects.all().update(folder=FOLDER)
         handle_mock = mock.MagicMock()
         handle_mock.returncode = 0
@@ -175,7 +175,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         if connection.vendor != 'postgres':  # pragma: no cover
             return self.skipTest(reason='Only PostgreSQL supported')
 
-        FOLDER = '/var/tmp/test-dsmr'
+        FOLDER = '/tmp/test-dsmr'
         BackupSettings.objects.all().update(folder=FOLDER)
 
         self.assertFalse(compress_mock.called)

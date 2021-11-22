@@ -174,7 +174,7 @@ Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogge
 
     [program:dsmr_remote_datalogger]
     command=/home/dsmr/dsmr-reader/.venv/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
-    pidfile=/var/tmp/dsmrreader--%(program_name)s.pid
+    pidfile=/tmp/dsmrreader--%(program_name)s.pid
     user=dsmr
     group=dsmr
     autostart=true
