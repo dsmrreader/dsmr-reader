@@ -10,7 +10,7 @@ StandardOutput=null
 StandardError=journal
 WorkingDirectory=/home/dsmr/dsmr-reader/
 PIDFile=/var/tmp/dsmrreader--dsmr_webinterface.pid
-ExecStart=/home/dsmr/.virtualenvs/dsmrreader/bin/gunicorn --timeout 60 --workers 4 --max-requests 500 --bind unix:/var/tmp/gunicorn--dsmr_webinterface.socket --pid /var/tmp/gunicorn--dsmr_webinterface.pid dsmrreader.wsgi
+ExecStart=/home/dsmr/dsmr-reader/.venv/bin/gunicorn --timeout 60 --workers 4 --max-requests 500 --bind unix:/var/tmp/gunicorn--dsmr_webinterface.socket --pid /var/tmp/gunicorn--dsmr_webinterface.pid dsmrreader.wsgi
 Restart=always
 RestartSec=10
 

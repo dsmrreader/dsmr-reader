@@ -81,11 +81,11 @@ Continue::
     sudo -u dsmr /home/dsmr/dsmr-reader/tools/generate-secret-key.sh
 
     # Requirements
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
+    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
 
     # Setup
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
+    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
+    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py collectstatic --noinput
 
     # Nginx
     sudo rm /etc/nginx/sites-enabled/default
@@ -102,7 +102,7 @@ Continue::
     sudo supervisorctl update
 
     # Create (super)user for the DSMR-reader configuration webinterface
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --email dsmr@localhost --username admin
+    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --email dsmr@localhost --username admin
 
     # You will be asked to choose and enter a password twice. The email address is not used.
 

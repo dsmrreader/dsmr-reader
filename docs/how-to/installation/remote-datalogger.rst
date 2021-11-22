@@ -55,7 +55,7 @@ Execute::
     sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
 
     # Requirements
-    sudo -u dsmr /home/dsmr/.virtualenvs/dsmrreader/bin/pip3 install pyserial==3.5 requests==2.26.0 python-decouple==3.5
+    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/pip3 install pyserial==3.5 requests==2.26.0 python-decouple==3.5
 
 
 Datalogger script
@@ -173,7 +173,7 @@ Supervisor
 Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` with contents::
 
     [program:dsmr_remote_datalogger]
-    command=/home/dsmr/.virtualenvs/dsmrreader/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
+    command=/home/dsmr/dsmr-reader/.venv/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
     pidfile=/var/tmp/dsmrreader--%(program_name)s.pid
     user=dsmr
     group=dsmr
