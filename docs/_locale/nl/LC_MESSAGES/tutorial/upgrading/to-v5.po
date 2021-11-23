@@ -32,15 +32,15 @@ msgstr "Lijst van wijzigingen"
 msgid ":doc:`See the changelog</reference/changelog>`, for ``v5.x releases`` and higher. Check them before updating!"
 msgstr ":doc:`Zie de changelog</reference/changelog>`, voor ``v5.x releases`` en hoger. Bekijk ze voordat je update!"
 
-#: ../../tutorial/upgrading/to-v5.rst:17
+#: ../../tutorial/upgrading/to-v5.rst:17 ../../tutorial/upgrading/to-v5.rst:165
 msgid "✋ Do not upgrade if you run **PostgreSQL 9.5 or below**. *Upgrade PostgreSQL first.*"
 msgstr "✋ Upgrade niet wanneer je **PostgreSQL 9.5 of lager** draait. *Upgrade PostgreSQL eerst.*"
 
-#: ../../tutorial/upgrading/to-v5.rst:18
+#: ../../tutorial/upgrading/to-v5.rst:18 ../../tutorial/upgrading/to-v5.rst:166
 msgid "✋ Do not upgrade if you run **InfluxDB 1.x**. *Upgrade to InfluxDB 2.x first.*"
 msgstr "✋ Upgrade niet wanneer je **InfluxDB 1.x** draait. *Upgrade naar InfluxDB 2.x eerst.*"
 
-#: ../../tutorial/upgrading/to-v5.rst:19
+#: ../../tutorial/upgrading/to-v5.rst:19 ../../tutorial/upgrading/to-v5.rst:167
 msgid "✋ Do not upgrade if you run **MySQL 5.6 or below**. *Upgrade MySQL first.*"
 msgstr "✋ Upgrade niet wanneer je **MySQL 5.6 of lager** draait. *Upgrade MySQL eerst.*"
 
@@ -153,18 +153,6 @@ msgstr "5. Upgrade naar DSMR-reader v5"
 msgid "**Reminder**"
 msgstr "**Herinnering**"
 
-#: ../../tutorial/upgrading/to-v5.rst:165
-msgid "✋ Do not upgrade if you run **PostgreSQL 9.5 or lower**. *Upgrade PostgreSQL first.*"
-msgstr "✋ Upgrade niet wanneer je **PostgreSQL 9.5 of lager** draait. *Upgrade PostgreSQL eerst.*"
-
-#: ../../tutorial/upgrading/to-v5.rst:166
-msgid "✋ Do not upgrade if you run **MySQL 5.6 or lower**. *Upgrade MySQL first.*"
-msgstr "✋ Upgrade niet wanneer je **MySQL 5.6 of lager** draait. *Upgrade MySQL eerst.*"
-
-#: ../../tutorial/upgrading/to-v5.rst:167
-msgid "✋ Do not upgrade if you run **InfluxDB 1.7 or lower**. *Upgrade InfluxDB first.*"
-msgstr "✋ Upgrade niet wanneer je **InfluxDB 1.7 of lager** draait. *Upgrade InfluxDB eerst.*"
-
 #: ../../tutorial/upgrading/to-v5.rst:171
 msgid "Stop DSMR-reader::"
 msgstr "Stop DSMR-reader::"
@@ -206,37 +194,50 @@ msgid "Check DSMR-reader::"
 msgstr "Check DSMR-reader::"
 
 #: ../../tutorial/upgrading/to-v5.rst:248
+msgid "Update Nginx config::"
+msgstr "Update Nginx config::"
+
+#: ../../tutorial/upgrading/to-v5.rst:253
 msgid "Update Supervisor configs::"
 msgstr "Update Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:255
+#: ../../tutorial/upgrading/to-v5.rst:259
 msgid "Reload Supervisor configs::"
 msgstr "Herlaad Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:259
+#: ../../tutorial/upgrading/to-v5.rst:263
 msgid "Start DSMR-reader::"
 msgstr "Start DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:265
+#: ../../tutorial/upgrading/to-v5.rst:269
 msgid "6. Deploy"
 msgstr "6. Deploy"
 
-#: ../../tutorial/upgrading/to-v5.rst:266
+#: ../../tutorial/upgrading/to-v5.rst:270
 msgid "Finally, execute the deploy script::"
 msgstr "Tot slot, voer het deploy-script uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:271
+#: ../../tutorial/upgrading/to-v5.rst:275
 msgid "Great. You should now be on ``v5.x``!"
 msgstr "Top! Je zou nu ``v5.x`` moeten draaien!"
 
-#: ../../tutorial/upgrading/to-v5.rst:275
+#: ../../tutorial/upgrading/to-v5.rst:279
 msgid "7. Situational: Reconfigure InfluxDB"
 msgstr "7. Situationeel: Herconfigureer InfluxDB"
 
-#: ../../tutorial/upgrading/to-v5.rst:277
+#: ../../tutorial/upgrading/to-v5.rst:281
 msgid "If you happened to use DSMR-reader export to InfluxDB previously, you **must** reconfigure it accordingly in order to get it working again. It has been disabled automatically as well."
 msgstr "Als je DSMR-reader gebruikte om data te exporteren naar InfluxDB, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen. De integratie is tevens automatisch uitgeschakeld."
 
-#: ../../tutorial/upgrading/to-v5.rst:282
+#: ../../tutorial/upgrading/to-v5.rst:286
 msgid "Where the previous version utilized *usernames*, *passwords* and *databases*, it now connects using *organizations*, *API tokens* and *buckets*."
 msgstr "Waar de vorige versie *usernames*, *passwords* en *databases* gebruikte, is het nu gewijzigd naar *organizations*, *API tokens* en *buckets*."
+
+#~ msgid "✋ Do not upgrade if you run **PostgreSQL 9.5 or lower**. *Upgrade PostgreSQL first.*"
+#~ msgstr "✋ Upgrade niet wanneer je **PostgreSQL 9.5 of lager** draait. *Upgrade PostgreSQL eerst.*"
+
+#~ msgid "✋ Do not upgrade if you run **MySQL 5.6 or lower**. *Upgrade MySQL first.*"
+#~ msgstr "✋ Upgrade niet wanneer je **MySQL 5.6 of lager** draait. *Upgrade MySQL eerst.*"
+
+#~ msgid "✋ Do not upgrade if you run **InfluxDB 1.7 or lower**. *Upgrade InfluxDB first.*"
+#~ msgstr "✋ Upgrade niet wanneer je **InfluxDB 1.7 of lager** draait. *Upgrade InfluxDB eerst.*"
