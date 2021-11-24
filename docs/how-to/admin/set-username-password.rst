@@ -6,20 +6,34 @@ Admin: Setting or changing username/password
     There is no default user or password.
     You will need to set it yourself with the steps below, depending on whether you've installed manually or using Docker.
 
-
 Manual installation
 ^^^^^^^^^^^^^^^^^^^
 
-- Now execute::
+- Set superuser credentials by opening the ``.env`` file with your favourite text editor::
 
     sudo su - dsmr
-    ./manage.py createsuperuser --email dsmr@localhost --username admin
 
-    # You will be asked to choose and enter a password twice. The email address is not used.
+    # Or use "nano" or whatever
+    vi .env
 
-- Did it error with ``Error: That username is already taken.``? Then try::
+- Find (or add) these lines::
 
-    ./manage.py changepassword admin
+    # In /home/dsmr/dsmr-reader/.env
+
+    DSMRREADER_ADMIN_USER=
+    DSMRREADER_ADMIN_PASSWORD=
+
+.. tip::
+    Set the admin username and password you'd like. E.g.::
+
+        DSMRREADER_ADMIN_USER=admin
+        DSMRREADER_ADMIN_PASSWORD=supersecretpassword
+
+Now have DSMR-reader create/reset the admin user for you.
+
+- Execute::
+
+    ./manage.py dsmr_superuser
 
 - The user should be created (or its password should be reset).
 

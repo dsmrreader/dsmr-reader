@@ -11,7 +11,7 @@ See the pre checks below to verify some states before restore.
 Pre checks
 ^^^^^^^^^^
 
-.. seealso::
+.. hint::
 
     **How to check whether the database exists?**
 
@@ -19,13 +19,13 @@ Pre checks
 
         sudo -u postgres psql --list | grep dsmrreader
 
-    If the database exists, you see output similar to this::
+    If the database exists, you will see output similar to this::
 
          dsmrreader | dsmrreader | UTF8     | en_GB.UTF-8 | en_GB.UTF-8 |
 
 ----
 
-.. seealso::
+.. hint::
 
     **How to check whether the database has a table structure?**
 
@@ -37,7 +37,7 @@ Pre checks
 
 ----
 
-.. seealso::
+.. hint::
 
     **How to check whether the database has existing day/hour statistics data?**
 
@@ -70,13 +70,13 @@ You can only import a full backup when:
 - 1. The database **does** exist.
 - 2. The database **does not** contain a table structure (and thus no data).
 
-.. tip::
+.. hint::
 
     If the database does not exist, create it::
 
          sudo -u postgres createdb -O dsmrreader dsmrreader
 
-.. tip::
+.. danger::
 
     If it has a table structure, usually just after reinstallation, then wipe it. **This will permanently delete all data in it!**
 
@@ -117,7 +117,7 @@ You can only import a partial backup when:
 - 2. The database **does** contain a table structure.
 - 3. The database **does not** contain existing day/hour statistics.
 
-.. tip::
+.. hint::
 
     If the database does not exist, create it.
 
@@ -125,7 +125,7 @@ You can only import a partial backup when:
 
          sudo -u postgres createdb -O dsmrreader dsmrreader
 
-.. tip::
+.. hint::
 
     If the database does not have a table structure, then try creating it.
     This assumes you already reinstalled DSMR-reader.
@@ -137,7 +137,7 @@ You can only import a partial backup when:
         ./deploy.sh
         logout
 
-.. warning::
+.. danger::
 
     If the database already contains day/hour statistics, you probably want to abort the restore and create an issue on Github for support instead.
 

@@ -2,12 +2,15 @@ Installation: Step by step
 ##########################
 
 
-.. note::
+For others users who want some addition explanation about what they are exactly doing/installing.
 
-    For others users who want some addition explanation about what they are exactly doing/installing.
+Use this to host both the datalogger and application on the same machine by installing it manually.
 
-    Use this to host both the datalogger and application on the same machine by installing it manually.
+.. tip::
 
+    Strongly consider :doc:`using Docker containers instead <../../how-to/installation/using-docker>`, as it already contains a lot of the details (and steps) below.
+
+    *DSMR-reader may switch to Docker-only support at some point in the future.*
 
 .. contents:: :local:
     :depth: 2
@@ -22,19 +25,24 @@ The application stores by default all readings taken from the serial cable.
 
     sudo apt-get install -y postgresql
 
-.. note::
+.. tip::
 
     Does PostgreSQL not start/create the cluster due to locales? E.g.::
 
       Error: The locale requested by the environment is invalid.
       Error: could not create default cluster. Please create it manually with
 
-      pg_createcluster 11 main --start
+      pg_createcluster 12 main start
 
     Try: ``dpkg-reconfigure locales``.
 
     Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
-    Then try ``pg_createcluster 11 main --start`` again (or whatever version you are using).
+    Then try ``pg_createcluster 12 main start`` again (or whatever version you are using).
+
+Execute::
+
+      # Check status, should be green/active
+      sudo systemctl status postgresql
 
 (!) Ignore any '*could not change directory to "/root": Permission denied*' errors for the following three commands.
 
@@ -63,9 +71,9 @@ Optional: Restore a database backup
 
 2. Dependencies
 ---------------
-Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::
+- Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::
 
-    sudo apt-get install -y cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv
+    sudo apt-get install -y cu nginx supervisor git python3 python3-psycopg2 python3-pip
 
 The CU program allows easily testing for your DSMR serial connection.
 It's very basic but also very effective to simply test whether your serial cable setup works properly.
@@ -74,11 +82,11 @@ It's very basic but also very effective to simply test whether your serial cable
 -------------------
 The application runs as ``dsmr`` user by default. This way we do not have to run the application as ``root``, which is a bad practice anyway.
 
-Create user with homedir. The application code and virtualenv will reside in this directory as well::
+- Create user with homedir. The application will be installed in this directory and run as that user as well::
 
     sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
 
-Our user also requires dialout permissions. So allow the user to perform a dialout by adding it to the ``dialout`` group::
+- Our user also requires dialout permissions. So allow the user to perform a dialout by adding it to the ``dialout`` group::
 
     sudo usermod -a -G dialout dsmr
 
@@ -108,15 +116,28 @@ You now should see something similar to ``Connected.`` and a wall of text and nu
 
 - To exit cu, type "``q.``", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``.
 
+- Execute::
+
+    logout
+
 
 4. Webserver/Nginx (part 1)
 ---------------------------
 
 *We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*
 
-- Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user.
+- Make sure you are **not** ``dsmr`` user here.
 
-Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefore it requires (write) access to it::
+- Execute::
+
+    whoami
+
+    # Still "dsmr"? Execute CTRL+D or:
+    logout
+
+Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefore it requires (write) access to it.
+
+- Execute::
 
     sudo mkdir -p /var/www/dsmrreader/static
 
@@ -127,7 +148,14 @@ Django will later copy all static files to the directory below, used by Nginx to
 ---------------------------------
 Now is the time to clone the code from the repository into the homedir we created.
 
-- Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
+Make sure you are currently (still) ``dsmr`` user here.
+
+- Execute::
+
+    whoami
+
+    # Not "dsmr"? Execute:
+    sudo su - dsmr
 
 - Clone the repository::
 
@@ -136,46 +164,58 @@ Now is the time to clone the code from the repository into the homedir we create
 This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the GitHub repository.
 
 
-6. Virtualenv
--------------
+6. External dependencies
+------------------------
 
-The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**.
+The dependencies our application uses need to be downloaded and store as well.
 
-- Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
+- Make sure you are **not** ``dsmr`` user here.
 
-.. note::
+- Execute::
 
-    **Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]
+    whoami
 
-- Install dependencies::
+    # Still "dsmr"? Execute CTRL+D or:
+    logout
 
-    pip3 install --user --upgrade pip poetry
+- Install Poetry::
+
+    sudo pip3 install poetry
+
+- Execute::
+
+    sudo su - dsmr
+
+- Configure Poetry::
 
     poetry config virtualenvs.in-project true
-    poetry install
 
-- Each time you work as ``dsmr`` user, you will have to switch to the virtualenv with these commands::
+Each time you log in as ``dsmr`` user, you will have to change working dir and activate Poetry::
 
-    cd ~/dsmr-reader
-    poetry shell
+    # cd ~/dsmr-reader
+    # poetry shell
 
 - Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::
 
-    sh -c 'echo "cd ~/dsmr-reader" >> ~/.bashrc'
-    sh -c 'echo "poetry shell" >> ~/.bashrc'
+    bash -c 'echo "cd ~/dsmr-reader" >> ~/.bashrc'
+    bash -c 'echo "poetry shell" >> ~/.bashrc'
 
-.. note::
+You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D or type ``logout``) and login again using ``sudo su - dsmr``.
 
-    You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D or type ``logout``) and login again using ``sudo su - dsmr``.
+You should see the terminal have a ``(.venv)`` prefix now, for example: ``(.venv)dsmr@rasp:~/dsmr-reader $``
 
-    You should see the terminal have a ``(.venv)`` prefix now, for example: ``(.venv)dsmr@rasp:~/dsmr-reader $``
+It should prompt something similar to::
 
-Make sure you've read and executed the note above, because you'll need it for the next chapter.
+    Creating virtualenv dsmr-reader in /home/dsmr/dsmr-reader/.venv
+    Spawning shell within /home/dsmr/dsmr-reader/.venv
+    . /home/dsmr/dsmr-reader/.venv/bin/activate
+    Virtual environment already activated: /home/dsmr/dsmr-reader/.venv
 
+- Install dependencies (may take a minute)::
 
-7. Application configuration & setup
-------------------------------------
-Setup local config::
+    poetry install --no-dev
+
+- Setup local config::
 
     cp dsmrreader/provisioning/django/settings.py.template dsmrreader/settings.py
 
@@ -183,13 +223,28 @@ Setup local config::
     ./tools/generate-secret-key.sh
 
 
-8. Bootstrapping
+7. Bootstrapping
 ----------------
 Now it's time to bootstrap the application and check whether all settings are good and requirements are met.
 
-- Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)
+Make sure you are currently (still) ``dsmr`` user here.
 
-- Execute this to initialize the database we've created earlier::
+- Execute::
+
+    whoami
+
+    # Not "dsmr"? Execute:
+    sudo su - dsmr
+
+- Execute::
+
+    ./manage.py check
+
+It should output something like::
+
+    System check identified no issues (0 silenced).
+
+- Execute this to initialize the structure for the database we've created earlier::
 
     ./manage.py migrate
 
@@ -200,29 +255,48 @@ It allows us to have Nginx serve static files outside our project/code root.
 
     ./manage.py collectstatic --noinput
 
-Create an application superuser with the following command.
+- Create an application superuser by opening the ``.env`` file with your favourite text editor. Find (or add) these lines::
 
-Execute::
+    # In /home/dsmr/dsmr-reader/.env
 
-    ./manage.py createsuperuser --email dsmr@localhost --username admin
+    ### Admin credentials.
+    #DSMRREADER_ADMIN_USER=
+    #DSMRREADER_ADMIN_PASSWORD=
 
-    # You will be asked to choose and enter a password twice. The email address is not used.
+.. tip::
+    Remove the ``#`` in front and add the admin username and password you'd like. E.g.::
+
+        DSMRREADER_ADMIN_USER=admin
+        DSMRREADER_ADMIN_PASSWORD=supersecretpassword
+
+Now have DSMR-reader create/reset the admin user for you.
+
+- Execute::
+
+    ./manage.py dsmr_superuser
 
 
-9. Webserver/Nginx (part 2)
+8. Webserver/Nginx (part 2)
 ---------------------------
 
 You've almost completed the installation now.
 
-.. note::
+.. seealso::
 
     This installation guide assumes you run the Nginx webserver for this application only.
 
     It's possible to have other applications use Nginx as well, but that requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will copy below.
 
-- Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user.
+- Make sure you are **not** ``dsmr`` user here.
 
-Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::
+- Execute::
+
+    whoami
+
+    # Still "dsmr"? Execute CTRL+D or:
+    logout
+
+- Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::
 
     sudo rm /etc/nginx/sites-enabled/default
 
@@ -233,13 +307,14 @@ Remove the default Nginx vhost (**only when you do not use it yourself, see the 
 
 - Let Nginx verify vhost syntax and restart Nginx when the ``-t`` configtest passes::
 
+    # Command below should output "syntax is ok" and/or "test is successful"
     sudo nginx -t
 
     sudo systemctl restart nginx.service
 
 
-10. Supervisor
---------------
+9. Supervisor
+-------------
 Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used.
 It's also configured to bring the entire application up again after a shutdown or reboot.
 
@@ -249,20 +324,17 @@ It's also configured to bring the entire application up again after a shutdown o
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_backend.conf /etc/supervisor/conf.d/
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
 
-- Login to ``supervisorctl`` management console::
 
-    sudo supervisorctl
+- Enter these commands. It will ask Supervisor to recheck its config directory and use/reload the files::
 
-- Enter these commands (**listed after the** ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::
+    sudo supervisorctl reread
+    sudo supervisorctl update
 
-    supervisor> reread
-    supervisor> update
+Three processes should be ``RUNNING``. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times.
 
-Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times.
+- Execute::
 
-- When still in ``supervisorctl``'s console, type::
-
-    supervisor> status
+    sudo supervisorctl status
 
 Example of everything running well::
 

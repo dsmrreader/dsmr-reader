@@ -1,12 +1,15 @@
 Installation: Quick
 ###################
 
-.. note::
+Use this to host both the datalogger and application on the same machine by installing it manually.
 
-    Use this to host both the datalogger and application on the same machine by installing it manually.
+Contains just a list of commands needed for the installation of DSMR-reader.
 
-    Contains just a list of commands needed for the installation of DSMR-reader.
+.. tip::
 
+    Strongly consider :doc:`using Docker containers instead <../../how-to/installation/using-docker>`, as it already contains a lot of the details (and steps) below.
+
+    *DSMR-reader may switch to Docker-only support at some point in the future.*
 
 .. contents:: :local:
     :depth: 1
@@ -18,22 +21,27 @@ System packages
 Execute::
 
     # Packages
-    sudo apt-get install -y postgresql nginx supervisor git python3 python3-psycopg2 python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get install -y postgresql cu nginx supervisor git python3 python3-psycopg2 python3-pip
 
-.. attention::
+.. tip::
 
     Does PostgreSQL not start/create the cluster due to locales? E.g.::
 
       Error: The locale requested by the environment is invalid.
       Error: could not create default cluster. Please create it manually with
 
-      pg_createcluster 9.4 main --start
+      pg_createcluster 12 main start
 
 
     Try: ``dpkg-reconfigure locales``.
 
     Still no luck? Try editing ``/etc/environment``, add ``LC_ALL="en_US.utf-8"`` and reboot.
-    Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using).
+    Then try ``pg_createcluster 12 main start`` again (or whatever version you are using).
+
+Execute::
+
+      # Check status, should be green/active
+      sudo systemctl status postgresql
 
 Continue::
 
@@ -41,6 +49,7 @@ Continue::
     sudo -u postgres createuser -DSR dsmrreader
     sudo -u postgres createdb -O dsmrreader dsmrreader
     sudo -u postgres psql -c "alter user dsmrreader with password 'dsmrreader';"
+
 
 Optional: Restore a database backup
 -----------------------------------
@@ -69,11 +78,15 @@ Continue::
     sudo git clone https://github.com/dsmrreader/dsmr-reader.git /home/dsmr/dsmr-reader
     sudo chown -R dsmr:dsmr /home/dsmr/
 
-    # Virtual env
-    sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --python python3
-    sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
+    # Dependencies
+    sudo pip3 install poetry
+    sudo -u dsmr poetry config virtualenvs.in-project true
     sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
+    sudo sh -c 'echo "poetry shell" >> /home/dsmr/.bashrc'
+    sudo su - dsmr
+    poetry install --no-dev
+    CTRL + D (exit)
+    CTRL + D (logout)
 
     # Config
     sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/settings.py.template /home/dsmr/dsmr-reader/dsmrreader/settings.py
@@ -100,11 +113,11 @@ Continue::
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
     sudo supervisorctl reread
     sudo supervisorctl update
+    sudo supervisorctl status
 
-    # Create (super)user for the DSMR-reader configuration webinterface
-    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py createsuperuser --email dsmr@localhost --username admin
+.. seealso::
 
-    # You will be asked to choose and enter a password twice. The email address is not used.
+    :doc:`See here for setting up admin credentials<../admin/set-username-password>`.
 
 .. seealso::
 

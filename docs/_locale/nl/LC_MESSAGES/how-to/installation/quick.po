@@ -14,62 +14,75 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../../how-to/installation/quick.rst:2
 msgid "Installation: Quick"
 msgstr "Installatie: Snel"
 
-#: ../../how-to/installation/quick.rst:6
+#: ../../how-to/installation/quick.rst:4
 msgid "Use this to host both the datalogger and application on the same machine by installing it manually."
 msgstr "Gebruik dit om zowel de datalogger als de applicatie op hetzelfde apparaat te installeren."
 
-#: ../../how-to/installation/quick.rst:8
+#: ../../how-to/installation/quick.rst:6
 msgid "Contains just a list of commands needed for the installation of DSMR-reader."
 msgstr "Bevat alleen een lijst met commando's nodig voor de installatie van DSMR-reader."
 
-#: ../../how-to/installation/quick.rst:16
+#: ../../how-to/installation/quick.rst:10
+msgid "Strongly consider :doc:`using Docker containers instead <../../how-to/installation/using-docker>`, as it already contains a lot of the details (and steps) below."
+msgstr "Overweeg zeker :doc:`om Docker-containers te gebruiken <../../how-to/installation/using-docker>` in plaats van onderstaande, gezien die al bijna alle aspecten en stappen in zich bevatten."
+
+#: ../../how-to/installation/quick.rst:12
+msgid "*DSMR-reader may switch to Docker-only support at some point in the future.*"
+msgstr "*Het kan zijn dat DSMR-reader op termijn wisselt naar Docker-only-ondersteuning.*"
+
+#: ../../how-to/installation/quick.rst:19
 msgid "System packages"
 msgstr "Systeem packages"
 
-#: ../../how-to/installation/quick.rst:18
+#: ../../how-to/installation/quick.rst:21
+#: ../../how-to/installation/quick.rst:41
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../how-to/installation/quick.rst:25
+#: ../../how-to/installation/quick.rst:28
 msgid "Does PostgreSQL not start/create the cluster due to locales? E.g.::"
 msgstr "Start PostgreSQL niet wegens een fout in 'locales'? Bijvoorbeeld::"
 
-#: ../../how-to/installation/quick.rst:33
+#: ../../how-to/installation/quick.rst:36
 msgid "Try: ``dpkg-reconfigure locales``."
 msgstr "Probeer: ``dpkg-reconfigure locales``."
 
-#: ../../how-to/installation/quick.rst:35
-msgid "Still no luck? Try editing ``/etc/environment``, add ``LC_ALL=\"en_US.utf-8\"`` and reboot. Then try ``pg_createcluster 9.4 main --start`` again (or whatever version you are using)."
-msgstr "Werkt het nog steeds niet? Open dan dit bestand ``/etc/environment``, voeg onderaan de regel ``LC_ALL=\"en_US.utf-8\"`` toe en herstart het systeem. Probeer daarna ``pg_createcluster 9.4 main --start`` (of welke versie je ook gebruikt)."
-
 #: ../../how-to/installation/quick.rst:38
-#: ../../how-to/installation/quick.rst:58
+msgid "Still no luck? Try editing ``/etc/environment``, add ``LC_ALL=\"en_US.utf-8\"`` and reboot. Then try ``pg_createcluster 12 main start`` again (or whatever version you are using)."
+msgstr "Werkt het nog steeds niet? Open dan dit bestand ``/etc/environment``, voeg onderaan de regel ``LC_ALL=\"en_US.utf-8\"`` toe en herstart het systeem. Probeer daarna ``pg_createcluster 12 main start`` (of welke versie je ook gebruikt)."
+
+#: ../../how-to/installation/quick.rst:46
+#: ../../how-to/installation/quick.rst:67
 msgid "Continue::"
 msgstr "Ga verder::"
 
-#: ../../how-to/installation/quick.rst:46
+#: ../../how-to/installation/quick.rst:55
 msgid "Optional: Restore a database backup"
 msgstr "Optioneel: Database back-up terugzetten"
 
-#: ../../how-to/installation/quick.rst:50
+#: ../../how-to/installation/quick.rst:59
 msgid "If you need to restore a database backup with your existing data, this is the moment to do so."
 msgstr "Indien je een back-up van de database wilt terugzetten met je oude gegevens, nu is het moment om dat te doen."
 
-#: ../../how-to/installation/quick.rst:52
+#: ../../how-to/installation/quick.rst:61
 msgid "Restoring a database backup? :doc:`See here for instructions </how-to/database/postgresql-restore-backup>`."
 msgstr "Database back-up terugzetten? :doc:`Zie hier voor instructies </how-to/database/postgresql-restore-backup>`."
 
-#: ../../how-to/installation/quick.rst:56
+#: ../../how-to/installation/quick.rst:65
 msgid "DSMR-reader"
 msgstr "DSMR-reader"
 
-#: ../../how-to/installation/quick.rst:111
+#: ../../how-to/installation/quick.rst:120
+msgid ":doc:`See here for setting up admin credentials<../admin/set-username-password>`."
+msgstr ":doc:`Zie hier voor het instellen van loginggegevens voor admins<../admin/set-username-password>`."
+
+#: ../../how-to/installation/quick.rst:124
 msgid ":doc:`Finished? Go to setting up the application</tutorial/setting-up>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen</tutorial/setting-up>`."

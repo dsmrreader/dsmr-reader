@@ -21,305 +21,325 @@ msgstr ""
 msgid "Installation: Step by step"
 msgstr "Installatie: Stapsgewijs"
 
-#: ../../tutorial/installation/step-by-step.rst:7
+#: ../../tutorial/installation/step-by-step.rst:5
 msgid "For others users who want some addition explanation about what they are exactly doing/installing."
 msgstr "Voor alle andere gebruikers, die graag willen weten wat ze exact uitvoeren."
 
-#: ../../tutorial/installation/step-by-step.rst:9
+#: ../../tutorial/installation/step-by-step.rst:7
 msgid "Use this to host both the datalogger and application on the same machine by installing it manually."
 msgstr "Gebruik dit om zowel de datalogger als de applicatie op hetzelfde apparaat te installeren."
 
-#: ../../tutorial/installation/step-by-step.rst:17
+#: ../../tutorial/installation/step-by-step.rst:11
+msgid "Strongly consider :doc:`using Docker containers instead <../../how-to/installation/using-docker>`, as it already contains a lot of the details (and steps) below."
+msgstr "Overweeg zeker :doc:`om Docker-containers te gebruiken <../../how-to/installation/using-docker>` in plaats van onderstaande, gezien die al bijna alle aspecten en stappen in zich bevatten."
+
+#: ../../tutorial/installation/step-by-step.rst:13
+msgid "*DSMR-reader may switch to Docker-only support at some point in the future.*"
+msgstr "*Het kan zijn dat DSMR-reader op termijn wisselt naar Docker-only-ondersteuning.*"
+
+#: ../../tutorial/installation/step-by-step.rst:20
 msgid "1. Database backend (PostgreSQL)"
 msgstr "1. Databaseopslag (PostgreSQL)"
 
-#: ../../tutorial/installation/step-by-step.rst:19
+#: ../../tutorial/installation/step-by-step.rst:22
 msgid "The application stores by default all readings taken from the serial cable."
 msgstr "De applicatie slaat de P1-metingen standaard op."
 
-#: ../../tutorial/installation/step-by-step.rst:21
+#: ../../tutorial/installation/step-by-step.rst:24
 msgid "Install database::"
 msgstr "Installeer database::"
 
-#: ../../tutorial/installation/step-by-step.rst:27
+#: ../../tutorial/installation/step-by-step.rst:30
 msgid "Does PostgreSQL not start/create the cluster due to locales? E.g.::"
 msgstr "Start PostgreSQL niet wegens een fout in 'locales'? Bijvoorbeeld::"
 
-#: ../../tutorial/installation/step-by-step.rst:34
+#: ../../tutorial/installation/step-by-step.rst:37
 msgid "Try: ``dpkg-reconfigure locales``."
 msgstr "Probeer: ``dpkg-reconfigure locales``."
 
-#: ../../tutorial/installation/step-by-step.rst:36
-msgid "Still no luck? Try editing ``/etc/environment``, add ``LC_ALL=\"en_US.utf-8\"`` and reboot. Then try ``pg_createcluster 11 main --start`` again (or whatever version you are using)."
-msgstr "Werkt het nog steeds niet? Open dan dit bestand ``/etc/environment``, voeg onderaan de regel ``LC_ALL=\"en_US.utf-8\"`` toe en herstart het systeem. Probeer daarna ``pg_createcluster 11 main --start`` (of welke versie je ook gebruikt)."
-
 #: ../../tutorial/installation/step-by-step.rst:39
-msgid "(!) Ignore any '*could not change directory to \"/root\": Permission denied*' errors for the following three commands."
-msgstr "(!) Negeer voor de volgende drie commando's de foutmelding: '*could not change directory to \"/root\": Permission denied*'."
+msgid "Still no luck? Try editing ``/etc/environment``, add ``LC_ALL=\"en_US.utf-8\"`` and reboot. Then try ``pg_createcluster 12 main start`` again (or whatever version you are using)."
+msgstr "Werkt het nog steeds niet? Open dan dit bestand ``/etc/environment``, voeg onderaan de regel ``LC_ALL=\"en_US.utf-8\"`` toe en herstart het systeem. Probeer daarna ``pg_createcluster 12 main start`` (of welke versie je ook gebruikt)."
 
-#: ../../tutorial/installation/step-by-step.rst:41
-msgid "Create database user::"
-msgstr "Creëer databasegebruiker::"
-
-#: ../../tutorial/installation/step-by-step.rst:45
-msgid "Create database, owned by the database user we just created::"
-msgstr "Creëer database, met als eigenaar de databasegebruiker die we net hebben aangemaakt::"
-
-#: ../../tutorial/installation/step-by-step.rst:49
-msgid "Set password for database user::"
-msgstr "Stel wachtwoord in voor databasegebruiker::"
-
-#: ../../tutorial/installation/step-by-step.rst:55
-msgid "Optional: Restore a database backup"
-msgstr "Optioneel: Database back-up terugzetten"
-
-#: ../../tutorial/installation/step-by-step.rst:59
-msgid "If you need to restore a database backup with your existing data, this is the moment to do so."
-msgstr "Indien je een back-up van de database wilt terugzetten met je oude gegevens, nu is het moment om dat te doen."
-
-#: ../../tutorial/installation/step-by-step.rst:61
-msgid "Restoring a database backup? :doc:`See here for instructions </how-to/database/postgresql-restore-backup>`."
-msgstr "Database back-up terugzetten? :doc:`Zie hier voor instructies </how-to/database/postgresql-restore-backup>`."
-
-#: ../../tutorial/installation/step-by-step.rst:65
-msgid "2. Dependencies"
-msgstr "2. Afhankelijkheden"
-
-#: ../../tutorial/installation/step-by-step.rst:66
-msgid "Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::"
-msgstr "Tijd om diverse tools te installeren. Deze zijn nodig voor de Nginx webserver, de Gunicorn applicatieserver en voor het binnenhalen van de code van de applicatie vanaf GitHub::"
-
-#: ../../tutorial/installation/step-by-step.rst:70
-msgid "The CU program allows easily testing for your DSMR serial connection. It's very basic but also very effective to simply test whether your serial cable setup works properly."
-msgstr "Met het CU-programma kun je vrij gemakkelijk de DSMR-verbinding testen naar je slimme meter toe. Erg handig om te kijken of dat überhaupt al lekker werkt."
-
-#: ../../tutorial/installation/step-by-step.rst:74
-msgid "3. Application user"
-msgstr "3. Applicatiegebruiker"
-
-#: ../../tutorial/installation/step-by-step.rst:75
-msgid "The application runs as ``dsmr`` user by default. This way we do not have to run the application as ``root``, which is a bad practice anyway."
-msgstr "De applicatie draait standaard onder de gebruiker ``dsmr``. Hierdoor heeft het geen ``root``-rechten (nodig), wat over het algemeen zeer afgeraden wordt."
-
-#: ../../tutorial/installation/step-by-step.rst:77
-msgid "Create user with homedir. The application code and virtualenv will reside in this directory as well::"
-msgstr "Maak een aparte gebruiker aan met eigen homedir. De code voor de applicatie en VirtualEnv zetten we later hier in::"
-
-#: ../../tutorial/installation/step-by-step.rst:81
-msgid "Our user also requires dialout permissions. So allow the user to perform a dialout by adding it to the ``dialout`` group::"
-msgstr "De gebruiker heeft ook toegang nodig om de kabel te kunnen uitlezen. Hiervoor voegen de we gebruiker toe aan de groep ``dialout``::"
-
-#: ../../tutorial/installation/step-by-step.rst:85
-msgid "Either proceed to the next heading **for a test reading** or continue at chapter 4."
-msgstr "Ga ofwel door naar het volgende hoofdstuk **voor een testmeting** of ga direct door naar stap 4."
-
-#: ../../tutorial/installation/step-by-step.rst:89
-msgid "Optional: Your first reading"
-msgstr "Optioneel: Je eerste meting"
-
-#: ../../tutorial/installation/step-by-step.rst:93
-msgid "**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected."
-msgstr "**OPTIONEEL**: Je kunt deze stap overslaan wanneer je al eerder een (test)meting hebt gedaan met je slimme meter. Ik raad het dus vooral aan als je nog nooit eerder je P1-poort hebt uitgelezen. Hiermee verzeker je jezelf ook dat de applicatie straks dezelfde (werkende) toegang heeft voor de metingen."
-
-#: ../../tutorial/installation/step-by-step.rst:95
-msgid "Now login as the user we have just created, to perform our very first reading! ::"
-msgstr "Log nu in als de gebruiker die we zojuist hebben aangemaakt voor de eerste testmeting! ::"
-
-#: ../../tutorial/installation/step-by-step.rst:99
-msgid "Test with ``cu`` for **DSMR 4+**::"
-msgstr "Test met ``cu`` voor **DSMR 4+**::"
-
-#: ../../tutorial/installation/step-by-step.rst:103
-msgid "Or test with ``cu`` for **DSMR 2.2** (untested)::"
-msgstr "Of test met ``cu`` voor **DSMR 2.2** (ongetest)::"
-
-#: ../../tutorial/installation/step-by-step.rst:107
-msgid "You now should see something similar to ``Connected.`` and a wall of text and numbers *within 10 seconds*. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, `such as this one (Dutch) <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
-msgstr "Je zou nu iets moeten zien als ``Connected.``. Vervolgens krijg je, als het goed is, binnen tien seconden een hele lap tekst te zijn met een hoop cijfers. Werkt het niet? Probeer dan een andere BAUD-waarde, zoals hierboven beschreven. Of `kijk op een nuttig weblog <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
-
-#: ../../tutorial/installation/step-by-step.rst:109
-msgid "To exit cu, type \"``q.``\", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``."
-msgstr "Om cu af te sluiten, typ \"``q.``\", druk op Enter en wacht voor een paar seconden. Het programma sluit af met de melding ``Disconnected.``."
-
-#: ../../tutorial/installation/step-by-step.rst:113
-msgid "4. Webserver/Nginx (part 1)"
-msgstr "4. Webserver/Nginx (deel 1)"
-
-#: ../../tutorial/installation/step-by-step.rst:115
-msgid "*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*"
-msgstr "*We configureren vervolgens de webserver (Nginx). Deze serveert alle statische bestanden en geeft de applicatie-verzoeken door naar de backend, waar de applicatie in Gunicorn draait onder Supervisor. Deze stellen we later in.*"
-
-#: ../../tutorial/installation/step-by-step.rst:117
-#: ../../tutorial/installation/step-by-step.rst:223
-msgid "Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user."
-msgstr "Zorg ervoor dat je hier ``root``- of ``sudo``-gebruiker bent. Zo niet, druk op CTRL + D om uit te loggen als ``dsmr`` gebruiker."
-
+#: ../../tutorial/installation/step-by-step.rst:42
 #: ../../tutorial/installation/step-by-step.rst:119
-msgid "Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefore it requires (write) access to it::"
-msgstr "Django kopieert alle statische bestanden naar een aparte map, die weer door Nginx gebruikt wordt. Daarom is er tevens (schrijf)toegang voor nodig::"
-
-#: ../../tutorial/installation/step-by-step.rst:127
-msgid "5. Clone project code from GitHub"
-msgstr "5. Kloon project code vanaf GitHub"
-
-#: ../../tutorial/installation/step-by-step.rst:128
-msgid "Now is the time to clone the code from the repository into the homedir we created."
-msgstr "Nu kunnen we de code van de applicatie van GitHub downloaden en in de homedir zetten die we net aangemaakt hebben."
-
-#: ../../tutorial/installation/step-by-step.rst:130
-msgid "Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"
-msgstr "Zorg ervoor dat je ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: ``sudo su - dsmr``)"
-
-#: ../../tutorial/installation/step-by-step.rst:132
-msgid "Clone the repository::"
-msgstr "Kloon de repository::"
-
-#: ../../tutorial/installation/step-by-step.rst:136
-msgid "This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the GitHub repository."
-msgstr "Dit kan enkele seconden in beslag nemen. Als het goed is zie je hierna een map genaamd ``dsmr-reader``, met daarin een kopie van de repository zoals die op GitHub staat."
-
+#: ../../tutorial/installation/step-by-step.rst:131
 #: ../../tutorial/installation/step-by-step.rst:140
-msgid "6. Virtualenv"
-msgstr "6. VirtualEnv"
-
-#: ../../tutorial/installation/step-by-step.rst:142
-msgid "The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**."
-msgstr "Alle (externe) afhankelijkheden worden opgeslagen in een aparte omgeving, ook wel **VirtualEnv** genoemd."
-
-#: ../../tutorial/installation/step-by-step.rst:144
-#: ../../tutorial/installation/step-by-step.rst:190
-msgid "Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"
-msgstr "Zorg ervoor dat je nog steeds ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: ``sudo su - dsmr``)"
-
-#: ../../tutorial/installation/step-by-step.rst:148
-msgid "**Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]"
-msgstr "**De installatie van de volgende afhankelijkheden kan enige tijd in beslag nemen**. Dit varieert en is sterk afhankelijk van de snelheid van je Internet-verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te maken wanneer dit lang lijkt te duren. :]"
-
-#: ../../tutorial/installation/step-by-step.rst:150
-msgid "Install dependencies::"
-msgstr "Installeer afhankelijkheden::"
-
-#: ../../tutorial/installation/step-by-step.rst:157
-msgid "Each time you work as ``dsmr`` user, you will have to switch to the virtualenv with these commands::"
-msgstr "Elke keer dat je als ``dsmr`` gebruiker werkt, zul je moeten wisselen naar de virtualenv met deze commando's::"
-
-#: ../../tutorial/installation/step-by-step.rst:162
-msgid "Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::"
-msgstr "Laten we ervoor zorgen dat deze commando's **automatisch** uitgevoerd worden, zodra we inloggen als ``dsmr`` gebruiker. Dit doen we door ze toe te voegen aan het ``~/.bashrc`` bestand::"
-
-#: ../../tutorial/installation/step-by-step.rst:169
-msgid "You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D or type ``logout``) and login again using ``sudo su - dsmr``."
-msgstr "Je kunt dit vrij gemakkelijk testen door uit te loggen als ``dsmr`` gebruiker (met CTRL + D of typ ``logout``) en vervolgens weer in te loggen met ``sudo su - dsmr``."
-
-#: ../../tutorial/installation/step-by-step.rst:171
-msgid "You should see the terminal have a ``(.venv)`` prefix now, for example: ``(.venv)dsmr@rasp:~/dsmr-reader $``"
-msgstr "Als het goed is heeft je terminal nu een ``(.venv)`` prefix, bijvoorbeeld: ``(.venv)dsmr@rasp:~/dsmr-reader $``"
-
-#: ../../tutorial/installation/step-by-step.rst:173
-msgid "Make sure you've read and executed the note above, because you'll need it for the next chapter."
-msgstr "Zorg ervoor dat je de bovenstaande notitie hebt gelezen en uitgevoerd, aangezien ze nodig zijn voor het volgende hoofdstuk."
-
-#: ../../tutorial/installation/step-by-step.rst:177
-msgid "7. Application configuration & setup"
-msgstr "7. Applicatieconfiguratie"
-
-#: ../../tutorial/installation/step-by-step.rst:178
-msgid "Setup local config::"
-msgstr "Stel lokale config in::"
-
-#: ../../tutorial/installation/step-by-step.rst:187
-msgid "8. Bootstrapping"
-msgstr "8. Initialisatie"
-
-#: ../../tutorial/installation/step-by-step.rst:188
-msgid "Now it's time to bootstrap the application and check whether all settings are good and requirements are met."
-msgstr "Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie proberen te initialiseren."
-
-#: ../../tutorial/installation/step-by-step.rst:192
-msgid "Execute this to initialize the database we've created earlier::"
-msgstr "Voer dit uit om de database te initialiseren::"
-
-#: ../../tutorial/installation/step-by-step.rst:196
-msgid "Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process. It allows us to have Nginx serve static files outside our project/code root."
-msgstr "Ga nu bezig met de statische bestanden voor de webinterface. Dit kopieert alle statische bestanden in de map die we eerder, vlak na de installatie voor Nginx, hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden kan hosten buiten de code-bestanden."
-
-#: ../../tutorial/installation/step-by-step.rst:199
-msgid "Sync static files::"
-msgstr "Synchroniseer statische bestanden::"
-
-#: ../../tutorial/installation/step-by-step.rst:203
-msgid "Create an application superuser with the following command."
-msgstr "Maak een supergebruiker aan met het volgende commando."
-
-#: ../../tutorial/installation/step-by-step.rst:205
+#: ../../tutorial/installation/step-by-step.rst:153
+#: ../../tutorial/installation/step-by-step.rst:174
+#: ../../tutorial/installation/step-by-step.rst:185
+#: ../../tutorial/installation/step-by-step.rst:232
+#: ../../tutorial/installation/step-by-step.rst:239
+#: ../../tutorial/installation/step-by-step.rst:274
+#: ../../tutorial/installation/step-by-step.rst:292
+#: ../../tutorial/installation/step-by-step.rst:335
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../tutorial/installation/step-by-step.rst:213
-msgid "9. Webserver/Nginx (part 2)"
-msgstr "9. Webserver/Nginx (deel 2)"
+#: ../../tutorial/installation/step-by-step.rst:47
+msgid "(!) Ignore any '*could not change directory to \"/root\": Permission denied*' errors for the following three commands."
+msgstr "(!) Negeer voor de volgende drie commando's de foutmelding: '*could not change directory to \"/root\": Permission denied*'."
 
-#: ../../tutorial/installation/step-by-step.rst:215
+#: ../../tutorial/installation/step-by-step.rst:49
+msgid "Create database user::"
+msgstr "Creëer databasegebruiker::"
+
+#: ../../tutorial/installation/step-by-step.rst:53
+msgid "Create database, owned by the database user we just created::"
+msgstr "Creëer database, met als eigenaar de databasegebruiker die we net hebben aangemaakt::"
+
+#: ../../tutorial/installation/step-by-step.rst:57
+msgid "Set password for database user::"
+msgstr "Stel wachtwoord in voor databasegebruiker::"
+
+#: ../../tutorial/installation/step-by-step.rst:63
+msgid "Optional: Restore a database backup"
+msgstr "Optioneel: Database back-up terugzetten"
+
+#: ../../tutorial/installation/step-by-step.rst:67
+msgid "If you need to restore a database backup with your existing data, this is the moment to do so."
+msgstr "Indien je een back-up van de database wilt terugzetten met je oude gegevens, nu is het moment om dat te doen."
+
+#: ../../tutorial/installation/step-by-step.rst:69
+msgid "Restoring a database backup? :doc:`See here for instructions </how-to/database/postgresql-restore-backup>`."
+msgstr "Database back-up terugzetten? :doc:`Zie hier voor instructies </how-to/database/postgresql-restore-backup>`."
+
+#: ../../tutorial/installation/step-by-step.rst:73
+msgid "2. Dependencies"
+msgstr "2. Afhankelijkheden"
+
+#: ../../tutorial/installation/step-by-step.rst:74
+msgid "Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::"
+msgstr "Tijd om diverse tools te installeren. Deze zijn nodig voor de Nginx webserver, de Gunicorn applicatieserver en voor het binnenhalen van de code van de applicatie vanaf GitHub::"
+
+#: ../../tutorial/installation/step-by-step.rst:78
+msgid "The CU program allows easily testing for your DSMR serial connection. It's very basic but also very effective to simply test whether your serial cable setup works properly."
+msgstr "Met het CU-programma kun je vrij gemakkelijk de DSMR-verbinding testen naar je slimme meter toe. Erg handig om te kijken of dat überhaupt al lekker werkt."
+
+#: ../../tutorial/installation/step-by-step.rst:82
+msgid "3. Application user"
+msgstr "3. Applicatiegebruiker"
+
+#: ../../tutorial/installation/step-by-step.rst:83
+msgid "The application runs as ``dsmr`` user by default. This way we do not have to run the application as ``root``, which is a bad practice anyway."
+msgstr "De applicatie draait standaard onder de gebruiker ``dsmr``. Hierdoor heeft het geen ``root``-rechten (nodig), wat over het algemeen zeer afgeraden wordt."
+
+#: ../../tutorial/installation/step-by-step.rst:85
+msgid "Create user with homedir. The application will be installed in this directory and run as that user as well::"
+msgstr "Maak een aparte gebruiker aan met eigen homedir. De applicatie installeren we hier in en zal draaien onder die gebruiker::"
+
+#: ../../tutorial/installation/step-by-step.rst:89
+msgid "Our user also requires dialout permissions. So allow the user to perform a dialout by adding it to the ``dialout`` group::"
+msgstr "De gebruiker heeft ook toegang nodig om de kabel te kunnen uitlezen. Hiervoor voegen de we gebruiker toe aan de groep ``dialout``::"
+
+#: ../../tutorial/installation/step-by-step.rst:93
+msgid "Either proceed to the next heading **for a test reading** or continue at chapter 4."
+msgstr "Ga ofwel door naar het volgende hoofdstuk **voor een testmeting** of ga direct door naar stap 4."
+
+#: ../../tutorial/installation/step-by-step.rst:97
+msgid "Optional: Your first reading"
+msgstr "Optioneel: Je eerste meting"
+
+#: ../../tutorial/installation/step-by-step.rst:101
+msgid "**OPTIONAL**: You may skip this section as it's not required for the application to install. However, if you have never read your meter's P1 telegram port before, I recommend to perform an initial reading to make sure everything works as expected."
+msgstr "**OPTIONEEL**: Je kunt deze stap overslaan wanneer je al eerder een (test)meting hebt gedaan met je slimme meter. Ik raad het dus vooral aan als je nog nooit eerder je P1-poort hebt uitgelezen. Hiermee verzeker je jezelf ook dat de applicatie straks dezelfde (werkende) toegang heeft voor de metingen."
+
+#: ../../tutorial/installation/step-by-step.rst:103
+msgid "Now login as the user we have just created, to perform our very first reading! ::"
+msgstr "Log nu in als de gebruiker die we zojuist hebben aangemaakt voor de eerste testmeting! ::"
+
+#: ../../tutorial/installation/step-by-step.rst:107
+msgid "Test with ``cu`` for **DSMR 4+**::"
+msgstr "Test met ``cu`` voor **DSMR 4+**::"
+
+#: ../../tutorial/installation/step-by-step.rst:111
+msgid "Or test with ``cu`` for **DSMR 2.2** (untested)::"
+msgstr "Of test met ``cu`` voor **DSMR 2.2** (ongetest)::"
+
+#: ../../tutorial/installation/step-by-step.rst:115
+msgid "You now should see something similar to ``Connected.`` and a wall of text and numbers *within 10 seconds*. Nothing? Try different BAUD rate, as mentioned above. You might also check out a useful blog, `such as this one (Dutch) <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
+msgstr "Je zou nu iets moeten zien als ``Connected.``. Vervolgens krijg je, als het goed is, binnen tien seconden een hele lap tekst te zijn met een hoop cijfers. Werkt het niet? Probeer dan een andere BAUD-waarde, zoals hierboven beschreven. Of `kijk op een nuttig weblog <http://gejanssen.com/howto/Slimme-meter-uitlezen/>`_."
+
+#: ../../tutorial/installation/step-by-step.rst:117
+msgid "To exit cu, type \"``q.``\", hit Enter and wait for a few seconds. It should exit with the message ``Disconnected.``."
+msgstr "Om cu af te sluiten, typ \"``q.``\", druk op Enter en wacht voor een paar seconden. Het programma sluit af met de melding ``Disconnected.``."
+
+#: ../../tutorial/installation/step-by-step.rst:125
+msgid "4. Webserver/Nginx (part 1)"
+msgstr "4. Webserver/Nginx (deel 1)"
+
+#: ../../tutorial/installation/step-by-step.rst:127
+msgid "*We will now prepare the webserver, Nginx. It will serve all application's static files directly and proxy any application requests to the backend, Gunicorn controlled by Supervisor, which we will configure later on.*"
+msgstr "*We configureren vervolgens de webserver (Nginx). Deze serveert alle statische bestanden en geeft de applicatie-verzoeken door naar de backend, waar de applicatie in Gunicorn draait onder Supervisor. Deze stellen we later in.*"
+
+#: ../../tutorial/installation/step-by-step.rst:129
+#: ../../tutorial/installation/step-by-step.rst:172
+#: ../../tutorial/installation/step-by-step.rst:290
+msgid "Make sure you are **not** ``dsmr`` user here."
+msgstr "Zorg ervoor dat je hier **geen** ``dsmr`` gebruiker bent."
+
+#: ../../tutorial/installation/step-by-step.rst:138
+msgid "Django will later copy all static files to the directory below, used by Nginx to serve statics. Therefore it requires (write) access to it."
+msgstr "Django kopieert alle statische bestanden naar een aparte map, die weer door Nginx gebruikt wordt. Daarom is er tevens (schrijf)toegang voor nodig."
+
+#: ../../tutorial/installation/step-by-step.rst:148
+msgid "5. Clone project code from GitHub"
+msgstr "5. Kloon project code vanaf GitHub"
+
+#: ../../tutorial/installation/step-by-step.rst:149
+msgid "Now is the time to clone the code from the repository into the homedir we created."
+msgstr "Nu kunnen we de code van de applicatie van GitHub downloaden en in de homedir zetten die we net aangemaakt hebben."
+
+#: ../../tutorial/installation/step-by-step.rst:151
+#: ../../tutorial/installation/step-by-step.rst:230
+msgid "Make sure you are currently (still) ``dsmr`` user here."
+msgstr "Zorg ervoor dat je hier (nog steeds) `dsmr`` gebruiker bent."
+
+#: ../../tutorial/installation/step-by-step.rst:160
+msgid "Clone the repository::"
+msgstr "Kloon de repository::"
+
+#: ../../tutorial/installation/step-by-step.rst:164
+msgid "This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the GitHub repository."
+msgstr "Dit kan enkele seconden in beslag nemen. Als het goed is zie je hierna een map genaamd ``dsmr-reader``, met daarin een kopie van de repository zoals die op GitHub staat."
+
+#: ../../tutorial/installation/step-by-step.rst:168
+msgid "6. External dependencies"
+msgstr "6. Externe afhankelijkheden"
+
+#: ../../tutorial/installation/step-by-step.rst:170
+msgid "The dependencies our application uses need to be downloaded and store as well."
+msgstr "De afhankelijkheden voor deze applicatie moeten gedownload en opgeslagen worden."
+
+#: ../../tutorial/installation/step-by-step.rst:181
+msgid "Install Poetry::"
+msgstr "Installeer Poetry::"
+
+#: ../../tutorial/installation/step-by-step.rst:189
+msgid "Configure Poetry::"
+msgstr "Configureer Poetry::"
+
+#: ../../tutorial/installation/step-by-step.rst:193
+msgid "Each time you log in as ``dsmr`` user, you will have to change working dir and activate Poetry::"
+msgstr "Elke keer dat je als ``dsmr`` gebruiker inlogt, zul je moeten wisselen van werkmap en Poetry activeren::"
+
+#: ../../tutorial/installation/step-by-step.rst:198
+msgid "Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::"
+msgstr "Laten we ervoor zorgen dat deze commando's **automatisch** uitgevoerd worden, zodra we inloggen als ``dsmr`` gebruiker. Dit doen we door ze toe te voegen aan het ``~/.bashrc`` bestand::"
+
+#: ../../tutorial/installation/step-by-step.rst:203
+msgid "You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D or type ``logout``) and login again using ``sudo su - dsmr``."
+msgstr "Je kunt dit vrij gemakkelijk testen door uit te loggen als ``dsmr`` gebruiker (met CTRL + D of typ ``logout``) en vervolgens weer in te loggen met ``sudo su - dsmr``."
+
+#: ../../tutorial/installation/step-by-step.rst:205
+msgid "You should see the terminal have a ``(.venv)`` prefix now, for example: ``(.venv)dsmr@rasp:~/dsmr-reader $``"
+msgstr "Als het goed is heeft je terminal nu een ``(.venv)`` prefix, bijvoorbeeld: ``(.venv)dsmr@rasp:~/dsmr-reader $``"
+
+#: ../../tutorial/installation/step-by-step.rst:207
+msgid "It should prompt something similar to::"
+msgstr "Je zou iets moeten zien zoals::"
+
+#: ../../tutorial/installation/step-by-step.rst:214
+msgid "Install dependencies (may take a minute)::"
+msgstr "Installeer afhankelijkheden (kan een minuutje in beslag nemen)::"
+
+#: ../../tutorial/installation/step-by-step.rst:218
+msgid "Setup local config::"
+msgstr "Stel lokale config in::"
+
+#: ../../tutorial/installation/step-by-step.rst:227
+msgid "7. Bootstrapping"
+msgstr "7. Initialisatie"
+
+#: ../../tutorial/installation/step-by-step.rst:228
+msgid "Now it's time to bootstrap the application and check whether all settings are good and requirements are met."
+msgstr "Tijd om te kijken of alles goed is ingesteld. We gaan de applicatie proberen te initialiseren."
+
+#: ../../tutorial/installation/step-by-step.rst:243
+msgid "It should output something like::"
+msgstr "Je zou iets moeten zien zoals::"
+
+#: ../../tutorial/installation/step-by-step.rst:247
+msgid "Execute this to initialize the structure for the database we've created earlier::"
+msgstr "Voer dit uit om de database, die we eerder hebben aangemaakt, te initialiseren::"
+
+#: ../../tutorial/installation/step-by-step.rst:251
+msgid "Prepare static files for webinterface. This will copy all static files to the directory we created for Nginx earlier in the process. It allows us to have Nginx serve static files outside our project/code root."
+msgstr "Ga nu bezig met de statische bestanden voor de webinterface. Dit kopieert alle statische bestanden in de map die we eerder, vlak na de installatie voor Nginx, hebben aangemaakt. Het zorgt ervoor dat Nginx deze bestanden kan hosten buiten de code-bestanden."
+
+#: ../../tutorial/installation/step-by-step.rst:254
+msgid "Sync static files::"
+msgstr "Synchroniseer statische bestanden::"
+
+#: ../../tutorial/installation/step-by-step.rst:258
+msgid "Create an application superuser by opening the ``.env`` file with your favourite text editor. Find (or add) these lines::"
+msgstr "Stel inloggegevens in voor de admingebruiker, door het ``.env`` te openen met een teksteditor naar eigen voorkeur. Zoek deze regels (of voeg ze toe)::"
+
+#: ../../tutorial/installation/step-by-step.rst:267
+msgid "Remove the ``#`` in front and add the admin username and password you'd like. E.g.::"
+msgstr "Verwijder de ``#`` vooraan de regel en voer de gewenste inloggegevens in. Bijvoorbeeld::"
+
+#: ../../tutorial/installation/step-by-step.rst:272
+msgid "Now have DSMR-reader create/reset the admin user for you."
+msgstr "Laat DSMR-reader nu de admingebruiker voor je aanmaken of resetten."
+
+#: ../../tutorial/installation/step-by-step.rst:280
+msgid "8. Webserver/Nginx (part 2)"
+msgstr "8. Webserver/Nginx (deel 2)"
+
+#: ../../tutorial/installation/step-by-step.rst:282
 msgid "You've almost completed the installation now."
 msgstr "Je bent op dit punt bijna klaar met de installatie."
 
-#: ../../tutorial/installation/step-by-step.rst:219
+#: ../../tutorial/installation/step-by-step.rst:286
 msgid "This installation guide assumes you run the Nginx webserver for this application only."
 msgstr "Deze installatiehandleiding gaat er vanuit dat je de Nginx webserver alleen gebruikt voor deze applicatie."
 
-#: ../../tutorial/installation/step-by-step.rst:221
+#: ../../tutorial/installation/step-by-step.rst:288
 msgid "It's possible to have other applications use Nginx as well, but that requires you to remove the wildcard in the ``dsmr-webinterface`` vhost, which you will copy below."
 msgstr "Het is uiteraard mogelijk dat andere applicaties ook Nginx gebruiken, maar daarvoor zul je de wildcard moet weghalen in de ``dsmr-webinterface`` vhost, die je hieronder kopieert."
 
-#: ../../tutorial/installation/step-by-step.rst:225
+#: ../../tutorial/installation/step-by-step.rst:299
 msgid "Remove the default Nginx vhost (**only when you do not use it yourself, see the note above**)::"
 msgstr "Verwijder de standaard vhost van Nginx **wanneer je deze niet zelf gebruikt** (zie de notitie hierboven)::"
 
-#: ../../tutorial/installation/step-by-step.rst:229
+#: ../../tutorial/installation/step-by-step.rst:303
 msgid "Copy application vhost, **it will listen to any hostname** (wildcard), but you may change that if you feel like you need to. It won't affect the application anyway::"
 msgstr "Kopieer de vhost voor de applicatie. Deze luistert standaard naar **elke hostname** (wildcard), maar dat is natuurlijk naar eigen wens aan te passen::"
 
-#: ../../tutorial/installation/step-by-step.rst:234
+#: ../../tutorial/installation/step-by-step.rst:308
 msgid "Let Nginx verify vhost syntax and restart Nginx when the ``-t`` configtest passes::"
 msgstr "Laat Nginx controleren of je geen typefouten hebt gemaakt en herstart Nginx vervolgens wanneer de ``-t`` configtest lukt::"
 
-#: ../../tutorial/installation/step-by-step.rst:242
-msgid "10. Supervisor"
-msgstr "10. Supervisor"
+#: ../../tutorial/installation/step-by-step.rst:317
+msgid "9. Supervisor"
+msgstr "9. Supervisor"
 
-#: ../../tutorial/installation/step-by-step.rst:243
+#: ../../tutorial/installation/step-by-step.rst:318
 msgid "Now we configure `Supervisor <http://supervisord.org/>`_, which is used to run our application's web interface and background jobs used. It's also configured to bring the entire application up again after a shutdown or reboot."
 msgstr "We gaan nu `Supervisor <http://supervisord.org/>`_ configureren, die gebruikt wordt om de applicatie en achtergrondprocessen te draaien. Tevens zorgt Supervisor ervoor dat deze processen bij het (opnieuw) opstarten automatisch draaien."
 
-#: ../../tutorial/installation/step-by-step.rst:246
+#: ../../tutorial/installation/step-by-step.rst:321
 msgid "Copy the configuration files for Supervisor::"
 msgstr "Kopieer de configuratie-bestanden voor Supervisor::"
 
-#: ../../tutorial/installation/step-by-step.rst:252
-msgid "Login to ``supervisorctl`` management console::"
-msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
+#: ../../tutorial/installation/step-by-step.rst:328
+msgid "Enter these commands. It will ask Supervisor to recheck its config directory and use/reload the files::"
+msgstr "Voer de volgende commando's in. Deze zorgen ervoor dat Supervisor de eigen configuratie opnieuw controleert en toepast::"
 
-#: ../../tutorial/installation/step-by-step.rst:256
-msgid "Enter these commands (**listed after the** ``>``). It will ask Supervisor to recheck its config directory and use/reload the files::"
-msgstr "Voer de volgende commando's in (**degene na de** ``>``). Dit zorgt ervoor dat Supervisor zijn eigen configuratie opnieuw controleert en toepast::"
+#: ../../tutorial/installation/step-by-step.rst:333
+msgid "Three processes should be ``RUNNING``. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times."
+msgstr "Er zouden drie processen moeten draaien met ``RUNNING``. Kijk goed of ze uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn gekomen. Je kunt het overzicht verversen door het ``status`` command een paar keer uit te voeren."
 
-#: ../../tutorial/installation/step-by-step.rst:261
-msgid "Three processes should be started or running. Make sure they don't end up in ``ERROR`` or ``BACKOFF`` state, so refresh with the ``status`` command a few times."
-msgstr "Er draaien als het goed is altijd **drie** processen. Kijk goed of ze uiteindelijk niet in ``ERROR`` of ``BACKOFF`` status terecht zijn gekomen. Je kunt het overzicht verversen door ``status`` te typen."
-
-#: ../../tutorial/installation/step-by-step.rst:263
-msgid "When still in ``supervisorctl``'s console, type::"
-msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"
-
-#: ../../tutorial/installation/step-by-step.rst:267
+#: ../../tutorial/installation/step-by-step.rst:339
 msgid "Example of everything running well::"
 msgstr "Voorbeeld van wanneer alles naar behoren draait::"
 
-#: ../../tutorial/installation/step-by-step.rst:273
+#: ../../tutorial/installation/step-by-step.rst:345
 msgid "Want to quit supervisor? Press ``CTRL + D`` to exit supervisor command line."
 msgstr "Wil je uit supervisor? Druk dan op ``CTRL + D`` om uit supervisor te gaan."
 
-#: ../../tutorial/installation/step-by-step.rst:278
+#: ../../tutorial/installation/step-by-step.rst:350
 msgid ":doc:`Finished? Go to setting up the application</tutorial/setting-up>`."
 msgstr ":doc:`Klaar? Ga dan naar applicatie instellen</tutorial/setting-up>`."
 
@@ -340,3 +360,36 @@ msgstr ":doc:`Klaar? Ga dan naar applicatie instellen</tutorial/setting-up>`."
 
 #~ msgid "The application will also need the appropriate database client, which is not installed by default. For this I created two ready-to-use requirements files, which will also install all other dependencies required, such as the Django framework."
 #~ msgstr "De applicatie heeft een databaseconnector nodig om de gegevens te kunnen opslaan. Daarvoor heb ik een tweetal requirements-bestanden gemaakt, waar alles al in staat wat nodig is. Zoals bijvoorbeeld Django en de databaseverbinding."
+
+#~ msgid "Make sure you are acting here as ``root`` or ``sudo`` user. If not, press CTRL + D to log out of the ``dsmr`` user."
+#~ msgstr "Zorg ervoor dat je hier ``root``- of ``sudo``-gebruiker bent. Zo niet, druk op CTRL + D om uit te loggen als ``dsmr`` gebruiker."
+
+#~ msgid "Make sure you are now acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"
+#~ msgstr "Zorg ervoor dat je ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: ``sudo su - dsmr``)"
+
+#~ msgid "6. Virtualenv"
+#~ msgstr "6. VirtualEnv"
+
+#~ msgid "The dependencies our application uses are stored in a separate environment, also called **VirtualEnv**."
+#~ msgstr "Alle (externe) afhankelijkheden worden opgeslagen in een aparte omgeving, ook wel **VirtualEnv** genoemd."
+
+#~ msgid "Make sure you are still acting as ``dsmr`` user (if not then enter: ``sudo su - dsmr``)"
+#~ msgstr "Zorg ervoor dat je nog steeds ingelogd bent als ``dsmr``-gebruiker (zo niet, typ dan: ``sudo su - dsmr``)"
+
+#~ msgid "**Installation of the requirements below might take a while**, depending on your Internet connection, RaspberryPi speed and resources (generally CPU) available. Nothing to worry about. :]"
+#~ msgstr "**De installatie van de volgende afhankelijkheden kan enige tijd in beslag nemen**. Dit varieert en is sterk afhankelijk van de snelheid van je Internet-verbinding en je RaspberryPi. Je hoeft je dus niet zorgen te maken wanneer dit lang lijkt te duren. :]"
+
+#~ msgid "Make sure you've read and executed the note above, because you'll need it for the next chapter."
+#~ msgstr "Zorg ervoor dat je de bovenstaande notitie hebt gelezen en uitgevoerd, aangezien ze nodig zijn voor het volgende hoofdstuk."
+
+#~ msgid "7. Application configuration & setup"
+#~ msgstr "7. Applicatieconfiguratie"
+
+#~ msgid "Create an application superuser with the following command."
+#~ msgstr "Maak een supergebruiker aan met het volgende commando."
+
+#~ msgid "Login to ``supervisorctl`` management console::"
+#~ msgstr "Wissel naar de ``supervisorctl`` beheerconsole::"
+
+#~ msgid "When still in ``supervisorctl``'s console, type::"
+#~ msgstr "Typ het volgende wanneer je nog in ``supervisorctl``'s console bent::"

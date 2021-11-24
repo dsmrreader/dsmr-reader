@@ -40,7 +40,7 @@ msgid "Execute::"
 msgstr "Voer uit::"
 
 #: ../../how-to/database/postgresql-restore-backup.rst:22
-msgid "If the database exists, you see output similar to this::"
+msgid "If the database exists, you will see output similar to this::"
 msgstr "Indien de database bestaat, dan zou je ongeveer deze output moeten zien::"
 
 #: ../../how-to/database/postgresql-restore-backup.rst:30
