@@ -223,18 +223,28 @@ Rename any legacy setting names in ``.env`` you find (see below)::
 
 If you find any listed on the left hand side, rename them to the one on the right hand side::
 
-    SECRET_KEY       ️      ➡️    ️      DJANGO_SECRET_KEY
-    DB_ENGINE        ️      ➡️    ️      DJANGO_DATABASE_ENGINE
-    DB_NAME          ️      ➡️    ️      DJANGO_DATABASE_NAME
-    DB_USER          ️      ➡️    ️      DJANGO_DATABASE_USER
-    DB_PASS          ️      ➡️    ️      DJANGO_DATABASE_PASSWORD
-    DB_HOST          ️      ➡️    ️      DJANGO_DATABASE_HOST
-    DB_PORT          ️      ➡️    ️      DJANGO_DATABASE_PORT
-    CONN_MAX_AGE     ️      ➡️    ️      DJANGO_DATABASE_CONN_MAX_AGE
-    TZ               ️      ➡️    ️      DJANGO_TIME_ZONE
-    DSMR_USER        ️      ➡️    ️      DSMRREADER_ADMIN_USER
-    DSMR_PASSWORD    ️      ➡️    ️      DSMRREADER_ADMIN_PASSWORD
+    # Core env vars/settings
+    SECRET_KEY       ️         ➡️    ️      DJANGO_SECRET_KEY
+    DB_ENGINE        ️         ➡️    ️      DJANGO_DATABASE_ENGINE
+    DB_NAME          ️         ➡️    ️      DJANGO_DATABASE_NAME
+    DB_USER          ️         ➡️    ️      DJANGO_DATABASE_USER
+    DB_PASS          ️         ➡️    ️      DJANGO_DATABASE_PASSWORD
+    DB_HOST          ️         ➡️    ️      DJANGO_DATABASE_HOST
+    DB_PORT          ️         ➡️    ️      DJANGO_DATABASE_PORT
+    CONN_MAX_AGE     ️         ➡️    ️      DJANGO_DATABASE_CONN_MAX_AGE
+    TZ               ️         ➡️    ️      DJANGO_TIME_ZONE
+    DSMR_USER        ️         ➡️    ️      DSMRREADER_ADMIN_USER
+    DSMR_PASSWORD    ️         ➡️    ️      DSMRREADER_ADMIN_PASSWORD
 
+    # Remote datalogger env vars/settings, usually only used with Docker
+    DATALOGGER_INPUT_METHOD    ️➡️    ️     DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD
+    DATALOGGER_SERIAL_PORT     ️➡️    ️     DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT
+    DATALOGGER_SERIAL_BAUDRATE ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE
+    DATALOGGER_API_HOSTS    ️  ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_API_HOSTS
+    DATALOGGER_API_KEYS    ️   ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_API_KEYS
+    DATALOGGER_TIMEOUT    ️    ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_TIMEOUT
+    DATALOGGER_SLEEP    ️      ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_SLEEP
+    DATALOGGER_MIN_SLEEP_FOR_RECONNECT ➡️   DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT
 
 Check DSMR-reader::
 

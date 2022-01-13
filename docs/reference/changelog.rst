@@ -56,14 +56,14 @@ v5.0.0 - 2021-xx-xx
 - ``Removed`` Dropped ``TZ`` env var, use ``DJANGO_TIME_ZONE`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
 - ``Removed`` Dropped ``DSMR_USER`` env var, use ``DSMRREADER_ADMIN_USER`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
 - ``Removed`` Dropped ``DSMR_PASSWORD`` env var, use ``DSMRREADER_ADMIN_PASSWORD`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DATALOGGER_INPUT_METHOD`` env var, use ``REMOTE_DATALOGGER_INPUT_METHOD`` instead
-- ``Removed`` Dropped ``DATALOGGER_SERIAL_PORT`` env var, use ``REMOTE_DATALOGGER_SERIAL_PORT`` instead
-- ``Removed`` Dropped ``DATALOGGER_SERIAL_BAUDRATE`` env var, use ``REMOTE_DATALOGGER_SERIAL_BAUDRATE`` instead
-- ``Removed`` Dropped ``DATALOGGER_API_HOSTS`` env var, use ``REMOTE_DATALOGGER_API_HOSTS`` instead
-- ``Removed`` Dropped ``DATALOGGER_API_KEYS`` env var, use ``REMOTE_DATALOGGER_API_KEYS`` instead
-- ``Removed`` Dropped ``DATALOGGER_TIMEOUT`` env var, use ``REMOTE_DATALOGGER_TIMEOUT`` instead
-- ``Removed`` Dropped ``DATALOGGER_SLEEP`` env var, use ``REMOTE_DATALOGGER_SLEEP`` instead
-- ``Removed`` Dropped ``DATALOGGER_MIN_SLEEP_FOR_RECONNECT`` env var, use ``REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT`` instead
+- ``Removed`` Dropped ``DATALOGGER_INPUT_METHOD`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD`` instead
+- ``Removed`` Dropped ``DATALOGGER_SERIAL_PORT`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT`` instead
+- ``Removed`` Dropped ``DATALOGGER_SERIAL_BAUDRATE`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE`` instead
+- ``Removed`` Dropped ``DATALOGGER_API_HOSTS`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_API_HOSTS`` instead
+- ``Removed`` Dropped ``DATALOGGER_API_KEYS`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_API_KEYS`` instead
+- ``Removed`` Dropped ``DATALOGGER_TIMEOUT`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_TIMEOUT`` instead
+- ``Removed`` Dropped ``DATALOGGER_SLEEP`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_SLEEP`` instead
+- ``Removed`` Dropped ``DATALOGGER_MIN_SLEEP_FOR_RECONNECT`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT`` instead
 
 
 ----

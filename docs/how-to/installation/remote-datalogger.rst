@@ -74,7 +74,7 @@ API config (``.env``)
 .. attention::
 
     Since DSMR-reader ``v5.x``, all env vars for this script were prefixed with ``REMOTE_``.
-    E.g.: ``DATALOGGER_INPUT_METHOD`` is now ``REMOTE_DATALOGGER_INPUT_METHOD``.
+    E.g.: ``DATALOGGER_INPUT_METHOD`` is now ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD``.
 
     This only affects **new installations** of the script.
 
@@ -85,28 +85,28 @@ API config (``.env``)
 Create another file ``/home/dsmr/.env`` and add as contents::
 
     ### The DSMR-reader API('s) to forward telegrams to:
-    REMOTE_DATALOGGER_API_HOSTS=
-    REMOTE_DATALOGGER_API_KEYS=
+    DSMRREADER_REMOTE_DATALOGGER_API_HOSTS=
+    DSMRREADER_REMOTE_DATALOGGER_API_KEYS=
 
 Keep the file open for multiple edits / additions below.
 
-Add the schema (``http://``/``https://``) and hostname/port to ``REMOTE_DATALOGGER_API_HOSTS``. Add the API key to ``REMOTE_DATALOGGER_API_KEYS``. For example::
+Add the schema (``http://``/``https://``) and hostname/port to ``DSMRREADER_REMOTE_DATALOGGER_API_HOSTS``. Add the API key to ``DSMRREADER_REMOTE_DATALOGGER_API_KEYS``. For example::
 
     # Example with default port:
-    REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78
-    REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH
+    DSMRREADER_REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78
+    DSMRREADER_REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH
 
     # Example with non standard port, e.g. Docker:
-    REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78:7777
-    REMOTE_DATALOGGER_API_KEYS=0987654321HGFEDCBA
+    DSMRREADER_REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78:7777
+    DSMRREADER_REMOTE_DATALOGGER_API_KEYS=0987654321HGFEDCBA
 
 .. tip::
 
-    Are you using the remote datalogger for multiple instances of DSMR-reader? Then use ``REMOTE_DATALOGGER_API_HOSTS`` and ``REMOTE_DATALOGGER_API_KEYS`` as comma separated lists::
+    Are you using the remote datalogger for multiple instances of DSMR-reader? Then use ``DSMRREADER_REMOTE_DATALOGGER_API_HOSTS`` and ``DSMRREADER_REMOTE_DATALOGGER_API_KEYS`` as comma separated lists::
 
         # Example with multiple DSMR-reader installations:
-        REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78,http://87.65.43.21:7777
-        REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH,0987654321HGFEDCBA
+        DSMRREADER_REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78,http://87.65.43.21:7777
+        DSMRREADER_REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH,0987654321HGFEDCBA
 
         ### API host "http://12.34.56.78"      uses API key "1234567890ABCDEFGH"
         ### API host "http://87.65.43.21:7777" uses API key "0987654321HGFEDCBA"
@@ -123,20 +123,20 @@ Are you using a cable to read telegrams directly from a serial port?
 
 Then add the following contents to ``/home/dsmr/.env``::
 
-    REMOTE_DATALOGGER_INPUT_METHOD=serial
-    REMOTE_DATALOGGER_SERIAL_PORT=/dev/ttyUSB0
+    DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=serial
+    DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT=/dev/ttyUSB0
 
     # DSMR meter version 4/5
-    REMOTE_DATALOGGER_SERIAL_BAUDRATE=115200
-    REMOTE_DATALOGGER_SERIAL_BYTESIZE=8
-    REMOTE_DATALOGGER_SERIAL_PARITY=N
+    DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE=115200
+    DSMRREADER_REMOTE_DATALOGGER_SERIAL_BYTESIZE=8
+    DSMRREADER_REMOTE_DATALOGGER_SERIAL_PARITY=N
 
 When needing a different port or serial settings, change the values accordingly. E.g.: For an older smart meter::
 
     # DSMR meter version 2/3
-    REMOTE_DATALOGGER_SERIAL_BAUDRATE=9600
-    REMOTE_DATALOGGER_SERIAL_BYTESIZE=7
-    REMOTE_DATALOGGER_SERIAL_PARITY=E
+    DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE=9600
+    DSMRREADER_REMOTE_DATALOGGER_SERIAL_BYTESIZE=7
+    DSMRREADER_REMOTE_DATALOGGER_SERIAL_PARITY=E
 
 
 B. Network socket (``.env``)
@@ -145,11 +145,11 @@ Are you using a network socket for reading the telegrams? E.g.: ``ser2net``.
 
 Then add the following contents to ``/home/dsmr/.env``::
 
-    REMOTE_DATALOGGER_INPUT_METHOD=ipv4
-    REMOTE_DATALOGGER_NETWORK_HOST=
-    REMOTE_DATALOGGER_NETWORK_PORT=
+    DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=ipv4
+    DSMRREADER_REMOTE_DATALOGGER_NETWORK_HOST=
+    DSMRREADER_REMOTE_DATALOGGER_NETWORK_PORT=
 
-Set the hostname or IP address in ``REMOTE_DATALOGGER_NETWORK_HOST`` and the port in ``REMOTE_DATALOGGER_NETWORK_PORT``.
+Set the hostname or IP address in ``DSMRREADER_REMOTE_DATALOGGER_NETWORK_HOST`` and the port in ``DSMRREADER_REMOTE_DATALOGGER_NETWORK_PORT``.
 
 
 Other settings (``.env``)
@@ -157,11 +157,11 @@ Other settings (``.env``)
 
 These settings are **optional** but can be tweaked when required:
 
-- ``REMOTE_DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value.
+- ``DSMRREADER_REMOTE_DATALOGGER_TIMEOUT``: The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default value.
 
-- ``REMOTE_DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value.
+- ``DSMRREADER_REMOTE_DATALOGGER_SLEEP``: The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default value.
 
-- ``REMOTE_DATALOGGER_DEBUG_LOGGING``: Set to ``true`` or ``1`` to enable verbose debug logging. Omit to disable. Warning: Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!
+- ``DSMRREADER_REMOTE_DATALOGGER_DEBUG_LOGGING``: Set to ``true`` or ``1`` to enable verbose debug logging. Omit to disable. Warning: Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!
 
 Supervisor
 ^^^^^^^^^^
