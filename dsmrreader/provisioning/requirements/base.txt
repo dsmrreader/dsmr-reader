@@ -14,6 +14,7 @@ dropbox==11.21.0
 gunicorn==20.1.0
 influxdb-client==1.23
 paho-mqtt==1.5.1
+psycopg2-binary==2.9.2
 pyserial==3.5
 pyserial-asyncio==0.6
 python-dateutil==2.8.2
