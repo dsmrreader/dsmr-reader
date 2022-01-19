@@ -43,11 +43,11 @@ sh $CURRENT_DIR/clear-po-headers.sh
 
 
 echo ""
-echo "--- Checking missing doc translations..."
-cd $CURRENT_DIR/../docs/
-poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
+echo "--- Checking missing translations..."
+poetry run sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
 
 if [ $? -ne 1 ]; then
-    echo "[!] Pending documentation translations [!]"
+    echo "[!] Pending translations [!]"
+    poetry run sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
     exit 1;
 fi
