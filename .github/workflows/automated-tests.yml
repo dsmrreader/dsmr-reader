@@ -15,16 +15,16 @@ jobs:
     timeout-minutes: 10  # Don't run forever when stale
     strategy:
       matrix:
-        python-version:
-          - '3.7'
-          - '3.8'
-          - '3.9'
-          - '3.10'
-    env:
-      # Do not log verbosely
-      DSMRREADER_LOGLEVEL: ERROR
-      # This version will check some generic stuff that should not differ among Python versions
-      MAIN_PYTHON_VERSION: '3.9'
+        include:
+          - python-version: 3.7
+            run-all-steps: false
+          - python-version: 3.8
+            run-all-steps: false
+          - python-version: 3.9
+            # This version will check some generic stuff that should not differ among Python versions, greatly reducing run duration
+            run-all-steps: true
+          - python-version: 3.10
+            run-all-steps: false
     services:
       postgres:
         image: 'postgres:12-alpine'
@@ -44,6 +44,9 @@ jobs:
             MYSQL_DATABASE: test_dsmrreader
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
+    env:
+      # Do not log verbosely
+      DSMRREADER_LOGLEVEL: ERROR
     steps:
       - uses: actions/checkout@v2
 
@@ -72,16 +75,16 @@ jobs:
           poetry check
           poetry install
 
-      - name: Check pylama (only runs on main Python job)
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+      - name: Check pylama (only runs on one job)
+        if: ${{ matrix.run-all-steps == true }}
         run: poetry run pylama
 
-      - name: Check autopep8 (only runs on main Python job)
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+      - name: Check autopep8 (only runs on one job)
+        if: ${{ matrix.run-all-steps == true }}
         run: poetry run autopep8 -r . --diff --exit-code
 
-      - name: Check translation status (only runs on main Python job)
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+      - name: Check translation status (only runs on one job)
+        if: ${{ matrix.run-all-steps == true }}
         run: sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po | wc -l | grep -e '^0$'
 
       - name: Run SQLite tests
@@ -91,8 +94,8 @@ jobs:
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-      - name: Run PostgreSQL tests (only runs on main Python job)
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+      - name: Run PostgreSQL tests (only runs on one job)
+        if: ${{ matrix.run-all-steps == true }}
         run: poetry run py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -104,8 +107,8 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
 
-      - name: Run MySQL tests (only runs on main Python job)
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+      - name: Run MySQL tests (only runs on one job)
+        if: ${{ matrix.run-all-steps == true }}
         run: poetry run py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -117,20 +120,20 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: ''
 
-      - name: Code coverage upload (only runs on main Python job)
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+      - name: Code coverage upload (only runs on one job)
+        if: ${{ matrix.run-all-steps == true }}
         uses: codecov/codecov-action@v1
 
       # (requirements.txt) check - Ensures it's in sync with Poetry - Required until Poetry-only support (if ever)
-      - name: Install Pip dependencies (only runs on main Python job)
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+      - name: Install Pip dependencies (only runs on one job)
+        if: ${{ matrix.run-all-steps == true }}
         run: |
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
 
-      - name: Check for Pip dependency updates, using Poetry venv (only runs on main Python job)
+      - name: Check for Pip dependency updates, using Poetry venv (only runs on one job)
         # The pip and packaging updates are to prevent false positives
-        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
+        if: ${{ matrix.run-all-steps == true }}
         run: |
           poetry run pip install --upgrade pip packaging
           poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
