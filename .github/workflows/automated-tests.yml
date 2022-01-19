@@ -72,15 +72,15 @@ jobs:
           poetry check
           poetry install
 
-      - name: Check pylama (only checked on main version)
+      - name: Check pylama (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run pylama
 
-      - name: Check autopep8 (only checked on main version)
+      - name: Check autopep8 (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run autopep8 -r . --diff --exit-code
 
-      - name: Check translation status (only checked on main version)
+      - name: Check translation status (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
 
@@ -91,7 +91,7 @@ jobs:
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-      - name: Run PostgreSQL tests (only checked on main version)
+      - name: Run PostgreSQL tests (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run py.test
         env:
@@ -104,7 +104,7 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
 
-      - name: Run MySQL tests (only checked on main version)
+      - name: Run MySQL tests (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run py.test
         env:
@@ -117,18 +117,18 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: ''
 
-      - name: Code coverage upload (only checked on main version)
+      - name: Code coverage upload (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         uses: codecov/codecov-action@v1
 
       # (requirements.txt) check - Ensures it's in sync with Poetry - Required until Poetry-only support (if ever)
-      - name: Install Pip dependencies (only checked on main version)
+      - name: Install Pip dependencies (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: |
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
 
-      - name: Check for Pip dependency updates, using Poetry venv (only checked on main version)
+      - name: Check for Pip dependency updates, using Poetry venv (only runs on Python ${{ env.MAIN_PYTHON_VERSION }} job)
         # The pip and packaging updates are to prevent false positives
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: |
