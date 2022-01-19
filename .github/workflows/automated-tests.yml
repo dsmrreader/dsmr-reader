@@ -20,7 +20,11 @@ jobs:
           - '3.8'
           - '3.9'
           - '3.10'
-
+    env:
+      # Do not log verbosely
+      DSMRREADER_LOGLEVEL: ERROR
+      # This version will check some generic stuff that should not differ among Python versions
+      MAIN_PYTHON_VERSION: '3.9'
     services:
       postgres:
         image: 'postgres:12-alpine'
@@ -40,9 +44,6 @@ jobs:
             MYSQL_DATABASE: test_dsmrreader
             MYSQL_ALLOW_EMPTY_PASSWORD: yes
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
-    env:
-        # Do not log verbosely
-        DSMRREADER_LOGLEVEL: ERROR
     steps:
       - uses: actions/checkout@v2
 
@@ -71,13 +72,16 @@ jobs:
           poetry check
           poetry install
 
-      - name: Check pylama
+      - name: Check pylama (only checked on main version)
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run pylama
 
-      - name: Check autopep8
+      - name: Check autopep8 (only checked on main version)
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run autopep8 -r . --diff --exit-code
 
-      - name: Check translation status
+      - name: Check translation status (only checked on main version)
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
 
       - name: Run SQLite tests
@@ -87,7 +91,8 @@ jobs:
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-      - name: Run PostgreSQL tests
+      - name: Run PostgreSQL tests (only checked on main version)
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -99,7 +104,8 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
 
-      - name: Run MySQL tests
+      - name: Run MySQL tests (only checked on main version)
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: poetry run py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -111,17 +117,20 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: ''
 
-      - name: Code coverage upload
+      - name: Code coverage upload (only checked on main version)
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         uses: codecov/codecov-action@v1
 
       # (requirements.txt) check - Ensures it's in sync with Poetry - Required until Poetry-only support (if ever)
-      - name: Install Pip dependencies
+      - name: Install Pip dependencies (only checked on main version)
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: |
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
 
-      - name: Check for Pip dependency updates, using Poetry venv
+      - name: Check for Pip dependency updates, using Poetry venv (only checked on main version)
         # The pip and packaging updates are to prevent false positives
+        if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
         run: |
           poetry run pip install --upgrade pip packaging
           poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
