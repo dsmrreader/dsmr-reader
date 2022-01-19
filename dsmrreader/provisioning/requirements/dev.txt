@@ -2,11 +2,11 @@
 poetry
 polib==1.1.1
 pylama==7.7.1
-pytest-cov==3.0
-pytest-django==4.4.0
-pytest-xdist==2.4.0
-mysqlclient==2.0.3
-sphinx==4.2.0
+pytest-cov==3.0.0
+pytest-django==4.5.2
+pytest-xdist==2.5.0
+mysqlclient
+sphinx==4.4.0
 sphinx-autobuild==2021.3.14
 sphinx-intl==2.0.1
 sphinx-rtd-theme==1.0.0
