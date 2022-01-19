@@ -9,22 +9,15 @@ on:
   pull_request: ~
 
 jobs:
-  tests:
+  # The most verbose and complete job.
+  main_test:
     name: 'Python ${{ matrix.python-version }}'
     runs-on: ubuntu-latest
     timeout-minutes: 10  # Don't run forever when stale
     strategy:
       matrix:
-        include:
-          - python-version: '3.7'
-            run-all-steps: false
-          - python-version: '3.8'
-            run-all-steps: false
-          - python-version: '3.9'
-            # This version will check some generic stuff that should not differ among Python versions, greatly reducing run duration
-            run-all-steps: true
-          - python-version: '3.10'
-            run-all-steps: false
+        python-version:
+          - 3.9
     services:
       postgres:
         image: 'postgres:12-alpine'
@@ -75,16 +68,13 @@ jobs:
           poetry check
           poetry install
 
-      - name: Check pylama (only runs on one job)
-        if: ${{ matrix.run-all-steps == true }}
+      - name: Check pylama
         run: poetry run pylama
 
-      - name: Check autopep8 (only runs on one job)
-        if: ${{ matrix.run-all-steps == true }}
+      - name: Check autopep8
         run: poetry run autopep8 -r . --diff --exit-code
 
-      - name: Check translation status (only runs on one job)
-        if: ${{ matrix.run-all-steps == true }}
+      - name: Check translation status
         run: sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po | wc -l | grep -e '^0$'
 
       - name: Run SQLite tests
@@ -94,8 +84,7 @@ jobs:
             DJANGO_SECRET_KEY: non-production-value
             DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
 
-      - name: Run PostgreSQL tests (only runs on one job)
-        if: ${{ matrix.run-all-steps == true }}
+      - name: Run PostgreSQL tests
         run: poetry run py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -107,8 +96,7 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
 
-      - name: Run MySQL tests (only runs on one job)
-        if: ${{ matrix.run-all-steps == true }}
+      - name: Run MySQL tests
         run: poetry run py.test
         env:
             DJANGO_SETTINGS_MODULE: dsmrreader.config.test
@@ -120,23 +108,70 @@ jobs:
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: ''
 
-      - name: Code coverage upload (only runs on one job)
-        if: ${{ matrix.run-all-steps == true }}
+      - name: Code coverage upload
         uses: codecov/codecov-action@v1
 
       # (requirements.txt) check - Ensures it's in sync with Poetry - Required until Poetry-only support (if ever)
-      - name: Install Pip dependencies (only runs on one job)
-        if: ${{ matrix.run-all-steps == true }}
+      - name: Install Pip dependencies
         run: |
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
           poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
 
-      - name: Check for Pip dependency updates, using Poetry venv (only runs on one job)
+      - name: Check for Pip dependency updates, using Poetry venv
         # The pip and packaging updates are to prevent false positives
-        if: ${{ matrix.run-all-steps == true }}
         run: |
           poetry run pip install --upgrade pip packaging
           poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
 
           poetry update --dry-run | grep -v "Skipped"
           exit 1
+
+  # Shallow tests for other supported Python versions.
+  matrix_tests:
+    needs: main_test
+    name: 'Python ${{ matrix.python-version }}'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python-version:
+          - '3.7'
+          - '3.8'
+          - '3.10'
+    env:
+      # Do not log verbosely
+      DSMRREADER_LOGLEVEL: ERROR
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install APT dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+
+      - name: Cached dependencies & virtualenv
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/pypoetry/
+            ~/dsmr-reader/dsmr-reader/.venv
+          key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip poetry
+          poetry config virtualenvs.in-project true
+          poetry check
+          poetry install
+
+      - name: Run SQLite tests
+        run: poetry run py.test --cov --cov-report=xml
+        env:
+            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
+            DJANGO_SECRET_KEY: non-production-value
+            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
