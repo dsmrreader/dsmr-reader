@@ -209,7 +209,10 @@ class TestScriptErrors(TestCase):
         with self.assertRaises(RuntimeError) as e:
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
-        self.assertEqual(str(e.exception), 'DSMRREADER_REMOTE_DATALOGGER_API_HOSTS or DSMRREADER_REMOTE_DATALOGGER_API_KEYS not set')
+        self.assertEqual(
+            str(e.exception),
+            'DSMRREADER_REMOTE_DATALOGGER_API_HOSTS or DSMRREADER_REMOTE_DATALOGGER_API_KEYS not set'
+        )
 
     @mock.patch.dict('os.environ', dict(
         DSMRREADER_REMOTE_DATALOGGER_API_HOSTS='http://127.0.0.1,https://localhost',
@@ -222,7 +225,8 @@ class TestScriptErrors(TestCase):
 
         self.assertEqual(
             str(e.exception),
-            'The number of DSMRREADER_REMOTE_DATALOGGER_API_HOSTS and DSMRREADER_REMOTE_DATALOGGER_API_KEYS given do not match each other'
+            'The number of DSMRREADER_REMOTE_DATALOGGER_API_HOSTS and DSMRREADER_REMOTE_DATALOGGER_API_KEYS given '
+            'do not match each other'
         )
 
     @mock.patch.dict('os.environ', dict(

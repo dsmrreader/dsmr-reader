@@ -111,8 +111,12 @@ def main():  # noqa: C901
     DATALOGGER_TIMEOUT = decouple.config('DSMRREADER_REMOTE_DATALOGGER_TIMEOUT', default=20, cast=float)
     DATALOGGER_SLEEP = decouple.config('DSMRREADER_REMOTE_DATALOGGER_SLEEP', default=0.5, cast=float)
     DATALOGGER_INPUT_METHOD = decouple.config('DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD')
-    DATALOGGER_API_HOSTS = decouple.config('DSMRREADER_REMOTE_DATALOGGER_API_HOSTS', cast=decouple.Csv(post_process=tuple))
-    DATALOGGER_API_KEYS = decouple.config('DSMRREADER_REMOTE_DATALOGGER_API_KEYS', cast=decouple.Csv(post_process=tuple))
+    DATALOGGER_API_HOSTS = decouple.config(
+        'DSMRREADER_REMOTE_DATALOGGER_API_HOSTS', cast=decouple.Csv(post_process=tuple)
+    )
+    DATALOGGER_API_KEYS = decouple.config(
+        'DSMRREADER_REMOTE_DATALOGGER_API_KEYS', cast=decouple.Csv(post_process=tuple)
+    )
     DATALOGGER_MIN_SLEEP_FOR_RECONNECT = decouple.config(
         'DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT', default=1.0, cast=float
     )
@@ -122,7 +126,8 @@ def main():  # noqa: C901
 
     if len(DATALOGGER_API_HOSTS) != len(DATALOGGER_API_KEYS):
         raise RuntimeError(
-            'The number of DSMRREADER_REMOTE_DATALOGGER_API_HOSTS and DSMRREADER_REMOTE_DATALOGGER_API_KEYS given do not match each other'
+            'The number of DSMRREADER_REMOTE_DATALOGGER_API_HOSTS and DSMRREADER_REMOTE_DATALOGGER_API_KEYS given do '
+            'not match each other'
         )
 
     serial_kwargs = dict(
@@ -133,7 +138,9 @@ def main():  # noqa: C901
         serial_kwargs.update(dict(
             url_or_port=decouple.config('DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT'),
             baudrate=decouple.config('DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE', cast=int, default=115200),
-            bytesize=decouple.config('DSMRREADER_REMOTE_DATALOGGER_SERIAL_BYTESIZE', cast=int, default=serial.EIGHTBITS),
+            bytesize=decouple.config(
+                'DSMRREADER_REMOTE_DATALOGGER_SERIAL_BYTESIZE', cast=int, default=serial.EIGHTBITS
+            ),
             parity=decouple.config('DSMRREADER_REMOTE_DATALOGGER_SERIAL_PARITY', cast=str, default=serial.PARITY_NONE),
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
