@@ -21,6 +21,6 @@ poetry run sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0
 
 if [ $? -ne 1 ]; then
     echo "[!] Pending translations [!]"
-    poetry run sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v changelog.po
+    poetry run sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
     exit 1;
 fi

@@ -82,7 +82,7 @@ jobs:
 
       - name: Check translation status (only runs on main Python job)
         if: ${{ matrix.python-version == env.MAIN_PYTHON_VERSION }}
-        run: poetry run sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
+        run: sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po | wc -l | grep -e '^0$'
 
       - name: Run SQLite tests
         run: poetry run py.test --cov --cov-report=xml

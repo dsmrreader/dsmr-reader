@@ -25,8 +25,7 @@ Check the generated or updated PO-files and translate them.
 
 ### Checking translation status
 ```
-cd docs
-sphinx-intl stat | grep -v "0 fuzzy, 0 untranslated"
+sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po
 ```
 
 
