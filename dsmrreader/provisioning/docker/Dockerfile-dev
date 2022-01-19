@@ -15,8 +15,6 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-COPY ./dsmrreader/provisioning/requirements/base.txt /app/dsmrreader/provisioning/requirements/
-COPY ./dsmrreader/provisioning/requirements/dev.txt /app/dsmrreader/provisioning/requirements/
-
+COPY ./dsmrreader/provisioning/requirements/base.txt ./dsmrreader/provisioning/requirements/dev.txt /app/dsmrreader/provisioning/requirements/
 RUN pip3 install pip --upgrade
 RUN pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt

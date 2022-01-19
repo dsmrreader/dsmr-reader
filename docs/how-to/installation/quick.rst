@@ -21,7 +21,7 @@ System packages
 Execute::
 
     # Packages
-    sudo apt-get install -y postgresql cu nginx supervisor git python3 python3-psycopg2 python3-pip
+    sudo apt-get install -y postgresql cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-venv
 
 .. tip::
 
@@ -79,12 +79,11 @@ Continue::
     sudo chown -R dsmr:dsmr /home/dsmr/
 
     # Dependencies
-    sudo pip3 install poetry
-    sudo -u dsmr poetry config virtualenvs.in-project true
+    sudo -u dsmr python3 -m venv ~/dsmr-reader/.venv/
     sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
-    sudo sh -c 'echo "poetry shell" >> /home/dsmr/.bashrc'
+    sudo sh -c 'echo "source ~/dsmr-reader/.venv/bin/activate" >> ~/.bashrc'
     sudo su - dsmr
-    poetry install --no-dev
+    pip3 install -r ~/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
     CTRL + D (exit)
     CTRL + D (logout)
 

@@ -73,10 +73,11 @@ Optional: Restore a database backup
 ---------------
 - Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::
 
-    sudo apt-get install -y cu nginx supervisor git python3 python3-psycopg2 python3-pip
+    sudo apt-get install -y cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-venv
 
 The CU program allows easily testing for your DSMR serial connection.
 It's very basic but also very effective to simply test whether your serial cable setup works properly.
+
 
 3. Application user
 -------------------
@@ -169,51 +170,38 @@ This may take a few seconds. When finished, you should see a new folder called `
 
 The dependencies our application uses need to be downloaded and store as well.
 
-- Make sure you are **not** ``dsmr`` user here.
+Make sure you are currently (still) ``dsmr`` user here.
 
 - Execute::
 
     whoami
 
-    # Still "dsmr"? Execute CTRL+D or:
-    logout
-
-- Install Poetry::
-
-    sudo pip3 install poetry
-
-- Execute::
-
+    # Not "dsmr"? Execute:
     sudo su - dsmr
 
-- Configure Poetry::
+- Create virtualenv::
 
-    poetry config virtualenvs.in-project true
+    python3 -m venv ~/dsmr-reader/.venv/
 
-Each time you log in as ``dsmr`` user, you will have to change working dir and activate Poetry::
-
-    # cd ~/dsmr-reader
-    # poetry shell
-
-- Let's have both commands executed **automatically** every time we login as ``dsmr`` user, by adding them ``~/.bashrc`` file::
+- Ease usage of virtualenv later::
 
     bash -c 'echo "cd ~/dsmr-reader" >> ~/.bashrc'
-    bash -c 'echo "poetry shell" >> ~/.bashrc'
+    bash -c 'echo "source ~/dsmr-reader/.venv/bin/activate" >> ~/.bashrc'
 
 You can easily test whether you've configured this correctly by logging out the ``dsmr`` user (CTRL + D or type ``logout``) and login again using ``sudo su - dsmr``.
 
 You should see the terminal have a ``(.venv)`` prefix now, for example: ``(.venv)dsmr@rasp:~/dsmr-reader $``
 
-It should prompt something similar to::
+Also, ``python3`` should point to the virtualenv::
 
-    Creating virtualenv dsmr-reader in /home/dsmr/dsmr-reader/.venv
-    Spawning shell within /home/dsmr/dsmr-reader/.venv
-    . /home/dsmr/dsmr-reader/.venv/bin/activate
-    Virtual environment already activated: /home/dsmr/dsmr-reader/.venv
+    which python3
+
+    # Expected output:
+    # /home/dsmr/dsmr-reader/.venv/bin/python3
 
 - Install dependencies (may take a minute)::
 
-    poetry install --no-dev
+    pip3 install -r dsmrreader/provisioning/requirements/base.txt
 
 - Setup local config::
 
@@ -240,7 +228,7 @@ Make sure you are currently (still) ``dsmr`` user here.
 
     ./manage.py check
 
-It should output something like::
+It should output something similar to::
 
     System check identified no issues (0 silenced).
 

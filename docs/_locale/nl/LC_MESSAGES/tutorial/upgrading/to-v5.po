@@ -28,19 +28,19 @@ msgstr "Inhoudsopgave"
 msgid "List of changes"
 msgstr "Lijst van wijzigingen"
 
-#: ../../tutorial/upgrading/to-v5.rst:15 ../../tutorial/upgrading/to-v5.rst:163
+#: ../../tutorial/upgrading/to-v5.rst:15 ../../tutorial/upgrading/to-v5.rst:162
 msgid ":doc:`See the changelog</reference/changelog>`, for ``v5.x releases`` and higher. Check them before updating!"
 msgstr ":doc:`Zie de changelog</reference/changelog>`, voor ``v5.x releases`` en hoger. Bekijk ze voordat je update!"
 
-#: ../../tutorial/upgrading/to-v5.rst:17 ../../tutorial/upgrading/to-v5.rst:165
+#: ../../tutorial/upgrading/to-v5.rst:17 ../../tutorial/upgrading/to-v5.rst:164
 msgid "✋ Do not upgrade if you run **PostgreSQL 9.5 or below**. *Upgrade PostgreSQL first.*"
 msgstr "✋ Upgrade niet wanneer je **PostgreSQL 9.5 of lager** draait. *Upgrade PostgreSQL eerst.*"
 
-#: ../../tutorial/upgrading/to-v5.rst:18 ../../tutorial/upgrading/to-v5.rst:166
+#: ../../tutorial/upgrading/to-v5.rst:18 ../../tutorial/upgrading/to-v5.rst:165
 msgid "✋ Do not upgrade if you run **InfluxDB 1.x**. *Upgrade to InfluxDB 2.x first.*"
 msgstr "✋ Upgrade niet wanneer je **InfluxDB 1.x** draait. *Upgrade naar InfluxDB 2.x eerst.*"
 
-#: ../../tutorial/upgrading/to-v5.rst:19 ../../tutorial/upgrading/to-v5.rst:167
+#: ../../tutorial/upgrading/to-v5.rst:19 ../../tutorial/upgrading/to-v5.rst:166
 msgid "✋ Do not upgrade if you run **MySQL 5.6 or below**. *Upgrade MySQL first.*"
 msgstr "✋ Upgrade niet wanneer je **MySQL 5.6 of lager** draait. *Upgrade MySQL eerst.*"
 
@@ -76,11 +76,11 @@ msgstr "2. Migreer naar github.com/dsmrreader/"
 msgid "Over a year ago the DSMR-reader project was moved to ``https://github.com/dsmrreader``."
 msgstr "Meer dan een jaar geleden is het DSMR-reader project verplaatst naar ``https://github.com/dsmrreader``."
 
-#: ../../tutorial/upgrading/to-v5.rst:51 ../../tutorial/upgrading/to-v5.rst:69
-#: ../../tutorial/upgrading/to-v5.rst:79 ../../tutorial/upgrading/to-v5.rst:86
-#: ../../tutorial/upgrading/to-v5.rst:104
-#: ../../tutorial/upgrading/to-v5.rst:124
-#: ../../tutorial/upgrading/to-v5.rst:151
+#: ../../tutorial/upgrading/to-v5.rst:51 ../../tutorial/upgrading/to-v5.rst:68
+#: ../../tutorial/upgrading/to-v5.rst:78 ../../tutorial/upgrading/to-v5.rst:85
+#: ../../tutorial/upgrading/to-v5.rst:103
+#: ../../tutorial/upgrading/to-v5.rst:123
+#: ../../tutorial/upgrading/to-v5.rst:150
 msgid "Execute the following::"
 msgstr "Voer het volgende uit::"
 
@@ -88,148 +88,152 @@ msgstr "Voer het volgende uit::"
 msgid "It should point to::"
 msgstr "Het zou moeten wijzen naar::"
 
-#: ../../tutorial/upgrading/to-v5.rst:64
+#: ../../tutorial/upgrading/to-v5.rst:63
 msgid "**If not**, update it and check again::"
 msgstr "**zo niet**, update deze en probeer opnieuw::"
 
-#: ../../tutorial/upgrading/to-v5.rst:75
+#: ../../tutorial/upgrading/to-v5.rst:74
 msgid "3. Python version check"
 msgstr "3. Python versie check"
 
-#: ../../tutorial/upgrading/to-v5.rst:77
+#: ../../tutorial/upgrading/to-v5.rst:76
 msgid "DSMR-reader ``5.x`` requires ``Python 3.7`` or higher."
 msgstr "DSMR-reader ``5.x`` vereist ``Python 3.7`` of hoger."
 
-#: ../../tutorial/upgrading/to-v5.rst:84
+#: ../../tutorial/upgrading/to-v5.rst:83
 msgid "It should display the Python version. **If you're already running** ``Python 3.7`` **(or higher), you can ignore the next section.**"
 msgstr "Het zou de Python-versie moeten tonen. **Wanneer je al de versie** ``Python 3.7`` **(of hoger) draait, kun je de volgende sectie negeren.**"
 
-#: ../../tutorial/upgrading/to-v5.rst:91
+#: ../../tutorial/upgrading/to-v5.rst:90
 msgid "4. Python version upgrade (when running ``Python 3.6`` or lower)"
 msgstr "4. Python-versie upgrade (wanneer je ``Python 3.6`` of lager draait)"
 
-#: ../../tutorial/upgrading/to-v5.rst:95
+#: ../../tutorial/upgrading/to-v5.rst:94
 msgid "Only execute this section if you're running DSMR-reader with ``Python 3.6`` or lower!"
 msgstr "Voer deze sectie alleen uit wanneer je DSMR-reader draait met ``Python 3.6`` of lager!"
 
-#: ../../tutorial/upgrading/to-v5.rst:97
+#: ../../tutorial/upgrading/to-v5.rst:96
 msgid "There are several guides, depending on your OS. We assume Raspbian OS here."
 msgstr "Er zijn diverse handleidingen, afhankelijk van je OS. We gaan hier uit van Raspbian OS."
 
-#: ../../tutorial/upgrading/to-v5.rst:101
+#: ../../tutorial/upgrading/to-v5.rst:100
 msgid "You may consider upgrading to a higher Python version, e.g. ``Python 3.9``, if possible for your OS."
 msgstr "Je kunt overwegen om direct naar een hogere Python-versie te upgrade, bijvoorbeeld ``Python 3.9``, indien mogelijk voor het OS dat je gebruikt."
 
-#: ../../tutorial/upgrading/to-v5.rst:118
+#: ../../tutorial/upgrading/to-v5.rst:117
 msgid "Try running the command ``python3.9 --version`` to see if things worked out. If you're getting any errors, do not continue with the upgrade."
 msgstr "Probeer om ``python3.9 --version`` uit te voeren om te controleren of het gelukt is. Wanneer je foutmeldingen krijgt, ga dan niet verder met de upgrade."
 
-#: ../../tutorial/upgrading/to-v5.rst:122
+#: ../../tutorial/upgrading/to-v5.rst:121
 msgid "The next thing you'll absolutely need to do, is create a fresh database backup and store it somewhere safe."
 msgstr "Het volgende wat je absoluut moet doen, is het maken van een verse database back-up en deze op een veilige plek opslaan."
 
-#: ../../tutorial/upgrading/to-v5.rst:129
+#: ../../tutorial/upgrading/to-v5.rst:128
 msgid "If things went well, you should see a message like::"
 msgstr "Wanneer alles OK is, zie je een melding in de trend van::"
 
-#: ../../tutorial/upgrading/to-v5.rst:133
-#: ../../tutorial/upgrading/to-v5.rst:141
+#: ../../tutorial/upgrading/to-v5.rst:132
+#: ../../tutorial/upgrading/to-v5.rst:140
 msgid "Execute the following (your file name may differ!)::"
 msgstr "Voer het volgende uit (bestandsnaam kan afwijken in jouw situatie!)::"
 
-#: ../../tutorial/upgrading/to-v5.rst:137
+#: ../../tutorial/upgrading/to-v5.rst:136
 msgid "Make sure the file is of some (reasonable) size::"
 msgstr "Controleer of het bestand een (aannemelijke) grootte heeft::"
 
-#: ../../tutorial/upgrading/to-v5.rst:145
+#: ../../tutorial/upgrading/to-v5.rst:144
 msgid "Make sure the output ends with::"
 msgstr "Controleer dat het eindigt met deze output::"
 
-#: ../../tutorial/upgrading/to-v5.rst:157
+#: ../../tutorial/upgrading/to-v5.rst:156
 msgid "5. Upgrade to DSMR-reader v5"
 msgstr "5. Upgrade naar DSMR-reader v5"
 
-#: ../../tutorial/upgrading/to-v5.rst:161
+#: ../../tutorial/upgrading/to-v5.rst:160
 msgid "**Reminder**"
 msgstr "**Herinnering**"
 
-#: ../../tutorial/upgrading/to-v5.rst:171
+#: ../../tutorial/upgrading/to-v5.rst:170
+msgid "Install Python venv::"
+msgstr "Installeer Python venv::"
+
+#: ../../tutorial/upgrading/to-v5.rst:174
 msgid "Stop DSMR-reader::"
 msgstr "Stop DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:175
+#: ../../tutorial/upgrading/to-v5.rst:178
 msgid "Disable ``v4.x`` virtualenv::"
 msgstr "Schakel ``v4.x`` virtualenv uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:182
+#: ../../tutorial/upgrading/to-v5.rst:184
+msgid "Create new ``v5.x`` virtualenv::"
+msgstr "Maak nieuwe ``v5.x`` virtualenv::"
+
+#: ../../tutorial/upgrading/to-v5.rst:188
 msgid "Remove the following line from ``/home/dsmr/.bashrc``::"
 msgstr "Verwijder de volgende regel uit ``/home/dsmr/.bashrc``::"
 
-#: ../../tutorial/upgrading/to-v5.rst:190
-msgid "Install Poetry::"
-msgstr "Installeer Poetry::"
-
-#: ../../tutorial/upgrading/to-v5.rst:194
-msgid "Add the following line to ``/home/dsmr/.bashrc``::"
-msgstr "Voeg de volgende regel toe aan ``/home/dsmr/.bashrc``::"
-
-#: ../../tutorial/upgrading/to-v5.rst:202
+#: ../../tutorial/upgrading/to-v5.rst:199
 msgid "Update DSMR-reader codebase::"
 msgstr "Update DSMR-reader codebase::"
 
-#: ../../tutorial/upgrading/to-v5.rst:212
+#: ../../tutorial/upgrading/to-v5.rst:209
 msgid "Install dependencies::"
 msgstr "Installeer dependencies::"
 
-#: ../../tutorial/upgrading/to-v5.rst:217
+#: ../../tutorial/upgrading/to-v5.rst:214
 msgid "Rename any legacy setting names in ``.env`` you find (see below)::"
 msgstr "Hernoem oude env vars in ``.env`` als je die tegenkomt (zie hieronder)::"
 
-#: ../../tutorial/upgrading/to-v5.rst:224
+#: ../../tutorial/upgrading/to-v5.rst:221
 msgid "If you find any listed on the left hand side, rename them to the one on the right hand side::"
 msgstr "Wanneer je eentje tegenkomt die aan de linkerkant staat, hernoem die naar de variant aan de rechterkant::"
 
-#: ../../tutorial/upgrading/to-v5.rst:239
+#: ../../tutorial/upgrading/to-v5.rst:237
+msgid "The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::"
+msgstr "De volgende **remote datalogger script** instellingen zijn ook hernoemd, maar je hoeft ze alleen aan te passen als je ze daadwerkelijk gebruikt, samen met een nieuwe versie van het remote datalogger script. Bijvoorbeeld wanneer je Docker gebruikt::"
+
+#: ../../tutorial/upgrading/to-v5.rst:248
 msgid "Check DSMR-reader::"
 msgstr "Check DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:248
+#: ../../tutorial/upgrading/to-v5.rst:257
 msgid "Update Nginx config::"
 msgstr "Update Nginx config::"
 
-#: ../../tutorial/upgrading/to-v5.rst:253
+#: ../../tutorial/upgrading/to-v5.rst:262
 msgid "Update Supervisor configs::"
 msgstr "Update Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:259
+#: ../../tutorial/upgrading/to-v5.rst:268
 msgid "Reload Supervisor configs::"
 msgstr "Herlaad Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:263
+#: ../../tutorial/upgrading/to-v5.rst:272
 msgid "Start DSMR-reader::"
 msgstr "Start DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:269
+#: ../../tutorial/upgrading/to-v5.rst:278
 msgid "6. Deploy"
 msgstr "6. Deploy"
 
-#: ../../tutorial/upgrading/to-v5.rst:270
+#: ../../tutorial/upgrading/to-v5.rst:279
 msgid "Finally, execute the deploy script::"
 msgstr "Tot slot, voer het deploy-script uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:275
+#: ../../tutorial/upgrading/to-v5.rst:284
 msgid "Great. You should now be on ``v5.x``!"
 msgstr "Top! Je zou nu ``v5.x`` moeten draaien!"
 
-#: ../../tutorial/upgrading/to-v5.rst:279
+#: ../../tutorial/upgrading/to-v5.rst:288
 msgid "7. Situational: Reconfigure InfluxDB"
 msgstr "7. Situationeel: Herconfigureer InfluxDB"
 
-#: ../../tutorial/upgrading/to-v5.rst:281
+#: ../../tutorial/upgrading/to-v5.rst:290
 msgid "If you happened to use DSMR-reader export to InfluxDB previously, you **must** reconfigure it accordingly in order to get it working again. It has been disabled automatically as well."
 msgstr "Als je DSMR-reader gebruikte om data te exporteren naar InfluxDB, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen. De integratie is tevens automatisch uitgeschakeld."
 
-#: ../../tutorial/upgrading/to-v5.rst:286
+#: ../../tutorial/upgrading/to-v5.rst:295
 msgid "Where the previous version utilized *usernames*, *passwords* and *databases*, it now connects using *organizations*, *API tokens* and *buckets*."
 msgstr "Waar de vorige versie *usernames*, *passwords* en *databases* gebruikte, is het nu gewijzigd naar *organizations*, *API tokens* en *buckets*."
 
@@ -241,3 +245,9 @@ msgstr "Waar de vorige versie *usernames*, *passwords* en *databases* gebruikte,
 
 #~ msgid "✋ Do not upgrade if you run **InfluxDB 1.7 or lower**. *Upgrade InfluxDB first.*"
 #~ msgstr "✋ Upgrade niet wanneer je **InfluxDB 1.7 of lager** draait. *Upgrade InfluxDB eerst.*"
+
+#~ msgid "Install Poetry::"
+#~ msgstr "Installeer Poetry::"
+
+#~ msgid "Add the following line to ``/home/dsmr/.bashrc``::"
+#~ msgstr "Voeg de volgende regel toe aan ``/home/dsmr/.bashrc``::"

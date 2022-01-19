@@ -18,7 +18,7 @@ Current version
 
 
 
-v5.0.0 - 2021-xx-xx
+v5.0.0 - 2022-02-xx
 -------------------
 
 .. seealso::
@@ -76,7 +76,7 @@ Older releases
     :depth: 1
 
 
-v4.20.0 - 2021-xx-xx
+v4.20.0 - 2022-02-xx
 --------------------
 
 .. note::

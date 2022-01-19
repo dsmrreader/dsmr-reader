@@ -56,7 +56,6 @@ Execute the following::
 
 It should point to::
 
-
     origin	https://github.com/dsmrreader/dsmr-reader.git (fetch)
     origin	https://github.com/dsmrreader/dsmr-reader.git (push)
 
@@ -168,6 +167,10 @@ Execute the following::
 
 ----
 
+Install Python venv::
+
+    sudo apt-get install python3-venv
+
 Stop DSMR-reader::
 
     sudo supervisorctl stop all
@@ -178,6 +181,9 @@ Disable ``v4.x`` virtualenv::
     deactivate
     mv ~/.virtualenvs/ ~/.old-v4-virtualenvs
 
+Create new ``v5.x`` virtualenv::
+
+    python3 -m venv ~/dsmr-reader/.venv/
 
 Remove the following line from ``/home/dsmr/.bashrc``::
 
@@ -187,17 +193,8 @@ Remove the following line from ``/home/dsmr/.bashrc``::
     # Remove if you see this line:
     source ~/.virtualenvs/dsmrreader/bin/activate
 
-Install Poetry::
-
-    pip3 install --user --upgrade pip poetry
-
-Add the following line to ``/home/dsmr/.bashrc``::
-
-    # (feel free to use "nano" instead or whatever you'd like)
-    vi /home/dsmr/.bashrc
-
-    # Add the following to the END of the file:
-    poetry shell
+    # Add this line instead:
+    source ~/dsmr-reader/.venv/bin/activate
 
 Update DSMR-reader codebase::
 
@@ -211,8 +208,8 @@ Update DSMR-reader codebase::
 
 Install dependencies::
 
-    poetry config virtualenvs.in-project true
-    poetry install
+    source ~/dsmr-reader/.venv/bin/activate
+    pip3 install -r dsmrreader/provisioning/requirements/base.txt
 
 Rename any legacy setting names in ``.env`` you find (see below)::
 
@@ -224,26 +221,28 @@ Rename any legacy setting names in ``.env`` you find (see below)::
 If you find any listed on the left hand side, rename them to the one on the right hand side::
 
     # Core env vars/settings
-    SECRET_KEY       ️         ➡️    ️      DJANGO_SECRET_KEY
-    DB_ENGINE        ️         ➡️    ️      DJANGO_DATABASE_ENGINE
-    DB_NAME          ️         ➡️    ️      DJANGO_DATABASE_NAME
-    DB_USER          ️         ➡️    ️      DJANGO_DATABASE_USER
-    DB_PASS          ️         ➡️    ️      DJANGO_DATABASE_PASSWORD
-    DB_HOST          ️         ➡️    ️      DJANGO_DATABASE_HOST
-    DB_PORT          ️         ➡️    ️      DJANGO_DATABASE_PORT
-    CONN_MAX_AGE     ️         ➡️    ️      DJANGO_DATABASE_CONN_MAX_AGE
-    TZ               ️         ➡️    ️      DJANGO_TIME_ZONE
-    DSMR_USER        ️         ➡️    ️      DSMRREADER_ADMIN_USER
-    DSMR_PASSWORD    ️         ➡️    ️      DSMRREADER_ADMIN_PASSWORD
+    SECRET_KEY       ️                 ➡️   DJANGO_SECRET_KEY
+    DB_ENGINE        ️                 ➡️   DJANGO_DATABASE_ENGINE
+    DB_NAME          ️                 ➡️   DJANGO_DATABASE_NAME
+    DB_USER          ️                 ➡️   DJANGO_DATABASE_USER
+    DB_PASS          ️                 ➡️   DJANGO_DATABASE_PASSWORD
+    DB_HOST          ️                 ➡️   DJANGO_DATABASE_HOST
+    DB_PORT          ️                 ➡️   DJANGO_DATABASE_PORT
+    CONN_MAX_AGE     ️                 ➡️   DJANGO_DATABASE_CONN_MAX_AGE
+    TZ               ️                 ➡️   DJANGO_TIME_ZONE
+    DSMR_USER        ️                 ➡️   DSMRREADER_ADMIN_USER
+    DSMR_PASSWORD    ️                 ➡️   DSMRREADER_ADMIN_PASSWORD
 
-    # Remote datalogger env vars/settings, usually only used with Docker
-    DATALOGGER_INPUT_METHOD    ️➡️    ️     DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD
-    DATALOGGER_SERIAL_PORT     ️➡️    ️     DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT
-    DATALOGGER_SERIAL_BAUDRATE ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE
-    DATALOGGER_API_HOSTS    ️  ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_API_HOSTS
-    DATALOGGER_API_KEYS    ️   ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_API_KEYS
-    DATALOGGER_TIMEOUT    ️    ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_TIMEOUT
-    DATALOGGER_SLEEP    ️      ➡️    ️      DSMRREADER_REMOTE_DATALOGGER_SLEEP
+
+The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::
+
+    DATALOGGER_INPUT_METHOD            ️➡️   DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD
+    DATALOGGER_SERIAL_PORT             ️➡️   DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT
+    DATALOGGER_SERIAL_BAUDRATE         ➡️   DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE
+    DATALOGGER_API_HOSTS    ️           ➡️   DSMRREADER_REMOTE_DATALOGGER_API_HOSTS
+    DATALOGGER_API_KEYS    ️            ➡️   DSMRREADER_REMOTE_DATALOGGER_API_KEYS
+    DATALOGGER_TIMEOUT    ️             ➡️   DSMRREADER_REMOTE_DATALOGGER_TIMEOUT
+    DATALOGGER_SLEEP    ️               ➡️   DSMRREADER_REMOTE_DATALOGGER_SLEEP
     DATALOGGER_MIN_SLEEP_FOR_RECONNECT ➡️   DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT
 
 Check DSMR-reader::
