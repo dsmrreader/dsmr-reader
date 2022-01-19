@@ -4,13 +4,13 @@
 
 version: "3.7"
 services:
-  # Manage command:   docker exec -it dsmr-app poetry run /app/manage.py
+  # Manage command:   docker exec -it dsmr-app ./manage.py
   dsmr-app:
     container_name: dsmr-app
     build:
       context: .
       dockerfile: Dockerfile
-    command: poetry run /app/manage.py runserver 0.0.0.0:8000
+    command: ./manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
@@ -48,14 +48,14 @@ services:
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PASSWORD=testpasswd
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_NAME=dsmrreader  # Django prefixes "test_" automatically.
 
-  # Docs commands:   docker exec -it dsmr-docs poetry run
+  # Docs commands:   docker exec -it dsmr-docs
   dsmr-docs:
     container_name: dsmr-docs
     build:
       context: .
       dockerfile: Dockerfile
     working_dir: /app/docs/
-    command: poetry run sphinx-autobuild . _build/html --host 0.0.0.0 --port 10000
+    command: sphinx-autobuild . _build/html --host 0.0.0.0 --port 10000
     volumes:
       - .:/app
     ports:
