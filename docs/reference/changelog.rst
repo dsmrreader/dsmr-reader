@@ -24,6 +24,7 @@ v4.20.0 - 2022-02-xx
 
     This is the last release of DSMR-reader ``v4.x``. You can upgrade to ``v5.x`` for future support/features/rework.
 
+- ``Added`` Doc update, FAQ regarding "lagging statistics" - by @balk77 [`#1530 <https://github.com/dsmrreader/dsmr-reader/issues/1530>`_]
 - ``Fixed`` Periode energiecontracten mist laatste dag [`#1534 <https://github.com/dsmrreader/dsmr-reader/issues/1534>`_]
 
 

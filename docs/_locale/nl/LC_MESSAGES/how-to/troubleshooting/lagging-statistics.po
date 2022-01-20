@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMR Reader\n"
+"Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Language: nl\n"
+"Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.3\n"
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:2
+msgid "Common error resolution: How do I fix ``Day statistics are lagging behind``?"
+msgstr "Veel voorkomende fouten: Hoe los ik ``Day statistics are lagging behind`` op?"
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:4
+msgid "The error::"
+msgstr "De foutmelding::"
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:8
+msgid "Means that the statistics module did not run (successfully) or lacks new data. This module runs once a day, by default at midnight."
+msgstr "Betekent dat de statistiekenmodule niet (of onsuccesvol) heeft gedraaid, of gegevens mist. De module draait dagelijks, doorgaans na middernacht."
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:10
+msgid "Due to unforeseen circumstances the module may have not ran. E.g. caused by power outage or restart of the docker image."
+msgstr "De module kan niet (goed) hebben gedraaid door onvoorziene omstandigheden. Bijvoorbeeld door stroomuitval of het herstarten van een Docker image."
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:12
+msgid "Wait until the next scheduled run and see if the problem gets resolved automatically. Alternatively (if you can't wait), go to ``/admin/dsmr_backend/scheduledprocess/`` and change the scheduled time of the ``Generate day and hour statistics`` task into the past, causing it to be executed momentarily."
+msgstr "Wacht tot de volgende run om te zien of dit het probleem oplost. Eventueel kun je ook zelf naar ``/admin/dsmr_backend/scheduledprocess/`` gaan en daar de geplande datumtijd van ``Generate day and hour statistics`` in het verleden zetten. Hierdoor wordt de taak direct opgepakt."
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:15
+msgid "If that doesn't resolve the issue, dive into the DEBUG logs and try to find the problem."
+msgstr "Als dit het probleem niet oplost, schakel DEBUG logging in om verder te zoeken."
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:19
+msgid "Check the logs for ``Stats:`` statements, which may identify a root cause."
+msgstr "Bekijk de logfiles voor regels met ``Stats:``, die een mogelijke oorzaak aangeven."
+
+#: ../../how-to/troubleshooting/lagging-statistics.rst:23
+msgid ":doc:`See here for how to enable DEBUG logging </how-to/troubleshooting/enabling-debug-logging>`."
+msgstr ":doc:`Bekijk hier hoe je DEBUG-logging inschakelt </how-to/troubleshooting/enabling-debug-logging>`."
