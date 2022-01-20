@@ -6,14 +6,15 @@
 
 FROM python:3
 ENV PYTHONUNBUFFERED=1
-ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 WORKDIR /app
 
-# "telnet" eases network debugging a lot...
-RUN apt-get update && apt-get install -y gettext telnet
+RUN apt-get update && apt-get install -y gettext telnet python3-psycopg2 python3-venv
 
-COPY ./pyproject.toml /app/
-COPY ./poetry.lock /app/
+# Credits to: https://pythonspeed.com/articles/activate-virtualenv-dockerfile/
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN pip3 install --upgrade pip poetry
-RUN poetry install
+COPY ./dsmrreader/provisioning/requirements/base.txt ./dsmrreader/provisioning/requirements/dev.txt /app/dsmrreader/provisioning/requirements/
+RUN pip3 install pip --upgrade
+RUN pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
