@@ -17,12 +17,14 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.20.0 - 2021-xx-xx
+v4.20.0 - 2022-02-xx
 --------------------
 
 .. note::
 
     This is the last release of DSMR-reader ``v4.x``. You can upgrade to ``v5.x`` for future support/features/rework.
+
+- ``Fixed`` Periode energiecontracten mist laatste dag [`#1534 <https://github.com/dsmrreader/dsmr-reader/issues/1534>`_]
 
 
 v4.19.0 - 2021-10-23
