@@ -75,25 +75,25 @@ class HourStatisticsAdmin(admin.ModelAdmin):
         ('hour_start', DateTimeRangeFilter),
     )
 
-    def formatted_electricity_merged(self, obj: HourStatistics) -> str:
+    def formatted_electricity_merged(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.electricity_merged:
             return '-'
 
         return obj.electricity_merged
     formatted_electricity_merged.short_description = 'electricity delivered'
 
-    def formatted_electricity_returned_merged(self, obj: HourStatistics) -> str:
+    def formatted_electricity_returned_merged(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.electricity_returned_merged:
             return '-'
 
         return obj.electricity_returned_merged
     formatted_electricity_returned_merged.short_description = 'electricity returned'
 
-    def formatted_gas(self, obj: HourStatistics) -> str:
+    def formatted_gas(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.gas:
             return '-'
 
-        return obj.gas
+        return str(obj.gas)
     formatted_gas.short_description = 'gas'
 
 

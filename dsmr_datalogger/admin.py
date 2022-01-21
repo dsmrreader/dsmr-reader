@@ -72,39 +72,39 @@ class DsmrReadingAdmin(ReadOnlyAdminModel):
         ('timestamp', DateTimeRangeFilter),
     )
 
-    def formatted_electricity_delivered_1(self, obj: DsmrReading) -> str:
+    def formatted_electricity_delivered_1(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_delivered_1:
             return '-'
 
-        return obj.electricity_delivered_1
+        return str(obj.electricity_delivered_1)
     formatted_electricity_delivered_1.short_description = 'electricity 1'
 
-    def formatted_electricity_delivered_2(self, obj: DsmrReading) -> str:
+    def formatted_electricity_delivered_2(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_delivered_2:
             return '-'
 
-        return obj.electricity_delivered_2
+        return str(obj.electricity_delivered_2)
     formatted_electricity_delivered_2.short_description = 'electricity 2'
 
-    def formatted_electricity_returned_1(self, obj: DsmrReading) -> str:
+    def formatted_electricity_returned_1(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_returned_1:
             return '-'
 
-        return obj.electricity_returned_1
+        return str(obj.electricity_returned_1)
     formatted_electricity_returned_1.short_description = 'electricity returned 1'
 
-    def formatted_electricity_returned_2(self, obj: DsmrReading) -> str:
+    def formatted_electricity_returned_2(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_returned_2:
             return '-'
 
-        return obj.electricity_returned_2
+        return str(obj.electricity_returned_2)
     formatted_electricity_returned_2.short_description = 'electricity returned 2'
 
-    def formatted_extra_device_delivered(self, obj: DsmrReading) -> str:
+    def formatted_extra_device_delivered(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.extra_device_delivered:
             return '-'
 
-        return obj.extra_device_delivered
+        return str(obj.extra_device_delivered)
     formatted_extra_device_delivered.short_description = 'gas'
 
 
