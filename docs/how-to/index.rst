@@ -22,7 +22,8 @@ How to's
    troubleshooting/smart-meter-replacement
    troubleshooting/smart-meter-invalid-date-or-times
    troubleshooting/recalculate-prices
-
+   troubleshooting/lagging-statistics
+  
    database/data-limits
    database/postgresql-restore-backup
    database/postgresql-migrate-day-hour-statistics

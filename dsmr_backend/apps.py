@@ -20,7 +20,7 @@ class BackendAppConfig(AppConfig):
     name = 'dsmr_backend'
     verbose_name = _('Backend (dsmr_backend)')
 
-    def ready(self) -> NoReturn:
+    def ready(self) -> NoReturn:  # pragma: no cover
         @register(Tags.compatibility, deploy=True)
         def system_checks(app_configs, **kwargs) -> List:
             """ @see https://docs.djangoproject.com/en/3.1/topics/checks/"""
