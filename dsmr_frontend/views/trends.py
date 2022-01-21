@@ -98,17 +98,13 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
             'electricity1': frontend_settings.tariff_1_delivered_name.capitalize(),
             'electricity2': frontend_settings.tariff_2_delivered_name.capitalize(),
         }
-        result = {}
-
-        if not capabilities[Capability.ANY] or not DayStatistics.objects.exists():
-            return JsonResponse(result)
-
         electricity_tariff_percentage = dsmr_stats.services.electricity_tariff_percentage(
             start=form.cleaned_data['start_date'],
             end=form.cleaned_data['end_date'],
         )
+        result = {}
 
-        if not electricity_tariff_percentage:
+        if not capabilities[Capability.ANY] or not DayStatistics.objects.exists() or not electricity_tariff_percentage:
             return JsonResponse(result)
 
         result['data'] = [
