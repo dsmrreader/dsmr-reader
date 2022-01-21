@@ -103,13 +103,18 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
         if not capabilities[Capability.ANY] or not DayStatistics.objects.exists():
             return JsonResponse(result)
 
+        electricity_tariff_percentage = dsmr_stats.services.electricity_tariff_percentage(
+            start=form.cleaned_data['start_date'],
+            end=form.cleaned_data['end_date'],
+        )
+
+        if not electricity_tariff_percentage:
+            return JsonResponse(result)
+
         result['data'] = [
             {'name': translation_mapping[k], 'value': v}
             for k, v in
-            dsmr_stats.services.electricity_tariff_percentage(
-                start=form.cleaned_data['start_date'],
-                end=form.cleaned_data['end_date'],
-            ).items()
+            electricity_tariff_percentage.items()
         ]
 
         return JsonResponse(result)
