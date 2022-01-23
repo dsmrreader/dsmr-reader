@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
-from rangefilter.filter import DateTimeRangeFilter
+from rangefilter.filters import DateTimeRangeFilter
 from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import ReadOnlyAdminModel

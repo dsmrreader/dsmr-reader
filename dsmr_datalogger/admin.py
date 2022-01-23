@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from solo.admin import SingletonModelAdmin
-from rangefilter.filter import DateTimeRangeFilter
+from rangefilter.filters import DateTimeRangeFilter
 import django.db.models.signals
 
 from dsmr_backend.mixins import ReadOnlyAdminModel

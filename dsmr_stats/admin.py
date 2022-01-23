@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.forms import widgets
 from django.db import models
 from solo.admin import SingletonModelAdmin
-from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
+from rangefilter.filters import DateRangeFilter, DateTimeRangeFilter
 
 from .models.note import Note
 from .models.statistics import HourStatistics, DayStatistics, ElectricityStatistics
