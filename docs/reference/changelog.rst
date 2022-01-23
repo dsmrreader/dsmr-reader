@@ -30,10 +30,12 @@ v5.0.0 - 2022-02-xx
 
 ----
 
-- ``Changed`` Updated to Django 3.2 [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
-- ``Changed`` Preferred Python version is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 - ``Changed`` `dsmr_datalogger_api_client.py <https://github.com/dsmrreader/dsmr-reader/blob/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_ env vars are now prefixed with ``REMOTE_`` (*affects new installations only*) [`#1216 <https://github.com/dsmrreader/dsmr-reader/issues/1216>`_]
+- ``Changed`` The default value of ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT`` was changed from ``3600`` to ``0``, disabling MQTT cache by default [`#1561 <https://github.com/dsmrreader/dsmr-reader/issues/1561>`_]
+- ``Changed`` The default values of ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE`` was changed from ``500`` to ``5000`` [`#1561 <https://github.com/dsmrreader/dsmr-reader/issues/1561>`_]
 - ``Changed`` The ``dsmr_influxdb_export_all_readings`` its console arguments were renamed due to **InfluxDB 2.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
+- ``Changed`` Preferred Python version for DSMR-reader is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
+- ``Changed`` Updated to Django 3.2 [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
 
 ----
 

@@ -18,7 +18,7 @@ DSMRREADER_LOGLEVEL = config('DSMRREADER_LOGLEVEL', cast=str, default=None)
 if DSMRREADER_LOGLEVEL in ('DEBUG', 'WARNING'):
     LOGGING['loggers']['dsmrreader']['level'] = DSMRREADER_LOGLEVEL
 
-CACHES['mqtt']['TIMEOUT'] = config('DSMRREADER_MQTT_MAX_CACHE_TIMEOUT', cast=int, default=3600)
+CACHES['mqtt']['TIMEOUT'] = config('DSMRREADER_MQTT_MAX_CACHE_TIMEOUT', cast=int, default=0)
 
 DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', cast=Csv(post_process=tuple), default='')
 
@@ -83,10 +83,10 @@ DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES = 15
 DSMRREADER_STATUS_ALLOWED_DAY_STATISTICS_LAGG_IN_DAYS = 2
 
 # Number of queued messages the application will retain. Any excess will be purged.
-DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = config('DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE', cast=int, default=500)
+DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = config('DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE', cast=int, default=5000)
 DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE = 500
 
-# Number of hours to cleanup in one run of applying retention.
+# Number of hours to clean up in one run of applying retention.
 DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
 
 DSMRREADER_BUIENRADAR_API_URL = 'https://data.buienradar.nl/2.0/feed/json'

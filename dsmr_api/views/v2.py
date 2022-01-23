@@ -92,7 +92,7 @@ class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
     schema = DsmrReaderSchema(get='Retrieve meter statistics', patch='Update meter statistics')
     serializer_class = MeterStatisticsSerializer
 
-    def get_queryset(self):
+    def get_queryset(self):  # pragma: nocover
         """ @see https://github.com/carltongibson/django-filter/issues/966#issuecomment-734971862 """
         if getattr(self, "swagger_fake_view", False):
             return MeterStatistics.objects.none()

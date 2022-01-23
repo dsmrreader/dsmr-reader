@@ -50,13 +50,3 @@ class TestMessages(TestCase):
         self.assertIn(self.TOPIC, calls)
         self.assertIn(self.DIFFERENT_PAYLOAD, calls)
         self.assertNotIn(self.PAYLOAD, calls)
-
-    def test_duplicate(self):
-        self.assertEqual(queue.Message.objects.all().count(), 0)
-
-        dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.PAYLOAD)
-        self.assertEqual(queue.Message.objects.all().count(), 1)
-
-        # Second create should be ignored. And caching is disabled in tests as well.
-        dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.PAYLOAD)
-        self.assertEqual(queue.Message.objects.all().count(), 1)

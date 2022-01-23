@@ -456,7 +456,9 @@ Omit to use the default.
 
     **This setting is optional**
 
-    .. versionadded:: v4.16
+    .. versionchanged:: v5.0 (default value: ``5000``)
+
+    .. versionadded:: v4.16 (default value: ``500``)
 
 
 ----
@@ -465,14 +467,18 @@ Omit to use the default.
 ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MQTT messages sent by DSMR-reader to your broker with a ``retain`` flag, meaning that the broker will remember the last value received for those topics.
-Updating retained MQTT topics consecutively with the same value has no effect. Therefor DSMR-reader caches the last value sent for each topic.
-DSMR-reader will not queue nor send MQTT messages that exactly match the previous one, greatly reducing the number of MQTT messages sent.
+DSMR-reader sends MQTT messages to your broker with a ``retain`` flag, resulting the broker keeping the last value received for every topic.
+Updating MQTT topics consecutively with the same value has no effect, depending on its usage.
+Therefor DSMR-reader can be set to cache the last value sent for each topic. It will cause DSMR-reader to **not** send the same value to the same topic consecutively.
 
-However, situationally you may want to decrease cache duration or disable it entirely. Set to ``0`` to disable. Omit to use the default.
+This was enabled by default in DSMR-reader ``v4.x``, but has been changed to being disabled by default since DSMR-reader ``v5.0``.
+
+Set this value (cache duration in seconds) to > ``0`` to enable.
 
 .. hint::
 
     **This setting is optional**
 
-    .. versionadded:: v4.16
+    .. versionchanged:: v5.0 (default value: ``0``)
+
+    .. versionadded:: v4.16 (default value: ``3600``)

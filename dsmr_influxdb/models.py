@@ -121,7 +121,7 @@ extra_device_delivered = delivered
 @receiver(django.db.models.signals.post_save, sender=InfluxdbIntegrationSettings)
 def _on_influxdb_settings_updated_signal(instance, created, raw, **kwargs):
     """ On settings change, require backend restart. """
-    if created or raw:
+    if created or raw:  # pragma: nocover
         return
 
     backend_restart_required.send_robust(None)

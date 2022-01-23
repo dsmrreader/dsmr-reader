@@ -6,16 +6,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  DSMR-reader\n"
+"Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language: nl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../../reference/env-settings.rst:2
 msgid "Environment settings"
@@ -158,7 +159,7 @@ msgstr "Zie ``DATABASES.CONN_MAX_AGE`` in `Django docs <https://docs.djangoproje
 #: ../../reference/env-settings.rst:192 ../../reference/env-settings.rst:215
 #: ../../reference/env-settings.rst:397 ../../reference/env-settings.rst:421
 #: ../../reference/env-settings.rst:438 ../../reference/env-settings.rst:457
-#: ../../reference/env-settings.rst:476
+#: ../../reference/env-settings.rst:480
 msgid "**This setting is optional**"
 msgstr "**Deze instelling is optioneel**"
 
@@ -313,17 +314,37 @@ msgstr "Het maximum aantal MQTT-berichten dat achtergehouden wordt totdat ze ver
 msgid "However, situationally you may increase the maximum for whatever reason along your local setup. Omit to use the default."
 msgstr "Desondanks kan het zijn dat je specifiek in je eigen situatie een ander maximum wilt. Laat weg om de standaardwaarde te gebruiken."
 
-#: ../../reference/env-settings.rst:466
+#: ../../reference/env-settings.rst:459
+msgid "(default value: ``5000``)"
+msgstr "(standaardwaarde: ``5000``)"
+
+#: ../../reference/env-settings.rst:461
+msgid "(default value: ``500``)"
+msgstr "(standaardwaarde: ``500``)"
+
+#: ../../reference/env-settings.rst:468
 msgid "``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``"
 msgstr "``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``"
 
-#: ../../reference/env-settings.rst:468
-msgid "MQTT messages sent by DSMR-reader to your broker with a ``retain`` flag, meaning that the broker will remember the last value received for those topics. Updating retained MQTT topics consecutively with the same value has no effect. Therefor DSMR-reader caches the last value sent for each topic. DSMR-reader will not queue nor send MQTT messages that exactly match the previous one, greatly reducing the number of MQTT messages sent."
-msgstr "DSMR-reader stuurt MQTT-berichten naar je broker met een zogenaamde ``retain`` vlag. Daarmee onthoudt de broker telkens de laatste waarde voor die topics. Het bijwerken van zulke topics, met telkens dezelfde waarde, heeft dan ook geen effect. Daarom gebruikt DSMR-reader een cache om ook zelf de laatste verstuurde waarde voor elke topic bij te houden. Achtereenvolgende berichten voor hetzelfde topic met exact dezelfde waarde worden daardoor niet dubbel verstuurd. Dit verkleint het aantal nodige MQTT-berichten aanzienlijk."
+#: ../../reference/env-settings.rst:470
+msgid "DSMR-reader sends MQTT messages to your broker with a ``retain`` flag, resulting the broker keeping the last value received for every topic. Updating MQTT topics consecutively with the same value has no effect, depending on its usage. Therefor DSMR-reader can be set to cache the last value sent for each topic. It will cause DSMR-reader to **not** send the same value to the same topic consecutively."
+msgstr "DSMR-reader stuurt MQTT-berichten naar je broker met een ``retain`` vlag. Dit zorgt ervoor dat de broker van elk topic de laatst ontvangen waarde bewaart. Het bijwerken van MQTT-topics met dezelfde waarde heeft doorgaans geen nut, afhankelijk van het gebruik. Daarom kan DSMR-reader ingesteld worden om de laatste waarde van elk topic te cachen. Dit zorgt ervoor dat DSMR-reader dezelfde waarde **niet** achtereenvolgend naar hetzelfde topic stuurt."
 
-#: ../../reference/env-settings.rst:472
-msgid "However, situationally you may want to decrease cache duration or disable it entirely. Set to ``0`` to disable. Omit to use the default."
-msgstr "Desondanks kan het zijn dat je de caching-duur wilt verlagen of zelfs helemaal uitschakelen. Stel in op ``0`` om uit te schakelen. Laat weg om de standaardwaarde te gebruiken."
+#: ../../reference/env-settings.rst:474
+msgid "This was enabled by default in DSMR-reader ``v4.x``, but has been changed to being disabled by default since DSMR-reader ``v5.0``."
+msgstr "Dit was standaard ingeschakeld in DSMR-reader ``v4.x``, maar is vanaf DSMR-reader ``v5.0`` standaard uitgeschakeld."
+
+#: ../../reference/env-settings.rst:476
+msgid "Set this value (cache duration in seconds) to > ``0`` to enable."
+msgstr "Stel deze (cachingduur in seconden) op > ``0`` om in te schakelen."
+
+#: ../../reference/env-settings.rst:482
+msgid "(default value: ``0``)"
+msgstr "(standaardwaarde: ``0``)"
+
+#: ../../reference/env-settings.rst:484
+msgid "(default value: ``3600``)"
+msgstr "(standaardwaarde: ``3600``)"
 
 #~ msgid "The following settings have been **renamed** since DSMR-reader ``v4.5``, but are still available. Their old name will be **removed** in DSMR-reader ``v5.0`` and can then be no longer used."
 #~ msgstr "De volgende instellingen zijn **hernoemd** sinds DSMR-reader ``v4.5``, maar nog steeds beschikbaar. De voormalige naam wordt **verwijderd** in DSMR-reader ``v5.0`` en is vanaf die versie niet meer te gebruiken."
@@ -367,3 +388,8 @@ msgstr "Desondanks kan het zijn dat je de caching-duur wilt verlagen of zelfs he
 #~ msgid "``DSMR_PASSWORD``"
 #~ msgstr "``DSMR_PASSWORD``"
 
+#~ msgid "MQTT messages sent by DSMR-reader to your broker with a ``retain`` flag, meaning that the broker will remember the last value received for those topics. Updating retained MQTT topics consecutively with the same value has no effect. Therefor DSMR-reader caches the last value sent for each topic. DSMR-reader will not queue nor send MQTT messages that exactly match the previous one, greatly reducing the number of MQTT messages sent."
+#~ msgstr "DSMR-reader stuurt MQTT-berichten naar je broker met een zogenaamde ``retain`` vlag. Daarmee onthoudt de broker telkens de laatste waarde voor die topics. Het bijwerken van zulke topics, met telkens dezelfde waarde, heeft dan ook geen effect. Daarom gebruikt DSMR-reader een cache om ook zelf de laatste verstuurde waarde voor elke topic bij te houden. Achtereenvolgende berichten voor hetzelfde topic met exact dezelfde waarde worden daardoor niet dubbel verstuurd. Dit verkleint het aantal nodige MQTT-berichten aanzienlijk."
+
+#~ msgid "However, situationally you may want to decrease cache duration or disable it entirely. Set to ``0`` to disable. Omit to use the default."
+#~ msgstr "Desondanks kan het zijn dat je de caching-duur wilt verlagen of zelfs helemaal uitschakelen. Stel in op ``0`` om uit te schakelen. Laat weg om de standaardwaarde te gebruiken."

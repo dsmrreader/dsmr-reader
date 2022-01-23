@@ -42,7 +42,7 @@ def initialize_client() -> Optional[InfluxDBClient]:
     )
     # logger.debug('INFLUXDB: InfluxDB client/server status: "%s"', influxdb_client.ready().status)
 
-    if influxdb_client.buckets_api().find_bucket_by_name(influxdb_settings.bucket) is None:
+    if influxdb_client.buckets_api().find_bucket_by_name(influxdb_settings.bucket) is None:  # pragma: nocover
         logger.debug('INFLUXDB: Creating InfluxDB bucket "%s"', influxdb_settings.bucket)
 
         try:
