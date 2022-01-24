@@ -3,7 +3,7 @@
 
 
 {% block object-tools %}
-    <div class="submit-row" style="text-align: center; background: #FFFFCC;">
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
         {% blocktranslate %}Emails are currently sent to{% endblocktranslate %}: <strong>{{ email_address|default:'No email address configured!' }}</strong>
         <small>(<a href="{% url 'admin:dsmr_backend_emailsettings_change' 1 %}">{% blocktranslate %}edit email address here{% endblocktranslate %}</a>)</small>
     </div>
@@ -17,7 +17,7 @@
 
     {{ block.super }}
 
-    <div class="submit-row" style="text-align: center;">
+    <div class="submit-row" style="text-align: left;">
         {% blocktranslate %}Saving the configuration will reset the delay until the next email backup.{% endblocktranslate %}
     </div>
 

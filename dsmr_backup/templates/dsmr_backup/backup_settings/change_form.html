@@ -6,7 +6,7 @@
 
     {{ block.super }}
 
-    <div class="submit-row" style="text-align: center; background: #FFFFCC;">
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
         {% blocktranslate %}Saving the configuration will reset the delay until the next backup.{% endblocktranslate %}
         {% blocktranslate %}Use Dropbox to secure all your backups{% endblocktranslate %}, <a href="{% url 'admin:dsmr_backup_dropboxsettings_change' 1 %}">{% blocktranslate %}view Dropbox settings here{% endblocktranslate %}</a>.
         {% blocktranslate %}Or use GMail/email for keeping smaller backups{% endblocktranslate %}, <a href="{% url 'admin:dsmr_backup_emailbackupsettings_change' 1 %}">{% blocktranslate %}view email backup settings here{% endblocktranslate %}</a>.
