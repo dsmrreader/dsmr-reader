@@ -36,6 +36,7 @@ v5.0.0 - 2022-02-xx
 - ``Changed`` The ``dsmr_influxdb_export_all_readings`` its console arguments were renamed due to **InfluxDB 2.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
 - ``Changed`` Preferred Python version for DSMR-reader is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 - ``Changed`` Updated to Django 3.2 [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+- ``Fixed`` OpenAPI specs wijken qua formaat af van de bestandsextensie [`#1563 <https://github.com/dsmrreader/dsmr-reader/issues/1563>`_]
 
 ----
 

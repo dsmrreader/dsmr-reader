@@ -11,6 +11,7 @@ class TestViews(TestCase):
 
     def test_openapi_schema(self):
         response = Client().get(
-            reverse('v2-api-openapi-schema')
+            reverse('v2-api-openapi-schema'),
+            data=dict(format='openapi-json')
         )
         self.assertEqual(response.status_code, 200, response.content)
