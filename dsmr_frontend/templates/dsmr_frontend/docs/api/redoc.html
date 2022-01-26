@@ -16,7 +16,7 @@
     </style>
   </head>
   <body>
-    <redoc spec-url='{% url schema_url %}'></redoc>
+    <redoc spec-url="{% url schema_url %}" json-sample-expand-level="all" expand-responses="200,201"></redoc>
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
   </body>
 </html>
