@@ -1,7 +1,7 @@
 from unittest import mock
 import ssl
 
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.conf import settings
 import paho.mqtt.client as paho
 
@@ -149,6 +149,7 @@ class TestBroker(TestCase):
 
     @mock.patch('paho.mqtt.client.Client.loop')
     @mock.patch('paho.mqtt.client.Client.publish')
+    @override_settings(DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE=10)
     def test_run_cleanup(self, publish_mock, loop_mock):
         """ Test whether any excess of messages is cleared. """
         loop_mock.return_value = paho.MQTT_ERR_SUCCESS
