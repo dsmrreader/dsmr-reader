@@ -50,6 +50,7 @@ DSMRREADER_MODULE_DAILY_BACKUP = 'dsmr_backup.services.backup.run'
 DSMRREADER_MODULE_DROPBOX_EXPORT = 'dsmr_dropbox.services.run'
 DSMRREADER_MODULE_PVOUTPUT_EXPORT = 'dsmr_pvoutput.services.run'
 
+DSMRREADER_DROPBOX_DEFAULT_APP_KEY = '@TODO@TODO'  # @TODO
 DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
 DSMRREADER_DROPBOX_ERROR_INTERVAL = 12  # Skip new files for 12 hours when insufficient space in Dropbox account.

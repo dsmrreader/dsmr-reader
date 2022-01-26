@@ -42,7 +42,7 @@ class Command(BaseCommand):
         EmailSettings.objects.update(
             email_from=None, email_to=None, host=None, port=None, username=None, password=None
         )
-        DropboxSettings.objects.update(access_token=None)
+        DropboxSettings.objects.update(refresh_token=None)
         ConsumptionSettings.objects.update(
             electricity_grouping_type=ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING
         )

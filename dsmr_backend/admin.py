@@ -127,7 +127,7 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
             }
         ),
         (
-            ('Next call'), {
+            _('Next call'), {
                 'fields': ['planned'],
                 'description': _(
                     _('Only reschedule a process if you really need to, as it could cause mistimings at some point.')

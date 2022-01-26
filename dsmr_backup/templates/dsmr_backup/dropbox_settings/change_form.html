@@ -1,0 +1,24 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %} 
+
+
+{% block field_sets %}
+    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+        {% blocktranslate %}This will synchronize backups to your Dropbox account.{% endblocktranslate %}
+        <ul>
+            <li>{% blocktranslate %}Step 1: Either use the default DSMR-reader Dropbox "App Key" or register your own Dropbox app in the <a href="https://www.dropbox.com/developers/apps/" target="_blank">Dropbox Developers Console</a>.{% endblocktranslate %}</li>
+            <li>{% blocktranslate %}Step 2: Enter the "App Key" of the (DSMR-reader) Dropbox app below.{% endblocktranslate %}</li>
+            <li>{% blocktranslate %}Step 3: Click "save and continue editing" below. It should then be OK (✅).{% endblocktranslate %}</li>
+            <li>{% blocktranslate %}Step 4: Click the one-time setup link further below to go to Dropbox and authorize your app with your Dropbox account.{% endblocktranslate %}</li>
+            <li>⚠️ <strong>{% blocktranslate %}WARNING: Ensure you trust the Dropbox App and that it prompts for file access in a dedicated subfolder of the "Apps" folder in your account!{% endblocktranslate %}</strong></li>
+            <li>{% blocktranslate %}Step 5: Return to DSMR-reader and enter the one-time authorization code below (also known as Access Code in Dropbox).{% endblocktranslate %}</li>
+            <li>⚠️ <strong>{% blocktranslate %}WARNING: Ensure you trust the Dropbox App and that it prompts for file access in a dedicated subfolder of the "Apps" folder in your account!{% endblocktranslate %}</strong></li>
+            <li>{% blocktranslate %}Step 6: Finally click "save and continue editing" one last time. This will verify the one-time authorization code with Dropbox.{% endblocktranslate %}</li>
+            <li>{% blocktranslate %}Step 7: "Dropbox refresh token" should now be OK (✅).{% endblocktranslate %}</li>
+        </ul>
+        <small>{% blocktranslate %}You can always reauthorize the/your Dropbox app again. Just update the App Key in step 2 and follow the steps again.{% endblocktranslate %}</small>
+    </div>
+
+    {{ block.super }}
+
+{% endblock %}

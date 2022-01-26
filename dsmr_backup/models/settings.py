@@ -49,12 +49,35 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
 
 class DropboxSettings(ModelUpdateMixin, SingletonModel):
     """ Dropbox backup upload settings. """
-    access_token = models.CharField(
+    app_key = models.CharField(
         max_length=255,
         default=None,
         null=True,
         blank=True,
-        verbose_name=_('Dropbox access token'),
+        help_text=_('The Dropbox "App Key" for the Dropbox app to use (care which app you authorize!)'),
+    )
+    one_time_authorization_code = models.CharField(
+        max_length=255,
+        default=None,
+        null=True,
+        blank=True,
+        help_text=_(
+            'One-time authorization code Dropbox generates for you after authorizing your app with your Dropbox account'
+        ),
+    )
+    serialized_auth_flow = models.BinaryField(
+        default=None,
+        null=True,
+        blank=True,
+        help_text=_('Automatically managed by DSMR-reader - Only used once during authorization set up'),
+    )
+    refresh_token = models.CharField(
+        max_length=255,
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_('Dropbox refresh token'),
+        help_text=_('Automatically managed by DSMR-reader'),
     )
 
     def __str__(self):

@@ -89,8 +89,8 @@ class TestAdmin(TestCase):
             active=True
         ).exists())
 
-        # Setting any Dropbox token should enable SP
-        response = self.client.post(URL, dict(access_token='test'))
+        # Setting any Dropbox refresh token should enable SP
+        response = self.client.post(URL, dict(refresh_token='test'))
 
         self.assertEqual(response.status_code, 302)
         self.assertTrue(ScheduledProcess.objects.filter(

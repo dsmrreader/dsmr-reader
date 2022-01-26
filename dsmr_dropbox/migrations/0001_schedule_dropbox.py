@@ -12,7 +12,7 @@ def migrate_forward(apps, schema_editor):
     ScheduledProcess.objects.create(
         name='Dropbox export',
         module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT,
-        active=bool(dropbox_settings.access_token)
+        active=bool(dropbox_settings.refresh_token)
     )
 
 

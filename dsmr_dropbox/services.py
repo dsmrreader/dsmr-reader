@@ -6,6 +6,7 @@ from typing import Iterable, NoReturn
 from django.utils.translation import gettext as _
 from django.conf import settings
 import dropbox
+import dropbox.exceptions
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backup.models.settings import DropboxSettings
@@ -20,12 +21,12 @@ logger = logging.getLogger('dsmrreader')
 def run(scheduled_process: ScheduledProcess) -> NoReturn:
     dropbox_settings = DropboxSettings.get_solo()
 
-    if not dropbox_settings.access_token:
+    if not dropbox_settings.refresh_token:
         # Should not happen, safe fallback
         scheduled_process.disable()
         return
 
-    check_access_token(scheduled_process, dropbox_settings.access_token)
+    dropbox_access_token = generate_access_token(scheduled_process=scheduled_process)
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
 
     # Sync each file, recursively.
@@ -35,7 +36,7 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
 
         sync_file(
             scheduled_process=scheduled_process,
-            dropbox_access_token=dropbox_settings.access_token,
+            dropbox_access_token=dropbox_access_token,
             local_root_dir=backup_directory,
             abs_file_path=current_file
         )
@@ -43,23 +44,31 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
     scheduled_process.delay(hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL)
 
 
-def check_access_token(scheduled_process: ScheduledProcess, dropbox_access_token: str) -> NoReturn:
-    """ Verify auth token validity. """
-    dbx = dropbox.Dropbox(dropbox_access_token)
+def generate_access_token(scheduled_process: ScheduledProcess) -> NoReturn:
+    """ Verify refresh token validity, generate an access token. """
+    dropbox_settings = DropboxSettings.get_solo()
+    dbx = dropbox.Dropbox(
+        oauth2_refresh_token=dropbox_settings.refresh_token,
+        app_key=dropbox_settings.app_key
+    )
 
     try:
-        dbx.users_get_space_usage()
-    except (dropbox.exceptions.BadInputError, dropbox.exceptions.AuthError) as error:
+        dbx.refresh_access_token()
+        dbx.check_user()  # No-op
+    except Exception as error:
         logger.error(' - Dropbox auth error: %s', error)
-        message = _(
-            "Unable to authenticate with Dropbox, removing credentials. Error: {}".format(
-                error
-            )
-        )
+        message = _("Unable to authenticate with Dropbox, removing credentials. Error: {}".format(error))
         dsmr_frontend.services.display_dashboard_message(message=message)
-        DropboxSettings.objects.update(access_token=None)  # Does not trigger auto disable
+        DropboxSettings.objects.update(
+            refresh_token=None,
+        )  # Does not trigger auto disable
         scheduled_process.disable()
         raise
+
+    logger.info('Dropbox: Auth/user check OK, generated access token')
+
+    # For some reason the SDK does not expose this. Still works though.
+    return dbx._oauth2_access_token
 
 
 def list_files_in_dir(directory: str) -> Iterable:

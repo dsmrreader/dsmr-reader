@@ -1,8 +1,11 @@
+import pickle
+
 from django.dispatch import receiver
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.forms import TextInput
 from django.utils import timezone
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.conf import settings
 from django.db import models
 from solo.admin import SingletonModelAdmin
@@ -26,8 +29,8 @@ class BackupSettingsAdmin(SingletonModelAdmin):
             None, {
                 'fields': ['daily_backup', 'backup_time'],
                 'description': _(
-                    'Detailed instructions for restoring a backup can be found here <a href="https://dsmr-reader.readt'
-                    'hedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html">in documentation</a>.'
+                    'Detailed instructions for restoring a backup can be found here <a href="https://dsmr-reader.read'
+                    'thedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html">in documentation</a>.'
                 )
             }
         ),
@@ -41,21 +44,63 @@ class BackupSettingsAdmin(SingletonModelAdmin):
 
 @admin.register(DropboxSettings)
 class DropboxSettingsAdmin(SingletonModelAdmin):
+    change_form_template = 'dsmr_backup/dropbox_settings/change_form.html'
+    readonly_fields = ('app_key_is_set', 'masked_refresh_token')
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
     }
-    fieldsets = (
-        (
-            None, {
-                'fields': ['access_token'],
-                'description': _(
-                    'This will synchronize backups to your Dropbox account. Detailed instructions for configuring '
-                    'Dropbox can be found here: <a href="https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/'
-                    'backup_dropbox.html">Documentation</a>'
-                )
-            }
-        ),
-    )
+    fieldsets = None  # See below.
+
+    def get_fieldsets(self, request, obj=None):
+        """ Method due to reverse_lazy() usage """
+        return (
+            (
+                None, {
+                    'fields': ['app_key'],
+                },
+            ),
+            (
+                _('One-time set up with authorization link'), {
+                    'fields': ['app_key_is_set', 'one_time_authorization_code', 'masked_refresh_token'],
+                    'description': _(
+                        'Set the "App Key" above, save it and ONLY THEN <a href="{}" target="_blank">'
+                        '➡️ click this authorization link ⬅️</a> (opens Dropbox.com). Follow the steps at Dropbox.com, '
+                        'enter the one-time authorization code given by Dropbox below and save one last time.'.format(
+                            reverse_lazy('dropbox:authorize-app')
+                        )
+                    )
+                }
+            ),
+
+        )
+
+    def save_model(self, request, obj, form, change):  # pragma: no cover
+        """ Hook for finishing Dropbox app authorization flow."""
+        if not obj.serialized_auth_flow or not obj.one_time_authorization_code:
+            return super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
+
+        auth_flow = pickle.loads(obj.serialized_auth_flow)
+
+        try:
+            oauth_result = auth_flow.finish(form.cleaned_data['one_time_authorization_code'])
+        except Exception as e:
+            messages.error(request, _('Dropbox app authorization failed: {}'.format(e)))
+            return super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
+
+        obj.serialized_auth_flow = None
+        obj.refresh_token = oauth_result.refresh_token
+        obj.one_time_authorization_code = None
+
+        messages.success(request, _('Dropbox app authorization completed!'))
+        super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
+
+    def app_key_is_set(self, obj: DropboxSettings) -> str:  # pragma: no cover
+        return '✅' if obj.app_key else '❌'
+    app_key_is_set.short_description = _('App Key is set')
+
+    def masked_refresh_token(self, obj: DropboxSettings) -> str:  # pragma: no cover
+        return '✅' if obj.refresh_token else '❌'
+    masked_refresh_token.short_description = _('Dropbox refresh token')
 
 
 @admin.register(EmailBackupSettings)
@@ -116,5 +161,5 @@ def handle_dropbox_settings_update(sender, instance, **kwargs):
         module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT
     ).update(
         planned=timezone.now(),
-        active=bool(instance.access_token)
+        active=bool(instance.refresh_token)
     )
