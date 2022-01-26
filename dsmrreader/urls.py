@@ -7,9 +7,7 @@ from rest_framework.schemas import get_schema_view
 
 v2_api_schema = get_schema_view(
     title="DSMR-reader API",
-    description="# Changelog\n"
-                "See [online documentation](https://dsmr-reader.readthedocs.io/en/latest/api.html).\n"
-                "# Postman collection\n"
+    description="# Postman collection\n"
                 "- Download current collection [here]({static_url}dsmr_frontend/postman/collection.json).\n"
                 "- Download current variables [here]({static_url}dsmr_frontend/postman/variables.json).".format(
                     static_url=settings.STATIC_URL
