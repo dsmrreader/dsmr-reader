@@ -161,5 +161,5 @@ def handle_dropbox_settings_update(sender, instance, **kwargs):
         module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT
     ).update(
         planned=timezone.now(),
-        active=bool(instance.refresh_token)
+        active=bool(instance.app_key and instance.refresh_token)
     )

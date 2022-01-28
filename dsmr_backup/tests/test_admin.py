@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.conf import settings
 
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_backup.models.settings import BackupSettings
+from dsmr_backup.models.settings import BackupSettings, DropboxSettings
 
 
 class TestAdmin(TestCase):
@@ -50,7 +50,7 @@ class TestAdmin(TestCase):
         response = self.client.post(URL, data=data)
         self.assertEqual(response.status_code, 302)
 
-        # Test non existing folder and cause permission denied.
+        # Test non-existing folder and cause permission denied.
         data.update(dict(folder='/non/existing/'))
         exists_mock.return_value = False
         mkdirs_mock.side_effect = IOError('Denied')
@@ -89,10 +89,11 @@ class TestAdmin(TestCase):
             active=True
         ).exists())
 
-        # Setting any Dropbox refresh token should enable SP
-        response = self.client.post(URL, dict(refresh_token='test'))
+        # Setting both Dropbox app key and refresh token should enable SP
+        DropboxSettings.objects.all().update(refresh_token='fake')
+        response = self.client.post(URL, dict(app_key='test'))
 
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 302, response.content)
         self.assertTrue(ScheduledProcess.objects.filter(
             module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT,
             active=True
