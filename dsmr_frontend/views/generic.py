@@ -54,6 +54,6 @@ class DonationsRedirect(ReadTheDocsRedirectView):
     subpage = 'donations.html'
 
 
-class V4UpgradeRedirect(ReadTheDocsRedirectView):
-    subpage = 'faq/v4_upgrade.html'
-    branch = 'v4'
+class V5UpgradeRedirect(ReadTheDocsRedirectView):
+    subpage = 'tutorial/upgrading/to-v5.html'
+    branch = 'v5'
