@@ -234,16 +234,6 @@ If you find any listed on the left hand side, rename them to the one on the righ
     DSMR_PASSWORD    ️                 ➡️   DSMRREADER_ADMIN_PASSWORD
 
 
-The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::
-
-    DATALOGGER_INPUT_METHOD            ️➡️   DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD
-    DATALOGGER_SERIAL_PORT             ️➡️   DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT
-    DATALOGGER_SERIAL_BAUDRATE         ➡️   DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE
-    DATALOGGER_API_HOSTS    ️           ➡️   DSMRREADER_REMOTE_DATALOGGER_API_HOSTS
-    DATALOGGER_API_KEYS    ️            ➡️   DSMRREADER_REMOTE_DATALOGGER_API_KEYS
-    DATALOGGER_TIMEOUT    ️             ➡️   DSMRREADER_REMOTE_DATALOGGER_TIMEOUT
-    DATALOGGER_SLEEP    ️               ➡️   DSMRREADER_REMOTE_DATALOGGER_SLEEP
-    DATALOGGER_MIN_SLEEP_FOR_RECONNECT ➡️   DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT
 
 Check DSMR-reader::
 
@@ -293,3 +283,24 @@ It has been disabled automatically as well.
 .. hint::
 
     Where the previous version utilized *usernames*, *passwords* and *databases*, it now connects using *organizations*, *API tokens* and *buckets*.
+
+
+8. Situational: Reconfigure Dropbox
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you happened to use DSMR-reader's Dropbox sync for backups, you **must** reconfigure it accordingly in order to get it working again.
+
+
+9. Situational: Remote datalogger env vars
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::
+
+    DATALOGGER_INPUT_METHOD            ️➡️   DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD
+    DATALOGGER_SERIAL_PORT             ️➡️   DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT
+    DATALOGGER_SERIAL_BAUDRATE         ➡️   DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE
+    DATALOGGER_API_HOSTS    ️           ➡️   DSMRREADER_REMOTE_DATALOGGER_API_HOSTS
+    DATALOGGER_API_KEYS    ️            ➡️   DSMRREADER_REMOTE_DATALOGGER_API_KEYS
+    DATALOGGER_TIMEOUT    ️             ➡️   DSMRREADER_REMOTE_DATALOGGER_TIMEOUT
+    DATALOGGER_SLEEP    ️               ➡️   DSMRREADER_REMOTE_DATALOGGER_SLEEP
+    DATALOGGER_MIN_SLEEP_FOR_RECONNECT ➡️   DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT

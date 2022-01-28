@@ -9,8 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../../how-to/admin/backup_dropbox.rst:2
 msgid "Admin: Backup & Dropbox"
@@ -24,68 +24,58 @@ msgstr "Backup"
 msgid "The application backs up your data daily. You can change the time the backup will be created every day."
 msgstr "De applicatie maakt dagelijks back-ups van de gegevens. Je kunt hier het tijdstip van de back-up wijzigen."
 
-#: ../../how-to/admin/backup_dropbox.rst:13
+#: ../../how-to/admin/backup_dropbox.rst:14
 msgid "Dropbox"
 msgstr "Dropbox"
 
-#: ../../how-to/admin/backup_dropbox.rst:15
-msgid "You can use your Dropbox-account to make sure your backups are safely stored in your account."
-msgstr "Je kunt je Dropbox-account gebruiken om ervoor te zorgen dat je data op een veilige plek bewaard wordt."
-
-#: ../../how-to/admin/backup_dropbox.rst:22
-msgid "Make sure you have a Dropbox-account or sign up for one."
-msgstr "Zorg dat je een Dropbox-account hebt of maak er een aan."
-
-#: ../../how-to/admin/backup_dropbox.rst:26
-msgid "Now go to `Dropbox Apps <https://www.dropbox.com/developers/apps>`_ and click ``Create app`` in top right corner:"
-msgstr "Ga naar `Dropbox Apps <https://www.dropbox.com/developers/apps>`_ en klik op ``Create app`` rechtsbovenin."
-
-#: ../../how-to/admin/backup_dropbox.rst:33
-msgid "Choose (1) ``Scoped access``, (2) ``App folder`` and (3) enter a name for your app:"
-msgstr "Kies (1) ``Scoped access``, (2) ``App folder`` en (3) vul een naam in voor je app:"
-
-#: ../../how-to/admin/backup_dropbox.rst:37
-msgid "It has to be unique among all Dropbox app names globally and it will also be used as the **directory name**, within the Apps-folder of your own Dropbox account."
-msgstr "Deze moet uniek zijn tussen alle Dropbox apps die er bestaan. De naam wordt ook gebruikt voor de map binnen de Apps-map van je Dropbox-account."
-
-#: ../../how-to/admin/backup_dropbox.rst:44
-msgid "After creation, go to the **Permissions** tab and check the boxes for:"
-msgstr "Na aanmaken, ga naar de permissies-tab en vink deze opties aan:"
-
-#: ../../how-to/admin/backup_dropbox.rst:46
-msgid "``files.metadata.write``"
-msgstr "``files.metadata.write``"
-
-#: ../../how-to/admin/backup_dropbox.rst:47
-msgid "``files.metadata.read``"
-msgstr "``files.metadata.read``"
-
-#: ../../how-to/admin/backup_dropbox.rst:48
-msgid "``files.content.write``"
-msgstr "``files.content.write``"
-
-#: ../../how-to/admin/backup_dropbox.rst:49
-msgid "``files.content.read``"
-msgstr "``files.content.read``"
-
-#: ../../how-to/admin/backup_dropbox.rst:51
-msgid "And don't forget to click **Submit** on the bottom of the page."
-msgstr "En vergeet niet om te klikken op **Submit** onderaan de pagina."
-
-#: ../../how-to/admin/backup_dropbox.rst:59
-msgid "On the **Settings** tab set ``Access token expiration`` to ``No expiration`` and click the ``Generate`` button below ``Generated access token``."
-msgstr "Bij de **Settings** tab stel ``Access token expiration`` in op ``No expiration`` en klik de ``Generate`` knop onder ``Generated access token``."
-
-#: ../../how-to/admin/backup_dropbox.rst:65
-msgid "Copy the **generated access token** to the DSMR-reader settings for the Dropbox-configuration. The DSMR-reader application should shortly sync any backups created."
-msgstr "Kopieer de gegenereerde toegangstoken naar de DSMR-reader instellingen onder Dropbox-configuratie. DSMR-reader zou vrij vlot gemaakte backups moeten uploaden naar je Dropbox-account."
-
-#: ../../how-to/admin/backup_dropbox.rst:70
-msgid "Check the `backend logs <https://dsmr-reader.readthedocs.io/en/latest/how-to/troubleshooting/logfiles.html>`_ if the backup files do not appear in the dropbox folder."
-msgstr "Bekijk de `backend logs <https://dsmr-reader.readthedocs.io/en/latest/how-to/troubleshooting/logfiles.html>`_ als de backups niet in de Dropbox (sub)map verschijnen."
+#: ../../how-to/admin/backup_dropbox.rst:16
+msgid "The Dropbox integration has been reworked in DMSR-reader ``v5.x``. See the Dropbox settings in the admin configuration for more details."
+msgstr "De Dropbox-integratie is gewijzigd in DSMR-reader ``v5.x``. Zie de Dropbox-instellingen binnen de admin-configuratie voor meer informatie."
 
 #~ msgid "Choose the following options: (1) **Dropbox API** and (2) **App folder**. Then enter a name for your app (3), this will also be used as directory name within the Apps-folder of your Dropbox."
 #~ msgstr "Kies de volgende opties:  (1) **Dropbox API** en (2) **App folder**. Voer vervolgens een naam voor je app in (3), deze wordt ook gebruikt als naam van de submap binnen je Apps-folder in Dropbox."
 
 #~ msgid "The app should be created in developer-mode. You can generate an access token for yourself by clicking the **\"Generate\"** button somewhere below."
 #~ msgstr "De app is als het goed is nu aangemaakt in developer-modus. Je kunt nog een toegangstoken genereren door op de knop **\"Generate\"** te klikken, die verderop onderaan de pagina staat."
+
+#~ msgid "You can use your Dropbox-account to make sure your backups are safely stored in your account."
+#~ msgstr "Je kunt je Dropbox-account gebruiken om ervoor te zorgen dat je data op een veilige plek bewaard wordt."
+
+#~ msgid "Make sure you have a Dropbox-account or sign up for one."
+#~ msgstr "Zorg dat je een Dropbox-account hebt of maak er een aan."
+
+#~ msgid "Now go to `Dropbox Apps <https://www.dropbox.com/developers/apps>`_ and click ``Create app`` in top right corner:"
+#~ msgstr "Ga naar `Dropbox Apps <https://www.dropbox.com/developers/apps>`_ en klik op ``Create app`` rechtsbovenin."
+
+#~ msgid "Choose (1) ``Scoped access``, (2) ``App folder`` and (3) enter a name for your app:"
+#~ msgstr "Kies (1) ``Scoped access``, (2) ``App folder`` en (3) vul een naam in voor je app:"
+
+#~ msgid "It has to be unique among all Dropbox app names globally and it will also be used as the **directory name**, within the Apps-folder of your own Dropbox account."
+#~ msgstr "Deze moet uniek zijn tussen alle Dropbox apps die er bestaan. De naam wordt ook gebruikt voor de map binnen de Apps-map van je Dropbox-account."
+
+#~ msgid "After creation, go to the **Permissions** tab and check the boxes for:"
+#~ msgstr "Na aanmaken, ga naar de permissies-tab en vink deze opties aan:"
+
+#~ msgid "``files.metadata.write``"
+#~ msgstr "``files.metadata.write``"
+
+#~ msgid "``files.metadata.read``"
+#~ msgstr "``files.metadata.read``"
+
+#~ msgid "``files.content.write``"
+#~ msgstr "``files.content.write``"
+
+#~ msgid "``files.content.read``"
+#~ msgstr "``files.content.read``"
+
+#~ msgid "And don't forget to click **Submit** on the bottom of the page."
+#~ msgstr "En vergeet niet om te klikken op **Submit** onderaan de pagina."
+
+#~ msgid "On the **Settings** tab set ``Access token expiration`` to ``No expiration`` and click the ``Generate`` button below ``Generated access token``."
+#~ msgstr "Bij de **Settings** tab stel ``Access token expiration`` in op ``No expiration`` en klik de ``Generate`` knop onder ``Generated access token``."
+
+#~ msgid "Copy the **generated access token** to the DSMR-reader settings for the Dropbox-configuration. The DSMR-reader application should shortly sync any backups created."
+#~ msgstr "Kopieer de gegenereerde toegangstoken naar de DSMR-reader instellingen onder Dropbox-configuratie. DSMR-reader zou vrij vlot gemaakte backups moeten uploaden naar je Dropbox-account."
+
+#~ msgid "Check the `backend logs <https://dsmr-reader.readthedocs.io/en/latest/how-to/troubleshooting/logfiles.html>`_ if the backup files do not appear in the dropbox folder."
+#~ msgstr "Bekijk de `backend logs <https://dsmr-reader.readthedocs.io/en/latest/how-to/troubleshooting/logfiles.html>`_ als de backups niet in de Dropbox (sub)map verschijnen."

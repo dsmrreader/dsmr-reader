@@ -189,53 +189,65 @@ msgstr "Hernoem oude env vars in ``.env`` als je die tegenkomt (zie hieronder)::
 msgid "If you find any listed on the left hand side, rename them to the one on the right hand side::"
 msgstr "Wanneer je eentje tegenkomt die aan de linkerkant staat, hernoem die naar de variant aan de rechterkant::"
 
-#: ../../tutorial/upgrading/to-v5.rst:237
-msgid "The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::"
-msgstr "De volgende **remote datalogger script** instellingen zijn ook hernoemd, maar je hoeft ze alleen aan te passen als je ze daadwerkelijk gebruikt, samen met een nieuwe versie van het remote datalogger script. Bijvoorbeeld wanneer je Docker gebruikt::"
-
-#: ../../tutorial/upgrading/to-v5.rst:248
+#: ../../tutorial/upgrading/to-v5.rst:238
 msgid "Check DSMR-reader::"
 msgstr "Check DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:257
+#: ../../tutorial/upgrading/to-v5.rst:247
 msgid "Update Nginx config::"
 msgstr "Update Nginx config::"
 
-#: ../../tutorial/upgrading/to-v5.rst:262
+#: ../../tutorial/upgrading/to-v5.rst:252
 msgid "Update Supervisor configs::"
 msgstr "Update Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:268
+#: ../../tutorial/upgrading/to-v5.rst:258
 msgid "Reload Supervisor configs::"
 msgstr "Herlaad Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:272
+#: ../../tutorial/upgrading/to-v5.rst:262
 msgid "Start DSMR-reader::"
 msgstr "Start DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:278
+#: ../../tutorial/upgrading/to-v5.rst:268
 msgid "6. Deploy"
 msgstr "6. Deploy"
 
-#: ../../tutorial/upgrading/to-v5.rst:279
+#: ../../tutorial/upgrading/to-v5.rst:269
 msgid "Finally, execute the deploy script::"
 msgstr "Tot slot, voer het deploy-script uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:284
+#: ../../tutorial/upgrading/to-v5.rst:274
 msgid "Great. You should now be on ``v5.x``!"
 msgstr "Top! Je zou nu ``v5.x`` moeten draaien!"
 
-#: ../../tutorial/upgrading/to-v5.rst:288
+#: ../../tutorial/upgrading/to-v5.rst:278
 msgid "7. Situational: Reconfigure InfluxDB"
 msgstr "7. Situationeel: Herconfigureer InfluxDB"
 
-#: ../../tutorial/upgrading/to-v5.rst:290
+#: ../../tutorial/upgrading/to-v5.rst:280
 msgid "If you happened to use DSMR-reader export to InfluxDB previously, you **must** reconfigure it accordingly in order to get it working again. It has been disabled automatically as well."
 msgstr "Als je DSMR-reader gebruikte om data te exporteren naar InfluxDB, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen. De integratie is tevens automatisch uitgeschakeld."
 
-#: ../../tutorial/upgrading/to-v5.rst:295
+#: ../../tutorial/upgrading/to-v5.rst:285
 msgid "Where the previous version utilized *usernames*, *passwords* and *databases*, it now connects using *organizations*, *API tokens* and *buckets*."
 msgstr "Waar de vorige versie *usernames*, *passwords* en *databases* gebruikte, is het nu gewijzigd naar *organizations*, *API tokens* en *buckets*."
+
+#: ../../tutorial/upgrading/to-v5.rst:289
+msgid "8. Situational: Reconfigure Dropbox"
+msgstr "8. Situationeel: Herconfigureer Dropbox"
+
+#: ../../tutorial/upgrading/to-v5.rst:291
+msgid "If you happened to use DSMR-reader's Dropbox sync for backups, you **must** reconfigure it accordingly in order to get it working again."
+msgstr "Als je DSMR-reader gebruikte om backups naar Dropbox te sturen, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen."
+
+#: ../../tutorial/upgrading/to-v5.rst:295
+msgid "9. Situational: Remote datalogger env vars"
+msgstr "9. Situationeel: Remote datalogger env vars"
+
+#: ../../tutorial/upgrading/to-v5.rst:297
+msgid "The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::"
+msgstr "De volgende **remote datalogger script** instellingen zijn ook hernoemd, maar je hoeft ze alleen aan te passen als je ze daadwerkelijk gebruikt, samen met een nieuwe versie van het remote datalogger script. Bijvoorbeeld wanneer je Docker gebruikt::"
 
 #~ msgid "✋ Do not upgrade if you run **PostgreSQL 9.5 or lower**. *Upgrade PostgreSQL first.*"
 #~ msgstr "✋ Upgrade niet wanneer je **PostgreSQL 9.5 of lager** draait. *Upgrade PostgreSQL eerst.*"

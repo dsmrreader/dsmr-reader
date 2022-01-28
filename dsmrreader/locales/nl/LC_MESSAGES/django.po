@@ -63,10 +63,8 @@ msgstr "Versturen van e-mail test gefaald: {}"
 msgid "Email sent succesfully, please check your email inbox (or spam folder)."
 msgstr "E-mail is verstuurd. Controleer je Inbox (of Spam-folder)."
 
-#, fuzzy
-#| msgid "Next check"
 msgid "Next call"
-msgstr "Volgende controle"
+msgstr "Volgende aanroep"
 
 msgid "Only reschedule a process if you really need to, as it could cause mistimings at some point."
 msgstr "Herplan een proces alleen wanneer het noodzakelijk is, gezien het de timing tussen processen kan aantasten."
@@ -228,24 +226,22 @@ msgid "Detailed instructions for restoring a backup can be found here <a href=\"
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html\">FAQ in documentatie</a>."
 
 msgid "One-time set up with authorization link"
-msgstr ""
+msgstr "Eenmalige setup met autorisatielink"
 
 msgid "Set the \"App Key\" above, save it and ONLY THEN <a href=\"{}\" target=\"_blank\">➡️ click this authorization link ⬅️</a> (opens Dropbox.com). Follow the steps at Dropbox.com, enter the one-time authorization code given by Dropbox below and save one last time."
-msgstr ""
+msgstr "Stel hierboven de \"App Key\" in, sla deze op en ALLEEN DAN <a href=\"{}\" target=\"_blank\">➡️ kun je deze autorisatielink klikken ⬅️</a> (opent Dropbox.com). Volg de stappen op Dropbox.com, voer daarna de door Dropbox getoonde eenmalige autorisatiecode in hieronder. Sla dit formulier tot slot nog een keer op."
 
 msgid "Dropbox app authorization failed: {}"
-msgstr ""
+msgstr "Dropbox app autorisatie gefaald: {}"
 
 msgid "Dropbox app authorization completed!"
-msgstr ""
+msgstr "Dropbox app autorisatie voltooid!"
 
 msgid "App Key is set"
-msgstr ""
+msgstr "App Key is ingesteld"
 
-#, fuzzy
-#| msgid "Dropbox access token"
 msgid "Dropbox refresh token"
-msgstr "Dropbox access token"
+msgstr "Dropbox refresh token"
 
 msgid "You can have DSMR-reader email you a backup every once in a while.<br><br>Please note that the backup will <strong>ONLY contain day and hour statistics</strong>, which are the most important data to preserve historically."
 msgstr "Je kunt DSMR-reader jezelf regelmatig een uitgeklede back-up laten sturen per e-mail.<br><br>N.B.: Deze back-up <strong>bevat alleen dag- en uurstatistics</strong>, de belangrijkste historische gegevens."
@@ -284,16 +280,16 @@ msgid "Backup configuration"
 msgstr "Back-upconfiguratie"
 
 msgid "The Dropbox \"App Key\" for the Dropbox app to use (care which app you authorize!)"
-msgstr ""
+msgstr "De Dropbox \"App Key\" voor de betreffende Dropbox-app die je wilt gebruiken (let op welke app je autoriseert!)"
 
 msgid "One-time authorization code Dropbox generates for you after authorizing your app with your Dropbox account"
-msgstr ""
+msgstr "Eenmalige autorisatiecode die Dropbox voor je genereert nadat je je app hebt geautoriseerd voor je Dropbox-account."
 
 msgid "Automatically managed by DSMR-reader - Only used once during authorization set up"
-msgstr ""
+msgstr "Automatisch beheerd door DSMR-reader - Slechts voor eenmalig gebruik bij instellen"
 
 msgid "Automatically managed by DSMR-reader"
-msgstr ""
+msgstr "Automatisch beheerd door DSMR-reader"
 
 msgid "Dropbox configuration"
 msgstr "Dropbox-configuratie"
@@ -347,34 +343,34 @@ msgid "view email backup settings here"
 msgstr "bekijk hier instellingen voor back-up per e-mail"
 
 msgid "This will synchronize backups to your Dropbox account."
-msgstr ""
+msgstr "Dit synchroniseert back-ups naar je Dropbox-account."
 
-msgid "Step 1: Either use the default DSMR-reader Dropbox \"App Key\" or register your own Dropbox app in the <a href=\"https://www.dropbox.com/developers/apps/\" target=\"_blank\">Dropbox Developers Console</a>."
-msgstr ""
+msgid "Step 1: Either use the default DSMR-reader Dropbox \"App Key\" (w5z4vlw9t2dqq5g) or register your own Dropbox app in the <a href=\"https://www.dropbox.com/developers/apps/\" target=\"_blank\">Dropbox Developers Console</a>."
+msgstr "Stap 1: Gebruik ofwel de standaard DSMR-reader Dropbox \"App Key\" (w5z4vlw9t2dqq5g) of registreer je eigen Dropbox-app in de <a href=\"https://www.dropbox.com/developers/apps/\" target=\"_blank\">Dropbox Developers Console</a>."
 
 msgid "Step 2: Enter the \"App Key\" of the (DSMR-reader) Dropbox app below."
-msgstr ""
+msgstr "Stap 2: Voer de \"App Key\" van de (DSMR-reader) Dropbox-app hieronder in."
 
 msgid "Step 3: Click \"save and continue editing\" below. It should then be OK (✅)."
-msgstr ""
+msgstr "Stap 3: Klik \"opslaan en doorgaan\" hieronder. Het zou daarna OK moeten zijn (✅)."
 
 msgid "Step 4: Click the one-time setup link further below to go to Dropbox and authorize your app with your Dropbox account."
-msgstr ""
+msgstr "Stap 4: Klik de eenmalige autorisatielink hieronder om naar Dropbox te gaan en je Dropbox-account te koppelen."
 
 msgid "WARNING: Ensure you trust the Dropbox App and that it prompts for file access in a dedicated subfolder of the \"Apps\" folder in your account!"
-msgstr ""
+msgstr "WAARSCHUWING: Zorg ervoor dat je de Dropbox-app vertrouwt en dat Dropbox aangeeft dat het alleen bestanden in een eigen submap van \"Apps\" in je account beheert!"
 
 msgid "Step 5: Return to DSMR-reader and enter the one-time authorization code below (also known as Access Code in Dropbox)."
-msgstr ""
+msgstr "Stap 5: Keer terug naar DSMR-reader en voer de eenmalige autorisatiecode hieronder in (ook wel bekend als Access Code binnen Dropbox)."
 
 msgid "Step 6: Finally click \"save and continue editing\" one last time. This will verify the one-time authorization code with Dropbox."
-msgstr ""
+msgstr "Stap 6: Tot slot, klik een laatste keer op \"opslaan en doorgaan\". Dit verifieert de eenmalige autorisatiecode bij Dropbox."
 
 msgid "Step 7: \"Dropbox refresh token\" should now be OK (✅)."
-msgstr ""
+msgstr "Stap 7: \"Dropbox refresh token\" zou nu OK moeten zijn (✅)."
 
 msgid "You can always reauthorize the/your Dropbox app again. Just update the App Key in step 2 and follow the steps again."
-msgstr ""
+msgstr "Je kunt altijd je/de Dropbox-app opnieuw autoriseren. Werk de App Key bij in stap 2 en volg de rest van de stappen opnieuw."
 
 msgid "Emails are currently sent to"
 msgstr "E-mails worden momenteel verstuurd naar"
@@ -854,7 +850,7 @@ msgid "Unable to upload files to Dropbox due to {}. Ignoring new files for the n
 msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
 
 msgid "Aborted Dropbox authorization: Missing Dropbox \"App Key\" in DSMR-reader"
-msgstr ""
+msgstr "Dropbox autorisatie afgebroken: Geen Dropbox \"App Key\" in DSMR-reader"
 
 msgid "Security"
 msgstr "Beveiliging"
