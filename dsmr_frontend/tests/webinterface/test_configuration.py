@@ -5,15 +5,13 @@ from django.urls import reverse
 
 class TestViews(TestCase):
     namespace = 'frontend'
-    support_data = True
-    support_gas = True
 
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
 
     def test_configuration(self):
-        """ Basicly the same view (context vars) as the archive view. """
+        """ Basically the same view (context vars) as the archive view. """
         view_url = reverse('{}:configuration'.format(self.namespace))
         # Check login required.
         response = self.client.get(view_url)

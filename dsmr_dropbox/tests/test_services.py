@@ -53,6 +53,12 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.schedule_process.refresh_from_db()
         self.assertFalse(self.schedule_process.active)
 
+        # Happy flow
+        check_user_mock.side_effect = None
+        refresh_access_token_mock.return_value = 'fake-access-token'
+        DropboxSettings.objects.all().update(app_key='appkey', refresh_token='token')
+        dsmr_dropbox.services.generate_access_token(self.schedule_process)
+
     @mock.patch('dsmr_dropbox.services.generate_access_token')
     @mock.patch('dsmr_dropbox.services.list_files_in_dir')
     @mock.patch('dsmr_dropbox.services.sync_file')
