@@ -9,8 +9,8 @@ django-debug-toolbar==3.2.4
 django-filter==21.1
 django-mathfilters==1.0.0
 djangorestframework==3.13.1
-django-solo==1.2.0
-dropbox==11.25.0
+django-solo==2.0
+dropbox==11.26.0
 gunicorn==20.1.0
 influxdb-client==1.25
 paho-mqtt==1.6.1
