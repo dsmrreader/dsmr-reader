@@ -4,7 +4,7 @@ crcmod==1.7
 django==3.2.11
 django-admin-rangefilter==0.8.3
 django-admin-sortable==2.3
-django-colorfield==0.4.5
+django-colorfield==0.6.3
 django-debug-toolbar==3.2.4
 django-filter==21.1
 django-mathfilters==1.0.0

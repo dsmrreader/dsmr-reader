@@ -1,7 +1,7 @@
 # Poetry is currently only used with development
 poetry
 polib==1.1.1
-pylama==7.7.1
+pylama==8.3.0
 pytest-cov==3.0.0
 pytest-django==4.5.2
 pytest-xdist==2.5.0
