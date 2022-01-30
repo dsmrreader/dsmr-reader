@@ -50,7 +50,7 @@ DSMRREADER_MODULE_DAILY_BACKUP = 'dsmr_backup.services.backup.run'
 DSMRREADER_MODULE_DROPBOX_EXPORT = 'dsmr_dropbox.services.run'
 DSMRREADER_MODULE_PVOUTPUT_EXPORT = 'dsmr_pvoutput.services.run'
 
-# Refers to the Dropbox app "DSMR-reader's Backup" which is a "Scoped App (App Folder)". Public access allowed with PKCE
+# Refers to the Dropbox app "Official DSMR-Reader" which is a "Scoped App (App Folder)". Public access allowed with PKCE
 DSMRREADER_DROPBOX_DEFAULT_APP_KEY = 'w5z4vlw9t2dqq5g'
 DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.

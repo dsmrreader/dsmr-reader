@@ -114,7 +114,7 @@ Execute the following::
 
 .. attention::
 
-    Try running the command ``python3.9 --version`` to see if things worked out. If you're getting any errors, do not continue with the upgrade.
+    Try running the command ``python3 --version`` to see if things worked out. If you're getting any errors, do not continue with the upgrade.
 
 ----
 
@@ -171,6 +171,10 @@ Install Python venv::
 
     sudo apt-get install python3-venv
 
+    # You MAY NOT need this, but be sure to install it if you happen to hit the following error at any point later:
+    # "ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory"
+    sudo apt-get install libopenjp2-7-dev
+
 Stop DSMR-reader::
 
     sudo supervisorctl stop all
@@ -188,12 +192,15 @@ Create new ``v5.x`` virtualenv::
 Remove the following line from ``/home/dsmr/.bashrc``::
 
     # (feel free to use "nano" instead or whatever you'd like)
-    vi /home/dsmr/.bashrc
+    vi ~/.bashrc
 
-    # Remove if you see this line:
+Remove this line (if set)::
+
+    # Probably on the bottom of the file.
     source ~/.virtualenvs/dsmrreader/bin/activate
 
-    # Add this line instead:
+Add this line instead::
+
     source ~/dsmr-reader/.venv/bin/activate
 
 Update DSMR-reader codebase::
@@ -209,14 +216,14 @@ Update DSMR-reader codebase::
 Install dependencies::
 
     source ~/dsmr-reader/.venv/bin/activate
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt
+
+    pip3 install pip --upgrade
+    pip3 install -r ~/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
 
 Rename any legacy setting names in ``.env`` you find (see below)::
 
-    sudo su - dsmr
-
     # (feel free to use "nano" instead or whatever you'd like)
-    vi .env
+    vi ~/dsmr-reader/.env
 
 If you find any listed on the left hand side, rename them to the one on the right hand side::
 
@@ -234,20 +241,32 @@ If you find any listed on the left hand side, rename them to the one on the righ
     DSMR_PASSWORD    ️                 ➡️   DSMRREADER_ADMIN_PASSWORD
 
 
-
 Check DSMR-reader::
 
-    sudo su - dsmr
-
-    # This should output something like: "System check identified no issues (0 silenced)."
     ./manage.py check
+
+It should output something similar to: "System check identified no issues (0 silenced)."
+
+Execute::
+
+    ./manage.py migrate
+
+Execute::
 
     logout
 
+.. attention::
+
+    Note: This *may* revert any customizations you've done yourself, such as HTTP Basic Auth configuration.
+
 Update Nginx config::
 
-    # Note: This *may* revert any customizations you've done yourself, such as HTTP Basic Auth configuration.
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
+
+Reload Nginx::
+
+    sudo nginx -t
+    sudo systemctl reload nginx.service
 
 Update Supervisor configs::
 
@@ -258,6 +277,7 @@ Update Supervisor configs::
 Reload Supervisor configs::
 
    sudo supervisorctl reread
+   sudo supervisorctl update
 
 Start DSMR-reader::
 
