@@ -92,13 +92,31 @@ def get_capability(capability: Capability) -> bool:
 
 def is_latest_version() -> bool:
     """ Checks whether the current version is the latest tagged available on GitHub. """
-    response = requests.get(settings.DSMRREADER_LATEST_TAGS_LIST)
-    latest_tag = response.json()[0]
+    response = requests.get(settings.DSMRREADER_LATEST_RELEASES_LIST)
 
-    local_version = '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3])
-    remote_version = latest_tag['name'].replace('v', '')
+    for current_release in response.json():
+        # Ignore release candidates or drafts.
+        if current_release['prerelease'] or current_release['draft']:
+            continue
 
-    return StrictVersion(local_version) >= StrictVersion(remote_version)
+        # Ignore other branches.
+        if not current_release['tag_name'].startswith(settings.DSMRREADER_MAIN_BRANCH):
+            continue
+
+        release_tag = current_release['tag_name'].replace('v', '')
+        local_version = '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3])
+
+        # StrictVersion does not support dashes nor rc's
+        # @see https://www.python.org/dev/peps/pep-0386/
+        comparable_release_tag = release_tag.replace('-', '').replace('rc', 'b')
+
+        # Ignore same or lower releases.
+        if StrictVersion(comparable_release_tag) <= StrictVersion(local_version):
+            continue
+
+        return False
+
+    return True
 
 
 def is_timestamp_passed(timestamp: Optional[timezone.datetime]) -> bool:
