@@ -19,21 +19,30 @@ $(document).ready(function () {
             {
                 type: 'category',
                 boundaryGap: false,
-                data: []
+                data: [],
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             }
         ],
         yAxis: [
             {
                 type: 'value',
                 min: 'dataMin',
-                max: 'dataMax'
+                max: 'dataMax',
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             }
         ],
         dataZoom: [
             {
                 show: true,
                 start: LIVE_GRAPHS_INITIAL_ZOOM,
-                end: 100
+                end: 100,
+                textStyle: {
+                    color: TEXTSTYLE_COLOR
+                }
             },
             {
                 type: 'inside',

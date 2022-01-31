@@ -22,12 +22,18 @@ $(document).ready(function () {
                 {
                     type: 'category',
                     boundaryGap: GAS_GRAPH_STYLE === 'bar',
-                    data: xhr_data.read_at
+                    data: xhr_data.read_at,
+                    axisLabel: {
+                        color: TEXTSTYLE_COLOR
+                    }
                 }
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLabel: {
+                        color: TEXTSTYLE_COLOR
+                    }
                 }
             ],
             dataZoom: [
@@ -36,7 +42,10 @@ $(document).ready(function () {
                     // Do not change initial zoom when using a non DSMR v5 meter.
                     // Because it will cause DSMR v4 meter users to only display 2 of 24 hours by default.
                     start: TELEGRAM_DSMR_VERSION === '50' ? LIVE_GRAPHS_INITIAL_ZOOM : 0,
-                    end: 100
+                    end: 100,
+                    textStyle: {
+                        color: TEXTSTYLE_COLOR
+                    }
                 },
                 {
                     type: 'inside',

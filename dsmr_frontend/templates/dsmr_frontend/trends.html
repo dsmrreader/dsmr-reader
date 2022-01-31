@@ -138,7 +138,14 @@
         const BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
 
         const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+
+        let TEXTSTYLE_COLOR = '#333';
+        if (document.body.classList.contains('dark-mode')) {
+            TEXTSTYLE_COLOR = 'rgba(255, 255, 255, 0.6)';
+        }
+
         const TITLE_TEXTSTYLE_OPTIONS = {
+            color: TEXTSTYLE_COLOR,
             rich: {
                 S: {
                     fontSize: 10,

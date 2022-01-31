@@ -79,7 +79,8 @@ function update_trends_averages(start_date, end_date) {
         url: AVG_CONSUMPTION_URL,
         data: {
             'start_date': start_date,
-            'end_date': end_date
+            'end_date': end_date,
+            'dark_theme': document.body.classList.contains('dark-mode')
         },
     }).done(function (xhr_data) {
         echarts_options.baseOption.series[0].data = xhr_data.electricity;

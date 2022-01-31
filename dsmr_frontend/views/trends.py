@@ -60,9 +60,17 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
             hour_start = '{}:00 - {}:00'.format(int(current['hour_start']), int(current['hour_start']) + 1)
 
             avg_electricity = (current['avg_electricity1'] + current['avg_electricity2']) / 2
+
+            textColor = 'black'
+            if form.cleaned_data['dark_theme'] == 'true':
+               textColor = 'rgba(255, 255, 255, 0.6)'
+
             data['electricity'].append({
                 'name': hour_start,
-                'value': float(dsmr_consumption.services.round_decimal(avg_electricity, decimal_count=5))
+                'value': float(dsmr_consumption.services.round_decimal(avg_electricity, decimal_count=5)),
+                'label': {
+                    'color': textColor
+                }
             })
 
             if capabilities[Capability.ELECTRICITY_RETURNED]:
@@ -71,13 +79,19 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
                 ) / 2
                 data['electricity_returned'].append({
                     'name': hour_start,
-                    'value': float(dsmr_consumption.services.round_decimal(avg_electricity_returned, decimal_count=5))
+                    'value': float(dsmr_consumption.services.round_decimal(avg_electricity_returned, decimal_count=5)),
+                    'label': {
+                        'color': textColor
+                    }
                 })
 
             if capabilities[Capability.GAS]:
                 data['gas'].append({
                     'name': hour_start,
-                    'value': float(dsmr_consumption.services.round_decimal(current['avg_gas'], decimal_count=5))
+                    'value': float(dsmr_consumption.services.round_decimal(current['avg_gas'], decimal_count=5)),
+                    'label': {
+                        'color': textColor
+                    }
                 })
 
         return JsonResponse(data)
@@ -100,11 +114,21 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
         }
         result = {}
 
+        textColor = 'black'
+        if form.cleaned_data['dark_theme'] == 'true':
+            textColor = 'rgba(255, 255, 255, 0.6)'
+
         if not capabilities[Capability.ANY] or not DayStatistics.objects.exists():
             return JsonResponse(result)
 
         result['data'] = [
-            {'name': translation_mapping[k], 'value': v}
+            {
+                'name': translation_mapping[k],
+                'value': v,
+                'label': {
+                    'color': textColor
+                }
+            }
             for k, v in
             dsmr_stats.services.electricity_tariff_percentage(
                 start=form.cleaned_data['start_date'],

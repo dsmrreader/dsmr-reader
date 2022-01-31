@@ -67,6 +67,7 @@ class NotificationReadForm(forms.Form):
 class TrendsPeriodForm(forms.Form):
     start_date = forms.DateField()
     end_date = forms.DateField()
+    dark_theme = forms.CharField(required=False)
 
     def clean(self):
         if self.cleaned_data.get('start_date') \
