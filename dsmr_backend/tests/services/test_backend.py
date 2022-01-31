@@ -328,12 +328,12 @@ class TestIslatestVersion(TestCase):
     response_same_branch_unchanged = [
         {
             # Lowest in branch
-            "tag_name": "v{}.0.0".format(settings.DSMRREADER_MAIN_BRANCH),
+            "tag_name": "{}.0.0".format(settings.DSMRREADER_MAIN_BRANCH),
             "prerelease": False,
             "draft": False,
         },
         {
-            # Current in branch
+            # Same in branch
             "tag_name": '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3]),
             "prerelease": False,
             "draft": False,
