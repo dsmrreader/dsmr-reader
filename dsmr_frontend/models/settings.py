@@ -35,7 +35,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         choices=THEME_CHOICES,
         default=THEME_AUTOMATIC,
         verbose_name=_('Theme'),
-        help_text=_('Select which theme you want to use for the frontend')
+        help_text=_('The theme will be used on the frontend based on this setting')
     )
 
     electricity_delivered_color = ColorField(

@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='frontendsettings',
             name='frontend_theme',
-            field=models.IntegerField(choices=[(-1, 'Based on device settings (default)'), (0, 'Light'), (1, 'Dark')], default=-1, help_text='Whether you are using a single electricity tariff and both (high/low) should be displayed merged', verbose_name='Theme'),
+            field=models.IntegerField(choices=[(-1, 'Based on device settings (default)'), (0, 'Light'), (1, 'Dark')], default=-1, help_text='The theme will be used on the frontend based on this setting', verbose_name='Theme'),
         ),
     ]

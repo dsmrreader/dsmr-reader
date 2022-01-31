@@ -109,8 +109,8 @@ class TestViews(TestCase):
             return self.assertEqual(json_response, {})
 
         self.assertIn('data', json_response)
-        self.assertIn({'value': 84, 'name': 'Laagtarief'}, json_response['data'])
-        self.assertIn({'value': 16, 'name': 'Hoogtarief'}, json_response['data'])
+        self.assertIn({'value': 84, 'name': 'Laagtarief', 'label': {'color': 'black'}}, json_response['data'])
+        self.assertIn({'value': 16, 'name': 'Hoogtarief', 'label': {'color': 'black'}}, json_response['data'])
 
         # Test with no stats available (yet).
         DayStatistics.objects.all().delete()

@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-31 22:24+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -909,11 +910,26 @@ msgstr "Staaf"
 msgid "Line"
 msgstr "Lijn"
 
+msgid "Based on device settings (default)"
+msgstr "Instelling gebaseerd op apparaat (standaard)"
+
+msgid "Light"
+msgstr "Licht"
+
+msgid "Dark"
+msgstr "Donker"
+
 msgid "Merge electricity tariffs"
 msgstr "Voeg tarieven samen"
 
 msgid "Whether you are using a single electricity tariff and both (high/low) should be displayed merged"
 msgstr "Bepaalt of de elektriciteitstarieven samengevoegd moeten worden (wanneer je voor een enkel tarief betaalt)"
+
+msgid "Theme"
+msgstr "Thema"
+
+msgid "The theme will be used on the frontend based on this setting"
+msgstr "Het thema wordt gebruikt aan de voorkant gebaseerd op deze instelling"
 
 msgid "Electricity delivered color"
 msgstr "Kleur elektriciteit verbruikt"
