@@ -1,6 +1,7 @@
 import importlib
 from unittest import mock
 
+from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
@@ -324,37 +325,70 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
 
 @mock.patch('requests.get')
 class TestIslatestVersion(TestCase):
-    response_older = [
+    response_same_branch_unchanged = [
         {
-            "name": "v1.2.0"
+            # Lowest in branch
+            "tag_name": "v{}.0.0".format(settings.DSMRREADER_MAIN_BRANCH),
+            "prerelease": False,
+            "draft": False,
         },
         {
-            "name": "v1.1.0"
+            # Current in branch
+            "tag_name": '{}.{}.{}'.format(* settings.DSMRREADER_RAW_VERSION[:3]),
+            "prerelease": False,
+            "draft": False,
+        },
+        {
+            # Latest but draft (should be ignored)
+            "tag_name": "v10.99.1",
+            "prerelease": False,
+            "draft": True,
+        },
+        {
+            # Latest but prerelease (should be ignored)
+            "tag_name": "v10.99.2",
+            "prerelease": True,
+            "draft": False,
+        }
+    ]
+    response_same_branch_newer_release = [
+        {
+            # Latest in branch
+            "tag_name": "{}.99.0".format(settings.DSMRREADER_MAIN_BRANCH),
+            "prerelease": False,
+            "draft": False,
+        }
+    ]
+    response_newer_branch = [
+        {
+            # Newer/other branch (should be ignored)
+            "tag_name": "v10.99.0",
+            "prerelease": False,
+            "draft": False,
         }
     ]
 
-    response_newer = [
-        {
-            "name": "v10.99.0"
-        },
-        {
-            "name": "v1.1.0"
-        }
-    ]
-
-    def test_true(self, get_mock):
+    def test_same_releases_in_branch_available(self, get_mock):
         request_mock = mock.MagicMock()
-        request_mock.json.return_value = self.response_older
+        request_mock.json.return_value = self.response_same_branch_unchanged
         get_mock.return_value = request_mock
 
         self.assertTrue(dsmr_backend.services.backend.is_latest_version())
 
-    def test_false(self, get_mock):
+    def test_new_release_in_branch_available(self, get_mock):
         request_mock = mock.MagicMock()
-        request_mock.json.return_value = self.response_newer
+        request_mock.json.return_value = self.response_same_branch_newer_release
         get_mock.return_value = request_mock
 
         self.assertFalse(dsmr_backend.services.backend.is_latest_version())
+
+    def test_newer_branch_new_release_available(self, get_mock):
+        request_mock = mock.MagicMock()
+        request_mock.json.return_value = self.response_newer_branch
+        get_mock.return_value = request_mock
+
+        # Should ignore other branches
+        self.assertTrue(dsmr_backend.services.backend.is_latest_version())
 
 
 class TestIsLocalTimestampPassed(TestCase):
