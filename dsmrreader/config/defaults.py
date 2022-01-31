@@ -36,7 +36,7 @@ DSMRREADER_MAIN_BRANCH = 'v4'
 DSMRREADER_VERSION = dsmrreader.__version__
 DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_USER_AGENT = 'DSMR-reader v{}'.format(DSMRREADER_VERSION)
-DSMRREADER_LATEST_TAGS_LIST = 'https://api.github.com/repos/dsmrreader/dsmr-reader/tags'
+DSMRREADER_LATEST_RELEASES_LIST = 'https://api.github.com/repos/dsmrreader/dsmr-reader/releases'
 
 # Scheduled Process modules.
 DSMRREADER_MODULE_EMAIL_BACKUP = 'dsmr_backup.services.email.run'

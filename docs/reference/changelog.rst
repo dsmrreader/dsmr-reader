@@ -30,6 +30,12 @@ v4.20.0 - 2022-02-xx
 - ``Fixed`` Geen grafiek "Verhouding tarieven" als 100% nachtverbruik [`#1523 <https://github.com/dsmrreader/dsmr-reader/issues/1523>`_]
 
 
+v4.19.1 - 2022-02-01
+--------------------
+
+- ``Fixed`` Update checker kan niet overweg met release candidate tags [`#1566 <https://github.com/dsmrreader/dsmr-reader/issues/1566>`_]
+
+
 v4.19.0 - 2021-10-23
 --------------------
 
