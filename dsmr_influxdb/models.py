@@ -39,7 +39,7 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
     # @see https://docs.influxdata.com/influxdb/v2.1/organizations
     organization = models.CharField(
         default='',
-        max_length=64,
+        max_length=128,
         verbose_name=_('InfluxDB organization'),
         help_text=_(
             'The organization to use.'
@@ -48,13 +48,13 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
     # @see https://docs.influxdata.com/influxdb/v2.1/security/tokens/
     api_token = models.CharField(
         default='',
-        max_length=64,
+        max_length=128,
         verbose_name=_('InfluxDB API token'),
         help_text=_('The API token to use.')
     )
     # @see https://docs.influxdata.com/influxdb/v2.1/organizations/buckets
     bucket = models.CharField(
-        max_length=64,
+        max_length=128,
         default='dsmrreader_measurements',
         verbose_name=_('InfluxDB bucket'),
         help_text=_('The name of the bucket used in InfluxDB.')

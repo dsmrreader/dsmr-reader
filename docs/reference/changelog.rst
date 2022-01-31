@@ -47,6 +47,7 @@ v5.0.0 - 2022-02-xx
 ----
 
 - ``Fixed`` OpenAPI specs wijken qua formaat af van de bestandsextensie [`#1563 <https://github.com/dsmrreader/dsmr-reader/issues/1563>`_]
+- ``Fixed`` InfluxDB 2.x instelling-velden te kort (*release candidate 2*) [`#1568 <https://github.com/dsmrreader/dsmr-reader/issues/1568>`_]
 
 ----
 
