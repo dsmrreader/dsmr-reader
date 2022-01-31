@@ -67,11 +67,17 @@ function update_trends_tariffs(start_date, end_date) {
         url: BY_TARIFF_URL,
         data: {
             'start_date': start_date,
-            'end_date': end_date,
-            'dark_theme': document.body.classList.contains('dark-mode')
+            'end_date': end_date
         },
     }).done(function (xhr_result) {
-        echarts_options.baseOption.series[0].data = xhr_result.data;
+        let data = xhr_result.data;
+        data.forEach(function (item) {
+            item['label'] = {
+                color: PIE_TEXTSTYLE_COLOR
+             };
+        });
+
+        echarts_options.baseOption.series[0].data = data;
         echarts_electricity_by_tariff_graph.setOption(echarts_options);
     }).always(function(){
         echarts_electricity_by_tariff_graph.hideLoading();

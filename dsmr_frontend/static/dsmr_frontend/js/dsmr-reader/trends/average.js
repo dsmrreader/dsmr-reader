@@ -79,24 +79,44 @@ function update_trends_averages(start_date, end_date) {
         url: AVG_CONSUMPTION_URL,
         data: {
             'start_date': start_date,
-            'end_date': end_date,
-            'dark_theme': document.body.classList.contains('dark-mode')
+            'end_date': end_date
         },
     }).done(function (xhr_data) {
-        echarts_options.baseOption.series[0].data = xhr_data.electricity;
+        let dataElectricity = xhr_data.electricity;
+        dataElectricity.forEach(function (item) {
+            item['label'] = {
+                color: PIE_TEXTSTYLE_COLOR
+             };
+        });
+
+        echarts_options.baseOption.series[0].data = dataElectricity;
         echarts_options.baseOption.title.text = TEXT_TITLE_ELECTRICITY;
         echarts_avg_electricity_graph?.setOption(echarts_options);
         echarts_avg_electricity_graph?.hideLoading();
 
         if (xhr_data.electricity_returned.length > 0) {
-            echarts_options.baseOption.series[0].data = xhr_data.electricity_returned;
+            let dataElectricityReturned = xhr_data.electricity_returned;
+            dataElectricityReturned.forEach(function (item) {
+                item['label'] = {
+                    color: PIE_TEXTSTYLE_COLOR
+                 };
+            });
+
+            echarts_options.baseOption.series[0].data = dataElectricityReturned;
             echarts_options.baseOption.title.text = TEXT_TITLE_ELECTRICITY_RETURNED;
             echarts_avg_electricity_returned_graph?.setOption(echarts_options);
             echarts_avg_electricity_returned_graph?.hideLoading();
         }
 
         if (xhr_data.gas.length > 0) {
-            echarts_options.baseOption.series[0].data = xhr_data.gas;
+            let dataGas = xhr_data.gas;
+            dataGas.forEach(function (item) {
+                item['label'] = {
+                    color: PIE_TEXTSTYLE_COLOR
+                 };
+            });
+
+            echarts_options.baseOption.series[0].data = dataGas;
             echarts_options.baseOption.title.text = TEXT_TITLE_GAS;
             echarts_avg_gas_graph?.setOption(echarts_options);
             echarts_avg_gas_graph?.hideLoading();
