@@ -2,11 +2,8 @@ name: Dependency update checker
 
 on:
   schedule:
-    - cron:  '0 12 * * 1'
-  # @TODO REMOVE
-  pull_request:
-    branches:
-      - wip/v*
+    - cron: '0 12 * * 1'
+  pull_request: ~  # For dev/testing only
 
 jobs:
   check:
