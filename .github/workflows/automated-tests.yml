@@ -74,7 +74,7 @@ jobs:
 
       - name: Compare requirements.txt dependencies with Poetry lock
         # The "pip" and "packaging" updates are EXCLUDED to prevent false positives
-        run: poetry install --no-ansi | grep -v "pip" | grep -v "packaging" | grep -E "Installing|Updating|Removing" && exit 1
+        run: poetry install --no-ansi | grep -v "pip" | grep -v "packaging" | grep -E "Installing|Updating|Removing" && exit 123
 
       - name: Check pylama
         run: poetry run pylama
