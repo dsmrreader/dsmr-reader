@@ -7,6 +7,7 @@ on:
 
 jobs:
   check:
+    name: 'Dependency update check'
     runs-on: ubuntu-latest
     timeout-minutes: 10  # Don't run forever when stale
 
