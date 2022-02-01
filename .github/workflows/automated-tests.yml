@@ -68,6 +68,17 @@ jobs:
           poetry check
           poetry install
 
+      # (requirements.txt) check - Ensures it's in sync with Poetry - Required until Poetry-only support (if ever)
+      - name: Install requirements.txt dependencies
+        run: poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
+
+      - name: Compare requirements.txt dependencies with Poetry lock
+        # The "pip" and "packaging" updates are EXCLUDED to prevent false positives
+        run: |
+          poetry install | grep -v "Updating pip" | grep -v "Updating packaging" | grep -e "Installing|Updating|Removing" && exit 0
+          
+          exit 1
+
       - name: Check pylama
         run: poetry run pylama
 
@@ -111,20 +122,6 @@ jobs:
       - name: Code coverage upload
         uses: codecov/codecov-action@v1
 
-      # (requirements.txt) check - Ensures it's in sync with Poetry - Required until Poetry-only support (if ever)
-      - name: Install Pip dependencies
-        run: |
-          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt
-          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
-
-      - name: Check for Pip dependency updates, using Poetry venv
-        # The pip and packaging updates are to prevent false positives
-        run: |
-          poetry run pip install --upgrade pip packaging
-          poetry update --dry-run --no-ansi | grep "Package operations: 0 installs, 0 updates, 0 removals" && exit 0
-
-          poetry update --dry-run | grep -v "Skipped"
-          exit 1
 
   # Shallow tests for other supported Python versions.
   matrix_tests:

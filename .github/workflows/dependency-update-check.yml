@@ -3,9 +3,10 @@ name: Dependency update checker
 on:
   schedule:
     - cron:  '0 12 * * 1'
-#  push:
-#    branches:
-#      - wip/v*
+  # @TODO REMOVE
+  push:
+    branches:
+      - wip/v*
 
 jobs:
   check:
