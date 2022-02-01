@@ -55,6 +55,7 @@ v5.0.0 - 2022-02-xx
 
     ⚠️ The following features/support have been **dropped** or were changed in an **incompatible** way!
 
+- ``Changed`` Relocated Supervisor processes PID files from ``/var/tmp/`` to ``/tmp/`` [`#1297 <https://github.com/dsmrreader/dsmr-reader/issues/1297>`_]
 - ``Removed`` Dropped support for **Python 3.6** (*EOL December 2021*) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
 - ``Removed`` Dropped support for **InfluxDB 1.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
 - ``Removed`` Dropped support for **PostgreSQL 9.5** and below (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
