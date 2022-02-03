@@ -262,6 +262,7 @@ Execute::
 Update Nginx config::
 
     sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
+    sudo ln -s -f /etc/nginx/sites-available/dsmr-webinterface /etc/nginx/sites-enabled/
 
 Reload Nginx::
 
