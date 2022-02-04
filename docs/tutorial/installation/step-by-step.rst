@@ -160,7 +160,7 @@ Make sure you are currently (still) ``dsmr`` user here.
 
 - Clone the repository::
 
-    git clone https://github.com/dsmrreader/dsmr-reader.git
+    git clone --branch v5 https://github.com/dsmrreader/dsmr-reader.git
 
 This may take a few seconds. When finished, you should see a new folder called ``dsmr-reader``, containing a clone of the GitHub repository.
 
