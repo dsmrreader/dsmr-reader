@@ -2,13 +2,13 @@ name: Dependency update checker
 
 on:
   schedule:
-    - cron:  '0 12 * * 1'
-#  push:
-#    branches:
-#      - wip/v*
+    - cron: '0 12 * * 1'
+#  # For dev/testing only
+#  pull_request: ~
 
 jobs:
   check:
+    name: 'Dependency update check'
     runs-on: ubuntu-latest
     timeout-minutes: 10  # Don't run forever when stale
 
