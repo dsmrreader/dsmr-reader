@@ -17,7 +17,7 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v4.20.0 - 2022-02-06
+v4.20.0 - 2022-02-07
 --------------------
 
 .. note::
