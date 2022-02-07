@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0043_default_color_update_tariff_2'),
+        ('dsmr_frontend', '0044_v4_20_0_release'),
     ]
 
     operations = [
