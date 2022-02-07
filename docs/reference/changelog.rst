@@ -21,6 +21,7 @@ Current version
 v5.1.0 - 2022-02-xx
 -------------------
 
+- ``Added`` Support for dark mode - by @Justin991q [`#1567 <https://github.com/dsmrreader/dsmr-reader/issues/1567>`_]
 
 
 
