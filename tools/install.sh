@@ -19,7 +19,7 @@ sudo mkdir -p /var/www/dsmrreader/static
 sudo chown -R dsmr:dsmr /var/www/dsmrreader/
 
 echo "Cloning DSMR-reader from GitHub"
-sudo git clone https://github.com/dsmrreader/dsmr-reader.git /home/dsmr/dsmr-reader
+sudo git clone --branch v4 https://github.com/dsmrreader/dsmr-reader.git /home/dsmr/dsmr-reader
 sudo chown -R dsmr:dsmr /home/dsmr/
 
 echo "Setting up virtualenv"

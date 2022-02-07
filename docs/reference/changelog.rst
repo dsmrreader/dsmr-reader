@@ -17,6 +17,19 @@ Current version
     :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
+v4.20.0 - 2022-02-07
+--------------------
+
+.. note::
+
+    This is the last release of DSMR-reader ``v4.x``. You can upgrade to ``v5.x`` for future support/features/rework.
+
+- ``Added`` Doc update, FAQ regarding "lagging statistics" - by @balk77 [`#1530 <https://github.com/dsmrreader/dsmr-reader/issues/1530>`_]
+
+- ``Fixed`` Periode energiecontracten mist laatste dag [`#1534 <https://github.com/dsmrreader/dsmr-reader/issues/1534>`_]
+- ``Fixed`` Geen grafiek "Verhouding tarieven" als 100% nachtverbruik [`#1523 <https://github.com/dsmrreader/dsmr-reader/issues/1523>`_]
+
+
 v4.19.1 - 2022-02-01
 --------------------
 
@@ -31,8 +44,6 @@ v4.19.0 - 2021-10-23
 .. note::
 
     This is the last **feature** release of DSMR-reader ``v4.x``. Upcoming new features will probably only be added to ``v5.x``.
-
-    *The v4.20 release following this one, will be used to mark the end of this major version and contain an how-to for upgrading to v5 later.*
 
 .. warning::
 

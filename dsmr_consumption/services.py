@@ -509,9 +509,11 @@ def summarize_energy_contracts() -> List[Dict]:
     }
 
     for current in EnergySupplierPrice.objects.all().order_by('-start'):
+        end_date = current.end or timezone.now().date()
         summary = dsmr_stats.services.range_statistics(
             start=current.start,
-            end=current.end or timezone.now().date()
+            # Note: +1 day is due to range_statistics()'s query (#1534)
+            end=end_date + timezone.timedelta(days=1)
         )
 
         # Override this one, since it's only good when ALL price fields are set.

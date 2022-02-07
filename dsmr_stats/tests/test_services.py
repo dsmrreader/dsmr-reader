@@ -641,10 +641,11 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # Now try again without data.
         DayStatistics.objects.all().delete()
-        dsmr_stats.services.electricity_tariff_percentage(
+        percentages = dsmr_stats.services.electricity_tariff_percentage(
             start=target_date.date(),
             end=timezone.now().date(),
         )
+        self.assertIsNone(percentages)
 
     @mock.patch('dsmr_stats.services.update_electricity_statistics')
     def test_dsmr_update_electricity_statistics_signal(self, service_mock):

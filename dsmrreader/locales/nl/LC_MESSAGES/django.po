@@ -900,6 +900,9 @@ msgstr "DSMR-reader v4.1: Ondersteuning toegevoegd voor het uitlezen van netwerk
 msgid "DSMR-reader will eventually be moved to its own organisation on GitHub in the near future. It should be redirected automatically, but if not, the new location will be: https://github.com/dsmrreader/dsmr-reader"
 msgstr "DSMR-reader wordt uiteindelijk onder een eigen 'organisatie' ondergebracht op GitHub. Het doorverwijzen zou t.z.t automatisch moeten gaan, maar zo niet, dan wordt de nieuwe locatie: https://github.com/dsmrreader/dsmr-reader"
 
+msgid "This is the final release on v4. Switching to v5 requires you to manually upgrade. Click the link button for more information."
+msgstr "Dit is de laatste release op v4. Wisselen naar v5 vereist je om handmatig te upgraden. Klik op de link/knop voor meer informatie."
+
 msgid "Application notification"
 msgstr "Applicatienotificatie"
 
