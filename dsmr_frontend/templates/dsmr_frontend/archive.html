@@ -144,7 +144,13 @@
         const ELECTRICITY_GRAPH_STYLE = "{{ frontend_settings.electricity_graph_style }}";
         const STACK_ELECTRICITY_GRAPHS = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
 
+        let TEXTSTYLE_COLOR = '#333';
+        if (document.body.classList.contains('dark-mode')) {
+            TEXTSTYLE_COLOR = 'rgba(255, 255, 255, 0.6)';
+        }
+
         const TITLE_TEXTSTYLE_OPTIONS = {
+            color: TEXTSTYLE_COLOR,
             rich: {
                 S: {
                     fontSize: 10,

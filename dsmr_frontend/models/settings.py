@@ -16,11 +16,26 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         (GRAPH_STYLE_BAR, _('Bar')),
         (GRAPH_STYLE_LINE, _('Line')),
     )
+    THEME_AUTOMATIC = -1
+    THEME_LIGHT = 0
+    THEME_DARK = 1
+    THEME_CHOICES = (
+        (THEME_AUTOMATIC, _('Based on device settings (default)')),
+        (THEME_LIGHT, _('Light')),
+        (THEME_DARK, _('Dark'))
+    )
 
     merge_electricity_tariffs = models.BooleanField(
         default=False,
         verbose_name=_('Merge electricity tariffs'),
         help_text=_('Whether you are using a single electricity tariff and both (high/low) should be displayed merged')
+    )
+
+    frontend_theme = models.IntegerField(
+        choices=THEME_CHOICES,
+        default=THEME_AUTOMATIC,
+        verbose_name=_('Theme'),
+        help_text=_('The theme will be used on the frontend based on this setting')
     )
 
     electricity_delivered_color = ColorField(

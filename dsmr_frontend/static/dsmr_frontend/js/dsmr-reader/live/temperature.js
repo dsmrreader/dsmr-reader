@@ -22,12 +22,18 @@ $(document).ready(function () {
                 {
                     type: 'category',
                     boundaryGap: false,
-                    data: xhr_data.read_at
+                    data: xhr_data.read_at,
+                    axisLabel: {
+                        color: TEXTSTYLE_COLOR
+                    }
                 }
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLabel: {
+                        color: TEXTSTYLE_COLOR
+                    }
                 }
             ],
             dataZoom: [

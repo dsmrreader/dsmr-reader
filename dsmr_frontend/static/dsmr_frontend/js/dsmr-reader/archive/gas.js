@@ -26,12 +26,18 @@ function render_gas_graph(xhr_data) {
             {
                 type: 'category',
                 boundaryGap: GAS_GRAPH_STYLE === 'bar',
-                data: xhr_data.x
+                data: xhr_data.x,
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             }
         ],
         series: [
