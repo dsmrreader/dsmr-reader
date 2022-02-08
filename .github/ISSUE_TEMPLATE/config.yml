@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: ⏏️ I have an issue specifically related to running DSMR-reader in Docker
+    url: https://github.com/xirixiz/dsmr-reader-docker/issues
+    about: Whenever you are 100% sure your issue is related to running in Docker (or the image used), check out Xirixiz's project as well!
