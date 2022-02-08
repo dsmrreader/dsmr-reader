@@ -5,14 +5,20 @@ $(document).ready(function () {
         {
             type: 'category',
             boundaryGap: false,
-            data: []
+            data: [],
+            axisLabel: {
+                color: TEXTSTYLE_COLOR
+            }
         },
         {
             // We need this axis for rendering the return graph but hide it, since it's redundant.
             show: false,
             gridIndex: 1,
             boundaryGap: false,
-            data: []
+            data: [],
+            axisLabel: {
+                color: TEXTSTYLE_COLOR
+            }
         }
     ];
     let echarts_phases_initial_options = {
@@ -47,12 +53,18 @@ $(document).ready(function () {
         xAxis: x_axis,
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             },
             {
                 gridIndex: 1,
                 type: 'value',
-                inverse: true
+                inverse: true,
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             }
         ],
         dataZoom: [
@@ -60,7 +72,10 @@ $(document).ready(function () {
                 xAxisIndex: [0, 1],
                 show: true,
                 start: LIVE_GRAPHS_INITIAL_ZOOM,
-                end: 100
+                end: 100,
+                textStyle: {
+                    color: TEXTSTYLE_COLOR
+                }
             },
             {
                 xAxisIndex: [0, 1],

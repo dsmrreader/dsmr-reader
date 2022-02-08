@@ -20,6 +20,9 @@
         <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css">
         <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
         <link href="{% static 'dsmr_frontend/css/dsmr-reader/global.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        {% if frontend_settings.frontend_theme is not 0 %}
+        <link href="{% static 'dsmr_frontend/css/dsmr-reader/dark.css' %}?r=v{{ dsmr_version }}" rel="stylesheet" type="text/css" />
+        {% endif %}
         {% endblock %}
 
         <link rel="shortcut icon" sizes="192x192" href="{% static 'dsmr_frontend/img/favicons/android-chrome-192x192.png' %}">
@@ -132,6 +135,18 @@
         <script src="{% static 'dsmr_frontend/js/bootstrap.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
         <script src="{% static 'dsmr_frontend/js/Director/app.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
         <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
+
+        <script>
+            {% if frontend_settings.frontend_theme is 0 %}
+                var darkModeEnabled = false;
+            {% else %}
+                var darkModeEnabled = true;
+            {% endif %}
+
+            if (darkModeEnabled && (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.body.classList.toggle("dark-mode");
+            }
+        </script>
         {% endblock %}
     </body>
 </html>

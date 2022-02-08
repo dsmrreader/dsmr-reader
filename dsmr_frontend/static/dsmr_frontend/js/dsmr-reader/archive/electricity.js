@@ -24,12 +24,18 @@ function render_electricity_graph(xhr_data) {
             {
                 type: 'category',
                 boundaryGap: ELECTRICITY_GRAPH_STYLE === 'bar',
-                data: xhr_data.x
+                data: xhr_data.x,
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
             }
         ],
         series: null,

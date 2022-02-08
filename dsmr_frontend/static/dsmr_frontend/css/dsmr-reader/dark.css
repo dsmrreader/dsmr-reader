@@ -1,0 +1,101 @@
+:root {
+    --dark-body-background-color: #222;
+    --dark-font-color: rgba(255, 255, 255, 0.6);
+    --dark-sidebar-header-background: #2c2c2c;
+    --dark-sidebar-background: #2c2c2c;
+    --dark-sidebar-hover: #444;
+    --dark-panel-background: #303030;
+    --dark-panel-heading-background: #444;
+    --dark-border-color: #444;
+    --dark-table-background: #444;
+}
+
+/**
+* Overall content
+*/
+html body.dark-mode {
+    background-color: var(--dark-body-background-color);
+}
+.dark-mode .content {
+    background-color: var(--dark-body-background-color);
+    color: var(--dark-font-color);
+}
+.dark-mode .unit { 
+    color: #989898;
+}
+
+/**
+* Navbar
+*/
+.dark-mode .navbar {
+    background-color: #303030;
+    border-bottom: 0;
+}
+.dark-mode .navbar .nav a {
+    color: var(--dark-font-color);
+}
+.dark-mode .navbar .nav > li > a:hover {
+    background-color: rgba(255, 255, 255, 0);
+    color: #FFF;
+}
+.dark-mode .navbar .sidebar-toggle .icon-bar {
+    background: var(--dark-font-color);
+}
+
+/**
+* Sidebar
+*/
+.dark-mode .left-side {
+    background-color: var(--dark-sidebar-background);
+}
+.dark-mode .sidebar > .sidebar-menu > li > a:hover {
+    background-color: var(--dark-sidebar-hover);
+}
+.dark-mode .sidebar {
+    border-bottom: 0;
+}
+.dark-mode .header .logo {
+    background-color: var(--dark-sidebar-header-background);
+}
+.dark-mode .sidebar > .sidebar-menu > li:first-of-type {
+    border-top: 0;
+}
+
+/**
+* Panel
+*/
+.dark-mode .panel {
+    background-color: var(--dark-panel-background);
+    border-color: var(--dark-border-color);
+}
+.dark-mode .panel .panel-heading {
+    background-color: var(--dark-panel-heading-background);
+    border-color: var(--dark-border-color);
+}
+
+/**
+* Tables
+*/
+.dark-mode .table.table-hover tr td {
+    border-color: var(--dark-border-color);
+}
+.dark-mode .table-hover tbody tr:hover td, .dark-mode .table-hover tbody tr:hover th {
+    background-color: var(--dark-table-background);
+}
+.dark-mode .table-hover tbody tr.highlight td, .dark-mode .table-hover tbody tr.highlight th {
+    background-color: var(--dark-table-background);
+}
+
+/**
+* Datepicker
+*/
+.dark-mode .datepicker table tr th:hover, 
+.dark-mode .datepicker table tr td.day:hover,
+.dark-mode .datepicker table tr td span:hover,
+.dark-mode .datepicker table tr td span.focused
+{
+    background-color: var(--dark-table-background);
+}
+.dark-mode .datepicker-trigger.st-gray {
+    background-color: var(--dark-table-background);
+}

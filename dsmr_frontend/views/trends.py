@@ -60,6 +60,7 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
             hour_start = '{}:00 - {}:00'.format(int(current['hour_start']), int(current['hour_start']) + 1)
 
             avg_electricity = (current['avg_electricity1'] + current['avg_electricity2']) / 2
+
             data['electricity'].append({
                 'name': hour_start,
                 'value': float(dsmr_consumption.services.round_decimal(avg_electricity, decimal_count=5))
