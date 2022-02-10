@@ -20,8 +20,8 @@ System packages
 
 Execute::
 
-    # Packages
-    sudo apt-get install -y postgresql cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-venv
+    # "libopenjp2-7-dev" is due to "ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory"
+    sudo apt-get install -y postgresql cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-venv libopenjp2-7-dev
 
 .. tip::
 

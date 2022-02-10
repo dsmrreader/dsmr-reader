@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Docker: (Docs) Update locates" type="ShConfigurationType">
+  <configuration default="false" name="Docker: (Docs) Update locales" type="ShConfigurationType">
     <option name="SCRIPT_TEXT" value="docker exec -it dsmr-docs bash -c 'poetry run make gettext &amp;&amp; poetry run sphinx-intl update --line-width=-1 -p _build/locale -l nl'" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />

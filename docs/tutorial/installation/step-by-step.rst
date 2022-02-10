@@ -73,7 +73,8 @@ Optional: Restore a database backup
 ---------------
 - Now you'll have to install several utilities, required for the Nginx webserver, Gunicorn application server and cloning the application code from the GitHub repository::
 
-    sudo apt-get install -y cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-venv
+    # "libopenjp2-7-dev" is due to "ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory"
+    sudo apt-get install -y cu nginx supervisor git python3 python3-psycopg2 python3-pip python3-venv libopenjp2-7-dev
 
 The CU program allows easily testing for your DSMR serial connection.
 It's very basic but also very effective to simply test whether your serial cable setup works properly.
