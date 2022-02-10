@@ -33,8 +33,8 @@ msgid ":doc:`See the changelog</reference/changelog>`, for ``v5.x releases`` and
 msgstr ":doc:`Zie de changelog</reference/changelog>`, voor ``v5.x releases`` en hoger. Bekijk ze voordat je update!"
 
 #: ../../tutorial/upgrading/to-v5.rst:17 ../../tutorial/upgrading/to-v5.rst:164
-msgid "✋ Do not upgrade if you run **PostgreSQL 9.5 or below**. *Upgrade PostgreSQL first.*"
-msgstr "✋ Upgrade niet wanneer je **PostgreSQL 9.5 of lager** draait. *Upgrade PostgreSQL eerst.*"
+msgid "✋ Do not upgrade if you run **PostgreSQL 9.x or below**. *Upgrade PostgreSQL first.*"
+msgstr "✋ Upgrade niet wanneer je **PostgreSQL 9.x of lager** draait. *Upgrade PostgreSQL eerst.*"
 
 #: ../../tutorial/upgrading/to-v5.rst:18 ../../tutorial/upgrading/to-v5.rst:165
 msgid "✋ Do not upgrade if you run **InfluxDB 1.x**. *Upgrade to InfluxDB 2.x first.*"

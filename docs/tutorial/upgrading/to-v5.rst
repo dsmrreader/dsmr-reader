@@ -14,7 +14,7 @@ List of changes
 
     :doc:`See the changelog</reference/changelog>`, for ``v5.x releases`` and higher. Check them before updating!
 
-    - ✋ Do not upgrade if you run **PostgreSQL 9.5 or below**. *Upgrade PostgreSQL first.*
+    - ✋ Do not upgrade if you run **PostgreSQL 9.x or below**. *Upgrade PostgreSQL first.*
     - ✋ Do not upgrade if you run **InfluxDB 1.x**. *Upgrade to InfluxDB 2.x first.*
     - ✋ Do not upgrade if you run **MySQL 5.6 or below**. *Upgrade MySQL first.*
     - ℹ️ This upgrade will require you to run (or upgrade to) **Python 3.7 or higher**. *Upgrade steps later below.*
@@ -161,7 +161,7 @@ Execute the following::
 
     :doc:`See the changelog</reference/changelog>`, for ``v5.x releases`` and higher. Check them before updating!
 
-    - ✋ Do not upgrade if you run **PostgreSQL 9.5 or below**. *Upgrade PostgreSQL first.*
+    - ✋ Do not upgrade if you run **PostgreSQL 9.x or below**. *Upgrade PostgreSQL first.*
     - ✋ Do not upgrade if you run **InfluxDB 1.x**. *Upgrade to InfluxDB 2.x first.*
     - ✋ Do not upgrade if you run **MySQL 5.6 or below**. *Upgrade MySQL first.*
 
