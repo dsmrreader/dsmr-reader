@@ -20,7 +20,7 @@ Current version
 v5.1.0 - 2022-xx-xx
 -------------------
 
-- ``Added`` Dark mode functionality - by @ Justin991q [`#1567 <https://github.com/dsmrreader/dsmr-reader/issues/1567>`_]
+- ``Fixed`` Fix docker issue with pg_dump not found - by @sanderdw [`#1579 <https://github.com/dsmrreader/dsmr-reader/issues/1579>`_]
 
 
 v5.0.0 - 2022-02-07
