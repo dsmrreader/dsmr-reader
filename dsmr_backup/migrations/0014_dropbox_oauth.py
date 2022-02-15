@@ -29,12 +29,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dropboxsettings',
             name='app_key',
-            field=models.CharField(blank=True, default=None, help_text='The Dropbox "App Key" for the Dropbox app to use (care which app you authorize!)', max_length=255, null=True),
+            field=models.CharField(blank=True, default=None, help_text='The "App Key" of the App in Dropbox to use (should be the "Official DSMR-reader" App Key)', max_length=255, null=True),
         ),
         migrations.AddField(
             model_name='dropboxsettings',
             name='one_time_authorization_code',
-            field=models.CharField(blank=True, default=None, help_text='One-time authorization code Dropbox generates for you after authorizing your app with your Dropbox account', max_length=255, null=True),
+            field=models.CharField(blank=True, default=None, verbose_name='Access Code by Dropbox', help_text='Enter the one-time Access Code here that Dropbox generates for you after authorizing DSMR-reader', max_length=255, null=True),
         ),
         migrations.RemoveField(
             model_name='dropboxsettings',

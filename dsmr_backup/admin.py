@@ -45,7 +45,7 @@ class BackupSettingsAdmin(SingletonModelAdmin):
 @admin.register(DropboxSettings)
 class DropboxSettingsAdmin(SingletonModelAdmin):
     change_form_template = 'dsmr_backup/dropbox_settings/change_form.html'
-    readonly_fields = ('app_key_is_set', 'masked_refresh_token')
+    readonly_fields = ('app_key', 'masked_refresh_token')
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
     }
@@ -60,15 +60,8 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
                 },
             ),
             (
-                _('One-time set up with authorization link'), {
-                    'fields': ['app_key_is_set', 'one_time_authorization_code', 'masked_refresh_token'],
-                    'description': _(
-                        'Set the "App Key" above, save it and ONLY THEN <a href="{}" target="_blank">'
-                        '➡️ click this authorization link ⬅️</a> (opens Dropbox.com). Follow the steps at Dropbox.com, '
-                        'enter the one-time authorization code given by Dropbox below and save one last time.'.format(
-                            reverse_lazy('dropbox:authorize-app')
-                        )
-                    )
+                _('One-time set up Dropbox Access Code'), {
+                    'fields': ['one_time_authorization_code', 'masked_refresh_token'],
                 }
             ),
 
@@ -93,10 +86,6 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
 
         messages.success(request, _('Dropbox app authorization completed!'))
         super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
-
-    def app_key_is_set(self, obj: DropboxSettings) -> str:  # pragma: no cover
-        return '✅' if obj.app_key else '❌'
-    app_key_is_set.short_description = _('App Key is set')
 
     def masked_refresh_token(self, obj: DropboxSettings) -> str:  # pragma: no cover
         return '✅' if obj.refresh_token else '❌'
@@ -161,5 +150,5 @@ def handle_dropbox_settings_update(sender, instance, **kwargs):
         module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT
     ).update(
         planned=timezone.now(),
-        active=bool(instance.app_key and instance.refresh_token)
+        active=bool(instance.refresh_token)
     )
