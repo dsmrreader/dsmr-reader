@@ -20,7 +20,7 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
                 'fields': [
                     'frontend_theme',
                     'merge_electricity_tariffs'
-                    ],
+                ],
             }
         ),
         (

@@ -90,6 +90,7 @@ def create_full(folder: str) -> str:
             db_settings['NAME'],
         ]
         backup_process = subprocess.Popen(command, env={
+            **os.environ,
             'PGPASSWORD': db_settings['PASSWORD']
         },
             stdout=open(backup_file, 'w')  # pragma: no cover
@@ -161,6 +162,7 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
         backup_process = subprocess.Popen(
             command,
             env={
+                **os.environ,
                 'PGPASSWORD': db_settings['PASSWORD']
             },
             stdout=open(backup_file, 'w'),

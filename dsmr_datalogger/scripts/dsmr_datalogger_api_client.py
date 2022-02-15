@@ -93,7 +93,7 @@ def _send_telegram_to_remote_dsmrreader(telegram, api_url, api_key, timeout):
 
 
 def _initialize_logging():
-    logging_level = logging.INFO
+    logging_level = logging.ERROR
 
     if decouple.config('DSMRREADER_REMOTE_DATALOGGER_DEBUG_LOGGING', default=False, cast=bool):
         logging_level = logging.DEBUG

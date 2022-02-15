@@ -54,15 +54,16 @@ class DropboxSettings(ModelUpdateMixin, SingletonModel):
         default=None,
         null=True,
         blank=True,
-        help_text=_('The Dropbox "App Key" for the Dropbox app to use (care which app you authorize!)'),
+        help_text=_('The "App Key" of the App in Dropbox to use (should be the "Official DSMR-reader" App Key)'),
     )
     one_time_authorization_code = models.CharField(
         max_length=255,
         default=None,
         null=True,
         blank=True,
+        verbose_name=_('Access Code by Dropbox'),
         help_text=_(
-            'One-time authorization code Dropbox generates for you after authorizing your app with your Dropbox account'
+            'Enter the one-time Access Code here that Dropbox generates for you after authorizing DSMR-reader'
         ),
     )
     serialized_auth_flow = models.BinaryField(

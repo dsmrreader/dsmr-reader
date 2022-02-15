@@ -161,7 +161,7 @@ class TestScript(TestCase):
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         self.assertTrue(set_level_mock.called)
-        self.assertEqual(set_level_mock.call_args[0][0], logging.INFO)
+        self.assertEqual(set_level_mock.call_args[0][0], logging.ERROR)
 
     @mock.patch('logging.Logger.error')
     @mock.patch('requests.post')

@@ -8,7 +8,7 @@ FROM python:3
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y gettext telnet python3-psycopg2 python3-venv
+RUN apt-get update && apt-get install -y gettext telnet python3-psycopg2 postgresql-client python3-venv
 
 # Credits to: https://pythonspeed.com/articles/activate-virtualenv-dockerfile/
 ENV VIRTUAL_ENV=/opt/venv

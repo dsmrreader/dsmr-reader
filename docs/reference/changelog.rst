@@ -17,6 +17,14 @@ Current version
     ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
+v5.1.0 - 2022-xx-xx
+-------------------
+
+- ``Changed`` Updated and improved Dropbox OAuth flow [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
+
+- ``Fixed`` Increased remote datalogger its default log level from `INFO` to `ERROR` [`dsmr-reader-docker/#1579 <https://github.com/xirixiz/dsmr-reader-docker/issues/268>`_]
+- ``Fixed`` Fix docker issue with pg_dump not found - by @sanderdw [`#1579 <https://github.com/dsmrreader/dsmr-reader/issues/1579>`_]
+
 
 v5.1.0 - 2022-02-xx
 -------------------

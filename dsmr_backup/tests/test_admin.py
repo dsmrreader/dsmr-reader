@@ -89,9 +89,9 @@ class TestAdmin(TestCase):
             active=True
         ).exists())
 
-        # Setting both Dropbox app key and refresh token should enable SP
+        # Setting refresh token should enable SP
         DropboxSettings.objects.all().update(refresh_token='fake')
-        response = self.client.post(URL, dict(app_key='test'))
+        response = self.client.post(URL)
 
         self.assertEqual(response.status_code, 302, response.content)
         self.assertTrue(ScheduledProcess.objects.filter(
