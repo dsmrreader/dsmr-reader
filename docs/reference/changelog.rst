@@ -20,6 +20,8 @@ Current version
 v5.1.0 - 2022-xx-xx
 -------------------
 
+- ``Added`` Support for dark mode - by @Justin991q [`#1567 <https://github.com/dsmrreader/dsmr-reader/issues/1567>`_]
+
 - ``Changed`` Updated and improved Dropbox OAuth flow [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
 - ``Changed`` Trends datepicker start now defaults to today
 - ``Changed`` Extended some admin forms with additional delete/save/update buttons on top of page
