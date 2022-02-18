@@ -106,7 +106,9 @@ class TestViews(TestCase):
         json_response = json.loads(response.content.decode("utf-8"))
 
         if not self.support_data:
-            return self.assertEqual(json_response, {})
+            self.assertIn({'value': 0, 'name': 'Laagtarief'}, json_response['data'])
+            self.assertIn({'value': 0, 'name': 'Hoogtarief'}, json_response['data'])
+            return
 
         self.assertIn('data', json_response)
         self.assertIn({'value': 84, 'name': 'Laagtarief'}, json_response['data'])

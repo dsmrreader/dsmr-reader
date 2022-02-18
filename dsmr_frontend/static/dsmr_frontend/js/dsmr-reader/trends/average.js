@@ -81,6 +81,10 @@ function update_trends_averages(start_date, end_date) {
             'start_date': start_date,
             'end_date': end_date
         },
+    }).fail(function (xhr_data) {
+        echarts_avg_electricity_graph?.showLoading('default', {text: '❌ ' + xhr_data.responseText});
+        echarts_avg_electricity_returned_graph?.showLoading('default', {text: '❌ ' + xhr_data.responseText});
+        echarts_avg_gas_graph?.showLoading('default', {text: '❌ ' + xhr_data.responseText});
     }).done(function (xhr_data) {
         let dataElectricity = xhr_data.electricity;
         dataElectricity.forEach(function (item) {

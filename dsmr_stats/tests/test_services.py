@@ -645,7 +645,8 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             start=target_date.date(),
             end=timezone.now().date(),
         )
-        self.assertIsNone(percentages)
+        self.assertEqual(percentages['electricity1'], 0)
+        self.assertEqual(percentages['electricity2'], 0)
 
     @mock.patch('dsmr_stats.services.update_electricity_statistics')
     def test_dsmr_update_electricity_statistics_signal(self, service_mock):

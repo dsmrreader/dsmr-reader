@@ -93,7 +93,6 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
         if not form.is_valid():
             return JsonResponse(dict(errors=form.errors), status=400)
 
-        capabilities = dsmr_backend.services.backend.get_capabilities()
         frontend_settings = FrontendSettings.get_solo()
         translation_mapping = {
             'electricity1': frontend_settings.tariff_1_delivered_name.capitalize(),
@@ -103,15 +102,13 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
             start=form.cleaned_data['start_date'],
             end=form.cleaned_data['end_date'],
         )
-        result = {}
 
-        if not capabilities[Capability.ANY] or not DayStatistics.objects.exists() or not electricity_tariff_percentage:
-            return JsonResponse(result)
-
-        result['data'] = [
-            {'name': translation_mapping[k], 'value': v}
-            for k, v in
-            electricity_tariff_percentage.items()
-        ]
+        result = {
+            'data': [
+                {'name': translation_mapping[k], 'value': v}
+                for k, v in
+                electricity_tariff_percentage.items()
+            ]
+        }
 
         return JsonResponse(result)

@@ -18,6 +18,7 @@ If you installed a former version, reconsider reinstalling it completely with th
     - The device hosting the remote datalogger
     - The device (or server) hosting the receiving DSMR-reader instance
 
+
 Receiving DSMR-reader instance
 ------------------------------
 
@@ -34,6 +35,7 @@ Also, you should disable the datalogger process over there, since you won't be u
     sudo supervisorctl reread
     sudo supervisorctl update
 
+
 Remote datalogger device
 ------------------------
 
@@ -41,21 +43,14 @@ Switch to the device you want to install the remote datalogger on.
 
 Execute::
 
-    # Packages
-    sudo apt-get install -y supervisor python3 python3-pip python3-virtualenv virtualenvwrapper
+    sudo apt-get install -y supervisor python3 python3-pip python3-venv libopenjp2-7-dev
 
-    # System user
     sudo useradd dsmr --home-dir /home/dsmr --create-home --shell /bin/bash
     sudo usermod -a -G dialout dsmr
     sudo chown -R dsmr:dsmr /home/dsmr/
 
-    # Virtual env
-    sudo -u dsmr mkdir /home/dsmr/.virtualenvs
-    sudo -u dsmr virtualenv /home/dsmr/.virtualenvs/dsmrreader --python python3
-    sudo sh -c 'echo "source ~/.virtualenvs/dsmrreader/bin/activate" >> /home/dsmr/.bashrc'
-
-    # Requirements
-    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/pip3 install pyserial==3.5 requests==2.26.0 python-decouple==3.5
+    sudo sudo -u dsmr python3 -m venv /home/dsmr/.venv/
+    sudo sudo -u dsmr /home/dsmr/.venv/bin/pip3 install pyserial==3.5 requests==2.27.1 python-decouple==3.6
 
 
 Datalogger script
@@ -173,7 +168,7 @@ Supervisor
 Create a new supervisor config in ``/etc/supervisor/conf.d/dsmr_remote_datalogger.conf`` with contents::
 
     [program:dsmr_remote_datalogger]
-    command=/home/dsmr/dsmr-reader/.venv/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
+    command=/home/dsmr/.venv/bin/python3 -u /home/dsmr/dsmr_datalogger_api_client.py
     pidfile=/tmp/dsmrreader--%(program_name)s.pid
     user=dsmr
     group=dsmr

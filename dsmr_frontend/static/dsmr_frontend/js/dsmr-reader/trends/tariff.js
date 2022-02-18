@@ -69,6 +69,8 @@ function update_trends_tariffs(start_date, end_date) {
             'start_date': start_date,
             'end_date': end_date
         },
+    }).fail(function (xhr_data) {
+        echarts_electricity_by_tariff_graph?.showLoading('default', {text: '❌ ' + xhr_data.responseText});
     }).done(function (xhr_result) {
         let data = xhr_result.data;
         data.forEach(function (item) {
@@ -79,7 +81,6 @@ function update_trends_tariffs(start_date, end_date) {
 
         echarts_options.baseOption.series[0].data = data;
         echarts_electricity_by_tariff_graph.setOption(echarts_options);
-    }).always(function(){
         echarts_electricity_by_tariff_graph.hideLoading();
     });
 }

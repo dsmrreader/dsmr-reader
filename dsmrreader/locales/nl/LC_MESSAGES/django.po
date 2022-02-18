@@ -894,6 +894,9 @@ msgstr "Temperaturen"
 msgid "CSV"
 msgstr "CSV"
 
+msgid "Selected date range START cannot be AFTER selected date range END"
+msgstr "Geselecteerde START datum kan niet NA een geselecteerde EIND datum liggen"
+
 msgid "Clears the entire cache."
 msgstr "Gooit de volledige cache leeg."
 
