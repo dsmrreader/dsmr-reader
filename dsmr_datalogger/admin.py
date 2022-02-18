@@ -7,7 +7,7 @@ from solo.admin import SingletonModelAdmin
 from rangefilter.filters import DateTimeRangeFilter
 import django.db.models.signals
 
-from dsmr_backend.mixins import ReadOnlyAdminModel
+from dsmr_backend.mixins import ReadOnlyAdminModel, DeletionOnlyAdminModel
 from dsmr_backend.models.schedule import ScheduledProcess
 from .models.settings import DataloggerSettings, RetentionSettings
 from .models.reading import DsmrReading
@@ -63,7 +63,7 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
 
 
 @admin.register(DsmrReading)
-class DsmrReadingAdmin(ReadOnlyAdminModel):
+class DsmrReadingAdmin(DeletionOnlyAdminModel):
     save_on_top = True
     ordering = ['-timestamp']
     list_display = (

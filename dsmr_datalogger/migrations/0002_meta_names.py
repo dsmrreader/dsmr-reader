@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='dsmrreading',
-            options={'verbose_name': 'DSMR reading (read only)', 'default_permissions': (), 'ordering': ['timestamp'], 'verbose_name_plural': 'DSMR readings (read only)'},
+            options={'verbose_name': 'DSMR reading', 'default_permissions': (), 'ordering': ['timestamp'], 'verbose_name_plural': 'DSMR readings'},
         ),
         migrations.AlterModelOptions(
             name='meterstatistics',
