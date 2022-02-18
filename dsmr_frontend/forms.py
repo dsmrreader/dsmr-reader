@@ -72,6 +72,6 @@ class TrendsPeriodForm(forms.Form):
         if self.cleaned_data.get('start_date') \
                 and self.cleaned_data.get('end_date') \
                 and self.cleaned_data.get('start_date') > self.cleaned_data.get('end_date'):
-            raise forms.ValidationError('Start date must be before end date')
+            raise forms.ValidationError(_('Selected date range START cannot be AFTER selected date range END'))
 
         return super().clean()
