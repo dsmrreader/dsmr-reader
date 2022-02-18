@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-18 23:02+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -648,11 +649,11 @@ msgstr "Huidige elektriciteitsteruglevering in fase L2 (in kW)"
 msgid "Current electricity returned by phase L3 (in kW)"
 msgstr "Huidige elektriciteitsteruglevering in fase L3 (in kW)"
 
-msgid "DSMR reading (read only)"
-msgstr "DSMR-uitlezing (alleen lezen)"
+msgid "DSMR reading"
+msgstr "DSMR reading"
 
-msgid "DSMR readings (read only)"
-msgstr "DSMR-uitlezing (alleen lezen)"
+msgid "DSMR readings"
+msgstr "DSMR readings"
 
 msgid "Serial port"
 msgstr "Seriële poort"
@@ -2694,6 +2695,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "DSMR reading (read only)"
+#~ msgstr "DSMR-uitlezing (alleen lezen)"
+
+#~ msgid "DSMR readings (read only)"
+#~ msgstr "DSMR-uitlezing (alleen lezen)"
 
 #~ msgid "One-time set up with authorization link"
 #~ msgstr "Eenmalige setup met autorisatielink"

@@ -8,6 +8,7 @@ from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasuremen
 
 @admin.register(InfluxdbIntegrationSettings)
 class InfluxdbIntegrationSettingsAdmin(SingletonModelAdmin):
+    save_on_top = True
     change_form_template = 'dsmr_influxdb/influxdb_settings/change_form.html'
     fieldsets = (
         (

@@ -29,7 +29,7 @@ class TestBackendInfra(InterceptCommandStdoutMixin, TestCase):
         )
 
     def test_internal_check(self):
-        """ Tests whether Django passes it's internal 'check' command. """
+        """ Tests whether Django passes its internal 'check' command. """
         self.assertEqual(
             self._intercept_command_stdout('check'),
             'System check identified no issues (0 silenced).\n',

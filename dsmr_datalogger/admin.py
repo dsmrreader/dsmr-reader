@@ -7,7 +7,7 @@ from solo.admin import SingletonModelAdmin
 from rangefilter.filters import DateTimeRangeFilter
 import django.db.models.signals
 
-from dsmr_backend.mixins import ReadOnlyAdminModel
+from dsmr_backend.mixins import ReadOnlyAdminModel, DeletionOnlyAdminModel
 from dsmr_backend.models.schedule import ScheduledProcess
 from .models.settings import DataloggerSettings, RetentionSettings
 from .models.reading import DsmrReading
@@ -16,6 +16,7 @@ from .models.statistics import MeterStatistics, MeterStatisticsChange
 
 @admin.register(DataloggerSettings)
 class DataloggerSettingsAdmin(SingletonModelAdmin):
+    save_on_top = True
     change_form_template = 'dsmr_datalogger/datalogger_settings/change_form.html'
     readonly_fields = ('restart_required',)
     fieldsets = (
@@ -62,7 +63,8 @@ class RetentionSettingsAdmin(SingletonModelAdmin):
 
 
 @admin.register(DsmrReading)
-class DsmrReadingAdmin(ReadOnlyAdminModel):
+class DsmrReadingAdmin(DeletionOnlyAdminModel):
+    save_on_top = True
     ordering = ['-timestamp']
     list_display = (
         'timestamp', 'processed', 'formatted_electricity_delivered_1', 'formatted_electricity_delivered_2',

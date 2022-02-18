@@ -9,6 +9,7 @@ from .models.settings import FrontendSettings, SortedGraph
 
 @admin.register(FrontendSettings)
 class FrontendSettingsAdmin(SingletonModelAdmin):
+    save_on_top = True
     fieldsets = (
         (
             _('Security'), {

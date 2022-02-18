@@ -156,8 +156,8 @@ class DsmrReading(ModelUpdateMixin, models.Model):
     class Meta:
         default_permissions = tuple()
         ordering = ['timestamp']
-        verbose_name = _('DSMR reading (read only)')
-        verbose_name_plural = _('DSMR readings (read only)')
+        verbose_name = _('DSMR reading')
+        verbose_name_plural = _('DSMR readings')
 
     def convert_to_local_timezone(self):
         """ Converts the timestamp to the local time zone used. Only affects this instance, does not update record! """
