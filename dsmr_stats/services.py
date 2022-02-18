@@ -215,13 +215,15 @@ def electricity_tariff_percentage(start: date, end: date) -> Optional[Dict]:
         electricity2=Sum('electricity2'),
     )
 
-    # Empty data will crash.
-    if not all(totals.values()):
-        return None
-
+    # Summing up non-existent data results in None.
+    totals = {k: v if v is not None else 0 for k, v in totals.items()}
     global_total = totals['electricity1'] + totals['electricity2']
-    totals['electricity1'] = math.ceil(totals['electricity1'] / global_total * 100)
-    totals['electricity2'] = 100 - totals['electricity1']
+
+    try:
+        totals['electricity1'] = math.ceil(totals['electricity1'] / global_total * 100)
+        totals['electricity2'] = 100 - totals['electricity1']
+    except ZeroDivisionError:
+        pass
 
     return totals
 
