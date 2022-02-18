@@ -28,6 +28,7 @@ class NoteAdmin(admin.ModelAdmin):
 
 @admin.register(DayStatistics)
 class DayStatisticsAdmin(admin.ModelAdmin):
+    save_on_top = True
     actions = None
     ordering = ['-day', 'total_cost']
     list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'fixed_cost', 'total_cost')
@@ -66,6 +67,7 @@ class DayStatisticsAdmin(admin.ModelAdmin):
 
 @admin.register(HourStatistics)
 class HourStatisticsAdmin(admin.ModelAdmin):
+    save_on_top = True
     actions = None
     ordering = ['-hour_start']
     list_display = (
@@ -99,4 +101,5 @@ class HourStatisticsAdmin(admin.ModelAdmin):
 
 @admin.register(ElectricityStatistics)
 class ElectricityStatisticsAdmin(SingletonModelAdmin):
+    save_on_top = True
     actions = None

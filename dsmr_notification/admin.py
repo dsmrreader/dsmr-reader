@@ -7,6 +7,7 @@ from dsmr_notification.models.settings import NotificationSetting, StatusNotific
 
 @admin.register(NotificationSetting)
 class NotificationSettingsAdmin(SingletonModelAdmin):
+    save_on_top = True
     readonly_fields = ('next_notification', )
     fieldsets = (
         (None, {

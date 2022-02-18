@@ -22,6 +22,7 @@ v5.1.0 - 2022-xx-xx
 
 - ``Changed`` Updated and improved Dropbox OAuth flow [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
 - ``Changed`` Trends datepicker start now defaults to today
+- ``Changed`` Extended some admin forms with additional delete/save/update buttons on top of page
 
 - ``Fixed`` Increased remote datalogger its default log level from `INFO` to `ERROR` [`dsmr-reader-docker/#1579 <https://github.com/xirixiz/dsmr-reader-docker/issues/268>`_]
 - ``Fixed`` Fix docker issue with pg_dump not found - by @sanderdw [`#1579 <https://github.com/dsmrreader/dsmr-reader/issues/1579>`_]
