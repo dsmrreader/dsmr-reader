@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.utils import timezone, formats
 from django.shortcuts import redirect
 
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_frontend.forms import ExportAsCsvForm
@@ -22,6 +23,7 @@ class Export(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(Export, self).get_context_data(**kwargs)
         context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
 
         day_statistics = DayStatistics.objects.all().order_by('day')
 

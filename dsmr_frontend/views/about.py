@@ -6,6 +6,7 @@ from django.views.generic.base import TemplateView
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 import dsmr_backend.services.backend
+from dsmr_frontend.models.settings import FrontendSettings
 
 
 class About(ConfigurableLoginRequiredMixin, TemplateView):
@@ -14,6 +15,7 @@ class About(ConfigurableLoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(About, self).get_context_data(**kwargs)
         context_data['monitoring_issues'] = dsmr_backend.services.backend.request_monitoring_status()
+        context_data['frontend_settings'] = FrontendSettings.get_solo()
         return context_data
 
 
