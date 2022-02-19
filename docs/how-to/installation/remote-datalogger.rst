@@ -49,8 +49,8 @@ Execute::
     sudo usermod -a -G dialout dsmr
     sudo chown -R dsmr:dsmr /home/dsmr/
 
-    sudo sudo -u dsmr python3 -m venv /home/dsmr/.venv/
-    sudo sudo -u dsmr /home/dsmr/.venv/bin/pip3 install pyserial==3.5 requests==2.27.1 python-decouple==3.6
+    sudo -u dsmr python3 -m venv /home/dsmr/.venv/
+    sudo -u dsmr /home/dsmr/.venv/bin/pip3 install pyserial==3.5 requests==2.27.1 python-decouple==3.6
 
 
 Datalogger script
