@@ -135,15 +135,10 @@
         <script src="{% static 'dsmr_frontend/js/bootstrap.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
         <script src="{% static 'dsmr_frontend/js/Director/app.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
         <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
-
         <script>
-            {% if frontend_settings.frontend_theme is 0 %}
-                var darkModeEnabled = false;
-            {% else %}
-                var darkModeEnabled = true;
-            {% endif %}
+            let darkModeEnabled = {{ frontend_settings.frontend_theme|default:-1 }};
 
-            if (darkModeEnabled && (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            if (darkModeEnabled === 1 || (darkModeEnabled === -1 && window?.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.body.classList.toggle("dark-mode");
             }
         </script>
