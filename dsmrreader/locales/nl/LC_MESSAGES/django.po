@@ -1260,6 +1260,9 @@ msgstr "Statistieken"
 msgid "Energy contracts"
 msgstr "Energiecontracten"
 
+msgid "Export"
+msgstr "Export"
+
 msgid "Level of detail"
 msgstr "Detailniveau"
 
