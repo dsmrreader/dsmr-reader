@@ -50,9 +50,9 @@
                     {% if not diff.electricity_merged|intdiv:1 %}
                         <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
                     {% elif diff.electricity_merged > 0 %}
-                        <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="improved">{{ diff.electricity_merged|floatformat:0 }}</span> <span class="unit">%</span>
+                        <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="degraded">{{ diff.electricity_merged|floatformat:0 }}</span> <span class="unit">%</span>
                     {% elif diff.electricity_merged < 0 %}
-                        <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="degraded">{{ diff.electricity_merged|floatformat:0|abs }} </span> <span class="unit">%</span>
+                        <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="improved">{{ diff.electricity_merged|floatformat:0|abs }} </span> <span class="unit">%</span>
                     {% endif %}
                 </td>
             </tr>
