@@ -99,3 +99,10 @@ html body.dark-mode {
 .dark-mode .datepicker-trigger.st-gray {
     background-color: var(--dark-table-background);
 }
+
+/**
+* Configuration
+*/
+.dark-mode div.content > div.title {
+    color: #FFF !important;
+}
