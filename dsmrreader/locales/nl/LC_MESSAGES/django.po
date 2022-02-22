@@ -1371,6 +1371,9 @@ msgstr "Graphics / Visualisaties / Weergave"
 msgid "Merge tariffs"
 msgstr "Voeg tarieven samen"
 
+msgid "Dark mode"
+msgstr "Dark mode"
+
 msgid "Graph line/bar colors"
 msgstr "Grafieklijn/staaf kleuren"
 
