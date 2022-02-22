@@ -47,7 +47,7 @@ def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C
     """ Sets up the daily consumption notification message. """
     capabilities = dsmr_backend.services.backend.get_capabilities()
     day_date = day_statistics.day.strftime("%d-%m-%Y")
-    message = _('Your daily usage statistics for') + ' {}\n'.format(day_date)
+    message = _('Your daily usage statistics for') + ' {}\n\n'.format(day_date)
 
     if capabilities[Capability.ELECTRICITY]:
         message += _('Electricity consumed') + ': {} kWh\n'.format(day_statistics.electricity_merged)
@@ -58,8 +58,8 @@ def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C
     if capabilities[Capability.GAS]:
         message += _('Gas consumed') + ': {} m³\n'.format(day_statistics.gas)
 
-    if capabilities[Capability.COSTS] and day_statistics.total_cost is not None:
-        message += '---\n'
+    if capabilities[Capability.COSTS]:
+        message += '\n'
 
     if capabilities[Capability.COSTS] and capabilities[Capability.ELECTRICITY] \
             and (day_statistics.electricity1_cost is not None or day_statistics.electricity2_cost is not None):
