@@ -246,12 +246,6 @@ class TestServices(TestCase):
         else:
             return self.assertFalse(requests_post_mock.called)
 
-        # Make sure the expected message is created.
-        yesterday = (timezone.localtime(timezone.now()) - timezone.timedelta(hours=24)).date()
-        day_statistics = DayStatistics.objects.get(day=yesterday)
-        api_msg = dsmr_notification.services.create_consumption_message(day_statistics)
-        self.assertTrue(day_statistics.day.strftime("%d-%m-%Y") in api_msg)
-
         # Next notification should be pushed.
         self.assertGreater(NotificationSetting.get_solo().next_notification, timezone.now())
 
