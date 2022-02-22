@@ -51,35 +51,47 @@ def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C
     message = '{}\n\n'.format(day_date)
 
     if capabilities[Capability.ELECTRICITY]:
-        message += _('Electricity consumed') + ': {} kWh\n'.format(day_statistics.electricity_merged)
+        message += _('Electricity consumed') + ': {} kWh\n'.format(
+            formats.number_format(day_statistics.electricity_merged)
+        )
 
     if capabilities[Capability.ELECTRICITY_RETURNED]:
-        message += _('Electricity returned') + ': {} kWh\n'.format(day_statistics.electricity_returned_merged)
+        message += _('Electricity returned') + ': {} kWh\n'.format(
+            formats.number_format(day_statistics.electricity_returned_merged)
+        )
 
     if capabilities[Capability.GAS]:
-        message += _('Gas consumed') + ': {} m³\n'.format(day_statistics.gas)
+        message += _('Gas consumed') + ': {} m³\n'.format(
+            formats.number_format(day_statistics.gas)
+        )
 
     if capabilities[Capability.COSTS]:
         message += '\n'
 
     if capabilities[Capability.COSTS] and capabilities[Capability.ELECTRICITY] \
             and (day_statistics.electricity1_cost is not None or day_statistics.electricity2_cost is not None):
-        electricity_costs_merged = dsmr_consumption.services.round_decimal(
-            day_statistics.electricity_costs_merged
+        electricity_costs_merged = dsmr_consumption.services.round_decimal(day_statistics.electricity_costs_merged)
+        message += _('Electricity costs') + ': € {}\n'.format(
+            formats.number_format(electricity_costs_merged)
         )
-        message += _('Electricity costs') + ': € {}\n'.format(electricity_costs_merged)
 
     if capabilities[Capability.COSTS] and capabilities[Capability.GAS] and day_statistics.gas_cost is not None:
         gas_cost = dsmr_consumption.services.round_decimal(day_statistics.gas_cost)
-        message += _('Gas costs') + ': € {}\n'.format(gas_cost)
+        message += _('Gas costs') + ': € {}\n'.format(
+            formats.number_format(gas_cost)
+        )
 
     if capabilities[Capability.COSTS] and day_statistics.fixed_cost is not None:
         fixed_cost = dsmr_consumption.services.round_decimal(day_statistics.fixed_cost)
-        message += _('Fixed costs') + ': € {}\n'.format(fixed_cost)
+        message += _('Fixed costs') + ': € {}\n'.format(
+            formats.number_format(fixed_cost)
+        )
 
     if capabilities[Capability.COSTS] and day_statistics.total_cost is not None:
         total_cost = dsmr_consumption.services.round_decimal(day_statistics.total_cost)
-        message += _('Total costs') + ': € {}'.format(total_cost)
+        message += _('Total costs') + ': € {}'.format(
+            formats.number_format(total_cost)
+        )
 
     return message
 
