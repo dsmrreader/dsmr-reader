@@ -2281,6 +2281,12 @@ msgstr "Statusnotificatie-configuratie"
 msgid "Your daily usage statistics for"
 msgstr "Dagelijkse verbruiksstatistieken voor"
 
+msgid "Electricity costs"
+msgstr "Elektriciteitskosten"
+
+msgid "Gas costs"
+msgstr "Gaskosten"
+
 msgid "Total cost"
 msgstr "Totale kosten"
 

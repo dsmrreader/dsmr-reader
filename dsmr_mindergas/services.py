@@ -74,7 +74,7 @@ def export() -> NoReturn:
         raise AssertionError(_('No recent gas reading found'))
 
     reading_date = last_gas_reading.read_at.date().isoformat()
-    logger.debug('MinderGas: Uploading gas meter position: %s m3 @ %s', last_gas_reading.delivered, reading_date)
+    logger.debug('MinderGas: Uploading gas meter position: %s m³ @ %s', last_gas_reading.delivered, reading_date)
     response = requests.post(
         MinderGasSettings.API_URL,
         headers={

@@ -55,3 +55,4 @@ class TestDayStatistics(TestCase):
     def test_attributes(self):
         self.assertEqual(self.instance.electricity_merged, 2)
         self.assertEqual(self.instance.electricity_returned_merged, 6)
+        self.assertEqual(self.instance.electricity_costs_merged, 100)

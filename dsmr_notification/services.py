@@ -43,37 +43,49 @@ def notify_pre_check() -> bool:
     return True
 
 
-def create_consumption_message(day_statistics: DayStatistics) -> str:
-    """ Create the action notification message """
+def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C901
+    """ Sets up the daily consumption notification message. """
     capabilities = dsmr_backend.services.backend.get_capabilities()
     day_date = day_statistics.day.strftime("%d-%m-%Y")
     message = _('Your daily usage statistics for') + ' {}\n'.format(day_date)
 
     if capabilities[Capability.ELECTRICITY]:
-        electricity_merged = dsmr_consumption.services.round_decimal(day_statistics.electricity_merged)
-        message += _('Electricity consumed') + ': {} kWh\n'.format(electricity_merged)
+        message += _('Electricity consumed') + ': {} kWh\n'.format(day_statistics.electricity_merged)
 
     if capabilities[Capability.ELECTRICITY_RETURNED]:
-        electricity_returned_merged = dsmr_consumption.services.round_decimal(
-            day_statistics.electricity_returned_merged
-        )
-        message += _('Electricity returned') + ': {} kWh\n'.format(electricity_returned_merged)
+        message += _('Electricity returned') + ': {} kWh\n'.format(day_statistics.electricity_returned_merged)
 
     if capabilities[Capability.GAS]:
-        gas = dsmr_consumption.services.round_decimal(day_statistics.gas)
-        message += _('Gas consumed') + ': {} m3\n'.format(gas)
+        message += _('Gas consumed') + ': {} m³\n'.format(day_statistics.gas)
 
-    if day_statistics.fixed_cost > 0:
+    if capabilities[Capability.COSTS] and day_statistics.total_cost is not None:
+        message += '---\n'
+
+    if capabilities[Capability.COSTS] and capabilities[Capability.ELECTRICITY] \
+            and (day_statistics.electricity1_cost is not None or day_statistics.electricity2_cost is not None):
+        electricity_costs_merged = dsmr_consumption.services.round_decimal(
+            day_statistics.electricity_costs_merged
+        )
+        message += _('Electricity costs') + ': € {}\n'.format(electricity_costs_merged)
+
+    if capabilities[Capability.COSTS] and capabilities[Capability.GAS] and day_statistics.gas_cost is not None:
+        gas_cost = dsmr_consumption.services.round_decimal(day_statistics.gas_cost)
+        message += _('Gas costs') + ': € {}\n'.format(gas_cost)
+
+    if capabilities[Capability.COSTS] and day_statistics.fixed_cost is not None:
         fixed_cost = dsmr_consumption.services.round_decimal(day_statistics.fixed_cost)
         message += _('Fixed costs') + ': € {}\n'.format(fixed_cost)
 
-    total_cost = dsmr_consumption.services.round_decimal(day_statistics.total_cost)
-    message += _('Total cost') + ': € {}'.format(total_cost)
+    if capabilities[Capability.COSTS] and day_statistics.total_cost is not None:
+        total_cost = dsmr_consumption.services.round_decimal(day_statistics.total_cost)
+        message += _('Total cost') + ': € {}'.format(total_cost)
+
     return message
 
 
 def send_notification(message: str, title: str) -> NoReturn:
     """ Sends notification using the preferred service """
+    logger.debug(' - Preparing notification: %s | %s', title, message)
     notification_settings = NotificationSetting.get_solo()
 
     # Allow hooks (e.g. plugins)
@@ -84,8 +96,9 @@ def send_notification(message: str, title: str) -> NoReturn:
     )
 
     # Plugins only require the hook above.
-    if notification_settings.notification_service == NotificationSetting.NOTIFICATION_DUMMY:
-        return
+    if notification_settings.notification_service == NotificationSetting.NOTIFICATION_DUMMY \
+            or notification_settings.notification_service is None:
+        return logger.debug(' - Notification service is dummy (or not set). Hook triggered, skipping notification.')
 
     DATA_FORMAT = {
         NotificationSetting.NOTIFICATION_PUSHOVER: {
@@ -120,13 +133,14 @@ def send_notification(message: str, title: str) -> NoReturn:
         },
     }
 
+    logger.debug(' - Sending notification')
     response = requests.post(
         timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         **DATA_FORMAT[notification_settings.notification_service]
     )
 
     if response.status_code == 200:
-        return
+        return logger.debug(' - Notification sent')
 
     # Invalid request, do not retry.
     if str(response.status_code).startswith('4'):

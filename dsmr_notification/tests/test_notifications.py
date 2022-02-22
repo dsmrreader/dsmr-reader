@@ -7,6 +7,7 @@ import pytz
 
 from dsmr_backend.dto import Capability
 from dsmr_consumption.models.consumption import ElectricityConsumption
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_notification.models.settings import NotificationSetting, StatusNotificationSetting
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_datalogger.models.reading import DsmrReading
@@ -335,8 +336,36 @@ class TestServicesWithoutElectricityReturned(TestServices):
         self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
 
 
+class TestServicesWithPrices(TestServices):
+    """ Same tests, with prices set. """
+
+    def setUp(self):
+        super(TestServicesWithPrices, self).setUp()
+        EnergySupplierPrice.objects.create(
+            start=DayStatistics.objects.all()[0].day,
+            end=DayStatistics.objects.all()[0].day,
+            description='Test',
+            electricity_delivered_1_price=3,
+            electricity_delivered_2_price=5,
+            electricity_returned_1_price=1,
+            electricity_returned_2_price=2,
+            gas_price=8,
+            fixed_daily_cost=7,
+        )
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.COSTS))
+
+
+class TestServicesWithoutPrices(TestServices):
+    """ Same tests, but WITHOUT any prices set. """
+
+    def setUp(self):
+        super(TestServicesWithoutPrices, self).setUp()
+        EnergySupplierPrice.objects.all().delete()
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.COSTS))
+
+
 class TestServicesWithoutAnyData(TestServices):
-    """ TSame tests, but without having any data at all. """
+    """ Same tests, but without having any data at all. """
     fixtures = []
 
     def setUp(self):

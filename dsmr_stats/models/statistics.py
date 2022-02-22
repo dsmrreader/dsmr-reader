@@ -93,6 +93,10 @@ class DayStatistics(ModelUpdateMixin, models.Model):
     def electricity_returned_merged(self):
         return self.electricity1_returned + self.electricity2_returned
 
+    @property
+    def electricity_costs_merged(self):
+        return (self.electricity1_cost or 0) + (self.electricity2_cost or 0)
+
     class Meta:
         default_permissions = tuple()
         verbose_name = _('Day statistics (automatically generated data)')

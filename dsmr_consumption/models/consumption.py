@@ -166,7 +166,7 @@ class GasConsumption(ModelUpdateMixin, models.Model):
     )
 
     def __str__(self):
-        return '{} | {}: {} m3'.format(
+        return '{} | {}: {} m³'.format(
             self.__class__.__name__, timezone.localtime(self.read_at), self.currently_delivered
         )
 
