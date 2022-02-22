@@ -78,7 +78,7 @@ def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C
 
     if capabilities[Capability.COSTS] and day_statistics.total_cost is not None:
         total_cost = dsmr_consumption.services.round_decimal(day_statistics.total_cost)
-        message += _('Total cost') + ': € {}'.format(total_cost)
+        message += _('Total costs') + ': € {}'.format(total_cost)
 
     return message
 

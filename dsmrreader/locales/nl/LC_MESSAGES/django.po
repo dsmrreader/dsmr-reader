@@ -2287,9 +2287,6 @@ msgstr "Elektriciteitskosten"
 msgid "Gas costs"
 msgstr "Gaskosten"
 
-msgid "Total cost"
-msgstr "Totale kosten"
-
 msgid "Daily usage notification"
 msgstr "Dagelijkse verbruiksnotificatie"
 
@@ -2430,6 +2427,9 @@ msgstr "Gemiddelde temperatuur"
 
 msgid "Fixed cost"
 msgstr "Vaste kosten"
+
+msgid "Total cost"
+msgstr "Totale kosten"
 
 msgid "Electricity tariff 1 reading"
 msgstr "Elektriciteit tarief 1 gemeten"
