@@ -2,7 +2,7 @@ import logging
 from typing import NoReturn
 
 from django.utils.translation import gettext_lazy as _
-from django.utils import timezone, translation
+from django.utils import timezone, translation, formats
 from django.conf import settings
 import requests
 
@@ -46,8 +46,9 @@ def notify_pre_check() -> bool:
 def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C901
     """ Sets up the daily consumption notification message. """
     capabilities = dsmr_backend.services.backend.get_capabilities()
-    day_date = day_statistics.day.strftime("%d-%m-%Y")
-    message = _('Your daily usage statistics for') + ' {}\n\n'.format(day_date)
+
+    day_date = formats.date_format(day_statistics.day, 'DSMR_GRAPH_LONG_DATE_FORMAT')
+    message = '{}\n\n'.format(day_date)
 
     if capabilities[Capability.ELECTRICITY]:
         message += _('Electricity consumed') + ': {} kWh\n'.format(day_statistics.electricity_merged)

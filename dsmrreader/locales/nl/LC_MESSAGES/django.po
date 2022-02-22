@@ -2278,9 +2278,6 @@ msgstr "Tijdstip van de volgende controle. Applicatie werkt dit automatisch bij.
 msgid "Status notification configuration"
 msgstr "Statusnotificatie-configuratie"
 
-msgid "Your daily usage statistics for"
-msgstr "Dagelijkse verbruiksstatistieken voor"
-
 msgid "Electricity costs"
 msgstr "Elektriciteitskosten"
 
@@ -2706,6 +2703,14 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#, fuzzy
+#~| msgid "Day totals"
+#~ msgid "Day totals for"
+#~ msgstr "Dagtotalen"
+
+#~ msgid "Your daily usage statistics for"
+#~ msgstr "Dagelijkse verbruiksstatistieken voor"
 
 #~ msgid "DSMR reading (read only)"
 #~ msgstr "DSMR-uitlezing (alleen lezen)"
