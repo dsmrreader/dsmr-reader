@@ -4,7 +4,7 @@
 # Dockerfile for DSMR-reader development only, NEVER use in production! #
 #########################################################################
 
-FROM python:3
+FROM python:3 AS local-dsmrreader-dev
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
@@ -18,3 +18,20 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 COPY ./dsmrreader/provisioning/requirements/base.txt ./dsmrreader/provisioning/requirements/dev.txt /app/dsmrreader/provisioning/requirements/
 RUN pip3 install pip --upgrade
 RUN pip3 install -r dsmrreader/provisioning/requirements/base.txt -r dsmrreader/provisioning/requirements/dev.txt
+
+
+# App
+FROM local-dsmrreader-dev AS local-dsmrreader-app
+WORKDIR /app
+ENTRYPOINT python3 manage.py runserver 0.0.0.0:8000
+
+
+# Docs - Language parameter does not seem to be supported dynamically...
+FROM local-dsmrreader-dev AS local-dsmrreader-docs
+WORKDIR /app/docs
+
+FROM local-dsmrreader-docs AS local-dsmrreader-docs-en
+ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=en
+
+FROM local-dsmrreader-docs AS local-dsmrreader-docs-nl
+ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=nl

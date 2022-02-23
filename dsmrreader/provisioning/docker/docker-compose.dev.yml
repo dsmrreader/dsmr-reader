@@ -4,13 +4,12 @@
 
 version: "3.7"
 services:
-  # Manage command:   docker exec -it dsmr-app ./manage.py
   dsmr-app:
     container_name: dsmr-app
     build:
       context: .
       dockerfile: Dockerfile
-    command: ./manage.py runserver 0.0.0.0:8000
+      target: local-dsmrreader-app
     volumes:
       - .:/app
     ports:
@@ -18,13 +17,14 @@ services:
     depends_on:
       # DSMR-reader development
       - dsmr-db
-      - dsmr-docs
+      - dsmr-docs-en
+      - dsmr-docs-nl
       # Testing DB engines
       - test-db-postgres
       - test-db-mysql
       # Misc tools for development/testing
-      - mqtt-v2
-      - influxdb-v2
+      - mosquitto
+      - influxdb
     environment:
       # Development
       - DSMRREADER_LOGLEVEL=DEBUG
@@ -48,20 +48,25 @@ services:
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PASSWORD=testpasswd
       - DOCKER_TEST_MYSQL_DJANGO_DATABASE_NAME=dsmrreader  # Django prefixes "test_" automatically.
 
-  # Docs commands:   docker exec -it dsmr-docs
-  dsmr-docs:
-    container_name: dsmr-docs
+  dsmr-docs-en:
     build:
       context: .
       dockerfile: Dockerfile
-    working_dir: /app/docs/
-    command: sphinx-autobuild . _build/html --host 0.0.0.0 --port 10000
+      target: local-dsmrreader-docs-en
     volumes:
       - .:/app
     ports:
       - '10000:10000'
-    environment:
-      - SPHINXOPTS="-D language='nl'"
+
+  dsmr-docs-nl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: local-dsmrreader-docs-nl
+    volumes:
+      - .:/app
+    ports:
+      - '10001:10000'
 
   dsmr-db:
     container_name: dsmr-db
@@ -82,7 +87,6 @@ services:
       - POSTGRES_PASSWORD=postgres-password
 
   test-db-postgres:
-    container_name: test-db-postgres
     image: postgres:13
     restart: always
     healthcheck:
@@ -97,7 +101,6 @@ services:
 
   # WARNING: MySQL tests/connections are broken here, but do seem to work well in the CI anyway.
   test-db-mysql:
-    container_name: test-db-mysql
     image: mysql:5.7
     restart: always
     healthcheck:
@@ -111,8 +114,7 @@ services:
      - MYSQL_PASSWORD=testpasswd
      - MYSQL_ROOT_PASSWORD=testpasswd
 
-  mqtt-v2:
-    container_name: mqtt-v2
+  mosquitto:
     image: eclipse-mosquitto:2
     restart: always
     volumes:
@@ -120,8 +122,7 @@ services:
     ports:
       - '1883:1883'
 
-  influxdb-v2:
-    container_name: influxdb-v2
+  influxdb:
     image: influxdb:2.0-alpine
     restart: always
     ports:
