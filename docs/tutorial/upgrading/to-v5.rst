@@ -171,8 +171,11 @@ Install Python venv::
 
     sudo apt-get install python3-venv
 
-    # You MAY NOT need this, but be sure to install it if you happen to hit the following error at any point later:
+
+Install ``libopenjp2-7-dev`` as well, to prevent as possible error later::
+
     # "ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory"
+
     sudo apt-get install libopenjp2-7-dev
 
 Stop DSMR-reader::
@@ -246,6 +249,20 @@ Check DSMR-reader::
     ./manage.py check
 
 It should output something similar to: "System check identified no issues (0 silenced)."
+
+.. tip::
+
+    Does it fail with::
+
+        ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory
+
+    Make sure you've installed ``libopenjp2-7-dev`` above::
+
+        logout
+        sudo apt-get install libopenjp2-7-dev
+
+        sudo su - dsmr
+        ./manage.py check
 
 Execute::
 
