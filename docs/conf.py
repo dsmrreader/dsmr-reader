@@ -22,7 +22,7 @@ copyright = '2015 - {} DSMR-reader'.format(datetime.datetime.now().year)
 author = 'Dennis Siemensma'
 
 # The full version, including alpha/beta/rc tags
-release = 'v4'
+release = 'v5'
 
 
 # -- General configuration ---------------------------------------------------
