@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.utils import formats
+from django.utils.cache import patch_response_headers
 from django.views.generic.base import TemplateView, View
 
 from dsmr_backend.dto import Capability
@@ -81,7 +82,10 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
                     'value': float(dsmr_consumption.services.round_decimal(current['avg_gas'], decimal_count=5))
                 })
 
-        return JsonResponse(data)
+        response = JsonResponse(data)
+        patch_response_headers(response)
+
+        return response
 
 
 class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
@@ -111,4 +115,7 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
             ]
         }
 
-        return JsonResponse(result)
+        response = JsonResponse(result)
+        patch_response_headers(response)
+
+        return response

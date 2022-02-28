@@ -33,6 +33,7 @@ v5.1.0 - 2022-xx-xx
 - ``Fixed`` Fix docker issue with pg_dump not found - by @sanderdw [`#1579 <https://github.com/dsmrreader/dsmr-reader/issues/1579>`_]
 - ``Fixed`` Improved empty/error state in Trends [`#1523 <https://github.com/dsmrreader/dsmr-reader/issues/1523>`_]
 - ``Fixed`` Vergelijken geeft visueel verkeerde kleur bij negatief verschil [`#1517 <https://github.com/dsmrreader/dsmr-reader/issues/1517>`_]
+- ``Fixed`` Added headers to XHR responses to prevent browser caching [`#1591 <https://github.com/dsmrreader/dsmr-reader/issues/1591>`_]
 
 
 v5.0.0 - 2022-02-07

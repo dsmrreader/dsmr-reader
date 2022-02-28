@@ -1,4 +1,5 @@
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.utils.cache import patch_response_headers
 from django.views.generic.base import RedirectView
 from django.views.generic.base import View
 from django.http import JsonResponse
@@ -17,7 +18,10 @@ class XhrHeader(ConfigurableLoginRequiredMixin, View):
         if data and data['timestamp']:
             data['timestamp'] = str(naturaltime(data['timestamp']))
 
-        return JsonResponse(data)
+        response = JsonResponse(data)
+        patch_response_headers(response)
+
+        return response
 
 
 class StatusRedirectView(RedirectView):

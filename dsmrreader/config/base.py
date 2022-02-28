@@ -141,6 +141,7 @@ CACHES = {
         'TIMEOUT': 3600,
     },
 }
+CACHE_MIDDLEWARE_SECONDS = 0  # Do not have browsers cache app responses
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

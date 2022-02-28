@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.utils.cache import patch_response_headers
 from django.views import View
 from django.views.generic.base import TemplateView
 
@@ -21,15 +22,21 @@ class About(ConfigurableLoginRequiredMixin, TemplateView):
 
 class AboutXhrUpdateCheck(ConfigurableLoginRequiredMixin, View):
     def get(self, request):
-        return JsonResponse({
+        response = JsonResponse({
             'is_latest_version': dsmr_backend.services.backend.is_latest_version(),
         })
+        patch_response_headers(response)
+
+        return response
 
 
 class AboutXhrDebugInfo(LoginRequiredMixin, InterceptCommandStdoutMixin, View):
     def get(self, request):
         debug_dump = self._intercept_command_stdout('dsmr_debuginfo')
 
-        return JsonResponse({
+        response = JsonResponse({
             'dump': debug_dump,
         })
+        patch_response_headers(response)
+
+        return response

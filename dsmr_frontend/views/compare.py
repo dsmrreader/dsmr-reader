@@ -82,4 +82,5 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
             base=base_data['number_of_days'],
             comparison=comparison_data['number_of_days']
         )
+
         return context_data

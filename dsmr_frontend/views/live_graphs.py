@@ -1,6 +1,7 @@
 import json
 
 from django.http import JsonResponse
+from django.utils.cache import patch_response_headers
 from django.views.generic.base import TemplateView, View
 from django.utils import formats, timezone
 
@@ -118,7 +119,10 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
 
             data['latest_delta_id'] = current.id
 
-        return JsonResponse(data)
+        response = JsonResponse(data)
+        patch_response_headers(response)
+
+        return response
 
     def _convert_to_watt(self, kw_or_none):
         if kw_or_none is None:
@@ -147,7 +151,10 @@ class LiveXhrGasConsumption(ConfigurableLoginRequiredMixin, View):
             data['read_at'].append(read_at)
             data['currently_delivered'].append(float(current.currently_delivered))
 
-        return JsonResponse(data)
+        response = JsonResponse(data)
+        patch_response_headers(response)
+
+        return response
 
 
 class LiveXhrTemperature(ConfigurableLoginRequiredMixin, View):
@@ -170,4 +177,7 @@ class LiveXhrTemperature(ConfigurableLoginRequiredMixin, View):
             data['read_at'].append(read_at)
             data['degrees_celcius'].append(float(current.degrees_celcius))
 
-        return JsonResponse(data)
+        response = JsonResponse(data)
+        patch_response_headers(response)
+
+        return response
