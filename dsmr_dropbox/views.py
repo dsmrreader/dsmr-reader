@@ -1,10 +1,7 @@
 import pickle
 
 from django.conf import settings
-from django.utils.translation import gettext_lazy as _
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 from django.views.generic import RedirectView
 import dropbox
 
@@ -20,12 +17,8 @@ class DropboxAppAuthorizationView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         dropbox_settings = DropboxSettings.get_solo()
 
-        if not dropbox_settings.app_key:
-            messages.error(self.request, _('Aborted Dropbox authorization: Missing Dropbox "App Key" in DSMR-reader'))
-            return reverse('admin:dsmr_backup_dropboxsettings_changelist')
-
         auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(
-            dropbox_settings.app_key,
+            settings.DSMRREADER_DROPBOX_APP_KEY,
             use_pkce=True,
             token_access_type='offline',
             timeout=settings.DSMRREADER_CLIENT_TIMEOUT

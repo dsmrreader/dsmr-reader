@@ -49,7 +49,7 @@ def generate_access_token(scheduled_process: ScheduledProcess) -> NoReturn:
     dropbox_settings = DropboxSettings.get_solo()
     dbx = dropbox.Dropbox(
         oauth2_refresh_token=dropbox_settings.refresh_token,
-        app_key=dropbox_settings.app_key
+        app_key=settings.DSMRREADER_DROPBOX_APP_KEY
     )
 
     try:

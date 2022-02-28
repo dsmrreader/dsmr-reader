@@ -6,7 +6,6 @@ from typing import NoReturn, Dict, Optional, List, Tuple
 
 import pytz
 from django.conf import settings
-
 from django.db.models import Avg, Min, Max, Count
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats

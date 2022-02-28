@@ -2,8 +2,6 @@ from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from dsmr_backup.models.settings import DropboxSettings
-
 
 class TestViews(TestCase):
     namespace = 'dropbox'
@@ -26,17 +24,8 @@ class TestViews(TestCase):
         self.client.login(username='testuser', password='passwd')
         response = self.client.get(view_url)
         self.assertEqual(response.status_code, 302, response.content)
-        self.assertNotEqual(
-            response['Location'], '/admin/login/?next={}'.format(view_url)
-        )
-
-        # Now with Dropbox app key.
-        DropboxSettings.get_solo().update(app_key='fake-key')
-
-        response = self.client.get(view_url)
-        self.assertEqual(response.status_code, 302, response.content)
         self.assertIn(
-            'https://www.dropbox.com/oauth2/authorize?response_type=code&client_id=fake-key&'
+            'https://www.dropbox.com/oauth2/authorize?response_type=code&client_id=w5z4vlw9t2dqq5g&'
             'token_access_type=offline&code_challenge=',
             response['Location'],
         )

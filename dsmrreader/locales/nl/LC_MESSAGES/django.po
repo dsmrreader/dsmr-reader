@@ -234,6 +234,9 @@ msgstr "Dropbox app autorisatie gefaald: {}"
 msgid "Dropbox app authorization completed!"
 msgstr "Dropbox app autorisatie voltooid!"
 
+msgid "Dropbox App Key"
+msgstr "Dropbox App Key"
+
 msgid "Dropbox refresh token"
 msgstr "Dropbox refresh token"
 
@@ -272,9 +275,6 @@ msgstr "Het compressieniveau dat voor gzip gebruikt wordt. Niveau 9 = beste, niv
 
 msgid "Backup configuration"
 msgstr "Back-upconfiguratie"
-
-msgid "The \"App Key\" of the App in Dropbox to use (should be the \"Official DSMR-reader\" App Key)"
-msgstr "De \"App Key\" van de te gebruiken App in Dropbox (zou de \"Official DSMR-reader\" App Key moeten zijn)"
 
 msgid "Access Code by Dropbox"
 msgstr "Access Code van Dropbox"
@@ -845,9 +845,6 @@ msgstr "Kan niet authenticeren met Dropbox, inloggegevens weggehaald. Fout: {}"
 
 msgid "Unable to upload files to Dropbox due to {}. Ignoring new files for the next {} hours..."
 msgstr "Kan geen nieuwe bestanden uploaden naar Dropbox, wegens {}, voor de komende {} uur..."
-
-msgid "Aborted Dropbox authorization: Missing Dropbox \"App Key\" in DSMR-reader"
-msgstr "Dropbox autorisatie afgebroken: Geen Dropbox \"App Key\" in DSMR-reader"
 
 msgid "Security"
 msgstr "Beveiliging"
@@ -2703,6 +2700,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "The \"App Key\" of the App in Dropbox to use (should be the \"Official DSMR-reader\" App Key)"
+#~ msgstr "De \"App Key\" van de te gebruiken App in Dropbox (zou de \"Official DSMR-reader\" App Key moeten zijn)"
+
+#~ msgid "Aborted Dropbox authorization: Missing Dropbox \"App Key\" in DSMR-reader"
+#~ msgstr "Dropbox autorisatie afgebroken: Geen Dropbox \"App Key\" in DSMR-reader"
 
 #, fuzzy
 #~| msgid "Day totals"

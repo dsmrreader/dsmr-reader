@@ -20,9 +20,18 @@ Current version
 v5.1.0 - 2022-03-01
 -------------------
 
+.. danger::
+
+    ⚠️ The following features/support were changed in an **incompatible** way due to external requirements!
+
+- ``Changed`` Dropbox Oauth flow: The App Key **is no longer configurable in the admin interface** and now uses the default App Key of DSMR-reader [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
+
+----
+
+*Other changes*:
+
 - ``Added`` Support for dark mode - by @Justin991q [`#1567 <https://github.com/dsmrreader/dsmr-reader/issues/1567>`_]
 
-- ``Changed`` Updated and improved Dropbox OAuth flow [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
 - ``Changed`` Dagelijkse notificaties uitbreiden [`#1589 <https://github.com/dsmrreader/dsmr-reader/issues/1589>`_]
 - ``Changed`` Trends datepicker start now defaults to today
 - ``Changed`` Extended some admin forms with additional delete/save/update buttons on top of page

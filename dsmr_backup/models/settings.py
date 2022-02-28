@@ -49,13 +49,6 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
 
 class DropboxSettings(ModelUpdateMixin, SingletonModel):
     """ Dropbox backup upload settings. """
-    app_key = models.CharField(
-        max_length=255,
-        default=None,
-        null=True,
-        blank=True,
-        help_text=_('The "App Key" of the App in Dropbox to use (should be the "Official DSMR-reader" App Key)'),
-    )
     one_time_authorization_code = models.CharField(
         max_length=255,
         default=None,

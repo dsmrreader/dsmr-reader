@@ -44,7 +44,7 @@ class BackupSettingsAdmin(SingletonModelAdmin):
 @admin.register(DropboxSettings)
 class DropboxSettingsAdmin(SingletonModelAdmin):
     change_form_template = 'dsmr_backup/dropbox_settings/change_form.html'
-    readonly_fields = ('app_key', 'masked_refresh_token')
+    readonly_fields = ('_settings_app_key', '_masked_refresh_token')
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '64'})},
     }
@@ -55,15 +55,14 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
         return (
             (
                 None, {
-                    'fields': ['app_key'],
+                    'fields': ['_settings_app_key'],
                 },
             ),
             (
                 _('One-time set up Dropbox Access Code'), {
-                    'fields': ['one_time_authorization_code', 'masked_refresh_token'],
+                    'fields': ['one_time_authorization_code', '_masked_refresh_token'],
                 }
             ),
-
         )
 
     def save_model(self, request, obj, form, change):  # pragma: no cover
@@ -86,9 +85,13 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
         messages.success(request, _('Dropbox app authorization completed!'))
         super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
 
-    def masked_refresh_token(self, obj: DropboxSettings) -> str:  # pragma: no cover
+    def _settings_app_key(self, obj: DropboxSettings) -> str:  # pragma: no cover
+        return settings.DSMRREADER_DROPBOX_APP_KEY
+    _settings_app_key.short_description = _('Dropbox App Key')
+
+    def _masked_refresh_token(self, obj: DropboxSettings) -> str:  # pragma: no cover
         return '✅' if obj.refresh_token else '❌'
-    masked_refresh_token.short_description = _('Dropbox refresh token')
+    _masked_refresh_token.short_description = _('Dropbox refresh token')
 
 
 @admin.register(EmailBackupSettings)

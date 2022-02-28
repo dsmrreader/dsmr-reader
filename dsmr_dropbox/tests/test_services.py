@@ -18,7 +18,7 @@ import dsmr_dropbox.services
 class TestServices(InterceptCommandStdoutMixin, TestCase):
     def setUp(self):
         DropboxSettings.get_solo()
-        DropboxSettings.objects.all().update(app_key='fake-app-key', refresh_token='FAKE')
+        DropboxSettings.objects.all().update(refresh_token='FAKE')
 
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT)
         self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
@@ -56,7 +56,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         # Happy flow
         check_user_mock.side_effect = None
         refresh_access_token_mock.return_value = 'fake-access-token'
-        DropboxSettings.objects.all().update(app_key='appkey', refresh_token='token')
+        DropboxSettings.objects.all().update(refresh_token='token')
         dsmr_dropbox.services.generate_access_token(self.schedule_process)
 
     @mock.patch('dsmr_dropbox.services.generate_access_token')
