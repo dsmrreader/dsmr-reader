@@ -813,7 +813,7 @@ msgstr "N.B.: Het verlagen van \"Datalogger proces sleep\" zorgt voor meer schij
 msgid "Do not enable \"Override telegram timestamp\" unless your smart meter wrongly emits telegrams with an offset of multiple minutes or more."
 msgstr "Schakel \"Overschrijf tijdstip van telegrammen\" niet in, tenzij je slimme meter verkeerde telegrammen stuurt die meer dan enkele minuten afwijken."
 
-msgid "All data here is based on the latest telegram received and should also deployed on the Statistics page (except for the telegram). You can find the latest raw telegram below, which can be used for debugging purposes."
+msgid "All data here is based on the latest telegram received and should also be displayed on the Statistics page (except for the telegram). You can find the latest raw telegram below, which can be used for debugging purposes."
 msgstr "Alle gegevens hier zijn gebaseerd op het meeste recent ontvangen telegram en worden ook getoond op de Statistieken-pagina (behalve het telegram). Je kunt het meest recente telegram hieronder vinden voor situaties waarbij dit nodig, doorgaans bij debuggen."
 
 msgid "Data retention policies cleans up source data after a while."
