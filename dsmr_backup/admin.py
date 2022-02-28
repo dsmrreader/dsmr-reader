@@ -54,13 +54,8 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
         """ Method due to reverse_lazy() usage """
         return (
             (
-                None, {
-                    'fields': ['_settings_app_key'],
-                },
-            ),
-            (
-                _('One-time set up Dropbox Access Code'), {
-                    'fields': ['one_time_authorization_code', '_masked_refresh_token'],
+                _('One-time set up with Dropbox Access Code'), {
+                    'fields': ['one_time_authorization_code', '_settings_app_key', '_masked_refresh_token'],
                 }
             ),
         )

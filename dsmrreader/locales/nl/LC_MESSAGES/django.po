@@ -225,8 +225,8 @@ msgstr "Stuur een test e-mail"
 msgid "Detailed instructions for restoring a backup can be found here <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html\">in documentation</a>."
 msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html\">FAQ in documentatie</a>."
 
-msgid "One-time set up Dropbox Access Code"
-msgstr "Eenmalig instellen Dropbox Access Code"
+msgid "One-time set up with Dropbox Access Code"
+msgstr "Eenmalig instellen met Dropbox Access Code"
 
 msgid "Dropbox app authorization failed: {}"
 msgstr "Dropbox app autorisatie gefaald: {}"
