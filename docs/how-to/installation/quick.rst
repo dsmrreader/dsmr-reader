@@ -79,9 +79,9 @@ Continue::
     sudo chown -R dsmr:dsmr /home/dsmr/
 
     # Dependencies
-    sudo -u dsmr python3 -m venv ~/dsmr-reader/.venv/
+    sudo -u dsmr python3 -m venv /home/dsmr/dsmr-reader/.venv/
     sudo sh -c 'echo "cd ~/dsmr-reader" >> /home/dsmr/.bashrc'
-    sudo sh -c 'echo "source ~/dsmr-reader/.venv/bin/activate" >> ~/.bashrc'
+    sudo sh -c 'echo "source ~/dsmr-reader/.venv/bin/activate" >> /home/dsmr/.bashrc'
     sudo su - dsmr
     pip3 install -r ~/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
     CTRL + D (exit)
@@ -91,9 +91,6 @@ Continue::
     sudo -u dsmr cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/django/settings.py.template /home/dsmr/dsmr-reader/dsmrreader/settings.py
     sudo -u dsmr cp /home/dsmr/dsmr-reader/.env.template /home/dsmr/dsmr-reader/.env
     sudo -u dsmr /home/dsmr/dsmr-reader/tools/generate-secret-key.sh
-
-    # Requirements
-    sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/pip3 install -r /home/dsmr/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
 
     # Setup
     sudo -u dsmr /home/dsmr/dsmr-reader/.venv/bin/python3 /home/dsmr/dsmr-reader/manage.py migrate
