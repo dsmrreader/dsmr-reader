@@ -17,7 +17,7 @@ Current version
     ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v5.1.0 - 2022-xx-xx
+v5.1.0 - 2022-03-01
 -------------------
 
 - ``Added`` Support for dark mode - by @Justin991q [`#1567 <https://github.com/dsmrreader/dsmr-reader/issues/1567>`_]
