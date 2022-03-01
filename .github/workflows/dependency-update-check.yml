@@ -21,6 +21,7 @@ jobs:
 
       - name: Install OS packages
         run: |
+          sudo apt-get update
           sudo apt install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
           pip install --upgrade pip poetry
 
