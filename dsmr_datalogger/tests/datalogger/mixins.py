@@ -29,7 +29,7 @@ class FakeDsmrReadingMixin(InterceptCommandStdoutMixin, TestCase):
 
         self._intercept_command_stdout('dsmr_datalogger', run_once=run_once)
 
-    def _reading_with_override_telegram_timestamp_active(self, now_mock):
+    def _reading_with_override_telegram_timestamp_active(self, now_mock) -> DsmrReading:
         """ For DRY. Returns the reading. """
         now_mock.return_value = timezone.make_aware(timezone.datetime(2021, 1, 15, 12, 34, 56, 0))
 
