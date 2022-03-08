@@ -10,10 +10,10 @@ body:
 
         ### Help yourself
         Sometimes you can help yourself with:
-        - Check [the how to guides](https://dsmr-reader.readthedocs.io/nl/v4/how-to/index.html).
+        - Check [the how to guides](https://dsmr-reader.readthedocs.io/nl/v5/how-to/index.html).
         - See previous [questions](https://github.com/dsmrreader/dsmr-reader/discussions).
         - See (recent) previous [issues](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc).
-        - Errors? Check [your logfiles](https://dsmr-reader.readthedocs.io/nl/v4/how-to/troubleshooting/logfiles.html).
+        - Errors? Check [your logfiles](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/logfiles.html).
 
   - type: textarea
     id: description
@@ -55,5 +55,5 @@ body:
     id: debug-info-dump
     attributes:
       label: Debug info dump
-      description: When applicable, add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v4/how-to/troubleshooting/debug-info-dump.html) below. This will be automatically formatted into code, so no need for backticks.
+      description: When applicable, add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/debug-info-dump.html) below. This will be automatically formatted into code, so no need for backticks.
       render: shell

@@ -222,8 +222,8 @@ msgstr "Optioneel: Bekijk hier je instellingen voor het versturen van back-ups p
 msgid "Send test email"
 msgstr "Stuur een test e-mail"
 
-msgid "Detailed instructions for restoring a backup can be found here <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html\">in documentation</a>."
-msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/database/postgresql-restore-backup.html\">FAQ in documentatie</a>."
+msgid "Detailed instructions for restoring a backup can be found here <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/database/postgresql-restore-backup.html\">in documentation</a>."
+msgstr "Gedetailleerde instructies voor het herstellen van een back-up kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/database/postgresql-restore-backup.html\">FAQ in documentatie</a>."
 
 msgid "One-time set up with Dropbox Access Code"
 msgstr "Eenmalig instellen met Dropbox Access Code"
@@ -1897,8 +1897,8 @@ msgstr "Daarnaast, wegens (geheugen) limieten moeten de gegevens in batches gesy
 msgid "You will need to keep executing the command untill there is no more data to sync. The progress will be stored in InfluxDB in an \"export_progress_meta\" measurement. See <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\">Issue #1055</a> for more details and tips on how to easily automate this."
 msgstr "Exporteer altijd eerst naar een aparte InfluxDB -database en bekijk het resultaat. Er is geen detectie voor dubbele bestaande data (behalve de export zelf), dus overweeg om na afloop te wisselen van actieve InfluxDB-database. Zie <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\">Issue #1055</a> voor meer informatie en ook tips hoe de export deels te automatiseren is."
 
-msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/mindergas.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/mindergas.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/mindergas.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/mindergas.html\">Documentatie</a>"
 
 msgid "MinderGas.nl"
 msgstr "MinderGas.nl"
@@ -2197,8 +2197,8 @@ msgstr "Geeft aan of binnengekomen telegrammen worden doorgestuurd naar de broke
 msgid "(Data source) Telegram: Split topic"
 msgstr "(Databron) Telegram: Gesplitst topic"
 
-msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/notifications.html\">Documentation</a>"
-msgstr "Gedetailleerde instructies voor het configureren van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/notifications.html\">Documentatie</a>"
+msgid "Detailed instructions for configuring notifications can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/notifications.html\">Documentation</a>"
+msgstr "Gedetailleerde instructies voor het configureren van notificaties kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/notifications.html\">Documentatie</a>"
 
 msgid "Only applies when using Pushover"
 msgstr "Alleen van toepassing voor Pushover"
@@ -2700,56 +2700,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "The \"App Key\" of the App in Dropbox to use (should be the \"Official DSMR-reader\" App Key)"
-#~ msgstr "De \"App Key\" van de te gebruiken App in Dropbox (zou de \"Official DSMR-reader\" App Key moeten zijn)"
-
-#~ msgid "Aborted Dropbox authorization: Missing Dropbox \"App Key\" in DSMR-reader"
-#~ msgstr "Dropbox autorisatie afgebroken: Geen Dropbox \"App Key\" in DSMR-reader"
-
-#, fuzzy
-#~| msgid "Day totals"
-#~ msgid "Day totals for"
-#~ msgstr "Dagtotalen"
-
-#~ msgid "Your daily usage statistics for"
-#~ msgstr "Dagelijkse verbruiksstatistieken voor"
-
-#~ msgid "DSMR reading (read only)"
-#~ msgstr "DSMR-uitlezing (alleen lezen)"
-
-#~ msgid "DSMR readings (read only)"
-#~ msgstr "DSMR-uitlezing (alleen lezen)"
-
-#~ msgid "One-time set up with authorization link"
-#~ msgstr "Eenmalige setup met autorisatielink"
-
-#~ msgid "Set the \"App Key\" above, save it and ONLY THEN <a href=\"{}\" target=\"_blank\">➡️ click this authorization link ⬅️</a> (opens Dropbox.com). Follow the steps at Dropbox.com, enter the one-time authorization code given by Dropbox below and save one last time."
-#~ msgstr "Stel hierboven de \"App Key\" in, sla deze op en ALLEEN DAN <a href=\"{}\" target=\"_blank\">➡️ kun je deze autorisatielink klikken ⬅️</a> (opent Dropbox.com). Volg de stappen op Dropbox.com, voer daarna de door Dropbox getoonde eenmalige autorisatiecode in hieronder. Sla dit formulier tot slot nog een keer op."
-
-#~ msgid "App Key is set"
-#~ msgstr "App Key is ingesteld"
-
-#~ msgid "The Dropbox \"App Key\" for the Dropbox app to use (care which app you authorize!)"
-#~ msgstr "De Dropbox \"App Key\" voor de betreffende Dropbox-app die je wilt gebruiken (let op welke app je autoriseert!)"
-
-#~ msgid "Step 1: Either use the official DSMR-reader Dropbox \"App Key\" (w5z4vlw9t2dqq5g) or register your own Dropbox app in the <a href=\"https://www.dropbox.com/developers/apps/\" target=\"_blank\">Dropbox Developers Console</a>."
-#~ msgstr "Stap 1: Gebruik ofwel de Official DSMR-reader Dropbox \"App Key\" (w5z4vlw9t2dqq5g) of registreer je eigen Dropbox-app in de <a href=\"https://www.dropbox.com/developers/apps/\" target=\"_blank\">Dropbox Developers Console</a>."
-
-#~ msgid "Step 2: Enter the \"App Key\" of the (DSMR-reader) Dropbox app below."
-#~ msgstr "Stap 2: Voer de \"App Key\" van de (DSMR-reader) Dropbox-app hieronder in."
-
-#~ msgid "Step 3: Click \"save and continue editing\" below. It should then be OK (✅)."
-#~ msgstr "Stap 3: Klik \"opslaan en doorgaan\" hieronder. Het zou daarna OK moeten zijn (✅)."
-
-#~ msgid "WARNING: Ensure you trust the Dropbox App and that it prompts for file access in a dedicated subfolder of the \"Apps\" folder in your account!"
-#~ msgstr "WAARSCHUWING: Zorg ervoor dat je de Dropbox-app vertrouwt en dat Dropbox aangeeft dat het alleen bestanden in een eigen submap van \"Apps\" in je account beheert!"
-
-#~ msgid "You can always reauthorize the/your Dropbox app again. Just update the App Key in step 2 and follow the steps again."
-#~ msgstr "Je kunt altijd je/de Dropbox-app opnieuw autoriseren. Werk de App Key bij in stap 2 en volg de rest van de stappen opnieuw."
-
-#~ msgid "This is the final release on v4. Switching to v5 requires you to manually upgrade. Click the link button for more information."
-#~ msgstr "Dit is de laatste release op v4. Wisselen naar v5 vereist je om handmatig te upgraden. Klik op de link/knop voor meer informatie."
-
-#~ msgid "This will synchronize backups to your Dropbox account. Detailed instructions for configuring Dropbox can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/backup_dropbox.html\">Documentation</a>"
-#~ msgstr "Dit synchroniseert back-up's naar je Dropbox-account. Gedetailleerde instructies voor het koppelen met Dropbox kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v4/how-to/admin/backup_dropbox.html\">Documentatie</a>"
