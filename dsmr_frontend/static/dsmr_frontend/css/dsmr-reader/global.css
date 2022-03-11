@@ -125,6 +125,10 @@ div.alert-without-padding {
     margin-bottom: 0 !important;
 }
 
+div.small-alert-info {
+    font-size: x-small;
+}
+
 span.improved {
     color: #27C24C;
 }
@@ -146,6 +150,10 @@ div.graph-canvas {
 div.large-graph-canvas {
     width: 100%;
     height: 600px;
+}
+
+tr.contract-details > td:nth-child(1) {
+    padding-left: 20px !important;
 }
 
 @media screen and (max-width: 768px) {

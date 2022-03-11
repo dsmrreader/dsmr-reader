@@ -10,15 +10,11 @@
 <!-- Main content -->
 <section class="content">
 {% if capabilities.costs and energy_contracts %}
-	<div class="alert alert-info" role="alert">
+	<div class="alert alert-info small-alert-info" role="alert">
 	    <span class="fas fa-info-circle"></span> &nbsp;
-        {% blocktranslate %}All data is based on whether you have set prices for each type of consumption. E.g.: Omitting gas prices will hide gas consumption for the contract.{% endblocktranslate %}
-        {% blocktranslate %}The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice.{% endblocktranslate %}
-
-        {% if capabilities.electricity_returned %}
-            {% blocktranslate %}When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation.{% endblocktranslate %}
-        {% endif %}
-	</div>
+        {% blocktranslate %}The data displayed here is only for giving you a global reference regarding static costs or historic meter positions. DSMR-reader does NOT simulate your energy supplier's invoice, nor it will ever do in a future release.{% endblocktranslate %}
+        {% blocktranslate %}All data is based on whether you have set prices for each type of consumption. For example, omitting a contract's gas price will hide gas consumption for that contract.{% endblocktranslate %}
+    </div>
 
     {% for current in energy_contracts %}
     <div class="row">
@@ -111,48 +107,91 @@
 			            </tr>
 
                         <tr>
-                            <td colspan="4"><a class="show-unit-prices" href="#">{% translate 'Show contract prices' %}</a></td>
+                            <td colspan="4"><a class="show-contract-details" href="#">{% translate 'Show more details' %}</a></td>
                         </tr>
+
+
+                        {# Prices #}
+                        <tr class="contract-details xhr-hidden">
+                            <td colspan="4"><strong>{% translate "Contract prices" %}</strong></td>
+                        </tr>
+
                         {% if current.prices.electricity_delivered_1_price %}
-                        <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_1_delivered_name|capfirst }}</small> <span class="unit">({% translate "tariff 1" %})</span></td>
+                        <tr class="contract-details xhr-hidden">
+                            <td colspan="3"><small>{{ frontend_settings.tariff_1_delivered_name|capfirst }}</small> <span class="unit">{% translate "tariff 1" %}</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_delivered_1_price }}</small></span></td>
                         </tr>
                         {% endif %}
                         
                         {% if current.prices.electricity_delivered_2_price %}
-                        <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_2_delivered_name|capfirst }}</small> <span class="unit">({% translate "tariff 2" %})</span></td>
+                        <tr class="contract-details xhr-hidden">
+                            <td colspan="3"><small>{{ frontend_settings.tariff_2_delivered_name|capfirst }}</small> <span class="unit">{% translate "tariff 2" %}</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_delivered_2_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.gas_price %}
-                        <tr class="unit-prices xhr-hidden">
+                        <tr class="contract-details xhr-hidden">
                             <td colspan="3"><small>{% translate "Gas" %}</small></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.gas_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.electricity_returned_1_price %}
-                        <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_1_returned_name }}</small> <span class="unit">({% translate "tariff 1" %})</span></td>
+                        <tr class="contract-details xhr-hidden">
+                            <td colspan="3"><small>{{ frontend_settings.tariff_1_returned_name }}</small> <span class="unit">{% translate "tariff 1" %}</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_returned_1_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.electricity_returned_2_price %}
-                        <tr class="unit-prices xhr-hidden">
-                            <td colspan="3"><small>{{ frontend_settings.tariff_2_returned_name }}</small> <span class="unit">({% translate "tariff 2" %})</span></td>
+                        <tr class="contract-details xhr-hidden">
+                            <td colspan="3"><small>{{ frontend_settings.tariff_2_returned_name }}</small> <span class="unit">{% translate "tariff 2" %}</span></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.electricity_returned_2_price }}</small></span></td>
                         </tr>
                         {% endif %}
 
                         {% if current.prices.fixed_daily_cost %}
-                        <tr class="unit-prices xhr-hidden">
+                        <tr class="contract-details xhr-hidden">
                             <td colspan="3"><small>{% translate "Fixed daily costs" %}</small></td>
                             <td><span class="badge bg-blue"><small>{{ current.prices.fixed_daily_cost }}</small></span></td>
                         </tr>
+                        {% endif %}
+
+
+                        {# Meter positions #}
+                        {% if current.first_day %}
+                            <tr class="contract-details xhr-hidden">
+                                <td><strong>{% translate "Meter positions start" %}</strong> <span class="unit">{{ current.first_day.day }}</span></td>
+                                <td><span class="unit">{% translate "Delivered" %}</span></td>
+                                <td><span class="unit">{% translate "Returned" %}</span></td>
+                                <td></td>
+                            </tr>
+
+                            {% if current.first_day.electricity1_reading or current.first_day.electricity1_returned_reading %}
+                            <tr class="contract-details xhr-hidden">
+                                <td><small>{{ frontend_settings.tariff_1_delivered_name|capfirst }}</small> <span class="unit">{% translate "kWh" %}</span></td>
+                                <td><span class="badge bg-red"><small>{{ current.first_day.electricity1_reading }}</small></span></td>
+                                <td>{% if capabilities.electricity_returned %}<span class="badge bg-green"><small>{{ current.first_day.electricity1_returned_reading }}</small></span>{% endif %}</td>
+                                <td></td>
+                            </tr>
+                            {% endif %}
+
+                            {% if current.first_day.electricity2_reading or current.first_day.electricity2_returned_reading %}
+                            <tr class="contract-details xhr-hidden">
+                                <td><small>{{ frontend_settings.tariff_2_delivered_name|capfirst }}</small> <span class="unit">{% translate "kWh" %}</span></td>
+                                <td><span class="badge bg-red"><small>{{ current.first_day.electricity2_reading }}</small></span></td>
+                                <td>{% if capabilities.electricity_returned %}<span class="badge bg-green"><small>{{ current.first_day.electricity2_returned_reading }}</small></span>{% endif %}</td>
+                                <td></td>
+                            </tr>
+                            {% endif %}
+                            {% if current.first_day.gas_reading %}
+                            <tr class="contract-details xhr-hidden">
+                                <td>{% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
+                                <td><span class="badge bg-orange"><small>{{ current.first_day.gas_reading }}</small></span></td>
+                                <td colspan="2"></td>
+                            </tr>
+                            {% endif %}
                         {% endif %}
 			        </table>
                 </div>
@@ -175,9 +214,9 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        $('.show-unit-prices').click(function(){
-            $('.unit-prices').show();
-            $('.show-unit-prices').hide();
+        $('.show-contract-details').click(function(){
+            $('.contract-details').show();
+            $('.show-contract-details').hide();
             return false;
         })
     });

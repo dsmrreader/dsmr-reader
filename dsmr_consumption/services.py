@@ -17,6 +17,7 @@ from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_frontend.models.settings import FrontendSettings
+from dsmr_stats.models.statistics import DayStatistics
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_stats.models.note import Note
 from dsmr_datalogger.models.statistics import MeterStatistics
@@ -528,6 +529,13 @@ def summarize_energy_contracts() -> List[Dict]:
 
             summary['total_cost'] += summary[summary_field]
 
+        try:
+            first_day = DayStatistics.objects.filter(
+                day__gte=current.start, day__lt=current.end
+            ).order_by('day')[0]
+        except IndexError:
+            first_day = None
+
         data.append({
             'description': current.description,
             'start': current.start,
@@ -540,7 +548,8 @@ def summarize_energy_contracts() -> List[Dict]:
                 'electricity_returned_1_price': current.electricity_returned_1_price,
                 'electricity_returned_2_price': current.electricity_returned_2_price,
                 'fixed_daily_cost': current.fixed_daily_cost,
-            }
+            },
+            'first_day': first_day,
         })
 
     return data

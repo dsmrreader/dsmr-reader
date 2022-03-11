@@ -1482,14 +1482,11 @@ msgstr "Ongelezen notificaties"
 msgid "Go to notification overview"
 msgstr "Ga naar notificatieoverzicht"
 
-msgid "All data is based on whether you have set prices for each type of consumption. E.g.: Omitting gas prices will hide gas consumption for the contract."
-msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. N.B.: Het weglaten van bijvoorbeeld gasprijzen verbergt gasconsumptie."
+msgid "The data displayed here is only for giving you a global reference regarding static costs or historic meter positions. DSMR-reader does NOT simulate your energy supplier's invoice, nor it will ever do in a future release."
+msgstr "De getoonde gegevens hier zijn er puur om je een globale indicatie te geven qua kosten of historische meterstanden. DSMR-reader simuleert NIET je energierekening en zal dat ook nooit doen."
 
-msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
-msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
-
-msgid "When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation."
-msgstr "Indien van toepassing: Kosten m.b.t. teruglevering kunnen afwijken van je daadwerkelijke situatie en worden getoond voor een volledig overzicht."
+msgid "All data is based on whether you have set prices for each type of consumption. For example, omitting a contract's gas price will hide gas consumption for that contract."
+msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. Bijvoorbeeld het weglaten van de gasprijs bij een contract verbergt daar de gasconsumptie."
 
 msgid "day"
 msgid_plural "days"
@@ -1520,8 +1517,11 @@ msgstr "m³"
 msgid "Total costs"
 msgstr "Totale kosten"
 
-msgid "Show contract prices"
-msgstr "Toon contractprijzen"
+msgid "Show more details"
+msgstr "Toon meer details"
+
+msgid "Contract prices"
+msgstr "Contractprijzen"
 
 msgid "tariff 1"
 msgstr "tarief 1"
@@ -1531,6 +1531,12 @@ msgstr "tarief 2"
 
 msgid "Fixed daily costs"
 msgstr "Vaste kosten per dag"
+
+msgid "Meter positions"
+msgstr "Meterstanden"
+
+msgid "Delivered"
+msgstr "Verbruikt"
 
 msgid "No data or energy contracts found."
 msgstr "Geen gegevens of energiecontracten gevonden."
@@ -1604,14 +1610,8 @@ msgstr "Max"
 msgid "Avg"
 msgstr "Gem"
 
-msgid "Meter positions"
-msgstr "Meterstanden"
-
 msgid "Meter positions of first reading of the day"
 msgstr "Meterstanden bij eerste meting van de dag"
-
-msgid "Delivered"
-msgstr "Verbruikt"
 
 #, python-format
 msgid "%(data_count)s data point"
@@ -2700,3 +2700,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
+#~ msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
+
+#~ msgid "When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation."
+#~ msgstr "Indien van toepassing: Kosten m.b.t. teruglevering kunnen afwijken van je daadwerkelijke situatie en worden getoond voor een volledig overzicht."
