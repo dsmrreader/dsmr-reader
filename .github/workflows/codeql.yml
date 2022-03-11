@@ -15,8 +15,10 @@ on:
   push:
     branches:
       - v*
-  # For dev/testing only
-  pull_request: ~
+  # For development/testing only
+  pull_request:
+    branches:
+      - v*
 
 jobs:
   analyze:
@@ -42,6 +44,10 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
       with:
+        config-file: codeql-config.yml
+        # Override the default behavior so that the action doesn't attempt
+        # to auto-install Python dependencies
+        setup-python-dependencies: false
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
