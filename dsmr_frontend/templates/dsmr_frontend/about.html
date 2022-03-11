@@ -75,7 +75,7 @@
                             {% translate "Looking for something specific? A good place to start might be the FAQ" %}:
                         </div>
                         <div class="col-sm-6">
-                            <a href="{% url 'frontend:docs-redirect' %}" target="_blank">{% translate "View frequently asked questions (FAQ)" %} </a>
+                            <a href="{% url 'frontend:docs-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View frequently asked questions (FAQ)" %} </a>
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -84,7 +84,7 @@
                             {% translate "Did something change after updating? Check out the latest changes" %}:
                         </div>
                         <div class="col-sm-6">
-                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank">{% translate "View changelog" %} </a>
+                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View changelog" %} </a>
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -93,7 +93,7 @@
                             <small>{% translate "Still need troubleshooting? Check out current issues on GitHub" %}:</small>
                         </div>
                         <div class="col-sm-6">
-                            <a href="https://github.com/dsmrreader/dsmr-reader/issues" target="_blank">{% translate "View DSMR-reader issues on GitHub (or create one)" %} </a>
+                            <a href="https://github.com/dsmrreader/dsmr-reader/issues" target="_blank" rel="noopener noreferrer">{% translate "View DSMR-reader issues on GitHub (or create one)" %} </a>
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -122,7 +122,7 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank">{% translate "View API docs" %}</a>
+                            <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank" rel="noopener noreferrer">{% translate "View API docs" %}</a>
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                             {% translate "Improved by" %}
                         </div>
                         <div class="col-sm-6">
-                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank">
+                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank" rel="noopener noreferrer">
                                 {% translate "Many contributors" %} <i class="fas fa-heart"></i>
                             </a>
                         </div>

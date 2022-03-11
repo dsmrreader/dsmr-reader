@@ -363,8 +363,8 @@ msgstr "Stap 4: Indien geldig zou het \"Dropbox refresh token\" nu OK moeten zij
 msgid "Step 5: DSMR-reader will upload the backups to your Dropbox-account within a day, usually shortly."
 msgstr "Stap 5: DSMR-reader uploadt de back-ups naar de Dropbox-account binnen een dag, en meestal nog sneller."
 
-msgid "Please note you can revoke DSMR-reader's access (the refresh token) at any time in <a target=\"_blank\" href=\"https://www.dropbox.com/account/connected_apps\">Your Connected Apps at Dropbox.com</a>."
-msgstr "N.B.: Je kunt DSMR-reader's toegang (het refresh token) op elk moment intrekken in <a target=\"_blank\" href=\"https://www.dropbox.com/account/connected_apps\">Your Connected Apps op Dropbox.com</a>."
+msgid "Please note you can revoke DSMR-reader's access (the refresh token) at any time in <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.dropbox.com/account/connected_apps\">Your Connected Apps at Dropbox.com</a>."
+msgstr "N.B.: Je kunt DSMR-reader's toegang (het refresh token) op elk moment intrekken in <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.dropbox.com/account/connected_apps\">Your Connected Apps op Dropbox.com</a>."
 
 msgid "To reauthorize or reconnect the \"Official DSMR-reader\" Dropbox App again, just follow the same steps above once more."
 msgstr "Om de \"Official DSMR-reader\" Dropbox App opnieuw te autoriseren of verbinden, volg de bovenstaande stappen opnieuw."
@@ -1894,8 +1894,8 @@ msgstr "Exporteer altijd eerst naar een aparte InfluxDB -bucket en bekijk het re
 msgid "Also, due to (memory) limitations the data will need to be synced in batches. Each batch consists of 100 readings and the number of batches per run defaults to 50. You may define the number of batches to sync for each run. You may try using a higher number of batches per run (see above), but increasing it may eventually decrease performance."
 msgstr "Daarnaast, wegens (geheugen) limieten moeten de gegevens in batches gesynchroniseerd worden. Elke batch bestaat uit 100 metingen en elke keer worden er standaard 50 batches overgezet. Je kunt het aantal batches per keer wijzigen. Je kunt proberen om deze te verhogen (zie hierboven), al resulteert dat niet perse in een betere performance."
 
-msgid "You will need to keep executing the command untill there is no more data to sync. The progress will be stored in InfluxDB in an \"export_progress_meta\" measurement. See <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\">Issue #1055</a> for more details and tips on how to easily automate this."
-msgstr "Exporteer altijd eerst naar een aparte InfluxDB -database en bekijk het resultaat. Er is geen detectie voor dubbele bestaande data (behalve de export zelf), dus overweeg om na afloop te wisselen van actieve InfluxDB-database. Zie <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\">Issue #1055</a> voor meer informatie en ook tips hoe de export deels te automatiseren is."
+msgid "You will need to keep executing the command until there is no more data to sync. The progress will be stored in InfluxDB in an \"export_progress_meta\" measurement. See <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\" rel=\"noopener noreferrer\">Issue #1055</a> for more details and tips on how to easily automate this."
+msgstr "Exporteer altijd eerst naar een aparte InfluxDB -database en bekijk het resultaat. Er is geen detectie voor dubbele bestaande data (behalve de export zelf), dus overweeg om na afloop te wisselen van actieve InfluxDB-database. Zie <a href=\"https://github.com/dsmrreader/dsmr-reader/issues/1055#issuecomment-663880073\" target=\"_blank\" rel=\"noopener noreferrer\">Issue #1055</a> voor meer informatie en ook tips hoe de export deels te automatiseren is."
 
 msgid "Detailed instructions for configuring MinderGas.nl can be found here: <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/mindergas.html\">Documentation</a>"
 msgstr "Gedetailleerde instructies voor het koppelen met MinderGas.nl kun je hier terugvinden: <a href=\"https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/mindergas.html\">Documentatie</a>"
@@ -2290,14 +2290,14 @@ msgstr "Er zijn meer dan {} minuten verstreken sinds de laatst ontvangen meting.
 msgid "Datalogger check"
 msgstr "Dataloggercontrole"
 
-msgid "Implements the following API call: <a href=\"https://pvoutput.org/help.html#api-addstatus\" target=\"_blank\">Add Status Service</a>"
-msgstr "Implementeert de volgende API call: <a href=\"https://pvoutput.org/help.html#api-addstatus\" target=\"_blank\">Add Status Service</a>"
+msgid "Implements the following API call: <a href=\"https://pvoutput.org/help.html#api-addstatus\" target=\"_blank\" rel=\"noopener noreferrer\">Add Status Service</a>"
+msgstr "Implementeert de volgende API call: <a href=\"https://pvoutput.org/help.html#api-addstatus\" target=\"_blank\" rel=\"noopener noreferrer\">Add Status Service</a>"
 
 msgid "PVOutput Donators"
 msgstr "PVOutput Donators"
 
-msgid "This feature is ONLY available when you have a DONATOR account for PVOutput.org. For more information see: <a href=\"https://pvoutput.org/donate.jsp\" target=\"_blank\">Donating to PVOutput</a>  and <a href=\"https://pvoutput.org/help.html#donations\" target=\"_blank\">Bonus Features</a>."
-msgstr "Deze feature is alleen beschikbaar wanneer je koppelt aan een PVOutput DONATOR account. Voor meer informatie zie: <a href=\"https://pvoutput.org/donate.jsp\" target=\"_blank\">Doneren aan PVOutput</a>  en <a href=\"https://pvoutput.org/help.html#donations\" target=\"_blank\">Bonus Features</a>."
+msgid "This feature is ONLY available when you have a DONATOR account for PVOutput.org. For more information see: <a href=\"https://pvoutput.org/donate.jsp\" target=\"_blank\" rel=\"noopener noreferrer\">Donating to PVOutput</a>  and <a href=\"https://pvoutput.org/help.html#donations\" target=\"_blank\" rel=\"noopener noreferrer\">Bonus Features</a>."
+msgstr "Deze feature is alleen beschikbaar wanneer je koppelt aan een PVOutput DONATOR account. Voor meer informatie zie: <a href=\"https://pvoutput.org/donate.jsp\" target=\"_blank\" rel=\"noopener noreferrer\">Doneren aan PVOutput</a>  en <a href=\"https://pvoutput.org/help.html#donations\" target=\"_blank\">Bonus Features</a>."
 
 msgid "PVOutput"
 msgstr "PVOutput"
@@ -2518,8 +2518,8 @@ msgstr "Elektriciteitsstatistieken"
 msgid "Buienradar"
 msgstr "Buienradar"
 
-msgid "See <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> for a map of all locations."
-msgstr "Zie <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\">Buienradar weerstations</a> voor een kaart van alle locaties."
+msgid "See <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\" rel=\"noopener noreferrer\">Buienradar weerstations</a> for a map of all locations."
+msgstr "Zie <a href=\"https://www.buienradar.nl/nederland/weerbericht/weerstations\" target=\"_blank\" rel=\"noopener noreferrer\">Buienradar weerstations</a> voor een kaart van alle locaties."
 
 msgid "Temperature (in ℃)"
 msgstr "Temperatuur (in ℃)"

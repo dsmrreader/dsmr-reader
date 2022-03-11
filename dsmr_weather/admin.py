@@ -21,7 +21,8 @@ class WeatherSettingsAdmin(SingletonModelAdmin):
             _('Buienradar'), {
                 'fields': ['buienradar_station'],
                 'description': _(
-                    'See <a href="https://www.buienradar.nl/nederland/weerbericht/weerstations" target="_blank">'
+                    'See <a href="https://www.buienradar.nl/nederland/weerbericht/weerstations" target="_blank" '
+                    'rel="noopener noreferrer">'
                     'Buienradar weerstations</a> for a map of all locations.')
             }
         ),

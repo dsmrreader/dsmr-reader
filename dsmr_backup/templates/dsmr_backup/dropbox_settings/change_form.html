@@ -16,7 +16,7 @@
             <li style="list-style-type: none;">
                 <ul>
                     <li>⚠️ <strong>{% blocktranslate %}Ensure that Dropbox states that the "Official DSMR-reader" app only requires file access for the following folder:{% endblocktranslate %}</strong> (<code>› "Apps" › "Official DSMR-Reader"</code>)</li>
-                    <li>➡️ <a target="_blank" href="{% url 'dropbox:authorize-app' %}">{% translate 'Authorize "Official DSMR-reader" App for your account (opens Dropbox.com)' %}</a></li>
+                    <li>➡️ <a target="_blank" rel="noopener noreferrer" href="{% url 'dropbox:authorize-app' %}">{% translate 'Authorize "Official DSMR-reader" App for your account (opens Dropbox.com)' %}</a></li>
                 </ul>
             </li>
             <li>{% blocktranslate %}Step 2: Return to the current screen in DSMR-reader and enter the given Access Code by Dropbox below.{% endblocktranslate %}</li>
@@ -26,7 +26,7 @@
         </ul>
 
         <small>
-            {% blocktranslate %}Please note you can revoke DSMR-reader's access (the refresh token) at any time in <a target="_blank" href="https://www.dropbox.com/account/connected_apps">Your Connected Apps at Dropbox.com</a>.{% endblocktranslate %}
+            {% blocktranslate %}Please note you can revoke DSMR-reader's access (the refresh token) at any time in <a target="_blank" rel="noopener noreferrer" href="https://www.dropbox.com/account/connected_apps">Your Connected Apps at Dropbox.com</a>.{% endblocktranslate %}
             {% blocktranslate %}To reauthorize or reconnect the "Official DSMR-reader" Dropbox App again, just follow the same steps above once more.{% endblocktranslate %}
         </small>
     </div>

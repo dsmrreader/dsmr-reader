@@ -23,7 +23,8 @@ class PVOutputAddStatusSettingsAdmin(SingletonModelAdmin):
                 'fields': ['export', 'upload_interval', 'upload_delay'],
                 'description': _(
                     'Implements the following API call: '
-                    '<a href="https://pvoutput.org/help.html#api-addstatus" target="_blank">Add Status Service</a>'
+                    '<a href="https://pvoutput.org/help.html#api-addstatus" target="_blank" rel="noopener noreferrer">'
+                    'Add Status Service</a>'
                 )
             }
         ),
@@ -33,8 +34,10 @@ class PVOutputAddStatusSettingsAdmin(SingletonModelAdmin):
                 'description': _(
                     'This feature is ONLY available when you have a DONATOR account for PVOutput.org. '
                     'For more information see: '
-                    '<a href="https://pvoutput.org/donate.jsp" target="_blank">Donating to PVOutput</a> '
-                    ' and <a href="https://pvoutput.org/help.html#donations" target="_blank">Bonus Features</a>.'
+                    '<a href="https://pvoutput.org/donate.jsp" target="_blank" rel="noopener noreferrer">'
+                    'Donating to PVOutput</a> '
+                    ' and <a href="https://pvoutput.org/help.html#donations" target="_blank" rel="noopener noreferrer">'
+                    'Bonus Features</a>.'
                 )
             }
         ),
