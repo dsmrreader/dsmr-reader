@@ -114,12 +114,12 @@ class TodayConsumptionView(APIView):
     DEFAULT_ZERO_FIELDS = ('gas', 'gas_cost')  # These might miss during the first hour of each day.
 
     def get(self, request):
+        today = timezone.localtime(timezone.now()).date()
+
         try:
-            day_totals = dsmr_consumption.services.day_consumption(
-                day=timezone.localtime(timezone.now()).date()
-            )
+            day_totals = dsmr_consumption.services.day_consumption(day=today)
         except LookupError:
-            return Response('Failed to find day totals')
+            return Response('No electricity readings found for: {}'.format(today))
 
         # Some fields are only for internal use.
         for x in self.IGNORE_FIELDS:
