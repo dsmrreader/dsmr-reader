@@ -15,10 +15,10 @@ on:
   push:
     branches:
       - v*
-  # For development/testing only
-  pull_request:
-    branches:
-      - v*
+#  # For development/testing only
+#  pull_request:
+#    branches:
+#      - v*
 
 jobs:
   analyze:
