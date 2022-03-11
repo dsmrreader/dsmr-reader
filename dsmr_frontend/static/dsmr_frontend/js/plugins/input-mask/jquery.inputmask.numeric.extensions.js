@@ -59,7 +59,7 @@ Optional extensions on the jquery.inputmask base
                     bufVal = bufVal.replace(new RegExp(escapedGroupSeparator, "g"), '');
                     var radixSplit = bufVal.split(opts.radixPoint);
                     bufVal = radixSplit[0];
-                    var reg = new RegExp('([-+]?[\\d\?]+)([\\d\?]{' + opts.groupSize + '})');
+                    var reg = new RegExp('([-+]?[\\d?]+)([\\d?]{' + opts.groupSize + '})');
                     while (reg.test(bufVal)) {
                         bufVal = bufVal.replace(reg, '$1' + opts.groupSeparator + '$2');
                         bufVal = bufVal.replace(opts.groupSeparator + opts.groupSeparator, opts.groupSeparator);
