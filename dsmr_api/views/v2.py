@@ -118,8 +118,8 @@ class TodayConsumptionView(APIView):
             day_totals = dsmr_consumption.services.day_consumption(
                 day=timezone.localtime(timezone.now()).date()
             )
-        except LookupError as error:
-            return Response(str(error))
+        except LookupError:
+            return Response('Failed to find day totals')
 
         # Some fields are only for internal use.
         for x in self.IGNORE_FIELDS:
