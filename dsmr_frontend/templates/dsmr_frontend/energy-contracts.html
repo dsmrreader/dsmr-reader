@@ -164,7 +164,7 @@
                             <tr class="contract-details xhr-hidden">
                                 <td><strong>{% translate "Meter positions start" %}</strong> <span class="unit">{{ current.first_day.day }}</span></td>
                                 <td><span class="unit">{% translate "Delivered" %}</span></td>
-                                <td><span class="unit">{% translate "Returned" %}</span></td>
+                                <td>{% if capabilities.electricity_returned %}<span class="unit">{% translate "Returned" %}</span>{% endif %}</td>
                                 <td></td>
                             </tr>
 
