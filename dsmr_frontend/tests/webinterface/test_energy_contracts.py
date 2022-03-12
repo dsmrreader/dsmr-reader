@@ -41,7 +41,14 @@ class TestViews(TestCase):
         self.assertGreater(len(response.context['energy_contracts']), 0)
 
         energy_contract = response.context['energy_contracts'][0]
+        self.assertIn('start', energy_contract)
+        self.assertIn('end', energy_contract)
+        self.assertIn('first_day', energy_contract)
         self.assertEqual(energy_contract['description'], 'Fake Energy Company')
+
+        if not DayStatistics.objects.exists():
+            return
+
         self.assertEqual(energy_contract['summary']['electricity1'], Decimal('2.732'))
         self.assertEqual(energy_contract['summary']['electricity1_cost'], Decimal('0.57'))
         self.assertEqual(energy_contract['summary']['electricity1_returned'], Decimal('0.000'))
@@ -79,6 +86,17 @@ class TestViewsWithoutPrices(TestViews):
         super(TestViewsWithoutPrices, self).setUp()
         EnergySupplierPrice.objects.all().delete()
         self.assertFalse(EnergySupplierPrice.objects.exists())
+
+
+class TestViewsWithoutDayStatistics(TestViews):
+    fixtures = ['dsmr_frontend/test_energysupplierprice.json']
+    support_data = False
+
+    def setUp(self):
+        super(TestViewsWithoutDayStatistics, self).setUp()
+
+        DayStatistics.objects.all().delete()
+        self.assertFalse(DayStatistics.objects.exists())
 
 
 class TestViewsWithoutGas(TestViews):

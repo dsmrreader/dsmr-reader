@@ -157,7 +157,7 @@ def request_monitoring_status() -> List[MonitoringStatusIssue]:
             if isinstance(x, MonitoringStatusIssue):
                 issues.append(x)
 
-    issues = sorted(issues, key=lambda x: x.since, reverse=True)
+    issues = sorted(issues, key=lambda y: y.since, reverse=True)
 
     # Always invalidate and update cache
     cache.set(settings.DSMRREADER_MONITORING_CACHE, issues)

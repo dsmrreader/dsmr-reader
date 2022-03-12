@@ -1532,8 +1532,8 @@ msgstr "tarief 2"
 msgid "Fixed daily costs"
 msgstr "Vaste kosten per dag"
 
-msgid "Meter positions"
-msgstr "Meterstanden"
+msgid "Meter positions start"
+msgstr "Start meterstanden"
 
 msgid "Delivered"
 msgstr "Verbruikt"
@@ -1609,6 +1609,9 @@ msgstr "Max"
 
 msgid "Avg"
 msgstr "Gem"
+
+msgid "Meter positions"
+msgstr "Meterstanden"
 
 msgid "Meter positions of first reading of the day"
 msgstr "Meterstanden bij eerste meting van de dag"
