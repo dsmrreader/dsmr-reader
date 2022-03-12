@@ -11,8 +11,8 @@ poetry run pytest dsmr_frontend/tests/regression/test_translations.py
 
 
 echo ""
-echo "--- Clearing PO headers..."
-sh $CURRENT_DIR/clear-po-headers.sh
+echo "--- Clearing translation file headers..."
+sh $CURRENT_DIR/clear-translation-files-headers.sh
 
 
 echo ""

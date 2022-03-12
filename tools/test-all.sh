@@ -52,4 +52,4 @@ fi
 
 
 DIR=$(cd `dirname $0` && pwd)
-sh $DIR/clear-po-headers.sh
+sh $DIR/clear-translation-files-headers.sh

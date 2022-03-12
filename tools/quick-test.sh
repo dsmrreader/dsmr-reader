@@ -39,7 +39,7 @@ fi
 
 echo ""
 echo "--- Clearing PO headers..."
-sh $CURRENT_DIR/clear-po-headers.sh
+sh $CURRENT_DIR/clear-translation-files-headers.sh
 
 
 echo ""

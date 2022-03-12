@@ -9,8 +9,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: ../../how-to/troubleshooting/logfiles.rst:2
 msgid "Troubleshooting: Log files"
