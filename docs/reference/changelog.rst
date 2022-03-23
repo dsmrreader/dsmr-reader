@@ -23,6 +23,8 @@ v5.2.0 - 2022-xx-xx
 
 - ``Added`` Meterstand tonen bij energiecontracten [`#1559 <https://github.com/dsmrreader/dsmr-reader/issues/1559>`_]
 
+- ``Fixed`` Graph numbers hidden when using OS dark mode + DSMR-reader light mode [`#1602 <https://github.com/dsmrreader/dsmr-reader/issues/1602>`_]
+
 
 v5.1.0 - 2022-03-01
 -------------------

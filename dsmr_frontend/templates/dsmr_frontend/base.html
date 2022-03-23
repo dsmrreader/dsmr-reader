@@ -142,7 +142,7 @@
         <script src="{% static 'dsmr_frontend/js/Director/app.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
         <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
         <script>
-            let darkModeEnabled = {{ frontend_settings.frontend_theme|default:-1 }};
+            let darkModeEnabled = {{ frontend_settings.frontend_theme|default_if_none:0 }};
 
             if (darkModeEnabled === 1 || (darkModeEnabled === -1 && window?.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.body.classList.toggle("dark-mode");
