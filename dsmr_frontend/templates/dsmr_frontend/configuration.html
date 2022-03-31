@@ -70,56 +70,67 @@
         const weather_settings_url = '{% url "admin:dsmr_weather_weathersettings_change" weather_settings.pk %}';
 
         const categoryContent = [
-            { category: "{% translate 'Background processing' %}", title: "{% translate 'Backend process sleep' %}", url: backend_settings_url },
-            { category: "{% translate 'Background processing' %}", title: "{% translate 'Language' %}", url: backend_settings_url },
-            { category: "{% translate 'Background processing' %}", title: "{% translate 'Check for updates' %}", url: backend_settings_url },
-            { category: "{% translate 'Background processing' %}", title: "{% translate 'Hide electricity return graphs' %}", url: backend_settings_url },
-            { category: "{% translate 'Background processing' %}", title: "{% translate 'Hide gas graphs' %}", url: backend_settings_url },
+            { category: "{% translate 'Interface' %}", title: "{% translate 'Override tariff names used (e.g. for Belgium)' %}", url: frontend_settings_url },
+            { category: "{% translate 'Interface' %}", title: "{% translate 'GUI refresh interval' %}", url: frontend_settings_url },
+            { category: "{% translate 'Interface' %}", title: "{% translate 'Dark mode' %}", url: frontend_settings_url },
+            { category: "{% translate 'Interface' %}", title: "{% translate 'Merge tariffs' %}", url: frontend_settings_url },
+            { category: "{% translate 'Interface' %}", title: "{% translate 'Graph line/bar colors' %}", url: frontend_settings_url },
+            { category: "{% translate 'Interface' %}", title: "{% translate 'Graph sorting/order' %}", url: frontend_sortedgraphs_sort_url },
+            { category: "{% translate 'Interface' %}", title: "{% translate 'Force password login everywhere' %}", url: frontend_settings_url },
+
+            { category: "{% translate 'Datalogger' %}", title: "{% translate 'Datalogger process sleep' %}", url: datalogger_settings_url },
+            { category: "{% translate 'Datalogger' %}", title: "{% translate 'Override telegram timestamp' %}", url: datalogger_settings_url },
+            { category: "{% translate 'Datalogger' %}", title: "{% translate 'Serial port config' %}", url: datalogger_settings_url },
+            { category: "{% translate 'Datalogger' %}", title: "{% translate 'Network socket / port' %}", url: datalogger_settings_url },
+            { category: "{% translate 'Datalogger' %}", title: "{% translate 'DSMR version (telegram parser)' %}", url: datalogger_settings_url },
+            { category: "{% translate 'Datalogger' %}", title: "{% translate 'Smarty meter support' %}", url: datalogger_settings_url },
+            { category: "{% translate 'Datalogger' %}", title: "{% translate 'Fluvius meter support' %}", url: datalogger_settings_url },
+
+            { category: "{% translate 'Data processing (backend)' %}", title: "{% translate 'Backend process sleep' %}", url: backend_settings_url },
+            { category: "{% translate 'Data processing (backend)' %}", title: "{% translate 'Language outside browser' %}", url: backend_settings_url },
+            { category: "{% translate 'Data processing (backend)' %}", title: "{% translate 'Check for updates' %}", url: backend_settings_url },
+            { category: "{% translate 'Data processing (backend)' %}", title: "{% translate 'Hide electricity return graphs' %}", url: backend_settings_url },
+            { category: "{% translate 'Data processing (backend)' %}", title: "{% translate 'Hide gas graphs' %}", url: backend_settings_url },
 
             { category: "{% translate 'Data grouping' %}", title: "{% translate 'Group electricity by reading' %}", url: consumption_settings_url },
-            { category: "{% translate 'Data grouping' %}", title: "{% translate 'Group electricity by minute' %}", url: consumption_settings_url },
             { category: "{% translate 'Data grouping' %}", title: "{% translate 'Group gas by hour' %}", url: consumption_settings_url },
 
-            { category: "{% translate 'Automatic data cleanup / Retention policy' %}", title: "{% translate 'Periodically trim data' %}", url: retention_settings_url },
-
-            { category: "{% translate 'Datalogger / P1 connection' %}", title: "{% translate 'Datalogger process sleep' %}", url: datalogger_settings_url },
-            { category: "{% translate 'Datalogger / P1 connection' %}", title: "{% translate 'Override telegram timestamp' %}", url: datalogger_settings_url },
-            { category: "{% translate 'Datalogger / P1 connection' %}", title: "{% translate 'Serial port' %}", url: datalogger_settings_url },
-            { category: "{% translate 'Datalogger / P1 connection' %}", title: "{% translate 'Network socket / port' %}", url: datalogger_settings_url },
-            { category: "{% translate 'Datalogger / P1 connection' %}", title: "{% translate 'DSMR version (telegram parser)' %}", url: datalogger_settings_url },
-            { category: "{% translate 'Datalogger / P1 connection' %}", title: "{% translate 'Smarty meter' %}", url: datalogger_settings_url },
-            { category: "{% translate 'Datalogger / P1 connection' %}", title: "{% translate 'Fluvius meter' %}", url: datalogger_settings_url },
+            { category: "{% translate 'Data cleanup / retention' %}", title: "{% translate 'Periodically cleanup excess data' %}", url: retention_settings_url },
 
             { category: "{% translate 'Datalogger meter statistics' %}", title: "{% translate 'Meter statistics overview' %}", url: meter_statistics_url },
-            { category: "{% translate 'Datalogger meter statistics' %}", title: "{% translate 'Latest telegram read' %}", url: meter_statistics_url },
+            { category: "{% translate 'Datalogger meter statistics' %}", title: "{% translate 'Latest telegram read dump' %}", url: meter_statistics_url },
 
-            { category: "{% translate 'Day and hour totals' %}", title: "{% translate 'Day statistics' %}", url: day_statistics_url },
-            { category: "{% translate 'Day and hour totals' %}", title: "{% translate 'Hour statistics' %}", url: hour_statistics_url },
-            { category: "{% translate 'Day and hour totals' %}", title: "{% translate 'Daily meter values read' %}", url: hour_statistics_url },
+            { category: "{% translate 'Per day/hour totals' %}", title: "{% translate 'Per day statistics' %}", url: day_statistics_url },
+            { category: "{% translate 'Per day/hour totals' %}", title: "{% translate 'Per hour statistics' %}", url: hour_statistics_url },
+            { category: "{% translate 'Per day/hour totals' %}", title: "{% translate 'First meter positions of the day read' %}", url: day_statistics_url },
+
+            { category: "{% translate 'Energy costs indication' %}", title: "{% translate 'Energy supplier price contracts' %}", url: energy_supplier_price_url },
+            { category: "{% translate 'Energy costs indication' %}", title: "{% translate 'Gas price/costs indication settings' %}", url: energy_supplier_price_url },
+            { category: "{% translate 'Energy costs indication' %}", title: "{% translate 'Electricity price/costs indication settings' %}", url: energy_supplier_price_url },
+
+            { category: "{% translate 'Backup' %}", title: "{% translate 'Daily backup settings' %}", url: backup_settings_url },
+            { category: "{% translate 'Backup' %}", title: "{% translate 'Folder to backup to' %}", url: backup_settings_url },
+            { category: "{% translate 'Backup' %}", title: "{% translate 'Gzip compression level used' %}", url: backup_settings_url },
+
+            { category: "{% translate 'CSV export' %}", title: "{% translate 'Export day totals to CSV' %}", url: export_url },
+            { category: "{% translate 'CSV export' %}", title: "{% translate 'Export hour totals to CSV' %}", url: export_url },
+            { category: "{% translate 'CSV export' %}", title: "{% translate 'Export temperatures to CSV' %}", url: export_url },
+
+            { category: "{% translate 'DSMR-reader API' %}", title: "{% translate 'Enable/disable API' %}", url: api_settings_url },
+            { category: "{% translate 'DSMR-reader API' %}", title: "{% translate 'DSMR-reader API (auth key)' %}", url: api_settings_url },
 
             { category: "{% translate 'Dropbox integration' %}", title: "{% translate 'Dropbox integration for backups' %}", url: dropbox_settings_url },
 
-            { category: "{% translate 'Energy supplier price indication' %}", title: "{% translate 'Energy supplier price contracts' %}", url: energy_supplier_price_url },
-            { category: "{% translate 'Energy supplier price indication' %}", title: "{% translate 'Gas price/costs' %}", url: energy_supplier_price_url },
-            { category: "{% translate 'Energy supplier price indication' %}", title: "{% translate 'Electricity price/costs' %}", url: energy_supplier_price_url },
+            { category: "{% translate 'InfluxDB integration' %}", title: "{% translate 'InfluxDB integration' %}", url: influxdb_settings_url },
+            { category: "{% translate 'InfluxDB integration' %}", title: "{% translate 'InfluxDB HTTP / HTTPS' %}", url: influxdb_settings_url },
+            { category: "{% translate 'InfluxDB integration' %}", title: "{% translate 'InfluxDB username / password' %}", url: influxdb_settings_url },
+            { category: "{% translate 'InfluxDB integration' %}", title: "{% translate 'InfluxDB measurement mapping' %}", url: influxdb_settings_url },
 
-            { category: "{% translate 'Graphics / Visuals / Display' %}", title: "{% translate 'Merge tariffs' %}", url: frontend_settings_url },
-            { category: "{% translate 'Graphics / Visuals / Display' %}", title: "{% translate 'Dark mode' %}", url: frontend_settings_url },
-            { category: "{% translate 'Graphics / Visuals / Display' %}", title: "{% translate 'Force password login everywhere' %}", url: frontend_settings_url },
-            { category: "{% translate 'Graphics / Visuals / Display' %}", title: "{% translate 'Tariff names' %}", url: frontend_settings_url },
-            { category: "{% translate 'Graphics / Visuals / Display' %}", title: "{% translate 'Graph line/bar colors' %}", url: frontend_settings_url },
-            { category: "{% translate 'Graphics / Visuals / Display' %}", title: "{% translate 'Graph sorting/order' %}", url: frontend_sortedgraphs_sort_url },
+            { category: "{% translate 'MinderGas.nl integration' %}", title: "{% translate 'Link your MinderGas API account' %}", url: mindergas_settings_url },
+            { category: "{% translate 'MinderGas.nl integration' %}", title: "{% translate 'Export to MinderGas API' %}", url: mindergas_settings_url },
 
-            { category: "{% translate 'InfluxDB export' %}", title: "{% translate 'InfluxDB integration' %}", url: influxdb_settings_url },
-            { category: "{% translate 'InfluxDB export' %}", title: "{% translate 'InfluxDB HTTP / HTTPS' %}", url: influxdb_settings_url },
-            { category: "{% translate 'InfluxDB export' %}", title: "{% translate 'InfluxDB username / password' %}", url: influxdb_settings_url },
-            { category: "{% translate 'InfluxDB export' %}", title: "{% translate 'InfluxDB measurement mapping' %}", url: influxdb_settings_url },
-
-            { category: "{% translate 'Mindergas.nl integration' %}", title: "{% translate 'Link your MinderGas API account' %}", url: mindergas_settings_url },
-            { category: "{% translate 'Mindergas.nl integration' %}", title: "{% translate 'Export to MinderGas API' %}", url: mindergas_settings_url },
-
-            { category: "{% translate 'MQTT (Message Queuing Telemetry Transport)' %}", title: "{% translate 'Data sources' %}", url: mqtt_app_url },
-            { category: "{% translate 'MQTT (Message Queuing Telemetry Transport)' %}", title: "{% translate 'Broker: host / port / SSL / TLS' %}", url: mqtt_broker_settings_url },
+            { category: "{% translate 'MQTT integration' %}", title: "{% translate 'Data sources' %}", url: mqtt_app_url },
+            { category: "{% translate 'MQTT integration' %}", title: "{% translate 'Broker: host / port / SSL / TLS' %}", url: mqtt_broker_settings_url },
 
             { category: "{% translate 'Notification apps integration' %}", title: "{% translate 'App notifications' %}", url: notification_setting_url },
             { category: "{% translate 'Notification apps integration' %}", title: "{% translate 'Pushover app' %}", url: notification_setting_url },
@@ -130,18 +141,7 @@
             { category: "{% translate 'PVOutput.org integration' %}", title: "{% translate 'PVOutput.org Add Status API' %}", url: pvoutput_addstatus_settings_url },
             { category: "{% translate 'PVOutput.org integration' %}", title: "{% translate 'PVOutput.org donator API options' %}", url: pvoutput_addstatus_settings_url },
 
-            { category: "{% translate 'API settings' %}", title: "{% translate 'Enable/disable API' %}", url: api_settings_url },
-            { category: "{% translate 'API settings' %}", title: "{% translate 'DSMR-reader API (key)' %}", url: api_settings_url },
-
-            { category: "{% translate 'Buienradar temperature' %}", title: "{% translate 'Buienradar API' %}", url: weather_settings_url },
-
-            { category: "{% translate 'Backup' %}", title: "{% translate 'Daily backup settings' %}", url: backup_settings_url },
-            { category: "{% translate 'Backup' %}", title: "{% translate 'Folder to backup to' %}", url: backup_settings_url },
-            { category: "{% translate 'Backup' %}", title: "{% translate 'Gzip compression level used' %}", url: backup_settings_url },
-
-            { category: "{% translate 'CSV export' %}", title: "{% translate 'Export day totals to CSV' %}", url: export_url },
-            { category: "{% translate 'CSV export' %}", title: "{% translate 'Export hour totals to CSV' %}", url: export_url },
-            { category: "{% translate 'CSV export' %}", title: "{% translate 'Export temperatures to CSV' %}", url: export_url },
+            { category: "{% translate 'Buienradar integration' %}", title: "{% translate 'Buienradar API' %}", url: weather_settings_url },
         ];
 
         $(document).ready(function () {

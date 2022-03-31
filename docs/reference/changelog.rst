@@ -24,6 +24,7 @@ v5.2.0 - 2022-xx-xx
 - ``Added`` Meterstand tonen bij energiecontracten [`#1559 <https://github.com/dsmrreader/dsmr-reader/issues/1559>`_]
 
 - ``Changed`` Added new admin setting for GUI refresh interval (1 - 5 seconds, default 5)
+- ``Changed`` Reworked search terms for Configuration page a bit
 
 - ``Fixed`` Graph numbers hidden when using OS dark mode + DSMR-reader light mode [`#1602 <https://github.com/dsmrreader/dsmr-reader/issues/1602>`_]
 

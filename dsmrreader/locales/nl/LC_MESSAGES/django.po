@@ -1117,6 +1117,12 @@ msgstr "Forceer overal inloggen met wachtwoord"
 msgid "Enable this to enforce login on all pages. Useful to restrict unauthorized access when hosted or reachable on the Internet."
 msgstr "Schakel dit in om te forceren dat er altijd ingelogd moet worden voor alle pagina's. Nuttig om bijvoorbeeld onbevoegde toegang te weigeren wanneer de applicatie wordt gehost op (of bereikbaar is via) het Internet."
 
+msgid "Refresh interval (GUI)"
+msgstr "Ververs interval (interface)"
+
+msgid "The number of seconds the GUI (e.g. graphs) will refresh data. Lowering this value may affect performance!"
+msgstr "Het aantal seconden voordat de interface (bijv. grafieken) ververst. Deze instelling verlagen kan invloed hebben op de performance!"
+
 msgid "Frontend configuration"
 msgstr "Interfaceconfiguratie"
 
@@ -1279,8 +1285,44 @@ msgstr "Sla over en ga direct naar het beheer"
 msgid "Click a topic below to display a pop-up with more details to choose from."
 msgstr "Klik hieronder op een onderwerp om meer inhoudelijke suggesties te zien."
 
-msgid "Background processing"
-msgstr "Achtergrondverwerking"
+msgid "Override tariff names used (e.g. for Belgium)"
+msgstr "Overschrijf tariefnamen (bijv. Belgische)"
+
+msgid "GUI refresh interval"
+msgstr "Interface ververs interval"
+
+msgid "Dark mode"
+msgstr "Dark mode"
+
+msgid "Merge tariffs"
+msgstr "Voeg tarieven samen"
+
+msgid "Graph line/bar colors"
+msgstr "Grafieklijn/staaf kleuren"
+
+msgid "Graph sorting/order"
+msgstr "Volgorde grafieken"
+
+msgid "Serial port config"
+msgstr "Seriële poort instellingen"
+
+msgid "Network socket / port"
+msgstr "Netwerk socket / poort"
+
+msgid "DSMR version (telegram parser)"
+msgstr "DSMR-versie (van telegrammen)"
+
+msgid "Smarty meter support"
+msgstr "Smarty meter ondersteuning"
+
+msgid "Fluvius meter support"
+msgstr "Fluvius meter ondersteuning"
+
+msgid "Data processing (backend)"
+msgstr "Gegevensverwerking (backend)"
+
+msgid "Language outside browser"
+msgstr "Taal buiten browser"
 
 msgid "Hide electricity return graphs"
 msgstr "Verberg grafieken teruglevering elektriciteit"
@@ -1294,32 +1336,14 @@ msgstr "Data groeperen"
 msgid "Group electricity by reading"
 msgstr "Groepeer elektriciteit op meting"
 
-msgid "Group electricity by minute"
-msgstr "Groepeer elektriciteit per minuut"
-
 msgid "Group gas by hour"
 msgstr "Groepeer gas per uur"
 
-msgid "Automatic data cleanup / Retention policy"
-msgstr "Automatisch dataopschoning / Dataretentiebeleid"
+msgid "Data cleanup / retention"
+msgstr "Dataopschoning / retentiebeleid"
 
-msgid "Periodically trim data"
-msgstr "Schoon periodiek gegevens op"
-
-msgid "Datalogger / P1 connection"
-msgstr "Datalogger / P1-verbinding"
-
-msgid "Network socket / port"
-msgstr "Netwerk socket / poort"
-
-msgid "DSMR version (telegram parser)"
-msgstr "DSMR-versie (van telegrammen)"
-
-msgid "Smarty meter"
-msgstr "Smarty meter"
-
-msgid "Fluvius meter"
-msgstr "Fluvius meter"
+msgid "Periodically cleanup excess data"
+msgstr "Schoon periodiek overtollige gegevens op"
 
 msgid "Datalogger meter statistics"
 msgstr "Datalogger meterstatistieken"
@@ -1327,56 +1351,68 @@ msgstr "Datalogger meterstatistieken"
 msgid "Meter statistics overview"
 msgstr "Overzicht meterstatistieken"
 
-msgid "Latest telegram read"
-msgstr "Laatst gelezen telegram"
+msgid "Latest telegram read dump"
+msgstr "Laatst gelezen telegram inhoud"
 
-msgid "Day and hour totals"
-msgstr "Dag- en uurtotalen"
+msgid "Per day/hour totals"
+msgstr "Per dag-/uur statistieken"
 
-msgid "Day statistics"
-msgstr "Dagstatistieken"
+msgid "Per day statistics"
+msgstr "Per dag statistieken"
 
-msgid "Hour statistics"
-msgstr "Uurstatistieken"
+msgid "Per hour statistics"
+msgstr "Per uur statistieken"
 
-msgid "Daily meter values read"
-msgstr "Dagelijks uitgelezen meterstand"
+msgid "First meter positions of the day read"
+msgstr "Eerste meterstanden van de dag"
+
+msgid "Energy costs indication"
+msgstr "Energiekosten indicatieinstellingen"
+
+msgid "Energy supplier price contracts"
+msgstr "Energieleverancier contracten"
+
+msgid "Gas price/costs indication settings"
+msgstr "Gasprijs/kosten indicatieinstellingen"
+
+msgid "Electricity price/costs indication settings"
+msgstr "Elektriciteitsprijs/kosten indicatieinstellingen"
+
+msgid "Daily backup settings"
+msgstr "Instellingen voor dagelijkse back-up's"
+
+msgid "Folder to backup to"
+msgstr "Bestandsmap om back-up's naar weg te schrijven"
+
+msgid "Gzip compression level used"
+msgstr "Gzip compressieniveau"
+
+msgid "CSV export"
+msgstr "CSV-export"
+
+msgid "Export day totals to CSV"
+msgstr "Exporteer dagtotalen naar CSV"
+
+msgid "Export hour totals to CSV"
+msgstr "Exporteer uurtotalen naar CSV"
+
+msgid "Export temperatures to CSV"
+msgstr "Exporteer temperaturen naar CSV"
+
+msgid "DSMR-reader API"
+msgstr "DSMR-reader API"
+
+msgid "Enable/disable API"
+msgstr "Schakel API in/uit"
+
+msgid "DSMR-reader API (auth key)"
+msgstr "DSMR-reader API (auth key)"
 
 msgid "Dropbox integration"
 msgstr "Dropbox-integratie"
 
 msgid "Dropbox integration for backups"
 msgstr "Dropbox-integratie voor back-up's"
-
-msgid "Energy supplier price indication"
-msgstr "Energieleverancier prijsindicatie"
-
-msgid "Energy supplier price contracts"
-msgstr "Energieleverancier contracten"
-
-msgid "Gas price/costs"
-msgstr "Gasprijs/kosten"
-
-msgid "Electricity price/costs"
-msgstr "Elektriciteitsprijs/kosten"
-
-msgid "Graphics / Visuals / Display"
-msgstr "Graphics / Visualisaties / Weergave"
-
-msgid "Merge tariffs"
-msgstr "Voeg tarieven samen"
-
-msgid "Dark mode"
-msgstr "Dark mode"
-
-msgid "Graph line/bar colors"
-msgstr "Grafieklijn/staaf kleuren"
-
-msgid "Graph sorting/order"
-msgstr "Volgorde grafieken"
-
-msgid "InfluxDB export"
-msgstr "InfluxDB export"
 
 msgid "InfluxDB integration"
 msgstr "InfluxDB-integratie"
@@ -1390,7 +1426,7 @@ msgstr "InfluxDB gebruikersnaam / wachtwoord"
 msgid "InfluxDB measurement mapping"
 msgstr "InfluxDB measurement mapping"
 
-msgid "Mindergas.nl integration"
+msgid "MinderGas.nl integration"
 msgstr "MinderGas.nl-integratie"
 
 msgid "Link your MinderGas API account"
@@ -1399,8 +1435,8 @@ msgstr "Koppel je MinderGas API-account"
 msgid "Export to MinderGas API"
 msgstr "Exporteer naar MinderGas API"
 
-msgid "MQTT (Message Queuing Telemetry Transport)"
-msgstr "MQTT (Message Queuing Telemetry Transport)"
+msgid "MQTT integration"
+msgstr "MQTT integratie"
 
 msgid "Data sources"
 msgstr "Databronnen"
@@ -1435,41 +1471,11 @@ msgstr "PVOutput.org Add Status API"
 msgid "PVOutput.org donator API options"
 msgstr "PVOutput.org API-opties voor donateurs"
 
-msgid "API settings"
-msgstr "API-instellingen"
-
-msgid "Enable/disable API"
-msgstr "Schakel API in/uit"
-
-msgid "DSMR-reader API (key)"
-msgstr "DSMR-reader API (sleutel)"
-
-msgid "Buienradar temperature"
-msgstr "Buienradar temperatuur"
+msgid "Buienradar integration"
+msgstr "Buienradar-integratie"
 
 msgid "Buienradar API"
 msgstr "Buienradar API"
-
-msgid "Daily backup settings"
-msgstr "Instellingen voor dagelijkse back-up's"
-
-msgid "Folder to backup to"
-msgstr "Bestandsmap om back-up's naar weg te schrijven"
-
-msgid "Gzip compression level used"
-msgstr "Gzip compressieniveau"
-
-msgid "CSV export"
-msgstr "CSV-export"
-
-msgid "Export day totals to CSV"
-msgstr "Exporteer dagtotalen naar CSV"
-
-msgid "Export hour totals to CSV"
-msgstr "Exporteer uurtotalen naar CSV"
-
-msgid "Export temperatures to CSV"
-msgstr "Exporteer temperaturen naar CSV"
 
 msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via de API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
@@ -2701,9 +2707,3 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
-
-#~ msgid "The data displayed here only includes whatever prices you have entered in DSMR-reader and may differ from your energy supplier's invoice."
-#~ msgstr "De gegevens die hier getoond worden zijn gebaseerd op de energieprijzen in DSMR-reader en kunnen daardoor verschillen van je uiteindelijke energierekening."
-
-#~ msgid "When applicable, any electricity returned costs calculated are approximate and will be displayed for your convenience. It may or may not match your personal situation."
-#~ msgstr "Indien van toepassing: Kosten m.b.t. teruglevering kunnen afwijken van je daadwerkelijke situatie en worden getoond voor een volledig overzicht."
