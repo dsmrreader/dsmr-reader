@@ -20,7 +20,8 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
             _('Interface'), {
                 'fields': [
                     'frontend_theme',
-                    'merge_electricity_tariffs'
+                    'gui_refresh_interval',
+                    'merge_electricity_tariffs',
                 ],
             }
         ),

@@ -57,10 +57,13 @@
         });
 
         const XHR_CONSUMPTION_HEADER_URL = "{% url 'frontend:xhr-consumption-header' %}";
+        const GUI_REFRESH_INTERVAL = {{ frontend_settings.gui_refresh_interval }};
 
         $(document).ready(function(){
-            /* This will reschedule itself again after completion. */
-            update_consumption_header(1000);
+             console.debug('GUI refresh interval:', GUI_REFRESH_INTERVAL);
+
+           /* This will reschedule itself again after completion. */
+            update_consumption_header(GUI_REFRESH_INTERVAL * 1000);
 
             /* Reload entire page after 5 minutes. */
             setTimeout(function(){ location.reload(); }, 5 * 60 * 1000)

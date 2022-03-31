@@ -135,6 +135,7 @@
         let echarts_voltage_graph = null;
 
         {% localize off %}
+        const GUI_REFRESH_INTERVAL = {{ frontend_settings.gui_refresh_interval }};
         const LIVE_GRAPHS_INITIAL_ZOOM = 100 - {{ frontend_settings.live_graphs_initial_zoom }};
         const TELEGRAM_DSMR_VERSION = '{{ meter_statistics.dsmr_version|default:'' }}';
         const CAPABILITY_MULTI_PHASE = {{ capabilities.multi_phases|yesno:'true,false' }};
@@ -194,7 +195,7 @@
 
 {% if capabilities.electricity %}
     <script type="text/javascript">
-        const ELECTRICITY_GRAPH_INTERVAL = 5;
+        const ELECTRICITY_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
 
         {% if capabilities.electricity_returned %}
         const ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True&returned=True";
@@ -210,7 +211,7 @@
 
 {% if capabilities.multi_phases %}
     <script type="text/javascript">
-        const PHASES_GRAPH_INTERVAL = 5;
+        const PHASES_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
 
         {% if capabilities.electricity_returned %}
         const PHASES_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?phases=True&returned=True";
@@ -230,7 +231,7 @@
 
 {% if capabilities.voltage %}
     <script type="text/javascript">
-        const VOLTAGE_GRAPH_INTERVAL = 5;
+        const VOLTAGE_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
         const VOLTAGE_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?voltage=True";
         const VOLTAGE_L1_COLOR = "{{ frontend_settings.phase_delivered_l1_color }}";
         const VOLTAGE_L2_COLOR = "{{ frontend_settings.phase_delivered_l2_color }}";
@@ -241,13 +242,11 @@
 
 {% if capabilities.power_current %}
     <script type="text/javascript">
-        const POWER_CURRENT_GRAPH_INTERVAL = 5;
+        const POWER_CURRENT_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
         const POWER_CURRENT_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?power_current=True";
         const POWER_CURRENT_L1_COLOR = "{{ frontend_settings.phase_delivered_l1_color }}";
         const POWER_CURRENT_L2_COLOR = "{{ frontend_settings.phase_delivered_l2_color }}";
         const POWER_CURRENT_L3_COLOR = "{{ frontend_settings.phase_delivered_l3_color }}";
-
-
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/power-current.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
@@ -275,8 +274,10 @@
         const sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())
 
         $(document).ready(function(){
+            console.debug('GUI refresh interval:', GUI_REFRESH_INTERVAL);
+
             /* This will reschedule itself again after completion. */
-            update_consumption_header(1000);
+            update_consumption_header(GUI_REFRESH_INTERVAL * 1000);
 
             /* Reload entire page after X minutes. */
             setTimeout(function(){ location.reload(); }, 5 * 60 * 1000)
@@ -304,7 +305,6 @@
             let bPos = sorted_graphs.indexOf($(b).data('graph-type'))
             return (aPos) < (bPos) ? -1 : 1;
         }
-
     </script>
 
 {% endblock %}

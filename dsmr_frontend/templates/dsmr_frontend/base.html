@@ -143,9 +143,13 @@
         <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}" type="text/javascript"></script>
         <script>
             let darkModeEnabled = {{ frontend_settings.frontend_theme|default_if_none:0 }};
+            console.debug('Frontend theme setting:', darkModeEnabled);
 
             if (darkModeEnabled === 1 || (darkModeEnabled === -1 && window?.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                console.debug('Enabling dark mode support');
                 document.body.classList.toggle("dark-mode");
+            } else {
+                console.debug('Omitting dark mode support');
             }
         </script>
         {% endblock %}

@@ -163,6 +163,14 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
             'reachable on the Internet.'
         )
     )
+    gui_refresh_interval = models.IntegerField(
+        default=5,
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        verbose_name=_('Refresh interval (GUI)'),
+        help_text=_(
+            'The number of seconds the GUI (e.g. graphs) will refresh data. Lowering this value may affect performance!'
+        )
+    )
 
     def __str__(self):
         return self._meta.verbose_name.title()
