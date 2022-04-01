@@ -22,6 +22,7 @@ v5.2.0 - 2022-xx-xx
 -------------------
 
 - ``Added`` Meterstand tonen bij energiecontracten [`#1559 <https://github.com/dsmrreader/dsmr-reader/issues/1559>`_]
+- ``Added`` Allow overriding backup files name prefix [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_]
 
 - ``Changed`` Added new admin setting for GUI refresh interval (1 - 5 seconds, default 5)
 - ``Changed`` Reworked search terms for Configuration page a bit

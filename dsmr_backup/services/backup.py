@@ -73,8 +73,10 @@ def create_full(folder: str) -> str:
         os.makedirs(folder)
 
     # Backup file with day name included, for weekly rotation.
-    backup_file = os.path.join(folder, 'dsmrreader-{}-backup-{}.sql'.format(
-        connection.vendor, formats.date_format(timezone.now().date(), 'l')
+    backup_file = os.path.join(folder, '{}-{}-backup-{}.sql'.format(
+        settings.DSMRREADER_BACKUP_NAME_PREFIX,
+        connection.vendor,
+        formats.date_format(timezone.now().date(), 'l')
     ))
 
     logger.info(' - Creating new full backup: %s', backup_file)
@@ -141,8 +143,10 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
         logger.info(' - Creating non-existing backup folder: %s', folder)
         os.makedirs(folder)
 
-    backup_file = os.path.join(folder, 'dsmrreader-{}-partial-backup-{}.sql'.format(
-        connection.vendor, formats.date_format(timezone.now().date(), 'Y-m-d')
+    backup_file = os.path.join(folder, '{}-{}-partial-backup-{}.sql'.format(
+        settings.DSMRREADER_BACKUP_NAME_PREFIX,
+        connection.vendor,
+        formats.date_format(timezone.now().date(), 'Y-m-d')
     ))
 
     logger.info(' - Creating new partial backup: %s', backup_file)
