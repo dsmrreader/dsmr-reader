@@ -31,6 +31,7 @@ FROM local-dsmrreader-base AS local-dsmrreader-dev
 RUN apt-get install -y \
     telnet \
     cu \
+    gettext \
     libmariadb-dev \
     libopenjp2-7-dev
 
