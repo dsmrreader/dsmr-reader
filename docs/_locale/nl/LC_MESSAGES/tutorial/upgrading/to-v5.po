@@ -191,96 +191,101 @@ msgstr "Update DSMR-reader codebase::"
 msgid "Install dependencies::"
 msgstr "Installeer dependencies::"
 
-#: ../../tutorial/upgrading/to-v5.rst:226
-msgid "Rename any legacy setting names in ``.env`` you find (see below)::"
-msgstr "Hernoem oude env vars in ``.env`` als je die tegenkomt (zie hieronder)::"
-
-#: ../../tutorial/upgrading/to-v5.rst:231
-msgid "If you find any listed on the left hand side, rename them to the one on the right hand side::"
-msgstr "Wanneer je eentje tegenkomt die aan de linkerkant staat, hernoem die naar de variant aan de rechterkant::"
-
-#: ../../tutorial/upgrading/to-v5.rst:247
-msgid "Check DSMR-reader::"
-msgstr "Check DSMR-reader::"
-
-#: ../../tutorial/upgrading/to-v5.rst:251
-msgid "It should output something similar to: \"System check identified no issues (0 silenced).\""
-msgstr "Het zou iets moeten tonen als: \"System check identified no issues (0 silenced).\""
-
-#: ../../tutorial/upgrading/to-v5.rst:255
+#: ../../tutorial/upgrading/to-v5.rst:228
+#: ../../tutorial/upgrading/to-v5.rst:271
 msgid "Does it fail with::"
 msgstr "Faalt het met::"
 
-#: ../../tutorial/upgrading/to-v5.rst:259
+#: ../../tutorial/upgrading/to-v5.rst:233
+msgid "Try installing ``libjpeg-dev``::"
+msgstr "Probeer ``libjpeg-dev`` te installeren::"
+
+#: ../../tutorial/upgrading/to-v5.rst:242
+msgid "Rename any legacy setting names in ``.env`` you find (see below)::"
+msgstr "Hernoem oude env vars in ``.env`` als je die tegenkomt (zie hieronder)::"
+
+#: ../../tutorial/upgrading/to-v5.rst:247
+msgid "If you find any listed on the left hand side, rename them to the one on the right hand side::"
+msgstr "Wanneer je eentje tegenkomt die aan de linkerkant staat, hernoem die naar de variant aan de rechterkant::"
+
+#: ../../tutorial/upgrading/to-v5.rst:263
+msgid "Check DSMR-reader::"
+msgstr "Check DSMR-reader::"
+
+#: ../../tutorial/upgrading/to-v5.rst:267
+msgid "It should output something similar to: \"System check identified no issues (0 silenced).\""
+msgstr "Het zou iets moeten tonen als: \"System check identified no issues (0 silenced).\""
+
+#: ../../tutorial/upgrading/to-v5.rst:275
 msgid "Make sure you've installed ``libopenjp2-7-dev`` above::"
 msgstr "Zorg dan dat je hierboven ``libopenjp2-7-dev`` hebt geïnstalleerd::"
 
-#: ../../tutorial/upgrading/to-v5.rst:267
-#: ../../tutorial/upgrading/to-v5.rst:271
+#: ../../tutorial/upgrading/to-v5.rst:284
+#: ../../tutorial/upgrading/to-v5.rst:288
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:277
+#: ../../tutorial/upgrading/to-v5.rst:294
 msgid "Note: This *may* revert any customizations you've done yourself, such as HTTP Basic Auth configuration."
 msgstr "N.b.: Dit *kan* alle handmatige wijzigingen die je zelf ooit hebt gedaan terugdraaien, zoals HTTP Basic Auth configuratie."
 
-#: ../../tutorial/upgrading/to-v5.rst:279
+#: ../../tutorial/upgrading/to-v5.rst:296
 msgid "Update Nginx config::"
 msgstr "Update Nginx config::"
 
-#: ../../tutorial/upgrading/to-v5.rst:284
+#: ../../tutorial/upgrading/to-v5.rst:301
 msgid "Reload Nginx::"
 msgstr "Herlaad Nginx::"
 
-#: ../../tutorial/upgrading/to-v5.rst:289
+#: ../../tutorial/upgrading/to-v5.rst:306
 msgid "Update Supervisor configs::"
 msgstr "Update Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:295
+#: ../../tutorial/upgrading/to-v5.rst:312
 msgid "Reload Supervisor configs::"
 msgstr "Herlaad Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:300
+#: ../../tutorial/upgrading/to-v5.rst:317
 msgid "Start DSMR-reader::"
 msgstr "Start DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:306
+#: ../../tutorial/upgrading/to-v5.rst:323
 msgid "6. Deploy"
 msgstr "6. Deploy"
 
-#: ../../tutorial/upgrading/to-v5.rst:307
+#: ../../tutorial/upgrading/to-v5.rst:324
 msgid "Finally, execute the deploy script::"
 msgstr "Tot slot, voer het deploy-script uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:312
+#: ../../tutorial/upgrading/to-v5.rst:329
 msgid "Great. You should now be on ``v5.x``!"
 msgstr "Top! Je zou nu ``v5.x`` moeten draaien!"
 
-#: ../../tutorial/upgrading/to-v5.rst:316
+#: ../../tutorial/upgrading/to-v5.rst:333
 msgid "7. Situational: Reconfigure InfluxDB"
 msgstr "7. Situationeel: Herconfigureer InfluxDB"
 
-#: ../../tutorial/upgrading/to-v5.rst:318
+#: ../../tutorial/upgrading/to-v5.rst:335
 msgid "If you happened to use DSMR-reader export to InfluxDB previously, you **must** reconfigure it accordingly in order to get it working again. It has been disabled automatically as well."
 msgstr "Als je DSMR-reader gebruikte om data te exporteren naar InfluxDB, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen. De integratie is tevens automatisch uitgeschakeld."
 
-#: ../../tutorial/upgrading/to-v5.rst:323
+#: ../../tutorial/upgrading/to-v5.rst:340
 msgid "Where the previous version utilized *usernames*, *passwords* and *databases*, it now connects using *organizations*, *API tokens* and *buckets*."
 msgstr "Waar de vorige versie *usernames*, *passwords* en *databases* gebruikte, is het nu gewijzigd naar *organizations*, *API tokens* en *buckets*."
 
-#: ../../tutorial/upgrading/to-v5.rst:327
+#: ../../tutorial/upgrading/to-v5.rst:344
 msgid "8. Situational: Reconfigure Dropbox"
 msgstr "8. Situationeel: Herconfigureer Dropbox"
 
-#: ../../tutorial/upgrading/to-v5.rst:329
+#: ../../tutorial/upgrading/to-v5.rst:346
 msgid "If you happened to use DSMR-reader's Dropbox sync for backups, you **must** reconfigure it accordingly in order to get it working again."
 msgstr "Als je DSMR-reader gebruikte om backups naar Dropbox te sturen, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen."
 
-#: ../../tutorial/upgrading/to-v5.rst:333
+#: ../../tutorial/upgrading/to-v5.rst:350
 msgid "9. Situational: Remote datalogger env vars"
 msgstr "9. Situationeel: Remote datalogger env vars"
 
-#: ../../tutorial/upgrading/to-v5.rst:335
+#: ../../tutorial/upgrading/to-v5.rst:352
 msgid "The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::"
 msgstr "De volgende **remote datalogger script** instellingen zijn ook hernoemd, maar je hoeft ze alleen aan te passen als je ze daadwerkelijk gebruikt, samen met een nieuwe versie van het remote datalogger script. Bijvoorbeeld wanneer je Docker gebruikt::"
 

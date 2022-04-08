@@ -223,6 +223,22 @@ Install dependencies::
     pip3 install pip --upgrade
     pip3 install -r ~/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
 
+.. tip::
+
+    Does it fail with::
+
+        The headers or library files could not be found for jpeg,
+        a required dependency when compiling Pillow from source.
+
+    Try installing ``libjpeg-dev``::
+
+        logout
+        sudo apt-get install libjpeg-dev
+
+        sudo su - dsmr
+        pip3 install -r ~/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
+
+
 Rename any legacy setting names in ``.env`` you find (see below)::
 
     # (feel free to use "nano" instead or whatever you'd like)
