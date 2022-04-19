@@ -20,11 +20,6 @@ Did you install using a monitor attached to the RaspberryPi and you don't know w
 In this example the ip address is ``192.168.178.40``. If possible, you should assign a static ip address to your device in your router. This will make sure you will always be able to find the application at the same location.
 
 
-Reboot test
------------
-You surely want to ``sudo reboot`` your device and check whether everything comes up automatically again with ``sudo supervisorctl status``. This will make sure your data logger 'survives' any power surges.
-
-
 Public webinterface warning
 ---------------------------
 
@@ -32,11 +27,9 @@ Public webinterface warning
 
     If you expose your application to the outside world or a public network, you might want to take additional steps:
 
-- Enable password protection :doc:`in the configuration<configuration>` for the entire application, available since DSMR-reader ``v4.0``.
+- Enable password protection :doc:`in the configuration<configuration>` for the entire application, available in the Frontend settings in DSMR-reader as *"Force password login everywhere"*.
 
 - Use :doc:`HTTPS when possible </how-to/installation/https>`.
-
-- Install a firewall, such as ``ufw`` `UncomplicatedFirewall <https://wiki.ubuntu.com/UncomplicatedFirewall>`_ and restrict traffic to port ``22`` (only for yourself) and port ``80``.
 
 
 Data integrity
@@ -84,3 +77,8 @@ Pitfalls
 ^^^^^^^^
 - SD cards' lifespan in this project vary from several weeks to some years, depending on the quality of the storage and the interval of telegrams sent by you smart meter.
 - Backups are created daily, but rotated weekly! So it's possible that, at some point, the backups get corrupted as well since they're overwritten each week. And eventually they will get synchronized to Dropbox as well.
+
+
+Reboot test
+-----------
+You surely want to ``sudo reboot`` your device and check whether everything comes up automatically again with ``sudo supervisorctl status``. This will make sure your data logger 'survives' any power surges.
