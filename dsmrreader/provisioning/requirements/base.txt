@@ -1,7 +1,7 @@
 autopep8==1.6.0
 coreapi==2.3.3
 crcmod==1.7
-django==3.2.12
+django==3.2.13
 django-admin-rangefilter==0.8.4
 django-admin-sortable==2.3
 django-colorfield==0.6.3
@@ -12,7 +12,7 @@ djangorestframework==3.13.1
 django-solo==2.0
 dropbox==11.29.0
 gunicorn==20.1.0
-influxdb-client==1.27
+influxdb-client==1.28
 paho-mqtt==1.6.1
 psycopg2-binary==2.9.3
 pyserial==3.5

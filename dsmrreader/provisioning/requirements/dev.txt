@@ -6,7 +6,7 @@ pytest-cov==3.0.0
 pytest-django==4.5.2
 pytest-xdist==2.5.0
 mysqlclient
-sphinx==4.4.0
+sphinx==4.5.0
 sphinx-autobuild==2021.3.14
 sphinx-intl==2.0.1
 sphinx-rtd-theme==1.0.0
