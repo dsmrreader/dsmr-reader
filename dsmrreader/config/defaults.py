@@ -18,6 +18,12 @@ DSMRREADER_LOGLEVEL = config('DSMRREADER_LOGLEVEL', cast=str, default=None)
 if DSMRREADER_LOGLEVEL in ('DEBUG', 'WARNING'):
     LOGGING['loggers']['dsmrreader']['level'] = DSMRREADER_LOGLEVEL
 
+# Query debugging. VERY VERBOSE! Undocumented on purpose as well.
+DSMRREADER_LOG_QUERIES = config('DSMRREADER_LOG_QUERIES', cast=bool, default=False)
+
+if DSMRREADER_LOG_QUERIES:
+    LOGGING['loggers']['django.db']['level'] = 'DEBUG'
+
 CACHES['mqtt']['TIMEOUT'] = config('DSMRREADER_MQTT_MAX_CACHE_TIMEOUT', cast=int, default=0)
 
 DSMRREADER_PLUGINS = config('DSMRREADER_PLUGINS', cast=Csv(post_process=tuple), default='')
