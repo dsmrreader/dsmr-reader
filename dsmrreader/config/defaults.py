@@ -52,6 +52,9 @@ DSMRREADER_MODULE_DAILY_BACKUP = 'dsmr_backup.services.backup.run'
 DSMRREADER_MODULE_DROPBOX_EXPORT = 'dsmr_dropbox.services.run'
 DSMRREADER_MODULE_PVOUTPUT_EXPORT = 'dsmr_pvoutput.services.run'
 
+# Used in SP error stack traces. Added a stacktrace to uncaught errors when in DEBUG mode.
+DSMRREADER_LOGGER_STACKTRACE_LIMIT = 20 if DSMRREADER_LOGLEVEL == 'DEBUG' else 0
+
 # Refers to the Dropbox app "Official DSMR-Reader" which is a "Scoped App (App Folder)". Public access allowed with PKCE
 DSMRREADER_DROPBOX_APP_KEY = config('DSMRREADER_DROPBOX_APP_KEY', cast=str, default='w5z4vlw9t2dqq5g')
 

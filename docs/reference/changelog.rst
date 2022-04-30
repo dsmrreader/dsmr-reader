@@ -26,6 +26,7 @@ v5.2.0 - 2022-xx-xx
 
 - ``Changed`` Added new admin setting for GUI refresh interval (1 - 5 seconds, default 5)
 - ``Changed`` Reworked search terms for Configuration page a bit
+- ``Changed`` Improved error logging for uncaught errors in backend process
 - ``Changed`` Added libjpeg-dev to upgrade guide for situational issues [`#1612 <https://github.com/dsmrreader/dsmr-reader/issues/1612>`_]
 
 - ``Fixed`` Graph numbers hidden when using OS dark mode + DSMR-reader light mode [`#1602 <https://github.com/dsmrreader/dsmr-reader/issues/1602>`_]

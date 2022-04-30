@@ -1,5 +1,8 @@
 import logging
+import traceback
 from typing import NoReturn
+
+from django.conf import settings
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.signals import backend_called
@@ -35,10 +38,14 @@ def execute_scheduled_processes() -> NoReturn:
             current.execute()
         except Exception as error:
             logger.error(
-                '(%s) %s errored: %s',
+                "(%s) %s errored: %s %s",
                 error.__class__.__name__,
                 current.module,
-                error
+                error,
+                ''.join(traceback.format_tb(
+                    error.__traceback__,
+                    limit=settings.DSMRREADER_LOGGER_STACKTRACE_LIMIT
+                ))
             )
 
             # Do not hammer.
