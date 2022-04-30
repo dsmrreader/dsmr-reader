@@ -103,7 +103,7 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
 
     create_statistics(target_day=target_day)
 
-    # We keep trying until we've catched on to the current day (which will then delay it for a day above).
+    # We keep trying until we've caught on to the current day (which will then delay it for a day above).
     return scheduled_process.delay(seconds=1)
 
 
