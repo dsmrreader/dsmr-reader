@@ -24,8 +24,7 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
     electricity_tariff = models.IntegerField(
         help_text=_(
             "Tariff indicator electricity. The tariff indicator can be used to switch tariff  "
-            "dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff "
-            "code 1 is used for low tariff and tariff code 2 is used for normal tariff."
+            "dependent loads e.g boilers. This is responsibility of the P1 user."
         ),
         null=True,
         default=None

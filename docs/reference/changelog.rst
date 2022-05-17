@@ -30,6 +30,7 @@ v5.2.0 - 2022-xx-xx
 - ``Changed`` Added libjpeg-dev to upgrade guide for situational issues [`#1612 <https://github.com/dsmrreader/dsmr-reader/issues/1612>`_]
 
 - ``Fixed`` Graph numbers hidden when using OS dark mode + DSMR-reader light mode [`#1602 <https://github.com/dsmrreader/dsmr-reader/issues/1602>`_]
+- ``Fixed`` Meter statistics tariff description field update [`#1631 <https://github.com/dsmrreader/dsmr-reader/issues/1631>`_]
 
 
 v5.1.0 - 2022-03-01
