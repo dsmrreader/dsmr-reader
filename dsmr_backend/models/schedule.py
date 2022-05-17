@@ -75,7 +75,7 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         logger.debug(
             'SP: Rescheduled "%s" to %s (ETA %s)',
             self.name,
-            self.planned,
+            timezone.localtime(self.planned),
             self.planned - timezone.now()
         )
 
