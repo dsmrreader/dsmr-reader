@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR Reader\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-18 00:02+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -465,6 +466,27 @@ msgstr "Aantal geleverd, gebaseerd op de voorgaande meting"
 
 msgid "Gas consumption"
 msgstr "Gasverbruik"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "The timestamp of the first reading used for average calculation"
+msgstr "Tijdstip van de eerste meting gebruikt voor gemiddelde berekening"
+
+msgid "End"
+msgstr "Einde"
+
+msgid "The timestamp of the last reading used for average calculation"
+msgstr "Tijdstip van de laatste meting gebruikt voor gemiddelde berekening"
+
+msgid "Average quarter peak delivered (kWh), calculated by delivered 1 + 2 difference of start/end, multiplied by 4"
+msgstr "Gemiddelde kwartiervermogen geleverd (kWh), berekend door verschil verbruik tarieven 1 + 2 start/eind te nemen, vermenigvuldigd door 4"
+
+msgid "Quarter hour peak electricity consumption"
+msgstr "Gemiddeld kwartiervermogen"
+
+msgid "Quarter hour peak electricity consumptions"
+msgstr "Gemiddelde kwartiervermogens"
 
 msgid "Contract start"
 msgstr "Contract start"

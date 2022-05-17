@@ -174,3 +174,39 @@ class GasConsumption(ModelUpdateMixin, models.Model):
         default_permissions = tuple()
         verbose_name = _('Gas consumption')
         verbose_name_plural = verbose_name
+
+
+class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
+    """ Average consumption calculated over a 15 minute period. """
+    read_at_start = models.DateTimeField(
+        db_index=True,
+        verbose_name=_('Start'),
+        help_text=_('The timestamp of the first reading used for average calculation')
+    )
+    read_at_end = models.DateTimeField(
+        verbose_name=_('End'),
+        help_text=_('The timestamp of the last reading used for average calculation')
+    )
+    average_delivered = models.DecimalField(
+        db_index=True,  # Possibly eases sorting or future analytics
+        max_digits=9,
+        decimal_places=3,
+        help_text=_(
+            'Average quarter peak delivered (kWh), calculated by delivered 1 + 2 difference of start/end, '
+            'multiplied by 4'
+        )
+    )
+
+    def __str__(self):
+        return '{} | {} - {} | Avg {} kWh'.format(
+            self.__class__.__name__,
+            timezone.localtime(self.read_at_start),
+            timezone.localtime(self.read_at_end),
+            self.average_delivered
+        )
+
+    class Meta:
+        ordering = ['read_at_start']
+        default_permissions = tuple()
+        verbose_name = _('Quarter hour peak electricity consumption')
+        verbose_name_plural = _('Quarter hour peak electricity consumptions')

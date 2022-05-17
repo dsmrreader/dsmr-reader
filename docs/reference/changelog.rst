@@ -21,6 +21,7 @@ Current version
 v5.2.0 - 2022-xx-xx
 -------------------
 
+- ``Added`` Support for tracking quarter peak electricity consumption (due to upcoming changes in Belgium's policy) [`#1084 <https://github.com/dsmrreader/dsmr-reader/issues/1084>`_]
 - ``Added`` Meterstand tonen bij energiecontracten [`#1559 <https://github.com/dsmrreader/dsmr-reader/issues/1559>`_]
 - ``Added`` Allow overriding backup files name prefix [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_]
 

@@ -63,11 +63,16 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         self.update(active=False)
 
     def delay(self, **delta):
-        """ Delays the next call by the given delta. """
+        """ Delays the next call by the given delta, based on the current SYSTEM TIME (now). """
         self.reschedule(planned_at=timezone.now() + timezone.timedelta(**delta))
+
+    def postpone(self, **delta):
+        """ Delays the next call by the given delta, based on the already PLANNED time of this instance. """
+        self.reschedule(planned_at=self.planned + timezone.timedelta(**delta))
 
     def reschedule(self, planned_at):
         """ Schedules the next call at a predetermined moment. """
+        now = timezone.now()
         self.planned = timezone.localtime(self.planned)
         self.planned = self.planned.replace(microsecond=0)
 
@@ -76,7 +81,7 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
             'SP: Rescheduled "%s" to %s (ETA %s)',
             self.name,
             timezone.localtime(self.planned),
-            self.planned - timezone.now()
+            self.planned - now if self.planned > now else '-'  # Negative timedelta formats weird for some reason
         )
 
     def reschedule_asap(self):

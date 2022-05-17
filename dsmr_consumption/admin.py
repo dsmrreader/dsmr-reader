@@ -5,7 +5,7 @@ from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import DeletionOnlyAdminModel
 from .forms import EnergySupplierPriceForm
-from .models.consumption import ElectricityConsumption, GasConsumption
+from .models.consumption import ElectricityConsumption, GasConsumption, QuarterHourPeakElectricityConsumption
 from .models.energysupplier import EnergySupplierPrice
 from .models.settings import ConsumptionSettings
 
@@ -66,3 +66,12 @@ class GasConsumptionAdmin(DeletionOnlyAdminModel):
         ('read_at', DateTimeRangeFilter),
     )
     list_display = ('read_at', 'currently_delivered')
+
+
+@admin.register(QuarterHourPeakElectricityConsumption)
+class QuarterHourPeakElectricityConsumptionAdmin(DeletionOnlyAdminModel):
+    list_display = ('read_at_start', 'read_at_end', 'average_delivered')
+    ordering = ('-read_at_start', 'average_delivered')  # Latest on top
+    list_filter = (
+        ('read_at_start', DateTimeRangeFilter),
+    )

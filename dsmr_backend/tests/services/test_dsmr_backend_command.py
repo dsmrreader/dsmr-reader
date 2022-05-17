@@ -114,7 +114,7 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
     def test_scheduled_processes_modules(self, *mocks):
         """ Verify the number of processes and that their module is called. """
         ScheduledProcess.objects.all().update(active=True, planned=timezone.now())
-        self.assertEqual(ScheduledProcess.objects.all().count(), 10)
+        self.assertEqual(ScheduledProcess.objects.all().count(), 11)
         self.assertFalse(any([x.called for x in mocks]))
 
         dsmr_backend.services.schedule.execute_scheduled_processes()

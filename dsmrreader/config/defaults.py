@@ -46,13 +46,14 @@ DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_USER_AGENT = 'DSMR-reader v{}'.format(DSMRREADER_VERSION)
 DSMRREADER_LATEST_RELEASES_LIST = 'https://api.github.com/repos/dsmrreader/dsmr-reader/releases'
 
-# Scheduled Process modules.
+# Scheduled Process modules. DO NOT RELOCATE WITHOUT DB MIGRATION!
 DSMRREADER_MODULE_EMAIL_BACKUP = 'dsmr_backup.services.email.run'
 DSMRREADER_MODULE_AUTO_UPDATE_CHECKER = 'dsmr_backend.services.update_checker.run'
 DSMRREADER_MODULE_WEATHER_UPDATE = 'dsmr_weather.services.run'
 DSMRREADER_MODULE_STATS_GENERATOR = 'dsmr_stats.services.run'
 DSMRREADER_MODULE_MINDERGAS_EXPORT = 'dsmr_mindergas.services.run'
 DSMRREADER_MODULE_GENERATE_CONSUMPTION = 'dsmr_consumption.services.run'
+DSMRREADER_MODULE_CALCULATE_QUARTER_HOUR_PEAKS = 'dsmr_consumption.services.run_quarter_hour_peaks'
 DSMRREADER_MODULE_RETENTION_DATA_ROTATION = 'dsmr_datalogger.services.retention.run'
 DSMRREADER_MODULE_DAILY_BACKUP = 'dsmr_backup.services.backup.run'
 DSMRREADER_MODULE_DROPBOX_EXPORT = 'dsmr_dropbox.services.run'

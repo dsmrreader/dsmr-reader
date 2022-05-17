@@ -12,7 +12,8 @@ from django.utils import timezone, formats
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_consumption.exceptions import CompactorNotReadyError
-from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption, \
+    QuarterHourPeakElectricityConsumption
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
@@ -37,6 +38,98 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
             return scheduled_process.delay(seconds=15)
 
     scheduled_process.delay(seconds=1)
+
+
+def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> NoReturn:
+    """ Calculates the quarter-hour peak consumption. For background info see issue #1084 ."""
+    MINUTE_INTERVAL = 15
+
+    # Just start with whatever time this process was scheduled.
+    # As it's incremental and will fix data gaps (see further below).
+    fuzzy_start = scheduled_process.planned.replace(second=0, microsecond=0)
+
+    # The fuzzy start should be just beyond whatever we target. E.g. fuzzy start = currently 14:34
+    logger.debug('Quarter hour peaks: Using %s as fuzzy start', timezone.localtime(fuzzy_start))
+
+    # Rewind at least 15 minutes. E.g. currently 14:34 -> 14:19 (rewind_minutes = 15)
+    rewind_minutes = MINUTE_INTERVAL
+
+    # Map to xx:00, xx:15, xx:30 or xx:45. E.g. 14:19 -> 14:15. Makes 19 % 15 = 4 (rewind_minutes = 15 + 4)
+    rewind_minutes += (
+        fuzzy_start - timezone.timedelta(minutes=rewind_minutes)
+    ).minute % MINUTE_INTERVAL
+
+    # E.g. Fuzzy start was 14:34. Now we start/end at 14:15/14:30.
+    start = fuzzy_start - timezone.timedelta(minutes=rewind_minutes)
+    end = start + timezone.timedelta(minutes=MINUTE_INTERVAL)
+
+    # Do NOT continue until we've received new readings AFTER the targeted end. Ensuring we do not miss any and it also
+    # blocks the "self-healing" implementation when having data gaps.
+    # Only happens for data gaps or directly after new installations (edge cases). This will keep pushing forward.
+    if not DsmrReading.objects.filter(timestamp__gte=end).exists():
+        logger.debug(
+            'Quarter hour peaks: Ready but awaiting any new readings after %s, postponing for a bit...',
+            timezone.localtime(end),
+        )
+
+        # Assumes new readings will arrive shortly (for most users/setups)
+        return scheduled_process.postpone(seconds=5)
+
+    quarter_hour_readings = DsmrReading.objects.filter(timestamp__gte=start, timestamp__lte=end)
+
+    # Only happens for data gaps or directly after new installations (edge cases). This will keep pushing forward.
+    if len(quarter_hour_readings) < 2:
+        logger.warning(
+            'Quarter hour peaks: Ready but not enough readings found between %s - %s, skipping quarter...',
+            timezone.localtime(start),
+            timezone.localtime(end),
+        )
+        return scheduled_process.postpone(minutes=MINUTE_INTERVAL)
+
+    first_reading = quarter_hour_readings.first()
+    last_reading = quarter_hour_readings.last()
+    logger.debug(
+        'Quarter hour peaks: Quarter %s - %s resulted in readings %s - %s',
+        timezone.localtime(start),
+        timezone.localtime(end),
+        timezone.localtime(first_reading.timestamp),
+        timezone.localtime(last_reading.timestamp),
+    )
+
+    # Do not create duplicate data.
+    existing_data = QuarterHourPeakElectricityConsumption.objects.filter(
+        read_at_start__gte=start,
+        read_at_start__lte=end,
+    ).exists()
+
+    if existing_data:
+        logger.debug('Quarter hour peaks: Ready but quarter already processed, rescheduling for next quarter...')
+        return scheduled_process.reschedule(planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL))
+
+    # Calculate quarter data.
+    total_delivered_start = (first_reading.electricity_delivered_1 - first_reading.electricity_delivered_2)
+    total_delivered_end = (last_reading.electricity_delivered_1 - last_reading.electricity_delivered_2)
+    avg_delivered_in_quarter = total_delivered_end - total_delivered_start
+    logger.debug(
+        'Quarter hour peaks: Calculating for %s - %s',
+        timezone.localtime(first_reading.timestamp),
+        timezone.localtime(last_reading.timestamp),
+    )
+
+    new_instance = QuarterHourPeakElectricityConsumption.objects.create(
+        # Using the reading timestamps used to ensure we can indicate gaps or lag in reading input.
+        # E.g. due backend/datalogger process sleep or simply v4 meters emitting a reading only once per 10 seconds.
+        read_at_start=first_reading.timestamp,
+        read_at_end=last_reading.timestamp,
+        # avg_delivered_in_quarter = kW QUARTER peak during 15 minutes... x 4 maps it to avg per hour for kW HOUR peak
+        average_delivered=avg_delivered_in_quarter * 4
+    )
+    logger.debug('Quarter hour peaks: Created %s', new_instance)
+
+    # Reschedule around the next moment we can expect to process the next quarter. Also works retroactively/with gaps.
+    scheduled_process.reschedule(
+        planned_at=new_instance.read_at_end + timezone.timedelta(minutes=MINUTE_INTERVAL)
+    )
 
 
 def compact(dsmr_reading: DsmrReading) -> NoReturn:
@@ -176,9 +269,6 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> NoReturn:
     There is quite some distinction between DSMR v4 and v5. DSMR v4 will update only once per hour and backtracks the
     time by reporting it over the previous hour.
     DSMR v5 will just allow small intervals, depending on whether the readings are grouped per minute or not.
-
-    Since DSMR-reader v3.2 users are allowed to have their gas readings grouped per hour. This never affects DSMR v4,
-    only DSMR v5 users.
     """
     if not dsmr_reading.extra_device_timestamp or not dsmr_reading.extra_device_delivered:
         # Some households aren't connected to a gas meter at all.
