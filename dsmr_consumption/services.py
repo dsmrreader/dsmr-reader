@@ -107,8 +107,8 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> NoReturn:
         return scheduled_process.reschedule(planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL))
 
     # Calculate quarter data.
-    total_delivered_start = (first_reading.electricity_delivered_1 - first_reading.electricity_delivered_2)
-    total_delivered_end = (last_reading.electricity_delivered_1 - last_reading.electricity_delivered_2)
+    total_delivered_start = first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2
+    total_delivered_end = last_reading.electricity_delivered_1 + last_reading.electricity_delivered_2
     avg_delivered_in_quarter = total_delivered_end - total_delivered_start
     logger.debug(
         'Quarter hour peaks: Calculating for %s - %s',
