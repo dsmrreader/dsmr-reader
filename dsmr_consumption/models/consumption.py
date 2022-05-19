@@ -191,9 +191,9 @@ class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
         db_index=True,  # Possibly eases sorting or future analytics
         max_digits=9,
         decimal_places=3,
+        verbose_name=_('Average quarter peak consumption'),
         help_text=_(
-            'Average quarter peak delivered (kWh), calculated by delivered 1 + 2 difference of start/end, '
-            'multiplied by 4'
+            'In kW/h. Calculated by tracking the kW/15m consumption during the given start/end and multiplying it by 4'
         )
     )
 

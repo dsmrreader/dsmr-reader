@@ -478,8 +478,11 @@ msgstr "Einde"
 msgid "The timestamp of the last reading used for average calculation"
 msgstr "Tijdstip van de laatste meting gebruikt voor gemiddelde berekening"
 
-msgid "Average quarter peak delivered (kWh), calculated by delivered 1 + 2 difference of start/end, multiplied by 4"
-msgstr "Gemiddelde kwartiervermogen geleverd (kWh), berekend door verschil verbruik tarieven 1 + 2 start/eind te nemen, vermenigvuldigd door 4"
+msgid "Average quarter peak consumption"
+msgstr "Gemiddeld kwartier piekverbruik"
+
+msgid "In kW/h. Calculated by tracking the kW/15m consumption during the given start/end and multiplying it by 4"
+msgstr "In kW/h. Berekend door het kW/15m verbruik van de gegeven periode te vermenigvuldigen met 4"
 
 msgid "Quarter hour peak electricity consumption"
 msgstr "Gemiddeld kwartiervermogen"
@@ -2728,3 +2731,6 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Average quarter peak delivered (kWh), calculated by delivered 1 + 2 difference of start/end, multiplied by 4"
+#~ msgstr "Gemiddelde kwartiervermogen geleverd (kWh), berekend door verschil verbruik tarieven 1 + 2 start/eind te nemen, vermenigvuldigd door 4"

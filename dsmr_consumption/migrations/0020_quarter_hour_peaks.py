@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('read_at_start', models.DateTimeField(db_index=True, help_text='The timestamp of the first reading used for average calculation', verbose_name='Start')),
                 ('read_at_end', models.DateTimeField(help_text='The timestamp of the last reading used for average calculation', verbose_name='End')),
-                ('average_delivered', models.DecimalField(db_index=True, decimal_places=3, help_text='Average quarter peak delivered (kWh), calculated by delivered 1 + 2 difference of start/end, multiplied by 4', max_digits=9)),
+                ('average_delivered', models.DecimalField(db_index=True, decimal_places=3, help_text='In kW/h. Calculated by tracking the kW/15m consumption during the given start/end and multiplying it by 4', verbose_name='Average quarter peak consumption', max_digits=9)),
             ],
             options={
                 'verbose_name': 'Quarter hour peak electricity consumption',
