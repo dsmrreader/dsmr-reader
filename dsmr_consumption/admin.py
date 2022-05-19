@@ -1,3 +1,4 @@
+from django.utils import formats, timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from rangefilter.filters import DateTimeRangeFilter
@@ -70,8 +71,17 @@ class GasConsumptionAdmin(DeletionOnlyAdminModel):
 
 @admin.register(QuarterHourPeakElectricityConsumption)
 class QuarterHourPeakElectricityConsumptionAdmin(DeletionOnlyAdminModel):
-    list_display = ('average_delivered', 'read_at_start', 'duration', 'read_at_end')
+    list_display = ('average_delivered', 'duration', 'read_at_start_formatted', 'read_at_end_formatted')
     ordering = ('-read_at_start', 'average_delivered')  # Latest on top
     list_filter = (
         ('read_at_start', DateTimeRangeFilter),
     )
+
+    def read_at_start_formatted(self, obj):
+        return formats.date_format(timezone.localtime(obj.read_at_start), 'DSMR_VERBOSE_DATETIME_FORMAT')
+
+    def read_at_end_formatted(self, obj):
+        return formats.date_format(timezone.localtime(obj.read_at_end), 'DSMR_VERBOSE_DATETIME_FORMAT')
+
+    read_at_start_formatted.short_description = _('Start')
+    read_at_end_formatted.short_description = _('End')
