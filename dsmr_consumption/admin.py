@@ -70,7 +70,7 @@ class GasConsumptionAdmin(DeletionOnlyAdminModel):
 
 @admin.register(QuarterHourPeakElectricityConsumption)
 class QuarterHourPeakElectricityConsumptionAdmin(DeletionOnlyAdminModel):
-    list_display = ('read_at_start', 'read_at_end', 'average_delivered')
+    list_display = ('average_delivered', 'read_at_start', 'duration', 'read_at_end')
     ordering = ('-read_at_start', 'average_delivered')  # Latest on top
     list_filter = (
         ('read_at_start', DateTimeRangeFilter),
