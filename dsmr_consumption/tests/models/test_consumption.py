@@ -1,7 +1,9 @@
 from django.test import TestCase
 from django.utils import timezone
+from django.contrib.admin.sites import site
 
-from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption, \
+    QuarterHourPeakElectricityConsumption
 
 
 class TestElectricityConsumption(TestCase):
@@ -47,6 +49,9 @@ class TestElectricityConsumption(TestCase):
         self.assertEqual(diff['returned_1'], 13)
         self.assertEqual(diff['returned_2'], 21)
 
+    def test_admin(self):
+        self.assertTrue(site.is_registered(ElectricityConsumption))
+
 
 class TestGasConsumption(TestCase):
     def setUp(self):
@@ -59,3 +64,25 @@ class TestGasConsumption(TestCase):
     def test_str(self):
         """ Model should override string formatting. """
         self.assertNotEqual(str(self.instance), 'GasConsumption')
+
+    def test_admin(self):
+        self.assertTrue(site.is_registered(GasConsumption))
+
+
+class TestQuarterHourPeakElectricityConsumption(TestCase):
+    def setUp(self):
+        self.instance = QuarterHourPeakElectricityConsumption.objects.create(
+            read_at_start=timezone.now(),
+            read_at_end=timezone.now() + timezone.timedelta(minutes=12, seconds=34),
+            average_delivered=123,
+        )
+
+    def test_duration(self):
+        self.assertTrue(self.instance.duration, timezone.timedelta(minutes=12, seconds=34))
+
+    def test_str(self):
+        """ Model should override string formatting. """
+        self.assertNotEqual(str(self.instance), 'QuarterHourPeakElectricityConsumption')
+
+    def test_admin(self):
+        self.assertTrue(site.is_registered(QuarterHourPeakElectricityConsumption))

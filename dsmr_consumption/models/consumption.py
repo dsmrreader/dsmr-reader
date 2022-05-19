@@ -197,6 +197,11 @@ class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
         )
     )
 
+    @property
+    def duration(self) -> timezone.timedelta:
+        """ When possible, this is exactly 15 minutes, but usually a few seconds off. """
+        return self.read_at_end - self.read_at_start
+
     def __str__(self):
         return '{} | {} - {} | Avg {} kWh'.format(
             self.__class__.__name__,
