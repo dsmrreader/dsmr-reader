@@ -114,3 +114,29 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             self.schedule_process.planned,
             timezone.now() + timezone.timedelta(minutes=15)  # Postponed + X minutes
         )
+
+    @mock.patch('django.utils.timezone.now')
+    def test_retroactive(self, now_mock):
+        """ Ensure it should work retroactively as well. """
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 1, 1, hour=0, minute=0, second=0))
+
+        MAX_INTERVAL = 300
+        self.schedule_process.reschedule(timezone.now() - timezone.timedelta(minutes=MAX_INTERVAL))  # Schedule once
+
+        for interval in range(0, MAX_INTERVAL, 5):
+            DsmrReading.objects.create(
+                timestamp=timezone.now() - timezone.timedelta(minutes=interval),
+                electricity_delivered_1=100 + 0.2 * interval,
+                electricity_delivered_2=150 + 0.2 * interval,
+                electricity_returned_1=0,
+                electricity_returned_2=0,
+                electricity_currently_delivered=0,
+                electricity_currently_returned=0,
+            )
+
+        self.assertFalse(QuarterHourPeakElectricityConsumption.objects.all().exists())
+
+        for interval in range(0, MAX_INTERVAL, 5):
+            dsmr_consumption.services.run_quarter_hour_peaks(self.schedule_process)
+
+        self.assertEqual(QuarterHourPeakElectricityConsumption.objects.count(), 20)
