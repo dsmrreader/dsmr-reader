@@ -18,7 +18,7 @@ Current version
 
 
 
-v5.2.0 - 2022-xx-xx
+v5.2.0 - 2022-05-24
 -------------------
 
 - ``Added`` Support for tracking quarter peak electricity consumption (due to upcoming changes in Belgium's policy) [`#1084 <https://github.com/dsmrreader/dsmr-reader/issues/1084>`_]
