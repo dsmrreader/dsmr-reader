@@ -16,7 +16,7 @@ Note: All the ``make`` commands below need to be ran in the virtualenv as well!
 
 ```
 cd docs
-../tools/clear-translation-files-headers.sh
+../tools/regenerate-translation-mo-files.sh
 make gettext && sphinx-intl update --line-width=-1 -p _build/locale -l nl
 ```
 

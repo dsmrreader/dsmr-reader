@@ -39,8 +39,8 @@ fi
 
 
 echo ""
-echo "--- Clearing PO headers..."
-sh $CURRENT_DIR/clear-translation-files-headers.sh
+echo "--- Regenerating MO files..."
+sh $CURRENT_DIR/regenerate-translation-mo-files.sh
 
 
 echo ""

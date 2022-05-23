@@ -36,5 +36,3 @@ class TestTranslations(InterceptCommandStdoutMixin, TestCase):
             )
             po = polib.pofile(po_file_path)
             self.assertEqual(po.percent_translated(), 100)
-
-        self._intercept_command_stdout('compilemessages')

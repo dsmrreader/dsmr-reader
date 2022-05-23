@@ -52,4 +52,4 @@ fi
 
 
 DIR=$(cd `dirname $0` && pwd)
-sh $DIR/clear-translation-files-headers.sh
+sh $DIR/regenerate-translation-mo-files.sh
