@@ -29,7 +29,6 @@ class TestTranslations(InterceptCommandStdoutMixin, TestCase):
             # Weird bug/collision with coverage reports, crashing the test.
             ignore_patterns=['coverage_report/*'],
         )
-        self._intercept_command_stdout('compilemessages')
 
         for current_locale in self.locales:
             po_file_path = os.path.join(
@@ -37,3 +36,5 @@ class TestTranslations(InterceptCommandStdoutMixin, TestCase):
             )
             po = polib.pofile(po_file_path)
             self.assertEqual(po.percent_translated(), 100)
+
+        self._intercept_command_stdout('compilemessages')
