@@ -389,6 +389,12 @@ msgstr "Gas"
 msgid "Fixed costs"
 msgstr "Vaste kosten"
 
+msgid "Start"
+msgstr "Start"
+
+msgid "End"
+msgstr "Einde"
+
 msgid "Consumption"
 msgstr "Verbruik"
 
@@ -467,14 +473,8 @@ msgstr "Aantal geleverd, gebaseerd op de voorgaande meting"
 msgid "Gas consumption"
 msgstr "Gasverbruik"
 
-msgid "Start"
-msgstr "Start"
-
 msgid "The timestamp of the first reading used for average calculation"
 msgstr "Tijdstip van de eerste meting gebruikt voor gemiddelde berekening"
-
-msgid "End"
-msgstr "Einde"
 
 msgid "The timestamp of the last reading used for average calculation"
 msgstr "Tijdstip van de laatste meting gebruikt voor gemiddelde berekening"
