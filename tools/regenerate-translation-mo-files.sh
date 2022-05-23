@@ -13,3 +13,5 @@ find $CURRENT_DIR/../ -type f -iname '*.po' | xargs sed -i '/"Generated-By:/d'
 # Just regenerate them AFTER we update the PO's.
 echo "Generating MO files..."
 $CURRENT_DIR/../manage.py compilemessages
+
+# How-to diff .MO in Git: https://superuser.com/a/1251397
