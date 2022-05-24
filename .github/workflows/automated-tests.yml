@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - 3.9
+          - 3.10
     services:
       postgres:
         image: 'postgres:12-alpine'
@@ -112,7 +112,7 @@ jobs:
         uses: codecov/codecov-action@v1
 
 
-  # Shallow tests for other supported Python versions.
+  # Shallow tests for (older) supported Python versions.
   matrix_tests:
     needs: main_test
     name: 'Python ${{ matrix.python-version }}'
@@ -123,7 +123,7 @@ jobs:
         python-version:
           - '3.7'
           - '3.8'
-          - '3.10'
+          - '3.9'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
