@@ -518,9 +518,6 @@ def live_gas_consumption() -> Dict:
 
 def round_decimal(value, decimal_count: int = 2) -> Decimal:
     """ Rounds a value to X decimals. """
-    assert value is not None
-    assert decimal_count > 0
-
     if not isinstance(value, Decimal):
         value = Decimal(str(value))
 

@@ -29,7 +29,7 @@ def send(email_from: str, email_to: str, subject: str, body: str, attachment: st
     )
 
     # Prevent hanging processes, ensure there is always a timeout set.
-    assert email_backend.timeout is not None
+    email_backend.timeout = email_backend.timeout if email_backend.timeout is not None else 30
 
     message = mail.EmailMessage(
         subject=subject,

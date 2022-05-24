@@ -58,8 +58,7 @@ class DropboxContentHasher:
             raise AssertionError(
                 "can't use this object anymore; you already called digest()")
 
-        assert isinstance(new_data, six.binary_type), (
-            "Expecting a byte string, got {!r}".format(new_data))
+        assert isinstance(new_data, six.binary_type), ("Expecting a byte string, got {!r}".format(new_data))  # noqa: S101
 
         new_data_pos = 0
         while new_data_pos < len(new_data):

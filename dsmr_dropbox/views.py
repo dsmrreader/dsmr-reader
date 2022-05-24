@@ -1,4 +1,4 @@
-import pickle
+import pickle  # noqa: S403
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,7 +17,7 @@ class DropboxAppAuthorizationView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         dropbox_settings = DropboxSettings.get_solo()
 
-        auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(
+        auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(  # noqa: S106
             settings.DSMRREADER_DROPBOX_APP_KEY,
             use_pkce=True,
             token_access_type='offline',

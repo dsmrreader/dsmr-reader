@@ -1,4 +1,4 @@
-import pickle
+import pickle  # noqa: S403
 from collections import defaultdict
 import configparser
 import logging
@@ -74,7 +74,7 @@ def run(influxdb_client: InfluxDBClient) -> NoReturn:
     for current in selection:
         try:
             decoded_fields = codecs.decode(current.fields.encode(), 'base64')
-            unpickled_fields = pickle.loads(decoded_fields)
+            unpickled_fields = pickle.loads(decoded_fields)  # noqa: S301
 
             with influxdb_client.write_api(write_options=SYNCHRONOUS) as write_api:
                 write_api.write(

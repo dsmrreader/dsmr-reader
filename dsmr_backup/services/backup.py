@@ -1,4 +1,4 @@
-import subprocess
+import subprocess  # noqa: S404
 import logging
 import shutil
 import gzip
@@ -91,7 +91,7 @@ def create_full(folder: str) -> str:
             '--user={}'.format(db_settings['USER']),
             db_settings['NAME'],
         ]
-        backup_process = subprocess.Popen(command, env={
+        backup_process = subprocess.Popen(command, env={  # noqa: S603
             **os.environ,
             'PGPASSWORD': db_settings['PASSWORD']
         },
@@ -110,7 +110,7 @@ def create_full(folder: str) -> str:
             '--password={}'.format(db_settings['PASSWORD']),
             db_settings['NAME'],
         ]
-        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover
+        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover # noqa: S603
     # SQLite backup.
     elif connection.vendor == 'sqlite':  # pragma: no cover
         command = [
@@ -118,7 +118,7 @@ def create_full(folder: str) -> str:
             db_settings['NAME'],
             '.dump',
         ]
-        backup_process = subprocess.Popen(
+        backup_process = subprocess.Popen(  # noqa: S603
             command,
             stdout=open(backup_file, 'w'),
             stderr=subprocess.PIPE
@@ -163,7 +163,7 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
         ] + [
             '--table={}'.format(x._meta.db_table) for x in models_to_backup
         ]
-        backup_process = subprocess.Popen(
+        backup_process = subprocess.Popen(  # noqa: S603
             command,
             env={
                 **os.environ,
@@ -188,7 +188,7 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
         ] + [
             x._meta.db_table for x in models_to_backup
         ]
-        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover
+        backup_process = subprocess.Popen(command, stdout=open(backup_file, 'w'))  # pragma: no cover  # noqa: S603
     else:
         raise NotImplementedError('Unsupported backup backend: {}'.format(connection.vendor))
 

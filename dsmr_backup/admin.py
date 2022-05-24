@@ -1,4 +1,4 @@
-import pickle
+import pickle  # noqa: S403
 
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
@@ -65,7 +65,7 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
         if not obj.serialized_auth_flow or not obj.one_time_authorization_code:
             return super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
 
-        auth_flow = pickle.loads(obj.serialized_auth_flow)
+        auth_flow = pickle.loads(obj.serialized_auth_flow)  # noqa: S3-1
 
         try:
             oauth_result = auth_flow.finish(form.cleaned_data['one_time_authorization_code'])

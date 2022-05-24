@@ -243,7 +243,7 @@ def average_consumption_by_hour(start: date, end: date) -> List:
     if set_time_zone_sql:
         connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])  # pragma: no cover
 
-    hour_statistics = HourStatistics.objects.filter(
+    hour_statistics = HourStatistics.objects.filter(  # noqa: S610
         hour_start__date__gte=start,
         hour_start__date__lte=end,
     ).extra({
