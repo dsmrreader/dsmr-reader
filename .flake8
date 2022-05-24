@@ -1,0 +1,6 @@
+# We're currently using pylama as well, so some errors are suppressed.
+[flake8]
+select = C,E,F,I,S,W
+ignore = B902,B903,E501,B950,S311
+exclude = .venv/*,docs/*,*/migrations/*,*/tests/*,dsmrreader/*,dsmr_plugins/modules/*
+max-complexity = 10

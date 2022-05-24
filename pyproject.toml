@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "DSMR-reader"
 version = "v5"
-description = "DSMR-protocol reader, telegram data storage and energy consumption visualizer"
+description = "DSMR-protocol reader, P1 telegram data storage and energy consumption visualizer"
 license = "Creative Commons Attribution-NonCommercial 4.0 International Public License"
 readme = 'README.md'
 repository = "https://github.com/dsmrreader/dsmr-reader"
@@ -43,12 +43,16 @@ urllib3 = "^1.26"
 
 
 [tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+flake8-bandit = "^3.0.0"
+flake8-bugbear = "^22.4.25"
 polib = "^1.1"
 pylama = "^8.3"
 pytest-cov = "^3.0"
 pytest-django = "^4.4"
 pytest-xdist = "^2.4"
 mysqlclient = "^2.0"
+safety = "^1.10.3"
 sphinx = "^4.2"
 sphinx-autobuild = "^2021.3"
 sphinx-intl = "^2.0"

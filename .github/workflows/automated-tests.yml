@@ -71,6 +71,12 @@ jobs:
       - name: Check pylama
         run: poetry run pylama
 
+      - name: Check flake8
+        run: poetry run flake8
+
+      - name: Check insecure packages (safety)
+        run: poetry run safety check
+
       - name: Check autopep8
         run: poetry run autopep8 -r . --diff --exit-code
 
