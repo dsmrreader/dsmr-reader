@@ -5,7 +5,7 @@
 #########################################################################
 
 ### Base: OS + venv + base requirements
-FROM debian:bullseye AS local-dsmrreader-base
+FROM python:3.10-bullseye AS local-dsmrreader-base
 WORKDIR /app
 ENV PYTHONUNBUFFERED=1
 
