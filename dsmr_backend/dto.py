@@ -51,10 +51,10 @@ class CapabilityReport(object):
         """ Check whether the capability is found in this report. """
         if isinstance(capability, str):
             try:
-                # Presumes all capability enums names are the simply the uppercase value.
+                # Presumes all capability enums names are simply the uppercase value.
                 getattr(Capability, capability.upper())
-            except AttributeError:
-                raise KeyError('Unknown capability: ' + capability)
+            except AttributeError as exc:
+                raise KeyError('Unknown capability: ' + capability) from exc
 
         if isinstance(capability, Capability):
             capability = capability.value

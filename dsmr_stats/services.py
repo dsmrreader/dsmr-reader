@@ -422,12 +422,18 @@ def recalculate_prices() -> NoReturn:
 
         current_day.fixed_cost = prices.fixed_daily_cost
         current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
-            current_day.electricity1 * prices.electricity_delivered_1_price -
-            current_day.electricity1_returned * prices.electricity_returned_1_price
+            (
+                current_day.electricity1 * prices.electricity_delivered_1_price
+            ) - (
+                current_day.electricity1_returned * prices.electricity_returned_1_price
+            )
         )
         current_day.electricity2_cost = dsmr_consumption.services.round_decimal(
-            current_day.electricity2 * prices.electricity_delivered_2_price -
-            current_day.electricity2_returned * prices.electricity_returned_2_price
+            (
+                current_day.electricity2 * prices.electricity_delivered_2_price
+            ) - (
+                current_day.electricity2_returned * prices.electricity_returned_2_price
+            )
         )
 
         total_cost = current_day.electricity1_cost + current_day.electricity2_cost + current_day.fixed_cost

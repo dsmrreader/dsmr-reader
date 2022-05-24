@@ -110,7 +110,7 @@ class TelegramParser(object):
         if len(TelegramParser.crc16_tab) == 0:
             for i in range(0, 256):
                 crc = c_ushort(i).value
-                for j in range(0, 8):
+                for _j in range(0, 8):
                     if (crc & 0x0001):
                         crc = c_ushort(crc >> 1).value ^ 0xA001
                     else:

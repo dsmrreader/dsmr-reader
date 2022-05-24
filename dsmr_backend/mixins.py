@@ -97,7 +97,7 @@ class InfiniteManagementCommandMixin:
             # Explicit exit.
             logger.info('%s: [i] Detected StopInfiniteRun exception', self.name)
             self._stop()
-        except:
+        except Exception:
             # Unforeseen errors.
             _, _, exc_traceback = sys.exc_info()
             logger.error('%s: [!] Exception raised. %s', self.name, traceback.format_exc())

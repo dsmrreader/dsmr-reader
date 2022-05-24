@@ -12,7 +12,7 @@ def initialize() -> List[object]:
     responses = initialize_persistent_client.send_robust(None)
     clients = []
 
-    for current_receiver, current_response in responses:
+    for _current_receiver, current_response in responses:
         if isinstance(current_response, Exception):
             logger.error('CLIENTS: Init error: %s', current_response)
             continue
@@ -33,7 +33,7 @@ def run(clients) -> NoReturn:
     for current in clients:
         responses = run_persistent_client.send_robust(None, client=current)
 
-        for current_receiver, current_response in responses:
+        for _current_receiver, current_response in responses:
             if isinstance(current_response, Exception):
                 logger.error('CLIENTS: Run error: %s', current_response)
 
@@ -45,6 +45,6 @@ def terminate(clients) -> NoReturn:
     for current in clients:
         responses = terminate_persistent_client.send_robust(None, client=current)
 
-        for current_receiver, current_response in responses:
+        for _current_receiver, current_response in responses:
             if isinstance(current_response, Exception):
                 logger.exception(current_response)

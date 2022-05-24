@@ -59,7 +59,7 @@ def initialize_client() -> Optional[paho.Client]:
             error
         )
         signal_reconnect()
-        raise RuntimeError('MQTT: Failed to connect to broker')
+        raise RuntimeError('MQTT: Failed to connect to broker') from error
 
     return mqtt_client
 

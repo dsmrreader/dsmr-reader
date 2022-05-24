@@ -365,12 +365,18 @@ def day_consumption(day: datetime.date) -> Dict:
 
     # Cost per tariff. Taking electricity return into account.
     consumption['electricity1_cost'] = round_decimal(
-        (consumption['electricity1'] * daily_energy_price.electricity_delivered_1_price) -
-        (consumption['electricity1_returned'] * daily_energy_price.electricity_returned_1_price)
+        (
+            consumption['electricity1'] * daily_energy_price.electricity_delivered_1_price
+        ) - (
+            consumption['electricity1_returned'] * daily_energy_price.electricity_returned_1_price
+        )
     )
     consumption['electricity2_cost'] = round_decimal(
-        (consumption['electricity2'] * daily_energy_price.electricity_delivered_2_price) -
-        (consumption['electricity2_returned'] * daily_energy_price.electricity_returned_2_price)
+        (
+            consumption['electricity2'] * daily_energy_price.electricity_delivered_2_price
+        ) - (
+            consumption['electricity2_returned'] * daily_energy_price.electricity_returned_2_price
+        )
     )
 
     # Totals.

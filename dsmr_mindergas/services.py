@@ -70,8 +70,8 @@ def export() -> NoReturn:
             # Slack of a few hours to make sure we have any valid reading at all.
             read_at__range=(midnight - timezone.timedelta(hours=3), midnight)
         ).order_by('-read_at')[0]
-    except IndexError:
-        raise AssertionError(_('No recent gas reading found'))
+    except IndexError as exc:
+        raise AssertionError(_('No recent gas reading found')) from exc
 
     reading_date = last_gas_reading.read_at.date().isoformat()
     logger.debug('MinderGas: Uploading gas meter position: %s m³ @ %s', last_gas_reading.delivered, reading_date)

@@ -80,7 +80,7 @@ def telegram_to_reading(data: str) -> DsmrReading:
         # Hook to keep track of failed readings count.
         MeterStatistics.objects.all().update(rejected_telegrams=F('rejected_telegrams') + 1)
         logger.warning('Rejected telegram: %s', error)
-        raise InvalidTelegramError(error)
+        raise InvalidTelegramError(error) from error
 
     return _map_telegram_to_model(parsed_telegram=parsed_telegram, data=data)
 
@@ -134,11 +134,11 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
             model_fields['extra_device_timestamp'] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
 
     # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
-    discard_timestamp = timezone.now() + timezone.timedelta(hours=24)
+    discard_after = timezone.now() + timezone.timedelta(hours=24)
 
-    if model_fields['timestamp'] > discard_timestamp or (
-            model_fields['extra_device_timestamp'] is not None and
-            model_fields['extra_device_timestamp'] > discard_timestamp):
+    if model_fields['timestamp'] > discard_after or (
+        model_fields['extra_device_timestamp'] is not None and model_fields['extra_device_timestamp'] > discard_after
+    ):
         error_message = 'Discarded telegram with future timestamp(s): {} / {}'.format(
             model_fields['timestamp'], model_fields['extra_device_timestamp']
         )

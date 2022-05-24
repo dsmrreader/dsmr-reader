@@ -37,7 +37,7 @@ def get_temperature_from_api() -> TemperatureReading:
             timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         )
     except Exception as error:
-        raise RuntimeError('Failed to read API: {}'.format(error))
+        raise RuntimeError('Failed to read API: {}'.format(error)) from error
 
     if response.status_code != 200:
         raise RuntimeError('Unexpected status code received: HTTP {}'.format(response.status_code))

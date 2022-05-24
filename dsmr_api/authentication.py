@@ -27,7 +27,7 @@ class HeaderAuthentication(authentication.BaseAuthentication):
 
         try:
             user = User.objects.get(username=settings.DSMRREADER_REST_FRAMEWORK_API_USER)
-        except User.DoesNotExist:
-            raise exceptions.APIException('API user not found')
+        except User.DoesNotExist as exc:
+            raise exceptions.APIException('API user not found') from exc
 
         return user, None

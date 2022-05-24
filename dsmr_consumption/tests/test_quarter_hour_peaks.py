@@ -136,7 +136,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         self.assertFalse(QuarterHourPeakElectricityConsumption.objects.all().exists())
 
-        for interval in range(0, MAX_INTERVAL, 5):
+        for _ in range(0, MAX_INTERVAL, 5):
             dsmr_consumption.services.run_quarter_hour_peaks(self.schedule_process)
 
         self.assertEqual(QuarterHourPeakElectricityConsumption.objects.count(), 20)

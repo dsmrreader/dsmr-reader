@@ -36,7 +36,7 @@ def read_telegram(url_or_port, telegram_timeout, **serial_kwargs):  # noqa: C901
     try:
         serial_handle = serial.serial_for_url(url=url_or_port, timeout=MAX_READ_TIMEOUT, **serial_kwargs)
     except Exception as error:
-        raise RuntimeError('Failed to connect: {}', error)
+        raise RuntimeError('Failed to connect: {}', error) from error
 
     buffer = ''
     start_timestamp = time.time()

@@ -14,9 +14,9 @@ class BackupSettingsAdminForm(forms.ModelForm):
         if not os.path.exists(backup_directory):
             try:
                 os.makedirs(backup_directory)
-            except IOError:
+            except IOError as exc:
                 raise forms.ValidationError(_('Failed to create this directory, please check permissions: {}').format(
                     backup_directory
-                ))
+                )) from exc
 
         return folder
