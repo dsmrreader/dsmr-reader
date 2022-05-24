@@ -39,4 +39,3 @@ class Migration(migrations.Migration):
     dependencies = [
         ('dsmr_frontend', '0033_django_colorfield_update'),
     ]
-

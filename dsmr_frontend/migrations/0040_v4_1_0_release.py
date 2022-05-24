@@ -28,6 +28,7 @@ def migrate_forward(apps, schema_editor):
         redirect_to='frontend:changelog-redirect'
     )
 
+
 def migrate_backward(apps, schema_editor):
     pass
 

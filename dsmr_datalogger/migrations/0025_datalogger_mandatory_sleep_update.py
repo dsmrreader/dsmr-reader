@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]
-    
+
     dependencies = [
         ('dsmr_datalogger', '0024_enable_retention_by_default'),
     ]

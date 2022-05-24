@@ -2,7 +2,6 @@
 
 from django.db import migrations
 from django.conf import settings
-from django.utils import timezone
 
 
 def migrate_forward(apps, schema_editor):
