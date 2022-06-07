@@ -3,7 +3,6 @@ from django.urls.conf import path
 
 from dsmr_api.views import v2 as views
 
-
 app_name = 'api-v2'
 
 datalogger_url_patterns = [
@@ -18,6 +17,9 @@ datalogger_url_patterns = [
 ]
 
 consumption_url_patterns = [
+    path('energy-supplier-prices', views.EnergySupplierPriceViewSet.as_view({
+        'get': 'list'
+    }), name='energy-supplier-price'),
     path('electricity', views.ElectricityConsumptionViewSet.as_view({'get': 'list'}), name='electricity-consumption'),
     path('electricity-live', views.ElectricityLiveView.as_view(), name='electricity-live'),
     path('gas', views.GasConsumptionViewSet.as_view({'get': 'list'}), name='gas-consumption'),

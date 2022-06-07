@@ -7,7 +7,9 @@ from django.utils import timezone
 from django.conf import settings
 
 from dsmr_api.schemas import DsmrReaderSchema
-from dsmr_consumption.serializers.consumption import ElectricityConsumptionSerializer, GasConsumptionSerializer
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_consumption.serializers.consumption import ElectricityConsumptionSerializer, GasConsumptionSerializer, \
+    EnergySupplierPriceSerializer
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.serializers.statistics import MeterStatisticsSerializer
@@ -15,8 +17,8 @@ from dsmr_stats.serializers.statistics import DayStatisticsSerializer, HourStati
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_datalogger.serializers.reading import DsmrReadingSerializer
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_api.filters import DsmrReadingFilter, DayStatisticsFilter, ElectricityConsumptionFilter,\
-    GasConsumptionFilter, HourStatisticsFilter
+from dsmr_api.filters import DsmrReadingFilter, DayStatisticsFilter, ElectricityConsumptionFilter, \
+    GasConsumptionFilter, HourStatisticsFilter, EnergySupplierPriceFilter
 import dsmr_consumption.services
 import dsmr_backend.services.backend
 import dsmr_datalogger.signals
@@ -100,6 +102,42 @@ class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
     def get_object(self):
         # This is a REALLY good combo with django-solo, as it fits perfectly for a singleton retriever and updater!
         return MeterStatistics.get_solo()
+
+
+class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Retrieves the energy supplier prices (contracts).
+
+    > **Note**: These are the contracts manually entered in DSMR-reader's admin interface. Can be used for manual
+    calculations.
+    *E.g. fetching any contracts active today, then fetch all day statistics filtered by the contract's start/end,
+    finally summing up the total consumption for that contract. Similar to DSMR-reader's GUI regarding contact totals.*
+
+    ### Changes
+    - This endpoint was added in DSMR-reader v5.3
+
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - ``limit`` / ``offset``: Optional pagination. Probably not needed unless you have *a lot* of contracts.
+    - ``ordering``: Order by either ``start`` (ASC), ``-start`` (DESC), ``end`` (ASC) or ``-end`` (DESC).
+    - ``start__gte`` / ``start__lte`` / ``end__gte`` / ``end__lte``: Can be used for generic filtering the results \
+    returned by contracts' start/end with the given date as placeholder `X` below. Note the ``Y-m-d`` format for `X`.
+
+    ### Request samples
+    ```
+    // Get the most recent contract, based on its start date:
+    GET /api/v2/consumption/energy-supplier-prices?ordering=-start&limit=1
+
+    // Get all contracts active/applying to "today", presuming "today" is 15 June 2022.
+    GET /api/v2/consumption/energy-supplier-prices?start__lte=2022-06-15&end__gte=2022-06-15
+    ```
+    """
+    schema = DsmrReaderSchema(get='Retrieve energy supplier prices')
+    queryset = EnergySupplierPrice.objects.all()
+    serializer_class = EnergySupplierPriceSerializer
+    filterset_class = EnergySupplierPriceFilter
+    ordering_fields = ('start', 'end')
+    ordering = 'start'
 
 
 class TodayConsumptionView(APIView):

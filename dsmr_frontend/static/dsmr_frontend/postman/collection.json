@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "5929f0d6-56f0-4a36-a4a6-088636f5c83a",
-		"name": "DSMR-reader [v4.x+]",
+		"_postman_id": "d263cef7-7f6d-49a9-b371-56f4c61169e3",
+		"name": "DSMR-reader [v5.x+]",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -46,8 +46,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "v2 API (REST)",
@@ -334,13 +333,82 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Consumption",
 					"item": [
+						{
+							"name": "Retrieve energy supplier prices",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/energy-supplier-prices",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"consumption",
+										"energy-supplier-prices"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "2",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "ordering",
+											"value": "-start",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "start__gte",
+											"value": "2020-01-01",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "start__lte",
+											"value": "2022-06-15",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "end__gte",
+											"value": "2022-06-15",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "end__lte",
+											"value": "2021-01-01",
+											"description": "Optional",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Retrieve electricity consumption",
 							"request": {
@@ -534,9 +602,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Statistics",
@@ -771,9 +837,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Application",
@@ -832,12 +896,9 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
 	"auth": {
@@ -859,7 +920,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "9bd730c1-8c9a-4162-957e-dde7fe9031aa",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -869,13 +929,11 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "22a981dd-3d57-4baf-99a7-01053bf5aaff",
 				"type": "text/javascript",
 				"exec": [
 					""
 				]
 			}
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

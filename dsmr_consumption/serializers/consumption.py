@@ -1,6 +1,13 @@
 from rest_framework import serializers
 
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+
+
+class EnergySupplierPriceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EnergySupplierPrice
+        fields = '__all__'
 
 
 class ElectricityConsumptionSerializer(serializers.ModelSerializer):

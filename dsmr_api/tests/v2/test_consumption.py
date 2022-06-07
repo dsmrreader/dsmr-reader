@@ -115,6 +115,48 @@ class GasLive(APIv2TestCase):
         self.assertEqual(result['cost_per_interval'], '0.77')
 
 
+class TestEnergySupplierPrice(APIv2TestCase):
+    fixtures = ['dsmr_api/test_energysupplierprice.json']
+
+    def test_get(self):
+        resultset = self._request('energy-supplier-price', data={'limit': 10})
+        self.assertEqual(resultset['count'], 2)
+        self.assertEqual(len(resultset['results']), 2)
+        self.assertEqual(resultset['results'][0]['id'], 1)
+        self.assertEqual(resultset['results'][1]['id'], 2)
+
+        # Data. For some reason all decimals have +1 precision.
+        self.assertEqual(resultset['results'][0]['start'], '2015-01-01')
+        self.assertEqual(resultset['results'][0]['end'], '2018-01-01')
+        self.assertEqual(resultset['results'][0]['description'], 'Test')
+        self.assertEqual(resultset['results'][0]['electricity_delivered_1_price'], '1.000000')
+        self.assertEqual(resultset['results'][0]['electricity_delivered_2_price'], '2.000000')
+        self.assertEqual(resultset['results'][0]['gas_price'], '5.000000')
+        self.assertEqual(resultset['results'][0]['electricity_returned_1_price'], '0.500000')
+        self.assertEqual(resultset['results'][0]['electricity_returned_2_price'], '1.500000')
+        self.assertEqual(resultset['results'][0]['fixed_daily_cost'], '1.234560')
+
+        # Limit.
+        resultset = self._request('energy-supplier-price', data={'limit': 1})
+        self.assertEqual(resultset['count'], 2)
+        self.assertEqual(len(resultset['results']), 1)
+
+        # Sort.
+        resultset = self._request('energy-supplier-price', data={'ordering': '-start', 'limit': 10})
+        self.assertEqual(resultset['count'], 2)
+        self.assertEqual(resultset['results'][0]['id'], 2)
+        self.assertEqual(resultset['results'][1]['id'], 1)
+
+        # Search
+        resultset = self._request('energy-supplier-price', data={'start__gte': '2017-12-12'})
+        self.assertEqual(resultset['count'], 1)
+        self.assertEqual(resultset['results'][0]['id'], 2)
+
+        resultset = self._request('energy-supplier-price', data={'start__lte': '2017-12-12'})
+        self.assertEqual(resultset['count'], 1)
+        self.assertEqual(resultset['results'][0]['id'], 1)
+
+
 class TestElectricity(APIv2TestCase):
     fixtures = ['dsmr_api/test_electricity_consumption.json']
 

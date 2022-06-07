@@ -1,5 +1,6 @@
 from django_filters import rest_framework as filters
 
+from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import GasConsumption, ElectricityConsumption
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
@@ -13,6 +14,17 @@ class DsmrReadingFilter(filters.FilterSet):
     class Meta:
         model = DsmrReading
         fields = ['timestamp']
+
+
+class EnergySupplierPriceFilter(filters.FilterSet):
+    start__gte = filters.DateFilter(field_name='start', lookup_expr='gte', label='Contract start date must be >= `X`')
+    start__lte = filters.DateFilter(field_name='start', lookup_expr='lte', label='Contract start date must be <= `X`')
+    end__gte = filters.DateFilter(field_name='end', lookup_expr='gte', label='Contract end date must be  >= `X`')
+    end__lte = filters.DateFilter(field_name='end', lookup_expr='lte', label='Contract end date must be  <= `X`')
+
+    class Meta:
+        model = EnergySupplierPrice
+        fields = []
 
 
 class ElectricityConsumptionFilter(filters.FilterSet):
