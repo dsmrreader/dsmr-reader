@@ -82,8 +82,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+#    # Only use for restoring DB-backups when developing.
 #    volumes:
-#      - .:/app
+#      # E.g. in container: psql -f -U dsmrreader /var/run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
+#      - ~/Desktop:/run/host/Desktop/
     environment:
       - POSTGRES_DB=dsmrreader
       - POSTGRES_USER=dsmrreader
