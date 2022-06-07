@@ -12,7 +12,7 @@
 <section class="content">
     {% if not capabilities.any %}
     <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktranslate %}
+        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No data found yet. Please make sure either the dsmr_datalogger process is running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktranslate %}
     </div>
     {% endif %}
 

@@ -1502,7 +1502,7 @@ msgstr "Buienradar-integratie"
 msgid "Buienradar API"
 msgstr "Buienradar API"
 
-msgid "No data found yet. Please make sure either the dsmr_datalogger process running or you supply data using the API. The dsmr_backend process should run as well."
+msgid "No data found yet. Please make sure either the dsmr_datalogger process is running or you supply data using the API. The dsmr_backend process should run as well."
 msgstr "Geen gegevens gevonden. Zorg ervoor dat het dsmr_datalogger-proces draait of dat je gegevens aanlevert via de API. Daarnaast hoort het dsmr_backend-proces eveneens te draaien."
 
 msgid "Unread notifications"
