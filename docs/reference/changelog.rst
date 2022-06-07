@@ -23,6 +23,8 @@ v5.3.0 - 2022-xx-xx
 
 - ``Added`` New API endpoint for fetching the energy supplier price (contracts) entered in DSMR-reader [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_]
 
+- ``Changed`` Updated/improved API documentation [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_]
+
 
 v5.2.0 - 2022-05-24
 -------------------

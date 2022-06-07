@@ -30,43 +30,53 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
     Retrieves any readings stored. The readings are either constructed from incoming telegrams or were created using
     this API.
 
-    *For example, fetching the latest reading created:*
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - ``limit`` / ``offset``: Pagination for iterating when having large result sets.
+    - ``ordering``: Order by either ``timestamp`` (ASC) or ``-timestamp`` (DESC).
+    - ``timestamp__gte`` / ``timestamp__lte``: Can be used for generic filtering the results \
+    returned by reading timestamp with the given datetime as placeholder `X` below. Note the ``Y-m-d HH:MM:SS`` \
+    format for `X`, in the local timezone. **Should be changed to ISO 8601 some day, supporting timezone hints.**
+    - ⚠️ **Deprecated** ~``timestamp``: Reading timestamp must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
 
+    ### Changes
+    - Deprecated the ``timestamp`` query parameter in DSMR-reader v5.3
+
+    ### Request samples
     ```
-        limit: 1
-        ordering: -timestamp
+    // Fetching the latest reading created.
+    GET /api/v2/consumption/energy-supplier-prices?ordering=-timestamp&limit=1
+
+    // Get all readings of a specific "day", presuming that day is 15 January 2022.
+    GET /api/v2/datalogger/dsmrreading?timestamp__gte=2022-01-15 00:00:00&timestamp__lte=2022-01-15 23:59:59
     ```
 
-    **All parameters are optional**
 
     create:
     Creates a reading from separate values, omitting the need for the original telegram.
 
-    # Note
-
-    Readings are processed simultaneously by the background process. Therefor inserting readings retroactively might
-    result in undesired results.
-
-    Therefor inserting historic data might require you to delete all aggregated data using:
+    ### Notes
+    - This requires you to **manually parse** any telegrams, e.g. when using ``dsmr_parser`` or a similar tool.
+    - Readings are processed *simultaneously* by the background process. So inserting readings retroactively *might*
+    cause undesired results due to side effects. *If your stats are not correctly after regenerating, see below,
+    try it again while having your datalogger disabled.*
+    - Inserting historic data might require you to **delete all aggregated data** as well, using:
 
     ```
-        sudo su - postgres
-        psql dsmrreader
+    sudo su - postgres
+    psql dsmrreader
 
-        truncate dsmr_consumption_electricityconsumption;
-        truncate dsmr_consumption_gasconsumption;
-        truncate dsmr_stats_daystatistics;
-        truncate dsmr_stats_hourstatistics;
+    truncate dsmr_consumption_electricityconsumption;
+    truncate dsmr_consumption_gasconsumption;
+    truncate dsmr_stats_daystatistics;
+    truncate dsmr_stats_hourstatistics;
 
-        # This query can take a long time!
-        update dsmr_datalogger_dsmrreading set processed = False;
+    // This query can take a long time!
+    update dsmr_datalogger_dsmrreading set processed = False;
+
+    // This will process all readings again, from the very first start, and aggregate them once more.
+    // It might take a long time, depending on your total reading count stored and hardware used.
     ```
-
-    This will process all readings again, from the very first start, and aggregate them (and will take a long time,
-    depending on your reading count).
-
-    *The datalogger may interfere. If your stats are not correctly after regenerating, try it again while having your
-    datalogger disabled.*
     """
     schema = DsmrReaderSchema(get='Retrieve DSMR readings', post='Create DSMR reading')
     FIELD = 'timestamp'
@@ -85,11 +95,19 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
 class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     """
     retrieve:
-    Retrieve meter statistics extracted by the datalogger.
+    Retrieve meter statistics extracted by the datalogger. Also contains the latest telegram read for convenience.
+
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - Do **not use** ``ordering``, as it's a faulty query parameter that should not be there nor works at all!
+
 
     partial_update:
-    Manually update any meter statistics fields. Only use this when you're not using the built-in datalogger (of v1
-    telegram API).
+    Manually update any meter statistics fields.
+
+    ### Notes
+    - Only use this when you're **not** using the built-in datalogger **nor** the v1 telegram API. \
+    *It should auto-update otherwise!*
     """
     schema = DsmrReaderSchema(get='Retrieve meter statistics', patch='Update meter statistics')
     serializer_class = MeterStatisticsSerializer
@@ -100,7 +118,7 @@ class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
             return MeterStatistics.objects.none()
 
     def get_object(self):
-        # This is a REALLY good combo with django-solo, as it fits perfectly for a singleton retriever and updater!
+        # This is a nice combo with django-solo, as it fits perfectly for a singleton retriever and updater!
         return MeterStatistics.get_solo()
 
 
@@ -108,13 +126,12 @@ class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Retrieves the energy supplier prices (contracts).
 
-    > **Note**: These are the contracts manually entered in DSMR-reader's admin interface. Can be used for manual
+    ### Notes
+    - These are the contracts manually entered in DSMR-reader's admin interface. Can be used for manual
     calculations.
-    *E.g. fetching any contracts active today, then fetch all day statistics filtered by the contract's start/end,
-    finally summing up the total consumption for that contract. Similar to DSMR-reader's GUI regarding contact totals.*
 
-    ### Changes
-    - This endpoint was added in DSMR-reader v5.3
+    > *E.g. fetching any contracts active today, then fetch all day statistics filtered by the contract's start/end,
+    finally summing up the total consumption for that contract. Similar to DSMR-reader's GUI regarding contact totals.*
 
     ### Query parameters
     - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
@@ -123,9 +140,12 @@ class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
     - ``start__gte`` / ``start__lte`` / ``end__gte`` / ``end__lte``: Can be used for generic filtering the results \
     returned by contracts' start/end with the given date as placeholder `X` below. Note the ``Y-m-d`` format for `X`.
 
+    ### Changes
+    - This endpoint was added in DSMR-reader v5.3
+
     ### Request samples
     ```
-    // Get the most recent contract, based on its start date:
+    // Get the most recent contract, based on its start date.
     GET /api/v2/consumption/energy-supplier-prices?ordering=-start&limit=1
 
     // Get all contracts active/applying to "today", presuming "today" is 15 June 2022.
@@ -189,7 +209,21 @@ class GasLiveView(APIView):
 
 
 class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
-    """ Retrieves any data regarding electricity consumption. This is based on the readings processed. """
+    """
+    Retrieves any data regarding electricity consumption. This is based on the readings processed.
+
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - ``limit`` / ``offset``: Pagination for iterating when having large result sets.
+    - ``ordering``: Order by either ``read_at`` (ASC) or ``-read_at`` (DESC).
+    - ``read_at__gte`` / ``read_at__lte``: Can be used for generic filtering the results \
+    returned by consumption timestamp with the given datetime as placeholder `X` below. Note the ``Y-m-d HH:MM:SS`` \
+    format for `X`, in the local timezone. **Should be changed to ISO 8601 some day, supporting timezone hints.**
+    - ⚠️ **Deprecated** ~`read_at`: Consumption timestamp must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
+
+    ### Changes
+    - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3
+    """
     schema = DsmrReaderSchema(get='Retrieve electricity consumption')
     FIELD = 'read_at'
     queryset = ElectricityConsumption.objects.all()
@@ -200,7 +234,21 @@ class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
-    """ Retrieves any data regarding gas consumption. This is based on the readings processed. """
+    """
+    Retrieves any data regarding gas consumption. This is based on the readings processed.
+
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - ``limit`` / ``offset``: Pagination for iterating when having large result sets.
+    - ``ordering``: Order by either ``read_at`` (ASC) or ``-read_at`` (DESC).
+    - ``read_at__gte`` / ``read_at__lte``: Can be used for generic filtering the results \
+    returned by consumption timestamp with the given datetime as placeholder `X` below. Note the ``Y-m-d HH:MM:SS`` \
+    format for `X`, in the local timezone. **Should be changed to ISO 8601 some day, supporting timezone hints.**
+    - ⚠️ **Deprecated** ~`read_at`: Consumption timestamp must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
+
+    ### Changes
+    - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3
+    """
     schema = DsmrReaderSchema(get='Retrieve gas consumption')
     FIELD = 'read_at'
     queryset = GasConsumption.objects.all()
@@ -215,15 +263,26 @@ class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSe
     list:
     Retrieves any aggregated day statistics, as displayed in the Archive.
 
-    ## Note
+    ### Notes
+    - These are automatically generated a few hours after midnight, based on the consumption data.
 
-    *These are automatically generated a few hours after midnight.*
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - ``limit`` / ``offset``: Pagination for iterating when having large result sets.
+    - ``ordering``: Order by either ``day`` (ASC) or ``-day`` (DESC).
+    - ``day__gte`` / ``day__lte``: Can be used for generic filtering the results \
+    returned by dates with the given date as placeholder `X` below.  ote the ``Y-m-d`` format for `X`.
+    - ⚠️ **Deprecated** ~`day`: Date must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
+
+    ### Changes
+    - Deprecated the ``day`` query parameter in DSMR-reader v5.3
+
 
     create:
     Creates statistics for a day, overriding any DSMR-reader internals.
 
-    ## Note
-    *Should only be used to import historic data.*
+    ### Notes
+    - Should only be used to import historic data.
     """
     schema = DsmrReaderSchema(get='Retrieve day statistics', post='Create day statistics')
     FIELD = 'day'
@@ -236,11 +295,22 @@ class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSe
 
 class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Retrieves any aggregated hour statistics.
+    Retrieves any aggregated hour statistics, as displayed in the Archive.
 
-    **Note**
+    ### Notes
+    - These are automatically generated a few hours after midnight, based on the consumption data.
 
-    *These are generated a few hours after midnight.*
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - ``limit`` / ``offset``: Pagination for iterating when having large result sets.
+    - ``ordering``: Order by either ``hour_start`` (ASC) or ``-hour_start`` (DESC).
+    - ``hour_start__gte`` / ``hour_start__lte``: Can be used for generic filtering the results \
+    returned by hour start timestamp with the given datetime as placeholder `X` below. Note the ``Y-m-d HH:MM:SS`` \
+    format for `X`, in the local timezone. **Should be changed to ISO 8601 some day, supporting timezone hints.**
+    - ⚠️ **Deprecated** ~`hour_start`: Hour start timestamp must **exactly match** the given value (`Y-m-d HH:MM:SS`).~
+
+    ### Changes
+    - Deprecated the ``hour_start`` query parameter in DSMR-reader v5.3
     """
     schema = DsmrReaderSchema(get='Retrieve hour statistics')
     FIELD = 'hour_start'
