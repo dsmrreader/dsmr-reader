@@ -1,10 +1,10 @@
 # Copyright (C) 2016, Dennis Siemensma
-# This file is distributed under the same license as the DSMR Reader
+# This file is distributed under the same license as the DSMR-reader
 # package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DSMR Reader\n"
+"Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -15,5 +15,5 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../index.rst:2
-msgid "DSMR Reader's documentation"
+msgid "DSMR-reader's documentation"
 msgstr "DSMR-reader's documentatie"

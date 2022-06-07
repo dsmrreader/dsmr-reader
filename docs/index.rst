@@ -1,4 +1,4 @@
-DSMR Reader's documentation
+DSMR-reader's documentation
 ###########################
 
 .. toctree::
