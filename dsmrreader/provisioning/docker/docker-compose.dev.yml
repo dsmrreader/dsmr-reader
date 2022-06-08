@@ -84,7 +84,7 @@ services:
       retries: 10
 #    # Only use for restoring DB-backups when developing.
 #    volumes:
-#      # E.g. in container: psql -f -U dsmrreader /var/run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
+#      # E.g. in container: psql -U dsmrreader -f /var/run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
 #      - ~/Desktop:/run/host/Desktop/
     environment:
       - POSTGRES_DB=dsmrreader
