@@ -44,3 +44,7 @@ How to's
    development
 
    troubleshooting/support
+
+   donate/thanks
+
+

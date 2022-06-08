@@ -1,15 +1,18 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2022-02-23 22:01+0000\n"
+"PO-Revision-Date: 2022-06-08 22:56+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../../explained/hall-of-fame.rst:2
 msgid "Hall of Fame"
@@ -154,3 +157,5 @@ msgstr "`sphinx-reredirects <https://pypi.org/project/sphinx-reredirects/>`_"
 msgid "The many other external packages used in DSMR-reader!"
 msgstr "De vele externe packages die door DSMR-reader gebruikt worden!"
 
+#~ msgid "Special donate"
+#~ msgstr "Speciale dank aan"
