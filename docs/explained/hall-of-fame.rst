@@ -21,6 +21,7 @@ For providing their time and support.
 
 - `Jeroen Peters <https://www.linkedin.com/in/jeroen-peters-nl/>`_ (`@jeroenpeters1986 <https://github.com/jeroenpeters1986>`_)
 - `Bram van Dartel <http://www.yunta.nl/>`_ (`@xirixiz <https://github.com/xirixiz>`_)
+- `DSMR-parser <https://github.com/ndokter/dsmr_parser>`_ by `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)
 - All the `other contributors <https://github.com/dsmrreader/dsmr-reader/graphs/contributors>`_!
 
 
@@ -33,7 +34,6 @@ Credits to the following software and projects:
 - Favicon made by `Freepik <http://www.freepik.com/>`_ from `flaticon.com <http://www.flaticon.com/free-icon/eco-energy_25013>`_
 - `CircleCI <https://circleci.com/>`_ *(used before switching this project to Github Actions)*
 - `TravisCI <https://travis-ci.org>`_ *(used before switching this project to Github Actions)*
-- `DSMR-parser <https://github.com/ndokter/dsmr_parser>`_ by `Nigel Dokter <https://www.linkedin.com/in/nigel-dokter-5321ab110/>`_ (`@ndokter <https://github.com/ndokter>`_)
 - `Raspbian <https://www.raspbian.org/>`_
 - `Supervisor <http://supervisord.org/>`_
 - `MySQL <https://www.mysql.com/>`_
