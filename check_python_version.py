@@ -10,7 +10,7 @@ def check():
     print('Running Python', sys.version)
 
     if sys.version_info < MINIMUM_VERSION:
-        print('[!] Python version unsupported. Minimum version required: Python {}'.format(
+        print('[!] Python version UNSUPPORTED by DSMR-reader. Minimum version required: Python {}'.format(
             '.'.join([str(x) for x in MINIMUM_VERSION])
         ))
         sys.exit(1)
@@ -18,7 +18,8 @@ def check():
     # Deprecation.
     if sys.version_info < PREFERRED_MINIMUM_VERSION:
         print(
-            '[WARNING] Python version is deprecated. Preferred version for DSMR-reader is Python {} or higher.'.format(
+            '[WARNING] Your Python version can still be used with your current DSMR-reader version. '
+            'However, Python {} or higher is preferred. Consider using it for new installations in the future.'.format(
                 '.'.join([str(x) for x in PREFERRED_MINIMUM_VERSION])
             )
         )
