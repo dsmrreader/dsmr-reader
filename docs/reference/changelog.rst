@@ -18,12 +18,13 @@ Current version
 
 
 
-v5.3.0 - 2022-xx-xx
+v5.3.0 - 2022-06-09
 -------------------
 
 - ``Added`` New API endpoint for fetching the energy supplier price (contracts) entered in DSMR-reader [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_]
 
 - ``Changed`` Updated/improved API documentation [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_]
+- ``Changed`` Improved Dropbox connection error handling a bit [`#1623 <https://github.com/dsmrreader/dsmr-reader/issues/1623>`_]
 
 
 v5.2.0 - 2022-05-24

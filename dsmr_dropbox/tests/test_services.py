@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.conf import settings
 import dropbox
 import dropbox.exceptions
+from urllib3.exceptions import TimeoutError
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
@@ -36,30 +37,45 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch('dropbox.Dropbox.refresh_access_token')
     @mock.patch('dropbox.Dropbox.check_user')
     @mock.patch('django.utils.timezone.now')
-    def test_generate_access_token(self, now_mock, check_user_mock, refresh_access_token_mock):
+    def test_get_dropbox_client(self, now_mock, check_user_mock, refresh_access_token_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
-
-        DropboxSettings.objects.all().update(refresh_token='invalid-token')
-        check_user_mock.side_effect = dropbox.exceptions.AuthError(12345, "Some error")
+        check_user_mock.return_value = None
 
         Notification.objects.all().delete()
         self.assertEqual(Notification.objects.count(), 0)
 
-        with self.assertRaises(dropbox.exceptions.AuthError):
-            dsmr_dropbox.services.generate_access_token(self.schedule_process)
+        # Generic connection error. Should NOT reset credentials.
+        refresh_access_token_mock.side_effect = TimeoutError()  # Network error
 
-        # Warning message should be created and SP disabled.
+        with self.assertRaises(TimeoutError):
+            dsmr_dropbox.services.get_dropbox_client(self.schedule_process)
+
+        self.assertEqual(Notification.objects.count(), 0)
+        self.schedule_process.refresh_from_db()
+        self.assertTrue(self.schedule_process.active)
+
+        # Dropbox Auth Error. Will reset credentials. Warning message should be created and SP disabled.
+        self.schedule_process.reschedule_asap()
+        DropboxSettings.objects.all().update(refresh_token='invalid-token')
+        refresh_access_token_mock.reset_mock()
+        refresh_access_token_mock.side_effect = dropbox.exceptions.AuthError(12345, "Some error")
+
+        with self.assertRaises(dropbox.exceptions.AuthError):
+            dsmr_dropbox.services.get_dropbox_client(self.schedule_process)
+
         self.assertEqual(Notification.objects.count(), 1)
         self.schedule_process.refresh_from_db()
         self.assertFalse(self.schedule_process.active)
 
         # Happy flow
-        check_user_mock.side_effect = None
-        refresh_access_token_mock.return_value = 'fake-access-token'
+        self.schedule_process.reschedule_asap()
+        refresh_access_token_mock.reset_mock()
+        refresh_access_token_mock.side_effect = None
         DropboxSettings.objects.all().update(refresh_token='token')
-        dsmr_dropbox.services.generate_access_token(self.schedule_process)
 
-    @mock.patch('dsmr_dropbox.services.generate_access_token')
+        dsmr_dropbox.services.get_dropbox_client(self.schedule_process)
+
+    @mock.patch('dsmr_dropbox.services.get_dropbox_client')
     @mock.patch('dsmr_dropbox.services.list_files_in_dir')
     @mock.patch('dsmr_dropbox.services.sync_file')
     @mock.patch('dsmr_dropbox.services.should_sync_file')
@@ -82,19 +98,20 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             timezone.make_aware(timezone.datetime(2016, 1, 1, hour=1))
         )
 
-    @mock.patch('dsmr_dropbox.services.generate_access_token')
+    @mock.patch('dsmr_dropbox.services.get_dropbox_client')
     @mock.patch('dsmr_backup.services.backup.get_backup_directory')
     @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('dsmr_dropbox.services.calculate_content_hash')
     @mock.patch('dropbox.Dropbox.files_get_metadata')
     def test_sync_content_not_modified(self, files_get_metadata_mock, calculate_hash_mock, upload_chunked_mock,
-                                       get_backup_directory_mock, *mocks):
+                                       get_backup_directory_mock, get_dropbox_client_mock):
         """ Test whether syncs are skipped when file was not modified. """
         HASH = 'abcdef123456'
         fake_metadata = mock.MagicMock()
         fake_metadata.content_hash = HASH
         files_get_metadata_mock.return_value = fake_metadata
         calculate_hash_mock.return_value = HASH
+        get_dropbox_client_mock.return_value = dropbox.Dropbox('fake')
 
         with tempfile.TemporaryDirectory() as temp_dir:
             get_backup_directory_mock.return_value = temp_dir
@@ -136,7 +153,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         with self.assertRaises(dropbox.exceptions.ApiError):
             dsmr_dropbox.services.sync_file(
                 scheduled_process=self.schedule_process,
-                dropbox_access_token='dummy-token',
+                dropbox_client=dropbox.Dropbox('fake'),
                 local_root_dir='/tmp/',
                 abs_file_path='/tmp/fake'
             )
@@ -149,14 +166,16 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             timezone.make_aware(timezone.datetime(2000, 1, 1, hour=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL - 1))
         )
 
-    @mock.patch('dsmr_dropbox.services.generate_access_token')
+    @mock.patch('dsmr_dropbox.services.get_dropbox_client')
     @mock.patch('dsmr_dropbox.services.upload_chunked')
     @mock.patch('dropbox.Dropbox.files_get_metadata')
     @mock.patch('os.stat')
-    def test_sync_non_existing_remote_file(self, stat_mock, files_get_metadata_mock, upload_chunked_mock, *mocks):
+    def test_sync_non_existing_remote_file(self, stat_mock, files_get_metadata_mock, upload_chunked_mock,
+                                           get_dropbox_client_mock):
         stat_result = mock.MagicMock()
         stat_result.st_size = 1234
         stat_mock.return_value = stat_result
+        get_dropbox_client_mock.return_value = dropbox.Dropbox('fake')
 
         # Unknown file remote.
         files_get_metadata_mock.side_effect = dropbox.exceptions.ApiError(
@@ -237,7 +256,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             temp_file.flush()
 
             dsmr_dropbox.services.upload_chunked(
-                'dummy-token',
+                dropbox.Dropbox('fake'),
                 temp_file.name,
                 '/remote-path.ext'
             )
@@ -254,7 +273,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             temp_file.flush()
 
             dsmr_dropbox.services.upload_chunked(
-                'dummy-token',
+                dropbox.Dropbox('fake'),
                 temp_file.name,
                 '/remote-path.ext'
             )

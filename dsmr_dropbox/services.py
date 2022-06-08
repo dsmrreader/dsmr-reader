@@ -26,7 +26,7 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
         scheduled_process.disable()
         return
 
-    dropbox_access_token = generate_access_token(scheduled_process=scheduled_process)
+    dropbox_client = get_dropbox_client(scheduled_process=scheduled_process)
     backup_directory = dsmr_backup.services.backup.get_backup_directory()
 
     # Sync each file, recursively.
@@ -36,7 +36,7 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
 
         sync_file(
             scheduled_process=scheduled_process,
-            dropbox_access_token=dropbox_access_token,
+            dropbox_client=dropbox_client,
             local_root_dir=backup_directory,
             abs_file_path=current_file
         )
@@ -44,8 +44,11 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
     scheduled_process.delay(hours=settings.DSMRREADER_DROPBOX_SYNC_INTERVAL)
 
 
-def generate_access_token(scheduled_process: ScheduledProcess) -> NoReturn:
-    """ Verify refresh token validity, generate an access token. """
+def get_dropbox_client(scheduled_process: ScheduledProcess) -> dropbox.Dropbox:
+    """
+    The Dropbox refresh token we locally store (after linking the user's Dropbox account) never expires. This method
+    returns a new and authenticated instance of the Dropbox client that can be used for its (short) duration.
+    """
     dropbox_settings = DropboxSettings.get_solo()
     dbx = dropbox.Dropbox(
         oauth2_refresh_token=dropbox_settings.refresh_token,
@@ -54,9 +57,16 @@ def generate_access_token(scheduled_process: ScheduledProcess) -> NoReturn:
 
     try:
         dbx.refresh_access_token()
-        dbx.check_user()  # No-op
+        dbx.check_user()  # No-op, just to verify the client/session.
     except Exception as error:
-        logger.error(' - Dropbox auth error: %s', error)
+        logger.error(' - Dropbox error: %s', error)
+
+        # Network errors should NOT reset the client side app token (see further below). Only API errors should do so.
+        if not isinstance(error, dropbox.exceptions.DropboxException):
+            scheduled_process.delay(minutes=1)
+            raise
+
+        logger.error(' - Removing Dropbox credentials due to API failure')
         message = _("Unable to authenticate with Dropbox, removing credentials. Error: {}".format(error))
         dsmr_frontend.services.display_dashboard_message(message=message)
         DropboxSettings.objects.update(
@@ -65,10 +75,8 @@ def generate_access_token(scheduled_process: ScheduledProcess) -> NoReturn:
         scheduled_process.disable()
         raise
 
-    logger.info('Dropbox: Auth/user check OK, generated access token')
-
-    # For some reason the SDK does not expose this. Still works though.
-    return dbx._oauth2_access_token
+    logger.info('Dropbox: Auth/user check OK')
+    return dbx
 
 
 def list_files_in_dir(directory: str) -> Iterable:
@@ -106,17 +114,15 @@ def should_sync_file(abs_file_path: str) -> bool:
 
 
 def sync_file(scheduled_process: ScheduledProcess,
-              dropbox_access_token: str,
+              dropbox_client: dropbox.Dropbox,
               local_root_dir: str,
               abs_file_path: str) -> NoReturn:
-    dbx = dropbox.Dropbox(dropbox_access_token)
-
     # The path we use in our Dropbox app folder.
     relative_file_path = abs_file_path.replace(local_root_dir, '')
 
     try:
         # Check whether the file is already at Dropbox, if so, check its hash.
-        dropbox_meta = dbx.files_get_metadata(relative_file_path)
+        dropbox_meta = dropbox_client.files_get_metadata(relative_file_path)
     except dropbox.exceptions.ApiError as exception:
         error_message = str(exception.error)
         dropbox_meta = None
@@ -132,7 +138,7 @@ def sync_file(scheduled_process: ScheduledProcess,
 
     try:
         upload_chunked(
-            dropbox_access_token=dropbox_access_token,
+            dropbox_client=dropbox_client,
             local_file_path=abs_file_path,
             remote_file_path=relative_file_path
         )
@@ -152,11 +158,10 @@ def sync_file(scheduled_process: ScheduledProcess,
         raise  # pragma: no cover
 
 
-def upload_chunked(dropbox_access_token: str, local_file_path: str, remote_file_path: str) -> NoReturn:
+def upload_chunked(dropbox_client: dropbox.Dropbox, local_file_path: str, remote_file_path: str) -> NoReturn:
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     logger.info('Dropbox: Syncing file %s', remote_file_path)
 
-    dbx = dropbox.Dropbox(dropbox_access_token)
     write_mode = dropbox.files.WriteMode.overwrite
 
     file_handle = open(local_file_path, 'rb')
@@ -168,11 +173,11 @@ def upload_chunked(dropbox_access_token: str, local_file_path: str, remote_file_
 
     # Small uploads should be transfers at one go.
     if file_size <= CHUNK_SIZE:
-        dbx.files_upload(file_handle.read(), remote_file_path, mode=write_mode)
+        dropbox_client.files_upload(file_handle.read(), remote_file_path, mode=write_mode)
 
     # Large uploads can be sent in chunks, by creating a session allowing multiple separate uploads.
     else:
-        upload_session_start_result = dbx.files_upload_session_start(file_handle.read(CHUNK_SIZE))
+        upload_session_start_result = dropbox_client.files_upload_session_start(file_handle.read(CHUNK_SIZE))
 
         cursor = dropbox.files.UploadSessionCursor(
             session_id=upload_session_start_result.session_id,
@@ -184,9 +189,9 @@ def upload_chunked(dropbox_access_token: str, local_file_path: str, remote_file_
         # by combining all the chunks sent previously.
         while file_handle.tell() < file_size:
             if (file_size - file_handle.tell()) <= CHUNK_SIZE:
-                dbx.files_upload_session_finish(file_handle.read(CHUNK_SIZE), cursor, commit)
+                dropbox_client.files_upload_session_finish(file_handle.read(CHUNK_SIZE), cursor, commit)
             else:
-                dbx.files_upload_session_append_v2(file_handle.read(CHUNK_SIZE), cursor)
+                dropbox_client.files_upload_session_append_v2(file_handle.read(CHUNK_SIZE), cursor)
                 cursor.offset = file_handle.tell()
 
     file_handle.close()
