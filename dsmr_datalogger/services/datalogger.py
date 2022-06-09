@@ -113,8 +113,8 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
 
     # Defaults for telegrams with missing data.
     model_fields['timestamp'] = model_fields['timestamp'] or timezone.now()
-    model_fields['electricity_delivered_2'] = model_fields['electricity_delivered_2'] or 0
-    model_fields['electricity_returned_2'] = model_fields['electricity_returned_2'] or 0
+    model_fields['electricity_delivered_2'] = model_fields['electricity_delivered_2'] or 0  # type:ignore[assignment]
+    model_fields['electricity_returned_2'] = model_fields['electricity_returned_2'] or 0  # type:ignore[assignment]
 
     # Ignore invalid dates on device bus. Reset the delivered value as well. This MUST be checked before override below.
     if model_fields['extra_device_timestamp'] is None:
@@ -153,7 +153,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
     new_instance = DsmrReading.objects.create(**reading_kwargs)
 
     # There should already be one in database, created when migrating.
-    statistics_kwargs['latest_telegram'] = data
+    statistics_kwargs['latest_telegram'] = data  # type:ignore[assignment]
     MeterStatistics.get_solo().update(**statistics_kwargs)  # Update() is required for signal!
 
     # Creation should be completed, can now be broadcasted for post processing.
