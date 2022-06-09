@@ -16,13 +16,13 @@ DSMR-reader project settings (non Django related).
 DSMRREADER_LOGLEVEL = config('DSMRREADER_LOGLEVEL', cast=str, default=None)
 
 if DSMRREADER_LOGLEVEL in ('DEBUG', 'WARNING'):
-    LOGGING['loggers']['dsmrreader']['level'] = DSMRREADER_LOGLEVEL
+    LOGGING['loggers']['dsmrreader']['level'] = DSMRREADER_LOGLEVEL  # type:ignore[index]
 
 # Query debugging. VERY VERBOSE! Undocumented on purpose as well.
 DSMRREADER_LOG_QUERIES = config('DSMRREADER_LOG_QUERIES', cast=bool, default=False)
 
 if DSMRREADER_LOG_QUERIES:
-    LOGGING['loggers']['django.db']['level'] = 'DEBUG'
+    LOGGING['loggers']['django.db']['level'] = 'DEBUG'  # type:ignore[index]
 
 CACHES['mqtt']['TIMEOUT'] = config('DSMRREADER_MQTT_MAX_CACHE_TIMEOUT', cast=int, default=0)
 
