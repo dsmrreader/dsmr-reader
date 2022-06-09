@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - v*
+      - dev/*
 #  # For dev/testing only
 #  pull_request: ~
 
