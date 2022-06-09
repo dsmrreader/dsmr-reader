@@ -12,7 +12,7 @@ from django.utils.translation import gettext as _
 from django.conf import settings
 from django.contrib import admin
 from django.db import connection
-
+from typing import Optional
 
 logger = logging.getLogger('dsmrreader')
 
@@ -24,8 +24,8 @@ class StopInfiniteRun(EnvironmentError):
 
 class InfiniteManagementCommandMixin:
     """ Mixin for long running management commands, only stopping (gracefully) on SIGHUP signal. """
-    name = None  # Set in sub classes.
-    sleep_time = None  # Set in sub classes.
+    name: Optional[str] = None  # Set in subclasses.
+    sleep_time: Optional[int] = None  # Set in subclasses.
     _keep_alive = None
     _pid_file = None
     _next_reconnect = None
