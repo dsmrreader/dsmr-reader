@@ -83,5 +83,5 @@ class QuarterHourPeakElectricityConsumptionAdmin(DeletionOnlyAdminModel):
     def read_at_end_formatted(self, obj):
         return formats.date_format(timezone.localtime(obj.read_at_end), 'DSMR_VERBOSE_DATETIME_FORMAT')
 
-    read_at_start_formatted.short_description = _('Start')
-    read_at_end_formatted.short_description = _('End')
+    read_at_start_formatted.short_description = _('Start')  # type: ignore[attr-defined]
+    read_at_end_formatted.short_description = _('End')  # type: ignore[attr-defined]

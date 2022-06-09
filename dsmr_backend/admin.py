@@ -148,7 +148,7 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
 
         return naturaltime(planned)
 
-    next_call_naturaltime.short_description = _('Time until next call')
+    next_call_naturaltime.short_description = _('Time until next call')  # type: ignore[attr-defined]
 
     def has_add_permission(self, request, obj=None):
         return False

@@ -79,35 +79,35 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
             return '-'
 
         return str(obj.electricity_delivered_1)
-    formatted_electricity_delivered_1.short_description = 'electricity 1'
+    formatted_electricity_delivered_1.short_description = 'electricity 1'  # type: ignore[attr-defined]
 
     def formatted_electricity_delivered_2(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_delivered_2:
             return '-'
 
         return str(obj.electricity_delivered_2)
-    formatted_electricity_delivered_2.short_description = 'electricity 2'
+    formatted_electricity_delivered_2.short_description = 'electricity 2'  # type: ignore[attr-defined]
 
     def formatted_electricity_returned_1(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_returned_1:
             return '-'
 
         return str(obj.electricity_returned_1)
-    formatted_electricity_returned_1.short_description = 'electricity returned 1'
+    formatted_electricity_returned_1.short_description = 'electricity returned 1'  # type: ignore[attr-defined]
 
     def formatted_electricity_returned_2(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_returned_2:
             return '-'
 
         return str(obj.electricity_returned_2)
-    formatted_electricity_returned_2.short_description = 'electricity returned 2'
+    formatted_electricity_returned_2.short_description = 'electricity returned 2'  # type: ignore[attr-defined]
 
     def formatted_extra_device_delivered(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.extra_device_delivered:
             return '-'
 
         return str(obj.extra_device_delivered)
-    formatted_extra_device_delivered.short_description = 'gas'
+    formatted_extra_device_delivered.short_description = 'gas'  # type: ignore[attr-defined]
 
 
 @admin.register(MeterStatistics)

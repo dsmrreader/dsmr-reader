@@ -82,11 +82,11 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
 
     def _settings_app_key(self, obj: DropboxSettings) -> str:  # pragma: no cover
         return settings.DSMRREADER_DROPBOX_APP_KEY
-    _settings_app_key.short_description = _('Dropbox App Key')
+    _settings_app_key.short_description = _('Dropbox App Key')  # type: ignore[attr-defined]
 
     def _masked_refresh_token(self, obj: DropboxSettings) -> str:  # pragma: no cover
         return '✅' if obj.refresh_token else '❌'
-    _masked_refresh_token.short_description = _('Dropbox refresh token')
+    _masked_refresh_token.short_description = _('Dropbox refresh token')  # type: ignore[attr-defined]
 
 
 @admin.register(EmailBackupSettings)

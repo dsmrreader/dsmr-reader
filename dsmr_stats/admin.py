@@ -82,21 +82,21 @@ class HourStatisticsAdmin(admin.ModelAdmin):
             return '-'
 
         return obj.electricity_merged
-    formatted_electricity_merged.short_description = 'electricity delivered'
+    formatted_electricity_merged.short_description = 'electricity delivered'  # type: ignore[attr-defined]
 
     def formatted_electricity_returned_merged(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.electricity_returned_merged:
             return '-'
 
         return obj.electricity_returned_merged
-    formatted_electricity_returned_merged.short_description = 'electricity returned'
+    formatted_electricity_returned_merged.short_description = 'electricity returned'  # type: ignore[attr-defined]
 
     def formatted_gas(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.gas:
             return '-'
 
         return str(obj.gas)
-    formatted_gas.short_description = 'gas'
+    formatted_gas.short_description = 'gas'  # type: ignore[attr-defined]
 
 
 @admin.register(ElectricityStatistics)
