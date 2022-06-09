@@ -6,7 +6,7 @@ from typing import Dict, Optional, List, Tuple
 
 import pytz
 from django.conf import settings
-from django.db.models import Avg, Min, Max, Count
+from django.db.models import Avg, Min, Max, Count, Manager
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
 
@@ -313,7 +313,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     )
 
 
-def consumption_by_range(start, end) -> Tuple[Tuple[ElectricityConsumption], Tuple[GasConsumption]]:
+def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
     """ Calculates the consumption of a range specified. """
     electricity_readings = ElectricityConsumption.objects.filter(
         read_at__gte=start, read_at__lt=end,
