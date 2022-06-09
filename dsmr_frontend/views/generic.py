@@ -4,6 +4,7 @@ from django.views.generic.base import RedirectView
 from django.views.generic.base import View
 from django.http import JsonResponse
 from django.conf import settings
+from typing import Optional
 
 import dsmr_consumption.services
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
@@ -31,9 +32,9 @@ class StatusRedirectView(RedirectView):
 
 class ReadTheDocsRedirectView(RedirectView):
     permanent = False
-    subpage = None
+    subpage: Optional[str] = None
     branch = settings.DSMRREADER_MAIN_BRANCH
-    url = None
+    url: Optional[str] = None
 
     def get(self, request, *args, **kwargs):
         self.url = 'https://dsmr-reader.readthedocs.io/{}/{}/{}'.format(
