@@ -1,7 +1,7 @@
 import logging
 from distutils.version import StrictVersion
 import datetime
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import requests
 from django.db.migrations.recorder import MigrationRecorder
@@ -191,10 +191,7 @@ def hours_in_day(day: datetime.date) -> int:
         return 24
 
 
-def postgresql_total_database_size() -> Optional[int]:  # pragma: nocover
-    if connection.vendor != 'postgresql':
-        return None
-
+def postgresql_total_database_size() -> Tuple[int, int]:  # pragma: nocover
     with connection.cursor() as cursor:
         database_name = settings.DATABASES['default']['NAME']
         size_sql = """

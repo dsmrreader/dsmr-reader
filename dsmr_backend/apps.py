@@ -90,6 +90,9 @@ def check_scheduled_processes(**kwargs) -> List[MonitoringStatusIssue]:
 def postgresql_check_database_size(**kwargs) -> Optional[MonitoringStatusIssue]:  # pragma: nocover
     import dsmr_backend.services.backend
 
+    if connection.vendor != 'postgresql':
+        return None
+
     pretty_size, bytes_size = dsmr_backend.services.backend.postgresql_total_database_size()
 
     if bytes_size < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_DATABASE_SIZE:
