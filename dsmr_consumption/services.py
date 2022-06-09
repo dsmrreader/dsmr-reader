@@ -2,7 +2,7 @@ import datetime
 from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
 import logging
-from typing import NoReturn, Dict, Optional, List, Tuple
+from typing import Dict, Optional, List, Tuple
 
 import pytz
 from django.conf import settings
@@ -28,19 +28,20 @@ import dsmr_backend.services.backend
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess) -> NoReturn:
+def run(scheduled_process: ScheduledProcess) -> None:
     """ Compacts all unprocessed readings, capped by a max to prevent hanging backend. """
     for current_reading in DsmrReading.objects.unprocessed()[0:settings.DSMRREADER_COMPACT_MAX]:
         try:
             compact(dsmr_reading=current_reading)
         except CompactorNotReadyError:
             # Try again in a while, since we can't do anything now anyway.
-            return scheduled_process.delay(seconds=15)
+            scheduled_process.delay(seconds=15)
+            return
 
     scheduled_process.delay(seconds=1)
 
 
-def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> NoReturn:
+def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     """ Calculates the quarter-hour peak consumption. For background info see issue #1084 ."""
     MINUTE_INTERVAL = 15
 
@@ -73,7 +74,8 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> NoReturn:
         )
 
         # Assumes new readings will arrive shortly (for most users/setups)
-        return scheduled_process.postpone(seconds=5)
+        scheduled_process.postpone(seconds=5)
+        return
 
     quarter_hour_readings = DsmrReading.objects.filter(timestamp__gte=start, timestamp__lte=end)
 
@@ -84,7 +86,8 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> NoReturn:
             timezone.localtime(start),
             timezone.localtime(end),
         )
-        return scheduled_process.postpone(minutes=MINUTE_INTERVAL)
+        scheduled_process.postpone(minutes=MINUTE_INTERVAL)
+        return
 
     first_reading = quarter_hour_readings.first()
     last_reading = quarter_hour_readings.last()
@@ -104,7 +107,8 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> NoReturn:
 
     if existing_data:
         logger.debug('Quarter hour peaks: Ready but quarter already processed, rescheduling for next quarter...')
-        return scheduled_process.reschedule(planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL))
+        scheduled_process.reschedule(planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL))
+        return
 
     # Calculate quarter data.
     total_delivered_start = first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2
@@ -132,7 +136,7 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> NoReturn:
     )
 
 
-def compact(dsmr_reading: DsmrReading) -> NoReturn:
+def compact(dsmr_reading: DsmrReading) -> None:
     """ Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute. """
     consumption_settings = ConsumptionSettings.get_solo()
 
@@ -172,7 +176,7 @@ def compact(dsmr_reading: DsmrReading) -> NoReturn:
 
 def _compact_electricity(
     dsmr_reading: DsmrReading, electricity_grouping_type: int, reading_start: timezone.datetime
-) -> NoReturn:
+) -> None:
     """
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
     """
@@ -262,7 +266,7 @@ def _compact_electricity(
     )
 
 
-def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> NoReturn:
+def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     """
     Compacts any DSMR readings to gas consumption records, optionally grouped. Only when there is support for gas.
 
@@ -583,7 +587,7 @@ def calculate_min_max_consumption_watt() -> Dict:
     return data
 
 
-def clear_consumption() -> NoReturn:
+def clear_consumption() -> None:
     """ Clears ALL consumption data ever generated. """
     ElectricityConsumption.objects.all().delete()
     GasConsumption.objects.all().delete()

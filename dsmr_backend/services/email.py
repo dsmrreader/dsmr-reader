@@ -1,5 +1,4 @@
 import logging
-from typing import NoReturn
 
 from django.core.mail.backends.smtp import EmailBackend
 from django.core import mail
@@ -10,7 +9,7 @@ from dsmr_backend.models.settings import EmailSettings
 logger = logging.getLogger('dsmrreader')
 
 
-def send(email_from: str, email_to: str, subject: str, body: str, attachment: str = None) -> NoReturn:
+def send(email_from: str, email_to: str, subject: str, body: str, attachment: str = None) -> None:
     """ Sends an email using the outgoing email settings. """
     email_settings = EmailSettings.get_solo()
 

@@ -4,7 +4,7 @@ import logging
 from decimal import Decimal
 from datetime import time, date
 import math
-from typing import NoReturn, Dict, Optional, List
+from typing import Dict, Optional, List
 
 from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection, models
@@ -58,11 +58,12 @@ def get_next_day_to_generate() -> datetime.date:
     return timezone.localtime(next_consumption.read_at).date()
 
 
-def run(scheduled_process: ScheduledProcess) -> NoReturn:
+def run(scheduled_process: ScheduledProcess) -> None:
     """ Analyzes daily consumption and statistics to determine whether new analysis is required. """
     if not is_data_available():
         logger.debug('Stats: No data available')
-        return scheduled_process.delay(hours=1)
+        scheduled_process.delay(hours=1)
+        return
 
     now = timezone.localtime(timezone.now())
     target_day = get_next_day_to_generate()
@@ -71,23 +72,26 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
     # Skip current day, wait until midnight.
     if target_day >= now.date():
         logger.debug('Stats: Waiting for day to pass: %s', target_day)
-        return scheduled_process.reschedule(
+        scheduled_process.reschedule(
             timezone.make_aware(timezone.datetime.combine(next_day, time.min))
         )
+        return
 
     # All readings of the day must be processed.
     unprocessed_readings = DsmrReading.objects.unprocessed().filter(timestamp__date=target_day).exists()
 
     if unprocessed_readings:
         logger.debug('Stats: Found unprocessed readings for: %s', target_day)
-        return scheduled_process.delay(minutes=5)
+        scheduled_process.delay(minutes=5)
+        return
 
     # Ensure we have any consumption.
     consumption_found = ElectricityConsumption.objects.filter(read_at__date=target_day).exists()
 
     if not consumption_found:
         logger.debug('Stats: Missing consumption data for: %s', target_day)
-        return scheduled_process.delay(hours=1)
+        scheduled_process.delay(hours=1)
+        return
 
     # If we recently supported gas, make sure we've received a gas reading on the next day (or later).
     recently_gas_read = GasConsumption.objects.filter(
@@ -99,15 +103,17 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
 
     if gas_capability and recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
         logger.debug('Stats: Waiting for first gas reading on the next day...')
-        return scheduled_process.delay(minutes=5)
+        scheduled_process.delay(minutes=5)
+        return
 
     create_statistics(target_day=target_day)
 
     # We keep trying until we've caught on to the current day (which will then delay it for a day above).
-    return scheduled_process.delay(seconds=1)
+    scheduled_process.delay(seconds=1)
+    return
 
 
-def create_statistics(target_day: datetime.date) -> NoReturn:
+def create_statistics(target_day: datetime.date) -> None:
     start_of_day = timezone.make_aware(timezone.datetime(
         year=target_day.year,
         month=target_day.month,
@@ -128,7 +134,7 @@ def create_statistics(target_day: datetime.date) -> NoReturn:
     cache.clear()
 
 
-def create_daily_statistics(day: datetime.date) -> NoReturn:
+def create_daily_statistics(day: datetime.date) -> DayStatistics:
     """ Calculates and persists both electricity and gas statistics for a day. Daily. """
     logger.debug('Stats: Creating day statistics for: %s', day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
@@ -162,7 +168,7 @@ def create_daily_statistics(day: datetime.date) -> NoReturn:
     )
 
 
-def create_hourly_statistics(hour_start: timezone.datetime) -> NoReturn:
+def create_hourly_statistics(hour_start: timezone.datetime) -> None:
     """ Calculates and persists both electricity and gas statistics for a day. Hourly. """
     logger.debug('Stats: Creating hour statistics for: %s', hour_start)
     hour_end = hour_start + timezone.timedelta(hours=1)
@@ -178,7 +184,8 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> NoReturn:
     }
 
     if HourStatistics.objects.filter(**creation_kwargs).exists():
-        return logger.debug('Stats: Skipping duplicate hour statistics for: %s', hour_start)
+        logger.debug('Stats: Skipping duplicate hour statistics for: %s', hour_start)
+        return
 
     electricity_start = electricity_readings[0]
     electricity_end = electricity_readings[electricity_readings.count() - 1]
@@ -199,7 +206,7 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> NoReturn:
     HourStatistics.objects.create(**creation_kwargs)
 
 
-def clear_statistics() -> NoReturn:
+def clear_statistics() -> None:
     """ Clears ALL statistics ever generated. """
     DayStatistics.objects.all().delete()
     HourStatistics.objects.all().delete()
@@ -367,7 +374,7 @@ def period_totals() -> Dict:
     )
 
 
-def update_electricity_statistics(reading: DsmrReading) -> NoReturn:
+def update_electricity_statistics(reading: DsmrReading) -> None:
     """ Updates the ElectricityStatistics records. """
     MAPPING = {
         # Stats record field: Reading field.
@@ -409,7 +416,7 @@ def update_electricity_statistics(reading: DsmrReading) -> NoReturn:
         stats.save()
 
 
-def recalculate_prices() -> NoReturn:
+def recalculate_prices() -> None:
     """ Retroactively sets the prices for all statistics. E.g.: When the user has altered the prices. """
     for current_day in DayStatistics.objects.all():
         print(' - Recalculating:', current_day.day)
@@ -448,7 +455,7 @@ def recalculate_prices() -> NoReturn:
         current_day.save()
 
 
-def reconstruct_missing_day_statistics() -> NoReturn:
+def reconstruct_missing_day_statistics() -> None:
     """ Reconstructs missing day statistics. """
     dates_to_generate = ElectricityConsumption.objects.exclude(
         # Skip today.
@@ -472,7 +479,7 @@ def reconstruct_missing_day_statistics() -> NoReturn:
         create_statistics(target_day=current_day)
 
 
-def reconstruct_missing_day_statistics_by_hours() -> NoReturn:
+def reconstruct_missing_day_statistics_by_hours() -> None:
     """ Reconstructs missing day statistics by using available hour statistics. """
     dates_to_generate = HourStatistics.objects.all().annotate(
         truncated_date=TruncDate('hour_start')

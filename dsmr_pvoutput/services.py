@@ -1,5 +1,5 @@
 import logging
-from typing import Optional, Dict, NoReturn
+from typing import Optional, Dict
 
 from django.conf import settings
 from django.utils import timezone
@@ -14,7 +14,7 @@ from dsmr_pvoutput.signals import pvoutput_upload
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess) -> NoReturn:
+def run(scheduled_process: ScheduledProcess) -> None:
     """ Exports data to PVOutput, calling Add Status. """
     api_settings = PVOutputAPISettings.get_solo()
     status_settings = PVOutputAddStatusSettings.get_solo()
@@ -65,7 +65,7 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
     schedule_next_export(scheduled_process)
 
 
-def schedule_next_export(scheduled_process: ScheduledProcess) -> NoReturn:
+def schedule_next_export(scheduled_process: ScheduledProcess) -> None:
     """ Schedules the next export, according to user preference. """
     next_export = get_next_export()
 

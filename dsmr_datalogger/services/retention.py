@@ -1,5 +1,4 @@
 import logging
-from typing import NoReturn
 
 from django.db.models.functions.datetime import TruncHour
 from django.db.models.aggregates import Count
@@ -16,11 +15,12 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess) -> NoReturn:
+def run(scheduled_process: ScheduledProcess) -> None:
     retention_settings = RetentionSettings.get_solo()
 
     if retention_settings.data_retention_in_hours == RetentionSettings.RETENTION_NONE:
-        return scheduled_process.disable()  # Changing the retention settings in the admin will re-activate it again.
+        scheduled_process.disable()  # Changing the retention settings in the admin will re-activate it again.
+        return
 
     # These models should be rotated with retention. Dict value is the datetime field used.
     ITEM_COUNT_PER_HOUR = 2

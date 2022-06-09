@@ -1,6 +1,6 @@
 import enum
 from enum import unique
-from typing import Union, NoReturn, Dict
+from typing import Union, Dict
 
 from django.utils import timezone
 
@@ -44,7 +44,7 @@ class CapabilityReport(object):
     def __init__(self):
         self._capabilities = {}
 
-    def add(self, capability: Capability) -> NoReturn:
+    def add(self, capability: Capability):
         self._capabilities[capability.value] = capability
 
     def __contains__(self, capability: Union[str, Capability]) -> bool:

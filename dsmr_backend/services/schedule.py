@@ -1,6 +1,5 @@
 import logging
 import traceback
-from typing import NoReturn
 
 from django.conf import settings
 
@@ -11,7 +10,7 @@ from dsmr_backend.signals import backend_called
 logger = logging.getLogger('dsmrreader')
 
 
-def dispatch_signals() -> NoReturn:
+def dispatch_signals() -> None:
     """ Legacy execution, using signals. """
     # send_robust() guarantees the every listener receives this signal.
     responses = backend_called.send_robust(None)
@@ -26,7 +25,7 @@ def dispatch_signals() -> NoReturn:
             )
 
 
-def execute_scheduled_processes() -> NoReturn:
+def execute_scheduled_processes() -> None:
     """ Calls the backend and all services required. """
     calls = ScheduledProcess.objects.ready()
     logger.debug('SP: %s backend service(s) ready to run', len(calls))

@@ -1,7 +1,7 @@
 import logging
 import time
 import os
-from typing import Iterable, NoReturn
+from typing import Iterable
 
 from django.utils.translation import gettext as _
 from django.conf import settings
@@ -18,7 +18,7 @@ import dsmr_frontend.services
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess) -> NoReturn:
+def run(scheduled_process: ScheduledProcess) -> None:
     dropbox_settings = DropboxSettings.get_solo()
 
     if not dropbox_settings.refresh_token:
@@ -116,7 +116,7 @@ def should_sync_file(abs_file_path: str) -> bool:
 def sync_file(scheduled_process: ScheduledProcess,
               dropbox_client: dropbox.Dropbox,
               local_root_dir: str,
-              abs_file_path: str) -> NoReturn:
+              abs_file_path: str) -> None:
     # The path we use in our Dropbox app folder.
     relative_file_path = abs_file_path.replace(local_root_dir, '')
 
@@ -129,7 +129,8 @@ def sync_file(scheduled_process: ScheduledProcess,
 
         # Unexpected.
         if 'not_found' not in error_message:
-            return logger.error(' - Dropbox error: %s', error_message)
+            logger.error(' - Dropbox error: %s', error_message)
+            return
 
     # Calculate local hash and compare with remote. Ignore if the remote file is exactly the same.
     if dropbox_meta and calculate_content_hash(abs_file_path) == dropbox_meta.content_hash:
@@ -158,7 +159,7 @@ def sync_file(scheduled_process: ScheduledProcess,
         raise  # pragma: no cover
 
 
-def upload_chunked(dropbox_client: dropbox.Dropbox, local_file_path: str, remote_file_path: str) -> NoReturn:
+def upload_chunked(dropbox_client: dropbox.Dropbox, local_file_path: str, remote_file_path: str) -> None:
     """ Uploads a file in chucks to Dropbox, allowing it to resume on (connection) failure. """
     logger.info('Dropbox: Syncing file %s', remote_file_path)
 

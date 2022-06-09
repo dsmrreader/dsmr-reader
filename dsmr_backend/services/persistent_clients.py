@@ -1,5 +1,5 @@
 import logging
-from typing import NoReturn, List
+from typing import List
 
 from dsmr_backend.signals import initialize_persistent_client, run_persistent_client, terminate_persistent_client
 
@@ -26,7 +26,7 @@ def initialize() -> List[object]:
     return clients
 
 
-def run(clients) -> NoReturn:
+def run(clients) -> None:
     """ Asks listeners to run tasks with their client. """
     logger.debug('CLIENTS: Running %d active client(s)', len(clients))
 
@@ -38,7 +38,7 @@ def run(clients) -> NoReturn:
                 logger.error('CLIENTS: Run error: %s', current_response)
 
 
-def terminate(clients) -> NoReturn:
+def terminate(clients) -> None:
     """ Asks listeners to terminate their client. """
     logger.debug('CLIENTS: Terminating %d client(s)', len(clients))
 

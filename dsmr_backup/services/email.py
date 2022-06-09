@@ -1,6 +1,5 @@
 import tempfile
 import logging
-from typing import NoReturn
 
 from django.utils.translation import gettext_lazy as _
 from django.utils import translation
@@ -16,13 +15,14 @@ import dsmr_backup.services.backup
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess) -> NoReturn:
+def run(scheduled_process: ScheduledProcess) -> None:
     """ Creates a new statistics backup and sends it per email. """
     email_backup_settings = EmailBackupSettings.get_solo()
 
     if not email_backup_settings.interval:
         logger.debug('Email backup: Interval not set, skipping backup for a day')
-        return scheduled_process.delay(days=1)
+        scheduled_process.delay(days=1)
+        return
 
     temp_dir = tempfile.TemporaryDirectory()
     backup_file = dsmr_backup.services.backup.create_partial(

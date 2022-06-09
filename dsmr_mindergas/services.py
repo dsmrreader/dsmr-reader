@@ -2,7 +2,6 @@ from datetime import time
 import logging
 import random
 import json
-from typing import NoReturn
 
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -20,16 +19,18 @@ import dsmr_frontend.services
 logger = logging.getLogger('dsmrreader')
 
 
-def run(scheduled_process: ScheduledProcess) -> NoReturn:
+def run(scheduled_process: ScheduledProcess) -> None:
     mindergas_settings = MinderGasSettings.get_solo()
 
     # Only when enabled and token set.
     if not mindergas_settings.auth_token:
-        return mindergas_settings.update(export=False)  # Should also disable SP.
+        mindergas_settings.update(export=False)  # Should also disable SP.
+        return
 
     # Nonsense when having no data.
     if not dsmr_backend.services.backend.get_capability(Capability.GAS):
-        return scheduled_process.delay(hours=1)
+        scheduled_process.delay(hours=1)
+        return
 
     try:
         export()
@@ -37,9 +38,10 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
         logger.exception(error)
 
         scheduled_process.delay(hours=1)
-        return dsmr_frontend.services.display_dashboard_message(message=_(
+        dsmr_frontend.services.display_dashboard_message(message=_(
             'Failed to export to MinderGas: {}'.format(error)
         ))
+        return
 
     # Reschedule between 3 AM and 6 AM next day.
     midnight = timezone.localtime(timezone.make_aware(
@@ -58,7 +60,7 @@ def run(scheduled_process: ScheduledProcess) -> NoReturn:
     )
 
 
-def export() -> NoReturn:
+def export() -> None:
     """ Exports gas readings to the MinderGas website. """
     mindergas_settings = MinderGasSettings.get_solo()
     midnight = timezone.localtime(timezone.make_aware(

@@ -1,6 +1,6 @@
 import logging
 import ssl
-from typing import NoReturn, Optional
+from typing import Optional
 
 from django.conf import settings
 import paho.mqtt.client as paho
@@ -18,7 +18,8 @@ def initialize_client() -> Optional[paho.Client]:
     broker_settings = MQTTBrokerSettings.get_solo()
 
     if not broker_settings.enabled:
-        return logger.debug('MQTT: Integration disabled in settings (or it was disabled due to a configuration error)')
+        logger.debug('MQTT: Integration disabled in settings (or it was disabled due to a configuration error)')
+        return None
 
     if not broker_settings.hostname:
         logger.error('MQTT: No hostname found in settings, disabling MQTT')
@@ -64,7 +65,7 @@ def initialize_client() -> Optional[paho.Client]:
     return mqtt_client
 
 
-def run(mqtt_client: paho.Client) -> NoReturn:
+def run(mqtt_client: paho.Client) -> None:
     """ Reads any messages from the queue and publishing them to the MQTT broker. """
 
     # Keep batches small, only send the latest X messages. The rest will be trimmed (in case of delay).
@@ -110,12 +111,12 @@ def run(mqtt_client: paho.Client) -> NoReturn:
     queue.Message.objects.all().delete()
 
 
-def signal_reconnect() -> NoReturn:
+def signal_reconnect() -> None:
     backend_restart_required.send_robust(None)
     logger.warning('MQTT: Client no longer connected. Signaling restart to reconnect...')
 
 
-def on_connect(client, userdata, flags, rc) -> NoReturn:
+def on_connect(client, userdata, flags, rc) -> None:
     """ MQTT client callback for connecting. Outputs some debug logging. """
     # From the docs, rc values:
     RC_MAPPING = {
@@ -134,7 +135,7 @@ def on_connect(client, userdata, flags, rc) -> NoReturn:
         pass
 
 
-def on_disconnect(client, userdata, rc) -> NoReturn:
+def on_disconnect(client, userdata, rc) -> None:
     """ MQTT client callback for disconnecting. Outputs some debug logging. """
 
     """
@@ -154,6 +155,6 @@ def on_disconnect(client, userdata, rc) -> NoReturn:
             client.disconnect()  # We cannot throw an exception here, so abort gracefully.
 
 
-def on_log(client, userdata, level, buf) -> NoReturn:
+def on_log(client, userdata, level, buf) -> None:
     """ MQTT client callback for logging. Outputs some debug logging. """
     logger.debug('MQTT: (Paho on_log) %s', buf)

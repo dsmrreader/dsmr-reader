@@ -2,7 +2,7 @@ import pickle  # noqa: S403
 from collections import defaultdict
 import configparser
 import logging
-from typing import NoReturn, Dict, Optional
+from typing import Dict, Optional
 import codecs
 
 from django.conf import settings
@@ -20,7 +20,8 @@ def initialize_client() -> Optional[InfluxDBClient]:
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
     if not influxdb_settings.enabled:
-        return logger.debug('INFLUXDB: Integration disabled in settings (or due to an error previously)')
+        logger.debug('INFLUXDB: Integration disabled in settings (or due to an error previously)')
+        return
 
     use_secure_connection = influxdb_settings.secure in (
         InfluxdbIntegrationSettings.SECURE_CERT_NONE,
@@ -58,7 +59,7 @@ def initialize_client() -> Optional[InfluxDBClient]:
     return influxdb_client
 
 
-def run(influxdb_client: InfluxDBClient) -> NoReturn:
+def run(influxdb_client: InfluxDBClient) -> None:
     """ Processes queued measurements. """
     # Keep batches small, only send the latest X items stored. The rest will be purged (in case of delay).
     selection = InfluxdbMeasurement.objects.all().order_by('-pk')[
@@ -95,7 +96,7 @@ def run(influxdb_client: InfluxDBClient) -> NoReturn:
     InfluxdbMeasurement.objects.all().delete()
 
 
-def publish_dsmr_reading(instance: DsmrReading) -> NoReturn:
+def publish_dsmr_reading(instance: DsmrReading) -> None:
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
     # Integration disabled.

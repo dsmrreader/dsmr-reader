@@ -1,5 +1,4 @@
 import logging
-from typing import NoReturn
 
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone, translation, formats
@@ -96,7 +95,7 @@ def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C
     return message
 
 
-def send_notification(message: str, title: str) -> NoReturn:
+def send_notification(message: str, title: str) -> None:
     """ Sends notification using the preferred service """
     logger.debug(' - Preparing notification: %s | %s', title, message)
     notification_settings = NotificationSetting.get_solo()
@@ -111,7 +110,8 @@ def send_notification(message: str, title: str) -> NoReturn:
     # Plugins only require the hook above.
     if notification_settings.notification_service == NotificationSetting.NOTIFICATION_DUMMY \
             or notification_settings.notification_service is None:
-        return logger.debug(' - Notification service is dummy (or not set). Hook triggered, skipping notification.')
+        logger.debug(' - Notification service is dummy (or not set). Hook triggered, skipping notification.')
+        return
 
     DATA_FORMAT = {
         NotificationSetting.NOTIFICATION_PUSHOVER: {
@@ -153,7 +153,8 @@ def send_notification(message: str, title: str) -> NoReturn:
     )
 
     if response.status_code == 200:
-        return logger.debug(' - Notification sent')
+        logger.debug(' - Notification sent')
+        return
 
     # Invalid request, do not retry.
     if str(response.status_code).startswith('4'):
@@ -182,7 +183,7 @@ def send_notification(message: str, title: str) -> NoReturn:
     raise AssertionError('Notify API call failed: {0} (HTTP {1})'.format(response.text, response.status_code))
 
 
-def set_next_notification() -> NoReturn:
+def set_next_notification() -> None:
     """ Set the next moment for notifications to be allowed again """
     # DST can cause some trouble. We need to go forward and set the requested hour.
     next_notification = timezone.now() + timezone.timedelta(hours=24)
@@ -199,7 +200,7 @@ def set_next_notification() -> NoReturn:
     NotificationSetting.objects.update(next_notification=next_notification)
 
 
-def notify() -> NoReturn:
+def notify() -> None:
     """ Sends notifications about daily energy usage """
     if not notify_pre_check():
         return
@@ -231,7 +232,7 @@ def notify() -> NoReturn:
     set_next_notification()
 
 
-def check_status() -> NoReturn:
+def check_status() -> None:
     """ Checks the status of the application. """
     status_settings = StatusNotificationSetting.get_solo()
     notification_settings = NotificationSetting.get_solo()

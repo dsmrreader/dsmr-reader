@@ -6,7 +6,7 @@ from dsmr_api.models import APISettings
 from dsmr_api.tests.v2 import APIv2TestCase
 
 
-class APIv2TestCase(APIv2TestCase):
+class TestGeneric(APIv2TestCase):
     @property
     def app(self):
         return apps.get_containing_app_config(type(self).__module__).name
