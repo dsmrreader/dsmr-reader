@@ -227,7 +227,7 @@ def _get_dsmrreader_mapping(version: int) -> Dict:
 def postgresql_approximate_reading_count() -> Optional[int]:  # pragma: nocover
     """ A live count is too slow on huge datasets. Using reltuples is accurate enough for an approximate. """
     if connection.vendor != 'postgresql':
-        return
+        return None
 
     with connection.cursor() as cursor:
         cursor.execute(

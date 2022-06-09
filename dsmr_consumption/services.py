@@ -540,7 +540,7 @@ def calculate_slumber_consumption_watt() -> Optional[int]:
     ).order_by('-currently_delivered_count')[:5]
 
     if not most_common:
-        return
+        return None
 
     # We calculate the average among the most common consumption read.
     count = 0

@@ -52,7 +52,7 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
     latest_date_generated = latest_day_statistics.day
 
     if latest_date_generated > offset:
-        return
+        return None
 
     return MonitoringStatusIssue(
         __name__,

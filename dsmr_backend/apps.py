@@ -93,7 +93,7 @@ def postgresql_check_database_size(**kwargs) -> Optional[MonitoringStatusIssue]:
     pretty_size, bytes_size = dsmr_backend.services.backend.postgresql_total_database_size()
 
     if bytes_size < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_DATABASE_SIZE:
-        return
+        return None
 
     return MonitoringStatusIssue(
         __name__,

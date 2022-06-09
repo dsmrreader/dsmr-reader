@@ -59,7 +59,7 @@ def check_influxdb_measurements_queue(**kwargs) -> Optional[MonitoringStatusIssu
     from dsmr_influxdb.models import InfluxdbMeasurement
 
     if InfluxdbMeasurement.objects.count() < settings.DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE:
-        return
+        return None
 
     return MonitoringStatusIssue(
         __name__,

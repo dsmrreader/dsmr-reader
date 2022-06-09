@@ -21,7 +21,7 @@ def initialize_client() -> Optional[InfluxDBClient]:
 
     if not influxdb_settings.enabled:
         logger.debug('INFLUXDB: Integration disabled in settings (or due to an error previously)')
-        return
+        return None
 
     use_secure_connection = influxdb_settings.secure in (
         InfluxdbIntegrationSettings.SECURE_CERT_NONE,

@@ -33,7 +33,7 @@ def check_recent_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
     )
 
     if latest_reading.timestamp > max_slack:
-        return
+        return None
 
     return MonitoringStatusIssue(
         __name__,
@@ -49,7 +49,7 @@ def check_reading_count(**kwargs) -> Optional[MonitoringStatusIssue]:  # pragma:
     reading_count = dsmr_datalogger.services.datalogger.postgresql_approximate_reading_count()
 
     if reading_count < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_READING_COUNT:
-        return
+        return None
 
     return MonitoringStatusIssue(
         __name__,

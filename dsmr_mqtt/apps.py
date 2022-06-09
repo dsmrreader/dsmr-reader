@@ -142,7 +142,7 @@ def check_mqtt_messages_queue(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_mqtt.models.queue import Message
 
     if Message.objects.count() < settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:
-        return
+        return None
 
     return MonitoringStatusIssue(
         __name__,
