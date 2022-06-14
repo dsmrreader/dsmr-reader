@@ -61,7 +61,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
 
 def export() -> None:
-    """ Exports gas readings to the MinderGas website. """
+    """ Exports gas readings to the MinderGas website. DSMR-reader transmits the last reading of the previous day. """
     mindergas_settings = MinderGasSettings.get_solo()
     midnight = timezone.localtime(timezone.make_aware(
         timezone.datetime.combine(timezone.now(), time.min)

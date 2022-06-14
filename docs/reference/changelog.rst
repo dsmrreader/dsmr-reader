@@ -21,6 +21,8 @@ Current version
 v5.4.0 - 2022-xx-xx
 -------------------
 
+- ``Changed`` Added comment regarding MinderGas upload mechanism [`#1646 <https://github.com/dsmrreader/dsmr-reader/issues/1646>`_]
+
 
 v5.3.0 - 2022-06-09
 -------------------

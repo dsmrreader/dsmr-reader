@@ -13,7 +13,8 @@ class MinderGasSettings(ModelUpdateMixin, SingletonModel):
         default=False,
         verbose_name=_('Export data to MinderGas'),
         help_text=_(
-            'Whether we should export your gas readings (if any) to your MinderGas.nl account.'
+            'Whether we should export your gas readings (if any) to your MinderGas.nl account. '
+            'DSMR-reader transmits the last reading of the previous day to your account.'
         )
     )
     auth_token = models.CharField(
