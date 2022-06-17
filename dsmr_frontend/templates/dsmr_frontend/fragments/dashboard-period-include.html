@@ -41,12 +41,7 @@
                     <tr {% if not frontend_settings.merge_electricity_tariffs %}class="highlight"{% endif %}>
                         <td>
                             {% if capabilities.electricity %}
-                                {% if not frontend_settings.merge_electricity_tariffs %}
-                                    <strong>{% translate "Total electricity" %}</strong>
-                                {% else %}
-                                    {% translate "Electricity (single tariff)" %}
-                                {% endif %}
-                                <span class="unit">{% translate "kWh" %}</span>
+                                {% translate "Electricity (total)" %} <span class="unit">{% translate "kWh" %}</span>
                             {% endif %}
                         </td>
                         <td>{% if capabilities.electricity and data.electricity_merged %}<span class="badge bg-red">{{ data.electricity_merged|default:'-' }} </span>{% endif %}</td>

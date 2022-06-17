@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-14 23:32+0200\n"
+"POT-Creation-Date: 2022-06-17 12:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1265,11 +1265,11 @@ msgstr "Elektriciteit verbruikt"
 msgid "Gas consumed"
 msgstr "Gas verbruikt"
 
-msgid "Electricity (single tariff)"
-msgstr "Elektriciteit (enkel tarief)"
+msgid "Electricity (total)"
+msgstr "Elektriciteitskosten (totaal)"
 
-msgid "Electricity returned (single tariff)"
-msgstr "Elektriciteit teruggeleverd (enkel tarief)"
+msgid "Electricity returned (total)"
+msgstr "Elektriciteit teruggeleverd (totaal)"
 
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
@@ -1543,9 +1543,6 @@ msgstr "Kosten"
 msgid "kWh"
 msgstr "kWh"
 
-msgid "Total electricity"
-msgstr "Totaal elektriciteit"
-
 msgid "m³"
 msgstr "m³"
 
@@ -1662,6 +1659,9 @@ msgstr "Verschil"
 
 msgid "There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate."
 msgstr "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
+
+msgid "total"
+msgstr "totaal"
 
 msgid "No data available (yet)."
 msgstr "Nog geen gegevens beschikbaar."
@@ -2738,6 +2738,15 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Electricity (single tariff)"
+#~ msgstr "Elektriciteit (enkel tarief)"
+
+#~ msgid "Electricity returned (single tariff)"
+#~ msgstr "Elektriciteit teruggeleverd (enkel tarief)"
+
+#~ msgid "Total electricity"
+#~ msgstr "Totaal elektriciteit"
 
 #~ msgid "Average quarter peak delivered (kWh), calculated by delivered 1 + 2 difference of start/end, multiplied by 4"
 #~ msgstr "Gemiddelde kwartiervermogen geleverd (kWh), berekend door verschil verbruik tarieven 1 + 2 start/eind te nemen, vermenigvuldigd door 4"

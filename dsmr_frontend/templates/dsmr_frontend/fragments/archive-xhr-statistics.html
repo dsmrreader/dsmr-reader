@@ -24,7 +24,7 @@
             </tr>
             {% if frontend_settings.merge_electricity_tariffs %}
             <tr>
-                <td>{% if capabilities.electricity %}{% translate "Electricity (single tariff)" %} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
+                <td>{% if capabilities.electricity %}{% translate "Electricity (total)" %} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
                 <td>{% if capabilities.electricity and statistics.electricity_merged %}<span class="badge bg-red">{{ statistics.electricity_merged|default:'-' }} </span>{% endif %}</td>
                 <td>{% if capabilities.electricity_returned and statistics.electricity_returned_merged %}<span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-' }}</span>{% endif %}</td>
                 <td>{% if capabilities.electricity and statistics.electricity_cost_merged %}<span class="badge bg-black">{{ statistics.electricity_cost_merged|default:'-' }}</span>{% endif %}</td>

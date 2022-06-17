@@ -21,6 +21,7 @@ Current version
 v5.4.0 - 2022-xx-xx
 -------------------
 
+- ``Changed`` Totaalverbruik toevoegen bij "Vergelijk" [`#1527 <https://github.com/dsmrreader/dsmr-reader/issues/1527>`_]
 - ``Changed`` Added comment regarding MinderGas upload mechanism [`#1646 <https://github.com/dsmrreader/dsmr-reader/issues/1646>`_]
 
 

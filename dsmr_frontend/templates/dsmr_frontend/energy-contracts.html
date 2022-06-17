@@ -62,12 +62,7 @@
                         {# Electricity sub totals #}
                         <tr {% if not frontend_settings.merge_electricity_tariffs %}class="highlight"{% endif %}>
                             <td>
-                                {% if not frontend_settings.merge_electricity_tariffs %}
-                                    <strong>{% translate "Total electricity" %}</strong>
-                                {% else %}
-                                    {% translate "Electricity (single tariff)" %}
-                                {% endif %}
-                                <span class="unit">{% translate "kWh" %}</span>
+                                {% translate "Electricity (total)" %} <span class="unit">{% translate "kWh" %}</span>
                             </td>
                             <td>
                             {% if current.prices.electricity_delivered_1_price or current.prices.electricity_delivered_2_price %}
