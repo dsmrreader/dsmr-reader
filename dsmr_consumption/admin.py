@@ -19,6 +19,7 @@ class ConsumptionSettingsAdmin(SingletonModelAdmin):
 @admin.register(EnergySupplierPrice)
 class EnergySupplierPriceAdmin(admin.ModelAdmin):
     save_on_top = True
+    save_as = True
     change_form_template = 'dsmr_consumption/energy_supplier_prices/change_form.html'
     list_display = ('description', 'start', 'end')
     form = EnergySupplierPriceForm
