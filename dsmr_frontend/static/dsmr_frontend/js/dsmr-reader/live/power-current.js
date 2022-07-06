@@ -114,8 +114,6 @@ $(document).ready(function () {
                 {
                     name: 'Ampere',
                     type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                     data: null
                 }
             ];
