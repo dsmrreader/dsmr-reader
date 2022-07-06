@@ -18,7 +18,7 @@ Current version
 
 
 
-v5.4.0 - 2022-07-xx
+v5.4.0 - 2022-07-07
 -------------------
 
 - ``Changed`` Pie charts in Trends vervangen door bar/line chart [`#1390 <https://github.com/dsmrreader/dsmr-reader/issues/1390>`_]
