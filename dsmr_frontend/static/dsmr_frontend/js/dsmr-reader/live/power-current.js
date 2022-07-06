@@ -88,18 +88,24 @@ $(document).ready(function () {
                     name: 'L1',
                     type: 'bar',
                     stack: true,
+                    showBackground: true,
+                    backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                     data: null
                 },
                 {
                     name: 'L2',
                     type: 'bar',
                     stack: true,
+                    showBackground: true,
+                    backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                     data: null
                 },
                 {
                     name: 'L3',
                     type: 'bar',
                     stack: true,
+                    showBackground: true,
+                    backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                     data: null
                 },
             ];
@@ -108,6 +114,8 @@ $(document).ready(function () {
                 {
                     name: 'Ampere',
                     type: 'bar',
+                    showBackground: true,
+                    backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                     data: null
                 }
             ];

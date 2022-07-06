@@ -47,6 +47,8 @@ function render_gas_graph(xhr_data) {
                 smooth: true,
                 areaStyle: {},
                 animationDelay: animationDelay,
+                showBackground: true,
+                backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 data: xhr_data.gas
             }
         ],

@@ -62,6 +62,8 @@ function render_electricity_graph(xhr_data) {
                 type: ELECTRICITY_GRAPH_STYLE,
                 stack: STACK_ELECTRICITY_GRAPHS,
                 animationDelay: ANIMATION_DELAY_OPTIONS,
+                showBackground: true,
+                backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity1
@@ -71,6 +73,8 @@ function render_electricity_graph(xhr_data) {
                 type: ELECTRICITY_GRAPH_STYLE,
                 stack: STACK_ELECTRICITY_GRAPHS,
                 animationDelay: ANIMATION_DELAY_OPTIONS,
+                showBackground: true,
+                backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity2
@@ -82,6 +86,8 @@ function render_electricity_graph(xhr_data) {
                 name: TEXT_ELECTRICITY_MERGED_DELIVERED,
                 type: ELECTRICITY_GRAPH_STYLE,
                 animationDelay: ANIMATION_DELAY_OPTIONS,
+                showBackground: true,
+                backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.electricity_merged
