@@ -4,65 +4,42 @@ let echarts_avg_gas_graph = null;
 
 function update_trends_averages(start_date, end_date) {
     let echarts_options = {
-        baseOption: {
-            title: {
-                text: null,  // Set below
-                textStyle: TITLE_TEXTSTYLE_OPTIONS,
-                left: 'center'
-            },
-            calculable: true,
-            tooltip: {
-                trigger: 'item',
-                formatter: '{b}\n({d}%)'
-            },
-            series: [
-                {
-                    name: '%',
-                    type: 'pie',
-                    roseType: 'radius',
-                    label: {
-                        formatter: '{d}% {S|{b}}',
-                        rich: {
-                            S: {
-                                fontSize: 8,
-                                color: 'grey'
-                            },
-                        }
-                    },
-                    labelLine: {
-                        length2: 0
-                    },
-                    data: null
-                }
-            ],
+        title: {
+            text: 'null',
+            textStyle: TITLE_TEXTSTYLE_OPTIONS,
+            left: 'center',
         },
+        tooltip: TOOLTIP_OPTIONS,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: ELECTRICITY_GRAPH_STYLE === 'bar',
+                data: null,
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR,
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
+            }
+        ],
+        series: null,
+        animationEasing: 'elasticOut',
         media: [
             {
               option: {
-                    series: [
-                        {
-                            radius: ['10%', '70%'],
-                            width: '100%',
-                            label: {
-                                alignTo: 'edge',
-                                position: 'outside',
-                                edgeDistance: '5%'
-                            }
-                        }
-                    ],
+                    toolbox: TOOLBOX_OPTIONS
                 },
             },
             {
                 query: { maxWidth: 500},
                 option: {
-                    series: [
-                        {
-                            radius: ['10%', '25%'],
-                            label: {
-                                edgeDistance: 0
-                            }
-                        }
-                    ]
+                    toolbox: {show: false}
                 }
             }
         ]
@@ -86,42 +63,61 @@ function update_trends_averages(start_date, end_date) {
         echarts_avg_electricity_returned_graph?.showLoading('default', {text: '❌ ' + xhr_data.responseText});
         echarts_avg_gas_graph?.showLoading('default', {text: '❌ ' + xhr_data.responseText});
     }).done(function (xhr_data) {
-        let dataElectricity = xhr_data.electricity;
-        dataElectricity.forEach(function (item) {
-            item['label'] = {
-                color: PIE_TEXTSTYLE_COLOR
-             };
-        });
+        echarts_options.xAxis[0].data = xhr_data.hour_start;
+        echarts_options.color = [ELECTRICITY_DELIVERED_COLOR];
+        echarts_options.series = [
+            {
+                name: TEXT_ELECTRICITY_CONSUMED_TOOLTIP,
+                type: ELECTRICITY_GRAPH_STYLE,
+                stack: STACK_ELECTRICITY_GRAPHS,
+                animationDelay: ANIMATION_DELAY_OPTIONS,
+                showBackground: true,
+                backgroundStyle: BACKGROUND_STYLE_OPTIONS,
+                smooth: true,
+                areaStyle: {},
+                data: xhr_data.avg_electricity
+            }
+        ]
 
-        echarts_options.baseOption.series[0].data = dataElectricity;
-        echarts_options.baseOption.title.text = TEXT_TITLE_ELECTRICITY;
+        echarts_options.title.text = TEXT_ELECTRICITY_CONSUMED_HEADER;
         echarts_avg_electricity_graph?.setOption(echarts_options);
         echarts_avg_electricity_graph?.hideLoading();
 
-        if (xhr_data.electricity_returned.length > 0) {
-            let dataElectricityReturned = xhr_data.electricity_returned;
-            dataElectricityReturned.forEach(function (item) {
-                item['label'] = {
-                    color: PIE_TEXTSTYLE_COLOR
-                 };
-            });
-
-            echarts_options.baseOption.series[0].data = dataElectricityReturned;
-            echarts_options.baseOption.title.text = TEXT_TITLE_ELECTRICITY_RETURNED;
+        if (xhr_data.avg_electricity_returned.length > 0) {
+            echarts_options.color = [ELECTRICITY_RETURNED_COLOR];
+            echarts_options.series = [
+                {
+                    name: TEXT_ELECTRICITY_RETURNED_TOOLTIP,
+                    type: ELECTRICITY_GRAPH_STYLE,
+                    stack: STACK_ELECTRICITY_GRAPHS,
+                    animationDelay: ANIMATION_DELAY_OPTIONS,
+                    showBackground: true,
+                    backgroundStyle: BACKGROUND_STYLE_OPTIONS,
+                    smooth: true,
+                    areaStyle: {},
+                    data: xhr_data.avg_electricity_returned
+                }
+            ]
+            echarts_options.title.text = TEXT_ELECTRICITY_RETURNED_HEADER;
             echarts_avg_electricity_returned_graph?.setOption(echarts_options);
             echarts_avg_electricity_returned_graph?.hideLoading();
         }
 
-        if (xhr_data.gas.length > 0) {
-            let dataGas = xhr_data.gas;
-            dataGas.forEach(function (item) {
-                item['label'] = {
-                    color: PIE_TEXTSTYLE_COLOR
-                 };
-            });
-
-            echarts_options.baseOption.series[0].data = dataGas;
-            echarts_options.baseOption.title.text = TEXT_TITLE_GAS;
+        if (xhr_data.avg_gas.length > 0) {
+            echarts_options.color = [GAS_DELIVERED_COLOR];
+            echarts_options.series = [
+                {
+                    name: TEXT_GAS_CONSUMED_TOOLTIP,
+                    type: ELECTRICITY_GRAPH_STYLE,
+                    animationDelay: ANIMATION_DELAY_OPTIONS,
+                    showBackground: true,
+                    backgroundStyle: BACKGROUND_STYLE_OPTIONS,
+                    smooth: true,
+                    areaStyle: {},
+                    data: xhr_data.avg_gas
+                }
+            ]
+            echarts_options.title.text = TEXT_GAS_CONSUMED_HEADER;
             echarts_avg_gas_graph?.setOption(echarts_options);
             echarts_avg_gas_graph?.hideLoading();
         }

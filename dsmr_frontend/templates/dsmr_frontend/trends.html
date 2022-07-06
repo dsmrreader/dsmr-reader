@@ -124,20 +124,32 @@
 
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-5.2.1.min.js' %}"></script>
     <script type="text/javascript">
+        /* Translations. */
+        const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+        const TEXT_ELECTRICITY_CONSUMED_HEADER = '{% blocktranslate %}Average electricity consumed{% endblocktranslate %} {S|kWh}';
+        const TEXT_ELECTRICITY_RETURNED_HEADER = '{% blocktranslate %}Average electricity returned{% endblocktranslate %} {S|kWh}';
+        const TEXT_GAS_CONSUMED_HEADER = '{% blocktranslate %}Average gas consumed{% endblocktranslate %} {S|m³}';
+        const TEXT_TARIFF_RATIO_HEADER = '{% blocktranslate %}Electricity tariff consumed{% endblocktranslate %} {S|%}';
+
+        const TEXT_ELECTRICITY_CONSUMED_TOOLTIP = 'kWh ({% blocktranslate %}average{% endblocktranslate %})';
+        const TEXT_ELECTRICITY_RETURNED_TOOLTIP = 'kWh ({% blocktranslate %}average{% endblocktranslate %})';
+        const TEXT_GAS_CONSUMED_TOOLTIP = 'm³ ({% blocktranslate %}average{% endblocktranslate %})';
+
+        /* Colors. */
+        const ELECTRICITY_DELIVERED_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
+        const ELECTRICITY_DELIVERED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_delivered_alternate_color }}";
+        const ELECTRICITY_RETURNED_COLOR = "{{ frontend_settings.electricity_returned_color }}";
+        const ELECTRICITY_RETURNED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_returned_alternate_color }}";
+        const GAS_DELIVERED_COLOR = "{{ frontend_settings.gas_delivered_color }}";
+
+        /* Settings. */
         const DATEPICKER_START_DATE = "{{ start_date|date:datepicker_date_format }}";
         const DATEPICKER_END_DATE = "{{ end_date|date:datepicker_date_format }}";
         const DATEPICKER_LOCALE_FORMAT = "{{ datepicker_locale_format }}";
         const DATEPICKER_LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
-
-        const TEXT_TITLE_ELECTRICITY = '{% blocktranslate %}Average electricity consumption{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
-        const TEXT_TITLE_ELECTRICITY_RETURNED = '{% blocktranslate %}Average electricity returned{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
-        const TEXT_TITLE_GAS = '{% blocktranslate %}Average gas consumption{% endblocktranslate %} {S|{% translate "per hour, in %" %}}';
-        const TEXT_TITLE_TARIFF_RATIO = '{% blocktranslate %}Electricity tariff ratio{% endblocktranslate %} {S|{% translate "in %" %}}';
-
-        const AVG_CONSUMPTION_URL = "{% url 'frontend:trends-xhr-avg-consumption' %}";
-        const BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
-
-        const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
+        const GAS_GRAPH_STYLE = "{{ frontend_settings.gas_graph_style }}";
+        const ELECTRICITY_GRAPH_STYLE = "{{ frontend_settings.electricity_graph_style }}";
+        const STACK_ELECTRICITY_GRAPHS = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
 
         let TEXTSTYLE_COLOR = '#333';
         let PIE_TEXTSTYLE_COLOR = 'black';
@@ -155,9 +167,39 @@
                 },
             }
         };
+        const BACKGROUND_STYLE_OPTIONS = {
+            color: 'rgba(180, 180, 180, 0.05)'
+        };
+        const TOOLBOX_OPTIONS = {
+            show: true,
+            feature: {
+                magicType: {
+                    type: ['line', 'bar']
+                },
+                dataView: {}
+            }
+        };
+        const ANIMATION_DELAY_OPTIONS = function (idx) {
+            return idx * 10;
+        };
+        const TOOLTIP_OPTIONS = {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow',
+                label: {
+                    show: true
+                }
+            }
+        };
+        const GRID_OPTIONS = {
+            top: '12%',
+            left: '1%',
+            right: '2%',
+            containLabel: true
+        };
 
-        const ELECTRICITY_DELIVERED_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
-        const ELECTRICITY_DELIVERED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_delivered_alternate_color }}";
+        const AVG_CONSUMPTION_URL = "{% url 'frontend:trends-xhr-avg-consumption' %}";
+        const BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
     </script>
 
     <script type="text/javascript">

@@ -73,15 +73,17 @@ class TestViews(TestCase):
         json_response = json.loads(response.content.decode("utf-8"))
 
         if not self.support_data:
-            return self.assertEqual(json_response, {"electricity": [], "electricity_returned": [], "gas": []})
+            return self.assertEqual(
+                json_response, {"avg_electricity": [], "avg_electricity_returned": [], "avg_gas": [], "hour_start": []}
+            )
 
-        self.assertEqual(len(json_response['electricity']), 24)
-        self.assertEqual(len(json_response['electricity_returned']), 24)
+        self.assertEqual(len(json_response['avg_electricity']), 24)
+        self.assertEqual(len(json_response['avg_electricity_returned']), 24)
 
         if self.support_gas:
-            self.assertEqual(len(json_response['gas']), 24)
+            self.assertEqual(len(json_response['avg_gas']), 24)
         else:
-            self.assertEqual(len(json_response['gas']), 0)
+            self.assertEqual(len(json_response['avg_gas']), 0)
 
         # Test with missing electricity returned.
         ElectricityConsumption.objects.all().update(currently_returned=0)
@@ -93,7 +95,7 @@ class TestViews(TestCase):
         json_response = json.loads(response.content.decode("utf-8"))
 
         self.assertEqual(response.status_code, 200, response.content)
-        self.assertEqual(len(json_response['electricity_returned']), 0)
+        self.assertEqual(len(json_response['avg_electricity_returned']), 0)
 
     @mock.patch('django.utils.timezone.now')
     def test_trends_xhr_by_tariff(self, now_mock):

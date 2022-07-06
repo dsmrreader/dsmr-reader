@@ -18,9 +18,10 @@ Current version
 
 
 
-v5.4.0 - 2022-xx-xx
+v5.4.0 - 2022-07-xx
 -------------------
 
+- ``Changed`` Pie charts in Trends vervangen door bar/line chart [`#1390 <https://github.com/dsmrreader/dsmr-reader/issues/1390>`_]
 - ``Changed`` Energiecontracten makkelijker kunnen klonen [`#1652 <https://github.com/dsmrreader/dsmr-reader/issues/1652>`_]
 - ``Changed`` Totaalverbruik toevoegen bij "Vergelijk" [`#1527 <https://github.com/dsmrreader/dsmr-reader/issues/1527>`_]
 - ``Changed`` Added comment regarding MinderGas upload mechanism [`#1646 <https://github.com/dsmrreader/dsmr-reader/issues/1646>`_]

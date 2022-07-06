@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-05 22:01+0200\n"
+"POT-Creation-Date: 2022-07-06 21:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1825,25 +1825,20 @@ msgstr "Selecteer startdatum voor berekenen van trends"
 msgid "Select ending day for calculating trends"
 msgstr "Selecteer einddatum voor berekenen van trends"
 
-msgid "Average electricity consumption"
+msgid "Average electricity consumed"
 msgstr "Gemiddeld elektriciteitsverbruik"
-
-#, python-format
-msgid "per hour, in %%"
-msgstr "per uur, in %%"
 
 msgid "Average electricity returned"
 msgstr "Gemiddelde teruglevering elektriciteit"
 
-msgid "Average gas consumption"
+msgid "Average gas consumed"
 msgstr "Gemiddeld gasverbruik"
 
-msgid "Electricity tariff ratio"
-msgstr "Verhouding tarieven elektriciteitsverbruik"
+msgid "Electricity tariff consumed"
+msgstr "Verbruik per elektriciteitstarief"
 
-#, python-format
-msgid "in %%"
-msgstr "in %%"
+msgid "average"
+msgstr "gemiddeld"
 
 msgid "The backend process should automatically restart to apply changes."
 msgstr "Het backend-proces zou automatisch moeten herstarten om de wijzigingen door te voeren."
@@ -2738,6 +2733,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Average m³"
+#~ msgstr "Gemiddelde m³"
+
+#~ msgid "per hour, in %%"
+#~ msgstr "per uur, in %%"
+
+#~ msgid "Electricity tariff ratio"
+#~ msgstr "Verhouding tarieven elektriciteitsverbruik"
+
+#~ msgid "in %%"
+#~ msgstr "in %%"
 
 #~ msgid "Electricity (single tariff)"
 #~ msgstr "Elektriciteit (enkel tarief)"

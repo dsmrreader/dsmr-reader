@@ -4,7 +4,7 @@ function update_trends_tariffs(start_date, end_date) {
     let echarts_options = {
         baseOption: {
             title: {
-                text: TEXT_TITLE_TARIFF_RATIO,
+                text: TEXT_TARIFF_RATIO_HEADER,
                 textStyle: TITLE_TEXTSTYLE_OPTIONS,
                 left: 'center',
             },
@@ -21,8 +21,12 @@ function update_trends_tariffs(start_date, end_date) {
                 {
                     name: '%',
                     type: 'pie',
+                    roseType: 'radius',
                     label: {
                         formatter: '{b}\n{d}%'
+                    },
+                    itemStyle: {
+                        borderRadius: 5
                     },
                     data: null
                 }
@@ -38,7 +42,7 @@ function update_trends_tariffs(start_date, end_date) {
                             label: {
                                 alignTo: 'edge',
                                 position: 'outside',
-                                edgeDistance: '5%'
+                                edgeDistance: '25%'
                             }
                         }
                     ],

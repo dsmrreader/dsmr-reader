@@ -52,35 +52,42 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
             end=form.cleaned_data['end_date'],
         )
         data = {
-            'electricity': [],
-            'electricity_returned': [],
-            'gas': [],
+            'hour_start': [],
+            'avg_electricity': [],
+            'avg_electricity_returned': [],
+            'avg_gas': [],
         }
 
         for current in average_consumption_by_hour:
-            hour_start = '{}:00 - {}:00'.format(int(current['hour_start']), int(current['hour_start']) + 1)
+            hour_start = '{:0>2}:00'.format(
+                int(current['hour_start']),
+            )
+            data['hour_start'].append(hour_start)
 
             avg_electricity = (current['avg_electricity1'] + current['avg_electricity2']) / 2
 
-            data['electricity'].append({
-                'name': hour_start,
-                'value': float(dsmr_consumption.services.round_decimal(avg_electricity, decimal_count=5))
-            })
+            data['avg_electricity'].append(
+                float(dsmr_consumption.services.round_decimal(
+                    avg_electricity, decimal_count=5)
+                )
+            )
 
             if capabilities[Capability.ELECTRICITY_RETURNED]:
                 avg_electricity_returned = (
                     current['avg_electricity1_returned'] + current['avg_electricity2_returned']
                 ) / 2
-                data['electricity_returned'].append({
-                    'name': hour_start,
-                    'value': float(dsmr_consumption.services.round_decimal(avg_electricity_returned, decimal_count=5))
-                })
+                data['avg_electricity_returned'].append(
+                    float(dsmr_consumption.services.round_decimal(
+                        avg_electricity_returned, decimal_count=5
+                    ))
+                )
 
             if capabilities[Capability.GAS]:
-                data['gas'].append({
-                    'name': hour_start,
-                    'value': float(dsmr_consumption.services.round_decimal(current['avg_gas'], decimal_count=5))
-                })
+                data['avg_gas'].append(
+                    float(dsmr_consumption.services.round_decimal(
+                        current['avg_gas'], decimal_count=5)
+                    )
+                )
 
         response = JsonResponse(data)
         patch_response_headers(response)
