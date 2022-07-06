@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-06 21:37+0200\n"
+"POT-Creation-Date: 2022-07-06 22:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1253,9 +1253,6 @@ msgstr "Maanden"
 msgid "Years"
 msgstr "Jaren"
 
-msgid "Pick a day, month or year."
-msgstr "Kies een dag, maand of jaar."
-
 msgid "Loading..."
 msgstr "Bezig met laden..."
 
@@ -1295,14 +1292,11 @@ msgstr "Energiecontracten"
 msgid "Export"
 msgstr "Export"
 
-msgid "Level of detail"
-msgstr "Detailniveau"
+msgid "Compare from"
+msgstr "Vergelijk van"
 
-msgid "Base selection"
-msgstr "Basisselectie"
-
-msgid "Compare with selection"
-msgstr "Te vergelijken selectie"
+msgid "Compare to"
+msgstr "Vergelijk met"
 
 msgid "Search for a topic or setting"
 msgstr "Zoek naar een onderwerp of instelling"
@@ -2733,6 +2727,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Pick a day, month or year."
+#~ msgstr "Kies een dag, maand of jaar."
+
+#~ msgid "Level of detail"
+#~ msgstr "Detailniveau"
+
+#~ msgid "Base selection"
+#~ msgstr "Basisselectie"
+
+#~ msgid "Compare with selection"
+#~ msgstr "Te vergelijken selectie"
 
 #~ msgid "Average m³"
 #~ msgstr "Gemiddelde m³"
