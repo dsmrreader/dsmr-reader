@@ -104,10 +104,10 @@ Execute the following::
 
     # Credits to Jeroen Peters @ issue #624
     sudo apt-get install python3-dev libffi-dev libssl-dev -y
-    wget https://www.python.org/ftp/python/3.9.9/Python-3.9.9.tar.xz
-    tar xJf Python-3.9.9.tar.xz
-    cd Python-3.9.9
-    ./configure
+    wget https://www.python.org/ftp/python/3.9.13/Python-3.9.13.tar.xz
+    tar xJf Python-3.9.13.tar.xz
+    cd Python-3.9.13
+    ./configure --enable-optimizations --with-lto
     make
     sudo make install
     sudo pip3 install --upgrade pip
