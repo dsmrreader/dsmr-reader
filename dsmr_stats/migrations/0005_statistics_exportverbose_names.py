@@ -24,32 +24,32 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='daystatistics',
             name='electricity1',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 (low tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 (Dutch users: low tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='daystatistics',
             name='electricity1_cost',
-            field=models.DecimalField(decimal_places=2, verbose_name='Electricity 1 price (low tariff)', max_digits=8),
+            field=models.DecimalField(decimal_places=2, verbose_name='Electricity 1 price (Dutch users: low tariff)', max_digits=8),
         ),
         migrations.AlterField(
             model_name='daystatistics',
             name='electricity1_returned',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 returned (low tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 returned (Dutch users: low tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='daystatistics',
             name='electricity2',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 (high tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 (Dutch users: normal tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='daystatistics',
             name='electricity2_cost',
-            field=models.DecimalField(decimal_places=2, verbose_name='Electricity 2 price (high tariff)', max_digits=8),
+            field=models.DecimalField(decimal_places=2, verbose_name='Electricity 2 price (Dutch users: normal tariff)', max_digits=8),
         ),
         migrations.AlterField(
             model_name='daystatistics',
             name='electricity2_returned',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 returned (high tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 returned (Dutch users: normal tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='daystatistics',
@@ -69,22 +69,22 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='hourstatistics',
             name='electricity1',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 (low tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 (Dutch users: low tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='hourstatistics',
             name='electricity1_returned',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 returned (low tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 1 returned (Dutch users: low tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='hourstatistics',
             name='electricity2',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 (high tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 (Dutch users: normal tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='hourstatistics',
             name='electricity2_returned',
-            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 returned (high tariff)', max_digits=9),
+            field=models.DecimalField(decimal_places=3, verbose_name='Electricity 2 returned (Dutch users: normal tariff)', max_digits=9),
         ),
         migrations.AlterField(
             model_name='hourstatistics',

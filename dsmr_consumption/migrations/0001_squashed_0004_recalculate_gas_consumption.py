@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('read_at', models.DateTimeField(unique=True)),
-                ('delivered_1', models.DecimalField(help_text='Meter Reading electricity delivered to client (low tariff) in 0,001 kWh', max_digits=9, decimal_places=3)),
-                ('returned_1', models.DecimalField(help_text='Meter Reading electricity delivered by client (low tariff) in 0,001 kWh', max_digits=9, decimal_places=3)),
+                ('delivered_1', models.DecimalField(help_text='Meter Reading electricity delivered to client (Dutch users: low tariff) in 0,001 kWh', max_digits=9, decimal_places=3)),
+                ('returned_1', models.DecimalField(help_text='Meter Reading electricity delivered by client (Dutch users: low tariff) in 0,001 kWh', max_digits=9, decimal_places=3)),
                 ('delivered_2', models.DecimalField(help_text='Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh', max_digits=9, decimal_places=3)),
                 ('returned_2', models.DecimalField(help_text='Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh', max_digits=9, decimal_places=3)),
                 ('currently_delivered', models.DecimalField(help_text='Actual electricity power delivered (+P) in 1 Watt resolution', max_digits=9, decimal_places=3)),

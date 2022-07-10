@@ -13,21 +13,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='frontendsettings',
             name='tariff_1_delivered_name',
-            field=models.CharField(default='Laagtarief', help_text="Defaults to 'low tariff' delivered", max_length=30, verbose_name='Name of tariff 1 (delivered)'),
+            field=models.CharField(default='Laagtarief', help_text="Dutch users: Defaults to 'low tariff' delivered", max_length=30, verbose_name='Name of tariff 1 (delivered)'),
         ),
         migrations.AddField(
             model_name='frontendsettings',
             name='tariff_1_returned_name',
-            field=models.CharField(default='Laagtarief teruglevering', help_text="Defaults to 'low tariff' returned", max_length=30, verbose_name='Name of tariff 1 (returned)'),
+            field=models.CharField(default='Laagtarief teruglevering', help_text="Dutch users: Defaults to 'low tariff' returned", max_length=30, verbose_name='Name of tariff 1 (returned)'),
         ),
         migrations.AddField(
             model_name='frontendsettings',
             name='tariff_2_delivered_name',
-            field=models.CharField(default='Hoogtarief', help_text="Defaults to 'normal tariff' or 'high tariff' delivered", max_length=30, verbose_name='Name of tariff 2 (delivered)'),
+            field=models.CharField(default='Hoogtarief', help_text="Dutch users: Defaults to 'normal tariff' delivered", max_length=30, verbose_name='Name of tariff 2 (delivered)'),
         ),
         migrations.AddField(
             model_name='frontendsettings',
             name='tariff_2_returned_name',
-            field=models.CharField(default='Hoogtarief teruglevering', help_text="Defaults to 'normal tariff' or 'high tariff' returned", max_length=30, verbose_name='Name of tariff 2 (returned)'),
+            field=models.CharField(default='Hoogtarief teruglevering', help_text="Dutch users: Defaults to 'normal tariff' returned", max_length=30, verbose_name='Name of tariff 2 (returned)'),
         ),
     ]

@@ -12,12 +12,12 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
     delivered_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter Reading electricity delivered to client (low tariff) in 0,001 kWh")
+        help_text=_("Meter Reading electricity delivered to client (Dutch users: low tariff) in 0,001 kWh")
     )
     returned_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter Reading electricity delivered by client (low tariff) in 0,001 kWh")
+        help_text=_("Meter Reading electricity delivered by client (Dutch users: low tariff) in 0,001 kWh")
     )
     delivered_2 = models.DecimalField(
         max_digits=9,

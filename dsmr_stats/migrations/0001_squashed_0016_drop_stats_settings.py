@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('timestamp', models.DateTimeField()),
-                ('electricity_delivered_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered to client (low tariff) in 0,001 kWh', max_digits=9)),
-                ('electricity_returned_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered by client (low tariff) in 0,001 kWh', max_digits=9)),
+                ('electricity_delivered_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered to client (Dutch users: low tariff) in 0,001 kWh', max_digits=9)),
+                ('electricity_returned_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered by client (Dutch users: low tariff) in 0,001 kWh', max_digits=9)),
                 ('electricity_delivered_2', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh', max_digits=9)),
                 ('electricity_returned_2', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh', max_digits=9)),
                 ('electricity_tariff', models.IntegerField(help_text='Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff.')),
@@ -43,8 +43,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('read_at', models.DateTimeField(unique=True)),
-                ('delivered_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered to client (low tariff) in 0,001 kWh', max_digits=9)),
-                ('returned_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered by client (low tariff) in 0,001 kWh', max_digits=9)),
+                ('delivered_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered to client (Dutch users: low tariff) in 0,001 kWh', max_digits=9)),
+                ('returned_1', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered by client (Dutch users: low tariff) in 0,001 kWh', max_digits=9)),
                 ('delivered_2', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh', max_digits=9)),
                 ('returned_2', models.DecimalField(decimal_places=3, help_text='Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh', max_digits=9)),
                 ('tariff', models.IntegerField(help_text='Tariff indicator electricity. The tariff indicator can be used to switch tariff dependent loads e.g boilers. This is responsibility of the P1 user. Note: Tariff code 1 is used for low tariff and tariff code 2 is used for normal tariff.')),

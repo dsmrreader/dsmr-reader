@@ -114,16 +114,16 @@ class HourStatistics(ModelUpdateMixin, models.Model):
     hour_start = models.DateTimeField(unique=True, db_index=True, verbose_name=_('Hour start'))
 
     electricity1 = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 (low tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 (Dutch users: low tariff)')
     )
     electricity2 = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 2 (high tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity 2 (Dutch users: normal tariff)')
     )
     electricity1_returned = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 returned (low tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity 1 returned (Dutch users: low tariff)')
     )
     electricity2_returned = models.DecimalField(
-        max_digits=9, decimal_places=3, verbose_name=_('Electricity 2 returned (high tariff)')
+        max_digits=9, decimal_places=3, verbose_name=_('Electricity 2 returned (Dutch users: normal tariff)')
     )
 
     # Gas readings are optional/not guaranteed. But need to be zero due to averages.

@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dsmrreading',
             name='electricity_delivered_1',
-            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity delivered (low tariff) in kWh', max_digits=9),
+            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity delivered (Dutch users: low tariff) in kWh', max_digits=9),
         ),
         migrations.AlterField(
             model_name='dsmrreading',
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dsmrreading',
             name='electricity_returned_1',
-            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity returned (low tariff) in kWh', max_digits=9),
+            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity returned (Dutch users: low tariff) in kWh', max_digits=9),
         ),
         migrations.AlterField(
             model_name='dsmrreading',

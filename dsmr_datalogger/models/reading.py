@@ -32,12 +32,12 @@ class DsmrReading(ModelUpdateMixin, models.Model):
     electricity_delivered_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter position stating electricity delivered (low tariff) in kWh")
+        help_text=_("Meter position stating electricity delivered (Dutch users: low tariff) in kWh")
     )
     electricity_returned_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_("Meter position stating electricity returned (low tariff) in kWh")
+        help_text=_("Meter position stating electricity returned (Dutch users: low tariff) in kWh")
     )
     electricity_delivered_2 = models.DecimalField(
         max_digits=9,

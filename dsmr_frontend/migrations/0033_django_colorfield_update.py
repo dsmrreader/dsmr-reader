@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='frontendsettings',
             name='electricity_delivered_alternate_color',
-            field=colorfield.fields.ColorField(default='#7D311A', help_text='Graph color for electricity delivered (low tariff)', max_length=18, verbose_name='Electricity delivered color (alternative)'),
+            field=colorfield.fields.ColorField(default='#7D311A', help_text='Graph color for electricity delivered (Dutch users: low tariff)', max_length=18, verbose_name='Electricity delivered color (alternative)'),
         ),
         migrations.AlterField(
             model_name='frontendsettings',
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='frontendsettings',
             name='electricity_returned_alternate_color',
-            field=colorfield.fields.ColorField(default='#C8C864', help_text='Graph color for electricity returned (low tariff)', max_length=18, verbose_name='Electricity returned color (alternative)'),
+            field=colorfield.fields.ColorField(default='#C8C864', help_text='Graph color for electricity returned (Dutch users: low tariff)', max_length=18, verbose_name='Electricity returned color (alternative)'),
         ),
         migrations.AlterField(
             model_name='frontendsettings',

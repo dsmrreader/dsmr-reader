@@ -25,12 +25,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='energysupplierprice',
             name='electricity_returned_1_price',
-            field=models.DecimalField(decimal_places=5, default=0, help_text='Set to zero when unused', max_digits=11, verbose_name='Electricity returned 1 price (low tariff)'),
+            field=models.DecimalField(decimal_places=5, default=0, help_text='Set to zero when unused', max_digits=11, verbose_name='Electricity returned 1 price (Dutch users: low tariff)'),
         ),
         migrations.AddField(
             model_name='energysupplierprice',
             name='electricity_returned_2_price',
-            field=models.DecimalField(decimal_places=5, default=0, help_text='Set to zero when unused', max_digits=11, verbose_name='Electricity returned 2 price (high tariff)'),
+            field=models.DecimalField(decimal_places=5, default=0, help_text='Set to zero when unused', max_digits=11, verbose_name='Electricity returned 2 price (Dutch users: normal tariff)'),
         ),
         migrations.AlterField(
             model_name='energysupplierprice',
