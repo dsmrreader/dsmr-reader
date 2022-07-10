@@ -133,25 +133,25 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
     )
     tariff_1_delivered_name = models.CharField(
         max_length=30,
-        default='Laagtarief',
+        default='Daltarief',
         verbose_name=_('Name of tariff 1 (delivered)'),
         help_text=_("Dutch users: Defaults to 'low tariff' delivered")
     )
     tariff_2_delivered_name = models.CharField(
         max_length=30,
-        default='Hoogtarief',
+        default='Normaaltarief',
         verbose_name=_('Name of tariff 2 (delivered)'),
         help_text=_("Dutch users: Defaults to 'normal tariff' delivered")
     )
     tariff_1_returned_name = models.CharField(
         max_length=30,
-        default='Laagtarief teruglevering',
+        default='Daltarief teruglevering',
         verbose_name=_('Name of tariff 1 (returned)'),
         help_text=_("Dutch users: Defaults to 'low tariff' returned")
     )
     tariff_2_returned_name = models.CharField(
         max_length=30,
-        default='Hoogtarief teruglevering',
+        default='Normaaltarief teruglevering',
         verbose_name=_('Name of tariff 2 (returned)'),
         help_text=_("Dutch users: Defaults to 'normal tariff' returned")
     )

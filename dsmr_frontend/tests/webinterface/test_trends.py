@@ -108,13 +108,13 @@ class TestViews(TestCase):
         json_response = json.loads(response.content.decode("utf-8"))
 
         if not self.support_data:
-            self.assertIn({'value': 0, 'name': 'Laagtarief'}, json_response['data'])
-            self.assertIn({'value': 0, 'name': 'Hoogtarief'}, json_response['data'])
+            self.assertIn({'value': 0, 'name': 'Daltarief'}, json_response['data'])
+            self.assertIn({'value': 0, 'name': 'Normaaltarief'}, json_response['data'])
             return
 
         self.assertIn('data', json_response)
-        self.assertIn({'value': 84, 'name': 'Laagtarief'}, json_response['data'])
-        self.assertIn({'value': 16, 'name': 'Hoogtarief'}, json_response['data'])
+        self.assertIn({'value': 84, 'name': 'Daltarief'}, json_response['data'])
+        self.assertIn({'value': 16, 'name': 'Normaaltarief'}, json_response['data'])
 
         # Test with no stats available (yet).
         DayStatistics.objects.all().delete()
