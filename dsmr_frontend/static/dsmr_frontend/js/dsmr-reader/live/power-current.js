@@ -87,19 +87,19 @@ $(document).ready(function () {
                 {
                     name: 'L1',
                     type: 'bar',
-                    stack: true,
+                    stack: STACK_ELECTRICITY_GRAPHS,
                     data: null
                 },
                 {
                     name: 'L2',
                     type: 'bar',
-                    stack: true,
+                    stack: STACK_ELECTRICITY_GRAPHS,
                     data: null
                 },
                 {
                     name: 'L3',
                     type: 'bar',
-                    stack: true,
+                    stack: STACK_ELECTRICITY_GRAPHS,
                     data: null
                 },
             ];

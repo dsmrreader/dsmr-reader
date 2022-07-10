@@ -115,7 +115,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                stack: 'delivered',
+                stack: STACK_ELECTRICITY_GRAPHS ? 'delivered' : false,
                 data: []
             },
             {
@@ -124,7 +124,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                stack: 'delivered',
+                stack: STACK_ELECTRICITY_GRAPHS ? 'delivered' : false,
                 data: []
             },
             {
@@ -133,7 +133,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                stack: 'delivered',
+                stack: STACK_ELECTRICITY_GRAPHS ? 'delivered' : false,
                 data: []
             },
             {
@@ -143,7 +143,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                stack: 'returned',
+                stack: STACK_ELECTRICITY_GRAPHS ? 'returned' : false,
                 data: []
             },
             {
@@ -153,7 +153,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                stack: 'returned',
+                stack: STACK_ELECTRICITY_GRAPHS ? 'returned' : false,
                 data: []
             },
             {
@@ -163,7 +163,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
-                stack: 'returned',
+                stack: STACK_ELECTRICITY_GRAPHS ? 'returned' : false,
                 data: []
             }
         ]

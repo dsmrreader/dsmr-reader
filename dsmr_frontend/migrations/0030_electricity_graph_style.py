@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='frontendsettings',
             name='electricity_graph_style',
-            field=models.CharField(choices=[('bar', 'Bar'), ('line', 'Line')], default='bar', help_text='Archive graphs only: Use the bar style to change visualisation', max_length=4, verbose_name='Electricity graph style'),
+            field=models.CharField(choices=[('bar', 'Bar'), ('line', 'Line')], default='bar', help_text='Use the bar style to change visualisation', max_length=4, verbose_name='Electricity graph style'),
         ),
         migrations.AddField(
             model_name='frontendsettings',
             name='stack_electricity_graphs',
-            field=models.BooleanField(default=True, help_text='Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better', verbose_name='Stack electricity graphs'),
+            field=models.BooleanField(default=True, help_text='Stacking, in combination with the bar graph style, distinguishes tariffs better', verbose_name='Stack electricity graphs'),
         ),
     ]

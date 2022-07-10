@@ -122,13 +122,13 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         choices=GRAPH_STYLES,
         default=GRAPH_STYLE_BAR,
         verbose_name=_('Electricity graph style'),
-        help_text=_("Archive graphs only: Use the bar style to change visualisation")
+        help_text=_("Use the bar style to change visualisation")
     )
     stack_electricity_graphs = models.BooleanField(
         default=True,
         verbose_name=_('Stack electricity graphs'),
         help_text=_(
-            "Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better"
+            "Stacking, in combination with the bar graph style, distinguishes tariffs better"
         )
     )
     tariff_1_delivered_name = models.CharField(

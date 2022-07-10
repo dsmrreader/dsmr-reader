@@ -195,6 +195,7 @@
 
 {% if capabilities.electricity %}
     <script type="text/javascript">
+        const STACK_ELECTRICITY_GRAPHS = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
         const ELECTRICITY_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
 
         {% if capabilities.electricity_returned %}

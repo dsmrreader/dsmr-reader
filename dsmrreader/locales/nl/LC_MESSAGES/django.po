@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 20:35+0200\n"
+"POT-Creation-Date: 2022-07-10 21:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1106,14 +1106,14 @@ msgstr "Je kunt lege waardes beter onderscheiden wanneer je staafgrafieken gebru
 msgid "Electricity graph style"
 msgstr "Stijl van elektriciteitsgrafieken"
 
-msgid "Archive graphs only: Use the bar style to change visualisation"
+msgid "Use the bar style to change visualisation"
 msgstr "Alleen Archief-grafieken: Gebruik staafgrafieken om de weergave te veranderen"
 
 msgid "Stack electricity graphs"
 msgstr "Stapel elektriciteitsgrafieken"
 
-msgid "Archive graphs only: Stacking, in combination with the bar graph style, distinguishes tariffs better"
-msgstr "Alleen Archief-grafieken: Stapelen van grafieken, gecombineerd met staafgrafieken, onderscheiden de tarieven beter"
+msgid "Stacking, in combination with the bar graph style, distinguishes tariffs better"
+msgstr "Stapelen van grafieken, gecombineerd met staafgrafieken, onderscheiden de tarieven beter"
 
 msgid "Name of tariff 1 (delivered)"
 msgstr "Naam van tarief 1 (verbruik)"
