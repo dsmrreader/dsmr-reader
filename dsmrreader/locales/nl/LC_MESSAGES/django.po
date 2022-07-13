@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 21:21+0200\n"
+"POT-Creation-Date: 2022-07-13 21:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1687,14 +1687,17 @@ msgstr "Uitleg grafiekgebruik"
 msgid "Additionally, when using a DSMR v5 smart meter"
 msgstr "Daarnaast, indien je een DSMR v5 slimme meter gebruikt"
 
-msgid "Recent electricity usage"
-msgstr "Recent elektriciteitsvermogen"
+msgid "Recent electricity"
+msgstr "Recent elektriciteit"
 
-msgid "in Watt"
-msgstr "in Watt"
+msgid "Wattage & kWh difference"
+msgstr "Wattage & kWh-verschil"
 
 msgid "Recent phases usage"
 msgstr "Recent (fase)vermogen"
+
+msgid "in Watt"
+msgstr "in Watt"
 
 msgid "Recent phase voltages"
 msgstr "Recente (fase)spanning"
@@ -1719,6 +1722,18 @@ msgstr "Recente temperaturen"
 
 msgid "in °C"
 msgstr "in °C"
+
+msgid "Current Watt delivered"
+msgstr "Huidig Wattage geleverd"
+
+msgid "Current Watt returned"
+msgstr "Huidig Wattage teruggeleverd"
+
+msgid "Total kWh consumed (difference)"
+msgstr "Totaal kWh verbruikt (verschil)"
+
+msgid "Total kWh returned (difference)"
+msgstr "Totaal kWh teruggeleverd (verschil)"
 
 msgid "Notifications"
 msgstr "Notificaties"
@@ -2727,6 +2742,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "usage & cumulative"
+#~ msgstr "gebruik & cumulatief"
 
 #~ msgid "Pick a day, month or year."
 #~ msgstr "Kies een dag, maand of jaar."

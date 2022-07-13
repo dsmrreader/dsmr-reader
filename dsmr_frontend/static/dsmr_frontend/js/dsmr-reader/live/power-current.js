@@ -15,6 +15,10 @@ $(document).ready(function () {
         tooltip: TOOLTIP_OPTIONS,
         calculable: true,
         grid: GRID_OPTIONS,
+        legend: {
+            top: '85%',
+            data: ['L1', 'L2', 'L3']
+        },
         xAxis: [
             {
                 type: 'category',
@@ -29,7 +33,8 @@ $(document).ready(function () {
             {
                 type: 'value',
                 axisLabel: {
-                    color: TEXTSTYLE_COLOR
+                    color: TEXTSTYLE_COLOR,
+                    formatter: '{value} A'
                 }
             }
         ],
@@ -51,13 +56,15 @@ $(document).ready(function () {
         media: [
             {
               option: {
-                    toolbox: TOOLBOX_OPTIONS
+                    toolbox: TOOLBOX_OPTIONS,
+                    legend: {show: true}
                 },
             },
             {
                 query: { maxWidth: 500},
                 option: {
-                    toolbox: {show: false}
+                    toolbox: {show: false},
+                    legend: {show: false}
                 }
             }
         ]

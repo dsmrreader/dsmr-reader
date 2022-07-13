@@ -28,6 +28,7 @@ class TestViews(TestCase):
     support_gas = True
 
     def setUp(self):
+        self.maxDiff = None
         self.client = Client()
 
     @mock.patch('django.utils.timezone.now')
@@ -51,10 +52,10 @@ class TestViews(TestCase):
         if self.support_data:
             ElectricityConsumption.objects.create(
                 read_at=timezone.now(),
-                delivered_1=0,
-                returned_1=0,
-                delivered_2=0,
-                returned_2=0,
+                delivered_1=5,
+                returned_1=5,
+                delivered_2=10,
+                returned_2=10,
                 currently_delivered=1.5,
                 currently_returned=0.1,
                 phase_currently_delivered_l1=0.5,
@@ -70,10 +71,10 @@ class TestViews(TestCase):
             )
             ElectricityConsumption.objects.create(
                 read_at=timezone.now() - timezone.timedelta(hours=1),
-                delivered_1=0,
-                returned_1=0,
-                delivered_2=0,
-                returned_2=0,
+                delivered_1=10.5,
+                returned_1=10.5,
+                delivered_2=11,
+                returned_2=11,
                 currently_delivered=2.5,
                 currently_returned=0.2,
                 phase_currently_delivered_l1=0.75,
@@ -90,7 +91,11 @@ class TestViews(TestCase):
 
         response = self.client.get(
             reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            dict(delivered=True, returned=True, phases=True, power_current=True)
+            dict(
+                delivered=True, returned=True,
+                total_delivered=True, total_returned=True,
+                phases=True, power_current=True
+            )
         )
 
         if not self.support_data:
@@ -105,17 +110,19 @@ class TestViews(TestCase):
             {
                 'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
                 'read_at': ['Sat 23:00', 'Sun 0:00'],
-                'currently_delivered': [2500.0, 1500.0],
-                'currently_returned': [200.0, 100.0],
+                'currently_delivered': [2500, 1500],
+                'currently_returned': [200, 100],
+                'total_delivered': ['21.000', '10.000'],
+                'total_returned': ['21.500', '15.000'],
                 'phases_delivered': {
-                    'l1': [750.0, 500.0],
-                    'l2': [500.0, 250.0],
-                    'l3': [1250.0, 750.0],
+                    'l1': [750, 500],
+                    'l2': [500, 250],
+                    'l3': [1250, 750],
                 },
                 'phases_returned': {
-                    'l1': [3500.0, 2500.0],
-                    'l2': [3250.0, 2250.0],
-                    'l3': [3750.0, 2750.0],
+                    'l1': [3500, 2500],
+                    'l2': [3250, 2250],
+                    'l3': [3750, 2750],
                 },
                 'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
                 'phase_power_current': {'l1': [11, 1], 'l2': [22, 2], 'l3': [33, 3]},
@@ -133,6 +140,8 @@ class TestViews(TestCase):
         self.assertNotEqual(json_content['read_at'], [])
         self.assertNotEqual(json_content['currently_delivered'], [])
         self.assertNotEqual(json_content['currently_returned'], [])
+        self.assertEqual(json_content['total_delivered'], [])
+        self.assertEqual(json_content['total_returned'], [])
         self.assertEqual(json_content['phases_delivered']['l1'], [])
         self.assertEqual(json_content['phases_delivered']['l2'], [])
         self.assertEqual(json_content['phases_delivered']['l3'], [])
@@ -150,6 +159,8 @@ class TestViews(TestCase):
         self.assertNotEqual(json_content['read_at'], [])
         self.assertNotEqual(json_content['currently_delivered'], [])
         self.assertEqual(json_content['currently_returned'], [])
+        self.assertEqual(json_content['total_delivered'], [])
+        self.assertEqual(json_content['total_returned'], [])
         self.assertNotEqual(json_content['phases_delivered']['l1'], [])
         self.assertNotEqual(json_content['phases_delivered']['l2'], [])
         self.assertNotEqual(json_content['phases_delivered']['l3'], [])
@@ -165,6 +176,8 @@ class TestViews(TestCase):
         self.assertNotEqual(json_content['read_at'], [])
         self.assertEqual(json_content['currently_delivered'], [])
         self.assertEqual(json_content['currently_returned'], [])
+        self.assertEqual(json_content['total_delivered'], [])
+        self.assertEqual(json_content['total_returned'], [])
         self.assertEqual(json_content['phases_delivered']['l1'], [])
         self.assertEqual(json_content['phases_delivered']['l2'], [])
         self.assertEqual(json_content['phases_delivered']['l3'], [])
@@ -196,6 +209,8 @@ class TestViews(TestCase):
                 'read_at': ['Sat 23:00'],
                 'currently_delivered': [2500.0],
                 'currently_returned': [200.0],
+                'total_delivered': [],
+                'total_returned': [],
                 'phases_delivered': {
                     'l1': [750.0],
                     'l2': [500.0],
@@ -225,6 +240,8 @@ class TestViews(TestCase):
                 'read_at': ['Sat 23:00'],
                 'currently_delivered': [],
                 'currently_returned': [],
+                'total_delivered': [],
+                'total_returned': [],
                 'phases_delivered': {
                     'l1': [],
                     'l2': [],
@@ -254,6 +271,8 @@ class TestViews(TestCase):
                 'read_at': ['Sat 23:00'],
                 'currently_delivered': [],
                 'currently_returned': [],
+                'total_delivered': [],
+                'total_returned': [],
                 'phases_delivered': {
                     'l1': [],
                     'l2': [],

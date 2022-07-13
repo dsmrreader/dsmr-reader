@@ -32,7 +32,8 @@ $(document).ready(function () {
                 {
                     type: 'value',
                     axisLabel: {
-                        color: TEXTSTYLE_COLOR
+                        color: TEXTSTYLE_COLOR,
+                        formatter: '{value} °C'
                     }
                 }
             ],

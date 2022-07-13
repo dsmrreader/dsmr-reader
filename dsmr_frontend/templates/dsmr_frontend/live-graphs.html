@@ -142,14 +142,19 @@
         const CAPABILITY_ELECTRICITY_RETURNED = {{ capabilities.electricity_returned|yesno:'true,false' }};
         {% endlocalize %}
 
-        const TEXT_DELIVERED = '{% translate "Delivered" %}';
-        const TEXT_RETURNED = '{% translate "Returned" %}';
-        const TEXT_ELECTRICITY_HEADER = '{% translate "Recent electricity usage" %} {S|{% translate "in Watt" %}}';
+        const TEXT_ELECTRICITY_HEADER = '{% translate "Recent electricity" %} {S|{% translate "Wattage & kWh difference" %}}';
         const TEXT_PHASES_HEADER = '{% translate "Recent phases usage" %} {S|{% translate "in Watt" %}}';
         const TEXT_VOLTAGE_HEADER = '{% translate "Recent phase voltages" %} {S|{% translate "in Volt" %}}';
         const TEXT_POWER_CURRENT_HEADER = '{% translate "Recent phase currents" %} {S|{% translate "in Ampere" %}}';
         const TEXT_GAS_HEADER = '{% translate "Recent gas consumption" %} {S|{% translate "in m³" %}}';
         const TEXT_TEMPERATURE_HEADER = '{% translate "Recent temperatures" %} {S|{% translate "in °C" %}}';
+
+        const TEXT_DELIVERED = '{% translate "Current Watt delivered" %}';
+        const TEXT_RETURNED = '{% translate "Current Watt returned" %}';
+        const TEXT_TOTAL_DELIVERED = '{% translate "Total kWh consumed (difference)" %}';
+        const TEXT_TOTAL_RETURNED = '{% translate "Total kWh returned (difference)" %}';
+        const TEXT_WATT = '{% translate "Watt" %}';
+        const TEXT_KWH = '{% translate "kWh" %}';
 
         const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
 
@@ -178,7 +183,7 @@
         const TOOLTIP_OPTIONS = {
             trigger: 'axis',
             axisPointer: {
-                type: 'shadow',
+                type: 'cross',
                 label: {
                     show: true
                 }
@@ -186,8 +191,9 @@
         };
         const GRID_OPTIONS = {
             top: '12%',
-            left: '1%',
+            left: '2%',
             right: '2%',
+            bottom: '20%',
             containLabel: true
         };
     </script>
@@ -199,13 +205,15 @@
         const ELECTRICITY_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
 
         {% if capabilities.electricity_returned %}
-        const ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True&returned=True";
+        const ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True&returned=True&total_delivered=True&total_returned=True";
         {% else %}
-        const ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True";
+        const ELECTRICITY_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?delivered=True&total_delivered=True";
         {% endif %}
-        
+
         const ELECTRICITY_DELIVERED_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
         const ELECTRICITY_RETURNED_COLOR = "{{ frontend_settings.electricity_returned_color }}";
+        const ELECTRICITY_DELIVERED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_delivered_alternate_color }}";
+        const ELECTRICITY_RETURNED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_returned_alternate_color }}";
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}

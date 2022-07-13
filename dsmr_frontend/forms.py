@@ -27,6 +27,8 @@ class ExportAsCsvForm(forms.Form):
 class DashboardElectricityConsumptionForm(forms.Form):
     delivered = forms.BooleanField(required=False, initial=False)
     returned = forms.BooleanField(required=False, initial=False)
+    total_delivered = forms.BooleanField(required=False, initial=False)
+    total_returned = forms.BooleanField(required=False, initial=False)
     phases = forms.BooleanField(required=False, initial=False)
     voltage = forms.BooleanField(required=False, initial=False)
     power_current = forms.BooleanField(required=False, initial=False)
@@ -49,6 +51,12 @@ class DashboardElectricityConsumptionForm(forms.Form):
 
     def clean_returned(self):
         return self._clean_type('returned', 'electricity_returned')
+
+    def clean_total_delivered(self):
+        return self._clean_type('total_delivered', 'electricity')
+
+    def clean_total_returned(self):
+        return self._clean_type('total_returned', 'electricity_returned')
 
     def clean_phases(self):
         return self._clean_type('phases', 'multi_phases')

@@ -48,14 +48,16 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
         data = {
             'latest_delta_id': 0,
             'read_at': [],
-            'currently_delivered': [],
-            'currently_returned': [],
-            'phases_delivered': {
+            'currently_delivered': [],  # Watt
+            'currently_returned': [],  # Watt
+            'total_delivered': [],  # kWh
+            'total_returned': [],  # kWh
+            'phases_delivered': {  # Watt
                 'l1': [],
                 'l2': [],
                 'l3': [],
             },
-            'phases_returned': {
+            'phases_returned': {  # Watt
                 'l1': [],
                 'l2': [],
                 'l3': [],
@@ -65,7 +67,7 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
                 'l2': [],
                 'l3': [],
             },
-            'phase_power_current': {
+            'phase_power_current': {  # Amps
                 'l1': [],
                 'l2': [],
                 'l3': [],
@@ -94,6 +96,12 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
 
             if form.cleaned_data.get('returned'):
                 data['currently_returned'].append(self._convert_to_watt(current.currently_returned))
+
+            if form.cleaned_data.get('total_delivered'):
+                data['total_delivered'].append(current.delivered_1 + current.delivered_1)
+
+            if form.cleaned_data.get('total_returned'):
+                data['total_returned'].append(current.returned_1 + current.returned_2)
 
             if form.cleaned_data.get('phases'):
                 # 'or 0' is required due to empty data.

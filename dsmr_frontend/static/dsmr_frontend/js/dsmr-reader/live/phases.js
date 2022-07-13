@@ -1,26 +1,6 @@
 $(document).ready(function () {
     echarts_phases_graph = echarts.init(document.getElementById('echarts-phases-graph'));
 
-    let x_axis = [
-        {
-            type: 'category',
-            boundaryGap: false,
-            data: [],
-            axisLabel: {
-                color: TEXTSTYLE_COLOR
-            }
-        },
-        {
-            // We need this axis for rendering the return graph but hide it, since it's redundant.
-            show: false,
-            gridIndex: 1,
-            boundaryGap: false,
-            data: [],
-            axisLabel: {
-                color: TEXTSTYLE_COLOR
-            }
-        }
-    ];
     let echarts_phases_initial_options = {
         color: [
             PHASE_DELIVERED_L1_COLOR,
@@ -37,33 +17,37 @@ $(document).ready(function () {
         },
         tooltip: TOOLTIP_OPTIONS,
         calculable: true,
-        grid: [{
-            left: 50,
-            right: 50,
-            height: '35%'
-        }, {
-            left: 50,
-            right: 50,
-            height: '35%',
-            top: '50%'
-        }],
+        grid: GRID_OPTIONS,
         axisPointer: {
             link: {xAxisIndex: 'all'}
         },
-        xAxis: x_axis,
+        legend: {
+            top: '85%',
+            data: ['L1+', 'L2+', 'L3+', 'L1-', 'L2-', 'L3-']
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: [],
+                axisLabel: {
+                    color: TEXTSTYLE_COLOR
+                }
+            }
+        ],
         yAxis: [
             {
                 type: 'value',
                 axisLabel: {
-                    color: TEXTSTYLE_COLOR
-                }
+                    color: TEXTSTYLE_COLOR,
+                    formatter: '{value} W'
+               }
             },
             {
-                gridIndex: 1,
                 type: 'value',
-                inverse: true,
                 axisLabel: {
-                    color: TEXTSTYLE_COLOR
+                    color: TEXTSTYLE_COLOR,
+                    formatter: '{value} W'
                 }
             }
         ],
@@ -88,6 +72,7 @@ $(document).ready(function () {
             {
               option: {
                     toolbox: TOOLBOX_OPTIONS,
+                    legend: {show: true},
                     grid: [{}, {
                         top: '50%'
                     }],
@@ -97,6 +82,7 @@ $(document).ready(function () {
                 query: { maxWidth: 768},
                 option: {
                     toolbox: {show: false},
+                    legend: {show: false},
                     grid: [{}, {
                         top: '55%'
                     }],
@@ -107,10 +93,15 @@ $(document).ready(function () {
 
     /* These settings should not affect the updates and reset the zoom on each update. */
     let echarts_phases_update_options = {
-        xAxis: x_axis,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: null
+            }
+        ],
         series: [
             {
-                yAxisIndex: 0,
                 name: 'L1+',
                 type: 'line',
                 smooth: true,
@@ -119,7 +110,6 @@ $(document).ready(function () {
                 data: []
             },
             {
-                yAxisIndex: 0,
                 name: 'L2+',
                 type: 'line',
                 smooth: true,
@@ -128,7 +118,6 @@ $(document).ready(function () {
                 data: []
             },
             {
-                yAxisIndex: 0,
                 name: 'L3+',
                 type: 'line',
                 smooth: true,
@@ -137,8 +126,6 @@ $(document).ready(function () {
                 data: []
             },
             {
-                xAxisIndex: 1,
-                yAxisIndex: 1,
                 name: 'L1-',
                 type: 'line',
                 smooth: true,
@@ -147,8 +134,6 @@ $(document).ready(function () {
                 data: []
             },
             {
-                xAxisIndex: 1,
-                yAxisIndex: 1,
                 name: 'L2-',
                 type: 'line',
                 smooth: true,
@@ -157,8 +142,6 @@ $(document).ready(function () {
                 data: []
             },
             {
-                xAxisIndex: 1,
-                yAxisIndex: 1,
                 name: 'L3-',
                 type: 'line',
                 smooth: true,
@@ -173,15 +156,6 @@ $(document).ready(function () {
 
     $.get(PHASES_GRAPH_URL, function (xhr_data) {
         if (! CAPABILITY_ELECTRICITY_RETURNED) {
-            delete echarts_phases_initial_options.xAxis[1];
-            delete echarts_phases_initial_options.yAxis[1];
-            delete echarts_phases_initial_options.dataZoom[0].xAxisIndex;
-            delete echarts_phases_initial_options.dataZoom[1].xAxisIndex;
-            delete echarts_phases_initial_options.grid[0].height;
-            delete echarts_phases_initial_options.grid[1];
-            echarts_phases_initial_options.grid[0].top = '12%';
-
-            delete echarts_phases_update_options.xAxis[1];
             delete echarts_phases_update_options.series[3];
             delete echarts_phases_update_options.series[4];
             delete echarts_phases_update_options.series[5];
@@ -196,7 +170,6 @@ $(document).ready(function () {
         echarts_phases_update_options.series[2].data = xhr_data.phases_delivered.l3;
 
         if (CAPABILITY_ELECTRICITY_RETURNED) {
-            echarts_phases_update_options.xAxis[1].data = xhr_data.read_at;
             echarts_phases_update_options.series[3].data = xhr_data.phases_returned.l1;
             echarts_phases_update_options.series[4].data = xhr_data.phases_returned.l2;
             echarts_phases_update_options.series[5].data = xhr_data.phases_returned.l3;
@@ -227,7 +200,6 @@ $(document).ready(function () {
                 echarts_phases_update_options.series[2].data = echarts_phases_update_options.series[2].data.concat(xhr_data.phases_delivered.l3);
 
                 if (CAPABILITY_ELECTRICITY_RETURNED) {
-                    echarts_phases_update_options.xAxis[1].data = echarts_phases_update_options.xAxis[1].data.concat(xhr_data.read_at);
                     echarts_phases_update_options.series[3].data = echarts_phases_update_options.series[3].data.concat(xhr_data.phases_returned.l1);
                     echarts_phases_update_options.series[4].data = echarts_phases_update_options.series[4].data.concat(xhr_data.phases_returned.l2);
                     echarts_phases_update_options.series[5].data = echarts_phases_update_options.series[5].data.concat(xhr_data.phases_returned.l3);
