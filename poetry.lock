@@ -297,7 +297,7 @@ pipenv = ["pipenv"]
 
 [[package]]
 name = "dropbox"
-version = "11.32.0"
+version = "11.33.0"
 description = "Official Dropbox API Client"
 category = "main"
 optional = false
@@ -1159,7 +1159,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-requests"
-version = "2.28.0"
+version = "2.28.1"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false
@@ -1331,11 +1331,7 @@ dparse = [
     {file = "dparse-0.5.1-py3-none-any.whl", hash = "sha256:e953a25e44ebb60a5c6efc2add4420c177f1d8404509da88da9729202f306994"},
     {file = "dparse-0.5.1.tar.gz", hash = "sha256:a1b5f169102e1c894f9a7d5ccf6f9402a836a5d24be80a986c7ce9eaed78f367"},
 ]
-dropbox = [
-    {file = "dropbox-11.32.0-py2-none-any.whl", hash = "sha256:8861c73468a243a0b8c2dd1ab61e2f2bdecd57f48875728a55470e8645f52692"},
-    {file = "dropbox-11.32.0-py3-none-any.whl", hash = "sha256:096242a11f633a0dddf267e5f8dd07bde3ed111f66c1c25169d7c4dcac16e490"},
-    {file = "dropbox-11.32.0.tar.gz", hash = "sha256:7df3d08277471aed4144ba8e171b7b3858c3ad3889bcef65bb86b85facc478c7"},
-]
+dropbox = []
 execnet = [
     {file = "execnet-1.9.0-py2.py3-none-any.whl", hash = "sha256:a295f7cc774947aac58dde7fdc85f4aa00c42adf5d8f5468fc630c1acf30a142"},
     {file = "execnet-1.9.0.tar.gz", hash = "sha256:8f694f3ba9cc92cab508b152dcfe322153975c29bda272e2fd7f3f00f36e47c5"},
@@ -1863,10 +1859,7 @@ types-pytz = [
     {file = "types-pytz-2021.3.8.tar.gz", hash = "sha256:41253a3a2bf028b6a3f17b58749a692d955af0f74e975de94f6f4d2d3cd01dbd"},
     {file = "types_pytz-2021.3.8-py3-none-any.whl", hash = "sha256:aef4a917ab28c585d3f474bfce4f4b44b91e95d9d47d4de29dd845e0db8e3910"},
 ]
-types-requests = [
-    {file = "types-requests-2.28.0.tar.gz", hash = "sha256:9863d16dfbb3fa55dcda64fa3b989e76e8859033b26c1e1623e30465cfe294d3"},
-    {file = "types_requests-2.28.0-py3-none-any.whl", hash = "sha256:85383b4ef0535f639c3f06c5bbb6494bbf59570c4cd88bbcf540f0b2ac1b49ab"},
-]
+types-requests = []
 types-six = []
 types-urllib3 = [
     {file = "types-urllib3-1.26.16.tar.gz", hash = "sha256:8bb3832c684c30cbed40b96e28bc04703becb2b97d82ac65ba4b968783453b0e"},
