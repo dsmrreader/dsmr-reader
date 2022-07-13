@@ -21,7 +21,7 @@ logger = logging.getLogger('dsmrreader')
 class Command(InfiniteManagementCommandMixin, BaseCommand):
     help = 'Generates a FAKE reading. DO NOT USE in production! Used for integration checks.'
     name = __name__  # Required for PID file.
-    sleep_time = 1
+    sleep_time = 3
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
@@ -108,8 +108,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
         electricity_1 = electricity_base
         electricity_2 = electricity_1 * 0.6  # Consumption during daylight is a bit lower.
-        electricity_1_returned = 0
-        electricity_2_returned = 0
+        electricity_1_returned = electricity_base * 0.2  # Low return on low tariff
+        electricity_2_returned = electricity_base * 0.8
         gas = electricity_base * 0.3  # Random as well.
 
         current_base = abs(graph_base)
