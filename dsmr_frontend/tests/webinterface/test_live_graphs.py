@@ -53,8 +53,8 @@ class TestViews(TestCase):
             ElectricityConsumption.objects.create(
                 read_at=timezone.now(),
                 delivered_1=5,
-                returned_1=5,
-                delivered_2=10,
+                returned_1=10,
+                delivered_2=5,
                 returned_2=10,
                 currently_delivered=1.5,
                 currently_returned=0.1,
@@ -72,9 +72,9 @@ class TestViews(TestCase):
             ElectricityConsumption.objects.create(
                 read_at=timezone.now() - timezone.timedelta(hours=1),
                 delivered_1=10.5,
-                returned_1=10.5,
+                returned_1=20.5,
                 delivered_2=11,
-                returned_2=11,
+                returned_2=21,
                 currently_delivered=2.5,
                 currently_returned=0.2,
                 phase_currently_delivered_l1=0.75,
@@ -112,8 +112,8 @@ class TestViews(TestCase):
                 'read_at': ['Sat 23:00', 'Sun 0:00'],
                 'currently_delivered': [2500, 1500],
                 'currently_returned': [200, 100],
-                'total_delivered': ['21.000', '10.000'],
-                'total_returned': ['21.500', '15.000'],
+                'total_delivered': ['21.500', '10.000'],
+                'total_returned': ['41.500', '20.000'],
                 'phases_delivered': {
                     'l1': [750, 500],
                     'l2': [500, 250],

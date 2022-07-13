@@ -98,7 +98,7 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
                 data['currently_returned'].append(self._convert_to_watt(current.currently_returned))
 
             if form.cleaned_data.get('total_delivered'):
-                data['total_delivered'].append(current.delivered_1 + current.delivered_1)
+                data['total_delivered'].append(current.delivered_1 + current.delivered_2)
 
             if form.cleaned_data.get('total_returned'):
                 data['total_returned'].append(current.returned_1 + current.returned_2)
