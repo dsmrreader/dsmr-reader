@@ -7,6 +7,6 @@ You can type any topic or setting you're searching for, as it should pop up with
 Or you can just skip it this page and continue directly to the admin panel.
 
 
-.. image:: ../_static/screenshots/v4/frontend/configuration.png
-    :target: ../_static/screenshots/v4/frontend/configuration.png
+.. image:: ../_static/screenshots/v5/frontend/configuration.png
+    :target: ../_static/screenshots/v5/frontend/configuration.png
     :alt: Configuration

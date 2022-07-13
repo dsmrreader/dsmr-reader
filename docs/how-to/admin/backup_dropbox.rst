@@ -6,8 +6,8 @@ Backup
 
 The application backs up your data daily. You can change the time the backup will be created every day.
 
-.. image:: ../../_static/screenshots/v4/admin/backupsettings.png
-    :target: ../../_static/screenshots/v4/admin/backupsettings.png
+.. image:: ../../_static/screenshots/v5/admin/backupsettings.png
+    :target: ../../_static/screenshots/v5/admin/backupsettings.png
 
 
 Dropbox

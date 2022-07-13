@@ -46,8 +46,8 @@ Enable API
 
 The API is disabled by default in the application. You may enable it :doc:`in the configuration</tutorial/configuration>`.
 
-.. image:: ../_static/screenshots/v4/admin/apisettings.png
-    :target: ../_static/screenshots/v4/admin/apisettings.png
+.. image:: ../_static/screenshots/v5/admin/apisettings.png
+    :target: ../_static/screenshots/v5/admin/apisettings.png
     :alt: API admin settings
 
 API key

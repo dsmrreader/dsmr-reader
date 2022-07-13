@@ -8,8 +8,8 @@ Link your MinderGas.nl-account to have DSMR-reader upload your gas meter positio
     DSMR-reader transmits the **last reading of the previous day** to your account.
 
 
-.. image:: ../../_static/screenshots/v4/admin/mindergassettings.png
-    :target: ../../_static/screenshots/v4/admin/mindergassettings.png
+.. image:: ../../_static/screenshots/v5/admin/mindergassettings.png
+    :target: ../../_static/screenshots/v5/admin/mindergassettings.png
     :alt: MinderGas
 
 
