@@ -24,19 +24,19 @@ Courtesy of [@Xirixiz](https://github.com/xirixiz).
 
 ## Preview
 
-![Dashboard](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v5/frontend/dashboard.png)
+![Dashboard](https://github.com/dsmrreader/dsmr-reader/blob/v5/docs/_static/screenshots/v5/frontend/dashboard.png)
 
 ----
 
-![Live](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v5/frontend/live.png)
+![Live](https://github.com/dsmrreader/dsmr-reader/blob/v5/docs/_static/screenshots/v5/frontend/live.png)
 
 ----
 
-![Archive](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v5/frontend/archive.png)
+![Archive](https://github.com/dsmrreader/dsmr-reader/blob/v5/docs/_static/screenshots/v5/frontend/archive.png)
 
 ----
 
-![Compare](https://github.com/dsmrreader/dsmr-reader/blob/6a9593a6abf60c465c2e54917febc5210bd03454/docs/_static/screenshots/v5/frontend/compare.png)
+![Compare](https://github.com/dsmrreader/dsmr-reader/blob/v5/docs/_static/screenshots/v5/frontend/compare.png)
 
 ----
 
