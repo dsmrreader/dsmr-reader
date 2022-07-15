@@ -18,7 +18,7 @@ Current version
 
 
 
-v5.5.0 - 2022-xx-xx
+v5.5.0 - 2022-07-15
 -------------------
 
 - ``Added`` Total kWh consumed/returned (diff) in live electricity graph [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
@@ -26,7 +26,7 @@ v5.5.0 - 2022-xx-xx
 - ``Changed`` Python patch bump + optimizations - by @goegol [`#1665 <https://github.com/dsmrreader/dsmr-reader/issues/1665>`_]
 - ``Changed`` Tariefnamen rechttrekken [`#1666 <https://github.com/dsmrreader/dsmr-reader/issues/1666>`_]
 - ``Changed`` Allow graph 'stack' option for live graphs [`#1420 <https://github.com/dsmrreader/dsmr-reader/issues/1420>`_]
-- ``Changed`` Reworked live graphs a bit, dropped inverse graphs [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
+- ``Changed`` Reworked live graphs a bit, dropped inverse graphs too [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
 
 
 v5.4.0 - 2022-07-07
