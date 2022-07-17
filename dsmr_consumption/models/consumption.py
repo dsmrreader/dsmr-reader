@@ -177,7 +177,7 @@ class GasConsumption(ModelUpdateMixin, models.Model):
 
 
 class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
-    """ Average consumption calculated over a 15 minute period. """
+    """ Average consumption calculated over a ~15 minute period. """
     read_at_start = models.DateTimeField(
         db_index=True,
         verbose_name=_('Start'),
@@ -193,7 +193,7 @@ class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
         decimal_places=3,
         verbose_name=_('Average quarter peak consumption'),
         help_text=_(
-            'In kW/h. Calculated by tracking the kW/15m consumption during the given start/end and multiplying it by 4'
+            'In kW. Calculated by tracking the kWh/15m consumption during the given start/end and multiplying it by 4'
         )
     )
 
@@ -203,7 +203,7 @@ class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
         return self.read_at_end - self.read_at_start
 
     def __str__(self):
-        return '{} | {} - {} | Avg {} kWh'.format(
+        return '{} | {} - {} | Avg {} kW'.format(
             self.__class__.__name__,
             timezone.localtime(self.read_at_start),
             timezone.localtime(self.read_at_end),
