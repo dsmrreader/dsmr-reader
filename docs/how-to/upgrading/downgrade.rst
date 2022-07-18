@@ -12,14 +12,14 @@ If for some reason you need to downgrade the application, you will need to:
     First, **please make sure you have a recent backup of your database**!
 
 
-Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v4/dsmrreader/provisioning/downgrade/>`_.
+Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v5/dsmrreader/provisioning/downgrade/>`_.
 You should execute the script of the version you wish to downgrade to. And the switch the code to the release.
 
-For example ``v4.0``::
+For example when downgrading to ``v5.4``::
 
    sudo su - dsmr
-   sh dsmrreader/provisioning/downgrade/v4.0.sh
-   git checkout tags/v4.0.0
+   sh dsmrreader/provisioning/downgrade/v5.4.sh
+   git checkout tags/v5.4.0
    ./deploy.sh
 
 .. note::
