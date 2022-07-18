@@ -8,6 +8,10 @@ body:
       value: |
         *🇳🇱 Voel je vooral vrij om ook in het Nederlands te communiceren, ondanks dat het project in de kern Engelstalig is, gezien dat een stuk vlotter gaat. If you're unable to communicate in Dutch, welcome anyway! Feel free to use English and indicate that you do not understand Dutch.*
 
+        ### Help yourself
+        Sometimes you can help yourself with:
+        - Errors? Check [your logfiles](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/logfiles.html).
+
         ### Note
         Sometimes bad stuff is already reported:
         - See (recent) previous [issues](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc).
