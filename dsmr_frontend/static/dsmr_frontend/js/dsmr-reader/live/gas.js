@@ -59,6 +59,7 @@ $(document).ready(function () {
                     name: 'm³',
                     type: GAS_GRAPH_STYLE,
                     areaStyle: {},
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: xhr_data.currently_delivered,
                     smooth: true
                 }

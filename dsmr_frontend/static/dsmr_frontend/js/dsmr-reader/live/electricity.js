@@ -118,6 +118,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: []
             },
             {
@@ -126,6 +127,7 @@ $(document).ready(function () {
                 name: TEXT_TOTAL_DELIVERED,
                 type: 'line',
                 smooth: true,
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: []
             },
             {
@@ -133,6 +135,7 @@ $(document).ready(function () {
                 name: TEXT_RETURNED,
                 type: 'line',
                 smooth: true,
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 areaStyle: {},
                 data: []
             },
@@ -142,6 +145,7 @@ $(document).ready(function () {
                 name: TEXT_TOTAL_RETURNED,
                 type: 'line',
                 smooth: true,
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: []
             }
         ],

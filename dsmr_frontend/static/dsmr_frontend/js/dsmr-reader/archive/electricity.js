@@ -66,6 +66,7 @@ function render_electricity_graph(xhr_data) {
                 backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: xhr_data.electricity1
             },
             {
@@ -77,6 +78,7 @@ function render_electricity_graph(xhr_data) {
                 backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: xhr_data.electricity2
             }
         ]
@@ -90,6 +92,7 @@ function render_electricity_graph(xhr_data) {
                 backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: xhr_data.electricity_merged
             }
         ]

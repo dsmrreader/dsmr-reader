@@ -95,16 +95,19 @@ $(document).ready(function () {
                 {
                     name: 'L1',
                     type: 'line',
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: []
                 },
                 {
                     name: 'L2',
                     type: 'line',
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: []
                 },
                 {
                     name: 'L3',
                     type: 'line',
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: []
                 },
             ];
@@ -113,6 +116,7 @@ $(document).ready(function () {
                 {
                     name: 'Volt',
                     type: 'line',
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: []
                 }
             ];

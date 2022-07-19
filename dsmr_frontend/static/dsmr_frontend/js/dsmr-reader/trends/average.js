@@ -73,6 +73,7 @@ function update_trends_averages(start_date, end_date) {
                 animationDelay: ANIMATION_DELAY_OPTIONS,
                 showBackground: true,
                 backgroundStyle: BACKGROUND_STYLE_OPTIONS,
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
                 data: xhr_data.avg_electricity
@@ -93,6 +94,7 @@ function update_trends_averages(start_date, end_date) {
                     animationDelay: ANIMATION_DELAY_OPTIONS,
                     showBackground: true,
                     backgroundStyle: BACKGROUND_STYLE_OPTIONS,
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     smooth: true,
                     areaStyle: {},
                     data: xhr_data.avg_electricity_returned
@@ -112,6 +114,7 @@ function update_trends_averages(start_date, end_date) {
                     animationDelay: ANIMATION_DELAY_OPTIONS,
                     showBackground: true,
                     backgroundStyle: BACKGROUND_STYLE_OPTIONS,
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     smooth: true,
                     areaStyle: {},
                     data: xhr_data.avg_gas

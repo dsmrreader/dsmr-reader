@@ -28,6 +28,7 @@ function update_trends_tariffs(start_date, end_date) {
                     itemStyle: {
                         borderRadius: 5
                     },
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: null
                 }
             ]

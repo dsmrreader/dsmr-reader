@@ -95,18 +95,21 @@ $(document).ready(function () {
                     name: 'L1',
                     type: 'bar',
                     stack: STACK_ELECTRICITY_GRAPHS,
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: null
                 },
                 {
                     name: 'L2',
                     type: 'bar',
                     stack: STACK_ELECTRICITY_GRAPHS,
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: null
                 },
                 {
                     name: 'L3',
                     type: 'bar',
                     stack: STACK_ELECTRICITY_GRAPHS,
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: null
                 },
             ];
@@ -115,6 +118,7 @@ $(document).ready(function () {
                 {
                     name: 'Ampere',
                     type: 'bar',
+                    emphasis: EMPHASIS_STYLE_OPTIONS,
                     data: null
                 }
             ];

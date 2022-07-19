@@ -106,6 +106,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 stack: STACK_ELECTRICITY_GRAPHS ? 'delivered' : false,
                 data: []
             },
@@ -114,6 +115,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 stack: STACK_ELECTRICITY_GRAPHS ? 'delivered' : false,
                 data: []
             },
@@ -122,6 +124,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 stack: STACK_ELECTRICITY_GRAPHS ? 'delivered' : false,
                 data: []
             },
@@ -130,6 +133,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 stack: STACK_ELECTRICITY_GRAPHS ? 'returned' : false,
                 data: []
             },
@@ -138,6 +142,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 stack: STACK_ELECTRICITY_GRAPHS ? 'returned' : false,
                 data: []
             },
@@ -146,6 +151,7 @@ $(document).ready(function () {
                 type: 'line',
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 stack: STACK_ELECTRICITY_GRAPHS ? 'returned' : false,
                 data: []
             }

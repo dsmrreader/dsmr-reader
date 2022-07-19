@@ -67,6 +67,7 @@ function render_electricity_returned_graph(xhr_data) {
                 backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: xhr_data.electricity1_returned
             },
             {
@@ -78,6 +79,7 @@ function render_electricity_returned_graph(xhr_data) {
                 backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: xhr_data.electricity2_returned
             }
         ]
@@ -91,6 +93,7 @@ function render_electricity_returned_graph(xhr_data) {
                 backgroundStyle: BACKGROUND_STYLE_OPTIONS,
                 smooth: true,
                 areaStyle: {},
+                emphasis: EMPHASIS_STYLE_OPTIONS,
                 data: xhr_data.electricity_returned_merged
             }
         ]
