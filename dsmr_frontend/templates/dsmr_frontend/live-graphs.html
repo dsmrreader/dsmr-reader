@@ -26,6 +26,7 @@
                     <div id="echarts-electricity-graph" class="{% if capabilities.electricity_returned %}large-graph-canvas{% else %}graph-canvas{% endif %}"></div>
                     <div class="graph_controls_help xhr-hidden">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
                     <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
@@ -43,6 +44,7 @@
                     <div id="echarts-phases-graph" class="{% if capabilities.electricity_returned %}large-graph-canvas{% else %}graph-canvas{% endif %}"></div>
                     <div class="graph_controls_help xhr-hidden">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
                     <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
@@ -60,6 +62,7 @@
                     <div id="echarts-voltage-graph" class="graph-canvas"></div>
                     <div class="graph_controls_help xhr-hidden">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
                     <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
@@ -77,6 +80,7 @@
                     <div id="echarts-power-current-graph" class="graph-canvas"></div>
                     <div class="graph_controls_help xhr-hidden">
                         {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                         {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                     </div>
                     <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
@@ -142,17 +146,17 @@
         const CAPABILITY_ELECTRICITY_RETURNED = {{ capabilities.electricity_returned|yesno:'true,false' }};
         {% endlocalize %}
 
-        const TEXT_ELECTRICITY_HEADER = '{% translate "Recent electricity" %} {S|{% translate "Wattage & kWh difference" %}}';
+        const TEXT_ELECTRICITY_HEADER = '{% translate "Recent electricity" %} {S|{% translate "Wattage & kWh" %}}';
         const TEXT_PHASES_HEADER = '{% translate "Recent phases usage" %} {S|{% translate "in Watt" %}}';
         const TEXT_VOLTAGE_HEADER = '{% translate "Recent phase voltages" %} {S|{% translate "in Volt" %}}';
         const TEXT_POWER_CURRENT_HEADER = '{% translate "Recent phase currents" %} {S|{% translate "in Ampere" %}}';
         const TEXT_GAS_HEADER = '{% translate "Recent gas consumption" %} {S|{% translate "in m³" %}}';
         const TEXT_TEMPERATURE_HEADER = '{% translate "Recent temperatures" %} {S|{% translate "in °C" %}}';
 
-        const TEXT_DELIVERED = '{% translate "Current Watt delivered" %}';
-        const TEXT_RETURNED = '{% translate "Current Watt returned" %}';
-        const TEXT_TOTAL_DELIVERED = '{% translate "Total kWh consumed (difference)" %}';
-        const TEXT_TOTAL_RETURNED = '{% translate "Total kWh returned (difference)" %}';
+        const TEXT_DELIVERED = '{% translate "Watt delivered" %}';
+        const TEXT_RETURNED = '{% translate "Watt returned" %}';
+        const TEXT_TOTAL_DELIVERED = '{% translate "kWh consumed" %}';
+        const TEXT_TOTAL_RETURNED = '{% translate "kWh returned" %}';
         const TEXT_WATT = '{% translate "Watt" %}';
         const TEXT_KWH = '{% translate "kWh" %}';
 
@@ -309,8 +313,8 @@
 
         // When clicked, show all help tooltips.
         $("a.graph_controls_help_trigger").click(function(){
-            $("a.graph_controls_help_trigger").fadeOut(500);
-            $(".graph_controls_help").fadeIn(1500);
+            $("a.graph_controls_help_trigger").hide();
+            $(".graph_controls_help").fadeIn(2500);
 
             return false;
         });

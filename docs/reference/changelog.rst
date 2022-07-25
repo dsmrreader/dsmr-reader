@@ -22,6 +22,7 @@ v5.6.0 - 2022-xx-xx
 -------------------
 
 - ``Changed`` Reworked/improved peak consumption [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_]
+- ``Changed`` Deselect live electricity graph kWh totals by default [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
 
 
 v5.5.0 - 2022-07-15

@@ -187,6 +187,16 @@ $(document).ready(function () {
 
         echarts_electricity_graph.setOption(echarts_electricity_update_options);
 
+        // Deselect totals by default.
+        echarts_electricity_graph.dispatchAction({
+            type: 'legendUnSelect',
+            name: TEXT_TOTAL_DELIVERED
+        });
+        echarts_electricity_graph.dispatchAction({
+            type: 'legendUnSelect',
+            name: TEXT_TOTAL_RETURNED
+        });
+
         // Schedule updates
         let latest_delta_id = xhr_data.latest_delta_id;
         let pending_xhr_request = null;

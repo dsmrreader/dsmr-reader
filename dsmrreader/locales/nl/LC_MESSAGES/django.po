@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-17 18:40+0200\n"
+"POT-Creation-Date: 2022-07-25 18:36+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1678,6 +1678,9 @@ msgstr "Watt"
 msgid "Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph."
 msgstr "Scroll of knijp de grafiek om in- en uit te zoomen. Om de huidige tijdspositie aan te passen, sleep de grafiek zijwaarts, of gebruik (de bovenkant van) de scrollbalk onder de grafiek."
 
+msgid "Click on the data series in the legend below the graph to toggle displaying it."
+msgstr "Klik onder de grafiek op een dataserie om deze te tonen of te verbergen."
+
 msgid "You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration."
 msgstr "Het is mogelijk om het totaal aantal weergegeven uren (tot max. een week terug), inclusief de bijbehorende initiële zoom bij openen, aan te passen in de Frontend-configuratie."
 
@@ -1690,8 +1693,8 @@ msgstr "Daarnaast, indien je een DSMR v5 slimme meter gebruikt"
 msgid "Recent electricity"
 msgstr "Recent elektriciteit"
 
-msgid "Wattage & kWh difference"
-msgstr "Wattage & kWh-verschil"
+msgid "Wattage & kWh"
+msgstr "Wattage & kWh"
 
 msgid "Recent phases usage"
 msgstr "Recent (fase)vermogen"
@@ -1723,17 +1726,17 @@ msgstr "Recente temperaturen"
 msgid "in °C"
 msgstr "in °C"
 
-msgid "Current Watt delivered"
-msgstr "Huidig Wattage geleverd"
+msgid "Watt delivered"
+msgstr "Wattage verbruikt"
 
-msgid "Current Watt returned"
-msgstr "Huidig Wattage teruggeleverd"
+msgid "Watt returned"
+msgstr "Wattage teruggeleverd"
 
-msgid "Total kWh consumed (difference)"
-msgstr "Totaal kWh verbruikt (verschil)"
+msgid "kWh consumed"
+msgstr "kWh verbruikt"
 
-msgid "Total kWh returned (difference)"
-msgstr "Totaal kWh teruggeleverd (verschil)"
+msgid "kWh returned"
+msgstr "kWh teruggeleverd"
 
 msgid "Notifications"
 msgstr "Notificaties"
@@ -2742,6 +2745,12 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Total kWh consumed (difference)"
+#~ msgstr "Totaal kWh verbruikt (verschil)"
+
+#~ msgid "Total kWh returned (difference)"
+#~ msgstr "Totaal kWh teruggeleverd (verschil)"
 
 #~ msgid "usage & cumulative"
 #~ msgstr "gebruik & cumulatief"
