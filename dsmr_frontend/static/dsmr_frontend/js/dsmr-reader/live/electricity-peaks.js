@@ -1,17 +1,17 @@
 $(document).ready(function () {
-    echarts_gas_graph = echarts.init(document.getElementById('echarts-gas-graph'));
-    echarts_gas_graph.showLoading('default', LOADING_OPTIONS);
+    echarts_electricity_peaks_graph = echarts.init(document.getElementById('echarts-electricity-peaks-graph'));
+    echarts_electricity_peaks_graph.showLoading('default', LOADING_OPTIONS);
 
     /* Init graph. */
-    $.get(GAS_GRAPH_URL, function (xhr_data) {
-        echarts_gas_graph.hideLoading();
+    $.get(ELECTRICITY_PEAKS_GRAPH_URL, function (xhr_data) {
+        echarts_electricity_peaks_graph.hideLoading();
 
         let option = {
             color: [
-                GAS_DELIVERED_COLOR
+                ELECTRICITY_PEAKS_COLOR
             ],
             title: {
-                text: TEXT_GAS_HEADER,
+                text: TEXT_ELECTRICITY_PEAKS_HEADER,
                 textStyle: TITLE_TEXTSTYLE_OPTIONS,
                 left: 'center',
             },
@@ -21,7 +21,7 @@ $(document).ready(function () {
             xAxis: [
                 {
                     type: 'category',
-                    boundaryGap: GAS_GRAPH_STYLE === 'bar',
+                    boundaryGap: false,
                     data: xhr_data.read_at,
                     axisLabel: {
                         color: TEXTSTYLE_COLOR
@@ -33,16 +33,14 @@ $(document).ready(function () {
                     type: 'value',
                     axisLabel: {
                         color: TEXTSTYLE_COLOR,
-                        formatter: '{value} ' + TEXT_M3
+                        formatter: '{value} ' + TEXT_KW15M
                     }
                 }
             ],
             dataZoom: [
                 {
                     show: true,
-                    // Do not change initial zoom when using a non DSMR v5 meter.
-                    // Because it will cause DSMR v4 meter users to only display 2 of 24 hours by default.
-                    start: TELEGRAM_DSMR_VERSION === '50' ? LIVE_GRAPHS_INITIAL_ZOOM : 0,
+                    start: LIVE_GRAPHS_INITIAL_ZOOM,
                     end: 100,
                     textStyle: {
                         color: TEXTSTYLE_COLOR
@@ -56,11 +54,11 @@ $(document).ready(function () {
             ],
             series: [
                 {
-                    name: TEXT_M3,
-                    type: GAS_GRAPH_STYLE,
+                    name: TEXT_KW15M,
+                    type: 'line',
                     areaStyle: {},
                     emphasis: EMPHASIS_STYLE_OPTIONS,
-                    data: xhr_data.currently_delivered,
+                    data: xhr_data.average_delivered,
                     smooth: true
                 }
             ],
@@ -78,10 +76,10 @@ $(document).ready(function () {
                 }
             ]
         };
-        echarts_gas_graph.setOption(option);
+        echarts_electricity_peaks_graph.setOption(option);
     });
 });
 
 $(window).resize(function () {
-    echarts_gas_graph?.resize();
+    echarts_electricity_peaks_graph?.resize();
 });

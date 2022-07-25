@@ -5,7 +5,8 @@ from django.test import TestCase, Client
 from django.utils import timezone
 from django.urls import reverse
 
-from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption, \
+    QuarterHourPeakElectricityConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
@@ -295,6 +296,27 @@ class TestViews(TestCase):
             dict(delivered=True, returned=True, phases=True)
         )
         self.assertEqual(response.status_code, 200, response.content)
+
+    @mock.patch('django.utils.timezone.now')
+    def test_live_xhr_electricity_peaks(self, now_mock):
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 7, 1, 12, 0, 3))
+
+        if self.support_data:
+            QuarterHourPeakElectricityConsumption.objects.create(
+                read_at_start=timezone.now(),
+                read_at_end=timezone.now() + timezone.timedelta(minutes=14, seconds=58),
+                average_delivered=1.234,
+            )
+
+        response = self.client.get(
+            reverse('{}:live-xhr-electricity-peaks'.format(self.namespace))
+        )
+        json_content = json.loads(response.content.decode("utf8"))
+
+        if self.support_data:
+            self.assertEqual(json_content, {'average_delivered': [1.234], 'read_at': ['Fri 12:00:03 - Fri 12:15:01']})
+        else:
+            self.assertEqual(json_content, {'read_at': [], 'average_delivered': []})
 
     @mock.patch('django.utils.timezone.now')
     def test_live_xhr_gas(self, now_mock):

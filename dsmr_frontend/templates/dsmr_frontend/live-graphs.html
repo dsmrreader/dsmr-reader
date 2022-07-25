@@ -1,7 +1,7 @@
 {% extends "dsmr_frontend/base.html" %}
 {% load static %}
 {% load humanize %}
-{% load i18n %} 
+{% load i18n %}
 {% load l10n %}
 
 {% block title %}{% translate "Live graphs" %}{% endblock %}
@@ -122,6 +122,23 @@
         </div>
     </div>
     {% endif %}
+
+    {% if capabilities.electricity %}
+    <div class="row" id="peaks_current_holder" data-graph-type="electricity-peaks">
+        <div class="col-sm-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div id="echarts-electricity-peaks-graph" class="graph-canvas"></div>
+                    <div class="graph_controls_help xhr-hidden">
+                        {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
+                        {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
+                    </div>
+                    <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </section>
 {% endblock %}
 
@@ -137,6 +154,7 @@
         let echarts_power_current_graph = null;
         let echarts_temperature_graph = null;
         let echarts_voltage_graph = null;
+        let echarts_electricity_peaks_graph = null;
 
         {% localize off %}
         const GUI_REFRESH_INTERVAL = {{ frontend_settings.gui_refresh_interval }};
@@ -146,12 +164,13 @@
         const CAPABILITY_ELECTRICITY_RETURNED = {{ capabilities.electricity_returned|yesno:'true,false' }};
         {% endlocalize %}
 
-        const TEXT_ELECTRICITY_HEADER = '{% translate "Recent electricity" %} {S|{% translate "Wattage & kWh" %}}';
+        const TEXT_ELECTRICITY_HEADER = '{% translate "Recent electricity usage" %} {S|{% translate "Wattage & kWh" %}}';
         const TEXT_PHASES_HEADER = '{% translate "Recent phases usage" %} {S|{% translate "in Watt" %}}';
         const TEXT_VOLTAGE_HEADER = '{% translate "Recent phase voltages" %} {S|{% translate "in Volt" %}}';
         const TEXT_POWER_CURRENT_HEADER = '{% translate "Recent phase currents" %} {S|{% translate "in Ampere" %}}';
         const TEXT_GAS_HEADER = '{% translate "Recent gas consumption" %} {S|{% translate "in m³" %}}';
         const TEXT_TEMPERATURE_HEADER = '{% translate "Recent temperatures" %} {S|{% translate "in °C" %}}';
+        const TEXT_ELECTRICITY_PEAKS_HEADER = '{% translate "Recent quarter hour electricity peak consumption" %} {S|{% translate "in kW/15m" %}}';
 
         const TEXT_DELIVERED = '{% translate "Watt delivered" %}';
         const TEXT_RETURNED = '{% translate "Watt returned" %}';
@@ -159,6 +178,8 @@
         const TEXT_TOTAL_RETURNED = '{% translate "kWh returned" %}';
         const TEXT_WATT = '{% translate "Watt" %}';
         const TEXT_KWH = '{% translate "kWh" %}';
+        const TEXT_M3 = '{% translate "m³" %}';
+        const TEXT_KW15M = '{% translate "kW/15m" %}';
 
         const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
 
@@ -286,8 +307,17 @@
     </script>
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
- 
+
+{% if capabilities.electricity %}
+    <script type="text/javascript">
+        const ELECTRICITY_PEAKS_GRAPH_URL = "{% url 'frontend:live-xhr-electricity-peaks' %}";
+        const ELECTRICITY_PEAKS_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity-peaks.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
+
     <script type="text/javascript">
         const XHR_CONSUMPTION_HEADER_URL = "{% url 'frontend:xhr-consumption-header' %}";
         const sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())

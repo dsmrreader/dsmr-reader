@@ -5,7 +5,8 @@ from django.utils.cache import patch_response_headers
 from django.views.generic.base import TemplateView, View
 from django.utils import formats, timezone
 
-from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption, \
+    QuarterHourPeakElectricityConsumption
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_frontend.forms import DashboardElectricityConsumptionForm
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
@@ -137,6 +138,38 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
             return 0
 
         return int(kw_or_none * 1000)
+
+
+class LiveXhrQuarterHourPeakElectricityConsumption(ConfigurableLoginRequiredMixin, View):
+    """ XHR view for fetching the quarter hour peak consumption graph data, in JSON. """
+
+    def get(self, request):  # noqa: C901
+        data = {
+            'read_at': [],
+            'average_delivered': [],
+        }
+
+        # Optimize queries for large datasets by restricting the data to the last week in the first place.
+        base_timestamp = timezone.now() - timezone.timedelta(
+            hours=FrontendSettings.get_solo().live_graphs_hours_range
+        )
+        peaks = QuarterHourPeakElectricityConsumption.objects.filter(
+            read_at_start__gt=base_timestamp
+        ).order_by('read_at_start')
+        FORMAT = 'DSMR_GRAPH_ACCURATE_TIME_FORMAT'
+
+        for current in peaks:
+            read_at_start = formats.date_format(timezone.localtime(current.read_at_start), FORMAT)
+            read_at_end = formats.date_format(timezone.localtime(current.read_at_end), FORMAT)
+            data['read_at'].append(
+                '{} - {}'.format(read_at_start, read_at_end)
+            )
+            data['average_delivered'].append(float(current.average_delivered))
+
+        response = JsonResponse(data)
+        patch_response_headers(response)
+
+        return response
 
 
 class LiveXhrGasConsumption(ConfigurableLoginRequiredMixin, View):

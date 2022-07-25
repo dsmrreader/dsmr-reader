@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 18:36+0200\n"
+"POT-Creation-Date: 2022-07-25 22:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1690,8 +1690,8 @@ msgstr "Uitleg grafiekgebruik"
 msgid "Additionally, when using a DSMR v5 smart meter"
 msgstr "Daarnaast, indien je een DSMR v5 slimme meter gebruikt"
 
-msgid "Recent electricity"
-msgstr "Recent elektriciteit"
+msgid "Recent electricity usage"
+msgstr "Recent elektriciteitsverbruik"
 
 msgid "Wattage & kWh"
 msgstr "Wattage & kWh"
@@ -1726,6 +1726,12 @@ msgstr "Recente temperaturen"
 msgid "in °C"
 msgstr "in °C"
 
+msgid "Recent quarter hour electricity peak consumption"
+msgstr "Recente kwartiervermogens"
+
+msgid "in kW/15m"
+msgstr "in kW/15m"
+
 msgid "Watt delivered"
 msgstr "Wattage verbruikt"
 
@@ -1737,6 +1743,9 @@ msgstr "kWh verbruikt"
 
 msgid "kWh returned"
 msgstr "kWh teruggeleverd"
+
+msgid "kW/15m"
+msgstr "kW/15m"
 
 msgid "Notifications"
 msgstr "Notificaties"
