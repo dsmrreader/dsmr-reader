@@ -10,7 +10,7 @@ django-filter==21.1
 django-mathfilters==1.0.0
 djangorestframework==3.13.1
 django-solo==2.0
-dropbox==11.33.0
+dropbox==11.32.0
 gunicorn==20.1.0
 influxdb-client==1.30.0
 paho-mqtt==1.6.1
@@ -22,4 +22,4 @@ python-decouple==3.6
 pytz==2021.3
 pyyaml==6.0
 requests==2.28.1
-urllib3==1.26.10
+urllib3==1.26.11
