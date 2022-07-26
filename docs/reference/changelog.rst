@@ -26,6 +26,12 @@ v5.6.0 - 2022-xx-xx
 - ``Changed`` Deselect live electricity graph kWh totals by default [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
 
 
+v5.5.1 - 2022-07-26
+-------------------
+
+- ``Fixed`` Unable to configure dropbox backup - Dropbox SDK downgrade [`#1677 <https://github.com/dsmrreader/dsmr-reader/issues/1677>`_]
+
+
 v5.5.0 - 2022-07-15
 -------------------
 
