@@ -18,7 +18,7 @@ Current version
 
 
 
-v5.5.1 - 2022-07-26
+v5.5.1 - 2022-07-27
 -------------------
 
 - ``Fixed`` Unable to configure dropbox backup - Dropbox SDK downgrade [`#1677 <https://github.com/dsmrreader/dsmr-reader/issues/1677>`_]
