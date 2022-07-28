@@ -42,10 +42,10 @@ jobs:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -55,7 +55,7 @@ jobs:
           sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Cached dependencies & virtualenv
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/pypoetry/
@@ -116,7 +116,7 @@ jobs:
             DJANGO_DATABASE_PASSWORD: ''
 
       - name: Code coverage upload
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
 
 
   # Shallow tests for (older) supported Python versions.
@@ -135,10 +135,10 @@ jobs:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -148,7 +148,7 @@ jobs:
           sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
 
       - name: Cached dependencies & virtualenv
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/pypoetry/

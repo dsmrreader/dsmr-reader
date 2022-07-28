@@ -15,10 +15,10 @@ jobs:
     timeout-minutes: 10  # Don't run forever when stale
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
 
       - name: Install OS packages
         run: |
@@ -27,7 +27,7 @@ jobs:
           pip install --upgrade pip poetry
 
       - name: Cached dependencies & virtualenv
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/pypoetry/
