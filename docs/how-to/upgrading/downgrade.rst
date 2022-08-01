@@ -18,7 +18,7 @@ You should execute the script of the version you wish to downgrade to. And the s
 For example when downgrading to ``v5.4``::
 
    sudo su - dsmr
-   sh dsmrreader/provisioning/downgrade/v5.4.sh
+   sh dsmrreader/provisioning/downgrade/v5.4.0.sh
    git checkout tags/v5.4.0
    ./deploy.sh
 
