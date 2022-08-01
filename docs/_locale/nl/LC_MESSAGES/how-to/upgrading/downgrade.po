@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2022-07-18 20:55+0000\n"
-"PO-Revision-Date: 2022-07-18 22:56+0200\n"
+"POT-Creation-Date: 2022-08-01 19:06+0000\n"
+"PO-Revision-Date: 2022-08-01 21:07+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -35,18 +35,22 @@ msgid "First, **please make sure you have a recent backup of your database**!"
 msgstr "Allereerst, **zorg ervoor dat je een recente backup hebt van je database**!"
 
 #: ../../how-to/upgrading/downgrade.rst:15
-msgid "Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v5/dsmrreader/provisioning/downgrade/>`_. You should execute the script of the version you wish to downgrade to. And the switch the code to the release."
+msgid "Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v5/dsmrreader/provisioning/downgrade/>`_. You should execute the script of the version you wish to downgrade to. And then switch the code to the release/tag accordingly."
 msgstr "Elke release `heeft z'n eigen databasemigraties vastgelegd <https://github.com/dsmrreader/dsmr-reader/tree/v5/dsmrreader/provisioning/downgrade>`_. Je zult het script moeten uitvoeren voor de release waar je naar toe wilt. En vervolgens de codebase wisselen naar dezelfde release."
 
-#: ../../how-to/upgrading/downgrade.rst:18
+#: ../../how-to/upgrading/downgrade.rst:20
+msgid "You do **not** need to downgrade to each intermediate version between your target. For example, if you currently run ``v5.6`` and your want to downgrade to ``v5.4``, just follow the sample below, ignoring ``v5.5`` between them."
+msgstr "Je hoeft **niet** naar elke tussenliggende versie te downgraden. Bijvoorbeeld downgraden van ``v5.6`` naar ``v5.4`` kan direct met onderstaand voorbeeld, zonder ook met iets met ``v5.5`` te doen."
+
+#: ../../how-to/upgrading/downgrade.rst:23
 msgid "For example when downgrading to ``v5.4``::"
 msgstr "Bijvoorbeeld, downgraden naar ``v5.4``::"
 
-#: ../../how-to/upgrading/downgrade.rst:27
+#: ../../how-to/upgrading/downgrade.rst:32
 msgid "Unapplying the database migrations may take a while."
 msgstr "Het terugdraaien van databasemigraties kan wat tijd in beslag nemen."
 
-#: ../../how-to/upgrading/downgrade.rst:29
+#: ../../how-to/upgrading/downgrade.rst:34
 msgid "You should now be on the targeted release."
 msgstr "Je zou nu op de gewenste release moeten zitten."
 

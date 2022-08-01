@@ -13,7 +13,12 @@ If for some reason you need to downgrade the application, you will need to:
 
 
 Each release `has it's database migrations locked <https://github.com/dsmrreader/dsmr-reader/tree/v5/dsmrreader/provisioning/downgrade/>`_.
-You should execute the script of the version you wish to downgrade to. And the switch the code to the release.
+You should execute the script of the version you wish to downgrade to. And then switch the code to the release/tag accordingly.
+
+.. tip::
+
+    You do **not** need to downgrade to each intermediate version between your target.
+    For example, if you currently run ``v5.6`` and your want to downgrade to ``v5.4``, just follow the sample below, ignoring ``v5.5`` between them.
 
 For example when downgrading to ``v5.4``::
 
