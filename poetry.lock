@@ -444,7 +444,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 
 [[package]]
 name = "influxdb-client"
-version = "1.30.0"
+version = "1.31.0"
 description = "InfluxDB 2.0 Python client library"
 category = "main"
 optional = false
@@ -1159,7 +1159,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-requests"
-version = "2.28.5"
+version = "2.28.6"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false
@@ -1178,7 +1178,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-urllib3"
-version = "1.26.17"
+version = "1.26.20"
 description = "Typing stubs for urllib3"
 category = "dev"
 optional = false
@@ -1425,8 +1425,8 @@ importlib-metadata = [
     {file = "importlib_metadata-4.2.0.tar.gz", hash = "sha256:b7e52a1f8dec14a75ea73e0891f3060099ca1d8e6a462a4dff11c3e119ea1b31"},
 ]
 influxdb-client = [
-    {file = "influxdb_client-1.30.0-py3-none-any.whl", hash = "sha256:68d62795047d3189d1c5869ff9eaeb1af48ad317b74f3e9772e27bdaea27a543"},
-    {file = "influxdb_client-1.30.0.tar.gz", hash = "sha256:691acd05d3ca205c1c561991e1d7888d65706feb0a44076f2a22eb572aed9926"},
+    {file = "influxdb_client-1.31.0-py3-none-any.whl", hash = "sha256:c65e1efe2e361a65f54238d0630280c217ca7b0502a1942de1e5d541635b719f"},
+    {file = "influxdb_client-1.31.0.tar.gz", hash = "sha256:adf6dfdf35f7c39cf543b243359d2c0ae79fc462f1ef57a09d0f1623f181796d"},
 ]
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
@@ -1908,16 +1908,16 @@ types-pytz = [
     {file = "types_pytz-2021.3.8-py3-none-any.whl", hash = "sha256:aef4a917ab28c585d3f474bfce4f4b44b91e95d9d47d4de29dd845e0db8e3910"},
 ]
 types-requests = [
-    {file = "types-requests-2.28.5.tar.gz", hash = "sha256:ac618bfefcb3742eaf97c961e13e9e5a226e545eda4a3dbe293b898d40933ad1"},
-    {file = "types_requests-2.28.5-py3-none-any.whl", hash = "sha256:98ab647ae88b5e2c41d6d20cfcb5117da1bea561110000b6fdeeea07b3e89877"},
+    {file = "types-requests-2.28.6.tar.gz", hash = "sha256:cf3383bbd79394bf051a0a9202d6831fa962f186f923c178f7c059e3424bd00e"},
+    {file = "types_requests-2.28.6-py3-none-any.whl", hash = "sha256:d8d7607419cd4b41a7b9497e15e8c0bad78d50df43c48ad25bc526a11518c3a9"},
 ]
 types-six = [
     {file = "types-six-1.16.18.tar.gz", hash = "sha256:26f481fabb65321ba428bdfb82c97fc638e00be6b20efa83915b007cf3893e28"},
     {file = "types_six-1.16.18-py3-none-any.whl", hash = "sha256:4f8be25faaa0a3088d6380ab7f27b4c7bc74ba81b2c7a351729f5be4af438290"},
 ]
 types-urllib3 = [
-    {file = "types-urllib3-1.26.17.tar.gz", hash = "sha256:73fd274524c3fc7cd8cd9ceb0cb67ed99b45f9cb2831013e46d50c1451044800"},
-    {file = "types_urllib3-1.26.17-py3-none-any.whl", hash = "sha256:0d027fcd27dbb3cb532453b4d977e05bc1e13aefd70519866af211b3003d895d"},
+    {file = "types-urllib3-1.26.20.tar.gz", hash = "sha256:1fb6e2af519a7216a19dd6be8cd2ee787b402a754ccb4a13ca1c0e5b202aea5a"},
+    {file = "types_urllib3-1.26.20-py3-none-any.whl", hash = "sha256:6249b6223226cb2012db3b4ff6945c9cb0e12ece9b24f5e29787c4f05028a979"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
