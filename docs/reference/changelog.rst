@@ -18,7 +18,7 @@ Current version
 
 
 
-v5.6.0 - 2022-xx-xx
+v5.6.0 - 2022-08-02
 -------------------
 
 - ``Changed`` Added peak consumption live graph [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_]
