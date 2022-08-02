@@ -15,7 +15,6 @@ authors = [
 [tool.poetry.dependencies]
 python = "^3.7 || ^3.8 || ^3.9 || ^3.10"
 
-autopep8 = "^1.5"
 coreapi = "^2.3"
 crcmod = "^1.7"
 django = "^3.2"
@@ -48,7 +47,6 @@ flake8-bandit = "^3.0"
 flake8-black = "^0.3"
 flake8-bugbear = "^22.4"
 polib = "^1.1"
-pylama = "^8.3"
 pytest-cov = "^3.0"
 pytest-django = "^4.4"
 pytest-xdist = "^2.4"

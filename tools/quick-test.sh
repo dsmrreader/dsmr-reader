@@ -24,11 +24,6 @@ fi
 
 
 echo ""
-echo "--- Applying autopep8..."
-poetry run autopep8 -r . --in-place
-
-
-echo ""
 echo "--- Running flake8..."
 poetry run flake8
 
@@ -41,16 +36,6 @@ fi
 echo ""
 echo "--- Running safety (insecure packages check)..."
 poetry run safety check --bare
-
-if [ $? -ne 0 ]; then
-    echo "[!] Failure"
-    exit 1;
-fi
-
-
-echo ""
-echo "--- Running Pylama for code audit..."
-poetry run pylama
 
 if [ $? -ne 0 ]; then
     echo "[!] Failure"
