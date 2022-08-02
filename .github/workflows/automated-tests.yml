@@ -3,11 +3,12 @@ name: Automated tests
 on:
   push:
     branches:
-      - v*
-      - development
-      - wip/*
-      - dev/*
-  pull_request: ~
+      - 'v*'
+      - 'development'
+      - 'dev/*'
+  pull_request:
+    branches:
+      - '!dependabot/'
 
 jobs:
   # The most verbose and complete job.
