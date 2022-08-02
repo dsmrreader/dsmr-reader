@@ -208,7 +208,7 @@ django = "*"
 
 [[package]]
 name = "django-colorfield"
-version = "0.6.3"
+version = "0.7.2"
 description = "simple color field for your models with a nice color-picker in the admin-interface."
 category = "main"
 optional = false
@@ -1228,7 +1228,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7 || ^3.8 || ^3.9 || ^3.10"
-content-hash = "ecb6e6d6e45e9f5984c92b5d37691ddfa85b20e09827aa498af1d1fb9e588676"
+content-hash = "ac27bc21b0a2daa2e19108f3341a1db501438f3b7bd4340db055aca56aa884a3"
 
 [metadata.files]
 alabaster = [
@@ -1344,8 +1344,8 @@ django-admin-sortable = [
     {file = "django_admin_sortable-2.3-py2-none-any.whl", hash = "sha256:3c7a77342a47cdabd272c031769f619c0f69e884f18983763ece92e4bef431ad"},
 ]
 django-colorfield = [
-    {file = "django-colorfield-0.6.3.tar.gz", hash = "sha256:441172f8c6024f70b01e3f63195fe83afc554387b34ad999880e86fde989e5af"},
-    {file = "django_colorfield-0.6.3-py3-none-any.whl", hash = "sha256:97625246fb5c4f4a17c9d83b2406a3c98dd9545c40c47741a7b62f7284609910"},
+    {file = "django-colorfield-0.7.2.tar.gz", hash = "sha256:9c2c36a7cac60bf6e57e70ca344529a3065226543358d01036e1714371f3166d"},
+    {file = "django_colorfield-0.7.2-py3-none-any.whl", hash = "sha256:29dffa09b2ce89f19504a53a120e5bfdbfe3e44621f33b3f94b0e6a572ae93c1"},
 ]
 django-debug-toolbar = [
     {file = "django-debug-toolbar-3.5.0.tar.gz", hash = "sha256:97965f2630692de316ea0c1ca5bfa81660d7ba13146dbc6be2059cf55b35d0e5"},
