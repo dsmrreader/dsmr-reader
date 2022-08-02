@@ -1,5 +1,6 @@
 flake8==4.0.1
 flake8-bandit==3.0.0
+flake8-black==0.3.3
 flake8-bugbear==22.7.1
 mypy==0.971
 # Poetry is currently only used with development
